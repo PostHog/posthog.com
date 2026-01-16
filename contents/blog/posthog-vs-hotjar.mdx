@@ -6,20 +6,19 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-hotjar/posthog-vs-hotjar.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-hotjar/posthog-vs-hotjar.jpg
 featuredImageType: full
 author:
-  - lior-neu-ner
-  - andy-vandervell
+    - lior-neu-ner
+    - andy-vandervell
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs Hotjar in-depth tool comparison
-  metaDescription: Looking for the best session replay and user research tool? Compare PostHog vs Hotjar on replays, heatmaps, surveys, analytics, and more to find the right fit.
+    metaTitle: PostHog vs Hotjar in-depth tool comparison
+    metaDescription: Looking for the best session replay and user research tool? Compare PostHog vs Hotjar on replays, heatmaps, surveys, analytics, and more to find the right fit.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 PostHog and Hotjar both help you understand user behavior, including the ability to watch real user sessions, conduct user research, and book interviews, but there are some important differences:
 
@@ -31,11 +30,11 @@ PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by i
 
 ### 2. We support both web and mobile apps
 
-We offer integrations for all the most popular web and and mobile SDKs, including [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [React Native](/docs/session-replay/installation?tab=React+Native), [Android](/docs/session-replay/installation?tab=Android), [iOS](/docs/session-replay/installation?tab=iOS), and [Flutter](/docs/session-replay/installation?tab=Flutter). Unlike Hotjar, we also support [session replay on mobile apps](/docs/session-replay/mobile), so you can track all versions of your app using PostHog.
+We offer integrations for all the most popular web and and mobile SDKs, including [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [React Native](/docs/session-replay/installation/react-native), [Android](/docs/session-replay/installation/android), [iOS](/docs/session-replay/installation/ios), and [Flutter](/docs/session-replay/installation/flutter). Unlike Hotjar, we also support [session replay on mobile apps](/docs/session-replay/mobile), so you can track all versions of your app using PostHog.
 
 ### 3. We're cheaper and have a generous free tier
 
-Every customer gets 5,000 web recordings and 1 million events for free each month, no matter what plan they're on. Our generous free tier means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps. 
+Every customer gets 5,000 web recordings and 1 million events for free each month, no matter what plan they're on. Our generous free tier means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
 
 See the [price comparison section](#price-comparison) for more.
 
@@ -43,60 +42,81 @@ See the [price comparison section](#price-comparison) for more.
 
 The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotjar-alternatives), [Heap](/blog/best-heap-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives) rolled into one.
 
-
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Funnels and trends" description="Track conversion funnels and event trends over time" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Advanced conversion funnels, behavior and retention analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Replace Google Analytics and track content performance" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="Visualize where users scroll on your website" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for users or cohorts" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys" />
-  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="Query data from any source and analyze it alongside your product data" />
-  <ComparisonRow column1={true} column2={true} feature="Interview scheduling" description="In-app widget for requesting customer interviews" />
-  <ComparisonRow column1={false} column2={true} feature="Interview transcriptions" description="Record and transcribe user interviews" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'product_analytics.funnels',
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'heatmaps',
+        {
+            path: 'heatmaps.features.scrollmaps',
+            label: 'Scrollmaps',
+            description: 'Visualize where users scroll on your website',
+        },
+        'feature_flags',
+        'experiments',
+        'surveys',
+        'data_warehouse',
+        {
+            path: 'surveys.templates.features.user_interview_requests',
+            label: 'Interview scheduling',
+            description: 'In-app widget for requesting customer interviews',
+        },
+        {
+            label: 'Interview transcriptions',
+            description: 'Record and transcribe user interviews',
+            values: [false, true],
+        },
+    ]}
+/>
 
 ### Analytics
 
 Product analytics isn't a core focus for Hotjar, but it does offer basic event tracking, funnels, and trend insights on its most expensive Scale plan.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events" />
-  <ComparisonRow column1={true} column2={true} feature="Trends" description="Track your data over time and visualize in charts" />
-  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Visualize conversion rates and drop-offs" />
-  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Display a collection of insights and trends" />
-  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates" />
-  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Group events by users in the same company, project, or any other attribute" />
-  <ComparisonRow column1={true} column2={false} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users" />
-  <ComparisonRow column1={true} column2={false} feature="Retention insights" description="Understand churn with returning user actions" />
-  <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time" />
-  <ComparisonRow column1={true} column2={false} feature="Path insights" description="Inspect how users journey through your product" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'product_analytics.features.custom_events',
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'dashboards',
+        'product_analytics.funnels.features.correlation_analysis',
+        'product_analytics.group_analytics',
+        'product_analytics.lifecycle',
+        'product_analytics.retention',
+        'product_analytics.stickiness',
+        'product_analytics.user_paths',
+    ]}
+/>
 
 ### Session replay
 
-Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. 
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit.
 
 Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives), though Hotjar doesn't support replays on mobile apps and has no public plans to do so.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Web app replays" description="Watch sessions in your web app" />
-  <ComparisonRow column1={true} column2={false} feature="Android replays" description="Watch real users use your Android app" />
-  <ComparisonRow column1={true} column2={false} feature="iOS replays" description="Watch real users use your iOS app" />
-  <ComparisonRow column1="Beta" column2={false} feature="React Native replays" description="Record your React Native app" />
-  <ComparisonRow column1="Beta" column2={false} feature="Flutter replays" description="Record your Flutter app" />
-  <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug user problems and app errors" />
-  <ComparisonRow column1={true} column2={false} feature="Network performance" description="See sessions web vitals and requests" />
-  <ComparisonRow column1={true} column2={false} feature="Custom playlists" description="Create playlists of related replays" />
-  <ComparisonRow column1="Beta" column2={true} feature="Create highlights" description="Crop and save segments of recordings" />
-  <ComparisonRow column1={false} column2={true} feature="Frustration and engagement scores" description="Filter recordings by scores" />
-  <ComparisonRow column1={true} column2={true} feature="Record via URL or event" description="Trigger recordings based on URL or event" />
-  <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Trigger recordings based on feature flag variables" />
-  <ComparisonRow column1={true} column2={true} feature="Download replays" description="Save replay files offline for storage" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'session_replay.platform_support.features.web_app_recordings',
+        'session_replay.platform_support.features.android_recordings',
+        'session_replay.platform_support.features.ios_recordings',
+        'session_replay.platform_support.features.react_native_recordings',
+        'session_replay.platform_support.features.flutter_recordings',
+        'session_replay.analysis.features.console_logs',
+        'session_replay.analysis.features.network_monitor',
+        'session_replay.organization.features.playlists',
+        'session_replay.features.highlights',
+        'session_replay.features.sentiment_scores',
+        'session_replay.targeting.features.target_by_url',
+        'session_replay.targeting.features.target_by_feature_flag',
+        'session_replay.export.features.export_to_json',
+        'session_replay.export.features.export_to_video',
+    ]}
+/>
 
 > **Note:** Our [mobile session replay](/blog/mobile-session-replay) is free while it's in development, and we're actively working on session replay support for React Native and Flutter, too. See our [mobile replay docs](/docs/session-replay/mobile) for more info on development and how replay works on mobile apps.
 
@@ -104,44 +124,40 @@ Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clar
 
 Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, give a clearer overview of how users behave.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See clicks and mouse movement on your site" />
-  <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="See what elements users click" />
-  <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="See how far users scroll" />
-  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Track repeated clicks in the same place" />
-  <ComparisonRow column1={false} column2={true} feature="Save heatmaps" description="Save historic heatmaps" />
-  <ComparisonRow column1={true} column2={false} feature="Toolbar" description="View heatmaps in browser" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'heatmaps.features.heatmaps',
+        'heatmaps.features.clickmaps',
+        'heatmaps.features.scrollmaps',
+        'heatmaps.features.rage_clicks',
+        'heatmaps.features.save_heatmaps',
+        'heatmaps.features.toolbar',
+    ]}
+/>
 
 ### Surveys
 
 Hotjar supports more survey types than PostHog, but fewer targeting options.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Show surveys on websites and web apps" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile surveys" description="Show surveys in mobile apps" />
-  <ComparisonRow column1={true} column2={true} feature="Popover surveys" description="Small surveys that popover bottom of screen" />
-  <ComparisonRow column1={true} column2={true} feature="Button surveys" description="Surveys with a button CTA" />
-  <ComparisonRow column1={true} column2={true} feature="Link surveys" description="Surveys with a link CTA" />
-  <ComparisonRow column1={false} column2={true} feature="Embedded surveys" description="Surveys embedded directly into web page" />
-  <ComparisonRow column1={false} column2={true} feature="Full screen surveys" description="Surveys that take over whole screen" />
-  <ComparisonRow column1={false} column2={true} feature="Sentiment analysis" description="Analyze survey results using AI to discover trends" />
-  <ComparisonRow column1={true} column2={true} feature="Survey templates" description="Templates for NPS, market-fit, and CSAT surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Interview scheduling" description="Send users a link to schedule a feedback meeting." />
-  <ComparisonRow column1={true} column2={false} feature="API" description="Build your own UI and send responses to API" />
-  <ComparisonRow column1={true} column2={true} feature="Webhooks" description="Send survey responses to places like Slack or Teams" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'surveys.platforms.features',
+        'surveys.question_types.features',
+        'surveys.presentation.features',
+        { label: 'Features' },
+        'surveys.features.sentiment_analysis',
+        'surveys.templates.survey_templates',
+        'surveys.templates.user_interview_requests',
+        'surveys.implementation.api_access',
+        'surveys.features.webhooks',
+    ]}
+/>
 
 Using PostHog's product analytics and surveys together unlocks more precise targeting options for surveys, such as using feature flags and pre-defined cohorts.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Target by URL" description="Trigger when user visits specific URL" />
-  <ComparisonRow column1={true} column2={true} feature="Target by person properties" description="Target users by individual attributes" />
-  <ComparisonRow column1={true} column2={true} feature="Target by completed event" description="Trigger when user completes specific event or action" />
-  <ComparisonRow column1={true} column2={false} feature="Target by feature flag" description="Show to users with a feature flag enabled" />
-  <ComparisonRow column1={true} column2={false} feature="Target by dynamic cohorts" description="Show to users that meet cohort criteria" />
-  <ComparisonRow column1={true} column2={false} feature="Target by static cohorts" description="Show to a specific list of users " />
-</ComparisonTable>
+<ProductComparisonTable competitors={['posthog', 'hotjar']} rows={['surveys.targeting.features']} />
 
 ## Price comparison
 
@@ -151,27 +167,27 @@ PostHog is cheaper than Hotjar for both session replay and user surveys, regardl
 
 ### Session replay pricing
 
-Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorded sessions. We've multiplied Hotjar's daily sessions by 30 to get a monthly equivalent. 
+Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorded sessions. We've multiplied Hotjar's daily sessions by 30 to get a monthly equivalent.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/replay_light_cfa8ac3dd9.jpg" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/replay_dark_c9dba6fd3f.jpg"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_light_cfa8ac3dd9.jpg"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_dark_c9dba6fd3f.jpg"
     classes="rounded"
     alt="session replay pricing"
 />
 
-| Monthly sessions | Hotjar Business | Hotjar Scale | PostHog |
-|------------------|--------------|-----------------|---------|
-| **5k**               | $99          | $213            | $0      |
-| **15k**              | $99          | $213            | $50     |
-| **45k**              | $249         | $525            | $157    |
-| **75k**              | $389         | $827            | $224    |
-| **120k**             | $489         | Contact sales   | $313    |
-| **240k**             | $789         | Contact sales   | $524    |
+| Monthly sessions | Hotjar Business | Hotjar Scale  | PostHog |
+| ---------------- | --------------- | ------------- | ------- |
+| **5k**           | $99             | $213          | $0      |
+| **15k**          | $99             | $213          | $50     |
+| **45k**          | $249            | $525          | $157    |
+| **75k**          | $389            | $827          | $224    |
+| **120k**         | $489            | Contact sales | $313    |
+| **240k**         | $789            | Contact sales | $524    |
 
 At 75k recorded sessions per month, PostHog is $1,980 cheaper over 12 months compared to Hotjar's Business tier, and $7,236 cheaper than Hotjar's Scale tier, when paying monthly.
 
-PostHog also offers a more generous free tier that includes 5,000 replay sessions, 1 million analytics events, and 1500 survey responses for free _every month_. 
+PostHog also offers a more generous free tier that includes 5,000 replay sessions, 1 million analytics events, and 1500 survey responses for free _every month_.
 
 Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
 
@@ -180,21 +196,21 @@ Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
 It's a similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/surveys_light_d45a4a6318.jpg" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/surveys_dark_96fc402ad8.jpg"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/surveys_light_d45a4a6318.jpg"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/surveys_dark_96fc402ad8.jpg"
     classes="rounded"
     alt="surveys pricing"
 />
 
-| Monthly survey responses | Hotjar Business | Hotjar Scale | PostHog |
-|--------------------------|--------------|-----------------|---------|
-| **250**                      | $79          | $159            | $0      |
-| **500**                      | $79          | $159            | $51     |
-| **1,000**                    | $99          | $259            | $99     |
-| **2,500**                    | $179         | $479            | $152    |
-| **5,000**                    | $289         | Contact sales   | $240    |
-| **7,500**                    | $399         | Contact sales   | $330    |
-| **10,000**                   | $479         | Contact sales   | $418    |
+| Monthly survey responses | Hotjar Business | Hotjar Scale  | PostHog |
+| ------------------------ | --------------- | ------------- | ------- |
+| **250**                  | $79             | $159          | $0      |
+| **500**                  | $79             | $159          | $51     |
+| **1,000**                | $99             | $259          | $99     |
+| **2,500**                | $179            | $479          | $152    |
+| **5,000**                | $289            | Contact sales | $240    |
+| **7,500**                | $399            | Contact sales | $330    |
+| **10,000**               | $479            | Contact sales | $418    |
 
 You can see how much PostHog will cost you using the calculator on our [pricing page](/pricing).
 
@@ -204,48 +220,57 @@ You can see how much PostHog will cost you using the calculator on our [pricing 
 
 PostHog has a [built-in data warehouse](/data-warehouse), so you can import, combine, and analyze data from multiple sources, and combine it with analytics events. This means you can [monitor deal counts](/tutorials/hubspot-reports) using data from Hubspot, [analyze gross revenue](/tutorials/stripe-reports) using Stripe data, and [track support ticket SLAs](/tutorials/zendesk-reports) using Zendesk data, all from within PostHog.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment" />
-  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Ingest Sentry errors for analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Stripe" description="Import revenue data and combine with analytics data" />
-  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Import CRM data from Hubspot" />
-  <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Combine support ticket data with session replay and customer data" />
-  <ComparisonRow column1={true} column2={false} feature="Amazon S3" description="Import data from Amazon S3 storage" />
-  <ComparisonRow column1={true} column2={false} feature="Postgres" description="Import data from Postgres data warehouse" />
-  <ComparisonRow column1={true} column2={false} feature="Snowflake" description="Import data from Snowflake" />
-  <ComparisonRow column1={true} column2={false} feature="Google Cloud" description="Import data from GCS" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'platform.integrations.segment',
+        'platform.integrations.sentry',
+        'platform.integrations.stripe',
+        'platform.integrations.hubspot',
+        'platform.integrations.zendesk',
+        'platform.integrations.s3',
+        'platform.integrations.postgres',
+        'platform.integrations.snowflake',
+        'platform.integrations.gcs',
+    ]}
+/>
 
 ### Data destinations
 
 Hotjar and PostHog support a similar range of data destinations, though PostHog can send more data because it collects more actionable data via product analytics. Hotjar is limited to sending basic event data, session replay, and survey responses.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Hubspot" description="Send data to Hubspot" />
-  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Export events for use in Zaps" />
-  <ComparisonRow column1={true} column2={true} feature="Slack" description="Send survey responses and data to Slack" />
-  <ComparisonRow column1={true} column2={true} feature="Teams" description="Send survey responses and data to Teams" />
-  <ComparisonRow column1={true} column2={false} feature="Discord" description="Send survey responses and data to Discord" />
-  <ComparisonRow column1={true} column2={true} feature="Intercom" description="Extract and load data to external platforms" />
-  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Send data to Salesforce" />
-  <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Sync data between platforms" />
-   <ComparisonRow column1={true} column2={true} feature="CSV" description="Export data to CSV" />
-  <ComparisonRow column1={true} column2={false} feature="S3" description="Batch export data to S3" />
-  <ComparisonRow column1={true} column2={false} feature="BigQuery" description="Batch export data to BigQuery" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'platform.integrations.hubspot',
+        'platform.integrations.zapier',
+        'platform.integrations.slack',
+        'platform.integrations.microsoft_teams',
+        'platform.integrations.discord',
+        'platform.integrations.intercom',
+        'platform.integrations.salesforce',
+        'platform.integrations.customer_io',
+        'platform.integrations.csv_exports',
+        'platform.integrations.s3',
+        'platform.integrations.bigquery',
+    ]}
+/>
 
 ### Privacy, compliance, and security
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPAA and GDPR can require teams to store data in certain locations or protect it in certain ways.
 
-<ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={false} feature="SOC 2 certified" description="Information security process audited" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="EU hosting or data residency available." />
-  <ComparisonRow column1={true} column2={true} feature="CCPA-ready" description="Compliant with California Consumer Privacy Act." />
-  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Business Associate Agreement available." />
-  <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Remove personally identifiable information." />
-  <ComparisonRow column1={true} column2={false} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'hotjar']}
+    rows={[
+        'platform.security.soc2_certified',
+        'platform.security.gdpr_ready',
+        'platform.security.ccpa_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.data_anonymization',
+        'platform.security.cookieless_tracking',
+    ]}
+/>
 
 ## Frequently asked questions
 
@@ -259,7 +284,7 @@ It's what PostHog's designed to do. The beauty of PostHog is that it replaces mu
 
 ### Can I choose which sessions are recorded?
 
-Yes. You can choose to only record sessions on specific pages, or sessions with a minimum duration that you set. You can also set a sampling rate – i.e. only record 20% of sessions – or trigger recordings based on a feature flag. See [How to only record the sessions you want](/tutorials/limit-session-recordings) for more.
+Yes. You can choose to only record sessions on specific pages, or sessions with a minimum duration that you set. You can also set a sampling rate – i.e. only record 20% of sessions – or trigger recordings based on a feature flag. See [How to only record the sessions you want](/tutorials/limit-session-recordings) for more.
 
 ### Does PostHog offer discounts for paying annually?
 
@@ -270,3 +295,7 @@ Yes. You get a 20% discount by default for paying annually upfront. Hotjar also 
 Yes. See our guide to [using PostHog with a CDP](/docs/advanced/cdp) for more on that, though many of our customers use PostHog as their CDP and utilize our [data pipelines](/docs/cdp) and [data warehouse](/docs/data-warehouse) for moving data in and out of PostHog.
 
 Got another question? You can [ask the PostHog team anything you want](/questions)!
+
+### How does PostHog compare to other session replay tools?
+
+PostHog offers replay as part of a broader platform that also includes analytics, feature flags, and error tracking, so you get more context than a standalone replay tool. If you want a deeper look at how PostHog stacks up against options like LogRocket, FullStory, Hotjar, and OpenReplay, check out our full guide to the [best session replay tools for developers](/blog/best-session-replay-tools).

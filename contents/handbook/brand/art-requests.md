@@ -5,7 +5,11 @@ showTitle: true
 hideAnchor: false
 ---
 
-[Lottie](/lottie), PostHog's in-house graphic designer, handles all requests for branding and artwork. She can help you with things like:
+> 🎨 **Need artwork?** Please request it using the [new art request template](https://github.com/PostHog/posthog.com/issues/new/choose). Do not request artwork over Slack or email.
+
+[Lottie](https://posthog.com/community/profiles/27881), our Illustration Lead, and [Daniel](https://posthog.com/community/profiles/34810), our Production Designer, handle all requests for branding and artwork. 
+
+They can help you with things like:
 
 - Custom visuals for paid ad campaigns
 - Blog and social media artwork
@@ -14,23 +18,23 @@ hideAnchor: false
 - Branded merch 
 - Animated UI elements
 
-You can see what Lottie is working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
+They get a lot of work requests, so they use [a request template](https://github.com/PostHog/posthog.com/issues/new/choose) to help them prioritize. All art requests should use this template, which automatically assigns work to their project board. 
 
-To search through our current hedgehog assets library go to the [Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0%3A1&mode=design&t=kquJnyBOtmHTYUvv-1) and search for anything you need, all artwork has been tagged with various actions/emotions to make for easier location of your perfect hedgehog. If you can't find what you are looking for, request a new one!
+You can see what they are working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
 
-Lottie gets lots of requests for work. To help plan and prioritize this work, please follow this process for requesting work:
+To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
-- Create a [new art and branding request issue](https://github.com/PostHog/posthog.com/issues/new/choose) on the posthog.com repo using the issue template
-- Add your issue to the `Art & Brand Planning` project
+Lottie and Daniel usually ask for two weeks minimum notice, but can often work faster on things if needed. If your request is genuinely urgent, please share your request issue in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Daniel, and/or [Cory](https://posthog.com/community/profiles/30200).
 
-Lottie will then confirm if/when she can complete the work, and clarify the requirements where necessary.
+## Hedgehog library
 
-Your issue should include:
+For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
 
-- A brief description of what you need
-- A deadline (be specific where possible)
-- Priority (e.g. is it urgent & important, or nice to have?)
-- Dimensions / file type requirements where necessary
-- Inspiration or examples of what you want (if you have them)
+Here's how:
+1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
+2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
+3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
-Please note: The more notice you give, the more likely she can hit your desired deadline.
+If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests). 
+
+> Non-team members can find some of the most-used hogs to download on [our press page](/media).

@@ -83,13 +83,13 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id',
   'event' => 'event_name_of_your_goal_metric',
-  'properties' => array(
-    '$feature/experiment-feature-flag-key'  = 'variant-name'
-  )
-));
+  'properties' => [
+    '$feature/experiment-feature-flag-key' => 'variant-name'
+  ]
+]);
 ```
 
 ```ruby
@@ -135,11 +135,9 @@ posthog.Capture(
 
 </MultiLanguage>
 
-## Step 4 (optional): Send the `$feature_flag_called` event
+## Step 4: Send the `$feature_flag_called` event
 
-> **This step is only required if your [experiment metric](/docs/experiments/metrics) is a "trend"**. This is not required for funnel goals.
-
-You need to capture the `$feature_flag_called` event. This ensures that we record which experiment variant each user was assigned to. This is also referred to as "exposure logging", and without it you would not be able to analyze your results. 
+You need to capture the `$feature_flag_called` event. This ensures that we record which experiment variant each user was assigned to. This is also referred to as [exposure logging](/docs/experiments/exposures), and without it you would not be able to analyze your results. 
 
 You need to include two properties with this event:
 
@@ -211,14 +209,14 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id',
   'event' => '$feature_flag_called',
-  'properties' => array(
-    '$feature_flag_response'  = 'variant-name',
-    '$feature_flag': 'feature-flag-key'
-  )
-));
+  'properties' => [
+    '$feature_flag_response' => 'variant-name',
+    '$feature_flag' => 'feature-flag-key'
+  ]
+]);
 ```
 
 ```ruby

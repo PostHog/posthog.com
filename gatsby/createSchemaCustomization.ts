@@ -16,12 +16,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       contributors: [Contributors]
       appConfig: [AppConfig]
       commits: [Commit]
+      templateConfigs: [TemplateConfig]
     }
     type Commit {
       author: GitHubUser
       date: Date
       message: String
       url: String
+    }
+    type TemplateConfigField {
+      key: String
+      type: String
+      label: String
+      required: Boolean
+      description: String
+      default: JSON
+    }
+    type TemplateConfig {
+      templateId: String
+      name: String
+      type: String
+      inputs_schema: [TemplateConfigField]
     }
     type GitHubUser {
       avatar_url: String
@@ -64,6 +79,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       seo: FrontmatterSEO
       hideFromIndex: Boolean
       price: String
+      platformLogo: String
+      platformIconName: String
+      platformSourceType: String
+      featuredImageCaption: String
     }
     type TeamData {
       name: String
@@ -235,6 +254,32 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Roadmap implements Node {
       year: Int
+      githubUrls: [String]
+      githubPRMetadata: GitHubPRMetadata
+    }
+    type GitHubPRMetadata {
+      url: String
+      html_url: String
+      review_comments_url: String
+      comments_url: String
+      commits_url: String
+      number: Int
+      comments: Int
+      review_comments: Int
+      commits: Int
+      additions: Int
+      deletions: Int
+      changed_files: Int
+      user: GitHubUser
+      commenters: [GitHubUser]
+      reviewers: [GitHubUser]
+      reviews_url: String
+    }
+    type GitHubUser {
+      login: String
+      avatar_url: String
+      html_url: String
+      type: String
     }
     type ProductDataProductsPlans {
       contact_support: Boolean
@@ -271,6 +316,94 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
       introSnippet: String
       installationSnippet: String
+      inputs_schema: [PostHogPipelineInputSchema]
+      name: String
+      slug: String
+      type: String
+      category: [String]
+      description: String
+      icon_url: String
+      status: String
+    }
+    type PostHogPipelineInputSchema {
+      key: String
+      type: String
+      label: String
+      secret: Boolean
+      required: Boolean
+      description: String
+    }
+    type SdkReferences implements Node {
+      info: SdkReferencesInfo
+      referenceId: String
+      hogRef: String
+      id: String
+      categories: [String]
+      classes: [SdkReferencesClass]
+      types: [SdkReferencesType]
+      version: String
+    }
+    type SdkReferencesInfo {
+      description: String
+      id: String
+      specUrl: String
+      slugPrefix: String
+      title: String
+      version: String
+    }
+    type SdkReferencesClass {
+      description: String
+      functions: [SdkReferencesFunction]
+      id: String
+      title: String
+    }
+    type SdkReferencesFunction {
+      category: String
+      description: String
+      details: String
+      examples: [SdkReferencesFunctionExample]
+      id: String
+      params: [SdkReferencesFunctionParam]
+      path: String
+      releaseTag: String
+      showDocs: Boolean
+      returnType: SdkReferencesFunctionReturnType
+      title: String
+    }
+    type SdkReferencesFunctionExample {
+      code: String
+      name: String
+      id: String
+    }
+    type SdkReferencesFunctionParam {
+      description: String
+      isOptional: Boolean
+      name: String
+      type: String
+    }
+    type SdkReferencesFunctionReturnType {
+      id: String
+      name: String
+    }
+    type SdkReferencesType {
+      example: String
+      id: String
+      name: String
+      path: String
+      properties: [SdkReferencesTypeProperty]
+    }
+    type SdkReferencesTypeProperty {
+      description: String
+      name: String
+      type: String
+    }
+    type GitHubStats implements Node {
+      owner: String
+      repo: String
+      stars: Int
+      forks: Int
+      commits: Int
+      contributors: Int
     }
     type ProductDataProductsAddons {
       legacy_product: Boolean
@@ -306,6 +439,64 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         tagline: String
         description: String
         createdAt: Date
+    }
+    type EventVenue {
+        name: String
+    }
+    type EventLocation {
+        label: String
+        lat: Float
+        lng: Float
+        venue: EventVenue
+    }
+    type EventPartner {
+        name: String
+        url: String
+    }
+    type EventPhotoAttributes {
+        url: String
+    }
+    type EventPhotoData {
+        attributes: EventPhotoAttributes
+    }
+    type EventPhoto {
+        data: [EventPhotoData]
+    }
+    type EventSpeakerAttributes {
+        firstName: String
+        lastName: String
+    }
+    type EventSpeakerData {
+        attributes: EventSpeakerAttributes
+    }
+    type EventSpeaker {
+        data: [EventSpeakerData]
+    }
+    type EventAttributes {
+        name: String
+        description: String
+        date: Date
+        private: Boolean
+        format: [String]
+        audience: [String]
+        speakerTopic: String
+        attendees: Int
+        vibeScore: Float
+        video: String
+        presentation: String
+        link: String
+        location: EventLocation
+        partners: [EventPartner]
+        photos: EventPhoto
+        speakers: EventSpeaker
+    }
+    type Event implements Node {
+        attributes: EventAttributes
+    }
+    type ChangelogVideo implements Node {
+        videoId: String!
+        publishedAt: Date! @dateformat
+        title: String!
     }
   `)
     createTypes([

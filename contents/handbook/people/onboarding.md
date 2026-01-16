@@ -24,7 +24,7 @@ We send an introductory email to all new hires to welcome them to the team and e
 
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we landed on a simple email with the necessary links.
 
-<PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails.
+<p><PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails.</p>
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
@@ -56,12 +56,31 @@ While there is no fixed budget for onboardings they should be relatively less ex
 -   Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
 -   Consider doing more casual social activities that are less expensive: dinners, drinks etc
 -   You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
+    -   Create a Slack channel for the onboarding (`#onboarding-[who]-[team]-[month]-[year]-[where]`) add everyone who’s going 
 -   The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the budget.
 -   See if there are any other onboardings at the same time you could pair up with
 
 Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex in USD for any onboardings you are doing. There will of course be some exceptions to this, please just include the reasoning in your brex budget request, and ensure to list who the budget request is for.
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
+
+It is important that you make the most out of the sync time with the new joiner on your team. You should not spend the whole week sitting next to them doing your usual work. Having something planned each day is sufficient, some ideas include:
+- An intro to PostHogs values & strategy
+- A history of your team, your current quarterly goals and a product demo of the features you own (product teams only)
+- Interview feedback session between the team lead and new joiner
+- Deep dive into a specific feature where you walk through the code (product teams only)
+- Mock demo (sales team only)
+- "No stupid questions" where the new joiner is expected to come with questions they had since starting
+
+### Your first week
+
+Your first week can definitely be a bit overwhelming at any new company, so here's what you can (roughly) expect!
+- You will meet (either in person or virtually) your team lead to discuss goals and aims over the next 30/60/90 days and beyond
+- You will get all your equipment set up and get access to all the accounts you need
+- You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company
+- You should try and set up a few calls with a range of people to introduce yourself
+- You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
+- You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
 
 ### Engineering
 
@@ -112,7 +131,7 @@ We use a number of different tools to organise our work and communicate at PostH
 ### Engineering
 
 -   AWS
--   PagerDuty
+-   Incident.io
 -   Heroku
 -   Grafana
 
@@ -176,10 +195,10 @@ In this call the support engineer will be able to answer any questions, as well 
 -   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 -   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] How to deal with bug reports and feature requests
--   [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
--   [ ] How to avoid duplication of effort in ZenDesk
--   [ ] [How to create and use personal views in ZenDesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] HogHero - how to deal with bug reports and feature requests, and how to merch customers (including [macros](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets))
+-   [ ] How to avoid duplication of effort in Zendesk
+-   [ ] [Which views should be used in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 
@@ -207,12 +226,19 @@ These check-ins are designed to ensure every new starter is set up for success. 
 
 If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people
 
+## Finding answers at PostHog
+
+Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start with #ask-max, our AI that's read every handbook and documentation page. It'll point you to relevant docs instantly and is available 24/7.
+
+Of course, if you're stuck or need context beyond what's documented, just ask in the relevant channel - people are always happy to help. The goal isn't to make you figure everything out alone, it's to give you the fastest path to answers.
+
 ## Slack Channels
 
 Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
+-   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
 -   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
 -   `#brand-mentions`
 -   `#do-more-weird`
@@ -222,11 +248,14 @@ Below are a list of Slack channels you may find helpful:
 -   `#general`
 -   `#alerts`
 -   `#industry-news`
+-   `#changelog` - keep up with all the cool things we're shipping across the team
 
 ### Social channels
 
+We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
+
 -   `#food`
--   `#parenting`
+-   `#kids`
 -   `#no-context-posthog`
 -   `#random`
 -   `#whereintheworld`

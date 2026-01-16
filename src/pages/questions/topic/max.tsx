@@ -33,7 +33,7 @@ export default function Questions({ location }: IProps) {
     const { isModerator } = useUser()
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('activity')
     const [helpful, setHelpful] = useState('all')
-    const title = 'Max AI questions'
+    const title = 'PostHog AI questions'
 
     const { questions, isLoading, fetchMore, hasMore } = useQuestions({
         limit: 20,
@@ -75,7 +75,7 @@ export default function Questions({ location }: IProps) {
     }, [isModerator])
 
     return (
-        <CommunityLayout menu={topicsNav} title="Max AI">
+        <CommunityLayout menu={topicsNav} title="PostHog AI">
             <section className="max-w-screen-4xl space-y-8 pb-12 -mx-3 lg:-mx-4 xl:-mx-10">
                 <div className="w-full flex items-center">
                     <Link
@@ -124,8 +124,8 @@ export default function Questions({ location }: IProps) {
                         fetchMore={fetchMore}
                         sortBy={sortBy}
                         currentPage={{
-                            title: 'Max AI',
-                            url: `/questions/topic/max`,
+                            title: 'PostHog AI',
+                            url: `/questions/topic/ai`,
                         }}
                     />
                 </div>

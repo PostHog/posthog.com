@@ -19,7 +19,7 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 ## Golden rules
 
 1. Use **asynchronous communication** when possible: pull requests (preferred) or issues. Announcements happen on the appropriate Slack channels and [people should be able to do their work without getting interrupted by chat](https://signalvnoise.com/svn3/is-group-chat-making-you-sweat/).
-1. Discussion in GitHub issues or pull requests is preferred over everything else. If you need a response urgently, you can Slack someone with a link to your comment on an issue or pull request, asking them to respond there. However, be aware that they still may not see it straight away (and that's OK in our book).
+1. Discussion in GitHub issues or pull requests is preferred over everything else. If you need a response urgently, you can Slack someone with a link to your comment on an issue or pull request, asking them to respond there. However, be aware that they still may not see it straight away (and that's OK in our book). That said, casual conversations in Slack are completely normal — it’s our main space for day-to-day communication.
 1. You are not expected to be available all the time. There is **no** expectation to respond to messages outside of your planned working hours.
 1. It is 100% OK to ask as many questions as you have - please ask in public channels! If someone sends you a handbook link, that means they are proud that we have the answer documented - they don't mean that you should have found that yourself or that this is the complete answer. If the answer to a question isn't documented yet please immediately make a pull request to add it to the handbook in a place you have looked for it.
 1. When someone asks for something, reply back with a deadline or by noting that you already did it. Answers like: 'will do', 'OK', or 'it is on my todo list' are not helpful. If it is a small task for you but will unblock someone else, consider spending a few minutes to do the task so the other person can move forward.
@@ -150,25 +150,31 @@ Slack is used for more informal communication, or where it doesn't make sense to
 
 Also keep in mind that, as an open source platform, PostHog has contributors who don't have access to Slack. Having too much context in a private location can be detrimental to those who are trying to understand the rationale for a certain decision.
 
-> Slack canvasses are useful for storing information like schedules, bookmarks, personal to-do lists, scratch notes etc. However, things like quarterly goals, runbooks, sprint plans, FAQs etc. should live in the Handbook, Docs, or in a GitHub RFC or Issue by default. If you find yourself documenting something useful in Slack, it's much better to put it in GitHub instead and link to it from Slack so that Max AI can include it in future search results. Slack canvasses are terrible for searchability!
+> Slack canvasses are useful for storing information like schedules, bookmarks, personal to-do lists, scratch notes etc. However, things like quarterly goals, runbooks, sprint plans, FAQs etc. should live in the Handbook, Docs, or in a GitHub RFC or Issue by default. If you find yourself documenting something useful in Slack, it's much better to put it in GitHub instead and link to it from Slack so that PostHog AI can include it in future search results. Slack canvasses are terrible for searchability!
+
+> [Slack recap](https://slack.com/help/articles/25076892548883-Guide-to-AI-features-in-Slack#01JM0PAPCT4K0TWNWGJRQDXTBA) is a great way to learn from others by adding channels like `#ask-max` and `#today-i-learned` to the recap. You can also use it to keep tabs on teams you may not directly work on, but still want to know what's being discussed.
 
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
 
 1. Keep `#general` open for company-wide announcements.
-1. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
-1. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
-1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
-1. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
+2. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
+3. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
+4. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
+5. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
 
 Channel naming conventions so people don't get confused:
 
--   `#team-xxxxx` - small team channels, only as listed on the [teams](/teams) page
--   `#project-xxxxxx` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
--   `#posthog-xxxxx` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#xxxxxx-posthog` instead)
--   `#alerts-xxxxx` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
--   `#support-xxxxx` - similarly, useful to feed support requests in if helpful without adding clutter
+-   `#team-[team-name]` - small team channels, only as listed on the [teams](/teams) page
+-   `#project-[project-name]` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
+-   `#posthog-[customer-name]` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#[partner-name]-posthog` instead)
+-   `#alerts-[team-name]` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
+-   `#support-[product-name]` - similarly, useful to feed support requests in if helpful without adding clutter
+-   `#offsite-[team]-[month]-[year]-[where]` - For planning and coordination of team offsite events
+-   `#onboarding-[who]-[team]-[month]-[year]-[where]` - For coordinating and supporting new team member onboarding
+-   `#hiring-[team-name]` - For recruiting discussions, candidate feedback, and hiring coordination for a specific team
+-   `#superday-[first-name]-[role]` - For candidate interview coordination and feedback during intensive interview days
 
 On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there.
 
@@ -209,7 +215,7 @@ We use RFCs to communicate and gather feedback on a decision. RFCs are useful be
 Here are the steps for an RFC:
 
 1. Identify a problem and a decision to be made
-2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/product-internal/tree/main/requests-for-comments/templates).
+2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES).
     - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
@@ -293,7 +299,7 @@ If someone contacts you outside of Slack, treat it as **untrusted until verified
 
 ### Best practices
 
-James, Tim, and other execs will never ask for wire transfers, gift cards, MFA codes, or access changes over email/SMS/WhatsApp/phone. Treat such requests as phishing and report them to `#project-security`.
+James, Tim, and other execs will never ask for wire transfers, gift cards, MFA codes, or access changes over email/SMS/WhatsApp/phone. Treat such requests as phishing and report them to `#phishing-attempts`.
 
 By email: Only trust `@posthog.com` senders. Verify via the company directory. Be cautious of look-alike domains (e.g., `posthog.co` vs `posthog.com`), unexpected attachments, and “urgent” requests.
 

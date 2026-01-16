@@ -3,11 +3,6 @@ title: Realtime analytics data exports
 showTitle: true
 ---
 
-<!-- <DestinationsLibraryCallout /> -->
-
-> Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
-
-
 As PostHog data arrives, you can export it *immediately* to other tools. You can use this for things like:
 
 - Conversion tracking

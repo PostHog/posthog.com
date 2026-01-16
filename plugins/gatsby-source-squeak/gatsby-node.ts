@@ -344,12 +344,36 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             url: String!
         }
 
+        type SqueakProfileAvatarFormats {
+            thumbnail: SqueakProfileAvatarFormat
+            small: SqueakProfileAvatarFormat
+            medium: SqueakProfileAvatarFormat
+            large: SqueakProfileAvatarFormat
+        }
+
+        type SqueakProfileAvatarFormat {
+            url: String
+            width: Int
+            height: Int
+        }
+
+        type SqueakProfileAvatar {
+            url: String
+            formats: SqueakProfileAvatarFormats
+            alternativeText: String
+            caption: String
+            width: Int
+            height: Int
+            mime: String
+        }
+
         type SqueakProfile implements Node {
             id: ID!
             squeakId: Int!
             firstName: String
             lastName: String
             color: String
+            avatar: SqueakProfileAvatar
         }
 
         type SqueakTopicGroup implements Node {
@@ -366,6 +390,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             slug: String!
             label: String!
         }
+
         type SqueakCrestOption {
             textColor: String
             textShadow: String
@@ -378,6 +403,128 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             imageXOffset: Int
             imageYOffset: Int
         }
+
+        type SqueakTeamCrestDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type SqueakTeamCrestData {
+            id: ID
+            attributes: SqueakTeamCrestDataAttributes
+        }
+
+        type SqueakTeamCrest {
+            cloudName: String
+            publicId: String
+            originalHeight: Int
+            originalWidth: Int
+            originalFormat: String
+            url: String
+            data: SqueakTeamCrestData
+        }
+
+        type SqueakTeamMiniCrestDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type SqueakTeamMiniCrestData {
+            id: ID
+            attributes: SqueakTeamMiniCrestDataAttributes
+        }
+
+        type SqueakTeamMiniCrest {
+            cloudName: String
+            publicId: String
+            originalHeight: Int
+            originalWidth: Int
+            originalFormat: String
+            url: String
+            data: SqueakTeamMiniCrestData
+        }
+
+        type SqueakTeamImageDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type SqueakTeamImageData {
+            id: ID
+            attributes: SqueakTeamImageDataAttributes
+        }
+
+        type SqueakTeamImage {
+            cloudName: String
+            publicId: String
+            originalHeight: Int
+            originalWidth: Int
+            originalFormat: String
+            url: String
+            data: SqueakTeamImageData
+        }
+
+        type SqueakTeamProfilesDataAttributesAvatarDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type SqueakTeamProfilesDataAttributesAvatarData {
+            id: ID
+            attributes: SqueakTeamProfilesDataAttributesAvatarDataAttributes
+        }
+
+        type SqueakTeamProfilesDataAttributesAvatar {
+            data: SqueakTeamProfilesDataAttributesAvatarData
+        }
+
+        type SqueakTeamProfilesDataAttributesLeadTeamsDataAttributes {
+            name: String
+        }
+
+        type SqueakTeamProfilesDataAttributesLeadTeamsData {
+            id: ID
+            attributes: SqueakTeamProfilesDataAttributesLeadTeamsDataAttributes
+        }
+
+        type SqueakTeamProfilesDataAttributesLeadTeams {
+            data: [SqueakTeamProfilesDataAttributesLeadTeamsData]
+        }
+
+        type SqueakTeamProfilesDataAttributes {
+            firstName: String
+            lastName: String
+            companyRole: String
+            country: String
+            location: String
+            startDate: Date @dateformat
+            pineappleOnPizza: Boolean
+            avatar: SqueakTeamProfilesDataAttributesAvatar
+            leadTeams: SqueakTeamProfilesDataAttributesLeadTeams
+            color: String
+        }
+
+        type SqueakTeamProfilesData {
+            id: ID
+            attributes: SqueakTeamProfilesDataAttributes
+        }
+
+        type SqueakTeamProfiles {
+            data: [SqueakTeamProfilesData]
+        }
+
         type SqueakTeam implements Node {
             id: ID!
             squeakId: Int!
@@ -385,6 +532,143 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
             emojis: [SlackEmoji] @link(by: "name", from: "emojis")
             crestOptions: SqueakCrestOption
+            crest: SqueakTeamCrest
+            miniCrest: SqueakTeamMiniCrest
+            teamImage: SqueakTeamImage
+            profiles: SqueakTeamProfiles
+        }
+
+        type SqueakRoadmapMediaDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type SqueakRoadmapMediaData {
+            id: ID
+            attributes: SqueakRoadmapMediaDataAttributes
+        }
+
+        type SqueakRoadmapMedia {
+            cloudName: String
+            publicId: String
+            originalHeight: Int
+            originalWidth: Int
+            originalFormat: String
+            mime: String
+            url: String
+            data: SqueakRoadmapMediaData
+        }
+
+        type RoadmapProfilesDataAttributesAvatarDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type RoadmapProfilesDataAttributesAvatarData {
+            id: ID
+            attributes: RoadmapProfilesDataAttributesAvatarDataAttributes
+        }
+
+        type RoadmapProfilesDataAttributesAvatar {
+            data: RoadmapProfilesDataAttributesAvatarData
+        }
+
+        type RoadmapProfilesDataAttributesTeamsDataAttributesMiniCrestDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type RoadmapProfilesDataAttributesTeamsDataAttributesMiniCrestData {
+            id: ID
+            attributes: RoadmapProfilesDataAttributesTeamsDataAttributesMiniCrestDataAttributes
+        }
+
+        type RoadmapProfilesDataAttributesTeamsDataAttributesMiniCrest {
+            data: RoadmapProfilesDataAttributesTeamsDataAttributesMiniCrestData
+        }
+
+        type RoadmapProfilesDataAttributesTeamsDataAttributes {
+            name: String
+            miniCrest: RoadmapProfilesDataAttributesTeamsDataAttributesMiniCrest
+        }
+
+        type RoadmapProfilesDataAttributesTeamsData {
+            id: ID
+            attributes: RoadmapProfilesDataAttributesTeamsDataAttributes
+        }
+
+        type RoadmapProfilesDataAttributesTeams {
+            data: [RoadmapProfilesDataAttributesTeamsData]
+        }
+
+        type RoadmapProfilesDataAttributes {
+            firstName: String
+            lastName: String
+            avatar: RoadmapProfilesDataAttributesAvatar
+            color: String
+            teams: RoadmapProfilesDataAttributesTeams
+        }
+
+        type RoadmapProfilesData {
+            id: ID
+            attributes: RoadmapProfilesDataAttributes
+        }
+
+        type RoadmapProfiles {
+            data: [RoadmapProfilesData]
+        }
+
+        type RoadmapTeamsDataAttributesMiniCrestDataAttributes {
+            url: String
+            width: Int
+            height: Int
+            mime: String
+            alternativeText: String
+        }
+
+        type RoadmapTeamsDataAttributesMiniCrestData {
+            id: ID
+            attributes: RoadmapTeamsDataAttributesMiniCrestDataAttributes
+        }
+
+        type RoadmapTeamsDataAttributesMiniCrest {
+            data: RoadmapTeamsDataAttributesMiniCrestData
+        }
+
+        type RoadmapTeamsDataAttributes {
+            name: String
+            miniCrest: RoadmapTeamsDataAttributesMiniCrest
+        }
+
+        type RoadmapTeamsData {
+            id: ID
+            attributes: RoadmapTeamsDataAttributes
+        }
+
+        type RoadmapTeams {
+            data: [RoadmapTeamsData]
+        }
+
+        type EmojiReactionProfilesData {
+            id: ID
+        }
+
+        type EmojiReactionProfiles {
+            data: [EmojiReactionProfilesData]
+        }
+
+        type EmojiReaction {
+            emoji: String
+            profiles: EmojiReactionProfiles
         }
 
         type SqueakRoadmap implements Node {
@@ -393,6 +677,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             title: String!
             description: String!
             image: StrapiImage
+            media: SqueakRoadmapMedia
             tagline: String!
             slug: String!
             dateCompleted: Date @dateformat
@@ -404,6 +689,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             githubUrls: [String!]!
             githubPages: [GithubPage!]!
             teams: [SqueakTeam!] @link(by: "id", from: "teams.id")
+            profiles: RoadmapProfiles
+            emojiReactions: [EmojiReaction]
         }
 
         type GithubPage {

@@ -2,22 +2,22 @@
 title: MDX components
 ---
 
-There are some nifty MDX components available for use in Markdown content. Because these components are included globally, you don't need to do anything special to use them (like renaming `.md` to `.mdx` or manually importing them at the top of the file).
+There are some nifty MDX components available for use in Markdown content. These components are included globally, so you don't need to do anything special to use them (like renaming `.md` to `.mdx` or manually importing them at the top of the file).
 
 ## Images
 
-### Product screenshot
+### Product screenshots
 
 The `<ProductScreenshot />` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. It also optionally supports dark mode screenshots.
 
 You use it by passing image URLs to the `imageLight` and `imageDark` props like this:
 
-```
+```tsx
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
-  alt="Sampling config shown set to 100% i.e. no sampling"
-  classes="rounded"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
+    alt="Sampling config shown set to 100% i.e. no sampling"
+    classes="rounded"
 />
 ```
 
@@ -29,13 +29,10 @@ _Note: If you don't have a dark image, just leave out the `imageDark` prop and t
 
 You can create a slider or carousel of images by wrapping them in the `<ImageSlider>` component like this:
 
-```
+```html
 <ImageSlider>
-
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
-
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
-
+    ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
+    ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 </ImageSlider>
 ```
 
@@ -43,11 +40,12 @@ See an example in our [open-source analytics tools post](/blog/best-open-source-
 
 ## Product videos
 
-Th `<ProductVideo />` component works the same as product screenshots (above) but supports light and dark videos.
+Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos.
 
 1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
 
-```
+<!-- prettier-ignore -->
+```html
 ---
 export const NewFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel.mp4"
 export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel-dark.mp4"
@@ -56,7 +54,8 @@ export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/
 
 1. Use the component wherever you want the video(s) to appear.
 
-```
+<!-- prettier-ignore -->
+```tsx
 <ProductVideo
   videoLight={NewFunnelLight}
   videoDark={NewFunnelDark}
@@ -66,11 +65,21 @@ export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/
 
 _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
 
-## Codeblocks
+### Embedding YouTube videos
 
-The PostHog website has a custom codeblock component that comes with a number of useful features built-in:
+While not an MDX component, a reminder that when embedding a YouTube video, you should do two things:
 
--   [Syntax highDarking](#adding-syntax-highlighting)
+1. Use the `-nocookie` variant of the YouTube URL. eg:
+    ```
+    https://www.youtube-nocookie.com/embed/{VIDEO_ID}
+    ```
+2. Add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
+
+## Code blocks
+
+The PostHog website has a custom code block component that comes with a number of useful features built-in:
+
+-   [Syntax highlighting](#adding-syntax-highlighting)
 -   [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
 -   [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
 
@@ -118,11 +127,44 @@ This will produce the following output:
 }
 ```
 
-### Supported languages
+import Tab from 'components/Tab'
+
+### Using tabs
+
+You can use the `<Tab />` component to create tabs in your code blocks. This is useful for showing multiple code snippets or examples in a single code block.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```js filename=index.js
+console.log('Hello, world!')
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+````mdx
+```js filename=index.js
+console.log('Hello, world!')
+```
+````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+#### Supported languages
 
 Here is a list of all the languages that are supported in codeblocks:
 
-##### Frontend
+**Frontend**
 
 |                   |                |
 | ----------------- | -------------- |
@@ -136,7 +178,7 @@ Here is a list of all the languages that are supported in codeblocks:
 | Dart              | `dart`         |
 | Objective-C       | `objectivec`   |
 
-##### Backend
+**Backend**
 
 |         |             |
 | ------- | ----------- |
@@ -149,7 +191,7 @@ Here is a list of all the languages that are supported in codeblocks:
 | Python  | `python`    |
 | C / C++ | `c` / `cpp` |
 
-##### Misc.
+**Misc.**
 
 |          |                   |
 | -------- | ----------------- |
@@ -163,7 +205,53 @@ Here is a list of all the languages that are supported in codeblocks:
 | YAML     | `yaml`            |
 | Git      | `git`             |
 
-> **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the imports [here](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
+> **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the [imports in languages.tsx](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
+
+### Multi-language code blocks
+
+You can use the `<MultiLanguage>` component to show code blocks in multiple languages.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+<MultiLanguage>
+
+```js filename=index.js
+console.log('Hello, world!')
+```
+
+```python filename=index.py
+print('Hello, world!')
+```
+
+</MultiLanguage>
+
+</Tab.Panel>
+<Tab.Panel>
+
+````mdx
+<MultiLanguage>
+```js filename=index.js
+console.log('Hello, world!')
+```
+
+```python filename=index.py
+print('Hello, world!')
+```
+
+</MultiLanguage>
+````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 ### Multiple code snippets in one block
 
@@ -229,6 +317,319 @@ cert-manager:
     enabled: true
 ```
 
+### Code highlighting
+
+Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
+
+| Comment        | Effect           | Usage                                    |
+| -------------- | ---------------- | ---------------------------------------- |
+| `// +`         | Green highlight  | Represents additions in diffs            |
+| `// -`         | Red highlight    | Represents removals in diffs             |
+| `// HIGHLIGHT` | Yellow highlight | General emphasis without special meaning |
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```js filename=index.js
+const a = 1
+const b = 2
+const c = a + b // +
+
+console.log(a + b) // -
+console.log(c) // +
+
+console.log('end') // HIGHLIGHT
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+````mdx
+```js filename=index.js
+const a = 1
+const b = 2
+const c = a + b // +
+
+console.log(a + b) // -
+console.log(c) // +
+
+console.log('end') // HIGHLIGHT
+```
+````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+### Collapsed code blocks
+
+In some cases, such as large nested config files, you need readers to focus on a specific part of the code block while maintaining the context. You can do this by adding `focusOnLines=` to the code block. This collapses the code block and only shows the lines of code you specify.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```json file=angular.json focusOnLines=4-14
+{
+    "projects": {
+        "my-app": {
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "sourceMap": {
+                            "scripts": true, // +
+                            "styles": true, // +
+                            "hidden": true, // +
+                            "vendor": true // +
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+````mdx
+```json file=angular.json focusOnLines=4-14
+{
+    "projects": {
+        "my-app": {
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "sourceMap": {
+                            "scripts": true, // +
+                            "styles": true, // +
+                            "hidden": true, // +
+                            "vendor": true // +
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+### Mermaid diagrams
+
+Code blocks can also be used to show mermaid UML diagrams. When using these diagrams, make sure to include a text description of the diagram afterwards for accessibility and LLMs.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```mermaid
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    John-->Alice: Great!
+    Alice->John: See you later!
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+````mdx
+```mermaid
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    John-->Alice: Great!
+    Alice->John: See you later!
+```
+````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+## Call to action
+
+Adding `<ArrayCTA />` to any article will add this simple CTA:
+
+<ArrayCTA />
+
+Don't overuse it, but it's useful for high intent pages, like comparisons.
+
+## Feature comparison tables
+
+When comparing features between two or more products, use the `<ProductComparisonTable />` component which sources data from the `src/hooks/competitorData/` directory and lets you compare specific features across multiple competitors.
+
+<!-- prettier-ignore -->
+```tsx
+<ProductComparisonTable
+  competitors={['posthog', 'amplitude']}
+  rows={['product_analytics']}
+/>
+```
+
+Read more in the [product & feature comparisons handbook page](/handbook/engineering/posthog-com/product-comparisons).
+
+## Captions
+
+You can add captions below images using the following code:
+
+```tsx
+<Caption>Add you caption copy here</Caption>
+```
+
+Here's an example of what it looks like:
+
+![PostHog webshare pricing experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710126300/posthog.com/contents/images/customers/webshare/webshare-pricing.png)
+
+<Caption>
+    Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%
+</Caption>
+
+## Customer quotes
+
+Add a styled quote component using the following code:
+
+<OSQuote customer="lovable" author="viktor_eriksson" quote={0} />
+
+**Product-specific quote**
+
+<!-- prettier-ignore -->
+```jsx
+<OSQuote
+  customer="significa"
+  author="tomas_gouveia"
+  product="web_analytics"
+ />
+```
+
+<OSQuote customer="significa" author="tomas_gouveia" product="web_analytics" />
+
+**Generic quote**
+
+<!-- prettier-ignore -->
+```jsx
+<OSQuote 
+    customer="lovable"
+    author="viktor_eriksson"
+    quote={0}
+/>
+```
+
+We mainly use them in customer stories and some product pages.
+
+Quotes are sourced from the `useCustomers` hook and can reference product-specific quotes or general quotes by someone at a company. Be sure to add the customer's information to the `useCustomers` hook in `src/hooks/useCustomers.tsx`.
+
+**Example**
+
+<!-- prettier-ignore -->
+```tsx
+quotes: {
+    viktor_eriksson: {
+        name: 'Viktor Eriksson',
+        role: 'Software Engineer',
+        image: {
+            thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
+        },
+        quotes: [
+            "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+        ],
+    },
+},
+```
+
+## Collapsible sections
+
+The combination of `<details>` and `<summary>` components enables you to add a collapsible section to your page. Useful for FAQs or details not relevant to the main content.
+
+```html
+<details>
+    <summary>Can I specify some events to be identified and others to be anonymous for the same users?</summary>
+
+    Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with
+    their person profile and are captured as identified events.
+</details>
+```
+
+## Tabs
+
+Tabs enable you to display different content in a single section. We often use them to show different code examples for different languages, like in [installation pages](/docs/product-analytics/installation).
+
+To use them:
+
+1. Import the `Tab` component.
+2. Set up `Tab.Group`, `Tab.List`, and `Tab.Panel` for each tab you want to display. The `tabs` prop in `Tab.Group` should be an array of strings, one for each tab. This enables you to link to each tab by its name.
+3. Add the content for each tab in the `Tab.Panel` components. You should use snippets for readability, maintainability, and to avoid duplication, but you can use multiple snippets in a single tab.
+
+For example, here's how we set up the tabs for the error tracking installation page:
+
+```jsx
+import Tab from "components/Tab"
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PythonErrorTracking from './_snippets/python-install-error-tracking.mdx'
+import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
+import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
+import UploadSourceMapsSteps from './_snippets/upload-source-maps-steps.mdx'
+
+Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'Next.js', 'Python']}>
+    <Tab.List>
+      <Tab>Web</Tab>
+      <Tab>Next.js</Tab>
+      <Tab>Python</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+          <WebInstall />
+          <JSWebErrorTracking />
+          <UploadSourceMaps />
+          <UploadSourceMapsSteps />
+        </Tab.Panel>
+        <Tab.Panel>
+          <NextJSErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <PythonInstall />
+          <PythonErrorTracking />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+```
+
+You can default to a specific tab by passing the tab name in the query string like:
+
+```
+/docs/product-analytics/installation?tab=web
+```
+
 ## Links
 
 ### Linking internally
@@ -245,6 +646,17 @@ Be sure to use _relative links_ (exclude `https://posthog.com`) with _absolute p
 | -------------------- | ------------------------------------------ |
 | **Correct syntax**   | `/absolute-path/to/url`                    |
 | **Incorrect syntax** | `https://posthog.com/absolute-path/to/url` |
+
+**Open a new PostHog window**
+
+To open a link in a new window within the PostHog.com OS interface, use `state={{ newWindow: true }}` like:
+
+<!-- prettier-ignore -->
+```tsx
+<Link to="/absolute-path/to/url" state={{ newWindow: true }}>
+  Link text
+</Link>
+```
 
 ### Linking externally
 
@@ -266,7 +678,7 @@ Example:
 
 ### Private links
 
-Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
+Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL (like a Slack link or private GitHub repo). Use the `<PrivateLink />` component for this. See an example ([on our share options page.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
 ```
 <PrivateLink url="https://path/to/private/link">
@@ -275,7 +687,7 @@ Sometimes we link to confidential information in our handbook. Since the handboo
 
 ```
 
-Private links will always open in a new tab.
+Private links will always open in a new browser tab.
 
 ## Mention a team member
 
@@ -321,7 +733,8 @@ _Note: This does **not** actually embed an X post; it's just styled to look like
 
 Be sure to change the alert message which appears if you click one of the action buttons (reply, repost, like).
 
-```
+<!-- prettier-ignore -->
+```tsx
 <Tweet
     className="mx-auto"
     alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."

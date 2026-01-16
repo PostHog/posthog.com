@@ -79,11 +79,11 @@ Clicking on any section in the retention table will tell you exactly which users
 * [UUIDs are ugly](https://github.com/PostHog/posthog/pull/1255), so we just cut them off rather than wrapping entire lines in the events table
 * [Samcaspus](https://github.com/samcaspus) contributed a little bit of magic: we now automatically adjust your date range if [you change the interval](https://github.com/PostHog/posthog/pull/1253)
 * We added a button to dashboard that allows users to [easily add a new item](https://github.com/PostHog/posthog/pull/1242)
-* enhanced ctrl + click new tab opening feature [](https://github.com/PostHog/posthog/pull/1248)
+* [Enhanced ctrl + click new tab opening feature](https://github.com/PostHog/posthog/pull/1248)
 * Massively speed up [loading live actions](https://github.com/PostHog/posthog/pull/1182)
-* Fix password validation and improve minimums notice (closes #1197) [](https://github.com/PostHog/posthog/pull/1204)
-* Closes #1180 worker fails if timestamp is invalid [](https://github.com/PostHog/posthog/pull/1181)
-* (abhijitghate)[https://github.com/abhijitghate] contributed an improvement to the way we display DAU's in the graph
+* [Fix password validation and improve minimums notice (closes #1197)](https://github.com/PostHog/posthog/pull/1204)
+* [Fix worker failures when a timestamp is invalid (closes #1180)](https://github.com/PostHog/posthog/pull/1181)
+* [abhijitghate](https://github.com/abhijitghate) contributed an improvement to the way we display DAU's in the graph
 * Fix an issue where [loading sessions would do an entire table scan](https://github.com/PostHog/posthog/pull/1221), and then throw it away
 * [Automatically bind docker-compose 2to port 80](https://github.com/PostHog/posthog/pull/1257) for production deployments
 * \+ a bunch of improvements to make local development better! ([1](https://github.com/PostHog/posthog/pull/1290), [2](https://github.com/PostHog/posthog/pull/1288), [3](https://github.com/PostHog/posthog/pull/1272), [4](https://github.com/PostHog/posthog/pull/1293))

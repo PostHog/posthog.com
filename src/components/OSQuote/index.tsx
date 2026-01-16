@@ -5,10 +5,11 @@ import CloudinaryImage from '../CloudinaryImage'
 interface OSQuoteProps {
     customer: string
     author: string
-    product: string
+    product?: string
+    quote?: number
 }
 
-export const OSQuote: React.FC<OSQuoteProps> = ({ customer, author, product }) => {
+export const OSQuote: React.FC<OSQuoteProps> = ({ customer, author, product, quote = 0 }) => {
     const { getCustomer } = useCustomers()
     const customerData = getCustomer(customer)
 
@@ -17,9 +18,17 @@ export const OSQuote: React.FC<OSQuoteProps> = ({ customer, author, product }) =
     }
 
     const authorData = customerData.quotes[author]
-    const quote = authorData.products[product]
+    let quoteText: string | undefined
 
-    if (!quote) {
+    if (product) {
+        // Product-specific quote
+        quoteText = authorData.products?.[product]
+    } else {
+        // General quote from quotes array
+        quoteText = authorData.quotes?.[quote]
+    }
+
+    if (!quoteText) {
         return null
     }
 
@@ -43,7 +52,7 @@ export const OSQuote: React.FC<OSQuoteProps> = ({ customer, author, product }) =
                 </div>
             </div>
             <div className="pt-2 [&_*]:!leading-normal">
-                <blockquote className="text-primary border-l-0 pl-0 not-italic m-0">{quote}</blockquote>
+                <blockquote className="text-primary border-l-0 pl-0 not-italic m-0">{quoteText}</blockquote>
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useState } from 'react'
-import { User, useUser } from 'hooks/useUser'
+import React, { useContext, useMemo, useState, useRef, useEffect } from 'react'
+import { useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
@@ -14,6 +14,7 @@ import {
     IconCheck,
     IconInfo,
     IconPencil,
+    IconShieldLock,
     IconThumbsDown,
     IconThumbsDownFilled,
     IconThumbsUp,
@@ -22,16 +23,18 @@ import {
 } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import EditWrapper from './EditWrapper'
-import { Authentication } from '..'
-import SideModal from 'components/Modal/SideModal'
+import { useApp } from '../../../context/App'
 import ReportSpamButton from './ReportSpamButton'
+import OSButton from 'components/OSButton'
+import { useToast } from '../../../context/Toast'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
     badgeText?: string | null
     className?: string
+    isInForum?: boolean
 }
 
 const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
@@ -152,7 +155,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     ]
 
     return (
-        <div className="p-4 border border-primary rounded bg-accent mt-1 mb-3">
+        <div data-scheme="primary" className="p-4 border border-primary bg-accent rounded mt-1 mb-3">
             {helpful === null ? (
                 <p className="m-0 text-sm">
                     <IconFeatures className="size-6 relative mr-1 -top-0.5 text-primary dark:text-primary-dark opacity-50 inline-block" />
@@ -198,34 +201,6 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
-const AuthModal = ({
-    authModalOpen,
-    setAuthModalOpen,
-    onAuth,
-}: {
-    authModalOpen: boolean
-    setAuthModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    onAuth: (user: User) => void
-}) => {
-    return (
-        <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
-            <h4 className="mb-4">Sign into PostHog.com</h4>
-            <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                <p className="text-sm mb-2">
-                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                </p>
-
-                <p className="text-sm mb-0">
-                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                    account.
-                </p>
-            </div>
-
-            <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
-        </SideModal>
-    )
-}
-
 const VoteButton = ({
     id,
     type,
@@ -239,49 +214,55 @@ const VoteButton = ({
     votes: number
     onVote: () => void
 }) => {
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const { voteReply, user } = useUser()
+    const { openSignIn } = useApp()
 
-    const vote = async (user: User) => {
+    const vote = async () => {
         await voteReply(id, type, user)
         onVote?.()
     }
 
     const handleClick = () => {
         if (!user) {
-            setAuthModalOpen(true)
+            openSignIn()
         } else {
-            vote(user)
+            vote()
         }
     }
 
-    const Icon =
-        type === 'up' ? (voted ? IconThumbsUpFilled : IconThumbsUp) : voted ? IconThumbsDownFilled : IconThumbsDown
-
     return (
-        <>
-            <AuthModal
-                authModalOpen={authModalOpen}
-                setAuthModalOpen={setAuthModalOpen}
-                onAuth={(user) => {
-                    if (user) {
-                        vote(user)
-                        setAuthModalOpen(false)
-                    }
-                }}
-            />
-            <button
-                onClick={handleClick}
-                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-            >
-                <Icon className="size-4 mr-1 text-secondary inline-block" />
-                {votes}
-            </button>
-        </>
+        <OSButton
+            onClick={handleClick}
+            icon={
+                type === 'up' ? (
+                    voted ? (
+                        <IconThumbsUpFilled className="text-white" />
+                    ) : (
+                        <IconThumbsUp />
+                    )
+                ) : voted ? (
+                    <IconThumbsDownFilled className="text-white" />
+                ) : (
+                    <IconThumbsDown />
+                )
+            }
+            size="md"
+            className={
+                type === 'up'
+                    ? voted
+                        ? '!bg-green !text-white !border-green'
+                        : ''
+                    : voted
+                    ? '!bg-red !text-white !border-red'
+                    : ''
+            }
+        >
+            <strong>{votes}</strong>
+        </OSButton>
     )
 }
 
-export default function Reply({ reply, badgeText }: ReplyProps) {
+export default function Reply({ reply, badgeText, isInForum = false }: ReplyProps) {
     const {
         id,
         attributes: { body, createdAt, profile, publishedAt, meta, edits },
@@ -295,7 +276,11 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         mutate,
     } = useContext(CurrentQuestionContext)
 
-    const [confirmDelete, setConfirmDelete] = useState(false)
+    const [pendingDelete, setPendingDelete] = useState(false)
+    const [isEditingReply, setIsEditingReply] = useState(false)
+    const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const toastCreatedAtRef = useRef<number | null>(null)
+    const { addToast, removeToast } = useToast()
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
@@ -308,16 +293,53 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
-        if (confirmDelete) {
+
+        const TOAST_DURATION = 5000
+
+        // Create timestamp that will be used by both the toast and our timeout
+        const createdAt = Date.now()
+        toastCreatedAtRef.current = createdAt
+
+        // Mark as pending delete and fade out
+        setPendingDelete(true)
+
+        // Set timeout to actually delete after toast expires
+        deleteTimeoutRef.current = setTimeout(async () => {
             await handleReplyDelete(id)
-        } else {
-            setConfirmDelete(true)
-        }
+            setPendingDelete(false)
+
+            // Remove the toast once deletion is complete
+            if (toastCreatedAtRef.current) {
+                removeToast(toastCreatedAtRef.current)
+                toastCreatedAtRef.current = null
+            }
+        }, TOAST_DURATION)
+
+        // Show toast with undo (createdAt will be set internally but we track it separately)
+        addToast({
+            description: 'Reply deleted',
+            duration: TOAST_DURATION,
+            createdAt, // Pass the timestamp so the toast context uses the same one
+            onUndo: () => {
+                // Cancel the deletion
+                if (deleteTimeoutRef.current) {
+                    clearTimeout(deleteTimeoutRef.current)
+                    deleteTimeoutRef.current = null
+                }
+                setPendingDelete(false)
+                toastCreatedAtRef.current = null
+            },
+        })
     }
 
-    const handleContainerClick = () => {
-        setConfirmDelete(false)
-    }
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (deleteTimeoutRef.current) {
+                clearTimeout(deleteTimeoutRef.current)
+            }
+        }
+    }, [])
 
     const pronouns = profile?.data?.attributes?.pronouns
     const helpful = useMemo(() => reply?.attributes?.helpful, [])
@@ -337,43 +359,45 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     const isMax = profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return profile?.data ? (
-        <div onClick={handleContainerClick}>
-            <div className="pb-1 flex items-center space-x-2">
+        <div className={`transition-opacity duration-300 ${pendingDelete ? 'opacity-30 pointer-events-none' : ''}`}>
+            <div className={`pb-1 flex items-center space-x-2 ${isInForum ? 'pr-8' : ''}`}>
                 {isMax ? (
                     <Tooltip
-                        content={() => (
-                            <div className="text-sm max-w-64">
-                                Max AI is our resident AI assistant. Double-check responses for accuracy.
+                        trigger={
+                            <div className="relative">
+                                <Link
+                                    state={{ newWindow: true }}
+                                    className="flex items-center !text-black dark:!text-white"
+                                    to={`/community/profiles/${profile.data.id}`}
+                                >
+                                    <div className="mr-2 relative ml-[-2px]">
+                                        <Avatar
+                                            className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
+                                            image={getAvatarURL(profile?.data?.attributes)}
+                                            color={profile?.data.attributes.color}
+                                        />
+                                        {isTeamMember && (
+                                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
+                                                <Logomark className="w-[16px]" />
+                                            </span>
+                                        )}
+                                    </div>
+                                    <strong>
+                                        {profile.data.attributes.firstName || 'Anonymous'}{' '}
+                                        {profile.data.attributes.lastName || 'Anonymous'}
+                                    </strong>
+                                    {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
+                                    <IconFeatures className="size-5 ml-1 text-primary dark:text-primary-dark opacity-50 inline-block" />
+                                </Link>
                             </div>
-                        )}
-                        placement="top"
+                        }
+                        delay={0}
                     >
-                        <div className="relative">
-                            <Link
-                                state={{ newWindow: true }}
-                                className="flex items-center !text-black dark:!text-white"
-                                to={`/community/profiles/${profile.data.id}`}
-                            >
-                                <div className="mr-2 relative ml-[-2px]">
-                                    <Avatar
-                                        className="w-[25px] h-[25px] rounded-full"
-                                        image={getAvatarURL(profile?.data?.attributes)}
-                                        color={profile?.data.attributes.color}
-                                    />
-                                    {isTeamMember && (
-                                        <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
-                                            <Logomark className="w-[16px]" />
-                                        </span>
-                                    )}
-                                </div>
-                                <strong>
-                                    {profile.data.attributes.firstName || 'Anonymous'}{' '}
-                                    {profile.data.attributes.lastName || 'Anonymous'}
-                                </strong>
-                                {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
-                                <IconFeatures className="size-5 ml-1 text-primary dark:text-primary-dark opacity-50 inline-block" />
-                            </Link>
-                        </div>
+                        <p>
+                            PostHog AI is our resident AI assistant.
+                            <br />
+                            Double-check responses for accuracy.
+                        </p>
                     </Tooltip>
                 ) : (
                     <Link
@@ -383,7 +407,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`w-[25px] h-[25px] rounded-full ${
+                                className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
@@ -418,9 +442,48 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         )}
                     </>
                 )}
+                <div className="!ml-auto flex items-center space-x-1">
+                    {isModerator && (
+                        <OSButton
+                            size="sm"
+                            tooltip={
+                                <>
+                                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                    {publishedAt ? 'Unpublish' : 'Publish'}
+                                </>
+                            }
+                            onClick={() => handlePublishReply(!!publishedAt, id)}
+                            icon={<IconArchive />}
+                        />
+                    )}
+                    {isModerator && (
+                        <OSButton
+                            size="sm"
+                            tooltip={
+                                <>
+                                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                    Delete reply
+                                </>
+                            }
+                            onClick={handleDelete}
+                            icon={<IconTrash />}
+                            disabled={pendingDelete}
+                        />
+                    )}
+
+                    {isReplyAuthor && (
+                        <OSButton
+                            size="sm"
+                            tooltip="Edit reply"
+                            onClick={() => setIsEditingReply(true)}
+                            icon={<IconPencil />}
+                        />
+                    )}
+                    {!isReplyAuthor && !isMax && <ReportSpamButton type="reply" id={id} />}
+                </div>
             </div>
 
-            <div className="border-l-0 ml-[33px] pl-0 pb-1">
+            <div className={`border-l-0 ${isInForum ? 'pl-[calc(44px_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&
@@ -440,104 +503,62 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             resolvable={resolvable}
                         />
                     ))}
-                <EditWrapper data={reply} type="reply" onSubmit={() => mutate()}>
-                    {({ setEditing }) => {
-                        return (
-                            <>
-                                <div
-                                    className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}
-                                >
-                                    {reply?.attributes?.helpful === false && (
-                                        <div className="p-2 rounded border border-primary mb-2 text-sm bg-accent">
-                                            <IconInfo className="size-5 inline-block" /> This answer was marked as
-                                            unhelpful.
-                                        </div>
-                                    )}
-                                    <Markdown>{body}</Markdown>
-                                    {!publishedAt && isModerator && (
-                                        <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
-                                            This reply is unpublished and only visible to moderators
-                                        </p>
-                                    )}
+                <EditWrapper
+                    data={reply}
+                    type="reply"
+                    onSubmit={() => mutate()}
+                    editing={isEditingReply}
+                    onEditingChange={setIsEditingReply}
+                >
+                    <>
+                        <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
+                            {reply?.attributes?.helpful === false && (
+                                <div className="p-2 rounded border border-primary mb-2 text-sm bg-accent">
+                                    <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                                 </div>
-                                {isMax && helpful && (
-                                    <div className="border-t border-primary pt-2 mt-2">
-                                        <p className="m-0 text-sm text-secondary pb-4">
-                                            Max AI's response was generated by{' '}
-                                            <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
-                                                Inkeep
-                                            </Link>
-                                            . Double-check for accuracy.
-                                        </p>
-                                    </div>
-                                )}
+                            )}
+                            <Markdown>{body}</Markdown>
+                            {!publishedAt && isModerator && (
+                                <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
+                                    This reply is unpublished and only visible to moderators
+                                </p>
+                            )}
+                        </div>
+                        {isMax && helpful && (
+                            <div className="border-t border-primary pt-2 mt-2">
+                                <p className="m-0 text-sm text-secondary pb-4">
+                                    Max AI's response was generated by{' '}
+                                    <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
+                                        Inkeep
+                                    </Link>
+                                    . Double-check for accuracy.
+                                </p>
+                            </div>
+                        )}
 
-                                <div
-                                    className={`flex ${
-                                        isModerator ? 'justify-end border-t border-primary mt-4' : ''
-                                    } mt-1 pt-1 pb-2`}
+                        <div className="space-y-1 mt-2">
+                            {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
+                                <OSButton
+                                    onClick={() => handleResolve(true, id)}
+                                    variant="secondary"
+                                    size="md"
+                                    icon={<IconCheck />}
                                 >
-                                    <div
-                                        className={`inline-flex space-x-1 flex-wrap ${
-                                            isModerator ? `bg-primary px-1 mr-4 -mt-5` : ''
-                                        }`}
-                                    >
-                                        <VoteButton
-                                            id={id}
-                                            type="up"
-                                            voted={upvoted}
-                                            votes={upvotes}
-                                            onVote={() => mutate()}
-                                        />
-                                        <VoteButton
-                                            id={id}
-                                            type="down"
-                                            voted={downvoted}
-                                            votes={downvotes}
-                                            onVote={() => mutate()}
-                                        />
-                                        {isReplyAuthor && (
-                                            <button
-                                                onClick={() => setEditing(true)}
-                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconPencil className="size-4 mr-1 text-secondary inline-block" />
-                                                Edit
-                                            </button>
-                                        )}
-                                        {(isModerator || resolvable) && (
-                                            <button
-                                                onClick={() => handleResolve(true, id)}
-                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                                Mark as solution
-                                            </button>
-                                        )}
-                                        {!isReplyAuthor && !isMax && <ReportSpamButton type="reply" id={id} />}
-                                        {isModerator && (
-                                            <button
-                                                onClick={() => handlePublishReply(!!publishedAt, id)}
-                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconArchive className="size-4 mr-1 text-muted inline-block" />
-                                                {publishedAt ? 'Unpublish' : 'Publish'}
-                                            </button>
-                                        )}
-                                        {isModerator && (
-                                            <button
-                                                onClick={handleDelete}
-                                                className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconTrash className="size-4 mr-1 text-muted inline-block" />
-                                                {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                                            </button>
-                                        )}
-                                    </div>
-                                </div>
-                            </>
-                        )
-                    }}
+                                    Mark as solution
+                                </OSButton>
+                            )}
+                            <div className="flex items-center gap-1">
+                                <VoteButton id={id} type="up" voted={upvoted} votes={upvotes} onVote={() => mutate()} />
+                                <VoteButton
+                                    id={id}
+                                    type="down"
+                                    voted={downvoted}
+                                    votes={downvotes}
+                                    onVote={() => mutate()}
+                                />
+                            </div>
+                        </div>
+                    </>
                 </EditWrapper>
             </div>
         </div>

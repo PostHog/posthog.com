@@ -14,9 +14,11 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 **Marketing analytics** enables you to track marketing campaigns, costs, and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
 
+> For detailed column definitions, formulas, and platform field mappings, see [Column definitions](/docs/web-analytics/marketing-analytics-schema).
+
 ## Marketing dashboard
 
-The marketing dashboard contains multiple pre-built insights helping you understand your campaigns and costs. 
+The marketing dashboard contains multiple pre-built insights that help you understand your campaigns and costs. 
 
 ### Marketing costs over time
 
@@ -46,8 +48,8 @@ The marketing costs chart displays your total advertising spend across all confi
 
 The campaign breakdown table provides detailed performance metrics by individual campaign:
 
-- **Campaign**: Campaign identifier from your advertising platform (should match to `utm_campaign` value)
-- **Source**: Ad platform name (e.g., `google`, should match to `utm_source` value)
+- **Campaign**: Campaign identifier from your advertising platform (must match the `utm_campaign` value in your conversion events)
+- **Source**: Ad platform name (e.g., `google`, must match the `utm_source` value in your conversion events)
 - **Total cost**: Total spend for the campaign in your base currency
 - **Total clicks**: Number of clicks received during the selected period
 - **Total impressions**: Number of impressions served
@@ -58,16 +60,55 @@ The campaign breakdown table provides detailed performance metrics by individual
 
 ## Settings and configuration
 
-### Base currency
+### Data source configuration
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bc_dark_c6547dfdb9.png"
-    alt="Base currency configuration"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Screenshot_2025_10_24_at_11_32_53_AM_11adfeb6c8.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Screenshot_2025_10_24_at_11_32_23_AM_00e27030df.png"
+    alt="Unified data source configuration showing native, data warehouse, and self-managed sources"
     classes="rounded"
 />
 
-PostHog converts currency values for the entire team to the base currency you set in [your project settings](https://app.posthog.com/settings/project#base-currency) before displaying them. If we can't properly detect your currency from the source data, we'll assume it's in this currency as well.
+PostHog supports three types of data sources for marketing analytics. All sources are configured through a unified interface that shows the connection status, required table syncing, and column mapping for each source type.
+
+#### Native sources
+
+PostHog can automatically sync marketing data from supported advertising platforms. You'll need to sync the required tables for each source to enable the functionality.
+
+**Supported native sources:**
+
+| Platform | Setup Guide | Required Tables |
+|----------|------------|-----------------|
+| Google Ads | [Setup guide](/docs/cdp/sources/google-ads) | `campaign` and `campaign_stats` |
+| LinkedIn Ads | [Setup guide](/docs/cdp/sources/linkedin-ads) | `campaigns` and `campaign_stats` |
+| Meta Ads | [Setup guide](/docs/cdp/sources/meta-ads) | `campaigns` and `campaign_stats` |
+| TikTok Ads | [Setup guide](/docs/cdp/sources/tiktok-ads) | `campaigns` and `campaign_report` |
+| Reddit Ads | [Setup guide](/docs/cdp/sources/reddit-ads) | `campaigns` and `campaign_report` |
+
+Each native source automatically handles data formatting and provides the required campaign and performance data. The configuration interface shows which tables are syncing and which still need to be enabled.
+
+#### Data warehouse sources
+
+You can _optionally_ connect external data warehouse sources (currently BigQuery) to display marketing analytics. You'll need to map the required columns for each table to enable the functionality.
+
+**Required field mappings:**
+- **Campaign**: Campaign identifier or name (mapped to `utm_campaign` query param)
+- **Cost**: Cost amount for the period
+- **Date**: Date of the data record
+- **Source**: Platform name (mapped to `utm_source` query param)
+
+**Optional field mappings:**
+- **Clicks**: Number of clicks received
+- **Currency**: Currency code for cost values
+- **Impressions**: Number of impressions served
+
+#### Self-managed sources
+
+You can configure self-managed sources from S3, GCS, Cloudflare R2, and Azure. Like data warehouse sources, you'll need to map the required columns for each table to enable the functionality.
+
+> **Note:** We strongly recommend using JSON format for better support and troubleshooting. You simply need to create a connection between PostHog and your marketing source, map the desired fields, and PostHog will use the marketing data directly from that source.
+
+Please refer to the [data pipeline docs](/docs/cdp/sources) for more information on configuring external data sources.
 
 ### Conversion goals
 
@@ -81,67 +122,96 @@ PostHog converts currency values for the entire team to the base currency you se
 Define conversion goals by selecting events, actions, or data warehouse tables. These goals are used to track and analyze user conversions in your marketing analytics.
 
 To configure conversion goals, select:
-- **Conversion goal name**: Descriptive name (e.g., purchase, sign up, download)
-- **Event, action or data warehouse table**: Select what to track for conversions
-- **Schema mapping**: For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source`
 
-### Native data warehouse sources
+| Configuration Field | Description |
+|---------------------|-------------|
+| Conversion goal name | Descriptive name (e.g., purchase, sign up, download) |
+| Event, action or data warehouse table | Select what to track for conversions |
+| Schema mapping | For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source` |
+
+For data warehouse table conversion goals, you'll need to map the following required fields:
+
+| Required Field | Description |
+|----------------|-------------|
+| UTM Campaign Name | Maps to the `utm_campaign` parameter for attribution |
+| UTM Source Name | Maps to the `utm_source` parameter for attribution |
+| Timestamp Field | Date/time field for the conversion event |
+| Distinct ID Field (optional) | User identifier for conversion tracking |
+
+### Advanced settings
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/native_white_0e3fb7591d.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/native_dark_6056080e7a.png"
-    alt="Native data warehouse sources configuration"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_16_20_PM_60589e9810.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_33_PM_d4a04d2a94.png"
+    alt="Advanced settings to map campaign data from your advertising sources to your conversion events"
     classes="rounded"
 />
 
-PostHog can automatically sync marketing data from support platforms like Google Ads by configuring them as native sources. You'll need to sync the required tables for each source to enable the functionality.
+Configure how PostHog maps campaign data from your advertising sources to your conversion events. These settings give you granular control over how campaign identifiers and sources are matched for attribution.
 
-The simplest way to add marketing data is to [add a Google Ads source](https://app.posthog.com/pipeline/new/source?kind=googleads) by following [this guide](/docs/cdp/sources/google-ads).
-
-Required tables for native sources:
-- `campaign`: Contains campaign information and metadata
-- `campaign_stats`: Maps campaigns with performance statistics for each time period
-
-### Non-native data warehouse sources
+#### Campaign field preference
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/non_native_white_344a406529.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/non_native_dark_f5dd988e41.png"
-    alt="Non-native data warehouse sources configuration"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_16_25_PM_67afdd8f63.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_41_PM_8717ecf7d4.png"
+    alt="Campaign field preference settings showing options to choose between campaign name and campaign ID"
     classes="rounded"
 />
 
-Alternatively, you can use an external data warehouse sources to display marketing analytics. You'll need to map the required columns for each table to enable the functionality. Currently, only BigQuery tables are supported.
+For each advertising platform, you can choose whether to map campaigns using the **campaign name** or **campaign ID**:
+
+- **Campaign name**: Uses the human-readable campaign name from your ad platform (e.g., "Summer Sale 2025")
+- **Campaign ID**: Uses the platform's unique campaign identifier (e.g., "123456789")
+
+This setting determines which field is matched against the `utm_campaign` parameter in your [conversion events](/docs/web-analytics/marketing-analytics#conversion-goals). Choose the option that matches how you structure your UTM parameters.
+
+#### UTM campaign manual mappings
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/configuring_white_0005e8dba1.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/configuring_dark_90df4b94c2.png"
-    alt="Configuring data warehouse source mapping with required and optional fields"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_16_30_PM_8ec98c0122.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_45_PM_91942d7d0e.png"
+    alt="UTM campaign manual mappings interface showing custom campaign mapping configuration"
     classes="rounded"
 />
 
-**Required field mappings:**
-- **Campaign**: Campaign identifier or name (mapped to `utm_campaign` query param)
-- **Cost**: Cost amount for the period
-- **Date**: Date of the data record
-- **Source**: Platform name (mapped to `utm_source` query param)
+Map arbitrary `utm_campaign` values to specific campaign names or IDs from your [advertising platforms](/docs/web-analytics/marketing-analytics#data-source-configuration). This is useful when:
 
-**Optional field mappings:**
-- **Clicks**: Number of clicks received
-- **Currency**: Currency code for cost values
-- **Impressions**: Number of impressions served
+- Your UTM parameters use different naming conventions than your campaign name or ID
+- You want to consolidate multiple campaign variations under a single campaign
+- You're tracking campaigns across multiple channels with different UTM campaign naming
 
-### Self-managed data warehouse sources
+For example, you can map `utm_campaign=summer-promo` to the Google Ads campaign named "Summer Sale 2025" or to campaign ID "123456789", depending on your campaign field preference.
+
+#### Custom source mappings
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/sm_white_f266abeb3a.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/sm_dark_3a47c737b9.png"
-    alt="Self-managed data warehouse sources configuration"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_12_09_at_3_16_33_PM_64be31b2d2.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_49_PM_a509d013da.png"
+    alt="Custom source mappings showing whitelisted UTM sources per advertising platform"
     classes="rounded"
 />
 
-Another option to get marketing analytics data is to configure and use self-managed sources from S3, GCS, Cloudflare R2, and Azure. You'll need to map the required columns for each table to enable the functionality.
+Control which UTM sources are attributed to each [advertising platform integration](/docs/web-analytics/marketing-analytics#native-sources). For each platform (Google Ads, LinkedIn Ads, Meta Ads, etc.), you can:
 
-> **Note:** We strongly recommend using JSON format for better support and troubleshooting. Like data warehouse tables, you simply need to create a connection between PostHog and your marketing source, map the desired fields, and PostHog will automatically sync the marketing data.
+- **Whitelist specific sources**: Define which `utm_source` values should be attributed to this platform
+- **Support multiple sources**: Map multiple UTM source values to a single advertising platform
 
-Please refer to the [data pipeline docs](/docs/cdp/sources) for more information on configuring external data sources.
+This is particularly useful when:
+- You use custom UTM source values that don't match the default platform names
+- A single campaign spans multiple traffic sources
+
+**Example configuration:**
+- [Google Ads](/docs/cdp/sources/google-ads) integration: Whitelist sources `google`, `google_ads`, `paid_search`
+- [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Whitelist sources `linkedin`, `li`, `linkedin_paid`
+- [Meta Ads](/docs/cdp/sources/meta-ads) integration: Whitelist sources `facebook`, `instagram`, `meta`
+
+### Base currency
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bc_dark_c6547dfdb9.png"
+    alt="Base currency configuration"
+    classes="rounded"
+/>
+
+PostHog converts currency values for the entire team to the base currency you set in [your project settings](https://app.posthog.com/settings/project#base-currency) before displaying them. If we can't properly detect your currency from the source data, we'll assume it's in the base currency as well.

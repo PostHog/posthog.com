@@ -123,6 +123,16 @@ export const CompensationCalculator = ({
         setJob(initialJob)
     }, [initialJob])
 
+    React.useEffect(() => {
+        const newRegion = country
+            ? locationFactor
+                  .filter((location) => location.country === country)
+                  .map((location) => location.area)
+                  .sort()[0]
+            : null
+        setRegion(newRegion || null)
+    }, [country])
+
     const setItem = (type: string) => {
         return (value: any) => {
             if (type === 'job') setJob(value)
@@ -198,7 +208,7 @@ export const CompensationCalculator = ({
                     <Section title="Level" description={descriptions['level'] && descriptions['level']}>
                         {breakpoints.sm ? (
                             <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
-                                <div className="w-full inline-flex flex-col items-stretch md:flex-row md:items-center bg-white  rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
+                                <div className="w-full inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
                                     {Object.entries(levelModifier).map(([level, modifier]) => (
                                         <RadioGroup.Option
                                             as="button"

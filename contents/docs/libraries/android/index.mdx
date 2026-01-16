@@ -4,8 +4,7 @@ sidebarTitle: Android
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-android'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg
+platformLogo: android
 features:
   eventCapture: true
   userIdentification: true
@@ -15,6 +14,7 @@ features:
   groupAnalytics: true
   surveys: false
   llmAnalytics: false
+  errorTracking: true
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -187,7 +187,7 @@ no matter how many events have been gathered.
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
 
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     flushAt = 20
     flushIntervalSeconds = 30
 }
@@ -239,7 +239,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:**  This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 -   Associate the events for this session with a group
 
@@ -267,6 +267,10 @@ PostHog.group(
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
+## Error tracking
+
+To set up error tracking in your project, follow the [Android installation guide](/docs/error-tracking/installation/android).
+
 ## Session replay
 
 To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Android SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
@@ -279,6 +283,19 @@ The PostHog Android SDK will continue to capture events when the device is offli
 - When the queue is full, the oldest event is deleted first.
 - The queue is flushed when the app is restarted and the device is online.
 - When you call [`flush()`](#flush) while the device is offline, it aborts early and the events are not flushed.
+
+## Debug mode 
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by setting the `debug` option to `true` in the `PostHogAndroidConfig` object. This will enable verbose logs about the inner workings of the SDK.
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+    debug = true
+    // ... other config options
+}
+```
 
 ## All configuration options
 
@@ -319,6 +336,10 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Preload feature flags automatically. (on/true by default)
     preloadFeatureFlags = true
 
+    // Environment tags that constrain which feature flags are evaluated. (not set by default)
+    // When set, only flags with matching evaluation tags (or no evaluation tags) will be returned.
+    evaluationEnvironments = listOf("production", "android", "mobile")
+
     // Callback that is called when feature flags are loaded (not set by default)
     onFeatureFlags = { ... }
 
@@ -348,6 +369,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Whether the SDK should reuse the anonymous Id between user changes. 
     // When enabled, a single Id will be used for all anonymous users on this device (off/false by default)
     reuseAnonymousId = false
+
+    // Error tracking configuration
+    errorTrackingConfig = PostHogErrorTrackingConfig(...)
 }
 ```
 
@@ -356,4 +380,3 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 ## Do I need to declare permissions in the AndroidManifest.xml?
 
 We don't declare nor use any 'Service', so no permissions are needed.
-

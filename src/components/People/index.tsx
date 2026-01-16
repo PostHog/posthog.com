@@ -1,33 +1,21 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { kebabCase } from 'lib/utils'
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
-import ReactCountryFlag from 'react-country-flag'
-import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
-import Layout from 'components/Layout'
 import { SEO } from '../seo'
-import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
-import { StaticImage } from 'gatsby-plugin-image'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
-import SideModal from 'components/Modal/SideModal'
-import Profile from 'components/Team/Profile'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Stickers from 'components/Stickers/Index'
-import { Toolbar } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
-import { useWindow } from '../../context/Window'
-import { useApp } from '../../context/App'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
+import PeopleMap from 'components/HogMap/PeopleMap'
+import { IconMapPin, IconList } from '@posthog/icons'
 
 export const TeamMember = (props: any) => {
     const {
@@ -44,6 +32,7 @@ export const TeamMember = (props: any) => {
         pineappleOnPizza,
         startDate,
         isTeamLead,
+        viewingOwnTeam,
     } = props
     const [ref, inView] = useInView({
         threshold: 0,
@@ -104,7 +93,7 @@ export const TeamMember = (props: any) => {
         <div ref={ref}>
             <Link
                 to={`/community/profiles/${squeakId}`}
-                wrapperClassName={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} block rounded max-w-96 relative`}
+                wrapperClassName={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} block rounded max-w-96 relative z-0`}
                 state={{ newWindow: true }}
             >
                 {inView && (
@@ -144,14 +133,20 @@ export const TeamMember = (props: any) => {
                             {isTeamLead && teamData.length > 0 && (
                                 <ZoomHover size="lg" className="cursor-default">
                                     <Tooltip trigger={<Stickers name="StickerCrown" />}>
-                                        Leads the{' '}
-                                        <Link
-                                            to={`/teams/${teamData[0].attributes.slug}`}
-                                            state={{ newWindow: true }}
-                                            className="font-semibold underline"
-                                        >
-                                            {teamData[0].attributes.name} Team
-                                        </Link>
+                                        {viewingOwnTeam ? (
+                                            'Small team lead'
+                                        ) : (
+                                            <>
+                                                Leads the{' '}
+                                                <Link
+                                                    to={`/teams/${teamData[0].attributes.slug}`}
+                                                    state={{ newWindow: true }}
+                                                    className="font-semibold underline"
+                                                >
+                                                    {teamData[0].attributes.name} Team
+                                                </Link>
+                                            </>
+                                        )}
                                     </Tooltip>
                                 </ZoomHover>
                             )}
@@ -293,8 +288,8 @@ interface PeopleProps {
 }
 
 export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
-    const { isMobile } = useApp()
-    const { appWindow } = useWindow()
+    const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
+
     const {
         team: { teamMembers },
         allTeams,
@@ -379,76 +374,88 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     // handleSearch removed since we use prop-based search
 
     return (
-        <div data-scheme="primary" className="bg-primary h-full">
+        <div data-scheme="primary" className="bg-primary h-full relative">
             <SEO title="Team - PostHog" />
+            <ToggleGroup
+                className="absolute top-[-44px] right-0 z-10"
+                title=""
+                hideTitle
+                options={[
+                    {
+                        label: (
+                            <>
+                                <IconList className="size-4 mr-1" />
+                                List
+                            </>
+                        ),
+                        value: 'list',
+                    },
+                    {
+                        label: (
+                            <>
+                                <IconMapPin className="size-4 mr-1" />
+                                Map
+                            </>
+                        ),
+                        value: 'map',
+                    },
+                ]}
+                onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
+                value={activeTab}
+            />
             <ScrollArea className="h-full">
-                <div className="@lg:columns-2 gap-4 mb-4">
-                    <p className="mt-0">
-                        We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
-                    </p>
+                {activeTab === 'list' && (
+                    <>
+                        <div className="@lg:columns-2 gap-4 mb-4">
+                            <p className="mt-0">
+                                We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
+                            </p>
 
-                    <p>Building an unusually great company starts with an unusual team.</p>
+                            <p>Building an unusually great company starts with an unusual team.</p>
 
-                    <p>
-                        We don't care if you haven't finished (or attended) school, if you were super important at a
-                        "Big Tech" company, or if you ran a startup that crashed and burned.
-                    </p>
+                            <p>
+                                We don't care if you haven't finished (or attended) school, if you were super important
+                                at a "Big Tech" company, or if you ran a startup that crashed and burned.
+                            </p>
 
-                    <p>
-                        What we <em>do</em> care about is your ability to learn, iterate, and ship.
-                    </p>
+                            <p>
+                                What we <em>do</em> care about is your ability to learn, iterate, and ship.
+                            </p>
 
-                    <p>
-                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
-                        United Kingdom, Finland, Poland, and Colombia (among other places).
-                    </p>
+                            <p>
+                                That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany,
+                                the United Kingdom, Finland, Poland, and Colombia (among other places).
+                            </p>
 
-                    <p>
-                        Interested in a hand-drawn sketch of your face?{' '}
-                        <Link to={`/careers`} state={{ newWindow: true }}>
-                            We're hiring.
-                        </Link>
-                    </p>
-                </div>
+                            <p>
+                                Interested in a hand-drawn sketch of your face?{' '}
+                                <Link to={`/careers`} state={{ newWindow: true }}>
+                                    We're hiring.
+                                </Link>
+                            </p>
+                        </div>
+                        <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
+                            {filteredTeamMembers.map((teamMember: any) => {
+                                // Calculate if this person is a team lead of any team
+                                const isTeamLead = teamMember.leadTeams?.data?.length > 0
 
-                {/* 
-                    <aside className="">
-                        <h3 className="text-lg mb-2">Team members who... </h3>
-                        <div className="grid grid-cols-2 @md:grid-cols-4 justify-start @md:justify-center overflow-x-auto">
-                            {teamStats.map((teamStat, index) => {
                                 return (
-                                    <TeamStat
-                                        key={index}
-                                        teamStatData={teamStat.data}
-                                        caption={teamStat.caption}
-                                        icon={teamStat.icon}
+                                    <TeamMember
+                                        key={teamMember.squeakId}
+                                        {...teamMember}
+                                        isTeamLead={isTeamLead}
+                                        teamCrestMap={teamCrestMap}
                                     />
                                 )
                             })}
-                        </div>
-
-                        <dl>
-                            <dt>Countries represented</dt>
-                            <dd>{uniqueCountriesCount}</dd>
-                        </dl>
-                    </aside> 
-                    */}
-
-                <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
-                    {filteredTeamMembers.map((teamMember: any, index: number) => {
-                        // Calculate if this person is a team lead of any team
-                        const isTeamLead = teamMember.leadTeams?.data?.length > 0
-
-                        return (
-                            <TeamMember
-                                key={teamMember.squeakId}
-                                {...teamMember}
-                                isTeamLead={isTeamLead}
-                                teamCrestMap={teamCrestMap}
-                            />
-                        )
-                    })}
-                </ul>
+                        </ul>
+                    </>
+                )}
+                {activeTab === 'map' && (
+                    <div className="h-[70vh] min-h-[480px] mt-2">
+                        <PeopleMap members={filteredTeamMembers} />
+                    </div>
+                )}
             </ScrollArea>
         </div>
     )

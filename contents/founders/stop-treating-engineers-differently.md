@@ -46,7 +46,7 @@ This should be reframed as ‘everyone thinks they hate meetings because 90% of 
 
 Meetings are a really important tool, [especially for managers](https://www.goodreads.com/book/show/324750.High_Output_Management) (which is why they love them), but just like any tool they can be ineffectively used. 
 
-**Why this matters:** It lets startups get away with packing their weeks with ineffective meetings for non-engineers. At PostHog at least, being mildly zealous about meeting-free Tuesdays and Thursdays means a) minimal low value meetings, and b) better communication because you’re forced to write stuff down properly. 
+**Why this matters:** It lets startups get away with packing their weeks with ineffective meetings for non-engineers. At PostHog at least, being mildly zealous about meeting-free Tuesdays and Thursdays means a) minimal low value meetings, and b) [better communication](/blog/ceo-diary-6) because you’re forced to write stuff down properly. 
 
 ## Myth #4: Engineers are allergic to process
 

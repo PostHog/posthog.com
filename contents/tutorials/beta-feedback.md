@@ -45,7 +45,7 @@ Once installed, go into the `app` folder and create a `providers.js` file. In th
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -88,7 +88,7 @@ Next, we add a button that goes to a `/beta` page. It conditionally shows based 
 ```js
 // app/page.js
 'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 import Link from 'next/link'
 
 export default function Page() {

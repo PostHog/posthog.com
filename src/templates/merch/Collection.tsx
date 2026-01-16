@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
@@ -6,7 +6,6 @@ import { CollectionPageContext } from './types'
 import SEO from 'components/seo'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
 import { getProductMetafieldByNamespace } from './utils'
@@ -20,6 +19,8 @@ import Fuse from 'fuse.js'
 import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
+import MobileDrawer from 'components/MobileDrawer'
+import { useCartStore } from './store'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -193,8 +194,11 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
     const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
-    const { isMobile } = useApp()
+    const { isMobile: appIsMobile } = useApp()
     const { getJwt, user } = useUser()
+    const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
+    const addToCart = useCartStore((state) => state.update)
+    const hasProcessedAddToCart = useRef(false)
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
@@ -216,19 +220,53 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             const productHandle = urlParams.get('product')
             const state = urlParams.get('state')
             const category = urlParams.get('category')
+            const addProductHandle = urlParams.get('add')
+            const variantId = urlParams.get('variant')
+            const quantity = parseInt(urlParams.get('qty') || '1', 10) || 1
 
             // Handle category parameter
             if (category) {
                 // Find the category key that matches the slug
                 const properCategory = Object.entries(categoryConfig).find(
-                    ([key, config]) => config.slug === category.toLowerCase()
+                    ([_, config]) => config.slug === category.toLowerCase()
                 )?.[0]
                 if (properCategory && categoryConfig[properCategory as CategoryKey]) {
                     setSelectedCategory(properCategory)
                 }
             }
 
-            if (productHandle) {
+            // Handle add to cart parameter (only once per page load)
+            if (addProductHandle && !hasProcessedAddToCart.current) {
+                const productToAdd = getProductFromHandle(transformedProducts, addProductHandle)
+                if (productToAdd && productToAdd.variants?.length > 0) {
+                    // Find the specific variant if provided, otherwise use first variant
+                    let variantToAdd = productToAdd.variants[0]
+                    if (variantId) {
+                        const foundVariant = productToAdd.variants.find(
+                            (v: any) => v.shopifyId === variantId || v.id === variantId
+                        )
+                        if (foundVariant) {
+                            variantToAdd = foundVariant
+                        }
+                    }
+
+                    // Add to cart
+                    addToCart(variantToAdd, quantity)
+                    hasProcessedAddToCart.current = true
+
+                    // Open cart and clear the add parameter from URL
+                    setCartIsOpen(true)
+                    setSelectedProduct(null)
+
+                    // Clean up the URL by removing add-related params
+                    const cleanUrl = new URL(window.location.href)
+                    cleanUrl.searchParams.delete('add')
+                    cleanUrl.searchParams.delete('variant')
+                    cleanUrl.searchParams.delete('qty')
+                    cleanUrl.searchParams.set('state', 'cart')
+                    window.history.replaceState({}, '', cleanUrl.toString())
+                }
+            } else if (productHandle) {
                 const product = getProductFromHandle(transformedProducts, productHandle)
                 if (product) {
                     setSelectedProduct(product)
@@ -241,7 +279,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
             setHasInitialized(true)
         }
-    }, [transformedProducts, hasInitialized])
+    }, [transformedProducts, hasInitialized, addToCart])
 
     // Update URL when selectedProduct, cartIsOpen, or selectedCategory changes (only after initialization)
     useEffect(() => {
@@ -430,7 +468,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                    {(cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
+                    {!isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
                         <motion.aside
                             data-scheme="secondary"
                             className="not-prose bg-primary border-l border-primary h-full text-primary relative"
@@ -473,6 +511,42 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 }}
                             />
                         </motion.aside>
+                    )}
+
+                    {isMobile && (
+                        <MobileDrawer
+                            isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
+                            onClose={() => {
+                                if (cartIsOpen) handleCartClose()
+                                if (selectedProduct) setSelectedProduct(null)
+                                if (orderHistoryIsOpen) handleOrderHistoryClose()
+                            }}
+                            title={
+                                cartIsOpen
+                                    ? 'Cart'
+                                    : orderHistoryIsOpen
+                                    ? 'Order History'
+                                    : selectedProduct?.title || 'Product'
+                            }
+                        >
+                            {cartIsOpen ? (
+                                <Cart className="h-full overflow-y-auto" />
+                            ) : orderHistoryIsOpen ? (
+                                <div className="h-full overflow-y-auto @container">
+                                    <OrderHistory orders={orders} />
+                                </div>
+                            ) : selectedProduct ? (
+                                <ProductPanel
+                                    product={selectedProduct}
+                                    setIsCart={() => undefined}
+                                    onClick={() => undefined}
+                                    updateURL={handleProductSelect}
+                                    onCartOpen={handleCartOpen}
+                                    className="!p-4 !pt-4"
+                                    containerWidth={asideWidth}
+                                />
+                            ) : null}
+                        </MobileDrawer>
                     )}
 
                     <main

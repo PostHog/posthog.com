@@ -20,6 +20,7 @@ interface Row {
     cells: {
         content: React.ReactNode
         className?: string
+        style?: React.CSSProperties
     }[]
 }
 
@@ -29,6 +30,7 @@ interface OSTableProps {
     className?: string
     rowAlignment?: 'top' | 'center'
     size?: 'sm' | 'md' | 'lg'
+    width?: string
     editable?: boolean
     onLastRowInView?: () => void
     loading?: boolean
@@ -195,8 +197,9 @@ const Row = ({
                     ? 'items-start'
                     : columns?.[cellIndex]?.align === 'right'
                     ? 'justify-end'
-                    : 'items-center'
+                    : 'items-center text-center'
             } ${cell.className || ''}`}
+                            style={cell.style}
                         >
                             {cell.content}
                         </div>
@@ -259,6 +262,7 @@ const OSTable: React.FC<OSTableProps> = ({
     rowAlignment = 'center',
     editable = true,
     size = 'md',
+    width = 'auto',
     onLastRowInView,
     loading,
     groupBy,
@@ -275,13 +279,24 @@ const OSTable: React.FC<OSTableProps> = ({
             onLastRowInView?.()
         }
     }, [lastRowInView])
-
     return (
-        <div className="-mx-4 @xl:-mx-8 md:@2xs/not-full-width:mx-0">
+        <div
+            className={`OSTable md:@2xs/not-full-width:mx-0 mb-2 ${
+                width === 'full' ? '' : '-mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8'
+            }`}
+        >
             <ScrollArea fullWidth>
-                <div className="px-4 @xl:px-8 md:@2xs/not-full-width:px-0">
+                <div
+                    className={`md:@2xs/not-full-width:px-0 flex ${
+                        width === 'full'
+                            ? ''
+                            : 'px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
+                    }`}
+                >
                     <div
-                        className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] min-w-full w-0 [&>div]:px-2 ${
+                        className={`text-primary inline-grid min-w-[42rem] max-w-full divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 ${
+                            width === 'full' ? 'w-full' : 'w-min'
+                        } ${
                             size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
                         } ${className}`}
                         style={{ gridTemplateColumns: gridClass }}
@@ -322,7 +337,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                       type={_group ? `${_group.toLowerCase()} ${type}` : type}
                                   />
                               ))
-                            : rows.map((row, rowIndex) => (
+                            : rows?.map((row, rowIndex) => (
                                   <Row
                                       key={row.key || rowIndex}
                                       row={row}
@@ -345,18 +360,18 @@ const OSTable: React.FC<OSTableProps> = ({
                             ) : null}
                         </div>
                     )}
-                    {pagination && (
-                        <Pagination
-                            currentPage={pagination.currentPage}
-                            totalPages={pagination.totalPages}
-                            goToPage={pagination.goToPage}
-                            nextPage={pagination.nextPage}
-                            prevPage={pagination.prevPage}
-                            hasNextPage={pagination.hasNextPage}
-                            hasPrevPage={pagination.hasPrevPage}
-                        />
-                    )}
                 </div>
+                {pagination && (
+                    <Pagination
+                        currentPage={pagination.currentPage}
+                        totalPages={pagination.totalPages}
+                        goToPage={pagination.goToPage}
+                        nextPage={pagination.nextPage}
+                        prevPage={pagination.prevPage}
+                        hasNextPage={pagination.hasNextPage}
+                        hasPrevPage={pagination.hasPrevPage}
+                    />
+                )}
             </ScrollArea>
         </div>
     )

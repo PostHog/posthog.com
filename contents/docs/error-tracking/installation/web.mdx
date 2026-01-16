@@ -1,6 +1,7 @@
 ---
 title: Web error tracking installation
 showStepsToc: true
+platformLogo: javascript
 tableOfContents: [
   {
     url: 'install-posthog-web-sdk',
@@ -35,7 +36,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 import Snippet from "../../integrate/_snippets/install-js-snippet.mdx"
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 
 <Steps>
@@ -89,7 +90,7 @@ import posthog from 'posthog-js/dist/module.full.no-external'
 import posthog from 'posthog-js/dist/module.full'
 
 // Finally you can also import specific extra dependencies 
-import "posthog-js/dist/recorder"
+import "posthog-js/dist/posthog-recorder"
 import "posthog-js/dist/surveys"
 import "posthog-js/dist/exception-autocapture"
 import "posthog-js/dist/tracing-headers"
@@ -100,7 +101,7 @@ import posthog from 'posthog-js/dist/module.no-external'
 posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 ```
 
-**Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `posthog-js/react` does not work with any module import other than the default.
+**Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `@posthog/react` does not work with any module import other than the default.
 
 </details>
 
@@ -119,16 +120,16 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 <details>
 <summary>What is the `defaults` option?</summary>
 
-The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
+The `defaults` is a date, such as `2025-11-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>
 
 </Step>
 
 
-<Step title="Set up exception autocapture" badge="required">
+<Step title="Set up exception autocapture" badge="recommended">
 
-> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). 
 
@@ -151,8 +152,8 @@ This is helpful if you've built your own error handling logic or want to capture
 <StepVerifyErrorTracking />
 
 <Step title="Upload source maps" badge="required">
-  <StepUploadSourceMaps urlPath="web" framework="web" />
+  <StepUploadSymbolSets urlPath="web" framework="web" />
 </Step>
 
 
-</Steps> 
+</Steps>

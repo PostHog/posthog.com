@@ -58,7 +58,7 @@ FROM events
 WHERE timestamp > now() - interval 1 day
 ```
 
-If you want to access dashboard or insight date filters, you can use the [`filters` variable](/docs/data-warehouse/sql/variables) like `filters.dateRange.from` and `filters.dateRange.to`.
+If you want to access dashboard or insight date filters, you can use the [variables](/docs/data-warehouse/sql/variables) `filters.dateRange.from` and `filters.dateRange.to`.
 
 > Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
 
@@ -166,15 +166,27 @@ select
 from events
 ```
 
+### SemVer
+
+If you have a SemVer version number, you can use the `sortableSemVer()` function to get a version number that you can use for sorting purposes.
+
+SELECT
+    DISTINCT properties.$lib_version
+FROM events
+WHERE event = '$pageview'
+  AND timestamp >= now() - INTERVAL 1 DAY
+ORDER BY sortableSemVer(properties.$lib_version) DESC
+LIMIT 10
+
 ### Session replays
 
-You can create a button to view the replay for a session by using the `recording_button()` function with the `session_id`. For example, to get a list of recent replays, you can use:
+You can create a button to view the replay for a session by using the `recordingButton()` function with the `session_id`. For example, to get a list of recent replays, you can use:
 
 ```sql
 SELECT
     person.properties.email,
     min_first_timestamp AS start,
-    recording_button(session_id)
+    recordingButton(session_id)
 FROM
     raw_session_replay_events
 WHERE
@@ -193,6 +205,19 @@ You can use actions in SQL by using the `matchesAction()` function with the name
 SELECT count() 
 FROM events 
 WHERE matchesAction('clicked homepage button')
+```
+
+### Translation
+
+You can translate a language code to a language name using the `languageCodeToName()` function. You can see what the mapping looks like [in our codebase](https://github.com/PostHog/posthog/blob/master/posthog/hogql/language_mappings.py)
+
+```sql
+SELECT
+    languageCodeToName('en') AS english, -- English
+    languageCodeToName('fr') AS french, -- French
+    languageCodeToName('pt') AS portuguese, -- Portuguese
+    languageCodeToName('ru') AS russian, -- Russian
+    languageCodeToName('zh') AS chinese -- Chinese
 ```
 
 ### HTML tags and links

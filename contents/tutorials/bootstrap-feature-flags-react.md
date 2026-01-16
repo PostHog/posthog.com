@@ -47,7 +47,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -140,7 +140,7 @@ import { StrictMode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
@@ -444,7 +444,7 @@ import { StrictMode } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 // Get bootstrapped data from window
 const flagData = window.__FLAG_DATA__;

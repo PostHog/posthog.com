@@ -10,6 +10,109 @@ import type {
 } from '../src/templates/merch/types'
 import dayjs from 'dayjs'
 
+const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
+
+type ChangelogPlaylistVideo = {
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
+const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]> => {
+    const apiKey = process.env.YOUTUBE_API_KEY_CHANGELOG
+    if (!apiKey) {
+        console.warn('YOUTUBE_API_KEY_CHANGELOG not set. Skipping changelog playlist ingestion.')
+        return []
+    }
+
+    const playlistId = process.env.CHANGELOG_YOUTUBE_PLAYLIST_ID || DEFAULT_CHANGELOG_PLAYLIST_ID
+    if (!playlistId) {
+        console.warn('No playlist ID provided for changelog videos. Set CHANGELOG_YOUTUBE_PLAYLIST_ID.')
+        return []
+    }
+
+    try {
+        const playlistItems: Array<{ videoId: string; position: number }> = []
+        let nextPageToken: string | undefined
+
+        do {
+            const params = new URLSearchParams({
+                part: 'snippet,contentDetails',
+                playlistId,
+                maxResults: '50',
+                key: apiKey,
+            })
+            if (nextPageToken) {
+                params.set('pageToken', nextPageToken)
+            }
+
+            const response = await fetch(
+                `https://www.googleapis.com/youtube/v3/playlistItems?${params.toString()}`
+            ).then((res) => res.json())
+
+            if (!response.items) {
+                console.warn('Unexpected response while fetching changelog playlist items', response)
+                break
+            }
+
+            response.items.forEach((item: any) => {
+                const videoId = item?.contentDetails?.videoId || item?.snippet?.resourceId?.videoId
+                if (videoId) {
+                    playlistItems.push({
+                        videoId,
+                        position: typeof item?.snippet?.position === 'number' ? item.snippet.position : 0,
+                    })
+                }
+            })
+
+            nextPageToken = response.nextPageToken
+        } while (nextPageToken)
+
+        if (playlistItems.length === 0) {
+            return []
+        }
+
+        const videoDetailsMap: Record<string, ChangelogPlaylistVideo> = {}
+        const chunkSize = 50
+        for (let i = 0; i < playlistItems.length; i += chunkSize) {
+            const chunk = playlistItems.slice(i, i + chunkSize)
+            const idsParam = chunk.map((item) => item.videoId).join(',')
+            const params = new URLSearchParams({
+                part: 'snippet',
+                id: idsParam,
+                key: apiKey,
+                maxResults: '50',
+            })
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?${params.toString()}`).then(
+                (res) => res.json()
+            )
+
+            if (!response.items) {
+                continue
+            }
+
+            response.items.forEach((item: any) => {
+                const videoId = item?.id
+                if (!videoId) return
+                const snippet = item?.snippet
+                if (!snippet?.publishedAt) return
+                videoDetailsMap[videoId] = {
+                    videoId,
+                    publishedAt: snippet.publishedAt,
+                    title: snippet.title,
+                }
+            })
+        }
+
+        return Object.values(videoDetailsMap).sort(
+            (a, b) => dayjs(b.publishedAt).valueOf() - dayjs(a.publishedAt).valueOf()
+        )
+    } catch (error) {
+        console.warn('Failed to fetch changelog playlist videos', error)
+        return []
+    }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
@@ -75,116 +178,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         components: JSON.stringify(spec.components),
     })
 
-    const postHogIssues = await fetch(
-        'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
-    ).then((res) => res.json())
-    postHogIssues.forEach((issue) => {
-        const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
-        const data = {
-            url: html_url,
-            title,
-            number,
-            comments,
-            user: {
-                username: user?.login,
-                avatar: user?.avatar_url,
-                url: user?.html_url,
-            },
-            reactions,
-            labels,
-            body,
-            updated_at,
-        }
-        if (data.reactions) {
-            data.reactions.plus1 = data.reactions['+1']
-            data.reactions.minus1 = data.reactions['-1']
-        }
-        const node = {
-            id: createNodeId(`posthog-issue-${title}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `PostHogIssue`,
-                contentDigest: createContentDigest(data),
-            },
-            ...data,
-        }
-        createNode(node)
-    })
-
-    const postHogPulls = await fetch(
-        'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
-    ).then((res) => res.json())
-    postHogPulls.forEach((issue) => {
-        const { html_url, title, number, user, labels, body, updated_at } = issue
-        const data = {
-            url: html_url,
-            title,
-            number,
-            user: {
-                username: user?.login,
-                avatar: user?.avatar_url,
-                url: user?.html_url,
-            },
-            labels,
-            body,
-            updated_at,
-        }
-
-        const node = {
-            id: createNodeId(`posthog-pull-${title}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `PostHogPull`,
-                contentDigest: createContentDigest(data),
-            },
-            ...data,
-        }
-        createNode(node)
-    })
-
-    const createGitHubStatsNode = async (owner, repo) => {
-        const repoStats = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then((res) => res.json())
-        const contributors = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`).then(
-            (res) => {
-                const link = parseLinkHeader(res.headers.get('link'))
-                const number = link?.last?.page
-                return number && Number(number)
-            }
-        )
-        const commits = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`).then((res) => {
-            const link = parseLinkHeader(res.headers.get('link'))
-            const number = link?.last?.page
-            return number && Number(number)
-        })
-        const { stargazers_count, forks_count } = repoStats
-
-        const data = {
-            owner,
-            repo,
-            stars: stargazers_count,
-            forks: forks_count,
-            commits,
-            contributors,
-        }
-
-        const node = {
-            id: createNodeId(`github-stats-${repo}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `GitHubStats`,
-                contentDigest: createContentDigest(data),
-            },
-            ...data,
-        }
-        createNode(node)
-    }
-
-    await createGitHubStatsNode('posthog', 'posthog')
-    await createGitHubStatsNode('posthog', 'posthog.com')
-
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
         const headers = {
@@ -214,26 +207,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
     await createProductDataNode()
 
-    const integrations = await fetch(
-        'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
-    ).then((res) => res.json())
-    integrations.forEach((integration) => {
-        const { name, url, ...other } = integration
-        const node = {
-            id: createNodeId(`integration-${name}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `Integration`,
-                contentDigest: createContentDigest(integration),
-            },
-            url: url.replace('https://posthog.com', ''),
-            name,
-            ...other,
-        }
-        createNode(node)
-    })
-
     const createRoadmapItems = async (page = 1) => {
         const roadmapQuery = qs.stringify(
             {
@@ -241,7 +214,28 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     page,
                     pageSize: 100,
                 },
-                populate: ['image', 'teams', 'topic', 'cta'],
+                populate: {
+                    image: true,
+                    teams: {
+                        populate: {
+                            miniCrest: true,
+                        },
+                    },
+                    topic: true,
+                    cta: true,
+                    profiles: {
+                        populate: {
+                            avatar: true,
+                            teams: {
+                                populate: {
+                                    miniCrest: true,
+                                },
+                            },
+                        },
+                    },
+                    githubUrls: true,
+                    githubPRMetadata: true,
+                },
             },
             {
                 encodeValuesOnly: true,
@@ -273,6 +267,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 media: cloudinaryMedia,
                 type: category,
                 year,
+                projectedCompletion,
+                dateCompleted,
                 ...other,
             }
             const roadmapNode = {
@@ -290,6 +286,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     await createRoadmapItems()
+
+    const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
+    changelogPlaylistVideos.forEach((video) => {
+        const nodeData = {
+            videoId: video.videoId,
+            publishedAt: video.publishedAt,
+            title: video.title,
+        }
+        const node = {
+            id: createNodeId(`changelog-video-${video.videoId}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `ChangelogVideo`,
+                contentDigest: createContentDigest(nodeData),
+            },
+            ...nodeData,
+        }
+        createNode(node)
+    })
 
     const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
         (res) => res.json()
@@ -664,105 +680,387 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const extractIntroSection = (markdown: string): string => {
-        const headingMatch = markdown.match(/^#{1,2}\s+/m)
+    async function sourceGithubNodes() {
+        if (!process.env.GITHUB_API_KEY) return
 
-        if (headingMatch) {
-            const headingIndex = markdown.indexOf(headingMatch[0])
-            return markdown.substring(0, headingIndex).trim()
-        }
+        const githubHeaders: HeadersInit = { Authorization: `token ${process.env.GITHUB_API_KEY}` }
 
-        return markdown
-    }
+        const postHogIssues = await fetch(
+            'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5',
+            {
+                headers: githubHeaders,
+            }
+        ).then((res) => res.json())
+        postHogIssues.forEach((issue) => {
+            const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
+            const data = {
+                url: html_url,
+                title,
+                number,
+                comments,
+                user: {
+                    username: user?.login,
+                    avatar: user?.avatar_url,
+                    url: user?.html_url,
+                },
+                reactions,
+                labels,
+                body,
+                updated_at,
+            }
+            if (data.reactions) {
+                data.reactions.plus1 = data.reactions['+1']
+                data.reactions.minus1 = data.reactions['-1']
+            }
+            const node = {
+                id: createNodeId(`posthog-issue-${title}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `PostHogIssue`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
 
-    const extractGettingStartedSection = (markdown: string): string => {
-        const gettingStartedMatch = markdown.match(/^#{1,2}\s+Getting started\s*$/im)
-
-        if (gettingStartedMatch) {
-            const startIndex = markdown.indexOf(gettingStartedMatch[0])
-            const afterHeading = markdown.substring(startIndex + gettingStartedMatch[0].length)
-
-            const nextHeadingMatch = afterHeading.match(/^#+\s+/m)
-
-            if (nextHeadingMatch) {
-                const endIndex = afterHeading.indexOf(nextHeadingMatch[0])
-                return '## Installation\n\n' + afterHeading.substring(0, endIndex).trim()
+        const postHogPulls = await fetch(
+            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
+            {
+                headers: githubHeaders,
+            }
+        ).then((res) => res.json())
+        postHogPulls.forEach((issue) => {
+            const { html_url, title, number, user, labels, body, updated_at } = issue
+            const data = {
+                url: html_url,
+                title,
+                number,
+                user: {
+                    username: user?.login,
+                    avatar: user?.avatar_url,
+                    url: user?.html_url,
+                },
+                labels,
+                body,
+                updated_at,
             }
 
-            return '## Installation\n\n' + afterHeading.trim()
+            const node = {
+                id: createNodeId(`posthog-pull-${title}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `PostHogPull`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
+
+        const createGitHubStatsNode = async (owner, repo) => {
+            const repoStats = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+                headers: githubHeaders,
+            }).then((res) => res.json())
+            const contributors = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
+                headers: githubHeaders,
+            }).then((res) => {
+                const link = parseLinkHeader(res.headers.get('link'))
+                const number = link?.last?.page
+                return number && Number(number)
+            })
+            const commits = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
+                headers: githubHeaders,
+            }).then((res) => {
+                const link = parseLinkHeader(res.headers.get('link'))
+                const number = link?.last?.page
+                return number && Number(number)
+            })
+            const { stargazers_count, forks_count } = repoStats
+
+            const data = {
+                owner,
+                repo,
+                stars: stargazers_count,
+                forks: forks_count,
+                commits,
+                contributors,
+            }
+
+            const node = {
+                id: createNodeId(`github-stats-${repo}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `GitHubStats`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
         }
 
-        return ''
-    }
+        await createGitHubStatsNode('posthog', 'posthog')
+        await createGitHubStatsNode('posthog', 'posthog.com')
 
-    const fetchPostHogPipelines = async (
-        type: 'transformation' | 'destination' | 'source_webhook',
-        generateSlug: (pipeline: any) => string
-    ) => {
-        const { results } = await fetch(
-            `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
+        const integrations = await fetch(
+            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
+            { headers: githubHeaders }
         ).then((res) => res.json())
-        await Promise.all(
-            results.map(async (pipeline) => {
-                let additionalData = {}
+        integrations.forEach((integration) => {
+            const { name, url, ...other } = integration
+            const node = {
+                id: createNodeId(`integration-${name}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Integration`,
+                    contentDigest: createContentDigest(integration),
+                },
+                url: url.replace('https://posthog.com', ''),
+                name,
+                ...other,
+            }
+            createNode(node)
+        })
 
-                if (pipeline.id.startsWith('segment-')) {
-                    const cleanMarkdown = (markdown: string) => {
-                        return markdown
-                            .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
-                            .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
-                            .replaceAll(/{:.*?}/g, '') // Remove {: ... }
-                            .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
-                            .replaceAll('Segment', 'PostHog')
-                            .replaceAll('Connections > Catalog', 'Data pipelines')
-                            .replaceAll('Catalog', 'Data pipelines')
-                            .replaceAll(' (Actions)', '')
-                            .replaceAll('segmentio', 'posthog')
-                            .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
-                            .replaceAll(/> \w+ ""/g, '')
-                            .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
-                            .replaceAll(
-                                /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
+        const extractIntroSection = (markdown: string): string => {
+            const headingMatch = markdown.match(/^#{1,2}\s+/m)
+
+            if (headingMatch) {
+                const headingIndex = markdown.indexOf(headingMatch[0])
+                return markdown.substring(0, headingIndex).trim()
+            }
+
+            return markdown
+        }
+
+        const extractGettingStartedSection = (markdown: string): string => {
+            const gettingStartedMatch = markdown.match(/^#{1,2}\s+Getting started\s*$/im)
+
+            if (gettingStartedMatch) {
+                const startIndex = markdown.indexOf(gettingStartedMatch[0])
+                const afterHeading = markdown.substring(startIndex + gettingStartedMatch[0].length)
+
+                const nextHeadingMatch = afterHeading.match(/^#+\s+/m)
+
+                if (nextHeadingMatch) {
+                    const endIndex = afterHeading.indexOf(nextHeadingMatch[0])
+                    return '## Installation\n\n' + afterHeading.substring(0, endIndex).trim()
+                }
+
+                return '## Installation\n\n' + afterHeading.trim()
+            }
+
+            return ''
+        }
+
+        const fetchPostHogPipelines = async (
+            type: 'transformation' | 'destination' | 'source_webhook',
+            generateSlug: (pipeline: any) => string
+        ) => {
+            const { results } = await fetch(
+                `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
+            ).then((res) => res.json())
+            await Promise.all(
+                results.map(async (pipeline) => {
+                    let additionalData = {}
+
+                    if (pipeline.id.startsWith('segment-')) {
+                        const cleanMarkdown = (markdown: string) => {
+                            return markdown
+                                .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
+                                .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
+                                .replaceAll(/{:.*?}/g, '') // Remove {: ... }
+                                .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
+                                .replaceAll('Segment', 'PostHog')
+                                .replaceAll('Connections > Catalog', 'Data pipelines')
+                                .replaceAll('Catalog', 'Data pipelines')
+                                .replaceAll(' (Actions)', '')
+                                .replaceAll('segmentio', 'posthog')
+                                .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
+                                .replaceAll(/> \w+ ""/g, '')
+                                .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
+                                .replaceAll(
+                                    /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
+                                    ''
+                                ) // Remove lines about other companies maintaining destinations or contact support
+                                .trim()
+                        }
+
+                        const response = await fetch(
+                            `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
+                                'segment-',
                                 ''
-                            ) // Remove lines about other companies maintaining destinations or contact support
-                            .trim()
+                            )}/index.md`,
+                            { headers: githubHeaders }
+                        )
+                        let markdown = await response.text()
+                        if (response.status !== 200) markdown = ''
+                        markdown = cleanMarkdown(markdown)
+
+                        additionalData = {
+                            introSnippet: extractIntroSection(markdown),
+                            installationSnippet: extractGettingStartedSection(markdown),
+                        }
                     }
 
-                    const response = await fetch(
-                        `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
-                            'segment-',
-                            ''
-                        )}/index.md`
-                    )
-                    let markdown = await response.text()
-                    if (response.status !== 200) markdown = ''
-                    markdown = cleanMarkdown(markdown)
-
-                    additionalData = {
-                        introSnippet: extractIntroSection(markdown),
-                        installationSnippet: extractGettingStartedSection(markdown),
+                    const slug = generateSlug(pipeline)
+                    const node = {
+                        id: createNodeId(`posthog-pipeline-${pipeline.id}`),
+                        internal: {
+                            type: 'PostHogPipeline',
+                            contentDigest: createContentDigest({ pipeline }),
+                        },
+                        pipelineId: pipeline.id,
+                        slug,
+                        type,
+                        ...pipeline,
+                        ...additionalData,
                     }
-                }
+                    createNode(node)
+                })
+            )
+        }
 
-                const slug = generateSlug(pipeline)
-                const node = {
-                    id: createNodeId(`posthog-pipeline-${pipeline.id}`),
-                    internal: {
-                        type: 'PostHogPipeline',
-                        contentDigest: createContentDigest({ pipeline }),
-                    },
-                    pipelineId: pipeline.id,
-                    slug,
-                    type,
-                    ...pipeline,
-                    ...additionalData,
-                }
-                createNode(node)
-            })
-        )
+        await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
+        await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
+        await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
     }
 
-    await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
-    await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
-    await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
+    await sourceGithubNodes()
+
+    const fetchReferences = async (page = 1) => {
+        const referenceQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+        const referencesURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
+        const { data, meta } = await fetch(referencesURL).then((res) => res.json())
+        for (const reference of data) {
+            const data = reference?.attributes?.data
+            if (!data) continue
+            const versionNode = {
+                parent: null,
+                children: [],
+                internal: {
+                    type: `SdkReferences`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(versionNode)
+        }
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchReferences(page + 1)
+    }
+
+    await fetchReferences()
+
+    const fetchEvents = async (page = 1) => {
+        const eventsQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                sort: ['date:desc'],
+                populate: {
+                    location: {
+                        populate: ['venue'],
+                    },
+                    photos: true,
+                    speakers: true,
+                    partners: true,
+                },
+            },
+            { encodeValuesOnly: true }
+        )
+        const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
+        const { data: events, meta } = await fetch(eventsUrl).then((res) => res.json())
+        events.forEach((event) => {
+            const node = {
+                ...event,
+                id: createNodeId(`event-${event.id}`),
+                internal: {
+                    type: 'Event',
+                    contentDigest: createContentDigest(event),
+                },
+            }
+            createNode(node)
+        })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
+    }
+    await fetchEvents()
+
+    const fetchAchievements = async () => {
+        const query = qs.stringify({
+            populate: ['icon', 'achievement_group.achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
+            res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-${achievement.id}`),
+                internal: {
+                    type: 'Achievement',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchAchievementGroups = async () => {
+        const query = qs.stringify({
+            populate: ['achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
+            (res) => res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-group-${achievement.id}`),
+                internal: {
+                    type: 'AchievementGroup',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchRewards = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/rewards`).then((res) =>
+            res.json()
+        )
+        data.forEach((reward) => {
+            const node = {
+                id: createNodeId(`reward-${reward.handle}`),
+                internal: {
+                    type: 'Reward',
+                    contentDigest: createContentDigest(reward),
+                },
+                ...reward,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchAchievements()
+    await fetchAchievementGroups()
+    await fetchRewards()
 }

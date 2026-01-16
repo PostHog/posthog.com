@@ -1,14 +1,7 @@
 # Project dependencies
 .cache
 node_modules
-yarn-error.log
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 
 # Build directory
 /public
@@ -26,11 +19,19 @@ static/fonts/MatterSQItalicVF.woff
 static/fonts/MatterSQItalicVF.woff2
 static/fonts/MatterSQVF.woff
 static/fonts/MatterSQVF.woff2
-yarn.lock
+static/scripts/posthog-init.js
 .vercel
 .env
 *Type.ts
 .env.development
+.env.*.local
+CLAUDE.local.md
 
 # Generated data files
 src/data/mcp-tools.json
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+

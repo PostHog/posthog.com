@@ -4,8 +4,7 @@ sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js/tree/main/packages/node'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
+platformLogo: nodejs
 features:
   eventCapture: true
   userIdentification: true
@@ -36,6 +35,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
+| `evaluation_environments`     | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. | `undefined`                |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
@@ -90,6 +90,130 @@ client.alias({
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## Contexts
+
+> Requires `posthog-node` version >= 5.17.0.
+
+The Node SDK uses nested contexts for managing state that's shared across events. Contexts are useful for adding properties to multiple events (including exceptions) during a single user's interaction with your product.
+
+You can enter a context using `withContext`:
+
+```node
+posthog.withContext(
+  {
+    distinctId: 'user-123',
+    properties: { transactionId: 'abc123' }
+  },
+  () => {
+    // This event is captured with the distinct ID and properties set above
+    posthog.capture({ event: 'order_processed' })
+  }
+)
+```
+
+Contexts are persisted across function calls. If you enter one and then call a function and capture an event in the called function, it uses the context properties set in the parent context:
+
+```node
+function someFunction() {
+  // When called from `outerFunction`, this event is captured
+  // with transactionId='abc123'
+  posthog.capture({ event: 'order_processed' })
+}
+
+function outerFunction() {
+  posthog.withContext(
+    { properties: { transactionId: 'abc123' } },
+    () => {
+      someFunction()
+    }
+  )
+}
+```
+
+By default, each context inherits from parent contexts. To disable nesting (where child contexts is fresh and has no properties), pass `{ fresh: true }`:
+
+```node
+posthog.withContext( // HIGHLIGHT
+  {
+    properties: {
+      someKey: 'value-1',
+      someOtherKey: 'another-value'
+    }
+  },
+  () => {
+    posthog.withContext( // HIGHLIGHT
+      { properties: { someKey: 'value-2' } },
+      () => {
+        // Captured with someKey='value-2', someOtherKey='another-value'
+        posthog.capture({ event: 'order_processed' })
+      },
+    )
+
+    // Captured with someKey='value-1', someOtherKey='another-value'
+    posthog.capture({ event: 'order_completed' })
+  }
+)
+```
+
+> **Note:** Properties passed directly to `capture` calls override context state in the final event.
+
+### Identification context
+
+Contexts can be associated with a distinct ID:
+
+```node
+posthog.withContext(
+  { distinctId: 'user-123' },
+  () => {
+    // Associated with "user-123"
+    posthog.capture({ event: 'order_processed' })
+
+    // Overrides to "another-user"
+    posthog.capture({
+      distinctId: 'another-user',
+      event: 'order_processed'
+    })
+  }
+)
+```
+
+### Session context
+
+```node
+posthog.withContext(
+  { sessionId: 'some-session' },
+  () => {
+    // Associated with session "some-session"
+    posthog.capture({ event: 'image_uploaded' })
+
+    // Overrides to "next-session"
+    posthog.capture({
+      event: 'image_uploaded',
+      properties: { $sessionId: 'next-session' }
+    })
+  }
+)
+```
+
+### Custom context parameters
+
+```node
+posthog.withContext(
+  { flightNumber: 'TAC313' },
+  () => {
+    // Associated with flightNumber TAC313
+    posthog.capture({ event: 'flight_cancelled' })
+
+    // Overrides to PL7714
+    posthog.capture({
+      event: 'flight_cancelled',
+      properties: { flightNumber: 'PL7714' }
+    })
+  }
+)
+```
+
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
@@ -121,6 +245,10 @@ await client.reloadFeatureFlags()
 
 // Do something with feature flags here
 ```
+
+#### Distributed environments
+
+In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See our guide for [local evaluation in distributed environments](/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js) for details.
 
 ## Experiments (A/B tests)
 
@@ -214,7 +342,16 @@ You should call `shutdown` on your program's exit to exit cleanly:
 await client.shutdown()
 ```
 
-## Debugging and exceptions
+## Debug mode
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode by calling the `debug()` method in your code. This will enable verbose logs about the inner workings of the SDK.
+
+```node
+client.debug()
+```
+
+## Handling errors thrown by the SDK
 
 If you are experiencing issues with the SDK it could be a number of things from an incorrectly configured API key, to some other network related issues.
 
@@ -225,12 +362,6 @@ client.on("error", (err) => {
   // Whatever handling you want
   console.error("PostHog had an error!", err)
 })
-```
-
-Or you can enable debugging to get verbose logs about all the inner workings of the SDK.
-
-```node
-client.debug()
 ```
 
 ## Short-lived processes like serverless environments
@@ -270,7 +401,7 @@ You can capture LLM usage and performance data by combining the `posthog-node` a
 
 ## Error tracking
 
-You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation?tab=Node).
+You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation/node).
 
 ## Upgrading from V1 to V2
 

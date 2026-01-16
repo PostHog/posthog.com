@@ -58,7 +58,7 @@ We started off as "open source product analytics". This means people instantly k
 
 As we grew, we quickly built many more products into the platform. Today, we provide product analytics, session recording, feature flags, experimentation and a range of apps. This is when it got harder to describe what we do in a one liner.
 
-We went for "Open Source Product OS. A suite of product and data tools. Built on the modern data stack.", then immediately included the list of them underneath.
+We went for "Open Source Product OS. A suite of dev tools. Built on the modern data stack.", then immediately included the list of them underneath.
 
 This created [a large debate](https://github.com/PostHog/posthog.com/issues/3620) internally. 
 

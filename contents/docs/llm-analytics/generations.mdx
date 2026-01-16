@@ -2,8 +2,8 @@
 title: Generations
 ---
 
-import GenerationEvent from "./_snippets/generation-event.mdx"
-import NotableGenerationProperties from "./_snippets/notable-generation-properties.mdx"
+import GenerationEventSnippet from "./_snippets/generation-event.mdx"
+import NotableGenerationPropertiesSnippet from "./_snippets/notable-generation-properties.mdx"
 
 Generations are events that capture LLM calls and their responses. They represent interactions and conversations with an AI model. Generations are tracked as `$ai_generation` events and can be used to create and visualize [insights](/docs/product-analytics/insights) just like other PostHog events.
 
@@ -41,12 +41,12 @@ PostHog automatically logs and displays the generation and its data within a con
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4" 
   alt="AI generation in-app view" 
   autoPlay="true"
-  loop="true"
+  loop
 />
 
 You can expect each generation to have the following properties (in addition to the [default event properties](/docs/data/events#default-properties)):
 
-<NotableGenerationProperties />
+<NotableGenerationPropertiesSnippet />
 
 When calling LLMs with our [SDK wrappers](/docs/llm-analytics/installation), you can also enrich the `$ai_generation` event with your own [custom properties](/docs/llm-analytics/custom-properties) and PostHog attributes like groups and distinct IDs for identified users.
 
@@ -97,6 +97,10 @@ Spans are individual operations within a trace. Some spans represent generations
 
 <Caption>Generations and spans are nested within a trace</Caption>
 
+## Evaluating generations
+
+You can automatically assess the quality of your generations using [evaluations](/docs/llm-analytics/evaluations). Evaluations use an LLM-as-a-judge approach to score outputs based on criteria like relevance, helpfulness, or safety.
+
 ## Event properties
 
-<GenerationEvent />
+<GenerationEventSnippet />

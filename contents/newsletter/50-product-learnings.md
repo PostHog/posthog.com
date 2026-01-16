@@ -40,13 +40,15 @@ To celebrate 50k subscribers to Product for Engineers, here are the 50 most impo
 
 ![Map everything your users could want](https://res.cloudinary.com/dmukukwp6/image/upload/map_b1105bea6c.png)  
 
-11. Your product is more than just its functionality. It's [your brand](https://newsletter.posthog.com/p/how-not-to-be-boring) and how your product is experienced by others. How much you invest in each function, the people you hire, what you decide to build, what function leads your company, your customer communication, and your pricing all matter in making you unique.  
+11. Your product is more than just its functionality. It's [your brand](https://newsletter.posthog.com/p/how-not-to-be-boring) and how your product is experienced by others. How much you invest in each function, the people you hire, what you decide to build, what function leads your company, your customer communication, and [your pricing](/newsletter/pricing-advice) all matter in making you unique.  
 
 12. Your website is the first impression your product is making. A [boring](https://newsletter.posthog.com/i/148803758/what-would-stop-me-from-using-this-thing), templated one signals the product and team behind the website isn't very strong. Creating a website unique to you and built for your ideal customer profile is a way to prevent this, and encourage users into your product.  
 
 13. Sometimes it's [the market's problem](https://newsletter.posthog.com/i/142577602/is-your-product-the-problem-or-the-market), not your product. For example, when Monzo founder and YC partner [Tom Blomfield](https://twitter.com/t_blom) was building a bill-splitting service for college friends, he got the advice to stop building and start trying to acquire new users. When he got one new user after four weeks of cold calling, he knew it was time to pivot.  
 
 14. If you're going to pivot, [make it big](https://newsletter.posthog.com/i/142577602/if-youre-going-to-pivot-make-it-big). Stewart Butterfield pivoted two video game companies into Flickr and Slack. LinkedIn co-founder Reid Hoffman says startup founders can pivot from failure to success, but only if they "slash and burn" the rest of their business. If it looks similar, go further.  
+
+<NewsletterForm />
 
 15. As 37Signal's [Jason Fried](https://twitter.com/jasonfried/status/1337095209620946944) says "You cannot validate an idea. It doesn't exist, you have to build the thing. The market will validate it."  
 

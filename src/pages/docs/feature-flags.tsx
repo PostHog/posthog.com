@@ -75,7 +75,7 @@ export const Content = ({ quickLinks = false }) => {
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
 
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 @md:grid @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
                     <ResourceItem
                         type="Guide"
                         title="Best practices for feature flags"
@@ -129,7 +129,7 @@ export const Content = ({ quickLinks = false }) => {
                 <h3 className="mb-1 text-xl">Nifty things you can do with feature flags</h3>
                 <p className="text-[15px]">Some use cases you may not have thought of</p>
 
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 @md:grid @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
                     <ResourceItem
                         title="Add popups to a React app"
                         description="Using payloads to send arbitrary data to your frontend"

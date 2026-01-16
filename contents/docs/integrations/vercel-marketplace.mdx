@@ -1,0 +1,130 @@
+---
+title: Vercel Marketplace integration
+sidebarTitle: Vercel Marketplace
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/vercel_icon_svgrepo_com_b7e78b41f9.svg
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import Tab from "components/Tab"
+
+The Vercel Marketplace integration adds PostHog feature flags and experiments to your Vercel projects with billing handled through Vercel.
+
+Choose this integration if you do not already have a PostHog account and you prefer to consolidate payment for PostHog inside your Vercel invoice.
+
+<CalloutBox icon="IconInfo" title="New organizations only" type="fyi">
+
+This integration creates a new PostHog organization. You cannot migrate an existing PostHog organization to be billed through Vercel.
+
+</CalloutBox>
+
+## Installing the integration
+
+1. Go to the [PostHog integration page](https://vercel.com/integrations/posthog) on Vercel Marketplace
+2. Click **Install**
+
+This creates a PostHog organization and project, and adds environment variables to your Vercel project.
+
+## Environment variables
+
+The integration adds these environment variables to your Vercel project:
+
+- `POSTHOG_PROJECT_API_KEY` - Your [project API key](/docs/getting-started/api-keys), used to initialize the PostHog SDK
+- `POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
+
+For client-side frameworks, you'll need to rename these variables in your Vercel project settings to expose them to the browser:
+
+| Framework | Rename to |
+|-----------|-----------|
+| Next.js | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` |
+| Vite/SvelteKit | `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST` |
+| Nuxt | `NUXT_PUBLIC_POSTHOG_KEY`, `NUXT_PUBLIC_POSTHOG_HOST` |
+
+Server-side code can use the original names directly.
+
+## Installing the SDK
+
+The fastest way to add PostHog to your application is using our [installation wizard](https://app.posthog.com/project/wizard). Alternatively, follow your framework's guide:
+
+- [Next.js](/docs/libraries/next-js)
+- [React](/docs/libraries/react)
+- [Svelte](/docs/libraries/svelte)
+- [All frameworks](/docs/libraries)
+
+By default, you'll also get [session replay](/docs/session-replay) and [event autocapture](/docs/product-analytics/autocapture). If you prefer to use feature flags only, you can opt out:
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  autocapture: false,
+  disable_session_recording: true
+})
+```
+
+## Using feature flags
+
+To use feature flags in your application:
+
+<Tab.Group tabs={['Web', 'React']}>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>React</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```js
+if (posthog.isFeatureEnabled('new-checkout')) {
+    // Show new checkout
+} else {
+    // Show old checkout
+}
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+```js
+import { useFeatureFlagEnabled } from '@posthog/react'
+
+function App() {
+  const showNewCheckout = useFeatureFlagEnabled('new-checkout')
+
+  return showNewCheckout ? <NewCheckout /> : <OldCheckout />
+}
+```
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+For more examples, see our [feature flag code guide](/docs/feature-flags/adding-feature-flag-code).
+
+## Creating feature flags and experiments
+
+Access the PostHog dashboard from your [Vercel project's Integrations tab](https://vercel.com/dashboard) or directly at [app.posthog.com](https://app.posthog.com).
+
+Feature flags and experiments you create automatically sync with Vercel's flags dashboard.
+
+For full documentation:
+- [Creating feature flags](/docs/feature-flags/creating-feature-flags)
+- [Running experiments](/docs/experiments)
+
+## Billing
+
+Billing goes through your Vercel account. View usage in Vercel under **Integrations** → **PostHog**.
+
+See [our pricing page](/pricing) for more details.
+
+## Limitations
+
+- **One organization per Vercel team** - Cannot link multiple PostHog organizations
+- **Cloud only** - No self-hosted support (US or EU regions available)
+- **Region cannot be changed** - US or EU is selected during installation
+- **One-way team sync** - Vercel team changes sync to PostHog, not vice versa
+
+## Further reading
+
+- [Feature flags documentation](/docs/feature-flags)
+- [Experiments documentation](/docs/experiments)
+- [PostHog on Vercel](/docs/libraries/vercel)

@@ -15,8 +15,9 @@ export const surveys = {
     colorSecondary: 'red',
     category: 'communication',
     seo: {
-        title: 'Surveys - PostHog',
-        description: 'Ask anything with no-code surveys – or use the API for complete control.',
+        title: 'Surveys – Collect product feedback with PostHog',
+        description:
+            'Collect and analyze product feedback with Surveys. Launch customizable no-code surveys fast on web and mobile with templates for NPS, CSAT, user interviews, and more.',
     },
     overview: {
         title: 'Ask anything with no-code surveys',
@@ -30,7 +31,7 @@ export const surveys = {
         },
     },
     postHogOnPostHog: {
-        title: 'How PostHog uses surveys',
+        title: 'How PostHog uses Surveys',
         benefits: [
             {
                 title: 'Track NPS scores',
@@ -79,6 +80,9 @@ export const surveys = {
         max: 100000,
     },
     volume: 1500,
+    pricing: {
+        free_tier: '1500 responses/month',
+    },
     customers: {
         purplewave: {
             headline: 'reached a 25% response rate with surveys',
@@ -202,7 +206,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=Web"
+                            to="/docs/surveys/installation/web"
                             state={{
                                 newWindow: true,
                             }}
@@ -218,7 +222,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=iOS"
+                            to="/docs/surveys/installation/ios"
                             state={{
                                 newWindow: true,
                             }}
@@ -247,7 +251,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=React+Native"
+                            to="/docs/surveys/installation/react-native"
                             state={{
                                 newWindow: true,
                             }}
@@ -260,7 +264,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=Flutter"
+                            to="/docs/surveys/installation/flutter"
                             state={{
                                 newWindow: true,
                             }}
@@ -379,169 +383,13 @@ export const surveys = {
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Hosted surveys',
-                companies: {
-                    // pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Mobile surveys',
-                companies: {
-                    // pendo: false,
-                    // hotjar: false,
-                    // sprig: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Customizable pop-ups',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Live previews',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Multi-step surveys',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'API access',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Single choice questions',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Multiple choice questions',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Open text questions',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Numerical rating questions',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Emoji rating questions',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Third-party link support',
-                companies: {
-                    pendo: true,
-                    hotjar: false,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by property',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by URL',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by feature flag',
-                companies: {
-                    pendo: false,
-                    hotjar: false,
-                    sprig: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Survey scheduling',
-                companies: {
-                    pendo: true,
-                    hotjar: false,
-                    sprig: false,
-                    postHog: false,
-                },
-            },
-            {
-                feature: 'Export responses',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Slack integration',
-                companies: {
-                    pendo: true,
-                    hotjar: true,
-                    sprig: true,
-                    posthog: true,
-                },
-            },
+        rows: ['surveys'],
+        excluded_sections: [
+            'surveys.features',
+            'surveys.question_types',
+            'surveys.templates',
+            'platform.libraries',
+            'platform.integrations',
         ],
     },
     ai: {

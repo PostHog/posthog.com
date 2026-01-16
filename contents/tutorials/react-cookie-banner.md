@@ -37,13 +37,13 @@ Running these commands gives us a working React app.
 
 ## Step 2: Setting up PostHog
 
-Next, we want to set up PostHog to track activity on our site. To do this, first, we’ll install the `posthog-js` package.
+Next, we want to set up PostHog to track activity on our site. To do this, first, we'll install the `posthog-js` and `@posthog/react` packages.
 
 ```bash
-npm install --save posthog-js
+npm install --save posthog-js @posthog/react
 ```
 
-Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `posthog-js/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))
+Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `@posthog/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))
 
 ```js file=main.jsx
 // main.jsx
@@ -52,7 +52,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
@@ -95,7 +95,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
@@ -164,7 +164,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import posthog from 'posthog-js'
 import { Banner } from './Banner'
 
@@ -203,7 +203,7 @@ Together, this looks like this:
 ```js
 // src/Banner.jsx
 import { useState } from "react";
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export function Banner() {
   const posthog = usePostHog();

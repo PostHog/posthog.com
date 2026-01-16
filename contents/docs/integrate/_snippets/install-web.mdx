@@ -4,6 +4,34 @@ import Snippet from "./install-js-snippet.mdx"
 
 <Snippet />
 
+<details>
+<summary>Using TypeScript with the script tag?</summary>
+
+If you're using TypeScript and want type safety for `window.posthog`, install the `@posthog/types` package:
+
+```bash
+npm install @posthog/types
+```
+
+Then create a type declaration file:
+
+```typescript
+// posthog.d.ts
+import type { PostHog } from '@posthog/types'
+
+declare global {
+    interface Window {
+        posthog?: PostHog
+    }
+}
+
+export {}
+```
+
+See the [TypeScript types documentation](/docs/libraries/js/types) for more details.
+
+</details>
+
 ### Option 2: Install via package manager
 
 import InstallWebPackageManagers from "./install-web-package-managers.mdx"
@@ -49,7 +77,7 @@ import posthog from 'posthog-js/dist/module.full.no-external'
 import posthog from 'posthog-js/dist/module.full'
 
 // Finally you can also import specific extra dependencies 
-import "posthog-js/dist/recorder"
+import "posthog-js/dist/posthog-recorder"
 import "posthog-js/dist/surveys"
 import "posthog-js/dist/exception-autocapture"
 import "posthog-js/dist/tracing-headers"
@@ -60,7 +88,7 @@ import posthog from 'posthog-js/dist/module.no-external'
 posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 ```
 
-**Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `posthog-js/react` does not work with any module import other than the default.
+**Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `@posthog/react` does not work with any module import other than the default.
 
 </details>
 
@@ -79,6 +107,6 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 <details>
 <summary>What is the `defaults` option?</summary>
 
-The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
+The `defaults` is a date, such as `2025-11-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>

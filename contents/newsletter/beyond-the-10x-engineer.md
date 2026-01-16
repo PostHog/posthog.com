@@ -25,6 +25,7 @@ At PostHog, we rely on engineers to make product decisions. They set their roadm
 > This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Always prototyping and experimenting
+
 You can plan and polish a feature to death. We prefer to ship early and iterate. This means engineers must be comfortable:
 
 - Building functional MVPs and proofs of concept.
@@ -64,6 +65,8 @@ Good writing is vital for all the above. It demonstrates clear thinking and enab
 To do this async with multiple teams involved, [Ted](/ted) wrote two 1,500+ word RFCs, which the team followed up with 2,000+ words of comments. Few decisions are as complex as this, but it’s a textbook example of why we look for people who can write.
 
 > **What to look for:** People who communicate well throughout the hiring process, have a blog, or come from a writing-heavy culture.
+
+<NewsletterForm />
 
 ## 3. A genuine love for building
 
@@ -107,7 +110,7 @@ Customer obsession guides us toward building products people want, not just what
 Our teams have a lot of autonomy. They decide on their roadmap, goals, and implementation details. To ensure they make the best decision possible, they must be able to analyze and use all the information available to them. This means:
 
 - Analyzing feedback usage and benchmark data.
-- Understanding the competitive landscape (feature sets, pricing).
+- Understanding the competitive landscape (feature sets, [pricing](/newsletter/pricing-advice)).
 - Choosing the right metrics to [measure the success of new features](https://newsletter.posthog.com/p/how-to-build-new-features-users-love).
 - Understanding the infrastructure requirements and scalability.
 

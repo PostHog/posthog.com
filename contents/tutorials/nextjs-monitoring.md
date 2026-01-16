@@ -50,7 +50,7 @@ After this, create a `providers.js` file in your `app` folder. In this file, set
 // app/provider.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
@@ -105,7 +105,7 @@ It should look like this:
 
 ```js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Error({ error }) {
   const posthog = usePostHog()
@@ -159,7 +159,7 @@ To set this up, create a new file in your `app` folder named `web-vitals.js`. In
 // app/web-vitals.js
 'use client'
 import { useReportWebVitals } from 'next/web-vitals';
-import { usePostHog } from 'posthog-js/react' 
+import { usePostHog } from '@posthog/react' 
  
 export function WebVitals() {
   const posthog = usePostHog()

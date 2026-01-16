@@ -5,8 +5,19 @@ import { calculatePrice, formatUSD } from '../../PricingSlider/pricingSliderLogi
 import { PricingTiers } from '../../Plans'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
+import pluralizeWord from 'pluralize'
 
-const SliderRow = ({ label = '', sliderConfig, volume, setVolume, unit, cost, billingTiers, freeAllocation }) => {
+const SliderRow = ({
+    label = '',
+    sliderConfig,
+    volume,
+    setVolume,
+    unit,
+    cost,
+    billingTiers,
+    freeAllocation,
+    freeAllocationText,
+}) => {
     const [currentVolume, setCurrentVolume] = useState(volume)
 
     useEffect(() => {
@@ -53,12 +64,19 @@ const SliderRow = ({ label = '', sliderConfig, volume, setVolume, unit, cost, bi
                     value={inverseCurve(currentVolume)}
                 />
             </div>
-            {freeAllocation && (
+            {(freeAllocation || freeAllocationText) && (
                 <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        First {Math.round(freeAllocation).toLocaleString()} {unit}s free –&nbsp;
-                        <em>every month!</em>
+                        {freeAllocationText ? (
+                            freeAllocationText
+                        ) : (
+                            <>
+                                First {Math.round(freeAllocation).toLocaleString()}{' '}
+                                {pluralizeWord(unit, Math.round(freeAllocation))} free –&nbsp;
+                                <em>every month!</em>
+                            </>
+                        )}
                     </span>
                 </div>
             )}
@@ -144,7 +162,9 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     return (
         <div className="mb-4">
             <div className="mb-4">
-                <h4 className="mb-3 text-base font-semibold">{activeProduct.name}</h4>
+                <h4 className="mb-3 text-base font-semibold">
+                    {activeProduct.productVariantName || activeProduct.name}
+                </h4>
                 <SliderRow
                     label={activeProduct.billingData.unit}
                     sliderConfig={activeProduct.slider}
@@ -154,6 +174,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     cost={mainCost}
                     billingTiers={mainBillingTiers}
                     freeAllocation={activeProduct.slider.min}
+                    freeAllocationText={activeProduct.freeAllocationText}
                 />
             </div>
 
@@ -170,7 +191,10 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                 unit={addon.unit}
                                 cost={addonData[index]?.cost || 0}
                                 billingTiers={addon.billingTiers}
-                                freeAllocation={addon.sliderConfig.min}
+                                freeAllocation={
+                                    addon.freeAllocation !== undefined ? addon.freeAllocation : addon.sliderConfig.min
+                                }
+                                freeAllocationText={addon.freeAllocationText}
                             />
                         </div>
                     )
@@ -210,7 +234,9 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                         </p>
                         <div className="space-y-8">
                             <div>
-                                <h4 className="text-lg m-0">{activeProduct.name}</h4>
+                                <h4 className="text-lg m-0">
+                                    {activeProduct.productVariantName || activeProduct.name}
+                                </h4>
                                 <p className="opacity-70 m-0 text-sm mb-2">
                                     <strong>{mainVolume.toLocaleString()}</strong> {activeProduct.billingData.unit}s
                                 </p>

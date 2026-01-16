@@ -22,7 +22,7 @@ We build PostHog for [product engineers](/blog/what-is-a-product-engineer). We d
 
 The TL;DR is product engineers care about customer value.
 
-And, that being the case, good product engineers have to care about pricing because **perceived value** and **what customers pay** are **inextricably linked**.
+And, that being the case, good product engineers have to care about [pricing](/newsletter/pricing-advice) because **perceived value** and **what customers pay** are **inextricably linked**.
 
 **This week’s theme is:** Pricing for SaaS products
 

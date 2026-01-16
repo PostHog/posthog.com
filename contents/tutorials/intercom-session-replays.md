@@ -87,7 +87,7 @@ Next, create a `providers.js`  file in your `app`  folder. In it, initialize Pos
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -192,7 +192,7 @@ Back in your app, add PostHog to your component in `app/page.js`, call the [`get
 // app/page.js
 "use client"
 import { useEffect, useState } from 'react';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Home() {
 	const [email, setEmail] = useState('');

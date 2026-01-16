@@ -137,8 +137,7 @@ Future<void> main() async {
   final config = PostHogConfig('<ph_project_api_key>');
   config.debug = true;
   config.captureApplicationLifecycleEvents = true;
-  // or EU Host: 'https://eu.i.posthog.com'
-  config.host = 'https://us.i.posthog.com';
+  config.host = '<ph_client_api_host>';
   await Posthog().setup(config);
   runApp(MyApp());
 }

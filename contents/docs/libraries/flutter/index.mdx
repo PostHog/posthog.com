@@ -4,8 +4,7 @@ sidebarTitle: Flutter
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-flutter'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg
+platformLogo: flutter
 features:
   eventCapture: true
   userIdentification: true
@@ -15,6 +14,7 @@ features:
   groupAnalytics: true
   surveys: true
   llmAnalytics: false
+  errorTracking: true
 ---
 
 import FlutterIdentify from './_snippets/identify.mdx'
@@ -115,7 +115,7 @@ If you are doing this as part of a user logging out you can instead simply use `
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:**  This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 -   Associate the events for this session with a group
 
@@ -125,7 +125,7 @@ await Posthog().group(groupType: "company", groupKey: "company_id_in_your_db");
 
 -   Associate the events for this session with a group AND update the properties of that group
 
-```swift
+```dart
 await Posthog().group(
   groupType: "company", 
   groupKey: "company_id_in_your_db", 
@@ -146,11 +146,27 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 <FlutterFeatureFlagsCode />
 
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```dart
+if (await Posthog().getFeatureFlag('experiment-feature-flag-key') == 'variant-name') {
+    // Do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Error tracking
+
+To set up error tracking in your project, follow the [Flutter installation guide](/docs/error-tracking/installation/flutter).
+
 ## Session replay
 
 > **Note:** Session replay is supported on the Flutter Web, Android and iOS environments.
 
-To set up [session replay web](/docs/session-replay) or [mobile session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Flutter SDK, follow the [additional installation instructions](/docs/session-replay/installation?tab=Flutter), and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
+To set up [session replay web](/docs/session-replay) or [mobile session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Flutter SDK, follow the [additional installation instructions](/docs/session-replay/installation/flutter), and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
 If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).  
 This is needed as Flutter renders your app using a browser canvas element.
@@ -188,4 +204,25 @@ To check if a user is opted out:
 
 ```dart
 await Posthog().isOptedOut();
+```
+
+## Debug mode 
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+You can enable debug mode during initialization by setting the `debug` option to `true` in the `PostHogConfig` object. A common pattern is to set this to `true` in development environments only using environment variables.
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.host = '<ph_client_api_host>';
+config.debug = true; // +
+await Posthog().setup(config);
+```
+
+This will enable verbose logs about the inner workings of the SDK.
+
+You can also enable debug by calling the `Posthog().debug()` method in your code.
+
+```dart
+await Posthog().debug();
 ```

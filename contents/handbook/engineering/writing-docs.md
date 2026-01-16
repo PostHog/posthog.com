@@ -39,9 +39,9 @@ Write the docs you would want to read if you were a user.
 
 ## Where do docs live?
 
-Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and edit docs [here](https://github.com/PostHog/posthog.com/tree/master/contents/docs). It uses file-based routing, so the folder and file structure is the same as the URL path. You can learn more about [developing the website here](/handbook/engineering/posthog-com/developing-the-website).
+Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and edit docs in the [contents/docs directory of posthog.com](https://github.com/PostHog/posthog.com/tree/master/contents/docs). It uses file-based routing, so the folder and file structure is the same as the URL path. You can learn more about [developing the website here](/handbook/engineering/posthog-com/developing-the-website).
 
-Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [Max AI](/docs/max-ai) live in the [Product OS](/docs) section.
+Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [PostHog AI](/docs/posthog-ai) live in the [Product OS](/docs) section.
 
 > **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">`#team-content`</PrivateLink>.
 

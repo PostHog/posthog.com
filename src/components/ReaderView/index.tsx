@@ -30,23 +30,40 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
-import { getProseClasses } from '../../constants'
+import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
+import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
+import { getVideoClasses } from '../../constants'
+import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
+
+// Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
+const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
+    // Check if path is in allowed content paths
+    const isAllowedPath = pageUrl && MARKDOWN_CONTENT_PATHS.some((path) => pageUrl.includes(path))
+    const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
+
+    // Don't render if path is not allowed, during loading, or if markdown doesn't exist
+    if (!isAllowedPath || markdownExists !== true) {
+        return null
+    }
+
+    return <CopyMarkdownActionsDropdown pageUrl={pageUrl} />
+}
 
 interface ReaderViewProps {
     body?: {
         type: 'mdx' | 'plain'
         content: string
         featuredImage?: any
+        featuredImageCaption?: string
         contributors?: any[]
         date?: string
         featuredVideo?: string
@@ -72,8 +89,9 @@ interface ReaderViewProps {
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
-    markdownContent?: string
     showQuestions?: boolean
+    showAbout?: boolean
+    sourceInstanceName?: string
 }
 
 interface BackgroundImageOption {
@@ -281,7 +299,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                <div className="@4xl/app-reader:hidden">
+                <div className="@4xl/app-reader:hidden mb-4">
                     <Accordion
                         items={[
                             {
@@ -310,6 +328,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
                         ]}
                         defaultValue="table-of-contents"
                         skin={true}
+                        dataScheme="secondary"
                     />
                 </div>
                 <div className="hidden @4xl/app-reader:block">
@@ -361,8 +380,9 @@ export default function ReaderView({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
+    showAbout = false,
+    sourceInstanceName,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -389,8 +409,9 @@ export default function ReaderView({
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
-                markdownContent={markdownContent}
                 showQuestions={showQuestions}
+                showAbout={showAbout}
+                sourceInstanceName={sourceInstanceName}
             >
                 {children}
             </ReaderViewContent>
@@ -522,8 +543,9 @@ function ReaderViewContent({
     onSearch,
     showSurvey = false,
     parent,
-    markdownContent,
     showQuestions = true,
+    showAbout = false,
+    sourceInstanceName,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -674,21 +696,44 @@ function ReaderViewContent({
                                     padding
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
-                                } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx'
-                                        ? 'max-w-full'
-                                        : contentMaxWidthClass || 'max-w-2xl'
                                 }`}
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
-                                    <div className="not-prose mb-4">
-                                        <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
+                                    <div className="not-prose mb-6 relative">
+                                        <div className="text-center">
+                                            <GatsbyImage
+                                                image={getImage(body.featuredImage)}
+                                                alt={title}
+                                                className="rounded"
+                                            />
+                                        </div>
+                                        {body.featuredImageCaption && (
+                                            <div className="absolute right-0 bottom-0 m-2 text-sm text-white bg-black bg-opacity-75 font-medium py-1 px-2 rounded-sm italic text-right">
+                                                {body.featuredImageCaption}
+                                            </div>
+                                        )}
                                     </div>
                                 )}
-                                {title && !hideTitle && <h1>{title}</h1>}
+                                {title && !hideTitle && (
+                                    <h1
+                                        className={`mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
+                                        {title}
+                                    </h1>
+                                )}
                                 {(body.date || body.contributors || body.tags) && (
-                                    <div className="flex items-center space-x-2 mb-4 flex-wrap">
+                                    <div
+                                        className={`flex items-center space-x-2 mt-4 flex-wrap mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                         {body.tags && (
@@ -710,7 +755,15 @@ function ReaderViewContent({
                                     tableOfContents.length > 0 &&
                                     !hideMobileTableOfContents &&
                                     !hideRightSidebar && (
-                                        <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
+                                        <div
+                                            id="mobile-toc"
+                                            data-scheme="secondary"
+                                            className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        >
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
                                                 contentRef={contentRef}
@@ -718,10 +771,19 @@ function ReaderViewContent({
                                             />
                                         </div>
                                     )}
-                                {body.featuredVideo && <iframe src={body.featuredVideo} />}
+                                {body.featuredVideo && (
+                                    <iframe src={body.featuredVideo} className={getVideoClasses(fullWidthContent)} />
+                                )}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
-                                        <div className={'@container'}>
+                                        <div
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
+                                                    : contentMaxWidthClass ||
+                                                      '[&>*:not(.OSTable):not(.Table)]:max-w-2xl'
+                                            }`}
+                                        >
                                             {/* Display customer metadata if this is a customer page */}
                                             {isCustomerPage && customerKey && (
                                                 <CustomerMetadata customerKey={customerKey} />
@@ -735,16 +797,59 @@ function ReaderViewContent({
                                         children
                                     )}
                                 </div>
+                                {showAbout && (
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
+                                        <Blockquote>
+                                            PostHog is an all-in-one developer platform for building successful
+                                            products. We provide <a href="/product-analytics">product analytics</a>,{' '}
+                                            <a href="/web-analytics">web analytics</a>,{' '}
+                                            <a href="/session-replay">session replay</a>,{' '}
+                                            <a href="/error-tracking">error tracking</a>,{' '}
+                                            <a href="/feature-flags">feature flags</a>,{' '}
+                                            <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
+                                            <a href="/llm-analytics">LLM analytics</a>,{' '}
+                                            <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
+                                            <a href="/ai">AI product assistant</a> to help debug your code, ship
+                                            features faster, and keep all your usage and customer data in one stack.
+                                        </Blockquote>
+                                    </div>
+                                )}
                                 {showQuestions && (
-                                    <div className="mt-8">
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         <h3 id="squeak-questions" className="mb-4">
                                             Community questions
                                         </h3>
-                                        <Questions slug={appWindow?.path} parentName={activeInternalMenu?.name} />
+                                        <Questions
+                                            slug={appWindow?.path}
+                                            parentName={activeInternalMenu?.name}
+                                            className={`mx-auto transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                            }`}
+                                        />
                                     </div>
                                 )}
                                 {showSurvey && (
-                                    <div className="mt-8">
+                                    <div
+                                        className={`mt-8 mx-auto transition-all ${
+                                            fullWidthContent || body?.type !== 'mdx'
+                                                ? 'max-w-full'
+                                                : contentMaxWidthClass || 'max-w-2xl'
+                                        }`}
+                                    >
                                         <DocsPageSurvey filePath={filePath} />
                                     </div>
                                 )}
@@ -823,7 +928,7 @@ function ReaderViewContent({
                                             })
                                         }
                                     >
-                                        Ask Max AI
+                                        Ask PostHog AI
                                     </button>{' '}
                                     or{' '}
                                     <Link
@@ -852,16 +957,15 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {(markdownContent || body?.type === 'mdx') && (
-                            <CopyMarkdownActionsDropdown
-                                markdownContent={markdownContent || body.content}
-                                pageUrl={`https://posthog.com${appWindow?.path}`}
-                            />
-                        )}
+                        <ConditionalMarkdownDropdown pageUrl={appWindow?.path} />
                         {filePath && (
                             <OSButton
                                 asLink
-                                to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                to={`https://github.com/PostHog/${
+                                    sourceInstanceName === 'posthog-main-repo'
+                                        ? 'posthog/blob/master'
+                                        : 'posthog.com/blob/master/contents'
+                                }/${filePath}`}
                                 icon={<IconPencil />}
                             />
                         )}

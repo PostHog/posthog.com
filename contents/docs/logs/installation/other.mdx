@@ -1,0 +1,63 @@
+---
+title: Other languages logs installation
+platformIconName: IconCode
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+The key requirements are:
+- Use OTLP (OpenTelemetry Protocol) for log export over HTTP
+- Send logs to `https://us.i.posthog.com/i/v1/logs` (or your self-hosted endpoint)
+- Include your project API key in the Authorization header or as a `?token=` query parameter
+
+Find the OpenTelemetry SDK for your language in the [official registry](https://opentelemetry.io/ecosystem/registry/).
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Configure your OpenTelemetry SDK to send logs to PostHog:
+
+- **Endpoint:** `https://us.i.posthog.com/i/v1/logs`
+- **Authentication:** Include your project API key either:
+  - In the Authorization header: `Bearer {your-project-api-key}`
+  - As a query parameter: `?token={your-project-api-key}`
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Accordion } from '../RadixUI/Accordion'
@@ -9,10 +9,26 @@ import { motion } from 'framer-motion'
 import { navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import ContactSales from 'components/ContactSales'
+import PresentationForm from './Utilities/PresentationForm'
+
+// Mapping for team query parameter - makes URL less conspicuous
+const TEAM_QUERY_MAP: Record<string, string> = {
+    '1': 'sales-cs',
+    '2': 'sales-product-led',
+}
 
 interface AccordionItem {
     title: string
     content: React.ReactNode
+}
+
+interface SalesRep {
+    name: string
+    title: string
+    email: string
+    photo: string
+    color: string
 }
 
 interface PresentationProps {
@@ -32,6 +48,14 @@ interface PresentationProps {
     }>
     slideId?: string
     presenterNotes?: Record<string, string>
+    config?: {
+        thumbnails?: boolean
+        notes?: boolean
+        form?: boolean
+        teamSlug?: string
+    }
+    salesRep?: SalesRep | null
+    rightActionButtons?: React.ReactNode
 }
 
 const SidebarContent = ({
@@ -81,6 +105,25 @@ export const getIsMobile = (siteSettings: any, appWindow: any) => {
     return width < 672
 }
 
+// Extract query param reading logic - DRY principle
+const getPanelStateFromURL = (param: string, configDefault?: boolean): boolean => {
+    if (typeof window === 'undefined') return configDefault ?? true
+    const params = new URLSearchParams(window.location.search)
+    const value = params.get(param)
+    return value !== null ? value === 'true' : configDefault ?? true
+}
+
+// Get team slug from URL query param, with mapping for less conspicuous URLs
+const getTeamSlugFromURL = (configDefault?: string): string | undefined => {
+    if (typeof window === 'undefined') return configDefault
+    const params = new URLSearchParams(window.location.search)
+    const teamParam = params.get('t')
+    if (teamParam && TEAM_QUERY_MAP[teamParam]) {
+        return TEAM_QUERY_MAP[teamParam]
+    }
+    return configDefault
+}
+
 export default function Presentation({
     accentImage,
     sidebarContent,
@@ -89,51 +132,86 @@ export default function Presentation({
     slides = [],
     slideId,
     presenterNotes,
+    config,
+    salesRep,
+    rightActionButtons,
 }: PresentationProps) {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
-    const [isNavVisible, setIsNavVisible] = useState<boolean>(!isMobile)
+
+    // Lazy initializers read state once on mount - prevents flash of wrong state
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(() =>
+        getPanelStateFromURL('thumbnails', config?.thumbnails)
+    )
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true)
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(() => getPanelStateFromURL('notes', config?.notes))
+    const [isFormVisible, setIsFormVisible] = useState<boolean>(() =>
+        getPanelStateFromURL('form', config?.form ?? false)
+    )
     const [drawerHeight, setDrawerHeight] = useState<number>(90)
+
+    // Determine effective team slug - URL param overrides config
+    const effectiveTeamSlug = getTeamSlugFromURL(config?.teamSlug)
     const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
     const [isDragging, setIsDragging] = useState<boolean>(false)
     const [dragStartHeight, setDragStartHeight] = useState<number>(0)
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const toggleNav = () => {
-        setIsNavVisible(!isNavVisible)
-    }
+    // Update URL when panel states change - preserves all existing params
+    const updateURL = useCallback((thumbnails: boolean, notes: boolean) => {
+        if (typeof window === 'undefined') return
 
-    const toggleDrawer = () => {
-        if (isDrawerOpen) {
-            // Closing: save current height (only if it's reasonable)
-            if (drawerHeight >= 10) {
-                setLastOpenHeight(drawerHeight)
+        const params = new URLSearchParams(window.location.search)
+        params.set('thumbnails', String(thumbnails))
+        params.set('notes', String(notes))
+
+        const newURL = `${window.location.pathname}?${params.toString()}${window.location.hash}`
+        window.history.replaceState({}, '', newURL)
+    }, [])
+
+    const toggleNav = useCallback(() => {
+        setIsNavVisible((prev) => {
+            const newState = !prev
+            updateURL(newState, isDrawerOpen)
+            return newState
+        })
+    }, [isDrawerOpen, updateURL])
+
+    const toggleDrawer = useCallback(() => {
+        setIsDrawerOpen((prev) => {
+            if (prev) {
+                // Closing: save current height if reasonable
+                if (drawerHeight >= 10) {
+                    setLastOpenHeight(drawerHeight)
+                }
+                updateURL(isNavVisible, false)
+                return false
+            } else {
+                // Opening: restore last height
+                const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 90
+                setDrawerHeight(heightToRestore)
+                updateURL(isNavVisible, true)
+                return true
             }
-            setIsDrawerOpen(false)
-        } else {
-            // Opening: restore last height, but ensure it's reasonable
-            const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 90
-            setDrawerHeight(heightToRestore)
-            setIsDrawerOpen(true)
-        }
-    }
+        })
+    }, [drawerHeight, lastOpenHeight, isNavVisible, updateURL])
 
-    const handleVerticalDrag = (_event: any, info: any) => {
-        if (!containerRef.current || !isDrawerOpen) return
-        const containerHeight = containerRef.current.getBoundingClientRect().height
-        const newDrawerHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 0), 300)
-        setDrawerHeight(newDrawerHeight)
+    const handleVerticalDrag = useCallback(
+        (_event: any, info: any) => {
+            if (!containerRef.current || !isDrawerOpen) return
+            const newDrawerHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 0), 300)
+            setDrawerHeight(newDrawerHeight)
 
-        // Update lastOpenHeight for reasonable heights only
-        if (newDrawerHeight >= 10) {
-            setLastOpenHeight(newDrawerHeight)
-        }
-    }
+            // Update lastOpenHeight for reasonable heights only
+            if (newDrawerHeight >= 10) {
+                setLastOpenHeight(newDrawerHeight)
+            }
+        },
+        [dragStartHeight, isDrawerOpen]
+    )
 
     const currentSlideNotes = useMemo(() => {
         if (!presenterNotes || !slides || slides.length === 0) return ''
@@ -248,21 +326,35 @@ export default function Presentation({
         return () => window.removeEventListener('resize', handleResize)
     }, [appWindow, siteSettings])
 
+    // Handle mobile/desktop transitions - don't persist mobile behavior to URL
     useEffect(() => {
-        setIsNavVisible(!isMobile)
-    }, [isMobile])
+        if (isMobile) {
+            setIsNavVisible(false)
+        } else {
+            setIsNavVisible(getPanelStateFromURL('thumbnails', config?.thumbnails))
+        }
+    }, [isMobile, config])
 
-    const enterPresentationMode = () => {
-        // Use the currently active slide index instead of searching for visible slide
+    // Update drawer state when config changes
+    useEffect(() => {
+        setIsDrawerOpen(getPanelStateFromURL('notes', config?.notes))
+    }, [config])
+
+    // Update form visibility when config changes
+    useEffect(() => {
+        setIsFormVisible(getPanelStateFromURL('form', config?.form ?? false))
+    }, [config])
+
+    const enterPresentationMode = useCallback(() => {
         if (slides.length > 0) {
             setCurrentSlideIndex(activeSlideIndex)
         }
         setIsPresentationMode(true)
-    }
+    }, [slides.length, activeSlideIndex])
 
-    const exitPresentationMode = () => {
+    const exitPresentationMode = useCallback(() => {
         setIsPresentationMode(false)
-    }
+    }, [])
 
     return (
         <>
@@ -311,6 +403,7 @@ export default function Presentation({
                         {!fullScreen && (
                             <>
                                 <HeaderBar
+                                    rightActionButtons={rightActionButtons}
                                     hasLeftSidebar={sidebarContent ? { enabled: true, alwaysShow: true } : false}
                                     showSidebar
                                     showSearch
@@ -380,6 +473,7 @@ export default function Presentation({
                                         <div className="p-4 text-sm prose dark:prose-invert prose-sm">
                                             {currentSlideNotes ? (
                                                 typeof currentSlideNotes === 'string' ? (
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation notes from CMS, not user input
                                                     <div dangerouslySetInnerHTML={{ __html: currentSlideNotes }} />
                                                 ) : (
                                                     currentSlideNotes
@@ -393,6 +487,15 @@ export default function Presentation({
                             </>
                         )}
                     </main>
+                    {/* editor/form panel */}
+                    {isFormVisible && (
+                        <aside
+                            data-scheme="secondary"
+                            className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
+                        >
+                            <PresentationForm teamSlug={effectiveTeamSlug} salesRep={salesRep} />
+                        </aside>
+                    )}
                 </div>
             </div>
 

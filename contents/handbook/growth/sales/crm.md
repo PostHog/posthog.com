@@ -8,9 +8,10 @@ showTitle: true
 
 We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as our customer relationship management ('CRM') platform. If you need access, you can ask <TeamMember name="Mine Kansu" photo /> for an invite.
 
-As a first step, you might find it useful to install Salesforce's [Chrome extension](https://chromewebstore.google.com/detail/Salesforce/jjghhkepijgakdammjldcbnjehfkfmha?hl=en-US), as it means you can manage most things directly in Gmail.
+As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. 
+Next, make sure your Gmail account is connected in <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally</PrivateLink>. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
 
-As a general principle, we try to ensure as much customer communication as possible is captured in Salesforce, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We've seen much higher response rates on Slack than email.
+As a general principle, we try to make sure as much customer communication as possible is captured in Salesforce rather than in individual email inboxes so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We’ve found Slack messages usually get better response rates than email.
 
 For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
@@ -18,7 +19,7 @@ All Slack messages sync up with the corresponding account in Salesforce. We use 
 
 You are most likely to use the following regularly:
 
--   _Leads_ - A lead is a potential customer who has shown interest but hasn't yet been qualified. We create leads for every new user emailing sales@posthog.com or filling out contact sales form on our website. You can also create them manually if you are introduced through other sources (e.g. events, referrals) or by tagging tickets in Zendesk.
+-   _Tasks_ A task represents a potential sales follow up or engagement. Every new inbound inquiry (via form or email) is now created as a task on an account and contact.
 -   _Opportunities_ - An opportunity is a qualified lead that has been assessed and is considered a potential sales deal (with an estimated revenue and an expected close date). This is where we manage our customers through their buying cycle.
 -   _Contacts_ - Contacts are individuals who use PostHog or contacts we interact with. You can create contacts manually or convert a Lead to a Contact after evaluating the lead and deciding to continue working with them.
 -   _Accounts_ - You will also create an account record to associate with any contact. You can associate multiple contacts with a single account. If you enter the company's domain name, we have data enrichment in place to pull in additional data on the organization.
@@ -29,22 +30,14 @@ Salesforce offers a ton of [resources](https://trailhead.Salesforce.com) if you 
 
 People currently come into Salesforce through one of the following ways:
 
--   Email Inquiries: When someone emails our sales team at sales@posthog.com
--   Website Forms: When they complete a contact or demo request form on our website
--   Product Sign-ups: When they sign up for specific products or plans that include onboarding assistance (e.g., Teams Plan)
+-   Email inquiries: messages sent to sales@posthog.com
+-   Website forms: when they complete a contact or demo request form on our website
+-   Product sign ups: All signups are saved as a contact record in Salesforce
 -   Manual Entry: When a team member manually adds a contact, such as meeting someone interested in PostHog at an event
-
-### Email
-
-We respond to emails which come into sales@posthog.com by replying with sales@ in BCC to ensure that everyone else on the team knows that you're handling the query.
-
-If you've turned on the Salesforce Chrome Extension you can see the person's Salesforce profile directly within Gmail which should give you their auto-computed [Lead score](/handbook/growth/sales/lead-scoring) so this will help you decide on the correct approach (hands-on/self-serve).
-
-We have lots of handy templates you can use as well - just select _Template_ in the email window in Salesforce. If you find yourself sending the same type of email repeatedly, you may want to create your own template - go to 'App Launcher' (the grid icon) > 'Email Templates' > 'New Email Template'.
 
 ### New PostHog signups
 
-When a `user signed up` (Cloud signup) or `license purchased` (Self-host license purchase) event is ingested into PostHog
+When a `user signed up` (Cloud signup) event is ingested into PostHog
 we use the [Salesforce App](https://github.com/PostHog/Salesforce-plugin) to sync contact data into Salesforce. We also populate
 the following Salesforce properties if they are set in the PostHog event:
 
@@ -55,18 +48,14 @@ the following Salesforce properties if they are set in the PostHog event:
 
 ### Completed contact form
 
-We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#website-contact-sales](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted - respond to them in the same way as the email section above.
+We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#sales-leads](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted.
 
-> If you receive a lead where someone completes the contact form but it is clearly just a regular support request, you should add :ticket: to the relevant thread in the `#website-contact-sales` channel in Slack and mark it as "Unqualified" in Salesforce.
+These submissions are processed through the Default app and routed into Salesforce as tasks. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
-### Manually adding new records
-
-You can also just manually add a user or an organization to Salesforce if they come through different channels. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience.
-
-Our preferred way to keep track of outreach is by creating Salesforce Leads, Contacts, and Opportunities, depending on the stage of the relationship:
-
--   Leads: If a contact is in the initial evaluation stage, it should be entered as a Lead. This allows us to track and manage potential clients who are not yet qualified or who are still in the early stages of engagement. This is typically how we add potential customers who do not use PostHog yet.
--   Opportunities: If you identify potential for growth with an existing user, such as expansion or commitment to an annual plan, you can create an Opportunity directly. This is appropriate for contacts or customers where you've already completed the lead assessment (more on that below).
+If the submission is clearly a support or billing request, you don’t need to reach out manually:
+- Select the Disqualification reason “Billing Support Request” or “Support Request.”
+- This automatically creates a Zendesk ticket for the correct team.
+- No manual outreach is needed, automation handles it.
 
 ### Zendesk Integration
 
@@ -80,79 +69,37 @@ If you are not in the sales team but are engaged with a client and identify a sa
 
 **Important:** The email must be forwarded (not replied to), and sales@posthog.com must be in the "To:" field—not CC or BCC—for the automation to work correctly.
 
-## How we do lead assignments
+## Task assignment logic
 
-Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
+When a new task is created, we first check whether the associated account already has an owner:
 
--   Based on Territory: Leads are assigned based on their geographical location.
+- If the account has an owner, task is automatically assigned to that person.
+- If the account is unowned, account and task are assigned to a salesperson via round robin within their territory.
 
-    -   Territory 1: Users based in the US, Canada, Central and Latin America are assigned to this territory.
-    -   Territory 2: Users based in Europe, the Middle East, Australia, and Africa are assigned to this territory.
-    -   Territory 3: All other geographies, or if the country information is missing, assigned to this territory.
+This ensures we avoid double assignments and maintain clear ownership.
 
--   Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
--   Reassignment Logic for Returning Leads: If a lead incoming from a specific domain later submits another contact sales form, the new lead is reassigned to the original owner if the old lead came in within the last 4 months. This ensures continuity in discussions with different leads from same company while preventing spam leads from being reassigned to the original owner.
+Territories
+- U.S. West
+- U.S. East
+- Europe & Africa
+- Asia & Middle East
+- Australia & New Zealand (ANZ)
 
-### Lead pool process (experimental)
+Each territory runs its own round robin assignment for new, unowned accounts.
 
-We’re testing a **new process** for handling **product-led leads** that haven’t been acted on within **7 days**. If a lead is assigned to an AE but hasn’t been updated for **7 days**, it will:
+### Converting tasks to opportunities
 
-1. Automatically unassign from the AE.
-2. Move to a shared lead pool where anyone can pick it up and take action.
+If a task represents a qualified opportunity:
+- Open the task and check the box labeled “Create new opportunity.”
+- Choose the appropriate Opportunity record type:
+    - New Revenue for brand-new customers.
+    - New Revenue – Existing Customer for upsells, cross-sells, or expansions.
+    - Existing – Convert to Annual for pay as you go customers moving to an annual plan.
+    - Renewal for existing annual customers renewing their plan.
+- This automatically creates and links the opportunity to the task.
+- You can then click the opportunity link to add deal details (value, close date, etc.)
 
-#### Why are we doing this?
-
--   **Keeps leads active:** Ensures leads don’t go stale and slip through the cracks.
--   **Encourages responsiveness:** AEs are motivated to act quickly to keep their assigned leads.
--   **Creates shared accountability:** Gives others a chance to work leads that need attention.
--   **Helps identify patterns:** Tracks unqualified leads and informs adjustments to our lead routing.
-
-#### What you should do
-
--   **Prioritize your assigned leads** to avoid them being reassigned. ✅
--   **Check the lead pool regularly**—there might be great leads waiting for you to pick up. 🚀
--   **Mark unqualified leads** in Salesforce instead of leaving them in the pool. ❌ Flagging them helps us track trends and improve lead quality.
-
-#### What _not_ to do
-
--   **Ignore assigned leads.** Leads that sit untouched will be unassigned and go to the pool.
--   **Dump bad leads into the pool.** If you’ve reviewed a lead and it’s not a fit, mark it appropriately in Salesforce.
-
-### How we assess leads in our pipeline
-
-We have the following lead statuses to manage the lead assessment process before we decide if a user is a right fit to use PostHog.
-
-New: A lead that has just been entered into Salesforce and has not yet been contacted.
-
--   Review lead details and ensure all necessary information is captured.
--   Perform an initial qualification check based on lead information.
-
-Working: A lead that you are actively engaging with.
-
--   Reach out to the lead via email, schedule a meeting if they’re interested.
--   Gather additional information to further qualify the lead.
--   Update lead details with any new information obtained.
--   Assess lead needs and match with PostHog solutions.
-
-Nurturing: A lead that requires further development before they are ready to make a purchasing decision (e.g. if they said let’s chat again in 3 months).
-
--   Schedule follow-up activities (e.g., calls, emails, meetings).
--   Provide valuable content (e.g., feature updates, product launches, blogs) to build the relationship.
--   Monitor engagement with the content and interactions.
-
-Converted: A lead that has been qualified and is ready to become an opportunity.
-
--   Convert the lead to an account, contact, and opportunity in Salesforce.
--   Ensure all relevant information is transferred accurately and opportunity type is selected properly (more on that below).
-
-Unqualified: A lead that does not meet the criteria to become an opportunity.
-
--   Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit, self serve customer, non-opportunity-related inquiries, support requests).
--   Update the lead status to 'Unqualified'.
-
-### Lead to opportunity conversion guidelines
-
-Use the following criteria (loosely based on traditional BANT qualification) to determine when a lead should be converted to an opportunity:
+Use the following criteria (loosely based on traditional BANT qualification) to determine when a task should be converted to an opportunity:
 
 - You've had at least one call with the customer to establish a relationship.
 - There's a clearly identified problem that PostHog can solve.
@@ -170,14 +117,27 @@ All of the above criteria should be met before creating an opportunity.  By doin
 
 If you aren't able to confidently say that you have covered the above, you should keep them as a Lead in the Nurturing stage.
 
+### Manual entry
+
+If you meet a potential customer elsewhere (e.g., events, introductions, referrals):
+- Create the Account and Contact manually.
+- Assign the correct Lead Source from drop down.
+- Create a Lead Task for any action item or sales follow up.
+ 
 ### Support requests
 
-If you receive a lead for a self-serve customer who has used the Sales Contact Form to submit a support request, you should:
+If you receive a lead for a self serve customer who has used the Sales Contact Form to submit a support request, you should:
 
 -   Set the 'Disqualification reason' to 'Support Request'
 -   Update the lead status to 'Unqualified'
 
 This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+
+### Below Sales Assist Threshold
+
+If you determine a lead is not a fit for hands on sales engagement, you can mark the task as **Below Sales Assist Threshold - Auto Emails**.
+
+When you do this, it triggers an automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>. These emails help guide them through a self-serve onboarding path without requiring manual outreach.
 
 ### Spam
 
@@ -196,13 +156,21 @@ These mostly come into the sales inbox rather than the contact form. Whilst ther
 -   Keep all lead information up-to-date and accurate in Salesforce.
 -   Periodically review lead statuses and update them as needed.
 
-### Which leads should go to RevOps?
+## Handling time off (PTO)
 
-Some incoming leads are better suited for RevOps, for example questions related to refunds, invoices, startup plan credits or eligibility. To ensure these leads are routed correctly, please create a zendesk ticket by leaving the :ticket: emoji in the relevant thread in the #website-contact-sales Slack channel. This will automatically create a ticket for RevOps to review and address.
+By default, when you are out leads will still be routed to you, and as we have no expectation of you being available whilst on PTO leads may be missed and not followed up on.  To mitigate this we need to temporarily remove you from lead round robin:
+
+- If you are out for 1 consecutive day or less:
+  - Ensure your calendar is up to date with your time off, so that Default doesn't schedule meetings for when you are out.
+- If you are out for longer than 1 consecutive day:
+  - Ensure your calendar is up to date with your time off, so that Default doesn't schedule meetings for when you are out.
+  - Let Mine or Simon know 2 working days before you leave that you are out and need to be taken out of the round robin temporarily
+    - Mine or Simon will then set you to inactive on the <PrivateLink url='https://posthog.lightning.force.com/lightning/o/Lead_Assignment_Tracker__c/list?filterName=All'>Leads assignment tracker</PrivateLink> in Salesforce.
+    - They will also set a reminder to re-add you the day before you are back.
 
 ## Opportunities
 
-Opportunities track potential deals in Salesforce. Managing opportunities effectively is important for tracking progress, forecasting revenue, and ensuring accurate reporting. In our sales process, for each lead conversion we create a Contact, an Account, and an Opportunity. Correctly identifying the appropriate opportunity record type is important to optimize our processes.
+Opportunities track potential deals in Salesforce. Managing opportunities effectively is important for tracking progress, forecasting revenue, and ensuring accurate reporting. In our sales process, for each lead conversion we create an Opportunity. Correctly identifying the appropriate opportunity record type is important to optimize our processes.
 
 ### Opportunity record types
 
@@ -222,13 +190,11 @@ Monthly Plan: Choose this type when the customer opts for a month-to-month subsc
 
 ### How to create an opportunity
 
-#### Convert a lead
+#### Convert a task
 
-When converting a lead, Salesforce will prompt you to create a Contact, an Account, and an Opportunity. Under Opportunity:
+If you're working a lead and want to create an opportunity from a task, simply check the Create New Opp checkbox and select the appropriate Opportunity Record Type from the dropdown.
 
--   Select New Opportunity
--   Choose the correct Opportunity Record Type from the dropdown menu
--   Complete Opportunity Details: Ensure all mandatory fields are completed, including Name, Type, Close Date, and Amount.
+This ensures the Lead Source is correctly carried over to the new Opportunity, and the task and opportunity remain linked for full visibility.
 
 #### Creating an opportunity from scratch
 
@@ -239,7 +205,12 @@ You can also create an opportunity directly from scratch, but make sure to conne
 -   Fill in Opportunity Details:
 -   Opportunity Name
 -   Close Date: Choose the estimated date when the opportunity is expected to close.
--   Amount: Enter the potential revenue amount for the opportunity (if blank this will be $20,000 by default). This should be the amount before any discounts are applied.
+-   Term (Months): Default is 12, update for multi year deals.
+-   Total Credit Amount: Total value of the contract before discounts.
+-   Discount (%): Percent discount applied to the total.
+-   ARR Discounted: Automatically calculated annualized revenue after discount.
+-   Contract Start Date: Date the contract begins.
+-   Contract End Date: Automatically calculated based on Start Date + Term.
 -   Stage: Select the current stage of the opportunity in the sales process.
 -   Type: If you know whether they're interested in paying on a monthly or an annual basis (if blank this will be Monthly by default)
 -   Connect to an Account: In the "Account Name" field, search for and select the account associated with the opportunity. If the account does not exist, create a new account first.
@@ -249,13 +220,41 @@ You can also create an opportunity directly from scratch, but make sure to conne
 
 Stages will differ depending on the chosen Opportunity Record Type. The following stages are for the New and Existing Business Record Types:
 
-1. Inbound Lead (10%) - Customer has submitted a contact us form/demo request
-2. Meeting Booked (20%) - Customer has booked a demo or other meeting with us
-3. Demo Completed (40%) - The first demo meeting has happened. At this point we should decide whether to manage them through the hands-on or self-serve pipeline and switch accordingly.
-4. Product Evaluation (50%) - We are assisting them in a guided evaluation of PostHog. We should have a Slack Connect channel and a time-boxed trial period agreed with them.
-5. Commercial & Legal Review (80%) - They have completed their evaluation and PostHog is the right tool for them. We are now working with them on contractual items such as custom pricing, MSAs etc.
+1. Problem Agreement - Buyer explicitly acknowledges they have a meaningful problem that can be qualified (e.g. "What happens if you don't solve this problem?")
+Exit criteria:
+-   **Identified & implicated pain with specific, quantifiable metrics (time/money/risk)**
+-   Answer to "What happens if you do nothing?" documented with real consequence
+-   Buyer explicitly said "This is a problem we need to solve" (not just "interesting")
+
+2. Solution Agreement - Buyer confirms our solution is best suited to solve their problem. Can be as simple as "We think PostHog will work for us"
+Exit criteria:
+-   **Active product usage OR completed POC/trial**
+-   **Clear, documentable decision made for PostHog (with or without comparing alternatives)**
+-   Economic Buyer identified (name + title)
+-   Champion identified (name)
+
+3. Priority Agreement - A senior decision-maker acknowledges the problem as a priority and validates our solution.
+Exit criteria:
+-   **Budget confirmed (amount range OR "yes, funded")**
+-   **Decision process mapped (who approves, what steps, timeline)**
+-   Economic Buyer said this is a priority (exact quote documented)
+-   Champion tested (evidence they're advocating internally)
+-   Compelling event known (deadline: budget cycle, launch, renewal, etc.)
+
+4. Commercial Agreement - Mutual agreement is reached on price and all contractual terms.
+Exit criteria:
+-   **Price agreed in writing (email/quote with amount + terms)**
+-   **All commercial terms agreed (payment terms, contract length, prepaid amount)**
+-   **Paper process mapped (legal, security, procurement steps + owners + timeline)**
+
+5. Vendor Approval - Buyer completes internal processes (legal, security, procurement) and contract is executed.
+Exit criteria:
+-   **Contract signed**
+
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
 ### Forecast categories
 
@@ -291,6 +290,7 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 
 -   Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
+  -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage, with the next step date reflecting when the outcome is expected.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
 
 ### Opportunity closure details
@@ -299,7 +299,8 @@ This section is to add additional information for opportunities that are won or 
 
 -   Loss Reason: A required field for any opportunity marked as "Closed - Lost." Pick the most appropriate option from the dropdown to help identify patterns.
 -   Additional Loss Context: Optional field to add further insights into the loss. It's great to include specific customer feedback if available.
--   Contract Start Date: Especially important for correct account setup and tracking renewals.
+-   Contract Start Date: Especially important for correct account setup and tracking renewals. This date must match the start date of the customer’s current billing period for which they intend to apply credits. Setting this correctly ensures that any purchased or applied credits can be used immediately for the intended billing cycle.
+    - Example: if a customer’s billing period runs from September 21 to October 21, and they purchase credits on October 15, the contract start date must be September 21 for credits to be applied to their current billing period. If instead the start date is set to a later date, credits would only apply to the next billing period, meaning the customer won't be able to use them right away. [see more info on under contracts](https://posthog.com/handbook/growth/sales/contracts)
 -   Products: Select the products discussed/planned to be used as part of the opportunity. Make sure to include all addons so RevOps can ensure the customer’s subscription is set up correctly.
 -   Contract Link: Link to the contract in PandaDoc for easy access and reference.
 

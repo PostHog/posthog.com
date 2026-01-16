@@ -1,6 +1,8 @@
 ```bash
-# Upload assets to posthog
+# Upload injected sourcemaps to their release
 posthog-cli sourcemap upload --directory ./path/to/assets
 ```
+
+The CLI reuses the release stored during injection, so you don't need to pass `--project` or `--version` again.
 
 > **💡 Tip:** You can use `--delete-after` option to clean up sourcemaps after uploading them.

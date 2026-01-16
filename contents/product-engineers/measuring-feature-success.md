@@ -41,7 +41,7 @@ Measuring feature success at PostHog is a multi-step process that goes hand-in-h
 3. **Personal experience** – Dog fooding is old advice, but good advice.
 
 In this case, Yakko decided to work on data sampling because:
-1. Slow results on complex queries were causing frustrations for large customers. This ties to the product analytics team objective of "[make PostHog performance frustration free for our 10 largest customers](/teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
+1. Slow results on complex queries were causing frustrations for large customers. This ties to the <SmallTeam slug="product-analytics" /> objective of "[make PostHog performance frustration free for our 10 largest customers](/teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
 
 2. Sampling felt like a simple solution that could be implemented quickly.
 
@@ -109,7 +109,7 @@ Success after launch looks like continued growth in usage metrics. It also looks
 
 If the feature has a large enough impact, it may even inspire a marketing push or case study.
 
-If a large feature is successful to warrant dedicated, sustained work, such as session recordings or group analytics, we might plan to [charge for it](/handbook/engineering/feature-pricing). If this is the case, then success becomes users paying for it. As an example, charging for our feature flags product is a goal for Q2 2023. Follow-on goals are likely growing the revenue of the product. 
+If a large feature is successful to warrant dedicated, sustained work, such as session recordings or group analytics, we might plan to [charge for it](/handbook/engineering/feature-pricing). If this is the case, then success becomes users paying for it. As an example, charging for our feature flags app is a goal for Q2 2023. Follow-on goals are likely growing the revenue of the product. 
 
 The success of the feature post-launch determines future effort and investment in that feature or related features. If a feature gets a lot of usage and feedback, then we often develop plans to continue working on ideas related to it.
 
@@ -129,7 +129,7 @@ You may have noticed that this process is relatively fluid. We don’t enforce m
 
 This is because we bias for impact, and believe that ownership is key to building successful features. Without people or teams owning features, there is little incentive to make them successful. No process can make ownerless features successful.
 
-We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the Experiments team is up to on [their small team page](/teams/experiments).
+We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the Experiments team is up to on <SmallTeam slug="experiments">their small team page</SmallTeam> .
 
 ## Further reading
 

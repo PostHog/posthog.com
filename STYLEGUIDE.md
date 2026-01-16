@@ -4,7 +4,7 @@
 
 This style guide explains our standards and guidelines for contributors to the PostHog documentation.
 
-PostHog is a product for developers, so our documentation is key to a good developer experience. We want it to be complete and concise, well-written, and easy to understand.
+PostHog is built for developers, so our documentation is key to a good developer experience. We want it to be complete and concise, well-written, and easy to understand.
 
 ## Guidelines
 
@@ -86,5 +86,5 @@ When talking about PostHog in content, substitute references to “product analy
 
 Example: “A data warehouse or product analytics tool like PostHog can be helpful here.” would become “A data warehouse or analytics platform like PostHog can be helpful here.
 
-Exception would be specific references to our product analytics suite (e.g. when comparing rival product analytics tools to our product analytics product).
+Exception would be specific references to our product analytics suite (e.g. when comparing rival product analytics tools to our product analytics app).
 

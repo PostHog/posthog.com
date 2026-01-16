@@ -7,9 +7,9 @@ showTitle: true
 >
 > I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team's organization on GitHub.
 >
-> &emdash; <TeamMember name="Cory Watilo" photo />
+> — <TeamMember name="Cory Watilo" photo />
 >
->     P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this [later in the article](#filing-an-issue)!
+>  P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this [later in the article](#filing-an-issue)!
 
 ## Key concepts
 

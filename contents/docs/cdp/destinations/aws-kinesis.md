@@ -4,13 +4,11 @@ templateId:
     - template-aws-kinesis
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 Send event data from PostHog into an AWS Kinesis stream.
 
-<Requirements />
 
 You'll also need access to the relevant AWS account.
 

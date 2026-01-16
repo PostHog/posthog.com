@@ -14,8 +14,9 @@ export const experiments = {
     colorSecondary: 'lilac',
     category: 'product_engineering',
     seo: {
-        title: 'Experiments - PostHog',
-        description: 'Run statistically-significant multivariate tests and robust targeting & exclusion rules.',
+        title: 'Experiments – Run A/B tests and validate ideas with PostHog',
+        description:
+            'Validate feature impact and make release decisions confidently with Experiments. Run A/B and multivariate tests with robust targeting & exclusion rules.',
     },
     overview: {
         title: 'Test changes with statistical significance',
@@ -262,7 +263,7 @@ export const experiments = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses experiments',
+        title: 'How PostHog uses Experiments',
         benefits: [
             {
                 title: 'A/B tests',
@@ -369,147 +370,17 @@ export const experiments = {
                 key: 'vwo',
             },
             {
+                name: 'Statsig',
+                key: 'statsig',
+                link: '/blog/posthog-vs-statsig',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Unlimited experiments',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Multivariate experiments',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Secondary metrics',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Minimum metrics',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Duration prediction',
-                companies: {
-                    amplitude: false,
-                    optimizely: false,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Cross-domain experiments',
-                companies: {
-                    amplitude: false,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Traffic allocation',
-                companies: {
-                    amplitude: false,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by cohort',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: true,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by person property',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: true,
-                    vwo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Bayesian statistics',
-                companies: {
-                    amplitude: false,
-                    optimizely: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Check results anytime',
-                companies: {
-                    amplitude: false,
-                    optimizely: false,
-                    vwo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Group-level experiments',
-                companies: {
-                    amplitude: false,
-                    optimizely: false,
-                    vwo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integrated session replay',
-                companies: {
-                    amplitude: false,
-                    optimizely: false,
-                    vwo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Shared metrics library',
-                companies: {
-                    amplitude: false,
-                    optimizely: true,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-        ],
+        rows: ['experiments'],
+        require_complete_data: true,
     },
     pairsWith: [
         {

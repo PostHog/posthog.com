@@ -27,7 +27,7 @@ We've previously assigned ownership to areas of the product and docs to individu
 
 You can view what we're working on right now by:
 
-1. Reading our goals on the [content team page](/teams/content)
+1. Reading our goals on the <SmallTeam slug="content" /> page
 2. Reading issues on our [team GitHub project board](https://github.com/orgs/PostHog/projects/107/views/1)
 
 You can share ideas / requests for new docs in the #content-docs-ideas Slack channel, or by creating an issue on the posthog.com repo.

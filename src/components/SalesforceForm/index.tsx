@@ -25,14 +25,12 @@ interface IProps {
             cols?: 1 | 2
         }
     }
-    buttonOptions?: {
-        className?: string
-        size?: 'sm' | 'md' | 'lg' | 'absurd'
-        type?: 'primary' | 'secondary' | 'outline'
-    }
     formOptions?: {
         className?: string
         cols?: 1 | 2
+        ctaLocation?: 'top' | 'bottom'
+        showToField?: boolean
+        rowPadding?: string
     }
     autoValidate?: boolean
     form: {
@@ -45,8 +43,15 @@ interface IProps {
             options?: CustomFieldOption[]
             fieldType?: string
             cols?: 1 | 2
+            hideLabel?: boolean
         }[]
-        buttonText?: string
+        ctaButton: {
+            label?: string
+            width?: 'full' | 'auto'
+            icon?: React.ReactNode | null
+            size?: 'sm' | 'md' | 'lg' | 'absurd'
+            type?: 'primary' | 'secondary' | 'outline'
+        }
         message?: string
         name: string
     }
@@ -260,8 +265,38 @@ function RadioGroup({
 
 const inputContainerClasses = `relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center`
 
-const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
-    const { name, placeholder, required } = props
+interface CTAButtonProps {
+    location?: 'top' | 'bottom'
+    width?: 'full' | 'auto'
+    size?: 'sm' | 'md' | 'lg' | 'xs' | 'xl'
+    variant?: 'primary' | 'secondary' | 'default' | 'underline' | 'underlineOnHover'
+    icon?: React.ReactNode
+    label?: string
+    rowPadding?: string
+}
+
+const CTAButton = ({ location, width, size, variant, icon, label, rowPadding }: CTAButtonProps) => {
+    return (
+        <div
+            className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-1'} ${
+                rowPadding || ''
+            }`}
+        >
+            <OSButton
+                width={width || 'auto'}
+                size={size || 'md'}
+                variant={variant || 'primary'}
+                icon={icon}
+                type="submit"
+            >
+                {label || 'Submit'}
+            </OSButton>
+        </div>
+    )
+}
+
+const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement> & { className?: string }) => {
+    const { name, placeholder, required, className } = props
     if (!name) return null
     const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
     const error = (errors as any)[name]
@@ -274,7 +309,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
                 </span>
             </label>
-            <div className="col-span-full @lg:col-span-10">
+            <div className="col-span-full">
                 <textarea
                     rows={8}
                     onChange={(e) => setFieldValue(name, e.target.value)}
@@ -283,7 +318,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     }}
                     className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full resize-none ${
                         error ? 'border-red' : 'border-primary'
-                    }`}
+                    } ${className ?? ''}`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                 />
@@ -330,7 +365,6 @@ export default function SalesforceForm({
     customFields,
     customMessage,
     onSubmit,
-    buttonOptions,
     formOptions,
     form,
     type = 'lead',
@@ -358,10 +392,21 @@ export default function SalesforceForm({
         setConfetti(true)
     }
 
+    const ctaButtonProps: CTAButtonProps = {
+        location: formOptions?.ctaLocation || 'bottom',
+        rowPadding: formOptions?.rowPadding || '',
+        width: form.ctaButton?.width as CTAButtonProps['width'] | undefined,
+        size: form.ctaButton?.size as CTAButtonProps['size'] | undefined,
+        variant: form.ctaButton?.type as CTAButtonProps['variant'] | undefined,
+        icon: form.ctaButton?.icon || undefined,
+        label: form.ctaButton?.label,
+    }
+
     return form.fields.length > 0 ? (
         submitted ? (
             <>
-                <div className="bg-accent border border-input px-6 py-16 rounded-md flex justify-center items-center">
+                <div className="bg-primary text-primary border border-green p-4 rounded flex justify-center items-center">
+                    {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - form message from Salesforce API, not external user input */}
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>
             </>
@@ -400,19 +445,21 @@ export default function SalesforceForm({
                 onSubmit={handleSubmit}
             >
                 <Form className={formOptions?.className}>
-                    <div className="px-4 pt-2 pb-1 border-b border-primary flex-[0_0_auto]">
-                        <OSButton size="md" variant="primary" icon={<IconSend />} type="submit">
-                            {form.buttonText ?? 'Submit'}
-                        </OSButton>
-                    </div>
+                    {formOptions?.ctaLocation === 'top' && <CTAButton {...ctaButtonProps} />}
                     <div className="flex-1">
                         <ScrollArea className="min-h-0">
-                            <div className="@container p-4">
-                                <div className="grid grid-cols-12 gap-2">
-                                    <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
-                                        To
-                                    </span>
-                                    <div className="col-span-full @lg:col-span-10 text-sm">sales@posthog.com</div>
+                            <div className="@container">
+                                <div className={`grid grid-cols-12 gap-2 ${formOptions?.rowPadding || ''}`}>
+                                    {formOptions?.showToField && (
+                                        <>
+                                            <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
+                                                To
+                                            </span>
+                                            <div className="col-span-full @lg:col-span-10 text-sm">
+                                                sales@posthog.com
+                                            </div>
+                                        </>
+                                    )}
                                     {form.fields.map(
                                         (
                                             { name, label, placeholder, type, required, options, fieldType, cols },
@@ -458,25 +505,38 @@ export default function SalesforceForm({
                                             )
                                         }
                                     )}
+                                    {form.fields.map(({ name, label, fieldType, required, hideLabel }, index) => {
+                                        if (fieldType === 'textarea') {
+                                            return (
+                                                <>
+                                                    {!hideLabel && (
+                                                        <label className={`${inputContainerClasses}`} htmlFor={name}>
+                                                            <span>
+                                                                {label}
+                                                                {required && (
+                                                                    <span className="text-red dark:text-yellow ml-0.5">
+                                                                        *
+                                                                    </span>
+                                                                )}
+                                                            </span>
+                                                        </label>
+                                                    )}
+                                                    <Textarea
+                                                        key={`${name}-${index}`}
+                                                        name={name}
+                                                        placeholder={label}
+                                                        required={required}
+                                                    />
+                                                </>
+                                            )
+                                        }
+                                        return null
+                                    })}
                                 </div>
-                            </div>
-                            <div className="px-4">
-                                {form.fields.map(({ name, label, fieldType, required }, index) => {
-                                    if (fieldType === 'textarea') {
-                                        return (
-                                            <Textarea
-                                                key={`${name}-${index}`}
-                                                name={name}
-                                                placeholder={label}
-                                                required={required}
-                                            />
-                                        )
-                                    }
-                                    return null
-                                })}
                             </div>
                         </ScrollArea>
                     </div>
+                    {formOptions?.ctaLocation === 'bottom' && <CTAButton {...ctaButtonProps} />}
                 </Form>
             </Formik>
         )

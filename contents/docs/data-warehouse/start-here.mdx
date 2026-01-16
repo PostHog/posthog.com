@@ -4,9 +4,10 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import DWInstallationPlatforms from './_snippets/dw-installation-platforms'
+import { AllSources } from '../_snippets/data-sources'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to build your data warehouse!">
@@ -23,11 +24,11 @@ import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
 
   ### Platforms
 
-  <DWInstallationPlatforms />
+  <AllSources />
 
-  <CallToAction type="primary" to="/docs/data-warehouse/sources">
+  <OSButton variant="primary" asLink to="/docs/data-warehouse/sources">
     Link your first source
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -49,9 +50,9 @@ import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
     padding={false}
   />
 
-  <CallToAction type="primary" to="/docs/data-warehouse/query">
+  <OSButton variant="primary" asLink to="/docs/data-warehouse/query">
     Query your data with SQL
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -73,9 +74,9 @@ import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
     padding={false}
   />
 
-  <CallToAction type="primary" to="/docs/data-warehouse/join">
+  <OSButton variant="primary" asLink to="/docs/data-warehouse/join">
     Set up a join
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -97,9 +98,9 @@ import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
     padding={false}
   />
 
-  <CallToAction type="primary" to="/docs/data-warehouse/views">
+  <OSButton variant="primary" asLink to="/docs/data-warehouse/views">
     Create a view
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -168,9 +169,9 @@ import { IconGraph, IconPiggyBank, IconFlask } from '@posthog/icons'
 
   That's it! You're ready to start building your data warehouse.
 
-  <CallToAction type="primary" to="/docs/data-warehouse/sources">
+  <OSButton variant="primary" asLink to="/docs/data-warehouse/sources">
     Link a source
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 

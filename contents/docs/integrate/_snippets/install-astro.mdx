@@ -1,3 +1,5 @@
+import AstroClientRouter from "./details/astro-clientrouter.mdx"
+
 In your `src/components` folder, create a `posthog.astro` file:
 
 ```bash
@@ -20,6 +22,8 @@ In this file, add your `Web snippet` which you can find in [your project setting
   })
 </script>
 ```
+
+<AstroClientRouter />
 
 The next step is to a create a [Layout](https://docs.astro.build/en/core-concepts/layouts/) where we will use `posthog.astro`. Create a new file `PostHogLayout.astro` in your `src/layouts` folder:
 

@@ -68,6 +68,7 @@ If you need more control or Salesforce isn't cooperating:
    - Friendly offer name
    - Expiration date (when offer becomes void)
    - Contract duration
+   - Start date (first service day if net new, day of renewal otherwise)
    - Offer type: Choose "Contract" with upfront payment
 6. **Set dimensions and pricing:**
    - Add your product dimensions

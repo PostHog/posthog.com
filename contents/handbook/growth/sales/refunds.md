@@ -41,14 +41,14 @@ Customer must meet the following criteria to get a refund:
 
 ## Repeat incidents
 
-For first incident response, we follow standard policy above and provide guidance for preventing future incidents (e.g. ask them to implement billing limits).
+For first incident response, we follow standard policy above and provide guidance for preventing future incidents (e.g. ask them to implement billing limits)
 
 Subsequent incidents:
-
--   Check if the user followed PostHog’s recommendations in the previous incident. For example, if a billing limit was suggested to prevent future spikes, was it implemented?
--   We issue up to 50% refund or up to 100% credits that can apply on future usage depending on the issue severity and previous actions taken to prevent spikes.
--   Provide warning that in the event that this happens again PostHog may not be able to support. Remind them of the measures necessary to take to avoid such issues going forward.
--   After 2 incidents, further refunds for similar issues may be declined unless there are extraordinary circumstances.
+- First, check if the customer has acted on PostHog’s earlier recommendations.
+- If they have not yet fixed the issue, refunds are conditional. Give them a window to implement the fix, and offer a partial refund (up to 50%) while they address it.
+- If they have made good faith fixes but the issue still occurred, then we issue a full or partial refund depending on severity.
+- Always warn that repeated incidents may not be refunded again.
+- For third incident and beyond, refunds may be declined unless there are extraordinary circumstances (e.g. a PostHog bug).
 
 ## Request channels and processing
 
@@ -101,7 +101,7 @@ What's "normal" vs "weird" usage:
 ### Refund or credit?
 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
--   If invoice is finalized and this is a first time request, issue a refund.
+-   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
 -   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
 
 ## How to issue refunds or credits
@@ -122,14 +122,31 @@ You need Support specialist level access to Stripe, ask Simon for access.
 8. Click 'Save and view'
 9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
 
-### Issuing refunds
+### Issuing a refund
+Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
 
-1. Find customer profile in Stripe (you can search by organization id)
-2. Under payments, find the payment that corresponds to the usage period
-3. Click "Refund payment" **Be careful on this dialog box as pressing enter will automatically complete the refund. **
-4. Specify the refund amount (default is full refund, remember to change as needed using instructions above)
-5. Add brief comment to explain the reason and link to Zendesk ticket
-6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.
+There are two ways to reach the Add Refund screen.
+
+*Option A:*
+
+1. Navigate to Billing Admin → Customers.
+2. Find the right Customer (search by organization ID or customer ID).
+3. Once in the Customer view, scroll down to _Related invoices_ section. Find the right one (you can identify it by its id, dates or amount).
+4. Click on "Start refund"
+
+*Option B:*
+
+1. Navigate to Billing Admin → Invoices.
+2. Find the right invoice (search by invoice ID, organization ID, etc).
+3. Click and open the invoice view. 
+4. Once in the view, click on the top right button "Start refund"
+
+Once you do that (through any of the two options), you'll land on the "Add refund" screen. From there, you can continue with the refund:
+
+1. Allocate refund amounts per product. Refunds must be issued per product. Enter the refund amount for each affected product. You may need to do more math here: for an event spike refund may span Product Analytics, Person Profiles, and Group Analytics. Billing Admin does not automatically split refunds across products, you must do the math and allocate amounts manually. As you enter per product amounts, the total refund amount updates automatically.
+2. Select refund reasons: Choose a Stripe refund reason (required) and select an internal reason (used for internal reporting and analysis)
+3. Add any relevant notes or context (e.g. Zendesk ticket, Slack link, short explanation)
+4. Once you review everything and all looks good save the refund in Billing Admin. This will issue a Stripe credit note, which is processed as a refund to the customer’s default payment method. Stripe automatically sends a notification email to the customer.
 
 ### Fixed fee product refunds
 For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.

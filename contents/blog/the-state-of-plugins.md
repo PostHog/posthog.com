@@ -60,7 +60,7 @@ Out of the more than 4,000 teams we have on PostHog Cloud, 50.3% use plugins (in
 
 However, only 4% of teams use a plugin that is not GeoIP. This is quite low. That said, many plugins weren't available to everyone on cloud until recently, so this is likely to be under-reporting the reality of how many teams would use them.
 
-The most popular plugin on Cloud (excluding GeoIP) is the Timestamp Parser, which turns timestamp data into date properties. This helps teams answer questions such as ‘_Why did our traffic spike on Tuesday?_’ or ‘_Do we get more purchases at the weekend or not?_’
+The most popular plugin on Cloud (excluding GeoIP) is the Timestamp Parser, which turns timestamp data into date properties. This helps developers answer questions such as ‘_Why did our traffic spike on Tuesday?_’ or ‘_Do we get more purchases at the weekend or not?_’
 
 ## Plugins on self-hosted PostHog deployments
 

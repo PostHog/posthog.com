@@ -194,7 +194,7 @@ The `token limit` refers to the maximum number of tokens that the model can proc
 
 The [`gpt-3.5-turbo-16k`](https://platform.openai.com/docs/models/gpt-3-5) model we use has a large limit (~16,000 tokens), while still being sufficiently fast and powerful for analyzing survey answers. 
 
-This brings us to the question: **How many survey answers can we batch and analyze at the same time? **
+This brings us to the question: **How many survey answers can we batch and analyze at the same time?**
 
 Using [tokenizer](https://platform.openai.com/tokenizer), a tool that counts the number of tokens in a string, we see that each survey answer is roughly `60 tokens` and each response is about `120 tokens`.
 

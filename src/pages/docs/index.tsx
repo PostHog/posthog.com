@@ -1,216 +1,79 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect } from 'react'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
-import PostLayout from 'components/PostLayout'
-import List from 'components/List'
-import { CallToAction } from 'components/CallToAction'
-import { IconLightBulb } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import { IconSearch } from '@posthog/icons'
 import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
-import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
-import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
-import ReaderView from 'components/ReaderView'
 import ZoomHover from 'components/ZoomHover'
-import { AppLink, IconPresentation } from 'components/OSIcons'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { useApp } from '../../context/App'
-import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
 import { SearchUI } from 'components/SearchUI'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
-
-const keyboardShortcut =
-    'box-content p-[5px] border border-b-2 border-primary  rounded-[3px] inline-flex text-black/35 dark:text-white/40'
-
-const ProductLink = ({ icon, name, url, color }: { icon: string; name: string; url: string; color: string }) => {
-    const Icon = Icons[icon as keyof typeof Icons] as any
-    return (
-        <Link
-            to={url}
-            className="flex items-center border border-primary hover:border-black/50 dark:hover:border-white/50 px-1 py-0.5 rounded-sm text-secondary hover:text-primary dark:hover:text-primary-dark relative hover:top-[-.5px] active:top-[.5px] hover:scale-[1.01] active:scale-[.995]"
-        >
-            <Icon className={`w-4 h-4 mr-1 text-${color}`} />
-            <span className="text-sm">{name}</span>
-        </Link>
-    )
-}
-
-const ProductItem = ({ product }: { product: any }) => {
-    const Icon = Icons[product.icon as keyof typeof Icons] as any
-    return (
-        <li className="flex flex-col @lg:flex-row justify-between gap-4 py-5">
-            <div className="flex gap-2">
-                <div>
-                    <Icon className={`w-6 h-6 text-${product.color}`} />
-                </div>
-                <div className="flex-1">
-                    <Link
-                        to={product.url}
-                        className="text-primary dark:text-primary-dark hover:underline hover:text-primary dark:hover:text-primary-dark"
-                    >
-                        <strong>{product.name}</strong>
-                    </Link>
-                    <p className="mb-0 text-[15px] opacity-75">{product.description}</p>
-                    <div className="flex flex-wrap gap-2 pt-2">
-                        {product.children
-                            ?.filter((child: any) => child.featured)
-                            ?.map((child: any, index: number) => (
-                                <ProductLink key={index} {...child} />
-                            ))}
-                    </div>
-                </div>
-            </div>
-            <aside className="@lg:pt-1">
-                <CallToAction to={product.url} type="outline" size="md" className="!w-full sm:!w-auto">
-                    Visit
-                </CallToAction>
-            </aside>
-        </li>
-    )
-}
-
-const ProductList = () => {
-    const products = docsMenu.children
-        .filter((item) => item.name !== 'Product OS')
-        .concat(docsMenu.children.find((item) => item.name === 'Product OS') || [])
-        .filter(Boolean)
-
-    return (
-        <ul className="list-none p-0 m-0 max-w-4xl divide-y divide-primary">
-            {products.map((product, index) => (
-                <ProductItem key={index} product={product} />
-            ))}
-        </ul>
-    )
-}
+import SmallTeam from 'components/SmallTeam'
 
 // Process docsMenu to extract structure
 const processDocsMenu = () => {
     const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
     const productSections = docsMenu.children.filter((item) => item.name !== 'Product OS')
 
-    // Items to filter out completely
-    const skipItems = [
-        'Docs',
-        'Overview',
-        'PostHog explained',
-        'Resources',
-        'Privacy',
-        'How PostHog works',
-        'Self-host',
-        'Billing',
+    const featuredIntegrationItems = [
+        'Install and configure',
+        'SDKs',
+        'Frameworks',
+        'API',
+        'Advanced',
+        'Tools',
+        'AI engineering',
+        'Getting HogPilled',
     ]
 
-    // Group Product OS children by section headers
-    const topLevelSections: any[] = []
+    const featuredAIPlatformItems = [
+        'PostHog AI',
+        'Array',
+        'Model Context Protocol (MCP)',
+        'AI wizard',
+        'AI engineering',
+    ]
 
-    if (productOSSection?.children) {
-        let currentSection: any = null
-        let inSkippedSection = false
+    const developerAppsSection = { name: 'Developer apps', children: [] }
+    const integrationSection = { name: 'Integration', children: [] }
+    // hardcode a few AI sections for now, until dedicated product docs are created
+    const AIPlatformSection = {
+        name: 'AI platform',
+        children: [
+            {
+                name: 'MCP',
+                url: '/docs/model-context-protocol',
+                icon: 'IconMagic',
+                color: 'blue',
+            },
+            {
+                name: 'AI wizard',
+                url: '/docs/ai-engineering/ai-wizard',
+                icon: 'IconMagicWand',
+                color: 'purple',
+            },
+        ],
+    }
 
-        for (const child of productOSSection.children) {
-            // Skip filtered items
-            if (!child.name) {
-                continue
-            }
-
-            // Items with just a name (no URL) are section headers
-            if (!child.url && child.name) {
-                // Check if this section header should be skipped
-                if (skipItems.includes(child.name)) {
-                    inSkippedSection = true
-                    continue
-                } else {
-                    inSkippedSection = false
-                    // Save the previous section if it has children
-                    if (currentSection && currentSection.children.length > 0) {
-                        topLevelSections.push(currentSection)
-                    }
-
-                    // Start a new section
-                    currentSection = {
-                        name: child.name,
-                        icon: getIconForSection(child.name),
-                        color: getColorForSection(child.name),
-                        children: [],
-                    }
-                }
-            } else if (!inSkippedSection && currentSection && child.name && (child.url || (child as any).children)) {
-                // Only add items to the current section if we're not in a skipped section
-                currentSection.children.push(child)
-            }
+    productSections?.forEach((product) => {
+        if (featuredAIPlatformItems.includes(product.name)) {
+            AIPlatformSection.children.unshift(product)
+        } else {
+            developerAppsSection.children.push(product)
         }
+    })
 
-        // Don't forget the last section
-        if (currentSection && currentSection.children.length > 0) {
-            topLevelSections.push(currentSection)
+    productOSSection?.children?.forEach((child) => {
+        if (featuredAIPlatformItems.includes(child.name)) {
+            AIPlatformSection.children.push(child)
+        } else if (featuredIntegrationItems.includes(child.name)) {
+            integrationSection.children.push(child)
         }
-    }
+    })
 
-    return {
-        topLevelSections,
-        productSections,
-    }
-}
-
-// Helper functions to assign icons and colors to sections from original data
-const getIconForSection = (sectionName: string) => {
-    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
-
-    if (!productOSSection?.children) return 'IconBook'
-
-    // Find the section in the original data
-    const sectionIndex = productOSSection.children.findIndex((child) => child.name === sectionName)
-
-    if (sectionIndex === -1) return 'IconBook'
-
-    // Look for an item with an icon in this section
-    for (let i = sectionIndex; i < productOSSection.children.length; i++) {
-        const item = productOSSection.children[i]
-
-        // Stop at the next section header
-        if (!item.url && item.name && i > sectionIndex) break
-
-        // If this item has an icon, use it
-        if (item.icon) return item.icon
-    }
-
-    return 'IconBook'
-}
-
-const getColorForSection = (sectionName: string) => {
-    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
-
-    if (!productOSSection?.children) return 'primary'
-
-    // Find the section in the original data
-    const sectionIndex = productOSSection.children.findIndex((child) => child.name === sectionName)
-
-    if (sectionIndex === -1) return 'primary'
-
-    // Look for an item with a color in this section
-    for (let i = sectionIndex; i < productOSSection.children.length; i++) {
-        const item = productOSSection.children[i]
-
-        // Stop at the next section header
-        if (!item.url && item.name && i > sectionIndex) break
-
-        // If this item has a color, use it
-        if ((item as any).color) return (item as any).color
-    }
-
-    // Default colors for sections that don't have explicit colors
-    const defaultColors: { [key: string]: string } = {
-        Integration: 'blue',
-        'Winning with PostHog': 'yellow',
-        'Tools and features': 'purple',
-    }
-
-    return defaultColors[sectionName] || 'primary'
+    return [integrationSection, AIPlatformSection, developerAppsSection]
 }
 
 const renderSectionContent = (children: any[]) => {
@@ -221,7 +84,6 @@ const renderSectionContent = (children: any[]) => {
         >
             {children
                 .filter((child) => child.url && child.name)
-                .slice(0, 8) // Limit to 8 items for better layout
                 .map((child, index) => {
                     const Icon = child.icon ? (Icons[child.icon as keyof typeof Icons] as any) : Icons.IconBook
                     return (
@@ -243,58 +105,22 @@ const renderSectionContent = (children: any[]) => {
 }
 
 export const DocsIndex = () => {
-    const { openSearch } = useApp()
-    const { topLevelSections, productSections } = processDocsMenu()
+    const topLevelSections = processDocsMenu()
     const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
     useEffect(() => {
         setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
     }, [])
 
     // Create accordion items
-    const accordionItems = [
-        // Top level sections from Product OS
-        ...topLevelSections.map((section: any) => ({
-            value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
-            trigger: (
-                <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
-                    {section.name}
-                </span>
-            ),
-            content: renderSectionContent(section.children || []),
-        })),
-        // Products section
-        {
-            value: 'products',
-            trigger: (
-                <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
-                    Products
-                </span>
-            ),
-            content: (
-                <div
-                    data-scheme="primary"
-                    className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-2 @4xl:gap-4 relative items-start"
-                >
-                    {productSections.map((product: any, index: number) => {
-                        const Icon = product.icon ? (Icons[product.icon as keyof typeof Icons] as any) : Icons.IconApps
-                        return (
-                            <ZoomHover key={index} className="items-center text-center [&>span]:w-full">
-                                <Link
-                                    to={product.url}
-                                    className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
-                                >
-                                    <div>
-                                        <Icon className={`size-6 text-${product.color || 'primary'}`} />
-                                    </div>
-                                    <div className="text-sm leading-tight">{product.name}</div>
-                                </Link>
-                            </ZoomHover>
-                        )
-                    })}
-                </div>
-            ),
-        },
-    ]
+    const accordionItems = topLevelSections.map((section: any) => ({
+        value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
+        trigger: (
+            <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
+                {section.name}
+            </span>
+        ),
+        content: renderSectionContent(section.children || []),
+    }))
 
     const imagePositioning =
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
@@ -513,16 +339,16 @@ export const DocsIndex = () => {
                             <p>
                                 <strong className="text-base">On our website</strong> (You are here)
                             </p>
-                            <ul>
-                                <li>
-                                    <AskMax linkOnly className="underline font-medium">
-                                        Ask Max
-                                    </AskMax>
-                                    , our trusty AI chatbot. Start a chat on any docs page and Max will have the
-                                    relevant context.
-                                </li>
-                                <li>Search with the icon at the top right</li>
-                            </ul>
+                            <p>
+                                <AskMax linkOnly className="underline font-medium">
+                                    Ask PostHog AI
+                                </AskMax>
+                                , our trusty AI chatbot. Start a chat on any docs page and PostHog AI will have the
+                                relevant context.
+                            </p>
+                            <p>
+                                Search with the <IconSearch className="size-4 inline-block" /> icon at the top right.
+                            </p>
                             <p>
                                 You can also ask a question at the end of each docs article. They get cross-posted to
                                 our{' '}
@@ -534,22 +360,20 @@ export const DocsIndex = () => {
                             <p>
                                 <strong className="text-base">In the product</strong>
                             </p>
-                            <ul>
-                                <li>Look for tooltips that link to docs - they open right inside the product</li>
-                                <li>Ask Max in the product</li>
-                            </ul>
+                            <p>Look for tooltips that link to docs - they open right inside the product.</p>
+                            <p>Ask PostHog AI in the product.</p>
 
                             <hr className="my-4" />
 
                             <h6 className="text-lg">Feedback</h6>
 
                             <p>
-                                Our docs are perpetually a work in progress. The{' '}
-                                <Link to="/teams/content" className="underline font-medium" state={{ newWindow: true }}>
-                                    Content team
-                                </Link>{' '}
-                                is responsible for what you see here. At the end of each page, you can provide feedback
-                                about what was (or wasn't) helpful. We read all feedback.
+                                Our docs are perpetually a work in progress. The
+                                <SmallTeam slug="content" /> is responsible for what you see here.
+                            </p>
+                            <p>
+                                At the end of each page, you can provide feedback about what was (or wasn't) helpful. We
+                                read all feedback.
                             </p>
                         </ScrollArea>
                     </aside>

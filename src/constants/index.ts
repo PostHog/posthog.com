@@ -1,3 +1,6 @@
+// Paths that have raw markdown available for copying/downloading
+export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook'] as const
+
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
 export const CUSTOMER_COUNT = 190254
@@ -12,6 +15,9 @@ export const explorerGridColumns =
     'grid-cols-2 @xs:grid-cols-3 @md:grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 @2xl:grid-cols-6 @3xl:grid-cols-7 @4xl:grid-cols-8 @5xl:grid-cols-9 @6xl:grid-cols-10 @7xl:grid-cols-11'
 
 export const TABLE_CLASSES = 'min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12'
+
+export const getVideoClasses = (fullWidthContent: boolean) =>
+    `aspect-video rounded-sm mx-auto transition-all ${fullWidthContent ? 'w-full' : 'max-w-4xl'}`
 
 // Base prose classes without size modifiers
 export const PROSE_CORE = `prose dark:prose-invert

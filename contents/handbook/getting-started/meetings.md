@@ -15,10 +15,10 @@ You should have been invited to any relevant meetings as part of your [onboardin
 ## Weekly schedule
 
 - **Monday** - PostHog News all-hands meeting. Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the doc is shared in the #general channel in Slack. We then go around and people are free to demo anything they've been working on recently. _The content of these meetings is always confidential._ All hands meetings are recorded too if you are out. Some teams also do sprint planning on a Monday. 
-- **Tuesday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
+- **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - some teams do sprint planning here as well. [Engineering tech talks/brown bags](/handbook/engineering/tech-talks) happen every second week, ClickHouse office hours happen on the alternate week. 
-- **Thursday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
-- **Friday** - extracurricular type meetings like [BookHog](/handbook/people/clubs#clubs-at-posthog) often end up here!
+- **Thursday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
+- **Friday** - extracurricular type meetings like [BookHog](/handbook/people/bookhog) often end up here!
 
 ## The all-hands
 
@@ -31,9 +31,9 @@ The Monday all-hands features a few regular sections and is recorded in [this do
 - **Q&A with James & Tim:** Ask the founders anything you want
 - **Demos:** Show us what you've worked on last week
 
-### No recurring meeting days (Tuesdays & Thursdays)
+### No meeting days (Tuesdays & Thursdays)
 
-We try to keep these days focused on deep work. Therefore, we run no regularly scheduled meetings on these days.
+We try to keep these days focused on deep work. Therefore, we run no planned meetings on these days.
 
 However, speaking ad-hoc to your teammates on this day is fine - especially:
 
@@ -42,7 +42,7 @@ However, speaking ad-hoc to your teammates on this day is fine - especially:
 
 If ad-hoc meetings are regularly happening, consider improving the agenda of another regular meeting so there isn't as much context switching in people's days. 
 
-People in customer-facing roles where being on calls is a bigger part of your job don't need to stick to this as much, but please don't loop in engineers to customer calls on these days if you do by default. 
+People in customer-facing roles where being on calls is a bigger part of your job don't need to stick to this as much, but please don't loop in engineers to customer calls on these days if you do by default.
 
 ### Sprint planning
 

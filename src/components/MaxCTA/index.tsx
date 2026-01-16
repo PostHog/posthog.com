@@ -23,10 +23,10 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                     <div className="shrink-0 opacity-75">
                         <IconMagicWand className="size-6" />
                     </div>
-                    <strong className="text-lg">Run this faster with Max AI</strong>
+                    <strong className="text-lg">Run this faster with PostHog AI</strong>
                 </div>
                 <div className="ph-text pl-8 text-[15px] [&_p]:text-[15px] [&_*]:text-[15px] [&>*:last-child]:mb-0 !leading-relaxed">
-                    Already using PostHog? <Link href="/docs/max-ai">Max</Link> can run this query for you.
+                    Already using PostHog? <Link href="/docs/posthog-ai">PostHog AI</Link> can run this query for you.
                 </div>
             </div>
             <aside className="pt-1 pl-8 md:pl-0">
@@ -38,7 +38,7 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                     href={maxUrl}
                     externalNoIcon
                 >
-                    Ask with Max
+                    Ask PostHog AI
                     <IconOpenSidebar className="size-6 inline-block opacity-75 group-hover:opacity-100" />
                 </CallToAction>
             </aside>

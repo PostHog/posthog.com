@@ -75,7 +75,7 @@ This means:
 
 ### 3. No sneaky shit
 
-Our [ideal customers](/handbook/who-we-are-building-for) are technical and acutely aware of the tedious, clickbaity, hyperbolic marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
+Our [ideal customers](/handbook/who-we-build-for) are technical and acutely aware of the tedious, clickbaity, hyperbolic marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
  
 For these reasons, we:
  
@@ -99,7 +99,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
  
 - **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR. This means being known for quality in all things we do.
 
-- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-are-building-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
+- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-build-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
 
 - **Launches:** Our team ships a lot of products and features. We need launches to break through the noise and get noticed. This helps create the momentum products need to succeed.
 

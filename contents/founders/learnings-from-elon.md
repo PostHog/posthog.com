@@ -102,7 +102,7 @@ Elon’s companies are wildly ambitious. They attract some of the smartest peopl
 
 We’ve seen this, too. Early on, we were very fortunate to find really great people, but we were choosing from the very small pool. As our ambition has grown, so has the pool of talent we can hire from.
 
-We now get hundreds, sometimes thousands, of applicants for every role. Engineers have noticed how challenging it looks to build a huge suite of products – we've [built eight already](https://posthog.com/) and have a [list of 30 more](https://newsletter.posthog.com/i/140404838/map-everything-your-users-want).
+We now get hundreds, sometimes thousands, of applicants for every role. Engineers have noticed how challenging it looks to build a huge suite of dev tools – we've [built eight already](https://posthog.com/) and have a [list of 30 more](https://newsletter.posthog.com/i/140404838/map-everything-your-users-want).
 
 > **Takeaway:** Your ambition – and how you communicate it – can make all the difference. And, as we constantly remind people, [talent compounds](/handbook/values#6-talent-compounds).
 

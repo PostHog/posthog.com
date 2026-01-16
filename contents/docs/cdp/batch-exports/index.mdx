@@ -16,13 +16,13 @@ The key features offered by this platform are:
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
 
-> **Note:** Batch exports require a subscription to the data pipeline add-on which you can enable in [your billing settings](https://us.posthog.com/organization/billing).
-
 ## Destinations
 
 Every batch export exports data to a destination using the configuration parameters provided when creating a batch export. The following destinations are currently supported:
 
+* [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
 * [BigQuery](/docs/cdp/batch-exports/bigquery)
+* [Databricks](/docs/cdp/batch-exports/databricks)
 * [S3](/docs/cdp/batch-exports/s3)
 * [Snowflake](/docs/cdp/batch-exports/snowflake)
 * [Postgres](/docs/cdp/batch-exports/postgres)
@@ -57,7 +57,9 @@ The events model is the default model for all batch exports, and it represents a
 
 For historical reasons, this model can vary depending on the destination, so we suggest checking each destinations documentation for the precise composition of the model's schema:
 
+* [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
 * [BigQuery](/docs/cdp/batch-exports/bigquery)
+* [Databricks](/docs/cdp/batch-exports/databricks)
 * [S3](/docs/cdp/batch-exports/s3)
 * [Snowflake](/docs/cdp/batch-exports/snowflake)
 * [Postgres](/docs/cdp/batch-exports/postgres)
@@ -81,16 +83,14 @@ The intended use-case for this model is to be exported alongside the events mode
 
 More information, including any additional necessary permissions, schema information, and examples, can be found in each of the destinations documentation:
 
+* [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
 * [BigQuery](/docs/cdp/batch-exports/bigquery)
 * [Snowflake](/docs/cdp/batch-exports/snowflake)
 * [Postgres](/docs/cdp/batch-exports/postgres)
 * [Redshift](/docs/cdp/batch-exports/redshift)
+* [Databricks](/docs/cdp/batch-exports/databricks)
 
 ### Sessions model
-
-> **Note:** The sessions model is currently in `beta`. This means the schema of this model is subject to change.
->
-> You can request access via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
 
 A [session](/docs/data/sessions) in PostHog represents a series of events that make up a single use of your product or visit to your website. Each session is uniquely identified by its `session_id`.
 

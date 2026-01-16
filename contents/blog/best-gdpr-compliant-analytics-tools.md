@@ -48,7 +48,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
-[PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a single platform. Think [Amplitude](/blog/best-amplitude-alternatives) + Hotjar + [LaunchDarkly](/blog/best-launchdarkly-alternatives) in one.
+[PostHog](https://posthog.com) is an all-in-one, open-source developer platform that combines [product analytics](/blog/best-open-source-analytics-tools), session recording, feature flags, and experimentation into a single platform. Think [Amplitude](/blog/best-amplitude-alternatives) + Hotjar + [LaunchDarkly](/blog/best-launchdarkly-alternatives) in one.
 
 PostHog offers EU data hosting, so you can keep all your user data within the EU to comply with the GDPR. Hobbyists can also self-host PostHog Open Source via Docker Compose, though this is only recommended for smaller event volumes in the ~100k per month range. PostHog also supports event autocapture, so you can start collecting useful data immediately without instrumenting events by hand.
 

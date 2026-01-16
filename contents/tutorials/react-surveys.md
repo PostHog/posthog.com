@@ -46,10 +46,10 @@ Finally, run `npm run dev` and go to `http://localhost:5173` to see our new home
 
 ## Adding PostHog
 
-PostHog will manage our survey and track our results. To use [PostHog's React SDK](/docs/libraries/react), install `posthog-js`:
+PostHog will manage our survey and track our results. To use [PostHog's React SDK](/docs/libraries/react), install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js @posthog/react
 ```
 
 Once installed, import PostHog into `src/main.jsx` and set up a client using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
@@ -61,7 +61,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -238,7 +238,7 @@ To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHo
 import './App.css'
 import { useEffect, useState } from 'react'
 import Survey from './Survey'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function App() {
   // ... rest of your code ...
@@ -441,7 +441,7 @@ You can capture these events using `posthog.capture()`:
 import './App.css'
 import { useEffect, useState } from 'react'
 import Survey from './Survey'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function App() {
   const [showSurvey, setShowSurvey] = useState(true)

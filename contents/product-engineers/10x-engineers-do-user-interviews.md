@@ -36,13 +36,13 @@ Information moves quickly and in both directions, boosting the signal. By increa
 
 Companies still need product managers, but it's easier to ship faster and better work when engineers behave like [product engineers](/blog/what-is-a-product-engineer) and [talk to users](/newsletter/talk-to-users). And in doing so, product managers are freed from writing tickets to spend more time exploring bigger opportunities.
 
-> 💬 **Sidenote:** PostHog's session recording feature came about because one of our engineers took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
+> 💬 **Sidenote:** PostHog's session recording feature came about because one of our engineers took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one developer platform.
 
 ## How to talk to users (as an engineer)
 
 Automation is crucial here. Too much friction and you’ll ride an initial burst of motivation followed by regression to the old way of heads-down coding.
 
-Step one is to find users to talk to. You can define your segment using company traits, user traits, and [behavioral information](/product-engineers/behavioral-analytics). A data warehouse or analytics platform like PostHog can be helpful here.
+Step one is to find users to talk to. You can define your segment using company traits, user traits, and [behavioral information](/product-engineers/behavioral-analytics). A developer platform like PostHog can be helpful here.
 
 Next, it's time to bulk email your segment. The simplest way is to email out a Calendly link in batches via bcc’ed using a message like this:
 

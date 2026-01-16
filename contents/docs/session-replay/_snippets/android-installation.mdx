@@ -8,7 +8,7 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 <AndroidInstall />
 
-> Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
+> Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
 
 ## Step two: Enable session recordings in your project settings
 
@@ -65,5 +65,5 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
 
 - Update your SDK.
 - If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
-    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug [here](https://github.com/PostHog/posthog-ios/issues/263).
-    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request [here](https://github.com/PostHog/posthog-android/issues/250).
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).

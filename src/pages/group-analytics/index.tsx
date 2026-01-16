@@ -59,7 +59,7 @@ export default function GroupAnalytics() {
                         )}
                         <h1 className="">{overview?.title}</h1>
                         <div className="border-l-4 border-primary pl-4 mt-4">
-                            Group Analytics is a <strong>paid add-on</strong> that allows you to analyze multi-seat
+                            Group Analytics is an <strong>add-on</strong> that enables you to analyze multi-seat
                             accounts and other groups.
                         </div>
                         <p className="">{overview?.description}</p>

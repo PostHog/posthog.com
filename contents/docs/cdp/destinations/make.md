@@ -4,7 +4,6 @@ templateId:
     - template-make
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
@@ -12,7 +11,6 @@ Trigger scenarios in Make based on PostHog events.
 
 ## Requirements
 
-<Requirements />
 
 You'll also need access to the relevant Make account.
 

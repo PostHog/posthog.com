@@ -380,7 +380,7 @@ The HogVM had a few design constraints:
 
 Effectively, we wanted to run SQL (AKA HogQL) synchronously within a NodeJS process, at scale. So that's what we built, twice.
 
-We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
+We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/common/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
 
 ### Async HogVM
 
@@ -394,7 +394,7 @@ The "aha" moment came when we realized we could build a real programming languag
 
 The key insight was this: we can pause and resume our own VM at any point, including right before `fetch()` calls. When a script calls `fetch`, we serialize the entire VM state (stack, bytecode, metadata), pass all of that onto the "fetch service" (via a queue like Kafka), push the response back onto the VM's stack, and resume execution on what might be a completely different machine. It doesn't matter if the fetch was called in a for loop or in an extremely recursive call stack, we can pause and resume the language at will. It's magic.
 
-During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP product.
+During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP app.
 
 So that's why we built Hog: to run multi-hop user-provided async scripts in a safe, predictable, and scalable way.
 
@@ -404,7 +404,7 @@ These are the early days for Hog and the HogVM. We will be evolving the language
 
 ## Running Hog locally
 
-To run Hog, first, you need to [clone and set up PostHog locally](/handbook/engineering/developing-locally). The repo has VMs to run the source code and complied bytecode as well as example files. The [default VM](https://github.com/PostHog/posthog/blob/master/hogvm/python) relies on PostHog's Python dependencies, but we also have a [Typescript VM](https://github.com/PostHog/posthog/blob/master/hogvm/typescript) that relies on those dependencies.
+To run Hog, first, you need to [clone and set up PostHog locally](/handbook/engineering/developing-locally). The repo has VMs to run the source code and complied bytecode as well as example files. The [default VM](https://github.com/PostHog/posthog/blob/master/common/hogvm/python) relies on PostHog's Python dependencies, but we also have a [Typescript VM](https://github.com/PostHog/posthog/blob/master/common/hogvm/typescript) that relies on those dependencies.
 
 Once you have PostHog set up, go into the repo and run `bin/hog` with a `.hog` file.
 

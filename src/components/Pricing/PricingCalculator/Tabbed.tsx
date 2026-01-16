@@ -122,7 +122,7 @@ export const TabContent = ({
     analyticsData,
     setAnalyticsData,
 }) => {
-    const { type, cost, volume, billingData, slider, costByTier } = activeProduct
+    const { type, cost, volume, billingData, slider, costByTier, freeAllocationText } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
 
     return (
@@ -181,8 +181,15 @@ export const TabContent = ({
                                 <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
                                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                                        First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free –&nbsp;
-                                        <em>every month!</em>
+                                        {freeAllocationText ? (
+                                            freeAllocationText
+                                        ) : (
+                                            <>
+                                                First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free
+                                                –&nbsp;
+                                                <em>every month!</em>
+                                            </>
+                                        )}
                                     </span>
                                 </div>
                             </div>
@@ -267,7 +274,7 @@ export default function Tabbed() {
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
     const { products: initialProducts, setVolume, setProduct, monthlyTotal } = useProducts()
-    const products = initialProducts.filter((product) => !!product.unit)
+    const products = initialProducts.filter((product) => !!product.unit && !product.hideFromPricingTableAndCalculator)
     const activeProduct = products[activeTab]
     const initialProductAddons = useMemo(() => {
         const initialAddons = []

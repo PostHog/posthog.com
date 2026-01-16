@@ -1,6 +1,7 @@
 ---
 title: Next.js error tracking installation
 showStepsToc: true
+platformLogo: nextjs
 ---
 
 
@@ -12,7 +13,7 @@ import PagesRouterErrorTracking from './_snippets/nextjs-router-snippets/page-ro
 import JSWebErrorTracking from '../_snippets/web-install-error-tracking.mdx'
 import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 Next.js is a SSR framework with both client-side and server-side rendering. To track errors in your Next.js app, you need to install and configure the PostHog SDK for both **client-side** and **server-side**.
 
@@ -110,9 +111,9 @@ try {
 
 You should also see events and exceptions in PostHog coming from your server-side code in the activity feed.
 
-<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/activity/explore" external={true}>
+<OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/activity/explore" external>
   Check for server events in PostHog
-</CallToAction>
+</OSButton>
 
 </Step>
 
@@ -137,10 +138,14 @@ export function register() {
 export const onRequestError = async (err, request, context) => {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     const { getPostHogServer } = require('./lib/posthog-server')
-    const posthog = await getPostHogServer()
+    const posthog = getPostHogServer()
     let distinctId = null
     if (request.headers.cookie) {
-      const cookieString = request.headers.cookie
+      // Normalize multiple cookie arrays to string
+      const cookieString = Array.isArray(request.headers.cookie) 
+        ? request.headers.cookie.join('; ') 
+        : request.headers.cookie
+
       const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
 
       if (postHogCookieMatch && postHogCookieMatch[1]) {
@@ -165,7 +170,7 @@ You can find a full example of both this and client-side error tracking in our [
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSourceMaps urlPath="nextjs" framework="Next.js" />
+<StepUploadSymbolSets urlPath="nextjs" framework="Next.js" />
 
 </Step>
 

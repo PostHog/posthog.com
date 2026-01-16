@@ -66,10 +66,10 @@ PostHog.distinctId()
 ```
 
 ```react-native
-PostHog.get_distinct_id()
+posthog.get_distinct_id()
 ```
 ```flutter
-posthog().getDistinctId()
+Posthog().getDistinctId()
 ```
 </MultiLanguage>
 
@@ -103,10 +103,10 @@ posthog.alias(previous_id='frontend_id', distinct_id='backend_id')
 ```
 
 ```php
-PostHog::alias(array(
+PostHog::alias([
   'distinctId' => 'frontend_id',
   'alias' => 'backend_id'
-));
+]);
 ```
 
 ```ruby
@@ -176,10 +176,10 @@ posthog.alias('user2', 'user1');
 # Assume we previously identified a user with 'user1' using posthog.identify('user1')
 # ❌ The following is not possible:
 # You cannot use user1 as an alias for user2
-PostHog::alias(array(
+PostHog::alias([
   'distinctId' => 'user2',
   'alias' => 'user1'
-));
+]);
 ```
 
 ```ruby

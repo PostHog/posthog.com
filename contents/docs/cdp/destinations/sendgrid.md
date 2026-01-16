@@ -4,13 +4,11 @@ templateId:
     - template-sendgrid
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You can also send person properties to custom fields in Sendgrid.
 
-<Requirements />
 
 You'll also need access to the relevant Sendgrid account.
 

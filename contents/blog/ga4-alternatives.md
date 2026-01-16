@@ -24,7 +24,7 @@ In this guide we'll cover:
 
 - The differences between UA and GA4
 - Why existing users want to switch
-- The best GA4 alternatives for different use cases
+- [The best GA4 alternatives for different use cases](/blog/best-web-analytics-tools)
 
 > **Changelog:**
 > - **Aug 24, 2023:** Added Kissmetrics and Vercel Web Analytics; updated info on EU-U.S. privacy framework.
@@ -64,7 +64,7 @@ The following GA4 alternatives all solve one or more of these issues. Some provi
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-PostHog is an [all-in-one Product OS](/product) that includes product analytics, session recording and A/B testing – pretty much everything you need to track user behavior in an app or website, basically. Like GA4, PostHog is an event-based platform. It's priced on per event used, though it offers a generous [1 million events for free](/pricing) each month, so many users can use it for free.
+PostHog is an [all-in-one developer platform](/product) that includes product analytics, session recording and A/B testing – pretty much everything you need to track user behavior in an app or website, basically. Like GA4, PostHog is an event-based platform. It's priced on per event used, though it offers a generous [1 million events for free](/pricing) each month, so many users can use it for free.
 
 As an open-source product, you can see exactly what the team is working on via the [PostHog's public roadmap](/roadmap). Small projects can self-host PostHog to keep complete control of their data, while PostHog Cloud (with US and EU hosting options) is available for those who want a managed SaaS experience.
 

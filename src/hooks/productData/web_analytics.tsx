@@ -13,15 +13,20 @@ export const webAnalytics = {
     category: 'analytics',
     billedWith: 'Product analytics',
     seo: {
-        title: 'Web analytics - PostHog',
+        title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
-            'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. Built for people who really liked GA3...',
+            'Track traffic and performance with Web Analytics. Get privacy-friendly insights, a pre-built dashboard, real-time data, and no sampling.',
     },
     overview: {
         title: 'Privacy-focused web analytics',
         description:
             'Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
         textColor: 'text-[#063619]', // tw
+    },
+    videos: {
+        overview: {
+            wistia: '092mo7cump',
+        },
     },
     screenshots: {
         overview: {
@@ -277,6 +282,31 @@ export const webAnalytics = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses Web Analytics',
+        benefits: [
+            {
+                title: 'Track pageviews, visitors,',
+                description: 'and other essential web metrics',
+            },
+            {
+                title: 'Gauge site performance',
+                description: 'using bounce rates and Core Web Vitals',
+            },
+            {
+                title: 'Protect user privacy',
+                description: 'with cookieless tracking and anonymous mode',
+            },
+            {
+                title: 'Monitor ad performance',
+                description: 'by focusing on landing page conversions',
+            },
+            {
+                title: 'Understand users',
+                description: 'by looking at device types and demographics',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Find broken links (404s)',
@@ -369,168 +399,8 @@ export const webAnalytics = {
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Pre-configured dashboards',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Visitor and view tracking',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Session and duration tracking',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Bounce rate tracking',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Breakdown by GeoIP',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Breakdown by device and browser',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Web Vitals reporting',
-                companies: {
-                    ga4: true,
-                    matomo: '<a href="https://matomo.org/guide/reports/seo-web-vitals/" target="_blank" rel="noopener noreferrer">On-premise only</a>',
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Revenue tracking',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Real-time reporting',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Open source',
-                companies: {
-                    ga4: false,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: '1st party cookies',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Cookieless tracking',
-                companies: {
-                    ga4: true,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'HIPAA compliance',
-                companies: {
-                    ga4: false,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'GDPR compliance',
-                companies: {
-                    ga4: false,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'No data sampling',
-                companies: {
-                    ga4: false,
-                    matomo: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Scroll depth tracking',
-                companies: {
-                    ga4: false,
-                    matomo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Custom channel types',
-                companies: {
-                    ga4: false,
-                    matomo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Integrated product analytics',
-                companies: {
-                    ga4: false,
-                    matomo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Revenue attribution',
-                companies: {
-                    ga4: true,
-                    matomo: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Ad blocker resilient',
-                companies: {
-                    ga4: false,
-                    matomo: false,
-                    posthog: true,
-                },
-            },
-        ],
+        rows: ['web_analytics'],
+        excluded_sections: ['platform.libraries', 'platform.developer', 'platform.integrations'],
     },
     pairsWith: [
         {

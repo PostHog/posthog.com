@@ -1,7 +1,6 @@
 ---
 title: Segment
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/segment.svg
+platformLogo: segment
 ---
 
 Segment is a customer data platform (CDP) that enables you to capture data from many sources and send it to many destinations. This is a guide for our favorite one of those destinations: PostHog. 
@@ -75,7 +74,7 @@ Similarly, the `analytics.page()` function sends `$pageview` events and the `ana
 
 ### Identifying users
 
-To add identify users and add person properties, you can use Segment's `identify` function.
+To identify users and add person properties, you can use Segment's `identify` function.
 
 ```js
 analytics.identify('userId123', {

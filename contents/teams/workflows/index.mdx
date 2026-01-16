@@ -1,0 +1,68 @@
+---
+title: Workflows
+sidebar: Handbook
+showTitle: true
+hideAnchor: false
+template: team
+---
+
+## What this team does
+
+We build the data pipelines and workflows products, along with APIs to help users inform, alert, and nurture their customers.  
+
+## Slack channel
+
+[#team-workflows](https://posthog.slack.com/messages/team-workflows)
+
+## Feature ownership
+
+You can find out more about the [features we own](/handbook/engineering/feature-ownership).
+
+## Who are we building for?
+
+### Assessing customer fit
+
+Use this guide to determine if a prospect's use case is a good fit for workflows now, in the future, or at all.
+
+### Product Leads / Technical PMs
+**✅ Fully supported now**
+
+Product-focused leads or technical PMs in companies of 10-100 employees who are comfortable with data and events. They're in roles where activation, retention, upsell, and lifecycle are important, often spanning product + marketing/growth responsibilities.
+
+They already use PostHog for product analytics and typically combine it with Zapier, Customer.io, or another tool, but are frustrated with costs of duplicating events across platforms, the time it takes to build automations, or both. They want to consolidate their stack by eliminating an automation tool.
+
+**Best fit:** Technical PMs who want to consolidate tools and eliminate Zapier/Customer.io while keeping everything in PostHog.
+
+---
+
+### Product Marketers
+**✅/⏳ Mostly supported now**
+
+Marketers actively using workflows for lifecycle marketing, user engagement, and campaign automation. They can build flows to inform, alert, and nurture customers based on product usage data.
+
+**What works today:** Email workflows, SMS, webhooks, and various destinations for marketing automation
+
+**Coming soon:** 
+- Behavioral cohort targeting - ability to branch in your flows based on whether the user has performed an event in last X days
+- Broadcast triggers - ability to trigger a workflow for an entire cohort
+
+**Is this customer a fit?**
+- ✅ Yes, if they need email/SMS/webhook-based marketing automation
+- ⏳ Set expectations if they heavily rely on ads destinations (which already has an uncertain future with Destinations), are interested in more advanced A/B marketing campaigns, or require behavioral cohort targeting immediately.
+
+---
+
+### Automation Nerds
+**⏳ Growing support ➡️ Full support planned**
+
+Power users who want to use PostHog as a complete Zapier/n8n alternative with advanced automation capabilities. They need sophisticated workflow logic and custom code integrations, LLM prompting as workflow steps, etc.
+
+**What works today:** Event-based triggers, multiple destinations, basic workflow logic
+
+**Coming later:** Custom code execution and other more technical features for advanced automation scenarios
+
+**Is this customer a fit?**
+- ✅ Yes, if they need standard automation workflows tool triggered primarily by product events
+- ⏳ Wait or set expectations if they require custom code execution or highly technical features (prioritized lower based on our ICP)
+
+---

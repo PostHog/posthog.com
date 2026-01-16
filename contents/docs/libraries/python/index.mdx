@@ -4,8 +4,7 @@ sidebarTitle: Python
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-python'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg
+platformLogo: python
 features:
   eventCapture: true
   userIdentification: true
@@ -17,6 +16,13 @@ features:
 ---
 
 The Python SDK makes it easy to capture events, evaluate feature flags, track errors, and more in your Python apps.
+
+<CalloutBox icon="IconInfo" title="Python 3.9 and lower" type="fyi">
+
+Python 3.9 is no longer supported for PostHog Python SDK versions `7.x.x` and higher.
+
+</CalloutBox>
+
 
 ## Installation
 
@@ -124,6 +130,10 @@ import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-
 
 For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
+#### Distributed environments
+
+In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See our guide for [local evaluation in distributed environments](/docs/feature-flags/local-evaluation/distributed-environments?tab=Python) for details.
+
 ## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
@@ -159,6 +169,20 @@ posthog.capture_exception(e, 'user_distinct_id', properties=additional_propertie
 
 Contexts automatically capture exceptions thrown inside them, unless disable it by passing `capture_exceptions=False` to `new_context()`.
 
+### Code variables capture
+
+The Python SDK can automatically capture the state of local variables when an exception occurs. This gives you a debugger-like view of your application state at the time of the error:
+
+```python
+posthog = Posthog(
+    "<ph_project_api_key>",
+    enable_exception_autocapture=True,
+    capture_exception_code_variables=True,
+)
+```
+
+You can configure which variables are captured, masked, or ignored. See the [code variables documentation](/docs/error-tracking/code-variables/python) for detailed configuration options.
+
 ## GeoIP properties
 
 Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
@@ -187,6 +211,69 @@ You can also explicitly chose to enable or disable GeoIP for a single capture re
 posthog.capture('test_event', disable_geoip=True|False)
 ```
 
+## Debug mode
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening.
+
+You can enable debug mode by setting the `debug` option to `True` in the `PostHog` object. This will enable verbose logs about the inner workings of the SDK.
+
+```python
+posthog.debug = True # +
+```
+
+## Disabling requests during tests
+
+You can disable requests during tests by setting the `disabled` option to `True` in the `PostHog` object. This means no events will be captured or no requests will be sent to PostHog.
+
+```python
+if settings.TEST:
+    posthog.disabled = True
+```
+
+## Connection configuration
+
+The SDK uses HTTP connection pooling internally for better performance. These settings typically need not be changed, but in some environments, such as when running behind NAT gateways, pooled connections may be terminated non-gracefully, causing request failures.
+
+You can configure connection behavior in several ways. The following settings should be called during initialization, before any API requests are made.
+
+### Enable TCP keepalive
+
+TCP keepalive probes help prevent idle connections from being dropped by network infrastructure. This is the recommended approach for most cases where idle connections are terminated.
+
+```python
+import posthog
+
+posthog.enable_keep_alive()
+```
+
+This enables TCP keepalive with sensible defaults (60 second idle time, 60 second probe interval, 3 probes before timeout).
+
+### Disable connection pooling
+
+If you need each request to use a fresh connection, you can disable connection reuse entirely. This will incur additional overhead per request but may be desirable in some circumstances.
+
+```python
+import posthog
+
+posthog.disable_connection_reuse()
+```
+
+### Custom HTTP socket options
+
+For advanced use cases, you can configure arbitrary socket options on the underlying HTTP connection.
+
+```python
+import socket
+import posthog
+
+posthog.set_socket_options([
+    (socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1),
+    # Add additional socket options as needed
+])
+```
+
+Pass `None` to `set_socket_options()` to reset to default behavior.
+
 ## Historical migrations
 
 You can use the Python or Node SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
@@ -205,7 +292,6 @@ By default, the library buffers events before sending them to the capture endpoi
 ## Django
 
 See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. Our library includes a [contexts middleware](/docs/libraries/django#django-contexts-middleware) that can automatically capture distinct IDs, session IDs, and other properties you can set up with tags.
-
 
 ## Alternative name
 

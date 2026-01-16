@@ -24,7 +24,7 @@ So why isn't there a simple, universal definition? Because:
 
 2. **It’s rarely a single event.** You want users to do many actions in your product: complete onboarding, upload a file, share a link, watch a video. Activation could mean doing any of these, or a combination of them.
 
-3. **Activating may mean doing something multiple times.** Someone might need to do the action multiple times in order to get it. For example, to activate into our session replay product means analyzing not one, but five replays.
+3. **Activating may mean doing something multiple times.** Someone might need to do the action multiple times in order to get it. For example, to activate into our session replay app means analyzing not one, but five replays.
 
 One thing is certain, though. You can’t build a successful product without nailing it. Read on to understand why.
 
@@ -65,6 +65,8 @@ That leaves **activation** and **retention** as the responsibilities of product 
 - For customer-facing teams, it’s a warning that users aren’t succeeding.
 
 As cringe as it is to say it, activation creates “ALIGNMENT” and figuring it out can create a lot of value for your organization as a whole.
+
+<NewsletterForm />
 
 ## How we find activation metrics at PostHog
 

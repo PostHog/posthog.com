@@ -1,0 +1,57 @@
+---
+title: How we do changelogs
+sidebar: Handbook
+showTitle: true
+---
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Our teams ship fast, and they ship [whenever](/blog/we-ship-whenever). The changelog is an important resource for users to keep up with what's new in PostHog.
+
+## Ownership
+
+The content team (specifically, <TeamMember name="Edwin Lim" photo /> and <TeamMember name="Vincent Ge"  photo />) writes changelog entries on a weekly basis and publishes them at the end of a week on the [changelog](/changelog) page.
+
+Changelog videos are produced by <TeamMember name="Jordo Dibb" photo /> on a **bi-weekly** basis.
+
+## Collecting entries
+
+To keep up with and stay out of the way of our fast moving product teams, we use automated workflows to collect changelog entries from merged GitHub PRs and feature flag rollouts.
+
+| Type | Description | Link |
+|------|-------------|------|
+| Merged PRs | Catches GitHub info / pushes and processes | <PrivateLink url="https://run.relay.app/workflows/cme1t0eno0gih0okphosc9pw0/edit">Relay workflow</PrivateLink> |
+| Feature flag rollouts | Webhook sent when someone updates a flag | <PrivateLink url="https://us.posthog.com/project/2/functions/0199a5e9-75cf-0000-25b0-439a08af8e31">PostHog webhook</PrivateLink> |
+| Feature flag rollouts | Relay workflow that catches the webhook and does the processing | <PrivateLink url="https://run.relay.app/workflows/cmg9oagij16o70nm34b5z7eur/edit">Relay workflow</PrivateLink> |
+
+These workflows publish to the <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelogs</PrivateLink> channel in Slack.
+
+## Content team's weekly changelog process
+
+| Day | Task |
+|-----|------|
+| Monday - Wednesday | Write up <PrivateLink url="https://drive.google.com/drive/folders/1l5qWyMkm2EhwO1WXUL2UVgILqz3N6NPq?usp=drive_link">changelog entries</PrivateLink> that should be added to the website over the _past week_. With help from the video team, decide which of those entries are video worthy. |
+| Thursday/Friday | Update PostHog's [changelog page](/changelog) with new entries. |
+| Thursday/Friday | Capture necessary screen recordings of that week's video entries and upload them <PrivateLink url="https://drive.google.com/drive/folders/1tYiRQMFIXZy7Lx3DcekB74PL6rezZFCt?usp=drive_link">for Jordo</PrivateLink>. |
+
+## Video team's bi-weekly changelog video process
+
+### Week one
+
+| Day | Task |
+|-----|------|
+| Monday | Jordo produces script based on changelog entries from the previous two weeks |
+| Monday/Tuesday | Content team reviews the script and suggests changes |
+| Tuesday/Wednesday/Thursday | Video production |
+| Thursday | Draft video reviewed (1 round of amends) |
+| Friday | Final edits |
+
+### Week two
+
+| Day | Task |
+|-----|------|
+| Monday | Publish video to:<br/>- HogTok (in-product)<br/>- Twitter<br/>- LinkedIn<br/>- Bluesky<br/>- Instagram<br/>- YouTube shorts / main video<br/>- James personal accounts |
+| Monday - Friday (both weeks) | Help content team with determining which entries should be included in next video |
+
+## Future plans
+
+The cadence of changelogs and changelog videos is likely to change in the future as we figure out our rhythm. Changelogs might also be surfaced in different ways in-app or in the product docs.

@@ -58,6 +58,8 @@ Researching options and evaluation happens simultaneously because our team knows
 
 When we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, for example, we knew we needed it to be open source and self-hostable. This immediately eliminated options like Snowflake, Redshift, or BigQuery.
 
+<NewsletterForm />
+
 ## 2. We evaluate as close to reality as possible
 
 Bias for action is one of core values. This means:
@@ -78,15 +80,13 @@ Testing this way meant they could also evaluate Warpstream’s deployment proces
 
 Testing technologies is often a non-trivial part of teams' development process. It is common to see tests or proofs of concept as a quarterly team goal. For example, building out a Warpstream proof of concept was a Q3 goal for the Pipeline team.
 
-<NewsletterForm />
-
 ## 3. We consider technical AND business factors
 
 Every problem has its own set of evaluation criteria, but there are some recurring themes:
 
 - **Performance** – We ingest billions of events per day and this will only grow. We need technology that can keep up and scale to 100x where we are today.
 
-- **Cost** – [Being the cheapest option](/handbook/how-we-make-money) is an important pricing principle for us. This means we always look for ways to reduce costs, such as using S3 for replay storage instead of ClickHouse, which helped us [make replays drastically cheaper](/blog/session-replay-pricing).
+- **Cost** – [Being the cheapest option](/handbook/how-we-make-money) is an important [pricing principle](/newsletter/pricing-advice) for us. This means we always look for ways to reduce costs, such as using S3 for replay storage instead of ClickHouse, which helped us [make replays drastically cheaper](/blog/session-replay-pricing).
 
 - **Reliability** – Companies rely on us to handle business-critical data. We need to maintain a high uptime and availability. Technologies we choose need to prove they are reliable and handle failures gracefully.
 

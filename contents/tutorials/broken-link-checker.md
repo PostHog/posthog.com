@@ -36,7 +36,7 @@ In the `app` folder, create a `provider.js` file where we initialize PostHog on 
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
@@ -77,7 +77,7 @@ To capture broken link events, create a custom 404 page to send details to PostH
 //app/not-found.js
 'use client'
 import Link from 'next/link';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 import { useEffect } from 'react';
  
 export default function NotFound() {

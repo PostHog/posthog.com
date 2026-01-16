@@ -112,7 +112,7 @@ Feature flags also enable you to run alphas and betas of new features easily. Ea
 
 There are many tools you can use to leverage feature flags and capture their benefits. Choosing the right one can be difficult, so we put together a summary and comparison of some of the top options:
 
-- **PostHog** is a suite of product and data tools built for engineers. It includes many product tools including feature flags, A/B testing, and experimentation. The feature flags tools have multi-variate flags, percentage and property release conditions, integrations with popular languages, bootstrapping, local evaluation, and more.
+- **PostHog** is a suite of dev tools built for engineers. It includes tools like feature flags, A/B testing, and experimentation. The feature flags tools have multi-variate flags, percentage and property release conditions, integrations with popular languages, bootstrapping, local evaluation, and more.
 
 - **Optimizely** is a digital experience platform that orchestrates, monetizes, and experiments with content. Their experimentation tool enables web and feature experimentation to test and optimize every custom touchpoint.
 

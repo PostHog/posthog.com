@@ -1,0 +1,27 @@
+name: HogFM Weekly
+permissions:
+    contents: read
+on:
+    schedule:
+        - cron: '0 6 * * 1' # monday 6am utc (so its ready by monday 9am utc)
+    workflow_dispatch:
+
+jobs:
+    run-script:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+            - name: Install uv
+              uses: astral-sh/setup-uv@3259c6206f993105e3a61b142c2d97bf4b9ef83d # v7.1.0
+            - name: Set up Python
+              run: uv python install
+              working-directory: scripts/hogfm
+            - name: Sync deps
+              run: uv sync --locked --all-extras --dev
+              working-directory: scripts/hogfm
+            - name: Run python script
+              run: yes # TODO uv run <filename>
+              working-directory: scripts/hogfm
+              env:
+                  SAMPLE: sample

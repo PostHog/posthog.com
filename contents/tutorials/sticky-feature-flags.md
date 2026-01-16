@@ -117,7 +117,7 @@ The flag will now:
 Here's a complete example using React:
 
 ```jsx
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect, useState } from 'react'
 
 export default function StickyExperiment() {

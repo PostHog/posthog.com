@@ -4,11 +4,9 @@ templateId:
    - template-reddit-pixel
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-<Requirements />
 
 You should be aware that this destination relies on creating third-party cookies. You'll also need access to the relevant Reddit Ads account.
 

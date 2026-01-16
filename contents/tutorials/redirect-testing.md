@@ -41,7 +41,7 @@ Next, in the `redirect-test/app` folder, create a `providers.js` file and set up
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
@@ -80,7 +80,7 @@ In the `app` folder, create two new folders named `control` and `test`. In each 
 ```js
 // app/control/page.js
 'use client'
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 
 export default function Control() {
   const posthog = usePostHog();
@@ -101,7 +101,7 @@ This is what the test page looks like:
 ```js
 // app/test/page.js
 'use client'
-import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "@posthog/react";
 
 export default function Test() {
   const posthog = usePostHog();
@@ -377,7 +377,7 @@ We then import and use it in `app/providers.js` to add the bootstrap data to our
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import cookieCutter from 'cookie-cutter'
 
 if (typeof window !== 'undefined') {

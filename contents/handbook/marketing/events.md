@@ -4,24 +4,24 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> If you want to build a local group of builders, go to [Community incubator](#community-incubator). If you’re planning an event and want PostHog to be involved, go to [Community events](#community-events)
+> Want PostHog to be involved in your event, go to [Community events](#community-events). Want to start a local co-working group for builders, go to [Community incubator](#community-incubator). And if your event will include PostHog and you'd like to add it to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/>.
 
-We’re [100% remote](/handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life. Still, we’re figuring out how to do events "the PostHog way."
+We did 45 events in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
-For us to be involved the event has to be relevant to our [ICP](/handbook/who-we-are-building-for). We prefer not to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we avoid booths, badge-scanning, buying attendee lists, paying to speak, webinars, and dinners.
+Events have to focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
 
 The event formats we get involved in (and organize ourselves) fall into one of these:
 
--   Hands-on gatherings that help our customers build faster and better for their customers
--   Experiences that allow engineers and founders to flex and grow their skillset
+-   Hands-on gatherings that enable our users to build better products for their customers
+-   Experiences that allow engineers and founders to flex and grow their skillsets
 -   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
--   AFK time such as a fun activity, some sightseeing, or just spending time together
+-   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
 
 ## Community incubator
 
-Where we connect builders around the world by helping them incubate micro-communities that gather for weekly co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person.
+We connect builders around the world by helping them start micro-communities that gather for recurring co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person with other people who have a bias for action.
 
-We have already seen how this format makes a higher impact on communities of builders because of the velocity built over weeks of communal work, collaboration, and creativity.
+We have already seen how this format makes a higher impact on communities because of the velocity built over weeks and months of communal work, collaboration, and creativity.
 
 ![Austin incubator](https://res.cloudinary.com/dmukukwp6/image/upload/Austin_community_incubator_photo_1049a2853e.png)
 
@@ -29,29 +29,27 @@ We have already seen how this format makes a higher impact on communities of bui
 
 ### Geographies
 
-The [pilot program](/community-incubator) is starting in tech hubs in North America, UK, and EU outside major capitals (examples include Detroit, Krakow, Guadalajara, and Manchester). After the pilot group, we'll expand to more cities encompassed by other regions and continents.
+The [pilot program](/community-incubator) started in tech hubs mostly in North America, UK, and EU (Austin, Singapore, New York, Barcelona, and Lahore). At this time, we're open to groups starting in any city with a population of more than half of a million people.
 
 ### Co-working structure
 
-The focus is on recurring weekly gatherings with small groups of ~10 people.
+The focus is on weekly, bi-weekly, or monthly gatherings with small groups of ~10 people. 
 
-Gatherings can take place during weekday evenings or weekends and go for about 3 hours. A suggested format is to have time for intros, at least 2-2.5 hours for working, and demos to close. Outside co-working, the group is encouraged to get together for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
+Gatherings typically take place during weekday evenings or weekends and go for about 3 hours. We suggest starting with intros, at least 2-2.5 hours for building, and then closing with demos to show off what you built. Outside of co-working, the group is encouraged to get together for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
 
 ### Venues
 
-The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) If you have a venue and want to host a community of builders once per week, [reach out](mailto:daniel.z@posthog.com) directly.
+The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) They are typically held in tech or VC offices that have an available room. If you have a venue and want to host, [reach out](mailto:daniel.z@posthog.com) directly.
 
 ## Community events
 
-Community events are in real life (IRL) manifestations of [our mission](/handbook/why-does-posthog-exist#our-mission) organized by enthusiastic partners and customers. They usually originate when someone has identified an interesting topic for an event to help people move [faster](/newsletter/this-is-why-youre-not-shipping), smarter, and more together.
+Community events are in real life (IRL) manifestations of [our mission](/handbook/why-does-posthog-exist#our-mission) organized by enthusiastic partners and customers. They usually originate when someone has identified an interesting topic or problem set for an event and want to help people move [faster](/newsletter/this-is-why-youre-not-shipping), smarter, and more together. 
 
-If you have a topic or gap you've identified but are unsure of format, here are some ideas:
+These are some of the event formats we're most actively pursuing: 
 
--   **Structure:** participatory > nonparticipatory, bottoms-up > top down, unconference > conference, demos > pitches.
--   **Curation:** Get fewer people but the right people to the event. Prioritise this alongside the content. This extends to speakers, co-hosts, and attendees.
--   **Atmosphere** foster a [welcoming environment](/handbook/company/grown-ups#things-we-do-to-create-a-welcoming-environment) where everyone can succeed.
-
-In our high trust environment, we expect organizers who initiate events to fully own them.
+-   **Builder Breakfasts:** bringing together 35 engineers for unconference-style discussions of hyperspecific software problem sets they are encountering. Breakfast served. 
+-   **AI Talks with Demos:** technical meetups for 75 people with live demos, where startups and scaleups demonstrate how they're deploying AI native tools to solve various problems.
+-   **Founder Fireside** deep dives with one of our co-founders (<TeamMember name="Tim Glaser"/> and <TeamMember name="James Hawkins"/>) for 100 founders and product engineers. 
 
 What community events are **not** for:
 
@@ -61,17 +59,17 @@ What community events are **not** for:
 
 ### Formulating a purpose and structure
 
-An impactful event follows the principles of user-driven development which stems from user problems or requests. Who is the user for your community event? The user can be your actual customers, fellow founders, local engineers or any other collection(s) of people. Talk to them first to validate if the event is worth your time.
+All impactful event follow the principles of user-driven development which stem from the user problem or requests. Who is the ideal attendee profile for your event? They might be your customers, fellow founders, local engineers or any other collection(s) of people. Talk to them first to validate if the event is worth your time.
 
-> We use GitHub for everything at PostHog. When you’re ready to organize an event, create a GitHub issue [using this template](https://github.com/PostHog/meta/issues/new?template=event-plan.md) and assign it to Daniel Zaltsman. Prioritize progress (on which you can build) over perfection.
-
-Put real effort into this first step. Defining the "what, why and how" of an event beforehand will pay off on event day. Let our [shared values](/handbook/values) guide you. Don’t submit until your answer to “Would I attend this?” is a clear “yes.”
+Put real effort into this first step. Defining the "what, why and how" of an event beforehand will pay off on event day. Let our [shared values](/handbook/values) guide you. Don’t submit your event for support until your answer to “Would I attend this?” is a clear “YES!”
 
 ### Getting support
 
-We support community events in a handful of ways.
+> We use GitHub for everything so When you’re ready to submit an event for support, create an issue [using this template](https://github.com/PostHog/requests-for-comments/issues/new?template=community-event.md) and assign it to [@Zaltsman](https://github.com/zaltsman). 
 
-**Speakers:** Want a speaker in our ecosystem (team PostHog, customers, partners)? We’ll try our best. When considering speakers, avoid:
+**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically fals in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagament. 
+
+**Speakers:** Want a speaker in our ecosystem ([team PostHog](/people), customers, partners)? We’ll try our best. When considering speakers for your events try to avoid:
 
 -   Corporate speak aficionados spewing tedious enterprise marketing nonsense
 -   People LARPing (live action role-playing) as executives
@@ -91,17 +89,22 @@ We support community events in a handful of ways.
 
 Our brand is a reflection of us and [how we’re experienced by others](/blog/brand), including events.
 
-**Words:** Naming products is hard. Same goes for naming events. As a prerequisite, read our primer on [writing for developers](/founders/writing-for-developers). Try your best to come up with event names that communicate the 'what?' and will attract the 'who?' And again, ask yourself if you would be interested in this event based on the title.
+**Words:** Naming products is hard. Same goes for naming events and writing their descriptions. As a prerequisite, read our primer on [writing for developers](/founders/writing-for-developers). Try your best to come up with event names that communicate the 'what?' and will attract the 'who?' And then again ask yourself, "would I attend this?" 
 
 **Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](/handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
 
-### Follow-ups
+### Event recaps
 
-Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](/handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we will share any photos, videos, quotes, data points with our team.
+Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](/handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we ask that you share any photos, videos, quotes, data points with our team.
 
 ## Sponsoring external events
 
-We sometimes get asked by other companies or people if we are interested in sponsoring their events - these can range from small to extremely large. We don't do these at the moment because they are a poor return on investment, though we always encourage team members to speak at these if there is an opportunity to, and we can support you with budget, social posts, merch etc. Ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+
+## Speaking at events
+
+If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. And at this point people are interested in not just what we build but how we did it. 
+
 
 ## Sponsoring student organizations
 

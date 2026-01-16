@@ -25,8 +25,14 @@ The parameters are appended to a URL using query parameters, for example:
 PostHog automatically captures any UTM parameters that are present when a user visits your website. These parameters are then set as properties in three places in PostHog.
 
 1. As properties on the event
-2. As **latest** and **initial** properties on the person profile when it is created
+2. As **latest** and **initial** properties on the person profile
 3. As **entry** session properties
+
+<CalloutBox icon="IconInfo" title="Setting person properties" type="fyi">
+
+Person properties are set when person profiles are created or updated via events like `$set` or `$identify`. By default, only identified users have person profiles. See our [person properties documentation](/docs/product-analytics/person-properties#how-to-set-person-properties) and [anonymous vs identified events documentation](/docs/data/anonymous-vs-identified-events) for more details.
+
+</CalloutBox>
 
 PostHog supports all 5 parameters:
 

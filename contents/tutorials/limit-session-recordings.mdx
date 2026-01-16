@@ -29,7 +29,7 @@ In order to follow this tutorial, you need to set `disable_session_recording` to
 ```js
 // pages/_app.js
 import posthog from "posthog-js"
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
@@ -100,10 +100,10 @@ Recordings buffer on the client until the decide response is received. It only c
 
 ### Manually in your code
 
-You can alternatively check this flag after you initialize PostHog, and start a recording if it is active for the current user. To ensure the correct user and flag details, you can use the `usePostHog` and `useFeatureFlagEnabled` hooks from `posthog-js/react` in a component like this:
+You can alternatively check this flag after you initialize PostHog, and start a recording if it is active for the current user. To ensure the correct user and flag details, you can use the `usePostHog` and `useFeatureFlagEnabled` hooks from `@posthog/react` in a component like this:
 
 ```js
-import { useFeatureFlagEnabled, usePostHog } from 'posthog-js/react'
+import { useFeatureFlagEnabled, usePostHog } from '@posthog/react'
 
 export default function Home() {
   const posthog = usePostHog()
@@ -151,7 +151,7 @@ Using the router, you can check which page users are going to and set session re
 
 ```js
 import { useEffect } from "react"
-import { usePostHog } from "posthog-js/react"
+import { usePostHog } from "@posthog/react"
 
 export default function About() {
   const posthog = usePostHog()
@@ -175,7 +175,7 @@ export default function About() {
 Finally, you can have recordings start on any user action, such as button clicks, inputs, hovers, and even scrolling. This is as simple as calling `startSessionRecording()` when a user completes those actions.
 
 ```js
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function Home() {
   const posthog = usePostHog()

@@ -58,7 +58,7 @@ A major reason Brandon was willing to make this switch was due to the way PostHo
 
 You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/session-replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
 
-You can even use [Max AI](/docs/max-ai), the in-app AI agent, to search for similar errors and recordings using natural language.
+You can even use [PostHog AI](/docs/posthog-ai) to search for similar errors and recordings using natural language.
 
 “That was one thing I really liked in Amplitude,” says Brandon. “They have this AI you can chat to and I was saying that if PostHog released that then that’d be huge... but then I found out you guys have it too and it was so easy to [get into the beta for that](http://app.posthog.com/home#panel=feature-previews) and to start using it.”
 

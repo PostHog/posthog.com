@@ -1,7 +1,6 @@
 ---
 title: Vercel
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/vercel_fbbc18772c.svg
+platformLogo: vercel
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -53,25 +52,11 @@ export function GET(request) {
 
 We use `captureImmediate` because it guarantees the HTTP request finishes before your function continues (or shuts downs). `flushAt` and `flushInterval` mean events are sent immediately, but `capture` is still async and serverless environments can freeze or terminate before it completes.
 
-Finally, to ensure all your requests complete you can combine PostHog's `shutdown()` method with either Vercel's [`waitUntil` helper method](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) or Next.js's [`after` function](https://nextjs.org/docs/app/api-reference/functions/after). This ensures your events get sent to PostHog, no background processes are left running, and the function doesn't hang forever if something goes wrong.
+Finally, to ensure all your requests complete you can combine PostHog's `shutdown()` method with Next.js's [`after`](https://nextjs.org/docs/app/api-reference/functions/after) function for Next.js 15.1 and above, or Vercel's [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) helper method for older versions. 
+
+This ensures your events get sent to PostHog and no background processes are left running. The function doesn't hang forever if something goes wrong.
 
 <MultiLanguage>
-
-```js file=waitUntil
-// app/api/wait/route.js
-import { waitUntil } from '@vercel/functions';
-import PostHogClient from '../../posthog'
-
-export async function POST(request) {
-  const posthogClient = PostHogClient()
-
-  // ... your code ...
-
-  waitUntil(posthogClient.shutdown())
-
-  return new Response('Good job!');
-}
-```
 
 ```js file=after
 // app/api/after/route.js
@@ -89,6 +74,22 @@ export async function POST(request) {
 }
 ```
 
+```js file=waitUntil
+// app/api/wait/route.js
+import { waitUntil } from '@vercel/functions';
+import PostHogClient from '../../posthog'
+
+export async function POST(request) {
+  const posthogClient = PostHogClient()
+
+  // ... your code ...
+
+  waitUntil(posthogClient.shutdown())
+
+  return new Response('Good job!');
+}
+```
+
 </MultiLanguage>
 
 <CalloutBox icon="IconInfo" title="What about the pages router?" type="fyi">
@@ -101,7 +102,7 @@ export async function POST(request) {
 
 You can capture errors in Vercel Functions like you would in other Node applications using `posthog.captureException()`.
 
-For more details and a method for automatically capturing errors from Vercel Functions, see our [error tracking installation docs](/docs/error-tracking/installation?tab=Next.js#capturing-server-errors).
+For more details and a method for automatically capturing errors from Vercel Functions, see our [error tracking installation docs](/docs/error-tracking/installation/nextjs#capturing-server-errors).
 
 ## AI SDK and LLM analytics
 

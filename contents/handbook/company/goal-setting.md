@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We plan objectives every quarter. The exec team set the direction and overall objectives for PostHog, and then small teams set their own objectives that feed into these. Longer-term planning that the exec team does is covered separately [here](/handbook/exec/annual-planning). 
+We plan objectives every quarter. The <SmallTeam slug="blitzscale" /> set the direction and overall objectives for PostHog, and then small teams set their own objectives that feed into these. Longer-term planning that the Blitzscale team does is covered separately in the [annual planning guide](/handbook/exec/annual-planning). 
 
 ## How quarterly planning works
 
-1. ~3 weeks before the end of each quarter, the Exec team meets to come up with larger goals for the company, which sometimes (but not always) trickle down to individual teams.
-2. ~2 weeks before the end of the quarter, team leads should schedule planning meetings to go through these - these will be run by the team lead and include the relevant Exec team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
-3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Exec team for review at a minimum.
+1. ~3 weeks before the end of each quarter, the Blitzscale team meets to come up with larger goals for the company, which sometimes (but not always) trickle down to individual teams.
+2. ~2 weeks before the end of the quarter, team leads should schedule planning meetings to go through these - these will be run by the team lead and include the relevant Blitzscale team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
+3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Blitzscale team for review at a minimum.
 4. Goal PRs need to be merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
 
 In terms of accountability, Scott will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
@@ -32,9 +32,11 @@ What else did we get done? List items from the changelog or PRs merged if they w
 
 You may also want to write some overall thoughts about how the quarter generally went.
 
-## HOGS (10 minutes - do beforehand solo)
+## HOGS (10 minutes - all the content should be here **before** the meeting starts)
 
-This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS). 
+This should be done BEFORE the meeting by everyone, independently and in this doc before the meeting starts. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS).
+
+Add entries under each question with your initials/name like: "- (your name): My comment"
 
 - Hope
   - What are you most excited about this quarter?
@@ -46,6 +48,7 @@ This should be done BEFORE the meeting by everyone, independently. During the me
   - What single thing would move the needle the most this quarter?
     - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
   - What are users asking for? Which of these are we ignoring?
+    - _Check Vitally for feature requests (if applicable for your team/product)_
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?

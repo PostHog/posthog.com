@@ -111,7 +111,7 @@ We realized we had to _act_ on feedback/bugs and feature requests. We knew that 
 
 For every new feature, we aimed to get a few early adopter users on it, and through the above loop. Every time we did, this led to bug reports, UX improvements, or something unexpected. A bit like QA-ing a pull request.
 
-It is _much _ better to ship like this, rather than shipping in isolation. With this approach, what you build will be much more likely to work, and you'll gain a far deeper understanding of your customers too.
+It is _much_  better to ship like this, rather than shipping in isolation. With this approach, what you build will be much more likely to work, and you'll gain a far deeper understanding of your customers too.
 
 This _still_ applies. See our [community roadmap idea](https://github.com/PostHog/posthog.com/issues/4453) – we're looking to go further with this.
 
@@ -121,7 +121,7 @@ Once we launched, we made it _very_ easy to give us feedback. Slack turned out t
 
 * Many users had it open all day at work - we saw 20x the response rate of email
 
-* There's a low bar to posting because people use it informally – people don't spend a lot of time to polish their communication on it. We wanted more communication, rather than less, especially in the early days
+* There's a low bar to posting because people use it informally – people don't spend a lot of time to [polish their communication](/blog/ceo-diary-6) on it. We wanted more communication, rather than less, especially in the early days
 
 There are some issues with using Slack like this:
 

@@ -163,40 +163,48 @@ export default function Heatmaps() {
                                 </p>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="bg-accent rounded-md p-6">
-                        <h3 className="mt-0">Getting started</h3>
-                        <p className="mb-4">To start using heatmaps:</p>
-                        <ol className="mb-4">
-                            <li>
-                                Enable heatmap data capture in your project settings or with the{' '}
-                                <code>enable_heatmaps</code> key in your JavaScript SDK initialization
-                            </li>
-                            <li>Install the PostHog toolbar on your site</li>
-                            <li>Click the heatmap icon in the toolbar to start viewing heatmaps</li>
-                        </ol>
                         <p className="text-sm opacity-70 mb-0">
                             Note: Clickmaps require autocapture to be enabled, and scrollmaps require pageleave events.
                         </p>
                     </div>
 
                     <div>
+                        <h2>Getting started</h2>
+                        <p className="mb-6">Follow these steps to start using heatmaps in PostHog:</p>
+                        <h3>Enable heatmap data capture</h3>
+                        <p className="mb-4">
+                            Enable heatmap data capture in your project settings or with the{' '}
+                            <code>enable_heatmaps</code> key in your JavaScript SDK initialization.
+                        </p>
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_settings_59f5d1258b.png"
+                            alt="Heatmap settings configuration"
+                            className="w-full rounded-md shadow-lg mt-4"
+                        />
+                    </div>
+
+                    <div>
                         <h2>View heatmaps two ways</h2>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="border border-primary rounded-md p-4">
-                                <h3 className="mt-0">Via the toolbar</h3>
-                                <p>
-                                    View heatmaps directly on your live site. Perfect for quick analysis and creating
-                                    actions on the fly.
-                                </p>
+                        <div className="space-y-6">
+                            <div className="">
+                                <h3 className="mt-0">Via Toolbar</h3>
+                                <ol className="space-y-2">
+                                    <li>Install the PostHog toolbar on your site</li>
+                                    <li>Click the heatmap icon in the toolbar to start viewing heatmaps</li>
+                                </ol>
                             </div>
-                            <div className="border border-primary rounded-md p-4">
-                                <h3 className="mt-0">In-app (beta)</h3>
-                                <p>
-                                    Access heatmaps from within PostHog. Currently in opt-in beta with more features
-                                    coming soon.
-                                </p>
+                            <div className="">
+                                <h3 className="mt-0">In PostHog App (beta)</h3>
+                                <ol className="space-y-2">
+                                    <li>Open the Heatmaps product in PostHog</li>
+                                    <li>Type the URL of your website in the "Display URL" field</li>
+                                    <li>Optional: Use "Wildcard URL matching" for the "Heatmap data URL"</li>
+                                </ol>
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_in_app_9b447c455e.png"
+                                    alt="Heatmaps in PostHog app interface"
+                                    className="w-full rounded-md shadow-lg mt-4"
+                                />
                             </div>
                         </div>
                     </div>

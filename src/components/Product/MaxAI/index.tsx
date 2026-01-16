@@ -38,7 +38,7 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
 import { useStaticQuery, graphql } from 'gatsby'
-import { MaxQuestionInput } from 'components/MaxQuestionInput'
+import { PostHogAIQuestionInput } from 'components/MaxQuestionInput'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useUser } from 'hooks/useUser'
@@ -122,7 +122,7 @@ const Roadmap = () => {
                     {
                         teams: {
                             name: {
-                                $eq: 'Max AI',
+                                $eq: 'PostHog AI',
                             },
                         },
                     },
@@ -378,7 +378,7 @@ const Roadmap = () => {
             </div>
 
             <div className="mt-auto text-center pt-8 flex flex-col gap-2 mdlg:flex-row mdlg:justify-center mdlg:items-center pb-8">
-                <strong className="">Have an idea for Max?</strong>
+                <strong className="">Have an idea for PostHog AI?</strong>
                 <CallToAction
                     href="https://github.com/PostHog/posthog/issues"
                     type="secondary"
@@ -394,13 +394,13 @@ const Roadmap = () => {
 
 const product = {
     slug: 'max-ai',
-    lowercase: 'Max AI',
-    capitalized: 'Max AI',
+    lowercase: 'PostHog AI',
+    capitalized: 'PostHog AI',
     freeTier: 'JOETBD',
 }
 
-const team = 'Max AI'
-const teamSlug = '/teams/max-ai'
+const team = 'PostHog AI'
+const teamSlug = '/teams/posthog-ai'
 
 const featuresPerRow = 3
 const features = [
@@ -417,7 +417,7 @@ const features = [
     },
     {
         title: '"Show me users who have rageclicked"',
-        description: 'Let Max automatically build filters and playlists for you',
+        description: 'Let PostHog AI automatically build filters and playlists for you',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/table_cedb252de2.png"
@@ -443,25 +443,28 @@ const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Product analytics',
-        description: 'Explore your product data with graphs, funnels, retention charts, and more just by asking Max',
+        description:
+            'Explore your product data with graphs, funnels, retention charts, and more just by asking PostHog AI',
         icon: <IconGraph />,
         color: 'blue',
     },
     {
         title: 'Session replays',
-        description: 'Tell Max what behaviours you are looking for and he can find the matching session recordings',
+        description:
+            'Tell PostHog AI what behaviours you are looking for and he can find the matching session recordings',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
         title: 'SQL insights',
-        description: 'Tired of writing long SQL queries? Max can do that for you to help you query your data warehouse',
+        description:
+            'Tired of writing long SQL queries? PostHog AI can do that for you to help you query your data warehouse',
         icon: <IconCode />,
         color: 'seagreen',
     },
     {
         title: 'PostHog docs',
-        description: 'Want advice on building your product? Max can access all our docs and give you tips',
+        description: 'Want advice on building your product? PostHog AI can access all our docs and give you tips',
         icon: <IconBook />,
         color: 'green',
     },
@@ -556,7 +559,7 @@ export const ProductMax = () => {
     return (
         <>
             <SEO
-                title="Max AI - PostHog"
+                title="PostHog AI - PostHog"
                 description="Your AI-powered, product-managing hedgehog"
                 image={`/images/og/max-ai.jpg`}
             />
@@ -613,17 +616,17 @@ export const ProductMax = () => {
                 >
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
                         <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
-                            <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
+                            <img src={headlineImg} alt="PostHog AI" className="w-full max-w-[604px]" />
 
                             <div>
                                 <img
                                     src={betaMobileImg}
-                                    alt="Max AI"
+                                    alt="PostHog AI"
                                     className="w-full mdlg:hidden max-w-[222px] mx-auto"
                                 />
                                 <img
                                     src={betaDesktopImg}
-                                    alt="Max AI"
+                                    alt="PostHog AI"
                                     className="w-full hidden mdlg:block max-w-[437px] mx-auto"
                                 />
 
@@ -693,12 +696,12 @@ export const ProductMax = () => {
                         }`}
                     >
                         <div className="bg-white border border-light rounded p-4 mb-12 font-serif">
-                            <h3 className="font-bold">Try Max AI beta</h3>
+                            <h3 className="font-bold">Try PostHog AI beta</h3>
                             <div className="mb-4">
                                 <p className="mb-2">
                                     <strong>1. New to PostHog?</strong> <br />
                                     <span className="inline-block pl-5">
-                                        Install with Max AI in 90 seconds or{' '}
+                                        Install with PostHog AI in 90 seconds or{' '}
                                         <CallToAction
                                             href="https://app.posthog.com/signup"
                                             type="custom"
@@ -718,7 +721,7 @@ export const ProductMax = () => {
                             <p className="mb-0">
                                 <strong>2. Already use PostHog?</strong> <br />
                                 <span className="inline-block pl-5">
-                                    Look for the Max button in the side panel in the app (top right)!
+                                    Look for the PostHog AI button in the side panel in the app (top right)!
                                 </span>
                             </p>
                         </div>
@@ -727,12 +730,12 @@ export const ProductMax = () => {
                     <div className="text-center mb-12">
                         <img
                             src={descriptionMobileImg}
-                            alt="Max AI"
+                            alt="PostHog AI"
                             className="w-full mdlg:hidden max-w-[412px] mx-auto"
                         />
                         <img
                             src={descriptionDesktopImg}
-                            alt="Max AI"
+                            alt="PostHog AI"
                             className="w-full hidden mdlg:block max-w-[619px] mx-auto"
                         />
                     </div>
@@ -740,9 +743,9 @@ export const ProductMax = () => {
                     <div className="mb-12">
                         <div className="max-w-3xl mx-auto p-4 mdlg:p-8 bg-white shadow-xl rounded-lg prose dark:text-primary font-serif">
                             <h3 className="font-bold">We're building a real product manager in your browser.</h3>
-                            <p>Max AI is so much more than just a chat interface for your data. </p>
+                            <p>PostHog AI is so much more than just a chat interface for your data. </p>
 
-                            <h3 className="font-bold">What Max can do today</h3>
+                            <h3 className="font-bold">What PostHog AI can do today</h3>
                             <ol className="space-y-1">
                                 <li>
                                     Answers product usage questions
@@ -781,40 +784,41 @@ export const ProductMax = () => {
                                 <li>Add PostHog's tracking code to your new project automatically</li>
                             </ol>
 
-                            <h3 className="font-bold">What Max doesn't do... yet!</h3>
+                            <h3 className="font-bold">What PostHog AI doesn't do... yet!</h3>
                             <p>
-                                Max works great for precise questions or requests. "How many companies signed up in the
-                                last month" will likely work well, "What should I build next" won't.
+                                PostHog AI works great for precise questions or requests. "How many companies signed up
+                                in the last month" will likely work well, "What should I build next" won't.
                             </p>
 
-                            <h3 className="font-bold">What's next for Max?</h3>
+                            <h3 className="font-bold">What's next for PostHog AI?</h3>
                             <p>
                                 Wider tool use across all our products. The whole shebang. Automatic feature flag use,
                                 finding important errors and so on.
                             </p>
                             <p>
-                                Deep research mode. Max will build a deep understanding of your customers and product to
-                                answer questions, pulling together context from all our tools and data – like an
-                                automatic PM or analyst.
+                                Deep research mode. PostHog AI will build a deep understanding of your customers and
+                                product to answer questions, pulling together context from all our tools and data – like
+                                an automatic PM or analyst.
                             </p>
                             <p>
-                                Automatic event and feature capture. Max will integrate with your codebase to detect and
-                                add event tracking to new features that we detect automatically.
+                                Automatic event and feature capture. PostHog AI will integrate with your codebase to
+                                detect and add event tracking to new features that we detect automatically.
                             </p>
                             <p>
                                 Feel free to{' '}
                                 <Link to="https://github.com/PostHog/posthog/issues" external>
                                     create a GitHub issue
                                 </Link>{' '}
-                                and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
+                                and we'll add new ideas to our roadmap when we're considering PostHog AI's future
+                                superpowers.
                             </p>
                         </div>
                     </div>
 
                     <div className="mb-12">
-                        <MaxQuestionInput
+                        <PostHogAIQuestionInput
                             className="bg-[#f5e2b1] border-[#F5E2B2] shadow-xl"
-                            placeholder="Ask Max anything about your product data..."
+                            placeholder="Ask PostHog AI anything about your product data..."
                         />
                     </div>
 
@@ -828,13 +832,13 @@ export const ProductMax = () => {
                                 <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
                                 <p className="mb-2">We have big free tiers on all our products.</p>
                                 <p>
-                                    <strong>Max is free during beta</strong> and doesn't cost anything extra. We will
-                                    charge something, but with a generous free tier, when he's out of beta.
+                                    <strong>PostHog AI is free during beta</strong> and doesn't cost anything extra. We
+                                    will charge something, but with a generous free tier, when it's out of beta.
                                 </p>
                             </div>
                             <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-16">
                                 <CloudinaryImage
-                                    alt="Max AI assistant"
+                                    alt="PostHog AI assistant"
                                     placeholder="blurred"
                                     className="w-full max-w-[250px]"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
@@ -844,7 +848,7 @@ export const ProductMax = () => {
 
                         <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                             <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
-                                <Plans showTitle={false} groupsToShow={['max_ai']} />
+                                <Plans showTitle={false} groupsToShow={['posthog_ai']} />
                             </div>
                         </div>
                     </section>
@@ -877,8 +881,8 @@ export const ProductMax = () => {
                                         You like alt-tabbing and copy-pasting to other tools, like ChatGPT or Claude
                                     </li>
                                     <li>
-                                        You'd like to talk with your assistant out loud (Max doesn't have voice mode
-                                        yet)
+                                        You'd like to talk with your assistant out loud (PostHog AI doesn't have voice
+                                        mode yet)
                                     </li>
                                     <li>You want to remake a pic in Studio Ghibli's style (ChatGPT is still best)</li>
                                 </ul>
@@ -897,7 +901,7 @@ export const ProductMax = () => {
                         </div>
 
                         <p className="text-center text-sm font-medium">
-                            Have questions about Max AI? <br className="md:hidden" />
+                            Have questions about PostHog AI? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
                             <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
@@ -909,7 +913,10 @@ export const ProductMax = () => {
                             Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                         </p>
                         <DocLinks
-                            menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'max ai')?.children || []}
+                            menu={
+                                docsMenu.children.find(({ name }) => name.toLowerCase() === 'posthog ai')?.children ||
+                                []
+                            }
                         />
                     </section>
 

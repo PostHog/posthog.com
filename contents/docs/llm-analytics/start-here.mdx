@@ -7,6 +7,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
 import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
+import OSButton from 'components/OSButton'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate LLM analytics!">
@@ -21,19 +22,21 @@ LLM analytics gives you x-ray vision into your LLM applications. You can track:
 
 - 🗣️ Every conversation (inputs, outputs, and tokens)
 - 🤖 Model performance (cost, latency and error rates)
-- 🔍 Full traces for when you need to go detective mode
+- 🔍 Full traces and sessions for when you need to go detective mode
 - 💰 How much each chat/user/organization is costing you
+- 🔗 Multi-conversation sessions across user visits
 
-  
+> **New to LLM observability?** See [core concepts](/docs/llm-analytics/basics) for a primer on events, tokens, and traces.
+
 The first step is to install a PostHog SDK to capture conversations, requests, and responses from an LLM provider.
 
 ### Platforms
 
 <LLMsInstallationPlatforms />
 
-<CallToAction type="primary" to="/docs/llm-analytics/installation">
+<OSButton variant="primary" asLink to="/docs/llm-analytics/installation">
 Install PostHog SDK
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -55,15 +58,15 @@ Install PostHog SDK
 <ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4" 
   alt="AI generation in-app view" 
-  autoPlay="true"
-  loop="true"
+  autoPlay
+  loop
 />
 
 PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
   
-<CallToAction type="primary" to="/docs/llm-analytics/generations">
+<OSButton variant="primary" asLink to="/docs/llm-analytics/generations">
   Learn about generations
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -82,9 +85,9 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
   classes="rounded"
 />
 
-  <CallToAction type="primary" to="/docs/llm-analytics/dashboard">
+  <OSButton variant="primary" asLink to="/docs/llm-analytics/dashboard">
     Analyze LLM performance
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -143,7 +146,7 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
 
   - No credit card required to start
   - First 100K LLM events per month are free with 30-day retention
-  - Above 100k we have usage-based pricing starting at $0.00006/event with discounts as volume increases
+  - Above 100k we have usage-based pricing at $0.00006/event
   - Set billing limits to avoid surprise charges
   - See our [pricing page](/pricing) for more up-to-date details
 
@@ -151,9 +154,9 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
 
 That's it! You're ready to start integrating.
 
-  <CallToAction type="primary" to="/docs/llm-analytics/installation">
+  <OSButton variant="primary" asLink to="/docs/llm-analytics/installation">
     Install LLM analytics
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 

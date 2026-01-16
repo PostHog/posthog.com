@@ -11,10 +11,11 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
+    IconFeatures,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
-import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -23,14 +24,11 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
-import { navigate } from 'gatsby'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 
 export default function TaskBarMenu() {
     const {
         windows,
-        bringToFront,
-        focusedWindow,
         openSearch,
         openSignIn,
         siteSettings,
@@ -191,6 +189,12 @@ export default function TaskBarMenu() {
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Feature matrix',
+                                    link: '/feature-matrix',
+                                    icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
                             ]
                           : []),
                       {
@@ -312,7 +316,7 @@ export default function TaskBarMenu() {
                         }
                     >
                         <div className="flex flex-col items-center gap-1">
-                            <p className="text-sm mb-0">Ask Max</p>
+                            <p className="text-sm mb-0">Ask PostHog AI</p>
                             <div className="flex items-center gap-1">
                                 <KeyboardShortcut text="Shift" size="sm" />
                                 <KeyboardShortcut text="?" size="sm" />

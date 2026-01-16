@@ -1,7 +1,8 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { graphql, useStaticQuery, navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconInfo, IconX, IconCrown } from '@posthog/icons'
+import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock } from '@posthog/icons'
+import dayjs from 'dayjs'
 import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -27,7 +28,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { Fieldset } from 'components/OSFieldset'
 import ZoomHover from 'components/ZoomHover'
 import Link from 'components/Link'
-import TeamPatch from 'components/TeamPatch'
 import Header from 'components/Team/Header'
 import Profile, { ProfileData } from 'components/Team/Profile'
 import Roadmap from 'components/Team/Roadmap'
@@ -38,8 +38,9 @@ import {
     StickerPineappleUnknown,
     StickerPineapple,
 } from 'components/Stickers/Index'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import TeamFeatures from 'components/TeamFeatures'
+import SpiritAnimal from 'components/Team/SpiritAnimal'
+import SmallTeam from 'components/SmallTeam'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -293,6 +294,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamMembers: team?.attributes?.profiles?.data || [],
             teamLeads: team?.attributes?.leadProfiles?.data || [],
             miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
+            spiritAnimal: team?.attributes?.spiritAnimal,
         },
         onSubmit: async ({
             name,
@@ -304,6 +306,7 @@ export default function TeamPage(props: TeamPageProps) {
             teamMembers,
             teamLeads,
             miniCrest,
+            spiritAnimal,
             ...other
         }) => {
             const jwt = await getJwt()
@@ -335,6 +338,7 @@ export default function TeamPage(props: TeamPageProps) {
                 name,
                 description,
                 tagline,
+                spiritAnimal,
                 teamImage: {
                     image: uploadedTeamImage
                         ? uploadedTeamImage.id
@@ -402,12 +406,14 @@ export default function TeamPage(props: TeamPageProps) {
 
     const handleTeamLead = (profileID: string, isTeamLead: boolean) => {
         if (isTeamLead) {
+            // Remove this person as team lead
             setFieldValue(
                 'teamLeads',
                 values.teamLeads.filter((teamLead: any) => teamLead.id !== profileID)
             )
         } else {
-            setFieldValue('teamLeads', [...values.teamLeads, { id: profileID }])
+            // Set this person as the only team lead (remove all others first)
+            setFieldValue('teamLeads', [{ id: profileID }])
         }
     }
 
@@ -459,10 +465,15 @@ export default function TeamPage(props: TeamPageProps) {
 
     const inProgress = teamData?.roadmaps?.filter((roadmap) => !roadmap.complete && roadmap.projectedCompletion)
 
+    const fifteenDaysAgo = dayjs().subtract(15, 'day')
+
     const [recentlyShipped] =
         teamData?.roadmaps
-            ?.filter((roadmap) => roadmap.complete)
-            .sort((a, b) => (new Date(a.dateCompleted).getTime() > new Date(b.dateCompleted).getTime() ? -1 : 1)) || []
+            ?.filter((roadmap) => {
+                if (!roadmap.complete || !roadmap.dateCompleted) return false
+                return dayjs(roadmap.dateCompleted).isAfter(fifteenDaysAgo)
+            })
+            .sort((a, b) => (dayjs(a.dateCompleted).isAfter(dayjs(b.dateCompleted)) ? -1 : 1)) || []
 
     const { updates } = useTeamUpdates({
         teamName: name,
@@ -475,7 +486,7 @@ export default function TeamPage(props: TeamPageProps) {
         },
     })
 
-    const hasUnderConsideration = underConsideration?.length > 0
+    const hasUnderConsideration = false
     const hasInProgress = inProgress?.length > 0
     const hasBody = !!body
     const heightToHedgehogs =
@@ -502,7 +513,22 @@ export default function TeamPage(props: TeamPageProps) {
     })
 
     const editButton = isModerator ? (
-        <>{!editing && <OSButton size="md" icon={<IconPencil />} onClick={() => setEditing(true)} />}</>
+        <>
+            {!editing && (
+                <OSButton
+                    size="md"
+                    tooltip={
+                        <>
+                            <IconShieldLock className="size-5 relative top-[-2px] inline-block text-secondary" /> Edit
+                            team details
+                        </>
+                    }
+                    tooltipDelay={0}
+                    icon={<IconPencil />}
+                    onClick={() => setEditing(true)}
+                />
+            )}
+        </>
     ) : null
 
     const editActions =
@@ -615,6 +641,12 @@ export default function TeamPage(props: TeamPageProps) {
 
                                 <TeamFeatures teamSlug={slug} />
 
+                                <SpiritAnimal
+                                    spiritAnimal={values.spiritAnimal}
+                                    editing={editing}
+                                    setFieldValue={setFieldValue}
+                                />
+
                                 <div>
                                     {teamEmojis?.length > 0 && (
                                         <Fieldset legend="Custom emojis">
@@ -695,6 +727,7 @@ export default function TeamPage(props: TeamPageProps) {
                                                       startDate={profile.attributes.startDate}
                                                       isTeamLead={isTeamLead(id)}
                                                       teams={teams}
+                                                      viewingOwnTeam={true}
                                                   />
                                                   {editing && (
                                                       <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
@@ -705,19 +738,28 @@ export default function TeamPage(props: TeamPageProps) {
                                                           >
                                                               <IconX className="w-4 h-4" />
                                                           </button>
-                                                          <button
-                                                              onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center ${
-                                                                  isTeamLead(id)
-                                                                      ? 'bg-yellow text-white'
-                                                                      : 'bg-accent text-black dark:text-white'
-                                                              }`}
-                                                              title={
-                                                                  isTeamLead(id) ? 'Remove team lead' : 'Make team lead'
+                                                          <Tooltip
+                                                              trigger={
+                                                                  <button
+                                                                      onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                                      className={`w-7 h-7 rounded-full border border-input flex items-center justify-center ${
+                                                                          isTeamLead(id)
+                                                                              ? 'bg-yellow text-white'
+                                                                              : 'bg-accent text-black dark:text-white'
+                                                                      }`}
+                                                                  >
+                                                                      <IconCrown className="w-4 h-4" />
+                                                                  </button>
                                                               }
+                                                              delay={0}
                                                           >
-                                                              <IconCrown className="w-4 h-4" />
-                                                          </button>
+                                                              <>
+                                                                  <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                                  {isTeamLead(id)
+                                                                      ? 'Remove as team lead'
+                                                                      : 'Set as team lead'}
+                                                              </>
+                                                          </Tooltip>
                                                       </div>
                                                   )}
                                               </li>
@@ -782,7 +824,7 @@ export default function TeamPage(props: TeamPageProps) {
                 {objectives && (
                     <>
                         <h2>Goals</h2>
-                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}>
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </>
@@ -791,7 +833,7 @@ export default function TeamPage(props: TeamPageProps) {
                 {body && (
                     <>
                         <h2>Handbook</h2>
-                        <MDXProvider components={{ PrivateLink }}>
+                        <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </>

@@ -15,7 +15,7 @@ tags:
 
 **Estimated reading time:** 5 minutes ☕
 
-For some users, cost is a big concern. Too many events can cause unexpected costs when first trying a product analytics platform like PostHog. We want to make sure we are providing value to you as a customer, and if that means capturing fewer events, we’ll do it.
+For some users, cost is a big concern. Too many events can cause unexpected costs when first trying a developer platform like PostHog. We want to make sure we are providing value to you as a customer, and if that means capturing fewer events, we’ll do it.
 
 For others, PostHog can overwhelm them with events. We try our best to help you avoid this by providing filtering tools for [insights](/manual/insights), [internal users](/tutorials/filter-internal-users), and [privacy](/tutorials/property-filter). We recommend having as much data as possible, because you never know what you need, but if you are feeling overwhelmed, there are solutions.
 

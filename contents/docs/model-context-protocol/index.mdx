@@ -9,10 +9,10 @@ import WindsurfSnippet from "./_snippets/windsurf.mdx"
 import VSCodeSnippet from "./_snippets/vscode.mdx"
 import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
 import ZedSnippet from "./_snippets/zed.mdx"
+import ReplitSnippet from "./_snippets/replit.mdx"
 import MCPTools from '../../../src/components/Docs/MCPTools'
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
-
 
 ## Quick install using the PostHog wizard
 
@@ -26,17 +26,15 @@ We're working on adding more supported tools to the wizard. If you're using anot
 
 ## Manual install
 
-Start by getting a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
+Add the MCP configuration to your client. When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
 
-This lets you add the MCP configuration to any desktop client you use, such as Cursor, Windsurf, or Claude Desktop.
+<CalloutBox icon="IconFlag" title="EU region users" type="fyi">
 
-<CalloutBox icon="IconInfo" title="Don't forget to use your personal API key" type="action">
-
-In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER</code> environment variable placeholder with the personal API key you obtained in the first step.
+If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For example: `https://mcp.posthog.com/mcp?region=eu`
 
 </CalloutBox>
 
-<Tab.Group tabs={['cursor', 'claude-desktop', 'windsurf', 'vscode', 'claude-code', 'zed']}>
+<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit']}>
     <Tab.List>
         <Tab>Claude Code</Tab>
         <Tab>Claude Desktop</Tab>
@@ -44,6 +42,7 @@ In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER<
         <Tab>Windsurf</Tab>
         <Tab>VS Code</Tab>
         <Tab>Zed</Tab>
+        <Tab>Replit</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -64,20 +63,37 @@ In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER<
         <Tab.Panel>
             <ZedSnippet />
         </Tab.Panel>
+        <Tab.Panel>
+            <ReplitSnippet />
+        </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
 
+Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
+
 <details>
 
-<summary>Security considerations</summary>
+<summary>Using an API key instead of OAuth?</summary>
 
-We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
+If your MCP client doesn't support OAuth, you can authenticate manually:
 
-- **Use the right API key permissions:** Use the provided **MCP Server** preset in the personal API key creator. If you use the MCP in an agentic workflow on production data, scope down the API key's permissions to only the permissions you want it to use. This prevents the AI from making unintended changes to your PostHog configuration or data.
+1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset (this scopes access to a specific project)
+2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
 
-- **Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+Example for Cursor (add to `.cursor/mcp.json`):
 
-- **Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
 
 </details>
 
@@ -90,6 +106,11 @@ Here's a list of tools we provide:
 
 <MCPTools />
 
+## Prompts and resources
+
+The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
+
+Currently we support Next.js, with more frameworks in progress.
 
 ## Next Steps
 

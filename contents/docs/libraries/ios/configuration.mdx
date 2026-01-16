@@ -1,0 +1,240 @@
+---
+title: iOS SDK configuration
+sidebarTitle: iOS
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-ios'
+platformLogo: ios
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
+  surveys: true
+  llmAnalytics: false
+---
+
+import iosAutocaptureConfiguration from './_snippets/autocapture.mdx'
+
+## Autocapture configuration
+
+You can enable or disable autocapture through the `PostHogConfig` object.
+
+<iosAutocaptureConfiguration />
+
+## Flush configuration
+
+The iOS SDK uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
+
+You can set the number of events in the configuration that should queue before flushing.
+
+Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
+
+```swift
+configuration.flushAt = 1
+```
+
+You can also manually flush the queue:
+
+```swift
+PostHogSDK.shared.capture("logged_out")
+PostHogSDK.shared.flush()
+```
+
+## Amending, dropping or sampling events
+
+Since version 3.28.0, you can provide a `BeforeSendBlock` function when initializing the SDK to amend, drop or sample events before they are sent to PostHog. 
+
+> **⚠️ Note:** This replaces the deprecated `propertiesSanitizer` option and provides more flexibility in modifying events. You can achieve the same functionality as `propertiesSanitizer` by using a `BeforeSendBlock` that mutates the event's properties in place. 
+
+> **🚨 Warning:** Amending and sampling events is advanced functionality that requires careful implementation. Core PostHog features may require 100% of unmodified events to function properly. We recommend only modifying or sampling your own custom events if possible, and preserving all PostHog internal events in their original form.
+
+### Redacting information in events
+
+`BeforeSendBlock` gives you one place to edit or redact information before it is sent to PostHog. For example:
+
+<details>
+<summary>Redact URLs in event properties</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+
+config.setBeforeSend { event in
+    // Redact URLs
+    if let url = event.properties["url"] as? String {
+        event.properties["url"] = url.map { _ in "*" }.joined()
+    }
+    return event
+}
+```
+</details>
+
+<details>
+<summary>Redact sensitive information from event properties</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+
+config.setBeforeSend { event in
+    // Redact sensitive information
+    if let email = event.properties["email"] as? String {
+        event.properties["email"] = email.map { _ in "*" }.joined()
+    }
+    
+    return event
+}
+```
+
+</details>
+
+<details>
+<summary>Drop events by event name</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+
+config.setBeforeSend { event in
+    // Drop all events named "Stale Event"
+    if event.event == "Stale Event" {
+        return nil
+    }
+    return event
+}
+```
+
+</details>
+
+### Sampling events
+
+Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
+
+<details>
+<summary>Sample events by event name</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+
+config.setBeforeSend { event in
+    // Sample 10% of Sampled Event events
+    if event.event == "Sampled Event" {
+        if Double.random(in: 0...1) < 0.1 {
+            event.properties["$sample_type"] = ["sampleByEvent"]
+            event.properties["$sample_threshold"] = 0.1
+            event.properties["$sampled_events"] = ["Sampled Event"]
+            return event
+        }
+        return nil
+    }
+    return event
+}
+```
+
+</details>
+
+### Chaining multiple BeforeSendBlocks
+
+You can provide an array of `BeforeSendBlock` functions to be called one after the other:
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+
+config.setBeforeSend(
+    // First block: Drop all events named "Stale Event"
+    { event in
+        if event.event == "Stale Event" {
+            return nil
+        }
+        return event
+    },
+    // Second block: Redact sensitive information
+    { event in
+        if let email = event.properties["email"] as? String {
+            event.properties["email"] = email.map { _ in "*" }.joined()
+        }
+        return event
+    }
+)
+```
+
+**Note:** When chaining beforeSend blocks, order is important. The first block is executed first and the mutated event is passed along to the second block, and so on. If at any point in the chain the event is dropped, any subsequent blocks will not be executed.
+
+## Setting up app groups
+
+1. **Configure App Groups**: Set up an [App Group](https://developer.apple.com/documentation/xcode/configuring-app-groups) in Xcode for your main app and extension targets
+2. **Configure PostHog**: Use the same App Group identifier in all targets:
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+config.appGroupIdentifier = "group.com.yourcompany.yourapp"
+PostHogSDK.shared.setup(config)
+```
+
+## Method swizzling
+
+Method swizzling is a technique that enables the SDK to intercept and modify method calls at runtime to provide advanced features like screen view tracking, element interactions, session replay, surveys, and more.
+
+Method swizzling is enabled by default, but can be disabled by setting the relevant config option to `false` in the `PostHogConfig` object:
+
+| Feature                        | Description                                                                           | Config option                    |
+| ------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------- |
+| Screen view tracking           | Automatically captures when view controllers are presented                            | `config.captureScreenViews`      |
+| Element interactions           | Automatically tracks user interactions with UI elements                               | `config.captureElementInteractions` |
+| Session replay                 | Records user sessions                                                                 | `config.sessionReplay`           |
+| Surveys                        | Displays surveys at appropriate times                                                 | `config.surveys`                 |
+| Advanced metrics tracking      | Provides more precise session ID calculation and rotation by detecting user activity and idleness | —                          |
+
+
+### Disabling all method swizzling
+
+Since version 3.34.0, you can opt out of all swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+config.enableSwizzling = false
+PostHogSDK.shared.setup(config)
+```
+
+> **Note:** When method swizzling is disabled, features that depend on it will not work even if they are individually enabled in the config. For example, if you set `config.sessionReplay = true` and `config.enableSwizzling = false`, session replay will **not** be enabled. 
+
+### Session metrics management 
+
+Method swizzling is particularly important for accurate [session metrics tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
+
+With swizzling disabled, the SDK only uses application open/backgrounded events to detect user activity, which can lead to a sub-optimal session calculation. 
+
+## Custom keyboard extensions
+
+Custom keyboard extensions have stricter security rules than other extension types. To use PostHog in a custom keyboard, the keyboard must have [Open Access permission](https://developer.apple.com/documentation/uikit/configuring-open-access-for-a-custom-keyboard) enabled. This permission is required for network requests and write access to shared containers.
+
+Users must explicitly grant Open Access in **Settings > General > Keyboard > Keyboards > [Your Keyboard] > Allow Full Access**.
+
+## All configuration options
+
+The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/files?new_files_changed=true#r2480032424:~:text=gonna%20link%20to-,config%20object,-in%20posthog%20for) contains several other settings you can toggle:
+
+| Attribute | Description |
+|-----------|-------------|
+| `flushAt`<br/><br/>**Type:** Integer<br/>**Default:** `20` | The number of queued events that the posthog client should flush at. Setting this to `1` will not queue any events and will use more battery. |
+| `flushIntervalSeconds`<br/><br/>**Type:** Integer<br/>**Default:** `30` | The amount of time to wait before each tick of the flush timer. Smaller values will make events delivered in a more real-time manner and also use more battery. A value smaller than 10 seconds will seriously degrade overall performance. |
+| `maxQueueSize`<br/><br/>**Type:** Integer<br/>**Default:** `1000` | The maximum number of items to queue before starting to drop old ones. This should be a value greater than zero, the behaviour is undefined otherwise. |
+| `maxBatchSize`<br/><br/>**Type:** Integer<br/>**Default:** `50` | Number of maximum events in a batch call. |
+| `captureApplicationLifecycleEvents`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Whether the posthog client should automatically make a capture call for application lifecycle events, such as "Application Installed", "Application Updated" and "Application Opened". |
+| `captureScreenViews`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Whether the posthog client should automatically make a screen call when a view controller is added to a view hierarchy. Because the underlying implementation uses method swizzling, we recommend initializing the posthog client as early as possible (before any screens are displayed), ideally during the Application delegate's applicationDidFinishLaunching method. |
+| `enableSwizzling`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Enable method swizzling for SDK functionality that depends on it. When disabled, functionality that requires swizzling (like autocapture, screen views, session replay, surveys) will not be installed. |
+| `captureElementInteractions`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | (UIKit only) Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen. |
+| `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Send a `$feature_flag_called` event when a feature flag is used automatically. |
+| `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Preload feature flags automatically. |
+| `evaluationEnvironments`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. |
+| `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Logs the SDK messages into Logcat. |
+| `optOut`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevents capturing any data if enabled. |
+| `getAnonymousId`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for modification of the default mechanism for generating anonymous id (which as of now is just random UUID v7). |
+| `dataMode`<br/><br/>**Type:** Enum<br/>**Default:** `.any` | Allows to send your data only if the data mode matches your configuration such as wifi only, cellular only or any. |
+| `personProfiles`<br/><br/>**Type:** Enum<br/>**Default:** `.identifiedOnly` | Determines the behavior for processing user profiles. |
+| `sessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Enable Recording of Session Replays. |
+| `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Session Replay configuration. https://posthog.com/docs/session-replay/installation for more details |
+| `appGroupIdentifier`<br/><br/>**Type:** String<br/>**Default:** `nil` | The identifier of the App Group that should be used to store shared analytics data. PostHog will try to get the physical location of the App Group's shared container, otherwise fallback to the default location. |
+| `reuseAnonymousId`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Whether the SDK should reuse the anonymous Id between user changes. When enabled, a single Id will be used for all anonymous users on this device. |
+| `surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Enable Surveys. |
+| `setBeforeSend`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for amending, sampling, or dropping events before they are sent to PostHog. |

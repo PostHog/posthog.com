@@ -1,0 +1,195 @@
+export const plausible = {
+    name: 'Plausible',
+    key: 'plausible',
+    assets: {
+        icon: '/images/competitors/plausible.svg',
+        comparisonArticle: '/blog/posthog-vs-plausible',
+    },
+    products: {
+        web_analytics: {
+            available: true,
+            features: {
+                advertising_analytics: false,
+                bounce_rate_tracking: false,
+                bounce_rate: true,
+                breakdown_by_device_and_browser: false,
+                breakdown_by_geoip: false,
+                clickmaps: false,
+                conversions: true,
+                cookieless_tracking: true,
+                custom_channel_types: false,
+                entry_exit_paths: true,
+                first_party_cookies: false,
+                heatmaps: false,
+                hipaa_compliance: false,
+                integration_with_feature_flags: false,
+                integration_with_session_replay: false,
+                integration_with_surveys: false,
+                migration: false,
+                movement_maps: false,
+                open_source: false,
+                outbound_clicks: true,
+                pageviews: true,
+                pre_configured_dashboards: false,
+                real_time_reporting: false,
+                revenue_tracking: false,
+                search_tools: 'Keywords',
+                script_size: '<1 kB',
+                session_and_duration_tracking: false,
+                sessions: true,
+                snippet_install: true,
+                traffic_breakdown: true,
+                utm_tracking: true,
+                visitor_and_view_tracking: false,
+                web_vitals_reporting: false,
+                web_vitals: false,
+            },
+        },
+        product_analytics: {
+            available: false,
+            features: {
+                advertising_analytics: false,
+                autocapture: 'Pageviews',
+                cohorts: false,
+                custom_events: true,
+                custom_properties: 'Events only',
+                monetization_analytics: false,
+                predictive_insights: false,
+                real_time_view: false,
+                toolbar: false,
+                user_profiles: false,
+                trends: {
+                    available: false,
+                    features: {},
+                },
+                funnels: {
+                    available: 'Limited',
+                    features: {
+                        correlation_analysis: false,
+                        conversion_funnels: true,
+                    },
+                },
+                retention: {
+                    available: false,
+                    features: {},
+                },
+                user_paths: {
+                    available: false,
+                    features: {},
+                },
+                lifecycle: {
+                    available: false,
+                    features: {},
+                },
+                stickiness: {
+                    available: false,
+                    features: {},
+                },
+                group_analytics: {
+                    available: false,
+                    features: {},
+                },
+                insights: {
+                    available: false,
+                    features: {
+                        ai_insight_builder: false,
+                        formula_mode: false,
+                        ready_made_insight_types: false,
+                        sampling: false,
+                        sql_editor: false,
+                    },
+                },
+            },
+        },
+        dashboards: {
+            available: true,
+            features: {
+                custom_dashboards: false,
+            },
+        },
+        cdp: {
+            features: {
+                realtime_streaming: '',
+            },
+        },
+        data_warehouse: {
+            available: false,
+            features: {
+                batch_exports: false,
+                warehouse_sources: false,
+            },
+        },
+        heatmaps: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        surveys: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+    },
+    platform: {
+        analytics_integration: {
+            built_in_analytics: false,
+        },
+        deployment: {
+            eu_hosting: true,
+            open_source: true,
+            reverse_proxy: true,
+            self_host: false,
+        },
+        developer: {
+            api: 'Partial',
+            mobile_sdks: false,
+            server_side_sdks: false,
+            sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
+        },
+        integrations: {
+            csv_exports: true,
+            datadog: false,
+            exports: false,
+            email_reports: true,
+            google_search_console: true,
+            hubspot: false,
+            sentry: false,
+            slack: 'Reports, anomalies',
+            stripe: false,
+            warehouse_import: false,
+            zapier: false,
+            zendesk: false,
+        },
+        pricing: {
+            free_tier: false,
+            self_serve: 'Trial only',
+            transparent_pricing: false,
+            usage_based_pricing: false,
+        },
+        security: {
+            bot_blocking: true,
+            cookieless_tracking: true,
+            data_anonymization: true,
+            data_retention: '3 years',
+            gdpr_ready: true,
+            hipaa_ready: false,
+            reverse_proxy: true,
+            saml_sso: false,
+            soc2_certified: false,
+            two_factor_auth: true,
+        },
+    },
+    pricing: {
+        model: 'Usage-based subscription',
+    },
+}

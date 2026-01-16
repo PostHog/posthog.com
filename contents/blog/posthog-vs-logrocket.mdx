@@ -6,21 +6,17 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg
 featuredImageType: full
 author:
-  - joe-martin
+    - joe-martin
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: PostHog vs LogRocket in-depth tool comparison
-  metaDescription: Looking for the best product analytics and session replay tool? Compare PostHog vs LogRocket on analytics, feature flags, and more to find the right fit.
+    metaTitle: PostHog vs LogRocket in-depth tool comparison
+    metaDescription: Looking for the best product analytics and session replay tool? Compare PostHog vs LogRocket on analytics, feature flags, and more to find the right fit.
 ---
-
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonHeader } from 'components/ComparisonTable/header'
-import { ComparisonRow } from 'components/ComparisonTable/row'
 
 Want to know how PostHog and LogRocket compare? If you remember nothing else, remember these two things:
 
@@ -32,7 +28,7 @@ Want to know how PostHog and LogRocket compare? If you remember nothing else, re
 
 ### 1. PostHog replaces multiple tools
 
-LogRocket is a narrow tool. It does one thing – and it does it well. PostHog includes many of the same tools, such as session replay, [error tracking](/docs/error-tracking), and console logs, but augments them with powerful product and data tools, such as product analytics, feature flags, A/B testing, and surveys. It's everything you need to both squash bugs _and_ understand every aspect of user behavior.
+LogRocket is a narrow tool. It does one thing – and it does it well. PostHog includes many of the same tools, such as session replay, [error tracking](/docs/error-tracking), and console logs, but augments them with powerful dev tools, such as product analytics, feature flags, A/B testing, and surveys. It's everything you need to both squash bugs _and_ understand every aspect of user behavior.
 
 ### 2. PostHog is open source and transparent
 
@@ -44,17 +40,20 @@ We ship weirdly fast. We update [our changelog](/changelog) every week and often
 
 ## Comparing PostHog and LogRocket
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
-  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregate traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Ask users for qualitative feedback and gather responses" />
-  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Test changes and analyze impact" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Track where users click" />
-  <ComparisonRow column1={true} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'surveys',
+        'experiments',
+        'heatmaps',
+        'cdp',
+        'platform.deployment.open_source',
+    ]}
+/>
 
 -   **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
 
@@ -62,21 +61,24 @@ We ship weirdly fast. We update [our changelog](/changelog) every week and often
 
 ### Product analytics
 
-While LogRocket offers some product analytics features, it isn’t primarily intended as an analytics platform and lacks many things product managers and engineers require. PostHog is a more capable product analytics platform, offering advanced features such as correlation analysis, custom formulas, and a flexible SQL query editor.
+While LogRocket offers some product analytics features, it isn’t primarily intended as a product analytics tool and lacks many things product managers and engineers require. PostHog is a more capable product analytics app, offering advanced features such as correlation analysis, custom formulas, and a flexible SQL query editor.
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
-  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
-  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Understand conversion between events, pages" />
-  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-  <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
-  <ComparisonRow column1={true} column2={true} feature="Retention" description="Analyze user and revenue retention" />
-  <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
-  <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
-  <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Understand how organizations use your product" />
-  <ComparisonRow column1={true} column2={false} feature="Formulas" description="Use custom formulas to calculate unique insights" />
-  <ComparisonRow column1={true} column2={false} feature="SQL query editor" description="Write your own queries in SQL" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        'product_analytics.trends',
+        'dashboards',
+        'product_analytics.funnels',
+        'product_analytics.features.cohorts',
+        'product_analytics.user_paths',
+        'product_analytics.retention',
+        'web_analytics.features.utm_tracking',
+        'product_analytics.funnels.features.correlation_analysis',
+        'product_analytics.group_analytics',
+        'product_analytics.insights.features.formula_mode',
+        'product_analytics.insights.features.sql_editor',
+    ]}
+/>
 
 -   **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
 
@@ -86,98 +88,118 @@ While LogRocket offers some product analytics features, it isn’t primarily int
 
 LogRocket and PostHog both offer robust, full-featured [session replay tools](/blog/best-open-source-session-replay-tools) that outperform even dedicated tools, such as Hotjar.
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1={true} column2={true} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
-  <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2={true} feature="Console logs" description="Capture extra content from a users’ browser environment" />
-  <ComparisonRow column1={true} column2={true} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
-  <ComparisonRow column1={true} column2={true} feature="Performance monitoring" description="Track network events within a session" />
-  <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
-  <ComparisonRow column1={true} column2={true} feature="Conditional recording" description="Only capture the sessions you want" />
-  <ComparisonRow column1={true} column2={true} feature="Export recordings" description="Take recordings in/out of the platform" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        'session_replay.platform_support.features.web_app_recordings',
+        'session_replay.platform_support.features.mobile_app_recordings',
+        'session_replay.identity.features.identity_detection',
+        'session_replay.analysis.features.console_logs',
+        'session_replay.organization.features.playlists',
+        'session_replay.analysis.features.performance_monitoring',
+        'session_replay.privacy.features.privacy_masking',
+        'session_replay.targeting.features.conditional_recording',
+        'session_replay.export.features.export_to_json',
+    ]}
+/>
 
-- **Mobile app recordings:** Session replay for mobile apps is currently under development – see [our GitHub mega issue](https://github.com/PostHog/posthog/issues/13267) for more.
+-   **Mobile app recordings:** Session replay for mobile apps is currently under development – see [our GitHub mega issue](https://github.com/PostHog/posthog/issues/13267) for more.
 
 ### Heatmaps and click tracking
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize cursor movements on a page" />
-  <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="Visualize where users click on a page" />
-  <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="Visualize how far down a page users scroll" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={['heatmaps.features.heatmaps', 'heatmaps.features.clickmaps', 'heatmaps.features.scrollmaps']}
+/>
 
 ### Tracking & SDKs
 
 **Tl;dr:** Both support a broad range of tracking options and libraries, and manual event instrumentation, as well as autocapture.
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Track manually instrumented events" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
-  <ComparisonRow column1={true} column2={true} feature="Combined events" description="Track related events as a single trackable action or behavior" />
-  <ComparisonRow column1={true} column2={true} feature="Reverse proxy available" description="Send events from your own domain to capture more data" />
-  <ComparisonRow column1={true} column2={true} feature="Cross-domain tracking" description="Track users across domains and sub-domains" />
-  <ComparisonRow column1={true} column2={true} feature="Server-side tracking" description="Send events from your server" />
-  <ComparisonRow column1={true} column2={true} feature="Capture API" description="Send events through an API" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        'product_analytics.features.custom_events',
+        'product_analytics.features.autocapture',
+        'product_analytics.features.actions',
+        'platform.deployment.reverse_proxy',
+        'platform.developer.cross_domain_tracking',
+        { label: 'Server-side tracking', description: 'Send events from your server', values: [true, true] },
+        { label: 'Capture API', description: 'Send events through an API', values: [true, true] },
+    ]}
+/>
 
 ### Library support
 
 PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all our features. See [our client library documentation](/docs/getting-started/install?tab=snippet) for more information.
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="JavaScript" />
-  <ComparisonRow column1={true} column2={true} feature="React Native" />
-  <ComparisonRow column1={true} column2={true} feature="React" />
-  <ComparisonRow column1={true} column2={false} feature="Flutter" />
-  <ComparisonRow column1={true} column2={true} feature="iOS" />
-  <ComparisonRow column1={true} column2={true} feature="Android" />
-  <ComparisonRow column1={true} column2={false} feature="Ruby" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        { label: 'Web' },
+        'platform.libraries.features.javascript',
+        'platform.libraries.features.react',
+        'platform.libraries.features.ruby',
+        { label: 'Mobile' },
+        'platform.libraries.features.android',
+        'platform.libraries.features.ios',
+        'platform.libraries.features.flutter',
+        'platform.libraries.features.react_native',
+    ]}
+/>
 
 ### Data pipelines
 
 [PostHog offers more than 50 integrations and apps](/cdp), while [LogRocket offers slightly fewer](https://logrocket.com/features/integrations). As an open-source application, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
 
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="Export API" description="Export data via API" />
-  <ComparisonRow column1={true} column2={true} feature="Import API" description="Import data via API" />
-  <ComparisonRow column1={true} column2={false} feature="Amazon Redshift" description="Export data to Redshift" />
-  <ComparisonRow column1={true} column2={false} feature="Amazon S3" description="Export data to S3 bucket" />
-  <ComparisonRow column1={true} column2={false} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
-  <ComparisonRow column1={true} column2={false} feature="Google Cloud Storage" description="Export data to GCS" />
-  <ComparisonRow column1={true} column2={false} feature="Snowflake" description="Export data to Snowflake database" />
-  <ComparisonRow column1={true} column2={false} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
-  <ComparisonRow column1={true} column2={false} feature="RudderStack" description="Sync event and person data" />
-  <ComparisonRow column1={true} column2={false} feature="Airbyte" description="Extract and load data to external platforms" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        { label: 'Import API', description: 'Import data via API', values: [true, true] },
+        { label: 'Export API', description: 'Export data via API', values: [true, true] },
+        'platform.integrations.redshift',
+        'platform.integrations.s3',
+        'platform.integrations.azure_blob',
+        'platform.integrations.gcs',
+        'platform.integrations.snowflake',
+        'platform.integrations.bigquery',
+        'platform.integrations.rudderstack',
+        'platform.integrations.airbyte',
+    ]}
+/>
 
-### Popular integrations 
+### Popular integrations
 
 Below, we've listed a few of the most popular integrations used across PostHog and LogRocket. See our [app directory](/cdp) for a full list.
 
-<ComparisonTable column1="LogRocket" column2="PostHog">
-  <ComparisonRow column1={false} column2={true} feature="Hubspot" description="Sync event and person data" />
-  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync event and person data" />
-  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Export events for use in Zaps" />
-  <ComparisonRow column1={true} column2={true} feature="Stripe" description="Sync customer and invoice data" />
-  <ComparisonRow column1={true} column2={true} feature="Intercom" description="Extract and load data to external platforms" />
-  <ComparisonRow column1={true} column2={true} feature="Customer.io" description="Sync data between platforms" />
-  <ComparisonRow column1={true} column2={true} feature="Sentry" description="Ingest Sentry errors for analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['logrocket', 'posthog']}
+    rows={[
+        'platform.integrations.hubspot',
+        'platform.integrations.salesforce',
+        'platform.integrations.zapier',
+        'platform.integrations.stripe',
+        'platform.integrations.intercom',
+        'platform.integrations.customer_io',
+        'platform.integrations.sentry',
+        'platform.integrations.segment',
+    ]}
+/>
 
 ### Compliance
-<ComparisonTable column1="PostHog" column2="LogRocket">
-  <ComparisonRow column1={true} column2={true} feature="GDPR ready" />
-  <ComparisonRow column1={true} column2="Self-host only" feature="HIPAA ready" />
-  <ComparisonRow column1={true} column2={true} feature="Data anonymization" />
-  <ComparisonRow column1={true} column2={false} feature="Cookie-less tracking option" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
-  <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
-  <ComparisonRow column1={true} column2={true} feature="2FA available" />
-</ComparisonTable>
+
+<ProductComparisonTable
+    competitors={['posthog', 'logrocket']}
+    rows={[
+        'platform.security.gdpr_ready',
+        'platform.security.hipaa_ready',
+        'platform.security.data_anonymization',
+        'platform.security.cookieless_tracking',
+        'platform.security.soc2_certified',
+        'platform.security.saml_sso',
+        'platform.security.two_factor_auth',
+    ]}
+/>
 
 ## Frequently asked questions
 
@@ -187,15 +209,15 @@ Got another question? You can [ask the PostHog team anything you want](/question
 
 PostHog has transparent pricing based on usage with a generous free tier:
 
-|                       | **Free usage per month** 
-|-----------------------|--------------------------
-| **Product analytics** | 1 million events        
-| **Session replay**    | 5,000 recordings         
-| **Feature flags**     | 1 million API requests
-| **A/B testing**       | 1 million API requests  
-| **Surveys**           | 1500 responses
+|                       | **Free usage per month** |
+| --------------------- | ------------------------ |
+| **Product analytics** | 1 million events         |
+| **Session replay**    | 5,000 recordings         |
+| **Feature flags**     | 1 million API requests   |
+| **A/B testing**       | 1 million API requests   |
+| **Surveys**           | 1500 responses           |
 
-We charge progressively less the more you use once you exceed your monthly free allowance. Volume, non-profit and [startup discounts](/startups) are also available. 
+We charge progressively less the more you use once you exceed your monthly free allowance. Volume, non-profit and [startup discounts](/startups) are also available.
 
 ### How can I estimate my usage?
 
@@ -212,3 +234,7 @@ We recommend all users deploy a reverse proxy, which enables you to send events 
 ### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
 Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+
+### Where can I learn more about session replay tools beyond PostHog and LogRocket?
+
+If you want a broader comparison across FullStory, Hotjar, OpenReplay, Replay.io, and more, check out our full guide to the [best session replay tools for developers](/blog/best-session-replay-tools).

@@ -14,6 +14,42 @@ The self-hosted version is the same exact product we run on PostHog Cloud, thoug
 
 Because we don't manage self-hosted instances or provide paid support plans for them, [we don't offer any sort of guarantees](/docs/self-host/open-source/disclaimer) around it working in certain ways on your infrastructure, and you assume all responsibility and risk for your use of the product and the stack.
 
+## TLDR;
+
+There are warnings and useful information below, so we recommend reading the whole document... but there are two commands for interacting with the hobby deploy
+
+<CalloutBox icon="IconStarFilled" title="[BETA] PostHog Self Host TUI" type="fyi">
+
+We're exploring a new version for our self-hosting deployment via a TUI binary. This is a trial and will change or might be removed based on your feedback.
+
+If you wanna opt-in, you can download and run the binary from our GitHub.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/posthog/posthog/rafa/hobby-deployment-goes-woke/bin/posthog-hobby -o hobby-installer
+chmod +x hobby-installer
+./hobby-installer
+```
+
+If you wanna run this programmatically, you can turn CI mode on and run it with an extra `--domain` flag to specify where you're hosting it on.
+
+```bash
+./hobby-installer --ci --domain=posthog.yourdomain.com
+```
+
+</CalloutBox>
+
+### Installing
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/deploy-hobby)"
+```
+
+### Upgrading
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
+```
+
 ## Should I use self-hosted PostHog or PostHog Cloud?
 
 Good question! We've found that PostHog Cloud is far and away the best experience for the vast majority of our users. However, some people still want to self-host, and we're here for that! Here's a quick flow chart to help you understand if self-hosting PostHog is for you:
@@ -109,7 +145,7 @@ If you need to customize anything, you can take a look at the [full list of envi
 After making any changes, simply restart the stack with `docker-compose`.
 
 Additionally, if you would like to run a different version of PostHog, you can change the tag for the web, worker, and plugins services.
-Check out [here](https://hub.docker.com/r/posthog/posthog) for a list of all available tags.
+Check out the [PostHog Docker Hub repository](https://hub.docker.com/r/posthog/posthog) for a list of all available tags.
 
 ## Troubleshooting
 

@@ -85,11 +85,15 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - Payment Method to `Credit Card`.
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
-    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
+    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”)
 
-    with
+    with either
 
-    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
+    > PostHog Cloud License Terms entered into by and between the Parties on or about the date hereof and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
+
+    or, if the Customer insists on including the exact date of the MSA to remove ambiguity,
+
+   > PostHog Cloud License Terms entered into by and between the Parties on or about [INSERT DATE OF EXECUTION OF MSA] and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “**Agreement**”).
 
 10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
@@ -122,18 +126,18 @@ Once you the signed form in PandaDoc is marked as complete and the Salesforce op
 
 ## Master Services Agreement (MSA)
 
-Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. We don't have this templated in PandaDoc yet as it's so infrequent.
+Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. 
 
 1. Download a copy of the [PostHog Cloud MSA](https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit#heading=h.y38xfjgcg4xm) as a Word Document (legal teams prefer this format) and share it with your Customer contact.
-2. They may want to propose changes (also known as 'redlines'). Work with Fraser to get these agreed.
+2. They may want to propose changes (also known as 'redlines'). Work with Hector or Fraser to get these agreed.
 3. Create a new document in PandaDoc, you can choose to either import from Google Drive or upload from your local machine. This should be the clean, non-redlined document as agreed by both parties.
 4. Change the name to be `PostHog Cloud MSA - CUSTOMER LEGAL NAME`.
-5. Add the Client and PostHog (fraser@posthog.com) as roles.
+5. Add the Client and your name and PostHog email as roles.
 6. Add a Signature, Name and Title field for both PostHog and the Customer.
 7. Check the signing order (Client, then PostHog normally).
-8. Send for signature.
+8. Send for signature - so long as any proposed changes have been reviewed and approved by Hector or Fraser, you are free to sign on behalf of PostHog
 
-Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo [here](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask Fraser.
+Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo in the [company-internal sales contract changes directory](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
 
 ## Business Associate Agreement (BAA)
 
@@ -146,3 +150,14 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
 > We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+
+## Non-disclosure Agreement (NDA)
+In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 
+
+- Access PandaDoc and Create a New Document
+- Use the current PostHog - NDA template
+- Add your desired contact as a recipient and follow the usual PandaDoc process
+- When document is complete, it will be stored in the Document library and can also be attached to the Salesforce account for future reference
+
+### Trust center approvals
+Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Once the document is fully signed, access will automatically be granted. 

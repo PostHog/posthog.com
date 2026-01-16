@@ -5,6 +5,7 @@ import ScalableSlide from 'components/Presentation/ScalableSlide'
 import ResponsiveSlideContent from 'components/Presentation/ResponsiveSlideContent'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
+import { useProductInterest } from 'hooks/useProductInterest'
 import { docsMenu } from '../../../navs'
 import SlideThumbnails from './SlideThumbnails'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
@@ -30,6 +31,7 @@ import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './create
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
+import VideosSlide from './VideosSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -40,6 +42,7 @@ interface SlidesTemplateProps {
         description?: string
         image?: string
     }
+    rightActionButtons?: React.ReactNode
 }
 
 export const SlideContainer = ({ children }: { children: React.ReactNode }) => {
@@ -51,9 +54,13 @@ export default function SlidesTemplate({
     data,
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
+    rightActionButtons,
 }: SlidesTemplateProps) {
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
+
+    // Track product interest for cross-subdomain cookie
+    useProductInterest(productData?.slug)
 
     // Process slide configuration
     let processedSlideConfig = slideConfig
@@ -237,6 +244,16 @@ export default function SlidesTemplate({
                     )
                 }
 
+                if (template === 'ai') {
+                    return (
+                        <FeaturesSlide
+                            features={productData?.features || []}
+                            backgroundImage={contentConfig.featuresBackgroundImage}
+                            {...props}
+                        />
+                    )
+                }
+
                 if (template === 'grid') {
                     // Individual feature grid slide
                     const features = productData?.features || []
@@ -364,6 +381,9 @@ export default function SlidesTemplate({
             case 'posthog-on-posthog':
                 return <PostHogOnPostHogSlide productData={productData} {...props} />
 
+            case 'videos':
+                return <VideosSlide productData={productData} {...props} />
+
             case 'comparison-summary':
                 return (
                     <ComparisonSummarySlide
@@ -373,14 +393,41 @@ export default function SlidesTemplate({
                     />
                 )
 
-            case 'feature-comparison':
+            case 'feature-comparison': {
+                const companies = productData?.comparison?.companies || []
+                let competitors = companies.map((c: any) => c.key)
+
+                // Put PostHog first in the comparison (after the feature name column)
+                const posthogIndex = competitors.indexOf('posthog')
+                if (posthogIndex > 0) {
+                    competitors = ['posthog', ...competitors.filter((c: string) => c !== 'posthog')]
+                }
+
+                // Get rows from product data or props override
+                const rows = props.rows || productData?.comparison?.rows
+
+                if (!rows || rows.length === 0) {
+                    return (
+                        <div className="h-full p-8 flex items-center justify-center">
+                            <p className="text-xl text-secondary">No feature comparison available</p>
+                        </div>
+                    )
+                }
+
+                // Get excluded sections and require complete data from product data
+                const excludedSections = productData?.comparison?.excluded_sections
+                const requireCompleteData = productData?.comparison?.require_complete_data
+
                 return (
                     <FeatureComparisonSlide
-                        features={productData?.comparison?.features || []}
-                        companies={productData?.comparison?.companies}
+                        competitors={competitors}
+                        rows={rows}
+                        excludedSections={excludedSections}
+                        requireCompleteData={requireCompleteData}
                         {...props}
                     />
                 )
+            }
 
             case 'docs':
                 return (
@@ -526,6 +573,7 @@ export default function SlidesTemplate({
                 } else if (feature.template === 'splitImage') {
                     featureContent = (
                         <FeaturesSplitWithImage
+                            className={feature.className}
                             bgColor={productData?.color}
                             textColor={productData?.overview?.textColor}
                             headline={feature.headline}
@@ -610,6 +658,7 @@ export default function SlidesTemplate({
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
             <Presentation
+                rightActionButtons={rightActionButtons}
                 template="generic"
                 slug={productData?.slug}
                 title=""

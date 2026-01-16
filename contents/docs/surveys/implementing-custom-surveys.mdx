@@ -14,7 +14,7 @@ At its most basic level, a survey is a collection of response events. If you wan
 
 ```js-web
 'use client'
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 export default function Feedback() {
   const posthog = usePostHog();
@@ -81,13 +81,13 @@ To display a survey as a popover, simply call `displaySurvey` with the survey ID
 ```js
 import React from 'react';
 import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 
 function App() {
   const posthog = usePostHog();
- 
+
   useEffect(() => {
     // Will be called only once on first load, respecting conditions defined in dashboard
     posthog.displaySurvey(coolSurveyID, {
@@ -121,6 +121,61 @@ function App() {
 export default App;
 ```
 
+#### Pre-filling survey responses
+
+You can pre-fill survey answers programmatically by passing prefill data to `displaySurvey` or `renderSurvey`. This works with single choice, multiple choice, and rating questions.
+
+```js
+import React from 'react';
+import { DisplaySurveyType } from 'posthog-js';
+import { usePostHog } from '@posthog/react';
+
+const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+
+function App() {
+  const posthog = usePostHog();
+
+  const handleShowPrefilled = () => {
+    posthog.displaySurvey(coolSurveyID, {
+      displayType: DisplaySurveyType.Popover,
+      prefillData: {
+        0: 'Very Satisfied',      // Single choice (by value)
+        1: 9,                      // Rating
+        2: ['Analytics', 'Flags']  // Multiple choice (array of values)
+      }
+    });
+  };
+
+  return (
+    <div className="App">
+      <h1>Survey Tutorial with PostHog</h1>
+      <div className="survey-controls">
+        <button onClick={handleShowPrefilled}>
+          Show Pre-filled Survey
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+**Prefill data format:**
+
+- Keys are question indices (0-based: `0` for first question, `1` for second, etc.)
+- Values depend on question type:
+  - **Single choice**: String matching the exact choice text (e.g., `'Very Satisfied'`)
+  - **Multiple choice**: Array of strings matching choice texts (e.g., `['Analytics', 'Flags']`)
+  - **Rating**: Number within the rating scale (e.g., `9` for a 0-10 scale)
+  - **Open text**: String value for the text field
+
+**Important notes:**
+- Pre-filled values must match exactly with the choice text defined in your survey
+- Invalid values are silently ignored
+- Users can modify pre-filled answers before submitting
+- Question indices are 0-based (first question is `0`, second is `1`, etc.)
+
 #### Inline surveys
 
 To display a survey inline within a specific element, specify the `displayType` and `selector`:
@@ -128,7 +183,7 @@ To display a survey inline within a specific element, specify the `displayType` 
 ```js
 import React from 'react';
 import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 
@@ -181,7 +236,7 @@ The legacy `renderSurvey` method renders an **unstyled** survey in a specific HT
 ```js
 import './App.css';
 import React from 'react';
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 
 function App() {
   const posthog = usePostHog();
@@ -264,7 +319,7 @@ As an example, we can use `getActiveMatchingSurveys()` to make our Next.js feedb
 
 ```js-web
 'use client'
-import { usePostHog } from 'posthog-js/react';
+import { usePostHog } from '@posthog/react';
 import { useEffect, useState } from 'react';
 
 export default function Feedback() {

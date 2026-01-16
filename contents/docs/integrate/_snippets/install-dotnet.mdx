@@ -1,6 +1,10 @@
 <DotNetInstall />
 
-At the moment, ASP.NET Core is the only supported platform for the PostHog .NET SDK. However, we do have experimental support for other platforms mentioned later in this document.
+The `PostHog` package supports any .NET platform that targets .NET Standard 2.1 or .NET 8+, including MAUI, Blazor, and console applications. The `PostHog.AspNetCore` package provides additional conveniences for ASP.NET Core applications such as streamlined registration, request-scoped caching, and integration with [.NET Feature Management](https://learn.microsoft.com/en-us/azure/azure-app-configuration/feature-management-dotnet-reference).
+
+> **Note:** We actively test with ASP.NET Core. Other platforms should work but haven't been specifically tested. If you encounter issues, please [report them on GitHub](https://github.com/PostHog/posthog-dotnet/issues).
+
+> **Not supported:** Classic UWP (requires .NET Standard 2.0 only). Microsoft has [deprecated UWP](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/migrate-to-windows-app-sdk-ovw) in favor of the Windows App SDK. For Unity projects, see our dedicated [Unity SDK](/docs/libraries/unity) (currently in beta).
 
 ```bash
 dotnet add package PostHog.AspNetCore
@@ -38,22 +42,6 @@ dotnet user-secrets set "PostHog:PersonalApiKey" "phx_..."
 ```
 
 You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
-
-To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
-
-```json
-{
-  "DetailedErrors": true,
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning",
-      "PostHog": "Trace"
-    }
-  },
-  ...
-}
-```
 
 ## Working with .NET Feature Management
 
@@ -129,11 +117,9 @@ public class NewFeatureController : Controller
 }
 ```
 
-## Experimental support for other platforms
+## Using the core package without ASP.NET Core
 
-The PostHog package is multi-targeted to support `net8.0` and `dotnetstandard2.1`. This means it can be used in a wider range of projects than just ASP.NET Core. However, this support is experimental and not officially supported.
-
-If you are using a different platform, you can install the `PostHog` package instead of `PostHog.AspNetCore`. This package does not depend on ASP.NET Core and can be used in any .NET project.
+If you're not using ASP.NET Core (for example, in a console application, MAUI app, or Blazor WebAssembly), install the `PostHog` package instead of `PostHog.AspNetCore`. This package has no ASP.NET Core dependencies and can be used in any .NET project targeting .NET Standard 2.1 or .NET 8+.
 
 ```bash
 dotnet add package PostHog
@@ -171,3 +157,22 @@ public static readonly PostHogClient PostHog = new(new PostHogOptions {
 });
 ```
 
+## Debug mode
+
+If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
+
+To see detailed logging, set the log level to `Debug` or `Trace` in `appsettings.json`:
+
+```json
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "PostHog": "Trace"
+    }
+  },
+  ...
+}
+```

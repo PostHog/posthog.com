@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) and [who we are building for](/handbook/who-we-are-building-for), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly. This is similar, but not the same as [our lead scoring](/handbook/growth/sales/lead-scoring).
+Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) and [who we are building for](/handbook/who-we-build-for), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly. This is similar, but not the same as [our lead scoring](/handbook/growth/sales/lead-scoring).
 
 We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 24 in [Salesforce](https://posthog.lightning.force.com/lightning/setup/ObjectManager/Lead/FieldsAndRelationships/00NHp000018JdMZ/view) based on the following parameters:
 

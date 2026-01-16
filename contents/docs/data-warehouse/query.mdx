@@ -26,7 +26,7 @@ Here you can:
 
 1. Write your SQL query using your table like `SELECT * FROM stripe.prod.charge`
 2. Click **Run** to see the results.
-3. Modify your query using [SQL commands](/docs/data-warehouse/sql) and [functions](/docs/data-warehouse/sql/functions) as needed to get the data you want like `select amount / 100 as dollar_charge, status from stripe.prod.charge`.
+3. Modify your query using [SQL commands](/docs/data-warehouse/sql) and [functions](/docs/data-warehouse/sql/useful-functions) as needed to get the data you want like `select amount / 100 as dollar_charge, status from stripe.prod.charge`.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_19_11_2x_b1d7ce399f.png" 
@@ -41,7 +41,7 @@ Here you can:
 
 <CalloutBox icon="IconInfo" title="Having trouble writing SQL?" type="fyi">
 
-  [Max AI](/docs/max-ai) can help write SQL for you. Just click his face in the corner of your screen and ask him to write or tweak your query for you.
+  [PostHog AI](/docs/posthog-ai) can help write SQL for you. Just click the icon in the corner of your screen and ask it to write or tweak your query for you.
 
 </CalloutBox>
 
@@ -74,3 +74,29 @@ Much of the power of the data warehouse comes from combining multiple sources, l
 import QueryJoinExample from './_snippets/query-join-example.mdx'
 
 <QueryJoinExample />
+
+## Query execution details
+
+After running a query, execution details can help you understand the resource usage and execution time:
+
+- **Memory usage**: Total memory consumed by the query
+- **Data read**: Total amount of data read by the query
+- **CPU time**: Processing time used by the CPU
+- **Duration**: Duration of query execution in ClickHouse
+
+Hover over **Execution details** to see additional information about how the query was executed.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_11_20_T13_39_06_799_Z_92c7985c92.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_11_20_T13_42_11_240_Z_6536dfc318.png"
+  alt="SQL query execution details"
+  classes="rounded"
+/>
+
+These metrics are helpful for optimizing queries, especially when working with large datasets or complex joins. As you develop and change your query, keep an eye on the impact of your changes on the metrics. Seeing a spike in bytes read might prompt you to use a more selective filter.
+
+## Optimizing queries
+
+import OptimalQueries from '../_snippets/optimal-queries.mdx'
+
+<OptimalQueries />

@@ -1,7 +1,6 @@
 ---
 title: Shopify
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/shopify.svg
+platformLogo: shopify
 ---
 
 export const eventLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711383938/posthog.com/contents/images/tutorials/shopify/event-light.png'
@@ -26,6 +25,51 @@ This guide walks you through integrating PostHog into your Shopify store using a
 3. Click the green save button on the top right and you're good to go - PostHog should now be capturing events on your Shopify store!
 
 > To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in the [PostHog activity tab](https://us.posthog.com/events). This may take a few minutes.
+
+
+### Enabling heatmap
+
+The heatmap won't work on Shopify out of the box because Shopify has very strict CSP headers, particularly `frame-ancestors`.
+
+You can bypass this issue and enable the heatmap by running a Cloudflare worker that rewrites the `frame-ancestors` header. We recommend using a separate subdomain like `heatmap.myshop.com` from your production site to minimize impact. Here is a simple Cloudflare worker that updates this header:
+
+```js
+export default {
+  async fetch(request) {
+    const response = await fetch(request);
+    const newResponse = new Response(response.body, response);
+
+    newResponse.headers.set(
+      'Content-Security-Policy',
+      "frame-ancestors 'self' *.posthog.com"
+    );
+
+    return newResponse;
+  }
+};
+```
+
+### Enabling toolbar
+
+If you're having trouble viewing the PostHog toolbar, ensure your Shopify theme is not hiding empty `div`s.
+
+```css
+a:empty,
+ul:empty,
+dl:empty,
+/* div:empty, -- Make sure this rule is turned off! */
+section:empty,
+article:empty,
+p:empty,
+h1:empty,
+h2:empty,
+h3:empty,
+h4:empty,
+h5:empty,
+h6:empty {
+  display: none;
+}
+```
 
 ### Tracking conversions
 

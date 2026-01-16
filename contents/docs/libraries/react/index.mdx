@@ -4,8 +4,7 @@ sidebarTitle: React
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg
+platformLogo: react
 features:
   eventCapture: true
   userIdentification: true
@@ -18,12 +17,37 @@ features:
   errorTracking: true
 ---
 
-import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
+import List from 'components/List'
+import { getLogo } from 'constants/logos'
 
 PostHog makes it easy to get data about traffic and usage of your React app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide walks you through an example integration of PostHog using React and the [posthog-js library](/docs/integrate/client/js).
+This guide walks you through an example integration of PostHog using vanilla React and the [posthog-js library](/docs/integrate/client/js).
+
+## Using a framework?
+
+Using React with a framework like Next.js, Remix, or React Router requires additional setup. Follow their respective guides instead:
+
+<List
+    className="grid sm:grid-cols-2 gap-1 my-4"
+    items={[
+        {
+            label: "Next.js",
+            url: "/docs/libraries/next-js",
+            image: getLogo('nextjs')
+        },
+        {
+            label: "Remix",
+            url: "/docs/libraries/remix",
+            image: getLogo('remix')
+        },
+        {
+            label: "React Router",
+            url: "/docs/libraries/react-router",
+            image: getLogo('reactRouter')
+        }
+    ]}
+/>
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
 
@@ -35,9 +59,6 @@ import ReactInstall from '../../integrate/_snippets/install-react.mdx'
 
 <ReactInstall />
 
-<DetailSetUpReverseProxy />
-
-<DetailGroupProductsInOneProject />
 
 ## Usage
 
@@ -50,7 +71,7 @@ The provider takes an initialized and configured client instance like this:
 ```react
 // src/index.js
 import posthog from 'posthog-js';
-import { PostHogProvider} from 'posthog-js/react'
+import { PostHogProvider} from '@posthog/react'
 
 posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
   api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
@@ -67,22 +88,27 @@ root.render(
 );
 ```
 
-### Using posthog-js functions
+### Calling PostHog methods
 
 By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/product-analytics/autocapture#configuring-autocapture).
 
-If you want to use the library to identify users, capture events, use feature flags, or use other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
+To call PostHog methods for actions like identifying users, capturing events, using feature flags, or using other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
 
-**Do not directly import `posthog` apart from installation** as shown above. This will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and hook.
+<CalloutBox icon="IconWarning" title="Don't directly import PostHog" type="fyi">
+
+  Always use the `usePostHog` hook to access the PostHog library. Directly importing `posthog` will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and hook.
+
+</CalloutBox>
 
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/libraries/js).
 
 ```react
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect } from 'react'
 import { useUser, useLogin } from '../lib/user'
 
 function App() {
+    // `usePostHog`, like other React contexts, must be called at the top level of your component
     const posthog = usePostHog()
     const login = useLogin()
     const user = useUser()
@@ -118,7 +144,7 @@ function App() {
 export default App
 ```
 
-#### TypeError: Cannot read properties of undefined
+### TypeError: Cannot read properties of undefined
 
 If you see the error `TypeError: Cannot read properties of undefined (reading '...')` this is likely because you tried to call a posthog function when posthog was not initialized (such as during the initial render). On purpose, we still render the children even if PostHog is not initialized so that your app still loads even if PostHog can't load.
 
@@ -135,6 +161,79 @@ useEffect(() => {
 ```
 
 Typescript helps protect against these errors.
+
+### Tracking element visibility
+
+The `PostHogCaptureOnViewed` component enables you to automatically capture events when elements scroll into view in the browser. This is useful for tracking impressions of important content, monitoring user engagement with specific sections, or understanding which parts of your page users are actually seeing.
+
+The component wraps your content and sends a `$element_viewed` event to PostHog when the wrapped element becomes visible in the viewport. It only fires once per component instance.
+
+**Basic usage:**
+
+```react
+import { PostHogCaptureOnViewed } from '@posthog/react'
+
+function App() {
+    return (
+        <PostHogCaptureOnViewed name="hero-banner">
+            <div>Your important content here</div>
+        </PostHogCaptureOnViewed>
+    )
+}
+```
+
+**With custom properties:**
+
+You can include additional properties with the event to provide more context:
+
+```react
+<PostHogCaptureOnViewed
+    name="product-card"
+    properties={{ 
+        product_id: '123', 
+        category: 'electronics',
+        price: 299.99
+    }}
+>
+    <ProductCard />
+</PostHogCaptureOnViewed>
+```
+
+**Tracking multiple children:**
+
+Use `trackAllChildren` to track each child element separately. This is useful for galleries or lists where you want to know which specific items were viewed:
+
+```react
+<PostHogCaptureOnViewed
+    name="product-gallery"
+    properties={{ gallery_type: 'featured' }}
+    trackAllChildren
+>
+    <ProductCard id="1" />
+    <ProductCard id="2" />
+    <ProductCard id="3" />
+</PostHogCaptureOnViewed>
+```
+
+When `trackAllChildren` is enabled, each child element sends its own event with a `child_index` property indicating its position.
+
+**Custom intersection observer options:**
+
+You can customize when elements are considered "viewed" by passing options to the `IntersectionObserver`:
+
+```react
+<PostHogCaptureOnViewed
+    name="footer"
+    observerOptions={{ 
+        threshold: 0.5,  // Element is 50% visible
+        rootMargin: '0px'
+    }}
+>
+    <Footer />
+</PostHogCaptureOnViewed>
+```
+
+The component passes all other props to the wrapper `div`, so you can add styling, classes, or other HTML attributes as needed.
 
 ## Feature flags
 
@@ -154,7 +253,7 @@ import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro
 
 For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
-### Experiments (A/B tests)
+## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
@@ -163,7 +262,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 // or you can use the feature flags component - /docs/libraries/react#feature-flags-react-component
 
 // Method one: using the useFeatureFlagVariantKey hook
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 
 function App() {
     const variant = useFeatureFlagVariantKey('experiment-feature-flag-key')
@@ -173,7 +272,7 @@ function App() {
 }
 
 // Method two: using the feature flags component
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function App() {
     return (
@@ -188,3 +287,4 @@ function App() {
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+

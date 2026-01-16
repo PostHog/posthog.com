@@ -167,9 +167,9 @@ This [Zap](https://zapier.com/editor/198072630/published) is triggered when a tr
 
 There are three zaps in this [folder](https://zapier.com/app/zaps/folder/1703751) which create follow-on deals when any hands-on pipeline deal is closed:
 
-1. HubSpot Inbound Hands-on Deal Closed to Renewal Deal ([link](https://zapier.com/editor/197645719/published))
-2. HubSpot PQL Hands-on Deal Closed to Renewal Deal([link](https://zapier.com/editor/209163551/published))
-3. HubSpot Renewal Deal Closed to Renewal Deal ([link](https://zapier.com/editor/197651007/published))
+1. HubSpot Inbound Hands-on Deal Closed to Renewal Deal ([Zapier automation details](https://zapier.com/editor/197645719/published))
+2. HubSpot PQL Hands-on Deal Closed to Renewal Deal ([Zapier automation details](https://zapier.com/editor/209163551/published))
+3. HubSpot Renewal Deal Closed to Renewal Deal ([Zapier automation details](https://zapier.com/editor/197651007/published))
 
 They're triggered by a deal closing in the respective pipeline.  It figures out the new deal close date based on the term 
 in the existing deal (1,2,3 years) and then creates a new deal in the renewal pipeline, with amounts and ownership copied over too. 

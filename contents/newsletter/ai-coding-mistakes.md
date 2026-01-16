@@ -45,6 +45,8 @@ As one of our product engineers, Paul D'Ambra, noted in a [blog on how he uses L
 
 > They're not actually very good software engineers… particularly since most of the data they've ingested about software engineering is "blogs on how to start something from scratch". So, if that's not the task. Then I find it often harder to prompt an LLM to do than to do it myself
 
+<NewsletterForm />
+
 ## 2. Not providing the right context, rules, and guardrails
 
 > DO NOT GIVE ME HIGH LEVEL SHIT, IF I ASK FOR FIX OR EXPLANATION, I WANT ACTUAL CODE OR EXPLANATION! I DON'T WANT "Here's how you can blablabla" - `posthog/.cursorrules`
@@ -132,7 +134,7 @@ Beyond founder mode, what are some specific ways we aim to improve our workflows
 
 - Trying different models with the same tools to figure out which models are good at what. For example, a lot of our engineers find switching to Opus extremely beneficial (over Sonnet) and have been experimenting with Qwen in Cursor.
 
-- Building and dogfooding our own AI engineering tools like [Max AI](/docs/max-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
+- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
 
 - Nearly every hackathon has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
 
@@ -159,3 +161,5 @@ Ultimately, you are responsible for the end product of what you create. This is 
 AI is reshaping software. As model capacities and adoption increase, more and more of software (and software development) will be reshaped. What's important as an individual isn't using AI for the sake of it, but, like everything else, understanding it and fitting it into how you work.
 
 Getting big architecture decisions right, [figuring out what to build](/newsletter/how-we-decide-what-to-build), positioning correctly, and [choosing the right tools](/newsletter/choosing-technologies) will all remain important, but it also remains up to you to figure these out, with or without AI. If you do choose to use AI, avoiding the mistakes here will help improve your odds that you're successful.
+
+<NewsletterForm />

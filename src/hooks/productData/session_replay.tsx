@@ -20,14 +20,20 @@ export const sessionReplay = {
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
-        title: 'Session replay - PostHog',
-        description: 'Watch people use your product to diagnose issues and understand user behavior',
+        title: 'Session Replay – Debug and analyze sessions with PostHog',
+        description:
+            'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and understand user behavior.',
     },
     overview: {
         title: 'Watch people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
+    },
+    videos: {
+        overview: {
+            wistia: 'a1480fky0u',
+        },
     },
     screenshots: {
         overview: {
@@ -398,6 +404,35 @@ window.posthog.onFeatureFlags(function () {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses Session Replay',
+        benefits: [
+            {
+                title: 'Gather context',
+                description: 'by seeing what led to each rageclick',
+            },
+            {
+                title: 'Debug issues',
+                description: 'by watching the prelude to each bug',
+            },
+            {
+                title: 'Assess performance',
+                description: 'by measuring first contentful paint and load time',
+            },
+            {
+                title: 'Resolve experiments',
+                description: 'by seeing how users interact with new features',
+            },
+            {
+                title: 'Build user empathy',
+                description: 'by watching their entire product journey',
+            },
+            {
+                title: 'Improve conversion',
+                description: 'by using context to solve stubborn problems',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Why are users dropping off in my funnel?',
@@ -477,11 +512,11 @@ window.posthog.onFeatureFlags(function () {
                 key: 'hotjar',
                 link: '/blog/posthog-vs-hotjar',
             },
-            {
-                name: 'Matomo',
-                key: 'matomo',
-                link: '/blog/posthog-vs-matomo',
-            },
+            // {
+            //     name: 'Matomo',
+            //     key: 'matomo',
+            //     link: '/blog/posthog-vs-matomo',
+            // },
             {
                 name: 'LogRocket',
                 key: 'logrocket',
@@ -492,188 +527,17 @@ window.posthog.onFeatureFlags(function () {
                 key: 'clarity',
             },
             {
+                name: 'Statsig',
+                key: 'statsig',
+                link: '/blog/posthog-vs-statsig',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'AI summaries',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: false,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: 'In alpha',
-                },
-            },
-            {
-                feature: 'Single-page app support',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: true,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'iOS recordings',
-                companies: {
-                    hotjar: false,
-                    logrocket: true,
-                    matomo: false,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Android recordings',
-                companies: {
-                    hotjar: false,
-                    logrocket: true,
-                    matomo: false,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'React Native recordings',
-                companies: {
-                    hotjar: false,
-                    logrocket: true,
-                    matomo: false,
-                    fullstory: false,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Flutter recordings',
-                companies: {
-                    hotjar: false,
-                    logrocket: false,
-                    matomo: false,
-                    fullstory: false,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Identity detection',
-                companies: {
-                    hotjar: false,
-                    logrocket: true,
-                    matomo: true,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target recordings by URL',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: true,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Target by sample size',
-                companies: {
-                    hotjar: true,
-                    logrocket: false,
-                    matomo: true,
-                    fullstory: false,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Filter recordings by user or event',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: true,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Search by network request',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: true,
-                    // fullstory: true,
-                    clarity: false,
-                    posthog: false,
-                },
-            },
-            {
-                feature: 'Rage-click detection',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: false,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Privacy masking for sensitive content',
-                companies: {
-                    hotjar: true,
-                    logrocket: true,
-                    matomo: true,
-                    fullstory: true,
-                    clarity: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Export recordings to JSON',
-                companies: {
-                    hotjar: true,
-                    logrocket: false,
-                    matomo: true,
-                    fullstory: true,
-                    clarity: false,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Export recordings to video',
-                companies: {
-                    hotjar: false,
-                    logrocket: false,
-                    matomo: false,
-                    fullstory: false,
-                    clarity: false,
-                    posthog: 'Beta',
-                },
-            },
-            {
-                feature: 'Recording retention policy',
-                companies: {
-                    hotjar: '12 months',
-                    logrocket: '1 month',
-                    matomo: '24 months',
-                    fullstory: '1 month',
-                    clarity: '30 days',
-                    posthog: 'Up to 3 months',
-                },
-            },
-        ],
+        rows: ['session_replay', 'heatmaps'],
+        excluded_sections: ['platform.integrations', 'platform.libraries', 'platform.developer', 'platform.security'],
     },
     pairsWith: [
         {

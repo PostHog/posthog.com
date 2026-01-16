@@ -122,7 +122,7 @@ Part of Snowflake’s value prop is the broad appeal to both technical and non-t
 
 ClickHouse and Snowflake are both used for analytics, but ClickHouse is more focused on analytical queries. 
 
-ClickHouse is a great fit for PostHog because we are an analytics platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
+ClickHouse is a great fit for PostHog because we are an developer platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
 
 Traditionally, Snowflake can be considered more of a standard data warehouse or data lake where you can store all your data and then query it. This is a great fit for companies that want to store all their data in one place and then query it.
 

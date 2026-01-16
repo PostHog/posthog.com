@@ -45,7 +45,7 @@ Below is an example of how this looks like in Next.js:
 ```js
 // first domain
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export default function FirstDomain() {
   const posthog = usePostHog()
@@ -68,7 +68,7 @@ On the second domain, bootstrap the PostHog initialization using the session ID.
 // second domain
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useSearchParams } from 'next/navigation'
 
 export function PHProvider({ children }) {

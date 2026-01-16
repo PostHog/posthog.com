@@ -2,8 +2,9 @@ import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React, { useEffect, useState } from 'react'
 import { IRoadmap } from '.'
-import { Authentication, Question } from 'components/Squeak'
+import { Question } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
+import { useApp } from '../../context/App'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../context/Toast'
 import useSWR from 'swr'
@@ -102,8 +103,8 @@ export function InProgress(
     const posthog = usePostHog()
     const [updates, setUpdates] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
-    const [authModalOpen, setAuthModalOpen] = useState(false)
     const [addingUpdate, setAddingUpdate] = useState(false)
+    const { openSignIn } = useApp()
     const isModerator = user?.role?.type === 'moderator'
 
     const [more, setMore] = useState(props.more ?? false)
@@ -163,7 +164,8 @@ export function InProgress(
             const token = await getJwt()
 
             if (!token) {
-                setAuthModalOpen(true)
+                openSignIn()
+                setLoading(false)
                 return
             }
 
@@ -178,8 +180,7 @@ export function InProgress(
             })
 
             if (res.ok) {
-                setAuthModalOpen(false)
-                addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
+                addToast({ message: `Subscribed to ${title}. We'll email you with updates!` })
                 mutate({
                     data: {
                         id: roadmapData?.id,
@@ -231,7 +232,8 @@ export function InProgress(
             const token = await getJwt()
 
             if (!token) {
-                setAuthModalOpen(true)
+                openSignIn()
+                setLoading(false)
                 return
             }
 
@@ -246,7 +248,6 @@ export function InProgress(
             })
 
             if (res.ok) {
-                setAuthModalOpen(false)
                 addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
                 mutate({
                     data: {
@@ -345,26 +346,6 @@ export function InProgress(
                         }
                     )}
                 </ul>
-            </SideModal>
-            <SideModal title={title} open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
-                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-
-                <Authentication
-                    initialView="sign-in"
-                    onAuth={() => subscribe()}
-                    showBanner={false}
-                    showProfile={false}
-                />
             </SideModal>
             <li className={`pb-4 border border-primary rounded-md ${props?.className ?? ''}`}>
                 <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent rounded-t-md">

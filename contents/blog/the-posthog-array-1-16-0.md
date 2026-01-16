@@ -52,7 +52,7 @@ As of right now, if you're on a self-hosted instance, you should head over to 'P
 
 We also have built apps for currency normalization and GeoIP data, allowing you to convert currency values in events according to up-to-date exchange rates and determine the location of an event based on the user's IP.
 
-Our overall vision for apps is to enable seamless integration with other relevant data analytics platforms, as well as allow users to more easily customize PostHog's functionality by adding their own logic and data to the event pipeline.
+Our overall vision for apps is to enable seamless integration with other relevant developer platforms, as well as allow users to more easily customize PostHog's functionality by adding their own logic and data to the event pipeline.
 
 Finally, as is the case with session recording, please report any bugs in the functionality on [GitHub](https://github.com/PostHog/posthog/issues).
 

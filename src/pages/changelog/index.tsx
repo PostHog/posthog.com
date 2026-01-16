@@ -1,55 +1,117 @@
-import React, { useEffect } from 'react'
-import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
-import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
-import { navigate } from 'gatsby'
-import { useWindow } from '../../context/Window'
+import { graphql } from 'gatsby'
+import Changelog from '../../templates/Changelog'
 
-const ChangelogPage = () => {
-    const { appWindow } = useWindow()
-    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/changelog/2025',
-        content: <></>,
-    })
+export default Changelog
 
-    useEffect(() => {
-        if (appWindow?.path === '/changelog') {
-            navigate('/changelog/2025')
+export const query = graphql`
+    query ChangelogPageQuery {
+        allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
+            nodes {
+                id: strapiID
+                date
+                title
+                description
+                cta {
+                    label
+                    url
+                }
+                media {
+                    gatsbyImageData
+                }
+                profiles {
+                    data {
+                        id
+                        attributes {
+                            firstName
+                            lastName
+                            avatar {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                            color
+                            teams {
+                                data {
+                                    attributes {
+                                        name
+                                        miniCrest {
+                                            data {
+                                                attributes {
+                                                    url
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                teams {
+                    data {
+                        attributes {
+                            name
+                            miniCrest {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                topic {
+                    data {
+                        attributes {
+                            label
+                        }
+                    }
+                }
+                githubUrls
+                githubPRMetadata {
+                    number
+                    html_url
+                    additions
+                    changed_files
+                    comments
+                    comments_url
+                    commits
+                    commits_url
+                    deletions
+                    review_comments
+                    review_comments_url
+                    reviews_url
+                    commenters {
+                        avatar_url
+                        html_url
+                        login
+                        type
+                    }
+                    reviewers {
+                        avatar_url
+                        html_url
+                        login
+                        type
+                    }
+                    user {
+                        login
+                        avatar_url
+                        html_url
+                        type
+                    }
+                }
+            }
         }
-    }, [])
-
-    return (
-        <>
-            <SEO
-                title="Changelog – PostHog"
-                description="See what's new in PostHog"
-                image={`/images/og/changelog.jpg`}
-            />
-            <Editor
-                hasTabs
-                type="changelog"
-                maxWidth="100%"
-                proseSize="base"
-                bookmark={{
-                    title: 'Changelog',
-                    description: 'Latest updates and releases',
-                }}
-            >
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/changelog/2025"
-                    onValueChange={handleTabChange}
-                    padding
-                    contentPadding={false}
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
-            </Editor>
-        </>
-    )
-}
-
-export default ChangelogPage
+        allChangelogVideo(sort: { fields: publishedAt, order: DESC }) {
+            nodes {
+                id
+                videoId
+                publishedAt
+                title
+            }
+        }
+    }
+`

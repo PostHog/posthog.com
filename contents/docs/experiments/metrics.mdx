@@ -10,7 +10,7 @@ Once you've created your experiment, you can assign metrics to let you evaluate 
 
 ## Metric types
 
-PostHog supports three types of metrics to measure different aspects of your experiment's impact. Choose the metric type that best aligns with your hypothesis.
+PostHog supports four types of metrics to measure different aspects of your experiment's impact. Choose the metric type that best aligns with your hypothesis.
 
 ### Funnel
 
@@ -60,6 +60,33 @@ Common use cases:
 - **Custom conversion rates**: Calculate conversions with a denominator other than exposed users (e.g., conversions per active user)
 
 Both the numerator and denominator support all aggregation methods (count, sum, average, unique values). You can even use the same event with different properties for each part of the ratio, such as dividing total revenue by total quantity sold from purchase events.
+
+### Retention
+
+Use retention metrics to measure if users come back to perform a specific action within a defined time window after an initial action. This helps you measure engagement patterns, feature stickiness, and long-term user behavior.
+
+Retention metrics track two events and a time window:
+
+| Event | Description | Examples |
+|-------|------------|----------|
+| Start event | The initial action that begins tracking | Signup, complete onboarding, first purchase |
+| Completion event | The action you want users to return for | Login, feature use, make another purchase |
+| Retention window | When the completion event should occur | Between 1 and 7 days after start event |
+
+PostHog calculates the retention rate by measuring what proportion of users performed the completion event within the window. Statistical significance is determined using the difference in retention rates between variants.
+
+The **retention window** defines when completion events count. A "1 to 7 days" window means the completion event must occur at least 1 full day after the start event, up to and including day 7. PostHog compares calendar days rather than exact 24-hour periods, so a "7 days" window includes any completion event on the 7th calendar day. Hour-based windows work the same way.
+
+For start handling, you can choose:
+- **First seen:** Uses the first occurrence of the start event, ideal for one-time actions like signup
+- **Last seen:** Uses the last occurrence of the start event, useful for recurring actions
+
+Common use cases:
+
+- **Onboarding effectiveness**: Track if users who complete onboarding return within 7 days
+- **Feature stickiness**: Measure if users who try a new feature come back to use it again
+- **Re-engagement**: Test if marketing campaigns bring back dormant users
+- **Churn reduction**: Measure if changes reduce the time until users return
 
 ## Outlier handling
 

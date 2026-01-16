@@ -39,6 +39,8 @@ Therefore, I’d argue you should just minimize the risk of you and your cofound
 
 Despite our differences in experience, I frequently feel I’m underperforming relative to Tim and need to remind myself how effective we’ve been together.
 
+<NewsletterForm />
+
 ## 2. Good relationships aren’t set and forget
 
 You need to be intentional about the way you work together day-to-day.
@@ -79,12 +81,12 @@ Right now, we split our responsibilities around the products we care most about,
 
   * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM analytics](/docs/llm-analytics). He’s great at execution and understands the ins and outs of these products better than I.
 
-  * I’m focused on marketing, and AI-first products and features like [Max AI](/docs/max-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
+  * I’m focused on marketing, and AI-first products and features like [PostHog AI](/docs/posthog-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
 
 There are also a handful of things we _both_ want to be involved in, such as people and strategy. We think both of us being involved leads to the best decisions here, and keeps us aligned.
 
 ![max ai](https://res.cloudinary.com/dmukukwp6/image/upload/max_ai_a2455c04fe.png)
-<Caption>I love taking big bets and Max AI is one of them. You can already use it to query your analytics data in PostHog, find session replays, and write SQL.</Caption>
+<Caption>I love taking big bets and PostHog AI is one of them. You can already use it to query your analytics data in PostHog, find session replays, and write SQL.</Caption>
 
 ## 5. Zoom out to solve problems 
 
@@ -155,4 +157,4 @@ It’s more fun, too.
 
  _Words by James Hawkins, Pizza Margherita fundamentalist._
 
-<NewsletterForm />
+ <NewsletterForm />

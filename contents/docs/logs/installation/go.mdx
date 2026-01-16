@@ -1,0 +1,113 @@
+---
+title: Go logs installation
+platformLogo: go
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+go get go.opentelemetry.io/otel/sdk/log
+go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp
+```
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to send logs to PostHog.
+
+```go
+package main
+
+import (
+    "context"
+    "go.opentelemetry.io/otel"
+    "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp"
+    "go.opentelemetry.io/otel/sdk/log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    // Create OTLP HTTP exporter
+    exporter, err := otlploghttp.New(ctx,
+        otlploghttp.WithEndpoint("us.i.posthog.com"),
+        otlploghttp.WithURLPath("/i/v1/logs"),
+        otlploghttp.WithHeaders(map[string]string{
+            "Authorization": "Bearer " + YOUR_PROJECT_API_KEY,
+        }),
+    )
+    if err != nil {
+        panic(err)
+    }
+
+    // Create logger provider
+    loggerProvider := log.NewLoggerProvider(
+        log.WithBatcher(exporter),
+    )
+
+    otel.SetLoggerProvider(loggerProvider)
+}
+```
+
+Alternatively, you can pass the API key as a query parameter by modifying the URL path:
+
+```go
+otlploghttp.WithURLPath("/i/v1/logs?token=" + YOUR_PROJECT_API_KEY)
+```
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can start logging with OpenTelemetry:
+
+```go
+import (
+    "go.opentelemetry.io/otel/log"
+)
+
+logger := otel.GetLoggerProvider().Logger("my-app")
+
+logger.Info(ctx, "User action",
+    log.String("userId", "123"),
+    log.String("action", "login"),
+)
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

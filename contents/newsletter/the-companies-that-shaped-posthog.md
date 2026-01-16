@@ -50,7 +50,7 @@ Its ability to do this comes down to two things:
 
 There’s room in every market for another great product with a different business strategy. For us, that is being developer-focused, open-source, and multi-product. We provide more of the tools startups need, which makes us more appealing to them.
 
-Like HubSpot, we’ve found that inbound works well for [our ideal customer](/handbook/who-we-are-building-for), which means we put a lot of effort into our website and content. Being helpful and making setup easy for engineers leads to ever-important word-of-mouth growth.
+Like HubSpot, we’ve found that inbound works well for [our ideal customer](/handbook/who-we-build-for), which means we put a lot of effort into our website and content. Being helpful and making setup easy for engineers leads to ever-important word-of-mouth growth.
 
 ## 3. Zapier: Self-serve, self-sufficient, SEO 💵
 

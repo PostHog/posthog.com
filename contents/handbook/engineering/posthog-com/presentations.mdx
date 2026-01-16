@@ -26,6 +26,8 @@ The example below shows a presentation that is personalized for a particular com
     -   Supports some variables like `{companyName}` and `{companyLogo}` that can be used within slides
 -   Connects with Salesforce to personalize the presentation with the assigned rep
 -   Embeds a Default.com scheduling form
+-   Supports a lead form
+-   Can optionally hide slide thumbnails and presenter notes
 -   And yes, they're fully responsive, and if an uploaded screenshot has a dark mode equivalent, it will be used in dark mode
 
 ## How it works
@@ -83,6 +85,12 @@ Here's a general structure for a presentation using the various templates. You c
 ```
 {
     "name": "Product Engineers",
+    "config": {
+        "thumbnails": false,
+        "notes": false,
+        "form": true,
+        "teamSlug": "sales-cs"
+    },
     "slides": {
         "overview": {
             "template": "stacked",
@@ -247,7 +255,9 @@ This is a multi-column layout that supports multiple products or features side-b
 }
 ```
 
-## Overriding default content
+## Customization
+
+### Overriding default content
 
 You can create an entirely personalized presentation, use the `dream-customers` folder. Set the json filename to the company's domain name and inside the file, set an arbitrary ID that will be used in the URL, like:
 
@@ -272,3 +282,81 @@ Reference content from any persona file with `inherit`, or override the content 
       "slideKey": "feature_flags"
   },
 ```
+
+### Display options
+
+Use the `config` object in the JSON file that supplies the content for the presentation to customize how the presentation renders. This can be done for a persona, a specific company, or an individual.
+
+#### All properties
+
+```
+"config": {
+    "thumbnails": false, // hides slide thumbnails column
+    "notes": false, // hides presenter notes drawer
+    "form": true,  // shows the lead form
+    "teamSlug": "sales-cs" // specifies which Small Team appears in the form
+}
+```
+
+The `thumbnails`, `notes`, and `form` values can be overridden in the query string (independently), like:
+
+```
+/for/product-engineers?thumbnails=false&notes=false&form=true
+```
+
+These configuration options are remembered when using the _Share your windows_ link generator in the _Active windows_ pane. This is useful for sending a link to someone that will open multiple windows _and also_ remember the display options of a presentation.
+
+### Product presentations
+
+The above properties also work for product presentations, like:
+
+```
+/llm-analytics?thumbnails=false&notes=false&form=true
+```
+
+### Lead form
+
+The lead form is hidden by default but can be enabled in a persona's JSON file, or displayed manually using the query param `&form=true`.
+
+```
+"config": {
+    "form": true,
+}
+```
+
+Non-personalized (industry-specific) landing pages show avatars of the <SmallTeam slug="sales-product-led" />.
+
+![Default small team](https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_11_06_T22_54_26_064_Z_ac2d292639.png)
+
+Company-specific landing pages show the <SmallTeam slug="sales-cs" /> by default.
+
+![No assignment in Salesforce](https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_11_06_T22_31_35_421_Z_67d9d50a39.png)
+
+This is because different URL patterns are intended for different purposes.
+
+| Path                       | Purpose  | Team                    |
+| -------------------------- | -------- | ----------------------- |
+| `/for/{company}/{persona}` | Outbound | New Business Sales Team |
+| `/for/{persona}`           | Inbound  | Product-Led Sales Team  |
+
+#### Small team
+
+The small team in the `config` object can be overridden for any persona, company, persona within a specific company, or completely custom landing page.
+
+```
+"config": {
+    "form": true,
+    "teamSlug": "sales-cs"
+}
+```
+
+This can also be overridden to show a specific small team using `&t={id}` using mappings in the `TEAM_QUERY_MAP` in `src/components/Presentation/index.tsx` and works for product presentations, use case landing pages, personalized landing pages, and custom presentations.
+
+| ID  | Small Team          |
+| --- | ------------------- |
+| 1   | `sales-cs`          |
+| 2   | `sales-product-led` |
+
+On landing pages personalized to a specific company, we check if the account is assigned in Salesforce. This takes priority over any small team assignment in JSON and the `t` query param.
+
+![Account assigned in Salesforce](https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_11_06_T22_27_14_309_Z_58d38f7173.png)

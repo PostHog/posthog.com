@@ -86,7 +86,7 @@ As an output from the query on your data, you get a result. The result takes the
 ]
 ```
 
-Most analytics platforms transform the data from the result into a visual such as a table, formatted page, or graph. This enables further analysis.
+Most analytics tools transform the data from the result into a visual such as a table, formatted page, or graph. This enables further analysis.
 
 ![SQL insight](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/sql-for-analytics/sql.png)
 

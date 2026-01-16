@@ -2,7 +2,8 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
-import OverflowContainer from '../OverflowContainer'
+import Link from '../Link'
+import OSTable from '../OSTable'
 
 type LibraryNode = {
     fields: {
@@ -68,42 +69,54 @@ export const LibraryComparison = () => {
         return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
     }
 
-    return (
-        <div className="overflow-x-scroll mb-4">
-            <table>
-                <thead>
-                    <tr>
-                        <th className="w-48">Library</th>
-                        <th>Event capture</th>
-                        <th>User identification</th>
-                        <th>Autocapture</th>
-                        <th>Session recording</th>
-                        <th>Feature flags</th>
-                        <th>Group analytics</th>
-                        <th>Error tracking</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sdks.nodes
-                        .filter((lib) => lib.frontmatter.features)
-                        .map((lib) => (
-                            <tr key={lib.fields.slug}>
-                                <td>
-                                    <a href={lib.fields.slug}>{lib.frontmatter.title}</a>
-                                </td>
-                                <td>{renderAvailability(lib.frontmatter.features?.eventCapture)}</td>
-                                <td>{renderAvailability(lib.frontmatter.features?.userIdentification)}</td>
-                                <td>{renderAvailability(lib.frontmatter.features?.autoCapture)}</td>
-                                <td>{renderAvailability(lib.frontmatter.features?.sessionRecording)}</td>
-                                <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
-                                <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
-                                <td>{renderAvailability(lib.frontmatter.features?.errorTracking)}</td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
-        </div>
-    )
+    const columns = [
+        { name: 'Library', width: 'auto', align: 'left' as const },
+        { name: 'Event capture', width: '1fr', align: 'center' as const },
+        { name: 'User identification', width: '1fr', align: 'center' as const },
+        { name: 'Autocapture', width: '1fr', align: 'center' as const },
+        { name: 'Session recording', width: '1fr', align: 'center' as const },
+        { name: 'Feature flags', width: '1fr', align: 'center' as const },
+        { name: 'Group analytics', width: '1fr', align: 'center' as const },
+        { name: 'Error tracking', width: '1fr', align: 'center' as const },
+    ]
+
+    const rows = sdks.nodes
+        .filter((lib) => lib.frontmatter.features)
+        .map((lib) => ({
+            key: lib.fields.slug,
+            cells: [
+                {
+                    content: (
+                        <Link to={lib.fields.slug} state={{ newWindow: true }}>
+                            {lib.frontmatter.title}
+                        </Link>
+                    ),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.eventCapture),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.userIdentification),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.autoCapture),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.sessionRecording),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.featureFlags),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.groupAnalytics),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.errorTracking),
+                },
+            ],
+        }))
+
+    return <OSTable columns={columns} rows={rows} />
 }
 
 export default LibraryComparison

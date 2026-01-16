@@ -40,8 +40,10 @@ Autocapture is available in the following SDKs, each with a different set of cap
 
 - [JavaScript Web](/docs/libraries/js) - enabled by default
 - [React](/docs/libraries/react) - enabled by default
+- [Android](/docs/libraries/android) - enabled by default
+- [iOS](/docs/libraries/ios) - enabled by default (element interactions - `$autocapture` events disabled by default)
 - [React Native](/docs/libraries/react-native) - disabled by default
-- [iOS](/docs/libraries/ios) - disabled by default
+- [Flutter](/docs/libraries/flutter) - disabled by default
 
 <CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
 
@@ -277,6 +279,7 @@ The PostHog [React Native SDK](/docs/libraries/react-native) can automatically c
 }}>
     ...
 </PostHogProvider>
+```
 
 Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...`.
 
@@ -380,7 +383,7 @@ posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false,
-    capture capture_pageleave ageleaves: false,
+    capture_pageleave: false,
 })
 ```
 

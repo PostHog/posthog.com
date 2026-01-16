@@ -17,9 +17,11 @@ type QuestionsProps = {
     disclaimer?: boolean
     autoFocus?: boolean
     noQuestionsMessage?: React.ReactNode
+    className?: string
 }
 
 export const Questions = ({
+    className = '',
     slug,
     limit,
     topicId,
@@ -39,10 +41,10 @@ export const Questions = ({
     const { questions, fetchMore, refresh, isLoading } = useQuestions({ slug, limit, topicId, profileId })
     const hasQuestions = questions.data && questions.data.length > 0
     return (
-        <div>
+        <div className={className}>
             {hasQuestions && title && <h3>{title}</h3>}
             {hasQuestions && (
-                <ul className="m-0 p-0 list-none mb-6">
+                <ul className="not-prose m-0 p-0 list-none mb-6">
                     {questions.data.map((question) => {
                         return (
                             <li key={question.id} className="py-4 first:pt-0">

@@ -35,7 +35,7 @@ A barebones example in React looks like this:
 ```js
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function FirstSite() {
   const posthog = usePostHog()
@@ -67,7 +67,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import posthog from 'posthog-js'
-import { PostHogProvider} from 'posthog-js/react'
+import { PostHogProvider} from '@posthog/react'
 
 // Parse hash parameters
 const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -108,7 +108,7 @@ In our barebones React example, this looks like this:
 
 ```js
 import React, { useState } from 'react'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 function SignUpPage() {
   const [username, setUsername] = useState('')

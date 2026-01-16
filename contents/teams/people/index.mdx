@@ -6,66 +6,21 @@ hideAnchor: false
 template: team
 ---
 
+import TaskOwnershipTable from '../../../src/components/TaskOwnershipTable'
+
 ## Responsibilities
 
 Our people team works across talent, people, operations, and culture. This is what we care about:
 
-- Setting a very high bar for bringing people on board. We are always looking for _the_ best people in their field, or people on their way to becoming exceptional at their jobs. This is so important to us, it's enshrined in our [values](/handbook/company/values#talent-compounds).
-- Supporting our team throughout the entire employee lifecycle - from [making an offer](/handbook/people/compensation), to [onboarding](/handbook/people/onboarding) and [progression](/handbook/people/career-progression), [time off](/handbook/people/time-off), and eventually [parting ways](/handbook/people/offboarding). 
-- We create light-touch initiatives, systems, and processes that allow PostHog to act fast and [scale iteratively](/handbook/company/culture#iteration) 
-- Building a [diverse and inclusive culture](/handbook/company/diversity) with a strong sense of belonging is at the heart of everything we do.
+-   Supporting our team throughout the entire employee lifecycle - from [making an offer](/handbook/people/compensation), to [onboarding](/handbook/people/onboarding) and [progression](/handbook/people/career-progression), [time off](/handbook/people/time-off), and eventually [parting ways](/handbook/people/offboarding).
+-   We create light-touch initiatives, systems, and processes that allow PostHog to act fast and [scale iteratively](/handbook/company/culture#iteration)
+-   Building a [grown up company](/handbook/company/grown-ups) with a strong sense of belonging is at the heart of everything we do.
 
-This is the list of who owns what on the team:
+### Task ownership
 
-| **People Ops**                   	|  Owner  	|
-|----------------------------------	|:-------:	|
-| US payroll                     	|  Carol 	|
-| UK payroll                  	   |  Ops   	|
-| Deel payroll                     	|  Ops   	|
-| UK benefits & pension            	|  Kendal 	|
-| US benefits & 401k               	|  Carol  	|
-| Offer letters                	   |  Talent 	|
-| Onboarding & contracts           	|  Ops   	|
-| State registrations              	|  Carol  	|
-| Managing merch                   	|  Kendal 	|
-| Compensation reviews             	|  Charles 	|
-| Grievance & disciplinary process 	|  Charles 	|
-| Termination process              	|  Ops   	|
-| Offboarding process              	|  Ops   	|
+<!-- manage this table in /src/hooks/useTaskOwnership.tsx -->
 
-| **Culture**                   	   |  Owner  	|
-|----------------------------------	|:-------:	|
-| Team celebrations                	|  Kendal 	|
-| Offsites                         	|  Kendal 	|
-| Quarterly surveys                	|  Kendal 	|
-| DE&I initiatives                 	|  Charles 	|
-
-| **Finance**                     	|  Owner  	|
-|----------------------------------	|:-------:	|
-| Accounting - US                  	|  Janani 	|
-| Accounting - UK                  	|  Janani 	|
-| Accounting - DE                  	|  Janani 	|
-| Financial planning/review        	|  Fraser 	|
-| Financial Audit co-ordination     |  Janani   |
-| Board reporting                  	|  Fraser 	|
-| Insurance                       	|  Ops    	|
-| Chasing receipts/invoices        	|  Janani 	|
-
-| **Legal**                   	   |  Owner  	|
-|----------------------------------	|:-------:	|
-| Commercial agreements            	|  Hector  	|
-| Fundraising agreements           	|  Hector 	|
-| IP & confidentiality             	|  Hector 	|
-| Privacy & compliance             	|  Hector 	|
-| Share options                    	|  Hector 	|
-
-| **Systems**                   	   |  Owner  	|
-|----------------------------------	|:-------:	|
-| Equipment management             	|  Ops     	|
-| Accounts management              	|  Ops    	|
-| Mail monitoring                  	|  Ops   	|
-
-Where "Ops" is mentioned this is shared responsibility of Ops Managers. Similarly, where Talent is mentioned this is shared across Talent Partners. 
+<TaskOwnershipTable dataset="people" />
 
 ## Customer
 
@@ -73,31 +28,28 @@ Every PostHog team member, as well as current, future and past candidates.
 
 ## Slack channels
 
-- [#team-people-and-ops](https://posthog.slack.com/messages/team-people-and-ops) - internally public, default for ops & people discussions
-- [#private-people-ops](https://posthog.slack.com/messages/private-people-ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
+-   [#team-people-and-ops](https://posthog.slack.com/messages/team-people-and-ops) - internally public, default for ops & people discussions
+-   [#private-team-people-ops](https://posthog.slack.com/messages/private-people-ops) - internally confidential, for minority of issues, e.g. salaries, candidate offers
 
 ## Tools
 
-Here is a summary of some of the tools we've found most effective for getting the job done. You can read more about why we chose them [here](https://posthog.com/blog/startup-ops-toolkit). Fraser and/or Charles are top level admins for all of these, should you need access. 
+Here is a summary of some of the tools we've found most effective for getting the job done. You can read more about why we chose them in the [startup ops toolkit blog post](https://posthog.com/blog/startup-ops-toolkit). Fraser and/or Charles are top level admins for all of these, should you need access.
 
-### People Ops, Recruiting, and Payroll
-
-- [Ashby](https://ashbyhq.com) - our ATS for managing all recruitment (you can find their full documentation [here](https://www.notion.so/Ashby-University-efd04871f5554358ada837de165070ca)).
-- [Deel](https://www.letsdeel.com/) - platform for managing all team members and payroll for everybody except in the UK (using their EOR service in certain countries). 
-   - We use [Middesk](https://www.middesk.com/) to manage all our state registrations and filings on our behalf. 
-  - For managing our US 401(k) we use [Guideline](https://www.guideline.com), which auto-enrolls all new US hires.
-- UK contracts are currently done manually in Google Drive, with payroll also being run manually - our accountants load up payments in Revolut for us to approve every month. All templates are stored in the _Legal Docs [CONFIDENTIAL]_ shared Google Drive, in the _Team_ folder. 
-- US contracts are also done manually in Google Drive. 
-- To avoid emailing PDFs back and forth forever, we use [PandaDoc](https://www.pandadoc.com/).
-- [PTO by Deel](https://www.tryroots.io/pto) - Slack app for booking all types of time off. 
-- [Deel](https://www.deel.com/) - used to store all team personal details, documents, and pay. We are in the process of migrating this to Deel HR.
+-   [Deel](https://www.letsdeel.com/) - platform for managing all team members and payroll for everybody except in the UK (using their EOR service in certain countries).
+-   We use [Middesk](https://www.middesk.com/) to manage all our state registrations and filings on our behalf.
+-   For managing our US 401(k) we use [Guideline](https://www.guideline.com), which auto-enrolls all new US hires.
+-   UK contracts are currently done manually in Google Drive, with payroll also being run manually - our accountants load up payments in Revolut for us to approve every month. All templates are stored in the _Legal Docs [CONFIDENTIAL]_ shared Google Drive, in the _Team_ folder.
+-   US contracts are also done manually in Google Drive.
+-   To avoid emailing PDFs back and forth forever, we use Google e-signature for contracts, Docusign for all other.
+-   [PTO by Deel](https://www.tryroots.io/pto) - Slack app for booking all types of time off.
+-   [Deel](https://www.deel.com/) - used to store all team personal details, documents, and pay.
 
 ### Finance and Banking
 
-Details can be found in `company-internal` [repo here](https://github.com/PostHog/company-internal/tree/master/finance) 
+Details can be found in the `company-internal` [finance repository](https://github.com/PostHog/company-internal/tree/master/finance)
 
 #### Everything Else
 
-- [Carta](https://carta.com/) is where we manage our cap table. Orrick manage this on our behalf. 
-- We use [Embroker](https://www.embroker.com/) for all of our insurance coverage, including D&O, Cyber Liability, and Travel. 
-- We track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board [here](https://github.com/orgs/PostHog/projects/2?fullscreen=true).
+-   [Carta](https://carta.com/) is where we manage our cap table. Orrick manage this on our behalf.
+-   We use [Embroker](https://www.embroker.com/) for all of our insurance coverage, including D&O, Cyber Liability, and Travel.
+-   We track everything in [GitHub](https://github.com/) from maintaining this handbook to sprint planning. You can find the People & Ops project board on the [PostHog GitHub Projects view](https://github.com/orgs/PostHog/projects/2?fullscreen=true).

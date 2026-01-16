@@ -87,10 +87,10 @@ The improvements were immediate and substantial:
 
 **Performance gains:**
 
-- p99 latency: 904ms → 85.4ms (90.5% improvement)
-- p95 latency: 381ms → 42.9ms (88.7% improvement)  
-- p90 latency: 160ms → 31.2ms (80.5% improvement)
-- p50 latency: 21.7ms → 11.8ms (45.6% improvement)
+- p99 latency: 904ms → 85.4ms (10.6x faster, 90.5% reduction)
+- p95 latency: 381ms → 42.9ms (8.9x faster, 88.7% reduction)  
+- p90 latency: 160ms → 31.2ms (5.1x faster, 80.5% reduction)
+- p50 latency: 21.7ms → 11.8ms (1.8x faster, 45.6% reduction)
 
 These aren't just synthetic benchmarks—these are real-world improvements under production load with the same traffic patterns.
 

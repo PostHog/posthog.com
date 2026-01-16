@@ -36,17 +36,33 @@ Typical agenda:
 
 We want to try to encourage small teams to get together once each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
 
+Planning a small team offsite? Kendal’s got you covered.
+Here’s how it works:
+
+- The team lead should message Kendal with their proposed dates and location.
+- Kendal will then go away and find suitable accommodation for the group.
+- Once that’s sorted, she’ll:
+  - Create a Slack channel for the offsite (use `#offsite-[team]-[month]-[year]-[where]`) and add everyone who’s going.
+  - Set up the offsite budget in Brex.
+  - Update the team’s Canvas with:
+    - Accommodation details and a handy map
+    - A flight tracker
+    - A rough itinerary (Kendal will include the mandatory bits, like 360° feedback/Readme sessions, team leads can fill in the rest)
+  - Look up dining options for a couple of group dinners (we like to keep a few nights free for “choose your own adventure” dining).
+  - Suggest and book a whole group activity for everyone to enjoy together.
+If there’s anything ad hoc you’d like Kendal to take point on, just let her know, she’s happy to help!
+Each team member is still responsible for booking their own flights.
+
 Some guidelines:
 
-- These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
-- Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
-- We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved. If the group is large enough optimize for multiple apartments in the same building so that you have separate spaces to work / chill / take calls.
-- If Airbnbs aren't an option for some reason, make sure the hotel has meeting rooms/working areas, or there's a coworking space a few minutes away where everyone fits comfortably.
+- Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going.
+- It can be useful to combine offsites but beware if you add too many people everything gets harder to arrange. There's no hard and fast rule here but the more people that are attending the more concrete you need to be on who is organising and why people are attending. It will be more work and you should be purposeful about it.
+- If the number of attendees is >10 actively consider if Kendal should be attending so there is a person attending whose only focus is making sure it goes well and everyone else can focus on the work of the offsite.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. Also, it's a good idea to have an expectation-setting session (can be async in a Figjam) to ensure everyone is on the same page about what the outcome/output of the offsite should be.
+- Choose a location that minimises layovers for attendees.
 - Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
-- Everyone should have their own bedroom which they don't need to share.
 - You should do a [360 degree feedback session](/handbook/people/feedback#ground-rules). It can feel uncomfortable doing these, but almost everyone who's done one at PostHog has come out feeling better and with a whole host of things they can improve. These are best in person.
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
 
@@ -68,6 +84,8 @@ Here's a real-world example: [Product Analytics team's Munich offsite agenda](ht
 The budget for these trips is up to $2,000 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
+
+> On occasion during busy hiring peak time, we do recommend any team member involved in the interview process to dedicate at least one hour block per day during the offsites to accommodate candidate interviews so that this does not delay the hiring process on your team while you're away. Please coordinate directly with #team-talent if you have additional questions.
 
 ## Hedge House
 
@@ -91,6 +109,14 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 - [Ruby Stella hotel](https://www.ruby-hotels.com/en/destinations/london/ruby-stella)
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
+
+## Border Control
+
+Quite often you will be required to travel to places where some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasize that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
+
+A successful strategy is usually to start off with a high-level purpose of your trip which is usually something like "hanging out with colleauges" or "I am here for a business meeting with colleauges", it is also usually advisable to only respond with a minimal amount, saying only what is necessary. If the agent asks for more details it's usually good to go into a bit more detail about the company structure "I work for a US tech company and I am based in [Insert your country] where I work remotely. I am here to do some in-person meetings with my colleagues for the next few days and I fly back on [insert date]". Sometimes the border patrol agent will ask more about the business, it's fine to give these details and be as honest about that as you would anybody else. If further details are required of the content of the trip, you can again give some context of how we like to lean into the benefits of in-person working and since most of your colleagues are based in the US, you are travelling their for a few days to meet in-person and will be returning home afterwards. 
+
+For all company offsites, it's best to describe this as a company gathering where you will be hanging out with colleagues for the week. Generally, it is best to avoid using the phrase "training" as this can also be confusing. 
 
 ## Travel insurance
 

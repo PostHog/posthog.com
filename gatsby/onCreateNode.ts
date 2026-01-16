@@ -6,7 +6,6 @@ import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
-import { resolveSnippets } from './snippetUtils'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -52,6 +51,13 @@ exports.onPreInit = async function (_, options) {
 }
 
 const cloudinaryCache = {}
+
+const REPO_CONFIGS = {
+    'posthog-main-repo': {
+        stripPrefix: '/docs/published/',
+        pathPrefix: '/handbook/engineering',
+    },
+}
 
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     if (
@@ -145,7 +151,20 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             })
         }
 
-        const slug = createFilePath({ node, getNode, basePath: `pages` })
+        let slug = createFilePath({ node, getNode, basePath: `pages` })
+        if (parent?.sourceInstanceName) {
+            const config = REPO_CONFIGS[parent.sourceInstanceName]
+            if (config) {
+                if (slug.startsWith(config.stripPrefix)) {
+                    slug = slug.substring(config.stripPrefix.length)
+                }
+                // Ensure slug starts with / before concatenating
+                if (!slug.startsWith('/')) {
+                    slug = `/${slug}`
+                }
+                slug = `${config.pathPrefix}${slug}`
+            }
+        }
 
         createNodeField({
             node,
@@ -249,19 +268,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 console.error(`Error fetching input_schema for ${templateIds}: ${error}`)
             }
         }
-
-        const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
-        const contentWithSnippets = resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
-
-        // Prepend title as H1 if it exists
-        const title = node.frontmatter?.title
-        const contentWithSnippetsAndTitle = title ? `# ${title}\n\n${contentWithSnippets}` : contentWithSnippets
-
-        createNodeField({
-            node,
-            name: `contentWithSnippets`,
-            value: contentWithSnippetsAndTitle,
-        })
     }
 
     if (node.internal.type === 'Plugin' && new URL(node.url).hostname === 'github.com' && process.env.GITHUB_API_KEY) {

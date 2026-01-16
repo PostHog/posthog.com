@@ -4,6 +4,14 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import useProduct from 'hooks/useProduct'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
+interface SalesRep {
+    name: string
+    title: string
+    email: string
+    photo: string
+    color: string
+}
+
 interface ContentItem {
     handle: string
     title: string
@@ -22,7 +30,7 @@ interface ColumnsTemplateProps {
     textColor?: string
     companyLogo?: string
     companyName?: string
-    salesRep?: SalesRep
+    salesRep?: SalesRep | null
     slideKey?: string
     content?: ContentItem[]
 }

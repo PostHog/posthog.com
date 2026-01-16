@@ -18,7 +18,7 @@ Some of the influencers we sponsor include:
 
 - You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we’ve already sponsored, inbound, and [Passionfroot](https://www.passionfroot.me/).
 
-- Their audience needs to be relevant to us, ideally targeting our [ICP](/handbook/who-we-are-building-for), but broadly engineers and founders.
+- Their audience needs to be relevant to us, ideally targeting our [ICP](/handbook/who-we-build-for), but broadly engineers and founders.
 
 - Even within this group, there are some categories to avoid like job interview prep, career growth, low-level engineering, and heavy computer science focus. Try to find web or mobile developers, product engineers, startup founders, and indiehackers instead.
 
@@ -55,10 +55,10 @@ Some of the influencers we sponsor include:
 - Make sure they tell their audience to "mention them on sign up" or "say that they heard about PostHog from them" so we can track the attribution.
 
 - We generally let influencers decide on what the ad read is like so that it best fits their audience. We can provide guidance on what to talk about though. These points are helpful to share:
-  - PostHog is an all-in-one suite of product and data tools for developers.
-  - This means product analytics, web analytics, session replay, A/B testing, feature flags, error tracking, LLM analytics, surveys, and more.
+  - PostHog is a developer platform that helps people build successful products. We provide a suite of dev tools to help them do this.
+  - This means product analytics, web analytics, session replay, error tracking, experimentation, feature flags, LLM analytics, surveys, and more.
   - We also have a CDP for sending data to 50+ destinations and a data warehouse product that lets you connect to external sources like your database, Stripe or Hubspot to query with SQL (or no code insights) alongside your product data.
-  - The goal of these tools is to help founders and engineers understand their customers,  how they are using products, the success of their features, and the journeys of their visitors.
+  - The goal of these tools is to help founders and engineers debug their product, understand their customers, analyze usage, and ship a more successful product faster.
   - We have a generous free tier for every one of our products. You can sign up and get started with all of them for free right away. 90% of users use PostHog for free.
   - Setup is as simple as installing one of our SDKs or pasting a snippet into your site header, we then autocapture data like pageviews, button clicks, and sessions. We also have SDKs for all the popular backend languages like Python, Node, Go, etc.
 

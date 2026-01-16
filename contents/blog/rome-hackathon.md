@@ -15,7 +15,7 @@ tags:
   - Offsites
 ---
 
-As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/teams/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
+As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our <SmallTeam slug="product-analytics" /> (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
 
 The team ate a lot of pizza and gelato, refocused and aligned current work, ran 360 feedback sessions, and more (see our engineer Paul's [summary thread here](https://twitter.com/pauldambra/status/1576257069766037506)). On top of all of this, they had a hackathon and built a bunch of new things.
 
@@ -41,7 +41,7 @@ The feedback app is injected into your site through PostHog. It can be modified 
 
 ![Feedback app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/rome-hackathon/feedback-app.png)
 
-You can find the first PR for the feedback app [here](https://github.com/PostHog/feedback-app/pull/1).
+You can find the first PR for the feedback app in [PostHog/feedback-app pull request #1](https://github.com/PostHog/feedback-app/pull/1).
 
 ## FaceHog (HogBook? Hoggr?) notifications
 

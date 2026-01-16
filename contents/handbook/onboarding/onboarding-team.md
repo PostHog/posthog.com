@@ -8,7 +8,7 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked here ([link](https://app.posthog.com/project/2/dashboard/363452)).
+The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked in the [onboarding team retention dashboard](https://app.posthog.com/project/2/dashboard/363452).
 
 We also care about net dollar retention for this segment, but we treat it as an auxiliary metric.
 
@@ -16,7 +16,7 @@ We also care about net dollar retention for this segment, but we treat it as an 
 
 The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $100 forecast are routed to us. We also handle a couple of other segments:
 
--   YC program participants
+-   YC program participants.
 -   Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
 -   Startup plan customers with high credit usage (> ~$1500).
 -   Hype startups we want to work with (despite being below $ thresholds), or longer-standing customers that have paid in this range and need billing or setup assistance.
@@ -28,16 +28,27 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 -   Not signed up/generated a bill, but have contacted sales.
 -   Are early-stage startups on the startup plan with no billing/low credit usage (<$500/mo).
 
+### Merch store consultation
+
+Customers who normally fall outside our scope still have a chance to get help! They can buy an Onboarding consultation [via our merch store](https://posthog.com/merch?product=30-min-onboarding-consultation).
+
+After making the purchase, the customer gets a link to book a meeting, and they can contact our Billing team if they can't find an appropriate time slot. The billing team handles issuing credits/refunds accordingly. 
+
+The booking link has no expiry, so there's no need to follow up with the customer if they haven't booked the call instantly - they can do so at the most convenient time.
+
+If someone did book the meeting but didn't show up at a consultation, follow up with the customer to offer a meeting at another time. Set a task reminder in Vitally, and if we don't hear back within 1-2 weeks, offer issuing credits for the missed meeting.
+
 ### Tooling
 
-Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools). 
+Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/sales-and-cs-tools).
 
 The team-specific tools for this team are:
 
-- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts
-- [Shared Calendly link](https://calendly.com/posthog-onboarding-team)
-- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1)
-- [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team)
+- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts.
+- [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
+- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
+- [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.
+- [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team).
 
 ### Internal process (Vitally)
 
@@ -62,25 +73,34 @@ A supplementary view that’s great for getting a general overview of progress.
 -   Use our docs, and link to relevant information.
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 
-## How to succeed 
+### Paid Onboarding service
+
+Customers can buy an Onboarding session in our [merch store](https://posthog.com/merch?product=30-min-onboarding-consultation). When that happens, we get notified in our Slack channel. Since it's a paid service, we should prioritize these. Check who completed the purchase, look them up in Vitally for more context, and check whether they booked a call. Change the status in Vitally accordingly, and add a note if needed. A few things to keep in mind:
+
+- If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
+- If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
+- If the customer can't find a suitable time to meet, offer them a refund. 
+
+## How to succeed
 
 ### How to deal with complex technical issues
 
 Our role is pretty hybrid and lives at the intersection of other teams. As much as we love solving our own problems, escalations may happen. Here’s a brief guide on how to handle them:
 
--   Do your homework – check our docs, ask Max AI, and search Slack and Zendesk for similar questions. You can also check GitHub to see whether we have a bug or enhancement logged. If that doesn’t bring you closer to a solution, ask in the team Slack channel.
+-   Do your homework – check our docs, ask PostHog AI, and search Slack and Zendesk for similar questions. You can also check GitHub to see whether we have a bug or enhancement logged. If that doesn’t bring you closer to a solution, ask in the team Slack channel.
 -   Don’t be afraid to admit when you don’t know something. Note it down and circle back once you’ve found the answer! Honesty goes a long way.
 -   Consider sharing a Loom recording in your reply to the user – It might be more efficient than a written instruction.
 -   If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
 -   Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
 -   If a support issue lands in your inbox, forwarding it to supportreply@posthog.com should do the trick. Make sure to double-check in Zendesk that the ticket is not marked as Solved.
-- Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
+- Ideally, after the meeting with the user, they should know how to seek further help. That includes using PostHog AI, consulting the docs, and reaching out to our Support team.
 
 ### How to deepen your knowledge
 
 -   Go through Sales docs, especially [Contract Rules](https://posthog.com/handbook/growth/sales/contract-rules), [Creating Contracts](https://posthog.com/handbook/growth/sales/contracts), and others from the SalesOps section. There will be some related conversations that you'll need to handle yourself, so come prepared.
 -   Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
--   Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
+-   Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) and [Sales & CS Trainings](https://app.buildbetter.app/folders/18024) BuildBetter folders.
 -   Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
 -   Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum).
--   Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend Ticket Deep Dive sessions and Product Intros that are scheduled periodically.
+-   Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend Product Intros that are scheduled periodically.
+-   Take [CoachHog](https://coachhog.lovable.app/) for a spin!

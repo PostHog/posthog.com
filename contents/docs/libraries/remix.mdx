@@ -1,25 +1,31 @@
 ---
 title: Remix
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/remix.svg
+platformLogo: remix
 ---
 
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your [Remix](https://remix.run/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+
+<CalloutBox icon="IconInfo" title="Using Remix V3?" type="fyi">
+
+Remix V3 is now React Router V7 framework mode. Please refer to the [React Router V7 framework mode](/docs/libraries/react-router/react-router-v7-framework-mode) guide instead for instructions on how to integrate PostHog.
+
+</CalloutBox>
 
 This guide walks you through integrating PostHog into your Remix app using the [JavaScript Web SDK](/docs/libraries/js).
 
 ## Installation
 
-Install `posthog-js`:
+Install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install --save posthog-js
+npm install --save posthog-js @posthog/react
 ```
 
-Start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
+Start by setting `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file.
 
 ```ts
 // vite.config.ts
@@ -39,7 +45,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   ssr: {
-    noExternal: ["posthog-js", "posthog-js/react"],
+    noExternal: ["posthog-js", "@posthog/react"],
   },
 });
 ```
@@ -50,7 +56,7 @@ Next, create a `provider.tsx` file in the `app` folder. In it, set up the PostHo
 // app/provider.tsx
 import { useEffect, useState } from "react";
 import posthog from "posthog-js";
-import { PostHogProvider } from "posthog-js/react";
+import { PostHogProvider } from "@posthog/react";
 
 export function PHProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
@@ -108,6 +114,8 @@ When you run your app now, PostHog will automatically capture events and pagevie
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
+
+<DetailPostHogIPs />
 
 ## Next steps
 

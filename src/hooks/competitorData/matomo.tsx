@@ -1,0 +1,196 @@
+export const matomo = {
+    name: 'Matomo',
+    key: 'matomo',
+    assets: {
+        icon: '/images/competitors/matomo.svg',
+        comparisonArticle: '/blog/posthog-vs-matomo',
+    },
+    products: {
+        product_analytics: {
+            available: true,
+            features: {
+                advertising_analytics: false,
+                autocapture: false,
+                cohorts: true,
+                custom_events: true,
+                custom_properties: true,
+                monetization_analytics: false,
+                predictive_insights: false,
+                real_time_view: false,
+                toolbar: false,
+                user_profiles: true,
+                trends: {
+                    available: true,
+                    features: {},
+                },
+                funnels: {
+                    available: true,
+                    features: {
+                        conversion_funnels: true,
+                        correlation_analysis: false,
+                    },
+                },
+                retention: {
+                    available: true,
+                    features: {},
+                },
+                user_paths: {
+                    available: true,
+                    features: {},
+                },
+                lifecycle: {
+                    available: false,
+                    features: {},
+                },
+                stickiness: {
+                    available: false,
+                    features: {},
+                },
+                group_analytics: {
+                    available: false,
+                    features: {},
+                },
+                insights: {
+                    available: true,
+                    features: {
+                        ai_insight_builder: false,
+                        formula_mode: false,
+                        ready_made_insight_types: false,
+                        sampling: false,
+                        sql_editor: 'Enterprise',
+                    },
+                },
+            },
+        },
+        web_analytics: {
+            available: true,
+            features: {
+                advertising_analytics: false,
+                bounce_rate: true,
+                bounce_rate_tracking: false,
+                breakdown_by_device_and_browser: false,
+                breakdown_by_geoip: false,
+                conversions: true,
+                cookieless_tracking: true,
+                custom_channel_types: false,
+                entry_exit_paths: true,
+                first_party_cookies: false,
+                hipaa_compliance: false,
+                integration_with_feature_flags: false,
+                integration_with_session_replay: false,
+                integration_with_surveys: false,
+                migration: false,
+                movement_maps: false,
+                open_source: false,
+                outbound_clicks: true,
+                pageviews: true,
+                pre_configured_dashboards: false,
+                real_time_reporting: false,
+                revenue_tracking: false,
+                script_size: false,
+                search_tools: true,
+                session_and_duration_tracking: false,
+                sessions: true,
+                snippet_install: true,
+                traffic_breakdown: true,
+                utm_tracking: true,
+                visitor_and_view_tracking: false,
+                web_vitals: true,
+                web_vitals_reporting: true,
+            },
+        },
+        session_replay: {
+            available: 'Plugin',
+            features: {
+                canvas_recording: true,
+                privacy_masking: true,
+            },
+            export: {
+                features: {
+                    retention_policy: '3 months',
+                },
+            },
+            platform_support: {
+                features: {
+                    web_app_recordings: true,
+                    mobile_app_recordings: true,
+                },
+            },
+        },
+        heatmaps: {
+            available: true,
+            features: {
+                clickmaps: true,
+                heatmaps: true,
+                scrollmaps: true,
+            },
+        },
+        experiments: {
+            available: true,
+        },
+        surveys: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+    },
+    platform: {
+        analytics_integration: {
+            built_in_analytics: false,
+        },
+        deployment: {
+            eu_hosting: true,
+            open_source: true,
+            self_host: true,
+            reverse_proxy: false,
+        },
+        developer: {
+            api: true,
+            mobile_sdks: true,
+            server_side_sdks: true,
+            sql: false,
+        },
+        tools: {
+            cms: '',
+            notebooks: false,
+            project_management_tools: '',
+        },
+        integrations: {
+            bigquery: true,
+            csv_exports: true,
+            datadog: false,
+            email_reports: true,
+            google_search_console: false,
+            hubspot: false,
+            sentry: false,
+            slack: true,
+            stripe: false,
+            warehouse_import: false,
+            wordpress: true,
+            zapier: false,
+            zendesk: false,
+        },
+        pricing: {
+            free_tier: false,
+            self_serve: 'Trial only',
+            transparent_pricing: false,
+            usage_based_pricing: false,
+        },
+        security: {
+            bot_blocking: true,
+            cookieless_tracking: true,
+            data_anonymization: true,
+            gdpr_ready: true,
+            history_audit_logs: true,
+            hipaa_ready: false,
+            reverse_proxy: false,
+            saml_sso: 'Enterprise',
+            soc2_certified: false,
+            two_factor_auth: true,
+        },
+    },
+    pricing: {
+        model: 'Tiered subscription',
+    },
+}

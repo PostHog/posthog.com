@@ -11,6 +11,7 @@ import Layout from 'components/Layout'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
 import TutorialsSlider from 'components/TutorialsSlider'
+import TutorialsList from 'components/TutorialsList'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect } from 'react'
@@ -41,6 +42,7 @@ export default function Plain({ data }) {
         Close,
         a: A,
         TutorialsSlider,
+        TutorialsList,
         ImageSlider,
         ...shortcodes,
     }

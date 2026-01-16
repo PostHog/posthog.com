@@ -3,27 +3,27 @@ name: Art or brand request
 about: Request some artwork or branding work
 title: "Art request - {title}"
 labels: 
-assignees: 
+  - artwork
+assignees:
+  - lottiecoxon
+  - dphawkins1617
+  - heidiberton
+projects:
+  - PostHog/65
 
 ---
 
-> **Guidelines for good art requests:**
-> - Avoid being overly prescriptive about what you need where possible. You're not prompting an AI. 
-> - Provide context about what you're trying to convey – i.e. a feeling, reaction, or narrative.
-> - If it's for an article, share the draft headline and some bullet points of what it's about.
-> - Leave reasonable time. A week is the minimum. Two weeks notice is ideal.
-> - Assign and tag Lottie and Daniel, so they know about it + and add your issue to the Art & Branding project board.
-> - Lottie and Daniel will decide between them who will work on what projects and unassign the other person so the Art board can reflect who is working on what. 
-> - If your request is genuinely urgent, please share in #website-and-vibes channel and mention Lottie and/or Cory.
-
-## Assignee
-@lottiecoxon & @dphawkins1617
+> **How art requests work**
+> By default, Lottie, Heidi & Daniel should be assigned to all art requests and the request will be added to [the art project board](https://github.com/orgs/PostHog/projects/65). They will decide who will work on this brief and reassign as needed. You can check the project board for updates if needed. 
+>
+> If your request is genuinely urgent, please share in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Heidi, Daniel, and/or Cory.
 
 ## Outline
-_Explain what you need_
+_Avoid being overly prescriptive and instead provide context about what you're trying to convey - i.e. a feeling, reaction, or narrative._
+_If it's for an article, share the draft headline and some bullet points of what it's about._
 
 ## Deadline & Priority
-_When do you need it? How important is it?_
+_Leave reasonable time. A week is the minimum. Two weeks notice is good, even more time is ideal._
 
 ## Technical requirements
 _Dimensions, file type etc._

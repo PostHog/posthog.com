@@ -18,6 +18,10 @@ export const DeltaChartHoverLight = "https://res.cloudinary.com/dmukukwp6/image/
 export const DeltaChartHoverDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_dark_cd122710e7.png"
 export const FunnelBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_light_e933e07d24.png"
 export const FunnelBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_dark_c6a7c3e830.png"
+export const TimeSeriesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_light_137450ab36.png"
+export const TimeSeriesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_dark_4cc2e5b46c.png"
+export const ClickIntervalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_51_27_cfce49599a.gif"
+export const ClickIntervalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_53_24_df61be48b8.gif"
 
 After your experiment runs and collects data, you'll want to analyze the results to determine if your changes had a statistically significant impact. This guide shows you how to understand and interpret your experiment results in PostHog.
 
@@ -91,6 +95,44 @@ The hover popup shows:
 Click on any variant in the delta chart to access detailed results. This opens a panel showing the same statistics as the hover popup, plus a **View recordings** button.
 
 Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
+
+### Time series analysis
+
+The time series chart shows how your experiment results change over time, helping you see if your results are stable or still changing.
+
+To view the time series chart, click on any confidence interval bar in the delta chart:
+
+<ProductScreenshot
+    imageLight={ClickIntervalLight}
+    imageDark={ClickIntervalDark}
+    alt="Click on confidence interval bar to show time series chart"
+    classes="rounded"
+/>
+
+This opens the time series view:
+
+<ProductScreenshot
+    imageLight={TimeSeriesLight}
+    imageDark={TimeSeriesDark}
+    alt="Time series chart showing experiment results over time with confidence intervals"
+    classes="rounded"
+/>
+
+How the chart works:
+
+- **Center line**: Shows the percentage change between your variants day by day
+- **Shaded bounds**: The confidence interval that gets narrower as you collect more data
+- **Colored areas**: 
+  - Green means the variant is winning with statistical significance
+  - Red means the variant is losing with statistical significance
+  - No color means the results aren't significant yet
+- **Hover for details**: Hover over any day to see that day's specific results and whether they were significant
+
+Use this chart to:
+
+1. **Check if results are stable**: Look for results that stay consistent over several days. If your results keep flip-flopping between positive and negative, you might need more time or there could be an issue with your experiment.
+2. **Spot unusual patterns**: Find spikes or dips that might be skewing your overall results. For example, a single day with unusual traffic could make your entire experiment look significant when it's actually not.
+3. **Decide when to stop**: When the confidence interval narrows and results stay consistent for several days, you have enough data to make a decision.
 
 ## Interpreting different scenarios
 

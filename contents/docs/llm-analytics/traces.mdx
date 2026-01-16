@@ -2,9 +2,16 @@
 title: Traces
 ---
 
-import TraceEvent from "./_snippets/trace-event.mdx"
+import TraceEventSnippet from "./_snippets/trace-event.mdx"
 
 Traces are a collection of [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
+
+## Sessions vs Traces
+
+- **Trace** (`$ai_trace_id`): Groups related generations and spans together. Required for all LLM analytics events.
+- **Session** (`$ai_session_id`): Optional property that groups multiple traces together based on your chosen grouping strategy.
+
+See the [Sessions](/docs/llm-analytics/sessions) documentation for more details on how to use `$ai_session_id`.
 
 ## Trace timeline
 
@@ -25,10 +32,14 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 ```mermaid
 flowchart TD
 
+    S["<strong>$ai_session_id</strong><br/>(optional)"]
+
     A[<strong>$ai_trace</strong>]
-            
+
+    A2[<strong>$ai_trace</strong>]
+
     B[<strong>$ai_generation</strong>]
-      
+
     C@{ shape: processes, label: "<strong>$ai_spans</strong>" }
 
     D[<strong>$ai_generation</strong>]
@@ -37,6 +48,8 @@ flowchart TD
 
     F[<strong>$ai_generation</strong>]
 
+    S -.-> A
+    S -.-> A2
     A --> B
     A --> C
     C --> D
@@ -44,13 +57,14 @@ flowchart TD
     E --> F
 ```
 
-Traces consist of the following event hierarchy: 
+Traces consist of the following event hierarchy:
 
-1. A trace is the top-level event entity.
-2. A trace can contain multiple spans and generations.
-3. A span can be the parent of other spans.
-4. A generation can be the child of a span or trace.
+1. (Optional) A session (`$ai_session_id`) can group multiple traces together.
+2. A trace (`$ai_trace_id`) is the top-level required grouping for LLM events.
+3. A trace can contain multiple spans and generations.
+4. A span can be the parent of other spans.
+5. A generation can be the child of a span or trace.
 
 ## Event properties
 
-<TraceEvent />
+<TraceEventSnippet />

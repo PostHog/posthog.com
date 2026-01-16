@@ -66,15 +66,18 @@ The schema of the model as created in Postgres is:
 
 The Postgres table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
+### Sessions model
+
+You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
+
 ## Creating the batch export
 
-1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **Postgres** as the batch export destination.
-5. Fill in the necessary [configuration details](#postgres-configuration).
-6. Finalize the creation by clicking on "Create".
-7. Done! The batch export will schedule its first run on the start of the next period.
+1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+2. Click **+ New destination** in the top-right corner.
+3. Select **Postgres** as the batch export destination.
+4. Fill in the necessary [configuration details](#postgres-configuration).
+5. Finalize the creation by clicking on **Create**.
+6. Done! The batch export will schedule its first run on the start of the next period.
 
 ## Postgres configuration
 

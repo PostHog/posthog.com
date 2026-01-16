@@ -7,59 +7,548 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import JSGroupsIntro from "../_snippets/groups-intro.mdx"
-import JSGroupsVSCohorts from "../_snippets/groups-vs-cohorts.mdx"
-import JSCreateGroups from "../_snippets/how-to-create-groups.mdx"
-import JSSetGroupProperties from "../_snippets/setting-group-properties.mdx"
-import JSLinkEventsToGroups from "../_snippets/how-to-link-events-to-groups.mdx"
-import JSGroupsUseCases from "../_snippets/groups-use-cases.mdx"
-export const viewGroupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-light-mode.png"
-export const viewGroupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/view-groups-dark-mode.png"
-export const relatedLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-light-mode.png"
-export const relatedDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/related-people-and-groups-dark-mode.png"
-export const groupInsightsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/group-insights-light-mode.png"
-export const groupInsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/group-insights-dark-mode.png"
-export const funnelsGroupAggregationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/funnels-group-aggregation-light-mode.png"
-export const funnelsGroupAggregationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/funnels-group-aggregation-dark-mode.png"
-export const groupsInFeatureLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-light-mode.mp4"
-export const groupsInFeatureDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-dark-mode.mp4"
-export const groupsProjectSettingLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-light-mode.png"
-export const groupsProjectSettingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-project-settings-dark-mode.png"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/9mCWbVNzn4c"
     className="rounded shadow-xl"
 />
 
-> 🎉 **New:** Group analytics is getting a makeover! Sign up for the [B2B analytics feature preview](https://app.posthog.com/settings/user-feature-previews#b2b-analytics) to get a sneak peek. [Let us know what you think in-app](https://us.posthog.com#panel=support%3Afeedback%3Acrm%3Alow).
+<CalloutBox icon="IconInfo" title="New: Customer Analytics preview" type="fyi">
 
-<JSGroupsIntro />
+Group analytics is getting a makeover! Sign up for the [customer analytics feature preview](https://app.posthog.com/settings/user-feature-previews#customer-analytics-roadmap) to get a sneak peek, and [share your feedback](https://app.posthog.com/#panel=support%3Afeedback%3Acrm%3Alow).
+
+</CalloutBox>
+
+## Overview
+
+Group analytics aggregates events by entities like organizations or companies instead of individual users. This is useful when you need to track behavior at the company, team, or project level.
+
+With groups, you can:
+
+- Track how companies progress through onboarding and activation
+- Deploy feature flags to entire organizations
+- Run experiments at the company level
+- Measure metrics like daily active companies or company churn rate
+
+### Key concepts
+
+**Group types** are categories you define - like "company" or "project". You can create up to 5 group types per project.
+
+**Groups** are the individual entities within each type. For example, if your group type is "company," each group would be a specific company like "Acme Corp" or "Tech Solutions Inc." You can have unlimited groups within each group type.
+
+### How it works
+
+1. Define group types - like "company" or "channel"
+2. Assign group keys (unique identifiers) to each group
+3. Link events to groups in your code
+4. Analyze data by group instead of by user
 
 ## Use cases
 
-<JSGroupsUseCases />
+### B2B product activation
 
-## The difference between groups and cohorts
+Create a "company" group type to track how companies progress through your B2B product's onboarding with [funnels](/docs/product-analytics/funnels):
 
-<JSGroupsVSCohorts />
+- Calculate number of daily active companies, company churn rate, or feature adoption by company
+- See how many companies signed up this month
+- Track what percentage completed onboarding
+- Measure what percentage of new companies used specific features
 
-## How to create groups
+### Channel retention
 
-<JSCreateGroups />
+Create a "channel" group type for Slack-like apps to measure [retention](/docs/product-analytics/retention) of features by channel:
 
-## How to set group properties
+- Track average messages per channel, monthly active channels, or channel participants
+- See which channels consistently use video calling
+- Measure how many channels stay active month over month
+- Compare feature adoption rates by channel type
 
-<JSSetGroupProperties />
+### Project-level feature flags
 
-## How to capture group events
+Create a "project" group type for collaborative apps like Jira, Notion, or Figma:
 
-<JSLinkEventsToGroups />
+- Track project pageviews, users per project, and project engagement
+- Target [feature flags](/docs/feature-flags) at the project level
+- Roll out refactored code to a few projects first, measure performance and errors, then expand based on results
 
-### Advanced (server-side only): Capturing group events without a user
+### Cross-product analysis
 
-If you want to capture group events but don't want to associate them with a specific user, we recommend using a single static string as the distinct ID to capture these events. This can be anything you want, as long as it's the same for every group event:
+Group analytics works across PostHog's entire platform. Here's how you can use group types with different products:
 
-<MultiLanguage >
+| Product | Functionality | Example |
+|---------|---------------|---------|
+| Product analytics | Aggregate trends, funnels, retention, and stickiness by group | Track how many companies completed onboarding |
+| Feature flags | Configure release conditions based on groups | Ensure all users of a company see the same feature flag variant |
+| Experiments | Evaluate experiment results based on group aggregations | Run an A/B test to improve activation rate for new companies |
+| Data warehouse | Join tables or enrich queries with groups data | Write SQL queries that calculate usage across different company sizes |
+
+## Groups vs cohorts
+
+Groups and [cohorts](/docs/data/cohorts) serve different purposes:
+
+- **Groups** aggregate events and don't have to be connected to users. They require code in your app to set up.
+- **Cohorts** represent specific sets of users with something in common. They're created in PostHog without additional code.
+
+Use cohorts if you only need to analyze a list of users. They're simpler and faster to implement.
+
+## Set up group analytics
+
+### Create group types
+
+Create group types before you associate events with them. Call the group identify method to create a group type and set properties.
+
+In this example, we create a "company" group type. For each individual group (company), we set the group key like an ID or domain:
+
+<MultiLanguage>
+
+```js-web
+// Call posthog.group() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist. In the
+// web SDK, it also associates all subsequent events in the session
+// with the group.
+posthog.group('company', 'company_id_in_your_db');
+// This event will be associated with the company above.
+posthog.capture('user_signed_up');
+
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
+posthog.capture('user_signed_up', {
+    '$groups': {
+        'company': 'company_id_in_your_db'
+    }
+});
+```
+
+```python
+# Call posthog.group_identify() to create a group before capturing events.
+# It sends a `$groupidentify` event to create or update the group.
+# It will also create the group type if it doesn't exist.
+posthog.group_identify('company', 'company_id_in_your_db')
+
+# Once the group is created, you can associate events with it by
+# passing the `group` argument. The `group` argument is required
+# for every event that should be associated with the group.
+posthog.capture(
+    'user_signed_up',
+    groups={'company': 'company_id_in_your_db'}
+)
+```
+
+```go
+// Call posthog.GroupIdentify{} to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist.
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company",
+    Key:  "company_id_in_your_db",
+})
+
+// Once the group is created, you can associate events with it by
+// passing the `$groups` property. The `$groups` property is required
+// for every event that should be associated with the group.
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_distinct_id",
+    Event: "user_signed_up",
+    Groups: posthog.NewGroups().
+        Set("company", "company_id_in_your_db"),
+})
+```
+
+```node
+// Call posthog.groupIdentify() to create a group before
+// capturing events. It sends a `$groupidentify` event to create
+// or update the group. It will also create the group type if it
+// doesn't exist.
+posthog.groupIdentify('company', 'company_id_in_your_db')
+
+// Once the group is created, you can associate events with it by
+// passing the `groups` property. The `groups` property is required
+// for every event that should be associated with the group.
+posthog.capture({
+    event: 'user_signed_up',
+    distinctId: 'user_distinct_id',
+    groups: { company: 'company_id_in_your_db' }
+})
+```
+
+```php
+// Call PostHog::groupIdentify() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist.
+PostHog::groupIdentify([
+    'groupType' => 'company',
+    'groupKey' => 'company_id_in_your_db'
+]);
+
+// Once the group is created, you can associate events with it by
+// passing the `$groups` property. The `$groups` property is required
+// for every event that should be associated with the group.
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'user_signed_up',
+    '$groups' => ['company' => 'company_id_in_your_db']
+]);
+```
+
+```ios_swift
+// Call PostHogSDK.shared.group() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist. In the
+// iOS SDK, it also associates all subsequent events in the
+// session with the group.
+PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
+// This event will be associated with the company above.
+PostHogSDK.shared.capture("user_signed_up")
+
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
+PostHogSDK.shared.capture(
+    event: "user_signed_up",
+    properties: [
+        "$groups": [
+            "company": "company_id_in_your_db"
+        ]
+    ]
+)
+```
+
+```android_kotlin
+// Call PostHog.group() to create a group before capturing events.
+// It sends a `$groupidentify` event to create or update the group.
+// It will also create the group type if it doesn't exist. In the
+// Android SDK, it also associates all subsequent events in the
+// session with the group.
+PostHog.group(type = "company", key = "company_id_in_your_db")
+// This event will be associated with the company above.
+PostHog.capture("user_signed_up")
+
+// If the group type is already created, you can also manually add
+// the `$groups` property to any event you want to associate with
+// the group.
+PostHog.capture(
+    event = "user_signed_up",
+    properties = mapOf(
+        "\$groups" to mapOf(
+            "company" to "company_id_in_your_db"
+        )
+    )
+)
+```
+
+```segment
+// You'll always need to pass through the $groups object for Segment, even for analytics.js
+analytics.track('user_signed_up', {
+    $groups: { segment_group: 'company_id_in_your_db' }
+})
+```
+
+```bash
+# Call $groupidentify to create or update a group.
+# It will also create the group type if it doesn't exist.
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "distinct_id": "static_string_used_for_all_group_events",
+    "properties": {
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db"
+    }
+}' <ph_client_api_host>/i/v0/e/
+
+# Once the group is created, you can associate events with it by
+# passing the `$groups` property. The `$groups` property is required
+# for every event that should be associated with the group.
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "user_signed_up",
+    "distinct_id": "user_distinct_id",
+    "properties": {
+        "$groups": {"company": "company_id_in_your_db"}
+    }
+}' <ph_client_api_host>/i/v0/e/
+```
+
+</MultiLanguage>
+
+<CalloutBox icon="IconInfo" title="Tips for group keys" type="fyi">
+
+- Use singular names for group types - "company" not "companies"
+- Use unique IDs as keys for individual groups, not names because names can duplicate
+- Each project can have up to 5 group types
+- You can have unlimited individual groups within each type
+
+</CalloutBox>
+
+### Set group properties
+
+Every individual group can have [properties](/docs/product-analytics/person-properties) associated with it, just like persons. For example, for a "company" group type, you might add `company_name`, `date_joined`, and `subscription` as properties for each individual group company.
+
+<CalloutBox icon="IconInfo" title="Individual groups require at least one property" type="fyi">
+
+You must include at least one group property for an individual group to appear in the [people tab](https://app.posthog.com/persons) in the PostHog app.
+
+</CalloutBox>
+
+<MultiLanguage>
+
+```js-web
+// Option 1 (recommended): Set properties in posthog.group()
+// This has the side-effect that all subsequent events in the session are associated to the group
+posthog.group('company', 'company_id_in_your_db', {
+    name: 'PostHog',
+    subscription: "subscription",
+    date_joined: '2020-01-23'
+});
+
+// Option 2: 
+// Set properties in posthog.capture()
+// This method doesn't have the side-effect of associating all future events to the group.
+posthog.capture('$groupidentify', {
+    '$group_type': 'company',
+    '$group_key': 'company_id_in_your_db',
+    '$group_set': {
+        name: 'PostHog',
+        subscription: "subscription",
+        date_joined: '2020-01-23'
+    }
+});
+```
+
+```python
+posthog.group_identify('company', 'company_id_in_your_db', {
+    'name': 'PostHog',
+    'subscription': 'subscription',
+    'date_joined': '2020-01-23'
+})
+```
+
+```go
+client.Enqueue(posthog.GroupIdentify{
+    Type: "company",
+    Key:  "company_id_in_your_db",
+    Properties: posthog.NewProperties().
+        Set("name", "PostHog").
+        Set("subscription", "subscription").
+        Set("date_joined", "2020-01-23"),
+})
+```
+
+```node
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'company_id_in_your_db',
+    properties: {
+        name: 'PostHog',
+        subscription: "subscription",
+        date_joined: '2020-01-23'
+    }
+})
+```
+
+```php
+PostHog::groupIdentify([
+    'groupType' => 'company',
+    'groupKey' => 'company_id_in_your_db',
+    'properties' => ['name' => 'PostHog', 'subscription' => 'premium', 'date_joined' => '2020-01-23']
+]);
+```
+
+```ios_swift
+// Option 1 (recommended): Set properties in group()
+// This has the side-effect that all subsequent events in the session are associated to the group
+PostHogSDK.shared.group(
+    type: "company", 
+    key: "company_id_in_your_db",
+    properties: [
+        "name": "PostHog",
+        "subscription": "subscription",
+        "date_joined": "2020-01-23"
+    ]
+)
+
+// Option 2: Set properties using capture
+// This method doesn't have the side-effect of associating the session's events to the group
+PostHogSDK.shared.capture(
+    event: "$groupidentify",
+    properties: [
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db",
+        "$group_set": [
+            "name": "PostHog",
+            "subscription": "subscription",
+            "date_joined": "2020-01-23"
+        ]
+    ]
+)
+```
+
+```android_kotlin
+// Option 1 (recommended): Set properties in group()
+// This has the side-effect that all subsequent events in the session are associated to the group
+PostHog.group(
+    type = "company", 
+    key = "company_id_in_your_db",
+    properties = mapOf(
+        "name" to "PostHog",
+        "subscription" to "subscription",
+        "date_joined" to "2020-01-23"
+    )
+)
+
+// Option 2: Set properties using capture
+// This method doesn't have the side-effect of associating the session's events to the group
+PostHog.capture(
+    event = "\$groupidentify",
+    properties = mapOf(
+        "\$group_type" to "company",
+        "\$group_key" to "company_id_in_your_db",
+        "\$group_set" to mapOf(
+            "name" to "PostHog",
+            "subscription" to "subscription",
+            "date_joined" to "2020-01-23"
+        )
+    )
+)
+```
+
+```segment
+analytics.group('company_id_in_your_db', {
+    "name": "PostHog",
+    "subscription": "subscription",
+    "date_joined": "2020-01-23"
+})
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "company_id_in_your_db",
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db",
+        "$group_set": {
+            "name": "PostHog",
+            "subscription": "premium",
+            "date_joined": "2020-01-23"
+        }
+    }
+}' <ph_client_api_host>/i/v0/e/
+```
+
+</MultiLanguage>
+
+Properties on individual groups work the same way as properties on [people](/docs/data/persons). They can be used in experiments and feature flags to roll out features to specific groups.
+
+The PostHog app identifies an individual group using the `name` property. If the `name` property isn't found, it falls back to the group key.
+
+### Link events to groups
+
+How you link events to individual groups depends on your SDK:
+
+- **JavaScript Web SDK:** Call `posthog.group()` once and all session events link to that individual group automatically.
+- **Other SDKs:** Pass the group information in the `groups` parameter for every event you capture.
+
+Events must be [identified](/docs/data/anonymous-vs-identified-events) to link to individual groups. If `$process_person_profile` is set to `false`, the event won't link to the group.
+
+#### Multiple groups per event
+
+You can't assign one event to multiple individual groups of the same group type, but you can assign it to individual groups of different group types.
+
+<MultiLanguage>
+
+```js-web
+// Not possible
+posthog.group('company', 'company_id_in_your_db');
+posthog.group('company', 'another_company_id_in_your_db');
+posthog.capture('user_signed_up')
+
+// Allowed
+posthog.group('company', 'company_id_in_your_db');
+posthog.group('channel', 'channel_id_in_your_db');
+posthog.capture('user_signed_up')
+```
+
+```python
+# Not possible
+posthog.capture(
+    'user_distinct_id',
+    'user_signed_up',
+    groups={
+        'company': 'company_id_in_your_db',
+        'company': 'another_company_id_in_your_db'
+    }
+)
+
+# Allowed
+posthog.capture(
+    'user_distinct_id',
+    'user_signed_up',
+    groups={
+        'company': 'company_id_in_your_db',
+        'channel': 'channel_id_in_your_db'
+    }
+)
+```
+
+```go
+// Not possible
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_distinct_id",
+    Event: "user_signed_up",
+    Groups: posthog.NewGroups().
+        Set("company", "company_id_in_your_db").
+        Set("company", "another_company_id_in_your_db"),
+})
+
+// Allowed
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_distinct_id",
+    Event: "user_signed_up",
+    Groups: posthog.NewGroups().
+        Set("company", "company_id_in_your_db").
+        Set("channel", "channel_id_in_your_db"),
+})
+```
+
+```node
+// Allowed
+posthog.capture({
+    event: 'user_signed_up',
+    distinctId: 'user_distinct_id',
+    groups: { 
+        company: 'company_id_in_your_db',
+        channel: 'channel_id_in_your_db'
+    }
+})
+```
+
+```php
+// Not possible
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'user_signed_up',
+    '$groups' => ['company' => 'company_id_in_your_db', 'company' => 'another_company_id_in_your_db']
+]);
+
+// Allowed
+PostHog::capture([
+    'distinctId' => 'user_distinct_id',
+    'event' => 'user_signed_up',
+    '$groups' => ['company' => 'company_id_in_your_db', 'channel' => 'channel_id_in_your_db']
+]);
+```
+
+</MultiLanguage>
+
+#### Capture events for individual groups without a user
+
+If you want to capture events for an individual group without linking them to a specific user, use a single static string as the distinct ID:
+
+<MultiLanguage>
 
 ```node
 posthog.capture({
@@ -86,11 +575,11 @@ client.Enqueue(posthog.Capture{
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'static_string_for_group_events',
     'event' => 'group_event_name',
-    '$groups' => array("company" => "company_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db']
+]);
 ```
 
 ```bash
@@ -104,78 +593,65 @@ curl -v -L --header "Content-Type: application/json" -d '{
 }' <ph_client_api_host>/i/v0/e/
 ```
 
-</MultiLanguage >
+</MultiLanguage>
 
 ## Using groups in PostHog
 
-Now that we have created our first group type, we can take a look at how to use groups within PostHog.
+### View individual groups
 
-### Viewing groups and their properties
-
-To view groups and their properties, head to the **People and groups** tab on the navigation bar.
-
-From here, you can select the group type you are interested in and view the groups and properties (by clicking the chevrons on the left). The properties shown here can be customized by clicking **Configure columns**.
+To view individual groups and their properties, go to the [people tab](https://app.posthog.com/persons) in the PostHog app and select the group type you want to view. Group types are listed under the **Groups** section.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_34_37_2x_0e700b3bb8.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_34_49_2x_d92d58ce0d.png"
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/view_Group_Light_8eb32757a3.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/view_Group_Dark_5b6c1cc29e.png"
     classes="rounded"
     alt="View groups"
 />
 
-Clicking one of groups brings you to the group details page. Here, you can generate, view, and customize a dashboard for the group. Beyond this, you can see events, recordings, related people, and more. On the **properties** tab, you can add, update, and delete group properties.
+### Analyze insights by group type
+
+Use [insights](/docs/product-analytics/insights) to view trends aggregated by group type.
+
+For example, to see how many organizations signed up recently:
+
+1. Create an insight with your signup event.
+2. Expand the menu next to the event.
+3. Select **Unique** with your group type.
+
+This shows total individual groups that signed up instead of individual users.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_27_14_2x_faa9770710.png" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_02_at_13_26_02_2x_407c211ca9.png"
-    classes="rounded"
-    alt="View group details"
-/>
-
-### How to view group insights
-
-You can use groups in [insights](/docs/product-analytics/insights) to view aggregated events based on group type.
-
-For example, let's say that we wanted to see a graph showing how many different organizations have signed up recently:
-
-To do this, expand the menu next to the event you've chosen. This lists of all the group types available. Next, select the option for "Unique" with your group type name, such as "Unique organizations." This shows a graph with the total number of groups (organizations) that have signed up (as opposed to individual users).
-
-<ProductScreenshot
-    imageLight = {groupInsightsLight} 
-    imageDark = {groupInsightsDark}
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/insights_Light_83a249155d.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/insight_Darks_87aa211aa0.png"
     classes="rounded"
     alt="Analyze group insights"
 />
 
-### Using groups with funnels
+### Use group types with funnels
 
-Another place where group analytics can be used is within funnels.
+Track how individual groups organizations move through conversion steps by setting **Aggregating by** to your group type.
 
-For example, you may want to understand how organizations move from their first visit to eventually signing up. You can do this by setting the "Aggregating by" field to "Unique organizations."
-
-This shows how many organizations have made it through, as well as the percentage of organizations that dropped off. It's also possible to see exactly which specific groups dropped off at each step.
+This shows how many individual groups completed each step, the drop-off percentage, and which specific individual groups dropped off.
 
 <ProductScreenshot
-    imageLight = {funnelsGroupAggregationLight} 
-    imageDark = {funnelsGroupAggregationDark}
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnels_Light_1fa9760a35.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnels_Dark_4d2a0992ab.png"
     classes="rounded"
     alt="Group funnels"
 />
 
-### Using groups with feature flags
+### Use group types with feature flags
 
-Groups in feature flags enable you to rollout a feature by group type (like `company`), instead of users.
-
-To do this, create a feature flag as you normally would, and select the group type you wish to "Match by", using the drop down in the "Release conditions" section:
+[Create a feature flag](/docs/feature-flags/creating-feature-flags) and select your group type in the **Match by** dropdown under **Release conditions**.
 
 <ProductVideo
-    videoLight = {groupsInFeatureLight} 
-    videoDark = {groupsInFeatureDark}
+    videoLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-light-mode.mp4"
+    videoDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-dark-mode.mp4"
     classes="rounded"
     alt="Feature flags for groups"
 />
 
-You also need to update your event tracking code for the feature flag to determine the groups of the current user.
+Update your code to pass group information when checking feature flags:
 
 <MultiLanguage>
 
@@ -193,7 +669,7 @@ if posthog.feature_enabled("new-groups-feature", "user_distinct_id", groups={"co
 ```
 
 ```php
-if (PostHog::isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, array("company" => "company_id_in_your_db"))) {
+if (PostHog::isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, ['company' => 'company_id_in_your_db'])) {
     // Do something
 }
 ```
@@ -208,27 +684,50 @@ if (isFlagEnabled) {
 
 </MultiLanguage>
 
-### Renaming group types
+### Rename group types
 
-You can change how group types are displayed in the insights interface and throughout PostHog by in project settings.
+Change how group types display in PostHog in [Settings > Customer Analytics](https://app.posthog.com/settings/project-customer-analytics#group-analytics).
 
 <ProductScreenshot
-    imageLight = {groupsProjectSettingLight} 
-    imageDark = {groupsProjectSettingDark}
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/project_Setting_Light_ff8617214d.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/project_Setting_Dark_2352dd1b0b.png"
     classes="rounded"
     alt="Groups in project settings"
 />
 
+### Delete group types
+
+To delete a group type:
+
+1. Go to the [people tab](https://app.posthog.com/persons) in the PostHog app.
+2. Select **Menu options** > **Delete group type**.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delete_Group_Type_Light_8f08fae9f8.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delete_Group_Type_Dark_45f2f7adb8.png"
+    classes="rounded"
+    alt="Delete group type"
+/>
+
+<CalloutBox icon="IconWarning" title="What happens when you delete a group type" type="caution">
+
+- Event data remains unchanged. Group data is filtered from queries based on a deletion timestamp.
+- Deleted group types don't count toward your 5 group type limit.
+- If new events arrive with the same group key, the group type reappears with a new creation timestamp. Historical events (before the new timestamp) won't appear for the recreated group type.
+
+</CalloutBox>
+
 ## Limitations
 
--   A maximum of 5 group types can be created per project.
--   Multiple groups of the same type cannot assigned to a single event (e.g., Company A & Company B).
--   Groups are not currently supported for the following insights:
-    -   Lifecycle - Expected soon.
-    -   User paths - These only support user level analytics.
--   Only groups with known properties are shown under [People and groups](https://us.posthog.com/persons) .
-- Currently there is no functionality within the app to delete groups. If you need to delete a group for privacy or security reasons, please [use the support modal](https://app.posthog.com/home#supportModal=support%3Adata_management).
+Group analytics has a few limitations to be aware of:
+
+- Maximum of 5 group types per project
+- You can delete group types, but not individual groups
+- Multiple individual groups of the same group type can't be assigned to a single event
+- Group types aren't supported for lifecycle insights or user paths
+- Only individual groups with known properties appear in the [people tab](https://app.posthog.com/persons)
 
 ## Further reading
 
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
+- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)

@@ -12,8 +12,7 @@ tags:
   - Comparisons
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ## 1. PostHog
 
@@ -26,7 +25,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ### What is PostHog?
 
-[PostHog](/) (us 💪) is an open-source suite of product and data tools like A/B testing, feature flags, product analytics, session replay, and user surveys. This means it's not only an alternative to VWO but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [Hotjar](/blog/posthog-vs-hotjar).
+[PostHog](/) (us 💪) is an open-source suite of dev tools like A/B testing, feature flags, product analytics, session replay, and user surveys. This means it's not only an alternative to VWO but also tools like [Mixpanel](/blog/posthog-vs-mixpanel) and [Hotjar](/blog/posthog-vs-hotjar).
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of April 2024, 5,610 of the top one million websites use PostHog. This is just over half of VWO's 9,183.
 
@@ -46,19 +45,22 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 PostHog and VWO have very similar feature sets. VWO focuses more on personalization and its visual experiment editor while PostHog has a stronger analytics suite.
 
-<ComparisonTable column1="PostHog" column2="VWO">
-  <ComparisonRow column1={true} column2={'Trial only'} feature="Self-serve" description="Free to use, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={false} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['posthog', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -104,19 +106,22 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Optimizely) in A
 
 Both Optimizely and VWO are multi-product platforms with a focus on optimizing user experiences. VWO has more tools for understanding users, like session replays and surveys, while VWO focuses more on content and project management tools.
 
-<ComparisonTable column1="Optimizely" column2="VWO">
-  <ComparisonRow column1={false} column2={'Trial only'} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['optimizely', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use Optimizely?
 
@@ -164,19 +169,22 @@ It helps teams build better end-to-end digital user experiences that drive ROI, 
 
 AB Tasty focuses entirely on experimentation and personalization features. VWO has these along with tools to help you understand users and their behavior.
 
-<ComparisonTable column1="AB Tasty" column2="VWO">
-  <ComparisonRow column1={false} column2={'Trial only'} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['ab_tasty', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use AB Tasty?
 
@@ -222,19 +230,22 @@ Data from [BuiltWith](https://trends.builtwith.com/analytics/Amplitude) says tha
 
 Amplitude heavily focuses on being an analytics platform. This means it misses out on other [behavioral analytics](/product-engineers/behavioral-analytics) tools like heatmaps and surveys as well as experimentation tools like personalization. VWO has all of these.
 
-<ComparisonTable column1="Amplitude" column2="VWO">
-  <ComparisonRow column1={'Starter plans only'} column2={'Trial only'} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={false} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['amplitude', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use Amplitude?
 
@@ -282,19 +293,22 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), as of Apr
 
 Similar to Amplitude, Heap focuses on analytics and session replay for product teams. This means it misses out on the experimentation features of VWO.
 
-<ComparisonTable column1="Heap" column2="VWO">
-  <ComparisonRow column1={true} column2={'Trial only'} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={false} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={false} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['heap', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use Heap?
 
@@ -338,19 +352,22 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), 1
 
 LaunchDarkly focuses on engineers. This means it misses out on the features marketing or product teams choose VWO for, like the visual experiment editor or analytics.
 
-<ComparisonTable column1="LaunchDarkly" column2="VWO">
-  <ComparisonRow column1={false} column2={'Trial only'} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={false} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={false} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['launchdarkly', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use LaunchDarkly?
 
@@ -396,19 +413,22 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as o
 
 As already mentioned, FullStory is a behavioral data platform. Although it includes many features of VWO on that front, it will not come as a surprise that it doesn't include the optimization ones. 
 
-<ComparisonTable column1="FullStory" column2="VWO">
-  <ComparisonRow column1={'Trial only'} column2={'Trial only'} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={false} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
-  <ComparisonRow column1={false} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom events, trends, funnels, paths, and retention" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
+<ProductComparisonTable
+  competitors={['fullstory', 'vwo']}
+  rows={[
+    'platform.pricing.self_serve',
+    'experiments',
+    'experiments.features.no_code_experiments',
+    'experiments.targeting.features.custom_targeting',
+    'product_analytics',
+    'product_analytics.features.autocapture',
+    'session_replay',
+    'feature_flags',
+    'heatmaps',
+    'surveys',
+    'platform.deployment.open_source',
+  ]}
+/>
 
 ### Why do companies use FullStory?
 

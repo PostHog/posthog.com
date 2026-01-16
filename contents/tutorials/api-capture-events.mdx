@@ -1,6 +1,6 @@
 ---
 title: Using the PostHog API to capture events
-date: 2023-02-09T00:00:00.000Z
+date: 2025-10-22T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -11,13 +11,45 @@ tags:
   - product analytics
   - product os
 ---
-export const apiEventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-capture-events/api-events-light-mode.png"
-export const apiEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-capture-events/api-events-dark-mode.png"
+export const apiEventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/view_event_light_30a37c70a8.png"
+export const apiEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/view_event_dark_97fe1d29d5.png"
 
 
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.
 
 Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation. Using the API to capture events directly also gives you a better understanding of [PostHog's event-based data structures](/docs/how-posthog-works/data-model) which is abstracted if you use a library. 
+
+## Base URL
+
+The base URL of your PostHog depends on the region of your PostHog project:
+
+<MultiLanguage>
+
+```bash file=US
+https://us.i.posthog.com
+```
+
+```bash file=EU
+https://eu.i.posthog.com
+```
+
+</MultiLanguage>
+
+## Capture endpoint
+
+PostHog captures events through `/i/v0/e/` endpoint of your project region.
+
+For your PostHog project (if you're authenticated on [PostHog](https://app.posthog.com/)), the fill URL is:
+
+```bash
+<ph_client_api_host>/i/v0/e/
+```
+
+You can also use the `/batch` endpoint to capture multiple events in one request. We cover this in the [batching events section](#batching-events).
+
+```bash
+<ph_client_api_host>/batch/
+```
 
 ## Authenticating with the project API key
 
@@ -61,9 +93,36 @@ response = requests.post(url, headers=headers, json=body)
 print(response.json())
 ```
 
+```js file=NodeJS
+require('dotenv').config();
+
+const headers = {
+    "Content-Type": "application/json",
+};
+
+const body = {
+    "api_key": "<ph_project_api_key>",
+    "event": "request", 
+    "properties": {
+        "distinct_id": "ian@posthog.com"
+    }
+};
+
+const url = "<ph_client_api_host>/i/v0/e/";
+
+fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
 </MultiLanguage>
 
-Once you've done that, you should see the event in your PostHog instance.
+Once you've done that, you should see the event in your PostHog project's [activity tab](https://app.posthog.com/activity/explore).
 
 <ProductScreenshot
     imageLight = {apiEventsLight} 
@@ -74,7 +133,7 @@ Once you've done that, you should see the event in your PostHog instance.
 
 ### Adding properties and batching
 
-You can also add properties and a timestamp in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) to this request. If you don't add a timestamp, we automatically set it to the current time. 
+You can also add arbitrary properties and a timestamp in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) to this request. If you don't add a timestamp, we automatically set it to the current time. 
 
 <MultiLanguage>
 
@@ -115,9 +174,38 @@ response = requests.post(url, headers=headers, json=body)
 print(response.json())
 ```
 
+```js file=NodeJS
+
+const headers = {
+    "Content-Type": "application/json",
+};
+
+const body = {
+    "api_key": "<ph_project_api_key>",
+    "event": "big_request",
+    "timestamp": "2022-10-21 09:03:11.913767",
+    "properties": {
+        "distinct_id": "ian@posthog.com",
+        "request_size": "big",
+        "api_request": true
+    }
+};
+
+const url = "<ph_client_api_host>/i/v0/e/";
+
+fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
 </MultiLanguage>
 
-You can also batch these requests together by sending a list of events to the `/batch/` endpoint. This is useful for limiting the number of requests you make. Events can be held, then sent as a batch. Our [Node.js library](/docs/integrate/server/node) does this automatically, and we use batching to process events.
+You can also batch these requests together by sending a list of events to the `/batch/` endpoint. This is useful for limiting the number of requests you make. Events can be held, then sent as a batch. PostHog SDKs do this automatically, and we use batching to process events.
 
 <MultiLanguage>
 
@@ -176,6 +264,43 @@ response = requests.post(url, headers=headers, json=body)
 print(response.json())
 ```
 
+```js file=NodeJS
+const headers = {
+    "Content-Type": "application/json",
+};
+
+const body = {
+    "api_key": "<ph_project_api_key>",
+    "batch": [
+        {
+            "event": "batched_event",
+            "properties" : {
+                "distinct_id": "ian@posthog.com",
+                "number_in_batch": 1
+            }
+        },
+        {
+            "event": "batched_event",
+            "properties" : {
+                "distinct_id": "ian@posthog.com",
+                "number_in_batch": 2
+            }
+        }
+    ]
+};
+
+const url = `<ph_client_api_host>/batch/`;
+
+fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
 </MultiLanguage>
 
 ## Identifying and aliasing users
@@ -219,6 +344,32 @@ response = requests.post(url, headers=headers, json=body)
 
 print(response.json())
 ```
+```js file=NodeJS
+const headers = {
+    "Content-Type": "application/json",
+};
+
+const body = {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "ian@posthog.com",
+    "$set": {
+        "email": "ian@posthog.com",
+        "is_cool": true
+    },
+    "event": "$identify"
+};
+
+const url = "<ph_client_api_host>/i/v0/e/";
+
+fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
 
 </MultiLanguage>
 
@@ -260,13 +411,296 @@ response = requests.post(url, headers=headers, json=body)
 
 print(response.json())
 ```
+```js file=NodeJS
+const headers = {
+    "Content-Type": "application/json",
+};
 
+const body = {
+    "api_key": "<ph_project_api_key>",
+    "properties": {
+        "distinct_id": "ian@posthog.com",
+        "alias": "ian2@posthog.com"
+    },
+    "event": "$create_alias"
+};
+
+const url = "<ph_client_api_host>/i/v0/e/";
+
+fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
 </MultiLanguage>
+
+## Capturing errors
+
+Everything is an event in PostHog. [Error tracking](/docs/error-tracking) is no different. You can manually capture errors by sending an `$exception` event with the following properties:
+
+| Property | Description |
+|----------|-------------|
+| `$exception_list` | A list of exception objects with detailed information about each error. Each exception can include a `type`, `value`, `mechanism`, `module`, and a `stacktrace` with `frames` and `type`. You can find the expected schema as types for both [exception](https://github.com/PostHog/posthog/blob/master/rust/cymbal/src/types/mod.rs#L39) and [stack frames](https://github.com/PostHog/posthog/blob/master/rust/cymbal/src/langs/custom.rs#L12) in our Rust repo |
+| `$exception_fingerprint` | (Optional) The identifier used to group issues. If not set, a unique hash based on the exception pattern will be generated during ingestion |
+
+Here's an example of how to capture an error:
+
+<MultiLanguage>
+
+```bash
+curl -X POST "<ph_client_api_host>/i/v0/e/" \
+     -H "Content-Type: application/json" \
+     -d '{
+         "api_key": "<ph_project_api_key>",
+         "event": "$exception",
+         "properties": {
+             "distinct_id": "ian@posthog.com",
+             "$exception_list": [{
+                 "type": "ScriptError",
+                 "value": "Command not found: fake_command",
+                 "mechanism": {
+                     "handled": true,
+                     "synthetic": false
+                 },
+                 "stacktrace": {
+                     "type": "raw",
+                     "frames": [
+                         {
+                             "platform": "custom",
+                             "lang": "bash",
+                             "function": "main",
+                             "filename": "basic-exception.sh",
+                             "lineno": 15,
+                             "colno": 1,
+                             "module": "script_execution",
+                             "resolved": true,
+                             "in_app": true
+                         },
+                         {
+                             "platform": "custom",
+                             "lang": "bash",
+                             "function": "execute_command",
+                             "filename": "utils.sh",
+                             "lineno": 42,
+                             "colno": 5,
+                             "module": "command_handler",
+                             "resolved": true,
+                             "in_app": true
+                         },
+                         {
+                             "platform": "custom",
+                             "lang": "bash",
+                             "function": "error_event_bash",
+                             "filename": "error_handler.sh",
+                             "lineno": 8,
+                             "colno": 12,
+                             "module": "error_tracking",
+                             "resolved": false,
+                             "in_app": false
+                         }
+                     ]
+                 }
+             }],
+             "$exception_fingerprint": <MD5_HASH_OF_EXCEPTION_MESSAGE>
+         }
+     }'
+```
+
+```python
+import requests
+import os
+import traceback
+import hashlib
+import time
+
+url = "<ph_client_api_host>/i/v0/e/"
+
+headers = {
+    "Content-Type": "application/json",
+}
+
+# Create a fake exception for demonstration
+try:
+    # Simulate an error_event_python
+    raise ValueError("error_event_python: This is a simulated error for testing")
+except Exception as e:
+    # Get the current traceback
+    tb = traceback.format_exc()
+    
+    # Create exception fingerprint
+    fingerprint = hashlib.md5(str(e).encode()).hexdigest()
+    
+    body = {
+        "api_key": "<ph_project_api_key>",
+        "event": "$exception",
+        "properties": {
+            "distinct_id": "ian@posthog.com",
+            "$exception_list": [{
+                "type": type(e).__name__,
+                "value": str(e),
+                "mechanism": {
+                    "handled": True,
+                    "synthetic": False
+                },
+                "stacktrace": {
+                    "type": "raw",
+                    "frames": [
+                        {
+                            "platform": "custom",
+                            "lang": "python",
+                            "function": "error_event_python",
+                            "filename": "basic-exception.py",
+                            "lineno": 15,
+                            "colno": 1,
+                            "module": "exception_handler",
+                            "resolved": True,
+                            "in_app": True
+                        },
+                        {
+                            "platform": "custom",
+                            "lang": "python",
+                            "function": "simulate_error",
+                            "filename": "error_simulator.py",
+                            "lineno": 8,
+                            "colno": 5,
+                            "module": "testing",
+                            "resolved": True,
+                            "in_app": True
+                        },
+                        {
+                            "platform": "custom",
+                            "lang": "python",
+                            "function": "main",
+                            "filename": "app.py",
+                            "lineno": 42,
+                            "colno": 12,
+                            "module": "application",
+                            "resolved": False,
+                            "in_app": False
+                        }
+                    ]
+                }
+            }],
+            "$exception_fingerprint": fingerprint
+        }
+    }
+
+response = requests.post(url, headers=headers, json=body)
+
+print(response.json())
+```
+
+```js file=NodeJS
+const crypto = require('crypto');
+
+const headers = {
+    "Content-Type": "application/json",
+};
+
+// Create a fake exception for demonstration
+try {
+    // Simulate an error_event_javascript
+    throw new Error('error_event_javascript: This is a simulated error for testing');
+} catch (error) {
+    // Create exception fingerprint
+    const fingerprint = crypto.createHash('md5').update(error.message).digest('hex');
+    
+    const body = {
+        "api_key": "<ph_project_api_key>",
+        "event": "$exception",
+        "properties": {
+            "distinct_id": "ian@posthog.com",
+            "$exception_list": [{
+                "type": error.name,
+                "value": error.message,
+                "mechanism": {
+                    "handled": true,
+                    "synthetic": false
+                },
+                "stacktrace": {
+                    "type": "raw",
+                    "frames": [
+                        {
+                            "platform": "custom",
+                            "lang": "javascript",
+                            "function": "error_event_javascript",
+                            "filename": "basic-exception.js",
+                            "lineno": 8,
+                            "colno": 1,
+                            "module": "exception_handler",
+                            "resolved": true,
+                            "in_app": true
+                        },
+                        {
+                            "platform": "custom",
+                            "lang": "javascript",
+                            "function": "simulateError",
+                            "filename": "error-simulator.js",
+                            "lineno": 15,
+                            "colno": 5,
+                            "module": "testing",
+                            "resolved": true,
+                            "in_app": true
+                        },
+                        {
+                            "platform": "custom",
+                            "lang": "javascript",
+                            "function": "main",
+                            "filename": "app.js",
+                            "lineno": 42,
+                            "colno": 12,
+                            "module": "application",
+                            "resolved": false,
+                            "in_app": false
+                        }
+                    ]
+                }
+            }],
+            "$exception_fingerprint": fingerprint
+        }
+    };
+
+    const url = "<ph_client_api_host>/i/v0/e/";
+
+    fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.error('Error:', err));
+}
+```
+</MultiLanguage>
+
+While possible, we strongly recommend you stick to using our [error tracking](/docs/error-tracking/installation) SDKs instead of manually capturing errors for features like accurate fingerprinting, source-map support, release tracking, and more.
+
+## Capturing LLM analytics events
+
+It's also possible to capture LLM analytics events using the API. If you're using a language without [SDK support for LLM analytics](/docs/llm-analytics/installation), you can use the API to capture events.
+
+To capture LLM analytics, you need to capture 4 types of events:
+
+| Event type   | Event name         | Documentation                          |
+|--------------|-------------------|---------------------------------------------|
+| Generations  | `$ai_generation`  | [What are generations?](/docs/llm-analytics/generations) |
+| Spans        | `$ai_span`        | [What are spans?](/docs/llm-analytics/spans)             |
+| Traces       | `$ai_trace`       | [What are traces?](/docs/llm-analytics/traces)            |
+| Embeddings   | `$ai_embedding`   | [What are embeddings?](/docs/llm-analytics/embeddings)    |
+
+You can find more information in our [manual capture guide](/docs/llm-analytics/installation/manual-capture).
 
 ## Further reading
 
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
 - [Documentation on our event capture API endpoint](/docs/api/capture)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
+- [Manual error tracking capture](/docs/error-tracking/installation/manual)
+- [Manual LLM analytics capture](/docs/llm-analytics/installation/manual-capture)
 
 <NewsletterForm />

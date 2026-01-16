@@ -426,7 +426,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "event": "$pageview",
   "distinct_id": "user distinct id",
   "properties": {
-    "$current_url": "/docs/api/capture"
+    "$current_url": "/docs/api/capture",
+    "$session_id": "019a0ccb-408c-728a-9df9-1ef51b742b36"
   }
 }' <ph_client_api_host>/i/v0/e/
 ```
@@ -445,6 +446,7 @@ payload = {
     "distinct_id": "user distinct id",
     "properties": {
         "$current_url": "/docs/api/capture",
+        "$session_id": "019a0ccb-408c-728a-9df9-1ef51b742b36"
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -452,6 +454,8 @@ print(response)
 ```
 
 </MultiLanguage>
+
+> **Note:** For a server-side integration with Web Analytics, check out our [Server SDKs and Sessions](docs/data/sessions#server-sdks-and-sessions) guide to make sure you're capturing every event and session property required for our product to work.
 
 ## Screen view
 

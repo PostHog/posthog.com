@@ -59,14 +59,14 @@
             "title": "Correlate revenue data with product metrics",
             "description": "<p>Get a deeper understanding of what drives revenue growth in your product. It’s only a few clicks to integrate most data sources and then you’ll be able to enrich your user data with additional metrics without a data team.</p>"
         },
-        "max_ai": {
+        "posthog_ai": {
             "template": "product",
-            "name": "Max AI",
-            "handle": "max_ai",
+            "name": "PostHog AI",
+            "handle": "posthog_ai",
             "screenshot": "sidebarInitialCropped",
             "screenshotClasses": "max-w-[724px] rounded-md shadow-2xl overflow-hidden [&_img]:w-[724px] [&_img]:max-w-[724px]",
             "title": "Ask questions about your product usage",
-            "description": "<p>We create the insights for you, all you need to do is ask Max AI questions about your product.</p>"
+            "description": "<p>We create the insights for you, all you need to do is ask PostHog AI questions about your product.</p>"
         },
         "pricing": {
             "template": "pricing",

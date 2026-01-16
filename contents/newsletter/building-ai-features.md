@@ -2,15 +2,15 @@
 title: What we’ve learned about building AI-powered features
 date: 2025-09-09
 author:
- - ian-vanagas
+    - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820.jpg
 featuredImageType: full
 tags:
-  - Product engineers
+    - Product engineers
 crosspost:
-  - Founders
-  - Blog
+    - Founders
+    - Blog
 ---
 
 AI feels like a gold rush.
@@ -46,6 +46,7 @@ First is the classic “chat with your docs/data/PDF.” AI is great at search a
 Second are generators of various kinds: titles, code, documents, SQL, images, and filters. [App builders](/newsletter/vibe-designing) like [Lovable](/customers/lovable) and Bolt.new are the most notable examples, but numerous companies, such as Figma, Rippling, and Notion, have integrated generation features into their products.
 
 ![Lovable's app builder](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/lovable_cac0926e58.png)
+
 <Caption>Lovable’s code generation features have made it one of the fastest growing software startups on record.</Caption>
 
 Third, and finally, is tool use. AI can use well-defined tools. This is what [MCP servers](/blog/machine-copy-paste-mcp-intro) are all about. Companies like [Zapier, Atlassian](/newsletter/the-companies-that-shaped-posthog), Asana, and many more have used this to automate and improve workflows. And yes, there’s a [PostHog MCP server](/docs/model-context-protocol), too.
@@ -56,11 +57,11 @@ Third, and finally, is tool use. AI can use well-defined tools. This is what [MC
 
 Knowing the common AI patterns helps you identify where you can use them in your product. [Max AI](/max) uses several of these, including:
 
-- Chat with your data and our docs
+-   Chat with your data and our docs
 
-- Generate [SQL insights](/docs/data-warehouse/query) and filters
+-   Generate [SQL insights](/docs/data-warehouse/query) and filters
 
-- Use tools, like [creating surveys](/docs/surveys/creating-surveys#maxai-and-surveys) and analytics insights.
+-   Use tools, like [creating surveys](/docs/surveys/creating-surveys#maxai-and-surveys) and analytics insights.
 
 Soon, Max AI will go further in its tool use by watching and analyzing session recordings for you, among other (somewhat secret) things.
 
@@ -70,11 +71,11 @@ Soon, Max AI will go further in its tool use by watching and analyzing session r
 
 With the patterns AI is good at in mind, go through your product and figure out the jobs to be done that AI could potentially do, such as:
 
-- A well-defined single task that takes more than 30 seconds to do, like filling a long form, manually entering data, setting up an integration, or [installing an SDK](/docs/getting-started/install).
+-   A well-defined single task that takes more than 30 seconds to do, like filling a long form, manually entering data, setting up an integration, or [installing an SDK](/docs/getting-started/install).
 
-- Instances where users need to use a language or interface they don’t understand, such as a complex UI, [SQL queries](/docs/data-warehouse/query), or building an app.
+-   Instances where users need to use a language or interface they don’t understand, such as a complex UI, [SQL queries](/docs/data-warehouse/query), or building an app.
 
-- Something users do more than 20 times, such as writing descriptions, summaries, or creating an entry.
+-   Something users do more than 20 times, such as writing descriptions, summaries, or creating an entry.
 
 As Stephen Whitworth of incident.io said in [Lenny's Newsletter](https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building):
 
@@ -108,6 +109,8 @@ When building Max, we quickly realized answering questions like “How do I incr
 
 For example, Max can write better SQL because it knows which tables are available, and answer product questions with native visualizations because it’s built-in and understands the tools available.
 
+<NewsletterForm />
+
 ## Implementing your idea
 
 Now that you have an idea of what you want to build, you need to make sure it actually works. Here are some core bits to focus on getting right:
@@ -116,23 +119,23 @@ Now that you have an idea of what you want to build, you need to make sure it ac
 
 Everyone can call the OpenAI API, but your app's context is unique. This can include data like:
 
-- What a user is trying to do
+-   What a user is trying to do
 
-- Who is doing it
+-   Who is doing it
 
-- Their account status
+-   Their account status
 
-- Where they are in the app
+-   Where they are in the app
 
-- The app’s data schema looks like
+-   The app’s data schema looks like
 
 When a user asks Max why signups dropped last week, for example, the API receives information on the:
 
-- Current page (dashboard, visible insights, applied filters, user role)
+-   Current page (dashboard, visible insights, applied filters, user role)
 
-- Data schema (available events, event properties, person properties)
+-   Data schema (available events, event properties, person properties)
 
-- Account (organization tier, timezone, retention)
+-   Account (organization tier, timezone, retention)
 
 The code for this literally looks like this:
 
@@ -149,7 +152,7 @@ def _format_ui_context(self, ui_context: MaxUIContext) -> str:
 
   if ui_context.insights:
     insight_context = f"""
-    Current insight: "{insight.name}" 
+    Current insight: "{insight.name}"
     Query type: {insight.query.kind}
     Events analyzed: {insight.query.events}
     Breakdown: {insight.query.breakdown}
@@ -180,17 +183,17 @@ We do this by orchestrating and chaining together multiple steps like query plan
 
 Beyond state management, this requires:
 
-- The AI knowing what tools and data it has at its disposal.
+-   The AI knowing what tools and data it has at its disposal.
 
-- Being able to select the correct tools and data based on the intended task.
+-   Being able to select the correct tools and data based on the intended task.
 
-- Making sure those tools, like query execution and formatting, actually work.
+-   Making sure those tools, like query execution and formatting, actually work.
 
 In PostHog, at the highest level, this functionality comes from a router like this:
 
 ```python
 # From root/nodes.py
-def router(self, state: AssistantState) -> Literal["insights", 
+def router(self, state: AssistantState) -> Literal["insights",
 "search_documentation", "billing"]:
   if self._should_generate_insight(state):
     return "insights"
@@ -203,9 +206,9 @@ Each node of the router then has its own conditions to route through to get to t
 
 ### 6. Plan for failure by adding monitoring, guardrails, and error handling
 
-Ideally all the structure you’ve built up to this point prevents failure, but you still need to [give the AI guardrails](/blog/envoy-wizard-llm-agent) because it *will* inevitably smash into them.
+Ideally all the structure you’ve built up to this point prevents failure, but you still need to [give the AI guardrails](/blog/envoy-wizard-llm-agent) because it _will_ inevitably smash into them.
 
-First, you need to know when something goes wrong, so [implement monitoring](/docs/llm-analytics/start-here) from the beginning. [Georgiy](/community/profiles/30798) from our [Max AI](/teams/max-ai) team relayed how important this is:
+First, you need to know when something goes wrong, so [implement monitoring](/docs/llm-analytics/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
 
 > Monitoring production traces is essential. We even built a [monitoring tool](/llm-analytics) for [dogfooding](/product-engineers/dogfooding), and I wish we had that tool from the beginning. It becomes harder to monitor traces at scale (we’re here), so online evaluations will be helpful (our next priority).
 >
@@ -215,19 +218,19 @@ Second, anything an AI can hallucinate, it will hallucinate. To prevent this, we
 
 In [our AI installation wizard](/blog/envoy-wizard-llm-agent), for example, we include rules like:
 
-- Never hallucinate an API key. Instead, always use the API key populated in the .env file.
+-   Never hallucinate an API key. Instead, always use the API key populated in the .env file.
 
-- Do not add placeholder comments like "// In a real app..."
+-   Do not add placeholder comments like "// In a real app..."
 
-- Do not modify the existing business logic or add simulation code
+-   Do not modify the existing business logic or add simulation code
 
-- Never import new packages or libraries that aren't already used
+-   Never import new packages or libraries that aren't already used
 
-- Do not assume any authentication library (Clerk, Auth.js, etc.) is available
+-   Do not assume any authentication library (Clerk, Auth.js, etc.) is available
 
 ![Hallucination](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hallucinate_4c3ef2b132.webp)
 
-You also need guardrails for *people*. When people see an empty text box, they get scared and forget everything.
+You also need guardrails for _people_. When people see an empty text box, they get scared and forget everything.
 
 The solution? Add suggestions for how they can use your AI-powered features, nudge them in the right direction, and help them remember what’s possible.
 
@@ -238,6 +241,7 @@ Beyond issues with humanity and hallucination, sometimes your workflows just bre
 For real pros, you can also set up [LLM analytics](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
 
 ## Improving your feature
+
 AI models are evolving rapidly and in unpredictable ways, so your AI-powered features require more maintenance and continual improvement than you might expect.
 
 From experience, here's what we've found is most important when trying to do this:
@@ -248,11 +252,11 @@ Building AI-powered features shouldn’t be the responsibility of some “AI guy
 
 There are a few ways you can encourage this:
 
-- **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps teams focus on unique and value-added AI functionality.
+-   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps developers focus on unique and value-added AI functionality.
 
-- **Have a consistent UX pattern across your app.** For us, that’s [Max](/max). This prevents death by a thousand AI widgets.
+-   **Have a consistent UX pattern across your app.** For us, that’s [Max](/max). This prevents death by a thousand AI widgets.
 
-- **Get your AI experts to embed in teams temporarily** to help those teams build AI functionality ([our Max AI team](/teams/max-ai) does this). This helps AI-powered features get built faster while distributing AI knowledge throughout the organization.
+-   **Get your AI experts to embed in teams temporarily** to help those teams build AI functionality (our <SmallTeam slug="posthog-ai" /> does this). This helps AI-powered features get built faster while distributing AI knowledge throughout the organization.
 
 ### 8. Focus on speed
 
@@ -263,33 +267,34 @@ As the founder of Superhuman, Rahul Vohra, noted in [Lenny’s Newsletter](https
 > The thing we’ve learned: speed wins.
 >
 > Take, for example, Instant Reply or Auto Summarize. Gmail and Outlook have similar features, but you have to generate the replies and summaries on demand—and then wait for them to finish generating.
-  >
+>
 > In Superhuman, we pre-compute them, so they are always instantaneous. That simple difference is a massive lever on the user experience.
 
 Some ways to improve this:
 
-- **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [LLM analytics](/llm-analytics) to test this.
+-   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [LLM analytics](/llm-analytics) to test this.
 
-- **Mix fast and slow models depending on the task.** We use fast models, like `gpt-4.1-mini` and `gpt-4.1-nano`, for title generation, session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
+-   **Mix fast and slow models depending on the task.** We use fast models, like `gpt-4.1-mini` and `gpt-4.1-nano`, for title generation, session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
 
-- **Use async processing.** Complex AI operations, such as session summaries and pattern extraction, run asynchronously via Temporal workflows to avoid blocking user interactions. These are then cached in Redis to support retries without recomputation.
+-   **Use async processing.** Complex AI operations, such as session summaries and pattern extraction, run asynchronously via Temporal workflows to avoid blocking user interactions. These are then cached in Redis to support retries without recomputation.
 
 ### 9. Constantly monitor and evaluate effectiveness
+
 Your new feature shouldn’t be judged less strictly just because it’s ✨ AI ✨.
 
 Not only can the wrong idea make your product worse, changes in models can negatively impact the experience without your knowledge.
 
 There are multiple methods we found work best for evaluating effectiveness:
 
-- **Add evals early.** We found even small golden or synthetic datasets were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
+-   **Add evals early.** We found even small golden or synthetic datasets were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
 
-- **A/B test AI-powered features vs the normal experience** as well as different prompts, contexts, workflows, and more.
+-   **A/B test AI-powered features vs the normal experience** as well as different prompts, contexts, workflows, and more.
 
-- **Check AI usage rates for different types of customers** – e.g. free users vs enterprise, or product vs sales. We found product managers and marketers were using Max more often than our ideal customer profile of product engineers, which led us to reconsider our roadmap.
+-   **Check AI usage rates for different types of customers** – e.g. free users vs enterprise, or product vs sales. We found product managers and marketers were using Max more often than our ideal customer profile of product engineers, which led us to reconsider our roadmap.
 
-- **Let users rate AI responses as good or bad.** When users rate responses poorly, ask them for more details. Use this to tweak context, prompts, and workflows.
+-   **Let users rate AI responses as good or bad.** When users rate responses poorly, ask them for more details. Use this to tweak context, prompts, and workflows.
 
-- **Compare AI vs non-AI usage using your existing activation and retention metrics.** This helps you understand where AI ideally fits into your product and user lifecycle, and whether it’s having a positive impact.
+-   **Compare AI vs non-AI usage using your existing activation and retention metrics.** This helps you understand where AI ideally fits into your product and user lifecycle, and whether it’s having a positive impact.
 
 ![Retention](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/retention_0491dd6fc2.webp)
 
@@ -301,4 +306,6 @@ Remember, you’re aiming to build something valuable to users, not shiny tech d
 
 All the lessons you’ve learned about building great products still apply. [Talk to users](/newsletter/talk-to-users), [ship fast](/newsletter/this-is-why-youre-not-shipping), [run experiments](/product-engineers/ab-testing-mistakes), and repeat.
 
-*Words by [Ian Vanagas](http://x.com/ianvanagas), who wrote this newsletter by hand as much as he would have liked to one-shot it with AI.*
+_Words by [Ian Vanagas](http://x.com/ianvanagas), who wrote this newsletter by hand as much as he would have liked to one-shot it with AI._
+
+<NewsletterForm />

@@ -18,7 +18,7 @@ export default function Trash(): JSX.Element {
         <>
             <SEO
                 title="Trash - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
             <Explorer
@@ -138,14 +138,6 @@ export default function Trash(): JSX.Element {
                                 color: 'blue',
                                 icon: 'doc' as AppIconName,
                             },
-                            {
-                                name: '[HR] how to avoid a coldplay concert moment.key',
-                                slug: 'hr-coldplay-concert-moment',
-                                url: undefined,
-                                extension: 'key',
-                                color: 'yellow',
-                                icon: 'presentation' as AppIconName,
-                            },
                         ],
                     }
 
@@ -182,12 +174,11 @@ export default function Trash(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${
-                                                            isListLayout
+                                                        className={`@md:pl-4 grid ${isListLayout
                                                                 ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
                                                                 : explorerGridColumns +
-                                                                  ' gap-y-4 items-start justify-items-center'
-                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                                ' gap-y-4 items-start justify-items-center'
+                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {items.map((item) => {
                                                             const appLink = (

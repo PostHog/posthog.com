@@ -28,14 +28,14 @@ Ways to invite users for an interview:
 
 When crafting user outreach, just put yourself in the shoes of the person about to receive the message. How can you help each other by getting on that quick call?
 
-Here's an example of an email from a real project, crafted by <TeamMember name="Michael Matloka" /> to learn about the problems of top users of the Max AI beta:
+Here's an example of an email from a real project, crafted by <TeamMember name="Michael Matloka" /> to learn about the problems of top users of the PostHog AI beta:
 
-> Subject: Quick chat about your PostHog Max AI experience?  
+> Subject: Quick chat about your PostHog AI experience?  
 >  
 > Hey $FIRST_NAME, Michael from PostHog engineering here!  
 >  
-> I'm focused on improving PostHog's AI features, and I saw you've been using our AI assistant Max.  
-> I want to make Max 10x better for you – and it'll be a gamechanger to hear about your personal experience with it.  
+> I'm focused on improving PostHog's AI features, and I saw you've been using our AI assistant.  
+> I want to make PostHog AI 10x better for you – and it'll be a gamechanger to hear about your personal experience with it.  
 > What do you say about a 30min chat about your product-building workflow, this week or in a couple of weeks? I promise in return you'll get a better tool for your job, plus $40 of PostHog merch. :)  
 >  
 > Feel free to pick any time that suits you in my calendar at $CAL_DOT_COM_LINK, or send me your own calendar! I'm excited to hear from you.  
@@ -70,7 +70,7 @@ We strongly value our users' time. As such, we usually send a small gift of appr
 - If the user wasn't up for a call, but nevertheless replied with a bunch of useful feedback async, it's good vibes to send them smaller gift card, with $20 of value.
 - When merch isn't an option (e.g. user has received some already), we can offer the user an equivalent-value gift card with [Open Collective](https://opencollective.com/).
 
-Instructions on how to create gift cards can be found [here](/handbook/company/merch-store#customers).
+Instructions on how to create gift cards can be found in the [merch store customer section](/handbook/company/merch-store#customers).
 
 ## Repositories of information 
 We keep a log of user feedback in the following places:

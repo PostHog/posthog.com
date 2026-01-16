@@ -50,7 +50,9 @@ This was contributed by [Anoop](https://github.com/anoopemacs), and while it adm
 
 Previously, the only way to edit selectors for frontend elements in actions was to go to your own site and use the toolbar. Now you can do this inside PostHog itself.
 
-### [Setup page redesign](https://github.com/PostHog/posthog/pull/701)
+### Setup page redesign
+
+[Related PR](https://github.com/PostHog/posthog/pull/701)
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/Screenshot-2020-05-06-at-11.13.06.png)
 

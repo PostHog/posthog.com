@@ -11,10 +11,24 @@ First, you should start with two assumptions about our users:
 
 This means our docs should be:
 
-- As short and to the point as possible.
-- Easy enough to understand so that a new user can read it and get what they need.
+-   As short and to the point as possible.
+-   Easy enough to understand so that a new user can read it and get what they need.
 
 The below is a style guide for writing good docs based on the above assumptions. It's not exhaustive, but it's a good starting point.
+
+## How to refer to PostHog Cloud vs self-hosted
+
+When writing docs, use the following terminology:
+
+- **PostHog**: Use this by default. This refers to our cloud product. Most users are on cloud, so we don't need to specify "Cloud" unless we're differentiating from self-hosted.
+- **PostHog Cloud**: Only use this when you need to explicitly differentiate cloud features from self-hosted deployments. For example, when a feature works differently or isn't available in self-hosted.
+- **Self-hosted PostHog** or **hobby deployments**": Use these when referring to self-hosted installations.
+
+> **Do:** "To create an insight in PostHog, go to the insights tab..."
+
+> **Do:** "This feature is only available in PostHog Cloud."
+
+> **Don't:** "To create an insight in PostHog Cloud, go to the insights tab..."
 
 ## Wikipedia-style internal links
 
@@ -28,10 +42,10 @@ When explaining complex features or concepts, provide real-world use cases and e
 
 ## Structure content for scannability
 
-- Use short paragraphs (3-4 lines maximum)
-- Use bullet points and numbered lists
-- Break up long sections with subheadings
-- Put the most important information first
+-   Use short paragraphs (3-4 lines maximum)
+-   Use bullet points and numbered lists
+-   Break up long sections with subheadings
+-   Put the most important information first
 
 ## Link to PostHog app
 
@@ -46,6 +60,7 @@ Put button, tab, and other navigation names in bold. This makes it easier for ou
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
 ## Navigating UI
+
 When documenting UI steps, references to UI elements should be in chronological order. When possible, hyperlink to the correct location.
 
 > **Do:** Under **Settings** > **User**, under the [Two-factor section](https://us.posthog.com/settings/user#2fa), click the **Set up 2FA** button.
@@ -78,19 +93,20 @@ Use `snake_case`, not `camelCase` or `PascalCase` for PostHog event and property
 
 ```js
 posthog.capture('user_signed_up', {
-  user_id: '123',
-  username: 'Jane Doe',
+    user_id: '123',
+    username: 'Jane Doe',
 })
 ```
 
 ## Screenshots
 
 To keep screenshots consistent and clear, here are tips to follow:
-- Make sure you're not showing any user data, like user emails or names.
-- Focus on the main element, leave out sidebars and irrelevant UI.
-- Use a device width of 1000px - 1400px in devtools. This avoids unnecessary empty space and keeps text readable.
-- Prefer taking **node screenshots** of the DOM node element you're trying to capture. This takes an **upscaled** screenshot by DPR of the DOM node element. 
-- Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
+
+-   Make sure you're not showing any user data, like user emails or names.
+-   Focus on the main element, leave out sidebars and irrelevant UI.
+-   Use a device width of 1000px - 1400px in devtools. This avoids unnecessary empty space and keeps text readable.
+-   Prefer taking **node screenshots** of the DOM node element you're trying to capture. This takes an **upscaled** screenshot by DPR of the DOM node element.
+-   Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
 
 ![Screenshot settings](https://res.cloudinary.com/dmukukwp6/video/upload/Google_Chrome_screenshot_settings_fcef064998.mp4)
 
@@ -99,32 +115,32 @@ To keep screenshots consistent and clear, here are tips to follow:
 For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [Screen Studio](https://screen.studio/) to record videos. Feel free to buy yourself a license.
 
 Use the following settings:
-- <PrivateLink url="https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969">Preset</PrivateLink>
-- Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
-- For exporting: use MP4, 720, 60 fps, and "web" quality
+
+-   <PrivateLink url="https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969">Preset</PrivateLink>
+-   Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
+-   For exporting: use MP4, 720, 60 fps, and "web" quality
 
 ## Docs components
+
+> **Note:** In addition to the components below, you can also use any [MDX components](/handbook/engineering/posthog-com/markdown) to add more complex content to your docs.
 
 ### Callout boxes
 
 import { CalloutBox } from '../../../src/components/Docs/CalloutBox'
 
-
 You can add callout boxes to documentation to ensure skimmers don't miss essential information.
 
 ```jsx
 <CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
-
-Here is some information
-
+    Here is some information
 </CalloutBox>
 ```
 
 Three styles are available:
 
-- `fyi`: this is for stuff that's helpful but not critical
-- `action`: these are tasks developers should complete and not miss
-- `caution`: these flag the potential for misconfiguration, data loss, and other churn vectors
+-   `fyi`: this is for stuff that's helpful but not critical
+-   `action`: these are tasks developers should complete and not miss
+-   `caution`: these flag the potential for misconfiguration, data loss, and other churn vectors
 
 They look like this:
 
@@ -148,27 +164,29 @@ Provide detail here. You can go on at length if necessary.
 
 Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
 
-### Max AI
+### PostHog AI
 
-You can also link to Max AI with a pre-loaded question if you want to give users an easy way to try building using the Max AI.
+You can also link to PostHog AI with a pre-loaded question if you want to give users an easy way to try building using the PostHog AI.
 
-Be aware that Max AI works best with straightforward questions that have predictable answers, e.g. "How many users completed the $pageview event this week?". It may struggle with more open-ended questions such as "Where are users struggling?". For this reason, you should test questions on Max before adding him to docs. 
+Be aware that PostHog AI works best with straightforward questions that have predictable answers, e.g. "How many users completed the $pageview event this week?". It may struggle with more open-ended questions such as "Where are users struggling?". For this reason, you should test questions on PostHog AI before adding it to docs.
 
-To add a preloaded question to docs or tutorials, you can use the MaxCTA component and add the question you'd like to preload in the question field, like so:
+> **Note:** This component will be renamed to AskPostHogAICTA component soon.
+
+To add a preloaded question to docs or tutorials, you can use the AskMaxCTA component and add the question you'd like to preload in the question field, like so:
 
 ```
 <MaxCTA question="What's my churn rate?" />
 ```
 
-This creates the following component in the docs, where the final link will divert to the relevant question. 
+This creates the following component in the docs, where the final link will divert to the relevant question.
 
 <MaxCTA question="What's my churn rate?" />
 
-This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
+This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with PostHog AI (currently).
 
 ### AskMax
 
-The `<AskMax>` component opens the Max AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
 
 ```jsx
 <AskMax
@@ -191,16 +209,50 @@ The `<AskMax>` component opens the Max AI chat window directly on the website. U
 />
 
 Available props:
-- `title`: Custom title text (defaults to "Questions?")
-- `quickQuestions`: Array of suggested questions to preload
-- `border`: Add top/bottom borders (defaults to false)
-- `linkOnly`: Render as a button only without the full UI (defaults to false)
 
-The component automatically tracks when users open Max AI and includes the current page context.
+-   `title`: Custom title text (defaults to "Questions?")
+-   `quickQuestions`: Array of suggested questions to preload
+-   `border`: Add top/bottom borders (defaults to false)
+-   `linkOnly`: Render as a button only without the full UI (defaults to false)
+
+The component automatically tracks when users open PostHog AI and includes the current page context.
+
+### AskAIInput
+
+The `<AskAIInput>` component provides a text input for users to ask PostHog AI questions directly within documentation pages. Use this to replace traditional FAQ sections in troubleshooting guides and documentation pages where users frequently have questions. The component opens the PostHog AI chat window with the user's question pre-loaded and includes the current page context. Add a clear h2 heading like "Have a question? Ask PostHog AI" above the component.
+
+> **Note:** Customize the `placeholder` prop per page to provide context-specific guidance. The default is `Ask a question...`
+
+```mdx
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+```
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+> See [src/components/AskAIInput/index.tsx](https://github.com/PostHog/posthog.com/blob/master/src/components/AskAIInput/index.tsx) for all available props.
+
+### SolvedQuestions
+
+The `<SolvedQuestions>` component displays resolved community questions from a specific topic. Use this in troubleshooting guides to highlight common issues and their solutions. Find question slugs by visiting the community question page and copying the URL slug.
+
+> **Note:** Use the `pinnedQuestions` prop to manually curate which questions appear. When provided, the component shows only those questions. If not provided, it shows recent solved posts.
+
+```mdx
+<SolvedQuestions
+    topicLabel="Error Tracking"
+    pinnedQuestions={[
+        'code-variables-for-external-libraries-for-python',
+        'trouble-setting-up-source-map-in-vite-react',
+        'webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel'
+    ]}
+/>
+```
 
 ### Steps
 
-Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials. 
+Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
 
 <Steps>
 
@@ -212,7 +264,7 @@ Steps are automatically numbered.
 
 <Step title="Call the capture method" badge="required">
 
-Write the *content* in **markdown**.
+Write the _content_ in **markdown**.
 
 </Step>
 
@@ -228,10 +280,10 @@ Add more steps!
 
 <CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
 
-  Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
+Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
 
-  - Add a line break after the opening component tags
-  - Avoid using 4-space indents
+-   Add a line break after the opening component tags
+-   Avoid using 4-space indents
 
 </CalloutBox>
 
@@ -239,6 +291,7 @@ Add more steps!
 ---
 showStepsToc: true # for table of contents with steps only
 ---
+
 <Steps>
 
 <Step title="Install the SDK" badge="required">
@@ -249,7 +302,7 @@ Steps are automatically numbered.
 
 <Step title="Call the capture method" badge="required">
 
-Write the *content* in **markdown**.
+Write the _content_ in **markdown**.
 
 </Step>
 
@@ -264,9 +317,77 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 </Steps>
 ```
 
+### Decision tree
+
+import { DecisionTree } from '../../../src/components/Docs/DecisionTree'
+
+Use a decision tree when users need help choosing between multiple, branching options. Instead of making users read through all possibilities, the tree asks questions and recommends the best path based on their answers.
+
+You can use the following decision tree to help you decide if using one is good for your use case! 
+
+<DecisionTree
+    questions={[
+        {
+            id: 'multiple-options',
+            question: 'Are you helping users choose between multiple options?',
+            options: [
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+            ],
+        },
+        {
+            id: 'option-count',
+            question: 'How many options are there?',
+            condition: (answers) => answers['multiple-options'] === 'yes',
+            options: [
+                { value: 'few', label: '2-6 options' },
+                { value: 'many', label: 'More than 6 options' },
+            ],
+        },
+        {
+            id: 'complexity',
+            question: 'Can you give the user an option by asking 2-3 simple questions?',
+            condition: (answers) => answers['option-count'] === 'few',
+            options: [
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' },
+            ],
+        },
+    ]}
+    getRecommendation={(answers) => {
+        if (answers['multiple-options'] === 'no') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "Decision trees are for helping users choose between options.",
+            }
+        }
+        if (answers['option-count'] === 'many') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "With more than 6 options, restructure your content or use a simple list instead.",
+            }
+        }
+        if (answers['complexity'] === 'no') {
+            return {
+                title: "Don't use a decision tree",
+                path: '',
+                reason: "If you need complex logic or many questions, a decision tree will be too complicated. Use a simple list instead.",
+            }
+        }
+        return {
+            title: 'Use a decision tree!',
+            path: '',
+            reason: "You have a manageable number of options and can guide users with a few simple questions.",
+        }
+    }}
+    buttonText=""
+/>
+
 ### Quest log
 
-The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking product.
+The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking app.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250731_oiej_cdce484c1c.png"
@@ -277,10 +398,10 @@ The `<QuestLog>` component is for syllabus-style pages. Inspired by video games,
 
 <CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
 
-  Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
+Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
 
-  - Add a line break after the opening component tags
-  - Avoid using 4-space indents
+-   Add a line break after the opening component tags
+-   Avoid using 4-space indents
 
 </CalloutBox>
 
@@ -293,7 +414,7 @@ hideAnchor: true # for a wider content column
 
 <QuestLogItem title="Capture your first exception" subtitle="Required" icon="IconCode">
 
-Write the *content* in **markdown**.
+Write the _content_ in **markdown**.
 
 </QuestLogItem>
 
@@ -306,104 +427,22 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 </QuestLog>
 ```
 
-## Code blocks 
-
-PostHog uses extended markdown syntax for more expressive code blocks. Here are the code block features we support:
-
-import Tab from "components/Tab"
-
-### File names
-
-You can identify the file you're editing by adding `filename=` to the code block. This is displayed in the code block's title.
-
-<Tab.Group tabs={[
-'Preview',
-'Markdown']}>
-<Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-
-```js filename=index.js
-console.log('Hello, world!')
-```
-
-</Tab.Panel>
-<Tab.Panel>
-
-``````mdx
-```js filename=index.js
-console.log('Hello, world!')
-```
-``````
-
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
-
-### Multi-language code blocks
-
-You can use the `<MultiLanguage>` component to show code blocks in multiple languages.
-
-<Tab.Group tabs={[
-'Preview',
-'Markdown']}>
-<Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-
-<MultiLanguage>
-
-```js filename=index.js
-console.log('Hello, world!')
-```
-
-```python filename=index.py
-print('Hello, world!')
-```
-
-</MultiLanguage>
-
-</Tab.Panel>
-<Tab.Panel>
-
-``````mdx
-<MultiLanguage>
-```js filename=index.js
-console.log('Hello, world!')
-```
-
-```python filename=index.py
-print('Hello, world!')
-```
-</MultiLanguage>
-``````
-
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
-
 ### Magic placeholders
 
 You can use magic placeholders to replace the project API key, project name, app host, region, and proxy path in the code block.
 
-- If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
-- If the user is not logged into the PostHog app, the placeholder will display as is.
+-   If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
+-   If the user is not logged into the PostHog app, the placeholder will display as is.
 
-| Placeholder | Description | Default |
-| --- | --- | --- |
-| `<ph_project_api_key>` | Your PostHog project API key | `<ph_project_api_key>` |
-| `<ph_project_name>` | Your PostHog project name | `<ph_project_name>` |
-| `<ph_app_host>` | Your PostHog instance URL | `<ph_app_host>` |
-| `<ph_client_api_host>` | Your PostHog client API host | `https://us.i.posthog.com` |
-| `<ph_region>` | Your PostHog region (us/eu) | `<ph_region>` |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-05-24` |
-| `<ph_proxy_path>` | Your proxy path | `relay-XXXX` (last 4 digits of project API key) |
+| Placeholder                | Description                   | Default                                         |
+| -------------------------- | ----------------------------- | ----------------------------------------------- |
+| `<ph_project_api_key>`     | Your PostHog project API key  | `<ph_project_api_key>`                          |
+| `<ph_project_name>`        | Your PostHog project name     | `<ph_project_name>`                             |
+| `<ph_app_host>`            | Your PostHog instance URL     | `<ph_app_host>`                                 |
+| `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
+| `<ph_region>`              | Your PostHog region (us/eu)   | `<ph_region>`                                   |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
+| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
 
 You can use these placeholders in the code block like this:
 
@@ -411,178 +450,86 @@ You can use these placeholders in the code block like this:
 const client = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
 ```
 
-### Code highlighting
-
-Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
-
-| Comment | Effect | Usage |
-| --- | --- | --- |
-| `// +` | Green highlight | Represents additions in diffs |
-| `// -` | Red highlight | Represents removals in diffs |
-| `// HIGHLIGHT` | Yellow highlight | General emphasis without special meaning |
-
-<Tab.Group tabs={[
-'Preview',
-'Markdown']}>
-<Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-
-```js filename=index.js
-const a = 1
-const b = 2
-const c = a + b // +
-
-console.log(a+b) // -
-console.log(c) // +
-
-console.log('end') // HIGHLIGHT
-```
-
-</Tab.Panel>
-<Tab.Panel>
-
-``````mdx
-```js filename=index.js
-const a = 1
-const b = 2
-const c = a + b // +
-
-console.log(a+b) // -
-console.log(c) // +
-
-console.log('end') // HIGHLIGHT
-```
-``````
-
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
-
-
-### Collapsed code blocks
-
-In some cases, such as large nested config files, you need readers to focus on a specific part of the code block while maintaining the context. You can do this by adding `focusOnLines=` to the code block. This collapses the code block and only shows the lines of code you specify.
-
-<Tab.Group tabs={[
-'Preview',
-'Markdown']}>
-<Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-
-```json file=angular.json focusOnLines=4-14
-{
-  "projects": {
-    "my-app": {
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "sourceMap": {
-              "scripts": true, // +
-              "styles": true, // +
-              "hidden": true, // +
-              "vendor": true // +
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-</Tab.Panel>
-<Tab.Panel>
-
-``````mdx
-```json file=angular.json focusOnLines=4-14
-{
-  "projects": {
-    "my-app": {
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "sourceMap": {
-              "scripts": true, // +
-              "styles": true, // +
-              "hidden": true, // +
-              "vendor": true // +
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-``````
-
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
-
-### Mermaid diagrams
-
-Code blocks can also be used to show mermaid UML diagrams. When using these diagrams, make sure to include a text description of the diagram afterwards for accessibility and LLMs.
-
-<Tab.Group tabs={[
-'Preview',
-'Markdown']}>
-<Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-
-```mermaid
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    John-->Alice: Great!
-    Alice->John: See you later!
-```
-
-</Tab.Panel>
-<Tab.Panel>
-
-``````mdx
-```mermaid
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    John-->Alice: Great!
-    Alice->John: See you later!
-```
-``````
-
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
-
 ## Debugging
 
-Gatsby's MDX parser has some quirks that can be hard to debug. Gatsby tends to throw 404s when it fails to build an MDX page. 
+Gatsby's MDX parser has some quirks that can be hard to debug. Gatsby tends to throw 404s when it fails to build an MDX page.
 
 To debug, check for the common issues below:
 
-- Avoid indenting by over 2 spaces. More indentation can confuse the parser.
-- Every JSX tag with inner markdown should have a line break after the opening tag and before the closing tag.
-- Make sure you're not missing imports and the imports are correct.
-- Every empty newline should actually be empty. Spaces on empty lines can confuse the parser.
-- Different snippets cannot share the same file name and import alias. When they do, they override each other.
+-   Avoid indenting by over 2 spaces. More indentation can confuse the parser.
+-   Every JSX tag with inner markdown should have a line break after the opening tag and before the closing tag.
+-   Make sure you're not missing imports and the imports are correct.
+-   Every empty newline should actually be empty. Spaces on empty lines can confuse the parser.
+-   Different snippets cannot share the same file name and import alias. When they do, they override each other.
 
 You can also try running the formatter script to fix some of the issues:
 
 ```bash
-yarn format:docs
+pnpm format:docs
 ```
 
 This will run the formatter against the current changes.
+
+## Platform logos
+
+Platform list pages, like installation guides or source integrations, use centralized logo management. All logo URLs are stored in `src/constants/logos.ts`.
+
+### Add a platform to an existing list
+
+1. Create an MDX file with frontmatter including `platformLogo`:
+
+   ```yaml
+   ---
+   title: Elixir error tracking installation
+   platformLogo: elixir
+   ---
+   ```
+
+2. Add the page to the sidebar in `src/navs/index.js`
+3. Order accordingly in the side nav `index.js` file. The order there = order on page
+3. Done! The `usePlatformList` hook automatically picks up the new platform
+
+### Add a new logo
+
+1. Upload the image to Cloudinary in SVG format
+2. Add a key to `src/constants/logos.ts`:
+
+   ```ts
+   export const LOGOS = {
+       // ... existing logos
+       myNewLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/...',
+   }
+   ```
+
+3. Reference using `platformLogo: myNewLogo` in MDX frontmatter
+
+### Naming conventions
+
+- Use the service/framework name in camelCase: `stripe`, `bigquery`, `nextjs`
+- Keep the list alphabetized
+- For generic icons, use descriptive names: `sqlDatabase`, `apiGeneric`
+
+### Available frontmatter fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| `platformLogo` | Key from `src/constants/logos.ts` | `stripe`, `react`, `nodejs` |
+| `platformIconName` | Fallback icon if no logo | `IconCode` |
+| `platformSourceType` | For source lists: `managed` or `self-hosted` | `managed` |
+
+### Create a new platform list section
+
+1. Add `platformLogo` to all platform MDX files in the section
+2. Create a snippet component using `usePlatformList`:
+
+   ```tsx
+   import usePlatformList from 'hooks/docs/usePlatformList'
+
+   const MyPlatforms = () => {
+       const platforms = usePlatformList('docs/my-section/installation', 'installation')
+       return <List items={platforms} />
+   }
+   ```
+
+3. Update sidebar with section children in `src/navs/index.js`
+4. Import and use the snippet in your `index.mdx`

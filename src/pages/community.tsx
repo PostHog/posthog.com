@@ -59,6 +59,7 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
         <div>
             {image && <aside className="float-right ml-1 mb-1">{image}</aside>}
             <h3 className="text-base mb-1 leading-tight">{title}</h3>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - spotlight content from codebase, not user input */}
             <div className="text-sm [&_*]:text-sm [&>*]:mb-2" dangerouslySetInnerHTML={{ __html: content }} />
 
             {byline && (
@@ -278,25 +279,25 @@ const Main = () => {
                     <div className="pt-4">
                         <PersonSpotlight
                             title="Meet a team member"
-                            content="<p>As an engineer on our Growth team, Zach is probably the reason you heard about PostHog. When he's not RBAC-ing that ass up, he's investing in early stage startups and finishing triathlons."
+                            content="<p>In a past life, Dana studied medicine. Now she helps teams get started with PostHog as a Technical Customer Success Manager. In her downtime she's a founding member of PostHog's D&D club."
                             image={
                                 <div className="h-24 w-24 rounded-full overflow-hidden bg-salmon">
                                     <CloudinaryImage
                                         width={200}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1711452549/Zach_c7f6a5a292.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Dana_b1e08c0410_52b3fbeba4.png"
                                     />
                                 </div>
                             }
                             cta={
                                 <OSButton
                                     asLink
-                                    to="/community/profiles/30086"
+                                    to="/community/profiles/32545"
                                     variant="secondary"
                                     size="md"
                                     width="full"
                                     state={{ newWindow: true }}
                                 >
-                                    Learn more about Zach W.
+                                    Learn more about Dana
                                 </OSButton>
                             }
                         />

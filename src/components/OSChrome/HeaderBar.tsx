@@ -183,18 +183,25 @@ export default function HeaderBar({
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}
                             <div>
                                 {hasLeftSidebar && (
-                                    <OSButton
-                                        size="md"
-                                        onClick={onToggleNav}
-                                        active={isNavVisible}
-                                        icon={
-                                            isNavVisible ? (
-                                                <IconSidebarOpen className={navIconClassName} />
-                                            ) : (
-                                                <IconSidebarClose className={navIconClassName} />
-                                            )
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton
+                                                size="md"
+                                                onClick={onToggleNav}
+                                                active={isNavVisible}
+                                                icon={
+                                                    isNavVisible ? (
+                                                        <IconSidebarOpen className={navIconClassName} />
+                                                    ) : (
+                                                        <IconSidebarClose className={navIconClassName} />
+                                                    )
+                                                }
+                                            />
                                         }
-                                    />
+                                    >
+                                        {isNavVisible ? 'Hide' : 'Show'}
+                                        {slideId ? ` slides` : ''}
+                                    </Tooltip>
                                 )}
                             </div>
                         </motion.div>

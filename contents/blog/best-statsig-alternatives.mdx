@@ -2,21 +2,20 @@
 title: 'The best Statsig alternatives & competitors, compared'
 date: 2025-10-06
 author:
-  - andy-vandervell
+    - andy-vandervell
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710126633/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/v1710126633/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 seo:
-  metaTitle: Best Statsig alternatives and competitors
-  metaDescription: Compare the best Statsig alternatives for startups, engineers, PMs, and marketers. See how PostHog, LaunchDarkly, Amplitude, and more stack up.
+    metaTitle: Best Statsig alternatives and competitors
+    metaDescription: Compare the best Statsig alternatives for startups, engineers, PMs, and marketers. See how PostHog, LaunchDarkly, Amplitude, and more stack up.
 ---
 
-import { ComparisonTable } from 'components/ComparisonTable'
-import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 Replacing Statsig comes down to what you're optimizing for: fast, safe releases; deeper analytics; or no-code web experimentation. Here’s a breakdown of the best Statsig alternatives depending on your team’s needs.
 
@@ -59,9 +58,9 @@ For more details, here are our in-depth comparisons of the best Statsig alternat
 
 ## 1. PostHog
 
-- **Founded:** 2020
-- **Similar to:** Statsig, Amplitude
-- **Typical users:** Engineers and product teams
+-   **Founded:** 2020
+-   **Similar to:** Statsig, Amplitude
+-   **Typical users:** Engineers and product teams
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_23_at_12_04_44_2x_9f000d1a5a.png"
@@ -80,40 +79,47 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHo
 
 #### Key features
 
-- 🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+-   🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
 
-- 🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+-   🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
-- 📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+-   📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
-- 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+-   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
-- 💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+-   💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
 ### How does PostHog compare to Statsig?
 
-Statsig and PostHog are similar in some ways, but have different strengths. 
+Statsig and PostHog are similar in some ways, but have different strengths.
 
 PostHog offers more powerful product analytics and session replay features, including support for [event autocapture](/docs/product-analytics/autocapture), writing [custom SQL insights](/docs/product-analytics/sql), and [session replay on mobile apps](/docs/session-replay/mobile). It also supports a handful of feature flag features not available with Statsig and offers user surveys.
 
-Statsig, as its name suggests, is an A/B testing tool first and foremost. While both tools support core testing features, like secondary metrics and multivariate tests, PostHog doesn't offer multi-armed bandit or mutually exclusive experiments. 
+Statsig, as its name suggests, is an A/B testing tool first and foremost. While both tools support core testing features, like secondary metrics and multivariate tests, PostHog doesn't offer multi-armed bandit or mutually exclusive experiments.
 
-<ComparisonTable column1="PostHog" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={false} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1="Beta" column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={true} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['posthog', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [true, false],
+        },
+    ]}
+/>
 
 ### Why do companies use PostHog?
 
@@ -126,16 +132,14 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 3. **It's easy to get started:** Many users love how PostHog's event autocapture means they can go from implementing its tracking code to ingesting events in just a few minutes. Enabling session replay is equally straightforward, so you can instantly start seeing how people are navigating your app or website.
 
 > #### Bottom line
-> 
+>
 > PostHog is an ideal Statsig alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost.
-
-<br />
 
 ## 2. LaunchDarkly
 
-- **Founded:** 2014
-- **Similar to:** Harness, Kameleoon
-- **Typical users:** Enterprise engineering and DevOps teams
+-   **Founded:** 2014
+-   **Similar to:** Harness, Kameleoon
+-   **Typical users:** Enterprise engineering and DevOps teams
 
 ![LaunchDarkly](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/launchdarkly.png)
 
@@ -147,34 +151,41 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), a
 
 #### Key features
 
-- 🚩 **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
+-   🚩 **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
 
-- 🧪 **Experimentation:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
+-   🧪 **Experimentation:** Run A/B/n tests against metric groups and segment. Easily roll out winning variants.
 
-- 🤖 **Automation:** Advanced automations enable teams to not only schedule flag states, but do progressive rollouts and trigger workflows.
+-   🤖 **Automation:** Advanced automations enable teams to not only schedule flag states, but do progressive rollouts and trigger workflows.
 
-- 🔍 **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag states.
+-   🔍 **Governance:** Audit flag changes. Get visibility into flag state across platforms. Use roles-based access controls to decide who can access and change flag states.
 
 ### How does LaunchDarkly compare to Statsig?
 
 LaunchDarkly and Statsig offer similar feature management and A/B testing features, though LaunchDarkly's lack of no code experiments and platform features might make it a less attractive option for non-technical users.
 
-<ComparisonTable column1="LaunchDarkly" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1={false} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1="Warehouse only" column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1="Alpha" column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1="Enterprise" column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['launchdarkly', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [true, false],
+        },
+    ]}
+/>
 
 ### Why do companies use LaunchDarkly?
 
@@ -190,13 +201,11 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 >
 > LaunchDarkly is a good alternative if you desire more powerful feature management options compared to Statsig, though it doesn't offer some of Statsig's nice perks, such as unlimited seats and autocapture. Also, even though LaunchDarkly is working on product analytics and session replay, they are quite limited at the moment.
 
-<br />
-
 ## 3. Amplitude
 
-- **Founded:** 2012
-- **Most similar to:** PostHog, Statsig
-- **Typical users:** Product managers, data analysts, marketing teams
+-   **Founded:** 2012
+-   **Most similar to:** PostHog, Statsig
+-   **Typical users:** Product managers, data analysts, marketing teams
 
 ![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/amplitude-website.png)
 
@@ -208,36 +217,44 @@ Unsurprisingly, given it was founded in 2012, it's much more widely used. Accord
 
 #### Key features
 
-- 📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+-   📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
 
-- 🧪 **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+-   🧪 **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
 
-- 👦 **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+-   👦 **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
 
-- 🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
+-   🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
 
 ### How does Amplitude compare to Statsig?
 
-Amplitude is missing some of the more complex statistical features of Statsig, but is very similar in terms of overall feature set. 
+Amplitude is missing some of the more complex statistical features of Statsig, but is very similar in terms of overall feature set.
 
-<ComparisonTable column1="Amplitude" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1="Enterprise" column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['amplitude', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [true, false],
+        },
+    ]}
+/>
 
 ### Why do companies use Amplitude?
+
 According to G2 reviews, people like Amplitude because:
 
 1. **It's simple to use:** Amplitude makes it easy for non-technical users to get insights about their product and make improvements. Amplitude is built for users like product managers and marketers, making it a popular choice for them.
@@ -250,13 +267,11 @@ According to G2 reviews, people like Amplitude because:
 >
 > Like PostHog, Amplitude is a good alternative if you value powerful analytics and experimentation in one, though it's less geared to engineers than Statsig or PostHog.
 
-<br />
-
 ## 4. Optimizely
 
-- **Founded:** 2010
-- **Similar to:** VWO
-- **Typical users:** Enterprise marketing, frontend teams
+-   **Founded:** 2010
+-   **Similar to:** VWO
+-   **Typical users:** Enterprise marketing, frontend teams
 
 ![Optimizely](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/optimizely.png)
 
@@ -268,37 +283,48 @@ As one of the oldest alternatives in this guide, it's also one of the most widel
 
 #### Key features
 
-- 🕸️ **Web experimentation:** Use Optimizely's visual editor and on-page previews to create frontend experiments quickly.
+-   🕸️ **Web experimentation:** Use Optimizely's visual editor and on-page previews to create frontend experiments quickly.
 
-- 🧪 **Feature experimentation:** Run targeted experiments anywhere on your stack. View detailed reports on their impact.
+-   🧪 **Feature experimentation:** Run targeted experiments anywhere on your stack. View detailed reports on their impact.
 
-- 🤹 **Project management:** Idea backlogs, workflows, and design tools to coordinate experiments and content.
+-   🤹 **Project management:** Idea backlogs, workflows, and design tools to coordinate experiments and content.
 
-- 📝 **Content management system:** Manage, deliver, and optimize your content in a centralized location.
+-   📝 **Content management system:** Manage, deliver, and optimize your content in a centralized location.
 
-- 💸 **Ecommerce optimization:** Customize checkout workflow along with CMS and experimentation to create the best possible commerce experience.
+-   💸 **Ecommerce optimization:** Customize checkout workflow along with CMS and experimentation to create the best possible commerce experience.
 
 ### How does Optimizely compare to Statsig?
 
 On paper, Optimizely is quite similar to Statsig, but it's more focused on marketing use cases, which is why it splits web experimentation and feature experimentation into two separate products. The former includes a no code, visual editor that's accessible for non-engineers.
 
-<ComparisonTable column1="Optimizely" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={false} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1="Warehouse only" column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1={false} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['optimizely', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        {
+            label: 'Bootstrapping',
+            description: 'Flags available on frontend application load',
+            values: [false, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [true, false],
+        },
+    ]}
+/>
 
 > **Note:** Although Optimizely was acquired by Episerver in 2020, they rebranded the combined company back to Optimizely in 2021.
 
@@ -316,13 +342,11 @@ According to G2 reviews, people are fans of Optimizely because:
 >
 > Optimizely's platform, especially its mature no code experiment feature, makes it a good choice if you need a tool that's accessible for non-technical teams, such as marketing.
 
-<br />
-
 ## 5. VWO
 
-- **Founded:** 2009
-- **Similar to:** Optimizely, PostHog
-- **Typical users:** Product managers, engineers, UX designers
+-   **Founded:** 2009
+-   **Similar to:** Optimizely, PostHog
+-   **Typical users:** Product managers, engineers, UX designers
 
 ![VWO](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-launchdarkly-alternatives/vwo.png)
 
@@ -334,37 +358,48 @@ It's a popular tool – according to [BuiltWith](https://trends.builtwith.com/an
 
 #### Key features
 
-- 🧪 **A/B testing:** Improve conversion with web, mobile, and server-side A/B testing.
+-   🧪 **A/B testing:** Improve conversion with web, mobile, and server-side A/B testing.
 
-- 💽 **Data platform:** Collect and analyze custom data across your stack.
+-   💽 **Data platform:** Collect and analyze custom data across your stack.
 
-- 🤔 **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
+-   🤔 **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
 
-- 👔 **Personalization:** Create and tailor user journeys and campaigns to the audience, location, and time.
+-   👔 **Personalization:** Create and tailor user journeys and campaigns to the audience, location, and time.
 
-- 📋 **Planning:** Ideate and plan optimization campaigns in one location.
+-   📋 **Planning:** Ideate and plan optimization campaigns in one location.
 
 ### How does VWO compare to Statsig?
 
 VWO is closer to Optimizely than Statsig, though it offers most of the same features. It doesn't offer a complete product analytics tool, but it does offer basic funnel analysis, heatmaps, session replays, and user surveys as part of its wider platform. Unfortunately, many of these features are only available on their more expensive plans.
 
-<ComparisonTable column1="VWO" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={false} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={false} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['vwo', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        {
+            label: 'Bootstrapping',
+            description: 'Flags available on frontend application load',
+            values: [false, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [false, false],
+        },
+    ]}
+/>
 
 > **Note:** Private equity firm Everstone acquired a majority stake in VWO in 2025.
 
@@ -382,13 +417,11 @@ Based on G2 reviews, the biggest reasons to choose VWO are:
 >
 > Like Optimizely, VWO is a good alternative to Statsig if you're looking for a tool anyone in your company can use. It offers a no code editor for marketing experiments, while also offering tools like heatmaps and replays that are useful for non-engineers.
 
-<br />
-
 ## 6. GrowthBook
 
-- **Founded:** 2020
-- **Similar to:** LaunchDarkly, Statsig
-- **Typical users:** Engineers and data scientists
+-   **Founded:** 2020
+-   **Similar to:** LaunchDarkly, Statsig
+-   **Typical users:** Engineers and data scientists
 
 ![GrowthBook](https://res.cloudinary.com/dmukukwp6/image/upload/v1713309283/posthog.com/contents/images/blog/best-split-alternatives/growthbook.png)
 
@@ -400,37 +433,48 @@ It's a popular choice for companies in strict regulatory environments because it
 
 #### Key features
 
-- 🔧 **Warehouse-native:** Designed to integrate seamlessly with your existing data tools like Snowflake or Postgres.
+-   🔧 **Warehouse-native:** Designed to integrate seamlessly with your existing data tools like Snowflake or Postgres.
 
-- 🚩 **Feature flags:** Robust feature-flagging capabilities with custom targeting and scheduling.
+-   🚩 **Feature flags:** Robust feature-flagging capabilities with custom targeting and scheduling.
 
-- 🧪 **A/B testing:** Experimentation suite built on feature flags with a visual editor to optimize UI changes.
+-   🧪 **A/B testing:** Experimentation suite built on feature flags with a visual editor to optimize UI changes.
 
-- 📊 **Analysis:** Use either Bayesian or Frequentist engines. Connect your existing data and do retroactive analysis.
+-   📊 **Analysis:** Use either Bayesian or Frequentist engines. Connect your existing data and do retroactive analysis.
 
-- 🔌 **Integrations:** Connects with data warehouses and analytics tools, but has limited integrations beyond that.
+-   🔌 **Integrations:** Connects with data warehouses and analytics tools, but has limited integrations beyond that.
 
 ### How does GrowthBook compare to Statsig?
 
 GrowthBook is a much more focused tool than others on this list. It is primarily a feature flag and experimentation platform, with a visual experiment editor that enables non-engineers to run simple web experiments. Its big differentiator is that it is open source and self-hostable.
 
-<ComparisonTable column1="GrowthBook" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1="Pro" column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1="Pro" column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={false} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1="Partial" column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1="Via self-hosting" column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['growthbook', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        {
+            label: 'Bootstrapping',
+            description: 'Flags available on frontend application load',
+            values: [false, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [true, false],
+        },
+    ]}
+/>
 
 ### Why do companies use GrowthBook?
 
@@ -443,55 +487,65 @@ According to G2, reviewers choose GrowthBook for the following reasons:
 3. **Self-hostable:** Reviewers like that they have full control over GrowthBook by running it on their own infrastructure. This means no limits to data.
 
 > #### Bottom line
+>
 > Being open source, free, and self-hostable, GrowthBook makes for a good alternative to Statsig, especially for companies in tricky regulatory situations.
-
-<br />
 
 ## 7. Kameleoon
 
-- **Founded:** 2012
-- **Similar to:** LaunchDarkly, VWO
-- **Typical users:** Product managers and developers
+-   **Founded:** 2012
+-   **Similar to:** LaunchDarkly, VWO
+-   **Typical users:** Product managers and developers
 
 ![Kameleoon](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/kameleoon.png)
 
 ### What is Kameleoon?
 
-Kameleoon is a developer-focused complete optimization platform with A/B testing, feature management, and personalization. On top of these, it includes an AI copilot that helps generate options, do predictive targeting, assist in decisions, and more. 
+Kameleoon is a developer-focused complete optimization platform with A/B testing, feature management, and personalization. On top of these, it includes an AI copilot that helps generate options, do predictive targeting, assist in decisions, and more.
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), as of September 2025, 941 of the top one million websites deploy Kameleoon, a little over half of Statsig's 1,705.
 
 #### Key features
 
-- 🌐 **Web experimentation:** Use their smart graphic editor and widget library to run flicker-free A/B tests on your website.
+-   🌐 **Web experimentation:** Use their smart graphic editor and widget library to run flicker-free A/B tests on your website.
 
-- 🚀 **Feature experimentation:** Do targeted rollouts of features and analyze their impact.
+-   🚀 **Feature experimentation:** Do targeted rollouts of features and analyze their impact.
 
-- 🤖 **AI copilot:** Have AI help with targeting, decision-making, and experiment creation.
+-   🤖 **AI copilot:** Have AI help with targeting, decision-making, and experiment creation.
 
-- 📊 **Stats accuracy:** Provides advanced stats like sample mismatch ratio, cross-campaign analysis, CUPED, and multiple test correlation.
+-   📊 **Stats accuracy:** Provides advanced stats like sample mismatch ratio, cross-campaign analysis, CUPED, and multiple test correlation.
 
 ### How does Kameleoon compare to Statsig?
 
 Like Statsig, Kameleoon is an A/B testing platform first and foremost, though it hasn't branched into other arenas, like analytics. Its AI copilot feature is a major differentiator, while it can be self-hosted if this is a requirement for your business.
 
-<ComparisonTable column1="Kameleoon" column2="Statsig">
-  <ComparisonRow column1={true} column2={true} feature="A/B/n testing" description="Run A/B/n tests with multiple variants and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
-  <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
-  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
-  <ComparisonRow column1="Beta" column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
-  <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
-</ComparisonTable>
+<ProductComparisonTable
+    competitors={['kameleoon', 'statsig']}
+    rows={[
+        'experiments',
+        'experiments.features.secondary_metrics',
+        'experiments.supported_tests.multi_armed_bandit',
+        'experiments.supported_tests.mutually_exclusive_experiments',
+        'experiments.features.no_code_experiments',
+        'feature_flags',
+        'feature_flags.implementation.local_evaluation',
+        {
+            label: 'Bootstrapping',
+            description: 'Flags available on frontend application load',
+            values: [false, true],
+        },
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.insights.sql_editor',
+        'session_replay',
+        'surveys',
+        'platform.deployment.eu_hosting',
+        {
+            label: 'Independent',
+            description: 'Standalone product not owned by a larger company',
+            values: [true, false],
+        },
+    ]}
+/>
 
 ### Why do companies use Kameleoon?
 
@@ -504,9 +558,8 @@ According to [G2 reviews](https://www.g2.com/products/kameleoon/reviews), users 
 3. **Integrations:** Reviewers like how Kameleoon integrates with all the tools they already use, like Google Analytics, Adobe Analytics, and Mixpanel.
 
 > #### Bottom line
+>
 > For companies looking for a developer-focused optimization platform, Kameleoon is a good alternative. Though the lack of self-serve is a major downside.
-
-<br />
 
 ## Is PostHog right for you?
 
@@ -514,8 +567,8 @@ Here's the (short) sales pitch.
 
 We're biased, obviously, but we think PostHog is the perfect Statsig replacement if:
 
-- You value transparency. We're open source and open core.
-- You want more than just A/B testing and feature flags. We have a full suite of product analytics, session replays, surveys, error tracking, and more.
-- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+-   You value transparency. We're open source and open core.
+-   You want more than just A/B testing and feature flags. We have a full suite of product analytics, session replays, surveys, error tracking, and more.
+-   You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-Check out [our product pages](/experimentation) and [read our docs](/docs) to learn more.
+Check out [our product pages](/experiments) and [read our docs](/docs) to learn more.

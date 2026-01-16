@@ -77,7 +77,7 @@ The solution is to make communication legible: [write it down](/newsletter/remot
 
 This means avoiding closed door meetings, private Slack conversations, and email threads, whenever possible. Instead, move communication to public channels, have an accessible wiki or [handbook](/handbook), and default to giving everyone access to everything.
 
-But this only works if it comes from the top. At PostHog, the [Blitzscale Team](/teams/blitzscale) shares details that are often private at other companies, like [company finances](/handbook/people/finance), slides from [board meetings](/handbook/exec/annual-planning), or the reasons for [letting people go](/handbook/strong-team#a-small-group-of-stronger-people-and-compensation). In doing this, they encourage everyone else to do the same. Hiding engineering knowledge looks trivial in comparison.
+But this only works if it comes from the top. At PostHog, the <SmallTeam slug="blitzscale" /> shares details that are often private at other companies, like [company finances](/handbook/people/finance), slides from [board meetings](/handbook/exec/annual-planning), or the reasons for [letting people go](/handbook/strong-team#a-small-group-of-stronger-people-and-compensation). In doing this, they encourage everyone else to do the same. Hiding engineering knowledge looks trivial in comparison.
 
 We also take "working in public" a step further by sharing as much as possible publicly, outside our company. This includes our [code](https://github.com/PostHog/), [roadmap](/roadmap), and even [strategy](/handbook/why-does-posthog-exist).
 
@@ -88,6 +88,8 @@ Sharing so much context publicly compounds its impact. It builds trust with cust
 We realize external openness doesn't work for everyone, but that doesn't mean you should return to hoarding information. Companies like [Palantir](https://nabeelqu.substack.com/i/150188028/secrets), [Pixar](https://hbr.org/2008/09/how-pixar-fosters-collective-creativity), and [Meta](https://alvinwan.com/why-and-why-not-work-at-meta/) are all secretive externally, but have internal openness. This has helped them build the massively successful companies they are today.
 
 > **Try this:** Write a guide or runbook on an undocumented process you're responsible for. Refer to it the next time someone asks you about it. We have a ton of public examples of these from [making schema changes safely](/handbook/engineering/databases/schema-changes) to [optimizing queries](/handbook/engineering/databases/query-performance-optimization) to [running growth reviews](/handbook/product/per-product-growth-reviews).
+
+<NewsletterForm />
 
 ## 3. Lacking an opinion
 
@@ -129,8 +131,6 @@ Sharing the context gives the receiver more of the information they need to eval
 Likewise, when asking a question, provide both the question you have **AND** the reason you're asking. This can save a lot of back and forth, and often leads to a better solution than the one you assumed existed.
 
 > **Remember this:** Put yourself in your recipient's shoes. Would you be able to accomplish what you want them to given the context you provide?
-
----
 
 ## 5. Being completely unstructured
 

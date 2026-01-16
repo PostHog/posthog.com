@@ -15,12 +15,14 @@ import { TeamMember } from 'components/People'
 import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconInfo, IconX, IconCrown, IconPlus } from '@posthog/icons'
+import { IconInfo, IconX, IconCrown, IconPlus, IconShieldLock } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
 import usePostHog from '../../hooks/usePostHog'
 import { PrivateLink } from 'components/PrivateLink'
+import TaskOwnershipTable from 'components/TaskOwnershipTable'
+import SmallTeam from 'components/SmallTeam'
 import Stickers from 'components/ProfileStickers'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import slugify from 'slugify'
@@ -476,12 +478,14 @@ export default function Team({
 
     const handleTeamLead = (profileID, isTeamLead) => {
         if (isTeamLead) {
+            // Remove this person as team lead
             setFieldValue(
                 'teamLeads',
                 values.teamLeads.filter((teamLead) => teamLead.id !== profileID)
             )
         } else {
-            setFieldValue('teamLeads', [...values.teamLeads, { id: profileID }])
+            // Set this person as the only team lead (remove all others first)
+            setFieldValue('teamLeads', [{ id: profileID }])
         }
     }
 
@@ -656,6 +660,7 @@ export default function Team({
                                                   pineappleOnPizza={pineappleOnPizza}
                                                   startDate={profile.attributes.startDate}
                                                   isTeamLead={isTeamLead(id)}
+                                                  viewingOwnTeam={true}
                                               />
                                               {editing && (
                                                   <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
@@ -666,15 +671,26 @@ export default function Team({
                                                       >
                                                           <IconX className="w-4 h-4" />
                                                       </button>
-                                                      <button
-                                                          onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                          className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
-                                                              isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
-                                                          }`}
-                                                          title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
+                                                      <Tooltip
+                                                          trigger={
+                                                              <button
+                                                                  onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                                  className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
+                                                                      isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                                  }`}
+                                                              >
+                                                                  <IconCrown className="w-4 h-4" />
+                                                              </button>
+                                                          }
+                                                          delay={0}
                                                       >
-                                                          <IconCrown className="w-4 h-4" />
-                                                      </button>
+                                                          <>
+                                                              <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                              {isTeamLead(id)
+                                                                  ? 'Remove as team lead'
+                                                                  : 'Set as team lead'}
+                                                          </>
+                                                      </Tooltip>
                                                   </div>
                                               )}
                                           </li>
@@ -736,6 +752,7 @@ export default function Team({
                     <h2>Goals</h2>
                     <div className="article-content team-page-content">
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - team objectives from CMS, not user input */}
                             <div dangerouslySetInnerHTML={{ __html: objectives }} />
                         </MDXProvider>
                     </div>
@@ -746,7 +763,9 @@ export default function Team({
                 <>
                     <h2>Handbook</h2>
                     <div className="article-content team-page-content">
-                        <MDXProvider components={{ PrivateLink }}>
+                        <MDXProvider
+                            components={{ PrivateLink, TaskOwnershipTable, SmallTeam, TeamMember: TeamMemberComponent }}
+                        >
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>

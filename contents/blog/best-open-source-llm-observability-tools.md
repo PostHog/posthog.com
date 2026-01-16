@@ -47,7 +47,7 @@ Its LLM observability product (known as [LLM analytics](/docs/llm-analytics)) in
 
 #### What makes PostHog special?
 
-PostHog’s LLM analytics product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
+PostHog’s LLM analytics app works with the rest of our dev tool suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
 PostHog’s hosted Cloud version and all of its LLM analytics features are free to use. It comes with 100k LLM observability events for free every month with 30 day retention. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
 
@@ -160,3 +160,7 @@ Its hosted version has a free tier, which offers 10k events per month with 30 da
 #### What makes Lunary special?
 
 Lunary is purpose built for LLM chatbots like knowledge bases and support tools. This shows in their focus on features like PII masking, access management, human reviewing, and multi-modal support. 
+
+## Related reading
+
+If you’re also instrumenting the rest of your app (not just the LLM parts), we have a separate roundup of the [best error tracking tools](/blog/best-error-tracking-tools). It compares the more traditional app monitoring tools — useful if you want LLM traces and regular exception monitoring to live side by side.

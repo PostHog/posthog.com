@@ -1,0 +1,39 @@
+name: Markdown Lint
+
+on:
+    pull_request:
+
+permissions:
+    contents: read
+
+jobs:
+    markdownlint:
+        name: Lint Markdown Files
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Get changed markdown files
+              id: changed-files
+              uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
+              with:
+                  files: |
+                      **/*.md
+                      **/*.mdx
+                      .markdownlint-cli2.jsonc
+                      .github/workflows/markdown-lint.yml
+
+            - name: Run markdownlint-cli2
+              if: steps.changed-files.outputs.any_changed == 'true'
+              uses: DavidAnson/markdownlint-cli2-action@30a0e04f1870d58f8d717450cc6134995f993c63 # v21
+              with:
+                  globs: ${{ steps.changed-files.outputs.all_changed_files }}
+                  config: '.markdownlint-cli2.jsonc'
+
+            - name: Skip if no markdown files changed
+              if: steps.changed-files.outputs.any_changed != 'true'
+              run: echo "No markdown files changed, skipping lint"

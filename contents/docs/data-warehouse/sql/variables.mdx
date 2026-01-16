@@ -42,20 +42,9 @@ You can set the value for the variable in the same **Variables** tab, on the ins
   classes="rounded"
 />
 
-## Dashboard filter variables
+## Dashboard date range filter variables
 
-Beyond the SQL variables you set up, there are also some variables that are automatically available to you when using SQL insights in a dashboard. You can access the dashboard's filters through the `filters` variable.
-
-They include:
-
-- `filters.dateRange.from` - Start date of the dashboard date range
-- `filters.dateRange.to` - End date of the dashboard date range
-- `filters.properties` - Array of property filters applied at the dashboard level
-- `filters.breakdown_filter` - Breakdown configuration from dashboard filters
-- `filters.compare` - Comparison settings if enabled
-- `filters.interval` - Time interval setting from dashboard
-
-For example, to add the dashboard's date range to the query, you can use the `filters.dateRange.from` and `filters.dateRange.to` variables like this:
+Beyond the SQL variables you set up, you can access the dashboard's date range filters through the `filters.dateRange.from` and `filters.dateRange.to` variables like this:
 
 ```sql
 select * 

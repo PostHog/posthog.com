@@ -26,7 +26,7 @@ jobs:
   build_and_upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -62,10 +62,10 @@ This step:
 | --- | --- | --- |
 | `directory` | Yes | Directory containing built assets (for example, `dist`) |
 | `env-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/environment#variables) |
-| `cli-token` | Yes | Personal API key with error tracking write scope. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `cli-token` | Yes | Personal API key with error tracking write and organization read scopes. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
 | `project` | No | Project identifier. Defaults to the Git repository name when available |
 | `version` | No | Release/version (for example, commit SHA). Defaults to current commit SHA when available |
-| `host` | No | PostHog host URL. Defaults to `https://us.posthog.com`. For EU cloud, set it to `https://eu.posthog.com` | 
+| `host` | No | PostHog host URL. Defaults to `https://us.posthog.com`. For EU cloud, set it to `https://eu.posthog.com` |
 
 </div>
 
@@ -77,9 +77,9 @@ We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `P
 
 1. Confirm symbol sets are present in PostHog after the workflow runs.
 
-<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+<OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
-</CallToAction>
+</OSButton>
 
 2. Confirm your served production files include an injected comment at the end of the file similar to:
 
@@ -96,5 +96,3 @@ You must deploy the injected build artifacts to production. PostHog reads the in
 </Step>
 
 </Steps>
-
-

@@ -89,6 +89,7 @@ interface EditorProps {
     }
     extraMenuOptions?: React.ReactNode
     articleRef?: React.RefObject<HTMLDivElement>
+    hideToolbar?: boolean
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -225,6 +226,7 @@ export function Editor({
     bookmark,
     extraMenuOptions,
     articleRef,
+    hideToolbar = false,
     ...other
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
@@ -550,9 +552,11 @@ export function Editor({
     return (
         <SearchProvider onSearchChange={onSearchChange}>
             <div className="@container w-full h-full flex flex-col min-h-1">
-                <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
-                    <Toolbar elements={toolbarElements} />
-                </aside>
+                {hideToolbar ? null : (
+                    <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
+                        <Toolbar elements={toolbarElements} />
+                    </aside>
+                )}
                 <div className="flex flex-col flex-grow min-h-0">
                     <main
                         data-app="Editor"

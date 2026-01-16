@@ -42,7 +42,7 @@ After creating your flag, go to your app to implement it. For example, in a Next
 ```js
 // app/page.js
 'use client'
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 import { useEffect, useState } from 'react'
 
 export default function Home() {

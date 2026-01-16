@@ -1,6 +1,7 @@
 ---
 title: React experiments installation
 showStepsToc: true
+platformLogo: react
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
@@ -10,27 +11,12 @@ import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
 import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
 import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
 import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
-import Wizard from '../../getting-started/_snippets/wizard.mdx'
-import Tab from "components/Tab"
 
 <Steps>
 
 <Step title="Install PostHog React SDK" badge="required">
 
-<Tab.Group tabs={['Wizard', 'Manual']}>
-<Tab.List>
-<Tab>Wizard</Tab>
-<Tab>Manual</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-    <Wizard />
-</Tab.Panel>
-<Tab.Panel>
-    <ReactInstall />
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
+<ReactInstall />
 
 </Step>
 
@@ -41,7 +27,7 @@ Once PostHog is initialized, you should be able to capture events.
 For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
 
 ```jsx
-import { usePostHog } from 'posthog-js/react'
+import { usePostHog } from '@posthog/react'
 
 export function CTAButton() {
   const posthog = usePostHog()
@@ -79,7 +65,7 @@ Use the React hooks to evaluate the experiment flag and render the `<button id="
 
 ```jsx
 // Method one: using the useFeatureFlagVariantKey hook
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
+import { useFeatureFlagVariantKey } from '@posthog/react'
 
 function CTAButton() {
   const variant = useFeatureFlagVariantKey('test-experiment-ff-key') // 'control' | 'test' | null
@@ -91,7 +77,7 @@ function CTAButton() {
 }
 
 // Method two: using the feature flags component
-import { PostHogFeature } from 'posthog-js/react'
+import { PostHogFeature } from '@posthog/react'
 
 function CTAButton() {
   return (

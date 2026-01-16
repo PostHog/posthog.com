@@ -7,7 +7,7 @@ If your Next.js app uses the [app router](https://nextjs.org/docs/app), you can 
 'use client'
 
 import posthog from 'posthog-js'
-import { PostHogProvider as PHProvider } from 'posthog-js/react'
+import { PostHogProvider as PHProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PostHogProvider({ children }) {
@@ -31,12 +31,12 @@ export function PostHogProvider({ children }) {
 'use client'
 
 import posthog from 'posthog-js'
-import { PostHogProvider as PHProvider } from 'posthog-js/react'
+import { PostHogProvider as PHProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
-      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
         defaults: '<ph_posthog_js_defaults>',
       })

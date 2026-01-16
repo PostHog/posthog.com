@@ -14,6 +14,8 @@ availability:
       selfServe: true
       enterprise: true
 ---
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 export const newFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-light-mode.mp4"
 export const newFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/funnels/new-funnel-dark-mode.mp4"
 export const funnelStepsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-light-mode.png"
@@ -74,7 +76,9 @@ You can learn the following from funnels:
 
 ### Adding steps
 
-Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow. Next, add intermediate events users need to go through to be successful and finish with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew results.
+Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow. 
+
+Next, add events users must complete to proceed through the funnel, ending with the event you consider the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew results.
 
 <ProductScreenshot
     imageLight = {funnelStepsLight} 
@@ -83,11 +87,18 @@ Select the steps to include in your funnel, ideally starting with the first even
     alt="Funnel steps"
 />
 
-By default, funnel steps must be completed sequentially, however you are able to change this behavior by selecting one of three different step orders:
+By default, funnel steps must be completed **sequentially**, however you are able to change this behavior by selecting one of three different step orders:
 
 1. **Sequential** – Step B must happen after Step A, but any number events can happen between A and B.
 2. **Strict order** – Step B must happen directly after Step A without any events in between.
 3. **Any order** – Steps can be completed in any sequence.
+
+<CalloutBox icon="IconInfo" title="Steps must be performed" type="info">
+
+If you add multiple steps with the same event type, it will require the user to **trigger that event multiple times**. Think of funnel steps as actions to be performed, not filters to be applied.
+
+For example, adding a `clicked button` step, then a second `clicked button` step that filters for the "Sign Up" button, will require the user to perform **two** distinct button clicks.
+</CalloutBox>
 
 ### Filtering steps
 

@@ -55,7 +55,15 @@ module.exports = {
                 'ai-blue': '#3E6B9E',
             },
             backgroundImage: {
-                ai: 'radial-gradient(67.05% 98.56% at 12.79% 49.61%, #FF8041 0%, #DE7AFF 34.48%, #3795FF 67.29%, #46EEBC 100%)',
+                ai: 'radial-gradient(at 84% 83%, hsla(354,99%,77%,1) 0px, transparent 50%), radial-gradient(at 66% 38%, hsla(295,67%,67%,1) 0px, transparent 50%), radial-gradient(at 44% 51%, hsla(149,78%,70%,1) 0px, transparent 50%), radial-gradient(at 41% 14%, hsla(257,76%,72%,1) 0px, transparent 50%), radial-gradient(at 75% 97%, hsla(107,92%,67%,1) 0px, transparent 50%), radial-gradient(at 68% 35%, hsla(237,71%,71%,1) 0px, transparent 50%), radial-gradient(at 42% 23%, hsla(64,65%,79%,1) 0px, transparent 50%)',
+                'llm-analytics':
+                    'radial-gradient(ellipse 80% 60% at 15% 20%, #DE7AFF 0px, transparent 40%), radial-gradient(ellipse 100% 80% at 85% 15%, #EF7D9B 0px, transparent 35%), radial-gradient(ellipse 70% 100% at 90% 85%, #3795FF 0px, transparent 45%), radial-gradient(ellipse 90% 70% at 10% 90%, #40C8D8 0px, transparent 40%)',
+                'trace-monitoring':
+                    'radial-gradient(ellipse 80% 90% at 30% 20%, rgba(77, 64, 216, 0.67) 0%, transparent 60%), radial-gradient(ellipse 90% 75% at 70% 80%, rgba(184, 255, 162, 0.75) 0%, transparent 55%), radial-gradient(ellipse 70% 85% at 10% 60%, rgba(122, 149, 255, 0.7) 0%, transparent 65%)',
+                'cost-analysis':
+                    'radial-gradient(ellipse 100% 80% at 85% 15%, rgba(184, 66, 231, 0.69) 0px, transparent 55%), radial-gradient(ellipse 70% 100% at 90% 85%, rgba(55, 148, 255, 0.52) 0px, transparent 65%), radial-gradient(ellipse 60% 80% at 50% 50%, rgba(239, 125, 155, 1) 0px, transparent 70%)',
+                'performance-monitoring':
+                    'radial-gradient(ellipse 80% 90% at 30% 20%, rgba(17, 126, 208, 0.6) 0%, transparent 60%), radial-gradient(ellipse 90% 75% at 70% 80%, rgba(255, 20, 147, 0.5) 0%, transparent 55%), radial-gradient(ellipse 70% 85% at 10% 60%, rgba(50, 84, 205, 0.4) 0%, transparent 65%)',
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'bullet-light':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%23D0D1C9" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
@@ -277,6 +285,11 @@ module.exports = {
                 'fluid-video': '56.25%',
                 '1/2': '50%',
             },
+            spacing: {
+                4.5: '1.125rem',
+                5.5: '1.375rem',
+                6.5: '1.625rem',
+            },
             maxWidth: {
                 '2xs': '16rem',
             },
@@ -362,6 +375,26 @@ module.exports = {
                     '0%, 100%': { 'background-position': '0% 50%' },
                     '50%': { 'background-position': '100% 50%' },
                 },
+                slideUpFadeIn: {
+                    from: {
+                        opacity: '0',
+                        transform: 'translateY(10px)',
+                    },
+                    to: {
+                        opacity: '1',
+                        transform: 'translateY(0)',
+                    },
+                },
+                slideUpFadeOut: {
+                    from: {
+                        opacity: '1',
+                        transform: 'translateY(0)',
+                    },
+                    to: {
+                        opacity: '0',
+                        transform: 'translateY(-10px)',
+                    },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -381,6 +414,8 @@ module.exports = {
                 'spin-slow': 'spin-slow 4s linear infinite',
                 'spin-slow-reverse': 'spin-slow-reverse 4s linear infinite',
                 'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
+                'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
+                'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
             },
             containers: {
                 '2xs': '16rem',

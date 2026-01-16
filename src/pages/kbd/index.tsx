@@ -32,7 +32,7 @@ export default function KBDShortcuts(): JSX.Element {
             title: 'Navigation',
             shortcuts: [
                 { keys: [[`${modifierKey}`, 'K', 'or', '/']], description: 'Open search' },
-                { keys: ['Shift', '?'], description: 'Open Max AI chat' },
+                { keys: ['Shift', '?'], description: 'Open PostHog AI chat' },
                 { keys: [','], description: 'Open display options' },
             ],
         },
@@ -102,23 +102,23 @@ export default function KBDShortcuts(): JSX.Element {
                                                 <div className="flex items-center gap-1">
                                                     {Array.isArray(shortcut.keys[0])
                                                         ? // Handle alternative shortcuts (e.g., "/" or "Cmd+K")
-                                                        shortcut.keys[0].map((key, keyIndex) => (
-                                                            <React.Fragment key={keyIndex}>
-                                                                {key === 'or' ? (
-                                                                    <span className="text-secondary mx-1 text-xs">
-                                                                        or
-                                                                    </span>
-                                                                ) : (
-                                                                    <KeyboardShortcut text={key} size="sm" />
-                                                                )}
-                                                            </React.Fragment>
-                                                        ))
+                                                          shortcut.keys[0].map((key, keyIndex) => (
+                                                              <React.Fragment key={keyIndex}>
+                                                                  {key === 'or' ? (
+                                                                      <span className="text-secondary mx-1 text-xs">
+                                                                          or
+                                                                      </span>
+                                                                  ) : (
+                                                                      <KeyboardShortcut text={key} size="sm" />
+                                                                  )}
+                                                              </React.Fragment>
+                                                          ))
                                                         : // Handle regular shortcuts
-                                                        shortcut.keys.map((key, keyIndex) => (
-                                                            <React.Fragment key={keyIndex}>
-                                                                <KeyboardShortcut text={key} size="sm" />
-                                                            </React.Fragment>
-                                                        ))}
+                                                          shortcut.keys.map((key, keyIndex) => (
+                                                              <React.Fragment key={keyIndex}>
+                                                                  <KeyboardShortcut text={key} size="sm" />
+                                                              </React.Fragment>
+                                                          ))}
                                                 </div>
                                             </div>
                                         ))}

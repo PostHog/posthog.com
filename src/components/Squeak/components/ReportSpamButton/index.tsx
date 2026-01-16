@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { IconCheck, IconWarning } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../../../context/App'
+import Tooltip from 'components/RadixUI/Tooltip'
+import OSButton from 'components/OSButton'
 
 export default function ReportSpamButton({ type, id }: { type: 'reply' | 'question'; id: number }): JSX.Element {
     const { user, reportSpam } = useUser()
@@ -54,14 +56,11 @@ export default function ReportSpamButton({ type, id }: { type: 'reply' | 'questi
     }
 
     return (
-        <>
-            <button
-                onClick={handleClick}
-                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-            >
-                <IconWarning className="size-4 mr-1 text-secondary inline-block" />
-                Report spam
-            </button>
-        </>
+        <Tooltip
+            trigger={<OSButton onClick={handleClick} className="" hover="border" size="md" icon={<IconWarning />} />}
+            delay={0}
+        >
+            Report spam
+        </Tooltip>
     )
 }

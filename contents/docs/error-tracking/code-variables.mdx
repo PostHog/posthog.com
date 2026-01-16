@@ -1,0 +1,53 @@
+---
+title: Code variables
+---
+
+PostHog SDK can automatically capture the state of local variables when an exception occurs, giving you a debugger-like view of your application at the time of the error.
+
+When enabled, PostHog captures the values of variables from each frame in the stack trace, eliminating the need to reproduce errors locally just to understand what values were present when the exception was thrown.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2025_11_13_T08_33_54_608_Z_019b9c4f02.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2025_11_13_T08_25_03_421_Z_07ba9b7242.png"
+    alt="Error tracking code variables"
+    classes="rounded"
+/>
+
+<Caption>
+The variables account_balance, email, user_id, and username and their values
+</Caption>
+
+## How it works
+
+1. **Variable extraction**: Local variables are extracted from each frame in the stack trace
+2. **Scope filtering**: Only frames from your application code (not third-party libraries) are included
+3. **Type mapping**: Simple types like strings, numbers, and booleans are directly mapped. Complex objects are JSON-serialized when possible. Otherwise their type name is shown
+4. **Truncation**: Long values are automatically truncated to keep event sizes manageable
+5. **Security**: Sensitive variable names are masked or excluded based on configurable patterns
+
+The captured variables appear alongside the stack trace in PostHog, allowing you to inspect the exact state of your application at the moment of the error.
+
+### Masking
+
+Masking replaces the values of sensitive variables with a redacted placeholder while still showing the variable name. This is useful for variables like `password`, `api_key`, or `access_token` where you want to know the variable exists in the stack trace, but don't want to expose its actual value.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2025_11_13_T08_28_21_412_Z_a69c250ada.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2025_11_13_T08_28_46_274_Z_b5813ee9b8.png"
+    alt="Error tracking code variables masking"
+    classes="rounded"
+/>
+
+<Caption>
+The secret's value is masked
+</Caption>
+
+### Ignoring
+
+Ignoring completely excludes variables from being captured. This is useful for internal framework variables, temporary data, or variables that don't provide debugging value. Ignored variables won't appear in the captured stack trace at all.
+
+### SDK support
+
+Each SDK provides platform-specific configuration options. See the platform-specific documentation for details:
+
+- [Python](/docs/error-tracking/code-variables/python)

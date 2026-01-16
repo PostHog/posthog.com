@@ -14,6 +14,8 @@ Among other things, they
 2. organize [user interviews](/handbook/product/user-feedback)
 3. coach product engineers on ["how to do product"](/handbook/engineering/product-engineering)
 
+# How PMs work
+
 ## Small team membership
 
 Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it. PMs join small team standups and planning whenever it makes sense, but they are not required to attend _all_ team meetings. This is up to the PM to decide when it makes sense to join these, and when their time is better spent elsewhere.
@@ -25,47 +27,48 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   [Analytics Platform](/teams/analytics-platform)
--   [Data Warehouse](/teams/data-warehouse)
--   [Product Analytics](/teams/product-analytics)
--   [Web Analytics](/teams/web-analytics)
+-   <SmallTeam slug="analytics-platform" />
+-   <SmallTeam slug="data-stack" />
+-   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="web-analytics" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   [Feature Flags](/teams/feature-flags)
--   [Experiments](/teams/experiments)
--   [Max AI](/teams/max-ai)
+-   <SmallTeam slug="feature-flags" />
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="posthog-ai" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Cory Slater" photo /></legend>
 
--   [Error Tracking](/teams/error-tracking)
--   [Surveys](/teams/surveys)
--   [Session Replay](/teams/session-replay)
+-   <SmallTeam slug="error-tracking" />
+-   <SmallTeam slug="surveys" />
+-   <SmallTeam slug="replay" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
--   [Messaging & CDP](/teams/messaging)
--   [Batch Exports (light support)](/teams/batch-exports)
--   Embedded Analytics
+-   <SmallTeam slug="workflows" />
+-   <SmallTeam slug="batch-exports" />*
+-   Endpoints
 -   Logs
+
+*light support
 
 </fieldset>
 
 <fieldset>
 <legend>Teams with no PM currently</legend>
 
--   [Customer Analytics](/teams/customer-analytics)
--   [LLM Analytics](/teams/llm-analytics)
--   [Revenue Analytics](/teams/revenue-analytics)
+-   <SmallTeam slug="customer-analytics" />
+-   <SmallTeam slug="llm-analytics" />
 
 </fieldset>
 
@@ -75,17 +78,10 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 Product managers primarily support their teams in reaching their goals. The top two priorities of each PM are to run a growth review at the beginning of every month for each of their products, and to organise regular user interviews. (Our rule of thumb is 1 interview per week per PM).
 
-The [quarterly per-product planning](/handbook/company/goal-setting) typically highlight the biggest blind spots a team or product has (e.g. what metrics or parts of the product do we think have potential, but we don't have enough context yet). Teams are encouraged to include their "biggest unknown" as a research goal for the PM to own as part of their quarterly goals. Findings should be shared asynchronously via a GitHub PR in [#product-internal](https://github.com/PostHog/product-internal), and in the growth reviews or team standups where applicable.
+The [quarterly per-product planning](/handbook/company/goal-setting) typically highlight the biggest blind spots a team or product has (e.g. what metrics or parts of the product do we think have potential, but we don't have enough context yet). Teams are encouraged to include their "biggest unknown" as a research goal for the PM to own as part of their quarterly goals. Findings should be shared asynchronously via a GitHub PR in the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">product-internal repo</PrivateLink>, and in the growth reviews or team standups where applicable.
 
-As the PM team, we are also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
+To keep track of their projects across teams, PMs should track their personal quarterly goals transparently somewhere, for example in the [public PostHog Meta repo](https://github.com/PostHog/meta).
 
-In Q3 2025, those are:
+As the PM team, we are usually also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-**Goal 1: Investigate if we can automate growth reviews, some parts at least** -> <TeamMember name="Anna Szell" photo /> & <TeamMember name="Cory Slater" photo />
-
--   Something along the lines of having a materialized view per metric
--   Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
-
-**Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
-
--   We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
+In Q4 2025, we are focussing primarily on the teams we work with, and have no big side projects.

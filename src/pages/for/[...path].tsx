@@ -78,11 +78,18 @@ interface SlideConfig {
     bgColor?: string
     textColor?: string
     content?: ContentItem[]
+    teamSlug?: string
 }
 
 interface PresentationConfig {
     name: string
     slides: Record<string, SlideConfig>
+    config?: {
+        thumbnails?: boolean
+        notes?: boolean
+        form?: boolean
+        teamSlug?: string
+    }
 }
 
 const CustomPresentationPage = () => {
@@ -92,16 +99,22 @@ const CustomPresentationPage = () => {
     const [salesRep, setSalesRep] = useState<SalesRep | null>(null)
 
     // Parse the URL path
+    // URL patterns:
+    // /for/{persona} -> pathSegments = ['', 'for', 'persona']
+    // /for/{company}/{role} -> pathSegments = ['', 'for', 'company', 'role']
     const pathSegments = appWindow?.path ? appWindow?.path.split('/') : []
-    const companyDomain = pathSegments[2] || ''
-    const roleOrId = pathSegments[3] || ''
 
-    // Redirect to homepage if no company is specified
+    // Determine if this is a company-specific or persona-only URL
+    const hasCompany = pathSegments.length >= 4
+    const companyDomain = hasCompany ? pathSegments[2] : ''
+    const roleOrId = hasCompany ? pathSegments[3] : pathSegments[2] || ''
+
+    // Redirect to homepage if no role/persona is specified
     useEffect(() => {
-        if (!companyDomain) {
+        if (!roleOrId) {
             navigate('/')
         }
-    }, [companyDomain])
+    }, [roleOrId])
 
     // Load custom configuration if available
     const [customConfig, setCustomConfig] = useState<any>(null)
@@ -129,12 +142,21 @@ const CustomPresentationPage = () => {
 
     // Determine which configuration to use
     const config: PresentationConfig = useMemo(() => {
+        // Check if this is a company-specific landing page (has a company domain in the URL)
+        const isCompanySpecific = !!companyDomain
+        const defaultTeamSlug = isCompanySpecific ? 'sales-cs' : 'sales-product-led'
+
         // Check for custom configuration first
         if (customConfig) {
             // Process custom config with inheritance
             const processedConfig: PresentationConfig = {
                 name: customConfig.name || 'Custom Presentation',
                 slides: {},
+                config: {
+                    ...customConfig.config,
+                    // Set default teamSlug if not specified in custom config
+                    teamSlug: customConfig.config?.teamSlug || defaultTeamSlug,
+                },
             }
 
             Object.entries(customConfig.slides || {}).forEach(([slideKey, slideConfig]: [string, any]) => {
@@ -161,26 +183,48 @@ const CustomPresentationPage = () => {
 
         // Check for standard role configuration
         if (roleOrId && roleConfigs[roleOrId as keyof typeof roleConfigs]) {
-            return roleConfigs[roleOrId as keyof typeof roleConfigs]
+            const roleConfig = roleConfigs[roleOrId as keyof typeof roleConfigs]
+            return {
+                ...roleConfig,
+                config: {
+                    ...(roleConfig.config || {}),
+                    // Set default teamSlug if not specified in role config
+                    teamSlug: roleConfig.config?.teamSlug || defaultTeamSlug,
+                },
+            }
         }
 
         // Default configuration
-        return defaultConfig
-    }, [roleOrId, customConfig])
+        return {
+            ...defaultConfig,
+            config: {
+                ...(defaultConfig.config || {}),
+                // Set default teamSlug if not specified in default config
+                teamSlug: defaultConfig.config?.teamSlug || defaultTeamSlug,
+            },
+        }
+    }, [roleOrId, customConfig, companyDomain])
 
     // Fetch company data from Clearbit
     useEffect(() => {
-        if (!companyDomain) return
+        // Only fetch if there's a company domain (i.e., company-specific URL)
+        if (!companyDomain) {
+            setIsLoading(false)
+            return
+        }
 
         const fetchCompanyData = async () => {
+            // Check if companyDomain is actually a domain (contains a dot)
+            const isActualDomain = companyDomain.includes('.')
+
             try {
                 const response = await fetch(`/api/customer?domain=${companyDomain}`)
                 if (response.ok) {
                     const data = await response.json()
                     setCompanyData({
-                        name: data?.companyInfo?.name || companyDomain,
+                        name: data?.companyInfo?.name || (isActualDomain ? companyDomain : ''),
                         domain: data?.companyInfo?.domain || companyDomain,
-                        logo: data?.companyInfo?.logo || null,
+                        logo: data?.companyInfo?.logo || undefined,
                     })
                     setSalesRep({
                         email: data?.accountManager?.email,
@@ -192,19 +236,19 @@ const CustomPresentationPage = () => {
                         color: data?.accountManager?.color,
                     })
                 } else {
-                    // Fallback if Clearbit fails
+                    // Fallback if API fails
                     setCompanyData({
-                        name: companyDomain.replace('.com', '').replace('.io', ''),
+                        name: isActualDomain ? companyDomain.replace('.com', '').replace('.io', '') : '',
                         domain: companyDomain,
-                        logo: null,
+                        logo: undefined,
                     })
                 }
             } catch (error) {
                 console.error('Error fetching company data:', error)
                 setCompanyData({
-                    name: companyDomain.replace('.com', '').replace('.io', ''),
+                    name: isActualDomain ? companyDomain.replace('.com', '').replace('.io', '') : '',
                     domain: companyDomain,
-                    logo: null,
+                    logo: undefined,
                 })
             } finally {
                 setIsLoading(false)
@@ -303,6 +347,7 @@ const CustomPresentationPage = () => {
                         companyLogo={props.companyLogo}
                         companyName={props.companyName}
                         salesRep={salesRep}
+                        teamSlug={props.teamSlug}
                         slideKey={slideKey}
                     >
                         {props.children}
@@ -375,6 +420,8 @@ const CustomPresentationPage = () => {
                 )}
                 slides={slides}
                 presenterNotes={{}}
+                config={config.config}
+                salesRep={salesRep}
             >
                 <div
                     data-scheme="primary"

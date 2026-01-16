@@ -15,8 +15,9 @@ export const dataWarehouse = {
     colorSecondary: 'lilac',
     // category: 'data',
     seo: {
-        title: 'Data Warehouse - PostHog',
-        description: 'Unify and query data from any source and analyze it alongside your product data.',
+        title: 'Data Warehouse – Sync and query product data in PostHog',
+        description:
+            "Centralize your product data with PostHog's Data Warehouse. Query events, sync external sources, and visualize results in one place.",
     },
     overview: {
         title: 'Query & visualize product and third party data together',
@@ -48,6 +49,21 @@ export const dataWarehouse = {
         max: 1000000000,
     },
     volume: 1000000,
+    includeAddonRates: true,
+    addonSliders: [
+        {
+            key: 'data_warehouse_historical',
+            label: 'Data warehouse historical syncs',
+            sliderConfig: {
+                marks: [1000000, 10000000, 100000000, 1000000000, 10000000000],
+                min: 1000000,
+                max: 10000000000,
+            },
+            volume: 1000000,
+            unit: 'row',
+            freeAllocationText: 'Free for the first 7 days of each new source (100M on free plan, unlimited on paid)',
+        },
+    ],
     customers: {
         headshotpro: {
             headline: 'analyzes Google Adwords data in PostHog',
@@ -76,7 +92,7 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'Write SQL without knowing SQL',
-                    description: 'Nobody likes writing SQL, except for our AI helper, Max',
+                    description: 'Nobody likes writing SQL, except for PostHog AI',
                 },
                 {
                     title: 'Simplified syntax',

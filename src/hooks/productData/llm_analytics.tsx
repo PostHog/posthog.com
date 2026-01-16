@@ -3,6 +3,7 @@ import {
     IconBell,
     IconClockRewind,
     IconDashboard,
+    IconGear,
     IconGraph,
     IconHandMoney,
     IconLightBulb,
@@ -18,6 +19,10 @@ import {
     IconWarning,
     IconGlobe,
     IconListCheck,
+    IconMagicWand,
+    IconLlmPromptManagement,
+    IconLlmPromptEvaluation,
+    IconDatabase,
 } from '@posthog/icons'
 import {
     IconAnthropic,
@@ -51,15 +56,21 @@ export const llmAnalytics = {
     },
     volume: 100000,
     seo: {
-        title: 'LLM analytics - PostHog',
+        title: 'LLM Analytics – Observe and optimize AI products in PostHog',
         description:
-            'Track every conversation, model performance, costs, and errors in your LLM applications. 10x cheaper than other LLM observability tools.',
+            'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
-        title: 'Monitor and debug your AI products',
-        description: 'Analyze traces, spans, per-user costs, latency, and usage of your AI features',
+        title: 'Observe and debug AI in production',
+        description:
+            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features.',
         textColor: 'text-white',
         layout: 'overlay',
+    },
+    videos: {
+        overview: {
+            wistia: 'bl174kpxu8',
+        },
     },
     screenshots: {
         overview: {
@@ -93,16 +104,70 @@ export const llmAnalytics = {
         lovable: {
             headline: 'compared us to every other observability tool, just to be sure',
             description:
-                "If you're building a new product, just use PostHog.It's a no-brainer. It's the only all-in -one platform like it for developers.",
+                "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
+        },
+        posthog: {
+            headline: 'monitors the usage and performance of PostHog AI with LLM Analytics',
+            description:
+                'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
         },
     },
     features: [
         {
-            title: 'Trace monitoring',
+            label: 'Features',
+        },
+        {
+            title: 'Dashboard',
+            icon: <IconDashboard />,
+            color: 'purple',
+            headline: 'Dashboard',
+            description:
+                "Get a comprehensive overview of where your LLM budget goes, who's using AI features, and how they perform.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_screenshot_ce72bbf715.png',
+                    alt: 'LLM Analytics dashboard',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Generations',
+            icon: <IconSparkles />,
+            color: 'yellow',
+            headline: 'Generations',
+            description:
+                'Every LLM call becomes a generation. See exactly what went in, what came out, and why it cost you $0.03.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
+                    alt: 'LLM Analytics generations',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Traces',
+            icon: <IconListTreeConnected />,
+            color: 'seagreen',
+            headline: 'Traces',
+            description:
+                'Debug entire conversations, not just individual calls. PostHog automatically captures properties like person, total cost, total latency, and more.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_screenshot_1e0bdd0ad3.png',
+                    alt: 'LLM Analytics traces',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Traces',
             handle: 'trace_monitoring',
+            className: 'bg-trace-monitoring !bg-blue',
             template: 'splitImage',
-            headline: 'Trace monitoring',
-            description: 'Debug entire conversations, not just individual calls',
+            headline: 'Traces',
+            description: 'See an interaction timeline including all generation and span events.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
@@ -135,7 +200,7 @@ export const llmAnalytics = {
                 {
                     icon: <IconShield />,
                     title: 'Privacy mode',
-                    description: 'Optionally exclude sensitive prompt and completion data',
+                    description: 'Optionally exclude sensitive data from being captured',
                 },
             ],
             // children: (<></>)
@@ -143,9 +208,10 @@ export const llmAnalytics = {
         {
             title: 'Cost analysis',
             handle: 'cost_analysis',
+            className: 'bg-cost-analysis !bg-purple',
             template: 'splitImage',
             headline: 'Cost analysis',
-            description: 'Track costs by model, user, feature, and time period to optimize spending and pricing',
+            description: 'Track costs by model, user, feature, and time period to optimize spending and pricing.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',
@@ -180,9 +246,10 @@ export const llmAnalytics = {
         {
             title: 'Performance monitoring',
             handle: 'performance_monitoring',
+            className: 'bg-performance-monitoring !bg-lilac',
             template: 'splitImage',
             headline: 'Performance monitoring',
-            description: 'Monitor latency, error rates, and model performance',
+            description: 'Monitor latency, error rates, and model performance over time.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
@@ -195,7 +262,7 @@ export const llmAnalytics = {
                 {
                     icon: <IconDashboard />,
                     title: 'Latency tracking',
-                    description: 'Monitor response times and identify performance bottlenecks',
+                    description: 'optimize response times and identify performance bottlenecks',
                 },
                 {
                     icon: <IconWarning />,
@@ -220,118 +287,244 @@ export const llmAnalytics = {
             ],
         },
         {
-            title: 'Native integrations',
-            handle: 'native_integrations',
-            template: 'grid',
-            headline: 'Works with your AI stack',
-            description: 'Simple SDKs for popular LLM providers and observability platforms.',
-            features: [
-                {
-                    icon: <IconOpenAI />,
-                    title: 'OpenAI SDK',
-                    // description: 'Drop-in integration for GPT models with one line of code',
-                },
-                {
-                    icon: <IconAnthropic />,
-                    title: 'Anthropic SDK',
-                    // description: 'Native support for Claude models',
-                },
-                {
-                    icon: <IconGemini />,
-                    title: 'Google Gemini',
-                    // description: 'Native support for Gemini models',
-                },
-                {
-                    icon: <IconLangChain />,
-                    title: 'LangChain',
-                    // description: 'Full observability for LangChain applications',
-                },
-                {
-                    icon: <IconVercel />,
-                    title: 'Vercel AI SDK',
-                    // description: 'Track streaming responses and edge functions',
-                },
-                {
-                    icon: <IconOpenRouter />,
-                    title: 'OpenRouter',
-                    // description: 'Native support for OpenRouter',
-                },
-            ],
-        },
-        {
-            title: 'Platform integrations',
-            handle: 'platform_integrations',
-            template: 'split',
-            headline: 'Integrates with other LLM observability platforms',
+            title: 'Users',
+            icon: <IconUser />,
+            color: 'red',
+            headline: 'Users',
             description:
-                'Using another LLM observability platform? Send data to PostHog to analyze it with product usage data.',
-            features: [
+                "Spot your power users, your biggest fans, and who's hitting errors. Most teams discover 20% of users drive 80% of costs.",
+            images: [
                 {
-                    icon: <IconLangfuse />,
-                    title: 'Langfuse',
-                    description: '',
-                },
-                {
-                    icon: <IconHelicone />,
-                    title: 'Helicone',
-                    description: '',
-                },
-                {
-                    icon: <IconTraceloop />,
-                    title: 'Traceloop',
-                    description: '',
-                },
-                {
-                    icon: <IconKeywordsAI />,
-                    title: 'Keywords AI',
-                    description: '',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_2_d93795cbdc.png',
+                    alt: 'LLM Analytics users',
+                    className: 'justify-center items-center',
                 },
             ],
-            children: (
-                <div className="prose-xl p-8">
-                    <h3>Answer questions like:</h3>
-                    <ul className="list-disc">
-                        <li>What are my LLM costs by customer, model, and in total?</li>
-                        <li>How many of my users are interacting with my LLM features?</li>
-                        <li>Are there generation latency spikes?</li>
-                        <li>
-                            Does interacting with LLM features correlate with other metrics (retention, usage, revenue,
-                            etc.)?
-                        </li>
-                    </ul>
-                </div>
-            ),
         },
         {
-            title: 'Advanced analytics',
-            handle: 'advanced_analytics',
-            template: 'grid',
+            title: 'Errors',
+            icon: <IconWarning />,
+            color: 'yellow',
+            headline: 'Errors',
+            description:
+                'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
+                    alt: 'LLM Analytics errors',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Sessions',
+            icon: <IconRewindPlay />,
+            color: 'yellow',
+            headline: 'Sessions',
+            description:
+                'See complete user sessions with all LLM activity. Spot the difference: engaged at length, or stuck in a loop.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/sessions_screenshot_d6fc106ce9.png',
+                    alt: 'LLM Analytics sessions',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Playground',
+            icon: <IconMagicWand />,
+            color: 'purple',
+            headline: 'Playground',
+            description:
+                'Iterate system prompts without pushing code. Swap models, adjust tools, test the cursed inputs users will inevitably throw at you.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_2_3364a67436.png',
+                    alt: 'LLM Analytics playground',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        {
+            title: 'Evaluations',
+            icon: <IconLlmPromptEvaluation />,
+            color: 'blue',
+            headline: 'Evaluations',
+            description:
+                'Catch regressions before users do. Run evals for hallucinations, toxicity, relevance, helpfulness, jailbreak attempts, or custom criteria.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+                    alt: 'LLM Analytics evaluations',
+                    className: 'justify-center items-center',
+                },
+            ],
+        },
+        // {
+        //     title: 'Prompts',
+        //     icon: <IconLlmPromptManagement />,
+        //     color: 'purple',
+        //     headline: 'Prompts',
+        //     description: 'Create, manage, and version control your prompts from a central location',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
+        //             alt: 'LLM Analytics prompts',
+        //             className: 'justify-center items-center',
+        //         },
+        //     ],
+        // },
+        {
+            label: 'Advanced analytics',
+        },
+        {
+            title: 'Analysis',
+            icon: <IconTrends />,
+            color: 'blue',
             headline: 'Go beyond basic metrics',
-            description: "Use PostHog's full analytics suite to understand AI feature adoption and impact.",
+            description:
+                'LLM observability tools tell you "how many calls?" LLM analytics shows how your AI features drive retention, revenue, and engagement.',
             features: [
                 {
                     title: 'Correlation analysis',
-                    description: 'See how AI usage correlates with retention, revenue, and engagement',
+                    description:
+                        'Connect AI performance to real business metrics. LLM traces, product analytics, session replay, and A/B testing in one tool.',
                 },
                 {
                     title: 'Funnel analysis',
-                    description: 'Track conversion through AI-powered features',
+                    description:
+                        'Track users through the entire product journey. Pinpoint where they drop off, and how AI was involved — latency, output quality, or UX.',
                 },
                 {
                     title: 'Cohort analysis',
-                    description: 'Compare heavy vs light AI users behavior',
+                    description:
+                        'Compare AI power users vs tourists. Are frequent users your best customers or just more expensive? Do they convert? Upgrade? Now you have answers.',
                 },
+            ],
+            layout: 'columns',
+            images: [
                 {
-                    title: 'Custom dashboards',
-                    description: 'Build dashboards combining AI and product metrics',
-                },
-                {
-                    title: 'SQL access',
-                    description: 'Query raw LLM data with HogQL for custom analysis',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_analysis_500cdd8b92.png',
+                    alt: 'LLM Analytics analysis',
+                    className: 'justify-center items-center',
                 },
             ],
         },
+        {
+            title: 'Customizations',
+            icon: <IconGear />,
+            color: 'seagreen',
+            headline: 'Customizations',
+            description:
+                'LLM analytics works best when you can analyze prompts, cost, and latency alongside events and metrics that matter to you.',
+            features: [
+                {
+                    title: 'Custom dashboards and SQL',
+                    description:
+                        'Build dashboards that show AI performance in context with user behavior, and use HogQL to query raw LLM data when you need more detail.',
+                },
+                {
+                    title: 'Privacy without losing signal',
+                    description:
+                        'Exclude or hash sensitive prompt and response data while still keeping structure, metadata, and performance metrics.',
+                },
+                {
+                    title: 'Works with your AI stack',
+                    description:
+                        'Already using an LLM observability tool? Send that data to PostHog to analyze alongside other product and user data.',
+                },
+            ],
+            layout: 'columns',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/LLM_features_70ab277d76.png',
+                    alt: 'LLM Analytics analysis',
+                    className: 'justify-center items-center p-8',
+                },
+            ],
+        },
+        {
+            title: 'Native integrations',
+            handle: 'native_integrations',
+            // Custom component handles this slide - no template needed
+            headline: 'Works with your AI stack',
+            description: 'Simple SDKs for popular LLM providers and observability platforms.',
+        },
+        // {
+        //     title: 'Platform integrations',
+        //     handle: 'platform_integrations',
+        //     template: 'split',
+        //     headline: 'Integrates with other LLM observability platforms',
+        //     description:
+        //         'Using another LLM observability platform? Send data to PostHog to analyze it with product usage data.',
+        //     features: [
+        //         {
+        //             icon: <IconLangfuse />,
+        //             title: 'Langfuse',
+        //             description: '',
+        //         },
+        //         {
+        //             icon: <IconHelicone />,
+        //             title: 'Helicone',
+        //             description: '',
+        //         },
+        //         {
+        //             icon: <IconTraceloop />,
+        //             title: 'Traceloop',
+        //             description: '',
+        //         },
+        //         {
+        //             icon: <IconKeywordsAI />,
+        //             title: 'Keywords AI',
+        //             description: '',
+        //         },
+        //     ],
+        //     children: (
+        //         <div className="prose-xl p-8">
+        //             <h3>Answer questions like:</h3>
+        //             <ul className="list-disc">
+        //                 <li>What are my LLM costs by customer, model, and in total?</li>
+        //                 <li>How many of my users are interacting with my LLM features?</li>
+        //                 <li>Are there generation latency spikes?</li>
+        //                 <li>
+        //                     Does interacting with LLM features correlate with other metrics (retention, usage, revenue,
+        //                     etc.)?
+        //                 </li>
+        //             </ul>
+        //         </div>
+        //     ),
+        // },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses LLM Analytics',
+        benefits: [
+            {
+                title: 'Analyze costs',
+                description: 'by comparing models and analyzing usage',
+            },
+            {
+                title: 'Spot emergencies',
+                description: 'with latency and error rate alerting',
+            },
+            {
+                title: 'Monitor performance',
+                description: 'by comparing speed and reliability across models',
+            },
+            {
+                title: 'Muck about',
+                description: 'in the prompt playground (meaningfully)',
+            },
+            {
+                title: 'Integrate with other tools',
+                description: 'in your LLM observability stack',
+            },
+            {
+                title: 'Build AI features',
+                description: 'like PostHog AI, obviously',
+            },
+        ],
+    },
     questions: [
         {
             question: 'What are my LLM costs by customer?',
@@ -405,102 +598,16 @@ export const llmAnalytics = {
                 // link: '/blog/posthog-vs-helicone',
             },
             {
+                name: 'Braintrust',
+                key: 'braintrust',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        features: [
-            {
-                feature: 'Generation tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Latency tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Cost tracking, incl. cost-per-user',
-                companies: {
-                    langfuse: true,
-                    langsmith: false,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Trace visualization',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Token tracking',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Prompt playground',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'Prompt evaluations',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: false,
-                },
-            },
-            {
-                feature: 'Alerting',
-                companies: {
-                    langfuse: false,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'SOC 2 compliance',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-            {
-                feature: 'HIPAA and GDPR compliance',
-                companies: {
-                    langfuse: true,
-                    langsmith: true,
-                    helicone: true,
-                    posthog: true,
-                },
-            },
-        ],
+        rows: ['llm_analytics'],
+        excluded_sections: ['platform'],
     },
     pairsWith: [
         {

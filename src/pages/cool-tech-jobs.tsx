@@ -1458,6 +1458,17 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     )}
                 </OSButton>
             </div>
+            <div>
+                <p className="text-sm opacity-70 m-0">
+                    Approvals are at our discretion and can take up to 48 hours to process.{' '}
+                    <Link
+                        to="http://app.posthog.com/home#supportModal"
+                        className="text-red dark:text-yellow font-semibold"
+                    >
+                        Got a question?
+                    </Link>
+                </p>
+            </div>
         </form>
     )
 }

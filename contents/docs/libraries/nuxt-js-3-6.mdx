@@ -1,0 +1,116 @@
+---
+title: Nuxt.js (v3.0 to v3.6)
+platformLogo: nuxt
+---
+
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+
+PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
+
+These docs are for Nuxt v3.0 to v3.6. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
+
+## Setting up PostHog on the client side
+
+import NuxtInstall from "../integrate/_snippets/install-nuxt.mdx"
+
+<NuxtInstall />
+
+PostHog can then be accessed throughout your Nuxt.js using the provider accessor, for example:
+
+```vue filename=index.vue
+<script setup>
+   const { $posthog } = useNuxtApp()
+   if ($posthog) {
+      const posthog = $posthog()
+      posthog.capture('<event_name>')
+   }
+</script>
+```
+
+See the [JavaScript SDK docs](/docs/libraries/js/features) for all usable functions, such as:
+- [Capture custom event capture, identify users, and more.](/docs/libraries/js/features#capturing-events)
+- [Feature flags including variants and payloads.](/docs/libraries/js/features#feature-flags)
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
+<DetailPostHogIPs />
+
+## Setting up PostHog on the server side
+
+Install `posthog-node` using your package manager:
+
+import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
+
+<InstallNodePackageManagers />
+
+Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
+
+```js file=nuxt.config.js
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      posthogPublicKey: '<ph_project_api_key>',
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
+    }
+  }
+})
+```
+
+Initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [server route](https://nuxt.com/docs/guide/directory-structure/server#server-routes):
+
+```js file=server/api/example.js focusOnLines=7-27
+export default defineEventHandler(async (event) => {
+  const rawCookie = getCookie(event, `ph_${runtimeConfig.public.posthogPublicKey}_posthog`)
+  const distinctID = rawCookie ? JSON.parse(rawCookie)?.distinct_id : undefined
+  const url = getRequestURL(event)
+  const query = getQuery(event)
+
+  const { PostHog } = await import('posthog-node');
+  const runtimeConfig = useRuntimeConfig()
+
+  const posthog = new PostHog(
+    runtimeConfig.public.posthogPublicKey,
+    { 
+      host: runtimeConfig.public.posthogHost, 
+    }
+  );
+
+  posthog.capture({
+    event: 'api_call',
+    distinctId: distinctId,
+    properties: {
+      $current_url: url,
+      query: query
+    }
+  })
+  posthog.shutdown()
+
+  return {
+    message: "example response"
+  }
+})
+```
+
+> **Note**: Make sure to _always_ call `posthog.shutdown()` after capturing events from the server-side.
+> PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+
+See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:
+- [Capture custom event capture, identify users, and more.](/docs/libraries/node#capturing-events)
+- [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Nuxt (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDK docs.
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
+- [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
+- [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
+- [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+

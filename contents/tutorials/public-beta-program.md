@@ -36,7 +36,7 @@ After this, we initialize PostHog. Create a `providers.js` file in the `app` fol
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
+import { PostHogProvider } from '@posthog/react'
 import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
@@ -83,7 +83,7 @@ Next, we add our beta functionality. To do this, we check our `new-docs` feature
 
 ```js
 'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 export default function Home() {
 
@@ -116,7 +116,7 @@ Because we set `opt_in_site_apps: true` in config earlier, all we do is add a bu
 ```js
 // app/page.js
 'use client'
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 export default function Home() {
 
@@ -157,7 +157,7 @@ First, set up a basic page with PostHog, our active flags, states for active and
 ```js
 // app/beta/page.js
 'use client'
-import { useActiveFeatureFlags, usePostHog } from 'posthog-js/react'
+import { useActiveFeatureFlags, usePostHog } from '@posthog/react'
 import { useState, useEffect } from 'react'
 
 export default function Beta() {

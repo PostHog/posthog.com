@@ -1,8 +1,6 @@
 ## Step one: Add PostHog to your app
 
-> 🚧 **Note:** Mobile surveys for Flutter is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow%3Atrue) or one of our other [support options](/docs/support-options).
-
-Using it requires PostHog's Flutter SDK version >= 5.4.1, but it's recommended to always use the latest version.
+Using it requires PostHog's Flutter SDK version >= 5.8.0, but it's recommended to always use [the latest version](/docs/sdk-doctor).
 
 import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
@@ -10,19 +8,7 @@ import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manu
 
 <FlutterInstallManual />
 
-## Step two: Enable surveys in your configuration
-
-To enable surveys in your Flutter app, update your PostHog configuration:
-
-```dart
-final config = PostHogConfig('<ph_project_api_key>');
-config.host = 'https://us.i.posthog.com';
-config.surveys = true; // Enable surveys
-
-await Posthog().setup(config);
-```
-
-## Step three: Install PosthogObserver
+## Step two: Install PosthogObserver
 
 For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys.
 
@@ -59,24 +45,36 @@ class _MyAppState extends State<MyApp> {
 
 If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing-screen-views) to learn how to set up the `PosthogObserver`.
 
+## Configuration
+
+> **Important:** For Flutter Web, surveys are powered by the JavaScript Web SDK, so any Flutter-specific survey configuration will be ignored. Please refer to the [Web installation guide](/docs/surveys/installation/web) for proper setup.
+
+Surveys are enabled by default. If you want to disable surveys, you can do so when setting up your SDK instance:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+
+config.surveys = false; // Disable surveys
+```
+
 ## Supported Features
 
 | Feature                           | Support                | 
 | --------------------------------- | ---------------------- |
-| **Questions**                                              |
+| **Questions** | |
 | All question types                | ✅                     |
 | Multi-question surveys            | ✅                     |
 | Confirmation message              | ✅                     |
 | Feedback button presentation      | ❌                     |
 | Conditional questions             | ✅                     |
-| **Customization / Appearance**                            |
+| **Customization / Appearance** | |
 | Set colors in PostHog dashboard   | ✅                     | 
 | Shuffle questions                 | ❌                     | 
 | PostHog branding                  | ❌                     | 
 | Delay popup after screen view     | ❌                     | 
-| Position config                   | ❌ Always bottom sheet | 
+| Position config                   | ❌ (always bottom sheet) | 
 | HTML content                      | ❌                     |
-| **Display conditions**                                     |
+| **Display conditions** | |
 | Feature flag & property targeting | ✅                     | 
 | Screen/URL targeting              | ❌                     | 
 | Device type targeting             | ✅                     | 
@@ -89,15 +87,16 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 
 - On Android, requires API >= 26.
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
-- Requires PostHog Flutter SDK version >= 5.4.0
+- On Web, surveys are powered by the [JavaScript Web SDK](/docs/surveys/installation/web).
+- Requires PostHog Flutter SDK version >= 5.8.0
 
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
 - Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
-- Make sure you have disabled automatic SDK intialization. 
+- Make sure you have disabled automatic SDK initialization. 
 - Run a clean build if you experience issues.
-- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-three-install-posthogobserver).
+- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).
   - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
   - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
 - If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

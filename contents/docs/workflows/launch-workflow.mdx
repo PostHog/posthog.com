@@ -1,0 +1,183 @@
+---
+title: "Launch your first workflow"
+showStepsToc: true
+---
+
+import Tab from "components/Tab"
+
+This guide covers creating a very basic workflow where we send an email to users who perform an event on your app or site. Since we are sending a message (email), you will need to set up a [channel](/docs/workflows/configure-channels) first.
+
+See the [workflow builder](/docs/workflows/workflow-builder) for more information on the different components of a workflow, and see the end of this guide for more examples.
+
+<Steps>
+
+<Step title="Create a workflow" badge="required">
+
+Go to [Workflows](https://app.posthog.com/workflows) and click the **+ New workflow button**.  
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_light_c1f7b79b46.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_light_c1f7b79b46.png"
+    classes="rounded"
+    alt="Click the New Workflow button"
+/>
+
+This will open the workflow builder:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
+    classes="rounded"
+    alt="Fresh workflow with trigger block"
+/>
+
+The new workflow only has two blocks:
+- A trigger block: This defines the event that will start the workflow.
+- An exit block: This defines the event that will end the workflow.
+
+On the right side of the workflow builder, you can see the types of blocks available to add to your workflow.
+
+</Step>
+
+<Step title="Configure the trigger" badge="required">
+
+Now, let's click on the trigger block and configure it. In a new workflow, the trigger doesn't have any trigger events. Triggers tell PostHog what events will start the workflow.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
+    classes="rounded"
+    alt="Trigger warning that event is required"
+/>
+
+Click the **+ Add trigger event** button and search for the event you want to use as the trigger. In this example, we'll use a `pageview` event to send an email to **any** users who view a page on our website.
+
+You can use any PostHog event as a trigger. For example, you could add a button in your app that captures a `test_email` event when clicked.
+
+Change the frequency drop down to `"One time"` this means a user cannot be re-enrolled once they are in the workflow
+
+</Step>
+
+<Step title="Add an Dispatch" badge="required">
+
+Now that we have a trigger that can initiate the workflow, we need to add an Dispatch to send a message to the users who trigger the workflow.
+
+<Tab.Group tabs={[
+'Email', 
+'Slack', 
+'Webhook']}>
+<Tab.List>
+<Tab>Email</Tab>
+<Tab>Slack</Tab>
+<Tab>Twilio</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+Drag an **Email** dispatch beneath the trigger, into the workflow. Then, click on the email block to configure it.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_light_ed7a551fec.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_dark_a58f62c95f.png"
+    classes="rounded"
+    alt="Configure email template"
+/>
+
+In the email template, you can configure the following:
+
+| Field       | Description                                                                                   |
+|-------------|-----------------------------------------------------------------------------------------------|
+| **From**    | A sender address configured in your channels.                                                 |
+| **To**      | The email address of the recipient. By default, it targets the user whose event triggered the workflow. |
+| **Subject** | The subject line of the email.                                                                |
+| **Preheader** | The optional preheader of the email.                                                        |
+| **Body**    | The content of the email. You can use the built-in editor to format your email or use a custom template. |
+
+During testing, you can hardcode your own email address in the **To** field for testing.
+
+The email template has access to event and person properties of the trigger event. You can learn more about this in the [workflow builder](/docs/workflows/workflow-builder) documentation.
+
+</Tab.Panel>
+<Tab.Panel>
+
+Drag a **Slack** dispatch beneath the trigger, into the workflow. Then, click on the Slack block to configure it.
+
+In the Slack step, you'll need to configure the following:
+
+- **Slack workspace**: Select the Slack workspace you connected to when you configured your Slack workflow channel.
+- **Channel to post to**: This is the Slack channel messages will be delivered to.
+- **Emoji icon**: Optional emoji for the bot.
+- **Bot name**: Optional name for the bot.
+- **Blocks**: Optionally define [blocks](https://docs.slack.dev/block-kit/) to compose your message.
+- **Plain text message**: The content of your Slack message. You can use templating variables like `{{ event.event }}` to include event properties in the message.
+
+</Tab.Panel>
+<Tab.Panel>
+
+Drag a **SMS** dispatch beneath the trigger, into the workflow. Then, click on the SMS block to configure it.
+
+In the SMS step, you'll need to configure the following:
+
+| Field                  | Description                                                                                                                                           |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Twilio account**     | The Twilio account you connected when you [configured your channels](/docs/workflows/configure-channels).                                             |
+| **From phone number**  | One of the phone numbers available on your Twilio account.                                                                                            |
+| **Recipient phone number** | The recipient's number. If your workflow is triggered by an identified event, use `{{ person.properties.phone }}` to reference it from [person properties](/docs/product-analytics/person-properties). |
+| **Message**            | The content of your SMS message. You can use templating variables like `{{ event.event }}` to include event properties in the message.                |
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step checkpoint title="Test the workflow" subtitle="Confirm you can trigger the workflow">
+
+Before publishing the workflow, you can test it to confirm it works as expected. On the right side of the workflow builder, you can see the **Test** button.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/test_campaign_light_898c0791af.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/test_campaign_dark_9ffc6cdd44.png"
+    classes="rounded"
+    alt="Test workflow"
+/>
+
+When you click the **Test** button, you will be directed to test the workflow by creating a mock trigger. The following options are available:
+
+- **Make a real request to PostHog:** When enabled, real messages will be delivered to the recipient. When disabled, API calls are mocked and logged.
+- **Test event:** Click to expand the test event configuration. An example event will be generated by default. You can click the **Load new event** to load a real event's data into the test event.
+
+You can click the **Run test** button to send the test event.
+
+</Step>
+
+<Step title="Enable the workflow" badge="required">
+
+Once you have confirmed the workflow works as expected, you can enable it by clicking the **Enable** button at the top right of the workflow builder.
+
+This will publish the workflow and start delivering messages to your when the trigger event is triggered. For this example workflow, you can hardcode all emails to your own email address for testing.
+
+</Step>
+
+<Step checkpoint title="Monitor the workflow" subtitle="Confirm messages are being delivered">
+
+Once the workflow is enabled, you can monitor your workflow in the **Metrics** and **Logs** tabs of the workflow builder.
+
+To confirm your workflow is delivering messages, look for these signs:
+- In the **Metrics** tab, you should see a line chart showing the number of **succeeded** and **triggered** messages.
+- In the **Logs** tab, you can see logs of recently triggered workflows. Confirm that there aren't any errors.
+- See the message delivered in your inbox.
+
+</Step>
+
+<Step checkpoint title="Troubleshooting" subtitle="Common issues you may encounter">
+
+| Issue | Solution |
+| --- | --- |
+| Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
+| Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
+| Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
+
+</Step>
+
+</Steps>

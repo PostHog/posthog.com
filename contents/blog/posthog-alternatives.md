@@ -547,7 +547,7 @@ Heap's visual labeling tool, which allows non-technical user to define events, i
 
 As autocapture, a feature it shares with PostHog:
 
-- "I like the sheer * amount * of information I can access with Heap. I can parse out a lot of data and gain a ton of insight by using this tool."
+- "I like the sheer *amount* of information I can access with Heap. I can parse out a lot of data and gain a ton of insight by using this tool."
 
 - "Most importantly, data is collected from Day 1 - even if the event hasn't been defined, unlike other platforms. This is really useful as requests for analysis often ask for things you haven't been actively tracking."
 

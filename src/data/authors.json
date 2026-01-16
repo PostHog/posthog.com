@@ -39,6 +39,22 @@
         "profile_id": 29070
     },
     {
+        "handle": "sara-miteva",
+        "name": "Sara Miteva",
+        "role": "Product Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/sara-miteva/",
+        "profile_id": 35224
+    },
+    {
+        "handle": "cleo-lant",
+        "name": "Cleo Lant",
+        "role": "Product Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/cleolant/",
+        "profile_id": 36864
+    },
+    {
         "handle": "michael-matloka",
         "name": "Michael Matloka",
         "role": "Software Engineer",
@@ -171,6 +187,14 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/alex-g-kim/",
         "profile_id": 27755
+    },
+    {
+        "handle": "alex-lebedev",
+        "name": "Alex Lebedev",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nightowlcoder/",
+        "profile_id": 33371
     },
     {
         "handle": "harry-waye",
@@ -421,5 +445,69 @@
         "link_type": "github",
         "link_url": "https://github.com/abheek9",
         "profile_id": 34044
+    },
+    {
+        "handle": "arda-eren",
+        "name": "Arda Eren",
+        "role": "Community contributor",
+        "link_type": "github",
+        "link_url": "https://github.com/arda-e",
+        "profile_id": 37690
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
+    },
+    {
+        "handle": "dustin-byrne",
+        "name": "Dustin Byrne",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/dustinbyrne",
+        "profile_id": 35043
+    },
+    {
+        "handle": "natalia-amorim",
+        "name": "Natalia Amorim",
+        "role": "Content Marketing Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
+        "profile_id": 35321
+    },
+    {
+        "handle": "posthog-team",
+        "name": "PostHog Team",
+        "role": "Equip every developer to build successful products",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/posthog",
+        "profile_id": 28378
+    },
+    {
+        "handle": "oliver-browne",
+        "name": "Oliver Browne",
+        "role": "Software Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/oliver-browne-6a37a513a/",
+        "profile_id": 30942
+    },
+    {
+        "handle": "jina-yoon",
+        "name": "Jina Yoon",
+        "role": "Technical Content Marketer",
+        "link_type": "linkedin",
+        "link_url": "https://linkedin.com/in/jinayoon963",
+        "profile_id": 38655
+    },
+    {
+        "handle": "christophe-eynius-tranberg",
+        "name": "Christophe Eynius Tranberg",
+        "role": "Technical Customer Success Manager",
+        "link_type": "linkedin",
+        "link_url": "https://dk.linkedin.com/in/chriseynius",
+        "profile_id": 35037
     }
 ]
