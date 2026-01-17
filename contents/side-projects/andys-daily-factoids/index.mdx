@@ -1,0 +1,62 @@
+---
+title: Andy's Daily Factoids
+description: AI-powered factoid generator with voting, streaming, and payments
+author: Andy Maguire
+authorGitHub: andrewm4894
+githubUrl: https://github.com/andrewm4894/andys-daily-factoids
+liveUrl: https://andys-daily-factoids.com
+filters:
+  tags:
+    - llm-analytics
+    - python
+    - django
+    - nextjs
+    - web-app
+---
+
+A full-stack application that generates creative AI factoids every 30 minutes. Features interactive voting, real-time streaming, model flexibility, and Stripe payments integration.
+
+## What it does
+
+- **Fresh Factoids**: Auto-generated via scheduled cron job (every 30 minutes) or on-demand
+- **Interactive Voting**: Users vote with mind-blown or boring reactions with live tallies
+- **Browse & Shuffle**: Explore the full catalogue without waiting for generation
+- **Model Flexibility**: Override generation parameters and select different models via OpenRouter
+- **Metadata Inspection**: View model details, parameters, and cost per factoid
+- **Payments**: Stripe integration to unlock additional generations
+- **Chat Agent**: Conversational interface with web search tool for discussing factoids
+
+## Architecture
+
+- **Backend**: Django 5 + Django REST Framework on Gunicorn with PostgreSQL
+- **Frontend**: Next.js 15 with Server-Sent Events (SSE) for real-time streaming
+- **Infrastructure**: Deployed on Render with separate services for backend, frontend, and cron automation
+
+## How it uses PostHog LLM Analytics
+
+The app demonstrates production-grade multi-platform observability:
+
+- **Backend Setup**: PostHog client with synchronized event flushing and exception autocapture
+- **Generation Tracking**: LangChain callback handler captures model selection, token usage, cost, and latency
+- **Client-Side Analytics**: Next.js frontend with PostHog integration for user behavior
+- **Custom Events**: `$ai_generation` events with full metadata (model, cost, parameters)
+- **Multi-Platform**: Also integrated with Braintrust, LangSmith, and Langfuse for comprehensive observability
+
+### Key patterns demonstrated
+
+- Service layer design separating API, business logic, and persistence
+- Rate limiting with Redis (production) and in-memory fallback
+- Per-profile daily budget enforcement with cost tracking
+- Real-time SSE streaming of generation progress
+
+## Try it yourself
+
+Visit [andys-daily-factoids.com](https://andys-daily-factoids.com) to see it in action, or run locally:
+
+```bash
+# Backend
+cd backend && make run
+
+# Frontend
+cd frontend && npm run dev
+```

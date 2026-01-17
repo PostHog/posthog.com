@@ -1,0 +1,92 @@
+---
+title: HogFlix (PostHog Demo 3000)
+description: Full-featured PostHog demo app styled as a movie streaming platform
+author: PostHog Team
+authorGitHub: PostHog
+githubUrl: https://github.com/PostHog/posthog-demo-3000
+filters:
+  tags:
+    - llm-analytics
+    - python
+    - flask
+    - demo
+    - posthog
+---
+
+A fully-featured Flask demo application styled as a movie streaming platform (HogFlix) instrumented with PostHog analytics. Showcases PostHog's capabilities including event tracking, feature flags, cohorts, and LLM analytics.
+
+## What it does
+
+- **Movie Streaming UI**: Browse movies, manage subscriptions, search content
+- **User Authentication**: Flask-Login with secure password hashing
+- **Subscription System**: Plan selection with revenue tracking
+- **Blog System**: Full blog creation/deletion with admin controls
+- **Feature Flags**: Accessible via `/feature-flags` route with full UI
+- **AI Chat**: Optional LLM chat interface for demonstrating LLM analytics
+
+## Pre-seeded Demo Data
+
+The app comes with everything you need for demos:
+
+- **500 Fake Users**: Pre-generated with realistic names and emails
+- **30+ Days of Historical Events**: Pseudo-random activity data
+- **PostHog Artifacts**: Automatically created actions, cohorts, insights, and feature flags
+- **Seeding Scripts**: Regenerate data anytime with included utilities
+
+## How it uses PostHog LLM Analytics
+
+HogFlix demonstrates dual LLM integration approaches:
+
+**LangChain Path** (preferred):
+```python
+from langchain_openai import ChatOpenAI
+from posthog.ai.langchain import CallbackHandler
+
+llm = ChatOpenAI(model="gpt-4o-mini")
+handler = CallbackHandler(posthog_client)
+response = llm.invoke(messages, config={"callbacks": [handler]})
+```
+
+**Direct OpenAI Path** (fallback):
+```python
+from posthog.ai.openai import OpenAI
+client = OpenAI(posthog_client=posthog_client)
+```
+
+**Events captured**:
+```python
+event='$ai_generation'
+properties={
+    '$ai_model': 'gpt-4o-mini',
+    '$ai_provider': 'openai',
+    '$ai_input': user_message,
+    '$ai_output': ai_response,
+    '$ai_trace_id': conversation_id
+}
+```
+
+## Other PostHog Features Demonstrated
+
+- `user_signed_up`: Plan selection tracking
+- `subscription_purchased`: Revenue tracking (plan, price, currency, months)
+- `search_performed`: Search query tracking
+- Feature flag evaluation and UI
+- Session management with conversation IDs
+
+## Try it yourself
+
+**Local development**:
+```bash
+git clone https://github.com/PostHog/posthog-demo-3000
+cd posthog-demo-3000
+make run
+```
+
+**Docker**:
+```bash
+docker-compose up
+```
+
+**GitHub Codespaces**: Auto-configured with `.devcontainer`
+
+The app is also deployed on Fly.io with US and EU region configurations.

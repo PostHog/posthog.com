@@ -1,0 +1,114 @@
+---
+title: How to Add Your Side Project
+description: A guide for PostHog team members to add their side projects to the gallery
+author: PostHog Team
+githubUrl: https://github.com/PostHog/posthog.com
+filters:
+  tags:
+    - guide
+---
+
+Want to share your side project with the world? This guide will walk you through adding it to the PostHog Side Projects gallery.
+
+## Quick Start
+
+1. Create a new folder in `contents/side-projects/` with your project name (use kebab-case)
+2. Add an `index.mdx` file with your project details
+3. Open a PR to the posthog.com repo
+
+## Frontmatter Schema
+
+Your `index.mdx` file should start with this frontmatter:
+
+```yaml
+---
+title: Your Project Name
+description: A brief one-liner that appears on the gallery card
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/side-projects/your-project.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/side-projects/your-project-featured.png
+author: Your Name
+authorGitHub: your-github-username
+teamLink: /teams/your-team  # optional - links to your PostHog team page
+githubUrl: https://github.com/your-username/your-repo
+liveUrl: https://your-demo.com  # optional - if you have a live demo
+filters:
+  tags:
+    - relevant-tag-1
+    - relevant-tag-2
+---
+```
+
+### Required Fields
+
+- **title**: The name of your project
+- **description**: A short description (shown on gallery cards)
+- **author**: Your name
+- **githubUrl**: Link to the source code
+
+### Optional Fields
+
+- **thumbnail**: Image shown on the gallery card (recommended: 400x300px)
+- **featuredImage**: Larger image shown on the detail page
+- **authorGitHub**: Your GitHub username (shows your avatar)
+- **teamLink**: Link to your PostHog team page
+- **liveUrl**: Link to a live demo
+- **filters.tags**: Array of tags for filtering (use existing tags when possible)
+
+## Adding Images
+
+Upload images to our Cloudinary account:
+
+1. Use the path `posthog.com/contents/images/side-projects/`
+2. Name your files descriptively (e.g., `your-project-thumbnail.png`)
+3. Use the full Cloudinary URL in your frontmatter
+
+## Writing Content
+
+After the frontmatter, write your project description in MDX. Include:
+
+- **What it does**: Explain the project's purpose
+- **How it works**: Brief technical overview
+- **How it uses PostHog**: If applicable, explain the PostHog integration
+- **Getting started**: How someone can try it themselves
+
+### Example Content Structure
+
+```markdown
+## What is [Project Name]?
+
+Brief description of what the project does and why you built it.
+
+## How it works
+
+Technical overview - what technologies/frameworks you used.
+
+## PostHog Integration
+
+If your project uses PostHog, explain how:
+- What events are tracked?
+- What features are used (LLM analytics, feature flags, etc.)?
+
+## Try it yourself
+
+Instructions for running locally or trying the live demo.
+```
+
+## Common Tags
+
+Use existing tags when they fit:
+
+- `llm-analytics` - Projects using PostHog LLM analytics
+- `python` / `typescript` / `node` - Language/runtime
+- `cli` - Command-line tools
+- `web-app` - Web applications
+- `demo` - PostHog feature demonstrations
+- `data` - Data analysis/visualization projects
+- `ai` - AI/ML projects
+
+Feel free to add new tags if needed - they'll automatically appear as filter options.
+
+## Questions?
+
+If you have questions about adding your project, ask in the #website Slack channel or open an issue on the posthog.com repo.

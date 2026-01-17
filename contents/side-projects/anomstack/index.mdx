@@ -1,0 +1,75 @@
+---
+title: Anomstack
+description: Lightweight anomaly detection system with LLM-powered analysis
+author: Andy Maguire
+authorGitHub: andrewm4894
+githubUrl: https://github.com/andrewm4894/anomstack
+liveUrl: https://anomstack-demo.fly.dev
+filters:
+  tags:
+    - llm-analytics
+    - python
+    - dagster
+    - anomaly-detection
+    - data
+---
+
+A lightweight, open-source anomaly detection system for metrics from any data platform. Uses PyOD machine learning for detection with Dagster for orchestration and LLM-based anomaly analysis.
+
+## What it does
+
+- **Multi-Platform Support**: BigQuery, Snowflake, ClickHouse, DuckDB, SQLite, and more
+- **ML-Powered Detection**: PyOD anomaly detection models
+- **Dagster Orchestration**: Automated job scheduling (Ingest → Train → Score → Alert → LLM Alert → Plot)
+- **LLM Analysis**: AI-powered anomaly explanation and verification
+- **Dashboard**: FastHTML + MonsterUI interface with searchable metrics, sparklines, and feedback system
+- **Flexible Alerting**: Email (with ASCII plots), Slack, or LLM-based alerts
+
+## Architecture
+
+- **3-Container Setup**: Webserver + User Code, Daemon, Dashboard
+- **Jobs Pipeline**: Ingest → Train → Score → Alert → LLM Alert → Plot
+- **Metric Configuration**: YAML config + SQL/Python ingest patterns
+
+## PostHog Integration
+
+Anomstack includes a PostHog example metric batch that pulls headline metrics from your PostHog project:
+
+```yaml
+# metrics/examples/posthog/
+# Pulls event count, user count, pageviews from PostHog Query API
+```
+
+**Configuration**:
+```bash
+POSTHOG_API_KEY=your-api-key
+POSTHOG_PROJECT_ID=your-project-id
+POSTHOG_HOST=https://us.posthog.com  # optional
+```
+
+## LLM Analytics Integration
+
+The LLM Alert job uses the `anomaly-agent` library for AI-powered anomaly detection:
+
+- Sends metric data to LLM (OpenAI ChatGPT) for analysis
+- Runs verification chain to validate detections
+- Provides reasoning/explanation for anomalies
+- Optionally disable with `disable_llmalert: True`
+
+## Features
+
+- **26+ Example Metrics**: HackerNews, weather, stock prices, system metrics, PostHog data
+- **Dashboard Features**: Homepage summaries, searchable metric batches sorted by anomaly rate, feedback persistence
+- **Multiple Deployment Options**: Local, Docker, Fly.io, Dagster Cloud, Replit, GitHub Codespaces
+
+## Try it yourself
+
+Visit the [live demo](https://anomstack-demo.fly.dev) or run locally:
+
+```bash
+git clone https://github.com/andrewm4894/anomstack
+cd anomstack
+docker-compose up
+```
+
+Open http://localhost:3000 for the dashboard.

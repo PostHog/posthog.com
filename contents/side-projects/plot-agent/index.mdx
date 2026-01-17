@@ -1,0 +1,96 @@
+---
+title: Plot Agent
+description: AI-powered data visualization assistant for generating Plotly charts
+author: Andy Maguire
+authorGitHub: andrewm4894
+githubUrl: https://github.com/andrewm4894/plot-agent
+filters:
+  tags:
+    - llm-analytics
+    - python
+    - langgraph
+    - data-viz
+    - ai
+---
+
+A Python library that generates Plotly visualizations from natural language requests using LangGraph and OpenAI's language models. Turn your pandas DataFrames into interactive charts with a simple conversation.
+
+## What it does
+
+- **Natural Language Visualization**: Describe the chart you want, get Plotly code
+- **LangGraph ReAct Agent**: Multi-step tool-calling workflow for reliable code generation
+- **Secure Execution**: Sandboxed code execution with AST validation and timeout protection
+- **Iterative Refinement**: Maintain conversation context for tweaking visualizations
+- **Rich Output**: Returns figure, title, and summary description
+
+## Architecture
+
+**LangGraph ReAct Agent Flow**:
+1. User describes visualization → LangGraph agent
+2. Agent uses tools: `execute_plotly_code`, `does_fig_exist`, `check_plot_outputs`, `view_generated_code`
+3. Code executes in sandboxed environment
+4. Returns Plotly figure + title + summary
+
+**Security Features**:
+- AST validation to reject non-allowlisted imports
+- Dunder attribute access prevention
+- Import allowlist: pandas, numpy, matplotlib, plotly, sklearn, scipy
+- 60-second execution timeout
+- Isolated namespace with pre-loaded libraries
+
+## How it uses PostHog LLM Analytics
+
+Plot Agent has comprehensive PostHog integration with session tracking:
+
+```python
+# Optional PostHog initialization
+# Enable via POSTHOG_ENABLED=true
+
+from posthog.ai.langchain import PostHogCallbackHandler
+
+# Callback handler passed to LangGraph agent
+response = agent.invoke(
+    messages,
+    config={"callbacks": [posthog_handler]}
+)
+```
+
+**Configuration**:
+```bash
+POSTHOG_ENABLED=true
+POSTHOG_API_KEY=your-key
+POSTHOG_HOST=https://us.posthog.com
+POSTHOG_AI_SESSION_ID=session-uuid  # Groups traces together
+POSTHOG_PRIVACY_MODE=false
+```
+
+**Tracked properties**:
+- `$ai_span_name`: "plot_agent"
+- Session ID for multi-turn conversation tracking
+- Full LangGraph trace via callback handler
+
+## Try it yourself
+
+Install from PyPI:
+
+```bash
+pip install plot-agent
+```
+
+Example usage:
+
+```python
+from plot_agent import PlotAgent
+import pandas as pd
+
+df = pd.DataFrame({
+    'month': ['Jan', 'Feb', 'Mar', 'Apr'],
+    'sales': [100, 150, 200, 175]
+})
+
+agent = PlotAgent()
+result = agent.plot(df, "Create a bar chart of monthly sales")
+result.fig.show()
+```
+
+Check out the [example notebooks](https://nbviewer.org/github/andrewm4894/plot-agent/tree/main/examples/) for more visualization patterns.
