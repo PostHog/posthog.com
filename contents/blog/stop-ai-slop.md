@@ -36,15 +36,15 @@ PostHog [evaluations](/docs/llm-analytics/evaluations) use LLM-as-a-judge to aut
 - Define pass/fail criteria 
 - Optionally add property filters to narrow which generations get evaluated
 
-_To avoid false negatives from incomplete context, we apply an N/A label when the judge can't access the necessary information to make a determination._
+_To prevent false negatives, N/A is used when the evaluation prompt is not relevant to the LLM generation. For example, a "mathematical accuracy" evaluation would apply the N/A label to responses that contain no math._
 
 Running evals with AI enables you to batch test hundreds or thousands of traces, then apply human judgement to investigate pass/fail samples. To help you get started, we included five pre-built templates:
 
 | Template | What it checks | Best for |
 |----------|---------------|----------|
 | **Relevance** | Whether the output addresses the user's input | Customer support bots, Q&A systems |
-| **Helpfulness** | Whether the response is useful and actionable | Chat assistants, productivity tools |
-| **Jailbreak** | Attempts to bypass safety guardrails | Security-sensitive applications |
+| **Helpfulness** | Whether the response is useful and actionable | Chat assistants, support boys, productivity tools |
+| **Jailbreak** | Attempts to bypass safety guardrails | Security-sensitive applications, apps with PII |
 | **Hallucination** | Made-up facts or unsupported claims | RAG systems, knowledge bases |
 | **Toxicity** | Harmful, offensive, or inappropriate content | User-facing applications |
 
@@ -157,9 +157,7 @@ When you connect eval results to real user behavior, you can see which AI behavi
 </div>
 
 ## Try it now
-AI slop is real. Evals are how you stop shipping it. 
-
-If you're already using [LLM analytics](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, evals count as regular LLM events (100K events included on our free tier).
+If you're already using [LLM analytics](/llm-analytics) in PostHog, you can start creating evaluations right away. Your first 100 evaluation runs are on us. After that, you'll need to use your LLM API key. Evals count as regular LLM events (100K events included on our free tier).
 
 <p>
 	<CallToAction to="http://app.posthog.com/llm-analytics/evaluations">
