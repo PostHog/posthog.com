@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const request = require('request')
-const multiparty = require('multiparty')
-const fs = require('fs')
+import request from 'request'
+import formidable from 'formidable'
+import fs from 'fs'
 
 const handler = async (req, res) => {
-    const form = new multiparty.Form()
+    const form = formidable({})
     const formData = await new Promise((resolve, reject) => {
         form.parse(req, function (err, fields, files) {
             if (err) reject({ err })
@@ -23,7 +22,7 @@ const handler = async (req, res) => {
                 applicationForm: JSON.stringify({ fieldSubmissions }),
                 jobPostingId: fields['jobPostingId'][0],
                 [resumeKey]: {
-                    value: fs.createReadStream(file.path),
+                    value: fs.createReadStream(file.filepath),
                     options: {
                         filename: file.originalFilename,
                         contentType: null,
