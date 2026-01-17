@@ -84,6 +84,7 @@
         "dayjs": "^1.11.7",
         "deepmerge": "^4.3.1",
         "dotenv": "^10.0.0",
+        "formidable": "^3.5.4",
         "formik": "^2.2.9",
         "framer-motion": "^4.1.17",
         "fs-extra": "^10.1.0",
