@@ -39,11 +39,6 @@ function SideProjectsPage() {
                 <p className="my-4 mx-auto text-center text-lg md:text-xl font-semibold text-primary/75 dark:text-primary-dark/75 max-w-2xl">
                     Fun and interesting projects from the PostHog team. Demos, experiments, tools, and more.
                 </p>
-                <p className="text-center">
-                    <Link to="/side-projects/guide" className="text-red dark:text-yellow hover:underline text-sm">
-                        Want to add your project? &rarr;
-                    </Link>
-                </p>
             </header>
 
             <div className="max-w-6xl mx-auto px-4 pb-12">
@@ -101,7 +96,7 @@ function SideProjectsPage() {
 const query = graphql`
     query {
         sideProjects: allMdx(
-            filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } } }
+            filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } }, frontmatter: { githubUrl: { ne: null } } }
             sort: { fields: frontmatter___title, order: ASC }
         ) {
             nodes {

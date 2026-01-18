@@ -1,0 +1,56 @@
+---
+title: Anomaly Agent
+description: LLM-powered anomaly detection for time series data using LangGraph
+projectThumbnail: /images/side-projects/anomaly-agent.png
+projectAuthor: Andy Maguire
+authorGitHub: andrewm4894
+githubUrl: https://github.com/andrewm4894/anomaly-agent
+filters:
+  tags:
+    - llm-analytics
+    - python
+    - ai
+    - data
+---
+
+A Python library that detects anomalies in time series data using Large Language Models. Built on LangGraph architecture for intelligent, contextual anomaly detection across multiple variables and domains.
+
+## What it does
+
+- **LLM-Powered Detection**: Uses language models for contextual anomaly identification
+- **Two-Stage Pipeline**: Detection followed by optional verification to minimize false positives
+- **Multi-Variable Analysis**: Processes multiple time series columns simultaneously
+- **Domain-Specific Prompts**: Customizable for different industries and use cases
+- **Structured Output**: Rich anomaly descriptions with confidence indicators
+
+## Architecture
+
+- **LangChain & LangGraph**: State machine workflow management
+- **Pydantic**: Type-safe data validation
+- **OpenAI API**: Language model processing
+- **Pandas**: Data manipulation and analysis
+
+## Use Cases
+
+- **Business**: Sales analytics, fraud detection, web traffic monitoring
+- **Engineering**: IoT sensor monitoring, energy systems, equipment performance
+- **Healthcare**: Patient monitoring, medical device readings
+- **Data Quality**: ETL monitoring, sensor failure detection
+
+## Try it yourself
+
+```bash
+pip install anomaly-agent
+```
+
+```python
+from anomaly_agent import AnomalyAgent
+import pandas as pd
+
+# Load your time series data
+df = pd.read_csv("your_data.csv")
+
+# Initialize and run
+agent = AnomalyAgent()
+results = agent.detect(df)
+```
