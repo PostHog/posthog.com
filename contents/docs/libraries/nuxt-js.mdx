@@ -18,7 +18,7 @@ The `@posthog/nuxt` module provides:
 - Automatic exception capture for error tracking
 - Source map configuration and upload for error tracking
 
-For server-side event capture beyond error tracking, you'll use `posthog-node` directly. 
+For server-side event capture beyond error tracking, you'll use the `posthog-node` SDK directly. 
 
 > **Using an older version?** See our docs for [Nuxt 3.0-3.6](/docs/libraries/nuxt-js-3-6) or [Nuxt 2.x](/docs/libraries/nuxt-js-2).
 
@@ -80,7 +80,9 @@ posthog?.capture('button_clicked', { button_name: 'signup' })
 
 ## Usage on the server side
 
-The `@posthog/nuxt` module initializes a server-side client for error tracking only. For general event capture in Nitro routes, create your own `posthog-node` client. The module makes your config available at `runtimeConfig.public.posthog`.
+The `@posthog/nuxt` module initializes a server-side client for error tracking only. For general event capture in Nitro routes, create your own `posthog-node` SDK client. 
+
+The `@posthog/nuxt` module makes your config available at `runtimeConfig.public.posthog`.
 
 First, create a server utility to reuse the PostHog client across requests:
 
