@@ -58,7 +58,21 @@ const FilterChip: React.FC<FilterChipProps> = ({ label, onRemove }) => (
 function SideProjectsPage() {
     const {
         sideProjects: { nodes },
+        profiles: { nodes: profileNodes },
     } = useStaticQuery(query)
+
+    // Create a lookup map from GitHub username to community profile ID
+    const githubToProfile = useMemo(() => {
+        const map: Record<string, string> = {}
+        profileNodes.forEach((profile: { github?: string; squeakId: string }) => {
+            if (profile.github) {
+                // Handle both full URLs and usernames
+                const username = profile.github.replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '')
+                map[username.toLowerCase()] = profile.squeakId
+            }
+        })
+        return map
+    }, [profileNodes])
 
     const [tagFilter, setTagFilter] = useState<string | null>(null)
     const [authorFilter, setAuthorFilter] = useState<string | null>(null)
@@ -260,48 +274,87 @@ function SideProjectsPage() {
                         ({
                             id,
                             fields: { slug },
-                            frontmatter: { projectThumbnail, title, description, liveUrl, githubUrl },
+                            frontmatter: {
+                                projectThumbnail,
+                                title,
+                                description,
+                                liveUrl,
+                                githubUrl,
+                                projectAuthor,
+                                authorGitHub,
+                            },
                         }: any) => {
                             const thumbnailSrc = projectThumbnail || getGitHubOGImage(githubUrl)
+                            const profileId = authorGitHub && githubToProfile[authorGitHub.toLowerCase()]
+                            const authorUrl = profileId
+                                ? `/community/profiles/${profileId}`
+                                : authorGitHub
+                                ? `https://github.com/${authorGitHub}`
+                                : null
                             return (
-                                <Link
+                                <div
                                     key={id}
-                                    to={slug}
-                                    className="group block bg-accent dark:bg-accent-dark rounded-lg overflow-hidden border border-light dark:border-dark hover:border-primary/25 dark:hover:border-primary-dark/25 hover:scale-[1.02] transition-all duration-200"
+                                    className="group bg-accent dark:bg-accent-dark rounded-lg overflow-hidden border border-light dark:border-dark hover:border-primary/25 dark:hover:border-primary-dark/25 hover:scale-[1.02] transition-all duration-200"
                                 >
-                                    <div className="aspect-video bg-light dark:bg-dark overflow-hidden flex items-center justify-center">
-                                        {thumbnailSrc ? (
-                                            <img
-                                                src={thumbnailSrc}
-                                                alt={title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                                            />
-                                        ) : (
-                                            <img
-                                                src={getPlaceholderHog(title)}
-                                                alt={title}
-                                                className="w-auto h-3/4 object-contain group-hover:scale-110 transition-transform duration-200"
-                                            />
-                                        )}
-                                    </div>
-                                    <div className="p-4">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <h3 className="m-0 text-lg font-bold text-primary dark:text-primary-dark group-hover:text-red dark:group-hover:text-yellow transition-colors">
-                                                {title}
-                                            </h3>
-                                            {liveUrl && (
-                                                <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green/10 text-green dark:bg-green/20">
-                                                    Live
+                                    <Link to={slug} className="block">
+                                        <div className="aspect-video bg-light dark:bg-dark overflow-hidden flex items-center justify-center">
+                                            {thumbnailSrc ? (
+                                                <img
+                                                    src={thumbnailSrc}
+                                                    alt={title}
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src={getPlaceholderHog(title)}
+                                                    alt={title}
+                                                    className="w-auto h-3/4 object-contain group-hover:scale-110 transition-transform duration-200"
+                                                />
+                                            )}
+                                        </div>
+                                        <div className="p-4">
+                                            <div className="flex items-start justify-between gap-2">
+                                                <h3 className="m-0 text-lg font-bold text-primary dark:text-primary-dark group-hover:text-red dark:group-hover:text-yellow transition-colors">
+                                                    {title}
+                                                </h3>
+                                                {liveUrl && (
+                                                    <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green/10 text-green dark:bg-green/20">
+                                                        Live
+                                                    </span>
+                                                )}
+                                            </div>
+                                            {description && (
+                                                <p className="m-0 mt-2 text-sm text-primary/70 dark:text-primary-dark/70 line-clamp-2">
+                                                    {description}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </Link>
+                                    {projectAuthor && (
+                                        <div className="px-4 pb-4 -mt-2">
+                                            {authorUrl ? (
+                                                <Link
+                                                    to={authorUrl}
+                                                    className="inline-flex items-center gap-1.5 text-xs text-primary/60 dark:text-primary-dark/60 hover:text-red dark:hover:text-yellow"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    {authorGitHub && (
+                                                        <img
+                                                            src={`https://github.com/${authorGitHub}.png?size=32`}
+                                                            alt={projectAuthor}
+                                                            className="w-4 h-4 rounded-full"
+                                                        />
+                                                    )}
+                                                    <span>{projectAuthor}</span>
+                                                </Link>
+                                            ) : (
+                                                <span className="inline-flex items-center gap-1.5 text-xs text-primary/60 dark:text-primary-dark/60">
+                                                    <span>{projectAuthor}</span>
                                                 </span>
                                             )}
                                         </div>
-                                        {description && (
-                                            <p className="m-0 mt-2 text-sm text-primary/70 dark:text-primary-dark/70 line-clamp-2">
-                                                {description}
-                                            </p>
-                                        )}
-                                    </div>
-                                </Link>
+                                    )}
+                                </div>
                             )
                         }
                     )}
@@ -344,10 +397,17 @@ const query = graphql`
                     liveUrl
                     githubUrl
                     projectAuthor
+                    authorGitHub
                     filters {
                         tags
                     }
                 }
+            }
+        }
+        profiles: allSqueakProfile {
+            nodes {
+                squeakId
+                github
             }
         }
     }

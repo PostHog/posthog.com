@@ -5,12 +5,12 @@ import { SEO } from 'components/seo'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import { IconGithub, IconExternal } from '@posthog/icons'
 
 export default function SideProject({ data }) {
-    const { pageData } = data
+    const { pageData, profiles } = data
     const {
         body,
         excerpt,
@@ -20,6 +20,24 @@ export default function SideProject({ data }) {
         pageData?.frontmatter
 
     const tags = filters?.tags || []
+
+    // Create a lookup map from GitHub username to community profile ID
+    const githubToProfile = useMemo(() => {
+        const map: Record<string, string> = {}
+        profiles?.nodes?.forEach((profile: { github?: string; squeakId: string }) => {
+            if (profile.github) {
+                const username = profile.github.replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '')
+                map[username.toLowerCase()] = profile.squeakId
+            }
+        })
+        return map
+    }, [profiles])
+
+    // Determine author link: teamLink (manual) > community profile > GitHub
+    const profileId = authorGitHub && githubToProfile[authorGitHub.toLowerCase()]
+    const authorUrl =
+        teamLink ||
+        (profileId ? `/community/profiles/${profileId}` : authorGitHub ? `https://github.com/${authorGitHub}` : null)
 
     return (
         <Layout>
@@ -53,8 +71,8 @@ export default function SideProject({ data }) {
                                 )}
                                 <span className="text-primary/75 dark:text-primary-dark/75">
                                     by{' '}
-                                    {teamLink ? (
-                                        <Link to={teamLink} className="text-red dark:text-yellow hover:underline">
+                                    {authorUrl ? (
+                                        <Link to={authorUrl} className="text-red dark:text-yellow hover:underline">
                                             {projectAuthor}
                                         </Link>
                                     ) : (
@@ -92,7 +110,7 @@ export default function SideProject({ data }) {
                             {tags.map((tag) => (
                                 <Link
                                     key={tag}
-                                    to={`/side-projects?filter=tags&value=${tag.toLowerCase()}`}
+                                    to={`/side-projects?tag=${tag.toLowerCase()}`}
                                     className="inline-block px-2 py-1 text-xs font-medium rounded bg-accent dark:bg-accent-dark text-primary/75 dark:text-primary-dark/75 hover:text-red dark:hover:text-yellow"
                                 >
                                     {tag}
@@ -168,6 +186,12 @@ export const query = graphql`
                         gatsbyImageData
                     }
                 }
+            }
+        }
+        profiles: allSqueakProfile {
+            nodes {
+                squeakId
+                github
             }
         }
     }
