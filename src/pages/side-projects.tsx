@@ -149,7 +149,7 @@ function SideProjectsPage() {
         <Layout>
             <SEO
                 title="PostHog Side Projects"
-                description="Fun and interesting side projects from the PostHog team"
+                description="Side projects let us express ourselves and make us better at our jobs. A collection of projects folks at PostHog have worked on."
                 image="/images/side-projects-og.png"
             />
             <header className="py-12 px-5">
@@ -157,7 +157,8 @@ function SideProjectsPage() {
                     Side Projects
                 </h1>
                 <p className="my-4 mx-auto text-center text-lg md:text-xl font-semibold text-primary/75 dark:text-primary-dark/75 max-w-2xl">
-                    Fun and interesting projects from the PostHog team. Demos, experiments, tools, and more.
+                    Side projects let us express ourselves and make us better at our jobs. Here's a collection of
+                    projects folks at PostHog have worked on.
                 </p>
             </header>
 
