@@ -1,0 +1,63 @@
+---
+title: MaxAI
+description: AI support bot combining vector search with GPT for intelligent answers
+projectAuthor: PostHog Team
+teamLink: /teams/website-docs
+githubUrl: https://github.com/PostHog/max-ai
+filters:
+  tags:
+    - ai
+    - python
+    - vector-search
+    - support
+    - hackathon
+    - open-source
+---
+
+An AI-powered support bot that combines vector embeddings with GPT to answer questions about PostHog. Built at the 2023 Aruba hackathon, MaxAI was deployed across Slack, the PostHog app, and website before evolving into [PostHog AI](/docs/posthog-ai).
+
+## What it does
+
+- **Semantic Search**: Uses Weaviate vector database to find contextually relevant documentation
+- **Knowledge Integration**: Ingests PostHog docs, GitHub issues, and community Q&A
+- **Personalized Responses**: Custom prompts with personality, safety guardrails, and relevant context
+- **Multi-Platform**: Deployed to Slack, web apps, and internal tools
+- **Thread Summarization**: Condenses long support threads into actionable summaries
+
+## How it works
+
+```mermaid
+flowchart TD
+    A[User Question] -->|Embed| I(Question Vector)
+    I -->|Query Weaviate|J[Most Similar Docs]
+    J -->|Collect Prompt Params| C{Prompt Context}
+    C --> D[Limitations]
+    C --> E[Personality]
+    C --> F[Context Docs]
+    F --> G[String Prompt]
+    E --> G
+    D --> G
+    G -->|Query OpenAI|H[AI Response]
+```
+
+## Tech Stack
+
+- **Vector Database**: Weaviate for semantic search
+- **Orchestration**: Haystack for pipeline management
+- **LLM**: GPT-3.5-turbo (at launch)
+- **Backend**: Python + FastAPI
+
+## Origin Story
+
+Team Bandwaggoners (James Greenhill, Paul Hultgren, Eric Duong, Raquel Smith, and Neil Kakkar) built MaxAI at PostHog's 2023 Aruba offsite hackathon. The goal was to reduce load on support engineers while helping the community find answers faster.
+
+## Legacy
+
+MaxAI has since evolved into [PostHog AI](/docs/posthog-ai), but the original repo remains available as a reference implementation for building support bots with vector search and LLMs.
+
+```bash
+git clone https://github.com/PostHog/max-ai
+# See repo README for setup instructions
+```
+
+**Note**: This repository is archived. For current AI support features, see [PostHog AI](/docs/posthog-ai).

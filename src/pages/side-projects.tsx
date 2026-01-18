@@ -4,6 +4,22 @@ import { SEO } from 'components/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
+// Hedgehog placeholder images for projects without thumbnails
+const PLACEHOLDER_HOGS = [
+    'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/builder_hog.png',
+    'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/professor_hog.png',
+    'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/detective_hog.png',
+    'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
+    'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
+]
+
+// Get a deterministic placeholder based on title (same project always gets same hog)
+const getPlaceholderHog = (title: string) => {
+    const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    return PLACEHOLDER_HOGS[hash % PLACEHOLDER_HOGS.length]
+}
+
 function SideProjectsPage() {
     const {
         sideProjects: { nodes },
@@ -40,15 +56,21 @@ function SideProjectsPage() {
                                     to={slug}
                                     className="group block bg-accent dark:bg-accent-dark rounded-lg overflow-hidden border border-light dark:border-dark hover:border-primary/25 dark:hover:border-primary-dark/25 hover:scale-[1.02] transition-all duration-200"
                                 >
-                                    {projectThumbnail && (
-                                        <div className="aspect-video bg-light dark:bg-dark overflow-hidden">
+                                    <div className="aspect-video bg-light dark:bg-dark overflow-hidden flex items-center justify-center">
+                                        {projectThumbnail ? (
                                             <img
                                                 src={projectThumbnail}
                                                 alt={title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                                             />
-                                        </div>
-                                    )}
+                                        ) : (
+                                            <img
+                                                src={getPlaceholderHog(title)}
+                                                alt={title}
+                                                className="w-auto h-3/4 object-contain group-hover:scale-110 transition-transform duration-200"
+                                            />
+                                        )}
+                                    </div>
                                     <div className="p-4">
                                         <div className="flex items-start justify-between gap-2">
                                             <h3 className="m-0 text-lg font-bold text-primary dark:text-primary-dark group-hover:text-red dark:group-hover:text-yellow transition-colors">

@@ -1,0 +1,54 @@
+---
+title: DeskHog
+description: A palm-sized developer toy with custom firmware for tinkering and learning
+projectAuthor: Danilo Campos
+authorGitHub: danilocampos
+githubUrl: https://github.com/PostHog/DeskHog
+liveUrl: https://posthog.com/deskhog
+filters:
+  tags:
+    - hardware
+    - esp32
+    - c++
+    - firmware
+    - open-source
+    - ai-coding
+---
+
+A palm-sized, open-source developer toy built around an ESP32-S3 microcontroller. DeskHog packages an Adafruit board with custom firmware, a 3D-printed case, and a color display into something you can actually build projects with.
+
+## What it does
+
+- **Built-in WiFi**: Easy network setup through a web portal
+- **Card-based UI**: Paginated screen interface with button navigation
+- **Rich Graphics**: LVGL-powered display with 240x135 color screen
+- **~10hr Battery**: Built-in battery management for portability
+- **Stable Foundation**: Dual-core task management prevents crashes from your experimental code
+
+## Built for AI-assisted development
+
+DeskHog's firmware is specifically designed for agent-based LLM coding:
+
+- **Clean Architecture**: Well-organized folders for network code, UI code, clients, and parsers
+- **Heavily Commented**: Class interfaces documented for AI agent context
+- **Tested by Non-Engineers**: PostHog team members with no hardware experience built games and tools in 48 hours using Claude and Cursor
+
+## Example Projects
+
+The repo includes projects built by PostHog team members:
+- Pong and Flappy Bird games
+- Roguelike adventures
+- Pomodoro timer
+- Data visualization dashboards
+
+## Try it yourself
+
+Get a kit from the [DeskHog page](/deskhog) or source your own [Adafruit ESP32-S3 Reverse TFT Feather](https://www.adafruit.com/product/5691).
+
+```bash
+git clone https://github.com/PostHog/DeskHog
+cd DeskHog
+# Follow the setup guide in the repo for PlatformIO
+```
+
+Check out the [Claude tutorial](/tutorials/deskhog-claude-tutorial) or [Cursor tutorial](/tutorials/deskhog-cursor-tutorial) to get started with AI-assisted development.

@@ -1,0 +1,57 @@
+---
+title: PostHog Wizard
+description: AI-powered CLI for automating PostHog integrations in any project
+projectAuthor: Danilo Campos
+authorGitHub: danilocampos
+githubUrl: https://github.com/PostHog/wizard
+filters:
+  tags:
+    - cli
+    - typescript
+    - ai
+    - mcp
+    - developer-tools
+    - open-source
+---
+
+An AI-powered CLI tool that automates PostHog integration into your projects. The Wizard acts as an "envoy" - conventional software that meets AI agents within coding sessions to ensure correct, hallucination-free integrations.
+
+## What it does
+
+- **Automated Integration**: Adds PostHog to React, Next.js, Svelte, Astro, and React Native projects
+- **API Key Management**: Fetches keys from your PostHog account and populates `.env` files securely
+- **LLM-Powered Code Generation**: Uses consistent prompting to read your code and integrate PostHog correctly
+- **Agent-Ready**: Non-interactive mode for AI coding agents (Cursor, Claude Code, Bolt, etc.)
+- **MCP Server Management**: Install/remove PostHog MCP servers for supported clients
+
+## Why it exists
+
+AI agents often hallucinate PostHog API keys or use outdated integration patterns. The Wizard solves this by:
+
+1. Authenticating with your real PostHog account
+2. Using up-to-date integration code, not training data
+3. Enforcing best practices through deterministic prompts
+
+## Using with AI Agents
+
+Paste this into Cursor, Claude Code, or other agent chats:
+
+```
+Integrate PostHog into this project using the PostHog wizard CLI.
+Run: npx @anthropic/wizard
+Follow the prompts to authenticate and configure.
+```
+
+The agent runs the command, and you get a working integration in ~90 seconds.
+
+## Try it yourself
+
+```bash
+# Interactive mode
+npx @posthog/wizard
+
+# Non-interactive mode (for CI/CD or agents)
+npx @posthog/wizard --api-key YOUR_KEY --non-interactive
+```
+
+The Wizard is MIT licensed - [fork it](https://github.com/PostHog/wizard) to build your own envoy for your developer tools.
