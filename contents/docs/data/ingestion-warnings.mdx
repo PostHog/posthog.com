@@ -54,7 +54,7 @@ When generating UUIDs, there are many gotchas to be aware of. For example, dedup
 
 ## Ignored an invalid timestamp, event was still ingested
 
-When capturing events, the `timestamp` and `sent_at` fields should be in `ISO 8601` format. When parsing fails, PostHog ignores these fields and [computes them itself](/docs/data/timestamps) as if omitted. These events are still ingested, but their timestamp might be different than the one you intended.
+When capturing events, the `timestamp` and `sent_at` fields should be in `ISO 8601` format. When parsing fails, PostHog ignores these fields and [computes them itself](/docs/data/timestamps) as if omitted. These events are still ingested, but their timestamp might differ from the one you intended.
 
 ## An event was sent more than 23 hours in the future
 
