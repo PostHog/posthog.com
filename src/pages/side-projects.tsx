@@ -282,11 +282,14 @@ function SideProjectsPage() {
                                 githubUrl,
                                 projectAuthor,
                                 authorGitHub,
+                                teamLink,
                             },
                         }: any) => {
                             const thumbnailSrc = projectThumbnail || getGitHubOGImage(githubUrl)
                             const profileId = authorGitHub && githubToProfile[authorGitHub.toLowerCase()]
-                            const authorUrl = profileId
+                            const authorUrl = teamLink
+                                ? teamLink
+                                : profileId
                                 ? `/community/profiles/${profileId}`
                                 : authorGitHub
                                 ? `https://github.com/${authorGitHub}`
@@ -398,6 +401,7 @@ const query = graphql`
                     githubUrl
                     projectAuthor
                     authorGitHub
+                    teamLink
                     filters {
                         tags
                     }
