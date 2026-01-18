@@ -1,54 +1,13 @@
-import Chip from 'components/Chip'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import List from 'components/List'
 import { SEO } from 'components/seo'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
-import React, { useEffect, useMemo, useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import React from 'react'
 
-function SideProjectsPage({ location }) {
+function SideProjectsPage() {
     const {
         sideProjects: { nodes },
     } = useStaticQuery(query)
-
-    const [projects, setProjects] = useState(nodes)
-    const [filteredProjects, setFilteredProjects] = useState(null)
-    const [currentFilter, setCurrentFilter] = useState('all')
-
-    // Extract all unique tags dynamically from project frontmatter
-    const allTags = useMemo(() => {
-        const tags = new Set<string>()
-        nodes.forEach((node) => {
-            node.frontmatter.filters?.tags?.forEach((tag: string) => tags.add(tag))
-        })
-        return Array.from(tags).sort()
-    }, [nodes])
-
-    const filterProjects = (tag: string) => {
-        const filtered = projects.filter((project) =>
-            project.frontmatter.filters?.tags?.some((t: string) => t.toLowerCase() === tag.toLowerCase())
-        )
-        setCurrentFilter(tag.toLowerCase())
-        setFilteredProjects(filtered)
-    }
-
-    const resetFilters = () => {
-        navigate('?')
-        setCurrentFilter('all')
-        setFilteredProjects(null)
-    }
-
-    useEffect(() => {
-        const params = new URLSearchParams(location?.search)
-        const filter = params.get('filter')
-        const value = params.get('value')
-
-        if (filter === 'tags' && value) {
-            filterProjects(value)
-        }
-    }, [location])
-
-    const displayProjects = filteredProjects || projects
 
     return (
         <Layout>
@@ -71,41 +30,48 @@ function SideProjectsPage({ location }) {
                 </p>
             </header>
 
-            {allTags.length > 0 && (
-                <div className="flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
-                    <Chip onClick={resetFilters} active={currentFilter === 'all'} text="All" />
-                    {allTags.map((tag) => (
-                        <Chip
-                            onClick={() => navigate(`?filter=tags&value=${tag.toLowerCase()}`)}
-                            active={currentFilter === tag.toLowerCase()}
-                            key={tag}
-                            text={tag}
-                        />
-                    ))}
-                </div>
-            )}
-
-            {displayProjects.length > 0 ? (
-                <List
-                    className="max-w-2xl mx-auto pb-12 px-4"
-                    items={displayProjects.map(
-                        ({ fields: { slug }, frontmatter: { thumbnail, title, description, author, liveUrl } }) => ({
-                            label: title,
-                            url: slug,
-                            image: thumbnail?.publicURL,
-                            description: description,
-                            badge: liveUrl ? 'Live' : undefined,
-                        })
+            <div className="max-w-6xl mx-auto px-4 pb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {nodes.map(
+                        ({ id, fields: { slug }, frontmatter: { projectThumbnail, title, description, liveUrl } }) => {
+                            return (
+                                <Link
+                                    key={id}
+                                    to={slug}
+                                    className="group block bg-accent dark:bg-accent-dark rounded-lg overflow-hidden border border-light dark:border-dark hover:border-primary/25 dark:hover:border-primary-dark/25 hover:scale-[1.02] transition-all duration-200"
+                                >
+                                    {projectThumbnail && (
+                                        <div className="aspect-video bg-light dark:bg-dark overflow-hidden">
+                                            <img
+                                                src={projectThumbnail}
+                                                alt={title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="p-4">
+                                        <div className="flex items-start justify-between gap-2">
+                                            <h3 className="m-0 text-lg font-bold text-primary dark:text-primary-dark group-hover:text-red dark:group-hover:text-yellow transition-colors">
+                                                {title}
+                                            </h3>
+                                            {liveUrl && (
+                                                <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green/10 text-green dark:bg-green/20">
+                                                    Live
+                                                </span>
+                                            )}
+                                        </div>
+                                        {description && (
+                                            <p className="m-0 mt-2 text-sm text-primary/70 dark:text-primary-dark/70 line-clamp-2">
+                                                {description}
+                                            </p>
+                                        )}
+                                    </div>
+                                </Link>
+                            )
+                        }
                     )}
-                />
-            ) : (
-                <div className="text-center py-12 text-primary/60 dark:text-primary-dark/60">
-                    <p>No projects found matching that filter.</p>
-                    <button onClick={resetFilters} className="mt-4 text-red dark:text-yellow hover:underline">
-                        Clear filter
-                    </button>
                 </div>
-            )}
+            </div>
         </Layout>
     )
 }
@@ -122,16 +88,10 @@ const query = graphql`
                     slug
                 }
                 frontmatter {
-                    thumbnail {
-                        publicURL
-                    }
+                    projectThumbnail
                     title
                     description
-                    author
                     liveUrl
-                    filters {
-                        tags
-                    }
                 }
             }
         }

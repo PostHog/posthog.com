@@ -16,7 +16,7 @@ export default function SideProject({ data }) {
         excerpt,
         fields: { slug },
     } = pageData
-    const { title, description, featuredImage, author, authorGitHub, teamLink, githubUrl, liveUrl, filters } =
+    const { title, description, featuredImage, projectAuthor, authorGitHub, teamLink, githubUrl, liveUrl, filters } =
         pageData?.frontmatter
 
     const tags = filters?.tags || []
@@ -42,12 +42,12 @@ export default function SideProject({ data }) {
                     )}
 
                     <div className="flex flex-wrap items-center gap-4 text-sm">
-                        {author && (
+                        {projectAuthor && (
                             <div className="flex items-center gap-2">
                                 {authorGitHub && (
                                     <img
                                         src={`https://github.com/${authorGitHub}.png?size=32`}
-                                        alt={author}
+                                        alt={projectAuthor}
                                         className="w-6 h-6 rounded-full"
                                     />
                                 )}
@@ -55,10 +55,10 @@ export default function SideProject({ data }) {
                                     by{' '}
                                     {teamLink ? (
                                         <Link to={teamLink} className="text-red dark:text-yellow hover:underline">
-                                            {author}
+                                            {projectAuthor}
                                         </Link>
                                     ) : (
-                                        author
+                                        projectAuthor
                                     )}
                                 </span>
                             </div>
@@ -154,7 +154,7 @@ export const query = graphql`
             frontmatter {
                 title
                 description
-                author
+                projectAuthor
                 authorGitHub
                 teamLink
                 githubUrl

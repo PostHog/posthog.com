@@ -1808,6 +1808,12 @@ export const communityMenu = {
             color: 'seagreen',
             url: '/merch',
         },
+        {
+            name: 'Side projects',
+            icon: 'IconRocket',
+            color: 'purple',
+            url: '/side-projects',
+        },
     ],
 }
 
