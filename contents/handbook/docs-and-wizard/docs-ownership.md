@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-**Product teams** are responsible for [writing docs](/handbook/engineering/writing-docs) and ensuring they are up-to-date. This means:
+**Product engineering teams** are responsible for [writing docs](/handbook/engineering/writing-docs) and ensuring they are up-to-date. This means:
 
 - Documenting new features when they're launched
 - Add doc comments to SDKs to make them easier to understand
@@ -13,7 +13,7 @@ showTitle: true
 
 Read [writing docs as an engineer](/handbook/engineering/writing-docs) – it's really important! 
 
-**The content team** is responsible for improving the docs. This means:
+The <SmallTeam slug="docs-wizard" /> is responsible for improving the docs. This means:
 
 - Reviewing and improving draft documentation created by product teams
 - Improving the subjective docs experience (navigation, discovery, interactivity, etc.)
@@ -21,36 +21,18 @@ Read [writing docs as an engineer](/handbook/engineering/writing-docs) – it's 
 - Ensuring screenshots and other visual elements are up-to-date
 - Shipping supplementary docs and tutorials based on feedback and emerging use cases
 
-## Ownership in the content team
+## Ownership in the Docs & Wizard team
 
 We've previously assigned ownership to areas of the product and docs to individuals, but we're presently more project orientated.
 
 You can view what we're working on right now by:
 
-1. Reading our goals on the <SmallTeam slug="content" /> page
-2. Reading issues on our [team GitHub project board](https://github.com/orgs/PostHog/projects/107/views/1)
+1. Reading our goals on the <SmallTeam slug="docs-wizard" /> page
+2. Dropping in on our `#team-docs-and-wizard` Slack channel
 
-You can share ideas / requests for new docs in the #content-docs-ideas Slack channel, or by creating an issue on the posthog.com repo.
+You can share ideas / requests for new docs in the `#team-docs-and-wizard` Slack channel, or by creating an issue on the posthog.com repo.
 
 As ever, though, PRs > issues. ;) 
-
-## Docs hero
-
-Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them. The rotation schedule can be found <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">here</PrivateLink>.
-
-The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
-
-Some notes and tips: 
-
-- Four people (<TeamMember name="Edwin Lim" photo={true} />, <TeamMember name="Ian Vanagas" photo={true} />, <TeamMember name="Lior Neu-ner" photo={true} />, and <TeamMember name="Vincent Ge" photo={true} />) are currently in the rotation. This means two days in every 20 working days will be dedicated to the docs hero role – 10% of your time. This will reduce as we add more people to the team.
-
-- It's up to individuals to decide how to spend their two days. You can spend it shipping one or two things, or shipping a dozen small improvements. The only requirement is you should work on things you can ship in those two days. Work should not carry over into other days, or future docs hero stints.
-
-- Feel free to create issues about problems you find that are too big to deal with in a couple of days, but **most of your time should be spent on shipping** updates, not triaging requests.
-
-- Tutorials count as well.
-
-- Talk to your teammates and update the <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">rotation schedule</PrivateLink> if you need to swap weeks.
 
 ### Sources for inspiration
 

@@ -31,9 +31,9 @@ Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/
 <details>
 <summary>I need help with documentation</summary>
 
-Your main contacts are <TeamMember name="Vincent Ge" /> and <TeamMember name="Edwin Lim" /> on the content team, but please read the [docs ownership handbook](/handbook/content/docs-ownership) to understand how best to work with them. 
+Your main contact is the <SmallTeam slug="docs-wizard" />, but please read the [docs ownership handbook](/handbook/docs-and-wizard/docs-ownership) to understand how best to work with them. 
 
-If you just need someone to review something, tag `docs reviewers` in GitHub.
+If you just need someone to review something, tag `Team Docs & Wizard` in GitHub.
 </details>
 
 <details>
