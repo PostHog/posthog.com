@@ -95,7 +95,7 @@ The GitHub App needs to bypass certain protections to push release commits direc
 
 ### 4. Grant access to organization secrets
 
-The release workflow needs access to shared organization secrets. Go to [organization secrets settings](https://github.com/organizations/PostHog/settings/secrets/actions) and grant your SDK repository access to:
+The release workflow needs access to shared organization secrets. Grant your SDK repository access to the below organization secrets via <PrivateLink url="https://runbooks.posthog.com/github/secrets">Terraform</PrivateLink>:
 
 **Secrets:**
 - `SLACK_CLIENT_LIBRARIES_BOT_TOKEN`

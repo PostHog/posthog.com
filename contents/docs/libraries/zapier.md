@@ -1,7 +1,6 @@
 ---
 title: Zapier
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/zapier.svg
+platformLogo: zapier
 ---
 
 ## Objective

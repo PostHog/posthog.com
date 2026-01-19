@@ -19,6 +19,10 @@ export const customerDataInfrastructureNav = {
             url: '/data-stack/managed-warehouse',
         },
         {
+            name: 'PostHog AI',
+            url: '/data-stack/posthog-ai',
+        },
+        {
             name: 'Data sources & import (ELT)',
             url: '/data-stack/sources',
         },

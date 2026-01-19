@@ -31,6 +31,7 @@ Product teams figure out what to work on, make estimates, and sacrifice their fi
 Execs set a deadline to “speed up” the engineers. Sales offer the deadline to customers. Customers are excited; execs are delighted.
 
 ### Phase 2: “Are we gonna make it?” 🤷
+
 Months pass and the plan is slowly dying on contact with reality:
 
 - It turns out building the feature is way more complex than first thought.
@@ -42,6 +43,7 @@ Months pass and the plan is slowly dying on contact with reality:
 Engineers warn their managers that things aren’t going to plan. Managers sugarcoat their warnings, or ignore them entirely.
 
 ### Phase 3: “We’re not gonna make it!” 🥵
+
 There’s a reckoning. Arguments and finger pointing ensue. Eventually, a new deadline is agreed enforced. “We must not miss again!”
 
 Customers are annoyed and sales rejig their promises to customers. Hello, commercial debt! It’s like technical debt, but for creating difficult customer situations.
@@ -49,6 +51,7 @@ Customers are annoyed and sales rejig their promises to customers. Hello, commer
 They’re placated via constant updates and alignment meetings. The customers who complain the loudest get what they want, even if it makes the product worse.
 
 ### Phase 4: “We (sort of) made it.” 😵‍💫
+
 A brutal crunch gets the feature over the line to the new deadline.
 
 Everyone’s relieved it’s over, but customers are underwhelmed. What you shipped is far less than sales promised, and it only partially solves their problem.
@@ -56,6 +59,7 @@ Everyone’s relieved it’s over, but customers are underwhelmed. What you ship
 Some customers found other solutions because you took too long, others use yours for a while and give up. Some just realize the problem wasn’t that important after all.
 
 ### Phase 5: “We’re gonna make it this time!” 🙏
+
 The big launch didn’t move the needle. A lengthy retrospective blames faulty processes. “The right process will fix this.”
 
 Spoiler: it doesn’t.
@@ -107,6 +111,8 @@ There are things you can do to help customers accept this way of working, too.
 At PostHog, we use transparency to create trust. Our code is open source, so customers can follow along through pull requests and issues we share.
 
 We also work very closely with highly-engaged customers on new features, and prioritize their most urgent needs. Listening to customers, and being transparent with them, is more effective than arbitrary promises.
+
+<NewsletterForm />
 
 ## Things you need to make this work
 
@@ -181,9 +187,6 @@ We’re doubling down on this approach as we grow – splitting up teams when th
 As of writing, we’re [78 people split across 21 small teams](/teams). If and when it stops working, I’ll write about it.
 
 *Words by [James Hawkins](https://x.com/james406), who you can call on (989)POST-HOG.*[^4]
-
-<NewsletterForm />
-
 
 [^1]: AAA videogame development is a great example of the deadline doom loop in action. Successful studios frequently doom loop their way into oblivion, normally after being acquired by a large, corporate software publisher.
 

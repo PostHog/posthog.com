@@ -85,7 +85,7 @@ if (posthog.isFeatureEnabled('new-checkout')) {
 <Tab.Panel>
 
 ```js
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+import { useFeatureFlagEnabled } from '@posthog/react'
 
 function App() {
   const showNewCheckout = useFeatureFlagEnabled('new-checkout')

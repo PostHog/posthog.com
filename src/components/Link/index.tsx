@@ -144,6 +144,7 @@ export default function Link({
         if (compact && url && !internal) {
             e.preventDefault()
             if (/(eu|us|app)\.posthog\.com/.test(url)) {
+                // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive navigation URL
                 window.parent.postMessage(
                     {
                         type: 'external-navigation',

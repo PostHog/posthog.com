@@ -1,7 +1,6 @@
 ---
 title: RudderStack
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg
+platformLogo: rudderstack
 ---
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.

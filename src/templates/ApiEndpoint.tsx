@@ -610,7 +610,8 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     }, [])
 
     // Find overview.mdx node for this API entity
-    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
+    // Note: name uses underscores (from OpenAPI), but file slugs use hyphens
+    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name.replace(/_/g, '-')}/overview`)
 
     const [hovered, setHovered] = useState(false)
 

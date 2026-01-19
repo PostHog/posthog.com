@@ -150,6 +150,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['feature-flags'],
         label: 'feature/feature-flags',
     },
+    endpoints: {
+        feature: 'Endpoints',
+        owner: ['data-stack'],
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -216,7 +220,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Notebooks',
         notes: (
             <>
-               Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks is owned by product analytics)
+                Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks
+                is owned by product analytics)
             </>
         ),
         owner: ['platform-features'],

@@ -268,12 +268,15 @@ The first time you sign into Zendesk, please make sure you include your name and
 
 ### Using Zendesk
 
-You’ll spend most of your time in the Views pane, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
+You’ll spend most of your time in the Views panel, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
 
 Tips:
 
 -   Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
--   Provide actionable information as an _Internal Note_ on the Zendesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+-   Provide actionable information as an _Internal Note_ on the Zendesk ticket (e.g. partial investigation, notes for escalating or transferring to a different team, etc.). Do not use internal notes to communicate internally about a ticket, it is far too easy to miss these notes (see below!).
+-   Use _side conversations_ from Zendesk to Slack to communicate about a ticket internally. Slack is our primary communication tool and therefore it's much easier to have a discussion in Slack than through Zendesk internal notes. Side conversations can be started from the right hand side panel in Zendesk:
+
+![Opening side conversations](https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/zendesk_side_conversation_b595f2b69f.png)
 
 ### Creating tickets on behalf of users or from existing tickets
 
