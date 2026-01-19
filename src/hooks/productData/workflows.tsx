@@ -361,7 +361,7 @@ export const workflows = {
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {
-            title: 'How PostHog uses PostHog Workflows',
+            title: 'Automating onboarding with PostHog Workflows',
             author: 'Sara Miteva',
             wistia: '9npwnc8sm6',
             chapters: [
