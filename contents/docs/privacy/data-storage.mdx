@@ -135,11 +135,7 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete persons and their events, you can use the single delete endpoint if you have the person UUID or the bulk delete endpoint if you have distinct IDs.
-
-#### Deleting by person UUID
-
-If you have the person's UUID (returned as `id` in the persons API response), use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id). To delete the person's corresponding events, add the `delete_events=true` parameter:
+To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter:
 
 <MultiLanguage>
 
@@ -177,6 +173,9 @@ print(response.json())
 ```
 
 </MultiLanguage>
+
+{/* TODO: Re-enable this section when engineering adds support for deleting anonymous users by distinct_id.
+    Currently the async deletion job uses person_id, so this won't work for truly anonymous users.
 
 #### Deleting anonymous users by distinct ID
 
@@ -237,6 +236,8 @@ The single delete endpoint (`DELETE /persons/:id`) only accepts the person UUID,
 </CalloutBox>
 
 You can delete up to 1,000 persons per request using the bulk delete endpoint. The endpoint also accepts `ids` (person UUIDs) instead of `distinct_ids` if you prefer.
+
+*/}
 
 This request will delete all events of the person(s) that have been captured before the deletion request.
 
