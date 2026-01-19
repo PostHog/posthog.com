@@ -219,7 +219,7 @@ export default function Workflows(): JSX.Element {
         },
         order: ['overview', 'features', 'comparison'],
         overrides: {
-            videos: { props: { title: 'How PostHog uses Workflows' } },
+            videos: { props: { title: 'How PostHog uses PostHog Workflows' } },
         },
         custom: [
             {
