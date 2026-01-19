@@ -2735,6 +2735,10 @@ export const docsMenu = {
                             url: '/docs/settings/access-control',
                         },
                         {
+                            name: 'Activity logs',
+                            url: '/docs/settings/activity-logs',
+                        },
+                        {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
