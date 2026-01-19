@@ -1,5 +1,5 @@
-import { Placement, reference } from '@popperjs/core'
-import React, { useEffect, useState } from 'react'
+import { Placement } from '@popperjs/core'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { createPortal } from 'react-dom'
 
@@ -27,8 +27,10 @@ export default function Tooltip({
     controlled?: boolean
 }): JSX.Element {
     const [open, setOpen] = useState(other.open ?? false)
-    const [referenceElement, setReferenceElement] = useState(null)
-    const [popperElement, setPopperElement] = useState(null)
+    const [referenceElement, setReferenceElement] = useState<Element | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
+    const wrapperRef = useRef<HTMLSpanElement>(null)
+    const recentlyTouchedRef = useRef(false)
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement,
         modifiers: [
@@ -44,14 +46,50 @@ export default function Tooltip({
         }
     }, [other.open])
 
+    useEffect(() => {
+        if (!open || controlled) return
+
+        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+            const target = e.target as Node
+            const isInsideWrapper = wrapperRef.current?.contains(target)
+            const isInsidePopper = popperElement?.contains(target)
+
+            if (!isInsideWrapper && !isInsidePopper) {
+                setOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener('touchstart', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('touchstart', handleClickOutside)
+        }
+    }, [open, controlled, popperElement])
+
     return (
         <span
-            onMouseEnter={() => !controlled && setOpen(true)}
-            onMouseLeave={() => !controlled && setOpen(false)}
+            ref={wrapperRef}
+            onTouchStart={() => {
+                recentlyTouchedRef.current = true
+                setTimeout(() => {
+                    recentlyTouchedRef.current = false
+                }, 500)
+            }}
+            onMouseEnter={() => {
+                if (recentlyTouchedRef.current) return
+                !controlled && setOpen(true)
+            }}
+            onMouseLeave={() => {
+                if (recentlyTouchedRef.current) return
+                !controlled && setOpen(false)
+            }}
             className={className}
-            onClick={() => {
+            onClick={(e) => {
                 if (!controlled) {
-                    setOpen(false)
+                    e.stopPropagation()
+                    setOpen((prev) => !prev)
                 }
             }}
         >
