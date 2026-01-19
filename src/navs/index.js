@@ -691,46 +691,36 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Docs & wizard',
-        url: '/handbook/content/docs',
+        name: 'Docs & Wizard',
+        url: '/handbook/docs-and-wizard/docs',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/content/docs',
+                url: '/handbook/docs-and-wizard/docs',
             },
             {
                 name: 'Ownership',
-                url: '/handbook/content/docs-ownership',
+                url: '/handbook/docs-and-wizard/docs-ownership',
             },
             {
                 name: 'Style guide',
-                url: '/handbook/content/docs-style-guide',
+                url: '/handbook/docs-and-wizard/docs-style-guide',
             },
             {
-                name: 'Runbook',
-                url: '/handbook/content/runbook',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/runbook',
-                    },
-                    {
-                        name: 'Onboarding docs',
-                        url: '/handbook/content/runbook/onboarding-docs',
-                    },
-                    {
-                        name: 'SDK reference docs',
-                        url: '/handbook/content/runbook/sdk-reference-docs',
-                    },
-                    {
-                        name: 'API specification',
-                        url: '/handbook/content/runbook/api-specifications',
-                    },
-                    {
-                        name: 'Developing the wizard',
-                        url: '/handbook/content/runbook/developing-the-wizard',
-                    },
-                ],
+                name: 'AI Wizard',
+                url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'Onboarding docs',
+                url: '/handbook/docs-and-wizard/onboarding-docs',
+            },
+            {
+                name: 'SDK reference docs',
+                url: '/handbook/docs-and-wizard/sdk-reference-docs',
+            },
+            {
+                name: 'API specs and docs',
+                url: '/handbook/docs-and-wizard/api-specifications',
             },
         ],
     },
