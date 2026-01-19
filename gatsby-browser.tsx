@@ -23,14 +23,6 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
         document.body.className = theme
     }
 
-    // Auto-open details elements when linked via hash
-    if (location.hash) {
-        const el = document.querySelector(location.hash)
-        if (el?.tagName === 'DETAILS') {
-            ;(el as HTMLDetailsElement).open = true
-        }
-    }
-
     if (window?.posthog) {
         if (prevLocation) {
             window.posthog.capture('$pageleave', {
