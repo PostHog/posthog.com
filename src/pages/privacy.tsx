@@ -147,7 +147,7 @@ function Privacy() {
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
                         💻 We collect data like your IP address, device info, and pages/content you view to improve your
-                        experience. No third-party cookies here – we don’t do retargeting ads or creepy tracking!
+                        experience. We do not use third party cookies.
                     </Tweet>
 
                     <Tweet
