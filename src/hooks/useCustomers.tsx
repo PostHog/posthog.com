@@ -413,6 +413,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'feature_flags',
             'experiments',
             'error_tracking',
+            'surveys',
             'posthog_ai',
         ],
         notes: 'AI model comparison platform',
@@ -432,7 +433,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
             },
             lily_d: {
-                name: 'Lily D',
+                name: 'Lily Dinh',
                 role: 'Growth Marketer',
                 image: {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/lily_d_lmarena_7ce598fc8c.jpeg',
