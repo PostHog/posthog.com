@@ -83,6 +83,7 @@ Add filters for events that represent meaningful user actions across product are
 - billing trial activated
 - autocapture_opt_out team setting updated
 - session_recording_opt_in team setting updated
+- autocapture_exceptions_opt_in team setting updated
 
 **Team growth:**
 - team member invited
