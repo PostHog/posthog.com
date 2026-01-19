@@ -16,6 +16,7 @@ import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import { PRODUCT_COUNT } from '../../../constants'
 import { motion } from 'framer-motion'
+import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
 
 const subfeaturesItemCount = 4
 const subfeatures = [
@@ -356,6 +357,21 @@ export const ProfessionalServices = () => {
                                         </li>
                                     </ul>
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex justify-center mt-2 sm:mt-12">
+                        <div className="dark:bg-dark bg-accent border border-input p-4 rounded max-w-2xl w-full text-center">
+                            <p className="!mt-0">
+                                <strong>But, wait there are more enterprise features coming!</strong> <br />
+                                <Link to="/data-stack/managed-warehouse">
+                                    PostHog's managed data warehouse built on DuckDB
+                                </Link>{' '}
+                                will be available soon. Join the waitlist to get early access and start building your
+                                data stack on PostHog.
+                            </p>
+                            <div className="max-w-md mx-auto">
+                                <DuckDBWaitlistSurvey />
                             </div>
                         </div>
                     </div>
