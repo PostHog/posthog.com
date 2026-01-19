@@ -2175,7 +2175,7 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                             children: [
                                 {
-                                    name: '3.7 and above',
+                                    name: '4.x and 3.7+',
                                     url: '/docs/libraries/nuxt-js',
                                 },
                                 {
