@@ -81,6 +81,8 @@ Add filters for events that represent meaningful user actions across product are
 - billing invoice payment failed
 - annual plan credit purchase
 - billing trial activated
+- autocapture_opt_out team setting updated
+- session_recording_opt_in team setting updated
 
 **Team growth:**
 - team member invited
