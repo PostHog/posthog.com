@@ -1270,8 +1270,8 @@ export const handbookSidebar = [
                 url: '/handbook/product/visiting-customers',
             },
             {
-                name: 'Releasing as beta',
-                url: '/handbook/product/releasing-as-beta',
+                name: 'Releasing new products and features',
+                url: '/handbook/product/releasing-new-products-and-features',
             },
             {
                 name: 'Product manager role',
@@ -2457,6 +2457,10 @@ export const docsMenu = {
                         {
                             name: 'Surveys',
                             url: '/docs/api/surveys',
+                        },
+                        {
+                            name: 'Product Tours',
+                            url: '/docs/api/product-tours',
                         },
                         {
                             name: 'Users',
@@ -4426,6 +4430,73 @@ export const docsMenu = {
                     icon: 'IconUserPaths',
                     color: 'blue',
                     featured: true,
+                },
+            ],
+        },
+        {
+            name: 'Product Tours',
+            url: '/docs/product-tours',
+            icon: 'IconSpotlight',
+            color: 'salmon',
+            description: 'Guide users through your product with interactive tours and announcements',
+            children: [
+                {
+                    name: 'Product Tours',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/product-tours',
+                    icon: 'IconHome',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/product-tours/start-here',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'salmon',
+                },
+                {
+                    name: 'Create product tours',
+                    url: '/docs/product-tours/creating-product-tours',
+                    icon: 'IconSpotlight',
+                    color: 'orange',
+                },
+                {
+                    name: 'Make an announcement',
+                    url: '/docs/product-tours/creating-announcements',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Launch and manage tours',
+                    url: '/docs/product-tours/managing-tours',
+                    icon: 'IconToggle',
+                    color: 'orange',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Target users and set display conditions',
+                    url: '/docs/product-tours/targeting',
+                    icon: 'IconTarget',
+                    color: 'orange',
+                },
+                {
+                    name: 'Customize styles and layouts',
+                    url: '/docs/product-tours/customization',
+                    icon: 'IconColor',
+                    color: 'orange',
+                },
+                {
+                    name: 'View and create analytics',
+                    url: '/docs/product-tours/analytics',
+                    icon: 'IconGraph',
+                    color: 'orange',
                 },
             ],
         },

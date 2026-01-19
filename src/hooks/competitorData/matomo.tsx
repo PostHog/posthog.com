@@ -53,6 +53,7 @@ export const matomo = {
                 insights: {
                     available: true,
                     features: {
+                        ai_insight_builder: false,
                         formula_mode: false,
                         ready_made_insight_types: false,
                         sampling: false,
@@ -70,6 +71,7 @@ export const matomo = {
                 breakdown_by_device_and_browser: false,
                 breakdown_by_geoip: false,
                 conversions: true,
+                cookieless_tracking: true,
                 custom_channel_types: false,
                 entry_exit_paths: true,
                 first_party_cookies: false,
@@ -93,8 +95,8 @@ export const matomo = {
                 traffic_breakdown: true,
                 utm_tracking: true,
                 visitor_and_view_tracking: false,
-                web_vitals: false,
-                web_vitals_reporting: false,
+                web_vitals: true,
+                web_vitals_reporting: true,
             },
         },
         session_replay: {
@@ -147,6 +149,7 @@ export const matomo = {
             api: true,
             mobile_sdks: true,
             server_side_sdks: true,
+            sql: false,
         },
         tools: {
             cms: '',
