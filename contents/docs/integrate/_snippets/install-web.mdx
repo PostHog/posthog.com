@@ -4,7 +4,7 @@ import Snippet from "./install-js-snippet.mdx"
 
 <Snippet />
 
-<details>
+<details id="typescript-script-tag">
 <summary>Using TypeScript with the script tag?</summary>
 
 If you're using TypeScript and want type safety for `window.posthog`, install the `@posthog/types` package:
@@ -51,7 +51,7 @@ posthog.init('<ph_project_api_key>', {
 
 See our framework specific docs for [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [Vue](/docs/libraries/vue-js), [Angular](/docs/libraries/angular), [Astro](/docs/libraries/astro), [Remix](/docs/libraries/remix), and [Svelte](/docs/libraries/svelte) for more installation details.
 
-<details>
+<details id="bundle-extensions">
 <summary>Bundle all required extensions (advanced)</summary>
 
 By default, the JavaScript Web library only loads the core functionality. It lazy-loads extensions such as surveys or the session replay 'recorder' when needed. 
@@ -92,7 +92,7 @@ posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', default
 
 </details>
 
-<details>
+<details id="disable-in-development">
 <summary>Don't want to send test data while developing?</summary>
 
 If you don't want to send test data while you're developing, you can do the following:
@@ -104,7 +104,7 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 ```
 
 </details>
-<details>
+<details id="defaults-option">
 <summary>What is the `defaults` option?</summary>
 
 The `defaults` is a date, such as `2025-11-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.

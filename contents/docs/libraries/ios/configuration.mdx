@@ -226,7 +226,7 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/f
 | `captureElementInteractions`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | (UIKit only) Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen. |
 | `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Send a `$feature_flag_called` event when a feature flag is used automatically. |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Preload feature flags automatically. |
-| `evaluationEnvironments`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. |
+| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 3.34.0+. The legacy parameter `evaluationEnvironments` (version 3.33.0+) is also supported for backward compatibility. |
 | `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Logs the SDK messages into Logcat. |
 | `optOut`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevents capturing any data if enabled. |
 | `getAnonymousId`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for modification of the default mechanism for generating anonymous id (which as of now is just random UUID v7). |
