@@ -439,7 +439,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/lily_d_lmarena_7ce598fc8c.jpeg',
                 },
                 products: {
-                    product_analytics: '.',
+                    product_analytics:
+                        'As a marketer, it’s so important to understand what top-of-funnel looks like, and which KPIs the company actually cares about. All of that data lives in PostHog. It’s our source of truth for company performance.',
                 },
             },
         },
