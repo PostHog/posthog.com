@@ -66,6 +66,26 @@ Delays help you control the timing of your messages. There are 3 types of delays
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
+### How "Wait until condition" works
+
+The **Wait until condition** block periodically re-evaluates your condition until it's met or the wait time expires. It's important to understand what data is checked:
+
+**What the condition evaluates against:**
+- **Person properties** – Fresh values are re-fetched from the database on each check. This is ideal for conditions like "wait until `onboarding_completed` is `true`" since person properties can be updated by other parts of your application.
+- **Workflow variables** – Current values that may have been updated by previous workflow actions.
+- **The original trigger event** – The event properties from when the workflow started (these don't change).
+
+**What the condition does NOT do:**
+- It does **not** wait for new events to come in. If you need to react to a specific event being captured, use an [event trigger](#event-triggers) in a separate workflow instead.
+- It does **not** monitor for new events with matching properties.
+
+**How the re-evaluation works:**
+- The condition is checked periodically (approximately every 10 minutes) until either:
+  - The condition is met → the workflow continues down the "match" branch
+  - The maximum wait time is reached → the workflow continues down the "no match" branch
+
+This makes "Wait until condition" perfect for scenarios where you're waiting for a person property to change (e.g., waiting for a user to complete onboarding, upgrade their plan, or verify their email).
+
 ## Audience splits
 
 Audience splits help you target your automation or messages to specific groups of users. There are 2 types of audience splits:
