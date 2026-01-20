@@ -10,9 +10,9 @@ export const logs = {
     colorSecondary: 'purple',
     // category not set - hidden from navigation/products until full marketing content added
     slider: {
-        marks: [50, 100, 500, 1000, 5000],
-        min: 50,
-        max: 5000,
+        marks: [50000, 100000, 500000, 1000000, 5000000],
+        min: 50000,
+        max: 5000000,
     },
-    volume: 50,
+    volume: 50000,
 }
