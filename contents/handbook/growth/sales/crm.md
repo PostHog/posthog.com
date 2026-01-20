@@ -8,7 +8,8 @@ showTitle: true
 
 We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as our customer relationship management ('CRM') platform. If you need access, you can ask <TeamMember name="Mine Kansu" photo /> for an invite.
 
-As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
+As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. 
+Next, make sure your Gmail account is connected in <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally</PrivateLink>. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
 
 As a general principle, we try to make sure as much customer communication as possible is captured in Salesforce rather than in individual email inboxes so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We’ve found Slack messages usually get better response rates than email.
 
@@ -132,6 +133,12 @@ If you receive a lead for a self serve customer who has used the Sales Contact F
 
 This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
 
+### Below Sales Assist Threshold
+
+If you determine a lead is not a fit for hands on sales engagement, you can mark the task as **Below Sales Assist Threshold - Auto Emails**.
+
+When you do this, it triggers an automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>. These emails help guide them through a self-serve onboarding path without requiring manual outreach.
+
 ### Spam
 
 These mostly come into the sales inbox rather than the contact form. Whilst there is a `Spam` disqualification reason in Salesforce we can also prevent users from emailing the group again by banning them in the [Sales Google Group](https://groups.google.com/a/posthog.com/g/sales/banned-users). If you do ban someone bear in mind they won't be able to email our sales email until the ban is lifted so only use this for genuine spam (e.g. people trying to sell us competitor user lists).
@@ -214,12 +221,40 @@ You can also create an opportunity directly from scratch, but make sure to conne
 Stages will differ depending on the chosen Opportunity Record Type. The following stages are for the New and Existing Business Record Types:
 
 1. Problem Agreement - Buyer explicitly acknowledges they have a meaningful problem that can be qualified (e.g. "What happens if you don't solve this problem?")
+Exit criteria:
+-   **Identified & implicated pain with specific, quantifiable metrics (time/money/risk)**
+-   Answer to "What happens if you do nothing?" documented with real consequence
+-   Buyer explicitly said "This is a problem we need to solve" (not just "interesting")
+
 2. Solution Agreement - Buyer confirms our solution is best suited to solve their problem. Can be as simple as "We think PostHog will work for us"
+Exit criteria:
+-   **Active product usage OR completed POC/trial**
+-   **Clear, documentable decision made for PostHog (with or without comparing alternatives)**
+-   Economic Buyer identified (name + title)
+-   Champion identified (name)
+
 3. Priority Agreement - A senior decision-maker acknowledges the problem as a priority and validates our solution.
+Exit criteria:
+-   **Budget confirmed (amount range OR "yes, funded")**
+-   **Decision process mapped (who approves, what steps, timeline)**
+-   Economic Buyer said this is a priority (exact quote documented)
+-   Champion tested (evidence they're advocating internally)
+-   Compelling event known (deadline: budget cycle, launch, renewal, etc.)
+
 4. Commercial Agreement - Mutual agreement is reached on price and all contractual terms.
+Exit criteria:
+-   **Price agreed in writing (email/quote with amount + terms)**
+-   **All commercial terms agreed (payment terms, contract length, prepaid amount)**
+-   **Paper process mapped (legal, security, procurement steps + owners + timeline)**
+
 5. Vendor Approval - Buyer completes internal processes (legal, security, procurement) and contract is executed.
+Exit criteria:
+-   **Contract signed**
+
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
 ### Forecast categories
 

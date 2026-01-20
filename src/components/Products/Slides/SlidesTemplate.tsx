@@ -5,6 +5,7 @@ import ScalableSlide from 'components/Presentation/ScalableSlide'
 import ResponsiveSlideContent from 'components/Presentation/ResponsiveSlideContent'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
+import { useProductInterest } from 'hooks/useProductInterest'
 import { docsMenu } from '../../../navs'
 import SlideThumbnails from './SlideThumbnails'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
@@ -30,6 +31,7 @@ import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './create
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
+import VideosSlide from './VideosSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -40,6 +42,7 @@ interface SlidesTemplateProps {
         description?: string
         image?: string
     }
+    rightActionButtons?: React.ReactNode
 }
 
 export const SlideContainer = ({ children }: { children: React.ReactNode }) => {
@@ -51,9 +54,13 @@ export default function SlidesTemplate({
     data,
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
+    rightActionButtons,
 }: SlidesTemplateProps) {
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
+
+    // Track product interest for cross-subdomain cookie
+    useProductInterest(productData?.slug)
 
     // Process slide configuration
     let processedSlideConfig = slideConfig
@@ -374,6 +381,9 @@ export default function SlidesTemplate({
             case 'posthog-on-posthog':
                 return <PostHogOnPostHogSlide productData={productData} {...props} />
 
+            case 'videos':
+                return <VideosSlide productData={productData} {...props} />
+
             case 'comparison-summary':
                 return (
                     <ComparisonSummarySlide
@@ -563,6 +573,7 @@ export default function SlidesTemplate({
                 } else if (feature.template === 'splitImage') {
                     featureContent = (
                         <FeaturesSplitWithImage
+                            className={feature.className}
                             bgColor={productData?.color}
                             textColor={productData?.overview?.textColor}
                             headline={feature.headline}
@@ -647,6 +658,7 @@ export default function SlidesTemplate({
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
             <Presentation
+                rightActionButtons={rightActionButtons}
                 template="generic"
                 slug={productData?.slug}
                 title=""

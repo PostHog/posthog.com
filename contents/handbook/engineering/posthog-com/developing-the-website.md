@@ -31,9 +31,9 @@ Below, we'll explain the two options for option two.
 
     When completed, press any key.
 
-1. In terminal, type `yarn && yarn start` and hit [Enter].
+1. In terminal, type `pnpm install && pnpm start` and hit [Enter].
 
-    ![yarn start](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_yarn_b02a89ed6b.png)
+    ![pnpm start](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_yarn_b02a89ed6b.png)
 
     - This will take a while. The last step of the process is "Building development bundle" which will take a few minutes on its own.
     - You may see a dialog that says, "Your application running on port 8001 is available." Don't be enticed by the big green button quite yet.
@@ -89,7 +89,7 @@ In order to run the PostHog website locally, you need the following installed:
 
 -   [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) – version control system
 -   [Node.js](https://nodejs.org/en/download/) (version 22.x) – server runtime
--   [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.js
+-   [pnpm](https://pnpm.io/installation) (version 10.x) – package manager for Node.js
 -   [Apple Rosetta](https://support.apple.com/en-gb/HT211861) (version 2) – dynamic binary translator for Apple silicon
 
 If you are unfamiliar with using Git from the command line (or just prefer graphical interfaces), use the [GitHub Desktop app](https://desktop.github.com/).
@@ -143,7 +143,7 @@ To work on it locally, first you need to clone it to your disk:
 
 ### Running posthog.com locally
 
-If you're using an Apple Silicon Mac (M1+) then you'll need to run the following commands before using yarn:
+If you're using an Apple Silicon Mac (M1+) then you'll need to run the following commands before using pnpm:
 
 ```bash
 rm -rf ./node_modules
@@ -153,27 +153,27 @@ brew install vips
 Type the following into the command line and press return:
 
 ```bash
-yarn
+pnpm install
 ```
 
-This runs the Yarn tool. When run standalone like this, it installs the dependency packages used by posthog.com. This may take a few minutes.
+This installs the dependency packages used by posthog.com. This may take a few minutes.
 
 After initial setup, use the following command to start the development server:
 
 ```bash
-yarn && yarn start
+pnpm install && pnpm start
 ```
 
 This runs the local clone of the website, which you can use to preview changes you make before pushing them live. It takes a bit of time for some file processing and compilation to take place, but once it's completed you can access the locally running version of posthog.com via by visiting `http://localhost:8001` in your web browser.
 
-Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `yarn start` again, wait for the command to finish running and then open `http://localhost:8001` in your web browser.
+Any time you want to preview changes you are making to the local version of the website, all you have to do is run the `pnpm start` again, wait for the command to finish running and then open `http://localhost:8001` in your web browser.
 
 **Troubleshooting**
 
 If the server fails to start, the first troubleshooting step is to clear cache. You can do this (and start the server again) by running:
 
 ```bash
-yarn clean && mkdir .cache && yarn && yarn start
+pnpm clean && mkdir .cache && pnpm install && pnpm start
 ```
 
 ### Environment variables
@@ -538,7 +538,7 @@ After a series of checks are run (to ensure nothing in your pull request breaks 
 
 An initial build can take up to 50 minutes to run. After the initial build, subsequent builds should complete in under ~15 minutes. We're limited to two concurrent builds, so if there's a backlog, this process can take longer.
 
-Because Vercel charges per seat, we don't automatically invite all team members to our Vercel account. If your build fails, you can run `yarn build` locally to see what's erroring out. If nothing is erroring locally, it's likely the build timed out in Vercel. The Website & Docs team monitors for failed builds, so they'll re-run it for you. If the build is urgent, give a shout in #team-website-and-docs and someone with Vercel access can trigger a rebuild for you.
+Because Vercel charges per seat, we don't automatically invite all team members to our Vercel account. If your build fails, you can run `pnpm build` locally to see what's erroring out. If nothing is erroring locally, it's likely the build timed out in Vercel. The Website & Docs team monitors for failed builds, so they'll re-run it for you. If the build is urgent, give a shout in #team-website-and-docs and someone with Vercel access can trigger a rebuild for you.
 
 ![Preview branch](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/preview-branch.png)
 
@@ -547,6 +547,40 @@ Because Vercel charges per seat, we don't automatically invite all team members 
 ## Deployment
 
 To get changes into production, the website deploys automatically from `master`. The build takes up to an hour, but can be delayed if other preview builds are in the queue.
+
+## Product interest tracking for onboarding
+
+We track which products users have shown interest in by visiting product landing pages or docs. This data is stored using PostHog's `cookie_persisted_properties` feature, making it available across all posthog.com subdomains (including app.posthog.com) for onboarding personalization.
+
+### How it works
+
+When a user visits a product-specific page (like `/product-analytics` or `/docs/session-replay`), we record that product's slug using `posthog.register()` with the property `prod_interest`. This property is configured in `cookie_persisted_properties` in `gatsby/onPreBoostrap.ts`, which means it gets stored in a cross-subdomain cookie automatically.
+
+To read the interests, we use `posthog.get_property('prod_interest')` which returns an array of product slugs like `["product-analytics", "session-replay"]`.
+
+We always store the most recent interests last in the array.
+
+### Code structure
+
+The tracking is implemented in:
+
+- `src/lib/productInterest.ts` - Core utilities using `posthog.get_property()` and `posthog.register()`
+- `src/hooks/useProductInterest.ts` - React hooks for tracking
+- `src/components/Products/Slides/SlidesTemplate.tsx` - Integration for product landing pages
+- `src/templates/Handbook.tsx` - Integration for docs pages
+
+### Reading interests on app.posthog.com
+
+Since this uses PostHog's built-in cookie persistence, you can read the interests on any subdomain where PostHog is initialized:
+
+```javascript
+const interests = posthog.get_property('prod_interest') || []
+// interests = ["product-analytics", "session-replay", ...]
+```
+
+### Expanding usage
+
+Everything is usually automatically handled because our website is well-structured but if you want to start tracking interest for new products you'll need to add a new entry to `PRODUCT_SLUGS` in `src/lib/productInterest.ts`
 
 #### Acknowledgements
 

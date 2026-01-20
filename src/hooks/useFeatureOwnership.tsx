@@ -115,6 +115,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Dashboards',
         owner: ['product-analytics', 'analytics-platform'],
     },
+    'dashboard-templates': {
+        feature: 'Dashboard templates',
+        owner: ['analytics-platform'],
+    },
     'data-colors-themes': {
         feature: 'Data colors & themes',
         owner: ['analytics-platform'],
@@ -146,6 +150,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['feature-flags'],
         label: 'feature/feature-flags',
     },
+    endpoints: {
+        feature: 'Endpoints',
+        owner: ['data-stack'],
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -159,13 +167,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feature flags',
         owner: ['feature-flags'],
     },
+    feed: {
+        feature: 'Feed',
+        owner: ['growth'],
+    },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['customer-analytics'],
     },
     heatmaps: {
         feature: 'Heatmaps',
-        owner: ['replay'],
+        owner: ['web-analytics'],
     },
     hogql: {
         feature: 'HogQL',
@@ -206,16 +218,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: [],
         notes: (
             <>
-                <TeamMember name="David Newell" photo />
+                Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks
+                is owned by product analytics)
             </>
         ),
+        owner: ['platform-features'],
+        label: 'feature/notebooks',
     },
     onboarding: {
         feature: 'Onboarding',
         owner: ['growth'],
+    },
+    'organization-management-deletion': {
+        feature: 'Organization Management & Deletion',
+        owner: ['platform-features'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -367,6 +385,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/sessions',
     },
+    'session-explorer': {
+        feature: 'Session explorer',
+        owner: ['web-analytics'],
+        label: 'feature/session-explorer',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
@@ -403,6 +426,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Table exports',
         owner: ['analytics-platform'],
     },
+    terraform: {
+        feature: 'Terraform integration',
+        owner: ['analytics-platform'],
+        label: 'feature/terraform',
+    },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
         owner: ['platform-ux'],
@@ -429,6 +457,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['workflows'],
         label: 'feature/pipelines',
     },
+    'weekly-digest': {
+        feature: 'Weekly digest',
+        owner: ['growth'],
+    },
     workflows: {
         feature: 'Workflows',
         owner: ['workflows'],
@@ -436,7 +468,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: ['content'],
+        owner: ['docs-wizard'],
     },
 }
 

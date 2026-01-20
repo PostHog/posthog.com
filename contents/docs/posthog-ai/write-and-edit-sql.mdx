@@ -1,0 +1,37 @@
+---
+title: Write and edit SQL with PostHog AI
+---
+
+import WistiaEmbed from 'components/WistiaEmbed'
+
+This guide shows you how the PostHog team uses PostHog AI to write and edit SQL queries. It includes a video demo and the prompts used to explore data directly within our SQL editor and [data warehouse](/docs/data-warehouse).
+
+This demo example uses our own internal PostHog project. The results will differ based on your project's specific setup and the data that's available to PostHog AI.
+
+## Video demo
+
+<WistiaEmbed mediaId="syysfftbzk" className="mb-5" />
+
+<Caption>
+How PostHog uses PostHog AI to write and edit SQL
+</Caption>
+
+## Conversation with PostHog AI
+
+Here's the full conversation with PostHog AI.
+
+**Prompt #1**
+
+> Last 10 Stripe charges.
+
+**Prompt #2**
+
+> All charges last 14 days with email.
+
+**Prompt #3**
+
+> Make this query a CTE and bring in refunds as another CTE. Match the select values and union them for the result.
+
+**Prompt #4**
+
+> In Stripe data, what’s the net amount charged and refunded in the last 7 days.

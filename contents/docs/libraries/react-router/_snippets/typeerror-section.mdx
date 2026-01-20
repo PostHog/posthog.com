@@ -1,0 +1,16 @@
+If you see the error `TypeError: Cannot read properties of undefined (reading '...')` this is likely because you tried to call a posthog function when posthog was not initialized (such as during the initial render). On purpose, we still render the children even if PostHog is not initialized so that your app still loads even if PostHog can't load.
+
+To fix this error, add a check that posthog has been initialized such as:
+
+```react
+useEffect(() => {
+  posthog?.capture('test') // using optional chaining (recommended)
+
+  if (posthog) {
+    posthog.capture('test') // using an if statement
+  }
+}, [posthog])
+```
+
+Typescript helps protect against these errors.
+

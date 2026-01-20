@@ -67,7 +67,7 @@ To write your own, we also recommend copying one of the <PrivateLink url="https:
 
 We use SQL queries to analyze activation. In addition, we track product intents and activation in the code. We do this so that in the future we could act on this, e.g. someone showed intent, but they didn't activate? Show them in an-app banner or send them an email.
 
-To add a new product to this, you can add the activation criteria [here](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
+To add a new product to this, you can add the activation criteria in the [product intent model](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
 
 This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
 

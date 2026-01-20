@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CroissantLogo from '../images/customers/croissant-light.png'
+import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
@@ -30,6 +32,8 @@ import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
+import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
+import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
@@ -47,6 +51,7 @@ import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
 import useProducts from './useProducts'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import { posthog_ai } from './productData/posthog_ai'
 
 export interface Customer {
     slug: string
@@ -266,12 +271,12 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'llm_analytics',
             'data_warehouse',
         ],
-        industries: ['Business', 'SaaS'],
+        industries: ['SaaS'],
         users: ['Data', 'Product', 'Marketing'],
         notes: 'AI compliance and grant writing',
         featured: false,
         logo: GrantableLogo,
-        height: 8,
+        height: 6,
         quotes: {
             evan_ralliss: {
                 name: 'Evan Ralliss',
@@ -282,6 +287,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 products: {
                     workflows:
                         'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
+                },
+            },
+        },
+    },
+    croissant: {
+        name: 'Croissant',
+        toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
+        industries: ['SaaS'],
+        users: ['Growth', 'Product', 'Marketing'],
+        notes: 'Workspace finder',
+        featured: false,
+        logo: {
+            light: CroissantLogo,
+            dark: CroissantLogoDark,
+        },
+        height: 6,
+        quotes: {
+            jorge_lopez: {
+                name: 'Jorge López',
+                role: 'Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
+                },
+                products: {
+                    workflows:
+                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
             },
         },
@@ -525,6 +556,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: RaycastLogo,
         featured: true,
         height: 12,
+    },
+    rayfit: {
+        name: 'RayFit',
+        toolsUsed: ['product_analytics', 'experiments', 'feature_flags', 'data_warehouse', 'posthog_ai'],
+        industries: ['Fitness'],
+        users: ['Product', 'Engineering'],
+        notes: 'AI personal training app',
+        quotes: {
+            alan_yang: {
+                name: 'Alan Yang',
+                role: 'Full Stack Engineering Leader',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alan_yang_1611287c98.png',
+                },
+                products: {
+                    posthog_ai:
+                        "We're evolving our data model and events all the time, so having an easy way to explore what's there is incredibly valuable. PostHog AI helps our product engineers build dashboards without needing to understand PostHog in depth — and it gives them real ownership over feature performance.",
+                },
+            },
+        },
+        logo: {
+            light: RayfitLogoLight,
+            dark: RayfitLogoDark,
+        },
+        featured: false,
+        height: 6,
     },
     rebtel: {
         name: 'Rebtel',

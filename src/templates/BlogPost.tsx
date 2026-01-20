@@ -284,8 +284,17 @@ const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
-    const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, tags, seo } =
-        postData?.frontmatter
+    const {
+        date,
+        title,
+        featuredImage,
+        featuredImageCaption,
+        featuredVideo,
+        featuredImageType,
+        contributors,
+        tags,
+        seo,
+    } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const category = postData?.parent?.category
@@ -382,6 +391,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             />
 
             <ReaderView
+                showAbout
                 leftSidebar={
                     <>
                         <Filters tag={tag} setTag={setTag} sort={sort} setSort={setSort} activeMenu={activeMenu} />
@@ -419,6 +429,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                     type: 'mdx',
                     content: body,
                     featuredImage,
+                    featuredImageCaption,
                     contributors,
                     date,
                     featuredVideo,
@@ -477,6 +488,7 @@ export const query = graphql`
                         gatsbyImageData
                     }
                 }
+                featuredImageCaption
                 contributors: authorData {
                     id
                     name

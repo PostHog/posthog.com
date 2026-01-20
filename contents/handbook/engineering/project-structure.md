@@ -10,164 +10,88 @@ showTitle: true
 
 ```
 .
-├── .github
-├── .platform
-├── bin
-├── cypress
-├── ee  
-├── frontend
-│   └── public
+├── bin              # Shell scripts for building, testing, and running PostHog
+├── common           # Shared code: PostHog SQL parser, HogVM, shared UI packages
+├── ee               # Enterprise platform package features (separate license)
+├── frontend         # React/TypeScript frontend application
 │   └── src
-│       └── layout
-│       └── lib
-│       └── models
-│       └── scenes
-│       └── style
-│       └── toolbar
-├── livestream
-├── posthog
-│   └── api
-│   └── management
-│   └── migrations
-│   └── models
-│   └── queries
-│   └── tasks
-│   └── templates
-│   └── test
-└── requirements
+│       └── layout   # App layout components (navigation, sidebars)
+│       └── lib      # Reusable components and utilities
+│       └── scenes   # Page-specific components
+│       └── queries  # Query builder components
+│       └── toolbar  # PostHog Toolbar code
+├── livestream       # Golang service for live events API
+├── playwright       # End-to-end tests using Playwright
+├── plugin-server    # Node.js service for event ingestion and plugins
+├── posthog          # Django backend application
+│   └── api          # REST API endpoints
+│   └── clickhouse   # ClickHouse database interactions
+│   └── hogql        # HogQL query language implementation
+│   └── models       # Django ORM models
+│   └── tasks        # Celery background tasks
+├── products         # Product-specific code (vertical slices)
+└── rust             # High-performance Rust services
 
 *Selected subdirectories only
-
 ```
 
-## `.github`
+## Key directories
 
-Directory for our GitHub actions and templates for issues and pull requests.
+### `frontend`
 
-## `.platform`
+The PostHog web application, built with React and TypeScript. Uses [Kea](https://github.com/keajs/kea) for state management.
 
-Scripts for deploying to Platform.sh.
+- `src/lib` – Reusable components and utilities
+- `src/scenes` – Page-specific components organized by feature
+- `src/queries` – Query builder and data visualization components
+- `src/toolbar` – Code for the [PostHog Toolbar](/docs/user-guides/toolbar)
 
-## `bin`
+### `posthog`
 
-Executable shell scripts for various purposes, most notably building, testing, and running PostHog.
+The Django backend application. Key subdirectories:
 
-## `cypress`
+- `api` – REST API endpoints and serializers
+- `clickhouse` – ClickHouse schema definitions and migrations
+- `hogql` – PostHog SQL query language compiler and executor
+- `models` – Django ORM models (PostgreSQL)
+- `tasks` – Celery background tasks
 
-Hosts our [Cypress](https://www.cypress.io/) tests. When writing tests that use Cypress, you will mostly be working on the `integration/` subdirectory. Remember that you should always be including tests if you are making a significant change to our frontend.
+### `products`
 
-## `ee`
+Product-specific code organized as **vertical slices**. Each product folder contains its own backend (Django app), frontend (React), and optionally shared code. This structure allows features to evolve independently.
 
-Enterprise Edition features for PostHog. This subdirectory is the only subdirectory not MIT-Licensed in the [PostHog/posthog](https://github.com/PostHog/posthog) repository, and a license is needed to use its features. To use PostHog with 100% FOSS code, refer to our [PostHog/posthog-foss](https://github.com/PostHog/posthog-foss) repository.
+See the [products README](https://github.com/PostHog/posthog/blob/master/products/README.md) for detailed conventions.
 
-## `frontend`
+### `plugin-server`
 
-Hosts the PostHog frontend, built with React.
+Node.js service responsible for:
+- Event ingestion and processing
+- Running plugins and data pipelines
+- Webhook delivery
 
-### Subdirectories
+### `rust`
 
-#### `public`
+High-performance Rust services including:
+- `capture` – Event capture endpoint
+- `feature-flags` – Feature flag evaluation
+- `cymbal` – Error tracking symbolication
+- Various workers and utilities
 
-PostHog logos to be used by the app.
+### `common`
 
-#### `src`
+Shared code used across the codebase:
+- `hogql_parser` – PostHog SQL parser (C++)
+- `hogvm` – Hog virtual machine
+- `tailwind` – Shared Tailwind configuration
 
-Code for the frontend.
+### `ee`
 
-##### `src/layout`
+Enterprise edition licensed features. This directory has a [separate license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE) - not MIT. For 100% FOSS code, see [PostHog/posthog-foss](https://github.com/PostHog/posthog-foss).
 
-Components referring to the overall PostHog app layout, such as sections of the app used in most pages, like `Sidebar.js`.
+### `playwright`
 
-##### `src/lib`
+End-to-end tests using [Playwright](https://playwright.dev/). Tests live in the `e2e/` subdirectory.
 
-Various components used all around the PostHog app. Reusable components will most likely be placed in this subdirectory, such as buttons, charts, etc.
+### `livestream`
 
-##### `src/models`
-
-[Kea](https://github.com/keajs/kea) models for the app's state. 
-
-##### `src/scenes`
-
-Components referring to specific pages of the PostHog app. Mostly non-reusable. 
-
-##### `src/styles`
-
-[Sass](https://sass-lang.com/) files for the PostHog app's style.
-
-##### `toolbar`
-
-All code related exclusively to the [PostHog Toolbar](/docs/user-guides/toolbar).
-
-## `livestream`
-
-The live events API, a Golang service (used in the Live tab of Activity in the app).
-
-## `posthog`
-
-Hosts the PostHog backend, built with Django.
-
-### Subdirectories
-
-#### `api`
-
-Subdirectory for PostHog's REST API. Includes its own tests.
-
-#### `management`
-
-Custom [Django management commands](https://docs.djangoproject.com/en/3.1/howto/custom-management-commands/). Commands defined here are registered as `manage.py` commands and can be called with:
-
-```bash
-./manage.py <your_command_here>
-# or
-python manage.py <your_command_here>
-```
-
-These commands are for admin use only, and generally refer to the configuration of your Django app.
-
-#### `migrations`
-
-Hosts the database migrations which occur when there are changes to the models. If you make any changes to the app's ORM, you need to first make migrations: 
-```
-python manage.py makemigrations
-```
-
-And after making your own migrations or running `git pull` after new migrations, you also need to apply them:
-```
-python manage.py migrate
-```
-
-#### `ClickHouse Migrations`
-
-To create boilerplate for clickhouse migrations use 
-```
-python manage.py create_ch_migration --name <name of migration>
-```
-
-To apply clickhouse migrations use
-```
-python manage.py migrate_clickhouse
-```
-
-#### `models`
-
-Subdirectory for the models ([Django ORM](https://docs.djangoproject.com/en/3.1/topics/db/models/)). Interactions with our database are handled by these models. 
-
-#### `queries`
-
-Hosts the queries used to query data from our database, which will be used by our various features, such as [Retention](/docs/user-guides/retention) and [Trends](/docs/user-guides/trends). 
-
-#### `tasks`
-
-Celery tasks that happen in the "background" of the server to enhance PostHog's performance by preventing long processes from  blocking the main thread. An example of task is processing events as they come in. 
-
-#### `templates`
-
-[Django templates](https://docs.djangoproject.com/en/3.1/topics/templates/) used to generate dynamic HTML. We use templates for pages such as `/login` and `/setup_admin`. 
-
-#### `test`
-
-Subdirectory hosting our backend tests. You should always include tests when you make changes to our backend. 
-
-### `requirements`
-
-Hosts our backend's dev requirements. 
+Golang service powering the live events feed in the **Activity** tab.

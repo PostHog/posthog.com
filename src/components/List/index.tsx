@@ -1,6 +1,7 @@
 import Link from 'components/Link'
 import React, { useEffect, useState } from 'react'
 import * as NewIcons from '@posthog/icons'
+import * as OSIcons from 'components/OSIcons'
 
 interface IItem {
     label: string | React.ReactNode
@@ -25,7 +26,7 @@ export const ListItem = ({
     lineClamp = 1,
     children,
 }: IItem): JSX.Element => {
-    const Icon = icon && NewIcons[icon]
+    const Icon = icon && (NewIcons[icon as keyof typeof NewIcons] || OSIcons[icon as keyof typeof OSIcons])
     const [open, setOpen] = useState(false)
     const ref = React.useRef<HTMLLIElement>(null)
 
@@ -55,13 +56,7 @@ export const ListItem = ({
             >
                 <span className="flex items-center space-x-2">
                     {image && <img className="icon size-8 rounded-sm" src={image} />}
-                    {Icon && (
-                        <Icon
-                            className={`size-8 ${
-                                iconColor ? `text-${iconColor} bg-${iconColor} bg-opacity-20` : `bg-accent`
-                            }  rounded-sm shrink-0`}
-                        />
-                    )}
+                    {Icon && <Icon className={`size-8 ${iconColor ? `text-${iconColor}` : ``} shrink-0`} />}
 
                     <span className="grid">
                         <span className="overflow-hidden text-ellipsis whitespace-nowrap">{label}</span>

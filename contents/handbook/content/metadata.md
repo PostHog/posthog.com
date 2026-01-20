@@ -60,7 +60,7 @@ tags:
 ---
 ```
 
-> **Note:** Each handle in the `author` field must match a handle in the `authors.json` file. If you're a first-time author, add yourself to `authors.json` [here](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json) using this format:
+> **Note:** Each handle in the `author` field must match a handle in the `authors.json` file. If you're a first-time author, add yourself to `authors.json` in the [authors data file](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json) using this format:
 > ```json
 > {
 >   "handle": "your-handle", // This is what you'll use in the author field

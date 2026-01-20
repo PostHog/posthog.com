@@ -6,7 +6,7 @@ availability:
   enterprise: full
 ---
 
-import {ProductVideo} from'components/ProductVideo'
+import { ProductVideo } from 'components/ProductVideo'
 export const watchRecordingsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/how-to-watch-recordings-light-mode.mp4"
 export const watchRecordingsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/how-to-watch-recordings-dark-mode.mp4"
 export const createPlaylistLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/create-playlist-light-mode.mp4"
@@ -15,30 +15,104 @@ export const createPlaylistDark = "https://res.cloudinary.com/dmukukwp6/video/up
 To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) page or click on any data point in an insight. This opens a list of persons and displays a **Watch recording** button or **Recordings** tab if available. This is especially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and [watch recordings of users who converted or dropped off](/tutorials/explore-insights-session-recordings).
 
 <ProductVideo
-    videoLight={watchRecordingsLight} 
+    videoLight={watchRecordingsLight}
     videoDark={watchRecordingsDark}
-    alt="How to watch recordings via insights" 
+    alt="How to watch recordings via insights"
     classes="rounded"
 />
 
-When watching replays, you can:
+<Caption>
+    How to watch recordings via insights
+</Caption>
 
-1. Change the playback speed, as well as select the option **Skip inactivity** which skips parts of the recording where the user was inactive on the page.
+## When watching replays, you can:
 
-2. Open the activity panel to see a list of all the events that happened during the recording. This also lets you see the network waterfall, page performance score, asset breakdown, and more.
+1. Choose whether to watch just one of your user's windows, or follow user activity between windows
 
-3. Click **Inspect DOM** to interact with the DOM of the page. It may not be 100% accurate, but should be close enough to help you debug. You can interact with the content below but most things won't work as it is only a snapshot of your app. Use your browser's developer tools (`CMD`+`Opt`+`I` on Mac and `Ctrl`+`Shift`+`I` on PC for Chrome) to inspect the content.
+2. Share the private link to the recording, create a public link, or link the recording in an issue in a tool like Linear or GitHub
 
-4. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team. You can also add emojis to the timeline to highlight specific parts.
+3. Add the recording to a collection so you can find it easily in future
 
-5. Enter cinema and fullscreen mode to remove the UI elements and focus on the recording.
+4. Open the activity panel to see a list of all the events that happened during the recording. This also lets you see the network waterfall, page performance score, asset breakdown, and more.
+
+5. Click **Inspect DOM** to interact with the DOM of the page. It may not be 100% accurate, but should be close enough to help you debug. You can interact with the content below but most things won't work as it is only a snapshot of your app. Use your browser's developer tools (`CMD`+`Opt`+`I` on Mac and `Ctrl`+`Shift`+`I` on PC for Chrome) to inspect the content.
+
+6. Use the HTML from the session recording as the background to view your heatmap data
+
+7. Change the playback speed, as well as select the option **Skip inactivity** which skips parts of the recording where the user was inactive on the page
+
+8. Play, pause, and seek through the recording. Hold `alt` to switch the seek buttons to seek in 1 millisecond steps
+
+9. Switch the timestamp view between "relative" (seconds in recording), UTC, and project timezone
+
+10. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team
+
+11. Add emoji reactions by pressing **e** or clicking the **emoji quick reaction** button
+
+12. Take a screenshot by pressing **s** or clcking the **screenshot** button
+
+13. Create a short gif clip around the current timestamp by pressing **x** or the **clip** button
+
+14. Skip to the next recording in a playlist or collection by pressing **n** or the **play next** button
+
+15. Enter cinema mode to focus on the recording by pressing **t** or clicking the cinema mode button
+
+16. Enter fullscreen mode by pressing **f** or clicking the fullscreen button
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_13_41_15_2x_509d07cde3.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_13_40_58_2x_bbafdeed8d.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/light_player_annotated_b298e2b90e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/dark_player_annotated_bb1bf53d6a.png"
   alt="Everything you can do in session replay"
   classes="rounded"
 />
+
+## When watching a filter result or collection:
+
+1. Open the filter panel to find more recordings
+
+2. Ask PostHog AI to find recordings for you
+
+3. Choose whether to see all recordings, or to hide ones you or other people have watched
+
+4. Switch time display between "relative" (seconds in recording), UTC, or projet timezone
+
+5. Change sorting to see recordings by timestamp, activity, errors, and more
+
+6. Change the autoplay mode for the playlist. Switch it off, or automatically play the next newest or oldest recording
+
+7. Scan quick information about the recording
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/light_playlist_annotated_d7f45dda32.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/h_800,c_limit,q_auto,f_auto/dark_playlist_annotated_cf1718f7c6.png"
+  alt="Everything you can do in with a session replay playlist"
+  classes="rounded"
+/>
+
+<Caption>
+    Everything you can do in session replay
+</Caption>
+
+## Triage recordings with PostHog AI
+
+Have too many recordings to watch? PostHog AI can help you triage them for you.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4"
+    alt="PostHog AI chat summarizing session recordings"
+    classes="rounded border border-primary @md:max-w-[80%] mx-auto"
+    autoPlay={true}
+    background={false}
+/>
+
+<Caption>
+    PostHog AI summarizes your session recordings for you
+</Caption>
+
+You can ask PostHog AI to do the following:
+- [`Find sessions where users dropped off during checkout`](https://app.posthog.com/#panel=max:!Find%20sessions%20where%20users%20dropped%20off%20during%20checkout)
+- [`Summarize session replays where users got stuck`](https://app.posthog.com/#panel=max:!Summarize%20session%20replays%20where%20users%20got%20stuck)
+- [`Show recordings for users who triggered the rage click event`](https://app.posthog.com/#panel=max:!Show%20recordings%20for%20users%20who%20triggered%20the%20rage%20click%20event)
 
 ## How to create saved filters
 
@@ -48,7 +122,7 @@ To do so:
 
 1. Click **Show filters**.
 2. Create your filter with options for date, active duration, events, properties, console logs, and more.
-3. Once done, click **Add to "Saved filters"**. 
+3. Once done, click **Add to "Saved filters"**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_39_38_2x_6f98a05cfb.png"
@@ -56,6 +130,10 @@ To do so:
   alt="Saved filters in session replay"
   classes="rounded"
 />
+
+<Caption>
+    Saved filters in session replay
+</Caption>
 
 This will then be accessible to anyone in your project via the **Shared filters** tab and new replays will automatically be added to it.
 
@@ -71,6 +149,10 @@ To do so, click **+ Add to collection** next to the **Share** button on a replay
   alt="Session replay collection"
   classes="rounded"
 />
+
+<Caption>
+    Session replay collection
+</Caption>
 
 ## Capturing and sharing moments
 
@@ -88,6 +170,9 @@ Both features are available in the bottom right corner of the recording player a
   classes="rounded"
 />
 
+<Caption>
+    Screen capture and clip capture features in session replay
+</Caption>
 
 ## Further reading
 

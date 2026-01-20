@@ -56,9 +56,12 @@ Each team member is still responsible for booking their own flights.
 Some guidelines:
 
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
-- Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
+- Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going.
+- It can be useful to combine offsites but beware if you add too many people everything gets harder to arrange. There's no hard and fast rule here but the more people that are attending the more concrete you need to be on who is organising and why people are attending. It will be more work and you should be purposeful about it.
+- If the number of attendees is >10 actively consider if Kendal should be attending so there is a person attending whose only focus is making sure it goes well and everyone else can focus on the work of the offsite.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. Also, it's a good idea to have an expectation-setting session (can be async in a Figjam) to ensure everyone is on the same page about what the outcome/output of the offsite should be.
+- Choose a location that minimises layovers for attendees.
 - Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
 - You should do a [360 degree feedback session](/handbook/people/feedback#ground-rules). It can feel uncomfortable doing these, but almost everyone who's done one at PostHog has come out feeling better and with a whole host of things they can improve. These are best in person.
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
@@ -82,6 +85,8 @@ The budget for these trips is up to $2,000 per person in total. We ask team memb
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
+> On occasion during busy hiring peak time, we do recommend any team member involved in the interview process to dedicate at least one hour block per day during the offsites to accommodate candidate interviews so that this does not delay the hiring process on your team while you're away. Please coordinate directly with #team-talent if you have additional questions.
+
 ## Hedge House
 
 PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites and for in-person onboarding. We'd recommend using the Hedge House for small team offsites for cost and convenience reasons if you are in Europe. 
@@ -104,6 +109,14 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 - [Ruby Stella hotel](https://www.ruby-hotels.com/en/destinations/london/ruby-stella)
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
+
+## Border Control
+
+Quite often you will be required to travel to places where some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasize that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
+
+A successful strategy is usually to start off with a high-level purpose of your trip which is usually something like "hanging out with colleauges" or "I am here for a business meeting with colleauges", it is also usually advisable to only respond with a minimal amount, saying only what is necessary. If the agent asks for more details it's usually good to go into a bit more detail about the company structure "I work for a US tech company and I am based in [Insert your country] where I work remotely. I am here to do some in-person meetings with my colleagues for the next few days and I fly back on [insert date]". Sometimes the border patrol agent will ask more about the business, it's fine to give these details and be as honest about that as you would anybody else. If further details are required of the content of the trip, you can again give some context of how we like to lean into the benefits of in-person working and since most of your colleagues are based in the US, you are travelling their for a few days to meet in-person and will be returning home afterwards. 
+
+For all company offsites, it's best to describe this as a company gathering where you will be hanging out with colleagues for the week. Generally, it is best to avoid using the phrase "training" as this can also be confusing. 
 
 ## Travel insurance
 

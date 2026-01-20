@@ -11,7 +11,7 @@ The API is available for all users and instances. It contains two types of endpo
 
 1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project API key](https://app.posthog.com/project/settings) to handle the request.
 
-2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key. 
+2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key.
 
 > You must make API requests to the correct domain. On US Cloud, these are `https://us.i.posthog.com` for public endpoints and `https://us.posthog.com` for private ones. On EU Cloud, these are `https://eu.i.posthog.com` for public endpoints and `https://eu.posthog.com` for private ones. For self-hosted instances, use your self-hosted domain. Confirm yours by checking your PostHog instance URL.
 
@@ -23,13 +23,13 @@ import InstallAPI from '../integrate/_snippets/install-api.mdx'
 
 ## Rate limiting
 
-Private `GET`, `POST`, `PATCH`, `DELETE` endpoints are rate limited. Public POST-only endpoints are **not** rate limited. A rule of thumb for whether rate limits apply is if the personal API key is used for authentication. 
+Private `GET`, `POST`, `PATCH`, `DELETE` endpoints are rate limited. Public POST-only endpoints are **not** rate limited. A rule of thumb for whether rate limits apply is if the personal API key is used for authentication.
 
 There are separate limits for different kinds of resources.
 
 - For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
 
-- The [`query`](/docs/api/queries) endpoint has a rate limit of `2400/hour`. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports).
+- The [`query`](/docs/api/queries) endpoint has a rate limit of `2400/hour`. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports). For data-powered APIs or user-facing dashboards, [reach out to us](https://posthog.com/talk-to-a-human).
 
 - For [feature flag local evaluation](/docs/feature-flags/local-evaluation) (which is enabled in SDKs when you input a personal API key), the rate limit is `600/minute`.
 
@@ -39,7 +39,7 @@ There are separate limits for different kinds of resources.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 
-> **Want to use the PostHog API beyond these limits?** Email us at [sales@posthog.com](to:sales@posthog.com).
+> **Want to use the PostHog API beyond these limits?** [Reach out to us](https://posthog.com/talk-to-a-human) and tell us about your use case. We don't guarantee raising rate limits and might point you to some of our other products that are more appropriate for your use case.
 
 ## Responses
 
@@ -61,7 +61,7 @@ These limits apply to **the entire team** (i.e. all users within your PostHog or
 
 ```json
 {
-  "type": "validation_error", 
+  "type": "validation_error",
   "code": "invalid_project",
   "detail": "Invalid Project ID.",
   "attr": "project_id"
@@ -72,9 +72,9 @@ These limits apply to **the entire team** (i.e. all users within your PostHog or
 
 ```json
 {
-  "type": "validation_error", 
-  "code": "invalid_payload", 
-  "detail": "Malformed request data", 
+  "type": "validation_error",
+  "code": "invalid_payload",
+  "detail": "Malformed request data",
   "attr": null
 }
 ```
@@ -149,3 +149,12 @@ You can then just call the `"next"` URL to get the next set of results.
 - The maximum size of a POST request body is governed by `settings.DATA_UPLOAD_MAX_MEMORY_SIZE`, and is 20MB by default.
 
 - By default, the PostHog API returns results from the last project you visited in the UI. To override this behavior, you can pass in your project API key as a query parameter in the request like `api/event/?token=my_project_api_key`.
+
+## GitHub secret scanning
+
+PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
+
+- **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
+- **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+
+This provides an automatic layer of protection, but you should still follow best practices: never commit API keys to version control, use environment variables, and rotate keys if you suspect exposure.

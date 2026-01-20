@@ -16,7 +16,7 @@ There are two paths for creating the first version of a product: v0.1 or MVP (ev
 
 ### v0.1
 
-If we're attempting to reach parity on a product or feature with other competitors in the space – and there's a clear path toward how a product should work or look – there's no need to loop in a designer. You should make your best judgement, while leveraging our [design system](https://storybook.posthog.net) to build your feature.
+If we're attempting to reach parity on a product or feature with other competitors in the space – and there's a clear path toward how a product should work or look – there's no need to loop in a designer. You should make your best judgement, while leveraging our [design system](https://storybook.dev.posthog.dev) to build your feature.
 
 ### MVP
 

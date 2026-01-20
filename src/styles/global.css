@@ -85,7 +85,7 @@
             }
 
             > div {
-                @apply ml-2 mt-2 rounded;
+                @apply ml-2 mr-2 mt-2 rounded;
             }
 
             ul,
@@ -1973,6 +1973,14 @@ li.squeak-left-border {
     transform-style: preserve-3d;
 }
 
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
 .tw-tweet + .tw-tweet {
     @apply before:absolute before:w-px before:bg-border before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
 }
@@ -2578,4 +2586,59 @@ article.reader-view-content-container:has(.quest-sidebar) {
     iframe {
         @apply w-full aspect-video; /* attempt to make youtube videos full width with hopefully no negative consequences... */
     }
+}
+
+.product-description {
+    ul,
+    ol {
+        @apply mb-3 pl-4;
+
+        li {
+            @apply list-disc;
+        }
+    }
+}
+
+.mapboxgl-popup-content {
+    @apply !font-sans !shadow-2xl !rounded !p-0;
+
+    .mapboxgl-popup-close-button {
+        @apply hidden text-[1.5rem] top-2 right-2;
+    }
+}
+
+.ph-mapbox-popup .mapboxgl-popup-content {
+    /* match bg-primary (data-scheme='primary') */
+    background: rgb(253 253 248);
+    color: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+/* Dark mode match for bg-primary in dark scheme */
+.dark .ph-mapbox-popup .mapboxgl-popup-content {
+    background: rgb(30 31 35);
+}
+/* Mapbox tip triangle uses border-* colors, not background */
+.ph-mapbox-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: rgb(253 253 248) !important;
+}
+.ph-mapbox-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: rgb(253 253 248) !important;
+}
+.ph-mapbox-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: rgb(253 253 248) !important;
+}
+.ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: rgb(253 253 248) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    border-bottom-color: rgb(30 31 35) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: rgb(30 31 35) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: rgb(30 31 35) !important;
+}
+.dark .ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: rgb(30 31 35) !important;
 }

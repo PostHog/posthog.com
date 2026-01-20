@@ -9,17 +9,29 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <MigrationWarning />
 
-Managed migrations provide an automated way to migrate your historical data into PostHog without writing custom scripts.
+Managed migrations provide an automated way to migrate your historical data into PostHog.
 
 With managed migrations, you can import data from multiple sources:
 
 - **Direct imports**: Connect directly to Mixpanel or Amplitude using your API credentials
 - **S3 imports**: Upload your event data to an S3 bucket in JSONL format for automatic ingestion
 
+Always [run a test batch](#run-a-test-batch-first) in a test project before migrating events into your production project.
+
+Customers with large datasets or who need custom event transformations/event enrichment will need to export and preprocess data before it can be ingested.
+
+## Limitations
+
+**Managed migrations do not deduplicate events.** If a migration is paused or stopped, running another migration against the same data set will result in duplicate events.
+
+**Managed migrations are not for data enrichment.** This feature is designed to import historical events as-is, not to enrich or modify existing data before migrating to PostHog. If you need to transform or enrich events prior to import, use an S3 import and run your own transformation. See [Custom event transformations with S3](#custom-event-transformations-with-s3).
+
+**Large datasets are not fully "managed".** The Amplitude and Mixpanel export endpoints do not support exporting large datasets. For these cases you will need to import via [S3 imports](#s3-imports), requiring some work to get your events into the supported format (see [File format and compression](#file-format-and-compression)) and uploaded to S3.
+
 ## Getting started
 
 1. Go to the [managed migrations page](https://app.posthog.com/managed_migrations)
-2. Choose your import method (details about methods below)
+2. Choose your import method: [Direct imports](#direct-imports-mixpanel-amplitude) or [S3 imports](#s3-imports)
 3. Import data
 
 ## Direct imports (Mixpanel & Amplitude)
@@ -51,11 +63,11 @@ S3 imports are the most reliable and flexible way to migrate your data to PostHo
 
 You can upload uncompressed JSONL files using any supported content type — `posthog`, `amplitude`, or `mixpanel`. You may choose to run your own custom transformations and output PostHog‑shaped events (select the `posthog` content type), but you don’t have to — if you upload Amplitude or Mixpanel exports and select the matching content type, we’ll apply the same mappings as direct imports.
 
-This method gives you full control while still benefiting from automated ingestion. This method is ideal when you need:
+This method gives you full control while still benefiting from automated ingestion. It is ideal when:
 
-- Custom event transformations
-- To handle very large datasets
-- To migrate from platforms not supported by direct imports
+- You want to transform/enrich your events before ingesting them
+- Your dataset is large
+- You are migrating from a platform not supported by direct imports (Amplitude, Mixpanel)
 - Direct imports aren't working for your data set
 
 If you upload Amplitude or Mixpanel events to S3, select the matching content type and PostHog will apply the event and property mappings described in [Event transformations](#event-transformations). If you upload PostHog events, they are ingested as-is without source-specific remapping.
@@ -125,10 +137,6 @@ Once started, you can monitor your migration progress:
 If an unexpected error occurs during a migration, the job will be paused and the error message will be displayed in the migration dashboard. For transient issues (for example, upstream API rate limits or temporary availability problems), you can contact support using the **Data ingestion** topic to help resume or retry your job once the condition has cleared.
 
 If the error indicates your job is attempting to import too much data (for example, exceeding export size limits), consider switching to an [S3 import](#s3-imports), which is better suited for large migrations.
-
-## Best practices
-
-- **Test first**: Run a small test migration with a subset of your data against a new project. This ensures events have the desired schema without polluting your main project
 
 ## Event transformations
 
@@ -244,3 +252,18 @@ Example (simplified):
 Start with a small date range as a test migration to a fresh project to preview the transformed events and validate your mappings before running a full migration.
 
 </CalloutBox>
+
+## Best practices
+
+### Run a test batch first
+
+Before migrating your full dataset, we highly recommend you run a small test migration with a subset of your data against a new project. 
+
+1. **Create a test project** to avoid polluting your production data.
+2. **Migrate a small batch** of 10,000 events from a representative time period.
+3. **Validate the results**:
+   - Check that event names and properties are transformed correctly.
+   - Verify user identities are mapped as expected.
+   - Confirm no unexpected duplicates appear.
+   - Test any queries or dashboards you plan to use.
+4. **Only proceed with the full migration** once you've confirmed the test batch meets your requirements.

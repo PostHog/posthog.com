@@ -32,7 +32,7 @@ A session can span multiple tabs and windows, but only on the same browser and d
 
 Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js/config).
 
-> **Note:** If you are [migrating data](/docs/migrate) or [using a CDP](/docs/advanced/cdp), you may need to manually set the `$session_id` property if you want to query sessions or connect them to session replays. 
+> **Note:** If you are [migrating data](/docs/migrate) or [using a CDP](/docs/advanced/cdp), you may need to manually set the `$session_id` property if you want to query sessions or connect them to session replays.
 > If you are using the JavaScript Web SDK alongside your CDP, you can get this value by calling `posthog.get_session_id()`.
 
 ## Session properties
@@ -86,9 +86,9 @@ The easiest way to analyze a session is to view a [session replay](/docs/session
 [Web analytics](/docs/web-analytics) also gives you an easily accessible overview. The top section contains sessions, session duration, and bounce rate, while further down provides more details on entry paths, exit paths, top channels, device types, and more.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716841744/posthog.com/contents/images/docs/user-guides/sessions/web-light.png" 
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716841744/posthog.com/contents/images/docs/user-guides/sessions/web-light.png"
     imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716841744/posthog.com/contents/images/docs/user-guides/sessions/web-dark.png"
-    alt="Session data in web analytics" 
+    alt="Session data in web analytics"
     classes="rounded"
 />
 
@@ -103,18 +103,18 @@ This provides the count of unique sessions where the specified event occurred. T
 To do this, select **Unique sessions** from the aggregation dropdown.
 
 <ProductScreenshot
-    imageLight = {uniqueSessionLight} 
+    imageLight = {uniqueSessionLight}
     imageDark = {uniqueSessionDark}
-    alt="Session counts" 
+    alt="Session counts"
     classes="rounded"
 />
 
 This can then be used in a formula to understand things like the average number of sessions per user or the average number of events per session.
 
 <ProductScreenshot
-    imageLight = {sessionFormulaLight} 
+    imageLight = {sessionFormulaLight}
     imageDark = {sessionFormulaDark}
-    alt="Session formula" 
+    alt="Session formula"
     classes="rounded"
 />
 
@@ -123,9 +123,9 @@ This can then be used in a formula to understand things like the average number 
 You can use any of the session properties to filter your data. For example, to remove sessions that are shorter than 10 seconds, you can filter for sessions where duration is greater than 10 seconds.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716848579/posthog.com/contents/images/docs/user-guides/sessions/duration-light.png" 
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716848579/posthog.com/contents/images/docs/user-guides/sessions/duration-light.png"
     imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716848579/posthog.com/contents/images/docs/user-guides/sessions/duration-dark.png"
-    alt="Session duration filter" 
+    alt="Session duration filter"
     classes="rounded"
 />
 
@@ -134,9 +134,9 @@ You can use any of the session properties to filter your data. For example, to r
 You can plot session properties over time like you would with an event count. To do this, select one of the property aggregators (e.g. median, 90th percentile, etc.) and then select the session property to plot. For example, to plot the median session duration, select **Property value median** and then select **Session duration** as the property.
 
 <ProductScreenshot
-    imageLight = {medianDurationLight} 
+    imageLight = {medianDurationLight}
     imageDark = {medianDurationDark}
-    alt="Session median duration" 
+    alt="Session median duration"
     classes="rounded"
 />
 
@@ -149,7 +149,7 @@ This is useful for understanding entry URLs or UTMs. For example, to break down 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716849942/posthog.com/contents/images/docs/user-guides/sessions/entry-light.png"
     imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716849942/posthog.com/contents/images/docs/user-guides/sessions/entry-dark.png"
-    alt="Entry URL breakdown" 
+    alt="Entry URL breakdown"
     classes="rounded"
 />
 
@@ -163,11 +163,11 @@ If the events are logically part of the same session, e.g. a user starts a purch
 
 ### Automatically sending session IDs
 
-If you enable tracing headers within the JavaScript SDK, the session ID will be sent on every request.
+If you enable tracing headers within the JavaScript SDK, the session ID will be sent on every request. You can enable tracing headers by adding the `__add_tracing_headers` option to your `posthog.init` call:
 
 ```ts
 posthog.init('<ph_project_api_key>', {
-    __add_tracing_headers: true
+    __add_tracing_headers: ['your-backend-domain.com'] // +
 })
 ```
 

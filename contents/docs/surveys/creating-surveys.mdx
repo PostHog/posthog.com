@@ -153,25 +153,39 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&
 
 **Auto-submit (one-click surveys):**
 
-Add `auto_submit=true` to automatically submit the survey when all required questions are pre-filled. This is perfect for email surveys where clicking a link should instantly submit the response:
+> **Note:** As of `posthog-js@1.302.0`, the `auto_submit` URL param, along with the `autoSubmitIfComplete` and `autoSubmitDelay` SDK configuration params, have been deprecated.
 
-```
-# One-click email survey - click the link and the response is submitted
-?distinct_id=user123&q0=2&auto_submit=true
-```
+Survey questions that are pre-filled will be skipped (not shown to the user) if they are set to "Automatically submit on selection". Additionally, if partial responses are enabled for your survey, these responses will be recorded automatically on page load.
 
-When auto-submit is enabled:
-- The survey auto-submits immediately if all required questions are pre-filled
-- Users see a confirmation message ("Thanks! Your response was recorded")
-- The form remains visible so users can optionally add more feedback
-- If required questions are missing, the survey shows normally without auto-submitting
+Here's how it works:
+- User clicks link to open survey page
+- Starting at the first question, we automatically advance through questions which are both prefilled **and** set to automatically submit on selection
+- If partial responses are enabled for your survey, responses are immediately stored for the questions we skipped
+- We always start the survey at the first non-prefilled question, regardless of whether some questions in the middle are pre-filled
+
+Additional notes:
+- If all questions are pre-filled, the user will only see a confirmation message ("Thanks! Your response was recorded")
+- If some questions in the middle of your survey are pre-filled, regardless of whether the question is set to auto-submit on selection, the user will still see the pre-selected response, and may change it
+
+Example: one-click NPS with optional follow-up
+Say you want to send an email with a "one-click" NPS survey that includes an optional follow-up question.
+
+Create your survey with the following configuration:
+1. Create your first question as a Rating question, with **"Automatically submit on selection" enabled**
+2. Create a second question as Freeform text
+3. Ensure partial responses are enabled (Completion conditions > Response collection > **Any question**)
+
+Now you can send your survey link with the NPS question pre-filled, like this:
+```
+# pre-fill the first question (index 0) with the value 8
+{survey_url}?q0=8
+```
 
 **Important notes:**
 - Question indices are 0-based (first question is `q0`, second is `q1`, etc.)
 - Choice indices are also 0-based (first choice is `0`, second is `1`, etc.)
 - Invalid indices are silently ignored
 - Pre-filling only works with choice and rating questions (not open text)
-- Users can still modify pre-filled answers before submitting (unless auto-submit is used)
 
 ### Steps
 

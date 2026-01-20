@@ -36,7 +36,6 @@
         { "source": "/docs/integrations/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
@@ -154,6 +153,10 @@
         {
             "source": "/handbook/people/hiring-process/hiring-process",
             "destination": "/handbook/people/hiring-process"
+        },
+        {
+            "source": "/handbook/growth/sales/hogpatch",
+            "destination": "/handbook/people/hogpatch"
         },
         { "source": "/docs/integrate/client/ios/index", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrate/client/ios", "destination": "/docs/libraries/ios" },
@@ -556,7 +559,6 @@
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
-        { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
@@ -612,11 +614,19 @@
         { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
         {
             "source": "/docs/feature-flags/evaluation-tags",
-            "destination": "/docs/feature-flags/evaluation-environments"
+            "destination": "/docs/feature-flags/evaluation-contexts"
+        },
+        {
+            "source": "/docs/feature-flags/evaluation-environments",
+            "destination": "/docs/feature-flags/evaluation-contexts"
         },
         {
             "source": "/tutorials/evaluation-runtimes-and-tags",
-            "destination": "/tutorials/evaluation-runtimes-and-environments"
+            "destination": "/tutorials/evaluation-runtimes-and-contexts"
+        },
+        {
+            "source": "/tutorials/evaluation-runtimes-and-environments",
+            "destination": "/tutorials/evaluation-runtimes-and-contexts"
         },
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
@@ -663,6 +673,8 @@
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
         { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
+        { "source": "/docs/advanced/proxy/managed-reverse-proxy", "destination": "/docs/advanced/proxy" },
+        { "source": "/docs/advanced/proxy/troubleshooting", "destination": "/docs/advanced/proxy/proxy-reference" },
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
         { "source": "/docs/data/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
@@ -683,6 +695,10 @@
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
         { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
         { "source": "/docs/session-replay/configure", "destination": "/docs/session-replay/manual" },
+        {
+            "source": "/docs/session-replay/cutting-costs",
+            "destination": "/docs/session-replay/how-to-control-which-sessions-you-record"
+        },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/replay" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
@@ -695,9 +711,9 @@
         { "source": "/ab-testing/features", "destination": "/experiments" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/roadmap/changelog", "destination": "/changelog/2025" },
-        { "source": "/blog/posthog-changelog", "destination": "/changelog/2025" },
-        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2025" },
+        { "source": "/roadmap/changelog", "destination": "/changelog" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog" },
         { "source": "/changelog/2025", "destination": "/changelog" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
@@ -909,6 +925,10 @@
         {
             "source": "/docs/error-tracking/filter-and-search-issues",
             "destination": "/docs/error-tracking/managing-issues"
+        },
+        {
+            "source": "/docs/error-tracking/external-tracking",
+            "destination": "/docs/error-tracking/integrations"
         },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
@@ -1226,6 +1246,10 @@
         { "source": "/tutorials/laudspeaker-posthog", "destination": "/docs/cdp/laudspeaker-connector" },
         { "source": "/tutorials/react-popups", "destination": "/tutorials/react-surveys" },
         {
+            "source": "/tutorials/node-external-cache",
+            "destination": "/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js"
+        },
+        {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
         },
@@ -1301,12 +1325,12 @@
             "source": "/questions/automatically-merge-users",
             "destination": "/docs/product-analytics/identify#how-to-merge-users"
         },
-        { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
+        { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation/android" },
         {
             "source": "/questions/how-to-get-current-user-identity",
             "destination": "/docs/product-analytics/identify#get-the-current-users-distinct-id"
         },
-        { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
+        { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation/ios" },
         {
             "source": "/questions/how-to-group-events",
             "destination": "/docs/product-analytics/troubleshooting#how-do-i-group-or-combine-events"
@@ -1325,10 +1349,10 @@
         },
         {
             "source": "/docs/session-replay/react-native",
-            "destination": "/docs/session-replay/installation?tab=React+Native"
+            "destination": "/docs/session-replay/installation/react-native"
         },
         { "source": "/teams/comms", "destination": "/teams/support" },
-        { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation?tab=Flutter" },
+        { "source": "/docs/session-replay/flutter", "destination": "/docs/session-replay/installation/flutter" },
         { "source": "/teams/customer-comms", "destination": "/teams/support" },
         { "source": "/apps", "destination": "/cdp", "statusCode": 302 },
         { "source": "/docs/data-warehouse/setup/azure-blob", "destination": "/docs/cdp/sources/azure-blob" },
@@ -1567,6 +1591,10 @@
             "destination": "/docs/error-tracking/issues-and-exceptions"
         },
         {
+            "source": "/docs/error-tracking/nextjs",
+            "destination": "/docs/error-tracking/installation/nextjs"
+        },
+        {
             "source": "/docs/ai-engineering/observability",
             "destination": "/docs/llm-analytics/start-here"
         },
@@ -1601,6 +1629,10 @@
         {
             "source": "/docs/ai-engineering/traceloop-posthog",
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
+        },
+        {
+            "source": "/docs/llm-analytics/manual-capture",
+            "destination": "/docs/llm-analytics/installation/manual-capture"
         },
         {
             "source": "/why",
@@ -1646,7 +1678,33 @@
         { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" },
         { "source": "/example-components", "destination": "/handbook/engineering/posthog-com/markdown" },
         { "source": "/handbook/content/components", "destination": "/handbook/engineering/posthog-com/markdown" },
-        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" }
+        { "source": "/handbook/engineering/storybook", "destination": "/handbook/engineering/posthog-com/markdown" },
+        {
+            "source": "/handbook/growth/sales/cross-sell-motions",
+            "destination": "/handbook/growth/cross-selling/cross-sell-motions"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/error-tracking-cross-sell",
+            "destination": "/handbook/growth/cross-selling/error-tracking-cross-sell"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell",
+            "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
+        },
+        { "source": "/startups/[...slug]", "destination": "/startups" },
+        { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
+        { "source": "/data-warehouse", "destination": "/data-stack" },
+        { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
+        { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
+        { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
+        { "source": "/docs/experiments/common-questions", "destination": "/docs/experiments/troubleshooting" },
+        { "source": "/docs/cdp/common-questions", "destination": "/docs/cdp/troubleshooting" },
+        { "source": "/docs/data-warehouse/common-questions", "destination": "/docs/data-warehouse/troubleshooting" },
+        {
+            "source": "/docs/revenue-analytics/common-questions",
+            "destination": "/docs/revenue-analytics/troubleshooting"
+        },
+        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" }
     ],
     "headers": [
         {

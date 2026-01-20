@@ -244,7 +244,7 @@ The context of a user and their session lives on the frontend. As such it is nec
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  __add_tracing_headers: ['your-domain.com'],
+    __add_tracing_headers: ['your-backend-domain.com'] // +
 })
 ```
 

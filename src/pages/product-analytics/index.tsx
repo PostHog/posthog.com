@@ -65,6 +65,7 @@ export default function ProductAnalytics(): JSX.Element {
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        exclude: ['videos'],
     })
 
     // Merge content data with product data

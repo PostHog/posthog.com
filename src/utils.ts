@@ -49,3 +49,28 @@ export function flattenStrapiResponse(response: any): any {
 
     return response
 }
+
+/**
+ * Removes leading indentation from a template literal string.
+ * Useful for formatting code blocks and markdown content in JSX.
+ *
+ * @param strings - Template literal strings
+ * @param values - Interpolated values
+ * @returns Dedented string
+ */
+export function dedent(strings: TemplateStringsArray | string, ...values: any[]): string {
+    const str =
+        typeof strings === 'string'
+            ? strings
+            : Array.isArray(strings)
+            ? strings.reduce((acc, s, i) => acc + s + (values[i] || ''), '')
+            : String(strings)
+    const lines = str.split('\n')
+    const firstNonEmptyLine = lines.find((line) => line.trim())
+    if (!firstNonEmptyLine) return str.trim()
+    const indent = firstNonEmptyLine.match(/^(\s*)/)?.[1]?.length || 0
+    return lines
+        .map((line) => (line.length >= indent ? line.slice(indent) : line))
+        .join('\n')
+        .trim()
+}

@@ -48,7 +48,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="error-tracking" />
 -   <SmallTeam slug="surveys" />
--   <SmallTeam slug="session-replay" />
+-   <SmallTeam slug="replay" />
 
 </fieldset>
 
@@ -56,9 +56,11 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
 -   <SmallTeam slug="workflows" />
--   <SmallTeam slug="batch-exports" /> (light support)
+-   <SmallTeam slug="batch-exports" />*
 -   Endpoints
 -   Logs
+
+*light support
 
 </fieldset>
 

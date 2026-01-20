@@ -1,6 +1,7 @@
 ---
 title: Nuxt error tracking installation (v3.6 and below)
 showStepsToc: true
+platformLogo: nuxt
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
@@ -10,7 +11,7 @@ import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import CLIDownload from "../_snippets/cli/download.mdx"
 import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 For older versions of Nuxt, you'll need to manually set up error tracking and source map uploads.
 
@@ -90,7 +91,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 <Step title="Upload source maps" badge="required">
 
-<StepUploadSourceMaps urlPath="nuxt" framework="Nuxt" />
+<StepUploadSymbolSets urlPath="nuxt" framework="Nuxt" />
 
 </Step>
 

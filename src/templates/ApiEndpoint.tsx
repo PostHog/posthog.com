@@ -237,9 +237,6 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-sm pt-2">
-                                    <ReactMarkdown>{param.schema.description || param.description}</ReactMarkdown>
-                                </div>
                             </div>
                         </div>
 
@@ -613,7 +610,8 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     }, [])
 
     // Find overview.mdx node for this API entity
-    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
+    // Note: name uses underscores (from OpenAPI), but file slugs use hyphens
+    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name.replace(/_/g, '-')}/overview`)
 
     const [hovered, setHovered] = useState(false)
 
@@ -639,8 +637,6 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                             <SectionDivider />
                         </div>
                     )}
-
-                    <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 

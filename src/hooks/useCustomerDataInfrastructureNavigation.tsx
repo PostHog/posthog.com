@@ -1,39 +1,57 @@
 import { navigate } from 'gatsby'
 
 export const customerDataInfrastructureNav = {
-    name: 'Customer data infrastructure',
-    url: '/customer-data-infrastructure',
+    name: 'PostHog data stack',
+    url: '/data-stack',
     children: [
         {
-            name: 'Customer data infrastructure',
+            name: 'PostHog data stack',
         },
         {
             name: 'Overview',
-            url: '/customer-data-infrastructure',
+            url: '/data-stack',
         },
         {
-            name: 'Integrations library',
+            name: 'Data tools',
+        },
+        {
+            name: 'Managed DuckDB warehouse',
+            url: '/data-stack/managed-warehouse',
+        },
+        {
+            name: 'PostHog AI',
+            url: '/data-stack/posthog-ai',
+        },
+        {
+            name: 'Data sources & import (ELT)',
+            url: '/data-stack/sources',
+        },
+        {
+            name: 'CDP',
             url: '/cdp',
-            icon: 'IconPlug',
         },
         {
-            name: 'Data flow',
+            name: 'Data modeling',
+            url: '/data-stack/data-modeling',
         },
         {
-            name: 'Get data into PostHog',
-            url: '/customer-data-infrastructure/sources',
+            name: 'SQL editor',
+            url: '/data-stack/sql-editor',
         },
         {
-            name: 'Transform data',
-            url: '/customer-data-infrastructure/transformations',
+            name: 'Business intelligence (BI)',
+            url: '/data-stack/business-intelligence',
         },
         {
-            name: 'Query & visualize data',
-            url: '/data-warehouse',
+            name: 'Reverse ETL & export',
+            url: '/data-stack/reverse-etl-export',
         },
         {
-            name: 'Send data out of PostHog',
-            url: '/customer-data-infrastructure/destinations',
+            name: 'Integrations',
+        },
+        {
+            name: 'Integration library',
+            url: '/data-stack/integrations-library',
         },
     ],
 }

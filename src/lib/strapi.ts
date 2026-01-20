@@ -1,5 +1,8 @@
 // Strapi helper types
-export type StrapiResult<T> = StrapiData<T> & StrapiMeta
+export type StrapiResult<T> = StrapiData<T> &
+    StrapiMeta & {
+        pinnedQuestions?: StrapiRecord<QuestionData>[]
+    }
 
 export type StrapiMeta = {
     meta: {

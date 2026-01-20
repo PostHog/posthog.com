@@ -6,9 +6,9 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
-import Beta from './_snippets/beta.mdx'
+import LogsBetaSnippet from './_snippets/beta.mdx'
 
-<Beta />
+<LogsBetaSnippet />
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
 
@@ -24,8 +24,8 @@ You don't need any vendor specific SDKs – just use standard OpenTelemetry libr
 Install and configure your logging client to send logs to PostHog:
 
 - Use the HTTP endpoint: `https://us.i.posthog.com/i/v1/logs`
-- Authenticate with your project token (same token as events/exceptions)
-- Include the token in the Authorization header or as a `?token=` query parameter
+- Authenticate with your project API key (same API key as events/exceptions)
+- Include the API key in the Authorization header or as a `?token=` query parameter
 - Use the standard [OTLP log format](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
 
 <CallToAction type="primary" to="/docs/logs/installation">
@@ -42,14 +42,14 @@ Install and configure your logging client to send logs to PostHog:
 
 Once your logs are flowing into PostHog, you can:
 
-- **Search through logs** by level, message content, or custom attributes
+- **Search through logs** using multiple search tokens, negative filters, and exact phrase matching
 - **Filter by time ranges** to find specific events
 - **Correlate logs with events** from your PostHog analytics
 
 Navigate to the Logs section in your PostHog dashboard to start exploring your log data.
 
-<CallToAction type="primary" to="https://app.posthog.com/logs">
-  View your logs in PostHog
+<CallToAction type="primary" to="/docs/logs/search">
+  Learn how to search logs
 </CallToAction>
 
 </QuestLogItem>
@@ -62,7 +62,7 @@ Navigate to the Logs section in your PostHog dashboard to start exploring your l
 
 Common issues you might encounter when setting up logging:
 
-- **Authentication errors** - Make sure you're using your correct project token
+- **Authentication errors** - Make sure you're using your correct project API key
 - **Connection issues** - Verify the HTTP endpoint is accessible
 - **Log format problems** - Ensure you're using the standard [OTLP log format](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
 

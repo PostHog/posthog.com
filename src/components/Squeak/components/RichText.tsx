@@ -516,7 +516,7 @@ export default function RichText({
                             onPaste={handlePaste}
                             disabled={imageLoading}
                             autoFocus={autoFocus}
-                            className={`w-full [field-sizing:content] border-none rounded-b min-h-40 markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold max-h-[500px] ${className}`}
+                            className={`w-full [field-sizing:content] border-none rounded-b min-h-40 markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold max-h-[500px] break-words [overflow-wrap:anywhere] ${className}`}
                             onBlur={(e) => e.preventDefault()}
                             name="body"
                             value={value}

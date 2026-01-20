@@ -48,6 +48,8 @@ To celebrate 50k subscribers to Product for Engineers, here are the 50 most impo
 
 14. If you're going to pivot, [make it big](https://newsletter.posthog.com/i/142577602/if-youre-going-to-pivot-make-it-big). Stewart Butterfield pivoted two video game companies into Flickr and Slack. LinkedIn co-founder Reid Hoffman says startup founders can pivot from failure to success, but only if they "slash and burn" the rest of their business. If it looks similar, go further.  
 
+<NewsletterForm />
+
 15. As 37Signal's [Jason Fried](https://twitter.com/jasonfried/status/1337095209620946944) says "You cannot validate an idea. It doesn't exist, you have to build the thing. The market will validate it."  
 
 16. Plans are useful, but sticking rigidly to them is not. Good execution should not mean executing a specific plan, but repeatedly doing the most important things. Judge people on what they ship, how often they ship, and the impact of their work, not on whether they "stuck to the plan."  

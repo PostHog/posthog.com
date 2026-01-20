@@ -15,9 +15,9 @@ We’re really happy people want to build on top of PostHog, but we want to keep
 
 -   We're _not OK_ with people using the PostHog name to make it look like your project is made by, endorsed by, or is officially partnered with PostHog if it isn't. So for example, while "Desktop Studio for PostHog" would be fine, "Official PostHog Desktop Studio" or "PostHog Desktop Studio" would not be.
 
--   You can use our logo or brand assets only in unmodified form, and not as the main branding for your own project. You cannot make it seem like your product is an official PostHog product. Please make sure that logo and name usage are consistent with the rules we've laid out in this page.
+-   You can use our logo or brand assets only in unmodified form, and not as the main branding for your own project. However, you may not use our hedgehog mascot or other illustrative brand assets in any commercial or marketing materials without explicit permission, as this can imply endoresement and confuse people. You cannot make it seem like your product is an official PostHog product, or that we've endorsed your product or partnered with you if we haven't. Please make sure that logo, brand asset and name usage are consistent with the rules we've laid out in this page.
 
-We don't like doing it, but if we spot some name or logo usage that are inconsistent with our guidelines or brand, we will reach out to try to get that sorted out, so please try to be thoughtful about branding and try to be consistent with the guidelines we've set out here. If you have questions, please reach out to us at marketing@posthog.com for clarification.
+We don't like doing it, but if we spot some name, brand asset or logo usage that are inconsistent with our guidelines or brand, we will reach out to try to get that sorted out, so please try to be thoughtful about branding and try to be consistent with the guidelines we've set out here. If you have questions, please reach out to us at marketing@posthog.com for clarification.
 
 ## Logo
 

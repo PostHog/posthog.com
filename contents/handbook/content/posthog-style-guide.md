@@ -204,4 +204,4 @@ There are two other places we host videos:
 
 ## Technical and docs writing
 
-See our [docs style guide](/handbook/content/docs-style-guide).
+See our [docs style guide](/handbook/docs-and-wizard/docs-style-guide).

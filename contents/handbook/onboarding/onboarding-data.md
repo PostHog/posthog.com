@@ -44,9 +44,9 @@ We sync customer data between Vitally and PostHog bi-directionally
 ### Data sync pipeline
 
 **To Vitally:**
-- Custom traits sync nightly from billing Postgres via SQL queries, defined [here](https://posthog.vitally-eu.io/integrations/postgresql/f97e26e3-3c73-4cc4-a150-cc0b9cc33cd0/accounts)
-- Product engagement events sent through data pipelines using [this action](https://us.posthog.com/project/2/data-management/actions/98141) 
-- Billing spike detection from `billing_spike` table, defined [here](https://us.posthog.com/project/2/functions/0196f9ab-b695-0000-5385-b1742bc01967)
+- Custom traits sync nightly from billing Postgres via [SQL queries in Vitally](https://posthog.vitally-eu.io/integrations/postgresql/f97e26e3-3c73-4cc4-a150-cc0b9cc33cd0/accounts)
+- Product engagement events sent through data pipelines using [this action](https://us.posthog.com/project/2/data-management/actions/98141)
+- Billing spike detection from `billing_spike` table, defined in [this PostHog function](https://us.posthog.com/project/2/functions/0196f9ab-b695-0000-5385-b1742bc01967)
 
 **From Vitally:**
 - All Vitally traits accessible as `` traits.`vitally.custom.traitNameFromVitally` `` in PostHog queries, eg see the `onboarding_accounts_timestamp_check` view)

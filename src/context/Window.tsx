@@ -74,6 +74,10 @@ interface WindowProviderProps {
     internalMenu: MenuItem[]
     activeInternalMenu?: MenuItem
     parent: MenuItem
+    view: 'marketing' | 'developer'
+    setView: (view: 'marketing' | 'developer') => void
+    hasDeveloperMode: boolean
+    setHasDeveloperMode: (hasDeveloperMode: boolean) => void
 }
 
 interface WindowContextType {
@@ -90,6 +94,10 @@ interface WindowContextType {
     internalMenu: MenuItem[]
     activeInternalMenu?: MenuItem
     parent: MenuItem
+    view: 'marketing' | 'developer'
+    setView: (view: 'marketing' | 'developer') => void
+    hasDeveloperMode: boolean
+    setHasDeveloperMode: (hasDeveloperMode: boolean) => void
 }
 
 export const Context = createContext<WindowContextType>({
@@ -117,6 +125,14 @@ export const Context = createContext<WindowContextType>({
         url: '',
         children: [],
     },
+    view: 'marketing',
+    setView: () => {
+        // No-op default implementation
+    },
+    hasDeveloperMode: false,
+    setHasDeveloperMode: () => {
+        // No-op default implementation
+    },
 })
 
 export const Provider = ({
@@ -134,6 +150,10 @@ export const Provider = ({
     internalMenu,
     activeInternalMenu,
     parent,
+    view,
+    setView,
+    hasDeveloperMode,
+    setHasDeveloperMode,
 }: WindowProviderProps) => {
     return (
         <Context.Provider
@@ -151,6 +171,10 @@ export const Provider = ({
                 internalMenu,
                 activeInternalMenu,
                 parent,
+                view,
+                setView,
+                hasDeveloperMode,
+                setHasDeveloperMode,
             }}
         >
             {children}

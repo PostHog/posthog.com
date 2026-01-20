@@ -19,6 +19,8 @@ While talking with customers or analyzing the account, do some discovery to unde
 
 We typically hand the account over to Sales when a customer is interested in the annual plan, requires additional contractual or legal support, or we notice potential ourselves.
 
+Make sure to mention our point of contact, i.e., the person you've been in touch with, while handing over the account to Sales.
+
 #### Unresponsive customers during onboarding
 
 Historically, there's still a good chance that they'll talk with Sales after passing them on! AEs have been successful in reaching out and securing long-term commitments. **You don't have to wait for the customer to complete the onboarding program** - you can pass them earlier on, if you see that it makes sense. If there are any pending config issues that you raised before but the customer didn't respond to, just provide relevant context to the fellow AE/TAM - sometimes it might be a good conversation starter!
@@ -26,7 +28,7 @@ Historically, there's still a good chance that they'll talk with Sales after pas
 ### Lead creation
 If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past two - three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement, you can add them to the `Onboarding referral` segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic.
 
-After a few minutes, your lead will appear in the `#sales-leads` Slack channel, tagged as "Onboarding referral". As a good practice, ping the assigned Account Executive on a thread with some relevant context on the customer.
+After a few minutes, your lead will appear in the `#sales-leads` Slack channel, tagged as "Onboarding referral". As a good practice, leave a note in Vitally for the Account Executive with some relevant context on the customer. You can also ping an assigned AE on Slack.
 
 ### Looking out for opportunities
 If you see an account with a promising, positive growth trajectory, but they may achieve the $ threshold after finishing the onboarding program, **set a task in Vitally assigned to yourself** in order to circle back after some time and see if they're eligible for being passed on to Sales.

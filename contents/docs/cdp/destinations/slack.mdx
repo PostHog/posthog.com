@@ -1,0 +1,122 @@
+---
+title: Send PostHog event data to Slack webhooks
+templateId:
+    - template-slack
+---
+
+import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import { IconSparkles } from '@posthog/icons'
+
+Use this destination to send custom messages into Slack based on PostHog events or actions. 
+
+> If you want to receive regular insight or dashboard subscriptions to Slack, checkout our [subscriptions docs](/docs/product-analytics/subscriptions).
+
+## Requirements
+
+Using this requires a PostHog Cloud account, access to an active Slack account, and permissions to add the PostHog bot to the Slack workspace and channel.
+
+## Installation
+
+### 1. Create a new destination
+
+First, you need to create a new destination in PostHog that will send the event data to Slack. To do this:
+
+1. Start in PostHog, click the [Data pipeline tab](https://app.posthog.com/pipeline/overview) in the left sidebar.
+
+1. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=slack) tab.
+
+1. Click the **+ New destination** button and search for `Slack`, then click **+ Create**.
+
+### 2. Configure a source
+
+Select a source that will trigger messages to be sent to Slack. To do this:
+
+1. Under **Source**, select if events or person updates will trigger messages to be sent to Slack.
+2. Update the filters to specify which events or person updates will trigger messages to be sent to Slack.
+3. Update the **Trigger options** to specify if the messages should be sent immediately or on a schedule.
+
+> 💡 You can also try clicking the <span className="inline-block"><IconSparkles className="h-4 w-4" /> </span> icon to create filters with PostHog AI.
+
+### 3. Add the PostHog Slack app to your workspace
+
+Next, connect your Slack workspace to PostHog by clicking **Choose Slack connection**. If you already have a Slack connection, you can select it from the dropdown, and continue to the next step. 
+
+If you don't have a Slack connection, you can click **Connect to Slack** to create a new one. You will be redirected to Slack to install the PostHog app.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/allow_slack_bb68272218.png" 
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/allow_slack_bb68272218.png"
+    classes="rounded"
+    alt="Allow PostHog Slack app permissions"
+/>
+
+<Caption>
+Allow PostHog Slack app permissions
+</Caption>
+
+The PostHog Slack app will require some basic permissions which you can grant by clicking the **Allow** button.
+
+### 4. Add the PostHog Slack app to your channel
+
+You also need to configure which Slack channel will receive the messages from PostHog. To do this, add the PostHog app to the channel you want to send messages to:
+
+1. In the Slack [channel header](https://slack.com/help/articles/360059928654-How-to-use-Slack--your-quick-start-guide#channels), click the top right menu and click **Open channel details**
+2. Navigate to the **Integrations** tab
+3. Click the **Add an app** button
+4. Under **In your workspace**, click **PostHog**
+
+Once you've added the PostHog app to your workspace, you can select it under **Channel to post to** in the destination editor.
+
+### 5. Template your message
+
+Finally, you can template your message using Slack's [block kit](https://docs.slack.dev/block-kit/) or as a plain text message. You can template the message with the event and person properties using the `\{\}` syntax. For example:
+
+<MultiLanguage>
+
+```json file=Blocks
+[
+    {
+        "text": "Hello, \{person.name\}! You have a new message from \{event.event\}.",
+        "type": "mrkdwn"
+    }
+]
+```
+
+```text file=Text
+Hello, \{person.name\}! You have a new message from \{event.event\}.
+```
+
+</MultiLanguage>
+
+Once done, press **Create & Enable** and watch your messages appear in Slack.
+
+You can see a full example of this in our tutorial on [how to send survey responses to Slack](/tutorials/slack-surveys)
+
+<HideOnCDPIndex>
+
+## Configuration
+
+<TemplateParameters />
+
+## FAQ
+
+### Why can't I see all my Slack channels in the dropdown?
+
+Slack integrations will only show channels that the authorizing user has access to.
+
+### I have a lot of slack channels and loading all in the dropdown fails, how can I set a slack channel?
+
+If you have thousands of slack channels, the slack API might rate limit you before the dropdown can load all channels.
+
+In this case, you can manually paste a slack channel id into the field to load just that one by id. If it is found, you can then select and use it.
+
+### Is the source code for this destination available?
+
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/slack/template_slack.py) is available on GitHub.
+
+<PostHogMaintained />
+
+<FeedbackQuestions />
+
+</HideOnCDPIndex>

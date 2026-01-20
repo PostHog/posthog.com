@@ -1,6 +1,7 @@
 ---
 title: Python error tracking installation
 showStepsToc: true
+platformLogo: python
 ---
 
 
@@ -9,7 +10,7 @@ import DjangoContextMiddleware from '../../libraries/python/_snippets/django-con
 import PythonFlaskExceptionAutocapture from '../../libraries/python/_snippets/python-flask-exception-autocapture.mdx'
 import PythonFastAPIExceptionAutocapture from '../../libraries/python/_snippets/python-fastapi-exception-autocapture.mdx'
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <Steps>
 <Step title="Install PostHog Python SDK" badge="required">
@@ -52,7 +53,7 @@ Before proceeding, enable debug and call `posthog.capture('test_event')` to make
 
 <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Python application." badge="recommended">
 
-> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend [keeping up to date with the latest version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any unhandled exceptions thrown by your Python application. It works by setting Python's built-in exception hooks, such as `sys.excepthook` and `threading.excepthook`.
 
@@ -109,7 +110,7 @@ Python frameworks often have built-in error handlers. This means PostHog's defau
 
 <Step title="Upload source maps" badge="optional">
 
-<StepUploadSourceMaps urlPath="cli" />
+<StepUploadSymbolSets urlPath="cli" />
 
 </Step>
 </Steps> 

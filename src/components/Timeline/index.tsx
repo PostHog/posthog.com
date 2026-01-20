@@ -9,7 +9,7 @@ interface TimelineProps {
     data?: {
         [year: string]: {
             [month: string]: {
-                [week: string]: {
+                [period: string]: {
                     count: number
                 }
             }
@@ -24,7 +24,8 @@ interface TimelineProps {
     roadmapsPercentageFromLeft: number
 }
 
-const WEEK_BOX_SIZE = 10
+const PERIOD_BOX_WIDTH = 20
+const PERIOD_BOX_HEIGHT = 10
 
 export default function Timeline({
     startYear = 2020,
@@ -187,7 +188,7 @@ export default function Timeline({
     }, [windowX, windowWidth, isDragging])
 
     return (
-        <ScrollArea>
+        <ScrollArea className="[&>div>div]:!table">
             <div className="px-4">
                 <div ref={containerRef} className="flex py-8 relative">
                     {(() => {
@@ -204,13 +205,6 @@ export default function Timeline({
                         const lastMonthForYear = year === currentYear ? now.month() + 1 : 12 // month is 1-12 here
                         return Array.from({ length: lastMonthForYear }, (_, i) => i + 1).map((month) => {
                             const isFirstMonth = month === 1
-                            const isCurrentMonth = year === currentYear && month === now.month() + 1
-                            const latestNonEmptyWeek = [4, 3, 2, 1].find(
-                                (w) => (data?.[year]?.[month]?.[w]?.count || 0) > 0
-                            )
-                            if (isCurrentMonth && !latestNonEmptyWeek) {
-                                return null
-                            }
                             return (
                                 <button
                                     className="relative flex flex-col gap-1 items-center py-1 px-2 border-r border-primary"
@@ -221,27 +215,37 @@ export default function Timeline({
                                     {isFirstMonth && (
                                         <p className="text-sm m-0 font-semibold absolute -top-6 left-0">{year}</p>
                                     )}
-                                    <div className="flex gap-1">
+                                    <div className="flex gap-3">
                                         {(() => {
                                             const now = dayjs()
                                             const isCurrentMonth = year === now.year() && month === now.month() + 1
-                                            const latestNonEmptyWeek = [4, 3, 2, 1].find(
-                                                (w) => (data?.[year]?.[month]?.[w]?.count || 0) > 0
-                                            )
-                                            const weeksToRender = isCurrentMonth
-                                                ? latestNonEmptyWeek
-                                                    ? [latestNonEmptyWeek]
-                                                    : []
-                                                : [1, 2, 3, 4]
+                                            const currentWeek = Math.min(4, Math.ceil(now.date() / 7))
+                                            const currentPeriod = Math.min(2, Math.ceil(currentWeek / 2))
+                                            let periodsToRender: number[]
 
-                                            return weeksToRender.map((week) => {
-                                                const count = data?.[year]?.[month]?.[week]?.count || 0
+                                            if (isCurrentMonth) {
+                                                // For current month: all periods before current, plus current period if non-empty
+                                                periodsToRender = Array.from(
+                                                    { length: currentPeriod - 1 },
+                                                    (_, i) => i + 1
+                                                )
+                                                const currentPeriodCount =
+                                                    data?.[year]?.[month]?.[currentPeriod]?.count || 0
+                                                if (currentPeriodCount > 0) {
+                                                    periodsToRender.push(currentPeriod)
+                                                }
+                                            } else {
+                                                periodsToRender = [1, 2]
+                                            }
+
+                                            return periodsToRender.map((period) => {
+                                                const count = data?.[year]?.[month]?.[period]?.count || 0
                                                 const color = getAcivityColor(count)
                                                 return (
                                                     <div
-                                                        style={{ width: WEEK_BOX_SIZE, height: WEEK_BOX_SIZE }}
+                                                        style={{ width: PERIOD_BOX_WIDTH, height: PERIOD_BOX_HEIGHT }}
                                                         className={`rounded-[1px] ${color}`}
-                                                        key={`${year}-${month}-${week}`}
+                                                        key={`${year}-${month}-${period}`}
                                                     />
                                                 )
                                             })

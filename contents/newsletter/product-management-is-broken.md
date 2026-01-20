@@ -146,6 +146,8 @@ They can choose to reprioritize their projects, change their goals, or come up w
 
 This creates a healthy tension. Engineers maintain their autonomy in decision-making, but there's a clear feedback loop to ensure those decisions are delivering real value. Without this accountability, autonomy can become directionless. With it, teams are empowered to experiment, and pivot quickly based on real-time feedback.
 
+<NewsletterForm />
+
 ## 5. Learn fast by optimizing for speed
 
 These changes unblock engineers and free product managers from the (not very fun) gatekeeper role, but there’s one final step.
@@ -175,7 +177,7 @@ It looks something like this:
 
 ![Design at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/86068163_7f95_41cf_9028_5eb4aa799db9_1295x1040_9247e766ee.webp)
 
-We also have a [design system](https://storybook.posthog.net/?path=/story/exporter-exporter--trends-bar-breakdown-insight) to help engineers self-serve their design needs and move faster.
+We also have a [design system](https://storybook.dev.posthog.dev/?path=/story/exporter-exporter--trends-bar-breakdown-insight) to help engineers self-serve their design needs and move faster.
 
 ### b. Radically transparent communication
 
@@ -215,6 +217,4 @@ This is our playbook in its simplest terms:
 
 Getting this dynamic right is how we ship fast, build right, and win
 
-
 <NewsletterForm />
-

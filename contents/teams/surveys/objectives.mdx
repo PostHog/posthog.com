@@ -1,31 +1,42 @@
-### 🎯 Goal 1: Build the new PostHog Notetaker Product
+### 🎨 Goal 1: Survey Platform UX Simplification
 
-> Why: Convert conversations into high-signal data for product autonomy - transcripts are easy data for LLMs and work for early-stage companies that can't get survey responses.
-
-> Who: <TeamMember name="Lucas Faria" photo /> and <TeamMember name="Cory Slater" photo />
-
-Beta notetaker and transcription tool with speaker detection, local storage, and PostHog integration. [See more details in this one pager](https://github.com/PostHog/product-internal/pull/883).
-
-### 🤖 Goal 2: Better Integrate PostHog AI with Survey Responses
-
-> Why: PostHog AI can analyze survey responses when you're viewing them, but can't access them from other conversations.
+> Why: The current survey creation flow is complex. We need to simplify it by organizing surveys by purpose and use case.
 
 > Who: <TeamMember name="Lucas Faria" photo />
 
-Enable PostHog AI to access and reference survey responses from any conversation, not just when viewing a specific survey. Users should be able to ask "What are users saying about feature X?" or "Summarize my NPS feedback" from anywhere in PostHog.
+Restructure the surveys experience around specific survey types and use cases:
+- Create dedicated pages for different survey types (hosted surveys, metric-based surveys like NPS/CSAT, small in-app feedback collection)
+- Figure out our current North Star metrics (Usage + NDR)
+- Make it intuitive for users to pick the right survey type for their needs
 
-### ⭐ Goal 3: Reduce Survey Support Tickets by 30%
+### 🎯 Goal 2: Product Tours Shipped
 
-> Why: Fix common issues to reduce support burden, especially as we focus on expanding the scope of the Surveys team.
+> Why: Product Tours is a highly requested feature that complements our surveys and feedback collection capabilities.
 
-> Who: <TeamMember name="Lucas Faria" photo />
+> Who: <TeamMember name="Adam Bowker" photo />
 
-Another metric to track for this goal: the NPS score over time for Q4. We want to see a upwards trend.
+Ship a limited feature set for Product Tours to GA:
+- Deliver core Product Tours functionality
+- Establish clarity on pricing and whether we charge for this feature
 
-### 🏷️ Side Quest: New Name for the Surveys Team
+### 🌎 Goal 3: Collective Qualitative Feedback on Autopilot (Surveys Everywhere v2)
 
-> Why: Our scope is expanding beyond surveys to encompass all qualitative feedback features.
+> Why: Users shouldn't have to think about "creating a survey" — they should just tell us how they want to collect feedback.
 
-> Who: <TeamMember name="Lucas Faria" photo /> and <TeamMember name="Cory Slater" photo />
+> Who: <TeamMember name="Lucas Faria" photo />, <TeamMember name="Adam Bowker" photo />, and <TeamMember name="Cory Slater" photo />
 
-In the future, we'll maintain not just Surveys but all qualitative feedback features at PostHog. Leading candidate so far: **Team Feedback**.
+Evolve the surveys paradigm from "create a survey" to "how do you want to collect feedback":
+- Enable feedback collection from feature flags, experiments, and errors
+- Make qualitative feedback collection feel automatic and contextual
+
+### 🤖 Goal 4: PostHog AI User Interviews
+
+> Why: AI-powered user interviews could be a game-changer for qualitative research at scale.
+
+> Who: <TeamMember name="Lucas Faria" photo />, <TeamMember name="Adam Bowker" photo />, and <TeamMember name="Cory Slater" photo />
+
+Explore and validate AI-powered user interviews:
+- Talk to customers to understand if this is a real problem worth solving
+- Write an RFC on what we're trying to solve
+- Understand how to integrate with PostHog's AI Platform
+- Benchmark against competitors

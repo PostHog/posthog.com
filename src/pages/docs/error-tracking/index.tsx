@@ -78,9 +78,8 @@ export const Content = () => {
                 <div>
                     <p>
                         Error tracking enables you to capture, monitor, and resolve exceptions within your app, so you
-                        can ship quickly and confidently. Built on our{' '}
-                        <Link to="/customer-data-infrastructure">customer data infrastructure</Link>, PostHog error
-                        tracking connects issues to user data and product context for faster, more effective debugging.
+                        can ship quickly and confidently. Connect issues to user data and product context for faster,
+                        more effective debugging.
                     </p>
                     <p>It's particularly useful for engineers who:</p>
                     <ul>
@@ -159,9 +158,8 @@ export const Content = () => {
                     No credit card is required to get started. You can also set billing limits to avoid any surprise
                     charges.
                 </p>
-                <div className="px-8 rounded-md border-primary border">
-                    <Pricing productType="error_tracking" />
-                </div>
+
+                <Pricing productType="error_tracking" />
 
                 <p>
                     See our <a href="/pricing">pricing page</a> for more details.

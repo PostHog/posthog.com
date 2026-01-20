@@ -63,7 +63,7 @@ James reads a lot and could likely recommend enough books to fill an article all
 
 If there’s one person whose book recommendations are really worth listening to, then it’s Charles. Not only is he the leader of both our Operations and Marketing teams — he’s _also_ the founder of our internal book club.
 
-**Charles' review:** “I like The Messy Middle because, as the title suggests, it covers the really important interim period for startups that are starting to scale. Most startup type books cover either the very beginning when you’re validating your idea, or the later stages when you are 50+ people. This book is full of specific, actionable advice for the time in between those stages.”
+**Charles' review:** “I like The Messy Middle because, as the title suggests, it covers the really important interim period for startups that are starting to scale. Most startup type books cover either the very beginning when you’re [validating your idea](/newsletter/validating-product-ideas), or the later stages when you are 50+ people. This book is full of specific, actionable advice for the time in between those stages.”
 
 > **Putting it into practice:** When it comes to ops, there’s no silver bullet. Instead, [you need a whole toolkit](/blog/startup-ops-toolkit) to help you solve messy problems!
 

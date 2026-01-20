@@ -1,56 +1,33 @@
-### Q4 2025 Objectives
+### Q1 2026 Objectives
 
-#### Go all in on AI (Driver: <TeamMember name="David Newell" />)
-* Implement issue autofixing
-  * In-app flow where an issue can be assigned to Max
-  * Build terminal based experience within the CLI
-    * Add issue selection to MCP (e.g. by file, most impactful)
-    * Stretch: Add test writing agent to prevent regressions
-* Add exception capture auto instrumentation to the wizard
-* Integrations to capture exceptions for popular LLM / agent tools (e.g. Langchain)
+#### **Alerting** - Spikes & Digest (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
+* Define how we calculate a spike and what are the controls
+* Add 'Issue Spiked' trigger in alerting
+* Add ability to snooze issues from alerting
+* Create weekly digest (warnings, resolved, recommendations, priorities...)
+* Stretch: correlate with event traffic to understand the context of a “spike”
 
-#### Ship mobile error tracking (Driver: <TeamMember name="Manoel Aranda Neto" />)
-* Complete 'straightforward' section of the [megaissue](https://github.com/PostHog/posthog/issues/38845)
-* Support suppression rules
-* Add suppression of minified exceptions before cymbal processing
-* Build dashboard template including crash free sessions / users metric
+#### **Engagement** - Search & Speed (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
+* Move issues to CH to avoid dual DB query
+* Stretch: Improve loading speed on search results
 
-#### Research deep dive on customers (Driver: <TeamMember name="Cory Slater" />)
-* Interview existing, potential, and recently churned customers to understand:
-  * What makes people switch from competitors and what pulls them back?
-  * What value would convince customers to remove billing limits?
-  * How do AI-first companies handle errors differently?
-  * What context would let customers skip steps in their workflow? 
-  * What drives month to month swings in spend vs contraction?
-* Every engineer to attend at least 2 customer interviews
+#### **Grouping** - Fingerprint & Sourcemaps (Driver: <TeamMember name="Hugues Pouillot" />)
+* Iterate on fingerprint algorithm and compare with existing approach using rand index
+* Stretch: Add bundler plugins to make sourcemap uploads easier
+* Stretch: Explore embedding based grouping
 
-#### Increase trust in product (Driver: <TeamMember name="Hugues Pouillot" />)
-* Improve issue grouping
-  * Introduce a measure of grouping accuracy to base changes off
-  * Add fingerprint versioning to avoid duplicate issues when iterating
-  * Fix obvious mis-groupings based on minor stack trace variances
-  * Ship embeddings to support merge suggestions
-* Decide with Team ClickHouse on approach to avoid dual DB querying
-* Reduce the number of stacktrace-less issues
-* Give better context when a recording is not found / source maps missing
-* Rethink UI / UX of issue page
+#### **Collection** - Cymbal refactoring & Mobile support (Driver: <TeamMember name="Hugues Pouillot" />)
+* Expose frame resolution and issue processing as endpoints
+* Coordinate with Ingestion team to move cymbal processing into plugin server
+* Make CLI compatible with stable chunk ids to:
+    * be compatible with debug id specification and reuse current tooling.
+    * avoid rebuilding application
+    * speed up ingestion by reducing symbol set downloads
+    * reduce symbol set uploads
+* Add debug symbol upload command to CLI
+* Support debug symbols with cymbal
 
-#### Improving context on issues  (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
-* Add breakdowns to issues (by release / person_id)
-* Show first affected release & relevant commit
-  * Stretch: Auto assign to commit author
-* Level up Node SDK (add contexts & tagging, $session_id propagation)
-* Capture code variables in Python
-* Stretch: Integrate logs into session timeline
-
-#### Stretch: Billing, spikes and alerts (Driver: <TeamMember name="Oliver Browne" />)
-(Note: this goal largely depends on the capacity Olly has outside of mobile error tracking, which takes precedence)
-* **Email** alerts for total exceptions ingested volume spikes
-* Add billing limits to onboarding
-* Fixed issue sampling (manually configured, drop X% of exceptions for this issue)
-  * Stretch: Adaptive sampling (spread exception capture over billing period)
-* Threshold based alerting per-issue, based on product analytics insight alerts
-  * Support "X occurrences per Y duration"
-  * Add to alerting step during onboarding
-  * Stretch: Support "X affected users per Y duration"
-* Issue time-based snoozing (drop all exceptions for X hours/days, re-open the issue if seen after that period)
+#### **Monitoring** - Acquisition & KPIs (Driver: <TeamMember name="Cory Slater" />)
+* Define KPIs for tracking collection, grouping, alerting, engagement
+* Deep dive into acquisition metrics
+* Case study around successful migration

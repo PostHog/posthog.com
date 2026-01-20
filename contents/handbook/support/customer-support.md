@@ -97,7 +97,7 @@ When support engineers need to escalate issues to other engineering teams for de
 
 We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687). 
 
-As an incentive, we offer to feed one hedgehog for every survey sent. <TeamMember name="Ben Haynes" photo /> is the current holder of the hedgehog feeding rights, and takes care of this by making a monthly donation to [the Herts Wildlife Trust](https://www.hertswildlifetrust.org.uk/).
+As an incentive, we offer to feed one hedgehog for every survey sent. <TeamMember name="Ben Haynes" photo /> is the current holder of the hedgehog feeding rights, and takes care of this by making a quarterly donation to [the Suffolk Prickles Hedgehog Rescue Charity](https://suffolkprickles.org/).
 
 ## Guidelines for doing support at PostHog
 

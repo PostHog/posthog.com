@@ -4,8 +4,7 @@ sidebarTitle: PHP
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-php'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg
+platformLogo: php
 features:
   eventCapture: true
   userIdentification: true
@@ -34,18 +33,18 @@ import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php
 The PHP SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'event_name',
-    'properties' => array(
-        '$set' => array(
+    'properties' => [
+        '$set' => [
             'name' => 'Max Hedgehog'
-        ),
-        '$set_once' => array(
+        ],
+        '$set_once' => [
             'initial_url' => '/blog'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
@@ -53,13 +52,13 @@ For more details on the difference between `$set` and `$set_once`, see our [pers
 To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'event_name',
-    'properties' => array(
+    'properties' => [
         '$process_person_profile' => false
-    )
-));
+    ]
+]);
 ```
 
 ## Alias
@@ -69,10 +68,10 @@ Sometimes, you want to assign multiple distinct IDs to a single user. This is he
 In this case, you can use `alias` to assign another distinct ID to the same user.
 
 ```php
-PostHog::alias(array(
+PostHog::alias([
   'distinctId' => 'distinct_id',
   'alias' => 'alias_id'
-));
+]);
 ```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
@@ -113,26 +112,26 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). This feature requires a posthog-php version of `2.1.0` or above. Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:**  This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 -   Capture an event and associate it with a group
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'user_distinct_id',
     'event' => 'some_event',
-    '$groups' => array("company" => "company_id_in_your_db")
-));
+    '$groups' => ['company' => 'company_id_in_your_db']
+]);
 ```
 
 -   Update properties on a group
 
 ```php
-PostHog::groupIdentify(array(
+PostHog::groupIdentify([
     'groupType' => 'company',
     'groupKey' => 'company_id_in_your_db',
-    'properties' => array("name" => "Awesome Inc.", "employees" => 11)
-));
+    'properties' => ['name' => 'Awesome Inc.', 'employees' => 11]
+]);
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
@@ -144,12 +143,12 @@ When calling `PostHog::init`, there are various configuration options you can se
 ```php
 PostHog::init(
     '<ph_project_api_key>',
-    array(
+    [
         'host' => '<ph_client_api_host>', 
         'debug' => true,
         'ssl' => false,
         // all options go here
-    ),
+    ],
 );
 ```
 
@@ -171,10 +170,10 @@ All possible options below:
 ```php
 PostHog::init(
     '<ph_project_api_key>',
-    array(
+    [
         'host' => '<ph_client_api_host>', 
         'debug' => true, // +
-    ),
+    ],
 );
 ```
 

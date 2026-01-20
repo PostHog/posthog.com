@@ -8,7 +8,7 @@ showTitle: true
 
 ### How do I get access?
 
-Create a PR to the `posthog-cloud-infra` repository to add your details [here](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
+Create a PR to the `posthog-cloud-infra` repository to add your details in the [identity center Terraform configuration](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
 
 To give someone access
 1. Add the new user to the cloud infra repo (see link above)
@@ -43,7 +43,7 @@ unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKE
 
 ### Deploying PostHog
 
-See docs [here](/docs/self-host/deploy/aws).
+See the [AWS self-host deployment guide](/docs/self-host/deploy/aws).
 
 
 ## GCP
@@ -56,7 +56,7 @@ To give someone access: Navigate to [PostHog project IAM](https://console.cloud.
 
 ### Deploying PostHog
 
-See docs [here](/docs/self-host/deploy/gcp).
+See the [GCP self-host deployment guide](/docs/self-host/deploy/gcp).
 
 
 ## DigitalOcean
@@ -75,4 +75,4 @@ The code and setup files are in [digitalocean/marketplace-kubernetes repository]
 
 ### Deploying PostHog
 
-See docs [here](/docs/self-host/deploy/digital-ocean).
+See the [DigitalOcean self-host deployment guide](/docs/self-host/deploy/digital-ocean).

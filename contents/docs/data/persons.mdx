@@ -8,6 +8,8 @@ availability:
   enterprise: full
 ---
 
+import DistinctIdReuseWarning from '../privacy/_snippets/distinct-id-reuse-warning.mdx'
+
 export const personProfileLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-light-mode.png"
 export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/data/people/person-profile-dark-mode.png"
 
@@ -60,6 +62,8 @@ Clicking on a person in the [People tab](https://us.posthog.com/persons) opens t
 - Search for the person via their unique ID. For example, their email.
 - Click on the person's ID
 - Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action.
+
+<DistinctIdReuseWarning />
 
 ### Via the API
 
