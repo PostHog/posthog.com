@@ -206,6 +206,56 @@ To check if a user is opted out:
 await Posthog().isOptedOut();
 ```
 
+## Amending or dropping events
+
+You can provide a `beforeSend` callback when initializing the SDK to amend or drop events before they are sent to PostHog.
+
+### Redacting information in events
+
+`beforeSend` gives you one place to edit or redact information before it is sent to PostHog. For example:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.host = '<ph_client_api_host>';
+
+config.beforeSend = (event) {
+  // Redact email from properties
+  if (event.properties?['email'] != null) {
+    event.properties?['email'] = '***@***.***';
+  }
+  return event;
+};
+
+await Posthog().setup(config);
+```
+
+### Dropping events
+
+Return `null` from the callback to drop the event:
+
+```dart
+config.beforeSend = (event) {
+  // Drop events you don't want to send
+  if (event.event == 'ignored_event') {
+    return null;
+  }
+  return event;
+};
+```
+
+### Limitations
+
+The `beforeSend` callback only applies to events captured via Dart APIs:
+- `Posthog().capture()` - custom events
+- `Posthog().screen()` - screen events (event name is `$screen`)
+- `Posthog().captureException()` - exception events (event name is `$exception`)
+
+It does **not** intercept native-initiated events such as:
+- Session replay events (`$snapshot`)
+- Application lifecycle events (`Application Opened`, etc.)
+
+Additionally, only user-provided properties are available in the callback. System properties (like `$device_type`, `$session_id`) are added by the native SDK at a later stage.
+
 ## Debug mode 
 
 If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
