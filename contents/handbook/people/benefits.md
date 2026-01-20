@@ -40,6 +40,12 @@ As always, we expect you to use this with restraint and with your own good judge
 
 Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-money#open-source-sponsorship-for-individuals) budget to spend as they see fit to support open source projects of their choice.
 
+## PostHog paid features on side projects
+
+If you have a personal or side project using PostHog and need access to paid features (like Boost or other platform add-ons), we can enable these for free.
+
+To get this set up, ask in <PrivateLink url="https://posthog.slack.com/archives/C01BLMPTFL3">#team-billing</PrivateLink> and provide your organization ID. Someone from the billing team can add the appropriate plan (e.g. `boost-addon`) via the billing admin by updating the `plan_map` on your billing customer record. These plans are billing-only and don't incur charges since they aren't linked to Stripe prices.
+
 ## We'll be your first investor
 
 We'll be your first investor and biggest cheerleader, if you spend two years at PostHog and leave to start a new company. We're looking for entrepreneurs and a strong [Why not now?](/handbook/company/values#why-not-now)!
