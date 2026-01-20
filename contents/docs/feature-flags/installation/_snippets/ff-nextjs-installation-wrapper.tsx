@@ -1,10 +1,10 @@
 import React from 'react'
-import { RemixInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import { NextJSInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { JSEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const RemixInstallationWrapper = () => {
+export const FFNextJSInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
@@ -13,7 +13,7 @@ export const RemixInstallationWrapper = () => {
                 MultivariateFlagSnippet,
             }}
         >
-            <RemixInstallation modifySteps={addNextStepsStep} />
+            <NextJSInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

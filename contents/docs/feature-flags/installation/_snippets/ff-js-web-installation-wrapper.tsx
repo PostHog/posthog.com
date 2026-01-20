@@ -1,25 +1,29 @@
 import React from 'react'
 import {
-    DjangoInstallation,
+    JSWebInstallation,
     BooleanFlagSnippet,
     MultivariateFlagSnippet,
-    OverridePropertiesSnippet,
+    FlagPayloadSnippet,
+    OnFeatureFlagsCallbackSnippet,
+    ReloadFlagsSnippet,
 } from 'onboarding/feature-flags'
-import { PythonEventCapture } from 'onboarding/product-analytics'
+import { JSEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const DjangoInstallationWrapper = () => {
+export const FFJSWebInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                PythonEventCapture,
+                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                OverridePropertiesSnippet,
+                FlagPayloadSnippet,
+                OnFeatureFlagsCallbackSnippet,
+                ReloadFlagsSnippet,
             }}
         >
-            <DjangoInstallation modifySteps={addNextStepsStep} />
+            <JSWebInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

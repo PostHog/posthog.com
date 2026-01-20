@@ -1,17 +1,19 @@
 import React from 'react'
-import { LaravelInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import { NuxtInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import { JSEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const LaravelInstallationWrapper = () => {
+export const FFNuxtInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
+                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
             }}
         >
-            <LaravelInstallation modifySteps={addNextStepsStep} />
+            <NuxtInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

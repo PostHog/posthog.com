@@ -1,10 +1,10 @@
 import React from 'react'
-import { WebflowInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import { BubbleInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { JSEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const WebflowInstallationWrapper = () => {
+export const FFBubbleInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
@@ -13,7 +13,7 @@ export const WebflowInstallationWrapper = () => {
                 MultivariateFlagSnippet,
             }}
         >
-            <WebflowInstallation modifySteps={addNextStepsStep} />
+            <BubbleInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

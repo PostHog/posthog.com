@@ -1,29 +1,25 @@
 import React from 'react'
 import {
-    JSWebInstallation,
+    NodeJSInstallation,
     BooleanFlagSnippet,
     MultivariateFlagSnippet,
-    FlagPayloadSnippet,
-    OnFeatureFlagsCallbackSnippet,
-    ReloadFlagsSnippet,
+    OverridePropertiesSnippet,
 } from 'onboarding/feature-flags'
-import { JSEventCapture } from 'onboarding/product-analytics'
+import { NodeEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const JSWebInstallationWrapper = () => {
+export const FFNodeJSInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                JSEventCapture,
+                NodeEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                FlagPayloadSnippet,
-                OnFeatureFlagsCallbackSnippet,
-                ReloadFlagsSnippet,
+                OverridePropertiesSnippet,
             }}
         >
-            <JSWebInstallation modifySteps={addNextStepsStep} />
+            <NodeJSInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }
