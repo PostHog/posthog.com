@@ -364,7 +364,7 @@ export const ProfessionalServices = () => {
                         <div className="dark:bg-dark bg-accent border border-input p-4 rounded max-w-2xl w-full text-center">
                             <p className="!mt-0">
                                 <strong>But, wait there are more enterprise features coming!</strong> <br />
-                                <Link to="/data-stack/managed-warehouse">
+                                <Link className="underline" to="/data-stack/managed-warehouse">
                                     PostHog's managed data warehouse built on DuckDB
                                 </Link>{' '}
                                 will be available soon. Join the waitlist to get early access and start building your
