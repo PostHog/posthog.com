@@ -1,46 +1,16 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconWrench, IconCode2, IconPlug, IconFolderMove, IconMessage, IconHandwave } from '@posthog/icons'
-import { Bang } from 'components/Icons'
+import { IconWrench, IconHandwave } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import Tooltip from 'components/RadixUI/Tooltip'
 
 import { CallToAction } from 'components/CallToAction'
 import { Hero } from 'components/Hero'
-import { Subfeature } from 'components/Products/Subfeature'
-import CTA from 'components/Home/CTA'
-import { FAQ } from 'components/Products/FAQ'
-import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
-import { PRODUCT_COUNT } from '../../../constants'
-import { motion } from 'framer-motion'
 import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
-
-const subfeaturesItemCount = 4
-const subfeatures = [
-    {
-        title: 'Help migrating your data',
-        description: "Ready to ditch legacy tools like Amplitude or Mixpanel? We'll migrate you in a flash.",
-        icon: <IconFolderMove />,
-    },
-    {
-        title: 'Help instrumenting events',
-        description: "Complex tracking needs? Privacy requirements? We'll get you setup with the right tools.",
-        icon: <IconCode2 />,
-    },
-    {
-        title: 'Help training your team',
-        description: "We'll make sure your team knows their analytics from their elbows with minimal meetings.",
-        icon: <IconMessage />,
-    },
-    {
-        title: 'Help integrating your stack',
-        description: "Stripe? Snowflake? Supabase? Whatever tools you use, we'll get them talking to PostHog.",
-        icon: <IconPlug />,
-    },
-]
+import { H3 } from 'components/MdxAnchorHeaders'
 
 export const ProfessionalServices = () => {
     const { fullWidthContent } = useLayoutData()
@@ -102,7 +72,7 @@ export const ProfessionalServices = () => {
             <div
                 className={`${
                     fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
-                } px-4 sm:px-5 pt-6 sm:pt-10 pb-10`}
+                } px-4 sm:px-5 pt-6 sm:pt-10 pb-2`}
             >
                 <div className="flex gap-1.5 justify-center items-center mb-3">
                     <span className="w-6 h-6 text-blue">
@@ -111,74 +81,40 @@ export const ProfessionalServices = () => {
                     <span className="text-[15px] font-semibold text-opacity-60">Professional Services</span>
                 </div>
                 <Hero
-                    title='<span class="text-red dark:text-yellow">Hire a PostHog expert</span> <br/>to get up and running'
-                    subtitle="We'll do the heavy lifting. You do the fun stuff."
+                    title='<span class="text-red dark:text-yellow">Hire a PostHog expert</span> <br/>to get you up and running'
+                    subtitle="From complete installation and onboarding packages to one-off projects, PostHog's forward-deployed engineers can help with whatever you need."
                 />
-                <div className="flex justify-center gap-2 mb-6">
-                    <CallToAction href="/talk-to-a-human" type="primary">
-                        Talk to us about custom options
-                    </CallToAction>
-                    <CallToAction
-                        href="https://posthog.com/merch?product=30-min-onboarding-consultation"
-                        type="secondary"
-                    >
-                        <>Or get a 30-minute consultation</>
-                    </CallToAction>
-                </div>
             </div>
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-4 sm:px-5 pb-6">
-                    <div className="mb-2">
-                        <ul
-                            className={`list-none p-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}
+                    <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-2 mb-8 sm:mb-12">
+                        <CallToAction href="/talk-to-a-human" type="primary">
+                            Talk to us about custom options
+                        </CallToAction>
+                        <CallToAction
+                            href="https://posthog.com/merch?product=30-min-onboarding-consultation"
+                            type="secondary"
                         >
-                            {subfeatures.map((subfeature, index) => {
-                                return <Subfeature {...subfeature} key={index} />
-                            })}
-                        </ul>
+                            <>Or get a 30-minute consultation</>
+                        </CallToAction>
                     </div>
 
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8 pt-6 sm:pt-8 md:pt-10 mb-6 sm:mb-8 md:mb-10">
-                        <div className="flex-1 text-center md:text-left">
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4">
-                                Want to show off your office?
-                                <br />
-                                <span className="text-red dark:text-yellow">We can do on-site training.</span>
-                            </h2>
-                            <p>
-                                Most people don't want to sit through a video call for hours on end, including us. So,
-                                we can come to you for a few days of face-to-face training. Our engineers can handle all
-                                your technical questions, and they'll bring some merch with them too.
-                            </p>
-                            <p className="text-sm mb-4 border-l-4 border-primary pl-2 py-1">
-                                <strong>Work remotely?</strong> Same. Let's just do it on Google Meet instead. Don't
-                                worry, we'll still send merch.
-                            </p>
-                        </div>
-                        <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/school_92f4d92503.png"
-                                alt="So starteth the lessoneth"
-                                className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[470px]"
-                            />
-                        </aside>
-                    </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-center mt-12 mb-8 px-2">
-                        Here's what the process looks like...
-                    </h2>
-                    <div className="grid @xl:grid-cols-2 gap-y-4 @xl:gap-y-8 pb-12 mt-16 sm:mt-12 max-w-2xl mx-auto">
+                    <h3 className="text-2xl font-bold text-center mb-8 sm:mb-12 px-2">Here's what we can help with</h3>
+
+                    <div className="grid @xl:grid-cols-2 gap-y-4 @xl:gap-y-8 pb-12 max-w-2xl mx-auto">
                         <h3 className="text-xl font-bold mt-0 @xl:pr-12 border-b border-primary pb-4 @xl:pb-8 mb-0">
-                            Step one
+                            Only slightly awkward <br />
+                            introductions
                             <br />
-                            <span className="text-red dark:text-yellow">Introductions</span>
+                            <span className="text-red dark:text-yellow text-base font-normal">(Always included)</span>
                         </h3>
                         <div className="@xl:border-b border-primary pb-8">
                             <p className="mb-4">
-                                We start by chatting about what you need and assigning a dedicated PostHog staff member
-                                to work with you. We're polite like that.
+                                No sales pitches, no hard sell, just one simple call or quick email chain to find out
+                                what you need. We'll then assign a dedicated PostHog staff member to work with you.
                             </p>
-                            <p className="mb-3">Team members who insist they do enjoy quick calls include...</p>
+                            <p className="mb-3">Team members who insist they really do enjoy quick calls include...</p>
                             {profiles.length > 0 && (
                                 <div className="mt-4">
                                     <div className="flex flex-wrap justify-end ml-3" dir="rtl">
@@ -243,15 +179,15 @@ export const ProfessionalServices = () => {
                         </div>
 
                         <h3 className="text-xl font-bold mt-0 @xl:pr-12 border-b border-primary pb-4 @xl:pb-8 mb-0">
-                            Step two
+                            Migration
                             <br />
-                            <span className="text-red dark:text-yellow">Migration</span>
+                            <span className="text-red dark:text-yellow text-base font-normal">(Optional)</span>
                         </h3>
                         <div className="@xl:border-b border-primary pb-8">
                             <p className="m-0">
-                                Coming from an existing provider? We'll help you bring your data with you. We cn
-                                implement dashboards, switch feature flags, and import historic data from tools such
-                                as...
+                                Want a hand ditching legacy tools like Amplitude or Mixpanel? We'll migrate you and buy
+                                you out of existing contracts. We can connect to most sources and easily import historic
+                                data from tools such as...
                             </p>
                             <div className="flex flex-wrap gap-2 mt-4">
                                 {[
@@ -273,15 +209,16 @@ export const ProfessionalServices = () => {
                             </div>
                         </div>
                         <h3 className="text-xl font-bold mt-0 @xl:pr-12 border-b border-primary pb-4 @xl:pb-8 mb-0">
-                            Step three
+                            Instrumentation
                             <br />
-                            <span className="text-red dark:text-yellow">Instrumentation</span>
+                            <span className="text-red dark:text-yellow text-base font-normal">(Optional)</span>
                         </h3>
                         <div className="@xl:border-b border-primary pb-8">
                             <p className="m-0">
-                                We'll setup PostHog for your marketing site and app so you can track users
-                                comprehensively, then tune your events so you only pay for what you need. We'll tailor
-                                everything to your privacy requirements too.
+                                Complex tracking needs? Privacy requirements? We'll setup PostHog up as needed for your
+                                marketing site and app so you can track users comprehensively, then tune your events so
+                                you only pay for what you need. We'll set up any initial dashboards, flags, and surveys
+                                you need while we're at it.
                             </p>
                             <div
                                 className="mt-4 bg-accent dark:bg-accent-dark border border-primary rounded p-4 transition-all duration-300 cursor-pointer hover:border-red dark:hover:border-yellow"
@@ -308,34 +245,34 @@ export const ProfessionalServices = () => {
                             </div>
                         </div>
                         <h3 className="text-xl font-bold mt-0 @xl:pr-12 border-b border-primary pb-4 @xl:pb-8 mb-0">
-                            Step four
+                            Training
                             <br />
-                            <span className="text-red dark:text-yellow">Training</span>
+                            <span className="text-red dark:text-yellow text-base font-normal">(Optional)</span>
                         </h3>
                         <div className="@xl:border-b border-primary pb-8">
                             <p className="m-0">
-                                This bit is always a bit fuzzy, because it depends on what you need. Custom dashboards?
-                                An A/B testing strategy? User surveys? Whatever it is, we'll help you get it done in
-                                line with our best practices.
+                                We'll make sure your team knows their analytics from their elbows, with minimal
+                                meetings. We'll help you understand all our best practices and how to use PostHog to its
+                                fullest.
                             </p>
-                            <p className="text-sm mt-2 border-l-4 border-primary pl-2 py-1">
-                                <strong>Optional:</strong> Want some sweet PostHog merch? Can do. We can also train you{' '}
-                                <Link className="underline font-medium" to="/academy">
-                                    how to use Post-it notes
-                                </Link>{' '}
-                                more effectively while we're at it. If you want.{' '}
+                            <p className="text-sm mt-4 border-l-4 border-primary pl-2 py-1">
+                                <strong>On-site options:</strong> Our default is to do everything online, with as few
+                                meetings as possible. But, if you want us on-site then we're happy to travel for a few
+                                days of face-to-face training. Either way, we can send some merch to welcome you to
+                                PostHog too!
                             </p>
                         </div>
                         <h3 className="text-xl font-bold mt-0 @xl:pr-12 border-b border-primary mb-0">
-                            Step six
+                            Integration
                             <br />
-                            <span className="text-red dark:text-yellow">Integration</span>
+                            <span className="text-red dark:text-yellow text-base font-normal">(Optional)</span>
                         </h3>
                         <div className="@xl:border-b border-primary pb-8">
                             <div className="flex flex-col gap-2">
                                 <p className="m-0">
-                                    PostHog offers its own data warehouse, but we can also integrate with your current
-                                    data stack. That means...
+                                    Stripe? Snowflake? Supabase? Whatever tools you use, we'll get them talking to
+                                    PostHog. PostHog offers its own data warehouse, but we can also integrate with your
+                                    current data stack. That means...
                                     <ul className={`list-disc m-4`}>
                                         <li>
                                             <Link className="underline font-medium" to="/data-stack/sources">
@@ -360,7 +297,7 @@ export const ProfessionalServices = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-center mt-2 sm:mt-12">
+                    <div className="flex justify-center mt-12 sm:mt-16 mb-8">
                         <div className="dark:bg-dark bg-accent border border-input p-4 rounded max-w-2xl w-full text-center">
                             <p className="!mt-0">
                                 <strong>But, wait there are more enterprise features coming!</strong> <br />
@@ -378,10 +315,10 @@ export const ProfessionalServices = () => {
                 </section>
             </div>
 
-            <section className="relative pt-8 md:pt-12 px-5 lg:px-0 max-w-7xl mx-auto">
+            <section className="relative pt-12 md:pt-16 px-5 lg:px-0 max-w-7xl mx-auto">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-2">Ready to get started?</h2>
                 <h3 className="text-lg sm:text-xl text-center mb-2 sm:mb-12 opacity-75">
-                    Let's talk about what you need
+                    Tell us what you need and we'll take it from there
                 </h3>
 
                 <div className="md:grid grid-cols-2 gap-16 md:pt-12 pb-16 max-w-5xl mx-auto">
