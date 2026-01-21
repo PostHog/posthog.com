@@ -1,19 +1,17 @@
 import React from 'react'
-import { AstroInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
-import { JSEventCapture } from 'onboarding/product-analytics'
+import { AndroidInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const AstroInstallationWrapper = () => {
+export const FFAndroidInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
             }}
         >
-            <AstroInstallation modifySteps={addNextStepsStep} />
+            <AndroidInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

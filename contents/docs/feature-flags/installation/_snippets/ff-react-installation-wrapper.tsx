@@ -1,25 +1,25 @@
 import React from 'react'
 import {
-    PythonInstallation,
+    ReactInstallation,
     BooleanFlagSnippet,
     MultivariateFlagSnippet,
-    OverridePropertiesSnippet,
+    FlagPayloadSnippet,
 } from 'onboarding/feature-flags'
-import { PythonEventCapture } from 'onboarding/product-analytics'
+import { JSEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const PythonInstallationWrapper = () => {
+export const FFReactInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                PythonEventCapture,
+                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                OverridePropertiesSnippet,
+                FlagPayloadSnippet,
             }}
         >
-            <PythonInstallation modifySteps={addNextStepsStep} />
+            <ReactInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

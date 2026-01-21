@@ -1,9 +1,9 @@
 import React from 'react'
-import { ReactNativeInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import { IOSInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const ReactNativeInstallationWrapper = () => {
+export const FFIOSInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
@@ -11,7 +11,7 @@ export const ReactNativeInstallationWrapper = () => {
                 MultivariateFlagSnippet,
             }}
         >
-            <ReactNativeInstallation modifySteps={addNextStepsStep} />
+            <IOSInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }
