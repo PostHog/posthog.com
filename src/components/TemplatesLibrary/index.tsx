@@ -107,10 +107,7 @@ export default function TemplatesLibrary(): JSX.Element {
     // Convert MDX templates to unified format
     const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || []).map((t: MdxTemplate) => {
         const types = t.frontmatter.filters?.type || []
-        let type: 'dashboard' | 'survey' | 'workflow' = 'dashboard'
-        if (types.some((t) => t.toLowerCase() === 'survey')) {
-            type = 'survey'
-        }
+        const type = types[0]
 
         return {
             id: t.id,

@@ -1,79 +1,167 @@
-import { MDXProvider } from '@mdx-js/react'
-import Breadcrumbs from 'components/Breadcrumbs'
-import Layout from 'components/Layout'
-import Link from 'components/Link'
-import { Section } from 'components/Section'
+import React from 'react'
+import { graphql } from 'gatsby'
+import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'
+import { Section } from 'components/Section'
+import { shortcodes } from '../mdxGlobalComponents'
+import { Blockquote } from 'components/BlockQuote'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { Heading } from 'components/Heading'
+import { InlineCode } from 'components/InlineCode'
+import { ZoomImage } from 'components/ZoomImage'
+import Link from 'components/Link'
+import Slugger from 'github-slugger'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { TreeMenu } from 'components/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { graphql } from 'gatsby'
-import React from 'react'
-import { shortcodes } from '../mdxGlobalComponents'
-import { communityMenu } from '../navs'
+
+const A = (props) => <Link {...props} />
+
+const TemplateCTAs = ({ type, title, usePrefilterLink = true }) => {
+    const isDashboard = type.includes('dashboard')
+    const isSurvey = type.includes('survey')
+
+    if (!isDashboard && !isSurvey) return null
+
+    const primaryHref = isDashboard
+        ? `https://us.posthog.com/dashboard?${usePrefilterLink ? `templateFilter=${title}` : ''}#newDashboard`
+        : 'https://us.posthog.com/survey_templates'
+    const secondaryHref = isDashboard ? 'https://us.posthog.com/dashboard' : 'https://us.posthog.com/surveys'
+
+    return (
+        <div className="flex justify-center gap-2 mb-12">
+            <CallToAction href={primaryHref} type="primary">
+                Get started with this template
+            </CallToAction>
+            <CallToAction href={secondaryHref} type="secondary">
+                Create your own
+            </CallToAction>
+        </div>
+    )
+}
+
+// Format headings into table of contents, similar to createPages
+function formatToc(headings) {
+    const slugger = new Slugger()
+    return headings.map((heading) => {
+        const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
+        return {
+            ...heading,
+            url: `#${slugger.slug(cleanValue)}`,
+            value: cleanValue,
+        }
+    })
+}
 
 export default function Template({ data }) {
-    const { pageData } = data
+    const { pageData, templates } = data
     const {
         body,
         excerpt,
+        headings,
         fields: { slug },
+        parent,
     } = pageData
-    const { title, subtitle, featuredImage, description, filters } = pageData?.frontmatter
-    const { type, usePrefilterLink } = filters
+    const {
+        title,
+        subtitle,
+        featuredImage,
+        description,
+        tableOfContents: frontmatterToc,
+        filters,
+    } = pageData?.frontmatter
+    const type = filters?.type?.map((t) => t.toLowerCase()) || []
+    const filePath = parent?.relativePath
+
+    // Generate table of contents from headings or use frontmatter
+    const tableOfContents = frontmatterToc || (headings ? formatToc(headings) : null)
+
+    // Group templates by type for the sidebar menu
+    const allTemplates = templates?.nodes || []
+    const dashboardTemplates = allTemplates.filter((t) =>
+        t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'dashboard')
+    )
+    const surveyTemplates = allTemplates.filter((t) =>
+        t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'survey')
+    )
+
+    const templatesMenu = [
+        ...(dashboardTemplates.length > 0
+            ? [
+                  {
+                      name: 'Dashboards',
+                      children: dashboardTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
+                          name: title,
+                          url: slug,
+                      })),
+                  },
+              ]
+            : []),
+        ...(surveyTemplates.length > 0
+            ? [
+                  {
+                      name: 'Surveys',
+                      children: surveyTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
+                          name: title,
+                          url: slug,
+                      })),
+                  },
+              ]
+            : []),
+    ]
+
+    const components = {
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
+        a: A,
+        ...shortcodes,
+        Section,
+    }
 
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
+        <>
             <SEO
                 image={`/images/templates/${slug.split('/')[2]}.png`}
                 title={`${title} template - PostHog`}
                 description={description || excerpt}
             />
-            <div
-                style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
-                className="mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
+            <ReaderView
+                body={{
+                    type: 'plain',
+                }}
+                title={title}
+                filePath={filePath}
+                homeURL="/templates"
+                leftSidebar={<TreeMenu items={templatesMenu} />}
+                hideRightSidebar
+                hideTitle
+                showQuestions={false}
             >
-                <section>
-                    <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
-                        <h1 className="text-center mt-0 mb-2 lg:block">{title}</h1>
-                        <h3 className="text-center mt-0 mb-6 font-semibold text-xl opacity-50">{subtitle}</h3>
-                        <GatsbyImage image={getImage(featuredImage)} alt="" />
-                        <article>
-                            <MDXProvider components={{ ...shortcodes, Section }}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </article>
-                        <article>
-                            {type.includes('dashboard') && (
-                                <div className="flex justify-center gap-2 mb-12">
-                                    <CallToAction
-                                        href={`https://us.posthog.com/dashboard?${
-                                            usePrefilterLink ? `templateFilter=${title}` : ''
-                                        }#newDashboard`}
-                                        type="primary"
-                                    >
-                                        Get started with this template
-                                    </CallToAction>
-                                    <CallToAction href="https://us.posthog.com/dashboard" type="secondary">
-                                        Create your own
-                                    </CallToAction>
-                                </div>
-                            )}
-                            {type.includes('survey') && (
-                                <div className="flex justify-center gap-2 mb-12">
-                                    <CallToAction href="https://us.posthog.com/survey_templates" type="primary">
-                                        Get started with this template
-                                    </CallToAction>
-                                    <CallToAction href="https://us.posthog.com/surveys" type="secondary">
-                                        Create your own
-                                    </CallToAction>
-                                </div>
-                            )}
-                        </article>
+                <div className="max-w-3xl mx-auto">
+                    <h1>{title}</h1>
+                    <div className="mb-6">
+                        {featuredImage && (
+                            <GatsbyImage image={getImage(featuredImage)} alt={title} className="rounded" />
+                        )}
                     </div>
-                </section>
-            </div>
-        </Layout>
+                    <MDXProvider components={components}>
+                        <MDXRenderer>{body}</MDXRenderer>
+                    </MDXProvider>
+                    <TemplateCTAs type={type} title={title} />
+                </div>
+            </ReaderView>
+        </>
     )
 }
 
@@ -82,6 +170,10 @@ export const query = graphql`
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
+            headings {
+                depth
+                value
+            }
             fields {
                 slug
             }
@@ -89,12 +181,40 @@ export const query = graphql`
                 title
                 subtitle
                 description
+                tableOfContents {
+                    depth
+                    url
+                    value
+                }
+                featuredImage {
+                    publicURL
+                    childImageSharp {
+                        gatsbyImageData
+                    }
+                }
                 filters {
                     type
                 }
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
+            }
+            parent {
+                ... on File {
+                    relativePath
+                }
+            }
+        }
+        templates: allMdx(
+            filter: { fields: { slug: { regex: "/^/templates/(?!.*/docs).*/" } } }
+            sort: { fields: [fields___slug], order: ASC }
+        ) {
+            nodes {
+                id
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    filters {
+                        type
                     }
                 }
             }
