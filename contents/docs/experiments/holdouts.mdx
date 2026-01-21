@@ -42,3 +42,48 @@ When assigned to an experiment, your holdout will be treated as another variant 
   classes="rounded"
   alt="Screenshot of the experiment with the results displayed"
 />
+
+## How holdouts affect feature flags
+
+When a user is assigned to a holdout group, the feature flags associated with experiments using that holdout return a special variant value instead of the experiment's control or test variants.
+
+### Holdout variant format
+
+Users in a holdout receive a variant value of `holdout-{holdout_id}`, where `holdout_id` is the internal database ID of the holdout group. For example, if your holdout has ID 727, users in that holdout receive the variant `holdout-727`.
+
+You can find the holdout ID in the URL when viewing the holdout in PostHog (e.g., `/experiments/holdouts/727`).
+
+### Detecting holdout users in code
+
+When evaluating a feature flag for an experiment with a holdout, you can check if a user is in the holdout by looking for the `holdout-` prefix in the variant:
+
+<MultiLanguage>
+
+```js
+const variant = posthog.getFeatureFlag('experiment-feature-flag')
+
+if (typeof variant === 'string' && variant.startsWith('holdout-')) {
+    // User is in a holdout group - show them the default experience
+} else if (variant === 'test') {
+    // User is in the test variant
+} else {
+    // User is in control or flag is disabled
+}
+```
+
+```python
+variant = posthog.get_feature_flag('experiment-feature-flag', 'user-id')
+
+if isinstance(variant, str) and variant.startswith('holdout-'):
+    # User is in a holdout group - show them the default experience
+elif variant == 'test':
+    # User is in the test variant
+else:
+    # User is in control or flag is disabled
+```
+
+</MultiLanguage>
+
+### Holdout evaluation priority
+
+Holdout conditions are evaluated before regular flag conditions. If a user matches the holdout's rollout percentage, they receive the holdout variant regardless of any other targeting rules on the flag.

@@ -73,6 +73,8 @@ Further details on how to do this are available in [the new small team template]
 
 It's the responsibility of the team lead to keep Marketing and Billing teams informed about product progress, so that product marketers can coordinate launches and the Billing team can implement pricing.
 
+For a complete walkthrough of the product lifecycle (from initial setup through GA), see [releasing new products and features](/handbook/product/releasing-new-products-and-features) and use [the new product RFC template](https://github.com/PostHog/requests-for-comments/blob/main/.github/ISSUE_TEMPLATE/new-product.md).
+
 Some guidelines on how to do this are below, but if in doubt team leads should always aim to overcommunicate with Marketing and Billing teams.
 
 ### Adding ideas to the roadmap
