@@ -1,17 +1,23 @@
 import React from 'react'
-import { FlutterInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import {
+    PHPInstallation,
+    BooleanFlagSnippet,
+    MultivariateFlagSnippet,
+    OverridePropertiesSnippet,
+} from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const FlutterInstallationWrapper = () => {
+export const FFPHPInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
+                OverridePropertiesSnippet,
             }}
         >
-            <FlutterInstallation modifySteps={addNextStepsStep} />
+            <PHPInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

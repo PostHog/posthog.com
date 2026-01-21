@@ -3,7 +3,7 @@ import { APIInstallation } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const APIInstallationWrapper = () => {
+export const FFAPIInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper>
             <APIInstallation modifySteps={addNextStepsStep} />

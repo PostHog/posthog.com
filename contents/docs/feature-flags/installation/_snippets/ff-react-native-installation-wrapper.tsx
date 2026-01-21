@@ -1,19 +1,17 @@
 import React from 'react'
-import { FramerInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
-import { JSEventCapture } from 'onboarding/product-analytics'
+import { ReactNativeInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const FramerInstallationWrapper = () => {
+export const FFReactNativeInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
             }}
         >
-            <FramerInstallation modifySteps={addNextStepsStep} />
+            <ReactNativeInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

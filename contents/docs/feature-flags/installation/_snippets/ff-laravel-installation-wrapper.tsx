@@ -1,9 +1,9 @@
 import React from 'react'
-import { IOSInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
+import { LaravelInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const IOSInstallationWrapper = () => {
+export const FFLaravelInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
@@ -11,7 +11,7 @@ export const IOSInstallationWrapper = () => {
                 MultivariateFlagSnippet,
             }}
         >
-            <IOSInstallation modifySteps={addNextStepsStep} />
+            <LaravelInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

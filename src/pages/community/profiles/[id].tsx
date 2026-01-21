@@ -795,110 +795,107 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
         }
     }, [posts])
 
-    const tabs = useMemo(
-        () => [
-            {
-                value: 'bio',
-                label: 'Bio',
-                content: isEditing ? (
-                    <BodyEditor
-                        values={values}
-                        setFieldValue={setFieldValue}
-                        bodyKey="biography"
-                        initialValue={profile.biography}
+    const tabs = [
+        {
+            value: 'bio',
+            label: 'Bio',
+            content: isEditing ? (
+                <BodyEditor
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    bodyKey="biography"
+                    initialValue={profile.biography}
+                />
+            ) : (
+                <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
+            ),
+        },
+        ...((isModerator && isEditing) || profile.readme
+            ? [
+                  {
+                      value: 'readme',
+                      label: 'README',
+                      content: isEditing ? (
+                          <BodyEditor
+                              values={values}
+                              setFieldValue={setFieldValue}
+                              bodyKey="readme"
+                              initialValue={profile.readme}
+                              maxLength={10000}
+                          />
+                      ) : (
+                          <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
+                      ),
+                  },
+              ]
+            : []),
+        {
+            value: 'discussions',
+            label: 'Discussions',
+            content: (
+                <>
+                    <Questions
+                        profileId={id}
+                        disclaimer={false}
+                        showForm={false}
+                        noQuestionsMessage={
+                            <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
+                                {firstName} hasn't participated in any discussions yet
+                            </p>
+                        }
                     />
-                ) : (
-                    <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
-                ),
-            },
-            ...((isModerator && isEditing) || profile.readme
-                ? [
-                      {
-                          value: 'readme',
-                          label: 'README',
-                          content: isEditing ? (
-                              <BodyEditor
-                                  values={values}
-                                  setFieldValue={setFieldValue}
-                                  bodyKey="readme"
-                                  initialValue={profile.readme}
-                                  maxLength={10000}
-                              />
-                          ) : (
-                              <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
-                          ),
-                      },
-                  ]
-                : []),
-            {
-                value: 'discussions',
-                label: 'Discussions',
-                content: (
-                    <>
-                        <Questions
-                            profileId={id}
-                            disclaimer={false}
-                            showForm={false}
-                            noQuestionsMessage={
-                                <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
-                                    {firstName} hasn't participated in any discussions yet
-                                </p>
-                            }
-                        />
-                    </>
-                ),
-            },
-            ...(hasPosts
-                ? [
-                      {
-                          value: 'posts',
-                          label: 'Posts',
-                          content: (
-                              <>
-                                  <div className="flex justify-between items-center mb-4">
-                                      <h4 className="text-lg font-bold m-0">All posts</h4>
-                                      <Select
-                                          groups={[
-                                              {
-                                                  items: sortOptions.map((option) => ({
-                                                      label: option.label,
-                                                      value: option.label,
-                                                  })),
-                                                  label: 'Sort by',
-                                              },
-                                          ]}
-                                          value={sort}
-                                          onValueChange={(value) => setSort(value)}
-                                      />
-                                  </div>
-                                  <PostsTable {...posts} />
-                              </>
-                          ),
-                      },
-                  ]
-                : []),
-            ...(user?.profile?.id === id
-                ? [
-                      {
-                          value: 'likes',
-                          label: 'Liked posts',
-                          content: (
-                              <>
-                                  <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
-                                  <LikedPosts profileID={id} />
-                              </>
-                          ),
-                      },
-                      {
-                          value: 'points',
-                          label: 'Points',
-                          content: <Points />,
-                      },
-                  ]
-                : []),
-        ],
-        []
-    )
+                </>
+            ),
+        },
+        ...(hasPosts
+            ? [
+                  {
+                      value: 'posts',
+                      label: 'Posts',
+                      content: (
+                          <>
+                              <div className="flex justify-between items-center mb-4">
+                                  <h4 className="text-lg font-bold m-0">All posts</h4>
+                                  <Select
+                                      groups={[
+                                          {
+                                              items: sortOptions.map((option) => ({
+                                                  label: option.label,
+                                                  value: option.label,
+                                              })),
+                                              label: 'Sort by',
+                                          },
+                                      ]}
+                                      value={sort}
+                                      onValueChange={(value) => setSort(value)}
+                                  />
+                              </div>
+                              <PostsTable {...posts} />
+                          </>
+                      ),
+                  },
+              ]
+            : []),
+        ...(user?.profile?.id === id
+            ? [
+                  {
+                      value: 'likes',
+                      label: 'Liked posts',
+                      content: (
+                          <>
+                              <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
+                              <LikedPosts profileID={id} />
+                          </>
+                      ),
+                  },
+                  {
+                      value: 'points',
+                      label: 'Points',
+                      content: <Points />,
+                  },
+              ]
+            : []),
+    ]
 
     const initialTab = useMemo(() => {
         const params = new URLSearchParams(appWindow?.location?.search)

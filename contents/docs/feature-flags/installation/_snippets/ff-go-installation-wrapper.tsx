@@ -1,25 +1,23 @@
 import React from 'react'
 import {
-    ReactInstallation,
+    GoInstallation,
     BooleanFlagSnippet,
     MultivariateFlagSnippet,
-    FlagPayloadSnippet,
+    OverridePropertiesSnippet,
 } from 'onboarding/feature-flags'
-import { JSEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const ReactInstallationWrapper = () => {
+export const FFGoInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                FlagPayloadSnippet,
+                OverridePropertiesSnippet,
             }}
         >
-            <ReactInstallation modifySteps={addNextStepsStep} />
+            <GoInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }
