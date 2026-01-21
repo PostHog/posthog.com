@@ -2,6 +2,8 @@
 
 Reference this guide when working on UI components.
 
+Many commonly-used form components can be seen at [/components](src/pages/components/index.tsx). Always use these patterns when possible.
+
 ## Radix UI
 
 We use Radix UI components. To match our design, we create custom wrappers in `/src/components/RadixUI`.

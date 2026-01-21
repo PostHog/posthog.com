@@ -109,7 +109,7 @@ Reference these when working on specific areas:
 
 - [Apps](agents/apps.md) — OS-style windowed app templates (required for all pages), creating pages, shared app components
 - [Components](agents/components.md) — Radix UI patterns, OS-prefixed components
-- [Styling](agents/styling.md) — Tailwind color tokens, CSS guidance
+- [Styling](agents/styling.md) — Tailwind color tokens, CSS guidance, theming
 - [Data hooks](agents/data.md) — Product, customer, navigation data
 - [Window system](agents/windows.md) — Desktop OS architecture, window management
 
