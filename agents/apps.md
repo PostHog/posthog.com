@@ -68,8 +68,12 @@ Shared components used across apps:
 
 ## Product presentation slide templates
 
-Product pages (`/llm-analytics`, `/product-analytics`) use slide templates. The various templates (and details for creating custom templates) are documented [in the component's README](src/components/Products/Slides/README.md).
+**Product pages** (`/llm-analytics`, `/product-analytics`) use slide templates. The various templates (and details for creating custom templates) are documented [in the component's README](src/components/Products/Slides/README.md).
 
-Landing pages (/for/product-engineers, etc) use a variation of slide templates and are documented [in the handbook](@contents/handbook/engineering/posthog-com/presentations.mdx).
+When creating a new slide, look for (or ask the prompter) for an existing template to use as a base instead of generating custom slides by default.
 
-**Important:** Slide templates use the `@2xl` container query breakpoint to toggle between portrait-oriented mobile-formatted slides and landscape-oriented desktop-formatted slides. Follow existing patterns, including layout and font size to ensure compatibility and consistency.
+**Landing pages** (/for/product-engineers, etc) use a variation of slide templates and are documented [in the handbook](@contents/handbook/engineering/posthog-com/presentations.mdx).
+
+**Important:** All slide templates use the `@2xl` container query breakpoint to toggle between portrait-oriented mobile-formatted slides and landscape-oriented desktop-formatted slides. Follow existing patterns, including layout and font size to ensure compatibility and consistency.
+
+Slide templates are intended to be kept DRY, with content being sourced from relevant [JSON](src/hooks/useProduct.ts) [files](src/hooks/useProducts.tsx).

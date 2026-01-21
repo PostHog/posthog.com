@@ -64,6 +64,8 @@ PostHog.com replicates a desktop-style OS. All pages should use an app template:
 
 See [Apps guide](agents/apps.md) for templates, creating pages, and shared components.
 
+For working on product pages/presentations, reference [Apps guide](agents/apps.md) for important details about slide templates.
+
 ## Code style
 
 ### TypeScript/React
