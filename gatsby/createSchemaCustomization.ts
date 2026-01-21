@@ -498,6 +498,17 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         publishedAt: Date! @dateformat
         title: String!
     }
+    type PostHogWorkflowTemplateCreatedBy {
+        first_name: String
+        last_name: String
+    }
+    type PostHogWorkflowTemplate implements Node {
+        templateId: String
+        name: String
+        description: String
+        image_url: String
+        created_by: PostHogWorkflowTemplateCreatedBy
+    }
   `)
     createTypes([
         schema.buildObjectType({
