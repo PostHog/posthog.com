@@ -1,23 +1,35 @@
 ## Q1 2026 objectives
 
 ### Objective 1
-- Endpoints GA
-  - Pricing finalized and rolled out
-
-### Objective 2
 - Data modeling as a first-class citizen in app
   - Lineage view 
   - DAG execution + matviews are STABLE with better error surfacing, logging, and alerting
 
-### Objective 3
+### Objective 2
 - All the most common data modeling workflows are supported
   - Run all downstream models, run all upstream, run all with a user-defined tag, etc.
   - Model tests
   - Models are backed by git and can be synced / managed with GitHub
 
-### Objective 4
+### Objective 3
 - Stretch: a few data modeling differentiators against competitors
   - Field level lineage that feels nice
   - At least one custom PostHog node type available for execution (e.g. 
   some model conditionally triggered on cohorts, funnels, experiments, etc.)
 
+Endpoints
+
+### Objective 1
+- Endpoints GA
+  - Pricing finalized and rolled out
+
+### Objective 2
+- Integration with managed warehouse
+  - Materialized endpoint execution goes through the managed warehouse compute
+
+### Objective 3
+- Flexible endpoint materialization
+  - Rewrite the endpoint query in a way that allows us to materialize it, 
+  even when it uses different variables 
+  - Simplify the API for executing an endpoint - should be same for both HogQL
+  and insight based endpoints, regardless of materialization status.
