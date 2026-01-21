@@ -84,6 +84,8 @@ Territories
 - Europe & Africa
 - Asia & Middle East
 - Australia & New Zealand (ANZ)
+- Territory 1 (U.S. but state unknown)
+- Territory 3 (Unknown, but otherwise qualified)
 
 Each territory runs its own round robin assignment for new, unowned accounts.
 
