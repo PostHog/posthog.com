@@ -56,7 +56,7 @@ function formatToc(headings) {
 }
 
 export default function Template({ data }) {
-    const { pageData, templates } = data
+    const { pageData, templates, workflowTemplates } = data
     const {
         body,
         excerpt,
@@ -86,6 +86,7 @@ export default function Template({ data }) {
     const surveyTemplates = allTemplates.filter((t) =>
         t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'survey')
     )
+    const workflows = workflowTemplates?.nodes || []
 
     const templatesMenu = [
         ...(dashboardTemplates.length > 0
@@ -106,6 +107,17 @@ export default function Template({ data }) {
                       children: surveyTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
                           name: title,
                           url: slug,
+                      })),
+                  },
+              ]
+            : []),
+        ...(workflows.length > 0
+            ? [
+                  {
+                      name: 'Workflows',
+                      children: workflows.map((w) => ({
+                          name: w.name,
+                          url: `/templates/workflow/${w.fields.slug}`,
                       })),
                   },
               ]
@@ -149,8 +161,8 @@ export default function Template({ data }) {
                 showQuestions={false}
             >
                 <div className="max-w-3xl mx-auto">
-                    <h1>{title}</h1>
-                    <div className="mb-6">
+                    <h1 className="!mb-4">{title}</h1>
+                    <div className="mb-4">
                         {featuredImage && (
                             <GatsbyImage image={getImage(featuredImage)} alt={title} className="rounded" />
                         )}
@@ -217,6 +229,14 @@ export const query = graphql`
                         type
                     }
                 }
+            }
+        }
+        workflowTemplates: allPostHogWorkflowTemplate(sort: { fields: [name], order: ASC }) {
+            nodes {
+                fields {
+                    slug
+                }
+                name
             }
         }
     }

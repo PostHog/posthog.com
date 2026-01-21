@@ -29,7 +29,9 @@ interface WorkflowTemplate {
     name: string
     description: string
     image_url: string
-    slug: string
+    fields: {
+        slug: string
+    }
     created_by: {
         first_name: string
         last_name: string
@@ -92,6 +94,9 @@ export default function TemplatesLibrary(): JSX.Element {
             workflowTemplates: allPostHogWorkflowTemplate {
                 nodes {
                     templateId
+                    fields {
+                        slug
+                    }
                     name
                     description
                     image_url
@@ -128,7 +133,7 @@ export default function TemplatesLibrary(): JSX.Element {
         description: t.description || '',
         type: 'workflow' as const,
         image_url: t.image_url,
-        url: `/docs/cdp/workflows/templates/${t.templateId}`,
+        url: `/templates/workflow/${t.fields.slug}`,
         author: t.created_by ? `${t.created_by.first_name || ''} ${t.created_by.last_name || ''}`.trim() : undefined,
     }))
 

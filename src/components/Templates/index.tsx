@@ -33,7 +33,7 @@ export default function TemplatesPage(): JSX.Element {
                         surveys
                     </Link>
                     , or{' '}
-                    <Link to="/docs/cdp/workflows" state={{ newWindow: true }}>
+                    <Link to="/docs/workflows" state={{ newWindow: true }}>
                         workflows
                     </Link>
                     .
