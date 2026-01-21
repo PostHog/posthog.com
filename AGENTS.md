@@ -30,6 +30,7 @@ pnpm format                     # Prettier for js/ts/tsx/json/css
 contents/                       # MDX content (blog, docs, handbook, tutorials)
 src/
   components/                   # React components
+    TaskBarMenu/menuData.tsx    # Global navigation menu (top bar)
   context/App.tsx               # Window management, settings, navigation
   hooks/
     useProduct.ts               # Product data (icons, metadata)
@@ -39,7 +40,7 @@ src/
       README.md                 # Overview of how the `<ProductComparisonTable />` is populated
                                 # Also documented [in the handbook](contents/handbook/engineering/posthog-com/product-comparisons.mdx)
       {competitor}.tsx          # Array of normalized products, platform, and pricing data
-  navs/index.js                 # All navigation menus
+  navs/index.js                 # Source navigation menus used for most of the site (especially docs, handbook)
   styles/global.css             # Global styles with @apply
 gatsby/
   createPages.ts                # Page generation
