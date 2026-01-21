@@ -498,6 +498,39 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         publishedAt: Date! @dateformat
         title: String!
     }
+    type AchievementIconDataAttributes {
+        url: String
+    }
+    type AchievementIconData {
+        attributes: AchievementIconDataAttributes
+    }
+    type AchievementIcon {
+        data: AchievementIconData
+    }
+    type AchievementAttributes {
+        title: String
+        points: Int
+        description: String
+        icon: AchievementIcon
+    }
+    type AchievementData {
+        id: String
+        attributes: AchievementAttributes
+    }
+    type AchievementGroupAchievements {
+        data: [AchievementData]
+    }
+    type AchievementGroup implements Node {
+        strapiID: Int
+        achievements: AchievementGroupAchievements
+    }
+    type Achievement implements Node {
+        strapiID: Int
+        title: String
+        points: Int
+        description: String
+        icon: AchievementIcon
+    }
   `)
     createTypes([
         schema.buildObjectType({
