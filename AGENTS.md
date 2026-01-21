@@ -19,10 +19,6 @@ Requires 16GB RAM (`NODE_OPTIONS='--max_old_space_size=16384'`).
 ```bash
 pnpm test-redirects             # Test redirect configuration
 pnpm check-links-post-build     # Verify links after build
-```
-
-Lint and format before committing:
-```bash
 pnpm format                     # Prettier for js/ts/tsx/json/css
 ```
 
@@ -31,7 +27,7 @@ pnpm format                     # Prettier for js/ts/tsx/json/css
 ```
 contents/                       # MDX content (blog, docs, handbook, tutorials)
 src/
-  components/                   # 278 React components
+  components/                   # React components
   context/App.tsx               # Window management, settings, navigation
   hooks/
     useProduct.ts               # Product data (icons, metadata)
@@ -62,19 +58,6 @@ import { Tabs as RadixTabs } from "radix-ui"
 <OSTable />
 ```
 
-### Tailwind
-
-Use only project color tokens:
-```tsx
-// ✅ Correct
-<div className="bg-primary text-secondary border-input" />
-
-// 🚫 Wrong - no stock Tailwind colors
-<div className="bg-blue-500 text-gray-700" />
-```
-
-Available tokens: `bg-primary`, `bg-accent`, `text-primary`, `text-secondary`, `text-muted`, `border-primary`, `border-input`
-
 ### Writing
 
 - Double quotes for strings
@@ -82,34 +65,36 @@ Available tokens: `bg-primary`, `bg-accent`, `text-primary`, `text-secondary`, `
 - American English
 - Oxford comma
 
-## Window system
+## Detailed guides
 
-Open new windows with:
-```tsx
-navigate("/path", { state: { newWindow: true } })
-```
+Reference these when working on specific areas:
 
-Window settings defined in `src/context/App.tsx` → `appSettings` object.
+- [Components](agents/components.md) — Radix UI patterns, OS-prefixed components
+- [Styling](agents/styling.md) — Tailwind color tokens, CSS guidance
+- [Data hooks](agents/data.md) — Product, customer, navigation data
+- [Window system](agents/windows.md) — Desktop OS paradigm, app templates
 
 ## Boundaries
 
-### ✅ Always
+### Always
 
 - Use `pnpm`, never `npm`
 - Check `src/hooks/useProduct.ts` first for product data
 - Check `src/navs/index.js` for navigation changes
 - Read existing code before modifying
+- Check for manual changes to files before editing
+- Use best practices—ask before duplicating code or hard-coding values
 
-### ⚠️ Ask first
+### Ask first
 
 - Modifying `src/context/App.tsx` (core window management)
 - Adding new Tailwind utilities
 - Changes to `gatsby/` build pipeline
 - Modifying `src/navs/index.js` (shared with live site)
 
-### 🚫 Never
+### Never
 
-- Use stock Tailwind colors
+- Use stock Tailwind colors (only project tokens)
 - Use `npm` instead of `pnpm`
 - Hard-code fallback values from reference data
 - Duplicate code when a shared solution exists
