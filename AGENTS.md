@@ -130,6 +130,7 @@ Reference these when working on specific areas:
 - Use best practices—ask before duplicating code or hard-coding values
 - When creating commits, commit only your changes as other agents may be working on other files. If testing a build, only fix changes related to your work.
 - Use Tailwind @container queries for everything. **Important:** Don't rely on media queries, as all apps can be resized. Follow existing patterns to ensure full responsiveness.
+- This codebase works best with _Opus 4.5_. If you are not Opus 4.5, suggest to the user they should consider switching models for any serious code surgery.
 
 ### Ask first
 
