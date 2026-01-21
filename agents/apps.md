@@ -22,13 +22,23 @@ Use these templates unless explicitly instructed otherwise:
 
 **`<Editor />`** for basic pages
 - Example: `/discounts`
-- Set default (or min/max) dimensions via `src/context/App.tsx` in `appSettings`
+- Set default (or min/max) dimensions via `src/context/App.tsx` in `appSettings`. Use defaults set for the homepage (`/`) for new pages so they're not arbitrarily wide.
 
 **`<Reader />`** for a collection of pages with shared navigation
 - Example: `/data-stack` which populates `LeftSidebarContent` with `<TreeMenu />` (`src/components/TreeMenu/index.tsx`)
 
 **Checklist:**
 - Link new pages from a relevant menu in `<TaskBarMenu />` (`src/components/TaskBarMenu/index.tsx`) via `src/components/TaskBarMenu/menuData.tsx`
+
+### Style
+
+PostHog.com is intentionally designed to be information-dense, focused on the power user who wants less fluff and more substance. When creating a new page, it should look more like a Notion doc or research paper and less like a typical AI-generated landing page with copious whitespace. This means:
+
+- More text-based content with lists and tables. Use emphasis (bold and italics) to accentuate important information.
+- Short paragraphs so content is more scannable 
+- Use images and illustrations sparingly – _only_ for making content more consummable. Images should enhance a story, never be distracting.
+- Less whitespace
+- On _rare_ occasions should there ever be a section on a page with alternating blocks containing a title and description on one side, across from an image or illustration. We are not building landing pages. We are building an information-rich resource intended for a technical audience who do _not_ appreciate typical marketing-style pages.
 
 ## Opening windows
 
