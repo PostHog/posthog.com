@@ -25,7 +25,8 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 3. [Onboarding specialist referral](/handbook/onboarding/sales-handover)
 4. First signup from a company with 1000+ employees ('Big Fish') signaling a high potential large account early in their product led journey.
 5. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
-6. Self-generated campaigns
+6. Requests for Trust Center access that require an NDA
+7. Self-generated campaigns
   1. [Top10 campaign](https://posthog.slack.com/docs/TSS5W8YQZ/F0A9W1BVCKE) 
 7. Outbound leads manually qualified by BDRs (below).
 
