@@ -43,3 +43,4 @@ Use these project-specific classes:
 - `font-semibold`
 - `text-right` (for alignment)
 - `dark:text-yellow` (dark mode)
+  - Most dark mode styling is handled by default in CSS, so there are few times where `dark:` is needed. Generally `text-primary`, `bg-primary` will handle changing color values when toggling color modes.

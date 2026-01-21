@@ -25,14 +25,15 @@ Contains customer names, logos, and quotes used across the site.
 
 **Source:** `src/navs/index.js`
 
-All navigation data lives here:
+Most navigation data lives here:
 - `companyMenu`
 - `handbookSidebar`
 - `communityMenu`
 - `sexyLegalMenu`
 - `docsMenu`
 - `pricingMenu`
-- `productMenu`
 - `menu`
+
+Other menu data lives in `src/components/TaskBarMenu/menuData.tsx`
 
 **Important:** This file is shared with the live website. During development, filter the JSON data on the front end rather than modifying this file directly.

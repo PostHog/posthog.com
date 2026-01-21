@@ -1,13 +1,8 @@
 # AGENTS.md
 
-PostHog.com — Gatsby 4 website with a desktop OS UI paradigm. Pages open as draggable, resizable windows.
+_This file acts as a table of contents for various context needed when working in the codebase._
 
-## Agent rules
-
-- Avoid one-shotting (building anything) without a plan.
-- Ask for copious clarifications before building anything.
-- When using a component, check for a `README.md` inside the component's folder for detailed documentation.
-- When building a new component, add a `README.md` with comprehensive documentation.
+PostHog.com — Gatsby 4 website with a desktop OS UI paradigm. Pages open as draggable, resizable windows. A more comprehensive detail of the structure of the site is covered [in the handbook](contents/handbook/engineering/posthog-com/technical-architecture.md).
 
 ## Commands
 
@@ -42,6 +37,7 @@ src/
     useCustomers.tsx            # Customer logos, quotes
     competitorData/
       README.md                 # Overview of how the `<ProductComparisonTable />` is populated
+                                # Also documented [in the handbook](contents/handbook/engineering/posthog-com/product-comparisons.mdx)
       {competitor}.tsx          # Array of normalized products, platform, and pricing data
   navs/index.js                 # All navigation menus
   styles/global.css             # Global styles with @apply
@@ -54,45 +50,19 @@ api/                            # Vercel serverless functions
 
 Docs also pulled from main PostHog repo into `.cache/gatsby-source-git/`.
 
-## Apps
+## Apps and pages
 
-PostHog.com replicates a desktop-style OS. All pages should use one of these templates.
+PostHog.com replicates a desktop-style OS. All pages should use an app template:
 
-| Name 	| Example(s) 	| Source 	| Notes 	|  	|  	|
-|---	|---	|---	|---	|---	|---	|
-| `<Editor />` 	| `/customers` 	| @src/components/Editor/index.tsx 	| Google Docs-style page editor. Use `<MDXEditor />` inside to render Markdown content. 	|  	|  	|
-| `<Reader />` 	| `/docs/getting-started/send-events`<br />`/handbook/why-does-posthog-exist`<br />`/blog/why-os`<br />`/tutorials/cookieless-tracking` 	| @src/components/ReaderView/index.tsx 	| Up to 3 columns (nav, main, on-page nav) - optional 	|  	|  	|
-| `<Presentation />` 	| `/llm-analytics` 	| @src/components/Presentation/index.tsx 	| - Sources data from product hooks - Uses slide templates inside presentations 	|  	|  	|
-| `<Explorer />` 	| `/products` 	| @src/components/Explorer/index.tsx 	|  	|  	|  	|
-| `<Inbox />` 	| `/questions` 	| @src/components/Inbox/index.tsx 	| Outlook-style panes 	|  	|  	|
-| `<Wizard />` 	| `/vibe-check` 	| src/pages/vibe-check/index.tsx 	| Slides with navigation and a final screen 	|  	|  	|
-| `<MediaPlayer />` 	| `/demo` 	| @src/components/MediaPlayer/index.tsx 	| Quicktime clone, supports YouTube (nocookie), Wistia 	|  	|  	|
+- `<Editor />`
+- `<Reader />`
+- `<Presentation />`
+- `<Explorer />`
+- `<Inbox />`
+- `<Wizard />`
+- `<MediaPlayer />`
 
-When adding an internal link to another page that will open a different app, include `state={{ newWindow: true }}` to the previous window doesn't disappear from view.
-
-When creating a new page...
-  - Use the following app templates unless explicitly instructed otherwise:
-    - `<Editor />` for basic pages
-      - Example: `/discounts`
-      - Note: Set an app's default (or min/max) dimensions via @src/context/App.tsx in `appSettings`.
-    - `<Reader />` for a collection of pages that need a shared menu
-      - Example `/data-stack` which populates `LeftSidebarContent` for navigation with `<TreeMenu />` (@src/components/TreeMenu/index.tsx)
-  - Make sure the new page is linked from a relevant menu in `<TaskBarMenu />` (@src/components/TaskBarMenu/index.tsx) via `@src/components/TaskBarMenu/menuData.tsx
-
-### App-less windows
-
-In rare cases should an "app" not use one of the templates above. Here are examples of some exceptions:
-
-- `/talk-to-a-human` (@src/pages/talk-to-a-human.tsx) - acts more like a modal
-- `/kbd` page is one example (@src/pages/kbd/index.tsx) - custom form design
-
-### App components
-
-1. `<HeaderBar />` (@src/components/OSChrome/HeaderBar.tsx) is used in `Explorer`, `Inbox`, `Presentation`, `ReaderView`, merch store collections, community profiles, and bookmarks. Custom menu options are passed into it as needed.
-1. `<OSTable />` (@src/components/OSTable/index.tsx) accepts arrays of rows and columns
-1. `<OSTabs />` (@src/components/OSTabs/index.tsx) is useful for tabbing content.
-  Examples: Stacked tabs on homepage (@src/pages/index.tsx), Horizontal tabs on `/about` (@src/pages/about.tsx)
-1. `<MDXEditor />` (@src/components/MDXEditor/index.tsx) is used for parsing Markdown/MDX content
+See [Apps guide](agents/apps.md) for templates, creating pages, and shared components.
 
 ## Code style
 
@@ -123,7 +93,6 @@ import { Menubar as RadixMenubar } from 'radix-ui'
 <RadixMenubar.Root>...</RadixMenubar.Root>
 ```
 
-
 ### Writing
 
 - Double quotes for strings
@@ -136,18 +105,23 @@ import { Menubar as RadixMenubar } from 'radix-ui'
 
 Reference these when working on specific areas:
 
+- [Apps](agents/apps.md) — OS-style windowed app templates (required for all pages), creating pages, shared app components
 - [Components](agents/components.md) — Radix UI patterns, OS-prefixed components
 - [Styling](agents/styling.md) — Tailwind color tokens, CSS guidance
 - [Data hooks](agents/data.md) — Product, customer, navigation data
-- [Window system](agents/windows.md) — Desktop OS paradigm, app templates
+- [Window system](agents/windows.md) — Desktop OS architecture, window management
 
 ## Boundaries
 
 ### Always
 
+- Avoid one-shotting (building anything) without a plan.
+- Ask for copious clarifications before building anything.
+- When using a component, check for a `README.md` inside the component's folder for detailed documentation.
+- When building a new component, add a `README.md` with comprehensive documentation.
 - Use `pnpm`, never `npm`
 - Check `src/hooks/useProduct.ts` and `src/hooks/useProducts.tsx` first for product data
-- Check `src/navs/index.js` for navigation changes
+- Check `src/navs/index.js` for docs and handbook navigation changes
 - Read existing code before modifying
 - Check for manual changes to files before editing
 - Use best practices—ask before duplicating code or hard-coding values

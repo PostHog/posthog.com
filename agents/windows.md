@@ -1,6 +1,8 @@
 # Window system
 
-Reference this guide when working on the desktop OS paradigm or window management.
+Reference this guide when working on window management or the desktop OS architecture.
+
+For app templates and creating pages, see [Apps](apps.md).
 
 ## Overview
 
@@ -13,11 +15,15 @@ PostHog.com replicates a desktop operating system within the browser:
 
 ## Architecture
 
-**Desktop:** Rendered in `src/components/Desktop/index.tsx`. Apps (windows) launch from icons.
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| Desktop | `src/components/Desktop/index.tsx` | Renders the desktop, launches apps from icons |
+| AppWindow | `src/components/AppWindow/index.tsx` | Wraps page content in window chrome |
+| App context | `src/context/App.tsx` | Window management, settings, navigation |
 
-**App window:** `src/components/AppWindow/index.tsx` wraps page content in the window chrome.
+## Window settings
 
-**Settings:** `src/context/App.tsx` contains `appSettings` for window size configuration.
+Configure default and min/max dimensions in `src/context/App.tsx` via the `appSettings` object.
 
 ## Opening windows
 
@@ -27,19 +33,4 @@ Pass `state={{ newWindow: true }}` to open pages in new windows:
 navigate("/path", { state: { newWindow: true } })
 ```
 
-## App templates
-
-Different "apps" use various templates:
-
-| App | Location |
-|-----|----------|
-| ReaderView | `src/components/ReaderView/index.tsx` |
-| Wizard | `src/components/Wizard/index.tsx` |
-| Explorer | `src/components/Explorer/index.tsx` |
-
-## Key files
-
-- `src/components/Desktop/index.tsx` - Desktop rendering
-- `src/components/AppWindow/index.tsx` - Window component
-- `src/context/App.tsx` - Window management, settings, navigation
-- `src/pages/products/index.tsx` - Example page using window system
+This prevents the current window from being replaced when navigating to a different app.
