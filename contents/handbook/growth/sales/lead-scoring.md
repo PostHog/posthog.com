@@ -37,6 +37,14 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 
+### Demo booking
+
+Customers that want to book a demo who have a >20 ICP score automatically get shown a booking link for a demo with a TAE. Those <20 are for the TAE to manually review and schedule. [Default](https://www.default.com/) is our contact form submission routing system for managing this. 
+
+- We have an AI qualifier step to classify submissions as sales/support/spam. If 'support' or 'spam', it'll skip round robin - 'support' will auto create Zendesk tickets, 'spam' are dropped.
+- Accounts also have to match 2/3 requirements for revenue, title, and/or industry to see the instant scheduler. 
+- If an account has had a lead disqualified within the last month, we no longer show the scheduler.
+
 ## Lead scoring
 
 We calculate lead scores in Salesforce to help us prioritize our inbound book of business.  Put simply, the higher the score the higher value a potential contract with a customer **should** be.
