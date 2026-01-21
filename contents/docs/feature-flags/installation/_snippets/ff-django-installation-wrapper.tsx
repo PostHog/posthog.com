@@ -1,25 +1,25 @@
 import React from 'react'
 import {
-    NodeJSInstallation,
+    DjangoInstallation,
     BooleanFlagSnippet,
     MultivariateFlagSnippet,
     OverridePropertiesSnippet,
 } from 'onboarding/feature-flags'
-import { NodeEventCapture } from 'onboarding/product-analytics'
+import { PythonEventCapture } from 'onboarding/product-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const NodeJSInstallationWrapper = () => {
+export const FFDjangoInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                NodeEventCapture,
+                PythonEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
                 OverridePropertiesSnippet,
             }}
         >
-            <NodeJSInstallation modifySteps={addNextStepsStep} />
+            <DjangoInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

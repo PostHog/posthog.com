@@ -1,19 +1,23 @@
 import React from 'react'
-import { VueInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
-import { JSEventCapture } from 'onboarding/product-analytics'
+import {
+    RubyInstallation,
+    BooleanFlagSnippet,
+    MultivariateFlagSnippet,
+    OverridePropertiesSnippet,
+} from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const VueInstallationWrapper = () => {
+export const FFRubyInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
-                JSEventCapture,
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
+                OverridePropertiesSnippet,
             }}
         >
-            <VueInstallation modifySteps={addNextStepsStep} />
+            <RubyInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

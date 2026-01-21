@@ -1,23 +1,17 @@
 import React from 'react'
-import {
-    RubyInstallation,
-    BooleanFlagSnippet,
-    MultivariateFlagSnippet,
-    OverridePropertiesSnippet,
-} from 'onboarding/feature-flags'
+import { FlutterInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from 'onboarding/feature-flags'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 
-export const RubyInstallationWrapper = () => {
+export const FFFlutterInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper
             snippets={{
                 BooleanFlagSnippet,
                 MultivariateFlagSnippet,
-                OverridePropertiesSnippet,
             }}
         >
-            <RubyInstallation modifySteps={addNextStepsStep} />
+            <FlutterInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }
