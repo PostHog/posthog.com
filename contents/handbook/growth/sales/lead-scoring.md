@@ -33,7 +33,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 1. Self-generated campaigns - all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) as these change week-to-week
 2. Job switchers
 3. Low usage orgs
-4. Closed lost opps 4-6 months old where reason was 'unresponsive'
+4. Closed lost oops 4-6 months old where reason was 'unresponsive'
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 
