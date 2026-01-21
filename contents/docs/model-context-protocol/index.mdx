@@ -30,7 +30,10 @@ Add the MCP configuration to your client. When you first use the MCP server, you
 
 <CalloutBox icon="IconFlag" title="EU region users" type="fyi">
 
-If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For example: `https://mcp.posthog.com/mcp?region=eu`
+If your PostHog project is on EU Cloud:
+
+- **Claude Code**: Use `https://mcp-eu.posthog.com/mcp` (the EU subdomain is required for OAuth to work correctly)
+- **Other clients**: Add `?region=eu` to the MCP URLs, e.g., `https://mcp.posthog.com/mcp?region=eu`
 
 </CalloutBox>
 
