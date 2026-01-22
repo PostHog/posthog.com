@@ -1050,6 +1050,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/customer-case-studies',
             },
             {
+                name: 'Co-marketing',
+                url: '/handbook/marketing/co-marketing',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
