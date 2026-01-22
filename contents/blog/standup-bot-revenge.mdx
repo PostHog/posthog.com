@@ -18,10 +18,7 @@ tags:
 
 {/*TODO: Replace featured image with something fun - hedgehog vs robot?*/}
 
-```
-Standup Bot  [6:00 PM]
-📋 Standup
-```
+![The standup bot, taunting me](../images/blog/standup-bot-taunt.png)
 
 There it is. Sitting there. Goading me.
 
@@ -269,31 +266,115 @@ You: yes
 
 The agent automatically finds the latest standup thread in your configured channel and posts as a reply. No more hunting for the thread. No more copy-paste. Just vibes.
 
-## Cool features I'm proud of
+## A real example: today's standup
 
-### Chat mode
+Let me show you what this actually looks like in practice. Here's my actual standup session from today:
 
-Don't like the first draft? Just... talk to it:
-
-```bash
+```
 $ standup chat
 
-🤖: Ready to help with your standup. What would you like to do?
+You: lets draft a standup for today
 
-You: generate my standup but make it more casual
+Agent [Standup Coordinator] starting...
+  Tool: gather_github_data(...)
+  Tool: get_recent_standups(days=3)...
 
-🤖: [generates casual standup]
-
-You: add something about the architecture discussion I had with the team
-
-🤖: [updates standup with architecture discussion]
-
-You: looks good, post it
-
-🤖: ✅ Posted to Slack!
+Agent [Data Gatherer] starting...
+  Tool: get_activity_feed(days_back=1)...
+  Tool: get_activity_summary(days_back=1)...
+  Tool: list_prs(filter_by='involves', username='andrewm4894', ...)...
+  Tool: list_issues(...)...
+  Tool: list_commits(...)...
+  Tool: list_reviews(filter_by='given', ...)...
+  Tool: list_reviews(filter_by='received', ...)...
+  Tool: get_team_slack_standups(days_back=4)...
 ```
 
-The conversation persists using SQLite, so you can even resume a session later.
+The Data Gatherer fires off a bunch of parallel tool calls to collect everything I did. It found 83 GitHub events, 28 PRs I was involved with, 12 issues, 20 commits, and even pulled in recent standups from the team Slack channel for context.
+
+Then it drills down into specific PRs that look important:
+
+```
+  Tool: get_pr_details(repo='PostHog/posthog', number=45650, ...)...
+  Tool: get_pr_details(repo='PostHog/posthog', number=45603, ...)...
+  Tool: get_pr_details(repo='PostHog/posthog', number=45716, ...)...
+
+Agent [Summarizer] starting...
+Agent [Summarizer] finished
+```
+
+And out comes a draft standup. But here's where it gets fun - I can iterate on it naturally:
+
+```
+You: remove the ask, dont need it
+
+Agent [Standup Coordinator] starting...
+  Tool: create_standup_summary(input='Refinement request: remove the ask section...')...
+
+Agent [Summarizer] finished
+```
+
+The agent understood "remove the ask" and updated the standup. Then I remembered a PR I needed to follow up on:
+
+```
+You: add a will do for following up on the posthog-js review pr
+     i assigned myself - see if you can find it - related to openai sanitizing
+
+Agent [Data Gatherer] starting...
+  Tool: list_prs(filter_by='assigned', username='andrewm4894', ...)...
+  Tool: list_prs(filter_by='review-requested', ...)...
+  Tool: get_pr_details(repo='PostHog/posthog-js', number=2510, ...)...
+
+Agent [Data Gatherer] finished
+```
+
+I gave it a vague description and it *found the PR* by searching my assigned PRs and matching it to my description. That's the magic of having an agent with access to your actual GitHub data.
+
+### The inferred feedback (this is the cool part)
+
+When I was happy with the result, I said:
+
+```
+You: sweet! good job today my man, lets post this puppy to slack
+```
+
+Watch what happens next:
+
+```
+Agent [Standup Coordinator] starting...
+  Tool: capture_feedback_rating(rating='good',
+        comment='User said: "sweet! good job today my man"')...
+  Tool: publish_standup_to_slack(confirmed=False)...
+```
+
+The agent **automatically inferred positive feedback** from my casual message and logged it! I didn't have to explicitly say "thumbs up" - it picked up on "sweet! good job today my man" and captured that as a quality signal.
+
+This feedback gets linked to the trace in PostHog, so over time I'm building a dataset of what makes a good standup vs a bad one. That's the foundation for real evals.
+
+### The two-step publish
+
+The agent showed me a preview and asked for confirmation:
+
+```
+Assistant: Captured the feedback — thanks.
+
+Slack preview is ready (channel #team-llm-analytics, thread 1769094010.048539).
+Reply with "yes, publish to slack" (or "confirm publish") and I'll post it.
+
+You: hell yeah we win! letsgoooo!
+
+Agent [Standup Coordinator] starting...
+  Tool: confirm_slack_publish()...
+  Tool: publish_standup_to_slack(confirmed=True)...
+```
+
+And boom - posted to Slack:
+
+![The final standup posted to Slack](../images/blog/standup-bot-output.png)
+
+The whole session took about 7 minutes, but most of that was me iterating on the draft. The actual agent work? Seconds.
+
+## Cool features I'm proud of
 
 ### Few-shot prompting
 
