@@ -137,16 +137,22 @@ You’re digging for information that would assist you with identifying pain and
 
 Run a brief mental evaluation of their answers on the call. Look at four factors:
 
-* Specific pain identified  
-* Pain quantified (time/money/impact)  
+* Specific pain identified - they have to have a problem
+* You have a theory about how pain will be eventually quanitifed (time/money/impact) - this is "line of sight" not a finished ROI calculation. 
 * Timeline - willing to take action within the next 6 months  
-* Authority or direct connection to the economic buyer
+* Authority or direct connection to the economic buyer - we've got to deal with someone who can make a decision
 
-If you have fewer than 3 factors, now is the time to respectfully disqualify them. It’ll save them time and allow you to focus.
+If you are struggling to know, work a relevant question into your discovery, e.g. for timeline:
+
+    *Why is this a problem you're trying to solve this / next quarter?*
+
+Their answer, or correction, will tell you whether this is a priority for them.     
+
+If you have fewer than all four factors, now is the time to respectfully disqualify them. It’ll save them time and allow you to focus.
 
     *"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
 
-If you have 3 or more factors, it’s qualified and you should ask for permission to give them a pitch.
+If you have all four factors, it’s qualified and you should ask for permission to give them a pitch.
 
 We should disqualify outbound tasks, as creating opportunities that go nowhere won’t help us (or them).
 
