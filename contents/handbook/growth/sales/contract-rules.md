@@ -10,7 +10,7 @@ We get it, nobody likes rules. As we scale the Sales and CS teams we need to be 
 
 > We don't offer discounts to customers paying monthly, irrespective of commitment.
 
-Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](https://transparentsalesleadership.com), being transparent about what drives our discounting:
+Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
 ### The 4 Discount Levers & Why They Matter to Our Business
 
