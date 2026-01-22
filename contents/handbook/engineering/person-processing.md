@@ -107,7 +107,7 @@ A `distinct_id` is an identifier attached to every event. It's how we know which
 
 ### Person UUID
 
-Every person has a UUID. This UUID is **deterministic** - it's generated from `(team_id, distinct_id)` using UUIDv5:
+Every person theoretically has a single UUID. This UUID is **deterministic** - it's generated from `(team_id, distinct_id)` using UUIDv5:
 
 ```typescript
 // nodejs/src/worker/ingestion/person-uuid.ts
