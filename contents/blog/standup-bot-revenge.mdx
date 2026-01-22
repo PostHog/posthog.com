@@ -147,7 +147,7 @@ Details:
 
 Here's where it gets interesting. Building an agent is one thing. Understanding what it's actually doing? That's where [PostHog LLM analytics](/docs/ai-engineering) comes in.
 
-I instrumented the entire agent with our OpenAI Agents SDK integration:
+I instrumented the entire agent with our OpenAI Agents SDK integration - which, fun fact, was built during a one-day hackathon at a team onsite in Barcelona (where I also discovered [Calçots](https://en.wikipedia.org/wiki/Cal%C3%A7ot) - highly recommend). The integration was surprisingly quick to build thanks to the [excellent tracing support](https://openai.github.io/openai-agents-python/tracing/) that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
 
 ```python
 from posthog import Posthog
