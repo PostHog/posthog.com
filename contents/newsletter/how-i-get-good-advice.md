@@ -2,7 +2,7 @@
 title: How I actually get good advice
 date: 2026-01-12
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/528579241_b49dc97f_6aa7_49dd_afa0_332de058abd5_3aec05c3bc.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/fish_ebe9609afe.jpg
 author:
  - charles-cook
 featuredImageType: full
