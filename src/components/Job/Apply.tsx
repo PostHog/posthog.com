@@ -17,19 +17,6 @@ import { IconSpinner } from '@posthog/icons'
 
 const allowedFileTypes = ['application/pdf']
 
-const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-            const result = reader.result as string
-            const base64 = result.split(',')[1]
-            resolve(base64)
-        }
-        reader.onerror = reject
-        reader.readAsDataURL(file)
-    })
-}
-
 interface IResumeComponentProps {
     title: string
     required: boolean
@@ -221,49 +208,28 @@ const Form = ({
         setError(null)
 
         try {
-            const form = e.currentTarget
-            const data = new FormData(form)
-            const payload: {
-                fields: Record<string, string>
-                files: Record<string, { name: string; type: string; data: string }>
-                jobPostingId: string
-            } = {
-                fields: {},
-                files: {},
-                jobPostingId: id,
-            }
+            const data = new FormData(e.currentTarget)
+            const form = new FormData()
 
             for (const [name, value] of data as any) {
-                const el = form.querySelector(`[name="${name}"]`) as HTMLInputElement
+                const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
                 const path = el?.dataset.path
                 if (el?.type === 'file') {
-                    const file = value as File
-                    if (!file.size) continue
-                    if (!allowedFileTypes.includes(file.type)) {
+                    if (!allowedFileTypes.includes((value as File).type)) {
                         throw new Error(`Allowed file types: ${allowedFileTypes.join(', ')}`)
                     }
-                    const base64Data = await fileToBase64(file)
-                    payload.files[name] = {
-                        name: file.name,
-                        type: file.type,
-                        data: base64Data,
-                    }
-                    if (path) {
-                        payload.fields[path] = name
-                    }
+                    form.append(name, value)
+                    form.append(path || '', name)
                 } else {
-                    if (path) {
-                        payload.fields[path] = value as string
-                    }
+                    form.append(path || '', value as string)
                 }
             }
 
+            form.append('jobPostingId', id)
+
             const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/job-application/submit`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+                body: form,
             })
 
             if (!res.ok) {
