@@ -156,11 +156,11 @@ The naive solution is to JOIN the events table with a mapping table (`person_dis
 
 #### The overrides approach
 
-Instead, we use a two-part strategy, which involves periodically rewriting the `person_id` on events to respect these merges. We call this process squashing. This gives us a:
+Instead, we use a two-part strategy, which involves 
 
-1. **Small overrides table for queries**: We maintain `person_distinct_id_overrides` which only contains distinct_ids whose person mapping has **changed** (i.e., been merged) since the last squash. This table is tiny compared to `person_distinct_id2` - typically just thousands of rows instead of millions. Queries LEFT JOIN to this small table, which is fast.
+1. **Periodically rewriting the `person_id` on events to respect these merges**: We call this process squashing. Once events are rewritten, we delete those rows from `person_distinct_id_overrides`. This keeps the overrides table small.
 
-2. **Background squashing to keep it small**: A scheduled job periodically rewrites the `person_id` column directly in the events table to use the merged person's ID. Once events are rewritten, we delete those rows from `person_distinct_id_overrides`. This keeps the overrides table small.
+2. **Small overrides table for queries**: We maintain `person_distinct_id_overrides` which only contains distinct_ids whose person mapping has **changed** (i.e., been merged) since the last squash. This table is tiny compared to `person_distinct_id2` - typically just thousands of rows instead of millions. Queries can quickly LEFT JOIN to this small table instead of the massive overrides table.
 
 #### How squashing works
 
@@ -200,7 +200,7 @@ If a personless user later identifies themselves via `$identify`, an override is
 
 ## Detailed component walkthrough
 
-### 1. Capture (Rust)
+### 1. Capture (Rust / Kafka)
 
 **Location**: `rust/capture/`
 
@@ -211,6 +211,8 @@ If a personless user later identifies themselves via `$identify`, an override is
 - Produce events to Kafka
 
 **Key behavior for person processing**:
+
+**Kafka Topic**: `events_plugin_ingestion`
 
 The Kafka partition key for most events is `<token>:<distinct_id>`:
 
@@ -232,39 +234,26 @@ The Kafka partition key for most events is `<token>:<distinct_id>`:
 - Events with **different** distinct_ids may go to **different** partitions → no ordering guarantee
 - Note: Unfortunately this means an anonymous event and its corresponding `$identify` event (which has a different distinct_id) can be processed in parallel by different workers, the ingestion pipeline code is careful to avoid race conditions here.
 
-### 2. Kafka
-
-**Topic**: `events_plugin_ingestion`
-
-**Guarantees**:
-- Ordering within a partition (events with same distinct_id)
-- No ordering across partitions (events with different distinct_ids)
-
-**Implication for $identify**:
-- The anonymous event (`distinct_id=anon-123`) and the `$identify` event (`distinct_id=user@example.com`) go to different partitions
-- They may be processed by different workers, in any order
-
-### 3. Ingestion pipeline (Node.js)
+### 2. Ingestion pipeline (Node.js)
 
 **Location**: `nodejs/src/worker/ingestion/`
 
 The ingestion pipeline processes events in batches. For person processing:
 
-#### 3.1 Prefetch step
+#### 2.1 Prefetch step
 
 **Location**: `nodejs/src/worker/ingestion/event-pipeline/prefetchPersonsStep.ts`
 
 - Batch-fetches persons for all distinct_ids in the batch
 - Populates a cache to avoid repeated database lookups
 
-#### 3.2 Personless batch step
+#### 2.2 Personless batch step
 
 **Location**: `nodejs/src/worker/ingestion/event-pipeline/processPersonlessDistinctIdsBatchStep.ts`
 
 For events with `$process_person_profile: false`:
 - Batch-inserts into `posthog_personlessdistinctid` table
-- Records whether the distinct_id was already merged (`is_merged` flag)
-- Results are cached for use in the next step
+- Checks and caches whether the distinct_id was already merged (`is_merged` flag)
 
 ```sql
 -- nodejs/src/worker/ingestion/persons/repositories/postgres-person-repository.ts
