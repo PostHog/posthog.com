@@ -233,6 +233,11 @@ const Form = ({
             })
 
             if (!res.ok) {
+                if (res.status === 413) {
+                    throw new Error(
+                        'Your resume is a little too impressive to upload. Please reduce the file size and try again.'
+                    )
+                }
                 throw new Error('Failed to submit application. Please try again.')
             }
 
