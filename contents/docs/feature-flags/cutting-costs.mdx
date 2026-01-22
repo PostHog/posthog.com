@@ -65,20 +65,9 @@ You can do the following using the [advanced configuration](/docs/libraries/js/c
 
 3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey-related feature flags are evaluated, which significantly reduces costs if you primarily use PostHog for surveys. This disables evaluation of regular feature flags while still allowing surveys to function properly.
 
-<CalloutBox icon="IconInfo" title="Surveys and feature flag billing" type="info">
+<CalloutBox icon="IconWarning" title="Surveys use feature flags" type="caution">
 
-  If you plan to use PostHog primarily for surveys, consider either:
-
-  - Setting `advanced_only_evaluate_survey_feature_flags` to `true` to only evaluate survey-related flags
-  - Disabling or archiving all non-survey feature flags in your PostHog project
-
-  This prevents charges from evaluating unused feature flags when surveys are loaded.
-
-</CalloutBox>
-
-<CalloutBox icon="IconWarning" title="Note" type="caution">
-
-  Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally. You should use `advanced_only_evaluate_survey_feature_flags` instead if you use surveys.
+Surveys rely on feature flags internally. Using `advanced_disable_feature_flags` will disable surveys. If you use surveys, set `advanced_only_evaluate_survey_feature_flags` instead to only evaluate survey-related flags while skipping others.
 
 </CalloutBox>
 
@@ -129,6 +118,7 @@ The key settings are:
 <MultiLanguage>
 
 ```js-web
+// Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
 posthog.init('<ph_project_api_key>', {
@@ -154,6 +144,7 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 ```android
+// Detect test/CI environment
 val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
 
 val config = PostHogConfig(apiKey = "<ph_project_api_key>").apply {
@@ -177,6 +168,7 @@ if (isTestEnv) {
 ```
 
 ```ios
+// Detect test/CI environment
 let isTestEnv = ProcessInfo.processInfo.environment["CI"] != nil
 
 let config = PostHogConfig(apiKey: "<ph_project_api_key>")
@@ -197,6 +189,7 @@ if isTestEnv {
 ```
 
 ```dart
+// Detect test/CI environment
 final isTestEnv = Platform.environment['CI'] != null;
 
 final config = PostHogConfig('<ph_project_api_key>');
@@ -217,6 +210,7 @@ if (isTestEnv) {
 ```
 
 ```react-native
+// Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
 const posthog = await Posthog.initAsync('<ph_project_api_key>', {
@@ -237,18 +231,6 @@ if (isTestEnv) {
 
 </MultiLanguage>
 
-<CalloutBox icon="IconInfo" title="Environment detection patterns" type="info">
-
-Common patterns for detecting test environments:
-- **JavaScript**: `process.env.NODE_ENV === 'test'` or `process.env.CI === 'true'`
-- **Android**: `BuildConfig.DEBUG` or `System.getProperty("CI") != null`
-- **iOS**: `ProcessInfo.processInfo.environment["CI"] != nil`
-- **Flutter**: `Platform.environment['CI'] != null`
-
-Wrap your PostHog initialization in these checks to automatically use the "quiet" configuration in test/CI builds.
-
-</CalloutBox>
-
 For staging environments where you want flags to work but don't need real-time evaluation, consider using [flag overrides and bootstrapping](/docs/feature-flags/testing#method-2-use-posthogfeatureflagsoverridefeatureflags) instead of fetching from the server.
 
 ## Audit environments to catch unexpected `/flags` calls
@@ -258,12 +240,6 @@ For staging environments where you want flags to work but don't need real-time e
   Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don't send events, they may still be polling and making `/flags` calls for feature flags, session replay, and surveys.
 
   These environments often get overlooked, especially if they're not part of your main deployment flow.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="Tip" type="info">
-
-If you identify test or CI environments making unexpected requests, see [Configuring test and CI environments](#configuring-test-and-ci-environments) above for SDK-specific settings to minimize costs.
 
 </CalloutBox>
 
