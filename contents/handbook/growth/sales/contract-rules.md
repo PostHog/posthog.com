@@ -59,10 +59,6 @@ Beyond optimization, we offer discounts based on four levers:
 **For Renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 
-**Maximum Total Discount:** 45%
-
-> We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
-
 > You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
 
 ### Platform Adoption Bonus
