@@ -1,14 +1,14 @@
 import React from 'react'
-import Editor from 'components/Editor'
-import { SEO } from 'components/seo'
-import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
-import { ScrollToElement } from 'components/ScrollToElement'
-import OSTable from 'components/OSTable'
+import { CallToAction } from 'components/CallToAction'
+import { SEO } from 'components/seo'
 import { IconArrowRightDown, IconArrowUpRight } from '@posthog/icons'
-import { graphql, useStaticQuery } from 'gatsby'
 import Tooltip from 'components/RadixUI/Tooltip'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Editor from 'components/Editor'
+import { graphql, useStaticQuery } from 'gatsby'
+import { ScrollToElement } from 'components/ScrollToElement'
+import OSTable from 'components/OSTable'
 
 const ServiceLink = ({ label, to }: { label: string; to: string }) => (
     <ScrollToElement targetId={to} as="span" className="group font-semibold cursor-pointer whitespace-nowrap underline">
@@ -238,6 +238,10 @@ const TeamProfiles = () => {
     )
 }
 
+const initialContactValues = {
+    talk_about: "I'd like to learn more about PostHog's professional services.",
+}
+
 export const ProfessionalServices = () => {
     return (
         <>
@@ -274,7 +278,7 @@ export const ProfessionalServices = () => {
                         href="/talk-to-a-human"
                         type="primary"
                         size="md"
-                        state={{ newWindow: true }}
+                        state={{ newWindow: true, initialValues: initialContactValues }}
                         width="full"
                         className="@xl:hidden"
                     >
@@ -439,7 +443,12 @@ export const ProfessionalServices = () => {
                         quote within a day or two.
                     </p>
                     <div className="flex flex-wrap gap-3">
-                        <CallToAction href="/talk-to-a-human" type="primary" size="md" state={{ newWindow: true }}>
+                        <CallToAction
+                            href="/talk-to-a-human"
+                            type="primary"
+                            size="md"
+                            state={{ newWindow: true, initialValues: initialContactValues }}
+                        >
                             Get a custom quote
                         </CallToAction>
                         <CallToAction

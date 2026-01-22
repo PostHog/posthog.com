@@ -1050,6 +1050,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/customer-case-studies',
             },
             {
+                name: 'Co-marketing',
+                url: '/handbook/marketing/co-marketing',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
@@ -4286,8 +4290,8 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Cutting costs',
-                    url: '/docs/error-tracking/cutting-costs',
+                    name: 'Pricing',
+                    url: '/docs/error-tracking/pricing',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
                     featured: true,
