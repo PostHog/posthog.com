@@ -13,6 +13,7 @@ export default function TemplatesPage(): JSX.Element {
                 image="/images/og/default.png"
             />
             <Editor
+                maxWidth={1100}
                 title="templates"
                 type="library"
                 bookmark={{

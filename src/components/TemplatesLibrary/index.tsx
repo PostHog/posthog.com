@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, navigate } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
+import dayjs from 'dayjs'
 
 interface MdxTemplate {
     id: string
@@ -29,6 +30,7 @@ interface WorkflowTemplate {
     name: string
     description: string
     image_url: string
+    created_at: string
     fields: {
         slug: string
     }
@@ -51,17 +53,15 @@ interface UnifiedTemplate {
 
 const Title = ({ template }: { template: UnifiedTemplate }) => {
     return (
-        <div className="flex items-center space-x-3">
-            {template.image_url && (
-                <img
-                    src={template.image_url}
-                    alt={template.name}
-                    className="w-8 h-8 object-cover rounded flex-shrink-0"
-                />
-            )}
+        <div className="flex items-center gap-2">
             <Link to={template.url} state={{ newWindow: true }}>
                 {template.name}
             </Link>
+            {template.badge && (
+                <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-yellow/20 text-yellow dark:bg-yellow/30 dark:text-yellow">
+                    {template.badge}
+                </span>
+            )}
         </div>
     )
 }
@@ -100,6 +100,7 @@ export default function TemplatesLibrary(): JSX.Element {
                     name
                     description
                     image_url
+                    created_at
                     created_by {
                         first_name
                         last_name
@@ -127,21 +128,30 @@ export default function TemplatesLibrary(): JSX.Element {
     })
 
     // Convert workflow templates to unified format
-    const workflowTemplates: UnifiedTemplate[] = (data.workflowTemplates?.nodes || []).map((t: WorkflowTemplate) => ({
-        id: t.templateId,
-        name: t.name,
-        description: t.description || '',
-        type: 'workflow' as const,
-        image_url: t.image_url,
-        url: `/templates/workflow/${t.fields.slug}`,
-        author: t.created_by ? `${t.created_by.first_name || ''} ${t.created_by.last_name || ''}`.trim() : undefined,
-    }))
+    const workflowTemplates: UnifiedTemplate[] = (data.workflowTemplates?.nodes || []).map((t: WorkflowTemplate) => {
+        // Check if created within last 30 days
+        const isNew = t.created_at ? dayjs(t.created_at).isAfter(dayjs().subtract(30, 'day')) : false
+
+        return {
+            id: t.templateId,
+            name: t.name,
+            description: t.description || '',
+            type: 'workflow' as const,
+            image_url: t.image_url,
+            url: `/templates/workflow/${t.fields.slug}`,
+            badge: isNew ? 'New' : undefined,
+            author: t.created_by
+                ? `${t.created_by.first_name || ''} ${t.created_by.last_name || ''}`.trim()
+                : undefined,
+        }
+    })
 
     // Combine all templates
     const allTemplates: UnifiedTemplate[] = [...mdxTemplates, ...workflowTemplates]
 
     // Define table columns
     const columns = [
+        { name: '', width: '48px', align: 'center' as const },
         { name: 'Name', width: 'minmax(200px, 1.5fr)', align: 'left' as const },
         { name: 'Description', width: 'minmax(200px, 2fr)', align: 'left' as const },
         { name: 'Type', width: '120px', align: 'center' as const },
@@ -203,6 +213,11 @@ export default function TemplatesLibrary(): JSX.Element {
     // Create table rows
     const rows = sortedTemplates.map((template) => ({
         cells: [
+            {
+                content: template.image_url ? (
+                    <img src={template.image_url} alt={template.name} className="w-8 h-8 object-cover rounded" />
+                ) : null,
+            },
             {
                 content: <Title template={template} />,
             },

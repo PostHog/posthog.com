@@ -510,6 +510,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         name: String
         description: String
         image_url: String
+        created_at: Date
         created_by: PostHogWorkflowTemplateCreatedBy
         fields: PostHogWorkflowTemplateFields
     }
