@@ -1708,7 +1708,8 @@
             "source": "/docs/revenue-analytics/common-questions",
             "destination": "/docs/revenue-analytics/troubleshooting"
         },
-        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" }
+        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
+        { "source": "/contributors", "destination": "/docs/contribute" }
     ],
     "headers": [
         {
