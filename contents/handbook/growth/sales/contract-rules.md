@@ -14,7 +14,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 
 ### The 4 Discount Levers & Why They Matter to Our Business
 
-Our general principle is that discounts are earned, not given. Each lever represents real value exchange:
+Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
 1. **Volume:** The amount of credits purchased - *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
 2. **Timing of Cash:** When we receive payment - *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
 3. **Length of Commitment:** Contract duration - *Longer commitments reduce our customer acquisition costs. We spend less on renewals and can invest more in product development*
