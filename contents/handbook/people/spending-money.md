@@ -23,8 +23,7 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 
 ## HOW IT WORKS 🏭
 - All company expenses (offsites, software/tool subscriptions, merch, etc.) will have common company-wide budgets.
-- You'll be assigned a single 'User Limit' of $5,000 per month from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptop and studio monitor), training, etc. If you need an increase in the limit, request it on Brex.
-
+- You'll be assigned a single 'User Limit' of $5,000 per month from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptop and studio monitor - ping #team-people-and-ops for this), training, etc. If you need an increase in the limit, request it on Brex.
 
 ### TRANSPARENCY & ACCOUNTABILITY 🧑‍🏫
 - All **expenses are visible company-wide**: we believe transparency drives better decision-making.
