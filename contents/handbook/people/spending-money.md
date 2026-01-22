@@ -190,8 +190,8 @@ Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles
 We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication).
 
 #### Other equipment
-- Keyboard/mouse/laptop stand: refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
-- If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
+- Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
+- Desk & Chair - again, refurbished is fine. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
 
 ### SOFTWARE
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
