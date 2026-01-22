@@ -5,6 +5,7 @@ import { SEO } from 'components/seo'
 import { TreeMenu } from 'components/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
+import TemplateCTAs from 'components/TemplateCTAs'
 
 export default function WorkflowTemplate({ data }) {
     if (!data) return null
@@ -13,7 +14,7 @@ export default function WorkflowTemplate({ data }) {
 
     if (!workflow) return null
 
-    const { templateId, name, description, image_url, created_by } = workflow
+    const { name, description, image_url, created_by } = workflow
 
     // Build sidebar menu from all templates
     const dashboardTemplates = (mdxTemplates?.nodes || []).filter((t) =>
@@ -94,16 +95,13 @@ export default function WorkflowTemplate({ data }) {
                             Created by <span className="font-semibold">{authorName}</span>
                         </p>
                     )}
-                    <div className="flex gap-2 mb-12 mt-5">
-                        <CallToAction
-                            href={`https://app.posthog.com/workflows?templateFilter=${name}#newWorkflow`}
-                            type="primary"
-                        >
-                            Get started with this template
-                        </CallToAction>
-                        <CallToAction href="https://app.posthog.com/workflows" type="secondary">
-                            Create your own
-                        </CallToAction>
+                    <div className="mb-12 mt-5">
+                        <TemplateCTAs
+                            urls={{
+                                primary: `https://app.posthog.com/workflows?templateFilter=${name}#newWorkflow`,
+                                secondary: `https://app.posthog.com/workflows/new/workflow`,
+                            }}
+                        />
                     </div>
                 </div>
             </ReaderView>
