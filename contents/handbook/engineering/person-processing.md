@@ -490,10 +490,9 @@ WHERE team_id = X AND distinct_id = 'anon-123'
 
 ### ClickHouse schema (Python)
 
-| File | Purpose |
-|------|---------|
-| `posthog/models/person/sql.py` | Person and person_distinct_id table definitions |
-| `posthog/models/person_overrides/sql.py` | person_distinct_id_overrides table and materialized view |
+| File | Purpose                                        |
+|------|------------------------------------------------|
+| `posthog/models/person/sql.py` | Person, person_distinct_id, person_distinct_id_overrides table definitions |
 
 ### Squashing job (Python)
 
