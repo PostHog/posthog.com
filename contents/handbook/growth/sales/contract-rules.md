@@ -46,7 +46,7 @@ Beyond optimization, we offer discounts based on four levers:
 - **Paid upfront (multi-year deals):** +2.5% per year paid upfront
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
-> Note: We currently require upfront payment for all discounted annual contracts. Quarterly or split payment terms would reduce the overall discount available as they impact our cash flow and create administrative overhead.
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier.
 
 #### 4. Ability to Forecast - Mutual Commitment to Timing (Additive)
 
