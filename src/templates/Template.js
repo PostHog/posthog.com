@@ -42,19 +42,6 @@ const TemplateCTAs = ({ type, title, usePrefilterLink = true }) => {
     )
 }
 
-// Format headings into table of contents, similar to createPages
-function formatToc(headings) {
-    const slugger = new Slugger()
-    return headings.map((heading) => {
-        const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
-        return {
-            ...heading,
-            url: `#${slugger.slug(cleanValue)}`,
-            value: cleanValue,
-        }
-    })
-}
-
 export default function Template({ data }) {
     const { pageData, templates, workflowTemplates } = data
     const {
@@ -74,9 +61,6 @@ export default function Template({ data }) {
     } = pageData?.frontmatter
     const type = filters?.type?.map((t) => t.toLowerCase()) || []
     const filePath = parent?.relativePath
-
-    // Generate table of contents from headings or use frontmatter
-    const tableOfContents = frontmatterToc || (headings ? formatToc(headings) : null)
 
     // Group templates by type for the sidebar menu
     const allTemplates = templates?.nodes || []
