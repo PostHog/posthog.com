@@ -31,6 +31,7 @@ Most integrations stop here. But if there's genuine opportunity, then it's worth
 - A video walkthrough if the workflow is complex
 - A blog article or other co-authored content
 
+In some cases where there's big partnership potential, the partnership is of a strategic significance, and the ICP is the same, feel free to explore a joint in-person event that will gather the community of both partners and deliver value from both sides. 
 > Like all PostHog marketing, co-marketing should be useful to the reader. A super simple way to signal compatibility without being promotional is to casually reference partner companies in docs and editorial. However, we avoid case studies where there isn't an interesting story, guest posts, and other marketing 'fluff' content.
 
 For example, PostHog docs might say "If you're routing LLMs (e.g. via OpenRouter)..." while OpenRouter docs say "Track downstream behavior in PostHog..."
