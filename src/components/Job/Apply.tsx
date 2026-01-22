@@ -227,7 +227,7 @@ const Form = ({
 
             form.append('jobPostingId', id)
 
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/job-application/submit`, {
+            const res = await fetch('/api/apply', {
                 method: 'POST',
                 body: form,
             })
