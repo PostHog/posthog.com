@@ -3,85 +3,85 @@ import Editor from 'components/Editor'
 import { SEO } from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
+import { ScrollToElement } from 'components/ScrollToElement'
 import OSTable from 'components/OSTable'
-import { IconWrench } from '@posthog/icons'
+import { IconArrowRightDown, IconArrowUpRight } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import Tooltip from 'components/RadixUI/Tooltip'
+import CloudinaryImage from 'components/CloudinaryImage'
+
+const ServiceLink = ({ label, to }: { label: string; to: string }) => (
+    <ScrollToElement targetId={to} as="span" className="group font-semibold cursor-pointer whitespace-nowrap underline">
+        {label}
+        <IconArrowRightDown className="inline-block size-4 invisible group-hover:visible" />
+    </ScrollToElement>
+)
 
 const ServicesTable = () => {
     const columns = [
-        { name: 'Service', width: '140px', align: 'left' as const },
+        { name: 'Service', width: '150px', align: 'left' as const },
         { name: 'What we do', width: '1fr', align: 'left' as const },
-        { name: 'Timeline', width: '100px', align: 'center' as const },
     ]
 
     const rows = [
         {
             cells: [
                 {
-                    content: <strong>Migration</strong>,
-                    className: 'font-semibold',
+                    content: <ServiceLink label="Migration" to="migration" />,
                 },
                 {
                     content: (
-                        <span>
-                            Move you from Amplitude, Mixpanel, Heap, LaunchDarkly, GA, or Pendo. We'll import your
-                            historic data and buy out existing contracts.
-                        </span>
+                        <ul className="-my-1">
+                            <li>Move you from Amplitude, Mixpanel, Heap, LaunchDarkly, GA, or Pendo</li>
+                            <li>We'll import your historic data and buy out existing contracts</li>
+                        </ul>
                     ),
                 },
-                { content: <span className="text-muted">1-4 weeks</span> },
             ],
         },
         {
             cells: [
                 {
-                    content: <strong>Instrumentation</strong>,
-                    className: 'font-semibold',
+                    content: <ServiceLink label="Instrumentation" to="instrumentation" />,
                 },
                 {
                     content: (
-                        <span>
-                            SDK setup across your stack, event tracking, privacy compliance (HIPAA, SOC 2), plus initial
-                            dashboards, feature flags, and surveys.
-                        </span>
+                        <ul className="-my-1">
+                            <li>SDK setup across your stack, event tracking, privacy compliance (HIPAA, SOC 2)</li>
+                            <li>Initial dashboards, feature flags, and surveys</li>
+                        </ul>
                     ),
                 },
-                { content: <span className="text-muted">1-2 weeks</span> },
             ],
         },
         {
             cells: [
                 {
-                    content: <strong>Training</strong>,
-                    className: 'font-semibold',
+                    content: <ServiceLink label="Training" to="training" />,
                 },
                 {
                     content: (
-                        <span>
-                            Best practices, team onboarding, and hands-on sessions. Remote by default, on-site available
-                            if you want face time.
-                        </span>
+                        <ul className="-my-1">
+                            <li>Best practices, team onboarding, and hands-on sessions</li>
+                            <li>Remote by default, on-site available</li>
+                        </ul>
                     ),
                 },
-                { content: <span className="text-muted">Ongoing</span> },
             ],
         },
         {
             cells: [
                 {
-                    content: <strong>Integration</strong>,
-                    className: 'font-semibold',
+                    content: <ServiceLink label="Integration" to="integration" />,
                 },
                 {
                     content: (
-                        <span>
-                            Connect your data sources (Stripe, Snowflake, Hubspot, Zendesk) and set up pipelines,
-                            destinations, and real-time workflows.
-                        </span>
+                        <ul className="-my-1">
+                            <li>Connect your data sources (Stripe, Snowflake, Hubspot, Zendesk)</li>
+                            <li>Set up pipelines, destinations, and real-time workflows</li>
+                        </ul>
                     ),
                 },
-                { content: <span className="text-muted">1-2 weeks</span> },
             ],
         },
     ]
@@ -105,9 +105,11 @@ const MigrationVendors = () => {
                 <Link
                     key={vendor.name}
                     to={vendor.url}
-                    className="inline-flex items-center px-2.5 py-1 rounded border border-primary bg-accent text-sm hover:border-b-[3px] hover:-translate-y-0.5 active:translate-y-0 active:border-b transition-all"
+                    className="group inline-flex items-center  text-sm  whitespace-nowrap"
+                    state={{ newWindow: true }}
                 >
                     {vendor.name}
+                    <IconArrowUpRight className="inline-block size-4 opacity-30 group-hover:opacity-75" />
                 </Link>
             ))}
         </div>
@@ -178,9 +180,14 @@ const TeamProfiles = () => {
     const remainingCount = profiles.length > maxDisplay ? profiles.length - 7 : 0
 
     return (
-        <div className="mt-6">
-            <p className="text-sm text-secondary mb-2">Your dedicated team:</p>
-            <div className="flex flex-wrap justify-start ml-3" dir="rtl">
+        <div className="mb-8">
+            <p>
+                We don't do sales pitches or hard sells – just one simple call or quick email thread to find out what
+                you need. We'll then assign a dedicated PostHog staff member to work with you.
+            </p>
+
+            <p>Team members who insist they really do enjoy quick calls include:</p>
+            <div className="flex flex-wrap justify-end ml-3" dir="rtl">
                 {remainingCount > 0 && (
                     <span className="visible cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-primary">
                         <Tooltip
@@ -235,7 +242,7 @@ export const ProfessionalServices = () => {
     return (
         <>
             <SEO
-                title="Professional Services - PostHog"
+                title="Services - PostHog"
                 description="Forward-deployed engineers to help you migrate, instrument, train, and integrate PostHog into your stack."
                 image={`/images/og/deskhog.jpg`}
             />
@@ -243,68 +250,77 @@ export const ProfessionalServices = () => {
                 maxWidth={900}
                 proseSize="base"
                 bookmark={{
-                    title: 'Professional Services',
+                    title: 'Services',
                     description: 'Expert help for PostHog setup',
                 }}
             >
-                {/* Header */}
-                <div className="flex items-center gap-2 mb-1">
-                    <span className="size-6 text-blue">
-                        <IconWrench />
-                    </span>
-                    <span className="text-sm font-semibold text-secondary uppercase tracking-wide">
-                        Professional Services
-                    </span>
-                </div>
+                <h1 className="text-center @xl:text-left pt-8 mb-4">Hire a PostHog expert</h1>
 
-                <h1 className="!mt-0 !mb-3">Hire a PostHog expert</h1>
+                <CloudinaryImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png"
+                    width={436}
+                    className="flex justify-center @xl:justify-start @xl:float-right rotate-1 @xl:ml-8 @xl:max-w-64 @2xl:max-w-80 mb-4"
+                />
 
-                <p className="text-lg !mt-0 mb-6">
-                    <strong>Forward-deployed engineers</strong> to get you up and running fast. From complete
-                    installation packages to one-off projects—we handle whatever you need.
+                <p className="text-lg !mt-0 mb-6 text-center @xl:text-left">
+                    From complete installation packages to one-off projects,{' '}
+                    <strong>PostHog's forward-deployed engineers are here to help.</strong>
                 </p>
 
-                {/* TL;DR Box */}
-                <div className="bg-accent dark:bg-accent-dark border border-primary rounded p-4 mb-8">
-                    <div className="@md:flex @md:items-start @md:justify-between gap-6">
-                        <div className="flex-1">
-                            <p className="!mt-0 !mb-2">
-                                <strong>Pricing:</strong> ~20% of your first year credit purchase, $5k minimum.
-                                Scope-based—you only pay for what you need.
-                            </p>
-                            <p className="!m-0 text-sm text-secondary">
-                                Need something smaller?{' '}
-                                <Link to="/merch?product=30-min-onboarding-consultation" className="font-semibold">
-                                    Book a 30-minute consultation
-                                </Link>{' '}
-                                instead.
-                            </p>
-                        </div>
-                        <div className="mt-4 @md:mt-0 flex-shrink-0">
-                            <CallToAction href="/talk-to-a-human" type="primary" size="md">
-                                Talk to us
-                            </CallToAction>
-                        </div>
-                    </div>
+                <div>
+                    <CallToAction
+                        href="/talk-to-a-human"
+                        type="primary"
+                        size="md"
+                        state={{ newWindow: true }}
+                        width="full"
+                        className="@xl:hidden"
+                    >
+                        Get a custom quote
+                    </CallToAction>
+
+                    <CallToAction
+                        href="/talk-to-a-human"
+                        type="primary"
+                        size="md"
+                        state={{ newWindow: true }}
+                        className="hidden @xl:inline-flex"
+                    >
+                        Get a custom quote
+                    </CallToAction>
                 </div>
+
+                <p className="text-sm text-secondary text-center @xl:text-left mb-12">
+                    Just need some quick help?{' '}
+                    <Link to="/merch?product=30-min-onboarding-consultation" state={{ newWindow: true }}>
+                        Book a 30-minute consultation
+                    </Link>{' '}
+                    with a PostHog expert for $80.
+                </p>
 
                 {/* Services Table */}
-                <h2 className="!mt-0">What we offer</h2>
+                <h2 className="!mt-0">How it works</h2>
+                <TeamProfiles />
+
+                <h2 className="!mt-0">How we can help</h2>
                 <ServicesTable />
 
-                {/* Detailed Sections */}
-                <h2>Service details</h2>
-
-                <h3>Migration</h3>
+                <h3 id="migration">Migration</h3>
                 <p>
                     Ditching Amplitude, Mixpanel, or another legacy tool? We'll handle the entire migration: export your
-                    historic data, map your events to PostHog's schema, and verify everything works. We'll also{' '}
-                    <strong>buy out your existing contracts</strong> so you can switch without paying twice.
+                    historic data, map your events to PostHog's schema, and verify everything works.
                 </p>
-                <p className="text-sm text-secondary !mb-2">We've migrated customers from:</p>
+                <p>
+                    We'll also <strong>buy out your existing contracts</strong> so you can switch without paying twice.
+                </p>
+                <p className="text-sm text-secondary !mb-2">Guides for migration to PostHog from...</p>
                 <MigrationVendors />
 
-                <h3 className="!mt-8">Instrumentation</h3>
+                <h3 id="instrumentation" className="!mt-8">
+                    Instrumentation
+                </h3>
                 <p>
                     Complex tracking needs? Privacy requirements? We'll set up PostHog correctly for your marketing site
                     and app—tracking users comprehensively while tuning events so you only pay for what matters.
@@ -315,50 +331,57 @@ export const ProfessionalServices = () => {
                     </li>
                     <li>
                         <strong>Privacy compliance</strong> setup (HIPAA BAA, SOC 2, GDPR)—use our{' '}
-                        <Link to="/baa">BAA generator</Link> and <Link to="/dpa">DPA builder</Link>
+                        <Link to="/baa" state={{ newWindow: true }}>
+                            BAA
+                        </Link>{' '}
+                        and{' '}
+                        <Link to="/dpa" state={{ newWindow: true }}>
+                            DPA
+                        </Link>{' '}
+                        generators
                     </li>
                     <li>
                         <strong>Initial dashboards, feature flags, and surveys</strong> configured to your specs
                     </li>
                 </ul>
 
-                <h3>Training</h3>
+                <h3 id="training">Training</h3>
                 <p>
                     We'll make sure your team knows their analytics from their elbows—with minimal meetings. You'll
                     learn our best practices and how to use PostHog to its fullest.
                 </p>
                 <ul>
                     <li>
-                        <strong>Remote by default</strong>—async docs, video calls, Slack support
+                        <strong>Remote by default</strong> — async docs, video calls, Slack support
                     </li>
                     <li>
                         <strong>On-site available</strong> if you want face-to-face sessions (we'll travel)
                     </li>
                     <li>
-                        <strong>Merch included</strong>—because everyone deserves a hedgehog sticker
+                        <strong>Merch included</strong> — because everyone deserves a hedgehog sticker
                     </li>
                 </ul>
 
-                <h3>Integration</h3>
+                <h3 id="integration">Integration</h3>
                 <p>
                     Whatever tools you use, we'll get them talking to PostHog. We can work with your existing data stack
                     or help you build one from scratch using PostHog's data warehouse.
                 </p>
                 <ul>
                     <li>
-                        <Link to="/data-stack/sources">
+                        <Link to="/data-stack/sources" state={{ newWindow: true }}>
                             <strong>Data sources</strong>
                         </Link>{' '}
                         — pull from Stripe, Hubspot, Zendesk, Postgres, and more
                     </li>
                     <li>
-                        <Link to="/cdp">
+                        <Link to="/cdp" state={{ newWindow: true }}>
                             <strong>Pipeline destinations</strong>
                         </Link>{' '}
                         — push to your CRM, data warehouse, or anywhere else
                     </li>
                     <li>
-                        <Link to="/workflows">
+                        <Link to="/workflows" state={{ newWindow: true }}>
                             <strong>Workflows</strong>
                         </Link>{' '}
                         — trigger real-time actions based on user behavior
@@ -366,12 +389,12 @@ export const ProfessionalServices = () => {
                 </ul>
 
                 {/* How it works */}
-                <h2>How it works</h2>
+                <h2>Our process</h2>
                 <div className="space-y-4 mb-8">
                     <ProcessStep
                         number={1}
                         title="Tell us what you need"
-                        description="Quick call or email—no sales pitch, just understanding your requirements."
+                        description="Quick call or email—no sales pitch, just understanding your requirements"
                     />
                     <ProcessStep
                         number={2}
@@ -381,7 +404,7 @@ export const ProfessionalServices = () => {
                     <ProcessStep
                         number={3}
                         title="We do the work"
-                        description="Migration, setup, training—whatever's in scope. You review, we iterate."
+                        description="Migration, setup, training—whatever's in scope. You review, we iterate"
                     />
                     <ProcessStep
                         number={4}
@@ -390,21 +413,42 @@ export const ProfessionalServices = () => {
                     />
                 </div>
 
-                <TeamProfiles />
+                <h2>Pricing</h2>
+                <p>
+                    Pricing is based on the scope of work, usually amounting to{' '}
+                    <strong>around 20% of your first year credit purchase</strong> with a <strong>$5k minimum.</strong>
+                </p>
+
+                <p className="!m-0 text-sm text-secondary">
+                    Need something smaller?{' '}
+                    <Link
+                        to="/merch?product=30-min-onboarding-consultation"
+                        className="font-semibold"
+                        state={{ newWindow: true }}
+                    >
+                        Book a 30-minute consultation
+                    </Link>{' '}
+                    instead.
+                </p>
 
                 {/* Final CTA */}
-                <div className="border-t border-primary pt-8 mt-8">
+                <div className="border-t border-primary pt-8 mt-8 pb-16">
                     <h2 className="!mt-0">Ready to get started?</h2>
                     <p>
                         Tell us what you're trying to accomplish. We'll figure out the scope together and get you a
                         quote within a day or two.
                     </p>
                     <div className="flex flex-wrap gap-3">
-                        <CallToAction href="/talk-to-a-human" type="primary" size="lg">
-                            Talk to us about custom options
+                        <CallToAction href="/talk-to-a-human" type="primary" size="md" state={{ newWindow: true }}>
+                            Get a custom quote
                         </CallToAction>
-                        <CallToAction href="/merch?product=30-min-onboarding-consultation" type="secondary" size="lg">
-                            Get a 30-minute consultation
+                        <CallToAction
+                            href="/merch?product=30-min-onboarding-consultation"
+                            type="secondary"
+                            size="md"
+                            state={{ newWindow: true }}
+                        >
+                            Get a 30 min consultation ($80)
                         </CallToAction>
                     </div>
                 </div>
