@@ -18,7 +18,7 @@ tags:
 
 {/*TODO: Replace featured image with something fun - hedgehog vs robot?*/}
 
-![The standup bot, taunting me](../images/blog/standup-bot-revenge/standup-bot-taunt.png)
+![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_taunt_b24351e046.png)
 
 There it is. Sitting there. Goading me.
 
@@ -149,7 +149,7 @@ Here's where it gets interesting. Building an agent is one thing. Understanding 
 
 I instrumented the entire agent with our OpenAI Agents SDK integration - which, fun fact, was built during a one-day hackathon at a team onsite in Barcelona (where I also discovered [Calçots](https://en.wikipedia.org/wiki/Cal%C3%A7ot) - highly recommend). The integration was surprisingly quick to build thanks to the [excellent tracing support](https://openai.github.io/openai-agents-python/tracing/) that OpenAI baked into the Agents SDK. We just needed to extend their `TracingProcessor` to send spans to PostHog instead of their default backend.
 
-![The team enjoying Calçots in Barcelona - fuel for hackathons](../images/blog/standup-bot-revenge/team-calcots.jpg)
+![The team enjoying Calçots in Barcelona - fuel for hackathons](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/team_calcots_295b5fff5e.jpg)
 
 ```python
 from posthog import Posthog
@@ -180,11 +180,11 @@ Every agent run creates a trace with spans for:
 
 I can see exactly how my coordinator decided to call the data gatherer, what GitHub tools it used, and how the summarizer turned that data into prose.
 
-![Trace view showing the full agent workflow](../images/blog/standup-bot-revenge/trace-view.png)
+![Trace view showing the full agent workflow](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_view_ecd9c7e1ce.png)
 
 Each trace also gets an AI-generated summary so you can quickly understand what happened without digging into every span:
 
-![Trace summary giving a quick overview](../images/blog/standup-bot-revenge/trace-summary.png)
+![Trace summary giving a quick overview](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_summary_3ac40f38d4.png)
 
 ### Events and metrics
 
@@ -241,7 +241,7 @@ Over time, this builds a dataset for understanding:
 
 This is the foundation for [evals](/docs/ai-engineering/evals) - systematic quality measurement for your AI features.
 
-![Evals in PostHog showing quality metrics linked to traces](../images/blog/standup-bot-revenge/eval-example.png)
+![Evals in PostHog showing quality metrics linked to traces](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/eval_example_dfd408a6b2.png)
 
 ## The victory lap: posting to Slack
 
@@ -374,7 +374,7 @@ Agent [Standup Coordinator] starting...
 
 And boom - posted to Slack:
 
-![The final standup posted to Slack](../images/blog/standup-bot-revenge/standup-bot-output.png)
+![The final standup posted to Slack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_output_f9eff991f3.png)
 
 The whole session took about 7 minutes, but most of that was me iterating on the draft. The actual agent work? Seconds.
 
