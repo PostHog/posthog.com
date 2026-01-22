@@ -88,12 +88,23 @@ export default function WorkflowTemplate({ data }) {
                             />
                         </div>
                     )}
-                    {description && <p className="mb-4 mt-0">{description}</p>}
+                    {description && <p className="mb-1.5 mt-0">{description}</p>}
                     {authorName && (
                         <p className="text-sm text-muted m-0">
                             Created by <span className="font-semibold">{authorName}</span>
                         </p>
                     )}
+                    <div className="flex gap-2 mb-12 mt-5">
+                        <CallToAction
+                            href={`https://app.posthog.com/workflows?templateFilter=${name}#newWorkflow`}
+                            type="primary"
+                        >
+                            Get started with this template
+                        </CallToAction>
+                        <CallToAction href="https://app.posthog.com/workflows" type="secondary">
+                            Create your own
+                        </CallToAction>
+                    </div>
                 </div>
             </ReaderView>
         </>

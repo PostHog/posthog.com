@@ -26,9 +26,9 @@ const TemplateCTAs = ({ type, title, usePrefilterLink = true }) => {
     if (!isDashboard && !isSurvey) return null
 
     const primaryHref = isDashboard
-        ? `https://us.posthog.com/dashboard?${usePrefilterLink ? `templateFilter=${title}` : ''}#newDashboard`
-        : 'https://us.posthog.com/survey_templates'
-    const secondaryHref = isDashboard ? 'https://us.posthog.com/dashboard' : 'https://us.posthog.com/surveys'
+        ? `https://app.posthog.com/dashboard?${usePrefilterLink ? `templateFilter=${title}` : ''}#newDashboard`
+        : 'https://app.posthog.com/survey_templates'
+    const secondaryHref = isDashboard ? 'https://app.posthog.com/dashboard' : 'https://app.posthog.com/surveys'
 
     return (
         <div className="flex justify-center gap-2 mb-12">
