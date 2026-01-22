@@ -60,7 +60,7 @@ Events flow through several systems before they're queryable:
                                   ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                 │
-│   Plugin Server / Ingestion Pipeline (Node.js)                                  │
+│   Ingestion Pipeline (Node.js) - formerly called Plugin Server                                  │
 │   - Person processing (creates/updates/merges persons in PostgreSQL)            │
 │   - Property updates ($set, $set_once, $unset)                                  │
 │   - Produces person updates to Kafka                                            │
