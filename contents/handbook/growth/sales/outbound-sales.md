@@ -97,35 +97,35 @@ Use this research to set a hypothesis that can assist you on the call.
 
 *We* contacted *them*. And this is a sales call that only makes sense if they have a problem we can solve. So a simple, open-ended question like this works as an opener:
 
-*"Hey [name], thanks for making the time. I know this was a cold outreach from [Dmytro/our team], so I really appreciate you giving me 30 minutes."*
+    *"Hey [name], thanks for making the time. I know this was a cold outreach from [Dmytro/our team], so I really appreciate you giving me 30 minutes."*
 
-*"Before we dive in, I'm curious - what made you decide to take this call?*
+    *"Before we dive in, I'm curious - what made you decide to take this call?*
 
 Often this is enough to get them talking, but if they’re vague, skeptical, or otherwise confused, you should be specific about why this call makes sense from your perspective and using the hypothesis you worked up, adding something like:
 
-*"[Dmytro mentioned/I saw] that [specific trigger - e.g. you're growing team/launching new product/scaling analytics]. We work with companies at your stage who struggle with [specific pain - e.g. fragmented analytics tools/poor data quality/lack of actionable insights]. I wanted to understand if that's actually a problem you're facing."*
+    *"[Dmytro mentioned/I saw] that [specific trigger - e.g. you're growing team/launching new product/scaling analytics]. We work with companies at your stage who struggle with [specific pain - e.g. fragmented analytics tools/poor data quality/lack of actionable insights]. I wanted to understand if that's actually a problem you're facing."*
 
-*"If it is, I can share how other companies like yours have solved it. If it's not a problem, I'll tell you honestly (or you can tell me) and we'll keep this short. Will that work for you?"*
+    *"If it is, I can share how other companies like yours have solved it. If it's not a problem, I'll tell you honestly (or you can tell me) and we'll keep this short. Will that work for you?"*
 
 Or, if they give you what you need to get started with the open-ended question, you can end with a more general outline of your plan for the call:
 
-“*Got it. Here's what I was thinking for today: I'd love to understand how you're handling [your role/the use case behind the trigger] now, what's working and what's not, and then share how other companies like yours have approached it. If it seems relevant, we can go deeper. If not, I'll tell you honestly and we'll keep this short. Sound fair?"*
+    *"Got it. Here's what I was thinking for today: I'd love to understand how you're handling [your role/the use case behind the trigger] now, what's working and what's not, and then share how other companies like yours have approached it. If it seems relevant, we can go deeper. If not, I'll tell you honestly and we'll keep this short. Sound fair?"*
 
 ### 3. Explore their role & current state/stack - find the pain
 
 As <TeamMember name="Charles Cook" />  likes to say, companies don’t buy software, humans buy software. Once you’re underway, start with interest in them and their team.
 
-*"Tell me more about your role and team."*
+    *"Tell me more about your role and team."*
 
 Once you’re underway in understanding their context, you can build out to the use-case/trigger:
 
-*“How are you thinking about [use-case/trigger] in that role/team? What do you need to understand about your product/users/customers?"*
+    *“How are you thinking about [use-case/trigger] in that role/team? What do you need to understand about your product/users/customers?"*
 
 Your questions will necessarily vary based on the thrust of the conversation, but you can go towards:
 
-*"What are you using for [use-case/trigger] today? And how'd you end up with that setup?”*
+    *"What are you using for [use-case/trigger] today? And how'd you end up with that setup?”*
 
-*"What do you love about it? What drives you crazy?"*
+    *"What do you love about it? What drives you crazy?"*
 
 You’re digging for information that would assist you with identifying pain and priority. This can emerge from your conversation, especially if you’re asking open-ended discovery questions. But you can drill in as needed:
 
@@ -144,35 +144,35 @@ Run a brief mental evaluation of their answers on the call. Look at four factors
 
 If you have fewer than 3 factors, now is the time to respectfully disqualify them. It’ll save them time and allow you to focus.
 
-*"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
+    *"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
 
 If you have 3 or more factors, it’s qualified and you should ask for permission to give them a pitch.
 
 We should disqualify outbound tasks, as creating opportunities that go nowhere won’t help us (or them).
 
-**Bonus: end early** if they’re disqualified or disinterested, you can cut the call short politely and professionally. Or if they’re highly qualified and very interested, you can skip the pitch and go right to a relevant next step.
+>**Bonus: end early** if they’re disqualified or disinterested, you can cut the call short politely and professionally. Or if they’re highly qualified and very interested, you can skip the pitch and go right to a relevant next step.
 
 ### 5. With explicit permission, give a brief PostHog pitch
 
 Open with what you heard and ask for permission to pitch:
 
-*"Based on what you shared - [their pain] - let me tell you how PostHog works and you tell me if it's relevant. Does that work for you?"*
+    *"Based on what you shared - [their pain] - let me tell you how PostHog works and you tell me if it's relevant. Does that work for you?"*
 
 Pivot to an elevator pitch that has products and use-cases tailored to their pain (the below is generic, yours should be specific):
 
-*"PostHog makes dev tools that help product engineers build successful products. These include many discrete tools that help with user behavior and analytics, product engineering, communication and data - all in one platform.”*
+    *"PostHog makes dev tools that help product engineers build successful products. These include many discrete tools that help with user behavior and analytics, product engineering, communication and data - all in one platform.”*
 
-*"Companies switch for three reasons: (1) tired of fragmented tools, (2) want engineers and product teams to have direct access to data, (3) our transparent, usage-based pricing."*
+    *"Companies switch for three reasons: (1) tired of fragmented tools, (2) want engineers and product teams to have direct access to data, (3) our transparent, usage-based pricing."*
 
 ### 6. Ask the hard question - is this relevant?
 
 Then, ask the hard question:
 
-*"Does that sound like it solves the problem you described?"*
+    *"Does that sound like it solves the problem you described?"*
 
 If they sound uncertain, or have been uncertain up this point (even after qualifying them), you can highlight the free trial in the wind up to the question.
 
-*"Knowing that we offer folks like you a free trial period to evaluate PostHog for yourself, does it sound like PostHog solves the problem you described?"*
+    *"Knowing that we offer folks like you a free trial period to evaluate PostHog for yourself, does it sound like PostHog solves the problem you described?"*
 
 Wait for an answer. Embrace the long pause or awkward silence. Get the answer.
 
@@ -180,15 +180,15 @@ Wait for an answer. Embrace the long pause or awkward silence. Get the answer.
 
 If they’re qualified and interested, suggest the natural next step and schedule it on the call:
 
-*"What makes sense as a next step? Demo? Trial? Talk to your team?"* *"Okay, I'll [take action]. Let's reconnect on [book specific date/time now]."*
+    *"What makes sense as a next step? Demo? Trial? Talk to your team?"* *"Okay, I'll [take action]. Let's reconnect on [book specific date/time now]."*
 
 If they’re hesitant or marginally qualified, you can ask them:
 
-*"Here's what I'm hearing: [summary]. Not sure if we're a fit yet. What would help you figure that out?"*
+    *"Here's what I'm hearing: [summary]. Not sure if we're a fit yet. What would help you figure that out?"*
 
 And, of course, if they’ve disqualified themselves after the pitch, you can still disqualify them at this point:
 
-*"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
+    *"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
 
 ### 8. Action the task in PostHog's Salesforce 
 
