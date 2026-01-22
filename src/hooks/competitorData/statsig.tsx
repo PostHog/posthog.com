@@ -81,7 +81,7 @@ export const statsig = {
                 features: {
                     llm_support: false,
                     results_visualization: true,
-                    side_effect_monitoring: false,
+                    side_effect_monitoring: true,
                     statistical_significance: true,
                     statistics_engine: 'Bayesian, Frequentist, or Sequential with Bonferroni correction',
                 },
@@ -103,7 +103,7 @@ export const statsig = {
                 early_access_management: false,
                 multivariate_flags: true,
                 json_payloads: true,
-                release_conditions: false,
+                release_conditions: true,
                 remote_config: true,
             },
             implementation: {
@@ -111,7 +111,7 @@ export const statsig = {
                     local_evaluation: true,
                     bootstrapping: true,
                     api_access: true,
-                    sdk_support: true,
+                    sdk_support: "30+",
                 },
             },
             targeting: {
@@ -198,7 +198,7 @@ export const statsig = {
                     features: {},
                 },
                 stickiness: {
-                    available: false,
+                    available: true,
                     features: {},
                 },
                 group_analytics: {
@@ -293,10 +293,10 @@ export const statsig = {
         developer: {
             api: true,
             collaboration: false,
-            mobile_sdks: false,
+            mobile_sdks: true,
             native_data_sources: false,
             proxies: false,
-            sdks: false,
+            sdks: true,
             server_side_sdks: true,
             sql: false,
             terraform: true,
