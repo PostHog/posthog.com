@@ -101,7 +101,7 @@ Use this research to set a hypothesis that can assist you on the call.
 
     *"Before we dive in, I'm curious - what made you decide to take this call?*
 
-Often this is enough to get them talking, but if they’re vague, skeptical, or otherwise confused, you should be specific about why this call makes sense from your perspective and using the hypothesis you worked up, adding something like:
+Often this is enough to get them talking and can provide you with valuable insight into what potential pain points there may be; but if they’re vague, skeptical, or otherwise confused, you should be specific about why this call makes sense from your perspective and using the hypothesis you worked up, adding something like:
 
     *"[Dmytro mentioned/I saw] that [specific trigger - e.g. you're growing team/launching new product/scaling analytics]. We work with companies at your stage who struggle with [specific pain - e.g. fragmented analytics tools/poor data quality/lack of actionable insights]. I wanted to understand if that's actually a problem you're facing."*
 
@@ -205,6 +205,7 @@ Where you take a qualified outbound sales opportunity is dependent on the specif
 You could:
 
 - Book a technical demo with the person’s team  
+- Ask for an introduction to the best contact at the company
 - Record a Loom of specific features to show how PostHog works  
 - Ship them documentation and a code sample to demonstrate how PostHog can be configured  
 - #domoreweird in a delightful way  
