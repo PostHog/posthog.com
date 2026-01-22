@@ -207,14 +207,20 @@ If a personless user later identifies themselves via `$identify`, an override is
 
 **Key behavior for person processing**:
 
-The Kafka partition key is `<token>:<distinct_id>`:
+The Kafka partition key for most events is `<token>:<distinct_id>`:
 
 ```rust
 // rust/common/types/src/event.rs
-pub fn key(&self) -> String {
-    format!("{}:{}", self.token, self.distinct_id)
-}
+  pub fn key(&self) -> String {
+      if self.is_cookieless_mode {
+          format!("{}:{}", self.token, self.ip)
+      } else {
+          format!("{}:{}", self.token, self.distinct_id)
+      }
+  }
 ```
+
+(Cookieless events use a placeholder distinct ID, which is replaced later with a privacy-preserving hash. The placeholder is not suitable as a partioning key, as it is always the same value for every cookieless event, so IP address is used)
 
 **Implications**:
 - Events with the **same** distinct_id go to the **same** Kafka partition → ordering preserved
