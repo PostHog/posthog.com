@@ -136,7 +136,7 @@ export default function PlatformPackages() {
                                 subscribe to packages after signing up for PostHog
                             </Link>
                             , via your billing page. Need help getting started, or want advice on which package to
-                            choose? <Link to="/professional-services">Our engineers can help.</Link>
+                            choose? <Link to="/services">Our engineers can help.</Link>
                         </p>
                     </div>
                 </div>
