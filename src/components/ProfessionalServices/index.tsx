@@ -251,6 +251,7 @@ export const ProfessionalServices = () => {
                 image={`/images/og/deskhog.jpg`}
             />
             <Editor
+                scrollable={false}
                 maxWidth={900}
                 proseSize="base"
                 bookmark={{
