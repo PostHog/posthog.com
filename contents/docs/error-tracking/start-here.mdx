@@ -1,5 +1,5 @@
 ---
-title: Getting started with error tracking
+title: Getting started with Error Tracking
 hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
@@ -10,7 +10,7 @@ import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
 
-<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate error tracking!">
+<QuestLog firstSpeechBubble="Let's catch some exceptions!" lastSpeechBubble="Time to integrate error tracking!">
 
 <QuestLogItem 
     title="Capture your first exception"
@@ -18,11 +18,13 @@ import OSButton from 'components/OSButton'
     icon="IconCode2"
 >
 
-  To get started with [error tracking](/docs/error-tracking), the first step is to install the PostHog SDK to start capturing exception events within your application.
+  To get started with [Error Tracking](/docs/error-tracking), the first step is to install the PostHog SDK to start capturing exception events within your application.
 
   ### Platforms
 
   <InstallationPlatforms />
+
+  > **New to error tracking?** See [core concepts](/docs/error-tracking/issues-and-exceptions) for a primer on issues, exceptions, stack traces, and more.
 
   ### Auto and manual capture
 
@@ -75,7 +77,7 @@ import OSButton from 'components/OSButton'
     padding={false}
 />
 
-  Use the PostHog error tracking dashboard to: 
+  Use the PostHog Error Tracking dashboard to: 
   
   - Manage, resolve, and auto-assign issues to team members
   - Customize issue grouping with rules 
@@ -156,13 +158,33 @@ Connect with the PostHog MCP server to enable autonomous debugging with AI agent
     padding={false}
   />
 
-   --- 
+</QuestLogItem>
 
-  That's it! You're ready to start integrating.
+<QuestLogItem
+  title="Use for free"
+  subtitle="Free 100k exceptions/mo"
+  icon="IconPiggyBank"
+>
 
-  <OSButton variant="primary" asLink to="/docs/error-tracking/installation">
-    Install error tracking
-  </OSButton>
+PostHog's Error Tracking is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. 
+
+## TL;DR 💸
+
+- No credit card required to start
+- First 100K exceptions per month are free
+- Above 100k we have usage-based pricing at $0.000370/exception with discounts 
+- Set billing limits to avoid surprise charges
+- See our [pricing page](/docs/error-tracking/pricing) for more up-to-date details
+
+And if that's *still* not enough, we wrote a whole page on how to [cut costs](/docs/error-tracking/pricing).
+
+--- 
+
+That's it! You're ready to start integrating.
+
+<OSButton variant="primary" asLink to="/docs/error-tracking/installation">
+  Install Error Tracking
+</OSButton>
 
 </QuestLogItem>
 
