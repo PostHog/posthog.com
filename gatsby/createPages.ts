@@ -18,6 +18,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
+    const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
@@ -156,6 +157,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
                 nodes {
                     id
+                    fields {
+                        slug
+                    }
+                }
+            }
+            workflowTemplates: allPostHogWorkflowTemplate {
+                nodes {
+                    templateId
                     fields {
                         slug
                     }
@@ -791,6 +800,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: DashboardTemplate,
             context: {
                 id: node.id,
+            },
+        })
+    })
+
+    // Create workflow template pages
+    result.data.workflowTemplates.nodes.forEach((node) => {
+        createPage({
+            path: `/templates/workflow/${node.fields.slug}`,
+            component: WorkflowTemplate,
+            context: {
+                slug: node.fields.slug,
             },
         })
     })

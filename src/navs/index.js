@@ -691,46 +691,36 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Docs & wizard',
-        url: '/handbook/content/docs',
+        name: 'Docs & Wizard',
+        url: '/handbook/docs-and-wizard/docs',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/content/docs',
+                url: '/handbook/docs-and-wizard/docs',
             },
             {
                 name: 'Ownership',
-                url: '/handbook/content/docs-ownership',
+                url: '/handbook/docs-and-wizard/docs-ownership',
             },
             {
                 name: 'Style guide',
-                url: '/handbook/content/docs-style-guide',
+                url: '/handbook/docs-and-wizard/docs-style-guide',
             },
             {
-                name: 'Runbook',
-                url: '/handbook/content/runbook',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/runbook',
-                    },
-                    {
-                        name: 'Onboarding docs',
-                        url: '/handbook/content/runbook/onboarding-docs',
-                    },
-                    {
-                        name: 'SDK reference docs',
-                        url: '/handbook/content/runbook/sdk-reference-docs',
-                    },
-                    {
-                        name: 'API specification',
-                        url: '/handbook/content/runbook/api-specifications',
-                    },
-                    {
-                        name: 'Developing the wizard',
-                        url: '/handbook/content/runbook/developing-the-wizard',
-                    },
-                ],
+                name: 'AI Wizard',
+                url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'Onboarding docs',
+                url: '/handbook/docs-and-wizard/onboarding-docs',
+            },
+            {
+                name: 'SDK reference docs',
+                url: '/handbook/docs-and-wizard/sdk-reference-docs',
+            },
+            {
+                name: 'API specs and docs',
+                url: '/handbook/docs-and-wizard/api-specifications',
             },
         ],
     },
@@ -2175,7 +2165,7 @@ export const docsMenu = {
                             url: '/docs/libraries/nuxt-js',
                             children: [
                                 {
-                                    name: '3.7 and above',
+                                    name: '4.x and 3.7+',
                                     url: '/docs/libraries/nuxt-js',
                                 },
                                 {
@@ -2733,6 +2723,10 @@ export const docsMenu = {
                         {
                             name: 'Access control',
                             url: '/docs/settings/access-control',
+                        },
+                        {
+                            name: 'Activity logs',
+                            url: '/docs/settings/activity-logs',
                         },
                         {
                             name: 'SSO, SAML, & SCIM',
@@ -3738,8 +3732,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Evaluation environments',
-                    url: '/docs/feature-flags/evaluation-environments',
+                    name: 'Evaluation contexts',
+                    url: '/docs/feature-flags/evaluation-contexts',
                     icon: 'IconDecisionTree',
                     color: 'red',
                 },
@@ -5609,119 +5603,6 @@ export const pricingMenu = {
     ],
 }
 
-export const productMenu = {
-    name: 'Products',
-    url: '/products',
-    icon: 'IconApps',
-    slug: 'products',
-    color: 'salmon',
-    children: [
-        {
-            name: 'Product analytics',
-            icon: 'IconGraph',
-            color: 'blue',
-            url: '/product-analytics',
-            slug: 'product-analytics',
-            description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels.',
-            startsAt: '0.00005',
-            denomination: 'event',
-            freeTier: 1000000,
-            sharesFreeTier: 'web-analytics',
-            worksWith: ['session-replay', 'experiments', 'surveys'],
-            category: 'analytics',
-        },
-        {
-            name: 'Web analytics',
-            icon: 'IconPieChart',
-            color: '[#36C46F]',
-            url: '/web-analytics',
-            slug: 'web-analytics',
-            description: 'Monitor your website traffic. Built for people who really liked GA3...',
-            startsAt: '0.00005',
-            denomination: 'event',
-            freeTier: 1000000,
-            sharesFreeTier: 'product-analytics',
-            worksWith: ['product-analytics', 'session-replay', 'surveys'],
-            category: 'analytics',
-        },
-        {
-            name: 'Session replay',
-            icon: 'IconRewindPlay',
-            color: 'yellow',
-            url: '/session-replay',
-            slug: 'session-replay',
-            category: 'behavior',
-        },
-        {
-            name: 'Feature flags',
-            icon: 'IconToggle',
-            color: 'seagreen',
-            url: '/feature-flags',
-            slug: 'feature-flags',
-            category: 'features',
-        },
-        {
-            name: 'Experiments',
-            icon: 'IconFlask',
-            color: 'purple',
-            url: '/experiments',
-            slug: 'experiments',
-            category: 'features',
-        },
-        {
-            name: 'Error tracking',
-            icon: 'IconWarning',
-            color: 'orange',
-            url: '/error-tracking',
-            slug: 'error-tracking',
-            category: 'behavior',
-        },
-        {
-            name: 'Surveys',
-            icon: 'IconMessage',
-            color: 'salmon',
-            url: '/surveys',
-            slug: 'surveys',
-            category: 'behavior',
-        },
-        {
-            name: 'Data pipelines',
-            icon: 'IconPlug',
-            color: 'sky-blue',
-            url: '/cdp',
-            slug: 'cdp',
-            category: 'tools',
-        },
-        {
-            name: 'Data stack',
-            icon: 'IconDatabase',
-            color: 'lilac',
-            url: '/data-stack',
-            slug: 'data-warehouse',
-        },
-        {
-            name: 'LLM analytics',
-            icon: 'IconLlmAnalytics',
-            color: '[#681291]',
-            colorDark: '[#C170E8]',
-            url: '/llm-analytics',
-        },
-        {
-            name: 'PostHog AI',
-            icon: 'IconLogomark',
-            color: 'black',
-            url: '/ai',
-        },
-        {
-            name: 'Product OS',
-            icon: 'IconStack',
-            color: 'salmon',
-            url: '/product-os',
-            slug: 'product-os',
-        },
-    ],
-}
-
 const menu = [
     {
         name: 'Why PostHog?',
@@ -5729,7 +5610,6 @@ const menu = [
         icon: 'IconLightBulb',
         color: 'yellow',
     },
-    productMenu,
     pricingMenu,
     docsMenu,
     communityMenu,
