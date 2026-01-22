@@ -307,17 +307,8 @@ async mergeDistinctIds(
 **When are overrides created?**
 
 An override is needed when events exist in ClickHouse with a person_id that's now incorrect (because of a merge). The `version` field in `posthog_persondistinctid` controls this:
-- `version = 0`: No override - this distinct_id's events already have the correct person_id
+- `version = 0`: No override - this distinct_id's events already have the correct person_id (e.g. the first `$identify` for a user, due to the deterministic UUID v5)
 - `version >= 1`: Override created - events exist with an old person_id that needs rewriting
-
-**Summary of when overrides are created**:
-
-| Scenario | Override needed? | Why? |
-|----------|------------------|------|
-| Neither distinct_id has events | No | No events to rewrite |
-| Only one has events, we swap to make it primary | No | Person UUID matches existing events |
-| Both have events (both used in personless mode) | Yes, for one | Can only use one UUID, other needs rewriting |
-| Moving distinct_ids between existing persons | Yes | Events have the old person's UUID |
 
 ### 4. PostgreSQL tables
 
