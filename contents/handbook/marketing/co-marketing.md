@@ -74,9 +74,11 @@ When a new startup perk goes live:
 - Create a new Startup landing page for this partner
 - Announce it on social media like [this](https://www.linkedin.com/posts/posthog_weve-partnered-up-with-incidentio-to-make-activity:7408935044288958464-QmEa)
 - Add the offer to relevant emails and onboarding flows (the startup program has dedicated flows)
+
 As a rule we don't commit to reporting sign-up performance to startup partners, as it just adds overhead and they should have their own methods of tracking. We also don't typically agree to rev share deals as part of this program, as it's a long tail activity. 
 
-> More questions about startup program partnerships? Head to <PrivateLink url="https://posthog.slack.com/archives/C088RSQKH2T">the project Slack channel<PrivateLink>. 
+> More questions about startup program partnerships? Head to <PrivateLink url="https://posthog.slack.com/archives/C088RSQKH2T">the project Slack channel</PrivateLink>.
+ 
 ### Other ecosystem partners
 Co-marketing goes both ways! PostHog’s startup program is promoted through partner channels like [Stripe Atlas perks](https://support.stripe.com/questions/stripe-atlas-perks-partners) and the [Fin Startup Pack](https://fin.ai/startup-pack).
 
