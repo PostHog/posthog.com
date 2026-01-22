@@ -1,5 +1,3 @@
-import { TruckElectric } from "lucide-react";
-
 export const statsig = {
     name: 'Statsig',
     key: 'statsig',
