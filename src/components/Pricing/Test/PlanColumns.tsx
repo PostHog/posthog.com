@@ -202,43 +202,35 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                                 <div className="flex-[1_0_100%] max-w-2xl mx-auto @4xl:mx-4">
                                     <AllPlansInclude />
                                     <div className="mt-4 mb-0">
-                                        <div className="mt-0 bg-white dark:bg-accent-dark border border-primary rounded-md px-3 pt-3 pb-3 text-[15px]">
-                                            <div>
-                                                <h3 className="text-xl my-0">
-                                                    <em>Let's talk extras...</em>
-                                                </h3>
-                                                <p className="text-[15px] mb-0 opacity-70">
-                                                    Need enterprise features? We can help.
+                                        <p className="font-bold text-[15px] mb-2">
+                                            <em>But wait, there's more...</em>
+                                        </p>
+                                        <ul className="prose dark:prose-invert">
+                                            <li className="text-[15px]">
+                                                <Link to="/platform-packages" state={{ newWindow: true }}>
+                                                    Platform packages
+                                                </Link>
+                                                <br />
+                                                <p className="my-0 opacity-90 text-sm">
+                                                    Choose from extra features, like dedicated support, RBAC and SSO
+                                                    enforcement.
                                                 </p>
-                                            </div>
-                                            <ul className="p-0 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
-                                                <li className="flex flex-col relative pl-7">
-                                                    <IconCheck className="size-5 text-green absolute top-0 left-0" />
-                                                    <strong>
-                                                        <Link to="/platform-packages">Platform packages</Link>
-                                                    </strong>
-                                                    <p className="my-0 opacity-70 text-sm">
-                                                        Choose from extra features, like dedicated support, RBAC and SSO
-                                                        enforcement.
-                                                    </p>
-                                                </li>
-                                                <li className="flex flex-col relative pl-7">
-                                                    <IconCheck className="size-5 text-green absolute top-0 left-0" />
-                                                    <strong>
-                                                        <Link
-                                                            to="/professional-services"
-                                                            className="underline font-semibold hover:text-red dark:hover:text-yellow transition-colors"
-                                                        >
-                                                            Professional services
-                                                        </Link>
-                                                    </strong>
-                                                    <p className="my-0 opacity-70 text-sm">
-                                                        Our engineers can set everything up for you and train your team.
-                                                        Includes free merch!
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            </li>
+                                            <li className="text-[15px]">
+                                                <Link
+                                                    to="/services"
+                                                    className="underline font-semibold hover:text-red dark:hover:text-yellow transition-colors"
+                                                    state={{ newWindow: true }}
+                                                >
+                                                    Setup &amp; training
+                                                    <br />
+                                                </Link>
+                                                <p className="my-0 opacity-90 text-sm">
+                                                    Our engineers can set everything up for you and train your team.{' '}
+                                                    <em>Includes free merch!</em>
+                                                </p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
