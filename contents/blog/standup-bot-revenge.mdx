@@ -167,9 +167,7 @@ processor = instrument(
 )
 ```
 
-That's it. One function call and suddenly I have full visibility into:
-
-{/*TODO: Add screenshot of PostHog trace view showing agent workflow*/}
+That's it. One function call and suddenly I have full visibility into everything:
 
 ### Tracing
 
@@ -180,7 +178,11 @@ Every agent run creates a trace with spans for:
 
 I can see exactly how my coordinator decided to call the data gatherer, what GitHub tools it used, and how the summarizer turned that data into prose.
 
-{/*TODO: Add screenshot of trace waterfall view*/}
+![Trace view showing the full agent workflow](../images/blog/trace-view.png)
+
+Each trace also gets an AI-generated summary so you can quickly understand what happened without digging into every span:
+
+![Trace summary giving a quick overview](../images/blog/trace-summary.png)
 
 ### Events and metrics
 
@@ -204,8 +206,6 @@ Now I can answer questions like:
 - How long are my standups on average?
 - Do I generate more on certain days?
 - How often do I use chat mode vs one-shot generation?
-
-{/*TODO: Add screenshot of PostHog dashboard with standup analytics*/}
 
 ### Evals and feedback
 
@@ -238,6 +238,8 @@ Over time, this builds a dataset for understanding:
 - Are certain types of activity harder to summarize?
 
 This is the foundation for [evals](/docs/ai-engineering/evals) - systematic quality measurement for your AI features.
+
+![Evals in PostHog showing quality metrics linked to traces](../images/blog/eval-example.png)
 
 ## The victory lap: posting to Slack
 
