@@ -53,18 +53,18 @@ Here's how some of the most popular CDPs with analytics features compare:
 
 You might notice some absences: **Salesforce Data Cloud**, **Adobe Real-Time CDP**, and **Treasure Data** are all major enterprise players. They're powerful, but they're also designed for large marketing orgs with dedicated implementation teams and big budgets to match.
 
-This guide focuses on tools that developers can actually evaluate, set up, and get value from without a long winded implementation project.
+This guide focuses on tools that developers can actually evaluate, set up, and get value from without a long-winded implementation project.
 
 ## What's the best CDP with analytics for developers?
 
 ### 1. PostHog
 
-PostHog takes a different approach to customer data: instead of being a CDP that bolts on analytics, it's an all-in-one platform where product analytics, web analytics, session replay, feature flags, experiments, error tracking, LLM observability, surveys, and CDP functionality all work together natively.
+PostHog takes a different approach to customer data: instead of being a CDP that bolts on analytics, it's an all-in-one platform where CDP functionality works together with product analytics, web analytics, session replay, feature flags, experiments, error tracking, LLM observability, surveys, and more natively.
 
 PostHog's data pipeline provides full CDP capabilities through three core components:
 
 - [**Sources**](/docs/cdp/sources): Ingest data from 20+ managed sources (Stripe, Hubspot, Salesforce, Snowflake, BigQuery, Google/Meta/LinkedIn/TikTok Ads, and more) or self-managed object storage (S3, GCS, Azure Blob). Data syncs automatically and can be joined with your product analytics data using the built-in data warehouse.
-- [**Transformations**](/docs/cdp/transformations): Clean and curate event data in real-time before it's stored – including GeoIP enrichment, PII scrubbing, bot filtering, property standardization, and custom transformations written in Hog. Transformations are completely free with no volume limits.
+- [**Transformations**](/docs/cdp/transformations): Clean and transform event data in real-time before it's stored – including GeoIP enrichment, PII scrubbing, bot filtering, property standardization, and custom transformations written in Hog. Transformations are completely free with no volume limits.
 - [**Destinations**](/docs/cdp/destinations): Send data to dozens of tools in real-time or schedule batch exports to warehouses like Snowflake, BigQuery, Redshift, Postgres, and Databricks.
 
 Unlike standalone CDPs, all that data is immediately available for analysis – no export required. Every event, user, and session can be queried with SQL, visualized in funnels and retention charts, or connected to a specific session recording. You can build cohorts based on behavior, run experiments on segments, and see exactly what users did before churning – all in one place.
@@ -101,7 +101,7 @@ Developers who want a CDP that doesn't stop at data plumbing – and teams that 
 
 ### 2. Segment
 
-Segment (now part of Twilio) is the original CDP and still the most widely adopted. It popularized the idea of a single API for customer data collection, and its tracking spec has become a de facto standard that other tools support.
+Segment (now part of Twilio) is the original CDP and still the most widely adopted. It popularized the idea of a single API for customer data collection, and its tracking spec has become a de facto standard.
 
 Segment's core strength is data routing: install one SDK, define your events, and Segment handles sending that data to 700+ destinations – analytics tools, ad platforms, CRMs, warehouses, and more. This dramatically simplifies instrumentation and makes it easy to add or remove tools without rewriting tracking code.
 
@@ -127,7 +127,7 @@ Pricing is based on Monthly Tracked Users (MTUs). There's a free tier with 1,000
 
 <CalloutBox icon="IconStarFilled" title="Segment is best for..." type="fyi">
 
-Teams that want a best-in-class data pipeline (are willing to pay for a premium, fully managed solution) and are comfortable pairing it with separate analytics and BI tools.
+Teams that want a best-in-class data pipeline, comfortable pairing it with separate analytics and BI tools, and willing to pay for a premium, fully managed solution.
 
 </CalloutBox>
 
@@ -155,7 +155,7 @@ RudderStack offers a free tier for up to 250,000 events/month, with paid plans s
 
 - Open source on [GitHub](https://github.com/rudderlabs/)
 - 4.3k+ stars, 100+ contributors
-- [Active community Slack] (https://www.rudderstack.com/join-rudderstack-slack-community/)
+- [Active community Slack](https://www.rudderstack.com/join-rudderstack-slack-community/)
 
 <CalloutBox icon="IconStarFilled" title="RudderStack is best for..." type="fyi">
 
@@ -173,7 +173,7 @@ mParticle's core differentiator is its real-time processing engine: data flows t
 
 On the analytics side, mParticle includes built-in data quality monitoring, identity analytics, and an AI-powered audience builder that can create predictive segments (likelihood to purchase, churn risk). However, like Segment, it doesn't include product analytics – you'll typically pair it with a standalone analytics or BI tool.
 
-mParticle uses a credits-based pricing model aimed at enterprise teams. Customers commit to an upfront pool of credits, which are then consumed across the platform based on usage (such as data ingestion, identity resolution, audiences, analytics, and activation). All features are included by default, with no per-feature tiers or hard caps, and usage draws from the same shared credit balance. Rates vary based on the size of the credit commitment, meaning costs scale with data volume but require working with sales to estimate and manage spend.
+mParticle uses credit-based pricing aimed at enterprise teams. Customers commit to an upfront pool of credits, which are then consumed based on usage of each feature. All features are included by default, with no per-feature tiers or hard caps. Rates vary based on the size of commitment, meaning costs scale with data volume but require working with sales to estimate and manage spend.
 
 **Strengths:**
 
@@ -280,7 +280,7 @@ Mid-to-large enterprise teams with complex martech stacks who need comprehensive
 
 #### For developer-first teams
 
-- **PostHog** for teams that want to query data with SQL, build on open source, and own their infrastructure
+- **PostHog** for teams that SDKs in all their favorite languages, customizable destinations and transformations, and docs that make all this easy to self-serve
 - **RudderStack** for teams that want a warehouse-native CDP with full control over transformations and routing
 
 #### For growth-stage companies
@@ -388,7 +388,7 @@ Watch for: low free tiers that force early upgrades, steep MTU-based scaling, an
 <details>
   <summary>Can I use a CDP without being a large enterprise?</summary>
 
-Yes. Tools like PostHog, Segment (free tier), and RudderStack have generous free tiers that work well for startups. 
+Yes. Tools like PostHog, Segment, and RudderStack have generous free tiers that work well for startups. 
 
 If you're small, you might get more value from an all-in-one tool (like PostHog) that includes analytics and data routing, rather than paying for a standalone CDP and separate analytics platform.
 
@@ -406,7 +406,7 @@ Most traditional CDPs (Segment, mParticle, Hightouch) do **not** include product
 <details>
   <summary>Which CDP is best for developers?</summary>
 
-**PostHog** and **RudderStack** are the most developer-friendly options. Both are open source (or have open-source cores), offer SQL access, support custom transformations, and don't require marketing team involvement to configure.
+**PostHog** and **RudderStack** are the most developer-friendly options. Both are open source (or have open-source cores), offer SQL access, and support custom transformations.
 
 **Segment** is well-documented and has excellent SDKs, but the platform itself is closed-source and enterprise-priced.
 
