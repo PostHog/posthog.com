@@ -9,6 +9,7 @@ import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
+import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
@@ -203,6 +204,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: ContraLogo,
         featured: false,
         height: 8,
+    },
+    convex: {
+        name: 'Convex',
+        toolsUsed: [],
+        industries: ['SaaS'],
+        users: [],
+        notes: 'Backend web app platform',
+        logo: ConvexLogo,
+        featured: true,
+        height: 7,
     },
     creatify: {
         name: 'Creatify',
