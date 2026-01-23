@@ -30,7 +30,7 @@ This guide compares the best CDPs with analytics features for developers: tools 
 
 ## What features do you need in a CDP with analytics?
 
-At a minimum, a CDP should help you collect and unify customer data:
+At a minimum, a CDP should include:
 
 - Data collection from multiple sources (web, mobile, server, third-party tools)
 - Identity resolution to stitch together anonymous and known users
@@ -51,7 +51,7 @@ Here's how some of the most popular CDPs with analytics features compare:
 
 (note to self - add competitor files and table)
 
-You might notice some absences: **Salesforce Data Cloud**, **Adobe Real-Time CDP**, and **Treasure Data** are all major enterprise players. They're powerful, but they're also designed for large marketing orgs with dedicated implementation teams and healthy budgets.
+You might notice some absences: **Salesforce Data Cloud**, **Adobe Real-Time CDP**, and **Treasure Data** are all major enterprise players. They're powerful, but they're also designed for large marketing orgs with dedicated implementation teams and big budgets to match.
 
 This guide focuses on tools that developers can actually evaluate, set up, and get value from without a long winded implementation project.
 
@@ -63,13 +63,13 @@ PostHog takes a different approach to customer data: instead of being a CDP that
 
 PostHog's data pipeline provides full CDP capabilities through three core components:
 
-- **Sources**: Ingest data from 20+ managed sources (Stripe, Hubspot, Salesforce, Snowflake, BigQuery, Google/Meta/LinkedIn/TikTok Ads, and more) or self-managed object storage (S3, GCS, Azure Blob). Data syncs automatically and can be joined with your product analytics data using the built-in data warehouse.
-- **Transformations**: Clean and curate event data in real-time before it's stored – including GeoIP enrichment, PII scrubbing, bot filtering, property standardization, and custom transformations written in Hog. Transformations are completely free with no volume limits.
-- **Destinations**: Send data to dozens of tools in real-time or schedule batch exports to warehouses like Snowflake, BigQuery, Redshift, Postgres, and Databricks.
+- [**Sources**](/docs/cdp/sources): Ingest data from 20+ managed sources (Stripe, Hubspot, Salesforce, Snowflake, BigQuery, Google/Meta/LinkedIn/TikTok Ads, and more) or self-managed object storage (S3, GCS, Azure Blob). Data syncs automatically and can be joined with your product analytics data using the built-in data warehouse.
+- [**Transformations**](/docs/cdp/transformations): Clean and curate event data in real-time before it's stored – including GeoIP enrichment, PII scrubbing, bot filtering, property standardization, and custom transformations written in Hog. Transformations are completely free with no volume limits.
+- [**Destinations**](/docs/cdp/destinations): Send data to dozens of tools in real-time or schedule batch exports to warehouses like Snowflake, BigQuery, Redshift, Postgres, and Databricks.
 
 Unlike standalone CDPs, all that data is immediately available for analysis – no export required. Every event, user, and session can be queried with SQL, visualized in funnels and retention charts, or connected to a specific session recording. You can build cohorts based on behavior, run experiments on segments, and see exactly what users did before churning – all in one place.
 
-PostHog uses simple usage-based pricing with a generous free tier, so you can start collecting and analyzing data before committing to a long-term contract.
+PostHog uses simple usage-based pricing with a [generous free tier](/pricing), so you can start collecting and analyzing data before committing to a long-term contract.
 
 <p>
   <CallToAction to="https://posthog.com/docs/cdp">
@@ -84,7 +84,6 @@ PostHog uses simple usage-based pricing with a generous free tier, so you can st
 - SQL access and raw data ownership
 - Flexible destinations and transformations
 - Strong developer tooling and APIs
-
 
 **Community:**
 
