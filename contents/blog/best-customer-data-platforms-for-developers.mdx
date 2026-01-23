@@ -97,7 +97,7 @@ PostHog's data pipeline provides full CDP capabilities through three core compon
 - [**Transformations**](/docs/cdp/transformations): Clean and transform event data in real-time before it's stored – including GeoIP enrichment, PII scrubbing, bot filtering, property standardization, and custom transformations written in Hog. Transformations are completely free with no volume limits.
 - [**Destinations**](/docs/cdp/destinations): Send data to dozens of tools in real-time or schedule batch exports to warehouses like Snowflake, BigQuery, Redshift, Postgres, and Databricks.
 
-Beyond data pipelines, [PostHog's CDP](/cdp) also handles event capture from [client-side SDKs](/docs/libraries) and [server-side APIs](/docs/api) and, unlike standalone CDPs, all that data is immediately available for analysis – no export required. Every event, user, and session can be queried with SQL, visualized in funnels and retention charts, or connected to a specific session recording. You can build cohorts based on behavior, run experiments on segments, and see exactly what users did before churning – all in one place.
+Beyond data pipelines, [PostHog's CDP](/cdp) also handles event capture from [client-side SDKs](/docs/libraries) and [server-side APIs](/docs/api) and, unlike standalone CDPs, all that data is immediately available for analysis – no export required. Every event, user, and session [can be queried with SQL](/docs/data-warehouse/sql), [visualized in funnels](/docs/product-analytics/funnels) and [retention charts](/docs/product-analytics/retention), or connected to a specific [session recording](/docs/session-replay). You can [build cohorts based on behavior](/docs/data/cohorts), [run experiments on segments](/docs/experiments), and see exactly what users did before churning – all in one place.
 
 PostHog uses simple usage-based pricing with a [generous free tier](/pricing), so you can start collecting and analyzing data before committing to a long-term contract.
 
@@ -303,12 +303,12 @@ Mid-to-large enterprise teams with complex martech stacks who need comprehensive
 
 #### For startups and small teams
 
-- **PostHog** if you want everything in one place – analytics, replay, flags, error tracking, and data pipelines – without managing multiple vendors
+- **PostHog** if you want everything in one place – [analytics](/product-analytics), [replay](/session-replay), [flags](/feature-flags), [error tracking](/error-tracking), and [data pipelines](/cdp) – without managing multiple vendors
 - **Segment** (free tier) if you're building a data layer and want maximum flexibility in tool choice
 
 #### For developer-first teams
 
-- **PostHog** for teams that SDKs in all their favorite languages, customizable destinations and transformations, and docs that make all this easy to self-serve
+- **PostHog** for teams that [SDKs in all their favorite languages](/docs/libraries), customizable destinations and transformations, and [docs](/docs) that make all this easy to self-serve
 - **RudderStack** for teams that want a warehouse-native CDP with full control over transformations and routing
 
 #### For growth-stage companies
@@ -321,7 +321,7 @@ Mid-to-large enterprise teams with complex martech stacks who need comprehensive
 - **Tealium** for complex martech stacks, 1,300+ integrations, and strong compliance (HIPAA, ISO 27001)
 - **mParticle** for real-time orchestration, strong governance, and enterprise support
 - **Segment** (Business tier) for teams already in the Twilio ecosystem
-- **PostHog** if you want an all-in-one platform with strong governance and raw data access
+- **PostHog** if you want an [all-in-one platform](/products)with strong governance and raw data access
 
 #### For warehouse-first teams
 
@@ -359,7 +359,7 @@ A **data warehouse** (Snowflake, BigQuery, Redshift) is a general-purpose storag
 
 A **CDP** is purpose-built for customer data: it collects from multiple sources, resolves identities, builds profiles, and syncs data to downstream tools. Some CDPs store data themselves; "composable CDPs" like Hightouch sit on top of your warehouse instead.
 
-Tools like **PostHog** blur the line by including both a data warehouse and CDP capabilities in one platform.
+Tools like **PostHog** blur the line by including both a [data warehouse](/data-stack) and CDP capabilities in one platform.
 
 </details>
 
@@ -418,9 +418,9 @@ Watch for: low free tiers that force early upgrades, steep MTU-based scaling, an
 <details>
   <summary>Can I use a CDP without being a large enterprise?</summary>
 
-Yes. Tools like PostHog, Segment, and RudderStack have generous free tiers that work well for startups. 
+Yes. Tools like **PostHog**, **Segment**, and **RudderStack** have generous free tiers that work well for startups.
 
-If you're small, you might get more value from an all-in-one tool (like PostHog) that includes analytics and data routing, rather than paying for a standalone CDP and separate analytics platform.
+If you're small, you might get more value from an all-in-one tool (like **PostHog**) that includes analytics and data routing, rather than paying for a standalone CDP and separate analytics platform.
 
 </details>
 
@@ -447,7 +447,7 @@ Most traditional CDPs (Segment, mParticle, Hightouch) do **not** include product
 
 For **mobile-first teams**, **mParticle** is purpose-built for apps with strong iOS and Android SDKs, real-time event streaming, and deep integrations with mobile attribution and marketing tools.
 
-For **product-led apps** where you want analytics, experimentation, and data routing in one platform, **PostHog** offers native mobile SDKs (iOS, Android, React Native, Flutter) alongside product analytics, session replay, and feature flags – so you can understand user behavior and ship improvements without stitching together multiple tools.
+For **product-led apps** where you want analytics, experimentation, and data routing in one platform, **PostHog** offers native mobile SDKs (iOS, Android, React Native, Flutter) alongside [product analytics](/product-analytics), [session replay](/session-replay), and [feature flags](/feature-flags) – so you can understand user behavior and ship improvements without stitching together multiple tools.
 
 **Segment** is also a solid choice if you need a broad integration library and plan to pair it with separate analytics tools.
 
