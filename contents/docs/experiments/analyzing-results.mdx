@@ -203,7 +203,21 @@ Beyond this, we recommend:
 
 Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
 
-## Stopping an experiment
+## Pausing and stopping experiments
+
+### Pausing an experiment
+
+You can temporarily pause an experiment to stop collecting data without ending it completely. This is useful when:
+
+- You need to fix a bug in one of the variants
+- External factors might temporarily affect results (e.g., a major marketing campaign)
+- You want to review interim results before continuing
+
+To pause an experiment, click the **Pause experiment** button on the experiment page. This will disable the feature flag behind the experiment, so no new data will be collected.
+
+When you're ready to continue, click **Resume experiment** to start collecting data again. The experiment will continue from where it left off.
+
+### Stopping an experiment
 
 Stopping the experiment will stop counting events in the results. Your feature flag, however, will continue working normally and events will still be tracked. You can restart the experiment later if needed.
 
