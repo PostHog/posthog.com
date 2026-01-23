@@ -23,7 +23,7 @@ So, let’s start there.
 
 ## Why you shouldn’t use a data warehouse, according to our own data engineers
 
-> **tl;dr:** If your data volume is tiny (millions of rows or less) and you don’t have either budget to burn or a complex need, a data warehouse is often overkill (unless you anticipate rapid growth). 
+> **tl;dr:** A data warehouse is overkill if your data volume is tiny (millions of rows or less) and you don’t have budget to burn or rapid growth.
 
 ### 1. “Your data volume is tiny”
 
