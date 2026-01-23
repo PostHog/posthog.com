@@ -112,7 +112,7 @@ Some commonly used Distinct ID formats are: the user's email address, a UUID ran
 
 ### Person UUID
 
-Every person theoretically has a single UUID. This UUID is **deterministic** - it's generated from `(team_id, distinct_id)` using UUIDv5:
+Every person has a single UUID, generated deterministically from `(team_id, distinct_id)` at creation time using UUIDv5.
 
 ```typescript
 // nodejs/src/worker/ingestion/person-uuid.ts
@@ -120,12 +120,6 @@ function uuidFromDistinctId(teamId: number, distinctId: string): string {
     return uuidv5(`${teamId}:${distinctId}`, PERSON_UUIDV5_NAMESPACE)
 }
 ```
-
-This determinism is critical for two reasons:
-
-1. **Pre-computation**: Even before a person exists in the database, we can compute what their UUID will be. This enables personless mode - we can assign a consistent person_id to events without creating a person record.
-
-2. **Cross-partition consistency**: Anonymous events (`distinct_id='anon-123'`) and `$identify` events (`distinct_id='user@example.com'`) have different distinct_ids, so they go to different Kafka partitions and may be processed by different workers in any order. The deterministic UUID allows the merge logic to choose the anonymous distinct_id as the "primary" one when creating a new person, so the resulting person UUID matches what the anonymous events already have - avoiding the need for an override in most cases.
 
 ### Person profile
 
@@ -140,7 +134,7 @@ When a user identifies themselves (typically on login), the SDK calls `$identify
 - `distinct_id`: The identified user ID (e.g., email, user ID from your database)
 - `$anon_distinct_id`: The anonymous ID that was being used before login
 
-This triggers a **merge**: all events from both the anonymous distinct ID and the identified ID should be attributed to the same person. We do this through a level of indirection (a join between persons_ids and distinct_ids) which we explain in more depth below. 
+This triggers a **merge**: all events from both the anonymous distinct ID and the identified ID should be attributed to the same person. We do this through a level of indirection (a join between persons_ids and distinct_ids) which we explain in more depth later on. 
 
 ---
 
@@ -272,7 +266,7 @@ Two branches based on `$process_person_profile`:
 
 **If `$process_person_profile: false` (personless mode)**:
 1. Check if a real person exists for this distinct_id
-2. If yes, use that person (and potentially force upgrade to full processing)
+2. If yes, use that person, and treat this like an identified event as long as the person was created more than one minute earlier (to avoid race conditions with identify).
 3. If no, create a "fake" person with deterministic UUID
 4. Event gets the fake person's UUID
 
@@ -282,7 +276,7 @@ Two branches based on `$process_person_profile`:
 3. Apply property updates ($set, $set_once, $unset)
 4. If this is an `$identify` event, handle the merge
 
-#### 3.4 Merge handling
+#### 2.4 Merge handling
 
 **Location**: `nodejs/src/worker/ingestion/persons/person-merge-service.ts`
 
