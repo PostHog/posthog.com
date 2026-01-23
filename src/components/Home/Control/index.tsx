@@ -531,7 +531,7 @@ const companyAttributes = {
         'elevenlabs',
         'lovable',
         // "hasura",
-        // 'convex',
+        'convex',
         'trust',
         // "airbus",
         // "supabase",
@@ -580,7 +580,7 @@ const companyAttributes = {
     realWords: [
         // "ycombinator",
         'airbus',
-        // 'convex',
+        'convex',
         'trust',
         'lovable',
         'elevenlabs',
