@@ -51,7 +51,11 @@ Costs will balloon, says Andrew, because warehouses make it easy to store data i
 
 ### 4. “Someone else thinks it’s a good idea”
 
-[Marius](/community/profiles/30202) may be have been [PostHog’s first employee](/founders/posthog-first-five), but he’s no rule-follower. 
+[Marius](/community/profiles/30202) may have been [PostHog’s first employee](/founders/posthog-first-five), but he’s no rule-follower and advises against warehouses for warehouses sake. His view: don't let a "mature company" checklist dictate your stack.
+
+Maybe your CTO thinks you need a warehouse because you just hit a certain headcount. Maybe your principal engineer is looking greedily at the latest funding round and wants to play with a new toy. Maybe someone just thinks it’s "fashionable."
+
+Whatever the case, if the push is coming from a desire to look professional rather than a desire to solve an actual problem, see it as a red flag. Wait until there’s a genuine use-case that actually hurts, as otherwise you'll end up paying for it later. 
 
 Maybe your CTO thinks you need a warehouse because you’re a mature company now. 
 Maybe your principal engineer is looking greedily at the latest funding round. 
