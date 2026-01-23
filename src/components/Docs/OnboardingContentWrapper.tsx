@@ -68,8 +68,8 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MDXComponent = React.ComponentType<any>
 
-// No-op component for unknown components from upstream
-// This prevents runtime errors when upstream adds new components we don't have
+// No-op component for unknown components from upstream monorepo
+// This prevents runtime errors when upstream monorepo adds new components we don't have
 const UnknownComponent: MDXComponent = () => null
 
 interface DocsComponents {
@@ -85,7 +85,7 @@ interface DocsComponents {
     Tab: typeof Tab
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
     snippets?: Record<string, React.ComponentType<Record<string, never>>>
-    // Allow additional components from upstream without breaking
+    // Allow additional components from upstream monorepo without breaking
     [key: string]: unknown
 }
 
@@ -148,6 +148,8 @@ interface StepDefinition {
     content: React.ReactNode
 }
 
+// TODO: Consider consolidating with DocsComponents above - these interfaces are nearly identical
+// and both have index signatures. OnboardingComponents could extend DocsComponents or be removed.
 interface OnboardingComponents {
     Steps: MDXComponent
     Step: MDXComponent
@@ -157,7 +159,7 @@ interface OnboardingComponents {
     Tab: typeof Tab
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
     snippets?: Record<string, React.ComponentType<Record<string, never>>>
-    // Allow additional components from upstream without breaking
+    // Allow additional components from upstream monorepo without breaking
     [key: string]: unknown
 }
 
@@ -170,7 +172,7 @@ export const createInstallation = (getSteps: (ctx: OnboardingComponents) => Step
         const allComponents = useMDXComponents()
 
         // Wrap components in a proxy that returns UnknownComponent for missing keys
-        // This prevents runtime errors when upstream adds new components we don't have
+        // This prevents runtime errors when upstream monorepo adds new components we don't have
         const safeComponents = new Proxy(allComponents as OnboardingComponents, {
             get(target, prop: string) {
                 const value = target[prop]
