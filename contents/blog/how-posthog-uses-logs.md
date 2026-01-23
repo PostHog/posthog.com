@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - sara-miteva
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/Group_2_1_8a6088a0a7.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/milk_meme_1_049755a42a.jpg
 featuredImageType: full
 category: Product
 tags:
