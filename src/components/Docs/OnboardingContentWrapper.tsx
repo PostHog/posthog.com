@@ -68,6 +68,10 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MDXComponent = React.ComponentType<any>
 
+// No-op component for unknown components from upstream
+// This prevents runtime errors when upstream adds new components we don't have
+const UnknownComponent: MDXComponent = () => null
+
 interface DocsComponents {
     Steps: MDXComponent
     Step: MDXComponent
@@ -81,6 +85,8 @@ interface DocsComponents {
     Tab: typeof Tab
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
     snippets?: Record<string, React.ComponentType<Record<string, never>>>
+    // Allow additional components from upstream without breaking
+    [key: string]: unknown
 }
 
 const MDXComponentsContext = createContext<DocsComponents>({
@@ -151,6 +157,8 @@ interface OnboardingComponents {
     Tab: typeof Tab
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
     snippets?: Record<string, React.ComponentType<Record<string, never>>>
+    // Allow additional components from upstream without breaking
+    [key: string]: unknown
 }
 
 interface InstallationProps {
@@ -159,23 +167,27 @@ interface InstallationProps {
 
 export const createInstallation = (getSteps: (ctx: OnboardingComponents) => StepDefinition[]) => {
     return function Installation({ modifySteps }: InstallationProps) {
-        const { Steps, Step, CodeBlock, CalloutBox, Markdown, Tab, dedent, snippets } = useMDXComponents()
+        const allComponents = useMDXComponents()
 
-        const ctx: OnboardingComponents = {
-            Steps,
-            Step,
-            CodeBlock,
-            CalloutBox,
-            Markdown,
-            Tab,
-            dedent,
-            snippets,
-        }
+        // Wrap components in a proxy that returns UnknownComponent for missing keys
+        // This prevents runtime errors when upstream adds new components we don't have
+        const safeComponents = new Proxy(allComponents as OnboardingComponents, {
+            get(target, prop: string) {
+                const value = target[prop]
+                if (value !== undefined) {
+                    return value
+                }
+                // Return no-op component for unknown components
+                return UnknownComponent
+            },
+        })
 
-        let steps = getSteps(ctx)
+        let steps = getSteps(safeComponents)
         if (modifySteps) {
             steps = modifySteps(steps)
         }
+
+        const { Steps, Step } = allComponents
 
         return (
             <Steps>
