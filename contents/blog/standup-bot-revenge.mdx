@@ -16,6 +16,8 @@ tags:
   - LLM analytics
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 {/*TODO: Replace featured image with something fun - hedgehog vs robot?*/}
 
 ![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_taunt_b24351e046.png)
@@ -61,6 +63,12 @@ And because I'm a shameless dogfooder, this was the perfect excuse to:
 - Write this very blog post
 
 Let me show you how it all works.
+
+<CalloutBox icon="IconBolt" title="🔥 Hot take" type="action">
+
+**Agents are the new scripts.** We used to write bash scripts and cron jobs to automate tedious tasks. Now we write agents. Same energy, better vibes. The difference? Scripts follow rigid rules; agents figure out what you actually meant.
+
+</CalloutBox>
 
 ## The architecture: three agents enter, one standup leaves
 
@@ -380,26 +388,54 @@ The whole session took about 7 minutes, but most of that was me iterating on the
 
 Did I save any time compared to just writing the standup myself? Debatable. Did I get to use AI instead of doing it manually? Yes. And isn't that all that really matters?
 
+<CalloutBox icon="IconBolt" title="🔥 Hot take" type="action">
+
+**Human in the loop still matters.** Here's the thing - as soon as I stop manually iterating and approving the standups my agent is generating, it flips into something weirdly anti-social. I'm just sending my teammates auto-generated text. Even if it's 90% accurate and I would have approved it anyway, something feels *off* about fully automating communication with other humans. The approval step isn't just quality control - it's me taking ownership of my words.
+
+</CalloutBox>
+
 ## Cool features I'm proud of
 
-### Few-shot prompting
+### Make it yours with config files
 
-Create an `examples.md` file with your team's standup style:
+The agent reads two optional config files from `~/.config/github-standup-agent/` that let you fully customize how it writes standups:
+
+**`style.md`** - Define your team's format and conventions:
 
 ```markdown
-## Yesterday
-- Shipped the new dashboard (PR #100)
-- Paired with Sarah on the auth refactor
+# Standup Style Guide
 
-## Today
-- Finishing the auth refactor
-- Starting on the API redesign
+## Format
+- Use "Did:" and "Will Do:" sections (NOT "Yesterday/Today")
+- No "Blockers" section unless explicitly needed
+- Keep everything as bullet points
 
-## Blockers
-- Waiting on design review for the new components
+## Content Style
+- Be concise but include enough context for team visibility
+- Reference PRs with actual URLs, not just "- pr"
+- Use casual/technical tone - not overly formal
+
+## What to Skip
+- Routine meetings unless notable outcome
+- Minor housekeeping unless significant
 ```
 
-The summarizer will match your format, tone, and level of detail. No more standups that sound like a robot wrote them.
+**`examples.md`** - Provide few-shot examples from real standups:
+
+```markdown
+# Example Standups
+
+## Andy's Example
+Did:
+- docs pr about verifying deployments - <link|runbooks#340>
+- bugfix for lazy import breaking deploy - <link|posthog#45050>
+
+Will Do:
+- merge clustering frontend PR and watch it in prod
+- follow up on support tickets I'm assigned
+```
+
+The summarizer uses these files to match your team's exact format, tone, and level of detail. It'll even pick up on quirks like how you reference PRs, whether you use Slack-style links, and what sections you include. No more standups that sound like a robot wrote them.
 
 ### Output guardrails
 
@@ -448,6 +484,12 @@ The OpenAI Agents SDK integration is [available in posthog-python](https://githu
 ## Stick it to your standup bot
 
 I've been using this agent daily for a few weeks now. It's not perfect - sometimes it misses context or formats things weirdly. But that's the beauty of having full observability: I can see exactly what went wrong and iterate.
+
+<CalloutBox icon="IconBolt" title="🔥 Hot take" type="action">
+
+**Why are we even doing standups?** Honestly, summarization as a category feels crazy early. The fact that I have to manually aggregate my work across GitHub, Slack, Linear, and Google Docs is absurd. I should just be able to read the "headlines" of my work life each morning - a personalized digest of what matters, generated automatically from all my tools. No one has solved this yet. Maybe standups are just a symptom of our tools not talking to each other. The standup bot isn't the enemy - it's a coping mechanism for a fragmented toolchain.
+
+</CalloutBox>
 
 The standup bot still messages me at 6 PM. But now I just smile, run `standup generate`, and let my agent do the talking.
 
