@@ -135,3 +135,56 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
         </MDXComponentsContext.Provider>
     )
 }
+
+interface StepDefinition {
+    title: string
+    badge?: string
+    content: React.ReactNode
+}
+
+interface OnboardingComponents {
+    Steps: MDXComponent
+    Step: MDXComponent
+    CodeBlock: React.ComponentType<CodeBlockWrapperProps>
+    CalloutBox: MDXComponent
+    Markdown: MDXComponent
+    Tab: typeof Tab
+    dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
+    snippets?: Record<string, React.ComponentType<Record<string, never>>>
+}
+
+interface InstallationProps {
+    modifySteps?: (steps: StepDefinition[]) => StepDefinition[]
+}
+
+export const createInstallation = (getSteps: (ctx: OnboardingComponents) => StepDefinition[]) => {
+    return function Installation({ modifySteps }: InstallationProps) {
+        const { Steps, Step, CodeBlock, CalloutBox, Markdown, Tab, dedent, snippets } = useMDXComponents()
+
+        const ctx: OnboardingComponents = {
+            Steps,
+            Step,
+            CodeBlock,
+            CalloutBox,
+            Markdown,
+            Tab,
+            dedent,
+            snippets,
+        }
+
+        let steps = getSteps(ctx)
+        if (modifySteps) {
+            steps = modifySteps(steps)
+        }
+
+        return (
+            <Steps>
+                {steps.map((step, index) => (
+                    <Step key={index} title={step.title} badge={step.badge}>
+                        {step.content}
+                    </Step>
+                ))}
+            </Steps>
+        )
+    }
+}
