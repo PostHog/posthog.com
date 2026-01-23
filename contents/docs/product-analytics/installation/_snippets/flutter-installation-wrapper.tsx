@@ -2,12 +2,12 @@ import React from 'react'
 import { getFlutterSteps } from 'onboarding/product-analytics/flutter.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '~/utils'
 
 const FlutterInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown } = useMDXComponents()
+    const components = useMDXComponents()
+    const { Steps, Step } = components
 
-    const steps = addNextStepsStep(getFlutterSteps(CodeBlock, Markdown, dedent))
+    const steps = addNextStepsStep(getFlutterSteps(components))
 
     return (
         <Steps>

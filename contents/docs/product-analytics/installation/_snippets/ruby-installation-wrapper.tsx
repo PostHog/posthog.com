@@ -2,12 +2,12 @@ import React from 'react'
 import { getRubySteps } from 'onboarding/product-analytics/ruby.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '~/utils'
 
 const RubyInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown } = useMDXComponents()
+    const components = useMDXComponents()
+    const { Steps, Step } = components
 
-    const steps = addNextStepsStep(getRubySteps(CodeBlock, Markdown, dedent))
+    const steps = addNextStepsStep(getRubySteps(components))
 
     return (
         <Steps>

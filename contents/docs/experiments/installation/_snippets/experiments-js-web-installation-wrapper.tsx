@@ -3,12 +3,12 @@ import { getJSWebSteps } from 'onboarding/experiments/js-web.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { ExperimentImplementationSnippet } from 'onboarding/experiments/_snippets/experiment-implementation.tsx'
 import { addNextStepsStep } from './shared-helpers'
-import { dedent } from '~/utils'
 
 const ExperimentsJSWebInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, snippets } = useMDXComponents()
+    const components = useMDXComponents()
+    const { Steps, Step } = components
 
-    const steps = addNextStepsStep(getJSWebSteps(CodeBlock, Markdown, dedent, snippets))
+    const steps = addNextStepsStep(getJSWebSteps(components))
 
     return (
         <Steps>

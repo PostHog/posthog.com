@@ -3,12 +3,12 @@ import { getJSWebSteps } from 'onboarding/product-analytics/js-web.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '~/utils'
 
 const JSWebInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, snippets } = useMDXComponents()
+    const components = useMDXComponents()
+    const { Steps, Step } = components
 
-    const steps = addNextStepsStep(getJSWebSteps(CodeBlock, Markdown, dedent, snippets))
+    const steps = addNextStepsStep(getJSWebSteps(components))
 
     return (
         <Steps>

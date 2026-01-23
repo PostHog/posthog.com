@@ -68,7 +68,18 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MDXComponent = React.ComponentType<any>
 
-interface DocsComponents {
+// Types for onboarding steps
+export interface StepDefinition {
+    title: string
+    badge?: 'required' | 'recommended' | 'optional'
+    content: React.ReactNode
+}
+
+export interface StepModifier {
+    modifySteps?: (steps: StepDefinition[]) => StepDefinition[]
+}
+
+export interface OnboardingComponents {
     Steps: MDXComponent
     Step: MDXComponent
     MdxCodeBlock: MDXComponent
@@ -82,6 +93,9 @@ interface DocsComponents {
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
     snippets?: Record<string, React.ComponentType<Record<string, never>>>
 }
+
+// Alias for backwards compatibility
+type DocsComponents = OnboardingComponents
 
 const MDXComponentsContext = createContext<DocsComponents>({
     Steps,
@@ -134,4 +148,32 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
             {children}
         </MDXComponentsContext.Provider>
     )
+}
+
+/**
+ * Creates an installation component from a steps function.
+ * This is used to generate installation docs.
+ */
+export function createInstallation(
+    getSteps: (ctx: OnboardingComponents) => StepDefinition[]
+): React.ComponentType<StepModifier> {
+    return function Installation({ modifySteps }: StepModifier = {}) {
+        const components = useMDXComponents()
+        const { Steps, Step } = components
+
+        let steps = getSteps(components)
+        if (modifySteps) {
+            steps = modifySteps(steps)
+        }
+
+        return (
+            <Steps>
+                {steps.map((step, index) => (
+                    <Step key={index} title={step.title} badge={step.badge}>
+                        {step.content}
+                    </Step>
+                ))}
+            </Steps>
+        )
+    }
 }

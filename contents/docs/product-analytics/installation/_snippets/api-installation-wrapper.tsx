@@ -2,12 +2,12 @@ import React from 'react'
 import { getAPISteps } from 'onboarding/product-analytics/api.tsx'
 import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '~/utils'
 
 const APIInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, CalloutBox } = useMDXComponents()
+    const components = useMDXComponents()
+    const { Steps, Step } = components
 
-    const steps = addNextStepsStep(getAPISteps(CodeBlock, Markdown, CalloutBox, dedent))
+    const steps = addNextStepsStep(getAPISteps(components))
 
     return (
         <Steps>
