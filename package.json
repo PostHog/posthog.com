@@ -140,6 +140,7 @@
         "mermaid": "^11.4.1",
         "mitt": "^1.2.0",
         "mobx": "^6.3.13",
+        "multiparty": "^4.2.3",
         "node-fetch": "^2.6.1",
         "node-html-parser": "^5.4.2",
         "openapi-sampler": "^1.6.1",
