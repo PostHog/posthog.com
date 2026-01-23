@@ -30,7 +30,7 @@ If there are any pending config issues that you raised before but the customer d
 ### Lead creation
 If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past two - three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement, you can add them to the `Onboarding referral` segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic.
 
-After a few minutes, your lead will appear in the `#sales-leads` Slack channel, tagged as "Onboarding referral". As a good practice, leave a note in Vitally for the Account Executive with some relevant context on the customer. You can also ping an assigned AE on Slack, if any futher follow up is needed.
+After a few minutes, your lead will appear in the `#sales-leads` Slack channel, tagged as "Onboarding referral". As a good practice, leave a note in Vitally for the Account Executive with some relevant context on the customer. You can also ping an assigned AE on Slack, if any further follow up is needed.
 
 The automation flips the Vitally's Onboarding pipeline trait to `Sales Handoff` so that we have not only data on the leads passed, but also a visual indication.
 
