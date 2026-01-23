@@ -183,9 +183,9 @@ The funnel breakdown shows conversion rates at each step, helping you identify:
 
 > **Important**: Statistical significance for funnels is always calculated between the first step (exposure event) and the final step. Intermediate steps are shown for analysis but don't affect the significance calculation.
 
-## Ending an experiment
+## Shipping a variant
 
-After you've analyzed your experiment metrics and you're ready to end your experiment, you can click the **Ship a variant** button on the experiment page to roll out a variant and stop the experiment.
+After you've analyzed your experiment metrics and determined a winning variant, you can click the **Ship a variant** button on the experiment page to roll out that variant to all users and end the experiment.
 
 ![Ship a variant](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_23_at_13_52_25_6c1cf85153.png)
 
@@ -195,10 +195,16 @@ Beyond this, we recommend:
 
 1. Sharing the results with your team.
 
-2. Documenting conclusions and findings in the description field your experiment. This helps preserve historical context for future team members.
+2. Documenting conclusions and findings in the description field of your experiment. This helps preserve historical context for future team members.
 
 3. Removing the experiment and losing variant's code.
 
 4. Archiving the experiment.
 
 Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
+
+## Stopping an experiment
+
+Stopping the experiment will stop counting events in the results. Your feature flag, however, will continue working normally and events will still be tracked. You can restart the experiment later if needed.
+
+When stopping an experiment, set a conclusion (won/lost/inconclusive/stopped early/invalid) based on your analysis of the results. We recommend adding a note to document your reasoning.
