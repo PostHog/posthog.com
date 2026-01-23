@@ -331,9 +331,11 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         IsEU,
         IsUS,
         table: (props) => (
-            <OverflowXSection>
-                <table {...props} />
-            </OverflowXSection>
+            <p>
+                <OverflowXSection>
+                    <table {...props} />
+                </OverflowXSection>
+            </p>
         ),
         ...shortcodes,
     }

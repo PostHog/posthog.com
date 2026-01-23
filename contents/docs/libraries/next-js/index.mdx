@@ -1,7 +1,6 @@
 ---
 title: Next.js
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg
+platformLogo: nextjs
 features:
   eventCapture: true
   userIdentification: true
@@ -184,6 +183,8 @@ export function PHProvider({
 </MultiLanguage>
 
 The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
+
+> **Tip:** If you experience hydration errors related to PostHog injecting scripts (for session recording, surveys, etc.), you can set `external_scripts_inject_target: 'head'` in your PostHog config. This tells PostHog to inject scripts into the document head instead of the body, avoiding DOM mutations that can interfere with React's hydration process. Alternatively, use `defaults: '2026-01-30'` or later which includes this setting by default. See the [JavaScript configuration docs](/docs/libraries/js/config#configuration-options) for more details.
 
 ### Why did the pageview component need a `useEffect`?
 

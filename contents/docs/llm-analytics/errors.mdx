@@ -1,0 +1,96 @@
+---
+title: Errors
+---
+
+The Errors tab groups and aggregates error messages from your LLM application, helping you identify patterns and prioritize which errors to fix.
+
+## How it works
+
+When your LLM application captures an error event (with `$ai_is_error` set to `true`), PostHog automatically normalizes the error message by replacing dynamic values like IDs, timestamps, and numbers with placeholders. This groups similar errors together, even when they contain different specific values.
+
+For example, these two errors:
+- `"Request req_abc123 failed at 2025-01-11T14:25:51Z with status 429"`
+- `"Request req_xyz789 failed at 2025-01-10T09:15:30Z with status 429"`
+
+Are normalized to:
+- `"Request <ID> failed at <TIMESTAMP> with status <N>"`
+
+This allows you to see that both errors are the same underlying issue, rather than treating them as separate problems.
+
+## Error metrics
+
+The Errors tab displays the following metrics for each normalized error:
+
+| Metric | Description |
+|--------|-------------|
+| **error** | The normalized error message |
+| **traces** | Number of unique traces containing this error |
+| **generations** | Number of generation events with this error |
+| **spans** | Number of span events with this error |
+| **embeddings** | Number of embedding events with this error |
+| **sessions** | Number of unique sessions affected |
+| **users** | Number of unique users who encountered this error |
+| **days_seen** | Number of distinct days the error occurred |
+| **first_seen** | When the error first appeared |
+| **last_seen** | Most recent occurrence |
+
+## Investigating errors
+
+Click on any error row to drill down into the [Traces](/docs/llm-analytics/traces) tab, filtered to show only traces containing that specific error. This helps you:
+
+- See the full context of what led to the error
+- Examine the inputs and outputs around the failure
+- Identify patterns across affected traces
+
+## Capturing errors
+
+To have errors appear in the Errors tab, set `$ai_is_error` to `true` and include the error message in `$ai_error` when capturing LLM events.
+
+Most PostHog LLM integrations automatically capture errors when API calls fail. If you're using manual capture, include these properties:
+
+```python
+posthog.capture(
+    distinct_id="user_123",
+    event="$ai_generation",
+    properties={
+        "$ai_trace_id": "trace_abc",
+        "$ai_model": "gpt-4",
+        "$ai_is_error": True,
+        "$ai_error": "Rate limit exceeded: 429 Too Many Requests"
+    }
+)
+```
+
+## Custom error normalization
+
+If you want more control over how errors are grouped, you can set the `$ai_error_normalized` property yourself. When this property is provided, PostHog uses your value instead of auto-normalizing.
+
+```python
+posthog.capture(
+    distinct_id="user_123",
+    event="$ai_generation",
+    properties={
+        "$ai_trace_id": "trace_abc",
+        "$ai_is_error": True,
+        "$ai_error": "OpenAI API error: rate_limit_exceeded for org-abc123",
+        "$ai_error_normalized": "OpenAI rate limit exceeded"  # Custom grouping
+    }
+)
+```
+
+## Normalization rules
+
+PostHog normalizes errors by replacing:
+
+| Pattern | Replacement | Example |
+|---------|-------------|---------|
+| UUIDs and request IDs | `<ID>` | `req_abc123` → `<ID>` |
+| ISO timestamps | `<TIMESTAMP>` | `2025-01-11T14:25:51Z` → `<TIMESTAMP>` |
+| Tool call IDs | `<TOOL_CALL_ID>` | `toolu_01ABC...` → `<TOOL_CALL_ID>` |
+| Function call IDs | `<CALL_ID>` | `call_abc123` → `call_<CALL_ID>` |
+| User IDs | `<USER_ID>` | `user_abc123` → `user_<USER_ID>` |
+| Token counts | `<TOKEN_COUNT>` | `"tokenCount":5000` → `"tokenCount":<TOKEN_COUNT>` |
+| Large numbers (9+ digits) | `<ID>` | `1234567890` → `<ID>` |
+| Other numbers | `<N>` | `429`, `5000` → `<N>` |
+
+Errors are truncated to 1000 characters before normalization.

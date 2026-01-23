@@ -89,6 +89,8 @@ We realize external openness doesn't work for everyone, but that doesn't mean yo
 
 > **Try this:** Write a guide or runbook on an undocumented process you're responsible for. Refer to it the next time someone asks you about it. We have a ton of public examples of these from [making schema changes safely](/handbook/engineering/databases/schema-changes) to [optimizing queries](/handbook/engineering/databases/query-performance-optimization) to [running growth reviews](/handbook/product/per-product-growth-reviews).
 
+<NewsletterForm />
+
 ## 3. Lacking an opinion
 
 Opinions are direction. They are what your product and company become. People who don't communicate in an opinionated way are easily ignored, and often resent their lack of influence.
@@ -129,8 +131,6 @@ Sharing the context gives the receiver more of the information they need to eval
 Likewise, when asking a question, provide both the question you have **AND** the reason you're asking. This can save a lot of back and forth, and often leads to a better solution than the one you assumed existed.
 
 > **Remember this:** Put yourself in your recipient's shoes. Would you be able to accomplish what you want them to given the context you provide?
-
----
 
 ## 5. Being completely unstructured
 

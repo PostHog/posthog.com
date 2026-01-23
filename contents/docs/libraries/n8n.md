@@ -1,7 +1,6 @@
 ---
 title: n8n
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/n8n.png
+platformLogo: n8n
 ---
 
 ## Objective

@@ -1,7 +1,6 @@
 ---
 title: MoEngage
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/1_95b73543_367f4ea0bc.png
+platformLogo: moengage
 ---
 
 ## Objective

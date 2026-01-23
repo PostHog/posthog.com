@@ -30,13 +30,15 @@ Products we're less excited about building:
 
 Sometimes the Blitzscale team will decide a new product needs to be built. They'll find someone internally to run it, ideally someone who's been at PostHog for at least 6 months (we tried getting new people to ship new products, but they often struggled to ship quickly).
 
-Other times you might have an idea for a great product we should build. In that case, use the [New Product RFC template](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-product.md). You might choose to hack together a prototype of the product to demo and show off, which you should do! Blitzscale only needs to get involved if you want to start working on this product full time. At that point, we are choosing whether to invest a pretty serious amount of money into launching it, so we want to get that right.
+Other times you might have an idea for a great product we should build. In that case, use the [New Product RFC template](https://github.com/PostHog/requests-for-comments/blob/main/.github/ISSUE_TEMPLATE/new-product.md). You might choose to hack together a prototype of the product to demo and show off, which you should do! Blitzscale only needs to get involved if you want to start working on this product full time. At that point, we are choosing whether to invest a pretty serious amount of money into launching it, so we want to get that right.
+
+For a complete walkthrough of the product lifecycle, see [releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
 ## Next products on deck
 
 From our [roadmap](/roadmap), here's what we're currently working on:
 
-- Endpoints - `#project-endpoints`
+- Endpoints - `#team-data-modeling`
 - Logs - `#project-logs`
 - Product autonomy - `#team-array`
 - Customer Analytics `#team-customer-analytics`

@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useMemo, useRef, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
@@ -14,10 +14,10 @@ import usePostHog from 'hooks/usePostHog'
 import useTopicsNav from '../../../navs/useTopicsNav'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import PostsTable from 'components/Edition/PostsTable'
-import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { Popover } from 'components/RadixUI/Popover'
 import Stickers from 'components/Stickers/Index'
 import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
@@ -29,13 +29,13 @@ import {
     IconThumbsDownFilled,
     IconArrowUpRight,
     IconPencil,
-    IconSpinner,
     IconUpload,
     IconX,
     IconCheck,
     IconExternal,
+    IconPresent,
+    IconSparkles,
 } from '@posthog/icons'
-import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -49,6 +49,8 @@ import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
+import Points from 'components/Points'
+import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
 
@@ -770,6 +772,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength })
 }
 
 const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFieldValue }) => {
+    const { appWindow } = useWindow()
     const { user, isModerator } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
     const [hasPosts, setHasPosts] = useState(false)
@@ -885,13 +888,23 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                           </>
                       ),
                   },
+                  {
+                      value: 'points',
+                      label: 'Points',
+                      content: <Points />,
+                  },
               ]
             : []),
     ]
 
+    const initialTab = useMemo(() => {
+        const params = new URLSearchParams(appWindow?.location?.search)
+        return tabs.find((tab) => tab.value === params.get('tab'))?.value || tabs[0].value
+    }, [])
+
     return (
         <div data-scheme="secondary">
-            <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+            <OSTabs tabs={tabs} defaultValue={initialTab} className="h-auto" triggerDataScheme="primary" />
         </div>
     )
 }
@@ -911,10 +924,14 @@ const ValidationSchema = Yup.object().shape({
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
-    const nav = useTopicsNav()
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
+    const [giftPopoverOpen, setGiftPopoverOpen] = useState(false)
+    const [giftAmount, setGiftAmount] = useState<number>()
+    const [giftNote, setGiftNote] = useState('')
+    const [giftSubmitting, setGiftSubmitting] = useState(false)
+    const [giftConfirming, setGiftConfirming] = useState(false)
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
@@ -1206,6 +1223,68 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
 
+    const handleGift = async () => {
+        if (!giftAmount || !giftNote?.trim()) {
+            addToast({
+                description: 'Amount and description are required',
+                error: true,
+                duration: 3000,
+            })
+            return
+        }
+
+        setGiftSubmitting(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/gift`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({
+                    profileId: id,
+                    amount: giftAmount,
+                    note: giftNote.trim(),
+                }),
+            })
+
+            if (response.ok) {
+                addToast({
+                    description: (
+                        <>
+                            <IconCheck className="text-green size-4 inline-block mr-1" />
+                            Gift sent successfully
+                        </>
+                    ),
+                    duration: 3000,
+                })
+                setGiftPopoverOpen(false)
+                setGiftAmount(undefined)
+                setGiftNote('')
+                setGiftConfirming(false)
+                mutate()
+            } else {
+                const data = await response.json()
+                addToast({
+                    description: data?.error?.message || 'Failed to send gift',
+                    error: true,
+                    duration: 3000,
+                })
+            }
+        } catch (err) {
+            console.error(err)
+            addToast({
+                description: 'Failed to send gift',
+                error: true,
+                duration: 3000,
+            })
+        } finally {
+            setGiftSubmitting(false)
+            setGiftConfirming(false)
+        }
+    }
+
     if (!profile && isLoading) {
         return <ProfileSkeleton />
     } else if (!profile && !isLoading) {
@@ -1239,6 +1318,122 @@ export default function ProfilePage({ params }: PageProps) {
                             <>
                                 {isModerator && (
                                     <div className="flex gap-px border-r border-secondary pr-2 mr-2">
+                                        <Popover
+                                            dataScheme="primary"
+                                            open={giftPopoverOpen}
+                                            onOpenChange={setGiftPopoverOpen}
+                                            trigger={
+                                                <span>
+                                                    <OSButton
+                                                        asLink
+                                                        size="md"
+                                                        tooltip={<>Gift this user points</>}
+                                                        icon={<IconPresent />}
+                                                        iconClassName="size-5"
+                                                    />
+                                                </span>
+                                            }
+                                            contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
+                                        >
+                                            <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="bg-yellow/30 rounded-full p-2">
+                                                        <IconPresent className="size-5 text-orange" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-sm font-bold m-0 flex items-center gap-1">
+                                                            Gift points to {firstName}
+                                                            <IconSparkles className="size-3.5 text-yellow" />
+                                                        </h4>
+                                                        <p className="text-xs text-secondary m-0">
+                                                            Reward great contributions
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="p-4 pt-2 space-y-2">
+                                                <div>
+                                                    <label
+                                                        htmlFor="gift-amount"
+                                                        className="text-xs font-semibold text-secondary block mb-1"
+                                                    >
+                                                        Points
+                                                    </label>
+                                                    <OSInput
+                                                        id="gift-amount"
+                                                        direction="column"
+                                                        showLabel={false}
+                                                        label="Points"
+                                                        type="number"
+                                                        min={1}
+                                                        value={giftAmount}
+                                                        onChange={(e) =>
+                                                            setGiftAmount(e.target.value ? Number(e.target.value) : '')
+                                                        }
+                                                        placeholder="How many points?"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label
+                                                        htmlFor="gift-reason"
+                                                        className="text-xs font-semibold  text-secondary block mb-1"
+                                                    >
+                                                        Reason
+                                                    </label>
+                                                    <OSInput
+                                                        id="gift-reason"
+                                                        direction="column"
+                                                        showLabel={false}
+                                                        label="Reason"
+                                                        type="text"
+                                                        value={giftNote}
+                                                        onChange={(e) => setGiftNote(e.target.value)}
+                                                        placeholder="What's this gift for?"
+                                                    />
+                                                </div>
+                                                {giftConfirming ? (
+                                                    <div className="space-y-2">
+                                                        <p className="text-sm text-secondary text-center">
+                                                            Send{' '}
+                                                            <span className="font-bold">
+                                                                {giftAmount} point{giftAmount === 1 ? '' : 's'}
+                                                            </span>{' '}
+                                                            to {profile?.firstName}?
+                                                        </p>
+                                                        <div className="flex gap-2">
+                                                            <OSButton
+                                                                size="md"
+                                                                variant="secondary"
+                                                                onClick={() => setGiftConfirming(false)}
+                                                                disabled={giftSubmitting}
+                                                                width="full"
+                                                            >
+                                                                Cancel
+                                                            </OSButton>
+                                                            <OSButton
+                                                                size="md"
+                                                                variant="primary"
+                                                                onClick={handleGift}
+                                                                disabled={giftSubmitting}
+                                                                width="full"
+                                                            >
+                                                                {giftSubmitting ? 'Sending...' : 'Confirm'}
+                                                            </OSButton>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <OSButton
+                                                        size="md"
+                                                        variant="primary"
+                                                        onClick={() => setGiftConfirming(true)}
+                                                        disabled={!giftAmount || !giftNote?.trim()}
+                                                        width="full"
+                                                    >
+                                                        Send gift
+                                                    </OSButton>
+                                                )}
+                                            </div>
+                                        </Popover>
                                         <OSButton
                                             asLink
                                             size="md"
@@ -1347,7 +1542,7 @@ export default function ProfilePage({ params }: PageProps) {
                             )}
 
                             {profile.achievements?.length > 0 && (
-                                <Block title="Achievements">
+                                <Block title="Achievements" url={`/community/achievements`}>
                                     <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
                                         {profile.achievements.map(({ achievement, hidden, id }) => (
                                             <li key={id} className="flex justify-center">
