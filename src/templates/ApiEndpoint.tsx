@@ -550,8 +550,6 @@ interface ApiEndpointData {
         name: string
         nextURL?: string
         items: string
-    }
-    apiComponents: {
         components: string
     }
     allMdx: {
@@ -563,10 +561,7 @@ interface ApiEndpointData {
 }
 
 export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
-    const {
-        apiComponents: { components: apiComponents },
-        allMdx,
-    } = data
+    const { allMdx } = data
     const name = data.data.name
     const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
@@ -585,7 +580,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
         }
         paths[item.path][item.httpVerb] = item.operationSpec
     })
-    const objects = JSON.parse(apiComponents)
+    const objects = JSON.parse(data.data.components)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
     const contentContainerRef = useRef<HTMLDivElement>(null)
@@ -749,8 +744,6 @@ export const query = graphql`
             name
             url
             nextURL
-        }
-        apiComponents: apiComponents {
             components
         }
     }

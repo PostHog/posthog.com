@@ -120,9 +120,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       name: String,
       url: String,
       items: String,
-    }
-    type ApiComponents implements Node {
-      id: String,
       components: String,
     }
     type Integration implements Node {
