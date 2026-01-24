@@ -171,10 +171,6 @@ function pathID(verb, path) {
     return verb + path.replaceAll('/', '-').replaceAll('{', '').replaceAll('}', '').slice(0, -1)
 }
 
-function getSchemaRef(schema) {
-    return schema?.items?.$ref || schema?.$ref
-}
-
 function getSchemaTypeName(schema: any): string | null {
     const itemRef = schema?.items?.$ref
     const directRef = schema?.$ref
@@ -191,12 +187,10 @@ function getSchemaTypeName(schema: any): string | null {
     return null
 }
 
-function ExpandToggle({ isOpen, onClick, schema }: { isOpen: boolean; onClick: () => void; schema: any }) {
-    const typeName = getSchemaTypeName(schema)
-
+function ExpandToggle({ isOpen, onClick, label }: { isOpen: boolean; onClick: () => void; label: string }) {
     return (
         <button className="group cursor-pointer inline-flex items-center" onClick={onClick}>
-            <span className="font-code text-[13px]">{typeName}</span>
+            <span className="font-code text-[13px]">{label}</span>
             <IconChevronDown className={`size-6 ${isOpen ? 'rotate-180' : ''}`} />
         </button>
     )
@@ -209,8 +203,9 @@ interface ParamItemProps {
 }
 
 function ParamItem({ param, objects, depth }: ParamItemProps) {
-    const schemaRef = getSchemaRef(param.schema)
     const [isOpen, setIsOpen] = useState(false)
+    const schemaRefName = getSchemaRefName(param.schema)
+    const schema = schemaRefName ? objects.schemas[schemaRefName] : param.schema
 
     return (
         <li className="py-3 border-b border-primary last:border-0">
@@ -221,27 +216,25 @@ function ParamItem({ param, objects, depth }: ParamItemProps) {
                 <div className="">
                     <div>
                         <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                            {schemaRef ? (
+                            {schemaRefName && schema.properties ? (
                                 <ExpandToggle
-                                    schema={param.schema}
+                                    label={schemaRefName}
                                     isOpen={isOpen}
                                     onClick={() => setIsOpen(!isOpen)}
                                 />
                             ) : (
-                                param.schema.type
+                                schema.type
                             )}
                         </span>
                     </div>
-                    {param.schema.default !== undefined && param.schema.default !== null && (
-                        <DefaultValue value={param.schema.default} />
-                    )}
-                    {param.schema.enum && <EnumValues values={param.schema.enum} />}
+                    {schema.default !== undefined && schema.default !== null && <DefaultValue value={schema.default} />}
+                    {schema.enum && <EnumValues values={schema.enum} />}
                 </div>
             </div>
 
-            {isOpen && schemaRef && (
+            {isOpen && schemaRefName && (
                 <div className="params-wrapper bg-accent rounded px-4 mr-2 my-1">
-                    <Params objects={objects} object={objects.schemas[schemaRef.split('/').at(-1)]} depth={depth + 1} />
+                    <Params objects={objects} object={objects.schemas[schemaRefName]} depth={depth + 1} />
                 </div>
             )}
         </li>
@@ -261,7 +254,7 @@ function Params({
 }) {
     if (depth > 4) return null
     let params = initialParams || []
-    if (object) {
+    if (object?.properties) {
         params = Object.entries(object.properties).map(([key, value]) => {
             return {
                 name: key,
