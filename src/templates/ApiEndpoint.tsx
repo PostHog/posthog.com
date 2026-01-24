@@ -16,6 +16,7 @@ import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
 import { Heading } from 'components/Heading'
+import { IconChevronDown } from '@posthog/icons'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -30,6 +31,36 @@ const Divider = ({ className = '' }) => <hr className={`border-0 border-t border
 
 // Section divider with more spacing for major sections
 const SectionDivider = ({ className = '' }) => <hr className={`border-0 border-t-2 border-primary my-8 ${className}`} />
+
+// Displays the default value for a parameter
+const DefaultValue = ({ value }: { value: unknown }) => (
+    <div>
+        <span className="text-sm">
+            Default: <code>{String(value)}</code>
+        </span>
+    </div>
+)
+
+// Extracts the schema name from a $ref path (e.g., "#/components/schemas/User" -> "User")
+// Checks both direct $ref and items.$ref for array types
+const getSchemaRefName = (schema?: { $ref?: string; items?: { $ref?: string } }): string | undefined => {
+    const ref = schema?.['$ref'] ?? schema?.items?.['$ref']
+    return ref?.split('/').at(-1)
+}
+
+// Displays enum values as a list of code snippets
+const EnumValues = ({ values }: { values: (string | null)[] }) => (
+    <div className="text-sm">
+        One of:{' '}
+        {values
+            .filter((item) => item && item !== '')
+            .map((item) => (
+                <code className="mr-1" key={item}>
+                    "{item}"
+                </code>
+            ))}{' '}
+    </div>
+)
 
 function Endpoints({
     paths,
@@ -140,8 +171,96 @@ function pathID(verb, path) {
     return verb + path.replaceAll('/', '-').replaceAll('{', '').replaceAll('}', '').slice(0, -1)
 }
 
-function Params({ params, objects, object, depth = 0 }) {
+function getSchemaRef(schema) {
+    return schema?.items?.$ref || schema?.$ref
+}
+
+function getSchemaTypeName(schema: any): string | null {
+    const itemRef = schema?.items?.$ref
+    const directRef = schema?.$ref
+
+    if (itemRef) {
+        const typeName = itemRef.split('/').at(-1)
+        return `${typeName}[]`
+    }
+
+    if (directRef) {
+        return directRef.split('/').at(-1)
+    }
+
+    return null
+}
+
+function ExpandToggle({ isOpen, onClick, schema }: { isOpen: boolean; onClick: () => void; schema: any }) {
+    const typeName = getSchemaTypeName(schema)
+
+    return (
+        <button className="group cursor-pointer inline-flex items-center" onClick={onClick}>
+            <span className="font-code text-[13px]">{typeName}</span>
+            <IconChevronDown className={`size-6 ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+    )
+}
+
+interface ParamItemProps {
+    param: { name: string; schema: any }
+    objects: any
+    depth: number
+}
+
+function ParamItem({ param, objects, depth }: ParamItemProps) {
+    const schemaRef = getSchemaRef(param.schema)
+    const [isOpen, setIsOpen] = useState(false)
+
+    return (
+        <li className="py-3 border-b border-primary last:border-0">
+            <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
+                <div className="flex flex-col">
+                    <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
+                </div>
+                <div className="">
+                    <div>
+                        <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                            {schemaRef ? (
+                                <ExpandToggle
+                                    schema={param.schema}
+                                    isOpen={isOpen}
+                                    onClick={() => setIsOpen(!isOpen)}
+                                />
+                            ) : (
+                                param.schema.type
+                            )}
+                        </span>
+                    </div>
+                    {param.schema.default !== undefined && param.schema.default !== null && (
+                        <DefaultValue value={param.schema.default} />
+                    )}
+                    {param.schema.enum && <EnumValues values={param.schema.enum} />}
+                </div>
+            </div>
+
+            {isOpen && schemaRef && (
+                <div className="params-wrapper bg-accent rounded px-4 mr-2 my-1">
+                    <Params objects={objects} object={objects.schemas[schemaRef.split('/').at(-1)]} depth={depth + 1} />
+                </div>
+            )}
+        </li>
+    )
+}
+
+function Params({
+    params: initialParams,
+    objects,
+    object,
+    depth = 0,
+}: {
+    params?: any[]
+    objects: any
+    object?: any
+    depth?: number
+}) {
     if (depth > 4) return null
+    let params = initialParams || []
     if (object) {
         params = Object.entries(object.properties).map(([key, value]) => {
             return {
@@ -150,117 +269,13 @@ function Params({ params, objects, object, depth = 0 }) {
             }
         })
     }
-    const [openSubParams, setOpenSubParams] = useState([])
 
     return (
-        <>
-            <ul className="list-none pl-0">
-                {params.map((param, index) => (
-                    <li key={index} className="py-3 border-b border-primary last:border-0">
-                        <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
-                            <div className="flex flex-col">
-                                <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
-                                {param.schema.items?.$ref && (
-                                    <>
-                                        {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
-                                            <div
-                                                type="link"
-                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-accent hover:bg-primary  hover:bg-accent-hover leading-[8px] text-black dark:text-white"
-                                                onClick={() => {
-                                                    setOpenSubParams(
-                                                        openSubParams.filter((item) => item !== param.schema.items.$ref)
-                                                    )
-                                                }}
-                                            >
-                                                <svg
-                                                    className="fill-current opacity-90 group-hover:opacity-100"
-                                                    width="16"
-                                                    height="5"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <title>Click to close</title>
-                                                    <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
-                                                </svg>
-                                            </div>
-                                        ) : (
-                                            <>
-                                                <div
-                                                    type="link"
-                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-primary border hover:bg-primary hover:bg-accent-hover leading-[8px] text-black dark:text-white"
-                                                    onClick={() =>
-                                                        setOpenSubParams([...openSubParams, param.schema.items.$ref])
-                                                    }
-                                                >
-                                                    <svg
-                                                        className="fill-current opacity-50 group-hover:opacity-75"
-                                                        width="16"
-                                                        height="5"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <title>Click to open</title>
-                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.80 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
-                                                    </svg>
-                                                </div>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </div>
-                            <div className="">
-                                <div>
-                                    <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                        {param.schema.type}
-                                    </span>
-                                </div>
-                                {param.schema.default !== undefined && param.schema.default !== null && (
-                                    <>
-                                        <div>
-                                            <span className="text-sm">
-                                                Default: <code>{String(param.schema.default)}</code>
-                                            </span>
-                                        </div>
-                                    </>
-                                )}
-                                {param.schema.enum && (
-                                    <>
-                                        <div className="text-sm">
-                                            One of:{' '}
-                                            {param.schema.enum
-                                                .filter((item) => item && item !== '')
-                                                .map((item) => (
-                                                    <code className="mr-1" key={item}>
-                                                        "{item}"
-                                                    </code>
-                                                ))}{' '}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-
-                        {param.schema.items?.$ref && (
-                            <>
-                                {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
-                                    <div>
-                                        <div className="params-wrapper bg-accent rounded px-4 mr-2 my-1">
-                                            <Params
-                                                objects={objects}
-                                                object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
-                                                depth={depth + 1}
-                                            />
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
-                            </>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </>
+        <ul className="list-none pl-0">
+            {params.map((param, index) => (
+                <ParamItem key={index} param={param} objects={objects} depth={depth} />
+            ))}
+        </ul>
     )
 }
 function Parameters({ item, objects }) {
@@ -290,25 +305,21 @@ function Security({ item }) {
     const personaApiKeyScopes = item.security?.[0]?.['PersonalAPIKeyAuth']
 
     return (
-        <>
-            {personaApiKeyScopes?.length && (
-                <div>
-                    <h4>Required API key scopes</h4>
-                    <div className="flex items-center gap-2">
-                        {personaApiKeyScopes.map((x) => (
-                            <code key={x}>{x}</code>
-                        ))}
-                    </div>
+        personaApiKeyScopes?.length && (
+            <div>
+                <h4>Required API key scopes</h4>
+                <div className="flex items-center gap-2">
+                    {personaApiKeyScopes.map((x) => (
+                        <code key={x}>{x}</code>
+                    ))}
                 </div>
-            )}
-        </>
+            </div>
+        )
     )
 }
 
 function RequestBody({ item, objects }) {
-    const objectKey =
-        item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
-        item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
+    const objectKey = getSchemaRefName(item.requestBody?.content?.['application/json']?.schema)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
 
@@ -331,9 +342,9 @@ function RequestBody({ item, objects }) {
 }
 
 function ResponseBody({ item, objects }) {
-    const objectKey = item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema['$ref']
-        ?.split('/')
-        .at(-1)
+    const objectKey = getSchemaRefName(
+        item.responses[Object.keys(item.responses)[0]]?.content?.['application/json']?.schema
+    )
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
     const [showResponse, setShowResponse] = useState(false)
@@ -371,7 +382,7 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
     let params = []
 
     if (item.requestBody) {
-        const objectKey = item.requestBody.content?.['application/json']?.schema['$ref']?.split('/').at(-1)
+        const objectKey = getSchemaRefName(item.requestBody.content?.['application/json']?.schema)
         if (!objectKey) return null
         const object = objects.schemas[objectKey]
         params = Object.entries(object.properties).filter(
@@ -528,28 +539,16 @@ function ResponseExample({ item, objects, objectKey }) {
 const pathDescription = (item) => {
     const name = humanReadableName(item.operationId).toLowerCase()
     if (item.operationId.includes('_list')) {
-        return (
-            <>
-                Returns a list of {name}. The {name} are returned in sorted order, with the most recent charges
-                appearing first.
-            </>
-        )
+        return `Returns a list of ${name}. The ${name} are returned in sorted order, with the most recent charges appearing first.`
     }
     if (item.httpVerb === 'get') {
-        return <>Returns a single {name.slice(0, -1)}, which you can request by passing through an id in the url. </>
+        return `Returns a single ${name.slice(0, -1)}, which you can request by passing through an id in the url.`
     }
     if (item.httpVerb === 'post') {
-        return (
-            <>
-                Create {name}. You need to pass through any required fields, and you can optionally pass through other
-                fields.
-            </>
-        )
+        return `Create ${name}. You need to pass through any required fields, and you can optionally pass through other fields.`
     }
     if (item.httpVerb === 'patch') {
-        return (
-            <>Update {name} by setting the values of the parameters passed. Any parameters not set will be unchanged.</>
-        )
+        return `Update ${name} by setting the values of the parameters passed. Any parameters not set will be unchanged.`
     }
 }
 
@@ -672,7 +671,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                                 : item.description}
                                         </ReactMarkdown>
 
-                                        <Security item={item} objects={objects} />
+                                        <Security item={item} />
                                         {item.security?.[0]?.['PersonalAPIKeyAuth']?.length && <Divider />}
 
                                         <Parameters item={item} objects={objects} />
@@ -710,16 +709,9 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                                         <ResponseExample
                                                             item={item}
                                                             objects={objects}
-                                                            objectKey={
-                                                                response.content?.['application/json']?.schema['$ref']
-                                                                    ?.split('/')
-                                                                    .at(-1) ||
-                                                                response.content?.['application/json']?.schema.items?.[
-                                                                    '$ref'
-                                                                ]
-                                                                    ?.split('/')
-                                                                    .at(-1)
-                                                            }
+                                                            objectKey={getSchemaRefName(
+                                                                response.content?.['application/json']?.schema
+                                                            )}
                                                             exampleLanguage={exampleLanguage}
                                                             setExampleLanguage={setExampleLanguage}
                                                         />
