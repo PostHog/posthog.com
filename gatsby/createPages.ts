@@ -689,6 +689,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post: true,
                 article: true,
                 askMax: true,
+                defer: true,
             },
         })
     })
