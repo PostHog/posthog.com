@@ -932,6 +932,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     await sourceGithubNodes()
 
+    const fetchWorkflowTemplates = async () => {
+        const data = await fetch('https://us.posthog.com/api/public_hog_flow_templates?limit=350').then((res) =>
+            res.json()
+        )
+        data.results.forEach((template) => {
+            const node = {
+                id: createNodeId(`posthog-workflow-template-${template.id}`),
+                internal: {
+                    type: 'PostHogWorkflowTemplate',
+                    contentDigest: createContentDigest({ template }),
+                },
+                templateId: template.id,
+                ...template,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchWorkflowTemplates()
+
     const fetchReferences = async (page = 1) => {
         const referenceQuery = qs.stringify(
             {
