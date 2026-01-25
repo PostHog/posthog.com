@@ -146,6 +146,8 @@ interface StepDefinition {
     title: string
     badge?: string
     content: React.ReactNode
+    checkpoint?: boolean
+    subtitle?: string
 }
 
 // TODO: Consider consolidating with DocsComponents above - these interfaces are nearly identical
@@ -194,7 +196,13 @@ export const createInstallation = (getSteps: (ctx: OnboardingComponents) => Step
         return (
             <Steps>
                 {steps.map((step, index) => (
-                    <Step key={index} title={step.title} badge={step.badge}>
+                    <Step
+                        key={index}
+                        title={step.title}
+                        badge={step.badge}
+                        checkpoint={step.checkpoint}
+                        subtitle={step.subtitle}
+                    >
                         {step.content}
                     </Step>
                 ))}

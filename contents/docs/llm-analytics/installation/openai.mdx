@@ -44,9 +44,10 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 
 import { OpenAIInstallation } from 'onboarding/llm-analytics/openai.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 
 import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 
 <OnboardingContentWrapper>
-    <OpenAIInstallation />
+    <OpenAIInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>
