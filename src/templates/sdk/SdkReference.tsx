@@ -70,11 +70,12 @@ export interface SdkReferenceData {
 }
 
 export interface PageContext {
-    fullReference: SdkReferenceData
+    sdkReferenceId: string
     types: string[]
 }
 
-export interface VersionsData {
+export interface QueryData {
+    sdkReferences: SdkReferenceData
     allSdkReferences: {
         nodes: Array<{
             id: string
@@ -130,8 +131,8 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
     return ordered
 }
 
-export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
-    const { fullReference } = pageContext
+export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: QueryData }) {
+    const fullReference = data.sdkReferences
     const location = useLocation()
 
     // Get the language for this SDK reference
@@ -385,7 +386,51 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
 }
 
 export const query = graphql`
-    query SdkReferencesQuery {
+    query SdkReferencesQuery($sdkReferenceId: String!) {
+        sdkReferences(id: { eq: $sdkReferenceId }) {
+            id
+            hogRef
+            referenceId
+            version
+            categories
+            info {
+                description
+                id
+                specUrl
+                slugPrefix
+                title
+                version
+            }
+            classes {
+                id
+                title
+                description
+                functions {
+                    id
+                    title
+                    description
+                    category
+                    showDocs
+                    details
+                    releaseTag
+                    params {
+                        name
+                        type
+                        description
+                        isOptional
+                    }
+                    returnType {
+                        id
+                        name
+                    }
+                    examples {
+                        id
+                        name
+                        code
+                    }
+                }
+            }
+        }
         allSdkReferences {
             nodes {
                 id

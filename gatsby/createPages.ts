@@ -884,10 +884,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 path: `/docs/references/${node.referenceId}`,
                 component: SdkReferenceTemplate,
                 context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.referenceId}`,
+                    sdkReferenceId: node.id,
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
             })
@@ -896,11 +893,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 path: `/docs/references/${node.id}`,
                 component: SdkReferenceTemplate,
                 context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.id}`,
-                    // Null checks, only affects type crosslinking, won't break build
+                    sdkReferenceId: node.id,
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
             })
