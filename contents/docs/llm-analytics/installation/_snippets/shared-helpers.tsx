@@ -1,7 +1,7 @@
 import React from 'react'
 import { StepDefinition } from 'onboarding/steps'
 import VerifyLLMEventsStep from './verify-llm-events-step.mdx'
-import NextStepsResources from './next-steps-resources.mdx'
+import NextStepsResources from './llma-next-steps.mdx'
 
 /**
  * Adds the "Next steps" step to an array of steps
