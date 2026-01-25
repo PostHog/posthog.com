@@ -113,6 +113,64 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
     }
 }
 
+/**
+ * Find all $ref references in an object recursively
+ */
+const findSchemaRefs = (obj: any, refs: Set<string>) => {
+    if (typeof obj === 'object' && obj !== null) {
+        if (obj['$ref'] && typeof obj['$ref'] === 'string') {
+            const ref = obj['$ref']
+            if (ref.startsWith('#/components/schemas/')) {
+                refs.add(ref.replace('#/components/schemas/', ''))
+            }
+        }
+        Object.values(obj).forEach((val) => findSchemaRefs(val, refs))
+    }
+}
+
+/**
+ * Recursively find all schema references including nested ones
+ */
+const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>): Record<string, any> => {
+    const referencedNames = new Set<string>()
+
+    // Find direct refs from all items
+    items.forEach((item) => {
+        findSchemaRefs(item.operationSpec, referencedNames)
+    })
+
+    // Recursively find nested refs
+    const findNestedRefs = (schemaName: string, visited: Set<string>) => {
+        if (visited.has(schemaName) || !allSchemas[schemaName]) {
+            return
+        }
+        visited.add(schemaName)
+
+        const beforeSize = referencedNames.size
+        findSchemaRefs(allSchemas[schemaName], referencedNames)
+
+        // Process any newly added refs
+        if (referencedNames.size > beforeSize) {
+            Array.from(referencedNames)
+                .filter((ref) => !visited.has(ref))
+                .forEach((ref) => findNestedRefs(ref, visited))
+        }
+    }
+
+    const visited = new Set<string>()
+    Array.from(referencedNames).forEach((ref) => findNestedRefs(ref, visited))
+
+    // Build the components object with only referenced schemas
+    const schemas: Record<string, any> = {}
+    referencedNames.forEach((name) => {
+        if (allSchemas[name]) {
+            schemas[name] = allSchemas[name]
+        }
+    })
+
+    return { schemas }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
@@ -125,6 +183,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const parser = new OpenAPIParser(spec)
     const menu = MenuBuilder.buildStructure(parser, {} as any)
+
+    const allSchemas = spec.components?.schemas || {}
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
     const maxEndpointItems = 20
@@ -149,6 +209,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return endpoint
     })
     all_endpoints.forEach((endpoint) => {
+        // Compute only the schemas referenced by this endpoint's items
+        const components = findAllReferencedSchemas(endpoint.items, allSchemas)
+
         const node = {
             id: createNodeId(`api_endpoint-${endpoint.name}`),
             internal: {
@@ -157,25 +220,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     items: endpoint.items,
                 }),
             },
-            items: JSON.stringify(
-                endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
-            ),
-            schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
+            items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
+            components: JSON.stringify(components),
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
         }
         createNode(node)
-    })
-    createNode({
-        id: createNodeId(`api_endpoint-components`),
-        internal: {
-            type: `ApiComponents`,
-            contentDigest: createContentDigest({
-                components: spec.components,
-            }),
-        },
-        components: JSON.stringify(spec.components),
     })
 
     const createProductDataNode = async () => {
