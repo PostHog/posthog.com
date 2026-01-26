@@ -73,18 +73,20 @@ Further details on how to do this are available in [the new small team template]
 
 It's the responsibility of the team lead to keep Marketing and Billing teams informed about product progress, so that product marketers can coordinate launches and the Billing team can implement pricing.
 
+For a complete walkthrough of the product lifecycle (from initial setup through GA), see [releasing new products and features](/handbook/product/releasing-new-products-and-features) and use [the new product RFC template](https://github.com/PostHog/requests-for-comments/blob/main/.github/ISSUE_TEMPLATE/new-product.md).
+
 Some guidelines on how to do this are below, but if in doubt team leads should always aim to overcommunicate with Marketing and Billing teams.
 
 ### Adding ideas to the roadmap
 
 -   [ ] As soon as you start seriously planning a new product, add it to [the in-app feature preview roadmap](https://posthog.com/docs/feature-flags/early-access-feature-management) as a `concept`.
--   [ ] Inform the marketing teams a new roadmap item is available via the #marketing channel
+-   [ ] Inform the marketing teams a new roadmap item is available via the #team-marketing channel
 
 ### Launching a new beta
 
 -   [ ] As soon as user opt-in is available, move your roadmap item from `concept` to `beta`
 -   [ ] Ensure your opt-in beta has a feedback link and docs link
--   [ ] Inform the marketing teams a new beta is available via the #marketing channel
+-   [ ] Inform the marketing teams a new beta is available via the #team-marketing channel
 
 ### Launching a new product
 

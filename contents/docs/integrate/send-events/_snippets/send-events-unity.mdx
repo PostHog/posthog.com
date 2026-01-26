@@ -1,0 +1,35 @@
+import SettingProperties from "./setting-properties-text.mdx"
+import NamingTip from "./naming-tip.mdx"
+import Intro from "./intro.mdx"
+
+<Intro />
+
+```csharp
+PostHog.Capture("user_signed_up");
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```csharp
+PostHog.Capture("user_signed_up", new Dictionary<string, object>
+{
+    { "login_type", "email" },
+    { "is_free_trial", true }
+});
+```
+
+### Capturing screen views
+
+Track screen views to understand user navigation through your game:
+
+```csharp
+PostHog.Screen("Main Menu");
+
+// With additional properties
+PostHog.Screen("Level Select", new Dictionary<string, object>
+{
+    { "unlocked_levels", 5 }
+});
+```

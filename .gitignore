@@ -25,6 +25,7 @@ static/scripts/posthog-init.js
 *Type.ts
 .env.development
 .env.*.local
+CLAUDE.local.md
 
 # Generated data files
 src/data/mcp-tools.json

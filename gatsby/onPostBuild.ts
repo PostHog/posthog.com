@@ -14,6 +14,7 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
 } from './rawMarkdownUtils'
+import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
@@ -482,7 +483,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     )
 }
 
-export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
     // Generate API spec markdown files first
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
@@ -555,27 +556,29 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         generateSdkReferencesMarkdown(node)
     })
 
-    // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
-    const markdownQuery = await graphql(`
-        query pagesForMarkdown {
-            allMdx {
+    // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
+    // Convert HTML files to markdown using turndown
+    // Build regex from MARKDOWN_CONTENT_PATHS constant (e.g., "/^/(docs|handbook)/")
+    const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
+    const docsQuery = (await graphql(`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
                 nodes {
-                    frontmatter {
-                        title
-                        date
-                    }
-                    rawBody
                     fields {
                         slug
-                        contentWithSnippets
+                    }
+                    frontmatter {
+                        title
                     }
                 }
             }
         }
-    `)
+    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
 
-    const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
-    generateLlmsTxt(filteredPages)
+    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
+    // Only include docs pages in llms.txt (not handbook)
+    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
+    generateLlmsTxt(docsPages)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
@@ -672,8 +675,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
             docsHandbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook|^/docs/" } } }) {
                 nodes {
-                    rawBody
-                    body
                     fields {
                         slug
                         contributors {

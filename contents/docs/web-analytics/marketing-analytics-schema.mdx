@@ -1,0 +1,208 @@
+---
+title: Marketing analytics column definitions
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import { Tab } from 'components/Tab'
+
+This page documents the column definitions used in [marketing analytics](/docs/web-analytics/marketing-analytics), including how each metric is calculated and where the data comes from for each advertising platform.
+
+## Understanding "Reported" vs PostHog conversions
+
+Marketing analytics displays two types of conversion data:
+
+1. **Reported conversions** - Conversion data reported directly by the ad platform (Google, Meta, LinkedIn, etc.). These use the platform's own tracking pixel and attribution model.
+
+2. **PostHog conversion goals** - Conversions you define in PostHog using events, actions, or data warehouse tables. These use PostHog's events and your custom attribution rules.
+
+**Examples:**
+
+| Type | Example conversions |
+|------|---------------------|
+| PostHog conversion goal | Any event you track: `user signed up`, `completed checkout`, `subscribed to newsletter`, `started trial`, `upgraded plan` |
+| Reported (ad platform) | It can track the same! Any conversion you defined. They key difference is the source of truth. |
+
+**Why does this matter?**
+
+- Reported conversions may differ from PostHog conversions due to different attribution windows, tracking methods, and data freshness
+- Ad platforms count conversions based on their own pixel data and attribution models (e.g., 7-day click, 1-day view)
+- PostHog conversion goals give you flexibility to define exactly what counts as a conversion and how it's attributed
+- Use reported metrics to reconcile with your ad platform dashboards; use PostHog goals for custom attribution
+
+## Standard columns
+
+These columns are available for all platforms in the marketing analytics dashboard.
+
+### Display columns
+
+| Column | Description |
+|--------|-------------|
+| `Campaign` | Campaign name from the advertising platform. Matched against `utm_campaign` in your conversion events if matching field is `Campaign name`. |
+| `Source` | Ad platform identifier (e.g., `google`, `meta`, `linkedin`). Matched against `utm_source` in your conversion events. |
+| `ID` | Platform-specific campaign identifier. Matched against `utm_campaign` in your conversion events if matching field is `Campaign ID`. |
+
+### Base metrics
+
+| Column | Description | Higher is... |
+|--------|-------------|--------------|
+| `Impressions` | Number of times ads were displayed | Better |
+| `Clicks` | Number of clicks on ads | Better |
+| `Cost` | Total ad spend in your [base currency](/docs/web-analytics/marketing-analytics#base-currency) | Worse |
+| `Reported Conversion` | Number of conversions reported by the ad platform | Better |
+| `Reported Conversion Value` | Monetary value of conversions reported by the ad platform | Better |
+
+### Calculated metrics
+
+| Column | Formula | Description | Higher is... |
+|--------|---------|-------------|--------------|
+| `CPC` | `Cost / Clicks` | Cost per click - average cost for each ad click | Worse |
+| `CTR` | `(Clicks / Impressions) × 100` | Click-through rate - percentage of impressions that resulted in clicks | Better |
+| `Reported ROAS` | `Reported Conversion Value / Cost` | Return on ad spend - revenue generated per dollar spent (as reported by the platform) | Better |
+
+> **Note:** All calculated metrics are rounded to 2 decimal places. Division by zero returns null.
+
+## Platform field mappings
+
+Each advertising platform provides data using different field names. PostHog normalizes these into the standard columns above.
+
+<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Microsoft Ads', 'TikTok Ads', 'Reddit Ads']}>
+<Tab.List>
+<Tab>Google Ads</Tab>
+<Tab>Meta Ads</Tab>
+<Tab>LinkedIn Ads</Tab>
+<Tab>Microsoft Ads</Tab>
+<Tab>TikTok Ads</Tab>
+<Tab>Reddit Ads</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+| PostHog Column | Google Ads Field | Notes | Platform Docs |
+|----------------|------------------|-------|---------------|
+| `Campaign` | `campaign.name` | Human-readable campaign name | |
+| `ID` | `campaign.id` | Unique campaign identifier | |
+| `Impressions` | `metrics_impressions` | | [Google Ads API - Metrics](https://developers.google.com/google-ads/api/fields/v21/metrics#metrics.impressions) |
+| `Clicks` | `metrics_clicks` | | [Google Ads API - Metrics](https://developers.google.com/google-ads/api/fields/v21/metrics#metrics.clicks) |
+| `Cost` | `metrics_cost_micros` | Divided by 1,000,000 (stored in micros). Converted from `customer_currency_code` or USD. | [Google Ads API - Metrics](https://developers.google.com/google-ads/api/fields/v21/metrics#metrics.cost_micros) |
+| `Reported Conversion` | `metrics_conversions` | Platform-tracked conversions | [Conversion Reporting](https://developers.google.com/google-ads/api/docs/conversions/reporting). [Google Ads API - Metrics](https://developers.google.com/google-ads/api/fields/v21/metrics#metrics.conversions) |
+| `Reported Conversion Value` | `metrics_conversions_value` | Monetary value of conversions | [Google Ads API - Metrics](https://developers.google.com/google-ads/api/fields/v21/metrics#metrics.conversions_value) |
+| Date field | `segments_date` | Used for date range filtering | |
+
+**Required tables:** `campaign` and `campaign_stats`
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Meta Ads Field | Notes | Platform Docs |
+|----------------|----------------|-------|---------------|
+| `Campaign` | `name` | Campaign name from campaigns table | |
+| `ID` | `id` | Campaign ID | |
+| `Impressions` | `impressions` | | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
+| `Clicks` | `clicks` | | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
+| `Cost` | `spend` | Converted from `account_currency` if available | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
+| `Reported Conversion` | `actions` array | Extracted by filtering for `purchase` and `omni_purchase` action types, summing `value` field | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/),  [Ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) |
+| `Reported Conversion Value` | `action_values` array | Extracted by filtering for `purchase` and `omni_purchase` action types, summing `value` field | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/),  [Ads action stats](https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/) |
+| Date field | `date_stop` | End date of reporting period | [Meta Marketing API](https://developers.facebook.com/docs/marketing-api/reference/ad-account/insights/) |
+
+**Required tables:** `campaigns` and `campaign_stats`
+
+**Special handling:** Meta stores conversions in JSON arrays. PostHog extracts purchase-related conversions using:
+```sql
+arraySum(x -> JSONExtractFloat(x, 'value'),
+  arrayFilter(x -> JSONExtractString(x, 'action_type') IN ('purchase', 'omni_purchase'),
+    JSONExtractArrayRaw(actions)))
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | LinkedIn Ads Field | Notes | Platform Docs |
+|----------------|-------------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | |
+| `ID` | `id` | Campaign ID | |
+| `Impressions` | `impressions` | | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
+| `Clicks` | `clicks` | | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
+| `Cost` | `cost_in_usd` | Already in USD, converted to base currency if different | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
+| `Reported Conversion` | `external_website_conversions` | Website conversions tracked by LinkedIn | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
+| `Reported Conversion Value` | `conversion_value_in_local_currency` | Returns 0 if field not available | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
+| Date field | `date_start` | Start date of reporting period | [LinkedIn Marketing API - Reporting](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads-reporting/ads-reporting) |
+
+**Required tables:** `campaigns` and `campaign_stats`
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Bing Ads Field | Notes | Platform Docs |
+|----------------|----------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | |
+| `ID` | `id` | Campaign ID | |
+| `Impressions` | `impressions` | | [Microsoft Advertising API - Reports](https://learn.microsoft.com/en-us/advertising/guides/report-attributes-performance-statistics?view=bingads-13) |
+| `Clicks` | `clicks` | | [Microsoft Advertising API - Reports](https://learn.microsoft.com/en-us/advertising/guides/report-attributes-performance-statistics?view=bingads-13) |
+| `Cost` | `spend` | Converted from `currency_code` if available | [Microsoft Advertising API - Reports](https://learn.microsoft.com/en-us/advertising/guides/report-attributes-performance-statistics?view=bingads-13) |
+| `Reported Conversion` | `conversions` | | [Microsoft Advertising API - Reports](https://learn.microsoft.com/en-us/advertising/guides/report-attributes-performance-statistics?view=bingads-13) |
+| `Reported Conversion Value` | `revenue` | | [Microsoft Advertising API - Reports](https://learn.microsoft.com/en-us/advertising/guides/report-attributes-performance-statistics?view=bingads-13) |
+| Date field | `time_period` | Reporting time period | [Microsoft Advertising API - Reports](https://learn.microsoft.com/en-us/advertising/guides/report-attributes-performance-statistics?view=bingads-13) |
+
+**Required tables:** `campaigns` and `campaign_performance_report`
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | TikTok Ads Field | Notes | Platform Docs |
+|----------------|-----------------|-------|---------------|
+| `Campaign` | `campaign_name` | Campaign name | [Basic reports doc](https://business-api.tiktok.com/portal/docs?id=1740662135093314) |
+| `ID` | `campaign_id` | Campaign ID | [Basic reports doc](https://business-api.tiktok.com/portal/docs?id=1740662135093314) |
+| `Impressions` | `impressions` | | [All TikTok Metrics](https://docs.supermetrics.com/docs/tiktok-ads-fields#field-basic-impressions) |
+| `Clicks` | `clicks` | | [All TikTok Metrics](https://docs.supermetrics.com/docs/tiktok-ads-fields#field-basic-clicks) |
+| `Cost` | `spend` | Converted from `currency` if available | [Basic reports doc](https://business-api.tiktok.com/portal/docs?id=1740662135093314) |
+| `Reported Conversion` | `conversion` | | [Basic reports doc](https://business-api.tiktok.com/portal/docs?id=1740662135093314) |
+| `Reported Conversion Value` | `total_complete_payment_rate` | Returns 0 if field not available | [All TikTok Metrics](https://docs.supermetrics.com/docs/tiktok-ads-fields#field-page-event-totalcompletepaymentrate) |
+| Date field | `stat_time_day` | Daily stat timestamp | |
+
+**Required tables:** `campaigns` and `campaign_report`
+
+</Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Reddit Ads Field | Notes | Platform Docs |
+|----------------|-----------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| `ID` | `id` | Campaign ID | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| `Impressions` | `impressions` | | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| `Clicks` | `clicks` | | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| `Cost` | `spend` | **Divided by 1,000,000** (stored in micros). Converted from `currency` if available. | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| `Reported Conversion` | `key_conversion_total_count` | Total key conversions | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| `Reported Conversion Value` | `conversion_purchase_total_value` + `conversion_signup_total_value` | Sum of purchase and signup values | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+| Date field | `date` | Reporting date | [Reddit Ads API](https://ads-api.reddit.com/docs/v3/operations/Get%20Ad%20Group) |
+
+**General notes:** The Reddit API docs are not very specific on the fields, so we've linked to the ad group docs where there are examples of the fields.
+
+**Required tables:** `campaigns` and `campaign_report`
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+## Currency handling
+
+PostHog converts all costs to your [base currency](/docs/web-analytics/marketing-analytics#base-currency) for consistent reporting across platforms.
+
+| Platform | Source Currency Field | Default Assumption |
+|----------|----------------------|-------------------|
+| Google Ads | `customer_currency_code` | USD |
+| Meta Ads | `account_currency` | Base currency |
+| LinkedIn Ads | Always USD (`cost_in_usd`) | USD |
+| Bing Ads | `currency_code` | Base currency |
+| TikTok Ads | `currency` | Base currency |
+| Reddit Ads | `currency` | Base currency |
+
+## Related documentation
+
+- [Marketing analytics overview](/docs/web-analytics/marketing-analytics)
+- [Setting up conversion goals](/docs/web-analytics/marketing-analytics#conversion-goals)
+- [Data source configuration](/docs/web-analytics/marketing-analytics#data-source-configuration)

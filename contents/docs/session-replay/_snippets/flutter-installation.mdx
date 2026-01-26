@@ -105,7 +105,7 @@ config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 - Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
 - Make sure you have disabled automatic SDK intialization. 
 - Run a clean build if you experience issues.
-- For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup).
+- For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation/flutter#widget-and-observer-setup).
 - For blank recordings for flutter web session replay, be sure to enable [Canvas capture](/docs/session-replay/canvas-recording).
 - If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
     - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).

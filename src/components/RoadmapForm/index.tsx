@@ -441,6 +441,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                         margin: `${socialValues.titleSpacing}px 0`,
                                                     }}
                                                     className="text-center leading-none"
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - form title from state, not external user input
                                                     dangerouslySetInnerHTML={{ __html: socialValues.title }}
                                                 />
                                                 {imageURL && (

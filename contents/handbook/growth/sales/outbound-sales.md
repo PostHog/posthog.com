@@ -29,7 +29,7 @@ Outbound is helpful because it is a good way to generate more leads in a semi-pr
 5. Not signed up, but has heard of PostHog
 6. Not signed up, never heard of PostHog
 
-> None of these people are currently talking to us - that's why they are under the umbrella of 'outbound'. 
+> None of these people are currently talking to us - that's why they are under the umbrella of 'outbound'.
 
 We’ll call 1-3 ‘warm’ outbound and 4-6 ‘cold’ outbound. Technical Account Managers are responsible for managing leads from warm outbound, in addition to their book of business. Technical Account Executives are responsible for managing leads from cold outbound, in addition to inbound leads (which comprise 90% of leads today).
 
@@ -37,14 +37,9 @@ We are building a BDR function that will generate leads, mainly focused on cold 
 
 ## What we're doing today
 
-Our focus today is on three categories: inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Ben Bradley" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
+Our focus today is on three categories: inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Dmytro Sitalo" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
 
-To see which leads go where, check out the [leads page](/growth/sales/lead-scoring). 
-
-We are also starting to experiment with cold outbound, specifically:
-
-- People who have moved to a new job and are familiar with PostHog
-- People who work at a growing (adding employees) software or technology company that, as best we can tell, are not currently using PostHog
+Check out the [leads page](/growth/sales/lead-scoring) for more detail on lead types and where they go. 
 
 ## If you're reading this after getting outbounded by PostHog, ~~blink twice~~ you can opt out here
 
@@ -55,7 +50,3 @@ So, if you'd rather we didn't reach out, you can opt out with this button: <a hr
 No forms, no 'are you sure?', no hurt feelings. You can always change your mind later by [reaching out to us directly](/talk-to-a-human). We would note that you're on our list because we think you're a good fit for PostHog, but that's for you to judge. 
 
 Most SaaS companies would likely just blast you with emails, calls and DMs without your consent. If you can’t already tell, PostHog does things differently. 
-
-## What we're doing next
-
-We are hiring a founding BDR and are going to run a bunch of experiments in Q1. By the end of Q1, we want to have a v1 outbound playbook, filled with repeatable things that we know work, and working closely with the <SmallTeam slug="billing" /> to build out a proper GTM engineering machine. As with all our sales processes, this will probably be a combination of existing playbook stuff and totally unique PostHog things. But the choice isn't entirely between one or the other - we need to find the right balance.

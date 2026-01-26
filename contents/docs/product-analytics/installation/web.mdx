@@ -1,0 +1,21 @@
+---
+title: Web product analytics installation
+platformLogo: javascript
+---
+
+import Snippet from '../../integrate/snippet.mdx'
+import { JSWebInstallationWrapper } from './_snippets/js-web-installation-wrapper.tsx'
+
+## Option 1: Add the JavaScript snippet to your HTML <span class="bg-accent text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
+
+This is the simplest way to get PostHog up and running. Copy the snippet below, replace `<ph_project_api_key>` and `<ph_client_api_host>` with your project's values, and add it within the `<head>` tags of your product — ideally just before the closing `</head>` tag.
+
+You can find the snippet pre-filled with your data in [your project settings](https://us.posthog.com/settings/project#snippet).
+
+<Snippet />
+
+Once added, PostHog automatically captures `$pageview` and [other events](/docs/data/autocapture) like button clicks.
+
+## Option 2: Install via package manager
+
+<JSWebInstallationWrapper />

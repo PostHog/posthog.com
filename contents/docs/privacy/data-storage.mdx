@@ -135,22 +135,20 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete the persons and their events, you can use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id)
-
-To do that, iterate through the persons returned in the previous step and use the person's `id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
+To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter:
 
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true" \
-     -H "Authorization: Bearer {YOUR_API_KEY}"
+curl -X DELETE "https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true" \
+     -H "Authorization: Bearer <personal_api_key>"
 ```
 
 ```javascript
-fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true", {
+fetch('https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true', {
   method: 'DELETE',
   headers: {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
+    'Authorization': 'Bearer <personal_api_key>'
   }
 })
 .then(response => response.json())
@@ -161,16 +159,22 @@ fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?d
 ```python
 import requests
 
-url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true"
-headers = {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
-}
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
+person_uuid = "<person_uuid>"
+
+url = "https://app.posthog.com/api/projects/{}/persons/{}?delete_events=true".format(
+    project_id, person_uuid
+)
+headers = {"Authorization": "Bearer {}".format(api_key)}
 
 response = requests.delete(url, headers=headers)
 print(response.json())
 ```
 
 </MultiLanguage>
+
+This request will delete all events of the person(s) that have been captured before the deletion request.
 
 ### Manual data deletion
 

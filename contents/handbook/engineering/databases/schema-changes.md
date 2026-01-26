@@ -5,10 +5,9 @@ showTitle: true
 ---
 
 PostHog's database schema evolves constantly along with the app.
-Each schema change safely requires delibration though, as a badly designed migration can cause pain for users,
-and require extra effort from the engineering team.
+Each schema change requires deliberation though, as a badly designed migration can cause pain for users and require extra effort from the engineering team.
 
-Below are some important considerations to keep in mind regarding schema changes:
+For detailed patterns on writing safe Django migrations, see the [Safe Django Migrations guide](/handbook/engineering/safe-django-migrations).
 
 ## General considerations
 
@@ -18,7 +17,7 @@ Before making a schema change, consider:
 - Can I deploy my schema change separately from application code change? For non-trivial changes, you want to deploy schema change first to ensure it's easy to roll back and if it's backwards compatible.
 - Am I doing a blocking migration? Migrations which lock huge tables can easily cause outages.
 
-If you're doing anything tricky, it is worth reading up on zero-downtime migrations and make sure you know how the change will work operationally in practice.
+If you're doing anything tricky, make sure you know how the change will work operationally.
 
 ## Do not delete or rename Django models and fields
 
@@ -33,16 +32,9 @@ To avoid this pain, **AVOID deleting/renaming models and fields**. Instead:
 
 ## Design for scale
 
-With any migration, make sure that it can run smoothly not only in local development, but also on self-hosted instances, and on PostHog Cloud.
+Migrations must run smoothly in local development, self-hosted instances, and PostHog Cloud. Avoid migrations that process rows individually on large tables (events, persons, person distinct IDs, logs) - they may take forever or lock the entire table.
 
-Generally this means avoiding migrations that need to process each row individually on _large_ tables (events, but also persons, person distinct IDs, or logs), as then the migration may take forever, or may even obtain a persisting lock on the entire table, causing severe issues for the app.
-
-Examples of operations dangerous at scale are:
-- Adding new fields **with a non-null default** (null is fine, as it avoids a lock).
-- Iterating over all rows individually.
-- Adding an index
-
-> For a quick overview of what Cloud scale _looks like_, see [Vanity Metrics in Metabase](https://metabase.posthog.net/dashboard/1).
+> For a quick overview of Cloud scale, see [Vanity Metrics in Metabase](https://metabase.posthog.net/dashboard/1).
 
 ## Tread carefully with ClickHouse schema changes
 

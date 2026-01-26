@@ -15,7 +15,7 @@ s3://your-bucket/handbook-audio/
 ├── values.mp3
 ├── story.mp3
 ├── product/
-│   ├── releasing-as-beta.mp3
+│   ├── releasing-new-products-and-features.mp3
 │   ├── metrics.mp3
 │   └── product-team.mp3
 ├── engineering/
@@ -136,7 +136,7 @@ https://{bucket}.s3.{region}.amazonaws.com/handbook-audio/{slug}.mp3
 
 **Examples:**
 - `https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/values.mp3`
-- `https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-as-beta.mp3`
+- `https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-new-products-and-features.mp3`
 - `https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/engineering/posthog-com/markdown.mp3`
 
 ## CDN Integration
@@ -160,10 +160,10 @@ https://d123456789.cloudfront.net/handbook-audio/values.mp3
 ```python
 from s3_uploader import get_s3_url
 
-# For handbook page: contents/handbook/product/releasing-as-beta.md
-slug = "product/releasing-as-beta"
+# For handbook page: contents/handbook/product/releasing-new-products-and-features.md
+slug = "product/releasing-new-products-and-features"
 url = get_s3_url(slug)
-# Returns: https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-as-beta.mp3
+# Returns: https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-new-products-and-features.mp3
 ```
 
 ### Check if File Exists
@@ -171,7 +171,7 @@ url = get_s3_url(slug)
 ```python
 from s3_uploader import file_exists_in_s3
 
-slug = "product/releasing-as-beta"
+slug = "product/releasing-new-products-and-features"
 if file_exists_in_s3(slug):
     print("Audio file exists in S3")
 ```
@@ -208,7 +208,7 @@ Each uploaded file includes metadata:
 ```python
 {
     "source": "handbook-audio-generator",
-    "slug": "product/releasing-as-beta"
+    "slug": "product/releasing-new-products-and-features"
 }
 ```
 
@@ -274,8 +274,8 @@ function getHandbookAudioUrl(slug: string): string {
 }
 
 // Example usage
-const audioUrl = getHandbookAudioUrl('product/releasing-as-beta')
-// Returns: https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-as-beta.mp3
+const audioUrl = getHandbookAudioUrl('product/releasing-new-products-and-features')
+// Returns: https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-new-products-and-features.mp3
 ```
 
 ## Security Considerations

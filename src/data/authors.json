@@ -371,7 +371,7 @@
     {
         "handle": "danilo-campos",
         "name": "Danilo Campos",
-        "role": "Technical Content Marketer",
+        "role": "Robopsychologist",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/danilo-campos/",
         "profile_id": 31731
@@ -501,5 +501,13 @@
         "link_type": "linkedin",
         "link_url": "https://linkedin.com/in/jinayoon963",
         "profile_id": 38655
+    },
+    {
+        "handle": "christophe-eynius-tranberg",
+        "name": "Christophe Eynius Tranberg",
+        "role": "Technical Customer Success Manager",
+        "link_type": "linkedin",
+        "link_url": "https://dk.linkedin.com/in/chriseynius",
+        "profile_id": 35037
     }
 ]

@@ -1,0 +1,106 @@
+---
+title: Python logs installation
+platformLogo: python
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
+```
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to send logs to PostHog.
+
+```python
+from opentelemetry import logs
+from opentelemetry.sdk.logs import LoggerProvider, LoggingHandler
+from opentelemetry.sdk.logs.export import BatchLogRecordProcessor
+from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
+
+# Configure the logger provider
+logger_provider = LoggerProvider()
+logs.set_logger_provider(logger_provider)
+
+# Create OTLP exporter with API key in header
+otlp_exporter = OTLPLogExporter(
+    endpoint="https://us.i.posthog.com/i/v1/logs",
+    headers={"Authorization": f"Bearer {YOUR_PROJECT_API_KEY}"}
+)
+
+# Add processor
+logger_provider.add_log_record_processor(
+    BatchLogRecordProcessor(otlp_exporter)
+)
+
+# Get logger
+logger = logs.get_logger("my-app")
+```
+
+Alternatively, you can pass the API key as a query parameter:
+
+```python
+otlp_exporter = OTLPLogExporter(
+    endpoint=f"https://us.i.posthog.com/i/v1/logs?token={YOUR_PROJECT_API_KEY}"
+)
+```
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can start logging with OpenTelemetry:
+
+```python
+import logging
+
+# Configure logging to use OpenTelemetry
+logging.basicConfig(level=logging.INFO)
+logging.getLogger().addHandler(LoggingHandler())
+
+# Use standard Python logging
+logger = logging.getLogger("my-app")
+logger.info("User action", extra={"userId": "123", "action": "login"})
+logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
+logger.error("Database connection failed", extra={"error": "Connection timeout"})
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

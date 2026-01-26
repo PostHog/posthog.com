@@ -109,6 +109,8 @@ When building Max, we quickly realized answering questions like “How do I incr
 
 For example, Max can write better SQL because it knows which tables are available, and answer product questions with native visualizations because it’s built-in and understands the tools available.
 
+<NewsletterForm />
+
 ## Implementing your idea
 
 Now that you have an idea of what you want to build, you need to make sure it actually works. Here are some core bits to focus on getting right:
@@ -305,3 +307,5 @@ Remember, you’re aiming to build something valuable to users, not shiny tech d
 All the lessons you’ve learned about building great products still apply. [Talk to users](/newsletter/talk-to-users), [ship fast](/newsletter/this-is-why-youre-not-shipping), [run experiments](/product-engineers/ab-testing-mistakes), and repeat.
 
 _Words by [Ian Vanagas](http://x.com/ianvanagas), who wrote this newsletter by hand as much as he would have liked to one-shot it with AI._
+
+<NewsletterForm />

@@ -1,20 +1,26 @@
 ---
-title: Logs troubleshooting and FAQs
+title: Logs troubleshooting
 ---
 
 import LogsBetaSnippet from './_snippets/beta.mdx'
 
 <LogsBetaSnippets />
 
+This page covers troubleshooting for Logs. For setup, see the [installation guide](/docs/logs/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
 ## Authentication errors
 
 **Problem**: Getting 401 Unauthorized errors when sending logs.
 
 **Solutions**:
-- Verify you're using the correct project token from [Project Settings](https://app.posthog.com/settings/project)
-- Check the Authorization header format: `Bearer {your-project-token}`
-- If using query parameter, verify the format: `?token={your-project-token}`
-- Ensure your project token hasn't been rotated or revoked
+- Verify you're using the correct project API key from [Project Settings](https://app.posthog.com/settings/project)
+- Check the Authorization header format: `Bearer {your-project-api-key}`
+- If using query parameter, verify the format: `?token={your-project-api-key}`
+- Ensure your project API key hasn't been rotated or revoked
 
 ## Connection issues
 
@@ -31,7 +37,7 @@ import LogsBetaSnippet from './_snippets/beta.mdx'
 **Problem**: Logs are being sent but don't appear in the PostHog interface.
 
 **Solutions**:
-- Verify your project token is correct and associated with the right project
+- Verify your project API key is correct and associated with the right project
 - Check that logs are being sent in the correct OTLP format
 - Ensure your project has access to the Logs feature in PostHog
 - Check the network tab in your browser/application to verify requests are succeeding (200 status)
@@ -56,16 +62,16 @@ import LogsBetaSnippet from './_snippets/beta.mdx'
 - Check that log attributes are properly structured
 - Use the OpenTelemetry logging APIs instead of raw log libraries
 
-## Token authentication issues
+## API key authentication issues
 
-**Problem**: Confused about which token to use or how to authenticate.
+**Problem**: Confused about which API key to use or how to authenticate.
 
 **Solutions**:
-- Use your **project token** (the same one you use for capturing events)
+- Use your **project API key** (the same one you use for capturing events)
 - Find it in [Project Settings](https://app.posthog.com/settings/project)
 - You can authenticate in two ways:
-  - **Header**: `Authorization: Bearer {your-project-token}`
-  - **Query param**: `?token={your-project-token}`
+  - **Header**: `Authorization: Bearer {your-project-api-key}`
+  - **Query param**: `?token={your-project-api-key}`
 - Do not use your personal API key or other authentication methods
 
 ## Self-hosted endpoint issues

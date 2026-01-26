@@ -1,7 +1,7 @@
 ---
 title: Node.js error tracking installation
 showStepsToc: true
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
+platformLogo: nodejs
 ---
 
 import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
@@ -36,7 +36,7 @@ You can find your project API key and instance address in the [project settings]
 
 <Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
 
-Before proceeding, confirm that you can capture events with PostHog using `client.capture('test_event')`.
+Before proceeding, confirm that you can capture events with PostHog using `client.capture({ event: 'test_event' })`.
 
 </Step>
 

@@ -206,7 +206,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=Web"
+                            to="/docs/surveys/installation/web"
                             state={{
                                 newWindow: true,
                             }}
@@ -222,7 +222,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=iOS"
+                            to="/docs/surveys/installation/ios"
                             state={{
                                 newWindow: true,
                             }}
@@ -251,7 +251,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=React+Native"
+                            to="/docs/surveys/installation/react-native"
                             state={{
                                 newWindow: true,
                             }}
@@ -264,7 +264,7 @@ export const surveys = {
                             iconClassName="size-8 relative -top-px"
                             size="xl"
                             className="!text-xl mr-1"
-                            to="/docs/surveys/installation?tab=Flutter"
+                            to="/docs/surveys/installation/flutter"
                             state={{
                                 newWindow: true,
                             }}

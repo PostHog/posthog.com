@@ -1,0 +1,92 @@
+---
+title: React Native surveys installation
+platformLogo: react
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
+
+Using surveys requires PostHog's React Native SDK version >= [4.5.0](https://github.com/PostHog/posthog-js/releases). It's recommended to always use the latest version.
+
+<ReactNativeInstall />
+
+</Step>
+
+<Step title="Install surveys dependencies" badge="required">
+
+```bash
+yarn add react-native-safe-area-context react-native-svg
+# or
+npm i -s react-native-safe-area-context react-native-svg
+```
+
+</Step>
+
+<Step title="Add the surveys provider" badge="required">
+
+Add `PostHogSurveyProvider` to your app anywhere inside `PostHogProvider`. This component fetches surveys. It also acts as the root for where popover surveys are rendered.
+
+```ts
+<PostHogProvider /*... your config ...*/>
+  <PostHogSurveyProvider>{children}</PostHogSurveyProvider>
+</PostHogProvider>
+```
+
+If you're not using the `PostHogProvider`, add `PostHogSurveyProvider` to your app anywhere inside your app root component.
+
+```ts
+<YourAppRoot>
+  <PostHogSurveyProvider>
+</YourAppRoot>
+```
+
+You can also pass your `client` instance to the `PostHogSurveyProvider`.
+
+```ts
+<PostHogSurveyProvider client={posthog}>
+```
+
+</Step>
+
+</Steps>
+
+## Supported Features
+
+| Feature                           | Support                            |
+| --------------------------------- | ---------------------------------- |
+| **Questions**                     |                                    |
+| All question types                | ✅                                 |
+| Multi-question surveys            | ✅                                 |
+| Confirmation message              | ✅                                 |
+| Feedback button presentation      | ❌                                 |
+| Conditional questions             | ✅  >= v4.5.0                      |
+| **Customization / Appearance**    |                                    |
+| Set colors in PostHog dashboard   | ✅ Or override with your app theme |
+| Shuffle questions                 | ❌                                 |
+| PostHog branding                  | ❌                                 |
+| Delay popup after screen view     | ❌                                 |
+| Position config                   | ❌ Always bottom center            |
+| HTML content                      | ❌                                 |
+| **Display conditions**            |                                    |
+| Feature flag & property targeting | ✅                                 |
+| Screen targeting                  | ❌                                 |
+| Device type targeting             | ✅                                 |
+| CSS selector matches              | ❌                                 |
+| Survey wait period                | ❌                                 |
+| Event triggers                    | ✅                                 |
+| Action triggers                   | ❌                                 |
+| Partial responses                 | ❌                                 |
+
+## Troubleshooting
+
+- Update your SDK.
+- Run a clean build if you experience issues.
+- For surveys not shown, be sure to set up the [surveys provider](/docs/surveys/installation/react-native#step-three-add-the-surveys-provider).
+- If you have enabled surveys using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users.
+    - Survey feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything.

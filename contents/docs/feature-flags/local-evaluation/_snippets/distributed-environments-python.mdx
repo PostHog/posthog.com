@@ -1,0 +1,66 @@
+## Installation
+
+Import the interface from the SDK:
+
+```python
+from posthog import FlagDefinitionCacheProvider, FlagDefinitionCacheData
+```
+
+## The interface
+
+To create a custom cache, implement the `FlagDefinitionCacheProvider` protocol:
+
+```python
+class FlagDefinitionCacheProvider(Protocol):
+    def get_flag_definitions(self) -> Optional[FlagDefinitionCacheData]:
+        """Retrieve cached flag definitions."""
+        ...
+
+    def should_fetch_flag_definitions(self) -> bool:
+        """Determine if this instance should fetch new definitions."""
+        ...
+
+    def on_flag_definitions_received(self, data: FlagDefinitionCacheData) -> None:
+        """Store definitions after a successful fetch."""
+        ...
+
+    def shutdown(self) -> None:
+        """Clean up resources on shutdown."""
+        ...
+```
+
+When the SDK fetches flag definitions from the API, it passes a `FlagDefinitionCacheData` object to `on_flag_definitions_received()` for you to store:
+
+```python
+class FlagDefinitionCacheData(TypedDict):
+    flags: List[Dict[str, Any]]           # Feature flag definitions
+    group_type_mapping: Dict[str, str]    # Group type index to name mapping
+    cohorts: Dict[str, Any]               # Cohort definitions for local evaluation
+```
+
+### Method details
+
+| Method | Purpose | Return value |
+| :----- | :------ | :----------- |
+| `get_flag_definitions()` | Retrieve cached definitions. Called when the poller refreshes. | Cached data, or `None` if cache is empty |
+| `should_fetch_flag_definitions()` | Decide if this instance should fetch. Use for distributed coordination (e.g., locks). | `True` to fetch, `False` to skip |
+| `on_flag_definitions_received(data)` | Store definitions after a successful API fetch. | None |
+| `shutdown()` | Release locks, close connections, clean up resources. | None |
+
+> **Note:** All methods may throw errors. The SDK catches and logs them gracefully, ensuring cache provider errors never break flag evaluation.
+
+## Using your cache provider
+
+Pass your cache provider when initializing PostHog:
+
+```python
+from posthog import Posthog
+
+cache = YourCacheProvider()
+
+posthog = Posthog(
+    '<ph_project_api_key>',
+    personal_api_key='<ph_personal_api_key>',
+    flag_definition_cache_provider=cache,
+)
+```
