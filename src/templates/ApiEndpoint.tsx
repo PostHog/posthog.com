@@ -1,5 +1,4 @@
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
-import '@fontsource/source-code-pro'
 import { CodeBlock, SingleCodeBlock } from 'components/CodeBlock'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
@@ -49,9 +48,8 @@ function Endpoints({
                                 <tr key={verb} className="border-0">
                                     <td className="py-1 px-0">
                                         <code
-                                            className={`method text-${
-                                                mapVerbsColor[verb as keyof typeof mapVerbsColor]
-                                            }`}
+                                            className={`method text-${mapVerbsColor[verb as keyof typeof mapVerbsColor]
+                                                }`}
                                         >
                                             {verb.toUpperCase()}
                                         </code>
@@ -408,9 +406,8 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
             language: 'bash',
             code: `
             export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
-                item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-            }\\
+curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+                }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
     <ph_app_host>${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
@@ -423,21 +420,19 @@ api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
-        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${
-                additionalPathParams.length > 0
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${additionalPathParams.length > 0
                     ? additionalPathParams.map(
-                          (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
-                      )
+                        (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
+                    )
                     : ''
-            }
+                }
     ),
-    headers={"Authorization": "Bearer {}".format(api_key)},${
-        params.length > 0
-            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
-                  .replaceAll('\n', '\n\t')
-                  .replace('\n}', '\n\t}')}`
-            : ''
-    }
+    headers={"Authorization": "Bearer {}".format(api_key)},${params.length > 0
+                    ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
+                        .replaceAll('\n', '\n\t')
+                        .replace('\n}', '\n\t}')}`
+                    : ''
+                }
 )${item.httpVerb !== 'delete' ? '.json()' : ''}
             `,
         },
@@ -661,7 +656,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                         )}
                                         <ReactMarkdown>
                                             {!item.description ||
-                                            item.description === items[0].operationSpec?.description
+                                                item.description === items[0].operationSpec?.description
                                                 ? pathDescription(item)
                                                 : item.description}
                                         </ReactMarkdown>

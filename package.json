@@ -41,7 +41,6 @@
         "@dnd-kit/sortable": "^10.0.0",
         "@dnd-kit/utilities": "^3.2.2",
         "@dotlottie/react-player": "^1.6.6",
-        "@fontsource/source-code-pro": "^4.5.4",
         "@gatsbyjs/reach-router": "^1.3.9",
         "@headlessui/react": "^1.7.13",
         "@headlessui/tailwindcss": "^0.1.1",
