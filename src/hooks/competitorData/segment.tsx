@@ -83,7 +83,8 @@ export const segment = {
         },
         pricing: {
             free_tier: true,
-            transparent_pricing: true,
+            // Only their "customer data pipelines" have transparent pricing so I would say no: https://segment.com/pricing/connections/
+            transparent_pricing: false,
             usage_based_pricing: true,
         },
         security: {
@@ -92,7 +93,7 @@ export const segment = {
             data_anonymization: true,
             data_retention: true,
             gdpr_ready: true,
-            hipaa_ready: 'Business plan only',
+            hipaa_ready: true,
             history_audit_logs: false,
             reverse_proxy: true,
             saml_sso: true,
