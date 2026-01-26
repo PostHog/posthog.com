@@ -1,6 +1,6 @@
 ---
 title: How we use Logs at PostHog
-date: 2025-23-01
+date: 2025-01-23
 rootPage: /blog
 sidebar: Blog
 showTitle: true
