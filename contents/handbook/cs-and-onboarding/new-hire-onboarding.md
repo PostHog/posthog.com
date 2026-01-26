@@ -10,8 +10,24 @@ Welcome to the PostHog Customer Success team!  We only hire about 1 in 400 appli
 
 Ramping up is mostly self serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
 
-Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-onboarding) for guidance on what _not_ to do when you start. In general, there's a lot of good resources within [sales](/handbook/growth/sales/overview) to reference (as we were previously one team!)
+## How to fail
 
+But first...
+
+Sales at PostHog isn't like most other software companies! These are some of the things that you _shouldn't_ do:
+
+- Wait til you're ready to talk to customers. Jump in sooner than you feel comfortable - it is by far the fastest way to learn. 
+- Lazily forward customer questions to engineering teams without any context. That's super annoying. Instead:
+  - Try to solve the problem yourself, read the Docs etc.
+  - Try asking in #ask-max Slack channel
+  - Ask the rest of the CS team
+  - _Then_ forward to the relevant engineering team _and add context_ - are they a huge oppo, evaluating or already paying, technical/non-technical etc.? Help them help you
+    - Bonus points for: 'I think [this] is the answer, am I on the right track?'
+- Execute your previous company's playbook. We're trying to do things differently from 90% of the industry. But please do tell us what has _and_ hasn't worked at previous places.
+- Keep information to yourself - share openly and frequently the things you are learning, what you've got right or wrong. We don't do lone wolfing here. PostHog is a huge product, so it's ok to ask dumb questions - so long as you've tried to figure it out yourself first!
+- Use sales BS language - if you don't know the answer that's fine! Don't promise features. Don't use vague, non-specific language. Talk to our customers like real human beings, not 'prospects'. And don't be discouraged if they say 'can we talk to someone more technical'!
+- Being slow to reply to customers - even if it's just to acknowledge their message. Make sure you have notifications turned on for _all_ messages in your customer Slack channels (not just for mentions).
+  
 ### Day 1
 
 - Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
@@ -26,12 +42,12 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
  - Work your way through your GitHub onboarding issue that a member of the <SmallTeam slug="people" /> created and sent a link to.
+ - Read all of the CS, Sales, and Shared Processes sections in the Handbook, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You can work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
- - Read all of the CS, Sales, and Shared Processes sections in the Handbook, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Customer Success.
 
 ### Week 2
