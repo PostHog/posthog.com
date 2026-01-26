@@ -90,7 +90,7 @@ Jon rarely starts by staring at log lines and hoping for enlightenment. (At leas
 
 Once something stands out, he digs into the details. Because logs are ingested as structured data, whether they come from OpenTelemetry or PostHog’s own SDKs, the metadata isn’t just there for reference. A trace ID or request ID becomes the fastest way to reframe the investigation. 
 
-If he needs a quick reality check, Jon lets Explore with AI explain what the error is trying (and failing) to do, in human language. And when things are actively on fire, Live Tail is there to stream logs in real time.
+If he needs a quick reality check, Jon lets PostHog explain what the error is trying (and failing) to do, in human language. And when things are actively on fire, Live Tail is there to stream logs in real time.
 
 > “The real superpower is how this connects to the front end, because we capture browser logs via PostHog JS. They’re automatically linked to the session and the user IDs. I can search for a front-end exception and jump directly into the session replay to watch the exact moment the bug happened,” he says. 
 
