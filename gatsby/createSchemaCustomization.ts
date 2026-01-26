@@ -254,6 +254,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Roadmap implements Node {
       year: Int
+      githubUrls: [String]
       githubPRMetadata: GitHubPRMetadata
     }
     type GitHubPRMetadata {
@@ -496,6 +497,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         videoId: String!
         publishedAt: Date! @dateformat
         title: String!
+    }
+    type PostHogWorkflowTemplateCreatedBy {
+        first_name: String
+        last_name: String
+    }
+    type PostHogWorkflowTemplateFields {
+        slug: String
+    }
+    type PostHogWorkflowTemplate implements Node {
+        templateId: String
+        name: String
+        description: String
+        image_url: String
+        created_at: Date
+        created_by: PostHogWorkflowTemplateCreatedBy
+        fields: PostHogWorkflowTemplateFields
     }
   `)
     createTypes([

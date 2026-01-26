@@ -7,7 +7,7 @@ availability:
     selfServe: full
     enterprise: full
     features:
-        evaluationEnvironments:
+        evaluationContexts:
             free: false
             selfServe: false
             boost: true
@@ -153,9 +153,9 @@ In our experience, the tradeoffs to enabling this are **not** worthwhile for the
 2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
 3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
 
-## Step 5. Configure evaluation runtime and environments (optional)
+## Step 5. Configure evaluation runtime and contexts (optional)
 
-You can control where your feature flags are evaluated using the **evaluation runtime** and **tags (evaluation environments)** sections of the form. You can find a detailed explanation of how evaluation environments work in the [evaluation environments documentation](docs/feature-flags/evaluation-environments).
+You can control where your feature flags are evaluated using the **evaluation runtime** and **tags (evaluation contexts)** sections of the form. You can find a detailed explanation of how evaluation contexts work in the [evaluation contexts documentation](docs/feature-flags/evaluation-contexts).
 
 ### Evaluation runtime (optional)
 
@@ -207,11 +207,11 @@ If you're not sure which runtime to use, you can use the following guidelines:
    - Gradual rollouts that need consistent behavior across environments
    - When you're unsure or need maximum flexibility
 
-### Tags and evaluation environments (optional)
+### Tags and evaluation contexts (optional)
 
-<CalloutBox icon="IconWarning" title="Evaluation environments are in alpha release" type="caution">
+<CalloutBox icon="IconWarning" title="Evaluation contexts are in alpha release" type="caution">
 
-Evaluation environments are currently in alpha release and require (at least) the **Boost add-on** for the resource tagging feature to function correctly. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
+Evaluation contexts are currently in alpha release and require (at least) the **Boost add-on** for the resource tagging feature to function correctly. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
 
 </CalloutBox>
 
@@ -221,22 +221,22 @@ Tags are a way to categorize your feature flags. Use them to describe when/where
 - Platform (e.g., "web", "mobile", "api")
 - Product area (e.g., "checkout", "onboarding", "admin")
 
-When evaluation environments are configured, the feature flag will only evaluate when the SDK provides matching evaluation environments in the `/flags` request.
+When evaluation contexts are configured, the feature flag will only evaluate when the SDK provides matching evaluation contexts in the `/flags` request.
 
 You can use tags to accomplish:
 
-- **Environment isolation**: Prevent flags from evaluating in unintended environments (e.g., marketing site vs. app vs. docs)
+- **Application isolation**: Prevent flags from evaluating in unintended contexts (e.g., marketing site vs. app vs. docs)
 - **Cost optimization**: Reduce unnecessary flag evaluations and associated costs
 - **Better organization**: Group flags by their intended usage context
-- **Backward compatible**: Flags without evaluation environments continue to work as before
-- **Prevent bloat**: Reduce unnecessary flag evaluations by only sending relevant flags to each environment
+- **Backward compatible**: Flags without evaluation contexts continue to work as before
+- **Prevent bloat**: Reduce unnecessary flag evaluations by only sending relevant flags to each context
 
-<CalloutBox icon="IconWarning" title="Evaluation environment tag behaviour" type="action">
+<CalloutBox icon="IconWarning" title="Evaluation context tag behaviour" type="action">
 
-- SDKs must send `evaluation_environments` parameter with matching tags for the flag to evaluate
-- Flags with no evaluation environment tags will evaluate for all requests (default behavior)
+- SDKs must send `evaluation_contexts` parameter with matching tags for the flag to evaluate (the legacy `evaluation_environments` parameter is also supported)
+- Flags with no evaluation context tags will evaluate for all requests (default behavior)
 - At least one evaluation tag must match for the flag to be included in the evaluation
 
 </CalloutBox>
 
-We recommend reading the [evaluation environments documentation](docs/feature-flags/evaluation-environments) in detail before using it in production.
+We recommend reading the [evaluation contexts documentation](docs/feature-flags/evaluation-contexts) in detail before using it in production.

@@ -27,14 +27,16 @@ As we start to generate cold outbound leads, these will be routed to TAEs to wor
 
 In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AE is picked at random, and we spend 30min going through:
 
-1. Recent Closed Won
-2. Where are you going to end up vs quota this quarter?   
-   - Confidence (scale of 1-5? a percentage out of 100? what's keeping it from being 5 or 100%?)
-3. Review deals (use this <PrivateLink url="https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view">Salesforce view</PrivateLink>) for this quarter by Commit -> Best Case -> Pipeline 
-   - For "Commit", how could it possibly end up "closed lost?"
-   - For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
-   - For "Pipeline", 1-2 opportunities you're excited about or want to share with the group
-4. Outbound successes and failures
+1. Brief, mid-week announcements (if any)
+2. For one random Technical AE as chosen by the wheel of names - SFDC Hygiene check — is the deal value, stage, and close date accurate? Are the next steps up to date? No story time here, just data. 
+3. Biweekly, we review all larger ($50k+) opportunities across all Technical AE. For each opportunity, the person reports and discusses:
+- Opportunity value and close date - why this value? when do we think it will close?
+- Progress towards exit criteria of the current stage
+- Concerns and questions about the opportunity
+4. On alternate weeks from the larger deal review, we run wheel of names again (excluding the Technical AE selected for the hygiene check), and the selected Technical AE reports and discusses the opportunities in their pipeline, including:
+- Starting with later stage opportunities, discuss opportunity value and close date - is the value solid? and what confidence do we have in the close?
+- Progress towards exit criteria of the current stage
+- Concerns and questions about the opportunity
 
 > The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
@@ -106,7 +108,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [here](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 ## How commission works - Technical Account Managers
 
@@ -143,7 +145,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [here](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
 >
