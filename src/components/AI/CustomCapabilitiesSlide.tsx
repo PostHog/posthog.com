@@ -1,6 +1,7 @@
 import React from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import CloudinaryImage from 'components/CloudinaryImage'
 import { IconMap, IconRewindPlay, IconSearch, IconSparkles } from '@posthog/icons'
 
 // Explicit class mappings for Tailwind JIT (can't use dynamic class names)
@@ -17,6 +18,10 @@ const colorClasses = {
         text: 'text-green',
         bg: 'bg-green/20',
     },
+    purple: {
+        text: 'text-purple',
+        bg: 'bg-purple/20',
+    },
 }
 
 const modes = [
@@ -28,6 +33,7 @@ const modes = [
         tagline: 'Computer vision for your product',
         description:
             "Session replay, but make it AI. PostHog AI watches the videos so you don't have to – and actually understands what's happening on screen.",
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_summaries_mode_f3d76a34e9.png',
         features: [
             {
                 title: 'Reads your UI like a human',
@@ -47,10 +53,35 @@ const modes = [
         ],
     },
     {
+        id: 'plan-mode',
+        name: 'Plan mode',
+        icon: <IconMap />,
+        color: 'green' as keyof typeof colorClasses,
+        tagline: 'Think before you act',
+        description:
+            'Plan mode is for when you want to explore schemas, map out your approach, and plot your next five moves before diving in.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Plan_mode_3c619089b6.png',
+        features: [
+            {
+                title: 'Explore your data schema',
+                description: 'Understand your events, properties, and sample values before building anything.',
+            },
+            {
+                title: 'Search across everything',
+                description: 'Find insights, dashboards, cohorts, experiments, flags, notebooks, and more.',
+            },
+            {
+                title: 'Switch modes on the fly',
+                description:
+                    'Automatically jumps to SQL, session replay, or analytics mode when the plan calls for it.',
+            },
+        ],
+    },
+    {
         id: 'research-mode',
         name: 'Research mode',
         icon: <IconSearch />,
-        color: 'yellow' as keyof typeof colorClasses,
+        color: 'purple' as keyof typeof colorClasses,
         tagline: 'Deep analysis for complex problems',
         description:
             'For when you need a deeper explanation – not just a dashboard. Research mode uses a more powerful model and can spawn multiple agents to tackle different parts of the task.',
@@ -69,30 +100,6 @@ const modes = [
                 title: 'Tells you what to do next',
                 description:
                     'Get a structured report with findings, evidence, and recommendations to move the needle on retention, conversion, or whatever metric matters.',
-            },
-        ],
-    },
-    {
-        id: 'plan-mode',
-        name: 'Plan mode',
-        icon: <IconMap />,
-        color: 'green' as keyof typeof colorClasses,
-        tagline: 'Think before you act',
-        description:
-            'Plan mode is for when you want to explore schemas, map out your approach, and plot your next five moves before diving in.',
-        features: [
-            {
-                title: 'Explore your data schema',
-                description: 'Understand your events, properties, and sample values before building anything.',
-            },
-            {
-                title: 'Search across everything',
-                description: 'Find insights, dashboards, cohorts, experiments, flags, notebooks, and more.',
-            },
-            {
-                title: 'Switch modes on the fly',
-                description:
-                    'Automatically jumps to SQL, session replay, or analytics mode when the plan calls for it.',
             },
         ],
     },
@@ -183,21 +190,29 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                                 </div>
                             </div>
 
-                            {/* Right: Media placeholder */}
+                            {/* Right: Media */}
                             <div className="@2xl:w-[45%] p-6 @2xl:p-8 flex items-center justify-center">
-                                <div className="w-full h-full min-h-[250px] bg-accent rounded border border-primary flex flex-col items-center justify-center p-8">
-                                    <div
-                                        className={`size-16 rounded-xl ${
-                                            colorClasses[mode.color].bg
-                                        } flex items-center justify-center mb-4`}
-                                    >
-                                        <span className={`${colorClasses[mode.color].text} size-8 [&>svg]:size-8`}>
-                                            {mode.icon}
-                                        </span>
+                                {mode.image ? (
+                                    <CloudinaryImage
+                                        src={mode.image as `https://res.cloudinary.com/${string}`}
+                                        alt={mode.name}
+                                        imgClassName="rounded border border-primary"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full min-h-[250px] bg-accent rounded border border-primary flex flex-col items-center justify-center p-8">
+                                        <div
+                                            className={`size-16 rounded-xl ${
+                                                colorClasses[mode.color].bg
+                                            } flex items-center justify-center mb-4`}
+                                        >
+                                            <span className={`${colorClasses[mode.color].text} size-8 [&>svg]:size-8`}>
+                                                {mode.icon}
+                                            </span>
+                                        </div>
+                                        <span className="text-lg font-medium text-primary mb-1">{mode.name}</span>
+                                        <span className="text-sm text-secondary">[Video / Screenshot placeholder]</span>
                                     </div>
-                                    <span className="text-lg font-medium text-primary mb-1">{mode.name}</span>
-                                    <span className="text-sm text-secondary">[Video / Screenshot placeholder]</span>
-                                </div>
+                                )}
                             </div>
                         </div>
                     </Tabs.Content>
