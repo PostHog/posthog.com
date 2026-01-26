@@ -4150,6 +4150,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
