@@ -20,7 +20,8 @@ export const hightouch = {
     platform: {
     pricing: {
         free_tier: true,
-        transparent_pricing: true,
+        // No money mentioned on https://hightouch.com/pricing
+        transparent_pricing: false,
         usage_based_pricing: true,
     },
     security: {

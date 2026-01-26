@@ -59,17 +59,17 @@ Here's how some of the most popular CDPs compare:
         {
             label: 'Audiences / cohorts',
             description: 'Build segments/cohorts for activation',
-            values: [true, 'Add-on', 'Paid plans only', true, 'Add-on', true],
+            values: [true, 'Add-on', 'Enterprise only', true, true, true],
         },
         {
             label: 'Warehouse as a source (Reverse ETL / activation)',
             description: 'Sync warehouse tables/models to downstream tools',
-            values: [true, true, true, true, true, true],
+            values: ["Coming soon", true, true, true, true, true],
         },
         {
             label: 'Warehouse as a destination (sync events into warehouse)',
             description: 'Send event data into Snowflake/BigQuery/Redshift/etc.',
-            values: [true, true, true, true, 'Add-on', true],
+            values: [true, true, true, true, true, true],
         },
         {
             label: 'SQL access to raw data',
@@ -316,7 +316,7 @@ Mid-to-large enterprise teams with complex martech stacks who need comprehensive
 - **PostHog** for teams that [SDKs in all their favorite languages](/docs/libraries), customizable destinations and transformations, and [docs](/docs) that make all this easy to self-serve
 - **RudderStack** for teams that want a warehouse-native CDP with full control over transformations and routing
 
-#### For growth-stage companies
+#### For teams with their own warehouses
 
 - **Segment** if you have budget and want a mature, well-supported platform with broad integrations
 - **Hightouch** if your data team has already invested in a warehouse and wants to activate that data
