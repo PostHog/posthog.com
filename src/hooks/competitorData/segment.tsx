@@ -15,8 +15,12 @@ export const segment = {
                 built_in_analytics: false,
             },
         },
-        product_analytics: false,
-        session_replay: false,
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
     },
     data_warehouse: {
         available: true,

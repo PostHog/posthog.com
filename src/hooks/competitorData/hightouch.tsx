@@ -6,15 +6,15 @@ export const hightouch = {
             available: true,
             features: {
                 realtime_streaming: true,
-            },
-            sources_destinations: {
-                features: {
-                    custom_transformations: true,
-                    no_code_setup: true,
+                custom_transformations: true,
+                no_code_setup: true,
                 },
             },
+        product_analytics: {
+            available: false,
         },
-        product_analytics: false,
-        session_replay: false,
+        session_replay: {
+            available: false,
+        },
     },
 }
