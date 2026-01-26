@@ -97,6 +97,18 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
                 icon={<Icons.IconLlmAnalytics className={`text-purple size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
             />
+            <FreeTierItem
+                name="PostHog AI"
+                allocation="2K credits (worth $20)"
+                icon={<Icons.IconSparkles className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
+            <FreeTierItem
+                name="Workflows"
+                allocation="10K messages per channel"
+                icon={<Icons.IconDecisionTree className={`text-teal size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
         </>
     )
 }

@@ -29,46 +29,48 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   [Analytics Platform](/teams/analytics-platform)
--   [Data Stack](/teams/data-stack)
--   [Product Analytics](/teams/product-analytics)
--   [Web Analytics](/teams/web-analytics)
+-   <SmallTeam slug="analytics-platform" />
+-   <SmallTeam slug="data-stack" />
+-   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="web-analytics" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   [Feature Flags](/teams/feature-flags)
--   [Experiments](/teams/experiments)
--   [PostHog AI](/teams/posthog-ai)
+-   <SmallTeam slug="feature-flags" />
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="posthog-ai" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Cory Slater" photo /></legend>
 
--   [Error Tracking](/teams/error-tracking)
--   [Surveys](/teams/surveys)
--   [Session Replay](/teams/session-replay)
+-   <SmallTeam slug="error-tracking" />
+-   <SmallTeam slug="surveys" />
+-   <SmallTeam slug="replay" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
--   [Workflows](/teams/workflows)
--   [Batch Exports (light support)](/teams/batch-exports)
+-   <SmallTeam slug="workflows" />
+-   <SmallTeam slug="batch-exports" />*
 -   Endpoints
 -   Logs
+
+*light support
 
 </fieldset>
 
 <fieldset>
 <legend>Teams with no PM currently</legend>
 
--   [Customer Analytics](/teams/customer-analytics)
--   [LLM Analytics](/teams/llm-analytics)
+-   <SmallTeam slug="customer-analytics" />
+-   <SmallTeam slug="llm-analytics" />
 
 </fieldset>
 

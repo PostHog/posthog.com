@@ -11,7 +11,7 @@ The paid ads team exists to do two things only:
 
 We don't do paid ads for general awareness of the PostHog brand - our website, content, and word of mouth are much better (and cheaper) ways to do this. 
 
-> For now paid ads sits within the [new business sales team](/teams/sales-cs), but will become its own thing once we have more people. This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
+> For now paid ads sits within the <SmallTeam slug="sales-cs" />, but will become its own thing once we have more people. This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, see the [newsletter ads guide](handbook/content/newsletter-ads).
 
 ## Channels
 
@@ -82,7 +82,7 @@ We aim for as much product coverage as possible unless there are compelling reas
 
 ### Landing pages
 
-We use custom presentations that match the style of our website as our landing pages. We have an internal guide on how to create these [here](https://github.com/PostHog/posthog.com/blob/915fe9ad366dcec8516bc0285af8a63d0e9c4b48/contents/handbook/engineering/posthog-com/presentations.mdx).
+We use custom presentations that match the style of our website as our landing pages. We have an [internal guide on creating presentations](https://github.com/PostHog/posthog.com/blob/915fe9ad366dcec8516bc0285af8a63d0e9c4b48/contents/handbook/engineering/posthog-com/presentations.mdx).
 
 In addition, PostHog now allows us to copy a URL to share a set of open windows in a specified layout allowing further customization for ad landing pages.
 

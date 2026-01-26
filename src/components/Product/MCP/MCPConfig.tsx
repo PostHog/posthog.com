@@ -7,43 +7,42 @@ interface MCPConfigSnippetProps {
     variant?: ConfigVariant
 }
 
-const MCP_SERVER_CONFIG = {
+// Native HTTP config for clients that support it (Cursor, VS Code, Zed)
+const MCP_SERVER_CONFIG_NATIVE = {
+    url: 'https://mcp.posthog.com/mcp',
+}
+
+// mcp-remote config for clients without native HTTP support (Claude Desktop, Windsurf)
+const MCP_SERVER_CONFIG_LEGACY = {
     command: 'npx',
-    args: [
-        '-y',
-        'mcp-remote@latest',
-        'https://mcp.posthog.com/sse',
-        '--header',
-        'Authorization:${POSTHOG_AUTH_HEADER}',
-    ],
-    env: {
-        POSTHOG_AUTH_HEADER: 'Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE}// HIGHLIGHT',
-    },
+    args: ['-y', 'mcp-remote@latest', 'https://mcp.posthog.com/sse'],
 }
-
-// https://zed.dev/docs/ai/mcp#as-custom-servers
-const MCP_SERVER_CONFIG_ZED = {
-    ...MCP_SERVER_CONFIG,
-    enabled: true,
-    source: 'custom',
-}
-
-const createConfig = (wrapper: string) => JSON.stringify({ [wrapper]: { posthog: MCP_SERVER_CONFIG } }, null, 2)
-
-const mcpServersConfig = { language: 'json', content: () => createConfig('mcpServers') }
 
 const EDITOR_CONFIGS = {
-    cursor: mcpServersConfig,
-    'claude-desktop': mcpServersConfig,
-    windsurf: mcpServersConfig,
-    vscode: { language: 'json', content: () => createConfig('servers') },
+    cursor: {
+        language: 'json',
+        content: () => JSON.stringify({ mcpServers: { posthog: MCP_SERVER_CONFIG_NATIVE } }, null, 2),
+    },
+    'claude-desktop': {
+        language: 'json',
+        content: () => JSON.stringify({ mcpServers: { posthog: MCP_SERVER_CONFIG_LEGACY } }, null, 2),
+    },
+    windsurf: {
+        language: 'json',
+        content: () => JSON.stringify({ mcpServers: { posthog: MCP_SERVER_CONFIG_LEGACY } }, null, 2),
+    },
+    vscode: {
+        language: 'json',
+        content: () => JSON.stringify({ servers: { posthog: { type: 'http', ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
+    },
     'claude-code': {
         language: 'bash',
-        content: () => `claude mcp add-json posthog -s user '${JSON.stringify(MCP_SERVER_CONFIG, null, 2)}'`,
+        content: () => `claude mcp add --transport http posthog https://mcp.posthog.com/mcp -s user`,
     },
     zed: {
         language: 'json',
-        content: () => JSON.stringify({ context_servers: { posthog: MCP_SERVER_CONFIG_ZED } }, null, 2),
+        content: () =>
+            JSON.stringify({ context_servers: { posthog: { enabled: true, ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
     },
 } as const
 

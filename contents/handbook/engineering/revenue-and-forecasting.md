@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The growth team maintains the revenue dashboards and queries that are used to understand:
+The <SmallTeam slug="billing" /> maintains the revenue dashboards and queries that are used to understand:
 
 1. What our historical revenue record looks like
 2. What our revenue is expected to be this month

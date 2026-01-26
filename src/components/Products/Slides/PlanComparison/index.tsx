@@ -1,12 +1,13 @@
 import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
-import ScrollArea from 'components/RadixUI/ScrollArea'
+import useProduct from 'hooks/useProduct'
+import ScrollArea from "components/RadixUI/ScrollArea"
 
 interface PlanComparisonProps {
     products: any[]
     productHandle: string
-    productData?: any // Add productData for accessing sharesFreeTier
+    productData?: any & { customPricingContent?: React.ReactNode } // Add productData for accessing sharesFreeTier
     onScrollToFeatures?: () => void
 }
 
@@ -19,10 +20,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     // Check if this product shares pricing with another product
     const sharesFreeTierWith = productInfo?.sharesFreeTier
     const billingProductHandle = sharesFreeTierWith || productHandle
+    const product = useProduct({ handle: billingProductHandle })
 
-    // Find the specific product data - GraphQL products use 'type' field, but we receive handle
-    // For session_replay handle, we need to match against 'session_replay' type in GraphQL
-    const productData = products.find((product: any) => product.type === billingProductHandle)
+    const productData = product?.billingData
 
     if (!productData || !productData.plans || productData.plans.length === 0) {
         // Skip rendering if no billing/pricing data is available
@@ -272,9 +272,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     }
 
     return (
-        <div className="h-full grid grid-cols-1 @2xl:grid-cols-5 text-primary">
+        <div className="h-full flex flex-col @2xl:flex-row text-primary">
             {/* Left side - Pricing */}
-            <div className="p-12 bg-tan dark:bg-dark col-span-1 @2xl:col-span-2 flex flex-col justify-between border-b border-primary @2xl:border-b-0">
+            <div className="p-12 bg-tan dark:bg-dark @2xl:w-2/5 flex flex-col justify-between border-b border-primary @2xl:border-b-0">
                 <div>
                     <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
 
@@ -398,94 +398,97 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
             </div>
 
             {/* Right side - Plans */}
-            <div className="p-12 bg-primary col-span-1 @2xl:col-span-3 border-l border-primary h-full">
-                <h2 className="text-4xl font-bold text-primary mb-12">Plans</h2>
+            <div className="bg-primary @2xl:flex-1 border-l border-primary h-full">
+                <ScrollArea className="min-h-0 h-full p-12">
+                    <h2 className="text-4xl font-bold text-primary mb-12">Plans</h2>
 
-                {/* Comparison rows */}
-                <div className="grid grid-cols-3 gap-y-4">
-                    <div className="border-b border-primary"></div>
-                    <div className="border-b border-primary">
-                        <strong>{freePlan?.name || 'Free'}</strong>
-                        <p className="text-secondary">No credit card required</p>
-                    </div>
-                    <div className="border-b border-primary">
-                        <strong>{paidPlan?.name || 'Pay-as-you-go'}</strong>
-                        <p className="text-secondary">Starts at $0/mo</p>
-                    </div>
-                    {/* Volume/Usage row - dynamically named based on unit */}
-                    <h4 className="text-lg font-semibold text-primary mb-0 pr-2">
-                        {unit.charAt(0).toUpperCase() + unit.slice(1)}s
-                    </h4>
-                    <div>
-                        <span className="text-xl font-bold text-green">
-                            {freePlan?.free_allocation?.toLocaleString() || '5,000'}
-                        </span>
-                        <span className="text-secondary">/mo</span>
-                    </div>
-                    <div>
-                        <span className="text-xl font-bold text-primary">Unlimited</span>
-                    </div>
+                    {/* Comparison rows */}
+                    <div className="grid grid-cols-3 gap-y-4 pb-4">
+                        <div className="border-b border-primary"></div>
+                        <div className="border-b border-primary">
+                            <strong>{freePlan?.name || 'Free'}</strong>
+                            <p className="text-secondary">No credit card required</p>
+                        </div>
+                        <div className="border-b border-primary">
+                            <strong>{paidPlan?.name || 'Pay-as-you-go'}</strong>
+                            <p className="text-secondary">Starts at $0/mo</p>
+                        </div>
+                        {/* Volume/Usage row - dynamically named based on unit */}
+                        <h4 className="text-lg font-semibold text-primary mb-0 pr-2">
+                            {unit.charAt(0).toUpperCase() + unit.slice(1)}s
+                        </h4>
+                        <div>
+                            <span className="text-xl font-bold text-green">
+                                {freePlan?.free_allocation?.toLocaleString() || '5,000'}
+                            </span>
+                            <span className="text-secondary">/mo</span>
+                        </div>
+                        <div>
+                            <span className="text-xl font-bold text-primary">Unlimited</span>
+                        </div>
 
-                    {/* Features callout */}
-                    {planDifferences.length > 0 && (
-                        <>
-                            <h4 className="text-lg font-semibold text-primary mb-0 pr-2">Features</h4>
-                            <div className="col-span-2 bg-accent border border-primary rounded px-2 py-1 text-center">
-                                <p className="text-center text-primary mb-0">
-                                    {onScrollToFeatures ? (
-                                        <button
-                                            className="font-semibold text-red dark:text-yellow hover:underline cursor-pointer bg-transparent border-none p-0"
-                                            onClick={onScrollToFeatures}
+                        {/* Features callout */}
+                        {planDifferences.length > 0 && (
+                            <>
+                                <h4 className="text-lg font-semibold text-primary mb-0 pr-2">Features</h4>
+                                <div className="col-span-2 bg-accent border border-primary rounded px-2 py-1 text-center">
+                                    <p className="text-center text-primary mb-0">
+                                        {onScrollToFeatures ? (
+                                            <button
+                                                className="font-semibold text-red dark:text-yellow hover:underline cursor-pointer bg-transparent border-none p-0"
+                                                onClick={onScrollToFeatures}
+                                            >
+                                                All features
+                                            </button>
+                                        ) : (
+                                            <span className="font-semibold">All features</span>
+                                        )}{' '}
+                                        available on both plans except listed below
+                                    </p>
+                                </div>
+                            </>
+                        )}
+
+                        {/* Dynamic plan differences */}
+                        {planDifferences.map((difference, index) => (
+                            <React.Fragment key={index}>
+                                <div className="">
+                                    <h4 className="text-lg font-semibold text-primary mb-0 pr-2 inline">
+                                        {difference.name}
+                                    </h4>
+                                    {difference.description && (
+                                        <Tooltip
+                                            trigger={
+                                                <IconInfo className="inline-block size-5 text-secondary cursor-help relative -top-0.5 -left-0.5 mr-2" />
+                                            }
+                                            delay={0}
                                         >
-                                            All features
-                                        </button>
-                                    ) : (
-                                        <span className="font-semibold">All features</span>
-                                    )}{' '}
-                                    available on both plans except listed below
+                                            <div className="max-w-xs">
+                                                <p className="mb-0 text-[13px] leading-normal">{difference.description}</p>
+                                            </div>
+                                        </Tooltip>
+                                    )}
+                                </div>
+                                <div>
+                                    {renderFeatureValue(difference.freeValue, difference.displayType, difference.key)}
+                                </div>
+                                <div>
+                                    {renderFeatureValue(difference.paidValue, difference.displayType, difference.key)}
+                                </div>
+                            </React.Fragment>
+                        ))}
+
+                        {productHandle !== 'posthog_ai' && (
+                            <div className="border border-primary bg-accent rounded p-4 col-span-3">
+                                <p className="text-center text-primary text-sm mb-0">
+                                    <span className="font-semibold">All features</span> are available on both plans
                                 </p>
                             </div>
-                        </>
-                    )}
+                        )}
 
-                    {/* Dynamic plan differences */}
-                    {planDifferences.map((difference, index) => (
-                        <React.Fragment key={index}>
-                            <div className="">
-                                <h4 className="text-lg font-semibold text-primary mb-0 pr-2 inline">
-                                    {difference.name}
-                                </h4>
-                                {difference.description && (
-                                    <Tooltip
-                                        trigger={
-                                            <IconInfo className="inline-block size-5 text-secondary cursor-help relative -top-0.5 -left-0.5 mr-2" />
-                                        }
-                                        delay={0}
-                                    >
-                                        <div className="max-w-xs">
-                                            <p className="mb-0 text-[13px] leading-normal">{difference.description}</p>
-                                        </div>
-                                    </Tooltip>
-                                )}
-                            </div>
-                            <div>
-                                {renderFeatureValue(difference.freeValue, difference.displayType, difference.key)}
-                            </div>
-                            <div>
-                                {renderFeatureValue(difference.paidValue, difference.displayType, difference.key)}
-                            </div>
-                        </React.Fragment>
-                    ))}
-
-                    {/* Fallback message if no differences found */}
-                    {planDifferences.length === 0 && (
-                        <div className="border border-primary bg-accent rounded p-4 col-span-3">
-                            <p className="text-center text-primary text-sm mb-0">
-                                <span className="font-semibold">All features</span> are available on both plans
-                            </p>
-                        </div>
-                    )}
-                </div>
+                    </div>
+                    {productInfo?.customPricingContent && productInfo.customPricingContent}
+                </ScrollArea>
             </div>
         </div>
     )

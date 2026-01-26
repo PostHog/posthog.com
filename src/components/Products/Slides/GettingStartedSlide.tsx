@@ -95,7 +95,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     <br />
                     <div className="relative">
                         <SignupCTA
-                            size="absurd"
+                            size="xl"
                             type="primary"
                             className="animate-grow mt-2 mb-1"
                             state={{ initialTab: 'signup' }}

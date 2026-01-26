@@ -107,7 +107,7 @@ Sales tech stack including:
 
 ### What RevOps supports but doesn't own
 
-Revenue reporting and forecasting: RevOps provides recommendations and improvements but does not own implementation and maintenance. This is currently owned by the Growth team. 
+Revenue reporting and forecasting: RevOps provides recommendations and improvements but does not own implementation and maintenance. This is currently owned by the <SmallTeam slug="billing" />. 
 
 Marketing operations: Marketing owns their campaigns and analytics, we help connect marketing data with revenue outcomes.
 
@@ -116,4 +116,4 @@ Product operations: Product teams own their metrics and experimentation, but we 
 ### What RevOps doesn't do
 - Financial accounting (though we work closely with Finance)
 - Individual sales deal management
-- Billing/invoicing platforms, and data infrastructure for revenue reporting owned by the Growth team
+- Billing/invoicing platforms, and data infrastructure for revenue reporting owned by the <SmallTeam slug="billing" />

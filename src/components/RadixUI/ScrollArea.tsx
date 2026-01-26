@@ -24,7 +24,9 @@ const ScrollArea = ({
     return (
         <ScrollAreaPrimitive.Root
             data-scheme={dataScheme}
-            className={`relative overflow-hidden h-full flex-1 ${fullWidth ? 'max-w-screen' : ''} ${className}`}
+            className={`relative overflow-hidden h-full flex-1 [&>div>div]:!block ${
+                fullWidth ? 'max-w-screen' : ''
+            } ${className}`}
             style={style}
         >
             <ScrollAreaPrimitive.Viewport

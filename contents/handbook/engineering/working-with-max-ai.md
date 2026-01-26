@@ -51,7 +51,7 @@ If you need AI capabilities for your product area:
 
 ## Resources
 
--   [PostHog AI team page](/teams/posthog-ai)
+-   <SmallTeam slug="posthog-ai">PostHog AI team page</SmallTeam>
 -   [PostHog AI objectives](/teams/posthog-ai#objectives)
 -   [PostHog AI documentation](/docs/posthog-ai)
 

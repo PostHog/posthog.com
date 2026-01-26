@@ -7,8 +7,9 @@
 ## Checklist
 
 - [ ] Words are spelled using American English
+- [ ] PostHog product names are in [title case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case). It's "Product Analytics" not "Product analytics". If talking about a category of product, use sentence case e.g. "There are a lot of product analytics tools, but PostHog's Product Analytics is the best"
 - [ ] Titles are in [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)
-- [ ] Feature names are in **[sentence case too](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)**. It's "product analytics" not "Product Analytics" and so on.
+- [ ] Feature names are in **[sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)**. It's "Click here to create a trend insight" not "... create a Trend Insight" and so on.
 - [ ] Use relative URLs for internal links
 - [ ] If I moved a page, I added a redirect in `vercel.json`
 - [ ] Remove this template if you're not going to fill it out!

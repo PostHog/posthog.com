@@ -94,7 +94,7 @@ You can find more information about this on our ['Securing PostHog' page](/docs/
 * We improved the [command description for `setup_review`](https://github.com/PostHog/posthog/commit/6b209413e9a6ee33b1e21b261ef72593da2b912a)
 * Tim made our [testing of PR environments easier](https://github.com/PostHog/posthog/pull/1496)
 * We made the ['Launch Toolbar' links open on a new page](https://github.com/PostHog/posthog/pull/1524)
-* We [updated our CHANGELOG](https://github.com/PostHog/posthog/pull/1522/files) and bumped versions [here](https://github.com/PostHog/posthog/pull/1421) and [there](https://github.com/PostHog/posthog/pull/1517)(and in a lot of other places)
+* We [updated our CHANGELOG](https://github.com/PostHog/posthog/pull/1522/files) and bumped versions in [PR #1421](https://github.com/PostHog/posthog/pull/1421) and [PR #1517](https://github.com/PostHog/posthog/pull/1517) (and in a lot of other places)
 * We crushed a bug regarding [rest hooks for Docker images](https://github.com/PostHog/posthog/pull/1516/files)
 * We [improved our syntax highlighting for code snippets](https://github.com/PostHog/posthog/pull/1490)
 * [License issues](https://github.com/PostHog/posthog/pull/1511/files) and [disappearing user paths on Firefox](https://github.com/PostHog/posthog/pull/1513) are now bugs of the past

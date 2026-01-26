@@ -48,7 +48,7 @@ Adding more data like random users and more actions, helps us show how funnels, 
 * [Funnel fix](https://github.com/PostHog/posthog/pull/408) to correct incorrect ordering.
 * Everything is now ordered by [timestamp](https://github.com/PostHog/posthog/issues/421) over id, this fixes ordering bugs if you explicitly set a “timestamp” in an event.
 
-## Favorite issue
+## Favorite issue
 
 ### [Allow Trend break downs by DOM element properties/attributes](https://github.com/PostHog/posthog/issues/419)
 

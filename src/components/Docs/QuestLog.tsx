@@ -474,15 +474,15 @@ export const QuestLog: React.FC<{
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative rounded-lg shadow-sm bg-white border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-white dark:bg-accent-dark border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
-                                            <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
+                                            <div className="text-xs font-medium text-primary text-center">
                                                 <span className="inline-block">{speechText}</span>
                                             </div>
 
                                             {/* Speech Bubble Tail */}
                                             <div
-                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-white rotate-45 ${
+                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-primary rotate-45 ${
                                                     selectedQuest === questItems.length - 1
                                                         ? 'border-r border-t left-full -translate-x-1/2'
                                                         : 'border-l border-b right-full translate-x-1/2'

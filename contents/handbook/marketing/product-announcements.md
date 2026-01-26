@@ -45,13 +45,19 @@ New product launches are major announcements. They have their own GitHub templat
 
 For new product announcements we generally apply the following best practices:
 
-- Ensure the product has at least one customer story created for it within 3 weeks of launch.
-- Ensure we publish best practice content for the product and link to it from docs.
-- Ensure the product has at least one tutorial created for it at launch.
+- Ensure the product has a product page added to the website.
+- Ensure the product team has implemented [intent](/growth/growth-engineering/product-intents) and [activation](/growth/growth-engineering/per-product-activation) signals for the product.
+- Ensure the product has at least one customer story created for it within 3 weeks of launch. [example](/customers/lovable)
+- Ensure we publish best practice content for the product and link to it from docs. [example](/docs/product-analytics/best-practices)
+- Ensure the product has at least one tutorial created for it at launch. [example](/docs/feature-flags/tutorials)
 - Ensure launch activities (such as changelog) link clearly to the docs.
 - Ensure the product is added to email and in-app onboarding flows.
+- Ensure the product is added to the [pricing page](/pricing) (this is typically owned by the product team's PM and the <SmallTeam slug="billing" />)
+- Submit an [art request](/brand/art-requests) for any creative assets needed for the email campaign, blog post, social media posts etc...
 
 Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
+
+If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 
 ### PR announcements
 We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/brand/press). 

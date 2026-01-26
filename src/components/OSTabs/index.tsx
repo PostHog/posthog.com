@@ -33,6 +33,7 @@ interface OSTabsProps {
     centerTabs?: boolean
     tabTriggerClassName?: string
     tabContentClassName?: string
+    tabContentDataScheme?: string
     scrollable?: boolean
     scrollAreaClasses?: string
 }
@@ -53,6 +54,7 @@ export default function OSTabs({
     centerTabs = false,
     tabTriggerClassName,
     tabContentClassName,
+    tabContentDataScheme = 'primary',
     scrollable = true,
     scrollAreaClasses = '',
 }: OSTabsProps): JSX.Element {
@@ -192,9 +194,8 @@ export default function OSTabs({
                 }}
                 defaultValue={defaultValue || tabs[0]?.value}
                 value={value || controlledValue}
-                className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
-                    padding ? 'pt-1  px-2 pb-2' : ''
-                } min-h-0 bg-primary ${className}`}
+                className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${padding ? 'pt-1  px-2 pb-2' : ''
+                    } min-h-0 bg-primary ${className}`}
             >
                 <div className={tabContainerClassName}>
                     <Tabs.List
@@ -203,11 +204,10 @@ export default function OSTabs({
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${
-                                    orientation === 'horizontal'
-                                        ? `items-center${!centerTabs ? ' ml-4' : ''}`
-                                        : 'flex-col gap-px h-full'
-                                } ${centerTabs ? 'justify-center ml-0' : ''}`}
+                                className={`flex ${orientation === 'horizontal'
+                                    ? `items-center${!centerTabs ? ' ml-4' : ''}`
+                                    : 'flex-col gap-px h-full'
+                                    } ${centerTabs ? 'justify-center ml-0' : ''}`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -227,12 +227,12 @@ export default function OSTabs({
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <TabContentContainer
-                            className={`@container bg-primary h-full min-h-0 ${
-                                border ? 'border border-primary rounded-md' : ''
-                            }`}
+                            className={`@container bg-primary h-full min-h-0 ${border ? 'border border-primary rounded-md' : ''
+                                }`}
                             viewportClasses={scrollAreaClasses}
                         >
                             <div
+                                data-scheme={tabContentDataScheme}
                                 className={`@container ${contentPadding ? 'p-4 @2xl:p-6' : ''} ${tabContentClassName}`}
                             >
                                 {tab.content}

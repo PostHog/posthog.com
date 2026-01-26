@@ -58,9 +58,24 @@ This is an overview for what you should actually be doing with a customer at eac
 
 Most people fill in the [form](/talk-to-a-human) via the website. Some email sales@posthog.com or open a Zendesk ticket.
 
+
+#### Big fish
+
+You'll also be assigned **Big fish** leads - these are people from big companies who have already signed up to PostHog.  Generic outreach emails don't work here, you need to check their recent session replays to figure out where they are at and any roadblocks to them trying PostHog out.  It's normally harder to get PostHog up and running in a bigger company so end up not being able to evaluate PostHog using their data.
+
+Specific things you could help with:
+
+- Demoing specific features to them, if they have also been checking out the docs.
+- See where they get stuck in onboarding. If they select specific products, then mention demoing those products to them specifically.
+- Offer to help them set up dashboards, etc., if they have been able to get PostHog connected to their app.
+- Offering to seed some demo data into their account if they need to get hands-on before actually integrating our SDK.  
+- If they are from an existing customer, they may have meant to join an existing org.  Let the PostHog account owner know that they might need to reach out to introduce themself and help the person get up and running in the correct organization.
+
+If you're still not sure what to say, ask your team in Slack to review the replays to see if they can help you be specific.  Again, **generic outreach doesn't work here.**
+
 ### 2. We assign and qualify
 
-Info on how leads are assigned can be [found here](handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
+Info on how leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
 
 - What is their [Lead Score](/handbook/growth/sales/lead-scoring)?
 - Which products are they looking to use? What's their use case?
@@ -83,7 +98,7 @@ It's also totally fine to ask a customer questions over email in advance of the 
 > - Who owns that data stack? Do you have a data team or data engineers?
 > - Who will be the consumers of PostHog data? How are they currently answering their questions, and how easy is it for them to do so with existing tooling?
 
-If you're pretty sure that they should be qualified out of our sales process, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
+If you're pretty sure that they should be qualified out of our sales process, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.) There is a [Claude skill](https://drive.google.com/file/d/1tGuKDf6nbG5vPVWkQRntkYkXBsRpKSLr/view?usp=drive_link) that can help draft genuinely helpful responses to folks like these - it will put together helpful resources from our docs and blog posts that can help customers get started, even if they don't qualify for a call with a salesperson.
 
 #### Requests for Proposals (RFPs)
 
@@ -97,6 +112,14 @@ If it's an unsolicited RFP where we haven't had any prior contact or usage from 
 If you can't identify anyone who has recently signed up to PostHog, then ask the person who sent you the RFP for a call to gather more context before making a decision on whether to fill it in.  If they aren't willing to get on a call then it's likely that we are not their vendor of choice, and they are using us to make up the numbers in a tender process.  As such, we shouldn't spend time on this kind of activity. If you choose to spend time with these, timebox your effort to ensure you are not devoting a week to a 500 question RFP where we have very slim chances of success. Your time is your most valuable asset.
 
 If it's a solicited RFP, you're free to proceed so long as the opportunity is qualified as a whole and you carefully balance the level of effort required in the RFP against the opportunity for you & PostHog. Again, a 500 question RFP may not be worth it if they plan on spending <$20k for PostHog (a 50 question RFP may not even be worth it in this instance)! Use your best judgement, and it is generally still wise to timebox your effort.
+
+#### Bigger Opportunities at Bigger Companies
+
+When you're working a deal north of $100k at a larger company, the playbook shifts. Generally, expect to challenge their stated evaluation criteria early, as well as sell to multiple people and functions within the organization. You need to dig past the surface-level requirements they may list and get to the real decision drivers. Question the "why" and "how" behind their stated criteria, because committee-driven procurement processes can hide the actual priorities behind "just so" rubrics that can obscure the real reasons they will buy (or disqualify). 
+
+On the relationship side, you need a strategy for engaging their leadership and developing champions at multiple levels within the account. If a key leadership stakeholder goes dark, escalate to PostHog leadership to help re-engage. If needed, don't be afraid to translate PostHog titles to something they would understand (e.g. Generic Exec Person = COO). For deals this size, on-site presence can also matter — you should attempt to build relationships in person, not just over Zoom. 
+
+Lastly, take a prescriptive and consultative approach to their evaluation process. The larger the opportunity, the more proactive you need to be about controlling the process. Ask for help from your lead, your team, and in Slack. These opportunities take a team effort. 
 
 #### Startups
 
@@ -247,6 +270,8 @@ By the end of either the 1st or 2nd call with a customer, you should have a defi
 3. **Authority** - Who will make the decision at the customer organization? Who holds the budget? 
 4. **Timeline** - When does the trial start? When are they looking to make a decision/have a contract in place?
 
+> It's really easy to convince yourself that you've got a well-qualified opportunity after a demo goes well.  Everybody has been laughing and having fun so they must love PostHog right?  You need to be more objective than that - ask the AI in the call recording to rate you on BANT qualification to see whether you actually got all of the information you need to confirm that a real opportunity exists here.  If you are missing any qualification information, don't be afraid to go back and ask your champion for additional context here.  It'll save you wasting a whole bunch of time helping a customer in an evaluation where they aren't serious about buying PostHog, and the inevitable **Closed - Lost** which comes as a result of that.
+
 ### 5. Product evaluation
 
 Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. 
@@ -269,7 +294,7 @@ If the customer isn't super clear on how to articulate the success criteria then
 - Surveys: deploy a survey, view and analyze the results
 - Data warehouse: set up the warehouse, sync at least 1 data source or pull additional person data in to enrich an insight
 
-> The AE acts as the support person during this period and it's your opportunity to show them what working with you and PostHog will be like should they decide to become a paying customer.  You shouldn't just leave the customer to fend for themselves.
+> Don't be over-reliant on support during the evaluation.  As the AE, you should be highly focused on customers during their evaluation to maximize your chance of success.  We deliberately hire people we know customers will love working with, so now is your time to shine.
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
    * [Anonymous vs Identified](/docs/product-analytics/identify#anonymous-and-identified-events) events.
@@ -282,6 +307,8 @@ If the customer isn't super clear on how to articulate the success criteria then
 4. A week before the trial period ends have a wrap-up call to ensure that they have seen everything they need to see, and identify any last remaining areas you can help them with, and next steps after the trial ends.
 
 In an ideal world this involves multiple calls per week during the trial period so that you can build a trusted relationship with the customer, but don't force that if they prefer to use Slack/Email.
+
+> If non-technical people such as Product Managers, Marketing, etc. are involved we know from prior experience that the PostHog UI, while powerful, can be overwhelming, especially if they have used similar tools in the past.  You should be prepared to run multiple remote or in-person sessions with these people to ensure that they get what they need out of the evaluation. 
 
 We usually set up the following trials depending on likely contract size:
 
@@ -296,7 +323,7 @@ Most customers don't need this beyond sharing our existing documentation. This s
 
 If the customer requires a vendor questionnaire or security questionnaire then it's best for the AE involved to try and fill it out. If a company reaches out initially with this request, it's often best to try and understand if the customer has an intention to pay or at least grow into a paying customer before investing a lot of time filling it out. If there are any questions that are unclear post the specific question in #team-people-and-ops channel. It is easy to get driven into filling out security questionnaires for accounts that would come in below the sales assist threshold. If the lead is pushing security review without having had any commercial discussions, be transparent up front and let them know that we only do security review for accounts at $20k annual spend or greater. We are happy to work with them to understand their usage, and at that point, further entertain security discussions or point them towards a self serve path. 
 
-Some customers may need payment details up front as part of their vendor onboarding process.  Stripe allows you to generate these ahead of them signing the contract - you can see how to do it [here](/handbook/growth/sales/billing#step-5-apply-credits).
+Some customers may need payment details up front as part of their vendor onboarding process. Stripe allows you to generate these ahead of them signing the contract — you can see how to do it in the [billing guide for applying credits](/handbook/growth/sales/billing#step-5-apply-credits).
 
 If you need help with anything data privacy or [MSA-related](/handbook/growth/sales/contracts), ping Fraser for help.
 

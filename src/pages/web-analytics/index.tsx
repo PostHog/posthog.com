@@ -145,6 +145,7 @@ export default function WebAnalytics(): JSX.Element {
             'pairs-with',
             'getting-started',
         ],
+        exclude: ['videos'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },

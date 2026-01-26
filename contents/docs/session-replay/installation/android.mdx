@@ -1,0 +1,86 @@
+---
+title: Android session replay installation
+platformLogo: android
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import AndroidInstall from "../../integrate/_snippets/install-android.mdx"
+
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
+
+<AndroidInstall />
+
+> Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
+
+</Step>
+
+<Step title="Enable session recordings in your project settings" badge="required">
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight}
+  imageDark={EnableSessionReplayDark}
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+</Step>
+
+<Step title="Configure replay settings" badge="required">
+
+Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+
+```android_kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+    // Enable session recording. Requires enabling in your project settings as well.
+    // Default is false.
+    sessionReplay = true
+
+    // Whether text and text input fields are masked. Default is true.
+    // Password inputs are always masked regardless
+    sessionReplayConfig.maskAllTextInputs = true
+
+    // Whether images are masked. Default is true.
+    sessionReplayConfig.maskAllImages = true
+
+    // Capture logs automatically. Default is true.
+    sessionReplayConfig.captureLogcat = true
+
+    // Whether replays are created using high quality screenshots. Default is false.
+    // If disabled, replays are created using wireframes instead.
+    // The screenshot may contain sensitive information, so use with caution
+    sessionReplayConfig.screenshot = false
+
+    // Throttle delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
+    // Ps: it was 500ms (0.5s) by default until version 3.8.2
+    // Available from version 3.10.0 (Before it was called debouncerDelayMs)
+    sessionReplayConfig.throttleDelayMs = 1000
+}
+```
+
+</Step>
+
+</Steps>
+
+## Limitations
+
+- Requires Android API >= 26.
+- Jetpack Compose is only supported if `screenshot` is enabled.
+- Custom views are partly supported, and only fully supported if `screenshot`  is enabled.
+- WebView is only supported if `screenshot` is enabled. A placeholder will be shown as a fallback.
+- Keyboard is not supported. A placeholder will be shown.
+
+## Troubleshooting
+
+- Update your SDK.
+- If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).

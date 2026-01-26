@@ -29,9 +29,9 @@ export const repeatingSurveyLight =
 export const repeatingSurveyDark =
     'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg'
 export const presentationTypesLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_51_26_PM_ca79895d6b.png'
 export const presentationTypesDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_52_53_PM_066c87466c.png'
 export const copySurveyLinkLight =
     'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg'
 export const copySurveyLinkDark =
@@ -86,7 +86,7 @@ There are three options for displaying a survey:
 
 3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
 
-4. **Hosted surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
+4. **Hosted surveys**: Create a survey accessible via an external link or embedded in an iframe, hosted by PostHog. Responses are anonymous by default, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
 
 <ProductScreenshot
     imageLight={presentationTypesLight}
@@ -153,25 +153,68 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&
 
 **Auto-submit (one-click surveys):**
 
-Add `auto_submit=true` to automatically submit the survey when all required questions are pre-filled. This is perfect for email surveys where clicking a link should instantly submit the response:
+> **Note:** As of `posthog-js@1.302.0`, the `auto_submit` URL param, along with the `autoSubmitIfComplete` and `autoSubmitDelay` SDK configuration params, have been deprecated.
 
-```
-# One-click email survey - click the link and the response is submitted
-?distinct_id=user123&q0=2&auto_submit=true
-```
+Survey questions that are pre-filled will be skipped (not shown to the user) if they are set to "Automatically submit on selection". Additionally, if partial responses are enabled for your survey, these responses will be recorded automatically on page load.
 
-When auto-submit is enabled:
-- The survey auto-submits immediately if all required questions are pre-filled
-- Users see a confirmation message ("Thanks! Your response was recorded")
-- The form remains visible so users can optionally add more feedback
-- If required questions are missing, the survey shows normally without auto-submitting
+Here's how it works:
+- User clicks link to open survey page
+- Starting at the first question, we automatically advance through questions which are both prefilled **and** set to automatically submit on selection
+- If partial responses are enabled for your survey, responses are immediately stored for the questions we skipped
+- We always start the survey at the first non-prefilled question, regardless of whether some questions in the middle are pre-filled
+
+Additional notes:
+- If all questions are pre-filled, the user will only see a confirmation message ("Thanks! Your response was recorded")
+- If some questions in the middle of your survey are pre-filled, regardless of whether the question is set to auto-submit on selection, the user will still see the pre-selected response, and may change it
+
+Example: one-click NPS with optional follow-up
+Say you want to send an email with a "one-click" NPS survey that includes an optional follow-up question.
+
+Create your survey with the following configuration:
+1. Create your first question as a Rating question, with **"Automatically submit on selection" enabled**
+2. Create a second question as Freeform text
+3. Ensure partial responses are enabled (Completion conditions > Response collection > **Any question**)
+
+Now you can send your survey link with the NPS question pre-filled, like this:
+```
+# pre-fill the first question (index 0) with the value 8
+{survey_url}?q0=8
+```
 
 **Important notes:**
 - Question indices are 0-based (first question is `q0`, second is `q1`, etc.)
 - Choice indices are also 0-based (first choice is `0`, second is `1`, etc.)
 - Invalid indices are silently ignored
 - Pre-filling only works with choice and rating questions (not open text)
-- Users can still modify pre-filled answers before submitting (unless auto-submit is used)
+
+#### Embedding hosted surveys in iframes
+
+You can embed hosted surveys directly on a page using an iframe. This is useful if you're working in a no-code site builder, or otherwise want to display a survey inline without creating an [API survey](/docs/surveys/implementing-custom-surveys).
+
+To create an embedded survey:
+1. Create a hosted survey - select **Hosted Survey** as the [presentation type](#presentation)
+2. Enable **Allow embedding in iframes** in the survey settings
+3. Save and launch your survey
+4. On the overview page, click **Copy embed code** to get the HTML snippet
+5. Paste the code snippet wherever you like - done!
+
+Here's an example with Framer:
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/embedded_surveys_6e058da781.mp4" 
+    alt="How to create an embedded survey in Framer" 
+    classes="rounded"
+    autoPlay={false}
+/>
+
+**Notes:**
+- **Person identification:** If the PostHog SDK is enabled on your site, the default embed code will automatically attach the Person's distinct ID (via `window.posthog.get_distinct_id()`) to all embedded survey responses. Otherwise, the responses will be anonymous.
+- **URL pre-fill:** URL pre-filling is supported with embedded surveys, you'll just need to update your embed code to include the pre-fill query params.
+- **Embed customization:** The default embed code provides automatic height adjustment and minimal styling. For more control, you can create your own iframe using the hosted survey's URL + `?embed=true`. Example:
+
+```
+https://us.posthog.com/external_surveys/my-survey-id/?embed=true
+```
 
 ### Steps
 

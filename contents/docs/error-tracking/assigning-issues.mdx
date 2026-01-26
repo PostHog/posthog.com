@@ -4,8 +4,7 @@ title: Assign issues to teammates
 
 Error tracking enables you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or teammates. This helps your team find relevant issues through **filtering**. You can also set up team-specific **alerting** to notify them when assigned issues are created or reopened.
 
-
-## Assigning issues
+## Assign issues
 
 You can manually assign issues as you triage them in the UI. This can be done both in the issue list and issue detail pages.
 
@@ -50,15 +49,15 @@ Here are some common properties you can filter on:
 
 | Property | Event property | Description |
 | --- | --- | --- |
-| Exception type | `$exception_types` | The type of exception(s) that occurred. |
-| Exception message | `$exception_values` | The message(s) detected on the error. |
-| Exception function | `$exception_functions` | The function(s) where the exception occurred. |
-| Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
-| Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
-| Device type | `$device_type` | The type of device that the error occurred on. |
-| Browser | `$browser` | The browser that the error occurred in. |
-| Current URL | `$current_url` | The URL that the error occurred on. |
-| Feature flag | `$feature_flag` | The feature flag that the error occurred on. |
+| Exception type | `$exception_types` | The type of exception(s) that occurred |
+| Exception message | `$exception_values` | The message(s) detected on the error |
+| Exception function | `$exception_functions` | The function(s) where the exception occurred |
+| Exception source | `$exception_sources` | The source file(s) where the exception occurred |
+| Exception was handled | `$exception_handled` | Whether the exception was handled by the application |
+| Device type | `$device_type` | The type of device that the error occurred on |
+| Browser | `$browser` | The browser that the error occurred in |
+| Current URL | `$current_url` | The URL that the error occurred on |
+| Feature flag | `$feature_flag` | The feature flag that the error occurred on |
 
 You can also set custom properties on the error tracking event to filter on. For example, setting a custom `params_received` property to provide more context or debug information.
 
@@ -69,3 +68,20 @@ Issue assignment filters are evaluated in the order they are configured. They ca
 ### Alerting based on assignment 
 
 A common use case for automatic issue assignment is to alert assignees of new issues. Once the issues are automatically assigned, you can set up alerts to notify the assignee. See the [alerts](/docs/error-tracking/alerts) guide for more information.
+
+## Create external issues
+
+You can also create issues in external tracking systems like GitHub Issues, Linear, or GitLab. 
+
+First, set up an [integration](/docs/error-tracking/integrations) with your tracking system. Then, from an issue's details page, under **External references**, click **Create issue**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_issue_error_light_b89cd91da1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/create_issue_error_dark_7d158087f8.png"
+    alt="Error tracking create issue in external tracking system"
+    classes="rounded"
+/>
+
+The new issue will have a partial stack trace and a link to the issue in PostHog.
+
+> If you use another issue tracking system and would like to request it, [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).

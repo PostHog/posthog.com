@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
@@ -15,6 +16,7 @@ import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
 import ContactSales from 'components/ContactSales'
 import qs from 'qs'
+import usePostHog from '../hooks/usePostHog'
 
 declare global {
     interface Window {
@@ -44,8 +46,8 @@ type WindowElement = React.ReactNode & {
         location: {
             pathname: string
         }
-        pageContext: any
-        data: any
+        pageContext: Record<string, unknown>
+        data: Record<string, unknown>
         params: any
         path: string
         newWindow: boolean
@@ -97,6 +99,7 @@ interface AppContextType {
         chatId,
         date,
         initialQuestion,
+        codeSnippet,
     }: {
         path: string
         context?: ChatContext[]
@@ -104,6 +107,7 @@ interface AppContextType {
         chatId?: string
         date?: string
         initialQuestion?: string
+        codeSnippet?: { code: string; language: string; sourceUrl: string }
     }) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
@@ -126,6 +130,7 @@ interface AppContextType {
     copyDesktopParams: () => void
     desktopCopied: boolean
     shareableDesktopURL: string
+    windowsInView: AppWindow[]
 }
 
 interface AppProviderProps {
@@ -258,7 +263,7 @@ export const Context = createContext<AppContextType>({
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
-        screensaverDisabled: false,
+        screensaverDisabled: true,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -285,9 +290,14 @@ export const Context = createContext<AppContextType>({
     copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
+    windowsInView: [],
 })
 
 export interface AppSetting {
+    experiment?: {
+        variant: 'control' | 'test'
+        flag: string
+    }
     size: {
         min: { width: number; height: number }
         max: { width: number; height: number }
@@ -311,6 +321,10 @@ export interface AppSettings {
 
 const appSettings: AppSettings = {
     '/': {
+        experiment: {
+            variant: 'control',
+            flag: 'homepage-test',
+        },
         size: {
             min: {
                 width: 700,
@@ -319,6 +333,47 @@ const appSettings: AppSettings = {
             max: {
                 width: 850,
                 height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
+                if (typeof window === 'undefined') {
+                    return {
+                        x: 0,
+                        y: 0,
+                    }
+                }
+
+                const { x, y } = getDesktopCenterPosition(size)
+                const keyboardGardenImageWidth = 700
+                const keyboardGardenImageLeft = window.innerWidth - keyboardGardenImageWidth
+                const windowRight = x + size.width
+                if (windowRight > keyboardGardenImageLeft) {
+                    const newX = x - (windowRight - keyboardGardenImageLeft)
+                    return {
+                        x: newX < 115 ? x : newX,
+                        y,
+                    }
+                }
+                return { x, y }
+            },
+        },
+    },
+    'home-test': {
+        experiment: {
+            variant: 'test',
+            flag: 'homepage-test',
+        },
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 900,
             },
             fixed: false,
         },
@@ -480,7 +535,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/customer-data-infrastructure': {
+    '/data-stack': {
         size: {
             min: {
                 width: 750,
@@ -662,6 +717,41 @@ const appSettings: AppSettings = {
                 height: 682,
             },
             fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/changelog-video': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/videos/play': {
+        size: {
+            min: {
+                width: 960,
+                height: 480,
+            },
+            max: {
+                width: 1440,
+                height: 810,
+            },
+            fixed: false,
+            autoHeight: true,
         },
         position: {
             center: true,
@@ -957,6 +1047,87 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/community/achievements': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/fm': {
+        size: {
+            min: {
+                width: 1100,
+                height: 660,
+            },
+            max: {
+                width: 1100,
+                height: 660,
+            },
+            fixed: true,
+        },
+    },
+    'fm/mixtapes': {
+        size: {
+            min: {
+                width: 450,
+                height: 709,
+            },
+            max: {
+                width: 450,
+                height: 709,
+            },
+            fixed: true,
+        },
+    },
+    '/fm/mixtapes/new': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
+    '/fm/mixtapes/edit/:id': {
+        size: {
+            min: {
+                width: 850,
+                height: 597,
+            },
+            max: {
+                width: 850,
+                height: 597,
+            },
+            fixed: true,
+        },
+    },
+    'fm/dance-mode': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+            fixed: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
@@ -981,6 +1152,7 @@ export interface SiteSettings {
 const isLabel = (item: any) => !item?.url && item?.name
 
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
+    const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
     const siteSettings = {
         experience: 'posthog',
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
@@ -990,7 +1162,9 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
         performanceBoost: false,
+        screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
     if (isMobile || compact) {
@@ -1007,13 +1181,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
-    const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
+    const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
+    const [windowsInView, setWindowsInView] = useState<AppWindow[]>([])
     const urlObj = isSSR ? null : new URL(location.href)
     const queryString = isSSR ? '' : urlObj?.search.substring(1)
     const parsed = isSSR ? {} : qs.parse(queryString)
     const paramsWindows = parsed?.windows
     const stateWindows = element.props?.location?.state?.savedWindows
+    const posthog = usePostHog()
 
     const [windows, setWindows] = useState<AppWindow[]>(
         (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
@@ -1137,12 +1313,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 )
                 if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                     if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(nextFocusedWindow.path)
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextFocusedWindow)
                     }
                 } else {
-                    window.history.pushState({}, '', '/')
+                    navigate('/', { state: { skipPageUpdate: true } })
                 }
                 setWindows(windowsFiltered)
             }, 0)
@@ -1281,12 +1457,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getLastClickedElementRect() {
-        const rect = lastClickedElement?.getBoundingClientRect()
-        if (!rect) return undefined
-        return {
-            x: rect.left,
-            y: rect.top,
-        }
+        return lastClickedElementRect || undefined
     }
 
     function getInitialWindows(element: any) {
@@ -1327,6 +1498,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
     }
 
+    function getKey(key: string) {
+        const experiment = appSettings[key]?.experiment
+        if (!experiment?.flag) return key
+        const assignedVariant = posthog?.getFeatureFlag?.(experiment?.flag)
+        if (!assignedVariant) return key
+        const keyToUse = Object.keys(appSettings).find(
+            (key) =>
+                appSettings[key]?.experiment?.flag === experiment?.flag &&
+                appSettings[key]?.experiment?.variant === assignedVariant
+        )
+        return keyToUse || key
+    }
+
     function createNewWindow(
         element: WindowElement,
         windows: AppWindow[],
@@ -1339,13 +1523,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             zIndex?: number
         }
     ) {
-        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(element.key)
+        const keyToUse = getKey(element.key)
+        const size = element.props?.location?.state?.size || element.props.size || getInitialSize(keyToUse)
         const position =
             element.props?.location?.state?.position ||
             element.props.position ||
-            appSettings[element.key]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
-            getPositionDefaults(element.key, size, windows)
-        const settings = appSettings[element.key]
+            appSettings[keyToUse]?.position?.getPositionDefaults?.(size, windows, getDesktopCenterPosition) ||
+            getPositionDefaults(keyToUse, size, windows)
+        const settings = appSettings[keyToUse]
         const lastClickedElementRect = getLastClickedElementRect()
 
         const newWindow: AppWindow = {
@@ -1377,7 +1562,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                   }
                 : undefined,
             minimal: element.props.minimal ?? false,
-            appSettings: appSettings[element.key],
+            appSettings: appSettings[keyToUse],
             location,
         }
 
@@ -1399,10 +1584,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
+            if (existingWindow) {
+                return bringToFront(existingWindow, element.props.location)
+            }
             if (newWindow.key.startsWith('/')) {
                 return replaceFocusedWindow(newWindow)
             } else {
-                return setWindows([...windows, newWindow])
+                return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
             }
         }
 
@@ -1518,6 +1706,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         chatId,
         date,
         initialQuestion,
+        codeSnippet,
     }: {
         path: string
         context?: ChatContext[]
@@ -1525,6 +1714,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         chatId?: string
         date?: string
         initialQuestion?: string
+        codeSnippet?: { code: string; language: string; sourceUrl: string }
     }) => {
         addWindow(
             <ChatProvider
@@ -1538,6 +1728,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 chatId={chatId}
                 date={date}
                 initialQuestion={initialQuestion}
+                codeSnippet={codeSnippet}
             />
         )
     }
@@ -1568,8 +1759,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
-        setSiteSettings(settings)
-        localStorage.setItem('siteSettings', JSON.stringify(settings))
+        try {
+            setSiteSettings(settings)
+            const savedSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+            localStorage.setItem(
+                'siteSettings',
+                JSON.stringify({
+                    ...settings,
+                    experience: compact ? savedSettings.experience || 'posthog' : settings.experience || 'posthog',
+                })
+            )
+        } catch (error) {
+            console.error('Failed to update site settings:', error)
+        }
     }
 
     const animateClosingAllWindows = () => {
@@ -1599,7 +1801,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     useEffect(() => {
-        if ((location.key === 'initial' && location.pathname === '/' && isMobile) || paramsWindows) {
+        if (
+            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
+            paramsWindows ||
+            location.state?.skipPageUpdate
+        ) {
             return
         }
         updatePages(element)
@@ -1626,7 +1832,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             const button = target.closest('button')
             const isClickable = link || button
             if (isClickable) {
-                setLastClickedElement(target)
+                // Capture immediately on click to avoid forced reflow during window creation
+                const rect = target.getBoundingClientRect()
+                setLastClickedElementRect({ x: rect.left, y: rect.top })
             }
         }
         document.addEventListener('click', handleClick)
@@ -1798,7 +2006,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
                     // Navigate to the next window
                     if (nextWindow.path.startsWith('/')) {
-                        navigate(nextWindow.path)
+                        navigate(`${nextWindow.path}${nextWindow.location?.search || ''}`)
                     } else {
                         bringToFront(nextWindow)
                     }
@@ -1841,17 +2049,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     ])
 
     useEffect(() => {
-        const savedSettings = localStorage.getItem('siteSettings')
-        if (savedSettings) {
-            const settings = JSON.parse(savedSettings)
-            if (isMobile && settings.experience === 'posthog') {
-                settings.experience = 'boring'
-            }
-            setSiteSettings({ ...siteSettings, ...settings })
-        }
-    }, [])
-
-    useEffect(() => {
         if (siteSettings.skinMode) {
             document.body.setAttribute('data-skin', siteSettings.skinMode)
         }
@@ -1875,6 +2072,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive ready signal
             window.parent.postMessage(
                 {
                     type: 'docs-ready',
@@ -1912,6 +2110,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive navigation data
             window.parent.postMessage(
                 {
                     type: 'internal-navigation',
@@ -1994,6 +2193,53 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [stateWindows])
 
+    useEffect(() => {
+        try {
+            const lastReset = localStorage.getItem('lastReset')
+            if (!lastReset) {
+                const currentSiteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+                currentSiteSettings.experience = 'posthog'
+                localStorage.setItem('lastReset', new Date().toISOString())
+                localStorage.setItem('siteSettings', JSON.stringify(currentSiteSettings))
+            }
+        } catch (error) {
+            console.error('Failed to reset site settings:', error)
+        }
+    }, [])
+
+    useEffect(() => {
+        const visibleWindows = windows.filter((window) => {
+            if (window.minimized) return false
+
+            const windowsAbove = windows.filter((w) => w !== window && w.zIndex > window.zIndex && !w.minimized)
+
+            let coveredArea = 0
+            const currentArea = window.size.width * window.size.height
+
+            for (const windowAbove of windowsAbove) {
+                const left = Math.max(window.position.x, windowAbove.position.x)
+                const right = Math.min(
+                    window.position.x + window.size.width,
+                    windowAbove.position.x + windowAbove.size.width
+                )
+                const top = Math.max(window.position.y, windowAbove.position.y)
+                const bottom = Math.min(
+                    window.position.y + window.size.height,
+                    windowAbove.position.y + windowAbove.size.height
+                )
+
+                if (left < right && top < bottom) {
+                    coveredArea += (right - left) * (bottom - top)
+                }
+            }
+
+            const coverageRatio = currentArea > 0 ? coveredArea / currentArea : 0
+            return coverageRatio < 0.8
+        })
+
+        setWindowsInView(visibleWindows)
+    }, [windows])
+
     return (
         <Context.Provider
             value={{
@@ -2042,6 +2288,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 copyDesktopParams,
                 desktopCopied,
                 shareableDesktopURL,
+                windowsInView,
             }}
         >
             {children}

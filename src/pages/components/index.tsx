@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
@@ -10,8 +10,9 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
-import { OSInput, OSTextarea, OSSelect } from 'components/OSForm'
+import { OSInput, OSTextarea, OSSelect, Combobox, TeamMemberMultiSelect, SelectedMember } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
+import { Checkbox } from 'components/RadixUI/Checkbox'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -55,6 +56,21 @@ const tableOfContents = [
         depth: 0,
     },
     {
+        value: 'Combobox',
+        url: 'combobox',
+        depth: 1,
+    },
+    {
+        value: 'Checkbox',
+        url: 'checkbox',
+        depth: 1,
+    },
+    {
+        value: 'TeamMemberMultiSelect',
+        url: 'teammembermultiselect',
+        depth: 1,
+    },
+    {
         value: 'Competitor feature matrix',
         url: 'competitor-matrix',
         depth: 0,
@@ -68,6 +84,93 @@ const tableOfContents = [
 
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
+
+    // Fetch real teams and profiles data
+    const data = useStaticQuery(graphql`
+        {
+            allTeams: allSqueakTeam(
+                filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }
+                sort: { fields: name, order: ASC }
+            ) {
+                nodes {
+                    id
+                    name
+                    slug
+                    miniCrest {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                    profiles {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                color
+                                avatar {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            allProfiles: allSqueakProfile(
+                filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            ) {
+                nodes {
+                    id
+                    squeakId
+                }
+            }
+        }
+    `)
+
+    // Build a map of profile id -> squeakId
+    const profileIdToSqueakId = React.useMemo(() => {
+        const map = new Map<string, string>()
+        data.allProfiles.nodes.forEach((profile: any) => {
+            map.set(profile.id, profile.squeakId)
+        })
+        return map
+    }, [data.allProfiles.nodes])
+
+    // Use teams with squeakId added to each profile
+    const teams = React.useMemo(() => {
+        return data.allTeams.nodes.map((team: any) => ({
+            ...team,
+            profiles: {
+                data: team.profiles.data.map((profile: any) => ({
+                    ...profile,
+                    attributes: {
+                        ...profile.attributes,
+                        squeakId: profileIdToSqueakId.get(profile.id) || profile.id,
+                    },
+                })),
+            },
+        }))
+    }, [data.allTeams.nodes, profileIdToSqueakId])
+
+    // State for Combobox examples
+    const [comboboxTags, setComboboxTags] = useState<any[]>([])
+    const [comboboxMembers, setComboboxMembers] = useState<any[]>([])
+    const [comboboxCategories, setComboboxCategories] = useState<any[]>([])
+
+    // State for Checkbox examples
+    const [checkboxBasic, setCheckboxBasic] = useState(false)
+    const [checkboxChecked, setCheckboxChecked] = useState(true)
+    const [checkboxDisabled, setCheckboxDisabled] = useState(false)
+
+    // State for TeamMemberMultiSelect examples
+    const [teamMemberSelection, setTeamMemberSelection] = useState<SelectedMember[]>([])
+    const [teamMemberError, setTeamMemberError] = useState<SelectedMember[]>([])
 
     // Logo rendering logic from customers page
     const renderCustomerLogo = (customer: any) => {
@@ -115,6 +218,12 @@ export default function Components(): JSX.Element {
             >
                 <div className="@container text-primary">
                     <div className="space-y-12">
+                        <section>
+                            <div className="bg-accent p-4 rounded border border-primary mt-4">
+                                <p className="mt-0">This is an internal playground for some React components that are used throughout the site.</p>
+                                <p className="mb-0">If you're looking for components to be used in articles (like blog posts and docs), check out the <Link to="/handbook/engineering/posthog-com/markdown" state={{ newWindow: true }}>MDX components handbook page</Link>.</p>
+                            </div>
+                        </section>
                         <section id="og-templates">
                             <h2>Open graph image templates</h2>
 
@@ -1972,6 +2081,364 @@ export default function Components(): JSX.Element {
                                         size="lg"
                                         placeholder="Select your team..."
                                     />
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Combobox Component Showcase */}
+                        <section id="combobox">
+                            <h3 className="text-xl font-semibold mb-4">
+                                <code>&lt;Combobox /&gt;</code>
+                            </h3>
+
+                            <p className="mb-6 text-secondary">
+                                A multi-select combobox component with search, keyboard navigation, and optional creation of
+                                new options. Perfect for tags, categories, and multi-value selections.
+                            </p>
+
+                            {/* Basic Examples */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Basic example (with creation enabled)</h4>
+                                <div className="space-y-4">
+                                    <Combobox
+                                        label="Tags"
+                                        placeholder="Select or create tags..."
+                                        description="Type to search or create new tags"
+                                        options={[
+                                            { label: 'React', value: 'react' },
+                                            { label: 'TypeScript', value: 'typescript' },
+                                            { label: 'JavaScript', value: 'javascript' },
+                                            { label: 'Python', value: 'python' },
+                                            { label: 'Go', value: 'go' },
+                                        ]}
+                                        value={comboboxTags}
+                                        onChange={setComboboxTags}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Without Creation */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Without creation (predefined options only)</h4>
+                                <div className="space-y-4">
+                                    <Combobox
+                                        label="Team members"
+                                        placeholder="Select team members..."
+                                        description="Choose from existing team members"
+                                        options={[
+                                            { label: 'Alice Johnson', value: 'alice' },
+                                            { label: 'Bob Smith', value: 'bob' },
+                                            { label: 'Charlie Brown', value: 'charlie' },
+                                            { label: 'Diana Prince', value: 'diana' },
+                                        ]}
+                                        value={comboboxMembers}
+                                        onChange={setComboboxMembers}
+                                        allowCreate={false}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Error State */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Error state</h4>
+                                <div className="space-y-4">
+                                    <Combobox
+                                        label="Categories"
+                                        placeholder="Select at least one category..."
+                                        description="At least one category is required"
+                                        options={[
+                                            { label: 'Frontend', value: 'frontend' },
+                                            { label: 'Backend', value: 'backend' },
+                                            { label: 'DevOps', value: 'devops' },
+                                            { label: 'Design', value: 'design' },
+                                        ]}
+                                        value={comboboxCategories}
+                                        onChange={setComboboxCategories}
+                                        touched={true}
+                                        error="Please select at least one category"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Key features</h4>
+                                <div className="space-y-2 text-sm">
+                                    <ul className="list-disc list-inside space-y-1 text-secondary">
+                                        <li>Multi-select with visual chips for selected items</li>
+                                        <li>Search/filter options by typing</li>
+                                        <li>Keyboard navigation (Arrow Up/Down, Enter, Escape, Backspace)</li>
+                                        <li>Optional creation of new options (allowCreate prop)</li>
+                                        <li>Click to select/deselect items</li>
+                                        <li>Remove items by clicking X or using Backspace</li>
+                                        <li>Checkmark indicator for selected items in dropdown</li>
+                                        <li>Auto-scrolling for keyboard navigation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Checkbox Component Showcase */}
+                        <section id="checkbox">
+                            <h3 className="text-xl font-semibold mb-4">
+                                <code>&lt;Checkbox /&gt;</code>
+                            </h3>
+
+                            <p className="mb-6 text-secondary">
+                                A checkbox component built with Radix UI. Supports controlled and uncontrolled states,
+                                disabled state, and custom styling.
+                            </p>
+
+                            {/* Basic Examples */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Basic examples</h4>
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox
+                                            id="checkbox-basic"
+                                            checked={checkboxBasic}
+                                            onCheckedChange={setCheckboxBasic}
+                                        />
+                                        <label htmlFor="checkbox-basic" className="text-sm cursor-pointer">
+                                            Basic checkbox (click to toggle)
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox
+                                            id="checkbox-checked"
+                                            checked={checkboxChecked}
+                                            onCheckedChange={setCheckboxChecked}
+                                        />
+                                        <label htmlFor="checkbox-checked" className="text-sm cursor-pointer">
+                                            Default checked
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox id="checkbox-disabled" disabled checked={checkboxDisabled} />
+                                        <label htmlFor="checkbox-disabled" className="text-sm opacity-50">
+                                            Disabled checkbox
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <Checkbox id="checkbox-disabled-checked" disabled checked={true} />
+                                        <label htmlFor="checkbox-disabled-checked" className="text-sm opacity-50">
+                                            Disabled checked
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* With Different Schemes */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Data scheme variations</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Primary scheme on secondary background */}
+                                    <div
+                                        data-scheme="secondary"
+                                        className="border border-primary rounded p-6 bg-primary space-y-3"
+                                    >
+                                        <h5 className="font-semibold mb-3">Primary scheme</h5>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-primary-1" dataScheme="primary" defaultChecked />
+                                            <label htmlFor="checkbox-primary-1" className="text-sm cursor-pointer">
+                                                Checked
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-primary-2" dataScheme="primary" />
+                                            <label htmlFor="checkbox-primary-2" className="text-sm cursor-pointer">
+                                                Unchecked
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    {/* Secondary scheme on primary background */}
+                                    <div
+                                        data-scheme="primary"
+                                        className="border border-primary rounded p-6 bg-primary space-y-3"
+                                    >
+                                        <h5 className="font-semibold mb-3">Secondary scheme</h5>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-secondary-1" dataScheme="secondary" defaultChecked />
+                                            <label htmlFor="checkbox-secondary-1" className="text-sm cursor-pointer">
+                                                Checked
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="checkbox-secondary-2" dataScheme="secondary" />
+                                            <label htmlFor="checkbox-secondary-2" className="text-sm cursor-pointer">
+                                                Unchecked
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Form Integration */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Form integration</h4>
+                                <div className="border border-primary rounded p-6 bg-accent">
+                                    <fieldset className="space-y-3">
+                                        <legend className="font-semibold mb-2">Select your preferences</legend>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-1" name="newsletter" value="newsletter" />
+                                            <label htmlFor="pref-1" className="text-sm cursor-pointer">
+                                                Subscribe to newsletter
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-2" name="updates" value="updates" defaultChecked />
+                                            <label htmlFor="pref-2" className="text-sm cursor-pointer">
+                                                Receive product updates
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-3" name="marketing" value="marketing" />
+                                            <label htmlFor="pref-3" className="text-sm cursor-pointer">
+                                                Marketing communications
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Checkbox id="pref-4" name="terms" value="terms" required />
+                                            <label htmlFor="pref-4" className="text-sm cursor-pointer">
+                                                I agree to the terms and conditions{' '}
+                                                <span className="text-red dark:text-yellow">*</span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Key features</h4>
+                                <div className="space-y-2 text-sm">
+                                    <ul className="list-disc list-inside space-y-1 text-secondary">
+                                        <li>Built on Radix UI for accessibility</li>
+                                        <li>Controlled and uncontrolled modes</li>
+                                        <li>Disabled state support</li>
+                                        <li>Data scheme variations (primary/secondary)</li>
+                                        <li>Required field support</li>
+                                        <li>Custom styling via className prop</li>
+                                        <li>Keyboard accessible</li>
+                                        <li>ARIA compliant</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* TeamMemberMultiSelect Component Showcase */}
+                        <section id="teammembermultiselect">
+                            <h3 className="text-xl font-semibold mb-4">
+                                <code>&lt;TeamMemberMultiSelect /&gt;</code>
+                            </h3>
+
+                            <p className="mb-6 text-secondary">
+                                A complex multi-select component for choosing team members from small teams. Features
+                                collapsible team sections, search functionality, avatar display, and deduplication across
+                                teams.
+                            </p>
+
+                            {/* Basic Example */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Basic example</h4>
+                                <div className="space-y-4">
+                                    <TeamMemberMultiSelect
+                                        label="Team members"
+                                        description="Select team members for this project"
+                                        placeholder="Search teams and members..."
+                                        teams={teams}
+                                        value={teamMemberSelection}
+                                        onChange={setTeamMemberSelection}
+                                    />
+                                    {teamMemberSelection.length > 0 && (
+                                        <div className="text-sm text-secondary">
+                                            Selected: {teamMemberSelection.map((m) => `${m.firstName} ${m.lastName}`).join(', ')}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Error State */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Error state</h4>
+                                <div className="space-y-4">
+                                    <TeamMemberMultiSelect
+                                        label="Required team members"
+                                        description="At least one team member is required"
+                                        placeholder="Search teams and members..."
+                                        teams={teams}
+                                        value={teamMemberError}
+                                        onChange={setTeamMemberError}
+                                        touched={true}
+                                        error="Please select at least one team member"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Key features</h4>
+                                <div className="space-y-2 text-sm">
+                                    <ul className="list-disc list-inside space-y-1 text-secondary">
+                                        <li>Multi-select with avatar chips for selected members</li>
+                                        <li>"All members" checkbox to select/deselect everyone</li>
+                                        <li>Collapsible team sections using Radix UI Accordion</li>
+                                        <li>Team-level checkboxes to select/deselect all team members</li>
+                                        <li>Search functionality filtering team and member names</li>
+                                        <li>Auto-expand teams with matching members when searching</li>
+                                        <li>Member deduplication by squeakId across multiple teams</li>
+                                        <li>Avatar display with colored backgrounds (like TeamMember component)</li>
+                                        <li>Selection count badges on team headers (e.g., "2/3 selected")</li>
+                                        <li>Tooltip on chips showing team affiliations</li>
+                                        <li>Keyboard navigation (Escape to close, Backspace to remove last)</li>
+                                        <li>Receives data as props for flexibility</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* Data Structure */}
+                            <div className="mb-6">
+                                <h4 className="font-semibold mb-4">Data structure</h4>
+                                <div className="text-sm">
+                                    <p className="mb-2 text-secondary">
+                                        The component receives teams with nested profiles and returns selected members with
+                                        full metadata:
+                                    </p>
+                                    <div className="bg-accent p-4 rounded border border-primary">
+                                        <pre className="text-xs overflow-x-auto">
+                                            {`// Teams prop structure
+teams: Array<{
+  id: string
+  name: string
+  slug: string
+  miniCrest?: { data: { attributes: { url: string } } }
+  profiles: {
+    data: Array<{
+      id: string
+      attributes: {
+        squeakId: string
+        firstName: string
+        lastName: string
+        companyRole?: string
+        avatar?: { data: { attributes: { url: string } } }
+        color?: string
+      }
+    }>
+  }
+}>
+
+// Value/onChange structure
+SelectedMember: {
+  squeakId: string
+  firstName: string
+  lastName: string
+  avatar?: { url: string }
+  color?: string
+  teams: string[]  // Team names
+}`}
+                                        </pre>
+                                    </div>
                                 </div>
                             </div>
                         </section>

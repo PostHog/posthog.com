@@ -1,0 +1,58 @@
+---
+title: iOS product analytics installation
+platformLogo: ios
+---
+
+import { IOSInstallationWrapper } from './_snippets/ios-installation-wrapper.tsx'
+
+PostHog is available through [CocoaPods](http://cocoapods.org) or as a Swift Package Manager dependency.
+
+<IOSInstallationWrapper />
+
+### Swift Package Manager
+
+Add PostHog as a dependency in your Xcode project **Package Dependencies** and select the project target for your app.
+
+For Swift Package Manager projects, add PostHog to your `Package.swift` dependencies:
+
+```swift file=Package.swift
+dependencies: [
+  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "3.0.0")
+],
+```
+
+Then add it as a dependency for your target:
+
+```swift file=Package.swift
+.target(
+    name: "myApp",
+    dependencies: [.product(name: "PostHog", package: "posthog-ios")]),
+```
+
+### SwiftUI configuration
+
+If you're using SwiftUI lifecycle, initialize PostHog in your app's `init()`:
+
+```swift
+import SwiftUI
+import PostHog
+
+@main
+struct YourGreatApp: App {
+    init() {
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+
+        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+        PostHogSDK.shared.setup(config)
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+For more advanced options, see the [configuration page](/docs/libraries/ios/configuration).

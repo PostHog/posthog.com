@@ -57,7 +57,7 @@ PostHog AI is paid platform, with a generous free tier (see [Pricing](/handbook/
 
 PostHog AI is currently in beta as we migrate to the new single-loop architecture. Early results show significant improvements in reliability and capability, but we're still ironing out edge cases before moving to general availability.
 
-The PostHog AI team owns the architecture, performance, and UX/UI. Product teams are responsible for adding their product-specific tools and capabilities, with the PostHog AI team providing reviews and guidance (see [Team Structure](/handbook/engineering/ai/team-structure) for details on collaboration).
+The <SmallTeam slug="posthog-ai" /> owns the architecture, performance, and UX/UI. Product teams are responsible for adding their product-specific tools and capabilities, with the PostHog AI team providing reviews and guidance (see [Team Structure](/handbook/engineering/ai/team-structure) for details on collaboration).
 
 ## Deep research [Under development]
 
@@ -329,7 +329,7 @@ Even inspiration-driven features (not from user data) benefit from Array's workf
 
 ### Current status
 
-Right now we're focused on dogfooding — getting the Array team to build everything using Array itself. This lets us refine product quality and identify friction fast. The PostHog AI team is supporting this by focusing on surfacing useful data that can be converted into Array tasks.
+Right now we're focused on dogfooding — getting the <SmallTeam slug="array" /> to build everything using Array itself. This lets us refine product quality and identify friction fast. The <SmallTeam slug="posthog-ai" /> is supporting this by focusing on surfacing useful data that can be converted into Array tasks.
 
 ### For engineers not using Array
 
@@ -337,7 +337,7 @@ When Array isn't the right fit (maybe you don't trust AI to ship code automatica
 
 ### Ownership
 
-The dedicated Array team owns the product. See [Team Structure](/handbook/engineering/ai/team-structure) for collaboration details.
+The dedicated <SmallTeam slug="array" /> owns the product. See [Team Structure](/handbook/engineering/ai/team-structure) for collaboration details.
 
 ## Wizard: AI-powered onboarding [General availability]
 
@@ -401,7 +401,7 @@ This would turn the Wizard from a one-time setup tool into an ongoing assistant 
 
 ### Current status & ownership
 
-The Wizard is in general availability and actively used during customer onboarding. It's currently owned by the Growth team.
+The Wizard is in general availability and actively used during customer onboarding. It's currently [owned](/handbook/engineering/feature-ownership) by the <SmallTeam slug="Content" />.
 
 The Wizard's future direction — particularly whether it should integrate with Array for continuous instrumentation or remain a standalone onboarding tool — is being evaluated as part of the broader AI platform strategy.
 

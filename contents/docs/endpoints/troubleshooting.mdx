@@ -1,0 +1,51 @@
+---
+title: Endpoints troubleshooting
+sidebar: Docs
+showTitle: true
+---
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+This page covers troubleshooting for Endpoints. For setup, see the [installation guide](/docs/endpoints/start-here).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## Endpoint not found
+
+If you get a 404 error:
+- Verify the endpoint name is correct
+- Check that the endpoint exists in your team **and** is active
+- Ensure you're using the correct team ID
+
+## Authentication errors
+
+If you get authentication errors:
+- Verify your personal API key is correct
+- Check that your API key has the necessary `endpoint:read` scope
+- Ensure you're including the `Authorization` header in your requests
+
+## Slow responses
+
+If endpoints are slow:
+- Look at the [endpoints usage tab](https://app.posthog.com/endpoints/usage) with the filter for the slow endpoint
+- Check if the underlying query is optimized
+- Consider materializing your endpoint
+- Review the query performance in the query log
+
+## Further reading
+
+- [Endpoints overview](/docs/endpoints) - Learn what endpoints are and when to use them
+- [Getting started](/docs/endpoints/start-here) - Create your first endpoint
+- [API reference](/docs/api/endpoints) - Complete API documentation
+- [API queries](/docs/api/queries) - Learn about standard API queries
+- [SQL documentation](/docs/sql) - Write SQL queries for your endpoints
+- [Insights](/docs/product-analytics/insights) - Create insights to use as endpoints
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Endpoints"
+/>

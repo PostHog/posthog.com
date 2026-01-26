@@ -1,0 +1,211 @@
+---
+title: Getting started with endpoints
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconCode, IconGraph, IconRocket } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to create your first endpoint!">
+
+<QuestLogItem 
+  title="Create an insight or SQL query"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+Endpoints can be created from existing insights or SQL queries in PostHog. Start by creating the query that defines the data you want to expose. You can do this directly from the endpoints page by clicking new and choosing the type or directly from a SQL query or an insight.
+
+### Option 1: Create an insight
+
+[Create an insight](/docs/product-analytics/insights) in PostHog that shows the data you want to expose. This could be:
+- A trend showing daily active users
+- A funnel tracking user conversion
+- A retention analysis
+- Any other insight type
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_insight_funnel_example_r_eb45dee714.png"
+  alt="Create an insight in PostHog" 
+  classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/insights">
+  Learn about insights
+</OSButton>
+
+### Option 2: Write a SQL query
+
+Alternatively, you can create a SQL query in the [SQL editor](https://us.posthog.com/sql) that returns the data you need.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_sql_example_ae774fd7c4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/abe_sql_example_ae774fd7c4.png"
+  alt="Write a SQL query" 
+  classes="rounded"
+/>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Create an endpoint"
+  subtitle="Required"
+  icon="IconRocket"
+>
+
+Once you have your insight or SQL query, create an endpoint from it. This will give you a stable API endpoint you can call to retrieve the data.
+
+### Option 1: Create endpoint from insight
+
+1. Open your insight
+2. Click on the info & actions button (the three dots button in the top right)
+3. Click the `Create endpoint` action
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
+  alt="Creating an endpoint from an insight" 
+  classes="rounded"
+/>
+4. Give your endpoint a descriptive name (e.g., `daily_active_users` or `account_users_activity`) and optionally a description
+5. Create the endpoint
+
+
+### Option 2: Create endpoint from a SQL query
+
+1. If you've written a SQL query, you can click on the `Endpoint` tab:
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_sql_6489b78d7c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_sql_6489b78d7c.png"
+  alt="Creating an endpoint from a SQL query" 
+  classes="rounded"
+/>
+2. Give your endpoint a descriptive name (e.g., `daily_active_users` or `account_users_activity`) and optionally a description
+3. Create the endpoint
+
+---
+
+<CalloutBox icon="IconInfo" type="fyi" title="Endpoint names">
+
+Choose descriptive names for your endpoints. They'll appear in the URL:
+- Recommended: `daily_active_users`, `account_users_activity`, `signup_funnel`
+- Avoid: `endpoint1`, `test`, `query`
+
+Endpoint names should be URL-friendly (lowercase, underscores instead of spaces).
+
+</CalloutBox>
+
+<OSButton variant="primary" asLink to="/docs/endpoints/use-cases-and-tips">
+  View endpoint examples
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Call your endpoint"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+Now you can call your endpoint from your application. You'll need:
+
+1. **Your personal API key**: The key needs to have the `endpoint:read` scope assigned. Create one in [your user settings](https://app.posthog.com/settings/user-api-keys#personal-api-keys).
+2. **Your endpoint URL**: You can find it in the [endpoints overview page](https://app.posthog.com/endpoints).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoints_list_ccef1a4478.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoints_list_ccef1a4478.png"
+  alt="endpoints product page" 
+  classes="rounded"
+/>
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+```python
+import requests
+
+url = "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
+headers = {
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+print(data)
+```
+
+```node
+import fetch from "node-fetch";
+
+async function callEndpoint() {
+  const url = "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run";
+  const headers = {
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const response = await fetch(url, { headers });
+  const data = await response.json();
+  console.log(data);
+}
+
+callEndpoint();
+```
+
+</MultiLanguage>
+
+<CalloutBox icon="IconInfo" type="fyi" title="Calling your Endpoint">
+
+Replace the `ph_app_host`, `project_id` and `endpoint_name` placeholders and set your `POSTHOG_PERSONAL_API_KEY` environment variable.
+
+</CalloutBox>
+
+<OSButton variant="primary" asLink to="/docs/api/endpoints">
+  View API reference
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use in your application"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+Endpoints are perfect for embedding analytics in your own application. You can:
+
+- **Show analytics to your customers**: Display dashboards with PostHog data in your app
+- **Build custom reports**: Create reports tailored to your customers' needs
+- **Power internal tools**: Use endpoints to power internal dashboards and tools
+
+### Best practices
+
+- **Materialization**: If you're not seeing the performance you're looking for, try optimizing your SQL query and materializing it
+- **Handle errors gracefully**: Always check response status codes and handle errors appropriately
+- **Respect rate limits**: While endpoints will have higher limits than standard API endpoints, be mindful of your usage
+- **Use meaningful names**: Choose endpoint names that clearly describe what data they return
+
+
+---
+
+That's it! You're ready to start using endpoints.
+
+<OSButton variant="primary" asLink to="/docs/endpoints/use-cases-and-tips">
+  Explore more resources
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
+

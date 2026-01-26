@@ -6,14 +6,14 @@ import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
-import Beta from '../../../../contents/docs/logs/_snippets/beta.mdx'
+import LogsBetaSnippet from '../../../../contents/docs/logs/_snippets/beta.mdx'
 
 export const Content = () => {
     return (
         <>
             <section className="mb-8">
                 <h2 className="mb-4">Overview</h2>
-                <Beta />
+                <LogsBetaSnippet />
                 <div>
                     <p>
                         PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
@@ -76,7 +76,7 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
-                <p>Logs is currently in early beta. While in beta, Logs is free to use.</p>
+                <p>Logs is currently in beta. While in beta, Logs is free to use.</p>
                 <p>
                     After the beta, pricing will be based on GB/ingest. We will offer 30 days standard retention. You'll
                     get 50GB ingest free each month, with discounts as your usage grows.
@@ -85,7 +85,7 @@ export const Content = () => {
 
             <section className="mb-8">
                 <h2 className="mb-4">Next steps</h2>
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-2">
                     <ResourceItem
                         type="Getting started"
                         title="Start here"
@@ -97,6 +97,12 @@ export const Content = () => {
                         title="Installation"
                         description="An overview of installing an OpenTelemetry client"
                         url="/docs/logs/installation"
+                    />
+                    <ResourceItem
+                        type="Using logs"
+                        title="Search logs"
+                        description="Learn how to search logs using multiple tokens, negative filters, and exact phrases"
+                        url="/docs/logs/search"
                     />
                     <ResourceItem
                         type="Troubleshooting"
@@ -124,7 +130,7 @@ const Logs: React.FC = () => {
                         buttonText="Get started!"
                         buttonLink="/docs/logs/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie-logs-icon.png"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_logs_29cd8c8402.png"
                         imageClasses="max-h-48 md:max-h-64"
                     />
                 </section>

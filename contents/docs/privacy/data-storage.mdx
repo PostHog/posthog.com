@@ -6,6 +6,7 @@ showTitle: true
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import DistinctIdReuseWarning from './_snippets/distinct-id-reuse-warning.mdx'
 
 This guide covers the various features available **after data reaches PostHog Cloud servers** to help you achieve your privacy goals. If you have data that cannot reach a third-party server like PostHog, please omit them during [data collection](/docs/privacy/data-collection).
 
@@ -32,7 +33,7 @@ PostHog supports [realtime transformations](/docs/cdp/transformations) of data *
 - [Hashing PII data](https://us.posthog.com/pipeline/new/transformation/hog-template-pii-hashing)
 - [IP anonymization](https://us.posthog.com/pipeline/new/transformation/hog-template-ip-anonymization)
 
-When in doubt, you can always create your own [custom transformation](https://us.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [ Hog](/docs/hog) language to transform data. 
+When in doubt, you can always create your own [custom transformation](https://us.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
 
 <details>
 <summary>See all default event properties collected</summary>
@@ -96,13 +97,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 ### Right to be forgotten
 
-<CalloutBox icon="IconWarning" title="Note" type="caution">
-
-You can reuse `distinct_id` values after deletion using the **Reset deleted person** tool, available from the dropdown at the top-right of the [**persons page**](https://app.posthog.com/persons). This tool allows you to reset a deleted `distinct_id` so that future events associated with it will create a new person profile.  
-
-If you instead want to split a person with multiple IDs (e.g. to isolate bad data tied to a specific `distinct_id`), use the **Split IDs** button on their person profile.
-
-</CalloutBox>
+<DistinctIdReuseWarning />
 
 Persons and events can be deleted using our API endpoints. This action requires a [personal API key](https://us.posthog.com/settings/user-api-keys).
 
@@ -140,22 +135,20 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete the persons and their events, you can use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id)
-
-To do that, iterate through the persons returned in the previous step and use the person's `id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
+To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter:
 
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true" \
-     -H "Authorization: Bearer {YOUR_API_KEY}"
+curl -X DELETE "https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true" \
+     -H "Authorization: Bearer <personal_api_key>"
 ```
 
 ```javascript
-fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true", {
+fetch('https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true', {
   method: 'DELETE',
   headers: {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
+    'Authorization': 'Bearer <personal_api_key>'
   }
 })
 .then(response => response.json())
@@ -166,16 +159,22 @@ fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?d
 ```python
 import requests
 
-url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true"
-headers = {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
-}
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
+person_uuid = "<person_uuid>"
+
+url = "https://app.posthog.com/api/projects/{}/persons/{}?delete_events=true".format(
+    project_id, person_uuid
+)
+headers = {"Authorization": "Bearer {}".format(api_key)}
 
 response = requests.delete(url, headers=headers)
 print(response.json())
 ```
 
 </MultiLanguage>
+
+This request will delete all events of the person(s) that have been captured before the deletion request.
 
 ### Manual data deletion
 

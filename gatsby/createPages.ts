@@ -17,7 +17,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
-    const DashboardTemplate = path.resolve(`src/templates/Template.js`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
+    const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
@@ -50,6 +51,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     slug
                     frontmatter {
                         template
+                    }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
                     }
                 }
             }
@@ -151,6 +157,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
                 nodes {
                     id
+                    fields {
+                        slug
+                    }
+                }
+            }
+            workflowTemplates: allPostHogWorkflowTemplate {
+                nodes {
+                    templateId
                     fields {
                         slug
                     }
@@ -510,6 +524,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     result.data.allMdx.nodes.forEach((node) => {
+        if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -785,6 +800,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: DashboardTemplate,
             context: {
                 id: node.id,
+            },
+        })
+    })
+
+    // Create workflow template pages
+    result.data.workflowTemplates.nodes.forEach((node) => {
+        createPage({
+            path: `/templates/workflow/${node.fields.slug}`,
+            component: WorkflowTemplate,
+            context: {
+                slug: node.fields.slug,
             },
         })
     })

@@ -4,14 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## The TL;DR 
+## The TL;DR
 
 * If you get paged, acknowledge the page and look at the associated metrics - if it looks even slightly bad and not recovering - **CREATE AN INCIDENT**
 * If you notice something broken with the app (not just a bug) - **CREATE AN INCIDENT**
 * If you are not sure - **CREATE AN INCIDENT**
-* _How?_ 
+* _How?_
   * Click the `Declare incident` button on an alert or do `/inc` in any slack channel
-* _What?_ 
+* _What?_
   * Join the incident channel
   * Assign yourself as lead (you can always re-assign later)
   * Share whatever info you have at that time
@@ -23,7 +23,7 @@ showTitle: true
 ![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/incidentio_alert_343ed2062b.png)
 
 
-Incidents are going to happen. If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+Incidents are going to happen. If you'd rather watch a Loom, check out an [incident drill Loom recording](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
 
 
 > **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not.  
@@ -120,15 +120,11 @@ When an incident is declared, the person who raised the incident is the incident
 
 The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
-[You can find all of our production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
+Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/growth/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
 
-### Customer communications
+[You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
-Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it.
-
-When handling a security incident, please align with the incident responder team in the incident slack channel about public communication of
-security issues. E.g. it could not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
-If an early communication is outweighing those kind of downsides or helps our customers if affected, then do it!
+### The PostHog status page
 
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
@@ -136,14 +132,21 @@ When updating the status page, make sure to mark the affected component appropri
 
 <img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f" />
 
-Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Product Marketers will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
+### Getting help from a comms lead
+
+Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/growth/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
+
+The best way to ask for support from a Comms Lead is to post in the incident channel and use the `@all-marketers` group tag. This will alert the all relevant marketing teams. 
+
+When handling a security incident, please align with the incident responder team in the incident Slack channel about public communication of security issues. For example, it may not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are already investigating. This could it make harder for us to stop this attack for good.
 
 #### When a customer is causing an incident
 
 In the case that we need to update a _specific_ customer, such as when an individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 
+- Look up the customer's org in Vitally to see if the org has an Account Exec assigned (`PostHog Default Dashboard` / righthand column, scroll down to `Key Roles`.) If so, let the AE know about the situation early.
 - Ensure you are always contacting the admins of the impacted organization
-- Communication is best done through Zendesk. The Support team can create tickets and handle this for you. 
+- Communication is best done through Zendesk. It's usually best for the customer's assigned person (check Vitally), or the Support team, to create tickets and handle the communication for you, but don't wait if it's really urgent. 
 - Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
 - If action is needed, it's better to take that action and inform the user than to ask the user to do it.
 - If you're not able to take the required action, give the user deadlines for the changes they need to do and explain what will happen if they don't meet the deadline.
@@ -163,7 +166,7 @@ Once the org has had their full access restored, repeat the steps above, but thi
 
 ## When does an incident end?
 
-When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
+When we've identified the root cause, implemented a fix, and confirmed all customer-facing services have returned to normal. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
 
 ## What happens after an incident?
 

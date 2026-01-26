@@ -20,6 +20,8 @@ export const FunnelBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/
 export const FunnelBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_dark_c6a7c3e830.png"
 export const TimeSeriesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_light_137450ab36.png"
 export const TimeSeriesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_dark_4cc2e5b46c.png"
+export const ClickIntervalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_51_27_cfce49599a.gif"
+export const ClickIntervalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_53_24_df61be48b8.gif"
 
 After your experiment runs and collects data, you'll want to analyze the results to determine if your changes had a statistically significant impact. This guide shows you how to understand and interpret your experiment results in PostHog.
 
@@ -94,14 +96,25 @@ Click on any variant in the delta chart to access detailed results. This opens a
 
 Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
 
-### Time series analysis (beta)
+### Time series analysis
 
-The time series chart shows how your experiment results change over time, helping you see if your results are stable or still changing:
+The time series chart shows how your experiment results change over time, helping you see if your results are stable or still changing.
+
+To view the time series chart, click on any confidence interval bar in the delta chart:
 
 <ProductScreenshot
-    imageLight={TimeSeriesLight} 
+    imageLight={ClickIntervalLight}
+    imageDark={ClickIntervalDark}
+    alt="Click on confidence interval bar to show time series chart"
+    classes="rounded"
+/>
+
+This opens the time series view:
+
+<ProductScreenshot
+    imageLight={TimeSeriesLight}
     imageDark={TimeSeriesDark}
-    alt="Time series chart showing experiment results over time with confidence intervals" 
+    alt="Time series chart showing experiment results over time with confidence intervals"
     classes="rounded"
 />
 

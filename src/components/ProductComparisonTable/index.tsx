@@ -13,10 +13,12 @@ import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
+import { cloudflare } from '../../hooks/competitorData/cloudflare'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
@@ -43,16 +45,20 @@ import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
+import { microsoft_clarity } from '../../hooks/competitorData/microsoft_clarity'
 import { mouseflow } from '../../hooks/competitorData/mouseflow'
 import { mparticle } from '../../hooks/competitorData/mparticle'
 import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
+import { openreplay } from '../../hooks/competitorData/openreplay'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
+import { replay_io } from '../../hooks/competitorData/replay_io'
 import { rollbar } from '../../hooks/competitorData/rollbar'
 import { rudderstack } from '../../hooks/competitorData/rudderstack'
 import { segment } from '../../hooks/competitorData/segment'
@@ -73,6 +79,10 @@ import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
+import { zapier } from '../../hooks/competitorData/zapier'
+import { make } from '../../hooks/competitorData/make'
+import { customer_io } from '../../hooks/competitorData/customer_io'
+import { brevo } from '../../hooks/competitorData/brevo'
 
 // Feature definition imports
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
@@ -91,6 +101,7 @@ import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
+import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -143,6 +154,7 @@ export default function ProductComparisonTable({
         session_replay: sessionReplayFeatures,
         surveys: surveysFeatures,
         web_analytics: webAnalyticsFeatures,
+        workflows: workflowsFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -580,10 +592,12 @@ export default function ProductComparisonTable({
         appcues,
         appsignal,
         baremetrics,
+        braintrust,
         bugsnag,
         chartmogul,
         chameleon,
         clarity,
+        cloudflare,
         contentsquare,
         crazy_egg,
         datadog,
@@ -610,16 +624,20 @@ export default function ProductComparisonTable({
         lucky_orange,
         matomo,
         mixpanel,
+        microsoft_clarity,
         mouseflow,
         mparticle,
         mutiny,
         newrelic,
+        openreplay,
         optimizely,
         pendo,
         piwik_pro,
         plausible,
         posthog,
+        quantum_metric,
         raygun,
+        replay_io,
         rollbar,
         rudderstack,
         segment,
@@ -640,6 +658,10 @@ export default function ProductComparisonTable({
         vwo,
         walkme,
         whatfix,
+        zapier,
+        make,
+        customer_io,
+        brevo,
     }
 
     // Helper to get feature value from competitor data

@@ -86,6 +86,11 @@ The below table summarizes the discount levels contained in points 2-4:
 </table>
 
 Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. Pre-paid discounts must be paid up-front. We do not offer monthly or quarterly payment plans for discounted contracts. If a customer prefers quarterly or monthly payments, we can offer them a lower credit value, which will reduce their discount.
+
+### Why we require up-front payment for credit purchases
+
+We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
+
 ### Credit for case studies
 
 We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them. We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
@@ -139,6 +144,18 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 
 All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
 
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
+
+### Margin negative deals
+
+In exceptional circumstances, we may explore providing additional discounts which eat into our operating margin for the following cases:
+
+1. They are a strategic logo we'd like to land as a brand-new customer.
+2. We are taking their business from a competitor.
+3. We are preventing them from churning to a competitor.
+
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with Charles.  If he's happy that it's the right thing to do, then you also need to check with Raquel from a product support perspective.
+
 ## Additional credit purchase
 
 As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
@@ -184,11 +201,19 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 ## Payment method
 
-Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
+For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
 
-If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
+For customers purchasing credits upfront, bank transfer is the default and highly preferred payment method for the following reasons:
 
-For customers in an annual contract but paying quarterly we require them to pay via credit card - ACH or bank transfer are not accepted.
+- For large payment amounts, the fees we incur are higher for credit card payments.
+- Our Sales Ops automations are set up to handle bank transfer payments.
+
+You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer.  If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
+
+- We have a card on file which we can immediately charge for the full invoice amount.
+- They pay immediately on the contract start date (i.e. no Net 30)
+
+If your customer must pay via credit card, you absolutely _need_ to let Mine (Simon as backup) know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
 
 > We absolutely do not allow payment by check.
 
@@ -247,11 +272,13 @@ When a customer chooses not to renew a prepaid credit contract we automatically 
 
 ### When we vary terms
 
-If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these suggested changes (also known as "redlines").
+If a customer wants to vary either our standard template DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these suggested changes (also known as "redlines").
 
 At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big changes (e.g. changing significant provisions, adding Service Level Agreements, etc.). A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect) with PostHog. A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation.
 
 We also sometimes receive unsolicited requests to vary our terms. In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity where the potential annual revenue is understood.
+
+> See the guidance below if the customer asks to use their own contract instead of ours
 
 ### How customers should suggest requested terms
 

@@ -148,5 +148,5 @@ For details on upcoming work, see [Future directions](/handbook/engineering/ai/i
 
 For questions about working with the AI platform:
 - **Slack**: #team-posthog-ai
-- **Team page**: [PostHog AI team](/teams/posthog-ai)
+- **Team page**: <SmallTeam slug="posthog-ai" />
 - **Objectives**: [Current goals and initiatives](/teams/posthog-ai/objectives)

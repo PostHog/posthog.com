@@ -4,8 +4,7 @@ sidebarTitle: Android
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-android'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg
+platformLogo: android
 features:
   eventCapture: true
   userIdentification: true
@@ -240,7 +239,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:**  This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 -   Associate the events for this session with a group
 
@@ -337,9 +336,10 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Preload feature flags automatically. (on/true by default)
     preloadFeatureFlags = true
 
-    // Environment tags that constrain which feature flags are evaluated. (not set by default)
-    // When set, only flags with matching evaluation tags (or no evaluation tags) will be returned.
-    evaluationEnvironments = listOf("production", "android", "mobile")
+    // Evaluation context tags that constrain which feature flags are evaluated. (not set by default)
+    // When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned.
+    // Available in version 3.25.0+. The legacy parameter `evaluationEnvironments` (version 3.24.0+) is also supported.
+    evaluationContexts = listOf("production", "android", "mobile")
 
     // Callback that is called when feature flags are loaded (not set by default)
     onFeatureFlags = { ... }

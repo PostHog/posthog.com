@@ -16,6 +16,7 @@ import ReaderView from 'components/ReaderView'
 
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
+import { scrollToElement } from 'components/ScrollToElement'
 
 export default function Pricing() {
     const [activePlan, setActivePlan] = useState('free')
@@ -144,6 +145,10 @@ export default function Pricing() {
         const tab = params.get('tab')
         if (tab) {
             setDefaultTab(tab)
+        }
+        const calculator = params.get('calculator')
+        if (calculator) {
+            scrollToElement('calculator')
         }
     }, [search])
 

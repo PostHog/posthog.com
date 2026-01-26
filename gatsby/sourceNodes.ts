@@ -10,6 +10,109 @@ import type {
 } from '../src/templates/merch/types'
 import dayjs from 'dayjs'
 
+const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
+
+type ChangelogPlaylistVideo = {
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
+const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]> => {
+    const apiKey = process.env.YOUTUBE_API_KEY_CHANGELOG
+    if (!apiKey) {
+        console.warn('YOUTUBE_API_KEY_CHANGELOG not set. Skipping changelog playlist ingestion.')
+        return []
+    }
+
+    const playlistId = process.env.CHANGELOG_YOUTUBE_PLAYLIST_ID || DEFAULT_CHANGELOG_PLAYLIST_ID
+    if (!playlistId) {
+        console.warn('No playlist ID provided for changelog videos. Set CHANGELOG_YOUTUBE_PLAYLIST_ID.')
+        return []
+    }
+
+    try {
+        const playlistItems: Array<{ videoId: string; position: number }> = []
+        let nextPageToken: string | undefined
+
+        do {
+            const params = new URLSearchParams({
+                part: 'snippet,contentDetails',
+                playlistId,
+                maxResults: '50',
+                key: apiKey,
+            })
+            if (nextPageToken) {
+                params.set('pageToken', nextPageToken)
+            }
+
+            const response = await fetch(
+                `https://www.googleapis.com/youtube/v3/playlistItems?${params.toString()}`
+            ).then((res) => res.json())
+
+            if (!response.items) {
+                console.warn('Unexpected response while fetching changelog playlist items', response)
+                break
+            }
+
+            response.items.forEach((item: any) => {
+                const videoId = item?.contentDetails?.videoId || item?.snippet?.resourceId?.videoId
+                if (videoId) {
+                    playlistItems.push({
+                        videoId,
+                        position: typeof item?.snippet?.position === 'number' ? item.snippet.position : 0,
+                    })
+                }
+            })
+
+            nextPageToken = response.nextPageToken
+        } while (nextPageToken)
+
+        if (playlistItems.length === 0) {
+            return []
+        }
+
+        const videoDetailsMap: Record<string, ChangelogPlaylistVideo> = {}
+        const chunkSize = 50
+        for (let i = 0; i < playlistItems.length; i += chunkSize) {
+            const chunk = playlistItems.slice(i, i + chunkSize)
+            const idsParam = chunk.map((item) => item.videoId).join(',')
+            const params = new URLSearchParams({
+                part: 'snippet',
+                id: idsParam,
+                key: apiKey,
+                maxResults: '50',
+            })
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?${params.toString()}`).then(
+                (res) => res.json()
+            )
+
+            if (!response.items) {
+                continue
+            }
+
+            response.items.forEach((item: any) => {
+                const videoId = item?.id
+                if (!videoId) return
+                const snippet = item?.snippet
+                if (!snippet?.publishedAt) return
+                videoDetailsMap[videoId] = {
+                    videoId,
+                    publishedAt: snippet.publishedAt,
+                    title: snippet.title,
+                }
+            })
+        }
+
+        return Object.values(videoDetailsMap).sort(
+            (a, b) => dayjs(b.publishedAt).valueOf() - dayjs(a.publishedAt).valueOf()
+        )
+    } catch (error) {
+        console.warn('Failed to fetch changelog playlist videos', error)
+        return []
+    }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
@@ -130,6 +233,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             },
                         },
                     },
+                    githubUrls: true,
+                    githubPRMetadata: true,
                 },
             },
             {
@@ -181,6 +286,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     await createRoadmapItems()
+
+    const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
+    changelogPlaylistVideos.forEach((video) => {
+        const nodeData = {
+            videoId: video.videoId,
+            publishedAt: video.publishedAt,
+            title: video.title,
+        }
+        const node = {
+            id: createNodeId(`changelog-video-${video.videoId}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `ChangelogVideo`,
+                contentDigest: createContentDigest(nodeData),
+            },
+            ...nodeData,
+        }
+        createNode(node)
+    })
 
     const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
         (res) => res.json()
@@ -807,6 +932,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     await sourceGithubNodes()
 
+    const fetchWorkflowTemplates = async () => {
+        const data = await fetch('https://us.posthog.com/api/public_hog_flow_templates?limit=350').then((res) =>
+            res.json()
+        )
+        data.results.forEach((template) => {
+            const node = {
+                id: createNodeId(`posthog-workflow-template-${template.id}`),
+                internal: {
+                    type: 'PostHogWorkflowTemplate',
+                    contentDigest: createContentDigest({ template }),
+                },
+                templateId: template.id,
+                ...template,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchWorkflowTemplates()
+
     const fetchReferences = async (page = 1) => {
         const referenceQuery = qs.stringify(
             {
@@ -875,4 +1020,67 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
     }
     await fetchEvents()
+
+    const fetchAchievements = async () => {
+        const query = qs.stringify({
+            populate: ['icon', 'achievement_group.achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
+            res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-${achievement.id}`),
+                internal: {
+                    type: 'Achievement',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchAchievementGroups = async () => {
+        const query = qs.stringify({
+            populate: ['achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
+            (res) => res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-group-${achievement.id}`),
+                internal: {
+                    type: 'AchievementGroup',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchRewards = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/rewards`).then((res) =>
+            res.json()
+        )
+        data.forEach((reward) => {
+            const node = {
+                id: createNodeId(`reward-${reward.handle}`),
+                internal: {
+                    type: 'Reward',
+                    contentDigest: createContentDigest(reward),
+                },
+                ...reward,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchAchievements()
+    await fetchAchievementGroups()
+    await fetchRewards()
 }

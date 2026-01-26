@@ -4,8 +4,7 @@ sidebarTitle: React
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg
+platformLogo: react
 features:
   eventCapture: true
   userIdentification: true
@@ -18,13 +17,37 @@ features:
   errorTracking: true
 ---
 
-import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+import List from 'components/List'
+import { getLogo } from 'constants/logos'
 
 PostHog makes it easy to get data about traffic and usage of your React app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide walks you through an example integration of PostHog using React and the [posthog-js library](/docs/integrate/client/js).
+This guide walks you through an example integration of PostHog using vanilla React and the [posthog-js library](/docs/integrate/client/js).
+
+## Using a framework?
+
+Using React with a framework like Next.js, Remix, or React Router requires additional setup. Follow their respective guides instead:
+
+<List
+    className="grid sm:grid-cols-2 gap-1 my-4"
+    items={[
+        {
+            label: "Next.js",
+            url: "/docs/libraries/next-js",
+            image: getLogo('nextjs')
+        },
+        {
+            label: "Remix",
+            url: "/docs/libraries/remix",
+            image: getLogo('remix')
+        },
+        {
+            label: "React Router",
+            url: "/docs/libraries/react-router",
+            image: getLogo('reactRouter')
+        }
+    ]}
+/>
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
 
@@ -36,11 +59,6 @@ import ReactInstall from '../../integrate/_snippets/install-react.mdx'
 
 <ReactInstall />
 
-<DetailSetUpReverseProxy />
-
-<DetailGroupProductsInOneProject />
-
-<DetailPostHogIPs />
 
 ## Usage
 
@@ -70,13 +88,17 @@ root.render(
 );
 ```
 
-### Using posthog-js functions
+### Calling PostHog methods
 
 By default, the `posthog-js` library automatically captures pageviews, element clicks, inputs, and more. Autocapture can be tuned in with [the configuration options](/docs/product-analytics/autocapture#configuring-autocapture).
 
-If you want to use the library to identify users, capture events, use feature flags, or use other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
+To call PostHog methods for actions like identifying users, capturing events, using feature flags, or using other features, you can access the initialized `posthog-js` library using the `usePostHog` hook.
 
-**Do not directly import `posthog` apart from installation** as shown above. This will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and hook.
+<CalloutBox icon="IconWarning" title="Don't directly import PostHog" type="fyi">
+
+  Always use the `usePostHog` hook to access the PostHog library. Directly importing `posthog` will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and hook.
+
+</CalloutBox>
 
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/libraries/js).
 
@@ -86,6 +108,7 @@ import { useEffect } from 'react'
 import { useUser, useLogin } from '../lib/user'
 
 function App() {
+    // `usePostHog`, like other React contexts, must be called at the top level of your component
     const posthog = usePostHog()
     const login = useLogin()
     const user = useUser()
@@ -121,7 +144,7 @@ function App() {
 export default App
 ```
 
-#### TypeError: Cannot read properties of undefined
+### TypeError: Cannot read properties of undefined
 
 If you see the error `TypeError: Cannot read properties of undefined (reading '...')` this is likely because you tried to call a posthog function when posthog was not initialized (such as during the initial render). On purpose, we still render the children even if PostHog is not initialized so that your app still loads even if PostHog can't load.
 
@@ -145,10 +168,10 @@ The `PostHogCaptureOnViewed` component enables you to automatically capture even
 
 The component wraps your content and sends a `$element_viewed` event to PostHog when the wrapped element becomes visible in the viewport. It only fires once per component instance.
 
-#### Basic usage
+**Basic usage:**
 
 ```react
-import { PostHogCaptureOnViewed } from 'posthog-js/react'
+import { PostHogCaptureOnViewed } from '@posthog/react'
 
 function App() {
     return (
@@ -159,7 +182,7 @@ function App() {
 }
 ```
 
-#### With custom properties
+**With custom properties:**
 
 You can include additional properties with the event to provide more context:
 
@@ -176,7 +199,7 @@ You can include additional properties with the event to provide more context:
 </PostHogCaptureOnViewed>
 ```
 
-#### Tracking multiple children
+**Tracking multiple children:**
 
 Use `trackAllChildren` to track each child element separately. This is useful for galleries or lists where you want to know which specific items were viewed:
 
@@ -194,7 +217,7 @@ Use `trackAllChildren` to track each child element separately. This is useful fo
 
 When `trackAllChildren` is enabled, each child element sends its own event with a `child_index` property indicating its position.
 
-#### Custom intersection observer options
+**Custom intersection observer options:**
 
 You can customize when elements are considered "viewed" by passing options to the `IntersectionObserver`:
 
@@ -230,7 +253,7 @@ import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro
 
 For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
-### Experiments (A/B tests)
+## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
@@ -264,3 +287,4 @@ function App() {
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+

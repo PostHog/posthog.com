@@ -1,28 +1,30 @@
-## Q4 objectives
+## Q1 2026 objectives
 
-### Implement the LLM Analytics Pipeline
+### Fence off non-ingestion services from persons DB
 
-- Build a new endpoint to handle LLM analytics events with large contexts
-- Include support for multi-modal models
+In order to have a single point of reference for all persons DB access so that any future changes to the underlying storage are seamless to the users.
 
-### Define the event ingestion boundaries and enforce them
+- Persons Read API for all non-ingestion services
+- Partial Persons Write API for non-ingestion services
 
-- Make it clear which use cases and traffic patterns are supported
-- Enforce boundaries to improve the resilience of the ingestion pipeline
+### Introduce rate / usage limits
 
-### Prototype Persons API
+So that certain patterns of system abuse are handled without manual intervention from the team.
 
-- Encapsulate database access to improve maintainability, scalability and performance
-- Enable more frequent and granular updates of person profiles
+- Rate Limiter API integrated into capture
+- Fair rate limits that don't upset customers
+- Public documentation on the rate limits
 
-### Prototype multi-threaded ingestion
+### Move Error Tracking ingestion to ingestion platform
 
-- Increase the maximum per-partition event throughput of the ingestion pipeline in Node.js
-- Prepare for a possible future rewrite
+To simplify the ingestion codebase specific to Error Tracking, allow the team to reuse generic ingestion platform tooling, and reduce their maintenance burden.
 
-### Do at least one thing that improves data quality for customers
+- Production-ready ingestion pipeline for Error Tracking that uses Cymbal
 
-Potential options:
-- Schema management
-- Authorized events
-- Better timestamp handling
+### Implement core features for the ingestion platform
+
+- Ingestion Pipelines Framework ready for broader rollout (docs, tutorials, tooling, etc.)
+- Better infrastructure for spinning up new ingestion pipelines (charts, automation, observability)
+- Tools for managing dead letter queues
+- Event restrictions available to all ingestion pipelines
+- Ability to create temporary ingestion pipelines for testing

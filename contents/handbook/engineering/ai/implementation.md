@@ -68,7 +68,7 @@ Deep research is being refined with better research strategies, improved denoisi
 For questions about working with PostHog AI, ask in the #team-posthog-ai Slack channel.
 
 Additional resources:
-- [PostHog AI team page](/teams/posthog-ai)
+- <SmallTeam slug="posthog-ai">PostHog AI team page</SmallTeam>
 - [PostHog AI user documentation](/docs/posthog-ai)
 - [PostHog AI objectives](/teams/posthog-ai/objectives)
 - [AI platform overview](/handbook/engineering/ai/ai-platform)

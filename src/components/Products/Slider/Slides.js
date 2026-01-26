@@ -66,6 +66,7 @@ const Subfeature = ({ name, description }) => {
     return (
         <li>
             <h4 className="mb-1 text-lg leading-tight">{name}</h4>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input */}
             <p className="text-sm mb-0" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )

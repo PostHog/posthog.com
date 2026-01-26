@@ -15,7 +15,7 @@ template: team
 -   Enterprise features
     -   SAML and SSO
     -   Organization domains
-    -   SCIM (coming soon)
+    -   SCIM
 -   Platform features
     -   Organization settings
     -   Access control and RBAC
@@ -25,8 +25,57 @@ template: team
     -   Activity logs (audit logs)
     -   Approvals (coming soon)
     -   Emails / notifications
--   Maybe more?!?
 
-## Slack channel
+---
 
-[#team-platform-features](https://posthog.slack.com/messages/team-platform-features)
+## Who are we building for?
+
+We've built 3 [platform packages](/platform-packages) for companies at different stages of growth.
+
+
+### Boost
+
+**Best fit:** Early-stage startups gaining traction that need access control, white labeling, or HIPAA compliance without enterprise complexity.
+
+**Persona:** Technical founders
+
+**Reasons to upgrade to Boost:**
+
+- The team started running more experiments and feature flags in parallel, need to protect them from accidental changes -> access control
+- Started using embedded surveys and want to remove PostHog branding -> white labeling
+- A healthtech company needs to be HIPAA compliant -> BAA agreement
+- User data protection becomes critical -> 2FA and SSO enforcement
+- An agency or embedded analytics startup needs to keep customer data in separate projects -> unlimited projects
+
+
+### Scale
+
+**Best fit:** Growing companies with multiple teams that need role-based access, audit trails for compliance, and centralized authentication.
+
+**Persona:** Managers and team leads
+
+**Reasons to upgrade to Scale:**
+
+- The company has decided to get SOC 2 compliance -> activity logs as audit trails
+- A startup has grown from a single team to several teams using PostHog, need visibility into who changed what and when -> activity logs and approvals
+- The company started using identity provider for managing access -> SAML auth
+
+
+### Enterprise
+
+**Best fit:** Large organizations that need automated identity management, SCIM provisioning, and full audit trails.
+
+**Persona:** IT security officers and IT admins
+
+**Reasons to upgrade to Enterprise:**
+
+- The org has outgrown manual user management (hundreds of users) and needs to automate admin processes -> role-based access control, SCIM provisioning
+- Security team needs to detect and respond to any issues -> audit logs with alerts
+
+---
+
+## Who we're NOT building for
+
+- **Solo builders and hobbyists** using PostHog for personal projects, don't need collaboration features, don't have budgets for addon packages
+- **Small teams (<10 people) at early-stage startups** without compliance requirements, happy managing users manually, and prefer everyone-has-full-access setup
+- **Traditional enterprises** requiring dedicated one-off feature development, or on-premise deployments

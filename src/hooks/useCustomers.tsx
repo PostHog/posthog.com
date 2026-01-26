@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CroissantLogo from '../images/customers/croissant-light.png'
+import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
@@ -30,6 +32,8 @@ import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
+import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
+import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
@@ -47,6 +51,7 @@ import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
 import useProducts from './useProducts'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import { posthog_ai } from './productData/posthog_ai'
 
 export interface Customer {
     slug: string
@@ -159,6 +164,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 9,
         featured: true,
     },
+    assemblyai: {
+        name: 'AssemblyAI',
+        toolsUsed: ['experiments', 'product_analytics'],
+        industries: ['API Platform'],
+        users: ['Leadership', 'Marketing', 'Engineering'],
+        notes: 'Speech-to-text and audio intelligence API',
+        logo: AssemblyAILogo,
+        featured: false,
+        height: 10,
+    },
     brainboard: {
         name: 'Brainboard',
         toolsUsed: ['experiments', 'product_analytics'],
@@ -212,6 +227,26 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 8,
         featured: true,
     },
+    exa: {
+        name: 'Exa',
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
+        industries: ['AI', 'Search'],
+        users: ['Engineering', 'Product'],
+        notes: 'Search API for AI products',
+        logo: ExaLogo,
+        height: 10,
+        featured: true,
+    },
+    gankster: {
+        name: 'Gankster',
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
+        industries: ['Gaming'],
+        users: ['Engineering', 'Growth', 'Marketing'],
+        notes: 'Gaming platform',
+        featured: false,
+        logo: GanksterLogo,
+        height: 10,
+    },
     'great-expectations': {
         name: 'Great Expectations',
         toolsUsed: ['product_analytics'],
@@ -222,6 +257,65 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // logo: GreatExpectationsLogo, // TODO: Create SVG component
         legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png',
         legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png',
+    },
+    grantable: {
+        name: 'Grantable',
+        toolsUsed: [
+            'workflows',
+            'feature_flags',
+            'session_replay',
+            'experiments',
+            'product_analytics',
+            'surveys',
+            'error_tracking',
+            'llm_analytics',
+            'data_warehouse',
+        ],
+        industries: ['SaaS'],
+        users: ['Data', 'Product', 'Marketing'],
+        notes: 'AI compliance and grant writing',
+        featured: false,
+        logo: GrantableLogo,
+        height: 6,
+        quotes: {
+            evan_ralliss: {
+                name: 'Evan Ralliss',
+                role: 'Head of Product & Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/evan_rallis_08cffd54f7.jpeg',
+                },
+                products: {
+                    workflows:
+                        'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
+                },
+            },
+        },
+    },
+    croissant: {
+        name: 'Croissant',
+        toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
+        industries: ['SaaS'],
+        users: ['Growth', 'Product', 'Marketing'],
+        notes: 'Workspace finder',
+        featured: false,
+        logo: {
+            light: CroissantLogo,
+            dark: CroissantLogoDark,
+        },
+        height: 6,
+        quotes: {
+            jorge_lopez: {
+                name: 'Jorge López',
+                role: 'Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
+                },
+                products: {
+                    workflows:
+                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
+                },
+            },
+        },
     },
     groove: {
         name: 'Groove',
@@ -285,6 +379,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         logo: LovableLogo,
         height: 8,
+        quotes: {
+            viktor_eriksson: {
+                name: 'Viktor Eriksson',
+                role: 'Software Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
+                },
+                quotes: [
+                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+                ],
+            },
+        },
     },
     juicebox: {
         name: 'Juicebox',
@@ -419,6 +525,28 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    qred: {
+        name: 'Qred',
+        toolsUsed: ['feature_flags', 'session_replay', 'experiments', 'product_analytics', 'cdp'],
+        industries: ['Fintech'],
+        users: ['Engineering', 'Product', 'Marketing'],
+        notes: 'Business loans and financial services',
+        featured: false,
+        logo: QredLogo,
+        height: 8,
+        quotes: {
+            lezgin_zilan: {
+                name: 'Lezgin Zilan',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2025_11_10_T20_01_06_489_Z_deeb25027d.png',
+                },
+                quotes: [
+                    'One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.',
+                ],
+            },
+        },
+    },
     raycast: {
         name: 'Raycast',
         toolsUsed: [], // TODO: Add toolsUsed
@@ -428,6 +556,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: RaycastLogo,
         featured: true,
         height: 12,
+    },
+    rayfit: {
+        name: 'RayFit',
+        toolsUsed: ['product_analytics', 'experiments', 'feature_flags', 'data_warehouse', 'posthog_ai'],
+        industries: ['Fitness'],
+        users: ['Product', 'Engineering'],
+        notes: 'AI personal training app',
+        quotes: {
+            alan_yang: {
+                name: 'Alan Yang',
+                role: 'Full Stack Engineering Leader',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alan_yang_1611287c98.png',
+                },
+                products: {
+                    posthog_ai:
+                        "We're evolving our data model and events all the time, so having an easy way to explore what's there is incredibly valuable. PostHog AI helps our product engineers build dashboards without needing to understand PostHog in depth — and it gives them real ownership over feature performance.",
+                },
+            },
+        },
+        logo: {
+            light: RayfitLogoLight,
+            dark: RayfitLogoDark,
+        },
+        featured: false,
+        height: 6,
     },
     rebtel: {
         name: 'Rebtel',
@@ -573,16 +727,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 10,
         featured: true,
     },
-    exa: {
-        name: 'Exa',
-        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
-        industries: ['AI', 'Search'],
-        users: ['Engineering', 'Product'],
-        notes: 'Search API for AI products',
-        logo: ExaLogo,
-        height: 10,
-        featured: true,
-    },
     zealot: {
         name: 'Zealot',
         toolsUsed: ['llm_analytics', 'session_replay', 'error_tracking', 'product_analytics'],
@@ -613,16 +757,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         },
     },
     // New customers from MDX files
-    assemblyai: {
-        name: 'AssemblyAI',
-        toolsUsed: ['experiments', 'product_analytics'],
-        industries: ['API Platform'],
-        users: ['Leadership', 'Marketing', 'Engineering'],
-        notes: 'Speech-to-text and audio intelligence API',
-        logo: AssemblyAILogo,
-        featured: false,
-        height: 10,
-    },
     // rebtel: { // Will be added via PR
     //     name: 'Rebtel',
     //     toolsUsed: ['product_analytics', 'experiments'],
@@ -632,46 +766,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     //     featured: false,
     //     // logo: RebtelLogo, // Logo not available
     // },
-    gankster: {
-        name: 'Gankster',
-        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
-        industries: ['Gaming'],
-        users: ['Engineering', 'Growth', 'Marketing'],
-        notes: 'Gaming platform',
-        featured: false,
-        logo: GanksterLogo,
-        height: 10,
-    },
-    qred: {
-        name: 'Qred',
-        toolsUsed: ['feature_flags', 'session_replay', 'experiments', 'product_analytics', 'cdp'],
-        industries: ['Fintech'],
-        users: ['Engineering', 'Product', 'Marketing'],
-        notes: 'Business loans and financial services',
-        featured: false,
-        logo: QredLogo,
-        height: 8,
-    },
-    grantable: {
-        name: 'Grantable',
-        toolsUsed: [
-            'workflows',
-            'feature_flags',
-            'session_replay',
-            'experiments',
-            'product_analytics',
-            'surveys',
-            'error_tracking',
-            'llm_analytics',
-            'data_warehouse',
-        ],
-        industries: ['Business', 'SaaS'],
-        users: ['Data', 'Product', 'Marketing'],
-        notes: 'AI Compliance and Grant Writing',
-        featured: false,
-        logo: GrantableLogo,
-        height: 8,
-    },
     // swype: {
     //     name: 'Swype',
     //     toolsUsed: ['session_replay', 'product_analytics'],

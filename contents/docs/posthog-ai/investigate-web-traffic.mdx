@@ -1,0 +1,41 @@
+---
+title: Investigate web traffic with PostHog AI
+---
+
+import WistiaEmbed from 'components/WistiaEmbed'
+
+This guide shows you how the PostHog team uses PostHog AI to investigate web traffic. It includes a video demo and the prompts used to create insights, build dashboards, and analyze data from [web analytics](/docs/web-analytics) and [session replays](/docs/session-replay).
+
+This demo example uses our own internal PostHog project. The results will differ based on your project's specific setup and the data that's available to PostHog AI.
+
+## Video demo
+
+<WistiaEmbed mediaId="tgws1dixc0" className="mb-5" />
+
+<Caption>
+How PostHog uses PostHog AI to investigate web traffic
+</Caption>
+
+## Conversation with PostHog AI
+
+Here's the full conversation with PostHog AI.
+
+**Prompt #1**
+
+> Add a graph series for unique users.
+
+**Prompt #2**
+
+> There’s an odd traffic spike happening around September 29th. Create a dashboard of insights with traffic breakdowns by referral, country, user agent, and operating system to further investigate what the root cause is.
+
+**Prompt #3**
+
+> Create a new insight with traffic breakdown by IP address. Any suspicious traffic behavior here?
+
+**Prompt #4**
+
+> Find the session replays for that specific IP address over the last 60 days.
+
+**Prompt #5**
+
+> Summarize these session recordings in a report for me and provide key findings.

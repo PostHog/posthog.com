@@ -10,6 +10,7 @@ import ZoomHover from 'components/ZoomHover'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
+import SmallTeam from 'components/SmallTeam'
 
 // Process docsMenu to extract structure
 const processDocsMenu = () => {
@@ -367,11 +368,8 @@ export const DocsIndex = () => {
                             <h6 className="text-lg">Feedback</h6>
 
                             <p>
-                                Our docs are perpetually a work in progress. The{' '}
-                                <Link to="/teams/content" className="underline font-medium" state={{ newWindow: true }}>
-                                    Content team
-                                </Link>{' '}
-                                is responsible for what you see here.
+                                Our docs are perpetually a work in progress. The
+                                <SmallTeam slug="content" /> is responsible for what you see here.
                             </p>
                             <p>
                                 At the end of each page, you can provide feedback about what was (or wasn't) helpful. We

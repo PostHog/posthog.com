@@ -1,0 +1,238 @@
+---
+title: Schema management
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+Schema management lets you define and enforce the structure of your events using typed property groups. This helps document expected properties, provides type safety in your code, and makes your analytics implementation more maintainable.
+
+## Creating events
+
+You can create event definitions before any events are actually captured. This is useful when planning your analytics implementation upfront, allowing you to:
+
+- Define your event schema before writing instrumentation code
+- Generate typed definitions for events that haven't been captured yet
+- Document expected events for your team
+- Ensure consistency across your codebase from day one
+
+To create an event:
+
+1. Go to **Data Management** > **Events**
+2. Click **Create event**
+3. Enter the event name (e.g., "user_signed_up")
+4. Optionally add:
+   - **Description**: What the event represents
+   - **Owner**: Team member responsible for this event
+   - **Tags**: Organizational labels
+
+<CalloutBox icon="IconWarning" title="Event names" type="caution">
+    
+    Event names cannot be changed after creation, so choose carefully.
+    
+</CalloutBox>
+
+Events created this way will show "-" for **First seen** and **Last seen** until the first event is actually captured by PostHog.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_29_02_PM_c3fb0a172f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_29_20_PM_63b8c82e7f.png"
+    alt="Creating a new event definition"
+    classes="rounded"
+/>
+
+## Creating property groups
+
+Property groups are reusable collections of typed properties that can be attached to one or more events.
+
+1. Navigate to **Data Management** > **Property Groups**
+2. Click **New Property Group**
+3. Give your group a name (e.g., `Order Information`)
+4. Add properties with their types:
+   - **Name**: The property key
+   - **Type**: String, Number, Boolean, or Object
+   - **Required**: Whether the property must be present
+   - **Description**: Help text for your team
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_26_02_PM_0c5f0a9310.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_26_12_PM_7b16bcf906.png"
+    alt="Creating a property group"
+    classes="rounded"
+/>
+
+Property groups can be reused across multiple events, making it easy to maintain consistent schemas.
+
+## Adding schemas to events
+
+Once you've created property groups and events (either new events you created, or existing events from captured data), attach property groups to your events:
+
+1. Go to **Data Management** > **Events**
+2. Select an event
+3. In the **Schema** section, click **Add Property Group**
+4. Choose from your existing property groups or create a new one
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_30_01_PM_3888578617.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_29_38_PM_7410012e28.png"
+    alt="Event schema with property group"
+    classes="rounded"
+/>
+
+Events can have multiple property groups, and each group's properties will be included in the generated types.
+
+## Downloading your schema with the CLI
+
+The PostHog CLI generates language definitions from your configured schemas.
+
+### Install the CLI
+
+```bash
+npm install -g @posthog/cli
+```
+
+### Authenticate
+
+```bash
+posthog-cli login
+```
+
+This opens your browser to authorize the CLI with your PostHog account.
+
+![CLI authorization page](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/cli_authorization_6e62c8a498.png)
+
+### Download your schema
+
+> **Note:** Schema management is currently an experimental feature. The `exp` prefix will be removed once the feature is stable.
+
+```bash
+posthog-cli exp schema pull
+```
+
+The CLI will:
+1. Fetch your event schemas
+2. Prompt you for the output file path
+3. Generate typed definitions and save them to the specified file
+4. Update `posthog.json` with the schema hash
+
+When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts` for TypeScript).
+
+> **Important:** Commit both `posthog.json` and `posthog-typed.<extension>` to your git repository. This ensures your team has consistent types and tracks schema changes over time.
+
+On subsequent runs, the CLI only updates the file if your schema has changed.
+
+### Check schema status
+
+```bash
+posthog-cli exp schema status
+```
+
+This shows your current sync status, including the schema hash, last updated time, and number of events.
+
+## Using typed events in your app
+
+Once you've downloaded your schema, import and use the generated PostHog client:
+
+
+<MultiLanguage selector="tabs">
+
+```typescript file=TypeScript
+
+import posthog from './posthog-typed'
+
+// Use typed events with autocomplete and type safety on known events:
+posthog.capture('button_clicked', {
+  button_name: 'signup',      // ✓ Type-checked
+  click_count: 5,             // ✓ Type-checked
+  // missing_required: ...    // ✗ TypeScript error if required
+})
+
+// Use captureRaw() when you need to bypass type checking:
+posthog.captureRaw('dynamic_event', { whatever: 'data' })
+```
+
+```go file=Go
+
+import (
+    "github.com/posthog/posthog-go"
+    typed "your-project/posthog-typed"
+)
+
+func captureEventWithRequiredProperties(client posthog.Client) error {
+    return client.Enqueue(typed.DashboardModeToggledCapture("distinct_id", 2048,
+        typed.DashboardModeToggledWithFileName("file_name"),
+        typed.DashboardModeToggledWithFileType(".pdf"),
+        typed.DashboardModeToggledWithExtraProps(posthog.Properties{
+            "extra": "property",
+        }),
+    ))
+}
+
+func captureEventWithNoRequiredProperties(client posthog.Client) error {
+    return client.Enqueue(typed.DashboardLoadingTimeCapture("distinct_id", posthog.Properties{
+        "test":           "property",
+        "two_and_two_is": 4,
+    }))
+}
+
+func captureEventWithFullCaptureControl(client posthog.Client) error {
+    return client.Enqueue(typed.DashboardLoadingTimeCaptureFromBase(
+        // Event should be omitted here as it will be retrieved from the typed function.
+        posthog.Capture{
+            DistinctId: "distinct_id",
+            Timestamp:  time.Now(),
+            // ... Any additional properties
+        },
+        posthog.Properties{
+            "test": "property",
+        },
+    ))
+}
+
+```
+
+```python file=Python
+
+import os
+
+from posthog_typed import PosthogTyped
+
+def main():
+    posthog = PosthogTyped(
+        POSTHOG_API_KEY,
+        host=POSTHOG_HOST,
+    )
+
+    # Capture with required properties
+    posthog.capture_downloaded_file(file_size_b=2048, file_name="file_name", distinct_id="distinct_id",
+                                    extra_properties={"test": "property"})
+    # Capture with no required properties
+    posthog.capture_user_logged_in(extra_properties={"test": "property"}, distinct_id="distinct_id")
+    # Base captures are still possible
+    posthog.capture("capture_raw_example", distinct_id="distinct_id", properties={"test": "property"})
+
+```
+
+</MultiLanguage>
+
+
+The generated typed file provides:
+- **Type safety**: Properties are validated against your schema
+- **Autocomplete**: Your IDE suggests event names and properties
+- **Documentation**: Inline types show required properties and descriptions
+- **Flexibility**: The standard SDK functionality remains available (capture / identify / experiments / ...), allowing gradual migrations
+
+![TypeScript type checking in action](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/typescript_type_checking_a5318b2d7e.png)
+
+## Best practices
+
+- **Define events upfront**: Create event definitions before implementing instrumentation to get type safety from day one
+- **Start with your most important events**: Define schemas for critical conversion events first
+- **Use descriptive property groups**: Name groups by their purpose (e.g., "E-commerce Properties", "User Context")
+- **Don't over-schema**: Not every event needs a schema—use them where type safety adds value
+- **Commit generated types**: Always commit `posthog.json` and `posthog-typed.<extension>` to version control so your team stays in sync

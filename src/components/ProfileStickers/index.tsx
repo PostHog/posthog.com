@@ -31,6 +31,7 @@ import {
     StickerFlagPT,
     StickerFlagRS,
     StickerFlagSE,
+    StickerFlagSI,
     StickerFlagUnknown,
     StickerFlagUS,
     StickerFlagUY,
@@ -128,6 +129,8 @@ const Stickers = ({
                     <StickerFlagSE className="w-8 h-8" />
                 ) : country === 'UY' ? (
                     <StickerFlagUY className="w-8 h-8" />
+                ) : country === 'SI' ? (
+                    <StickerFlagSI className="w-8 h-8" />
                 ) : (
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}

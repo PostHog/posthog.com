@@ -16,12 +16,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       contributors: [Contributors]
       appConfig: [AppConfig]
       commits: [Commit]
+      templateConfigs: [TemplateConfig]
     }
     type Commit {
       author: GitHubUser
       date: Date
       message: String
       url: String
+    }
+    type TemplateConfigField {
+      key: String
+      type: String
+      label: String
+      required: Boolean
+      description: String
+      default: JSON
+    }
+    type TemplateConfig {
+      templateId: String
+      name: String
+      type: String
+      inputs_schema: [TemplateConfigField]
     }
     type GitHubUser {
       avatar_url: String
@@ -64,6 +79,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       seo: FrontmatterSEO
       hideFromIndex: Boolean
       price: String
+      platformLogo: String
+      platformIconName: String
+      platformSourceType: String
+      featuredImageCaption: String
     }
     type TeamData {
       name: String
@@ -235,6 +254,32 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Roadmap implements Node {
       year: Int
+      githubUrls: [String]
+      githubPRMetadata: GitHubPRMetadata
+    }
+    type GitHubPRMetadata {
+      url: String
+      html_url: String
+      review_comments_url: String
+      comments_url: String
+      commits_url: String
+      number: Int
+      comments: Int
+      review_comments: Int
+      commits: Int
+      additions: Int
+      deletions: Int
+      changed_files: Int
+      user: GitHubUser
+      commenters: [GitHubUser]
+      reviewers: [GitHubUser]
+      reviews_url: String
+    }
+    type GitHubUser {
+      login: String
+      avatar_url: String
+      html_url: String
+      type: String
     }
     type ProductDataProductsPlans {
       contact_support: Boolean
@@ -447,6 +492,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Event implements Node {
         attributes: EventAttributes
+    }
+    type ChangelogVideo implements Node {
+        videoId: String!
+        publishedAt: Date! @dateformat
+        title: String!
+    }
+    type PostHogWorkflowTemplateCreatedBy {
+        first_name: String
+        last_name: String
+    }
+    type PostHogWorkflowTemplateFields {
+        slug: String
+    }
+    type PostHogWorkflowTemplate implements Node {
+        templateId: String
+        name: String
+        description: String
+        image_url: String
+        created_at: Date
+        created_by: PostHogWorkflowTemplateCreatedBy
+        fields: PostHogWorkflowTemplateFields
     }
   `)
     createTypes([

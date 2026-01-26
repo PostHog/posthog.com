@@ -24,7 +24,7 @@ We send an introductory email to all new hires to welcome them to the team and e
 
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we landed on a simple email with the necessary links.
 
-<PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails.
+<p><PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails.</p>
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
@@ -63,6 +63,14 @@ While there is no fixed budget for onboardings they should be relatively less ex
 Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex in USD for any onboardings you are doing. There will of course be some exceptions to this, please just include the reasoning in your brex budget request, and ensure to list who the budget request is for.
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
+
+It is important that you make the most out of the sync time with the new joiner on your team. You should not spend the whole week sitting next to them doing your usual work. Having something planned each day is sufficient, some ideas include:
+- An intro to PostHogs values & strategy
+- A history of your team, your current quarterly goals and a product demo of the features you own (product teams only)
+- Interview feedback session between the team lead and new joiner
+- Deep dive into a specific feature where you walk through the code (product teams only)
+- Mock demo (sales team only)
+- "No stupid questions" where the new joiner is expected to come with questions they had since starting
 
 ### Your first week
 
@@ -187,10 +195,10 @@ In this call the support engineer will be able to answer any questions, as well 
 -   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 -   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] How to deal with bug reports and feature requests
--   [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
--   [ ] How to avoid duplication of effort in ZenDesk
--   [ ] [How to create and use personal views in ZenDesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] HogHero - how to deal with bug reports and feature requests, and how to merch customers (including [macros](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets))
+-   [ ] How to avoid duplication of effort in Zendesk
+-   [ ] [Which views should be used in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+-   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 

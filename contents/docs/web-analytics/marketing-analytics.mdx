@@ -14,6 +14,8 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 **Marketing analytics** enables you to track marketing campaigns, costs, and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
 
+> For detailed column definitions, formulas, and platform field mappings, see [Column definitions](/docs/web-analytics/marketing-analytics-schema).
+
 ## Marketing dashboard
 
 The marketing dashboard contains multiple pre-built insights that help you understand your campaigns and costs. 
@@ -136,10 +138,77 @@ For data warehouse table conversion goals, you'll need to map the following requ
 | Timestamp Field | Date/time field for the conversion event |
 | Distinct ID Field (optional) | User identifier for conversion tracking |
 
+### Advanced settings
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_16_20_PM_60589e9810.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_33_PM_d4a04d2a94.png"
+    alt="Advanced settings to map campaign data from your advertising sources to your conversion events"
+    classes="rounded"
+/>
+
+Configure how PostHog maps campaign data from your advertising sources to your conversion events. These settings give you granular control over how campaign identifiers and sources are matched for attribution.
+
+#### Campaign field preference
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_16_25_PM_67afdd8f63.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_41_PM_8717ecf7d4.png"
+    alt="Campaign field preference settings showing options to choose between campaign name and campaign ID"
+    classes="rounded"
+/>
+
+For each advertising platform, you can choose whether to map campaigns using the **campaign name** or **campaign ID**:
+
+- **Campaign name**: Uses the human-readable campaign name from your ad platform (e.g., "Summer Sale 2025")
+- **Campaign ID**: Uses the platform's unique campaign identifier (e.g., "123456789")
+
+This setting determines which field is matched against the `utm_campaign` parameter in your [conversion events](/docs/web-analytics/marketing-analytics#conversion-goals). Choose the option that matches how you structure your UTM parameters.
+
+#### UTM campaign manual mappings
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_16_30_PM_8ec98c0122.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_45_PM_91942d7d0e.png"
+    alt="UTM campaign manual mappings interface showing custom campaign mapping configuration"
+    classes="rounded"
+/>
+
+Map arbitrary `utm_campaign` values to specific campaign names or IDs from your [advertising platforms](/docs/web-analytics/marketing-analytics#data-source-configuration). This is useful when:
+
+- Your UTM parameters use different naming conventions than your campaign name or ID
+- You want to consolidate multiple campaign variations under a single campaign
+- You're tracking campaigns across multiple channels with different UTM campaign naming
+
+For example, you can map `utm_campaign=summer-promo` to the Google Ads campaign named "Summer Sale 2025" or to campaign ID "123456789", depending on your campaign field preference.
+
+#### Custom source mappings
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_12_09_at_3_16_33_PM_64be31b2d2.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_49_PM_a509d013da.png"
+    alt="Custom source mappings showing whitelisted UTM sources per advertising platform"
+    classes="rounded"
+/>
+
+Control which UTM sources are attributed to each [advertising platform integration](/docs/web-analytics/marketing-analytics#native-sources). For each platform (Google Ads, LinkedIn Ads, Meta Ads, etc.), you can:
+
+- **Whitelist specific sources**: Define which `utm_source` values should be attributed to this platform
+- **Support multiple sources**: Map multiple UTM source values to a single advertising platform
+
+This is particularly useful when:
+- You use custom UTM source values that don't match the default platform names
+- A single campaign spans multiple traffic sources
+
+**Example configuration:**
+- [Google Ads](/docs/cdp/sources/google-ads) integration: Whitelist sources `google`, `google_ads`, `paid_search`
+- [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Whitelist sources `linkedin`, `li`, `linkedin_paid`
+- [Meta Ads](/docs/cdp/sources/meta-ads) integration: Whitelist sources `facebook`, `instagram`, `meta`
+
 ### Base currency
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bc_dark_c6547dfdb9.png"
     alt="Base currency configuration"
     classes="rounded"

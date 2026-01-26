@@ -8,6 +8,9 @@ export default function Intro({
     description,
     buttonText,
     buttonLink,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryExternalNoIcon,
     imageColumnClasses,
     imageUrl,
     imageClasses,
@@ -17,8 +20,22 @@ export default function Intro({
             <div className="p-4 pb-0 md:p-8 flex-1 w-full">
                 <p className="text-[15px] text-secondary mb-1">{subheader}</p>
                 <h1 className="text-3xl md:text-4xl mt-0 mb-1 md:mb-2">{title}</h1>
-                <h3 className="text-base md:text-lg font-semibold text-secondary !leading-tight"> {description}</h3>
-                <CallToAction to={buttonLink}>{buttonText}</CallToAction>
+                <h3 className="text-base md:text-lg font-semibold text-secondary !leading-tight my-4">
+                    {' '}
+                    {description}
+                </h3>
+                <div className="flex gap-2">
+                    <CallToAction to={buttonLink}>{buttonText}</CallToAction>
+                    {secondaryButtonLink && secondaryButtonText && (
+                        <CallToAction
+                            externalNoIcon={secondaryExternalNoIcon ?? false}
+                            type="secondary"
+                            to={secondaryButtonLink}
+                        >
+                            {secondaryButtonText}
+                        </CallToAction>
+                    )}
+                </div>
             </div>
 
             {imageUrl && (

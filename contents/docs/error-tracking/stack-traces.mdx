@@ -25,9 +25,9 @@ For languages like Python, the stack trace and code context can be gathered by t
 
 If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. You can either use the `@posthog/nextjs-config` package or the `posthog-cli` to handle this process. Select your platform to view instructions.
 
-import UploadSourceMapPlatforms from  './upload-source-maps/_snippets/upload-source-map-platforms.tsx'
+import UploadSymbolSetsPlatforms from  './_snippets/upload-symbol-sets-platforms.tsx'
 
-<UploadSourceMapPlatforms />
+<UploadSymbolSetsPlatforms />
 
 ## Release context in stack traces
 
@@ -41,6 +41,19 @@ Error tracking displays release information over stack traces to help you track 
 />
 
 Learn more about [releases](/docs/error-tracking/releases/) in error tracking.
+
+## Source linking
+
+When viewing stack traces in PostHog, you can click directly through to the relevant code in your GitHub or GitLab repository. Each stack frame includes a **View commit** button (displayed using a GitHub or GitLab icon) that links to the exact file and line where the error occurred.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_20_at_14_37_09_2x_2ff2e56430.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_11_20_at_14_37_09_2x_2ff2e56430.png"
+    alt="Stacktrace with GitLab source link"
+    classes="rounded"
+/>
+
+Source linking requires a [GitHub or GitLab integration](/docs/error-tracking/integrations) and a [release](/docs/error-tracking/releases) with repository information. Once set up, PostHog automatically adds source links to your stack traces.
 
 ## Troubleshooting symbol sets
 

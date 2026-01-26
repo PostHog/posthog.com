@@ -1,5 +1,5 @@
 ---
-title: PostHog as a data warehouse source
+title: Linking PostHog as a data warehouse source
 ---
 
 Much of your PostHog data is available in the data warehouse by default. This includes data like [events](/docs/data/events), [persons](/docs/data/persons), [sessions](/docs/data/sessions), [groups](/docs/product-analytics/group-analytics), and the [query log](/docs/data/query-log).
@@ -88,7 +88,7 @@ Unlike the other tables, the `sessions` table stores all its properties as separ
 | `$is_bounce`                | Indicates if the session was a bounce (`1` = bounce, `0` = not)                              |
 | `$last_external_click_url`  | Last external click URL in the session                                                       |
 | `$vitals_lcp`               | Largest Contentful Paint (LCP) web vital for the session                                     |
-| [... more](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties |
+| [View additional session properties](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties |
 
 The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
 
@@ -118,6 +118,6 @@ Like the `sessions` table, the `query_log` table stores all its properties as se
 | `api_key_mask`               | Masked API key used                                                                    |
 | `cpu_microseconds`           | CPU time consumed (for computation, excluding waiting)                                 |
 | `RealTimeMicroseconds`       | Wall clock time in microseconds                                                        |
-| [... more](/docs/data/query-log#table-schema) | See [full list](/docs/data/query-log#table-schema) of query log properties |
+| [View additional query log fields](/docs/data/query-log#table-schema) | See [full list](/docs/data/query-log#table-schema) of query log properties |
 
 The `query_log` table is the only table with data on you and your team's internal usage of PostHog, making it useful for security, governance, and performance optimization.

@@ -66,7 +66,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 - **Think about rhythm:** Two long paragraphs back-to-back is tiring. Use bullet points to break things up where needed, and mix short, clear sentences with longer ones, so the pace doesn't become monotonous. 
 
-- **Break up very hard to read sentences:** Use a tool like [Hemmingway](https://hemingwayapp.com/) to identify sections that are very hard to read. Some long sentences aren't bad, but lots of them consecutively will drain the reader's attention. Aim for readability grade of 8 or less.
+- **Break up very hard to read sentences:** Use a tool like [Hemingway](https://hemingwayapp.com/) to identify sections that are very hard to read. Some long sentences aren't bad, but lots of them consecutively will drain the reader's attention. Aim for readability grade of 8 or less.
 
 - **Use footnotes tactically:** They're useful for adding context that's useful, but not important enough to bog down your core narrative. If something is hard to explain and slowing things down, consider using a footnote. They're also a fun way to add jokes, rants, easter eggs, and references.
 

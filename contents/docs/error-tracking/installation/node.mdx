@@ -1,11 +1,12 @@
 ---
 title: Node.js error tracking installation
 showStepsToc: true
+platformLogo: nodejs
 ---
 
 import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
-import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <Steps>
 <Step title="Install PostHog Node.js SDK" badge="required">
@@ -35,13 +36,13 @@ You can find your project API key and instance address in the [project settings]
 
 <Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
 
-Before proceeding, confirm that you can capture events with PostHog using `client.capture('test_event')`.
+Before proceeding, confirm that you can capture events with PostHog using `client.capture({ event: 'test_event' })`.
 
 </Step>
 
 <Step title="Configure exception autocapture" badge="recommended">
 
-> **Note:** A minimum SDK version of v4.5.2 is required, but we recommend [keeping up to date with the latest version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+> **Note:** A minimum SDK version of v4.5.2 is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 You can enable exception autocapture when initializing the PostHog client to automatically capture uncaught exceptions and unhandled rejections in your Node app. 
 
@@ -86,7 +87,7 @@ This is helpful if you've built your own error handling logic or want to capture
 
 <Step title="Upload source maps" badge="optional">
 
-<StepUploadSourceMaps urlPath="node" framework="Node.js" />
+<StepUploadSymbolSets urlPath="node" framework="Node.js" />
 
 </Step>
 

@@ -17,7 +17,7 @@ export default function ImageSlider({ children, ...other }: { children: JSX.Elem
     const ref = useRef(null)
     return (
         <div className="relative group image-slider mb-4">
-            <Slider {...sliderSettings} {...other} ref={ref}>
+            <Slider {...sliderSettings} {...other} ref={ref} className="px-8 @xl:px-12">
                 {children}
             </Slider>
             <button

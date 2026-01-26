@@ -1,0 +1,50 @@
+---
+title: React Native product analytics installation
+platformLogo: react
+---
+
+import { ReactNativeInstallationWrapper } from './_snippets/react-native-installation-wrapper.tsx'
+
+Our React Native library enables you to integrate PostHog with your React Native project. For Expo projects, there are no mobile native dependencies outside of supported Expo packages.
+
+<ReactNativeInstallationWrapper />
+
+### React Native Web and macOS
+
+If you're using [React Native Web](https://github.com/necolas/react-native-web) or [React Native macOS](https://github.com/microsoft/react-native-macos), don't use [expo-file-system](https://github.com/expo/expo/tree/master/packages/expo-file-system) since Web and macOS targets aren't supported. Use [@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage) instead.
+
+### Without the PostHogProvider
+
+If you prefer not to use the provider, initialize PostHog in its own file and import the instance:
+
+```react-native file=posthog.ts
+import PostHog from 'posthog-react-native'
+
+export const posthog = new PostHog('<ph_project_api_key>', {
+  host: '<ph_client_api_host>' // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+})
+```
+
+Then access PostHog by importing your instance:
+
+```react-native
+import { posthog } from './posthog'
+
+export function MyApp() {
+    useEffect(() => {
+        posthog.capture('event_name')
+    }, [])
+
+    return <View>Your app code</View>
+}
+```
+
+You can also use this instance with the PostHogProvider:
+
+```react-native
+import { posthog } from './posthog'
+
+export function MyApp() {
+  return <PostHogProvider client={posthog}>{/* Your app code */}</PostHogProvider>
+}
+```

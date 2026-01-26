@@ -28,3 +28,15 @@ When you [upload sourcemaps](/docs/error-tracking/upload-source-maps/) using `po
 ## Release context in error tracking
 
 Other than a specific release version that you define, captured exceptions inherit the release information recorded during injection. PostHog attaches the release, project, and Git metadata to each exception captured as we capture it in our ingestion pipeline.
+
+## Source linking
+
+Releases enable source linking in stack traces. When you create a release with repository information, PostHog can link each stack frame to the exact file and line in your GitHub or GitLab repository.
+
+To use source linking:
+
+1. Set up a [GitHub or GitLab integration](/docs/error-tracking/integrations)
+2. Create a release that includes your repository and commit information
+3. PostHog automatically adds **View commit** buttons to stack traces
+
+This makes it faster to investigate errors by jumping directly from the stack trace to your source code. Learn more about [stack traces](/docs/error-tracking/stack-traces#source-linking).

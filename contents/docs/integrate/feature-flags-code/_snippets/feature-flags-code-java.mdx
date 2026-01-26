@@ -1,0 +1,25 @@
+### Boolean feature flags
+
+```java
+if (posthog.isFeatureEnabled("distinct_id_of_your_user", "flag-key")) {
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+}
+```
+
+### Multivariate feature flags
+
+```java
+if ("variant-key".equals(posthog.getFeatureFlag("distinct_id_of_your_user", "flag-key"))) { // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+}
+```
+
+import JavaOverrideServerProperties from './override-server-properties/java.mdx'
+
+<JavaOverrideServerProperties />

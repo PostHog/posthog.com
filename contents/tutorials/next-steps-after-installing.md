@@ -36,14 +36,14 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'ian@posthog.com',
   'event' => 'movie_played',
-  'properties' => array(
+  'properties' => [
     'movie_id' => 'Return of the Hedgehogs',
     'category' => 'thriller'
-  )
-));
+  ]
+]);
 ```
 
 ```ruby

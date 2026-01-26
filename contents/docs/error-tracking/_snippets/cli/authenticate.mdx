@@ -10,12 +10,13 @@ If you are using the CLI in a CI/CD environment such as GitHub Actions, you can 
 
 | Environment Variable | Description | Source |
 | --- | --- | --- |
-| `POSTHOG_CLI_ENV_ID` | PostHog project ID | [Environment settings](https://app.posthog.com/settings/environment#variables) |
-| `POSTHOG_CLI_TOKEN` | **Personal API key** with `error tracking write` scope | [API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `POSTHOG_CLI_HOST` | The PostHog host to connect to [default: https://us.posthog.com] | [Project settings](https://app.posthog.com/settings/project#variables) |
+| `POSTHOG_CLI_ENV_ID` | PostHog project ID | [Project settings](https://app.posthog.com/settings/project#variables) |
+| `POSTHOG_CLI_TOKEN` | **Personal API key** with `error tracking write` and `organization read` scopes | [API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
 
 </div>
 
-Use the `--host` option in subsequent commands to specify a different PostHog instance / or region. For EU users:
+You can also use the `--host` option instead of the `POSTHOG_CLI_HOST` environment variable to target a different PostHog instance or region. For EU users:
 
 ```bash
 posthog-cli --host https://eu.posthog.com [CMD]

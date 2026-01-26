@@ -70,6 +70,47 @@ export const query = graphql`
                         }
                     }
                 }
+                githubUrls
+                githubPRMetadata {
+                    number
+                    html_url
+                    additions
+                    changed_files
+                    comments
+                    comments_url
+                    commits
+                    commits_url
+                    deletions
+                    review_comments
+                    review_comments_url
+                    reviews_url
+                    commenters {
+                        avatar_url
+                        html_url
+                        login
+                        type
+                    }
+                    reviewers {
+                        avatar_url
+                        html_url
+                        login
+                        type
+                    }
+                    user {
+                        login
+                        avatar_url
+                        html_url
+                        type
+                    }
+                }
+            }
+        }
+        allChangelogVideo(sort: { fields: publishedAt, order: DESC }) {
+            nodes {
+                id
+                videoId
+                publishedAt
+                title
             }
         }
     }
