@@ -233,6 +233,43 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
 />
 </p>
 
+## When to choose PostHog vs Sentry
+
+Choosing the right error tracking tool depends on what problem you're solving. Here's a quick guide:
+
+**Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, and more?** Go with **PostHog**.
+
+**Need deep stack traces, distributed tracing, and mature error triage workflows?** **Sentry** is the proven choice.
+
+## Recommendations by team type
+
+**For early-stage startups**
+- **PostHog** – A single platform that scales from landing pages to product analytics without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly.
+
+| &nbsp;                            | **Free usage per month** |
+| --------------------------------- | ------------------------ |
+| **Error tracking**                | 100k errors              |
+| **Product analytics**             | 1 million events         |
+| **Session replay**                | 5,000 recordings         |
+| **Surveys**                       | 1500 responses           |
+| **LLM analytics**                 | 100k events              |
+| **Feature flags and A/B testing** | 1 million API requests   |
+| **Data warehouse**                | 1 million synced rows    |
+
+Startups can also qualify for free credits. For all the details about how much PostHog might cost, see [our pricing page](/pricing).
+
+**For product and growth teams**
+- **PostHog** – Connect errors to user behavior, run experiments, and measure business impact in one workflow. Non-technical teammates can use surveys, dashboards, and cohorts without engineering help.
+
+**For DevOps and SRE teams**
+- **Sentry** – Deep performance monitoring, distributed tracing, and incident response workflows built for reliability engineering.
+
+**For mobile-focused teams**
+- **Sentry** – More mature crash symbolication, native SDK support, and longer track record with complex mobile debugging.
+
+**For privacy-conscious and regulated organizations**
+- Both offer self-hosting and EU data residency. **PostHog** is fully open-source with raw data access. **Sentry** also has an open-source edition and enterprise compliance options.
+
 ## Frequently asked questions
 
 <details>
@@ -255,54 +292,6 @@ If you want full context, including stack traces, user sessions, and console log
 Key features to evaluate include: automatic error grouping (so you're not flooded with duplicate alerts), stack trace quality, source map support for minified code, session replay integration, release tracking, alerting options, and pricing that scales with your usage. For product teams, integration with analytics and feature flags adds valuable context.
 
 </details>
-
-<details>
-  <summary>How much does PostHog cost?</summary>
-
-Every PostHog user gets a generous amount of free usage each month:
-
-| &nbsp;                            | **Free usage per month** |
-| --------------------------------- | ------------------------ |
-| **Error tracking**                | 100k errors              |
-| **Product analytics**             | 1 million events         |
-| **Session replay**                | 5,000 recordings         |
-| **Surveys**                       | 1500 responses           |
-| **LLM analytics**                 | 100k events              |
-| **Feature flags and A/B testing** | 1 million API requests   |
-| **Data warehouse**                | 1 million synced rows    |
-
-Beyond this, we have usage-based pricing with volume discounts. Startups can also qualify for free credits.
-
-For all the details about how much PostHog might cost, see [our pricing page](/pricing).
-
-</details>
-
-### When to choose PostHog vs Sentry
-
-Choosing the right error tracking tool depends on what problem you're solving. Here's a quick guide:
-
-**Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, and more?** Go with **PostHog**.
-
-**Need deep stack traces, distributed tracing, and mature error triage workflows?** **Sentry** is the proven choice.
-
-### Recommendations by team type
-
-**For early-stage startups**
-- **PostHog** – A single platform that scales from landing pages to product analytics without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly.
-
-**For product and growth teams**
-- **PostHog** – Connect errors to user behavior, run experiments, and measure business impact in one workflow. Non-technical teammates can use surveys, dashboards, and cohorts without engineering help.
-
-**For DevOps and SRE teams**
-- **Sentry** – Deep performance monitoring, distributed tracing, and incident response workflows built for reliability engineering.
-
-**For mobile-focused teams**
-- **Sentry** – More mature crash symbolication, native SDK support, and longer track record with complex mobile debugging.
-
-**For privacy-conscious and regulated organizations**
-- Both offer self-hosting and EU data residency. **PostHog** is fully open-source with raw data access. **Sentry** also has an open-source edition and enterprise compliance options.
-
-### Frequently asked questions
 
 <details>
   <summary>How much does Sentry cost?</summary>
