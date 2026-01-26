@@ -30,7 +30,7 @@ export const hightouch = {
         data_anonymization: true,
         data_retention: true,
         gdpr_ready: true,
-        hipaa_ready: 'CDP plans',
+        hipaa_ready: true,
         history_audit_logs: true,
         reverse_proxy: false,
         saml_sso: true,
