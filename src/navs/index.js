@@ -1268,16 +1268,20 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-new-products-and-features',
             },
             {
-                name: 'Product manager role',
-                url: '/handbook/product/product-manager-role',
-            },
-            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
+            },
+            {
+                name: 'Product manager role',
+                url: '/handbook/product/product-manager-role',
+            },
+            {
+                name: 'Product manager hiring',
+                url: '/handbook/product/product-manager-hiring',
             },
         ],
     },
@@ -1360,6 +1364,10 @@ export const handbookSidebar = [
                             {
                                 name: 'Expansion, cross-sell & retention',
                                 url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                            {
+                                name: 'Cross sell motions',
+                                url: '/handbook/growth/sales/cross-sell-motions',
                             },
                             {
                                 name: 'Communications templates',
@@ -4150,6 +4158,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
@@ -5484,6 +5496,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
                 },
