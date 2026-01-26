@@ -53,17 +53,11 @@ Most SaaS companies would likely just blast you with emails, calls and DMs witho
 
 ## What will we do on our calls? A simple outbound sales process
 
-As we begin to run outbound sales meetings set via <TeamMember name="Dmytro Sitalo" />’s efforts and our own, it makes sense to define a lightweight process for managing an outbound sales conversation.
+As we begin to run outbound sales meetings set via <TeamMember name="Dmytro Sitalo" />’s efforts and our own, we need a lightweight, human-first approach to managing outbound conversations.
 
-First, remember, *we* contacted *them*.
+Remember, *we* contacted *them* — be transparent about our process and who we build for. How [well we do discovery in our initial conversations](/handbook/growth/sales/how-to-do-discovery) will dictate how well (or poorly) we position PostHog.
 
-Because we are taking their time, we want to remain human and helpful. We also want to be transparent about our process, who we build for, and how we help our customers.
-
-We should aim to be a pure expression of our PostHog selves. How [well we do discovery in our initial conversations](/handbook/growth/sales/how-to-do-discovery) will dictate whether we succeed or fail.
-
-If they’re interested, we’ll tell them how they can try PostHog before they buy and give them technical help along the way.
-
-If they’re not interested or not a fit for PostHog, we’ll tell them honestly and transparently. We need to earn the right for each step in a sales process and not assume their interest.
+If they’re interested, we’ll show them how to try PostHog and help them along the way; if they’re not a fit, we’ll say so honestly. We need to earn the right for each step and not assume their interest.
 
 So, what does that mean for a first conversation? We:
 
@@ -77,57 +71,58 @@ So, what does that mean for a first conversation? We:
 8. Action the task  
 9. Rinse, lather, and repeat
 
-Our ultimate goal is to help this person figure out if PostHog solves a real problem for them, not to close the deal in one call.
+Goal: help them decide if PostHog solves a real problem, not close in one call.
 
 In order:
 
 ### 1. We do research & get context
 
-In brief, do some basic account research:
+Do basic account research:
 
-* What's their current tech stack? (Check job postings, tech stack sites like BuiltWith/Wappalyzer)  
-* Recent company news (funding, product launches, hiring)  
-* Their role + how long they've been there (LinkedIn)  
-* Why did they agree to this meeting? (Read <TeamMember name="Dmytro Sitalo" />’s notes carefully)  
-* What problem or pain did <TeamMember name="Dmytro Sitalo" /> identify/suggest?
+* Prompt your LLM of choice for facts (especially with MCP access). Ask:  
+    * What's their tech stack? (Job postings, BuiltWith/Wappalyzer, 1Password)  
+    * Recent company news (funding, launches, hiring)  
+    * Their role + tenure (LinkedIn, their website)  
+* Why did they agree to this meeting? (Read <TeamMember name="Dmytro Sitalo" />’s notes in the New Business Slack)  
+* What problem or pain did <TeamMember name="Dmytro Sitalo" /> flag?
 
-Use this research to set a hypothesis that can assist you on the call.
+Use this to form a call hypothesis.
 
 ### 2. We are human & transparent when we meet them
 
-*We* contacted *them*. And this is a sales call that only makes sense if they have a problem we can solve. So a simple, open-ended question like this works as an opener:
+*We* contacted *them*. This call only makes sense if we can solve a real problem for them. Start with:
 
     *"Hey [name], thanks for making the time. I know this was a cold outreach from [Dmytro/our team], so I really appreciate you giving me 30 minutes."*
 
     *"Before we dive in, I'm curious - what made you decide to take this call?*
 
-Often this is enough to get them talking and can provide you with valuable insight into what potential pain points there may be; but if they’re vague, skeptical, or otherwise confused, you should be specific about why this call makes sense from your perspective and using the hypothesis you worked up, adding something like:
+Often this is enough. If they’re vague or skeptical, get specific with your pre-prepared hypothesis:
 
     *"[Dmytro mentioned/I saw] that [specific trigger - e.g. you're growing team/launching new product/scaling analytics]. We work with companies at your stage who struggle with [specific pain - e.g. fragmented analytics tools/poor data quality/lack of actionable insights]. I wanted to understand if that's actually a problem you're facing."*
 
     *"If it is, I can share how other companies like yours have solved it. If it's not a problem, I'll tell you honestly (or you can tell me) and we'll keep this short. Will that work for you?"*
 
-Or, if they give you what you need to get started with the open-ended question, you can end with a more general outline of your plan for the call:
+If they answer clearly, set a simple agenda:
 
     *"Got it. Here's what I was thinking for today: I'd love to understand how you're handling [your role/the use case behind the trigger] now, what's working and what's not, and then share how other companies like yours have approached it. If it seems relevant, we can go deeper. If not, I'll tell you honestly and we'll keep this short. Sound fair?"*
 
 ### 3. Explore their role & current state/stack - find the pain
 
-As <TeamMember name="Charles Cook" />  likes to say, companies don’t buy software, humans buy software. Once you’re underway, start with interest in them and their team.
+As <TeamMember name="Charles Cook" />  says, companies don’t buy software; humans do. Start with their role/team.
 
     *"Tell me more about your role and team."*
 
-Once you’re underway in understanding their context, you can build out to the use-case/trigger:
+Then move to the trigger/use-case:
 
     *“How are you thinking about [use-case/trigger] in that role/team? What do you need to understand about your product/users/customers?"*
 
-Your questions will necessarily vary based on the thrust of the conversation, but you can go towards:
+Other prompts:
 
     *"What are you using for [use-case/trigger] today? And how'd you end up with that setup?”*
 
     *"What do you love about it? What drives you crazy?"*
 
-You’re digging for information that would assist you with identifying pain and priority. This can emerge from your conversation, especially if you’re asking open-ended discovery questions. But you can drill in as needed:
+You’re digging for pain, urgency, and priority in this part of the conversation. Drill in as needed:
 
 * What's the pain and is it urgent/quantified? - *"You mentioned [pain]. Help me understand the impact. What's that costing you - in staff time, in missed opportunities, in money?"*  
 * Is it a priority, and do they have a sense of timeline? - *"How much is [frustration] actually getting in the way? Is it blocking you or just annoying?"* *"Is there a timeline or trigger that makes solving this more urgent?"*  
@@ -135,28 +130,28 @@ You’re digging for information that would assist you with identifying pain and
 
 ### 4. Qualify or disqualify
 
-Run a brief mental evaluation of their answers on the call. Look at four factors:
+Run a quick mental evaluation of their answers on the call. Assess four factors:
 
-* Specific pain identified - they have to have a problem
-* You have a theory about how pain will be eventually quantified (time/money/impact) - this is "line of sight" not a finished ROI calculation. 
-* Timeline - willing to take action within the next 6 months  
-* Authority or direct connection to the economic buyer - we've got to deal with someone who can make a decision
+* Specific pain identified  
+* Line of sight to impact (time/money)  
+* Timeline (next 6 months)  
+* Authority or direct line to buyer
 
-If you are struggling to know, work a relevant question into your discovery, e.g. for timeline:
+If unclear, ask directly, e.g. timeline:
 
     *Why is this a problem you're trying to solve this / next quarter?*
 
-Their answer, or correction, will tell you whether this is a priority for them.     
+Their answer tells you if this is a priority.
 
-If you have fewer than all four factors, now is the time to respectfully disqualify them. It’ll save them time and allow you to focus.
+If you have fewer than four, disqualify politely.
 
     *"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
 
-If you have all four factors, it’s qualified and you should ask for permission to give them a pitch.
+If you have all four, ask permission to pitch.
 
-We should disqualify outbound tasks, as creating opportunities that go nowhere won’t help us (or them).
+Disqualify outbound tasks that won’t convert.
 
->**Bonus: end early** if they’re disqualified or disinterested, you can cut the call short politely and professionally. Or if they’re highly qualified and very interested, you can skip the pitch and go right to a relevant next step.
+>**Bonus: end early** if they’re disqualified or disinterested. If highly qualified and eager, skip the pitch and go straight to a next step.
 
 ### 5. With explicit permission, give a brief PostHog pitch
 
@@ -164,60 +159,62 @@ Open with what you heard and ask for permission to pitch:
 
     *"Based on what you shared - [their pain] - let me tell you how PostHog works and you tell me if it's relevant. Does that work for you?"*
 
-Pivot to an elevator pitch that has products and use-cases tailored to their pain (the below is generic, yours should be specific):
+Pivot to a tailored elevator pitch (below is generic):
 
     *"PostHog makes dev tools that help product engineers build successful products. These include many discrete tools that help with user behavior and analytics, product engineering, communication and data - all in one platform.”*
 
     *"Companies switch for three reasons: (1) tired of fragmented tools, (2) want engineers and product teams to have direct access to data, (3) our transparent, usage-based pricing."*
 
-### 6. Ask the hard question - is this relevant?
+### 6. Ask the hard question
 
-Then, ask the hard question:
+Ask:
 
     *"Does that sound like it solves the problem you described?"*
 
-If they sound uncertain, or have been uncertain up this point (even after qualifying them), you can highlight the free trial in the wind up to the question.
+If they’re uncertain, emphasize the free trial:
 
     *"Knowing that we offer folks like you a free trial period to evaluate PostHog for yourself, does it sound like PostHog solves the problem you described?"*
 
-Wait for an answer. Embrace the long pause or awkward silence. Get the answer.
+Wait. Embrace the pause. And, get their answer. If we don't solve a problem for them, this isn't worth continuing.
 
 ### 7. Provide a relevant next step & schedule it on the call
 
-If they’re qualified and interested, suggest the natural next step and schedule it on the call:
+If qualified and interested, propose a next step and book it on the call:
 
     *"What makes sense as a next step? Demo? Trial? Talk to your team?"* *"Okay, I'll [take action]. Let's reconnect on [book specific date/time now]."*
 
-If they’re hesitant or marginally qualified, you can ask them:
+If hesitant or marginal, ask:
 
     *"Here's what I'm hearing: [summary]. Not sure if we're a fit yet. What would help you figure that out?"*
 
-And, of course, if they’ve disqualified themselves after the pitch, you can still disqualify them at this point:
+If they disqualify themselves post-pitch, disqualify:
 
     *"Based on our conversation, and being completely honest, I don't think we're the right fit because [reason]. My recommendation: [alternative]. If [use-case/trigger] changes, do please reach out."*
 
 ### 8. Action the task in PostHog's Salesforce 
 
-This is relevant to PostHog, and not the customer, but is important for our hygiene. Track the tasks and make sure they reflect your knowledge of the opportunity. Specifically:
+This is internal hygiene. Track tasks to reflect the opportunity:
 
-- If qualified and next step, create an opportunity in `Problem Agreement` from the task object in Salesforce, and use stage exit criteria to dictate when/whether it moves forward  
-- If marginally qualified or no next step, switch task from `In progress` to `Nurturing` in Salesforce – work with the customer to progress them to the point where you would create an opportunity  
-- If not qualified, disqualify the task with the relevant reason. Be sure to give relevant feedback to <TeamMember name="Dmytro Sitalo" /> in a relevant Slack channel  
+- If qualified + next step, create an opportunity in `Problem Agreement` and use stage exit criteria  
+- If marginal/no next step, switch task from `In progress` to `Nurturing` and progress them toward an opportunity  
+- If not qualified, disqualify with reason and share feedback with <TeamMember name="Dmytro Sitalo" /> in Slack  
 
 ### 9. Rinse, lather, and repeat
 
-Where you take a qualified outbound sales opportunity is dependent on the specifics of your conversation. 
+You should always aim to get them into a shared Slack channel or establish a regular communication cadence with them (call/email). Nothing will happen if we aren't talking.
 
-You could:
+Where else you take a qualified outbound sales opportunity is dependent on the specifics of your conversation. 
+
+Your process may resemble later stages of [the inbound sales process](/handbook/growth/sales/new-sales).
+
+Otherwise, you can:
 
 - Book a technical demo with the person’s team  
 - Ask for an introduction to the best contact at the company
 - Record a Loom of specific features to show how PostHog works  
 - Ship them documentation and a code sample to demonstrate how PostHog can be configured  
 - #domoreweird in a delightful way  
-- Invite them to a shared Slack channel to get their trial started  
+- Schedule a kickoff to get their trial started  
 - Ship them merch
 
-What you do with the opportunity may start to resemble the later stages of [the inbound sales process](/handbook/growth/sales/new-sales). Or, it may be a more ambiguous search for the time to evaluate PostHog.
-
-What won’t change is the need to qualify the account at each step, ensure that PostHog solves a real problem for them, and not assume their interest just because they’ve passed from Task to Opportunity in our Salesforce instance. If we remain focused on their pain/problem, and do our best work to qualify their use-case for PostHog, we’ll earn the right to keep the process moving.
+What won’t change: qualify each step, solve a real problem, and don’t assume interest just because a task became an opportunity. Stay focused on their pain and you’ll earn the right to keep moving.
