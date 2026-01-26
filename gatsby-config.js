@@ -395,7 +395,7 @@ module.exports = {
             options: {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
-                branch: process.env.GATSBY_POSTHOG_BRANCH || 'onboarding-steps-refactor',
+                branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
                 patterns: ['docs/published/**', 'docs/onboarding/**'],
             },
         },
