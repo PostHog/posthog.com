@@ -4150,6 +4150,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
@@ -5484,6 +5488,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
                 },
