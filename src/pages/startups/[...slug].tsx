@@ -280,7 +280,7 @@ export default function Startups(): JSX.Element {
                             </div>
                         </div>
 
-                        <div className="border-t border-primary pt-4 @2xl:border-none @2xl:pt-0">
+                        <div className="border-t border-primary pt-4 mt-4 @2xl:border-none @2xl:pt-0">
                             <img
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/concept_ventures_fa46262122.svg"
                                 className="h-8 my-2"
