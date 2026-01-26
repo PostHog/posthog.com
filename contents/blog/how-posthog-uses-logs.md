@@ -57,7 +57,7 @@ Sven still checks Grafana/Loki when he needs older history, but for day-to-day i
 
 [Rory (ClickHouse Engineer)](/community/profiles/36766) and his team used to build queried built-in ClickHouse tables directly to inspect logs. The data was there, but correlating events and getting a high-level overview was painful. Until we built PostHog Logs.
 
-Their setup now is intentionally simple. ClickHouse runs on EC2 as a systemd service. systemd writes logs to journald, Vector reads from journald, and sends everything to PostHog via OpenTelemetry. As a bonus, this doesn’t just include ClickHouse logs, it brings in system logs too.
+Their setup now is intentionally simple. ClickHouse runs on EC2 as a systemd service. systemd writes logs to journald, Vector reads from journald, and sends everything to PostHog via OpenTelemetry. As a bonus, this doesn’t just include ClickHouse logs; it brings in system logs too.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/log_person_details_7948949dbb.png"
