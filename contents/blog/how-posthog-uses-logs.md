@@ -30,7 +30,7 @@ This is a crucial part of how we build better products. We're building tools for
     classes="rounded"
 />
 
-Having this in mind, I talked to a few of our engineers to see how they’re using Logs.
+Our team loves using Logs to debug PostHog. Here's the most important things they've learned about doing this effectively so far.
 
 ## When “everything looks fine” isn’t true
 
