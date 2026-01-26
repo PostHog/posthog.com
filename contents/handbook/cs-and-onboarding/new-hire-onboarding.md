@@ -31,7 +31,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You can work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
- - Read all of the CS, Sales, and Shared Proccesses sections in the Handbook, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
+ - Read all of the CS, Sales, and Shared Processes sections in the Handbook, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Customer Success.
 
 ### Week 2
