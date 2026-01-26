@@ -22,7 +22,7 @@ seo:
 
 If there’s something we do a lot here at PostHog (well, there’s many things but this one is top three), it’s [dogfooding](/product-engineers/dogfooding) our own product.
 
-Our engineers are mainly the target users of the products they’re building, so they are always the first to use them. **[Logs](https://app.posthog.com/logs)** is one of the products that’s used across many teams, and the Logs team often gets feedback and feature requests internally. Sometimes they even write a haiku.
+This is a crucial part of how we build better products. We're building tools for engineers, so having our own engineers using them helps us get feedback, feature requests, and even haikus.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_01_22_at_15_53_53_2x_362b2ecaf8.png"
