@@ -46,7 +46,7 @@ const UploadSymbolSetsPlatforms = () => {
         {
             label: 'Flutter',
             url: '/docs/error-tracking/upload-source-maps/flutter',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
         },
         {
             label: 'Rollup',
