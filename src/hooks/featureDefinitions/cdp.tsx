@@ -13,11 +13,11 @@ export const cdpFeatures = {
          custom_transformations: {
             name: 'Custom transformations',
             description: 'Filter, modify, and enrich data before sending to destinations',
-            },
+        },
             no_code_setup: {
                 name: 'No-code setup',
                 description: 'Configure sources and destinations through the UI',
-            },
+        },
     },
     sources_destinations: {
         description: 'Connect tools to your data pipeline',
