@@ -27,19 +27,22 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   <SmallTeam slug="analytics-platform" />
+-   <SmallTeam slug="analytics-platform" /> *
 -   <SmallTeam slug="data-stack" />
--   <SmallTeam slug="product-analytics" />
--   <SmallTeam slug="web-analytics" />
+-   <SmallTeam slug="data-modeling" />
+-   <SmallTeam slug="product-analytics" />*
+-   <SmallTeam slug="web-analytics" />*
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="feature-flags" />
--   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="feature-flags" />*
+-   <SmallTeam slug="experiments" />*
 -   <SmallTeam slug="posthog-ai" />
+-   <SmallTeam slug="signals" />*
+-   Project support: Twig pricing
 
 </fieldset>
 
@@ -56,9 +59,9 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
 -   <SmallTeam slug="workflows" />
+-   <SmallTeam slug="logs" />
 -   <SmallTeam slug="batch-exports" />*
--   Endpoints
--   Logs
+-   Project support: Endpoints
 
 *light support
 
@@ -67,8 +70,12 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend>Teams with no PM currently</legend>
 
+-   <SmallTeam slug="array" />
 -   <SmallTeam slug="customer-analytics" />
+-   <SmallTeam slug="conversations" />
+-   <SmallTeam slug="flags-platform" />
 -   <SmallTeam slug="llm-analytics" />
+
 
 </fieldset>
 
@@ -84,4 +91,4 @@ To keep track of their projects across teams, PMs should track their personal qu
 
 As the PM team, we are usually also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-In Q4 2025, we are focussing primarily on the teams we work with, and have no big side projects.
+In Q1 2026, we are focussing primarily on the teams we work with, and have no big side projects.
