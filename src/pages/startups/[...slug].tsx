@@ -5,7 +5,6 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
@@ -234,13 +233,13 @@ export default function Startups(): JSX.Element {
                         </div>
                         <div className="bg-[#9BBEC2] p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png" />
-                            <h3 className="text-base my-1 leading-tight">Founder swag</h3>
+                            <h3 className="text-base my-1 leading-tight">Exclusive founder swag</h3>
                             <p className="text-sm mb-0">
                                 You can never have too many laptop stickers, hats, or free t-shirts, right?
                             </p>
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_docs_ae8043058c.png" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startup_perk_2_f6a6b9d058.png" />
                             <h3 className="text-base my-1 leading-tight">Easier incidents with Incident.io</h3>
                             <p className="text-sm mb-0">
                                 Avoid additional stress by getting $1,500 off a teams plan for Incident.io.
@@ -475,6 +474,33 @@ export default function Startups(): JSX.Element {
                                                 contact us to discuss options
                                             </Link>
                                             . Credits can be used towards all other aspects of the Boost add-on.
+                                        </p>
+                                    ),
+                                },
+                                {
+                                    trigger:
+                                        'I use another tool, like Amplitude or Pendo. Can I migrate that data to PostHog?',
+                                    content: (
+                                        <p>
+                                            Yes, you can migrate your data from another tool to PostHog using our
+                                            [migration guides](/docs/migrate/), which cover how to migrate from tools
+                                            such as Amplitude, Pendo, Plausible, Mixpanel, Heap, LaunchDarkly, Google
+                                            Analytics, and more.
+                                        </p>
+                                    ),
+                                },
+                                {
+                                    trigger:
+                                        'Do you offer onboarding help, to make sure I get everything set up correctly.',
+                                    content: (
+                                        <p>
+                                            Yes. By joining the startup program, you'll already get access to our
+                                            startup newsletter full of tips and tricks for getting the most out of
+                                            PostHog, as well as invites to our exclusive events. If you need more help,
+                                            you can [purchase a 30-minute onboarding call with our
+                                            team](/merch?product=30-min-onboarding-consultation), or explore [custom
+                                            service packages](/services). Please note that PostHog credit can not be
+                                            used towards these services.
                                         </p>
                                     ),
                                 },
