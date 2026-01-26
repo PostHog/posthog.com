@@ -1,0 +1,94 @@
+---
+title: Research mode (Deep research)
+---
+
+Research mode is a powerful workflow for in-depth data analysis. It uses Claude Opus 4.5 with extended thinking capabilities to tackle complex, multi-faceted research projects that require deep investigation and synthesis.
+
+## What is research mode?
+
+Research mode is designed for complex questions that require:
+- Systematic investigation across multiple data sources
+- Correlation of different metrics and patterns
+- Deep reasoning about cause and effect
+- Synthesis of findings into actionable recommendations
+
+Unlike regular chat, research mode takes more time but produces comprehensive research reports with thorough analysis.
+
+## When to use research mode
+
+Research mode is ideal for:
+
+- **Root cause analysis** - "What's causing our churn increase this quarter?"
+- **Cross-metric investigation** - "How does our onboarding flow impact long-term retention?"
+- **Strategic analysis** - "What are the biggest opportunities to improve our conversion funnel?"
+- **Comprehensive audits** - "Analyze our entire user journey from signup to first purchase"
+
+For quick questions or simple analyses, regular chat mode is faster and more efficient.
+
+## How research mode works
+
+Research mode operates in two distinct phases:
+
+### Phase 1: Planning
+
+When you start a research project, the agent enters a planning phase:
+
+1. **Clarification** - The agent asks questions to understand your research objectives, scope, and what success looks like
+2. **Plan creation** - The agent creates a research plan notebook outlining:
+   - Research questions to answer
+   - Data sources to investigate
+   - Metrics and analyses to perform
+   - Expected deliverables
+3. **Review** - You review and approve the plan before research begins
+
+### Phase 2: Research execution
+
+Once you approve the plan, the agent switches to research mode:
+
+1. **Task decomposition** - The plan is broken into atomic research tasks
+2. **Parallel execution** - Independent tasks run concurrently for efficiency
+3. **Data gathering** - The agent queries your data using all available modes (product analytics, SQL, session replay, error tracking)
+4. **Iterative refinement** - Draft findings are refined as new data is gathered
+5. **Report synthesis** - A final polished report is produced summarizing findings and recommendations
+
+## Starting research mode
+
+You can start research mode by **selecting "Research"** in the mode selector above the chat interface.
+
+You can only select research mode from a new conversation. 
+
+## Research mode capabilities
+
+Research mode has access to:
+
+- **Extended thinking** - More sophisticated reasoning for complex analysis
+- **All analysis modes** - Can switch between product analytics, SQL, session replay, and error tracking as needed
+- **Parallel task execution** - Run multiple analyses concurrently
+- **Notebook creation** - Create draft and final research report notebooks
+- **Iterative refinement** - Revise findings as new information is discovered
+
+## Research mode vs regular chat
+
+| Aspect | Regular chat | Research mode |
+|--------|-------------|---------------|
+| Best for | Quick questions, simple tasks | Deep investigations, multi-faceted analysis |
+| Model | Claude Sonnet | Claude Opus 4.5 with extended thinking |
+| Planning | Optional | Required (plan approval before research) |
+| Duration | Seconds to minutes | Up to 60 minutes for complex research |
+| Output | Direct answers, insights | Comprehensive research report notebook |
+| Approach | Immediate response | Systematic investigation with synthesis |
+
+## Tips for effective research
+
+1. **Be specific about your goals** - "Why are users churning?" is good, but "Why are enterprise users churning within 30 days of signup?" is better
+2. **Define success criteria** - Tell the agent what a useful answer looks like
+3. **Set scope boundaries** - Specify time periods, user segments, or product areas to focus on
+4. **Review the plan carefully** - The planning phase is your chance to ensure the research will answer your actual questions
+
+## Example research projects
+
+- "Investigate why our trial-to-paid conversion rate dropped 15% last month. Focus on the enterprise segment and compare behavior patterns between converters and non-converters."
+
+- "Research how our new onboarding flow impacts 30-day retention. Compare users who completed onboarding vs those who dropped off at each step."
+
+- "Analyze error patterns in our checkout flow. Identify which errors have the highest impact on conversion and what user behaviors lead to those errors."
