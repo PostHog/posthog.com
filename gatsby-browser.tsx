@@ -1,5 +1,7 @@
 import React from 'react'
 import { initKea, wrapElement } from './kea'
+// In production, this import is replaced with empty.css via webpack's NormalModuleReplacementPlugin
+// The actual CSS is built separately via `pnpm build:css` and linked in html.tsx
 import './src/styles/global.css'
 import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'

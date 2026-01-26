@@ -71,6 +71,15 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
 }
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
+    // In production builds, replace global.css import with empty module
+    // The CSS is built separately via `pnpm build:css` and served as a static file
+    if (stage === 'build-javascript' || stage === 'build-html') {
+        const webpack = require('webpack')
+        actions.setWebpackConfig({
+            plugins: [new webpack.NormalModuleReplacementPlugin(/styles\/global\.css$/, 'data:text/css,')],
+        })
+    }
+
     actions.setWebpackConfig({
         cache: process.env.NODE_ENV === 'development' || {
             compression: 'gzip',

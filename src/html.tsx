@@ -39,6 +39,8 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     href="/fonts/squeak-bold-webfont.woff"
                     crossOrigin="anonymous"
                 />
+                {/* In production, CSS is built separately and served as a static file */}
+                {process.env.NODE_ENV === 'production' && <link rel="stylesheet" href="/styles/global.css" />}
                 {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
                     <script src="/scripts/posthog-init.js" />
                 )}
