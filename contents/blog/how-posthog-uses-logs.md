@@ -1,5 +1,5 @@
 ---
-title: How PostHog uses PostHog Logs for PostHog
+title: How we use Logs at PostHog
 date: 2025-23-01
 rootPage: /blog
 sidebar: Blog
