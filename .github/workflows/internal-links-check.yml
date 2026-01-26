@@ -21,7 +21,7 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            NODE_OPTIONS: '--max-old-space-size=8192 --expose-gc'
+            NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
             GATSBY_CPU_COUNT: 1
 
         steps:
