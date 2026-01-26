@@ -79,7 +79,7 @@ The signals were technically available before, but Logs makes it much faster to 
 
 [Jon, Product Engineer in the Logs team](/community/profiles/38376), spends a lot of time inside Logs. Which actually makes total sense, because he’s one of the people working on it. 
 
-Jon rarely starts by staring at log lines and hoping for enlightenment. (At least he says so.) Instead, he narrows the blast radius first, a specific surface, service, or severity,  until the noise drops enough for a pattern to show itself. As he tweaks the filters, the sparkline responds instantly, which is usually faster than his own intuition and much more honest.
+Jon rarely starts by staring at log lines and hoping for enlightenment (at least he says so). Instead, he narrows the blast radius first, a specific surface, service, or severity, until the noise drops enough for a pattern to show itself. As he tweaks the filters, the sparkline responds instantly, which is usually faster than his own intuition and much more honest.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Logs_details_light_42368d34a6.png"
