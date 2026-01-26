@@ -45,7 +45,7 @@ For [Sven, Platform Engineer in the Infrastructure Team](/community/profiles/352
 
 One case stood out: repeated out-of-Memory crashes on a node, with no obvious explanation. Sven opened Logs, filtered down to everything running on that node, and then started ruling things out. Normal-looking logs went first, then more normal-looking logs, until only something odd remained - gzipped noise showing up where it really shouldn’t.
 
-That “noise” turned out to be an application logging huge compressed payloads. The old log shipping infrastructure dutifully tried to read all of it, the logs were far too large, and it kept crashing, sometimes taking other applications with it.
+That “noise” turned out to be an application logging huge compressed payloads. The old log shipping infrastructure dutifully tried to read all of it, but the logs were far too large and it kept crashing, sometimes taking other applications with it.
 
 This was exactly the kind of problem the previous logging setup was good at hiding. That system discarded the problematic data, so everything looked mostly fine… apart from the unexplained crashes.
 
