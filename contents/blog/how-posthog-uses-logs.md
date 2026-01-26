@@ -20,7 +20,7 @@ seo:
     }
 ---
 
-If there’s something we heavily do here at PostHog (well, there’s many things but this one is top 3), it’s [dogfooding](/product-engineers/dogfooding). Dogfooding shortly means using your own product. 
+If there’s something we do a lot here at PostHog (well, there’s many things but this one is top three), it’s [dogfooding](/product-engineers/dogfooding) our own product.
 
 Our engineers are mainly the target users of the products they’re building, so they are always the first to use them. **[Logs](https://app.posthog.com/logs)** is one of the products that’s used across many teams, and the Logs team often gets feedback and feature requests internally. Sometimes they even write a haiku.
 
