@@ -113,62 +113,26 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
     }
 }
 
-/**
- * Find all $ref references in an object recursively
- */
-const findSchemaRefs = (obj: any, refs: Set<string>) => {
-    if (typeof obj === 'object' && obj !== null) {
-        if (obj['$ref'] && typeof obj['$ref'] === 'string') {
-            const ref = obj['$ref']
-            if (ref.startsWith('#/components/schemas/')) {
-                refs.add(ref.replace('#/components/schemas/', ''))
+const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>): Record<string, any> => {
+    const collected = new Set<string>()
+
+    const collect = (obj: any) => {
+        if (typeof obj !== 'object' || !obj) return
+        if (obj['$ref']?.startsWith('#/components/schemas/')) {
+            const name = obj['$ref'].replace('#/components/schemas/', '')
+            if (!collected.has(name) && allSchemas[name]) {
+                collected.add(name)
+                collect(allSchemas[name])
             }
         }
-        Object.values(obj).forEach((val) => findSchemaRefs(val, refs))
-    }
-}
-
-/**
- * Recursively find all schema references including nested ones
- */
-const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>): Record<string, any> => {
-    const referencedNames = new Set<string>()
-
-    // Find direct refs from all items
-    items.forEach((item) => {
-        findSchemaRefs(item.operationSpec, referencedNames)
-    })
-
-    // Recursively find nested refs
-    const findNestedRefs = (schemaName: string, visited: Set<string>) => {
-        if (visited.has(schemaName) || !allSchemas[schemaName]) {
-            return
-        }
-        visited.add(schemaName)
-
-        const beforeSize = referencedNames.size
-        findSchemaRefs(allSchemas[schemaName], referencedNames)
-
-        // Process any newly added refs
-        if (referencedNames.size > beforeSize) {
-            Array.from(referencedNames)
-                .filter((ref) => !visited.has(ref))
-                .forEach((ref) => findNestedRefs(ref, visited))
-        }
+        Object.values(obj).forEach(collect)
     }
 
-    const visited = new Set<string>()
-    Array.from(referencedNames).forEach((ref) => findNestedRefs(ref, visited))
+    items.forEach((item) => collect(item.operationSpec))
 
-    // Build the components object with only referenced schemas
-    const schemas: Record<string, any> = {}
-    referencedNames.forEach((name) => {
-        if (allSchemas[name]) {
-            schemas[name] = allSchemas[name]
-        }
-    })
-
-    return { schemas }
+    return {
+        schemas: Object.fromEntries([...collected].map((name) => [name, allSchemas[name]])),
+    }
 }
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
@@ -209,7 +173,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return endpoint
     })
     all_endpoints.forEach((endpoint) => {
-        // Compute only the schemas referenced by this endpoint's items
         const components = findAllReferencedSchemas(endpoint.items, allSchemas)
 
         const node = {
