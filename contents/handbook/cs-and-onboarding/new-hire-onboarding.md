@@ -6,7 +6,7 @@ showTitle: true
 
 ## Your first few weeks
 
-Welcome to the PostHog Customer Success & Onboarding team!  We only hire about 1 in 400 applicants, so you've done well to make it here!  Unlike a lot of companies, we don't have a super-long onboarding process and would prefer you to be up and running with your customer base as quickly as possible.  Here are the things you should focus on in your first few weeks at PostHog to help you achieve that. 
+Welcome to the PostHog Customer Success team!  We only hire about 1 in 400 applicants, so you've done well to make it here!  Unlike a lot of companies, we don't have a super-long onboarding process and would prefer you to be up and running with your customer base as quickly as possible.  Here are the things you should focus on in your first few weeks at PostHog to help you achieve that. 
 
 Ramping up is mostly self serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
 
@@ -18,11 +18,9 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools)
   - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
+- If you start on a Monday, join your first CS sprint planning.
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
-- If you start on a Monday, join your first CS and Onboarding standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Dana will add your GitHub handle to the template.
-- (Onboarding specialist) Book time with Magda / Cameron to go over the nuts and bolts of the role - which leads get onboarding, what signals we're looking for, how to reach out. Start working through leads together.
-
 
 ### Rest of week 1
 
@@ -33,7 +31,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You can work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
- - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
+ - Read all of the CS, Sales, and Shared Proccesses sections in the Handbook, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Customer Success.
 
 ### Week 2
