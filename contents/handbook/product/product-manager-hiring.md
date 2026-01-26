@@ -5,8 +5,6 @@ showTitle: true
 hideAnchor: true
 ---
 
-# What we look for in product managers
-
 > This page outlines what makes a great product manager at PostHog: The traits, skills, and mindset we look for when hiring and developing PMs.  
 >  
 > For how the role works day to day, see [What product managers do at PostHog](/handbook/product/product-manager-role).
