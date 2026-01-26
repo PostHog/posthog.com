@@ -96,7 +96,7 @@ If he needs a quick reality check, Jon lets PostHog explain what the error is tr
 
 This means that logs are now part of the same space as [replays](/session-replay), [errors](/error-tracking), and [analytics](/product-analytics), which removes a lot of back-and-forth and makes debugging feel noticeably quicker.
 
-—
+## Why you should try PostHog Logs too
 
 Logs shows up in the same way across teams, making it easier to debug, especially because all the user context is already in PostHog and we don’t have to switch tools.
 
