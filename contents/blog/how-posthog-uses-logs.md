@@ -47,7 +47,7 @@ One case stood out: repeated out-of-Memory crashes on a node, with no obvious ex
 
 That “noise” turned out to be an application logging huge compressed payloads. The old log shipping infrastructure dutifully tried to read all of it, but the logs were far too large and it kept crashing, sometimes taking other applications with it.
 
-This was exactly the kind of problem the previous logging setup was good at hiding. That system discarded the problematic data, so everything looked mostly fine… apart from the unexplained crashes.
+This was exactly the kind of problem the previous logging setup was good at hiding. That system discarded the problematic data, so everything looked mostly fine… apart for the unexplained crashes.
 
 Today, Sven can get from “there are way too many logs” to “ah, that’s it” pretty quickly. Include and exclude filters make it easy to carve down large datasets without guessing. Tracking slow HTTP requests, for example, is as simple as filtering for requests over 600 ms and seeing the results update immediately.
 
