@@ -16,9 +16,9 @@
     ],
     "private": true,
     "scripts": {
-        "build:css": "NODE_ENV=production postcss ./src/styles/global.css -o ./static/styles/global.css",
-        "build-move": "pnpm build:css && gatsby build && bash ./src/scripts/move-index.sh",
-        "build": "pnpm build:css && gatsby build",
+        "build:css": "mkdir -p ./public/styles && NODE_ENV=production postcss ./src/styles/global.css -o ./public/styles/global.css",
+        "build-move": "gatsby build && pnpm build:css && bash ./src/scripts/move-index.sh",
+        "build": "gatsby build && pnpm build:css",
         "start": "./bin/start",
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
