@@ -1,5 +1,5 @@
 ---
-title: How PostHog uses PostHog Logs for PostHog
+title: How we use Logs at PostHog
 date: 2025-23-01
 rootPage: /blog
 sidebar: Blog
@@ -20,9 +20,9 @@ seo:
     }
 ---
 
-If there’s something we heavily do here at PostHog (well, there’s many things but this one is top 3), it’s [dogfooding](/product-engineers/dogfooding). Dogfooding shortly means using your own product. 
+If there’s something we do a lot here at PostHog (well, there’s many things but this one is top three), it’s [dogfooding](/product-engineers/dogfooding) our own product.
 
-Our engineers are mainly the target users of the products they’re building, so they are always the first to use them. **[Logs](https://app.posthog.com/logs)** is one of the products that’s used across many teams, and the Logs team often gets feedback and feature requests internally. Sometimes they even write a haiku.
+This is a crucial part of how we build better products. We're building tools for engineers, so having our own engineers using them helps us get feedback, feature requests, and even haikus.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_01_22_at_15_53_53_2x_362b2ecaf8.png"
@@ -30,11 +30,11 @@ Our engineers are mainly the target users of the products they’re building, so
     classes="rounded"
 />
 
-Having this in mind, I talked to a few of our engineers to see how they’re using Logs.
+Our team loves using Logs to debug PostHog. Here's the most important things they've learned about doing this effectively so far.
 
 ## When “everything looks fine” isn’t true
 
-For [Sven, Platform Engineer at the Infrastructure Team](/community/profiles/35250), opening Logs usually means something already feels off. It might start with an alert, a bug report, or a suspicious anomaly. Lately, that often means checking whether reported SQL injection attempts actually went anywhere.
+For [Sven, Platform Engineer in the Infrastructure Team](/community/profiles/35250), opening Logs usually means something already feels off. It might start with an alert, a bug report, or a suspicious anomaly. Lately, that often means checking whether reported SQL injection attempts actually went anywhere.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Logs_screen_light_109f882754.png"
@@ -43,11 +43,11 @@ For [Sven, Platform Engineer at the Infrastructure Team](/community/profiles/352
     classes="rounded"
 />
 
-One case stood out: repeated Out-of-Memory crashes on a node, with no obvious explanation. Sven opened Logs, filtered down to everything running on that node, and then started ruling things out. Normal-looking logs went first, then more normal-looking logs, until only something odd remained, looking like gzipped noise showing up where it really shouldn’t.
+One case stood out: repeated out-of-Memory crashes on a node, with no obvious explanation. Sven opened Logs, filtered down to everything running on that node, and then started ruling things out. Normal-looking logs went first, then more normal-looking logs, until only something odd remained - gzipped noise showing up where it really shouldn’t.
 
-That “noise” turned out to be an application logging huge compressed payloads. The old log shipping infrastructure dutifully tried to read all of it, the logs were far too large, and it kept crashing, sometimes taking other applications with it.
+That “noise” turned out to be an application logging huge compressed payloads. The old log shipping infrastructure dutifully tried to read all of it, but the logs were far too large and it kept crashing, sometimes taking other applications with it.
 
-This was exactly the kind of problem the previous logging setup was good at hiding. That system discarded the problematic data, so everything looked mostly fine… apart from the unexplained crashes.
+This was exactly the kind of problem the previous logging setup was good at hiding. That system discarded the problematic data, so everything looked mostly fine… apart for the unexplained crashes.
 
 Today, Sven can get from “there are way too many logs” to “ah, that’s it” pretty quickly. Include and exclude filters make it easy to carve down large datasets without guessing. Tracking slow HTTP requests, for example, is as simple as filtering for requests over 600 ms and seeing the results update immediately.
 
@@ -55,9 +55,9 @@ Sven still checks Grafana/Loki when he needs older history, but for day-to-day i
 
 ## Logs, but with the full picture
 
-[Rory (ClickHouse Engineer)](/community/profiles/36766) and his team used to build queried built-in ClickHouse tables directly to inspect logs. The data was there, but correlating events and getting a high-level overview was painful. Until we built PostHog Logs.
+[Rory (ClickHouse Engineer)](/community/profiles/36766) and his team used to query built-in ClickHouse tables directly to inspect logs. The data was there, but correlating with other systems and getting a high-level overview was painful. Until we built PostHog Logs.
 
-Their setup now is intentionally simple. ClickHouse runs on EC2 as a systemd service. systemd writes logs to journald, Vector reads from journald, and sends everything to PostHog via OpenTelemetry. As a bonus, this doesn’t just include ClickHouse logs, it brings in system logs too.
+Their setup now is intentionally simple. ClickHouse runs on EC2 as a systemd service. systemd writes logs to journald, Vector reads from journald, and sends everything to PostHog via OpenTelemetry. As a bonus, this doesn’t just include ClickHouse logs; it brings in system logs too.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/log_person_details_7948949dbb.png"
@@ -79,7 +79,7 @@ The signals were technically available before, but Logs makes it much faster to 
 
 [Jon, Product Engineer in the Logs team](/community/profiles/38376), spends a lot of time inside Logs. Which actually makes total sense, because he’s one of the people working on it. 
 
-Jon rarely starts by staring at log lines and hoping for enlightenment. (At least he says so.) Instead, he narrows the blast radius first, a specific surface, service, or severity,  until the noise drops enough for a pattern to show itself. As he tweaks the filters, the sparkline responds instantly, which is usually faster than his own intuition and much more honest.
+Jon rarely starts by staring at log lines and hoping for enlightenment (at least he says so). Instead, he narrows the blast radius first, a specific surface, service, or severity, until the noise drops enough for a pattern to show itself. As he tweaks the filters, the sparkline responds instantly, which is usually faster than his own intuition and much more honest.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Logs_details_light_42368d34a6.png"
@@ -90,13 +90,13 @@ Jon rarely starts by staring at log lines and hoping for enlightenment. (At leas
 
 Once something stands out, he digs into the details. Because logs are ingested as structured data, whether they come from OpenTelemetry or PostHog’s own SDKs, the metadata isn’t just there for reference. A trace ID or request ID becomes the fastest way to reframe the investigation. 
 
-If he needs a quick reality check, Jon lets Explore with AI explain what the error is trying (and failing) to do, in human language. And when things are actively on fire, Live Tail is there to stream logs in real time.
+If he needs a quick reality check, Jon lets PostHog explain what the error is trying (and failing) to do, in human language. And when things are actively on fire, Live Tail is there to stream logs in real time.
 
 > “The real superpower is how this connects to the front end, because we capture browser logs via PostHog JS. They’re automatically linked to the session and the user IDs. I can search for a front-end exception and jump directly into the session replay to watch the exact moment the bug happened,” he says. 
 
 This means that logs are now part of the same space as [replays](/session-replay), [errors](/error-tracking), and [analytics](/product-analytics), which removes a lot of back-and-forth and makes debugging feel noticeably quicker.
 
-—
+## Why you should try PostHog Logs too
 
 Logs shows up in the same way across teams, making it easier to debug, especially because all the user context is already in PostHog and we don’t have to switch tools.
 
