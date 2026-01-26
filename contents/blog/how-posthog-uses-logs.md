@@ -34,7 +34,7 @@ Having this in mind, I talked to a few of our engineers to see how they’re usi
 
 ## When “everything looks fine” isn’t true
 
-For [Sven, Platform Engineer at the Infrastructure Team](/community/profiles/35250), opening Logs usually means something already feels off. It might start with an alert, a bug report, or a suspicious anomaly. Lately, that often means checking whether reported SQL injection attempts actually went anywhere.
+For [Sven, Platform Engineer in the Infrastructure Team](/community/profiles/35250), opening Logs usually means something already feels off. It might start with an alert, a bug report, or a suspicious anomaly. Lately, that often means checking whether reported SQL injection attempts actually went anywhere.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Logs_screen_light_109f882754.png"
