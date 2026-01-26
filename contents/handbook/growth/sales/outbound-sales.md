@@ -138,7 +138,7 @@ You’re digging for information that would assist you with identifying pain and
 Run a brief mental evaluation of their answers on the call. Look at four factors:
 
 * Specific pain identified - they have to have a problem
-* You have a theory about how pain will be eventually quanitifed (time/money/impact) - this is "line of sight" not a finished ROI calculation. 
+* You have a theory about how pain will be eventually quantified (time/money/impact) - this is "line of sight" not a finished ROI calculation. 
 * Timeline - willing to take action within the next 6 months  
 * Authority or direct connection to the economic buyer - we've got to deal with someone who can make a decision
 
