@@ -5538,6 +5538,24 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Modes',
+                    url: '/docs/posthog-ai/modes',
+                    icon: 'IconToggle',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Plan mode',
+                    url: '/docs/posthog-ai/plan-mode',
+                    icon: 'IconMap',
+                    color: 'green',
+                },
+                {
+                    name: 'Research mode',
+                    url: '/docs/posthog-ai/research-mode',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Session summaries',
                     url: '/docs/posthog-ai/session-summaries',
                     icon: 'IconEye',
