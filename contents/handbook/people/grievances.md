@@ -41,9 +41,9 @@ We will send round written notes afterwards, which will be kept confidential.
 
 > All proceedings are confidential, and you will never be punished for bringing a grievance (unless it’s obviously malicious), even if no action is taken. 
 
-Victims of harassment or bullying should disengage from the situation immediately and seek support. You can speak to Fraser about your grievance and he can help you, or Charles if Fraser is not available or you need to talk to someone else. 
+Victims of harassment or bullying should disengage from the situation immediately and seek support. You can speak to Fraser about your grievance and he can help you. If he is not available, talk to Carol (US timezones) or Tara (Europe timezones). 
 
-Most grievances otherwise can usually be resolved informally between you and the person involved - if you're unsure what to do, talk to your manager. If the grievance is about your manager, talk to _their_ manager or ask Fraser. If the matter cannot be resolved informally, you should put the details of your grievance in writing and send it to Fraser (or if the matter concerns him, please send it to James or Tim). There is no particular format to follow, and you can start at this step if needed. 
+Most grievances otherwise can usually be resolved informally between you and the person involved - if it is informal and you're unsure what to do, talk to your manager. If it is about your manager, talk to _their_ manager or ask Fraser. If the matter cannot be resolved informally, you should put the details of your grievance in writing and send it to Fraser (or if the matter concerns him, please send it to James or Tim). There is no particular format to follow, and you can start at this step if needed. 
 
 To make sure we can investigate your grievance properly:
 * Try and raise your grievance as soon as possible - it's easier to figure out what happened that way. 
