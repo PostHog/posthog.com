@@ -241,8 +241,9 @@ function DpaGenerator() {
 
             <section
                 data-scheme="primary"
-                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary text-primary ${isSubmitted ? 'block' : 'hidden'
-                    }`}
+                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary text-primary ${
+                    isSubmitted ? 'block' : 'hidden'
+                }`}
             >
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png"
@@ -266,8 +267,9 @@ function DpaGenerator() {
 
             <section
                 data-scheme="primary"
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${isSubmitted ? 'hidden' : 'block'
-                    }`}
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
+                    isSubmitted ? 'hidden' : 'block'
+                }`}
             >
                 <div
                     className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0`}
@@ -818,13 +820,16 @@ function DpaGenerator() {
                     </div>
 
                     <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${mode === 'pretty' && ''
-                            } ${mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
-                            } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
+                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
+                            mode === 'pretty' && ''
+                        } ${
+                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
+                        } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
                     >
                         <div
-                            className={`my-8 print:mt-0 print:relative print:-top-2 print:mb-12 ${mode === 'lawyer' && 'hidden'
-                                }`}
+                            className={`my-8 print:mt-0 print:relative print:-top-2 print:mb-12 ${
+                                mode === 'lawyer' && 'hidden'
+                            }`}
                         >
                             <img width={157} src="/brand/posthog-logo.svg" />
                         </div>
@@ -1417,12 +1422,20 @@ function DpaGenerator() {
                         </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
                         <p>Company's end users (including prospects, customer and contractors)</p>
+                        <p>
+                            Data subjects include the individuals about whom data is provided to the Processor in
+                            connection with the provision of Services by (or at the direction of) Company or its users
+                        </p>
 
                         <p>
                             <strong>Categories of personal data processed</strong>
                         </p>
                         <p>The personal data processed comprises the following categories of data:</p>
-                        <p>(As determined at the discretion of the Company):</p>
+                        <p>
+                            (As determined at the discretion of the Company, including data relating to the individuals
+                            provided to the Processor in connection with the provision of the Services, and including,
+                            without limitation):
+                        </p>
 
                         <ul>
                             <li>
@@ -1618,8 +1631,9 @@ function DpaGenerator() {
                     </div>
 
                     <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
-                            }`}
+                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
+                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
+                        }`}
                     >
                         <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm pb-8">
                             <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">

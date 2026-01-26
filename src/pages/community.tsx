@@ -59,6 +59,7 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
         <div>
             {image && <aside className="float-right ml-1 mb-1">{image}</aside>}
             <h3 className="text-base mb-1 leading-tight">{title}</h3>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - spotlight content from codebase, not user input */}
             <div className="text-sm [&_*]:text-sm [&>*]:mb-2" dangerouslySetInnerHTML={{ __html: content }} />
 
             {byline && (

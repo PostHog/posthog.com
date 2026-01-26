@@ -1,0 +1,119 @@
+---
+title: iOS session replay installation
+platformLogo: ios
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
+
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+<CalloutBox title="Xcode 26" type="caution" icon="IconWarning">
+
+SwiftUI rendering behavior changed for apps built with Xcode 26 (when running on iOS 26).
+If you're building with Xcode 26, please use PostHog iOS SDK version &gt;= [3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2), which includes a fix for this issue.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Add PostHog to your app" badge="required">
+
+<IOSInstall />
+
+> - Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
+> - Session replay is currently only available on iOS. For future macOS support, please follow and upvote [this GitHub issue](https://github.com/PostHog/posthog-ios/issues/200).
+
+</Step>
+
+<Step title="Enable session recordings in your project settings" badge="required">
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight}
+  imageDark={EnableSessionReplayDark}
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+</Step>
+
+<Step title="Configure replay settings" badge="required">
+
+### Automatically start session recordings
+
+Setting `config.sessionReplay = true` to your PostHog configuration will start session recordings on SDK setup.
+
+### Manually control session recordings
+
+Setting `config.sessionReplay = false` to your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup.
+
+You can manually control when to start and stop session recordings using the following two methods:
+
+- `startSessionRecording(resumeCurrent: Bool)`
+  - Set **resumeCurrent** to `true` to resume a previous session recording (Default).
+  - Set **resumeCurrent** to `false` to start a new session recording.
+- `stopSessionRecording()`
+  - Stops/pauses the current session recording.
+
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+</Step>
+
+</Steps>
+
+## Configuration options
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+// Enable session recording. Requires enabling in your project settings as well.
+// Default is false.
+config.sessionReplay = true
+
+// Whether text and text input fields are masked. Default is true.
+// Password inputs are always masked regardless
+config.sessionReplayConfig.maskAllTextInputs = true
+
+// Whether images are masked. Default is true.
+config.sessionReplayConfig.maskAllImages = true
+
+// Enable masking of all sandboxed system views
+// These may include UIImagePickerController, PHPickerViewController and CNContactPickerViewController
+// Default is true.
+config.sessionReplayConfig.maskAllSandboxedViews = true
+
+// Whether network requests are captured in recordings. Default is true
+// Only metric-like data like speed, size, and response code are captured.
+// No data is captured from the request or response body.
+config.sessionReplayConfig.captureNetworkTelemetry = true
+
+// Whether replays are created using high quality screenshots. Default is false.
+// Required for SwiftUI.
+// If disabled, replays are created using wireframes instead.
+// The screenshot may contain sensitive information, so use with caution
+config.sessionReplayConfig.screenshotMode = true
+
+// Sets the minimum time interval (in seconds) between session replay snapshots.
+// A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
+// Note: Previously known as `debouncerDelay` before version 3.21.0
+config.sessionReplayConfig.throttleDelay = 1.0
+```
+
+## Limitations
+
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is only supported if `screenshotMode` is enabled. A placeholder will be shown as a fallback.
+- Currently only available on iOS.
+
+## Troubleshooting
+
+- Update your SDK.
+- If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).

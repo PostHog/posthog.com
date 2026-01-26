@@ -32,18 +32,18 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => '$set',
-    'properties' => array(
-        '$set' => array(
+    'properties' => [
+        '$set' => [
             'name' => 'Max Hedgehog'
-        ),
-        '$set_once' => array(
+        ],
+        '$set_once' => [
             'initial_url' => '/blog'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 ```ruby

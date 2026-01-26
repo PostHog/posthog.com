@@ -361,8 +361,9 @@ export default function Presentation({
             <div
                 ref={containerRef}
                 data-scheme="secondary"
-                className={`@container w-full transition-all duration-300 h-full flex flex-col min-h-1 ${websiteMode ? 'h-[calc(100vh_-_49px)] ' : 'max-w-full'
-                    }`}
+                className={`@container w-full transition-all duration-300 h-full flex flex-col min-h-1 ${
+                    websiteMode ? 'h-[calc(100vh_-_49px)] ' : 'max-w-full'
+                }`}
             >
                 <div
                     data-scheme="secondary"
@@ -373,15 +374,16 @@ export default function Presentation({
                             animate={
                                 isMobile
                                     ? {
-                                        height: isNavVisible ? 'auto' : 0,
-                                        width: '100%',
-                                    }
+                                          height: isNavVisible ? 'auto' : 0,
+                                          width: '100%',
+                                      }
                                     : { width: isNavVisible ? 192 : 0, height: '100%' }
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`${websiteMode ? '' : 'bg-primary border-primary @2xl:border-y-0 border-y'} ${isNavVisible && !websiteMode ? '@2xl:border-r' : 'border-b-0'
-                                } overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
+                            className={`${websiteMode ? '' : 'bg-primary border-primary @2xl:border-y-0 border-y'} ${
+                                isNavVisible && !websiteMode ? '@2xl:border-r' : 'border-b-0'
+                            } overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
@@ -435,8 +437,9 @@ export default function Presentation({
                                 </div>
                                 <div
                                     data-scheme="primary"
-                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${!isDragging ? 'transition-all duration-200 ease-out' : ''
-                                        }`}
+                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${
+                                        !isDragging ? 'transition-all duration-200 ease-out' : ''
+                                    }`}
                                     style={{
                                         height: isDrawerOpen ? drawerHeight : 0,
                                         maxHeight: 300,
@@ -445,10 +448,11 @@ export default function Presentation({
                                 >
                                     <motion.div
                                         data-scheme="tertiary"
-                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${isDrawerOpen
-                                            ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
-                                            : 'pointer-events-none'
-                                            }`}
+                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${
+                                            isDrawerOpen
+                                                ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
+                                                : 'pointer-events-none'
+                                        }`}
                                         drag={isDrawerOpen ? 'y' : false}
                                         dragMomentum={false}
                                         dragConstraints={{ top: 0, bottom: 0 }}
@@ -475,6 +479,7 @@ export default function Presentation({
                                         <div className="p-4 text-sm prose dark:prose-invert prose-sm">
                                             {currentSlideNotes ? (
                                                 typeof currentSlideNotes === 'string' ? (
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation notes from CMS, not user input
                                                     <div dangerouslySetInnerHTML={{ __html: currentSlideNotes }} />
                                                 ) : (
                                                     currentSlideNotes

@@ -75,7 +75,8 @@ export default function FeaturesGrid({
                         <p
                             className="mt-4 text-xl [&_code]:text-xl"
                             {...(typeof description === 'string'
-                                ? { dangerouslySetInnerHTML: { __html: description } }
+                                ? // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input
+                                  { dangerouslySetInnerHTML: { __html: description } }
                                 : { children: description })}
                         />
                     )}
@@ -146,7 +147,8 @@ export default function FeaturesGrid({
                     <p
                         className="mt-4 text-xl text-center [&_code]:text-xl"
                         {...(typeof description === 'string'
-                            ? { dangerouslySetInnerHTML: { __html: description } }
+                            ? // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input
+                              { dangerouslySetInnerHTML: { __html: description } }
                             : { children: description })}
                     />
                 )}

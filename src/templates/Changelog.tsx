@@ -2,29 +2,16 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 're
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
-import { useUser, User } from 'hooks/useUser'
-import { addRoadmapEmojiReaction, fetchRoadmapReactions, EmojiReaction } from 'hooks/useRoadmaps'
-import {
-    IconDownload,
-    IconPencil,
-    IconPlus,
-    IconShieldLock,
-    IconX,
-    IconEmojiAdd,
-    IconGitBranch,
-    IconCommit,
-    IconCode,
-    IconPeople,
-    IconDocument,
-    IconComment,
-} from '@posthog/icons'
+import { useUser } from 'hooks/useUser'
+import { IconArchive, IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import { ChangelogEmojiReactions } from 'components/EmojiReactions'
+import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
 import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { Popover } from 'components/RadixUI/Popover'
 import Timeline from 'components/Timeline'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -42,8 +29,22 @@ import { Heading } from 'components/Heading'
 import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
 import { useLocation } from '@reach/router'
+import MediaPlayer from 'components/MediaPlayer'
 
 dayjs.extend(utc)
+
+const updateDescriptors = [
+    'mind-blowing',
+    'earth-shattering',
+    'game-changing',
+    'jaw-dropping',
+    'awe-inspiring',
+    'groundbreaking',
+    'revolutionary',
+    'show-stopping',
+    'spectacular',
+    'legendary',
+]
 
 type RoadmapNode = {
     id: number | string
@@ -160,286 +161,6 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-const EmojiReactions = ({ roadmapId }: { roadmapId: number | string }) => {
-    const { user, getJwt } = useUser()
-    const { openSignIn } = useApp()
-    const [reactions, setReactions] = useState<EmojiReaction[]>([])
-    const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
-
-    // Fetch reactions on mount and when roadmapId changes
-    useEffect(() => {
-        fetchRoadmapReactions(roadmapId).then(setReactions)
-    }, [roadmapId])
-
-    const emojiMap = {
-        hedgehog: '🦔',
-        'raised-hands': '🙌',
-        clap: '👏',
-        'thumbs-up': '👍',
-        'pinched-fingers': '🤌',
-        'rock-on': '🤘',
-        'nail-polish': '💅',
-        surprised: '😮',
-        exhale: '😮‍💨',
-        shaking: '🫨',
-        'mind-blown': '🤯',
-        laugh: '😂',
-        grin: '😁',
-        cool: '😎',
-        'heart-eyes': '😍',
-        cowboy: '🤠',
-        chef: '👨‍🍳',
-        robot: '🤖',
-        wizard: '🧙',
-        sparkles: '✨',
-        rocket: '🚀',
-        eyes: '👀',
-        hundred: '💯',
-        fire: '🔥',
-        heart: '❤️',
-        'blue-heart': '💙',
-        boom: '💥',
-        check: '✅',
-        plus: '➕',
-        party: '🎉',
-        'hot-pepper': '🌶️',
-        brain: '🧠',
-        ship: '🚢',
-        zap: '⚡️',
-        ribbon: '🎀',
-        beers: '🍻',
-        champagne: '🍾',
-        dancer: '💃',
-        'disco-ball': '🪩',
-        target: '🎯',
-        siren: '🚨',
-        unicorn: '🦄',
-        dinosaur: '🦖',
-        rainbow: '🌈',
-        bouquet: '💐',
-        flag: '🏁',
-        toolbox: '🧰',
-        camera: '📷',
-        graph: '📈',
-    }
-
-    const checkUserHasReacted = (reaction: EmojiReaction): boolean => {
-        const profiles = reaction?.profiles ? reaction.profiles : []
-        return profiles.some((profile) => profile.id === user?.profile?.id) ?? false
-    }
-
-    const performEmojiReaction = async (emojiKey: string, authenticatedUser?: User) => {
-        const currentUser = authenticatedUser || user
-        if (!currentUser) return
-
-        try {
-            const existingReaction = reactions.find((r) => r.emoji === emojiKey)
-            const userHasReacted = existingReaction
-                ? existingReaction.profiles?.some((profile) => profile.id === currentUser?.profile?.id) ?? false
-                : false
-
-            const jwt = await getJwt()
-
-            if (!jwt) {
-                console.error('No JWT token available')
-                return
-            }
-
-            await addRoadmapEmojiReaction({
-                roadmapId: typeof roadmapId === 'string' ? parseInt(roadmapId) : roadmapId,
-                emoji: emojiKey,
-                remove: userHasReacted,
-                jwt,
-            })
-
-            setIsEmojiPickerOpen(false)
-
-            // Refetch reactions after update
-            const updatedReactions = await fetchRoadmapReactions(roadmapId)
-            setReactions(updatedReactions)
-        } catch (error) {
-            console.error('Failed to update emoji reaction:', error)
-        }
-    }
-
-    const handleEmojiSelect = async (emojiKey: keyof typeof emojiMap) => {
-        if (!user) {
-            openSignIn()
-            setIsEmojiPickerOpen(false)
-            return
-        }
-
-        await performEmojiReaction(emojiKey)
-    }
-
-    return (
-        <>
-            {reactions.map((reaction, index) => {
-                const userHasReacted = checkUserHasReacted(reaction)
-                return (
-                    <button
-                        key={index}
-                        onClick={() => handleEmojiSelect(reaction.emoji as keyof typeof emojiMap)}
-                        className={`rounded-lg px-2 flex flex-row items-center gap-x-1 hover:cursor-pointer border ${
-                            userHasReacted
-                                ? 'border-orange bg-orange/20 dark:bg-orange-dark/20 dark:border-orange-dark'
-                                : 'bg-accent/30 hover:bg-accent/50 border-transparent hover:border-primary'
-                        }`}
-                    >
-                        <span className="text-lg">{emojiMap[reaction.emoji]}</span>
-                        <span
-                            className={`text-xs ${
-                                userHasReacted ? 'font-semibold text-orange-dark dark:text-white' : ''
-                            }`}
-                        >
-                            {(reaction.profiles?.length ?? 0).toLocaleString()}
-                        </span>
-                    </button>
-                )
-            })}
-            <Popover
-                trigger={
-                    <button className="bg-accent/30 rounded-lg px-3 py-1 flex flex-row items-center gap-x-1 hover:cursor-pointer hover:bg-accent/50 border border-transparent hover:border-primary mr-2">
-                        <IconEmojiAdd className="w-4 h-4" />
-                    </button>
-                }
-                contentClassName="border border-primary px-1 py-1"
-                dataScheme="secondary"
-                open={isEmojiPickerOpen}
-                onOpenChange={setIsEmojiPickerOpen}
-                side="top"
-            >
-                <div className="grid grid-cols-7 gap-1 px-2 max-h-[160px] overflow-y-auto scrollbar-hide">
-                    {(Object.keys(emojiMap) as Array<keyof typeof emojiMap>).map((emojiKey, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handleEmojiSelect(emojiKey)}
-                            className="text-xl hover:bg-accent/50 rounded transition-colors py-1 px-1.5"
-                            title={emojiKey}
-                        >
-                            {emojiMap[emojiKey]}
-                        </button>
-                    ))}
-                </div>
-            </Popover>
-        </>
-    )
-}
-
-const GitHubPRInfo = ({ roadmap }: { roadmap: RoadmapNode }) => {
-    const gitHubData = roadmap.githubPRMetadata
-    const scrollContainerRef = React.useRef<HTMLDivElement>(null)
-
-    const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-        if (scrollContainerRef.current) {
-            const container = scrollContainerRef.current
-            const canScrollLeft = container.scrollLeft > 0
-            const canScrollRight = container.scrollLeft < container.scrollWidth - container.clientWidth
-
-            if ((e.deltaY > 0 && canScrollRight) || (e.deltaY < 0 && canScrollLeft)) {
-                e.preventDefault()
-                container.scrollLeft += e.deltaY
-            }
-        }
-    }
-
-    const handleMouseLeave = () => {
-        if (scrollContainerRef.current) {
-            scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' })
-        }
-    }
-
-    return (
-        <>
-            <div className="flex flex-row items-center">
-                <IconGitBranch className="w-4 h-4 opacity-50 mr-1" />
-                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    #{gitHubData.number}
-                </a>
-            </div>
-            <div className="flex flex-row items-center overflow-hidden">
-                <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div
-                    ref={scrollContainerRef}
-                    onWheel={handleWheel}
-                    onMouseLeave={handleMouseLeave}
-                    className="flex flex-row items-center group overflow-x-auto scrollbar-hide"
-                >
-                    {[gitHubData.user, ...(gitHubData.reviewers || []), ...(gitHubData.commenters || [])]
-                        .filter(Boolean)
-                        .map((commenter, index, array) => (
-                            <Tooltip
-                                key={`avatar-${commenter.login}`}
-                                trigger={
-                                    <div
-                                        className={`relative transition-all duration-200 flex-none ${
-                                            index > 0 ? '-ml-2 group-hover:ml-0.5' : ''
-                                        }`}
-                                        style={{ zIndex: array.length - index }}
-                                    >
-                                        <img
-                                            src={commenter.avatar_url}
-                                            alt={`${commenter.login} avatar`}
-                                            loading="lazy"
-                                            decoding="async"
-                                            referrerPolicy="no-referrer"
-                                            className="w-5 h-5 min-w-5 min-h-5 rounded-full border-primary border flex-none"
-                                        />
-                                    </div>
-                                }
-                                side="top"
-                            >
-                                <a
-                                    href={commenter.html_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="opacity-50 font-semibold underline"
-                                >
-                                    {commenter.login}
-                                </a>
-                            </Tooltip>
-                        ))}
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                <div className="flex flex-row gap-x-1">
-                    <span className="text-green font-semibold">+{(gitHubData.additions ?? 0).toLocaleString()}</span>{' '}
-                    <span className="text-red font-semibold">-{(gitHubData.deletions ?? 0).toLocaleString()}</span>
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconCommit className="w-4 h-4 opacity-50 mr-1" />
-                <a
-                    href={gitHubData.html_url + '/commits'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-50"
-                >
-                    {gitHubData.commits}
-                </a>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconDocument className="w-4 h-4 opacity-50 mr-1" />
-                <a
-                    href={gitHubData.html_url + '/files'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-50"
-                >
-                    {gitHubData.changed_files}
-                </a>
-            </div>
-            <div className="flex flex-row items-center">
-                <IconComment className="w-4 h-4 opacity-50 mr-1" />
-                <a href={gitHubData.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
-                    {(gitHubData.comments ?? 0) + (gitHubData.review_comments ?? 0)}
-                </a>
-            </div>
-        </>
-    )
-}
-
 const Roadmap = ({
     roadmap,
     onClose,
@@ -450,7 +171,7 @@ const Roadmap = ({
     initialActiveRoadmap: RoadmapNode | null
 }) => {
     const { appWindow } = useWindow()
-    const { isModerator } = useUser()
+    const { isModerator, getJwt } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
@@ -471,6 +192,27 @@ const Roadmap = ({
                 status="complete"
             />
         )
+    }
+
+    const handleUnpublishRoadmap = async () => {
+        const confirmed = window.confirm(
+            'Unpublishing will remove this item from the changelog on the next build. You can republish it later in Strapi. No data will be lost.'
+        )
+        if (confirmed) {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${roadmap.id}`, {
+                body: JSON.stringify({
+                    data: {
+                        publishedAt: null,
+                    },
+                }),
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            onClose()
+        }
     }
 
     const handleClose = () => {
@@ -495,20 +237,31 @@ const Roadmap = ({
                 exit={{ x: width }}
                 transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
             >
-                <div className="flex justify-between space-x-2 p-4 border-b border-primary">
+                <div className="flex justify-between space-x-2 px-4 pt-4 pb-3.5 border-b border-primary">
                     <div className="flex-1">
                         <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
                         <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
                     </div>
                     <aside className="">
                         {isModerator && (
-                            <Tooltip
-                                trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
-                                delay={0}
-                            >
-                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Edit
-                                roadmap item
-                            </Tooltip>
+                            <>
+                                <Tooltip
+                                    trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
+                                    delay={0}
+                                >
+                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                    Edit roadmap item
+                                </Tooltip>
+                                <Tooltip
+                                    trigger={
+                                        <OSButton size="md" icon={<IconArchive />} onClick={handleUnpublishRoadmap} />
+                                    }
+                                    delay={0}
+                                >
+                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                    Unpublish roadmap item
+                                </Tooltip>
+                            </>
                         )}
                         <OSButton size="md" icon={<IconX />} onClick={handleClose} />
                     </aside>
@@ -584,7 +337,7 @@ const Roadmap = ({
                             <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
                                 <div className="mt-8 mb-4 flex flex-row flex-wrap gap-1">
-                                    <EmojiReactions roadmapId={roadmap.id} />
+                                    <ChangelogEmojiReactions roadmapId={roadmap.id} />
                                 </div>
                             </div>
                         )}
@@ -592,8 +345,8 @@ const Roadmap = ({
                 </div>
 
                 {roadmap.githubPRMetadata && (
-                    <div className="px-4 py-4 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
-                        <GitHubPRInfo roadmap={roadmap} />
+                    <div className="px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                        <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
                     </div>
                 )}
 
@@ -644,6 +397,16 @@ interface RoadmapCardsProps {
     videos: ChangelogVideo[]
 }
 
+const ChangelogVideo = ({ videoId, title }: { videoId: string; title: string }) => {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    useEffect(() => {
+        if (!appWindow) return
+        setWindowTitle(appWindow, title)
+    }, [])
+    return <MediaPlayer videoId={videoId} source="youtube" />
+}
 const RoadmapCards = ({
     startYear,
     endYear,
@@ -658,6 +421,7 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
+    const { addWindow } = useApp()
     // Two-week buckets need to preserve the same overall per-month width, so each card spans two former week widths.
     const width = 600
 
@@ -857,38 +621,34 @@ const RoadmapCards = ({
         return () => clearTimeout(timer)
     }, [periods, width])
 
-    // Map vertical scroll to horizontal scroll
-    useEffect(() => {
-        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-        if (!viewport) return
-
-        const handleWheel = (e: WheelEvent) => {
-            const targetViewport =
-                e.target instanceof Element
-                    ? (e.target.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null)
-                    : null
-            const targetViewportChild = targetViewport?.querySelector('div') as HTMLElement | null
-
-            if (
-                targetViewport &&
-                targetViewportChild &&
-                targetViewport !== viewport &&
-                targetViewportChild.getBoundingClientRect().height > targetViewport.getBoundingClientRect().height
-            )
-                return
-
-            // Only handle vertical scrolling (deltaY)
-            if (e.deltaY !== 0) {
-                e.preventDefault()
-                viewport.scrollLeft += e.deltaY
-            }
+    const handlePlayVideo = (video: ChangelogVideo) => {
+        const size = {
+            width: 500,
+            height: 467,
         }
-
-        viewport.addEventListener('wheel', handleWheel, { passive: false })
-        return () => {
-            viewport.removeEventListener('wheel', handleWheel)
+        const appSettings = {
+            size: {
+                min: size,
+                max: size,
+                autoHeight: true,
+            },
         }
-    }, [])
+        addWindow(
+            <ChangelogVideo
+                videoId={video.videoId}
+                title={video.title}
+                newWindow
+                location={{ pathname: `changelog-video-${video.videoId}` }}
+                key={`changelog-video-${video.videoId}`}
+                appSettings={appSettings}
+                position={{
+                    x: window.innerWidth - size.width - 20,
+                    y: window.innerHeight - size.height - 20,
+                }}
+                size={size}
+            />
+        )
+    }
 
     return (
         <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
@@ -916,7 +676,7 @@ const RoadmapCards = ({
                             ),
                         }))
                         const periodKey = `${periodData.year}-${periodData.month}-${periodData.period}`
-                        const periodVideos = videosByPeriod.get(periodKey) || []
+                        const periodVideo = videosByPeriod.get(periodKey)?.[0] || null
 
                         return (
                             <div
@@ -932,33 +692,41 @@ const RoadmapCards = ({
                                 }}
                             >
                                 <div className="w-full h-full flex flex-col bg-white dark:bg-dark rounded border border-primary overflow-hidden">
-                                    <div className="flex items-center justify-between p-4 border-b border-primary">
-                                        <h4 className="m-0 text-lg font-semibold">
-                                            {monthName} {periodData.year} - {periodLabel}
-                                        </h4>
-                                        <div className="size-7 flex items-center justify-center bg-accent rounded-full text-sm font-semibold">
-                                            {count}
+                                    <div className="flex items-center justify-between p-2 border-b border-primary gap-4">
+                                        <div className="pl-2">
+                                            <h4 className="m-0 text-lg font-semibold">
+                                                {monthName} {periodData.year} - {periodLabel}
+                                            </h4>
+                                            <p className="m-0 text-sm text-secondary">
+                                                {count}{' '}
+                                                {
+                                                    updateDescriptors[
+                                                        (periodData.month * 2 +
+                                                            periodData.year * 24 +
+                                                            periodData.period) %
+                                                            updateDescriptors.length
+                                                    ]
+                                                }{' '}
+                                                update{count !== 1 ? 's' : ''}
+                                            </p>
                                         </div>
+                                        {periodVideo && (
+                                            <button
+                                                onClick={() => handlePlayVideo(periodVideo)}
+                                                className="shrink-0 w-[140px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
+                                            >
+                                                <img
+                                                    src={`https://img.youtube.com/vi/${periodVideo.videoId}/hqdefault.jpg`}
+                                                    alt={periodVideo.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <span className="text-white text-2xl">▶</span>
+                                                </div>
+                                            </button>
+                                        )}
                                     </div>
                                     <div className="w-full flex-1 min-h-0 flex flex-col">
-                                        {periodVideos.length > 0 && (
-                                            <div className="border-b border-primary divide-y divide-primary bg-primary/20">
-                                                {periodVideos.map((video) => (
-                                                    <div key={video.id} className="p-2">
-                                                        <div className="aspect-video rounded border border-primary overflow-hidden w-full bg-black max-w-screen">
-                                                            <iframe
-                                                                title={video.title}
-                                                                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
-                                                                loading="lazy"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowFullScreen
-                                                                className="w-full h-full"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
                                         <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
                                             {columns.map((column) => (
                                                 <div key={column.weekNumber} className="flex flex-col min-h-0">
@@ -1286,7 +1054,7 @@ export default function Changelog({
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
                             <RoadmapCards
                                 startYear={2020}
-                                endYear={2025}
+                                endYear={2026}
                                 roadmaps={filteredData}
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}
@@ -1309,7 +1077,7 @@ export default function Changelog({
                                 >
                                     <Timeline
                                         startYear={2020}
-                                        endYear={2025}
+                                        endYear={2026}
                                         data={roadmapsGrouped}
                                         onDrag={handleDrag}
                                         windowX={windowX}

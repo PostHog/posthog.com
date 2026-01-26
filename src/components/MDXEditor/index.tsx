@@ -41,6 +41,7 @@ export default function MDXEditor({
     mdxBody,
     jsxComponentDescriptors = [],
     cta,
+    noEditorWrapper = false,
 }: {
     mdxBody?: string
     body: string
@@ -49,6 +50,7 @@ export default function MDXEditor({
         url: string
         label: string
     }
+    noEditorWrapper?: boolean
 }) {
     const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
@@ -127,6 +129,52 @@ export default function MDXEditor({
         }
     }
 
+    const content = (
+        <div onClick={handleClick} ref={mdxEditorContainerRef}>
+            {isSSR && mdxBody ? (
+                <MDXProvider components={mdxComponents}>
+                    <MDXRenderer>{mdxBody}</MDXRenderer>
+                </MDXProvider>
+            ) : (
+                <MDXEditorComponent
+                    readOnly={websiteMode}
+                    contentEditableClassName="outline-none"
+                    markdown={body}
+                    lexicalTheme={{
+                        link: 'mdx-editor-link cursor-pointer',
+                    }}
+                    plugins={[
+                        headingsPlugin(),
+                        frontmatterPlugin(),
+                        listsPlugin(),
+                        linkPlugin(),
+                        jsxPlugin({ jsxComponentDescriptors }),
+                        toolbarPlugin({
+                            toolbarContents: () => {
+                                const [currentFormat, activeEditor] = useCellValues(currentFormat$, activeEditor$)
+                                const applyFormat = usePublisher(applyFormat$)
+                                useEffect(() => {
+                                    applyFormatRef.current = applyFormat
+                                }, [])
+                                useEffect(() => {
+                                    setCurrentFormat(currentFormat)
+                                }, [currentFormat])
+                                useEffect(() => {
+                                    setActiveEditor(activeEditor)
+                                }, [activeEditor])
+                                return null
+                            },
+                        }),
+                    ]}
+                />
+            )}
+        </div>
+    )
+
+    if (noEditorWrapper) {
+        return content
+    }
+
     return (
         <Editor
             type="mdx"
@@ -166,45 +214,7 @@ export default function MDXEditor({
             }}
             cta={cta}
         >
-            <div onClick={handleClick} ref={mdxEditorContainerRef}>
-                {isSSR && mdxBody ? (
-                    <MDXProvider components={mdxComponents}>
-                        <MDXRenderer>{mdxBody}</MDXRenderer>
-                    </MDXProvider>
-                ) : (
-                    <MDXEditorComponent
-                        readOnly={websiteMode}
-                        contentEditableClassName="outline-none"
-                        markdown={body}
-                        lexicalTheme={{
-                            link: 'mdx-editor-link cursor-pointer',
-                        }}
-                        plugins={[
-                            headingsPlugin(),
-                            frontmatterPlugin(),
-                            listsPlugin(),
-                            linkPlugin(),
-                            jsxPlugin({ jsxComponentDescriptors }),
-                            toolbarPlugin({
-                                toolbarContents: () => {
-                                    const [currentFormat, activeEditor] = useCellValues(currentFormat$, activeEditor$)
-                                    const applyFormat = usePublisher(applyFormat$)
-                                    useEffect(() => {
-                                        applyFormatRef.current = applyFormat
-                                    }, [])
-                                    useEffect(() => {
-                                        setCurrentFormat(currentFormat)
-                                    }, [currentFormat])
-                                    useEffect(() => {
-                                        setActiveEditor(activeEditor)
-                                    }, [activeEditor])
-                                    return null
-                                },
-                            }),
-                        ]}
-                    />
-                )}
-            </div>
+            {content}
         </Editor>
     )
 }

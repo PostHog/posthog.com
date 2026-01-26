@@ -14,6 +14,7 @@ import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
+import { useToast } from '../../context/Toast'
 
 declare global {
     interface Window {
@@ -83,23 +84,23 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                {
-                    label: 'Open app ↗',
-                    Icon: <AppIcon name="computerCoffee" />,
-                    url: 'https://app.posthog.com',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
             : [
-                {
-                    label: 'Sign up ↗',
-                    Icon: <AppIcon name="compass" />,
-                    url: 'https://app.posthog.com/signup',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]),
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
     ]
 }
 
@@ -207,6 +208,7 @@ export default function Desktop() {
         windows,
         websiteMode,
         posthogInstance,
+        updateSiteSettings,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -216,7 +218,7 @@ export default function Desktop() {
     const [navVisible, setNavVisible] = useState(false)
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
-
+    const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
@@ -357,6 +359,40 @@ export default function Desktop() {
     }
 
     const allApps = [...productLinks, ...apps]
+
+    const handleScreensaverDismiss = () => {
+        addToast({
+            title: 'Screensaver dismissed',
+            description: 'Want to disable it permanently?',
+            duration: 10000,
+            actionLabel: 'Disable screensaver',
+            onAction: () => {
+                updateSiteSettings({ ...siteSettings, screensaverDisabled: true })
+                addToast({
+                    title: 'Screensaver disabled',
+                    description: (
+                        <>
+                            Change this setting in{' '}
+                            <Link
+                                to="/display-options"
+                                className="text-red dark:text-yellow font-semibold"
+                                state={{ newWindow: true }}
+                            >
+                                Display options
+                            </Link>
+                            .
+                        </>
+                    ),
+                    duration: 10000,
+                    onUndo: () => {
+                        updateSiteSettings({ ...siteSettings, screensaverDisabled: false })
+                    },
+                })
+            },
+        })
+        setScreensaverPreviewActive(false)
+        dismiss()
+    }
 
     return (
         <>
@@ -585,10 +621,7 @@ export default function Desktop() {
                     {!compact && (
                         <Screensaver
                             isActive={isInactive || screensaverPreviewActive}
-                            onDismiss={() => {
-                                setScreensaverPreviewActive(false)
-                                dismiss()
-                            }}
+                            onDismiss={handleScreensaverDismiss}
                         />
                     )}
                     <HedgeHogModeEmbed />

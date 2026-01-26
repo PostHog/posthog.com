@@ -7,7 +7,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from 'gatsby'
 
 interface VideoChapter {
     title: string
@@ -27,23 +27,23 @@ interface VideosSlideProps {
         videos?: Record<string, Video>
     }
     videoKeys?: string[]
+    title?: string
 }
 
 // Video player window component
 const VideoPlayerWindow = ({ video, startTime = 0 }: any) => {
     return (
         <div className="h-full w-full bg-black">
-            <WistiaCustomPlayer
-                theme="dark"
-                mediaId={video.wistia}
-                autoPlay={true}
-                startTime={startTime}
-            />
+            <WistiaCustomPlayer theme="dark" mediaId={video.wistia} autoPlay={true} startTime={startTime} />
         </div>
     )
 }
 
-export default function VideosSlide({ productData, videoKeys }: VideosSlideProps) {
+export default function VideosSlide({
+    productData,
+    videoKeys,
+    title = 'How PostHog uses PostHog AI',
+}: VideosSlideProps) {
     const { addWindow } = useApp()
     const { addToast } = useToast()
     const [selectedVideoKey, setSelectedVideoKey] = useState<string | null>(null)
@@ -163,9 +163,7 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                 className="h-full bg-gradient-to-b from-[#08080A] to-[#737385] text-white overflow-auto"
             >
                 <div className="p-8 @2xl:p-12">
-                    <h2 className="text-4xl @2xl:text-5xl font-bold text-center mb-8 @2xl:mb-12">
-                        How PostHog uses PostHog AI
-                    </h2>
+                    <h2 className="text-4xl @2xl:text-5xl font-bold text-center mb-8 @2xl:mb-12">{title}</h2>
 
                     <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 gap-6 @2xl:gap-8 items-start">
                         {displayVideoKeys.map((key) => {
@@ -203,12 +201,10 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                             icon={<IconArrowRightDown className="rotate-180" />}
                             iconPosition="left"
                         >
-                            How PostHog uses PostHog AI:
+                            {title}:
                         </OSButton>
                         <div>
-                            <h2 className="text-3xl font-bold text-center">
-                                {selectedVideo?.title}
-                            </h2>
+                            <h2 className="text-3xl font-bold text-center">{selectedVideo?.title}</h2>
                         </div>
                     </div>
 
@@ -260,7 +256,15 @@ export default function VideosSlide({ productData, videoKeys }: VideosSlideProps
                                                     <span className="inline-block pt-1 font-mono text-sm opacity-70 shrink-0 pr-2">
                                                         {formatTime(chapter.time)}
                                                     </span>
-                                                    <span className={`flex-1 ${chapter.copyable ? 'before:content-["“"] after:content-["”"]' : ''}`}>{chapter.title}</span>
+                                                    <span
+                                                        className={`flex-1 ${
+                                                            chapter.copyable
+                                                                ? 'before:content-["“"] after:content-["”"]'
+                                                                : ''
+                                                        }`}
+                                                    >
+                                                        {chapter.title}
+                                                    </span>
                                                 </button>
                                                 {chapter.copyable && (
                                                     <OSButton
@@ -322,7 +326,7 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
     return (
         <button
             onClick={onClick}
-            className="group relative rounded overflow-hidden hover:ring-2 hover:ring-yellow h-full"
+            className="group relative rounded overflow-hidden hover:ring-2 hover:ring-yellow h-full flex flex-col"
         >
             <div className="aspect-video bg-black flex items-center justify-center relative">
                 {isLoading ? (
@@ -332,11 +336,7 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
                         <img src={thumbnailUrl} alt={video.title} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 flex items-center justify-center">
                             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-colors">
-                                <svg
-                                    className="w-8 h-8 text-white ml-1"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
+                                <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
                             </div>
@@ -355,8 +355,6 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
 
 // Component to fetch and display author's team and pineapple preference
 function AuthorInfo({ name }: { name: string }) {
-    const { graphql, useStaticQuery } = require('gatsby')
-
     const {
         profiles: { nodes },
     } = useStaticQuery(graphql`
@@ -424,10 +422,22 @@ function AuthorInfo({ name }: { name: string }) {
                     </Link>
                 )}
                 <div className="text-left">
-                    <div className="text-2xl font-semibold"><Link to={`/community/profiles/${person.squeakId}`} state={{ newWindow: true }} className="hover:underline">{fullName}</Link></div>
+                    <div className="text-2xl font-semibold">
+                        <Link
+                            to={`/community/profiles/${person.squeakId}`}
+                            state={{ newWindow: true }}
+                            className="hover:underline"
+                        >
+                            {fullName}
+                        </Link>
+                    </div>
                     {teamSlug && (
                         <div className="text-secondary">
-                            <SmallTeam slug={teamSlug} inline className="!text-white [&_span]:!text-lg [&_span]:no-underline [&_span]:hover:underline" />
+                            <SmallTeam
+                                slug={teamSlug}
+                                inline
+                                className="!text-white [&_span]:!text-lg [&_span]:no-underline [&_span]:hover:underline"
+                            />
                         </div>
                     )}
                     {person.pineappleOnPizza !== null && person.pineappleOnPizza !== undefined && (

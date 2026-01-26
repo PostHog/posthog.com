@@ -558,7 +558,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
     },
     rayfit: {
-        name: 'Rayfit',
+        name: 'RayFit',
         toolsUsed: ['product_analytics', 'experiments', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         industries: ['Fitness'],
         users: ['Product', 'Engineering'],

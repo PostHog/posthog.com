@@ -48,6 +48,8 @@ I joined PostHog when we were 11 people and had sold nothing. 5 years later, we�
 
 12. Copy the bits you like about other, more successful companies or leaders – don’t import them in their entirety. Remember, you are probably not as smart as Jensen Huang.
 
+<NewsletterForm />
+
 ## Product and engineering
 
 13. [Small teams](/newsletter/small-teams) scale extremely well. One of the best things we’ve ever done is to keep engineering teams to six people or fewer.

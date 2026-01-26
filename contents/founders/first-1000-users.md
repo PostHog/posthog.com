@@ -106,7 +106,7 @@ Doing this surfaced lots of edge cases we wouldn’t have considered on our own.
 
 We weren't self-serve at this stage. In fact, we had to create new users by manually editing the database. We set people up over Slack, WhatsApp, or in-person. We managed to get to 10 users mostly from using our personal networks.
 
-Once we were confident friends could use the product and found it useful, we focused on making PostHog self-serve by creating a one-click Heroku deployment. We knew this wasn’t scalable – we were prioritizing validating our idea quickly.
+Once we were confident friends could use the product and found it useful, we focused on making PostHog self-serve by creating a one-click Heroku deployment. We knew this wasn’t scalable – we were prioritizing [validating our idea](/newsletter/validating-product-ideas) quickly.
 
 ![meetings](https://res.cloudinary.com/dmukukwp6/image/upload/meetings_a65d6cf7dd.png)
 

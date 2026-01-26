@@ -216,6 +216,7 @@ export const pendo = {
             sdks: false,
             server_side_sdks: true,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',

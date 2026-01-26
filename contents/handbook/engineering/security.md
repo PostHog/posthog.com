@@ -20,15 +20,11 @@ Once commit signing is configured, enable the option in your [GitHub Profile](ht
 
 ### GitHub Actions
 
-Great care should be taken when writing or modifying a GitHub Actions workflow. In public repos, Actions may run against PRs written by external contributors.
+Great care should be taken when writing or modifying a GitHub Actions workflow.
 
-#### Event `pull_request_target`
+#### External contributors
 
-Note: GitHub will be [altering this behavior](https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/) on Dec 8, 2025.
-
-Actions that run on the `pull_request_target` event will run on external contributors' PRs, with full access to secrets, without requiring prior approval. This can allow an attacker to run arbitrary code with full access to a repo's GitHub Action secrets. Only use `pull_request_target` when a workflow explicitly requires access to secrets
-
-If your workflow does not require access to secrets when run against an external contributor's PR, use the `pull_request` event instead.
+In public repos, Actions may run against PRs written by external contributors. These PRs should be reviewed thoroughly before [approving workflows to run](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/approve-runs-from-forks) against them. Otherwise, a malicious PR could gain access to and steal all of the secrets available to the repo.
 
 ## Managing secrets
 

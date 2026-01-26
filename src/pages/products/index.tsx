@@ -260,10 +260,11 @@ export default function Products(): JSX.Element {
                                             return (
                                                 <div className="@container space-y-2">
                                                     <div
-                                                        className={`bg-${sidePanelProduct.color} pt-4 relative flex ${sidePanelProduct.screenshots?.home?.classes
+                                                        className={`bg-${sidePanelProduct.color} pt-4 relative flex ${
+                                                            sidePanelProduct.screenshots?.home?.classes
                                                                 ? sidePanelProduct.screenshots.home.classes
                                                                 : 'justify-center px-4 shadow-2xl'
-                                                            }`}
+                                                        }`}
                                                     >
                                                         <CloudinaryImage
                                                             src={
@@ -335,13 +336,13 @@ export default function Products(): JSX.Element {
                                     There are four main components to the Product OS toolkit:
                                 </p>
                                 <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                    <li>Customer data infrastructure</li>
                                     <li>Product engineering tools</li>
                                     <li>Analytics/data viz</li>
                                     <li>
                                         Automation & AI{' '}
                                         <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
                                     </li>
+                                    <li>PostHog data stack</li>
                                 </ul>
                                 {/* 
                                 <OSButton
@@ -461,11 +462,12 @@ export default function Products(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${isListLayout
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
                                                                 ? '@lg:grid-cols-2 @3xl:grid-cols-3'
                                                                 : explorerGridColumns +
-                                                                'gap-y-4 items-start justify-items-center'
-                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                                  'gap-y-4 items-start justify-items-center'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
                                                             <button
@@ -496,10 +498,11 @@ export default function Products(): JSX.Element {
                                                                         hoverTimeoutRef.current = null
                                                                     }
                                                                 }}
-                                                                className={`w-full p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${product.status === 'WIP'
+                                                                className={`w-full p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
+                                                                    product.status === 'WIP'
                                                                         ? 'cursor-default opacity-75'
                                                                         : 'cursor-pointer'
-                                                                    } ${selectedProduct?.slug === product.slug ? '' : ''}`}
+                                                                } ${selectedProduct?.slug === product.slug ? '' : ''}`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>

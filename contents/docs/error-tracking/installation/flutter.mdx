@@ -1,7 +1,7 @@
 ---
 title: Flutter error tracking installation
 showStepsToc: true
-platformImageUrl: https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg
+platformLogo: flutter
 tableOfContents: [
   {
     url: 'install-posthog-flutter-sdk',
@@ -22,6 +22,11 @@ tableOfContents: [
     url: 'verify-error-tracking',
     value: 'Verify error tracking',
     depth: 1,
+  },
+  {
+    url: 'upload-source-maps',
+    value: 'Upload source maps',
+    depth: 1,
   }
 ]
 ---
@@ -31,6 +36,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 import InstallFlutter from "../../integrate/_snippets/install-flutter-manual.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSymbolSets from "./_snippets/step-upload-symbol-sets.tsx"
 
 <CalloutBox icon="IconInfo" title="Planned features" type="fyi">
 
@@ -42,7 +48,6 @@ We currently don't support the following features:
 - No native iOS exception capture
 - No native C/C++ exception capture on Android (Java/Kotlin only)
 - No background isolate error capture
-- No Flutter web support
 
 These features will be added in future releases.
 
@@ -54,7 +59,7 @@ These features will be added in future releases.
 
 <CalloutBox icon="IconInfo" title="SDK version requirement" type="action">
 
-A minimum SDK version of [5.9.0](https://github.com/PostHog/posthog-flutter/releases/tag/5.9.0) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
+A minimum SDK version of [5.12.0](https://github.com/PostHog/posthog-flutter/releases/tag/5.12.0) is required, but we recommend [keeping up with the latest SDK version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
 </CalloutBox>
 
@@ -79,7 +84,7 @@ final config = PostHogConfig('<ph_project_api_key>');
 config.errorTrackingConfig.captureFlutterErrors = true;
 config.errorTrackingConfig.capturePlatformDispatcherErrors = true;
 config.errorTrackingConfig.captureIsolateErrors = true;
-config.errorTrackingConfig.captureNativeExceptions = true; // Android only
+config.errorTrackingConfig.captureNativeExceptions = true;
 config.errorTrackingConfig.captureSilentFlutterErrors = false;
 
 await Posthog().setup(config);
@@ -88,9 +93,9 @@ await Posthog().setup(config);
 **Configuration options:**
 
 - **`captureFlutterErrors`**: Captures Flutter framework errors (FlutterError.onError)
-- **`capturePlatformDispatcherErrors`**: Captures Dart runtime errors (PlatformDispatcher.onError)
-- **`captureIsolateErrors`**: Captures errors from main isolate
-- **`captureNativeExceptions`**: Captures native exceptions (Android only - Java/Kotlin exceptions)
+- **`capturePlatformDispatcherErrors`**: Captures Dart runtime errors (PlatformDispatcher.onError) // Web not supported
+- **`captureIsolateErrors`**: Captures errors from main isolate // Web not supported
+- **`captureNativeExceptions`**: Captures native exceptions (Java/Kotlin exceptions) // Android only
 - **`captureSilentFlutterErrors`**: Captures Flutter errors that are marked as silent (default: false)
 
 </Step>
@@ -122,6 +127,12 @@ This is helpful if you've built your own error handling logic or want to capture
 
 ### Error tracking configuration
 
+<CalloutBox icon="IconInfo" title="Flutter web apps use minified stack trace frames" type="fyi">
+
+Flutter web apps generate minified stack trace frames by default, which may cause the configurations below to behave differently or not work as expected.
+
+</CalloutBox>
+
 You can configure error tracking behavior when setting up PostHog:
 
 ```dart
@@ -147,5 +158,17 @@ These are highlighted in the PostHog error tracking interface to help you focus 
 </Step>
 
 <StepVerifyErrorTracking />
+
+<Step title="Upload source maps" badge="required">
+
+<CalloutBox icon="IconInfo" title="Flutter web apps use minified stack trace frames" type="fyi">
+
+This is required only for Flutter web.
+
+</CalloutBox>
+
+<StepUploadSymbolSets urlPath="flutter" framework="Flutter" />
+
+</Step>
 
 </Steps>

@@ -79,8 +79,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       seo: FrontmatterSEO
       hideFromIndex: Boolean
       price: String
-      platformImageUrl: String
+      platformLogo: String
       platformIconName: String
+      platformSourceType: String
       featuredImageCaption: String
     }
     type TeamData {
@@ -253,6 +254,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type Roadmap implements Node {
       year: Int
+      githubUrls: [String]
       githubPRMetadata: GitHubPRMetadata
     }
     type GitHubPRMetadata {
@@ -495,6 +497,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         videoId: String!
         publishedAt: Date! @dateformat
         title: String!
+    }
+    type PostHogWorkflowTemplateCreatedBy {
+        first_name: String
+        last_name: String
+    }
+    type PostHogWorkflowTemplateFields {
+        slug: String
+    }
+    type PostHogWorkflowTemplate implements Node {
+        templateId: String
+        name: String
+        description: String
+        image_url: String
+        created_at: Date
+        created_by: PostHogWorkflowTemplateCreatedBy
+        fields: PostHogWorkflowTemplateFields
     }
   `)
     createTypes([

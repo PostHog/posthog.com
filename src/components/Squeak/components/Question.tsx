@@ -39,6 +39,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import ZendeskTicket from 'components/ZendeskTicket'
 import { TopicSelector } from './TopicSelector'
 import { XIcon } from 'lucide-react'
+import { useToast } from '../../../context/Toast'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -52,18 +53,30 @@ type QuestionProps = {
     onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
     subscribeButton?: boolean
     isInForum?: boolean
+    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
 }
 
 export const CurrentQuestionContext = createContext<any>({})
 
-const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
+const TopicSelect = (props: {
+    selectedTopics: StrapiData<TopicData[]>
+    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
+}) => {
     const { pinTopics } = useContext(CurrentQuestionContext)
     const [topicGroups, setTopicGroups] = useState([])
     const [selectedTopics, setSelectedTopics] = useState<StrapiRecord<TopicData>[]>([])
+    const { addToast } = useToast()
 
     const handleChange = async (topics: StrapiRecord<TopicData>[]) => {
         setSelectedTopics(topics)
         await pinTopics(topics.map((topic) => topic.id))
+        props.onPinTopics?.(topics)
+        const topicsAdded = topics.length - selectedTopics.length
+        const action = topicsAdded > 0 ? 'pinned' : 'unpinned'
+        addToast({
+            title: `Topic ${action}`,
+            description: `The topic has been ${action} successfully.`,
+        })
     }
 
     useEffect(() => {
@@ -104,7 +117,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                         data-scheme="primary"
                         className={`list-none p-0 m-0 absolute z-20 max-h-[500px] divide-y divide-primary mt-2 bg-primary shadow-xl border border-primary rounded min-w-52`}
                     >
-                        <div className="relative">
+                        <div className="relative w-full">
                             <ScrollArea className="min-h-0 h-[500px] max-h-[500px]">
                                 {topicGroups
                                     .sort(
@@ -427,7 +440,7 @@ const AskMax = ({
 }
 
 export function Question(props: QuestionProps) {
-    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, ...other } = props
+    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, onPinTopics, ...other } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
@@ -437,11 +450,11 @@ export function Question(props: QuestionProps) {
         if (
             notifications?.length > 0 &&
             notifications.some(
-                (notification) => notification.question.id === id || notification.question.permalink === id
+                (notification) => notification.question?.id === id || notification.question?.permalink === id
             )
         ) {
             const newNotifications = notifications.filter(
-                (notification) => notification.question.id !== id && notification.question.permalink !== id
+                (notification) => notification.question?.id !== id && notification.question?.permalink !== id
             )
             setNotifications(newNotifications)
         }
@@ -541,7 +554,12 @@ export function Question(props: QuestionProps) {
                         <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
                             {user?.role?.type === 'moderator' && showActions && (
                                 <>
-                                    {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
+                                    {!archived && (
+                                        <TopicSelect
+                                            onPinTopics={onPinTopics}
+                                            selectedTopics={questionData.attributes.pinnedTopics}
+                                        />
+                                    )}
                                     <EscalateButton escalate={escalate} escalated={escalated} />
                                     {!archived ? (
                                         <OSButton

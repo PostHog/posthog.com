@@ -6,13 +6,11 @@ import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
 import { useApp } from '../../context/App'
-
 
 interface AccordionItem {
     title: string
@@ -140,26 +138,29 @@ export default function Explorer({
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            {!fullScreen || !websiteMode && (
-                <>
-                    <HeaderBar
-                        {...getHeaderBarProps()}
-                        searchContentRef={searchContainerRef}
-                        rightActionButtons={rightActionButtons}
-                        onSearch={onSearch}
-                    />
-                    <AddressBar
-                        selectOptions={selectOptions}
-                        currentPath={currentPath}
-                        handleValueChange={handleValueChange}
-                        selectedCategory={selectedCategory}
-                    />
-                </>
-            )}
+            {!fullScreen ||
+                (!websiteMode && (
+                    <>
+                        <HeaderBar
+                            {...getHeaderBarProps()}
+                            searchContentRef={searchContainerRef}
+                            rightActionButtons={rightActionButtons}
+                            onSearch={onSearch}
+                        />
+                        <AddressBar
+                            selectOptions={selectOptions}
+                            currentPath={currentPath}
+                            handleValueChange={handleValueChange}
+                            selectedCategory={selectedCategory}
+                        />
+                    </>
+                ))}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'} ${websiteMode && 'max-w-7xl'}`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'} ${
+                        websiteMode && 'max-w-7xl'
+                    }`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -220,8 +221,9 @@ export default function Explorer({
                                 )}
                                 <div
                                     ref={searchContainerRef}
-                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative @md:p-4' : ''
-                                        } `}
+                                    className={`${getProseClasses()} max-w-none h-full ${
+                                        padding ? 'relative @md:p-4' : ''
+                                    } `}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}

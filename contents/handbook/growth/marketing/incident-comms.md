@@ -53,7 +53,8 @@ These are principles to keep in mind during any incident:
 -   **Aim not to send broad customer comms until an incident is resolved or a post-mortem is published.**
     Major or critical incidents will often have a public post-mortem – this should usually be the backbone of any wider comms. Don't communicate before resolution unless there is a strong need.
 
-> **When handling a security incident:** align with the incident lead in the incident Slack channel about public communication of security issues before proceeding. E.g. it could make sense to hold back communication of an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
+> **When handling a security incident:** align with the incident lead in the incident Slack channel about public communication of security issues before proceeding. E.g. it could make sense to hold back communication of an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good. However, in some cases of data breach and security incidents, like the [download of malicious packages](/blog/nov-24-shai-hulud-attack-post-mortem), it is better to notify users immediately, in case the incident lead has identified that **users can take action to prevent the malicious packages from spreading further.** 
+
 
 What does the Comms Lead do?
 ----------------------------
@@ -75,9 +76,11 @@ At a high level, the Comms Lead is responsible for *how* we talk about the incid
     -   Keep messages in plain English, impact-first, and avoid status-speak. Use existing [communication templates for incidents](/handbook/growth/sales/communications-templates-incidents) as a reference.
     -   By default, communicate through email rather than in social posts. Social posts can exacerbate an issue.
     -   Direct users to the status page or post-mortem (if available) as the source of truth. 
+     > **When do we need to notify users immediately?** For security incidents, like the [download of malicious packages](/blog/nov-24-shai-hulud-attack-post-mortem), in case the incident lead has identified that users can take action to reduce their risk, we should notify users immediately with clear steps how to act on their side. Product downtime that doesn’t involve security breaches/attacks should be addressed after the incident is closed and we have the context needed to inform users.
 
 -   **Support the post-mortem process.**
     For major/critical incidents you may need to help shape and review the post-mortem with the incident lead and approvers (Tim and/or Ben, and Charles). Once published, use the post-mortem as the primary reference for any follow-up comms (emails, service messages, etc.), rather than rewriting multiple different explanations.
+    > **After a data breach/security incident** the comms lead should contribute to the post-mortem by transparently addressing the impact, what went well, and what could have gone better. 
 -   **Keep Sales and Support teams notified of impact.**
     Often these teams are dealing with the brunt of the customer response and your goal should be support them by giving them the information they need to respond effectively. 
 -   **Handover to another Comms Lead, if needed.**

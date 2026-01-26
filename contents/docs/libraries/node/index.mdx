@@ -4,8 +4,7 @@ sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js/tree/main/packages/node'
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
+platformLogo: nodejs
 features:
   eventCapture: true
   userIdentification: true
@@ -36,7 +35,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
-| `evaluation_environments`     | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. | `undefined`                |
+| `evaluation_contexts`         | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 5.10.0+. The legacy parameter `evaluation_environments` (version 5.9.6+) is also supported for backward compatibility. | `undefined`                |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
@@ -247,6 +246,10 @@ await client.reloadFeatureFlags()
 // Do something with feature flags here
 ```
 
+#### Distributed environments
+
+In multi-worker or edge environments, you can implement custom caching for flag definitions using Redis, Cloudflare KV, or other storage backends. This enables sharing definitions across workers and coordinating fetches. See our guide for [local evaluation in distributed environments](/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js) for details.
+
 ## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
@@ -398,7 +401,7 @@ You can capture LLM usage and performance data by combining the `posthog-node` a
 
 ## Error tracking
 
-You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation?tab=Node).
+You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation/node).
 
 ## Upgrading from V1 to V2
 

@@ -13,14 +13,17 @@ export const Feature = ({ title, description, image, background, border, fade }:
     return (
         <li className="text-center">
             <div
-                className={`mb-2 w-full ${background || (border && 'rounded overflow-hidden')} ${background && 'bg-accent'
-                    } ${border && 'border border-primary'} ${fade &&
+                className={`mb-2 w-full ${background || (border && 'rounded overflow-hidden')} ${
+                    background && 'bg-accent'
+                } ${border && 'border border-primary'} ${
+                    fade &&
                     'relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
-                    }`}
+                }`}
             >
                 {image}
             </div>
             <h4 className="mb-1 leading-tight text-lg">{title}</h4>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - feature description from CMS, not user input */}
             <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )

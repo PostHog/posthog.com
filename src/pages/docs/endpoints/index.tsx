@@ -7,7 +7,7 @@ import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
 import { CalloutBox } from 'components/Docs/CalloutBox'
-import Beta from '../../../../contents/docs/endpoints/_snippets/beta.mdx'
+import EndpointsBetaSnippet from '../../../../contents/docs/endpoints/_snippets/beta.mdx'
 
 export const Content = () => {
     return (
@@ -16,7 +16,7 @@ export const Content = () => {
                 <h2 className="mb-4" id="overview">
                     Overview
                 </h2>
-                <Beta />
+                <EndpointsBetaSnippet />
                 <div>
                     <p>
                         Endpoints enable you to create predefined queries from PostHog insights or SQL queries and
@@ -156,6 +156,8 @@ const Endpoints: React.FC = () => {
                         description="Create predefined queries from insights or SQL and expose them as optimized API endpoints."
                         buttonText="Get started"
                         buttonLink="/docs/endpoints/start-here"
+                        imageClasses="max-h-48 md:max-h-64"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_endpoints_8737bb2c29.png"
                     />
                 </section>
 

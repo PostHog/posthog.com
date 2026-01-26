@@ -25,14 +25,14 @@ For **server-side SDKs** (Node, Python, PHP, etc.), each call to `getFeatureFlag
 </CalloutBox>
 
 
-Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
+Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
 <CalloutBox icon="IconWarning" title="Unused flags still incur charges" type="caution">
 
   Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
-  
+
   To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
 
 </CalloutBox>
@@ -65,20 +65,9 @@ You can do the following using the [advanced configuration](/docs/libraries/js/c
 
 3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey-related feature flags are evaluated, which significantly reduces costs if you primarily use PostHog for surveys. This disables evaluation of regular feature flags while still allowing surveys to function properly.
 
-<CalloutBox icon="IconInfo" title="Surveys and feature flag billing" type="info">
+<CalloutBox icon="IconWarning" title="Surveys use feature flags" type="caution">
 
-  If you plan to use PostHog primarily for surveys, consider either:
-  
-  - Setting `advanced_only_evaluate_survey_feature_flags` to `true` to only evaluate survey-related flags
-  - Disabling or archiving all non-survey feature flags in your PostHog project
-  
-  This prevents charges from evaluating unused feature flags when surveys are loaded.
-
-</CalloutBox>
-
-<CalloutBox icon="IconWarning" title="Note" type="caution">
-
-  Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally. You should use `advanced_only_evaluate_survey_feature_flags` instead if you use surveys.
+Surveys rely on feature flags internally. Using `advanced_disable_feature_flags` will disable surveys. If you use surveys, set `advanced_only_evaluate_survey_feature_flags` instead to only evaluate survey-related flags while skipping others.
 
 </CalloutBox>
 
@@ -100,7 +89,7 @@ The drawback of this approach is that whenever you make an update to a feature f
 
 ## Quota limiting
 
-Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. When a project exceeds this limit, the `/flags` endpoint will return a `quota_limited` response like this:
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. This limit is set at the **organization level** and shared across all projects in your organization. When your organization exceeds this limit, the `/flags` endpoint will return a `quota_limited` response like this:
 
 ```json
 {
@@ -117,7 +106,134 @@ In this case, SDKs will:
 
 This ensures that your application continues to function even when feature flag quotas are exceeded, falling back to default behavior rather than failing.
 
-## Audit environments to catch unexpected `/decide` calls
+## Configuring test and CI environments
+
+Test environments, staging servers, and CI pipelines can silently accumulate feature flag requests. Since these environments often don't need real-time flag evaluation, you can configure the SDK to minimize or eliminate `/flags` requests entirely.
+
+The key settings are:
+- **JavaScript**: `advanced_disable_feature_flags: true` stops the SDK from hitting `/flags` on init
+- **Mobile SDKs**: `preloadFeatureFlags = false` prevents automatic flag fetching
+- **All SDKs**: Use flag overrides or bootstrapping to provide values locally without network requests
+
+<MultiLanguage>
+
+```js-web
+// Detect test/CI environment
+const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
+
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+
+    // Disable all flag requests in test environments
+    ...(isTestEnv && {
+        advanced_disable_feature_flags: true,
+
+        // Bootstrap flags locally if your tests need them
+        bootstrap: {
+            featureFlags: {
+                'your-flag': true,
+                'another-flag': 'variant-a'
+            }
+        },
+
+        // Reduce other traffic
+        autocapture: false,
+        disable_session_recording: true
+    })
+})
+```
+
+```android
+// Detect test/CI environment
+val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
+
+val config = PostHogConfig(apiKey = "<ph_project_api_key>").apply {
+    if (isTestEnv) {
+        // Disable flag requests entirely
+        preloadFeatureFlags = false
+        sendFeatureFlagEvent = false
+
+        // Reduce event traffic
+        flushAt = 100
+        flushIntervalSeconds = 120
+    }
+}
+
+PostHog.setup(context, config)
+
+// If tests need flags to work, override them locally:
+if (isTestEnv) {
+    PostHog.with { it.overrideFeatureFlag("your-flag", true) }
+}
+```
+
+```ios
+// Detect test/CI environment
+let isTestEnv = ProcessInfo.processInfo.environment["CI"] != nil
+
+let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+
+if isTestEnv {
+    config.preloadFeatureFlags = false
+    config.sendFeatureFlagEvent = false
+    config.flushAt = 100
+    config.flushIntervalSeconds = 120
+}
+
+PostHogSDK.shared.setup(config)
+
+// Override flags locally if needed
+if isTestEnv {
+    PostHogSDK.shared.overrideFeatureFlag("your-flag", value: true)
+}
+```
+
+```dart
+// Detect test/CI environment
+final isTestEnv = Platform.environment['CI'] != null;
+
+final config = PostHogConfig('<ph_project_api_key>');
+
+if (isTestEnv) {
+    config.preloadFeatureFlags = false;
+    config.sendFeatureFlagEvents = false;
+    config.flushAt = 100;
+    config.flushInterval = const Duration(seconds: 120);
+}
+
+await Posthog().setup(config);
+
+// Override flags locally if needed
+if (isTestEnv) {
+    await Posthog().overrideFeatureFlag('your-flag', true);
+}
+```
+
+```react-native
+// Detect test/CI environment
+const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
+
+const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    ...(isTestEnv && {
+        preloadFeatureFlags: false,
+        sendFeatureFlagEvent: false,
+        flushAt: 100,
+        flushInterval: 120000
+    })
+})
+
+// Override flags locally if needed
+if (isTestEnv) {
+    posthog.overrideFeatureFlag('your-flag', true)
+}
+```
+
+</MultiLanguage>
+
+For staging environments where you want flags to work but don't need real-time evaluation, consider using [flag overrides and bootstrapping](/docs/feature-flags/testing#method-2-use-posthogfeatureflagsoverridefeatureflags) instead of fetching from the server.
+
+## Audit environments to catch unexpected `/flags` calls
 
 <CalloutBox icon="IconWarning" title="Watch out for forgotten environments" type="caution">
 
@@ -129,10 +245,10 @@ This ensures that your application continues to function even when feature flag 
 
 To identify where PostHog is still running:
 
-1. Create a [trends insight](https://us.posthog.com/insights/new#insight=TRENDS)  
-2. Choose a high-signal event that occurs across SDKs: like `$feature_flag_called`, `$identify`, or a common custom event  
-3. Set the chart type to **Table**  
-4. Breakdown by `$lib`, `$lib_version`, and experiment with breakdowns on `$host`, `$device_name`, and `$app_version` as these can clue you into what environments are running PostHog  
+1. Create a [trends insight](https://us.posthog.com/insights/new#insight=TRENDS)
+2. Choose a high-signal event that occurs across SDKs: like `$feature_flag_called`, `$identify`, or a common custom event
+3. Set the chart type to **Table**
+4. Breakdown by `$lib`, `$lib_version`, and experiment with breakdowns on `$host`, `$device_name`, and `$app_version` as these can clue you into what environments are running PostHog
 5. Set the time range to **Last 30 days**
 
 This shows you every SDK, domain, and version currently making requests, so you can spot any forgotten environments.

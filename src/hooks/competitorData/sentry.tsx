@@ -43,16 +43,16 @@ export const sentry = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: 'Limited',
+                free_tier: '50 recordings',
             },
             features: {
                 canvas_recording: true,
                 chat_with_recordings: false,
-                conditional_recording: false,
-                event_timeline: false,
+                conditional_recording: true,
+                event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
-                filter_by_user_or_event: false,
+                filter_by_user_or_event: true,
                 identity_detection: false,
                 iframe_recording: false,
                 minimum_duration: false,
@@ -62,12 +62,12 @@ export const sentry = {
                 privacy_masking: true,
                 retention_policy: false,
                 screenshot_mode: false,
-                search_by_network: false,
+                search_by_network: true,
                 share_replays: false,
-                single_page_app: false,
+                single_page_app: true,
                 target_by_feature_flag: false,
                 target_by_sample: true,
-                target_by_url: false,
+                target_by_url: true,
                 wireframe_mode: false,
             },
             platform_support: {
@@ -84,22 +84,22 @@ export const sentry = {
                 features: {
                     console_logs: true,
                     performance_monitoring: true,
-                    network_monitor: false,
-                    dom_explorer: false,
+                    network_monitor: true,
+                    dom_explorer: true,
                 },
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    ai_summaries: true,
                 },
             },
         },
         heatmaps: {
-            available: false,
+            available: true,
             features: {
                 clickmaps: false,
                 heatmaps: false,
-                rage_clicks: false,
+                rage_clicks: true,
                 scrollmaps: false,
             },
         },
@@ -207,9 +207,6 @@ export const sentry = {
         experiments: {
             available: false,
         },
-        heatmaps: {
-            available: false,
-        },
         dashboards: {
             available: true,
             features: {},
@@ -232,23 +229,23 @@ export const sentry = {
         deployment: {
             eu_hosting: true,
             managed_reverse_proxy: false,
-            open_source: 'Open core',
+            open_source: 'Eventually',
             self_host: true,
         },
         pricing: {
             free_tier: 'Limited',
-            transparent_pricing: false,
-            usage_based_pricing: false,
+            transparent_pricing: true,
+            usage_based_pricing: true,
             self_serve: true,
         },
         developer: {
             api: true,
             collaboration: false,
-            mobile_sdks: false,
+            mobile_sdks: true,
             native_data_sources: false,
             proxies: false,
             sdks: true,
-            server_side_sdks: false,
+            server_side_sdks: true,
             sql: false,
         },
         tools: {
@@ -265,7 +262,7 @@ export const sentry = {
             csv_exports: false,
             customer_io: false,
             data_warehouse: false,
-            datadog: false,
+            datadog: true,
             email_reports: false,
             exports: false,
             gcs: false,
@@ -281,13 +278,13 @@ export const sentry = {
             s3: false,
             salesforce: false,
             segment: true,
-            sentry: false,
+            sentry: true,
             slack: true,
             snowflake: false,
             stripe: false,
             warehouse_import: false,
             wordpress: false,
-            zapier: false,
+            zapier: true,
             zendesk: false,
         },
         security: {
@@ -310,6 +307,6 @@ export const sentry = {
         },
     },
     pricing: {
-        model: 'Seat-based + usage',
+        model: 'Usage-based',
     },
 }

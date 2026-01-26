@@ -23,13 +23,13 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_the_user',
   'event' => 'your_event_name',
-  'properties' => array(
+  'properties' => [
     '$process_person_profile' => false
-  )
-));
+  ]
+]);
 ```
 
 ```ruby

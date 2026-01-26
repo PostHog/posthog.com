@@ -66,7 +66,7 @@ export const posthog_ai = {
             'Your AI-powered product analyst. Write natural language to query and analyze PostHog data instantly, find insights, and speed up product decisions with PostHog AI.',
     },
     overview: {
-        title: 'Our resident AI agent who understands your product and data',
+        title: 'Ask questions about how people use your product',
         description:
             'PostHog AI builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
         layout: 'ai',
@@ -90,6 +90,13 @@ export const posthog_ai = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_cropped_240b38f95e.png',
             alt: 'PostHog AI chat',
             imgClasses: 'max-w-[444px]',
+        },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_f654818fb0.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_35c03e330c.png',
+            alt: 'PostHog AI screenshot',
+            classes: 'justify-start items-end pr-4 @lg:pr-6',
+            imgClasses: 'rounded-tr-md shadow-2xl',
         },
     },
     hog: {
@@ -144,12 +151,12 @@ export const posthog_ai = {
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
-                {
-                    name: 'Anomaly detection',
-                    description: 'Detect outliers with AI and configure alerts to catch them',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
+                // {
+                //     name: 'Anomaly detection',
+                //     description: 'Detect outliers with AI and configure alerts to catch them',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 0,
+                // },
             ],
         },
         {
@@ -236,12 +243,12 @@ export const posthog_ai = {
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
-                {
-                    name: 'Chat with traces',
-                    description: 'Query your trace data through the PostHog AI chat',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
+                // {
+                //     name: 'Chat with traces',
+                //     description: 'Query your trace data through the PostHog AI chat',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 0,
+                // },
             ],
         },
         {
@@ -493,7 +500,7 @@ export const posthog_ai = {
             ],
         },
         {
-            label: 'Customer data infrastructure',
+            label: 'PostHog data stack',
         },
         {
             title: 'Data Stack',
@@ -647,6 +654,25 @@ export const posthog_ai = {
                 {
                     title: 'Summarize session recordings for the given filters',
                     time: 104,
+                    copyable: true,
+                },
+            ],
+        },
+        integrating_external_data: {
+            title: 'Integrating external data',
+            author: 'Natlaia Amorim',
+            wistia: '8yephrnt6h',
+            customThumb:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_integrating_external_data_ab4b91a189.png',
+            chapters: [
+                {
+                    title: 'How can I import a google sheet into PostHog so I can use it as a data source',
+                    time: 55,
+                    copyable: true,
+                },
+                {
+                    title: 'Now my table has been synced and is available as a data source. Help me create an insight where I can show our keyword rankings evolution over time (the Y axis should be the count, and X axis should be the month string and the ranking string.',
+                    time: 143,
                     copyable: true,
                 },
             ],

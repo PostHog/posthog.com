@@ -72,11 +72,11 @@ posthog.capture({
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'ian@posthog.com',
     'event' => 'login',
-    '$groups' => array("company" => "posthog")
-));
+    '$groups' => ['company' => 'posthog']
+]);
 ```
 
 ```segment
@@ -124,11 +124,11 @@ posthog.groupIdentify({
 ```
 
 ```php
-PostHog::groupIdentify(array(
+PostHog::groupIdentify([
     'groupType' => 'company',
     'groupKey' => 'posthog',
-    'properties' => array("name" => "PostHog", "score" => 99)
-));
+    'properties' => ['name' => 'PostHog', 'score' => 99]
+]);
 ```
 
 ```segment

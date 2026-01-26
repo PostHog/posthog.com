@@ -452,6 +452,12 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Places',
+                    link: '/places',
+                    icon: <Icons.IconMap className="size-4 text-red" />,
+                },
+                {
                     type: 'separator',
                 },
                 {
@@ -578,7 +584,7 @@ export function useMenuData(): MenuType[] {
                         {
                             type: 'item',
                             label: 'Instagram',
-                            link: 'https://www.instagram.com/posthog',
+                            link: 'https://www.instagram.com/teamposthog',
                             icon: <IconInstagram className="size-4" />,
                             external: true,
                         },
@@ -680,6 +686,12 @@ export function useMenuData(): MenuType[] {
                             link: '/docs/privacy/hipaa-compliance',
                         },
                     ],
+                },
+                {
+                    type: 'item',
+                    label: 'Professional Services',
+                    link: '/professional-services',
+                    icon: <Icons.IconPerson className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'separator',
@@ -803,52 +815,61 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isMobile
         ? [
-            {
-                type: 'item' as const,
-                label: 'home.mdx',
-                link: '/',
-            },
-            { type: 'separator' as const },
-            // Main navigation items processed for mobile
-            ...processMobileNavItems(),
-            { type: 'separator' as const },
-            // System items
-            ...baseLogoMenuItems,
-        ]
+              {
+                  type: 'item' as const,
+                  label: 'home.mdx',
+                  link: '/',
+              },
+              { type: 'separator' as const },
+              // Main navigation items processed for mobile
+              ...processMobileNavItems(),
+              { type: 'separator' as const },
+              // System items
+              ...baseLogoMenuItems,
+          ]
         : [
-            // Desktop: only show system items
-            ...baseLogoMenuItems,
-            ...(!websiteMode
-                ? [
-                    { type: 'separator' as const },
-                    {
-                        type: 'item' as const,
-                        label: 'Start screensaver',
-                        onClick: () => {
-                            setScreensaverPreviewActive(true)
+              // Desktop: only show system items
+              ...baseLogoMenuItems,
+              ...(!websiteMode
+                  ? [
+                        { type: 'separator' as const },
+                        {
+                            type: 'item' as const,
+                            label: 'Start screensaver',
+                            onClick: () => {
+                                setScreensaverPreviewActive(true)
+                            },
+                            shortcut: ['Shift', 'Z'],
                         },
-                        shortcut: ['Shift', 'Z'],
-                    },
-                    {
-                        type: 'item' as const,
-                        label: 'Close all windows',
-                        disabled: windows.length < 1,
-                        onClick: () => {
-                            animateClosingAllWindows()
+                        {
+                            type: 'item' as const,
+                            label: 'Close all windows',
+                            disabled: windows.length < 1,
+                            onClick: () => {
+                                animateClosingAllWindows()
+                            },
+                            shortcut: ['Shift', 'X'],
                         },
-                        shortcut: ['Shift', 'X'],
-                    },
-                ]
-                : []),
-        ]
+                    ]
+                  : []),
+          ]
 
     return [
         {
             trigger: (
                 <>
                     <div className="flex items-center">
-                        <Logo noText className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`} fill="primary" classic />
-                        <Logo className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `} fill="primary" classic />
+                        <Logo
+                            noText
+                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
+                            fill="primary"
+                            classic
+                        />
+                        <Logo
+                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
+                            fill="primary"
+                            classic
+                        />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>

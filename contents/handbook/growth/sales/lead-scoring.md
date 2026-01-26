@@ -23,11 +23,28 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 1. Completed the book a demo form (organic inbound or via paid ads campaign or outbound)
 2. Emailed sales@ 
 3. [Onboarding specialist referral](/handbook/onboarding/sales-handover)
-4. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
-5. Automated 'cool company' flag in Ocean.io
-6. Using PostHog but not spending money and trigger a signal for: hiring increase in engineers, web/social traffic hike, and/or recently fundraised
+4. First signup from a company with 1000+ employees ('Big Fish') signaling a high potential large account early in their product led journey.
+5. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
+6. Requests for Trust Center access that require an NDA
+7. Self-generated campaigns
+  1. [Top10 campaign](https://posthog.slack.com/docs/TSS5W8YQZ/F0A9W1BVCKE) 
+7. Outbound leads manually qualified by BDRs (below).
+
+**BDR team**
+1. Self-generated campaigns - all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) as these change week-to-week
+2. Job switchers
+3. Low usage orgs
+4. Closed lost opportunities 4-6 months old where reason was 'unresponsive'
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
+
+### Demo booking
+
+Customers that want to book a demo and show strong ICP fit signals are automatically get shown a booking link for a demo with a TAE. Those <20 are for the TAE to manually review and schedule. [Default](https://www.default.com/) is our contact form submission routing system for managing this. 
+
+- We have an AI qualifier step to classify submissions as sales/support/spam. If 'support' or 'spam', it'll skip round robin - 'support' will auto create Zendesk tickets, 'spam' are dropped.
+- Accounts also have to match 2/3 requirements for revenue, title, and/or industry to see the instant scheduler. 
+- If an account has had a lead disqualified within the last month, we no longer show the scheduler.
 
 ## Lead scoring
 

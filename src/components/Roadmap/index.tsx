@@ -37,6 +37,7 @@ import { Select } from 'components/RadixUI/Select'
 import {
     createFuseInstance,
     processItemsWithHighlighting,
+    generateHighlightedText,
     HighlightedText,
     HighlightedMarkdown,
 } from 'components/Editor/SearchUtils'
@@ -547,23 +548,15 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                 {
                     content: (
                         <h3 className="text-[15px] m-0 font-normal leading-tight">
-                            {effectiveSearchTerm && effectiveSearchTerm.length > 1 ? (
-                                // Direct approach for highlighting when we have a search term
-                                <span
-                                    dangerouslySetInnerHTML={{
-                                        __html: roadmap.attributes.title.replace(
-                                            new RegExp(
-                                                `(${effectiveSearchTerm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`,
-                                                'gi'
-                                            ),
-                                            '<strong>$1</strong>'
-                                        ),
-                                    }}
-                                />
-                            ) : (
-                                // Use the HighlightedText component when no direct search
-                                <HighlightedText text={roadmap.attributes.title} highlights={highlightedTitle} />
-                            )}
+                            <HighlightedText
+                                text={roadmap.attributes.title}
+                                highlights={
+                                    highlightedTitle ||
+                                    (effectiveSearchTerm && effectiveSearchTerm.length > 1
+                                        ? generateHighlightedText(roadmap.attributes.title, [], effectiveSearchTerm)
+                                        : undefined)
+                                }
+                            />
                         </h3>
                     ),
                     className: '!pt-0.75',
