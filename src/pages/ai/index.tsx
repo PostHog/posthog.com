@@ -8,6 +8,7 @@ import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CustomRoadmapSlide from 'components/AI/CustomRoadmapSlide'
 import CustomPersonasSlide from 'components/AI/CustomPersonasSlide'
+import CustomCapabilitiesSlide from 'components/AI/CustomCapabilitiesSlide'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import ASCIISlide from 'components/AI/ASCIISlide'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -29,7 +30,7 @@ const CustomDemoSlide = () => {
             </p>
 
             <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
-                <Cards data={PostHogAIExampleCards} buttons={false} />
+                <Cards data={PostHogAIExampleCards} buttons={true} />
             </ScrollArea>
 
             <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">
@@ -140,13 +141,29 @@ export default function PostHogAI(): JSX.Element {
                 name: 'Try it',
                 component: CustomDemoSlide,
             },
+            {
+                slug: 'capabilities',
+                name: 'Advanced modes',
+                component: CustomCapabilitiesSlide,
+            },
             // {
             //     slug: 'manifesto',
             //     name: 'AI manifesto',
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demos', 'try-it', 'videos', 'you', 'roadmap', 'pricing', 'getting-started'],
+        order: [
+            'overview',
+            'features',
+            'demos',
+            'try-it',
+            'capabilities',
+            'videos',
+            'you',
+            'roadmap',
+            'pricing',
+            'getting-started',
+        ],
         templates: {
             overview: 'max',
             features: 'ai',
