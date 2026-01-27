@@ -11,9 +11,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import EventForm from 'components/EventForm'
 import { useUser } from 'hooks/useUser'
 import qs from 'qs'
-import { IconPencil, IconTrash } from '@posthog/icons'
+import { IconPencil, IconTrash, IconSend } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
+import ContactSales from 'components/ContactSales'
 
 export type Event = {
     date: string // YYYY-MM-DD
@@ -187,6 +188,46 @@ function Events() {
     const [editingEvent, setEditingEvent] = useState<boolean>(false)
     const [pendingSelectedId, setPendingSelectedId] = useState<number | null>(null)
     const [isInitialized, setIsInitialized] = useState(false)
+    const [showEventForm, setShowEventForm] = useState(false)
+
+    const eventFormConfig = {
+        type: 'lead' as const,
+        formOptions: {
+            className: 'pb-4 flex flex-col',
+            ctaLocation: 'bottom' as const,
+            rowPadding: 'px-4',
+            toEmail: 'events@posthog.com',
+        },
+        form: {
+            ctaButton: {
+                label: 'Send',
+                size: 'md',
+                type: 'primary',
+                width: 'auto',
+                icon: <IconSend />,
+            },
+            message: "Message received! We'll be in touch.",
+            name: 'Event proposal',
+            fields: [
+                {
+                    label: 'From',
+                    placeholder: 'Your email',
+                    type: 'string' as const,
+                    name: 'email',
+                    required: true,
+                    fieldType: 'email',
+                },
+                {
+                    label: 'Event proposal',
+                    name: 'talk_about',
+                    type: 'string' as const,
+                    required: true,
+                    fieldType: 'textarea',
+                    hideLabel: true,
+                },
+            ],
+        },
+    }
 
     // Generate unique event key
     const getEventKey = (event: Event) => {
@@ -335,6 +376,19 @@ function Events() {
                                         >
                                             Add event
                                         </OSButton>
+                                    )}
+                                    <OSButton
+                                        variant="secondary"
+                                        width="full"
+                                        size="md"
+                                        onClick={() => setShowEventForm(!showEventForm)}
+                                    >
+                                        Talk to us about an event
+                                    </OSButton>
+                                    {showEventForm && (
+                                        <div className="mt-3 p-4 border border-primary rounded bg-primary [&_input]:bg-white [&_textarea]:bg-white [&_input]:text-black [&_textarea]:text-black [&>div>form>div:last-child]:flex [&>div>form>div:last-child]:justify-end">
+                                            <ContactSales formConfig={eventFormConfig as any} />
+                                        </div>
                                     )}
                                     {displayEvents.map((event) => (
                                         <OSButton
