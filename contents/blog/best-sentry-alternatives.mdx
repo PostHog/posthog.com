@@ -81,7 +81,7 @@ This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but
 
 * PostHog offers 100k free errors/month vs Sentry's 5k on the free tier.
 * PostHog ties every error to user sessions, product analytics, session recordings, and feature flags. Sentry focuses on stack traces and performance monitoring.
-* PostHog is fully open source (MIT license) with a public roadmap. Sentry is open-source but with a more restrictive license.
+* PostHog includes SQL/HogQL and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors.
 * Sentry supports 100+ platforms including Unity, Unreal Engine, Rust, and Elixir; PostHog covers major web and mobile frameworks but has narrower SDK coverage.
 
 </details>
@@ -257,7 +257,7 @@ It provides crashing reporting, performance monitoring, and user experience insi
 
 * Raygun includes AI-powered error resolution; Sentry recently added Seer AI but it's an add-on.
 * Sentry offers a free tier; Raygun only provides a 14-day free trial.
-* Sentry is open source with self-hosting available; Raygun is SaaS-only.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; Raygun is SaaS-only.
 * Raygun has a stronger focus on .NET and Flutter SDKs; Sentry has broader framework coverage.
 
 </details>
@@ -511,7 +511,7 @@ G2 reviewers like New Relic because:
 
 * LogRocket emphasizes frontend debugging with visual session replays; Sentry focuses on backend and full-stack error monitoring.
 * LogRocket captures user interactions, network calls, and console logs together; Sentry treats replay as a supplementary feature.
-* Sentry offers self-hosting and is open source; LogRocket is cloud-only and proprietary.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; LogRocket is cloud-only and proprietary.
 * Sentry has stronger backend error tracking; LogRocket is primarily frontend-focused.
 
 </details>
@@ -596,9 +596,9 @@ AppSignal is an application performance monitoring (APM) and error tracking tool
   <summary>Main differences between AppSignal and Sentry</summary>
 
 * AppSignal has deep support for Ruby, Elixir, Node.js, and Python; Sentry supports 100+ platforms.
-* Sentry offers a free tier; AppSignal does not (only a free trial).
+* Sentry’s free tier is built around errors/spans/replays; AppSignal’s free plan is request/log–centric (≈ 50k requests, 1 GB logs, 5-day retention).
 * AppSignal includes host monitoring for CPU, memory, and disk; Sentry focuses on application-level metrics.
-* Sentry is open source with self-hosting available; AppSignal is SaaS-only.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; AppSignal is SaaS-only.
 
 </details>
 
@@ -622,7 +622,7 @@ According to [reviews on G2](https://www.g2.com/products/appsignal/reviews), App
 
 > #### Bottom line
 >
-> For developers using one of the languages AppSignal supports, it's a great alternative to Sentry. Although their lack of a free tier might be a dealbreaker for some.
+> For developers using one of the languages AppSignal supports, it's a great alternative to Sentry. With OTel support and a lightweight free plan, it’s easy to adopt and covers the essentials without extra complexity.
 
 ## Which Sentry alternative should you choose?
 

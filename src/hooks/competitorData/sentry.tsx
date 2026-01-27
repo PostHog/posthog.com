@@ -233,7 +233,7 @@ export const sentry = {
             self_host: true,
         },
         pricing: {
-            free_tier: 'Limited',
+            free_tier: true,
             transparent_pricing: true,
             usage_based_pricing: true,
             self_serve: true,
