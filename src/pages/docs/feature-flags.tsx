@@ -1,149 +1,175 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CallToAction } from 'components/CallToAction'
-import { docsMenu } from '../../navs'
-import { useLayoutData } from 'components/Layout/hooks'
-import QuickLinks from 'components/QuickLinks'
-import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
+import OSTable from 'components/OSTable'
+import { IconCheck, IconLogomark } from '@posthog/icons'
+import FeatureFlagsInstallationPlatforms from '../../../contents/docs/feature-flags/installation/_snippets/installation-platforms'
+import { IconFlask, IconRewindPlay, IconTrends, IconMessage, IconWarning, IconDatabase } from '@posthog/icons'
+import Card from 'components/Card'
 
-export const quickLinks = [
+const phFeatures = [
     {
-        icon: 'GraduationCap',
-        name: 'Start here',
-        to: '/docs/feature-flags/hey',
-        color: 'red',
+        title: 'Experiments',
+        description: 'Run A/B tests powered by feature flags with statistical significance tracking.',
+        icon: <IconFlask className="text-purple" />,
+        url: '/docs/experiments',
     },
     {
-        name: 'Product manual',
-        to: '/docs/feature-flags/manual',
-        description: 'Learn how to use feature flags.',
+        title: 'Session replay',
+        description: 'Watch recordings of users interacting with flagged features to understand impact.',
+        icon: <IconRewindPlay className="text-yellow" />,
+        url: '/docs/session-replay',
     },
     {
-        name: 'Bootstrapping & local evaluation',
-        to: '/docs/feature-flags/bootstrapping-and-local-evaluation',
-        description: 'Bootstrap and evaluate flags locally when you need an immediate response.',
+        title: 'Product analytics',
+        description: 'Track how flagged features affect conversion, retention, and revenue.',
+        icon: <IconTrends className="text-blue" />,
+        url: '/docs/product-analytics',
     },
     {
-        name: 'Multivariate flags',
-        to: '/docs/feature-flags/multivariate-flags',
-        description: 'Test features with multiple variants.',
+        title: 'Error tracking',
+        description: 'Roll back flagged features when they cause exceptions for users.',
+        icon: <IconWarning className="text-orange" />,
+        url: '/docs/error-tracking',
     },
     {
-        name: 'Payloads',
-        to: '/docs/feature-flags/payloads',
-        description: 'Add configuration data to your feature flags with JSON payloads',
+        title: 'Surveys',
+        description: 'Collect feedback from users who have specific feature flags enabled.',
+        icon: <IconMessage className="text-salmon" />,
+        url: '/docs/surveys',
     },
     {
-        name: 'Early access feature management',
-        to: '/docs/feature-flags/early-access-feature-management',
-        description: 'Give your users the ability to opt-in to early access features',
-    },
-    {
-        name: 'Common questions',
-        to: '/docs/feature-flags/common-questions',
-        description: 'Common questions about feature flags and how to solve them.',
+        title: 'Data warehouse',
+        description: 'Query flag evaluation data alongside product data with SQL.',
+        icon: <IconDatabase className="text-purple" />,
+        url: '/docs/data-warehouse',
     },
 ]
 
-type FeatureFlagsProps = {
-    data: {
-        tutorials: {
-            edges: {
-                node: any
-            }[]
-        }
-    }
-}
+const featureFlagFeatures = [
+    { text: 'Boolean flags', url: '/docs/feature-flags/creating-feature-flags' },
+    { text: 'Multivariate flags', url: '/docs/feature-flags/creating-feature-flags#multivariate-feature-flags' },
+    { text: 'Percentage rollouts', url: '/docs/feature-flags/creating-feature-flags#release-conditions' },
+    { text: 'User and group targeting', url: '/docs/feature-flags/creating-feature-flags#release-conditions' },
+    { text: 'Server-side local evaluation', url: '/docs/feature-flags/local-evaluation' },
+    { text: 'Client-side bootstrapping', url: '/docs/feature-flags/bootstrapping' },
+    { text: 'Remote config / payloads', url: '/docs/feature-flags/remote-config' },
+    { text: 'Scheduled flag changes', url: '/docs/feature-flags/scheduled-flag-changes' },
+    { text: 'Feature flag dependencies', url: '/docs/feature-flags/dependencies' },
+    { text: 'Early access management', url: '/docs/feature-flags/early-access-feature-management' },
+    { text: 'Multi-project flags', url: '/docs/feature-flags/multi-project-feature-flags' },
+    { text: 'Property overrides', url: '/docs/feature-flags/property-overrides' },
+    { text: 'Evaluation contexts', url: '/docs/feature-flags/evaluation-contexts' },
+]
 
-export const Content = ({ quickLinks = false }) => {
-    const { compact } = useLayoutData()
+export const Content = () => {
     return (
         <>
-            {(quickLinks || compact) && (
-                <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'feature flags')?.children}
-                />
-            )}
-            <section className="mb-12">
-                <h3 className="m-0 text-xl">Resources</h3>
-                <p className="text-[15px]">Real-world use cases to get you started</p>
-
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 @md:grid @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
-                    <ResourceItem
-                        type="Guide"
-                        title="Best practices for feature flags"
-                        description="Contains 9 examples"
-                        url="/docs/feature-flags/best-practices"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="Feature flags API"
-                        description="Evaluate and update with the /flags/ endpoint"
-                        url="/tutorials/api-feature-flags"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="Canary releases"
-                        description="Gradual rollouts to a subset of users"
-                        url="/tutorials/canary-release"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="Bootstrapping feature flags in React"
-                        description="Available at client-side load time"
-                        url="/tutorials/bootstrap-feature-flags-react"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="How to set up one-time feature flags"
-                        description="Show a component or content just once"
-                        url="/tutorials/one-time-feature-flags"
-                    />
-                    <ResourceItem
-                        type="Guide"
-                        title="Cookie-based feature flags"
-                        description="Storing feature flag values locally"
-                        url="/tutorials/one-time-feature-flags"
-                    />
-                </ul>
-                <CallToAction
-                    to="/docs/feature-flags/tutorials"
-                    type="custom"
-                    size="md"
-                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
-                    width="[calc(100%_+_3px)]"
-                >
-                    Explore guides
-                </CallToAction>
+            <section className="mb-4">
+                <h2 className="mb-4">Overview</h2>
+                <div>
+                    <p>
+                        Feature flags let you toggle features on or off for specific users, groups, or percentages of
+                        traffic without redeploying code. They're the foundation for safe rollouts, A/B testing, and
+                        remote configuration.
+                    </p>
+                    <p>Common use cases include:</p>
+                    <ul>
+                        <li>
+                            <strong>Phased rollouts</strong> &mdash; Ship to 5% of users, monitor, then gradually
+                            increase
+                        </li>
+                        <li>
+                            <strong>Kill switches</strong> &mdash; Instantly disable a broken feature without
+                            redeploying
+                        </li>
+                        <li>
+                            <strong>Targeting</strong> &mdash; Show features to specific users, teams, or organizations
+                        </li>
+                        <li>
+                            <strong>A/B testing</strong> &mdash; Run experiments with multivariate flags and track
+                            results
+                        </li>
+                        <li>
+                            <strong>Remote config</strong> &mdash; Send JSON payloads to configure behavior server-side
+                        </li>
+                        <li>
+                            <strong>Beta programs</strong> &mdash; Let users opt in to early access features
+                        </li>
+                    </ul>
+                </div>
             </section>
 
-            <section>
-                <h3 className="mb-1 text-xl">Nifty things you can do with feature flags</h3>
-                <p className="text-[15px]">Some use cases you may not have thought of</p>
+            <section className="mb-8">
+                <h2 className="mb-4 mt-0">SDKs and frameworks</h2>
+                <div className="mt-4">
+                    <FeatureFlagsInstallationPlatforms columns={3} />
+                </div>
+            </section>
 
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 @md:grid @md/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
+            <section className="mb-8">
+                <h2 className="mb-4">All the features you expect</h2>
+                <OSTable
+                    columns={[
+                        { name: '', width: '1fr', align: 'left' },
+                        { name: <IconLogomark className="h-7" />, width: '80px', align: 'center' },
+                        { name: '', width: '1fr', align: 'left' },
+                        { name: <IconLogomark className="h-7" />, width: '80px', align: 'center' },
+                    ]}
+                    rows={featureFlagFeatures.reduce((rows, feature, i) => {
+                        if (i % 2 === 0) rows.push({ cells: [] as any[] })
+                        const row = rows[rows.length - 1]
+                        row.cells.push(
+                            { content: <a href={feature.url}>{feature.text}</a> },
+                            { content: <IconCheck className="h-5 text-green" /> }
+                        )
+                        return rows
+                    }, [] as any[])}
+                    size="sm"
+                    width="full"
+                />
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4">Even better in the PostHog ecosystem</h2>
+                <div className="flex flex-col gap-4 lg:grid @lg:grid-cols-3">
+                    {phFeatures.map((feature, index) => (
+                        <Card key={index} url={feature.url} className="bg-accent dark:bg-accent-dark not-prose">
+                            <div key="content" className="px-4 py-3">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div className="w-6 h-6 flex-shrink-0">{feature.icon}</div>
+                                    <h4 className="font-semibold my-0 flex-1">{feature.title}</h4>
+                                </div>
+                                <p className="text-secondary text-sm">{feature.description}</p>
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4">Next steps</h2>
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
                     <ResourceItem
-                        title="Add popups to a React app"
-                        description="Using payloads to send arbitrary data to your frontend"
-                        url="/tutorials/react-popups"
+                        type="Getting started"
+                        title="Start here"
+                        description="A guided walkthrough of the full feature flag experience"
+                        url="/docs/feature-flags/start-here"
                     />
                     <ResourceItem
-                        title="Location-based site banner"
-                        description="Regional announcements or country-based alerts"
-                        url="/tutorials/location-based-banner"
+                        type="Quickstart"
+                        title="Install the SDK"
+                        description="Set up feature flags in your app with your preferred platform"
+                        url="/docs/feature-flags/installation"
                     />
                     <ResourceItem
-                        title="Sampling with feature flags and local evaluation"
-                        description="Use flags to capture a subset of events for analysis"
-                        url="/tutorials/track-high-volume-apis"
+                        type="Guide"
+                        title="Best practices"
+                        description="9 best practices for using feature flags effectively"
+                        url="/docs/feature-flags/best-practices"
                     />
                 </ul>
             </section>
@@ -151,36 +177,37 @@ export const Content = ({ quickLinks = false }) => {
     )
 }
 
-const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
+const FeatureFlags: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Feature flags - Docs - PostHog" />
 
-            <Intro
-                subheader="Getting started"
-                title="Feature flags"
-                description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
-                buttonText="Create your first feature flag"
-                buttonLink="/docs/feature-flags/installation"
-                imageColumnClasses="max-w-96 md:-mt-8"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                imageClasses=""
-            />
+            <div className="mx-auto max-w-4xl">
+                <section className="mb-6">
+                    <Intro
+                        subheader="Getting started"
+                        title="Feature flags"
+                        description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
+                        buttonText="Start here"
+                        buttonLink="/docs/feature-flags/start-here"
+                        imageColumnClasses="mt-4 md:-mt-8"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
+                        imageClasses="max-h-48 md:max-h-64"
+                    />
+                </section>
 
-            <AskMax
-                quickQuestions={[
-                    'Why is there a delay in loading flags?',
-                    'How do I create a multivariate flag?',
-                    'Can I override a flag?',
-                ]}
-            />
+                <Content />
 
-            <Content />
-
-            <div className="pt-8">
-                <CallToAction to="/docs/feature-flags/manual" width="full">
-                    Visit the manual
-                </CallToAction>
+                <div>
+                    <AskMax
+                        className=""
+                        quickQuestions={[
+                            'Why is there a delay in loading flags?',
+                            'How do I create a multivariate flag?',
+                            'How do I target a flag to a specific group?',
+                        ]}
+                    />
+                </div>
             </div>
         </ReaderView>
     )
