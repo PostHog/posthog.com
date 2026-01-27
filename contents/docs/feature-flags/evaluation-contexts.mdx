@@ -3,13 +3,9 @@ title: Evaluation contexts
 sidebar: Docs
 showTitle: true
 availability:
-    features:
-        evaluationContexts:
-            free: false
-            selfServe: false
-            boost: true
-            scale: true
-            enterprise: true
+    free: full
+    selfServe: full
+    enterprise: full
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -20,8 +16,6 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 Evaluation contexts are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access.
 
 </CalloutBox>
-
-<FeatureAvailability availability={_frontmatter.availability.features.evaluationContexts} />
 
 Evaluation contexts provide fine-grained control over where and when your feature flags evaluate. By constraining flag evaluation to specific contexts, you can reduce unnecessary evaluations, optimize costs, and better organize your feature management strategy.
 
