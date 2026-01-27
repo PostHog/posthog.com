@@ -15,7 +15,7 @@ export const glassbox = {
                 toolbar: false,
                 conversion_funnels: true,
                 alerts: true,
-                anomaly_detection: false,
+                anomaly_detection: true,
             },
             group_analytics: {
                 available: false,
@@ -55,7 +55,7 @@ export const glassbox = {
             },
         },
         web_analytics: {
-            available: false,
+            available: true,
         },
         session_replay: {
             available: true,
@@ -93,7 +93,7 @@ export const glassbox = {
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    ai_summaries: true,
                 },
             },
         },
