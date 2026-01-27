@@ -30,7 +30,7 @@ const CustomDemoSlide = () => {
             </p>
 
             <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
-                <Cards data={PostHogAIExampleCards} buttons={true} />
+                <Cards data={PostHogAIExampleCards} />
             </ScrollArea>
 
             <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">

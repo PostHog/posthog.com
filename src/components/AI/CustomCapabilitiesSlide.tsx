@@ -4,32 +4,12 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { IconMap, IconRewindPlay, IconSearch, IconSparkles } from '@posthog/icons'
 
-// Explicit class mappings for Tailwind JIT (can't use dynamic class names)
-const colorClasses = {
-    blue: {
-        text: 'text-blue',
-        bg: 'bg-blue/20',
-    },
-    yellow: {
-        text: 'text-yellow',
-        bg: 'bg-yellow/20',
-    },
-    green: {
-        text: 'text-green',
-        bg: 'bg-green/20',
-    },
-    purple: {
-        text: 'text-purple',
-        bg: 'bg-purple/20',
-    },
-}
-
 const modes = [
     {
         id: 'session-summaries',
         name: 'Session summaries',
         icon: <IconRewindPlay />,
-        color: 'blue' as keyof typeof colorClasses,
+        color: 'blue',
         tagline: 'Computer vision for your product',
         description:
             "Session replay, but make it AI. PostHog AI watches the videos so you don't have to – and actually understands what's happening on screen.",
@@ -56,7 +36,7 @@ const modes = [
         id: 'plan-mode',
         name: 'Plan mode',
         icon: <IconMap />,
-        color: 'green' as keyof typeof colorClasses,
+        color: 'green',
         tagline: 'Think before you act',
         description:
             'Plan mode is for when you want to explore schemas, map out your approach, and plot your next five moves before diving in.',
@@ -81,7 +61,7 @@ const modes = [
         id: 'research-mode',
         name: 'Research mode',
         icon: <IconSearch />,
-        color: 'purple' as keyof typeof colorClasses,
+        color: 'purple',
         tagline: 'Deep analysis for complex problems',
         description:
             'For when you need a deeper explanation – not just a dashboard. Research mode uses a more powerful model and can spawn multiple agents to tackle different parts of the task.',
@@ -120,17 +100,24 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                     className="w-full @2xl:w-64 @2xl:h-full bg-primary border-b border-primary @2xl:border-b-0"
                 >
                     <ScrollArea className="overflow-y-hidden @2xl:overflow-y-auto">
-                        <Tabs.List className="flex @2xl:flex-col" aria-label="Advanced modes">
-                            <Tabs.Label className="hidden @2xl:block">Advanced modes</Tabs.Label>
-                            <p className="text-sm text-secondary px-2 py-3 leading-snug">
-                                PostHog AI auto-switches basic modes based on your query. Activate advanced modes in the
-                                chat for more powerful analysis.
-                            </p>
-                            {modes.map((mode) => (
-                                <Tabs.Trigger key={mode.id} value={mode.id} icon={mode.icon} color={mode.color}>
-                                    {mode.name}
-                                </Tabs.Trigger>
-                            ))}
+                        <Tabs.List className="flex flex-col" aria-label="Advanced modes">
+                            <Tabs.Label>
+                                <div className="flex items-center gap-1 mb-2 font-semibold">
+                                    <IconSparkles className="size-6" />
+                                    <span>Advanced modes</span>
+                                </div>
+                                <p className="text-sm text-secondary leading-snug mb-1">
+                                    PostHog AI auto-switches basic modes based on your query. Activate advanced modes in
+                                    the chat for more powerful analysis.
+                                </p>
+                            </Tabs.Label>
+                            <div className="flex @2xl:flex-col">
+                                {modes.map((mode) => (
+                                    <Tabs.Trigger key={mode.id} value={mode.id} icon={mode.icon} color={mode.color}>
+                                        {mode.name}
+                                    </Tabs.Trigger>
+                                ))}
+                            </div>
                         </Tabs.List>
                     </ScrollArea>
                 </div>
@@ -145,16 +132,7 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                         <div className="h-full flex flex-col @2xl:flex-row">
                             {/* Left: Text content */}
                             <div className="@2xl:flex-1 p-6 @2xl:p-8">
-                                {/* Badge */}
-                                <div
-                                    data-scheme="secondary"
-                                    className="inline-flex items-center gap-2 mb-6 text-lg px-2 py-1 rounded bg-primary border border-primary font-medium"
-                                >
-                                    <IconSparkles className="size-6" />
-                                    Advanced modes
-                                </div>
-
-                                <div className={`flex items-center gap-2 ${colorClasses[mode.color].text} mb-4`}>
+                                <div className={`flex items-center gap-2 text-${mode.color} mb-4`}>
                                     <span className="size-8 [&>svg]:size-8">{mode.icon}</span>
                                     <span className="text-2xl @2xl:text-3xl font-bold">{mode.name}</span>
                                 </div>
@@ -169,11 +147,7 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                                     {mode.features.map((feature, index) => (
                                         <div key={index} className="flex gap-4">
                                             <div
-                                                className={`shrink-0 size-8 rounded-full ${
-                                                    colorClasses[mode.color].bg
-                                                } ${
-                                                    colorClasses[mode.color].text
-                                                } flex items-center justify-center text-base font-bold`}
+                                                className={`shrink-0 size-8 rounded-full bg-${mode.color}/20 text-${mode.color} flex items-center justify-center text-base font-bold`}
                                             >
                                                 {index + 1}
                                             </div>
@@ -201,11 +175,9 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                                 ) : (
                                     <div className="w-full h-full min-h-[250px] bg-accent rounded border border-primary flex flex-col items-center justify-center p-8">
                                         <div
-                                            className={`size-16 rounded-xl ${
-                                                colorClasses[mode.color].bg
-                                            } flex items-center justify-center mb-4`}
+                                            className={`size-16 rounded-xl bg-${mode.color}/20 flex items-center justify-center mb-4`}
                                         >
-                                            <span className={`${colorClasses[mode.color].text} size-8 [&>svg]:size-8`}>
+                                            <span className={`text-${mode.color} size-8 [&>svg]:size-8`}>
                                                 {mode.icon}
                                             </span>
                                         </div>
