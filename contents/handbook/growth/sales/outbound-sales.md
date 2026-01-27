@@ -39,13 +39,7 @@ We are building a BDR function that will generate leads, mainly focused on cold 
 
 Our focus today is on three categories: inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Dmytro Sitalo" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
 
-To see which leads go where, check out the [leads page](/growth/sales/lead-scoring). 
-
-We are also starting to experiment with cold outbound, specifically:
-
-- People who have moved to a new job and are familiar with PostHog
-- People who work at a growing (adding employees) software or technology company that, as best we can tell, are not currently using PostHog
-- People who work at a growing company and use 2+ solutions that PostHog can consolidate
+Check out the [leads page](/growth/sales/lead-scoring) for more detail on lead types and where they go. 
 
 ## If you're reading this after getting outbounded by PostHog, ~~blink twice~~ you can opt out here
 
@@ -56,6 +50,3 @@ So, if you'd rather we didn't reach out, you can opt out with this button: <a hr
 No forms, no 'are you sure?', no hurt feelings. You can always change your mind later by [reaching out to us directly](/talk-to-a-human). We would note that you're on our list because we think you're a good fit for PostHog, but that's for you to judge. 
 
 Most SaaS companies would likely just blast you with emails, calls and DMs without your consent. If you can’t already tell, PostHog does things differently. 
-
-## What we're doing next
-We will spend Q1 running experiments to gain clarity on outbound ICP, Persona, and Messaging. By end of Q1, we will have a v1 outbound playbook filled with repeatable tactics. Once we have gotten a good feel on what works, <TeamMember name="Dmytro Sitalo" /> will work closely with <TeamMember name="Abhischek Thottakara" /> to automate manual parts of the process and build a proper GTM engine! Ideally, we want our BDR team to spend 80% of their time experimenting with weird, PostHog-y tactics, and 20% instrumenting the agents that will predictably generate pipeline. 

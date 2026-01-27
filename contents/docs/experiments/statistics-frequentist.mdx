@@ -186,10 +186,20 @@ You can interpret this as: "If we repeated this experiment many times, 95% of co
 A result is marked as "statistically significant" when we have strong evidence against the null hypothesis:
 
 ```
-is_significant = p_value < 0.05
+is_significant = p_value < alpha
 ```
 
-This means there's less than a 5% probability that we'd observe such a large difference if there truly was no effect. The 0.05 threshold (alpha level) is the standard significance level used in PostHog.
+For example, with a 95% confidence level (the default), alpha is 0.05, meaning there's less than a 5% probability that we'd observe such a large difference if there truly was no effect.
+
+##### Configuring the confidence level
+
+You can choose between 90%, 95%, or 99% confidence levels, which correspond to alpha levels of 0.10, 0.05, and 0.01 respectively:
+
+- **90% (α = 0.10)**: More lenient threshold - you'll see significant results sooner, but with a higher chance of false positives
+- **95% (α = 0.05)** (default): The standard balance between speed and accuracy
+- **99% (α = 0.01)**: More stringent threshold - requires stronger evidence, reducing false positives but requiring more data
+
+To set the default confidence level for all experiments, go to **Experiments > Settings**. You can also override this for individual experiments in the **Statistics** section of the experiment.
 
 ## Mathematical formulas reference
 

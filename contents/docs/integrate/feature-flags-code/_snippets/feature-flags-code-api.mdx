@@ -96,13 +96,15 @@ sendFlagsRequest();
 
 > **Note:** The `groups` key is only required for group-based feature flags. If you use it, replace `group_type` and `group_id` with the values for your group such as `company: "Twitter"`.
 
-#### Using evaluation environment tags and runtime filtering without SDKs
+#### Using evaluation context tags and runtime filtering without SDKs
 
-When making direct API calls to the `/flags` endpoint, you can control which flags are evaluated using evaluation environment tags and runtime filtering.
+When making direct API calls to the `/flags` endpoint, you can control which flags are evaluated using evaluation context tags and runtime filtering.
 
-##### Evaluation environments
+##### Evaluation contexts
 
-To filter flags by evaluation environment, include the `evaluation_environments` field in your request body:
+To filter flags by evaluation context, include the `evaluation_contexts` field in your request body:
+
+> **Note:** The legacy parameter `evaluation_environments` is also supported for backward compatibility.
 
 <MultiLanguage>
 
@@ -110,7 +112,7 @@ To filter flags by evaluation environment, include the `evaluation_environments`
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "distinct_id_of_your_user",
-    "evaluation_environments": ["production", "web"]
+    "evaluation_contexts": ["production", "web"]
 }' "<ph_client_api_host>/flags?v=2"
 ```
 
@@ -125,7 +127,7 @@ headers = {
 payload = {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "user distinct id",
-    "evaluation_environments": ["production", "web"]
+    "evaluation_contexts": ["production", "web"]
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -140,7 +142,7 @@ const response = await fetch("<ph_client_api_host>/flags?v=2", {
     body: JSON.stringify({
         api_key: "<ph_project_api_key>",
         distinct_id: "user-distinct-id",
-        evaluation_environments: ["production", "web"]
+        evaluation_contexts: ["production", "web"]
     }),
 });
 const data = await response.json();
@@ -149,10 +151,10 @@ const data = await response.json();
 </MultiLanguage>
 
 Only flags where at least one evaluation tag matches (or flags with no tags at all) will be returned. For example:
-- Flag with evaluation environment tags `["production", "api", "backend"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
-- Flag with evaluation environment tags `["staging", "api"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no tags match)
-- Flag with evaluation environment tags `["web", "mobile"]` + request with `["production", "web"]` = ✅ Flag evaluates ("web" matches)
-- Flag with no evaluation environment tags = ✅ Always evaluates (backward compatibility)
+- Flag with evaluation context tags `["production", "api", "backend"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
+- Flag with evaluation context tags `["staging", "api"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no tags match)
+- Flag with evaluation context tags `["web", "mobile"]` + request with `["production", "web"]` = ✅ Flag evaluates ("web" matches)
+- Flag with no evaluation context tags = ✅ Always evaluates (backward compatibility)
 
 ##### Runtime detection
 
@@ -233,7 +235,7 @@ const response = await fetch("<ph_client_api_host>/flags?v=2", {
 });
 ```
 
-##### Combining evaluation environment tags and runtime filtering
+##### Combining evaluation context tags and runtime filtering
 
 Both features work together as sequential filters:
 
@@ -248,14 +250,15 @@ const response = await fetch("<ph_client_api_host>/flags?v=2", {
     body: JSON.stringify({
         api_key: "<ph_project_api_key>",
         distinct_id: "user-id",
-        evaluation_environments: ["production", "web"]
+        evaluation_contexts: ["production", "web"]
     })
 });
 
 // This request will only receive flags that:
 // 1. Have runtime set to "client" OR "all" (due to browser headers)
 // AND
-// 2. Have evaluation environment tags matching "production" OR "web" (or no tags)
+// 2. Have evaluation context tags matching "production" OR "web" (or no tags)
+// Note: You can also use the legacy "evaluation_environments" parameter
 ```
 
 This allows precise control over which flags are evaluated in different contexts, helping optimize costs and improve security by ensuring flags only evaluate where intended.
@@ -266,7 +269,9 @@ The response varies depending on whether you include the `config=true` query par
 
 ##### Basic response (`/flags?v=2`)
 
-Use this endpoint when you only need to evaluate feature flags. It returns a response with just the flag evaluation results:
+Use this endpoint when you only need to evaluate feature flags. It returns a response with just the flag evaluation results.
+
+> **Note:** If a feature flag is associated with an experiment that has a [holdout group](/docs/experiments/holdouts), users in the holdout receive a variant value in the format `holdout-{holdout_id}` (e.g., `holdout-727`). You can detect holdout users by checking if the variant starts with `holdout-`.
 
 ```json
 {
