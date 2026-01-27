@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { IconChevronRight } from '@posthog/icons'
-import { motion } from 'framer-motion'
+import { IconPlus, IconMinus } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
@@ -203,15 +202,17 @@ const CollapsibleNavItem = ({
                 <OSButton
                     align="left"
                     width="full"
-                    className={getDepthPadding(depth)}
+                    className={`${getDepthPadding(depth)} justify-between`}
                     size="md"
                     hover="background"
-                    icon={showIcon ? item.icon : undefined}
                 >
-                    <motion.div animate={{ rotate: open ? 90 : 0 }} className="mr-1">
-                        <IconChevronRight className="size-4" />
-                    </motion.div>
-                    <span className={open ? 'font-semibold' : ''}>{item.name}</span>
+                    <span className="flex items-center gap-1">
+                        {showIcon && item.icon}
+                        <span className={open ? 'font-semibold' : ''}>{item.name}</span>
+                    </span>
+                    <span className="text-muted">
+                        {open ? <IconMinus className="size-4" /> : <IconPlus className="size-4" />}
+                    </span>
                 </OSButton>
             </Collapsible.Trigger>
 
