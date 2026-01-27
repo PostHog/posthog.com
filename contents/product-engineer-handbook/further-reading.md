@@ -1,6 +1,5 @@
 ---
 title: Further reading for product engineers
-sidebar: #TODO
 showTitle: true
 ---
 

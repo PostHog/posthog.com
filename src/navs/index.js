@@ -1659,6 +1659,58 @@ export const handbookSidebar = [
     },
 ]
 
+export const productEngineerHandbookSidebar = [
+    {
+        name: 'Product Engineer Handbook',
+    },
+    {
+        name: 'Table of contents',
+        url: '/product-engineer-handbook',
+    },
+    {
+        name: 'Chapters',
+        url: '',
+        children: [
+            {
+                name: '1. What is a product engineer?',
+                url: '/product-engineer-handbook/what-is-a-product-engineer',
+            },
+            {
+                name: '2. Traits of product engineers',
+                url: '/product-engineer-handbook/traits',
+            },
+            {
+                name: '3. Things product engineers need to know',
+                url: '/product-engineer-handbook/skills',
+            },
+            {
+                name: "4. The product engineer's role in the product team",
+                url: '/product-engineer-handbook/product-engineers-vs-product-managers',
+            },
+            {
+                name: '5. Why companies should hire product engineers',
+                url: '/product-engineer-handbook/benefits',
+            },
+            {
+                name: '6. Creating a product engineering culture',
+                url: '/product-engineer-handbook/culture',
+            },
+            {
+                name: '7. Antipatterns for product engineers',
+                url: '/product-engineer-handbook/antipatterns',
+            },
+            {
+                name: '8. Getting started as a product engineer',
+                url: '/product-engineer-handbook/getting-started',
+            },
+            {
+                name: '9. Further reading for product engineers',
+                url: '/product-engineer-handbook/further-reading',
+            },
+        ],
+    },
+]
+
 export const communityMenu = {
     name: 'Community',
     url: '/community',

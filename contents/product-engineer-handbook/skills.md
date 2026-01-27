@@ -1,6 +1,5 @@
 ---
 title: Things product engineers need to know
-sidebar: #TODO
 showTitle: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: The product engineer's role in the product team
-sidebar: #TODO
 showTitle: true
 ---
 

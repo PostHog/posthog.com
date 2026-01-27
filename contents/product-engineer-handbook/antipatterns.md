@@ -1,6 +1,5 @@
 ---
 title: Antipatterns for product engineers
-sidebar: #TODO
 showTitle: true
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Traits of product engineers
-sidebar: #TODO
 showTitle: true
 ---
 

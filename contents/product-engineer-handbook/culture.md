@@ -1,6 +1,5 @@
 ---
 title: Creating a product engineering culture
-sidebar: #TODO
 showTitle: true
 ---
 

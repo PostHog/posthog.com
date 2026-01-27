@@ -1,6 +1,5 @@
 ---
 title: Why companies should hire product engineers
-sidebar: #TODO
 showTitle: true
 ---
 

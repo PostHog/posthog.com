@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Chapters",
+        "links": [
+            { "order": "1", "name": "What is a product engineer?", "to": "/product-engineer-handbook/what-is-a-product-engineer" },
+            { "order": "2", "name": "Traits of product engineers", "to": "/product-engineer-handbook/traits" },
+            { "order": "3", "name": "Things product engineers need to know", "to": "/product-engineer-handbook/skills" },
+            { "order": "4", "name": "The product engineer's role in the product team", "to": "/product-engineer-handbook/product-engineers-vs-product-managers" },
+            { "order": "5", "name": "Why companies should hire product engineers", "to": "/product-engineer-handbook/benefits" },
+            { "order": "6", "name": "Creating a product engineering culture", "to": "/product-engineer-handbook/culture" },
+            { "order": "7", "name": "Antipatterns for product engineers", "to": "/product-engineer-handbook/antipatterns" },
+            { "order": "8", "name": "Getting started as a product engineer", "to": "/product-engineer-handbook/getting-started" },
+            { "order": "9", "name": "Further reading for product engineers", "to": "/product-engineer-handbook/further-reading" }
+        ]
+    }
+]

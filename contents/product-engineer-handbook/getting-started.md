@@ -1,6 +1,5 @@
 ---
 title: Getting started as a product engineer
-sidebar: #TODO
 showTitle: true
 ---
 
@@ -10,7 +9,7 @@ These tips are intended to help you get started on your journey. This isn't a ch
 
 We'll be publishing additional chapters and modules in the future. Use the form below to be alerted when we update the handbook.
 
-\[FORM\]
+<NewsletterForm />
 
 ## 1. Build a meaningful (side) project
 

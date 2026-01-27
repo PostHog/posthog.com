@@ -1,6 +1,5 @@
 ---
 title: What is a product engineer?
-sidebar: #TODO
 showTitle: true
 ---
 
