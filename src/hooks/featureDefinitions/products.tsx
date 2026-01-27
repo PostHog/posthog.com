@@ -42,7 +42,7 @@ export const productDescriptions = {
     },
     cdp: {
         name: 'CDP',
-        description: 'Ingest, transform, and send data between 145+ tools',
+        description: 'Ingest, transform, and send data to other tools',
     },
     data_warehouse: {
         name: 'Data warehouse',
