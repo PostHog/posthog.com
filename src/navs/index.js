@@ -1666,15 +1666,12 @@ export const handbookSidebar = [
 export const productEngineerHandbookSidebar = [
     {
         name: 'Product Engineer Handbook',
-    },
-    {
-        name: 'Table of contents',
-        url: '/product-engineer-handbook',
-    },
-    {
-        name: 'Chapters',
-        url: '',
+        icon: 'IconBook',
+        color: 'seagreen',
         children: [
+            {
+                name: 'Chapters',
+            },
             {
                 name: '1. What is a product engineer?',
                 url: '/product-engineer-handbook/what-is-a-product-engineer',
@@ -1828,6 +1825,7 @@ export const communityMenu = {
                 },
             ],
         },
+        ...productEngineerHandbookSidebar,
         {
             name: 'Templates',
             icon: 'IconMagic',
