@@ -79,7 +79,7 @@ If you’re trying to figure out your MRR and you’re tired of having to reconc
 
 Don’t be mean to Postgres. It can do a lot of things well, but heavy, concurrent reporting queries with complex joins? Not so much. You’ll end up slowing down your product, timing out your queries, and upsetting your product managers.
 
-Once app performance starts to suffer and your queries start to be measured in pages, it’s time to consider offloading that work. You can start small with tools like DuckDB for fast, local analytical processing on your own machine, or graduate to a [managed warehouse](/data-stack/managed-warehouse) for team-wide access. 
+Once app performance starts to suffer and you're writing enough SQL to fill a book, it’s time to consider offloading that work. You can start small with tools like DuckDB for fast, local analytical processing on your own machine, or graduate to a [managed warehouse](/data-stack/managed-warehouse) for team-wide access. 
 
 ### 3. Something something single source of truth
 
