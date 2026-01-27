@@ -1,0 +1,144 @@
+import React, { useMemo, useEffect } from 'react'
+import SEO from 'components/seo'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
+import useProduct from 'hooks/useProduct'
+import { useProductCategoryNavigation } from 'hooks/useProductCategoryNavigation'
+import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
+import ProgressBar from 'components/ProgressBar'
+
+// Section components
+import OverviewSection from './sections/OverviewSection'
+import FeaturesSection from './sections/FeaturesSection'
+import VideosSection from './sections/VideosSection'
+import PricingSection from './sections/PricingSection'
+
+interface ProductReaderViewProps {
+    productHandle: string
+    /** Override which sections to show and in what order */
+    sections?: string[]
+    /** Custom SEO overrides */
+    seoOverrides?: {
+        title?: string
+        description?: string
+        image?: string
+    }
+}
+
+interface TableOfContentsItem {
+    value: string
+    url: string
+    depth: number
+}
+
+const LeftSidebarContent = () => {
+    const categoryNav = useProductCategoryNavigation()
+    return <TreeMenu items={categoryNav.children} />
+}
+
+/**
+ * Reusable product page template that renders product data in a reader view layout
+ * with left sidebar navigation and on-page table of contents.
+ */
+export default function ProductReaderView({
+    productHandle,
+    sections: sectionOverrides,
+    seoOverrides,
+}: ProductReaderViewProps): JSX.Element {
+    const productData = useProduct({ handle: productHandle }) as any
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    // Set window title
+    useEffect(() => {
+        if (appWindow && productData?.name) {
+            setWindowTitle(appWindow, `${productData.name}.md`)
+        }
+    }, [appWindow, productData?.name])
+
+    // Default section order - only show sections that have data
+    const defaultSections = ['overview', 'features', 'videos', 'pricing']
+
+    const activeSections = useMemo(() => {
+        const sectionsToShow = sectionOverrides || defaultSections
+
+        return sectionsToShow.filter((section) => {
+            switch (section) {
+                case 'overview':
+                    return productData?.overview
+                case 'features':
+                    return productData?.features && productData.features.length > 0
+                case 'videos':
+                    return productData?.videos && Object.keys(productData.videos).length > 0
+                case 'pricing':
+                    return productData?.billingData || productData?.customPricingContent
+                default:
+                    return false
+            }
+        })
+    }, [productData, sectionOverrides])
+
+    // Generate table of contents from active sections
+    const tableOfContents: TableOfContentsItem[] = useMemo(() => {
+        return activeSections.map((section) => {
+            const sectionNames: Record<string, string> = {
+                overview: 'Overview',
+                features: 'Features',
+                videos: 'Videos',
+                pricing: 'Pricing',
+            }
+
+            return {
+                value: sectionNames[section] || section,
+                url: section,
+                depth: 0,
+            }
+        })
+    }, [activeSections])
+
+    // Handle loading state
+    if (!productData) {
+        return (
+            <div className="size-full flex items-center justify-center">
+                <ProgressBar title="product" />
+            </div>
+        )
+    }
+
+    // Render section based on slug
+    const renderSection = (section: string) => {
+        switch (section) {
+            case 'overview':
+                return <OverviewSection key={section} productData={productData} />
+            case 'features':
+                return <FeaturesSection key={section} productData={productData} />
+            case 'videos':
+                return <VideosSection key={section} productData={productData} />
+            case 'pricing':
+                return <PricingSection key={section} productData={productData} />
+            default:
+                return null
+        }
+    }
+
+    return (
+        <>
+            <SEO
+                title={seoOverrides?.title || productData?.seo?.title || productData?.name}
+                description={seoOverrides?.description || productData?.seo?.description || productData?.description}
+                image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
+                updateWindowTitle={false}
+            />
+            <ReaderView
+                leftSidebar={<LeftSidebarContent />}
+                title={productData?.name}
+                hideTitle={false}
+                tableOfContents={tableOfContents}
+                showQuestions={false}
+            >
+                {activeSections.map((section) => renderSection(section))}
+            </ReaderView>
+        </>
+    )
+}
