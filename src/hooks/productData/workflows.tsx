@@ -25,7 +25,6 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     category: 'automation',
-    status: 'beta',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
@@ -66,13 +65,13 @@ export const workflows = {
             classesMobile: 'rounded-t-md',
             imgClassesMobile: '',
         },
-        // home: {
-        //     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
-        //     srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
-        //     alt: 'LLM Analytics screenshot',
-        //     classes: 'justify-end items-end pl-4 @lg:pl-6',
-        //     imgClasses: 'rounded-tl-lg shadow-2xl',
-        // },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_light_1_7afd43fd88.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_dark_1_9ebe26d46e.png',
+            alt: 'Workflows screenshot',
+            classes: 'justify-center px-4 @lg:px-6',
+            imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
+        },
     },
     // hog: {
     //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',

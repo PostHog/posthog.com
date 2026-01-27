@@ -209,6 +209,104 @@ PostHog.Setup(new PostHogConfig
 });
 ```
 
+## Session replay
+
+> **Note:** Session replay for Unity is currently **experimental**. Performance impact varies based on your game's complexity and target devices.
+
+Session replay enables you to record and watch user sessions in your Unity game. It captures screenshots, touch/mouse input, network requests, and console logs. Session replay is **disabled by default** and must be explicitly enabled.
+
+The SDK uses `AsyncGPUReadback` to capture screenshots without blocking the main thread, ensuring minimal performance impact during gameplay.
+
+### Enabling session replay
+
+```csharp
+PostHog.Setup(new PostHogConfig
+{
+    ApiKey = "<ph_project_api_key>",
+    Host = "<ph_client_api_host>",
+    SessionReplay = true
+});
+```
+
+### Configuration options
+
+You can customize session replay behavior with `SessionReplayConfig`:
+
+```csharp
+PostHog.Setup(new PostHogConfig
+{
+    ApiKey = "<ph_project_api_key>",
+    SessionReplay = true,
+    SessionReplayConfig = new PostHogSessionReplayConfig
+    {
+        // Screenshot settings
+        ThrottleDelaySeconds = 1.0f,    // Min time between screenshots (default: 1.0)
+        ScreenshotQuality = 80,          // JPEG quality 1-100 (default: 80)
+        ScreenshotScale = 0.75f,         // Resolution scale 0.1-1.0 (default: 0.75)
+
+        // Telemetry capture
+        CaptureNetworkTelemetry = true,  // Record HTTP request metadata (default: true)
+        CaptureLogs = false,             // Record console logs (default: false)
+        MinLogLevel = SessionReplayLogLevel.Warning,  // Log, Warning, or Error
+
+        // Queue settings
+        FlushAt = 20,                    // Events before auto-flush (default: 20)
+        FlushIntervalSeconds = 30,       // Auto-flush interval (default: 30)
+        MaxQueueSize = 100               // Max queued events (default: 100)
+    }
+});
+```
+
+### Manual control
+
+You can manually start and stop session recording:
+
+```csharp
+// Check if session replay is active
+if (PostHog.IsSessionReplayActive)
+{
+    // Stop recording
+    PostHog.StopSessionReplay();
+}
+
+// Start recording (if not already active)
+PostHog.StartSessionReplay();
+```
+
+### Recording network requests
+
+Network requests are automatically captured when `CaptureNetworkTelemetry` is enabled. For custom HTTP clients, you can manually record requests:
+
+```csharp
+PostHog.RecordNetworkRequest(
+    url: "https://api.example.com/data",
+    method: "GET",
+    statusCode: 200,
+    durationMs: 150,
+    responseSize: 1024
+);
+```
+
+### Platform support for session replay
+
+| Platform | Session Replay Support |
+|----------|------------------------|
+| Windows/Mac/Linux | Full |
+| iOS | Full |
+| Android | Full |
+| WebGL | Not supported |
+
+> **Note:** Session replay requires async GPU readback support. On WebGL, session replay is automatically disabled.
+
+### Performance considerations
+
+Session replay captures screenshots which can impact performance. To optimize:
+
+- Increase `ThrottleDelaySeconds` to reduce capture frequency
+- Lower `ScreenshotScale` to reduce resolution
+- Lower `ScreenshotQuality` to reduce file size
+- Disable `CaptureNetworkTelemetry` and `CaptureLogs` if not needed
+
 ## Application lifecycle events
 
 When `CaptureApplicationLifecycleEvents` is enabled (default: `true`), these events are captured automatically:
@@ -297,7 +395,3 @@ void OnApplicationQuit()
 
 - Ensure your PostHog instance allows CORS from your domain
 - WebGL has limited storage - consider reducing `MaxQueueSize`
-
-## Demo
-
-Check out [Hedgehog Game](https://github.com/PostHog/hedgehog-game), a sample Unity game that demonstrates how to integrate PostHog analytics.

@@ -1,5 +1,5 @@
 ---
-title: 'How to vibe-code a game with DeskHog'
+title: 'How to vibe-code a game with DeskHog and Cursor'
 date: 2025-06-22
 author:
   - joe-martin

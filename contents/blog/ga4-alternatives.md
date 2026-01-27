@@ -24,7 +24,7 @@ In this guide we'll cover:
 
 - The differences between UA and GA4
 - Why existing users want to switch
-- The best GA4 alternatives for different use cases
+- [The best GA4 alternatives for different use cases](/blog/best-web-analytics-tools)
 
 > **Changelog:**
 > - **Aug 24, 2023:** Added Kissmetrics and Vercel Web Analytics; updated info on EU-U.S. privacy framework.

@@ -31,20 +31,8 @@ If PostHog isn't capturing errors:
 If stack traces show minified code instead of original source:
 
 1. Verify source maps are uploaded to the correct project by navigating to [Error Tracking](https://app.posthog.com/error_tracking) and selecting **Configure** > **Symbol sets**. You'll also see warnings for missing symbol sets
-2. The `release` tag in your SDK config must match the version you uploaded:
-
-    ```js
-    posthog.init('<ph_project_api_key>', {
-        ...
-        session_recording: {
-            recordCrossOriginIframes: true,
-        },
-        release: 'v1.2.3'
-    })
-    ```
-
-3. Source map paths must match your production bundle URLs exactly
-4. Upload source maps *before* deploying code that references them
+2. Source map paths must match your production bundle URLs exactly
+3. Upload source maps *before* deploying code that references them
 
 See the [source maps guide](/docs/error-tracking/upload-source-maps/) for upload instructions.
 

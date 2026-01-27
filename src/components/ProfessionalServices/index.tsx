@@ -6,15 +6,8 @@ import { IconWrench, IconCode2, IconGraph, IconPlay } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Hero } from 'components/Hero'
 import { Subfeature } from 'components/Products/Subfeature'
-import CTA from 'components/Home/CTA'
-import { FAQ } from 'components/Products/FAQ'
-import Tooltip from 'components/Tooltip'
-import { TextCard } from 'components/Products/TextCard'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
-import { PRODUCT_COUNT } from '../../../constants'
-import { Bang } from 'components/Icons'
-import { motion } from 'framer-motion'
 
 const subfeaturesItemCount = 4
 const subfeatures = [
@@ -42,6 +35,10 @@ const subfeatures = [
     },
 ]
 
+const initialContactValues = {
+    talk_about: "I'd like to learn more about PostHog's professional services.",
+}
+
 export const ProfessionalServices = () => {
     const { fullWidthContent } = useLayoutData()
     return (
@@ -61,7 +58,11 @@ export const ProfessionalServices = () => {
                     subtitle="We do the heavy lifting so that you can get on with delighting your users."
                 />
                 <div className="flex justify-center gap-2 mb-12">
-                    <CallToAction href="/talk-to-a-human" type="primary">
+                    <CallToAction
+                        href="/talk-to-a-human"
+                        type="primary"
+                        state={{ newWindow: true, initialValues: initialContactValues }}
+                    >
                         Talk to a human
                     </CallToAction>
                 </div>
@@ -218,7 +219,11 @@ export const ProfessionalServices = () => {
                         </aside>
                     </div>
                     <div className="flex justify-center gap-2 mb-12">
-                        <CallToAction href="/talk-to-a-human" type="primary">
+                        <CallToAction
+                            href="/talk-to-a-human"
+                            type="primary"
+                            state={{ newWindow: true, initialValues: initialContactValues }}
+                        >
                             Talk to a human
                         </CallToAction>
                     </div>
