@@ -195,7 +195,7 @@ export default function ProductReaderView({
                 leftSidebar={leftSidebar}
                 title={productData?.name}
                 hideTitle={false}
-                tableOfContents={useProductNav ? undefined : tableOfContents}
+                tableOfContents={tableOfContents}
                 showQuestions={false}
             >
                 {activeSections.map((section) => renderSection(section))}

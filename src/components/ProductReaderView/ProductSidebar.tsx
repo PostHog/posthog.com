@@ -5,8 +5,10 @@ import { motion } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { Select } from 'components/RadixUI/Select'
 import { docsMenu } from '../../navs'
+import * as NewIcons from '@posthog/icons'
+import * as NotProductIcons from '../NotProductIcons'
+import * as OSIcons from '../OSIcons/Icons'
 
 interface NavItem {
     name: string
@@ -20,10 +22,21 @@ interface ProductSidebarProps {
     product: {
         name: string
         url: string
-        docsUrl?: string // The docs URL for this product (for dropdown matching)
+        docsUrl?: string
         icon?: React.ReactNode
         children: NavItem[]
     }
+}
+
+// Icon resolver for string icon names
+const resolveIcon = (icon?: string | React.ReactNode, color?: string): React.ReactNode => {
+    if (!icon) return null
+    if (React.isValidElement(icon)) return icon
+    if (typeof icon === 'string') {
+        const IconComponent = (NewIcons as any)[icon] || (NotProductIcons as any)[icon] || (OSIcons as any)[icon]
+        return IconComponent ? <IconComponent className={`size-4 ${color ? `text-${color}` : ''}`} /> : null
+    }
+    return null
 }
 
 // Get depth-based padding class (explicit classes for Tailwind JIT)
@@ -38,54 +51,7 @@ const getDepthPadding = (depth: number): string => {
     return paddingClasses[Math.min(depth, paddingClasses.length - 1)]
 }
 
-// Scroll link component - handles in-page navigation with smooth scroll
-const ScrollLink = ({ item, depth, showIcon = false }: { item: NavItem; depth: number; showIcon?: boolean }) => {
-    const { hash } = useLocation()
-
-    const sectionId = item.url?.split('#')[1] || ''
-    const currentHash = hash?.replace('#', '') || ''
-    const isActive = currentHash === sectionId
-
-    const handleClick = (e: React.MouseEvent) => {
-        e.preventDefault()
-        if (!sectionId) return
-
-        const scrollViewport = document.querySelector('[data-radix-scroll-area-viewport]')
-        const targetElement = document.getElementById(sectionId)
-
-        if (targetElement && scrollViewport) {
-            const parentRect = scrollViewport.getBoundingClientRect()
-            const targetRect = targetElement.getBoundingClientRect()
-            const relativeTop = targetRect.top - parentRect.top + scrollViewport.scrollTop
-
-            scrollViewport.scrollTo({
-                top: relativeTop,
-                behavior: 'smooth',
-            })
-
-            if (typeof window !== 'undefined') {
-                window.history.pushState(null, '', item.url)
-            }
-        }
-    }
-
-    return (
-        <OSButton
-            active={isActive}
-            align="left"
-            width="full"
-            size="md"
-            hover="background"
-            className={getDepthPadding(depth)}
-            onClick={handleClick}
-            icon={showIcon ? item.icon : undefined}
-        >
-            {item.name}
-        </OSButton>
-    )
-}
-
-// Regular external link component - opens in new window
+// External link component - opens in new window
 const ExternalLink = ({ item, depth, showIcon = false }: { item: NavItem; depth: number; showIcon?: boolean }) => {
     const { pathname } = useLocation()
     const itemPath = item.url?.split('#')[0]?.split('?')[0] || ''
@@ -136,13 +102,6 @@ const NavItemRenderer = ({
     if (!item.url) {
         return <SectionHeader item={item} depth={depth} />
     }
-
-    const isScrollLink = item.type === 'scroll' || (item.url?.includes('#') && !item.url?.startsWith('http'))
-
-    if (isScrollLink) {
-        return <ScrollLink item={item} depth={depth} showIcon={showIcon} />
-    }
-
     return <ExternalLink item={item} depth={depth} showIcon={showIcon} />
 }
 
@@ -151,25 +110,25 @@ const CollapsibleNavItem = ({
     item,
     depth = 0,
     showIcon = false,
+    defaultOpen = false,
 }: {
     item: NavItem
     depth?: number
     showIcon?: boolean
+    defaultOpen?: boolean
 }) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(defaultOpen)
     const hasChildren = item.children && item.children.length > 0
     const { pathname, hash } = useLocation()
 
     // Check if this item or any descendant is active
     const isActiveOrHasActiveChild = useMemo(() => {
         const checkActive = (navItem: NavItem): boolean => {
-            if (navItem.type === 'scroll' || navItem.url?.includes('#')) {
-                const sectionId = navItem.url?.split('#')[1] || ''
-                const currentHash = hash?.replace('#', '') || ''
-                if (currentHash === sectionId) return true
-            } else if (navItem.url) {
+            if (navItem.url) {
                 const itemPath = navItem.url.split('#')[0]?.split('?')[0] || ''
-                if (pathname === itemPath || pathname === itemPath + '/') return true
+                if (pathname === itemPath || pathname === itemPath + '/' || pathname.startsWith(itemPath + '/')) {
+                    return true
+                }
             }
             if (navItem.children) {
                 return navItem.children.some(checkActive)
@@ -226,58 +185,89 @@ const CollapsibleNavItem = ({
     )
 }
 
-// Get all products from docsMenu for the dropdown
-const getProducts = () => {
+// Get all products from docsMenu
+const getProducts = (): Array<{
+    name: string
+    url: string
+    icon: string
+    color?: string
+    children?: any[]
+}> => {
     const children = (docsMenu as any)?.children || []
     return children.map((product: any) => ({
-        value: product.url,
-        label: product.name,
+        name: product.name,
+        url: product.url,
         icon: product.icon,
         color: product.color,
+        children: product.children || [],
     }))
 }
 
 export default function ProductSidebar({ product }: ProductSidebarProps) {
-    const products = useMemo(() => getProducts(), [])
+    const allProducts = useMemo(() => getProducts(), [])
 
-    // Use docsUrl for dropdown matching (docsMenu has /docs/... URLs)
-    const currentProductDocsUrl = product.docsUrl || product.url
+    // Current product's docs URL for matching
+    const currentProductDocsUrl = product.docsUrl
 
-    const handleProductChange = (value: string) => {
-        navigate(value, { state: { newWindow: true } })
-    }
+    // Build the navigation structure with all products at top level
+    const navigation = useMemo(() => {
+        return allProducts.map((docProduct) => {
+            const isCurrentProduct = docProduct.url === currentProductDocsUrl
+
+            // For the current product, merge in the additional navigation children
+            // (like Roadmap, Forums, etc.) from product.children that aren't in-page scroll links
+            const productChildren: NavItem[] = isCurrentProduct
+                ? product.children.filter((child) => child.type !== 'scroll')
+                : docProduct.children?.map((child: any) => ({
+                      name: child.name,
+                      url: child.url,
+                      children: child.children,
+                  })) || []
+
+            return {
+                name: docProduct.name,
+                url: docProduct.url,
+                icon: resolveIcon(docProduct.icon, docProduct.color),
+                children: productChildren,
+                isCurrentProduct,
+            }
+        })
+    }, [allProducts, currentProductDocsUrl, product.children])
 
     return (
-        <div className="not-prose space-y-2">
-            {/* Product dropdown selector */}
-            <Select
-                groups={[
-                    {
-                        label: '',
-                        items: products,
-                    },
-                ]}
-                placeholder="Select product..."
-                ariaLabel="Products"
-                className="w-full mb-2"
-                value={currentProductDocsUrl}
-                onValueChange={handleProductChange}
-                dataScheme="primary"
-            />
+        <div className="not-prose space-y-px">
+            {navigation.map((productNav, index) => {
+                const key = `product-${index}-${productNav.url}`
+                const hasChildren = productNav.children && productNav.children.length > 0
 
-            {/* Top-level navigation items (no icons, flat) */}
-            <div className="space-y-px">
-                {product.children.map((item, index) => {
-                    const key = `${item.name}-${index}-${item.url}`
-                    const hasChildren = item.children && item.children.length > 0
-
-                    return hasChildren ? (
-                        <CollapsibleNavItem key={key} item={item} depth={0} showIcon={false} />
-                    ) : (
-                        <NavItemRenderer key={key} item={item} depth={0} showIcon={false} />
+                // Current product should be expanded by default and show icon
+                if (hasChildren) {
+                    return (
+                        <CollapsibleNavItem
+                            key={key}
+                            item={productNav}
+                            depth={0}
+                            showIcon={true}
+                            defaultOpen={productNav.isCurrentProduct}
+                        />
                     )
-                })}
-            </div>
+                }
+
+                // Products without children - just a link
+                return (
+                    <OSButton
+                        key={key}
+                        align="left"
+                        width="full"
+                        size="md"
+                        hover="background"
+                        icon={productNav.icon}
+                        onClick={() => navigate(productNav.url, { state: { newWindow: true } })}
+                    >
+                        {productNav.name}
+                    </OSButton>
+                )
+            })}
         </div>
     )
 }
