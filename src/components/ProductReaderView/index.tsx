@@ -13,6 +13,10 @@ import OverviewSection from './sections/OverviewSection'
 import FeaturesSection from './sections/FeaturesSection'
 import VideosSection from './sections/VideosSection'
 import PricingSection from './sections/PricingSection'
+import CustomersSection from './sections/CustomersSection'
+import PairsWithSection from './sections/PairsWithSection'
+import PostHogOnPostHogSection from './sections/PostHogOnPostHogSection'
+import ComparisonSection from './sections/ComparisonSection'
 
 interface ProductReaderViewProps {
     productHandle: string
@@ -58,7 +62,16 @@ export default function ProductReaderView({
     }, [appWindow, productData?.name])
 
     // Default section order - only show sections that have data
-    const defaultSections = ['overview', 'features', 'videos', 'pricing']
+    const defaultSections = [
+        'overview',
+        'features',
+        'customers',
+        'posthog-on-posthog',
+        'videos',
+        'comparison',
+        'pairs-with',
+        'pricing',
+    ]
 
     const activeSections = useMemo(() => {
         const sectionsToShow = sectionOverrides || defaultSections
@@ -73,6 +86,14 @@ export default function ProductReaderView({
                     return productData?.videos && Object.keys(productData.videos).length > 0
                 case 'pricing':
                     return productData?.billingData || productData?.customPricingContent
+                case 'customers':
+                    return productData?.customers && Object.keys(productData.customers).length > 0
+                case 'pairs-with':
+                    return productData?.pairsWith && productData.pairsWith.length > 0
+                case 'posthog-on-posthog':
+                    return productData?.postHogOnPostHog
+                case 'comparison':
+                    return productData?.comparison
                 default:
                     return false
             }
@@ -87,6 +108,10 @@ export default function ProductReaderView({
                 features: 'Features',
                 videos: 'Videos',
                 pricing: 'Pricing',
+                customers: 'Customers',
+                'pairs-with': 'Pairs with',
+                'posthog-on-posthog': 'PostHog on PostHog',
+                comparison: 'Comparison',
             }
 
             return {
@@ -117,6 +142,14 @@ export default function ProductReaderView({
                 return <VideosSection key={section} productData={productData} />
             case 'pricing':
                 return <PricingSection key={section} productData={productData} />
+            case 'customers':
+                return <CustomersSection key={section} productData={productData} />
+            case 'pairs-with':
+                return <PairsWithSection key={section} productData={productData} />
+            case 'posthog-on-posthog':
+                return <PostHogOnPostHogSection key={section} productData={productData} />
+            case 'comparison':
+                return <ComparisonSection key={section} productData={productData} />
             default:
                 return null
         }
