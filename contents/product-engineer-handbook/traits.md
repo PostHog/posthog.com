@@ -6,7 +6,7 @@ showTitle: true
 
 ## 1. They take extreme ownership of ideas
 
-Product engineers own products from beginning to end. Talking to users, shipping minimum lovable products, experimenting and iterating constantly.
+Product engineers own products from beginning to end. [Talking to users](/newsletter/talk-to-users), shipping minimum lovable products, experimenting and iterating constantly.
 
 Product engineers are committed to delivering the full vision of an idea, not handing it off to someone else when they get stuck or lose interest. Getting to 80% doesn't count.
 
@@ -22,7 +22,7 @@ A good product engineer has customers they're friendly with who they can go to a
 
 Second, they're more motivated by work that directly benefits users, and getting this work into their hands as quickly as possible. [Fly.io](http://fly.io) defines this by saying:
 
-"We're ruthless about working on stuff that our users will see and care about. We are not ruthless about shaping and polishing our code into a radiant-cut gem of perfection."
+> "We're ruthless about working on stuff that our users will see and care about. We are not ruthless about shaping and polishing our code into a radiant-cut gem of perfection."
 
 Third, they love jumping on user problems and solving them. Whether it's an annoying paper cut they can solve quickly, or a useful feature that other users will benefit from, product engineers live for sparking joy by proactively solving problems.
 
@@ -32,7 +32,7 @@ By being customer-obsessed, product engineers become more open-minded. They care
 
 Product engineers prefer prototypes, minimum viable features, and experiments to briefs, proposals, and presentations because they get them closer to building a great product. 
 
-They learn by taking bets, building, gathering feedback, and repeating until what they're building sparks joy in their users. They operate under the assumption it's always best to get something into the hands of a user, and learn from them, than to endlessly polish their work before anyone ever sees it. 
+They learn by taking bets, building, [gathering feedback](/newsletter/how-to-give-feedback), and repeating until what they're building sparks joy in their users. They operate under the assumption it's always best to get something into the hands of a user, and learn from them, than to endlessly polish their work before anyone ever sees it. 
 
 This means they use [feature flags tools](https://posthog.com/feature-flags) to [test in production](https://posthog.com/product-engineers/testing-in-production), and run [experiments](https://posthog.com/experiments) to understand the impact of their changes where needed. This mindset, and a willingness to use tools that enable it, allows product engineers to quickly validate ideas with real users, so they learn exponentially faster.
 
@@ -44,19 +44,25 @@ Their love of building means they're more likely to have side projects they’ve
 
 [Ghost](https://ghost.org/) looks for these people:
 
-"The majority of our team is made up of former founders, freelancers and self-starters who are confident and comfortable working independently and getting things done."
+> "The majority of our team is made up of former founders, freelancers and self-starters who are confident and comfortable working independently and getting things done."
 
 As does [Supabase](https://supabase.com/blog/who-we-hire):
 
-"Something we especially value are team members who take on responsibility without asking and without being asked. Founders do this regularly. Clearly these traits are not only found in people who’ve started companies, but it can be an indication. It’s not the credentials that we value most, but the mindset. We expect everyone who works at Supabase to act like a business owner."
+> "Something we especially value are team members who take on responsibility without asking and without being asked. Founders do this regularly. Clearly these traits are not only found in people who’ve started companies, but it can be an indication. It’s not the credentials that we value most, but the mindset. We expect everyone who works at Supabase to act like a business owner."
 
 Many of the product engineers at PostHog are former founders, or cut their teeth maintaining open-source projects.
 
+/TO DO: ADD EXAMPLES HERE
+
+<NewsletterForm />
+
 ## 5. They have product sense and taste
 
-Building successful products requires a little intuition. 
+Building successful products requires a little intuition.
 
-Product engineers use lots of products, think about how they're made, what they do and don't like about them, and how they would improve the apps they use everyday.
+Product engineers use lots of products, think about how they're made, what they do and don't like about them, and how they would improve the apps they use every day.
+
+These habits help them [build taste and product sense](/newsletter/good-taste-great-products) – a gut feel for what a good experience should look like. They still want and need to validate their assumptions with real users, but their intuition makes it easier to go from 0 to 1 quickly.
 
 These habits help them build taste and product sense – a gut feel for what a good experience should look like. They still want and need to validate their assumptions with real users, but their intuition makes it easier to go from 0 to 1 quickly.
 
@@ -76,13 +82,13 @@ Product engineers love gathering more context because it helps them make better 
 
 ## 7. They constantly search for 1% gains
 
-Software isn't made in a vacuum and, more often than not, you're always trying to out ship and out grow a competitor. Product engineers are aware of this and always looking for ways to work more efficiently, or more successfully.
+Software isn't made in a vacuum and, more often than not, you're always trying to out ship and outgrow a competitor. Product engineers are aware of this and always looking for ways to work more efficiently, or more successfully.
 
 This takes different forms, such as:
 
-* Dedicating time to automating time consuming tasks, like tests.  
-* Improving developer tooling to reduce time to deployment.  
-* Testing in production – i.e. as close to reality as possible.  
+* Dedicating time to automating time-consuming tasks, like tests.
+* Improving developer tooling to reduce time to deployment.
+* [Testing in production](/product-engineers/testing-in-production) – i.e. as close to reality as possible.
 * Experimenting with different tools, agents, models, and frameworks. 
 
 They do this because being a successful product engineer requires making time for things like talking to users, and because shipping faster is a fundamental competitive advantage.
@@ -97,4 +103,6 @@ Building successful products that users genuinely love isn't easy, so you need t
 
 A product engineer's reaction to any difficult problem should always be "this is solvable", not a long list of reasons why they can't do anything about it. They bring practical solutions to edge cases, and are more willing to tolerate them if the impact of a change will benefit the vast majority of users. 
 
-This doesn't mean saying yes to every problem or request that comes along – product engineers are opinionated about their work, after all. It means having an open mind about what's possible. 
+This doesn't mean saying yes to every problem or request that comes along – product engineers are opinionated about their work, after all. It means having an open mind about what's possible.
+
+<NewsletterForm />

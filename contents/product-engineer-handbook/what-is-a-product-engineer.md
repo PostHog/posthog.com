@@ -10,27 +10,23 @@ We believed this long before AI coding agents became genuinely useful, but their
 
 Today, a decent engineer can achieve more than they ever realistically could before. As a consequence, teams that stick to the old assumptions and boundaries of "engineering work" will flounder. Teams that embrace a broader definition will out ship and outperform them, and do so while working within smaller, more efficient teams.
 
-Those high-performing teams will be led by product engineers. Unlike a traditionally defined full stack engineer, a product engineer's job goes beyond shipping code. It's about engineering every aspect of the product and what makes it successful. 
+We think those high-performing teams will be led by product engineers. Unlike a traditionally defined full stack engineer, a product engineer's job goes beyond shipping code. It's about engineering every aspect of the product and what makes it successful. 
 
 Product engineers talk to users. They decide what to build. They own pricing, revenue, and user experience. They support customers directly. They're accountable primarily to their users and paying customers. They own product decisions.
-
-Product engineers still work with product managers, but they're not ruled by them. It's a fundamentally different dynamic, one that requires leaders to relinquish command and control measures. A dynamic that defaults to trust and autonomy. A dynamic that gives *everyone* permission to be ambitious.
-
-## Why should I read this? 
 
 The Product Engineer Handbook is about helping developers embrace this new reality. The good news? You can wake up tomorrow and decide to be one. You don't need anyone's permission, least of all ours. All you need is an open mind, a love of building, and the desire to learn.
 
 Reading this handbook will help you understand how to adapt your thinking, the behaviors you should adopt, and the skills you should develop to become a successful product engineer. It'll also help you learn the basic concepts that underpin the business of building successful software businesses.
 
-We'll share how adopting this mentality has helped us grow PostHog, and how others are applying it too. Just like our company handbook, the Product Engineer Handbook is a living document. One we will be growing, fine-tuning, and iterating on for a long time. 
+We'll share how adopting this mentality has helped us grow PostHog, and how others are applying it too. Just like our [company handbook](/handbook) where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product.
 
-If you enjoy it, you should sign up to our newsletter, Product for Engineers, so you don't miss out on new chapters. Got a request for something we should add to the handbook? Leave a comment anywhere, or ask a question.
+If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. Got a request for something we should add to the handbook? Leave a comment anywhere on this page, or in our [community](/questions).
+
+<NewsletterForm />
 
 ## Defining the product engineer
 
-Can anyone be a product engineer? Possibly. Tools like Cursor, and Claude Code make it easier than ever for anyone with enough knowledge and determination to build products that users love.
-
-In the most general terms, however, a product engineer is a software developer who builds products for *real users*, writes full stack code, and cares deeply about solving the "hair on fire" problems of their users.
+In the most general terms, a product engineer is a software developer who builds products for *real users*, writes full stack code, and cares deeply about solving the "hair on fire" problems of their users.
 
 For us this means product engineers need to be: 
 
@@ -73,7 +69,13 @@ AI can't build your business. You can't plug a large language model into your ho
 
 Code that works isn’t just code that compiles, it’s code that creates results. Results for customers who depend on it. Results for the business that maintains it. Code that keeps the lights on gives you more leverage to reach your goals.
 
-Developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, are more employable. They're more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
+Developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, they're more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
+
+Embracing the product engineer mindset requires a complete reset of how organizations behave. It requires [smaller teams](/newsletter/small-teams), more autonomy, and transparency. It requires minimal process, time to build, trust and feedback. It requires a culture that gives *everyone* permission to be ambitious.
+
+For individuals, being a [product engineer is just plain fun](/blog/why-product-engineering-is-so-fun). When you truly understand and engage with the impact of your work on real users, every line of code you write is more meaningful.
+
+For companies, embracing product engineers and the [culture they need to flourish](/product-engineer-handbook/culture), unlocks the kind of speed and agency that allows small companies to out flank larger incumbents. To spark joy in users and build products they truly love. It's a competitive advantage.
 
 In our experience, nothing is more motivating than working with other talented product engineers. The speed, scale, and ambition of problems you can tackle when product engineers work together is on a different level.
 

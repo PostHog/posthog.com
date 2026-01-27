@@ -8,7 +8,7 @@ You can't plug product engineers into a traditional corporate environment and ex
 
 That's why product engineers are most common at startups and scale ups – companies that have built their culture around moving fast, and giving product engineers the things they need to thrive.
 
-Whether you're building a new company, or trying to change an existing one for the better, here are some ways to help product engineers flourish that we've adopted at PostHog. 
+Whether you're building a new company, or trying to change an existing one, here are some ways to help product engineers flourish that we've adopted at PostHog. 
 
 ## 1. Create time to build
 
@@ -26,7 +26,7 @@ In many ways, everything we do at PostHog is designed to reduce the need for mee
 
 * **Two meeting-free days a week:** Every Tuesday and Thursday at PostHog is a mandated meeting-free day. Only in exceptional circumstances, such as quarterly planning sessions, will we book a meeting on these days. Recurring meetings should never happen on a meeting-free day.
 
-* **Defaulting to async comms:** Most big product decisions can be made asynchronously, and a meeting should only happen when everyone involved has contributed to an RFC, given their feedback, and have done their thinking beforehand. This makes the meeting purely about making a decision where everyone has the necessary context.
+* **Defaulting to async comms:** Most big product decisions can be made [asynchronously](/newsletter/how-we-work-async), and a meeting should only happen when everyone involved has contributed to an RFC, given their feedback, and have done their thinking beforehand. This makes the meeting purely about making a decision where everyone has the necessary context.
 
 * **Part-time managers:** Managers at PostHog are individual contributors first and managers second. We generally encourage people to have fewer 1:1s with their manager, skip them when they're not required, since 1:1s tend to proliferate as companies grow. 
 
@@ -56,9 +56,9 @@ Most companies love to set artificial deadlines because they’re the easiest wa
 
 Instead, we ask product engineers a simple question: why not now? And, provided the "why not" doesn't include some kind of critical problem (security, compliance, privacy, etc) the default should be to always ship something as early as possible. 
 
-We always prefer to give feedback on work someone has done than require approval to do it. This doesn't mean engineers "yolo merge" to prod with no code review. It does mean trusting product engineers to make decisions about what to build and how to build it, and creating tight and regular feedback loops, so they keep learning.
+We always prefer to [give feedback](/newsletter/how-to-give-feedback) on work someone has done than require approval to do it. This doesn't mean engineers "yolo merge" to prod with no code review. It does mean trusting product engineers to make decisions about what to build and how to build it, and creating tight and regular feedback loops, so they keep learning.
 
-Ultimately, autonomy requires trust, and trust requires regular feedback to help people when they need it. You can't have one without the other. We do this by having lots of rituals for forcing transparent feedback, such as 360-degree feedback sessions at offsites, and keeper tests.
+Ultimately, autonomy requires trust, and trust requires regular feedback to help people when they need it. You can't have one without the other. We do this by having lots of rituals for forcing transparent feedback, such as 360-degree feedback sessions at off sites, and keeper tests.
 
 ## 5. Be very honest about performance
 
@@ -103,7 +103,7 @@ This also helps reduce meetings, since important context isn't siloed within mee
 
 ## 7. Adopt a small team structure
 
-All the above is much easier if you build your company around small teams, which we define as teams of six people or less.
+All the above is much easier if you build your company around [small teams](/newsletter/small-teams), which we define as teams of six people or fewer.
 
 Small teams don't require a bunch of coordination and process to keep them aligned, reducing the need for meetings and processes, and it's easier for them to quickly change direction when needed.
 

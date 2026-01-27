@@ -18,7 +18,7 @@ The result is a maze of half-baked features, and it’s just plain slow. PMs bec
 
 This is the most important principle. At PostHog, PMs don't own the roadmap, make product decisions, or shield engineers from users, or the wider business goals.
 
-Instead, product engineers manage product teams. They have complete autonomy. They talk to users, decide how to prioritize the roadmap, and are ultimately responsible for the impact of their decisions on the business – i.e. revenue, user satisfaction, and retention.
+Instead, product engineers manage product teams. They have complete autonomy. They [talk to users](/newsletter/talk-to-users), [decide how to prioritize the roadmap](/newsletter/how-we-decide-what-to-build), and are ultimately responsible for the impact of their decisions on the business – i.e. revenue, user satisfaction, and retention.
 
 Why is this important? Because the most important thing we've built at PostHog came from an engineer deciding what to build.
 
@@ -37,18 +37,18 @@ While product engineers own the product and the roadmap, product managers act as
 One way they do this at PostHog is by owning growth reviews. Growth reviews exist to evaluate the impact of each team’s work and we do every month. PMs collect all the vital data on the product, such as: 
 
 - **Revenue metrics:** e.g., MRR, month-on-month growth, revenue churn rate, total paying customers count.
-- **Product analytics:** e.g., active users, user growth rate, organization growth rate, user retention rate.
-- **User feedback:** e.g., NPS score, customer interviews, support tickets, any other requests.
+- **Product analytics:** e.g., active users, user growth rate, organization growth rate, [user retention rate](/product-engineers/customer-retention-metrics).
+- **User feedback:** e.g., [NPS score](/product-engineers/nps-vs-csat-vs-ces), customer interviews, support tickets, any other requests.
 
 They then compile it, put it together in an easy-to-understand format, and conduct a deep dive highlighting interesting findings we should discuss further.
 
 The PM, engineers and exec team then meet to discuss questions like:
 
 - Are our 10 biggest customers happy users of the product?
-- Do high ICP and non-ICP customers use the product differently?
+- Do high [ICP](/newsletter/ideal-customer-profile-framework) and non-ICP customers use the product differently?
 - Why was churn high last month? Can we identify any reasons?
 - Can we find leading indicators that predict long-term product usage?
-- Where in the onboarding funnel do new users struggle?
+- Where in the [onboarding funnel](/blog/how-to-find-and-fix-app-onboarding-drop-off) do new users struggle?
 
 This paints a full picture of how the team and product are doing. It’s then up to the product team lead (an engineer) to decide if the team should continue on their course, or if something needs to change.
 

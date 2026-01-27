@@ -14,13 +14,13 @@ If in doubt, it's always better to present an opinion and hypothesis that people
 
 ## 2. Dismissing feedback
 
-There's a fine line between disagreeing with feedback and dismissing it out of hand. Whether it's coming from colleagues you're working with, or users of what you ship, a product engineer needs to be able to deal with direct feedback and respond appropriately.
+There's a fine line between disagreeing with feedback and dismissing it out of hand. Whether it's coming from colleagues you're working with, or users of what you ship, a product engineer needs to be able to deal with [direct feedback](/newsletter/how-to-give-feedback) and respond appropriately.
 
 If you disagree, you need to articulate why and understand why you're receiving that feedback in the first place. Ultimately, being a product engineer requires a love of learning, and that starts by learning how to listen and making good judgements about when feedback is valid.
 
 ## 3. Not shipping early enough
 
-It's always best to get something into the hands of users, even if it's a small subset of users. If you're not slightly embarrassed by the early version of what you ship, you're probably shipping too late. Polish comes from shipping fast and iterating, not endlessly refining in isolation.
+It's always best to get something into the hands of users, even if it's a small subset of users. If you're not slightly embarrassed by the early version of what you ship, [you're probably shipping too late](/newsletter/this-is-why-youre-not-shipping). Polish comes from shipping fast and iterating, not endlessly refining in isolation.
 
 ## 4. Obsessing over code quality
 
@@ -46,7 +46,7 @@ No one using what you've built is bad, not knowing whether people are using what
 
 ## 9. Being an asshole
 
-Sometimes, when we talk about product engineers, people imagine the tech bro archetype of someone who is just out there doing their own thing, not caring what other people think, and feeling superior because they're "building the future". This is not it at all. 
+Sometimes when we talk about product engineers, people imagine the tech bro archetype of someone who is just out there doing their own thing, not caring what other people think, and feeling superior because they're "building the future". This is not it at all. 
 
 In fact, "low ego" is one of the key qualities we look for when hiring. We want people with strong opinions, but strong opinions become a weakness if they come with a side dish of being dogmatic, inflexible, and uninterested in other perspectives.
 
@@ -60,4 +60,4 @@ As noted in an earlier chapter, management should be a part-time activity for a 
 
 ## 12. Lack of awareness
 
-A product engineer should be able to describe their ideal customer profile or user persona, the high-level goals of their company, and the why behind what they're building. Failure to engage on these points is a clear sign someone won't work out. You can't make good decisions about what to build if you don't know, or care to know, the context in which you're building.
+A product engineer should be able to describe their [ideal customer profile](/newsletter/ideal-customer-profile-framework) or [user persona](/product-engineers/how-to-create-user-personas), the high-level goals of their company, and the why behind what they're building. Failure to engage on these points is a clear sign someone won't work out. You can't make good decisions about what to build if you don't know, or care to know, the context in which you're building.
