@@ -643,6 +643,10 @@
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
+        {
+            "source": "/docs/session-replay/_snippets/react-native-installation",
+            "destination": "/docs/session-replay/installation/react-native"
+        },
         { "source": "/docs/features/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/feature-flags/manual", "destination": "/docs/feature-flags" },
@@ -1704,7 +1708,8 @@
             "source": "/docs/revenue-analytics/common-questions",
             "destination": "/docs/revenue-analytics/troubleshooting"
         },
-        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" }
+        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
+        { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" }
     ],
     "headers": [
         {
