@@ -108,7 +108,7 @@ export default function Products(): JSX.Element {
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
     const { appWindow } = useWindow()
-    const { siteSettings, websiteMode } = useApp()
+    const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
