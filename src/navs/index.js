@@ -1354,36 +1354,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/new-sales',
                     },
                     {
-                        name: 'Product-led sales',
-                        url: '/handbook/growth/sales/product-led-sales',
-                        children: [
-                            {
-                                name: 'Account planning',
-                                url: '/handbook/growth/sales/account-planning',
-                            },
-                            {
-                                name: 'Expansion, cross-sell & retention',
-                                url: '/handbook/growth/sales/expansion-and-retention',
-                            },
-                            {
-                                name: 'Cross sell motions',
-                                url: '/handbook/growth/sales/cross-sell-motions',
-                            },
-                            {
-                                name: 'Communications templates',
-                                url: '/handbook/growth/sales/communications-templates',
-                            },
-                            {
-                                name: 'User event streams',
-                                url: '/handbook/growth/sales/user-event-streams',
-                            },
-                            {
-                                name: 'Customer on-sites',
-                                url: '/handbook/growth/sales/customer-onsites',
-                            },
-                        ],
-                    },
-                    {
                         name: 'Outbound sales',
                         url: '/handbook/growth/sales/outbound-sales',
                     },
@@ -1406,6 +1376,16 @@ export const handbookSidebar = [
                     {
                         name: 'Professional services',
                         url: '/handbook/growth/sales/professional-services',
+                    },
+                    {
+                        name: 'Product-led sales',
+                        url: '/handbook/growth/sales/product-led-sales',
+                        children: [
+                            {
+                                name: 'Expansion, cross-sell & retention',
+                                url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                        ],
                     },
                 ],
             },
@@ -1552,8 +1532,16 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/account-allocation',
                     },
                     {
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
+                    },
+                    {
                         name: 'Automations',
                         url: '/handbook/growth/sales/automations',
+                    },
+                    {
+                        name: 'User event streams',
+                        url: '/handbook/growth/sales/user-event-streams',
                     },
                     {
                         name: 'Who we do business with',
@@ -1562,6 +1550,10 @@ export const handbookSidebar = [
                     {
                         name: 'Handling customer issues',
                         url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
+                        name: 'Communications templates',
+                        url: '/handbook/growth/sales/communications-templates',
                     },
                     {
                         name: 'Health tracking',
@@ -1598,6 +1590,10 @@ export const handbookSidebar = [
                     {
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'Customer on-sites',
+                        url: '/handbook/growth/sales/customer-onsites',
                     },
                     {
                         name: 'Metabase account analysis',
