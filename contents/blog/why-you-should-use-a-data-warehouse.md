@@ -9,7 +9,9 @@ featuredImageType: full
 category: PostHog news
 ---
 
-You’ve learned the difference between data lakes and data warehouses. You can drop acronyms like ETL and OLAP into conversation without flinching. But you’re still stuck on the annoying question underneath all of it.
+import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
+
+You've learned the difference between data lakes and data warehouses. You can drop acronyms like ETL and OLAP into conversation without flinching. But you’re still stuck on the annoying question underneath all of it.
 
 Why should you use a data warehouse in the first place?
 
@@ -91,4 +93,17 @@ That can include not just what data should be referenced, but also metric defini
 
 Nobody gets excited about governance (except for [Tom](/community/profiles/34651)), but it is important. If you’ve got a dozen hands all over your data then things are inevitably going to go wrong — and you need a way to find out who to blame and how to fix it.
 
-For example, if someone changes a column name in your production database without telling anyone, the downstream pipeline will fall apart and you’ll have to look at your logs. A mature warehouse, however, will prevent the problem with schema controls, access limits to keep out nosey interns, and cost controls to stop marketing from accidentally causing a financial crisis. Again. 
+For example, if someone changes a column name in your production database without telling anyone, the downstream pipeline will fall apart and you'll have to look at your logs. A mature warehouse, however, will prevent the problem with schema controls, access limits to keep out nosey interns, and cost controls to stop marketing from accidentally causing a financial crisis. Again. 
+
+<div className="dark:bg-dark bg-accent border border-input p-4 rounded">
+    <p className="!mt-0">
+        <strong>Note:</strong> PostHog managed DuckDB warehouse is in{' '}
+        <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+            Beta
+        </span>
+        . Join the waitlist to get early access.
+    </p>
+    <div className="max-w-md">
+        <DuckDBWaitlistSurvey />
+    </div>
+</div>
