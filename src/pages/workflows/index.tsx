@@ -218,6 +218,9 @@ export default function Workflows(): JSX.Element {
             answersHeadline: '',
         },
         order: ['overview', 'features', 'comparison'],
+        overrides: {
+            videos: { props: { title: 'How PostHog uses PostHog Workflows' } },
+        },
         custom: [
             {
                 slug: 'pricing',

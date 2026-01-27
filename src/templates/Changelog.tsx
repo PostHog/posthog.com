@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import { IconArchive, IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import { ChangelogEmojiReactions } from 'components/EmojiReactions'
 import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 import SEO from 'components/seo'
@@ -171,7 +171,7 @@ const Roadmap = ({
     initialActiveRoadmap: RoadmapNode | null
 }) => {
     const { appWindow } = useWindow()
-    const { isModerator } = useUser()
+    const { isModerator, getJwt } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
@@ -192,6 +192,27 @@ const Roadmap = ({
                 status="complete"
             />
         )
+    }
+
+    const handleUnpublishRoadmap = async () => {
+        const confirmed = window.confirm(
+            'Unpublishing will remove this item from the changelog on the next build. You can republish it later in Strapi. No data will be lost.'
+        )
+        if (confirmed) {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${roadmap.id}`, {
+                body: JSON.stringify({
+                    data: {
+                        publishedAt: null,
+                    },
+                }),
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            onClose()
+        }
     }
 
     const handleClose = () => {
@@ -223,13 +244,24 @@ const Roadmap = ({
                     </div>
                     <aside className="">
                         {isModerator && (
-                            <Tooltip
-                                trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
-                                delay={0}
-                            >
-                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Edit
-                                roadmap item
-                            </Tooltip>
+                            <>
+                                <Tooltip
+                                    trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
+                                    delay={0}
+                                >
+                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                    Edit roadmap item
+                                </Tooltip>
+                                <Tooltip
+                                    trigger={
+                                        <OSButton size="md" icon={<IconArchive />} onClick={handleUnpublishRoadmap} />
+                                    }
+                                    delay={0}
+                                >
+                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                    Unpublish roadmap item
+                                </Tooltip>
+                            </>
                         )}
                         <OSButton size="md" icon={<IconX />} onClick={handleClose} />
                     </aside>

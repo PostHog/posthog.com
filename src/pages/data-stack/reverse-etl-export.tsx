@@ -25,13 +25,14 @@ export default function ReverseETLExport(): JSX.Element {
                 <h2 className="flex items-center">
                     Reverse ETL
                     <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
-                        Beta
+                        Coming soon
                     </span>
                 </h2>
                 <p>
                     Deliver cleaned and modeled data from your PostHog data warehouse to your operational tools for
                     marketing, sales, and customer success via our{' '}
-                    <Link to="/cdp#integrations-library">CDP destinations</Link>.
+                    <Link to="/cdp#integrations-library">CDP destinations</Link> like you can with{' '}
+                    <Link to="/docs/cdp/destinations">realtime data</Link> already.
                 </p>
 
                 <h2>Batch exports</h2>

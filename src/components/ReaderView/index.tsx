@@ -602,10 +602,17 @@ function ReaderViewContent({
             })
             await Promise.all(imageLoadPromises)
             await new Promise((resolve) => setTimeout(resolve, 100))
-            scrollElement.scrollTo({
-                top: document.getElementById(hash.replace('#', ''))?.offsetTop || 0,
-                behavior: 'smooth',
-            })
+            const targetElement = document.getElementById(hash.replace('#', ''))
+            if (targetElement) {
+                const detailsParent = targetElement.closest('details')
+                if (detailsParent) {
+                    detailsParent.open = true
+                }
+                scrollElement.scrollTo({
+                    top: targetElement.offsetTop || 0,
+                    behavior: 'smooth',
+                })
+            }
         }
 
         if (hash) {

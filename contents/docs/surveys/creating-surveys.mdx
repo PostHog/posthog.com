@@ -29,9 +29,9 @@ export const repeatingSurveyLight =
 export const repeatingSurveyDark =
     'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg'
 export const presentationTypesLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_51_26_PM_ca79895d6b.png'
 export const presentationTypesDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_52_53_PM_066c87466c.png'
 export const copySurveyLinkLight =
     'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg'
 export const copySurveyLinkDark =
@@ -86,7 +86,7 @@ There are three options for displaying a survey:
 
 3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
 
-4. **Hosted surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
+4. **Hosted surveys**: Create a survey accessible via an external link or embedded in an iframe, hosted by PostHog. Responses are anonymous by default, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
 
 <ProductScreenshot
     imageLight={presentationTypesLight}
@@ -186,6 +186,35 @@ Now you can send your survey link with the NPS question pre-filled, like this:
 - Choice indices are also 0-based (first choice is `0`, second is `1`, etc.)
 - Invalid indices are silently ignored
 - Pre-filling only works with choice and rating questions (not open text)
+
+#### Embedding hosted surveys in iframes
+
+You can embed hosted surveys directly on a page using an iframe. This is useful if you're working in a no-code site builder, or otherwise want to display a survey inline without creating an [API survey](/docs/surveys/implementing-custom-surveys).
+
+To create an embedded survey:
+1. Create a hosted survey - select **Hosted Survey** as the [presentation type](#presentation)
+2. Enable **Allow embedding in iframes** in the survey settings
+3. Save and launch your survey
+4. On the overview page, click **Copy embed code** to get the HTML snippet
+5. Paste the code snippet wherever you like - done!
+
+Here's an example with Framer:
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/embedded_surveys_6e058da781.mp4" 
+    alt="How to create an embedded survey in Framer" 
+    classes="rounded"
+    autoPlay={false}
+/>
+
+**Notes:**
+- **Person identification:** If the PostHog SDK is enabled on your site, the default embed code will automatically attach the Person's distinct ID (via `window.posthog.get_distinct_id()`) to all embedded survey responses. Otherwise, the responses will be anonymous.
+- **URL pre-fill:** URL pre-filling is supported with embedded surveys, you'll just need to update your embed code to include the pre-fill query params.
+- **Embed customization:** The default embed code provides automatic height adjustment and minimal styling. For more control, you can create your own iframe using the hosted survey's URL + `?embed=true`. Example:
+
+```
+https://us.posthog.com/external_surveys/my-survey-id/?embed=true
+```
 
 ### Steps
 

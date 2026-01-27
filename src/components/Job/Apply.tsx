@@ -139,7 +139,22 @@ const components = {
                 >
                     <div className="absolute">
                         {fileName ? (
-                            <p className="!m-0">{fileName}</p>
+                            <p className="flex items-center gap-2 !m-0">
+                                <span>{fileName}</span>
+                                <button
+                                    type="button"
+                                    className="text-red dark:text-yellow text-sm font-medium"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setFileName(null)
+                                        if (inputRef.current) {
+                                            inputRef.current.value = ''
+                                        }
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            </p>
                         ) : (
                             <p className="flex space-x-3 items-center !m-0">
                                 <button type="button" className={container('primary', 'sm')} onClick={open}>
@@ -233,6 +248,11 @@ const Form = ({
             })
 
             if (!res.ok) {
+                if (res.status === 413) {
+                    throw new Error(
+                        'Your resume is a little too impressive to upload. Please reduce the file size and try again.'
+                    )
+                }
                 throw new Error('Failed to submit application. Please try again.')
             }
 
