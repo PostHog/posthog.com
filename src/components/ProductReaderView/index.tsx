@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -9,6 +9,7 @@ import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 import ProgressBar from 'components/ProgressBar'
 import ProductSidebar from './ProductSidebar'
+import { useLocation } from '@reach/router'
 
 // Section components
 import OverviewSection from './sections/OverviewSection'
@@ -21,7 +22,7 @@ import PostHogOnPostHogSection from './sections/PostHogOnPostHogSection'
 import ComparisonSection from './sections/ComparisonSection'
 
 interface NavigationConfig {
-    docs?: string | boolean
+    docs?: string | boolean | { basePath: string; dynamic?: boolean }
     roadmap?: string | boolean
     tutorials?: string | boolean
     changelog?: string | boolean
@@ -46,11 +47,31 @@ interface ProductReaderViewProps {
     navigationConfig?: NavigationConfig
 }
 
-interface TableOfContentsItem {
-    value: string
-    url: string
-    depth: number
+// Define the pages and what sections they contain
+const PAGE_DEFINITIONS = {
+    overview: {
+        name: 'Overview',
+        sections: ['overview', 'customers', 'pairs-with'],
+    },
+    features: {
+        name: 'Features',
+        sections: ['features'],
+    },
+    demos: {
+        name: 'Demos',
+        sections: ['videos', 'posthog-on-posthog'],
+    },
+    comparison: {
+        name: 'Comparison',
+        sections: ['comparison'],
+    },
+    pricing: {
+        name: 'Pricing',
+        sections: ['pricing'],
+    },
 }
+
+type PageKey = keyof typeof PAGE_DEFINITIONS
 
 const CategorySidebarContent = () => {
     const categoryNav = useProductCategoryNavigation()
@@ -59,11 +80,10 @@ const CategorySidebarContent = () => {
 
 /**
  * Reusable product page template that renders product data in a reader view layout
- * with left sidebar navigation and on-page table of contents.
+ * with left sidebar navigation. Pages are navigable via hash.
  */
 export default function ProductReaderView({
     productHandle,
-    sections: sectionOverrides,
     seoOverrides,
     useProductNav = false,
     navigationConfig = {},
@@ -71,6 +91,16 @@ export default function ProductReaderView({
     const productData = useProduct({ handle: productHandle }) as any
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
+    const { hash } = useLocation()
+
+    // Determine active page from hash (default to 'overview')
+    const activePage = useMemo(() => {
+        const pageFromHash = hash?.replace('#', '') as PageKey
+        if (pageFromHash && PAGE_DEFINITIONS[pageFromHash]) {
+            return pageFromHash
+        }
+        return 'overview' as PageKey
+    }, [hash])
 
     // Get product-specific navigation
     const productNavigation = useProductNavigation({
@@ -82,70 +112,43 @@ export default function ProductReaderView({
     // Set window title
     useEffect(() => {
         if (appWindow && productData?.name) {
-            setWindowTitle(appWindow, `${productData.name}.md`)
+            const pageName = PAGE_DEFINITIONS[activePage]?.name || 'Overview'
+            setWindowTitle(appWindow, `${productData.name} - ${pageName}.md`)
         }
-    }, [appWindow, productData?.name])
+    }, [appWindow, productData?.name, activePage])
 
-    // Default section order - only show sections that have data
-    const defaultSections = [
-        'overview',
-        'features',
-        'customers',
-        'posthog-on-posthog',
-        'videos',
-        'comparison',
-        'pairs-with',
-        'pricing',
-    ]
+    // Check which pages have data
+    const availablePages = useMemo(() => {
+        if (!productData) return []
 
-    const activeSections = useMemo(() => {
-        const sectionsToShow = sectionOverrides || defaultSections
-
-        return sectionsToShow.filter((section) => {
+        const hasData = (section: string): boolean => {
             switch (section) {
                 case 'overview':
-                    return productData?.overview
+                    return Boolean(productData?.overview)
                 case 'features':
-                    return productData?.features && productData.features.length > 0
+                    return Boolean(productData?.features && productData.features.length > 0)
                 case 'videos':
-                    return productData?.videos && Object.keys(productData.videos).length > 0
+                    return Boolean(productData?.videos && Object.keys(productData.videos).length > 0)
                 case 'pricing':
-                    return productData?.billingData || productData?.customPricingContent
+                    return Boolean(productData?.billingData || productData?.customPricingContent)
                 case 'customers':
-                    return productData?.customers && Object.keys(productData.customers).length > 0
+                    return Boolean(productData?.customers && Object.keys(productData.customers).length > 0)
                 case 'pairs-with':
-                    return productData?.pairsWith && productData.pairsWith.length > 0
+                    return Boolean(productData?.pairsWith && productData.pairsWith.length > 0)
                 case 'posthog-on-posthog':
-                    return productData?.postHogOnPostHog
+                    return Boolean(productData?.postHogOnPostHog)
                 case 'comparison':
-                    return productData?.comparison
+                    return Boolean(productData?.comparison)
                 default:
                     return false
             }
-        })
-    }, [productData, sectionOverrides])
+        }
 
-    // Generate table of contents from active sections
-    const tableOfContents: TableOfContentsItem[] = useMemo(() => {
-        return activeSections.map((section) => {
-            const sectionNames: Record<string, string> = {
-                overview: 'Overview',
-                features: 'Features',
-                videos: 'Videos',
-                pricing: 'Pricing',
-                customers: 'Customers',
-                'pairs-with': 'Pairs with',
-                'posthog-on-posthog': 'PostHog on PostHog',
-                comparison: 'Comparison',
-            }
-
-            return {
-                value: sectionNames[section] || section,
-                url: section,
-                depth: 0,
-            }
-        })
-    }, [activeSections])
+        // A page is available if at least one of its sections has data
+        return (Object.entries(PAGE_DEFINITIONS) as [PageKey, (typeof PAGE_DEFINITIONS)[PageKey]][])
+            .filter(([, pageDef]) => pageDef.sections.some(hasData))
+            .map(([key]) => key)
+    }, [productData])
 
     // Handle loading state
     if (!productData) {
@@ -156,32 +159,52 @@ export default function ProductReaderView({
         )
     }
 
-    // Render section based on slug
+    // Render a section
     const renderSection = (section: string) => {
         switch (section) {
             case 'overview':
-                return <OverviewSection key={section} productData={productData} />
+                return productData?.overview ? <OverviewSection key={section} productData={productData} /> : null
             case 'features':
-                return <FeaturesSection key={section} productData={productData} />
+                return productData?.features?.length > 0 ? (
+                    <FeaturesSection key={section} productData={productData} />
+                ) : null
             case 'videos':
-                return <VideosSection key={section} productData={productData} />
+                return productData?.videos && Object.keys(productData.videos).length > 0 ? (
+                    <VideosSection key={section} productData={productData} />
+                ) : null
             case 'pricing':
-                return <PricingSection key={section} productData={productData} />
+                return productData?.billingData || productData?.customPricingContent ? (
+                    <PricingSection key={section} productData={productData} />
+                ) : null
             case 'customers':
-                return <CustomersSection key={section} productData={productData} />
+                return productData?.customers && Object.keys(productData.customers).length > 0 ? (
+                    <CustomersSection key={section} productData={productData} />
+                ) : null
             case 'pairs-with':
-                return <PairsWithSection key={section} productData={productData} />
+                return productData?.pairsWith?.length > 0 ? (
+                    <PairsWithSection key={section} productData={productData} />
+                ) : null
             case 'posthog-on-posthog':
-                return <PostHogOnPostHogSection key={section} productData={productData} />
+                return productData?.postHogOnPostHog ? (
+                    <PostHogOnPostHogSection key={section} productData={productData} />
+                ) : null
             case 'comparison':
-                return <ComparisonSection key={section} productData={productData} />
+                return productData?.comparison ? <ComparisonSection key={section} productData={productData} /> : null
             default:
                 return null
         }
     }
 
+    // Get sections for the active page
+    const activePageDef = PAGE_DEFINITIONS[activePage]
+    const sectionsToRender = activePageDef?.sections || []
+
     // Determine which sidebar to use
-    const leftSidebar = useProductNav ? <ProductSidebar product={productNavigation} /> : <CategorySidebarContent />
+    const leftSidebar = useProductNav ? (
+        <ProductSidebar product={productNavigation} availablePages={availablePages} activePage={activePage} />
+    ) : (
+        <CategorySidebarContent />
+    )
 
     return (
         <>
@@ -194,12 +217,14 @@ export default function ProductReaderView({
             <ReaderView
                 leftSidebar={leftSidebar}
                 title={productData?.name}
-                hideTitle={false}
-                tableOfContents={tableOfContents}
+                hideTitle={activePage !== 'overview'}
                 showQuestions={false}
             >
-                {activeSections.map((section) => renderSection(section))}
+                {sectionsToRender.map((section) => renderSection(section))}
             </ReaderView>
         </>
     )
 }
+
+export { PAGE_DEFINITIONS }
+export type { PageKey }

@@ -9,13 +9,15 @@ import { docsMenu } from '../../navs'
 import * as NewIcons from '@posthog/icons'
 import * as NotProductIcons from '../NotProductIcons'
 import * as OSIcons from '../OSIcons/Icons'
+import { PAGE_DEFINITIONS, PageKey } from './index'
 
 interface NavItem {
     name: string
     url?: string
     icon?: React.ReactNode
     children?: NavItem[]
-    type?: 'scroll' | 'link'
+    type?: 'scroll' | 'link' | 'page'
+    isActive?: boolean
 }
 
 interface ProductSidebarProps {
@@ -26,6 +28,8 @@ interface ProductSidebarProps {
         icon?: React.ReactNode
         children: NavItem[]
     }
+    availablePages?: PageKey[]
+    activePage?: PageKey
 }
 
 // Icon resolver for string icon names
@@ -49,6 +53,35 @@ const getDepthPadding = (depth: number): string => {
         'pl-16', // depth 4
     ]
     return paddingClasses[Math.min(depth, paddingClasses.length - 1)]
+}
+
+// Page link component - handles hash-based page navigation
+const PageLink = ({ item, depth, isActive }: { item: NavItem; depth: number; isActive?: boolean }) => {
+    const handleClick = (e: React.MouseEvent) => {
+        e.preventDefault()
+        if (item.url) {
+            // Navigate to the hash URL
+            if (typeof window !== 'undefined') {
+                window.history.pushState(null, '', item.url)
+                // Trigger a location change event
+                window.dispatchEvent(new PopStateEvent('popstate'))
+            }
+        }
+    }
+
+    return (
+        <OSButton
+            active={isActive || item.isActive}
+            align="left"
+            width="full"
+            size="md"
+            hover="background"
+            onClick={handleClick}
+            className={getDepthPadding(depth)}
+        >
+            {item.name}
+        </OSButton>
+    )
 }
 
 // External link component - opens in new window
@@ -94,14 +127,24 @@ const NavItemRenderer = ({
     item,
     depth = 0,
     showIcon = false,
+    activePage,
 }: {
     item: NavItem
     depth?: number
     showIcon?: boolean
+    activePage?: string
 }) => {
     if (!item.url) {
         return <SectionHeader item={item} depth={depth} />
     }
+
+    // Page links use hash navigation
+    if (item.type === 'page') {
+        const pageKey = item.url?.split('#')[1]
+        const isActive = pageKey === activePage
+        return <PageLink item={item} depth={depth} isActive={isActive} />
+    }
+
     return <ExternalLink item={item} depth={depth} showIcon={showIcon} />
 }
 
@@ -111,11 +154,13 @@ const CollapsibleNavItem = ({
     depth = 0,
     showIcon = false,
     defaultOpen = false,
+    activePage,
 }: {
     item: NavItem
     depth?: number
     showIcon?: boolean
     defaultOpen?: boolean
+    activePage?: string
 }) => {
     const [open, setOpen] = useState(defaultOpen)
     const hasChildren = item.children && item.children.length > 0
@@ -124,7 +169,10 @@ const CollapsibleNavItem = ({
     // Check if this item or any descendant is active
     const isActiveOrHasActiveChild = useMemo(() => {
         const checkActive = (navItem: NavItem): boolean => {
-            if (navItem.url) {
+            if (navItem.type === 'page') {
+                const pageKey = navItem.url?.split('#')[1]
+                if (pageKey === activePage) return true
+            } else if (navItem.url) {
                 const itemPath = navItem.url.split('#')[0]?.split('?')[0] || ''
                 if (pathname === itemPath || pathname === itemPath + '/' || pathname.startsWith(itemPath + '/')) {
                     return true
@@ -136,7 +184,7 @@ const CollapsibleNavItem = ({
             return false
         }
         return checkActive(item)
-    }, [item, pathname, hash])
+    }, [item, pathname, hash, activePage])
 
     // Auto-expand if a child is active
     useEffect(() => {
@@ -146,7 +194,7 @@ const CollapsibleNavItem = ({
     }, [isActiveOrHasActiveChild])
 
     if (!hasChildren) {
-        return <NavItemRenderer item={item} depth={depth} showIcon={showIcon} />
+        return <NavItemRenderer item={item} depth={depth} showIcon={showIcon} activePage={activePage} />
     }
 
     return (
@@ -174,9 +222,21 @@ const CollapsibleNavItem = ({
                         const hasNestedChildren = child.children && child.children.length > 0
 
                         return hasNestedChildren ? (
-                            <CollapsibleNavItem key={key} item={child} depth={depth + 1} showIcon={true} />
+                            <CollapsibleNavItem
+                                key={key}
+                                item={child}
+                                depth={depth + 1}
+                                showIcon={true}
+                                activePage={activePage}
+                            />
                         ) : (
-                            <NavItemRenderer key={key} item={child} depth={depth + 1} showIcon={true} />
+                            <NavItemRenderer
+                                key={key}
+                                item={child}
+                                depth={depth + 1}
+                                showIcon={true}
+                                activePage={activePage}
+                            />
                         )
                     })}
                 </div>
@@ -203,26 +263,57 @@ const getProducts = (): Array<{
     }))
 }
 
-export default function ProductSidebar({ product }: ProductSidebarProps) {
+export default function ProductSidebar({ product, availablePages = [], activePage }: ProductSidebarProps) {
     const allProducts = useMemo(() => getProducts(), [])
 
     // Current product's docs URL for matching
     const currentProductDocsUrl = product.docsUrl
+
+    // Build page navigation items for the current product
+    const pageNavItems: NavItem[] = useMemo(() => {
+        return (Object.entries(PAGE_DEFINITIONS) as [PageKey, (typeof PAGE_DEFINITIONS)[PageKey]][])
+            .filter(([key]) => availablePages.includes(key))
+            .map(([key, def]) => ({
+                name: def.name,
+                url: `${product.url}#${key}`,
+                type: 'page' as const,
+            }))
+    }, [availablePages, product.url])
 
     // Build the navigation structure with all products at top level
     const navigation = useMemo(() => {
         return allProducts.map((docProduct) => {
             const isCurrentProduct = docProduct.url === currentProductDocsUrl
 
-            // For the current product, merge in the additional navigation children
-            // (like Roadmap, Forums, etc.) from product.children that aren't in-page scroll links
-            const productChildren: NavItem[] = isCurrentProduct
-                ? product.children.filter((child) => child.type !== 'scroll')
-                : docProduct.children?.map((child: any) => ({
-                      name: child.name,
-                      url: child.url,
-                      children: child.children,
-                  })) || []
+            // For the current product, build a combined navigation:
+            // 1. Page links (Overview, Features, Demos, etc.)
+            // 2. External links (Docs, Roadmap, Forums, etc.) from product.children
+            let productChildren: NavItem[] = []
+
+            if (isCurrentProduct) {
+                // Add page navigation items first
+                productChildren = [...pageNavItems]
+
+                // Then add external links (filter out scroll and page types since we handle those above)
+                // Strip icons from these items - they should only show text
+                const externalLinks = product.children
+                    .filter((child) => child.type !== 'scroll' && child.type !== 'page')
+                    .map((child) => ({
+                        ...child,
+                        icon: undefined, // Remove icons from external links
+                    }))
+                if (externalLinks.length > 0) {
+                    productChildren = [...productChildren, ...externalLinks]
+                }
+            } else {
+                // For other products, use their docs children
+                productChildren =
+                    docProduct.children?.map((child: any) => ({
+                        name: child.name,
+                        url: child.url,
+                        children: child.children,
+                    })) || []
+            }
 
             return {
                 name: docProduct.name,
@@ -232,7 +323,7 @@ export default function ProductSidebar({ product }: ProductSidebarProps) {
                 isCurrentProduct,
             }
         })
-    }, [allProducts, currentProductDocsUrl, product.children])
+    }, [allProducts, currentProductDocsUrl, product.children, pageNavItems])
 
     return (
         <div className="not-prose space-y-px">
@@ -249,6 +340,7 @@ export default function ProductSidebar({ product }: ProductSidebarProps) {
                             depth={0}
                             showIcon={true}
                             defaultOpen={productNav.isCurrentProduct}
+                            activePage={activePage}
                         />
                     )
                 }
