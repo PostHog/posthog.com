@@ -237,26 +237,11 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
 
 Choosing the right error tracking tool depends on what problem you're solving. Here's a quick guide:
 
-**Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, and more?** Go with **PostHog**.
+- Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, and more? Go with **PostHog**.
 
-**Need deep stack traces, distributed tracing, and mature error triage workflows?** **Sentry** is the proven choice.
+- Need deep stack traces, distributed tracing, and mature error triage workflows? **Sentry** is probably the right choice.
 
 ## Recommendations by team type
-
-**For early-stage startups**
-- **PostHog** – A single platform that scales from landing pages to product analytics without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly.
-
-| &nbsp;                            | **Free usage per month** |
-| --------------------------------- | ------------------------ |
-| **Error tracking**                | 100k errors              |
-| **Product analytics**             | 1 million events         |
-| **Session replay**                | 5,000 recordings         |
-| **Surveys**                       | 1500 responses           |
-| **LLM analytics**                 | 100k events              |
-| **Feature flags and A/B testing** | 1 million API requests   |
-| **Data warehouse**                | 1 million synced rows    |
-
-Startups can also qualify for free credits. For all the details about how much PostHog might cost, see [our pricing page](/pricing).
 
 **For product and growth teams**
 - **PostHog** – Connect errors to user behavior, run experiments, and measure business impact in one workflow. Non-technical teammates can use surveys, dashboards, and cohorts without engineering help.
@@ -268,7 +253,22 @@ Startups can also qualify for free credits. For all the details about how much P
 - **Sentry** – More mature crash symbolication, native SDK support, and longer track record with complex mobile debugging.
 
 **For privacy-conscious and regulated organizations**
-- Both offer self-hosting and EU data residency. **PostHog** is fully open-source with raw data access. **Sentry** also has an open-source edition and enterprise compliance options.
+- Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/data-stack). **Sentry** provides BAA agreements and enterprise compliance packages.
+
+**For early-stage startups**
+- **PostHog** – A single platform that scales from landing pages to product analytics without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly. [Startups can also qualify for free credits](/startups). For all the details about how much PostHog might cost, see [our pricing page](/pricing).
+
+| &nbsp;                            | **Free usage per month** |
+| --------------------------------- | ------------------------ |
+| **Error tracking**                | 100k errors              |
+| **Product analytics**             | 1 million events         |
+| **Session replay**                | 5,000 recordings         |
+| **Surveys**                       | 1500 responses           |
+| **LLM analytics**                 | 100k events              |
+| **Feature flags and A/B testing** | 1 million API requests   |
+| **Data warehouse**                | 1 million synced rows    |
+
+<ArrayCTA />
 
 ## Frequently asked questions
 
@@ -309,23 +309,23 @@ Each of these includes unlimited projects, 5M traces, 50 replays, 1 cron monitor
 <details>
   <summary>Does Sentry or PostHog offer free trials?</summary>
 
-Do you know what is better than a free trial? Being free forever. This is what we believe at PostHog and means you can get all of the features for free, no trial needed.
+Do you know what is better than a free trial? Being free forever. This is what we believe at **PostHog** and means you can get all of the features for free, no trial needed.
 
-Sentry has a 14-day free trial for paid features.
+**Sentry** has a 14-day free trial for paid features.
 
 </details>
 
 <details>
   <summary>How long does it take to implement PostHog?</summary>
 
-You can get started with PostHog in less than 90 seconds using our [AI install wizard](/docs/getting-started/install?tab=wizard). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
+You can get started with **PostHog** in less than 90 seconds using our [AI install wizard](/docs/getting-started/install?tab=wizard). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
 
 </details>
 
 <details>
   <summary>Can I use PostHog with a CDP?</summary>
 
-Yes. PostHog includes a [built-in CDP](/cdp) that lets you import, transform, and export data without needing a separate tool. You can also integrate PostHog with third-party CDPs like Segment and Rudderstack. See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for setup instructions, or browse our comparison of the [best customer data platforms for developers](/blog/best-customer-data-platforms-for-developers) if you're evaluating options.
+Yes. **PostHog** includes a [built-in CDP](/cdp) that lets you import, transform, and export data without needing a separate tool. You can also integrate PostHog with third-party CDPs like Segment and Rudderstack. See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for setup instructions, or browse our comparison of the [best customer data platforms for developers](/blog/best-customer-data-platforms-for-developers) if you're evaluating options.
 
 </details>
 
@@ -364,7 +364,7 @@ Yes. **PostHog**, **Sentry**, and **GlitchTip** all offer open-source editions. 
 
 **Logging** records all application events (info, warnings, errors) in chronological order for debugging and auditing. **Error tracking** specifically captures exceptions and crashes, groups them by root cause, and provides context like stack traces, affected users, and frequency. Error tracking tools are purpose-built for triaging and resolving bugs, while logs require more manual analysis.
 
-PostHog offers both – error tracking is generally available, and [logs](/docs/logs) is currently in beta.
+**PostHog** offers both – error tracking is generally available, and [logs](/docs/logs) is currently in beta.
 
 </details>
 
@@ -373,7 +373,7 @@ PostHog offers both – error tracking is generally available, and [logs](/docs/
 
 **Error tracking** focuses on catching and diagnosing bugs, crashes, and exceptions. **APM (Application Performance Monitoring)** measures response times, throughput, and resource usage to identify slowdowns and bottlenecks. 
 
-Many tools like Sentry offer both, while PostHog combines error tracking with product analytics instead of traditional APM.
+Many tools like **Sentry** offer both, while **PostHog** combines error tracking with product analytics instead of traditional APM.
 
 </details>
 
@@ -405,7 +405,7 @@ Both **PostHog** and **Sentry** let you customize alert thresholds and notificat
 <details>
   <summary>What languages and frameworks do PostHog and Sentry support?</summary>
 
-Both platforms offer broad SDK support. Sentry supports 100+ platforms including JavaScript, Python, Ruby, PHP, Go, Java, .NET, React, Vue, Angular, iOS (Swift/Objective-C), Android (Java/Kotlin), React Native, Flutter, Unity, and Unreal Engine. [PostHog](/docs/libraries) supports JavaScript, Python, Ruby, PHP, Go, Node.js, React, Next.js, Vue, iOS, Android, React Native, and Flutter. For error tracking specifically, Sentry has deeper language coverage due to its longer history as a dedicated error monitoring tool.
+Both platforms offer broad SDK support. Sentry supports 100+ platforms including JavaScript, Python, Ruby, PHP, Go, Java, .NET, React, Vue, Angular, iOS (Swift/Objective-C), Android (Java/Kotlin), React Native, Flutter, Unity, and Unreal Engine. [PostHog](/docs/libraries) supports JavaScript, Python, Ruby, PHP, Go, Node.js, React, Next.js, Vue, iOS, Android, React Native, and Flutter. For error tracking specifically, **Sentry** has deeper language coverage due to its longer history as a dedicated error monitoring tool.
 
 </details>
 

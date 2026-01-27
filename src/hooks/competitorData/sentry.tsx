@@ -244,7 +244,7 @@ export const sentry = {
             mobile_sdks: true,
             native_data_sources: false,
             proxies: false,
-            sdks: true,
+            sdks: '100+',
             server_side_sdks: true,
             sql: false,
         },
