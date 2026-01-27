@@ -6,7 +6,7 @@ showTitle: true
 
 There are many occasions when you will need to spend company money. PostHog is a lean organization - the less we spend, the more time we have to make sure the company takes off. However, it is more important you are productive, healthy, and happy.
 
-## PHILOSOPHY & GUIDING PRINCIPLES 📙💭
+## Philosophy & guiding principles 📙💭
 PostHog operates on a context-based expense policy [inspired by the book 'No Rules Rules'](https://posthog.com/handbook/story#things-that-influenced-us). We're empowering team members to make good decisions while maintaining transparency and accountability.
 
 Ask yourself:
@@ -21,19 +21,18 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 - Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
-## HOW IT WORKS 🏭
+## How it works 🏭
 - All company expenses (offsites, software/tool subscriptions, merch, etc.) will have common company-wide budgets.
-- You'll be assigned a single 'User Limit' of $5,000 per month from which you can spend money on individual subscriptions, coworking/collaboration, training, etc. If you need an increase in the limit, request it on Brex.
+- You'll be assigned a single 'User Limit' of $5,000 per month from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptop and studio monitor - ping #team-people-and-ops for this), training, etc. If you need an increase in the limit, request it on Brex.
 
-
-### TRANSPARENCY & ACCOUNTABILITY 🧑‍🏫
+### Transparency & accountability 🧑‍🏫
 - All **expenses are visible company-wide**: we believe transparency drives better decision-making.
 - **Accountability**: If we have questions about an expense or need documentation, we'll reach out for clarification.
 - **Team lead oversight**: Monthly reports showing all direct report expenses.
 
 
-## LOGISTICS ⚙️
-### UK EMPLOYEES
+## Logistics ⚙️
+### UK employees
 Use your Revolut if
  - the expense is over £75, _and_
  - has UK VAT on it.
@@ -42,7 +41,7 @@ If not, use your Brex.
 
 Why? The company can claim back VAT on these larger purchases - the more money we claim back, the more money we have to #DoMoreWeird
 
-### RECEIPTS 🧾
+### Receipts 🧾
 All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation).
 - Brex
   - upload the itemized receipt using the [Brex app, text, email or Slack](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-a-specific-expense)
@@ -61,7 +60,7 @@ Expenses with no receipts above $75 or £75 may be deducted from your pay if we 
 >  - Context: [relevant details - who attended, what project, etc.]
 
 
-## EXPENSE REVIEW 🔎
+## Expense review 🔎
 Finance reviews:
 - All expenses over $1000 (Brex),
 - Random sampling of expenses under $1000 (Brex),
@@ -73,7 +72,7 @@ _We may adjust these thresholds depending on bandwidth in the team._
 You'll get monthly expense reports for your direct reports. You have context Finance doesn't, which will help justify spending decisions to the auditors. **How much you dig into these is up to you - the goal is catching patterns, not micromanaging.**
 
 
-### WHY DOCUMENTATION MATTERS 🏦
+### Why documentation matters 🏦
 - Missing receipts and memos create extra work during audit season - auditors will need to dig into those expenses, which means hours of back-and-forth with you about charges from several months ago! A quick receipt upload and memo update now saves everyone time later.
 - Additionally, we're legally prohibited from paying personal expenses on behalf of team members.
 - Beyond the audit hassle, poor expense documentation can:
@@ -84,7 +83,7 @@ You'll get monthly expense reports for your direct reports. You have context Fin
 > The flexible, trust-based policy we have only works when everyone maintains proper documentation. If team members consistently fail to upload receipts and add memos, we'll either need to implement rigid pre-approvals for all spending, or treat repeated violations as performance management issues.
 
 
-## BUDGET STRUCTURE ON BREX 💳
+## Budget structure on Brex 💳
 We're not going to police your spending with hard limits but we will continue to use budgets and limits on Brex because:
 - **Audit**: maintaining budgets and limits help with proper categorization and tracking of expenses by department and function. Without this, financial reporting for audits becomes a manual nightmare.
 - **Financial Reporting**: accurate categorization of expenses is essential for Board reporting, tax compliance, and to track actual spend against budgets.
@@ -102,7 +101,7 @@ Think of these budgets as organizational tools, not spending restrictions:
 Joining an offsite? Only use the offsite budget, not your User Limit - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
-## FREQUENTLY ASKED QUESTIONS 🤨
+## Frequently asked questions 🤨
 - Can I use my personal card for a work-related expense?
   - No, you **must use** your Brex or Revolut for all work-related expenses.
   - The company earns points which we use towards billboard campaigns. The Finance team also doesn't have the bandwidth to process lots of reimbursement requests.
@@ -139,14 +138,14 @@ Joining an offsite? Only use the offsite budget, not your User Limit - it helps 
     - Request a reimbursement for the cost of the economy fare in Brex, along with a screenshot of the cost of the economy fare at the time of booking.
 
 
-## ADDRESSING POLICY ISSUES 👮
-#### INAPPROPRIATE SPEND
+## Addressing policy issues 👮
+#### Inappropriate spend
 - Audit compliance: Expenses that could be construed as personal will be flagged as non-business expenses by auditors,
 - If you pay for a personal expense using the company card, it would constitute a taxable benefit to you. The People & Ops team does not have the bandwidth to handle the admin burden.
 
 So, you may not use your Brex or Revolut for personal expenses.
 
-#### EXAMPLES OF INAPPROPRIATE SPEND
+#### Examples of inappropriate spend
 - Personal expenses during business travel (for example: gym sessions/fitness classes, groceries)
 - Entertainment subscriptions for personal use (for example: Spotify, Netflix, Amazon Prime, etc.)
 - Expenses that benefit you personally rather than the business
@@ -154,19 +153,19 @@ So, you may not use your Brex or Revolut for personal expenses.
 
 _This list will be updated based on common questions/scenarios._
 
-#### CONSEQUENCES
+#### Consequences
 - Misunderstanding: you genuinely thought an expense was in PostHog’s best interest, but we disagree - we’ll provide clarification and context,
 - Intentional violation: knowingly and willingly spending money in ways not in PostHog’s best interest or to intentionally circumvent the guidelines will result in the individual being terminated for cause.
   - Continual misuse (multiple transactions flagged frequently) will be treated like policy violation and result in termination for cause.
 
-#### TEAM LEAD RESPONSIBILITIES
+#### Team lead responsibilities
 - We recommend Team Leads review direct report expenses monthly/quarterly to assess if they’re in the best interest of the business. This helps in maintaining oversight over expenses, and approaches the review with appropriate context (Finance won’t always have the best context), which will be important during audits.
 - Address concerning patterns promptly.
 - Lead by example with transparent spending and context-setting.
 
 
-## EXPENSE GUIDELINES 🛠
-### EQUIPMENT
+## Expense guidelines 🛠
+### Equipment
 #### Laptop & Monitor
 Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
@@ -193,7 +192,7 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 - Keyboard/mouse/laptop stand: refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 - If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
 
-### SOFTWARE
+### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
 
 The cost of introducing new collaborative software is that it creates another place where todo items / comments / communication can exist. This creates a disproportionate amount of complexity.
@@ -215,7 +214,7 @@ Individual software is down to your personal preference, and we encourage you to
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
 
-### SPONSORSHIPS
+### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/growth/marketing/open-source-sponsorship).
 
 To enable individuals to support projects on an ad-hoc basis, we use [Open Collective](https://opencollective.com/).
@@ -224,7 +223,7 @@ To get setup with Open Collective get in touch with [Charles](https://posthog.co
 
 _If you find a project that only supports [GitHub Sponsors](https://github.com/sponsors), please ask Charles to set up the sponsorship._ 
 
-### TRAVEL
+### Travel
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
   - It may be worth occasionally upgrading to Premium Economy if you're travelling a lot for work and the cost is not unreasonably high, particularly if you're working the next day

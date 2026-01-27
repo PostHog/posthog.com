@@ -326,7 +326,7 @@ export const statsig = {
             microsoft_teams: true,
             redshift: true,
             rudderstack: false,
-            s3: false,
+            s3: true,
             salesforce: false,
             segment: true,
             sentry: false,

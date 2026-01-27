@@ -25,7 +25,6 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     category: 'automation',
-    status: 'beta',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
