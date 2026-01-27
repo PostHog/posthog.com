@@ -93,7 +93,8 @@ export default function PlatformPackages() {
                                 {' '}
                                 subscribe to packages after signing up for PostHog
                             </Link>
-                            .
+                            . Need more help getting started?{' '}
+                            <Link to="/services">We also offer service packages.</Link>
                         </div>
                     </div>
 
