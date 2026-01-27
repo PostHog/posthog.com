@@ -111,7 +111,7 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                                     the chat for more powerful analysis.
                                 </p>
                             </Tabs.Label>
-                            <div className="flex @2xl:flex-col">
+                            <div className="flex @2xl:flex-col @2xl:gap-0.5">
                                 {modes.map((mode) => (
                                     <Tabs.Trigger key={mode.id} value={mode.id} icon={mode.icon} color={mode.color}>
                                         {mode.name}
