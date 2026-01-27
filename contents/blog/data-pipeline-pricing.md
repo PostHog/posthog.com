@@ -52,6 +52,8 @@ That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions]
 
 To learn more about usage-based pricing beyond free tiers and to calculate potential costs, check out our [pricing page and calculator](/pricing).
 
+*Still exploring CDP alternatives? We compare the tradeoffs in our [guide to the best CDPs for developers.](/blog/best-customer-data-platforms-for-developers)*
+
 ## What's next?
 
 If you're already using pipelines, you don't need to do anything — your billing will automatically switch to the new system starting today and will apply to usage going forward. Your usage up until yesterday is billed under the old pricing scheme and you can see both charges in the billing page for this month. 

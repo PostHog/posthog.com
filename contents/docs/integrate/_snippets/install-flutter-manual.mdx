@@ -76,14 +76,28 @@ import 'package:flutter/material.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 Future<void> main() async {
-  // init WidgetsFlutterBinding if not yet
-  WidgetsFlutterBinding.ensureInitialized();
   final config = PostHogConfig('<ph_project_api_key>');
   config.debug = true;
-  config.captureApplicationLifecycleEvents = true;
   // or EU Host: 'https://eu.i.posthog.com'
   config.host = 'https://us.i.posthog.com';
+
+  // For web targets, the SDK must be initialized inside `runZonedGuarded` to enable automatic exception capture.
+  if (kIsWeb) {
+    runZonedGuarded(
+      () async => await _initAndRun(config),
+      (error, stackTrace) async => await Posthog()
+          .captureRunZonedGuardedError(error: error, stackTrace: stackTrace),
+    );
+  } else {
+    await _initAndRun(config);
+  }
+}
+
+Future<void> _initAndRun(PostHogConfig config) async {
+  // init WidgetsFlutterBinding if not yet
+  // On the web, this must be executed within runZonedGuarded
+  WidgetsFlutterBinding.ensureInitialized();
   await Posthog().setup(config);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 ```
