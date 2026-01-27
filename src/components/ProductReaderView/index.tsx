@@ -4,9 +4,11 @@ import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import useProduct from 'hooks/useProduct'
 import { useProductCategoryNavigation } from 'hooks/useProductCategoryNavigation'
+import { useProductNavigation } from 'hooks/useProductNavigation'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 import ProgressBar from 'components/ProgressBar'
+import ProductSidebar from './ProductSidebar'
 
 // Section components
 import OverviewSection from './sections/OverviewSection'
@@ -18,6 +20,16 @@ import PairsWithSection from './sections/PairsWithSection'
 import PostHogOnPostHogSection from './sections/PostHogOnPostHogSection'
 import ComparisonSection from './sections/ComparisonSection'
 
+interface NavigationConfig {
+    docs?: string | boolean
+    roadmap?: string | boolean
+    tutorials?: string | boolean
+    changelog?: string | boolean
+    forums?: string | boolean
+    people?: string | boolean
+    getStarted?: string | boolean
+}
+
 interface ProductReaderViewProps {
     productHandle: string
     /** Override which sections to show and in what order */
@@ -28,6 +40,10 @@ interface ProductReaderViewProps {
         description?: string
         image?: string
     }
+    /** Use product-centric navigation (product name as parent with sections/links nested) */
+    useProductNav?: boolean
+    /** Configuration for external navigation links */
+    navigationConfig?: NavigationConfig
 }
 
 interface TableOfContentsItem {
@@ -36,7 +52,7 @@ interface TableOfContentsItem {
     depth: number
 }
 
-const LeftSidebarContent = () => {
+const CategorySidebarContent = () => {
     const categoryNav = useProductCategoryNavigation()
     return <TreeMenu items={categoryNav.children} />
 }
@@ -49,10 +65,19 @@ export default function ProductReaderView({
     productHandle,
     sections: sectionOverrides,
     seoOverrides,
+    useProductNav = false,
+    navigationConfig = {},
 }: ProductReaderViewProps): JSX.Element {
     const productData = useProduct({ handle: productHandle }) as any
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
+
+    // Get product-specific navigation
+    const productNavigation = useProductNavigation({
+        productHandle,
+        basePath: productData?.slug ? `/${productData.slug}` : undefined,
+        config: navigationConfig,
+    })
 
     // Set window title
     useEffect(() => {
@@ -155,6 +180,9 @@ export default function ProductReaderView({
         }
     }
 
+    // Determine which sidebar to use
+    const leftSidebar = useProductNav ? <ProductSidebar product={productNavigation} /> : <CategorySidebarContent />
+
     return (
         <>
             <SEO
@@ -164,10 +192,10 @@ export default function ProductReaderView({
                 updateWindowTitle={false}
             />
             <ReaderView
-                leftSidebar={<LeftSidebarContent />}
+                leftSidebar={leftSidebar}
                 title={productData?.name}
                 hideTitle={false}
-                tableOfContents={tableOfContents}
+                tableOfContents={useProductNav ? undefined : tableOfContents}
                 showQuestions={false}
             >
                 {activeSections.map((section) => renderSection(section))}
