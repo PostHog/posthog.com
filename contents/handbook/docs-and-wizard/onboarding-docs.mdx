@@ -50,7 +50,7 @@ This is a relatively new feature, so we're still migrating old onboarding docs t
 Onboarding content is written once as React components in the [`posthog/posthog`](https://github.com/PostHog/posthog) repo, then rendered in two places:
 
 1. **PostHog monorepo:** For in-app onboarding, the PostHog app imports these docs components directly and wraps them with [`OnboardingDocsContentWrapper`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx), which provides UI components like `Steps`, `CodeBlock`, etc.
-2. **Posthog.com repo:** The website pulls the docs components from the monorepo via `gatsby-source-git`, a Gatsby plugin, and then renders them through MDX stub files that use [`OnboardingContentWrapper`](https://github.com/PostHog/posthog.com/blob/master/src/components/Docs/OnboardingContentWrapper.tsx) to provide the same UI components.
+2. **Posthog.com repo:** The website pulls the docs components from the monorepo via `gatsby-source-git`, a Gatsby plugin, and then renders them through MDX stub files that use a similar but different [`OnboardingContentWrapper`](https://github.com/PostHog/posthog.com/blob/master/src/components/Docs/OnboardingContentWrapper.tsx) to provide compatible UI components.
 
 Both wrappers provide the same component names (`Steps`, `CodeBlock`, `CalloutBox`, etc.) so the shared content renders correctly in either place. When you merge changes to `master` in `posthog/posthog`, the website automatically pulls the updated content on its next build.
 
