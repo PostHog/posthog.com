@@ -63,7 +63,7 @@ Whatever the case, if the push is coming from a desire to look professional rath
 - Maybe your principal engineer is looking greedily at the latest funding round. 
 - Maybe someone just thinks it’s so fashionable right now. 
 
-Whatever the case, if there’s someone who really wants to do it despite everyone else’s better judgement, you should see it as a red flag and advise waiting until there’s a genuine use-case.
+Whatever the case, if there’s someone who really wants to do it despite everyone else’s better judgement, you should see it as a red flag. Implementing and maintaining a data warehouse is a big task that requires everyone to be brought-in to a shared vision at both the high level ("Why are we spending so much on this?") and in the details ("What should our naming convention be?"). Without at least _some_ consensus, the project will get off to a very shaky start. 
 
 ## Why you should use a data warehouse
 
