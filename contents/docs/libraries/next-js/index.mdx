@@ -184,6 +184,8 @@ export function PHProvider({
 
 The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
 
+> **Tip:** If you experience hydration errors related to PostHog injecting scripts (for session recording, surveys, etc.), you can set `external_scripts_inject_target: 'head'` in your PostHog config. This tells PostHog to inject scripts into the document head instead of the body, avoiding DOM mutations that can interfere with React's hydration process. Alternatively, use `defaults: '2026-01-30'` or later which includes this setting by default. See the [JavaScript configuration docs](/docs/libraries/js/config#configuration-options) for more details.
+
 ### Why did the pageview component need a `useEffect`?
 
 Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2025-11-30'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:

@@ -210,7 +210,7 @@ export const amplitude = {
                 count_value_metrics: true,
                 custom_goals: true,
                 dynamic_cohorts: false,
-                experiment_analysis: false,
+                experiment_analysis: true,
                 funnel_metrics: true,
                 namespacing: false,
                 native_goal_tracking: false,

@@ -40,7 +40,8 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 import { VercelAIInstallation } from 'onboarding/llm-analytics/vercel-ai.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 
 <OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
-    <VercelAIInstallation />
+    <VercelAIInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>

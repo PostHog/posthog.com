@@ -1,26 +1,21 @@
 ---
-title: Cutting error tracking costs
+title: Error Tracking pricing
 sidebar: Docs
 showTitle: true
 ---
 
-Error tracking is billed by the number of `$exception` events you capture. The price per event changes based on your usage. You can estimate your costs using our pricing calculator below, and click **see how we calculate this** to understand the exact breakdown:
+PostHog Error Tracking comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies *use PostHog for free*.
+
+No credit card is required to get started. You can also set billing limits to avoid any surprise
+charges.
+
+Error Tracking is billed by the number of `$exception` events you capture. The price per event changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
 
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 <Pricing productType="error_tracking" />
 
-<!-- The full pricing breakdown is as follows: -->
-
-<!-- | Allocation | Price | Your selection | Subtotal | -->
-<!-- |------------|-------|----------------|----------| -->
-<!-- | First 100k exceptions | $0.000000/exception | 100,000 | $0 | -->
-<!-- | 100-325k | $0.000370/exception | 0 | $0 | -->
-<!-- | 325-10 million | $0.000140/exception | 0 | $0 | -->
-<!-- | 10 million+ | $0.000115/exception | 0 | $0 | -->
-
-
-We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your error tracking costs.
+We aim to be significantly cheaper than our competitors. Below are tips to reduce your error tracking costs.
 
 ## What contributes to your bill?
 
@@ -31,7 +26,7 @@ This also means:
 - The number of [issues](/docs/error-tracking/issues-and-exceptions) in PostHog does not affect your bill, only the individual exception events that make up the issues.
 - Merging, resolving, and suppressing issues in PostHog does not reduce your bill.
 
-## Preventing surprise bills
+## Prevent surprises with billing limits
 
 Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for error tracking. When a project exceeds this limit, PostHog will no longer capture exception events until your billing period resets.
 
