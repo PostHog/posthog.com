@@ -222,3 +222,14 @@ When you're ready to continue, click **Resume experiment** to start collecting d
 Stopping the experiment will stop counting events in the results. Your feature flag, however, will continue working normally and events will still be tracked. You can reset the experiment later if needed.
 
 When stopping an experiment, set a conclusion (won/lost/inconclusive/stopped early/invalid) based on your analysis of the results. We recommend adding a note to document your reasoning.
+
+## Comparing pausing, stopping, and shipping
+
+Here's how the actions differ:
+
+| Status | Feature flag | Users see | Exposure tracking | Results | Can resume |
+|--------|----------------------|----------|-----------|---------|---------|
+| **Running** | Enabled | Multiple variants | Continues | Updating | N/A |
+| **Stopping** | Enabled (unless manually disabled) | Multiple variants | Continues | Fixed | No (only reset) |
+| **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
+| **Shipping** | Modified to roll out winning variant to all users | Winning variant | Continues (winning variant only) | Fixed | No |
