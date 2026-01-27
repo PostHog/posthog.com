@@ -1,5 +1,3 @@
-import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
-
 export const hotjar = {
     name: 'Hotjar',
     key: 'hotjar',
@@ -85,6 +83,7 @@ export const hotjar = {
                 crash_reports: false,
                 export_to_json: true,
                 export_to_video: false,
+                // https://help.hotjar.com/hc/en-us/articles/36819988557329-How-Do-I-Filter-Session-Data
                 filter_by_user_or_event: false,
                 highlights: true,
                 identity_detection: false,
@@ -93,7 +92,8 @@ export const hotjar = {
                 movement_maps: false,
                 notes_on_replays: false,
                 playlists: false,
-                privacy_masking: false,
+                // https://help.hotjar.com/hc/en-us/articles/36819956605329-How-to-Suppress-Text-Images-Videos-and-User-Input-from-Collected-Data
+                privacy_masking: true,
                 retention_policy: false,
                 screenshot_mode: false,
                 scrollmaps: false,
@@ -127,7 +127,8 @@ export const hotjar = {
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    // https://www.hotjar.com/product/recordings/ "Sense"
+                    ai_summaries: true,
                 },
             },
         },

@@ -95,7 +95,8 @@ export const fullstory = {
                 canvas_recording: true,
                 chat_with_recordings: false,
                 conditional_recording: true,
-                crash_reports: false,
+                // https://help.fullstory.com/hc/en-us/articles/24730772415511-Native-Mobile-Crash-Error-Reporting
+                crash_reports: 'Android & Flutter',
                 event_timeline: true,
                 export_to_json: true,
                 export_to_video: false,
