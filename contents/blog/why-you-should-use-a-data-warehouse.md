@@ -31,7 +31,7 @@ If you don’t have much data then you probably don’t need a data warehouse, s
 
 It’s a rough guideline, but if you’re not either in the mid-millions of rows or anticipating being there soon then moving to a data warehouse is premature. Data warehouses are costly and only really pay off at scale anyway.
 
-Granted, if you’re anticipating more growth in the future then it could be worth looking at simple options (PostHog has generous free allowances, for example), but implementing anything as complex as Snowflake would likely be overkill. 
+Granted, if you’re anticipating explosive growth in the future then it could be worth looking at simple options (PostHog has generous free allowances, for example), but implementing anything as complex as Snowflake would likely be overkill. 
 
 ### 2. “You need transactional workloads”
 
