@@ -26,8 +26,7 @@ const createBadgeElement = (
     if (badgeType === 'none') return null
 
     const badge = document.createElement('div')
-    badge.className =
-        'absolute -right-1 -bottom-1 size-5 rounded-full flex items-center justify-center text-xs shadow-sm overflow-hidden'
+    badge.className = 'absolute -right-1 -bottom-1 size-5 rounded-full flex items-center justify-center text-xs shadow-sm overflow-hidden'
 
     if (badgeType === 'pineapple') {
         if (profile.pineappleOnPizza === true) {
@@ -46,7 +45,7 @@ const createBadgeElement = (
     } else if (badgeType === 'team') {
         const teamName = profile.teams?.data?.[0]?.attributes?.name
         const miniCrestUrl = teamName ? teamMiniCrestMap[teamName] : null
-
+        
         if (miniCrestUrl) {
             badge.style.backgroundColor = '#ffffff'
             badge.title = `${teamName} Team`
@@ -407,10 +406,10 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     const pos = positions[idx] || { longitude, latitude }
                     const el = document.createElement('div')
                     el.className = 'relative'
-
+                    
                     const avatarContainer = document.createElement('div')
                     avatarContainer.className = 'size-12 rounded-full flex items-center justify-center overflow-hidden'
-
+                    
                     const img = document.createElement('img')
                     img.src = p.avatar?.url || avatarFallback
                     img.alt = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Team member'
@@ -426,7 +425,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     )
                     avatarContainer.appendChild(img)
                     el.appendChild(avatarContainer)
-
+                    
                     // Add badge based on current badge type
                     const badge = createBadgeElement(badgeTypeRef.current, p, teamMiniCrestMapRef.current)
                     if (badge) {
@@ -559,18 +558,14 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     <div className="flex gap-1">
                         <button
                             onClick={() => setBadgeType('none')}
-                            className={`px-2 py-1 text-xs rounded text-primary font-medium ${
-                                badgeType === 'none' ? 'bg-accent' : 'bg-primary hover:bg-accent'
-                            }`}
+                            className={`px-2 py-1 text-xs rounded text-primary font-medium ${badgeType === 'none' ? 'bg-accent' : 'bg-primary hover:bg-accent'}`}
                             title="No badge"
                         >
                             None
                         </button>
                         <button
                             onClick={() => setBadgeType('pineapple')}
-                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${
-                                badgeType === 'pineapple' ? 'bg-accent' : 'bg-primary hover:bg-accent'
-                            }`}
+                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${badgeType === 'pineapple' ? 'bg-accent' : 'bg-primary hover:bg-accent'}`}
                             title="Show pineapple preference"
                         >
                             <IconPineapple className="size-3" />
@@ -578,9 +573,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                         </button>
                         <button
                             onClick={() => setBadgeType('team')}
-                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${
-                                badgeType === 'team' ? 'bg-accent' : 'bg-primary hover:bg-accent'
-                            }`}
+                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${badgeType === 'team' ? 'bg-accent' : 'bg-primary hover:bg-accent'}`}
                             title="Show small team"
                         >
                             <IconDecisionTree className="size-3" />

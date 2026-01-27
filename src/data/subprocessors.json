@@ -125,7 +125,7 @@
         "categories": "Customer's end users",
         "details": ["https://trust.planetscale.com/", "https://trust.planetscale.com/subprocessors"]
     },
-    {
+        {
         "name": "Modal Labs, Inc.",
         "type": "cloud",
         "contact": "Modal Labs, Inc. 584 Broadway Rm 1001<br />New York, NY 10012<br />USA,<br />security@modal.com",

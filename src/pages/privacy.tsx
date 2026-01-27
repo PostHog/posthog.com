@@ -155,8 +155,8 @@ function Privacy() {
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
                         🛠️ We gather usage data from our self-managed instances to analyze and improve our site, but you
-                        can opt out. We do not collect sensitive info like genetic data here, and definitely no under-18
-                        data!
+                        can opt out. We do not collect 
+                        sensitive info like genetic data here, and definitely no under-18 data!
                     </Tweet>
 
                     <Tweet
@@ -180,8 +180,8 @@ function Privacy() {
                         className="mx-auto"
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
-                        🌐 We share your information with trusted service providers to run our site and product. We’re
-                        part of the EU-US Data Privacy Framework, ensuring your data is safe.
+                        🌐 We share your information with trusted service providers to run our site and product.
+                        We’re part of the EU-US Data Privacy Framework, ensuring your data is safe.
                     </Tweet>
 
                     <Tweet
@@ -288,20 +288,19 @@ function Privacy() {
                     </div>
                     <div className="md:pb-12">
                         <p>
-                            This privacy policy ("<b>Privacy Policy</b>") applies to all visitors, users and customers
-                            of the PostHog.com hosted services and websites (collectively, the "<b>Website</b>" or "
-                            <b>Websites</b>") and self-managed installations, which are offered by PostHog Inc.
-                            (formerly known as Hiberly Inc.) and/or any of its subsidiaries and/or affiliates ("
-                            <b>PostHog</b>" or "<b>we</b>" or "<b>us</b>") and describes how we process your personal
+                            This privacy policy ("<b>Privacy Policy</b>") applies to all visitors, users and customers of the
+                            PostHog.com hosted services and websites (collectively, the "<b>Website</b>" or "<b>Websites</b>") and
+                            self-managed installations, which are offered by PostHog Inc. (formerly known as Hiberly Inc.) and/or
+                            any of its subsidiaries and/or affiliates ("<b>PostHog</b>" or "<b>we</b>" or "<b>us</b>") and describes how we process your personal
                             information in connection with those Websites or self managed installations, customer events
                             and demos, and how we collect information through the use of cookies and related
                             technologies. It also tells you how you can access and update your personal information and
                             describes the data protection rights that may be available under your country’s or state's
-                            laws, including (in the European Economic Area ("<b>EEA</b>"), and UK), a right to object to
-                            some processing that we carry out or, where we rely on consent, how to withdraw that
-                            consent. Please read this Privacy Policy carefully. By accessing or using any part of the
-                            Websites or self-managed installations, you acknowledge you have been informed of and
-                            consent to our practices with regard to your personal information and data.
+                            laws, including (in the European Economic Area ("<b>EEA</b>"), and UK), a right to object to some
+                            processing that we carry out or, where we rely on consent, how to withdraw that consent.
+                            Please read this Privacy Policy carefully. By accessing or using any part of the Websites or
+                            self-managed installations, you acknowledge you have been informed of and consent to our
+                            practices with regard to your personal information and data.
                         </p>
                         <p>
                             PostHog is an open source project and collaborative community, as well as a company. This
@@ -443,14 +442,13 @@ function Privacy() {
                         <p>
                             The amount and type of information that PostHog gathers depends on the nature of your
                             interaction with us, as well as the amount of information you choose to share. For example,
-                            we ask visitors who use our community group to provide a username and email address. We also
-                            collect the information you provide to us in connection with creating an account on the
-                            Websites. You may voluntarily provide personal information when you fill in forms on our
-                            Websites, such as when you request a demo, contact sales, subscribe to our newsletter, or
-                            participate in other marketing activities or events. The information you provide may
-                            include, but is not limited to, email addresses, names, organization or company names, and
-                            roles and titles at such organizations or companies. If you use a single sign-on partner
-                            like Google, we'll collect the information from them that you authorize.&nbsp;
+                            we ask visitors who use our community group to provide a username and email address. We 
+                            also collect the information you provide to us in connection with creating an account on
+                            the Websites. You may voluntarily provide personal information when you fill in forms on our 
+                            Websites, such as when you request a demo, contact sales, subscribe to our newsletter, or participate 
+                            in other marketing activities or events. The information you provide may include, but is not limited 
+                            to, email addresses, names, organization or company names, and roles and titles at such organizations 
+                            or companies. If you use a single sign-on partner like Google, we'll collect the information from them that you authorize.&nbsp;
                         </p>
                         <p>
                             Certain profile information (such as your username) may be shared publicly, as well as
@@ -462,14 +460,12 @@ function Privacy() {
                         <p>
                             In each case, PostHog collects such personal information only insofar as is necessary or
                             appropriate to fulfill the purpose of your interaction with or your request to PostHog. We
-                            may also collect certain personal information during live in-person or virtual events and
-                            demos. We will not disclose your personal information other than as described in this
-                            Privacy Policy.
+                            may also collect certain personal information during live in-person or virtual events and demos. We
+                            will not disclose your personal information other than as described in this Privacy Policy.
                         </p>
                         <p>
-                            We may also collect limited personal data from third-party sources and publicly available
-                            platforms to help identify potential customers, enhance our business contact database, and
-                            otherwise support our sales and marketing efforts.
+                            We may also collect limited personal data from third-party sources and publicly available platforms to help identify 
+                            potential customers, enhance our business contact database, and otherwise support our sales and marketing efforts.
                         </p>
                         <p>
                             We may aggregate all information (including your personal information) collected from our
@@ -594,19 +590,19 @@ function Privacy() {
                                 countries);
                             </li>
                             <li>Where you give us consent to place cookies or similar technologies;</li>
-                            <li>To deliver marketing or advertisements via third-party platforms such as LinkedIn;</li>
+                            <li>
+                                To deliver marketing or advertisements via third-party platforms such as LinkedIn;
+                            </li>
                             <li>
                                 On other occasions where we ask for your consent, for the purpose we explain at the
                                 time.
                             </li>
                         </ul>
                         <p>
-                            You may withdraw your consent to marketing emails at any time through the unsubscribe
-                            feature provided with the relevant marketing email or by contacting us using the details in
-                            the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy. You may withdraw
-                            your consent for us to use your personal information to market or advertise to you via
-                            third-party platforms at any time by sending an email to{' '}
-                            <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
+                            You may withdraw your consent to marketing emails at any time through the unsubscribe feature provided with the
+                            relevant marketing email or by contacting us using the details in the ‘Contacting PostHog
+                            About Your Privacy’ section of this Privacy Policy. You may withdraw your consent for us to 
+                            use your personal information to market or advertise to you via third-party platforms at any time by sending an email to <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
                         </p>
                     </div>
                     <div>
@@ -632,11 +628,10 @@ function Privacy() {
                             purposes that are described in this Privacy Policy or otherwise with your consent.
                         </p>
                         <p>
-                            PostHog only shares your personal information with those of its service providers,
-                            employees, contractors, and affiliated organizations that (i) need to know that personal
-                            information in order to process it on PostHog's behalf, help power our products and operate
-                            our business or to provide services available on the Websites, and (ii) that have agreed to
-                            follow data privacy and security requirements and to follow our instructions.
+                            PostHog only shares your personal information with those of its service providers, employees, contractors, and
+                            affiliated organizations that (i) need to know that personal information in order to process
+                            it on PostHog's behalf, help power our products and operate our business or to provide services available on the Websites, and (ii) that have
+                            agreed to follow data privacy and security requirements and to follow our instructions.
                         </p>
                     </div>
                     <div>
@@ -649,22 +644,20 @@ function Privacy() {
                     <div></div>
                     <div>
                         <p className="">
-                            <strong>Service Providers and partners</strong>. PostHog engages a number of trusted
-                            third-party service providers and partners to manage or support certain aspects of our
-                            business operations. These service providers may process your personal information on our
-                            behalf for purposes such as cloud hosting, analytics, marketing, advertising, customer
-                            support, communication, or internal operations.
+                            <strong>Service Providers and partners</strong>. PostHog engages a number of trusted third-party service
+                            providers and partners to manage or support certain aspects of our business operations. 
+                            These service providers may process your personal information on our behalf for purposes such as 
+                            cloud hosting, analytics, marketing, advertising, customer support, communication, or internal operations.
                         </p>
                         <p>
-                            We may also share some of your account information that you provide to us (including email
-                            addresses) with third-party advertising platforms to create or target marketing and
-                            advertising audiences on our behalf. We do not share any of your user content that you have
-                            uploaded or have enabled our products to access for these purposes. You have the option to
-                            opt out of your personal information being sent to third-party platforms for targeted
-                            marketing or advertising purposes by sending an email to{' '}
-                            <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
+                            We may also share some of your account information that you provide to us (including email addresses) with third-party advertising 
+                            platforms to create or target marketing and advertising audiences on our behalf. We do not share any of your 
+                            user content that you have uploaded or have enabled our products to access for these purposes. You have the 
+                            option to opt out of your personal information being sent to third-party platforms for targeted marketing or advertising purposes by sending an email to <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
                         </p>
-                        <p>Examples of the service providers and partners we currently use include:</p>
+                        <p>
+                            Examples of the service providers and partners we currently use include:
+                        </p>
                         <ul>
                             <li>Amazon Web Services (AWS) - cloud data hosting</li>
                             <li>Clay - marketing data engine</li>
@@ -676,28 +669,26 @@ function Privacy() {
                             <li>Zendesk - customer support tool</li>
                         </ul>
                         <p>
-                            <strong>This list is meant to be representative and not exhaustive</strong>. We may engage
-                            additional or different service providers and partners over time as we see fit to support
-                            our business needs. Our service providers and partners are required by contract to safeguard
-                            any personal information they receive from us and are prohibited from using the personal
-                            information for any purpose other than to perform the services as instructed by PostHog.
+                          <strong>This list is meant to be representative and not exhaustive</strong>. We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
+                            Our service providers and partners are required by contract to safeguard any personal
+                            information they receive from us and are prohibited from using the personal information for
+                            any purpose other than to perform the services as instructed by PostHog.
                         </p>
                     </div>
                     <div>
                         <p>
-                            Here is a list of examples of the types of companies we use to manage and support our
-                            business. This applies to your personal data, not the data of your users.
+                            Here is a list of examples of the types of companies we use to manage and support our business. This applies to your personal data, not the data of
+                            your users.
                         </p>
                     </div>
 
                     <div>
                         <p>
-                            <strong>Subsidiaries and Affiliates.</strong> PostHog is a global business, headquartered in
-                            the United States. Your personal information collected by us in accordance with this Privacy
-                            Policy is used and shared by PostHog with our subsidiaries and affiliates, including our
-                            subsidiaries based in the UK (Hiberly Ltd) and in Germany (PostHog GmbH) for the purposes of
-                            providing the Websites, delivering our Products and services, managing your accounts,
-                            hosting, IT, security, support, billing, marketing, advertising and communications.
+                            <strong>Subsidiaries and Affiliates.</strong> PostHog is a global business, headquartered in the United
+                            States. Your personal information collected by us in accordance with this Privacy Policy is
+                            used and shared by PostHog with our subsidiaries and affiliates, including our subsidiaries based in the UK (Hiberly Ltd) and in Germany (PostHog GmbH) for
+                            the purposes of providing the Websites, delivering our Products and services, managing your
+                            accounts, hosting, IT, security, support, billing, marketing, advertising and communications.
                         </p>
                     </div>
                     <div>
@@ -743,39 +734,37 @@ function Privacy() {
                             The Websites are hosted in the United States, or in Germany if you are a PostHog Cloud
                             customer who has selected EU hosting, and the personal information we collect about our
                             customers' users will be stored and processed on our servers in either the United States or
-                            Germany. Information about our customers is processed in the United States by us, and may be
-                            processed elsewhere by the service providers and partners that we use to manage and support
-                            our business. Our service providers, employees, contractors and affiliated organizations
-                            that process information for us as described above may be located in the United States or in
-                            other countries outside of your home country which may have different data protection
-                            standards to those which apply in your home country.
+                            Germany. Information about our customers is processed in the United States by us, and may
+                            be processed elsewhere by the service providers and partners that we use to manage and support our business. Our service providers, employees, contractors and
+                            affiliated organizations that process information for us as described above may be located
+                            in the United States or in other countries outside of your home country which may have
+                            different data protection standards to those which apply in your home country.
                         </p>
                         <p>
                             Where your personal information is transferred outside of the EEA, Switzerland and UK and
                             where this is to a country which is not subject to an adequacy decision by the EU Commission
                             or considered adequate as determined by applicable data protection laws, we will take steps
                             to ensure your personal information is adequately protected by safeguards such as Standard
-                            Contractual Clauses approved by the EU Commission or by the UK Government ("<b>SCCs</b>"). A
-                            copy of the relevant mechanism can be obtained for your review on request by using the
-                            contact details in the ‘Contacting PostHog About Your Privacy’ section of this Privacy
-                            Policy.
+                            Contractual Clauses approved by the EU Commission or by the UK Government ("<b>SCCs</b>"). A copy
+                            of the relevant mechanism can be obtained for your review on request by using the contact
+                            details in the ‘Contacting PostHog About Your Privacy’ section of this Privacy Policy.
                         </p>
                         <p>
-                            Posthog complies with the EU-U.S. Data Privacy Framework ("<b>EU-U.S. DPF</b>"), the UK
-                            Extension to the EU-U.S. Data Privacy Framework ("<b>UK Extension to the EU-U.S. DPF</b>"),
-                            and the Swiss-U.S. Data Privacy Framework ("<b>Swiss-U.S. DPF</b>") as set forth by the U.S.
-                            Department of Commerce. Posthog has certified to the U.S. Department of Commerce that it
-                            adheres to the EU-U.S. DPF Principles with regard to the processing of personal data
-                            received from the European Union in reliance on the EU-U.S. DPF and that it adheres to the
-                            UK Extension to the EU-U.S. DPF Principles with regard to the processing of personal data
-                            received from the United Kingdom (and Gibraltar) in reliance on the UK Extension to the
-                            EU-U.S. DPF. Posthog has certified to the U.S. Department of Commerce that it adheres to the
-                            Swiss-U.S. DPF Principles with regard to the processing of personal data received from
-                            Switzerland in reliance on the Swiss-U.S. DPF. If there is any conflict between the terms in
-                            this privacy policy and the EU-U.S. DPF Principles, the UK Extension to the EU-U.S. DPF
-                            Principles, and/or the Swiss-U.S. DPF Principles (together, the "<b>DPF Principles</b>"),
-                            the DPF Principles shall govern. To learn more about the Data Privacy Framework ("<b>DPF</b>
-                            ") program, and to view our certification, please visit&nbsp;
+                            Posthog complies with the EU-U.S. Data Privacy Framework ("<b>EU-U.S. DPF</b>"), the UK Extension
+                            to the EU-U.S. Data Privacy Framework ("<b>UK Extension to the EU-U.S. DPF</b>"), and the
+                            Swiss-U.S. Data Privacy Framework ("<b>Swiss-U.S. DPF</b>") as set forth by the U.S. Department of
+                            Commerce. Posthog has certified to the U.S. Department of Commerce that it adheres to the
+                            EU-U.S. DPF Principles with regard to the processing of personal data received from the
+                            European Union in reliance on the EU-U.S. DPF and that it adheres to the UK Extension to the
+                            EU-U.S. DPF Principles with regard to the processing of personal data received from the
+                            United Kingdom (and Gibraltar) in reliance on the UK Extension to the EU-U.S. DPF. Posthog
+                            has certified to the U.S. Department of Commerce that it adheres to the Swiss-U.S. DPF
+                            Principles with regard to the processing of personal data received from Switzerland in
+                            reliance on the Swiss-U.S. DPF. If there is any conflict between the terms in this privacy
+                            policy and the EU-U.S. DPF Principles, the UK Extension to the EU-U.S. DPF Principles,
+                            and/or the Swiss-U.S. DPF Principles (together, the "<b>DPF Principles</b>"), the DPF Principles
+                            shall govern. To learn more about the Data Privacy Framework ("<b>DPF</b>") program, and to view
+                            our certification, please visit&nbsp;
                             <Link href="https://www.dataprivacyframework.gov/" externalNoIcon>
                                 <u>https://www.dataprivacyframework.gov/</u>
                             </Link>
@@ -1035,8 +1024,8 @@ function Privacy() {
                     </div>
                     <div>
                         <p>
-                            PostHog is a US company, with UK and German subsidiaries, however our users are based all
-                            over the world and you still hold lots of rights that we respect.{' '}
+                            PostHog is a US company, with UK and German subsidiaries, however our users are based all over the
+                            world and you still hold lots of rights that we respect.{' '}
                         </p>
                     </div>
 
@@ -1099,10 +1088,9 @@ function Privacy() {
                     <div className="md:pb-12">
                         <h3>Introduction</h3>
                         <p>
-                            This Addendum (“<b>Addendum</b>”) forms part of the Privacy Policy, and of any superseding
-                            written agreement, entered by and between you, the Customer (as defined in the Agreement) (“
-                            <b>Customer</b>”), and PostHog Inc. (“<b>PostHog</b>”; and collectively – the “
-                            <b>Agreement</b>”).
+                            This Addendum (“<b>Addendum</b>”) forms part of the Privacy Policy, and of any superseding written
+                            agreement, entered by and between you, the Customer (as defined in the Agreement)
+                            (“<b>Customer</b>”), and PostHog Inc. (“<b>PostHog</b>”; and collectively – the “<b>Agreement</b>”).
                         </p>
                         <p>
                             This Addendum reflects the parties’ desire and intent to modify and amend the Agreement, in
@@ -1244,10 +1232,10 @@ function Privacy() {
                             Where you apply for a job opening posted by us, these provisions will apply to our
                             processing of your personal information. When you apply for a job opening via the
                             application function on a job site like LinkedIn or similar online service provider
-                            (referred to below as a “<b>Partner</b>”), you should note that the relevant Partner may
-                            retain your personal data and may also collect data from us in respect of the progress of
-                            your application. Any use by the Partner of your data will be in accordance with the
-                            Partner’s privacy policy.
+                            (referred to below as a “<b>Partner</b>”), you should note that the relevant Partner may retain
+                            your personal data and may also collect data from us in respect of the progress of your
+                            application. Any use by the Partner of your data will be in accordance with the Partner’s
+                            privacy policy.
                         </p>
                         <h3 id="information-we-collect-from-applicants">Information we collect from applicants</h3>
                         <h4 id="information-we-collect-from-you">Information we collect from you</h4>
@@ -1318,9 +1306,9 @@ function Privacy() {
                             Lawful basis and purposes for processing applicant personal information
                         </h3>
                         <p>
-                            If you are a national of countries in the EEA, United Kingdom, or Switzerland, we collect
-                            and process your personal information on the following legal bases set out by applicable
-                            law:
+                            If you are a national of countries in the EEA, United Kingdom, or
+                            Switzerland, we collect and process your personal information on the following legal bases
+                            set out by applicable law:
                         </p>
                         <p>
                             <strong>Consent:</strong> We may ask you for your consent to process your personal
@@ -1358,10 +1346,11 @@ function Privacy() {
                         </p>
                         <p>
                             PostHog may transfer, store, or process your personal information in a country outside your
-                            jurisdiction, including countries outside the EEA, Switzerland, and the United Kingdom. If
-                            we transfer personal information from the EEA, Switzerland, or United Kingdom to a country
-                            outside it, such as the United States, we will enter into SCCs, with the data importer, or
-                            take other measures to provide an adequate level of data protection.
+                            jurisdiction, including countries outside the EEA, Switzerland,
+                            and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or
+                            United Kingdom to a country outside it, such as the United States, we will enter into SCCs, 
+                            with the data importer, or take other measures to provide an adequate level of data
+                            protection.
                         </p>
                         <h3 id="how-long-we-keep-applicant-personal-data">How long we keep applicant personal data</h3>
                         <p>
@@ -1472,9 +1461,7 @@ function Privacy() {
                         </p>
 
                         <p>
-                            If you would like to opt out of your personal information being sent to third party
-                            platforms for marketing or advertising purposes, please reach out to{' '}
-                            <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
+                            If you would like to opt out of your personal information being sent to third party platforms for marketing or advertising purposes, please reach out to <a href="mailto:Brian@GetPostHog.com">Brian@GetPostHog.com</a>.
                         </p>
 
                         <p>
@@ -1501,19 +1488,19 @@ function Privacy() {
 
                         <p>
                             We may also provide notification to customers who have provided us email addresses of
-                            material changes to this Privacy Policy by sending an email or by displaying a notice
-                            through our Websites or products, or otherwise. PostHog encourages visitors to frequently
-                            check this page for any minor changes to its Privacy Policy. Your continued use of this
-                            site, any of the Websites, self-managed installations, deployments, or other PostHog
-                            products after any change in this Privacy Policy will constitute your acceptance of such
+                            material changes to this Privacy Policy by sending an email or by displaying a notice through our Websites or products, or otherwise. PostHog encourages visitors to
+                            frequently check this page for any minor changes to its Privacy Policy. Your continued use
+                            of this site, any of the Websites, self-managed installations, deployments, or other PostHog products after any change in this Privacy Policy will constitute your acceptance of such
                             change and acknowledgement of the updated Policy.
                         </p>
-                        <p>Last Updated: January 19, 2026</p>
+                        <p>
+                            Last Updated: January 19, 2026
+                        </p>
                     </div>
                     <div>
                         <p>
-                            We might change our privacy policy, so check our website often. Your use of our site or
-                            products means you accept any changes.
+                            We might change our privacy policy, so check our website often. Your use of our site or products means
+                            you accept any changes.
                         </p>
                     </div>
                 </div>

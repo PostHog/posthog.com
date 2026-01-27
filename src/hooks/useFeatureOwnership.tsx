@@ -396,7 +396,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         notes: <>All teams manage their own settings</>,
         label: 'feature/settings',
     },
-    'source-maps': {
+        'source-maps': {
         feature: 'Source maps',
         owner: ['error-tracking'],
     },

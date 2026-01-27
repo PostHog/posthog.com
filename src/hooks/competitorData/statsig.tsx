@@ -109,7 +109,7 @@ export const statsig = {
                     local_evaluation: true,
                     bootstrapping: true,
                     api_access: true,
-                    sdk_support: '30+',
+                    sdk_support: "30+",
                 },
             },
             targeting: {

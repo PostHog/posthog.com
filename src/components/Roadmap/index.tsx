@@ -550,12 +550,9 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                         <h3 className="text-[15px] m-0 font-normal leading-tight">
                             <HighlightedText
                                 text={roadmap.attributes.title}
-                                highlights={
-                                    highlightedTitle ||
-                                    (effectiveSearchTerm && effectiveSearchTerm.length > 1
-                                        ? generateHighlightedText(roadmap.attributes.title, [], effectiveSearchTerm)
-                                        : undefined)
-                                }
+                                highlights={highlightedTitle || (effectiveSearchTerm && effectiveSearchTerm.length > 1
+                                    ? generateHighlightedText(roadmap.attributes.title, [], effectiveSearchTerm)
+                                    : undefined)}
                             />
                         </h3>
                     ),

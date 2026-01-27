@@ -52,8 +52,8 @@ export default function FeaturesSplitWithImage({
                         <p
                             className="mt-3 opacity-80 text-3xl @2xl:text-2xl [&_code]:text-2xl"
                             {...(typeof description === 'string'
-                                ? // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input
-                                  { dangerouslySetInnerHTML: { __html: description } }
+                                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input
+                                ? { dangerouslySetInnerHTML: { __html: description } }
                                 : { children: description })}
                         />
                     )}
