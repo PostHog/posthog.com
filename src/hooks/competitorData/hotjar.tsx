@@ -164,6 +164,10 @@ export const hotjar = {
                     popover: true,
                     feedback_button: true,
                     hosted_surveys: true,
+                    custom_ui: true,
+                    custom_html: false,
+                    // https://help.hotjar.com/hc/en-us/articles/36819957395217-How-to-Embed-a-Survey-on-Your-Site
+                    iframe_embedding: true,
                 },
             },
             platforms: {
@@ -228,6 +232,7 @@ export const hotjar = {
             transparent_pricing: true,
             usage_based_pricing: false,
         },
+        // https://help.hotjar.com/hc/en-us/articles/36819973021457-Integrations-with-Hotjar
         integrations: {
             azure_blob: false,
             bigquery: false,
@@ -239,14 +244,14 @@ export const hotjar = {
             exports: true,
             gcs: false,
             google_ads: false,
-            hubspot: false,
+            hubspot: true,
             imports: false,
-            intercom: true,
+            intercom: false,
             microsoft_teams: true,
             redshift: false,
             postgres: false,
             s3: false,
-            salesforce: true,
+            salesforce: false,
             segment: true,
             slack: true,
             snowflake: false,
