@@ -48,7 +48,7 @@ After making the purchase, the customer gets a link to book a meeting, and they 
 A few things to keep in mind:
 
 - The booking link has no expiry, so there's no need to follow up with the customer if they haven't booked the call instantly - they can do so at the most convenient time.
-- If someone did book the meeting but didn't show up at a consultation, follow up with the customer to offer a meeting at another time. Set a task reminder in Vitally, and if we don't hear back within 1-2 weeks, offer issuing credits for the missed meeting.
+- If someone did book the meeting but didn't show up at a consultation, issue them credits for the missed meeting, and follow up with the customer to offer a meeting at another time.
 - If they had a call with us and then need more help, we'll offset the onboarding call cost against a professional services package.
 - If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
 - If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
