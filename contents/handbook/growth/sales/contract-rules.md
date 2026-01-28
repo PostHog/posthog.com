@@ -48,7 +48,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 > Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier.
 
-#### 4. Ability to Forecast - Mutual Commitment to Timing (Additive)
+#### 4. Ability to forecast - mutual commitment to timing (additive)
 
 **For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
 - Available when both parties commit to specific, mutually agreed timing for contract signature (this is not an end-of-quarter discount)
