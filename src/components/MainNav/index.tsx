@@ -582,14 +582,17 @@ export const Main = () => {
                                         <li className="px-1">
                                             <Link
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                to="https://app.posthog.com"
+                                                to={
+                                                    posthogInstance
+                                                        ? posthogInstance.replace(/"/g, '')
+                                                        : posthog?.isFeatureEnabled?.('direct-to-eu-cloud')
+                                                          ? 'https://eu.posthog.com'
+                                                          : 'https://us.posthog.com'
+                                                }
                                             >
                                                 <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                PostHog app
+                                                Sign in
                                             </Link>
-                                        </li>
-                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-primary text-[13px] px-2 py-1.5 !my-1 text-muted z-20 m-0 font-semibold">
-                                            Community
                                         </li>
                                         <li className="px-1">
                                             <Link
@@ -647,13 +650,19 @@ export const Main = () => {
                                                     Community logout
                                                 </button>
                                             ) : (
-                                                <button
-                                                    onClick={() => setAuthModalOpen(true)}
+                                                <Link
+                                                    to={
+                                                        posthogInstance
+                                                            ? posthogInstance.replace(/"/g, '')
+                                                            : posthog?.isFeatureEnabled?.('direct-to-eu-cloud')
+                                                              ? 'https://eu.posthog.com'
+                                                              : 'https://us.posthog.com'
+                                                    }
                                                     className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
                                                 >
-                                                    <IconUser className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                    Community login
-                                                </button>
+                                                    <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    Sign in
+                                                </Link>
                                             )}
                                         </li>
 
