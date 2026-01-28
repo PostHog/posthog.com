@@ -243,7 +243,7 @@ export const posthog = {
             },
         },
         product_tours: {
-            available: false,
+            available: 'Private alpha',
         },
         feature_flags: {
             available: true,
