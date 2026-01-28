@@ -8,13 +8,23 @@ Saved views let you save column configurations and filters for the [persons](/do
 
 For example, you might create a "High value customers" view that shows lifetime value, last active date, and subscription status columns with a filter for revenue above a certain threshold.
 
+## What's saved in a view
+
+Each saved view stores:
+
+- **Column configuration**: Which columns are visible and their order.
+- **Filters**: Any active filters applied to the list.
+
+Views are saved per table and can be either private or shared with project members.
+
 ## Creating a view
 
 To create a saved view:
 
-1. Configure the columns you want by clicking **Configure columns** in the table toolbar.
-2. Add any filters using the **Filter** button.
-3. Click **Save current view** and enter a name for your view.
+1. Go to **People & groups** in your PostHog project and select **Persons**
+2. Click **Configure columns** in the toolbar above the customer table
+3. Add any filters using the **Filter** button
+4. Click **Save current view** and enter a name for your view
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_27_T19_04_37_792_Z_9762323099.png"
@@ -34,7 +44,7 @@ Once you have at least one saved view, the button becomes a dropdown where you c
 
 ## Switching views
 
-Click the view selector dropdown to see all your saved views. Selecting a view applies its column configuration and filters to the list.
+Click the **view selector dropdown** to see all your saved views. Selecting a view applies its column configuration and filters to the list.
 
 ## Updating a view
 
@@ -57,12 +67,3 @@ Click the settings icon (gear) next to a view name in the dropdown to access opt
     alt="View settings menu"
     classes="rounded"
 />
-
-## What's saved in a view
-
-Each saved view stores:
-
-- **Column configuration**: Which columns are visible and their order.
-- **Filters**: Any active filters applied to the list.
-
-Views are saved per table and can be either private or shared with project members.
