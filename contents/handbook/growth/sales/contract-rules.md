@@ -41,7 +41,7 @@ Beyond optimization, we offer discounts based on four levers:
 - **2-year commitment:** +3% additional discount
 - **3-year commitment:** +5% additional discount
 
-#### 3. Timing of Cash Discount (Additive)
+#### 3. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
 - **Paid upfront (multi-year deals):** +2.5% per year paid upfront
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
