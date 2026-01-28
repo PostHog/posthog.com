@@ -3875,6 +3875,58 @@ export const docsMenu = {
                             name: '.NET',
                             url: '/docs/experiments/installation/dotnet',
                         },
+                        {
+                            name: 'Angular',
+                            url: '/docs/experiments/installation/angular',
+                        },
+                        {
+                            name: 'Astro',
+                            url: '/docs/experiments/installation/astro',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/experiments/installation/bubble',
+                        },
+                        {
+                            name: 'Django',
+                            url: '/docs/experiments/installation/django',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/experiments/installation/flutter',
+                        },
+                        {
+                            name: 'Framer',
+                            url: '/docs/experiments/installation/framer',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/experiments/installation/laravel',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/experiments/installation/nextjs',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/experiments/installation/nuxt',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/experiments/installation/remix',
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/docs/experiments/installation/svelte',
+                        },
+                        {
+                            name: 'Vue',
+                            url: '/docs/experiments/installation/vue',
+                        },
+                        {
+                            name: 'Webflow',
+                            url: '/docs/experiments/installation/webflow',
+                        },
                     ],
                 },
                 {
@@ -4900,6 +4952,10 @@ export const docsMenu = {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                         },
+                        {
+                            name: 'OpenAI Agents',
+                            url: '/docs/llm-analytics/installation/openai-agents',
+                        },
                     ],
                 },
                 {
@@ -5547,6 +5603,7 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
+                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
