@@ -6,54 +6,29 @@ import { IconMap, IconRewindPlay, IconSearch, IconSparkles } from '@posthog/icon
 
 const modes = [
     {
-        id: 'session-summaries',
-        name: 'Session summaries',
-        icon: <IconRewindPlay />,
-        color: 'blue',
-        tagline: 'Computer vision for your product',
-        description:
-            "Session replay, but make it AI. PostHog AI watches the videos so you don't have to – and actually understands what's happening on screen.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_summaries_mode_f3d76a34e9.png',
-        features: [
-            {
-                title: 'Reads your UI like a human',
-                description:
-                    'Extracts not just what the user did, but metadata on labels and events as they appeared on the page.',
-            },
-            {
-                title: 'Find patterns at scale',
-                description:
-                    'Search sessions, analyze paths, and spot issues across thousands of recordings without watching a single one.',
-            },
-            {
-                title: 'Skip to the good part',
-                description:
-                    'Get a sizzle reel of user behavior – errors, rage clicks, dead ends – ranked by severity with clips ready to investigate.',
-            },
-        ],
-    },
-    {
         id: 'plan-mode',
         name: 'Plan mode',
         icon: <IconMap />,
         color: 'green',
-        tagline: 'Think before you act',
+        tagline: 'Think twice, ship once',
         description:
-            'Plan mode is for when you want to explore schemas, map out your approach, and plot your next five moves before diving in.',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Plan_mode_3c619089b6.png',
+            'For complex queries without clear solutions, ask PostHog AI to map out the approach. Plot the next five moves before diving in.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Plan_mode_ebaace2a2c.png',
         features: [
             {
-                title: 'Explore your data schema',
-                description: 'Understand your events, properties, and sample values before building anything.',
-            },
-            {
-                title: 'Search across everything',
-                description: 'Find insights, dashboards, cohorts, experiments, flags, notebooks, and more.',
-            },
-            {
-                title: 'Switch modes on the fly',
+                title: 'Clarify the mission',
                 description:
-                    'Automatically jumps to SQL, session replay, or analytics mode when the plan calls for it.',
+                    "Time period? Segments? Success criteria? The agent asks upfront (it's like a standup, but useful).",
+            },
+            {
+                title: 'Approve the battle plan',
+                description:
+                    'No need to burn tokens on the wrong approach. See exactly what the agent wants to do. Tweak it. Reject it. Or let it rip.',
+            },
+            {
+                title: 'Watch it execute',
+                description:
+                    'Once a plan is approved, PostHog AI builds to spec. Dashboards, SQL queries, and insights – delivered as specified (no scope creep).',
             },
         ],
     },
@@ -62,24 +37,52 @@ const modes = [
         name: 'Research mode',
         icon: <IconSearch />,
         color: 'purple',
-        tagline: 'Deep analysis for complex problems',
+        tagline: 'For questions without quick answers',
         description:
-            'For when you need a deeper explanation – not just a dashboard. Research mode uses a more powerful model and can spawn multiple agents to tackle different parts of the task.',
+            '"Why is churn increasing?" is a rabbit hole. Research mode runs a more powerful model with extended thinking to correlate metrics, test hypotheses, and find the answer.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/research_mode_dc98608a04.png',
         features: [
             {
-                title: 'Investigates like a human would',
+                title: 'Review the plan before it runs',
                 description:
-                    "Explores events, flags, recordings, and errors in parallel – and throws out theories it can't back with data.",
+                    "You approve the research plan first: which segments to look at, which time periods matter. Point it at the problems you're ready to fix.",
             },
             {
-                title: 'Builds the case as it goes',
+                title: 'Parallel subagents do the legwork',
                 description:
-                    'Weak theories get deleted, strong ones get sharper, and new investigation loops spin up if needed.',
+                    'Subagents spawn across analytics, SQL, and replay to build a complete picture. Weak theories get deleted, strong ones get sharper.',
             },
             {
-                title: 'Tells you what to do next',
+                title: 'Get a report you can act on',
                 description:
-                    'Get a structured report with findings, evidence, and recommendations to move the needle on retention, conversion, or whatever metric matters.',
+                    'Findings land in a shareable PostHog notebook with evidence and recommendations (handy for winning architecture debates).',
+            },
+        ],
+    },
+    {
+        id: 'session-summaries',
+        name: 'Session summaries',
+        icon: <IconRewindPlay />,
+        color: 'blue',
+        tagline: 'Computer vision for your product',
+        description:
+            "Session replay, but make it AI. PostHog AI watches hundreds of recordings so you don't have to – and actually understands what's happening on screen.",
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_summaries_mode_3be9f6ebde.png',
+        features: [
+            {
+                title: 'Enrich autocapture with OCR',
+                description:
+                    'Vision AI extracts button labels, form fields, and error messages as they appeared on screen to users.',
+            },
+            {
+                title: 'Query recordings by what users saw',
+                description:
+                    'Use natural language to find and filter sessions by metadata, labels, events on page, or instances where users performed a specific action.',
+            },
+            {
+                title: 'Fast forward to the blooper reel',
+                description:
+                    'Get the highlights (and lowlights) of user behavior including errors, rage clicks and dead ends – ranked by severity with clips to investigate.',
             },
         ],
     },
@@ -173,7 +176,7 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                                         imgClassName="rounded border border-primary"
                                     />
                                 ) : (
-                                    <div className="w-full h-full min-h-[250px] bg-accent rounded border border-primary flex flex-col items-center justify-center p-8">
+                                    <div className="w-full h-full min-h-[250px] bg-accent rounded border flex flex-col items-center justify-center p-8">
                                         <div
                                             className={`size-16 rounded-xl bg-${mode.color}/20 flex items-center justify-center mb-4`}
                                         >
