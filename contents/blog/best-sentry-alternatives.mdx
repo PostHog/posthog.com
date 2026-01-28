@@ -39,7 +39,7 @@ This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but
 
 - **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation). Provide stack traces to debug issues. Correlate with product usage data.
 
-- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, performance monitoring, and 90-day data retention.
 
 - **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
@@ -79,9 +79,9 @@ This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but
 <details>
   <summary>Main differences between PostHog and Sentry</summary>
 
-* PostHog offers 100k free errors/month vs Sentry's 5k on the free tier.
+* PostHog offers 100k free errors and 5k free recordings per month vs Sentry's 5k errors and 50 recordings on the free tier.
 * PostHog ties every error to user sessions, product analytics, session recordings, and feature flags. Sentry focuses on stack traces and performance monitoring.
-* PostHog includes SQL/HogQL and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors.
+* PostHog includes SQL querying and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors.
 * Sentry supports 100+ platforms including Unity, Unreal Engine, Rust, and Elixir; PostHog covers major web and mobile frameworks but has narrower SDK coverage.
 
 </details>
@@ -257,7 +257,7 @@ It provides crashing reporting, performance monitoring, and user experience insi
 
 * Raygun includes AI-powered error resolution; Sentry recently added Seer AI but it's an add-on.
 * Sentry offers a free tier; Raygun only provides a 14-day free trial.
-* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; Raygun is SaaS-only.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; Raygun is subscription only.
 * Raygun has a stronger focus on .NET and Flutter SDKs; Sentry has broader framework coverage.
 
 </details>
