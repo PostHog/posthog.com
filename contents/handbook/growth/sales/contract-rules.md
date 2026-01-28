@@ -72,7 +72,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 *Why: Platform customers have better outcomes and lower churn. We invest in your success.*
 
-### Discount Examples
+### Discount examples
 
 **Example 1: Simple annual deal**
 ```
