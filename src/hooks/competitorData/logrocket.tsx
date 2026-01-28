@@ -17,7 +17,7 @@ export const logrocket = {
                 custom_properties: true,
                 monetization_analytics: false,
                 predictive_insights: false,
-                real_time_view: false,
+                real_time_view: true,
                 toolbar: false,
                 user_profiles: true,
                 insights: {
@@ -74,13 +74,14 @@ export const logrocket = {
                 free_tier: true,
             },
             features: {
-                canvas_recording: false,
+                canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: true,
                 conditional_recording: true,
                 crash_reports: true,
                 event_timeline: true,
-                export_to_json: '',
+                // https://docs.logrocket.com/docs/streaming-data-export
+                export_to_json: 'Add-on',
                 export_to_video: false,
                 filter_by_user_or_event: true,
                 identity_detection: true,
@@ -117,7 +118,7 @@ export const logrocket = {
                     console_logs: true,
                     performance_monitoring: true,
                     network_monitor: true,
-                    dom_explorer: false,
+                    dom_explorer: true,
                 },
             },
             ai: {
@@ -147,7 +148,8 @@ export const logrocket = {
             available: false,
         },
         cdp: {
-            available: true,
+            // They have some integrations, but not at "CDP" levels: https://logrocket.com/products/integrations
+            available: false,
         },
         error_tracking: {
             available: true,
@@ -185,14 +187,17 @@ export const logrocket = {
         deployment: {
             eu_hosting: true,
             open_source: false,
-            self_host: false,
+            self_host: 'Enterprise',
             reverse_proxy: true,
         },
         libraries: {
+            // https://docs.logrocket.com/reference/getting-started-with-sdks
             features: {
                 android: true,
                 flutter: true,
                 ios: true,
+                node: false,
+                python: false,
                 javascript: true,
                 react_native: true,
                 react: true,
@@ -202,9 +207,11 @@ export const logrocket = {
         pricing: {
             free_tier: true,
             self_serve: true,
-            transparent_pricing: false,
+            transparent_pricing: true,
             usage_based_pricing: true,
         },
+        // https://docs.logrocket.com/docs/streaming-data-export
+        // https://docs.logrocket.com/docs/integrations
         integrations: {
             airbyte: false,
             azure_blob: false,
@@ -246,7 +253,7 @@ export const logrocket = {
             data_anonymization: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: false,
+            history_audit_logs: 'Professional plan',
             role_based_access_control: true,
             saml_sso: true,
             soc2_certified: true,
