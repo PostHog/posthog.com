@@ -5504,6 +5504,7 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
+                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
