@@ -63,7 +63,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 ### Platform Adoption Bonus
 
-**Multi-Product Credit:** Get 5% bonus credits when you use 3+ PostHog products at $1,000+/month each
+**Multi-product credit:** Get 5% bonus credits when you use 3+ PostHog products at $1,000+/month each
 - Applied at contract start for products included in the agreement
 
 **Expansion credit:** Existing customers get an extra 5% of remaining contract value when adopting each new product
