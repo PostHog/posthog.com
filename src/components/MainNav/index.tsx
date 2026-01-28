@@ -36,6 +36,7 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
+import useCloud from 'hooks/useCloud'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -438,6 +439,7 @@ export const Main = () => {
     const [mediaModalOpen, setMediaModalOpen] = useState(false)
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const posthog = usePostHog()
+    const cloud = useCloud()
 
     useEffect(() => {
         if (window) {
@@ -582,10 +584,14 @@ export const Main = () => {
                                         <li className="px-1">
                                             <Link
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                to="https://app.posthog.com"
+                                                to={
+                                                    posthogInstance
+                                                        ? posthogInstance.replace(/"/g, '')
+                                                        : `https://${cloud || 'us'}.posthog.com`
+                                                }
                                             >
                                                 <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                PostHog app
+                                                Sign in
                                             </Link>
                                         </li>
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-primary text-[13px] px-2 py-1.5 !my-1 text-muted z-20 m-0 font-semibold">
