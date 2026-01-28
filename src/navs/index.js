@@ -39,6 +39,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/hubspot',
                 },
                 {
+                    name: 'Klaviyo',
+                    url: '/docs/cdp/sources/klaviyo',
+                },
+                {
                     name: 'Zendesk',
                     url: '/docs/cdp/sources/zendesk',
                 },
@@ -4609,6 +4613,10 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                        },
+                        {
+                            name: 'Klaviyo',
+                            url: '/docs/data-warehouse/sources/klaviyo',
                         },
                         {
                             name: 'MongoDB',
