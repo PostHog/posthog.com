@@ -402,6 +402,8 @@ SELECT pdi.person.properties.email FROM events
 
 These properties reflect **the current state** of the person. All events show the person's current email, even if it was different when the event occurred.
 
+PDI = Person Distinct ID
+
 #### Which to use?
 
 | Access pattern | JOIN required? | Property state |
@@ -410,6 +412,13 @@ These properties reflect **the current state** of the person. All events show th
 | `pdi.person.properties.X` | Yes | Current |
 
 Most queries should use `person.properties` for performance. Use `pdi.person.properties` only when you specifically need the current property values.
+
+#### PoE mode settings
+
+It is possible to change `person.properties` to use the PDI properties instead, using the PoE mode setting. This can be set at both the query level and the team level, though we would like to remove the team-level setting soon.
+This is set through the `HogQLQueryModifiers` class.
+
+If this setting is overridden, you can access PoE properties regardless of the PoE mode by using `poe.properties.X`
 
 ---
 
