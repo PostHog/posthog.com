@@ -8,7 +8,7 @@ date: 2026-01-28
 
 [Kilo Code](https://kilo.ai/) is an open source, developer-first AI coding platform that lets teams access 500+ LLMs, including top models from OpenAI, Anthropic, xAI, Gemini, and MiniMax. Developers can use Kilo everywhere they work, such as in their coding editor of choice, the terminal, or a web interface. 
 
-In addition to the language models, the team also operates fast. In a matter of months, the they have shipped multiple products, expanded headcount aggressively, and built a platform that serves both registered users and developers who never create an account at all. That pace leaves very little room for fragmented tooling or slow feedback loops.
+In addition to the language models, the team also operates fast. In a matter of months, they have shipped multiple products, expanded headcount aggressively, and built a platform that serves both registered users and developers who never create an account at all. That pace leaves very little room for fragmented tooling or slow feedback loops.
 
 From the start, PostHog became the system that made this speed sustainable. 
 
