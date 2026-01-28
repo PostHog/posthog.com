@@ -39,7 +39,8 @@ export const rollbar = {
             },
             integrations: {
                 product_analytics: false,
-                session_replay: false,
+                // https://rollbar.com/session-replay
+                session_replay: true,
             },
         },
     },
@@ -76,7 +77,8 @@ export const rollbar = {
             azure_blob: false,
             bigquery: false,
             cdp: false,
-            ci_cd_integrations: true,
+            // There is some mention of it, but no official documentation like others have (see https://docs.bugsnag.com/build-integrations/)
+            ci_cd_integrations: false,
             community_integrations: false,
             csv_exports: false,
             customer_io: false,

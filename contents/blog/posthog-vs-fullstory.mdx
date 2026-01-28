@@ -56,6 +56,11 @@ This comparison will compare all available features, regardless of pricing tier.
     rows={[
         'product_analytics',
         'web_analytics',
+        {
+            label: 'Mobile analytics',
+            description: 'Capture data from iOS, Android, and more mobile apps',
+            values: [true, 'Add-on'],
+        },
         'session_replay',
         'feature_flags',
         'surveys',
@@ -113,6 +118,7 @@ FullStory is _primarily_ a session replay tool, while PostHog is an all-in-one p
         'session_replay.platform_support.features.ios_recordings',
         'session_replay.platform_support.features.android_recordings',
         'session_replay.platform_support.features.web_app_recordings',
+        'session_replay.ai.features.ai_summaries',
         'session_replay.privacy.features.privacy_masking',
         'session_replay.targeting.features.conditional_recording',
         'session_replay.analysis.features.performance_monitoring',
@@ -122,14 +128,14 @@ FullStory is _primarily_ a session replay tool, while PostHog is an all-in-one p
         'session_replay.analysis.features.dom_explorer',
         'session_replay.export.features.export_to_json',
         'session_replay.export.features.retention_policy',
-        { label: 'Free tier', values: ['5,000 sessions/mo', 'No free allowance**'] },
+        { label: 'Free tier', values: ['5,000 sessions/mo', '30,000 sessions/mo**'] },
     ]}
 />
 
 <div>
     <sup>*</sup> Data retention increases on more expensive plans.
     <br />
-    <sup>**</sup> FullStory offers a 14-day trial with 5,000 free sessions before forcing you to pay.
+    <sup>**</sup> FullStory offers a 30,000 sessions per month free tier with 12 month retention, but limited features.
 </div>
 
 Beyond this, PostHog and FullStory are roughly comparable even in spite of FullStory’s near-exclusive focus on session replays as a feature.
@@ -217,7 +223,7 @@ Both PostHog and FullStory offer three main pricing tiers, but how these tiers d
 
 > See [PostHog’s pricing page](/pricing) to find out more about what’s included in each tier.
 
-**FullStory** has three premium, paid-for tiers, which differ in available features. The basic Business plan offers minimal features and a limited 14-day trial, while the following Advanced and Enterprise plans increase the feature scope and, presumably, cost.
+**FullStory** has a free tier and then three premium, paid-for tiers, which differ in available features. The Business, Advanced, and Enterprise plans increase the feature scope and, presumably, cost.
 
 We say 'presumably' because FullStory’s pricing isn’t transparent and there’s no way to know exactly how much each tier costs. In contrast, PostHog's pricing is completely transparent – we have a cost calculator on [our pricing page](/pricing) and you can set billing limits to prevent surprise bills.
 
