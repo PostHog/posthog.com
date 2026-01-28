@@ -61,7 +61,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 > You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
 
-### Platform Adoption Bonus
+### Platform adoption bonus credits
 
 **Multi-product credit:** Get 5% bonus credits when you use 3+ PostHog products at $1,000+/month each
 - Applied at contract start for products included in the agreement
