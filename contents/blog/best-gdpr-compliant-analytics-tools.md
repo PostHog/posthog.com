@@ -122,7 +122,7 @@ Plausible is made and hosted in the EU. It collects no personally identifiable i
 
 #### How much does Plausible cost?
 
-Plausible charges by pageview with 1 million pageviews costing $69 per month. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker Compose.
+Plausible charges by pageview with 1 million pageviews costing $69 per month. Paying annually grants you two free months per year – i.e. $69 per month becomes $690 per year. The open source version is free to self-host via Docker Compose.
 
 ### 3. Umami
 
@@ -313,7 +313,7 @@ TelemetryDeck makes GDPR compliance very easy. It doesn't collect enough persona
 
 #### How much does TelemetryDeck cost?
 
-TelemetryDeck's free plan gives you up to 100,000 signals per month – signals are TelemetryDeck's name for events. It offers 20% discount for annual plans, and has transparency privacy up to 500M signals for month; additional signals would require a custom quote.
+TelemetryDeck's free plan gives you up to 100,000 signals per month – signals are TelemetryDeck's name for events. It offers 20% discount for annual plans, and has transparency pricing up to 500M signals for month; additional signals would require a custom quote.
 
 ### 9. GoAccess
 
@@ -350,7 +350,7 @@ GoAccess is open source and has no paid tiers.
 ## Which GDPR-compliant analytics tool should you choose?
 
 - Want an all-in-one platform with analytics, session replay, feature flags, and EU hosting? Go with **PostHog**.
-- Need simple website metrics with zero personal data collection? **Plausible** or Fathom keep it minimal.
+- Need simple website metrics with zero personal data collection? **Plausible** or **Fathom** keep it minimal.
 - Building mobile apps and need privacy-first analytics? **TelemetryDeck** is purpose-built for iOS and Android.
 - Looking for a direct Google Analytics replacement you can self-host? **Matomo** imports your GA data.
 - Already using Vercel? Their built-in **Vercel Web Analytics** covers the basics.
@@ -370,7 +370,7 @@ GoAccess is open source and has no paid tiers.
 <details>
 <summary>Do I need cookie consent banners with GDPR-compliant analytics?</summary>
 
-Not always. Tools like **Plausible**, **Fathom**, and **TelemetryDeck** collect no personally identifiable information, so they don't require consent banners. **PostHog** and **Matomo** can be configured for cookieless tracking, which also removes the banner requirement – though this limits some tracking capabilities.
+Not always. Tools like **Plausible**, **Fathom**, and **TelemetryDeck** collect no personally identifiable information, so they don't require consent banners. **PostHog** and **Matomo** can be configured for [cookieless tracking](/tutorials/cookieless-tracking), which also removes the banner requirement – though this limits some tracking capabilities.
 
 </details>
 
