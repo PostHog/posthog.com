@@ -88,7 +88,7 @@ Each product >$1,000/month usage
 Total value: $60,000 + $1,800 = $61,800 in credits
 ```
 
-**Example 2: Strategic Multi-Year Platform Deal**
+**Example 2: Strategic multi-year platform deal**
 ```
 $250,000 in credits  
 3-year commitment (+5%)
