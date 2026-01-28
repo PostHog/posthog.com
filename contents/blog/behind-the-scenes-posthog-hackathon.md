@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ben_dreams_of_hedgehogs_a90e7c58cf.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/ben_dreams_of_hedgehogs_a90e7c58cf.png
 featuredImageType: full
 category: Inside PostHog
 tags:
@@ -17,7 +17,7 @@ tags:
 
 As a 100% remote company, our annual company hackathon is one of our most important rituals.  
 
-Some of the most important features, like session replay and our data warehouse, were the direct results of hackathons.
+Some of our most important products and features, like session replay and our data warehouse, started as hackathon projects.
 
 We wanted to share this with you, so at our 2025 offsite in Tulum, Mexico we shot this hackathon documentary about one of our... defining features: Hedgehog Mode. 
 
