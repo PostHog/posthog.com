@@ -66,7 +66,7 @@ Beyond optimization, we offer discounts based on four levers:
 **Multi-Product Credit:** Get 5% bonus credits when you use 3+ PostHog products at $1,000+/month each
 - Applied at contract start for products included in the agreement
 
-**Expansion Credit:** Existing customers get 5% of remaining contract value when adopting each new product
+**Expansion credit:** Existing customers get an extra 5% of remaining contract value when adopting each new product
 - Product must exceed $1,000/month for 3 consecutive months
 - Maximum 20% total (4 products)
 
