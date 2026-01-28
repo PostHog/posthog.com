@@ -1,0 +1,137 @@
+---
+title: Getting started with feature flags
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import FeatureFlagsInstallationPlatforms from './installation/_snippets/installation-platforms'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconFlask } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+<QuestLog firstSpeechBubble="Let's ship some flags!" lastSpeechBubble="Time to start flagging features!">
+
+<QuestLogItem
+    title="Create your first flag"
+    subtitle="Required"
+    icon="IconFlag"
+>
+
+  A feature flag lets you toggle a feature on or off without redeploying code. To get started, install the PostHog SDK for your platform and create your first flag in the PostHog UI.
+
+  ### Platforms
+
+  <FeatureFlagsInstallationPlatforms />
+
+  > **New to feature flags?** Check the [overview page](/docs/feature-flags) for a primer on use cases like phased rollouts, kill switches, targeting, and remote config.
+
+  <OSButton variant="primary" asLink to="/docs/feature-flags/installation">
+    Install PostHog SDK
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Add flag code to your app"
+    subtitle="Required"
+    icon="IconCode"
+>
+
+  Once the SDK is installed, [create a feature flag](/docs/feature-flags/creating-feature-flags) in PostHog and then check it in your code. The basic pattern looks like this:
+
+  ```js
+  // Check a boolean flag
+  if (posthog.isFeatureEnabled('my-new-feature')) {
+      // Show the new feature
+  }
+
+  // Get a multivariate flag value
+  const variant = posthog.getFeatureFlag('signup-flow')
+  if (variant === 'test') {
+      // Show the test variant
+  }
+  ```
+
+  You can also use [payloads](/docs/feature-flags/remote-config) to send JSON configuration alongside your flags, and [multivariate flags](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags) to test multiple variants.
+
+  <OSButton variant="primary" asLink to="/docs/feature-flags/adding-feature-flag-code">
+    See all SDKs and code examples
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Test and roll out"
+    subtitle="Required"
+    icon="IconTestTube"
+>
+
+  Before going live, test that your flag behaves correctly. PostHog gives you several ways to test and roll out safely:
+
+  - **Override for yourself** &mdash; Target your email or user ID to see each variant
+  - **Phased rollout** &mdash; Start at 5-10% of users, monitor metrics, then gradually increase
+  - **Target by properties** &mdash; Show features to specific users, cohorts, or groups
+  - **Set up dependencies** &mdash; Make flags depend on other flags for complex rollout strategies
+
+  <ProductScreenshot
+      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_feature_flags_light_133081fabc.png"
+      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_feature_flags_dark_8aaa86aa47.png"
+      alt="Feature flag creation UI"
+      classes="rounded"
+      padding={false}
+  />
+
+  <OSButton variant="primary" asLink to="/docs/feature-flags/testing">
+    Learn about testing flags
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Use with experiments"
+    subtitle="Recommended"
+    icon="IconFlask"
+>
+
+  Feature flags power PostHog's [A/B testing and experimentation](/docs/experiments) platform. When you create an experiment, PostHog automatically creates a feature flag to split users into control and test groups, then tracks your goal metric to determine statistical significance.
+
+  This means you can:
+
+  - Run A/B tests on any feature you've flagged
+  - Track conversion, revenue, or custom metrics per variant
+  - Get statistically significant results before rolling out to everyone
+  - Use [holdout groups](/tutorials/holdout-testing) to measure long-term impact
+
+  <OSButton variant="primary" asLink to="/docs/experiments/start-here">
+    Run your first experiment
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Use for free"
+    subtitle="Free 1M requests/mo"
+    icon="IconPiggyBank"
+>
+
+PostHog's feature flags are built to be cost-effective, with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, most companies use PostHog for free.
+
+## TL;DR
+
+- No credit card required to start
+- First 1M API requests per month are free
+- Above 1M we have usage-based pricing with volume discounts
+- Set billing limits to avoid surprise charges
+- Use our [pricing calculator](/docs/feature-flags/cutting-costs) to estimate costs
+
+---
+
+That's it! You're ready to start flagging features.
+
+<OSButton variant="primary" asLink to="/docs/feature-flags/installation">
+  Install feature flags
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
