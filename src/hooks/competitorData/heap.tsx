@@ -69,16 +69,16 @@ export const heap = {
             available: false,
         },
         web_analytics: {
-            available: false,
+            available: true,
             features: {
                 snippet_install: true,
                 search_tools: false,
             },
         },
         session_replay: {
-            available: true,
+            available: 'Pro/Premier Add-on',
             pricing: {
-                free_tier: 'Limited trial',
+                free_tier: false,
             },
             features: {
                 canvas_recording: false,
@@ -102,7 +102,7 @@ export const heap = {
                 single_page_app: true,
                 target_by_feature_flag: false,
                 target_by_sample: true,
-                target_by_url: false,
+                target_by_url: true,
                 wireframe_mode: false,
             },
             export: {
@@ -276,11 +276,11 @@ export const heap = {
         },
         integrations: {
             ci_cd_integrations: false,
-            community_integrations: false,
+            community_integrations: true,
             datadog: false,
             email_reports: true,
             google_ads: false,
-            imports: false,
+            imports: true,
             microsoft_teams: false,
             segment: true,
             sentry: false,

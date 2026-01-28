@@ -1,0 +1,142 @@
+---
+title: Next.js logs installation
+platformLogo: nextjs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+npm install @opentelemetry/sdk-logs @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs @opentelemetry/resources
+```
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
+
+</Step>
+
+<Step title="Enable instrumentation in Next.js" badge="required">
+
+Add the following to your `next.config.js` (or `next.config.mjs`) to enable the instrumentation hook:
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    instrumentationHook: true,
+  },
+}
+
+module.exports = nextConfig
+```
+
+> **Note:** For Next.js 15 and later, the instrumentation hook is enabled by default. You can skip this step if you're on Next.js 15+.
+
+</Step>
+
+<Step title="Create the instrumentation file" badge="required">
+
+Create an `instrumentation.ts` (or `instrumentation.js`) file in the root of your project (or inside `src/` if you use that folder).
+
+```typescript
+import { BatchLogRecordProcessor, LoggerProvider } from '@opentelemetry/sdk-logs'
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http'
+import { logs } from '@opentelemetry/api-logs'
+import { resourceFromAttributes } from '@opentelemetry/resources'
+
+export function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const logExporter = new OTLPLogExporter({
+      url: '<ph_client_api_host>/i/v1/logs',
+      headers: {
+        Authorization: 'Bearer <ph_project_api_key>',
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const loggerProvider = new LoggerProvider({
+      resource: resourceFromAttributes({ 'service.name': 'my-nextjs-app' }),
+      processors: [new BatchLogRecordProcessor(logExporter)],
+    })
+    logs.setGlobalLoggerProvider(loggerProvider)
+  }
+}
+```
+
+> **Note:** The `register` function runs once when a new Next.js server instance is initialized. We check for `NEXT_RUNTIME === 'nodejs'` to ensure the SDK only initializes in the Node.js runtime, not in the Edge runtime.
+
+> **Important:** The `Content-Type: application/json` header is required.
+
+Alternatively, you can pass the API key as a query parameter:
+
+```typescript
+new OTLPLogExporter({
+  url: '<ph_client_api_host>/i/v1/logs?token=<ph_project_api_key>',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+```
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can use OpenTelemetry logging in your server-side code (API routes, Server Components, etc.):
+
+```typescript
+import { logs, SeverityNumber } from '@opentelemetry/api-logs'
+
+const logger = logs.getLogger('my-nextjs-app')
+
+// In an API route or Server Component
+export async function GET() {
+  logger.emit({
+    body: 'API request received',
+    severityNumber: SeverityNumber.INFO,
+    attributes: {
+      endpoint: '/api/example',
+      method: 'GET',
+    },
+  })
+
+  // Your logic here
+
+  return Response.json({ success: true })
+}
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
