@@ -30,3 +30,5 @@ Was it a lot of fun? Absolutely.
 You can watch the first episode below, or on [our YouTube channel](https://www.youtube.com/watch?v=gwUZRA0Y7xI).
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/gwUZRA0Y7xI?si=ZpbEqAJV6dYV1FPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+And if you'd like to participate in a PostHog hackathon, we're [always hiring](/careers).
