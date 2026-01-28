@@ -74,7 +74,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 ### Discount Examples
 
-**Example 1: Simple Annual Deal**
+**Example 1: Simple annual deal**
 ```
 $60,000 in credits
 1-year commitment
