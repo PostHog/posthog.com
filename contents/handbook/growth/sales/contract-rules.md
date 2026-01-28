@@ -12,7 +12,7 @@ We get it, nobody likes rules. As we scale the Sales and CS teams we need to be 
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
-### The 4 Discount Levers & Why They Matter to Our Business
+### The 4 discount levers & why they matter to us
 
 Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
 1. **Volume:** The amount of credits purchased - *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
