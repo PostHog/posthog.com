@@ -7,29 +7,15 @@ interface MCPConfigSnippetProps {
     variant?: ConfigVariant
 }
 
-const API_KEY_PLACEHOLDER = '{INSERT_YOUR_PERSONAL_API_KEY_HERE}// HIGHLIGHT'
-
 // Native HTTP config for clients that support it (Cursor, VS Code, Zed)
 const MCP_SERVER_CONFIG_NATIVE = {
     url: 'https://mcp.posthog.com/mcp',
-    headers: {
-        Authorization: `Bearer ${API_KEY_PLACEHOLDER}`,
-    },
 }
 
 // mcp-remote config for clients without native HTTP support (Claude Desktop, Windsurf)
 const MCP_SERVER_CONFIG_LEGACY = {
     command: 'npx',
-    args: [
-        '-y',
-        'mcp-remote@latest',
-        'https://mcp.posthog.com/sse',
-        '--header',
-        'Authorization:${POSTHOG_AUTH_HEADER}',
-    ],
-    env: {
-        POSTHOG_AUTH_HEADER: `Bearer ${API_KEY_PLACEHOLDER}`,
-    },
+    args: ['-y', 'mcp-remote@latest', 'https://mcp.posthog.com/sse'],
 }
 
 const EDITOR_CONFIGS = {
@@ -47,14 +33,11 @@ const EDITOR_CONFIGS = {
     },
     vscode: {
         language: 'json',
-        content: () =>
-            JSON.stringify({ servers: { posthog: { type: 'http', ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
+        content: () => JSON.stringify({ servers: { posthog: { type: 'http', ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
     },
     'claude-code': {
         language: 'bash',
-        content: () =>
-            `claude mcp add --transport http posthog https://mcp.posthog.com/mcp \\
-  --header "Authorization: Bearer ${API_KEY_PLACEHOLDER}" -s user`,
+        content: () => `claude mcp add --transport http posthog https://mcp.posthog.com/mcp -s user`,
     },
     zed: {
         language: 'json',

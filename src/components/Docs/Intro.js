@@ -8,6 +8,9 @@ export default function Intro({
     description,
     buttonText,
     buttonLink,
+    secondaryButtonLink,
+    secondaryButtonText,
+    secondaryExternalNoIcon,
     imageColumnClasses,
     imageUrl,
     imageClasses,
@@ -21,7 +24,18 @@ export default function Intro({
                     {' '}
                     {description}
                 </h3>
-                <CallToAction to={buttonLink}>{buttonText}</CallToAction>
+                <div className="flex gap-2">
+                    <CallToAction to={buttonLink}>{buttonText}</CallToAction>
+                    {secondaryButtonLink && secondaryButtonText && (
+                        <CallToAction
+                            externalNoIcon={secondaryExternalNoIcon ?? false}
+                            type="secondary"
+                            to={secondaryButtonLink}
+                        >
+                            {secondaryButtonText}
+                        </CallToAction>
+                    )}
+                </div>
             </div>
 
             {imageUrl && (

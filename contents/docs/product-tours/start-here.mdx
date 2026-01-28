@@ -1,0 +1,173 @@
+---
+title: Getting started with product tours
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+<QuestLog firstSpeechBubble="Let's guide your users!" lastSpeechBubble="You're ready to launch!">
+
+<QuestLogItem
+    title="Create your first tour"
+    subtitle="Required"
+    icon="IconSpotlight"
+>
+
+Product tours are multi-step walkthroughs that highlight elements in your UI and guide users through features. You build them visually using the PostHog toolbar.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/pt_demo_67b4b87c6e.mp4" 
+  alt="Use product tours to guide users through your app" 
+  autoPlay={true}
+  loop={true}
+/>
+
+### How it works
+
+1. Launch the toolbar on your site
+2. Click elements to create steps
+3. Add content with the rich text editor
+4. Configure buttons and actions
+5. Save and launch
+
+Each step can highlight a specific element, show a modal, or even include an embedded survey question.
+
+<OSButton variant="primary" asLink to="/docs/product-tours/creating-product-tours">
+  Create a tour
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Or launch an announcement"
+    subtitle="Optional"
+    icon="IconMessage"
+>
+
+Announcements are single-step messages for when you don't need a full tour. Choose between:
+
+- **Modals** - Centered popups for important messages, changelogs, or feature launches
+- **Banners** - Top or bottom page alerts for subtle notifications
+
+<div className="grid sm:grid-cols-2 gap-4 my-4">
+    <div>
+        <ProductScreenshot
+            imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_44_39_PM_b1e4fb4ce4.png"
+            alt="Modal announcement example"
+            classes="rounded"
+        />
+        <Caption>Modal announcement</Caption>
+    </div>
+    <div>
+        <ProductScreenshot
+            imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_44_14_PM_1614e763bf.png"
+            alt="Banner announcement example"
+            classes="rounded"
+        />
+        <Caption>Banner announcement</Caption>
+    </div>
+</div>
+
+Announcement buttons can open links or trigger a product tour, making them a great entry point for onboarding flows.
+
+You can create announcements directly from the PostHog app without using the toolbar.
+
+<OSButton variant="primary" asLink to="/docs/product-tours/creating-announcements">
+  Create an announcement
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Target the right users"
+    subtitle="Required"
+    icon="IconTarget"
+>
+
+Control who sees your tours and when they appear:
+
+- **URL matching** - Show on specific pages (exact, contains, or regex)
+- **User properties** - Target specific user segments via built-in [feature flags](/docs/feature-flags)
+
+Users who interact with a tour (complete or dismiss) won't see it again.
+
+<OSButton variant="primary" asLink to="/docs/product-tours/targeting">
+  Set up targeting
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Customize the look"
+    subtitle="Recommended"
+    icon="IconColor"
+>
+
+Make tours match your brand:
+
+- **Colors** - Background, text, buttons, borders
+- **Layout** - Border radius, shadows, positioning
+- **Typography** - Custom font family
+- **Behavior** - Overlay, dismiss on click outside
+- **White-label** - Hide PostHog branding
+
+<OSButton variant="primary" asLink to="/docs/product-tours/customization">
+  Customize appearance
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Launch and measure"
+    subtitle="Required"
+    icon="IconGraph"
+>
+
+Once your tour is ready, set a start date to launch it. PostHog automatically tracks:
+
+- **Shown** - How many users saw the tour
+- **Completed** - How many finished all steps
+- **Dismissed** - How many closed early
+- **Tour funnel** - Shows step-by-step where users drop off
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_07_08_PM_54e558bc6e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_16_at_12_08_05_PM_2f34b3d315.png"
+    alt="Product tour analytics"
+    classes="rounded"
+    padding={false}
+/>
+
+### Integrate with product analytics
+
+Tour events work with the rest of PostHog. Create funnels to see if tours improve activation, or use [cohorts](/docs/data/cohorts) to target users who haven't completed onboarding.
+
+Person properties like `$product_tour_completed/{id}` are set automatically, so you can filter and segment based on tour interactions.
+</QuestLogItem>
+
+<QuestLogItem
+    title="Use for free"
+    subtitle="No cost"
+    icon="IconPiggyBank"
+>
+
+Product tours is completely free while in alpha. No usage limits, no credit card required.
+
+We'll introduce pricing once we're out of beta – we'll give you plenty of notice before that happens.
+
+---
+
+That's it! You're ready to start guiding users.
+
+<OSButton variant="primary" asLink to="/docs/product-tours/creating-product-tours">
+  Create your first tour
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

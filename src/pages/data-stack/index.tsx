@@ -274,9 +274,9 @@ export default function CDP(): JSX.Element {
                     </span>
                 </h3>
                 <p>
-                    We give you the credentials to directly access your DuckDB data store for complete flexibility, so
-                    you can bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data
-                    modeling, and more so you can get started quickly.
+                    We give you the credentials to directly access your data store for complete flexibility, so you can
+                    bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data modeling,
+                    and more so you can get started quickly.
                 </p>
 
                 <ProductScreenshot
