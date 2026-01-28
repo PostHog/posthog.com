@@ -446,8 +446,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar
-                showBack
-                showForward
+                showBack={!websiteMode}
+                showForward={!websiteMode}
                 showCustomLeft={<h2 className="text-primary">Merch store</h2>}
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
@@ -457,8 +457,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 onOrderHistoryClose={handleOrderHistoryClose}
                 showCart
                 showOrderHistory={orders?.length > 0}
-                showSearch
+                showSearch={!websiteMode}
                 onSearch={handleSearch}
+                className={websiteMode ? 'border-b border-primary' : ''}
             />
             {!websiteMode && (
                 <AddressBar

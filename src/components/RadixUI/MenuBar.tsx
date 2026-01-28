@@ -305,7 +305,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
             return
         }
         const container = rootRef.current.closest('[data-menu-container]')
-        console.log('container', container)
         setPortalContainer(container instanceof HTMLElement ? container : null)
     }, [])
 
