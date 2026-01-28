@@ -59,11 +59,13 @@ In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/r
 
 You can do the following using the [advanced configuration](/docs/libraries/js/config#advanced-configuration):
 
-1. Set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+1. Set `advanced_disable_feature_flags_on_first_load` to `true`. This prevents the SDK from automatically requesting feature flags during its initial initialization. Note that other SDK methods (like `posthog.identify()`) will still trigger flag requests when called. This is useful when you're immediately calling `identify()` anyway, since that requests flags on its own.
 
 2. Set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
 
 3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey-related feature flags are evaluated, which significantly reduces costs if you primarily use PostHog for surveys. This disables evaluation of regular feature flags while still allowing surveys to function properly.
+
+> **Note:** When using `advanced_disable_feature_flags_on_first_load` or `advanced_only_evaluate_survey_feature_flags`, the SDK still makes a request to the `/flags` endpoint, but flags won't be evaluated and you won't be charged for that request.
 
 <CalloutBox icon="IconWarning" title="Surveys use feature flags" type="caution">
 

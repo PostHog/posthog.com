@@ -29,7 +29,7 @@ It's a vague term, what does this _actually_ mean?
 
 The tools we have are an internal forum, dozens of unofficial YC WhatsApp/Slack groups filled with other founders, regular invites to informal in person events, and the contact details of all the partners and every founder. This extends to real life - we met many people there that are now good friends.
 
-Ultimately, all these new contacts gave us access to many of the best founders and investors in the world. This was critical to us - as Silicon Valley outsiders, we really knew no one before we started with YC. This helped us to meet people for advice, angel investors and a few funds.
+Ultimately, all these new contacts gave us access to many of the best founders and investors in the world. This was critical to us - as Silicon Valley outsiders, we really knew no one before we started with YC. This helped us to [meet people for advice](/newsletter/how-i-get-good-advice), angel investors and a few funds.
 
 A benefit of many networks is emotional support, but being closely connected to other founders in particular can provide the opposite depending on how you react. When we were very small, we benefited greatly from [talking to founders or senior people at successful developer-focussed](a-chat-with-sid) [companies](ceo-diary-4#hiring-the-right-people--what-stripe-taught-me
 ). At other times, we've seen people we know well create multi billion dollar companies from scratch, faster than us. We should take lessons from them, but shouldn't blindly raise money as fast as possible to compete on valuation.

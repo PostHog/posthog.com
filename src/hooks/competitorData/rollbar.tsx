@@ -39,7 +39,8 @@ export const rollbar = {
             },
             integrations: {
                 product_analytics: false,
-                session_replay: false,
+                // https://rollbar.com/session-replay
+                session_replay: true,
             },
         },
     },

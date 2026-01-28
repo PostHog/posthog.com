@@ -77,10 +77,11 @@ export const logrocket = {
                 canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: false,
-                conditional_recording: true,
+                conditional_recording: 'Add-on',
                 crash_reports: true,
                 event_timeline: true,
-                export_to_json: '',
+                // https://docs.logrocket.com/docs/streaming-data-export
+                export_to_json: 'Add-on',
                 export_to_video: false,
                 filter_by_user_or_event: true,
                 identity_detection: true,
@@ -147,7 +148,8 @@ export const logrocket = {
             available: false,
         },
         cdp: {
-            available: true,
+            // They have some integrations, but not at "CDP" levels: https://logrocket.com/products/integrations
+            available: false,
         },
         error_tracking: {
             available: true,
@@ -189,10 +191,13 @@ export const logrocket = {
             reverse_proxy: true,
         },
         libraries: {
+            // https://docs.logrocket.com/reference/getting-started-with-sdks
             features: {
                 android: true,
                 flutter: false,
                 ios: true,
+                node: false,
+                python: false,
                 javascript: true,
                 react_native: true,
                 react: true,
@@ -205,15 +210,17 @@ export const logrocket = {
             transparent_pricing: true,
             usage_based_pricing: true,
         },
+        // https://docs.logrocket.com/docs/streaming-data-export
+        // https://docs.logrocket.com/docs/integrations
         integrations: {
             airbyte: false,
             azure_blob: false,
-            bigquery: false,
+            bigquery: true,
             community_integrations: false,
-            customer_io: true,
+            customer_io: false,
             datadog: false,
             exports: true,
-            gcs: false,
+            gcs: true,
             google_ads: false,
             hubspot: false,
             imports: true,
