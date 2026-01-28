@@ -561,6 +561,7 @@
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
+        { "source": "/docs/feature-flags/installation", "destination": "/docs/feature-flags/start-here" },
         { "source": "/tutorials/phased-rollout", "destination": "/docs/feature-flags/phased-rollout" },
         { "source": "/tutorials/canary-release", "destination": "/docs/feature-flags/canary-release" },
         { "source": "/tutorials/group-page-machine-flags", "destination": "/docs/feature-flags/targeting-groups" },

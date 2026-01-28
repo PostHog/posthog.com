@@ -63,6 +63,7 @@ const featureFlagFeatures = [
     { text: 'Multi-project flags', url: '/docs/feature-flags/multi-project-feature-flags' },
     { text: 'Property overrides', url: '/docs/feature-flags/property-overrides' },
     { text: 'Evaluation contexts', url: '/docs/feature-flags/evaluation-contexts' },
+    { text: 'A/B testing integration', url: '/docs/experiments' },
 ]
 
 export const Content = () => {

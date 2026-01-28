@@ -3614,7 +3614,6 @@ export const docsMenu = {
                     color: 'blue',
                     featured: true,
                     children: [
-                        { name: 'Overview', url: '/docs/feature-flags/installation' },
                         { name: 'Web', url: '/docs/feature-flags/installation/web' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
