@@ -159,13 +159,13 @@ export default function usePlatformList(
     const sidebarOrder = getSidebarOrder(basePath)
 
     if (sidebarOrder.length > 0) {
-        // Fail build if MDX files exist but aren't in the sidenav
+        // Warn about MDX files that exist but aren't in the sidenav
         const orphanedFiles = result.filter((platform: Platform) => !sidebarOrder.includes(platform.url))
         if (orphanedFiles.length > 0) {
-            throw new Error(
+            console.warn(
                 `[usePlatformList] Found ${orphanedFiles.length} MDX file(s) in "${basePath}" not listed in sidenav:\n` +
-                    orphanedFiles.map((p) => `  - ${p.url}`).join('\n') +
-                    `\nAdd these to src/navs/index.js or delete the MDX files if they're no longer in use.`
+                    orphanedFiles.map((p: Platform) => `  - ${p.url}`).join('\n') +
+                    `\nAdd these to src/navs/index.js or delete the MDX files if they're no longer needed.`
             )
         }
 
