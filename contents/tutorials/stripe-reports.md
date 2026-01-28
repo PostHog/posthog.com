@@ -36,7 +36,7 @@ Once done, PostHog will automatically pull and format your Stripe data for query
 
 Now that your Stripe data is synced into PostHog, you can use it to create insights for your report. Each of these requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
 
-> **Want to get started fast?** Check out our [Stripe starter report template](/templates/stripe-report-dashboard).
+> **Want to get started fast?** Check out our [Stripe starter report template](/templates/stripe-report-dashboard), or [ask PostHog AI to help you create the reports](https://app.posthog.com/#panel=max) you need and write SQL for you.
 
 ### Customer count
 

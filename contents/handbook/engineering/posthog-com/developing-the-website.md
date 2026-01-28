@@ -192,6 +192,26 @@ Once you have cloned the repo, the `contents/` directory contains a few key area
 
 Inside each of these are a series of markdown files for you to edit.
 
+### Posts and blog filtering
+
+There are two ways to filter posts by tag:
+
+1. **Query param** — Add a `post_tags` query param to the URL, e.g., `/posts?post_tags=Comparisons`. This works on the main posts listing and allows saving/sharing filtered URLs.
+
+2. **Static tag pages** — For SEO purposes, we generate static pages at `/{category}/{tag}`, e.g., `/blog/session-replay`. These are generated at build time in `gatsby/createPages.ts`.
+
+#### Hidden from index
+
+Some categories and tags are intentionally hidden from the main posts index view. They still appear when you filter directly to that category or tag.
+
+**Categories hidden from index:** `customers`, `spotlight`, `changelog`, `comparisons`, `notes`, `repost`
+
+**Tags hidden from index:** `Comparisons`
+
+Posts can also set `hideFromIndex: true` in their frontmatter to be excluded.
+
+These exclusions are defined in `src/components/Edition/Posts.tsx` and `src/templates/BlogPost.tsx`.
+
 ## Making edits
 
 ### Creating a new Git branch
