@@ -28,7 +28,7 @@ In our consumption-based pricing model, the first way to reduce spend is to ensu
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume Discount (Based on Credit Purchase Amount)
+#### 1. Volume discount (based on credit purchase amount)
 - **$25k - $60k:** Base discount of 20%
 - **$60k - $100k:** Base discount of 25%
 - **$100k - $250k:** Base discount of 30%
