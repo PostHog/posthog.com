@@ -56,7 +56,7 @@ Beyond optimization, we offer discounts based on four levers:
 - This is about creating predictability for both sides, not artificial deadlines
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle, and is subject to the maximum total discount below
 
-**For Renewals:** +5% additional discount
+**For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 
 > You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
