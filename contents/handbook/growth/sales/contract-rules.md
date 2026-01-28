@@ -22,7 +22,7 @@ Our general principle is that discounts are earned, not given. Each lever repres
 
 Every discount reflects a value exchange that provides a sound basis for our pricing. We don't offer unilateral concessions - better pricing comes from moving on one or more of these levers. This framework gives both sides a clear frame of reference for what drives pricing decisions.
 
-### How Our Discounts Work
+### How our discounts work
 
 In our consumption-based pricing model, the first way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 
