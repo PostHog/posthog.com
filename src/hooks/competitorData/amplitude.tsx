@@ -9,7 +9,7 @@ export const amplitude = {
         product_analytics: {
             available: true,
             pricing: {
-                free_tier: '50k tracked users',
+                free_tier: '10k monthly tracked users',
             },
             features: {
                 advertising_analytics: true,
