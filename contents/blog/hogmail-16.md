@@ -64,7 +64,7 @@ All the ways you can use filters to find useful session recordings.
 
 [What I've learned from users](http://paulgraham.com/users.html) by Paul Graham. For Graham, "users" means founders of YC companies:
 
-- Founders frequently don't listen to the advice of YC partners and live to regret it. Graham posits this is because "so much about startups is counterintuitive. And when you tell someone something counterintuitive, what it sounds to them is wrong."
+- Founders frequently don't listen to [the advice](/newsletter/how-i-get-good-advice) of YC partners and live to regret it. Graham posits this is because "so much about startups is counterintuitive. And when you tell someone something counterintuitive, what it sounds to them is wrong."
 
 - "The educational system in most countries trains you to win by hacking the test instead of actually doing whatever it's supposed to measure. But that stops working when you start a startup."
 
