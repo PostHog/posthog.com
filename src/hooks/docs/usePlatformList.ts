@@ -46,14 +46,28 @@ interface Platform {
 }
 
 /**
- * Recursively searches for a section with the given URL and returns its children URLs
+ * Collects all URLs from a section and its nested children
+ */
+function collectAllUrls(children: any[], parentUrl: string): string[] {
+    const urls: string[] = []
+    for (const child of children) {
+        if (child.url && child.url !== parentUrl) {
+            urls.push(child.url)
+        }
+        if (child.children) {
+            urls.push(...collectAllUrls(child.children, child.url))
+        }
+    }
+    return urls
+}
+
+/**
+ * Searches for a section with the given URL and returns all descendant URLs
  */
 function findSectionChildren(sections: any[], targetUrl: string): string[] {
     for (const section of sections) {
         if (section.url === targetUrl && section.children) {
-            return section.children
-                .filter((child: any) => child.url && child.url !== targetUrl)
-                .map((child: any) => child.url)
+            return collectAllUrls(section.children, targetUrl)
         }
         if (section.children) {
             const result = findSectionChildren(section.children, targetUrl)
