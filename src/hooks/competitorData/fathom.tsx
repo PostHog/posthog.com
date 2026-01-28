@@ -161,7 +161,8 @@ export const fathom = {
         pricing: {
             free_tier: false,
             self_serve: 'Trial only',
-            transparent_pricing: false,
+            // You can see up to 25,000,000 pageviews
+            transparent_pricing: true,
             usage_based_pricing: true,
         },
         security: {
