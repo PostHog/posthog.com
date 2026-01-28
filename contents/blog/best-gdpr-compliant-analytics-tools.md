@@ -360,34 +360,58 @@ GoAccess is open source and has no paid tiers.
 
 ## Frequently asked questions
 
-### Is Google Analytics GDPR compliant?
+<details>
+<summary>Is Google Analytics GDPR compliant?</summary>
 
 **Google Analytics** can be configured for GDPR compliance, but it requires effort. You need cookie consent banners, IP anonymization, and data processing agreements. Several EU data protection authorities have ruled against GA4 implementations, making alternatives like PostHog, Plausible, or Matomo safer choices for EU-focused businesses.
 
-### Do I need cookie consent banners with GDPR-compliant analytics?
+</details>
+
+<details>
+<summary>Do I need cookie consent banners with GDPR-compliant analytics?</summary>
 
 Not always. Tools like **Plausible**, **Fathom**, and **TelemetryDeck** collect no personally identifiable information, so they don't require consent banners. **PostHog** and **Matomo** can be configured for cookieless tracking, which also removes the banner requirement – though this limits some tracking capabilities.
 
-### What's the difference between EU hosting and cookieless tracking?
+</details>
+
+<details>
+<summary>What's the difference between EU hosting and cookieless tracking?</summary>
 
 **EU hosting** means your data is stored on servers within the European Union, which satisfies GDPR data residency requirements. **Cookieless tracking** means no cookies are set on user devices, eliminating the need for consent banners. They solve different problems – you might want both, or just one, depending on your compliance needs.
 
-### Which GDPR-compliant analytics tool is best for product teams?
+</details>
+
+<details>
+<summary>Which GDPR-compliant analytics tool is best for product teams?</summary>
 
 **PostHog** is the best choice for product teams. It combines a full suite of developer tools, including product and web analytics, all with EU hosting. **Matomo** and **Countly** also offer product analytics features, but PostHog's all-in-one approach means fewer tools to manage.
 
-### Which is best for simple website analytics?
+</details>
+
+<details>
+<summary>Which is best for simple website analytics?</summary>
 
 **Plausible** and **Fathom** are both excellent for basic website metrics. They're lightweight, collect no personal data, and don't require cookie banners. **Plausible** is open source if you want to self-host; **Fathom** offers intelligent routing for better global performance.
 
-### Can I use GDPR-compliant analytics without self-hosting?
+</details>
+
+<details>
+<summary>Can I use GDPR-compliant analytics without self-hosting?</summary>
 
 Yes. **PostHog**, **Plausible**, **Fathom**, **Matomo**, and **TelemetryDeck** all offer managed cloud hosting with EU data residency. Self-hosting is optional – it gives you maximum control but isn't required for GDPR compliance.
 
-### What's the best free GDPR-compliant analytics tool?
+</details>
+
+<details>
+<summary>What's the best free GDPR-compliant analytics tool?</summary>
 
 **PostHog** offers the most generous free tier for product analytics: 1 million events and 5,000 session replays per month with EU hosting. For simple website analytics, **Umami** offers 100k events free, and **GoAccess** is completely free and open source (though it requires self-hosting).
 
-### Is Amplitude GDPR compliant?
+</details>
+
+<details>
+<summary>Is Amplitude GDPR compliant?</summary>
 
 **Amplitude** offers EU data residency and SOC 2 certification, so it can be configured for GDPR compliance. However, it's not privacy-first – you'll still need cookie consent banners. If GDPR compliance is a priority, consider [PostHog](/blog/posthog-vs-amplitude) as an alternative with similar features plus transparent pricing.
+
+</details>
