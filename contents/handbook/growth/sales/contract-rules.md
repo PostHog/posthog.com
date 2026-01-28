@@ -36,7 +36,7 @@ Beyond optimization, we offer discounts based on four levers:
 - **$500k - $1M:** Base discount of 40%
 - **$1M+:** Contact us for custom pricing
 
-#### 2. Length of Commitment Discount (Additive)
+#### 2. Length of commitment discount (additive)
 - **1-year commitment:** No additional discount
 - **2-year commitment:** +3% additional discount
 - **3-year commitment:** +5% additional discount
