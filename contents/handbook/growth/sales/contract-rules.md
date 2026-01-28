@@ -70,7 +70,7 @@ Beyond optimization, we offer discounts based on four levers:
 - Product must exceed $1,000/month for 3 consecutive months
 - Maximum 20% total (4 products)
 
-*Why: Platform customers have better outcomes and lower churn. We invest in your success.*
+*Why: Platform customers have better outcomes and lower churn. We are more invested in their success.*
 
 ### Discount examples
 
