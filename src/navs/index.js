@@ -5214,6 +5214,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Saved views',
+                    url: '/docs/customer-analytics/saved-views',
+                    icon: 'IconBookmark',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
