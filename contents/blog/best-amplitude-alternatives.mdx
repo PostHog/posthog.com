@@ -38,7 +38,8 @@ In this guide, we compare the best Amplitude alternatives across analytics, sess
 
 [PostHog](/) (that's us 👋) is an all-in-one platform combining [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [A/B testing](/experiments), and [user surveys](/surveys) into one product. This means it's not just an alternative to Amplitude, but also tools like [LaunchDarkly](/blog/best-launchdarkly-alternatives) and [FullStory](/blog/best-fullstory-alternatives).
 
-Typical PostHog users are engineers, founders, and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
+Typical PostHog users are engineers, founders, and product managers at startups and mid-size companies, particularly B2B companies. Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and many more.
+
 
 ### Key features
 
@@ -83,7 +84,7 @@ Typical PostHog users are engineers, founders, and product managers at startups 
 <summary>Main differences between PostHog and Amplitude</summary>
 
 - PostHog uses usage-based pricing (pay per event/replay); Amplitude charges per Monthly Tracked User (MTU).
-- PostHog offers 1M events, 5,000 replays, 1,500 survey responses free; Amplitude offers 50K MTUs and 1,000 replays.
+- PostHog offers 1M events, 5,000 replays, 1,500 survey responses free; Amplitude offers 10K MTUs and 1,000 replays.
 - PostHog includes error tracking, LLM analytics, and SQL access; Amplitude lacks error tracking and LLM analytics entirely.
 - PostHog is built for engineering-led teams; Amplitude is designed for product and marketing teams.
 
@@ -130,21 +131,25 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Mixpanel?
 
-[Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. Founded in 2009, in recent years it's deprecated additional features, such as A/B testing, to focus on product analytics alone. Their tools enable teams to easily connect to and analyze data from their [data warehouse, CDP](/blog/cdp-vs-data-warehouse), and application(s).
+[Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. While it previously deprecated features like A/B testing to focus on core analytics, Mixpanel has reversed course and expanded substantially since 2024. The platform now includes session replay (web and mobile), heatmaps, experiments, and feature flags alongside its core analytics. Teams can connect Mixpanel to their data warehouse, CDP, or instrument directly via SDKs.
 
 ### Key features
 
-- **Product analytics:** Track user behavior, KPIs, and core metrics with trends, retention, and flows.
+- **Product analytics:** Track user behavior, KPIs, and core metrics with trends, retention, funnels, and flows.
 
-- **Collaborative boards:** Build analysis in collaborative boards that can include reports, text, videos, and GIFs. Embed these boards in other tools.
+- **Session replay:** Watch real user sessions on web and mobile (iOS/Android), with AI-powered summaries to surface key moments.
 
-- **Alerts:** Get automated notifications when there are anomalies in metrics or if they fall outside a positive or negative range.
+- **Heatmaps:** Visualize clicks, scroll depth, and engagement patterns – integrated directly with session replays.
 
-- **Filtered data views:** Hide and filter data on a per-team basis to reduce noise and separate data for privacy reasons.
+- **Experiments & feature flags:** Run A/B tests with statistical rigor and roll out features safely with native feature flagging.
+
+- **Metric trees:** Map how specific engagement metrics connect to business outcomes and track impact across your product.
+
+- **Warehouse connectors:** Sync data bidirectionally with Snowflake, BigQuery, Databricks, and Redshift.
 
 ### How does Mixpanel compare to Amplitude?
 
-Mixpanel and Amplitude are the original product analytics platforms and have battled for many years. Over time, Amplitude has added more features while Mixpanel remains focused on its key product analytics use cases.
+Mixpanel and Amplitude are the original product analytics platforms and have battled for many years. Both have expanded well beyond core analytics – Mixpanel relaunched experimentation and added feature flags in late 2025, while Amplitude has built out session replay and heatmaps. The two platforms are now more similar than ever.
 
 <p>
 <ProductComparisonTable
@@ -170,10 +175,10 @@ Mixpanel and Amplitude are the original product analytics platforms and have bat
 <details>
 <summary>Main differences between Mixpanel and Amplitude</summary>
 
-- Mixpanel focuses purely on product analytics; Amplitude bundles analytics with experiments, feature flags, and surveys.
-- Mixpanel charges per event with 1M events free; Amplitude charges per Monthly Tracked User (MTU) with 50K MTUs free.
-- Mixpanel recently added session replay; Amplitude has had it longer with deeper integration.
-- Amplitude can run queries directly on your data warehouse; Mixpanel syncs to/from warehouses but doesn't sit on top of them.
+- Mixpanel charges per event with 1M events free; Amplitude charges per Monthly Tracked User (MTU) with 10K MTUs free.
+- Amplitude offers warehouse-native queries directly on your data; Mixpanel syncs bidirectionally but doesn't sit on top of your warehouse.
+- Amplitude includes Guides & Surveys as an add-on; Mixpanel doesn't offer native survey functionality.
+- Amplitude launched session replay earlier; Mixpanel's is newer but includes mobile support and AI summaries.
 
 </details>
 
@@ -761,7 +766,7 @@ For most teams, **PostHog** is the best alternative. It includes everything Ampl
 <details>
 <summary>Which alternative has the best free tier?</summary>
 
-**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, and 1 million feature flag requests per month. Amplitude's free tier includes 50K MTUs and 1,000 session replays. Mixpanel offers 1 million events free but lacks session replay on free plans.
+**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, and 1 million feature flag requests per month. Amplitude's free tier includes 10K MTUs and 1,000 session replays. Mixpanel offers 1 million events free but lacks session replay on free plans.
 
 </details>
 
