@@ -82,7 +82,7 @@ async function forwardRequest(request, pathWithSearch) {
   const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
     method: request.method,
     headers: originHeaders,
-    body: request.body,
+    body: request.method !== "GET" && request.method !== "HEAD" ? await request.arrayBuffer() : null,
     redirect: request.redirect
   })
 
@@ -131,7 +131,7 @@ async function forwardRequest(request, pathWithSearch) {
   const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
     method: request.method,
     headers: originHeaders,
-    body: request.body,
+    body: request.method !== "GET" && request.method !== "HEAD" ? await request.arrayBuffer() : null,
     redirect: request.redirect
   })
 
@@ -370,6 +370,18 @@ When creating a worker, Cloudflare offers two formats:
 - **ES Modules** (newer format, required for the code above)
 
 The worker code in this guide uses ES Modules syntax. When creating your worker, make sure you select the **ES Modules** format, not Service Worker.
+
+### Custom events or POST requests not reaching PostHog
+
+If page views work but custom events (like `posthog.capture()`) are missing, your Worker code may not be forwarding request bodies correctly.
+
+The `request.body` in Cloudflare Workers is a `ReadableStream` that can cause issues when forwarded directly with encoded payloads. Update your `forwardRequest` function to explicitly read the body:
+
+```javascript
+body: request.method !== "GET" && request.method !== "HEAD" ? await request.arrayBuffer() : null,
+```
+
+This buffers the request body as binary data before forwarding, ensuring POST requests with event data are transmitted correctly.
 
 ### Page Rules not taking effect
 

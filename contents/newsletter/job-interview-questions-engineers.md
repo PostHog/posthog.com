@@ -79,6 +79,8 @@ Some founders will think or say, either intentionally or through self-delusion, 
 
 >  **Remember:** Not having product-market fit is normal for early-stage startups, so don't be put off by this alone. Your goal is to understand if the company you're applying to is likely to make it or not.
 
+<NewsletterForm />
+
 ## Can the company survive?
 
 Startups that don't have product-market fit will find it hard to raise more money, so it's important they have enough runway (aka money in the bank!) to get there.
@@ -224,6 +226,8 @@ Finally, early-stage companies often fall apart because the founders break up, s
 - **[Senior Engineer](https://jobs.gem.com/zep/am9icG9zdDruahx6m_TnEkWP11kC3JBv?utm_source=posthog) at Zep**
 - **[Founding Software Engineer](https://jobs.gem.com/voker-ai/am9icG9zdDoNMp8onm6ESFRFCYjTu_bY?utm_source=posthog) at Voker**
 - **[Full-Stack Growth Engineer](https://jobs.ashbyhq.com/elevenlabs/5881bc5d-765a-430e-9d28-7d598a0e1a03?utm_source=posthog) at ElevenLabs**
+
+<NewsletterForm />
 
 ## Footnotes
 

@@ -14,6 +14,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { useWindow } from '../../context/Window'
 import TerminalView from 'components/AI/TerminalView'
 import usePostHog from 'hooks/usePostHog'
+import Demos from 'components/Home/Test'
 const PRODUCT_HANDLE = 'posthog_ai'
 
 const CustomDemoSlide = () => {
@@ -120,6 +121,11 @@ export default function PostHogAI(): JSX.Element {
         ],
         custom: [
             {
+                slug: 'demos',
+                name: 'Demos',
+                component: Demos,
+            },
+            {
                 slug: 'roadmap',
                 name: 'Roadmap',
                 component: CustomRoadmapSlide,
@@ -130,8 +136,8 @@ export default function PostHogAI(): JSX.Element {
                 component: CustomPersonasSlide,
             },
             {
-                slug: 'demo',
-                name: 'Demo',
+                slug: 'try-it',
+                name: 'Try it',
                 component: CustomDemoSlide,
             },
             // {
@@ -140,7 +146,7 @@ export default function PostHogAI(): JSX.Element {
             //     component: CustomManifestoSlide,
             // },
         ],
-        order: ['overview', 'features', 'demo', 'videos', 'you', 'roadmap', 'pricing', 'getting-started'],
+        order: ['overview', 'features', 'demos', 'try-it', 'videos', 'you', 'roadmap', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',

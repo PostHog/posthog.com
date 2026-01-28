@@ -150,6 +150,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['feature-flags'],
         label: 'feature/feature-flags',
     },
+    endpoints: {
+        feature: 'Endpoints',
+        owner: ['data-stack'],
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -173,7 +177,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     heatmaps: {
         feature: 'Heatmaps',
-        owner: ['replay'],
+        owner: ['web-analytics'],
     },
     hogql: {
         feature: 'HogQL',
@@ -214,12 +218,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: [],
         notes: (
             <>
-                <TeamMember name="David Newell" photo />
+                Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks
+                is owned by product analytics)
             </>
         ),
+        owner: ['platform-features'],
+        label: 'feature/notebooks',
     },
     onboarding: {
         feature: 'Onboarding',
@@ -390,6 +396,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         notes: <>All teams manage their own settings</>,
         label: 'feature/settings',
     },
+        'source-maps': {
+        feature: 'Source maps',
+        owner: ['error-tracking'],
+    },
     'sql-editor': {
         feature: 'SQL editor',
         owner: ['data-stack'],
@@ -420,6 +430,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Table exports',
         owner: ['analytics-platform'],
     },
+    terraform: {
+        feature: 'Terraform integration',
+        owner: ['analytics-platform'],
+        label: 'feature/terraform',
+    },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
         owner: ['platform-ux'],
@@ -445,6 +460,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Webhook delivery service',
         owner: ['workflows'],
         label: 'feature/pipelines',
+    },
+    'weekly-digest': {
+        feature: 'Weekly digest',
+        owner: ['growth'],
     },
     workflows: {
         feature: 'Workflows',

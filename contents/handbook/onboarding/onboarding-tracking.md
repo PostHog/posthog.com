@@ -36,6 +36,7 @@ These are the statuses we use to track users in the new **Onboarding Pipeline** 
 - `6b. Onboarded — Engaged` - This stage is set right after sending the final outreach. Assigned to those who engaged either over email or also in a call.
 - `6c. Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/onboarding/sales-handover). This can happen at any stage throughout the process.
 - `6d. Churned` - Assigned to churned customers.
+- `7. Paid call purchased` - Assigned when someone buys our consultation via the merch store. The status is applied automatically via [this Workflow](https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow). 
 
 Stages `3a` to `4b` only happen for those customers who engaged with us over email or in a call. For those who never engaged with us, they skip immediately to `5. Awaiting Final Outreach`.
 

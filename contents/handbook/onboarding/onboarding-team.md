@@ -6,7 +6,17 @@ showTitle: true
 
 ## How we work
 
+First and foremost, we’re account-agnostic, which makes us different from other GTM teams. This means that we don’t have our book of customers, and our focus is on being fast, responsive, and available to a huge number of customers. This is precisely why we use, e.g., a Team Link for customers to book the call - they can choose a person closest to their time zone, and both the experience and value provided remain the same across the team. 
+
+Day-to-day, we collaborate closely with Account Executives and Account Managers, especially when a customer would benefit from a dedicated PostHog human, and the Support team on solving issues.
+
+Onboarding sessions are a mine of information about our users and their needs, which makes us a fantastic liaison for the Product teams. We share product feedback whenever it surfaces. 
+
+Since the Onboarding team is still a relatively new addition to a wider GTM team, we're a highly collaborative and creative bunch who are not afraid to try new ideas, iterate, and build the foundation for the future Onboarding endeavors.
+
 ### What does this team do?
+
+The core job of an Onboarding Specialist (OS) is to ensure a successful start of the user journey with PostHog. That means making sure that our customers get the most value out of using PostHog, they are aware of best practices, their setup is solid, and they don’t pay for something they don’t need. Ultimately, we serve as the customer's sparring partner in achieving their goals, so we need to understand their needs, their business, and where they’re coming from. 
 
 The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked in the [onboarding team retention dashboard](https://app.posthog.com/project/2/dashboard/363452).
 
@@ -16,7 +26,7 @@ We also care about net dollar retention for this segment, but we treat it as an 
 
 The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $100 forecast are routed to us. We also handle a couple of other segments:
 
--   YC program participants
+-   YC program participants at the roll-off of the plan.
 -   Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
 -   Startup plan customers with high credit usage (> ~$1500).
 -   Hype startups we want to work with (despite being below $ thresholds), or longer-standing customers that have paid in this range and need billing or setup assistance.
@@ -27,6 +37,23 @@ Since we primarily focus on customers who've signed up and have a forecasted bil
 
 -   Not signed up/generated a bill, but have contacted sales.
 -   Are early-stage startups on the startup plan with no billing/low credit usage (<$500/mo).
+-   Customers who paid over 3 bills
+
+### Merch store consultation
+
+Customers who normally fall outside our scope still have a chance to get help! They can buy an Onboarding consultation [via our merch store](https://posthog.com/merch?product=30-min-onboarding-consultation).
+
+After making the purchase, the customer gets a link to book a meeting, and they can contact our Billing team if they can't find an appropriate time slot. The billing team handles issuing credits/refunds accordingly. However, since it's a paid service, we should prioritize these and try to make space in our calendars, if possible.
+
+A few things to keep in mind:
+
+- The booking link has no expiry, so there's no need to follow up with the customer if they haven't booked the call instantly - they can do so at the most convenient time.
+- If someone did book the meeting but didn't show up at a consultation, issue them credits for the missed meeting, and follow up with the customer to offer a meeting at another time.
+- If they had a call with us and then need more help, we'll offset the onboarding call cost against a professional services package.
+- If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
+- If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
+
+Internally, when someone purchases a call, we get notified in our Slack channel. Check who completed the purchase, look them up in Vitally for more context, and check whether they booked a call. Change the status in Vitally to `Paid Call purchased` for tracking purposes, and add a note if needed.
 
 ### Tooling
 
@@ -34,11 +61,11 @@ Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/s
 
 The team-specific tools for this team are:
 
-- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts
+- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts.
 - [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
-- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1)
-- [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents
-- [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team)
+- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
+- [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.
+- [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team).
 
 ### Internal process (Vitally)
 
@@ -58,18 +85,11 @@ A supplementary view that’s great for getting a general overview of progress.
 
 ### Account analysis
 
--   Take a look at the [Metabase primer](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) and follow the tips included there.
+-   Take a look at the [Metabase primer](https://posthog.com/handbook/onboarding/metabase-account-analysis) and follow the tips included there.
 -   Check and get familiar with the [Account health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking) page.
 -   Use our docs, and link to relevant information.
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
-
-### Paid Onboarding service
-
-Customers can buy an Onboarding session in our [merch store](https://posthog.com/merch?product=30-min-onboarding-consultation). When that happens, we get notified in our Slack channel. Since it's a paid service, we should prioritize these. Check who completed the purchase, look them up in Vitally for more context, and check whether they booked a call. Change the status in Vitally accordingly, and add a note if needed. A few things to keep in mind:
-
-- If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
-- If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
-- If the customer can't find a suitable time to meet, offer them a refund. 
+-   Use Wappalyzer (browser or extension) to understand the customer's tech stack better. Credentials available in 1password.
 
 ## How to succeed
 

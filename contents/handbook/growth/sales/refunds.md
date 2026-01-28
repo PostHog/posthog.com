@@ -123,16 +123,30 @@ You need Support specialist level access to Stripe, ask Simon for access.
 9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
 
 ### Issuing a refund
-Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note.
+Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
 
-1. Navigate to Billing Admin → Refunds and click "Add refund"
-2. Find and select the correct customer (search by organization ID)
-3. Find invoice: Open Stripe in a new tab. Find the same customer in Stripe. Under Invoices, locate the invoice corresponding to the usage period or issue you’re refunding. Copy the Invoice ID.
-4. Paste the Invoice ID into the refund flow in Billing Admin. You’ll see total invoice amount and per product amount breakdown
-5. Allocate refund amounts per product. Refunds must be issued per product. Enter the refund amount for each affected product. You may need to do more math here: for an event spike refund may span Product Analytics, Person Profiles, and Group Analytics. Billing Admin does not automatically split refunds across products, you must do the math and allocate amounts manually. As you enter per product amounts, the total refund amount updates automatically.
-6. Select refund reasons: Choose a Stripe refund reason (required) and select an internal reason (used for internal reporting and analysis)
-7. Add any relevant notes or context (e.g. Zendesk ticket, Slack link, short explanation)
-8. Once you review everything and all looks good save the refund in Billing Admin. This will issue a Stripe credit note, which is processed as a refund to the customer’s default payment method. Stripe automatically sends a notification email to the customer.
+There are two ways to reach the Add Refund screen.
+
+*Option A:*
+
+1. Navigate to Billing Admin → Customers.
+2. Find the right Customer (search by organization ID or customer ID).
+3. Once in the Customer view, scroll down to _Related invoices_ section. Find the right one (you can identify it by its id, dates or amount).
+4. Click on "Start refund"
+
+*Option B:*
+
+1. Navigate to Billing Admin → Invoices.
+2. Find the right invoice (search by invoice ID, organization ID, etc).
+3. Click and open the invoice view. 
+4. Once in the view, click on the top right button "Start refund"
+
+Once you do that (through any of the two options), you'll land on the "Add refund" screen. From there, you can continue with the refund:
+
+1. Allocate refund amounts per product. Refunds must be issued per product. Enter the refund amount for each affected product. You may need to do more math here: for an event spike refund may span Product Analytics, Person Profiles, and Group Analytics. Billing Admin does not automatically split refunds across products, you must do the math and allocate amounts manually. As you enter per product amounts, the total refund amount updates automatically.
+2. Select refund reasons: Choose a Stripe refund reason (required) and select an internal reason (used for internal reporting and analysis)
+3. Add any relevant notes or context (e.g. Zendesk ticket, Slack link, short explanation)
+4. Once you review everything and all looks good save the refund in Billing Admin. This will issue a Stripe credit note, which is processed as a refund to the customer’s default payment method. Stripe automatically sends a notification email to the customer.
 
 ### Fixed fee product refunds
 For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.

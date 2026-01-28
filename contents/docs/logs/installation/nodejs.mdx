@@ -20,11 +20,11 @@ npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @open
 
 </Step>
 
-<Step title="Get your project token" badge="required">
+<Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project token to authenticate log requests. This is the same token you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
 
-You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
 
 </Step>
 
@@ -46,7 +46,7 @@ const sdk = new NodeSDK({
     new OTLPLogExporter({
       url: 'https://us.i.posthog.com/i/v1/logs',
       headers: {
-        'Authorization': `Bearer ${YOUR_PROJECT_TOKEN}`
+        'Authorization': `Bearer ${YOUR_PROJECT_API_KEY}`
       }
     })
   )
@@ -55,13 +55,13 @@ const sdk = new NodeSDK({
 sdk.start();
 ```
 
-Alternatively, you can pass the token as a query parameter:
+Alternatively, you can pass the API key as a query parameter:
 
 ```javascript
 const sdk = new NodeSDK({
   logRecordProcessor: new BatchLogRecordProcessor(
     new OTLPLogExporter({
-      url: `https://us.i.posthog.com/i/v1/logs?token=${YOUR_PROJECT_TOKEN}`
+      url: `https://us.i.posthog.com/i/v1/logs?token=${YOUR_PROJECT_API_KEY}`
     })
   )
 });

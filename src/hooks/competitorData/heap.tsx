@@ -267,6 +267,7 @@ export const heap = {
             proxies: false,
             sdks: false,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',

@@ -76,7 +76,7 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
-                <p>Logs is currently in early alpha. While in alpha and beta, Logs is free to use.</p>
+                <p>Logs is currently in beta. While in beta, Logs is free to use.</p>
                 <p>
                     After the beta, pricing will be based on GB/ingest. We will offer 30 days standard retention. You'll
                     get 50GB ingest free each month, with discounts as your usage grows.
@@ -130,7 +130,7 @@ const Logs: React.FC = () => {
                         buttonText="Get started!"
                         buttonLink="/docs/logs/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie-logs-icon.png"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_logs_29cd8c8402.png"
                         imageClasses="max-h-48 md:max-h-64"
                     />
                 </section>

@@ -1,0 +1,7 @@
+Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). If you're using Vite, including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
+
+```shell file=.env.local
+VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+

@@ -213,7 +213,7 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
                     />
                 </div>
             )}
-            <List className="grid sm:grid-cols-2 mb-4" items={displayedPlatforms} />
+            <List className="grid @2xl:grid-cols-2 @3xl:grid-cols-3 mb-4" items={displayedPlatforms} />
             {remainingCount > 0 && <p className="text-sm font-bold ml-6">+ {remainingCount} more!</p>}
         </>
     )

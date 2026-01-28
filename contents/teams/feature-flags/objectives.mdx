@@ -1,67 +1,75 @@
-### Q4 2025 Objectives
-This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
+### Q1 2026 Objectives
 
-#### Awesome documentation 🚧 <TeamMember name="Dylan Martin" photo /> driving, shared across the team
+This quarter we're focused on finishing what we started, shipping high-impact new features, and deeply understanding our users. We're baking the half-baked, building the things our users want (and that our competition doesn't), building AI-powered cleanup tools, and doing the user research to figure out what's next.
 
-**Status: In progress** — Improved usage docs, but new how-to guides still needed
+#### Bake the half-baked (Driver: <TeamMember name="Dustin Byrne" /> and <TeamMember name="Gustavo Henrique Strassburger" />)
 
-Our docs should be as good as the <SmallTeam slug="experiment" />'s. We're partnering with the <SmallTeam slug="content" /> to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
+We've shipped a lot of features that are 80% done. Time to finish them by clearing the [issue backlogs](https://github.com/PostHog/posthog/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20label%3Ateam%2Ffeature-flags%20-project%3APostHog%2F112) for each.
 
-#### Make local evaluation the default server-side evaluation strategy 🔄 <TeamMember name="Phil Haack" photo />
+- **Cohorts** <TeamMember name="Gustavo Henrique Strassburger" photo /> — Clear the `feature/cohorts` backlog
+- **Early access** <TeamMember name="Dustin Byrne" photo /> — Clear the `feature/early-access` backlog
 
-**Status: Partially complete** — Stretch goal: ETag support and better docs/guides
+#### Remote config to maintenance mode (Driver: <TeamMember name="Dylan Martin" />)
 
-Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
-- Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
-- Rewriting the endpoint in Rust for better performance
-- Adding ETag support for efficient caching
-- Writing better docs and guides; specifically around best practices for including relevant properties alongside the flag when calling e.g. `getFeatureFlag` or `isFeatureEnabled`
+Remote config is an interesting idea but right now it's a bit of a feature looking for a market, and its presence causes feature bloat without corresponding to much user value. We will move this feature to maintenance mode (existing users will still be able to use remote config flags, but new users will not be able to make new remote config flags) until we have bandwidth/demand to work on it further.
 
-#### Ship a Java SDK ✅ <TeamMember name="Dustin Byrne" photo />
+#### Sand the flags UX (Driver: <TeamMember name="Dylan Martin" />)
 
-**Status: Complete**
+Polish the overall flags experience — scheduled flags, rollouts, and general UX improvements.
 
-Java developers need an official SDK. We're shipping one and iterating based on feedback.
+- A/B test any big UI changes rather than assuming they're better
 
-#### Improve SDK standardization 🚧 <TeamMember name="Dustin Byrne" photo />
+#### Ship new targeting capabilities (Driver: <TeamMember name="Dylan Martin" />)
 
-**Status: In progress**
+New targeting options that unlock real value for users.
 
-Inconsistent SDKs lead to bugs. We're burning down the [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425) to create a consistent experience across the stack.
+- **SemVer targeting** — Support matching semantic versions (`<`, `>`, `>=`, `<=`) for app version in release conditions. Removes the need for painful regex workarounds. [#24485](https://github.com/PostHog/posthog/issues/24485)
+- **User & Group targeting** — Allow targeting flags to users AND groups, not just one or the other. [#33206](https://github.com/PostHog/posthog/issues/33206)
 
-#### Mature the Cohorts UI/UX ✅ <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Ship behavioral cohorts (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
 
-**Status: Complete**
+Target flags based on user behavior (e.g. "users who completed X event").
 
-Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so cohorts is actually pleasant to use by end of Q4.
+- [Megaissue #14796](https://github.com/PostHog/posthog/issues/14796)
 
-#### Real-time feature flags 🚧 <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Importing flags from competitors (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
 
-**Status: In progress**
+Get the Statsig and LaunchDarkly import flow over the line.
 
-Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
+#### Ship AI-powered flag cleanup (Driver: <TeamMember name="Dylan Martin" />, but could be anyone with bandwidth)
 
-#### Finish behavioral cohort targeting 🚧 <TeamMember name="Gustavo Henrique Strassburger" photo />
+Automate stale flag cleanup. We've come up with a principled definition for what "stale" means — now we need to build the tooling. Eventually, I imagine this is a goal we share with PostHog AI/Twig somewhat, but for this quarter the feature flags team will commit to a tool that:
 
-**Status: In progress**
+- identifies stale flags in the UI and gives users the ability to remove them in bulk
+- provides a copyable prompt for LLM-assisted IDEs to use to clean up their flags on the application-side
 
-We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
+#### Launch Evaluation Contexts to early access (Driver: <TeamMember name="Dylan Martin" />)
 
-#### Natural language flag creation ✅ <TeamMember name="Phil Haack" photo />
+Move [Evaluation Contexts](/docs/feature-flags/evaluation-contexts) from select access to early access/beta. Currently piloting with a few customers — this quarter we'll clean up the UX and copy, then open it up more broadly.
 
-**Status: Complete**
+#### Understand users better (Driver: <TeamMember name="Annika Schmid" />)
 
-Building flags with AI. You describe what you want in plain English, Max builds the flag.
+A quarter is too short to interview users, make changes, and measure metrics. The features we're already planning should move the metrics we care about — interviews help us (1) figure out what to prioritize next and (2) identify things we might be missing.
 
-#### Platform improvements 🚧 <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Phil Haack" photo />
+- Conduct 10-15 user interviews
+- Understand: Why do people use flags? What holds them back? Why do they drop off?
+- Every engineer to attend at least 2 interviews
+- Use findings to inform Q2 priorities
 
-**Status: In progress**
+#### External cache (Driver: <TeamMember name="Dustin Byrne" />)
 
-Fixing the foundations:
-- Finishing the persons database split (shared with ingestion team)
-- Move our deployment progress from a rollout (this experience was buggy at scale) to a k8s deployment
-- Right-size our k8s infrastructure with better alerting on nodepool usage and CPU utilization
-- Decouple the flags service from the production redis so that we can have 100% redis usage for flag/team reads AND we can isolate flags redis usage from main app redis usage (useful for any future incidents; minimizes the blast radius)
-- Decoupling `/flags` from the writer database so flags stay up even when the database is down
-- Rewriting `/evaluation_reasons` in Rust
-- Deprecating the legacy `/decide` endpoint
+When using local evaluation, SDKs fetch feature flag definitions and store them in memory. In highly distributed or stateless environments, it's preferred to store those feature flag definitions in a shared cache.
+
+Currently, Node.js and Python SDKs have experimental support for shared, external caching of feature flag definitions. In Q1 we'd like to:
+
+- Solidify the caching API, moving it out of "experimental" status
+- Expand the caching API to other server-side SDKs
+
+#### Better debuggability (Driver: <TeamMember name="Dustin Byrne" />)
+
+Make it way easier to understand what's happening with your flags. [#38669](https://github.com/PostHog/posthog/issues/38669)
+
+- Show users why flag evaluation failed when it fails
+- Show users why flag evaluations returned what they did when they succeed
+- Stretch: Streamline how we send flag events to ClickHouse
+- Stretch: Improve how the UI renders feature flag data

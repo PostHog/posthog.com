@@ -58,9 +58,6 @@ export const posthog = {
                 ab_experiments: true,
             },
         },
-        llm_analytics: {
-            available: true,
-        },
         session_replay: {
             available: true,
             beta: false,
@@ -480,11 +477,12 @@ export const posthog = {
         cdp: {
             available: true,
             features: {
-                number_of_integrations: '60+',
+                number_of_integrations: '200+',
                 realtime_streaming: true,
                 custom_transformations: true,
                 no_code_setup: true,
                 built_in_analytics: true,
+                
             },
         },
         llm_analytics: {
@@ -494,10 +492,32 @@ export const posthog = {
                 cost_tracking: true,
                 generation_tracking: true,
                 latency_tracking: true,
-                prompt_evaluations: false,
+                prompt_evaluations: true,
                 prompt_playground: true,
                 token_tracking: true,
                 trace_visualization: true,
+                error_tracking: true,
+                clustering: true,
+                system_prompts: true,
+                trace_summarization: true,
+                llm_translation: true,
+            },
+        },
+        workflows: {
+            available: true,
+            features: {
+                real_time_triggers: true,
+                email_editor: true,
+                cohort_targeting: true,
+                native_event_triggers: true,
+                user_identity: true,
+                user_properties: true,
+                branching_logic: true,
+                no_data_syncing: true,
+                unified_analytics: true,
+                experiment_triggers: true,
+                webhook_actions: true,
+                run_based_pricing: true,
             },
         },
         data_warehouse: {
@@ -638,6 +658,7 @@ export const posthog = {
             sdks: '14',
             server_side_sdks: true,
             sql: true,
+            terraform: true,
             tv_sdks: false,
         },
         tools: {
