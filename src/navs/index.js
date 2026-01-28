@@ -39,6 +39,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/hubspot',
                 },
                 {
+                    name: 'Klaviyo',
+                    url: '/docs/cdp/sources/klaviyo',
+                },
+                {
                     name: 'Zendesk',
                     url: '/docs/cdp/sources/zendesk',
                 },
@@ -4611,6 +4615,10 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Klaviyo',
+                            url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
                             name: 'MongoDB',
                             url: '/docs/data-warehouse/sources/mongodb',
                         },
@@ -5202,6 +5210,13 @@ export const docsMenu = {
                     name: 'Customer profiles',
                     url: '/docs/customer-analytics/customer-profiles',
                     icon: 'IconPerson',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Saved views',
+                    url: '/docs/customer-analytics/saved-views',
+                    icon: 'IconBookmark',
                     color: 'purple',
                     featured: true,
                 },
