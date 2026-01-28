@@ -249,9 +249,9 @@ export const sentry = {
             sql: false,
         },
         tools: {
-            cms: true,
+            cms: false,
             notebooks: false,
-            project_management_tools: true,
+            project_management_tools: false,
         },
         integrations: {
             azure_blob: false,
