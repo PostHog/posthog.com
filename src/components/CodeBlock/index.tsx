@@ -160,30 +160,50 @@ const SyncedCodeBlock = ({
 
     // Find the initial language based on stored preference
     const storedValue = preferences[syncKey]
+
+    // Debug logging
+    console.log('[CodeBlock] SyncedCodeBlock render:', {
+        syncKey,
+        storedValue,
+        preferences,
+        languages: languages.map((l) => ({
+            label: l.label,
+            file: l.file,
+            language: l.language,
+            key: getOptionKey(l),
+        })),
+    })
+
     const initialLanguage = storedValue
         ? languages.find((lang) => getOptionKey(lang) === storedValue) || languages[0]
         : languages[0]
 
     const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(initialLanguage)
 
-    // Sync with preference changes from other code blocks
+    // Sync with preference changes from other code blocks OR when preferences load from localStorage
     React.useEffect(() => {
         const storedValue = preferences[syncKey]
         if (storedValue) {
             const matchingLanguage = languages.find((lang) => getOptionKey(lang) === storedValue)
-            if (matchingLanguage && getOptionKey(matchingLanguage) !== getOptionKey(currentLanguage)) {
+            if (matchingLanguage) {
+                console.log('[CodeBlock] Syncing to stored preference:', { syncKey, storedValue, matchingLanguage })
                 setCurrentLanguage(matchingLanguage)
             }
         }
-    }, [preferences, syncKey, languages])
+    }, [preferences[syncKey], languages])
 
     const handleChange = React.useCallback(
         (language: LanguageOption) => {
+            const key = getOptionKey(language)
+            console.log('[CodeBlock] handleChange:', { syncKey, language, key })
             setCurrentLanguage(language)
             // Only persist preferences if this language exists in the available options
             // This ensures selecting an option only affects code blocks that have that option
-            if (languages.some((lang) => getOptionKey(lang) === getOptionKey(language))) {
-                setPreference(syncKey, getOptionKey(language))
+            if (languages.some((lang) => getOptionKey(lang) === key)) {
+                console.log('[CodeBlock] Persisting preference:', { syncKey, key })
+                setPreference(syncKey, key)
+            } else {
+                console.log('[CodeBlock] NOT persisting - language not in options')
             }
         },
         [syncKey, setPreference, languages]
