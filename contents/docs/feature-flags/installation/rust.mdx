@@ -1,33 +1,13 @@
 ---
-title: Rust
-github: 'https://github.com/PostHog/posthog-rs'
+title: Rust feature flags installation
 platformLogo: rust
-features:
-  eventCapture: true
-  userIdentification: false
-  featureFlags: true
-  groupAnalytics: true
-  surveys: false
-  llmAnalytics: false
 ---
-
-## Installation
 
 import RustInstall from '../../integrate/_snippets/install-rust.mdx'
 
 <RustInstall />
 
-## Capturing events
-
-import RustSendEvents from '../../integrate/send-events/_snippets/send-events-rust.mdx'
-
-<RustSendEvents />
-
-## Feature flags
-
-import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
-
-<FeatureFlagsLibsIntro />
+## Using feature flags
 
 ### Boolean feature flags
 
@@ -37,7 +17,9 @@ use posthog_rs::FlagValue;
 let is_enabled = client.is_feature_enabled(
     "flag-key".to_string(),
     "distinct_id_of_your_user".to_string(),
-    None, None, None
+    None, // groups
+    None, // person_properties
+    None, // group_properties
 ).await.unwrap();
 
 if is_enabled {
@@ -139,27 +121,6 @@ let flag = client.get_feature_flag(
 ).await.unwrap();
 ```
 
-## Local evaluation
+import FFNextSteps from './_snippets/ff-next-steps.mdx'
 
-For improved performance, you can evaluate feature flags locally by enabling local evaluation. This caches flag definitions and evaluates them without making API requests for each flag check.
-
-To enable local evaluation, you need a [personal API key](/docs/api#how-to-obtain-a-personal-api-key) and to configure the client:
-
-```rust
-use posthog_rs::ClientOptionsBuilder;
-
-let options = ClientOptionsBuilder::default()
-    .api_key("your-project-api-key")
-    .personal_api_key("your-personal-api-key")
-    .enable_local_evaluation(true)
-    .poll_interval_seconds(30) // Optional, defaults to 30
-    .build()
-    .unwrap();
-
-let client = posthog_rs::client(options).await;
-```
-
-When local evaluation is enabled, flag definitions are fetched on initialization and periodically refreshed in the background. Flag evaluation then happens locally without network requests, providing 100-1000x faster performance.
-
-> **Note:** Local evaluation requires providing any person properties, groups, or group properties needed to evaluate the flag's release conditions, since PostHog can't fetch these automatically without a server request.
-
+<FFNextSteps />
