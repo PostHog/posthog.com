@@ -5623,6 +5623,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Link session replay',
+                    url: '/docs/logs/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
                     name: 'Resources',
                 },
                 {

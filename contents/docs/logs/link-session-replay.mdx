@@ -1,0 +1,127 @@
+---
+title: Link session replay
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Connecting your backend logs to frontend session replays provides complete visibility into the user journey, helping you understand the full context around issues in your application.
+
+## Why link to session replay?
+
+By including session IDs and user identity in your logs, you can:
+- **See the full user journey**: Navigate from a log entry directly to the session replay to see what the user was doing
+- **Debug issues faster**: Quickly find and watch the exact session where an error or issue occurred
+- **Correlate logs with user actions**: Match backend log events with actual user experience
+
+## Prerequisites
+
+- A [logging client installed](/docs/logs/installation) on your backend
+- The [PostHog JavaScript SDK](/docs/libraries/js) on your frontend
+- [Session replay enabled](/docs/session-replay/installation) if you want to link to replays (you can still pass `posthogDistinctId` without session replay to link logs to a user profile)
+
+## Implementation
+
+To link logs to session replays, you need to pass the session ID and user identity from your frontend to your backend, then include them as log attributes.
+
+### Frontend: Get the session ID
+
+In your frontend code, retrieve the current session ID and send it with your API requests:
+
+```javascript
+// In your frontend code
+import posthog from 'posthog-js'
+
+// Get the current session ID
+const sessionId = posthog.getSessionId()
+
+// Send it with your API request
+const response = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    message: userInput,
+    sessionId: sessionId  // Include session ID
+  })
+})
+```
+
+### Backend: Include session ID and user identity in logs
+
+Once you have the session ID, include it along with the user's identity using the `sessionId` and `posthogDistinctId` attributes. These examples assume you've already [set up a logging client](/docs/logs/installation) for your language.
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+import { logs } from '@opentelemetry/api-logs'
+
+const logger = logs.getLogger('my-app')
+
+app.post('/api/chat', async (req, res) => {
+  const { message, sessionId } = req.body
+  const userId = req.userId // ... get your user ID
+
+  logger.emit({
+    severityText: 'info',
+    body: 'Chat request received',
+    attributes: {
+      posthogDistinctId: userId,       // Links to PostHog user
+      sessionId: sessionId,            // Links to session replay
+      endpoint: '/api/chat',
+    },
+  })
+
+  // ... handle the request
+
+  res.json({ success: true })
+})
+```
+
+```python file=Python
+import logging
+
+logger = logging.getLogger(__name__)
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.json
+    message = data['message']
+    session_id = data.get('sessionId')
+    user_id = current_user.id
+
+    logger.info(
+        "Chat request received",
+        extra={
+            "posthogDistinctId": user_id,     # Links to PostHog user
+            "sessionId": session_id,           # Links to session replay
+            "endpoint": "/api/chat",
+        }
+    )
+
+    # ... handle the request
+
+    return jsonify({"success": True})
+```
+
+</MultiLanguage>
+
+> **Note:** If you don't include `posthogDistinctId`, logs won't be linked to a user. If you don't include `sessionId`, logs won't be linked to a session replay. You can use either or both independently.
+
+## Viewing linked replays
+
+Once you've set up session linking, you can navigate from logs to their corresponding session replays:
+
+1. In the [logs view](https://app.posthog.com/logs), find the log entry you're interested in
+2. Click the session replay button to jump directly to the replay
+3. Watch the user's interaction in context alongside the backend logs
+
+This linking helps you correlate backend log events with actual frontend user behavior, enabling faster debugging and better understanding of issues as they occur in your application.
+
+## See also
+
+- [Session replay installation](/docs/session-replay/installation)
+- [Logs installation](/docs/logs/installation)
+- [Search logs](/docs/logs/search)
