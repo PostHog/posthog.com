@@ -2741,6 +2741,10 @@ export const docsMenu = {
                             url: '/docs/settings/activity-logs',
                         },
                         {
+                            name: 'Approvals',
+                            url: '/docs/settings/approvals',
+                        },
+                        {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
@@ -5617,6 +5621,12 @@ export const docsMenu = {
                     icon: 'IconSearch',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'Link session replay',
+                    url: '/docs/logs/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
                 },
                 {
                     name: 'Resources',
