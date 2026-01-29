@@ -641,6 +641,8 @@ If you see an unusual number of visitors in your project, you can try and unders
 
 If a specific user agent is causing problems (many more events than other user agents), you can block it by adding it to `custom_blocked_useragents` in your PostHog initialization:
 
+> **Learn more:** See the comprehensive [bot filtering guide](/docs/data/bot-filtering) for all available bot detection and filtering methods.
+
 ```ts
 posthog.init('<ph_project_api_key>', {
   custom_blocked_useragents: ['<user_agent_string>']

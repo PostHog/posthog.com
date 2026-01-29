@@ -1,0 +1,234 @@
+---
+title: Bot filtering
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+PostHog provides multiple methods to filter bot and automated traffic from your analytics data. This guide covers all available approaches, from client-side blocking to server-side filtering.
+
+## Overview
+
+PostHog handles bot traffic through several mechanisms:
+
+1. **Client-side automatic blocking** - The JavaScript SDK automatically blocks known bots before events are sent
+2. **Client-side tagging** - Mark bot events with properties so you can filter them later
+3. **Server-side filtering** - Use CDP transformations to filter bots based on user agents or IP addresses
+4. **Manual analysis** - Use the `$raw_user_agent` property to identify and filter bots yourself
+
+## Client-side bot blocking (JavaScript SDK)
+
+By default, the PostHog JavaScript SDK automatically blocks events from known bots and crawlers before they're sent to PostHog.
+
+### How it works
+
+The SDK maintains a list of known bot user agents including:
+
+- **Search engine crawlers**: googlebot, bingbot, duckduckbot, linkedinbot
+- **SEO tools**: ahrefsbot, semrushbot, screaming frog
+- **AI crawlers**: gptbot, oai-searchbot, chatgpt-user, perplexitybot
+- **Monitoring tools**: uptimerobot, pingdom
+- **Headless browsers**: headlesschrome, puppeteer, playwright, cypress
+
+When a bot is detected, **the event is not sent to PostHog at all** - it's dropped client-side.
+
+See the [full list of blocked user agents](https://github.com/PostHog/posthog-js/blob/main/packages/core/src/utils/bot-detection.ts) in the PostHog JS repository.
+
+### Adding custom blocked user agents
+
+You can block additional user agents beyond PostHog's defaults using the `custom_blocked_useragents` config option:
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    custom_blocked_useragents: [
+        'my-internal-tool',
+        'lighthouse',
+        'my-custom-bot'
+    ]
+})
+```
+
+The SDK performs case-insensitive substring matching, so `'lighthouse'` will match user agents containing "Lighthouse", "lighthouse", "LIGHTHOUSE", etc.
+
+### Opting out of automatic bot blocking
+
+If you want to receive bot events but mark them so you can filter later, use the `opt_out_useragent_filter` option:
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    opt_out_useragent_filter: true
+})
+```
+
+When enabled, bot events are sent to PostHog with a `$browser_type` property set to either:
+- `'bot'` - The event came from a detected bot
+- `'browser'` - The event came from a regular browser
+
+You can then filter events in PostHog using the `$browser_type` property.
+
+## Raw user agent data
+
+Every event sent by the JavaScript SDK includes a `$raw_user_agent` property containing the complete user agent string. You can use this to:
+
+- Identify bots that aren't in PostHog's default blocklist
+- Create custom filters based on user agent patterns
+- Analyze user agent distributions using trends
+
+### Example: Finding bots in your data
+
+To identify potential bot traffic:
+
+1. Go to **Product analytics** > **Trends**
+2. Filter events where `$raw_user_agent` contains common bot patterns like "bot", "crawler", "spider"
+3. Analyze the results to find user agents you want to block
+
+Once you've identified bots, you can either:
+- Add them to `custom_blocked_useragents` for client-side blocking
+- Filter them in your queries using the `$raw_user_agent` property
+- Use server-side filtering (see below)
+
+## Server-side bot filtering (CDP)
+
+For more control over bot filtering, you can use PostHog's CDP (Customer Data Platform) transformations to filter bot traffic server-side.
+
+### Bot-blocking transformation
+
+PostHog provides a built-in bot-blocking transformation that filters events based on:
+- **User agent patterns** - Similar to client-side blocking
+- **IP address ranges** - Block known bot IP ranges from providers like Ahrefs, Bing, and Google
+
+To set up bot-blocking:
+
+1. Go to **Data pipeline** > **Transformations**
+2. Click **New transformation**
+3. Search for and select the **Bot detection** template
+4. Configure the transformation with your custom rules (optional)
+5. Enable the transformation
+
+### Custom IP prefixes
+
+The bot-blocking transformation includes IP ranges for major bot providers, but you can add your own using the `customIpPrefixes` parameter:
+
+```typescript
+// In your transformation configuration
+{
+    customIpPrefixes: [
+        '192.0.2.0/24',      // Your custom IP range
+        '198.51.100.0/24',   // Another custom IP range
+    ]
+}
+```
+
+### Custom transformation for advanced filtering
+
+For more complex bot detection logic, you can create a custom transformation using Hog. For example, to drop events based on multiple criteria:
+
+```hog
+fun processEvent(event) {
+    let userAgent := event.properties.$raw_user_agent
+    let ip := event.properties.$ip
+
+    // Drop events from specific user agents
+    if (matchesPattern(userAgent, '.*bot.*')) {
+        return null
+    }
+
+    // Drop events from specific IP ranges
+    if (isInIpRange(ip, '192.0.2.0/24')) {
+        return null
+    }
+
+    return event
+}
+```
+
+Learn more about [customizing transformations](/docs/cdp/transformations/customizing-transformations).
+
+## Filtering internal and test traffic
+
+In addition to bot filtering, you may want to filter internal team traffic or test events. PostHog provides separate tools for this:
+
+- **Project settings** - Configure internal user filters at **Settings** > **Project** > **Internal and test user filtering**
+- **Test account filtering** - Many queries and insights include a "Filter out internal and test users" toggle
+
+These filters use different criteria than bot detection (typically email domains, IP addresses, or specific user properties).
+
+## Best practices
+
+### When to use each approach
+
+| Approach | Best for | Pros | Cons |
+|----------|----------|------|------|
+| **Client-side automatic blocking** | Most use cases | No cost for bot events, automatic updates | Can't analyze bot traffic, only works in browser |
+| **Client-side tagging** (`opt_out_useragent_filter`) | Analyzing bot patterns | Can review bot behavior, flexible filtering | Increases event volume and costs |
+| **Server-side filtering** (CDP) | Advanced scenarios, non-browser SDKs | Centralized logic, IP-based filtering, works for all SDKs | Requires configuration, bot events count toward ingestion |
+| **Manual filtering** (`$raw_user_agent`) | Custom bot detection | Full control, works retroactively | Requires manual maintenance |
+
+### Recommended strategy
+
+For most users, we recommend:
+
+1. **Start with default client-side blocking** - It handles the majority of bot traffic automatically
+2. **Add custom blocked user agents** - Block any internal tools or known scrapers specific to your site
+3. **Monitor with `$raw_user_agent`** - Periodically check for new bot patterns in your data
+4. **Use server-side filtering for edge cases** - Only if you need IP-based blocking or have specific requirements
+
+### Avoiding common pitfalls
+
+- **Don't block legitimate monitoring tools** - Be careful blocking user agents like "lighthouse" if you use Google Lighthouse for performance monitoring
+- **Test before blocking** - Use `opt_out_useragent_filter: true` temporarily to see what would be blocked before enabling permanent blocking
+- **Consider costs** - If using `opt_out_useragent_filter` or server-side filtering, bot events count toward your event volume
+- **Document your custom blocks** - Maintain a list of why each custom user agent was blocked to avoid confusion later
+
+## Known issues and limitations
+
+### Sophisticated bots may bypass user agent filtering
+
+Some bots spoof legitimate user agents to avoid detection. For example, a recent issue identified bots using fake Chrome user agents with abnormally high version numbers (e.g., `Chrome/1234.5678.9999.0000`).
+
+If you notice suspicious traffic patterns:
+
+1. Use trends to analyze the `$raw_user_agent` property for anomalies
+2. Look for patterns like impossible version numbers or suspicious user agent strings
+3. Add these patterns to your `custom_blocked_useragents` or create a custom CDP transformation
+4. Report the issue in the [posthog-js GitHub repository](https://github.com/PostHog/posthog-js/issues) so PostHog can update the default blocklist
+
+### Client-side blocking only works in browsers
+
+The automatic bot blocking in `posthog-js` only works in browser environments. If you're using PostHog from:
+
+- **Server-side SDKs** (Node, Python, etc.) - Use server-side filtering via CDP
+- **Mobile apps** - Most mobile SDKs don't include automatic bot filtering (though mobile bot traffic is typically much lower)
+- **Backend APIs** - Use server-side filtering via CDP
+
+### Testing with headless browsers
+
+If you're using headless browsers for E2E testing (Playwright, Puppeteer, Cypress), they're detected as bots by default. To allow events during testing:
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    opt_out_useragent_filter: process.env.NODE_ENV === 'test'
+})
+```
+
+Alternatively, use the "Filter out internal and test users" feature to filter test events based on other properties.
+
+## Related documentation
+
+- [JavaScript SDK configuration](/docs/libraries/js/config) - Full list of config options including `custom_blocked_useragents`
+- [CDP transformations](/docs/cdp/transformations) - Create custom transformation logic
+- [Web analytics troubleshooting](/docs/web-analytics/troubleshooting) - Troubleshooting bot-related issues in web analytics
+- [Internal user filtering](/docs/product-analytics/trends/filters) - Filter internal team traffic
+
+## Support and feedback
+
+If you need help with bot filtering or want to report a bot that should be added to the default blocklist:
+
+- Use the in-app feedback form (question mark icon in PostHog)
+- Raise an issue in the [posthog-js GitHub repository](https://github.com/PostHog/posthog-js/issues)

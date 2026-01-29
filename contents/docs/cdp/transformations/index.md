@@ -9,7 +9,7 @@ As PostHog data arrives, you can transform it *immediately* before ingestion. Yo
 - Enriching events with geo information
 - Dropping unnecessary properties
 <!-- - Writing custom transformations using our Hog programming language -->
-- Filtering out bot traffic
+- Filtering out bot traffic (see our [bot filtering guide](/docs/data/bot-filtering) for details)
 - Much more.. 
 
 PostHog enables you to transform your events in realtime using a variety of pre-built transformations. Check out the [data pipelines](https://us.posthog.com/pipeline/overview) tab and choose **transformations** to get started.
