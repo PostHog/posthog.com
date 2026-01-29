@@ -5637,6 +5637,12 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'red',
                 },
+                {
+                    name: 'Changelog',
+                    url: '/docs/logs/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
+                },
             ],
         },
         {
