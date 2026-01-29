@@ -21,7 +21,7 @@ const Support: React.FC = () => {
             <Intro
                 subheader="Getting started"
                 title="Support"
-                description="Built-in customer support with an embeddable chat widget and unified inbox. Automatically links conversations to session replays and user context."
+                description="Built-in customer support with an embeddable chat widget and a unified inbox with session replays and user context."
                 buttonText="Get started"
                 buttonLink="/docs/support/start-here"
                 imageClasses="max-h-48 md:max-h-64"
