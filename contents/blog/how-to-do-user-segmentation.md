@@ -86,6 +86,6 @@ PostHog is a powerful tool for user segmentation because you can explore segment
 
 - [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to use segmentation and how to apply if to your business
 
-- [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
+- [How to actually measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 <NewsletterForm />
