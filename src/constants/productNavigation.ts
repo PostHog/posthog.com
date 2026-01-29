@@ -2,10 +2,17 @@ import React from 'react'
 import * as Icons from '@posthog/icons'
 
 // Popular products to highlight in the menu
-export const popularProducts = ['web_analytics', 'product_analytics', 'session_replay', 'feature_flags', 'experiments']
+export const popularProducts = [
+    'posthog_ai',
+    'web_analytics',
+    'product_analytics',
+    'session_replay',
+    'feature_flags',
+    'experiments',
+]
 
 // Newest products to highlight in the menu
-export const newestProducts = ['posthog_ai', 'llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
+export const newestProducts = ['logs', 'posthog_ai', 'llm_analytics', 'error_tracking', 'web_analytics']
 
 // Category ordering for display
 export const categoryOrder = [
@@ -50,7 +57,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
     data: ['data-stack', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
-    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'error_tracking', 'early_access'],
+    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'logs', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
         'product_analytics',
