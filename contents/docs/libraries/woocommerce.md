@@ -40,3 +40,22 @@ Once this action is created, you can get an overview of conversions by going to 
 />
 
 To dive deeper into your conversions, you can use [funnels](/docs/product-analytics/funnels) to add multiple steps, break down by properties, and see timings.
+
+## Using a third party plugin
+
+Another option is to use a third party plugin like [Integrate PostHog Web Analytics](https://wordpress.org/plugins/integrate-posthog-web-analytics/).
+
+The workflow for this is:
+
+1. Install and activate the plugin.
+2. Navigate to `Settings > Integrate PostHog Web Analytics`.
+3. Enter your Project API Key, Project ID and PostHog region.
+4. Click `Save Changes`.
+
+To then track conversions in WooCommerce:
+
+1. Click the `WooCommerce` tab.
+2. Tick the checkboxes for the events you'd like to track, including viewing products, cart and checkout actions.
+3. Click `Save Changes`
+
+These actions will then be available in PostHog's events.
