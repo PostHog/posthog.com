@@ -480,8 +480,8 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     {/* Sidebar - overlay on mobile, normal flow on desktop */}
                     <motion.div
                         id="nav"
-                        className="flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
-                                   fixed left-2 top-[47px] bottom-16 z-50 
+                        className="flex-shrink-0 overflow-hidden text-primary
+                                   fixed left-2 top-[47px] bottom-16 z-50
                                    @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
                         initial={{
                             width: '250px',
