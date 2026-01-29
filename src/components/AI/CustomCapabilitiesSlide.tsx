@@ -150,7 +150,7 @@ export default function CustomCapabilitiesSlide(): JSX.Element {
                                     {mode.features.map((feature, index) => (
                                         <div key={index} className="flex gap-4">
                                             <div
-                                                className={`shrink-0 size-8 rounded-full bg-${mode.color}/20 text-${mode.color} flex items-center justify-center text-base font-bold`}
+                                                className={`shrink-0 size-8 rounded-full bg-${mode.color}/10 text-${mode.color} flex items-center justify-center text-base font-bold`}
                                             >
                                                 {index + 1}
                                             </div>
