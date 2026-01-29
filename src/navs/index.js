@@ -715,6 +715,10 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/developing-the-wizard',
             },
             {
+                name: 'How to publish changelog',
+                url: '/handbook/docs-and-wizard/changelog',
+            },
+            {
                 name: 'Onboarding docs',
                 url: '/handbook/docs-and-wizard/onboarding-docs',
             },

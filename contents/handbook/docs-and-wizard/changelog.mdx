@@ -1,0 +1,143 @@
+---
+title: How to publish changelog
+sidebar: Handbook
+showTitle: true
+---
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+We have one of the coolest [changelogs](/changelog) on the internet. It's also one of the busiest. 
+
+As a company that ships weirdly fast, it's important to share what we're working on with as many people as possible, as often as possible. The changelog is a great way to do that.
+
+<ProductVideo 
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/changelog_handbook_1_8038f2d9d4.mp4"
+  autoPlay={false} 
+  muted={false} 
+  loop={false}
+  background={false}
+  alt="The /changelog page on the website"
+  classes="rounded"
+/>
+
+<Caption>
+The /changelog page on the website
+</Caption>
+
+## Changelog content and ownership
+
+Technically speaking, the changelog is a stream of content that's published across multiple channels. 
+
+From start to finish, a changelog entry is:
+
+1. Posted in the `#changelog` Slack channel
+2. Published on the [website](/changelog) by <SmallTeam slug="docs-wizard" />
+3. Produced into a [video](/changelog) by <SmallTeam slug="youtube" />
+4. And then sent in an [email](/handbook/brand/email-comms) by <SmallTeam slug="marketing" />
+
+The **engineer** is responsible for making sure their feature appears in the `#changelog` Slack channel and writing the initial draft (details below). 
+
+This page mainly covers the first two steps. 
+
+<CalloutBox type="fyi" title="Website team">
+
+The changelog code and data (stored in our Strapi CMS) is mainatined by the <SmallTeam slug="website" />. To learn more about how the features work, check out their [roadmap](handbook/engineering/posthog-com/roadmap) and [changelog](handbook/engineering/posthog-com/changelog) handbook pages.
+
+</CalloutBox>
+
+## What gets included
+
+New features! But changelog entries can also include beta launches, UX improvements, or performance improvements.
+
+For engineers, here's the rule of thumb: if you think an update (small or big) is worth sharing with users, it's probably worth posting about in the changelog. 
+
+<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_29_T05_07_13_116_Z_0bca53d20f.png" alt="Changelog entry" padding={false}/>
+
+<Caption>
+A published changelog entry 
+</Caption>
+
+## How the publishing process works
+
+We have an end-to-end process for moving shipped features into the website changelog.
+
+1. An engineer merges a `feat` PR into the monorepo or rolls out a feature flag. 
+2. Relay workflows are triggered, which classify and summarize the PR or flag.
+3. The feature is automatically posted in the `#changelog` Slack channel if classified as "impactful" by the workflow.
+4. The PR author or engineer is tagged in the Slack thread.
+5. The **engineer** writes the inital changelog draft (2-3 sentences and screenshots) and replies to the thread.
+6. At the end of every week, the <SmallTeam slug="docs-wizard" /> team reviews the `#changelog` channel, compiles the entries, edits them, and then publishes to the [/changelog](/changelog) page.
+
+Anyone can manually post in the `#changelog` Slack channel if something is worth sharing but isn't captured by the automated workflow.
+
+<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_29_T15_12_55_657_Z_2194ad70a1.png" alt="Changelog Slack channel" />
+
+<Caption>
+The #changelog Slack channel
+</Caption>
+
+## How to publish changelog yourself
+
+People are encouraged to self-serve and publish changelog entries. Here's how. 
+
+<CalloutBox type="fyi" title="Authentication">
+
+You must be logged into your posthog.com account. Only website moderators (a.k.a PostHog employees) are permitted to publish changelog entries.
+
+</CalloutBox>
+
+### Option 1: The main changelog
+
+Go to the [/changelog](/changelog) page and click the **+** button in the top right corner. 
+
+<ProductVideo 
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/changelog_form_c7f3d3a351.mp4"
+  alt="Changelog form"
+  classes="rounded"
+/>
+
+Fill out the changelog form and click **Create** to publish. The changelog entry will appear on the website on the ***next website build***, which is usually when a PR is merged into the master branch.
+
+| Field | Required | Recommended value |
+|-------|----------|-------------------|
+| Title | **Yes** | The title of the changelog entry. Keep it short and sweet. |
+| Description | **Yes** | The description with native Markdown support. Add screenshots or gifs here. |
+| Hero image | No | We leave this empty. We add images in the description field for more control. |
+| Status | **Yes** | It must be set to `Complete` to appear in the changelog. |
+| Date | **Yes** | The completed date of the changelog entry. |
+| Team | **Yes** | The team that shipped the feature. |
+| Author | No | We normally leave this blank because we pull in GitHub PR metadata which includes author and reviewers. |
+| Product or feature | **Yes** | The category or product area of the feature. Select `Uncategorized` if nothing fits. |
+| Type | **Yes** | Set to `New feature` for most changelog entries. |
+| GitHub URLs | **Yes** | It's technically optional, but the GitHub URL populates the changelog entry with the feature's PR metadata. |
+| Category | **Yes** | The product category of the changelog entry. |
+| Show on homepage | No | Always set the toggle to off or no. |
+
+### Option 2: The product changelogs
+
+Each product has a dedicated changelog page in their docs. You can also publish from there using the **+ Add changelog** button. 
+
+<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_01_29_T15_09_15_804_Z_1e014d1b8e.png" alt="Add changelog button" padding={false}/>
+
+<Caption>
+Each product should have a changelog page in their docs
+</Caption>
+
+| Product | Changelog page |
+|---------|----------------|
+| PostHog AI | [/docs/posthog-ai/changelog](/docs/posthog-ai/changelog) |
+| Product Analytics | [/docs/product-analytics/changelog](/docs/product-analytics/changelog) |
+| Session Replay | [/docs/session-replay/changelog](/docs/session-replay/changelog) |
+| Error Tracking | [/docs/error-tracking/changelog](/docs/error-tracking/changelog) |
+| LLM Analytics | [/docs/llm-analytics/changelog](/docs/llm-analytics/changelog) |
+| Feature Flags | [/docs/feature-flags/changelog](/docs/feature-flags/changelog) |
+| ... | ... |
+
+
+## Links and resources
+
+- <PrivateLink url="https://run.relay.app/workflows/cme1t0eno0gih0okphosc9pw0/edit">Relay workflow for PRs</PrivateLink>
+- <PrivateLink url="https://run.relay.app/workflows/cmg9oagij16o70nm34b5z7eur/edit">Relay workflow for feature flag rollouts</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/functions/0199a5e9-75cf-0000-25b0-439a08af8e31">PostHog webhook for feature flag rollouts</PrivateLink>
+- <PrivateLink url="https://api.slack.com/apps/A0A63H6UPRT">Slack bot for posting in #changelog</PrivateLink>
+- <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog Slack channel</PrivateLink>
+- <PrivateLink url="https://drive.google.com/drive/folders/1l5qWyMkm2EhwO1WXUL2UVgILqz3N6NPq?usp=drive_link">Google Doc for editing changelog entries</PrivateLink>
