@@ -1,0 +1,530 @@
+---
+title: How to build an LLM evaluation framework
+date: 2025-01-21
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/cooking_w_PH_hero_1_279b09be96.png
+featuredImageType: full
+category: General
+tags:
+    - AI engineering
+    - Product engineers
+seo:
+    metaTitle: 'LLM evaluation framework: How to build one for production'
+    metaDescription: 'A step-by-step recipe for building an LLM evaluation framework that catches bad outputs, connects AI quality to user outcomes, and helps you prioritize what to fix.'
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { Checkbox } from 'components/RadixUI/Checkbox'
+
+*A PostHog recipe for teams serving AI and hoping it's not raw.*
+
+| | |
+|---|---|
+| **Prep time** | ~2 hours setup, ongoing refinement |
+| **Difficulty** | Intermediate |
+| **Yields** | One LLM evaluation system |
+| **Best for** | AI engineers, Product Engineers |
+| **Outcome** | A clear, repeatable system for measuring LLM quality and tying it to real user outcomes. |
+
+<p>
+<CallToAction to="#step-1-preheat-your-standards-define-what-good-tastes-like">
+  Jump to recipe
+</CallToAction>
+</p>
+
+---
+
+Before AI: you wrote code, ran tests, and shipped with confidence.
+
+After AI: you write code that calls an LLM and... hope. Hope it doesn't hallucinate, go off-brand, or end up screenshotted on Twitter. Except hope is not a strategy for production systems.
+
+LLMs fail differently than traditional code; bad outputs don't throw errors, they just land on users' plates. It's like serving food you haven't tasted, and hoping you eyeballed the right amount of salt.
+
+This recipe gives you a quality control system.
+
+![LLM evaluation framework recipe card](https://res.cloudinary.com/dmukukwp6/image/upload/Recipe_Cards_blue_4c0590aa9b.png)
+
+## What you'll need
+
+### Ingredients
+
+**Required:**
+<div className="space-y-4 pl-6">
+  <div className="flex items-center gap-2"><Checkbox id="req-1" defaultChecked={false} /><label htmlFor="req-1" className="text-sm cursor-pointer"><a href="/docs/llm-analytics">An LLM observability tool</a> (to capture prompts, responses, traces, latency, and cost)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="req-2" defaultChecked={false} /><label htmlFor="req-2" className="text-sm cursor-pointer"><a href="/docs/product-analytics">A product analytics tool</a> (to connect LLM quality to real user behavior and outcomes)</label></div>
+</div>
+
+*Optional, but recommended:*
+<div className="space-y-4 pl-6">
+  <div className="flex items-center gap-2"><Checkbox id="opt-1" defaultChecked={false} /><label htmlFor="opt-1" className="text-sm cursor-pointer"><a href="/docs/llm-analytics/evaluations">Automated evaluations</a> (for catching issues at scale)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-2" defaultChecked={false} /><label htmlFor="opt-2" className="text-sm cursor-pointer"><a href="/docs/session-replay">Session replay</a> (to see what users do after AI responses)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-3" defaultChecked={false} /><label htmlFor="opt-3" className="text-sm cursor-pointer"><a href="/surveys">Surveys</a> (to collect direct feedback on AI quality)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-4" defaultChecked={false} /><label htmlFor="opt-4" className="text-sm cursor-pointer"><a href="/feature-flags">Feature flags</a> (for safely rolling out prompt changes)</label></div>
+  <div className="flex items-center gap-2"><Checkbox id="opt-5" defaultChecked={false} /><label htmlFor="opt-5" className="text-sm cursor-pointer"><a href="/experiments">Experiments</a> (for A/B testing prompts or models)</label></div>
+</div>
+
+<br />
+
+<details>
+<summary><strong>Substitutions</strong></summary>
+
+**No LLM observability?** You can log to your own database with a simple wrapper. You'll get the data, but you'll spend time building dashboards and queries instead of improving your AI.
+
+**No product analytics?** You can still evaluate outputs in isolation, but you won't know if quality issues actually affect user behavior, retention, or conversion.
+
+**No automated evaluations?** Manual review works at a small scale. Sample 20 to 30 outputs per week and score them yourself. It won't scale past a few hundred generations per day, but it's a starting point.
+
+**No session replay?** Run user interviews instead – ask people to walk through how they use your AI feature. It's slower and relies on their memory, but you'll still learn how they react to bad outputs.
+
+**No surveys?** Watch for behavioral proxies: retries, copy/paste, or immediate exits. Direct feedback is clearer, but behavior still tells a story.
+
+**No feature flags?** Ship prompt changes directly and keep a changelog. Just be ready to revert manually if something breaks.
+
+**No experiments?** Compare before/after metrics manually. You won't get statistical significance, but you'll still see if things moved in the right direction.
+
+</details>
+
+You'll also need:
+- **An AI feature in production (or close to it).** This framework is designed for real user traffic. If you're pre-launch, you can still set up the instrumentation and activate evaluations when you ship.
+- **Enough traffic to spot patterns.** A few hundred interactions is a good starting point. Earlier than that, lean on manual review.
+
+### Want to cook with PostHog? Great choice.
+
+If you haven't set it up yet, [start here](/docs/getting-started/install). For LLM analytics specifically:
+
+1. Install the [PostHog SDK](/docs/llm-analytics/installation) with your LLM provider wrapper ([OpenAI](/docs/llm-analytics/installation/openai), [Anthropic](/docs/llm-analytics/installation/anthropic), [LangChain](/docs/llm-analytics/installation/langchain), etc.)
+2. Make sure you're calling [`posthog.identify()`](/docs/product-analytics/identify) so you can connect AI outputs to specific users
+3. Your generations will start appearing in [LLM Analytics](https://app.posthog.com/llm-analytics) automatically
+
+The first **100K** LLM events per month are free with 30-day retention!
+
+<p>
+<CallToAction to="https://app.posthog.com/signup">
+  Cook with PostHog – it's free!
+</CallToAction>
+</p>
+
+---
+
+## Step 1: Preheat your standards (define what "good" tastes like)
+
+Before you can evaluate anything, you need to define your quality criteria – the specific things that make an output good or bad for your product.
+
+This matters because "good" is context-dependent: what matters for a customer support bot is different from what matters for a creative writing tool or a code assistant.
+
+Pick 2–4 criteria that map to user trust and product risk. Here are some examples:
+
+| Criterion | What it measures | Good for |
+|-----------|------------------|----------|
+| **Accuracy** | Is it factually correct? | Knowledge bases, Q&A, RAG |
+| **Relevance** | Does it address what the user asked? | Support bots, search, assistants |
+| **Helpfulness** | Does it move the user toward their goal? | Productivity tools, chat assistants |
+| **Groundedness** | Is it based on provided context (not hallucinated)? | RAG systems, document Q&A |
+| **Tone/style** | Does it match your brand voice? | User-facing products |
+| **Safety** | Is it free from harmful content? | All user-facing AI |
+| **Conciseness** | Is it the right length? | Chat, summaries |
+
+Be specific:
+- ❌ "Good quality" (too vague)
+- ✅ "Accurate, helpful, matches our friendly-but-professional tone. Never hallucinates policies." (specific)
+
+Finally, define auto-fail conditions – outputs that should never ship, even if everything else looks fine (for example: leaking sensitive data or generating unsafe content).
+
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+
+Not sure what matters? Look at your negative user feedback – support tickets, bad reviews, churn surveys. What do people complain about? Start there.
+
+</details>
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+You can explain, in one sentence, what a "good" output looks like.
+
+</CalloutBox>
+
+---
+
+## Step 2: Mise en place your telemetry (capture what you need)
+
+An LLM evaluation framework is only as good as its data. Every generation should be captured with enough context to debug later.
+
+Set up your LLM observability so that, at a minimum, it records:
+- **Input** (the user's prompt and any system context)
+- **Output** (the LLM's response)
+- **Metadata** (model, latency, tokens, cost)
+- **User or org context**, where appropriate
+
+**If using PostHog:**
+
+Our [SDK wrappers](/docs/llm-analytics/installation) handle most of this automatically. Install the wrapper for your provider, and every LLM call becomes a [generation](/docs/llm-analytics/generations) – a detailed record of what went in and what came out. For multi-step workflows, use [traces](/docs/llm-analytics/traces) to group related calls together.
+
+Also: make sure you're identifying users. Anonymous LLM data can tell you whether outputs look good in isolation, but identified data is what gives real insight.
+
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+
+Capture more than you think you need. Storage is cheap; re-instrumenting later is not.
+
+</details>
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+LLM interactions are showing up in your observability tool with inputs, outputs, user identifiers, and model metadata.
+
+</CalloutBox>
+
+---
+
+## Step 3: Whisk together your LLM evaluation methods
+
+You can't manually review every generation, and you shouldn't try. A production-ready LLM evaluation framework combines three methods:
+
+- **Automated evals** for scale
+- **User feedback** for ground truth
+- **Manual review** for calibration and learning
+
+Each catches different things. The value is in how you combine them.
+
+### Method 1: Automated LLM evaluations
+
+Automated evaluations use LLM-as-a-judge to score sampled production traffic against your quality criteria. Each evaluation runs automatically on live data and returns a pass/fail result with reasoning, so you know why something failed.
+
+You can use templates or write custom evaluations for criteria like brand voice, domain accuracy, or anything specific to your use case.
+
+Set your sampling rate strategically to balance coverage and cost:
+- 5–10% for general traffic
+- 100% for high-risk workflows (payments, compliance, safety)
+- 100% for new prompt or model variants
+
+**If using PostHog:**
+
+PostHog's [LLM analytics](/llm-analytics) now includes built-in support for [automated evaluations](/docs/llm-analytics/evaluations). To set one up:
+
+1. Go to [LLM Analytics](https://app.posthog.com/llm-analytics) → **Evaluations**
+2. Click **New evaluation**
+3. Choose a template or write a custom prompt
+4. Set your sampling rate (start with 5–10%)
+5. Optionally add filters (for example: production only, a specific model, or a single feature)
+
+PostHog also includes evaluation templates you can use out of the box:
+
+| Template | What it checks | Best for |
+|----------|----------------|----------|
+| **Relevance** | Does the output address the input? | Support bots, Q&A |
+| **Helpfulness** | Is it useful and actionable? | Chat assistants, productivity |
+| **Hallucination** | Made-up facts or unsupported claims? | RAG, knowledge bases |
+| **Toxicity** | Harmful or inappropriate content? | All user-facing AI |
+| **Jailbreak** | Attempts to bypass guardrails? | Security-sensitive apps |
+
+You can treat these as starting points, then customize as you learn what matters.
+
+### Method 2: User feedback
+
+Add a simple feedback mechanism – thumbs up/down, "Was this helpful?", or a simple rating – and capture it as an event tied to the specific generation.
+
+Response rates don't need to be high; directional feedback is enough to validate (or challenge) your automated evaluations and surface blind spots.
+
+**If using PostHog:**
+
+You can use [surveys](/docs/surveys) to collect feedback at precise moments, like immediately after an AI response or when a task completes.
+
+To launch a simple feedback survey in PostHog:
+
+1. Go to [Surveys](https://app.posthog.com/surveys) → **New survey**
+2. Choose a question type (single choice for thumbs up/down, rating for scales, etc)
+3. Set display conditions so it triggers after an AI response event
+4. Attach properties like `model`, `prompt_version`, or `task_type`
+5. Publish and monitor responses alongside your eval metrics
+
+### Method 3: Manual review
+
+Set a recurring task to review 20–30 random generations per week. Use it to calibrate your automated evals, spot new failure patterns, and build intuition.
+
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+
+Don't over-index on any single method. Automated evals catch issues at scale, user feedback provides ground truth, and manual review keeps everything honest. The value is in how you combine them.
+
+</details>
+
+<CalloutBox icon="IconInfo" title="You're ready to move on when..." type="fyi">
+
+Automated evals, user feedback, and manual review all point to the same quality trends.
+
+</CalloutBox>
+
+---
+
+## Step 4: Taste the impact on user outcomes *(optional, but recommended)*
+
+Now you know what's good and bad. But which bad outputs actually matter?
+
+This step is optional – you can run a solid evaluation framework without it. But if you want to prioritize what to fix, connecting AI quality to user behavior is how you do it.
+
+### See what happens after bad outputs
+
+Use [session replay](/session-replay) to watch what users do after AI responses. Do they retry? Rage-click? Leave immediately? Copy the response? Filter replays by evaluation results to see what users do after a failed eval.
+
+### Correlate quality with retention
+
+Use [product analytics](/product-analytics) to ask: do users who get more failed evaluations churn faster? Which segments get worse AI quality? Create a [cohort](/docs/data/cohorts) of users with below-average AI quality and compare their retention to everyone else.
+
+### Prioritize by impact
+
+Not all issues are made equal. Combine frequency (how often does this fail?) with impact (what happens when it does?):
+
+| Issue | Frequency | Impact | Priority |
+|-------|-----------|--------|----------|
+| Hallucinations in onboarding | 5% | Users drop off | 🔴 High |
+| Tone mismatch in settings | 12% | Users ignore it | 🟡 Medium |
+| Slow responses on edge cases | 2% | Users retry | 🟢 Low |
+
+**If using PostHog:**
+
+Everything connects automatically. Filter [session replays](/docs/session-replay) by LLM events or eval results. Build [funnels](/docs/product-analytics/funnels) or [retention](/docs/product-analytics/retention) insights broken down by AI quality metrics. Click from a generation directly to its associated replay.
+
+Not sure where to start? Ask [PostHog AI](/ai). You can ask questions like "Which users had the most failed evaluations last week?" or "Show me retention for users who got hallucinations vs. those who didn't" – and it'll guide you through building the right insight.
+
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+
+Watch replays of your power users when they hit a failed eval. They'll show you workarounds you should be building into the product. You can also look at users who stopped using your AI feature; their last few generations often reveal what went wrong.
+
+</details>
+
+<CalloutBox icon="IconInfo" title="You're ready for the next step when..." type="fyi">
+
+You know which issues are actually hurting user metrics and have a prioritized list of what to fix.
+
+</CalloutBox>
+
+---
+
+## Step 5: Plate the fix and measure the result
+
+Before you ship, write down your hypothesis: "We believe [change] will improve [metric] because [reason]."
+
+### Common fixes
+
+- **Prompt engineering** — rewrite instructions, add examples, clarify constraints
+- **Better context** — for RAG, improve retrieval or add more relevant documents
+- **Guardrails** — add output validation or fallback responses
+- **Model changes** — try a different model, adjust temperature
+- **UX changes** — set better expectations, guide users to ask clearer questions
+
+### Ship safely with feature flags *(optional, but recommended)*
+
+Use [feature flags](/feature-flags) to:
+- Roll out to 10–20% of users first
+- Target specific segments (internal users, beta testers)
+- Kill the change instantly if something breaks
+
+### Measure the improvement
+
+After your fix has been live for a bit:
+- Did eval pass rates improve?
+- Did user feedback shift?
+- Did retention or conversion change for affected users?
+
+**If using PostHog:**
+
+Because [feature flags](/docs/feature-flags), [experiments](/docs/experiments), and [LLM analytics](/docs/llm-analytics) are all connected, you can test prompt changes and measure their impact in one place.
+
+To run an experiment:
+
+1. Go to [Experiments](https://app.posthog.com/experiments) → **New experiment**
+2. Link it to your feature flag (the one controlling your prompt variant)
+3. Set your goal metrics — include both eval metrics (pass rate, feedback score) and product metrics (retention, conversion, task completion)
+4. Let it run until you hit statistical significance
+
+<details>
+<summary><strong>👨‍🍳 Chef's tip</strong></summary>
+
+Test one variable at a time. Changing the prompt and the model makes it impossible to know what worked.
+
+</details>
+
+<CalloutBox icon="IconInfo" title="You're done when..." type="fyi">
+
+You can see measurable improvement in both AI quality metrics (eval pass rates, user feedback) and user outcomes (retention, conversion, satisfaction).
+
+</CalloutBox>
+
+---
+
+## Why this recipe works especially well with PostHog
+
+Most teams piece together LLM evaluation frameworks with 3–4 different tools: observability here, product analytics there, session replay somewhere else. It works, but it's slow, and you lose context every time you switch tabs.
+
+With PostHog, [everything's in one place](/products):
+
+- **[LLM Analytics](/llm-analytics)** captures generations, traces, and costs
+- **[Evaluations](/docs/llm-analytics/evaluations)** run automated quality checks at scale
+- **[Session Replay](/session-replay)** shows what users do after AI responses
+- **[Product Analytics](/product-analytics)** connects AI quality to retention and conversion
+- **[Surveys](/surveys)** collect direct user feedback
+- **[Feature Flags](/feature-flags)** let you ship changes safely
+- **[Experiments](/experiments)** prove whether fixes actually worked
+
+[Get started free](https://app.posthog.com/signup) with 1M events, 5K recordings, 1M feature flag requests, and 100K LLM events included every month!
+
+<ArrayCTA />
+
+---
+
+## FAQ
+
+<details>
+<summary><strong>What is an LLM evaluation framework?</strong></summary>
+
+An LLM evaluation framework is a system for measuring the quality of your AI outputs in production. It typically includes: quality criteria (what "good" means), evaluation methods (automated checks, user feedback, manual review), and feedback loops.
+
+The goal is to replace "hope it works" with "know it works", with data.
+
+</details>
+
+<details>
+<summary><strong>What are LLM evaluation metrics?</strong></summary>
+
+Common metrics include: accuracy, relevance, helpfulness, groundedness (for RAG), tone/style, safety, and user satisfaction. The right metrics depend on your use case.
+
+Beyond output quality, you should also track: eval pass rates over time, user feedback rates, and downstream product metrics (retention, conversion) for users who interact with AI.
+
+</details>
+
+<details>
+<summary><strong>What are LLM evaluation methods?</strong></summary>
+
+The three main methods are:
+
+- **Automated evaluation** — LLM-as-judge or rule-based checks running on sampled traffic
+- **User feedback** — direct signals like thumbs up/down or ratings
+- **Manual review** — human review of sampled outputs for calibration
+
+Ideally you should try doing a mix of all three.
+
+</details>
+
+<details>
+<summary><strong>What are LLM evaluation benchmarks?</strong></summary>
+
+Standardized tests for comparing models – MMLU, HumanEval, TruthfulQA. Useful for model selection, but they won't tell you how your AI performs with your users. Production evaluation requires your own criteria on real traffic.
+
+</details>
+
+<details>
+<summary><strong>What's the difference between LLM evaluation and LLM observability?</strong></summary>
+
+**Observability** is capturing what happens (inputs, outputs, latency, costs, errors). It answers "what did the AI do?"
+
+**Evaluation** is judging what happened; Was the output good? Did it meet quality criteria? It answers "was that good or bad?"
+
+You need both. Observability without evaluation means you can see everything but don't know if it's working. Evaluation without observability means you're judging outputs without context.
+
+</details>
+
+<details>
+<summary><strong>How is LLM evaluation different from traditional testing?</strong></summary>
+
+Traditional tests are deterministic: same input → same output → pass/fail. LLMs are non-deterministic and subjective — the same input can produce different outputs, and "correct" is often a judgment call.
+
+This means you need: sampling instead of exhaustive testing, probabilistic evaluation (pass rates, not pass/fail), multiple evaluation methods, and continuous monitoring (not just pre-deploy tests).
+
+</details>
+
+<details>
+<summary><strong>What are the best LLM evaluation tools?</strong></summary>
+
+It depends on your needs. For evaluation-only, tools like **Braintrust**, **Humanloop**, or **DeepEval** focus specifically on evals. For end-to-end (observability + evaluation + product analytics), **PostHog** gives you everything connected in one place.
+
+The advantage of a unified tool is connecting AI quality to user outcomes — not just knowing outputs are bad, but knowing which bad outputs actually hurt retention.
+
+</details>
+
+<details>
+<summary><strong>What are the best LLM observability tools for developers?</strong></summary>
+
+The best LLM observability tools capture generations, traces, latency, costs, and errors with minimal setup. Popular options include **Langfuse**, **Helicone**, **Braintrust**, and **PostHog**.
+
+**PostHog** is a good fit if you want [LLM observability](/llm-analytics) connected to [product analytics](/product-analytics), [session replay](/session-replay), and [experimentation](/experiments) — so you can see how AI quality affects real user behavior.
+
+</details>
+
+<details>
+<summary><strong>How often should I evaluate my LLM?</strong></summary>
+
+Continuously. Set automated evals to run on a sample of production traffic (5–10% is a good starting point). Review user feedback weekly. Do deeper manual reviews monthly or after major changes.
+
+AI quality can drift over time — especially when models update or user behavior changes. Ongoing evaluation catches regressions early.
+
+</details>
+
+<details>
+<summary><strong>What's a good eval pass rate?</strong></summary>
+
+There's no universal benchmark. It depends on your criteria and how strict your evaluation prompts are.
+
+More important than absolute numbers is: tracking pass rates over time, comparing pass rates across user segments, and correlating pass rates with user outcomes. A 90% pass rate means nothing if users are still churning.
+
+</details>
+
+<details>
+<summary><strong>Can I automate LLM evaluation completely?</strong></summary>
+
+Partially. Automated evals scale well but miss nuance; LLMs judging LLMs can also hallucinate or have blind spots.
+
+Use automation for coverage and flagging, user feedback for ground truth, and manual review for calibration. Don't skip the human layer entirely.
+
+</details>
+
+<details>
+<summary><strong>What is LLM cost optimization?</strong></summary>
+
+LLM cost optimization means reducing what you spend on model inference without sacrificing quality. Common strategies include:
+
+- Caching repeated queries
+- Using cheaper models for simpler tasks
+- Reducing token count in prompts
+- Batching requests where possible
+- Monitoring cost per user/feature to spot inefficiencies
+
+Start by tracking cost per generation — you can't optimize what you don't measure.
+
+</details>
+
+<details>
+<summary><strong>What is LLM latency and why does it matter?</strong></summary>
+
+LLM latency is the time it takes for your AI to return a response. High latency frustrates users and can hurt conversion, especially in real-time applications like chat or search.
+
+Track latency per model, prompt, and feature. If certain queries are slow, consider prompt optimization, model switching, or caching.
+
+</details>
+
+---
+
+## Pairs well with
+
+- [Stop AI slop: Run evals with LLM-as-a-Judge](/blog/llm-as-a-judge-evals)
+- [How to A/B test LLM models and prompts](/tutorials/llm-ab-tests)
+- [What we've learned about building AI-powered features](/blog/ai-powered-features)
+- [8 learnings from 1 year of agents](/blog/agents-learnings)
+
+...hungry for more?
+
+<NewsletterForm />
+
+---
+
+## Did you make this recipe?
+
+Share your eval pass rates (before and after) in the comments.
+
+⭐⭐⭐⭐⭐ "*Our AI finally stopped gaslighting users. Down to only 2 hallucinations per quarter.*" — Actual user, probably
