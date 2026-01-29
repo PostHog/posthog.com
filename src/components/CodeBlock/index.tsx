@@ -180,9 +180,13 @@ const SyncedCodeBlock = ({
     const handleChange = React.useCallback(
         (language: LanguageOption) => {
             setCurrentLanguage(language)
-            setPreference(syncKey, getOptionKey(language))
+            // Only persist preferences if this language exists in the available options
+            // This ensures selecting an option only affects code blocks that have that option
+            if (languages.some((lang) => getOptionKey(lang) === getOptionKey(language))) {
+                setPreference(syncKey, getOptionKey(language))
+            }
         },
-        [syncKey, setPreference]
+        [syncKey, setPreference, languages]
     )
 
     return (

@@ -1,6 +1,6 @@
 If your Next.js app uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/app/getting-started/server-and-client-components).
 
-<MultiLanguage syncKey="typescript">
+<MultiLanguage>
 
 ```jsx
 // app/providers.jsx
@@ -54,7 +54,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
 
 Then, import the `PostHogProvider` component into your `app/layout` file and wrap your app with it.
 
-<MultiLanguage syncKey="typescript">
+<MultiLanguage>
 
 ```jsx
 // app/layout.jsx
