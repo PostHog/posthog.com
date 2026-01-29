@@ -2741,6 +2741,10 @@ export const docsMenu = {
                             url: '/docs/settings/activity-logs',
                         },
                         {
+                            name: 'Approvals',
+                            url: '/docs/settings/approvals',
+                        },
+                        {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
@@ -3602,6 +3606,16 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/feature-flags/start-here',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/feature-flags/installation',
                     icon: 'IconBook',
@@ -3647,53 +3661,21 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Concepts',
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/feature-flags/best-practices',
                     icon: 'IconStar',
                     color: 'red',
-                },
-                {
-                    name: 'Cutting costs',
-                    url: '/docs/feature-flags/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Troubleshooting',
-                    url: '/docs/feature-flags/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/feature-flags/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
                     featured: true,
-                },
-                {
-                    name: 'Changelog',
-                    url: '/docs/feature-flags/changelog',
-                    icon: 'IconRocket',
-                    color: 'purple',
-                },
-                {
-                    name: 'Settings',
-                },
-                {
-                    name: 'Project-wide settings',
-                    url: '/docs/feature-flags/project-wide-settings',
-                    icon: 'IconWrench',
-                    color: 'green',
-                },
-                {
-                    name: 'Features',
                 },
                 {
                     name: 'Server-side local evaluation',
                     url: '/docs/feature-flags/local-evaluation',
                     icon: 'IconBolt',
                     color: 'orange',
+                    featured: true,
                     children: [
                         {
                             name: 'Local evaluation in distributed or stateless environments',
@@ -3706,48 +3688,113 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
-                },
-                {
-                    name: 'Property overrides',
-                    url: '/docs/feature-flags/property-overrides',
-                    icon: 'IconPerson',
-                    color: 'blue',
-                },
-                {
-                    name: 'Feature flag dependencies',
-                    url: '/docs/feature-flags/dependencies',
-                    icon: 'IconListTreeChild',
-                    color: 'purple',
-                },
-                {
-                    name: 'Remote config',
-                    url: '/docs/feature-flags/remote-config',
-                    icon: 'IconGear',
-                    color: 'green',
-                },
-                {
-                    name: 'Early access feature management',
-                    url: '/docs/feature-flags/early-access-feature-management',
-                    icon: 'IconFeatures',
-                    color: 'purple',
-                },
-                {
-                    name: 'Multi-project feature flags',
-                    url: '/docs/feature-flags/multi-project-feature-flags',
-                    icon: 'IconStack',
-                    color: 'blue',
-                },
-                {
-                    name: 'Scheduled flag changes',
-                    url: '/docs/feature-flags/scheduled-flag-changes',
-                    icon: 'IconClock',
-                    color: 'seagreen',
+                    featured: true,
                 },
                 {
                     name: 'Evaluation contexts',
                     url: '/docs/feature-flags/evaluation-contexts',
                     icon: 'IconDecisionTree',
                     color: 'red',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Do a phased rollout',
+                    url: '/docs/feature-flags/phased-rollout',
+                    icon: 'IconTrends',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Run a canary release',
+                    url: '/docs/feature-flags/canary-release',
+                    icon: 'IconRocket',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Target flags with groups',
+                    url: '/docs/feature-flags/targeting-groups',
+                    icon: 'IconPeople',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Set up remote config',
+                    url: '/docs/feature-flags/remote-config',
+                    icon: 'IconGear',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Use feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconListTreeChild',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Manage early access features',
+                    url: '/docs/feature-flags/early-access-feature-management',
+                    icon: 'IconFeatures',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Schedule flag changes',
+                    url: '/docs/feature-flags/scheduled-flag-changes',
+                    icon: 'IconClock',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Use multi-project flags',
+                    url: '/docs/feature-flags/multi-project-feature-flags',
+                    icon: 'IconStack',
+                    color: 'blue',
+                },
+                {
+                    name: 'Override flag properties',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Cutting costs',
+                    url: '/docs/feature-flags/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Project-wide settings',
+                    url: '/docs/feature-flags/project-wide-settings',
+                    icon: 'IconWrench',
+                    color: 'green',
+                },
+                {
+                    name: 'More tutorials',
+                    url: '/docs/feature-flags/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/feature-flags/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/feature-flags/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -3831,6 +3878,58 @@ export const docsMenu = {
                         {
                             name: '.NET',
                             url: '/docs/experiments/installation/dotnet',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/experiments/installation/angular',
+                        },
+                        {
+                            name: 'Astro',
+                            url: '/docs/experiments/installation/astro',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/experiments/installation/bubble',
+                        },
+                        {
+                            name: 'Django',
+                            url: '/docs/experiments/installation/django',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/experiments/installation/flutter',
+                        },
+                        {
+                            name: 'Framer',
+                            url: '/docs/experiments/installation/framer',
+                        },
+                        {
+                            name: 'Laravel',
+                            url: '/docs/experiments/installation/laravel',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/experiments/installation/nextjs',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/experiments/installation/nuxt',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/experiments/installation/remix',
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/docs/experiments/installation/svelte',
+                        },
+                        {
+                            name: 'Vue',
+                            url: '/docs/experiments/installation/vue',
+                        },
+                        {
+                            name: 'Webflow',
+                            url: '/docs/experiments/installation/webflow',
                         },
                     ],
                 },
@@ -4857,6 +4956,10 @@ export const docsMenu = {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                         },
+                        {
+                            name: 'OpenAI Agents',
+                            url: '/docs/llm-analytics/installation/openai-agents',
+                        },
                     ],
                 },
                 {
@@ -5504,6 +5607,7 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/logs/installation' },
                         { name: 'Node.js', url: '/docs/logs/installation/nodejs' },
+                        { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
