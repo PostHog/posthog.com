@@ -19,36 +19,38 @@ docs/[product-name]/
 ├── # Getting started
 ├── start-here.mdx              # Quest-log entry point
 ├── installation/               # Platform installation guides
-│   ├── index.mdx               # Hub with auto-generated platform grid
-│   ├── [platform].mdx          # One file per platform
+│   ├── index.mdx               # Auto-generated platform grid
+│   ├── [platform].mdx          # Platform-specific installation, one file per platform
 │   └── _snippets/              # Installation-specific snippets
 │
 ├── # Concepts
-├── [concept-1].mdx             # Core concepts users need to understand
+├── [concept-1].mdx             # Core concepts
 ├── [concept-2].mdx
 │
 ├── # Guides
 ├── [guide-1].mdx               # Task-oriented how-tos
 ├── [guide-2].mdx
-├── integrations.mdx
-├── alerts.mdx
 │
 ├── # Resources
-├── pricing.mdx
+├── pricing.mdx                 # Product pricing and limits
 ├── references.mdx              # Links to SDK and API docs
-├── tutorials.mdx               # Curated list of tutorials
-├── troubleshooting.mdx
-├── changelog.mdx
+├── tutorials.mdx               # Curated tutorials
+├── troubleshooting.mdx         # Common issues and solutions
+├── changelog.mdx               # Auto-generated product updates
 │
 └── _snippets/                  # Reusable content that are not rendered as pages
     └── [shared-content].mdx
 ```
 
-The sidebar sections – Getting started, Concepts, Guides, Resources – are defined in `src/navs/index.js`, not by folder structure. Files can live flat in the product folder.
+The sidebar sections – Getting started, Concepts, Guides, Resources – are defined in `src/navs/index.js`, not by folder structure. Files live flat in the product folder.
 
-## Core page types
+## Sidebar sections
 
-Every product should have these page types. Each serves a specific purpose in the user journey.
+Product docs are organized into these high-level sections. Each section contains specific types of pages that serve different purposes in the user journey.
+
+## Getting started
+
+The onboarding section. Contains pages that help new users get up and running with the product.
 
 ### 1. Start here page
 
@@ -89,23 +91,35 @@ How it works:
 
 > **Example** - [Error Tracking installation index](/docs/error-tracking/installation)
 
-### 3. Feature documentation
+## Concepts
 
-Deep-dives into specific features that help users understand and use a specific capability. In general, one page per major feature.
+Foundational knowledge. Explains how things work under the hood to build mental models for complex systems.
 
-On each page, include a brief intro explaining what the feature does, screenshots showing the feature in the UI, step-by-step instructions with links to relevant app pages, and tables for comparing options. Integrate links naturally throughout the content rather than in a separate section.
-
-> **Examples** - [Alerts](/docs/error-tracking/alerts), [Managing issues](/docs/error-tracking/managing-issues)
-
-### 4. Concept pages
+### Concept pages
 
 Explain how things work under the hood to build mental models for complex systems. Use diagrams and examples.
 
 Include Mermaid diagrams for flows and relationships, definitions with context, examples of real-world scenarios, and links to implementation details.
 
-> **Examples** - [Fingerprints](/docs/error-tracking/fingerprints), [Issues and exceptions](/docs/error-tracking/issues-and-exceptions)
+> **Examples** - [Fingerprints](/docs/error-tracking/fingerprints), [Issues and exceptions](/docs/error-tracking/issues-and-exceptions), [Stack traces](/docs/error-tracking/stack-traces), [Releases](/docs/error-tracking/releases)
 
-### 5. Troubleshooting page
+## Guides
+
+Task-oriented how-tos. Help users complete specific actions and workflows with the product.
+
+### Guide pages
+
+Task-oriented how-tos that help users complete specific actions. In general, one page per major task or workflow.
+
+On each page, include a brief intro explaining what the guide helps you do, screenshots showing the feature in the UI, step-by-step instructions with links to relevant app pages, and tables for comparing options. Integrate links naturally throughout the content rather than in a separate section.
+
+> **Examples** - [Capture exceptions](/docs/error-tracking/capture), [Manage and resolve issues](/docs/error-tracking/managing-issues), [Send alerts](/docs/error-tracking/alerts), [Set up integrations](/docs/error-tracking/integrations)
+
+## Resources
+
+Reference material and support. Contains utility pages that users reference when needed.
+
+### Troubleshooting page
 
 Common issues and solutions that unblock users who are stuck. Keep this updated based on support tickets and community questions.
 
@@ -113,25 +127,25 @@ Start with the `<AskAIInput>` component, then use searchable headings with numbe
 
 > **Example** - [Error Tracking troubleshooting](/docs/error-tracking/troubleshooting)
 
-### 6. Pricing page
+### Pricing page
 
 Explain the product's pricing model, free tier limits, and how usage is calculated. Link to the main pricing page for full details.
 
 > **Example** - [Error Tracking pricing](/docs/error-tracking/pricing)
 
-### 7. Changelog page
+### Changelog page
 
 Auto-generated list of product updates using the `<ProductChangelog>` component. Requires `hideRightSidebar: true` in frontmatter.
 
 > **Example** - [Error Tracking changelog](/docs/error-tracking/changelog)
 
-### 8. Tutorials page
+### Tutorials page
 
 Curated list of tutorials and guides for the product. Links to blog posts and community content.
 
 > **Example** - [Error Tracking tutorials](/docs/error-tracking/tutorials)
 
-### 9. References page
+### References page
 
 Links to SDK reference docs and API documentation filtered by product.
 
@@ -269,3 +283,4 @@ Types include:
 | `showStepsToc` | Show steps in right sidebar TOC | `true` |
 | `hideRightSidebar` | Hide right sidebar TOC on start-here and changelog pages | `true` |
 | `contentMaxWidthClass` | Wider content area for QuestLog pages | `max-w-5xl` |
+| `tableOfContents` | Override the auto-generated TOC with custom entries | `[{ url: 'section-id', value: 'Section Name', depth: 1 }]` |
