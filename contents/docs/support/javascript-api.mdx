@@ -1,5 +1,5 @@
 ---
-title: JavaScript API
+title: JavaScript API reference
 sidebar: Docs
 showTitle: true
 ---
@@ -8,22 +8,7 @@ import Alpha from './_snippets/alpha.mdx'
 
 <Alpha />
 
-The JavaScript API is available at `posthog.conversations` and provides full programmatic control over conversations. Use it to build custom support experiences or integrate with your existing UI.
-
-## API reference
-
-| Method | Description | Returns |
-|--------|-------------|---------|
-| `isAvailable()` | Check if conversations API is ready | `boolean` |
-| `isVisible()` | Check if widget is rendered | `boolean` |
-| `show()` | Show/render the widget | `void` |
-| `hide()` | Hide/remove the widget | `void` |
-| `sendMessage(message, userTraits?, newTicket?)` | Send a message | `Promise<SendMessageResponse \| null>` |
-| `getMessages(ticketId?, after?)` | Fetch messages | `Promise<GetMessagesResponse \| null>` |
-| `markAsRead(ticketId?)` | Mark messages as read | `Promise<MarkAsReadResponse \| null>` |
-| `getTickets(options?)` | Fetch tickets list | `Promise<GetTicketsResponse \| null>` |
-| `getCurrentTicketId()` | Get current ticket ID | `string \| null` |
-| `getWidgetSessionId()` | Get widget session ID | `string \| null` |
+The JavaScript API at `posthog.conversations` gives you full programmatic control over support conversations. Use it to build custom support interfaces or integrate support into your existing UI.
 
 ## Checking availability
 
@@ -68,7 +53,6 @@ const response = await posthog.conversations.sendMessage(
 - `newTicket` (optional, boolean) - If `true`, creates a new ticket even if one exists
 
 **Response:**
-
 ```typescript
 interface SendMessageResponse {
   ticket_id: string      // ID of the ticket
@@ -88,7 +72,7 @@ const response = await posthog.conversations.getMessages()
 // Get messages for a specific ticket
 const response = await posthog.conversations.getMessages('ticket-uuid')
 
-// Get messages after a specific timestamp (for polling/pagination)
+// Get messages after a specific timestamp (for pagination)
 const response = await posthog.conversations.getMessages(
   'ticket-uuid',
   '2024-01-15T10:30:00Z'
@@ -96,7 +80,6 @@ const response = await posthog.conversations.getMessages(
 ```
 
 **Response:**
-
 ```typescript
 interface GetMessagesResponse {
   ticket_id: string
@@ -127,7 +110,6 @@ await posthog.conversations.markAsRead('ticket-uuid')
 ```
 
 **Response:**
-
 ```typescript
 interface MarkAsReadResponse {
   success: boolean
@@ -138,7 +120,7 @@ interface MarkAsReadResponse {
 ## Fetching tickets
 
 ```javascript
-// Get all tickets for this user
+// Get all tickets
 const response = await posthog.conversations.getTickets()
 
 // Get tickets with filters
@@ -150,7 +132,6 @@ const response = await posthog.conversations.getTickets({
 ```
 
 **Parameters:**
-
 ```typescript
 interface GetTicketsOptions {
   status?: string   // Filter by status: 'new' | 'open' | 'pending' | 'on_hold' | 'resolved'
@@ -160,7 +141,6 @@ interface GetTicketsOptions {
 ```
 
 **Response:**
-
 ```typescript
 interface GetTicketsResponse {
   count: number      // Total count of tickets
@@ -199,7 +179,7 @@ Conversations work with both anonymous and identified users.
 
 ### Anonymous users
 
-Messages are associated with the widget session ID. The user maintains access to their conversation across page loads, even without logging in.
+Messages are associated with the widget session ID. The user maintains access to their conversation across page loads.
 
 ### Identified users
 
@@ -211,22 +191,20 @@ When you call `posthog.identify()`, the conversation seamlessly continues:
 ### User traits priority
 
 When sending messages, user traits are resolved in this order:
-
 1. Explicitly provided in `sendMessage(message, { name, email })`
 2. PostHog person properties (`$name`, `$email`, `name`, `email`)
 3. Previously saved traits from the identification form
 
-## Building custom UI
+## Building a custom chat UI
 
-You can build a completely custom chat UI using the API while disabling the default widget.
-
-First, disable the widget in **Settings > Conversations** by setting `widgetEnabled` to false.
-
-Then use the API to build your own interface:
+You can build a completely custom chat UI using the API while disabling the default widget:
 
 ```javascript
-// Wait for conversations to be available
+// In PostHog settings: set widgetEnabled to false
+
+// Your custom implementation
 async function initCustomChat() {
+  // Wait for conversations to be available
   const checkAvailable = setInterval(() => {
     if (posthog.conversations.isAvailable()) {
       clearInterval(checkAvailable)
@@ -235,7 +213,6 @@ async function initCustomChat() {
   }, 100)
 }
 
-// Load existing messages if there's an active ticket
 async function loadExistingMessages() {
   const ticketId = posthog.conversations.getCurrentTicketId()
   if (ticketId) {
@@ -244,12 +221,10 @@ async function loadExistingMessages() {
   }
 }
 
-// Send a message and update UI
 async function sendMessage(text, userEmail) {
   const response = await posthog.conversations.sendMessage(text, {
     email: userEmail
   })
-  
   // Add optimistic UI update
   addMessageToUI({
     id: response.message_id,
@@ -259,7 +234,7 @@ async function sendMessage(text, userEmail) {
   })
 }
 
-// Poll for new messages from your team
+// Poll for new messages
 setInterval(async () => {
   if (posthog.conversations.getCurrentTicketId()) {
     const response = await posthog.conversations.getMessages()
@@ -270,7 +245,7 @@ setInterval(async () => {
 
 ## Events captured
 
-The conversations module automatically captures these events for your analytics:
+The conversations module automatically captures these events:
 
 | Event | Description |
 |-------|-------------|
@@ -281,12 +256,11 @@ The conversations module automatically captures these events for your analytics:
 | `$conversations_user_identified` | User submitted identification form |
 | `$conversations_identity_changed` | User called `posthog.identify()` |
 
-These events work with the rest of PostHog. You can create funnels to measure support engagement or use cohorts to target users who have contacted support.
+These events integrate with the rest of PostHog – use them in funnels, cohorts, or to trigger other actions.
 
 ## Persistence
 
 The SDK persists the following data in localStorage:
-
 - Widget session ID (for access control)
 - Current ticket ID (to continue conversations)
 - Widget state (open/closed)
@@ -295,8 +269,6 @@ The SDK persists the following data in localStorage:
 This data is cleared when:
 - `posthog.reset()` is called
 - The user clears browser storage
-
-> **Note:** Calling `posthog.reset()` will clear the widget session ID, meaning the user will no longer have access to their previous tickets.
 
 ## Error handling
 
@@ -331,10 +303,17 @@ try {
 }
 ```
 
-### Rate limiting
+## API reference summary
 
-The API has rate limits to prevent abuse:
-- Per-user throttling based on widget session ID
-- Per-team throttling for overall usage
-
-If you hit rate limits, wait a few seconds before retrying.
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `isAvailable()` | Check if conversations API is ready | `boolean` |
+| `isVisible()` | Check if widget is rendered | `boolean` |
+| `show()` | Show/render the widget | `void` |
+| `hide()` | Hide/remove the widget | `void` |
+| `sendMessage(message, userTraits?, newTicket?)` | Send a message | `Promise<SendMessageResponse \| null>` |
+| `getMessages(ticketId?, after?)` | Fetch messages | `Promise<GetMessagesResponse \| null>` |
+| `markAsRead(ticketId?)` | Mark messages as read | `Promise<MarkAsReadResponse \| null>` |
+| `getTickets(options?)` | Fetch tickets list | `Promise<GetTicketsResponse \| null>` |
+| `getCurrentTicketId()` | Get current ticket ID | `string \| null` |
+| `getWidgetSessionId()` | Get widget session ID | `string \| null` |

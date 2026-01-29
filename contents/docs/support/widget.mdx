@@ -1,5 +1,5 @@
 ---
-title: Widget setup
+title: Widget setup and configuration
 sidebar: Docs
 showTitle: true
 ---
@@ -8,70 +8,47 @@ import Alpha from './_snippets/alpha.mdx'
 
 <Alpha />
 
-The Support widget is a chat interface that appears on your website, allowing users to send messages directly to your team. When enabled, it automatically renders on your page.
+The Support widget is a chat interface that appears on your website, allowing users to start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
-## How the widget works
+## Enabling the widget
 
-When `widgetEnabled` is true in your project settings, the chat widget automatically renders on your page. The widget includes:
+1. Go to **Support** in PostHog and click **Settings**
+2. Click **Enable conversations** (if not already enabled)
+3. Go to the **In-app widget** section and enable it
+4. Configure your settings (see below)
+5. Save
 
-- **Floating chat button** - Positioned in the bottom-right corner with customizable color
-- **Chat panel** - Opens when clicked, showing conversation history and message input
-- **Unread badge** - Shows count of unread messages from your team
-- **Identification form** - Optional form to collect user name/email before chatting
+The widget appears as a floating button in the bottom-right corner of your site.
 
-## Configuration options
+## Widget configuration
 
-Configure the widget in **Settings > Conversations** in PostHog.
+These settings are configured in the **In-app widget** section of Support settings.
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| `widgetEnabled` | Whether to show the chat widget UI | `false` |
-| `color` | Primary color for the widget button (hex) | `#5375ff` |
-| `greetingText` | Welcome message shown when user opens the widget | `"Hi! How can we help?"` |
-| `placeholderText` | Placeholder text in the message input | `"Type your message..."` |
-| `requireEmail` | Require email before user can start chatting | `false` |
-| `collectName` | Show name field in the identification form | `true` |
-| `identificationFormTitle` | Title text for the identification form | `"Before we start..."` |
-| `identificationFormDescription` | Description text for the identification form | `"Please provide your details..."` |
-| `domains` | Allowed domains where the widget can appear | `[]` (all domains) |
-
-### Identification form
-
-If you want to collect user information before they start chatting, enable the identification form options:
-
-- **requireEmail** - When `true`, users must enter their email before sending a message
-- **collectName** - When `true`, shows a name field alongside the email field
-
-You can customize the form's title and description text to match your brand voice.
-
-> **Note:** If you're already using `posthog.identify()` with user properties like `email` or `name`, the widget will use those values automatically.
+| **Enable widget** | Show the chat widget on your site | `false` |
+| **Button color** | Primary color for the widget (hex) | `#5375ff` |
+| **Greeting message** | Welcome text shown when widget opens | `"Hi! How can we help?"` |
+| **Allowed domains** | Restrict which domains can show the widget | `[]` (all domains) |
 
 ## Domain restrictions
 
-You can restrict which domains the widget appears on for security or to limit it to specific environments.
+You can restrict which domains the widget appears on for security:
 
 ```javascript
 // Configured in PostHog settings
 domains: [
-  "example.com",            // Exact match
-  "*.example.com",          // Wildcard: matches app.example.com, docs.example.com
-  "https://app.example.com" // With protocol (protocol is stripped)
+  "example.com",              // Exact match
+  "*.example.com",            // Wildcard: matches sub.example.com
+  "https://app.example.com"   // With protocol (protocol is stripped)
 ]
 ```
 
 If `domains` is empty or not set, the widget shows on all domains.
 
-### Common patterns
-
-| Pattern | Matches |
-|---------|---------|
-| `example.com` | Only `example.com` |
-| `*.example.com` | `app.example.com`, `docs.example.com`, but not `example.com` |
-| `*.example.com, example.com` | Both `example.com` and all subdomains |
-
 ## Controlling widget visibility
 
-You can programmatically control the widget using the JavaScript API:
+Use the JavaScript API to programmatically show or hide the widget:
 
 ```javascript
 // Show the widget (renders it if not already rendered)
@@ -84,70 +61,49 @@ posthog.conversations.hide()
 const isVisible = posthog.conversations.isVisible()
 ```
 
-### Use cases
+This is useful for:
+- Showing the widget only on certain pages
+- Triggering the widget from a custom button
+- Hiding the widget during specific user flows
 
-**Show widget only on certain pages:**
+## Disabling the widget via config
 
-```javascript
-// Only show on /help pages
-if (window.location.pathname.startsWith('/help')) {
-  posthog.conversations.show()
-} else {
-  posthog.conversations.hide()
-}
-```
-
-**Show widget after user action:**
+You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-// Show widget when user clicks a help button
-document.getElementById('help-button').addEventListener('click', () => {
-  posthog.conversations.show()
+posthog.init('YOUR_API_KEY', {
+  disable_conversations: true  // Prevents loading the conversations module
 })
 ```
 
-**Hide widget for specific users:**
-
-```javascript
-// Hide for admin users
-if (currentUser.role === 'admin') {
-  posthog.conversations.hide()
-}
-```
+This is different from hiding the widget – it completely disables the feature.
 
 ## Email notifications
 
-Configure email notifications to alert your team when new tickets are created.
+Configure your team to receive email alerts when new tickets arrive.
 
 ### Setting up notifications
 
-1. Go to **Settings > Conversations** in PostHog
+1. Go to **Settings > Support** in PostHog
 2. Find the **Email notifications** section
-3. Select team members who should receive notifications
+3. Select team members who should receive alerts
 
-### What's included in notification emails
-
-When a new ticket is created, notification emails include:
+### What emails include
 
 - Team name
 - Ticket number
-- Customer information (name, email if provided)
 - First message preview
-- Direct link to the ticket in PostHog
+- Direct link to the ticket
 
-> **Note:** Recipients must have access to the team to receive notifications.
+Recipients must have access to the team to receive notifications.
 
-## Troubleshooting
+## Public token
 
-### Widget not appearing
+The widget uses a public token for authentication. This token is automatically generated and shown in your Support settings. It's safe to expose in client-side code.
 
-1. **Check that Support is enabled** - Go to Settings > Conversations and verify both "Enable conversations" and "Enable widget" are on
-2. **Check domain restrictions** - If you've set allowed domains, make sure your current domain matches
-3. **Check posthog-js version** - Requires version >= v1.230.0
-4. **Check init config** - Make sure `disable_conversations` is not set to `true`
+If you need to reset the token:
 
-### Widget appears but can't send messages
+1. Go to **Support > Settings**
+2. Click **Regenerate token**
 
-1. **Check browser console** - Look for any error messages
-2. **Check network requests** - Verify requests to the conversations API are succeeding
-3. **Check rate limiting** - If you've sent many messages quickly, you may be temporarily rate limited
+> **Warning:** Resetting the token will stop current chats. Users will need to refresh the page to reconnect with the new token.

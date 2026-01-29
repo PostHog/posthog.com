@@ -62,6 +62,17 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
+            name: 'Support',
+            Icon: IconThoughtBubble,
+            description: 'Built-in customer support with chat widget and unified inbox.',
+            handle: 'support',
+            color: 'blue',
+            colorSecondary: 'blue',
+            category: 'communication',
+            slug: 'docs/support',
+            status: 'private alpha',
+        },
+        {
             name: 'Group Analytics',
             Icon: IconPeople,
             description: 'Analyze multi-seat accounts and other groups.',

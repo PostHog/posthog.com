@@ -10,7 +10,7 @@ import Alpha from './_snippets/alpha.mdx'
 
 <Alpha />
 
-<QuestLog firstSpeechBubble="Let's set up support!" lastSpeechBubble="You're ready to help your users!">
+<QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
 
 <QuestLogItem
     title="Enable Support"
@@ -18,21 +18,19 @@ import Alpha from './_snippets/alpha.mdx'
     icon="IconToggle"
 >
 
-Support is enabled in your PostHog project settings. Once enabled, the widget and JavaScript API become available.
+Support is enabled via the Support product settings. Once enabled, the `posthog.conversations` API becomes available (if you have `posthog-js` installed).
 
 ### How to enable
 
-1. Go to **Settings > Conversations** in PostHog
-2. Toggle **Enable conversations** on
-3. Toggle **Enable widget** on to show the chat widget
+1. Go to **Support** in PostHog and click **Settings**
+2. Click **Enable conversations** – this enables the conversations API
+3. To show the chat widget, go to **In-app widget** section and enable it
+4. Configure your greeting message, button color, and other settings
+5. Save your settings
 
-The widget will automatically load on your site when you have `posthog-js` installed. You can also explicitly control this in your init config:
+If you enabled the widget, it will appear on your site for users to start conversations.
 
-```javascript
-posthog.init('YOUR_API_KEY', {
-  disable_conversations: false // default - set to true to disable
-})
-```
+> **Note:** You can enable just the API without the widget if you want to build a custom support UI. Simply skip step 3.
 
 <OSButton variant="primary" asLink to="/docs/support/widget">
   Configure widget settings
@@ -41,74 +39,82 @@ posthog.init('YOUR_API_KEY', {
 </QuestLogItem>
 
 <QuestLogItem
-    title="Customize the widget"
-    subtitle="Recommended"
-    icon="IconColor"
->
-
-Make the widget match your brand and set up a greeting for your users.
-
-In **Settings > Conversations**, configure:
-
-- **Button color** - Match your brand (hex value)
-- **Greeting message** - The welcome text users see when they open the widget
-- **Allowed domains** - Restrict which domains can show the widget (optional)
-
-You can also collect user information before they start chatting by enabling the identification form.
-
-<OSButton variant="primary" asLink to="/docs/support/widget">
-  See all widget options
-</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
     title="Test the widget"
-    subtitle="Required"
-    icon="IconFlask"
+    subtitle="Recommended"
+    icon="IconMessage"
 >
 
-Visit your site and look for the chat button in the bottom-right corner. Click it to open the widget and send a test message.
+Once enabled, visit your site and look for the chat button in the bottom-right corner.
 
-### What to check
+1. Click the chat button to open the widget
+2. Enter your name and email (if required)
+3. Send a test message
+4. Check your PostHog inbox to see the ticket
 
-1. The widget appears on your site
-2. You can open and close the chat panel
-3. You can send a message
-4. The greeting text shows correctly
-
-If you don't see the widget, check that:
-- Support is enabled in project settings
-- The widget is enabled
-- Your domain is in the allowed list (if you've set domain restrictions)
-- `posthog-js` version is >= v1.230.0
+The widget automatically captures:
+- **Session ID** - Links to events and exceptions from the user's session
+- **Session Replay ID** - Links to the user's session recording (if replay is enabled)
+- **Current URL** - The page they were on
+- **User identity** - If they're identified via `posthog.identify()`
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="View tickets in the inbox"
+    title="View and respond to tickets"
     subtitle="Required"
     icon="IconInbox"
 >
 
-After sending a test message, go to **Support** in PostHog to see your new ticket.
+All tickets appear in the Support inbox within PostHog.
 
-The inbox shows all tickets with:
+### What you'll see for each ticket
 
-- **Status** - New, open, pending, on hold, or resolved
-- **Last message** - Preview of the most recent message
-- **Unread count** - Messages you haven't seen yet
+- **Chat thread** - The conversation with the customer
+- **Session recording** - Watch what the user was doing (if available)
+- **Recent events** - Events from around when they submitted
+- **Exceptions** - Any errors from their session
+- **Previous tickets** - Other conversations with this user
 
-Click a ticket to view the full conversation and respond. Your response will appear in the user's widget.
+This context helps you understand and resolve issues faster.
 
 <OSButton variant="primary" asLink to="/docs/support/inbox">
-  Learn about inbox management
+  Learn about the inbox
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Use for free"
+    title="Build a custom UI (optional)"
+    subtitle="Optional"
+    icon="IconCode"
+>
+
+Don't want to use the default widget? Use the JavaScript API to build your own support experience.
+
+```javascript
+// Check if conversations are available
+if (posthog.conversations.isAvailable()) {
+  // Send a message
+  const response = await posthog.conversations.sendMessage(
+    'Hello, I need help!',
+    { name: 'John', email: 'john@example.com' }
+  )
+  
+  // Fetch messages
+  const messages = await posthog.conversations.getMessages()
+}
+```
+
+The API gives you full control over the UI while PostHog handles the backend.
+
+<OSButton variant="primary" asLink to="/docs/support/javascript-api">
+  Explore the JavaScript API
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Free during alpha"
     subtitle="No cost"
     icon="IconPiggyBank"
 >
@@ -121,8 +127,8 @@ We'll introduce pricing once we're out of alpha – we'll give you plenty of not
 
 That's it! You're ready to start helping your users.
 
-<OSButton variant="primary" asLink to="/docs/support/javascript-api">
-  Explore the JavaScript API
+<OSButton variant="primary" asLink to="/docs/support/widget">
+  Configure your widget
 </OSButton>
 
 </QuestLogItem>

@@ -1,16 +1,20 @@
----
-title: Widget API
-sidebar: Docs
-showTitle: true
----
-
 <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
 
-Support is currently in private alpha. [Share your thoughts](https://us.posthog.com/external_surveys/019af5f5-a50e-0000-b10f-e8c30c0b73a0) and we'll reach out with early access.
+Support is currently in private alpha. [Share your interest](https://us.posthog.com/external_surveys/01970d04-7155-0000-9e29-f9e1b18a1bda) and we'll reach out with early access.
 
 </CalloutBox>
 
-The Widget API allows you to build custom support interfaces instead of using the default chat widget. This is a low-level HTTP API – **most users should use the [JavaScript SDK](/docs/support/javascript-api) instead**, which handles authentication, session management, and provides a simpler interface.
+This documents the HTTP API for the Support widget. Most users should use the [JavaScript SDK](/docs/support/javascript-api) instead, which handles authentication and session management automatically.
+
+## Authentication
+
+All widget API requests require the `X-Conversations-Token` header with your public token:
+
+```bash
+X-Conversations-Token: <your_public_token>
+```
+
+Find your public token in **Settings > Support** in PostHog.
 
 ## Base URL
 
@@ -18,51 +22,34 @@ The Widget API allows you to build custom support interfaces instead of using th
 /api/conversations/v1/widget/
 ```
 
-## Authentication
-
-All requests require the `X-Conversations-Token` header with your public token:
-
-```
-X-Conversations-Token: <public_token>
-```
-
-You can find your public token in **Settings > Conversations** in PostHog. This token is safe to expose in client-side code.
-
 ## Endpoints
 
 ### POST /message
 
-Create a new message. If this is the first message for the `widget_session_id`, a new ticket is created.
+Create a new message. Creates a ticket if this is the first message for the widget session.
 
 **Request body:**
-
 ```json
 {
   "widget_session_id": "uuid",
   "distinct_id": "user_123",
   "message": "I need help with...",
-  "traits": { 
-    "name": "John", 
-    "email": "john@example.com" 
-  },
+  "traits": { "name": "John", "email": "john@example.com" },
   "session_id": "optional_posthog_session_id",
-  "session_context": { 
-    "current_url": "https://example.com/page" 
-  }
+  "session_context": { "current_url": "https://..." }
 }
 ```
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `widget_session_id` | string | Yes | Persistent UUID identifying this browser session |
+| `widget_session_id` | string | Yes | Unique browser identifier (UUID) |
+| `message` | string | Yes | The message text |
 | `distinct_id` | string | No | PostHog distinct_id for person linking |
-| `message` | string | Yes | The message content |
 | `traits` | object | No | User info: `name`, `email` |
 | `session_id` | string | No | PostHog session ID for replay linking |
 | `session_context` | object | No | Additional context: `current_url` |
 
 **Response:**
-
 ```json
 {
   "ticket_id": "uuid",
@@ -75,18 +62,16 @@ Create a new message. If this is the first message for the `widget_session_id`, 
 
 ### GET /messages/{ticket_id}
 
-Fetch messages for a specific ticket.
+Fetch messages for a ticket.
 
 **Query parameters:**
-
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `widget_session_id` | string | Yes | Must match the ticket's session |
-| `after` | string | No | ISO timestamp to fetch messages after (for polling) |
-| `limit` | number | No | Max messages to return (default: 50, max: 500) |
+| `after` | string | No | ISO timestamp for pagination |
+| `limit` | number | No | Max messages to return (default: 100, max: 500) |
 
 **Response:**
-
 ```json
 {
   "ticket_id": "uuid",
@@ -94,23 +79,14 @@ Fetch messages for a specific ticket.
   "messages": [
     {
       "id": "uuid",
-      "content": "I need help with...",
+      "content": "Hello, I need help",
       "author_type": "customer",
-      "author_name": "John",
       "created_at": "2024-01-15T10:30:00Z",
-      "is_private": false
-    },
-    {
-      "id": "uuid",
-      "content": "Happy to help! What specifically are you having trouble with?",
-      "author_type": "human",
-      "author_name": "Support Team",
-      "created_at": "2024-01-15T10:35:00Z",
       "is_private": false
     }
   ],
   "has_more": false,
-  "unread_count": 0
+  "unread_count": 1
 }
 ```
 
@@ -119,27 +95,25 @@ Fetch messages for a specific ticket.
 List tickets for a widget session.
 
 **Query parameters:**
-
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `widget_session_id` | string | Yes | The browser session ID |
-| `status` | string | No | Filter by status: `new`, `open`, `pending`, `on_hold`, `resolved` |
+| `widget_session_id` | string | Yes | Browser identifier |
+| `status` | string | No | Filter by status |
 | `limit` | number | No | Max tickets to return (default: 20) |
 | `offset` | number | No | Pagination offset |
 
 **Response:**
-
 ```json
 {
-  "count": 2,
+  "count": 5,
   "results": [
     {
       "id": "uuid",
       "status": "open",
-      "last_message": "Happy to help!",
-      "last_message_at": "2024-01-15T10:35:00Z",
-      "message_count": 2,
-      "created_at": "2024-01-15T10:30:00Z",
+      "last_message": "Thanks for your help!",
+      "last_message_at": "2024-01-15T10:30:00Z",
+      "message_count": 3,
+      "created_at": "2024-01-15T10:00:00Z",
       "unread_count": 1
     }
   ]
@@ -148,10 +122,9 @@ List tickets for a widget session.
 
 ### POST /messages/{ticket_id}/read
 
-Mark a ticket's messages as read by the customer.
+Mark messages as read by the customer.
 
 **Request body:**
-
 ```json
 {
   "widget_session_id": "uuid"
@@ -159,7 +132,6 @@ Mark a ticket's messages as read by the customer.
 ```
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -169,11 +141,9 @@ Mark a ticket's messages as read by the customer.
 
 ## Security
 
-The Widget API includes several security measures:
-
 ### Origin validation
 
-Requests are validated against the `widget_domains` setting in your project configuration. If you've configured allowed domains, requests from other origins will be rejected.
+Requests are validated against the `allowed_domains` setting. If domains are configured, requests from other origins are rejected.
 
 ### Session-based access control
 
@@ -181,36 +151,30 @@ Users can only access tickets associated with their `widget_session_id`. This pr
 
 ### Honeypot
 
-A hidden `_hp` field is used to reject bot submissions. If this field contains any value, the request is rejected.
+A hidden `_hp` field rejects bot submissions if filled.
 
 ### Rate limiting
 
-The API enforces rate limits to prevent abuse:
-- Per-user throttling based on `widget_session_id`
-- Per-team throttling for overall usage
+The API implements rate limiting:
+- Per-user throttling based on widget_session_id
+- Per-team throttling to prevent abuse
 
-If you hit rate limits, you'll receive a `429 Too Many Requests` response. Wait a few seconds before retrying.
+If rate limited, you'll receive a `429 Too Many Requests` response.
 
 ## Error responses
 
 | Status | Description |
 |--------|-------------|
-| `400` | Bad request - missing required fields or invalid data |
+| `400` | Bad request - missing required fields |
 | `401` | Unauthorized - invalid or missing token |
 | `403` | Forbidden - origin not allowed or session mismatch |
-| `404` | Not found - ticket doesn't exist or doesn't belong to this session |
+| `404` | Not found - ticket doesn't exist |
 | `429` | Too many requests - rate limited |
 | `500` | Server error |
 
-## When to use the HTTP API
-
-Use the HTTP API directly when:
-- Building a mobile app (where the JS SDK isn't available)
-- Integrating with a backend service
-- Building a completely custom implementation
-
-For web applications, we recommend using the [JavaScript SDK](/docs/support/javascript-api) instead, which provides:
-- Automatic session management
-- Built-in error handling
-- Simpler method signatures
-- Automatic PostHog integration
+Error responses include a JSON body:
+```json
+{
+  "error": "Description of the error"
+}
+```
