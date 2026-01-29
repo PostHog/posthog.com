@@ -94,8 +94,10 @@ export const fullstory = {
             features: {
                 canvas_recording: true,
                 chat_with_recordings: false,
-                conditional_recording: true,
-                crash_reports: false,
+                // https://help.fullstory.com/hc/en-us/articles/360020623854-Is-it-possible-to-rate-limit-or-sample-with-Fullstory
+                conditional_recording: false,
+                // https://help.fullstory.com/hc/en-us/articles/24730772415511-Native-Mobile-Crash-Error-Reporting
+                crash_reports: 'Android & Flutter',
                 event_timeline: true,
                 export_to_json: true,
                 export_to_video: false,
@@ -107,7 +109,7 @@ export const fullstory = {
                 notes_on_replays: true,
                 playlists: false,
                 privacy_masking: true,
-                retention_policy: '1 month',
+                retention_policy: '12 months',
                 screenshot_mode: false,
                 search_by_network: false,
                 share_replays: true,
@@ -120,11 +122,12 @@ export const fullstory = {
             platform_support: {
                 features: {
                     web_app_recordings: true,
-                    mobile_app_recordings: true,
-                    ios_recordings: true,
-                    android_recordings: true,
-                    react_native_recordings: false,
-                    flutter_recordings: false,
+                    // https://help.fullstory.com/hc/en-us/articles/360020623114-Does-Fullstory-work-with-native-mobile-apps
+                    mobile_app_recordings: 'Add-on',
+                    ios_recordings: 'Add-on',
+                    android_recordings: 'Add-on',
+                    react_native_recordings: 'Add-on',
+                    flutter_recordings: 'Add-on',
                 },
             },
             analysis: {
@@ -139,9 +142,10 @@ export const fullstory = {
                     rage_taps: true,
                 },
             },
+            // https://www.fullstory.com/plans/
             ai: {
                 features: {
-                    ai_summaries: true,
+                    ai_summaries: 'Add-on',
                 },
             },
         },
@@ -191,6 +195,8 @@ export const fullstory = {
             transparent_pricing: false,
             usage_based_pricing: true,
         },
+        // https://help.fullstory.com/hc/en-us/sections/360003790653-Supported-Integrations
+        // https://directory.fullstory.com/integrations
         integrations: {
             azure_blob: false,
             bigquery: true,
@@ -203,18 +209,18 @@ export const fullstory = {
             hubspot: false,
             imports: false,
             intercom: true,
-            microsoft_teams: false,
+            microsoft_teams: true,
             redshift: false,
             rudderstack: true,
             s3: false,
             salesforce: true,
             segment: true,
-            slack: false,
+            slack: true,
             snowflake: true,
             sentry: false,
             stripe: false,
-            zapier: false,
-            zendesk: false,
+            zapier: true,
+            zendesk: true,
         },
         developer: {
             api: true,
@@ -232,7 +238,7 @@ export const fullstory = {
             gdpr_ready: true,
             hipaa_ready: true,
             history_audit_logs: false,
-            saml_sso: true,
+            saml_sso: 'Enterprise',
             soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,
