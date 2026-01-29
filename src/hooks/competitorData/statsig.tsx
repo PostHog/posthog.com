@@ -227,7 +227,7 @@ export const statsig = {
                 minimum_duration: false,
                 movement_maps: false,
                 notes_on_replays: false,
-                playlists: false,
+                playlists: true,
                 privacy_masking: true,
                 retention_policy: '30 days',
                 screenshot_mode: false,
@@ -277,7 +277,7 @@ export const statsig = {
     },
     platform: {
         deployment: {
-            eu_hosting: false,
+            eu_hosting: true,
             managed_reverse_proxy: false,
             open_source: false,
             self_host: false,
@@ -312,7 +312,7 @@ export const statsig = {
             community_integrations: false,
             csv_exports: false,
             customer_io: false,
-            data_warehouse: false,
+            data_warehouse: true,
             datadog: true,
             email_reports: false,
             exports: true,

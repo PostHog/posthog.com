@@ -3,7 +3,8 @@
  * PR example: https://github.com/PostHog/posthog.com/pull/13838
  *
  * Landing pages automatically display cards by reading MDX files and
- * sidebar navigation at build time. No more manually maintaining hardcoded platform lists!
+ * sidebar navigation at build time. Only platforms listed in the sidebar
+ * will appear on the page.
  *
  * Add a platform to an existing section:
  * 1. Create MDX file with frontmatter:
@@ -15,9 +16,8 @@
  * 3. Done!
  *
  * Remove a platform:
- * 1. Delete MDX file
- * 2. Remove from sidebar in src/navs/index.js
- * 3. It auto-deletes from the platformList at build time
+ * 1. Remove from sidebar in src/navs/index.js - this removes it from the page
+ * 2. Optionally delete MDX file if no longer needed
  *
  * Add pattern to new section:
  * 1. Add platformLogo or platformIconName to all platform MDX files' frontmatter, see `src/constants/logos.ts` for available keys
@@ -46,14 +46,28 @@ interface Platform {
 }
 
 /**
- * Recursively searches for a section with the given URL and returns its children URLs
+ * Collects all URLs from a section and its nested children
+ */
+function collectAllUrls(children: any[], parentUrl: string): string[] {
+    const urls: string[] = []
+    for (const child of children) {
+        if (child.url && child.url !== parentUrl) {
+            urls.push(child.url)
+        }
+        if (child.children) {
+            urls.push(...collectAllUrls(child.children, child.url))
+        }
+    }
+    return urls
+}
+
+/**
+ * Searches for a section with the given URL and returns all descendant URLs
  */
 function findSectionChildren(sections: any[], targetUrl: string): string[] {
     for (const section of sections) {
         if (section.url === targetUrl && section.children) {
-            return section.children
-                .filter((child: any) => child.url && child.url !== targetUrl)
-                .map((child: any) => child.url)
+            return collectAllUrls(section.children, targetUrl)
         }
         if (section.children) {
             const result = findSectionChildren(section.children, targetUrl)
@@ -145,15 +159,24 @@ export default function usePlatformList(
     const sidebarOrder = getSidebarOrder(basePath)
 
     if (sidebarOrder.length > 0) {
-        return result.sort((a: Platform, b: Platform) => {
-            const indexA = sidebarOrder.indexOf(a.url)
-            const indexB = sidebarOrder.indexOf(b.url)
+        // Warn about MDX files that exist but aren't in the sidenav
+        const orphanedFiles = result.filter((platform: Platform) => !sidebarOrder.includes(platform.url))
+        if (orphanedFiles.length > 0) {
+            console.warn(
+                `[usePlatformList] Found ${orphanedFiles.length} MDX file(s) in "${basePath}" not listed in sidenav:\n` +
+                    orphanedFiles.map((p: Platform) => `  - ${p.url}`).join('\n') +
+                    `\nAdd these to src/navs/index.js or delete the MDX files if they're no longer needed.`
+            )
+        }
 
-            if (indexA !== -1 && indexB !== -1) return indexA - indexB
-            if (indexA !== -1) return -1
-            if (indexB !== -1) return 1
-            return 0
-        })
+        // Filter to only include items that are in the sidebar, then sort by sidebar order
+        return result
+            .filter((platform: Platform) => sidebarOrder.includes(platform.url))
+            .sort((a: Platform, b: Platform) => {
+                const indexA = sidebarOrder.indexOf(a.url)
+                const indexB = sidebarOrder.indexOf(b.url)
+                return indexA - indexB
+            })
     }
 
     return result

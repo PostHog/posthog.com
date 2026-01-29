@@ -145,6 +145,7 @@ const Search = ({
                             static
                             hold
                             className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl"
+                            onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>

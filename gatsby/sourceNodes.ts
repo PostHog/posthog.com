@@ -179,7 +179,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     })
 
     const createProductDataNode = async () => {
-        const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+        const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
             'Content-Type': 'application/json',
         }
