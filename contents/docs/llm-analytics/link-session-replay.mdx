@@ -48,9 +48,9 @@ const response = await fetch('/api/chat', {
 
 Once you have the session ID, include it in your LLM tracking using the `$session_id` property:
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 app.post('/api/chat', async (req, res) => {
   const { message, sessionId } = req.body
   
@@ -69,7 +69,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.json

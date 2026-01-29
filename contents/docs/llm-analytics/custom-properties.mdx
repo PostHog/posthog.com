@@ -27,9 +27,9 @@ You can add custom properties to any LLM generation using the `posthogProperties
 
 ### Basic example
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
@@ -55,7 +55,7 @@ const response = await openai.responses.create({
 })
 ```
 
-```python file=Python
+```python
 from posthog.ai.openai import OpenAI
 from posthog import Posthog
 
@@ -89,9 +89,9 @@ response = client.responses.create(
 
 Track LLM usage by subscription tier or payment plan to monitor costs and usage patterns:
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 const getSubscriptionTier = (userId) => {
   // Your logic to determine the user subscription tier
   return user.subscription?.tier || 'free'
@@ -109,7 +109,7 @@ const response = await openai.responses.create({
 })
 ```
 
-```python file=Python
+```python
 def get_subscription_tier(user_id):
     # Your logic to determine the user's subscription tier
     return user.subscription.tier if user.subscription else 'free'
@@ -132,9 +132,9 @@ response = client.responses.create(
 
 Track different versions of your prompts to measure improvements:
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 const PROMPT_VERSION = "v2.3.1"
 const PROMPT_ID = "customer_support_agent"
 
@@ -155,7 +155,7 @@ const response = await anthropic.messages.create({
 })
 ```
 
-```python file=Python
+```python
 PROMPT_VERSION = "v2.3.1"
 PROMPT_ID = "customer_support_agent"
 
@@ -182,9 +182,9 @@ response = client.messages.create(
 
 Set meaningful names for your LLM generations to improve trace readability:
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 // For Vercel AI SDK
 import { withTracing } from '@posthog/ai'
 import { generateText } from 'ai'
@@ -207,7 +207,7 @@ const { text } = await generateText({
 })
 ```
 
-```python file=Python
+```python
 response = client.responses.create(
     model="gpt-5",
     messages=messages,

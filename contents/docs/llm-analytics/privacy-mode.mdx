@@ -8,7 +8,17 @@ To avoid storing potentially sensitive prompt and completion data, you can enabl
 
 This can be done by setting the `privacy_mode` config option in the SDK like this:
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage syncKey="sdk-backend">
+
+```node
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  {
+    host: '<ph_client_api_host>',
+    privacyMode: true
+  }
+)
+```
 
 ```python
 from posthog import Posthog
@@ -20,23 +30,13 @@ posthog = Posthog(
 )
 ```
 
-```ts
-const phClient = new PostHog(
-  '<ph_project_api_key>',
-  { 
-    host: '<ph_client_api_host>',
-    privacyMode: true
-  }
-)
-```
-
 </MultiLanguage>
 
 ## Request parameter
 
 It can also be set at the request level by setting the `privacy_mode` parameter to `True` in the request. The exact setup depends on the LLM platform you're using:
 
-<MultiLanguage syncKey="llm">
+<MultiLanguage>
 
 ```python file=OpenAI.py
 client.responses.create(
