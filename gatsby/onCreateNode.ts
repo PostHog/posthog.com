@@ -54,8 +54,10 @@ const cloudinaryCache = {}
 
 const REPO_CONFIGS = {
     'posthog-main-repo': {
-        stripPrefix: '/docs/published/',
-        pathPrefix: '/handbook/engineering',
+        mappings: [
+            { stripPrefix: '/docs/published/products/', pathPrefix: '/docs' },
+            { stripPrefix: '/docs/published/', pathPrefix: '/handbook/engineering' },
+        ],
     },
 }
 
@@ -154,15 +156,17 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         let slug = createFilePath({ node, getNode, basePath: `pages` })
         if (parent?.sourceInstanceName) {
             const config = REPO_CONFIGS[parent.sourceInstanceName]
-            if (config) {
-                if (slug.startsWith(config.stripPrefix)) {
-                    slug = slug.substring(config.stripPrefix.length)
+            if (config?.mappings) {
+                for (const mapping of config.mappings) {
+                    if (slug.startsWith(mapping.stripPrefix)) {
+                        slug = slug.substring(mapping.stripPrefix.length)
+                        if (!slug.startsWith('/')) {
+                            slug = `/${slug}`
+                        }
+                        slug = `${mapping.pathPrefix}${slug}`
+                        break
+                    }
                 }
-                // Ensure slug starts with / before concatenating
-                if (!slug.startsWith('/')) {
-                    slug = `/${slug}`
-                }
-                slug = `${config.pathPrefix}${slug}`
             }
         }
 
