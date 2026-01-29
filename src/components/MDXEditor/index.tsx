@@ -35,6 +35,7 @@ import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useApp } from '../../context/App'
+import Link from 'components/Link'
 
 export default function MDXEditor({
     body,
@@ -131,8 +132,8 @@ export default function MDXEditor({
 
     const content = (
         <div onClick={handleClick} ref={mdxEditorContainerRef}>
-            {isSSR && mdxBody ? (
-                <MDXProvider components={mdxComponents}>
+            {(isSSR && mdxBody) || websiteMode ? (
+                <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
             ) : (
