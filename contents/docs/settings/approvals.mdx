@@ -219,10 +219,15 @@ Small rollout adjustments (20% or less) proceed immediately. Larger increases re
 **Scenario**: Your compliance requirements mandate that two people review any feature flag change.
 
 **Setup**:
-1. Create an approval policy for feature flag actions
-2. Set the quorum to 2
-3. Disable self-approval
-4. Add all authorized reviewers
+Create an approval policy for feature flags actions:
+1. Go to **Settings** > **Project** > **Approvals**
+2. Click **New policy**
+3. Select the actions: **Enable feature flag**, **Disable feature flag**, and **Update feature flag**
+4. Leave conditions empty to require approval for all changes
+5. Add approvers: select the team members who should review changes
+6. Set quorum to 2
+7. Disable **Allow self-approval**
+8. Save the policy
 
 Every change requires two different people to approve before it takes effect.
 
