@@ -509,5 +509,13 @@
         "link_type": "linkedin",
         "link_url": "https://dk.linkedin.com/in/chriseynius",
         "profile_id": 35037
+    },
+    {
+        "handle": "lricoy",
+        "name": "Lucas Ricoy",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/lricoy",
+        "profile_id": 33028
     }
 ]
