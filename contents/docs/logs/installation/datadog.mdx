@@ -1,0 +1,79 @@
+---
+title: Datadog logs installation
+platformIconName: IconCode
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+If you're already using Datadog to collect logs, you can forward them to PostHog by configuring your existing Datadog log exporters (like the Datadog Agent) to send logs to PostHog's Datadog-compatible endpoint.
+
+<Steps>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
+
+</Step>
+
+<Step title="Configure Datadog Agent" badge="required">
+
+Set the Datadog logs URL to point to PostHog's Datadog-compatible endpoint. The endpoint format is:
+
+```
+<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>
+```
+
+For the **Datadog Agent**, set the `DD_LOGS_CONFIG_LOGS_DD_URL` environment variable:
+
+```bash
+export DD_LOGS_CONFIG_LOGS_DD_URL="<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>"
+```
+
+Alternatively, you can set this in your `datadog.yaml` configuration file:
+
+```yaml
+logs_config:
+  logs_dd_url: "<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>"
+```
+
+</Step>
+
+<Step title="Other Datadog log exporters" badge="optional">
+
+If you're using other Datadog log exporters or forwarders, configure them to send logs to the same endpoint:
+
+```
+<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>
+```
+
+The endpoint accepts logs in the standard Datadog log format, so existing integrations should work without additional changes.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Restart the Datadog Agent (or your log forwarder) to apply the configuration
+2. Generate some log entries in your application
+3. Check the PostHog logs interface for your log entries
+4. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

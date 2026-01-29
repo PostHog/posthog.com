@@ -64,7 +64,8 @@ export const signoz = {
             azure_blob: false,
             bigquery: false,
             cdp: false,
-            ci_cd_integrations: 'Partial',
+            // https://signoz.io/blog/ci-cd-observability-opentelemetry/
+            ci_cd_integrations: true,
             community_integrations: false,
             csv_exports: false,
             customer_io: false,

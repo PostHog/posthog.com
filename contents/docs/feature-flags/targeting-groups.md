@@ -1,12 +1,7 @@
 ---
 title: 'Targeting feature flags on groups, pages, machines, and more'
-date: 2023-08-14
-author:
-  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags:
-  - feature flags
 ---
 
 To decide what value to return, PostHog’s feature flag service uses a flag key and an entity. Which entity to use it up to you, and these don't necessarily need to be _users_ – you can also target organizations, pages, machines, and more. 
@@ -82,7 +77,7 @@ If instead, you want to target users who visited a page repeatedly, you can crea
 
 ## Targeting services, machines, devices, applications
 
-Another entity you might want to target is services, machines, or devices. For example, you might want to roll out a [canary release](/tutorials/canary-release) to some of your servers or activate a flag in one region but not another.
+Another entity you might want to target is services, machines, or devices. For example, you might want to roll out a [canary release](/docs/feature-flags/canary-release) to some of your servers or activate a flag in one region but not another.
 
 ### Custom user value
 

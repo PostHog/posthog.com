@@ -58,9 +58,6 @@ export const posthog = {
                 ab_experiments: true,
             },
         },
-        llm_analytics: {
-            available: true,
-        },
         session_replay: {
             available: true,
             beta: false,
@@ -246,7 +243,7 @@ export const posthog = {
             },
         },
         product_tours: {
-            available: false,
+            available: 'Private alpha',
         },
         feature_flags: {
             available: true,
@@ -480,11 +477,12 @@ export const posthog = {
         cdp: {
             available: true,
             features: {
-                number_of_integrations: '60+',
+                number_of_integrations: '200+',
                 realtime_streaming: true,
                 custom_transformations: true,
                 no_code_setup: true,
                 built_in_analytics: true,
+                
             },
         },
         llm_analytics: {

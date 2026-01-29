@@ -23,9 +23,11 @@ go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp
 
 <Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
 
-You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
 
 </Step>
 
@@ -37,10 +39,16 @@ Set up the OpenTelemetry SDK to send logs to PostHog.
 package main
 
 import (
+	"os"
     "context"
-    "go.opentelemetry.io/otel"
+    "log"
+    "log/slog"
+
     "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp"
-    "go.opentelemetry.io/otel/sdk/log"
+    "go.opentelemetry.io/otel/exporters/stdout/stdoutlog"
+    "go.opentelemetry.io/contrib/bridges/otelslog"
+    otellog "go.opentelemetry.io/otel/sdk/log"
+    "go.opentelemetry.io/otel/log/global"
 )
 
 func main() {
@@ -48,29 +56,42 @@ func main() {
 
     // Create OTLP HTTP exporter
     exporter, err := otlploghttp.New(ctx,
-        otlploghttp.WithEndpoint("us.i.posthog.com"),
+        otlploghttp.WithEndpoint("<ph_region>.i.posthog.com"),
         otlploghttp.WithURLPath("/i/v1/logs"),
         otlploghttp.WithHeaders(map[string]string{
-            "Authorization": "Bearer " + YOUR_PROJECT_API_KEY,
+            "Authorization": "Bearer <ph_project_api_key>",
         }),
     )
     if err != nil {
         panic(err)
     }
 
-    // Create logger provider
-    loggerProvider := log.NewLoggerProvider(
-        log.WithBatcher(exporter),
-    )
+    // you could also set this outside your application
+    os.Setenv("OTEL_SERVICE_NAME", "my-service")
 
-    otel.SetLoggerProvider(loggerProvider)
+    stdoutExporter, _ := stdoutlog.New()
+
+    // Create logger provider
+    loggerProvider := otellog.NewLoggerProvider(
+        otellog.WithProcessor(otellog.NewBatchProcessor(exporter)),
+        // optional, also log to stdout
+        otellog.WithProcessor(otellog.NewSimpleProcessor(stdoutExporter)),
+    )
+    defer func() {
+		loggerProvider.Shutdown(context.Background())
+	}()
+
+    global.SetLoggerProvider(loggerProvider)
+    slog.SetDefault(otelslog.NewLogger(""))
+
+    log.Println("this is a log line")
 }
 ```
 
 Alternatively, you can pass the API key as a query parameter by modifying the URL path:
 
 ```go
-otlploghttp.WithURLPath("/i/v1/logs?token=" + YOUR_PROJECT_API_KEY)
+otlploghttp.WithURLPath("/i/v1/logs?token=<ph_project_api_key>")
 ```
 
 </Step>

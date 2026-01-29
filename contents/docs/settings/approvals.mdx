@@ -1,0 +1,242 @@
+---
+title: Approvals
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: none
+    scale: full
+    enterprise: full
+---
+
+export const approvalsOverviewLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_09_29_99087c1a8d.png"
+export const approvalsOverviewDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_10_22_8f295cf0ba.png"
+export const approvalsPolicyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_26_59_93df353ffc.png"
+export const approvalsPolicyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_27_29_740dec7482.png"
+export const approvalsWorkflowLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_30_35_91cd5aaf4d.png"
+export const approvalsWorkflowDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_30_42_a119d94040.png"
+export const approvalsChangeRequest1Light = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_22_18_560d368bb2.png"
+export const approvalsChangeRequest1Dark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_22_26_ce6ac690a1.png"
+export const approvalsChangeRequest2Light = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_23_16_b68ba76945.png"
+export const approvalsChangeRequest2Dark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_28_at_9_23_28_75c0d58860.png"
+
+Approvals add a review step before high-impact changes take effect. Use them to prevent accidental rollouts, enforce change management processes, or meet compliance requirements that mandate human review of critical changes.
+
+<ProductScreenshot
+    imageLight = {approvalsOverviewLight}
+    imageDark = {approvalsOverviewDark}
+    alt="Approvals interface showing pending change requests"
+    classes="rounded"
+/>
+
+## How approvals work
+
+When approvals are enabled, [supported actions](#supported-actions) create a **change request** instead of taking effect immediately. The change request captures what the user wants to do and waits for approval from designated reviewers.
+
+Once enough approvers approve the request and reach the required quorum, PostHog automatically applies the change. If reviewers reject the request, the change is not applied and the requester is notified.
+
+### Approval workflow
+
+1. **User attempts a gated action** – For example, enabling a feature flag or changing a rollout percentage
+2. **Change request created** – PostHog captures the intended change and notifies approvers via email
+3. **Reviewers evaluate** – Approvers can approve or reject the request
+4. **Change applied or rejected** – When quorum is reached, the change is automatically applied. If the request is rejected, the requester is notified and the change is discarded
+
+<ProductScreenshot
+    imageLight = {approvalsWorkflowLight}
+    imageDark = {approvalsWorkflowDark}
+    alt="Approval workflow diagram"
+    classes="rounded"
+/>
+
+## Supported actions
+
+Approvals currently support gating the following actions:
+
+| Resource | Gateable actions |
+|----------|-----------------|
+| Feature flags | Enable, disable, change rollout percentage |
+
+More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
+
+## Approval policies
+
+Approval policies define when actions require approval and who can approve them. Policies can be configured at the project level.
+
+<ProductScreenshot
+    imageLight = {approvalsPolicyLight}
+    imageDark = {approvalsPolicyDark}
+    alt="Approval policy configuration"
+    classes="rounded"
+/>
+
+### Policy components
+
+Each approval policy includes:
+
+| Component | Description |
+|-----------|-------------|
+| **Action** | Which action triggers this policy (e.g., "Enable feature flag") |
+| **Conditions** | Rules that determine when approval is required (available on certain policy types only) |
+| **Approvers** | Users or roles authorized to approve requests |
+| **Quorum** | Number of approvals needed before the change is applied |
+| **Self-approve** | Whether the requester is allowed to self-approve the change request |
+
+> **Note**:  In order for a self-approver to be able to approve a change request, they still need to be part of the approvers set of users/roles.
+
+### Conditions
+
+Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
+
+| Condition type | Description | Example |
+|----------------|-------------|---------|
+| **Any change** | Requires approval for any modification to the specified field | Any change to rollout percentage |
+| **Before/after** | Requires approval when the new value meets a threshold | New rollout percentage > 50% |
+| **Change amount** | Requires approval when the change magnitude exceeds a threshold | Rollout percentage increases by more than 10% |
+
+Conditions support these operators: `>`, `<`, `>=`, `<=`, `==`, `!=`
+
+> **Note**: The `change_amount` condition only compares values that exist in both the before and after states. If you add a new release condition group to a feature flag, `change_amount` won't trigger because there's no previous value to compare against. Use `any_change` or `before_after` if you want to gate newly added groups.
+
+### Approvers
+
+You can designate approvers in two ways:
+
+- **Specific users** – Select individual team members who can approve requests
+- **Roles** – Grant approval rights to everyone with a specific [role](/docs/settings/access-control)
+
+When both users and roles are specified, anyone in either group can approve.
+
+### Self-approval
+
+By default, the person who created a change request cannot approve it themselves. You can enable self-approval in the policy settings if your workflow allows it.
+
+## Change requests
+
+A change request captures everything needed to apply a change: what resource is being modified, what the change is, and who requested it.
+
+<ProductScreenshot
+    imageLight = {approvalsChangeRequest1Light}
+    imageDark = {approvalsChangeRequest1Dark}
+    alt="Change request details"
+    classes="rounded"
+/>
+
+<ProductScreenshot
+    imageLight = {approvalsChangeRequest2Light}
+    imageDark = {approvalsChangeRequest2Dark}
+    alt="Change request details"
+    classes="rounded"
+/>
+
+### Change request states
+
+| State | Description |
+|-------|-------------|
+| **Pending** | Awaiting approval or rejection |
+| **Approved** | Quorum reached, change is being applied |
+| **Applied** | Change was successfully applied |
+| **Rejected** | Request was rejected by a reviewer |
+| **Expired** | Request was not actioned before the expiration period |
+| **Failed** | Change could not be applied (e.g., resource was modified externally) |
+
+### Viewing change requests
+
+You can view change requests in a couple of places:
+
+- **Resource detail page** – When viewing a feature flag or other resource, pending change requests are shown in a banner at the top of the page
+- **Settings** – Go to **Settings** → **Project** → **Approvals** to see all change requests for the project
+
+### Acting on change requests
+
+**To approve a request:**
+1. Go to the change request via the banner on the resource or **Settings** → **Project** → **Approvals**
+2. Review the proposed changes
+3. Click **Approve**
+
+**To reject a request:**
+1. Go to the change request via the banner on the resource or **Settings** → **Project** → **Approvals**
+2. Review the proposed changes
+3. Click **Reject** and provide a reason
+
+A reason is required when rejecting to help the requester understand why.
+
+**To cancel a request:**
+Only the original requester can cancel a pending change request, and only before any votes have been cast.
+
+### Validation and staleness
+
+Change requests are continuously validated to ensure they can still be applied. If the underlying resource changes after a request is created, the request may become **stale**.
+
+#### Feature flag version tracking
+
+Feature flags have an internal version number that increments whenever the flag is modified. When you create a change request for a feature flag, the current version is recorded as part of the request.
+
+If anyone modifies the feature flag while a change request is pending—whether through bypass permissions, the API, or another approved change request—the flag's version increments. This makes the pending change request **inapplicable**: the approval workflow can still complete (approvers can still approve), but PostHog cannot apply the requested change because it was created against an older version of the flag with different properties.
+
+When this happens:
+1. The change request shows a warning indicating it is stale
+2. The approval flow can complete, but the change will fail to apply
+3. The requester must create a new change request based on the current state of the feature flag
+
+This version tracking prevents race conditions where concurrent changes could lead to unexpected flag states. It ensures that approved changes are applied exactly as reviewed, or not at all.
+
+> **Tip**: Coordinate with your team before modifying resources that have pending change requests. Check for pending requests in the resource's detail page or the approvals settings before making direct changes.
+
+## Common use cases
+
+### Requiring approval for production feature flag changes
+
+**Scenario**: You want to ensure all feature flag changes in production are reviewed before taking effect.
+
+**Setup**:
+1. Go to **Settings** → **Project** → **Approvals**
+2. Click **New policy**
+3. Select the actions: **Enable feature flag**, **Disable feature flag**, and **Update feature flag**
+4. Leave conditions empty to require approval for all changes
+5. Add approvers: select your engineering leads or a "Feature Flag Reviewers" role
+6. Set quorum to 1 or higher if you want multiple reviewers
+7. Save the policy
+
+Now all feature flag changes will create change requests that must be approved.
+
+### Gating large rollout increases
+
+**Scenario**: You want to allow small rollout changes without approval, but require review for large increases.
+
+**Setup**:
+1. Go to **Settings** → **Project** → **Approvals**
+2. Click **New policy**
+3. Select **Update feature flag**
+4. Add a condition: **Change amount** > 20 for `rollout_percentage`
+5. Add approvers
+6. Save the policy
+
+Small rollout adjustments (20% or less) proceed immediately. Larger increases require approval.
+
+### Dual approval for compliance
+
+**Scenario**: Your compliance requirements mandate that two people review any feature flag change.
+
+**Setup**:
+Create an approval policy for feature flags actions:
+1. Go to **Settings** > **Project** > **Approvals**
+2. Click **New policy**
+3. Select the actions: **Enable feature flag**, **Disable feature flag**, and **Update feature flag**
+4. Leave conditions empty to require approval for all changes
+5. Add approvers: select the team members who should review changes
+6. Set quorum to 2
+7. Disable **Allow self-approval**
+8. Save the policy
+
+Every change requires two different people to approve before it takes effect.
+
+## Notifications
+
+Approvals integrate with PostHog's notification system to keep everyone informed:
+
+- **Approvers** receive notifications when a new change request needs their review
+- **Requesters** receive notifications when their request is approved, applied, rejected, or expires
+
+Notifications are delivered via email.
+

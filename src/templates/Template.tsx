@@ -10,56 +10,24 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import { ZoomImage } from 'components/ZoomImage'
 import Link from 'components/Link'
-import Slugger from 'github-slugger'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TreeMenu } from 'components/TreeMenu'
-import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import TemplateCTAs from 'components/TemplateCTAs'
 
 const A = (props) => <Link {...props} />
-
-const TemplateCTAs = ({ type, title, usePrefilterLink = true }) => {
-    const isDashboard = type.includes('dashboard')
-    const isSurvey = type.includes('survey')
-
-    if (!isDashboard && !isSurvey) return null
-
-    const primaryHref = isDashboard
-        ? `https://us.posthog.com/dashboard?${usePrefilterLink ? `templateFilter=${title}` : ''}#newDashboard`
-        : 'https://us.posthog.com/survey_templates'
-    const secondaryHref = isDashboard ? 'https://us.posthog.com/dashboard' : 'https://us.posthog.com/surveys'
-
-    return (
-        <div className="flex justify-center gap-2 mb-12">
-            <CallToAction href={primaryHref} type="primary">
-                Get started with this template
-            </CallToAction>
-            <CallToAction href={secondaryHref} type="secondary">
-                Create your own
-            </CallToAction>
-        </div>
-    )
-}
 
 export default function Template({ data }) {
     const { pageData, templates, workflowTemplates } = data
     const {
         body,
         excerpt,
-        headings,
         fields: { slug },
         parent,
     } = pageData
-    const {
-        title,
-        subtitle,
-        featuredImage,
-        description,
-        tableOfContents: frontmatterToc,
-        filters,
-    } = pageData?.frontmatter
-    const type = filters?.type?.map((t) => t.toLowerCase()) || []
+    const { title, featuredImage, description, filters } = pageData?.frontmatter
+    const templateType = filters?.type?.[0]?.toLowerCase()
     const filePath = parent?.relativePath
 
     // Group templates by type for the sidebar menu
@@ -154,7 +122,20 @@ export default function Template({ data }) {
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
-                    <TemplateCTAs type={type} title={title} />
+                    <div className="mb-12">
+                        <TemplateCTAs
+                            urls={{
+                                primary:
+                                    templateType === 'survey'
+                                        ? `https://app.posthog.com/survey_templates`
+                                        : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
+                                secondary:
+                                    templateType === 'survey'
+                                        ? `https://app.posthog.com/surveys/guided/new`
+                                        : `https://app.posthog.com/dashboards`,
+                            }}
+                        />
+                    </div>
                 </div>
             </ReaderView>
         </>
@@ -166,22 +147,12 @@ export const query = graphql`
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
-            headings {
-                depth
-                value
-            }
             fields {
                 slug
             }
             frontmatter {
                 title
-                subtitle
                 description
-                tableOfContents {
-                    depth
-                    url
-                    value
-                }
                 featuredImage {
                     publicURL
                     childImageSharp {
