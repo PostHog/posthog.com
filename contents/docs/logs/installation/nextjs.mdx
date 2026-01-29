@@ -32,6 +32,8 @@ You can find your project API key in [Project Settings](https://app.posthog.com/
 
 <Step title="Enable instrumentation in Next.js" badge="required">
 
+> **Note:** For Next.js 15 and later, the instrumentation hook is enabled by default. You can skip this step if you're on Next.js 15+.
+
 Add the following to your `next.config.js` (or `next.config.mjs`) to enable the instrumentation hook:
 
 ```javascript
@@ -45,8 +47,6 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-> **Note:** For Next.js 15 and later, the instrumentation hook is enabled by default. You can skip this step if you're on Next.js 15+.
-
 </Step>
 
 <Step title="Create the instrumentation file" badge="required">
@@ -59,26 +59,30 @@ import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http'
 import { logs } from '@opentelemetry/api-logs'
 import { resourceFromAttributes } from '@opentelemetry/resources'
 
+// Create LoggerProvider outside register() so it can be exported and flushed in route handlers
+export const loggerProvider = new LoggerProvider({
+  resource: resourceFromAttributes({ 'service.name': 'my-nextjs-app' }),
+  processors: [
+    new BatchLogRecordProcessor(
+      new OTLPLogExporter({
+        url: '<ph_client_api_host>/i/v1/logs',
+        headers: {
+          Authorization: 'Bearer <ph_project_api_key>',
+          'Content-Type': 'application/json',
+        },
+      })
+    ),
+  ],
+})
+
 export function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const logExporter = new OTLPLogExporter({
-      url: '<ph_client_api_host>/i/v1/logs',
-      headers: {
-        Authorization: 'Bearer <ph_project_api_key>',
-        'Content-Type': 'application/json',
-      },
-    })
-
-    const loggerProvider = new LoggerProvider({
-      resource: resourceFromAttributes({ 'service.name': 'my-nextjs-app' }),
-      processors: [new BatchLogRecordProcessor(logExporter)],
-    })
     logs.setGlobalLoggerProvider(loggerProvider)
   }
 }
 ```
 
-> **Note:** The `register` function runs once when a new Next.js server instance is initialized. We check for `NEXT_RUNTIME === 'nodejs'` to ensure the SDK only initializes in the Node.js runtime, not in the Edge runtime.
+> **Note:** The `loggerProvider` is created outside of `register()` so it can be exported and used to flush logs in route handlers. This pattern is necessary because Route Handlers complete execution before batched logs have a chance to be sent to the collector. By exporting the provider, we can manually flush logs at the end of each request.
 
 > **Important:** The `Content-Type: application/json` header is required.
 
@@ -100,11 +104,12 @@ new OTLPLogExporter({
 Now you can use OpenTelemetry logging in your server-side code (API routes, Server Components, etc.):
 
 ```typescript
-import { logs, SeverityNumber } from '@opentelemetry/api-logs'
+import { SeverityNumber } from '@opentelemetry/api-logs'
+import { after } from 'next/server'
+import { loggerProvider } from '@/instrumentation'
 
-const logger = logs.getLogger('my-nextjs-app')
+const logger = loggerProvider.getLogger('my-nextjs-app')
 
-// In an API route or Server Component
 export async function GET() {
   logger.emit({
     body: 'API request received',
@@ -115,11 +120,16 @@ export async function GET() {
     },
   })
 
-  // Your logic here
+  // Ensure logs are flushed before the serverless function freezes
+  after(async () => {
+    await loggerProvider.forceFlush()
+  })
 
   return Response.json({ success: true })
 }
 ```
+
+> **Important:** Without calling `forceFlush()`, your logs may not be sent. Route Handlers complete execution before the OpenTelemetry batch processor has a chance to send logs to the collector. The `after()` function from `next/server` runs code after the response is sent, ensuring logs are flushed before the serverless function freezes.
 
 </Step>
 
