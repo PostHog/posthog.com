@@ -22,6 +22,7 @@ import {
     IconDatabaseBolt,
     IconAsterisk,
     IconAI,
+    IconSupport,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -63,7 +64,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Support',
-            Icon: IconThoughtBubble,
+            Icon: IconSupport,
             description: 'Built-in customer support with chat widget and unified inbox.',
             handle: 'support',
             color: 'blue',

@@ -4517,7 +4517,7 @@ export const docsMenu = {
         {
             name: 'Support',
             url: '/docs/support',
-            icon: 'IconMessages',
+            icon: 'IconSupport',
             color: 'teal',
             description: 'Built-in customer support with chat widget, inbox, and session context',
             children: [

@@ -12,10 +12,10 @@ const Support: React.FC = () => {
             <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
                 <p>
                     Support is currently in private alpha.{' '}
-                    <a href="https://us.posthog.com/external_surveys/01970d04-7155-0000-9e29-f9e1b18a1bda">
-                        Share your interest
+                    <a href="https://us.posthog.com/settings/user-feature-previews#in-app-messenger">
+                        Request early access
                     </a>{' '}
-                    and we'll reach out with early access.
+                    and we'll invite you when ready.
                 </p>
             </CalloutBox>
             <Intro
