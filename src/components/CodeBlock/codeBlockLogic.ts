@@ -10,6 +10,9 @@ import type { codeBlockLogicType } from './codeBlockLogicType'
  * to enable preference synchronization for that group.
  */
 export const codeBlockLogic = kea<codeBlockLogicType>([
+    // Path is required for localStorage persistence
+    { path: ['components', 'CodeBlock', 'codeBlockLogic'] },
+
     actions({
         setPreference: (syncKey: string, value: string) => ({ syncKey, value }),
     }),
