@@ -96,7 +96,7 @@ export const ga4 = {
                 pre_configured_dashboards: true,
                 real_time_reporting: true,
                 revenue_tracking: true,
-                script_size: '',
+                script_size: '371 kb',
                 search_tools: true,
                 session_and_duration_tracking: true,
                 sessions: true,
