@@ -45,13 +45,12 @@ Add entries under each question with your initials/name like: "- (your name): My
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
 - Growth
-  - What single thing would move the needle the most this quarter?
-    - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
   - What are users asking for? Which of these are we ignoring?
     - _Check Vitally for feature requests (if applicable for your team/product)_
+  - What single thing would move the needle the most this quarter?
+    - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
-  - What are we not talking about enough?
 
 ## Themes (20 minutes - do as a team)
 
@@ -62,7 +61,7 @@ What themes can we distill from the above HOGS list? What are categories of thin
 
 This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
 
-Objective 1: PostHog in the EU
+Objective 1: PostHog in the EU (OWNER)
 Motivation: Unblock 1,000s of customers [link to data] who need to keep data in the EU but are not capable of self hosting.
 What we'll ship:
   - This thing (Name)
