@@ -790,6 +790,7 @@ const Customers = () => {
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
+    const { websiteMode } = useApp()
 
     // Get all companies
     const allCompanies = [...COL1, ...COL2]
@@ -960,7 +961,7 @@ const Customers = () => {
     return (
         <>
             <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className="@xl:absolute right-0 -top-8">
+                <div className={websiteMode ? 'mb-2' : `@xl:absolute right-0 -top-8`}>
                     <OSButton
                         onClick={toggleBreakdown}
                         variant="secondary"
