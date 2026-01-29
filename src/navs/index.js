@@ -663,10 +663,6 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Changelog',
-                url: '/handbook/content/changelog',
-            },
-            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
                 children: [
