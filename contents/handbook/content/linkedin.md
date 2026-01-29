@@ -38,6 +38,8 @@ Yes, I realize LinkedIn has a bad reputation, but it’s a popular channel with 
 
 - Posting daily beats 1-2x/week “perfect” posts. A lot won’t hit, but this will more than pay off for the ones that do.
 
+- If you are posting a changelog update, you can create nice images when clicking **Add entry** in the [changelog](/changelog/). It's under the **Social sharing** header.
+
 > Thank you to <TeamMember name="Lucas Faria" photo /> for many of these tips.
 
 ## LinkedIn posters and their newsletters
