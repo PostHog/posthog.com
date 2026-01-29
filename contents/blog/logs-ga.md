@@ -1,6 +1,6 @@
 ---
 title: "Your logs' final destination is in GA. You always end up here anyway"
-date: 2026-01-30
+date: 2026-01-29
 rootPage: /blog
 sidebar: Blog
 showTitle: true
