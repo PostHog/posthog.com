@@ -39,6 +39,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/hubspot',
                 },
                 {
+                    name: 'Klaviyo',
+                    url: '/docs/cdp/sources/klaviyo',
+                },
+                {
                     name: 'Zendesk',
                     url: '/docs/cdp/sources/zendesk',
                 },
@@ -1268,16 +1272,20 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-new-products-and-features',
             },
             {
-                name: 'Product manager role',
-                url: '/handbook/product/product-manager-role',
-            },
-            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
+            },
+            {
+                name: 'Product manager role',
+                url: '/handbook/product/product-manager-role',
+            },
+            {
+                name: 'Product manager hiring',
+                url: '/handbook/product/product-manager-hiring',
             },
         ],
     },
@@ -1350,32 +1358,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/new-sales',
                     },
                     {
-                        name: 'Product-led sales',
-                        url: '/handbook/growth/sales/product-led-sales',
-                        children: [
-                            {
-                                name: 'Account planning',
-                                url: '/handbook/growth/sales/account-planning',
-                            },
-                            {
-                                name: 'Expansion, cross-sell & retention',
-                                url: '/handbook/growth/sales/expansion-and-retention',
-                            },
-                            {
-                                name: 'Communications templates',
-                                url: '/handbook/growth/sales/communications-templates',
-                            },
-                            {
-                                name: 'User event streams',
-                                url: '/handbook/growth/sales/user-event-streams',
-                            },
-                            {
-                                name: 'Customer on-sites',
-                                url: '/handbook/growth/sales/customer-onsites',
-                            },
-                        ],
-                    },
-                    {
                         name: 'Outbound sales',
                         url: '/handbook/growth/sales/outbound-sales',
                     },
@@ -1398,6 +1380,16 @@ export const handbookSidebar = [
                     {
                         name: 'Professional services',
                         url: '/handbook/growth/sales/professional-services',
+                    },
+                    {
+                        name: 'Product-led sales',
+                        url: '/handbook/growth/sales/product-led-sales',
+                        children: [
+                            {
+                                name: 'Expansion, cross-sell & retention',
+                                url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                        ],
                     },
                 ],
             },
@@ -1544,8 +1536,16 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/account-allocation',
                     },
                     {
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
+                    },
+                    {
                         name: 'Automations',
                         url: '/handbook/growth/sales/automations',
+                    },
+                    {
+                        name: 'User event streams',
+                        url: '/handbook/growth/sales/user-event-streams',
                     },
                     {
                         name: 'Who we do business with',
@@ -1554,6 +1554,10 @@ export const handbookSidebar = [
                     {
                         name: 'Handling customer issues',
                         url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
+                        name: 'Communications templates',
+                        url: '/handbook/growth/sales/communications-templates',
                     },
                     {
                         name: 'Health tracking',
@@ -1590,6 +1594,10 @@ export const handbookSidebar = [
                     {
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding',
+                    },
+                    {
+                        name: 'Customer on-sites',
+                        url: '/handbook/growth/sales/customer-onsites',
                     },
                     {
                         name: 'Metabase account analysis',
@@ -4154,6 +4162,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-mappings/android',
                         },
                         {
+                            name: 'Flutter',
+                            url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
@@ -4654,6 +4666,10 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                        },
+                        {
+                            name: 'Klaviyo',
+                            url: '/docs/data-warehouse/sources/klaviyo',
                         },
                         {
                             name: 'MongoDB',
@@ -5251,6 +5267,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Saved views',
+                    url: '/docs/customer-analytics/saved-views',
+                    icon: 'IconBookmark',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -5537,6 +5560,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
+                        { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
                 },

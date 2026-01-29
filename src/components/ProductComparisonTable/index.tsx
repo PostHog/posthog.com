@@ -36,6 +36,7 @@ import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
 import { heap } from '../../hooks/competitorData/heap'
 import { helicone } from '../../hooks/competitorData/helicone'
+import { hightouch } from '../../hooks/competitorData/hightouch'
 import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
 import { langfuse } from '../../hooks/competitorData/langfuse'
@@ -71,6 +72,7 @@ import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
 import { survey_monkey } from '../../hooks/competitorData/survey_monkey'
+import { tealium } from '../../hooks/competitorData/tealium'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { userpilot } from '../../hooks/competitorData/userpilot'
@@ -616,6 +618,7 @@ export default function ProductComparisonTable({
         heap,
         helicone,
         hotjar,
+        hightouch,
         kameleoon,
         langfuse,
         langsmith,
@@ -650,6 +653,7 @@ export default function ProductComparisonTable({
         stripe,
         survicate,
         survey_monkey,
+        tealium,
         umami,
         unleash,
         userpilot,
