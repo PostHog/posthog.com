@@ -2741,6 +2741,10 @@ export const docsMenu = {
                             url: '/docs/settings/activity-logs',
                         },
                         {
+                            name: 'Approvals',
+                            url: '/docs/settings/approvals',
+                        },
+                        {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
