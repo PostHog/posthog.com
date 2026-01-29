@@ -40,6 +40,7 @@ export const LOGOS = {
     googleSheets: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Sheets_logo_2014_2020_7db9f50a1e.svg',
     gtm: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/gtm.svg',
     hono: 'https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg',
+    html5: 'https://res.cloudinary.com/dmukukwp6/image/upload/HTML5_logo_and_wordmark_c8e734a0be.svg',
     hubspot: 'https://res.cloudinary.com/dmukukwp6/image/upload/hubspot_1_f8248c008e.svg',
     ios: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
     java: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
