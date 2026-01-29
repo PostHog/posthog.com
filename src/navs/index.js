@@ -3636,6 +3636,7 @@ export const docsMenu = {
                         { name: 'Java', url: '/docs/feature-flags/installation/java' },
                         { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
                         { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'API', url: '/docs/feature-flags/installation/api' },
                     ],
