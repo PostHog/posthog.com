@@ -18,8 +18,8 @@ import { posthog_ai } from './productData/posthog_ai'
 import { llmAnalytics } from './productData/llm_analytics'
 import { workflows } from './productData/workflows'
 import { revenueAnalytics } from './productData/revenue_analytics'
-import { realtimeDestinations } from './productData/realtime_destinations'
 import { logs } from './productData/logs'
+import { realtimeDestinations } from './productData/realtime_destinations'
 
 const initialProducts = [
     productAnalytics,
@@ -35,8 +35,8 @@ const initialProducts = [
     posthog_ai,
     llmAnalytics,
     revenueAnalytics,
-    workflows,
     logs,
+    workflows,
 ]
 
 export default function useProducts() {
