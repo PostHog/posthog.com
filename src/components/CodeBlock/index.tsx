@@ -7,7 +7,7 @@ import { SelectorIcon } from '@heroicons/react/outline'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
-import { useValues } from 'kea'
+import { useActions, useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Mermaid from 'components/Mermaid'
 import Tooltip from 'components/Tooltip'
@@ -16,6 +16,7 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
 import { useLocation } from '@reach/router'
+import { codeBlockLogic } from './codeBlockLogic'
 
 type LanguageOption = {
     label?: string
@@ -56,6 +57,12 @@ type MdxCodeBlock = {
     selector?: 'dropdown' | 'tabs'
     showTitle?: boolean
     showCopy?: boolean
+    /**
+     * When provided, persists the selected tab across page refreshes and syncs
+     * the selection across all code blocks with the same syncKey on the page.
+     * Example: syncKey="install" for npm/yarn/pnpm tabs, syncKey="sdk" for Python/Node tabs.
+     */
+    syncKey?: string
     children: MdxCodeBlockChildren[] | MdxCodeBlockChildren
 }
 
@@ -86,7 +93,7 @@ type MdxCodeBlockChildren = {
     } & MetaStringProps
 }
 
-export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element | null => {
+export const MdxCodeBlock = ({ children, syncKey, ...props }: MdxCodeBlock): JSX.Element | null => {
     if (children?.props?.className?.includes('language-mermaid')) {
         return <Mermaid>{children.props.children}</Mermaid>
     }
@@ -122,9 +129,64 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element 
         return null
     }
 
+    // If syncKey is provided, use persisted preferences
+    if (syncKey) {
+        return <SyncedCodeBlock languages={languages} syncKey={syncKey} {...props} />
+    }
+
+    // Otherwise, use local state only
     const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(languages[0])
     return (
         <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} {...props}>
+            {languages}
+        </CodeBlock>
+    )
+}
+
+/**
+ * Code block with synced preferences via kea.
+ * Only rendered when syncKey is provided.
+ */
+const SyncedCodeBlock = ({
+    languages,
+    syncKey,
+    ...props
+}: { languages: LanguageOption[]; syncKey: string } & Omit<MdxCodeBlock, 'children' | 'syncKey'>): JSX.Element => {
+    const { preferences } = useValues(codeBlockLogic)
+    const { setPreference } = useActions(codeBlockLogic)
+
+    // Get the option key for each language (label > file > language)
+    const getOptionKey = (lang: LanguageOption) => lang.label || lang.file || lang.language
+
+    // Find the initial language based on stored preference
+    const storedValue = preferences[syncKey]
+    const initialLanguage = storedValue
+        ? languages.find((lang) => getOptionKey(lang) === storedValue) || languages[0]
+        : languages[0]
+
+    const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(initialLanguage)
+
+    // Sync with preference changes from other code blocks
+    React.useEffect(() => {
+        const storedValue = preferences[syncKey]
+        if (storedValue) {
+            const matchingLanguage = languages.find((lang) => getOptionKey(lang) === storedValue)
+            if (matchingLanguage && getOptionKey(matchingLanguage) !== getOptionKey(currentLanguage)) {
+                setCurrentLanguage(matchingLanguage)
+            }
+        }
+    }, [preferences, syncKey, languages])
+
+    const handleChange = React.useCallback(
+        (language: LanguageOption) => {
+            setCurrentLanguage(language)
+            setPreference(syncKey, getOptionKey(language))
+        },
+        [syncKey, setPreference]
+    )
+
+    return (
+        <CodeBlock currentLanguage={currentLanguage} onChange={handleChange} {...props}>
             {languages}
         </CodeBlock>
     )

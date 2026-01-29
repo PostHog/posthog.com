@@ -27,7 +27,7 @@ You can add custom properties to any LLM generation using the `posthogProperties
 
 ### Basic example
 
-<MultiLanguage>
+<MultiLanguage syncKey="llm">
 
 ```javascript file=JavaScript
 import { OpenAI } from '@posthog/ai'
@@ -89,7 +89,7 @@ response = client.responses.create(
 
 Track LLM usage by subscription tier or payment plan to monitor costs and usage patterns:
 
-<MultiLanguage>
+<MultiLanguage syncKey="llm">
 
 ```javascript file=JavaScript
 const getSubscriptionTier = (userId) => {
@@ -132,7 +132,7 @@ response = client.responses.create(
 
 Track different versions of your prompts to measure improvements:
 
-<MultiLanguage>
+<MultiLanguage syncKey="llm">
 
 ```javascript file=JavaScript
 const PROMPT_VERSION = "v2.3.1"
@@ -182,7 +182,7 @@ response = client.messages.create(
 
 Set meaningful names for your LLM generations to improve trace readability:
 
-<MultiLanguage>
+<MultiLanguage syncKey="llm">
 
 ```javascript file=JavaScript
 // For Vercel AI SDK

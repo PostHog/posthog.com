@@ -46,7 +46,7 @@ If you know your pricing per token, you can set the following [custom properties
 
 **Important:** Token prices should be per individual token, not per million tokens. For example, if your provider charges $0.03 per 1M tokens, you would set `$ai_input_token_price: 0.00000003` (0.03 / 1,000,000).
 
-<MultiLanguage>
+<MultiLanguage syncKey="llm">
 
 ```javascript file=JavaScript
 import { OpenAI } from '@posthog/ai'
@@ -115,7 +115,7 @@ If you're [manually capturing](/docs/llm-analytics/installation/manual-capture) 
 - `$ai_request_cost_usd`: Total cost for requests in USD
 - `$ai_web_search_cost_usd`: Total cost for web searches in USD
 
-<MultiLanguage>
+<MultiLanguage syncKey="llm">
 
 ```javascript file=JavaScript
 // After making your LLM call and calculating costs

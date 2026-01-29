@@ -6,7 +6,7 @@ This is important if your users are sharing a computer, as otherwise all of thos
 
 You can do that like so:
 
-<MultiLanguage selector="tabs">
+<MultiLanguage selector="tabs" syncKey="sdk-client">
 
 ```js-web
 posthog.reset()
@@ -32,7 +32,7 @@ Posthog().reset()
 
 If you _also_ want to reset the `device_id` so that the device will be considered a new device in future events, you can pass `true` as an argument:
 
-<MultiLanguage selector="tabs">
+<MultiLanguage selector="tabs" syncKey="sdk-client">
 
 ```js-web
 posthog.reset(true)
