@@ -59,8 +59,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="workflows" />
 -   <SmallTeam slug="batch-exports" />*
+-   <SmallTeam slug="logs" />
 -   Endpoints
--   Logs
 
 *light support
 
