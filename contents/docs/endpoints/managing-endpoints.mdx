@@ -1,0 +1,50 @@
+---
+title: Manage your endpoints
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+## Duplicate an endpoint
+
+Duplicating is useful when you need a similar query with different parameters, like the same metrics for different time ranges.
+
+1. Go to [**Data management** > **Endpoints**](https://us.posthog.com/data-management/endpoints)
+2. Click the **⋯** menu next to the endpoint
+3. Click **Duplicate endpoint**
+
+What happens next depends on the endpoint type:
+
+- **HogQL-based endpoints**: Opens the SQL editor with the query prefilled in the **Endpoint** output tab. Modify the query and create a new endpoint.
+- **Insight-based endpoints**: Opens the endpoint creation modal with the original query prefilled. Modify the query or settings, then click **Create endpoint**.
+
+## Edit an endpoint
+
+Editing an endpoint's query creates a new version while keeping older versions accessible.
+
+1. Open your endpoint
+2. Go to the **Playground** tab
+3. Click **Edit query** to open the SQL editor
+4. Make your changes
+5. In the **Endpoint** output tab, toggle **Update existing endpoint**
+6. Select your endpoint from the dropdown
+7. Click **Update endpoint**
+
+See [Versioning](/docs/endpoints/configuration#versioning) for details on how versions work.
+
+## Delete an endpoint
+
+1. Go to [**Data management** > **Endpoints**](https://us.posthog.com/data-management/endpoints)
+2. Click the **⋯** menu next to the endpoint
+3. Click **Delete endpoint**
+4. Confirm the deletion
+
+<CalloutBox icon="IconWarning" type="caution" title="Deleting is permanent">
+
+Deleting an endpoint removes all versions and cannot be undone.
+
+</CalloutBox>

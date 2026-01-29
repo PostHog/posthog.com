@@ -5,7 +5,7 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconCode, IconGraph, IconRocket } from '@posthog/icons'
+import { IconCode, IconFlask, IconGraph, IconRocket } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import EndpointsBetaSnippet from './_snippets/beta.mdx'
@@ -20,7 +20,7 @@ import EndpointsBetaSnippet from './_snippets/beta.mdx'
   icon="IconGraph"
 >
 
-Endpoints can be created from existing insights or SQL queries in PostHog. Start by creating the query that defines the data you want to expose. You can do this directly from the endpoints page by clicking new and choosing the type or directly from a SQL query or an insight.
+Endpoints can be created from existing insights or SQL queries in PostHog. Start by creating the query that defines the data you want to expose. You can do this directly from the endpoints page by clicking **New** and choosing the type, or directly from a SQL query or an insight.
 
 ### Option 1: Create an insight
 
@@ -65,8 +65,8 @@ Once you have your insight or SQL query, create an endpoint from it. This will g
 ### Option 1: Create endpoint from insight
 
 1. Open your insight
-2. Click on the info & actions button (the three dots button in the top right)
-3. Click the `Create endpoint` action
+2. Click the **⋯** (more options) button in the top right
+3. Click **Create endpoint**
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
@@ -74,36 +74,82 @@ Once you have your insight or SQL query, create an endpoint from it. This will g
   classes="rounded"
 />
 4. Give your endpoint a descriptive name (e.g., `daily_active_users` or `account_users_activity`) and optionally a description
-5. Create the endpoint
+5. Click **Create endpoint**
 
+If endpoints already exist for this insight, they're shown in the create dialog to help you avoid duplicates.
 
 ### Option 2: Create endpoint from a SQL query
 
-1. If you've written a SQL query, you can click on the `Endpoint` tab:
+1. Write your SQL query in the [SQL editor](https://us.posthog.com/sql)
+2. Click the **Endpoint** tab in the output pane
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_sql_6489b78d7c.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_sql_6489b78d7c.png"
   alt="Creating an endpoint from a SQL query" 
   classes="rounded"
 />
-2. Give your endpoint a descriptive name (e.g., `daily_active_users` or `account_users_activity`) and optionally a description
-3. Create the endpoint
+3. Give your endpoint a descriptive name (e.g., `daily_active_users` or `account_users_activity`) and optionally a description
+4. Click **Create endpoint**
+
+### Update an existing endpoint
+
+You can also update an existing endpoint's query from the SQL editor:
+
+1. Write your updated SQL query
+2. Click the **Endpoint** tab in the output pane
+3. Toggle **Update existing endpoint**
+4. Select the endpoint you want to update from the dropdown
+5. Optionally update the description
+6. Click **Update endpoint**
+
+This creates a new version of the endpoint with your updated query. See [Versioning](/docs/endpoints/configuration#versioning) for more on how versions work.
 
 ---
 
-<CalloutBox icon="IconInfo" type="fyi" title="Endpoint names">
+<CalloutBox icon="IconInfo" type="fyi" title="Endpoint naming requirements">
 
-Choose descriptive names for your endpoints. They'll appear in the URL:
-- Recommended: `daily_active_users`, `account_users_activity`, `signup_funnel`
-- Avoid: `endpoint1`, `test`, `query`
+Endpoint names must:
+- **Start with a letter** (a-z, A-Z)
+- Contain only letters, numbers, hyphens, or underscores
+- Be between 1 and 128 characters
 
-Endpoint names should be URL-friendly (lowercase, underscores instead of spaces).
+Good examples: `daily_active_users`, `account_users_activity`, `signup-funnel`
+
+Avoid generic names like `endpoint1`, `test`, or `query`.
 
 </CalloutBox>
 
-<OSButton variant="primary" asLink to="/docs/endpoints/use-cases-and-tips">
+<OSButton variant="primary" asLink to="/docs/endpoints/use-cases">
   View endpoint examples
 </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Test your endpoint"
+  subtitle="Recommended"
+  icon="IconFlask"
+>
+
+Test your endpoint in the **Playground** tab before integrating it into your application. You can send API requests, experiment with different parameters, and see the JSON response.
+
+### Using the Playground
+
+1. Open your endpoint
+2. Go to the **Playground** tab
+3. Edit the request payload JSON on the left (use `variables` to pass query parameters for SQL-based endpoints)
+4. Click **Execute endpoint** (or press `Cmd/Ctrl + Enter`)
+5. View the API response on the right
+
+The `results` key in the response contains your query data. If no data is returned, you'll see a "No results" message.
+
+### Testing different versions
+
+Use the version selector to test older versions of your endpoint before updating your application code.
+
+### Code examples
+
+The **Playground** includes code examples for Terminal (curl), Python, and Node.js. Create a personal API key if you don't have one, then copy the code directly into your application. Click **API keys** to open your personal API keys page.
 
 </QuestLogItem>
 
@@ -165,6 +211,54 @@ callEndpoint();
 
 </MultiLanguage>
 
+### Passing parameters
+
+The parameters you pass depend on your endpoint type. SQL-based endpoints use `variables`, while insight-based endpoints use `filters_override` or `query_override`. These parameters are mutually exclusive.
+
+#### SQL-based endpoints with variables
+
+If your SQL query uses variables, pass their values in `variables`:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "variables": {
+      "user_email": "jane@example.com",
+      "date_range": "-30d"
+    }
+  }' \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+#### Insight-based endpoints
+
+For insight-based endpoints, use `filters_override` to customize the query:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "filters_override": {
+      "date_from": "-7d",
+      "properties": [
+        {
+          "key": "browser",
+          "value": "Chrome",
+          "type": "event"
+        }
+      ]
+    }
+  }' \
+  <ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run
+```
+
+Common filter overrides include:
+- `date_from` and `date_to` – adjust the date range (e.g., `-7d`, `-30d`, `2024-01-01`)
+- `properties` – add property filters to narrow results
+
 <CalloutBox icon="IconInfo" type="fyi" title="Calling your Endpoint">
 
 Replace the `ph_app_host`, `project_id` and `endpoint_name` placeholders and set your `POSTHOG_PERSONAL_API_KEY` environment variable.
@@ -191,7 +285,7 @@ Endpoints are perfect for embedding analytics in your own application. You can:
 
 ### Best practices
 
-- **Materialization**: If you're not seeing the performance you're looking for, try optimizing your SQL query and materializing it
+- **Materialization**: Enabled by default for supported endpoints. If you need real-time data, disable it in the **Configuration** tab.
 - **Handle errors gracefully**: Always check response status codes and handle errors appropriately
 - **Respect rate limits**: While endpoints will have higher limits than standard API endpoints, be mindful of your usage
 - **Use meaningful names**: Choose endpoint names that clearly describe what data they return
@@ -201,7 +295,7 @@ Endpoints are perfect for embedding analytics in your own application. You can:
 
 That's it! You're ready to start using endpoints.
 
-<OSButton variant="primary" asLink to="/docs/endpoints/use-cases-and-tips">
+<OSButton variant="primary" asLink to="/docs/endpoints/use-cases">
   Explore more resources
 </OSButton>
 

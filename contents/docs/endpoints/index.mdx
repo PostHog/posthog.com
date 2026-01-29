@@ -1,0 +1,48 @@
+---
+title: Endpoints
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: full
+  enterprise: full
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+Endpoints let you expose your PostHog [insights](/docs/product-analytics/insights) and [SQL queries](/docs/sql) as API endpoints. Instead of rebuilding complex queries in your application code, create an endpoint that returns the exact data you need.
+
+## Why use endpoints?
+
+- Embed analytics in your product – show PostHog data to your customers without exposing your entire analytics setup
+- Your endpoint URLs stay the same even when you update the underlying query
+- Endpoints use isolated resources and support materialization for faster responses
+- Call a single API instead of managing query construction in your app
+
+## How it works
+
+1. Create an insight or write a SQL query that returns the data you need
+2. Convert it to an endpoint with a descriptive name
+3. Call the endpoint from your application using your [personal API key](/docs/api/overview#personal-api-keys)
+
+The endpoint returns your query results in a consistent format, ready to use in your application.
+
+## Key features
+
+| Feature | Description |
+|---------|-------------|
+| **Versioning** | Track changes to your endpoints and test older versions |
+| **Materialization** | Precompute results on a schedule for faster responses |
+| **Caching** | Configure how long results should be cached |
+| **Authentication** | Secure access with personal API keys |
+
+## Get started
+
+- **[Start here](/docs/endpoints/start-here)** – Create your first endpoint step-by-step
+- **[Manage with CLI](/docs/endpoints/cli)** – Version control your endpoints as YAML files
+- **[Configuration](/docs/endpoints/configuration)** – Set up versioning, materialization, and caching
+- **[Use cases](/docs/endpoints/use-cases)** – Examples of how to use endpoints
+- **[Security](/docs/endpoints/security)** – Learn about authentication and access control
+- **[API reference](/docs/api/endpoints)** – Complete API documentation

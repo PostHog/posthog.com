@@ -1,0 +1,33 @@
+---
+title: Performance
+sidebar: Docs
+showTitle: true
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+Endpoint performance depends on the underlying queries. For faster responses:
+
+- **Use shorter date ranges** – Only query the time periods you need
+- **Avoid scanning the same table multiple times** – Restructure queries to reduce redundant scans
+- **Use materialized views** – Precompute frequently accessed data. You can also [materialize your endpoint](/docs/endpoints/configuration#materialization) directly.
+- **Add appropriate filters** – Limit the data processed
+
+See [writing performant queries](/docs/api/queries#writing-performant-queries) for more details.
+
+## Isolated resources
+
+Unlike the standard Query API, endpoints use isolated resources. This means more consistent, reliable performance for production use cases.
+
+## Rate limits
+
+Endpoints have separate rate limits from the Query API. Materialized endpoints get 5x higher limits since they return precomputed results instead of querying ClickHouse.
+
+| Endpoint type | Burst rate | Sustained rate |
+|---------------|-----------|----------------|
+| Inline (non-materialized) | 240 requests/minute | 2,400 requests/hour |
+| Materialized | 1,200 requests/minute | 12,000 requests/hour |
+
+If you're hitting rate limits frequently, consider [enabling materialization](/docs/endpoints/configuration#materialization) for your busiest endpoints.

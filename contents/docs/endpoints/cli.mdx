@@ -1,0 +1,160 @@
+---
+title: Manage endpoints with CLI
+sidebar: Docs
+showTitle: true
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+The [PostHog CLI](/docs/error-tracking/upload-source-maps/cli) lets you manage endpoints as YAML files, making it easy to version control your endpoint configurations.
+
+## Prerequisites
+
+- [PostHog CLI](/docs/error-tracking/upload-source-maps/cli) installed
+- A [personal API key](/docs/api/overview#personal-api-keys) with the following scopes:
+  - `endpoint:read` for listing, getting, and pulling endpoints
+  - `endpoint:write` and `insight_variable:write` for pushing endpoints
+  - `query:read` for running endpoint queries
+
+## Available commands
+
+All commands are under `posthog-cli exp endpoints`.
+
+| Command | Description |
+|---------|-------------|
+| `list` | List all endpoints in your project |
+| `get <name>` | Show details of a specific endpoint |
+| `open <name>` | Open an endpoint in your browser |
+| `pull` | Download endpoints to local YAML files |
+| `push <path>` | Upload local YAML files to PostHog |
+| `diff <path>` | Show differences between local and remote |
+| `run <name>` | Run an endpoint query and see results |
+
+## YAML format
+
+Endpoint YAML files have this structure:
+
+```yaml
+name: my-endpoint
+description: Returns daily active users for the past week
+query: |
+  SELECT 
+    toDate(timestamp) AS day,
+    count(DISTINCT person_id) AS active_users
+  FROM events
+  WHERE timestamp > now() - INTERVAL 7 DAY
+  GROUP BY day
+  ORDER BY day DESC
+```
+
+### Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | URL-safe name (letters, numbers, hyphens, underscores). 1-128 characters, must start with a letter. |
+| `description` | No | What the endpoint does |
+| `query` | No | [HogQL](/docs/hogql) query for SQL-based endpoints |
+| `query_definition` | No | Full query object for insight-based queries (trends, funnels, etc.) |
+| `variables` | No | Query variables for parameterized queries |
+| `materialization` | No | Materialization configuration |
+
+Use either `query` or `query_definition`, not both.
+
+### Variables
+
+Add variables to create parameterized endpoints:
+
+```yaml
+name: user-events
+description: Get events for a specific user
+query: |
+  SELECT event, timestamp
+  FROM events
+  WHERE person_id = {user_id}
+  ORDER BY timestamp DESC
+  LIMIT 100
+variables:
+  - name: user_id
+    type: String
+    default: ""
+```
+
+### Materialization
+
+Enable materialization to precompute results on a schedule:
+
+```yaml
+name: daily-summary
+description: Daily metrics summary
+query: |
+  SELECT count(*) as total_events
+  FROM events
+  WHERE timestamp > now() - INTERVAL 1 DAY
+materialization:
+  enabled: true
+  schedule: 1hour
+```
+
+Valid schedule values: `5min`, `15min`, `30min`, `1hour`, `2hour`, `4hour`, `6hour`, `12hour`, `24hour`, `7day`, `30day`
+
+## Common workflows
+
+### Pull all endpoints
+
+```bash
+posthog-cli exp endpoints pull --all --output ./endpoints
+```
+
+This creates one YAML file per endpoint.
+
+### Pull a specific endpoint
+
+```bash
+posthog-cli exp endpoints pull my-endpoint --output ./endpoints
+```
+
+### Preview changes before pushing
+
+```bash
+posthog-cli exp endpoints diff ./endpoints
+```
+
+### Push changes
+
+```bash
+posthog-cli exp endpoints push ./endpoints
+```
+
+You'll be prompted to confirm before changes are applied. Use `--yes` to skip confirmation, or `--dry-run` to preview changes without applying them.
+
+### Test a query locally
+
+Run an endpoint's query without pushing:
+
+```bash
+posthog-cli exp endpoints run my-endpoint
+```
+
+Pass variable values with `--var`:
+
+```bash
+posthog-cli exp endpoints run my-endpoint --var user_id=12345
+```
+
+You can also run a query directly from a YAML file without creating an endpoint:
+
+```bash
+posthog-cli exp endpoints run --file ./my-endpoint.yaml
+```
+
+## Environment variables
+
+For CI/CD pipelines, set these environment variables instead of authenticating interactively:
+
+| Variable | Description |
+|----------|-------------|
+| `POSTHOG_CLI_HOST` | PostHog host (default: `https://us.posthog.com`) |
+| `POSTHOG_CLI_TOKEN` | Your personal API key |
+| `POSTHOG_CLI_ENV_ID` | Your project ID (the number in your PostHog URL) |

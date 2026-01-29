@@ -1,0 +1,17 @@
+---
+title: Security
+sidebar: Docs
+showTitle: true
+---
+
+import EndpointsBetaSnippet from './_snippets/beta.mdx'
+
+<EndpointsBetaSnippet />
+
+All endpoint requests require a [personal API key](https://us.posthog.com/settings/user-api-keys) with the `endpoint:read` scope. Endpoints are scoped to your project, so you can only access endpoints within your own project.
+
+To set up authentication:
+
+1. Go to **Settings** > **Personal API keys**
+2. Create a new API key with the `endpoint:read` scope
+3. Include the key in your requests using the `Authorization: Bearer YOUR_API_KEY` header
