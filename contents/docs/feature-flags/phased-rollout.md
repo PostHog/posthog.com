@@ -1,15 +1,7 @@
 ---
 title: How to do a phased rollout
-date: 2023-10-06
-author:
-  - ian-vanagas
 showTitle: true
 sidebar: Docs
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-2.png
-tags:
-  - feature flags
-  - cohorts
 ---
 
 Phased rollouts, also known as phased releases, are a way to roll out new features safely by [testing a feature works in production](/product-engineers/testing-in-production) with a small group before incrementally moving to progressively bigger (and more important) groups. 
@@ -85,6 +77,6 @@ Once created, repeat for the rest of your phases. You can then use the cohorts a
 
 - [How to do holdout testing](/tutorials/holdout-testing)
 - [Running experiments on new users](/tutorials/new-user-experiments)
-- [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
+- [How to do a canary release with feature flags](/docs/feature-flags/canary-release)
 
 <NewsletterForm />

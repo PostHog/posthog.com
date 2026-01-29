@@ -44,11 +44,12 @@ export const logs = {
     colorSecondary: 'green-2',
     category: 'product_engineering',
     slider: {
-        marks: [100000, 1000000, 10000000, 100000000],
-        min: 100000,
-        max: 100000000,
+        // Values in GB (display_friendly=true converts MB to GB)
+        marks: [50, 100, 500, 1000, 5000],
+        min: 50,
+        max: 5000,
     },
-    volume: 100000,
+    volume: 50,
     seo: {
         title: 'Logs that sync with customer data',
         description: 'Full backend context, with events, requests, and state changes in one place',
@@ -297,4 +298,3 @@ export const logs = {
     //     overview:
     //         '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
     // },
-}

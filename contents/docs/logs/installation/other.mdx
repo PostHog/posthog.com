@@ -18,7 +18,7 @@ PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTele
 
 The key requirements are:
 - Use OTLP (OpenTelemetry Protocol) for log export over HTTP
-- Send logs to `https://us.i.posthog.com/i/v1/logs` (or your self-hosted endpoint)
+- Send logs to `<ph_client_api_host>/i/v1/logs` (or your self-hosted endpoint)
 - Include your project API key in the Authorization header or as a `?token=` query parameter
 
 Find the OpenTelemetry SDK for your language in the [official registry](https://opentelemetry.io/ecosystem/registry/).
@@ -27,9 +27,11 @@ Find the OpenTelemetry SDK for your language in the [official registry](https://
 
 <Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
 
-You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
 
 </Step>
 
@@ -37,10 +39,10 @@ You can find your project API key in [Project Settings](https://app.posthog.com/
 
 Configure your OpenTelemetry SDK to send logs to PostHog:
 
-- **Endpoint:** `https://us.i.posthog.com/i/v1/logs`
+- **Endpoint:** `<ph_client_api_host>/i/v1/logs`
 - **Authentication:** Include your project API key either:
-  - In the Authorization header: `Bearer {your-project-api-key}`
-  - As a query parameter: `?token={your-project-api-key}`
+  - In the Authorization header: `Bearer <ph_project_api_key>`
+  - As a query parameter: `?token=<ph_project_api_key>`
 
 </Step>
 
