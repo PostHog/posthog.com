@@ -342,7 +342,7 @@ export const posthog = {
                     abn_testing: true,
                     data_warehouse_experiments: 'Beta',
                     fake_door_testing: true,
-                    holdout_testing: 'Partial',
+                    holdout_testing: true,
                     multi_armed_bandit: false,
                     mutually_exclusive_experiments: false,
                     redirect_testing: true,

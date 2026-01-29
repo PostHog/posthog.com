@@ -31,7 +31,7 @@ export const mixpanel = {
                         formula_mode: true,
                         ready_made_insight_types: true,
                         sampling: false,
-                        sql_editor: 'JQL only',
+                        sql_editor: false,
                     },
                 },
                 trends: {
