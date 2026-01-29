@@ -88,10 +88,10 @@ Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable)
 <summary>Main differences between PostHog and Mixpanel</summary>
 
 - PostHog includes [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and [surveys](/surveys) natively; Mixpanel doesn't offer these at all.
-- PostHog charges up to 80% less for anonymous events; Mixpanel charges the same rate for all events regardless of identification status.
+- PostHog charges up to 80% less for anonymous events; Mixpanel charges the same, higher rate for all events regardless.
 - PostHog has a built-in [data warehouse](/data-stack) for importing external data (Stripe, Zendesk, etc.); Mixpanel relies on warehouse connectors and requires you to get data into a third-party warehouse first.
 - Mixpanel's Experiments report is an Enterprise-only add-on; PostHog includes experiments on all plans with usage-based pricing.
-- PostHog offers SQL access for custom queries; Mixpanel doesn't have a native SQL editor.
+- PostHog offers SQL access for custom queries; Mixpanel doesn't have a native SQL editor, requiring you to export your data instead.
 
 </details>
 
@@ -404,9 +404,9 @@ This guide focuses on the most popular Mixpanel alternatives, but these aren't t
 
 - **Kissmetrics** is more focused on marketing and e-commerce use cases than Mixpanel. It's worth considering if you want to focus on channel attribution and revenue tracking, but don't want to use GA4.
 
-- **[Snowplow](https://snowplow.io/)** is a powerful, open-source behavioral data platform. It can replace tools like Mixpanel, but requires significant data engineering resources to set up and maintain. Best for large enterprises with well-staffed data teams who want full control over their data pipeline.
+- **Snowplow** is a powerful, open-source behavioral data platform. It can replace tools like Mixpanel, but requires significant data engineering resources to set up and maintain. Best for large enterprises with well-staffed data teams who want full control over their data pipeline.
 
-- **[Countly](https://countly.com/)** is an open-source analytics platform with strong mobile app support, push notifications, and crash analytics. It offers both self-hosted and cloud options, making it a good choice for teams who need data sovereignty.
+- **Countly** is an open-source analytics platform with strong mobile app support, push notifications, and crash analytics. It offers both self-hosted and cloud options, making it a good choice for teams who need data sovereignty.
 
 - **[Plausible](/blog/best-plausible-alternatives)** and **[Fathom](/blog/best-fathom-alternatives)** are privacy-first, lightweight analytics tools. They're not direct Mixpanel replacements – they focus on simple website metrics rather than product analytics – but they're worth considering if GDPR compliance and minimal data collection are priorities.
 
@@ -525,7 +525,7 @@ Yes. Mixpanel offers warehouse connectors that sync data bidirectionally with Sn
 <details>
 <summary>Can I migrate from Mixpanel to PostHog?</summary>
 
-Yes. **PostHog** has a dedicated [Mixpanel to PostHog migration guide](/docs/migrate/mixpanel) that walks you through exporting your Mixpanel data and importing it into PostHog, including historical events and user properties.
+Yes. **PostHog** has a [managed migration tool](/docs/migrate/managed-migrations) for Mixpanel that makes importing your data, historical events, and user properties easy. It also has dedicated [Mixpanel to PostHog migration guide](/docs/migrate/mixpanel)
 
 </details>
 
