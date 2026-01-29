@@ -385,7 +385,7 @@ const AIAgents = () => {
 
 const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
 
-const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
+const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'convex', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
@@ -411,6 +411,7 @@ const companyAttributes = {
         'ycombinator',
         'airbus',
         // "elevenlabs",
+        // 'convex',
         'trust',
         'lovable',
         // "supabase",
@@ -427,6 +428,7 @@ const companyAttributes = {
         'ycombinator',
         // "airbus",
         // "elevenlabs",
+        // 'convex',
         'trust',
         'lovable',
         'supabase',
@@ -443,6 +445,7 @@ const companyAttributes = {
         // "ycombinator",
         'airbus',
         // "elevenlabs",
+        // 'convex',
         // "trust",
         // "lovable",
         // "supabase",
@@ -459,6 +462,7 @@ const companyAttributes = {
         // "ycombinator",
         'airbus',
         // "elevenlabs",
+        // 'convex',
         // "trust",
         // "lovable",
         // "supabase",
@@ -474,6 +478,7 @@ const companyAttributes = {
     highValue: [
         'airbus',
         'elevenlabs',
+        // 'convex',
         // "ycombinator",
         'lovable',
         'supabase',
@@ -491,6 +496,7 @@ const companyAttributes = {
         'ycombinator',
         // "airbus",
         'elevenlabs',
+        // 'convex',
         // "trust",
         'lovable',
         'supabase',
@@ -508,6 +514,7 @@ const companyAttributes = {
         'airbus',
         // "elevenlabs",
         'trust',
+        'convex',
         // "lovable",
         // "supabase",
         // "hasura",
@@ -524,6 +531,7 @@ const companyAttributes = {
         'elevenlabs',
         'lovable',
         // "hasura",
+        'convex',
         'trust',
         // "airbus",
         // "supabase",
@@ -540,6 +548,7 @@ const companyAttributes = {
         'airbus',
         // "trust",
         'lovable',
+        // 'convex',
         // "elevenlabs",
         // "supabase",
         // "hasura",
@@ -556,6 +565,7 @@ const companyAttributes = {
         'airbus',
         'trust',
         'lovable',
+        'convex',
         // "elevenlabs",
         // "supabase",
         'hasura',
@@ -570,6 +580,7 @@ const companyAttributes = {
     realWords: [
         // "ycombinator",
         'airbus',
+        'convex',
         'trust',
         'lovable',
         'elevenlabs',
@@ -587,6 +598,7 @@ const companyAttributes = {
         'ycombinator',
         // "airbus",
         // "elevenlabs",
+        'convex',
         'trust',
         // "lovable",
         'supabase',
@@ -605,6 +617,7 @@ const companyAttributes = {
         // "elevenlabs",
         // "trust",
         'lovable',
+        'convex',
         'supabase',
         'hasura',
         // "startengine",
