@@ -63,6 +63,7 @@ module.exports = {
         queries: [
             retrievePages('docs', '/^docs/'),
             retrievePages('handbook', '/^handbook/'),
+            retrievePages('product-engineer-handbook', '/^product-engineer-handbook/'),
             retrievePages('tutorial', '/^tutorials/'),
             retrievePages('blog', '/^blog|^spotlight/'),
             retrievePages('customers', '/^customers/'),
