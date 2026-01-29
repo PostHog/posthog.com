@@ -16,7 +16,7 @@ Migrating from Amplitude is a two step process:
 
 2. [Import data into PostHog](/docs/migrate) using PostHog's [Python SDK](/docs/libraries/python) or [`batch` API](/docs/api/capture) with the `historical_migration` option set to `true`. Other libraries don't support historical migrations yet.
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## Exporting data from Amplitude
 
@@ -58,17 +58,17 @@ url = f'https://amplitude.com/api/2/export?start={start_time}&end={end_time}'
 response = requests.get(url, auth=HTTPBasicAuth(amplitude_api_key, amplitude_secret_key))
 
 if response.status_code == 200:
-  print(response)
-  if response.headers.get('Content-Type') == 'application/zip':
-    with open('data.zip', 'wb') as f:
-      f.write(response.content)
-    print('Data successfully downloaded and saved as data.zip')
-  else:
-    print('Unexpected content type:', response.headers.get('Content-Type'))
-elif response.status_code == 404:
-  print('No data available for the requested time range.')
+print(response)
+if response.headers.get('Content-Type') == 'application/zip':
+with open('data.zip', 'wb') as f:
+f.write(response.content)
+print('Data successfully downloaded and saved as data.zip')
 else:
-  print(f'Failed to retrieve data. Status code: {response.status_code}')
+print('Unexpected content type:', response.headers.get('Content-Type'))
+elif response.status_code == 404:
+print('No data available for the requested time range.')
+else:
+print(f'Failed to retrieve data. Status code: {response.status_code}')
 ```
 
 </MultiLanguage>
@@ -92,7 +92,7 @@ Steps 1, 3, and 4 are relatively straightforward, but step 2 requires more expla
 
 Although Amplitude events have a similar structure, you need to convert them to PostHog's schema. Many events and properties have different keys. For example, autocaptured events and properties in PostHog often start with `$`.
 
-You can see Amplitude's event structure in their [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema) and PostHog's autocapture event structure in our [autocapture docs](/docs/product-analytics/autocapture#autocaptured-events). 
+You can see Amplitude's event structure in their [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema) and PostHog's autocapture event structure in our [autocapture docs](/docs/product-analytics/autocapture #autocaptured-events).
 
 Some conversions needed include:
 
@@ -117,99 +117,99 @@ import gzip
 
 # PostHog Python Client
 posthog = Posthog(
-  <ph_project_api_key>, 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+<ph_project_api_key>,
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 # Convert and capture Amplitude data
 def capture_entry(entry):
-  distinct_id = entry.get("user_id") or entry.get("device_id")
-  event_name = entry["event_type"]
+distinct_id = entry.get("user_id") or entry.get("device_id")
+event_name = entry["event_type"]
 
-  if event_name == "session_start":
-    return
-  if event_name == "[Amplitude] Page Viewed":
-    event_name = "$pageview"
-  if event_name in ["[Amplitude] Element Clicked", "[Amplitude] Element Changed"]:
-    event_name = "$autocapture"
-  
-  timestamp = datetime.strptime(entry.get("event_time"), "%Y-%m-%d %H:%M:%S.%f")
+if event_name == "session_start":
+return
+if event_name == "[Amplitude] Page Viewed":
+event_name = "$pageview"
+if event_name in ["[Amplitude] Element Clicked", "[Amplitude] Element Changed"]:
+event_name = "$autocapture"
 
-  device_type = entry.get("device_type")
-  if device_type == "Windows" or device_type == "Linux":
-    device_type = "Desktop"
-  elif device_type == "iOS" or device_type == "Android":
-    device_type = "Mobile"
-  else:
-    device_type = None
+timestamp = datetime.strptime(entry.get("event_time"), "%Y-%m-%d %H:%M:%S.%f")
 
-  payload = {
-    "event": event_name,
-    "distinct_id": distinct_id,
-    "properties": {
-      "$os": entry.get("device_type"),
-      "$browser": entry.get("os_name"),
-      "$browser_version": int(entry.get("os_version")),
-      "$device_type": device_type,
-      "$current_url": entry.get("event_properties").get("[Amplitude] Page URL"),
-      "$host": entry.get("event_properties").get("[Amplitude] Page Domain"),
-      "$pathname": entry.get("event_properties").get("[Amplitude] Page Path"),
-      "$viewport_height": entry.get("event_properties").get("[Amplitude] Viewport Height"),
-      "$viewport_width": entry.get("event_properties").get("[Amplitude] Viewport Width"),
-      "$referrer": entry.get("event_properties").get("referrer"),
-      "$referring_domain": entry.get("event_properties").get("referring_domain"),
-      "$device_id": entry.get("device_id"),
-      "$ip": entry.get("ip_address"),
-      "$geoip_city_name": entry.get("city"),
-      "$geoip_subdivision_1_name": entry.get("region"),
-      "$geoip_country_name": entry.get("country"),
-      "$set_once": {
-        "$initial_referrer": None if entry.get("user_properties").get("initial_referrer") == "EMPTY" else entry.get("user_properties").get("initial_referrer"),
-        "$initial_referring_domain": None if entry.get("user_properties").get("initial_referring_domain") == "EMPTY" else entry.get("user_properties").get("initial_referring_domain"),
-        "$initial_utm_source": None if entry.get("user_properties").get("initial_utm_source") == "EMPTY" else entry.get("user_properties").get("initial_utm_source"),
-        "$initial_utm_medium": None if entry.get("user_properties").get("initial_utm_medium") == "EMPTY" else entry.get("user_properties").get("initial_utm_medium"),
-        "$initial_utm_campaign": None if entry.get("user_properties").get("initial_utm_campaign") == "EMPTY" else entry.get("user_properties").get("initial_utm_campaign"),
-        "$initial_utm_content": None if entry.get("user_properties").get("initial_utm_content") == "EMPTY" else entry.get("user_properties").get("initial_utm_content"),
-      },
-      "$set": {
-        "$os": entry.get("device_type"),
-        "$browser": entry.get("os_name"),
-        "$device_type": device_type,
-        "$current_url": entry.get("event_properties").get("[Amplitude] Page URL"),
-        "$pathname": entry.get("event_properties").get("[Amplitude] Page Path"),
-        "$browser_version":  entry.get("os_version"),
-        "$referrer": entry.get("event_properties").get("referrer"),
-        "$referring_domain": entry.get("event_properties").get("referring_domain"),
-        "$geoip_city_name": entry.get("city"),
-        "$geoip_subdivision_1_name": entry.get("region"),
-        "$geoip_country_name": entry.get("country"),
-      }
-    },
-    "timestamp": timestamp
-  }
+device_type = entry.get("device_type")
+if device_type == "Windows" or device_type == "Linux":
+device_type = "Desktop"
+elif device_type == "iOS" or device_type == "Android":
+device_type = "Mobile"
+else:
+device_type = None
 
-  posthog.capture(
-    event=payload["event"],
-    distinct_id=payload["distinct_id"],
-    properties=payload["properties"], 
-    timestamp=payload["timestamp"],
-  )
+payload = {
+"event": event_name,
+"distinct_id": distinct_id,
+"properties": {
+"$os": entry.get("device_type"),
+"$browser": entry.get("os_name"),
+"$browser_version": int(entry.get("os_version")),
+"$device_type": device_type,
+"$current_url": entry.get("event_properties").get("[Amplitude] Page URL"),
+"$host": entry.get("event_properties").get("[Amplitude] Page Domain"),
+"$pathname": entry.get("event_properties").get("[Amplitude] Page Path"),
+"$viewport_height": entry.get("event_properties").get("[Amplitude] Viewport Height"),
+"$viewport_width": entry.get("event_properties").get("[Amplitude] Viewport Width"),
+"$referrer": entry.get("event_properties").get("referrer"),
+"$referring_domain": entry.get("event_properties").get("referring_domain"),
+"$device_id": entry.get("device_id"),
+"$ip": entry.get("ip_address"),
+"$geoip_city_name": entry.get("city"),
+"$geoip_subdivision_1_name": entry.get("region"),
+"$geoip_country_name": entry.get("country"),
+"$set_once": {
+"$initial_referrer": None if entry.get("user_properties").get("initial_referrer") == "EMPTY" else entry.get("user_properties").get("initial_referrer"),
+"$initial_referring_domain": None if entry.get("user_properties").get("initial_referring_domain") == "EMPTY" else entry.get("user_properties").get("initial_referring_domain"),
+"$initial_utm_source": None if entry.get("user_properties").get("initial_utm_source") == "EMPTY" else entry.get("user_properties").get("initial_utm_source"),
+"$initial_utm_medium": None if entry.get("user_properties").get("initial_utm_medium") == "EMPTY" else entry.get("user_properties").get("initial_utm_medium"),
+"$initial_utm_campaign": None if entry.get("user_properties").get("initial_utm_campaign") == "EMPTY" else entry.get("user_properties").get("initial_utm_campaign"),
+"$initial_utm_content": None if entry.get("user_properties").get("initial_utm_content") == "EMPTY" else entry.get("user_properties").get("initial_utm_content"),
+},
+"$set": {
+"$os": entry.get("device_type"),
+"$browser": entry.get("os_name"),
+"$device_type": device_type,
+"$current_url": entry.get("event_properties").get("[Amplitude] Page URL"),
+"$pathname": entry.get("event_properties").get("[Amplitude] Page Path"),
+"$browser_version": entry.get("os_version"),
+"$referrer": entry.get("event_properties").get("referrer"),
+"$referring_domain": entry.get("event_properties").get("referring_domain"),
+"$geoip_city_name": entry.get("city"),
+"$geoip_subdivision_1_name": entry.get("region"),
+"$geoip_country_name": entry.get("country"),
+}
+},
+"timestamp": timestamp
+}
 
-# Get Amplitude data from folder, unzip it, and use the capture function 
+posthog.capture(
+event=payload["event"],
+distinct_id=payload["distinct_id"],
+properties=payload["properties"],
+timestamp=payload["timestamp"],
+)
+
+# Get Amplitude data from folder, unzip it, and use the capture function
 def get_entries_from_folder_and_capture(folder_name):
-  count = 0
-  for filename in os.listdir(folder_name):
-    if filename.endswith('.json.gz'):
-      file_path = os.path.join(folder_name, filename)
-      with gzip.open(file_path, 'rt', encoding='utf-8') as f:
-        for line in f:
-          entry = json.loads(line)
-          capture_entry(entry)
-      count += 1
-      if count >= 6:
-        break
+count = 0
+for filename in os.listdir(folder_name):
+if filename.endswith('.json.gz'):
+file_path = os.path.join(folder_name, filename)
+with gzip.open(file_path, 'rt', encoding='utf-8') as f:
+for line in f:
+entry = json.loads(line)
+capture_entry(entry)
+count += 1
+if count >= 6:
+break
 
 folder_name = '609539'
 get_entries_from_folder_and_capture(folder_name)
@@ -219,7 +219,7 @@ This script may need modification depending on the structure of your Amplitude d
 
 > **Why am I seeing "analytics-python queue is full"?** The default queue size for ingesting is 10,000. If you are importing more than 10,000 events, call `posthog.flush()` every 5000 messages to block the thread until the queue empties out.
 
-> **Why are my event and DAU count lower in PostHog than Amplitude?** PostHog blocks bot traffic by default, while Amplitude doesn't. You can see a full list of the bots PostHog blocks [in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
+> **Why are my event and DAU count lower in PostHog than Amplitude?** PostHog blocks bot traffic by default, while Amplitude doesn't. You can see a full list of the bots PostHog blocks [in our docs](/docs/product-analytics/troubleshooting #does-posthog-block-bots-by-default).
 
 ### Aliasing device IDs to user IDs
 
@@ -231,14 +231,14 @@ In addition to capturing the events, we want to combine anonymous and identified
 | Login | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 | Purchase | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 
-We want to attribute "Application installed" to the user with ID 123, so we need to also call [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) with both the device ID and user ID:
+We want to attribute "Application installed" to the user with ID 123, so we need to also call [alias](/docs/product-analytics/identify #alias-assigning-multiple-distinct-ids-to-the-same-user) with both the device ID and user ID:
 
 ```python
 posthog = Posthog(
-    '<ph_project_api_key>', 
-    host='<ph_client_api_host>',
-    debug=True,
-    historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 posthog.alias(previous_id=device_id, distinct_id=user_id)

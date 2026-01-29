@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-Statsig is a multi-product feature flag, experimentation, and analytics platform. This means going from Statsig to PostHog requires migrating data from each product. 
+Statsig is a multi-product feature flag, experimentation, and analytics platform. This means going from Statsig to PostHog requires migrating data from each product.
 
-This guide walks through getting data from Statsig, converting it to the PostHog format, and using it to create or capture data in PostHog. 
+This guide walks through getting data from Statsig, converting it to the PostHog format, and using it to create or capture data in PostHog.
 
 ## Differences between Statsig and PostHog
 
@@ -20,7 +20,7 @@ PostHog and Statsig have many of the same features and concepts, but different n
 
 Learn more about how they compare in our [PostHog vs Statsig comparison](/blog/posthog-vs-statsig).
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## Getting your Statsig and PostHog API key
 
@@ -50,55 +50,55 @@ ph_api_key = 'phx_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0tuvwxyz'
 ph_project_id = '12345'
 
 headers = {
-    'Accept': 'application/json',
-    'STATSIG-API-KEY': console_key
+'Accept': 'application/json',
+'STATSIG-API-KEY': console_key
 }
 
 params = {
-    'idType': 'userID',
-    'limit': 10,
-    'page': 1
+'idType': 'userID',
+'limit': 10,
+'page': 1
 }
 
 response = requests.get(gates_url, headers=headers, params=params)
 
 if response.status_code == 200:
-  gates_data = response.json()
+gates_data = response.json()
 else:
-  print(f"Error: {response.status_code}")
-  print(response.text)
+print(f"Error: {response.status_code}")
+print(response.text)
 
 gates = gates_data["data"]
 
 # Convert Statsig flags to PostHog format
 for gate in gates:
-  ph_flag = {
-    "created_by": {
-      "first_name": gate['creatorName'].split()[0],
-      "last_name": gate['creatorName'].split()[-1] if len(gate['creatorName'].split()) > 1 else "",
-      "email": gate['creatorEmail']
-    },
-    "name": f"{gate['name']}\n\n{gate['description']}",
-    "key": gate['id'],
-    "active": gate['isEnabled'],
-    "filters": {
-      "groups": [
-        {
-          "properties": [],
-          "rollout_percentage": 100
-        }
-      ]
-    }
-  }
+ph_flag = {
+"created_by": {
+"first_name": gate['creatorName'].split()[0],
+"last_name": gate['creatorName'].split()[-1] if len(gate['creatorName'].split()) > 1 else "",
+"email": gate['creatorEmail']
+},
+"name": f"{gate['name']}\n\n{gate['description']}",
+"key": gate['id'],
+"active": gate['isEnabled'],
+"filters": {
+"groups": [
+{
+"properties": [],
+"rollout_percentage": 100
+}
+]
+}
+}
 
-  # Create flag in PostHog
-  response = requests.post(
-    "<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
-      ph_project_id=ph_project_id
-    ),
-    headers={"Authorization": "Bearer {}".format(ph_api_key)},
-    json=ph_flag
-  ).json()
+# Create flag in PostHog
+response = requests.post(
+"<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
+ph_project_id=ph_project_id
+),
+headers={"Authorization": "Bearer {}".format(ph_api_key)},
+json=ph_flag
+).json()
 ```
 
 Once migrated, you can go into each flag to set the targeting rules and enable or rollout the flag. You can also replace your `statsig.checkGate` calls with `posthog.isFeatureEnabled` ones.
@@ -118,81 +118,81 @@ ph_api_key = 'phx_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0tuvwxyz'
 ph_project_id = '12345'
 
 headers = {
-  'Accept': 'application/json',
-  'STATSIG-API-KEY': console_key
+'Accept': 'application/json',
+'STATSIG-API-KEY': console_key
 }
 params = {
-  'limit': 10,
-  'page': 1
+'limit': 10,
+'page': 1
 }
 
 response = requests.get(configs_url, headers=headers, params=params)
 if response.status_code == 200:
-  configs_data = response.json()
+configs_data = response.json()
 else:
-  print(f"Error: {response.status_code}")
-  print(response.text)
+print(f"Error: {response.status_code}")
+print(response.text)
 
 # Convert dynamic configs to PostHog flag format
 configs = configs_data["data"]
 for config in configs:
 
-  variants = []
-  payloads = {}
+variants = []
+payloads = {}
 
-  rules = config.get('rules', [])
-  if len(rules) == 0:
-    payloads["true"] = json.dumps(config['defaultValue'])
-  else: 
-    default_variant = {
-      "key": "default",
-      "description": "Default from Statsig",
-      "rollout_percentage": 100
-    }
-    variants.append(default_variant)
-    payloads["default"] = json.dumps(config['defaultValue'])
+rules = config.get('rules', [])
+if len(rules) == 0:
+payloads["true"] = json.dumps(config['defaultValue'])
+else:
+default_variant = {
+"key": "default",
+"description": "Default from Statsig",
+"rollout_percentage": 100
+}
+variants.append(default_variant)
+payloads["default"] = json.dumps(config['defaultValue'])
 
-    rules = config.get('rules', [])
-    for rule in rules:
-      variant_key = rule['name'].lower().replace(' ', '_')
-      variant = {
-        "key": variant_key,
-        "description": rule['name'] + " from Statsig. Use an override to target this variant.",
-        "rollout_percentage": 0
-      }
-      variants.append(variant)
+rules = config.get('rules', [])
+for rule in rules:
+variant_key = rule['name'].lower().replace(' ', '_')
+variant = {
+"key": variant_key,
+"description": rule['name'] + " from Statsig. Use an override to target this variant.",
+"rollout_percentage": 0
+}
+variants.append(variant)
 
-      payloads[variant_key] = json.dumps(rule['returnValue'])
+payloads[variant_key] = json.dumps(rule['returnValue'])
 
-  ph_flag = {
-    "created_by": {
-      "first_name": config['creatorName'].split()[0],
-      "last_name": config['creatorName'].split()[-1] if len(config['creatorName'].split()) > 1 else "",
-      "email": config['creatorEmail']
-    },
-    "name": f"{config['name']}\n\n{config['description']}",
-    "key": config['id'],
-    "active": config['isEnabled'],
-    "filters": {
-      "groups": [
-        {
-          "properties": [],
-          "rollout_percentage": 100
-        }
-      ],
-      "multivariate": {"variants": variants} if len(variants) > 1 else None,
-      "payloads": payloads
-    }
-  }
+ph_flag = {
+"created_by": {
+"first_name": config['creatorName'].split()[0],
+"last_name": config['creatorName'].split()[-1] if len(config['creatorName'].split()) > 1 else "",
+"email": config['creatorEmail']
+},
+"name": f"{config['name']}\n\n{config['description']}",
+"key": config['id'],
+"active": config['isEnabled'],
+"filters": {
+"groups": [
+{
+"properties": [],
+"rollout_percentage": 100
+}
+],
+"multivariate": {"variants": variants} if len(variants) > 1 else None,
+"payloads": payloads
+}
+}
 
-  # Create flag in PostHog
-  response = requests.post(
-    "<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
-        ph_project_id=ph_project_id
-    ),
-    headers={"Authorization": "Bearer {}".format(ph_api_key)},
-    json=ph_flag
-  ).json()
+# Create flag in PostHog
+response = requests.post(
+"<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
+ph_project_id=ph_project_id
+),
+headers={"Authorization": "Bearer {}".format(ph_api_key)},
+json=ph_flag
+).json()
 ```
 
 Once done, you can replace your `statsig.getConfig` call with a `posthog.getFeatureFlagPayload` one.
@@ -219,71 +219,70 @@ experiments_url = 'https://statsigapi.net/console/v1/experiments'
 ph_api_key = 'phx_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0tuvwxyz'
 ph_project_id = '12345'
 
-
 headers = {
-    'Accept': 'application/json',
-    'STATSIG-API-KEY': console_key
+'Accept': 'application/json',
+'STATSIG-API-KEY': console_key
 }
 params = {
-    'limit': 10,
-    'page': 1
+'limit': 10,
+'page': 1
 }
 
 response = requests.get(experiments_url, headers=headers, params=params)
 if response.status_code == 200:
-  experiments_data = response.json()
+experiments_data = response.json()
 else:
-  print(f"Error: {response.status_code}")
-  print(response.text)
+print(f"Error: {response.status_code}")
+print(response.text)
 
 experiments = experiments_data["data"]
 
 for exp in experiments:
-  # Convert Statsig groups to PostHog variants
-  variants = []
-  payloads = {}
-  for group in exp['groups']:
-    variant = {
-      "key": "control" if group['id'] == exp['controlGroupID'] else group['name'],
-      "rollout_percentage": group['size']
-    }
-    variants.append(variant)
-    payloads[variant["key"]] = json.dumps(group['parameterValues'])
+# Convert Statsig groups to PostHog variants
+variants = []
+payloads = {}
+for group in exp['groups']:
+variant = {
+"key": "control" if group['id'] == exp['controlGroupID'] else group['name'],
+"rollout_percentage": group['size']
+}
+variants.append(variant)
+payloads[variant["key"]] = json.dumps(group['parameterValues'])
 
-  # Create PostHog experiment
-  ph_experiment = {
-    "name": exp['name'],
-    "description": "Hypothesis: " + exp['hypothesis'] + "\n\n" + exp['description'],
-    "feature_flag_key": exp['id'],
-    # Use pageview trend goal as default
-    "filters": {
-      "events": [
-        {
-          "id": "$pageview",
-          "math": "total",
-          "name": "$pageview",
-          "type": "events",
-          "order": 0
-        }
-      ],
-      "display": "ActionsLineGraph",
-      "insight": "TRENDS",
-      "entity_type": "events",
-      # You can't add payloads to experiment flags via the API
-    },
-    "parameters": {
-      "feature_flag_variants": variants
-    },
-  }
-  
-  # Create experiment in PostHog
-  response = requests.post(
-    "<ph_app_host>/api/projects/{project_id}/experiments/".format(
-      project_id=ph_project_id
-    ),
-    headers={"Authorization": "Bearer {}".format(ph_api_key)},
-    json=ph_experiment
-  ).json()
+# Create PostHog experiment
+ph_experiment = {
+"name": exp['name'],
+"description": "Hypothesis: " + exp['hypothesis'] + "\n\n" + exp['description'],
+"feature_flag_key": exp['id'],
+# Use pageview trend goal as default
+"filters": {
+"events": [
+{
+"id": "$pageview",
+"math": "total",
+"name": "$pageview",
+"type": "events",
+"order": 0
+}
+],
+"display": "ActionsLineGraph",
+"insight": "TRENDS",
+"entity_type": "events",
+# You can't add payloads to experiment flags via the API
+},
+"parameters": {
+"feature_flag_variants": variants
+},
+}
+
+# Create experiment in PostHog
+response = requests.post(
+"<ph_app_host>/api/projects/{project_id}/experiments/".format(
+project_id=ph_project_id
+),
+headers={"Authorization": "Bearer {}".format(ph_api_key)},
+json=ph_experiment
+).json()
 ```
 
 Once created, modify the goal and secondary metrics as well as the targeting to fit your needs and then launch your experiment.
@@ -296,7 +295,7 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 > **Note:** As of writing this guide, the Statsig event API was not returning events. This is written using a mix of their sample data and data returned from requests in-app.
 
-The schema of Statsig's event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Statsig's schema in [their docs](https://www.statsig.com/glossary/event-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Statsig's event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Statsig's schema in [their docs](https://www.statsig.com/glossary/event-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
 
 With Statsig's event data, you can go through each row and convert it to PostHog's schema. This requires converting:
 
@@ -304,7 +303,7 @@ With Statsig's event data, you can go through each row and convert it to PostHog
 - Properties like `page_url` to `$current_url`
 - Event `timestamp` to an ISO 8601 timestamp
 
-Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`. You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). 
+Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`. You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project).
 
 Here's an example Python script to convert Statsig's event data to PostHog's schema:
 
@@ -315,103 +314,103 @@ import datetime
 from posthog import Posthog
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 key_mapping = {
-  'os': '$os',
-  'os_version': '$os_version',
-  'browser_name': '$browser',
-  'browser_version': '$browser_version',
-  'language': '$browser_language',
-  'country': '$geoip_country_name',
-  'deviceType': '$device_type',
-  'device_id': '$device_id',
-  'page_url': '$current_url',
-  'sessionID': '$session_id'
+'os': '$os',
+'os_version': '$os_version',
+'browser_name': '$browser',
+'browser_version': '$browser_version',
+'language': '$browser_language',
+'country': '$geoip_country_name',
+'deviceType': '$device_type',
+'device_id': '$device_id',
+'page_url': '$current_url',
+'sessionID': '$session_id'
 }
-  
+
 event_mapping = {
-  'auto_capture::page_view_end': '$pageleave',
-  'auto_capture::page_view': '$pageview',
-  'auto_capture::error': '$error',
-  'auto_capture::click': '$autocapture',
+'auto_capture::page_view_end': '$pageleave',
+'auto_capture::page_view': '$pageview',
+'auto_capture::error': '$error',
+'auto_capture::click': '$autocapture',
 }
-  
+
 omitted_keys = [
-  'name',
-  'timestamp',
-  'userID',
-  'id',
-  'event_name',
-  'sdk_key'
+'name',
+'timestamp',
+'userID',
+'id',
+'event_name',
+'sdk_key'
 ]
 
 # This could be replaced with a request to the Statsig events API
 with open('events.json', 'r') as file:
-  events_data = json.load(file)
+events_data = json.load(file)
 
 events = events_data["data"]
 
 for event in events:
-  distinct_id = event.get('userID') or event.get('deviceID') or event.get('user_id') or event.get('device_id')
-  
-  ph_event_name = event.get('name') or event.get('event_name')
-  if ph_event_name == 'auto_capture::session_start':
-    continue
-  if ph_event_name in event_mapping:
-    ph_event_name = event_mapping[ph_event_name]
+distinct_id = event.get('userID') or event.get('deviceID') or event.get('user_id') or event.get('device_id')
 
-  # Timestamp must be in ISO 8601 format
-  timestamp_ms = int(event.get('timestamp'))
-  ph_timestamp = datetime.datetime.fromtimestamp(timestamp_ms / 1000.0)
-  
-  # Flatten metadata
-  if 'metadata' in event and isinstance(event['metadata'], dict):
-    for meta_key, meta_value in event['metadata'].items():
-      event[meta_key] = meta_value
-    del event['metadata']
-  
-  # Flatten device_metadata
-  if 'device_metadata' in event and isinstance(event['device_metadata'], str):
-    device_metadata = json.loads(event['device_metadata'])
-    for meta_key, meta_value in device_metadata.items():
-      event[meta_key] = meta_value
-    del event['device_metadata']
-  
-  # Flatten trimmed_data
-  if 'trimmed_data' in event and isinstance(event['trimmed_data'], str):
-    trimmed_data = json.loads(event['trimmed_data'])
-    for data_key, data_value in trimmed_data.items():
-      event[data_key] = data_value
-    del event['trimmed_data']
+ph_event_name = event.get('name') or event.get('event_name')
+if ph_event_name == 'auto_capture::session_start':
+continue
+if ph_event_name in event_mapping:
+ph_event_name = event_mapping[ph_event_name]
 
-  # Convert properties
-  properties = {}
-  for key, value in event.items():
-    if value == '' or value is None:
-      continue
-    elif key in omitted_keys:
-      continue
-    elif key in key_mapping:
-      properties[key_mapping[key]] = value
-    elif key == 'value':
-      if event.get('event_name') == 'auto_capture::page_view' or event.get('event_name') == 'auto_capture::page_view_end':
-        properties['$current_url'] = value
-      else:
-        properties[key] = value
-    else:
-      properties[key] = value
+# Timestamp must be in ISO 8601 format
+timestamp_ms = int(event.get('timestamp'))
+ph_timestamp = datetime.datetime.fromtimestamp(timestamp_ms / 1000.0)
 
-  posthog.capture(
-    distinct_id=distinct_id,
-    event=ph_event_name,
-    properties=properties,
-    timestamp=ph_timestamp
-  )
+# Flatten metadata
+if 'metadata' in event and isinstance(event['metadata'], dict):
+for meta_key, meta_value in event['metadata'].items():
+event[meta_key] = meta_value
+del event['metadata']
+
+# Flatten device_metadata
+if 'device_metadata' in event and isinstance(event['device_metadata'], str):
+device_metadata = json.loads(event['device_metadata'])
+for meta_key, meta_value in device_metadata.items():
+event[meta_key] = meta_value
+del event['device_metadata']
+
+# Flatten trimmed_data
+if 'trimmed_data' in event and isinstance(event['trimmed_data'], str):
+trimmed_data = json.loads(event['trimmed_data'])
+for data_key, data_value in trimmed_data.items():
+event[data_key] = data_value
+del event['trimmed_data']
+
+# Convert properties
+properties = {}
+for key, value in event.items():
+if value == '' or value is None:
+continue
+elif key in omitted_keys:
+continue
+elif key in key_mapping:
+properties[key_mapping[key]] = value
+elif key == 'value':
+if event.get('event_name') == 'auto_capture::page_view' or event.get('event_name') == 'auto_capture::page_view_end':
+properties['$current_url'] = value
+else:
+properties[key] = value
+else:
+properties[key] = value
+
+posthog.capture(
+distinct_id=distinct_id,
+event=ph_event_name,
+properties=properties,
+timestamp=ph_timestamp
+)
 ```
 
-This script may need modification depending on the structure of your Statsig data, but it gives you a start. 
+This script may need modification depending on the structure of your Statsig data, but it gives you a start.

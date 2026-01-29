@@ -90,6 +90,7 @@ interface EditorProps {
     extraMenuOptions?: React.ReactNode
     articleRef?: React.RefObject<HTMLDivElement>
     hideToolbar?: boolean
+    scrollable?: boolean
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -101,6 +102,9 @@ type EditorActionButton = {
     active?: boolean
     disabled?: boolean
 }
+
+const ScrollWrapper = ({ scrollable, children }: { scrollable: boolean; children: React.ReactNode }) =>
+    scrollable ? <ScrollArea>{children}</ScrollArea> : <>{children}</>
 
 const filterData = (data: any, filters: any) => {
     return data.filter((obj: any) => {
@@ -227,6 +231,7 @@ export function Editor({
     extraMenuOptions,
     articleRef,
     hideToolbar = false,
+    scrollable = true,
     ...other
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
@@ -673,7 +678,7 @@ export function Editor({
                                 </article>
                             </div>
                         ) : (
-                            <ScrollArea>
+                            <ScrollWrapper scrollable={scrollable}>
                                 <article
                                     ref={articleRef ?? undefined}
                                     style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
@@ -691,7 +696,7 @@ export function Editor({
                                         <div ref={searchContentRef}>{children}</div>
                                     </div>
                                 </article>
-                            </ScrollArea>
+                            </ScrollWrapper>
                         )}
                     </main>
                 </div>

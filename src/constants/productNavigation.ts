@@ -73,7 +73,7 @@ export const productOrder: Record<string, string[]> = {
     ],
     automation: ['posthog_ai', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews'],
-    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }
 
 // Non-product pages that appear in the product navigation
