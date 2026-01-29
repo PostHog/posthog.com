@@ -31,7 +31,7 @@ Approvals add a review step before high-impact changes take effect. Use them to 
 
 ## How approvals work
 
-When approvals are enabled, certain actions create a **change request** instead of taking effect immediately. The change request captures what the user wants to do and waits for approval from designated reviewers.
+When approvals are enabled, [supported actions](#supported-actions) create a **change request** instead of taking effect immediately. The change request captures what the user wants to do and waits for approval from designated reviewers.
 
 Once enough approvers approve the request (reaching the required quorum), PostHog automatically applies the change. If reviewers reject the request, the change is not applied and the requester is notified.
 
