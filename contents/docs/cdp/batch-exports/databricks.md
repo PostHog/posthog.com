@@ -16,10 +16,6 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 The Databricks destination is currently in `beta`. This means the configuration and features are subject to change.
 
-You can request access via the [in-app support form](https://app.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
-
-We love feature requests and feedback. Please tell us what you think using the same link above.
-
 </CalloutBox>
 
 ## Requirements
