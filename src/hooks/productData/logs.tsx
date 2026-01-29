@@ -65,29 +65,29 @@ export const logs = {
             wistia: 'm67tqy5vs8',
         },
     },
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
+        alt: 'A hedgehog perusing some logs',
+        classes: 'hidden @2xl:block max-w-sm',
+    },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_overview_5408b3bed3.png',
             // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
             alt: 'Logs overview',
-            classes: 'max-w-6xl mt-auto',
+            classes: 'max-w-5xl mt-auto',
             imgClasses: '',
             classesMobile: '',
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_home_a553e506ca.png',
+            // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
             alt: 'Logs screenshot',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
-            imgClasses: 'rounded-tl-lg shadow-2xl',
+            imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
-    // hog: {
-    //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-    //   alt: 'AI-powered hedgehog',
-    //   classes: 'absolute bottom-0 right-4 max-w-lg',
-    // },
     customers: {
         key: {
             headline: '',
