@@ -702,7 +702,7 @@ const CompanyStageTabs = () => {
                             'experiments',
                             'feature_flags',
                             'surveys',
-                            'dashboards',
+                            'logs',
                             'cdp',
                             'workflows_emails',
                         ]}
