@@ -2,7 +2,7 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 
 <OverrideServerPropertiesIntro />
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
@@ -45,7 +45,7 @@ import OverrideGeoIPPropertiesIntro from './override-geoip-properties-intro.mdx'
 
 To override the GeoIP properties used to evaluate a feature flag, provide an IP address in the `HTTP_X_FORWARDED_FOR` when making your `/flags` request:
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```shell
 curl -v -L \

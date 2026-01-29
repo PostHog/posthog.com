@@ -6,7 +6,7 @@ There are 3 steps to implement feature flags using the PostHog API:
 
 #### Request
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```shell
 # Basic request (flags only)
@@ -106,7 +106,7 @@ To filter flags by evaluation context, include the `evaluation_contexts` field i
 
 > **Note:** The legacy parameter `evaluation_environments` is also supported for backward compatibility.
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
@@ -434,7 +434,7 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 To do this, include the `$feature/feature_flag_name` property in your event:
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
@@ -478,7 +478,7 @@ You need to include two properties with this event:
 1. `$feature_flag_response`: This is the name of the variant the user has been assigned to e.g., "control" or "test"
 2. `$feature_flag`: This is the key of the feature flag in your experiment.
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {

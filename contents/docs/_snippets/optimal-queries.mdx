@@ -6,7 +6,7 @@ Here is some advice for making sure your queries are quick and don't read over t
 
 You should almost always include a time range in your queries, and the shorter the better. There are a variety of SQL features to help you do this including `now()`, `INTERVAL`, and `dateDiff`. See more about these in our [SQL docs](/docs/product-analytics/sql#date-and-time).
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```sql
 SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY
@@ -103,7 +103,7 @@ To do this, write your query in the [SQL editor](https://us.posthog.com/sql), cl
 
 Once done, you can query the view like any other table.
 
-<MultiLanguage>
+<MultiLanguage syncKey="api">
 
 ```sql
 SELECT * FROM mat_event_count
