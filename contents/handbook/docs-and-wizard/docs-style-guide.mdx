@@ -20,45 +20,45 @@ This style guide helps you write docs based on these assumptions.
 
 Address the reader directly using "you" instead of "the user" or "developers".
 
-> **Do:** "You can create an insight by clicking **New insight**"
+> **Do** - "You can create an insight by clicking **New insight**"
 
-> **Don't:** "Users can create insights"
+> **Don't** - "Users can create insights"
 
 ### Use present tense
 
 Write in present tense. Avoid future tense unless specifically discussing future events.
 
-> **Do:** "The insight displays your data"
+> **Do** - "The insight displays your data"
 
-> **Don't:** "The insight will display your data"
+> **Don't** - "The insight will display your data"
 
 ### Use active voice
 
 Active voice makes it clear who or what performs an action.
 
-> **Do:** "PostHog captures events automatically"
+> **Do** - "PostHog captures events automatically"
 
-> **Don't:** "Events are captured automatically by PostHog"
+> **Don't** - "Events are captured automatically by PostHog"
 
 Exception: Use passive voice when the actor is unknown or unimportant.
 
-> **Acceptable:** "The data is encrypted at rest"
+> **Acceptable** - "The data is encrypted at rest"
 
 ### Be concise
 
 Remove unnecessary words. Every sentence should add value.
 
-> **Do:** "Click **Save**"
+> **Do** - "Click **Save**"
 
-> **Don't:** "Now you can go ahead and click the **Save** button to save your changes"
+> **Don't** - "Now you can go ahead and click the **Save** button to save your changes"
 
 ### Avoid jargon and explain technical terms
 
 When you must use technical terms, explain them on first use or link to a definition.
 
-> **Do:** "Create a [cohort](/docs/data/cohorts) to analyze behavior. A cohort is a group of users who share common properties."
+> **Do** - "Create a [cohort](/docs/data/cohorts) to analyze behavior. A cohort is a group of users who share common properties."
 
-> **Do:** "Create a [cohort](/docs/data/cohorts)—a group of users who share common properties—to analyze behavior."
+> **Do** - "Create a [cohort](/docs/data/cohorts)—a group of users who share common properties—to analyze behavior."
 
 ## Product terminology
 
@@ -68,11 +68,11 @@ When you must use technical terms, explain them on first use or link to a defini
 - **PostHog Cloud**: Only use when explicitly differentiating cloud features from self-hosted deployments.
 - **Self-hosted PostHog** or **hobby deployments**: Use when referring to self-hosted installations.
 
-> **Do:** "Go to **Insights** in the PostHog app and click **New insight**."
+> **Do** - "Go to **Insights** in the PostHog app and click **New insight**."
 
-> **Do:** "This feature is only available in PostHog Cloud."
+> **Do** - "This feature is only available in PostHog Cloud."
 
-> **Don't:** "To create an insight in PostHog Cloud, go to the **Insights** tab."
+> **Don't** - "To create an insight in PostHog Cloud, go to the **Insights** tab."
 
 ### Product and feature names
 
@@ -84,19 +84,19 @@ Always capitalize PostHog product names.
 
 Lead with what readers need to know. For instructions, start with the action. For explanations, start with the definition.
 
-> **Do:** "Click **New insight** to create an insight. Insights help you visualize your data."
+> **Do** - "Click **New insight** to create an insight. Insights help you visualize your data."
 
-> **Do:** "Cohorts are groups of users who share a property. Use them to compare behavior across segments."
+> **Do** - "Cohorts are groups of users who share a property. Use them to compare behavior across segments."
 
-> **Don't:** "Insights are a powerful way to visualize your data. They help you understand user behavior. To create one, click **New insight**."
+> **Don't** - "Insights are a powerful way to visualize your data. They help you understand user behavior. To create one, click **New insight**."
 
 ### Use descriptive headings
 
 Headings should clearly describe what's in the section. Use sentence case, not title case.
 
-> **Do:** "## How to create a feature flag"
+> **Do** - "## How to create a feature flag"
 
-> **Don't:** "## Creating Feature Flags"
+> **Don't** - "## Creating Feature Flags"
 
 ### Use short paragraphs
 
@@ -106,7 +106,7 @@ Keep paragraphs to 3-4 lines maximum. Break up longer content with subheadings, 
 
 Use bullets for unordered items of equal importance. Default to prose when 1-2 items would be clearer as a sentence.
 
-> **Do:**
+> **Do** -
 > PostHog offers several products:
 > - Product Analytics
 > - Session Replay
@@ -115,7 +115,7 @@ Use bullets for unordered items of equal importance. Default to prose when 1-2 i
 
 > **Do (prose):** "You need a PostHog account and at least one event captured to get started."
 
-> **Don't:**
+> **Don't** -
 > Feature flags let you:
 > - Control feature rollouts
 
@@ -123,7 +123,7 @@ Use bullets for unordered items of equal importance. Default to prose when 1-2 i
 
 Use numbered lists only when sequence matters. Numbered lists are mainly used for UI instructions.
 
-> **Do:**
+> **Do** -
 > 1. Click **New insight**
 > 2. Select your event
 > 3. Click **Save**
@@ -132,13 +132,13 @@ Use numbered lists only when sequence matters. Numbered lists are mainly used fo
 
 Use tables for comparing multiple items across multiple attributes.
 
-> **Do:**
+> **Do** -
 > | Plan | Events/month | Team members | Price |
 > |------|--------------|--------------|-------|
 > | Free | 1M | Unlimited | $0 |
 > | Paid | 2M+ | Unlimited | $0.00031/event |
 
-> **Don't:**
+> **Don't** -
 > Our plans:
 > - Free: 1M events per month, unlimited team members, $0
 > - Paid: 2M+ events per month, unlimited team members, $0.00031 per event
@@ -158,10 +158,9 @@ Don't use:
 
 Use bold for structured information:
 
-- **Callout labels:** `**Note:**`, `**Important:**`, `**Warning:**`, `**Tip:**`
-- **UI elements:** Button names, menu items, keyboard shortcuts
-- **Definition lists:** The term in `**Term:** Description` patterns
-- **Problem/Solution labels:** `**Problem:**` and `**Solutions:**` in troubleshooting docs
+- **Callout labels** - Whatever you want on the first line of a blockquote callout
+- **UI elements** - Button names, menu items, keyboard shortcuts
+- **Definition lists** - The term in `**Term** - Description` patterns
 
 ## Links
 
@@ -169,29 +168,29 @@ Use bold for structured information:
 
 Link the first mention of a PostHog term, feature, or SDK on a page to its docs page.
 
-> **Example:** "To create an [insight](/docs/product-analytics/insights), first [capture events](/docs/product-analytics/capture-events). Then, select the data you want to see."
+> **Example** - "To create an [insight](/docs/product-analytics/insights), first [capture events](/docs/product-analytics/capture-events). Then, select the data you want to see."
 
 ### Link to the PostHog app
 
 Link directly to PostHog app pages using `https://app.posthog.com/${path}`. EU Cloud users are redirected automatically.
 
-> **Example:** "Go to the [**Insights** tab](https://app.posthog.com/insights) and click **New insight**."
+> **Example** - "Go to the [**Insights** tab](https://app.posthog.com/insights) and click **New insight**."
 
 ### Link text
 
 Link text should describe the destination. Avoid "click here" or "this page."
 
-> **Do:** "See our [installation guide](/docs/getting-started/install) for instructions."
+> **Do** - "See our [installation guide](/docs/getting-started/install) for instructions."
 
-> **Don't:** "Click [this link](/docs/getting-started/install) for installation instructions."
+> **Don't** - "Click [this link](/docs/getting-started/install) for installation instructions."
 
 ## Formatting UI instructions
 
 Bold all UI elements. Use exact names as they appear in the UI. Don't use quotes.
 
-> **Do:** Click **New insight** in the **Insights** tab.
+> **Do** - Click **New insight** in the **Insights** tab.
 
-> **Don't:** Click the "New insight" button.
+> **Don't** - Click the "New insight" button.
 
 For multi-step flows, use ordered lists. Use `>` within a step to show hierarchy as needed:
 
@@ -203,16 +202,16 @@ For multi-step flows, use ordered lists. Use `>` within a step to show hierarchy
 
 ### Use backticks
 
-- **Inline code:** Use single backticks for code elements in text: `posthog.capture()`
-- **Code blocks:** Use triple backticks for multi-line code
+- **Inline code** - Use single backticks for code elements in text: `posthog.capture()`
+- **Code blocks** - Use triple backticks for multi-line code
 
 ### Follow language conventions
 
 Use the standard style conventions for each programming language:
 
-- **JavaScript/TypeScript:** `PascalCase` for classes, `camelCase` for functions and variables, ES modules (`import`/`export`) instead of CommonJS (`require`)
-- **Python**: `PascalCase` for classes, `snake_case` for functions and variables
-- **HTML**: Lowercase for elements and attributes
+- **JavaScript/TypeScript** - `PascalCase` for classes, `camelCase` for functions and variables, ES modules (`import`/`export`) instead of CommonJS (`require`)
+- **Python** - `PascalCase` for classes, `snake_case` for functions and variables
+- **HTML** - Lowercase for elements and attributes
 
 ### PostHog event and property naming
 
@@ -231,7 +230,7 @@ Never use `camelCase` or `PascalCase` for event or property names.
 
 Use realistic examples that demonstrate actual use cases.
 
-> **Do:**
+> **Do** -
 > ```js
 > posthog.capture('purchase_completed', {
 >     product_id: 'prod_12345',
@@ -240,7 +239,7 @@ Use realistic examples that demonstrate actual use cases.
 > })
 > ```
 
-> **Don't:**
+> **Don't** -
 > ```js
 > posthog.capture('event', {
 >     property: 'value'
@@ -278,11 +277,11 @@ Use magic placeholders in code blocks. These auto-populate for logged-in users:
 
 To maintain consistency and clarity:
 
-- **No user data**: Ensure no personal information is visible
-- **Focus on the relevant UI**: Exclude sidebars and irrelevant interface elements
-- **Use standard viewport**: Set device width to 1000-1400px in devtools
-- **Use node screenshots**: Capture DOM node elements for upscaled rendering
-- **Set DPR to 3**: Use device pixel ratio of 3 for 3x upscaling
+- **No user data** - Ensure no personal information is visible
+- **Focus on the relevant UI** - Exclude sidebars and irrelevant interface elements
+- **Use standard viewport** - Set device width to 1000-1400px in devtools
+- **Use node screenshots** - Capture DOM node elements for upscaled rendering
+- **Set DPR to 3** - Use device pixel ratio of 3 for 3x upscaling
 
 ### When to use videos
 
@@ -328,17 +327,11 @@ Use precise verbs that clearly indicate the action:
 
 ### Avoid these words and phrases
 
-- **Simply, just, easily**:
-  - **Don't:** "Simply add the SDK to your project."
-  - **Do:** "Add the SDK to your project."
+- **Simply, just, easily** - Don't use these. Say "Add the SDK to your project" not "Simply add the SDK to your project."
 
-- **Please**:
-  - **Don't:** "Please click **Save**."
-  - **Do:** "Click **Save**."
+- **Please** - Don't use this. Say "Click **Save**" not "Please click **Save**."
 
-- **Obviously, of course, clearly**:
-  - **Don't:** "Of course, this only works for authenticated users."
-  - **Do:** "This only works for authenticated users."
+- **Obviously, of course, clearly** - Don't use these. Say "This only works for authenticated users" not "Of course, this only works for authenticated users."
 
 ## Grammar and mechanics
 
@@ -346,17 +339,17 @@ Use precise verbs that clearly indicate the action:
 
 Avoid using parentheses for explanations or clarifications. They disrupt reading flow and make content harder to scan. Instead, use separate sentences or en dashes.
 
-> **Do:** "Create a cohort to analyze behavior. A cohort is a group of users who share common properties."
+> **Do** - "Create a cohort to analyze behavior. A cohort is a group of users who share common properties."
 
-> **Do:** "Create a cohort – a group of users who share common properties – to analyze behavior."
+> **Do** - "Create a cohort – a group of users who share common properties – to analyze behavior."
 
-> **Don't:** "Create a cohort (a group of users who share common properties) to analyze behavior."
+> **Don't** - "Create a cohort (a group of users who share common properties) to analyze behavior."
 
 Parentheses are acceptable for:
 
-- **Abbreviations on first use:** "Application Programming Interface (API)"
-- **Optional parameters in code:** `posthog.capture(event, properties)`
-- **Version numbers:** "Available in version 1.2.0 (or later)"
+- **Abbreviations on first use** - "Application Programming Interface (API)"
+- **Optional parameters in code** - `posthog.capture(event, properties)`
+- **Version numbers** - "Available in version 1.2.0 (or later)"
 
 ### Contractions
 
@@ -366,17 +359,17 @@ Use contractions to maintain a conversational tone.
 
 Always use the Oxford comma in lists:
 
-> **Do:** "PostHog offers analytics, session replay, and feature flags."
+> **Do** - "PostHog offers analytics, session replay, and feature flags."
 
-> **Don't:** "PostHog offers analytics, session replay and feature flags."
+> **Don't** - "PostHog offers analytics, session replay and feature flags."
 
 ### Sentence case for headings
 
 Use sentence case for all headings. Capitalize only the first word and proper nouns:
 
-> **Do:** "## How to create a feature flag"
+> **Do** - "## How to create a feature flag"
 
-> **Don't:** "## How To Create A Feature Flag"
+> **Don't** - "## How To Create A Feature Flag"
 
 ### Numbers
 
@@ -384,9 +377,9 @@ Use sentence case for all headings. Capitalize only the first word and proper no
 - Use numerals for 10 and above
 - Use numerals for percentages, measurements, and technical values
 
-> **Do:** "You can create three dashboards" or "You can create 15 dashboards."
+> **Do** - "You can create three dashboards" or "You can create 15 dashboards."
 
-> **Do:** "Set the timeout to 30 seconds."
+> **Do** - "Set the timeout to 30 seconds."
 
 ## Inclusive language
 
