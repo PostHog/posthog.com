@@ -105,7 +105,6 @@ export const Select = ({
                 searchable={true}
                 searchPlaceholder="Search topics..."
                 maxHeight="max-h-[300px]"
-                showLabel={false}
                 className=""
             />
         </div>
