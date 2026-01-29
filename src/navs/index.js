@@ -2465,10 +2465,6 @@ export const docsMenu = {
                             url: '/docs/api/product-tours',
                         },
                         {
-                            name: 'Support',
-                            url: '/docs/api/support',
-                        },
-                        {
                             name: 'Users',
                             url: '/docs/api/users',
                         },
