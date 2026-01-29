@@ -37,7 +37,6 @@ const initialProducts = [
     revenueAnalytics,
     logs,
     workflows,
-    logs,
 ]
 
 export default function useProducts() {
