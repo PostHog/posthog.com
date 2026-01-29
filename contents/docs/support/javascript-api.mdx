@@ -1,0 +1,340 @@
+---
+title: JavaScript API
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+The JavaScript API is available at `posthog.conversations` and provides full programmatic control over conversations. Use it to build custom support experiences or integrate with your existing UI.
+
+## API reference
+
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `isAvailable()` | Check if conversations API is ready | `boolean` |
+| `isVisible()` | Check if widget is rendered | `boolean` |
+| `show()` | Show/render the widget | `void` |
+| `hide()` | Hide/remove the widget | `void` |
+| `sendMessage(message, userTraits?, newTicket?)` | Send a message | `Promise<SendMessageResponse \| null>` |
+| `getMessages(ticketId?, after?)` | Fetch messages | `Promise<GetMessagesResponse \| null>` |
+| `markAsRead(ticketId?)` | Mark messages as read | `Promise<MarkAsReadResponse \| null>` |
+| `getTickets(options?)` | Fetch tickets list | `Promise<GetTicketsResponse \| null>` |
+| `getCurrentTicketId()` | Get current ticket ID | `string \| null` |
+| `getWidgetSessionId()` | Get widget session ID | `string \| null` |
+
+## Checking availability
+
+Before using the API, check if conversations are available:
+
+```javascript
+if (posthog.conversations.isAvailable()) {
+  // Conversations API is ready to use
+}
+```
+
+`isAvailable()` returns `true` when:
+- Conversations are enabled in your project settings
+- The conversations module has loaded successfully
+
+## Sending messages
+
+```javascript
+// Send a message (creates ticket if none exists)
+const response = await posthog.conversations.sendMessage('Hello, I need help!')
+
+// Send with user identification
+const response = await posthog.conversations.sendMessage(
+  'Hello, I need help!',
+  { 
+    name: 'John Doe', 
+    email: 'john@example.com' 
+  }
+)
+
+// Force start a new conversation (new ticket)
+const response = await posthog.conversations.sendMessage(
+  'Starting a new conversation',
+  undefined,  // userTraits
+  true        // newTicket
+)
+```
+
+**Parameters:**
+- `message` (string) - The message text to send
+- `userTraits` (optional) - Object with `name` and/or `email` for user identification
+- `newTicket` (optional, boolean) - If `true`, creates a new ticket even if one exists
+
+**Response:**
+
+```typescript
+interface SendMessageResponse {
+  ticket_id: string      // ID of the ticket
+  message_id: string     // ID of the created message
+  ticket_status: string  // 'new' | 'open' | 'pending' | 'on_hold' | 'resolved'
+  created_at: string     // ISO timestamp
+  unread_count: number   // Unread messages from team (0 after sending)
+}
+```
+
+## Fetching messages
+
+```javascript
+// Get messages for the current active ticket
+const response = await posthog.conversations.getMessages()
+
+// Get messages for a specific ticket
+const response = await posthog.conversations.getMessages('ticket-uuid')
+
+// Get messages after a specific timestamp (for polling/pagination)
+const response = await posthog.conversations.getMessages(
+  'ticket-uuid',
+  '2024-01-15T10:30:00Z'
+)
+```
+
+**Response:**
+
+```typescript
+interface GetMessagesResponse {
+  ticket_id: string
+  ticket_status: string
+  messages: Message[]
+  has_more: boolean      // Whether more messages exist
+  unread_count: number   // Unread messages from team
+}
+
+interface Message {
+  id: string
+  content: string
+  author_type: 'customer' | 'AI' | 'human'
+  author_name?: string
+  created_at: string     // ISO timestamp
+  is_private: boolean    // Internal notes (not shown to customer)
+}
+```
+
+## Marking messages as read
+
+```javascript
+// Mark messages as read for current ticket
+await posthog.conversations.markAsRead()
+
+// Mark messages as read for a specific ticket
+await posthog.conversations.markAsRead('ticket-uuid')
+```
+
+**Response:**
+
+```typescript
+interface MarkAsReadResponse {
+  success: boolean
+  unread_count: number   // Should be 0 after marking as read
+}
+```
+
+## Fetching tickets
+
+```javascript
+// Get all tickets for this user
+const response = await posthog.conversations.getTickets()
+
+// Get tickets with filters
+const response = await posthog.conversations.getTickets({
+  status: 'open',
+  limit: 10,
+  offset: 0
+})
+```
+
+**Parameters:**
+
+```typescript
+interface GetTicketsOptions {
+  status?: string   // Filter by status: 'new' | 'open' | 'pending' | 'on_hold' | 'resolved'
+  limit?: number    // Number of tickets to return (default: 20)
+  offset?: number   // Pagination offset (default: 0)
+}
+```
+
+**Response:**
+
+```typescript
+interface GetTicketsResponse {
+  count: number      // Total count of tickets
+  results: Ticket[]  // Array of tickets
+}
+
+interface Ticket {
+  id: string
+  status: string
+  last_message?: string
+  last_message_at?: string
+  message_count: number
+  created_at: string
+  unread_count?: number
+}
+```
+
+## Getting current context
+
+```javascript
+// Get the current active ticket ID (null if no conversation started)
+const ticketId = posthog.conversations.getCurrentTicketId()
+
+// Get the widget session ID (persistent browser identifier)
+const sessionId = posthog.conversations.getWidgetSessionId()
+```
+
+The **widget session ID** is a persistent UUID that:
+- Stays the same across page loads and browser sessions
+- Is used for access control (only this browser can access its tickets)
+- Survives user identification changes (`posthog.identify()`)
+
+## User identification
+
+Conversations work with both anonymous and identified users.
+
+### Anonymous users
+
+Messages are associated with the widget session ID. The user maintains access to their conversation across page loads, even without logging in.
+
+### Identified users
+
+When you call `posthog.identify()`, the conversation seamlessly continues:
+- Widget session ID remains the same (user keeps access)
+- Backend links the ticket to the identified Person
+- User traits from PostHog are used if not provided in `sendMessage()`
+
+### User traits priority
+
+When sending messages, user traits are resolved in this order:
+
+1. Explicitly provided in `sendMessage(message, { name, email })`
+2. PostHog person properties (`$name`, `$email`, `name`, `email`)
+3. Previously saved traits from the identification form
+
+## Building custom UI
+
+You can build a completely custom chat UI using the API while disabling the default widget.
+
+First, disable the widget in **Settings > Conversations** by setting `widgetEnabled` to false.
+
+Then use the API to build your own interface:
+
+```javascript
+// Wait for conversations to be available
+async function initCustomChat() {
+  const checkAvailable = setInterval(() => {
+    if (posthog.conversations.isAvailable()) {
+      clearInterval(checkAvailable)
+      loadExistingMessages()
+    }
+  }, 100)
+}
+
+// Load existing messages if there's an active ticket
+async function loadExistingMessages() {
+  const ticketId = posthog.conversations.getCurrentTicketId()
+  if (ticketId) {
+    const response = await posthog.conversations.getMessages()
+    renderMessages(response.messages)
+  }
+}
+
+// Send a message and update UI
+async function sendMessage(text, userEmail) {
+  const response = await posthog.conversations.sendMessage(text, {
+    email: userEmail
+  })
+  
+  // Add optimistic UI update
+  addMessageToUI({
+    id: response.message_id,
+    content: text,
+    author_type: 'customer',
+    created_at: response.created_at
+  })
+}
+
+// Poll for new messages from your team
+setInterval(async () => {
+  if (posthog.conversations.getCurrentTicketId()) {
+    const response = await posthog.conversations.getMessages()
+    updateMessagesUI(response.messages)
+  }
+}, 5000)
+```
+
+## Events captured
+
+The conversations module automatically captures these events for your analytics:
+
+| Event | Description |
+|-------|-------------|
+| `$conversations_loaded` | Conversations API initialized |
+| `$conversations_widget_loaded` | Widget UI rendered |
+| `$conversations_message_sent` | User sent a message |
+| `$conversations_widget_state_changed` | Widget opened/closed |
+| `$conversations_user_identified` | User submitted identification form |
+| `$conversations_identity_changed` | User called `posthog.identify()` |
+
+These events work with the rest of PostHog. You can create funnels to measure support engagement or use cohorts to target users who have contacted support.
+
+## Persistence
+
+The SDK persists the following data in localStorage:
+
+- Widget session ID (for access control)
+- Current ticket ID (to continue conversations)
+- Widget state (open/closed)
+- User traits (name/email from identification form)
+
+This data is cleared when:
+- `posthog.reset()` is called
+- The user clears browser storage
+
+> **Note:** Calling `posthog.reset()` will clear the widget session ID, meaning the user will no longer have access to their previous tickets.
+
+## Error handling
+
+API methods return `null` if conversations are not available yet. Always check availability or handle null returns:
+
+```javascript
+// Option 1: Check availability first
+if (posthog.conversations.isAvailable()) {
+  const response = await posthog.conversations.sendMessage('Hello')
+}
+
+// Option 2: Handle null response
+const response = await posthog.conversations.sendMessage('Hello')
+if (response) {
+  console.log('Message sent:', response.message_id)
+}
+```
+
+API calls may also throw errors for:
+- Network failures
+- Rate limiting (429 status)
+- Invalid ticket IDs
+- Server errors
+
+```javascript
+try {
+  await posthog.conversations.sendMessage('Hello')
+} catch (error) {
+  if (error.message.includes('Too many requests')) {
+    // Handle rate limiting - wait and retry
+  }
+}
+```
+
+### Rate limiting
+
+The API has rate limits to prevent abuse:
+- Per-user throttling based on widget session ID
+- Per-team throttling for overall usage
+
+If you hit rate limits, wait a few seconds before retrying.

@@ -1,0 +1,193 @@
+---
+title: Inbox management
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+The Support inbox is where your team manages all customer conversations. Access it by clicking **Support** in the PostHog navigation.
+
+## Ticket list
+
+The inbox shows all tickets with key information at a glance:
+
+- **Ticket number** - Unique identifier (e.g., #1, #2, #3)
+- **Customer** - Name and email if provided
+- **Status** - Current ticket status
+- **Last message** - Preview of the most recent message
+- **Unread count** - Messages you haven't seen yet
+
+## Ticket properties
+
+Each ticket has the following properties:
+
+| Property | Description |
+|----------|-------------|
+| **Ticket number** | Auto-incremented unique number per team |
+| **Status** | `new`, `open`, `pending`, `on_hold`, `resolved` |
+| **Priority** | `low`, `medium`, `high` (optional) |
+| **Assignee** | User or role responsible for the ticket |
+| **Session ID** | The PostHog session associated with this ticket |
+| **Distinct ID** | PostHog distinct_id for person linking |
+| **Customer traits** | Name, email, and other info captured from the widget |
+
+## Status workflow
+
+Use statuses to track where each ticket is in your support process:
+
+| Status | Meaning | When to use |
+|--------|---------|-------------|
+| `new` | Just created, not yet viewed | Automatically set when ticket is created |
+| `open` | Being actively worked on | When you start working on a ticket |
+| `pending` | Waiting for customer response | After you've replied and need more info |
+| `on_hold` | Paused for external reason | When blocked by something outside your control |
+| `resolved` | Issue resolved, conversation closed | When the issue is fully addressed |
+
+To change a ticket's status, open the ticket and use the status dropdown in the sidebar.
+
+## Filtering and search
+
+Find tickets quickly using the filter and search options:
+
+**Filter by:**
+- Status (new, open, pending, on hold, resolved)
+- Priority (low, medium, high)
+- Assignee (unassigned, specific user, specific role)
+- Date range
+
+**Search by:**
+- Ticket number (e.g., "42" or "#42")
+- Customer name
+- Customer email
+
+## Assignment
+
+Assign tickets to team members or roles to distribute workload and ensure accountability.
+
+### Who can be assigned
+
+Tickets can be assigned to:
+
+1. **Individual users** - A specific team member
+2. **Roles** - A group of users (the role itself, not individual members)
+
+> **Note:** Assignment is currently manual – there's no automatic routing. Only one assignment per ticket is supported.
+
+### How to assign a ticket
+
+1. Open a ticket
+2. Click the **Assignee** dropdown in the sidebar
+3. Search for and select a user or role
+4. The assignment is saved automatically
+
+### Filtering by assignee
+
+Use the assignee filter in the ticket list:
+
+- **Unassigned** - Show tickets with no assignment
+- **User: [name]** - Show tickets assigned to a specific user
+- **Role: [name]** - Show tickets assigned to a specific role
+
+## Messages
+
+### Message types
+
+| Author type | Description |
+|-------------|-------------|
+| **Customer** | Messages sent by the end user via the widget |
+| **Support** | Messages sent by your team from PostHog |
+| **AI** | Messages from AI (reserved for future use) |
+
+### Sending replies
+
+To reply to a customer:
+
+1. Open a ticket
+2. Type your message in the input at the bottom
+3. Press Enter or click Send
+
+Your reply will appear in the customer's widget.
+
+### Private messages
+
+Messages can be marked as private for internal communication. Private messages:
+
+- Are only visible to your team in PostHog
+- Are hidden from customers in the widget
+- Useful for internal notes, handoff context, or documenting steps taken
+
+To send a private message, toggle the "Private" option before sending.
+
+### Unread tracking
+
+The system tracks unread messages separately for customers and your team:
+
+- **For customers** - Messages from your team they haven't seen yet
+- **For your team** - Messages from customers you haven't seen yet
+
+Unread counts reset when:
+- Your team views a ticket in PostHog
+- The customer views the widget (via the mark as read endpoint)
+
+## Ticket detail page
+
+When you open a ticket, you see the full conversation along with helpful context panels.
+
+### Chat thread
+
+The main area shows the conversation history with the customer. Messages are displayed chronologically with:
+- Author name and type
+- Timestamp
+- Message content
+- Private message indicator (if applicable)
+
+### Context panels
+
+The sidebar shows additional context to help you understand the customer's situation:
+
+#### Recent events panel
+
+Shows events from approximately ±5 minutes around when the ticket was created. This helps you see:
+- What pages they visited
+- What actions they took
+- Any errors that occurred
+
+#### Exceptions panel
+
+Displays any errors or exceptions from the user's session. This is especially helpful for debugging issues the customer is reporting.
+
+#### Previous tickets panel
+
+Shows other tickets from the same person (matched by distinct_id). This helps you:
+- See their support history
+- Avoid asking for information they've already provided
+- Understand recurring issues
+
+#### Session recording
+
+If session replay is enabled and available, you can watch the user's session recording inline. This shows exactly what the user was doing when they reached out.
+
+> **Note:** Session recording requires [Session Replay](/docs/session-replay) to be enabled in your project.
+
+## Best practices
+
+### Responding quickly
+
+- Use the unread filter to prioritize new messages
+- Assign tickets to specific team members to avoid duplicate work
+- Set up [email notifications](/docs/support/widget#email-notifications) so you don't miss new tickets
+
+### Using statuses effectively
+
+- Move tickets to `pending` after replying so you can focus on tickets that need action
+- Use `on_hold` when waiting for something external (deployment, third-party, etc.)
+- Mark as `resolved` when the issue is fully addressed – the customer can always reply to reopen
+
+### Leveraging context
+
+- Check the recent events panel before asking "what were you doing?"
+- Look at exceptions first for bug reports
+- Review previous tickets to understand the customer's history

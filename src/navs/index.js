@@ -2457,6 +2457,10 @@ export const docsMenu = {
                             url: '/docs/api/product-tours',
                         },
                         {
+                            name: 'Support',
+                            url: '/docs/api/support',
+                        },
+                        {
                             name: 'Users',
                             url: '/docs/api/users',
                         },
@@ -4494,6 +4498,55 @@ export const docsMenu = {
                     name: 'View and create analytics',
                     url: '/docs/product-tours/analytics',
                     icon: 'IconGraph',
+                    color: 'orange',
+                },
+            ],
+        },
+        {
+            name: 'Support',
+            url: '/docs/support',
+            icon: 'IconMessages',
+            color: 'teal',
+            description: 'Built-in customer support with chat widget, inbox, and session context',
+            children: [
+                {
+                    name: 'Support',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support',
+                    icon: 'IconHome',
+                    color: 'teal',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/support/start-here',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'teal',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Widget setup',
+                    url: '/docs/support/widget',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'JavaScript API',
+                    url: '/docs/support/javascript-api',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
+                    name: 'Inbox management',
+                    url: '/docs/support/inbox',
+                    icon: 'IconInbox',
                     color: 'orange',
                 },
             ],
