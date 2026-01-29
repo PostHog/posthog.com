@@ -1,11 +1,15 @@
 ---
 title: Svelte web analytics installation
 platformLogo: svelte
+showStepsToc: true
 ---
 
-import SvelteInstall from '../../integrate/_snippets/install-svelte-client.mdx'
-import WebNextSteps from './_snippets/web-next-steps.mdx'
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/web-analytics/svelte.tsx
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
+-->
 
-<SvelteInstall />
+import { WASvelteInstallationWrapper } from './_snippets/wa-installation-wrapper.tsx'
 
-<WebNextSteps />
+<WASvelteInstallationWrapper />
