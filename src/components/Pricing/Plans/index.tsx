@@ -14,6 +14,14 @@ import { IconInfo } from '@posthog/icons'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import pluralizeWord from 'pluralize'
 
+// Don't pluralize all-uppercase units like GB, MB, TB
+const pluralizeUnit = (unit: string, count: number): string => {
+    if (unit === unit.toUpperCase()) {
+        return unit
+    }
+    return pluralizeWord(unit, count)
+}
+
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
         <div className={className}>
@@ -118,9 +126,9 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'flex-grow'}`}
                             title={
                                 index === 0 && up_to
-                                    ? `First ${formatCompactNumber(up_to)} ${pluralizeWord(unit, up_to)}`
+                                    ? `First ${formatCompactNumber(up_to)} ${pluralizeUnit(unit, up_to)}`
                                     : index === 0 && !up_to
-                                    ? `Unlimited ${unit}s`
+                                    ? `Unlimited ${pluralizeUnit(unit, 2)}`
                                     : !up_to
                                     ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
                                     : `${
