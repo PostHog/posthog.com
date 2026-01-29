@@ -50,13 +50,9 @@ For Product-led leads we will only add them to your book for quota purposes if y
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
-#### TAM Territory Review
+#### TAM At-Risk Accounts review meeting
 
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
-
-1. Rate your relationship with them (no connection yet/made contact/answering their questions in Slack/trusted advisor)
-2. What's your next step with that customer (annual plan, cross-sell etc).
-3. Are they a churn risk and why?
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly at-risk accounts meeeting on Wednesday. Any TAM can bring forward an at-risk account to the group for support, suggestions and tactics. The end result of each account discussed should be some clear actions the TAM can take. These actions will be reviewed in the following week's meeting.
 
 > The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
