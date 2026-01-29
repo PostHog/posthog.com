@@ -258,7 +258,7 @@ export const mixpanel = {
                     results_visualization: true,
                     side_effect_monitoring: false,
                     statistical_significance: true,
-                    statistics_engine: 'Sequential default; Frequentist option',
+                    statistics_engine: 'Bayesian or Frequentist',
                 },
             },
             platforms: {

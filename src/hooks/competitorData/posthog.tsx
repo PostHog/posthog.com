@@ -70,6 +70,7 @@ export const posthog = {
                 conditional_recording: true,
                 crash_reports: false,
                 event_timeline: true,
+                export_to_json: true,
                 filter_by_user_or_event: true,
                 highlights: 'Beta',
                 identity_detection: true,
