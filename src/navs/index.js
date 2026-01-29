@@ -2008,6 +2008,16 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/libraries/flutter',
+                            children: [
+                                {
+                                    name: 'Setup and usage',
+                                    url: '/docs/libraries/flutter',
+                                },
+                                {
+                                    name: 'Reference ↗',
+                                    url: 'https://pub.dev/documentation/posthog_flutter/latest/',
+                                },
+                            ],
                         },
                         {
                             name: 'Go',
