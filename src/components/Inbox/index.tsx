@@ -386,6 +386,8 @@ export default function Inbox(props) {
         }
     }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width])
 
+    const { websiteMode } = useApp()
+
     return (
         <>
             <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
@@ -430,11 +432,15 @@ export default function Inbox(props) {
 
                     <div
                         data-scheme="secondary"
-                        className="flex @2xl:flex-row flex-col flex-grow border-t border-primary min-h-0"
+                        className={`flex @2xl:flex-row flex-col flex-grow min-h-0 ${
+                            websiteMode ? 'gap-4' : 'border-t border-primary'
+                        }`}
                     >
                         <aside
                             data-scheme="secondary"
-                            className="w-full @2xl:w-64 bg-primary @2xl:border-r border-primary @2xl:h-full flex-shrink-0"
+                            className={`w-full @2xl:w-64 bg-primary @2xl:h-full flex-shrink-0 ${
+                                websiteMode ? 'rounded' : '@2xl:border-r border-primary'
+                            }`}
                         >
                             <ScrollArea className="h-full">
                                 <Menu onValueChange={setMenuValue} />
@@ -490,7 +496,7 @@ export default function Inbox(props) {
                                                 />
                                             ))}
                                             {!isLoading && (!questions.data || questions.data.length === 0) && (
-                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
                                                     <div className="text-lg mb-2 font-semibold">No questions found</div>
                                                     <div className="text-secondary text-sm">
                                                         {props.path === '/questions/subscriptions'
@@ -503,7 +509,6 @@ export default function Inbox(props) {
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Lottie
                                                         animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75 text-secondary"
                                                         className="size-6 opacity-75 dark:hidden"
                                                         title="Loading questions..."
                                                     />

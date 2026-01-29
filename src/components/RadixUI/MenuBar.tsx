@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useApp } from '../../context/App'
+import { navigate } from 'gatsby'
 
 // Types
 export type MenuItemType = {
@@ -29,9 +30,10 @@ export type MenuType = {
     mobileLink?: string // Direct link for the menu trigger on mobile
 }
 
+// const { websiteMode } = useApp()
+// websiteMode ? 'text-base' : 'text-[13px]'
 const RootClasses = 'flex gap-px py-0.5 h-full'
-const TriggerClasses =
-    'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
+const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
 const ItemClasses =
     'hover:bg-accent group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
 const SubTriggerClasses =
@@ -146,10 +148,11 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
 
 // Components
 const MenuItem: React.FC<{
+    portalContainer: HTMLElement | null
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
-}> = ({ item, forceIconIndent, menuIndex }) => {
+}> = ({ item, forceIconIndent, menuIndex, portalContainer }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
@@ -185,7 +188,7 @@ const MenuItem: React.FC<{
                             {MenuItemContent(item, forceIconIndent)}
                         </RadixMenubar.SubTrigger>
                     )}
-                    <RadixMenubar.Portal>
+                    <RadixMenubar.Portal container={portalContainer || undefined}>
                         <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
                             <ScrollArea className="max-h-screen !overflow-y-auto">
                                 {item.items.map((subItem, subIndex) => (
@@ -217,7 +220,7 @@ const MenuItem: React.FC<{
                             <IconChevronRight className="size-4" />
                         </div>
                     </RadixMenubar.SubTrigger>
-                    <RadixMenubar.Portal>
+                    <RadixMenubar.Portal container={portalContainer || undefined}>
                         <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
                             {item.items}
                         </RadixMenubar.SubContent>
@@ -291,7 +294,19 @@ export interface MenuBarProps {
 }
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
-    const { isMobile } = useApp()
+    const { isMobile, websiteMode } = useApp()
+
+    const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
+    const rootRef = React.useRef<HTMLDivElement | null>(null)
+    const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
+
+    React.useEffect(() => {
+        if (!rootRef.current) {
+            return
+        }
+        const container = rootRef.current.closest('[data-menu-container]')
+        setPortalContainer(container instanceof HTMLElement ? container : null)
+    }, [])
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
@@ -311,7 +326,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
     }, [menus, isMobile])
 
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
+        <RadixMenubar.Root ref={rootRef} data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
             {processedMenus.map((menu, menuIndex) => {
                 // On mobile, if menu has mobileLink, make it a direct link
                 if (isMobile && menu.mobileLink) {
@@ -330,25 +345,67 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                 }
 
                 return (
-                    <RadixMenubar.Menu key={menuIndex} data-scheme="primary">
+                    <RadixMenubar.Menu
+                        key={menuIndex}
+                        data-scheme="primary"
+                        {...(websiteMode
+                            ? {
+                                  open: openMenuIndex === menuIndex,
+                                  onOpenChange: (open: boolean) => {
+                                      setOpenMenuIndex(open ? menuIndex : null)
+                                  },
+                              }
+                            : {})}
+                    >
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
                             className={`${triggerAsChild ? '' : TriggerClasses} ${
                                 menu.bold ? 'font-bold' : 'font-medium'
-                            } ${customTriggerClasses}`}
+                            } ${customTriggerClasses} ${
+                                websiteMode ? (openMenuIndex === menuIndex ? '!bg-accent' : '!bg-transparent') : ''
+                            }`}
+                            onMouseEnter={
+                                websiteMode
+                                    ? () => {
+                                          setOpenMenuIndex(menuIndex)
+                                      }
+                                    : undefined
+                            }
+                            onClick={
+                                websiteMode
+                                    ? () => {
+                                          const url = menu.mobileLink || menu.items.find((item) => item.link)?.link
+                                          if (url) {
+                                              navigate(url, { state: { newWindow: true } })
+                                          }
+                                      }
+                                    : undefined
+                            }
                         >
                             {menu.trigger}
                         </RadixMenubar.Trigger>
-                        <RadixMenubar.Portal>
+                        <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
                                 className={ContentClasses}
                                 align="start"
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
+                                onMouseLeave={
+                                    websiteMode
+                                        ? () => {
+                                              setOpenMenuIndex(null)
+                                          }
+                                        : undefined
+                                }
                             >
                                 {menu.items.map((item, itemIndex) => (
-                                    <MenuItem key={`${menuIndex}-${itemIndex}`} item={item} menuIndex={menuIndex} />
+                                    <MenuItem
+                                        key={`${menuIndex}-${itemIndex}`}
+                                        item={item}
+                                        menuIndex={menuIndex}
+                                        portalContainer={portalContainer}
+                                    />
                                 ))}
                             </RadixMenubar.Content>
                         </RadixMenubar.Portal>

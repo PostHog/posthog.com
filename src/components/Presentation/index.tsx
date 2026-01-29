@@ -136,7 +136,7 @@ export default function Presentation({
     salesRep,
     rightActionButtons,
 }: PresentationProps) {
-    const { siteSettings } = useApp()
+    const { siteSettings, websiteMode } = useApp()
     const { appWindow } = useWindow()
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
 
@@ -358,7 +358,13 @@ export default function Presentation({
 
     return (
         <>
-            <div ref={containerRef} className="@container w-full h-full flex flex-col min-h-1">
+            <div
+                ref={containerRef}
+                data-scheme="secondary"
+                className={`@container w-full transition-all duration-300 h-full flex flex-col min-h-1 ${
+                    websiteMode ? 'h-[calc(100vh_-_49px)] ' : 'max-w-full'
+                }`}
+            >
                 <div
                     data-scheme="secondary"
                     className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
@@ -375,9 +381,9 @@ export default function Presentation({
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`bg-primary @2xl:border-y-0 border-y ${
-                                isNavVisible ? '@2xl:border-r' : 'border-b-0'
-                            } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
+                            className={`${websiteMode ? '' : 'bg-primary border-primary @2xl:border-y-0 border-y'} ${
+                                isNavVisible && !websiteMode ? '@2xl:border-r' : 'border-b-0'
+                            } overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
@@ -398,7 +404,7 @@ export default function Presentation({
                         data-app="Presentation"
                         data-presentation-id={slideId}
                         data-scheme="secondary"
-                        className="@container flex-1 flex flex-col bg-primary relative h-full"
+                        className={`@container flex-1 flex flex-col relative h-full ${websiteMode ? '' : 'bg-primary'}`}
                     >
                         {!fullScreen && (
                             <>

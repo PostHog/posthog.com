@@ -34,6 +34,7 @@ import { mergeRegister } from '@lexical/utils'
 import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
+import { useApp } from '../../context/App'
 
 export default function MDXEditor({
     body,
@@ -59,6 +60,7 @@ export default function MDXEditor({
     const [canUndo, setCanUndo] = React.useState(false)
     const [canRedo, setCanRedo] = React.useState(false)
     const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
+    const { websiteMode } = useApp()
 
     const mdxComponents = useMemo(() => {
         return jsxComponentDescriptors.reduce((acc, descriptor) => {
@@ -135,6 +137,7 @@ export default function MDXEditor({
                 </MDXProvider>
             ) : (
                 <MDXEditorComponent
+                    readOnly={websiteMode}
                     contentEditableClassName="outline-none"
                     markdown={body}
                     lexicalTheme={{

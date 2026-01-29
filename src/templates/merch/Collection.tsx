@@ -20,6 +20,7 @@ import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
+import Modal from 'components/RadixUI/Modal'
 import { useCartStore } from './store'
 
 // Category configuration with icons and display order
@@ -194,7 +195,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
     const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
-    const { isMobile: appIsMobile } = useApp()
+    const { isMobile: appIsMobile, websiteMode } = useApp()
     const { getJwt, user } = useUser()
     const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
     const addToCart = useCartStore((state) => state.update)
@@ -423,6 +424,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         [appWindow]
     )
 
+    const MainContainer = useMemo(() => (websiteMode ? React.Fragment : ScrollArea), [websiteMode])
+
     const fetchOrders = async () => {
         try {
             const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
@@ -446,8 +449,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar
-                showBack
-                showForward
+                showBack={!websiteMode}
+                showForward={!websiteMode}
+                showCustomLeft={<h2 className="text-primary">Merch store</h2>}
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
                 isCartOpen={cartIsOpen}
@@ -456,19 +460,62 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 onOrderHistoryClose={handleOrderHistoryClose}
                 showCart
                 showOrderHistory={orders?.length > 0}
-                showSearch
+                showSearch={!websiteMode}
                 onSearch={handleSearch}
+                className={websiteMode ? 'border-b border-primary' : ''}
             />
-            <AddressBar
-                selectOptions={selectOptions}
-                currentPath={currentPath}
-                handleValueChange={handleValueChange}
-                selectedCategory={selectedCategory}
-            />
+            {!websiteMode && (
+                <AddressBar
+                    selectOptions={selectOptions}
+                    currentPath={currentPath}
+                    handleValueChange={handleValueChange}
+                    selectedCategory={selectedCategory}
+                />
+            )}
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                    {!isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
+                    {websiteMode && (
+                        <Modal
+                            open={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
+                            onOpenChange={(open) => {
+                                if (!open) {
+                                    if (cartIsOpen) handleCartClose()
+                                    if (selectedProduct) setSelectedProduct(null)
+                                    if (orderHistoryIsOpen) handleOrderHistoryClose()
+                                }
+                            }}
+                            maxWidth={700}
+                            autoHeight
+                        >
+                            <ScrollArea>
+                                <div className="max-h-[90vh] h-full">
+                                    <div className="bg-primary">
+                                        {cartIsOpen ? (
+                                            <Cart className="h-full" />
+                                        ) : orderHistoryIsOpen ? (
+                                            <div className="h-full @container">
+                                                <OrderHistory orders={orders} />
+                                            </div>
+                                        ) : selectedProduct ? (
+                                            <ProductPanel
+                                                product={selectedProduct}
+                                                setIsCart={() => undefined}
+                                                onClick={() => undefined}
+                                                updateURL={handleProductSelect}
+                                                onCartOpen={handleCartOpen}
+                                                className="!p-4 !pt-4"
+                                                containerWidth={500}
+                                            />
+                                        ) : null}
+                                    </div>
+                                </div>
+                            </ScrollArea>
+                        </Modal>
+                    )}
+
+                    {/* Non-website mode: use aside panel */}
+                    {!websiteMode && !isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
                         <motion.aside
                             data-scheme="secondary"
                             className="not-prose bg-primary border-l border-primary h-full text-primary relative"
@@ -513,7 +560,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         </motion.aside>
                     )}
 
-                    {isMobile && (
+                    {/* Non-website mode on mobile: use MobileDrawer */}
+                    {!websiteMode && isMobile && (
                         <MobileDrawer
                             isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
                             onClose={() => {
@@ -554,7 +602,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         data-scheme="primary"
                         className="@container flex-1 bg-primary relative h-full"
                     >
-                        <ScrollArea className="h-full">
+                        <MainContainer>
                             {/* <DebugContainerQuery /> */}
                             <div className={`${getProseClasses()} max-w-none h-full`}>
                                 <SEO title="Merch - PostHog" image="/images/merch.png" />
@@ -570,11 +618,16 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                     </div>
                                 </div>
                             </div>
-                        </ScrollArea>
+                        </MainContainer>
                     </main>
                     {leftSidebarContent && (
-                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
-                            <ScrollArea className="p-2">
+                        <aside
+                            data-scheme="secondary"
+                            className={`w-64 h-full bg-primary ${
+                                websiteMode ? 'sticky top-[48px]' : 'border-r border-primary'
+                            }`}
+                        >
+                            <ScrollArea className={`p-2`}>
                                 <div className="space-y-3">
                                     <SidebarContent content={leftSidebarContent} />
                                 </div>
