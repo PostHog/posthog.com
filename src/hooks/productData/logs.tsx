@@ -81,8 +81,8 @@ export const logs = {
             imgClassesMobile: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_home_a553e506ca.png',
-            // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_light_ed58d98928.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_dark_7f8310925f.png',
             alt: 'Logs screenshot',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
@@ -193,7 +193,7 @@ export const logs = {
                 'PostHog AI can give on-demand summaries and highlight patterns. Think of it as your automatic backup; a second set of eyes on the problem.',
             children: (
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/logs_4_light_f771d8cbad.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/logs_4_light_6b4cc017f6.png"
                     alt="AI"
                     className="w-full h-full object-contain"
                 />
