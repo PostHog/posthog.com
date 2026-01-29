@@ -62,7 +62,7 @@ export default function Logs(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['customers', 'answers', 'videos', 'pairs-with', 'feature-platform_integrations'],
+        exclude: ['customers', 'answers', 'videos', 'pairs-with', 'feature-comparison'],
         order: [
             'overview',
             'customers',
@@ -72,7 +72,6 @@ export default function Logs(): JSX.Element {
             'features',
             'posthog-on-posthog',
             'comparison-summary',
-            'feature-comparison',
             'docs',
             'pricing',
             'getting-started',

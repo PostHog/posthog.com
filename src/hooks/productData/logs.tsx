@@ -190,15 +190,6 @@ export const logs = {
             headline: 'Get a sanity check from AI ✨',
             description:
                 'PostHog AI can give on-demand summaries and highlight patterns. Think of it as your automatic backup; a second set of eyes on the problem.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_4_light_f771d8cbad.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                    alt: 'Queryable logs',
-                    className:
-                        'rounded-tl-md shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0 w-full @2xl:w-6xl',
-                },
-            ],
             children: (
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/logs_4_light_f771d8cbad.png"
@@ -283,27 +274,27 @@ export const logs = {
         rows: ['logs'],
         // excluded_sections: ['platform'],
     },
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Correlate AI usage with user behavior and business metrics',
-        },
-        {
-            slug: 'dashboards',
-            description: 'Build custom dashboards combining LLM and product metrics',
-        },
-        {
-            slug: 'session-replay',
-            description: 'Watch how users interact with AI features in real sessions',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Roll out AI features gradually and test different models',
-        },
-    ],
-    worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
-    presenterNotes: {
-        overview:
-            '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
-    },
+    // pairsWith: [
+    //     {
+    //         slug: 'product-analytics',
+    //         description: 'Correlate AI usage with user behavior and business metrics',
+    //     },
+    //     {
+    //         slug: 'dashboards',
+    //         description: 'Build custom dashboards combining LLM and product metrics',
+    //     },
+    //     {
+    //         slug: 'session-replay',
+    //         description: 'Watch how users interact with AI features in real sessions',
+    //     },
+    //     {
+    //         slug: 'feature-flags',
+    //         description: 'Roll out AI features gradually and test different models',
+    //     },
+    // ],
+    // worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
+    // presenterNotes: {
+    //     overview:
+    //         '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
+    // },
 }
