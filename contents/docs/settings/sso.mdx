@@ -19,13 +19,6 @@ availability:
             boost: true
             scale: true
             enterprise: true
-        github: true
-        gitlab: true
-        google:
-            openSource: false
-            free: true
-            selfServe: true
-            enterprise: true
         saml:
             free: false
             selfServe: false
@@ -109,8 +102,6 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 
 ### GitHub
 
-<FeatureAvailability availability={_frontmatter.availability.features.github} />
-
 1. Go to <a href='https://github.com/settings/applications/new' target='_blank'>Register a new OAuth application</a>
 
 > If you want to have this application as part of an organisation, you'll need to go to your organization's settings -> OAuth apps -> New OAuth App.
@@ -130,8 +121,6 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 
 ### GitLab
 
-<FeatureAvailability availability={_frontmatter.availability.features.gitlab} />
-
 1. Go to **Settings** -> **Applications** in your GitLab instance (<a href='https://gitlab.com/profile/applications' target='_blank'>open the GitLab.com applications settings</a>)
 
 2. Register your application
@@ -145,7 +134,7 @@ Looking for a provider that's not here? [Reach out to us](https://app.posthog.co
 
 ### Google
 
-<FeatureAvailability availability={_frontmatter.availability.features.google} />
+> ❗️ Google SSO is not available for open source deployments.
 
 To set up Google SSO please follow these instructions:
 

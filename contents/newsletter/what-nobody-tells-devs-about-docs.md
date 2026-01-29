@@ -70,6 +70,8 @@ We take time every week to review these and make improvements to docs. We also b
 
 It is the repeated little improvements that creates a coveted polished docs experience.
 
+<NewsletterForm />
+
 ## 3. Your readers are in a rush
 
 ![Average book fan vs average docs enjoyer](https://res.cloudinary.com/dmukukwp6/image/upload/image_2_4ece7bbd84.png)
@@ -146,9 +148,9 @@ This means ideas that apply to building a great product also apply to writing gr
 
 2. **Prioritize what really matters.** Use [analytics](/web-analytics) to see what users are actually reading. Use [session replays](/session-replay) to see where they are getting stuck. Constantly evaluate what docs are most important to work on, so you maximize your impact.
 
-3. **Invest in design and development.** The structure and navigability of your docs helps people find what they need. We're lucky to have <SmallTeam slug="brand" /> to help us with this. They make the pages and components within those pages look good and work towards our goal.
+3. **Invest in design and development.** The structure and navigability of your docs helps people find what they need. We're lucky to have <SmallTeam slug="website" /> to help us with this. They make the pages and components within those pages look good and work towards our goal.
 
-4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/content/docs) of the docs team members are responsible for.
+4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/docs-and-wizard/docs) of the docs team members are responsible for.
 
 5. **Culture makes a big difference.** Your product is a product of your culture and so is your docs. [Our values](/handbook/values) of being open source, everybody codes, trust and feedback over process, and biasing for action play a big role in how we write docs.
 

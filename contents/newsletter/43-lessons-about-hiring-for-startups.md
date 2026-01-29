@@ -44,6 +44,8 @@ We talk to a lot of founders these days about hiring, and find ourselves saying 
 
 12. Take home tasks are pointless in an AI world. 
 
+<NewsletterForm />
+
 13. Pay people for their time, dammit.
 
 14. You have too many stages in your process, probably. 2 hours of interviews and a [SuperDay](/newsletter/hiring-at-posthog-lessons#7-actual-work-is-10x-more-valuable-than-interviews) is enough for us.

@@ -68,6 +68,10 @@ const CodeBlockWrapper = (props: CodeBlockWrapperProps) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MDXComponent = React.ComponentType<any>
 
+// No-op component for unknown components from upstream monorepo
+// This prevents runtime errors when upstream monorepo adds new components we don't have
+const UnknownComponent: MDXComponent = () => null
+
 interface DocsComponents {
     Steps: MDXComponent
     Step: MDXComponent
@@ -81,6 +85,8 @@ interface DocsComponents {
     Tab: typeof Tab
     dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
     snippets?: Record<string, React.ComponentType<Record<string, never>>>
+    // Allow additional components from upstream monorepo without breaking
+    [key: string]: unknown
 }
 
 const MDXComponentsContext = createContext<DocsComponents>({
@@ -134,4 +140,73 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
             {children}
         </MDXComponentsContext.Provider>
     )
+}
+
+interface StepDefinition {
+    title: string
+    badge?: string
+    content: React.ReactNode
+    checkpoint?: boolean
+    subtitle?: string
+}
+
+// TODO: Consider consolidating with DocsComponents above - these interfaces are nearly identical
+// and both have index signatures. OnboardingComponents could extend DocsComponents or be removed.
+interface OnboardingComponents {
+    Steps: MDXComponent
+    Step: MDXComponent
+    CodeBlock: React.ComponentType<CodeBlockWrapperProps>
+    CalloutBox: MDXComponent
+    Markdown: MDXComponent
+    Tab: typeof Tab
+    dedent: (strings: TemplateStringsArray | string, ...values: unknown[]) => string
+    snippets?: Record<string, React.ComponentType<Record<string, never>>>
+    // Allow additional components from upstream monorepo without breaking
+    [key: string]: unknown
+}
+
+interface InstallationProps {
+    modifySteps?: (steps: StepDefinition[]) => StepDefinition[]
+}
+
+export const createInstallation = (getSteps: (ctx: OnboardingComponents) => StepDefinition[]) => {
+    return function Installation({ modifySteps }: InstallationProps) {
+        const allComponents = useMDXComponents()
+
+        // Wrap components in a proxy that returns UnknownComponent for missing keys
+        // This prevents runtime errors when upstream monorepo adds new components we don't have
+        const safeComponents = new Proxy(allComponents as OnboardingComponents, {
+            get(target, prop: string) {
+                const value = target[prop]
+                if (value !== undefined) {
+                    return value
+                }
+                // Return no-op component for unknown components
+                return UnknownComponent
+            },
+        })
+
+        let steps = getSteps(safeComponents)
+        if (modifySteps) {
+            steps = modifySteps(steps)
+        }
+
+        const { Steps, Step } = allComponents
+
+        return (
+            <Steps>
+                {steps.map((step, index) => (
+                    <Step
+                        key={index}
+                        title={step.title}
+                        badge={step.badge}
+                        checkpoint={step.checkpoint}
+                        subtitle={step.subtitle}
+                    >
+                        {step.content}
+                    </Step>
+                ))}
+            </Steps>
+        )
+    }
 }

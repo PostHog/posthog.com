@@ -1,0 +1,152 @@
+---
+title: Next.js logs installation
+platformLogo: nextjs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsBetaSnippet from '../_snippets/beta.mdx'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<LogsBetaSnippet />
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+npm install @opentelemetry/sdk-logs @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs @opentelemetry/resources
+```
+
+</Step>
+
+<Step title="Get your project API key" badge="required">
+
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
+
+</Step>
+
+<Step title="Enable instrumentation in Next.js" badge="required">
+
+> **Note:** For Next.js 15 and later, the instrumentation hook is enabled by default. You can skip this step if you're on Next.js 15+.
+
+Add the following to your `next.config.js` (or `next.config.mjs`) to enable the instrumentation hook:
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    instrumentationHook: true,
+  },
+}
+
+module.exports = nextConfig
+```
+
+</Step>
+
+<Step title="Create the instrumentation file" badge="required">
+
+Create an `instrumentation.ts` (or `instrumentation.js`) file in the root of your project (or inside `src/` if you use that folder).
+
+```typescript
+import { BatchLogRecordProcessor, LoggerProvider } from '@opentelemetry/sdk-logs'
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http'
+import { logs } from '@opentelemetry/api-logs'
+import { resourceFromAttributes } from '@opentelemetry/resources'
+
+// Create LoggerProvider outside register() so it can be exported and flushed in route handlers
+export const loggerProvider = new LoggerProvider({
+  resource: resourceFromAttributes({ 'service.name': 'my-nextjs-app' }),
+  processors: [
+    new BatchLogRecordProcessor(
+      new OTLPLogExporter({
+        url: '<ph_client_api_host>/i/v1/logs',
+        headers: {
+          Authorization: 'Bearer <ph_project_api_key>',
+          'Content-Type': 'application/json',
+        },
+      })
+    ),
+  ],
+})
+
+export function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    logs.setGlobalLoggerProvider(loggerProvider)
+  }
+}
+```
+
+> **Note:** The `loggerProvider` is created outside of `register()` so it can be exported and used to flush logs in route handlers. This pattern is necessary because Route Handlers complete execution before batched logs have a chance to be sent to the collector. By exporting the provider, we can manually flush logs at the end of each request.
+
+> **Important:** The `Content-Type: application/json` header is required.
+
+Alternatively, you can pass the API key as a query parameter:
+
+```typescript
+new OTLPLogExporter({
+  url: '<ph_client_api_host>/i/v1/logs?token=<ph_project_api_key>',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+```
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can use OpenTelemetry logging in your server-side code (API routes, Server Components, etc.):
+
+```typescript
+import { SeverityNumber } from '@opentelemetry/api-logs'
+import { after } from 'next/server'
+import { loggerProvider } from '@/instrumentation'
+
+const logger = loggerProvider.getLogger('my-nextjs-app')
+
+export async function GET() {
+  logger.emit({
+    body: 'API request received',
+    severityNumber: SeverityNumber.INFO,
+    attributes: {
+      endpoint: '/api/example',
+      method: 'GET',
+    },
+  })
+
+  // Ensure logs are flushed before the serverless function freezes
+  after(async () => {
+    await loggerProvider.forceFlush()
+  })
+
+  return Response.json({ success: true })
+}
+```
+
+> **Important:** Without calling `forceFlush()`, your logs may not be sent. Route Handlers complete execution before the OpenTelemetry batch processor has a chance to send logs to the collector. The `after()` function from `next/server` runs code after the response is sent, ensuring logs are flushed before the serverless function freezes.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

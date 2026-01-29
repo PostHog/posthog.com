@@ -13,10 +13,12 @@ import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
+import { cloudflare } from '../../hooks/competitorData/cloudflare'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
@@ -34,6 +36,7 @@ import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
 import { heap } from '../../hooks/competitorData/heap'
 import { helicone } from '../../hooks/competitorData/helicone'
+import { hightouch } from '../../hooks/competitorData/hightouch'
 import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
 import { langfuse } from '../../hooks/competitorData/langfuse'
@@ -69,6 +72,7 @@ import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
 import { survey_monkey } from '../../hooks/competitorData/survey_monkey'
+import { tealium } from '../../hooks/competitorData/tealium'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { userpilot } from '../../hooks/competitorData/userpilot'
@@ -77,6 +81,10 @@ import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
+import { zapier } from '../../hooks/competitorData/zapier'
+import { make } from '../../hooks/competitorData/make'
+import { customer_io } from '../../hooks/competitorData/customer_io'
+import { brevo } from '../../hooks/competitorData/brevo'
 
 // Feature definition imports
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
@@ -95,6 +103,7 @@ import { revenueAnalyticsFeatures } from '../../hooks/featureDefinitions/revenue
 import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_replay'
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
+import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -147,6 +156,7 @@ export default function ProductComparisonTable({
         session_replay: sessionReplayFeatures,
         surveys: surveysFeatures,
         web_analytics: webAnalyticsFeatures,
+        workflows: workflowsFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -584,10 +594,12 @@ export default function ProductComparisonTable({
         appcues,
         appsignal,
         baremetrics,
+        braintrust,
         bugsnag,
         chartmogul,
         chameleon,
         clarity,
+        cloudflare,
         contentsquare,
         crazy_egg,
         datadog,
@@ -606,6 +618,7 @@ export default function ProductComparisonTable({
         heap,
         helicone,
         hotjar,
+        hightouch,
         kameleoon,
         langfuse,
         langsmith,
@@ -640,6 +653,7 @@ export default function ProductComparisonTable({
         stripe,
         survicate,
         survey_monkey,
+        tealium,
         umami,
         unleash,
         userpilot,
@@ -648,6 +662,10 @@ export default function ProductComparisonTable({
         vwo,
         walkme,
         whatfix,
+        zapier,
+        make,
+        customer_io,
+        brevo,
     }
 
     // Helper to get feature value from competitor data

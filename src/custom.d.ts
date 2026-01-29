@@ -1,4 +1,4 @@
-import type { PostHog } from 'posthog-js'
+import type { PostHog } from '@posthog/types'
 
 declare module '*.svg' {
     const content: React.HTMLImageElement
@@ -7,14 +7,6 @@ declare module '*.svg' {
 declare module '*.png' {
     const content: React.HTMLImageElement
     export default content
-}
-
-declare module 'mark.js' {
-    export default class Mark {
-        constructor(element: HTMLElement | HTMLElement[])
-        mark(keyword: string, options?: any): void
-        unmark(options?: any): void
-    }
 }
 
 declare global {

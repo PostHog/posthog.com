@@ -272,11 +272,13 @@ When a customer chooses not to renew a prepaid credit contract we automatically 
 
 ### When we vary terms
 
-If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these suggested changes (also known as "redlines").
+If a customer wants to vary either our standard template DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these suggested changes (also known as "redlines").
 
 At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big changes (e.g. changing significant provisions, adding Service Level Agreements, etc.). A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect) with PostHog. A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation.
 
 We also sometimes receive unsolicited requests to vary our terms. In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity where the potential annual revenue is understood.
+
+> See the guidance below if the customer asks to use their own contract instead of ours
 
 ### How customers should suggest requested terms
 

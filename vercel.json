@@ -36,7 +36,6 @@
         { "source": "/docs/integrations/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
-        { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
         { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/message-formatting", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
@@ -560,9 +559,11 @@
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
         { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
-        { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
         { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
         { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
+        { "source": "/tutorials/phased-rollout", "destination": "/docs/feature-flags/phased-rollout" },
+        { "source": "/tutorials/canary-release", "destination": "/docs/feature-flags/canary-release" },
+        { "source": "/tutorials/group-page-machine-flags", "destination": "/docs/feature-flags/targeting-groups" },
         { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
         { "source": "/blog/categories/guides", "destination": "/blog/tags/guides" },
         { "source": "/blog/categories/product-analytics", "destination": "/blog/tags/product-analytics" },
@@ -616,11 +617,19 @@
         { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
         {
             "source": "/docs/feature-flags/evaluation-tags",
-            "destination": "/docs/feature-flags/evaluation-environments"
+            "destination": "/docs/feature-flags/evaluation-contexts"
+        },
+        {
+            "source": "/docs/feature-flags/evaluation-environments",
+            "destination": "/docs/feature-flags/evaluation-contexts"
         },
         {
             "source": "/tutorials/evaluation-runtimes-and-tags",
-            "destination": "/tutorials/evaluation-runtimes-and-environments"
+            "destination": "/tutorials/evaluation-runtimes-and-contexts"
+        },
+        {
+            "source": "/tutorials/evaluation-runtimes-and-environments",
+            "destination": "/tutorials/evaluation-runtimes-and-contexts"
         },
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
@@ -637,6 +646,10 @@
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
+        {
+            "source": "/docs/session-replay/_snippets/react-native-installation",
+            "destination": "/docs/session-replay/installation/react-native"
+        },
         { "source": "/docs/features/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/feature-flags/manual", "destination": "/docs/feature-flags" },
@@ -1698,7 +1711,8 @@
             "source": "/docs/revenue-analytics/common-questions",
             "destination": "/docs/revenue-analytics/troubleshooting"
         },
-        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" }
+        { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
+        { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" }
     ],
     "headers": [
         {

@@ -1,6 +1,18 @@
 import React from 'react'
-import { IconDecisionTree } from '@posthog/icons'
-import { Link } from 'react-scroll/modules'
+import {
+    IconBolt,
+    IconClock,
+    IconDatabase,
+    IconDecisionTree,
+    IconGraph,
+    IconMessage,
+    IconPeople,
+    IconPlug,
+    IconSend,
+    IconTestTube,
+    IconWarning,
+} from '@posthog/icons'
+import { IconEnvelope, IconLink, IconMessages } from 'components/OSIcons'
 
 export const workflows = {
     name: 'Workflows',
@@ -13,7 +25,6 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     category: 'automation',
-    status: 'beta',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
@@ -54,13 +65,13 @@ export const workflows = {
             classesMobile: 'rounded-t-md',
             imgClassesMobile: '',
         },
-        // home: {
-        //     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
-        //     srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
-        //     alt: 'LLM Analytics screenshot',
-        //     classes: 'justify-end items-end pl-4 @lg:pl-6',
-        //     imgClasses: 'rounded-tl-lg shadow-2xl',
-        // },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_light_1_7afd43fd88.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_dark_1_9ebe26d46e.png',
+            alt: 'Workflows screenshot',
+            classes: 'justify-center px-4 @lg:px-6',
+            imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
+        },
     },
     // hog: {
     //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
@@ -73,146 +84,159 @@ export const workflows = {
             description:
                 'PostHog Workflows just lives on top of the event data and the amazing user data you already have. The setup was incredibly easy.',
         },
+        croissant: {
+            headline:
+                'paired Workflows with Product Analytics, Web Analytics, and Surveys to power up their B2B motion',
+            description:
+                'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
+        },
     },
     features: [
         {
-            title: 'Workflow builder',
-            // handle: 'trace_monitoring',
-            headline: 'Workflow builder',
-            description:
-                'Build automations with a drag-and-drop interface – no YAML, no API juggling. It only takes a few minutes to go from idea to live.',
+            title: 'Workflow automation builder',
+            handle: 'workflow_builder',
+            template: 'splitImage',
+            headline: 'Workflow automation builder',
+            description: 'No YAML, no syncing, no API juggling.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_canvas_029de986cd.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                    alt: 'Workflow builder',
-                    className: 'rounded-tl-md shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10157_1_3d5bffb9a5.png',
+                    alt: 'Workflow automation builder',
+                    className: '@2xl:w-[80%] @2xl:ml-auto @2xl:mt-8',
                 },
             ],
-            // children: (<></>)
+            features: [
+                {
+                    icon: <IconDecisionTree />,
+                    title: 'Drag-and-drop steps',
+                    description: 'Build onboarding, activation, and retention flows in minutes',
+                },
+                {
+                    icon: <IconPeople />,
+                    title: 'Event and cohort triggers',
+                    description: 'Start workflows from real product behavior',
+                },
+                {
+                    icon: <IconDatabase />,
+                    title: 'Data-native',
+                    description: 'Use the events, actions, and properties already tracked in PostHog',
+                },
+                {
+                    icon: <IconTestTube />,
+                    title: 'Testing & execution logs',
+                    description: 'Preview how a workflow behaves for a real user and view detailed run history',
+                },
+            ],
         },
         {
-            title: 'Messaging',
+            title: 'Behavior-triggered messaging',
             handle: 'messaging',
-            // template: 'splitImage',
-            headline: 'Messaging',
-            description:
-                'Send targeted emails, Slack posts, or webhook messages to users and cohorts based on live product data. Automate onboarding, activation, or feedback loops directly from PostHog.',
+            template: 'splitImage',
+            headline: 'Behavior-triggered messaging',
+            description: 'Send emails, Slack posts, or webhook messages based on product activity.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_messaging_9d466af120.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                    alt: 'Workflow messaging',
-                    className: 'justify-center items-center',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10158_1_5b25e98912.png',
+                    alt: 'Behavior-triggered messaging',
+                    containerClassName: 'flex justify-end items-end @2xl:w-[85%] @2xl:ml-auto -mb-2',
+                },
+            ],
+            features: [
+                {
+                    icon: <IconEnvelope />,
+                    title: 'Built-in email editor',
+                    description: 'Create onboarding, activation, and transactional emails directly in PostHog',
+                },
+                {
+                    icon: <IconBolt />,
+                    title: 'Behavior-triggered delivery',
+                    description: 'Messages fire the moment users perform key actions',
+                },
+                {
+                    icon: <IconPeople />,
+                    title: 'Cohort & property personalization',
+                    description: 'Tailor content using user properties, segments, and experiment variants',
+                },
+                {
+                    icon: <IconGraph />,
+                    title: 'Unified with your product data',
+                    description: 'No syncing, all context comes from PostHog natively',
                 },
             ],
         },
         {
-            title: 'Data-native',
-            // template: 'splitImage',
-            headline: 'Data-native',
-            description:
-                'Workflows runs on the product data you already track in PostHog. No need to connect extra tools or import events.',
+            title: 'Flow logic & timing controls',
+            handle: 'flow_logic',
+            template: 'splitImage',
+            headline: 'Flow logic & timing controls',
+            description: 'Shape user journeys with conditions, splits, delays, and lifecycle-based steps.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_events_d25a7eaebf.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                    alt: 'Data-native',
-                    className: 'justify-center items-center',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10159_1_2ff0d42149.png',
+                    alt: 'Flow logic & timing controls',
+                    containerClassName: 'flex justify-end items-center @2xl:w-[85%] @2xl:ml-auto',
                 },
             ],
-        },
-        {
-            title: 'Triggers',
-            // template: 'splitImage',
-            headline: 'Triggers',
-            description:
-                'Start a workflow when a user signs up, clicks a feature, or completes an experiment. Trigger emails, Slack posts, or follow-up events automatically from that behavior.',
-            images: [
+            features: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_triggers_00b7e98a48.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                    alt: 'Triggers',
-                    className: 'justify-center items-center',
+                    icon: <IconDecisionTree />,
+                    title: 'Smart branching',
+                    description: 'Route users with conditions based on properties, events, or random splits',
                 },
-            ],
-        },
-        {
-            title: 'Conditions & splits',
-            // template: 'splitImage',
-            headline: 'Conditions & splits',
-            description:
-                'Branch logic visually based on user properties, cohorts or random variations, enabling targeted actions or A/B-style automation paths.',
-            images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_conditions_92cdc86bf3.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                    alt: 'Conditions & splits',
-                    className: 'justify-center items-center',
+                    icon: <IconClock />,
+                    title: 'Precise timing',
+                    description: 'Add delays or scheduled waits to build multi-step journeys',
                 },
-            ],
-        },
-        {
-            title: 'Flow control',
-            // template: 'splitImage',
-            headline: 'Flow control',
-            description:
-                'Add delays, pauses, or conditional waits to match how users actually behave. Time actions precisely around engagement, churn, or trial limits.',
-            images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_flow_5f0ac20268.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                    alt: 'Flow control',
-                    className: 'justify-center items-center',
+                    icon: <IconSend />,
+                    title: 'Conditional waits',
+                    description: 'Continue only when a user completes a specific action',
+                },
+                {
+                    icon: <IconWarning />,
+                    title: 'Step-level error handling',
+                    description: 'Build resilient automations with fallback paths',
                 },
             ],
         },
         {
             title: 'Channels',
-            // template: 'splitImage',
+            handle: 'channels',
+            template: 'splitImage',
             headline: 'Channels',
-            description: 'Reach users wherever they are – email, Slack, Discord, webhooks, or your own destinations.',
+            description:
+                'Reach users wherever they are. Pick from the standard channels or connect to one of the 35+ integrations (and counting) that we have.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_channels_9a8ee1d2d5.png',
-                    // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_channels_2_1f26ef04dd.png',
                     alt: 'Channels',
-                    className: 'justify-center items-center',
+                    containerClassName: 'flex justify-end items-center @2xl:ml-auto',
                 },
             ],
-        },
-        {
-            title: 'More features',
-            // template: 'splitImage',
-            headline: 'More features',
-            description:
-                'Build advanced logic with loops, exit conditions, and custom actions. Trigger PostHog events, update user properties, or call APIs — all from one place.',
-            children: (
-                <>
-                    <p>Check out our workflow guides:</p>
-                    <ul>
-                        <li>
-                            <Link to="/docs/workflows/email-drip-campaign">Email drip campaign</Link>
-                        </li>
-                        <li>
-                            <Link to="/docs/workflows/triggering-internal-notifications">
-                                Triggering internal notifications
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/docs/workflows/updating-user-properties">Updating user properties</Link>
-                        </li>
-                    </ul>
-                </>
-            ),
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-            //         srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-            //         alt: 'LLM performance monitoring',
-            //         className: 'justify-center items-center',
-            //     },
-            // ],
+            features: [
+                {
+                    icon: <IconEnvelope />,
+                    title: 'Email',
+                },
+                {
+                    icon: <IconMessage />,
+                    title: 'SMS',
+                },
+                {
+                    icon: <IconMessages />,
+                    title: 'Slack',
+                },
+                {
+                    icon: <IconLink />,
+                    title: 'Webhook',
+                },
+                {
+                    icon: <IconPlug />,
+                    title: '35+ integrations',
+                    description: 'ClickUp, Discord, GitHub, GitLab, Google Ads, Google Cloud Storage, and more',
+                },
+            ],
         },
     ],
     questions: [
@@ -279,26 +303,27 @@ export const workflows = {
         },
         companies: [
             {
-                name: 'Langfuse',
-                key: 'langfuse',
-                // link: '/blog/posthog-vs-langfuse',
+                name: 'Zapier',
+                key: 'zapier',
             },
             {
-                name: 'Langsmith',
-                key: 'langsmith',
-                // link: '/blog/posthog-vs-langsmith',
+                name: 'Make',
+                key: 'make',
             },
             {
-                name: 'Helicone',
-                key: 'helicone',
-                // link: '/blog/posthog-vs-helicone',
+                name: 'Customer.io',
+                key: 'customer_io',
+            },
+            {
+                name: 'Brevo',
+                key: 'brevo',
             },
             {
                 name: 'PostHog',
                 key: 'posthog',
             },
         ],
-        rows: ['llm_analytics'],
+        rows: ['workflows'],
         excluded_sections: ['platform'],
     },
     pairsWith: [
@@ -327,5 +352,62 @@ export const workflows = {
     presenterNotes: {
         overview:
             '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
+    },
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+        alt: 'A hedgehog automating workflows',
+        classes: 'absolute bottom-0 right-4 max-w-[250px]',
+    },
+    videos: {
+        automating_onboarding_with_posthog_workflows: {
+            title: 'Automating onboarding with PostHog Workflows',
+            author: 'Sara Miteva',
+            wistia: '9npwnc8sm6',
+            chapters: [
+                {
+                    title: 'Understanding triggers and user targeting',
+                    time: 29,
+                },
+                {
+                    title: 'Setting up workflow steps',
+                    time: 72,
+                },
+                {
+                    title: 'Incorporating delays and conditions',
+                    time: 108,
+                },
+                {
+                    title: 'Customizing user communication',
+                    time: 137,
+                },
+                {
+                    title: 'Email editor features',
+                    time: 178,
+                },
+                {
+                    title: 'Finalizing the onboarding sequence',
+                    time: 229,
+                },
+            ],
+        },
+        workflows_space_demo: {
+            title: 'PostHog Workflows demo in space',
+            author: 'Jordo Dibb',
+            wistia: '33f5pyiaxo',
+            chapters: [
+                {
+                    title: 'Building user journeys',
+                    time: 67,
+                },
+                {
+                    title: 'Implementing conditional logic',
+                    time: 97,
+                },
+                {
+                    title: 'Chaining flows, audience splits, and integrations',
+                    time: 184,
+                },
+            ],
+        },
     },
 }

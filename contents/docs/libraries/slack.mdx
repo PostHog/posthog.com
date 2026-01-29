@@ -1,0 +1,90 @@
+---
+title: Slack
+platformLogo: slack
+---
+
+import AddSlackToWorkspace from '../workflows/_snippets/add-posthog-to-slack-workspace.mdx'
+import AddSlackToChannel from '../workflows/_snippets/add-posthog-to-slack-channel.mdx'
+
+The PostHog app for Slack helps you stay connected to your product data and receive timely updates directly in your workspace.
+
+## Features
+
+The PostHog app for Slack provides three key capabilities:
+
+<!-- 1. **Ask PostHog AI product data questions** – Mention @PostHog in your workspace to get answers about your product data right where you are. -->
+
+1. **Subscribe to product insights and dashboards** – Receive regular digests of your key metrics in chosen Slack channels.
+
+1. **Set up Slack notifications via PostHog Data Pipelines** – Get timely notifications of any event or action in PostHog.
+
+<!-- > **Note:** PostHog AI is an LLM-powered feature, so it can make mistakes – always double-check its work. -->
+
+## Installing the PostHog Slack app
+
+### 1. Adding the PostHog Slack app to your workspace
+
+<AddSlackToWorkspace/>
+
+### 2. Adding the PostHog Slack app to specific channels
+
+<AddSlackToChannel/>
+
+<!--
+## Using PostHog AI in Slack
+
+Once you've added the PostHog app to your workspace and channels, you can ask PostHog AI questions by mentioning @PostHog in any channel where the app is installed.
+
+For example, you can ask:
+- "What were the top features used this week?"
+- "Show me conversion rate trends"
+- "How many users signed up yesterday?"
+
+PostHog AI will analyze your product data and provide answers directly in the Slack thread.
+-->
+
+## Subscribing to insights and dashboards
+
+You can receive regular updates of your [insights](/docs/product-analytics/insights) or [dashboards](/docs/product-analytics/dashboards) directly in Slack.
+
+To set up a subscription:
+
+1. Open the insight or dashboard you want to subscribe to in PostHog
+2. Click the dropdown menu in the top right corner (three dots)
+3. Click **Subscribe**
+4. Click "Add subscription" and select **Slack** as the destination
+5. Choose the Slack channel where you want to receive updates
+6. Set your desired frequency (daily, weekly, monthly, etc.)
+
+For more details, see our [subscriptions documentation](/docs/product-analytics/subscriptions).
+
+## Setting up event notifications
+
+You can send custom messages to Slack based on PostHog events or actions using [Data Pipelines destinations](/docs/cdp/destinations/slack).
+
+Common use cases include:
+- Notifying your team when a user completes a key action
+- Alerting on errors or issues detected in your product
+- Sharing important user milestones with your team
+- Sending survey responses to a dedicated channel
+
+To set up event notifications:
+
+1. Go to the [Data pipeline](https://app.posthog.com/pipeline/overview) tab in PostHog
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=slack) tab
+3. Click **+ New destination** and search for "Slack"
+4. Configure which events or actions should trigger notifications
+5. Select your Slack connection and channel
+6. Template your message using event and person properties
+
+For detailed setup instructions, see our [Slack destination documentation](/docs/cdp/destinations/slack).
+
+## What can you do with this integration?
+
+The PostHog Slack integration helps teams stay informed and make data-driven decisions without leaving Slack. You can:
+
+- **Stay updated on key metrics** – Receive regular reports on user behavior, feature adoption, and conversion rates
+<!-- - **Get instant insights** – Ask PostHog AI questions and get answers without switching context -->
+- **React quickly to events** – Be notified immediately when important user actions or errors occur
+- **Share insights with your team** – Make product data accessible to everyone in relevant channels
+- **Monitor product health** – Keep an eye on critical metrics and get alerted to anomalies

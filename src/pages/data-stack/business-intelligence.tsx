@@ -5,7 +5,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import OSTable from 'components/OSTable'
+import FeatureTable from './FeatureTable'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -51,32 +51,6 @@ const biFeatures: BIFeature[] = [
 ]
 
 export default function BusinessIntelligence(): JSX.Element {
-    // Define table columns
-    const columns = [
-        { name: 'Feature', width: 'minmax(150px, 1fr)', align: 'left' as const },
-        { name: 'Description', width: 'minmax(300px, 2fr)', align: 'left' as const },
-        { name: '', width: '60px', align: 'center' as const },
-    ]
-
-    // Create table rows from biFeatures
-    const featureRows = biFeatures.map((feature) => ({
-        cells: [
-            { content: <span className="font-bold">{feature.title}</span> },
-            { content: feature.description, className: 'text-sm' },
-            {
-                content:
-                    feature.status === 'coming_soon' ? (
-                        <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
-                            Coming soon
-                        </span>
-                    ) : (
-                        '✅'
-                    ),
-                className: 'text-xl',
-            },
-        ],
-    }))
-
     return (
         <>
             <SEO
@@ -113,7 +87,7 @@ export default function BusinessIntelligence(): JSX.Element {
 
                 <div className="mb-8">
                     <h3>Features</h3>
-                    <OSTable columns={columns} rows={featureRows} editable={false} />
+                    <FeatureTable features={biFeatures} />
                 </div>
 
                 <ProductScreenshot

@@ -262,13 +262,65 @@ Always request a review on your pull request by a fellow team member (or leave u
 
 Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 
-We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status. 
+We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
+
+### Verifying your deployment
+
+After merging, your code should deploy automatically. If you need to verify your changes are live (or troubleshoot why they're not), here's how:
+
+#### 1. Check state.yaml (what *should* be deployed)
+
+The [charts repository state.yaml](https://github.com/PostHog/charts/blob/main/state.yaml) is the source of truth for what ArgoCD is trying to deploy. Find your service (e.g., `ingestion`, `posthog`) and check the commit SHA listed.
+
+#### 2. Check running pods (what's *actually* deployed)
+
+If you have [cluster access](/handbook/engineering/how-to-access-posthog-cloud-infra), verify what's running:
+
+```bash
+# Find your service's pods
+kubectl -n posthog get pods | grep <service-name>
+
+# Get the image/commit running on a pod
+kubectl -n posthog get pod <pod-name> -o jsonpath='{.spec.containers[0].image}'
+```
+
+#### 3. Verify your commit is included
+
+Use `git merge-base` to check if your commit is an ancestor of the deployed commit:
+
+```bash
+git fetch origin
+git merge-base --is-ancestor <your-commit-sha> <deployed-commit-sha> && echo "Deployed" || echo "Not deployed"
+```
+
+#### 4. Troubleshooting with ArgoCD
+
+If `state.yaml` shows a newer commit than what's running on pods, check ArgoCD:
+
+1. **Find the specific app** - Don't just look at the parent grouping (e.g., `ingestion`). Drill down to the specific environment app like `ingestion-events-prod-us` or `posthog-prod-eu`.
+
+2. **Check sync status** - Is it "Synced" or "OutOfSync"? When was the last successful sync?
+
+3. **Check if auto-sync is enabled** - Some apps may have auto-sync disabled and require manual syncing.
+
+4. **Look at the diff** - Click "DIFF" to see what's different between desired and live state.
+
+#### Common deployment issues
+
+| Symptom | Likely cause | Solution |
+|---------|--------------|----------|
+| App shows "OutOfSync" | Auto-sync disabled or sync error | Check if auto-sync is enabled; try manual sync |
+| state.yaml updated but pods unchanged | ArgoCD hasn't synced yet | Check ArgoCD app status; may need manual intervention |
+| Pods running old commit | Rollout stuck or image not built | Check deployment rollout status; verify CI built the image |
+| Can't find your service in ArgoCD | Looking at wrong app grouping | Search for your specific service + environment (e.g., `ingestion-events-prod-us`) |
+
+If a deployment appears stuck, reach out in `#team-infrastructure`.
 
 ## Documenting
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either <SmallTeam slug="brand" /> or <SmallTeam slug="content" /> teams to document features.
+It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="content" /> teams to document features.
 
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 
@@ -329,9 +381,9 @@ Experiment design is a bit of an art. There are different types of [metrics](/do
 
 Generally, a good pattern is to set up 1-2 primary metrics that you anticipate might be impacted by the A/B test, as well as 3+ secondary metrics that might also be good to keep an eye on, just in case. If you aren't sure what metrics to be testing, just ask! Lots of people are excited to help think this through (especially #team-growth and Raquel!).
 
-### Releasing as a beta
+### Releasing a new product
 
-We can release betas both as publicly available, or opt-in. See: [Releasing a feature as beta](/handbook/product/releasing-as-beta).
+We can release alphas and betas both as publicly available, or opt-in. See: [Releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
 It's always worth letting Marketing know about new betas so they can help raise awareness. [The owner](/handbook/engineering/development-process#assign-an-owner) should tag them on an issue, or drop a message in the Marketing Slack channel.
 
