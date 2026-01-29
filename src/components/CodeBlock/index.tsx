@@ -182,15 +182,26 @@ const SyncedCodeBlock = ({
 
     // Sync with preference changes from other code blocks OR when preferences load from localStorage
     React.useEffect(() => {
-        const storedValue = preferences[syncKey]
-        if (storedValue) {
-            const matchingLanguage = languages.find((lang) => getOptionKey(lang) === storedValue)
-            if (matchingLanguage) {
-                console.log('[CodeBlock] Syncing to stored preference:', { syncKey, storedValue, matchingLanguage })
+        const currentStoredValue = preferences[syncKey]
+        console.log('[CodeBlock] useEffect triggered:', {
+            syncKey,
+            currentStoredValue,
+            currentLanguageKey: getOptionKey(currentLanguage),
+            willUpdate: currentStoredValue && getOptionKey(currentLanguage) !== currentStoredValue,
+        })
+
+        if (currentStoredValue) {
+            const matchingLanguage = languages.find((lang) => getOptionKey(lang) === currentStoredValue)
+            if (matchingLanguage && getOptionKey(matchingLanguage) !== getOptionKey(currentLanguage)) {
+                console.log('[CodeBlock] Syncing to stored preference:', {
+                    syncKey,
+                    currentStoredValue,
+                    matchingLanguage,
+                })
                 setCurrentLanguage(matchingLanguage)
             }
         }
-    }, [preferences[syncKey], languages])
+    }, [preferences, syncKey])
 
     const handleChange = React.useCallback(
         (language: LanguageOption) => {
@@ -296,6 +307,15 @@ export const CodeBlock = ({
         setExpandedStates((prev) => ({ ...prev, [language]: value }))
     }
     const getExpanded = (language: string) => expandedStates[language] || false
+
+    // Sync selectedIndex with currentLanguage prop
+    React.useEffect(() => {
+        const index = languages.findIndex((lang) => lang === currentLanguage)
+        if (index !== -1 && index !== selectedIndex) {
+            console.log('[CodeBlock] Syncing selectedIndex:', { from: selectedIndex, to: index, currentLanguage })
+            setSelectedIndex(index)
+        }
+    }, [currentLanguage, languages, selectedIndex])
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
