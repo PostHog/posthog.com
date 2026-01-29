@@ -14,16 +14,20 @@ interface ModalProps {
     className?: string
     contentClassName?: string
     showCloseButton?: boolean
+    maxWidth?: number
+    autoHeight?: boolean
 }
 
 const Modal = ({
     trigger,
+    maxWidth,
     children,
     open,
     onOpenChange,
     className = '',
     contentClassName = '',
     showCloseButton = true,
+    autoHeight = false,
 }: ModalProps): JSX.Element => {
     const { websiteMode } = useApp()
     const { appWindow } = useWindow()
@@ -44,18 +48,19 @@ const Modal = ({
                         style={
                             websiteMode
                                 ? {
-                                      maxWidth: appWindow?.size?.width || '100%',
-                                      maxHeight: appWindow?.appSettings?.size?.autoHeight
-                                          ? '100%'
-                                          : appWindow?.size?.height || '100%',
+                                      maxWidth: maxWidth || appWindow?.size?.width || '100%',
+                                      maxHeight:
+                                          autoHeight || appWindow?.appSettings?.size?.autoHeight
+                                              ? '100%'
+                                              : appWindow?.size?.height || '100%',
                                       width: '100vw',
-                                      height: appWindow?.appSettings?.size?.autoHeight ? '100%' : '100vh',
+                                      height: autoHeight || appWindow?.appSettings?.size?.autoHeight ? '100%' : '100vh',
                                   }
                                 : {}
                         }
                     >
                         {showCloseButton && (
-                            <div className="flex items-center justify-between absolute right-0 top-0 translate-x-1/2 -translate-y-1/2">
+                            <div className="flex items-center justify-between absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 z-50">
                                 <RadixDialog.Close asChild>
                                     <button
                                         className="inline-flex size-8 items-center justify-center rounded-full bg-accent border border-primary"
