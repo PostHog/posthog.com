@@ -1,0 +1,263 @@
+---
+title: How to write product docs
+sidebar: Handbook
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+This guide outlines how to structure product documentation, based on patterns from [Error Tracking](/docs/error-tracking). Use this as a reference when building docs for new products or improving existing ones.
+
+## Directory structure
+
+This structure mirrors the sidebar navigation of Error Tracking docs. The hierarchy drives how users discover and navigate docs.
+
+```
+docs/[product-name]/
+├── index.mdx                   # Overview page
+│
+├── # Getting started
+├── start-here.mdx              # Quest-log entry point
+├── installation/               # Platform installation guides
+│   ├── index.mdx               # Hub with auto-generated platform grid
+│   ├── [platform].mdx          # One file per platform
+│   └── _snippets/              # Installation-specific snippets
+│
+├── # Concepts
+├── [concept-1].mdx             # Core concepts users need to understand
+├── [concept-2].mdx
+│
+├── # Guides
+├── [guide-1].mdx               # Task-oriented how-tos
+├── [guide-2].mdx
+├── integrations.mdx
+├── alerts.mdx
+│
+├── # Resources
+├── pricing.mdx
+├── references.mdx              # Links to SDK and API docs
+├── tutorials.mdx               # Curated list of tutorials
+├── troubleshooting.mdx
+├── changelog.mdx
+│
+└── _snippets/                  # Reusable content
+    └── [shared-content].mdx
+```
+
+The sidebar sections – Getting started, Concepts, Guides, Resources – are defined in `src/navs/index.js`, not by folder structure. Files can live flat in the product folder.
+
+## Core page types
+
+Every product should have these page types. Each serves a specific purpose in the user journey.
+
+### 1. Start here page
+
+The entry point for new users. These pages are our highest converting pages, so they matter. Uses the `QuestLog` component to create a visual roadmap that guides users through adoption milestones.
+
+Structure each quest item with: required → recommended → optional progression, platform selectors for installation, screenshots showing what they'll achieve, and links to deeper docs.
+
+Key frontmatter for start-here pages:
+
+```yaml
+---
+title: Getting started with [Product Name]
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl # QuestLog component needs extra horizontal space
+---
+```
+
+**Example:** [Error Tracking start-here](/docs/error-tracking/start-here)
+
+### 2. Installation guides
+
+Installation docs are shared between the in-app onboarding flow and the posthog.com website. The single source of truth lives in the [posthog/posthog monorepo](https://github.com/PostHog/posthog/tree/master/docs/onboarding), and the website pulls the content automatically.
+
+See the [onboarding docs runbook](/handbook/docs-and-wizard/onboarding-docs) for full details on how to create or migrate installation guides.
+
+#### Auto-generated platform grids
+
+The installation index page displays a grid of platform cards that's automatically generated from the sidebar navigation. This means you never manually maintain a hardcoded list of platforms.
+
+How it works:
+
+1. The index page imports a snippet that calls `usePlatformList()`
+2. The hook reads all MDX files in the installation folder
+3. It sorts them based on the order defined in `src/navs/index.js`
+4. Each platform's logo comes from the `platformLogo` frontmatter field
+
+**Example:** [Error Tracking installation index](/docs/error-tracking/installation)
+
+### 3. Feature documentation
+
+Deep-dives into specific features that help users understand and use a specific capability. In general, one page per major feature.
+
+On each page, include a brief intro explaining what the feature does, screenshots showing the feature in the UI, step-by-step instructions with links to relevant app pages, and tables for comparing options. Integrate links naturally throughout the content rather than in a separate section.
+
+**Examples:** [Alerts](/docs/error-tracking/alerts), [Managing issues](/docs/error-tracking/managing-issues)
+
+### 4. Concept pages
+
+Explain how things work under the hood to build mental models for complex systems. Use diagrams and examples.
+
+Include Mermaid diagrams for flows and relationships, definitions with context, examples of real-world scenarios, and links to implementation details.
+
+**Examples:** [Fingerprints](/docs/error-tracking/fingerprints), [Issues and exceptions](/docs/error-tracking/issues-and-exceptions)
+
+### 5. Troubleshooting page
+
+Common issues and solutions that unblock users who are stuck. Keep this updated based on support tickets and community questions.
+
+Start with the `<AskAIInput>` component, then use searchable headings with numbered solutions. Each section should be scannable and actionable.
+
+**Example:** [Error Tracking troubleshooting](/docs/error-tracking/troubleshooting)
+
+### 6. Pricing page
+
+Explain the product's pricing model, free tier limits, and how usage is calculated. Link to the main pricing page for full details.
+
+**Example:** [Error Tracking pricing](/docs/error-tracking/pricing)
+
+### 7. Changelog page
+
+Auto-generated list of product updates using the `<ProductChangelog>` component. Requires `hideRightSidebar: true` in frontmatter.
+
+**Example:** [Error Tracking changelog](/docs/error-tracking/changelog)
+
+### 8. Tutorials page
+
+Curated list of tutorials and guides for the product. Links to blog posts and community content.
+
+**Example:** [Error Tracking tutorials](/docs/error-tracking/tutorials)
+
+### 9. References page
+
+Links to SDK reference docs and API documentation filtered by product.
+
+**Example:** [Error Tracking references](/docs/error-tracking/references)
+
+## Using snippets for reusability
+
+Create snippets in `_snippets/` for content used across multiple pages.
+
+### When to create a snippet
+
+- Content appears in 2+ pages
+- Event schemas or property tables
+- Platform-specific code blocks
+- Reusable UI components
+
+### MDX snippets
+
+For static reusable content like tables, callouts, or text blocks:
+
+`_snippets/event-properties.mdx`:
+```mdx
+| Property | Type | Description |
+|----------|------|-------------|
+| `$exception_message` | string | The error message |
+| `$exception_type` | string | The error type |
+```
+
+Usage in a doc:
+```mdx
+import EventProperties from './_snippets/event-properties.mdx'
+
+## Event properties
+
+<EventProperties />
+```
+
+### TSX snippets
+
+For dynamic content like platform selectors or components that need React hooks:
+
+```tsx
+// _snippets/installation-platforms.tsx
+import usePlatformList from 'hooks/docs/usePlatformList'
+
+export default function InstallationPlatforms() {
+  const platforms = usePlatformList('docs/[product]/installation', 'installation')
+  return <PlatformList items={platforms} />
+}
+```
+
+## Components
+
+Use the following components in docs as needed.
+
+### Steps
+
+For sequential instructions in installation guides:
+
+```mdx
+<Steps>
+<Step title="Step name" badge="required">
+Content here
+</Step>
+</Steps>
+```
+
+### QuestLog
+
+For start-here pages with milestone-based onboarding:
+
+```mdx
+<QuestLog>
+<QuestLogItem title="Quest name" subtitle="Required" icon="IconCode">
+Content here
+</QuestLogItem>
+</QuestLog>
+```
+
+### MultiLanguage
+
+For code examples in multiple programming languages:
+
+````mdx
+<MultiLanguage>
+
+```js
+// JavaScript example
+```
+
+```python
+# Python example
+```
+
+</MultiLanguage>
+````
+
+### ProductScreenshot
+
+For UI screenshots with light and dark variants:
+
+```mdx
+<ProductScreenshot
+  imageLight="https://..."
+  imageDark="https://..."
+  alt="Descriptive alt text"
+  classes="rounded"
+/>
+```
+
+### CalloutBox
+
+For important callouts that need to stand out:
+
+```mdx
+<CalloutBox icon="IconInfo" title="Title" type="fyi">
+Content here
+</CalloutBox>
+```
+
+Types: `fyi` (info), `action` (task), `caution` (warning)
+
+## Frontmatter reference
+
+| Field | Purpose | Example |
+|-------|---------|---------|
+| `title` | Page title | `React installation` |
+| `platformLogo` | Platform icon key for installation pages | `react`, `python`, `nodejs` |
+| `showStepsToc` | Show steps in right sidebar TOC | `true` |
+| `hideRightSidebar` | Hide right sidebar TOC on start-here and changelog pages | `true` |
+| `contentMaxWidthClass` | Wider content area for QuestLog pages | `max-w-5xl` |

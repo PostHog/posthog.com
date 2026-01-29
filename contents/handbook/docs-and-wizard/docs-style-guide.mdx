@@ -14,82 +14,209 @@ This means our docs should be:
 -   As short and to the point as possible.
 -   Easy enough to understand so that a new user can read it and get what they need.
 
-The below is a style guide for writing good docs based on the above assumptions. It's not exhaustive, but it's a good starting point.
+This style guide helps you write docs based on these assumptions.
 
-## How to refer to PostHog Cloud vs self-hosted
+## Voice and tone
 
-When writing docs, use the following terminology:
+Address the reader directly using "you" instead of "the user" or "developers".
 
-- **PostHog**: Use this by default. This refers to our cloud product. Most users are on cloud, so we don't need to specify "Cloud" unless we're differentiating from self-hosted.
-- **PostHog Cloud**: Only use this when you need to explicitly differentiate cloud features from self-hosted deployments. For example, when a feature works differently or isn't available in self-hosted.
-- **Self-hosted PostHog** or **hobby deployments**": Use these when referring to self-hosted installations.
+> **Do:** "You can create an insight by clicking **New insight**"
 
-> **Do:** "To create an insight in PostHog, go to the insights tab..."
+> **Don't:** "Users can create insights"
+
+### Use present tense
+
+Write in present tense. Avoid future tense unless specifically discussing future events.
+
+> **Do:** "The insight displays your data"
+
+> **Don't:** "The insight will display your data"
+
+### Use active voice
+
+Active voice makes it clear who or what performs an action.
+
+> **Do:** "PostHog captures events automatically"
+
+> **Don't:** "Events are captured automatically by PostHog"
+
+Exception: Use passive voice when the actor is unknown or unimportant.
+
+> **Acceptable:** "The data is encrypted at rest"
+
+### Be concise
+
+Remove unnecessary words. Every sentence should add value.
+
+> **Do:** "Click **Save**"
+
+> **Don't:** "Now you can go ahead and click the **Save** button to save your changes"
+
+### Avoid jargon and explain technical terms
+
+When you must use technical terms, explain them on first use or link to a definition.
+
+> **Do:** "Create a [cohort](/docs/data/cohorts) to analyze behavior. A cohort is a group of users who share common properties."
+
+> **Do:** "Create a [cohort](/docs/data/cohorts)—a group of users who share common properties—to analyze behavior."
+
+## Product terminology
+
+### How to refer to PostHog Cloud vs self-hosted
+
+- **PostHog**: Use by default. This refers to our cloud product. Most users are on cloud, so don't specify "Cloud" unless differentiating from self-hosted.
+- **PostHog Cloud**: Only use when explicitly differentiating cloud features from self-hosted deployments.
+- **Self-hosted PostHog** or **hobby deployments**: Use when referring to self-hosted installations.
+
+> **Do:** "Go to **Insights** in the PostHog app and click **New insight**."
 
 > **Do:** "This feature is only available in PostHog Cloud."
 
-> **Don't:** "To create an insight in PostHog Cloud, go to the insights tab..."
+> **Don't:** "To create an insight in PostHog Cloud, go to the **Insights** tab."
 
-## Wikipedia-style internal links
+### Product and feature names
 
-The first mention on a page of a PostHog term, feature, or SDK should link to its docs page.
+Always capitalize PostHog product names.
 
-> **Example:** "To create an [insight](/docs/product-analytics/insights), first [capture events](/docs/product-analytics/capture-events). Then, select the data you want to see and create an insight."
+## Content structure
 
-## Include examples for complex concepts
+### Start with the most important information
 
-When explaining complex features or concepts, provide real-world use cases and examples. This makes it easier for our users to understand and apply the concept.
+Lead with what readers need to know. For instructions, start with the action. For explanations, start with the definition.
 
-## Structure content for scannability
+> **Do:** "Click **New insight** to create an insight. Insights help you visualize your data."
 
--   Use short paragraphs (3-4 lines maximum)
--   Use bullet points and numbered lists
--   Break up long sections with subheadings
--   Put the most important information first
+> **Do:** "Cohorts are groups of users who share a property. Use them to compare behavior across segments."
 
-## Link to PostHog app
+> **Don't:** "Insights are a powerful way to visualize your data. They help you understand user behavior. To create one, click **New insight**."
 
-You can also link to the PostHog app directly by using `https://us.posthog.com/${path}`. This saves time for our users and makes it easier for them to find what they need. Make sure to remove `project/2/` from the URL so it redirects them to their project. EU Cloud users are redirected automatically.
+### Use descriptive headings
 
-> **Example:** "To create an insight, first [capture events](/docs/product-analytics/capture-events). Then, go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
+Headings should clearly describe what's in the section. Use sentence case, not title case.
 
-## Bold button and tab names
+> **Do:** "## How to create a feature flag"
 
-Put button, tab, and other navigation names in bold. This makes it easier for our users to skim through the docs, and it's cleaner than using quotes all the time.
+> **Don't:** "## Creating Feature Flags"
 
-> **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
+### Use short paragraphs
 
-## Navigating UI
+Keep paragraphs to 3-4 lines maximum. Break up longer content with subheadings, lists, or visual elements as needed.
 
-When documenting UI steps, references to UI elements should be in chronological order. When possible, hyperlink to the correct location.
+### When to use bulleted lists
 
-> **Do:** Under **Settings** > **User**, under the [Two-factor section](https://us.posthog.com/settings/user#2fa), click the **Set up 2FA** button.
+Use bullets for unordered items of equal importance. Default to prose when 1-2 items would be clearer as a sentence.
 
-> **Don't:** Under **User** in your **Settings**, click the **Set up 2FA** button under **Two-factor** authentication.
+> **Do:**
+> PostHog offers several products:
+> - Product Analytics
+> - Session Replay
+> - Feature Flags
+> - Experiments
 
-Using exact label names in chronological order helps when searching with `⌘+F`. It also makes it easier to follow on a screen reader.
+> **Do (prose):** "You need a PostHog account and at least one event captured to get started."
 
-For long UI flows, like big menus or settings, use `>` to show the menu or heading hierarchy. Use exact names for headers and labels for easier searching. Clearly state actions like clicks.
+> **Don't:**
+> Feature flags let you:
+> - Control feature rollouts
 
-> **Do:** Under **Settings** > **Product analytics** > **Correlation analysis exclusions**, under **Excluded events**, click **+ Add exclusion**.
+### When to use numbered lists
 
-> **Don't:** Under **Settings**, find **Product analytics**, then find **Correlation analysis exclusions**, then in the second subheading, **Add exclusion**.
+Use numbered lists only when sequence matters. Numbered lists are mainly used for UI instructions.
 
-Using `>` in long flows and explicitly stating actions makes it easier to scan. If the flow is complex, consider [adding a video](#record-video).
+> **Do:**
+> 1. Click **New insight**
+> 2. Select your event
+> 3. Click **Save**
 
-## The backtick is your friend
+### When to use tables
 
-Remember to use backticks around inline code snippets, and triple backticks around multiline code samples.
+Use tables for comparing multiple items across multiple attributes.
 
-## Follow the style standards of each programming language
+> **Do:**
+> | Plan | Events/month | Team members | Price |
+> |------|--------------|--------------|-------|
+> | Free | 1M | Unlimited | $0 |
+> | Paid | 2M+ | Unlimited | $0.00031/event |
 
-In code samples, use the conventions of the language the code is written in.
+> **Don't:**
+> Our plans:
+> - Free: 1M events per month, unlimited team members, $0
+> - Paid: 2M+ events per month, unlimited team members, $0.00031 per event
 
-For example, JavaScript uses `PascalCase` for class/constructor names, and `camelCase` for most other names. Python uses `PascalCase` for classes, and `snake_case` for most other names. And so on.
+Use tables when a bulleted list isn't easy to scan.
 
-## Use snake case for PostHog events and properties.
+### Avoid excessive formatting
 
-Use `snake_case`, not `camelCase` or `PascalCase` for PostHog event and property names. For example:
+Don't use:
+
+- Multiple header levels in short sections
+- Bold text for general emphasis in prose
+- Lists when prose is clearer
+- Tables for simple two-item comparisons
+
+### When to use bold
+
+Use bold for structured information:
+
+- **Callout labels:** `**Note:**`, `**Important:**`, `**Warning:**`, `**Tip:**`
+- **UI elements:** Button names, menu items, keyboard shortcuts
+- **Definition lists:** The term in `**Term:** Description` patterns
+- **Problem/Solution labels:** `**Problem:**` and `**Solutions:**` in troubleshooting docs
+
+## Links
+
+### Wikipedia-style internal links
+
+Link the first mention of a PostHog term, feature, or SDK on a page to its docs page.
+
+> **Example:** "To create an [insight](/docs/product-analytics/insights), first [capture events](/docs/product-analytics/capture-events). Then, select the data you want to see."
+
+### Link to the PostHog app
+
+Link directly to PostHog app pages using `https://app.posthog.com/${path}`. EU Cloud users are redirected automatically.
+
+> **Example:** "Go to the [**Insights** tab](https://app.posthog.com/insights) and click **New insight**."
+
+### Link text
+
+Link text should describe the destination. Avoid "click here" or "this page."
+
+> **Do:** "See our [installation guide](/docs/getting-started/install) for instructions."
+
+> **Don't:** "Click [this link](/docs/getting-started/install) for installation instructions."
+
+## Formatting UI instructions
+
+Bold all UI elements. Use exact names as they appear in the UI. Don't use quotes.
+
+> **Do:** Click **New insight** in the **Insights** tab.
+
+> **Don't:** Click the "New insight" button.
+
+For multi-step flows, use ordered lists. Use `>` within a step to show hierarchy as needed:
+
+> 1. In PostHog, navigate to **Settings** > **API keys** > **Personal API key**
+> 2. Copy your API key
+> 3. Paste your key
+
+## Code blocks
+
+### Use backticks
+
+- **Inline code:** Use single backticks for code elements in text: `posthog.capture()`
+- **Code blocks:** Use triple backticks for multi-line code
+
+### Follow language conventions
+
+Use the standard style conventions for each programming language:
+
+- **JavaScript/TypeScript:** `PascalCase` for classes, `camelCase` for functions and variables, ES modules (`import`/`export`) instead of CommonJS (`require`)
+- **Python**: `PascalCase` for classes, `snake_case` for functions and variables
+- **HTML**: Lowercase for elements and attributes
+
+### PostHog event and property naming
+
+Always use `snake_case` for PostHog event and property names:
 
 ```js
 posthog.capture('user_signed_up', {
@@ -98,200 +225,186 @@ posthog.capture('user_signed_up', {
 })
 ```
 
-## Screenshots
+Never use `camelCase` or `PascalCase` for event or property names.
 
-To keep screenshots consistent and clear, here are tips to follow:
+### Show real-world examples
 
--   Make sure you're not showing any user data, like user emails or names.
--   Focus on the main element, leave out sidebars and irrelevant UI.
--   Use a device width of 1000px - 1400px in devtools. This avoids unnecessary empty space and keeps text readable.
--   Prefer taking **node screenshots** of the DOM node element you're trying to capture. This takes an **upscaled** screenshot by DPR of the DOM node element.
--   Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
+Use realistic examples that demonstrate actual use cases.
 
-![Screenshot settings](https://res.cloudinary.com/dmukukwp6/video/upload/Google_Chrome_screenshot_settings_fcef064998.mp4)
+> **Do:**
+> ```js
+> posthog.capture('purchase_completed', {
+>     product_id: 'prod_12345',
+>     revenue: 49.99,
+>     currency: 'USD'
+> })
+> ```
 
-### Record videos
+> **Don't:**
+> ```js
+> posthog.capture('event', {
+>     property: 'value'
+> })
+> ```
 
-For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [Screen Studio](https://screen.studio/) to record videos. Feel free to buy yourself a license.
+### Comment sparingly
 
-Use the following settings:
+Only add comments when code isn't self-explanatory:
 
--   <PrivateLink url="https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969">Preset</PrivateLink>
--   Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
--   For exporting: use MP4, 720, 60 fps, and "web" quality
+```js
+// Don't show the survey if user dismissed it in the last 30 days
+if (lastDismissed > Date.now() - 30 * 24 * 60 * 60 * 1000) {
+    return
+}
+```
+
+### Magic placeholders
+
+Use magic placeholders in code blocks. These auto-populate for logged-in users:
+
+| Placeholder                | Description                   | Default                                         |
+| -------------------------- | ----------------------------- | ----------------------------------------------- |
+| `<ph_project_api_key>`     | Your PostHog project API key  | n/a                                             |
+| `<ph_project_name>`        | Your PostHog project name     | n/a                                             |
+| `<ph_app_host>`            | Your PostHog instance URL     | n/a                                             |
+| `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
+| `<ph_region>`              | Your PostHog region (us/eu)   | n/a                                             |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
+| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
+
+## Screenshots and media
+
+### Screenshot requirements
+
+To maintain consistency and clarity:
+
+- **No user data**: Ensure no personal information is visible
+- **Focus on the relevant UI**: Exclude sidebars and irrelevant interface elements
+- **Use standard viewport**: Set device width to 1000-1400px in devtools
+- **Use node screenshots**: Capture DOM node elements for upscaled rendering
+- **Set DPR to 3**: Use device pixel ratio of 3 for 3x upscaling
+
+### When to use videos
+
+Use videos for:
+
+- Multi-step workflows
+- Complex interactions
+- Demonstrating UI behavior
+
+Use Screen Studio with these settings:
+
+- Use the preset
+- Remove zoom-in for clicks
+- Export: MP4, 720p, 60 fps, "web" quality
+
+## Word choice
+
+### Use simple words
+
+Choose simple, common words over complex alternatives:
+
+| Instead of | Use |
+|------------|-----|
+| utilize | use |
+| leverage | use |
+| implement | set up, create, add |
+| initiate | start |
+| terminate | end, stop |
+| commence | start, begin |
+| subsequent | next |
+| prior to | before |
+
+### Be specific with verbs
+
+Use precise verbs that clearly indicate the action:
+
+| Vague | Specific |
+|-------|----------|
+| use the API | call the API |
+| work with data | query data, analyze data |
+| handle errors | catch errors, log errors |
+| manage users | add users, remove users, assign roles |
+
+### Avoid these words and phrases
+
+- **Simply, just, easily**:
+  - **Don't:** "Simply add the SDK to your project."
+  - **Do:** "Add the SDK to your project."
+
+- **Please**:
+  - **Don't:** "Please click **Save**."
+  - **Do:** "Click **Save**."
+
+- **Obviously, of course, clearly**:
+  - **Don't:** "Of course, this only works for authenticated users."
+  - **Do:** "This only works for authenticated users."
+
+## Grammar and mechanics
+
+### Parentheses
+
+Avoid using parentheses for explanations or clarifications. They disrupt reading flow and make content harder to scan. Instead, use separate sentences or en dashes.
+
+> **Do:** "Create a cohort to analyze behavior. A cohort is a group of users who share common properties."
+
+> **Do:** "Create a cohort – a group of users who share common properties – to analyze behavior."
+
+> **Don't:** "Create a cohort (a group of users who share common properties) to analyze behavior."
+
+Parentheses are acceptable for:
+
+- **Abbreviations on first use:** "Application Programming Interface (API)"
+- **Optional parameters in code:** `posthog.capture(event, properties)`
+- **Version numbers:** "Available in version 1.2.0 (or later)"
+
+### Contractions
+
+Use contractions to maintain a conversational tone.
+
+### Oxford comma
+
+Always use the Oxford comma in lists:
+
+> **Do:** "PostHog offers analytics, session replay, and feature flags."
+
+> **Don't:** "PostHog offers analytics, session replay and feature flags."
+
+### Sentence case for headings
+
+Use sentence case for all headings. Capitalize only the first word and proper nouns:
+
+> **Do:** "## How to create a feature flag"
+
+> **Don't:** "## How To Create A Feature Flag"
+
+### Numbers
+
+- Spell out numbers zero through nine
+- Use numerals for 10 and above
+- Use numerals for percentages, measurements, and technical values
+
+> **Do:** "You can create three dashboards" or "You can create 15 dashboards."
+
+> **Do:** "Set the timeout to 30 seconds."
+
+## Inclusive language
+
+Use neutral, inclusive terms:
+
+| Instead of | Use |
+|------------|-----|
+| blacklist/whitelist | blocklist/allowlist |
+| sanity check | validation, verification |
+| dummy value | placeholder, sample value |
 
 ## Docs components
 
-> **Note:** In addition to the components below, you can also use any [MDX components](/handbook/engineering/posthog-com/markdown) to add more complex content to your docs.
-
-### Callout boxes
-
-import { CalloutBox } from '../../../src/components/Docs/CalloutBox'
-
-You can add callout boxes to documentation to ensure skimmers don't miss essential information.
-
-```jsx
-<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
-    Here is some information
-</CalloutBox>
-```
-
-Three styles are available:
-
--   `fyi`: this is for stuff that's helpful but not critical
--   `action`: these are tasks developers should complete and not miss
--   `caution`: these flag the potential for misconfiguration, data loss, and other churn vectors
-
-They look like this:
-
-<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
-
-Provide detail here. You can go on at length if necessary.
-
-</CalloutBox>
-
-<CalloutBox icon="IconInfo" title="Here is some information" type="action">
-
-Provide detail here. You can go on at length if necessary.
-
-</CalloutBox>
-
-<CalloutBox icon="IconWarning" title="Here is some information" type="caution">
-
-Provide detail here. You can go on at length if necessary.
-
-</CalloutBox>
-
-Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
-
-### PostHog AI
-
-You can also link to PostHog AI with a pre-loaded question if you want to give users an easy way to try building using the PostHog AI.
-
-Be aware that PostHog AI works best with straightforward questions that have predictable answers, e.g. "How many users completed the $pageview event this week?". It may struggle with more open-ended questions such as "Where are users struggling?". For this reason, you should test questions on PostHog AI before adding it to docs.
-
-> **Note:** This component will be renamed to AskPostHogAICTA component soon.
-
-To add a preloaded question to docs or tutorials, you can use the AskMaxCTA component and add the question you'd like to preload in the question field, like so:
-
-```
-<MaxCTA question="What's my churn rate?" />
-```
-
-This creates the following component in the docs, where the final link will divert to the relevant question.
-
-<MaxCTA question="What's my churn rate?" />
-
-This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with PostHog AI (currently).
-
-### AskMax
-
-The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
-
-```jsx
-<AskMax
-    title="Need help with feature flags?"
-    quickQuestions={[
-        'Why is there a delay in loading flags?',
-        'How do I create a multivariate flag?',
-        'Can I override a flag?',
-    ]}
-/>
-```
-
-<AskMax
-    title="Need help with feature flags?"
-    quickQuestions={[
-        'Why is there a delay in loading flags?',
-        'How do I create a multivariate flag?',
-        'Can I override a flag?',
-    ]}
-/>
-
-Available props:
-
--   `title`: Custom title text (defaults to "Questions?")
--   `quickQuestions`: Array of suggested questions to preload
--   `border`: Add top/bottom borders (defaults to false)
--   `linkOnly`: Render as a button only without the full UI (defaults to false)
-
-The component automatically tracks when users open PostHog AI and includes the current page context.
-
-### AskAIInput
-
-The `<AskAIInput>` component provides a text input for users to ask PostHog AI questions directly within documentation pages. Use this to replace traditional FAQ sections in troubleshooting guides and documentation pages where users frequently have questions. The component opens the PostHog AI chat window with the user's question pre-loaded and includes the current page context. Add a clear h2 heading like "Have a question? Ask PostHog AI" above the component.
-
-> **Note:** Customize the `placeholder` prop per page to provide context-specific guidance. The default is `Ask a question...`
-
-```mdx
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-```
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
-> See [src/components/AskAIInput/index.tsx](https://github.com/PostHog/posthog.com/blob/master/src/components/AskAIInput/index.tsx) for all available props.
-
-### SolvedQuestions
-
-The `<SolvedQuestions>` component displays resolved community questions from a specific topic. Use this in troubleshooting guides to highlight common issues and their solutions. Find question slugs by visiting the community question page and copying the URL slug.
-
-> **Note:** Use the `pinnedQuestions` prop to manually curate which questions appear. When provided, the component shows only those questions. If not provided, it shows recent solved posts.
-
-```mdx
-<SolvedQuestions
-    topicLabel="Error Tracking"
-    pinnedQuestions={[
-        'code-variables-for-external-libraries-for-python',
-        'trouble-setting-up-source-map-in-vite-react',
-        'webpack-turbopack-plugin-getting-sourcemaps-uploaded-to-vercel'
-    ]}
-/>
-```
-
 ### Steps
 
-Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
-
-<Steps>
-
-<Step title="Install the SDK" badge="required">
-
-Steps are automatically numbered.
-
-</Step>
-
-<Step title="Call the capture method" badge="required">
-
-Write the _content_ in **markdown**.
-
-</Step>
-
-<Step checkpoint title="Check for events in PostHog" subtitle="Log in to your PostHog account" badge="optional">
-
-You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
-
-Add more steps!
-
-</Step>
-
-</Steps>
-
-<CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
-
-Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
-
--   Add a line break after the opening component tags
--   Avoid using 4-space indents
-
-</CalloutBox>
+Use the `<Steps>` component for sequential instructions:
 
 ```mdx
----
-showStepsToc: true # for table of contents with steps only
----
-
 <Steps>
 
 <Step title="Install the SDK" badge="required">
@@ -308,9 +421,7 @@ Write the _content_ in **markdown**.
 
 <Step checkpoint title="Check for events in PostHog" subtitle="Log in to your PostHog account" badge="optional">
 
-Add checkpoints to help readers know they're on the right track.
-
-You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
+Add checkpoints to help readers verify their progress.
 
 </Step>
 
@@ -319,217 +430,71 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 
 ### Decision tree
 
-import { DecisionTree } from '../../../src/components/Docs/DecisionTree'
+Use decision trees to help users choose between 2-6 options:
 
-Use a decision tree when users need help choosing between multiple, branching options. Instead of making users read through all possibilities, the tree asks questions and recommends the best path based on their answers.
-
-You can use the following decision tree to help you decide if using one is good for your use case! 
-
+```jsx
 <DecisionTree
     questions={[
         {
-            id: 'multiple-options',
-            question: 'Are you helping users choose between multiple options?',
+            id: 'platform',
+            question: 'What platform are you using?',
             options: [
-                { value: 'yes', label: 'Yes' },
-                { value: 'no', label: 'No' },
-            ],
-        },
-        {
-            id: 'option-count',
-            question: 'How many options are there?',
-            condition: (answers) => answers['multiple-options'] === 'yes',
-            options: [
-                { value: 'few', label: '2-6 options' },
-                { value: 'many', label: 'More than 6 options' },
-            ],
-        },
-        {
-            id: 'complexity',
-            question: 'Can you give the user an option by asking 2-3 simple questions?',
-            condition: (answers) => answers['option-count'] === 'few',
-            options: [
-                { value: 'yes', label: 'Yes' },
-                { value: 'no', label: 'No' },
+                { value: 'web', label: 'Web' },
+                { value: 'mobile', label: 'Mobile' },
             ],
         },
     ]}
     getRecommendation={(answers) => {
-        if (answers['multiple-options'] === 'no') {
-            return {
-                title: "Don't use a decision tree",
-                path: '',
-                reason: "Decision trees are for helping users choose between options.",
-            }
-        }
-        if (answers['option-count'] === 'many') {
-            return {
-                title: "Don't use a decision tree",
-                path: '',
-                reason: "With more than 6 options, restructure your content or use a simple list instead.",
-            }
-        }
-        if (answers['complexity'] === 'no') {
-            return {
-                title: "Don't use a decision tree",
-                path: '',
-                reason: "If you need complex logic or many questions, a decision tree will be too complicated. Use a simple list instead.",
-            }
-        }
-        return {
-            title: 'Use a decision tree!',
-            path: '',
-            reason: "You have a manageable number of options and can guide users with a few simple questions.",
-        }
+        // return recommendation based on answers
     }}
-    buttonText=""
 />
+```
 
-### Quest log
+### AskMax components
 
-The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking app.
+Use `<AskMax>` to provide in-context help:
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250731_oiej_cdce484c1c.png"
-    alt="Questlog example"
-    classes="rounded"
-    padding={false}
+```jsx
+<AskMax
+    quickQuestions={[
+        'How do I mask sensitive data?',
+        'Can I enable recordings only for certain users?',
+        'How can I control costs?',
+    ]}
 />
+```
 
-<CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
-
-Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
-
--   Add a line break after the opening component tags
--   Avoid using 4-space indents
-
-</CalloutBox>
+Use `<AskAIInput>` for troubleshooting sections:
 
 ```mdx
----
-hideAnchor: true # for a wider content column
----
+## Have a question? Ask PostHog AI
 
-<QuestLog firstSpeechBubble="Let's go on an adventure!" lastSpeechBubble="Time to build products!">
-
-<QuestLogItem title="Capture your first exception" subtitle="Required" icon="IconCode">
-
-Write the _content_ in **markdown**.
-
-</QuestLogItem>
-
-<QuestLogItem title="Integrate customer data" subtitle="Recommended" icon="IconLogomark">
-
-You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
-
-</QuestLogItem>
-
-</QuestLog>
+<AskAIInput placeholder="Ask about error tracking..." />
 ```
 
-### Magic placeholders
+## Platform logos
 
-You can use magic placeholders to replace the project API key, project name, app host, region, and proxy path in the code block.
+All platform logos are centralized in `src/constants/logos.ts`. To add a new platform:
 
--   If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
--   If the user is not logged into the PostHog app, the placeholder will display as is.
+1. Upload SVG to Cloudinary
+2. Add key to `src/constants/logos.ts` in camelCase
+3. Reference in MDX frontmatter: `platformLogo: myPlatform`
 
-| Placeholder                | Description                   | Default                                         |
-| -------------------------- | ----------------------------- | ----------------------------------------------- |
-| `<ph_project_api_key>`     | Your PostHog project API key  | `<ph_project_api_key>`                          |
-| `<ph_project_name>`        | Your PostHog project name     | `<ph_project_name>`                             |
-| `<ph_app_host>`            | Your PostHog instance URL     | `<ph_app_host>`                                 |
-| `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
-| `<ph_region>`              | Your PostHog region (us/eu)   | `<ph_region>`                                   |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
-| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
+Use consistent naming: `stripe`, `react`, `nodejs`, etc.
 
-You can use these placeholders in the code block like this:
+## Debugging MDX issues
 
-```js
-const client = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
-```
+Common MDX parsing issues:
 
-## Debugging
+- Avoid deep indentation – stay at 2 spaces or less
+- Add line breaks after opening JSX tags and before closing tags
+- Ensure all components are imported correctly
+- Empty lines must be completely empty, no spaces
+- Snippets can't share file names
 
-Gatsby's MDX parser has some quirks that can be hard to debug. Gatsby tends to throw 404s when it fails to build an MDX page.
-
-To debug, check for the common issues below:
-
--   Avoid indenting by over 2 spaces. More indentation can confuse the parser.
--   Every JSX tag with inner markdown should have a line break after the opening tag and before the closing tag.
--   Make sure you're not missing imports and the imports are correct.
--   Every empty newline should actually be empty. Spaces on empty lines can confuse the parser.
--   Different snippets cannot share the same file name and import alias. When they do, they override each other.
-
-You can also try running the formatter script to fix some of the issues:
+Run the formatter to catch issues:
 
 ```bash
 pnpm format:docs
 ```
 
-This will run the formatter against the current changes.
-
-## Platform logos
-
-Platform list pages, like installation guides or source integrations, use centralized logo management. All logo URLs are stored in `src/constants/logos.ts`.
-
-### Add a platform to an existing list
-
-1. Create an MDX file with frontmatter including `platformLogo`:
-
-   ```yaml
-   ---
-   title: Elixir error tracking installation
-   platformLogo: elixir
-   ---
-   ```
-
-2. Add the page to the sidebar in `src/navs/index.js`
-3. Order accordingly in the side nav `index.js` file. The order there = order on page
-3. Done! The `usePlatformList` hook automatically picks up the new platform
-
-### Add a new logo
-
-1. Upload the image to Cloudinary in SVG format
-2. Add a key to `src/constants/logos.ts`:
-
-   ```ts
-   export const LOGOS = {
-       // ... existing logos
-       myNewLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/...',
-   }
-   ```
-
-3. Reference using `platformLogo: myNewLogo` in MDX frontmatter
-
-### Naming conventions
-
-- Use the service/framework name in camelCase: `stripe`, `bigquery`, `nextjs`
-- Keep the list alphabetized
-- For generic icons, use descriptive names: `sqlDatabase`, `apiGeneric`
-
-### Available frontmatter fields
-
-| Field | Description | Example |
-|-------|-------------|---------|
-| `platformLogo` | Key from `src/constants/logos.ts` | `stripe`, `react`, `nodejs` |
-| `platformIconName` | Fallback icon if no logo | `IconCode` |
-| `platformSourceType` | For source lists: `managed` or `self-hosted` | `managed` |
-
-### Create a new platform list section
-
-1. Add `platformLogo` to all platform MDX files in the section
-2. Create a snippet component using `usePlatformList`:
-
-   ```tsx
-   import usePlatformList from 'hooks/docs/usePlatformList'
-
-   const MyPlatforms = () => {
-       const platforms = usePlatformList('docs/my-section/installation', 'installation')
-       return <List items={platforms} />
-   }
-   ```
-
-3. Update sidebar with section children in `src/navs/index.js`
-4. Import and use the snippet in your `index.mdx`
