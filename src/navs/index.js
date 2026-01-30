@@ -5002,6 +5002,26 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/installation/litellm',
                         },
                         {
+                            name: 'Instructor',
+                            url: '/docs/llm-analytics/installation/instructor',
+                        },
+                        {
+                            name: 'CrewAI',
+                            url: '/docs/llm-analytics/installation/crewai',
+                        },
+                        {
+                            name: 'Pydantic AI',
+                            url: '/docs/llm-analytics/installation/pydantic-ai',
+                        },
+                        {
+                            name: 'LlamaIndex',
+                            url: '/docs/llm-analytics/installation/llamaindex',
+                        },
+                        {
+                            name: 'DSPy',
+                            url: '/docs/llm-analytics/installation/dspy',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                         },
