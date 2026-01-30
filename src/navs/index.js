@@ -1354,7 +1354,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
                     {
-                        name: 'Inbound sales',
+                        name: 'New business sales',
                         url: '/handbook/growth/sales/new-sales',
                     },
                     {
