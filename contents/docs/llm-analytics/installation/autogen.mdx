@@ -1,0 +1,46 @@
+---
+title: AutoGen LLM analytics installation
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'install-the-posthog-sdk',
+        value: 'Install the PostHog SDK',
+        depth: 1,
+    },
+    {
+        url: 'install-autogen',
+        value: 'Install AutoGen',
+        depth: 1,
+    },
+    {
+        url: 'initialize-posthog-and-autogen',
+        value: 'Initialize PostHog and AutoGen',
+        depth: 1,
+    },
+    {
+        url: 'run-your-agents',
+        value: 'Run your agents',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+]
+---
+
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/llm-analytics/autogen.tsx
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
+-->
+
+import { AutoGenInstallation } from 'onboarding/llm-analytics/autogen.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+
+<OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
+    <AutoGenInstallation modifySteps={addNextStepsStep} />
+</OnboardingContentWrapper>

@@ -5022,6 +5022,18 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/installation/dspy',
                         },
                         {
+                            name: 'AutoGen',
+                            url: '/docs/llm-analytics/installation/autogen',
+                        },
+                        {
+                            name: 'Semantic Kernel',
+                            url: '/docs/llm-analytics/installation/semantic-kernel',
+                        },
+                        {
+                            name: 'smolagents',
+                            url: '/docs/llm-analytics/installation/smolagents',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                         },
