@@ -5042,6 +5042,10 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/installation/mastra',
                         },
                         {
+                            name: 'Mirascope',
+                            url: '/docs/llm-analytics/installation/mirascope',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                         },
