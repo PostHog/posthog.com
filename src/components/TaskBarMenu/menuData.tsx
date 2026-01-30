@@ -914,6 +914,12 @@ export const SparksJoyItems = {
             customIcon: null,
         },
         {
+            label: 'Hogsweeper',
+            link: '/sparks-joy/hogsweeper',
+            iconName: 'minesweeper' as AppIconName,
+            customIcon: null,
+        },
+        {
             label: 'HogWars',
             link: '/sparks-joy/hogwars',
             iconName: 'hogwars' as AppIconName,

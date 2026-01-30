@@ -468,6 +468,22 @@ const appSettings: AppSettings = {
             fixed: false,
         },
     },
+    '/sparks-joy/hogsweeper': {
+        size: {
+            min: {
+                width: 250,
+                height: 360,
+            },
+            max: {
+                width: 250,
+                height: 360,
+            },
+            fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/talk-to-a-human': {
         size: {
             min: {
