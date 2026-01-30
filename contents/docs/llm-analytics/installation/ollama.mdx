@@ -1,0 +1,46 @@
+---
+title: Ollama LLM analytics installation
+showStepsToc: true
+tableOfContents: [
+    {
+        url: 'install-posthog-sdk',
+        value: 'Install the PostHog SDK',
+        depth: 1,
+    },
+    {
+        url: 'install-openai-sdk',
+        value: 'Install the OpenAI SDK',
+        depth: 1,
+    },
+    {
+        url: 'initialize-posthog-and-openai-client',
+        value: 'Initialize PostHog and OpenAI client',
+        depth: 1,
+    },
+    {
+        url: 'call-ollama',
+        value: 'Call Ollama',
+        depth: 1,
+    },
+    {
+        url: 'verify-traces-and-generations',
+        value: 'Verify traces and generations',
+        depth: 1,
+    },
+]
+---
+
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/llm-analytics/ollama.tsx
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
+-->
+
+import { OllamaInstallation } from 'onboarding/llm-analytics/ollama.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+
+<OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
+    <OllamaInstallation modifySteps={addNextStepsStep} />
+</OnboardingContentWrapper>

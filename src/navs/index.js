@@ -5046,6 +5046,62 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/installation/mirascope',
                         },
                         {
+                            name: 'Groq',
+                            url: '/docs/llm-analytics/installation/groq',
+                        },
+                        {
+                            name: 'Mistral',
+                            url: '/docs/llm-analytics/installation/mistral',
+                        },
+                        {
+                            name: 'Ollama',
+                            url: '/docs/llm-analytics/installation/ollama',
+                        },
+                        {
+                            name: 'DeepSeek',
+                            url: '/docs/llm-analytics/installation/deepseek',
+                        },
+                        {
+                            name: 'Amazon Bedrock',
+                            url: '/docs/llm-analytics/installation/bedrock',
+                        },
+                        {
+                            name: 'Together AI',
+                            url: '/docs/llm-analytics/installation/together-ai',
+                        },
+                        {
+                            name: 'Fireworks AI',
+                            url: '/docs/llm-analytics/installation/fireworks-ai',
+                        },
+                        {
+                            name: 'Azure OpenAI',
+                            url: '/docs/llm-analytics/installation/azure-openai',
+                        },
+                        {
+                            name: 'Cerebras',
+                            url: '/docs/llm-analytics/installation/cerebras',
+                        },
+                        {
+                            name: 'Perplexity',
+                            url: '/docs/llm-analytics/installation/perplexity',
+                        },
+                        {
+                            name: 'Portkey',
+                            url: '/docs/llm-analytics/installation/portkey',
+                        },
+                        {
+                            name: 'Cohere',
+                            url: '/docs/llm-analytics/installation/cohere',
+                        },
+                        {
+                            name: 'Hugging Face',
+                            url: '/docs/llm-analytics/installation/hugging-face',
+                        },
+                        {
+                            name: 'xAI',
+                            url: '/docs/llm-analytics/installation/xai',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                         },
