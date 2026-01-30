@@ -663,10 +663,6 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Changelog',
-                url: '/handbook/content/changelog',
-            },
-            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
                 children: [
@@ -713,6 +709,10 @@ export const handbookSidebar = [
             {
                 name: 'AI Wizard',
                 url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
             },
             {
                 name: 'Onboarding docs',
