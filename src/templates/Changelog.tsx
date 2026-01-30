@@ -172,7 +172,7 @@ const Roadmap = ({
 }) => {
     const { appWindow } = useWindow()
     const { isModerator, getJwt } = useUser()
-    const { addWindow } = useApp()
+    const { addWindow, websiteMode } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
@@ -223,7 +223,9 @@ const Roadmap = ({
 
     return (
         <motion.div
-            className="h-full border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
+            className={`border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden ${
+                websiteMode ? '' : 'shadow-2xl'
+            }`}
             initial={{ width: 0 }}
             animate={{ width: containerWidth }}
             exit={{ width: 0 }}
@@ -421,7 +423,7 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
-    const { addWindow } = useApp()
+    const { addWindow, websiteMode } = useApp()
     // Two-week buckets need to preserve the same overall per-month width, so each card spans two former week widths.
     const width = 600
 
@@ -651,7 +653,11 @@ const RoadmapCards = ({
     }
 
     return (
-        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
+        <ScrollArea
+            className={`size-full [&>div>div]:size-full [&>div>div]:!flex ${
+                websiteMode ? 'h-[80vh] max-h-[900px]' : ''
+            }`}
+        >
             <div className="h-full px-4">
                 <div
                     ref={containerRef}
