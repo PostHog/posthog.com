@@ -1,5 +1,5 @@
 ---
-date: 2025-03-11
+date: 2026-01-28
 title: 'In-depth: PostHog vs Mixpanel'
 rootPage: /blog
 sidebar: Blog
@@ -21,6 +21,12 @@ seo:
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import AskMax from 'components/AskMax'
 
+PostHog and [Mixpanel](/blog/best-mixpanel-alternatives) are both product analytics platforms helping teams understand user behavior and build better products. Both expanded beyond core analytics, but their approaches and feature sets differ.
+
+1. **Mixpanel** is a product analytics platform with session replay, heatmaps, A/B testing, and feature flags. It's built for product managers and growth teams who want deep behavioral insights.
+
+2. **PostHog** is an all-in-one platform for building successful products. On top of [product analytics](/product-analytics), it includes [error tracking](/error-tracking), [session replays](/session-replay), [experiments](/experiments), [feature flags](/feature-flags), [surveys](/surveys), [LLM analytics](/llm-analytics), an [AI assistant](/ai), and more. It's built for engineers and product teams who want everything in one place.
+
 ## How is PostHog different?
 
 ### 1. We're an all-in-one platform
@@ -34,9 +40,10 @@ PostHog puts all your data in one place and combines it with every tool you need
 -   **[Experiments](/experiments)** for verifying improvements to your product and website
 -   **[Error tracking](/error-tracking)** for monitoring exceptions and problems in your code
 -   **[Surveys](/surveys)** for capturing user feedback, tracking NPS, and booking interviews
+    **[LLM Analytics](/llm-analytics)** for understanding how users interact with AI features
 -   **A built-in [data warehouse](/data-warehouse)** for analyzing your business and event data together
 
-In other words, it's everything you need in one app with a single login and contract. A _genuine_ single source of truth for your product and customer data.
+In other words, it's [everything you need in one app](/products) with a single login and contract. A _genuine_ single source of truth for your product and customer data.
 
 ### 2. We build for developers
 
@@ -44,7 +51,13 @@ This means you get support from the engineers who _actually build the product_, 
 
 ### 3. We promise transparent and cheap pricing (forever)
 
-We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on outbound sales, or D-list comedians to host an annual convention you'll never attend. Our [pricing](/pricing) is also 100% transparent.
+We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on D-list comedians to host an annual convention you'll never attend. Our [pricing](/pricing) is also 100% transparent.
+
+<p>
+  <CallToAction to="https://posthog.com/docs">
+    Learn more about using PostHog
+  </CallToAction>
+</p>
 
 ## Comparing PostHog and Mixpanel
 
@@ -52,6 +65,7 @@ As an all-in-one-platform, PostHog isn't just [an alternative to Mixpanel](/blog
 
 ### Platform
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -74,13 +88,15 @@ As an all-in-one-platform, PostHog isn't just [an alternative to Mixpanel](/blog
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 > **Good to know:** If we don't have something you want now, there's a good chance we're planning on building it already. Visit [our public roadmap](/roadmap) to see what we're considering, and vote for features and products you're interested in. [We ship fast](/changelog/)!
 
 ### Product analytics
 
-PostHog and Mixpanel offer broadly similar product analytics features, including the ability to create insights using natural language.
+PostHog and Mixpanel offer broadly similar product analytics features, including the ability to [create insights using natural language](/ai).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -105,6 +121,7 @@ PostHog and Mixpanel offer broadly similar product analytics features, including
         'product_analytics.stickiness',
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -116,6 +133,7 @@ Our [generous free tier](/pricing) means every PostHog customer gets 1 million a
 
 PostHog is also a powerful [alternative to Google Analytics](/blog/ga4-alternatives) that bridges the gap between lightweight tools like [Plausible](/blog/best-plausible-alternatives), and expensive enterprise platforms like [Adobe Analytics](/blog/best-adobe-analytics-alternatives).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -134,6 +152,7 @@ PostHog is also a powerful [alternative to Google Analytics](/blog/ga4-alternati
         'web_analytics.features.web_vitals',
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -143,8 +162,9 @@ You can use the [PostHog toolbar](/docs/toolbar) to [view clickmaps, heatmaps, a
 
 ### Session replay
 
-PostHog's session replay can be used by anyone, but it includes numerous developer-level features that make it useful for engineers, product managers, and support engineers who want to diagnose issues, and identify potential improvements.
+PostHog [session replay](/session-replay) can be used by anyone, but it includes numerous developer-level features that make it useful for engineers, product managers, and support engineers who want to diagnose issues and identify potential improvements. Features include console logs, network request monitoring, a DOM explorer, performance metrics, and the ability to jump directly from errors or funnel drop-offs into relevant replays.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -169,11 +189,13 @@ PostHog's session replay can be used by anyone, but it includes numerous develop
         'session_replay.targeting.target_by_sample',
     ]}
 />
+</p>
 
 #### Library support for replays
 
-Mixpanel only recently introduced session replay, so its mobile SDKs are still in development. PostHog has wide support for all popular web and mobile SDKs.
+Both PostHog and Mixpanel offer broad SDK support for session replay across web and mobile platforms.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -194,10 +216,11 @@ Mixpanel only recently introduced session replay, so its mobile SDKs are still i
         },
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-You can use PostHog AI to chat with your recordings using natural language – e.g. "show me sessions over 5 minutes long" or "show me sessions from users in Belgium". You can also ask PostHog AI to summarize what happened during a session.
+You can use PostHog AI to chat with your recordings using natural language – e.g. "show me sessions over 5 minutes long" or "show me sessions from users in Belgium". You can also ask [PostHog AI](/ai) to summarize what happened during a session.
 
 </CalloutBox>
 
@@ -205,6 +228,7 @@ You can use PostHog AI to chat with your recordings using natural language – e
 
 Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). You can also use them to [control access to beta features](/docs/feature-flags/early-access-feature-management), and make [scheduled changes to your app](/docs/feature-flags/scheduled-flag-changes).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -226,6 +250,7 @@ Feature flags make it easy to roll out features to specific users or groups, and
         },
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -235,10 +260,9 @@ Our feature flags are tightly integrated with other tools, meaning you can targe
 
 ### Experiments
 
-Experiments in PostHog are billed with feature flags.
+Both PostHog and Mixpanel now offer native A/B testing and feature flags. PostHog has had experimentation longer and bills experiments together with feature flags. Mixpanel relaunched experimentation in late 2025 after previously deprecating it – their Experiments report is available as an Enterprise add-on.
 
-You **can't run A/B tests using Mixpanel**, but you can analyze the results of experiments created using third-party testing tools.
-
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -280,6 +304,7 @@ You **can't run A/B tests using Mixpanel**, but you can analyze the results of e
         'experiments.supported_tests.features.holdout_testing',
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -291,6 +316,7 @@ You can evaluate the results of experiments using events tracked using PostHog, 
 
 You can't build a successful product on data alone. Surveys are useful for [gathering feedback and booking interviews](/tutorials/feedback-interviews-site-apps), notifying users of changes, and keeping track of customer satisfaction metrics.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -335,6 +361,7 @@ You can't build a successful product on data alone. Surveys are useful for [gath
         },
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -358,7 +385,7 @@ As the below table shows, however, PostHog is cheaper than Mixpanel even if you'
 | <strong class="text-15px">0-1 million</strong> | Free                                                                                                | Free                                                                                                | &nbsp |
 | <strong class="text-15px">3 million</strong>   | <span class="text-[15px] font-semibold">$352</span><span class="text-sm opacity-70">/month</span>   | <span class="text-[15px] font-semibold">$378</span><span class="text-sm opacity-70">/month</span>   |
 | <strong class="text-15px">5 million</strong>   | <span class="text-[15px] font-semibold">$560</span><span class="text-sm opacity-70">/month</span>   | <span class="text-[15px] font-semibold">$612</span><span class="text-sm opacity-70">/month</span>   |
-| <strong class="text-15px">10 million</strong>  | <span class="text-[15px] font-semibold">$1,080</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,465</span><span class="text-sm opacity-70">/month</span> |
+| <strong class="text-15px">10 million</strong>  | <span class="text-[15px] font-semibold">$1,080</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,176</span><span class="text-sm opacity-70">/month</span> |
 | <strong class="text-15px">15 million</strong>  | <span class="text-[15px] font-semibold">$1,600</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,722</span><span class="text-sm opacity-70">/month</span> |
 | <strong class="text-15px">20 million</strong>  | <span class="text-[15px] font-semibold">$1,927</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$2,289</span><span class="text-sm opacity-70">/month</span> |
 
@@ -369,7 +396,7 @@ And it becomes even cheaper if 20% of your events are from anonymous users, whic
 | <strong class="text-15px">0-1 million</strong> | Free                                                                                                | Free                                                                                                | &nbsp |
 | <strong class="text-15px">3 million</strong>   | <span class="text-[15px] font-semibold">$310</span><span class="text-sm opacity-70">/month</span>   | <span class="text-[15px] font-semibold">$378</span><span class="text-sm opacity-70">/month</span>   |
 | <strong class="text-15px">5 million</strong>   | <span class="text-[15px] font-semibold">$490</span><span class="text-sm opacity-70">/month</span>   | <span class="text-[15px] font-semibold">$612</span><span class="text-sm opacity-70">/month</span>   |
-| <strong class="text-15px">10 million</strong>  | <span class="text-[15px] font-semibold">$940</span><span class="text-sm opacity-70">/month</span>   | <span class="text-[15px] font-semibold">$1,465</span><span class="text-sm opacity-70">/month</span> |
+| <strong class="text-15px">10 million</strong>  | <span class="text-[15px] font-semibold">$940</span><span class="text-sm opacity-70">/month</span>   | <span class="text-[15px] font-semibold">$1,176</span><span class="text-sm opacity-70">/month</span> |
 | <strong class="text-15px">15 million</strong>  | <span class="text-[15px] font-semibold">$1,391</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,722</span><span class="text-sm opacity-70">/month</span> |
 | <strong class="text-15px">20 million</strong>  | <span class="text-[15px] font-semibold">$1,783</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$2,289</span><span class="text-sm opacity-70">/month</span> |
 
@@ -380,7 +407,7 @@ We recommend tracking your marketing website and product in a single project, an
 | <strong class="text-15px">0-1 million</strong> | Free                                                                                              | Free                                                                                                | &nbsp |
 | <strong class="text-15px">3 million</strong>   | <span class="text-[15px] font-semibold">$84</span><span class="text-sm opacity-70">/month</span>  | <span class="text-[15px] font-semibold">$378</span><span class="text-sm opacity-70">/month</span>   |
 | <strong class="text-15px">5 million</strong>   | <span class="text-[15px] font-semibold">$153</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$612</span><span class="text-sm opacity-70">/month</span>   |
-| <strong class="text-15px">10 million</strong>  | <span class="text-[15px] font-semibold">$324</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,465</span><span class="text-sm opacity-70">/month</span> |
+| <strong class="text-15px">10 million</strong>  | <span class="text-[15px] font-semibold">$324</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,176</span><span class="text-sm opacity-70">/month</span> |
 | <strong class="text-15px">15 million</strong>  | <span class="text-[15px] font-semibold">$496</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$1,722</span><span class="text-sm opacity-70">/month</span> |
 | <strong class="text-15px">20 million</strong>  | <span class="text-[15px] font-semibold">$643</span><span class="text-sm opacity-70">/month</span> | <span class="text-[15px] font-semibold">$2,289</span><span class="text-sm opacity-70">/month</span> |
 
@@ -392,11 +419,11 @@ We recommend tracking your marketing website and product in a single project, an
 
 **Mixpanel** relies on data warehouse connectors to combine customer and product data. This means you don't import data directly from third-party tools. You need to get them into a third-party warehouse and then import that data into Mixpanel for analysis.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
         { product: 'data_warehouse' },
-        'platform.integrations.warehouse_import',
         'platform.integrations.stripe',
         'platform.integrations.zendesk',
         'platform.integrations.hubspot',
@@ -408,11 +435,13 @@ We recommend tracking your marketing website and product in a single project, an
         'platform.integrations.intercom',
     ]}
 />
+</p>
 
 See our docs for full lists of [destinations](/docs/cdp) and [data warehouse sources](/docs/cdp/sources).
 
 ### Security and compliance
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -425,6 +454,7 @@ See our docs for full lists of [destinations](/docs/cdp) and [data warehouse sou
         'platform.security.saml_sso',
     ]}
 />
+</p>
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
@@ -432,7 +462,164 @@ A Business Associate Agreement for HIPAA compliance is available for customers w
 
 </CalloutBox>
 
+## When to choose PostHog vs Mixpanel
+
+Choosing the right product analytics platform depends on your team's needs and technical depth. Here's a quick guide:
+
+- Want an all-in-one developer platform that goes beyond analytics with [error tracking](/docs/integrate/error-tracking), [LLM analytics](/llm-analytics), [feature flags](/feature-flags), and transparent pricing + a generous free tier to get you started? Go with **PostHog**.
+
+- Prefer a polished UI optimized for product managers and growth teams, with strong warehouse-native analytics? **Mixpanel** is a solid choice.
+
+## Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – SQL access, open-source codebase, and direct support from the engineers who build the product. Tightly integrated feature flags, experiments, and error tracking mean fewer tools to manage.
+
+**For product management teams**
+- **Mixpanel** – Purpose-built for non-technical users with a polished interface, metric trees for aligning teams on goals, and strong collaboration features.
+
+**For teams building AI products**
+- **PostHog** – Native [LLM analytics](/llm-analytics) for tracking AI usage, model performance, token costs, and debugging LLM interactions. Mixpanel doesn't offer AI observability.
+
+**For privacy-conscious and regulated organizations**
+- Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/data-warehouse). Both support SAML SSO on enterprise plans.
+
+**For early-stage startups**
+- **PostHog** – A single platform that scales from MVP to growth stage without rebuilding your stack. The generous free tier means you won't outgrow it quickly. [Startups can also qualify for $50k in free credits](/startups).
+
+| &nbsp;                            | **Free usage per month** |
+| --------------------------------- | ------------------------ |
+| **Product analytics**             | 1 million events         |
+| **Session replay**                | 5,000 recordings         |
+| **Feature flags and A/B testing** | 1 million API requests   |
+| **Surveys**                       | 1,500 responses          |
+| **Error tracking**                | 100k errors              |
+| **LLM analytics**                 | 100k events              |
+| **Data warehouse**                | 1 million synced rows    |
+
+<ArrayCTA />
+
 ## Frequently asked questions
+
+<details>
+    <summary>What's the difference between PostHog and Mixpanel?</summary>
+
+**Mixpanel** is a product analytics platform that has expanded to include session replay, heatmaps, A/B testing, and feature flags. It's optimized for product managers and growth teams. **PostHog** is a broader all-in-one platform that combines product analytics with error tracking, LLM analytics, surveys, and more – built primarily for engineering-led teams who want everything in one place.
+
+</details>
+
+<details>
+    <summary>Does PostHog replace Mixpanel?</summary>
+
+**Yes, for most teams.** PostHog offers all of Mixpanel's core analytics features (funnels, retention, cohorts, user paths) plus additional tools like error tracking, LLM analytics, and surveys. If you're an engineering-led team that values SQL access, open-source code, and transparent pricing, PostHog is a strong replacement.
+
+**Consider keeping Mixpanel if** your team is heavily invested in Mixpanel's metric trees for goal alignment, you prefer their polished UI for non-technical users, or you're using warehouse-native analytics with Mixpanel sitting directly on your data warehouse.
+
+</details>
+
+<details>
+    <summary>How much does Mixpanel cost?</summary>
+
+Mixpanel has three tiers:
+
+1. **Free:** 1M events/month, core analytics, limited features
+2. **Growth:** Starts ~$28/month per 10k events after, scales with volume
+3. **Enterprise:** Custom pricing, includes experiments, advanced features
+
+Add-ons like Group Analytics, Data Pipelines, and Experiments are separately priced. Session Replay is included but limited by recording count. For comparison, PostHog's [pricing](/pricing) is fully transparent with no hidden add-on costs.
+
+</details>
+
+<details>
+    <summary>Which has better session replay – PostHog or Mixpanel?</summary>
+
+Both offer solid session replay with web and mobile support. **PostHog** includes more developer-focused features like console logs, network request monitoring, DOM explorer, and performance metrics. **Mixpanel** added AI-powered replay summaries and heatmap comparison mode in late 2025. PostHog's free tier includes 5,000 replays/month; Mixpanel's replay limits depend on your plan.
+
+</details>
+
+<details>
+    <summary>Can I use PostHog and Mixpanel together?</summary>
+
+Yes, though most teams find it redundant. If you're migrating gradually, you can run both in parallel. PostHog can also receive data from Mixpanel via our [Mixpanel to PostHog migration guide](/docs/migrate/mixpanel), or you can send PostHog data to Mixpanel using our [CDP](/docs/cdp).
+
+</details>
+
+<details>
+    <summary>What are the best all-in-one product analytics tools in 2026?</summary>
+
+The top all-in-one product analytics platforms in 2026 include:
+
+- **PostHog** – Best for engineering-led teams wanting analytics, session replay, feature flags, experiments, error tracking, LLM analytics, and surveys in one place
+- **Mixpanel** – Best for product managers wanting polished analytics with session replay, heatmaps, and A/B testing
+- **Amplitude** – Best for enterprise teams wanting deep behavioral analytics with warehouse-native queries
+- **Pendo** – Best for product teams wanting analytics combined with in-app guides, feedback, and roadmap tools
+- **Heap** – Best for teams wanting comprehensive autocapture with minimal instrumentation
+- **LogRocket** – Best for frontend teams wanting session replay with error tracking and performance monitoring
+
+</details>
+
+<details>
+    <summary>Which is better for B2B SaaS – PostHog or Mixpanel?</summary>
+
+Both support group/account-level analytics for B2B use cases. **Mixpanel** recently added Account Profiles and Activation Metrics specifically for B2B analysis (requires Group Analytics add-on). **PostHog** includes [group analytics](/docs/product-analytics/group-analytics) on all plans, plus you can connect it to CRM data via the built-in [data warehouse](/data-stack). PostHog is often preferred by B2B teams that also need feature flags and experiments for enterprise rollouts.
+
+</details>
+
+<details>
+    <summary>Does Mixpanel have feature flags?</summary>
+
+Yes, as of late 2025. Mixpanel relaunched feature flags alongside their Experimentation 2.0 release. However, feature flags are newer in Mixpanel compared to PostHog, which has had them longer with more mature functionality like local evaluation, bootstrapping, early access management, and scheduling.
+
+</details>
+
+<details>
+    <summary>Does Mixpanel have error tracking?</summary>
+
+No. Mixpanel does not offer error tracking or crash reporting. If you need to monitor exceptions alongside your analytics, you'd need a separate tool like Sentry or Bugsnag. **PostHog** includes [error tracking](/error-tracking) natively, connected to session replays and user behavior data.
+
+</details>
+
+<details>
+    <summary>Does Mixpanel have LLM analytics?</summary>
+
+No. Mixpanel doesn't offer AI/LLM observability features. **PostHog** includes [LLM analytics](/llm-analytics) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions – useful for teams building AI-powered features.
+
+</details>
+
+<details>
+    <summary>Which is easier to set up – PostHog or Mixpanel?</summary>
+
+Both are designed for quick implementation. **PostHog** offers an [AI install wizard](/docs/getting-started/install?tab=wizard) that gets you running in under 90 seconds, plus autocapture that starts collecting events immediately. **Mixpanel** also supports autocapture and has straightforward SDK installation. The main difference is PostHog's broader feature set means there's more to explore, but you can adopt features incrementally.
+
+</details>
+
+<details>
+    <summary>Which has better data warehouse integration?</summary>
+
+Different approaches. **Mixpanel** offers warehouse-native analytics – it can sit on top of Snowflake, BigQuery, or Databricks and query your data directly. **PostHog** has a built-in [data warehouse](/data-warehouse) that imports data from external sources (Stripe, Zendesk, Hubspot, or your own warehouse) so you can analyze business and product data together. Mixpanel's approach is better if you want to keep data in your warehouse; PostHog's is better if you want a single platform for analysis.
+
+</details>
+
+<details>
+    <summary>How do I reduce costs on PostHog vs Mixpanel?</summary>
+
+**PostHog** charges up to 80% less for anonymous events, so tracking your marketing website anonymously significantly reduces costs. You can also set billing limits per product to avoid surprises. **Mixpanel** charges the same rate for all events. Both offer free tiers (PostHog: 1M events; Mixpanel: 1M events with credit card). See our [pricing page](/pricing) for a detailed calculator.
+
+</details>
+
+<details>
+    <summary>Which has better support?</summary>
+
+**PostHog** offers direct support from the engineers who build the product – you can often get help from the person who wrote the code you're asking about. We also have active [community forums](/questions) and extensive [documentation](/docs). **Mixpanel** has traditional tiered support with faster response times on higher plans.
+
+</details>
+
+<details>
+    <summary>Is PostHog or Mixpanel better for startups?</summary>
+
+**PostHog** is generally better for early-stage startups. The generous free tier covers most startup needs, and the [PostHog for Startups](/startups) program offers $50k in additional credits. More importantly, you get a single platform that scales from MVP to growth stage without needing to add tools as you grow. Mixpanel also has a startup program, but you may need additional tools for feature flags, experiments, error tracking, and surveys.
+
+</details>
 
 <details>
     <summary>Can I migrate my data from Mixpanel to PostHog?</summary>
@@ -453,16 +640,7 @@ See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and
 <details>
     <summary>What's included in PostHog's free tier?</summary>
 
-Every PostHog user gets a generous amount of free usage each month:
-
-| &nbsp;                | **Free usage per month** |
-| --------------------- | ------------------------ |
-| **Product analytics** | 1 million events         |
-| **Data warehouse**    | 1 million synced rows    |
-| **Session replay**    | 5,000 recordings         |
-| **Feature flags**     | 1 million API requests   |
-| **A/B testing**       | 1 million API requests   |
-| **Surveys**           | 1500 responses           |
+Every PostHog user gets a generous amount of free usage each month: 1 million events for product analytics, 1 million synced rows for the data warehouse, 5,000 session recordings, 1 million API requests each for feature flags and A/B testing, and 1,500 survey responses.
 
 You'll never pay anything if you stay within these limits and you can set billing limits to avoid surprise bills.
 
@@ -473,7 +651,9 @@ A full breakdown and pricing calculator is on [our pricing page](/pricing).
 <details>
     <summary>Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)</summary>
 
-Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+Yes. **PostHog** includes a [built-in CDP](/cdp) that lets you import, transform, and export data without needing a separate tool. You can also integrate PostHog with third-party CDPs like Segment and Rudderstack. 
+
+See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for setup instructions, or browse our comparison of the [best customer data platforms for developers](/blog/best-customer-data-platforms-for-developers) if you're evaluating options.
 
 </details>
 
