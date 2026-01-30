@@ -59,16 +59,18 @@ Beyond optimization, we offer discounts based on four levers:
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 
+**If timelines change:** We handle extensions on a case-by-case basis. The goal of this lever is predictability for both sides, not artificial pressure. If circumstances genuinely change, we'll discuss it when it arises - but we also want to maintain the integrity of mutual commitments so this discount remains meaningful.
+
 > You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
 
 ### Platform adoption bonus credits
 
-**Multi-product credit:** Get 5% bonus credits when you use 3+ PostHog products at $1,000+/month each
+**Multi-product credit:** Get 2.5% bonus credits when you use 3+ PostHog products at $100+/month each
 - Applied at contract start for products included in the agreement
 
-**Expansion credit:** Existing customers get an extra 5% of remaining contract value when adopting each new product
-- Product must exceed $1,000/month for 3 consecutive months
-- Maximum 20% total (4 products)
+**Expansion credit:** Existing customers get an extra 2.5% of remaining contract value when adopting each new product
+- Product must exceed $100/month for 3 consecutive months
+- Maximum 10% total (4 products)
 
 *Why: Platform customers have better outcomes and lower churn. We are more invested in their success.*
 
@@ -83,9 +85,9 @@ No mutual timing agreement
 = 25% discount
 
 Using 3 products (Analytics, Replay, Feature Flags)
-Each product >$1,000/month usage
-= Additional 3% bonus credits ($1,800)
-Total value: $60,000 + $1,800 = $61,800 in credits
+Each product >$100/month usage
+= Additional 2.5% bonus credits ($1,500)
+Total value: $60,000 + $1,500 = $61,500 in credits
 ```
 
 **Example 2: Strategic multi-year platform deal**
@@ -94,12 +96,12 @@ $250,000 in credits
 3-year commitment (+5%)
 All paid upfront (+7.5% for 3 years upfront)
 Early renewal commitment (+5%)
-= 35% + 5% + 7.5% + 5% = 45% discount (max)
+= 35% + 5% + 7.5% + 5% = 52.5% discount
 
 Using full platform (6+ products)
-Each product >$1,000/month usage
-= Additional 10% bonus credits ($25,000)
-Total value: $250,000 + $25,000 = $275,000 in credits
+Each product >$100/month usage
+= Additional 2.5% bonus credits ($6,250)
+Total value: $250,000 + $6,250 = $256,250 in credits
 ```
 
 Pre-paid discounts require upfront payment (Net 30). We do not currently offer quarterly or split payment terms for discounted contracts. Extended payment terms reduce discounts as they impact our cash flow.
