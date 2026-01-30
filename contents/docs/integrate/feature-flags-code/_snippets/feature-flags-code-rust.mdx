@@ -5,8 +5,6 @@ There are 2 steps to implement feature flags in Rust:
 #### Boolean feature flags
 
 ```rust
-use posthog_rs::FlagValue;
-
 let is_enabled = client.is_feature_enabled(
     "flag-key".to_string(),
     "distinct_id_of_your_user".to_string(),
@@ -45,6 +43,8 @@ match client.get_feature_flag(
     }
 }
 ```
+
+### Step 2: Include feature flag information in your events
 
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 

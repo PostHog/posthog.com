@@ -260,6 +260,12 @@ PostHog::loadFlags()
 posthog.reloadFeatureFlags()
 ```
 
+```rust
+// The Rust SDK automatically reloads flags in the background
+// at the interval specified by poll_interval_seconds (default: 30).
+// Manual reload is not currently supported.
+```
+
 </MultiLanguage>
 
 ## Restriction on local evaluation

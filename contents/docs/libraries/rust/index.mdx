@@ -32,8 +32,6 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 ### Boolean feature flags
 
 ```rust
-use posthog_rs::FlagValue;
-
 let is_enabled = client.is_feature_enabled(
     "flag-key".to_string(),
     "distinct_id_of_your_user".to_string(),

@@ -3881,6 +3881,10 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/dotnet',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/experiments/installation/rust',
+                        },
+                        {
                             name: 'Angular',
                             url: '/docs/experiments/installation/angular',
                         },
