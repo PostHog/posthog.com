@@ -663,10 +663,6 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Changelog',
-                url: '/handbook/content/changelog',
-            },
-            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
                 children: [
@@ -713,6 +709,10 @@ export const handbookSidebar = [
             {
                 name: 'AI Wizard',
                 url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
             },
             {
                 name: 'Onboarding docs',
@@ -1354,7 +1354,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
                     {
-                        name: 'Inbound sales',
+                        name: 'New business sales',
                         url: '/handbook/growth/sales/new-sales',
                     },
                     {
@@ -4609,6 +4609,55 @@ export const docsMenu = {
                 },
             ],
         },
+        {
+            name: 'Support',
+            url: '/docs/support',
+            icon: 'IconSupport',
+            color: 'teal',
+            description: 'Built-in customer support with chat widget, inbox, and session context',
+            children: [
+                {
+                    name: 'Support',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support',
+                    icon: 'IconHome',
+                    color: 'teal',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/support/start-here',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'teal',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Widget setup',
+                    url: '/docs/support/widget',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'JavaScript API',
+                    url: '/docs/support/javascript-api',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
+                    name: 'Inbox management',
+                    url: '/docs/support/inbox',
+                    icon: 'IconInbox',
+                    color: 'orange',
+                },
+            ],
+        },
         ...[dataPipelines],
         {
             name: 'Data warehouse',
@@ -5636,6 +5685,12 @@ export const docsMenu = {
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/logs/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },

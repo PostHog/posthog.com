@@ -94,5 +94,5 @@ If you need images, there is a <PrivateLink url="https://www.figma.com/design/Hw
 
 We tried to run LinkedIn and Reddit ads for the newsletter but both were unsuccessful. Here's what we found:
 
-- LinkedIn is too expensive. Cost per link clicks were north of $5, about 10x-20x more expesnvie than meta ads
+- LinkedIn is too expensive. Cost per link clicks were north of $5, about 10x-20x more expensive than meta ads
 - Reddit ads had CPCs similar to meta ads, but converted at a significantly lower rate (about 20x worse), meaning that cost per sign up was between $50-$90.
