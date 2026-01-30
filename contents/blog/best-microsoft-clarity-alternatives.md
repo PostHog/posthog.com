@@ -59,7 +59,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use PostHog?
 
 According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
@@ -119,7 +119,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use LogRocket?
 
 Reviews on G2.com suggest companies use LogRocket because it:
@@ -179,7 +179,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use FullStory?
 
 According to reviews on G2, companies use FullStory for:
@@ -237,7 +237,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use UXCam?
 
 According to G2 reviews, UXCam helps companies:
@@ -299,7 +299,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use Lucky Orange?
 
 According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.html), because:
@@ -359,7 +359,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use Hotjar?
 
 According to G2 reviews, users are fans of Hotjar because:
@@ -419,7 +419,7 @@ rows={[
 'surveys',
 ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Why do companies use Mouseflow?
 
 Based on reviews from G2.com, customers use Mouseflow because they:

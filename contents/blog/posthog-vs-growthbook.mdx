@@ -83,7 +83,7 @@ Both PostHog and GrowthBook have the infrastructure to use flags and experiments
         'web_analytics',
     ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Feature flags
 
 Both PostHog and GrowthBook offer all the functionality you expect from feature flags.
@@ -101,7 +101,7 @@ Both PostHog and GrowthBook offer all the functionality you expect from feature 
         'feature_flags.implementation.features.bootstrapping',
     ]}
 />
-
+<ProductComparisonDisclaimer />
 -   **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/person-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
 -   **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
@@ -129,7 +129,7 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
         'experiments.features.visual_editor',
     ]}
 />
-
+<ProductComparisonDisclaimer />
 -   **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
 ![Recommended run time calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-growthbook/runtime.png)
@@ -157,7 +157,7 @@ PostHog provides all the visualizations and product tools for evaluating the suc
         { label: 'Non-flag data', description: 'Combine flag data with other product data', values: [true, false] },
     ]}
 />
-
+<ProductComparisonDisclaimer />
 ### Pricing
 
 <ProductComparisonTable
@@ -170,7 +170,7 @@ PostHog provides all the visualizations and product tools for evaluating the suc
         { label: 'Fully transparent', values: [true, false] },
     ]}
 />
-
+<ProductComparisonDisclaimer />
 PostHog’s [feature flag pricing](/feature-flags#pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
 ![Pricing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-growthbook/pricing.png)
@@ -256,7 +256,7 @@ GrowthBook has integrations with data warehouses and analytics tools they rely o
         'platform.integrations.datadog',
     ]}
 />
-
+<ProductComparisonDisclaimer />
 [PostHog’s event-based structure](/docs/how-posthog-works/data-model) enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too. For example, you can import data from [warehouses](/docs/data-warehouse), [no-code site builders](/tutorials/webflow-ab-tests), [Segment](/docs/cdp/segment), and more.
 
 ### Security and compliance
@@ -275,7 +275,7 @@ Both PostHog and GrowthBook enable companies to remain secure and compliant with
         'platform.security.saml_sso',
     ]}
 />
-
+<ProductComparisonDisclaimer />
 ## Frequently asked questions
 
 ### Who is PostHog useful for?
