@@ -183,10 +183,9 @@ We try to keep moves infrequent and when needed. We anticipate moving people rou
 There are two scenarios that will trigger a move:
 
 -   The small team may realize they no longer need someone, or that they could really do with someone currently in another small team internally.
-
 -   An individual team member may wish to move in order to develop their skills or experience.
 
-It is at the discretion of the _manager_ of that person if they can move.
+It is **very important** to raise any desire for a team change with your relevant [teams/blitzscale](Blitzscale team) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. 
 
 ### Aren't most small teams way too small?
 
