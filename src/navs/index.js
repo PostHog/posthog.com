@@ -712,7 +712,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'How to write product docs',
-                url: '/handbook/docs-and-wizard/product-docs-structure',
+                url: '/handbook/docs-and-wizard/writing-product-docs',
             },
             {
                 name: 'AI Wizard',
