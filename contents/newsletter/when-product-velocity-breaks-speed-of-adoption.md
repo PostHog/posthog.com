@@ -1,6 +1,6 @@
 ---
 title: What to do when product velocity breaks the speed of adoption
-date: 2026-01-11
+date: 2026-01-31
 author:
   - cleo-lant
 featuredImage: >-
@@ -184,7 +184,7 @@ Some companies extend this into events and initiatives adjacent to their product
 
 Yes, you're building a product, but you can also be a good citizen,[create spaces](/handbook/people/hogpatch) for others to thrive, help your community without expecting anything back. Do this with good will, and trust you gain will yield larger dividends than any marketing campaign. 
 
->HubSpot pioneered inbound marketing by teaching people how to be better marketers before selling them software. For many young professionals, that learning happened years before any purchasing decision — and by then, brand equity was already baked in.
+>**What this looks like:** HubSpot pioneered inbound marketing by teaching people how to be better marketers before selling them software. For many young professionals, that learning happened years before any purchasing decision — and by then, brand equity was already baked in.
 
 ## Fast, not frantic
 
