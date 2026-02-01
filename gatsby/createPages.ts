@@ -44,6 +44,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         regex: "/^((?!contents/teams/|contents/about.mdx|contents/media-contents.mdx).)*$/"
                     }
                     frontmatter: { title: { nin: [""] }, template: { nin: ["custom"] } }
+                    fields: {
+                        slug: {
+                            regex: "/^(?!/handbook/|/docs/|/manual/|/tutorials/|/apps/|/cdp/|/templates/|/customers/|/blog/|/library/|/founders/|/product-engineers/|/features/|/newsletter/|/spotlight/).*/"
+                        }
+                    }
                 }
             ) {
                 nodes {
