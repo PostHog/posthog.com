@@ -8,14 +8,14 @@ import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
-// Docs preview mode: Only build /docs and /handbook pages
-const isDocsPreview = process.env.GATSBY_DOCS_PREVIEW === 'true'
+// Content preview mode: Build content pages without external data sources
+const isContentPreview = process.env.GATSBY_CONTENT_PREVIEW === 'true'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    // In docs preview mode, use a simplified page creation flow
-    if (isDocsPreview) {
-        console.log('📚 Docs preview mode: Only creating /docs and /handbook pages')
-        return createDocsPreviewPages({ createPage, graphql })
+    // In content preview mode, use a simplified page creation flow
+    if (isContentPreview) {
+        console.log('📚 Content preview mode: Creating content pages only')
+        return createContentPreviewPages({ createPage, graphql })
     }
 
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
@@ -950,10 +950,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 }
 
 /**
- * Simplified page creation for docs preview mode
- * Only builds /docs and /handbook pages - no external data sources needed
+ * Simplified page creation for content preview mode
+ * Builds content pages (docs, handbook, tutorials, customers, blog, library, spotlights)
+ * without external data sources
  */
-async function createDocsPreviewPages({
+async function createContentPreviewPages({
     createPage,
     graphql,
 }: {
@@ -961,6 +962,7 @@ async function createDocsPreviewPages({
     graphql: Parameters<GatsbyNode['createPages']>[0]['graphql']
 }) {
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const Slugger = require('github-slugger')
 
     const result = await graphql(`
@@ -975,7 +977,6 @@ async function createDocsPreviewPages({
                     fields {
                         slug
                     }
-                    rawBody
                 }
             }
             handbook: allMdx(
@@ -990,14 +991,91 @@ async function createDocsPreviewPages({
                     fields {
                         slug
                     }
-                    rawBody
+                }
+            }
+            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            blogPosts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/blog/" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            libraryArticles: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/library|^/founders|^/product-engineers|^/features|^/newsletter/" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            spotlights: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/spotlight/" } }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
                 }
             }
         }
     `)
 
     if (result.errors) {
-        console.error('Error in docs preview GraphQL query:', result.errors)
+        console.error('Error in content preview GraphQL query:', result.errors)
         return Promise.reject(result.errors)
     }
 
@@ -1016,7 +1094,7 @@ async function createDocsPreviewPages({
         })
     }
 
-    function createPreviewPosts(data: any[], menuName: string, breadcrumbBase: { name: string; url: string }) {
+    function createHandbookPreviewPosts(data: any[], menuName: string, breadcrumbBase: { name: string; url: string }) {
         data.forEach((node) => {
             const slug = node.fields?.slug
             if (!slug) return
@@ -1045,6 +1123,30 @@ async function createDocsPreviewPages({
                     links: [],
                     nextURL: '',
                 },
+                defer: true,
+            })
+        })
+    }
+
+    function createBlogPreviewPosts(data: any[], askMax: boolean = false) {
+        data.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) return
+
+            const tableOfContents = node.headings && formatToc(node.headings)
+
+            createPage({
+                path: replacePath(slug),
+                component: BlogPostTemplate,
+                context: {
+                    id: node.id,
+                    tableOfContents,
+                    slug,
+                    post: true,
+                    article: true,
+                    ...(askMax ? { askMax: true } : {}),
+                },
+                defer: true,
             })
         })
     }
@@ -1052,13 +1154,33 @@ async function createDocsPreviewPages({
     const data = result.data as {
         docs: { nodes: any[] }
         handbook: { nodes: any[] }
+        tutorials: { nodes: any[] }
+        customers: { nodes: any[] }
+        blogPosts: { nodes: any[] }
+        libraryArticles: { nodes: any[] }
+        spotlights: { nodes: any[] }
     }
 
     console.log(`📚 Creating ${data.docs.nodes.length} docs pages`)
-    createPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+    createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
 
     console.log(`📚 Creating ${data.handbook.nodes.length} handbook pages`)
-    createPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
 
-    console.log('📚 Docs preview pages created successfully')
+    // console.log(`📚 Creating ${data.tutorials.nodes.length} tutorial pages`)
+    // createBlogPreviewPosts(data.tutorials.nodes, true)
+
+    console.log(`📚 Creating ${data.customers.nodes.length} customer pages`)
+    createBlogPreviewPosts(data.customers.nodes)
+
+    console.log(`📚 Creating ${data.blogPosts.nodes.length} blog pages`)
+    createBlogPreviewPosts(data.blogPosts.nodes)
+
+    console.log(`📚 Creating ${data.libraryArticles.nodes.length} library pages`)
+    createBlogPreviewPosts(data.libraryArticles.nodes)
+
+    console.log(`📚 Creating ${data.spotlights.nodes.length} spotlight pages`)
+    createBlogPreviewPosts(data.spotlights.nodes)
+
+    console.log('📚 Preview pages created successfully')
 }

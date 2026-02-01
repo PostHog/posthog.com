@@ -20,8 +20,10 @@ const query = (params: any, offset: number) => {
 }
 
 export const usePosts = ({ params }: { params?: any }) => {
+    const isBrowser = typeof window !== 'undefined'
+
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, offset)}`,
+        (offset) => (isBrowser ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, offset)}` : null),
         (url: string) => fetch(url).then((r) => r.json())
     )
     const posts = React.useMemo(() => {

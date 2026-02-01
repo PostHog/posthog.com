@@ -10,8 +10,8 @@ export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
-    // For docs preview builds, remove all pages first
-    if (process.env.GATSBY_DOCS_PREVIEW === 'true') {
+    // For content preview builds, remove all pages first
+    if (process.env.GATSBY_CONTENT_PREVIEW === 'true') {
         const pagesDir = path.resolve(__dirname, '../src/pages')
         if (fs.existsSync(pagesDir)) {
             const files = fs.readdirSync(pagesDir)
@@ -19,7 +19,7 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) =>
                 const filePath = path.join(pagesDir, file)
                 fs.rmSync(filePath, { recursive: true, force: true })
             }
-            console.log('Cleared src/pages for docs preview build')
+            console.log('Cleared src/pages for content preview build')
         }
     }
 
