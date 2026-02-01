@@ -8,7 +8,16 @@ import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
+// Docs preview mode: Only build /docs and /handbook pages
+const isDocsPreview = process.env.GATSBY_DOCS_PREVIEW === 'true'
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+    // In docs preview mode, use a simplified page creation flow
+    if (isDocsPreview) {
+        console.log('📚 Docs preview mode: Only creating /docs and /handbook pages')
+        return createDocsPreviewPages({ createPage, graphql })
+    }
+
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
@@ -938,4 +947,118 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
         })
     })
+}
+
+/**
+ * Simplified page creation for docs preview mode
+ * Only builds /docs and /handbook pages - no external data sources needed
+ */
+async function createDocsPreviewPages({
+    createPage,
+    graphql,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    graphql: Parameters<GatsbyNode['createPages']>[0]['graphql']
+}) {
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const Slugger = require('github-slugger')
+
+    const result = await graphql(`
+        {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    rawBody
+                }
+            }
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    rawBody
+                }
+            }
+        }
+    `)
+
+    if (result.errors) {
+        console.error('Error in docs preview GraphQL query:', result.errors)
+        return Promise.reject(result.errors)
+    }
+
+    const menuFlattened = flattenMenu(menu)
+
+    function formatToc(headings: Array<{ depth: number; value: string }>) {
+        const slugger = new Slugger()
+        return headings.map((heading) => {
+            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
+            return {
+                ...heading,
+                depth: heading.depth - 2,
+                url: slugger.slug(cleanValue),
+                value: cleanValue,
+            }
+        })
+    }
+
+    function createPreviewPosts(data: any[], menuName: string, breadcrumbBase: { name: string; url: string }) {
+        data.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) return
+
+            const tableOfContents = node.headings && formatToc(node.headings)
+            let breadcrumb = null
+
+            menuFlattened.some((item) => {
+                if (item.url === slug) {
+                    breadcrumb = [...item.breadcrumb]
+                    return true
+                }
+                return false
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: HandbookTemplate,
+                context: {
+                    id: node.id,
+                    breadcrumb,
+                    breadcrumbBase,
+                    tableOfContents,
+                    slug,
+                    searchFilter: menuName,
+                    links: [],
+                    nextURL: '',
+                },
+            })
+        })
+    }
+
+    const data = result.data as {
+        docs: { nodes: any[] }
+        handbook: { nodes: any[] }
+    }
+
+    console.log(`📚 Creating ${data.docs.nodes.length} docs pages`)
+    createPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+
+    console.log(`📚 Creating ${data.handbook.nodes.length} handbook pages`)
+    createPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+
+    console.log('📚 Docs preview pages created successfully')
 }
