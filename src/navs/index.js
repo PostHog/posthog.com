@@ -692,11 +692,15 @@ export const handbookSidebar = [
     },
     {
         name: 'Docs & Wizard',
-        url: '/handbook/docs-and-wizard/overview',
+        url: '/handbook/docs-and-wizard',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/docs-and-wizard/overview',
+                url: '/handbook/docs-and-wizard',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
             },
             {
                 name: 'Wizard',
@@ -727,10 +731,6 @@ export const handbookSidebar = [
             {
                 name: 'How to write product docs',
                 url: '/handbook/docs-and-wizard/writing-product-docs',
-            },
-            {
-                name: 'How to publish changelog',
-                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
             },
             {
                 name: 'Onboarding docs',
