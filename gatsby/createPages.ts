@@ -1123,7 +1123,6 @@ async function createContentPreviewPages({
                     links: [],
                     nextURL: '',
                 },
-                defer: true,
             })
         })
     }
@@ -1146,7 +1145,6 @@ async function createContentPreviewPages({
                     article: true,
                     ...(askMax ? { askMax: true } : {}),
                 },
-                defer: true,
             })
         })
     }
