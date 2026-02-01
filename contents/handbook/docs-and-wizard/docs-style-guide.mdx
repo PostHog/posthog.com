@@ -1,155 +1,289 @@
 ---
-title: Docs style guide
+title: Style guide for writing docs
 sidebar: Handbook
 showTitle: true
 ---
 
-First, you should start with two assumptions about our users:
+First, you should start with two assumptions about our users.
 
-1. They're busy and don't have time to read long docs.
+1. They're busy and have limited time.
 2. They're not experts and don't know what we know.
 
-This means our docs should be:
+This style guide helps you write docs based on these assumptions. 
 
--   As short and to the point as possible.
--   Easy enough to understand so that a new user can read it and get what they need.
+These are *guidelines*, not rules. They exist to keep our docs consistent and polished, but good judgement matters more than strict adherence when you're writing. If something makes the docs clearer, more helpful, or just plain better, do it. 
 
-This style guide helps you write docs based on these assumptions.
+<CalloutBox type="fyi" title="Tools to enforce style">
 
-## Using LLMs to enforce style
+Tools like Vale and LLMs are effective at catching style guide violations that humans often miss. Use them to check your writing against this entire guide.
 
-LLMs are effective at catching style guide violations that humans often miss. Consider using them to check your writing against this entire guide.
+</CalloutBox>
+
+See the [style guide](/handbook/content/style-guide) from the <SmallTeam slug="editorial" /> for additional writing advice.
+
+---
 
 ## Voice and tone
 
-Address the reader directly using "you" instead of "the user", "developers", or "we".
+### Address the reader directly
 
-> **Do** - "You can create an insight by clicking **New insight**"
+Address the reader directly using "you" instead of "the user", "developers", or "we". 
 
-> **Don't** - "Users can create insights"
+> **Do**: "You can create an insight by clicking **New insight**."
 
-### Use present tense
+> **Don't**: "Users can create insights."
 
-Write in present tense. Avoid future tense unless specifically discussing future events.
+Use the imperative form and drop the "you" when giving instructions, commands, or guidance.
 
-> **Do** - "The insight displays your data"
-
-> **Don't** - "The insight will display your data"
+> **Do**: "Create an insight by clicking **New insight**"
 
 ### Use active voice
 
 Active voice makes it clear who or what performs an action.
 
-> **Do** - "PostHog captures events automatically"
+> **Do**: "PostHog captures events automatically."
 
-> **Don't** - "Events are captured automatically by PostHog"
+> **Don't**: "Events are captured automatically by PostHog."
 
 Exception: Use passive voice when the actor is unknown or unimportant.
 
-> **Acceptable** - "The data is encrypted at rest"
+> **Acceptable**: "The data is encrypted at rest."
+
+### Use present tense
+
+Write in present tense. Avoid future tense unless you are explicitly describing future behavior or outcomes.
+
+> **Do**: "The insight displays your data."
+
+> **Don't**: "The insight will display your data."
 
 ### Be concise
 
-Remove unnecessary words. Every sentence should add value.
+Remove unnecessary words. Every clause should add either value or clarity. 
 
-> **Do** - "Click **Save**"
+> **Do**: "Click **Save**"
 
-> **Don't** - "Now you can go ahead and click the **Save** button to save your changes"
+> **Don't**: "Now you can go ahead and click the **Save** button to save your changes"
 
-### Avoid jargon and explain technical terms
+### Avoid unexplained jargon
 
-When you must use technical terms, explain them on first use or link to a definition.
+When you introduce technical terms or acronyms, explain them on first use or link to a definition. Don't assume the reader knows what you're talking about.
 
-> **Do** - "Create a [cohort](/docs/data/cohorts) to analyze behavior. A cohort is a group of users who share common properties."
+> **Do**: "Create a [cohort](/docs/data/cohorts) to analyze behavior. A cohort is a group of users who share common properties."
 
-> **Do** - "Create a [cohort](/docs/data/cohorts)—a group of users who share common properties—to analyze behavior."
+> **Do**: "Create a [cohort](/docs/data/cohorts) — a group of users who share common properties — to analyze behavior."
+
+> **Don't**: "Enable LTV analysis by configuring your CDP and syncing cohort data to the warehouse."
+
+### Contractions
+
+Use contractions to maintain a conversational tone. 
+
+> **Do**: "That's it. The experiment is running."
+
+> **Don't**: "That is it. The experiment is running."
+
+---
 
 ## Product terminology
 
-### How to refer to PostHog Cloud vs self-hosted
+### Capitalize product names
 
-- **PostHog**: Use by default. This refers to our cloud product. Most users are on cloud, so don't specify "Cloud" unless differentiating from self-hosted.
-- **PostHog Cloud**: Only use when explicitly differentiating cloud features from self-hosted deployments.
-- **Self-hosted PostHog** or **hobby deployments**: Use when referring to self-hosted installations.
+Always capitalize PostHog product names as proper nouns. Use "Product Analytics", not "product analytics".
 
-> **Do** - "Go to **Insights** in the PostHog app and click **New insight**."
+> **Do**: "Use Session Replay to understand user behavior."
 
-> **Do** - "This feature is only available in PostHog Cloud."
+> **Don't**: "Use session replay to understand user behavior."
 
-> **Don't** - "To create an insight in PostHog Cloud, go to the **Insights** tab."
+However, if you're referring to the general industry term or a feature that isn't specific to PostHog, use lowercase. For examples: "many companies offer product analytics."
 
-### Product and feature names
+### PostHog platform
 
-Always capitalize PostHog product names.
+| Platform term | Description |
+|---------------|-------------|
+| **PostHog** | Use by default. Refers to our cloud platform. Most users are on cloud, so do not specify "Cloud" unless differentiating from self-hosted. |
+| **PostHog Cloud** | Only use when explicitly differentiating cloud features from self-hosted deployments. |
+| **Self-hosted PostHog** or **hobby deployments** | Use when referring to self-hosted installations. |
 
-## Content structure
+> **Do**: "Go to **Insights** in the PostHog app and click **New insight**."
 
-### Start with the most important information
+> **Do**: "This feature is only available on PostHog Cloud."
 
-Lead with what readers need to know. For familiar concepts, start with the action. For unfamiliar terms, provide brief context first.
+> **Don't**: "To create an insight on PostHog Cloud, go to the **Insights** tab."
 
-You can also split content into sections—one with the definition, one with instructions—to improve scannability.
+---
 
-> **Do** - "Click **New insight** to create an insight. Insights help you visualize your data."
+## Grammar and mechanics
 
-> **Do** - "Cohorts are groups of users who share a property. Use them to compare behavior across segments."
+### Use American English
 
-> **Don't** - "Insights are a powerful way to visualize your data. They help you understand user behavior. To create one, click **New insight**."
+PostHog is a global company. Our team and our customers are distributed around the world. For consistency, we use American English spelling, grammar, date, and time formatting.
+
+> **Do**: color, analyze, behavior, license  
+
+> **Don’t**: colour, analyse, behaviour, licence
+
+### Sentence case for headings
+
+Use sentence case for all headings. Capitalize only the first word and proper nouns like our products.
+
+> **Do**: "## How to create a feature flag"
+
+> **Do**: "## Get started with PostHog Feature Flags"
+
+> **Don't**: "## How To Create A Feature Flag"
+
+### Oxford comma
+
+Always use the Oxford comma.
+
+> **Do**: "PostHog offers analytics, session replay, and feature flags."
+
+> **Don't**: "PostHog offers analytics, session replay and feature flags."
+
+### Numbers
+
+- Spell out numbers zero through nine
+- Use numerals for 10 and above
+- Use numerals for percentages, measurements, and technical values
+
+> **Do**: "You can create three dashboards" or "You can create 15 dashboards."
+
+> **Do**: "Set the timeout to 30 seconds."
+
+### Use straight apostrophes and quote marks
+
+Many writing tools, such as Google Docs, Notion and Word, add curly quotes and apostrophes. Please avoid using these. They can normally be turned off in the settings.
+
+### Use British-style en dashes
+
+While we default to American English in most things, we prefer using the British-style en dash ( – ) with a space either side rather than the longer em dash with no spaces (—) used in American English.
+
+Please don't use a hyphen instead of en dash. On Macs, holding down Option and the hyphen key will give you an en dash.
+
+> **Do**: "Don’t up vote your own content, and don’t ask other people to – post it and pray."
+
+> **Don't**: "Don't up vote your own content, and don't ask other people to—post it and pray."
+
+---
+
+## Word choice
+
+### Acronyms
+
+Use all caps for acronyms and initialisms.
+
+> **Do**: SQL, API, HTML, CSS, JSON, REST, HTTP, URL, SDK, CLI, UI, UX
+
+> **Don't**: Sql, Api, Html
+
+Follow official capitalization for branded technologies.
+
+> **Do**: GraphQL, WebSocket, PostgreSQL
+
+### Choose simple words
+
+Choose simple, common words over complex alternatives.
+
+| Instead of | Use |
+|------------|-----|
+| utilize | use |
+| facilitate | help |
+| commence | start, begin |
+| subsequent | next |
+| prior to | before |
+
+### Use precise verbs
+
+Use precise verbs that clearly describe the action being performed.
+
+| Vague | Specific |
+|-------|----------|
+| use the API | call the API |
+| work with data | query data, analyze data |
+| handle errors | catch errors, log errors |
+| manage users | add users, remove users, assign roles |
+
+### Inclusive language
+
+Prefer neutral, inclusive terms.
+
+| Instead of | Use |
+|------------|-----|
+| blacklist/whitelist | denylist/allowlist |
+| sanity check | validation, verification |
+| master/slave | primary/secondary |
+
+### Avoid phrases that trivialize
+
+Avoid words or phrases that trivialize the work. They can sound dismissive or minimize the reader's efforts.
+
+Don't use words like "simply", "just", "easily", "obviously", "of course", and "clearly".
+
+> **Do**: "Add the SDK to your project."
+
+> **Don't**: "Simply add the SDK to your project."
+
+---
+
+## Formatting and structure
 
 ### Use descriptive headings
 
-Headings should clearly describe what's in the section. Use sentence case, not title case.
+Headings should clearly and explicitly describe what's in the section. Prefer action-oriented titles over nouns and gerunds.
 
-> **Do** - "## How to create a feature flag"
+> **Do**: "## How to create a feature flag"
 
-> **Don't** - "## Creating Feature Flags"
+> **Don't**: "## Feature flag creation"
+
+> **Do**: "## Customize styles and layouts"
+
+> **Don't**: "## Customization"
 
 ### Use short paragraphs
 
-Avoid paragraphs longer than 3-4 lines. Break up longer content with subheadings, lists, or visual elements as needed.
+Avoid paragraphs longer than 3-4 lines. Break up longer content with line breaks, subheadings, lists, or visual elements as needed.
 
-### When to use bulleted lists
+### Bulleted lists
 
 Use bullets for unordered items of equal importance. Default to prose when 1-2 items would be clearer as a sentence.
 
-> **Do** -
+> **Do**:
+>
 > PostHog offers several products:
 > - Product Analytics
 > - Session Replay
 > - Feature Flags
 > - Experiments
 
-> **Do (prose):** "You need a PostHog account and at least one event captured to get started."
-
-> **Don't** -
+> **Don't**:
+>
 > Feature flags let you:
 > - Control feature rollouts
 
-### When to use numbered lists
+### Numbered lists
 
-Use numbered lists only when sequence matters. Numbered lists are mainly used for UI instructions. Consider using steps if the list items are loaded or complex.
+Use numbered lists when ordering, ranking, or hierarchy matters.
 
-> **Do** -
+> **Do**:
 > 1. Click **New insight**
 > 2. Select your event
 > 3. Click **Save**
 
-### When to use tables
+### Tables
 
-Use tables for comparing multiple items across multiple attributes.
+Use tables for listing multiple items across multiple attributes. When a bulleted list isn't easy to scan, try using a table instead.
 
-> **Do** -
-> | Plan | Events/month | Team members | Price |
-> |------|--------------|--------------|-------|
-> | Free | 1M | Unlimited | $0 |
-> | Paid | 2M+ | Unlimited | $0.00031/event |
+| Plan | Events | Team members | Price |
+|------|--------|--------------|-------|
+| Free | 1M | Unlimited | $0 |
+| Paid | 2M+ | Unlimited | $0.00031/event |
 
-> **Don't** -
+> **Don't**:
+>
 > Our plans:
 > - Free: 1M events per month, unlimited team members, $0
 > - Paid: 2M+ events per month, unlimited team members, $0.00031 per event
-
-Use tables when a bulleted list isn't easy to scan.
 
 ### Avoid excessive formatting
 
@@ -158,57 +292,56 @@ Don't use:
 - Multiple header levels in short sections
 - Bold text for general emphasis in prose
 - Lists when prose is clearer
-- Tables for simple two-item comparisons
+- Too many callout boxes
 
-### When to use bold
+### Bold UI elements
 
-Use bold for structured information:
+Use bold for UI elements like buttons, menu items, labels, and text fields. Don't use quotes.
 
-- **UI elements** - Button names, menu items, keyboard shortcuts
-- **Definition lists** - The term in `**Term** - Description` patterns
+> **Do**: Click **New insight** in the **Insights** tab.
 
-## Links
+> **Don't**: Click the "New insight" button.
 
-### Wikipedia-style internal links
+For nested UI elements, use `>` to connect them hierarchically.
+
+> **Do**: In PostHog, navigate to **Settings** > **API keys** > **Personal API key**.
+
+> **Don't**: In PostHog, navigate to **Settings**, look under **API keys**, and then click **Personal API key**.
+
+### Links
+
+#### Wikipedia-style internal links
 
 Link the first mention of a PostHog term, feature, or SDK on a page to its docs page.
 
-> **Example** - "To create an [insight](/docs/product-analytics/insights), first [capture events](/docs/product-analytics/capture-events). Then, select the data you want to see."
+> **Example**: "To create an [insight](/docs/product-analytics/insights), first [capture events](/docs/product-analytics/capture-events). Then, select the data you want to see."
 
-### Link to the PostHog app
+#### Link to the PostHog app
 
-Link directly to PostHog app pages using `https://app.posthog.com/${path}`. EU Cloud users are redirected automatically.
+Link directly to PostHog in-app pages using `https://app.posthog.com/`. Users are redirected automatically to the correct US or EU subdomain.
 
-> **Example** - "Go to the [**Insights** tab](https://app.posthog.com/insights) and click **New insight**."
+> **Do**: "Go to the [**Insights** tab](https://app.posthog.com/insights) and click **New insight**."
 
-### Link text
+> **Don't**: "Go to the [**Insights** tab](https://us.posthog.com/insights) and click **New insight**."
 
-Link text should describe the destination. Avoid "click here" or "this page."
+> **Don't**: "Go to the [**Insights** tab](https://eu.posthog.com/insights) and click **New insight**."
 
-> **Do** - "See our [installation guide](/docs/getting-started/install) for instructions."
+#### Link text
 
-> **Don't** - "Click [this link](/docs/getting-started/install) for installation instructions."
+Link text should describe the destination. Avoid generic text like "click here" or "this page."
 
-## Formatting UI instructions
+> **Do**: "See our [installation guide](/docs/getting-started/install) for instructions."
 
-Bold all UI elements. Use exact names as they appear in the UI. Don't use quotes.
+> **Don't**: "Click [this link](/docs/getting-started/install) for installation instructions."
 
-> **Do** - Click **New insight** in the **Insights** tab.
+---
 
-> **Don't** - Click the "New insight" button.
-
-For multi-step flows, use ordered lists. Use `>` within a step to show hierarchy as needed:
-
-> 1. In PostHog, navigate to **Settings** > **API keys** > **Personal API key**
-> 2. Copy your API key
-> 3. Paste your key
-
-## Code blocks
+## Code
 
 ### Use backticks
 
-- **Inline code** - Use single backticks for code elements in text: `posthog.capture()`
-- **Code blocks** - Use triple backticks for multi-line code
+- **Inline code** - Use single backticks for code elements or values in prose like `posthog.capture()`
+- **Code blocks** - Use triple backticks for multi-line code blocks
 
 ### Follow language conventions
 
@@ -217,18 +350,6 @@ Use the standard style conventions for each programming language:
 - **JavaScript/TypeScript** - `PascalCase` for classes, `camelCase` for functions and variables, ES modules (`import`/`export`) instead of CommonJS (`require`)
 - **Python** - `PascalCase` for classes, `snake_case` for functions and variables
 - **HTML** - Lowercase for elements and attributes
-
-### Acronyms
-
-Use full caps for acronyms:
-
-> **Do** - SQL, API, HTML, CSS, JSON, REST, HTTP, URL, SDK, CLI, UI, UX
-
-> **Don't** - Sql, Api, Html
-
-Follow official capitalization for branded technologies:
-
-> **Do** - GraphQL, WebSocket, PostgreSQL
 
 ### PostHog event and property naming
 
@@ -247,7 +368,7 @@ Never use `camelCase` or `PascalCase` for event or property names.
 
 Use realistic examples that demonstrate actual use cases.
 
-> **Do** -
+> **Do**:
 > ```js
 > posthog.capture('purchase_completed', {
 >     product_id: 'prod_12345',
@@ -256,7 +377,7 @@ Use realistic examples that demonstrate actual use cases.
 > })
 > ```
 
-> **Don't** -
+> **Don't**:
 > ```js
 > posthog.capture('event', {
 >     property: 'value'
@@ -274,31 +395,23 @@ if (lastDismissed > Date.now() - 30 * 24 * 60 * 60 * 1000) {
 }
 ```
 
-### Magic placeholders
-
-Use magic placeholders in code blocks. These auto-populate for logged-in users:
-
-| Placeholder                | Description                   | Default                                         |
-| -------------------------- | ----------------------------- | ----------------------------------------------- |
-| `<ph_project_api_key>`     | Your PostHog project API key  | n/a                                             |
-| `<ph_project_name>`        | Your PostHog project name     | n/a                                             |
-| `<ph_app_host>`            | Your PostHog instance URL     | n/a                                             |
-| `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
-| `<ph_region>`              | Your PostHog region (us/eu)   | n/a                                             |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
-| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
+---
 
 ## Screenshots and media
+
+<CalloutBox type="fyi" title="Make sure no personal information is visible">
+
+It's extremely important to ensure screenshots or videos don't show any personal or sensitive user information like emails, phone numbers, or other identifying details.
+
+</CalloutBox>
 
 ### Screenshot requirements
 
 To maintain consistency and clarity:
 
-- **No user data** - Ensure no personal information is visible
 - **Focus on the relevant UI** - Exclude sidebars and irrelevant interface elements
 - **Use standard viewport** - Set device width to 1000-1400px in devtools
-- **Use node screenshots** - Capture DOM node elements for upscaled rendering
-- **Set DPR to 3** - Use device pixel ratio of 3 for 3x upscaling
+- **Use annotations** – Add arrows, text, or other visual elements to highlight specific UI elements
 
 ### When to use videos
 
@@ -312,199 +425,4 @@ Use Screen Studio with these settings:
 
 - Use the preset
 - Remove zoom-in for clicks
-- Export: MP4, 720p, 60 fps, "web" quality
-
-## Word choice
-
-### Use simple words
-
-Choose simple, common words over complex alternatives:
-
-| Instead of | Use |
-|------------|-----|
-| utilize | use |
-| leverage | use |
-| implement | set up, create, add |
-| initiate | start |
-| terminate | end, stop |
-| commence | start, begin |
-| subsequent | next |
-| prior to | before |
-
-### Be specific with verbs
-
-Use precise verbs that clearly indicate the action:
-
-| Vague | Specific |
-|-------|----------|
-| use the API | call the API |
-| work with data | query data, analyze data |
-| handle errors | catch errors, log errors |
-| manage users | add users, remove users, assign roles |
-
-### Avoid these words and phrases
-
-- **Simply, just, easily** - Don't use these. Say "Add the SDK to your project" not "Simply add the SDK to your project."
-
-- **Please** - Don't use this. Say "Click **Save**" not "Please click **Save**."
-
-- **Obviously, of course, clearly** - Don't use these. Say "This only works for authenticated users" not "Of course, this only works for authenticated users."
-
-## Grammar and mechanics
-
-### Parentheses
-
-Avoid using parentheses for explanations or clarifications. They disrupt reading flow and make content harder to scan. Instead, use separate sentences or en dashes.
-
-> **Do** - "Create a cohort to analyze behavior. A cohort is a group of users who share common properties."
-
-> **Do** - "Create a cohort – a group of users who share common properties – to analyze behavior."
-
-> **Don't** - "Create a cohort (a group of users who share common properties) to analyze behavior."
-
-Parentheses are acceptable for:
-
-- **Abbreviations on first use** - "Application Programming Interface (API)"
-- **Optional parameters in code** - `posthog.capture(event, properties)`
-- **Version numbers** - "Available in version 1.2.0 (or later)"
-
-### Contractions
-
-Use contractions to maintain a conversational tone.
-
-### Oxford comma
-
-Always use the Oxford comma in lists:
-
-> **Do** - "PostHog offers analytics, session replay, and feature flags."
-
-> **Don't** - "PostHog offers analytics, session replay and feature flags."
-
-### Sentence case for headings
-
-Use sentence case for all headings. Capitalize only the first word and proper nouns:
-
-> **Do** - "## How to create a feature flag"
-
-> **Don't** - "## How To Create A Feature Flag"
-
-### Numbers
-
-- Spell out numbers zero through nine
-- Use numerals for 10 and above
-- Use numerals for percentages, measurements, and technical values
-
-> **Do** - "You can create three dashboards" or "You can create 15 dashboards."
-
-> **Do** - "Set the timeout to 30 seconds."
-
-## Inclusive language
-
-Use neutral, inclusive terms:
-
-| Instead of | Use |
-|------------|-----|
-| blacklist/whitelist | blocklist/allowlist |
-| sanity check | validation, verification |
-| dummy value | placeholder, sample value |
-
-## Docs components
-
-### Steps
-
-Use the `<Steps>` component for sequential instructions:
-
-```mdx
-<Steps>
-
-<Step title="Install the SDK" badge="required">
-
-Steps are automatically numbered.
-
-</Step>
-
-<Step title="Call the capture method" badge="required">
-
-Write the _content_ in **markdown**.
-
-</Step>
-
-<Step checkpoint title="Check for events in PostHog" subtitle="Log in to your PostHog account" badge="optional">
-
-Add checkpoints to help readers verify their progress.
-
-</Step>
-
-</Steps>
-```
-
-### Decision tree
-
-Use decision trees to help users choose between 2-6 options:
-
-```jsx
-<DecisionTree
-    questions={[
-        {
-            id: 'platform',
-            question: 'What platform are you using?',
-            options: [
-                { value: 'web', label: 'Web' },
-                { value: 'mobile', label: 'Mobile' },
-            ],
-        },
-    ]}
-    getRecommendation={(answers) => {
-        // return recommendation based on answers
-    }}
-/>
-```
-
-### AskMax components
-
-Use `<AskMax>` to provide in-context help:
-
-```jsx
-<AskMax
-    quickQuestions={[
-        'How do I mask sensitive data?',
-        'Can I enable recordings only for certain users?',
-        'How can I control costs?',
-    ]}
-/>
-```
-
-Use `<AskAIInput>` for troubleshooting sections:
-
-```mdx
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Ask about error tracking..." />
-```
-
-## Platform logos
-
-All platform logos are centralized in `src/constants/logos.ts`. To add a new platform:
-
-1. Upload SVG to Cloudinary
-2. Add key to `src/constants/logos.ts` in camelCase
-3. Reference in MDX frontmatter: `platformLogo: myPlatform`
-
-Use consistent naming: `stripe`, `react`, `nodejs`, etc.
-
-## Debugging MDX issues
-
-Common MDX parsing issues:
-
-- Avoid deep indentation – stay at 2 spaces or less
-- Add line breaks after opening JSX tags and before closing tags
-- Ensure all components are imported correctly
-- Empty lines must be completely empty, no spaces
-- Snippets can't share file names
-
-Run the formatter to catch issues:
-
-```bash
-pnpm format:docs
-```
-
+- Export: MP4, 1080p, 60 fps, "web" quality

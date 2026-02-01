@@ -696,27 +696,41 @@ export const handbookSidebar = [
     },
     {
         name: 'Docs & Wizard',
-        url: '/handbook/docs-and-wizard/docs',
+        url: '/handbook/docs-and-wizard/overview',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/docs-and-wizard/docs',
+                url: '/handbook/docs-and-wizard/overview',
+            },
+            {
+                name: 'Wizard',
+            },
+            {
+                name: 'AI wizard',
+                url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'Context mill',
+                url: '/handbook/docs-and-wizard/context-mill',
+            },
+            {
+                name: 'Docs',
             },
             {
                 name: 'Ownership',
                 url: '/handbook/docs-and-wizard/docs-ownership',
             },
             {
-                name: 'Style guide',
+                name: 'Stlye guide',
                 url: '/handbook/docs-and-wizard/docs-style-guide',
+            },
+            {
+                name: 'MDX and components',
+                url: '/handbook/docs-and-wizard/mdx-and-components',
             },
             {
                 name: 'How to write product docs',
                 url: '/handbook/docs-and-wizard/writing-product-docs',
-            },
-            {
-                name: 'AI Wizard',
-                url: '/handbook/docs-and-wizard/developing-the-wizard',
             },
             {
                 name: 'Onboarding docs',

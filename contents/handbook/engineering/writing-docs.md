@@ -4,16 +4,22 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Product engineers are responsible for writing docs and making sure they are up to date. This page is a guide to help you do this. 
+Product engineers are responsible for writing and maintaining documentation for their products. This page is a guide to help you do this. 
 
-> **What about the so-called "content team"?** They are responsible for improving the docs. This means:
->
-> - Reviewing and improving draft documentation created by product teams
-> - Identifying and improving low-quality documentation
-> - Shipping supplementary docs and tutorials based on feedback and emerging use cases
-> - Working on large scale docs projects
+## What about the so-called <SmallTeam slug="docs-wizard"/>?
 
-## When should I write a doc?
+They are responsible for improving the docs as a knowledge base. This means:
+
+- Reviewing and improving draft documentation created by product teams
+- Identifying opportunities to improve baseline quality and structure
+- Shipping docs content based on prioritized feedback and emerging use cases
+- Working on large scale docs projects across the platform
+
+Hit them up in `#team-docs-and-wizard` or tag `@team-docs-wizard` for PR review.
+
+<SmallTeam slug="docs-wizard" /> can help you, but they can't write docs for everyone. High-quality product documentation requires the expertise and context you bring, which is why engineers own them.
+
+## When should I start writing product docs?
 
 Two great times to write docs:
 
@@ -43,7 +49,7 @@ Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and
 
 Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [PostHog AI](/docs/posthog-ai) live in the [Product OS](/docs) section.
 
-> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">`#team-content`</PrivateLink>.
+> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">`#team-docs-and-wizard`</PrivateLink>.
 
 ## What about internal docs?
 
