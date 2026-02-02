@@ -27,7 +27,7 @@ Just to reassure you, PostHog won't try to claim ownership of any intellectual p
 
 ### Projects that start at PostHog
 
-If a project is born from work you have done inside PostHog – that is, using work time, PostHog code, PostHog data, or other PostHog tools and infrastructure – some explicit signoff will make life easier for all parties. This will prevent confusion around ownership, data use, or future plans. Absent that sign-off, these projects should live within PostHog repos and follow PostHog processes.
+If a project is born from work you have done inside PostHog – that is, using work time, PostHog code, PostHog data, or other PostHog tools and infrastructure – these projects belong to PostHog and should live in PostHog repos. If you want to develop these projects further on the side, you will need explicit permission.
 
 If you are ever worried about this, please talk to Fraser and he can help you figure out the best solution here, especially if what you are working on directly competes with something PostHog has built or is on our roadmap. 
 
