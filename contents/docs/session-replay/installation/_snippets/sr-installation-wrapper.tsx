@@ -24,7 +24,7 @@ import {
     SessionReplayFinalSteps,
 } from 'onboarding/session-replay'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
-import { addNextStepsStep } from './shared-helpers'
+import { addNextStepsStep } from './sr-shared-helpers'
 
 const SNIPPETS = {
     SessionReplayFinalSteps,
