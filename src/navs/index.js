@@ -768,7 +768,7 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/writing-docs',
                     },
                     {
-                        name: 'Working with data warehouse',
+                        name: 'Working with Data Warehouse',
                         url: '/handbook/engineering/data-warehouse',
                     },
                 ],
@@ -1406,7 +1406,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/cross-selling/cross-sell-motions',
                     },
                     {
-                        name: 'Error tracking cross-sell',
+                        name: 'Error Tracking cross-sell',
                         url: '/handbook/growth/cross-selling/error-tracking-cross-sell',
                     },
                 ],
@@ -1725,7 +1725,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'Product analytics',
+                    name: 'Product Analytics',
                     icon: 'IconGraph',
                     color: 'blue',
                     url: '/tutorials/categories/correlation-analysis',
@@ -1744,13 +1744,13 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'Session replay',
+                    name: 'Session Replay',
                     color: 'yellow',
                     icon: 'IconRewindPlay',
                     url: '/tutorials/categories/session-replay',
                 },
                 {
-                    name: 'Feature flags',
+                    name: 'Feature Flags',
                     icon: 'IconToggle',
                     color: 'seagreen',
                     url: '/tutorials/categories/feature-flags',
@@ -1773,7 +1773,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM analytics',
+                    name: 'LLM Analytics',
                     color: 'purple',
                     icon: 'IconLlmAnalytics',
                     url: '/tutorials/ai-engineering',
@@ -2385,7 +2385,7 @@ export const docsMenu = {
                             url: '/docs/api/experiments',
                         },
                         {
-                            name: 'Feature flags',
+                            name: 'Feature Flags',
                             url: '/docs/api/feature-flags',
                         },
                         {
@@ -2532,7 +2532,7 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/agent-toolkit',
                         },
                         {
-                            name: 'LLM analytics ↗',
+                            name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
                         {
@@ -3079,7 +3079,7 @@ export const docsMenu = {
                             url: '/docs/how-posthog-works/queries',
                         },
                         {
-                            name: 'Session replay',
+                            name: 'Session Replay',
                             url: '/docs/how-posthog-works/recordings-ingestion',
                         },
                     ],
@@ -3095,14 +3095,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Product analytics',
+            name: 'Product Analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
             description: 'Funnels, graphs, user paths, correlation analysis, retention, stickiness, lifecycle, SQL',
             children: [
                 {
-                    name: 'Product analytics',
+                    name: 'Product Analytics',
                 },
                 {
                     name: 'Overview',
@@ -3367,14 +3367,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Web analytics',
+            name: 'Web Analytics',
             icon: 'IconPieChart',
             color: '[#36C46F]',
             url: '/docs/web-analytics',
             description: 'Monitor your website traffic. Built for people who really liked GA3...',
             children: [
                 {
-                    name: 'Web analytics',
+                    name: 'Web Analytics',
                 },
                 {
                     name: 'Overview',
@@ -3424,7 +3424,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Web vs product analytics',
+                    name: 'Web vs Product Analytics',
                     url: '/docs/web-analytics/web-vs-product-analytics',
                     icon: 'IconGraph',
                     color: 'red',
@@ -3471,14 +3471,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Session replay',
+            name: 'Session Replay',
             url: '/docs/session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
             description: 'Watch how users interact with your app in a DVR-like playback experience',
             children: [
                 {
-                    name: 'Session replay',
+                    name: 'Session Replay',
                 },
                 {
                     name: 'Overview',
@@ -3515,7 +3515,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Mobile session replay',
+                    name: 'Mobile Session Replay',
                     url: '/docs/session-replay/mobile',
                     icon: 'IconPhone',
                     color: 'blue',
@@ -3590,14 +3590,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Feature flags',
+            name: 'Feature Flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
             description: 'Safely roll out features to specific users or groups',
             children: [
                 {
-                    name: 'Feature flags',
+                    name: 'Feature Flags',
                 },
                 {
                     name: 'Overview',
@@ -3636,12 +3636,13 @@ export const docsMenu = {
                         { name: 'Java', url: '/docs/feature-flags/installation/java' },
                         { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
                         { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'API', url: '/docs/feature-flags/installation/api' },
                     ],
                 },
                 {
-                    name: 'Creating feature flags',
+                    name: 'Creating Feature Flags',
                     url: '/docs/feature-flags/creating-feature-flags',
                     icon: 'IconFlag',
                     color: 'orange',
@@ -3880,6 +3881,10 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/dotnet',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/experiments/installation/rust',
+                        },
+                        {
                             name: 'Angular',
                             url: '/docs/experiments/installation/angular',
                         },
@@ -4020,7 +4025,7 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
-                    name: 'Experiments without feature flags',
+                    name: 'Experiments without Feature Flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
                     color: 'red',
@@ -4069,7 +4074,7 @@ export const docsMenu = {
                 },
 
                 {
-                    name: 'Data warehouse experiments',
+                    name: 'Data Warehouse experiments',
                     url: '/docs/experiments/data-warehouse',
                     icon: 'IconDatabase',
                     color: 'purple',
@@ -4109,14 +4114,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Error tracking',
+            name: 'Error Tracking',
             url: '/docs/error-tracking',
             icon: 'IconWarning',
             color: 'orange',
             description: 'Track and monitor errors and exceptions in your code.',
             children: [
                 {
-                    name: 'Error tracking',
+                    name: 'Error Tracking',
                 },
                 {
                     name: 'Overview',
@@ -4426,7 +4431,7 @@ export const docsMenu = {
                             url: '/docs/references/posthog-python?filter=error-tracking',
                         },
                         {
-                            name: 'Error tracking API',
+                            name: 'Error Tracking API',
                             url: '/docs/api',
                         },
                     ],
@@ -4660,14 +4665,14 @@ export const docsMenu = {
         },
         ...[dataPipelines],
         {
-            name: 'Data warehouse',
+            name: 'Data Warehouse',
             url: '/docs/data-warehouse',
             color: 'lilac',
             icon: 'IconDatabase',
             description: 'Unify and query data from any source and analyze it alongside your product data',
             children: [
                 {
-                    name: 'Data warehouse',
+                    name: 'Data Warehouse',
                 },
                 {
                     name: 'Overview',
@@ -4936,7 +4941,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM analytics',
+            name: 'LLM Analytics',
             url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
@@ -4944,7 +4949,7 @@ export const docsMenu = {
             description: 'Insights for building your AI and LLM products',
             children: [
                 {
-                    name: 'LLM analytics',
+                    name: 'LLM Analytics',
                 },
                 {
                     name: 'Overview',
@@ -5116,13 +5121,13 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Link session replay',
+                    name: 'Link Session Replay',
                     url: '/docs/llm-analytics/link-session-replay',
                     icon: 'IconRewindPlay',
                     color: 'blue',
                 },
                 {
-                    name: 'Link error tracking',
+                    name: 'Link Error Tracking',
                     url: '/docs/llm-analytics/link-error-tracking',
                     icon: 'IconWarning',
                     color: 'red',
@@ -5181,7 +5186,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Revenue analytics',
+            name: 'Revenue Analytics',
             icon: 'IconPiggyBank',
             color: '[#36C46F]',
             url: '/docs/revenue-analytics',
@@ -5192,7 +5197,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'Revenue analytics',
+                    name: 'Revenue Analytics',
                 },
                 {
                     name: 'Overview',
@@ -5672,7 +5677,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Link session replay',
+                    name: 'Link Session Replay',
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
                     color: 'blue',
