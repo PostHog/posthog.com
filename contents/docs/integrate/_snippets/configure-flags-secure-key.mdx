@@ -88,4 +88,18 @@ PostHogConfig config = PostHogConfig.builder("<ph_project_api_key>")
 PostHogInterface posthog = PostHog.with(config);
 ```
 
+```rust
+use posthog_rs::ClientOptionsBuilder;
+
+let options = ClientOptionsBuilder::default()
+    .api_key("<ph_project_api_key>")
+    .personal_api_key("your feature flags secure API key from step 1")
+    .enable_local_evaluation(true)
+    .poll_interval_seconds(30) // Optional. Measured in seconds. Defaults to 30.
+    .build()
+    .unwrap();
+
+let client = posthog_rs::client(options).await;
+```
+
 </MultiLanguage>

@@ -1,13 +1,7 @@
 ---
-title: How to do a canary release with feature flags in PostHog
-sidebar: Docs
+title: How to do a canary release with feature flags
 showTitle: true
-author:
-  - ian-vanagas
-date: 2023-09-12
-tags:
-  - feature flags
-  - persons
+sidebar: Docs
 ---
 
 Few things are worse than shipping a new feature, having it unexpectedly break, and then scrambling to fix it. To mitigate problems like this, teams often roll out changes to a subset of users before releasing them to everyone. This is known as a canary release or deployment.
@@ -76,7 +70,7 @@ Canary releases ensure higher quality features get shipped and fewer issues impa
 
 ## Further reading
 
-- [Targeting feature flags on groups, pages, machines, and more](/tutorials/group-page-machine-flags)
+- [Targeting feature flags on groups, pages, machines, and more](/docs/feature-flags/targeting-groups)
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 
