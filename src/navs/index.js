@@ -4720,6 +4720,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/chargebee',
                         },
                         {
+                            name: 'Clerk',
+                            url: '/docs/data-warehouse/sources/clerk',
+                        },
+                        {
                             name: 'DoIt',
                             url: '/docs/data-warehouse/sources/doit',
                         },
@@ -4760,6 +4764,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/google-sheets',
                         },
                         {
+                            name: 'GitHub',
+                            url: '/docs/data-warehouse/sources/github',
+                        },
+                        {
                             name: 'Hubspot',
                             url: '/docs/data-warehouse/sources/hubspot',
                             badge: {
@@ -4770,6 +4778,10 @@ export const docsMenu = {
                         {
                             name: 'Klaviyo',
                             url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
+                            name: 'Mailchimp',
+                            url: '/docs/data-warehouse/sources/mailchimp',
                         },
                         {
                             name: 'MongoDB',
