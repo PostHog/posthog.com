@@ -31,6 +31,10 @@ export const dataPipelines = {
                     name: 'Managed',
                 },
                 {
+                    name: 'Attio',
+                    url: '/docs/cdp/sources/attio',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -4706,6 +4710,10 @@ export const docsMenu = {
                         },
                         {
                             name: 'Managed',
+                        },
+                        {
+                            name: 'Attio',
+                            url: '/docs/data-warehouse/sources/attio',
                         },
                         {
                             name: 'Azure SQL Server',
