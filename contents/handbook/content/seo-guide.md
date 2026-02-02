@@ -140,6 +140,14 @@ The goal is to make our content the easiest, clearest, most trustworthy answer i
 - **Consistency matters:** Keep facts about PostHog accurate and aligned across different pieces of content.  
 - **Watch competitors:** Monitor what SGE cites and improve on those answers to outrank them.
 
+### 11. Steelman competitors
+
+Many other companies "straw man" their competitors. They claim their competitors are worse than reality, focus on differences that don't matter, and make hyperbolic claims about how much better they are. We don't do this.
+
+When writing about competitors, be honest about their capabilities. Assume they are reading and will dunk on you for being dishonest. PostHog may not have all the features competitors have today, that's okay. Our reputation and trust with readers is more important than whatever "marketing win" being dishonest gives us. 
+
+It's also okay to make mistakes here. Competitors change faster than we can keep up. Whenever we find a mistake, we fix it as soon as we realize. We also happily accept updates from competitors if they make our post more accurate. 
+
 ### Additional tips
 
 Good metadata is like a handshake – it’s the first impression users (and AI tools) get before they ever see the page. Well-crafted titles and descriptions can improve click-through rates and help AI engines understand context.
