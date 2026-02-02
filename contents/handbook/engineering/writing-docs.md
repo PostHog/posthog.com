@@ -6,26 +6,37 @@ showTitle: true
 
 Product engineers are responsible for writing and maintaining documentation for their products. This page is a guide to help you do this. 
 
-## What about the so-called <SmallTeam slug="docs-wizard"/>?
+## Ownership 
 
-They are responsible for improving the docs as a knowledge base. This means:
+High-quality docs require the expertise and context of the engineers building them, which is why *you* own your product's documentation. 
 
-- Reviewing and improving draft documentation created by product teams
-- Identifying opportunities to improve baseline quality and structure
+Keeping your docs up-to-date is extra important in the age of AI. All of our docs eventually make their way into the training data of newer foundation models. The quality and accuracy of your docs directly affects how people discover your product through LLMs.
+
+AI search is our fastest growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs.
+
+## What about the so-called Docs & Wizard team?
+
+The <SmallTeam slug="docs-wizard" /> can help you, but they can't write docs for everyone. They are responsible for improving the docs as a knowledge base. This means:
+
+- Reviewing and improving docs PRs created by product teams
 - Shipping docs content based on prioritized feedback and emerging use cases
-- Working on large scale docs projects across the platform
+- Building tools and systems to improve baseline quality and structure
+- Creating context services that power agents like the AI wizard
+- Working on large scale docs projects
 
-Hit them up in `#team-docs-and-wizard` or tag `@team-docs-wizard` for PR review.
+If you want their input, hit them up in `#team-docs-and-wizard` or tag `@team-docs-wizard` in GitHub. 
 
-<SmallTeam slug="docs-wizard" /> can help you, but they can't write docs for everyone. High-quality product documentation requires the expertise and context you bring, which is why engineers own them.
+They've also created a comprehensive self-serve guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to use.
 
 ## When should I start writing product docs?
 
-Two great times to write docs:
+Three great times to write docs:
 
 1. When you ship a new user-facing product or feature. Write docs for big product launches before they release (during early access or beta). Smaller features and updates can wait until after they are shipped.
 
 2. When you recognize a confusion or gap in users' understanding of your product. This could be based on support tickets, sales requests, or just user feedback.
+
+3. When you update product behavior or interfaces. Check if the docs need to be updated with new information or instructions.
 
 Basically, if users *could* self-serve and use your product, but aren't, you should write docs to help them do so. Write the obvious docs before users start asking you obvious questions.
 
@@ -42,6 +53,8 @@ Docs should help people:
 3. Make the most of your product by detailing common use cases, concepts related to your product, answering common questions, and more.
 
 Write the docs you would want to read if you were a user. 
+
+The <SmallTeam slug="docs-wizard" /> have created a guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to follow. It walks through how to structure and write your product docs in detail. Start there.
 
 ## Where do docs live?
 

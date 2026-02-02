@@ -4,150 +4,309 @@ sidebar: Handbook
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+This guide explains how to write and structure your product's documentation.
 
-This guide outlines how to structure product documentation, based on patterns from [Error Tracking](/docs/error-tracking). Use this as a reference when building docs for new products or improving existing ones.
+## Docs categories
 
-## Directory structure
+We've created a standard, flexible structure for product docs. Each section contains specific types of pages that serve different purposes in the developer journey.
 
-This structure mirrors the sidebar navigation of Error Tracking docs. The hierarchy drives how users discover and navigate docs.
+Every docs page should fit into one of the following categories:
+
+1. [Overview](#overview) – The landing page for your product docs. Think of it as a one-pager for your product.
+2. [Getting started](#getting-started) – Docs that focus on the minimal tasks and context necessary to get your product up and running.
+3. [Concepts](#concepts) – Docs that explain the core abstractions and building blocks of your product.
+4. [Guides](#guides) – Tutorials on how to use your product's features.
+5. [PostHog AI](#posthog-ai) – Docs on how to use PostHog AI or AI workflows with your product. 
+6. [Resources](#resources) – Standalone docs that don't fit into the other categories like pricing or changelog.
+
+We recommend using [Error Tracking](/docs/error-tracking) docs as a reference. We've invested significant time in their docs and consider them to be the strongest example of well-structured documentation. It's a good template to use when writing docs for new products or improving existing ones.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T01_01_56_985_Z_3300a46cb9.png"
+    alt="Error Tracking docs"
+    padding={false}
+/>
+
+<Caption>
+Error Tracking is a good template for product docs structure
+</Caption>
+
+**Disclaimer:** PostHog has a wide variety of products. For example, [Data Pipelines](/docs/cdp) is integration heavy while [PostHog AI](/docs/posthog-ai) and [Workflows](/docs/workflows) are UI-oriented. They require different content structures for their docs, and that's okay. You can adapt this structure to your product's needs. 
+
+That said, stick to this structure first. It’s worked well for other products, both in terms of docs-to-product conversion and user feedback, so it’s proven to be effective.
+
+## Sidebar navigation
+
+This sidebar navigation mirrors the docs structure. The hierarchy drives how users discover and navigate docs.
 
 ```
-docs/[product-name]/
-├── index.mdx                   # Overview page
-│
-├── # Getting started
-├── start-here.mdx              # Quest-log entry point
-├── installation/               # Platform installation guides
-│   ├── index.mdx               # Auto-generated platform grid
-│   ├── [platform].mdx          # Platform-specific installation, one file per platform
-│   └── _snippets/              # Installation-specific snippets
-│
-├── # Concepts
-├── [concept-1].mdx             # Core concepts
-├── [concept-2].mdx
-│
-├── # Guides
-├── [guide-1].mdx               # Task-oriented how-tos
-├── [guide-2].mdx
-│
-├── # Resources
-├── pricing.mdx                 # Product pricing and limits
-├── references.mdx              # Links to SDK and API docs
-├── tutorials.mdx               # Curated tutorials
-├── troubleshooting.mdx         # Common issues and solutions
-├── changelog.mdx               # Auto-generated product updates
-│
-└── _snippets/                  # Reusable content that are not rendered as pages
-    └── [shared-content].mdx
+Docs sidebar
+|
+├── Your product
+|   └── Overview                # Landing page or home page
+├── Getting started
+|   ├── Start here              # "Syllabus" page
+|   ├── Installation            
+│   │   ├── Framework 1         # Installation quickstart
+│   │   └── Framework 2              
+│   └── Basic config            # Minimal setup quickstart
+├── Concepts
+|   ├──Concept 1                # In-depth product explainer 
+|   └──Concept 2    
+├── Guides
+|   ├──Guide 1                  # Tutorial for feature
+|   └──Guide 2 
+├── PostHog AI
+|   ├──AI guide 1               # Tutorial for AI feature
+|   └──AI guide 2 
+├── Resources
+|   ├──Pricing                  # Pricing and usage limits
+|   ├──Troubleshooting          # Common issues and solutions
+|   ├──Changelog                # Product updates
+|   └──References               # Links to SDK and API docs
 ```
 
-The sidebar sections – Getting started, Concepts, Guides, Resources – are defined in `src/navs/index.js`, not by folder structure. Files live flat in the product folder.
+## Overview 
 
-## Sidebar sections
+The **Overview** page is the landing page for your product docs. Think of it like a book cover for your product. People *will* judge your product based on a quick glance. 
 
-Product docs are organized into these high-level sections. Each section contains specific types of pages that serve different purposes in the user journey.
+The overview needs to work like an effective one-pager. Imagine a busy engineering manager who's evaluating multiple solutions. Someone sends them a link to your product docs. With a quick scan, they need to confirm basic criteria before deciding to learn more or bounce:
+
+- What is this product?
+- Is it compatible with my tech stack?
+- Does it have the essential features I expect or need?
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/error_docs_overview_compress_e8ddecebaf.mp4"
+    alt="Error Tracking overview video"
+    classes="rounded"
+/>
+
+> **Example** - [Error Tracking overview](/docs/error-tracking/overview)
+
+Your **Overview** page should include: 
+
+- Description of the product and its value proposition
+- List of key features and capabilities
+- List of supported languages, frameworks, and integrations
+- List of PostHog platform, cross-product features
+- CTAs for next steps in the docs
+- Visual components and elements to make it scannable and appealing
 
 ## Getting started
 
-The onboarding section. Contains pages that help new users get up and running with the product.
+The **Getting started** section in your product docs exists to get new users up and running with your product as quickly as possible and with *just* enough context for them to understand what's going on. It needs to be streamlined for minimal setup.
 
-### 1. Start here page
+Avoid including advanced or more complex features in the getting started section. Those should go into the [guides section](#guides).
 
-The entry point for new users. These pages give readers an overview of the tasks necessary to be successful with your product, like the main quest line of a video game.
+Your **Getting started** section should include: 
 
-These pages are our highest converting pages, so they matter. Uses the `QuestLog` component to create a visual roadmap that guides users through adoption milestones.
+- A **Start here** page
+- Installation quickstarts
+- Basic config quickstarts (optional) (e.g. upload source maps)
 
-Structure each quest item with: required → recommended → optional progression, platform selectors for installation, screenshots showing what they'll achieve, and links to deeper docs.
+### Start here
 
-Key frontmatter for start-here pages:
+The **Start here** page shows the product adoption journey at a high-level. It gives readers an overview of the milestones necessary to be successful with your product, like the quest log of a video game. 
 
-```yaml
----
-title: Getting started with [Product Name]
-hideRightSidebar: true
-contentMaxWidthClass: max-w-5xl # QuestLog component needs extra horizontal space
----
-```
+It acts as a syllabus. Users are more willing to invest their effort and time when they can see what they’re signing up for. Otherwise, one setback – a missing link or an outdated config – can be enough for users to give up if they don't know how far along they are in the process.
 
-> **Example** - [Error Tracking start-here](/docs/error-tracking/start-here)
+These pages are high converting pages for our paid ads, so they matter. Use the `QuestLog` component to create a visual roadmap that guides users through adoption milestones.
 
-### 2. Installation guides
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/error_start_here_compress_8251df6df1.mp4"
+    alt="Error Tracking start here page"
+/>
 
-Installation docs are shared between the in-app onboarding flow and the posthog.com website. The single source of truth lives in the [posthog/posthog monorepo](https://github.com/PostHog/posthog/tree/master/docs/onboarding), and the website pulls the content automatically.
+> **Example** - [Error Tracking start here page](/docs/error-tracking/start-here)
 
-See the [onboarding docs runbook](/handbook/docs-and-wizard/onboarding-docs) for full details on how to create or migrate installation guides.
+Your **Start here** page should include: 
 
-#### Auto-generated platform grids
+- `QuestLogItem` sections for each milestone in the adoption journey
+- Screenshots and media 
+- Links to deeper docs
+- **Use for free** section at the end
 
-The installation index page displays a grid of platform cards that's automatically generated from the sidebar navigation. This means you never manually maintain a hardcoded list of platforms.
+### Installation
 
-How it works:
+The installation pages are quickstarts for your product. An installation page using the `<Steps>` component should be created for each platform, framework, or language your product supports. 
 
-1. The index page imports a snippet that calls `usePlatformList()`
-2. The hook reads all MDX files in the installation folder
-3. It sorts them based on the order defined in `src/navs/index.js`
-4. Each platform's logo comes from the `platformLogo` frontmatter field
+Installation docs have a special architecture; they render the same content as the in-app onboarding flow from the monorepo. The single source of truth lives in the [posthog/posthog monorepo](https://github.com/PostHog/posthog/tree/master/docs/onboarding), and the website pulls the content automatically. But it requires some boilerplate code to set up.
 
-> **Example** - [Error Tracking installation index](/docs/error-tracking/installation)
+See the [onboarding docs handbook](/handbook/docs-and-wizard/onboarding-docs) for full details on how to create or migrate installation guides to the shared rendering architecture.
+
+<ImageSlider>
+
+![installation platforms overview](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T06_44_08_158_Z_86c52df90d.png)
+
+![installation 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T06_57_39_225_Z_7efb2aa18b.png)
+
+![installation 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T06_57_44_195_Z_d4c2849300.png)
+
+</ImageSlider>
+
+> **Example** - [Error Tracking installation docs](/docs/error-tracking/installation)
+
+Your **Installation** section should include: 
+
+- Installation index page of all supported platforms
+- Installation quickstarts for each framework or language using `<Steps>` component
+
+> The installation index page displays a grid of platform cards (i.e. frameworks and languages) that's automatically generated from the sidebar navigation with logos and icons. 
+>
+> 1. The index page imports a snippet that calls `usePlatformList()`.
+> 2. The hook reads all MDX files in the installation folder.
+> 3. It sorts them based on the order defined in `src/navs/index.js`.
+> 4. Each platform's logo comes from the `platformLogo` frontmatter field.
 
 ## Concepts
 
-Foundational knowledge. Explains how things work under the hood to build mental models for complex systems.
+The **Concepts** section explains your product's core abstractions or building blocks in depth. Concept pages help readers understand how your product is designed to work and the underlying mental model.
 
-### Concept pages
+The goal is to explain to readers *why* the product behaves the way it does, not just how to use it. 
 
-Explain how things work under the hood to build mental models for complex systems. Use diagrams and examples.
+If your product uses any terminology that carries specific meaning or implies functionality, it probably deserves a concept page. Some concepts are shared across an industry, others are specific or adapted to your product. For example, in Error Tracking, we have concept pages for: 
 
-Include Mermaid diagrams for flows and relationships, definitions with context, examples of real-world scenarios, and links to implementation details.
+- **Exceptions**: an industry-wide concept
+- **Stack traces**: an industry-wide concept
+- **Issues**: a PostHog-specific concept (group of exceptions in the app UI)
+- **Fingerprints**: a PostHog-specific concept (low-level identifier for exceptions on SDK capture)
+
+Use Mermaid diagrams for data flows and relationships, tables for definitions, and screenshots for in-app UI elements.
+
+<ImageSlider>
+
+![Concept page 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T14_26_39_792_Z_f45a86901b.png)
+
+![Concept page 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T14_26_45_407_Z_c1e5a1b07b.png)
+
+![Concept page 3](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T14_27_50_570_Z_5c50ca2c72.png)
+
+![Concept page 4](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T14_26_36_554_Z_d5083ec4ed.png)
+
+</ImageSlider>
 
 > **Examples** - [Fingerprints](/docs/error-tracking/fingerprints), [Issues and exceptions](/docs/error-tracking/issues-and-exceptions), [Stack traces](/docs/error-tracking/stack-traces), [Releases](/docs/error-tracking/releases)
 
+Your **Concepts** section should include: 
+
+- In-depth explainers for each product concept
+- Mermaid diagrams for data flows and relationships
+- Tables for definitions with context
+
 ## Guides
 
-Task-oriented how-tos. Help users complete specific actions and workflows with the product.
+The **Guides** section contains tutorials for your product's features. These pages are framed around accomplishing specific use cases, jobs-to-be-done, or goals with your product.
 
-### Guide pages
+Why call this section "Guides" instead of "Features"? Because it's task-oriented and focuses on outcomes. We want to avoid listing out a bunch of branded feature names in the sidebar: they don't mean anything to the user. What your product feature is called is secondary to what it enables, which is to help users solve their problems.
 
-Task-oriented how-tos that help users complete specific actions. In general, one page per major task or workflow.
+In general, there should be one page for each major feature or workflow in your product. On each page, include a brief intro explaining what the guide helps you do, instructions on how to use the feature in practice, and screenshots of the UI.
 
-On each page, include a brief intro explaining what the guide helps you do, screenshots showing the feature in the UI, step-by-step instructions with links to relevant app pages, and tables for comparing options. Integrate links naturally throughout the content rather than in a separate section.
+<ImageSlider>
+
+![Guides page 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T15_07_30_326_Z_0ef4eb50f4.png)
+
+![Guides page 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T15_07_21_302_Z_deacd6f5fe.png)
+
+![Guides page 3](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T15_07_28_394_Z_e7557faf1f.png)
+
+![Guides page 4](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T15_07_26_025_Z_360291704d.png)
+
+![Guides page 5](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T15_07_23_460_Z_8ee5de5504.png)
+
+![Guides page 6](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T15_07_19_225_Z_848a414537.png)
+
+</ImageSlider>
 
 > **Examples** - [Capture exceptions](/docs/error-tracking/capture), [Manage and resolve issues](/docs/error-tracking/managing-issues), [Send alerts](/docs/error-tracking/alerts), [Set up integrations](/docs/error-tracking/integrations)
 
+Your **Guides** section should include: 
+
+- Guides for each major feature or workflow in your product
+- Screenshots showing the feature in the UI
+- Step-by-step or general instructions on how to use the feature
+- A use case or jobs-to-be-done framing for the guide
+
+## PostHog AI
+
+The **PostHog AI** section showcases your product's AI workflows. This includes integrations with our official [PostHog AI](/docs/posthog-ai) product, MCP-based workflows, or examples of useful prompts or skills. 
+
+We don't want to be too prescriptive here. The goal is to show off your product's AI capabilities, small or big.
+
+<ImageSlider>
+
+![PostHog AI 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T16_04_37_025_Z_b93ba02c10.png)
+
+![PostHog AI 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T16_04_34_126_Z_c43dbc9728.png)
+
+</ImageSlider>
+
+> **Example** - [Error Tracking PostHog AI docs](/docs/error-tracking/debugging-with-mcp)
+
+Your **PostHog AI** section should include: 
+
+- Guides for PostHog AI features your product supports
+- Guides for AI workflows like MCP
+- Guides for AI resources like recommended prompts or skills
+
 ## Resources
 
-Reference material and support. Contains utility pages that users reference when needed.
+The **Resources** section is where the useful “lookup” stuff lives. These are important but standalone pages like pricing, changelog, troubleshooting, and API or SDK references.
 
-### Troubleshooting page
+If something doesn't fit neatly into the other categories, it belongs here.
 
-Common issues and solutions that unblock users who are stuck. Keep this updated based on support tickets and community questions.
+<ImageSlider>
 
-Start with the `<AskAIInput>` component, then use searchable headings with numbered solutions. Each section should be scannable and actionable.
+![Resource 1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T16_26_34_649_Z_5d714cc267.png)
 
-> **Example** - [Error Tracking troubleshooting](/docs/error-tracking/troubleshooting)
+![Resource 2](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T16_26_30_812_Z_85c9f0db82.png)
 
-### Pricing page
+![Resource 3](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T16_26_32_760_Z_22d047c29c.png)
 
-Explain the product's pricing model, free tier limits, and how usage is calculated. Link to the main pricing page for full details.
+![Resource 4](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_02_T16_26_28_585_Z_60d73f2230.png)
+
+</ImageSlider>
+
+> **Example** - [Error Tracking resources](/docs/error-tracking/pricing)
+
+Your **Resources** section should include: 
+
+- Pricing page
+- Troubleshooting page
+- Changelog page
+- Links to SDK and API references
+- Other resources
+
+### Pricing
+
+The **Pricing** page explains the product's pricing model, free tier limits, and how usage is calculated. Transparency is a differentiator for us, so we want to be clear and upfront about how much users will pay.
+
+Just as importantly, we want to show users how to stay in control of costs. This page should include advice on how users can reduce their bill and cut costs.
 
 > **Example** - [Error Tracking pricing](/docs/error-tracking/pricing)
 
-### Changelog page
+Your **Pricing** page should include:
 
-Auto-generated list of product updates using the `<ProductChangelog>` component. Requires `hideRightSidebar: true` in frontmatter.
+- `<SingleProductPricing>` calculator component
+- Breakdown of how usage or costs are calculated
+- Section on how to reduce and cut costs
+
+### Troubleshooting
+
+Common issues and solutions that unblock users who are stuck. Keep this updated based on support tickets and community questions.
+
+Start with the `<AskAIInput>` component to enable AI chat support, then use searchable headings with numbered solutions. Each section should be scannable and actionable.
+
+> **Example** - [Error Tracking troubleshooting](/docs/error-tracking/troubleshooting)
+
+### Changelog
+
+Displays changelog entries for your product using the `<ProductChangelog>` component. It filters entries from the main [/changelog](/changelog) page.
 
 > **Example** - [Error Tracking changelog](/docs/error-tracking/changelog)
 
-### Tutorials page
-
-Curated list of tutorials and guides for the product. Links to blog posts and community content.
-
-> **Example** - [Error Tracking tutorials](/docs/error-tracking/tutorials)
-
-### References page
+### API and SDK references
 
 Links to SDK reference docs and API documentation filtered by product.
 
 > **Example** - [Error Tracking references](/docs/error-tracking/references)
-

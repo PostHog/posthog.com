@@ -270,6 +270,43 @@ Use numbered lists when ordering, ranking, or hierarchy matters.
 > 2. Select your event
 > 3. Click **Save**
 
+### Punctuation in lists
+
+Use a period when each item is a complete and standalone sentence (has a subject and verb and is an indepedent thought). 
+
+Don't use a period when items are phrases or fragments that complete an introductory phrase.
+
+Be consistent within a single list. If one item is a partial sentence, make all items partial sentences.
+
+
+> **Do**:
+>
+> PostHog offers several products:
+> - Product Analytics
+> - Session Replay
+> - Feature Flags
+
+> **Do**:
+>
+> Use feature flags to:
+> - Control rollouts to specific users
+> - Run A/B tests on new features
+> - Disable features without redeploying
+
+> **Do**:
+>
+> There are multiple ways to fetch data from PostHog.
+> - You can use the API. 
+> - You can use the SDK. 
+> - You can use webhooks or data pipelines. 
+
+> **Don't**:
+>
+> To set up PostHog:
+> - Install the SDK.
+> - Configure your API key.
+> - Start capturing events.
+
 ### Tables
 
 Use tables for listing multiple items across multiple attributes. When a bulleted list isn't easy to scan, try using a table instead.
@@ -285,14 +322,23 @@ Use tables for listing multiple items across multiple attributes. When a bullete
 > - Free: 1M events per month, unlimited team members, $0
 > - Paid: 2M+ events per month, unlimited team members, $0.00031 per event
 
-### Avoid excessive formatting
+### Bold text 
 
-Don't use:
+Use bold for structured information and visual formatting like callout labels, definition lists, and problem/solution patterns.
 
-- Multiple header levels in short sections
-- Bold text for general emphasis in prose
-- Lists when prose is clearer
-- Too many callout boxes
+- **Callout labels:** `**Note:**`, `**Important:**`, `**Warning:**`, `**Tip:**`
+- **Definition lists:** `**Term:** Description` patterns
+- **Problem/Solution labels:** `**Problem:**` and `**Solution:**` in troubleshooting docs
+
+> **Do**: "**Note:** Use feature flags to control rollouts."
+
+> **Do**: "**Problem:** Events aren't appearing in the dashboard."
+
+Avoid using bold text for general emphasis in prose. If something is important and needs extra emphasis, consider using a callout box instead.
+
+> **Don't**: "This is a **really important** step in the process."
+
+> **Don't**: "Make sure you **always** configure this setting **before** deploying."
 
 ### Bold UI elements
 
@@ -307,6 +353,15 @@ For nested UI elements, use `>` to connect them hierarchically.
 > **Do**: In PostHog, navigate to **Settings** > **API keys** > **Personal API key**.
 
 > **Don't**: In PostHog, navigate to **Settings**, look under **API keys**, and then click **Personal API key**.
+
+### Avoid excessive formatting
+
+Don't use:
+
+- Multiple header levels in short sections
+- Bold text for general emphasis in prose
+- Lists when prose is clearer
+- Too many callout boxes
 
 ### Links
 
