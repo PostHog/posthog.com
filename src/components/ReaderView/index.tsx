@@ -784,7 +784,7 @@ function ReaderViewContent({
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div
-                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all [&>span:not(.OSTable):not(.Table)]:block ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
                                                     : contentMaxWidthClass ||
