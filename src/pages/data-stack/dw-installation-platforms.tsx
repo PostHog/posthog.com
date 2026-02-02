@@ -42,6 +42,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'SaaS tools',
         },
         {
+            label: 'Clerk',
+            url: '/docs/data-warehouse/sources/clerk',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_36_01_806_Z_30c81aea20.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Cloudflare R2',
             url: '/docs/data-warehouse/sources/r2',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
@@ -96,6 +102,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Other',
         },
         {
+            label: 'GitHub',
+            url: '/docs/data-warehouse/sources/github',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/github_mark_903e35d471.svg',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Hubspot',
             url: '/docs/data-warehouse/sources/hubspot',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hubspot_1_f8248c008e.svg',
@@ -105,6 +117,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             label: 'Klaviyo',
             url: '/docs/data-warehouse/sources/klaviyo',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+            category: 'SaaS tools',
+        },
+        {
+            label: 'Mailchimp',
+            url: '/docs/data-warehouse/sources/mailchimp',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_37_02_666_Z_2c8f3e8398.png',
             category: 'SaaS tools',
         },
         {
