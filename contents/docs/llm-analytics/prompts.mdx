@@ -1,0 +1,167 @@
+---
+title: Prompt management
+---
+
+import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
+
+<PromptsAlpha />
+
+Prompt management lets you create and update LLM prompts directly in PostHog. When you use prompts through the SDK, they're fetched at runtime with caching and fallback support—so you can iterate on prompts without deploying code.
+
+## Why use prompt management?
+
+- **Update prompts without code deploys** – Change prompts instantly from the PostHog UI
+- **Non-engineers can iterate** – Product and content teams can tweak prompts without touching code
+- **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
+- **(soon) Versioning** – Support for prompt versioniong and tagging
+- **(soon) A/B testing** – Support for testing different prompt variants using Experiments
+
+## Creating prompts
+
+1. Navigate to **LLM analytics** > **Prompts**
+2. Click **New prompt**
+3. Enter a name for your prompt
+4. Write your prompt content, using `{{variables}}` for dynamic values
+5. Click **Save**
+
+### Prompt naming rules
+
+- Names are **immutable** after creation (cannot be changed)
+- Only letters, numbers, hyphens, and underscores allowed (`^[a-zA-Z0-9_-]+$`)
+- Names must be unique within your project
+
+## Template variables
+
+Use double curly braces to define variables in your prompts:
+
+```text
+You are a helpful assistant for {{company_name}}.
+The user's name is {{user_name}} and their subscription tier is {{tier}}.
+```
+
+## Using prompts in code
+
+### Prerequisites
+
+- **Personal API key** – Prompt fetching requires a [personal API key](/docs/api#personal-api-keys), not a project API key
+- **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
+
+### Python
+
+```python
+from posthog import Posthog
+from posthog.ai.prompts import Prompts
+
+# Initialize with PostHog client
+posthog = Posthog(
+    '<your_project_api_key>',
+    host='https://us.i.posthog.com',
+    personal_api_key='<your_personal_api_key>'
+)
+prompts = Prompts(posthog)
+
+# Or initialize directly
+prompts = Prompts(
+    personal_api_key='<your_personal_api_key>',
+    host='https://us.i.posthog.com'
+)
+
+# Fetch a prompt with optional fallback
+template = prompts.get(
+    'support-system-prompt',
+    cache_ttl_seconds=600,  # Override default 5-minute cache
+    fallback='You are a helpful assistant.'  # Used if fetch fails
+)
+
+# Compile with variables
+system_prompt = prompts.compile(template, {
+    'company': 'Acme Corp',
+    'tier': 'premium',
+    'user_name': 'Alice'
+})
+
+# Use in your LLM call
+# ... your OpenAI/Anthropic call here
+```
+
+### JavaScript/TypeScript
+
+```typescript
+import { Prompts } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
+
+// Initialize with PostHog client
+const posthog = new PostHog('<your_project_api_key>', {
+  host: 'https://us.i.posthog.com'
+})
+
+const prompts = new Prompts({
+  posthog,
+  personalApiKey: '<your_personal_api_key>',
+  defaultCacheTtlSeconds: 300  // Optional
+})
+
+// Or initialize directly
+const prompts = new Prompts({
+  personalApiKey: '<your_personal_api_key>',
+  host: 'https://us.i.posthog.com'
+})
+
+// Fetch a prompt
+const template = await prompts.get('support-system-prompt', {
+  cacheTtlSeconds: 600,
+  fallback: 'You are a helpful assistant.'
+})
+
+// Compile with variables
+const systemPrompt = prompts.compile(template, {
+  company: 'Acme Corp',
+  tier: 'premium',
+  userName: 'Alice'
+})
+
+// Use in your LLM call
+// ... your OpenAI/Anthropic call here
+```
+
+## Caching
+
+Prompts are cached on the SDK side to minimize latency and API calls:
+
+- **Default TTL**: 5 minutes (300 seconds)
+- **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
+- **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
+- **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
+
+## Linking prompts to traces
+
+To track which prompts are used in which generations, include the `$ai_prompt_name` property when capturing:
+
+<MultiLanguage>
+
+```python
+response = client.chat.completions.create(
+    model="gpt-5",
+    messages=[{"role": "system", "content": system_prompt}],
+    posthog_properties={
+        "$ai_prompt_name": "support-system-prompt"
+    }
+)
+```
+
+```typescript
+const response = await openai.chat.completions.create({
+    model: "gpt-5",
+    messages: [{ role: "system", content: systemPrompt }],
+    posthogProperties: {
+        $ai_prompt_name: "support-system-prompt"
+    }
+})
+```
+
+</MultiLanguage>
+
+Once linked, you can:
+- Filter generations by prompt name
+- View related traces from the prompt detail page
+- Analyze which prompts perform best
