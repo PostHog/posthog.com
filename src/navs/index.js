@@ -721,7 +721,7 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/docs-ownership',
             },
             {
-                name: 'Stlye guide',
+                name: 'Style guide',
                 url: '/handbook/docs-and-wizard/docs-style-guide',
             },
             {
