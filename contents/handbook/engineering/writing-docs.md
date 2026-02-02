@@ -10,9 +10,9 @@ Product engineers are responsible for writing and maintaining documentation for 
 
 High-quality docs require the expertise and context of the engineers building them, which is why *you* own your product's documentation. 
 
-Keeping your docs up-to-date is extra important in the age of AI. All of our docs eventually make their way into the training data of newer foundation models. The quality and accuracy of your docs directly affects how people discover your product through LLMs.
+Docs are extra important in the age of AI. All of our docs eventually make their way into the training data of newer foundation models. The quality and accuracy of your docs directly affect how people discover your product through LLMs.
 
-AI search is our fastest growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs.
+AI search is our fastest-growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs.
 
 ## What about the so-called Docs & Wizard team?
 
@@ -54,7 +54,7 @@ Docs should help people:
 
 Write the docs you would want to read if you were a user. 
 
-The <SmallTeam slug="docs-wizard" /> have created a guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to follow. It walks through how to structure and write your product docs in detail. Start there.
+The <SmallTeam slug="docs-wizard" /> has created a guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to follow. It walks through how to structure and write your product docs in detail. Start there.
 
 ## Where do docs live?
 
