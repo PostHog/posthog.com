@@ -140,7 +140,7 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
 3. Inform them they can take advantage of this offer, which allows them to:
-   - purchase credits equivalent to ~10 months of usage, and
+   - purchase credits equivalent to ~10 months of usage (expiring 10 months after the contract start date), and
    - receive ~2 months of additional usage for free, applied before the contract start date.
 4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
 5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
