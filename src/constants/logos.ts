@@ -44,6 +44,7 @@ export const LOGOS = {
     ios: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
     java: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
     javascript: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg',
+    klaviyo: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
     kubernetes: 'https://res.cloudinary.com/dmukukwp6/image/upload/kubernetes_svgrepo_com_b9716be409.svg',
     laravel:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/laravel.svg',

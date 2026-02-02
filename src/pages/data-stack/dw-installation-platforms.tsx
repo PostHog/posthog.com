@@ -102,6 +102,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'SaaS tools',
         },
         {
+            label: 'Klaviyo',
+            url: '/docs/data-warehouse/sources/klaviyo',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'MongoDB',
             url: '/docs/data-warehouse/sources/mongodb',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Mongo_DB_Logo_f095b5aca0.svg',
