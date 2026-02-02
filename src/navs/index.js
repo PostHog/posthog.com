@@ -2528,10 +2528,6 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Agent toolkit',
-                            url: '/docs/ai-engineering/agent-toolkit',
-                        },
-                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
