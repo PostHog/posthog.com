@@ -5050,6 +5050,10 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/installation/groq',
                         },
                         {
+                            name: 'Helicone',
+                            url: '/docs/llm-analytics/installation/helicone',
+                        },
+                        {
                             name: 'Mistral',
                             url: '/docs/llm-analytics/installation/mistral',
                         },
