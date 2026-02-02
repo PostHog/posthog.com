@@ -12,7 +12,7 @@ High-quality docs require the expertise and context of the engineers building th
 
 Docs are extra important in the age of AI. All of our docs eventually make their way into the training data of newer foundation models. The quality and accuracy of your docs directly affect how people discover your product through LLMs.
 
-AI search is our fastest-growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs.
+AI search is our fastest-growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs and keep them up to date.
 
 ## What about the so-called Docs & Wizard team?
 
