@@ -21,7 +21,7 @@ When PostHog is initialized via `instrumentation-client.ts`, the [React feature 
 
 ```js
 'use client'
-import { useFeatureFlagEnabled } from '@posthog/react'
+import { useFeatureFlagEnabled } from 'posthog-js/react'
 
 export default function FeatureComponent() {
   const showNewFeature = useFeatureFlagEnabled('new-feature')
