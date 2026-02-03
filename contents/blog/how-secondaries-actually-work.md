@@ -54,13 +54,9 @@ This is the fun part. It’s also the bit that caused us the most angst. “Who 
 
 The most important thing is to have a basic set of rules you apply, so that you are taking the judgement out of it. These are the rules we settled on - feel free to copy them or modify to create your own:
 
-- Only open to all current employees. This was part admin, part fairness.   
-  - On the admin side, you will be chasing your team _a lot_ to let you know what they want to do, sign documents, reply to boring questions about admin etc. This is wayyy easier to do if they still work at the company.   
-  - We also wanted to reward people who had stuck around at PostHog, as we’re still a relatively young company.   
+- **Only open to all current employees.** This was part admin, part fairness. On the admin side, you will be chasing your team _a lot_ to hear what they want to do, sign documents, reply to boring questions about admin, etc. This is *wayyy* easier if they still work at the company. We also wanted to reward people who had stuck around at PostHog, as we’re still a relatively young company.   
 
-- Employees can sell up to 20% of their vested stock.   
-  - 20% felt like a reasonable number - enough to make a difference in your life, but not enough to retire.   
-  - Vested meant that only folks who had been with us > 1 year could sell stock (because of our 1-year vesting cliff), which again seemed fair. 
+- **Employees can sell up to 20% of their vested stock.** 20% felt like a reasonable number - enough to make a difference in your life, but not enough to retire. Vested meant that only folks who had been with us > 1 year could sell stock (because of our 1-year vesting cliff), which again seemed fair. 
 
 If you are the lucky person responsible for running this process internally, some other important things to consider. This is all stuff your lawyers are experts on, so talk to them:
 
