@@ -22,6 +22,7 @@ import {
     IconDatabaseBolt,
     IconAsterisk,
     IconAI,
+    IconSupport,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -60,6 +61,17 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: 'products',
             status: 'WIP',
+        },
+        {
+            name: 'Support',
+            Icon: IconSupport,
+            description: 'Built-in customer support with chat widget and unified inbox.',
+            handle: 'support',
+            color: 'blue',
+            colorSecondary: 'blue',
+            category: 'communication',
+            slug: 'docs/support',
+            status: 'private alpha',
         },
         {
             name: 'Group Analytics',

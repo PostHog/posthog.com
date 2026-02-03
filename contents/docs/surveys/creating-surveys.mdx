@@ -114,11 +114,16 @@ With the parameter, responses are attributed to the specified user, enabling you
 
 #### Adding event properties to hosted survey responses
 
-When directing users to a hosted survey, you can add event propertie using URL parameters. These parameters are automatically captured on the survey sent event.
+When directing users to a hosted survey, you can add event properties using URL parameters. These parameters are automatically captured on the survey sent event.
 
 ```
 https://us.posthog.com/external_surveys/your-survey-id?order_id=12345
 ```
+
+The types for custom properties are automatically inferred with this logic, in this order:
+- `Numeric`: matches regex `/^-?\d+(\.\d+)?$/` (integer or decimal)
+- `Boolean`: exact strings `"true"` and `"false"`
+- `String`: everything else
 
 #### Pre-filling survey responses via URL
 
