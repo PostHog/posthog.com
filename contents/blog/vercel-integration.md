@@ -1,6 +1,6 @@
 ---
 date: 2026-02-02
-title: PostHog × Vercel: feature flags, minus the plumbing
+title: "PostHog × Vercel: feature flags, minus the plumbing"
 author:
   - sara-miteva
 featuredImage: >-
@@ -12,6 +12,11 @@ hideAnchor: true
 category: PostHog news
 tags:
   - Product
+  seo:
+    {
+        metaTitle: 'PostHog × Vercel: feature flags, minus the plumbing',
+        metaDescription: 'The new PostHog × Vercel integration lets you use PostHog feature flags and experiments directly in Vercel, without custom wiring or creative workarounds.',
+    }
 ---
 
 If you’re building on Vercel and using PostHog for [feature flags](/feature-flags) and [experiments](/experiments), you’ve probably had some version of this setup:
