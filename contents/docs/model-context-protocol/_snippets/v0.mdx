@@ -1,5 +1,9 @@
-1. Open [v0](https://v0.app/chat/settings/mcp-connections) settings and navigate to **Connections**.
-2. Click **Add MCP** and select **Custom MCP**.
-3. In the form, name the MCP `PostHog` and use the URL `https://mcp.posthog.com/mcp`.
-4. Under **Authentication**, select **OAuth** and click **Authorize** to kick off the OAuth flow.
-5. When prompted, log in to PostHog to authorize access. Then, you can access the PostHog MCP server in your v0 chat.
+1. In a v0 chat, click the **+** button in the bottom left
+2. Click **MCPs**
+3. Click **Add MCP**
+4. Select **Custom MCP**
+5. Enter the name `PostHog` and URL `https://mcp.posthog.com/mcp`
+6. Under **Authentication**, select **OAuth**
+7. Click **Add**, then authorize with PostHog when prompted
+
+If OAuth stops working, you can use a [personal API key](/docs/integrations/v0#oauth-not-refreshing) with Bearer authentication instead.
