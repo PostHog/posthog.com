@@ -12,7 +12,7 @@ const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     if (isMinimalBuild) {
-        return createContentPreviewPages({ createPage, graphql })
+        return createMinimalPages({ createPage, graphql })
     }
 
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
@@ -946,7 +946,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 }
 
-async function createContentPreviewPages({
+async function createMinimalPages({
     createPage,
     graphql,
 }: {
@@ -985,71 +985,15 @@ async function createContentPreviewPages({
                     }
                 }
             }
-            tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
-            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
-            blogPosts: allMdx(
+            posts: allMdx(
                 filter: {
                     isFuture: { eq: false }
                     frontmatter: { date: { ne: null } }
-                    fields: { slug: { regex: "/^/blog/" } }
-                }
-            ) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
+                    fields: {
+                        slug: {
+                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers)/"
+                        }
                     }
-                    fields {
-                        slug
-                    }
-                }
-            }
-            libraryArticles: allMdx(
-                filter: {
-                    isFuture: { eq: false }
-                    frontmatter: { date: { ne: null } }
-                    fields: { slug: { regex: "/^/library|^/founders|^/product-engineers|^/features|^/newsletter/" } }
-                }
-            ) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
-            spotlights: allMdx(
-                filter: {
-                    isFuture: { eq: false }
-                    frontmatter: { date: { ne: null } }
-                    fields: { slug: { regex: "/^/spotlight/" } }
                 }
             ) {
                 nodes {
@@ -1144,17 +1088,10 @@ async function createContentPreviewPages({
     const data = result.data as {
         docs: { nodes: any[] }
         handbook: { nodes: any[] }
-        tutorials: { nodes: any[] }
-        customers: { nodes: any[] }
-        blogPosts: { nodes: any[] }
-        libraryArticles: { nodes: any[] }
-        spotlights: { nodes: any[] }
+        posts: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
-    createBlogPreviewPosts(data.customers.nodes)
-    createBlogPreviewPosts(data.blogPosts.nodes)
-    createBlogPreviewPosts(data.libraryArticles.nodes)
-    createBlogPreviewPosts(data.spotlights.nodes)
+    createBlogPreviewPosts(data.posts.nodes)
 }
