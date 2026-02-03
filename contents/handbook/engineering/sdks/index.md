@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-There is no dedicated SDK team at PostHog. Instead, SDK development and maintenance is a collaborative effort across the engineering organization. [@PostHog/client-libraries-approvers](https://github.com/orgs/PostHog/teams/client-libraries-approvers) exists in GitHub to coordinate the collaboration for those who are more interested than normal in the development of these SDKs.
+There is now a small, dedicated SDK team at PostHog ([@PostHog/team-client-libraries](https://github.com/orgs/PostHog/teams/team-client-libraries)) that helps drive direction and coordination. However, SDK development and maintenance remains a collaborative effort across the engineering organization. [@PostHog/client-libraries-approvers](https://github.com/orgs/PostHog/teams/client-libraries-approvers) exists in GitHub to coordinate the collaboration for those who are more interested than normal in the development of these SDKs.
 
 ## How SDK work gets done
 
