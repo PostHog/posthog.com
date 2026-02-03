@@ -5736,6 +5736,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Logging best practices',
+                    url: '/docs/logs/best-practices',
+                    icon: 'IconBook',
+                    color: 'green',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
