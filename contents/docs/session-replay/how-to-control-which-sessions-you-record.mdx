@@ -51,8 +51,8 @@ posthog.startSessionRecording({
 
 ## With URL trigger conditions
 
-You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.  
-The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the page.
+You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.
+The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png" 
@@ -63,8 +63,8 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
 
 ## With Event trigger conditions
 
-Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.  
-The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the event.
+Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.
+The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png" 
@@ -78,11 +78,27 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
 If you use [error tracking](/docs/error-tracking), exceptions are captured as events. You can select the exception event as an event trigger to start session recording.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_dark_621ce757d3.png"
-    alt="Triggering session recordings on exceptions" 
+    alt="Triggering session recordings on exceptions"
     classes="rounded"
 />
+
+### How the trigger buffer works
+
+When using URL or event triggers, the client buffers recording data in-memory while waiting for a trigger to match. Here's how it works:
+
+- While waiting for a trigger ("trigger pending"), the client takes a **full snapshot once per minute**
+- Only data from the **most recent snapshot** up to when the trigger fires is kept
+- This means the buffer contains **up to 1 minute** of activity before the trigger
+
+The actual buffered duration varies depending on timing. For example:
+- If a snapshot was taken 45 seconds before the trigger fires, you'll see ~45 seconds of activity before the trigger
+- If a snapshot was taken 5 seconds before the trigger fires, you'll only see ~5 seconds of activity
+
+This approach balances providing useful context with browser performance — keeping multiple snapshots would be more expensive for the browser.
+
+> **Note:** Full page navigations (page refreshes) clear the buffer and start over from a new snapshot.
 
 ## With feature flags
 
