@@ -65,7 +65,7 @@ If you are the lucky person responsible for running this process internally, som
   - More than 10 people selling? You are now doing an SEC-regulated tender offer, and will need to use a platform like [Carta](https://carta.com/) to manage the sale. This adds about 4 weeks to the process because you need to have the tender open for a minimum period, and Carta will charge a % of the proceeds as their fee (try to get buyers to pay for this or at least split the cost between buyers and sellers.)  
 
 - There are a few different ways the mechanics of exercising the stock options works.  
-  - If your employees hold ISOs, they should exercise the options first themselves, ie. they wire your company money, and then sell. This is better tax-wise for the employee.   
+  - If your employees hold ISOs, they should exercise the options first themselves, i.e. they wire your company money, and then sell. This is better tax-wise for the employee.   
   - If they hold ISOs but can’t afford to exercise, then they should do cashless exercise, where the amount the employee pays to exercise is just deducted from the proceeds you send them, ie. they don’t send any money.   
 
 - We had employees transacting directly with investors in the paperwork - your lawyers will handle all this.   
