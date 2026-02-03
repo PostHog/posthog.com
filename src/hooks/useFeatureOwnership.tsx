@@ -336,7 +336,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 .
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile folks (@mobile-folks on Slack) first.</strong>
+                <strong>
+                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
+                    first.
+                </strong>
             </>
         ),
         label: 'feature/libraries',
