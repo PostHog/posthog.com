@@ -85,7 +85,7 @@ The GitHub App needs to bypass certain protections to push release commits direc
 1. Go to your SDK repository settings
 2. Navigate to **Rules** → **Rulesets**
 3. Open the ruleset that requires PRs (may have various names)
-   1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/team-client-libraries` for all files
+   1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/client-libraries-approvers` for all files
 4. Under **Bypass list**, click **Add bypass**
 5. Select your GitHub App (`Releaser (<sdk_name>)`)
 6. Click the three-dot menu and choose **Exempt**
