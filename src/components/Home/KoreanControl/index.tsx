@@ -43,16 +43,24 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 
-// Language Toggle Component for Korean homepage
+// Language Toggle Component
 const LanguageToggle = () => {
+    const handleClick = () => {
+        // Set preference so user won't be auto-redirected back to Korean
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('language-preference-dismissed', 'true')
+        }
+    }
+
     return (
         <div className="fixed bottom-4 right-4 z-50">
             <Link
-                to="/ko/"
+                to="/"
+                onClick={handleClick}
                 className="flex items-center gap-2 px-3 py-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full shadow-lg hover:shadow-xl transition-shadow text-sm font-medium"
             >
                 <IconGlobe className="size-4" />
-                <span>한국어</span>
+                <span>English</span>
             </Link>
         </div>
     )
@@ -67,7 +75,6 @@ interface ProductButtonsProps {
 const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
     const allProducts = useProduct()
 
-    // Helper to get product by handle
     const getProduct = (handle: string) =>
         Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
 
@@ -115,10 +122,12 @@ const CTAs = () => {
                     size="md"
                     state={{ newWindow: true, initialTab: 'signup' }}
                 >
-                    Get started - free
+                    {/* Korean: "Get started - free" */}
+                    무료로 시작하기
                 </CallToAction>
                 <CallToAction type="secondary" size="md" onClick={() => setShowIntegrationPrompt(true)}>
-                    Install with AI
+                    {/* Korean: "Install with AI" */}
+                    AI로 설치하기
                 </CallToAction>
             </div>
             <motion.div
@@ -169,7 +178,8 @@ const HomeHitCounter = () => {
 
     return (
         <div className="flex flex-col justify-center text-center mt-20">
-            <p className="mb-2">Thanks for being visitor number</p>
+            {/* Korean: "Thanks for being visitor number" */}
+            <p className="mb-2">방문자 번호로 와주셔서 감사합니다</p>
             <Tooltip
                 trigger={
                     <div className="inline-flex bg-black divide-x divide-primary">
@@ -203,7 +213,8 @@ const HomeHitCounter = () => {
                 }
                 delay={0}
             >
-                Total hit count to posthog.com
+                {/* Korean: "Total hit count to posthog.com" */}
+                posthog.com 총 방문 횟수
             </Tooltip>
         </div>
     )
@@ -423,214 +434,19 @@ const companyBreakdowns = {
 }
 
 const companyAttributes = {
-    VCsLoveThem: [
-        'ycombinator',
-        'airbus',
-        // "elevenlabs",
-        'trust',
-        'lovable',
-        // "supabase",
-        // "hasura",
-        'startengine',
-        // "mistralai",
-        // "raycast",
-        'researchgate',
-        'exa',
-        'heygen',
-        // "posthog"
-    ],
-    colorful: [
-        'ycombinator',
-        // "airbus",
-        // "elevenlabs",
-        'trust',
-        'lovable',
-        'supabase',
-        // "hasura",
-        'startengine',
-        'mistralai',
-        'raycast',
-        // "researchgate",
-        // "heygen",
-        // 'exa',
-        'posthog',
-    ],
-    hardware: [
-        // "ycombinator",
-        'airbus',
-        // "elevenlabs",
-        // "trust",
-        // "lovable",
-        // "supabase",
-        // "hasura",
-        // "startengine",
-        // "mistralai",
-        // "raycast",
-        // "researchgate",
-        // "heygen",
-        // 'exa',
-        'posthog',
-    ],
-    planes: [
-        // "ycombinator",
-        'airbus',
-        // "elevenlabs",
-        // "trust",
-        // "lovable",
-        // "supabase",
-        // "hasura",
-        // "startengine",
-        // "mistralai",
-        // "raycast",
-        // "researchgate",
-        // "heygen",
-        // 'exa',
-        // "posthog"
-    ],
-    highValue: [
-        'airbus',
-        'elevenlabs',
-        // "ycombinator",
-        'lovable',
-        'supabase',
-        'hasura',
-        // "trust",
-        // "startengine",
-        'mistralai',
-        // "raycast",
-        // "researchgate",
-        // "heygen",
-        // 'exa',
-        // "posthog"
-    ],
-    caseStudy: [
-        'ycombinator',
-        // "airbus",
-        'elevenlabs',
-        // "trust",
-        'lovable',
-        'supabase',
-        'hasura',
-        // "startengine",
-        // "mistralai",
-        // "raycast",
-        'researchgate',
-        'exa',
-        // "heygen",
-        'posthog',
-    ],
-    easyToYell: [
-        // "ycombinator",
-        'airbus',
-        // "elevenlabs",
-        'trust',
-        // "lovable",
-        // "supabase",
-        // "hasura",
-        // "startengine",
-        // "mistralai",
-        'raycast',
-        // "researchgate",
-        'exa',
-        'heygen',
-        'posthog',
-    ],
-    goodBandName: [
-        // "ycombinator",
-        'elevenlabs',
-        'lovable',
-        // "hasura",
-        'trust',
-        // "airbus",
-        // "supabase",
-        'startengine',
-        // "mistralai",
-        'raycast',
-        'researchgate',
-        //'exa',
-        // "heygen",
-        'posthog',
-    ],
-    explainable: [
-        'ycombinator',
-        'airbus',
-        // "trust",
-        'lovable',
-        // "elevenlabs",
-        // "supabase",
-        // "hasura",
-        'startengine',
-        // "mistralai",
-        // "raycast",
-        'researchgate',
-        'exa',
-        // "heygen",
-        // "posthog"
-    ],
-    shortNames: [
-        // "ycombinator",
-        'airbus',
-        'trust',
-        'lovable',
-        // "elevenlabs",
-        // "supabase",
-        'hasura',
-        // "startengine",
-        // "mistralai",
-        'raycast',
-        // "researchgate",
-        'exa',
-        'heygen',
-        'posthog',
-    ],
-    realWords: [
-        // "ycombinator",
-        'airbus',
-        'trust',
-        'lovable',
-        'elevenlabs',
-        // "supabase",
-        // "hasura",
-        'startengine',
-        // "mistralai",
-        // "raycast",
-        'researchgate',
-        //'exa',
-        // "heygen",
-        'posthog',
-    ],
-    american: [
-        'ycombinator',
-        // "airbus",
-        // "elevenlabs",
-        'trust',
-        // "lovable",
-        'supabase',
-        'hasura',
-        'startengine',
-        // "mistralai",
-        // "raycast",
-        'researchgate',
-        'exa',
-        'heygen',
-        'posthog',
-    ],
-    pokemon: [
-        // "ycombinator",
-        // "airbus",
-        // "elevenlabs",
-        // "trust",
-        'lovable',
-        'supabase',
-        'hasura',
-        // "startengine",
-        'mistralai',
-        'raycast',
-        // "researchgate",
-        'exa',
-        'heygen',
-        // "posthog"
-    ],
+    VCsLoveThem: ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen'],
+    colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
+    hardware: ['airbus', 'posthog'],
+    planes: ['airbus'],
+    highValue: ['airbus', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'mistralai'],
+    caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
+    easyToYell: ['airbus', 'trust', 'raycast', 'exa', 'heygen', 'posthog'],
+    goodBandName: ['elevenlabs', 'lovable', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
+    explainable: ['ycombinator', 'airbus', 'lovable', 'startengine', 'researchgate', 'exa'],
+    shortNames: ['airbus', 'trust', 'lovable', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
+    realWords: ['airbus', 'trust', 'lovable', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
+    american: ['ycombinator', 'trust', 'supabase', 'hasura', 'startengine', 'researchgate', 'exa', 'heygen', 'posthog'],
+    pokemon: ['lovable', 'supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
 }
 
 interface CustomerProps {
@@ -662,21 +478,21 @@ const CompanyStageTabs = () => {
         {
             label: (
                 <span>
-                    Startup<span className="hidden @lg:inline"> / Side project</span>
+                    {/* Korean: "Startup / Side project" */}
+                    스타트업<span className="hidden @lg:inline"> / 사이드 프로젝트</span>
                 </span>
             ),
             value: 'startup',
-            // icon: <IconLaptop className="size-5" />,
         },
         {
-            label: 'Growth',
+            // Korean: "Growth"
+            label: '성장기',
             value: 'growth',
-            // icon: <IconLaptop className="size-5" />,
         },
         {
-            label: 'Scale',
+            // Korean: "Scale"
+            label: '스케일',
             value: 'scale',
-            // icon: <IconLaptop className="size-5" />,
         },
     ]
 
@@ -757,84 +573,32 @@ const Image = ({ src, className }: { src: string; className?: string }) => {
     return <CloudinaryImage src={src} className={className} />
 }
 
-const PageNavigation = () => {
-    const [showTableOfContents, setShowTableOfContents] = useState(false)
-    return (
-        <div className="mb-8">
-            {!showTableOfContents && (
-                <button
-                    className="underline text-sm font-semibold"
-                    onClick={() => setShowTableOfContents(!showTableOfContents)}
-                >
-                    table of contents
-                </button>
-            )}
-            {showTableOfContents && (
-                <Accordion
-                    defaultValue="table-of-contents"
-                    items={[
-                        {
-                            value: 'table-of-contents',
-                            trigger: <strong>Contents</strong>,
-                            content: (
-                                <div data-scheme="primary">
-                                    <ol className="pl-4">
-                                        {sections.map((section) => (
-                                            <li key={section.title}>
-                                                <Link
-                                                    to={`/#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                    className="group flex items-center gap-1"
-                                                >
-                                                    <span>{section.title}</span>
-                                                    <IconArrowRight className="inline-block rotate-90 size-3 text-primary opacity-0 group-hover:opacity-100" />
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ol>
-                                </div>
-                            ),
-                        },
-                    ]}
-                />
-            )}
-        </div>
-    )
-}
-
 const Customers = () => {
     const { getCustomers, hasCaseStudy } = useCustomers()
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 
-    // Get all companies
     const allCompanies = [...COL1, ...COL2]
-
-    // Get companies in column 1 (those in the breakdown) and column 2 (the rest)
     const companiesInCol1 = companyAttributes[currentBreakdown as keyof typeof companyAttributes] || []
     const companiesInCol2 = allCompanies.filter((company) => !companiesInCol1.includes(company))
 
     const column1 = getCustomers(companiesInCol1)
     const column2 = getCustomers(companiesInCol2)
 
-    // Helper function to render logo - same logic as CustomersSlide.tsx
     const renderLogo = (customer: any) => {
         if (!customer.logo) {
             return <span className="text-xs">{customer.name}</span>
         }
 
-        // Check if logo is a React component (single SVG format)
         if (typeof customer.logo === 'function') {
             const LogoComponent = customer.logo
             const heightClass = customer.height ? `h-${customer.height - 2}` : 'h-8'
             const className = `w-full fill-current object-contain ${heightClass} `.trim()
-
             return <LogoComponent className={className} />
         }
 
-        // Otherwise, it's the existing light/dark object format
         const heightClass = customer.height ? `max-h-${customer.height}` : ''
-
         return (
             <>
                 <img
@@ -851,11 +615,9 @@ const Customers = () => {
         )
     }
 
-    // Toggle function to change breakdown with FLIP animation
     const toggleBreakdown = () => {
         if (isAnimating) return
 
-        // Step 1: Record current positions (First)
         const beforePositions: Record<string, DOMRect> = {}
         Object.keys(logoRefs.current).forEach((slug) => {
             const element = logoRefs.current[slug]
@@ -866,14 +628,12 @@ const Customers = () => {
 
         setIsAnimating(true)
 
-        // Step 2: Change breakdown (Last)
         const breakdownKeys = Object.keys(companyBreakdowns)
         const currentIndex = breakdownKeys.indexOf(currentBreakdown)
         const availableBreakdowns = breakdownKeys.filter((_, index) => index !== currentIndex)
         const randomIndex = Math.floor(Math.random() * availableBreakdowns.length)
         setCurrentBreakdown(availableBreakdowns[randomIndex])
 
-        // Step 3: Calculate and animate differences (Invert & Play)
         requestAnimationFrame(() => {
             Object.keys(logoRefs.current).forEach((slug) => {
                 const element = logoRefs.current[slug]
@@ -882,11 +642,9 @@ const Customers = () => {
                     const deltaX = beforePositions[slug].left - afterPosition.left
                     const deltaY = beforePositions[slug].top - afterPosition.top
 
-                    // Apply initial transform (Invert)
                     element.style.transform = `translate(${deltaX}px, ${deltaY}px)`
                     element.style.transition = 'none'
 
-                    // Animate to final position (Play)
                     requestAnimationFrame(() => {
                         element.style.transition = 'transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
                         element.style.transform = 'translate(0, 0)'
@@ -894,10 +652,8 @@ const Customers = () => {
                 }
             })
 
-            // Reset animation state
             setTimeout(() => {
                 setIsAnimating(false)
-                // Clean up transforms
                 Object.keys(logoRefs.current).forEach((slug) => {
                     const element = logoRefs.current[slug]
                     if (element) {
@@ -915,7 +671,6 @@ const Customers = () => {
         { name: currentLabels.col2, width: 'minmax(auto,1fr)', align: 'center' as const },
     ]
 
-    // Helper function to render customer with case study link
     const renderCustomerWithLink = (customer: any) => (
         <div
             key={customer.slug}
@@ -940,7 +695,8 @@ const Customers = () => {
                         sideOffset={14}
                     >
                         <p className="text-sm mb-0">
-                            {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
+                            {/* Korean: "First PostHog customer!" / "Read customer story" */}
+                            {customer.slug === 'posthog' ? '첫 번째 PostHog 고객!' : '고객 스토리 읽기'}
                         </p>
                     </Tooltip>
                 </OSButton>
@@ -985,78 +741,20 @@ const Customers = () => {
                         disabled={isAnimating}
                     >
                         {isAnimating ? (
-                            '🔀 Shuffling...'
+                            '🔀 섞는 중...' // Korean: "Shuffling..."
                         ) : (
                             <>
-                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                                {/* Korean: "Shuffle companies" */}
+                                <IconRefresh className="size-4 inline-block relative -top-px" /> 회사 섞기
                             </>
                         )}
                     </OSButton>
                 </div>
-
-                {/* 
-            <select
-                value={currentBreakdown}
-                onChange={(e) => {
-                    if (!isAnimating) {
-                        // Record positions before change for FLIP animation
-                        const beforePositions: Record<string, DOMRect> = {}
-                        Object.keys(logoRefs.current).forEach(slug => {
-                            const element = logoRefs.current[slug]
-                            if (element) {
-                                beforePositions[slug] = element.getBoundingClientRect()
-                            }
-                        })
-
-                        setIsAnimating(true)
-                        setCurrentBreakdown(e.target.value)
-
-                        // Apply FLIP animation
-                        requestAnimationFrame(() => {
-                            Object.keys(logoRefs.current).forEach(slug => {
-                                const element = logoRefs.current[slug]
-                                if (element && beforePositions[slug]) {
-                                    const afterPosition = element.getBoundingClientRect()
-                                    const deltaX = beforePositions[slug].left - afterPosition.left
-                                    const deltaY = beforePositions[slug].top - afterPosition.top
-
-                                    element.style.transform = `translate(${deltaX}px, ${deltaY}px)`
-                                    element.style.transition = 'none'
-
-                                    requestAnimationFrame(() => {
-                                        element.style.transition = 'transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
-                                        element.style.transform = 'translate(0, 0)'
-                                    })
-                                }
-                            })
-
-                            setTimeout(() => {
-                                setIsAnimating(false)
-                                Object.keys(logoRefs.current).forEach(slug => {
-                                    const element = logoRefs.current[slug]
-                                    if (element) {
-                                        element.style.transform = ''
-                                        element.style.transition = ''
-                                    }
-                                })
-                            }, 600)
-                        })
-                    }
-                }}
-                className="px-2 py-1 text-sm border border-primary rounded bg-primary text-primary"
-                disabled={isAnimating}
-            >
-                {Object.entries(companyBreakdowns).map(([key, labels]) => (
-                    <option key={key} value={key}>
-                        {labels.col1} / {labels.col2}
-                    </option>
-                ))}
-            </select>
-             */}
             </div>
             <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open customers.mdx
+                {/* Korean: "Open customers.mdx" */}
+                customers.mdx 열기
             </OSButton>
         </>
     )
@@ -1111,9 +809,8 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         props: [],
         Editor: () => (
             <>
-                <p className="-mt-2">
-                    If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
-                </p>
+                {/* Korean: "If nothing else has sold you on PostHog, hopefully these classic marketing tactics will." */}
+                <p className="-mt-2">아직 마음이 안 움직이셨다면, 이 클래식한 마케팅 전술이 도움이 되길 바랍니다.</p>
                 <CTA headline={false} />
             </>
         ),
@@ -1131,25 +828,29 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+        // Korean: "README: PostHog data stack.md"
+        Editor: () => <Button url="/data-stack">README: PostHog 데이터 스택.md</Button>,
     },
     {
         name: 'ButtonPricing',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/pricing">Explore pricing</Button>,
+        // Korean: "Explore pricing"
+        Editor: () => <Button url="/pricing">요금제 살펴보기</Button>,
     },
     {
         name: 'ButtonAI',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/ai">Learn about PostHog AI</Button>,
+        // Korean: "Learn about PostHog AI"
+        Editor: () => <Button url="/ai">PostHog AI 알아보기</Button>,
     },
     {
         name: 'ButtonAbout',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/about">Read more about us</Button>,
+        // Korean: "Read more about us"
+        Editor: () => <Button url="/about">우리에 대해 더 알아보기</Button>,
     },
     {
         name: 'ImageDW',
@@ -1208,7 +909,8 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                 }
                 delay={0}
             >
-                <p className="text-sm mb-0">You can also connect your own!</p>
+                {/* Korean: "You can also connect your own!" */}
+                <p className="text-sm mb-0">자체 데이터 웨어하우스도 연결할 수 있어요!</p>
             </Tooltip>
         ),
     },
@@ -1217,19 +919,20 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => (
+            // Korean: "support folks"
             <SmallTeam slug="support" noMiniCrest>
-                support folks
+                서포트 팀원들
             </SmallTeam>
         ),
     },
 ]
 
-export default function Home() {
+export default function KoreanHome() {
     const {
         mdx: { rawBody, mdxBody },
     } = useStaticQuery(graphql`
         query {
-            mdx(slug: { eq: "" }) {
+            mdx(slug: { eq: "ko" }) {
                 rawBody
                 mdxBody: body
             }
@@ -1241,33 +944,16 @@ export default function Home() {
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'home.mdx')
-        }
-    }, [])
-
-    // Browser language detection for Korean users
-    useEffect(() => {
-        // Check if we've already shown or dismissed the language preference
-        const hasSeenLanguagePrompt = localStorage.getItem('language-preference-dismissed')
-        if (hasSeenLanguagePrompt) return
-
-        // Check if browser language is Korean
-        const browserLang = navigator.language || (navigator as any).userLanguage
-        const isKorean = browserLang?.toLowerCase().startsWith('ko')
-
-        if (isKorean && typeof window !== 'undefined') {
-            // Redirect Korean users to the Korean homepage
-            localStorage.setItem('language-preference-dismissed', 'true')
-            window.location.href = '/ko/'
+            setWindowTitle(appWindow, 'home.mdx (한국어)')
         }
     }, [])
 
     return (
         <>
             <SEO
-                title="PostHog – We make dev tools for product engineers"
+                title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
                 updateWindowTitle={false}
-                description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
+                description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                 image="/images/og/default.png"
             />
             <LanguageToggle />
@@ -1280,7 +966,7 @@ export default function Home() {
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
                     }.posthog.com/signup`,
-                    label: 'Get started - free',
+                    label: '무료로 시작하기', // Korean: "Get started - free"
                 }}
             />
         </>
