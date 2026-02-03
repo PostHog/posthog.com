@@ -25,7 +25,7 @@ Secondaries - so hot right now. For those not in the loop, a secondary stock sal
 
 We’ve done two rounds of secondary sales at PostHog as part of our Series C and D, and we learned a *lot* of important details about how this stuff actually works. However, nobody is writing about this in any detail. Today I’m sharing those details with you. 
 
-> This guide is mainly written for founders and employees at US-based startups, so I’m going to assume you already understand what things like stocks, options and strike prices are. If you don’t, [this primer may help](https://posthog.com/handbook/people/share-options). And it goes without saying, this post is 1000% not legal advice!
+> This guide is mainly written for founders and employees at US-based startups, so I’m going to assume you already understand what things like stocks, options and strike prices are. If you don’t, [this primer may help](/handbook/people/share-options). And it goes without saying, this post is 1000% not legal advice!
 
 ## Why should I care?
 
@@ -85,12 +85,12 @@ You may have read all of the above and thought ‘wow everyone is doing secondar
 - In the US and some other countries, early exercise can have tax benefits - google 83(b) and then _please talk to an accountant._   
 - If you work for a US startup but live outside the US, get an account set up that can receive USD like [Wise](https://wise.com/) or similar and then transfer out from there. Do not just have the money wired straight to your local currency account. For our non-US employees, this took 10min and literally saved them $000s. 
 
-Finally, if you are interviewing for jobs and [asking good questions](https://posthog.com/founders/what-to-ask-in-interviews), secondary strategy is probably more important than exit strategy in 2026. It is probably more useful to ask about how they think about secondaries and control more generally than ‘so, when’s that IPO happening?’. 
+Finally, if you are interviewing for jobs and [asking good questions](/founders/what-to-ask-in-interviews), secondary strategy is probably more important than exit strategy in 2026. It is probably more useful to ask about how they think about secondaries and control more generally than ‘so, when’s that IPO happening?’. 
 
 ## Further reading
 
-- [32 things we’ve learned about building a startup that scales](https://posthog.com/newsletter/building-a-startup-that-scales)
-- [43 things we've learned about hiring at PostHog](https://posthog.com/newsletter/43-lessons-about-hiring-for-startups)
-- [Job interview questions engineers should ask (but don't)](https://posthog.com/newsletter/job-interview-questions-engineers)
+- [32 things we’ve learned about building a startup that scales](/newsletter/building-a-startup-that-scales)
+- [43 things we've learned about hiring at PostHog](/newsletter/43-lessons-about-hiring-for-startups)
+- [Job interview questions engineers should ask (but don't)](/newsletter/job-interview-questions-engineers)
 
 <NewsletterForm />
