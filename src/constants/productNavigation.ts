@@ -12,7 +12,14 @@ export const popularProducts = [
 ]
 
 // Newest products to highlight in the menu
-export const newestProducts = ['logs', 'posthog_ai', 'llm_analytics', 'error_tracking', 'web_analytics', 'workflows']
+export const newestProducts = [
+    'logs',
+    'posthog_ai',
+    'llm_analytics',
+    'error_tracking',
+    'web_analytics',
+    'workflows_emails',
+]
 
 // Category ordering for display
 export const categoryOrder = [
@@ -78,8 +85,8 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
-    automation: ['posthog_ai', 'workflows', 'webhooks'],
-    communication: ['surveys', 'user-interviews', 'workflows'],
+    automation: ['posthog_ai', 'workflows_emails', 'webhooks'],
+    communication: ['surveys', 'user-interviews', 'workflows_emails'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
