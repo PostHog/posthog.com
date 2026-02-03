@@ -48,7 +48,7 @@ These are the ways to deal with this mismatch when you do a round of funding wit
 
 > This is all assuming that you are doing primary and secondary financing at the same time - later on I’ll talk about why you might want to split them. 
 
-## How to offer them to employees
+## How to offer secondaries to employees
 
 This is the fun part. It’s also the bit that caused us the most angst. “Who do we let sell? How much can they sell? How long should they have been here? Do we set a $ cap? Will the team become demotivated if they sell too much? Will they not care if they sell too little?”
 
