@@ -129,10 +129,10 @@ Make sure the repository includes the following labels, they're used to trigger 
 
 ### 7. Open a PR
 
-Create a PR with the new `release.yml` workflow and request a review from `@PostHog/group-client-libraries` - there's no SDK team at the moment, this is all collaborative work.
+Create a PR with the new `release.yml` workflow and request a review from `@PostHog/client-libraries-approvers`. There is now a small, dedicated SDK team at PostHog ([@PostHog/team-client-libraries](https://github.com/orgs/PostHog/teams/team-client-libraries)) that helps drive direction and coordination. However, SDK development and maintenance remains a collaborative effort across the engineering organization.
 
 ## Triggering a release
 
-Once set up, releases are triggered by having a `release` label added to the PR alongside a matching `bump-*` tag. Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/group-client-libraries` team will have to approve it on `#approval-support-libraries`.
+Once set up, releases are triggered by having a `release` label added to the PR alongside a matching `bump-*` tag. Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/client-libraries-approvers` team will have to approve it on `#approval-support-libraries`.
 
 > In the future, we'll attempt to use https://github.com/bruits/sampo everywhere to support changesets like we have on `posthog-js` which means we won't need to worry about the `bump-*` tags.
