@@ -187,12 +187,12 @@ pnpm build:minimal
 Minimal mode only builds:
 - Docs pages (`/docs/*`)
 - Handbook pages (`/handbook/*`)
-- Blog/content posts (`/blog/*`, `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
+- Blog/content posts (`/blog/*`, `/tutorials/*` `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
 - All pages in `src/pages/` (product pages, pricing, etc.)
 
 It skips:
 - All pagination, category, and tag index pages
-- Tutorials, apps, CDP, templates, jobs, API docs, SDK references
+- Apps, CDP, templates, jobs, API docs, SDK references
 - `onPostBuild` entirely (API spec generation, SDK markdown)
 - GitHub API calls for roadmap and job issues
 - Next/previous navigation and internal link extraction
