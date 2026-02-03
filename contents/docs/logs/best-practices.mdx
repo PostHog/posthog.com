@@ -15,6 +15,20 @@ If you're already using `posthog.capture()`, you might wonder where logs fit in.
 
 </CalloutBox>
 
+This guide covers:
+
+- [Logging requests, not code](#log-what-happened-to-requests-not-what-your-code-is-doing)
+- [Structured logging](#use-structured-logging)
+- [Cardinality and dimensionality](#think-in-cardinality-and-dimensionality)
+- [Business context and OTel attributes](#include-business-context)
+- [Building wide events](#build-events-throughout-the-request-lifecycle)
+- [Log levels](#use-log-levels-correctly)
+- [Sampling strategies](#sample-strategically)
+- [Trace and session context](#add-trace-and-session-context)
+- [Schema evolution](#treat-your-log-schema-like-an-api-contract)
+- [What not to log](#what-not-to-log)
+- [Checklist](#logging-checklist)
+
 ## Log what happened to requests, not what your code is doing
 
 This is the single most important shift you can make.
@@ -40,7 +54,7 @@ Instead, emit one rich log per request per service:
 {
   "event": "payment.completed",
   "duration_ms": 342,
-  "user_id": "user_abc123",
+  "posthog_distinct_id": "user_abc123",
   "order_id": "ord_789",
   "amount_cents": 4999,
   "currency": "USD",
@@ -70,7 +84,7 @@ Payment failed for user abc123 - Stripe error: card_declined (amount: $49.99)
 ```json
 {
   "event": "payment.failed",
-  "user_id": "user_abc123",
+  "posthog_distinct_id": "user_abc123",
   "error_type": "card_declined",
   "provider": "stripe",
   "amount_cents": 4999
@@ -92,7 +106,7 @@ Two concepts that separate useful logs from noise. You want both high cardinalit
 <details>
 <summary>What is cardinality?</summary>
 
-Cardinality is the number of unique values a field has. `user_id` has high cardinality (millions of unique values). `log_level` has low cardinality (5 values). High-cardinality fields are what enable you to debug specific requests and users.
+Cardinality is the number of unique values a field has. `posthog_distinct_id` has high cardinality (millions of unique values). `log_level` has low cardinality (5 values). High-cardinality fields are what enable you to debug specific requests and users.
 
 Some teams avoid high-cardinality fields because older logging tools can't handle them efficiently. Modern columnar databases (like ClickHouse, which PostHog uses under the hood) handle high cardinality just fine. Don't let outdated tooling concerns stop you from logging the fields that matter.
 
@@ -122,7 +136,7 @@ This lets you move from "500 errors spiked" to "500 errors spiked for enterprise
 In OpenTelemetry, this context splits into two layers:
 
 - **Resource attributes** are set once when your service starts. They describe the service itself: `service.name`, `deployment.environment`, `service.version`, `cloud.region`. Every log from that process automatically includes them.
-- **Log attributes** are set per event. They describe what happened in that specific request: `user_id`, `order_id`, `payment_method`, `duration_ms`.
+- **Log attributes** are set per event. They describe what happened in that specific request: `posthog_distinct_id`, `order_id`, `payment_method`, `duration_ms`.
 
 The rule of thumb: if a value is the same for every log from the same process, it's a resource attribute. If it changes per request, it's a log attribute. See the [installation guide](/docs/logs/installation) for how to configure both in your language.
 
@@ -157,7 +171,7 @@ The implementation details vary by language, but the pattern is always the same.
   def handle_checkout(request):
       attrs = {
           "event": "checkout",
-          "user_id": request.user.id,
+          "posthog_distinct_id": request.user.id,
           "subscription_tier": request.user.tier,
       }
 
@@ -195,7 +209,7 @@ The implementation details vary by language, but the pattern is always the same.
   function handleCheckout(req, res) {
     const attrs = {
       event: "checkout",
-      user_id: req.user.id,
+      posthog_distinct_id: req.user.id,
       subscription_tier: req.user.tier,
     };
 
@@ -228,7 +242,7 @@ The implementation details vary by language, but the pattern is always the same.
   func HandleCheckout(w http.ResponseWriter, r *http.Request) {
       log := slog.With(
           "event", "checkout",
-          "user_id", r.Context().Value("user_id"),
+          "posthog_distinct_id", r.Context().Value("posthog_distinct_id"),
       )
 
       cart, _ := getCart(r.Context())
@@ -349,7 +363,7 @@ Some things should never appear in your logs:
 
 - **Secrets:** API keys, passwords, tokens, credit card numbers. If you log these by accident, you now have a security incident *and* a logging problem.
 - **Request and response bodies:** Logging full payloads is one of the fastest ways to blow up storage costs and accidentally capture PII, auth tokens, or sensitive user data. Log the metadata (status code, content length, duration), not the body.
-- **Personal data you don't need:** Full email addresses, IP addresses, or other PII beyond what's required for debugging. If you need to correlate logs to a user but can't store raw identifiers, hash or tokenize them. Check your GDPR, HIPAA, or other compliance requirements, as even fields like `user_id` or `email` may need masking depending on your jurisdiction.
+- **Personal data you don't need:** Full email addresses, IP addresses, or other PII beyond what's required for debugging. If you need to correlate logs to a user but can't store raw identifiers, hash or tokenize them. Check your GDPR, HIPAA, or other compliance requirements, as even fields like `posthog_distinct_id` or `email` may need masking depending on your jurisdiction.
 - **High-frequency health checks:** Load balancer pings and liveness probes generate massive volume with zero debugging value. Exclude them.
 - **Unnecessary duplication:** If a downstream service logs the same event, you don't always need to log it again upstream. That said, when you're debugging a production incident at 2am, having key context from downstream calls in your own service's logs can save you from correlating across multiple systems under pressure. The rule of thumb: don't log a play-by-play of every call you make, but do include the outcome and any data you'd need to debug without switching to another service's logs.
 
@@ -366,7 +380,7 @@ Use this to audit your existing logging or as a starting point for a new service
 
 ### Business and trace context
 
-- [ ] **The "Who":** `user_id`, `org_id`, `account_tier`, or equivalent
+- [ ] **The "Who":** `posthog_distinct_id`, `org_id`, `account_tier`, or equivalent
 - [ ] **The "What":** `order_id`, `transaction_id`, `feature_flag_variants`, or equivalent
 - [ ] **The "Where":** `service.name`, `service.version`, `deployment.environment` set as OTel resource attributes
 - [ ] **Trace IDs:** OpenTelemetry `trace_id` is attached so you can jump from logs to traces
