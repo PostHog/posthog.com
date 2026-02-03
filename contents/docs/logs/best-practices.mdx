@@ -7,7 +7,7 @@ import Tab from 'components/Tab'
 
 Most logging is bad. Not because people don't log enough. They log too much of the wrong things and too little of the right things. The result is millions of lines that are expensive to store and useless to query.
 
-This guide covers what actually makes logs useful in production systems. PostHog ingests logs via [OpenTelemetry (OTLP)](/docs/logs/installation), so the patterns here are built around OTel's structured logging model: resource attributes, log attributes, and trace context. By centralizing your logs in PostHog, you get more than just a single place to search across all your services. Your logs live alongside your [product analytics](/docs/product-analytics), [session replays](/docs/session-replay), and [feature flags](/docs/feature-flags), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
+This guide covers what actually makes logs useful in production systems. PostHog ingests logs via [OpenTelemetry (OTLP)](/docs/logs/installation), so the patterns here are built around OTel's structured logging model: resource attributes, log attributes, and trace context. By centralizing your logs in PostHog, you get more than just a single place to search across all your services. Your logs live alongside your [Product Analytics](/docs/product-analytics), [Session Replays](/docs/session-replay), and [Feature Flags](/docs/feature-flags), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
 
 <CalloutBox icon="IconInfo" title="Logs vs events in PostHog" type="fyi">
 
@@ -87,7 +87,7 @@ PostHog's log search works across all fields in structured logs, so the more con
 
 ## Think in cardinality and dimensionality
 
-Two concepts that separate useful logs from noise. You want both high cardinality *and* high dimensionality. One wide event with 50 fields tells you more than 50 separate log lines with 3 fields each.
+Two concepts that separate useful logs from noise. You want both high cardinality *and* high dimensionality. One wide event with 50 fields tells you more than 50 separate log lines with three fields each.
 
 <details>
 <summary>What is cardinality?</summary>
@@ -101,7 +101,7 @@ Some teams avoid high-cardinality fields because older logging tools can't handl
 <details>
 <summary>What is dimensionality?</summary>
 
-Dimensionality is the number of fields per log event. A log with 3 fields (`timestamp`, `level`, `message`) has low dimensionality. A wide event with 30+ fields has high dimensionality.
+Dimensionality is the number of fields per log event. A log with three fields (`timestamp`, `level`, `message`) has low dimensionality. A wide event with 30+ fields has high dimensionality.
 
 High dimensionality is what makes wide events powerful. Instead of scattering context across dozens of log lines, you pack it all into one event. This means every query can filter, group, and correlate across all those fields simultaneously.
 
@@ -112,7 +112,7 @@ High dimensionality is what makes wide events powerful. Instead of scattering co
 Technical context (status codes, latency, error types) is necessary but insufficient. Add the business context that turns debugging into understanding:
 
 - **Who:** user ID, account type, subscription tier, organization
-- **What:** order ID, cart contents, item count, feature flags
+- **What:** order ID, cart contents, item count, Feature Flags
 - **Where:** service name, deployment version, region
 - **How:** payment method, auth provider, API version
 - **How much:** amount, quantity, retry count
@@ -126,9 +126,9 @@ In OpenTelemetry, this context splits into two layers:
 
 The rule of thumb: if a value is the same for every log from the same process, it's a resource attribute. If it changes per request, it's a log attribute. See the [installation guide](/docs/logs/installation) for how to configure both in your language.
 
-<CalloutBox icon="IconInfo" title="Correlate with product analytics" type="action">
+<CalloutBox icon="IconInfo" title="Correlate with Product Analytics" type="action">
 
-If you're using PostHog for product analytics, the business context in your logs can match the properties on your events. This means you can go from a log search result straight to seeing how that user behaves in your product, and vice versa.
+If you're using PostHog for Product Analytics, the business context in your logs can match the properties on your events. This means you can go from a log search result straight to seeing how that user behaves in your product, and vice versa.
 
 </CalloutBox>
 
@@ -188,7 +188,7 @@ The implementation details vary by language, but the pattern is always the same.
   The OpenTelemetry Logs API with `logger.emit()`. Attributes are passed as a dictionary on each log record. See the [installation guide](/docs/logs/installation/nodejs) for SDK setup.
 
   ```js
-  const { logs, SeverityNumber } = require("@opentelemetry/api-logs");
+  import { logs } from "@opentelemetry/api-logs";
 
   const logger = logs.getLogger("my-app");
 
@@ -331,11 +331,11 @@ Pick a library that supports structured output, async/buffered writes, and low p
 
 Isolated logs are hard to correlate. Adding trace IDs and session IDs connects individual log events to the broader request journey.
 
-Since PostHog uses OpenTelemetry, trace context propagation is automatic. Your logs are already correlated by trace ID if you have the OTel SDK configured. If you're also using PostHog for product analytics or session replay, you can go further and [link your logs to session replays](/docs/logs/link-session-replay), giving you the user's full experience alongside your backend logs.
+Since PostHog uses OpenTelemetry, trace context propagation is automatic. Your logs are already correlated by trace ID if you have the OTel SDK configured. If you're also using PostHog for Product Analytics or Session Replay, you can go further and [link your logs to Session Replays](/docs/logs/link-session-replay), giving you the user's full experience alongside your backend logs.
 
-<CalloutBox icon="IconRewindPlay" title="Link logs to session replays" type="action">
+<CalloutBox icon="IconRewindPlay" title="Link logs to Session Replays" type="action">
 
-By adding a PostHog session ID and distinct ID to your log attributes, you can jump directly from a log line to the user's session replay. See the [session replay linking guide](/docs/logs/link-session-replay) to set this up.
+By adding a PostHog session ID and distinct ID to your log attributes, you can jump directly from a log line to the user's Session Replay. See the [Session Replay linking guide](/docs/logs/link-session-replay) to set this up.
 
 </CalloutBox>
 
@@ -370,7 +370,7 @@ Use this to audit your existing logging or as a starting point for a new service
 - [ ] **The "What":** `order_id`, `transaction_id`, `feature_flag_variants`, or equivalent
 - [ ] **The "Where":** `service.name`, `service.version`, `deployment.environment` set as OTel resource attributes
 - [ ] **Trace IDs:** OpenTelemetry `trace_id` is attached so you can jump from logs to traces
-- [ ] **Session IDs:** PostHog `session_id` is included to enable [session replay linking](/docs/logs/link-session-replay)
+- [ ] **Session IDs:** PostHog `session_id` is included to enable [Session Replay linking](/docs/logs/link-session-replay)
 
 ### Levels and sampling
 
@@ -390,4 +390,4 @@ Use this to audit your existing logging or as a starting point for a new service
 
 - [Install a logging client](/docs/logs/installation) to start sending logs to PostHog
 - [Search logs](/docs/logs/search) to find specific events
-- [Link logs to session replays](/docs/logs/link-session-replay) for full user context
+- [Link logs to Session Replays](/docs/logs/link-session-replay) for full user context
