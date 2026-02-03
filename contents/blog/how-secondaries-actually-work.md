@@ -71,7 +71,7 @@ If you are the lucky person responsible for running this process internally, som
 - We had employees transacting directly with investors in the paperwork - your lawyers will handle all this.   
   - An alternative is to have your company buy all the stock from employees and then transact with investors - again your lawyers will advise mechanically what makes the most sense. 
 
-The bit that no one tells you? Be prepared to spend half your time managing _internal_ comms. Most of your team will have no idea how this stuff works. You will have to answer what you think are extremely basic questions, and have to chase a million times for bank details, addresses, signatures etc. Be patient!
+The bit that no one tells you? Be prepared to spend half your time managing _internal_ comms. Most of your team will have no idea how this stuff works. You will have to answer what you think are extremely basic questions, and have to chase a million times for bank details, addresses, signatures, etc. Be patient!
 
 >  If you are letting > 10 people sell, I strongly recommend you keep your primary and secondary financing rounds completely separate. It will slow down and complicate your primary financing round otherwise. 
 
