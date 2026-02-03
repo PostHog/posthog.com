@@ -66,7 +66,7 @@ If you are the lucky person responsible for running this process internally, som
 
 - There are a few different ways the mechanics of exercising the stock options works.  
   - If your employees hold ISOs, they should exercise the options first themselves, i.e. they wire your company money, and then sell. This is better tax-wise for the employee.   
-  - If they hold ISOs but can’t afford to exercise, then they should do cashless exercise, where the amount the employee pays to exercise is just deducted from the proceeds you send them, ie. they don’t send any money.   
+  - If they hold ISOs but can’t afford to exercise, then they should do cashless exercise, where the amount the employee pays to exercise is just deducted from the proceeds you send them, i.e. they don’t send any money.   
 
 - We had employees transacting directly with investors in the paperwork - your lawyers will handle all this.   
   - An alternative is to have your company buy all the stock from employees and then transact with investors - again your lawyers will advise mechanically what makes the most sense. 
