@@ -8,31 +8,54 @@ showTitle: true
 
 ### What is PostHog?
 
-PostHog is an all-in-one suite of dev tools including product analytics, web analytics, session replay, heatmaps, feature flags, experiments, surveys, and more. Our mission is to equip every developer to build successful products. 
+PostHog is an all-in-one developer platform for building successful products. We provide [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [LLM analytics](/llm-analytics), [data warehouse](/data-stack), [CDP](/cdp), [workflows](/workflows), [logs](/logs), and an [AI product assistant](/ai) to help debug your code, ship features faster, and keep all your usage and customer data in one stack.
 
-We're open source, free-to-use, and self-serve.
+PostHog is free to start with a [generous free tier](/pricing) and fully self-serve. Engineers can sign up and capture their first event in under five minutes.
 
-### What does it do?
+### What does PostHog do?
 
 PostHog helps developers understand how users use their product, figure out ways to improve it, and ship new features faster. It does this through features like:
 
-- Anonymous and identified event capture, supports both autocapture and custom events
-- Frontend and backend SDKs
-- API for capture, flags, creating and managing metadata
-- Product analytics with trends, funnels, retention, SQL, and more
-- A simplified web analytics dashboard with session duration, bounce rates, and channel analysis
-- Session replays with event timeline, console and performance capture, and mobile recording
-- Heatmaps, clickmaps, scrollmaps
-- Feature flags with multivariant options, percentage and targeted rollouts, and local evaluation
-- Experiments with multivariate testing
-- Surveys with both no-code and API options
-- A data warehouse to import and query data from external sources alongside PostHog
-- Batch exports to popular warehouse destinations
+- Anonymous and identified [event capture](/docs/data/events), supports both [autocapture](/docs/product-analytics/autocapture) and custom events
+- [Frontend, backend, and mobile SDKs](/docs/libraries)
+- API for capture, flags, creating and managing metadata, and querying your data
+- [Product analytics](/docs/product-analytics) with trends, funnels, retention, [SQL](/docs/data-warehouse/sql), and more
+- A simplified [web analytics](/docs/web-analytics) dashboard with session duration, bounce rates, web vitals, and channel analysis
+- [Session replays](/docs/session-replay) with event timeline, console and performance capture, and mobile recording
+- [Heatmaps](/docs/toolbar/heatmaps), clickmaps, scrollmaps
+- [Feature flags](/docs/feature-flags) with multivariant options, percentage and targeted rollouts, and local evaluation
+- [Experiments](/docs/experiments) with multivariate testing
+- [Surveys](/docs/surveys) with both no-code and API options
+- [Error tracking](/docs/error-tracking) to capture and debug exceptions with full stack traces and session context
+- [Logs](/docs/logs) to ingest, search, and analyze log data alongside your product data
+- [Workflows](/docs/workflows) to automate actions based on events, like sending messages to your users
+- [LLM analytics](/docs/llm-analytics) to monitor, debug, and optimize AI features with trace inspection and cost tracking
+- A [data warehouse](/docs/data-warehouse) to import and query data from external sources alongside PostHog
+- [Batch exports](/docs/cdp/batch-exports) to popular warehouse destinations
 - Combine events into actions, anonymous and identified users, cohorts, and groups for analysis
 
 TLDR; All the tools you need to build a successful product.
 
-### Does it work with my stack?
+### How much does PostHog cost?
+
+PostHog offers a generous free tier with no credit card required:
+
+- **Product Analytics and Web Analytics**: 1 million events/month
+- **Session Replay**: 5,000 recordings/month
+- **Feature Flags**: 1 million requests/month
+- **Surveys**: 1,500 responses/month
+- **Data warehouse**: 1 million synced rows/month + free historical syncs for the first 7 days for each new source
+- **Error tracking**: 100 thousand exceptions/month
+- **LLM analytics**: 100 thousand events/month
+- **Logs**: 50GB ingested/month
+- **Workflows**: 10,000 messages per channel/month
+- **PostHog AI**: 2,000 credits/month
+
+Beyond the free tier, pricing is usage-based and scales down as volume increases. There are no seat-based charges – unlimited team members can access the platform.
+
+See [our pricing page](/pricing) for more details.
+
+### Does PostHog work with my stack?
 
 Yes. PostHog can be in a range of languages and frameworks across web, backend, and mobile. You can use it through:
 
@@ -45,10 +68,6 @@ This means that it doesn't matter what your stack is - you can use PostHog with 
 ### Does PostHog support mobile apps? 
 
 Yes. PostHog has SDKs for iOS, Android, React Native, Flutter, and more. All of them support event capture, feature flags, and experiments. Some also support autocapture and session replay.
-
-### How much does PostHog cost?
-
-PostHog is free to use and has a generous free plan. See [our pricing page](/pricing) for more details.
 
 ### Is there an enterprise offering?
 
@@ -64,10 +83,13 @@ Find out more on [the pricing page](/pricing) or [get in touch](/talk-to-a-human
 
 ### How is PostHog different from other tools?
 
-1. We have all the tools in one.
-2. We cost less, have a free plan, and have scalable, transparent pricing.
-3. We are open source.
-4. We are built for engineers.
+PostHog stands apart in several key ways:
+
+- **All-in-one platform** – Instead of stitching together separate tools for analytics, session replay, feature flags, and experimentation, PostHog provides everything in one place. This means shared data, no integration headaches, and lower total cost.
+- **Built for engineers** – PostHog is designed with developers in mind. It offers SDKs in every major language, a powerful API, SQL access to raw data, and transparent documentation. Engineers can self-serve without waiting on analytics teams.
+- **Open source** – PostHog's core is open source with thousands of GitHub stars. This means transparency into how the product works, the ability to contribute, and community-driven development.
+- **Privacy-conscious** – PostHog offers EU-based hosting for organizations with data residency requirements, ensuring data never leaves European servers. The platform supports a fully cookieless tracking mode, eliminating the need for cookie consent banners while still capturing accurate analytics. Even in standard mode, PostHog doesn't rely on third-party cookies and offers more complete data compared to tools like Google Analytics.
+- **Transparent pricing** – No hidden fees, no sales calls required, no per-seat charges. Pricing is public and usage-based.
 
 There are many specific differences. Check out our blog for [comparisons](/posts). 
 
@@ -99,7 +121,9 @@ If you have any issues or feature requests, you can [raise a ticket in-app](http
 
 ### Is this hard to set up?
 
-No. You can [signup](/signup), install the snippet, and capture your first event in less than five minutes.
+No. You can [sign up](/signup), install the snippet, and capture your first event in less than five minutes.
+
+Alternatively, the [AI wizard](/docs/ai/wizard) can handle the entire installation process for you with a single command. It automatically authenticates your account, installs the relevant SDKs, scans your codebase, and configures everything.
 
 ### I'm having trouble setting up PostHog. What should I do?
 
@@ -108,9 +132,11 @@ No. You can [signup](/signup), install the snippet, and capture your first event
 3. Check our [status page](https://status.posthog.com/) to see if there are any issues.
 4. [Ask a question](/questions) in our community.
 
-### Can I self-host?
+### Can I self-host PostHog?
 
-Yes, the open source version of PostHog can be deployed with Docker Compose with no event limits. This is a good option for users who want to self-host for their hobby projects but is limited due to infrastructure complexity at scale. 
+PostHog's open-source version can be self-hosted, but this is not recommended. Self-hosting requires significant infrastructure expertise, ongoing maintenance, and manual updates, making it difficult to scale and keep secure. Self-hosted deployments also miss out on new features and improvements that ship continuously to PostHog Cloud.
+
+**PostHog Cloud is the recommended option** for all teams. It offers instant setup, automatic updates, managed infrastructure, and a choice of US or EU data hosting for compliance requirements.
 
 See our [self-hosting docs](/docs/self-host) for more information about how to deploy PostHog's open source version.
 

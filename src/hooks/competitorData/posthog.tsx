@@ -58,9 +58,6 @@ export const posthog = {
                 ab_experiments: true,
             },
         },
-        llm_analytics: {
-            available: true,
-        },
         session_replay: {
             available: true,
             beta: false,
@@ -73,6 +70,7 @@ export const posthog = {
                 conditional_recording: true,
                 crash_reports: false,
                 event_timeline: true,
+                export_to_json: true,
                 filter_by_user_or_event: true,
                 highlights: 'Beta',
                 identity_detection: true,
@@ -246,7 +244,7 @@ export const posthog = {
             },
         },
         product_tours: {
-            available: false,
+            available: 'Private alpha',
         },
         feature_flags: {
             available: true,
@@ -344,7 +342,7 @@ export const posthog = {
                     abn_testing: true,
                     data_warehouse_experiments: 'Beta',
                     fake_door_testing: true,
-                    holdout_testing: 'Partial',
+                    holdout_testing: true,
                     multi_armed_bandit: false,
                     mutually_exclusive_experiments: false,
                     redirect_testing: true,
@@ -480,11 +478,12 @@ export const posthog = {
         cdp: {
             available: true,
             features: {
-                number_of_integrations: '60+',
+                number_of_integrations: '200+',
                 realtime_streaming: true,
                 custom_transformations: true,
                 no_code_setup: true,
                 built_in_analytics: true,
+                
             },
         },
         llm_analytics: {

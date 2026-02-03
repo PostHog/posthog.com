@@ -32,13 +32,9 @@ Target flags based on user behavior (e.g. "users who completed X event").
 
 - [Megaissue #14796](https://github.com/PostHog/posthog/issues/14796)
 
-#### Importing flags from competitors (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
-
-Get the Statsig and LaunchDarkly import flow over the line.
-
 #### Ship AI-powered flag cleanup (Driver: <TeamMember name="Dylan Martin" />, but could be anyone with bandwidth)
 
-Automate stale flag cleanup. We've come up with a principled definition for what "stale" means — now we need to build the tooling. Eventually, I imagine this is a goal we share with PostHog AI/Array somewhat, but for this quarter the feature flags team will commit to a tool that:
+Automate stale flag cleanup. We've come up with a principled definition for what "stale" means — now we need to build the tooling. Eventually, I imagine this is a goal we share with PostHog AI/Twig somewhat, but for this quarter the feature flags team will commit to a tool that:
 
 - identifies stale flags in the UI and gives users the ability to remove them in bulk
 - provides a copyable prompt for LLM-assisted IDEs to use to clean up their flags on the application-side
@@ -65,7 +61,7 @@ Currently, Node.js and Python SDKs have experimental support for shared, externa
 - Solidify the caching API, moving it out of "experimental" status
 - Expand the caching API to other server-side SDKs
 
-#### Better debuggability (Driver: <TeamMember name="Dustin Byrne" />)
+#### Better debuggability (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
 
 Make it way easier to understand what's happening with your flags. [#38669](https://github.com/PostHog/posthog/issues/38669)
 

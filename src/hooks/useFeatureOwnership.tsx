@@ -79,7 +79,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'client-libraries': {
         feature: 'Client libraries',
-        owner: [],
+        owner: ['client-libraries'],
         notes: <em>See SDKs</em>,
         label: false,
     },
@@ -322,7 +322,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
-        owner: [],
+        owner: ['client-libraries'],
         notes: (
             <>
                 Shared responsibility, with features owned by the relevant small team, or try{' '}
@@ -336,7 +336,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 .
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
+                <strong>
+                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
+                    first.
+                </strong>
             </>
         ),
         label: 'feature/libraries',
@@ -348,14 +351,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: ['mobile'],
+        owner: ['client-libraries'],
         notes: (
             <>
-                Shared responsibility with the relevant small team for feature-owned areas.
-                <br />
-                <br /> Start with the <SmallTeam slug="mobile" /> for triage, loop in
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
-                needed.
+                Shared responsibility, with features owned by the relevant small team, or try{' '}
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
+                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
+                    incident.io schedule
+                </PrivateLink>
+                .
             </>
         ),
         label: 'feature/mobile',
@@ -395,6 +400,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-ux'],
         notes: <>All teams manage their own settings</>,
         label: 'feature/settings',
+    },
+    'source-maps': {
+        feature: 'Source maps',
+        owner: ['error-tracking'],
     },
     'sql-editor': {
         feature: 'SQL editor',
