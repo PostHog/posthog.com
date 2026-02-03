@@ -15,7 +15,6 @@ tags:
   - Guides
   - Explainers
   - Culture
-  - Startups
   - People
 ---
 
