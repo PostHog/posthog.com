@@ -8,13 +8,10 @@ import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
-// Content preview mode: Build content pages without external data sources
-const isContentPreview = process.env.GATSBY_CONTENT_PREVIEW === 'true'
+const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    // In content preview mode, use a simplified page creation flow
-    if (isContentPreview) {
-        console.log('📚 Content preview mode: Creating content pages only')
+    if (isMinimalBuild) {
         return createContentPreviewPages({ createPage, graphql })
     }
 
@@ -949,11 +946,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 }
 
-/**
- * Simplified page creation for content preview mode
- * Builds content pages (docs, handbook, tutorials, customers, blog, library, spotlights)
- * without external data sources
- */
 async function createContentPreviewPages({
     createPage,
     graphql,
@@ -1159,26 +1151,10 @@ async function createContentPreviewPages({
         spotlights: { nodes: any[] }
     }
 
-    console.log(`📚 Creating ${data.docs.nodes.length} docs pages`)
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
-
-    console.log(`📚 Creating ${data.handbook.nodes.length} handbook pages`)
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
-
-    // console.log(`📚 Creating ${data.tutorials.nodes.length} tutorial pages`)
-    // createBlogPreviewPosts(data.tutorials.nodes, true)
-
-    console.log(`📚 Creating ${data.customers.nodes.length} customer pages`)
     createBlogPreviewPosts(data.customers.nodes)
-
-    console.log(`📚 Creating ${data.blogPosts.nodes.length} blog pages`)
     createBlogPreviewPosts(data.blogPosts.nodes)
-
-    console.log(`📚 Creating ${data.libraryArticles.nodes.length} library pages`)
     createBlogPreviewPosts(data.libraryArticles.nodes)
-
-    console.log(`📚 Creating ${data.spotlights.nodes.length} spotlight pages`)
     createBlogPreviewPosts(data.spotlights.nodes)
-
-    console.log('📚 Preview pages created successfully')
 }
