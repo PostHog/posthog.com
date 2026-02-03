@@ -35,11 +35,11 @@ For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on
   - [posthog-android](https://github.com/PostHog/posthog-android)
   - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
 
-Mobile support tickets reported by the PostHog app - Contact support panel with the Mobile topic will be assigned to the Mobile group on Zendesk and triaged by the Mobile team.
+Mobile support tickets reported by the PostHog app - Contact support panel with the Mobile topic will be assigned to the Mobile group on Zendesk and triaged by the Client Libraries.
 
-The <SmallTeam slug="mobile" /> will triage and fix them if they are in our domain area or reassign them to the related team.
+The <SmallTeam slug="client-libraries" /> will triage and fix them if they are in our domain area or reassign them to the related team.
 
-If you see a Mobile SDK issue, please escalate it to the <SmallTeam slug="mobile" /> as soon as possible (@mobile-folks on Slack, Mobile group on Zendesk, and @team-mobile on GitHub).
+If you see a Mobile SDK issue, please escalate it to the <SmallTeam slug="client-libraries" /> as soon as possible (@mobile-folks on Slack, Mobile group on Zendesk, and @team-client-libraries on GitHub).
 
-The Mobile team is also happy to collaborate on any non-Mobile SDK issue that requires knowledge in the Mobile ecosystem, e.g., you're debugging person profiles from customers using the Mobile SDKs, and you don't have context on how the SDK works/identifies users.
+The Mobile folks are also happy to collaborate on any non-Mobile SDK issue that requires knowledge in the Mobile ecosystem, e.g., you're debugging person profiles from customers using the Mobile SDKs, and you don't have context on how the SDK works/identifies users.
 
