@@ -172,14 +172,14 @@ function QuestionFormMain({
                             </div>
 
                             <div data-scheme="primary" className="pl-[55px] space-y-2">
-                                {status && status !== 'none' && (
+                                {status && status !== 'operational' && (
                                     <div data-scheme="secondary" className="p-4 bg-primary border border-primary">
                                         <h5 className="m-0">Heads up!</h5>
                                         <p className="m-0 text-sm">
                                             We're currently experiencing an incident. Check{' '}
                                             <Link
                                                 className="text-red dark:text-yellow font-bold"
-                                                to="https://status.posthog.com"
+                                                to="https://www.posthogstatus.com"
                                                 externalNoIcon
                                             >
                                                 here
