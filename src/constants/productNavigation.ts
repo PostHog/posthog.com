@@ -128,9 +128,20 @@ export const nonProductPages = {
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {
     const products = allProducts.filter((product: any) => product.category === category)
-    const customOrder = productOrder[category]
+    const customOrder = productOrder[category] || []
 
-    if (customOrder && customOrder.length > 0) {
+    // Handle case where customOrder contains product that isn't its official category
+    const secondaryCategoryProducts = customOrder.filter(
+        (product: string) => !products.find((p) => p.handle === product)
+    )
+    secondaryCategoryProducts.forEach((productHandle: string) => {
+        const product = allProducts.find((p) => p.handle === productHandle)
+        if (product) {
+            products.push(product)
+        }
+    })
+
+    if (customOrder.length > 0) {
         return products.sort((a: any, b: any) => {
             const aIndex = customOrder.indexOf(a.handle)
             const bIndex = customOrder.indexOf(b.handle)
