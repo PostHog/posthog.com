@@ -34,7 +34,7 @@ As startups stay private for longer, [more investor money](https://www.industryv
 
 When investors buy stock in a primary financing (like investing in a startup's Series B), most of the time they are buying _preferred_ stock. This means that a new type of stock is being created for that particular round and it comes with extra rights. However, the stock that founders and employees sell in a secondary are _ordinary_ stock, which don’t come with these rights, and are just transferred to the investor - no new stock is created. 
 
-These are the normal ways to deal with this when you do a round of funding:
+These are the ways to deal with this mismatch when you do a round of funding with secondaries:
 
 - Investors buy and hold ordinary stock, paying the preferred price. This is the best move, but you need to be in a strong position with an oversubscribed round to pull this off.   
   - The cleanest way to do this is to have investors who are only buying secondary, rather than splitting primary and secondary across everyone.   
