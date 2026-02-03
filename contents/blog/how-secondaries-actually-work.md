@@ -36,12 +36,12 @@ When investors buy stock in a primary financing (like investing in a startup's S
 
 These are the ways to deal with this mismatch when you do a round of funding with secondaries:
 
-- Investors buy and hold ordinary stock, paying the preferred price. This is the best move, but you need to be in a strong position with an oversubscribed round to pull this off.   
+1. Investors buy and hold ordinary stock, paying the preferred price. This is the best move, but you need to be in a strong position with an oversubscribed round to pull this off.   
   - The cleanest way to do this is to have investors who are only buying secondary, rather than splitting primary and secondary across everyone.   
 
-- Investors buy and hold ordinary stock, but at a discount to the preferred price - the market standard is usually 20%.  
+2. Investors buy and hold ordinary stock, but at a discount to the preferred price - the market standard is usually 20%.  
 
-- Investors buy ordinary stock at no discount, and that stock then convert to preferred afterwards. This can be a win-win BUT be careful of these gotchas:  
+3. Investors buy ordinary stock at no discount, and that stock then convert to preferred afterwards. This can be a win-win BUT be careful of these gotchas:  
   - Something called [QSBS](https://carta.com/uk/en/learn/startups/tax-planning/qsbs/) comes into play - ask your lawyer. This is a very technical piece of tax law that your investors will really, really care about.   
   - You will increase your pref stack - more investors at the front of the queue to get paid out in a future liquidity event.   
   - If you have an EMI plan in the UK, timing and order here is really important - ask a UK lawyer or you risk tanking your entire EMI scheme. 
