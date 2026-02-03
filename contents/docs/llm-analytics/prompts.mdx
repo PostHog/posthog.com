@@ -55,7 +55,7 @@ from posthog.ai.prompts import Prompts
 # Initialize with PostHog client
 posthog = Posthog(
     '<your_project_api_key>',
-    host='https://us.i.posthog.com',
+    host='https://us.posthog.com',
     personal_api_key='<your_personal_api_key>'
 )
 prompts = Prompts(posthog)
@@ -63,7 +63,7 @@ prompts = Prompts(posthog)
 # Or initialize directly
 prompts = Prompts(
     personal_api_key='<your_personal_api_key>',
-    host='https://us.i.posthog.com'
+    host='https://us.posthog.com'
 )
 
 # Fetch a prompt with optional fallback
@@ -92,19 +92,16 @@ import { PostHog } from 'posthog-node'
 
 // Initialize with PostHog client
 const posthog = new PostHog('<your_project_api_key>', {
-  host: 'https://us.i.posthog.com'
+  host: 'https://us.posthog.com',
+  personalApiKey: '<your_personal_api_key>'
 })
 
-const prompts = new Prompts({
-  posthog,
-  personalApiKey: '<your_personal_api_key>',
-  defaultCacheTtlSeconds: 300  // Optional
-})
+const prompts = new Prompts({ posthog })
 
-// Or initialize directly
+// Or initialize directly (without PostHog client)
 const prompts = new Prompts({
   personalApiKey: '<your_personal_api_key>',
-  host: 'https://us.i.posthog.com'
+  host: 'https://us.posthog.com'
 })
 
 // Fetch a prompt
