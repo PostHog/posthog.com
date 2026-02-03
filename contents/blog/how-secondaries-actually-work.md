@@ -1,6 +1,6 @@
 ---
 title: How startup secondaries actually work
-date: 2026-02-05
+date: 2026-02-03
 author:
   - charles-cook
 showTitle: true
