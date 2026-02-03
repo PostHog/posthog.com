@@ -18,6 +18,7 @@
     "scripts": {
         "build-move": "gatsby build && bash ./src/scripts/move-index.sh",
         "build": "gatsby build",
+        "build:minimal": "SOURCEMAPS=false GATSBY_MINIMAL=true gatsby build",
         "start": "./bin/start",
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
