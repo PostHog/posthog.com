@@ -5121,6 +5121,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Trace clustering',
+                    url: '/docs/llm-analytics/clustering',
+                    icon: 'IconGraph',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Link Session Replay',
                     url: '/docs/llm-analytics/link-session-replay',
                     icon: 'IconRewindPlay',

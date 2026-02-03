@@ -1,0 +1,185 @@
+---
+title: Trace clustering
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Clustering is in beta" type="fyi">
+
+Clustering is currently in beta. We'd love to [hear your feedback](https://app.posthog.com/llm-analytics#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
+
+</CalloutBox>
+
+Trace clustering automatically groups similar LLM [traces](/docs/llm-analytics/traces) together using embeddings and clustering algorithms. This helps you discover patterns in how users interact with your LLM application – identifying common use cases, recurring issues, or unexpected behaviors at scale.
+
+## Why use clustering?
+
+- **Discover usage patterns** – See how users actually use your LLM without reading thousands of traces manually.
+- **Identify issues at scale** – Find clusters of problematic conversations (e.g., hallucinations, unhelpful responses) to prioritize fixes.
+- **Understand your users** – Group conversations by topic, intent, or outcome to understand what your users need.
+- **Track trends over time** – Run clustering periodically to see how conversation patterns evolve.
+
+## How clustering works
+
+Clustering uses embeddings (vector representations) of your traces to group similar conversations together. Here's the process:
+
+1. **Embed traces** – Each trace is converted to a high-dimensional embedding that captures its semantic meaning.
+2. **Reduce dimensions** – Embeddings are reduced from 3,072 dimensions to a smaller space (typically 15-100 dimensions) for efficient clustering.
+3. **Cluster** – A clustering algorithm groups similar traces together based on their embeddings.
+4. **Label** – An LLM analyzes each cluster and generates a human-readable title and description.
+5. **Visualize** – Results are projected to 2D for an interactive scatter plot visualization.
+
+## Viewing clusters
+
+Navigate to **LLM analytics** > **Clusters** to see your clustering results. The view shows:
+
+- **Scatter plot** – Interactive 2D visualization where each point is a trace. Points are colored by cluster, with similar traces grouped together. Noise/outlier traces appear in gray.
+- **Cluster cards** – Each cluster has an AI-generated title and description explaining what the traces have in common.
+- **Trace list** – Click a cluster to see all traces in that group, ranked by how close they are to the cluster center.
+
+### Understanding the scatter plot
+
+The scatter plot projects your high-dimensional trace embeddings into 2D space:
+
+- **Proximity = similarity** – Traces close together are semantically similar.
+- **Cluster colors** – Each cluster gets a distinct color.
+- **Noise points** – Traces that don't fit any cluster appear as gray crosses (labeled as cluster -1).
+- **Centroids** – The center of each cluster is marked, representing the "average" trace for that group.
+
+## Running clustering
+
+<CalloutBox icon="IconWarning" title="Admin access required" type="warning">
+
+Triggering new clustering runs requires admin access. Contact your PostHog team if you need access.
+
+</CalloutBox>
+
+To run a new clustering analysis:
+
+1. Navigate to **LLM analytics** > **Clusters**
+2. Click the **Settings** icon to open the clustering configuration
+3. Configure your parameters (see below)
+4. Click **Run clustering**
+
+Clustering runs as a background job and typically takes 1-5 minutes depending on the number of traces.
+
+## Configuration options
+
+### Time window
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| **Lookback days** | How far back to analyze (1-90 days) | 7 days |
+| **Max samples** | Maximum traces to include (20-10,000) | 2,500 |
+
+### Clustering algorithm
+
+Choose between two algorithms:
+
+| Algorithm | Description | Best for |
+|-----------|-------------|----------|
+| **HDBSCAN** | Automatically determines the optimal number of clusters. Identifies outliers as noise. | Exploratory analysis, unknown number of topics |
+| **K-means** | Tests multiple k values and picks the one with the best silhouette score. | When you want more evenly-sized clusters |
+
+**HDBSCAN parameters:**
+
+- **Min cluster size fraction** – Minimum cluster size as a percentage of total traces (default: 5%)
+- **Min samples** – Density threshold for core points
+
+**K-means parameters:**
+
+- **Min k / Max k** – Range of cluster counts to test (optimal k is selected automatically)
+
+### Dimensionality reduction
+
+Before clustering, embeddings are reduced to a smaller dimension:
+
+| Method | Description |
+|--------|-------------|
+| **UMAP** (default) | Non-linear reduction that preserves local structure well |
+| **PCA** | Fast linear reduction, good for preserving global structure |
+| **None** | Cluster on full embeddings (slower, may have worse results) |
+
+**Target dimensions:** 15-100 dimensions (default: 100)
+
+### Visualization method
+
+The 2D projection for the scatter plot:
+
+| Method | Description |
+|--------|-------------|
+| **UMAP** (default) | Good for showing cluster separation |
+| **PCA** | Fast, preserves global variance |
+| **t-SNE** | Best for visual cluster separation, slower |
+
+### Filtering
+
+Use **property filters** to cluster a subset of traces. For example:
+
+- Cluster only traces from production environment
+- Cluster traces from a specific user segment
+- Cluster traces that had errors
+
+## Analysis levels
+
+Clustering supports two analysis levels:
+
+| Level | Description | Use case |
+|-------|-------------|----------|
+| **Trace** | Groups entire traces as units | Understanding conversation topics |
+| **Generation** | Groups individual LLM calls | Analyzing specific prompt/response patterns |
+
+## Cluster labels
+
+Each cluster gets an AI-generated label with:
+
+- **Title** – A short descriptive name (e.g., "Customer refund requests")
+- **Description** – A detailed explanation of what traces in this cluster have in common
+
+Labels are generated by an LLM that examines representative traces from each cluster to understand the common theme.
+
+## Noise and outliers
+
+Traces that don't fit any cluster are marked as **noise** (cluster ID -1). This happens when:
+
+- The trace is unique or unusual compared to others
+- The trace is semantically different from all discovered patterns
+- The trace falls in a low-density region of the embedding space
+
+Reviewing noise traces can help you find edge cases or unexpected user behaviors.
+
+## Best practices
+
+### Choosing parameters
+
+- **Start with defaults** – The default settings work well for most use cases.
+- **Adjust lookback** – Use shorter windows (1-7 days) for recent patterns, longer (30-90 days) for comprehensive analysis.
+- **HDBSCAN vs K-means** – Use HDBSCAN when you don't know how many clusters to expect. Use K-means when you want more control.
+
+### Interpreting results
+
+- **Check cluster sizes** – Very small clusters might be edge cases; very large clusters might need to be split.
+- **Review noise traces** – They often contain interesting edge cases or bugs.
+- **Compare over time** – Run clustering weekly to see how patterns evolve.
+
+### Taking action
+
+- **Create evaluations** – Use cluster insights to create [evaluations](/docs/llm-analytics/evaluations) for common failure patterns.
+- **Improve prompts** – Identify clusters where your LLM underperforms and refine your prompts.
+- **Build dashboards** – Create [insights](/docs/product-analytics/insights) to monitor specific cluster types over time.
+
+## Requirements
+
+### AI data processing consent
+
+Clustering requires AI data processing to be enabled for your organization. When you first use the feature, you'll be prompted to approve AI data processing. This consent applies organization-wide.
+
+To manage this setting, go to **Settings** → **Organization** → **AI data processing**.
+
+### Trace embeddings
+
+Clustering requires trace embeddings to be generated. This happens automatically when [trace summarization](/docs/llm-analytics/summarization) runs on your traces.
+
+## Pricing
+
+Clustering runs are included in your LLM analytics quota. Each clustering run counts as events based on the number of traces analyzed.
