@@ -28,11 +28,10 @@ interface UsePaginatedPostsProps {
 }
 
 export const usePaginatedPosts = ({ params, pageSize = POSTS_PER_PAGE, onPageChange }: UsePaginatedPostsProps = {}) => {
-    const isBrowser = typeof window !== 'undefined'
     const [currentPage, setCurrentPage] = React.useState(0)
 
     const { data, isLoading, error, mutate, isValidating } = useSWR(
-        isBrowser ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, currentPage, pageSize)}` : null,
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, currentPage, pageSize)}`,
         (url: string) => fetch(url).then((r) => r.json())
     )
 

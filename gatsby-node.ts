@@ -72,6 +72,11 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
+        ...(process.env.SOURCEMAPS === 'false'
+            ? {
+                  devtool: false,
+              }
+            : null),
         cache: process.env.NODE_ENV === 'development' || {
             compression: 'gzip',
         },
