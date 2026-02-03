@@ -1,8 +1,8 @@
-export const grafana_loki = {
-    name: 'Grafana Loki',
-    key: 'grafana_loki',
+export const better_stack = {
+    name: 'Better Stack',
+    key: 'better_stack',
     assets: {
-        icon: '/images/competitors/grafana-loki.png',
+        icon: '/images/competitors/betterstack.png',
     },
     products: {
         logs: {
@@ -11,7 +11,7 @@ export const grafana_loki = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: 'Supported via agents',
+                    native_open_telemetry_ingest: 'Supported as transport, not the primary model',
                     vendor_agnostic_sdks: true,
                 },
             },

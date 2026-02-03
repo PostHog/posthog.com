@@ -13,6 +13,7 @@ import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { better_stack } from '../../hooks/competitorData/better_stack'
 import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
@@ -33,7 +34,7 @@ import { fullstory } from '../../hooks/competitorData/fullstory'
 import { ga4 } from '../../hooks/competitorData/ga4'
 import { glassbox } from '../../hooks/competitorData/glassbox'
 import { glitchtip } from '../../hooks/competitorData/glitchtip'
-import { grafanaLoki } from 'hooks/competitorData/grafana_loki'
+import { grafana_loki } from 'hooks/competitorData/grafana_loki'
 import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
 import { heap } from '../../hooks/competitorData/heap'
@@ -598,6 +599,7 @@ export default function ProductComparisonTable({
         appcues,
         appsignal,
         baremetrics,
+        better_stack,
         braintrust,
         bugsnag,
         chartmogul,
@@ -618,7 +620,7 @@ export default function ProductComparisonTable({
         ga4,
         glassbox,
         glitchtip,
-        grafanaLoki,
+        grafana_loki,
         growthbook,
         harness,
         heap,
