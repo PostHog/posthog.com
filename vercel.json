@@ -1661,6 +1661,10 @@
             "source": "/teams/exec",
             "destination": "/teams/blitzscale"
         },
+        {
+            "source": "/teams/mobile",
+            "destination": "/teams/client-libraries"
+        },
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
