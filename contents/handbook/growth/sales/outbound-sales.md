@@ -7,7 +7,7 @@ showTitle: true
 ## Woah woah woah, we're doing outbound?
 
 Yes! But do not be afraid:
-- We are not doing this to 'go enterprise' - for now we're trying to reach more of [our ICP](https://posthog.com/handbook/who-we-build-for). 
+- We are not doing this to 'go enterprise' - for now we're trying to reach more of [our ICP](/handbook/who-we-build-for). 
 - Our investors did not ask us to do this - we came up with it ourselves. 
 
 _So why are we doing it now? I thought our inbound pipeline was good?_
@@ -39,7 +39,7 @@ We are building a BDR function that will generate leads, mainly focused on cold 
 
 Our focus today is on three categories: inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Dmytro Sitalo" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
 
-Check out the [leads page](/growth/sales/lead-scoring) for more detail on lead types and where they go.
+Check out the [leads page](/handbook/growth/sales/lead-scoring) for more detail on lead types and where they go.
 
 ## What will we do on our calls? A simple outbound sales process
 
