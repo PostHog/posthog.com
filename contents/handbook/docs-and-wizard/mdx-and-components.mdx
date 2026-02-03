@@ -1,0 +1,323 @@
+---
+title: MDX and components for docs
+sidebar: Handbook
+showTitle: true
+---
+
+<CalloutBox icon="IconInfo" title="Website components" type="fyi">
+
+The website's core technical architecture is built and maintained by the <SmallTeam slug="website" />. See their handbook pages on the [website](/handbook/engineering/posthog-com/how-posthog-website-works) and [MDX components](/handbook/engineering/posthog-com/markdown) for more information.
+
+</CalloutBox>
+
+## Gatsby and MDX features
+
+### Snippets for content reuse
+
+Create snippets in a `_snippets/` directory for content you want to reuse across multiple pages.
+
+When to create a snippet:
+
+- Content appears in 2+ pages
+- Event schemas or property tables
+- Platform-specific code blocks
+- Reusable UI components
+
+#### MDX snippets
+
+Create an MDX snippet for static reusable content like tables, callouts, or text blocks.
+
+```mdx file=_snippets/event-properties.mdx
+
+The error event includes the following properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `$exception_message` | string | The error message |
+| `$exception_type` | string | The error type |
+
+```
+
+Use the snippet in an MDX page like this:
+
+```mdx
+import EventProperties from './_snippets/event-properties.mdx'
+
+<EventProperties />
+```
+
+#### TSX snippets
+
+Create a TSX snippet for dynamic content for lightweight components or React hooks. 
+
+```tsx
+// _snippets/installation-platforms.tsx
+import usePlatformList from 'hooks/docs/usePlatformList'
+
+export default function InstallationPlatforms() {
+  const platforms = usePlatformList('docs/[product]/installation', 'installation')
+  return <PlatformList items={platforms} />
+}
+```
+
+Use the snippet in an MDX page like this:
+
+```mdx
+import InstallationPlatforms from './_snippets/installation-platforms.tsx'
+
+<InstallationPlatforms />
+```
+
+If the TSX snippet contains substantial logic, create a reusable component or hook in `/src/components/` or `/src/hooks/` instead.
+
+### Frontmatter
+
+All `.mdx` pages support frontmatter, which Gatsby uses to configure page metadata. 
+
+```mdx file=install-react.MDX
+
+---
+title: Install PostHog for React
+platformLogo: react
+showStepsToc: true
+---
+
+This guide walks you through installing PostHog for React.
+
+```
+
+Here's a table of available frontmatter fields:
+
+| Field | Purpose | Example |
+|-------|---------|---------|
+| `title` | Page title | `React installation` |
+| `platformLogo` | Platform icon key for installation pages | `react`, `python`, `nodejs` |
+| `showStepsToc` | Show steps in right sidebar TOC | `true` |
+| `hideRightSidebar` | Hide right sidebar TOC on start-here and changelog pages | `true` |
+| `contentMaxWidthClass` | Control and customize the width of main content column | `max-w-5xl` |
+| `tableOfContents` | Override the auto-generated TOC with custom entries | `[{ url: 'section-id', value: 'Section Name', depth: 1 }]` |
+
+### Magic `<placeholders>`
+
+You can use magic placeholders or strings to replace the project API key, project name, app host, region, and proxy path in the code block with values from the user's project.
+
+-   If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
+-   If the user is not logged into the PostHog app, the placeholder will display as is.
+
+| Placeholder                | Description                   | Default                                         |
+| -------------------------- | ----------------------------- | ----------------------------------------------- |
+| `<ph_project_api_key>`     | Your PostHog project API key  | n/a                                             |
+| `<ph_project_name>`        | Your PostHog project name     | n/a                                             |
+| `<ph_app_host>`            | Your PostHog instance URL     | n/a                                             |
+| `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
+| `<ph_region>`              | Your PostHog region (us/eu)   | n/a                                             |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
+| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
+
+You can use these placeholders in the code block like this:
+
+```js
+const client = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
+```
+
+## Docs components
+
+### Screenshots and gifs
+
+For UI screenshots and gifs with light and dark variants:
+
+```mdx
+<ProductScreenshot
+  imageLight="https://..."
+  imageDark="https://..."
+  alt="Descriptive alt text"
+  classes="rounded"
+/>
+```
+
+### Videos
+
+For videos like `.mp4` or `.mov` files:
+
+```mdx
+<ProductVideo
+  videoLight="https://..."
+  videoDark="https://..."
+  alt="Descriptive alt text"
+  classes="rounded"
+  autoPlay={false}
+  muted={true}
+  loop={true}
+  background={false}
+/>
+```
+
+### Multi-language code blocks
+
+For code examples in multiple programming languages:
+
+````mdx
+<MultiLanguage>
+
+```js
+// JavaScript example
+```
+
+```python
+# Python example
+```
+
+</MultiLanguage>
+````
+
+### Callout boxes
+
+You can add callout boxes to documentation to ensure skimmers don't miss essential information.
+
+```jsx
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+    Here is some information
+</CalloutBox>
+```
+
+Three styles are available:
+
+-   `fyi`: this is for stuff that's helpful but not critical
+-   `action`: these are tasks developers should complete and not miss
+-   `caution`: these flag the potential for misconfiguration, data loss, and other churn vectors
+
+They look like this:
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
+
+Provide detail here. You can go on at length if necessary.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Here is some information" type="action">
+
+Provide detail here. You can go on at length if necessary.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Here is some information" type="caution">
+
+Provide detail here. You can go on at length if necessary.
+
+</CalloutBox>
+
+Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
+
+### Steps
+
+Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials.
+
+```mdx
+<Steps>
+
+<Step title="Install the SDK" badge="required">
+
+Steps are automatically numbered.
+
+</Step>
+
+<Step title="Call the capture method" badge="required">
+
+Write the _content_ in **markdown**.
+
+</Step>
+
+<Step checkpoint title="Check for events in PostHog" subtitle="Log in to your PostHog account" badge="optional">
+
+Add checkpoints to help readers verify their progress.
+
+</Step>
+
+</Steps>
+```
+
+<CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
+
+Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
+
+-   Add a line break after the opening component tags
+-   Avoid using 4-space indents
+
+</CalloutBox>
+
+
+### Decision tree
+
+Use decision trees to help users choose between 2-6 options:
+
+```jsx
+<DecisionTree
+    questions={[
+        {
+            id: 'platform',
+            question: 'What platform are you using?',
+            options: [
+                { value: 'web', label: 'Web' },
+                { value: 'mobile', label: 'Mobile' },
+            ],
+        },
+    ]}
+    getRecommendation={(answers) => {
+        // return recommendation based on answers
+    }}
+/>
+```
+
+### PostHog AI components
+
+You can also link to PostHog AI which used to be called Max AI. 
+
+Use `<AskMax>` to provide in-context help:
+
+The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+
+
+```jsx
+<AskMax
+    quickQuestions={[
+        'How do I mask sensitive data?',
+        'Can I enable recordings only for certain users?',
+        'How can I control costs?',
+    ]}
+/>
+```
+
+Use `<AskAIInput>` for troubleshooting sections:
+
+```mdx
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Ask about error tracking..." />
+```
+
+## Platform logos
+
+All platform logos are centralized in `src/constants/logos.ts`. To add a new platform:
+
+1. Upload SVG to Cloudinary
+2. Add key to `src/constants/logos.ts` in camelCase
+3. Reference in MDX frontmatter: `platformLogo: myPlatform`
+
+Use consistent naming: `stripe`, `react`, `nodejs`, etc.
+
+## Debugging MDX issues
+
+Common MDX parsing issues:
+
+- Avoid deep indentation. Stay at 2 spaces or less
+- Add line breaks after opening JSX tags and before closing tags
+- Ensure all components are imported correctly
+- Empty lines must be completely empty, no spaces
+- Snippets can't share file names
+
+Run the formatter to catch issues:
+
+```bash
+pnpm format:docs
+```
+
