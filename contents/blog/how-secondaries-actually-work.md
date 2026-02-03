@@ -8,7 +8,7 @@ rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/saleshog_9f74052914.png
 featuredImageType: full
 category: Startups
 tags:
