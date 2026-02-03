@@ -32,7 +32,7 @@ As startups stay private for longer, [more investor money](https://www.industryv
 
 ## How are secondaries priced?
 
-When investors buy stock, most of the time they are buying _preferred_ stock in a primary financing. This means that a new type of stock is being created for that particular round, and they come with extra rights. However, the stock that founders and employees sell in a secondary are _ordinary_ stock, which don’t come with these rights, and are just transferred to the investor - no new stock is created. 
+When investors buy stock in a primary financing (like investing in a startup's Series B), most of the time they are buying _preferred_ stock. This means that a new type of stock is being created for that particular round and it comes with extra rights. However, the stock that founders and employees sell in a secondary are _ordinary_ stock, which don’t come with these rights, and are just transferred to the investor - no new stock is created. 
 
 These are the normal ways to deal with this when you do a round of funding:
 
