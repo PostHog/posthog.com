@@ -72,7 +72,7 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
-        ...(process.env.SOURCEMAPS === 'false'
+        ...(process.env.GATSBY_MINIMAL === 'true'
             ? {
                   devtool: false,
               }
