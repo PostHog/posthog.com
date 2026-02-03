@@ -17,7 +17,7 @@ export default function Home() {
 
 ### Using React hooks without PostHogProvider
 
-When PostHog is initialized via `instrumentation-client.ts`, the React hooks work without wrapping your app in `PostHogProvider`. The hooks default to using the initialized posthog-js singleton.
+When PostHog is initialized via `instrumentation-client.ts`, the React hooks work without wrapping your app in `PostHogProvider`. The hooks default to using the initialized posthog-js singleton:
 
 ```js
 'use client'
@@ -29,5 +29,3 @@ export default function FeatureComponent() {
   return showNewFeature ? <NewFeature /> : <OldFeature />
 }
 ```
-
-This works because the PostHog React context defaults to the posthog-js singleton when no provider is present.
