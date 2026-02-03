@@ -60,7 +60,7 @@ The most important thing is to have a basic set of rules you apply, so that you 
 
 If you are the lucky person responsible for running this process internally, some other important things to consider. This is all stuff your lawyers are experts on, so talk to them:
 
-- There is a *huge* difference in the amount of (paper)work when < 10 people sell stock vs > 10. This figure includes your founders, if they are participating.   
+- There is a *huge* difference in the amount of (paper)work when fewer than 10 people sell stock vs more than 10. This figure includes your founders, if they are participating.   
   - Fewer than 10 people selling? You can just do this directly through your lawyers, it’s extra paperwork but it’s pretty straightforward. This is what we did the first time.   
   - More than 10 people selling? You are now doing an SEC-regulated tender offer, and will need to use a platform like [Carta](https://carta.com/) to manage the sale. This adds about 4 weeks to the process because you need to have the tender open for a minimum period, and Carta will charge a % of the proceeds as their fee (try to get buyers to pay for this or at least split the cost between buyers and sellers.)  
 
