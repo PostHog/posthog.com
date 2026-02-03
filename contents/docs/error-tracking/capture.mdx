@@ -188,9 +188,10 @@ You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [g
 
 The process is slightly different depending on the SDK you're using.
 
-<Tab.Group tabs={['Web and Node.js', 'Python']}>
+<Tab.Group tabs={['Web and Node.js', 'React Native', 'Python']}>
 <Tab.List>
   <Tab>Web and Node.js</Tab>
+  <Tab>React Native</Tab>
   <Tab>Python</Tab>
 </Tab.List>
 <Tab.Panels>
@@ -216,6 +217,31 @@ The process is slightly different depending on the SDK you're using.
     }
     return event
     }
+  })
+  ```
+  
+  </Tab.Panel>
+  <Tab.Panel>
+
+  In [React Native](/docs/libraries/react-native), you can override the default properties by passing a `before_send` callback when initializing PostHog. This callback is called before any exception is captured.
+
+  ```react-native
+  const posthog = new PostHog('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    before_send: (event) => {
+      if (event.event === '$exception') {
+        const exceptionList = event.properties?.['$exception_list'] || []
+        const exception = exceptionList.length > 0 ? exceptionList[0] : null
+
+        if (exception) {
+          event.properties['custom_property'] = 'custom_value'
+          // Optional: you can also override generated properties like fingerprint
+          event.properties['$exception_fingerprint'] = 'MyCustomGroup'
+          // ... and any other properties you want to override
+        }
+      }
+      return event
+    },
   })
   ```
   

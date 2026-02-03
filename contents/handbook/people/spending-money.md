@@ -183,7 +183,7 @@ Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles
       - UK only: use your Revolut since we claim back the VAT,
       - Do not get Apple care since it doesn't have great value for money.
     - You can request a new laptop if your laptop is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
-    - Part of the Mobile team and need to purchase a new phone? Coordinate with [Tara](https://posthog.com/community/profiles/34526).
+    - Part of the Client Libraries team and need to purchase a new phone? Coordinate with [Tara](https://posthog.com/community/profiles/34526).
 
 #### Yubikey
 We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication).

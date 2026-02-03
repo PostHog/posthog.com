@@ -692,11 +692,29 @@ export const handbookSidebar = [
     },
     {
         name: 'Docs & Wizard',
-        url: '/handbook/docs-and-wizard/docs',
+        url: '/handbook/docs-and-wizard',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/docs-and-wizard/docs',
+                url: '/handbook/docs-and-wizard',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
+            },
+            {
+                name: 'Wizard',
+            },
+            {
+                name: 'AI wizard',
+                url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'Context mill',
+                url: '/handbook/docs-and-wizard/context-mill',
+            },
+            {
+                name: 'Docs',
             },
             {
                 name: 'Ownership',
@@ -707,12 +725,12 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/docs-style-guide',
             },
             {
-                name: 'AI Wizard',
-                url: '/handbook/docs-and-wizard/developing-the-wizard',
+                name: 'MDX and components',
+                url: '/handbook/docs-and-wizard/mdx-and-components',
             },
             {
-                name: 'How to publish changelog',
-                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
+                name: 'How to write product docs',
+                url: '/handbook/docs-and-wizard/writing-product-docs',
             },
             {
                 name: 'Onboarding docs',
@@ -2526,10 +2544,6 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                        },
-                        {
-                            name: 'Agent toolkit',
-                            url: '/docs/ai-engineering/agent-toolkit',
                         },
                         {
                             name: 'LLM Analytics ↗',
