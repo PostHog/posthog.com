@@ -48,7 +48,7 @@ You can view the schema for each model inside the batch export configuration in 
 
 ## Creating the batch export
 
-1. Click [Destinations](https://app.posthog.com/destinations) in the left sidebar.
+1. Click [Data management > Destinations](https://app.posthog.com/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Azure Blob Storage**.
 4. Click the **+ Create** button.
