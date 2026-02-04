@@ -113,7 +113,7 @@ GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<servi
 
 ## Creating the batch export
 
-1. In PostHog, click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+1. In PostHog, click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Databricks**.
 4. Click the **+ Create** button.
