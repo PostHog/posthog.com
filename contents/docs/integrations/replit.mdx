@@ -38,7 +38,7 @@ Use the PostHog MCP to:
 Install packages: posthog-js and @posthog/cli
 
 Create a PostHog client at client/src/lib/posthog.ts that:
-- Initializes with capture_exceptions: true, autocapture: true, capture_pageview: true
+- Initializes with defaults: '2025-11-30', capture_exceptions: true, autocapture: true, capture_pageview: true
 - Uses env vars VITE_POSTHOG_KEY and VITE_POSTHOG_HOST
 - Exports helper functions for captureException and captureEvent
 
