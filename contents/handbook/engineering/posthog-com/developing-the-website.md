@@ -178,7 +178,7 @@ pnpm clean && mkdir .cache && pnpm install && pnpm start
 
 ### Minimal mode
 
-For faster builds during local development, you can run in minimal mode:
+For faster builds, you can run in minimal mode:
 
 ```bash
 pnpm build:minimal
@@ -187,17 +187,10 @@ pnpm build:minimal
 Minimal mode only builds:
 - Docs pages (`/docs/*`)
 - Handbook pages (`/handbook/*`)
-- Blog/content posts (`/blog/*`, `/tutorials/*` `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
+- Blog/content posts (`/blog/*`, `/tutorials/*`, `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
 - All pages in `src/pages/` (product pages, pricing, etc.)
 
-It skips:
-- All pagination, category, and tag index pages
-- Apps, CDP, templates, jobs, API docs, SDK references
-- `onPostBuild` entirely (API spec generation, SDK markdown)
-- GitHub API calls for roadmap and job issues
-- Next/previous navigation and internal link extraction
-- Sourcemap generation
-
+Everything else (apps, CDP, templates, jobs, API docs, SDK references, pagination/category/tag pages) won't exist - they'll 404. Next/previous navigation links and GitHub data for roadmaps/jobs will also be absent. Sourcemap generation is disabled.
 
 ### Environment variables
 
