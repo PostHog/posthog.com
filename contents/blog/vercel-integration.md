@@ -31,7 +31,7 @@ Today, that gets simpler.
 
 ## Introducing the PostHog × Vercel integration
 
-The new PostHog × Vercel integration lets you use PostHog feature flags and experiments directly in Vercel, without custom wiring or creative workarounds.
+[The new PostHog × Vercel integration](/docs/integrations/vercel-marketplace) lets you use PostHog feature flags and experiments directly in Vercel, without custom wiring or creative workarounds.
 
 Here’s how it works:
 
@@ -42,6 +42,8 @@ Here’s how it works:
 Alongside flag syncing, the integration also takes care of credentials. Your PostHog Project ID and API key are automatically synced into Vercel environment variables.
 
 This means no copying values between dashboards and no wondering if prod and staging are using the same project. It’s the boring kind of automation – the best kind.
+
+The integration also works with [v0 – Vercel's AI agent](v0.app) that helps users create real code and full-stack apps.
 
 ## Get started
 
