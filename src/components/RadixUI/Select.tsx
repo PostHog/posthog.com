@@ -151,7 +151,9 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             {selectedItem && (
                                 <span className="flex space-x-1 items-center">
                                     <Icon icon={selectedItem.icon} color={selectedItem.color} className="size-4" />
-                                    <span>{selectedItem.label}</span>
+                                    <span className={`${selectedItem.label?.length > 20 ? 'text-xs' : ''}`}>
+                                        {selectedItem.label}
+                                    </span>
                                 </span>
                             )}
                         </RadixSelect.Value>
