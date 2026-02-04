@@ -1,0 +1,29 @@
+The Redshift connector can link your Amazon Redshift database tables to PostHog.
+
+To link Redshift:
+
+1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
+2. Click **New source** and select Redshift
+3. Enter your database connection details:
+    - **Connection string (optional):** A connection string in the format `redshift://user:password@my-cluster.abc123xyz.us-east-1.redshift.amazonaws.com:5439/dev`. If provided, this will auto-fill the other fields.
+    - **Host:** The Redshift cluster endpoint like `my-cluster.abc123xyz.us-east-1.redshift.amazonaws.com`.
+    - **Port:** The port your Redshift cluster is listening on. The default is `5439`.
+    - **Database:** The name of the database you want like `dev`.
+    - **User:** The username with the necessary permissions to access the database like `awsuser`.
+    - **Password:** The password for the user.
+    - **Schema:** The schema for your database where your tables are located. The default is `public`.
+4. If you need to connect through an SSH tunnel, enable and configure it (optional):
+    - **Tunnel host:** The hostname of your SSH server.
+    - **Tunnel port:** The port your SSH server is listening on.
+    - **Authentication type:**
+        - For password authentication, enter your SSH username and password.
+        - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+5. Click **Link**
+
+The data warehouse then starts syncing your Redshift data. You can see details and progress in the [sources tab](https://us.posthog.com/pipeline/sources).
+
+> **Permissions:** The Redshift source only requires read permissions on the schemas and tables you intend to sync.
+
+import InboundIpAddresses from '../../_snippets/inbound-ip-addresses.mdx'
+
+<InboundIpAddresses />
