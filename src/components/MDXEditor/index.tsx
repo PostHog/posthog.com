@@ -41,6 +41,7 @@ export default function MDXEditor({
     jsxComponentDescriptors = [],
     cta,
     noEditorWrapper = false,
+    staticOnly = false,
 }: {
     mdxBody?: string
     body: string
@@ -50,6 +51,8 @@ export default function MDXEditor({
         label: string
     }
     noEditorWrapper?: boolean
+    /** When true, always render compiled MDX (no Lexical editor). Use for localized/read-only pages to avoid flash-to-blank. */
+    staticOnly?: boolean
 }) {
     const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
@@ -117,8 +120,8 @@ export default function MDXEditor({
     }, [activeEditor])
 
     useEffect(() => {
-        setIsSSR(false)
-    }, [])
+        if (!staticOnly) setIsSSR(false)
+    }, [staticOnly])
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
@@ -129,7 +132,7 @@ export default function MDXEditor({
 
     const content = (
         <div onClick={handleClick} ref={mdxEditorContainerRef}>
-            {isSSR && mdxBody ? (
+            {(isSSR || staticOnly) && mdxBody ? (
                 <MDXProvider components={mdxComponents}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>

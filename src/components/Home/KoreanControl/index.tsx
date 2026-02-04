@@ -27,8 +27,10 @@ import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
+import Editor from 'components/Editor'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
+import { MDXProvider } from '@mdx-js/react'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -927,17 +929,27 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     },
 ]
 
-export default function KoreanHome() {
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "ko" }) {
+interface KoreanHomeProps {
+    rawBody?: string
+    mdxBody?: unknown
+    bodyComponent?: React.ComponentType
+}
+
+export default function KoreanHome({
+    rawBody: rawBodyProp,
+    mdxBody: mdxBodyProp,
+    bodyComponent: BodyComponent,
+}: KoreanHomeProps = {}) {
+    const data = useStaticQuery(graphql`
+        query KoreanHomeQuery {
+            mdx(fields: { slug: { eq: "/ko" } }) {
                 rawBody
                 mdxBody: body
             }
         }
     `)
+    const rawBody = rawBodyProp ?? data?.mdx?.rawBody
+    const mdxBody = mdxBodyProp ?? data?.mdx?.mdxBody
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
@@ -947,6 +959,61 @@ export default function KoreanHome() {
             setWindowTitle(appWindow, 'home.mdx (한국어)')
         }
     }, [])
+
+    if (BodyComponent) {
+        const components = {
+            ...jsxComponentDescriptors.reduce((acc, d) => {
+                acc[d.name] = d.Editor
+                return acc
+            }, {} as Record<string, React.ComponentType<unknown>>),
+            Link,
+        }
+        return (
+            <>
+                <SEO
+                    title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
+                    updateWindowTitle={false}
+                    description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
+                    image="/images/og/default.png"
+                />
+                <LanguageToggle />
+                <Editor
+                    type="mdx"
+                    hideToolbar
+                    cta={{
+                        url: `https://${
+                            posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                        }.posthog.com/signup`,
+                        label: '무료로 시작하기',
+                    }}
+                >
+                    <MDXProvider components={components as import('@mdx-js/react').MDXProviderComponentsProp}>
+                        <BodyComponent />
+                    </MDXProvider>
+                </Editor>
+            </>
+        )
+    }
+
+    if (!mdxBody) {
+        return (
+            <>
+                <SEO
+                    title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
+                    updateWindowTitle={false}
+                    description="모든 개발자 도구를 한 곳에서."
+                    image="/images/og/default.png"
+                />
+                <LanguageToggle />
+                <div className="p-8 text-center text-secondary">
+                    <p>한국어 랜딩 페이지 콘텐츠를 불러올 수 없습니다.</p>
+                    <Link to="/" className="text-primary underline mt-4 inline-block">
+                        영어 홈페이지로 이동
+                    </Link>
+                </div>
+            </>
+        )
+    }
 
     return (
         <>
@@ -958,15 +1025,14 @@ export default function KoreanHome() {
             />
             <LanguageToggle />
             <MDXEditor
-                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
-                body={rawBody}
+                body={rawBody ?? ''}
                 mdxBody={mdxBody}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
                     }.posthog.com/signup`,
-                    label: '무료로 시작하기', // Korean: "Get started - free"
+                    label: '무료로 시작하기',
                 }}
             />
         </>
