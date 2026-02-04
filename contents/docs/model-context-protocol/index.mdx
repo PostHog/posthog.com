@@ -121,6 +121,12 @@ Here are some examples of what you can ask your AI agent to do with the PostHog 
 
 The agent will use the `create-feature-flag` tool to create the flag with a 20% rollout and return the configuration including the key, rollout percentage, and a link to the flag in PostHog.
 
+### Multivariate feature flags
+
+**Prompt:** "Create a multivariate feature flag called 'homepage-hero-test' with three variants: control at 34%, variant_a at 33%, and variant_b at 33%"
+
+The agent will use the `create-feature-flag` tool with a `multivariate` configuration to create the flag with multiple variants. Variant rollout percentages must be integers that sum to 100.
+
 ### Analytics queries
 
 **Prompt:** "How many unique users signed up in the last 7 days, broken down by day?"
