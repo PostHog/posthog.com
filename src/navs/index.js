@@ -31,6 +31,10 @@ export const dataPipelines = {
                     name: 'Managed',
                 },
                 {
+                    name: 'Attio',
+                    url: '/docs/cdp/sources/attio',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -4734,6 +4738,10 @@ export const docsMenu = {
                             name: 'Managed',
                         },
                         {
+                            name: 'Attio',
+                            url: '/docs/data-warehouse/sources/attio',
+                        },
+                        {
                             name: 'Azure SQL Server',
                             url: '/docs/data-warehouse/sources/azure-db',
                         },
@@ -5130,6 +5138,12 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
+                },
+                {
+                    name: 'Collecting feedback',
+                    url: '/docs/llm-analytics/collecting-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
                 },
                 {
                     name: 'Tracking custom properties',
