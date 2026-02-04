@@ -65,25 +65,15 @@ Traces consist of the following event hierarchy:
 4. A span can be the parent of other spans.
 5. A generation can be the child of a span or trace.
 
+## Event properties
+
+<TraceEventSnippet />
+
+
 ## User feedback
 
 The **Feedback** tab in the trace view displays user feedback collected via [PostHog Surveys](/docs/surveys). This enables you to see thumbs up/down ratings and follow-up responses directly alongside trace data.
 
-To link survey responses to a specific trace, include the `$ai_trace_id` property when capturing survey events:
+If no feedback exists for a trace, the Feedback tab provides a wizard to create a new survey pre-configured for thumbs up/down feedback with an optional follow-up question for negative responses.
 
-```js
-posthog.capture('survey sent', {
-  $survey_id: 'your-survey-id',
-  $survey_response: 1, // 1 = thumbs up, 0 = thumbs down
-  $ai_trace_id: traceId, // links feedback to the trace
-})
-```
-
-If no feedback exists for a trace, the Feedback tab provides a wizard to create a new survey. This survey is pre-configured for thumbs up/down feedback with an optional follow-up question for negative responses.
-
-For more details on implementing custom feedback collection, see [Implementing custom surveys](/docs/surveys/implementing-custom-surveys).
-
-
-## Event properties
-
-<TraceEventSnippet />
+For implementation details on collecting feedback and linking it to traces, see [Collecting feedback](/docs/llm-analytics/collecting-feedback).
