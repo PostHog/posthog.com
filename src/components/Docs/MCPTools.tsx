@@ -23,12 +23,12 @@ const MCPTools: React.FC = () => {
                 <p className="text-red-800 dark:text-red-200">
                     Tools unavailable. Please view the repo{' '}
                     <a
-                        href="https://github.com/PostHog/posthog/tree/master/products/mcp"
+                        href="https://github.com/PostHog/posthog/tree/master/services/mcp"
                         className="underline font-semibold"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        https://github.com/PostHog/posthog/tree/master/products/mcp
+                        https://github.com/PostHog/posthog/tree/master/services/mcp
                     </a>{' '}
                     to see tools.
                 </p>
