@@ -57,7 +57,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template](), along with a checklist of actions.
+Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template within the new org change issue](https://github.com/PostHog/company-internal/issues), along with a checklist of actions. The dropdown of actions appears when you create a new issue and select the "org change" template and you simply delete the non-relevant sections of the checklist.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
