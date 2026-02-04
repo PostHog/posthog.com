@@ -11,7 +11,7 @@ The API is available for all users and instances. It contains two types of endpo
 
 1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project API key](https://app.posthog.com/project/settings) to handle the request.
 
-2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key.
+2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with a personal API key or project secret API key.
 
 > You must make API requests to the correct domain. On US Cloud, these are `https://us.i.posthog.com` for public endpoints and `https://us.posthog.com` for private ones. On EU Cloud, these are `https://eu.i.posthog.com` for public endpoints and `https://eu.posthog.com` for private ones. For self-hosted instances, use your self-hosted domain. Confirm yours by checking your PostHog instance URL.
 
@@ -20,6 +20,35 @@ The API is available for all users and instances. It contains two types of endpo
 import InstallAPI from '../integrate/_snippets/install-api.mdx'
 
 <InstallAPI />
+
+## Project secret API keys
+
+Project secret API keys provide project-scoped access to the API without being tied to a specific user. They are prefixed with `phs_` and have explicit scopes that control what resources they can access.
+
+Project secret API keys are ideal for:
+
+- Server-side integrations
+- CI/CD pipelines
+- Shared automation that shouldn't depend on a specific user's access
+
+**Creating a project secret API key:**
+
+1. Go to [your project settings](https://us.posthog.com/settings/project)
+2. Navigate to the **Project Secret API Keys** section
+3. Click **Create key**, add a label, and select the scopes you need
+4. Copy the key (it's only shown once)
+
+**Authenticating with a project secret API key:**
+
+Use the `Authorization` header with `Bearer` authentication:
+
+```js
+const headers = {
+    Authorization: `Bearer ${PROJECT_SECRET_API_KEY}`
+}
+```
+
+> **Note:** Project secret API keys have limited scopes compared to personal API keys. Check the available scopes when creating your key to ensure it has access to the endpoints you need.
 
 ## Rate limiting
 
@@ -155,7 +184,7 @@ You can then just call the `"next"` URL to get the next set of results.
 PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
-- **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+- **Project secret API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
 - **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
 - **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
