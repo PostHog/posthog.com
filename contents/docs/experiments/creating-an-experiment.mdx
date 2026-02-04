@@ -42,13 +42,13 @@ Here's a breakdown of each field in the form:
 
 Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to.
 
-You can use an existing feature flag if it has multiple variants and `'control'` as the first variant. Otherwise, the feature flag will be created for you automatically when the experiment is created.
+You can use an existing feature flag if it has at least 2 variants (including one named `'control'`). Otherwise, the feature flag will be created for you automatically when the experiment is created.
 
 > **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you're using a different third-party library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ## Experiment variants
 
-By default, all experiments have a `control` and `test` variant. You can add more variants if you like. If you need to modify the variants after you've created the experiment, you can do so from the feature flag page.
+Experiments require at least 2 variants: a `control` and one or more test variants. By default, all experiments have a `control` and `test` variant. You can add more variants if you like (up to 9 test variants). If you need to modify the variants after you've created the experiment, you can do so from the feature flag page.
 
 Participants are automatically split equally between variants. If you want assign specific users to a specific variant, see the section below on [distribution and release conditions](#distribution-and-release-conditions).
 
