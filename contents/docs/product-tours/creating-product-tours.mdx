@@ -22,13 +22,31 @@ Click elements on your page to create steps. PostHog generates a CSS selector fo
 
 >**Note:** If your target elements do not have stable selectors like `id` or `data-*`, the tour may fail to correctly identify them. We're working on a new element-finding algorithm, stay tuned!
 
-## Add step content
+## Edit step content
 
-The toolbar includes a lightweight editor for basic formatting and images. For more control, edit your tour in the main PostHog app.
+After creating steps with the toolbar, edit your tour in the main PostHog app. The unified editing page includes:
 
-## Step progression
+- **Step sidebar** – Navigate between steps on the left
+- **WYSIWYG editor** – Edit content in the center with live appearance styling
+- **Settings panel** – Configure display conditions and theme on the right
 
-Steps can progress via buttons or when the user clicks the target element. Guide users through real interactions, not just info.
+The WYSIWYG editor supports:
+
+- Rich text formatting (headings, bold, italic, underline, lists)
+- Text alignment and color
+- Image and video embedding
+- Link insertion
+- Slash commands (`/`) for quick formatting
+
+## Configure step settings
+
+Each step has settings you can configure below the content editor:
+
+- **Target element** – Choose Auto mode or enter a CSS selector manually
+- **Advance on** – Progress via the Next button or when users click the target element
+- **Position** – For modal steps, select where on screen the modal appears
+- **Buttons** – Add, remove, or customize button text and actions
+
 
 ## Step types
 
