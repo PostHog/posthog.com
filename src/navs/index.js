@@ -2554,10 +2554,6 @@ export const docsMenu = {
                             url: '/docs/integrations/v0',
                         },
                         {
-                            name: 'Agent toolkit',
-                            url: '/docs/ai-engineering/agent-toolkit',
-                        },
-                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },

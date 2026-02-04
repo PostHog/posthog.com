@@ -31,9 +31,9 @@ Once connected, give Replit Agent this prompt to add PostHog with error tracking
 Add PostHog to this project for error tracking and analytics with source map uploads.
 
 Use the PostHog MCP to:
-- Get the project API token (from projects-get) → set as VITE_POSTHOG_KEY
-- Get the host URL → set as VITE_POSTHOG_HOST
-- Set VITE_POSTHOG_KEY and VITE_POSTHOG_HOST as shared environment variables so they work in both development and production
+- Get the project API token (from `projects-get`) → set as `VITE_POSTHOG_KEY`
+- Get the host URL → set as `VITE_POSTHOG_HOST`
+- Set `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST` as shared environment variables so they work in both development and production
 
 Install packages: posthog-js and @posthog/cli
 
@@ -46,11 +46,11 @@ Initialize PostHog in App.tsx with useEffect.
 
 Add an error boundary component that captures React errors to PostHog.
 
-Update script/build.ts to:
-- Build with sourcemap: true
-- After build, run posthog-cli sourcemap inject then sourcemap upload
-- Delete .map files from dist after upload (keep them private)
-- Skip upload gracefully if POSTHOG_CLI_TOKEN or POSTHOG_CLI_ENV_ID aren't set
+Update `script/build.ts` to:
+- Build with `sourcemap: true`
+- After build, run `posthog-cli sourcemap inject` then `posthog-cli sourcemap upload`
+- Delete `.map` files from dist after upload (keep them private)
+- Skip upload gracefully if `POSTHOG_CLI_TOKEN` or `POSTHOG_CLI_ENV_ID` aren't set
 
 For the source map upload secrets:
 - Prompt me to provide POSTHOG_CLI_TOKEN as a secret
