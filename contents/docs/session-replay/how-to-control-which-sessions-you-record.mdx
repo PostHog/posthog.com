@@ -51,8 +51,8 @@ posthog.startSessionRecording({
 
 ## With URL trigger conditions
 
-You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.  
-The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the page.
+You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.
+The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png" 
@@ -63,8 +63,8 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
 
 ## With Event trigger conditions
 
-Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.  
-The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the event.
+Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.
+The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png" 
@@ -78,11 +78,27 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
 If you use [error tracking](/docs/error-tracking), exceptions are captured as events. You can select the exception event as an event trigger to start session recording.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_light_4a88e6f239.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_on_exception_dark_621ce757d3.png"
-    alt="Triggering session recordings on exceptions" 
+    alt="Triggering session recordings on exceptions"
     classes="rounded"
 />
+
+### How the trigger buffer works
+
+When using URL or event triggers, the client buffers recording data in-memory while waiting for a trigger to match. Here's how it works:
+
+- While waiting for a trigger ("trigger pending"), the client takes a **full snapshot once per minute**
+- Only data from the **most recent snapshot** up to when the trigger fires is kept
+- This means the buffer contains **up to 1 minute** of activity before the trigger
+
+The actual buffered duration varies depending on timing. For example:
+- If a snapshot was taken 45 seconds before the trigger fires, you'll see ~45 seconds of activity before the trigger
+- If a snapshot was taken 5 seconds before the trigger fires, you'll only see ~5 seconds of activity
+
+This approach balances providing useful context with browser performance — keeping multiple snapshots would be more expensive for the browser.
+
+> **Note:** Full page navigations (page refreshes) clear the buffer and start over from a new snapshot.
 
 ## With feature flags
 
@@ -112,7 +128,18 @@ Sampling enables you to record a percentage of all sessions. To set a sampling r
 
 Our recommendation is to start with capturing 100% of sessions and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
 
-> **Note:** Sampling reduces the number of sessions you record, but it doesn’t let you control which sessions are recorded.
+### How sampling works
+
+Sampling is deterministic based on the session ID. When a new session starts, PostHog converts the session ID into a number between 0 and 1 using a hash function. This number is then compared to your configured sample rate (for example, 0.1 for 10% or 0.2 for 20%).
+
+If the generated number is less than the sample rate, the session is recorded. Because the same session ID always produces the same number, the decision to record or not is consistent throughout the session's lifetime.
+
+This means:
+- Sessions are selected based on their ID, not by time period or order
+- The same session will always get the same recording decision, even across page refreshes
+- At 20% sampling, roughly 20% of your unique sessions will be recorded, distributed evenly across your traffic
+
+> **Note:** Sampling reduces the number of sessions you record, but you cannot control which specific sessions are selected — the selection is determined by the session ID hash.
 
 ## Combining controls
 

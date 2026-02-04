@@ -18,6 +18,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Cloud storage',
         },
         {
+            label: 'Attio',
+            url: '/docs/data-warehouse/sources/attio',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T13_32_15_602_Z_3d36e826ca.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Azure SQL Server',
             url: '/docs/data-warehouse/sources/azure-db',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
@@ -39,6 +45,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             label: 'Chargebee',
             url: '/docs/data-warehouse/sources/chargebee',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/cb_597858b354.svg',
+            category: 'SaaS tools',
+        },
+        {
+            label: 'Clerk',
+            url: '/docs/data-warehouse/sources/clerk',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_36_01_806_Z_30c81aea20.png',
             category: 'SaaS tools',
         },
         {
@@ -96,9 +108,27 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Other',
         },
         {
+            label: 'GitHub',
+            url: '/docs/data-warehouse/sources/github',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/github_mark_903e35d471.svg',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Hubspot',
             url: '/docs/data-warehouse/sources/hubspot',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hubspot_1_f8248c008e.svg',
+            category: 'SaaS tools',
+        },
+        {
+            label: 'Klaviyo',
+            url: '/docs/data-warehouse/sources/klaviyo',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+            category: 'SaaS tools',
+        },
+        {
+            label: 'Mailchimp',
+            url: '/docs/data-warehouse/sources/mailchimp',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_37_02_666_Z_2c8f3e8398.png',
             category: 'SaaS tools',
         },
         {

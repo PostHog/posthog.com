@@ -1,6 +1,6 @@
 ---
 title: 'The most popular Mixpanel alternatives & competitors, compared'
-date: 2023-10-04
+date: 2026-01-28
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,9 +13,19 @@ featuredImageType: full
 category: General
 tags:
     - Comparisons
+
+seo:
+    metaTitle: The most popular Mixpanel alternatives & competitors, compared
+    metaDescription: Compare the best Mixpanel alternatives for product analytics, session replay, and experimentation – including PostHog, Amplitude, Heap, GA4, and more.
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+[Mixpanel](/blog/posthog-vs-mixpanel) has been a go-to product analytics platform for over a decade, and it's evolved significantly – adding session replay, heatmaps, A/B testing, and feature flags in recent years.
+
+But Mixpanel isn't the only option. Whether you're looking for an all-in-one platform that includes error tracking and LLM analytics, transparent usage-based pricing, or a tool built specifically for engineering teams, there are alternatives worth considering.
+
+In this guide, we compare the best Mixpanel alternatives – whether you need a focused analytics tool or an all-in-one platform for building better products.
 
 ## 1. PostHog
 
@@ -23,19 +33,25 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-PostHog is an open-source developer platform that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, but also Hotjar, [Optimizely](/blog/posthog-vs-optimizely), and [Split](/blog/best-split-alternatives)
+PostHog is an open-source developer platform that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, but also [Hotjar](/blog/posthog-vs-hotjar), [Optimizely](/blog/posthog-vs-optimizely), and [Split](/blog/best-split-alternatives)
 
 ### Key features
 
--   📈 **Product analytics**, including funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Power users can create custom insights using SQL.
+- **Product analytics**, including funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Power users can create custom insights using SQL.
 
--   📺 **Session replays** with event timelines, console logs, and network activity, and 90-day retention. Individual replays can be saved offline indefinitely.
+- **Web analytics** for tracking your marketing website – pageviews, bounce rate, traffic sources, UTM campaigns, and web vitals in a simple dashboard.
 
--   🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads, so you can make changes to your product without deploying new code.
+- **Session replays** with event timelines, console logs, network activity, DOM explorer, and performance metrics. 90-day retention with the ability to save individual replays offline indefinitely.
 
--   🧪 **A/B tests** with up to 9 test variations, primary and secondary metrics. Automatically calculates recommended duration, sample size, and statistical significance.
+- **Heatmaps** showing clicks, scroll depth, and mouse movement overlaid on your actual site – viewable directly via the PostHog toolbar.
 
--   💬 **Surveys**, including open text, link with custom CTA, ratings (for [NPS, CSAT, and CES surveys](/product-engineers/nps-vs-csat-vs-ces)), single and multiple choice. Target users based on person properties, URL, or using existing feature flags.
+- **A/B tests** with up to 10 test variations, primary and secondary metrics. Automatically calculates recommended duration, sample size, and statistical significance.
+
+- **Surveys**, including open text, link with custom CTA, ratings (for [NPS, CSAT, and CES surveys](/product-engineers/nps-vs-csat-vs-ces)), single and multiple choice. Target users based on person properties, URL, or using existing feature flags.
+
+- **Error tracking** to monitor exceptions, stack traces, and crashes – connected directly to session replays, user behavior, and feature flag changes.
+
+- **Data warehouse** to import and query data from external sources like Stripe, Zendesk, Hubspot, or your existing warehouse – analyze business and product data together.
 
 ### Who uses PostHog?
 
@@ -45,10 +61,11 @@ Typical PostHog users are:
 -   Data-savvy product managers
 -   Startups and mid-size enterprises
 
-Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
+Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and [more](/customers).
 
 ### How does PostHog compare to Mixpanel?
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'mixpanel']}
     rows={[
@@ -65,18 +82,33 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
         'platform.tools.notebooks',
     ]}
 />
+</p>
 
-PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
+<details>
+<summary>Main differences between PostHog and Mixpanel</summary>
 
-PostHog also supports autocapture. This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet.
+- PostHog includes [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and [surveys](/surveys) natively; Mixpanel doesn't offer these at all.
+- PostHog charges up to 80% less for anonymous events; Mixpanel charges the same, higher rate for all events regardless.
+- PostHog has a built-in [data warehouse](/data-stack) for importing external data (Stripe, Zendesk, etc.); Mixpanel relies on warehouse connectors and requires you to get data into a third-party warehouse first.
+- Mixpanel's Experiments report is an Enterprise-only add-on; PostHog includes experiments on all plans with usage-based pricing.
+- PostHog offers SQL access for custom queries; Mixpanel doesn't have a native SQL editor, requiring you to export your data instead.
 
-### How popular is PostHog?
+</details>
 
-According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, PostHog is the fastest growing Mixpanel alternative in the market.
+<details>
+<summary>Main similarities between PostHog and Mixpanel</summary>
 
-As of July 2023, **PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Mixpanel** is deployed by 5,218 (0.5%), down -17% from 6,295 the previous year.
+- Both offer core product analytics: funnels, retention, cohorts, user paths, and trends.
+- Both include A/B testing, feature flags, and session replay with web and mobile SDK support (iOS, Android, React Native).
+- Both have AI-powered insight builders for natural language queries.
+- Both are SOC 2 certified and GDPR-ready with EU data residency options.
+- Both integrate with CDPs like Segment and Rudderstack, and data warehouses like Snowflake and BigQuery.
 
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/posthog.png)
+</details>
+
+PostHog is the best choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
+
+PostHog also supports [autocapture](/docs/product-analytics/autocapture). This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet.
 
 ### Why do companies use PostHog?
 
@@ -94,21 +126,25 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ## 2. Google Analytics 4 (GA4)
 
-![GA4](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/google-website.png)
+![GA4](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/GA4.png)
 
 ### What is Google Analytics 4?
 
-Google Analytics 4 (GA4) is a marketing and product analytics tool that's tightly integrated with other Google products, such as Ads, BigQuery, Looker Studio, and Firebase.
+[Google Analytics 4 (GA4)](/blog/posthog-vs-ga4) is a marketing and product analytics tool that's tightly integrated with other Google products, such as Ads, BigQuery, Looker Studio, and Firebase.
 
 Unlike its predecessor, Universal Analytics (GA3), it's event-based. It also introduces new report types, such as conversion funnels and retention tables. This makes it more useful to product teams than before.
 
 ### Key features
 
--   🤖 **Predictive insights** alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
+- **Web and app analytics** with event-based tracking, conversion funnels, retention tables, and user paths across websites and mobile apps.
 
--   🔁 **Integration with Google tools** means it's easy to analyze your GA4 data elsewhere, such as Google's dashboarding tool, Looker Studio.
+- **Advertising analytics** with native Google Ads integration, campaign attribution, and ROI tracking across paid channels.
 
--   ⌨️ **Natural language search** means you can ask specific questions, like "MoM growth in users on iOS", rather searching existing reports.
+- **Predictive insights** powered by Google's machine learning – alerts you to trends, anomalies, and predicts churn and purchase probability.
+
+- **Google ecosystem integration** with BigQuery for raw data access, Looker Studio for dashboards, Firebase for mobile, and Google Ads for attribution.
+
+- **Natural language search** lets you ask specific questions like "MoM growth in users on iOS" rather than building reports manually.
 
 ### Who uses GA4?
 
@@ -122,6 +158,7 @@ Google's huge scale means GA4 is used by both the biggest global corporations to
 
 ### How does GA4 compare to Mixpanel?
 
+<p>
 <ProductComparisonTable
     competitors={['ga4', 'mixpanel']}
     rows={[
@@ -138,18 +175,33 @@ Google's huge scale means GA4 is used by both the biggest global corporations to
         'platform.pricing.transparent_pricing',
     ]}
 />
+</p>
+
+<details>
+<summary>Main differences between GA4 and Mixpanel</summary>
+
+- GA4 is optimized for marketing analytics and campaign attribution; Mixpanel is built for product analytics and user behavior.
+- GA4 has native Google Ads integration for tracking ad spend and ROI; Mixpanel requires third-party connectors for advertising data.
+- Mixpanel supports group analytics for B2B account-level tracking; GA4 doesn't have native group analytics.
+- GA4 is free for most businesses (up to 10M events/month); Mixpanel's free tier is 1M events with paid plans scaling from there.
+- Mixpanel now includes session replay, heatmaps, A/B testing, and feature flags; GA4 doesn't offer any of these.
+
+</details>
+
+<details>
+<summary>Main similarities between GA4 and Mixpanel</summary>
+
+- Both are event-based analytics platforms with funnels, retention, and cohort analysis.
+- Both integrate with major data warehouses like BigQuery and Snowflake.
+- Both provide custom dashboards and reporting capabilities.
+- Both support mobile app analytics via Firebase (GA4) and native SDKs (Mixpanel).
+- Both are used by large enterprises with significant compliance and scale requirements.
+
+</details>
 
 GA4 and Mixpanel are only superficially similar. They cover the same basics, but GA4 is better-suited to content and marketing teams, while Mixpanel is designed for product teams.
 
 Note, GA4 doesn't support group analytics. This makes it easy to track aggregated usage at an account level, rather than at a user level – useful for tracking behavior in B2B products.
-
-### How popular is GA4?
-
-Google Analytics remains the most-used analytics tool in the world by a large margin.
-
-As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/) run GA4 – another 35.7% were still running GA3.
-
-![GA4](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/GA4.png)
 
 ### Why do companies use GA4?
 
@@ -165,21 +217,27 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 
 ## 3. Amplitude
 
-![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/amplitude-website.png)
+![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/ammplitude.png)
 
 ### What is Amplitude?
 
-[Amplitude](/blog/best-amplitude-alternatives) is an analytics and testing tool with a particular focus on large enterprise customers, like Ford, NBCUniversal, and Walmart.
+[Amplitude](/blog/best-amplitude-alternatives) is an analytics and testing tool with a particular focus on large enterprise customers, like Zoom, NBCUniversal, and Walmart.
 
 ### Key features
 
--   📈 **Product analytics**, including funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+- **Product analytics** with funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and SQL access for power users.
 
--   🧪 **A/B testing** with support for JSON payloads, primary, secondary, and counter metrics.
+- **Session replay** to watch real user sessions and understand behavior qualitatively – includes heatmaps on Growth/Enterprise plans.
 
--   💁‍♂️ **Customer data platform** that combines analytics data with third-party tools for data governance, identity resolution, and data federation.
+- **A/B testing** with support for JSON payloads, primary, secondary, and guardrail metrics. Web Experimentation includes a visual editor.
 
--   🤖 **AI insight builder** that generates insights based on natural language requests, like "What is my purchase conversion rate?".
+- **Feature flags** for controlled rollouts and targeting specific user segments based on behavioral cohorts.
+
+- **Warehouse-native analytics** that queries data directly from Snowflake, BigQuery, or Databricks without moving it.
+
+- **AI insight builder** that generates insights based on natural language requests, like "What is my purchase conversion rate?".
+
+- **Customer data platform** that combines analytics data with third-party tools for data governance, identity resolution, and audience syncing.
 
 ### Who uses Amplitude?
 
@@ -194,6 +252,7 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
 
 ### How does Amplitude compare to Mixpanel?
 
+<p>
 <ProductComparisonTable
     competitors={['amplitude', 'mixpanel']}
     rows={[
@@ -206,16 +265,33 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
         'platform.security.role_based_access_control',
     ]}
 />
+</p>
 
-On paper, Amplitude and Mixpanel are very similar, but they differ in focus and approach. While both products serve large enterprise customers, Amplitude is more focused on these users. Unlike Mixpanel, for example, pricing isn't transparent.
+<details>
+<summary>Main differences between Amplitude and Mixpanel</summary>
 
-### How popular is Amplitude?
+- Amplitude offers warehouse-native analytics that queries data directly in your warehouse; Mixpanel syncs data bidirectionally but doesn't sit on top of your warehouse.
+- Amplitude's session replay launched earlier with deeper analytics integration; Mixpanel's is newer but includes mobile support and AI summaries.
+- Amplitude includes Guides & Surveys as a paid add-on; Mixpanel doesn't offer native survey functionality.
+- Amplitude targets larger enterprises with more complex compliance needs; Mixpanel is more accessible to mid-market companies.
+- Mixpanel's feature flags and experiments are newer (late 2025); Amplitude has had experimentation longer.
 
-Amplitude is slightly more popular than Mixpanel, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant:
+</details>
 
-As of July 2023, Amplitude is deployed by 6,973 (0.7%) of the top 1 million websites in 2023. Mixpanel is deployed by 5,218 (0.5%).
+<details>
+<summary>Main similarities between Amplitude and Mixpanel</summary>
 
-![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/ammplitude.png)
+- Both are established product analytics platforms with 10+ years in market.
+- Both now offer session replay, heatmaps, A/B testing, and feature flags.
+- Both provide AI-powered natural language querying for building insights.
+- Both support group analytics for B2B account-level tracking.
+- Both integrate with CDPs like Segment and data warehouses like Snowflake and BigQuery.
+- Both are SOC 2 certified and GDPR-ready with EU data residency options.
+- Both serve large enterprise customers with complex data governance requirements.
+
+</details>
+
+On paper, Amplitude and Mixpanel are very similar, but they differ in focus and approach. While both products serve large enterprise customers, Amplitude is more focused on these users. 
 
 ### Why do companies use Amplitude?
 
@@ -231,21 +307,27 @@ As of July 2023, Amplitude is deployed by 6,973 (0.7%) of the top 1 million webs
 
 ## 4. Heap
 
-![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/heap-website.png)
+![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/heap.png)
 
 ### What is Heap?
 
 Heap describes itself as a Digital Insights Platform. Unpacking that a bit, it means Heap offers both product analytics and session replay, and supports marketing use cases with multitouch attribution.
 
-Heap was [acquired in September 2023](https://contentsquare.com/heap/) by Contentsquare, a marketing and e-commerce analytics firm, and announced plans to integrate the two products.
+Heap was [acquired in September 2023](https://contentsquare.com/heap/) by [Contentsquare](/blog/best-contentsquare-alternatives), a marketing and e-commerce analytics firm, and announced plans to integrate the two products.
 
 ### Key features
 
--   ✅ **Event autocapture** is a key differentiator between Heap and Mixpanel. Autocapture means product teams don't have to rely on engineers to instrument all events. Heap offers a visual editor for enables teams to tag on-page events for analysis.
+- **Event autocapture** captures clicks, form submissions, and pageviews automatically without manual instrumentation. A visual editor lets teams tag and define events retroactively.
 
--   📺 **Session replay** and heatmaps augment Heap's analytics features with qualitative insights, though it lacks the debugging tools typical of most replay tools.
+- **Product analytics** with funnels, retention, user paths, and behavioral cohorts for understanding how users move through your product.
 
--   🔁 **Managed ETL** to data warehouses, so you can export your Heap analytics data into a data warehouse and combine it with data from other sources.
+- **Session replay** and heatmaps for qualitative insights into user behavior, though it lacks developer-focused debugging tools like console logs and network monitoring.
+
+- **Analysis suggestions** use data science to automatically surface hidden interactions, friction points, and opportunities in user journeys.
+
+- **Multi-touch attribution** for marketing teams to understand which channels and campaigns drive conversions.
+
+- **Managed ETL** to export analytics data to Snowflake, BigQuery, and other warehouses for broader analysis.
 
 ### Who uses Heap?
 
@@ -256,10 +338,11 @@ Typical Heap users are:
 
 Heap puts a strong focus on supporting non-technical product managers via autocapture.
 
-Customers include Amway, Eventbrite, and Freshworks.
+Customers include Amway, Eventbrite, and Nielsen.
 
 ### How does Heap compare to Mixpanel?
 
+<p>
 <ProductComparisonTable
     competitors={['heap', 'mixpanel']}
     rows={[
@@ -272,18 +355,33 @@ Customers include Amway, Eventbrite, and Freshworks.
         'platform.security.role_based_access_control',
     ]}
 />
+</p>
 
-Session replay and autocapture support make Heap a good Mixpanel alternative for product teams.
+<details>
+<summary>Main differences between Heap and Mixpanel</summary>
 
-Heap has a healthy integration library for things like A/B testing, or marketing automation, but Mixpanel's is better. For example, Heap has two official survey integrations (Appcues and Delighted), while Mixpanel has nine.
+- Heap's autocapture is more comprehensive and central to its value prop; Mixpanel supports autocapture but emphasizes manual instrumentation.
+- Mixpanel now includes A/B testing and feature flags; Heap lacks native experimentation and relies on third-party integrations.
+- Mixpanel offers a more generous free tier (1M events) compared to Heap's 10,000 monthly sessions.
+- Heap includes heatmaps out of the box; Mixpanel's heatmaps are tied to session replay.
+- Mixpanel offers EU data residency; Heap does not currently offer EU hosting.
 
-Mixpanel also offers a more generous free tier of up to 20 million events; Heap is limited to 10,000 monthly users.
+</details>
 
-### How popular is Heap?
+<details>
+<summary>Main similarities between Heap and Mixpanel</summary>
 
-Heap is less popular than Mixpanel. According to BuiltWith, Heap is deployed on 4,221 (0.4%) of the top 1 million websites, while Mixpanel is used by 6,300.
+- Both offer core product analytics with funnels, retention, cohorts, and user paths.
+- Both support integrations with data warehouses like Snowflake and BigQuery.
+- Both are self-serve with free tiers available for smaller teams.
+- Both are designed primarily for non-technical product managers and growth teams.
+- Both integrate with CDPs like Segment and Rudderstack.
 
-![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/mixpanel-alternatives/heap.png)
+</details>
+
+Heap has a healthy integration library for A/B testing and marketing automation. For surveys, Heap supports Appcues, Delighted, and Chameleon (microsurveys). Mixpanel also has a large catalog and lists at least eight survey/microsurvey integrations (including Appcues, Survicate, Wootric/InMoment, Hotjar, Sprig, 1Flow, Userflow, and UserGuiding).
+
+Mixpanel also offers a more generous free tier of up to 1 million events; Heap is limited to 10,000 monthly sessions.
 
 ### Why do companies use Heap?
 
@@ -297,15 +395,143 @@ Heap is less popular than Mixpanel. According to BuiltWith, Heap is deployed on 
 >
 > Heap is basically Mixpanel with autocapture. This makes it a decent choice for non-technical product teams, but it's not radically different.
 
-## Honorable mentions
+<details>
+<summary>Honorable mentions</summary>
 
-This guide focuses on the most popular Mixpanel alternatives, but these aren't the only ones. Here are some honorable mentions that are worth also worth considering:
+This guide focuses on the most popular Mixpanel alternatives, but these aren't the only ones. Here are some other tools worth considering:
 
--   **[Pendo](/blog/best-pendo-alternatives)**, which describes itself as a product experience platform. It combines analytics with in-app guides, user feedback widgets, roadmap planning, and product discovery tools.
--   **[Kissmetrics](https://www.kissmetrics.io/)**, which is more focused on marketing and e-commerce use cases than Mixpanel. It's worth considering if you want to focus on channel attribution and revenue tracking, but don't want to use GA4.
+- **[Pendo](/blog/best-pendo-alternatives)** describes itself as a product experience platform. It combines analytics with in-app guides, user feedback widgets, roadmap planning, and product discovery tools. Best for product teams who want onboarding and adoption tools alongside analytics.
 
--   **[Snowplow](https://snowplow.io/)**, a powerful, open-source behavioral data platform. It can replace tools like Mixpanel, but it's only suitable for companies with well-staffed data science teams. It's mostly used by large enterprises.
+- **Kissmetrics** is more focused on marketing and e-commerce use cases than Mixpanel. It's worth considering if you want to focus on channel attribution and revenue tracking, but don't want to use GA4.
 
--   **[June](https://www.june.so/)**, a lightweight take on product analytics that focuses on auto generated reports. It's popular among seed stage and Series A B2B SaaS startups, though its free tier includes only 1,000 active monthly users.
+- **Snowplow** is a powerful, open-source behavioral data platform. It can replace tools like Mixpanel, but requires significant data engineering resources to set up and maintain. Best for large enterprises with well-staffed data teams who want full control over their data pipeline.
 
-<NewsletterForm />
+- **Countly** is an open-source analytics platform with strong mobile app support, push notifications, and crash analytics. It offers both self-hosted and cloud options, making it a good choice for teams who need data sovereignty.
+
+- **[Plausible](/blog/best-plausible-alternatives)** and **[Fathom](/blog/best-fathom-alternatives)** are privacy-first, lightweight analytics tools. They're not direct Mixpanel replacements – they focus on simple website metrics rather than product analytics – but they're worth considering if GDPR compliance and minimal data collection are priorities.
+
+For more options, see our guide to the [best open-source product analytics tools](/blog/best-open-source-analytics-tools).
+
+</details>
+
+## Which Mixpanel alternative should you choose?
+
+- Engineering team wanting to ship faster with analytics, session replay, feature flags, A/B testing, and error tracking in one platform? **PostHog** is built for you.
+- Marketing team needing campaign attribution, ad spend tracking, and Google ecosystem integration? **GA4** is the obvious choice.
+- Large enterprise wanting warehouse-native analytics and mature experimentation? **Amplitude** is built for scale.
+- Non-technical team wanting comprehensive autocapture with minimal engineering effort? **Heap** gets you started fast.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Mixpanel replacement if:
+
+- You value transparency. We're open source and open core.
+- You want all the tools to help you build a better product (like error tracking, session replays, feature flags, and A/B testing).
+- You're an engineering-led team that wants SQL access and direct support from the people who build the product.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+Check out our [product analytics docs](/docs/product-analytics) and [PostHog vs Mixpanel comparison](/blog/posthog-vs-mixpanel) to learn more.
+
+<ArrayCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is Mixpanel used for?</summary>
+
+**Mixpanel** is a product analytics platform used to track user behavior, analyze conversion funnels, measure retention, and run A/B tests. Product, growth, and marketing teams use it to understand how users interact with their products and make data-driven decisions. Mixpanel has expanded significantly in recent years, adding session replay, heatmaps, feature flags, and experimentation.
+
+</details>
+
+<details>
+<summary>Why look for Mixpanel alternatives?</summary>
+
+Common reasons include: needing features Mixpanel doesn't offer (like error tracking or LLM analytics), wanting a more generous free tier to get you started, preferring an open-source or self-hostable platform, wanting SQL access for custom queries, or consolidating multiple tools into one platform.
+
+</details>
+
+<details>
+<summary>What's the best Mixpanel alternative overall?</summary>
+
+For most teams, **PostHog** is the best alternative. It includes everything Mixpanel offers ([product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags)) plus [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), and a built-in [data warehouse](/data-warehouse) – all with transparent pricing and a generous free tier.
+
+</details>
+
+<details>
+<summary>Which Mixpanel alternatives are open source?</summary>
+
+**PostHog** is the only major open-source alternative on this list (it's open core under the MIT license). **Snowplow** is also open source but requires significant data engineering resources. See our guide to the [best open-source product analytics tools](/blog/best-open-source-analytics-tools) for more options.
+
+</details>
+
+<details>
+<summary>Which Mixpanel alternative has the best free tier?</summary>
+
+**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, 1 million feature flag requests, and 1,500 survey responses per month. **[GA4](/blog/posthog-vs-ga4)** is free for up to 10M events/month but lacks session replay and experimentation. Mixpanel's free tier includes 1M events with a credit card on file.
+
+</details>
+
+<details>
+<summary>Which alternative is best for marketing teams?</summary>
+
+**GA4** is the best choice for marketing teams. It offers native Google Ads integration, campaign attribution, predictive insights, and is free for most businesses. It's tightly integrated with the Google ecosystem (BigQuery, Looker Studio, Firebase), making it ideal for teams already using Google tools.
+
+</details>
+
+<details>
+<summary>Which alternative is best for large enterprises?</summary>
+
+**Amplitude** is purpose-built for large enterprises. It offers warehouse-native analytics, mature experimentation, advanced data governance, and is designed to help non-technical teams self-serve analytics without overloading data teams. However, pricing requires contacting sales and can be expensive.
+
+</details>
+
+<details>
+<summary>Which alternative requires the least engineering effort?</summary>
+
+**Heap** is designed for teams with limited engineering resources. Its comprehensive autocapture starts collecting clicks, form submissions, and pageviews automatically, and a visual editor lets you define events retroactively without writing code.
+
+</details>
+
+<details>
+<summary>Does Mixpanel have error tracking?</summary>
+
+No. Mixpanel does not offer [error tracking or crash reporting](/blog/best-error-tracking-tools). If you need to monitor exceptions alongside your analytics, consider **PostHog** (which ties [errors](/error-tracking) to user sessions and feature flags) or pair Mixpanel with a dedicated tool like [Sentry](/blog/posthog-vs-sentry).
+
+</details>
+
+<details>
+<summary>Does Mixpanel have LLM analytics?</summary>
+
+No. Mixpanel doesn't offer LLM observability or AI analytics features. **PostHog** is currently the only analytics platform on this list that includes [LLM analytics](/llm-analytics) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions.
+
+</details>
+
+<details>
+<summary>Does Mixpanel have surveys?</summary>
+
+No. Mixpanel doesn't offer native survey functionality. If you need to collect user feedback, NPS scores, or run product-market fit surveys, you'll need a separate tool like Sprig or Survicate – or use **PostHog**, which includes [surveys](/surveys) with targeting based on user properties, URLs, and feature flags.
+
+</details>
+
+<details>
+<summary>Can I use Mixpanel with my data warehouse?</summary>
+
+Yes. Mixpanel offers warehouse connectors that sync data bidirectionally with Snowflake, BigQuery, and other warehouses. **Amplitude** goes further with warehouse-native analytics that queries your data directly without moving it. **PostHog** takes a different approach with a [built-in data warehouse](/data-stack) that imports external data for unified analysis.
+
+</details>
+
+<details>
+<summary>Can I migrate from Mixpanel to PostHog?</summary>
+
+Yes. **PostHog** has a [managed migration tool](/docs/migrate/managed-migrations) for Mixpanel that makes importing your data, historical events, and user properties easy. It also has dedicated [Mixpanel to PostHog migration guide](/docs/migrate/mixpanel)
+
+</details>
+
+<details>
+<summary>What other analytics tools are available?</summary>
+
+Beyond the tools in this guide, there are many other options worth considering. See our guides to [Amplitude alternatives](/blog/best-amplitude-alternatives), [Heap alternatives](/blog/best-heap-alternatives), [Google Analytics alternatives](/blog/ga4-alternatives), and [open-source product analytics tools](/blog/best-open-source-analytics-tools) for broader comparisons.
+
+</details>

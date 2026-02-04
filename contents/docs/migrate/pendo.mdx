@@ -13,7 +13,7 @@ Migrating data from Pendo is a two step process:
 1. Export data via Pendo Data Sync
 2. Convert Pendo data to the PostHog schema and capture in PostHog
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## 1. Export data via Pendo Data Sync
 
@@ -25,7 +25,7 @@ This exports events, features, guides, pages, and more in a `.avro` format which
 
 ## 2. Convert Pendo data and capture it in PostHog
 
-The schema of Pendo's exported event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Pendo's schema in [their docs](https://support.pendo.io/hc/en-us/articles/14121317891355-Data-Sync-schema-definitions) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Pendo's exported event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Pendo's schema in [their docs](https://support.pendo.io/hc/en-us/articles/14121317891355-Data-Sync-schema-definitions) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
 
 If you have done one single historical export, you can query the `allevents.avro` table to get the event data. With it, you can then go through each row and convert it to PostHog's schema. This requires converting:
 
@@ -33,7 +33,7 @@ If you have done one single historical export, you can query the `allevents.avro
 - Properties like `url` to `$current_url`
 - Event `browserTimestamp` to an ISO 8601 timestamp
 
-Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
+Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
 
 Here's an example version of a Python script reading from an `allevents.avro` file:
 
@@ -46,89 +46,89 @@ from avro.datafile import DataFileReader
 from avro.io import DatumReader
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 key_mapping = {
-  'browser': '$browser',
-  'eventSource': '$lib',
-  'language': '$browser_language',
-  'latitude': '$geoip_latitude',
-  'longitude': '$geoip_longitude',
-  'elementPath': 'elements_chain',
-  'region': '$geoip_subdivision_1_name',
-  'url': '$current_url',
-  'userAgent': '$user_agent',
-  'country': '$geoip_country_name',
-  'remoteIp': '$ip',
-  'pollId': 'survey_id',
-  'pollResponse': 'survey_response',
-  'eventType': '$event_type'
+'browser': '$browser',
+'eventSource': '$lib',
+'language': '$browser_language',
+'latitude': '$geoip_latitude',
+'longitude': '$geoip_longitude',
+'elementPath': 'elements_chain',
+'region': '$geoip_subdivision_1_name',
+'url': '$current_url',
+'userAgent': '$user_agent',
+'country': '$geoip_country_name',
+'remoteIp': '$ip',
+'pollId': 'survey_id',
+'pollResponse': 'survey_response',
+'eventType': '$event_type'
 }
 
 event_mapping = {
-  'load': '$pageview',
-  'pollResponse': 'survey sent',
-  'click': '$autocapture',
-  'change': '$autocapture',
-  'focus': '$autocapture'
+'load': '$pageview',
+'pollResponse': 'survey sent',
+'click': '$autocapture',
+'change': '$autocapture',
+'focus': '$autocapture'
 }
 
 omitted_keys = [
-  "accountId",
-  "browserTimestamp",
-  "destinationStepId",
-  "eventId",
-  "version",
-  "matchableId",
-  "oldVisitorId",
-  "periodId",
-  "visitorId",
-  "accountId",
+"accountId",
+"browserTimestamp",
+"destinationStepId",
+"eventId",
+"version",
+"matchableId",
+"oldVisitorId",
+"periodId",
+"visitorId",
+"accountId",
 ]
 
 with open("pendo_events.avro", "rb") as file:
-  reader = DataFileReader(file, DatumReader())
-  for event in reader:
-    # Capture the event
-    properties = {}
-    for key, value in event.items():
-      if value is None:
-        continue
-      if key in omitted_keys:
-        continue
-      elif key in key_mapping:
-        properties[key_mapping[key]] = value
-      elif key == 'propertiesJson':
-        properties = json.loads(value)
-        for key, value in properties.items():
-        if key in key_mapping:
-          properties[key_mapping[key]] = value
-        else:
-          properties[key] = value
-      else:
-        properties[key] = value
+reader = DataFileReader(file, DatumReader())
+for event in reader:
+# Capture the event
+properties = {}
+for key, value in event.items():
+if value is None:
+continue
+if key in omitted_keys:
+continue
+elif key in key_mapping:
+properties[key_mapping[key]] = value
+elif key == 'propertiesJson':
+properties = json.loads(value)
+for key, value in properties.items():
+if key in key_mapping:
+properties[key_mapping[key]] = value
+else:
+properties[key] = value
+else:
+properties[key] = value
 
-    # Convert milliseconds to seconds then to ISO 8601
-    timestamp = datetime.utcfromtimestamp(event['browserTimestamp'] / 1000)
-    
-    event_name = event['eventType']
-    if event_name in event_mapping:
-      event_name = event_mapping[event_name]
+# Convert milliseconds to seconds then to ISO 8601
+timestamp = datetime.utcfromtimestamp(event['browserTimestamp'] / 1000)
 
-    distinct_id = event['visitorId']
+event_name = event['eventType']
+if event_name in event_mapping:
+event_name = event_mapping[event_name]
 
-    posthog.capture(
-      distinct_id=distinct_id,
-      event=event_name,
-      properties=properties,
-      timestamp=timestamp
-    )
+distinct_id = event['visitorId']
 
-  reader.close()
+posthog.capture(
+distinct_id=distinct_id,
+event=event_name,
+properties=properties,
+timestamp=timestamp
+)
+
+reader.close()
 ```
 
 This script may need modification depending on the structure of your Pendo data, but it gives you a start.

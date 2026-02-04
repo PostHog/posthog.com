@@ -13,6 +13,7 @@ import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { better_stack } from '../../hooks/competitorData/better_stack'
 import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
@@ -24,6 +25,7 @@ import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
 import { devcycle } from '../../hooks/competitorData/devcycle'
 import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
+import { elastic } from '../../hooks/competitorData/elastic'
 import { eppo } from '../../hooks/competitorData/eppo'
 import { fathom } from '../../hooks/competitorData/fathom'
 import { fivetran } from '../../hooks/competitorData/fivetran'
@@ -32,6 +34,7 @@ import { fullstory } from '../../hooks/competitorData/fullstory'
 import { ga4 } from '../../hooks/competitorData/ga4'
 import { glassbox } from '../../hooks/competitorData/glassbox'
 import { glitchtip } from '../../hooks/competitorData/glitchtip'
+import { grafana_loki } from 'hooks/competitorData/grafana_loki'
 import { growthbook } from '../../hooks/competitorData/growthbook'
 import { harness } from '../../hooks/competitorData/harness'
 import { heap } from '../../hooks/competitorData/heap'
@@ -104,7 +107,8 @@ import { sessionReplayFeatures } from '../../hooks/featureDefinitions/session_re
 import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
-
+import { logsFeatures } from 'hooks/featureDefinitions/logs'
+import { logs } from 'hooks/productData/logs'
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
     path?: string
@@ -157,6 +161,7 @@ export default function ProductComparisonTable({
         surveys: surveysFeatures,
         web_analytics: webAnalyticsFeatures,
         workflows: workflowsFeatures,
+        logs: logsFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -594,6 +599,7 @@ export default function ProductComparisonTable({
         appcues,
         appsignal,
         baremetrics,
+        better_stack,
         braintrust,
         bugsnag,
         chartmogul,
@@ -605,6 +611,7 @@ export default function ProductComparisonTable({
         datadog,
         devcycle,
         dynamic_yield,
+        elastic,
         eppo,
         fathom,
         fivetran,
@@ -613,6 +620,7 @@ export default function ProductComparisonTable({
         ga4,
         glassbox,
         glitchtip,
+        grafana_loki,
         growthbook,
         harness,
         heap,

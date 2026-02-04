@@ -16,7 +16,7 @@ Migrating data from Google Analytics is a three step process:
 
 > **Want a higher-level overview of PostHog?** Check out our [introduction to PostHog for Google Analytics users](/blog/google-analytics-to-posthog).
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## 1. Setting up the Google Analytics BigQuery export
 
@@ -50,9 +50,9 @@ project_id = 'cool'
 client = bigquery.Client(project=project_id)
 
 QUERY = (
-    'SELECT * FROM `analytics_123456789.events_20240731` '
-    'WHERE event_name NOT IN ("session_start", "first_visit") '
-    'LIMIT 100')
+'SELECT * FROM `analytics_123456789.events_20240731` '
+'WHERE event_name NOT IN ("session_start", "first_visit") '
+'LIMIT 100')
 query_job = client.query(QUERY)
 rows = query_job.result()
 ```
@@ -61,7 +61,7 @@ This returns a [BigQuery `RowIterator` object](https://cloud.google.com/python/d
 
 ## 3. Converting GA event data to the PostHog schema and capturing
 
-The schema of Google Analytics' exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on the Google Analytics schema in [their docs](https://support.google.com/analytics/answer/7029846?hl=en) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Google Analytics' exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on the Google Analytics schema in [their docs](https://support.google.com/analytics/answer/7029846?hl=en) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
 
 For example, many PostHog events and properties are prepended with the `$` character.
 
@@ -77,7 +77,7 @@ To convert to PostHog's schema, we need to:
 
 5. Do the same conversion with person properties. These are then added to the `$set` property.
 
-Once this is done, you can capture events into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) with `historical_migration` set to `true`.
+Once this is done, you can capture events into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) with `historical_migration` set to `true`.
 
 Here's an example version of a full Python script that gets data from BigQuery, converts it to PostHog's schema, and captures it in PostHog.
 
@@ -86,147 +86,146 @@ from posthog import Posthog
 from datetime import datetime
 from google.cloud import bigquery
 
-
 posthog = Posthog(
-  '<ph_project_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 key_mapping = {
-  'page_title': 'title',
-  'page_location': '$current_url',
-  'page_referrer': '$referrer',
-  'category': '$device_type',
-  'operating_system': '$os',
-  'operating_system_version': '$os_version',
-  'language': '$browser_language',
-  'web_info.browser': '$browser',
-  'web_info.browser_version': '$browser_version',
-  'web_info.hostname': '$host',
-  'city': '$geoip_city_name',
-  'country': '$geoip_country_name',
-  'continent': '$geoip_continent_name',
-  'region': '$geoip_subdivision_1_name'
+'page_title': 'title',
+'page_location': '$current_url',
+'page_referrer': '$referrer',
+'category': '$device_type',
+'operating_system': '$os',
+'operating_system_version': '$os_version',
+'language': '$browser_language',
+'web_info.browser': '$browser',
+'web_info.browser_version': '$browser_version',
+'web_info.hostname': '$host',
+'city': '$geoip_city_name',
+'country': '$geoip_country_name',
+'continent': '$geoip_continent_name',
+'region': '$geoip_subdivision_1_name'
 }
 
 omitted_keys = [
-  'event_date',
-  'event_timestamp',
-  'event_name',
-  'event_bundle_sequence_id',
-  'event_server_timestamp_offset',
-  'user_id',
-  'user_pseudo_id',
-  'stream_id',
-  'platform',
-  'batch_event_index',
-  'batch_page_id',
-  'batch_ordering_id',
-  'session_traffic_source_last_click'
+'event_date',
+'event_timestamp',
+'event_name',
+'event_bundle_sequence_id',
+'event_server_timestamp_offset',
+'user_id',
+'user_pseudo_id',
+'stream_id',
+'platform',
+'batch_event_index',
+'batch_page_id',
+'batch_ordering_id',
+'session_traffic_source_last_click'
 ]
 
 def get_record_key_value(param):
-  record_key = param['key']
-  value_dict = param['value']
-  record_value = next((v for v in value_dict.values() if v is not None), None)
-  return record_key, record_value
+record_key = param['key']
+value_dict = param['value']
+record_value = next((v for v in value_dict.values() if v is not None), None)
+return record_key, record_value
 
 def flatten_row(row):
-  flat_row = {}
-  for key, value in row.items():
-    print(f"{key}: {value}")
-    if value == None:
-      continue
-    elif isinstance(value, list) and len(value) == 0:
-      continue
-    elif key in omitted_keys:
-      continue
-    elif key in ['user_properties', 'user_first_touch_timestamp', 'user_ltv']:
-      # We'll handle user properties separately
-      continue
-    elif key in ['event_params', 'items']:
-      # Flatten records
-      for param in value:
-        record_key, record_value = get_record_key_value(param)
-        flat_row[record_key] = record_value
-    elif key in ['privacy_info', 'device', 'geo', 'app_info', 'collected_traffic_source', 'traffic_source', 'event_dimensions', 'ecommerce']:
-      # Flatten dicts and nested dicts
-      for key, val in value.items():
-        if isinstance(val, dict):
-          for sub_key, sub_val in val.items():
-            # We might not want to do this
-            flat_row[f"{key}.{sub_key}"] = sub_val
-        else:
-          flat_row[key] = val
-    else:
-      flat_row[key] = value
-  return flat_row
+flat_row = {}
+for key, value in row.items():
+print(f"{key}: {value}")
+if value == None:
+continue
+elif isinstance(value, list) and len(value) == 0:
+continue
+elif key in omitted_keys:
+continue
+elif key in ['user_properties', 'user_first_touch_timestamp', 'user_ltv']:
+# We'll handle user properties separately
+continue
+elif key in ['event_params', 'items']:
+# Flatten records
+for param in value:
+record_key, record_value = get_record_key_value(param)
+flat_row[record_key] = record_value
+elif key in ['privacy_info', 'device', 'geo', 'app_info', 'collected_traffic_source', 'traffic_source', 'event_dimensions', 'ecommerce']:
+# Flatten dicts and nested dicts
+for key, val in value.items():
+if isinstance(val, dict):
+for sub_key, sub_val in val.items():
+# We might not want to do this
+flat_row[f"{key}.{sub_key}"] = sub_val
+else:
+flat_row[key] = val
+else:
+flat_row[key] = value
+return flat_row
 
 def get_person_properties(row):
-  person_properties = {}
-  user_properties = row.get('user_properties', [])
-  for prop in user_properties:
-    key, value = get_record_key_value(prop)
-    person_properties[key] = value
-  user_first_touch_timestamp = row.get('user_first_touch_timestamp')
-  user_ltv = row.get('user_ltv')
-  if user_first_touch_timestamp is not None:
-    person_properties['user_first_touch_timestamp'] = user_first_touch_timestamp
-  if user_ltv is not None:
-    person_properties['user_ltv'] = user_ltv
-  return person_properties
+person_properties = {}
+user_properties = row.get('user_properties', [])
+for prop in user_properties:
+key, value = get_record_key_value(prop)
+person_properties[key] = value
+user_first_touch_timestamp = row.get('user_first_touch_timestamp')
+user_ltv = row.get('user_ltv')
+if user_first_touch_timestamp is not None:
+person_properties['user_first_touch_timestamp'] = user_first_touch_timestamp
+if user_ltv is not None:
+person_properties['user_ltv'] = user_ltv
+return person_properties
 
 def get_properties(row):
-  properties = {}
-  for key, value in row.items():
-    if value == None:
-      continue
-    elif key in omitted_keys:
-      continue
-    elif value in ['(not provided)', '(not set)']:
-      continue
-    elif key in key_mapping:
-      properties[key_mapping[key]] = value
-    else:
-      properties[key] = value
-  return properties
+properties = {}
+for key, value in row.items():
+if value == None:
+continue
+elif key in omitted_keys:
+continue
+elif value in ['(not provided)', '(not set)']:
+continue
+elif key in key_mapping:
+properties[key_mapping[key]] = value
+else:
+properties[key] = value
+return properties
 
 # Get events from BigQuery
 project_id = 'cool'
 client = bigquery.Client(project=project_id)
 
 QUERY = (
-    'SELECT * FROM `analytics_123456789.events_20240731` '
-    'WHERE event_name NOT IN ("session_start", "first_visit") '
-    'LIMIT 100')
+'SELECT * FROM `analytics_123456789.events_20240731` '
+'WHERE event_name NOT IN ("session_start", "first_visit") '
+'LIMIT 100')
 query_job = client.query(QUERY)
 rows = query_job.result()
 
 # Convert and capture events in PostHog
 for row in rows:
-  distinct_id = row.get('user_id') or row.get('user_pseudo_id')
+distinct_id = row.get('user_id') or row.get('user_pseudo_id')
 
-  ph_event_name = row.get('event_name')
-  if ph_event_name == 'page_view':
-    ph_event_name = '$pageview'
-  if ph_event_name == 'user_engagement':
-    ph_event_name = '$autocapture'
+ph_event_name = row.get('event_name')
+if ph_event_name == 'page_view':
+ph_event_name = '$pageview'
+if ph_event_name == 'user_engagement':
+ph_event_name = '$autocapture'
 
-  event_timestamp = row.get('event_timestamp')
-  ph_timestamp = datetime.fromtimestamp(event_timestamp / 1000000)
+event_timestamp = row.get('event_timestamp')
+ph_timestamp = datetime.fromtimestamp(event_timestamp / 1000000)
 
-  flat_row = flatten_row(row)
-  properties = get_properties(flat_row)
-  properties['$set'] = get_person_properties(row)
+flat_row = flatten_row(row)
+properties = get_properties(flat_row)
+properties['$set'] = get_person_properties(row)
 
-  posthog.capture(
-    distinct_id=distinct_id,
-    event=ph_event_name,
-    properties=properties,
-    timestamp=ph_timestamp
-  )
+posthog.capture(
+distinct_id=distinct_id,
+event=ph_event_name,
+properties=properties,
+timestamp=ph_timestamp
+)
 ```
 
 This script may need modification depending on the structure of your Google Analytics data, but it gives you a start.
