@@ -1,0 +1,145 @@
+---
+title: v0 integration
+sidebarTitle: v0
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+The PostHog MCP lets v0 query your analytics data, investigate errors, manage feature flags, and run experiments - all through natural language.
+
+## Connect PostHog to v0
+
+1. In a v0 chat, click the **+** button in the bottom left
+2. Click **MCPs**
+3. Click **Add MCP**
+4. Select **Custom MCP**
+5. Enter the name `PostHog` and URL `https://mcp.posthog.com/mcp`
+6. Under **Authentication**, select **OAuth**
+7. Click **Add**, then authorize with PostHog when prompted
+
+The PostHog MCP server is now available in your v0 chats.
+
+<CalloutBox icon="IconFlag" title="EU region users" type="fyi">
+
+If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` instead.
+
+</CalloutBox>
+
+## Set up PostHog in your project
+
+Once connected, give v0 this prompt to add PostHog with the Vercel Flags SDK:
+
+```text
+## Add PostHog Analytics and Feature Flags
+
+### Environment Variables
+
+Use Vercel's managed PostHog env vars:
+
+- `NEXT_PUBLIC_POSTHOG_KEY` - PostHog project API key
+- `NEXT_PUBLIC_POSTHOG_HOST` - PostHog host URL
+
+
+### Packages
+
+`posthog-js`, `flags`, `@flags-sdk/posthog`
+
+### Critical: Distinct ID Synchronization
+
+The main challenge is keeping the same `distinct_id` between server-side flag evaluation and client-side event tracking. Without this, experiment attribution breaks.
+
+**Key insight**: PostHog stores the distinct_id in a cookie named `ph_<api_key>_posthog` as JSON: `{"distinct_id": "..."}`
+
+**Solution**:
+
+1. Server reads distinct_id from PostHog's native cookie format
+2. If no cookie (first visit), generate a UUID
+3. Pass that ID to client-side PostHog via `bootstrap: { distinctID }` option
+4. Both server and client now use the same ID
+
+
+### Implementation Structure
+
+- `/lib/posthog.ts` - Server helpers: `getPostHogCookieName()` returns `ph_${apiKey}_posthog`, `getDistinctId()` reads cookie or generates UUID
+- `/lib/flags.ts` - Flag definitions using `postHogAdapter.featureFlagValue()` with `identify()` that reads the same cookie format
+- `/components/posthog-provider.tsx` - Client provider that accepts `bootstrapDistinctId` prop and passes it to `posthog.init({ bootstrap: { distinctID } })`
+- `/app/layout.tsx` - Make async, call `getDistinctId()`, pass to `<PostHogProvider bootstrapDistinctId={distinctId}>`
+
+
+### PostHog MCP Limitations
+
+- `Posthog_create-feature-flag` only creates boolean flags, not multivariate
+- Experiments need variants added manually in PostHog UI after creation
+- Use `Posthog_experiment-results-get` and `Posthog_query-run` to check tracking is working
+
+
+### Verification
+
+Query recent events with `Posthog_query-run` and check that `$feature_flag_called` events have the same `distinct_id` as other events (e.g., `$pageview`, custom events). If they differ, the bootstrap isn't working correctly.
+```
+
+The agent will set up the Vercel Flags SDK with proper distinct ID synchronization between server and client, ensuring experiment attribution works correctly.
+
+## What you can do with the MCP
+
+Once connected, you can ask v0 to interact with your PostHog data directly:
+
+### Query your analytics
+
+**Prompt:** "How many unique users signed up in the last 7 days, broken down by day?"
+
+The agent will run a trends query and return daily signup counts with a breakdown.
+
+**Prompt:** "What's the conversion rate from signup to first purchase?"
+
+The agent will build a funnel query and calculate the conversion percentage between those two events.
+
+### Investigate errors
+
+**Prompt:** "What are the top 5 errors in my project this week?"
+
+The agent will fetch error groups sorted by occurrence count, including how many users were affected.
+
+**Prompt:** "Show me details about the most recent TypeError"
+
+The agent will pull the stack trace, affected users, and browser/OS context for that error.
+
+### Manage feature flags
+
+**Prompt:** "Create a feature flag called 'new-checkout' enabled for 10% of users"
+
+The agent will create the flag with a 10% rollout and return the configuration with a link to the flag in PostHog.
+
+**Prompt:** "Update the 'beta-features' flag to 50% rollout"
+
+The agent will modify the existing flag and confirm the new rollout percentage.
+
+### Run experiments
+
+**Prompt:** "Create an A/B test for the pricing page that measures conversion to checkout"
+
+The agent will set up an experiment with control/test variants and configure a funnel metric measuring pricing page to checkout conversion.
+
+See [all available MCP tools](/docs/model-context-protocol#available-tools) for the complete list.
+
+## Troubleshooting
+
+### OAuth not refreshing
+
+If the OAuth token expires and won't refresh, you can use a personal API key instead:
+
+1. Create a [personal API key](https://us.posthog.com/settings/user-api-keys) with the **MCP Server** preset
+2. In v0, go to **Manage MCPs** and edit the PostHog connection
+3. Change authentication to **Bearer** and enter your API key
+
+### MCP not connecting
+
+Try disconnecting and reconnecting the PostHog MCP server. Make sure you're logged into the correct PostHog account.
+
+## Next steps
+
+- [Vercel Flags SDK docs](/docs/libraries/vercel) - Full Vercel Flags SDK setup guide
+- [MCP tools reference](/docs/model-context-protocol#available-tools) - All available MCP tools
+- [Feature flags](/docs/feature-flags) - Set up feature flags in your code
+
+Have feedback or questions? Let us know on [GitHub](https://github.com/PostHog/posthog/issues) or [ask a question](/questions).
