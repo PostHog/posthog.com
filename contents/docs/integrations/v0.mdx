@@ -30,33 +30,55 @@ If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` ins
 Once connected, give v0 this prompt to add PostHog with the Vercel Flags SDK:
 
 ```text
-Add PostHog to this project for analytics and feature flags.
+## Add PostHog Analytics and Feature Flags
 
-Use the PostHog MCP to:
-- Get the project API token (from projects-get) → set as NEXT_PUBLIC_POSTHOG_KEY
-- Get the host URL → set as NEXT_PUBLIC_POSTHOG_HOST
+### Environment Variables
 
-Install packages: @flags-sdk/posthog, @vercel/flags, posthog-js
+Use Vercel's managed PostHog env vars:
 
-Set up the Vercel Flags SDK with the PostHog adapter:
-- Create flags.ts with the PostHog adapter configuration
-- Use the adapter's identify() function for user identification
+- `NEXT_PUBLIC_POSTHOG_KEY` - PostHog project API key
+- `NEXT_PUBLIC_POSTHOG_HOST` - PostHog host URL
 
-Create a PostHog provider at app/providers.tsx that:
-- Initializes PostHog with autocapture: true, capture_pageview: false
-- Uses env vars NEXT_PUBLIC_POSTHOG_KEY and NEXT_PUBLIC_POSTHOG_HOST
-- Handles pageview tracking for Next.js app router
 
-Wrap the app in the PostHog provider in app/layout.tsx.
+### Packages
+
+`posthog-js`, `flags`, `@flags-sdk/posthog`
+
+### Critical: Distinct ID Synchronization
+
+The main challenge is keeping the same `distinct_id` between server-side flag evaluation and client-side event tracking. Without this, experiment attribution breaks.
+
+**Key insight**: PostHog stores the distinct_id in a cookie named `ph_<api_key>_posthog` as JSON: `{"distinct_id": "..."}`
+
+**Solution**:
+
+1. Server reads distinct_id from PostHog's native cookie format
+2. If no cookie (first visit), generate a UUID
+3. Pass that ID to client-side PostHog via `bootstrap: { distinctID }` option
+4. Both server and client now use the same ID
+
+
+### Implementation Structure
+
+- `/lib/posthog.ts` - Server helpers: `getPostHogCookieName()` returns `ph_${apiKey}_posthog`, `getDistinctId()` reads cookie or generates UUID
+- `/lib/flags.ts` - Flag definitions using `postHogAdapter.featureFlagValue()` with `identify()` that reads the same cookie format
+- `/components/posthog-provider.tsx` - Client provider that accepts `bootstrapDistinctId` prop and passes it to `posthog.init({ bootstrap: { distinctID } })`
+- `/app/layout.tsx` - Make async, call `getDistinctId()`, pass to `<PostHogProvider bootstrapDistinctId={distinctId}>`
+
+
+### PostHog MCP Limitations
+
+- `Posthog_create-feature-flag` only creates boolean flags, not multivariate
+- Experiments need variants added manually in PostHog UI after creation
+- Use `Posthog_experiment-results-get` and `Posthog_query-run` to check tracking is working
+
+
+### Verification
+
+Query recent events with `Posthog_query-run` and check that `$feature_flag_called` events have the same `distinct_id` as other events (e.g., `$pageview`, custom events). If they differ, the bootstrap isn't working correctly.
 ```
 
-The agent will get your project credentials from the MCP, install the Vercel Flags SDK with the PostHog adapter, and set up analytics.
-
-For production, add these environment variables in your Vercel project settings:
-
-- `NEXT_PUBLIC_POSTHOG_KEY` - your project API token (MCP can provide this)
-- `NEXT_PUBLIC_POSTHOG_HOST` - `https://us.i.posthog.com` or `https://eu.i.posthog.com`
-- `FLAGS_SECRET` - generate with `node -e "console.log(crypto.randomBytes(32).toString('base64url'))"`
+The agent will set up the Vercel Flags SDK with proper distinct ID synchronization between server and client, ensuring experiment attribution works correctly.
 
 ## What you can do with the MCP
 
