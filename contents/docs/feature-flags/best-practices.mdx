@@ -68,6 +68,16 @@ For example, at PostHog we often roll out the flag to just the responsible devel
 
 Leaving flags in your code for too long can confuse future developers and create technical debt, especially if it's already rolled out and integrated. Be sure to remove stale flags once they are completely rolled out or no longer needed.
 
+PostHog enables you to bulk delete multiple flags at once from the feature flags list view. Filter by status (like STALE) to identify candidates, then select multiple flags using checkboxes. Use shift-click to select a range of flags quickly.
+
+Flags with dependencies cannot be deleted until those dependencies are resolved. This includes flags linked to:
+
+-   Active experiments
+-   Early access features
+-   Other flags that depend on them
+
+After bulk deletion, PostHog provides a copyable AI prompt to help you remove flag references from your codebase using AI code editors like Cursor, Claude Code, or Copilot.
+
 ## 9. Fallback to working code
 
 It's possible that a feature flag will return an [unexpected value](/docs/feature-flags/common-questions#my-feature-flag-called-events-show-none-empty-string-or-false-instead-of-my-variant-names). For example, if the flag is disabled or failed to load due to a network error.
