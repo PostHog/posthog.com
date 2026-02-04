@@ -16,6 +16,12 @@ Product tours are multi-step walkthroughs that highlight elements in your UI. Yo
 2. Click **New tour** and select **Product tour**
 3. Enter the URL where you want to build the tour and click **Open toolbar**
 
+## Record your session (optional)
+
+When you open the toolbar, you'll see a modal asking if you want to enable session replay. If you opt in, PostHog records your DOM interactions while you build the tour – not your screen or camera. This is useful for reviewing your tour-building process or sharing with teammates.
+
+The recording respects any `.ph-no-capture` privacy markers on your site. All inputs are masked by default.
+
 ## Select elements
 
 Click elements on your page to create steps. PostHog generates a CSS selector for each element automatically.
