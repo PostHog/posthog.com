@@ -31,6 +31,10 @@ export const dataPipelines = {
                     name: 'Managed',
                 },
                 {
+                    name: 'Attio',
+                    url: '/docs/cdp/sources/attio',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -692,11 +696,29 @@ export const handbookSidebar = [
     },
     {
         name: 'Docs & Wizard',
-        url: '/handbook/docs-and-wizard/docs',
+        url: '/handbook/docs-and-wizard',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/docs-and-wizard/docs',
+                url: '/handbook/docs-and-wizard',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
+            },
+            {
+                name: 'Wizard',
+            },
+            {
+                name: 'AI wizard',
+                url: '/handbook/docs-and-wizard/developing-the-wizard',
+            },
+            {
+                name: 'Context mill',
+                url: '/handbook/docs-and-wizard/context-mill',
+            },
+            {
+                name: 'Docs',
             },
             {
                 name: 'Ownership',
@@ -707,12 +729,12 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/docs-style-guide',
             },
             {
-                name: 'AI Wizard',
-                url: '/handbook/docs-and-wizard/developing-the-wizard',
+                name: 'MDX and components',
+                url: '/handbook/docs-and-wizard/mdx-and-components',
             },
             {
-                name: 'How to publish changelog',
-                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
+                name: 'How to write product docs',
+                url: '/handbook/docs-and-wizard/writing-product-docs',
             },
             {
                 name: 'Onboarding docs',
@@ -2528,10 +2550,6 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Agent toolkit',
-                            url: '/docs/ai-engineering/agent-toolkit',
-                        },
-                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
@@ -3495,10 +3513,22 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/session-replay/installation' },
                         { name: 'Web', url: '/docs/session-replay/installation/web' },
+                        { name: 'React', url: '/docs/session-replay/installation/react' },
+                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
+                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
                         { name: 'Android', url: '/docs/session-replay/installation/android' },
                         { name: 'iOS', url: '/docs/session-replay/installation/ios' },
-                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
                         { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
+                        { name: 'Angular', url: '/docs/session-replay/installation/angular' },
+                        { name: 'Astro', url: '/docs/session-replay/installation/astro' },
+                        { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
+                        { name: 'Framer', url: '/docs/session-replay/installation/framer' },
+                        { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
+                        { name: 'Nuxt', url: '/docs/session-replay/installation/nuxt' },
+                        { name: 'Remix', url: '/docs/session-replay/installation/remix' },
+                        { name: 'Svelte', url: '/docs/session-replay/installation/svelte' },
+                        { name: 'Vue', url: '/docs/session-replay/installation/vue' },
+                        { name: 'Webflow', url: '/docs/session-replay/installation/webflow' },
                     ],
                 },
                 {
@@ -3636,6 +3666,7 @@ export const docsMenu = {
                         { name: 'Java', url: '/docs/feature-flags/installation/java' },
                         { name: 'Flutter', url: '/docs/feature-flags/installation/flutter' },
                         { name: 'Elixir', url: '/docs/feature-flags/installation/elixir' },
+                        { name: 'Rust', url: '/docs/feature-flags/installation/rust' },
                         { name: '.NET', url: '/docs/feature-flags/installation/dotnet' },
                         { name: 'API', url: '/docs/feature-flags/installation/api' },
                     ],
@@ -3878,6 +3909,10 @@ export const docsMenu = {
                         {
                             name: '.NET',
                             url: '/docs/experiments/installation/dotnet',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/experiments/installation/rust',
                         },
                         {
                             name: 'Angular',
@@ -4703,6 +4738,10 @@ export const docsMenu = {
                             name: 'Managed',
                         },
                         {
+                            name: 'Attio',
+                            url: '/docs/data-warehouse/sources/attio',
+                        },
+                        {
                             name: 'Azure SQL Server',
                             url: '/docs/data-warehouse/sources/azure-db',
                         },
@@ -4713,6 +4752,10 @@ export const docsMenu = {
                         {
                             name: 'Chargebee',
                             url: '/docs/data-warehouse/sources/chargebee',
+                        },
+                        {
+                            name: 'Clerk',
+                            url: '/docs/data-warehouse/sources/clerk',
                         },
                         {
                             name: 'DoIt',
@@ -4755,6 +4798,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/google-sheets',
                         },
                         {
+                            name: 'GitHub',
+                            url: '/docs/data-warehouse/sources/github',
+                        },
+                        {
                             name: 'Hubspot',
                             url: '/docs/data-warehouse/sources/hubspot',
                             badge: {
@@ -4765,6 +4812,10 @@ export const docsMenu = {
                         {
                             name: 'Klaviyo',
                             url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
+                            name: 'Mailchimp',
+                            url: '/docs/data-warehouse/sources/mailchimp',
                         },
                         {
                             name: 'MongoDB',
