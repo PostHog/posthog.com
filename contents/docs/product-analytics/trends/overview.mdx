@@ -39,6 +39,8 @@ export const DeviceFilterLight = "https://res.cloudinary.com/dmukukwp6/video/upl
 export const DeviceFilterDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/adding-device-filter-dark.mp4"
 export const CopyFilterLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/copy-filter-light.mp4"
 export const CopyFilterDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/copy-filter-dark.mp4"
+export const TrendsCombineEventsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/trends_combine_events_light_4c1e816453.mp4"
+export const TrendsCombineEventsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/trends_combine_events_dark_7ea563c4eb.mp4"
 
 export const FilterIcon = () => <svg class="inline-block w-5 h-5 text-gray" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"><path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z" fill="currentColor"></path></svg>
 
@@ -110,7 +112,7 @@ Trends is the default insight type, so clicking 'New insight' will always create
 
 ### 2. Configuring your insight
 
-The default event type is `Pageview`. 
+The default event type depends on your project's data: PostHog defaults to `Pageview` if pageview events exist, `Screen` if only screen events exist, or `All events` if neither exist.
 
 To change the event being used, click on the dropdown the dropdown to the right of the <div className="inline-flex items-center justify-center rounded-full border-2 font-semibold" style={{ width: '20px', height: '20px', borderColor: 'rgb(29, 74, 255)', color: 'rgb(29, 74, 255)', backgroundColor: 'rgba(29, 74, 255, 0.15)' }}>A</div> icon.
 
@@ -126,6 +128,21 @@ This dropdown enables you to search through all your [events](/docs/data/events)
 We aggregate series by the total number (Total count) by default. Click the dropdown to choose a different metric, such as `Unique users` or `Daily active users`. See the [event and property aggregation docs](/docs/product-analytics/trends/aggregations) for a full breakdown of options.
 
 > **Note:** A dotted line indicated the data for that period is still being collected. If you choose a date range of the last 30 days grouped by week, for example, the week you're currently in would be dotted because the week hasn't ended yet. 
+
+
+#### Combine events inline
+
+You can combine multiple events into a single series using inline combination, allowing you to analyze trends without creating custom Actions.
+
+Simply select the events to include, and they will be treated as a single series in your analysis. 
+The combination uses a logical `OR`, so any occurrence of the selected events will count toward the series.
+
+<ProductVideo
+    videoLight = {TrendsCombineEventsLight} 
+    videoDark = {TrendsCombineEventsDark}
+    classes="rounded"
+    alt="Combine events inline"
+/>
 
 ### 3. Adding filters based on properties
 
@@ -177,7 +194,7 @@ You can also select how events are grouped – e.g. by hour, day, week, or mont
 
 Smoothing, where we apply a 7-day or 28-day rolling average, is available when data is grouped by day. This is useful for eliminating excess variability in data, and identifying long-term patterns in very noisy data.
 
-> **Note** Setting a very long time range can severely impact query performance, especially for high-volume events. If you find it's taking too long to load, consider reducing your date range, or [enabling sampling](/docs/product-analytics/sampling).
+> **Note** Setting a very long time range can severely impact query performance, especially for high-volume events. If you find it's taking too long to load, consider reducing your date range.
 
 ### 5. Saving and sharing your insight
 

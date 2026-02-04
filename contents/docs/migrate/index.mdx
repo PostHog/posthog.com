@@ -18,7 +18,7 @@ Historical migrations refer to ingesting and importing past data into PostHog fo
 
 - Migrating from a [self-hosted PostHog instance to PostHog Cloud](/docs/migrate/migrate-to-cloud).
 
-- Migrating from [one PostHog Cloud instance to another](/docs/migrate/migrate-to-cloud#between-cloud-instances-eg-us-cloud-to-eu-cloud), for example US -> EU.
+- Migrating from [one PostHog Cloud instance to another](/docs/migrate/migrate-to-cloud #between-cloud-instances-eg-us-cloud-to-eu-cloud), for example US -> EU.
 
 - Adding past data from a third-party source into PostHog.
 
@@ -36,7 +36,6 @@ Start your migration by formatting your data correctly. There is no way to selec
 
 To capture events, you must use the PostHog Python SDK or the PostHog API `batch` endpoint with the `historical_migration` set to `true`. This ensures we handle this data correctly and you aren't charged standard ingestion fees for it.
 
-
 Using our Python or Node SDKs, you can capture events like this:
 
 <SDKMigration />
@@ -45,7 +44,7 @@ An example `cURL` implementation using the `batch` API endpoint looks like this:
 
 <ApiMigration />
 
-> Need someone to do the migration for you?  A PostHog [Forward Deployed Engineer](/professional-services) could help!
+> Need someone to do the migration for you? A PostHog [forward-deployed engineer](/services) can help!
 
 ## Best practices for migrations
 

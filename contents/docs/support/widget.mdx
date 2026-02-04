@@ -1,0 +1,113 @@
+---
+title: Widget setup and configuration
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+The Support widget is a chat interface that appears on your website, allowing users to start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
+
+## Enabling the widget
+
+1. Go to **Support** in PostHog and click **Settings**
+2. Click **Enable conversations** (if not already enabled)
+3. Go to the **In-app widget** section and enable it
+4. Configure your settings (see below)
+5. Save
+
+The widget appears as a floating button in the bottom-right corner of your site.
+
+## Widget configuration
+
+These settings are configured in the **In-app widget** section of Support settings.
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| **Enable widget** | Show the chat widget on your site | `false` |
+| **Button color** | Primary color for the widget (hex) | `#5375ff` |
+| **Greeting message** | Welcome text shown when widget opens | `"Hi! How can we help?"` |
+| **Allowed domains** | Restrict which domains can show the widget | `[]` (all domains) |
+
+## Domain restrictions
+
+You can restrict which domains the widget appears on for security:
+
+```javascript
+// Configured in PostHog settings
+domains: [
+  "example.com",              // Exact match
+  "*.example.com",            // Wildcard: matches sub.example.com
+  "https://app.example.com"   // With protocol (protocol is stripped)
+]
+```
+
+If `domains` is empty or not set, the widget shows on all domains.
+
+## Controlling widget visibility
+
+Use the JavaScript API to programmatically show or hide the widget:
+
+```javascript
+// Show the widget (renders it if not already rendered)
+posthog.conversations.show()
+
+// Hide and remove the widget from DOM
+posthog.conversations.hide()
+
+// Check if widget is currently visible
+const isVisible = posthog.conversations.isVisible()
+```
+
+This is useful for:
+- Showing the widget only on certain pages
+- Triggering the widget from a custom button
+- Hiding the widget during specific user flows
+
+## Disabling the widget via config
+
+You can disable conversations entirely via the PostHog init config:
+
+```javascript
+posthog.init('YOUR_API_KEY', {
+  disable_conversations: true  // Prevents loading the conversations module
+})
+```
+
+This is different from hiding the widget – it completely disables the feature.
+
+## Email notifications
+
+Configure your team to receive email alerts when new tickets arrive.
+
+### Setting up notifications
+
+1. Go to **Settings > Support** in PostHog
+2. Find the **Email notifications** section
+3. Select team members who should receive alerts
+
+### What emails include
+
+- Team name
+- Ticket number
+- First message preview
+- Direct link to the ticket
+
+Recipients must have access to the team to receive notifications.
+
+## Public token
+
+The widget uses a public token for authentication. This token is automatically generated and shown in your Support settings. It's safe to expose in client-side code.
+
+If you need to reset the token:
+
+1. Go to **Support > Settings**
+2. Click **Regenerate token**
+
+<CalloutBox icon="IconWarning" title="Resetting stops active chats" type="caution">
+
+Resetting the token stops current chats. Users need to refresh the page to reconnect with the new token.
+
+</CalloutBox>

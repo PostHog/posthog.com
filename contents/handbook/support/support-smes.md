@@ -42,7 +42,7 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 - EU: <TeamMember name="Christian Rafferty" photo />, NA: <TeamMember name="Ben Haynes" photo />
 
 **Observability + AI & SDK/Implementation**
-- EU: TBD, NA: <TeamMember name="Steven Shults" photo />
+- EU: <TeamMember name="Christiaan Hendriksen" photo />, NA: <TeamMember name="Steven Shults" photo />
 
 
 ## What SMEs actually do

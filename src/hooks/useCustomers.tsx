@@ -9,7 +9,6 @@ import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
-import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
@@ -48,10 +47,8 @@ import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
-import Link from 'components/Link'
 import useProducts from './useProducts'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
-import { posthog_ai } from './productData/posthog_ai'
 
 export interface Customer {
     slug: string
@@ -263,7 +260,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     grantable: {
         name: 'Grantable',
         toolsUsed: [
-            'workflows',
+            'workflows_emails',
             'feature_flags',
             'session_replay',
             'experiments',
@@ -295,7 +292,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     croissant: {
         name: 'Croissant',
-        toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
+        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
         industries: ['SaaS'],
         users: ['Growth', 'Product', 'Marketing'],
         notes: 'Workspace finder',
