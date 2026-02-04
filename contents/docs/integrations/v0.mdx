@@ -25,6 +25,39 @@ If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` ins
 
 </CalloutBox>
 
+## Set up PostHog in your project
+
+Once connected, give v0 this prompt to add PostHog with the Vercel Flags SDK:
+
+```text
+Add PostHog to this project for analytics and feature flags.
+
+Use the PostHog MCP to:
+- Get the project API token (from projects-get) → set as NEXT_PUBLIC_POSTHOG_KEY
+- Get the host URL → set as NEXT_PUBLIC_POSTHOG_HOST
+
+Install packages: @flags-sdk/posthog, @vercel/flags, posthog-js
+
+Set up the Vercel Flags SDK with the PostHog adapter:
+- Create flags.ts with the PostHog adapter configuration
+- Use the adapter's identify() function for user identification
+
+Create a PostHog provider at app/providers.tsx that:
+- Initializes PostHog with autocapture: true, capture_pageview: false
+- Uses env vars NEXT_PUBLIC_POSTHOG_KEY and NEXT_PUBLIC_POSTHOG_HOST
+- Handles pageview tracking for Next.js app router
+
+Wrap the app in the PostHog provider in app/layout.tsx.
+```
+
+The agent will get your project credentials from the MCP, install the Vercel Flags SDK with the PostHog adapter, and set up analytics.
+
+For production, add these environment variables in your Vercel project settings:
+
+- `NEXT_PUBLIC_POSTHOG_KEY` - your project API token (MCP can provide this)
+- `NEXT_PUBLIC_POSTHOG_HOST` - `https://us.i.posthog.com` or `https://eu.i.posthog.com`
+- `FLAGS_SECRET` - generate with `node -e "console.log(crypto.randomBytes(32).toString('base64url'))"`
+
 ## What you can do with the MCP
 
 Once connected, you can ask v0 to interact with your PostHog data directly:
@@ -83,8 +116,8 @@ Try disconnecting and reconnecting the PostHog MCP server. Make sure you're logg
 
 ## Next steps
 
+- [Vercel Flags SDK docs](/docs/libraries/vercel) - Full Vercel Flags SDK setup guide
 - [MCP tools reference](/docs/model-context-protocol#available-tools) - All available MCP tools
 - [Feature flags](/docs/feature-flags) - Set up feature flags in your code
-- [Error tracking docs](/docs/error-tracking) - Learn more about error tracking features
 
 Have feedback or questions? Let us know on [GitHub](https://github.com/PostHog/posthog/issues) or [ask a question](/questions).
