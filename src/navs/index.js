@@ -5742,6 +5742,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/docs/logs/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'blue',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/logs/troubleshooting',
                     icon: 'IconQuestion',
