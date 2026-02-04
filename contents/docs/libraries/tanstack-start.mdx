@@ -111,7 +111,7 @@ Call `posthog.reset()` on logout to clear the identified user.
 
 Create a server-side PostHog client using `posthog-node`. Use a singleton pattern so you reuse the same client across requests:
 
-```ts
+```ts file=src/utils/posthog-server.ts
 // src/utils/posthog-server.ts
 import { PostHog } from 'posthog-node'
 
@@ -129,12 +129,6 @@ export function getPostHogClient() {
     )
   }
   return posthogClient
-}
-
-export async function shutdownPostHog() {
-  if (posthogClient) {
-    await posthogClient.shutdown()
-  }
 }
 ```
 
