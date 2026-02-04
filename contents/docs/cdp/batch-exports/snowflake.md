@@ -12,7 +12,7 @@ With batch exports, data can be exported to a Snowflake database table.
 
 ## Creating the batch export
 
-1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+1. Click [Destinations](https://app.posthog.com/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Snowflake**.
 4. Click the **+ Create** button. 
