@@ -5,7 +5,7 @@ platformLogo: rust
 features:
   eventCapture: true
   userIdentification: false
-  featureFlags: false
+  featureFlags: true
   groupAnalytics: true
   surveys: false
   llmAnalytics: false
@@ -29,5 +29,135 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
 
-Feature flags are not supported yet in our community-maintained Rust SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).
+### Boolean feature flags
+
+```rust
+let is_enabled = client.is_feature_enabled(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await.unwrap();
+
+if is_enabled {
+    // Do something differently for this user
+}
+```
+
+### Multivariate feature flags
+
+```rust
+use posthog_rs::FlagValue;
+
+match client.get_feature_flag(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await.unwrap() {
+    Some(FlagValue::String(variant)) => {
+        if variant == "variant-key" {
+            // Do something for this variant
+        }
+    }
+    Some(FlagValue::Boolean(enabled)) => {
+        // Handle boolean flag
+    }
+    None => {
+        // Flag not found or disabled
+    }
+}
+```
+
+### Fetching all flags
+
+```rust
+let (flags, payloads) = client.get_feature_flags(
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await.unwrap();
+
+for (key, value) in flags {
+    println!("Flag {}: {:?}", key, value);
+}
+```
+
+### Feature flag payloads
+
+```rust
+let payload = client.get_feature_flag_payload(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string()
+).await.unwrap();
+
+if let Some(data) = payload {
+    println!("Payload: {}", data);
+}
+```
+
+### With person properties
+
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+let mut person_props = HashMap::new();
+person_props.insert("plan".to_string(), json!("enterprise"));
+person_props.insert("country".to_string(), json!("US"));
+
+let flag = client.get_feature_flag(
+    "premium-feature".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None,
+    Some(person_props),
+    None
+).await.unwrap();
+```
+
+### With groups
+
+For B2B applications with group-based flags:
+
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+let mut groups = HashMap::new();
+groups.insert("company".to_string(), "company-123".to_string());
+
+let mut group_props = HashMap::new();
+let mut company_props = HashMap::new();
+company_props.insert("size".to_string(), json!(500));
+group_props.insert("company".to_string(), company_props);
+
+let flag = client.get_feature_flag(
+    "b2b-feature".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    Some(groups),
+    None,
+    Some(group_props)
+).await.unwrap();
+```
+
+## Local evaluation
+
+For improved performance, you can evaluate feature flags locally by enabling local evaluation. This caches flag definitions and evaluates them without making API requests for each flag check.
+
+To enable local evaluation, you need a [personal API key](/docs/api#how-to-obtain-a-personal-api-key) and to configure the client:
+
+```rust
+use posthog_rs::ClientOptionsBuilder;
+
+let options = ClientOptionsBuilder::default()
+    .api_key("your-project-api-key")
+    .personal_api_key("your-personal-api-key")
+    .enable_local_evaluation(true)
+    .poll_interval_seconds(30) // Optional, defaults to 30
+    .build()
+    .unwrap();
+
+let client = posthog_rs::client(options).await;
+```
+
+When local evaluation is enabled, flag definitions are fetched on initialization and periodically refreshed in the background. Flag evaluation then happens locally without network requests, providing 100-1000x faster performance.
+
+> **Note:** Local evaluation requires providing any person properties, groups, or group properties needed to evaluate the flag's release conditions, since PostHog can't fetch these automatically without a server request.
 

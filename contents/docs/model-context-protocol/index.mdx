@@ -11,6 +11,7 @@ import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
 import ZedSnippet from "./_snippets/zed.mdx"
 import ReplitSnippet from "./_snippets/replit.mdx"
 import MCPTools from '../../../src/components/Docs/MCPTools'
+import V0Snippet from "./_snippets/v0.mdx"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
 
@@ -34,7 +35,7 @@ If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` ins
 
 </CalloutBox>
 
-<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit']}>
+<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit', 'v0']}>
     <Tab.List>
         <Tab>Claude Code</Tab>
         <Tab>Claude Desktop</Tab>
@@ -43,6 +44,7 @@ If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` ins
         <Tab>VS Code</Tab>
         <Tab>Zed</Tab>
         <Tab>Replit</Tab>
+        <Tab>v0</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -65,6 +67,9 @@ If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` ins
         </Tab.Panel>
         <Tab.Panel>
             <ReplitSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <V0Snippet />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
@@ -100,7 +105,7 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 ## Available Tools
 
-Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. PostHog tools are also available in our [agent toolkit](/docs/ai-engineering/agent-toolkit) which can be integrated with AI agent frameworks like Vercel's AI SDK and LangChain.
+Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM.
 
 Here's a list of tools we provide:
 
