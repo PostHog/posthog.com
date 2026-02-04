@@ -27,6 +27,7 @@ import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
+import { LocaleProvider, useLocale } from '../../../context/Locale'
 import Editor from 'components/Editor'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -416,7 +417,7 @@ const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'resea
 
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
-const companyBreakdowns = {
+const companyBreakdownsEn = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
@@ -433,6 +434,22 @@ const companyBreakdowns = {
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
+}
+
+const companyBreakdownsKo = {
+    VCsLoveThem: { col1: 'VC가 좋아하는 회사', col2: '프로덕트 엔지니어가 좋아하는 회사' },
+    colorful: { col1: '컬러풀한 로고', col2: '"슬릭한" 로고' },
+    hardware: { col1: '하드웨어 회사', col2: '하드웨어 회사 아님' },
+    planes: { col1: '비행기 만드는 회사', col2: '아직 비행기는 안 만드는 회사' },
+    highValue: { col1: '밸류에이션 10억 달러 이상', col2: '그 외 (당분간)' },
+    caseStudy: { col1: 'PostHog 사례 연구 있는 회사', col2: '사례 연구 하면 좋을 회사' },
+    easyToYell: { col1: '부르기 쉬운 이름', col2: '호흡 조절이 필요한 이름' },
+    goodBandName: { col1: '밴드 이름으로 좋을 만한', col2: '제약회사로 오해받기 쉬운' },
+    explainable: { col1: '부모님께 설명 가능한 회사', col2: '부모님이 이해 못 할 회사' },
+    shortNames: { col1: '글자 7개 이하', col2: '오타 내기 쉬운 이름' },
+    realWords: { col1: '실제 단어', col2: '실제 단어 아님' },
+    american: { col1: '미국에서 설립', col2: '미국 외에서 설립' },
+    pokemon: { col1: '포켓몬 같음', col2: '본드 빌런 같음' },
 }
 
 const companyAttributes = {
@@ -576,6 +593,8 @@ const Image = ({ src, className }: { src: string; className?: string }) => {
 }
 
 const Customers = () => {
+    const locale = useLocale()
+    const companyBreakdowns = locale === 'ko' ? companyBreakdownsKo : companyBreakdownsEn
     const { getCustomers, hasCaseStudy } = useCustomers()
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
@@ -667,7 +686,7 @@ const Customers = () => {
         })
     }
 
-    const currentLabels = companyBreakdowns[currentBreakdown as keyof typeof companyBreakdowns]
+    const currentLabels = companyBreakdowns[currentBreakdown as keyof typeof companyBreakdownsEn]
     const columns = [
         { name: currentLabels.col1, width: 'minmax(auto,1fr)', align: 'center' as const },
         { name: currentLabels.col2, width: 'minmax(auto,1fr)', align: 'center' as const },
@@ -969,7 +988,7 @@ export default function KoreanHome({
             Link,
         }
         return (
-            <>
+            <LocaleProvider locale="ko">
                 <SEO
                     title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
                     updateWindowTitle={false}
@@ -991,7 +1010,7 @@ export default function KoreanHome({
                         <BodyComponent />
                     </MDXProvider>
                 </Editor>
-            </>
+            </LocaleProvider>
         )
     }
 
