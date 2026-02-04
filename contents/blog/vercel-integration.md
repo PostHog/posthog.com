@@ -12,7 +12,7 @@ hideAnchor: true
 category: PostHog news
 tags:
   - Product
-  seo:
+seo:
     {
         metaTitle: 'PostHog × Vercel: feature flags, minus the plumbing',
         metaDescription: 'The new PostHog × Vercel integration lets you use PostHog feature flags and experiments directly in Vercel, without custom wiring or creative workarounds.',
