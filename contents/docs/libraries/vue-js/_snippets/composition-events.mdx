@@ -11,8 +11,55 @@ const { posthog } = usePostHog()
 const handleClick = () => {
   posthog.capture('button_clicked', { location: 'homepage' })
 }
+</script>
 
-const isFeatureEnabled = posthog.isFeatureEnabled('test-flag')
+<template>
+  <div>
+    <button @click="handleClick">Click me!</button>
+  </div>
+
+  <RouterView />
+</template>
+```
+
+### Feature flags with reactive updates
+
+When using feature flags on pages that users navigate to directly, the flags may not be loaded when the component first renders. To ensure your UI updates reactively when flags load, create a composable that returns a reactive ref:
+
+```js
+// src/composables/usePostHogFeatureFlag.ts
+import { ref, type Ref } from 'vue'
+import { usePostHog } from './usePostHog'
+
+export function usePostHogFeatureFlag(
+  feature: string,
+): Ref<string | boolean | undefined> {
+  const { posthog } = usePostHog()
+  const flag = ref(posthog.getFeatureFlag(feature))
+  
+  posthog.onFeatureFlags(() => {
+    flag.value = posthog.getFeatureFlag(feature)
+  })
+  
+  return flag
+}
+```
+
+Then use it in your components:
+
+```js
+// src/App.vue
+<script setup>
+import { RouterView } from 'vue-router'
+import { usePostHog } from './composables/usePostHog'
+import { usePostHogFeatureFlag } from './composables/usePostHogFeatureFlag'
+
+const { posthog } = usePostHog()
+const isFeatureEnabled = usePostHogFeatureFlag('test-flag')
+
+const handleClick = () => {
+  posthog.capture('button_clicked', { location: 'homepage' })
+}
 </script>
 
 <template>
@@ -23,4 +70,6 @@ const isFeatureEnabled = posthog.isFeatureEnabled('test-flag')
 
   <RouterView />
 </template>
-``` 
+```
+
+This ensures your component will automatically update when feature flags load, even if the page is accessed directly. 

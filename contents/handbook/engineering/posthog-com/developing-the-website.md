@@ -176,6 +176,22 @@ If the server fails to start, the first troubleshooting step is to clear cache. 
 pnpm clean && mkdir .cache && pnpm install && pnpm start
 ```
 
+### Minimal mode
+
+For faster builds, you can run in minimal mode:
+
+```bash
+pnpm build:minimal
+```
+
+Minimal mode only builds:
+- Docs pages (`/docs/*`)
+- Handbook pages (`/handbook/*`)
+- Blog/content posts (`/blog/*`, `/tutorials/*`, `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
+- All pages in `src/pages/` (product pages, pricing, etc.)
+
+Everything else (apps, CDP, templates, jobs, API docs, SDK references, pagination/category/tag pages) won't exist - they'll 404. Next/previous navigation links and GitHub data for roadmaps/jobs will also be absent. Sourcemap generation is disabled.
+
 ### Environment variables
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
