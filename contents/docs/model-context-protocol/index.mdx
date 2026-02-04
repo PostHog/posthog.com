@@ -11,6 +11,7 @@ import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
 import ZedSnippet from "./_snippets/zed.mdx"
 import ReplitSnippet from "./_snippets/replit.mdx"
 import MCPTools from '../../../src/components/Docs/MCPTools'
+import V0Snippet from "./_snippets/v0.mdx"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
 
@@ -30,11 +31,11 @@ Add the MCP configuration to your client. When you first use the MCP server, you
 
 <CalloutBox icon="IconFlag" title="EU region users" type="fyi">
 
-If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For example: `https://mcp.posthog.com/mcp?region=eu`
+If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` instead.
 
 </CalloutBox>
 
-<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit']}>
+<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit', 'v0']}>
     <Tab.List>
         <Tab>Claude Code</Tab>
         <Tab>Claude Desktop</Tab>
@@ -43,6 +44,7 @@ If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For ex
         <Tab>VS Code</Tab>
         <Tab>Zed</Tab>
         <Tab>Replit</Tab>
+        <Tab>v0</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -65,6 +67,9 @@ If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For ex
         </Tab.Panel>
         <Tab.Panel>
             <ReplitSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <V0Snippet />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
@@ -100,11 +105,39 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 ## Available Tools
 
-Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. PostHog tools are also available in our [agent toolkit](/docs/ai-engineering/agent-toolkit) which can be integrated with AI agent frameworks like Vercel's AI SDK and LangChain.
+Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM.
 
 Here's a list of tools we provide:
 
 <MCPTools />
+
+## Example prompts
+
+Here are some examples of what you can ask your AI agent to do with the PostHog MCP server:
+
+### Feature flag management
+
+**Prompt:** "Create a feature flag called 'new-checkout-flow' that's enabled for 20% of users"
+
+The agent will use the `create-feature-flag` tool to create the flag with a 20% rollout and return the configuration including the key, rollout percentage, and a link to the flag in PostHog.
+
+### Analytics queries
+
+**Prompt:** "How many unique users signed up in the last 7 days, broken down by day?"
+
+The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
+
+### A/B test creation
+
+**Prompt:** "Create an A/B test for our pricing page that measures conversion to checkout"
+
+The agent will use `experiment-create` to set up an experiment with control/test variants and configure a funnel metric measuring pricing page to checkout conversion.
+
+### Error investigation
+
+**Prompt:** "What are the top 5 errors in my project this week?"
+
+The agent will use the `list-errors` tool to fetch error groups sorted by occurrence count and return details including affected user counts.
 
 ## Prompts and resources
 
@@ -112,8 +145,16 @@ The MCP server provides **resources**, including framework-specific documentatio
 
 Currently we support Next.js, with more frameworks in progress.
 
-## Next Steps
+## Privacy and support
 
-- [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/products/mcp): Check out GitHub repository for the MCP server
+- **Privacy Policy:** [posthog.com/privacy](/privacy)
+- **Terms of Service:** [posthog.com/terms](/terms)
+- **Support:** [posthog.com/questions](/questions) or email support@posthog.com
+
+The MCP server acts as a proxy to your PostHog instance. It does not store your analytics data - all queries are executed against your PostHog project and results are returned directly to your AI client.
+
+## Next steps
+
+- [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp): Check out GitHub repository for the MCP server
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
 - [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?

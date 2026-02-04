@@ -1,0 +1,140 @@
+---
+title: Getting started with Support
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+<QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
+
+<QuestLogItem
+    title="Enable Support"
+    subtitle="Required"
+    icon="IconToggle"
+>
+
+Support is enabled via the Support product settings. Once enabled, the `posthog.conversations` API becomes available (if you have `posthog-js` installed).
+
+### How to enable
+
+1. Go to **Support** in PostHog and click **Settings**
+2. Click **Enable conversations** – this enables the conversations API
+3. To show the chat widget, go to **In-app widget** section and enable it
+4. Configure your greeting message, button color, and other settings
+5. Save your settings
+
+If you enabled the widget, it will appear on your site for users to start conversations.
+
+<CalloutBox icon="IconInfo" title="Building a custom UI?" type="fyi">
+
+To use just the API without the default widget, skip step 3.
+
+</CalloutBox>
+
+<OSButton variant="primary" asLink to="/docs/support/widget">
+  Configure widget settings
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Test the widget"
+    subtitle="Recommended"
+    icon="IconMessage"
+>
+
+Once enabled, visit your site and look for the chat button in the bottom-right corner.
+
+1. Click the chat button to open the widget
+2. Enter your name and email (if required)
+3. Send a test message
+4. Check your PostHog inbox to see the ticket
+
+The widget automatically captures:
+- **Session ID** - Links to events and exceptions from the user's session
+- **Session Replay ID** - Links to the user's [session recording](/docs/session-replay) if replay is enabled
+- **Current URL** - The page they were on
+- **User identity** - If they're identified via [`posthog.identify()`](/docs/product-analytics/identify)
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="View and respond to tickets"
+    subtitle="Required"
+    icon="IconInbox"
+>
+
+All tickets appear in the Support inbox within PostHog.
+
+### What you'll see for each ticket
+
+- **Chat thread** - The conversation with the customer
+- **Session recording** - Watch what the user was doing (if available)
+- **Recent events** - Events from around when they submitted
+- **Exceptions** - Any errors from their session
+- **Previous tickets** - Other conversations with this user
+
+This context helps you understand and resolve issues faster.
+
+<OSButton variant="primary" asLink to="/docs/support/inbox">
+  Learn about the inbox
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Build a custom UI (optional)"
+    subtitle="Optional"
+    icon="IconCode"
+>
+
+Don't want to use the default widget? Use the JavaScript API to build your own support experience.
+
+```javascript
+// Check if conversations are available
+if (posthog.conversations.isAvailable()) {
+  // Send a message
+  const response = await posthog.conversations.sendMessage(
+    'Hello, I need help!',
+    { name: 'John', email: 'john@example.com' }
+  )
+  
+  // Fetch messages
+  const messages = await posthog.conversations.getMessages()
+}
+```
+
+The API gives you full control over the UI while PostHog handles the backend.
+
+<OSButton variant="primary" asLink to="/docs/support/javascript-api">
+  Explore the JavaScript API
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Free during alpha"
+    subtitle="No cost"
+    icon="IconPiggyBank"
+>
+
+Support is completely free while in alpha. No usage limits, no credit card required.
+
+We'll introduce pricing once we're out of alpha – we'll give you plenty of notice before that happens.
+
+---
+
+That's it! You're ready to start helping your users.
+
+<OSButton variant="primary" asLink to="/docs/support/widget">
+  Configure your widget
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

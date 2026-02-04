@@ -40,7 +40,8 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 import { AnthropicInstallation } from 'onboarding/llm-analytics/anthropic.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 
 <OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
-    <AnthropicInstallation />
+    <AnthropicInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>
