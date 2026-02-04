@@ -6,6 +6,7 @@ import OSTable from 'components/OSTable'
 import { IconCheck } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { productOSNav } from 'hooks/useProductOSNavigation'
+import { Link } from 'gatsby'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={productOSNav.children} />
@@ -85,10 +86,16 @@ export default function PlatformPackages() {
                 <div className="space-y-8">
                     <div>
                         <h1>Platform packages</h1>
-                        <p>
-                            Our platform packages are designed to help you manage your teams securely and efficiently on
-                            PostHog as you grow. You can subscribe to packages in the app after signing up for PostHog.
-                        </p>
+                        <div>
+                            Our platform packages help you manage your teams securely and efficiently on PostHog as you
+                            grow. You can{' '}
+                            <Link to="https://app.posthog.com/organization/billing/">
+                                {' '}
+                                subscribe to packages after signing up for PostHog
+                            </Link>
+                            . Need more help getting started?{' '}
+                            <Link to="/services">We also offer service packages.</Link>
+                        </div>
                     </div>
 
                     {/* List of addons with name, description, and flat rate */}
@@ -123,7 +130,15 @@ export default function PlatformPackages() {
 
                     <div>
                         <h2>Get started</h2>
-                        <p>Subscribe to packages after signing up for PostHog.</p>
+                        <p>
+                            You can{' '}
+                            <Link to="https://app.posthog.com/organization/billing/">
+                                {' '}
+                                subscribe to packages after signing up for PostHog
+                            </Link>
+                            , via your billing page. Need help getting started, or want advice on which package to
+                            choose? <Link to="/services">Our engineers can help.</Link>
+                        </p>
                     </div>
                 </div>
             </ReaderView>

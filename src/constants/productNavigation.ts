@@ -85,9 +85,9 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
-    automation: ['posthog_ai', 'workflows_emails', 'webhooks'],
-    communication: ['surveys', 'user-interviews', 'workflows_emails'],
-    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    automation: ['posthog_ai', 'workflows', 'webhooks'],
+    communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }
 
 // Non-product pages that appear in the product navigation

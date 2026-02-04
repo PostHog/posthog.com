@@ -18,6 +18,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Cloud storage',
         },
         {
+            label: 'Attio',
+            url: '/docs/data-warehouse/sources/attio',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T13_32_15_602_Z_3d36e826ca.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Azure SQL Server',
             url: '/docs/data-warehouse/sources/azure-db',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
