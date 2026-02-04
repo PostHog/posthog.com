@@ -1,0 +1,21 @@
+The Customer.io connector can link customers, segments, campaigns, newsletters, and activities to PostHog.
+
+> **Note:** This source is currently in beta.
+
+To link Customer.io:
+
+1. Go to the [sources tab](https://us.posthog.com/pipeline/sources) of the data pipeline section in PostHog.
+
+2. Click **+ New source** and then click **Link** next to Customer.io.
+
+3. You need an **App API key** from Customer.io (not a Track API key or Site ID). Go to your [API Credentials settings](https://fly.customer.io/settings/api_credentials) in Customer.io. Under **App API Keys**, click **Create App API Key**, give it a name, and copy the key value.
+
+4. Back in PostHog, paste the API key in the **App API key** field.
+
+5. Select your **Region** (US or EU) based on where your Customer.io account is hosted.
+
+6. Click **Next**. On the following page, select the schemas you want to sync and click **Import**.
+
+Once the syncs are complete, you can start using Customer.io data in PostHog.
+
+> **Note:** Customer.io only supports full refresh syncs. Incremental syncing is not available.
