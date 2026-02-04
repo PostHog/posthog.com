@@ -72,7 +72,7 @@ You can view the schema for the sessions model in the configuration form when cr
 
 ## Creating the batch export
 
-1. Click [Destinations](https://app.posthog.com/destinations) in the left sidebar.
+1. Click [Data management > Destinations](https://app.posthog.com/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Select **Postgres** as the batch export destination.
 4. Fill in the necessary [configuration details](#postgres-configuration).
