@@ -86,7 +86,8 @@ const TabPanel = ({ children, className, ...props }: React.ComponentProps<typeof
             {...restProps}
             static={true}
             className={({ selected }: { selected: boolean }) => {
-                const baseClass = selected ? '' : 'hidden'
+                // min-w-0 prevents flex children from growing beyond container bounds
+                const baseClass = selected ? 'min-w-0' : 'hidden'
                 if (typeof className === 'function') {
                     return classNames(baseClass, className({ selected }))
                 }
