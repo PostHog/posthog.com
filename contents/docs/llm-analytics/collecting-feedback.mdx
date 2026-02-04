@@ -1,0 +1,127 @@
+---
+title: Collecting feedback
+---
+
+import Tab from "components/Tab"
+
+You can collect thumbs up/down feedback on AI responses and link that feedback directly to LLM traces. When feedback is captured with a trace ID, it appears in the **Feedback** tab of trace views, making it easy to see how users rate specific generations.
+
+<Tab.Group tabs={['React', 'JavaScript']}>
+    <Tab.List>
+        <Tab>React</Tab>
+        <Tab>JavaScript</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+
+## Using the `useThumbSurvey` hook
+
+The `useThumbSurvey` hook from `posthog-js/react` provides a simple way to collect thumbs up/down feedback.
+
+> **Note:** Requires `posthog-js` version 1.332.0 or later.
+
+```jsx
+import { useThumbSurvey } from 'posthog-js/react'
+
+function AIResponse({ traceId }) {
+  const { respond, response, triggerRef } = useThumbSurvey({
+    surveyId: 'your-survey-id',
+    properties: {
+      $ai_trace_id: traceId, // Links feedback to LLM traces
+    },
+  })
+
+  return (
+    <div>
+      <ChatBubble>Here's the AI response...</ChatBubble>
+      
+      <div ref={triggerRef}> {/* Follow-up popup anchors to this element */}
+        <p>Was this response helpful?</p>
+        <button 
+          className={response === 'up' ? 'active' : ''} 
+          onClick={() => respond('up')}
+        >
+          👍
+        </button>
+        <button 
+          className={response === 'down' ? 'active' : ''} 
+          onClick={() => respond('down')}
+        >
+          👎
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+### Hook return values
+
+| Value | Description |
+|-------|-------------|
+| `respond(rating)` | Function to submit feedback. Pass `'up'` or `'down'`. |
+| `response` | The current response value (`'up'`, `'down'`, or `null`). |
+| `triggerRef` | Ref to attach to the element where follow-up popups should anchor. |
+
+### Hook options
+
+| Option | Description |
+|--------|-------------|
+| `surveyId` | The ID of your feedback survey. |
+| `properties` | Additional properties to include with the response. Use `$ai_trace_id` to link to traces. |
+
+        </Tab.Panel>
+        <Tab.Panel>
+
+## Capturing feedback manually
+
+Use `posthog.capture()` to send feedback events directly:
+
+```js
+// When user clicks thumbs up/down
+posthog.capture('survey sent', {
+  $survey_id: 'your-survey-id',
+  $survey_response: 1, // 1 = thumbs up, 0 = thumbs down
+  $ai_trace_id: traceId, // Links to LLM trace
+})
+```
+
+### Multi-question surveys
+
+For surveys with follow-up questions (like asking why after a thumbs down), use `$survey_submission_id` to link multiple responses together:
+
+```js
+const submissionId = crypto.randomUUID()
+
+// Thumbs down response
+posthog.capture('survey sent', {
+  $survey_id: 'your-survey-id',
+  $survey_response: 0,
+  $ai_trace_id: traceId,
+  $survey_submission_id: submissionId,
+  $survey_completed: false, // More responses coming
+})
+
+// Follow-up text response
+posthog.capture('survey sent', {
+  $survey_id: 'your-survey-id',
+  $survey_response_1: 'The response was inaccurate',
+  $ai_trace_id: traceId,
+  $survey_submission_id: submissionId, // Same ID links the events
+  $survey_completed: true,
+})
+```
+
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Viewing feedback
+
+When you include `$ai_trace_id` with your feedback, it automatically appears in the **Feedback** tab when viewing that trace in LLM analytics. This lets you see user sentiment alongside the full context of the generation.
+
+## Creating a feedback survey
+
+If no feedback exists for a trace, the Feedback tab provides a wizard to create a new survey pre-configured for thumbs up/down feedback.
+
+See [creating surveys](/docs/surveys/creating-surveys) for more details on survey configuration.
