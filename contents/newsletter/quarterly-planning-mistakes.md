@@ -46,6 +46,8 @@ When a team realizes they need a different goal, they have [the autonomy to chan
 
 Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would two months ago.
 
+<NewsletterForm />
+
 ## 2. You have to prepare asynchronously
 
 Goals planning can really go off the rails in meetings, especially if:

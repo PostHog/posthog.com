@@ -2,10 +2,24 @@ import React from 'react'
 import * as Icons from '@posthog/icons'
 
 // Popular products to highlight in the menu
-export const popularProducts = ['web_analytics', 'product_analytics', 'session_replay', 'feature_flags', 'experiments']
+export const popularProducts = [
+    'posthog_ai',
+    'web_analytics',
+    'product_analytics',
+    'session_replay',
+    'feature_flags',
+    'experiments',
+]
 
 // Newest products to highlight in the menu
-export const newestProducts = ['posthog_ai', 'llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
+export const newestProducts = [
+    'logs',
+    'posthog_ai',
+    'llm_analytics',
+    'error_tracking',
+    'web_analytics',
+    'workflows_emails',
+]
 
 // Category ordering for display
 export const categoryOrder = [
@@ -50,7 +64,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
     data: ['data-stack', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
-    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'error_tracking', 'early_access'],
+    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'logs', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
         'product_analytics',
@@ -72,8 +86,8 @@ export const productOrder: Record<string, string[]> = {
         'bi',
     ],
     automation: ['posthog_ai', 'workflows', 'webhooks'],
-    communication: ['surveys', 'messaging', 'user-interviews'],
-    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }
 
 // Non-product pages that appear in the product navigation
@@ -114,9 +128,20 @@ export const nonProductPages = {
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {
     const products = allProducts.filter((product: any) => product.category === category)
-    const customOrder = productOrder[category]
+    const customOrder = productOrder[category] || []
 
-    if (customOrder && customOrder.length > 0) {
+    // Handle case where customOrder contains product that isn't its official category
+    const secondaryCategoryProducts = customOrder.filter(
+        (product: string) => !products.find((p) => p.handle === product)
+    )
+    secondaryCategoryProducts.forEach((productHandle: string) => {
+        const product = allProducts.find((p) => p.handle === productHandle)
+        if (product) {
+            products.push(product)
+        }
+    })
+
+    if (customOrder.length > 0) {
         return products.sort((a: any, b: any) => {
             const aIndex = customOrder.indexOf(a.handle)
             const bIndex = customOrder.indexOf(b.handle)

@@ -60,6 +60,23 @@ posthog.getFeatureFlag('key-for-your-multivariate-flag')
 posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
 ```
 
+### Ensuring flags are loaded before usage
+
+Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
+
+This means that for most screens, the feature flags are available immediately — **except for the first time a user visits**.
+
+To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
+
+```react-native
+posthog.onFeatureFlags((flags) => {
+  // feature flags are guaranteed to be available at this point
+  if (posthog.isFeatureEnabled('flag-key')) {
+    // do something
+  }
+})
+```
+
 ### Reloading flags
 
 PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag.

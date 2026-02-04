@@ -69,12 +69,12 @@ export const pendo = {
         heatmaps: {
             available: true,
             features: {
-                rage_clicks: false,
+                rage_clicks: true,
                 scrollmaps: false,
             },
         },
         web_analytics: {
-            available: false,
+            available: true,
             features: {
                 utm_tracking: true,
             },
@@ -93,7 +93,7 @@ export const pendo = {
             platform_support: {
                 features: {
                     web_app_recordings: true,
-                    mobile_app_recordings: false,
+                    mobile_app_recordings: true,
                 },
             },
             analysis: {
@@ -163,19 +163,19 @@ export const pendo = {
             transparent_pricing: false,
             usage_based_pricing: false,
             model: 'Seat-based',
-            self_serve: false,
+            self_serve: true,
         },
         integrations: {
             airbyte: false,
             azure_blob: false,
             bigquery: true,
             ci_cd_integrations: false,
-            community_integrations: false,
+            community_integrations: true,
             customer_io: false,
             datadog: false,
             discord: false,
             exports: true,
-            gcs: false,
+            gcs: true,
             google_ads: false,
             hubspot: true,
             imports: true,
@@ -183,7 +183,7 @@ export const pendo = {
             microsoft_teams: true,
             redshift: true,
             rudderstack: false,
-            s3: false,
+            s3: true,
             salesforce: true,
             segment: true,
             sentry: false,
@@ -192,7 +192,7 @@ export const pendo = {
             snowflake: true,
             stripe: false,
             zapier: true,
-            zendesk: false,
+            zendesk: true,
         },
         security: {
             cookieless_tracking: false,
@@ -206,16 +206,17 @@ export const pendo = {
             user_privacy_options: true,
         },
         analytics_integration: {
-            built_in_analytics: false,
+            built_in_analytics: true,
         },
         developer: {
             api: true,
             cross_domain_tracking: true,
             proxies: false,
             mobile_sdks: true,
-            sdks: false,
+            sdks: true,
             server_side_sdks: true,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',

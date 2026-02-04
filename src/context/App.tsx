@@ -263,7 +263,7 @@ export const Context = createContext<AppContextType>({
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
-        screensaverDisabled: false,
+        screensaverDisabled: true,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -483,6 +483,18 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+    },
+    '/services': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 850,
+                height: 1000,
+            },
         },
     },
     start: {
@@ -1047,6 +1059,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/community/achievements': {
+        size: {
+            min: {
+                width: 500,
+                height: 1000,
+            },
+            max: {
+                width: 500,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/fm': {
         size: {
             min: {
@@ -1146,6 +1174,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
         performanceBoost: false,
+        screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
@@ -2055,6 +2084,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive ready signal
             window.parent.postMessage(
                 {
                     type: 'docs-ready',
@@ -2092,6 +2122,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (compact) {
+            // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive navigation data
             window.parent.postMessage(
                 {
                     type: 'internal-navigation',

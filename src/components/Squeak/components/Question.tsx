@@ -23,7 +23,7 @@ import {
 } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import { fetchTopicGroups, topicGroupsSorted } from '../index'
 import { Check2, Close } from 'components/Icons'
 import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
@@ -450,11 +450,11 @@ export function Question(props: QuestionProps) {
         if (
             notifications?.length > 0 &&
             notifications.some(
-                (notification) => notification.question.id === id || notification.question.permalink === id
+                (notification) => notification.question?.id === id || notification.question?.permalink === id
             )
         ) {
             const newNotifications = notifications.filter(
-                (notification) => notification.question.id !== id && notification.question.permalink !== id
+                (notification) => notification.question?.id !== id && notification.question?.permalink !== id
             )
             setNotifications(newNotifications)
         }

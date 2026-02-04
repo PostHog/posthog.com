@@ -105,6 +105,12 @@ You can see a full example of this in our tutorial on [how to send survey respon
 
 Slack integrations will only show channels that the authorizing user has access to.
 
+### I have a lot of slack channels and loading all in the dropdown fails, how can I set a slack channel?
+
+If you have thousands of slack channels, the slack API might rate limit you before the dropdown can load all channels.
+
+In this case, you can manually paste a slack channel id into the field to load just that one by id. If it is found, you can then select and use it.
+
 ### Is the source code for this destination available?
 
 PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/slack/template_slack.py) is available on GitHub.

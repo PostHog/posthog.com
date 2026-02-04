@@ -248,6 +248,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         <div className="text-secondary">Description</div>
                         <div
                             className="col-span-3 product-description"
+                            // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - product description from Shopify, not user input
                             dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                         />
                     </>

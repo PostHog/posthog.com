@@ -176,6 +176,22 @@ If the server fails to start, the first troubleshooting step is to clear cache. 
 pnpm clean && mkdir .cache && pnpm install && pnpm start
 ```
 
+### Minimal mode
+
+For faster builds, you can run in minimal mode:
+
+```bash
+pnpm build:minimal
+```
+
+Minimal mode only builds:
+- Docs pages (`/docs/*`)
+- Handbook pages (`/handbook/*`)
+- Blog/content posts (`/blog/*`, `/tutorials/*`, `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
+- All pages in `src/pages/` (product pages, pricing, etc.)
+
+Everything else (apps, CDP, templates, jobs, API docs, SDK references, pagination/category/tag pages) won't exist - they'll 404. Next/previous navigation links and GitHub data for roadmaps/jobs will also be absent. Sourcemap generation is disabled.
+
 ### Environment variables
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
@@ -191,6 +207,26 @@ Once you have cloned the repo, the `contents/` directory contains a few key area
 -   `blog/` = our blog posts
 
 Inside each of these are a series of markdown files for you to edit.
+
+### Posts and blog filtering
+
+There are two ways to filter posts by tag:
+
+1. **Query param** — Add a `post_tags` query param to the URL, e.g., `/posts?post_tags=Comparisons`. This works on the main posts listing and allows saving/sharing filtered URLs.
+
+2. **Static tag pages** — For SEO purposes, we generate static pages at `/{category}/{tag}`, e.g., `/blog/session-replay`. These are generated at build time in `gatsby/createPages.ts`.
+
+#### Hidden from index
+
+Some categories and tags are intentionally hidden from the main posts index view. They still appear when you filter directly to that category or tag.
+
+**Categories hidden from index:** `customers`, `spotlight`, `changelog`, `comparisons`, `notes`, `repost`
+
+**Tags hidden from index:** `Comparisons`
+
+Posts can also set `hideFromIndex: true` in their frontmatter to be excluded.
+
+These exclusions are defined in `src/components/Edition/Posts.tsx` and `src/templates/BlogPost.tsx`.
 
 ## Making edits
 
@@ -547,6 +583,40 @@ Because Vercel charges per seat, we don't automatically invite all team members 
 ## Deployment
 
 To get changes into production, the website deploys automatically from `master`. The build takes up to an hour, but can be delayed if other preview builds are in the queue.
+
+## Product interest tracking for onboarding
+
+We track which products users have shown interest in by visiting product landing pages or docs. This data is stored using PostHog's `cookie_persisted_properties` feature, making it available across all posthog.com subdomains (including app.posthog.com) for onboarding personalization.
+
+### How it works
+
+When a user visits a product-specific page (like `/product-analytics` or `/docs/session-replay`), we record that product's slug using `posthog.register()` with the property `prod_interest`. This property is configured in `cookie_persisted_properties` in `gatsby/onPreBoostrap.ts`, which means it gets stored in a cross-subdomain cookie automatically.
+
+To read the interests, we use `posthog.get_property('prod_interest')` which returns an array of product slugs like `["product-analytics", "session-replay"]`.
+
+We always store the most recent interests last in the array.
+
+### Code structure
+
+The tracking is implemented in:
+
+- `src/lib/productInterest.ts` - Core utilities using `posthog.get_property()` and `posthog.register()`
+- `src/hooks/useProductInterest.ts` - React hooks for tracking
+- `src/components/Products/Slides/SlidesTemplate.tsx` - Integration for product landing pages
+- `src/templates/Handbook.tsx` - Integration for docs pages
+
+### Reading interests on app.posthog.com
+
+Since this uses PostHog's built-in cookie persistence, you can read the interests on any subdomain where PostHog is initialized:
+
+```javascript
+const interests = posthog.get_property('prod_interest') || []
+// interests = ["product-analytics", "session-replay", ...]
+```
+
+### Expanding usage
+
+Everything is usually automatically handled because our website is well-structured but if you want to start tracking interest for new products you'll need to add a new entry to `PRODUCT_SLUGS` in `src/lib/productInterest.ts`
 
 #### Acknowledgements
 

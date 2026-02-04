@@ -18,29 +18,44 @@ PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTele
 
 The key requirements are:
 - Use OTLP (OpenTelemetry Protocol) for log export over HTTP
-- Send logs to `https://us.i.posthog.com/i/v1/logs` (or your self-hosted endpoint)
-- Include your project token in the Authorization header or as a `?token=` query parameter
+- Send logs to your PostHog logs endpoint (see configuration step below)
+- Include your project API key in the Authorization header or as a `?token=` query parameter
 
 Find the OpenTelemetry SDK for your language in the [official registry](https://opentelemetry.io/ecosystem/registry/).
 
 </Step>
 
-<Step title="Get your project token" badge="required">
+<Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project token to authenticate log requests. This is the same token you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
 
-You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
 
 </Step>
 
 <Step title="Configure the SDK" badge="required">
 
-Configure your OpenTelemetry SDK to send logs to PostHog:
+Configure your OpenTelemetry SDK to send logs to PostHog.
 
-- **Endpoint:** `https://us.i.posthog.com/i/v1/logs`
-- **Authentication:** Include your project token either:
-  - In the Authorization header: `Bearer {your-project-token}`
-  - As a query parameter: `?token={your-project-token}`
+**Endpoint:**
+
+```
+<ph_client_api_host>/i/v1/logs
+```
+
+**Authentication:** Include your project API key either as an Authorization header:
+
+```
+Authorization: Bearer <ph_project_api_key>
+```
+
+Or as a query parameter on the endpoint:
+
+```
+<ph_client_api_host>/i/v1/logs?token=<ph_project_api_key>
+```
 
 </Step>
 

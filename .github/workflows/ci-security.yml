@@ -9,6 +9,9 @@ name: Security
 permissions:
     contents: read
 
+env:
+    SEMGREP_ENABLE_VERSION_CHECK: 'false'
+
 jobs:
     ensure-pinned-actions:
         runs-on: ubuntu-latest
@@ -26,3 +29,74 @@ jobs:
                       hashicorp/
                       PostHog/
                       tailscale/
+                      inkeep/
+
+    semgrep-js:
+        runs-on: ubuntu-latest
+        container:
+            image: returntocorp/semgrep
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            # exclude react-markdown rule: we use rehypeSanitize to sanitize HTML output
+            - name: Run Semgrep
+              run: |
+                  semgrep \
+                    --config "p/javascript" \
+                    --config "p/owasp-top-ten" \
+                    --config "p/security-audit" \
+                    --config "p/trailofbits" \
+                    --exclude-rule typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html \
+                    --error \
+                    --metrics=off \
+                    --verbose \
+                    src/ gatsby/ plugins/ api/ *.js *.ts *.tsx
+
+    # scans GitHub Actions and other repo-wide config
+    semgrep-general:
+        runs-on: ubuntu-latest
+        container:
+            image: returntocorp/semgrep
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            # exclude all directories already scanned by other jobs
+            - name: Run Semgrep
+              run: |
+                  semgrep \
+                    --config "p/owasp-top-ten" \
+                    --config "p/security-audit" \
+                    --config "p/trailofbits" \
+                    --config "p/github-actions" \
+                    --error \
+                    --metrics=off \
+                    --verbose \
+                    --exclude ./src/ \
+                    --exclude ./gatsby/ \
+                    --exclude ./plugins/ \
+                    --exclude ./api/ \
+                    --exclude ./contents/ \
+                    .
+
+    semgrep_checks:
+        needs: [semgrep-js, semgrep-general]
+        name: Semgrep Checks Pass
+        runs-on: ubuntu-latest
+        if: always()
+        steps:
+            - name: Check matrix outcome
+              run: |
+                  if [[ "${{ needs.semgrep-js.result }}" != "success" && "${{ needs.semgrep-js.result }}" != "skipped" ]]; then
+                    echo "semgrep-js did not complete successfully."
+                    exit 1
+                  fi
+                  if [[ "${{ needs.semgrep-general.result }}" != "success" && "${{ needs.semgrep-general.result }}" != "skipped" ]]; then
+                    echo "semgrep-general did not complete successfully."
+                    exit 1
+                  fi
+
+                  echo "All checks passed."

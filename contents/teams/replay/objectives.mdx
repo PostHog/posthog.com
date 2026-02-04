@@ -1,67 +1,33 @@
-See more detail in our MegaIssue https://github.com/PostHog/posthog/issues/39011
+## 🚀 Goal 1: Get Hayne rocketing
 
-## 🚀 Goal 1: Get Kim and Hayne rocketing
+It's great to have Hayne on the team, let's make the time and priority to make it a success!
 
-It's great to have new folk on the team, let's make the time and priority to make it a success
+## 👀 Goal 2: Make Replay low-maintenance 🔧
 
-## 👀 Goal 2: See the value of each recording - deep integrations into other tools @TueHaulund with @veryayskiy
+* Clean up legacy features and finish outstanding migrations from old to new
+   * Move everyone to PostHog recorder
+   * Remove support for Blobby V1
+   * Remove LTS feature and related Celery tasks
+* Improve fidelity - let's squash the filtering bugs and visual inconsistencies that make Replay seem "rough" to use
+* Improve debugging facilities - it can be hard to reproduce issues locally or get our hands on the data we need, let's build the internal tooling needed to solve that
 
-* Build on the manual crisp and intercom integrations to make it easy to add replay into every support tool
-* Easy link to share clips to github/linear/jira etc
-* Easy links from salesforce
-* Easy links to AI/vibe-coding platforms
-* A zendesk app to have two way links
-* more ...?
+## ⌚ Goal 3: Replay everywhere!
 
-### Why?
+* When a recording doesn't exist, explain why!
+* Make the view recording buttons consistent
+* Make the view recording buttons session aware
+* Out with modals, in with tabs!
+* Where else can we link to recordings from within other products?
+* External integrations - jam.dev? GitHub? ZenDesk? Linear? FreshDesk? Jira? Trello?
 
-Replay is a great debugging and support tool, let's help folk discover that
+## 🏎️ Goal 4: Make Replay compliant 
 
-## ⌚ Goal 3: See the value of each recording - nail watching in context @veryayskiy
+* Let's shred some recordings 🤘
 
-For example....
+## 💰 Goal 5: How are our unit economics trending?
 
-It’s hard to get from a funnel to the recordings for the funnel. It should be easy to watch them, summarise them, track them
+How have recent infrastructure changes impacted our unit economics? Is our pricing still competitive?
 
-imagine being able to ask Max: "hey max, 12% of people drop off this funnel at step 2 - summarize those sessions and tell me why"
+## 👨‍🔬 Goal 6. Make "show me something interesting" tangible
 
-And not just funnels but everywhere
-
-* If a recording doesn’t exist, upsell adding it - make it easy to know why i can’t watch, and make it easy to watch the ones i do have
-* get from where you are (flag, funnel, insight, etc) to the point in time in the recording
-* split the list of recordings out of the actors modal
-* view recording button should be session aware
-
-### Why?
-
-Folk should be able to watch the recordings they need to where they are, without needing to figure out how to find them in replay
-
-## 💰 Goal 4: Refresh price comparisons @fivestarspicy supported by us all
-
-Are we still competitive? Do recent infrastructure improvements change things?
-
-## 🏎️ Goal 5: Replay the rocket @pauldambra with @TueHaulund
-
-We hear (some) people tell us replay is slow... let's fix that
-
-* Snappy in the browser so we don’t need to decompress in the API
-* Don’t load the whole 2hour recording to play it
-* Performance in the browser generally for playback
-* Performance impact when recording
-* Listing speed should be blazing fast
-* Precache the recording homepage data when you login or start a session?
-
-### Why?
-
-Replay is awesome, waiting for things is not
-
-## 👨‍🔬 Goal 6. Refresh our understanding of how replay gets used and where we can derive more value faster @fivestarspicy 
-
-Talk to customers who love replay and customers who churned. Learn what makes them pay vs leave. Hone in on questions like:
-- How do they find replays to watch?
-- What makes an individual replay interesting/valuable?
-- Where do they want replays to show up? (in posthog? external tools?)
-- What workflows have they built around replay?
-- Why do they churn or turn down volume?
-
-
+Customers want us to highlight interesting moments and sessions, but that means different things to different people. Can we generate a library of what Interesting means to our customers?

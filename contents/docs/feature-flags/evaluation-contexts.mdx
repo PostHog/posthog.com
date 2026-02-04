@@ -1,0 +1,330 @@
+---
+title: Evaluation contexts
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Heads up!" type="caution">
+
+Evaluation contexts are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access.
+
+</CalloutBox>
+
+Evaluation contexts provide fine-grained control over where and when your feature flags evaluate. By constraining flag evaluation to specific contexts, you can reduce unnecessary evaluations, optimize costs, and better organize your feature management strategy.
+
+## What are evaluation contexts?
+
+Evaluation contexts are constraints that determine when a feature flag should be evaluated. They're configured in the PostHog UI by tagging your flags and marking those tags as "evaluation context tags" (with the bolt icon ⚡). Unlike standard tags (which are purely organizational), evaluation context tags actively filter which flags are returned during evaluation requests.
+
+When you configure evaluation context tags on a feature flag:
+- The flag will **only** evaluate when the SDK provides matching contexts via `evaluation_contexts` (or the legacy `evaluation_environments` parameter)
+- Flags without evaluation context tags continue to work as before (evaluating for all requests)
+- At least one context must match for the flag to be included
+
+## Why use evaluation contexts?
+
+### 1. Application isolation
+
+Prevent feature flags from accidentally affecting the wrong application or context. For example:
+- Marketing site flags won't affect your main application
+- Documentation site flags won't impact your mobile apps
+- Admin panel flags won't evaluate in customer-facing features
+
+### 2. Cost optimization
+
+Reduce unnecessary flag evaluations and associated costs by:
+- Only evaluating relevant flags per application context
+- Reducing network payload sizes
+- Minimizing server-side processing
+
+### 3. Better organization
+
+Group and filter flags by their intended application context in the feature flags UI, for example:
+- Application type (e.g., "main-app", "marketing-site", "docs")
+- Platform (e.g., "web", "mobile", "api")
+- Product area (e.g., "checkout", "onboarding", "admin")
+
+### 4. Improved performance
+
+Smaller, more focused flag sets mean:
+- Faster evaluation times
+- Reduced memory usage in SDKs
+
+## Setting up evaluation contexts
+
+### Step 1: Apply evaluation contexts to flags in the UI
+
+When creating or editing a feature flag:
+
+1. Navigate to the tags section
+2. Add tags that represent your application contexts (e.g., "main-app", "marketing-site", "docs", "mobile")
+3. Click the bolt icon <IconBolt className="inline w-4 h-4" /> to mark these tags as evaluation constraints
+4. Selected evaluation context tags will display with a green background and bolt icon
+
+> **Remember:** Setting evaluation context tags in the PostHog app is only half the setup. Your application needs to declare its context via the SDK configuration (Step 2).
+
+### Step 2: Configure your SDKs
+
+**This step is essential** - After marking tags as evaluation constraints in the PostHog app, you must update your SDK configuration to declare which application contexts your application represents. The SDK's `evaluation_contexts` parameter must match the tags you've marked in the UI.
+
+> **Note:** Newer SDK versions use `evaluation_contexts` (or `evaluationContexts` depending on the language). Older versions use `evaluation_environments` (or `evaluationEnvironments`). Both parameters are supported for backward compatibility — see the [SDK support](#sdk-support) section for version details.
+
+Update your SDK initialization to include evaluation contexts:
+
+<MultiLanguage>
+
+```js-web
+posthog.init('YOUR_API_KEY', {
+    api_host: 'https://app.posthog.com',
+    evaluation_contexts: ['main-app', 'web', 'checkout']
+})
+```
+
+```node
+const posthog = new PostHog('YOUR_API_KEY', {
+    host: 'https://app.posthog.com',
+    evaluation_contexts: ['main-app', 'api', 'backend']
+})
+```
+
+```python
+posthog = Posthog(
+    'YOUR_API_KEY',
+    host='https://app.posthog.com',
+    evaluation_contexts=['main-app', 'api', 'backend']
+)
+```
+
+```react
+<PostHogProvider 
+    apiKey='YOUR_API_KEY'
+    options={{
+        api_host: 'https://app.posthog.com',
+        evaluation_contexts: ['main-app', 'web', 'app']
+    }}
+>
+    <App />
+</PostHogProvider>
+```
+
+```react-native
+import PostHog from 'posthog-react-native'
+
+const posthogAsync = PostHog.initAsync('YOUR_API_KEY', {
+    host: 'https://app.posthog.com',
+    evaluationContexts: ['main-app', 'mobile', 'app']
+})
+```
+
+```android
+val config = PostHogConfig(
+    apiKey = "YOUR_API_KEY",
+    host = "https://app.posthog.com"
+).apply {
+    evaluationContexts = listOf("main-app", "android", "mobile")
+}
+PostHogAndroid.setup(context, config)
+```
+
+```ios
+let config = PostHogConfig(
+    apiKey: "YOUR_API_KEY",
+    host: "https://app.posthog.com"
+)
+config.evaluationContexts = ["main-app", "ios", "mobile"]
+PostHogSDK.shared.setup(config)
+```
+
+```ruby
+posthog = PostHog::Client.new({
+    api_key: 'YOUR_API_KEY',
+    host: 'https://app.posthog.com',
+    evaluation_contexts: ['main-app', 'api', 'backend']
+})
+```
+
+```go
+client, _ := posthog.NewWithConfig("YOUR_API_KEY", posthog.Config{
+    Endpoint: "https://app.posthog.com",
+    EvaluationContexts: []string{"main-app", "api", "backend"},
+})
+```
+
+```php
+PostHog::init('YOUR_API_KEY', [
+    'host' => 'https://app.posthog.com',
+    'evaluation_contexts' => ['main-app', 'api', 'backend']
+]);
+```
+
+```java
+PostHog posthog = new PostHog.Builder("YOUR_API_KEY")
+    .host("https://app.posthog.com")
+    .evaluationContexts(Arrays.asList("main-app", "api", "backend"))
+    .build();
+```
+
+</MultiLanguage>
+
+## How evaluation works
+
+When a flag evaluation request is made:
+
+1. **SDK sends application contexts**: The SDK includes its configured `evaluation_contexts` in the request
+2. **PostHog filters flags**: Only flags matching these criteria are evaluated:
+   - Flags with no evaluation context tags (backward compatibility)
+   - Flags with empty evaluation context tags
+   - Flags where at least one evaluation tag matches the SDK's declared application contexts
+3. **Results returned**: Only the filtered flags are returned to the SDK
+
+### Example scenario
+
+Consider these feature flags (with their evaluation context tags in the UI):
+- Flag A: No evaluation context tags → Evaluates for all requests
+- Flag B: Evaluation context tags `["main-app", "web"]` → Only evaluates when SDK declares "main-app" OR "web"
+- Flag C: Evaluation context tags `["marketing-site"]` → Only evaluates when SDK declares "marketing-site"
+
+If an SDK is configured with `evaluation_contexts: ["main-app", "mobile"]`:
+- ✅ Flag A evaluates (no constraints)
+- ✅ Flag B evaluates ("main-app" matches)
+- ❌ Flag C does NOT evaluate (no matching application contexts)
+
+## Best practices
+
+### Start simple
+Begin with high-level application distinctions:
+- `main-app` vs. `marketing-site` vs. `docs`
+- `web` vs. `mobile` vs. `api`
+
+### Use consistent naming
+Establish a naming convention for your evaluation context tags:
+- Application: `main-app`, `marketing-site`, `docs`, `admin-panel`
+- Platform: `web`, `ios`, `android`, `api`
+- Product area: `checkout`, `onboarding`, `billing`
+
+### Document your application contexts
+
+Maintain a list of standard application context names and their purposes to ensure consistent usage across teams.
+
+### Gradual adoption
+
+You don't need to add evaluation context tags to all flags at once. Start with new flags or high-traffic flags where the benefits are most significant.
+
+### Monitor impact
+
+Track the reduction in flag evaluations and associated cost savings after implementing evaluation contexts.
+
+## Differences from evaluation runtime
+
+While both features control where flags evaluate, they serve different purposes:
+
+| Feature | Evaluation Contexts | Evaluation Runtime |
+|---------|------------------------|-------------------|
+| **Purpose** | Fine-grained application context constraints | SDK type filtering |
+| **Control** | User-defined tags in UI | Predefined options (client/server/all) |
+| **Granularity** | Unlimited custom contexts | Three fixed options |
+| **Configuration** | Tags marked as evaluation constraints | Per-flag setting |
+| **SDK parameter** | `evaluation_contexts` | Automatic based on SDK type |
+| **Use case** | Application isolation, cost optimization | Client vs. server separation |
+
+For practical examples of using both features together, see [How to use evaluation runtimes and contexts together](/tutorials/evaluation-runtimes-and-contexts).
+
+## Common use cases
+
+### Multi-application organizations
+
+If you have multiple applications sharing a PostHog instance:
+```javascript
+// Marketing site
+posthog.init('KEY', { evaluation_contexts: ['marketing-site', 'web'] })
+
+// Main app
+posthog.init('KEY', { evaluation_contexts: ['main-app', 'web'] })
+
+// Documentation
+posthog.init('KEY', { evaluation_contexts: ['docs', 'web'] })
+```
+
+### Platform-specific features
+
+Separate features by platform while maintaining a single flag source:
+```javascript
+// iOS app
+posthog.init('KEY', { evaluation_contexts: ['main-app', 'ios'] })
+
+// Android app
+posthog.init('KEY', { evaluation_contexts: ['main-app', 'android'] })
+
+// Web app
+posthog.init('KEY', { evaluation_contexts: ['main-app', 'web'] })
+```
+
+### Product area isolation
+
+Separate features by product area within your main application:
+```javascript
+// Checkout flow
+posthog.init('KEY', { evaluation_contexts: ['main-app', 'checkout'] })
+
+// Onboarding flow
+posthog.init('KEY', { evaluation_contexts: ['main-app', 'onboarding'] })
+
+// Admin panel
+posthog.init('KEY', { evaluation_contexts: ['admin-panel', 'web'] })
+```
+
+## Troubleshooting
+
+### Flags not evaluating
+
+If a flag with evaluation context tags isn't evaluating:
+1. **Check that your SDK is configured with `evaluation_contexts`** - This is the most common issue. Your application must explicitly declare its application contexts.
+2. Verify at least one evaluation tag in the UI matches your SDK's `evaluation_contexts`
+3. Ensure the tags are properly marked as evaluation constraints (bolt icon) in PostHog
+4. Confirm you've deployed the SDK configuration changes to your application
+
+### All flags evaluating
+
+If you're still seeing all flags despite using evaluation contexts:
+1. Confirm your SDK version supports evaluation contexts
+2. Check that flags have tags marked as evaluation constraints (bolt icon, not just regular tags)
+3. Verify your SDK is sending the `evaluation_contexts` parameter
+
+### Performance not improved
+
+If you don't see performance improvements:
+1. Ensure you've added evaluation context tags to high-traffic flags
+2. Check that your application contexts are specific enough to filter effectively
+3. Monitor the reduction in evaluated flags using PostHog analytics
+
+## Migration guide
+
+To adopt evaluation contexts in an existing PostHog setup:
+
+1. **Audit current flags**: Identify which flags are used in which application contexts
+2. **Define tag taxonomy**: Create a consistent naming scheme for your application contexts
+3. **Configure tags**: Mark appropriate tags as evaluation constraints
+4. **Update high-impact flags first**: Start with flags that have the most evaluations
+5. **Update SDKs gradually**: Roll out [SDK changes](/docs/sdk-doctor) with `evaluation_contexts` per context
+6. **Monitor and adjust**: Track the impact and refine your tag strategy
+
+## SDK support
+
+Evaluation contexts are supported in the following SDKs:
+
+| SDK | `evaluation_contexts` | `evaluation_environments` (legacy) |
+|-----|----------------------|-----------------------------------|
+| [JavaScript Web](/docs/libraries/js/config#evaluation_contexts) | 1.250.0+ | 1.270.0+ |
+| [React Native](/docs/libraries/react-native/) | 4.8.0+ | 4.7.2+ |
+| [Node.js](/docs/libraries/node/) | 5.10.0+ | 5.9.6+ |
+| [Android](/docs/libraries/android) | 3.25.0+ | 3.24.0+ |
+| [iOS](/docs/libraries/ios) | 3.34.0+ | 3.33.0+ |
+
+> **Note:** Both parameter names work in newer SDK versions. If you're on an older version that only supports `evaluation_environments`, that will continue to work. We recommend using `evaluation_contexts` for new implementations.

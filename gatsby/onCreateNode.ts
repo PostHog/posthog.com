@@ -421,4 +421,12 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
     }
+    if (node.internal.type === 'PostHogWorkflowTemplate') {
+        const slug = slugify(node.name, { lower: true, strict: true })
+        createNodeField({
+            node,
+            name: 'slug',
+            value: slug,
+        })
+    }
 }

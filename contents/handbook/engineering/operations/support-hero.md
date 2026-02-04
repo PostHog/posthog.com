@@ -133,50 +133,7 @@ The key principle: We want to be responsive to our open-source community when we
 
 ## What do I do as a SDK Support Hero?
 
-Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in incident.io](https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MD6JK1TEGAK97450S).
-
-Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
-
-- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
-- New issues in the SDK repositories
-  - [posthog-js (Web, Web Lite, React, Next, Node, AI)](https://github.com/PostHog/posthog-js/)
-  - [posthog-python](https://github.com/PostHog/posthog-python)
-  - [posthog-php](https://github.com/PostHog/posthog-php)
-  - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
-  - [posthog-java](https://github.com/PostHog/posthog-android/tree/main/posthog-server)
-  - [posthog-rs (Rust)](/docs/libraries/rust)
-  - [posthog-go](/docs/libraries/go)
-  - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
-  - Others, see /docs/libraries
-
-You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
-
-### How should I prioritize my time?
-
-Firstly, try to stay on top of new escalated Zendesk tickets and GitHub issues, and make sure that issues related to a specific team are routed to them. If there is a relevant team (e.g. the issue is related to session replay in posthog-js), you can assign the Zendesk ticket to that team, and use the team's label in GitHub. If there is no relevant team for a GitHub issue, please label with `SDK Support Hero`. Feel free to try to fix things yourself before tagging the team.
-
-Next, please work on SDK tickets in Zendesk, and GitHub issues labelled `SDK Support Hero` (and unlabelled, but please label these!). You can use your own judgement to decide which issues to work on but please consider effort / reward / urgency / your skill set. For example, `posthog-js` usually has the most issues, but if you're a Python expert, you might want to focus on `posthog-python`.
-
-At the end of the week, please write a public handover message in `#support-client-libraries`, to let the next person know what work is in progress, let the team know how the support rotation is going in general, and to share any learnings or feedback.
-
-### Mobile SDKs
-
-For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on Mobile Apps may take weeks or even months.
-
-- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/42222680081819)
-- New issues in the SDK repositories
-  - [posthog-js (React Native)](https://github.com/PostHog/posthog-js/tree/main/packages/react-native)
-  - [posthog-ios](https://github.com/PostHog/posthog-ios)
-  - [posthog-android](https://github.com/PostHog/posthog-android)
-  - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
-
-Mobile support tickets reported by the PostHog app - Contact support panel with the Mobile topic will be assigned to the Mobile group on Zendesk and triaged by the Mobile team.
-
-The Mobile team will triage and fix them if they are in our domain area or reassign them to the related team.
-
-If you see a Mobile SDK issue, please escalate it to the <SmallTeam slug="mobile" /> as soon as possible (@mobile-folks on Slack, Mobile group on Zendesk, and @team-mobile on GitHub).
-
-The Mobile team is also happy to collaborate on any non-Mobile SDK issue that requires knowledge in the Mobile ecosystem, e.g., you're debugging person profiles from customers using the Mobile SDKs, and you don't have context on how the SDK works/identifies users.
+See the dedicated [SDK support rotation](/handbook/engineering/sdks/support-rotation) page for details on the (optional) SDK Support Hero rotation, including how to prioritize your time and handle mobile SDK issues.
 
 ## Don't ask users to do work that you can do!
 
@@ -221,7 +178,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 -   Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 -   If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store.
 
-If you have any questions about how or when to communicate with users, you can always ask the <SmallTeam slug="brand" /> for help.
+If you have any questions about how or when to communicate with users, you can always ask the <SmallTeam slug="website" /> for help.
 
 ## How do I prioritize?
 
@@ -311,12 +268,15 @@ The first time you sign into Zendesk, please make sure you include your name and
 
 ### Using Zendesk
 
-You’ll spend most of your time in the Views pane, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
+You’ll spend most of your time in the Views panel, where you’ll find all tickets divided into different lists depending on who they are assigned to, and whether they have been solved or not.
 
 Tips:
 
 -   Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
--   Provide actionable information as an _Internal Note_ on the Zendesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+-   Provide actionable information as an _Internal Note_ on the Zendesk ticket (e.g. partial investigation, notes for escalating or transferring to a different team, etc.). Do not use internal notes to communicate internally about a ticket, it is far too easy to miss these notes (see below!).
+-   Use _side conversations_ from Zendesk to Slack to communicate about a ticket internally. Slack is our primary communication tool and therefore it's much easier to have a discussion in Slack than through Zendesk internal notes. Side conversations can be started from the right hand side panel in Zendesk:
+
+![Opening side conversations](https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/zendesk_side_conversation_b595f2b69f.png)
 
 ### Creating tickets on behalf of users or from existing tickets
 

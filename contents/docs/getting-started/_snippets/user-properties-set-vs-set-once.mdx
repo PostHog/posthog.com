@@ -73,30 +73,30 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'event_name',
-    'properties' => array(
-        '$set' => array(
+    'properties' => [
+        '$set' => [
             'name' => 'Max Hedgehog'
-        ),
-        '$set_once' => array(
+        ],
+        '$set_once' => [
             'initial_url' => '/blog'
-        )
-    )
-));
-PostHog::capture(array(
+        ]
+    ]
+]);
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => 'event_name',
-    'properties' => array(
-        '$set' => array(
+    'properties' => [
+        '$set' => [
             'name' => 'Mr. Fox'
-        ),
-        '$set_once' => array(
+        ],
+        '$set_once' => [
             'initial_url' => '/pricing'
-        )
-    )
-));
+        ]
+    ]
+]);
 # name: 'Mr. Fox'
 # initial_url: '/blog'
 ```

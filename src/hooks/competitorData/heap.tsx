@@ -9,7 +9,7 @@ export const heap = {
         product_analytics: {
             available: true,
             pricing: {
-                free_tier: '10k monthly tracked users',
+                free_tier: '10k monthly sessions',
             },
             features: {
                 advertising_analytics: false,
@@ -56,7 +56,7 @@ export const heap = {
                     features: {},
                 },
                 stickiness: {
-                    available: false,
+                    available: true,
                     features: {},
                 },
                 group_analytics: {
@@ -69,26 +69,26 @@ export const heap = {
             available: false,
         },
         web_analytics: {
-            available: false,
+            available: true,
             features: {
                 snippet_install: true,
                 search_tools: false,
             },
         },
         session_replay: {
-            available: true,
+            available: 'Pro/Premier Add-on',
             pricing: {
-                free_tier: 'Limited trial',
+                free_tier: false,
             },
             features: {
                 canvas_recording: false,
                 chat_with_recordings: false,
-                clickmaps: false,
+                clickmaps: true,
                 conditional_recording: true,
                 event_timeline: false,
-                filter_by_user_or_event: false,
+                filter_by_user_or_event: true,
                 identity_detection: true,
-                iframe_recording: false,
+                iframe_recording: true,
                 minimum_duration: false,
                 movement_maps: false,
                 notes_on_replays: false,
@@ -96,13 +96,13 @@ export const heap = {
                 privacy_masking: true,
                 retention_policy: false,
                 screenshot_mode: false,
-                scrollmaps: false,
+                scrollmaps: true,
                 search_by_network: false,
-                share_replays: false,
-                single_page_app: false,
+                share_replays: true,
+                single_page_app: true,
                 target_by_feature_flag: false,
                 target_by_sample: true,
-                target_by_url: false,
+                target_by_url: true,
                 wireframe_mode: false,
             },
             export: {
@@ -116,15 +116,15 @@ export const heap = {
                 features: {
                     web_app_recordings: true,
                     mobile_app_recordings: true,
-                    ios_recordings: false,
-                    android_recordings: false,
-                    react_native_recordings: false,
-                    flutter_recordings: false,
+                    ios_recordings: true,
+                    android_recordings: true,
+                    react_native_recordings: true,
+                    flutter_recordings: true,
                 },
             },
             analysis: {
                 features: {
-                    heatmaps: false,
+                    heatmaps: true,
                     console_logs: false,
                     performance_monitoring: false,
                     network_monitor: false,
@@ -263,10 +263,11 @@ export const heap = {
             usage_based_pricing: true,
         },
         developer: {
-            api: false,
+            api: true,
             proxies: false,
-            sdks: false,
+            sdks: true,
             sql: false,
+            terraform: false,
         },
         tools: {
             cms: '',
@@ -275,16 +276,16 @@ export const heap = {
         },
         integrations: {
             ci_cd_integrations: false,
-            community_integrations: false,
+            community_integrations: true,
             datadog: false,
             email_reports: true,
             google_ads: false,
-            imports: false,
+            imports: true,
             microsoft_teams: false,
-            segment: false,
+            segment: true,
             sentry: false,
-            slack: false,
-            zapier: false,
+            slack: true,
+            zapier: true,
             zendesk: false,
         },
         security: {

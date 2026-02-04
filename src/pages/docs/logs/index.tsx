@@ -6,14 +6,12 @@ import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
-import LogsBetaSnippet from '../../../../contents/docs/logs/_snippets/beta.mdx'
 
 export const Content = () => {
     return (
         <>
             <section className="mb-8">
                 <h2 className="mb-4">Overview</h2>
-                <LogsBetaSnippet />
                 <div>
                     <p>
                         PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
@@ -76,10 +74,9 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
-                <p>Logs is currently in early alpha. While in alpha and beta, Logs is free to use.</p>
                 <p>
-                    After the beta, pricing will be based on GB/ingest. We will offer 30 days standard retention. You'll
-                    get 50GB ingest free each month, with discounts as your usage grows.
+                    Every month, the first 50GB is free. After that, pricing is $0.25 per GB up to 300GB ingested, then
+                    $0.15/GB for 300GB+. Have a look at our <Link to="/pricing">pricing page</Link> for more details.
                 </p>
             </section>
 
@@ -130,7 +127,7 @@ const Logs: React.FC = () => {
                         buttonText="Get started!"
                         buttonLink="/docs/logs/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie-logs-icon.png"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_logs_29cd8c8402.png"
                         imageClasses="max-h-48 md:max-h-64"
                     />
                 </section>

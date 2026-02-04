@@ -12,6 +12,7 @@ import {
     IconGraph,
     IconPlug,
     IconShuffle,
+    IconAI,
 } from '@posthog/icons'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
@@ -69,6 +70,15 @@ export default function CDP(): JSX.Element {
                 "A single-tenant DuckDB warehouse that's automatically filled with your PostHog data - and anything else you sync in.",
             perfectFor: 'data engineers and analysts',
             showWaitlist: true,
+        },
+        {
+            id: 'posthog-ai',
+            icon: 'IconAI',
+            title: 'PostHog AI',
+            url: '/data-stack/posthog-ai',
+            description:
+                "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+            perfectFor: 'product teams, data engineers, and analysts',
         },
         {
             id: 'data-import',
@@ -135,7 +145,7 @@ export default function CDP(): JSX.Element {
             <SEO
                 title="PostHog data stack"
                 updateWindowTitle={false}
-                description="Your modern data stack, powered by PostHog and built on DuckDB"
+                description="Your modern data stack, powered by PostHog AI and built on DuckDB"
                 image={`images/og/cdp.jpg`}
             />
             <ReaderView
@@ -152,7 +162,9 @@ export default function CDP(): JSX.Element {
                                 imgClassName="max-w-[542px] w-full mx-auto"
                             />
                             <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">
-                                Your modern data stack on <span className="line-through">quack</span> DuckDB
+                                Your modern data stack on <span className="line-through">quack</span> DuckDB,
+                                <br />
+                                fully wired with PostHog AI
                             </h2>
                         </>
                     ),
@@ -200,16 +212,16 @@ export default function CDP(): JSX.Element {
                     </Fieldset>
                 </div> */}
                 <h3>
-                    The most flexible integrated modern data stack – powered by PostHog, built on DuckDB, and designed
-                    to scale
+                    The most flexible modern data stack – built on DuckDB, designed to scale, and wired up with our
+                    omniscient AI
                 </h3>
 
                 <CallToAction to="https://app.posthog.com/signup" size="sm">
                     Get started - free
                 </CallToAction>
                 <p>
-                    Your data needs flexibility, tooling, and portability. We provide it all, in the most seamless data
-                    warehousing experience available.
+                    Your data needs flexibility, tooling, and actually-useful AI that's not stuck in a silo. We provide
+                    it all in a seamless data stack.
                 </p>
                 <p>
                     <span className="font-bold">Bring your own tools</span> like dbt and Hex to customize your
@@ -240,16 +252,36 @@ export default function CDP(): JSX.Element {
                     It's, quite literally, the best of both worlds.
                 </p>
 
-                <h3>You get the keys to the (data) castle</h3>
+                <h3>
+                    Fully wired with our{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">omnicient AI</span>
+                </h3>
                 <p>
-                    We give you the credentials to directly access your DuckDB data store for complete flexibility, so
-                    you can bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data
-                    modeling, and more so you can get started quickly.
+                    With all your data in one place, PostHog AI becomes truly omnicient about your business. Generate
+                    SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to
+                    work faster than ever before.
+                </p>
+                <p>
+                    And better yet - PostHog AI allows <span className="italic">everyone on your team</span> to work
+                    with your modeled data. Product teams can ask questions and get insights without relying on the data
+                    team, which means data teams can focus on more strategic work.
+                </p>
+
+                <h3>
+                    You get the{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
+                        keys to the (data) castle
+                    </span>
+                </h3>
+                <p>
+                    We give you the credentials to directly access your data store for complete flexibility, so you can
+                    bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data modeling,
+                    and more so you can get started quickly.
                 </p>
 
                 <ProductScreenshot
-                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_duckdb_stack_610acbe532.png"
-                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_duckdb_stack_610acbe532.png"
+                    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_20_T11_16_00_398_Z_eff184f271.png"
+                    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_12_20_T11_16_00_398_Z_eff184f271.png"
                     alt="Use our data stack tools or bring your own"
                     classes="rounded"
                     zoom={true}
@@ -269,6 +301,7 @@ export default function CDP(): JSX.Element {
                             IconArrowUpRight,
                             IconArrowRight,
                             IconGraph,
+                            IconAI,
                         }
                         const Icon = iconMap[product.icon]
 

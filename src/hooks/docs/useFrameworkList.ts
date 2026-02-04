@@ -6,7 +6,8 @@
  *
  * FRONTMATTER:
  * - title: Framework name (e.g., "Next.js")
- * - icon: URL to logo (e.g., "https://res.cloudinary.com/.../nextjs.svg")
+ * - platformLogo: Key from `src/constants/logos.ts` (e.g., "nextjs", "react")
+ * - platformIconName: Icon like "IconCode" (fallback if no logo)
  *
  * USAGE:
  * const frameworks = useFrameworkList()
@@ -14,11 +15,13 @@
 
 import { useStaticQuery, graphql } from 'gatsby'
 import { docsMenu } from '../../navs'
+import { getLogo } from '../../constants/logos'
 
 interface Framework {
     url: string
     label: string
     image?: string
+    icon?: string
 }
 
 /**
@@ -55,9 +58,8 @@ export default function useFrameworkList(): Framework[] {
                     slug
                     frontmatter {
                         title
-                        icon {
-                            publicURL
-                        }
+                        platformLogo
+                        platformIconName
                     }
                 }
             }
@@ -69,7 +71,9 @@ export default function useFrameworkList(): Framework[] {
 
     const result = allMdx.nodes
         .filter((node: any) => {
-            const url = `/${node.slug}`
+            // Remove trailing slash from slug if present (for index.mdx files in directories)
+            const normalizedSlug = node.slug.replace(/\/$/, '')
+            const url = `/${normalizedSlug}`
             return frameworkUrls.includes(url)
         })
         .map((node: any) => {
@@ -81,13 +85,21 @@ export default function useFrameworkList(): Framework[] {
                 label = howToMatch[1]
             }
 
+            // Remove trailing slash from slug if present (for index.mdx files in directories)
+            const normalizedSlug = node.slug.replace(/\/$/, '')
+
             const framework: Framework = {
                 label,
-                url: `/${node.slug}`,
+                url: `/${normalizedSlug}`,
             }
 
-            if (node.frontmatter.icon?.publicURL) {
-                framework.image = node.frontmatter.icon.publicURL
+            if (node.frontmatter.platformLogo) {
+                const logoUrl = getLogo(node.frontmatter.platformLogo)
+                if (logoUrl) {
+                    framework.image = logoUrl
+                }
+            } else if (node.frontmatter.platformIconName) {
+                framework.icon = node.frontmatter.platformIconName
             }
 
             return framework

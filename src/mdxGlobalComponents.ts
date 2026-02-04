@@ -11,7 +11,9 @@ import ProductComparisonTable from './components/ProductComparisonTable'
 import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { CalloutBox } from './components/Docs/CalloutBox'
+import { DecisionTree } from './components/Docs/DecisionTree'
 import { Step, Steps } from './components/Docs/Steps'
+import { ProductChangelog } from './components/Docs/ProductChangelog'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
@@ -40,6 +42,7 @@ export const shortcodes = {
     CalloutBox,
     Caption,
     ComparisonTable,
+    DecisionTree,
     ProductComparisonTable,
     Snippet,
     CompensationCalculator,
@@ -54,6 +57,7 @@ export const shortcodes = {
     OSButton,
     Link,
     PrivateLink,
+    ProductChangelog,
     ProductScreenshot,
     ProductVideo,
     StarRepoButton,

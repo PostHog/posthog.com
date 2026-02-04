@@ -61,7 +61,8 @@ Once made, they should share their decision in #tell-posthog-anything and the re
 
 ### What if I want to move teams?
 
-Talk to your line manager. This process exists purely for making larger changes to existing teams, or forming new ones, that impact multiple people.
+This process exists purely for making larger changes to existing teams, or forming new ones, that impact multiple people. If you are personally looking to change team, see the [small teams handbook page](/handbook/company/small-teams#can-people-change-teams).
+
 
 ### What happens after a decision is made?
 

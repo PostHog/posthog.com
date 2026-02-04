@@ -694,6 +694,7 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
+                            'posthog_ai',
                             'session_replay',
                             'web_analytics',
                             'product_analytics',
@@ -701,8 +702,9 @@ const CompanyStageTabs = () => {
                             'experiments',
                             'feature_flags',
                             'surveys',
-                            'dashboards',
+                            'logs',
                             'cdp',
+                            'workflows_emails',
                         ]}
                     />
                 </div>

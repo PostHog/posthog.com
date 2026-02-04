@@ -30,7 +30,7 @@ export default function Startups() {
                     />
                 </div>
 
-                <p className="font-semibold mb-1 opacity-75">Startup program</p>
+                <p className="font-semibold mb-1 opacity-75">The PostHog startup program</p>
                 <h3 className="text-3xl">
                     Get to product market-fit with the{' '}
                     <span className="text-red dark:text-yellow">most popular analytics toolkit</span> used by YC
