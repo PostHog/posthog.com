@@ -24,6 +24,8 @@ import ObtainFeatureFlagsSecureAPIKey from "../../integrate/_snippets/obtain-fla
 
 <ObtainFeatureFlagsSecureAPIKey />
 
+> **Tip:** You can also create and manage project secret API keys with custom labels and scopes in [Project settings](https://us.posthog.com/settings/project) under the "Project Secret API Keys" section. These keys work the same way for local evaluation as long as they have the `feature_flag:read` scope.
+
 ## Step 2: Initialize PostHog with your feature flags secure API key
 
 When you initialize PostHog with your feature flags secure API key, PostHog will use the key to automatically fetch feature flag definitions. These definitions are then used to evaluate feature flags locally.
