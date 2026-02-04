@@ -12,6 +12,7 @@ export const LOGOS = {
     angular:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg',
     astro: 'https://res.cloudinary.com/dmukukwp6/image/upload/astro_icon_dark_23a13977ad.svg',
+    attio: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T13_32_15_602_Z_3d36e826ca.png',
     azureBlob: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_blob_storage_a5110351f6.svg',
     azureSql: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
     bigquery: 'https://res.cloudinary.com/dmukukwp6/image/upload/bigquery_8546771248.svg',
