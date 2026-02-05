@@ -63,6 +63,12 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         const targetElement = element.current.querySelector(`#${CSS.escape(id)}`)
         if (!targetElement) return
 
+        // Check for Radix ScrollArea container
+        const scrollViewport = element.current.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        // Only use viewport as root if it exists AND is actually scrollable
+        // In website mode, the viewport exists but doesn't scroll (pages are full height)
+        const viewportIsScrollable = scrollViewport && scrollViewport.scrollHeight > scrollViewport.clientHeight
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -74,7 +80,7 @@ export default function ElementScrollLink({ id, label, element, className = '', 
                 })
             },
             {
-                root: element.current.closest('[data-radix-scroll-area-viewport]'),
+                root: viewportIsScrollable ? scrollViewport : null,
                 threshold: [0, 0.1],
             }
         )
@@ -85,16 +91,28 @@ export default function ElementScrollLink({ id, label, element, className = '', 
     const handleClick = () => {
         if (!element.current) return
 
-        const scrollViewport = element.current.closest('[data-radix-scroll-area-viewport]')
-        const scrollParent = scrollViewport || element.current
-
         const targetElement = element.current.querySelector(`#${CSS.escape(id)}`)
-        if (targetElement && scrollParent) {
-            const parentRect = scrollParent.getBoundingClientRect()
+        if (!targetElement) return
+
+        // Check for Radix ScrollArea container
+        const scrollViewport = element.current.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        // Only use viewport scrolling if it exists AND is actually scrollable
+        // In website mode, the viewport exists but doesn't scroll (pages are full height)
+        const viewportIsScrollable = scrollViewport && scrollViewport.scrollHeight > scrollViewport.clientHeight
+
+        if (viewportIsScrollable) {
+            const parentRect = scrollViewport.getBoundingClientRect()
             const targetRect = targetElement.getBoundingClientRect()
-            const relativeTop = targetRect.top - parentRect.top + scrollParent.scrollTop
-            scrollParent.scrollTo({
+            const relativeTop = targetRect.top - parentRect.top + scrollViewport.scrollTop
+            scrollViewport.scrollTo({
                 top: relativeTop,
+                behavior: 'smooth',
+            })
+        } else {
+            // Standard window scrolling fallback (used in website mode or when no viewport exists)
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset
+            window.scrollTo({
+                top: targetPosition,
                 behavior: 'smooth',
             })
         }

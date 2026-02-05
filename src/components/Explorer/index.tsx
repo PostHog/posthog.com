@@ -234,7 +234,9 @@ export default function Explorer({
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className="@3xl:w-64 bg-primary border-t @md:border-t-0 @md:border-r border-primary h-full prose prose-sm dark:prose-invert"
+                            className={`@3xl:w-64 bg-primary border-t @md:border-t-0 h-full prose prose-sm dark:prose-invert ${
+                                websiteMode ? '' : '@md:border-r border-primary'
+                            }`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">

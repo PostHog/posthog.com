@@ -268,7 +268,7 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const { addWindow, openSearch } = useApp()
+    const { addWindow, openSearch, websiteMode } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -363,9 +363,13 @@ export default function Inbox(props) {
     }, [isValidating, props.path])
 
     useEffect(() => {
-        const sideBySide = localStorage.getItem('sideBySide')
-        if (sideBySide) {
-            setSideBySide(sideBySide === 'true')
+        if (websiteMode) {
+            setSideBySide(true)
+        } else {
+            const sideBySide = localStorage.getItem('sideBySide')
+            if (sideBySide) {
+                setSideBySide(sideBySide === 'true')
+            }
         }
     }, [])
 
@@ -381,12 +385,10 @@ export default function Inbox(props) {
     }, [sideBySide])
 
     useEffect(() => {
-        if (isMobile && sideBySide && containerRef.current) {
+        if (websiteMode || (isMobile && sideBySide && containerRef.current)) {
             setSideWidth(containerRef.current.getBoundingClientRect().width)
         }
-    }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width])
-
-    const { websiteMode } = useApp()
+    }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width, websiteMode])
 
     return (
         <>
@@ -394,15 +396,18 @@ export default function Inbox(props) {
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
                     <HeaderBar
-                        homeURL="/questions"
-                        showBack
-                        showForward
+                        homeURL={websiteMode ? undefined : '/questions'}
+                        showBack={!websiteMode}
+                        showForward={!websiteMode}
                         showSearch
+                        showCustomLeft={websiteMode ? <h2 className="text-primary">Forums</h2> : undefined}
+                        className={websiteMode ? 'border-b border-primary sticky top-[49px] z-20 bg-primary' : ''}
                         rightActionButtons={
                             <div className="flex items-center gap-2 flex-wrap">
                                 <OSButton icon={<IconSearch />} onClick={() => openSearch('question')} />
                                 <CallToAction
                                     size="sm"
+                                    type={websiteMode ? 'secondary' : 'primary'}
                                     onClick={() =>
                                         addWindow(
                                             <AskAQuestion
@@ -416,7 +421,7 @@ export default function Inbox(props) {
                                 >
                                     Ask a question
                                 </CallToAction>
-                                {permalink ? (
+                                {permalink && !websiteMode ? (
                                     <ToggleGroup
                                         title="Layout"
                                         hideTitle={true}
@@ -439,7 +444,9 @@ export default function Inbox(props) {
                         <aside
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary @2xl:h-full flex-shrink-0 ${
-                                websiteMode ? 'rounded' : '@2xl:border-r border-primary'
+                                websiteMode
+                                    ? 'rounded h-[calc(100vh-91px)] sticky top-[99px]'
+                                    : '@2xl:border-r border-primary'
                             }`}
                         >
                             <ScrollArea className="h-full">
@@ -454,74 +461,80 @@ export default function Inbox(props) {
                                 ref={containerRef}
                                 className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}
                             >
-                                <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
-                                    <ScrollArea className="h-full">
-                                        <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
-                                            <div className="w-8 shrink-0 @3xl:block hidden" />
-                                            <div className="hidden @3xl:block w-48">Author</div>
-                                            <div className="flex-1">
-                                                <span className="@3xl:hidden">Author / Replies</span>
-                                                <span className="hidden @3xl:block">Subject</span>
+                                {permalink && websiteMode ? null : (
+                                    <div
+                                        className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}
+                                    >
+                                        <ScrollArea className="h-full">
+                                            <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
+                                                <div className="w-8 shrink-0 @3xl:block hidden" />
+                                                <div className="hidden @3xl:block w-48">Author</div>
+                                                <div className="flex-1">
+                                                    <span className="@3xl:hidden">Author / Replies</span>
+                                                    <span className="hidden @3xl:block">Subject</span>
+                                                </div>
+                                                <div className="hidden @3xl:block w-24 text-center">Replies</div>
+                                                <div className="w-60 text-right @3xl:text-left">Last activity</div>
                                             </div>
-                                            <div className="hidden @3xl:block w-24 text-center">Replies</div>
-                                            <div className="w-60 text-right @3xl:text-left">Last activity</div>
-                                        </div>
-                                        <div className="px-1 py-1 space-y-px">
-                                            {pinnedQuestions?.map((question) => (
-                                                <QuestionRow
-                                                    key={question.id}
-                                                    question={question}
-                                                    lastQuestionRef={lastQuestionRef}
-                                                    appWindowPath={appWindow?.path}
-                                                    bottomHeight={bottomHeight}
-                                                    setBottomHeight={setBottomHeight}
-                                                    containerRef={containerRef}
-                                                    pinned
-                                                />
-                                            ))}
-                                            {(showSubscribedQuestions
-                                                ? subscribedQuestions
-                                                : flattenStrapiResponse(questions.data)?.filter(
-                                                      (question) => !question?.pinnedTopics?.[0]
-                                                  )
-                                            )?.map((question) => (
-                                                <QuestionRow
-                                                    key={question.id}
-                                                    question={question}
-                                                    lastQuestionRef={lastQuestionRef}
-                                                    appWindowPath={appWindow?.path}
-                                                    bottomHeight={bottomHeight}
-                                                    setBottomHeight={setBottomHeight}
-                                                    containerRef={containerRef}
-                                                />
-                                            ))}
-                                            {!isLoading && (!questions.data || questions.data.length === 0) && (
-                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
-                                                    <div className="text-lg mb-2 font-semibold">No questions found</div>
-                                                    <div className="text-secondary text-sm">
-                                                        {props.path === '/questions/subscriptions'
-                                                            ? "You haven't subscribed to any questions yet."
-                                                            : 'There are no questions in this topic yet.'}
+                                            <div className="px-1 py-1 space-y-px">
+                                                {pinnedQuestions?.map((question) => (
+                                                    <QuestionRow
+                                                        key={question.id}
+                                                        question={question}
+                                                        lastQuestionRef={lastQuestionRef}
+                                                        appWindowPath={appWindow?.path}
+                                                        bottomHeight={bottomHeight}
+                                                        setBottomHeight={setBottomHeight}
+                                                        containerRef={containerRef}
+                                                        pinned
+                                                    />
+                                                ))}
+                                                {(showSubscribedQuestions
+                                                    ? subscribedQuestions
+                                                    : flattenStrapiResponse(questions.data)?.filter(
+                                                          (question) => !question?.pinnedTopics?.[0]
+                                                      )
+                                                )?.map((question) => (
+                                                    <QuestionRow
+                                                        key={question.id}
+                                                        question={question}
+                                                        lastQuestionRef={lastQuestionRef}
+                                                        appWindowPath={appWindow?.path}
+                                                        bottomHeight={bottomHeight}
+                                                        setBottomHeight={setBottomHeight}
+                                                        containerRef={containerRef}
+                                                    />
+                                                ))}
+                                                {!isLoading && (!questions.data || questions.data.length === 0) && (
+                                                    <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
+                                                        <div className="text-lg mb-2 font-semibold">
+                                                            No questions found
+                                                        </div>
+                                                        <div className="text-secondary text-sm">
+                                                            {props.path === '/questions/subscriptions'
+                                                                ? "You haven't subscribed to any questions yet."
+                                                                : 'There are no questions in this topic yet.'}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )}
-                                            {isLoading && (
-                                                <div className="flex items-center justify-center py-8 h-full">
-                                                    <Lottie
-                                                        animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75 dark:hidden"
-                                                        title="Loading questions..."
-                                                    />
-                                                    <Lottie
-                                                        animationData={hourglassAnimationWhite}
-                                                        className="size-6 opacity-75 hidden dark:block"
-                                                        title="Loading questions..."
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </ScrollArea>
-                                </div>
+                                                )}
+                                                {isLoading && (
+                                                    <div className="flex items-center justify-center py-8 h-full">
+                                                        <Lottie
+                                                            animationData={hourglassAnimation}
+                                                            className="size-6 opacity-75 dark:hidden"
+                                                            title="Loading questions..."
+                                                        />
+                                                        <Lottie
+                                                            animationData={hourglassAnimationWhite}
+                                                            className="size-6 opacity-75 hidden dark:block"
+                                                            title="Loading questions..."
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </ScrollArea>
+                                    </div>
+                                )}
                                 <AnimatePresence>
                                     {permalink && (
                                         <motion.div
@@ -541,10 +554,11 @@ export default function Inbox(props) {
                                             }}
                                             transition={{
                                                 type: 'tween',
+                                                ...(websiteMode ? { duration: 0 } : {}),
                                                 ...(isDragging ? { duration: 0 } : {}),
                                             }}
                                         >
-                                            {sideBySide ? (
+                                            {websiteMode ? null : sideBySide ? (
                                                 <motion.div
                                                     data-scheme="tertiary"
                                                     className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent @4xl:block hidden"
@@ -635,41 +649,43 @@ export default function Inbox(props) {
                                                         />
                                                     )}
 
-                                                    <div className="ml-1 pl-1 border-l border-primary">
-                                                        <Tooltip
-                                                            trigger={
-                                                                <span>
-                                                                    <OSButton
-                                                                        size="sm"
-                                                                        className="relative"
-                                                                        style={{ width: 26, height: 26 }}
-                                                                        icon={
-                                                                            <IconChevronDown
-                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                    sideBySide
-                                                                                        ? expandable
-                                                                                            ? 'rotate-90'
-                                                                                            : '-rotate-90'
-                                                                                        : expandable
-                                                                                        ? 'rotate-180'
-                                                                                        : ''
-                                                                                }`}
-                                                                            />
-                                                                        }
-                                                                        onClick={() => {
-                                                                            if (isMobile && sideBySide) {
-                                                                                navigate(menuValue)
-                                                                            } else {
-                                                                                expandOrCollapse(expandable)
+                                                    {!websiteMode && (
+                                                        <div className="ml-1 pl-1 border-l border-primary">
+                                                            <Tooltip
+                                                                trigger={
+                                                                    <span>
+                                                                        <OSButton
+                                                                            size="sm"
+                                                                            className="relative"
+                                                                            style={{ width: 26, height: 26 }}
+                                                                            icon={
+                                                                                <IconChevronDown
+                                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                                                        sideBySide
+                                                                                            ? expandable
+                                                                                                ? 'rotate-90'
+                                                                                                : '-rotate-90'
+                                                                                            : expandable
+                                                                                            ? 'rotate-180'
+                                                                                            : ''
+                                                                                    }`}
+                                                                                />
                                                                             }
-                                                                        }}
-                                                                    />
-                                                                </span>
-                                                            }
-                                                        >
-                                                            {expandable ? 'Expand' : 'Collapse'}
-                                                        </Tooltip>
-                                                    </div>
+                                                                            onClick={() => {
+                                                                                if (isMobile && sideBySide) {
+                                                                                    navigate(menuValue)
+                                                                                } else {
+                                                                                    expandOrCollapse(expandable)
+                                                                                }
+                                                                            }}
+                                                                        />
+                                                                    </span>
+                                                                }
+                                                            >
+                                                                {expandable ? 'Expand' : 'Collapse'}
+                                                            </Tooltip>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                             <ScrollArea>

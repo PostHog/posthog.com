@@ -2091,6 +2091,32 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    // In website mode, sync window sizes to browser viewport on resize
+    useEffect(() => {
+        if (!websiteMode || isSSR) return
+
+        const handleResize = () => {
+            const newWidth = window.innerWidth
+            const newHeight = window.innerHeight - taskbarHeight
+
+            setWindows((currentWindows) =>
+                currentWindows.map((w) => ({
+                    ...w,
+                    size: {
+                        width: newWidth,
+                        height: newHeight,
+                    },
+                }))
+            )
+        }
+
+        // Set initial size
+        handleResize()
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [websiteMode, taskbarHeight, isSSR])
+
     useEffect(() => {
         if (compact) {
             // nosemgrep: javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration - intentional for docs embedding, parent origin unknown, non-sensitive ready signal

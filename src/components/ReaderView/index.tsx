@@ -299,38 +299,6 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                <div className="@4xl/app-reader:hidden mb-4">
-                    <Accordion
-                        items={[
-                            {
-                                value: 'table-of-contents',
-                                trigger: title,
-                                content: (
-                                    <ul className="list-none m-0 p-0 flex flex-col">
-                                        {tableOfContents.map((navItem) => {
-                                            return (
-                                                <li className="relative leading-none m-0" key={navItem.url}>
-                                                    <ElementScrollLink
-                                                        id={navItem.url}
-                                                        label={navItem.value}
-                                                        className="hover:underline"
-                                                        element={contentRef}
-                                                        style={{
-                                                            paddingLeft: `${navItem.depth || 0}rem`,
-                                                        }}
-                                                    />
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                ),
-                            },
-                        ]}
-                        defaultValue="table-of-contents"
-                        skin={true}
-                        dataScheme="secondary"
-                    />
-                </div>
                 <div className="hidden @4xl/app-reader:block">
                     {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
                     <ul className="list-none m-0 p-0 flex flex-col">
@@ -481,9 +449,13 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     {/* Sidebar - overlay on mobile, normal flow on desktop */}
                     <motion.div
                         id="nav"
-                        className="flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
+                        className={`flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
                                    fixed left-2 top-[47px] bottom-16 z-50 
-                                   @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
+                                   @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto ${
+                                       websiteMode
+                                           ? '2xl/app-reader:sticky 2xl/app-reader:top-[48px] 2xl/app-reader:self-start 2xl/app-reader:h-[calc(100vh-48px)]'
+                                           : ''
+                                   }`}
                         initial={{
                             width: '250px',
                             x: isNavVisible ? 0 : -250, // Start off-screen on mobile
@@ -886,7 +858,9 @@ function ReaderViewContent({
                         {showSidebar && isTocVisible && (
                             <motion.div
                                 id="toc"
-                                className="hidden @4xl/app-reader:block flex-shrink-0 overflow-hidden"
+                                className={`${
+                                    websiteMode ? 'sticky top-16 self-start' : 'overflow-hidden'
+                                } @4xl/app-reader:block flex-shrink-0`}
                                 initial={{ width: 250 }}
                                 animate={{
                                     width: 250,
