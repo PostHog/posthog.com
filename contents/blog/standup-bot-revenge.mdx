@@ -22,9 +22,11 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 ![The standup bot, taunting me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/standup_bot_taunt_b24351e046.png)
 
-There it is. Sitting there. Goading me.
+There it is. Starign at me. Sitting there. Goading me.
 
-The day is nearly done. I've done loads. I've reviewed PRs, fixed bugs, attended meetings, and somehow survived another day of being a software engineer. And now I'm expected to fill in some stupid Slack thread with my standup updates?
+The day is nearly done. I've reviewed PRs, fixed bugs, hopped on quick calls, commanded my agents and smashed that accept button all day!
+
+And now I'm expected to fill in some stupid Slack thread with my standup updates?
 
 I'm too good for this. I don't need this corporate nonsense. I'm gonna stick it to the man. I'm not gonna play their silly little games.
 
@@ -36,9 +38,7 @@ OK standup bot, you want a standup update? No problem my friend. You just wait..
 
 Every time I manually copy-paste into our standup thread, a little part of me dies inside.
 
-We just passed the Turing test and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, trying to remember what I actually did today (was that bug fix today or yesterday?), and formatting it all nicely so I don't look like a complete animal.
-
-Meanwhile, AI can write poetry, generate photorealistic images, and beat grandmasters at chess. But I'm still doing data entry for my own work history. THE ROBOTS HAVE ALL THE DATA. Why am I the messenger?
+We just passed the Turing test and here I am copy-pasting GitHub issue URLs into a Slack thread like it's 2010. I'm pulling up tabs, hunting for PR links, navigating all over GitHub, trying to remember what I (my agents) actually did today, and formatting it all nicely in slack.
 
 After a few months of this, I snapped.
 
@@ -46,12 +46,14 @@ I work on LLM analytics at PostHog. I spend my days helping people understand wh
 
 The irony was too much. I decided to build my own agent to beat the standup bot at its own game.
 
+It helps too that this was also the perfect excuse to learn about and play around a little with the OpenAI Agents SDK.
+
 ## The plan
 
 The idea was simple:
 
-1. Build an AI agent that reads my GitHub activity
-2. Have it draft a sensible standup summary
+1. Build an AI agent that reads my GitHub activity and previous recent standups for context
+2. Have it draft a sensible standup summary in the style I want
 3. Chat with it to refine the draft
 4. Post directly to Slack
 
@@ -61,57 +63,76 @@ And because I'm a shameless dogfooder, this was the perfect excuse to:
 - Build instrumentation for it in [posthog-python](https://github.com/PostHog/posthog-python)
 - Create something I can actually use every day
 - Write this very blog post
+- But most importantly, use AI even if it actually sometimes takes me longer each day than it did before.
 
 Let me show you how it all works.
 
 <CalloutBox icon="IconBolt" title="🔥 Hot take" type="action">
 
-**Agents are the new scripts.** We used to write bash scripts and cron jobs to automate tedious tasks. Now we write agents. Same energy, better vibes. The difference? Scripts follow rigid rules; agents figure out what you actually meant.
+**Agents are the new scripts.** We used to write bash scripts and cron jobs to automate tedious tasks. Now we write agents. Scripts follow rigid rules; agents are more flexible and often thats worth it.
 
 </CalloutBox>
 
-## The architecture: three agents enter, one standup leaves
+## The architecture: one agent to rule them all
 
-I could have built this as a single agent with a bunch of tools. But where's the fun in that? Instead, I went full multi-agent with a **coordinator** that orchestrates two specialized sub-agents:
+I started by sketching out a multi-agent system - a coordinator, a data gatherer, a summarizer - but quickly realized: why complicate things? One agent with the right tools can handle the entire workflow. Gather data, summarize it, refine it, post it. No handoffs, no routing logic, no coordination overhead.
 
-{/*TODO: Add architecture diagram here showing Coordinator → Data Gatherer + Summarizer*/}
+The agent has various tools organized by what they do:
 
-### The Coordinator (temperature: 0.5)
+- **GitHub overview** - activity feed and summary stats
+- **GitHub lists** - PRs, issues, commits, reviews, comments (all with date filters)
+- **GitHub details** - drill into specific PRs or issues
+- **Slack** - fetch team standups, publish, confirm before posting
+- **Utilities** - clipboard, file save
+- **Feedback** - capture quality ratings and comments
 
-The boss. It handles your requests, decides what data to gather, and manages the whole workflow. When you say "generate my standup," it kicks things off.
-
-### The Data Gatherer (temperature: 0.3)
-
-The detective. Low temperature because we want deterministic, thorough data collection. This agent has access to 8+ GitHub tools and knows how to find everything you did:
-
-- Activity feed (commits, PRs, issues, reviews)
-- PR details (descriptions, reviews, CI status)
-- Issue details (linked PRs, labels, milestones)
-- Reviews you gave and received
-- Commits across repos
-
-### The Summarizer (temperature: 0.7)
-
-The wordsmith. Higher temperature for more natural, varied language. Takes all that raw GitHub data and turns it into a human-readable standup that doesn't sound like it was written by a robot.
-
-The magic is in how they work together. Instead of using traditional agent handoffs, I use the **agents-as-tools pattern**:
+Here's the actual agent definition:
 
 ```python
-# Sub-agents are exposed as tools to the coordinator
-coordinator_tools = [
-    data_gatherer.as_tool(
-        tool_name="gather_github_data",
-        tool_description="Gather GitHub activity data (PRs, issues, commits, reviews)",
-    ),
-    summarizer.as_tool(
-        tool_name="create_standup_summary",
-        tool_description="Create a formatted standup summary from gathered data",
-    ),
-    # ... other tools
-]
+def create_standup_agent(
+    model: str = DEFAULT_MODEL,
+    hooks: AgentHooks[StandupContext] | None = None,
+    style_instructions: str | None = None,
+) -> Agent[StandupContext]:
+    instructions = _make_dynamic_instructions(style_instructions)
+
+    return Agent[StandupContext](
+        name="Standup Agent",
+        instructions=instructions,
+        tools=[
+            # GitHub overview tools
+            get_activity_feed,
+            get_activity_summary,
+            # GitHub list tools (with date filters)
+            list_prs,
+            list_issues,
+            list_commits,
+            list_reviews,
+            list_comments,
+            # GitHub assigned items (no date filter)
+            list_assigned_items,
+            # GitHub detail tools
+            get_pr_details,
+            get_issue_details,
+            # Slack tools
+            get_team_slack_standups,
+            publish_standup_to_slack,
+            confirm_slack_publish,
+            set_slack_thread,
+            # Utility tools
+            copy_to_clipboard,
+            save_standup_to_file,
+            # Feedback tools
+            capture_feedback_rating,
+            capture_feedback_text,
+        ],
+        model=model,
+        model_settings=ModelSettings(),
+        hooks=hooks,
+    )
 ```
 
-This gives the coordinator explicit control over the workflow. It can gather data, summarize, then gather more data if something's missing, all while sharing context through a `StandupContext` object that stays out of the LLM's token budget.
+The agent uses **dynamic instructions** that inject the current standup draft, so each refinement iteration has full context without blowing the token budget. A `StandupContext` object tracks collected data across tool calls without stuffing it all into the prompt.
 
 ## Stealing my own GitHub activity
 
@@ -186,7 +207,7 @@ Every agent run creates a trace with spans for:
 - **Tool calls** - what tools were called, with what arguments, and what they returned
 - **LLM generations** - prompts, completions, token usage, and latency
 
-I can see exactly how my coordinator decided to call the data gatherer, what GitHub tools it used, and how the summarizer turned that data into prose.
+I can see exactly how the agent decided which tools to call, what data it gathered, and how it turned all of that into prose.
 
 ![Trace view showing the full agent workflow](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trace_view_ecd9c7e1ce.png)
 
@@ -285,81 +306,70 @@ Let me show you what this actually looks like in practice. Here's my actual stan
 ```
 $ standup chat
 
-You: lets draft a standup for today
+You: lets make a standup for today
 
-Agent [Standup Coordinator] starting...
-  Tool: gather_github_data(...)
-  Tool: get_recent_standups(days=3)...
-
-Agent [Data Gatherer] starting...
+Agent [Standup Agent] starting...
   Tool: get_activity_feed(days_back=1)...
   Tool: get_activity_summary(days_back=1)...
-  Tool: list_prs(filter_by='involves', username='andrewm4894', ...)...
-  Tool: list_issues(...)...
-  Tool: list_commits(...)...
-  Tool: list_reviews(filter_by='given', ...)...
-  Tool: list_reviews(filter_by='received', ...)...
   Tool: get_team_slack_standups(days_back=4)...
+  Tool: list_prs(filter_by='authored', username='andrewm4894', state='all', days_back=1)...
+  Tool: list_reviews(filter_by='given', username='andrewm4894', days_back=1)...
+  Tool: list_comments(username='andrewm4894', days_back=1)...
+  Tool: list_issues(filter_by='assigned', username='andrewm4894', state='all', days_back=1)...
 ```
 
-The Data Gatherer fires off a bunch of parallel tool calls to collect everything I did. It found 83 GitHub events, 28 PRs I was involved with, 12 issues, 20 commits, and even pulled in recent standups from the team Slack channel for context.
+The agent fires off 7 parallel tool calls to collect everything I did. It found 84 GitHub events, 31 PRs I was involved with, 17 reviews given, and even pulled in recent standups from the team Slack channel for context.
 
 Then it drills down into specific PRs that look important:
 
 ```
-  Tool: get_pr_details(repo='PostHog/posthog', number=45650, ...)...
-  Tool: get_pr_details(repo='PostHog/posthog', number=45603, ...)...
-  Tool: get_pr_details(repo='PostHog/posthog', number=45716, ...)...
-
-Agent [Summarizer] starting...
-Agent [Summarizer] finished
+  Tool: get_pr_details(repo='PostHog/posthog', number=46825)...
+  Tool: get_pr_details(repo='PostHog/posthog', number=46793)...
+  Tool: get_pr_details(repo='PostHog/posthog', number=46820)...
+Agent [Standup Agent] finished
 ```
 
 And out comes a draft standup. But here's where it gets fun - I can iterate on it naturally:
 
 ```
-You: remove the ask, dont need it
+You: add a will do to talk to infra and data stack teams about the ml
+     research platform rfc (sagemaker)
 
-Agent [Standup Coordinator] starting...
-  Tool: create_standup_summary(input='Refinement request: remove the ask section...')...
-
-Agent [Summarizer] finished
+Agent [Standup Agent] starting...
+Agent [Standup Agent] finished
 ```
 
-The agent understood "remove the ask" and updated the standup. Then I remembered a PR I needed to follow up on:
+The agent understood my vague instruction and added a "Will do" bullet about syncing with infra + data stack teams on the ML research platform RFC. No tool calls needed - it already had the context from the initial data gathering and just updated the draft using its dynamic instructions.
+
+I kept iterating:
 
 ```
-You: add a will do for following up on the posthog-js review pr
-     i assigned myself - see if you can find it - related to openai sanitizing
+You: add a did about adding ai_product breakout to dashboard in llm project 2
 
-Agent [Data Gatherer] starting...
-  Tool: list_prs(filter_by='assigned', username='andrewm4894', ...)...
-  Tool: list_prs(filter_by='review-requested', ...)...
-  Tool: get_pr_details(repo='PostHog/posthog-js', number=2510, ...)...
-
-Agent [Data Gatherer] finished
+Agent [Standup Agent] starting...
+Agent [Standup Agent] finished
 ```
 
-I gave it a vague description and it *found the PR* by searching my assigned PRs and matching it to my description. That's the magic of having an agent with access to your actual GitHub data.
+Each refinement is instant because the current standup draft is injected into the agent's instructions. It's not re-fetching data, it's just editing prose. That's the beauty of having one agent that holds all the context.
 
 ### The inferred feedback (this is the cool part)
 
 When I was happy with the result, I said:
 
 ```
-You: sweet! good job today my man, lets post this puppy to slack
+You: ok great, lets publish to slack
 ```
 
 Watch what happens next:
 
 ```
-Agent [Standup Coordinator] starting...
+Agent [Standup Agent] starting...
   Tool: capture_feedback_rating(rating='good',
-        comment='User said: "sweet! good job today my man"')...
+        comment='User happy with updated standup and wants to publish to Slack.')...
   Tool: publish_standup_to_slack(confirmed=False)...
 ```
 
-The agent **automatically inferred positive feedback** from my casual message and logged it! I didn't have to explicitly say "thumbs up" - it picked up on "sweet! good job today my man" and captured that as a quality signal.
+The agent **automatically inferred positive feedback** from my casual message and logged it! I didn't have to explicitly say "thumbs up" - it picked up on "ok great" and captured that as a quality signal.
 
 This feedback gets linked to the trace in PostHog, so over time I'm building a dataset of what makes a good standup vs a bad one. That's the foundation for real evals.
 
@@ -368,14 +378,14 @@ This feedback gets linked to the trace in PostHog, so over time I'm building a d
 The agent showed me a preview and asked for confirmation:
 
 ```
-Assistant: Captured the feedback — thanks.
+Assistant: Captured the positive feedback — thanks.
 
-Slack preview is ready (channel #team-llm-analytics, thread 1769094010.048539).
-Reply with "yes, publish to slack" (or "confirm publish") and I'll post it.
+Slack preview is ready (channel #team-llm-analytics, thread 1770217207.394779).
+Reply "yes, publish to slack" (or "confirm publish") and I'll post it.
 
-You: hell yeah we win! letsgoooo!
+You: yes
 
-Agent [Standup Coordinator] starting...
+Agent [Standup Agent] starting...
   Tool: confirm_slack_publish()...
   Tool: publish_standup_to_slack(confirmed=True)...
 ```
@@ -435,7 +445,7 @@ Will Do:
 - follow up on support tickets I'm assigned
 ```
 
-The summarizer uses these files to match your team's exact format, tone, and level of detail. It'll even pick up on quirks like how you reference PRs, whether you use Slack-style links, and what sections you include. No more standups that sound like a robot wrote them.
+The agent uses these files to match your team's exact format, tone, and level of detail. It'll even pick up on quirks like how you reference PRs, whether you use Slack-style links, and what sections you include. No more standups that sound like a robot wrote them.
 
 ### Output guardrails
 
