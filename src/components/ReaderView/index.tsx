@@ -462,6 +462,7 @@ const Menu = (props: { parent: MenuItem }) => {
 }
 
 const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
+    const { websiteMode } = useApp()
     const { isNavVisible, toggleNav } = useReaderView()
 
     return (
@@ -499,7 +500,9 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                         }}
                     >
                         <motion.div
-                            className="h-full bg-primary rounded @2xl/app-reader:rounded-none pt-4 @2xl/app-reader:pt-0"
+                            className={`h-full rounded @2xl/app-reader:rounded-none pt-4  ${
+                                websiteMode ? '' : 'bg-primary @2xl/app-reader:pt-0'
+                            }`}
                             initial={{ opacity: 1 }}
                             animate={{
                                 opacity: 1,
@@ -510,7 +513,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                 transition: { duration: 0.05 },
                             }}
                         >
-                            <ScrollArea className="px-4">{children}</ScrollArea>
+                            <ScrollArea className={websiteMode ? '' : 'px-4'}>{children}</ScrollArea>
                         </motion.div>
                     </motion.div>
                 </>
@@ -547,7 +550,7 @@ function ReaderViewContent({
     showAbout = false,
     sourceInstanceName,
 }) {
-    const { openNewChat, compact } = useApp()
+    const { openNewChat, compact, websiteMode } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
@@ -626,37 +629,53 @@ function ReaderViewContent({
 
     return (
         <SearchProvider>
-            <div className="@container/app-reader w-full h-full flex flex-col">
+            <div
+                data-scheme="secondary"
+                className={`@container/app-reader w-full h-full flex flex-col transition-all duration-300 ${
+                    websiteMode ? 'max-w-7xl mx-auto' : 'max-w-full'
+                }`}
+            >
                 {/* <DebugContainerQuery /> */}
                 {/* First row - Header */}
-                <HeaderBar
-                    isNavVisible={isNavVisible}
-                    isTocVisible={isTocVisible}
-                    onToggleNav={toggleNav}
-                    onToggleToc={toggleToc}
-                    showBack
-                    showForward
-                    showSearch
-                    showToc
-                    showSidebar={showSidebar}
-                    hasLeftSidebar={renderLeftSidebar}
-                    searchContentRef={contentRef}
-                    homeURL={homeURL}
-                    bookmark={{
-                        title,
-                        description,
-                    }}
-                    rightActionButtons={rightActionButtons}
-                    isEditing={isEditing}
-                    onSearch={onSearch}
-                />
+                {!websiteMode && (
+                    <HeaderBar
+                        isNavVisible={isNavVisible}
+                        isTocVisible={isTocVisible}
+                        onToggleNav={toggleNav}
+                        onToggleToc={toggleToc}
+                        showBack
+                        showForward
+                        showSearch
+                        showToc
+                        showSidebar={showSidebar}
+                        hasLeftSidebar={renderLeftSidebar}
+                        searchContentRef={contentRef}
+                        homeURL={homeURL}
+                        bookmark={{
+                            title,
+                            description,
+                        }}
+                        rightActionButtons={rightActionButtons}
+                        isEditing={isEditing}
+                        onSearch={onSearch}
+                    />
+                )}
                 {/* Second row - Main Content */}
-                <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
+                <div
+                    data-scheme="secondary"
+                    className={`flex w-full gap-2 min-h-0 flex-grow ${websiteMode ? '' : 'bg-primary'}`}
+                >
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
-                            ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:rounded-l' : 'border-l-0'}
+                            ${
+                                !websiteMode
+                                    ? renderLeftSidebar && isNavVisible
+                                        ? '@2xl/app-reader:rounded-l'
+                                        : 'border-l-0'
+                                    : 'border-t-0 border-l-0'
+                            }
                             ${
                                 showSidebar && isTocVisible
                                     ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
@@ -735,7 +754,7 @@ function ReaderViewContent({
                                 )}
                                 {(body.date || body.contributors || body.tags) && (
                                     <div
-                                        className={`flex items-center space-x-2 mt-4 flex-wrap mx-auto transition-all ${
+                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
                                                 ? 'max-w-full'
                                                 : contentMaxWidthClass || 'max-w-2xl'
@@ -890,7 +909,7 @@ function ReaderViewContent({
                                         transition: { duration: 0.05 },
                                     }}
                                 >
-                                    <ScrollArea className="px-2" fadeOverflow>
+                                    <ScrollArea className={websiteMode ? 'pl-2' : 'px-2'} fadeOverflow>
                                         {tableOfContents && tableOfContents?.length > 0 && (
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}

@@ -11,6 +11,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
 import SmallTeam from 'components/SmallTeam'
+import { useApp } from '../../context/App'
 
 // Process docsMenu to extract structure
 const processDocsMenu = () => {
@@ -76,7 +77,9 @@ const processDocsMenu = () => {
     return [integrationSection, AIPlatformSection, developerAppsSection]
 }
 
+
 const renderSectionContent = (children: any[]) => {
+
     return (
         <div
             data-scheme="primary"
@@ -125,13 +128,15 @@ export const DocsIndex = () => {
     const imagePositioning =
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
 
+    const { websiteMode } = useApp()
+
     return (
-        <div data-scheme="secondary" className="bg-primary h-full text-primary">
+        <div data-scheme="secondary" className={`${!websiteMode && 'bg-primary'} h-full text-primary`}>
             <SEO title="Documentation - PostHog" />
-            <ScrollArea>
+            <ScrollArea className={`${websiteMode && '@container'}`}>
                 <section
                     id="hero"
-                    className="@container not-prose relative aspect-[3/1] @2xl:aspect-[4/1] @6xl:aspect-[5/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]"
+                    className={`@container not-prose relative aspect-[3/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px] ${websiteMode ? '@2xl:aspect-none h-36 @6xl:h-48 w-full mt-8' : '@2xl:aspect-[4/1] @6xl:aspect-[5/1]'}`}
                 >
                     {/* Background container for positioned graphics */}
                     {/* Example of positioned graphics - replace with your actual graphics */}
@@ -308,7 +313,7 @@ export const DocsIndex = () => {
                         </div>
                     </div>
                 </section>
-                <div className="flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full p-2 @xl:p-4">
+                <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 ${websiteMode ? '' : 'px-2 @xl:px-4'}`}>
                     <section className="flex-1">
                         <SearchUI
                             initialFilter="docs"

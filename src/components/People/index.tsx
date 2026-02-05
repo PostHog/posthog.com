@@ -374,7 +374,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     // handleSearch removed since we use prop-based search
 
     return (
-        <div data-scheme="primary" className="bg-primary h-full relative">
+        <div data-scheme="primary" className="@container bg-primary h-full">
             <SEO title="Team - PostHog" />
             <ToggleGroup
                 className="absolute top-[-44px] right-0 z-10"

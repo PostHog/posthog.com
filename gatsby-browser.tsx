@@ -43,3 +43,10 @@ export const wrapPageElement = ({ element, props: { location } }) => {
         </Provider>
     )
 }
+
+export const shouldUpdateScroll = ({ routerProps: { location } }) => {
+    if (location.state?.preventScroll) {
+        return false
+    }
+    return true
+}

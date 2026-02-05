@@ -223,7 +223,7 @@ function DpaGenerator() {
                 description="PostHog's cutting-edge data processing agreement (DPA) generator"
                 image={`/images/og/dpa.png`}
             />
-            <header className="print:hidden">
+            <header data-scheme="primary" className="text-primary print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     DPA? Try DP
                     <em className="dark:text-primary-dark">
@@ -240,7 +240,8 @@ function DpaGenerator() {
             </header>
 
             <section
-                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary ${
+                data-scheme="primary"
+                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary text-primary ${
                     isSubmitted ? 'block' : 'hidden'
                 }`}
             >
@@ -265,7 +266,8 @@ function DpaGenerator() {
             </section>
 
             <section
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
+                data-scheme="primary"
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
@@ -1420,13 +1422,20 @@ function DpaGenerator() {
                         </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
                         <p>Company's end users (including prospects, customer and contractors)</p>
-                        <p>Data subjects include the individuals about whom data is provided to the Processor in connection with the provision of Services by (or at the direction of) Company or its users</p>
+                        <p>
+                            Data subjects include the individuals about whom data is provided to the Processor in
+                            connection with the provision of Services by (or at the direction of) Company or its users
+                        </p>
 
                         <p>
                             <strong>Categories of personal data processed</strong>
                         </p>
                         <p>The personal data processed comprises the following categories of data:</p>
-                        <p>(As determined at the discretion of the Company, including data relating to the individuals provided to the Processor in connection with the provision of the Services, and including, without limitation):</p>
+                        <p>
+                            (As determined at the discretion of the Company, including data relating to the individuals
+                            provided to the Processor in connection with the provision of the Services, and including,
+                            without limitation):
+                        </p>
 
                         <ul>
                             <li>

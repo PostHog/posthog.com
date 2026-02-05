@@ -126,6 +126,7 @@ interface AppContextType {
     setConfetti: (isActive: boolean) => void
     confetti: boolean
     posthogInstance?: string
+    websiteMode: boolean
     desktopParams?: string
     copyDesktopParams: () => void
     desktopCopied: boolean
@@ -286,6 +287,7 @@ export const Context = createContext<AppContextType>({
     setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
+    websiteMode: false,
     desktopParams: undefined,
     copyDesktopParams: () => {},
     desktopCopied: false,
@@ -1192,6 +1194,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const constraintsRef = useRef<HTMLDivElement>(null)
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
+    const websiteMode = siteSettings.experience === 'boring' && !isMobile
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
@@ -1214,7 +1218,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             undefined
         )
     }, [windows])
-    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
@@ -1325,7 +1328,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 )
                 if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                     if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
+                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`, {
+                            state: { preventScroll: websiteMode },
+                        })
                     } else {
                         bringToFront(nextFocusedWindow)
                     }
@@ -1588,6 +1593,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
+        if (websiteMode && newWindow.appSettings?.size.fixed) {
+            newWindow.modal = { type: 'standard' }
+        }
+
         return { ...newWindow, ...options }
     }
 
@@ -1596,10 +1605,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
-            if (existingWindow) {
-                return bringToFront(existingWindow, element.props.location)
-            }
-            if (newWindow.key.startsWith('/')) {
+            if (!newWindow.appSettings?.size.fixed) {
                 return replaceFocusedWindow(newWindow)
             } else {
                 return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
@@ -2024,6 +2030,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     }
                 }
             }
+            if (e.shiftKey && e.key.toLowerCase() === 'm') {
+                e.preventDefault()
+                // Toggle between OS mode and website mode
+                const newExperience = siteSettings.experience === 'posthog' ? 'boring' : 'posthog'
+                updateSiteSettings({
+                    ...siteSettings,
+                    experience: newExperience,
+                })
+
+                // Add toast notification
+                addToast({
+                    description: `Switched to ${newExperience === 'posthog' ? 'OS mode' : 'website mode'}`,
+                    duration: 2000,
+                })
+            }
             if (e.shiftKey && e.key === 'C') {
                 e.preventDefault()
                 if (!desktopParams) return
@@ -2144,6 +2165,22 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }
         }
     }, [])
+
+    useEffect(() => {
+        if (websiteMode) {
+            const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
+            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
+            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed)
+            const newWindows = [
+                ...(currentWindow ? [currentWindow] : []),
+                ...(modalWindow ? [{ ...modalWindow, modal: { type: 'standard' } }] : []),
+            ]
+            setWindows(newWindows)
+        } else {
+            const newWindows = windows.map((w) => ({ ...w, modal: undefined }))
+            setWindows(newWindows)
+        }
+    }, [websiteMode])
 
     const convertWindowsToPixels = (windows: any[]) => {
         const innerWidth = window.innerWidth
@@ -2296,6 +2333,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setConfetti,
                 confetti,
                 posthogInstance,
+                websiteMode,
                 desktopParams,
                 copyDesktopParams,
                 desktopCopied,

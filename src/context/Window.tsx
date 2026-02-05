@@ -57,6 +57,9 @@ export interface AppWindow {
     minimal: boolean
     appSettings?: AppSetting
     location?: Location
+    modal?: {
+        type: 'standard' | 'side'
+    }
 }
 
 interface WindowProviderProps {
