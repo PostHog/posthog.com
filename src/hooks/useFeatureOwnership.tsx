@@ -265,7 +265,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
-        owner: ['data-stack'],
+        owner: ['warehouse-sources'],
         label: 'feature/pipelines',
     },
     platform: {
