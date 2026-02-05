@@ -31,6 +31,10 @@ export const dataPipelines = {
                     name: 'Managed',
                 },
                 {
+                    name: 'Attio',
+                    url: '/docs/cdp/sources/attio',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -2239,12 +2243,16 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Remix',
+                            url: '/docs/libraries/remix',
+                        },
+                        {
                             name: 'Svelte',
                             url: '/docs/libraries/svelte',
                         },
                         {
-                            name: 'Remix',
-                            url: '/docs/libraries/remix',
+                            name: 'TanStack Start',
+                            url: '/docs/libraries/tanstack-start',
                         },
                         {
                             name: 'Vue.js',
@@ -4732,6 +4740,10 @@ export const docsMenu = {
                         },
                         {
                             name: 'Managed',
+                        },
+                        {
+                            name: 'Attio',
+                            url: '/docs/data-warehouse/sources/attio',
                         },
                         {
                             name: 'Azure SQL Server',
