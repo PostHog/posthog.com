@@ -75,8 +75,8 @@ importers:
         specifier: 0.36.0
         version: 0.36.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/types':
-        specifier: 1.341.1
-        version: 1.341.1
+        specifier: 1.341.2
+        version: 1.341.2
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3175,8 +3175,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/types@1.341.1':
-    resolution: {integrity: sha512-Ufuo+6X7BbbhKeqmO/WHyWZZPBSESLO6sPKJEaHpOJLTBXmCmgIQvwXq2SA9QY56htJqLHIluvTXvr3UKoCi8w==}
+  '@posthog/types@1.341.2':
+    resolution: {integrity: sha512-Dwxi5OkxS54Pl1lUw2Zmc9fHKdGQCCFzKoWF/EYgdTj8zCnw/58XIAzqJknfmhYD9K8ivt9WETP96pBM5jMR9g==}
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -20523,7 +20523,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/types@1.341.1': {}
+  '@posthog/types@1.341.2': {}
 
   '@preact/signals-core@1.12.1': {}
 
@@ -25938,7 +25938,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   camelcase-css@2.0.1: {}
 
@@ -27564,7 +27564,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   dot-prop@5.3.0:
     dependencies:
@@ -33870,7 +33870,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   node-abi@3.77.0:
     dependencies:
@@ -34328,7 +34328,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   parent-module@1.0.1:
     dependencies:
@@ -34455,7 +34455,7 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   pascalcase@0.1.1: {}
 
