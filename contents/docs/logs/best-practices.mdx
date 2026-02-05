@@ -7,13 +7,7 @@ import Tab from 'components/Tab'
 
 Most logging is bad. Not because people don't log enough. They log too much of the wrong things and too little of the right things. The result is millions of lines that are expensive to store and useless to query.
 
-This guide covers what actually makes logs useful in production systems. PostHog ingests logs via [OpenTelemetry (OTLP)](/docs/logs/installation), so the patterns here are built around OTel's structured logging model: resource attributes, log attributes, and trace context. By centralizing your logs in PostHog, you get more than just a single place to search across all your services. Your logs live alongside your [Product Analytics](/docs/product-analytics), [Session Replays](/docs/session-replay), and [Feature Flags](/docs/feature-flags), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
-
-<CalloutBox icon="IconInfo" title="Logs vs events in PostHog" type="fyi">
-
-If you're already using `posthog.capture()`, you might wonder where logs fit in. Events (captured via the PostHog SDK) track **what the user did**: clicks, signups, purchases, feature usage. Logs track **what the system did**: API requests, errors, retries, timeouts, config failures. If you've been capturing things like `database_connection_failed` or `stripe_api_timeout` as PostHog events, those belong in logs instead.
-
-</CalloutBox>
+This guide covers what actually makes logs useful in production systems. PostHog ingests logs via [OpenTelemetry (OTLP)](/docs/logs/installation), so the patterns here are built around OTel's structured logging model: resource attributes, log attributes, and trace context.
 
 This guide covers:
 
