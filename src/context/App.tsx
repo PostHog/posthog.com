@@ -485,6 +485,18 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/services': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 850,
+                height: 1000,
+            },
+        },
+    },
     start: {
         size: {
             min: {

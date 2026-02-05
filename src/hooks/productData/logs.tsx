@@ -1,37 +1,6 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import {
-    IconActivity,
-    IconBell,
-    IconDashboard,
-    IconGear,
-    IconListTreeConnected,
-    IconPiggyBank,
-    IconRewindPlay,
-    IconShield,
-    IconSparkles,
-    IconTarget,
-    IconTrends,
-    IconUser,
-    IconWarning,
-    IconGlobe,
-    IconMagicWand,
-    IconLlmPromptEvaluation,
-} from '@posthog/icons'
-import {
-    IconAnthropic,
-    IconGemini,
-    IconGrid,
-    IconHelicone,
-    IconKeywordsAI,
-    IconLangChain,
-    IconLangfuse,
-    IconOpenAI,
-    IconOpenRouter,
-    IconTag,
-    IconTraceloop,
-    IconVercel,
-} from 'components/OSIcons'
+import { IconActivity } from '@posthog/icons'
 
 export const logs = {
     name: 'Logs',
@@ -123,7 +92,6 @@ export const logs = {
                 },
             ],
         },
-
         {
             title: 'Built on OpenTelemetry',
             template: 'splitImage',
@@ -250,11 +218,11 @@ export const logs = {
         companies: [
             {
                 name: 'Grafana (Loki)',
-                key: 'loki',
+                key: 'grafana_loki',
                 // link: '/blog/posthog-vs-langfuse',
             },
             {
-                name: 'Betters Stack',
+                name: 'Better Stack',
                 key: 'better_stack',
             },
             {
@@ -272,8 +240,8 @@ export const logs = {
                 key: 'posthog',
             },
         ],
-        rows: ['logs'],
-        // excluded_sections: ['platform'],
+        rows: ['logs', 'logs.pricing.features'],
+        excluded_sections: ['platform', 'pricing'],
     },
     // pairsWith: [
     //     {
