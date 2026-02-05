@@ -636,7 +636,12 @@ const ProductCount = () => {
 }
 
 const AppCount = () => {
-    return APP_COUNT
+    return (
+        <span className="flex items-center gap-1">
+            <Link to="/products">Browse app library</Link>
+            <span>({APP_COUNT})</span>
+        </span>
+    )
 }
 
 const CompanyStageTabs = () => {
