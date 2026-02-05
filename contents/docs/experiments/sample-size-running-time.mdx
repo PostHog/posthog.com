@@ -35,7 +35,7 @@ Click the gear icon next to the time estimate to open the configuration modal:
 
 ## Calculation modes
 
-The calculator offers two modes, **Automatic** (default) and **Manual**. We recommend that you use automatic mode when possible for more accurate results.
+The calculator offers two modes: **Automatic** and **Manual**. Automatic mode is the default for launched experiments and provides more accurate results using real data. Manual mode is available for both draft and launched experiments.
 
 ### Automatic mode
 
@@ -47,6 +47,8 @@ Automatic mode uses real data from your running experiment to calculate estimate
 
 This mode requires at least **1 day** of runtime and **100 exposures** before estimates appear. Until then, you'll see "Pending" in the running time indicator.
 
+> **Note:** Automatic mode is only available after launching your experiment since it requires real data. For draft experiments, use Manual mode to estimate running time before launch.
+
 Once you have enough data, automatic mode shows:
 - **Remaining time**: How many more days until you reach the recommended sample size
 - **Progress**: Current exposures vs. target sample size
@@ -54,7 +56,7 @@ Once you have enough data, automatic mode shows:
 
 ### Manual mode
 
-Manual mode lets you estimate running time **before** launching your experiment or when you want to plan ahead. Use it when you know your approximate traffic numbers and baseline metrics.
+Manual mode lets you estimate running time **before** launching your experiment. It's the default mode for draft experiments, enabling you to plan your test duration in advance. Use it when you know your approximate traffic numbers and baseline metrics.
 
 <ProductScreenshot
     imageLight={ManualModeLight}
