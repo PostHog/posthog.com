@@ -287,6 +287,17 @@ export default function CDP(): JSX.Element {
                     zoom={true}
                 />
 
+                <h3>Warehouse-native with PostHog Warehouse</h3>
+                <p>
+                    PostHog supports <strong>warehouse-native workflows</strong> via an integrated data warehouse. If
+                    you're using an external warehouse, such as Snowflake, you can sync or ingest the data you need into
+                    PostHog via our CDP. Either way, queries run on PostHog compute; we don&apos;t execute queries in
+                    your external warehouse.
+                    <Link to="/warehouse-native" state={{ newWindow: true }}>
+                        Learn more about being warehouse-native with PostHog
+                    </Link>
+                </p>
+
                 <h3>Data stack products</h3>
                 <p>This is what we offer built-in - but feel free to bring your own tools if that's what you need.</p>
 

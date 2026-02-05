@@ -357,7 +357,7 @@ We offer a Business Associate Agreement (BAA) for any customer on our platform p
 
 Choosing the right analytics platform depends on your team's priorities and technical needs. Here's a quick guide:
 
-- Want an [all-in-one platform](/products) built for engineers, with [product analytics](/product-analytics), [web analytics](/web-analytics), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys ](/surveys), and more, with transparent usage-based [pricing](/pricing)? Go with **PostHog**.
+- Want an [all-in-one platform](/products) built for engineers, with [product analytics](/product-analytics), [web analytics](/web-analytics), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), and more, with transparent usage-based [pricing](/pricing)? Go with **PostHog**.
 
 - Need a platform optimized for marketing analytics, campaign attribution, and growth experimentation with a UI built for non-technical teams? **Amplitude** is probably the right choice.
 
@@ -370,7 +370,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 - **Amplitude** – Purpose-built for growth analytics with a UI designed for non-technical users. Tighter integrations with ad platforms and marketing tools, plus dedicated web experimentation features.
 
 **For data teams**
-- **Amplitude** – Warehouse-native architecture lets you query directly on Snowflake, BigQuery, or Databricks without moving data. PostHog syncs to/from warehouses but doesn't sit on top of them yet (coming soon).
+- **Amplitude** – Warehouse-native architecture lets you query directly on Snowflake, BigQuery, or Databricks without moving data. PostHog supports [warehouse-native workflows with its integrated warehouse](/warehouse-native) and can sync to and from external warehouses while running queries on PostHog compute, not on your external warehouse (Snowflake, Databricks, etc).
 
 **For privacy-conscious and regulated organizations**
 - Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/docs/data-warehouse). **Amplitude** provides BAA agreements and enterprise compliance packages.
@@ -413,7 +413,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 
 Yes, for most use cases. **PostHog** offers all the core analytics features Amplitude provides – funnels, retention, cohorts, user paths, feature flags, A/B testing, session replay, and surveys – plus additional capabilities like error tracking and LLM analytics. 
 
-The main exception is warehouse-native analytics: Amplitude can run queries directly on your data warehouse (Snowflake, BigQuery), while PostHog syncs data to/from warehouses but doesn't sit on top of them.
+The main exception is warehouse-native analytics: Amplitude can run queries directly on your data warehouse (Snowflake, BigQuery), while we mostly sync data into PostHog and run queries there. Find out more about ([how we do warehouse-native](/warehouse-native) in the docs).
 
 </details>
 
@@ -479,7 +479,7 @@ No. Amplitude does not offer LLM observability or analytics. PostHog includes [L
 <details>
 <summary>Which should I choose for warehouse-native analytics?</summary>
 
-**Amplitude**. Can run directly on top of your data warehouse, while PostHog syncs to/from warehouses but doesn't sit on top of them yet (coming soon!)
+**Amplitude** if you need queries to run directly on your Snowflake/BigQuery. **PostHog** supports [warehouse-native workflows](/warehouse-native) with an integrated data warehouse, but queries currently run on PostHog compute.
 
 </details>
 

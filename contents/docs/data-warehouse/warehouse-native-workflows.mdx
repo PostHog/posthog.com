@@ -1,0 +1,24 @@
+---
+title: Warehouse-native workflows (PostHog warehouse native)
+sidebar: Docs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+This page explains how PostHog supports **warehouse-native workflows** with its integrated data warehouse, and what we mean (and don't mean) by "warehouse native."
+
+> For the full "does PostHog do warehouse native?" answer, check out our [warehouse-native explainer](/warehouse-native).
+
+## How it works
+
+Data flows into PostHog and all query execution happens in PostHog:
+
+1. **Getting data** – Events, persons, and external data is synced or ingested into PostHog either directly (as events), or via the [CDP](/cdp).
+2. **Storing data** – Data is stored in PostHog infrastructure, either in ClickHouse or on a PostHog data warehouse. We do not run your queries inside your Snowflake, BigQuery, or Databricks.
+3. **Using data** – Analytics, experiments, feature flags, and other tools use enable you to use the data that’s available in PostHog.
+
+If you're using PostHog as your data warehouse, this makes PostHog **warehouse-native in practice**. You get SQL, unified data, and warehouse-style workflows, and data stays in your warehouse. 
+
+If you're using an external data warehouse, such as Snowflake, PostHog still enables you to ingest the data via the CDP. 
+
+For more detail on how data gets into PostHog and where queries run, see [Under the hood](/docs/data-warehouse/under-the-hood).

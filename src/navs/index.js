@@ -4725,6 +4725,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Warehouse-native workflows',
+                    url: '/docs/data-warehouse/warehouse-native-workflows',
+                },
+                {
                     name: 'Link sources',
                     url: '/docs/data-warehouse/sources',
                     icon: 'IconBook',

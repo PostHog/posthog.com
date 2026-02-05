@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, WarehouseNativeSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { Accordion } from 'components/RadixUI/Accordion'
 
@@ -410,11 +410,17 @@ export default function Experiments(): JSX.Element {
                 name: 'Statistical methods',
                 component: StatisticalMethodsSlide,
             },
+            {
+                slug: 'warehouse-native',
+                name: 'Warehouse-native',
+                component: WarehouseNativeSlide,
+            },
         ],
         order: [
             'overview',
             'customers',
             'features',
+            'warehouse-native',
             'posthog-on-posthog',
             'statistical-methods',
             'pricing',
