@@ -63,12 +63,24 @@ SDK doctor will also notify you if your SDK version isn't officially "outdated",
 
 ## Accessing SDK doctor
 
-SDK doctor is available in the [right side panel](https://app.posthog.com/#panel=sdk-doctor). The SDK doctor button will be added to the right side panel if you have one or more outdated SDKs in need of an update.
+There are two ways to access SDK doctor:
 
-1. Click the three vertical dots in the lower-right corner of any page.
-2. In the resulting menu, click `SDK doctor`
-3. View detected SDKs, their versions, and notes about issues found
-4. Click the provided links to view available versions and documentation
+### Command palette
+
+The quickest way to open SDK doctor is via the [command palette](/docs/cmd-k):
+
+1. Press `Cmd` + `K` (Mac) or `Ctrl` + `K` (Windows/Linux)
+2. Type "SDK doctor"
+3. Select **SDK doctor** from the results
+
+### Side panel
+
+You can also access SDK doctor from the side panel:
+
+1. Click the three vertical dots in the lower-right corner of any page
+2. In the resulting menu, click **SDK doctor**
+
+The SDK doctor button will appear in the side panel if you have one or more outdated SDKs in need of an update.
 
 ## Understanding SDK doctor badges
 
