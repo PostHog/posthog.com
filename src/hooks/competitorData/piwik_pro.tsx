@@ -80,8 +80,8 @@ export const piwik_pro = {
         },
         pricing: {
             free_tier: false,
-            self_serve: true,
-            transparent_pricing: true,
+            self_serve: 'Trial only',
+            transparent_pricing: false,
             usage_based_pricing: true,
         },
         developer: {

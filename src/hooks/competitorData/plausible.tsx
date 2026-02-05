@@ -1,6 +1,3 @@
-import { logs } from "hooks/productData/logs";
-import { workflows } from "hooks/productData/workflows";
-
 export const plausible = {
     name: 'Plausible',
     key: 'plausible',
@@ -20,7 +17,7 @@ export const plausible = {
                 clickmaps: false,
                 conversions: true,
                 cookieless_tracking: true,
-                custom_channel_types: true,
+                custom_channel_types: false,
                 entry_exit_paths: true,
                 first_party_cookies: false,
                 heatmaps: false,
