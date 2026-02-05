@@ -315,6 +315,9 @@ export interface AppSetting {
             getDesktopCenterPosition: (size: { width: number; height: number }) => { x: number; y: number }
         ) => { x: number; y: number }
     }
+    modal?: {
+        type: 'standard' | 'side'
+    }
 }
 
 export interface AppSettings {
@@ -485,6 +488,9 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     start: {
@@ -724,6 +730,9 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        modal: {
+            type: 'standard',
+        },
     },
     '/changelog-video': {
         size: {
@@ -935,6 +944,9 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     'cool-tech-jobs-issue': {
@@ -1581,8 +1593,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
-        if (websiteMode && newWindow.appSettings?.size.fixed) {
-            newWindow.modal = { type: 'standard' }
+        if (websiteMode && (newWindow.appSettings?.size.fixed || newWindow.appSettings?.modal)) {
+            newWindow.modal = { type: 'standard', ...newWindow.appSettings?.modal }
         }
 
         return { ...newWindow, ...options }
@@ -1593,7 +1605,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
-            if (!newWindow.appSettings?.size.fixed) {
+            if (!newWindow.appSettings?.size.fixed && !newWindow.appSettings?.modal) {
                 return replaceFocusedWindow(newWindow)
             } else {
                 return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
@@ -2102,10 +2114,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setWindows((currentWindows) =>
                 currentWindows.map((w) => ({
                     ...w,
-                    size: {
-                        width: newWidth,
-                        height: newHeight,
-                    },
+                    ...(w.appSettings?.size?.fixed || w.appSettings?.modal
+                        ? {}
+                        : {
+                              size: {
+                                  width: newWidth,
+                                  height: newHeight,
+                              },
+                          }),
                 }))
             )
         }
@@ -2184,10 +2200,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (websiteMode) {
             const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
             const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
-            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed)
+            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed || w.appSettings?.modal)
             const newWindows = [
                 ...(currentWindow ? [currentWindow] : []),
-                ...(modalWindow ? [{ ...modalWindow, modal: { type: 'standard' } }] : []),
+                ...(modalWindow
+                    ? [{ ...modalWindow, modal: { type: 'standard', ...modalWindow.appSettings?.modal } }]
+                    : []),
             ]
             setWindows(newWindows)
         } else {

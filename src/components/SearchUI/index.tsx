@@ -216,7 +216,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
             <div ref={ref}>
                 <Search
                     initialFilter={initialFilter}
-                    className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl max-w-screen-md border border-primary"
+                    className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl border border-primary"
                     onChange={close}
                     onEscape={close}
                 />
