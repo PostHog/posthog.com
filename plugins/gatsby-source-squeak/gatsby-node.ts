@@ -296,7 +296,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 id: createNodeId(`squeak-roadmap-${roadmap.id}`),
             }
 
-            if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY) {
+            if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY && process.env.GATSBY_MINIMAL !== 'true') {
                 node.githubPages = await Promise.all(
                     githubUrls
                         .filter((url) => new URL(url).hostname === 'github.com')
