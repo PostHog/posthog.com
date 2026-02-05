@@ -5733,13 +5733,16 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Resources',
+                    name: 'Guides',
                 },
                 {
                     name: 'Logging best practices',
                     url: '/docs/logs/best-practices',
                     icon: 'IconBook',
                     color: 'green',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Pricing',
