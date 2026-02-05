@@ -17,7 +17,7 @@ export const whatfix = {
                 custom_properties: true,
                 monetization_analytics: false,
                 predictive_insights: false,
-                real_time_view: false,
+                real_time_view: true,
                 toolbar: false,
                 user_profiles: true,
                 insights: {
@@ -139,11 +139,11 @@ export const whatfix = {
         libraries: {
             features: {
                 android: true,
-                flutter: false,
+                flutter: true,
                 ios: true,
                 javascript: true,
                 react: true,
-                react_native: false,
+                react_native: true,
                 ruby: false,
             },
         },
@@ -187,7 +187,7 @@ export const whatfix = {
             cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: true,
-            hipaa_ready: false,
+            hipaa_ready: true,
             history_audit_logs: false,
             saml_sso: true,
             soc2_certified: true,

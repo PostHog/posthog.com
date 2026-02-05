@@ -1,17 +1,26 @@
 ---
 title: 'The best Pendo alternatives & competitors, compared'
-date: 2024-01-26
+date: 2026-02-05
 author:
     - ian-vanagas
 rootpage: /blog
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-pendo/posthog-vs-pendo.jpg
 featuredImageType: full
 tags:
     - Comparisons
+seo:
+    metaTitle: The best Pendo alternatives & competitors, compared
+    metaDescription: Looking for a Pendo alternative with transparent pricing, feature flags, or deeper analytics? We compare 7 options including PostHog, Whatfix, Hotjar, Heap, and more.
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+[Pendo](/blog/posthog-vs-pendo) is a popular product experience platform — and a good one. Its combination of in-app guides, product analytics, feedback collection, and roadmap tools has made it a go-to for product managers looking to drive adoption without engineering support.
+
+But Pendo isn't the right fit for every team. Maybe you need feature flags, A/B testing, or error tracking that Pendo doesn't offer. Maybe you want transparent, usage-based pricing instead of opaque quotes that [average ~$47k/year](https://www.vendr.com/buyer-guides/pendo). Or maybe you're an engineering-led team that wants SQL access, open-source code, and a platform that goes beyond in-app guides.
+
+In this guide, we compare the best Pendo alternatives for 2026 — from all-in-one platforms that combine analytics with experimentation and developer tools, to focused digital adoption platforms for enterprise onboarding.
 
 ## 1. PostHog
 
@@ -24,26 +33,29 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an open-source platform combining product analytics, session replay, user surveys, feature flags, and A/B testing into one product. This means it's not just an alternative to Pendo, but also tools like [LaunchDarkly](/blog/best-launchdarkly-alternatives) and [Amplitude](/blog/best-amplitude-alternatives).
+[PostHog](/) (that's us 👋) is a developer platform combining [product analytics](/product-analytics), [session replay](/session-replay), [user surveys](/user-surveys), [feature flags](/feature-flags), [A/B testing](/ab-testing), [error tracking](/error-tracking), [workflows](/workflows), and more into one environment. This means it's not just an alternative to Pendo, but also tools like [LaunchDarkly](/blog/best-launchdarkly-alternatives) and [Amplitude](/blog/best-amplitude-alternatives).
 
-Typical PostHog users are engineers, founders, and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
+Typical PostHog users are engineers, founders, and product managers at startups and mid-size companies, particularly B2B companies. Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and many more.
 
 ### Key features
 
--   📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports [SQL insights](/docs/product-analytics/sql) for power users.
+- **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports [SQL insights](/docs/product-analytics/sql) for power users.
 
--   💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF) surveys](/templates/pmf-survey), and more.
+- **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF) surveys](/templates/pmf-survey), and more.
 
--   📺 **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
+- **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
 
--   🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
--   🚩 **Feature flags:** Rollout features safely with local evaluation (for faster performance) and JSON payloads.
+- **Feature flags:** Rollout features safely with local evaluation (for faster performance) and JSON payloads.
+
+- **Workflows:** Automate messaging based on user behavior — trigger emails, Slack messages, or webhooks when users complete (or don't complete) key actions.
 
 ### How does PostHog compare to Pendo?
 
-Both PostHog and Pendo are multi-product companies covering many use cases. Pendo focuses on in-app guides and internal tools. PostHog focuses on tools product and engineering teams need like feature flags and A/B testing.
+Both PostHog and Pendo are multi-product companies covering many use cases. Pendo focuses on in-app guides and internal tools. PostHog focuses on tools product and engineering teams need like feature flags, error tracking, and A/B testing.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -60,10 +72,31 @@ Both PostHog and Pendo are multi-product companies covering many use cases. Pend
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is PostHog?
+<details>
+<summary>Main differences between PostHog and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of January 2024, 4,732 (0.5%) of the top 1 million websites deploy PostHog. This is ~1,000 more than Pendo's 3,711.
+- PostHog includes feature flags, A/B testing, and experiments natively; Pendo doesn't offer any of these.
+- PostHog includes error tracking and LLM analytics; Pendo has no equivalent.
+- Pendo has a visual drag-and-drop editor for tooltips, product tours, and onboarding walkthroughs; PostHog doesn't have in-app guide tooling.
+- Pendo includes product validation, roadmap planning, and feedback collection (via Pendo Listen); PostHog covers feedback through surveys and automated messaging through Workflows.
+- PostHog supports SQL access for custom queries; Pendo does not.
+- Pendo includes session replay only on Core plans and above; PostHog includes replay on all plans including free.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Pendo</summary>
+
+- Both offer product analytics with funnels, trends, retention analysis, and user paths.
+- Both support event autocapture to start collecting data without manual instrumentation.
+- Both include surveys for collecting in-app feedback and NPS scores.
+- Both offer EU hosting and are SOC 2 certified, GDPR-ready, and HIPAA-ready.
+- Both support group analytics for account-level analysis in B2B products.
+- Both have web and mobile SDKs with support for major platforms.
+
+</details>
 
 ### Why do companies use PostHog?
 
@@ -78,6 +111,13 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 > #### Bottom line
 >
 > For teams looking for all the features of Pendo minus in-app guidance, PostHog makes a great alternative. Being free, self-serve, and open source makes it easy to explore and try out. PostHog is especially good for engineering-focused startups and scale-ups looking for tools for build a great product.
+
+<p>
+  <CallToAction to="https://posthog.com/docs/product-analytics/installation">
+    Get started with PostHog – it's free!
+  </CallToAction>
+</p>
+
 
 ## 2. Whatfix
 
@@ -96,20 +136,21 @@ Whatfix also includes personalizations, automation, and integrations to help opt
 
 ### Key features
 
--   🧳 **Guidance:** Add interactive in-app guidance, contextual support, and announcements to your app easily.
+- **Guidance:** Add interactive in-app guidance, contextual support, and announcements to your app easily.
 
--   📈 **Product analytics:** Autocapture user behavior and analyze with trend, funnel, and retention graphs.
+- **Product analytics:** Autocapture user behavior and analyze with trend, funnel, and retention graphs.
 
--   📝 **Content management:** Create and manage support content like e-learning materials and product announcements, no coding required.
+- **Content management:** Create and manage support content like e-learning materials and product announcements, no coding required.
 
--   🗣️ **In-app messaging:** Make announcements, drive adoption of new features, and help users when they get stuck.
+- **In-app messaging:** Make announcements, drive adoption of new features, and help users when they get stuck.
 
--   📋 **Surveys:** Collect feedback and NPS responses through in-app surveys.
+- **Surveys:** Collect feedback and NPS responses through in-app surveys.
 
 ### How does Whatfix compare to Pendo?
 
-While Pendo focuses both on internal and external use cases, Whatfix focuses almost entirely on internal use cases. It has more content tools but misses out on the tools tracking user behavior like session replay.
+While Pendo focuses both on internal and external use cases, Whatfix focuses primarily on internal use cases (helping employees learn and use enterprise software). It recently added more tools like session replay, which is available as separately priced add-on.
 
+<p>
 <ProductComparisonTable
     competitors={['whatfix', 'pendo']}
     rows={[
@@ -126,10 +167,29 @@ While Pendo focuses both on internal and external use cases, Whatfix focuses alm
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is Whatfix?
+<details>
+<summary>Main differences between Whatfix and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/widgets/WhatFix), as of January 2024, 231 of the top million sites use Whatfix. This is much less than Pendo's 3,711 but doesn't reflect their internal usage. For context, Ahrefs puts Whatfix's organic traffic at 301k, while Pendo's is only 35.9k.
+- Whatfix focuses primarily on internal employee adoption; Pendo focuses on external product experience for end users.
+- Whatfix includes sandbox training environments (Whatfix Mirror) and LMS integrations; Pendo has no training or simulation features.
+- Pendo includes session replay on Core plans and above; Whatfix offers session replay only through its separately priced Product Analytics add-on.
+- Pendo includes native NPS surveys and feedback collection (Pendo Listen); Whatfix has basic in-app surveys but no equivalent feedback loop.
+- Whatfix has deeper enterprise integrations with Salesforce, Workday, and ServiceNow; Pendo integrates with product and analytics tools.
+
+</details>
+
+<details>
+<summary>Main similarities between Whatfix and Pendo</summary>
+
+- Both offer in-app guides, tooltips, and onboarding walkthroughs with no-code editors.
+- Both include product analytics with trends, funnels, and retention analysis.
+- Both support event autocapture for tracking user behavior.
+- Both require sales conversations for pricing — neither publishes transparent pricing.
+- Both are closed-source, cloud-only platforms.
+
+</details>
 
 ### Why do companies use Whatfix?
 
@@ -156,24 +216,25 @@ Looking at G2 reviews, users are fans of the following features of Whatfix:
 
 ### What is Hotjar?
 
-[Hotjar](/blog/best-hotjar-alternatives) is a tool for understanding user behavior. It provides heatmaps, replays, feedback, and interviews to capture and display the qualitative aspects of your site and app. Teams use it to discover and address pain points on their site and app, which helps them improve customer experiences.
+[Hotjar](/blog/best-hotjar-alternatives) (now part of [Contentsquare](/blog/best-contentsquare-alternatives)) is a tool for understanding user behavior. It provides heatmaps, replays, feedback, and interviews to capture and display the qualitative aspects of your site and app. Teams use it to discover and address pain points on their site and app, which helps them improve customer experiences.
 
 ### Key features
 
--   🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+- **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
 
--   🎥 **Recordings:** Replay real user sessions and see what they see; discover hidden friction.
+- **Recordings:** Replay real user sessions and see what they see; discover hidden friction.
 
--   🗣️ **Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
+- **Feedback:** Learn what your users are thinking. Find out their likes, dislikes, and satisfaction.
 
--   📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+- **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
 
--   👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+- **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
 
 ### How does Hotjar compare to Pendo?
 
-Hotjar has a similar focus on Pendo, helping users create better digital experiences. Hotjar tools on tools for capturing and displaying qualitative data. It doesn't have the product adoption or the quantitative analytics features of Pendo.
+Hotjar has a similar focus to Pendo, helping users create better digital experiences. Hotjar tools on tools for capturing and displaying qualitative data. It doesn't have the product adoption or the quantitative analytics features of Pendo.
 
+<p>
 <ProductComparisonTable
     competitors={['hotjar', 'pendo']}
     rows={[
@@ -190,10 +251,27 @@ Hotjar has a similar focus on Pendo, helping users create better digital experie
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is Hotjar?
+<details>
+<summary>Main differences between Hotjar and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as of January 2024, Hotjar is much more popular than Pendo. A massive 73,874 of the top 1 million sites use Hotjar. Pendo is only used on 3,711.
+- Hotjar focuses on qualitative insights (heatmaps, recordings, feedback); Pendo focuses on product adoption and quantitative analytics.
+- Pendo includes in-app guides, tooltips, and onboarding flows; Hotjar has no in-app messaging or adoption tooling.
+- Pendo includes product analytics with funnels, retention, and cohorts; Hotjar doesn't offer product analytics natively (available on the full Contentsquare platform).
+- Hotjar includes heatmaps and user interviews; Pendo offers neither.
+
+</details>
+
+<details>
+<summary>Main similarities between Hotjar and Pendo</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include surveys for collecting in-app feedback and NPS scores.
+- Both are closed-source, cloud-only platforms now owned by larger companies (Contentsquare and Pendo respectively).
+- Both target non-technical users like product managers and designers.
+
+</details>
 
 ### Why do companies use Hotjar?
 
@@ -220,22 +298,23 @@ According to G2 reviews, users are fans of Hotjar because:
 
 ### What is WalkMe?
 
-WalkMe is a leading digital adoption platform that overlays any application. It tracks usage of internal software, automates repetitive tasks, and provides guidance to onboarding or lost users. It is used by sales teams to navigate a CRM like Salesfore, HR teams to onboard with Workday, or support teams to resolve issues with ServiceNow.
+WalkMe (acquired by SAP in 2024) is a leading digital adoption platform that overlays any application. It tracks usage of internal software, automates repetitive tasks, and provides guidance to onboarding or lost users. It is used by sales teams to navigate a CRM like Salesfore, HR teams to onboard with Workday, or support teams to resolve issues with ServiceNow.
 
 ### Key features
 
--   🙋‍♂️**Guidance:** Create guidance for workflows that resolve friction. Provide content, notifications, and support at the right time.
+- **Guidance:** Create guidance for workflows that resolve friction. Provide content, notifications, and support at the right time.
 
--   🏗️ **Workflows:** Automate common tasks, and help employees save time with repetitive tasks.
+- **Workflows:** Automate common tasks, and help employees save time with repetitive tasks.
 
--   🤝 **Integrations:** Integrate with Salesforce, Workday, ServiceNow, and more to speed up adoption and automate workflows.
+- **Integrations:** Integrate with Salesforce, Workday, ServiceNow, and more to speed up adoption and automate workflows.
 
--   📈 **Analytics:** Monitor application, workflow, and form analytics to get insights on how employees are using software.
+- **Analytics:** Monitor application, workflow, and form analytics to get insights on how employees are using software.
 
 ### How does WalkMe compare to Pendo?
 
 Like Whatfix, WalkMe focuses on internal analytics and use cases. Its integrations with tools like Salesforce and Workday are particularly strong, but it doesn't have the same external-facing analytics features as Pendo.
 
+<p>
 <ProductComparisonTable
     competitors={['walkme', 'pendo']}
     rows={[
@@ -252,10 +331,28 @@ Like Whatfix, WalkMe focuses on internal analytics and use cases. Its integratio
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is WalkMe?
+<details>
+<summary>Main differences between WalkMe and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/widgets/WalkMe), as of January 2024, 1,006 of the top million sites used WalkMe. This is roughly a quarter of Pendo's 3,711 but doesn't reflect WalkMe's focus on internal apps.
+- WalkMe focuses on internal employee adoption of enterprise software; Pendo focuses on external product experience for end users.
+- WalkMe includes workflow automation and task bots (ActionBots); Pendo has no automation tooling.
+- Pendo includes product analytics with funnels, retention, and cohorts; WalkMe's analytics focus on application usage and workflow completion.
+- Pendo includes session replay on Core plans and above; WalkMe does not offer session replay.
+
+</details>
+
+<details>
+<summary>Main similarities between WalkMe and Pendo</summary>
+
+- Both offer in-app guides, tooltips, and onboarding walkthroughs.
+- Both include analytics for tracking user engagement and adoption.
+- Both support enterprise integrations with tools like Salesforce.
+- Both require sales conversations for pricing — neither is self-serve.
+- Both are closed-source, cloud-only platforms.
+
+</details>
 
 ### Why do companies use WalkMe?
 
@@ -282,26 +379,27 @@ Looking at G2 reviews, users like WalkMe the most for:
 
 ### What is Heap?
 
-[Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers product analytics, session replay, and multi-touch attribution. This makes especially strong for marketing teams.
+[Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means it offers product analytics, session replay, and multi-touch attribution. This makes it especially strong for marketing teams.
 
 Contentsquare, a marketing and ecommerce analytics firm that also owns Hotjar, [acquired Heap in September 2023](https://contentsquare.com/heap/) and announced plans to integrate the products.
 
 ### Key features
 
--   ✅ **Event autocapture:** Frees product teams from relying on engineers to instrument events. Heap offers a visual editor for enables teams to tag on-page events for analysis.
+- **Event autocapture:** Frees product teams from relying on engineers to instrument events. Heap offers a visual editor that enables teams to tag on-page events for analysis.
 
--   📺 **Session replay:** Get qualitative insights about user behavior by replaying their session (although this lacks the debugging tools typical of most replay tools).
+- **Session replay:** Get qualitative insights about user behavior by replaying their session (although this lacks the debugging tools typical of most replay tools).
 
--   🔥 **Heatmaps:** See where users click, what point they scroll to, and the areas that get the most attention.
+- **Heatmaps:** See where users click, what point they scroll to, and the areas that get the most attention.
 
--   🤖 **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
+- **Analysis suggestions**: Advanced data science capabilities discover hidden interactions, friction points, and knowledge about key paths.
 
--   🔁 **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
+- **Managed ETL:** Connect to data warehouses, so you can combine your analytics with other sources and get a fuller picture of the entire user journey.
 
 ### How does Heap compare to Pendo?
 
-Heap entirely focuses on analytics. Although the feature sets between the two look similar, Heap includes complex, deeper visualizations and AI support for discovering insights. It does not include the feedback tools or in-app guides of Pendo though.
+Heap focuses entirely on analytics. Although the feature sets between the two look similar, Heap includes complex, deeper visualizations and AI support for discovering insights. It does not include the feedback tools or in-app guides of Pendo though.
 
+<p>
 <ProductComparisonTable
     competitors={['heap', 'pendo']}
     rows={[
@@ -318,10 +416,29 @@ Heap entirely focuses on analytics. Although the feature sets between the two lo
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is Heap?
+<details>
+<summary>Main differences between Heap and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Heap), 4,221 of the top one million sites use Heap as of January 2024. This is similar to Pendo's 3,711.
+- Heap focuses primarily on product analytics; Pendo combines analytics with in-app guides and product adoption tools.
+- Heap has a visual event editor for tagging and defining events retroactively; Pendo supports autocapture but has no equivalent labeling tool.
+- Pendo includes in-app guides, tooltips, and onboarding flows; Heap has no in-app messaging.
+- Pendo includes native NPS surveys and feedback collection; Heap doesn't offer surveys.
+- Heap is now part of Contentsquare (alongside Hotjar); Pendo is an independent company.
+
+</details>
+
+<details>
+<summary>Main similarities between Heap and Pendo</summary>
+
+- Both offer product analytics with funnels, trends, retention, and user paths.
+- Both support event autocapture to start collecting data without manual instrumentation.
+- Both offer session replay for watching real user sessions.
+- Both support group analytics for account-level analysis in B2B products.
+- Both are closed-source, cloud-only platforms.
+
+</details>
 
 ### Why do companies use Heap?
 
@@ -335,7 +452,7 @@ According to G2 reviews, companies like these three areas of Heap:
 
 > #### Bottom line
 >
-> For product analytics and session replay, Heap is a good alternative to Pendo as it has greater focus and depth for those features. If you need, in-app guides and surveys, it is better to look elsewhere.
+> For product analytics and session replay, Heap is a good alternative to Pendo as it has greater focus and depth for those features. If you need in-app guides and surveys, it is better to look elsewhere.
 
 ## 6. Appcues
 
@@ -352,20 +469,21 @@ Appcues is a product adoption platform helping teams build better onboarding. It
 
 ### Key features
 
--   🆘 **In-app guides:** Help users and drive feature adoption with slideouts, tooltips, and hotspots.
+- **In-app guides:** Help users and drive feature adoption with slideouts, tooltips, and hotspots.
 
--   🧑‍💻 **No-code builder:** Create and customize onboarding components without needing to write code.
+- **No-code builder:** Create and customize onboarding components without needing to write code.
 
--   📋 **Feedback:** Run in-app surveys to capture feedback and NPS scores**.**
+- **Feedback:** Run in-app surveys to capture feedback and NPS scores**.**
 
--   🤹 **Personalization:** Segment users and show unique, custom onboarding for each.
+- **Personalization:** Segment users and show unique, custom onboarding for each.
 
--   📈 **Analytics:** Understand how your onboarding flows are performing with event capture, trends, and funnels.
+- **Analytics:** Understand how your onboarding flows are performing with event capture, trends, and funnels.
 
 ### How does Appcues compare to Pendo?
 
 Appcues focuses on features helping improve the product onboarding experience. However, it lacks features that capture the broader user experience, like product analytics and session replay.
 
+<p>
 <ProductComparisonTable
     competitors={['appcues', 'pendo']}
     rows={[
@@ -383,10 +501,29 @@ Appcues focuses on features helping improve the product onboarding experience. H
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is Appcues?
+<details>
+<summary>Main differences between Appcues and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/widgets/Appcues), as of January 2024, 1,966 of the top 1 million sites use Appcues. This is just over half of Pendo's 3,711.
+- Appcues focuses purely on onboarding and adoption; Pendo combines adoption tools with product analytics and session replay.
+- Appcues has published pricing starting at $750/mo for their Grow plan; Pendo requires sales conversations.
+- Pendo includes product analytics with funnels, retention, and cohorts; Appcues has basic flow analytics only.
+- Pendo includes session replay on Core plans and above; Appcues has no session replay.
+- Pendo includes roadmap and feedback collection tools (Pendo Listen); Appcues focuses on in-app flows and surveys.
+
+</details>
+
+<details>
+<summary>Main similarities between Appcues and Pendo</summary>
+
+- Both offer in-app guides, tooltips, and onboarding flows with no-code builders.
+- Both support mobile apps (iOS and Android).
+- Both include surveys for collecting in-app feedback and NPS scores.
+- Both allow user segmentation and personalized onboarding.
+- Both are closed-source, cloud-only platforms.
+
+</details>
 
 ### Why do companies use Appcues?
 
@@ -417,20 +554,21 @@ Smartlook combines session replays, product analytics, visualizations, and crash
 
 ### Key features
 
--   📊 **Event-based analytics:** See how often users behave in ways important to you such as URL visits, form submits, and clicks.
+- **Event-based analytics:** See how often users behave in ways important to you such as URL visits, form submits, and clicks.
 
--   🛣️ **Funnels and paths:** See how users move through your app with custom visuals for key flows.
+- **Funnels and paths:** See how users move through your app with custom visuals for key flows.
 
--   📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
+- **Session recordings:** Understand how users are actually using your app and where issues occur.
 
--   🔥 **Heatmaps:** Figure out what parts of the page users click on, move their mouse over, and scroll to. Overlay all this on your actual site.
+- **Heatmaps:** Figure out what parts of the page users click on, move their mouse over, and scroll to. Overlay all this on your actual site.
 
--   📉 **Crash reports:** Learn what happens before a crash without reproduction. Watch related session replay and manage crash triaging in Smartlook.
+- **Crash reports:** Learn what happens before a crash without reproduction. Watch related session replay and manage crash triaging in Smartlook.
 
 ### How does Smartlook compare to Pendo?
 
 Smartlook is entirely focused on user experience analytics, but lacks the adoption tools and surveys of Pendo. Heatmaps, crash reports, and their features built for mobile shows this focus.
 
+<p>
 <ProductComparisonTable
     competitors={['smartlook', 'pendo']}
     rows={[
@@ -447,10 +585,29 @@ Smartlook is entirely focused on user experience analytics, but lacks the adopti
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is Smartlook?
+<details>
+<summary>Main differences between Smartlook and Pendo</summary>
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Smartlook), as of January 2024, 3,186 of the top 1 million websites use Smartlook. This is a bit less than Pendo's 3,711 but doesn't account for their focus on mobile apps.
+- Smartlook focuses on session replay and UX analytics; Pendo combines analytics with in-app guides and adoption tools.
+- Smartlook includes crash reports and error tracking; Pendo does not.
+- Smartlook has strong mobile-first features (native rendering, wireframe mode); Pendo's mobile support is less specialized.
+- Pendo includes in-app guides, tooltips, and onboarding flows; Smartlook has no adoption or messaging tools.
+- Pendo includes NPS surveys and feedback collection; Smartlook has no survey features.
+
+</details>
+
+<details>
+<summary>Main similarities between Smartlook and Pendo</summary>
+
+- Both offer session replay for watching real user sessions.
+- Both include product analytics with funnels and user paths.
+- Both support event tracking and autocapture.
+- Both offer heatmaps for visualizing user interactions.
+- Both have web and mobile SDKs.
+
+</details>
 
 ### Why do companies use Smartlook?
 
@@ -466,6 +623,30 @@ According to G2 reviewers, Smartlook users benefit from:
 >
 > For companies only wanting user analytics, replays, and analytics, Smartlook is a solid alternative to Pendo. This is especially true for mobile-focused companies.
 
+## Which Pendo alternative should you choose?
+
+Here's a quick guide based on what you're looking for:
+
+**For engineering-led teams wanting an all-in-one platform:**
+- **PostHog** – [Product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [feature flags](/docs/feature-flags), [A/B testing](/docs/experiments), [error tracking](/docs/error-tracking), [surveys](/docs/surveys), [workflows](/docs/workflows), and more in one developer platform. Best if you want to replace multiple tools with transparent pricing.
+
+**For internal digital adoption and employee training:**
+- **Whatfix** – Enterprise-focused with deep Salesforce/Workday/ServiceNow integrations, sandbox training environments, and LMS capabilities.
+- **WalkMe** – Now part of SAP, strong for enterprise digital transformation with workflow automation and ActionBots.
+
+**For qualitative user research and UX insights:**
+- **Hotjar** – Heatmaps, session recordings, surveys, and user interviews – now part of Contentsquare. Best for non-technical teams wanting simple, visual feedback tools.
+
+**For product analytics with deep autocapture:**
+- **Heap** – Comprehensive autocapture with retroactive event definition and visual labeling. Now part of Contentsquare alongside Hotjar.
+
+**For focused product onboarding:**
+- **Appcues** – No-code onboarding flows, tooltips, and checklists with transparent pricing. Best for product-led SaaS teams who don't need deep analytics.
+
+**For mobile-first session replay and crash analytics:**
+- **Smartlook** – Strong mobile SDK support with native rendering, crash reports, and heatmaps. Best for teams prioritizing mobile app UX.
+
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
@@ -479,3 +660,132 @@ We're biased, obviously, but we think PostHog is the perfect Pendo replacement i
 Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 
 <ArrayCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is Pendo used for?</summary>
+
+**Pendo** is a product experience platform used by product managers and customer success teams to understand user behavior, collect feedback, and drive product adoption. It combines product analytics with in-app guides, tooltips, NPS surveys, and roadmap tools.
+
+</details>
+
+<details>
+<summary>Why look for Pendo alternatives?</summary>
+
+Common reasons include: needing features Pendo doesn't offer (like feature flags, A/B testing, or error tracking), wanting transparent pricing instead of opaque sales-driven contracts, preferring a more developer-friendly or open-source platform, or finding Pendo's average cost too expensive.
+
+</details>
+
+<details>
+<summary>What's the difference between PostHog and Pendo?</summary>
+
+**PostHog** is built for engineers and technical product teams, combining product analytics with feature flags, A/B testing, error tracking, LLM analytics, surveys, [and more](/products). **Pendo** is built for non-technical product managers and customer success teams, combining product analytics with in-app guides, tooltips, feedback collection, and roadmap tools. PostHog is open source with transparent pricing; Pendo is closed-source with opaque, sales-driven pricing.
+
+</details>
+
+<details>
+<summary>How much does Pendo cost?</summary>
+
+Pendo doesn't publish pricing. According to [Vendr data](https://www.vendr.com/buyer-guides/pendo), customers pay an average of ~$47k/year, with a range of $15k–$140k+ depending on MAUs and features. Pendo has four tiers (Free, Base, Core, Ultimate), with session replay and NPS only available on Core and above. Many features like Pendo Listen are separately priced add-ons.
+
+</details>
+
+<details>
+<summary>What's the best Pendo alternative overall?</summary>
+
+For most teams, **PostHog** is the best alternative. It includes product analytics, session replay, surveys, feature flags, A/B testing, error tracking, LLM analytics, and more; the main gap between them is in-app guides and, which PostHog doesn't have yet.
+
+</details>
+
+<details>
+<summary>Which Pendo alternative is best for in-app onboarding?</summary>
+
+**Appcues** is the best choice if product onboarding is your primary focus. It offers a polished no-code builder for tooltips, modals, and checklists. **Whatfix** and **WalkMe** are better for enterprise employee training on internal tools.
+
+</details>
+
+<details>
+<summary>Which Pendo alternative is best for session replay?</summary>
+
+**PostHog** and **Smartlook** both excel at session replay. PostHog's strength is connecting replays to the broader product context – you can jump from a funnel drop-off directly into a relevant replay, or see which feature flag variant a user was on. Smartlook is particularly strong for mobile apps with native rendering and crash reports.
+
+</details>
+
+<details>
+<summary>Does Pendo have a free tier?</summary>
+
+Yes, but it's limited. Pendo Free is capped at 500 MAUs with data sampling and Pendo branding. For comparison, PostHog's free tier includes 1M events, 5k session replays, 1500 survey responses, 10k messages per channel, and 1M feature flag requests per month with no branding restrictions.
+
+</details>
+
+<details>
+<summary>Which Pendo alternative is best for startups?</summary>
+
+**PostHog** stands out for early-stage companies. Beyond the generous free tier, startups can apply for [PostHog for Startups](/startups) to get $50,000 in additional credits. One platform that scales from MVP to growth stage without needing to add tools as you grow.
+
+</details>
+
+<details>
+<summary>Which Pendo alternative is best for engineering teams?</summary>
+
+**PostHog** is built with engineers in mind. It offers SQL access for custom queries, a fully documented API, SDKs for every major platform, and is open source so you can inspect the code. If your team values transparency and direct access to the people building the product, PostHog's engineer-focused support model fits well.
+
+</details>
+
+<details>
+<summary>Can PostHog replace Pendo?</summary>
+
+**Yes, for most use cases.** PostHog covers product analytics, session replay, surveys, and user feedback. The main gap is in-app guides — Pendo has a visual editor for tooltips, product tours, and onboarding walkthroughs that PostHog doesn't offer. PostHog does include [Surveys](/surveys) for collecting feedback and [Workflows](/workflows) for automated messaging, but if visual in-app guidance is critical, you may need a dedicated tool like Appcues alongside PostHog.
+
+</details>
+
+<details>
+<summary>Does Pendo have feature flags or A/B testing?</summary>
+
+No. Pendo does not offer feature flags, A/B testing, or experiments. If you need these capabilities alongside product analytics, you'll need a separate tool like LaunchDarkly or Statsig, or an all-in-one platform like **PostHog**.
+
+</details>
+
+<details>
+<summary>Does Pendo have error tracking?</summary>
+
+No. Pendo does not offer error tracking or crash reporting. If you need to monitor exceptions alongside your analytics, consider **PostHog** (which ties errors to user sessions and feature flags), **Smartlook** (which links crash reports to mobile session replays), or a dedicated tool like Sentry.
+
+</details>
+
+<details>
+<summary>Does Pendo have LLM analytics?</summary>
+
+No. Pendo does not offer LLM observability or AI analytics features. **PostHog** is currently the only analytics platform on this list that includes [LLM analytics](/llm-analytics) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions.
+
+</details>
+
+<details>
+<summary>Does Pendo offer EU hosting?</summary>
+
+Yes. Pendo offers EU hosting via GCP's EU multi-region infrastructure. PostHog also offers [EU hosting](/blog/posthog-cloud-eu).
+
+</details>
+
+<details>
+<summary>What are the best product analytics tools in 2026?</summary>
+
+The top product analytics tools in 2026 include:
+
+- **[PostHog](/product-analytics)** – Best all-in-one platform combining analytics with session replay, feature flags, A/B testing, error tracking, and more
+- **[Amplitude](https://amplitude.com/)** – Best for enterprise teams wanting warehouse-native analytics and a built-in CDP
+- **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for product managers wanting polished analytics with session replay and heatmaps
+- **[Heap](https://www.heap.io/)** – Best for teams wanting comprehensive autocapture with minimal instrumentation
+- **[Pendo](https://www.pendo.io/)** – Best for product managers who also need in-app guides and user onboarding
+
+For detailed comparisons, see our guides to [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Amplitude alternatives](/blog/best-amplitude-alternatives), and [Heap alternatives](/blog/best-heap-alternatives).
+
+</details>
+
+<details>
+<summary>What other analytics tools are available?</summary>
+
+We've written comparison guides for many analytics categories. See our takes on the best [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Amplitude alternatives](/blog/best-amplitude-alternatives), [Heap alternatives](/blog/best-heap-alternatives), and [Hotjar alternatives](/blog/best-hotjar-alternatives).
+
+</details>
