@@ -1080,6 +1080,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/co-marketing',
             },
             {
+                name: 'Influencers',
+                url: '/handbook/growth/marketing/influencers',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
@@ -5632,6 +5636,24 @@ export const docsMenu = {
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                },
+                {
+                    name: 'Modes',
+                    url: '/docs/posthog-ai/modes',
+                    icon: 'IconToggle',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Plan mode',
+                    url: '/docs/posthog-ai/plan-mode',
+                    icon: 'IconMap',
+                    color: 'green',
+                },
+                {
+                    name: 'Research mode',
+                    url: '/docs/posthog-ai/research-mode',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Session summaries',
