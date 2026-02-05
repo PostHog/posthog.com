@@ -17,7 +17,6 @@ export const LOGOS = {
     azureBlob: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_blob_storage_a5110351f6.svg',
     azureOpenAI: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_openai_884ba0124a.svg',
     azureSql: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
-    bedrock: 'https://res.cloudinary.com/dmukukwp6/image/upload/bedrock_5c06698148.png',
     bigquery: 'https://res.cloudinary.com/dmukukwp6/image/upload/bigquery_8546771248.svg',
     bingAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
     bubble: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/bubble.svg',
