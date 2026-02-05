@@ -10,10 +10,10 @@ export default function WarehouseNativeSlide({ variant = 'default' }: WarehouseN
         <div className="h-full p-8 @md:p-12 flex flex-col justify-center bg-light dark:bg-dark">
             <h2 className="text-3xl @2xl:text-4xl font-bold text-primary mb-4">Warehouse-native workflows</h2>
             <p className="text-lg @2xl:text-xl text-primary max-w-3xl mb-4">
-                PostHog supports <strong>warehouse-native workflows</strong> via an integrated data warehouse. If you're
-                using an external warehouse, such as Snowflake, you can sync or ingest the data you need into PostHog
-                via our CDP. Either way, queries run on PostHog compute; we don&apos;t execute queries in your external
-                warehouse.
+                PostHog supports <strong>warehouse-native workflows</strong> via an integrated data warehouse. If
+                you&apos;re using PostHog as your data warehouse, you get SQL, unified data, and data stays in your
+                warehouse. If you&apos;re using an external warehouse, such as Snowflake, PostHog still enables you to
+                ingest data via the CDP. Either way, queries run in PostHog.
             </p>
             {variant === 'feature-flags' && (
                 <p className="text-lg @2xl:text-xl text-primary max-w-3xl mb-4">

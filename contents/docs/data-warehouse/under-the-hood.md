@@ -7,7 +7,7 @@ There are two types of data sources we are able to connect data from—integrati
 
 ## Connectors
 
-Connectors use a combination of [Temporal](https://temporal.io/) and the open source data loading tool, [dlt](https://dlthub.com/) to sync data from your source to PostHog's storage in S3. You can think of this as a complete extract and load tool where you simply provide the credentials and we will take care of the rest of the data flow.
+Connectors use a combination of [Temporal](https://temporal.io/) and the open source data loading tool, [dlt](https://dlthub.com/) to sync data from your source into PostHog. You provide the credentials and we handle the rest of the data flow. Data is stored in PostHog infrastructure; we do not run your queries inside your Snowflake, BigQuery, or Databricks.
 
 ## Custom sources
 
