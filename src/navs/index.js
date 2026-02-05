@@ -1080,6 +1080,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/co-marketing',
             },
             {
+                name: 'Influencers',
+                url: '/handbook/growth/marketing/influencers',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
