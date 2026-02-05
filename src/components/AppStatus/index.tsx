@@ -7,12 +7,12 @@ export default function AppStatus() {
 
     return loading ? null : (
         <Link
-            className="flex gap-1 items-center justify-end text-inherit hover:underline"
-            to="https://status.posthog.com"
+            className="flex gap-1 items-center justify-end text-inherit group"
+            to="https://www.posthogstatus.com"
             externalNoIcon
         >
             <span className={`text-2xl -mt-1 ${getStatusColor(appStatus)}`}>&bull;</span>
-            <span className="text-sm">{getStatusDescription(appStatus)}</span>
+            <span className="text-sm group-hover:underline">{getStatusDescription(appStatus)}</span>
         </Link>
     )
 }

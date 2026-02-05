@@ -4,22 +4,39 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Product engineers are responsible for writing docs and making sure they are up to date. This page is a guide to help you do this. 
+Product engineers are responsible for writing and maintaining documentation for their products. This page is a guide to help you do this. 
 
-> **What about the so-called "content team"?** They are responsible for improving the docs. This means:
->
-> - Reviewing and improving draft documentation created by product teams
-> - Identifying and improving low-quality documentation
-> - Shipping supplementary docs and tutorials based on feedback and emerging use cases
-> - Working on large scale docs projects
+## Ownership 
 
-## When should I write a doc?
+High-quality docs require the expertise and context of the engineers building them, which is why *you* own your product's documentation. 
 
-Two great times to write docs:
+Docs are extra important in the age of AI. All of our docs eventually make their way into the training data of newer foundation models. The quality and accuracy of your docs directly affect how people discover your product through LLMs.
+
+AI search is our fastest-growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs and keep them up to date.
+
+## What about the so-called Docs & Wizard team?
+
+The <SmallTeam slug="docs-wizard" /> can help you, but they can't write docs for everyone. They are responsible for improving the docs as a knowledge base. This means:
+
+- Reviewing and improving docs PRs created by product teams
+- Shipping docs content based on prioritized feedback and emerging use cases
+- Building tools and systems to improve baseline quality and structure
+- Creating context services that power agents like the AI wizard
+- Working on large scale docs projects
+
+If you want their input, hit them up in `#team-docs-and-wizard` or tag `@team-docs-wizard` in GitHub. 
+
+They've also created a comprehensive self-serve guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to use.
+
+## When should I start writing product docs?
+
+Three great times to write docs:
 
 1. When you ship a new user-facing product or feature. Write docs for big product launches before they release (during early access or beta). Smaller features and updates can wait until after they are shipped.
 
 2. When you recognize a confusion or gap in users' understanding of your product. This could be based on support tickets, sales requests, or just user feedback.
+
+3. When you update product behavior or interfaces. Check if the docs need to be updated with new information or instructions.
 
 Basically, if users *could* self-serve and use your product, but aren't, you should write docs to help them do so. Write the obvious docs before users start asking you obvious questions.
 
@@ -37,13 +54,15 @@ Docs should help people:
 
 Write the docs you would want to read if you were a user. 
 
+The <SmallTeam slug="docs-wizard" /> has created a guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to follow. It walks through how to structure and write your product docs in detail. Start there.
+
 ## Where do docs live?
 
 Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and edit docs in the [contents/docs directory of posthog.com](https://github.com/PostHog/posthog.com/tree/master/contents/docs). It uses file-based routing, so the folder and file structure is the same as the URL path. You can learn more about [developing the website here](/handbook/engineering/posthog-com/developing-the-website).
 
 Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [PostHog AI](/docs/posthog-ai) live in the [Product OS](/docs) section.
 
-> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">`#team-content`</PrivateLink>.
+> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">`#team-docs-and-wizard`</PrivateLink>.
 
 ## What about internal docs?
 

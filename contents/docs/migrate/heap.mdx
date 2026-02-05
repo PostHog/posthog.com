@@ -14,7 +14,7 @@ Migrating data from Heap is a three step process:
 2. Converting Heap event data to the PostHog schema and capturing in PostHog
 3. Converting Heap user data to the PostHog schema and capturing in PostHog
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## 1. Exporting data from Heap
 
@@ -24,11 +24,11 @@ This is only available on their *Pro* or *Premier* plans. The chart view CSV exp
 
 The other option is a one-time JSON export. To do this, contact [Heap support in-app](https://heapanalytics.com/app/contact). This requires a paid plan.
 
-These exports come in the form of multiple tables including ones for users, pageviews, and each type of event you label. 
+These exports come in the form of multiple tables including ones for users, pageviews, and each type of event you label.
 
 ## 2. Converting and capturing event data
 
-The schema of Heap's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. You can see details on Heap's schema in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/data-schema/#schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Heap's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. You can see details on Heap's schema in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/data-schema/ #schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 To start, you need to query each of the production event tables because the `all_events` table doesn't contain any properties. For example, if you have a project named **My Cool App** and labeled an event **My Cool Event**, you query the `my_cool_app.heap_main_production.my_cool_event` table.
 
@@ -38,7 +38,7 @@ With this event data, you can then go through each row and convert it to PostHog
 - Properties like `landing_page` to `$current_url`
 - Event `time` to an ISO 8601 timestamp
 
-Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
+Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
 
 Here's an example version of a Python script assuming the data is in `.csv` file:
 
@@ -48,78 +48,78 @@ from datetime import datetime
 import pandas as pd
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 key_mapping = {
-  'browser': '$browser',
-  'browser_version': '$browser_version',
-  'device_type': '$device_type',
-  'library': '$lib',
-  'ip': '$ip',
-  'city': '$geoip_city_name',
-  'country': '$geoip_country_name',
-  'region': '$geoip_subdivision_1_name',
-  'landing_page': '$current_url',
-  'path': '$pathname',
-  'referrer': '$referrer'
+'browser': '$browser',
+'browser_version': '$browser_version',
+'device_type': '$device_type',
+'library': '$lib',
+'ip': '$ip',
+'city': '$geoip_city_name',
+'country': '$geoip_country_name',
+'region': '$geoip_subdivision_1_name',
+'landing_page': '$current_url',
+'path': '$pathname',
+'referrer': '$referrer'
 }
 
 omitted_keys = ['session_time', 'user_id', 'time', 'event_id', 'session_id', 'domain']
 
 file_name = 'my_cool_app.heap_main_production.my_cool_event.csv'
 data = pd.read_csv(file_name)
-# We can try to get the event name from the file name, 
+# We can try to get the event name from the file name,
 # but it's not always the one you might want to use.
 event_name = file_name.split('.')[-2]
 
 for index, row in data.iterrows():
-  line = row.to_dict()
-  
-  if "UTC" in line["time"]:
-    ph_timestamp = datetime.strptime(line["time"], "%Y-%m-%d %H:%M:%S.%f %Z")
-  else:
-    ph_timestamp = datetime.strptime(line["time"], "%Y-%m-%d %H:%M:%S.%f")
+line = row.to_dict()
 
-  properties = {}
-  for key, value in line.items():
-    # Skip some properties
-    if  key in omitted_keys:
-      continue
-    elif pd.isna(value):
-      continue
-    elif key in key_mapping:
-      properties[key_mapping[key]] = value
-    elif key == 'platform':
-      # This doesn't handle Mac OS X well
-      if value.startswith("Mac OS X"):
-        ph_os = "Mac OS X"
-        ph_os_version = value.split(' ')[2]
-      else:
-        ph_os = value.split(' ')[0]
-        ph_os_version = value.split(' ')[1]
-      properties['$os'] = ph_os
-      properties['$os_version'] = ph_os_version
-    else:
-      # Custom properties, UTMs are the same
-      properties[key] = value
+if "UTC" in line["time"]:
+ph_timestamp = datetime.strptime(line["time"], "%Y-%m-%d %H:%M:%S.%f %Z")
+else:
+ph_timestamp = datetime.strptime(line["time"], "%Y-%m-%d %H:%M:%S.%f")
 
-  posthog.capture(
-    event=event_name,
-    distinct_id=line["user_id"],
-    properties=properties,
-    timestamp=ph_timestamp,
-  )
+properties = {}
+for key, value in line.items():
+# Skip some properties
+if key in omitted_keys:
+continue
+elif pd.isna(value):
+continue
+elif key in key_mapping:
+properties[key_mapping[key]] = value
+elif key == 'platform':
+# This doesn't handle Mac OS X well
+if value.startswith("Mac OS X"):
+ph_os = "Mac OS X"
+ph_os_version = value.split(' ')[2]
+else:
+ph_os = value.split(' ')[0]
+ph_os_version = value.split(' ')[1]
+properties['$os'] = ph_os
+properties['$os_version'] = ph_os_version
+else:
+# Custom properties, UTMs are the same
+properties[key] = value
+
+posthog.capture(
+event=event_name,
+distinct_id=line["user_id"],
+properties=properties,
+timestamp=ph_timestamp,
+)
 ```
 
 ## 3. Converting and capturing user data
 
 Heap's user data is stored in the `users` table and connected to events using the `user_id` column. Some of these users have an `identity` column with a value we can use as a `distinct_id`.
 
-Converting and capturing this data requires a similar process to the event data. The big difference is the need to call [`posthog.alias()`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) with the `user_id` and `identity` values so we can query events from either as the same person.
+Converting and capturing this data requires a similar process to the event data. The big difference is the need to call [`posthog.alias()`](/docs/product-analytics/identify #alias-assigning-multiple-distinct-ids-to-the-same-user) with the `user_id` and `identity` values so we can query events from either as the same person.
 
 Once we convert the properties to PostHog's schema, we can use the `$set` and `$set_once` to set the [person's properties](/docs/product-analytics/person-properties).
 
@@ -131,33 +131,33 @@ from datetime import datetime
 import pandas as pd
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 key_mapping = {
-  'browser': '$browser',
-  'browser_version': '$browser_version',
-  'device_type': '$device_type',
-  'library': '$lib',
-  'ip': '$ip',
-  'city': '$geoip_city_name',
-  'country': '$geoip_country_name',
-  'region': '$geoip_subdivision_1_name',
-  'landing_page': '$current_url',
-  'path': '$pathname',
-  'referrer': '$referrer',
-  'initial_browser': '$initial_browser',
-  'initial_browser_version': '$initial_browser_version',
-  'initial_device_type': '$initial_device_type',
-  'initial_landing_page': '$initial_current_url',
-  'initial_path': '$initial_pathname',
-  'initial_referrer': '$initial_referrer',
-  'initial_city': '$initial_geoip_city_name',
-  'initial_country': '$initial_geoip_country_name',
-  'initial_region': '$initial_geoip_subdivision_1_name'
+'browser': '$browser',
+'browser_version': '$browser_version',
+'device_type': '$device_type',
+'library': '$lib',
+'ip': '$ip',
+'city': '$geoip_city_name',
+'country': '$geoip_country_name',
+'region': '$geoip_subdivision_1_name',
+'landing_page': '$current_url',
+'path': '$pathname',
+'referrer': '$referrer',
+'initial_browser': '$initial_browser',
+'initial_browser_version': '$initial_browser_version',
+'initial_device_type': '$initial_device_type',
+'initial_landing_page': '$initial_current_url',
+'initial_path': '$initial_pathname',
+'initial_referrer': '$initial_referrer',
+'initial_city': '$initial_geoip_city_name',
+'initial_country': '$initial_geoip_country_name',
+'initial_region': '$initial_geoip_subdivision_1_name'
 }
 
 omitted_keys = ['id', 'user_id', 'full_initial_referrer']
@@ -166,58 +166,58 @@ file_name = 'my_cool_app.heap_main_production.users.csv'
 data = pd.read_csv(file_name)
 for index, row in data.iterrows():
 
-  set_properties = {}
-  set_once_properties = {}
-  line = row.to_dict()
-  user_id = line['user_id'] if 'user_id' in line else line['id']
-  for key, value in line.items():
-    if  key in omitted_keys:
-      continue
-    elif pd.isna(value):
-      continue
-    elif key == 'identity':
-      # user_id is the anonymous value, identity is the identified one
-      # An identity can have multiple user_id values, so we set it as the previous_id
-      posthog.alias(previous_id=line['identity'], distinct_id=user_id)
-    
-    elif key.startswith('initial') and key in key_mapping:
-      set_once_properties[key_mapping[key]] = value
-    elif key.startswith('initial'):
-      set_once_properties[key] = value
-    elif key == 'initial_platform':
-      if value.startswith("Mac OS X"):
-        ph_os = "Mac OS X"
-        ph_os_version = value.split(' ')[2]
-      else:
-        ph_os = value.split(' ')[0]
-        ph_os_version = value.split(' ')[1]
-      set_once_properties['$initial_os'] = ph_os
-      set_once_properties['$initial_os_version'] = ph_os_version
-    
-    elif key in ['joindate', 'last_modified', 'lastseen', 'identity_time']:
-      if value == 'Invalid date':
-        continue
-      # Dates must be converted to ISO 8601
-      if isinstance(value, str):
-        value = pd.to_datetime(value).isoformat()
-      else:
-        value = pd.to_datetime(value, unit='ms').isoformat()
-      set_properties[key] = value
-    else:
-      # Custom properties stay the same
-      set_properties[key] = value
+set_properties = {}
+set_once_properties = {}
+line = row.to_dict()
+user_id = line['user_id'] if 'user_id' in line else line['id']
+for key, value in line.items():
+if key in omitted_keys:
+continue
+elif pd.isna(value):
+continue
+elif key == 'identity':
+# user_id is the anonymous value, identity is the identified one
+# An identity can have multiple user_id values, so we set it as the previous_id
+posthog.alias(previous_id=line['identity'], distinct_id=user_id)
 
-  combined_properties = {
-    "$set": set_properties,
-    "$set_once": set_once_properties
-  }
-  distinct_id = line['identity'] if 'identity' in line and not pd.isna(line['identity']) else user_id
+elif key.startswith('initial') and key in key_mapping:
+set_once_properties[key_mapping[key]] = value
+elif key.startswith('initial'):
+set_once_properties[key] = value
+elif key == 'initial_platform':
+if value.startswith("Mac OS X"):
+ph_os = "Mac OS X"
+ph_os_version = value.split(' ')[2]
+else:
+ph_os = value.split(' ')[0]
+ph_os_version = value.split(' ')[1]
+set_once_properties['$initial_os'] = ph_os
+set_once_properties['$initial_os_version'] = ph_os_version
 
-  posthog.capture(
-    event="$set",
-    distinct_id=distinct_id,
-    properties=combined_properties
-  )
+elif key in ['joindate', 'last_modified', 'lastseen', 'identity_time']:
+if value == 'Invalid date':
+continue
+# Dates must be converted to ISO 8601
+if isinstance(value, str):
+value = pd.to_datetime(value).isoformat()
+else:
+value = pd.to_datetime(value, unit='ms').isoformat()
+set_properties[key] = value
+else:
+# Custom properties stay the same
+set_properties[key] = value
+
+combined_properties = {
+"$set": set_properties,
+"$set_once": set_once_properties
+}
+distinct_id = line['identity'] if 'identity' in line and not pd.isna(line['identity']) else user_id
+
+posthog.capture(
+event="$set",
+distinct_id=distinct_id,
+properties=combined_properties
+)
 ```
 
 This script may need modification depending on the structure of your Heap data, but it gives you a start.

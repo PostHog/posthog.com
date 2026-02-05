@@ -1,0 +1,173 @@
+---
+title: TanStack Start
+platformLogo: tanstack
+---
+
+This tutorial shows how to integrate PostHog with a [TanStack Start](https://tanstack.com/start) app for both client-side and server-side analytics.
+
+## Installation
+
+Install the required packages:
+
+```bash
+npm install @posthog/react posthog-node
+```
+
+- `@posthog/react` - React package for our [JS Web SDK](/docs/libraries/js) for client-side usage
+- `posthog-node` - PostHog [Node.js SDK](/docs/libraries/node) for server-side event capture
+
+## Initialize PostHog on the client
+
+Wrap your app with `PostHogProvider` in your root route with your project API key, host, and other options. 
+
+```tsx file=src/routes/__root.tsx
+// src/routes/__root.tsx
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { PostHogProvider } from '@posthog/react'
+
+export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <PostHogProvider
+          apiKey="<ph_project_api_key>"
+          options={{
+            api_host: '<ph_client_api_host>',
+            defaults: '2025-11-30',
+            capture_exceptions: true
+          }}
+        >
+          {children}
+        </PostHogProvider>
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+Once the provider is in place, PostHog automatically captures pageviews, sessions, and web vitals.
+
+## Capture events on the client
+
+Use the `usePostHog` hook from `@posthog/react` in any component to capture custom events:
+
+```tsx file=src/routes/checkout.tsx
+import { usePostHog } from '@posthog/react'
+
+function CheckoutButton({ orderId, total }: { orderId: string; total: number }) {
+  const posthog = usePostHog()
+
+  const handleClick = () => {
+    posthog.capture('checkout_started', {
+      order_id: orderId,
+      total: total,
+    })
+  }
+
+  return <button onClick={handleClick}>Checkout</button>
+}
+```
+
+### Identify users
+
+Call `posthog.identify()` when a user logs in to link their events to a user ID:
+
+```tsx
+import { usePostHog } from '@posthog/react'
+
+function LoginForm() {
+  const posthog = usePostHog()
+
+  const handleLogin = async (userId: string, email: string) => {
+    // ... your login logic
+
+    posthog.identify(userId, {
+      email: email,
+    })
+
+    posthog.capture('user_logged_in')
+  }
+}
+```
+
+Call `posthog.reset()` on logout to clear the identified user.
+
+## Initialize PostHog on the server
+
+Create a server-side PostHog client using `posthog-node`. Use a singleton pattern so you reuse the same client across requests:
+
+```ts file=src/utils/posthog-server.ts
+// src/utils/posthog-server.ts
+import { PostHog } from 'posthog-node'
+
+let posthogClient: PostHog | null = null
+
+export function getPostHogClient() {
+  if (!posthogClient) {
+    posthogClient = new PostHog(
+      '<ph_project_api_key>',
+      {
+        host: '<ph_client_api_host>',
+        flushAt: 1,
+        flushInterval: 0,
+      },
+    )
+  }
+  return posthogClient
+}
+```
+
+## Capture events on the server
+
+Use the server client in TanStack Start API routes to capture events server-side. Server-side capture is useful for tracking events that shouldn't be spoofable from the client, like purchases or authentication:
+
+```ts file=src/routes/api/checkout.ts
+// src/routes/api/checkout.ts
+import { createFileRoute } from '@tanstack/react-router'
+import { json } from '@tanstack/react-start'
+import { getPostHogClient } from '../../utils/posthog-server'
+
+export const Route = createFileRoute('/api/checkout')({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        const body = await request.json()
+
+        const posthog = getPostHogClient()
+
+        posthog.capture({
+          distinctId: body.userId,
+          event: 'item_purchased',
+          properties: {
+            item_id: body.itemId,
+            price: body.price,
+            source: 'api',
+          },
+        })
+
+        return json({ success: true })
+      },
+    },
+  },
+})
+```
+
+The server-side `capture` call requires a `distinctId` (the user identifier), an `event` name, and optional `properties`.
+
+## Next steps
+
+Installing the JS Web SDK and Node SDK means all of their functionality is available in your TanStack Start project. To learn more about this, have a look at our [JS Web SDK docs](/docs/libraries/js/usage) and [Node SDK docs](/docs/libraries/node).
