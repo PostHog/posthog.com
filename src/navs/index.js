@@ -2243,12 +2243,16 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Remix',
+                            url: '/docs/libraries/remix',
+                        },
+                        {
                             name: 'Svelte',
                             url: '/docs/libraries/svelte',
                         },
                         {
-                            name: 'Remix',
-                            url: '/docs/libraries/remix',
+                            name: 'TanStack Start',
+                            url: '/docs/libraries/tanstack-start',
                         },
                         {
                             name: 'Vue.js',
