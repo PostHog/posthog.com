@@ -245,7 +245,7 @@
         "autoprefixer": "^10.4.7",
         "babel-loader": "^8.2.2",
         "css-loader": "^6.4.0",
-        "eslint": "^7.9.0",
+        "eslint": "^9.26.0",
         "eslint-plugin-react": "^7.20.6",
         "hastscript": "^7.0.2",
         "husky": "9.1.7",
