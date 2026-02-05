@@ -47,7 +47,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### In-person onboarding
 
-Ideally, this will happen in Week 2 or 3, and will be with a few existing team members (depending on where we do it) and will be 3-4 days covering:
+This typically happens in Week 2 or 3 and runs 3-4 days with a few existing team members, covering:
 
 - Demo practice session with the team.
 - The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
@@ -66,6 +66,7 @@ By the end of month 1:
  - Be starting to solve technical problems for your book with occasional help
  - Be leading customer calls and demos on your own
  - Successfully made contact with _everyone_ in your book of business
+ - Update this page and other relevant handbook pages with what you learned during onboarding
 
 By the end of month 2:
  - Saved your first 'we're going to churn' - it's going to happen, but you're going to save them!
