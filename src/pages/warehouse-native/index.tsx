@@ -75,7 +75,7 @@ export default function WarehouseNative(): JSX.Element {
                     PostHog does not execute queries directly on an external warehouse (e.g. Snowflake, BigQuery, or
                     Databricks). If your requirement is &ldquo;run my analytics queries inside my existing
                     warehouse,&rdquo; that isn&apos;t how PostHog works today. We run queries on PostHog
-                    infrastructure—either in our integrated warehouse or on data ingested into PostHog via the CDP.
+                    infrastructure—either in our integrated warehouse or on data synced into PostHog via our warehouse sources.
                 </p>
 
                 <h2>Why this approach?</h2>
