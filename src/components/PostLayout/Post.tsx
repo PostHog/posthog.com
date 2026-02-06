@@ -101,11 +101,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
                         className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border hidden lg:flex flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-primary"
                     >
-                        <div
-                            className={`${
-                                stickySidebar ? 'reasonable:sticky reasonable:top-[108px]' : ''
-                            } bg-light dark:bg-dark z-10`}
-                        >
+                        <div className={`${stickySidebar ? 'reasonable:sticky reasonable:top-[108px]' : ''} z-10`}>
                             {sidebar}
                         </div>
                         <div className="flex flex-grow items-end">
