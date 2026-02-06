@@ -18,7 +18,7 @@ This page covers troubleshooting for Experiments. For setup, see the [installati
 
 We generally don't recommend this, since experiment feature flags need to be in a specific format (see below) or otherwise they won't work.
 
-However, if you insist on doing this (for example, you don't want to make code change), you can do this for **multiple variant feature flags only** by doing the following:
+However, if you insist on doing this (for example, you don't want to make code change), you can do this for **feature flags with at least 2 variants** by doing the following:
 
 1. Delete the existing [feature flag](https://app.posthog.com/feature_flags) you'd like to use in the experiment
 2. Create a new experiment and give your feature flag the same key as the feature flag you deleted in step 1.
@@ -36,6 +36,20 @@ However, if you insist on doing this (for example, you don't want to make code c
 ## How do I run a second experiment using the same feature flag as the first experiment?
 
 This is similar to running an experiment using an [existing feature flag](#how-do-i-use-an-existing-feature-flag-in-an-experiment). If you want to re-run an experiment (using the same feature flag key) while preserving the previous experiment results, delete the existing feature flag (not the experiment) and use the same key in the new experiment.
+
+## Why am I getting a feature flag validation error when creating an experiment?
+
+Experiments require feature flags to meet specific requirements. You may see validation errors if your feature flag doesn't meet them:
+
+- **"Feature flag must have at least 2 variants (control and at least one test variant)"**: Experiments need at least two variants – a `control` and at least one test variant. Single-variant flags cannot be used for experiments.
+
+- **"Feature flag must have a variant with key 'control'"**: One of your variants must have the key `control`. This is used as the baseline for comparison.
+
+To fix these errors:
+
+1. Ensure your feature flag has at least 2 variants.
+2. Make sure one variant has the key `control`.
+3. If using an existing feature flag, check that it meets both requirements before linking it to an experiment.
 
 ## How can I run experiments with my custom feature flag setup?
 
