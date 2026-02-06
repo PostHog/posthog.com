@@ -76,7 +76,11 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                                 <ScrollArea className="h-full">{children}</ScrollArea>
                             </div>
                         </div>
-                        <RadixPopover.Arrow className="fill-white" />
+                        <RadixPopover.Arrow asChild>
+                            <div className="w-5 h-2.5 overflow-hidden">
+                                <div className="w-3 h-3 bg-primary rotate-45 rounded-xs relative left-[3px] top-[-7px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]" />
+                            </div>
+                        </RadixPopover.Arrow>
                     </RadixPopover.Content>
                 </RadixPopover.Portal>
             </RadixPopover.Root>
