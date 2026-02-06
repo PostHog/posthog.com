@@ -26,15 +26,15 @@ This role has been called “the hottest job in startups” according to [a16z](
 
 A [forward deployed engineer](https://www.youtube.com/watch?v=Zyw-YA0k3xo) (FDE) is an engineer who sits at the customer site and fills the gap between what your product already does, and what that customer needs. They're like product engineers, but they focus on discovery, development, and delivery “from the inside” of the customer’s world rather than "side-by-side" with prospective and current users.
 
-The role originally formed at [Palantir](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1). As an intelligence software company, Palantir found that their target customers’ needs weren’t always super accessible and available for developers to build for; after all, things in that space are… top secret. Palantir found success with a model where engineers are “forward deployed” at the customer’s locations where they could directly and confidentially talk to users. 
+The role originated from [Palantir](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1). As an intelligence software company, Palantir found that their target customers’ needs weren’t always super accessible and available for developers to build for; after all, things in that space are… top secret. Palantir found success with a model where engineers are “forward deployed” to the customer’s locations where they could directly and confidentially talk to users. 
 
-Being onsite with customers lets FDEs get familiar with customer’s existing tech stack and pain points, which enables deep product discovery. It's a win-win: as FDEs solve problems, the customer gets highly customized solutions. The FDEs gain valuable domain-specific knowledge that then informs further product development. 
+Being onsite lets FDEs get familiar with customer’s existing tech stack and pain points, which enables deeper product discovery. It's a win-win: the customer gets highly customized solutions while FDEs gain domain-specific knowledge that informs further product development. 
 
-For example, when OpenAI was working on their voice models, they sent FDEs to a customer to work on call center automation. The customer was skeptical at first; the model wasn't good enough for them to use it in prod. So the FDEs created evals, took that data back to OpenAI's research team, and worked on improving the model's performance with the customer. Eventually, the customer became the first to deploy it, and these improvements were made widely available in their [Realtime API](https://platform.openai.com/docs/guides/realtime).
+For example, [when OpenAI was working on their voice models](https://newsletter.pragmaticengineer.com/i/170794709/3-the-fde-role-at-openai), they sent FDEs to a customer to work on call center automation. The customer was skeptical at first; the model wasn't good enough for them to use it in prod. So the FDEs created evals, took that data back to OpenAI's research team, and worked on improving the model's performance with the customer. Eventually, the customer became the first to deploy it, and these improvements were made widely available in their [Realtime API](https://platform.openai.com/docs/guides/realtime).
 
 ## What do forward deployed engineers actually do?
 
-The life of an FDE is pretty similar to other software engineers, except that they are onsite (physically or virtually) to develop for the customer's needs. This means they do a ton of meetings and customer-facing work, and are often required to travel.
+The life of a FDE is pretty similar to other software engineers, except that they are onsite to develop for the customer's needs. This means they do a ton of meetings and customer-facing work, and are required to travel 20-50% of the time (unless they do remote/virtual visits).
 
 At [Palantir](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1), an FDE's day to day looks like something like:
 
@@ -47,18 +47,19 @@ That said, every company is different. As the role evolves and becomes more popu
 
 ## How are they different from product engineers?
 
-The role of an FDE is to work onsite with customers to do product discovery and implementation in a way that is specific to that customer. FDEs spend more time talking to customers and scoping projects [than other software engineers](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87).
+The role of an FDE is to work onsite with customers to do product discovery and implementation in a way that is specific to that customer. So, FDEs spend way more time talking to customers and scoping projects [than other software engineers](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87).
 
-FDEs are usually found at companies that have products that are more like a “platform” or suite of tools that need hands-on work to implement. That's why they're more common at startups with highly technical products, like developer tools and AI. The product discovery and development cycle starts with specialized use cases, and then gets generalized later.
+FDEs are also usually found at companies that have products that are more like a “platform” or suite of tools that need hands-on work to implement. That's why they're more common at startups with very technical products, like developer tools and AI. The product discovery and development cycle starts with specialized use cases, and then gets generalized later.
 
 (Image: Diagram of converge > converge > diverge)
 
-Product engineers, on the other hand, don’t focus on a single customer at a time. They do talk to users, but their goal is to solve a problem that many people have by building a reusable product. They start out with lots of MVPs until they find product-market fit, zoom in on that, then zoom back out to scale up to sell to lots of people.
+Product engineers, on the other hand, don’t focus on a single customer at a time. They do talk to users, but their goal is to solve a problem that many people have by building a reusable product. The cycle for product engineers starts with tons of brainstorming and MVPs until they find product-market fit. They zoom in on what's working and make it reusable for others, and then zoom back out to scale and sell to lots of people.
 
 (Image: Diagram of diverge > contract > diverge)
 
-[Bob McGrew](https://www.youtube.com/watch?v=Zyw-YA0k3xo), an early executive at Palantir, describes that at companies that hire both, FDEs are in charge of building a rough gravel road for where the product needs to go. The product team then figures out how to generalize that gravel road for the next ten customers and turn it into a paved superhighway.
+[Bob McGrew](https://www.youtube.com/watch?v=Zyw-YA0k3xo), an early executive at Palantir, says that at companies with both roles, FDEs are in charge of building a rough gravel road for where the product needs to go. The product team then figures out how to generalize that gravel road for the next ten customers and turn it into a paved superhighway:
 
+(Image: Diagram combining both with FDE first, then PE next. converge > converge > diverge > converge > diverge)
 
 ## Why does it feel like everyone is hiring forward deployed engineers right now?
 
@@ -89,7 +90,7 @@ Companies look to [hire](https://builders.ramp.com/post/forward-deployed-enginee
 
 - **Passion for the process.** You love mixing engineering, consulting, and delivery, owning every step of the journey ([HackerRank](https://www.hackerrank.com/careers/job?id=7348505#Forward%20Deployed%20Engineer)).
 
-[Shyam Sankar](https://www.linkedin.com/in/shyamsankar), President and CTO of Palantir, has been [quoted](https://www.youtube.com/watch?v=Zyw-YA0k3xo) saying that people who are “heretics” or “rebels” in their domain make for perfect FDEs because they have the unique depth, context, and energy that can unlock 10x growth in a business.
+[Shyam Sankar](https://www.linkedin.com/in/shyamsankar), President and CTO of Palantir, has been [quoted](https://www.youtube.com/watch?v=Zyw-YA0k3xo) saying that people who are “heretics” or “rebels” in their domain make for perfect FDEs because they have the unique depth, context, and energy that can unlock 3x-10x growth for a business.
 
 If you haven't noticed yet, all of these are traits that also make for great product engineers and founders. It's no wonder why so many former Palantir employees go on to [start their own companies](https://www.businessinsider.com/palantirs-forward-deployed-engineer-role-churns-out-startup-founders-2025-6). 
 
@@ -99,13 +100,15 @@ If the product-market fit playbook is already working for you, the answer is tha
 
 (Image: dont try this at home kids meme)
 
-In the [FDE model](https://www.futureventures.ca/insights/understanding-the-forward-deployed-engineering-model), you lose lots of money early on. You start by solving one of their CEO’s top five problems, then you earn the right to solve bigger problems for them. But until that happens, you are spending lots of money and headcount to keep engineers onsite. This can take multiple years for a single customer.
+In the [FDE model](https://www.futureventures.ca/insights/understanding-the-forward-deployed-engineering-model), you lose a LOT of money early on. 
 
-The goal is not necessarily to land as many contracts as possible, but to grow deep and valuable contracts from each customer.
+You start by solving one of their CEO’s top five problems, then you earn the right to solve bigger problems for them. But until that happens, you are spending lots of money and headcount to keep engineers onsite. This can take multiple years for a single customer.
 
-That’s why FDE teams make sense for companies where the product requires a lot of hands-on work for implementation. The only other clear category is for companies in regulated verticals like defense, intelligence, and government.
+The goal isn't necessarily to land as many contracts as possible, but to establish contracts from each customer that grow deeper and more valuable over time.
 
-If those don’t sound like you, then you probably don’t need FDEs (yet). The need for FDEs organically becomes clear when your company decides to tackle new verticals, AI challenges, or massivee scale. This is what happened to [Ramp](https://builders.ramp.com/post/forward-deployed-engineering) in 2023. The FDE team formed naturally as the scaling needs of enterprise became obvious.
+That’s why FDE teams make sense for companies where the product requires a lot of hands-on work for implementation. The only other clear category is companies in regulated verticals like defense, intelligence, and government.
+
+If those don’t sound like you, then you probably don’t need FDEs (yet). The need for FDEs organically will become clear when your company decides to tackle new industries, AI-specific or infrastructure challenges, or _massive_ scale. That's what happened to [Ramp](https://builders.ramp.com/post/forward-deployed-engineering) in 2023 – their FDE team formed as the scaling needs of enterprise became increasingly obvious.
 
 # Why did we hire a forward deployed engineer at PostHog?
 
