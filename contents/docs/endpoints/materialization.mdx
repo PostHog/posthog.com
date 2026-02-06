@@ -1,0 +1,56 @@
+---
+title: Materialization
+---
+
+
+
+
+Materialization pre-computes your query results and stores them in S3. When someone calls your endpoint, PostHog returns the materialized results instead of running the query again - making responses much faster.
+
+## When to use materialization
+
+Materialization is ideal when:
+
+- **Your data doesn't need to be real-time** - Results are only as fresh as the last sync
+- **Your query is expensive** - Complex queries with large datasets benefit the most
+- **You have high traffic** - Avoid repeatedly running the same query
+
+If you need real-time data or frequently update your query, stick with direct execution or use [caching](/docs/endpoints/caching) instead.
+
+## How to enable materialization
+
+1. Go to your endpoint's `Configuration` tab
+2. Enable the **Materialization** toggle
+3. Choose a sync frequency:
+   - **Every hour** - Updates every hour
+   - **Every 6 hours** - Updates four times a day
+   - **Daily** - Updates once per day
+   - **Weekly** - Updates once per week
+
+PostHog will run the first materialization immediately. After that, it syncs on your chosen schedule.
+
+## Materialization status
+
+On the endpoint page, you'll see one of these statuses:
+
+- **Completed** - Latest materialization succeeded, results are available
+- **Running** - Materialization is in progress
+- **Failed** - Materialization encountered an error
+
+If materialization fails, the endpoint falls back to direct execution until the next successful sync.
+
+## Limitations
+
+Materialization is not available when:
+
+- **The endpoint has incompatible variables** - Complex [variables](docs/endpoints/variables) prevent us from materializing the endpoint.
+- **The endpoint is inactive** - Only active endpoints and their versions are materialized.
+
+## How materialization works with execution
+
+When you execute an endpoint:
+
+1. If materialization is enabled and complete, PostHog returns the materialized results
+2. If materialization is running or failed, PostHog executes the query directly
+
+See [Execution](/docs/endpoints/execution) for more details on how PostHog chooses between materialized and direct execution.

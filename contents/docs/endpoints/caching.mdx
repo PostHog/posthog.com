@@ -1,0 +1,37 @@
+---
+title: Caching
+---
+
+
+
+
+Caching stores query results temporarily so repeated calls don't re-run the query. This is different from [materialization](/docs/endpoints/materialization), which pre-computes and stores results on a schedule.
+
+## How caching works
+
+When you execute an endpoint:
+
+1. PostHog checks if there's a cached result that's still considered fresh based on your configuration
+2. If yes, it returns the cached result immediately
+3. If no, it runs the query and caches the result
+
+## Cache age
+
+You can set a custom cache duration per endpoint in the `Configuration` tab. The allowed range is:
+
+- **Minimum:** 5 minutes (300 seconds)
+- **Maximum:** 24 hours (86,400 seconds)
+
+If not set, the default is 6 hours.
+
+See [endpoint execution](/docs/endpoints/execution) for more detail on how this can affect your results.
+
+## Caching vs materialization
+
+| Feature | Caching | Materialization |
+|---------|---------|-----------------|
+| Storage | Temporary | Persistent (S3) |
+| Refresh | On demand | Scheduled |
+| Best for | Moderate traffic, real-time needs | High traffic, expensive queries |
+
+Use caching when you need relatively fresh data. Use materialization when query speed matters more than freshness.

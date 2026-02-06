@@ -1,0 +1,39 @@
+---
+title: Retrieve data from your endpoint with Node.js
+platformLogo: nodejs
+---
+
+
+Call PostHog endpoints from Node.js.
+
+## Basic request
+
+```javascript
+const response = await fetch(
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run",
+  {
+    headers: {
+      "Authorization": `Bearer ${process.env.POSTHOG_PERSONAL_API_KEY}`
+    }
+  }
+);
+const data = await response.json();
+console.log(data);
+```
+
+## With variables
+
+```javascript
+const response = await fetch(
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run",
+  {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.POSTHOG_PERSONAL_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ variables: { customer_id: "cust_123" } })
+  }
+);
+const data = await response.json();
+```

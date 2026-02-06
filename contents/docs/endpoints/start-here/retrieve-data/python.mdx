@@ -1,0 +1,33 @@
+---
+title: Retrieve data from your endpoint with Python
+platformLogo: python
+---
+
+
+Call PostHog endpoints from Python using the `requests` library.
+
+## Basic request
+
+```python
+import requests
+
+url = "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
+headers = {"Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+print(data)
+```
+
+## With variables
+
+```python
+import requests
+
+url = "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
+headers = {"Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"}
+body = {"variables": {"customer_id": "cust_123"}}
+
+response = requests.post(url, headers=headers, json=body)
+data = response.json()
+```

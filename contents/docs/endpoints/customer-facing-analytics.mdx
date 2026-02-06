@@ -1,0 +1,103 @@
+---
+title: Build customer-facing analytics
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+This guide shows how to build a customer-facing analytics feature where each user sees their own personalized stats. We'll track button clicks per user and query personalized counts from a PostHog endpoint.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T15_31_10_923_Z_06506e4259.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T15_31_10_923_Z_06506e4259.png"
+  alt="Customer-facing analytics demo app"
+  classes="rounded"
+/>
+
+<CalloutBox icon="IconLightBulb" type="info" title="Prerequisites">
+
+- [PostHog installed](/docs/getting-started/install) in your app
+
+</CalloutBox>
+
+## Step 1: Create an endpoint with a user variable
+
+Open the [SQL editor](https://us.posthog.com/sql) and write this query:
+
+```sql
+SELECT count() as click_count
+FROM events
+WHERE event = 'hedgehog_clicked'
+  AND properties.user_id = {variables.user_id}
+```
+
+In the **Variables** tab, add a variable named `user_id` with type `String`.
+
+Create the endpoint with the name `hedgehog_clicks_by_user`.
+
+## Step 2: Track events with user context
+
+When tracking events, include a `user_id` property to associate them with specific users:
+
+```tsx
+posthog.capture("hedgehog_clicked", {
+  user_id: currentUser.id,
+});
+```
+
+## Step 3: Query the endpoint from your backend
+
+<CalloutBox icon="IconWarning" type="caution" title="Keep API keys server-side">
+
+Never expose your PostHog API key in client-side code. Always proxy endpoint calls through your backend.
+
+</CalloutBox>
+
+Create an API route that queries the endpoint with the user's ID:
+
+```ts
+// Example: Next.js API route
+export async function POST(request: Request) {
+  const { user_id } = await request.json();
+
+  const response = await fetch(
+    `https://us.posthog.com/api/projects/${PROJECT_ID}/endpoints/hedgehog_clicks_by_user/run`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.POSTHOG_API_KEY}`,
+      },
+      body: JSON.stringify({
+        variables: { user_id },
+      }),
+    }
+  );
+
+  const data = await response.json();
+  return Response.json({ click_count: data.results?.[0]?.[0] ?? 0 });
+}
+```
+
+Then fetch from your frontend:
+
+```tsx
+const response = await fetch("/api/hedgehog-clicks", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ user_id: currentUser.id }),
+});
+
+const { click_count } = await response.json();
+```
+
+## Security considerations
+
+1. **Never expose API keys client-side** - Always proxy through your backend
+2. **Variables are required** - Endpoints with variables require values, preventing accidental data leaks
+3. **Validate user IDs** - In production, verify the user is authorized to query data for the requested `user_id`
+
+## Next steps
+
+- [Materialize your endpoint](/docs/endpoints/materialization) for faster response times
+- [Generate a typed SDK](/docs/endpoints/openapi-sdk-generation) for type-safe API calls
+- Learn about [caching](/docs/endpoints/caching) to reduce costs

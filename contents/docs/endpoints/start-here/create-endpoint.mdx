@@ -1,0 +1,93 @@
+---
+title: Create an endpoint
+showStepsToc: true
+---
+
+import EndpointsBetaSnippet from '../_snippets/beta.mdx'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CallToAction } from 'components/CallToAction'
+import { Steps, Step } from 'components/Docs/Steps'
+import Tab from 'components/Tab'
+
+
+<Steps>
+
+<Step title="Create your endpoint" badge="required">
+
+Once you have your insight or SQL query, create an endpoint from it. This will give you a stable API endpoint you can call to retrieve the data.
+
+<Tab.Group tabs={['Insight', 'SQL']}>
+<Tab.List>
+<Tab>From insight</Tab>
+<Tab>From SQL</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+1. Open your insight
+2. Click on the info & actions button (the three dots button in the top right)
+3. Click `Create endpoint`
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoint_from_insight_b9567d7ef7.png"
+  alt="Creating an endpoint from an insight"
+  classes="rounded"
+/>
+
+4. Give your endpoint a descriptive name and optionally a description
+  - **Recommended**: `daily_active_users`, `account_users_activity`, `signup_funnel`
+  - **Avoid**: `endpoint1`, `test`, `query`
+5. Create the endpoint
+
+</Tab.Panel>
+<Tab.Panel>
+
+1. In the SQL editor, click on the `Endpoint` tab in the output pane:
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_00_54_246_Z_a8d31a1299.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_00_26_709_Z_11f8e467e6.png"
+  alt="Creating an endpoint from a SQL query"
+  classes="rounded"
+/>
+
+2. Give your endpoint a descriptive name and optionally a description
+  - **Recommended**: `daily_active_users`, `account_users_activity`, `signup_funnel`
+  - **Avoid**: `endpoint1`, `test`, `query`
+3. Create the endpoint
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Verify endpoint data" badge="recommended">
+
+Before integrating your endpoint into your application, use the `Playground` tab to verify it returns the expected data.
+
+1. Open your endpoint from the [Endpoints page](https://posthog.com/endpoints)
+2. Click the `Playground` tab
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_31_26_778_Z_c5108ec55b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T12_30_54_702_Z_2d3d04c01b.png"
+  alt="Endpoint playground tab"
+  classes="rounded"
+/>
+
+3. If your endpoint has [variables](/docs/endpoints/variables), enter test values
+4. Click **Execute endpoint** to retrieve the data
+5. Review the results to understand the response structure
+
+</Step>
+
+<Step title="Next step">
+
+Now retrieve data from your endpoint using your preferred language.
+
+<CallToAction type="primary" to="/docs/endpoints/start-here/retrieve-data">
+Retrieve your data
+</CallToAction>
+
+</Step>
+
+</Steps>

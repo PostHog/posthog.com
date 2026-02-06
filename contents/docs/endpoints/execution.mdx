@@ -1,0 +1,84 @@
+---
+title: Execution
+---
+
+
+
+
+When you execute an endpoint, PostHog runs your query and returns the results. This page explains what happens under the hood and how to control execution behavior.
+
+## Trying it out
+
+Before integrating an endpoint into your app, use the `Playground` tab on the endpoint's page to experiment. You can test different parameters and see the response format without writing any code.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T11_40_07_486_Z_fc74bd9c5a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_02_05_T11_40_53_363_Z_8d35c76563.png"
+  alt="Endpoint Playground tab"
+  classes="rounded"
+/>
+
+## Execution modes
+
+PostHog uses one of two execution modes depending on your endpoint configuration:
+
+### Direct execution
+
+Runs the query directly against the database. This is used when:
+
+- the endpoint version you're executing is not enabled
+- or you request a fresh calculation with `refresh: "direct"` on a materialized endpoint
+
+### Materialized execution
+
+Reads from pre-computed results stored in S3. This is faster but only available when materialization is enabled and complete.
+
+## The `refresh` parameter
+
+Control query behavior when executing an endpoint:
+
+| Value | Behavior |
+|-------|----------|
+| `cache` | (default) If available, return cached results. Otherwise, either return the materialized results or run the query against raw data, depending on whether the endpoint is materialized. |
+| `force` | Forcefully bypass cached results, and either return materialized results or run the query against raw data, depending on whether the endpoint is materialized. |
+| `direct` | Only valid for a materialized endpoint. Bypass the materialized results and run the query against raw data. |
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"refresh": "direct"}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+## Response format
+
+A successful response (HTTP 200) includes:
+
+```json
+{
+  "results": [
+    ["value1", "value2"],
+    ["value3", "value4"]
+  ],
+  "columns": ["column_a", "column_b"]
+}
+```
+
+- `results` - Array of rows, each row is an array of values
+- `columns` - Column names matching the order of values in each row
+- and a few more fields with additional metadata around materialization status, endpoint version, etc
+
+## Debugging
+
+Pass `debug: true` in the request body to include additional debugging information in the response:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"debug": true}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+Main bit of extra information here to help you debug is the `hogql` field which includes the exact query that's been run against our database, mostly useful when you want to verify the query ran against a materialized endpoint.
