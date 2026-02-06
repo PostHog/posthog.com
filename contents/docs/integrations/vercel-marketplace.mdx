@@ -29,18 +29,15 @@ This creates a PostHog organization and project, and adds environment variables 
 
 The integration adds these environment variables to your Vercel project:
 
-- `POSTHOG_PROJECT_API_KEY` - Your [project API key](/docs/getting-started/api-keys), used to initialize the PostHog SDK
-- `POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
+- `NEXT_PUBLIC_POSTHOG_KEY` - Your [project API key](/docs/getting-started/api-keys), used to initialize the PostHog SDK
+- `NEXT_PUBLIC_POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 
-For client-side frameworks, you'll need to rename these variables in your Vercel project settings to expose them to the browser:
+These `NEXT_PUBLIC_*` variable names work automatically in Next.js for both client and server environments. For other frameworks, you may need to copy the values to framework-specific variable names:
 
-| Framework | Rename to |
-|-----------|-----------|
-| Next.js | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` |
+| Framework | Copy values to |
+|-----------|----------------|
 | Vite/SvelteKit | `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST` |
 | Nuxt | `NUXT_PUBLIC_POSTHOG_KEY`, `NUXT_PUBLIC_POSTHOG_HOST` |
-
-Server-side code can use the original names directly.
 
 ## Installing the SDK
 
