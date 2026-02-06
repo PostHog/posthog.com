@@ -43,6 +43,22 @@ With groups, you can:
 3. Link events to groups in your code
 4. Analyze data by group instead of by user
 
+## Billing
+
+Group analytics is a paid add-on. Here's how billing works:
+
+<CalloutBox icon="IconInfo" title="All identified events count toward billing" type="fyi">
+
+Once you subscribe to group analytics, billing applies to **all identified events** in your project, not just events with group properties attached. This is because group analytics enables infrastructure that processes all identified events to support group-level analysis.
+
+</CalloutBox>
+
+- Billing starts when you enable group analytics from your [billing page](https://app.posthog.com/organization/billing), not when you add group analytics code to your application.
+- Usage is based on captured [identified events](/docs/product-analytics/identify), even if they don't include group properties.
+- Billing stops when you unsubscribe from the billing page. You don't need to remove group analytics code from your application to stop billing.
+
+You can see how enabling group analytics affects your pricing on the [pricing calculator](/pricing).
+
 ## Use cases
 
 ### B2B product activation

@@ -27,11 +27,11 @@ If you require GDPR compliance, there are [specific guidelines](docs/privacy/gdp
 
 PostHog supports [realtime transformations](/docs/cdp/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
 
-- [Redacting PII data](https://posthog.com/tutorials/property-filter) before it's stored in PostHog
-- Disabling default [GeoIP enrichment transformations](https://us.posthog.com/pipeline/transformations)
-- [Dropping events](https://us.posthog.com/pipeline/new/transformation/hog-template-drop-events) based on a filter
-- [Hashing PII data](https://us.posthog.com/pipeline/new/transformation/hog-template-pii-hashing)
-- [IP anonymization](https://us.posthog.com/pipeline/new/transformation/hog-template-ip-anonymization)
+- [Redacting PII data](https://posthog.com/docs/cdp/transformations/template-pii-hashing) before it's stored in PostHog
+- Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/cdp/transformations/template-geoip)
+- [Dropping events](https://posthog.com/docs/cdp/transformations/drop-events) based on a filter
+- [Hashing PII data](https://posthog.com/docs/cdp/transformations/template-hash-properties)
+- [IP anonymization](https://posthog.com/docs/cdp/transformations/template-ip-anonymization)
 
 When in doubt, you can always create your own [custom transformation](https://us.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
 

@@ -10,10 +10,10 @@ export const plausible = {
             available: true,
             features: {
                 advertising_analytics: false,
-                bounce_rate_tracking: false,
+                bounce_rate_tracking: true,
                 bounce_rate: true,
-                breakdown_by_device_and_browser: false,
-                breakdown_by_geoip: false,
+                breakdown_by_device_and_browser: true,
+                breakdown_by_geoip: true,
                 clickmaps: false,
                 conversions: true,
                 cookieless_tracking: true,
@@ -25,22 +25,22 @@ export const plausible = {
                 integration_with_feature_flags: false,
                 integration_with_session_replay: false,
                 integration_with_surveys: false,
-                migration: false,
+                migration: true,
                 movement_maps: false,
-                open_source: false,
+                open_source: true,
                 outbound_clicks: true,
                 pageviews: true,
-                pre_configured_dashboards: false,
-                real_time_reporting: false,
+                pre_configured_dashboards: true,
+                real_time_reporting: true,
                 revenue_tracking: false,
                 search_tools: 'Keywords',
                 script_size: '<1 kB',
-                session_and_duration_tracking: false,
+                session_and_duration_tracking: true,
                 sessions: true,
                 snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,
-                visitor_and_view_tracking: false,
+                visitor_and_view_tracking: true,
                 web_vitals_reporting: false,
                 web_vitals: false,
             },
@@ -55,7 +55,7 @@ export const plausible = {
                 custom_properties: 'Events only',
                 monetization_analytics: false,
                 predictive_insights: false,
-                real_time_view: false,
+                real_time_view: true,
                 toolbar: false,
                 user_profiles: false,
                 trends: {
@@ -63,7 +63,7 @@ export const plausible = {
                     features: {},
                 },
                 funnels: {
-                    available: 'Limited',
+                    available: 'Business plan only',
                     features: {
                         correlation_analysis: false,
                         conversion_funnels: true,
@@ -134,6 +134,12 @@ export const plausible = {
         feature_flags: {
             available: false,
         },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         analytics_integration: {
@@ -143,7 +149,7 @@ export const plausible = {
             eu_hosting: true,
             open_source: true,
             reverse_proxy: true,
-            self_host: false,
+            self_host: true,
         },
         developer: {
             api: 'Partial',
@@ -159,7 +165,7 @@ export const plausible = {
         integrations: {
             csv_exports: true,
             datadog: false,
-            exports: false,
+            exports: true,
             email_reports: true,
             google_search_console: true,
             hubspot: false,
@@ -173,8 +179,8 @@ export const plausible = {
         pricing: {
             free_tier: false,
             self_serve: 'Trial only',
-            transparent_pricing: false,
-            usage_based_pricing: false,
+            transparent_pricing: true,
+            usage_based_pricing: true,
         },
         security: {
             bot_blocking: true,
@@ -184,7 +190,7 @@ export const plausible = {
             gdpr_ready: true,
             hipaa_ready: false,
             reverse_proxy: true,
-            saml_sso: false,
+            saml_sso: 'Enterprise',
             soc2_certified: false,
             two_factor_auth: true,
         },
