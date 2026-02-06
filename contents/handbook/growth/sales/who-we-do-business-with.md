@@ -55,6 +55,59 @@ We must comply with these sanctions, so in August 2024 we contacted impacted ind
 There are some exemptions to the sanctions including any service to any entity located in the Russian Federation that is owned or controlled, directly or indirectly, by a U.S. person.
 
 > If a customer believes they've been incorrectly impacted by our response to these sanctions, or have further questions about them, ask them to contact [sales@posthog.com](mailto:sales@posthog.com) so we can investigate.
+>
+> 
+### How to deactivate a sanctioned account
+
+If you need to deactivate a customer account due to sanctions compliance, follow these steps:
+
+> **Note:** TAMs may not have permissions to cancel Stripe subscriptions directly. If you encounter access issues, post in #team-billing for assistance.
+
+#### Step 1: Cancel the Stripe subscription
+
+1. Go to [Stripe Dashboard](https://dashboard.stripe.com/)
+2. Search for the customer using their email or Stripe ID
+3. Click on their current subscription
+4. Click **Cancel subscription** (do NOT delete the customer — we need invoice/payment records)
+5. This automatically updates the billing customer's `plans_map` to free and removes the Stripe subscription ID
+
+#### Step 2: Deactivate the organization
+
+1. Go to the [Org Admin page](https://us.posthog.com/admin/posthog/organization/)
+2. Find the customer's organization
+3. Set **active** to `No`
+
+#### Step 3: Deactivate the user
+
+1. Go to the [User Admin page](https://us.posthog.com/admin/posthog/user/)
+2. Find the user by email
+3. Set **permissions → active** to `No`
+4. This prevents them from creating a new account with the same email
+
+#### Step 4: Send notification email
+
+Send the customer an email informing them of the deactivation:
+
+> Subject: Important: PostHog Account Deactivation Notice
+>
+> Hi,
+>
+> I'm reaching out regarding your PostHog account for [COMPANY NAME].
+>
+> Due to US Treasury sanctions effective since September 2024, PostHog is no longer able to provide services to organizations based in Russia. As a result, we have deactivated your PostHog account in compliance with these regulations.
+>
+> If you believe this action was taken in error (for example, if your organization is owned or controlled by a U.S. person), please contact sales@posthog.com so we can investigate.
+>
+> Best regards,
+> [Your name]
+> Technical Account Manager, PostHog
+
+#### Checklist
+
+- [ ] Stripe subscription cancelled (not deleted)
+- [ ] Organization deactivated in admin
+- [ ] User deactivated in admin
+- [ ] Notification email sent to customer
 
 ## Checking whether we can do business with a customer
 
