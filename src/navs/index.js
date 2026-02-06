@@ -5035,138 +5035,172 @@ export const docsMenu = {
                         {
                             name: 'OpenAI',
                             url: '/docs/llm-analytics/installation/openai',
+                            icon: 'IconOpenAI',
                         },
                         {
                             name: 'OpenAI Agents',
                             url: '/docs/llm-analytics/installation/openai-agents',
+                            icon: 'IconOpenAI',
                         },
                         {
                             name: 'Anthropic',
                             url: '/docs/llm-analytics/installation/anthropic',
+                            icon: 'IconAnthropic',
                         },
                         {
                             name: 'Google',
                             url: '/docs/llm-analytics/installation/google',
+                            icon: 'IconGemini',
                         },
                         {
                             name: 'Vercel AI SDK',
                             url: '/docs/llm-analytics/installation/vercel-ai',
+                            platformLogo: 'vercel',
                         },
                         {
                             name: 'LangChain',
                             url: '/docs/llm-analytics/installation/langchain',
+                            icon: 'IconLangChain',
                         },
                         {
                             name: 'LiteLLM',
                             url: '/docs/llm-analytics/installation/litellm',
+                            platformLogo: 'litellm',
                         },
                         {
                             name: 'OpenRouter',
                             url: '/docs/llm-analytics/installation/openrouter',
+                            icon: 'IconOpenRouter',
                         },
                         {
                             name: 'DeepSeek',
                             url: '/docs/llm-analytics/installation/deepseek',
+                            platformLogo: 'deepseek',
                         },
                         {
                             name: 'LangGraph',
                             url: '/docs/llm-analytics/installation/langgraph',
+                            platformLogo: 'langgraph',
                         },
                         {
                             name: 'Ollama',
                             url: '/docs/llm-analytics/installation/ollama',
+                            platformLogo: 'ollama',
                         },
                         {
                             name: 'Azure OpenAI',
                             url: '/docs/llm-analytics/installation/azure-openai',
+                            platformLogo: 'azureOpenAI',
                         },
                         {
                             name: 'Groq',
                             url: '/docs/llm-analytics/installation/groq',
+                            platformLogo: 'groq',
                         },
                         {
                             name: 'Mistral',
                             url: '/docs/llm-analytics/installation/mistral',
+                            platformLogo: 'mistral',
                         },
                         {
                             name: 'LlamaIndex',
                             url: '/docs/llm-analytics/installation/llamaindex',
+                            platformLogo: 'llamaindex',
                         },
                         {
                             name: 'CrewAI',
                             url: '/docs/llm-analytics/installation/crewai',
+                            platformLogo: 'crewai',
                         },
                         {
                             name: 'Instructor',
                             url: '/docs/llm-analytics/installation/instructor',
+                            platformLogo: 'instructor',
                         },
                         {
                             name: 'Pydantic AI',
                             url: '/docs/llm-analytics/installation/pydantic-ai',
+                            platformLogo: 'pydanticAI',
                         },
                         {
                             name: 'xAI',
                             url: '/docs/llm-analytics/installation/xai',
+                            platformLogo: 'xai',
                         },
                         {
                             name: 'Perplexity',
                             url: '/docs/llm-analytics/installation/perplexity',
+                            platformLogo: 'perplexity',
                         },
                         {
                             name: 'Together AI',
                             url: '/docs/llm-analytics/installation/together-ai',
+                            platformLogo: 'togetherAI',
                         },
                         {
                             name: 'Fireworks AI',
                             url: '/docs/llm-analytics/installation/fireworks-ai',
+                            platformLogo: 'fireworksAI',
                         },
                         {
                             name: 'Cohere',
                             url: '/docs/llm-analytics/installation/cohere',
+                            platformLogo: 'cohere',
                         },
                         {
                             name: 'Hugging Face',
                             url: '/docs/llm-analytics/installation/hugging-face',
+                            platformLogo: 'huggingFace',
                         },
                         {
                             name: 'DSPy',
                             url: '/docs/llm-analytics/installation/dspy',
+                            platformLogo: 'dspy',
                         },
                         {
                             name: 'AutoGen',
                             url: '/docs/llm-analytics/installation/autogen',
+                            platformLogo: 'autogen',
                         },
                         {
                             name: 'Semantic Kernel',
                             url: '/docs/llm-analytics/installation/semantic-kernel',
+                            platformLogo: 'semanticKernel',
                         },
                         {
                             name: 'smolagents',
                             url: '/docs/llm-analytics/installation/smolagents',
+                            platformLogo: 'smolagents',
                         },
                         {
                             name: 'Mastra',
                             url: '/docs/llm-analytics/installation/mastra',
+                            platformLogo: 'mastra',
                         },
                         {
                             name: 'Mirascope',
                             url: '/docs/llm-analytics/installation/mirascope',
+                            platformLogo: 'mirascope',
                         },
                         {
                             name: 'Cerebras',
                             url: '/docs/llm-analytics/installation/cerebras',
+                            platformLogo: 'cerebras',
                         },
                         {
                             name: 'Portkey',
                             url: '/docs/llm-analytics/installation/portkey',
+                            platformLogo: 'portkey',
                         },
                         {
                             name: 'Helicone',
                             url: '/docs/llm-analytics/installation/helicone',
+                            platformLogo: 'helicone',
                         },
                         {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
+                            icon: 'IconCode',
                         },
                     ],
                 },

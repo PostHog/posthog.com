@@ -28,6 +28,9 @@ import Slider from 'components/RadixUI/Slider'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
+import * as PostHogIcons from '@posthog/icons'
+import * as OSIcons from '../OSIcons/Icons'
+import { getLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
@@ -419,6 +422,24 @@ export default function ReaderView({
     )
 }
 
+const resolveMenuIcons = (items: MenuItem[] | undefined): MenuItem[] | undefined => {
+    return items?.map((item) => {
+        let icon = item.icon
+        if (item.platformLogo) {
+            const url = getLogo(item.platformLogo)
+            if (url) icon = <img src={url} className="size-full" />
+        } else if (typeof icon === 'string') {
+            const IconComponent = (PostHogIcons as any)[icon] || (OSIcons as any)[icon]
+            if (IconComponent) icon = <IconComponent className="size-full" />
+        }
+        return {
+            ...item,
+            icon,
+            children: item.children ? resolveMenuIcons(item.children) : undefined,
+        }
+    })
+}
+
 const Menu = (props: { parent: MenuItem }) => {
     const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
 
@@ -456,7 +477,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 }}
                 dataScheme="primary"
             />
-            <TreeMenu key={activeInternalMenu?.url} items={activeInternalMenu?.children} />
+            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(activeInternalMenu?.children)} />
         </>
     )
 }
