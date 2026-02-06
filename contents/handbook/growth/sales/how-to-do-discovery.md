@@ -48,15 +48,26 @@ Beyond the 1st call, there are other spaces where we frequently communicate with
 
 ### Prep work
 
-Discovery includes preparation. Before speaking with any new customer interested in engaging further with PostHog, it's helpful to gather some basic knowledge to help with demoing relevant features and determining if it's a good fit.
+### Prep work
 
-**Examples:**
+Discovery includes preparation. Before speaking with any new customer interested in engaging further with PostHog, it's helpful to gather some basic knowledge to help with demoing relevant features and determining if it's a good fit — and to show up with context and a point of view.
+
+Discovery calls can add more value when you pair curiosity with perspective.
+
+That perspective should be data-informed and shaped by your understanding of common use cases, user stories, and lived experience helping customers be successful with PostHog — then grounded in the customer’s actual product, business objectives, and desired outcomes.
+
+Before joining a call, take time to understand:
 
 - Learn more about our [ICP](/handbook/who-we-build-for)
 - Cross-reference Vitally, PostHog, Slack and Salesforce for any prior engagement or current activity/status
-- Learn more about who you're speaking with via LinkedIn/X
-- Visit the company's website, learn about their product, who they are marketing/selling to, language they are using. Familiarize yourself with what may be important to them
-- Use ChatGPT, Perplexity, Claude, etc. to help research the company, their industry, macroeconomic factors and potential use cases for PostHog
+- Who the customer is building for and what decisions they’re trying to make
+- How they’re currently using PostHog (products, events, existing insights, data flow)
+- When possible, sign up for the customer’s product and experience the user journey firsthand
+- Use ChatGPT, Perplexity, Claude, etc. to help research the company, their industry, and potential use cases for PostHog
+
+Use this context to come into the discovery call with a perspective — not something to push, but something to test and refine through conversation.
+
+During discovery, you’re not just listening for what’s top of mind. You’re also looking for signals that help connect the dots between the customer’s current challenges and how they could more fully leverage PostHog as their needs evolve.
 
 ### Asking questions
 
