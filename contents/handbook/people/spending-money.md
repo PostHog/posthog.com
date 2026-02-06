@@ -17,7 +17,7 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 
 **If not, think again**.
 
-**When in doubt, ask your team lead for context, not permission.**
+**The goal here is to empower you. However, when in doubt, ask your team lead for context, not permission.** 
 - Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 

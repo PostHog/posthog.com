@@ -106,7 +106,7 @@ Users are analyzed based on the first variant they were exposed to, regardless o
 
 ## Sample ratio mismatch detection
 
-Sample ratio mismatch (SRM) is an automatic check that compares your actual user distribution across variants against your configured rollout percentages. PostHog uses a chi-squared statistical test to detect when the observed distribution is significantly different from what's expected.
+Sample ratio mismatch (SRM) is an automatic check that compares your actual user distribution across variants against your configured split percentages. PostHog uses a chi-squared statistical test to detect when the observed distribution is significantly different from what's expected.
 
 ### Why SRM matters
 
@@ -134,7 +134,7 @@ PostHog automatically calculates SRM once your experiment has at least 100 total
   alt="Screenshot of sample ratio mismatch indicator"
 />
 
-- **Green checkmark**: Distribution matches your rollout percentages. The observed difference is within normal random variation.
+- **Green checkmark**: Distribution matches your split percentages. The observed difference is within normal random variation.
 - **Yellow warning**: Sample ratio mismatch detected. The distribution is significantly different from expected.
 
 PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-value is displayed alongside the status—a lower p-value indicates stronger evidence of a mismatch.

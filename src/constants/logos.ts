@@ -93,6 +93,7 @@ export const LOGOS = {
     stripe: 'https://res.cloudinary.com/dmukukwp6/image/upload/Stripe_Logo_revised_2016_24183d3284.svg',
     supabase: 'https://res.cloudinary.com/dmukukwp6/image/upload/supabase_logo_icon_f4d15903a4.svg',
     svelte: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg',
+    tanstack: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logo_color_600_391d28faae.png',
     temporal: 'https://res.cloudinary.com/dmukukwp6/image/upload/Temporal_Symbol_dark_66b0582c1b.svg',
     tiktokAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/tiktok_svgrepo_com_9315a2fa30.svg',
     unity: 'https://res.cloudinary.com/dmukukwp6/image/upload/unity_9f9c332941.svg',

@@ -14,7 +14,7 @@ export const piwik_pro = {
                 entry_exit_paths: true,
                 pageviews: true,
                 search_tools: true,
-                snippet_install: false,
+                snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,
             },
@@ -79,10 +79,10 @@ export const piwik_pro = {
             reverse_proxy: true,
         },
         pricing: {
-            free_tier: true,
-            self_serve: true,
-            transparent_pricing: true,
-            usage_based_pricing: false,
+            free_tier: false,
+            self_serve: 'Trial only',
+            transparent_pricing: false,
+            usage_based_pricing: true,
         },
         developer: {
             api: true,
@@ -96,13 +96,13 @@ export const piwik_pro = {
         security: {
             cookieless_tracking: true,
             gdpr_ready: true,
-            hipaa_ready: false,
-            soc2_certified: false,
+            hipaa_ready: true,
+            soc2_certified: true,
             saml_sso: true,
             two_factor_auth: true,
         },
     },
     pricing: {
-        model: 'Free tier + subscription',
+        model: 'Subscription',
     },
 }

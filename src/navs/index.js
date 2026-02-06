@@ -1080,6 +1080,10 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/co-marketing',
             },
             {
+                name: 'Influencers',
+                url: '/handbook/growth/marketing/influencers',
+            },
+            {
                 name: 'Email & comms',
                 url: '',
                 children: [
@@ -2243,12 +2247,16 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Remix',
+                            url: '/docs/libraries/remix',
+                        },
+                        {
                             name: 'Svelte',
                             url: '/docs/libraries/svelte',
                         },
                         {
-                            name: 'Remix',
-                            url: '/docs/libraries/remix',
+                            name: 'TanStack Start',
+                            url: '/docs/libraries/tanstack-start',
                         },
                         {
                             name: 'Vue.js',
@@ -5528,6 +5536,24 @@ export const docsMenu = {
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                },
+                {
+                    name: 'Modes',
+                    url: '/docs/posthog-ai/modes',
+                    icon: 'IconToggle',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Plan mode',
+                    url: '/docs/posthog-ai/plan-mode',
+                    icon: 'IconMap',
+                    color: 'green',
+                },
+                {
+                    name: 'Research mode',
+                    url: '/docs/posthog-ai/research-mode',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Session summaries',

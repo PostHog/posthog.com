@@ -52,7 +52,7 @@ Content:
 Discovery and planning with the champions, potentially over a meal or in another less formal context - certainly not in front of their teams or boss, if relevant. Give the champions time to air any frustrations, and ask direct questions about renewal, their roadmap, any current or future needs in their team or beyond. This is a  good time to find out where you really are with a customer and what organizational challenges you may need to navigate, as well as expand their perception of what we can do. Some good questions to ask:
 
 -"Do you intend to renew with PostHog? If not, why not?"
--"What tools are other teams using alongside PostHog data to get the full picture of user behaviour?"
+-"What tools are other teams using alongside PostHog data to get the full picture of user behavior?"
 -"What goals and focus areas are on the table for the next year? How does PostHog fit into those?"
 
 ### New user demo on your own data
