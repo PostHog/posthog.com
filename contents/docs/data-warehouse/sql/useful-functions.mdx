@@ -92,6 +92,13 @@ select properties.$set.$geoip_country_name
 from events
 ```
 
+To convert a string property to the JSON type (useful for views where properties are stored as strings), use `toJSON()`:
+
+```sql
+SELECT toJSON(properties).some_field
+FROM events
+```
+
 You can parse JSON with `JSONExtractRaw()` to return a value.
 
 ```sql
