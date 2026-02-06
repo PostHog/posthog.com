@@ -34,3 +34,16 @@ You can view the scheduled changes in the table at the bottom of the page.
     alt="Scheduled flag changes"
     classes="rounded"
 />
+
+
+## Copying scheduled changes across projects
+
+When [copying feature flags across projects](/docs/feature-flags/multi-project-feature-flags), you can optionally include pending scheduled changes. This is useful when you want to replicate your entire flag configuration, including future automated changes, to another project.
+
+When copying schedules:
+
+- Only **pending** (unexecuted) scheduled changes are copied
+- All schedule properties are preserved, including timing, recurrence, payload, and end dates
+- Schedules that have already executed are not copied to avoid duplicating completed actions
+
+To copy schedules, check the "Copy schedules" option in the Projects tab when copying a flag. The checkbox shows the number of pending schedules available to copy.
