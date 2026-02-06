@@ -75,8 +75,8 @@ importers:
         specifier: 0.36.0
         version: 0.36.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/types':
-        specifier: 1.340.0
-        version: 1.340.0
+        specifier: 1.342.0
+        version: 1.342.0
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -890,8 +890,8 @@ packages:
     resolution: {integrity: sha512-lOoVRwADj8hjf7al89tvQ2a1lf53Z+7tiXMgpZJL3maQPDxh0DgLMN62B2MKUOFcoodBHLMbDM6WAbKgNy5Suw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/generator@7.29.0':
-    resolution: {integrity: sha512-vSH118/wwM/pLR38g/Sgk05sNtro6TlTJKuiMXDaZqPUfjTFcudpCOt00IhOfj+1BFAX+UFAlzCU+6WXr3GLFQ==}
+  '@babel/generator@7.29.1':
+    resolution: {integrity: sha512-qsaF+9Qcm2Qv8SRIMMscAvG4O3lJ0F1GuMo5HR/Bp02LopNgnZBC/EkbevHFeGs4ls/oPz9v+Bsmzbkbe+0dUw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-annotate-as-pure@7.27.3':
@@ -3175,8 +3175,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/types@1.340.0':
-    resolution: {integrity: sha512-vsHaWgioNUFUt7iPdPnjfyhQuOs0GcuIk1dSfDJ4w37y+Lj3GCvQy4Wqes7yGGB7splAuUNG2PZYVWWfQjpqIw==}
+  '@posthog/types@1.342.0':
+    resolution: {integrity: sha512-GfKJ6Q+4+IE4+9LrONkSBS92gsNJBuL+HfaSKhXd/bxD/tx+7CySmPshmBbjsIqA+eWbOdqreQK77x4RzTGjzQ==}
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -17166,7 +17166,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       jsesc: 3.1.0
 
-  '@babel/generator@7.29.0':
+  '@babel/generator@7.29.1':
     dependencies:
       '@babel/parser': 7.29.0
       '@babel/types': 7.29.0
@@ -18149,7 +18149,7 @@ snapshots:
   '@babel/traverse@7.29.0':
     dependencies:
       '@babel/code-frame': 7.29.0
-      '@babel/generator': 7.29.0
+      '@babel/generator': 7.29.1
       '@babel/helper-globals': 7.28.0
       '@babel/parser': 7.29.0
       '@babel/template': 7.28.6
@@ -20523,7 +20523,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/types@1.340.0': {}
+  '@posthog/types@1.342.0': {}
 
   '@preact/signals-core@1.12.1': {}
 
@@ -25938,7 +25938,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   camelcase-css@2.0.1: {}
 
@@ -27564,7 +27564,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   dot-prop@5.3.0:
     dependencies:
@@ -33870,7 +33870,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   node-abi@3.77.0:
     dependencies:
@@ -34328,7 +34328,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   parent-module@1.0.1:
     dependencies:
@@ -34455,7 +34455,7 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   pascalcase@0.1.1: {}
 
