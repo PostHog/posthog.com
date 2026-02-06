@@ -1,31 +1,26 @@
 ---
-title: LiteLLM LLM analytics installation
-platformLogo: litellm
+title: AutoGen LLM analytics installation
+platformLogo: autogen
 showStepsToc: true
 tableOfContents: [
     {
-        url: 'litellm-requirements',
-        value: 'LiteLLM Requirements',
+        url: 'install-the-posthog-sdk',
+        value: 'Install the PostHog SDK',
         depth: 1,
     },
     {
-        url: 'install-litellm',
-        value: 'Install LiteLLM',
+        url: 'install-autogen',
+        value: 'Install AutoGen',
         depth: 1,
     },
     {
-        url: 'configure-posthog-observability',
-        value: 'Configure PostHog observability',
+        url: 'initialize-posthog-and-autogen',
+        value: 'Initialize PostHog and AutoGen',
         depth: 1,
     },
     {
-        url: 'call-llms-through-litellm',
-        value: 'Call LLMs through LiteLLM',
-        depth: 1,
-    },
-    {
-        url: 'capture-embeddings',
-        value: 'Capture embeddings',
+        url: 'run-your-agents',
+        value: 'Run your agents',
         depth: 1,
     },
     {
@@ -38,15 +33,15 @@ tableOfContents: [
 
 <!--
 This page imports shared onboarding content from the main PostHog repo.
-Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/llm-analytics/litellm.tsx
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/llm-analytics/autogen.tsx
 See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
 -->
 
-import { LiteLLMInstallation } from 'onboarding/llm-analytics/litellm.tsx'
+import { AutoGenInstallation } from 'onboarding/llm-analytics/autogen.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 
 <OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
-    <LiteLLMInstallation modifySteps={addNextStepsStep} />
+    <AutoGenInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>
