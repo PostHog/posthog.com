@@ -1,11 +1,12 @@
 ---
-date: 2021-11-23
-title: How to measure product engagement
+date: 2025-12-12
+title: How to actually measure product engagement
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
+  - jina-yoon
   - hanna-crombie
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
@@ -16,104 +17,94 @@ tags:
   - Guides
 ---
 
-Product engagement is the most important factor when it comes to driving retention and revenue for your business. Though it seems easy to view success through a financial lens, revenue alone is rarely a clear indicator of a sustainable product. 
+Everyone wants high product engagement. It's one of those things that sounds obviously good, like "growth" or "traction." But what does it actually mean, and how do you measure it? 
 
-In this article we’ll take a look at why strong customer engagement metrics are vital to the success of your product, how to define engagement for your platform, and how to use analytics tools to measure and build on the results.
+In this blog, we'll explain what it is, common ways people measure it, and what metrics startups should actually focus on.
 
 **Contents:**
 
 - [What is product engagement?](#what-is-product-engagement)
 - [What are product engagement metrics?](#what-are-product-engagement-metrics)
-  - [Common engagement metrics](#common-engagement-metrics)
-- [What is the best way to measure product engagement?](#what-is-the-best-way-to-measure-product-engagement)
-  - [Active users](#active-users)
-  - [Stickiness](#stickiness)
-  - [Adoption](#adoption)
-- [What tools are good for tracking product engagement?](#what-tools-are-good-for-tracking-product-engagement)
+- [Common engagement metrics](#common-product-engagement-metrics)
+- [How to measure product engagement for startups](#how-to-measure-product-engagement-for-startups)
+- [Quick recap](#quick-recap)
 - [Further reading](#further-reading)
 
-> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics.
-
 ## What is product engagement?
-The golden rule for any product manager: [listen to your users](https://posthog.com/handbook/product/user-feedback).
 
-Product engagement metrics measure how active your users are and how they spend time with your product. They give valuable insight into what is resonating, and what’s not quite hitting the mark. Knowing more about the specifics of customer engagement can inform your product roadmap going forward, so you build more features that matter and don’t dilute your offering with ones that don’t. 
+Product engagement is simply about how people interact with your product. This includes how frequently they use it, what they do in it, how deeply they engage, whether they come back, and more. 
 
-Churn is a metric we associate closely with customer satisfaction but alone it isn’t sophisticated enough to explain _why_ your customers do or do not stay. It’s also a lagging metric – it can take at least 30 days just to understand that a customer is not coming back, during which you’ve lost precious time.
+You want to measure it because meaningful product engagement = value for your users = $$$ for your business.
 
-Your users are constantly providing feedback through their actions; which features they interact with, how they scroll, where their mouse hovers. By interpreting those actions, you’ll better understand what keeps them on your platform and be able to build more of what they need and love.
+*How* you choose to measure it depends on your business’s goals. Different product types and industries will have very different product engagement metrics. 
 
-Product engagement also makes a great [North Star Metric](https://posthog.com/blog/north-star-metrics), as it’s usually a reliable forecast for retention and can provide a strong foundation for product development.
+For example, increased [session time](/tutorials/time-on-page) is great for a mobile game that relies on ad revenue, but the same numbers could indicate an awful UX for a B2B fintech product. Context matters.
 
-## What are product engagement metrics?
-The engagement metrics you need to track will depend on what your business looks like and what your product is.
+This also means startups should prioritize different engagement metrics than established enterprises. (Skip ahead to [How to measure product engagement for startups](#how-to-measure-product-engagement-for-startups) if that’s what you’re looking for.)
 
-In order to use the right product engagement metric for your organization you need a strong understanding of your customer personas. What does your ideal user look like? How do they interact with your platform? What are the revenue drivers attached to them?
-By examining [your user personas](/product-engineers/how-to-create-user-personas) and how their individual actions influence revenue and growth, you can select the most appropriate engagement metrics for your product.
+## Common product engagement metrics
 
-### Common engagement metrics
-If your product is an online service which users engage with regularly then **interactions** are a key metric. Social media platforms, for example, look at numbers of likes, comments and shares.
+There are a ton of different ways to measure how people interact with your product. Here are the most common metrics people track.
 
-For gaming products **session duration** is likely to be a good indicator of positive user engagement. The longer users play, the better. 
+### Raw behavioral metrics
 
-If you're a business which delivers content then your key metric should be based on how that content is delivered. YouTube may base engagement metrics on **views**, for example, while Google may use the number of **search queries**.
+These are raw numbers from what users are doing with your product.
 
-The individual metrics are limitless. You’ll see **pageviews**, **bounce rate**, **page scroll depth**, **purchases** and many more used as KPIs for different business models. It’s important not to choose these glibly, but to make sure you’ve chosen the perfect fit for your product.
+- **Sessions per user:** How often they open/use the product. High session count might mean your product is sticky (like Instagram or Candy Crush).
 
-## What is the best way to measure product engagement?
-Listening to users’ actions is important, but how can you track engagement metrics and translate them into actionable insights?
+- **Session length/time in product:** Useful for media products where longer = better (like YouTube or Spotify). Not so good if efficiency is the goal (like a banking app).
 
-![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-engagement/product-engagement-metrics.jpeg)
+- **Feature adoption/breadth:** How many features of your product someone uses. Useful for B2B software if upselling from one product to multiple offerings is your goal.
 
-A good way to get started is to use some basic metrics to create a broad framework for engagement insight. The following metrics are very easy to track with the help of product analytics software such as PostHog (pictured above).
+- **Specific actions completed:** The concrete things users do, like files created in Figma or searches performed in Google. (These are often the best candidates for [North Star metrics](/founders/north-star-metrics)!)
 
-### Active users
-Active users are those who perform valuable actions on your platform. 
-Daily Active Users (DAU) is a key metric for subscription services and is expressed as a percentage of total users. High DAU is evidence that you’ve been successful in attracting customers. On PostHog, you can track this by [defining actions for key activities, such as daily sign-ins](/docs/data/actions).
+- **Frequency of use:** Daily, weekly, monthly active users (DAU/WAU/MAU). Shows baseline usage patterns, but doesn’t tell you if the usage is meaningful.
 
-This metric is particularly important if you’re working with an ad-based revenue model. The number of daily users you see is directly linked to your profitability, so you should be keeping a close eye on DAU.
+- **Depth of engagement:** How far your users get. Someone who completes onboarding and uses 3 features is more engaged than someone who signs up and bounces.
 
-### Stickiness
-Imagine you’re a customer at a local hair salon. 
+### Calculated metrics
 
-You like the cut you’re given, so you book to go back. That’s great for their business – at that salon you’re considered a sticky customer. 
+These are derived by doing math on the raw metrics above to answer specific questions.
 
-The stickiness metric validates that your customers are happy and are likely to keep using your product. It’s a good demonstration of [retention](https://posthog.com/blog/introduction-to-customer-retention).
+- **[Activation rate](/product-engineers/activation-metrics):** % of users who complete key early actions that correlate with retention. Helps you understand if people are experiencing value quickly enough to come back. (For startups, the hard part is defining what those "key early actions" are.)
 
-Again, the way you measure stickiness will depend on your business but many product managers calculate stickiness using this formula: 
+- **Stickiness (DAU/MAU ratio):** How many days per month your active users show up. Good stickiness varies wildly (e.g., a daily habit-tracking app might be high, a travel app is naturally low).
 
-> DAU ÷ MAU. 
+- **[Retention rate](/product-engineers/customer-retention-metrics):** % of users still active after X days/weeks/months. Usually tracked by cohort (i.e., for users who signed up in January, how many are still here in March?).
 
-This will show you what percentage of customers you’re retaining over a period of time. 
+- **[Churn rate](/product-engineers/churn-rate-vs-retention-rate):** % of users who stop using the product over a time period. Commonly used for subscriptions where you can clearly see when someone cancels, like Netflix.
 
-An easier way to track this is to use a tool such as PostHog, which has a dedicated stickiness tool which can be used to track the stickiness of any defined action and gives a granular view of how this correlates to engagement. 
+- **Engagement scores:** Sometimes called Product Engagement Score (PES). Weighted composites of multiple metrics meant to represent per user/account engagement in a single number. 
 
-### Adoption
-Adoption represents the number of users using key features in your product.
-Each new feature presents an opportunity for additional customer value. Low adoption implies that you’re offering something which users don’t need, or that there’s something wrong with the feature itself. High adoption means users are flocking to a new feature.
+> **Product Engagement Scores (PES)** are popular among the interwebz because having a single representative number sounds nice and looks pretty on dashboards. In practice, it's extremely reductive and rarely useful since you lose so much context when combining these numbers arbitrarily, so we don't recommend using them.
 
-If users are paying for features they don’t use then it lowers the perceived value, so it’s essential to keep an eye on what isn’t working and rollback where necessary. That’s why PostHog offers tools like [feature flags](/docs/feature-flags/tutorials), which help you to incrementally roll out new features and key an eye on adoption progress. If something isn’t working, you can roll it back instantly. 
+## How to measure product engagement for startups
 
-[Flagging the use of specific features as a key event](/docs/user-guides/events) per user type will also help you to track adoption.whether you’re successfully reaching the users they were intended for.
+Now that you know what all these buzzwords mean, here's how to actually make sense of them for your startup. 
 
-By comparing the values of these metrics against each other you can begin to get an idea of where you’re winning on product engagement, and where you might be losing out. 
+First off, there’s no need to obsess over a dozen engagement metrics from the start. Until you've solidly found product-market fit, your team should still be focused on one number: your [North Star metric](/founders/north-star-metrics).
 
-![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/how-to-measure-engagement/correlation.png)
+North Star metrics are numbers that are simple to communicate, easy to measure, and are an [obvious precursor to revenue](/docs/new-to-posthog/getting-hogpilled). They're typically one of the raw behavioral metrics from above, like rides booked on Uber, for example. (And if the semantics are bothering you, yes – technically, your North Star metric _is_ an engagement metric.)
 
-## What tools are good for tracking product engagement?
-Naturally, we think PostHog is the best tool for tracking product engagement. 
+We recommend prioritizing your North Star at this point since engagement metrics are only meaningful if they help you understand your product's value. When you're early on, value is best indicated by your North Star metric.
 
-This is because, in addition to tracking the metrics above, PostHog enables you to understand their context through tools such as  [Session Recording](/docs/user-guides/sessions), [Heatmaps](/docs/user-guides/toolbar#inspecting-elements), [Cohorts](/docs/user-guides/cohorts) and [Correlation analysis](/docs/user-guides/correlation). You can also [create dashboards](/templates) to monitor engagement continuously.
+When your North Star isn't moving the way you want, THEN you can dig into supporting metrics like activation or retention to figure out why.
 
-Paying attention to engagement and building more of what your customers love is a sure way to turn them from regular users into fans and advocates. Stay on top of your user engagement, listen and respond, and you’ll turn casual customers into product champions.
+> **Don’t underestimate the value of qualitative data.** Numbers are useful and all, but sometimes just [talking to your users](/newsletter/talk-to-users), watching [session replays](/tutorials/explore-insights-session-recordings), or sending [surveys](/tutorials/survey) will lead to your biggest breakthroughs as a startup. Don’t tunnel on the quant.
+
+# Quick recap
+
+- A product engagement metric is only useful if it indicates users are getting value out of your product.
+- How you choose to measure product engagement varies wildly between different products, ICPs, industries, and stages.
+- Don’t get caught up tracking all the different types of metrics. Until you find PMF, focus on your North Star metric and use product engagement metrics as diagnostic or supportive tools.
 
 ## Further reading
 
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics): Successful products need actionable metrics. Here's how to find them.
 
-- [What is user segmentation?](/blog/how-to-do-user-segmentation): A quick guide to user segmentation and how to apply it to your business
+- [B2B Product Metrics 101](/blog/b2b-saas-product-metrics): Everything you need to know about metrics for B2B SaaS products.
 
-- [B2B Product Metrics 101:](/blog/b2b-saas-product-metrics): Everything you need to know about metrics for B2B SaaS products
+- [WTF is activation and why should engineers care?](/newsletter/wtf-is-activation): Why engineers should care about activation rates.
 
 <NewsletterForm />
 
