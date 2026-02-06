@@ -50,6 +50,8 @@ Here’s how it works:
     - A rough itinerary (Kendal will include the mandatory bits, like 360° feedback/Readme sessions, team leads can fill in the rest)
   - Look up dining options for a couple of group dinners (we like to keep a few nights free for “choose your own adventure” dining).
   - Suggest and book a whole group activity for everyone to enjoy together.
+  - Provide a letter for immigration purposes for each person attending stating the purpose of your visit, dates of travel, accommodation address, and any other relevant information.
+
 If there’s anything ad hoc you’d like Kendal to take point on, just let her know, she’s happy to help!
 Each team member is still responsible for booking their own flights.
 
