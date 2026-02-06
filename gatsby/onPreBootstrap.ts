@@ -9,7 +9,48 @@ import { enrichVideos } from './enrichVideos'
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
+const GATSBY_SOURCE_GIT_CACHE_DIR = path.resolve(__dirname, '../.cache/gatsby-source-git')
+const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-manifest.json')
+
+/**
+ * Invalidates the gatsby-source-git cache if the configured branch has changed.
+ * This prevents stale docs from being served when switching GATSBY_POSTHOG_BRANCH.
+ */
+function invalidateGitCacheIfBranchChanged(): void {
+    const currentBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
+
+    // Read the stored branch from the manifest file
+    let storedBranch: string | null = null
+    if (fs.existsSync(BRANCH_MANIFEST_FILE)) {
+        try {
+            const manifest = JSON.parse(fs.readFileSync(BRANCH_MANIFEST_FILE, 'utf-8'))
+            storedBranch = manifest.branch
+        } catch {
+            // Manifest is corrupted, treat as no stored branch
+        }
+    }
+
+    // If the branch has changed, clear the gatsby-source-git cache
+    if (storedBranch !== null && storedBranch !== currentBranch) {
+        console.log(`GATSBY_POSTHOG_BRANCH changed from '${storedBranch}' to '${currentBranch}'`)
+        console.log('Clearing gatsby-source-git cache…')
+
+        // Remove the entire gatsby-source-git cache directory
+        if (fs.existsSync(GATSBY_SOURCE_GIT_CACHE_DIR)) {
+            fs.rmSync(GATSBY_SOURCE_GIT_CACHE_DIR, { recursive: true, force: true })
+        }
+    }
+
+    // Ensure the cache directory exists and write the current branch to the manifest
+    if (!fs.existsSync(GATSBY_SOURCE_GIT_CACHE_DIR)) {
+        fs.mkdirSync(GATSBY_SOURCE_GIT_CACHE_DIR, { recursive: true })
+    }
+    fs.writeFileSync(BRANCH_MANIFEST_FILE, JSON.stringify({ branch: currentBranch }))
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+    // Invalidate gatsby-source-git cache if branch has changed
+    invalidateGitCacheIfBranchChanged()
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
