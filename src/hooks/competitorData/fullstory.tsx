@@ -191,7 +191,7 @@ export const fullstory = {
         },
         pricing: {
             free_tier: true,
-            self_serve: true,
+            self_serve: false,
             transparent_pricing: false,
             usage_based_pricing: true,
         },
