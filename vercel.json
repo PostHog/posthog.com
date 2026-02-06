@@ -262,7 +262,7 @@
         { "source": "/handbook/engineering/aws", "destination": "/handbook/engineering/cloud-providers" },
         {
             "source": "/docs/contribute/coding-conventions",
-            "destination": "/handbook/engineering/conventions/frontend-coding"
+            "destination": "/handbook/engineering/conventions"
         },
         { "source": "/handbook/engineering/mdx", "destination": "/handbook/engineering/posthog-com/mdx-setup" },
         { "source": "/docs/contribute/project-structure", "destination": "/handbook/engineering/project-structure" },
