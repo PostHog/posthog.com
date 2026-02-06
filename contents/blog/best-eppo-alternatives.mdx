@@ -46,7 +46,7 @@ Both Eppo and PostHog support core feature flag and A/B testing components. The 
 
 -   Eppo is warehouse-native, meaning that it integrates with your existing data tools like Snowflake or Postgres.
 
--   PostHog is not warehouse-native, but instead aims to replace your existing data stack by combining product analytics, [pipelines](/docs/cdp), and warehousing into one platform. This eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data.
+-   PostHog offers an integrated data warehouse that enables warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple tools together and provides a single platform for storing and working with data. Alternatively, you can ingest data from an external warehouse, such as Snowflake, and run queries on PostHog compute.
 
 Besides this, PostHog offers product analytics, session replays, and surveys, whereas Eppo does not. On the other hand, Eppo offers multi-armed bandit testing (called "contextual bandits" in Eppo) and [CUPED analysis](https://matteocourthoud.github.io/post/cuped/), whereas PostHog does not.
 

@@ -287,6 +287,14 @@ export default function CDP(): JSX.Element {
                     zoom={true}
                 />
 
+                <h3>Warehouse-native with PostHog Warehouse</h3>
+                <p>
+                    PostHog offers an integrated data warehouse that supports warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. Your data never needs to travel and you don't need to stitch together multiple tools into a complex data stack. Alternatively, if you're using an external warehouse, such as Snowflake, you can sync or ingest the data you need into PostHog via our warehouse sources.
+                    <Link to="/warehouse-native" state={{ newWindow: true }}>
+                        Learn more about warehouse-native workflows with PostHog
+                    </Link>
+                </p>
+
                 <h3>Data stack products</h3>
                 <p>This is what we offer built-in - but feel free to bring your own tools if that's what you need.</p>
 

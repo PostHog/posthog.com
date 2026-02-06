@@ -159,6 +159,14 @@ export default function CDP(): JSX.Element {
                     <li>Automate support ticket creation</li>
                 </ul>
 
+                <h2>Is PostHog warehouse-native?</h2>
+                <p>
+                    PostHog offers an integrated data warehouse that supports warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. Your data never needs to travel and you don't need to stitch together multiple tools into a complex data stack. Alternatively, if you're using an external warehouse, such as Snowflake, you can sync or ingest the data you need into PostHog via our warehouse sources.
+                    <Link to="/warehouse-native" state={{ newWindow: true }}>
+                        Learn more about our warehouse
+                    </Link>
+                </p>
+
                 <h2 id="integrations-library">Integrations library</h2>
                 <IntegrationsLibrary />
             </ReaderView>

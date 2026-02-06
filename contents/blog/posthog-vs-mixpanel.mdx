@@ -596,7 +596,9 @@ Both are designed for quick implementation. **PostHog** offers an [AI install wi
 <details>
     <summary>Which has better data warehouse integration?</summary>
 
-Different approaches. **Mixpanel** offers warehouse-native analytics – it can sit on top of Snowflake, BigQuery, or Databricks and query your data directly. **PostHog** has a built-in [data warehouse](/data-warehouse) that imports data from external sources (Stripe, Zendesk, Hubspot, or your own warehouse) so you can analyze business and product data together. Mixpanel's approach is better if you want to keep data in your warehouse; PostHog's is better if you want a single platform for analysis.
+Different approaches. **Mixpanel** offers warehouse-native analytics – it can sit on top of Snowflake, BigQuery, or Databricks and query your data directly. **PostHog** has a built-in [data warehouse](/data-warehouse) that enables warehouse-native workflows across other PostHog tools, such as analytics and feature flags, as well. as the ability to ingest data from external warehouses and run queries on PostHog compute.
+
+Mixpanel's approach is better if you have a limited use-case and need to keep data in your warehouse; PostHog's is better if you want a single platform for storing and using data across multiple use-cases with analytics, feature flags, surveys, and more. 
 
 </details>
 

@@ -19,6 +19,10 @@ export const customerDataInfrastructureNav = {
             url: '/data-stack/managed-warehouse',
         },
         {
+            name: 'Is PostHog warehouse native?',
+            url: '/warehouse-native',
+        },
+        {
             name: 'PostHog AI',
             url: '/data-stack/posthog-ai',
         },
