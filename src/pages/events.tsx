@@ -14,6 +14,7 @@ import qs from 'qs'
 import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
+import { useApp } from '../context/App'
 
 export type Event = {
     date: string // YYYY-MM-DD
@@ -179,6 +180,7 @@ const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: 
 }
 
 function Events() {
+    const { websiteMode } = useApp()
     const { isModerator } = useUser()
     const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
@@ -301,7 +303,12 @@ function Events() {
                 fullScreen
                 viewportClasses="[&>div>div]:h-full"
             >
-                <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+                <div
+                    data-scheme="primary"
+                    className={`flex flex-col @xl:flex-row text-primary h-full ${
+                        websiteMode ? 'h-[calc(100vh-48px)]' : ''
+                    }`}
+                >
                     <aside
                         data-scheme="secondary"
                         className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
