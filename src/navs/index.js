@@ -5787,7 +5787,22 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Logging best practices',
+                    url: '/docs/logs/best-practices',
+                    icon: 'IconBook',
+                    color: 'green',
+                },
+                {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/logs/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'blue',
                 },
                 {
                     name: 'Troubleshooting',
