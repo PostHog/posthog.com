@@ -5,8 +5,8 @@ import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
-import Dock from 'components/Desktop/Dock'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
+import WebsiteFooter from 'components/WebsiteFooter'
 
 export default function Wrapper() {
     const {
@@ -30,7 +30,7 @@ export default function Wrapper() {
     return (
         <div className={`${websiteMode ? 'max-w-7xl mx-auto' : 'fixed inset-0 size-full'} flex flex-col`}>
             {!compact && <TaskBarMenu />}
-            <div ref={constraintsRef} className={`flex-grow relative ${websiteMode && 'pb-4'}`}>
+            <div ref={constraintsRef} className={`flex-grow relative`}>
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item, index) => {
@@ -64,14 +64,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
-            {websiteMode && (
-                <footer
-                    data-scheme="secondary"
-                    className="text-primary bg-primary border border-primary rounded p-4 @xl:p-8 mb-8"
-                >
-                    This is a footer.
-                </footer>
-            )}
+            {websiteMode && <WebsiteFooter />}
             {/*             
             {!compact && <Dock />}
             */}
