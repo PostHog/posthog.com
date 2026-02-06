@@ -273,7 +273,7 @@
     {
         "featuresUsed": ["groups", "feature flags"],
         "author": { "name": "Weyert de Boer", "role": "Senior Software Engineer", "company": { "name": "Tapico" } },
-        "quote": "The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. We can enable feature flags per instance,  dark launch features for a specific instance, or implement kill switches or ops flags. Group Analytics also give us more detailed insight into user behaviour between instances. We love it!"
+        "quote": "The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. We can enable feature flags per instance,  dark launch features for a specific instance, or implement kill switches or ops flags. Group Analytics also give us more detailed insight into user behavior between instances. We love it!"
     },
     {
         "featuresUsed": ["competitors", "data pipeline", "ingestion"],
