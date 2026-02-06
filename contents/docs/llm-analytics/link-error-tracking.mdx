@@ -23,9 +23,9 @@ Linking LLM events to error tracking enables you to:
 
 When an LLM operation fails or encounters an error, you can link the exception to the LLM trace using the `$ai_trace_id` property:
 
-<MultiLanguage>
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body
   const traceId = generateTraceId() // Your trace ID generation logic
@@ -57,7 +57,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.json
@@ -101,9 +101,9 @@ def chat():
 
 You can also track errors that occur during prompt validation, response processing, or any other part of your LLM pipeline:
 
-<MultiLanguage>
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 async function processLLMResponse(response, traceId) {
   try {
     // Validate response structure
@@ -128,7 +128,7 @@ async function processLLMResponse(response, traceId) {
 }
 ```
 
-```python file=Python
+```python
 def process_llm_response(response, trace_id):
     try:
         # Validate response structure

@@ -40,9 +40,9 @@ This automatically adds `X-POSTHOG-SESSION-ID` (and `X-POSTHOG-DISTINCT-ID`) hea
 
 On your backend, read the header and include it in your LLM tracking:
 
-<MultiLanguage>
+<MultiLanguage syncKey="sdk-backend">
 
-```javascript file=JavaScript
+```node
 app.post('/api/chat', async (req, res) => {
   const sessionId = req.headers['x-posthog-session-id']
 
@@ -59,7 +59,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python
 @app.route('/api/chat', methods=['POST'])
 def chat():
     session_id = request.headers.get('X-POSTHOG-SESSION-ID')
