@@ -1302,6 +1302,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
+                name: 'Per-product cost & margin analysis',
+                url: '/handbook/product/per-product-cost-margin-analysis',
+            },
+            {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
             },
