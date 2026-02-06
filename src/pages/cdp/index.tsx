@@ -159,7 +159,7 @@ export default function CDP(): JSX.Element {
                     <li>Automate support ticket creation</li>
                 </ul>
 
-                <h2>Warehouse-native with PostHog</h2>
+                <h2>Is PostHog warehouse-native?</h2>
                 <p>
                     PostHog supports <strong>warehouse-native workflows</strong> via an integrated data warehouse. If
                     you're using an external warehouse, such as Snowflake, you can sync or ingest the data you need into
