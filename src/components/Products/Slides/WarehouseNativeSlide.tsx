@@ -31,7 +31,7 @@ export default function WarehouseNativeSlide({ variant = 'default' }: WarehouseN
                     <h3 className="text-2xl font-bold text-primary mb-2">Use an external data warehouse</h3>
                     <p className="text-lg text-secondary flex-1 mb-4">
                         Keep data in an existing warehouse and sync the tables and fields you need into PostHog via our
-                        CDP. Queries run in PostHog.
+                        warehouse sources. Queries run in PostHog.
                     </p>
                     <OSButton asLink to="/cdp" state={{ newWindow: true }} variant="secondary" size="md">
                         Explore available data sources
