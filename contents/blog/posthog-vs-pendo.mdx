@@ -28,12 +28,12 @@ Now it's time for the long answer...
 
 In this article we'll explore the crucial differences and similarities between Pendo (specifically, Pendo Engage) and PostHog. We’ll cover topics such as:
 
--   Pendo and PostHog's [core features](#core-features)
--   [Product analytics](#product-analytics) and [in-app messaging](#in-app-messages-and-prompts) features in detail
--   [Integrations](#apps-and-integrations) and [data pipelines](#data-pipelines)
+-   Pendo and PostHog's [core features](#comparing-posthog-and-pendo)
+-   [Product analytics](#product-analytics) and [messaging & feedback](#in-app-engagement-messaging-and-feedback) features in detail
+-   [Data pipelines](#cdp-and-integrations) and [popular integrations](#popular-integrations)
 -   [Libraries](#library-support), [tracking differences and SDKs](#sdks-and-tracking)
 -   [Privacy, security and regulatory compliance](#compliance-and-security)
--   [Pricing details](#how-much-does-pendo-cost), [free trials](#do-pendo-and-posthog-offer-free-trials) and other [frequently asked questions](#frequently-asked-questions)
+-   Other [frequently asked questions](#frequently-asked-questions)
 
 ## How is PostHog different?
 
@@ -168,6 +168,7 @@ PostHog includes a built-in [CDP](/cdp) (Customer Data Platform) with three core
 
 Because the CDP is built into PostHog, imported data lives alongside your product analytics, session replays, and feature flags – so you can join data with product behavior in a single query without stitching systems together. PostHog also integrates with third-party CDPs like [Segment](/docs/libraries/segment) and [RudderStack](/docs/libraries/rudderstack) if you already have one set up.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -184,11 +185,13 @@ Because the CDP is built into PostHog, imported data lives alongside your produc
         'platform.integrations.airbyte',
     ]}
 />
+</p>
 
 ### Popular integrations
 
 Below, we've listed a few of the most popular integrations used across PostHog and Pendo.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -206,6 +209,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
         'platform.integrations.segment',
     ]}
 />
+</p>
 
 > **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/cdp).
 
@@ -213,6 +217,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPAA and GDPR can require teams to store data in certain locations, or to protect data in certain ways.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -226,6 +231,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
         'platform.security.two_factor_auth',
     ]}
 />
+</p>
 
 ## SDKs and tracking
 
@@ -233,6 +239,7 @@ Pendo and PostHog both support a variety of tracking and implementation options 
 
 Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it's why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It's something we feel quite strongly about](/blog/is-autocapture-still-bad).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -246,11 +253,13 @@ Autocapture is preferred by many users because it's faster to set up, but some a
         { label: 'Capture API', description: 'Send events through an API', values: [true, true] },
     ]}
 />
+</p>
 
 ### Library support
 
 PostHog supports [a wide range of client and server libraries](/docs/libraries), but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all features. See [our client library documentation](/docs/integrate?tab=snippet) for more information.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'pendo']}
     rows={[
@@ -265,6 +274,7 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
         'platform.libraries.react_native',
     ]}
 />
+</p>
 
 ## When to choose PostHog vs Pendo
 
