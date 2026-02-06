@@ -176,8 +176,8 @@ const Options = ({
                         value === 'full'
                             ? '100%'
                             : typeof preferredMaxWidth === 'number'
-                                ? preferredMaxWidth
-                                : appWindow?.size?.width || 1000
+                            ? preferredMaxWidth
+                            : appWindow?.size?.width || 1000
                     )
                 }}
             />
@@ -422,33 +422,33 @@ export function Editor({
                             {...(hasShareButton
                                 ? showCher
                                     ? {
-                                        onClick: () => {
-                                            addWindow(
-                                                <MediaPlayer
-                                                    newWindow
-                                                    location={{ pathname: `cher` }}
-                                                    key={`cher`}
-                                                    videoId="nZXRV4MezEw"
-                                                />
-                                            )
-                                        },
-                                    }
+                                          onClick: () => {
+                                              addWindow(
+                                                  <MediaPlayer
+                                                      newWindow
+                                                      location={{ pathname: `cher` }}
+                                                      key={`cher`}
+                                                      videoId="nZXRV4MezEw"
+                                                  />
+                                              )
+                                          },
+                                      }
                                     : {
-                                        onClick: () => {
-                                            addWindow(
-                                                <Share
-                                                    title={appWindow?.meta?.title}
-                                                    location={{ pathname: `share` }}
-                                                    key={`share`}
-                                                    newWindow
-                                                    url={`${window.location.origin}${appWindow?.path}`}
-                                                />
-                                            )
-                                        },
-                                    }
+                                          onClick: () => {
+                                              addWindow(
+                                                  <Share
+                                                      title={appWindow?.meta?.title}
+                                                      location={{ pathname: `share` }}
+                                                      key={`share`}
+                                                      newWindow
+                                                      url={`${window.location.origin}${appWindow?.path}`}
+                                                  />
+                                              )
+                                          },
+                                      }
                                 : {
-                                    to: cta?.url,
-                                })}
+                                      to: cta?.url,
+                                  })}
                             state={{ newWindow: true }}
                             asLink
                             className="ml-1 -my-0.5"
@@ -556,10 +556,10 @@ export function Editor({
                 {hideToolbar
                     ? null
                     : !websiteMode && (
-                        <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
-                            <Toolbar elements={toolbarElements} />
-                        </aside>
-                    )}
+                          <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
+                              <Toolbar elements={toolbarElements} />
+                          </aside>
+                      )}
                 <div className="flex flex-col flex-grow min-h-0">
                     <main
                         data-app="Editor"
@@ -577,9 +577,7 @@ export function Editor({
 
                         {showFilters && availableFilters && availableFilters.length > 0 && (
                             <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-40 ">
-
                                 <div className={`flex flex-wrap ${websiteMode && WEBSITE_MODE_CLASSES}`}>
-
                                     {availableFilters?.map((filter, index) => {
                                         return (
                                             <div key={filter.label} className="flex items-center gap-1">
@@ -594,8 +592,8 @@ export function Editor({
                                                         filter.initialValue === null
                                                             ? null
                                                             : filter.initialValue ??
-                                                            filters[filter.value ?? filter.label]?.value ??
-                                                            filter.options[0].value
+                                                              filters[filter.value ?? filter.label]?.value ??
+                                                              filter.options[0].value
                                                     }
                                                     groups={[
                                                         {
@@ -665,8 +663,9 @@ export function Editor({
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
                                     data-scheme="primary"
-                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${fullWidthContent ? 'max-w-full' : websiteMode ? 'max-w-5xl' : 'max-w-3xl'
-                                        }`}
+                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
@@ -685,8 +684,9 @@ export function Editor({
                                     ref={articleRef ?? undefined}
                                     className={`${getProseClasses(
                                         proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all ${fullWidthContent ? 'max-w-full' : websiteMode ? 'max-w-5xl' : 'max-w-3xl'
-                                        }`}
+                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all ${
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-3xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
