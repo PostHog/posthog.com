@@ -1,0 +1,274 @@
+---
+title: Rails error tracking installation
+showStepsToc: true
+platformLogo: rails
+---
+
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+
+<Steps>
+<Step title="Install PostHog Rails gem" badge="required">
+
+Add both gems to your Gemfile:
+
+```ruby file=Gemfile
+gem 'posthog-ruby'
+gem 'posthog-rails'
+```
+
+Then run:
+
+```bash
+bundle install
+```
+
+</Step>
+
+<Step title="Generate the initializer" badge="required">
+
+Run the install generator to create the PostHog initializer:
+
+```bash
+rails generate posthog:install
+```
+
+This creates `config/initializers/posthog.rb` with sensible defaults.
+
+</Step>
+
+<Step title="Configure PostHog" badge="required">
+
+Edit the generated initializer at `config/initializers/posthog.rb`:
+
+```ruby file=config/initializers/posthog.rb
+# Rails-specific configuration
+PostHog::Rails.configure do |config|
+  config.auto_capture_exceptions = true           # Enable automatic exception capture
+  config.report_rescued_exceptions = true         # Report exceptions Rails rescues
+  config.auto_instrument_active_job = true        # Instrument background jobs
+  config.capture_user_context = true              # Include user info in exceptions
+  config.current_user_method = :current_user      # Method to get current user
+end
+
+# Core PostHog client initialization
+PostHog.init do |config|
+  config.api_key = ENV['POSTHOG_API_KEY']
+  config.host = '<ph_client_api_host>'
+
+  config.on_error = proc { |status, msg|
+    Rails.logger.error("PostHog error: #{msg}")
+  }
+end
+```
+
+You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings).
+
+> **Note:** We recommend using environment variables for API keys rather than hardcoding them.
+
+</Step>
+
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm PostHog is correctly set up">
+
+In a Rails console, verify that PostHog is initialized:
+
+```ruby
+Rails.console
+> PostHog.initialized?
+=> true
+```
+
+</Step>
+
+<Step title="Enable automatic exception capture" badge="recommended" subtitle="Your goal in this step: Enable automatic exception tracking for your Rails application.">
+
+Automatic exception capture is enabled by setting `auto_capture_exceptions = true` in your configuration. When enabled, exceptions are automatically captured:
+
+```ruby
+class PostsController < ApplicationController
+  def show
+    @post = Post.find(params[:id])
+    # Any exception here is automatically captured
+  end
+end
+```
+
+### Understanding exception tracking options
+
+**`auto_capture_exceptions`** - Master switch for all automatic error tracking (default: `false`)
+- When `true`: All exceptions are automatically captured and sent to PostHog
+- When `false` (default): No automatic error tracking (you must manually call `PostHog.capture_exception`)
+
+**`report_rescued_exceptions`** - Control exceptions that Rails handles gracefully (default: `false`)
+- When `true`: Capture exceptions that Rails rescues and shows error pages for (404s, 500s, etc.)
+- When `false` (default): Only capture truly unhandled exceptions that crash your app
+
+**Recommendation:** Enable both options to get complete visibility into all errors.
+
+</Step>
+
+<Step title="Enable ActiveJob exception tracking" badge="optional" subtitle="Your goal in this step: Capture exceptions from background jobs.">
+
+When `auto_instrument_active_job` is enabled, ActiveJob exceptions are automatically captured with job context:
+
+```ruby
+class EmailJob < ApplicationJob
+  def perform(user_id)
+    user = User.find(user_id)
+    UserMailer.welcome(user).deliver_now
+    # Exceptions are automatically captured
+  end
+end
+```
+
+#### Associating jobs with users
+
+By default, PostHog extracts a `distinct_id` from job arguments by looking for a `user_id` key:
+
+```ruby
+ProcessOrderJob.perform_later(order.id, user_id: current_user.id)
+```
+
+For more control, use the `posthog_distinct_id` class method:
+
+```ruby
+class SendWelcomeEmailJob < ApplicationJob
+  posthog_distinct_id ->(user, options) { user.id }
+
+  def perform(user, options = {})
+    UserMailer.welcome(user).deliver_now
+  end
+end
+```
+
+> **Note:** Currently only ActiveJob is supported. Support for other job runners (Sidekiq, Resque, Good Job, etc.) is planned for future releases.
+
+</Step>
+
+<Step title="Configure user context" badge="optional" subtitle="Your goal in this step: Associate exceptions with users.">
+
+PostHog Rails automatically captures user information from your controllers. By default, it uses the `current_user` method.
+
+If your user method has a different name:
+
+```ruby
+PostHog::Rails.config.current_user_method = :logged_in_user
+```
+
+PostHog auto-detects the user's distinct ID by trying these methods on your user object:
+
+1. `posthog_distinct_id` – Define this on your User model for full control
+2. `distinct_id` – Common analytics convention
+3. `id` – Standard ActiveRecord primary key
+
+You can configure a specific method:
+
+```ruby
+PostHog::Rails.config.user_id_method = :email
+```
+
+Or define a method on your User model:
+
+```ruby
+class User < ApplicationRecord
+  def posthog_distinct_id
+    "user_#{id}"
+  end
+end
+```
+
+</Step>
+
+<Step title="Rails 7.0+ error reporter integration" badge="optional" subtitle="Your goal in this step: Use Rails' built-in error reporting.">
+
+PostHog integrates with Rails' built-in error reporting (Rails 7.0+):
+
+```ruby
+# These errors are automatically sent to PostHog
+Rails.error.handle do
+  # Code that might raise an error
+end
+
+Rails.error.record(exception, context: { user_id: current_user.id })
+```
+
+PostHog automatically extracts the user's distinct ID from `user_id` or `distinct_id` in the context hash.
+
+</Step>
+
+<Step title="Manually capture exceptions" badge="optional" subtitle="Your goal in this step: Capture handled exceptions.">
+
+For exceptions you handle but still want to track:
+
+```ruby
+begin
+  # risky code
+rescue => e
+  PostHog.capture_exception(
+    e,
+    current_user.id,
+    { custom_property: 'value' }
+  )
+  # handle the error gracefully
+end
+```
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+<Step title="Configure excluded exceptions" badge="optional">
+
+The following exceptions are not reported by default:
+
+- `AbstractController::ActionNotFound`
+- `ActionController::BadRequest`
+- `ActionController::InvalidAuthenticityToken`
+- `ActionController::RoutingError`
+- `ActionController::UnknownFormat`
+- `ActiveRecord::RecordNotFound`
+
+Add more with:
+
+```ruby
+PostHog::Rails.config.excluded_exceptions = ['MyException']
+```
+
+</Step>
+
+</Steps>
+
+## Configuration reference
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `auto_capture_exceptions` | Boolean | `false` | Automatically capture exceptions |
+| `report_rescued_exceptions` | Boolean | `false` | Report exceptions Rails rescues |
+| `auto_instrument_active_job` | Boolean | `false` | Instrument ActiveJob |
+| `capture_user_context` | Boolean | `true` | Include user info |
+| `current_user_method` | Symbol | `:current_user` | Controller method for user |
+| `user_id_method` | Symbol | `nil` | Method to extract ID from user object |
+| `excluded_exceptions` | Array | `[]` | Additional exceptions to ignore |
+
+## Troubleshooting
+
+### Exceptions not being captured
+
+1. Verify PostHog is initialized:
+   ```ruby
+   Rails.console
+   > PostHog.initialized?
+   => true
+   ```
+
+2. Check that `auto_capture_exceptions` is set to `true`
+3. Check your excluded exceptions list
+4. Verify middleware is installed:
+   ```ruby
+   Rails.application.middleware
+   ```
+
+### User context not working
+
+1. Verify `current_user_method` matches your controller method
+2. Check that the user object responds to `posthog_distinct_id`, `distinct_id`, or `id`
+3. If using a custom identifier, set `PostHog::Rails.config.user_id_method = :your_method`
