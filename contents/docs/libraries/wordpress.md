@@ -30,6 +30,17 @@ The workflow for these is the same:
 2. Add the PostHog snippet to the header via the plugin.
 3. Activate the plugin.
 
+Another plugin option is to use a third party plugin like [Integrate PostHog Web Analytics](https://wordpress.org/plugins/integrate-posthog-web-analytics/).
+
+The workflow for this is:
+
+1. Install and activate the plugin.
+2. Navigate to `Settings > Integrate PostHog Web Analytics`.
+3. Enter your Project API Key, Project ID and PostHog region.
+4. Click `Save Changes`.
+
+This option also supports [WooCommerce](/docs/libraries/woocommerce) sites.
+
 ### Option 2: Edit your theme's functions file
 
 [Theme functions](https://developer.wordpress.org/themes/basics/theme-functions/) enable you to add functionality to your WordPress site. This makes them a great way to add PostHog.
@@ -43,12 +54,12 @@ Next, create an `add_posthog` function with your snippet like this:
 ```php
 if ( ! function_exists( 'add_posthog' ) ) :
 function add_posthog() {
-	?>
+  ?>
     <script>
       !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
       posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', defaults:'<ph_posthog_js_defaults>'})
-    </script>	
-	<?php
+    </script> 
+  <?php
 }
 endif;
 ```
@@ -60,12 +71,12 @@ Finally, add the `add_action` hook to add the code to your site. Your `functions
 
 if ( ! function_exists( 'add_posthog' ) ) :
 function add_posthog() {
-	?>
+  ?>
     <script>
       !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
       posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', defaults:'<ph_posthog_js_defaults>'})
-    </script>	
-	<?php
+    </script> 
+  <?php
 }
 endif;
 
