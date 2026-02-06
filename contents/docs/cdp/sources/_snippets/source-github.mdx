@@ -1,0 +1,17 @@
+The GitHub connector can link issues, pull requests, commits, stargazers, and releases to PostHog.
+
+To link GitHub:
+
+1. Go to the [sources tab](https://us.posthog.com/pipeline/sources) of the data pipeline section in PostHog.
+
+2. Click **+ New source** and then click **Link** next to GitHub.
+
+3. Next, you need a personal access token from GitHub. Go to your [personal access tokens settings](https://github.com/settings/tokens) in GitHub. Click **Generate new token**, give it a name, select the required scopes (at minimum `repo` for private repositories or `public_repo` for public repositories), and copy the value of the newly created token.
+
+4. Back in PostHog, paste the personal access token in the `Personal access token` field and enter the repository in the format `owner/repo` (e.g., `posthog/posthog`). Click **Next**.
+
+5. On the next page, set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
+
+Once the syncs are complete, you can start using GitHub data in PostHog.
+
+> **Note:** The issues table includes pull requests as GitHub's API considers every pull request an issue. You can identify pull requests by the `pull_request` field.

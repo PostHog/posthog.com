@@ -31,6 +31,19 @@ The Monday all-hands features a few regular sections and is recorded in [this do
 - **Q&A with James & Tim:** Ask the founders anything you want
 - **Demos:** Show us what you've worked on last week
 
+## How to give a good demo
+
+Demos are a great way to share what you've been working on and keep everyone in the loop. A little prep goes a long way toward making them useful and respectful of everyone's time. It also stops the meeting length getting out of hand!
+
+- **Test your setup before you start.** Make sure screen sharing and your microphone work so you can dive straight in. A quick check a few minutes before the meeting avoids awkward fumbling and keeps the energy up.
+- **Keep it short and purposeful.** Aim for quick, concise demos. It can help to write down some bullets to structure your demo ahead of time. Lead with why what you built is useful or interesting — that context helps people stay engaged and can be especially useful for less technical teams. 
+- **Don't rely on real-time.** If your demo involves triggering other services (e.g. sending emails or calling APIs), cue them up in advance or use mocks. Live demos are fun when they work but can eat into everyone's time when we're waiting for something to load. 
+- **Arrive with energy.** We don't expect polished sales pitches, but it's always more engaging to listen to someone who is excited to show what they've made.
+- **It's okay to skip or shorten.** If something isn't working or you run out of time, feel free to skip it and move on. You can always share a [Loom](https://www.loom.com/) in #tell-posthog-anything so people can watch when it suits them.
+- **Be ready when it's your turn.** Pay attention to the order of raised hands and be prepared to speak when you're up. It keeps the flow smooth and shows you're tuned in to the group.
+
+When in doubt: a short, clear demo that explains the "so what?" beats a long one that leaves people wondering why it matters.
+
 ### No meeting days (Tuesdays & Thursdays)
 
 We try to keep these days focused on deep work. Therefore, we run no planned meetings on these days.

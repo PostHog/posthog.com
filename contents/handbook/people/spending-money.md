@@ -17,7 +17,7 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 
 **If not, think again**.
 
-**When in doubt, ask your team lead for context, not permission.**
+**The goal here is to empower you. However, when in doubt, ask your team lead for context, not permission.** 
 - Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
@@ -40,6 +40,8 @@ Use your Revolut if
 If not, use your Brex.
 
 Why? The company can claim back VAT on these larger purchases - the more money we claim back, the more money we have to #DoMoreWeird
+
+Please make sure that the invoice is addressed to Hiberly and its registered address (this can be found in the company information sheet).
 
 ### Receipts 🧾
 All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation).
@@ -183,14 +185,14 @@ Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles
       - UK only: use your Revolut since we claim back the VAT,
       - Do not get Apple care since it doesn't have great value for money.
     - You can request a new laptop if your laptop is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
-    - Part of the Mobile team and need to purchase a new phone? Coordinate with [Tara](https://posthog.com/community/profiles/34526).
+    - Part of the Client Libraries team and need to purchase a new phone? Coordinate with [Tara](https://posthog.com/community/profiles/34526).
 
 #### Yubikey
 We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication).
 
 #### Other equipment
-- Keyboard/mouse/laptop stand: refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
-- If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
+- Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
+- Desk & Chair - again, refurbished is fine. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.

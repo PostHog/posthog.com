@@ -134,13 +134,18 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 
 For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. The amount of free credits is determined by how much they purchase on a prepaid plan. By default, we work with customers on prepaid plans that will cover their usage for the next 12 months.
 
+> Important clarification: operationally this is implemented as free credits applied before the contract start date, not as extra credits inside the contract term unless a specific dollar amount for the free credits is explicitly included under Special Terms.
+
 You should follow the same [inbound sales process](https://posthog.com/handbook/growth/sales/new-sales) and work with the customer on understanding and optimizing their usage. Then follow these additional steps take to present the prepaid plan + free credits option(s):
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
-3. Inform them they can take advantage of this offer, which gives them the option to purchase [monthly cost x 10] and still have 12-months of coverage.
+3. Inform them they can take advantage of this offer, which allows them to:
+   - purchase credits equivalent to ~10 months of usage (expiring 10 months after the contract start date), and
+   - receive ~2 months of additional usage for free, applied before the contract start date.
 4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
 5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
-6. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+   - two months of this free usage should again be applied before the contract start date, unless explicitly priced and included under Special Terms.
+7. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
 All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
 

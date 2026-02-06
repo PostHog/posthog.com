@@ -1,6 +1,6 @@
 ---
 title: 'The best Heap alternatives & competitors, compared'
-date: 2023-11-01
+date: 2026-02-04
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,9 +13,18 @@ featuredImageType: full
 category: General
 tags:
     - Comparisons
+seo:
+    metaTitle: The best Heap alternatives & competitors, compared
+    metaDescription: Compare the best Heap alternatives for product analytics – including PostHog, Amplitude, Mixpanel, FullStory, and more.
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+[Heap](/blog/posthog-vs-heap) made its name with autocapture – install a snippet, start collecting everything, define events later. It's a powerful approach, especially for teams without dedicated data engineering resources.
+
+But autocapture alone doesn't help you ship better products. Heap doesn't include feature flags, A/B testing, or error tracking, for example; its session replay lacks developer debugging tools, and key features like group analytics require a sales conversation.
+
+If you've outgrown Heap or need more from your analytics stack, this guide compares the best alternatives – whether you want a similar tool or a full platform for building better products.
 
 ## 1. PostHog
 
@@ -28,21 +37,29 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-[PostHog](https://posthog.com/) (that's us 👋) is an open-source developer platform that combines [product analytics](/blog/best-open-source-analytics-tools), session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Heap, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) and [LogRocket](/blog/posthog-vs-logrocket).
+[PostHog](/) (that's us 👋) is an all-in-one platform combining [product analytics](/product-analytics), [error tracking](/error-tracking), [session replays](/session-replay), [web analytics](/web-analytics), [A/B testing](/experiments), [feature flags](/feature-flags), [user surveys](/surveys), [LLM observability](/llm-analytics),[logs](/logs), and more into one product. This means it's not just an alternative to Heap, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) and [LogRocket](/blog/posthog-vs-logrocket).
 
-Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
+Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and [more](/customers).
 
 ### Key features
 
--   📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
+- **Product analytics:** [Funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths), [retention analysis](/docs/product-analytics/retention), custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
 
--   📺 **Session replays:** Including event timelines, console logs, and network activity, and 90-day data retention.
+- **Session replays:** Including event timelines, console logs, and network activity, and 90-day data retention.
 
--   🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
+- **Feature flags:** Release features to specific users safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance) and JSON payloads.
 
--   🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate [test duration, sample size,](/docs/experiments/testing-and-launching) and [statistical significance](/docs/experiments/analyzing-results).
 
--   💬 **Surveys:** Target surveys by event or person properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
+- **Surveys:** Target surveys by event or person properties. [Templates](/templates) for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
+
+- **Error tracking:** [Monitor exceptions](/docs/error-tracking/issues-and-exceptions), [stack traces](/docs/error-tracking/stack-traces), and crashes – connected directly to session replays, user behavior, and feature flag changes.
+
+<<<<<<< HEAD
+- **Data warehouse** to import and query data from external sources like [Stripe](/docs/cdp/sources/stripe), [Zendesk](/docs/cdp/sources/zendesk), [Hubspot](/docs/cdp/sources/hubspot), or your existing warehouse – analyze business and product data together.
+=======
+- **Data warehouse:** Import and query data from external sources like Stripe, Zendesk, Hubspot, or your existing warehouse – analyze business and product data together.
+>>>>>>> ad5c71eb9310f6bfcb982d41cc1901fa318966cb
 
 ### How does PostHog compare to Heap?
 
@@ -52,6 +69,7 @@ Unlike Mixpanel and Amplitude, PostHog supports event autocapture, which means i
 
 You can also [create and label events using the PostHog toolbar](/tutorials/how-to-capture-events-the-easy-way). This is similar to Heap's visual labeling feature, though it's only supported on web apps.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -69,12 +87,30 @@ You can also [create and label events using the PostHog toolbar](/tutorials/how-
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
-### How popular is PostHog?
+<details>
+<summary>Main differences between PostHog and Heap</summary>
 
-According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, PostHog is the fastest growing Heap alternative on the market.
+- PostHog includes [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), and [LLM analytics](/llm-analytics); Heap doesn't offer any of these natively.
+- PostHog's session replay includes console logs, network monitoring, DOM explorer, and performance metrics; Heap's replay is simpler and lacks developer debugging tools.
+- PostHog includes a built-in [data warehouse](/data-warehouse) for importing and querying external data from [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Zendesk](/docs/cdp/sources/zendesk), and more; Heap imports user context via "Sources" (Salesforce, Marketo, Segment, etc.) but queries happen within Heap's UI rather than via SQL.
+- PostHog offers [SQL access](/docs/product-analytics/sql) for custom queries; Heap doesn't support direct SQL querying.
+- PostHog is open-source; Heap is closed-source and cloud-only.
 
-As of July 2023, **PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Heap** is deployed by 3,200 (0.3%), but only grew by 1% YoY.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Heap</summary>
+
+- Both support event autocapture that starts collecting data immediately after installation.
+- Both include product analytics with funnels, retention charts, user paths, and cohorts.
+- Both support heatmaps for understanding where users click and scroll.
+- Both support group analytics for account-level analysis in B2B products.
+- Both offer data warehouse exports — Heap Connect syncs to Snowflake, BigQuery, Redshift, and S3; PostHog exports to S3, BigQuery, Snowflake, and Redshift via batch exports.
+
+</details>
 
 ### Why do companies use PostHog?
 
@@ -88,7 +124,13 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 > #### Bottom line
 >
-> PostHog is the only Heap alternative that offers product analytics with autocapture, session replay, and a visual labeling tool for creating events. This, combined with additional features like feature flags and surveys, makes it an excellent like-for-like replacement for Heap.
+> PostHog offers product analytics with autocapture, session replay, and a visual labeling tool for creating events. This, combined with additional features like feature flags, A/B testing, and surveys, makes it an excellent like-for-like replacement for Heap.
+
+<p>
+  <CallToAction to="https://posthog.com/docs/product-analytics/installation">
+    Get started with PostHog – it's free!
+  </CallToAction>
+</p>
 
 ## 2. FullStory
 
@@ -105,20 +147,21 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### Key features
 
--   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+- **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
--   📊 **Product analytics:** Understand user paths and struggle points.
+- **Product analytics:** Understand user paths and struggle points.
 
--   📈 **Event autocapture:** Tagless event capture that ensures all events are tracked.
+- **Event autocapture:** Tagless event capture that ensures all events are tracked.
 
--   🔥 **Heatmaps:** Find out where users click and frustration points.
+- **Heatmaps:** Find out where users click and frustration points.
 
--   📱 **Mobile app analytics:** Crash analytics and users path analysis.
+- **Mobile app analytics:** Crash analytics and users path analysis.
 
 ### How does FullStory compare to Heap?
 
-FullStory offers both product analytics with autocapture and session replay. It also offers session replay for mobile apps, which Heap doesn't support.
+FullStory and Heap share a similar feature set – autocapture, product analytics, session replay, and heatmaps – but FullStory leans more toward session replay and user experience debugging, while Heap is stronger on the analytics side with its visual event editor and retroactive event definition.
 
+<p>
 <ProductComparisonTable
     competitors={['fullstory', 'heap']}
     rows={[
@@ -135,10 +178,30 @@ FullStory offers both product analytics with autocapture and session replay. It 
         'product_analytics.group_analytics',
     ]}
 />
+</p>
 
-### How popular is FullStory?
+<details>
+<summary>Main differences between FullStory and Heap</summary>
 
-FullStory is more popular than Heap. According to data from BuiltWith, as of January 2024, FullStory is deployed on 8,430 of the top 1 million websites in the world. Heap is used by 4,221.
+- FullStory's core strength is session replay with frustration signals (rage clicks, dead clicks, error clicks); Heap leads with product analytics and retroactive event definition.
+- Heap has a visual event editor for non-technical users to tag and define events without code; FullStory doesn't offer an equivalent labeling tool.
+- Heap offers managed ETL for exporting data to warehouses; FullStory's data export options are more limited.
+- FullStory is more commonly used by customer success and support teams; Heap is primarily used by product managers.
+- Heap's free tier is limited to 10,000 sessions/month; FullStory's free plan (FullstoryFree) includes 30,000 sessions with 12 months of data retention.
+
+</details>
+
+<details>
+<summary>Main similarities between FullStory and Heap</summary>
+
+- Both offer session replay and heatmaps for understanding user behavior.
+- Both include product analytics with funnels, user paths, and conversion tracking.
+- Both are designed to be accessible to non-technical teams.
+- Neither offers feature flags, A/B testing, or surveys natively.
+- Both integrate with third-party tools like Segment, Salesforce, and Slack.
+- Both are closed-source, cloud-only platforms.
+
+</details>
 
 ### Why do companies use FullStory?
 
@@ -171,20 +234,21 @@ Unlike Heap, which is mainly used by product managers, G2 suggests Glassbox is p
 
 ### Key features
 
--   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+- **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
--   📊 **Product analytics:** Understand user paths and struggle points.
+- **Product analytics:** Understand user paths and struggle points.
 
--   🏎️ **Performance analytics:** Track app performance and their impact on conversion rates.
+- **Performance analytics:** Track app performance and their impact on conversion rates.
 
--   🔥 **Click, scroll and heatmaps:** Understand where users interact with your app.
+- **Click, scroll and heatmaps:** Understand where users interact with your app.
 
--   ✅ **User feedback:** Gather satisfaction and user feedback on app experience.
+- **User feedback:** Gather satisfaction and user feedback on app experience.
 
 ### How does Glassbox compare to Heap?
 
 Glassbox offers similar core features to Heap, including product analytics with autocapture – Glassbox calls it tagless tracking. It doesn't offer visual labeling tool, however.
 
+<p>
 <ProductComparisonTable
     competitors={['glassbox', 'heap']}
     rows={[
@@ -201,14 +265,31 @@ Glassbox offers similar core features to Heap, including product analytics with 
         'product_analytics.group_analytics',
     ]}
 />
+</p>
 
-### How popular is Glassbox?
+<details>
+<summary>Main differences between Glassbox and Heap</summary>
 
-According to data from [BuiltWith](https://trends.builtwith.com/analytics/GlassBox), Glassbox isn't as popular as Heap.
+- Glassbox includes performance analytics that track app speed and its impact on conversion; Heap doesn't offer native performance monitoring.
+- Glassbox offers built-in user feedback collection; Heap doesn't have native survey or feedback tools.
+- Heap has a visual event editor for non-technical users to tag and define events retroactively; Glassbox supports autocapture (tagless tracking) but has no equivalent labeling tool.
+- Heap offers managed ETL for exporting data to warehouses like Snowflake and BigQuery; Glassbox's data export options are more limited.
+- Heap is self-serve with a free tier; Glassbox is sales-driven with no public pricing or free plan.
+- Glassbox has a stronger focus on mobile app analytics with native mobile session replay; Heap's mobile replay requires its Contentsquare integration.
 
-As of January 2024, it's deployed on just 386 of the top 1 million websites, compared to Heap's 4,221.
+</details>
 
-That said, Glassbox's greater focus on mobile apps isn't reflected in these figures.
+<details>
+<summary>Main similarities between Glassbox and Heap</summary>
+
+- Both support event autocapture (Glassbox calls it "tagless tracking") that collects data without manual instrumentation.
+- Both offer session replay and heatmaps for understanding user behavior.
+- Both include product analytics with funnels, user paths, and conversion tracking.
+- Neither offers feature flags, A/B testing, or experiments natively.
+- Both are closed-source, cloud-only platforms.
+- Both are used to diagnose conversion drop-offs and improve user experience.
+
+</details>
 
 ### Why do companies use Glassbox?
 
@@ -239,18 +320,19 @@ According to G2 reviews, customers use Glassbox for:
 
 ### Key features
 
--   📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+- **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
 
--   🦮 **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
+- **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
 
--   📝 **User feedback:** Capture and analyze customer feedback at scale.
+- **User feedback:** Capture and analyze customer feedback at scale.
 
--   🗺️ **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
+- **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
 
 ### How does Pendo compare to Heap?
 
 Pendo offers similar features to Heap, including event autocapture and session replay. It lacks a visual labeling tool for events, however.
 
+<p>
 <ProductComparisonTable
     competitors={['pendo', 'heap']}
     rows={[
@@ -272,10 +354,30 @@ Pendo offers similar features to Heap, including event autocapture and session r
         'product_analytics.group_analytics',
     ]}
 />
+</p>
 
-### How popular is Pendo?
+<details>
+<summary>Main differences between Pendo and Heap</summary>
 
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo), Pendo is about as popular as Heap. As of January 2024, Pendo is used by 3,711 of the top 1 million websites, compared to 4,221 that use Heap.
+- Pendo includes in-app guides for user onboarding, tooltips, and feature announcements; Heap doesn't offer any in-app messaging.
+- Pendo has built-in product validation and roadmap tools for aligning teams on priorities; Heap focuses purely on analytics and replay.
+- Pendo includes native user feedback collection and NPS surveys; Heap doesn't offer feedback or survey tools.
+- Heap captures every user interaction (clicks, scrolls, form inputs, rage clicks) and lets you define events retroactively; Pendo's autocapture is limited to page loads and feature clicks, and requires tagging before data appears in reports.
+- Heap's session replay and analytics features are more mature; Pendo's analytics are functional but secondary to its product experience tools.
+
+</details>
+
+<details>
+<summary>Main similarities between Pendo and Heap</summary>
+
+- Both support event autocapture that starts collecting data without manual instrumentation.
+- Both offer session replay for watching real user sessions.
+- Both include product analytics with funnels, trends, retention analysis, and user paths.
+- Both support group analytics for account-level analysis in B2B products.
+- Both are primarily designed for non-technical product managers.
+- Neither offers feature flags, A/B testing, or experiments natively.
+
+</details>
 
 ### Why do companies use Pendo?
 
@@ -302,22 +404,25 @@ According to G2 reviews, customers use Pendo for:
 
 ### What is Mixpanel?
 
-[Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. Founded in 2009, in recent years it's deprecated additional features, such as A/B testing, to focus on product analytics alone.
+[Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. Founded in 2009, it previously narrowed its focus to analytics alone, but has since expanded again – adding session replay, heatmaps, A/B testing (Enterprise), and feature flags in recent years.
 
 ### Key features
 
--   📊 **Product analytics:** Track user behavior, trends, and retention
+- **Product analytics:** Track user behavior, trends, and retention
 
--   📝 **Collaborative notebooks:** Create analysis in notebooks and collaborate with colleagues
+- **Collaborative notebooks:** Create analysis in notebooks and collaborate with colleagues
 
--   🚨 **Anomaly detection:** Get automated alerts when metrics fall outside a positive or negative range
+- **Anomaly detection:** Get automated alerts when metrics fall outside a positive or negative range
 
--   🔎 **Filtered data views:** Hide and filter data on a per-team basis to reduce noise
+- **Filtered data views:** Hide and filter data on a per-team basis to reduce noise
 
 ### How does Mixpanel compare to Heap?
 
-Mixpanel and Heap are similar in many ways. They're both used mainly by product managers and offer product analytics. However, Mixpanel lacks several features Heap users rely on, such as event autocapture and session replay.
+Mixpanel and Heap are similar in many ways. They're both used mainly by product managers and offer product analytics.  Mixpanel has closed the gap in recent years by adding session replay, heatmaps, A/B testing, and feature flags. 
 
+The key remaining difference is autocapture: Heap records everything from day one and lets you define events retroactively, while Mixpanel supports autocapture but relies more on manual event instrumentation for deeper tracking.
+
+<p>
 <ProductComparisonTable
     competitors={['mixpanel', 'heap']}
     rows={[
@@ -334,10 +439,31 @@ Mixpanel and Heap are similar in many ways. They're both used mainly by product 
         'product_analytics.group_analytics',
     ]}
 />
+</p>
 
-### How popular is Mixpanel?
+<details>
+<summary>Main differences between Mixpanel and Heap</summary>
 
-According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, Mixpanel is more popular than Heap. As of July 2023, **Mixpanel** is deployed by 5,218 of the top 1 million websites in 2023. **Heap** is deployed by 3,200.
+- Heap's autocapture is more comprehensive – it records everything by default and lets you define events retroactively with a visual editor. Mixpanel supports autocapture but relies more on manual instrumentation for deeper tracking.
+- Mixpanel now offers A/B testing and feature flags (relaunched in late 2025); Heap doesn't offer either natively.
+- Mixpanel includes collaborative notebooks for sharing analysis with teammates; Heap doesn't have an equivalent.
+- Mixpanel offers anomaly detection with automated alerts; Heap relies on its analysis suggestions to surface insights.
+- Heap includes managed ETL for exporting data to warehouses; Mixpanel offers bidirectional warehouse sync and warehouse-native analytics that can query your warehouse directly.
+- Mixpanel's free tier includes 1 million events/month; Heap's free tier is limited to 10,000 sessions.
+
+</details>
+
+<details>
+<summary>Main similarities between Mixpanel and Heap</summary>
+
+- Both are popular product analytics platforms designed primarily for product managers.
+- Both offer funnels, retention charts, user paths, cohorts, and custom dashboards.
+- Both now offer session replay and heatmaps.
+- Both support group analytics for account-level B2B analysis.
+- Both integrate with CDPs like Segment and Rudderstack, and data warehouses like Snowflake and BigQuery.
+- Both are self-serve with free tiers and transparent pricing.
+
+</details>
 
 ### Why do companies use Mixpanel?
 
@@ -349,7 +475,7 @@ According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/
 
 > #### Bottom line
 >
-> Mixpanel is a good option to replace Heap, but it has shortcomings. The lack of autocapture is a major drawback for Heap users reliant on that feature, and you'll need to find another session replay tool if you want that feature.
+> Mixpanel is a strong Heap alternative with a mature analytics feature set and recent additions like session replay, heatmaps, and A/B testing. The main trade-off is autocapture depth – if your team relies on retroactive event definition without engineering support, Heap still has the edge.
 
 ## 6. Amplitude
 
@@ -364,18 +490,21 @@ According to [BuiltWith data compiled by Jason Packer](https://www.linkedin.com/
 
 ### Key features
 
--   📈 **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+- **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
 
--   🧪 **A/B testing:** Support for JSON payloads, primary, secondary, and counter metrics.
+- **A/B testing:** Support for JSON payloads, primary, secondary, and counter metrics.
 
--   💁‍♂️ **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
+- **Customer data platform:** Combine analytics data with third-party tools for data governance, identity resolution, and data federation.
 
--   🤖 **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?".
+- **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?".
 
 ### How does Amplitude compare to Heap?
 
-Like Mixpanel, Amplitude lacks features Heap users rely on, such as autocapture, visual labeling, and session replay. But its analytics features are arguably a little more mature, particularly the natural language and anomaly detection features.
+Amplitude and Heap are both mature product analytics platforms, but they've evolved in different directions. 
 
+While they overlap on core analytics, session replay, and heatmaps, Amplitude skews enterprise with warehouse-native analytics, built-in experimentation, and a CDP. Heap's edge is autocapture depth: it records everything from day one and lets you define events retroactively without code. Amplitude is better for large teams with data engineers; Heap is more accessible to self-serve product managers.
+
+<p>
 <ProductComparisonTable
     competitors={['amplitude', 'heap']}
     rows={[
@@ -397,12 +526,31 @@ Like Mixpanel, Amplitude lacks features Heap users rely on, such as autocapture,
         'product_analytics.group_analytics',
     ]}
 />
+</p>
 
-### How popular is Amplitude?
+<details>
+<summary>Main differences between Amplitude and Heap</summary>
 
-Amplitude is more than twice as popular than Heap, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant.
+- Heap's autocapture is more comprehensive. Amplitude supports basic autocapture but relies more on manual instrumentation.
+- Amplitude offers warehouse-native analytics that can sit on top of Snowflake, BigQuery, or Databricks and query your data directly; Heap offers managed ETL exports but no native warehouse querying.
+- Amplitude includes a built-in customer data platform (CDP) for identity resolution, data governance, and audience syndication; Heap doesn't offer a native CDP.
+- Amplitude offers mature A/B testing and feature flags with holdout testing and a Bayesian statistics engine; Heap doesn't offer either natively.
+- Amplitude targets large enterprises with dedicated data and product teams; Heap is more focused on self-serve product managers at mid-market companies.
 
-As of July 2023, Amplitude is deployed by 6,973 of the top 1 million websites in 2023. Heap is deployed by 3,200.
+</details>
+
+<details>
+<summary>Main similarities between Amplitude and Heap</summary>
+
+- Both are mature product analytics platforms with 10+ years in market.
+- Both offer funnels, retention charts, user paths, cohorts, and custom dashboards.
+- Both now offer session replay and heatmaps.
+- Both support group analytics for account-level B2B analysis.
+- Both offer an AI-powered natural language insight builder.
+- Both integrate with CDPs like Segment and Rudderstack, and data warehouses like Snowflake and BigQuery.
+- Both are SOC 2 certified and GDPR-ready.
+
+</details>
 
 ### Why do companies use Amplitude?
 
@@ -414,7 +562,7 @@ As of July 2023, Amplitude is deployed by 6,973 of the top 1 million websites in
 
 > #### Bottom line
 >
-> The case for Amplitude is very similar to the case for Mixpanel. It's a well-established Heap alternative, but falls short of a like-for-like replacement due to is lack of autocapture and session replay.
+> Amplitude is a strong Heap alternative for enterprise teams, especially those wanting warehouse-native analytics, mature experimentation, and a built-in CDP. The main trade-off is autocapture – if your team relies on retroactive event definition without engineering effort, Heap is the better choice.
 
 ## 7. Google Analytics 4
 
@@ -433,18 +581,17 @@ Unlike its predecessor, Universal Analytics (GA3), it's event-based. It also int
 
 ### Key features
 
--   🤖 **Predictive insights** alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
+- **Predictive insights** alert you to trends you're not aware of, like an increase in traffic to a specific landing page, or an anomalous decline in conversion from one period to another.
 
--   🔁 **Integration with Google tools** means it's easy to analyze your GA4 data elsewhere, such as Google's dashboarding tool, Looker Studio.
+- **Integration with Google tools** means it's easy to analyze your GA4 data elsewhere, such as Google's dashboarding tool, Looker Studio.
 
--   ⌨️ **Natural language search** means you can ask specific questions, like "MoM growth in users on iOS", rather searching existing reports.
+- **Natural language search** means you can ask specific questions, like "MoM growth in users on iOS", rather searching existing reports.
 
 ### How does GA4 compare to Heap?
 
-GA4 is another tool that supports event autocapture, though confusingly Google calls this "enhanced analytics".
+GA4 supports event autocapture (calling it "enhanced measurement"), but it' less comprehensive than Heap's – covering scrolls, outbound clicks, and file downloads rather than every interaction. The bigger difference is focus: GA4 is a marketing and web analytics tool built around the Google ecosystem, while Heap is a product analytics tool built for understanding in-product user behavior. 
 
-On paper, it offers similar feature to Heap, though GA4's product analytics are less mature than those of Heap and other more established event-based tools.
-
+<p>
 <ProductComparisonTable
     competitors={['ga4', 'heap']}
     rows={[
@@ -461,12 +608,32 @@ On paper, it offers similar feature to Heap, though GA4's product analytics are 
         'product_analytics.group_analytics',
     ]}
 />
+</p>
 
-### How popular is GA4?
+<details>
+<summary>Main differences between GA4 and Heap</summary>
 
-Google Analytics remains the most-used analytics tool in the world by a large margin.
+- GA4 is primarily a marketing and web analytics tool with deep Google Ads, BigQuery, and Looker Studio integration; Heap is built for product analytics with a focus on understanding in-product user behavior.
+- Heap's autocapture records all interactions and lets you define events retroactively with a visual editor; GA4's autocapture ("enhanced measurement") covers basic interactions like scrolls and outbound clicks but is far less comprehensive.
+- GA4 is free for up to 10 million events/month; Heap's free tier is limited to 10,000 sessions.
+- Heap offers session replay and heatmaps; GA4 doesn't offer either.
+- GA4 includes predictive insights and audience building for ad targeting; Heap doesn't offer advertising or marketing attribution tools.
+- Heap supports group analytics for account-level B2B analysis; GA4 doesn't have a native equivalent.
+- GA4 uses cookies and typically requires consent banners in the EU; Heap also uses cookies but offers more granular privacy controls.
 
-As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/) run GA4 – another 35.7% were still running GA3.
+</details>
+
+<details>
+<summary>Main similarities between GA4 and Heap</summary>
+
+- Both are event-based analytics platforms with funnels, retention, and conversion tracking.
+- Both support a form of event autocapture without manual instrumentation.
+- Both offer custom dashboards and reporting.
+- Both integrate with data warehouses like BigQuery and Snowflake.
+- Both support UTM campaign tracking and traffic source analysis.
+- Neither offers feature flags, A/B testing, or surveys natively.
+
+</details>
 
 ### Why do companies use GA4?
 
@@ -480,6 +647,16 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 >
 > Until recently, Google Analytics wasn't a viable Heap alternative. The launch of GA4 changed this, but switching from Heap to Google only makes sense if you're keen to integrate deeper into Google's ecosystem of data tools, like BigQuery and Looker Studio.
 
+## Which Heap alternative should you choose?
+
+- Want analytics integrated with feature flags, experiments, error tracking, session replays, and more? **PostHog** closes the loop in one platform.
+- Need session replay with frustration detection for UX and support teams? **FullStory** leads the charge.
+- Retail or financial services team focused on mobile app experience? **Glassbox** is built for that.
+- Want analytics plus in-app guides, onboarding flows, and product roadmapping? **Pendo** combines them.
+- Looking for mature analytics with experimentation and warehouse-native queries? **Amplitude** skews enterprise.
+- Want polished, self-serve product analytics with a strong free tier? **Mixpanel** is a solid pick.
+- Heavily invested in Google Ads, BigQuery, and the Google ecosystem? **GA4** is hard to beat for marketing attribution.
+
 ## Is PostHog right for you?
 
 Here's the (short) sales pitch.
@@ -492,4 +669,113 @@ We're biased, obviously, but we think PostHog is the perfect Heap replacement if
 
 Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
 
-<NewsletterForm />
+<ArrayCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is Heap used for?</summary>
+
+**Heap** is a product analytics platform known for comprehensive autocapture. It automatically records clicks, pageviews, form submissions, and other user interactions from the moment you install it, letting you define and analyze events retroactively without engineering support. It also includes session replay and heatmaps, and is now part of **Contentsquare**.
+
+</details>
+
+<details>
+<summary>Why look for Heap alternatives?</summary>
+
+Common reasons include: needing feature flags, A/B testing, or error tracking that Heap doesn't offer natively; wanting developer debugging tools like console logs and DOM inspection in session replay; needing transparent, self-serve pricing (Heap's higher tiers require sales conversations); wanting EU data residency (Heap doesn't currently offer this); or looking for an open-source platform with SQL access.
+
+</details>
+
+<details>
+<summary>What's the best Heap alternative overall?</summary>
+
+For most teams, **[PostHog](/blog/posthog-vs-heap)** is the best alternative. It's the only tool on this list that matches Heap's autocapture while also including [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and a built-in [data warehouse](/data-warehouse) – all with a generous free tier.
+
+</details>
+
+<details>
+<summary>Which Heap alternatives support autocapture?</summary>
+
+**PostHog**, **FullStory**, **Glassbox**, **Pendo**, and **GA4** all support some form of autocapture. PostHog and FullStory are the closest to Heap's approach – both start recording interactions immediately. GA4's "enhanced measurement" is more limited, covering basic interactions like scrolls and outbound clicks. Mixpanel and Amplitude support autocapture but rely more on manual instrumentation for deeper tracking.
+
+</details>
+
+<details>
+<summary>Which Heap alternatives are open source?</summary>
+
+**PostHog** is the only open-source Heap alternative on this list; its code is publicly available on [GitHub](https://github.com/PostHog/posthog). All other tools listed – FullStory, Glassbox, Pendo, Mixpanel, Amplitude, and GA4 – are closed-source. See our guide to the [best open-source analytics tools](/blog/best-open-source-analytics-tools) for more options.
+
+</details>
+
+<details>
+<summary>Which Heap alternative has the best free tier?</summary>
+
+**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, and 1 million feature flag requests per month – with no credit card required. **GA4** is free for up to 10 million events but has limited product analytics. **FullStory's** free plan includes 30,000 sessions with 12 months of retention. **Mixpanel** offers 1 million events free. **Heap's** free tier is limited to 10,000 sessions.
+
+</details>
+
+<details>
+<summary>Does Heap have feature flags or A/B testing?</summary>
+
+No. **Heap** doesn't offer native feature flags or experimentation. You'd need a separate tool like **LaunchDarkly**, **Optimizely**, or **PostHog**. PostHog includes both [feature flags](/feature-flags) and [A/B testing](/experiments) natively, tightly integrated with analytics so you can measure experiment impact on funnels, retention, and revenue.
+
+</details>
+
+<details>
+<summary>Does Heap have error tracking?</summary>
+
+No. **Heap** doesn't offer error tracking or crash monitoring. If you need to monitor exceptions alongside your analytics, you'd need a separate tool like Sentry or Bugsnag. **PostHog** includes native [error tracking](/error-tracking) that connects exceptions and stack traces directly to session replays, user behavior, and feature flag changes.
+
+</details>
+
+<details>
+<summary>What happened to Heap after the Contentsquare acquisition?</summary>
+
+Contentsquare [completed its acquisition of Heap](https://contentsquare.com/heap/) in December 2023. Heap's product analytics features have been integrated into Contentsquare's broader experience intelligence platform, alongside [Hotjar](/posthog-vs-hotjar). Heap continues to operate as a product, but its roadmap is now shaped by Contentsquare's enterprise and ecommerce focus.
+
+</details>
+
+<details>
+<summary>Can I migrate from Heap to PostHog?</summary>
+
+Yes. See the [Heap to PostHog migration guide](/docs/migrate/heap) for step-by-step instructions on exporting your Heap data and importing it into PostHog, including historical events and user properties.
+
+</details>
+
+<details>
+<summary>Can PostHog replace Google Analytics?</summary>
+
+Yes. **PostHog** includes [web analytics](/web-analytics) for tracking pageviews, bounce rate, traffic sources, and UTM campaigns. You can integrate it using [Google Tag Manager](/docs/libraries/google-tag-manager). See the [PostHog vs GA4 comparison](/blog/posthog-vs-ga4) and [intro for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+
+</details>
+
+<details>
+<summary>Does PostHog offer EU hosting?</summary>
+
+Yes. **PostHog** offers EU-hosted cloud with data stored exclusively in the EU. PostHog is also SOC 2 certified, GDPR-ready, and HIPAA-ready.
+
+</details>
+
+<details>
+<summary>How does PostHog compare to Amplitude and Mixpanel?</summary>
+
+Amplitude and Mixpanel offer similar product analytics features to Heap but take different approaches. Amplitude skews enterprise with warehouse-native analytics, a built-in CDP, and mature experimentation. Mixpanel is more self-serve with polished analytics and recent additions like session replay and heatmaps. PostHog goes further with feature flags, error tracking, LLM analytics, and surveys in one platform. Read the [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparisons for details.
+
+</details>
+
+<details>
+<summary>What are the best product analytics tools in 2026?</summary>
+
+The top product analytics tools in 2026 include:
+
+- **[PostHog](/product-analytics)** – Best all-in-one platform combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), and more
+- **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for self-serve product teams wanting fast, flexible analytics
+- **[Amplitude](/blog/posthog-vs-amplitude)** – Best for enterprises wanting warehouse-native analytics and a built-in CDP
+- **[Heap](/blog/posthog-vs-heap)** – Best for teams wanting comprehensive autocapture with minimal engineering effort
+- **[Pendo](https://www.pendo.io/)** – Best for product managers who also need in-app guides and user onboarding
+- **[Google Analytics](/blog/posthog-vs-ga4)** – Best for marketing teams already invested in the Google ecosystem
+
+For detailed comparisons, see our guides to [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Amplitude alternatives](/blog/best-amplitude-alternatives), and [Plausible alternatives](/blog/best-plausible-alternatives).
+
+</details>
