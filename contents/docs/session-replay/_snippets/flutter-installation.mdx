@@ -64,9 +64,50 @@ This is needed as Flutter renders your app using a browser canvas element.
   classes="rounded"
 />
 
-## Step three: Configure replay settings 
+## Step three: Configure replay settings
 
-Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+### Automatically start session recordings
+
+Setting `config.sessionReplay = true` in your PostHog configuration will start session recordings on SDK setup.
+
+### Manually control session recordings
+
+> Requires PostHog Flutter SDK version >= [5.12.0](https://github.com/PostHog/posthog-flutter/releases). Available on iOS, Android, and Web.
+
+Setting `config.sessionReplay = false` in your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup. 
+
+You can manually control when to start and stop session recordings using the following methods:
+
+- `startSessionRecording({bool resumeCurrent = true})`
+  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
+  - Set **resumeCurrent** to `false` to start a new session recording. 
+- `stopSessionRecording()` 
+  - Stops/pauses the current session recording.
+- `isSessionReplayActive()`
+  - Returns whether session replay is currently active.
+
+```dart
+// Start recording (resume current session)
+await Posthog().startSessionRecording();
+
+// Start recording with a new session
+await Posthog().startSessionRecording(resumeCurrent: false);
+
+// Stop recording
+await Posthog().stopSessionRecording();
+
+// Check if recording is active
+final isActive = await Posthog().isSessionReplayActive();
+
+// Start recording with a new session
+await Posthog().startSessionRecording(resumeCurrent: false);
+```
+
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+### Configuration options
+
+You can customize session replay behavior with the following configuration options:
 
 ```dart
 final config = PostHogConfig('<ph_project_api_key>');
