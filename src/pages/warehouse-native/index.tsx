@@ -48,15 +48,7 @@ export default function WarehouseNative(): JSX.Element {
 
                 <h2>What does "warehouse native" mean anyway?</h2>
                 <p>
-                    &ldquo;Warehouse native&rdquo; usually means that you have an external tool, such as an analytics
-                    platform, that exists outside of your warehouse and does not ingest data. Queries and workloads are
-                    created in the external platform, but run on your data warehouse (Snowflake, BigQuery, Databricks,
-                    etc.) and the data stays there, never moving into the external tool. PostHog can do this via our own
-                    data warehouse, which can be used either as a standalone data warehouse or as part of an integrated
-                    PostHog stack. However, while PostHog tools such as product analytics, experiments, and feature
-                    flags, cannot be used on their own in a truly warehouse native setup. Teams either need to use our
-                    [integrated data warehouse](/managed-warehouse), or use our warehouse sources to sync data into
-                    PostHog for these tools to use.
+                    &ldquo;Warehouse native&rdquo; usually means that you have an external tool, such as an analytics. platform, that exists outside of your warehouse and does not ingest data. Queries and workloads are created in the external platform, but run on your data warehouse (Snowflake, BigQuery, Databricks, etc.) and the data stays there, never moving into the external tool. In PostHog, this is possible due to an integrated data warehouse which makes your warehouse accessible to other PostHog tools, such as product analytics.  
                 </p>
 
                 <h2>What does PostHog support today?</h2>
