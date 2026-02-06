@@ -4,42 +4,43 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Want PostHog to be involved in your event, go to [Community events](#community-events). Want to start a local co-working group for builders, go to [Community incubator](#community-incubator). And if your event will include PostHog and you'd like to add it to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/>.
+> Want PostHog to be involved in your event? See how we do [Community events](#community-events). <br /> Want to start a co-working group for builders? Check out our [Community incubator](#community-incubator) program and submit the [form](/community-incubator#apply). <br /> If your event will include PostHog and you'd like to add it to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/> or <TeamMember name="Kliment Minchev"/>.
 
 We did 45 events in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
-Events have to focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
+Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
 
-The event formats we get involved in (and organize ourselves) fall into one of these:
+The event formats we prefer (and organize ourselves) fall into one of these:
 
 -   Hands-on gatherings that enable our users to build better products for their customers
--   Experiences that allow engineers and founders to flex and grow their skillsets
+-   Experiences that allow engineers and founders to walk away with unique product engineering insights
 -   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
 
 ## Community incubator
 
-We connect builders around the world by helping them start micro-communities that gather for recurring co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person with other people who have a bias for action.
+We connect builders around the world by helping them start IRL micro-communities that gather for recurring co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person with other people who have a bias for action.
 
 We have already seen how this format makes a higher impact on communities because of the velocity built over weeks and months of communal work, collaboration, and creativity.
 
-![Austin incubator](https://res.cloudinary.com/dmukukwp6/image/upload/Austin_community_incubator_photo_1049a2853e.png)
+![Philadelphia incubator](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/taj_phl_builder_group_f00b7c9abd.jpg)
 
-<Caption>Kliment leading community incubator, Austin</Caption>
+<Caption>Taj leading his builder group in Philadelphia</Caption>
 
 ### Geographies
-
-The [pilot program](/community-incubator) started in tech hubs mostly in North America, UK, and EU (Austin, Singapore, New York, Barcelona, and Lahore). At this time, we're open to groups starting in any city with a population of more than half of a million people.
+The [pilot program](/community-incubator) started in tech hubs mostly in North America, UK, and EU. We now have communities in Austin, Philadelphia, Singapore, New York, Barcelona, and Lahore. At this time, we're open to groups starting in any city with a population of more than half of a million people.
 
 ### Co-working structure
 
-The focus is on weekly, bi-weekly, or monthly gatherings with small groups of ~10 people. 
+The focus is on weekly, bi-weekly, or monthly gatherings with small groups of ~10 people. Gatherings typically take place during weekday evenings or weekends and go for about 3 hours. 
 
-Gatherings typically take place during weekday evenings or weekends and go for about 3 hours. We suggest starting with intros, at least 2-2.5 hours for building, and then closing with demos to show off what you built. Outside of co-working, the group is encouraged to get together for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
+<Caption>Discuss → Build → Demo</Caption>
+
+We suggest starting with a roundtable discussion of the latest dev news and trends, then each builder can set their own goals for the session. Allow at least 2 hours for building, and then close out the session with demos to show off what you built. Outside of co-working, the group is encouraged to get together to connect for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
 
 ### Venues
 
-The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) They are typically held in tech or VC offices that have an available room. If you have a venue and want to host, [reach out](mailto:daniel.z@posthog.com) directly.
+The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) They are typically held in tech or VC offices that have an available room, libraries, and co-working spaces. If you have a venue and want to host a builder group, reach out to [Daniel](mailto:daniel.z@posthog.com) directly.
 
 ## Community events
 
