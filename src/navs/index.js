@@ -5897,6 +5897,12 @@ export const pricingMenu = {
             url: '/sales',
         },
         {
+            name: 'How we do AI',
+            icon: 'IconPercentage',
+            color: 'green',
+            url: '/how-we-ai',
+        },
+        {
             name: 'Founder stack',
             icon: 'IconStack',
             color: 'salmon',

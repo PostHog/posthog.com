@@ -785,6 +785,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/how-we-ai': {
+        size: {
+            min: {
+                width: 875,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 900,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/spicy.mov': {
         size: {
             min: {

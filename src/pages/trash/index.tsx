@@ -100,6 +100,14 @@ export default function Trash(): JSX.Element {
                                 color: 'blue',
                                 icon: 'doc' as AppIconName,
                             },
+                            {
+                                name: 'Max AI',
+                                slug: 'max-ai-assistant',
+                                url: '/blog/why-we-killed-our-ai-product-assistant', 
+                                extension: 'folder',
+                                color: 'yellow',
+                                icon: 'aiMax' as AppIconName,
+                            },
                         ],
                         archive: [
                             {
