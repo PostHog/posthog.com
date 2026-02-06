@@ -55,7 +55,7 @@ Typical PostHog users are engineers and product managers at startups and mid-siz
 
 - **Error tracking** to [monitor exceptions](/docs/error-tracking/issues-and-exceptions), [stack traces](/docs/error-tracking/stack-traces), and crashes – connected directly to session replays, user behavior, and feature flag changes.
 
-- **Data warehouse** to import and query data from external sources like Stripe, Zendesk, Hubspot, or your existing warehouse – analyze business and product data together.
+- **Data warehouse** to import and query data from external sources like [Stripe](/docs/cdp/sources/stripe), [Zendesk](/docs/cdp/sources/zendesk), [Hubspot](/docs/cdp/sources/hubspot), or your existing warehouse – analyze business and product data together.
 
 ### How does PostHog compare to Heap?
 
@@ -90,9 +90,10 @@ You can also [create and label events using the PostHog toolbar](/tutorials/how-
 
 - PostHog includes [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), and [LLM analytics](/llm-analytics); Heap doesn't offer any of these natively.
 - PostHog's session replay includes console logs, network monitoring, DOM explorer, and performance metrics; Heap's replay is simpler and lacks developer debugging tools.
-- PostHog includes a built-in [data warehouse](/data-warehouse) for importing and querying external data from Stripe, Hubspot, Zendesk, and more; Heap offers managed ETL exports but no native warehouse.
+- PostHog includes a built-in [data warehouse](/data-warehouse) for importing and querying external data from [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Zendesk](/docs/cdp/sources/zendesk), and more; Heap imports user context via "Sources" (Salesforce, Marketo, Segment, etc.) but queries happen within Heap's UI rather than via SQL.
 - PostHog offers [SQL access](/docs/product-analytics/sql) for custom queries; Heap doesn't support direct SQL querying.
 - PostHog is open-source; Heap is closed-source and cloud-only.
+
 
 </details>
 
@@ -103,7 +104,7 @@ You can also [create and label events using the PostHog toolbar](/tutorials/how-
 - Both include product analytics with funnels, retention charts, user paths, and cohorts.
 - Both support heatmaps for understanding where users click and scroll.
 - Both support group analytics for account-level analysis in B2B products.
-- Both integrate with data warehouses like Snowflake and BigQuery, and CDPs like Segment and Rudderstack.
+- Both offer data warehouse exports — Heap Connect syncs to Snowflake, BigQuery, Redshift, and S3; PostHog exports to S3, BigQuery, Snowflake, and Redshift via batch exports.
 
 </details>
 
@@ -357,9 +358,8 @@ Pendo offers similar features to Heap, including event autocapture and session r
 - Pendo includes in-app guides for user onboarding, tooltips, and feature announcements; Heap doesn't offer any in-app messaging.
 - Pendo has built-in product validation and roadmap tools for aligning teams on priorities; Heap focuses purely on analytics and replay.
 - Pendo includes native user feedback collection and NPS surveys; Heap doesn't offer feedback or survey tools.
-- Heap has a visual event editor for tagging and defining events retroactively without code; Pendo supports autocapture but has no equivalent labeling tool.
+- Heap captures every user interaction (clicks, scrolls, form inputs, rage clicks) and lets you define events retroactively; Pendo's autocapture is limited to page loads and feature clicks, and requires tagging before data appears in reports.
 - Heap's session replay and analytics features are more mature; Pendo's analytics are functional but secondary to its product experience tools.
-- Heap offers managed ETL for warehouse exports; Pendo's data export and warehouse integration options are more limited.
 
 </details>
 
