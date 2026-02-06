@@ -123,16 +123,17 @@ export default function Explorer({
         return props
     }
 
+    const windowWidth = appWindow?.size?.width
     const ContentWrapper = useMemo(() => {
         const WrapperComponent = ({ children: wrapperChildren }: { children: React.ReactNode }) => {
-            if (appWindow?.size?.width && appWindow.size.width <= 768) {
+            if (windowWidth && windowWidth <= 768) {
                 return <ScrollArea viewportClasses={`[&>div]:h-full ${viewportClasses}`}>{wrapperChildren}</ScrollArea>
             }
             return <>{wrapperChildren}</>
         }
         WrapperComponent.displayName = 'ContentWrapper'
         return WrapperComponent
-    }, [appWindow, viewportClasses])
+    }, [windowWidth, viewportClasses])
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
