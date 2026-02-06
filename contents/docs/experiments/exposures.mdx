@@ -95,6 +95,7 @@ Users might be exposed to different variants if:
 - They clear cookies/storage
 - There's an implementation error
 - They're part of a gradual rollout
+- They are shown the flag both before and after calling `identify` and you don't have [flag persistence](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) enabled
 
 PostHog provides two strategies for handling these cases:
 
