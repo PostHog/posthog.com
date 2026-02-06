@@ -56,7 +56,7 @@ Customer obsession manifests in a couple of ways. First is that they [talk to us
 
 > "Enjoy speaking directly with customers and understanding their problems”
 
-Second, customer obsession means shipping features users wants and benefit from. Features without a direct connection to users are less important to product engineers. They focus less of their time here. Quickly shipping these features to improve the user’s experience is important for a product engineer. [Fly.io](http://fly.io) states this by saying:
+Second, customer obsession means shipping features users want and benefit from. Features without a direct connection to users are less important to product engineers. They focus less of their time here. Quickly shipping these features to improve the user’s experience is important for a product engineer. [Fly.io](http://fly.io) states this by saying:
 
 > “We're ruthless about working on stuff that our users will see and care about. We are not ruthless about shaping and polishing our code into a radiant-cut gem of perfection.”
 
