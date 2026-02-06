@@ -33,7 +33,7 @@ will produce:
 ```console
 2021-10-28T13:46:40.099007Z [debug] event_sent_to_kafka [posthog.api.capture] event_uuid=017cc727-1662-0000-630c-d35f6a29bae3 kafka_topic=default
 ```
-As you can see above, the log contains all the information needed to understand the app behaviour.
+As you can see above, the log contains all the information needed to understand the app behavior.
 
 ##### Enabling INFO logs for your module
 
