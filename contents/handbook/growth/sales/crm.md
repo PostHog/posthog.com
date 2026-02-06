@@ -345,6 +345,20 @@ When moving someone to self-serve we should set them up for success by using the
 
 > If you move an opportunity to self-serve then it won't be included in your quota retirement/commission calculation (as you aren't working on it).
 
+## Tasks (for product-led leads)
+
+Technical account managers are also assigned incoming product-led leads based on a number of [criteria](/handbook/growth/sales/product-led-sales#product-led-lead-generation). These leads are assigned round-robin by territory as Tasks in Salesforce, related to an Account.
+
+As leads are assigned, TAMs should understand their current state and work with these leads to be successful with PostHog, and identify areas to adopt additional products.
+
+Incoming lead Tasks should be handled within a week of assignment and should have their status updated accordingly. Any lead that is being engaged by a TAM should be edited and the status changed to "In Progress".
+
+If a lead Task is not ready to be engaged or has indicated that they do not currently need a TAM, they should be edited and the status changed to "Nurturing" for follow up at a later time.
+
+If a lead Task should be disqualified, it should be edited with the appropriate Disqualification Reason and saved, this will automatically close the task as disqualified (this includes marking leads as duplicates).
+
+For a lead Task that is [qualified as an opportunity](/handbook/growth/sales/crm#lead-to-opportunity-conversion-guidelines), it should be editied to change the status to "Complete". Additionally, check the "Create New Opp" box and select an "Opportunity Record Type". This will complete the lead Task and create an Opportunity associated with the account. The [Opportunity](/handbook/growth/sales/crm#opportunities) should then be managed accordingly.
+
 ## All done - now what?
 
 This is just the beginning of what will hopefully be an awesome relationship with a new customer!
