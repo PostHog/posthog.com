@@ -1,13 +1,33 @@
 import React, { createContext, useContext } from 'react'
 
-type Locale = 'en' | 'ko'
+export type Locale = 'en' | 'ko'
 
-const LocaleContext = createContext<Locale>('en')
+type LocaleContextValue = {
+    locale: Locale
+    setLocale: ((locale: Locale) => void) | null
+}
 
-export function LocaleProvider({ locale, children }: { locale: Locale; children: React.ReactNode }) {
-    return <LocaleContext.Provider value={locale}>{children}</LocaleContext.Provider>
+const LocaleContext = createContext<LocaleContextValue>({
+    locale: 'en',
+    setLocale: null,
+})
+
+export function LocaleProvider({
+    locale,
+    setLocale = null,
+    children,
+}: {
+    locale: Locale
+    setLocale?: ((locale: Locale) => void) | null
+    children: React.ReactNode
+}) {
+    return <LocaleContext.Provider value={{ locale, setLocale }}>{children}</LocaleContext.Provider>
 }
 
 export function useLocale(): Locale {
-    return useContext(LocaleContext)
+    return useContext(LocaleContext).locale
+}
+
+export function useSetLocale(): ((locale: Locale) => void) | null {
+    return useContext(LocaleContext).setLocale
 }

@@ -43,20 +43,7 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 
-// Language Toggle Component for Korean homepage
-const LanguageToggle = () => {
-    return (
-        <div className="fixed bottom-4 right-4 z-50">
-            <Link
-                to="/ko/"
-                className="flex items-center gap-2 px-3 py-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full shadow-lg hover:shadow-xl transition-shadow text-sm font-medium"
-            >
-                <IconGlobe className="size-4" />
-                <span>한국어</span>
-            </Link>
-        </div>
-    )
-}
+import LanguageToggle from 'components/Home/LanguageToggle'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -1242,23 +1229,6 @@ export default function Home() {
     useEffect(() => {
         if (appWindow) {
             setWindowTitle(appWindow, 'home.mdx')
-        }
-    }, [])
-
-    // Browser language detection for Korean users
-    useEffect(() => {
-        // Check if we've already shown or dismissed the language preference
-        const hasSeenLanguagePrompt = localStorage.getItem('language-preference-dismissed')
-        if (hasSeenLanguagePrompt) return
-
-        // Check if browser language is Korean
-        const browserLang = navigator.language || (navigator as any).userLanguage
-        const isKorean = browserLang?.toLowerCase().startsWith('ko')
-
-        if (isKorean && typeof window !== 'undefined') {
-            // Redirect Korean users to the Korean homepage
-            localStorage.setItem('language-preference-dismissed', 'true')
-            window.location.href = '/ko/'
         }
     }, [])
 

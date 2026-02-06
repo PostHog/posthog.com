@@ -45,29 +45,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
-
-// Language Toggle Component
-const LanguageToggle = () => {
-    const handleClick = () => {
-        // Set preference so user won't be auto-redirected back to Korean
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('language-preference-dismissed', 'true')
-        }
-    }
-
-    return (
-        <div className="fixed bottom-4 right-4 z-50">
-            <Link
-                to="/"
-                onClick={handleClick}
-                className="flex items-center gap-2 px-3 py-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full shadow-lg hover:shadow-xl transition-shadow text-sm font-medium"
-            >
-                <IconGlobe className="size-4" />
-                <span>English</span>
-            </Link>
-        </div>
-    )
-}
+import LanguageToggle from 'components/Home/LanguageToggle'
 
 interface ProductButtonsProps {
     productTypes: string[]
