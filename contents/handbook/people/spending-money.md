@@ -172,7 +172,8 @@ _This list will be updated based on common questions/scenarios._
 Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
-  - Apple Studio Displays are only allowed for Product Engineers (high density screen) and Sales (in-built high quality webcam and microphone) teams
+  - Apple Studio Displays are only allowed for Product Engineers (high density screen) and Sales/CS/Onboarding (in-built high quality webcam and microphone) teams
+    - If you order a Studio Display during your probation period but end up leaving PostHog we can recover the cost of the display and you won't need to return it.
   - Guidelines
     - For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 64GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
     - For sales roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
