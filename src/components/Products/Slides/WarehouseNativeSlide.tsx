@@ -18,9 +18,7 @@ export default function WarehouseNativeSlide({ variant = 'default' }: WarehouseN
                 <div className="border-2 border-primary rounded-lg p-6 bg-primary flex flex-col">
                     <h3 className="text-2xl font-bold text-primary mb-2">Use our integrated data warehouse</h3>
                     <p className="text-lg text-secondary flex-1 mb-4">
-                        Store, query, and model data via PostHog's Data stack, then use it across PostHog — in notebooks supporting SQL and Python,
-                        product analytics, experiments, feature flags, and more. It&apos;s warehouse-native and your
-                        data never needs to travel.
+                        Store, query, and model data in PostHog's integrated data warehouse. Use it in warehouse native workflows across other PostHog tools, or in notebooks supporting SQL and Python. Queries run on. our infrastructure and your data never needs to travel. 
                     </p>
                     <OSButton asLink to="/data-stack" state={{ newWindow: true }} variant="secondary" size="md">
                         Learn more about being warehouse native
