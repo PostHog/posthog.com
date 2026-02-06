@@ -25,7 +25,7 @@ export const hotjar = {
                     available: true,
                     features: {
                         formula_mode: false,
-                        ready_made_insight_types: false,
+                        ready_made_insight_types: true,
                         sampling: false,
                         sql_editor: false,
                     },
@@ -67,12 +67,12 @@ export const hotjar = {
             available: false,
         },
         product_tours: {
-            available: true,
+            available: false,
         },
         session_replay: {
             available: true,
             pricing: {
-                free_tier: '35/day',
+                free_tier: true,
             },
             features: {
                 canvas_recording: false,
@@ -84,7 +84,7 @@ export const hotjar = {
                 export_to_json: true,
                 export_to_video: false,
                 // https://help.hotjar.com/hc/en-us/articles/36819988557329-How-Do-I-Filter-Session-Data
-                filter_by_user_or_event: false,
+                filter_by_user_or_event: true,
                 highlights: true,
                 identity_detection: false,
                 iframe_recording: false,
@@ -94,16 +94,16 @@ export const hotjar = {
                 playlists: false,
                 // https://help.hotjar.com/hc/en-us/articles/36819956605329-How-to-Suppress-Text-Images-Videos-and-User-Input-from-Collected-Data
                 privacy_masking: true,
-                retention_policy: false,
+                retention_policy: true,
                 screenshot_mode: false,
                 scrollmaps: false,
                 search_by_network: false,
                 sentiment_scores: true,
-                share_replays: false,
+                share_replays: true,
                 single_page_app: false,
                 target_by_feature_flag: false,
                 target_by_sample: false,
-                target_by_url: false,
+                target_by_url: true,
                 wireframe_mode: false,
             },
             platform_support: {
@@ -146,7 +146,7 @@ export const hotjar = {
         surveys: {
             available: true,
             features: {
-                api_access: false,
+                api_access: true,
                 csat_surveys: true,
                 custom_html: '',
                 feedback_button: true,
@@ -271,11 +271,11 @@ export const hotjar = {
             cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: true,
-            hipaa_ready: true,
+            hipaa_ready: false,
             history_audit_logs: false,
-            saml_sso: false,
-            soc2_certified: false,
-            two_factor_auth: false,
+            saml_sso: true,
+            soc2_certified: true,
+            two_factor_auth: true,
             user_privacy_options: true,
         },
     },
