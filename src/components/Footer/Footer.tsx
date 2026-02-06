@@ -278,6 +278,10 @@ const linklist: IProps[] = [
                 url: '/people',
             },
             {
+                title: 'People map',
+                url: '/map',
+            },
+            {
                 title: 'Small teams',
                 url: '/teams',
             },

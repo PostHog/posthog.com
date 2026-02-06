@@ -22,6 +22,11 @@ const tabs = [
         content: null,
     },
     {
+        value: '/map',
+        label: 'People map',
+        content: null,
+    },
+    {
         value: '/small-teams',
         label: 'Teams',
         content: null,
