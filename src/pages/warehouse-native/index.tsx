@@ -55,7 +55,7 @@ export default function WarehouseNative(): JSX.Element {
                     data warehouse, which can be used either as a standalone data warehouse or as part of an integrated
                     PostHog stack. However, while PostHog tools such as product analytics, experiments, and feature
                     flags, cannot be used on their own in a truly warehouse native setup. Teams either need to use our
-                    [integrated data warehouse](/managed-warehouse), or use [the PostHog CDP](/cdp) to ingest data into
+                    [integrated data warehouse](/managed-warehouse), or use our warehouse sources to sync data into
                     PostHog for these tools to use.
                 </p>
 
