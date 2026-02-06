@@ -36,7 +36,11 @@ It's best to use separate projects for:
 
 ## Moving projects between organizations
 
-You can move a project from one organization to another through [project settings](https://app.posthog.com/settings/project#project-move). However, there are a few requirements to keep in mind:
+You can move a project from one organization to another through [project settings](https://app.posthog.com/settings/project#project-move). The process differs depending on whether you're staying within the same region or moving between regions.
+
+### Requirements
+
+Before moving a project, keep these requirements in mind:
 
 - You need to be an owner or admin of the originating organization to transfer a project
 - You need to be a member of the target organization
@@ -45,3 +49,28 @@ You can move a project from one organization to another through [project setting
 - After the move is complete, you can downgrade the original organization back to the free plan if desired
 
 > Moving a project will mean all original organization members will lose access (including via things like API keys) unless they also are part of the target organization.
+
+### Same region (self-serve)
+
+If both organizations are in the **same region** (e.g., both on US Cloud or both on EU Cloud), you can move projects yourself through the UI:
+
+1. Go to your project settings
+2. Navigate to the "Move project" section
+3. Select the destination organization
+4. Confirm the move
+
+This option is **free and available to all customers** regardless of plan level. Since both organizations are in the same data center, the move simply transfers project ownership without needing to physically relocate any data.
+
+### Cross-region (requires Scale or Enterprise)
+
+If you need to move a project **between regions** (e.g., from US Cloud to EU Cloud), this requires a different process:
+
+> **Important:** Cross-region migration is only available to customers on the **Scale** or **Enterprise** plan as it requires significant engineering time. A PostHog engineer must run this migration for you.
+
+To request a cross-region migration:
+
+1. Contact us via in-app support
+2. Provide details about your source and destination projects
+3. Our engineering team will coordinate the migration with you
+
+Cross-region moves require physically transferring all your event data between data centers, which is why engineering support is needed.
