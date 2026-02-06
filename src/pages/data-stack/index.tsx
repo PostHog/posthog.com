@@ -294,7 +294,7 @@ export default function CDP(): JSX.Element {
                     PostHog via our warehouse sources. Either way, queries run on PostHog compute; we don&apos;t execute queries in
                     your external warehouse.
                     <Link to="/warehouse-native" state={{ newWindow: true }}>
-                        Learn more about being warehouse-native with PostHog
+                        Learn more about warehouse-native workflows with PostHog
                     </Link>
                 </p>
 
