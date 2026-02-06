@@ -480,7 +480,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     {/* Sidebar - overlay on mobile, normal flow on desktop */}
                     <motion.div
                         id="nav"
-                        className="flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
+                        className="flex-shrink-0 overflow-hidden mb-[-36px] @2xl/app-reader:mb-0 text-primary 
                                    fixed left-2 top-[47px] bottom-16 z-50 
                                    @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
                         initial={{
@@ -784,7 +784,7 @@ function ReaderViewContent({
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div
-                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all [&>span:not(.OSTable):not(.Table)]:block ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
                                                     : contentMaxWidthClass ||

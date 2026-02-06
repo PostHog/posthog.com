@@ -1,0 +1,94 @@
+---
+title: PostHog AI modes
+---
+
+PostHog AI uses specialized modes to handle different types of analysis tasks. Each mode is optimized with specific tools and capabilities for its domain.
+
+When you ask a question, the agent selects the most appropriate mode based on your request, or you can be in a specific mode based on the page you're viewing. The agent can switch between modes automatically based on your needs, and context is preserved when switching.
+
+## How mode switching works
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mode_selection_posthog_ai_c3e0797366.mp4"
+    alt="PostHog AI mode selection"
+    classes="rounded border border-primary @md:max-w-[80%] mx-auto"
+    autoPlay={true}
+    background={false}
+/>
+
+The agent can switch modes in two ways:
+
+1. **Automatic switching** - When your request requires tools from a different mode, the agent will switch automatically. For example, if you're in Product analytics mode and ask to "run a custom SQL query", the agent will switch to SQL mode.
+
+2. **Manual switching** - You can explicitly select a mode with the mode selector above the chat input.
+
+When switching modes:
+- Your conversation history is preserved
+- The agent gains access to the new mode's specialized tools
+- The agent maintains context about what you were working on
+
+## Available modes
+
+### Product analytics
+
+The default mode for creating insights and dashboards.
+
+**Best for:**
+- Creating trend, funnel, and retention insights
+- Building dashboards
+- Analyzing user behavior patterns
+
+**Mode-specific tools:**
+- `create_insight` - Create or edit insights
+- `create_dashboard` / `upsert_dashboard` - Create and manage dashboards
+
+### SQL
+
+A specialized mode for executing HogQL queries against your data.
+
+**Best for:**
+- Complex queries requiring custom SQL
+- Exploring your data warehouse sources
+- Ad-hoc data analysis
+- Finding specific data that can be used in other modes
+
+**Mode-specific tools:**
+- `execute_sql` - Write and execute HogQL queries
+
+### Session replay
+
+A mode for analyzing session recordings and user behavior.
+
+**Best for:**
+- Finding recordings matching specific criteria
+- Understanding user behavior patterns
+- Analyzing sessions with errors or specific events
+- Getting AI summaries of session content
+
+**Mode-specific tools:**
+- `filter_session_recordings` - Filter recordings by properties and events
+- `summarize_sessions` - Get AI-powered summaries of sessions
+
+### Error tracking
+
+A mode for investigating errors and exceptions in your product.
+
+**Best for:**
+- Finding and analyzing error patterns
+- Understanding error frequency and impact
+- Investigating stack traces and root causes
+
+**Mode-specific tools:**
+- `search_error_tracking_issues` - Search and filter error tracking issues
+
+## Default tools (available in all modes)
+
+Regardless of which mode is active, the agent always has access to:
+
+| Tool | Description |
+|------|-------------|
+| `read_taxonomy` | Read your data schema including events, properties, and sample values |
+| `read_data` | Read data warehouse schema, insights, dashboards, and billing info |
+| `list_data` | Browse PostHog entities with pagination |
+| `search` | Search insights, dashboards, cohorts, actions, experiments, feature flags, notebooks, and more |
+| `switch_mode` | Switch to a different specialized mode |

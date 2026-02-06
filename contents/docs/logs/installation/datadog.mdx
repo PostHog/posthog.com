@@ -5,10 +5,7 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import LogsBetaSnippet from '../_snippets/beta.mdx'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
-
-<LogsBetaSnippet />
 
 If you're already using Datadog to collect logs, you can forward them to PostHog by configuring your existing Datadog log exporters (like the Datadog Agent) to send logs to PostHog's Datadog-compatible endpoint.
 
@@ -16,9 +13,11 @@ If you're already using Datadog to collect logs, you can forward them to PostHog
 
 <Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
 
-You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
 
 </Step>
 
@@ -27,23 +26,21 @@ You can find your project API key in [Project Settings](https://app.posthog.com/
 Set the Datadog logs URL to point to PostHog's Datadog-compatible endpoint. The endpoint format is:
 
 ```
-https://us.i.posthog.com/i/v1/logs/datadog/<YOUR_PROJECT_API_KEY>
+<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>
 ```
 
 For the **Datadog Agent**, set the `DD_LOGS_CONFIG_LOGS_DD_URL` environment variable:
 
 ```bash
-export DD_LOGS_CONFIG_LOGS_DD_URL="https://us.i.posthog.com/i/v1/logs/datadog/<YOUR_PROJECT_API_KEY>"
+export DD_LOGS_CONFIG_LOGS_DD_URL="<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>"
 ```
 
 Alternatively, you can set this in your `datadog.yaml` configuration file:
 
 ```yaml
 logs_config:
-  logs_dd_url: "https://us.i.posthog.com/i/v1/logs/datadog/<YOUR_PROJECT_API_KEY>"
+  logs_dd_url: "<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>"
 ```
-
-Replace `<YOUR_PROJECT_API_KEY>` with your actual PostHog project API key.
 
 </Step>
 
@@ -52,7 +49,7 @@ Replace `<YOUR_PROJECT_API_KEY>` with your actual PostHog project API key.
 If you're using other Datadog log exporters or forwarders, configure them to send logs to the same endpoint:
 
 ```
-https://us.i.posthog.com/i/v1/logs/datadog/<YOUR_PROJECT_API_KEY>
+<ph_client_api_host>/i/v1/logs/datadog/<ph_project_api_key>
 ```
 
 The endpoint accepts logs in the standard Datadog log format, so existing integrations should work without additional changes.

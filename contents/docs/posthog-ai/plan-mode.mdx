@@ -1,0 +1,85 @@
+---
+title: Plan mode
+---
+<CalloutBox icon="IconInfo" title="Plan mode is in closed beta" type="warning">
+Plan mode is currently in closed beta. Results may not be accurate or complete. If you find issues or have suggestions, please <a href="https://us.posthog.com/project/2/settings/#panel=support%3Asupport%3A%3A%3Afalse">reach out to us</a> to help us improve PostHog AI.  
+</CalloutBox>
+
+Plan mode is a structured workflow for tackling complex, multi-step tasks. Instead of executing immediately, the agent first creates a plan for your approval, ensuring you're aligned on the approach before any work begins.
+
+The agent will ask clarifying questions if needed, create a plan document outlining the steps, and wait for your approval before executing. This prevents wasted effort on misunderstood requirements and gives you visibility into how the agent will approach your task.
+
+## When to use plan mode
+
+Plan mode is useful for:
+
+- **Multi-step analyses** - [`Why did conversion drop last week?`](https://app.posthog.com/#panel=max:mode=plan:Why%20did%20conversion%20drop%20last%20week%3F) requires checking multiple metrics and correlating data
+- **Complex investigations** - Tasks that touch multiple data sources or require a systematic approach
+- **Dashboard creation** - Building comprehensive dashboards with multiple related insights
+- **Cross-functional analysis** - Questions that span product analytics, session replays, and error tracking
+
+For simple questions like "show me daily active users", the regular chat mode is faster and more appropriate.
+
+## How plan mode works
+
+### Step 1: Clarification
+
+When you enter plan mode with a request, the agent may ask clarifying questions to understand your objective. These questions appear as an interactive form that you can fill out. For example:
+
+- What time period should the analysis cover?
+- Which user segments are you interested in?
+- What metrics define success for this analysis?
+
+### Step 2: Planning
+
+The agent presents a plan that outlines:
+- The steps it will take
+- What data sources it will use
+- What insights or outputs you'll receive
+
+### Step 3: Review
+
+You review the plan and can:
+- **Approve** - The agent proceeds to execution
+- **Request changes** - Ask the agent to modify the plan
+- **Cancel** - Exit plan mode without executing
+
+### Step 4: Execution
+
+Once approved, the agent switches to execution mode and works through the plan, creating insights, running queries, and producing the outputs outlined in your approved plan.
+
+## Entering plan mode
+
+You can enter plan mode by:
+
+1. **Selecting the "Plan" option** in the mode selector above the chat interface
+2. **Asking explicitly** - "Create a plan for analyzing our onboarding funnel" or "Plan how to investigate our checkout drop-off"
+
+## What you can do in plan mode
+
+In plan mode, the agent can:
+
+- **Explore your data schema** - Understand what events, properties, and data sources are available
+- **Search existing content** - Find relevant insights, dashboards, and notebooks
+- **Ask clarifying questions** - Gather requirements through forms and questions
+- **Read documentation** - Access PostHog docs to understand best practices
+- **Create plan notebooks** - Save the planned approach to a notebook by clicking the save button
+
+## What you cannot do in plan mode
+
+Until you approve the plan, the agent cannot:
+
+- Create or modify insights
+- Create or modify dashboards
+- Run any operations that modify your data or content
+
+This ensures you maintain control over what changes are made in your project.
+
+## Plan mode vs regular chat
+
+| Aspect | Regular chat | Plan mode |
+|--------|-------------|-----------|
+| Best for | Quick questions, simple tasks | Complex, multi-step analyses |
+| Planning | Agent works immediately | Agent creates a plan first |
+| Approval | Not required | Required before execution |
+| Visibility | See results as they happen | See plan before execution |

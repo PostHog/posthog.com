@@ -7,7 +7,7 @@ showTitle: true
 ## Woah woah woah, we're doing outbound?
 
 Yes! But do not be afraid:
-- We are not doing this to 'go enterprise' - for now we're trying to reach more of [our ICP](https://posthog.com/handbook/who-we-build-for). 
+- We are not doing this to 'go enterprise' - for now we're trying to reach more of [our ICP](/handbook/who-we-build-for). 
 - Our investors did not ask us to do this - we came up with it ourselves. 
 
 _So why are we doing it now? I thought our inbound pipeline was good?_
@@ -39,17 +39,7 @@ We are building a BDR function that will generate leads, mainly focused on cold 
 
 Our focus today is on three categories: inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Dmytro Sitalo" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
 
-Check out the [leads page](/growth/sales/lead-scoring) for more detail on lead types and where they go. 
-
-## If you're reading this after getting outbounded by PostHog, ~~blink twice~~ you can opt out here
-
-We've linked to this section because you've been included in our [first few experiments.](#what-were-doing-today) We want to work together, but not at the expense of you hating us.
-
-So, if you'd rather we didn't reach out, you can opt out with this button: <a href="#" class="optout-button font-bold">Opt out of outbound</a>
-
-No forms, no 'are you sure?', no hurt feelings. You can always change your mind later by [reaching out to us directly](/talk-to-a-human). We would note that you're on our list because we think you're a good fit for PostHog, but that's for you to judge. 
-
-Most SaaS companies would likely just blast you with emails, calls and DMs without your consent. If you can’t already tell, PostHog does things differently. 
+Check out the [leads page](/handbook/growth/sales/lead-scoring) for more detail on lead types and where they go.
 
 ## What will we do on our calls? A simple outbound sales process
 
@@ -205,7 +195,7 @@ You should always aim to get them into a shared Slack channel or establish a reg
 
 Where else you take a qualified outbound sales opportunity is dependent on the specifics of your conversation. 
 
-Your process may resemble later stages of [the inbound sales process](/handbook/growth/sales/new-sales).
+Your process may resemble later stages of [the new business sales process](/handbook/growth/sales/new-sales).
 
 Otherwise, you can:
 

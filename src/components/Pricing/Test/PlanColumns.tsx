@@ -201,11 +201,36 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                                 ))}
                                 <div className="flex-[1_0_100%] max-w-2xl mx-auto @4xl:mx-4">
                                     <AllPlansInclude />
-                                    <div className="mt-6">
-                                        <p className="font-bold text-[15px] xl:mt-4 mb-2">
-                                            Looking for features for larger teams?{' '}
-                                            <Link to="/platform-packages">Check out our platform packages.</Link>
+                                    <div className="mt-4 mb-0">
+                                        <p className="font-bold text-[15px] mb-2">
+                                            <em>But wait, there's more...</em>
                                         </p>
+                                        <ul className="prose dark:prose-invert">
+                                            <li className="text-[15px]">
+                                                <Link to="/platform-packages" state={{ newWindow: true }}>
+                                                    Platform packages
+                                                </Link>
+                                                <br />
+                                                <p className="my-0 opacity-90 text-sm">
+                                                    Choose from extra features, like dedicated support, RBAC and SSO
+                                                    enforcement.
+                                                </p>
+                                            </li>
+                                            <li className="text-[15px]">
+                                                <Link
+                                                    to="/services"
+                                                    className="underline font-semibold hover:text-red dark:hover:text-yellow transition-colors"
+                                                    state={{ newWindow: true }}
+                                                >
+                                                    Setup &amp; training
+                                                    <br />
+                                                </Link>
+                                                <p className="my-0 opacity-90 text-sm">
+                                                    Our engineers can set everything up for you and train your team.{' '}
+                                                    <em>Includes free merch!</em>
+                                                </p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

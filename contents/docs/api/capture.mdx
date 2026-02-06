@@ -149,7 +149,9 @@ async function sendAnonymousPosthogEvent() {
 }
 
 sendAnonymousPosthogEvent()
-```
+```event.
+
+> **Note:** If the provided `distinct_id` has ever been used with an identified event, the event will still be treated as identified.
 
 </MultiLanguage>
 
