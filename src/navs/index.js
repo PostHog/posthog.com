@@ -4630,6 +4630,27 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Element selection',
+                    url: '/docs/product-tours/element-selection',
+                    icon: 'IconCursorClick',
+                    color: 'orange',
+                },
+                {
+                    name: 'Tour progression',
+                    url: '/docs/product-tours/tour-progression',
+                    icon: 'IconArrowRight',
+                    color: 'orange',
+                },
+                {
+                    name: 'Button actions',
+                    url: '/docs/product-tours/button-actions',
+                    icon: 'IconButton',
+                    color: 'orange',
+                },
+                {
                     name: 'Guides',
                 },
                 {
