@@ -1,7 +1,22 @@
-import { Placement, reference } from '@popperjs/core'
-import React, { useEffect, useState } from 'react'
+import { Placement } from '@popperjs/core'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { createPortal } from 'react-dom'
+
+interface TooltipProps {
+    children: JSX.Element
+    content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
+    offset?: [number, number]
+    className?: string
+    tooltipClassName?: string
+    placement?: Placement
+    title?: string
+    contentContainerClassName?: string
+    open?: boolean
+    controlled?: boolean
+}
+
+const TOUCH_TIMEOUT_MS = 500
 
 export default function Tooltip({
     children,
@@ -13,22 +28,15 @@ export default function Tooltip({
     title,
     contentContainerClassName = '',
     controlled,
-    ...other
-}: {
-    children: JSX.Element
-    content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
-    offset?: [number, number]
-    className?: string
-    tooltipClassName?: string
-    placement?: Placement
-    title?: string
-    contentContainerClassName?: string
-    open?: boolean
-    controlled?: boolean
-}): JSX.Element {
-    const [open, setOpen] = useState(other.open ?? false)
-    const [referenceElement, setReferenceElement] = useState(null)
-    const [popperElement, setPopperElement] = useState(null)
+    open: openProp,
+}: TooltipProps): JSX.Element {
+    const [isOpen, setIsOpen] = useState(openProp ?? false)
+    const [referenceElement, setReferenceElement] = useState<Element | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
+    const wrapperRef = useRef<HTMLSpanElement>(null)
+    const recentlyTouchedRef = useRef<boolean>(false)
+    const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement,
         modifiers: [
@@ -38,27 +46,89 @@ export default function Tooltip({
         ],
     })
 
+    // Sync with controlled prop
     useEffect(() => {
-        if (controlled && other.open !== undefined) {
-            setOpen(other.open)
+        if (controlled && openProp !== undefined) {
+            setIsOpen(openProp)
         }
-    }, [other.open])
+    }, [controlled, openProp])
+
+    // Clean up touch timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (touchTimeoutRef.current) {
+                clearTimeout(touchTimeoutRef.current)
+            }
+        }
+    }, [])
+
+    // Click outside handler
+    useEffect(() => {
+        if (!isOpen || controlled) return
+
+        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+            const target = e.target
+            if (!(target instanceof Node)) return
+
+            const isInsideWrapper = wrapperRef.current?.contains(target) ?? false
+            const isInsidePopper = popperElement?.contains(target) ?? false
+
+            if (!isInsideWrapper && !isInsidePopper) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener('touchstart', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('touchstart', handleClickOutside)
+        }
+    }, [isOpen, controlled, popperElement])
+
+    const handleTouchStart = useCallback(() => {
+        recentlyTouchedRef.current = true
+        if (touchTimeoutRef.current) {
+            clearTimeout(touchTimeoutRef.current)
+        }
+        touchTimeoutRef.current = setTimeout(() => {
+            recentlyTouchedRef.current = false
+        }, TOUCH_TIMEOUT_MS)
+    }, [])
+
+    const handleMouseEnter = useCallback(() => {
+        if (recentlyTouchedRef.current || controlled) return
+        setIsOpen(true)
+    }, [controlled])
+
+    const handleMouseLeave = useCallback(() => {
+        if (recentlyTouchedRef.current || controlled) return
+        setIsOpen(false)
+    }, [controlled])
+
+    const handleClick = useCallback(
+        (e: React.MouseEvent) => {
+            if (controlled) return
+            e.stopPropagation()
+            setIsOpen((prev) => !prev)
+        },
+        [controlled]
+    )
 
     return (
         <span
-            onMouseEnter={() => !controlled && setOpen(true)}
-            onMouseLeave={() => !controlled && setOpen(false)}
+            ref={wrapperRef}
+            onTouchStart={handleTouchStart}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             className={className}
-            onClick={() => {
-                if (!controlled) {
-                    setOpen(false)
-                }
-            }}
+            onClick={handleClick}
         >
             {React.cloneElement(children, {
                 ref: setReferenceElement,
             })}
-            {open &&
+            {isOpen &&
                 createPortal(
                     <div
                         id="portal-tooltip"
@@ -132,7 +202,7 @@ export default function Tooltip({
                                     <div
                                         className={`text-primary dark:text-primary-dark px-2 py-2 text-sm z-20 ${contentContainerClassName}`}
                                     >
-                                        {content && (typeof content === 'string' ? content : content(setOpen))}
+                                        {content && (typeof content === 'string' ? content : content(setIsOpen))}
                                     </div>
                                 </div>
                             </div>
