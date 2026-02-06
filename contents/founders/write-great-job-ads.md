@@ -139,5 +139,6 @@ And just to reiterate – Apple can get away with this because they are one of t
 - [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
 - A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
 - How do you make your [first ops hire](/founders/first-ops-hire)?
+- See [how we run our hiring process](/handbook/people/hiring-process) at PostHog
 
 <NewsletterForm />
