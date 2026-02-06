@@ -66,6 +66,56 @@ ORDER BY url_count DESC
 
 You can use SQL insights within [notebooks](/docs/notebooks) and with external sources using the [data warehouse](/docs/data-warehouse).
 
+### GROUP BY modifiers
+
+HogQL supports ClickHouse's `GROUP BY` modifiers for advanced multi-dimensional analytics:
+
+**GROUPING SETS** - Specify explicit grouping combinations:
+
+```sql
+SELECT 
+    browser,
+    os,
+    count() AS event_count
+FROM events
+GROUP BY GROUPING SETS (
+    (browser, os),
+    (browser),
+    (os),
+    ()
+)
+```
+
+This returns aggregates for each specified combination: by browser and OS together, by browser alone, by OS alone, and a grand total.
+
+**CUBE** - Generate all possible grouping combinations:
+
+```sql
+SELECT 
+    browser,
+    country,
+    count() AS event_count
+FROM events
+GROUP BY CUBE(browser, country)
+```
+
+This is equivalent to `GROUPING SETS ((browser, country), (browser), (country), ())`.
+
+**ROLLUP** - Generate hierarchical grouping combinations:
+
+```sql
+SELECT 
+    toYear(timestamp) AS year,
+    toMonth(timestamp) AS month,
+    count() AS event_count
+FROM events
+GROUP BY ROLLUP(year, month)
+```
+
+This produces aggregates for (year, month), (year), and a grand total - useful for hierarchical drill-downs.
+
+> **Note:** To prevent resource exhaustion, CUBE and ROLLUP are limited to 10 columns, and GROUPING SETS is limited to 64 sets.
+
 ## Query API
 
 To query events using SQL via the [PostHog API](/docs/api/queries), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
