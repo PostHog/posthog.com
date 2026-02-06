@@ -2,6 +2,26 @@ import { GatsbyNode } from 'gatsby'
 import fetch from 'node-fetch'
 import qs from 'qs'
 
+async function safeFetch(url: string, options?: any) {
+    try {
+        const res = await fetch(url, options)
+        if (!res.ok) {
+            console.warn(`gatsby-source-squeak: API returned ${res.status} for ${url}`)
+            return null
+        }
+        const text = await res.text()
+        try {
+            return JSON.parse(text)
+        } catch {
+            console.warn(`gatsby-source-squeak: Invalid JSON response from ${url}`)
+            return null
+        }
+    } catch (err) {
+        console.warn(`gatsby-source-squeak: Failed to fetch ${url}:`, err.message)
+        return null
+    }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     { actions, createContentDigest, createNodeId, cache },
     pluginOptions
@@ -39,7 +59,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             }
         )
 
-        const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`).then((res) => res.json())
+        const profiles = await safeFetch(`${apiHost}/api/profiles?${profileQuery}`)
+
+        if (!profiles?.data) break
 
         for (const profile of profiles.data) {
             const { avatar, ...profileData } = profile.attributes
@@ -72,7 +94,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             }*/
         }
 
-        if (profiles.meta.pagination.page >= profiles.meta.pagination.pageCount) {
+        if (!profiles?.meta?.pagination || profiles.meta.pagination.page >= profiles.meta.pagination.pageCount) {
             break
         }
         page++
@@ -87,24 +109,25 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         },
     })
 
-    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
+    const topicGroups = await safeFetch(`${apiHost}/api/topic-groups?${query}`)
 
-    topicGroups.data.forEach((topicGroup) => {
-        const { topics, ...rest } = topicGroup.attributes
+    if (topicGroups?.data)
+        topicGroups.data.forEach((topicGroup) => {
+            const { topics, ...rest } = topicGroup.attributes
 
-        const node = {
-            id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
-            internal: {
-                type: `SqueakTopicGroup`,
-                contentDigest: createContentDigest(topicGroup),
-            },
-            ...rest,
-            topics: topics.data.map((topic) => ({
-                id: createNodeId(`squeak-topic-${topic.id}`),
-            })),
-        }
-        createNode(node)
-    })
+            const node = {
+                id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
+                internal: {
+                    type: `SqueakTopicGroup`,
+                    contentDigest: createContentDigest(topicGroup),
+                },
+                ...rest,
+                topics: topics.data.map((topic) => ({
+                    id: createNodeId(`squeak-topic-${topic.id}`),
+                })),
+            }
+            createNode(node)
+        })
 
     // Fetch all topics
     let topicQuery = qs.stringify(
@@ -119,9 +142,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         }
     )
 
-    const topics = await fetch(`${apiHost}/api/topics?${topicQuery}`).then((res) => res.json())
+    const topics = await safeFetch(`${apiHost}/api/topics?${topicQuery}`)
 
-    for (const topic of topics.data) {
+    for (const topic of topics?.data || []) {
         createNode({
             id: createNodeId(`squeak-topic-${topic.id}`),
             squeakId: topic.id,
@@ -194,9 +217,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         }
     )
 
-    const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
+    const teams = await safeFetch(`${apiHost}/api/teams?${teamQuery}`)
 
-    for (const team of teams.data) {
+    for (const team of teams?.data || []) {
         const { roadmaps, crest, miniCrest, teamImage, ...rest } = team.attributes
 
         const cloudinaryTeamImage = {
@@ -264,7 +287,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             },
         })
 
-        const roadmaps = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
+        const roadmaps = await safeFetch(`${apiHost}/api/roadmaps?${roadmapQuery}`)
+
+        if (!roadmaps?.data) return
 
         for (const roadmap of roadmaps.data) {
             const { teams, githubUrls, image, ...rest } = roadmap.attributes
@@ -327,7 +352,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
 
             createNode(node)
         }
-        if (roadmaps.meta.pagination.page < roadmaps.meta.pagination.pageCount) {
+        if (roadmaps?.meta?.pagination?.page < roadmaps?.meta?.pagination?.pageCount) {
             await fetchRoadmaps(page + 1)
         }
     }
