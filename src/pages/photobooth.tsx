@@ -235,6 +235,7 @@ const Camera = ({
     const [permissionError, setPermissionError] = useState<string>()
 
     const startCountdown = () => {
+        return
         const interval = setInterval(() => {
             setCount((prevCount) => {
                 if (prevCount <= 1) {
@@ -1000,106 +1001,104 @@ export default function Photobooth(): JSX.Element {
     }, [])
 
     return (
-        <Explorer template="generic" slug="photobooth" fullScreen>
+        <ScrollArea>
             <SEO
                 title="Photo booth - PostHog"
                 description="A photo booth with Max the hedgehog"
                 image={`/images/og/photobooth.png`}
             />
-            <ScrollArea>
-                <div className="pt-4 pb-12">
-                    <div className="flex flex-col items-center">
-                        {/* <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
+            <div className="pt-4 pb-12">
+                <div className="flex flex-col items-center">
+                    {/* <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
                         Valentine's Day edition
                     </h2> */}
-                        <AppIcon name="photobooth" className="!size-10" />
+                    <AppIcon name="photobooth" className="!size-10" />
 
-                        <h1 className="text-2xl @3xl:text-4xl font-bold md:px-4 mb-3 mt-3 text-center">
-                            Welcome to the <span className="text-red dark:text-yellow">PostHog photo booth</span>
-                        </h1>
-                    </div>
-                    <AnimatePresence>
-                        {mobile ? (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                                <div className="bg-accent p-4 rounded border border-primary max-w-xl mx-auto mt-4">
-                                    <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>
-                                    <p className="text-center text-[15px] max-w-md mx-auto mt-4">
-                                        Sorry! The PostHog photo booth is designed for desktop use only. Please visit
-                                        this page on your computer for the best experience.
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ) : images.length > 0 ? (
-                            <>
-                                <h2 className="text-5xl font-bold px-4 text-center mb-2">Share with your friends</h2>
-                                <p className="text-center text-[15px] text-opacity-75">
-                                    Ideally on X would be cool. (Don't forget to tag{' '}
-                                    <Link href="@posthog" externalNoIcon to="https://x.com/posthog">
-                                        @posthog
-                                    </Link>
-                                    !)
-                                </p>
-                                <p>
-                                    <div className="flex justify-center mt-4 mb-8">
-                                        <CallToAction
-                                            onClick={() => {
-                                                setImages([])
-                                                setDataURL(undefined)
-                                                setModalOpen(true)
-                                            }}
-                                            type="secondary"
-                                            size="sm"
-                                        >
-                                            <span>Start over</span>
-                                        </CallToAction>
-                                    </div>
-                                </p>
-                                <div className="flex justify-center items-start gap-8">
-                                    <div className="flex flex-col snap-y snap-mandatory flex-shrink-0 gap-8">
-                                        {dataURL ? (
-                                            cardTypes.map((cardType, index) => (
-                                                <Card
-                                                    key={index}
-                                                    stripDataURL={dataURL}
-                                                    template={template}
-                                                    name={name}
-                                                    index={index}
-                                                    {...cardType}
-                                                />
-                                            ))
-                                        ) : (
-                                            <div className="w-[800px] aspect-video flex-shrink-0" />
-                                        )}
-                                    </div>
-
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        className="flex justify-center items-center flex-shrink-0"
-                                    >
-                                        <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
-                                    </motion.div>
-                                </div>
-                            </>
-                        ) : (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                                <p className="font-medium opacity-80 text-center md:px-4">
-                                    We've assembled four photo booth templates for your enjoyment. Click your favorite
-                                    and get to snappin'.
-                                </p>
-                                <PhotoModal
-                                    onClose={() => setModalOpen(false)}
-                                    template={template}
-                                    onDone={handleDone}
-                                    onSelectTemplate={setTemplate}
-                                    onNameChange={setName}
-                                />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    <h1 className="text-2xl @3xl:text-4xl font-bold md:px-4 mb-3 mt-3 text-center">
+                        Welcome to the <span className="text-red dark:text-yellow">PostHog photo booth</span>
+                    </h1>
                 </div>
-            </ScrollArea>
-        </Explorer>
+                <AnimatePresence>
+                    {mobile ? (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <div className="bg-accent p-4 rounded border border-primary max-w-xl mx-auto mt-4">
+                                <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>
+                                <p className="text-center text-[15px] max-w-md mx-auto mt-4">
+                                    Sorry! The PostHog photo booth is designed for desktop use only. Please visit this
+                                    page on your computer for the best experience.
+                                </p>
+                            </div>
+                        </motion.div>
+                    ) : images.length > 0 ? (
+                        <>
+                            <h2 className="text-5xl font-bold px-4 text-center mb-2">Share with your friends</h2>
+                            <p className="text-center text-[15px] text-opacity-75">
+                                Ideally on X would be cool. (Don't forget to tag{' '}
+                                <Link href="@posthog" externalNoIcon to="https://x.com/posthog">
+                                    @posthog
+                                </Link>
+                                !)
+                            </p>
+                            <p>
+                                <div className="flex justify-center mt-4 mb-8">
+                                    <CallToAction
+                                        onClick={() => {
+                                            setImages([])
+                                            setDataURL(undefined)
+                                            setModalOpen(true)
+                                        }}
+                                        type="secondary"
+                                        size="sm"
+                                    >
+                                        <span>Start over</span>
+                                    </CallToAction>
+                                </div>
+                            </p>
+                            <div className="flex justify-center items-start gap-8">
+                                <div className="flex flex-col snap-y snap-mandatory flex-shrink-0 gap-8">
+                                    {dataURL ? (
+                                        cardTypes.map((cardType, index) => (
+                                            <Card
+                                                key={index}
+                                                stripDataURL={dataURL}
+                                                template={template}
+                                                name={name}
+                                                index={index}
+                                                {...cardType}
+                                            />
+                                        ))
+                                    ) : (
+                                        <div className="w-[800px] aspect-video flex-shrink-0" />
+                                    )}
+                                </div>
+
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="flex justify-center items-center flex-shrink-0"
+                                >
+                                    <FinalPhotoStrip dataURL={dataURL} onImageReady={setDataURL} images={images} />
+                                </motion.div>
+                            </div>
+                        </>
+                    ) : (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <p className="font-medium opacity-80 text-center md:px-4">
+                                We've assembled four photo booth templates for your enjoyment. Click your favorite and
+                                get to snappin'.
+                            </p>
+                            <PhotoModal
+                                onClose={() => setModalOpen(false)}
+                                template={template}
+                                onDone={handleDone}
+                                onSelectTemplate={setTemplate}
+                                onNameChange={setName}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </ScrollArea>
     )
 }
