@@ -21,7 +21,7 @@ import {
     GoogleTagManagerInstallation,
     ShopifyInstallation,
     WebflowInstallation,
-    WordPressInstallation,
+    WordpressInstallation,
     FramerInstallation,
     BubbleInstallation,
     DocusaurusInstallation,
@@ -153,7 +153,7 @@ export const WAWebflowInstallationWrapper = () => (
 
 export const WAWordPressInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
-        <WordPressInstallation modifySteps={addNextStepsStep} />
+        <WordpressInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
