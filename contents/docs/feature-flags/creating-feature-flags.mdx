@@ -26,9 +26,15 @@ Before you can evaluate a feature flag in your application code, you need to cre
 
 ## Step 1. Create a new feature flag (required)
 
-To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click the **Create feature flag** button to create a new flag.
+To create a new feature flag, navigate to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click the **New** button. This opens a dropdown menu with options to create different flag types:
 
-This presents you with a form where you can complete the details of your new flag:
+- **Boolean flag** – Simple on/off toggle for feature releases
+- **Multivariate flag** – Multiple variants with rollout percentages (for A/B tests)
+- **Remote config** – Deliver configuration values to your app
+- **Experiment** – Create an A/B test with statistical analysis (links to [experiments](/docs/experiments))
+
+Selecting an option pre-configures the form for that flag type. You can also click the main button to create a flag and select the type in the form.
+
 
 <details>
 <summary>Migrate feature flags from another tool</summary>
