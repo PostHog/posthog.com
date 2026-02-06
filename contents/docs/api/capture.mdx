@@ -457,7 +457,9 @@ print(response)
 
 </MultiLanguage>
 
-> **Note:** For a server-side integration with Web Analytics, check out our [Server SDKs and Sessions](docs/data/sessions#server-sdks-and-sessions) guide to make sure you're capturing every event and session property required for our product to work.
+> **Note:** Web Analytics expects additional properties—such as `$host`—that are typically sent by the JavaScript browser integration code.
+If you use both server- and browser-generated events, the `distinct_id` and `session_id` must be aligned. You can achieve this either by generating them on the server and bootstrapping the JS code with those values, or by sending them from the browser to the server. It is **not recommended** to generate `$pageview` events on the server for Web Analytics, as the implementation would need to continuously track changes and adjust properties to match the expectations of Web Analytics.
+
 
 ## Screen view
 
