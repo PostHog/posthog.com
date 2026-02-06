@@ -107,7 +107,8 @@ export const LOGOS = {
     salesforce: 'https://res.cloudinary.com/dmukukwp6/image/upload/Salesforce_com_logo_2e650322bc.svg',
     segment:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/segment.svg',
-    semanticKernel: 'https://res.cloudinary.com/dmukukwp6/image/upload/semantic_kernel_07a9ab4646.svg',
+    semanticKernel:
+        'https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/semantic_kernel_5102489978.png',
     shopify: 'https://res.cloudinary.com/dmukukwp6/image/upload/shopify_glyph_5a3ad7459b.svg',
     smolagents: 'https://res.cloudinary.com/dmukukwp6/image/upload/smolagents_84211ed873.svg',
     slack: 'https://res.cloudinary.com/dmukukwp6/image/upload/Symbol_1_ac11ac22f6.svg',
