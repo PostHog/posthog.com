@@ -201,6 +201,10 @@ Your first three months of commission are paid at 100% fixed OTE. This will be c
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You need to get their permission first unless it's an emergency, i.e. to resolve an incident.
 
+### How do I get enterprise features for my demo environment?
+
+- Go to [Billing Admin](https://billing.posthog.com) → Trials → Add. Select your organization, set **Target** to `enterprise`, set **Expires at** to a far future date (e.g., 2099), and check **Silence notifications**. This gives you a free Enterprise trial with all features — no credits or Stripe billing needed.
+
 ### Are there any influential folks in our space I should read/listen to?
 
 - Join the `#newsletters` channel in Slack for updates from a curated collection of influential folks in our industry.
