@@ -145,7 +145,7 @@ When you use direct imports, PostHog transforms events from your source (Amplitu
 ### Amplitude → PostHog
 
 - **Event name mapping**
-  - `session_start`: dropped (not imported)
+  - `session_start` and `session_end`: dropped (not imported)
   - `[Amplitude] Page Viewed` → `$pageview`
   - `[Amplitude] Element Clicked` and `[Amplitude] Element Changed` → `$autocapture`
   - All other event names are preserved
