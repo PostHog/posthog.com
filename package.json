@@ -119,7 +119,7 @@
         "instantsearch.js": "^4.49.1",
         "is-relative": "^1.0.0",
         "jsdom": "^20.0.0",
-        "jspdf": "^3.0.1",
+        "jspdf": "^4.1.0",
         "kea": "3.1.6",
         "kea-loaders": "^3.1.1",
         "kea-localstorage": "^3.1.0",
