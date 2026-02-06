@@ -241,7 +241,7 @@ To add Pylon to your customer channel:
 4. In the popup that appears in the Slack channel, select Customer Channel.
 5. Add yourself as the Account Owner.
 6. Click Enable.
-7. Add Tim, Simon, Charles, and Abigail to the channel.
+7. Add Tim, Simon, Charles, and Abigail to the channel. TAMs also add team lead (Landon).
 
 Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
 
