@@ -41,7 +41,7 @@ export default function WarehouseNative(): JSX.Element {
                         If you&apos;re using PostHog as your data warehouse, PostHog is{' '}
                         <strong>warehouse-native in practice</strong>: you get SQL, unified data, and warehouse-style
                         workflows, and data stays in your warehouse. If you&apos;re using an external data warehouse,
-                        such as Snowflake, PostHog still enables you to ingest data via the CDP. Either way, queries run
+                        such as Snowflake, PostHog still enables you to sync data via our warehouse sources. Either way, queries run
                         in PostHog.
                     </p>
                 </div>
