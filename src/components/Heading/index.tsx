@@ -2,13 +2,20 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
 import { IconLink } from '../OSIcons'
+import Link from 'components/Link'
 
 export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
     const [visible, setVisible] = useState(false)
-    const { href } = useLocation()
-    const handleClick = () => {
-        const url = `${href.replace(/#.*/, '')}#${id}`
-        navigator.clipboard.writeText(url)
+    const location = useLocation()
+    const relativeUrl = `${location.pathname}#${id}`
+    const absoluteUrl =
+        typeof window !== 'undefined'
+            ? `${window.location.origin}${location.pathname}#${id}`
+            : `${location.pathname}#${id}`
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+        navigator.clipboard.writeText(absoluteUrl)
         setVisible(true)
         setTimeout(() => {
             setVisible(false)
@@ -31,9 +38,9 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
                     </motion.div>
                 )}
             </AnimatePresence>
-            <button className="hover:opacity-100 opacity-20 transition-opacity" onClick={handleClick}>
+            <Link to={relativeUrl} className="hover:opacity-100 opacity-20 transition-opacity" onClick={handleClick}>
                 <IconLink className="size-4" />
-            </button>
+            </Link>
         </span>
     )
 }
