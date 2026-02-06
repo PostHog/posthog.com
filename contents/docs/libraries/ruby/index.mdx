@@ -181,7 +181,9 @@ If the optional `distinct_id` is not provided in the group identify call, it def
 
 You can capture exceptions using the `posthog-ruby` library. This enables you to see stack traces and debug errors in your application. Learn more in our [error tracking docs](/docs/error-tracking/installation/ruby).
 
-> **Note:** The Ruby SDK currently only supports manual exception capture. Automatic exception capture is not yet available.
+> **Using Rails?** The [posthog-rails](/docs/libraries/rails) gem provides automatic exception capture, ActiveJob instrumentation, and user context out of the box. See our [Rails error tracking guide](/docs/error-tracking/installation/rails) for details.
+
+For non-Rails Ruby applications, you can manually capture exceptions:
 
 To capture exceptions, use the `capture_exception` method:
 
