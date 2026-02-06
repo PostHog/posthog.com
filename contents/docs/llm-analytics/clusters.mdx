@@ -1,0 +1,131 @@
+---
+title: Clusters
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Clusters is in beta" type="fyi">
+
+Clusters is currently in beta. We'd love to [hear your feedback](https://app.posthog.com/llm-analytics#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
+
+</CalloutBox>
+
+Clusters automatically group similar LLM [traces](/docs/llm-analytics/traces) or [generations](/docs/llm-analytics/generations) together, helping you discover patterns in how users interact with your LLM features without reading every conversation.
+
+## Why use clusters?
+
+- **Discover usage patterns** – See what users are actually asking your LLM to do.
+- **Find problem areas** – Identify clusters with high error rates, costs, or latency.
+- **Monitor trends** – Daily runs show how usage patterns evolve over time.
+- **Surface outliers** – Items that don't fit any cluster are flagged as unusual behavior.
+
+## How clusters work
+
+1. PostHog analyzes your recent traces or generations from the past 7 days.
+2. Similar items are grouped together based on their content.
+3. AI generates a title and description for each cluster.
+4. Metrics like average cost, latency, token usage, and error rate are computed per cluster.
+
+Clustering runs automatically every day — no setup needed beyond having [traces captured](/docs/llm-analytics/installation).
+
+## Viewing clusters
+
+Navigate to **LLM analytics** > **Clusters** to see the overview.
+
+{/*TODO: Capture and upload GIF - Hero overview showing distribution bar, scatter plot, and cluster cards (~8s, light + dark) */}
+{/* <ProductScreenshot */}
+{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_overview_light_PLACEHOLDER.gif" */}
+{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_overview_dark_PLACEHOLDER.gif" */}
+{/*     alt="LLM analytics clusters overview" */}
+{/*     classes="rounded" */}
+{/* /> */}
+{/* <Caption>The clusters view groups similar traces together and shows metrics for each cluster</Caption>*/}
+
+### Trace vs generation clustering
+
+Clusters can operate at two levels:
+
+- **Traces** – Cluster entire conversations, giving you a high-level view of what users are doing.
+- **Generations** – Cluster individual LLM calls, useful for analyzing specific model interactions.
+
+Toggle between them using the selector at the top of the page.
+
+{/*TODO: Capture and upload GIF - Toggling between trace and generation levels (~5s, light + dark) */}
+{/* <ProductScreenshot */}
+{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_toggle_light_PLACEHOLDER.gif" */}
+{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_toggle_dark_PLACEHOLDER.gif" */}
+{/*     alt="Toggling between trace and generation clustering" */}
+{/*     classes="rounded" */}
+{/* />*/}
+
+### Distribution bar
+
+The color-coded bar at the top shows the proportional size of each cluster. Hover over a segment to see the cluster name and item count. Click a segment to jump to that cluster.
+
+### Scatter plot
+
+The interactive 2D scatter plot visualizes how items are distributed across clusters.
+
+| Feature | Description |
+|---------|-------------|
+| Dots | Each dot represents one trace or generation, color-coded by cluster |
+| Centroids | Larger dots marking the center of each cluster |
+| Click dot | Navigate to the trace or generation detail |
+| Click centroid | Navigate to the cluster detail page |
+| Drag to zoom | Zoom into a region of the plot |
+| Double-click | Reset zoom |
+
+{/*TODO: Capture and upload GIF - Hovering over scatter plot, tooltips, drag-to-zoom, double-click reset (~8s, light + dark) */}
+{/* <ProductScreenshot */}
+{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_scatter_light_PLACEHOLDER.gif" */}
+{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_scatter_dark_PLACEHOLDER.gif" */}
+{/*     alt="Scatter plot interaction showing zoom and tooltips" */}
+{/*     classes="rounded" */}
+{/* />*/}
+
+### Cluster cards
+
+Below the scatter plot, a grid of cards shows each cluster with:
+
+- **AI-generated title and description** summarizing the cluster's content
+- **Size** – Item count and percentage of total
+- **Metrics** – Average cost, average latency, average tokens, error rate, and total cost
+
+Expand a card to preview the traces or generations in that cluster.
+
+Items that don't fit any cluster appear in a special **Outliers** cluster with a dashed border.
+
+{/*TODO: Capture and upload GIF - Expanding a cluster card, viewing metrics and trace preview (~8s, light + dark) */}
+{/* <ProductScreenshot */}
+{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_card_light_PLACEHOLDER.gif" */}
+{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_card_dark_PLACEHOLDER.gif" */}
+{/*     alt="Expanding a cluster card to view metrics and trace preview" */}
+{/*     classes="rounded" */}
+{/* />*/}
+
+## Cluster detail page
+
+Click a cluster card or centroid to open the detail page. Here you'll find:
+
+- **Cluster title, description, and item count** with the date range
+- **Focused scatter plot** showing only items in this cluster
+- **Paginated list of traces or generations** with AI summaries you can expand to see flow diagrams, summary bullets, and notes
+- Click any item to view the full trace timeline
+
+{/*TODO: Capture and upload GIF - Navigating to cluster detail, expanding trace summaries (~10s, light + dark) */}
+{/* <ProductScreenshot */}
+{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_detail_light_PLACEHOLDER.gif" */}
+{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_detail_dark_PLACEHOLDER.gif" */}
+{/*     alt="Cluster detail page showing trace summaries" */}
+{/*     classes="rounded" */}
+{/* />*/}
+
+## Clusters in trace view
+
+When viewing an individual trace, the **Clusters** tab shows which cluster(s) that trace belongs to. This is useful for understanding what category a specific conversation falls into.
+
+## Requirements
+
+- **Traces or generations captured** – Set up LLM event capture using the [installation guide](/docs/llm-analytics/installation).
+- **AI data processing enabled** – Your organization must have AI data processing consent enabled, the same requirement as [trace summarization](/docs/llm-analytics/summarization).
+- **Automatic daily runs** – Clustering runs automatically every day. No manual setup is needed.
