@@ -395,6 +395,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/session-explorer',
     },
+    'session-summaries': {
+        feature: 'Session summaries',
+        owner: ['signals'],
+        label: 'feature/session-summaries',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
