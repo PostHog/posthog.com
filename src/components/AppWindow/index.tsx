@@ -33,6 +33,7 @@ import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import FloatingModal from 'components/FloatingModal'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -112,6 +113,8 @@ const Router = (props) => {
         <>
             {appWindow?.modal?.type === 'standard' ? (
                 <PageModal>{children}</PageModal>
+            ) : appWindow?.modal?.type === 'floating' ? (
+                <FloatingModal>{children}</FloatingModal>
             ) : (
                 (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
             )}

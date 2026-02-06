@@ -58,7 +58,7 @@ export interface AppWindow {
     appSettings?: AppSetting
     location?: Location
     modal?: {
-        type: 'standard' | 'side'
+        type: 'standard' | 'side' | 'floating'
     }
 }
 

@@ -316,7 +316,7 @@ export interface AppSetting {
         ) => { x: number; y: number }
     }
     modal?: {
-        type: 'standard' | 'side'
+        type: 'standard' | 'side' | 'floating'
     }
 }
 
@@ -827,6 +827,9 @@ const appSettings: AppSettings = {
                 height: 600,
             },
             fixed: false,
+        },
+        modal: {
+            type: 'floating',
         },
     },
     'community-auth-signin': {
@@ -1357,10 +1360,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const replaceFocusedWindow = useCallback(
         (newWindow: AppWindow) => {
-            if (focusedWindow) {
+            // Find the highest zIndex window, excluding floating modals in websiteMode
+            const windowToReplace = windows
+                .filter((w) => !websiteMode || w.appSettings?.modal?.type !== 'floating')
+                .reduce<AppWindow | undefined>(
+                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                    undefined
+                )
+
+            if (windowToReplace) {
                 setWindows((windows) =>
                     windows.map((w) =>
-                        w === focusedWindow
+                        w === windowToReplace
                             ? {
                                   ...w,
                                   element: newWindow.element,
@@ -1376,7 +1387,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setWindows((windows) => [...windows, newWindow])
             }
         },
-        [focusedWindow]
+        [windows, websiteMode]
     )
 
     const setWindowTitle = useCallback((appWindow: AppWindow, title: string) => {
@@ -1594,7 +1605,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
 
         if (websiteMode && (newWindow.appSettings?.size.fixed || newWindow.appSettings?.modal)) {
-            newWindow.modal = { type: 'standard', ...newWindow.appSettings?.modal }
+            newWindow.modal = { type: 'standard' as const, ...newWindow.appSettings?.modal }
         }
 
         return { ...newWindow, ...options }
@@ -1603,7 +1614,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
-
         if (siteSettings.experience === 'boring') {
             if (!newWindow.appSettings?.size.fixed && !newWindow.appSettings?.modal) {
                 return replaceFocusedWindow(newWindow)
@@ -2204,7 +2214,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             const newWindows = [
                 ...(currentWindow ? [currentWindow] : []),
                 ...(modalWindow
-                    ? [{ ...modalWindow, modal: { type: 'standard', ...modalWindow.appSettings?.modal } }]
+                    ? [{ ...modalWindow, modal: { type: 'standard' as const, ...modalWindow.appSettings?.modal } }]
                     : []),
             ]
             setWindows(newWindows)
