@@ -5197,6 +5197,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Prompt management',
+                    url: '/docs/llm-analytics/prompts',
+                    icon: 'IconPencil',
+                    color: 'purple',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
                     name: 'Trace summarization',
                     url: '/docs/llm-analytics/summarization',
                     icon: 'IconAI',
