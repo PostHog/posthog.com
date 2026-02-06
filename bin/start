@@ -13,4 +13,7 @@ export NODE_OPTIONS='--max_old_space_size=16384' # At least 16GB of RAM is requi
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 export TAILWIND_MODE=watch
 
+# Ensure .cache directory exists (Gatsby expects it before onPreBootstrap runs)
+mkdir -p .cache
+
 gatsby develop -H 0.0.0.0 -p 8001
