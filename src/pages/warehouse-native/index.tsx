@@ -26,7 +26,7 @@ export default function WarehouseNative(): JSX.Element {
         <>
             <SEO
                 title="PostHog warehouse native – Warehouse-native analytics with PostHog Warehouse"
-                description="Yes. PostHog supports warehouse-native workflows with its integrated data warehouse. We run queries on PostHog compute (we don't run them on your Snowflake/BigQuery today). Here's how it works."
+                description="PostHog offers an integrated data warehouse that enables warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. Alternatively, you can ingest data from existing warehouses for use in PostHog."
                 image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
