@@ -2221,6 +2221,10 @@ export const docsMenu = {
                             url: '/docs/libraries/phoenix',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/libraries/rails',
+                        },
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
@@ -4207,6 +4211,10 @@ export const docsMenu = {
                         {
                             name: 'Ruby',
                             url: '/docs/error-tracking/installation/ruby',
+                        },
+                        {
+                            name: 'Rails',
+                            url: '/docs/error-tracking/installation/rails',
                         },
                         {
                             name: 'React',
