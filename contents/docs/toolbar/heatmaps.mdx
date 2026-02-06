@@ -100,6 +100,17 @@ Our JavaScript SDK attempts to detect fixed elements, such as headers or modals,
 
 You can change fixed positioning so these clicks move when scrolled or hide them entirely.
 
+### Click to view events
+
+When viewing a heatmap, you can click on any area with activity to view the individual events at that location. This opens a modal showing:
+
+- Total count of events at that coordinate
+- A table of events with timestamp, type, user ID, and a link to view the associated session recording
+
+This enables you to drill down from aggregate heatmap data into specific user interactions, helping you understand exactly what's happening at high-activity areas.
+
+> **Note:** The events shown are at the exact coordinate you clicked. Since heatmaps use interpolation for visual display, the count in the events modal may differ slightly from the hover tooltip.
+
 ## Scrollmaps
 
 The scrollmap uses data from pageview and pageleave events to show how far down the page users are scrolling. 
