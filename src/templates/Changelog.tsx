@@ -655,7 +655,7 @@ const RoadmapCards = ({
     return (
         <ScrollArea
             className={`size-full [&>div>div]:size-full [&>div>div]:!flex ${
-                websiteMode ? 'h-[80vh] max-h-[900px]' : ''
+                websiteMode ? '!h-[80vh] max-h-[900px]' : ''
             }`}
         >
             <div className="h-full px-4">
