@@ -17,7 +17,7 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 
 **If not, think again**.
 
-**When in doubt, ask your team lead for context, not permission.**
+**The goal here is to empower you. However, when in doubt, ask your team lead for context, not permission.** 
 - Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
@@ -40,6 +40,8 @@ Use your Revolut if
 If not, use your Brex.
 
 Why? The company can claim back VAT on these larger purchases - the more money we claim back, the more money we have to #DoMoreWeird
+
+Please make sure that the invoice is addressed to Hiberly and its registered address (this can be found in the company information sheet).
 
 ### Receipts 🧾
 All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation).

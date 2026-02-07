@@ -1,0 +1,61 @@
+---
+title: Element selection
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+PostHog provides two ways to target specific webpage elements for Product Tours: **auto** and **manual**.
+
+## TL;DR
+
+By default, we use a robust **automatic element targeting** algorithm to find your elements. This is the recommended approach, but may need some configuration tweaks depending on your app.
+
+If you prefer, you can swap to **manual element targeting**, and provide a CSS selector for us to use for finding tour elements.
+
+## Automatic element targeting
+
+Automatic targeting is the default for all tour steps. This is the recommended option for most cases, but read on to learn when it may not work, or when you may need to tweak its configuration.
+
+When you select an element, we collect information such as CSS class names and other attributes so we can reliably find it again later.
+
+Here's how it works:
+1. When you select an element, we gather many "groups" of selectors that match your element (and potentially other elements).
+2. These groups are sorted by specificity, so the groups matching the lowest number of elements are prioritized.
+2. At tour runtime, we reverse this algorithm to see which elements are matched by each group.
+3. Each found element gets a "vote".
+4. The element with the highest number of votes "wins" and is used for the given tour step.
+
+This process has proven to be more robust than simply building a single CSS selector for your chosen elements.
+
+However, it won't always be perfect, so we provide some controls to help in case your tours match unexpected elements.
+
+### Dynamic text
+
+By default, automatic element targeting uses the element's text as a targeting attribute. For elements with static text, this results in reliable element selection.
+
+However, if your elements have dynamic text, such as a button that says `"Hello, {first_name}!"`, you should toggle on **Dynamic text** to prevent PostHog from attempting to find the element using its text value.
+
+### Targeting precision
+
+If you experience tours failing to find elements (or finding the wrong ones), you can tweak the precision for those elements.
+
+Precision ranges from **loose (0)** to **strict (1)**. Increase targeting precision if your tours find the wrong elements, and decrease if they fail to find elements.
+
+Under the hood, here's how it works:
+- We use the precision value (0-1) as a ratio to determine how many groups will be searched.
+- The default precision is 1, the strictest, which always means we'll only use the group with the highest specificity. This is great for elements with specific attributes like `data-attr`.
+- A precision of 0 means we'll search _all_ groups to find your target element.
+
+Generally speaking, a precision of 0 is not recommended unless your tour has other conditions to help prevent matching the wrong elements, such as specific URL targeting.
+
+## Manual element targeting
+
+If automatic selection does not work, or you want to guarantee your tours never match the wrong elements, we recommend using **manual** targeting.
+
+With manual targeting, you simply provide a CSS selector like `[data-attr="dashboard-button"]`, and we'll use that at tour runtime to find your element.
+
+You should **not use manual targeting** if your element(s) only have selectors that generic, such as class names repeated throughout the page.

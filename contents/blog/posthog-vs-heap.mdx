@@ -1,5 +1,5 @@
 ---
-date: 2024-10-08
+date: 2026-02-04
 title: 'In-depth: PostHog vs Heap'
 rootPage: /blog
 sidebar: Blog
@@ -20,6 +20,12 @@ seo:
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
+[Heap](/blog/best-heap-alternatives) is a product analytics platform known for its comprehensive autocapture – it starts collecting clicks, pageviews, and form submissions the moment you install it, no manual instrumentation required.
+
+PostHog [also supports autocapture](/docs/product-analytics/autocapture), but goes much further – combining [product analytics](/product-analytics) with [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), and more in one developer platform.
+
+In this guide, we break down how PostHog and Heap compare across analytics, session replay, experimentation, pricing, and compliance – so you can decide which is the better fit for your team.
+
 ## How is PostHog different?
 
 ### 1. We're built for engineers
@@ -34,7 +40,7 @@ What does this mean?
 
 ### 2. We're an all-in-one platform
 
-Heap is mainly focused on product analytics. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a built-in data warehouse that [integrates with Stripe](/tutorials/stripe-reports) and [Hubspot](/tutorials/hubspot-reports). You can replace half a dozen tools with PostHog, save money, and get more from your data.
+Heap is mainly focused on product analytics. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a [built-in data warehouse](/data-stack) that [integrates with Stripe](/tutorials/stripe-reports) and [Hubspot](/tutorials/hubspot-reports). You can replace half a dozen tools with PostHog, save money, and get more from your data.
 
 ### 3. We're totally transparent
 
@@ -46,10 +52,17 @@ Heap is mainly focused on product analytics. This means you need to adopt additi
 
 Oh, we're open source, too. Go take a peak at our code if you like on [our GitHub repo](https://github.com/PostHog).
 
+<p>
+  <CallToAction to="https://posthog.com/docs">
+    Learn more about using PostHog
+  </CallToAction>
+</p>
+
 ## Comparing PostHog and Heap
 
 ### Platform
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -66,11 +79,13 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 > 💡 **Good to know:** PostHog can replace multiple tools, such as [Hotjar](/blog/posthog-vs-hotjar), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly). This makes it a lot easier to extract usable insights, since you don't have to constantly switch between tools. Running PostHog on both your product and website makes it easier to understand how marketing activity influences signups and usage, too.
 
 ### Product analytics
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -89,11 +104,13 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
         'product_analytics.stickiness',
     ]}
 />
+</p>
 
 > 💡 **Good to know:** Every PostHog user gets [1 million events for free](/pricing) each month. You can also save money by sending us anonymous events for non-identified users, which are up to 80% cheaper than identified product analytics events. Anonymous events are ideal for tracking behavior on marketing websites, or mobile apps with large consumer audiences. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for more.
 
 ### Session recordings
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -115,11 +132,13 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
         'session_replay.targeting.target_by_feature_flag',
     ]}
 />
+</p>
 
 > 💡 **Good to know:** Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for [product-market fit](/founders/product-market-fit-game). Both Heap and PostHog offer session replay, though Heap lacks many developer-facing features like a DOM explorer, performance monitoring, and network events, which are useful for fixing bugs and performance issues.
 
 ### Feature flags
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -136,11 +155,13 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
         'feature_flags.features.early_access_management',
     ]}
 />
+</p>
 
 > 💡 **Good to know:** Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other features so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 ### Experiments
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -155,11 +176,13 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
         'experiments.analysis.statistics_engine',
     ]}
 />
+</p>
 
-> 💡 **Good to know:** Our experiments integrate seamlessly with our feature flag product. This means you can easily deploy the winning variant of an experiment with a single click from the experiment UI.
+> 💡 **Good to know:** Our [experiments](/docs/experiments) integrate seamlessly with our [feature flag product](/docs/feature-flags). This means you can easily deploy the winning variant of an experiment with a single click from the experiment UI.
 
 ### Security and compliance
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'heap']}
     rows={[
@@ -172,45 +195,153 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
         'platform.security.saml_sso',
     ]}
 />
+</p>
 
 > 💡**Good to know:** Additional compliance features, such as HIPAA Business Associate Agreements, advanced permissions, and audit logs are available on our some of our [platform packages](/platform-packages), which also includes our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) and white labelling for surveys and shared dashboards.
 
+## When to choose PostHog vs Heap
+
+Choosing the right product analytics tool depends on what your team needs beyond basic analytics. Here's a quick guide:
+
+- Want to understand user behavior, debug issues, and ship experiments – all without switching tools? Go with **PostHog**.
+- Need comprehensive autocapture with minimal engineering effort and a simple, low-density UI? **Heap** is a solid choice.
+
+### Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – SQL access, public [APIs](/docs/api), [SDKs](/docs/libraries) for every major platform, and tight integration between analytics, feature flags, and experiments, error tracking, logs, LLM analytics, and more. Built by engineers, for engineers.
+
+**For non-technical product managers**
+- **Heap** – Autocapture and a visual event editor mean you can define and track events without writing code. The low-density interface is designed for PMs who want insights without complexity.
+
+**For growth and experimentation teams**
+- **PostHog** – Run A/B tests, roll out features incrementally with feature flags, and measure impact on conversion and retention – all in one workflow.
+
+**For marketing and CRO teams**
+- **Heap** – Multi-touch attribution and analysis suggestions help surface friction points and optimize conversion funnels. Its Contentsquare integration adds deeper ecommerce and marketing analytics.
+
+**For teams building AI products**
+- **PostHog** – Native [LLM analytics](/llm-analytics) for tracking model performance, token costs, and user interactions. Heap doesn't offer AI observability.
+
+**For privacy-conscious and regulated organizations**
+- Both are SOC 2 certified and GDPR-ready. PostHog is also HIPAA-ready, offers EU hosting, and provides raw data access via its built-in [data warehouse](/data-warehouse). Heap does not currently offer EU data residency.
+
+**For early-stage startups**
+- **PostHog** – One platform that scales from first users to product-market fit without swapping tools as you grow. The [generous free tier](/pricing) includes 1 million events, 5,000 replays, and 1 million feature flag requests per month. [Startups can also qualify for $50k in free credits](/startups).
+
+<ArrayCTA />
+
 ## Frequently asked questions
 
-### Can I migrate from Heap?
+<details>
+<summary>What's the main difference between PostHog and Heap?</summary>
 
-Yes. See our [Heap to PostHog migration guide](/docs/migrate/heap) for more.
+**PostHog** is an all-in-one platform that combines [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and more in one environment. **Heap** focuses on product analytics and session replay, with autocapture as its core differentiator. If you need more than analytics and replay, PostHog means fewer tools and less context-switching.
 
-### How long does it take to deploy PostHog?
+</details>
 
-Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session replays and other features via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
+<details>
+<summary>Both have autocapture – what's the difference?</summary>
 
-### Can PostHog also replace Google Analytics?
+Both **PostHog** and **Heap** automatically capture clicks, pageviews, and form submissions. The key difference is that Heap's visual event editor lets non-technical users tag and define events retroactively without code. PostHog's autocapture works similarly but is designed more for engineering teams, with tighter integration into feature flags, experiments, and session replays.
 
-Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using [Google Tag Manager](/docs/libraries/google-tag-manager). See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [an intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+</details>
 
-### How can I estimate my usage?
+<details>
+<summary>Can I migrate from Heap to PostHog?</summary>
 
-The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
+Yes. See the [Heap to PostHog migration guide](/docs/migrate/heap) for step-by-step instructions on exporting your Heap data and importing it into PostHog, including historical events and user properties.
 
-### Does PostHog block bots by default?
+</details>
 
-Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
+<details>
+<summary>How long does it take to deploy PostHog?</summary>
 
-### What about ad blockers?
+Minutes. Use the [onboarding wizard](/docs/ai-engineering/ai-wizard) to connect your app, or just [add the tracking snippet](/docs/getting-started) directly and autocapture starts collecting events immediately. Enable session replays, feature flags, and other features from your project settings.
 
-We recommend all users deploy a reverse proxy, which enables you to send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible.
+</details>
 
-We offer a managed reverse proxy on our Team plans, and we have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs if you want to run your own.
+<details>
+<summary>Does Heap have feature flags or A/B testing?</summary>
 
-### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
+No. **Heap** doesn't offer native feature flags or experimentation. You'd need a separate tool like LaunchDarkly or Optimizely. PostHog includes both [feature flags](/feature-flags) and [A/B testing](/experiments) natively, tightly integrated with analytics so you can measure experiment impact on funnels, retention, and revenue.
 
-Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+</details>
 
-### Can you use PostHog on e-commerce websites?
+<details>
+<summary>Does Heap have error tracking?</summary>
+
+No. **Heap** doesn't offer error tracking or crash monitoring. PostHog includes native [error tracking](/error-tracking) that connects exceptions and stack traces directly to session replays, user behavior, and feature flag changes.
+
+</details>
+
+<details>
+<summary>Which has better session replay?</summary>
+
+Both offer session replay, but **PostHog**'s is more developer-focused. It includes console logs, network request monitoring, a DOM explorer, and performance metrics. **Heap**'s replay is simpler and more suited to PMs who want to watch user sessions without the technical detail.
+
+</details>
+
+<details>
+<summary>What are the best product analytics tools in 2026?</summary>
+
+The top product analytics tools in 2026 include:
+
+- **[PostHog](/product-analytics)** – Best all-in-one platform combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), and more
+- **[Heap](/blog/posthog-vs-heap)** – Best for teams wanting comprehensive autocapture with minimal engineering effort
+- **[Amplitude](/blog/posthog-vs-amplitude)** – Best for enterprises wanting warehouse-native analytics and a built-in CDP
+- **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for self-serve product teams wanting fast, flexible analytics
+- **[Pendo](/blog/posthog-vs-pendo)** – Best for product managers who also need in-app guides and user onboarding
+- **[Google Analytics](/blog/posthog-vs-ga4)** – Best for marketing teams already invested in the Google ecosystem
+
+</details>
+
+<details>
+<summary>Can PostHog replace Google Analytics?</summary>
+
+Yes. PostHog includes [web analytics](/web-analytics) for tracking pageviews, bounce rate, traffic sources, and UTM campaigns. You can integrate it using [Google Tag Manager](/docs/libraries/google-tag-manager). See the [PostHog vs GA4 comparison](/blog/posthog-vs-ga4) and [intro for Google Analytics users](/blog/google-analytics-to-posthog) for more.
+
+</details>
+
+<details>
+<summary>How can I estimate my PostHog usage?</summary>
+
+The easiest way is to [sign up](https://us.posthog.com/signup), integrate the snippet, then check the projection on your billing page after a few days. Alternatively, multiply your monthly active users by 50–100 events per user as a starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) for more detail.
+
+</details>
+
+<details>
+<summary>What about ad blockers?</summary>
+
+We recommend deploying a reverse proxy, which sends events to PostHog Cloud using your own domain. This makes them less likely to be intercepted by tracking blockers. We offer a managed reverse proxy on Team plans, plus [setup guides](/docs/advanced/proxy) for AWS CloudFront, Cloudflare, Netlify, Vercel, and more.
+
+</details>
+
+<details>
+<summary>Does PostHog offer EU hosting?</summary>
+
+Yes. **PostHog** offers EU-hosted cloud with data stored exclusively in the EU. PostHog is also SOC 2 certified, GDPR-ready, and HIPAA-ready.
+
+</details>
+
+<details>
+<summary>Can I use PostHog with a CDP like Segment or Rudderstack?</summary>
+
+Yes. PostHog integrates with both Segment and Rudderstack. See [Using PostHog with a CDP](/docs/advanced/cdp) for setup instructions.
+
+It also includes a [built-in CDP](/cdp) that lets you import, transform, and export data without needing a separate tool. See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for setup instructions, or browse our comparison of the [best customer data platforms for developers](/blog/best-customer-data-platforms-for-developers) if you're evaluating options.
+</details>
+
+<details>
+<summary>Can you use PostHog on e-commerce websites?</summary>
 
 Absolutely. PostHog is easy to integrate with [Shopify](/docs/libraries/shopify) and [WooCommerce](/docs/libraries/woocommerce). You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress).
 
-### How does PostHog compare to Amplitude and Mixpanel?
+</details>
 
-Amplitude and Mixpanel offer similar features to Heap. Read our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) guides for more info. You may also find guides to the [most popular Heap alternatives](/blog/best-heap-alternatives) useful.
+<details>
+<summary>How does PostHog compare to Amplitude and Mixpanel?</summary>
+
+Amplitude and Mixpanel offer similar product analytics features to Heap. Read the [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparisons for details. You can also see the [most popular Heap alternatives](/blog/best-heap-alternatives) for a broader view.
+
+</details>
