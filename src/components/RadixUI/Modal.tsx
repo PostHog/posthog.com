@@ -3,6 +3,7 @@ import { Dialog as RadixDialog } from 'radix-ui'
 import { IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import OSButton from 'components/OSButton'
 
 interface ModalProps {
     trigger?: React.ReactNode
@@ -30,7 +31,8 @@ const Modal = ({
     autoHeight = false,
 }: ModalProps): JSX.Element => {
     const { websiteMode } = useApp()
-    const { appWindow } = useWindow()
+    const { appWindow, activeInternalMenu } = useWindow()
+    const title = appWindow?.meta?.title || activeInternalMenu?.name
     return (
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
@@ -59,19 +61,20 @@ const Modal = ({
                                 : {}
                         }
                     >
-                        {showCloseButton && (
-                            <div className="flex items-center justify-between absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 z-50">
-                                <RadixDialog.Close asChild>
-                                    <button
-                                        className="inline-flex size-8 items-center justify-center rounded-full bg-accent border border-primary"
-                                        aria-label="Close"
-                                    >
-                                        <IconX className="size-4" />
-                                    </button>
-                                </RadixDialog.Close>
+                        <div className="rounded border border-primary overflow-hidden size-full">
+                            <div className="bg-accent flex items-center justify-between p-1 border-b border-primary">
+                                {title && (
+                                    <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
+                                )}
+                                {showCloseButton && (
+                                    <RadixDialog.Close asChild>
+                                        <OSButton icon={<IconX />} size="md" />
+                                    </RadixDialog.Close>
+                                )}
                             </div>
-                        )}
-                        <div className="rounded overflow-hidden border border-primary size-full">{children}</div>
+
+                            <div className="overflow-hidden size-full">{children}</div>
+                        </div>
                     </div>
                 </RadixDialog.Content>
             </RadixDialog.Portal>
