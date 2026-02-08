@@ -204,29 +204,38 @@ export default function Menu({
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
                 ) : (
-                    <button className={`${buttonClasses} !p-0`} onClick={() => setOpen(!open)}>
+                    <div className={`${buttonClasses} !p-0 flex items-center justify-between`}>
                         {isWithChild ? (
                             <>
                                 <Link
-                                    className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark flex-grow pl-3 py-1 leading-tight"
+                                    className="flex-grow pl-3 py-1 leading-tight text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
                                     to={children[0]?.url || ''}
+                                    onClick={() => {
+                                        setOpen(!open)
+                                        handleLinkClick &&
+                                            handleLinkClick({ name, url: children[0]?.url, topLevel, tag })
+                                    }}
                                 >
-                                    <span>
-                                        <span className={badge?.title ? 'mr-1.5' : ''}>{name}</span>
-                                        {badge?.title && (
-                                            <span className={`${badgeClasses} ${badge.className || ''}`}>
-                                                {' '}
-                                                {badge.title}
-                                            </span>
-                                        )}
-                                    </span>
+                                    <span className={badge?.title ? 'mr-1.5' : ''}>{name}</span>
+                                    {badge?.title && (
+                                        <span className={`${badgeClasses} ${badge.className || ''}`}>
+                                            {' '}
+                                            {badge.title}
+                                        </span>
+                                    )}
                                 </Link>
-                                <Chevron open={open ?? false} />
+                                <button
+                                    onClick={() => setOpen(!open)}
+                                    className="h-8 w-8 flex justify-center items-center hover:bg-accent/50 rounded"
+                                    aria-label={open ? 'Collapse section' : 'Expand section'}
+                                >
+                                    <Chevron open={open ?? false} />
+                                </button>
                             </>
                         ) : (
                             <span className="inline-block pl-3 pr-2 py-1">{name}</span>
                         )}
-                    </button>
+                    </div>
                 )}
                 {isWithChild && (
                     <motion.div
