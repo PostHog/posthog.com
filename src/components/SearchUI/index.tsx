@@ -66,7 +66,7 @@ const Search = ({
     const [query, setQuery] = useState('')
     const [isFocused, setIsFocused] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { openNewChat, websiteMode } = useApp()
+    const { openNewChat, websiteMode, setSearchOpen } = useApp()
     const { dragControls, appWindow } = useWindow()
     const { refine } = useSearchBox()
     const { hits } = useHits()
@@ -80,7 +80,7 @@ const Search = ({
 
     const handleChange = (hit: Hit) => {
         if (!hit) return
-        setIsFocused(false)
+        setSearchOpen(false)
         navigate(`${hit.fields?.slug || `/${hit.slug}`}`, { state: { newWindow: true } })
         onChange?.()
     }
@@ -164,7 +164,7 @@ const Search = ({
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     openChat()
-                                    setIsFocused(false)
+                                    setSearchOpen(false)
                                 }}
                                 icon={<IconSparkles />}
                                 hover="border"
