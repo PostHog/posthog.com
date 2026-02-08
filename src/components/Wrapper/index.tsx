@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import WebsiteFooter from 'components/WebsiteFooter'
+import { SearchUI } from 'components/SearchUI'
 
 export default function Wrapper() {
     const {
@@ -17,6 +18,7 @@ export default function Wrapper() {
         setClosingAllWindowsAnimation,
         closeAllWindows,
         websiteMode,
+        searchOpen,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -28,10 +30,20 @@ export default function Wrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div className={`${websiteMode ? 'max-w-7xl mx-auto' : 'fixed inset-0 size-full'} flex flex-col`}>
+        <div
+            data-scheme="primary"
+            className={`${
+                websiteMode ? 'max-w-7xl mx-auto border-x border-primary' : 'fixed inset-0 size-full'
+            } flex flex-col`}
+        >
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative`}>
                 <Desktop />
+                {searchOpen && websiteMode && (
+                    <div className="bg-accent sticky top-[49px] z-20">
+                        <SearchUI />
+                    </div>
+                )}
                 <AnimatePresence>
                     {windows.map((item, index) => {
                         return (

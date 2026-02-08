@@ -18,9 +18,14 @@ const searchClient = algoliasearch(
 )
 
 const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: string }) => {
+    const { websiteMode } = useApp()
     const { refine, items } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
     return (
-        <ul className="list-none m-0 p-0 flex space-x-2 mt-2 snap-x snap-mandatory overflow-x-auto">
+        <ul
+            className={`list-none m-0 p-0 flex space-x-2 snap-x snap-mandatory overflow-x-auto ${
+                websiteMode ? 'my-2 px-2' : 'mt-2'
+            }`}
+        >
             {items.map((item) => (
                 <li className="snap-center" key={item.value}>
                     <button
@@ -59,7 +64,9 @@ const Search = ({
     onEscape?: () => void
 }) => {
     const [query, setQuery] = useState('')
-    const { openNewChat } = useApp()
+    const [isFocused, setIsFocused] = useState(false)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { openNewChat, websiteMode } = useApp()
     const { dragControls, appWindow } = useWindow()
     const { refine } = useSearchBox()
     const { hits } = useHits()
@@ -67,12 +74,13 @@ const Search = ({
 
     const openChat = () => {
         if (query) {
-            openNewChat({ path: `ask-max-${appWindow?.path}`, initialQuestion: query })
+            openNewChat({ path: `ask-max${websiteMode ? '' : `-${appWindow?.path}`}`, initialQuestion: query })
         }
     }
 
     const handleChange = (hit: Hit) => {
         if (!hit) return
+        setIsFocused(false)
         navigate(`${hit.fields?.slug || `/${hit.slug}`}`, { state: { newWindow: true } })
         onChange?.()
     }
@@ -94,6 +102,11 @@ const Search = ({
         }
     }
 
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (websiteMode) return
+        dragControls?.start(e)
+    }
+
     useEffect(() => {
         refine(query)
     }, [query])
@@ -104,16 +117,38 @@ const Search = ({
         }
     }, [initialFilter])
 
+    useEffect(() => {
+        if (!websiteMode) return
+        const handleClickOutside = (e: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                setIsFocused(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [websiteMode])
+
     return (
-        <div className={`flex flex-col ${className}`} onMouseDown={(e) => dragControls.start(e)}>
+        <div
+            ref={containerRef}
+            onFocus={() => setIsFocused(true)}
+            className={`flex flex-col ${className}`}
+            onMouseDown={handleMouseDown}
+        >
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
-                    <div className="bg-accent rounded border !border-primary overflow-hidden relative">
+                    <div
+                        className={`bg-accent !border-primary overflow-hidden relative ${
+                            websiteMode ? 'border-b' : 'border rounded'
+                        }`}
+                    >
                         <Combobox.Input
                             as={Input}
                             label=""
                             showLabel={false}
-                            className="w-full text-primary border-0 bg-transparent focus:ring-0"
+                            className={`w-full text-primary border-0 bg-transparent focus:ring-0 ${
+                                websiteMode ? 'rounded-none' : ''
+                            }`}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
                             onKeyDown={handleKeyDown}
                             placeholder={`Search ${initialFilter ? 'the ' + initialFilter : 'PostHog.com'}...`}
@@ -129,6 +164,7 @@ const Search = ({
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     openChat()
+                                    setIsFocused(false)
                                 }}
                                 icon={<IconSparkles />}
                                 hover="border"
@@ -138,13 +174,17 @@ const Search = ({
                             </OSButton>
                         </div>
                     </div>
-                    {!hideFilters && hits.length > 0 && query && <Filters isRefinedClassName={isRefinedClassName} />}
+                    {!hideFilters && hits.length > 0 && query && (!websiteMode || isFocused) && (
+                        <Filters isRefinedClassName={isRefinedClassName} />
+                    )}
 
-                    {hits.length > 0 && query && (
+                    {hits.length > 0 && query && (!websiteMode || isFocused) && (
                         <Combobox.Options
                             static
                             hold
-                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl"
+                            className={`w-full border-primary list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl ${
+                                websiteMode ? 'absolute !h-[400px] border-y' : 'mt-2 rounded-md border'
+                            }`}
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>

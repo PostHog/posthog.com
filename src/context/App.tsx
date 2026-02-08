@@ -132,6 +132,8 @@ interface AppContextType {
     desktopCopied: boolean
     shareableDesktopURL: string
     windowsInView: AppWindow[]
+    searchOpen: boolean
+    setSearchOpen: (isOpen: boolean) => void
 }
 
 interface AppProviderProps {
@@ -293,6 +295,8 @@ export const Context = createContext<AppContextType>({
     desktopCopied: false,
     shareableDesktopURL: '',
     windowsInView: [],
+    searchOpen: false,
+    setSearchOpen: () => {},
 })
 
 export interface AppSetting {
@@ -1227,6 +1231,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
     const [confetti, setConfetti] = useState(false)
     const [posthogInstance, setPosthogInstance] = useState<string>()
+    const [searchOpen, setSearchOpen] = useState<boolean>(false)
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
@@ -1677,6 +1682,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const openSearch = (initialFilter?: string) => {
+        setSearchOpen((prev) => !prev)
+        if (websiteMode) {
+            return
+        }
         addWindow(
             <WindowSearchUI
                 location={{ pathname: `search` }}
@@ -2381,6 +2390,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 desktopCopied,
                 shareableDesktopURL,
                 windowsInView,
+                searchOpen,
+                setSearchOpen,
             }}
         >
             {children}
