@@ -1052,6 +1052,9 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        modal: {
+            type: 'standard',
+        },
     },
     'add-roadmap': {
         size: {
