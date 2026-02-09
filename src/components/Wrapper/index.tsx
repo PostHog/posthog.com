@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import WebsiteFooter from 'components/WebsiteFooter'
-import { SearchUI } from 'components/SearchUI'
 
 export default function Wrapper() {
     const {
@@ -39,11 +38,6 @@ export default function Wrapper() {
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative`}>
                 <Desktop />
-                {searchOpen && websiteMode && (
-                    <div className="bg-accent sticky top-[49px] z-20">
-                        <SearchUI />
-                    </div>
-                )}
                 <AnimatePresence>
                     {windows.map((item, index) => {
                         return (

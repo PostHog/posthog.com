@@ -1682,8 +1682,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const openSearch = (initialFilter?: string) => {
-        setSearchOpen((prev) => !prev)
         if (websiteMode) {
+            setSearchOpen((prev) => !prev)
             return
         }
         addWindow(

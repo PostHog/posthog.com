@@ -23,7 +23,7 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
     return (
         <ul
             className={`list-none m-0 p-0 flex space-x-2 snap-x snap-mandatory overflow-x-auto ${
-                websiteMode ? 'my-2 px-2' : 'mt-2'
+                websiteMode ? 'mb-2 px-2 border-t border-primary pt-2' : 'mt-2'
             }`}
         >
             {items.map((item) => (
@@ -139,7 +139,7 @@ const Search = ({
                 <div className="relative">
                     <div
                         className={`bg-accent !border-primary overflow-hidden relative ${
-                            websiteMode ? 'border-b' : 'border rounded'
+                            websiteMode ? '' : 'border rounded'
                         }`}
                     >
                         <Combobox.Input
@@ -168,7 +168,7 @@ const Search = ({
                                 }}
                                 icon={<IconSparkles />}
                                 hover="border"
-                                className="font-semibold underline bg-accent text-primary"
+                                className="font-semibold underline bg-accent disabled:bg-transparent border border-primary text-primary disabled:border-transparent"
                             >
                                 Ask AI
                             </OSButton>
@@ -183,7 +183,7 @@ const Search = ({
                             static
                             hold
                             className={`w-full border-primary list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl ${
-                                websiteMode ? 'absolute !h-[400px] border-y' : 'mt-2 rounded-md border'
+                                websiteMode ? 'border-t' : 'mt-2 rounded-md border'
                             }`}
                         >
                             {hits.length === 0 && query !== '' ? (

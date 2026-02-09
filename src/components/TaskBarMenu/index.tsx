@@ -25,6 +25,8 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { Popover } from 'components/RadixUI/Popover'
+import { SearchUI } from 'components/SearchUI'
 
 export default function TaskBarMenu() {
     const {
@@ -39,6 +41,8 @@ export default function TaskBarMenu() {
         taskbarRef,
         posthogInstance,
         websiteMode,
+        searchOpen,
+        setSearchOpen,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -80,6 +84,14 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
+    }
+
+    const handleSearchOpenChange = (open: boolean) => {
+        if (websiteMode) {
+            setSearchOpen(open)
+        } else {
+            openSearch()
+        }
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -339,18 +351,32 @@ export default function TaskBarMenu() {
                                 {posthogInstance ? 'Dashboard' : 'Get started – free'}
                             </OSButton>
                         </div>
-                        <Tooltip
+                        <Popover
+                            open={searchOpen}
+                            dataScheme="primary"
+                            onOpenChange={handleSearchOpenChange}
                             trigger={
-                                <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
-                                    <IconSearch className="size-5" />
-                                </OSButton>
+                                <span>
+                                    <Tooltip
+                                        trigger={
+                                            <span>
+                                                <OSButton size="sm" className="relative top-px">
+                                                    <IconSearch className="size-5" />
+                                                </OSButton>
+                                            </span>
+                                        }
+                                    >
+                                        <div className="flex flex-col items-center gap-1">
+                                            <p className="text-sm mb-0">Search</p>
+                                            <KeyboardShortcut text="/" size="sm" />
+                                        </div>
+                                    </Tooltip>
+                                </span>
                             }
+                            contentClassName="w-[450px] border border-primary rounded !p-0 overflow-hidden"
                         >
-                            <div className="flex flex-col items-center gap-1">
-                                <p className="text-sm mb-0">Search</p>
-                                <KeyboardShortcut text="/" size="sm" />
-                            </div>
-                        </Tooltip>
+                            <SearchUI />
+                        </Popover>
                         <Tooltip
                             trigger={
                                 <OSButton
