@@ -686,7 +686,7 @@ const RoadmapCards = ({
 
                         const singleVideo = periodVideos.length === 1 ? periodVideos[0] : null
                         const secondWeekHasContent = columns[1]?.roadmaps.length > 0
-                        const showVideoAboveColumn = singleVideo && !secondWeekHasContent
+                        const showVideoAboveColumn = (singleVideo && !secondWeekHasContent) || periodVideos.length === 2
                         const showVideoInHeader = singleVideo && secondWeekHasContent
 
                         return (
@@ -740,23 +740,29 @@ const RoadmapCards = ({
                                     <div className="w-full flex-1 min-h-0 flex flex-col">
                                         <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
                                             {columns.map((column, colIndex) => {
-                                                const weekVideo = singleVideo ? null : getWeekVideo(column.weekNumber)
+                                                const weekVideo = getWeekVideo(column.weekNumber)
+                                                const videoForThisColumn =
+                                                    periodVideos.length === 2
+                                                        ? weekVideo
+                                                        : singleVideo && colIndex === 0
+                                                        ? singleVideo
+                                                        : null
                                                 const showVideoAboveThisColumn =
-                                                    showVideoAboveColumn && colIndex === 0 && singleVideo
+                                                    showVideoAboveColumn && videoForThisColumn
                                                 return (
                                                     <div key={column.weekNumber} className="flex flex-col min-h-0">
                                                         <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
                                                             <span>{column.label}</span>
                                                         </div>
-                                                        {showVideoAboveThisColumn && (
+                                                        {showVideoAboveThisColumn && videoForThisColumn && (
                                                             <div className="border-b border-primary">
                                                                 <button
-                                                                    onClick={() => handlePlayVideo(singleVideo)}
+                                                                    onClick={() => handlePlayVideo(videoForThisColumn)}
                                                                     className="m-2 aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
                                                                 >
                                                                     <img
-                                                                        src={`https://img.youtube.com/vi/${singleVideo.videoId}/hqdefault.jpg`}
-                                                                        alt={singleVideo.title}
+                                                                        src={`https://img.youtube.com/vi/${videoForThisColumn.videoId}/hqdefault.jpg`}
+                                                                        alt={videoForThisColumn.title}
                                                                         className="w-full h-full object-cover"
                                                                     />
                                                                     <div className="absolute inset-0 flex items-center justify-center">
