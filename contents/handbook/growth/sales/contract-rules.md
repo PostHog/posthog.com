@@ -43,7 +43,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 #### 3. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
-- **Paid upfront (multi-year deals):** +2.5% per year paid upfront
+- **Multi-year deals:** +2.5% per additional year paid upfront (i.e. +2.5% for 2 years, +5% for 3 years)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
 > Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier.
