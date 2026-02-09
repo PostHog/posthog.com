@@ -125,6 +125,26 @@ Each of them can be completely customized within notebooks like you would in ins
 
 You can add insights from the insights list by clicking, holding, and dragging the title onto the right-side popover.
 
+
+### SQL (HogQL)
+
+You can add HogQL query nodes to notebooks to run SQL queries directly against your PostHog data. Add a HogQL node using the slash command `/hogql` or by clicking the `+` icon and selecting **SQL (HogQL)**.
+
+HogQL nodes support:
+
+- **Python variable placeholders**: Define variables in a Python node, then reference them in HogQL queries using `{variable_name}` syntax. This enables dynamic queries based on computed values.
+
+- **Composed queries**: Combine results from multiple HogQL queries by referencing other HogQL nodes as subqueries.
+
+- **Return variables**: Each HogQL node outputs results to a variable (default: `hogql_df`) that you can use in subsequent Python or HogQL nodes.
+
+You can also call `hogql_execute()` directly from Python nodes for programmatic query execution:
+
+```python
+result = hogql_execute("SELECT event, count() FROM events GROUP BY event")
+df = result.to_df()  # Convert to pandas DataFrame
+```
+
 ### Events, persons, groups, cohorts
 
 On top of insights, you can add event, person, group, and cohort lists or entries. They provide a summary of the event, person, group, or cohort and let you click in to get more details or filter.
