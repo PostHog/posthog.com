@@ -451,7 +451,7 @@ const subfeatures = [
     {
         title: 'Session replays',
         description:
-            'Tell PostHog AI what behaviours you are looking for and he can find the matching session recordings',
+            'Tell PostHog AI what behaviors you are looking for and he can find the matching session recordings',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
@@ -526,7 +526,7 @@ const PairsWithArray = [
     },
     {
         title: 'Session Replay',
-        description: 'Create filters and playlists based on user behaviours',
+        description: 'Create filters and playlists based on user behaviors',
         icon: <IconRewindPlay />,
         product: 'Session Replay',
         url: '/session-replay',
