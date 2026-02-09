@@ -499,15 +499,15 @@ const RoadmapCards = ({
         return hideEmpty ? monthPeriods.filter((period) => period.roadmaps.length > 0) : monthPeriods
     }, [roadmaps, startYear, endYear, hideEmpty])
 
-    const videosByPeriod = useMemo(() => {
+    const videosByWeek = useMemo(() => {
         const map = new Map<string, ChangelogVideo[]>()
         videos.forEach((video) => {
             if (!video.publishedAt) return
             const date = dayjs.utc(video.publishedAt)
             const year = date.year()
             const month = date.month()
-            const period = getBiweeklyBucket(video.publishedAt)
-            const key = `${year}-${month}-${period}`
+            const week = getWeekOfMonth(video.publishedAt)
+            const key = `${year}-${month}-${week}`
             const existing = map.get(key) || []
             existing.push(video)
             map.set(
@@ -675,8 +675,19 @@ const RoadmapCards = ({
                                 (roadmap) => getWeekOfMonth(roadmap.date) === weekNumber
                             ),
                         }))
-                        const periodKey = `${periodData.year}-${periodData.month}-${periodData.period}`
-                        const periodVideo = videosByPeriod.get(periodKey)?.[0] || null
+                        const getWeekVideo = (weekNumber: number) => {
+                            const weekKey = `${periodData.year}-${periodData.month}-${weekNumber}`
+                            return videosByWeek.get(weekKey)?.[0] || null
+                        }
+
+                        const periodVideos = columns
+                            .map((col) => getWeekVideo(col.weekNumber))
+                            .filter(Boolean) as ChangelogVideo[]
+
+                        const singleVideo = periodVideos.length === 1 ? periodVideos[0] : null
+                        const secondWeekHasContent = columns[1]?.roadmaps.length > 0
+                        const showVideoAboveColumn = singleVideo && !secondWeekHasContent
+                        const showVideoInHeader = singleVideo && secondWeekHasContent
 
                         return (
                             <div
@@ -710,14 +721,14 @@ const RoadmapCards = ({
                                                 update{count !== 1 ? 's' : ''}
                                             </p>
                                         </div>
-                                        {periodVideo && (
+                                        {showVideoInHeader && singleVideo && (
                                             <button
-                                                onClick={() => handlePlayVideo(periodVideo)}
+                                                onClick={() => handlePlayVideo(singleVideo)}
                                                 className="shrink-0 w-[140px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
                                             >
                                                 <img
-                                                    src={`https://img.youtube.com/vi/${periodVideo.videoId}/hqdefault.jpg`}
-                                                    alt={periodVideo.title}
+                                                    src={`https://img.youtube.com/vi/${singleVideo.videoId}/hqdefault.jpg`}
+                                                    alt={singleVideo.title}
                                                     className="w-full h-full object-cover"
                                                 />
                                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -728,77 +739,114 @@ const RoadmapCards = ({
                                     </div>
                                     <div className="w-full flex-1 min-h-0 flex flex-col">
                                         <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
-                                            {columns.map((column) => (
-                                                <div key={column.weekNumber} className="flex flex-col min-h-0">
-                                                    <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
-                                                        {column.label}
-                                                    </div>
-                                                    <ScrollArea className="flex-1">
-                                                        <ul className="p-0 m-0 list-none min-h-0">
-                                                            {column.roadmaps.length === 0 ? (
-                                                                <li className="p-4 text-center text-sm text-secondary opacity-70">
-                                                                    No updates
-                                                                </li>
-                                                            ) : (
-                                                                column.roadmaps.map((roadmap) => {
-                                                                    const active = activeRoadmap?.id === roadmap.id
-                                                                    const teamName =
-                                                                        roadmap.teams?.data?.[0]?.attributes?.name
-                                                                    const crestUrl =
-                                                                        roadmap.teams?.data?.[0]?.attributes?.miniCrest
-                                                                            ?.data?.attributes?.url
-                                                                    return (
-                                                                        <li
-                                                                            key={roadmap.id}
-                                                                            className="p-0 m-0 border-b last:border-b-0 border-primary"
-                                                                        >
-                                                                            <button
-                                                                                data-scheme="secondary"
-                                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
-                                                                                    active
-                                                                                        ? 'bg-primary'
-                                                                                        : 'hover:bg-primary'
-                                                                                }`}
-                                                                                onClick={() =>
-                                                                                    handleRoadmapClick(roadmap)
-                                                                                }
-                                                                            >
-                                                                                <div>
-                                                                                    <h5
-                                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${
-                                                                                            active
-                                                                                                ? ''
-                                                                                                : 'group-hover:underline'
-                                                                                        }`}
-                                                                                    >
-                                                                                        {roadmap.title}
-                                                                                    </h5>
-                                                                                    {teamName && (
-                                                                                        <p className="!m-0 text-[13px]">
-                                                                                            {teamName} Team
-                                                                                        </p>
-                                                                                    )}
-                                                                                </div>
-                                                                                {crestUrl && (
-                                                                                    <div className="shrink-0 leading-[0]">
-                                                                                        <CloudinaryImage
-                                                                                            className="w-10"
-                                                                                            width={80}
-                                                                                            src={
-                                                                                                crestUrl as `https://res.cloudinary.com/${string}`
-                                                                                            }
-                                                                                        />
-                                                                                    </div>
-                                                                                )}
-                                                                            </button>
-                                                                        </li>
-                                                                    )
-                                                                })
+                                            {columns.map((column, colIndex) => {
+                                                const weekVideo = singleVideo ? null : getWeekVideo(column.weekNumber)
+                                                const showVideoAboveThisColumn =
+                                                    showVideoAboveColumn && colIndex === 0 && singleVideo
+                                                return (
+                                                    <div key={column.weekNumber} className="flex flex-col min-h-0">
+                                                        {showVideoAboveThisColumn && (
+                                                            <button
+                                                                onClick={() => handlePlayVideo(singleVideo)}
+                                                                className="m-2 aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
+                                                            >
+                                                                <img
+                                                                    src={`https://img.youtube.com/vi/${singleVideo.videoId}/hqdefault.jpg`}
+                                                                    alt={singleVideo.title}
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                                    <span className="text-white text-2xl">▶</span>
+                                                                </div>
+                                                            </button>
+                                                        )}
+                                                        <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30 flex items-center justify-between gap-2">
+                                                            <span>{column.label}</span>
+                                                            {weekVideo && (
+                                                                <button
+                                                                    onClick={() => handlePlayVideo(weekVideo)}
+                                                                    className="shrink-0 w-[80px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.02] active:scale-[0.98] transition-all duration-100"
+                                                                >
+                                                                    <img
+                                                                        src={`https://img.youtube.com/vi/${weekVideo.videoId}/hqdefault.jpg`}
+                                                                        alt={weekVideo.title}
+                                                                        className="w-full h-full object-cover"
+                                                                    />
+                                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                                        <span className="text-white text-lg drop-shadow-md">
+                                                                            ▶
+                                                                        </span>
+                                                                    </div>
+                                                                </button>
                                                             )}
-                                                        </ul>
-                                                    </ScrollArea>
-                                                </div>
-                                            ))}
+                                                        </div>
+                                                        <ScrollArea className="flex-1">
+                                                            <ul className="p-0 m-0 list-none min-h-0">
+                                                                {column.roadmaps.length === 0 ? (
+                                                                    <li className="p-4 text-center text-sm text-secondary opacity-70">
+                                                                        No updates
+                                                                    </li>
+                                                                ) : (
+                                                                    column.roadmaps.map((roadmap) => {
+                                                                        const active = activeRoadmap?.id === roadmap.id
+                                                                        const teamName =
+                                                                            roadmap.teams?.data?.[0]?.attributes?.name
+                                                                        const crestUrl =
+                                                                            roadmap.teams?.data?.[0]?.attributes
+                                                                                ?.miniCrest?.data?.attributes?.url
+                                                                        return (
+                                                                            <li
+                                                                                key={roadmap.id}
+                                                                                className="p-0 m-0 border-b last:border-b-0 border-primary"
+                                                                            >
+                                                                                <button
+                                                                                    data-scheme="secondary"
+                                                                                    className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
+                                                                                        active
+                                                                                            ? 'bg-primary'
+                                                                                            : 'hover:bg-primary'
+                                                                                    }`}
+                                                                                    onClick={() =>
+                                                                                        handleRoadmapClick(roadmap)
+                                                                                    }
+                                                                                >
+                                                                                    <div>
+                                                                                        <h5
+                                                                                            className={`m-0  text-[15px] leading-tight mb-1 ${
+                                                                                                active
+                                                                                                    ? ''
+                                                                                                    : 'group-hover:underline'
+                                                                                            }`}
+                                                                                        >
+                                                                                            {roadmap.title}
+                                                                                        </h5>
+                                                                                        {teamName && (
+                                                                                            <p className="!m-0 text-[13px]">
+                                                                                                {teamName} Team
+                                                                                            </p>
+                                                                                        )}
+                                                                                    </div>
+                                                                                    {crestUrl && (
+                                                                                        <div className="shrink-0 leading-[0]">
+                                                                                            <CloudinaryImage
+                                                                                                className="w-10"
+                                                                                                width={80}
+                                                                                                src={
+                                                                                                    crestUrl as `https://res.cloudinary.com/${string}`
+                                                                                                }
+                                                                                            />
+                                                                                        </div>
+                                                                                    )}
+                                                                                </button>
+                                                                            </li>
+                                                                        )
+                                                                    })
+                                                                )}
+                                                            </ul>
+                                                        </ScrollArea>
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
                                     </div>
                                 </div>
