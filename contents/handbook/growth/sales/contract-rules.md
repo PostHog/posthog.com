@@ -24,7 +24,7 @@ Every discount reflects a value exchange that provides a sound basis for our pri
 
 ### How our discounts work
 
-In our consumption-based pricing model, the first way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
+In our consumption-based pricing model, the first way for a customer to reduce spend is to ensure that they are only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 
 Beyond optimization, we offer discounts based on four levers:
 
