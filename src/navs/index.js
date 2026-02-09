@@ -5066,6 +5066,7 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    showIcons: true,
                     featured: true,
                     children: [
                         {

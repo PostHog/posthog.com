@@ -12,7 +12,7 @@
  *    title: Elixir error tracking installation
  *    platformLogo: elixir
  *    ---
- * 2. Add to sidebar in src/navs/index.js, the order there = order on page
+ * 2. Add to sidebar in src/navs/index.js (platforms are sorted alphabetically)
  * 3. Done!
  *
  * Remove a platform:
@@ -169,14 +169,10 @@ export default function usePlatformList(
             )
         }
 
-        // Filter to only include items that are in the sidebar, then sort by sidebar order
+        // Filter to only include items that are in the sidebar, then sort alphabetically
         return result
             .filter((platform: Platform) => sidebarOrder.includes(platform.url))
-            .sort((a: Platform, b: Platform) => {
-                const indexA = sidebarOrder.indexOf(a.url)
-                const indexB = sidebarOrder.indexOf(b.url)
-                return indexA - indexB
-            })
+            .sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
     }
 
     return result

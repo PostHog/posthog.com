@@ -31,6 +31,7 @@ export interface MenuItem {
     icon?: React.ReactNode
     color?: string
     platformLogo?: string
+    showIcons?: boolean
     children?: MenuItem[]
 }
 
