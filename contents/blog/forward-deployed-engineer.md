@@ -18,6 +18,8 @@ crosspost:
   - Product engineers
 ---
 
+https://x.com/tbpn/status/2019520634771108041?t=200
+
 If you've been living anywhere except under a rock lately, you've probably heard the term **forward deployed engineer** 50 times by now and thought: WTF does that even mean?
 
 This role has been called “the hottest job in startups” according to [a16z](https://x.com/a16z/status/1930774473445142934), with [800% growth](https://www.ft.com/content/91002071-7874-4cb7-9245-08ca0571c408) in 2025. Companies that are hiring or have hired for this position include [OpenAI](https://openai.com/careers/forward-deployed-engineer-(fde)-sf-san-francisco/), [Anthropic](https://job-boards.greenhouse.io/anthropic/jobs/5079562008), [Databricks](https://www.databricks.com/company/careers/professional-services-operations/forward-deployed-engineer-fde-8251119002), [Ramp](https://builders.ramp.com/post/forward-deployed-engineering), and even [yours truly](https://posthog.com/community/profiles/32997). But why?
@@ -110,7 +112,7 @@ That’s why FDE teams make sense for companies where the product requires a lot
 
 If those don’t sound like you, then you probably don’t need FDEs (yet). The need for FDEs organically will become clear when your company decides to tackle new industries, AI-specific or infrastructure challenges, or _massive_ scale. That's what happened to [Ramp](https://builders.ramp.com/post/forward-deployed-engineering) in 2023 – their FDE team formed as the scaling needs of enterprise became increasingly obvious.
 
-# Why did we hire a forward deployed engineer at PostHog?
+## Why did we hire a forward deployed engineer at PostHog?
 
 We pride ourselves on having tools that are already awesome out of the box, so you might wonder why we created an FDE role if it's supposedly all about hands-on customization for big, hairy enterprise problems. 
 
