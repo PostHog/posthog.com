@@ -16,11 +16,13 @@ When you ask a question, the agent selects the most appropriate mode based on yo
     background={false}
 />
 
-The agent can switch modes in two ways:
+The agent can switch modes in three ways:
 
 1. **Automatic switching** - When your request requires tools from a different mode, the agent will switch automatically. For example, if you're in Product analytics mode and ask to "run a custom SQL query", the agent will switch to SQL mode.
 
 2. **Manual switching** - You can explicitly select a mode with the mode selector above the chat input.
+
+3. **URL-based switching** - You can set the mode via [URL parameters](/docs/posthog-ai/platform-and-chat-ui#deep-linking-with-url-parameters) when opening Max AI (e.g., `#panel=max:mode=sql`).
 
 When switching modes:
 - Your conversation history is preserved
