@@ -900,10 +900,12 @@ function ReaderViewContent({
                 {/* Third row - Footer */}
                 <div
                     data-scheme="secondary"
-                    className={`bg-primary flex w-full flex-shrink-0 rounded-b ${websiteMode ? 'gap-2y' : 'gap-px'}`}
+                    className={`flex w-full flex-shrink-0 rounded-b ${
+                        websiteMode ? 'dark:bg-secondary' : 'gap-px bg-primary '
+                    }`}
                 >
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${
+                        className={`flex-shrink-0 transition-all min-w-0 ${websiteMode ? 'pr-4 box-content' : ''} ${
                             renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
                         }`}
                     >
@@ -912,7 +914,7 @@ function ReaderViewContent({
                     {!compact && (
                         <div
                             className={`flex-grow flex justify-between items-center text-primary p-2 ${
-                                websiteMode && renderLeftSidebar && isNavVisible ? 'border-l border-primary ml-4 ' : ''
+                                websiteMode && renderLeftSidebar && isNavVisible ? 'border-l border-primary' : ''
                             }`}
                         >
                             <div>
