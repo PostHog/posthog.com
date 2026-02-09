@@ -29,37 +29,38 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 Beyond optimization, we offer discounts based on four levers:
 
 #### 1. Volume discount (based on credit purchase amount)
-- **$25k - $60k:** Base discount of 20%
-- **$60k - $100k:** Base discount of 25%
-- **$100k - $250k:** Base discount of 30%
-- **$250k - $500k:** Base discount of 35%
-- **$500k - $1M:** Base discount of 40%
+- **$25-59k:** 20% base discount
+- **$60-99k:** 25% base discount
+- **$100-249k:** 30% base discount
+- **$250-499k:** 35% base discount
+- **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
 
 #### 2. Length of commitment discount (additive)
 - **1-year commitment:** No additional discount
 - **2-year commitment:** +3% additional discount
-- **3-year commitment:** +5% additional discount
+- **3-year commitment:** +5% additional discount (doesn't stack)
+- **4-years or more:** Contact us for custom pricing
 
 #### 3. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
 - **Multi-year deals:** +2.5% per additional year paid upfront (i.e. +2.5% for 2 years, +5% for 3 years)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
-> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier.
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
 
 #### 4. Ability to forecast - mutual commitment to timing (additive)
 
 **For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
-- Available when both parties commit to specific, mutually agreed timing for contract signature (this is not an end-of-quarter discount)
-- To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date
+- Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
+- To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle, and is subject to the maximum total discount below
 
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 
-**If timelines change:** We will handle these on a case by case basis, but we are prepared to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
+**If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
 > You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with Ben (TAEs), Simon (TAMs or CSMs), or Charles (as backup), you should assume by default that the deal will not count toward your quota.
 
@@ -132,15 +133,15 @@ In exceptional circumstances, we may explore providing additional discounts whic
 2. We are taking their business from a competitor.
 3. We are preventing them from churning to a competitor.
 
-If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with Charles.  If he's happy that it's the right thing to do, then you also need to check with Raquel from a product support perspective.
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Charles (TAEs).
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
+As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
 
-## Price Guarantees & Lock-ins
+## Price guarantees & lock-ins
 
-Our default stance is to not offer price guarantees for the following reasons:
+We do not offer price guarantees for the following reasons:
 
 1. We regularly *lower* prices, which would result in higher costs for customers who've locked in a price
 2. We occasionally split or restructure products (e.g. Data Pipelines unbundled), which makes guarantees administratively complex
@@ -171,7 +172,7 @@ You can see a signed multi-year contract set up in this way by navigating to Doc
 Customers only get an uptime SLA if:
 
 1. They have subscribed to the Enterprise add-on; or
-2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR post discount
+2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR _post_ discount (i.e. $ spend, not credit usage). 
 
 An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
 
@@ -181,7 +182,7 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
 
-For customers purchasing credits upfront, bank transfer is the default and highly preferred payment method for the following reasons:
+For customers purchasing credits upfront, we only take bank transfers because:
 
 - For large payment amounts, the fees we incur are higher for credit card payments.
 - Our Sales Ops automations are set up to handle bank transfer payments.
@@ -193,11 +194,11 @@ You should confirm ahead of the customer signing the order form that they are ha
 
 If your customer must pay via credit card, you absolutely _need_ to let Mine (Simon as backup) know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
 
-> We absolutely do not allow payment by check.
+> We absolutely do not allow payment by check. This is made clear on order forms. 
 
 ## Contract buyouts
 
-> **Want to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
+> **Are you a potential customer who wants to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
