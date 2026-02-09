@@ -572,6 +572,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             canGoForward={canGoForward}
             dragControls={controls}
             setPageOptions={setPageOptions}
+            pageOptions={pageOptions}
             activeInternalMenu={activeInternalMenu}
             setActiveInternalMenu={setActiveInternalMenu}
             internalMenu={internalMenu}

@@ -1,15 +1,73 @@
 import React, { useState, useEffect } from 'react'
 import { Dialog as RadixDialog } from 'radix-ui'
-import { IconX } from '@posthog/icons'
+import { IconChevronDown, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
+import { Popover } from 'components/RadixUI/Popover'
+import Link from 'components/Link'
+import { MenuItemType } from 'components/RadixUI/MenuBar'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+
+const MenuItems = ({ items }: { items: MenuItemType[] }) => {
+    const itemClassName =
+        'flex items-center gap-2 px-3 py-2 text-sm text-primary hover:bg-accent rounded transition-colors text-left w-full'
+
+    return (
+        <>
+            {items.map((item, index) => {
+                if (item.type === 'separator') {
+                    return <div key={`separator-${index}`} className="my-1 h-px bg-border" />
+                }
+
+                if (item.type === 'submenu' && item.items) {
+                    return (
+                        <div key={`submenu-${index}`}>
+                            {item.label && (
+                                <p className="px-3 py-1 text-xs text-secondary font-semibold uppercase tracking-wide m-0">
+                                    {item.label}
+                                </p>
+                            )}
+                            <MenuItems items={item.items} />
+                        </div>
+                    )
+                }
+
+                if (item.link) {
+                    return (
+                        <Link key={`${item.label}-${index}`} to={item.link} className={itemClassName}>
+                            {item.icon}
+                            {item.label}
+                        </Link>
+                    )
+                }
+
+                if (item.onClick || item.label) {
+                    return (
+                        <button
+                            key={`${item.label}-${index}`}
+                            onClick={item.onClick}
+                            className={itemClassName}
+                            disabled={item.disabled}
+                        >
+                            {item.icon}
+                            {item.label}
+                        </button>
+                    )
+                }
+
+                return null
+            })}
+        </>
+    )
+}
 
 const FloatingModal = ({ children }: { children: React.ReactNode }): JSX.Element | null => {
     const [open, setOpen] = useState(true)
-    const { appWindow } = useWindow()
+    const { appWindow, pageOptions } = useWindow()
     const { closeWindow } = useApp()
     const title = appWindow?.meta?.title
+    const hasMenuItems = pageOptions && pageOptions.length > 0
 
     useEffect(() => {
         if (!open && appWindow) {
@@ -31,7 +89,24 @@ const FloatingModal = ({ children }: { children: React.ReactNode }): JSX.Element
                     >
                         <div className="rounded border border-primary overflow-hidden size-full">
                             <div className="bg-accent flex items-center justify-between p-1 border-b border-primary">
-                                {title && (
+                                {hasMenuItems ? (
+                                    <Popover
+                                        dataScheme="primary"
+                                        side="top"
+                                        trigger={
+                                            <button className="flex items-center gap-1 text-primary text-left text-sm font-semibold ml-2 hover:opacity-75 transition-opacity">
+                                                {title}
+                                                <IconChevronDown className="size-4" />
+                                            </button>
+                                        }
+                                    >
+                                        <ScrollArea className="h-full">
+                                            <div className="flex flex-col min-w-[200px] max-h-[300px]">
+                                                <MenuItems items={pageOptions} />
+                                            </div>
+                                        </ScrollArea>
+                                    </Popover>
+                                ) : (
                                     <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
                                 )}
                                 <RadixDialog.Close asChild>
