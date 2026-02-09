@@ -19,7 +19,7 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/llm
 
 When a [generation](/docs/llm-analytics/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
 
-You can optionally filter which generations get evaluated using [property filters](/docs/llm-analytics/custom-properties). For example, only evaluate generations from production, from a specific model, or above a certain cost threshold.
+You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users by email domain or filter by user role.
 
 ## Built-in templates
 
@@ -42,7 +42,7 @@ PostHog provides five pre-built evaluation templates to get you started:
    - **Name**: A descriptive name for the evaluation
    - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
-   - **Property filters** (optional): Narrow which generations to evaluate
+   - **Property filters** (optional): Filter by event properties (model, environment, cost) or person properties (email domain, user role) to narrow which generations to evaluate
 5. Enable the evaluation and click **Save**
 
 ## Viewing results
