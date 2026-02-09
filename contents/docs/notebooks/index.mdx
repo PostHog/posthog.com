@@ -132,11 +132,9 @@ You can add HogQL query nodes to notebooks to run SQL queries directly against y
 
 HogQL nodes support:
 
-- **Python variable placeholders**: Define variables in a Python node, then reference them in HogQL queries using `{variable_name}` syntax. This enables dynamic queries based on computed values.
-
-- **Composed queries**: Combine results from multiple HogQL queries by referencing other HogQL nodes as subqueries.
-
-- **Return variables**: Each HogQL node outputs results to a variable (default: `hogql_df`) that you can use in subsequent Python or HogQL nodes.
+- Python variable placeholders - Define variables in a Python node, then reference them in HogQL queries using `{variable_name}` syntax. This enables dynamic queries based on computed values.
+- Composed queries - Combine results from multiple HogQL queries by referencing other HogQL nodes as subqueries.
+- Return variables - Each HogQL node outputs results to a variable (default: `hogql_df`) that you can use in subsequent Python or HogQL nodes.
 
 You can also call `hogql_execute()` directly from Python nodes for programmatic query execution:
 
