@@ -28,6 +28,27 @@ The PostHog AI chat is always available in the sidebar
 
 The in-app chat supports conversation history and features like [context, commands, and memory](/docs/posthog-ai/context-and-commands).
 
+## Deep linking with URL parameters
+
+You can open PostHog AI directly with a specific mode and question using URL parameters. This is useful for sharing links to specific analyses or bookmarking common queries.
+
+The URL format is:
+
+```
+https://app.posthog.com#panel=max:mode=<mode>:!<question>
+```
+
+**Parameters:**
+- `panel=max` - Opens the PostHog AI sidepanel
+- `mode=<mode>` - Sets the [mode](/docs/posthog-ai/modes) (optional). Available modes: `research`, `sql`, `session-replay`, `error-tracking`
+- `!<question>` - Pre-fills and runs a question (optional, URL-encoded)
+
+**Examples:**
+- Open PostHog AI: `https://app.posthog.com#panel=max`
+- Open in research mode: `https://app.posthog.com#panel=max:mode=research`
+- Open with a question: `https://app.posthog.com#panel=max:!What%20are%20my%20top%20events%3F`
+- Open in SQL mode with a question: `https://app.posthog.com#panel=max:mode=sql:!Show%20me%20all%20events%20from%20today`
+
 ## Platform UI
 
 PostHog AI shows up throughout the PostHog platform as inline or ambient UI elements, typically labelled with the <span className="inline-block"><IconSparkles className="h-4 w-4" /> </span> icon, and embedded within other features.
