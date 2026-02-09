@@ -5973,8 +5973,8 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Cutting costs',
-                    url: '/docs/endpoints/cutting-costs',
+                    name: 'Pricing',
+                    url: '/docs/endpoints/pricing',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
                 },

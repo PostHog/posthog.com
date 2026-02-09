@@ -76,7 +76,7 @@ For insight-based endpoints, variables work differently. Instead of defining the
 
 If your insight has a single breakdown configured, the breakdown property name automatically becomes a variable. For example, if your TrendsQuery breaks down by `$browser`, you can filter results by passing that property as a variable:
 
-> **Note:** The breakdown variable is only available for insights with a single breakdown. Insights with multiple breakdowns can still be used as endpoints, but won't have a breakdown variable available.
+> **Note:** The breakdown variable is only available for insights with a single breakdown. Insights with multiple breakdowns can still be used as endpoints, but you will not be able to filter by the variables.
 
 ```bash
 curl -X POST \

@@ -22,7 +22,7 @@ export const Content = () => {
                     </p>
                     <ul>
                         <li>
-                            <b>Build embedded analytics.</b> Show analytics to your customers in your own application
+                            <b>Build embedded analytics.</b> Show analytics to your customers in your own application.
                         </li>
                         <li>
                             <b>Data on your landing page.</b> Expose live metrics on your landing page in minutes.
