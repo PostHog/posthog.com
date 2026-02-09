@@ -745,41 +745,26 @@ const RoadmapCards = ({
                                                     showVideoAboveColumn && colIndex === 0 && singleVideo
                                                 return (
                                                     <div key={column.weekNumber} className="flex flex-col min-h-0">
-                                                        {showVideoAboveThisColumn && (
-                                                            <button
-                                                                onClick={() => handlePlayVideo(singleVideo)}
-                                                                className="m-2 aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
-                                                            >
-                                                                <img
-                                                                    src={`https://img.youtube.com/vi/${singleVideo.videoId}/hqdefault.jpg`}
-                                                                    alt={singleVideo.title}
-                                                                    className="w-full h-full object-cover"
-                                                                />
-                                                                <div className="absolute inset-0 flex items-center justify-center">
-                                                                    <span className="text-white text-2xl">▶</span>
-                                                                </div>
-                                                            </button>
-                                                        )}
-                                                        <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30 flex items-center justify-between gap-2">
+                                                        <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
                                                             <span>{column.label}</span>
-                                                            {weekVideo && (
+                                                        </div>
+                                                        {showVideoAboveThisColumn && (
+                                                            <div className="border-b border-primary">
                                                                 <button
-                                                                    onClick={() => handlePlayVideo(weekVideo)}
-                                                                    className="shrink-0 w-[80px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.02] active:scale-[0.98] transition-all duration-100"
+                                                                    onClick={() => handlePlayVideo(singleVideo)}
+                                                                    className="m-2 aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
                                                                 >
                                                                     <img
-                                                                        src={`https://img.youtube.com/vi/${weekVideo.videoId}/hqdefault.jpg`}
-                                                                        alt={weekVideo.title}
+                                                                        src={`https://img.youtube.com/vi/${singleVideo.videoId}/hqdefault.jpg`}
+                                                                        alt={singleVideo.title}
                                                                         className="w-full h-full object-cover"
                                                                     />
                                                                     <div className="absolute inset-0 flex items-center justify-center">
-                                                                        <span className="text-white text-lg drop-shadow-md">
-                                                                            ▶
-                                                                        </span>
+                                                                        <span className="text-white text-2xl">▶</span>
                                                                     </div>
                                                                 </button>
-                                                            )}
-                                                        </div>
+                                                            </div>
+                                                        )}
                                                         <ScrollArea className="flex-1">
                                                             <ul className="p-0 m-0 list-none min-h-0">
                                                                 {column.roadmaps.length === 0 ? (
