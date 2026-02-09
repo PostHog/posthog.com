@@ -3,6 +3,7 @@ title: Clusters
 ---
 
 import CalloutBox from 'components/Docs/CalloutBox'
+import { ProductScreenshot } from 'components/ProductScreenshot'
 
 <CalloutBox icon="IconInfo" title="Clusters is in beta" type="fyi">
 
@@ -32,14 +33,11 @@ Clustering runs automatically every day — no setup needed beyond having [trace
 
 Navigate to **LLM analytics** > **Clusters** to see the overview.
 
-{/*TODO: Capture and upload GIF - Hero overview showing distribution bar, scatter plot, and cluster cards (~8s, light + dark) */}
-{/* <ProductScreenshot */}
-{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_overview_light_PLACEHOLDER.gif" */}
-{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_overview_dark_PLACEHOLDER.gif" */}
-{/*     alt="LLM analytics clusters overview" */}
-{/*     classes="rounded" */}
-{/* /> */}
-{/* <Caption>The clusters view groups similar traces together and shows metrics for each cluster</Caption>*/}
+<ProductScreenshot
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_1_3de328bf21.mp4"
+    alt="LLM analytics clusters overview"
+    classes="rounded"
+/>
 
 ### Trace vs generation clustering
 
@@ -50,13 +48,11 @@ Clusters can operate at two levels:
 
 Toggle between them using the selector at the top of the page.
 
-{/*TODO: Capture and upload GIF - Toggling between trace and generation levels (~5s, light + dark) */}
-{/* <ProductScreenshot */}
-{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_toggle_light_PLACEHOLDER.gif" */}
-{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_toggle_dark_PLACEHOLDER.gif" */}
-{/*     alt="Toggling between trace and generation clustering" */}
-{/*     classes="rounded" */}
-{/* />*/}
+<ProductScreenshot
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_trace_and_generations_81bcc05872.mp4"
+    alt="Toggling between trace and generation clustering"
+    classes="rounded"
+/>
 
 ### Distribution bar
 
@@ -75,14 +71,6 @@ The interactive 2D scatter plot visualizes how items are distributed across clus
 | Drag to zoom | Zoom into a region of the plot |
 | Double-click | Reset zoom |
 
-{/*TODO: Capture and upload GIF - Hovering over scatter plot, tooltips, drag-to-zoom, double-click reset (~8s, light + dark) */}
-{/* <ProductScreenshot */}
-{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_scatter_light_PLACEHOLDER.gif" */}
-{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_scatter_dark_PLACEHOLDER.gif" */}
-{/*     alt="Scatter plot interaction showing zoom and tooltips" */}
-{/*     classes="rounded" */}
-{/* />*/}
-
 ### Cluster cards
 
 Below the scatter plot, a grid of cards shows each cluster with:
@@ -95,14 +83,6 @@ Expand a card to preview the traces or generations in that cluster.
 
 Items that don't fit any cluster appear in a special **Outliers** cluster with a dashed border.
 
-{/*TODO: Capture and upload GIF - Expanding a cluster card, viewing metrics and trace preview (~8s, light + dark) */}
-{/* <ProductScreenshot */}
-{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_card_light_PLACEHOLDER.gif" */}
-{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_card_dark_PLACEHOLDER.gif" */}
-{/*     alt="Expanding a cluster card to view metrics and trace preview" */}
-{/*     classes="rounded" */}
-{/* />*/}
-
 ## Cluster detail page
 
 Click a cluster card or centroid to open the detail page. Here you'll find:
@@ -111,14 +91,6 @@ Click a cluster card or centroid to open the detail page. Here you'll find:
 - **Focused scatter plot** showing only items in this cluster
 - **Paginated list of traces or generations** with AI summaries you can expand to see flow diagrams, summary bullets, and notes
 - Click any item to view the full trace timeline
-
-{/*TODO: Capture and upload GIF - Navigating to cluster detail, expanding trace summaries (~10s, light + dark) */}
-{/* <ProductScreenshot */}
-{/*     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_detail_light_PLACEHOLDER.gif" */}
-{/*     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/clusters_detail_dark_PLACEHOLDER.gif" */}
-{/*     alt="Cluster detail page showing trace summaries" */}
-{/*     classes="rounded" */}
-{/* />*/}
 
 ## Clusters in trace view
 
