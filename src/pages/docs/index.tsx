@@ -131,13 +131,13 @@ export const DocsIndex = () => {
     return (
         <div data-scheme="secondary" className={`${!websiteMode && 'bg-primary'} h-full text-primary`}>
             <SEO title="Documentation - PostHog" />
-            <ScrollArea className={`${websiteMode && '@container'}`}>
+            <ScrollArea className={`${websiteMode ? '@container' : ''}`}>
                 <section
                     id="hero"
-                    className={`@container not-prose relative aspect-[3/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px] ${
+                    className={`@container not-prose relative aspect-[3/1] overflow-hidden border-b border-primary bg-red-carpet bg-[length:150px_150px] ${
                         websiteMode
-                            ? '@2xl:aspect-none h-36 @6xl:h-48 w-full mt-8'
-                            : '@2xl:aspect-[4/1] @6xl:aspect-[5/1]'
+                            ? '@2xl:aspect-none h-36 @6xl:h-48 w-full'
+                            : '@2xl:aspect-[4/1] @6xl:aspect-[5/1] mb-4'
                     }`}
                 >
                     {/* Background container for positioned graphics */}
@@ -315,17 +315,15 @@ export const DocsIndex = () => {
                         </div>
                     </div>
                 </section>
-                <div
-                    className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 ${
-                        websiteMode ? '' : 'px-2 @xl:px-4'
-                    }`}
-                >
+                <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 px-2 @xl:px-4`}>
                     <section className="flex-1">
                         <SearchUI
                             initialFilter="docs"
                             hideFilters
                             isRefinedClassName="bg-white"
-                            className="mb-4"
+                            className={`mb-4 ${
+                                websiteMode ? 'border border-primary rounded overflow-hidden [&_input]:bg-white' : ''
+                            }`}
                             autoFocus={false}
                         />
                         <div className="@md:-ml-3">

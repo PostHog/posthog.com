@@ -445,7 +445,7 @@ export default function Inbox(props) {
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary @2xl:h-full flex-shrink-0 ${
                                 websiteMode
-                                    ? 'rounded h-[calc(100vh-91px)] sticky top-[99px]'
+                                    ? 'rounded h-[calc(100vh-91px)] sticky top-[101px]'
                                     : '@2xl:border-r border-primary'
                             }`}
                         >
@@ -455,7 +455,9 @@ export default function Inbox(props) {
                         </aside>
                         <main
                             data-scheme="primary"
-                            className="flex-1 bg-primary overflow-hidden @2xl:border-none border-t border-primary"
+                            className={`flex-1 bg-primary overflow-hidden border-primary ${
+                                websiteMode ? 'border-l' : '@2xl:border-none border-t'
+                            }`}
                         >
                             <div
                                 ref={containerRef}

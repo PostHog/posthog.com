@@ -449,13 +449,11 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     {/* Sidebar - overlay on mobile, normal flow on desktop */}
                     <motion.div
                         id="nav"
-                        className={`flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
-                                   fixed left-2 top-[47px] bottom-16 z-50 
-                                   @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto ${
-                                       websiteMode
-                                           ? '2xl/app-reader:sticky 2xl/app-reader:top-[48px] 2xl/app-reader:self-start 2xl/app-reader:h-[calc(100vh-48px)]'
-                                           : ''
-                                   }`}
+                        className={`flex-shrink-0 overflow-hidden text-primary ${
+                            websiteMode
+                                ? 'sticky top-[49px] self-start h-[calc(100vh-48px)] ml-2 -mb-[50px]'
+                                : ` mb-[-47px] fixed left-2 top-[47px] bottom-16 z-50 @2xl/app-reader:static @2xl/app-reader:z-auto @2xl app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto`
+                        }`}
                         initial={{
                             width: '250px',
                             x: isNavVisible ? 0 : -250, // Start off-screen on mobile
@@ -472,8 +470,8 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                         }}
                     >
                         <motion.div
-                            className={`h-full rounded @2xl/app-reader:rounded-none pt-4  ${
-                                websiteMode ? '' : 'bg-primary @2xl/app-reader:pt-0'
+                            className={`h-full rounded @2xl/app-reader:rounded-none ${
+                                websiteMode ? 'pt-2' : 'pt-4 bg-primary @2xl/app-reader:pt-0'
                             }`}
                             initial={{ opacity: 1 }}
                             animate={{
@@ -646,11 +644,13 @@ function ReaderViewContent({
                                     ? renderLeftSidebar && isNavVisible
                                         ? '@2xl/app-reader:rounded-l'
                                         : 'border-l-0'
-                                    : 'border-t-0 border-l-0'
+                                    : `border-t-0 ${renderLeftSidebar && isNavVisible ? '' : 'border-l-0'}`
                             }
                             ${
                                 showSidebar && isTocVisible
-                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                    ? websiteMode
+                                        ? ''
+                                        : 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
                                     : 'border-r-0'
                             } ${
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
@@ -859,7 +859,7 @@ function ReaderViewContent({
                             <motion.div
                                 id="toc"
                                 className={`${
-                                    websiteMode ? 'sticky top-16 self-start' : 'overflow-hidden'
+                                    websiteMode ? 'sticky top-[49px] self-start pt-2' : 'overflow-hidden'
                                 } @4xl/app-reader:block flex-shrink-0`}
                                 initial={{ width: 250 }}
                                 animate={{
@@ -898,7 +898,10 @@ function ReaderViewContent({
                 </div>
 
                 {/* Third row - Footer */}
-                <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 rounded-b">
+                <div
+                    data-scheme="secondary"
+                    className={`bg-primary flex w-full flex-shrink-0 rounded-b ${websiteMode ? 'gap-2y' : 'gap-px'}`}
+                >
                     <motion.div
                         className={`flex-shrink-0 transition-all min-w-0 ${
                             renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
@@ -907,7 +910,11 @@ function ReaderViewContent({
                         {/* this space intentionally left blank */}
                     </motion.div>
                     {!compact && (
-                        <div className="flex-grow flex justify-between items-center text-primary">
+                        <div
+                            className={`flex-grow flex justify-between items-center text-primary p-2 ${
+                                websiteMode && renderLeftSidebar && isNavVisible ? 'border-l border-primary ml-4 ' : ''
+                            }`}
+                        >
                             <div>
                                 <p className="m-0 text-sm">
                                     Questions about this page?{' '}
@@ -915,7 +922,7 @@ function ReaderViewContent({
                                         className="font-semibold underline"
                                         onClick={() =>
                                             openNewChat({
-                                                path: `ask-max-${appWindow?.path}`,
+                                                path: `ask-max${websiteMode ? '' : `-${appWindow?.path}`}`,
                                                 context: [
                                                     {
                                                         type: 'page',
@@ -952,7 +959,7 @@ function ReaderViewContent({
                         </div>
                     )}
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 p-2 ${
                             showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
