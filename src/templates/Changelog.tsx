@@ -686,24 +686,24 @@ const RoadmapCards = ({
                                             </p>
                                         </div>
                                     </div>
-                                    {weekVideo && (
-                                        <div className="p-3 border-b border-primary">
-                                            <button
-                                                onClick={() => handlePlayVideo(weekVideo)}
-                                                className="w-full aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.005] active:scale-[0.995] transition-all duration-100"
-                                            >
-                                                <img
-                                                    src={`https://img.youtube.com/vi/${weekVideo.videoId}/hqdefault.jpg`}
-                                                    alt={weekVideo.title}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                                                    <span className="text-white text-3xl drop-shadow-lg">▶</span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    )}
                                     <ScrollArea className="flex-1 min-h-0">
+                                        {weekVideo && (
+                                            <div className="p-2 border-b border-primary">
+                                                <button
+                                                    onClick={() => handlePlayVideo(weekVideo)}
+                                                    className="w-full aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.005] active:scale-[0.995] transition-all duration-100"
+                                                >
+                                                    <img
+                                                        src={`https://img.youtube.com/vi/${weekVideo.videoId}/hqdefault.jpg`}
+                                                        alt={weekVideo.title}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                                        <span className="text-white text-3xl drop-shadow-lg">▶</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        )}
                                         <ul className="p-0 m-0 list-none">
                                             {weekData.roadmaps.length === 0 ? (
                                                 <li className="p-4 text-center text-sm text-secondary opacity-70">
