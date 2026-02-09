@@ -87,7 +87,7 @@ As a rule we don't commit to reporting sign-up performance to startup partners, 
 ### Other ecosystem partners
 Co-marketing goes both ways! PostHog’s startup program is promoted through partner channels like [Stripe Atlas perks](https://support.stripe.com/questions/stripe-atlas-perks-partners) and the [Fin Startup Pack](https://fin.ai/startup-pack).
 
-We maintain a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TWgioHlReyMj9otbQRkx8rSQYUO8yJqpv0pwM/edit?usp=sharing">#spreadsheet</PrivateLink> with most of our current partnerships. This also includes partnerships with VCs and PE firms. For the most part these we do no co-marketing with these partners, though this may change. This spreadsheet doesn't list all VC partnerships via [GetProven](https://www.getproven.com/home), as these are best tracked directly through that tool. 
+We maintain a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TWgioHlReyMj9otbQRkx8rSQYUO8yJqpv0pwM/edit?usp=sharing">spreadsheet</PrivateLink> with most of our current partnerships. This also includes partnerships with VCs and PE firms. For the most part we do no co-marketing with these partners, though this may change. This spreadsheet doesn't list all VC partnerships via [GetProven](https://www.getproven.com/home), as these are best tracked directly through that tool. 
 
 ## Co-sponsored events
 [Events](/handbook/marketing/events) are a great place to co-market and vary from intimate gatherings to large scale meetups. These are higher effort and don’t usually sit under product marketing alone. Tag [Daniel](/community/profiles/34023) early – he’s the best judge of what events and co-sponsorships will actually land.
