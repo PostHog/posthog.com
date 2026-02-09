@@ -81,6 +81,7 @@ export default function EventsMap({
     const layersRef = useRef<string[] | undefined>(layers)
     const prevSelectedIdRef = useRef<number | null>(null)
     const skipNextSelectionTransitionRef = useRef<boolean>(false)
+    const handleExternalSelectionRef = useRef<(() => void) | null>(null)
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -370,6 +371,10 @@ export default function EventsMap({
         mapRef.current.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right')
         mapRef.current.on('load', () => {
             renderMarkers()
+            // Fly to initially-selected event if one exists
+            if (handleExternalSelectionRef.current) {
+                handleExternalSelectionRef.current()
+            }
         })
         mapRef.current.on('zoomend', () => {
             renderMarkers()
@@ -507,10 +512,15 @@ export default function EventsMap({
         }
     }, [selectedEventId])
 
-    // Focus a marker when an event is selected externally
+    // Keep ref updated so map can call it on load
+    useEffect(() => {
+        handleExternalSelectionRef.current = handleExternalSelection
+    }, [handleExternalSelection])
+
+    // Focus a marker when an event is selected externally or when coords load
     useEffect(() => {
         handleExternalSelection()
-    }, [handleExternalSelection])
+    }, [handleExternalSelection, coordsByEventId])
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative">

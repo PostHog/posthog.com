@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import EventForm from 'components/EventForm'
 import { useUser } from 'hooks/useUser'
 import qs from 'qs'
-import { IconPencil, IconTrash } from '@posthog/icons'
+import { IconPencil, IconShare, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
 
@@ -180,6 +180,7 @@ const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: 
 
 function Events() {
     const { isModerator } = useUser()
+    const { addToast } = useToast()
     const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
@@ -187,6 +188,7 @@ function Events() {
     const [editingEvent, setEditingEvent] = useState<boolean>(false)
     const [pendingSelectedId, setPendingSelectedId] = useState<number | null>(null)
     const [isInitialized, setIsInitialized] = useState(false)
+    const [showMobileMap, setShowMobileMap] = useState(false)
 
     // Generate unique event key
     const getEventKey = (event: Event) => {
@@ -212,6 +214,43 @@ function Events() {
 
         if (updateHash) {
             window.history.replaceState(null, '', `#eventId=${event.id}`)
+        }
+    }
+
+    const getShareUrl = (eventId: number) => {
+        if (typeof window === 'undefined') return ''
+        return `${window.location.origin}/events?eventId=${eventId}`
+    }
+
+    const handleShareEvent = async (event: Event) => {
+        const shareUrl = getShareUrl(event.id)
+        if (!shareUrl) return
+        if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+            try {
+                await navigator.share({
+                    title: event.name,
+                    text: event.description || event.location.label,
+                    url: shareUrl,
+                })
+                return
+            } catch {
+                // User cancelled or share failed; fall back below if possible
+            }
+        }
+        if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+            try {
+                await navigator.clipboard.writeText(shareUrl)
+                addToast({
+                    title: 'Link copied',
+                    description: 'Event link copied to clipboard.',
+                })
+            } catch {
+                addToast({
+                    title: 'Share failed',
+                    description: 'Unable to copy the event link.',
+                    error: true,
+                })
+            }
         }
     }
     const handleMapEventClick = (eventOrId: number) => {
@@ -261,15 +300,17 @@ function Events() {
         }
     }, [eventsData, pendingSelectedId])
 
-    // Initialize from URL hash on page load
+    // Initialize from URL hash on page load, or select nearest upcoming event
     useEffect(() => {
         if (!isInitialized && eventsData.length > 0) {
+            const params = new URLSearchParams(window.location.search)
+            const queryEventId = params.get('eventId')
             const hash = window.location.hash
             const match = hash.match(/#eventId=(\d+)/)
+            const matchedId = queryEventId ? parseInt(queryEventId, 10) : match ? parseInt(match[1], 10) : null
 
-            if (match) {
-                const eventId = parseInt(match[1], 10)
-                const event = eventsData.find((e) => e.id === eventId)
+            if (matchedId) {
+                const event = eventsData.find((e) => e.id === matchedId)
 
                 if (event) {
                     // Determine if event is past or upcoming and switch tab
@@ -280,11 +321,14 @@ function Events() {
                     // Select event without updating hash (since we're reading from it)
                     handleEventClick(event, false)
                 }
+            } else if (upcomingEvents.length > 0) {
+                // Auto-select the nearest upcoming event (first in the sorted list)
+                handleEventClick(upcomingEvents[0], false)
             }
 
             setIsInitialized(true)
         }
-    }, [eventsData, isInitialized])
+    }, [eventsData, isInitialized, upcomingEvents])
 
     return (
         <>
@@ -302,9 +346,380 @@ function Events() {
                 viewportClasses="[&>div>div]:h-full"
             >
                 <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+                    {/* Mobile horizontal ribbon - visible only on small screens */}
+                    <div className="@xl:hidden flex flex-col h-full">
+                        <div className="border-b border-primary px-3 pt-3 pb-3 flex items-center gap-2">
+                            <ToggleGroup
+                                title=""
+                                hideTitle
+                                options={[
+                                    { label: `Upcoming (${upcomingEvents.length})`, value: 'upcoming' },
+                                    { label: `Past (${pastEvents.length})`, value: 'past' },
+                                ]}
+                                onValueChange={(value) => setActiveTab(value as 'past' | 'upcoming')}
+                                value={activeTab}
+                            />
+                            <div className="flex-1" />
+                            <OSButton
+                                size="lg"
+                                variant={showMobileMap ? 'primary' : 'secondary'}
+                                onClick={() => {
+                                    setShowMobileMap(!showMobileMap)
+                                    if (!showMobileMap) {
+                                        setSelectedEvent(null)
+                                    }
+                                }}
+                            >
+                                📍 Map
+                            </OSButton>
+                            {isModerator && (
+                                <OSButton
+                                    variant="primary"
+                                    size="sm"
+                                    onClick={() => {
+                                        setCreatingEvent(true)
+                                        setSelectedEvent(null)
+                                        setEditingEvent(false)
+                                        setShowMobileMap(false)
+                                    }}
+                                >
+                                    + Add
+                                </OSButton>
+                            )}
+                        </div>
+
+                        {/* Horizontal scrolling ribbon - sized to show ~2.5 events */}
+                        {!showMobileMap && (
+                            <div className="border-b border-primary overflow-x-auto">
+                                <div className="flex gap-3 p-3 min-w-max">
+                                    {displayEvents.map((event) => (
+                                        <button
+                                            key={getEventKey(event)}
+                                            onClick={() => handleEventClick(event)}
+                                            className={`flex items-center gap-3 p-2 rounded-md border bg-primary shrink-0 text-left transition-all hover:border-orange/50 w-[200px] overflow-hidden ${
+                                                selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
+                                                    ? 'border-orange ring-2 ring-orange/30'
+                                                    : 'border-primary'
+                                            }`}
+                                        >
+                                            {event.photos && event.photos.length > 0 && event.photos[0] ? (
+                                                <img
+                                                    src={event.photos[0].url}
+                                                    alt=""
+                                                    className="w-20 h-20 object-cover rounded shrink-0"
+                                                />
+                                            ) : (
+                                                <div className="w-20 h-20 bg-accent rounded shrink-0 flex items-center justify-center text-secondary text-2xl">
+                                                    📍
+                                                </div>
+                                            )}
+                                            <div className="min-w-0 flex-1 overflow-hidden">
+                                                <div className="text-xs text-secondary whitespace-nowrap font-medium truncate">
+                                                    {new Date(event.date).toLocaleDateString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                    })}
+                                                </div>
+                                                <div className="text-sm font-semibold text-primary line-clamp-2 mt-0.5">
+                                                    {event.location.label.split(',')[0]}
+                                                </div>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Mobile content area - keeps map mounted so it can animate in the background */}
+                        <div className="flex-1 relative overflow-hidden">
+                            <div
+                                className={`absolute inset-0 transition-opacity duration-300 ${
+                                    showMobileMap || (!selectedEvent && !(editingEvent || creatingEvent))
+                                        ? 'opacity-100'
+                                        : 'opacity-0 pointer-events-none'
+                                }`}
+                                aria-hidden={!(showMobileMap || (!selectedEvent && !(editingEvent || creatingEvent)))}
+                            >
+                                <EventsMap
+                                    layers={activeTab === 'upcoming' ? [LAYER_EVENTS_UPCOMING] : [LAYER_EVENTS_PAST]}
+                                    onEventClick={(eventId) => {
+                                        handleMapEventClick(eventId)
+                                        setShowMobileMap(false)
+                                    }}
+                                    selectedEventId={selectedEvent?.id || null}
+                                />
+                            </div>
+
+                            {(editingEvent || creatingEvent) && isModerator ? (
+                                <div className="absolute inset-0 h-full overflow-auto p-4 bg-primary">
+                                    <div className="flex justify-end mb-2">
+                                        <button
+                                            onClick={() => {
+                                                setCreatingEvent(false)
+                                                setEditingEvent(false)
+                                                handleCloseEvent()
+                                            }}
+                                            className="w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary text-xl"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                    <EventForm
+                                        event={editingEvent && selectedEvent ? selectedEvent : undefined}
+                                        onSuccess={() => {
+                                            if (editingEvent) {
+                                                setEditingEvent(false)
+                                            } else {
+                                                setCreatingEvent(false)
+                                            }
+                                            refreshEvents()
+                                        }}
+                                    />
+                                </div>
+                            ) : selectedEvent ? (
+                                <ScrollArea className="absolute inset-0 h-full bg-primary">
+                                    <div className="p-4">
+                                        <div className="flex justify-between items-start mb-3">
+                                            <div className="flex-1">
+                                                <h2 className="text-lg font-bold mb-1">{selectedEvent.name}</h2>
+                                                <div className="text-sm text-secondary">
+                                                    {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={handleCloseEvent}
+                                                className="w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary text-xl shrink-0"
+                                            >
+                                                ✕
+                                            </button>
+                                        </div>
+
+                                        <div className="space-y-3 text-sm">
+                                            {selectedEvent.private && (
+                                                <div
+                                                    data-scheme="secondary"
+                                                    className="border border-primary bg-primary rounded p-2"
+                                                >
+                                                    <div className="text-secondary text-[13px]">
+                                                        This event is closed to the public
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.startTime && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Start time</div>
+                                                    <div>
+                                                        {dayjs(
+                                                            `${selectedEvent.date} ${selectedEvent.startTime}`
+                                                        ).format('h:mm A')}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div>
+                                                <div className="text-secondary text-[13px] mb-1">Location</div>
+                                                {selectedEvent.location.venue && (
+                                                    <div className="text-primary font-semibold mt-1">
+                                                        {selectedEvent.location.venue.name}
+                                                    </div>
+                                                )}
+                                                <div>{selectedEvent.location.label}</div>
+                                            </div>
+
+                                            {selectedEvent.description && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Description</div>
+                                                    <div className="text-sm leading-relaxed">
+                                                        {selectedEvent.description}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">
+                                                        Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedEvent.speakers.map((speaker, i) => (
+                                                            <TeamMember key={i} name={speaker} photo />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.speakerTopic && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
+                                                    <div>{selectedEvent.speakerTopic}</div>
+                                                    {selectedEvent.presentation && (
+                                                        <a
+                                                            href={selectedEvent.presentation}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="block mt-1 font-semibold underline"
+                                                        >
+                                                            View slide deck
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.format && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Format</div>
+                                                    <div>{selectedEvent.format.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.audience && selectedEvent.audience.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Audience</div>
+                                                    <div>{selectedEvent.audience.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.partners && selectedEvent.partners.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Partners</div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedEvent.partners.map((partner, i) =>
+                                                            partner.url ? (
+                                                                <a
+                                                                    key={i}
+                                                                    href={partner.url}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-orange hover:underline"
+                                                                >
+                                                                    {partner.name}
+                                                                </a>
+                                                            ) : (
+                                                                <span key={i}>{partner.name}</span>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.attendees && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Attendees</div>
+                                                    <div>{selectedEvent.attendees} people</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.vibeScore && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Vibe Score</div>
+                                                    <div className="flex gap-1">
+                                                        {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
+                                                            <span key={i} className="text-lg">
+                                                                🔥
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.photos && selectedEvent.photos.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Photos</div>
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        {selectedEvent.photos.map((photo, i) => (
+                                                            <ZoomImage key={i}>
+                                                                <img
+                                                                    src={photo.url}
+                                                                    alt={`Event photo ${i + 1}`}
+                                                                    className="w-full h-32 object-cover rounded"
+                                                                />
+                                                            </ZoomImage>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.video && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Video</div>
+                                                    <a
+                                                        href={selectedEvent.video}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-orange hover:underline text-sm"
+                                                    >
+                                                        Watch video →
+                                                    </a>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.link && (
+                                                <div className="flex gap-2">
+                                                    <div className="flex-[3]">
+                                                        <OSButton
+                                                            asLink
+                                                            to={selectedEvent.link}
+                                                            variant={
+                                                                new Date(selectedEvent.date) >=
+                                                                new Date(new Date().toISOString().split('T')[0])
+                                                                    ? 'primary'
+                                                                    : 'secondary'
+                                                            }
+                                                            width="full"
+                                                            size="md"
+                                                            external
+                                                        >
+                                                            View details
+                                                        </OSButton>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <OSButton
+                                                            onClick={() => handleShareEvent(selectedEvent)}
+                                                            variant="secondary"
+                                                            width="full"
+                                                            size="md"
+                                                            icon={<IconShare />}
+                                                            tooltip="Share this event"
+                                                        >
+                                                            Share
+                                                        </OSButton>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {isModerator && (
+                                                <div className="mt-2 flex justify-end gap-1">
+                                                    <OSButton
+                                                        size="md"
+                                                        tooltip="Edit this event"
+                                                        icon={<IconPencil />}
+                                                        onClick={() => {
+                                                            setEditingEvent(true)
+                                                        }}
+                                                    />
+                                                    <OSButton
+                                                        size="md"
+                                                        tooltip="Delete this event"
+                                                        icon={<IconTrash />}
+                                                        onClick={() => {
+                                                            deleteEvent(selectedEvent.id)
+                                                            handleCloseEvent()
+                                                        }}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </ScrollArea>
+                            ) : null}
+                        </div>
+                    </div>
+
+                    {/* Desktop sidebar - hidden on small screens */}
                     <aside
                         data-scheme="secondary"
-                        className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
+                        className="hidden @xl:flex basis-80 bg-primary border-r border-primary h-full flex-col"
                     >
                         <div className="border-b border-primary px-4 pt-4 pb-4">
                             <ToggleGroup
@@ -320,7 +735,7 @@ function Events() {
                         </div>
 
                         <ScrollArea className="flex-1">
-                            <div className="p-4 h-96 @xl:h-full">
+                            <div className="p-4 h-full">
                                 <div className="space-y-3">
                                     {isModerator && (
                                         <OSButton
@@ -392,7 +807,8 @@ function Events() {
                         </ScrollArea>
                     </aside>
 
-                    <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
+                    {/* Desktop main content area - hidden on small screens */}
+                    <div className="hidden @xl:block flex-1 relative h-full border-primary">
                         <AnimatePresence>
                             {(editingEvent || creatingEvent) && isModerator ? (
                                 <EventCard
@@ -594,22 +1010,36 @@ function Events() {
                                                 )}
 
                                                 {selectedEvent.link && (
-                                                    <div>
-                                                        <OSButton
-                                                            asLink
-                                                            to={selectedEvent.link}
-                                                            variant={
-                                                                new Date(selectedEvent.date) >=
-                                                                new Date(new Date().toISOString().split('T')[0])
-                                                                    ? 'primary'
-                                                                    : 'secondary'
-                                                            }
-                                                            width="full"
-                                                            size="md"
-                                                            external
-                                                        >
-                                                            View details
-                                                        </OSButton>
+                                                    <div className="flex gap-2">
+                                                        <div className="flex-[3]">
+                                                            <OSButton
+                                                                asLink
+                                                                to={selectedEvent.link}
+                                                                variant={
+                                                                    new Date(selectedEvent.date) >=
+                                                                    new Date(new Date().toISOString().split('T')[0])
+                                                                        ? 'primary'
+                                                                        : 'secondary'
+                                                                }
+                                                                width="full"
+                                                                size="md"
+                                                                external
+                                                            >
+                                                                View details
+                                                            </OSButton>
+                                                        </div>
+                                                        <div className="flex-1">
+                                                            <OSButton
+                                                                onClick={() => handleShareEvent(selectedEvent)}
+                                                                variant="secondary"
+                                                                width="full"
+                                                                size="md"
+                                                                icon={<IconShare />}
+                                                                tooltip="Share this event"
+                                                            >
+                                                                Share
+                                                            </OSButton>
+                                                        </div>
                                                     </div>
                                                 )}
                                                 {isModerator && (
