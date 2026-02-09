@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { IconChevronDown, IconX } from '@posthog/icons'
 import { useApp } from '../../context/App'
@@ -8,6 +8,7 @@ import { Popover } from 'components/RadixUI/Popover'
 import Link from 'components/Link'
 import { MenuItemType } from 'components/RadixUI/MenuBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { motion, useDragControls } from 'framer-motion'
 
 const MenuItems = ({ items }: { items: MenuItemType[] }) => {
     const itemClassName =
@@ -68,6 +69,9 @@ const FloatingModal = ({ children }: { children: React.ReactNode }): JSX.Element
     const { closeWindow } = useApp()
     const title = appWindow?.meta?.title
     const hasMenuItems = pageOptions && pageOptions.length > 0
+    const dragControls = useDragControls()
+    const constraintsRef = useRef<HTMLDivElement>(null)
+    const [hasDragged, setHasDragged] = useState(false)
 
     useEffect(() => {
         if (!open && appWindow) {
@@ -78,44 +82,73 @@ const FloatingModal = ({ children }: { children: React.ReactNode }): JSX.Element
     return (
         <RadixDialog.Root open={open} onOpenChange={setOpen} modal={false}>
             <RadixDialog.Portal>
+                <div ref={constraintsRef} className="fixed inset-0 pointer-events-none z-[9998]" aria-hidden="true" />
                 <RadixDialog.Content
                     aria-label="Floating window"
-                    className="data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed bottom-0 right-6 z-[9999] w-[380px] h-[500px]"
+                    className="data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed z-[9999] w-[380px] h-[500px]"
                     onInteractOutside={(e) => e.preventDefault()}
+                    asChild
                 >
-                    <div
-                        data-scheme="primary"
-                        className="bg-primary text-primary rounded rounded-br-none rounded-bl-none shadow-2xl overflow-hidden size-full flex flex-col"
+                    <motion.div
+                        drag
+                        dragControls={dragControls}
+                        dragListener={false}
+                        dragMomentum={false}
+                        dragConstraints={constraintsRef}
+                        onDrag={() => setHasDragged(true)}
+                        initial={{ bottom: 0, right: 24 }}
+                        style={{ position: 'fixed', bottom: 0, right: 24 }}
                     >
-                        <div className="rounded border border-primary overflow-hidden size-full">
-                            <div className="bg-accent flex items-center justify-between p-1 border-b border-primary">
-                                {hasMenuItems ? (
-                                    <Popover
-                                        dataScheme="primary"
-                                        side="top"
-                                        trigger={
-                                            <button className="flex items-center gap-1 text-primary text-left text-sm font-semibold ml-2 hover:opacity-75 transition-opacity">
-                                                {title}
-                                                <IconChevronDown className="size-4" />
-                                            </button>
-                                        }
-                                    >
-                                        <ScrollArea className="h-full">
-                                            <div className="flex flex-col min-w-[200px] max-h-[300px]">
-                                                <MenuItems items={pageOptions} />
-                                            </div>
-                                        </ScrollArea>
-                                    </Popover>
-                                ) : (
-                                    <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
-                                )}
-                                <RadixDialog.Close asChild>
-                                    <OSButton icon={<IconX />} size="md" />
-                                </RadixDialog.Close>
+                        <div
+                            data-scheme="primary"
+                            className="bg-primary text-primary shadow-2xl overflow-hidden size-full flex flex-col"
+                        >
+                            <div
+                                className={`rounded border border-primary overflow-hidden size-full ${
+                                    hasDragged ? '' : 'rounded-br-none rounded-bl-none'
+                                }`}
+                            >
+                                <div
+                                    className="bg-accent flex items-center justify-between p-1 border-b border-primary cursor-grab active:cursor-grabbing"
+                                    onPointerDown={(e) => dragControls.start(e)}
+                                >
+                                    {hasMenuItems ? (
+                                        <Popover
+                                            dataScheme="primary"
+                                            side="top"
+                                            trigger={
+                                                <button
+                                                    className="flex items-center gap-1 text-primary text-left text-sm font-semibold ml-2 hover:opacity-75 transition-opacity"
+                                                    onPointerDown={(e) => e.stopPropagation()}
+                                                >
+                                                    {title}
+                                                    <IconChevronDown className="size-4" />
+                                                </button>
+                                            }
+                                        >
+                                            <ScrollArea className="h-full">
+                                                <div className="flex flex-col min-w-[200px] max-h-[300px]">
+                                                    <MenuItems items={pageOptions} />
+                                                </div>
+                                            </ScrollArea>
+                                        </Popover>
+                                    ) : (
+                                        <p className="text-primary text-left text-sm font-semibold ml-2 my-0">
+                                            {title}
+                                        </p>
+                                    )}
+                                    <RadixDialog.Close asChild>
+                                        <OSButton
+                                            icon={<IconX />}
+                                            size="md"
+                                            onPointerDown={(e: React.PointerEvent) => e.stopPropagation()}
+                                        />
+                                    </RadixDialog.Close>
+                                </div>
+                                <div className="overflow-hidden size-full">{children}</div>
                             </div>
-                            <div className="overflow-hidden size-full">{children}</div>
                         </div>
-                    </div>
+                    </motion.div>
                 </RadixDialog.Content>
             </RadixDialog.Portal>
         </RadixDialog.Root>
