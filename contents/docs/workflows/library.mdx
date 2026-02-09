@@ -78,6 +78,13 @@ You can type Liquid syntax directly into your email template. We also provide a 
     alt="viewing-as-desktop"
 />
 
+In addition to person properties, the following system merge tags are available:
+
+| Merge tag | Description |
+|-----------|-------------|
+| `{{unsubscribe_url}}` | URL to the email preferences page where recipients can manage their subscription settings |
+| `{{unsubscribe_url_one_click}}` | One-click unsubscribe URL that immediately opts the recipient out of all marketing emails. This URL is also automatically added to email headers for RFC 8058 compliance, enabling "Unsubscribe" buttons in email clients like Gmail |
+
 If you type Liquid syntax directly and the Liquid doesn't compile correctly, the email won't be sent. Always verify your Liquid syntax is valid before starting a workflow.
 
 ### Testing templates
