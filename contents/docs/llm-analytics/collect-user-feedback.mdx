@@ -1,5 +1,5 @@
 ---
-title: Collect user feedback
+title: Collecting user feedback
 ---
 
 import CalloutBox from 'components/Docs/CalloutBox'
@@ -13,17 +13,17 @@ User feedback is currently in beta. We'd love to hear your feedback as we develo
 
 </CalloutBox>
 
-To collect user feedback for LLM traces, PostHog provides a native integration with [Surveys](/docs/surveys) that enables you to attach user feedback, including thumbs up/down responses, directly to a given trace.
+To collect user feedback for LLM traces, PostHog provides a native integration with [Surveys](/docs/surveys). The Surveys integration enables you to collect user feedback and thumbs up/down responses attached directly to a given trace.
 
 ## How it works
 
-1. Create a survey for a group of LLM traces.
-2. Send survey response events with an `$ai_trace_id` property.
+1. Start by creating a survey for a group of LLM traces.
+2. In your app, collect survey responses with an `$ai_trace_id` property attached to the events.
 3. View user feedback per-trace within LLM Analytics, or view all feedback within [Surveys](https://app.posthog.com/surveys).
 
-For the common thumbs up/down use-case, we provide a React hook `useThumbSurvey` to quickly attach a thumb survey and optionall followup questions to your existing UI. In other cases, you can manually send survey-related events to attach them to your trace.
+For the common thumbs up/down use-case, we provide a React hook `useThumbSurvey` to quickly attach a thumb survey and optional followup questions to your existing UI. In other cases, you can manually send survey-related events to attach them to your trace.
 
-## Create a survey
+## Creating a survey
 
 On any top-level [trace](/llm-analytics/traces) (or pseudo-trace) event, navigate to the **Feedback** tab to create a survey.
 
@@ -41,190 +41,15 @@ The survey will begin with a thumbs up/down question. Toggle on **Ask follow-up 
     alt="LLM trace survey creation"
 />
 
-For more customization you can edit this survey post-creation, or create a new survey, within [Surveys](https://app.posthog.com/surveys). However, note that complex surveys may not work with our `useThumbSurveys` hook, requiring manual event capture.
+For more customization you can edit this survey post-creation, or create a [new survey](https://app.posthog.com/surveys). However, complex surveys may not work with our `useThumbSurveys` hook and require manual event capture.
 
-## Integrate with `useThumbSurvey`
+Click **Create & continue** to create your survey and view implementation instructions.
 
-To quickly integrate with your React app, we provide a hook `useThumbSurvey` that exposes a method to submit survey responses, the user's response, and a ref to position followup question pop-ups.
+## Integrating with your app
 
-Initialize the hook with the following options:
+For the quickest setup in React apps, [use the `useThumbSurvey` hook to wire up your survey](/docs/llm-analytics/user-feedback/use-thumb-survey).
 
-```typescript
-export interface UseThumbSurveyOptions {
-    /** ID of the target PostHog survey */
-    surveyId: string
-    /** Configure the position of the pop-up for followup questions, if applicable. Defaults to SurveyPosition.NextToTrigger */
-    displayPosition?: SurveyPosition
-    /** Custom event properties to pass with each survey result */
-    properties?: Record<string, any>
-    /** Callback on thumb button click */
-    onResponse?: (response: 'up' | 'down') => void
-    /** Disable automatically emitting `survey shown` on hook mount. Defaults to false. */
-    disableAutoShownTracking?: boolean
-}
-```
-
-It returns the following interface:
-
-```typescript
-export interface UseThumbSurveyResult {
-    /** Call this to submit a survey response, with value 'up' or 'down' */
-    respond: (value: 'up' | 'down') => void
-    /** User's response value, available after submission. Not persisted across mounts. */
-    response: 'up' | 'down' | null
-    /** Ref to attach to the trigger element for positioning the followup survey popup */
-    triggerRef: RefCallback<HTMLElement>
-    /** Method to manually trigger a `survey shown` event. Only available when disableAutoShownTracking is true. */
-    trackShown?: () => void
-}
-```
-
-A simple usage of this hook, including a followup question pop-up, looks like this:
-
-```typescript
-// requires @posthog/react X.XX.X+ (bundled with posthog-js 1.XXX.X+)
-import { useThumbSurvey } from 'posthog-js/react/surveys'
-
-function HedgehogBotResponse({ traceId }: { traceId: string }) {
-  const { respond, response, triggerRef } = useThumbSurvey({
-    surveyId: '019bb5a3-1677-0000-63dd-00f241c1710a', // ID for the survey you just created
-    properties: {
-      $ai_trace_id: traceId, // your generated trace ID
-      // add any other custom properties here to be attached to `survey sent` and `survey shown` events
-    },
-  })
-
-  return (
-    <div>
-      <ChatBubble>You're absolutely right! I should have been using PostHog all along.</ChatBubble>
-
-      {/* PostHog followup pop-up anchors to triggerRef. If not provided, defaults to showing on the center of the page. */}
-      <div ref={triggerRef}>
-        <p>Was this response helpful?</p>
-        <button onClick={() => respond('up')} >
-          <ThumbsUpIcon className={response === 'up' ? 'active' : ''} />
-        </button>
-        <button onClick={() => respond('down')} >
-          <ThumbsDownIcon className={response === 'down' ? 'active' : ''} />
-        </button>
-      </div>
-
-    </div>
-  )
-}
-```
-
-### Impression tracking
-
-By default, the hook emits a `survey shown` (impression) event on mount.
-
-Duplicate impression events will not impact your ability to see responses within LLM Analytics, but may skew metrics viewed directly from Surveys. 
-
-To disable this behavior, initialize the hook with `disableAutoShownTracking: true` and manually call `trackShown()` when you consider your survey to be "shown."
-
-### Response persistence
-
-The hook's `response` value is **not** persisted across mounts. We plan to improve this soon, but in the meantime, you'll need to set up your own persistent response tracking if needed.
-
-### Question indices
-
-The hook submits survey responses using the legacy index-based tracking for survey questions. If you add or re-order survey questions from the Surveys UI, you may experience unexpected behavior. See [Implementing custom surveys](/docs/surveys/implementing-custom-surveys) for more information.
-
-### Survey compatibility
-
-To use this hook, your survey **must** begin with a thumbs up/down question. All other surveys features are supported, such as followup questions and question branching.
-
-
-> For more information, see the [hook source here on GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/react/src/hooks/useThumbSurvey.ts), or a [real implementation in the PostHog codebase here](https://github.com/PostHog/posthog/blob/59359b4d13351931d809a64725d0b2147f23c6eb/frontend/src/scenes/surveys/components/question-visualizations/OpenQuestionSummaryV2.tsx#L112).
-
-## Manual feedback event capture
-
-If you are not building a React app or otherwise need more control (such as a completely custom followup UI), you can capture user feedback events manually.
-
-In summary, you'll emit these events with `$ai_trace_id` properties:
-
-1. Emit a `survey shown` event when a user sees your survey
-2. Emit a `survey sent` event each time a user answers a question
-
-### Step 1: Track impressions
-
-While not required, we recommend emitting `survey shown` events when a user sees your survey. This enables two things:
-
-1. Accuracy when viewing all metrics in Surveys
-2. Heads-up messages within LLM traces that indicate a user saw a survey, but did not respond
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_04_at_5_01_07_PM_7052cdd115.png" 
-    classes="rounded"
-    alt="LLM trace survey impression with no response"
-/>
-
-`survey shown` events must have the following properties:
-
-| Property | Description |
-| --- | --- |
-| `$survey_id` | Your survey ID |
-| `$ai_trace_id` | Your generated trace ID |
-
-> **Note:** we do not yet support an easy way to check whether a user has responded to a given survey/trace combination. Because of this, without your own persistent tracking, you may end up with duplicate `survey shown` events.
-> 
-> Duplicate events will not impact your ability to view responses per trace, but will skew impression & response rate metrics on your Survey overview.
-
-### Step 2: Collect responses
-
-You'll send one `survey sent` event per survey question, with a unique submission ID that groups events into one "response." PostHog aggregates these events based on the submission ID in order to display each complete response.
-
-`survey sent` events may have the following properties (`*` = required):
-
-| Property | Description |
-| --- | --- |
-| `$survey_id` * | Your survey ID |
-| `$survey_response_{questionId}` * | The current question's response value, where `id` is the current question's ID |
-| `$ai_trace_id` * | ID for the trace corresponding to this survey |
-| `$survey_submission_id` | A unique ID you generate to aggregate responses for multi-question surveys |
-| `$survey_completed` | boolean, whether this survey is complete (useful for multi-question surveys) |
-
-To get survey question IDs, you have two options:
-1. Go to [Surveys](https://app.posthog.com/surveys), find your survey, and check the **Overview** tab. This will show the full survey object, including each question's ID.
-2. Call the PostHog SDK's `getSurveys` method to retrieve your survey, then extract the question IDs from the response.
-
-To learn more about the properties available for survey events, or how to use the `getSurveys` method, see [Implementing custom surveys](/docs/surveys/implementing-custom-surveys).
-
-### Example
-
-An example sequence for a thumbs up/down survey with a followup may look like this:
-
-```typescript
-const traceId = 'your-generated-trace-id'
-const surveyId = 'your-survey-id'
-
-// (Optional) Track when the survey is shown to the user
-posthog.capture('survey shown', {
-  $survey_id: surveyId,
-  $ai_trace_id: traceId,
-})
-
-// Generate a unique ID to link `survey sent` events into a single user feedback event
-const submissionId = crypto.randomUUID()
-
-// User clicked "thumbs down"
-posthog.capture('survey sent', {
-  $survey_id: surveyId,
-  [`$survey_response_${firstQuestionId}`]: 1, // 1 = thumbs up, 2 = thumbs down
-  $ai_trace_id: traceId,
-  $survey_submission_id: submissionId,
-  $survey_completed: false,
-})
-
-// User submitted follow-up text after the "thumbs down" response
-posthog.capture('survey sent', {
-  $survey_id: surveyId,
-  [`$survey_response_${secondQuestionId}`]: 'the AI hallucinated hedgehogs everywhere',
-  $ai_trace_id: traceId,
-  $survey_submission_id: submissionId, // must match the previous event's $survey_submission_id
-  $survey_completed: true,
-})
-```
+If you need more flexibility, or are not building a React app, see [manual feedback event capture](/docs/llm-analytics/user-feedback/manual-event-capture).
 
 ## Viewing survey responses
 
