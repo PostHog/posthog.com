@@ -59,7 +59,7 @@ Beyond optimization, we offer discounts based on four levers:
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 
-**If timelines change:** We handle extensions on a case-by-case basis. The goal of this lever is predictability for both sides, not artificial pressure. If circumstances genuinely change, we'll discuss it when it arises - but we also want to maintain the integrity of mutual commitments so this discount remains meaningful.
+**If timelines change:** We will handle these on a case by case basis, but we are prepared to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
 > You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
 
