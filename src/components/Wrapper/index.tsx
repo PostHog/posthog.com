@@ -34,6 +34,7 @@ export default function Wrapper() {
             className={`${
                 websiteMode ? 'max-w-7xl mx-auto border-x border-primary' : 'fixed inset-0 size-full'
             } flex flex-col`}
+            id="app-container"
         >
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative`}>

@@ -149,10 +149,11 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
 // Components
 const MenuItem: React.FC<{
     portalContainer: HTMLElement | null
+    appContainer: HTMLElement | null
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
-}> = ({ item, forceIconIndent, menuIndex, portalContainer }) => {
+}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
@@ -189,7 +190,12 @@ const MenuItem: React.FC<{
                         </RadixMenubar.SubTrigger>
                     )}
                     <RadixMenubar.Portal container={portalContainer || undefined}>
-                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
+                        <RadixMenubar.SubContent
+                            collisionBoundary={appContainer}
+                            className={ContentClasses}
+                            alignOffset={-5}
+                            data-scheme="primary"
+                        >
                             <ScrollArea className="max-h-screen !overflow-y-auto">
                                 {item.items.map((subItem, subIndex) => (
                                     <MenuItem
@@ -197,6 +203,8 @@ const MenuItem: React.FC<{
                                         item={subItem}
                                         forceIconIndent={anyChildHasIcon}
                                         menuIndex={menuIndex}
+                                        portalContainer={portalContainer}
+                                        appContainer={appContainer}
                                     />
                                 ))}
                             </ScrollArea>
@@ -221,7 +229,12 @@ const MenuItem: React.FC<{
                         </div>
                     </RadixMenubar.SubTrigger>
                     <RadixMenubar.Portal container={portalContainer || undefined}>
-                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
+                        <RadixMenubar.SubContent
+                            collisionBoundary={appContainer}
+                            className={ContentClasses}
+                            alignOffset={-5}
+                            data-scheme="primary"
+                        >
                             {item.items}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
@@ -299,6 +312,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
     const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
     const rootRef = React.useRef<HTMLDivElement | null>(null)
     const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
+    const [appContainer, setAppContainer] = React.useState<HTMLElement | null>(null)
+
+    React.useEffect(() => {
+        if (websiteMode) {
+            setAppContainer(document.getElementById('app-container'))
+        }
+    }, [websiteMode])
 
     React.useEffect(() => {
         if (!rootRef.current) {
@@ -386,6 +406,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                         </RadixMenubar.Trigger>
                         <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
+                                collisionBoundary={appContainer}
                                 className={ContentClasses}
                                 align="start"
                                 sideOffset={5}
@@ -405,6 +426,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                         item={item}
                                         menuIndex={menuIndex}
                                         portalContainer={portalContainer}
+                                        appContainer={appContainer}
                                     />
                                 ))}
                             </RadixMenubar.Content>
