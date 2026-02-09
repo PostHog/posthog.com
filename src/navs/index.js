@@ -5361,6 +5361,13 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Collect user feedback',
+                    url: '/docs/llm-analytics/collect-user-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
+                    featured: true,
+                },
+                {
                     name: 'Resources',
                 },
                 {
