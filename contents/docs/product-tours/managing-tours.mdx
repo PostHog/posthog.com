@@ -12,7 +12,7 @@ import Alpha from './_snippets/alpha.mdx'
 
 Tours won't show until you launch them, regardless of targeting method.
 
-1. Go to your tour in [Product tours](https://us.posthog.com/product-tours)
+1. Go to your tour in [Product tours](https://app.posthog.com/product-tours)
 2. Click **Launch**
 
 ### Auto-launch
@@ -35,9 +35,23 @@ You can edit a running tour. Changes take effect immediately:
 
 ## Archiving tours
 
-Archive a tour when you no longer need it. Archived tours:
+Archive a tour when you no longer need it. You can archive any launched tour, including running tours. Archiving a running tour stops it automatically.
+
+Archived tours:
 
 - Stop showing to users immediately
 - Remain in the archived tab for reference
 - Keep their analytics data
-- Can be restored if needed
+- Can be restored or permanently deleted
+
+## Deleting tours
+
+You can only delete draft or archived tours. Launched tours must be archived first before deletion.
+
+To delete a tour:
+
+1. Go to [Product tours](https://app.posthog.com/product-tours)
+2. Open the tour's menu
+3. Click **Delete**
+
+**Note:** Deletion is permanent and cannot be undone. The tour configuration is permanently removed, but tour interaction events in your analytics data are not affected.
