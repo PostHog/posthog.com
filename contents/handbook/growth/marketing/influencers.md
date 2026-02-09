@@ -4,14 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We sponsor influencers to drive awareness and sign ups to PostHog.
+We work with creators and influencers to make content about PostHog and sponsor placements to drive awareness and sign ups.
+
+We're open to inbound proposals, if you're interested in collaboration with us, you can send emails directly to <TeamMember name="Adlet Smykov" />, we're always open to seeing thoughtful proposals.
 
 Some of the influencers we sponsor include:
 
 - [Theo](https://www.youtube.com/watch?v=6xXSsu0YXWo). He is a great partner for us. His audience is ideal, he is doing YouTube right, and he's a PostHog user.
-
 - [Fireship](https://www.youtube.com/@Fireship)
-
 - [Chris Raroque](https://www.youtube.com/@raroque)
 
 ## Sourcing and evaluating influencers
