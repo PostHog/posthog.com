@@ -223,7 +223,7 @@ You can use tags to accomplish:
 - **Backward compatible**: Flags without evaluation contexts continue to work as before
 - **Prevent bloat**: Reduce unnecessary flag evaluations by only sending relevant flags to each context
 
-<CalloutBox icon="IconWarning" title="Evaluation context tag behaviour" type="action">
+<CalloutBox icon="IconWarning" title="Evaluation context tag behavior" type="action">
 
 - SDKs must send `evaluation_contexts` parameter with matching tags for the flag to evaluate (the legacy `evaluation_environments` parameter is also supported)
 - Flags with no evaluation context tags will evaluate for all requests (default behavior)

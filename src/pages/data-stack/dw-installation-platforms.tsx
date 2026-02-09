@@ -150,6 +150,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Databases',
         },
         {
+            label: 'Redshift',
+            url: '/docs/data-warehouse/sources/redshift',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Amazon_Redshift_Logo_fbd926efbc.svg',
+            category: 'Databases',
+        },
+        {
             label: 'S3',
             url: '/docs/data-warehouse/sources/s3',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/s3_8f86e011ce.svg',

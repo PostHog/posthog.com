@@ -93,6 +93,9 @@ export const LOGOS = {
     python: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg',
     railway: 'https://res.cloudinary.com/dmukukwp6/image/upload/logo_dark_f8e870867f.svg',
     react: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
+    redshift: 'https://res.cloudinary.com/dmukukwp6/image/upload/Amazon_Redshift_Logo_fbd926efbc.svg',
+    reactNative:
+        'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
     reactRouter: 'https://res.cloudinary.com/dmukukwp6/image/upload/rr_logo_light_970950178e.svg',
     redditAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/reddit_logo_f6d4c5cb0b.svg',
     remix: 'https://res.cloudinary.com/dmukukwp6/image/upload/remix_letter_glowing_49183adce2.svg',
