@@ -71,6 +71,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/azure-db',
                 },
                 {
+                    name: 'Redshift',
+                    url: '/docs/cdp/sources/redshift',
+                },
+                {
                     name: 'Snowflake',
                     url: '/docs/cdp/sources/snowflake',
                 },
@@ -4876,6 +4880,10 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                        },
+                        {
+                            name: 'Redshift',
+                            url: '/docs/data-warehouse/sources/redshift',
                         },
                         {
                             name: 'Salesforce',
