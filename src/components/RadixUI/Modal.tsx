@@ -63,9 +63,7 @@ const Modal = ({
                     >
                         <div className="rounded border border-primary overflow-hidden size-full">
                             <div className="bg-accent flex items-center justify-between p-1 border-b border-primary">
-                                {title && (
-                                    <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
-                                )}
+                                <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
                                 {showCloseButton && (
                                     <RadixDialog.Close asChild>
                                         <OSButton icon={<IconX />} size="md" />

@@ -153,7 +153,8 @@ const MenuItem: React.FC<{
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
-}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer }) => {
+    onCloseMenu?: () => void
+}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer, onCloseMenu }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
@@ -178,7 +179,10 @@ const MenuItem: React.FC<{
                             state={{ newWindow: true }}
                             externalNoIcon={item.external}
                             className="no-underline"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                onCloseMenu?.()
+                            }}
                         >
                             <RadixMenubar.SubTrigger className={SubTriggerClasses}>
                                 {MenuItemContent(item, forceIconIndent)}
@@ -205,6 +209,7 @@ const MenuItem: React.FC<{
                                         menuIndex={menuIndex}
                                         portalContainer={portalContainer}
                                         appContainer={appContainer}
+                                        onCloseMenu={onCloseMenu}
                                     />
                                 ))}
                             </ScrollArea>
@@ -255,6 +260,7 @@ const MenuItem: React.FC<{
                     state={{ newWindow: true }}
                     externalNoIcon={item.external}
                     className="w-full min-h-[25px] h-full px-2.5 flex items-center gap-2 no-underline text-primary"
+                    onClick={() => onCloseMenu?.()}
                 >
                     {item.icon ? (
                         item.icon
@@ -345,8 +351,18 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
         })
     }, [menus, isMobile])
 
+    const closeMenu = React.useCallback(() => {
+        setOpenMenuIndex(null)
+    }, [])
+
     return (
-        <RadixMenubar.Root ref={rootRef} data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
+        <RadixMenubar.Root
+            ref={rootRef}
+            data-scheme="tertiary"
+            className={`${RootClasses} ${className || ''}`}
+            value={openMenuIndex !== null ? String(openMenuIndex) : ''}
+            onValueChange={(value) => setOpenMenuIndex(value ? Number(value) : null)}
+        >
             {processedMenus.map((menu, menuIndex) => {
                 // On mobile, if menu has mobileLink, make it a direct link
                 if (isMobile && menu.mobileLink) {
@@ -365,18 +381,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                 }
 
                 return (
-                    <RadixMenubar.Menu
-                        key={menuIndex}
-                        data-scheme="primary"
-                        {...(websiteMode
-                            ? {
-                                  open: openMenuIndex === menuIndex,
-                                  onOpenChange: (open: boolean) => {
-                                      setOpenMenuIndex(open ? menuIndex : null)
-                                  },
-                              }
-                            : {})}
-                    >
+                    <RadixMenubar.Menu key={menuIndex} value={String(menuIndex)} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
                             className={`${triggerAsChild ? '' : TriggerClasses} ${
@@ -412,13 +417,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
-                                onMouseLeave={
-                                    websiteMode
-                                        ? () => {
-                                              setOpenMenuIndex(null)
-                                          }
-                                        : undefined
-                                }
+                                onMouseLeave={websiteMode ? closeMenu : undefined}
                             >
                                 {menu.items.map((item, itemIndex) => (
                                     <MenuItem
@@ -427,6 +426,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                         menuIndex={menuIndex}
                                         portalContainer={portalContainer}
                                         appContainer={appContainer}
+                                        onCloseMenu={closeMenu}
                                     />
                                 ))}
                             </RadixMenubar.Content>

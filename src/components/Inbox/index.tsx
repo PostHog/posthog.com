@@ -543,16 +543,16 @@ export default function Inbox(props) {
                                             ref={bottomContainerRef}
                                             className={`flex-none relative min-h-0 min-w-0 ${
                                                 !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                            } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
+                                            } ${sideBySide && !websiteMode ? '@4xl:border-l border-primary' : ''}`}
                                             initial={{
-                                                width: 0,
+                                                width: websiteMode ? '100%' : 0,
                                             }}
                                             animate={{
                                                 height: sideBySide ? '100%' : bottomHeight,
-                                                width: sideBySide ? sideWidth : '100%',
+                                                width: sideBySide && !websiteMode ? sideWidth : '100%',
                                             }}
                                             exit={{
-                                                width: 0,
+                                                width: websiteMode ? '100%' : 0,
                                             }}
                                             transition={{
                                                 type: 'tween',

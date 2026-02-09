@@ -576,7 +576,7 @@ export function Editor({
                         />
 
                         {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-40 ">
+                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-20 ">
                                 <div className={`flex flex-wrap ${websiteMode && WEBSITE_MODE_CLASSES}`}>
                                     {availableFilters?.map((filter, index) => {
                                         return (
