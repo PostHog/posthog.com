@@ -269,16 +269,23 @@ export default function Presentation({
     useEffect(() => {
         if (slides.length === 0) return
 
+        // In websiteMode, listen to window scroll; otherwise use ScrollArea
+        const useWindowScroll = websiteMode
+
         const scrollContainerSelector = slideId
             ? `[data-presentation-id="${slideId}"] [data-radix-scroll-area-viewport]`
             : '[data-app="Presentation"] [data-radix-scroll-area-viewport]'
-        const scrollContainer = document.querySelector(scrollContainerSelector)
-        if (!scrollContainer) return
+        const scrollContainer = useWindowScroll ? null : document.querySelector(scrollContainerSelector)
+
+        // In non-websiteMode, we need a scroll container
+        if (!useWindowScroll && !scrollContainer) return
 
         const handleScroll = () => {
-            const containerRect = scrollContainer.getBoundingClientRect()
-            const containerTop = containerRect.top
-            const containerBottom = containerRect.bottom
+            // Use viewport bounds for websiteMode, container bounds otherwise
+            const containerTop = useWindowScroll ? 0 : scrollContainer!.getBoundingClientRect().top
+            const containerBottom = useWindowScroll
+                ? window.innerHeight
+                : scrollContainer!.getBoundingClientRect().bottom
 
             let bestSlideIndex = 0
             let maxVisibleArea = 0
@@ -308,13 +315,14 @@ export default function Presentation({
         // Initial check
         handleScroll()
 
-        // Listen for scroll events
-        scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+        // Listen for scroll events on window or container
+        const scrollTarget = useWindowScroll ? window : scrollContainer!
+        scrollTarget.addEventListener('scroll', handleScroll, { passive: true })
 
         return () => {
-            scrollContainer.removeEventListener('scroll', handleScroll)
+            scrollTarget.removeEventListener('scroll', handleScroll)
         }
-    }, [slides.length, slideId])
+    }, [slides.length, slideId, websiteMode])
 
     useEffect(() => {
         const handleResize = () => {
@@ -437,9 +445,9 @@ export default function Presentation({
                                 </div>
                                 <div
                                     data-scheme="primary"
-                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${
+                                    className={`bg-primary border-t border-primary overflow-hidden ${
                                         !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                    }`}
+                                    } ${websiteMode ? 'sticky bottom-0 left-0 right-0 z-50' : 'flex-none relative'}`}
                                     style={{
                                         height: isDrawerOpen ? drawerHeight : 0,
                                         maxHeight: 300,
