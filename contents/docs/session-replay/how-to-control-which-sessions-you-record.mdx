@@ -16,6 +16,8 @@ There are several ways to control which sessions you record with the Web JavaScr
 
 ## Programmatically start and stop recordings
 
+Most users should initialize PostHog with the default settings (which starts recording automatically) and use the other options on this page — like [URL triggers](#with-url-trigger-conditions), [event triggers](#with-event-trigger-conditions), [feature flags](#with-feature-flags), or [sampling](#sampling) — to control what gets recorded. Manual control is only needed for advanced use cases where you need to programmatically start and stop recording at specific points in your application.
+
 > Note: For mobile replay controls, see [iOS](/docs/session-replay/privacy?tab=iOS#handling-sensitive-third-party-screens), and [Android](/docs/session-replay/privacy?tab=Android#handling-sensitive-third-party-screens) privacy controls section. Support for this method in React Native and Flutter is planned — track progress in [issue #2169](https://github.com/PostHog/posthog-js/issues/2169).
 
 1. For older projects, there is a section for 'Authorized domains for replay' in the [project replay settings](https://us.posthog.com/settings/environment-replay#replay-authorized-domains). Ensure your domain is added if the section is present.
