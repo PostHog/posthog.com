@@ -422,21 +422,11 @@ const RoadmapCards = ({
     videos,
 }: RoadmapCardsProps) => {
     const { addWindow } = useApp()
-    // Two-week buckets need to preserve the same overall per-month width, so each card spans two former week widths.
-    const width = 600
-
+    const width = 400
     const containerRef = useRef<HTMLDivElement>(null)
 
     const getWeekOfMonth = (date: string) => {
         return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
-    }
-
-    const getBiweeklyBucket = (date: string) => {
-        return Math.min(2, Math.ceil(getWeekOfMonth(date) / 2))
-    }
-
-    const getWeeksForPeriod = (period: number) => {
-        return period === 1 ? [1, 2] : [3, 4]
     }
 
     const toRomanNumeral = (num: number): string => {
@@ -444,59 +434,71 @@ const RoadmapCards = ({
         return romanNumerals[num] || num.toString()
     }
 
-    const periods = useMemo(() => {
-        const monthPeriods: Array<{ roadmaps: RoadmapNode[]; year: number; month: number; period: number }> = []
+    // Group by months instead of bi-weekly periods
+    const months = useMemo(() => {
+        const monthData: Array<{
+            year: number
+            month: number
+            weeks: Array<{
+                weekNumber: number
+                roadmaps: RoadmapNode[]
+            }>
+            totalCount: number
+        }> = []
+
         const now = dayjs.utc()
         const currentYear = now.year()
-        const currentMonthIndex = now.month() // 0-based
+        const currentMonthIndex = now.month()
+
         for (let y = startYear; y <= endYear && y <= currentYear; y++) {
             const lastMonthIndexForYear = y === currentYear ? currentMonthIndex : 11
             for (let m = 0; m <= lastMonthIndexForYear; m++) {
-                const items = roadmaps.filter((r) => {
+                const monthRoadmaps = roadmaps.filter((r) => {
                     const d = dayjs.utc(r.date)
                     return d.year() === y && d.month() === m
                 })
-                const buckets: Record<number, RoadmapNode[]> = {}
-                items.forEach((item) => {
-                    const period = getBiweeklyBucket(item.date)
-                    if (!buckets[period]) buckets[period] = []
-                    buckets[period].push(item)
+
+                // Group by week within the month
+                const weekBuckets: Record<number, RoadmapNode[]> = { 1: [], 2: [], 3: [], 4: [] }
+                monthRoadmaps.forEach((item) => {
+                    const week = getWeekOfMonth(item.date)
+                    weekBuckets[week].push(item)
                 })
-                // Create two-week period entries with metadata
-                if (y === currentYear && m === currentMonthIndex) {
-                    // For current month, show all two-week periods up to the current one, but only include the current period if non-empty
-                    const currentPeriod = getBiweeklyBucket(now.format('YYYY-MM-DD'))
-                    // Add all periods before the current period
-                    for (let p = 1; p < currentPeriod; p++) {
-                        monthPeriods.push({
-                            roadmaps: buckets[p] || [],
-                            year: y,
-                            month: m,
-                            period: p,
-                        })
-                    }
-                    // Add current period only if it has content
-                    if ((buckets[currentPeriod] || []).length > 0) {
-                        monthPeriods.push({
-                            roadmaps: buckets[currentPeriod] || [],
-                            year: y,
-                            month: m,
-                            period: currentPeriod,
-                        })
-                    }
-                } else {
-                    for (let p = 1; p <= 2; p++) {
-                        monthPeriods.push({
-                            roadmaps: buckets[p] || [],
-                            year: y,
-                            month: m, // 0-based
-                            period: p,
-                        })
-                    }
+
+                // Determine which weeks to show for current month
+                let weeksToShow = [1, 2, 3, 4]
+                const isCurrentMonth = y === currentYear && m === currentMonthIndex
+                const currentWeek = getWeekOfMonth(now.format('YYYY-MM-DD'))
+
+                if (isCurrentMonth) {
+                    // Show all weeks before current week, and current week only if it has content
+                    weeksToShow = weeksToShow.filter((w) => {
+                        if (w < currentWeek) return true
+                        if (w === currentWeek) return (weekBuckets[w]?.length || 0) > 0
+                        return false
+                    })
+                }
+
+                const weeks = weeksToShow.map((weekNumber) => ({
+                    weekNumber,
+                    roadmaps: weekBuckets[weekNumber] || [],
+                }))
+
+                const totalCount = weeks.reduce((sum, week) => sum + week.roadmaps.length, 0)
+
+                // Filter out empty months if hideEmpty is true
+                if (!hideEmpty || totalCount > 0) {
+                    monthData.push({
+                        year: y,
+                        month: m,
+                        weeks: hideEmpty ? weeks.filter((w) => w.roadmaps.length > 0) : weeks,
+                        totalCount,
+                    })
                 }
             }
         }
-        return hideEmpty ? monthPeriods.filter((period) => period.roadmaps.length > 0) : monthPeriods
+
+        return monthData
     }, [roadmaps, startYear, endYear, hideEmpty])
 
     const videosByWeek = useMemo(() => {
@@ -520,14 +522,12 @@ const RoadmapCards = ({
 
     const virtualizer = useVirtualizer({
         horizontal: true,
-        count: periods.length,
+        count: months.length,
         getScrollElement: () => {
-            // Get the ScrollArea viewport element
             const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
             return viewport
         },
         estimateSize: () => width,
-
         overscan: 5,
         gap: 15,
     })
@@ -576,27 +576,23 @@ const RoadmapCards = ({
         }
     }, [])
 
-    // Scroll to latest week with roadmaps on mount
+    // Scroll to latest month with roadmaps on mount
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
 
-        // Find the last week that has roadmap items
-        const lastNonEmptyPeriodIndex = periods.reduce((lastIndex, period, index) => {
-            return period.roadmaps.length > 0 ? index : lastIndex
+        const lastNonEmptyMonthIndex = months.reduce((lastIndex, month, index) => {
+            return month.totalCount > 0 ? index : lastIndex
         }, -1)
 
-        if (lastNonEmptyPeriodIndex === -1) return
+        if (lastNonEmptyMonthIndex === -1) return
 
-        // Wait for content to be rendered and measured
-        const scrollToLastPeriod = () => {
+        const scrollToLastMonth = () => {
             const virtualItems = virtualizer.getVirtualItems()
             if (virtualItems.length === 0) return
 
-            // Calculate scroll position for the last period with content
-            // We want to show the last few periods, not scroll all the way to the absolute end
-            const targetIndex = Math.max(0, lastNonEmptyPeriodIndex)
-            const scrollLeft = targetIndex * (width + 15) // width + gap
+            const targetIndex = Math.max(0, lastNonEmptyMonthIndex)
+            const scrollLeft = targetIndex * (width + 15)
 
             viewport.scrollTo({
                 left: scrollLeft,
@@ -605,21 +601,20 @@ const RoadmapCards = ({
 
         const handleInitialScroll = () => {
             if (initialActiveRoadmap) {
-                const index = periods.findIndex((period) =>
-                    period.roadmaps.some((r) => r.id === initialActiveRoadmap.id)
+                const index = months.findIndex((month) =>
+                    month.weeks.some((week) => week.roadmaps.some((r) => r.id === initialActiveRoadmap.id))
                 )
                 if (index >= 0) {
                     scrollToIndex(index)
                     return
                 }
             }
-            scrollToLastPeriod()
+            scrollToLastMonth()
         }
 
-        // Delay to ensure virtualizer has measured content
         const timer = setTimeout(handleInitialScroll, 100)
         return () => clearTimeout(timer)
-    }, [periods, width])
+    }, [months, width])
 
     const handlePlayVideo = (video: ChangelogVideo) => {
         const size = {
@@ -661,33 +656,9 @@ const RoadmapCards = ({
                     className="h-full relative"
                 >
                     {virtualizer.getVirtualItems().map((virtualColumn) => {
-                        const periodData = periods[virtualColumn.index]
-                        const monthName = dayjs.utc().year(periodData.year).month(periodData.month).format('MMMM')
-                        const periodLabel =
-                            periodData.period === 1
-                                ? `Weeks ${toRomanNumeral(1)}-${toRomanNumeral(2)}`
-                                : `Weeks ${toRomanNumeral(3)}-${toRomanNumeral(4)}`
-                        const count = periodData.roadmaps.length
-                        const columns = getWeeksForPeriod(periodData.period).map((weekNumber) => ({
-                            weekNumber,
-                            label: `Week ${toRomanNumeral(weekNumber)}`,
-                            roadmaps: periodData.roadmaps.filter(
-                                (roadmap) => getWeekOfMonth(roadmap.date) === weekNumber
-                            ),
-                        }))
-                        const getWeekVideo = (weekNumber: number) => {
-                            const weekKey = `${periodData.year}-${periodData.month}-${weekNumber}`
-                            return videosByWeek.get(weekKey)?.[0] || null
-                        }
-
-                        const periodVideos = columns
-                            .map((col) => getWeekVideo(col.weekNumber))
-                            .filter(Boolean) as ChangelogVideo[]
-
-                        const singleVideo = periodVideos.length === 1 ? periodVideos[0] : null
-                        const secondWeekHasContent = columns[1]?.roadmaps.length > 0
-                        const showVideoAboveColumn = (singleVideo && !secondWeekHasContent) || periodVideos.length === 2
-                        const showVideoInHeader = singleVideo && secondWeekHasContent
+                        const monthData = months[virtualColumn.index]
+                        const monthName = dayjs.utc().year(monthData.year).month(monthData.month).format('MMMM')
+                        const count = monthData.totalCount
 
                         return (
                             <div
@@ -703,143 +674,121 @@ const RoadmapCards = ({
                                 }}
                             >
                                 <div className="w-full h-full flex flex-col bg-white dark:bg-dark rounded border border-primary overflow-hidden">
-                                    <div className="flex items-center justify-between p-2 border-b border-primary gap-4">
-                                        <div className="pl-2">
+                                    <div className="flex items-center justify-between p-3 border-b border-primary">
+                                        <div>
                                             <h4 className="m-0 text-lg font-semibold">
-                                                {monthName} {periodData.year} - {periodLabel}
+                                                {monthName} {monthData.year}
                                             </h4>
                                             <p className="m-0 text-sm text-secondary">
                                                 {count}{' '}
                                                 {
                                                     updateDescriptors[
-                                                        (periodData.month * 2 +
-                                                            periodData.year * 24 +
-                                                            periodData.period) %
+                                                        (monthData.month + monthData.year * 12) %
                                                             updateDescriptors.length
                                                     ]
                                                 }{' '}
                                                 update{count !== 1 ? 's' : ''}
                                             </p>
                                         </div>
-                                        {showVideoInHeader && singleVideo && (
-                                            <button
-                                                onClick={() => handlePlayVideo(singleVideo)}
-                                                className="shrink-0 w-[140px] aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
-                                            >
-                                                <img
-                                                    src={`https://img.youtube.com/vi/${singleVideo.videoId}/hqdefault.jpg`}
-                                                    alt={singleVideo.title}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                                <div className="absolute inset-0 flex items-center justify-center">
-                                                    <span className="text-white text-2xl">▶</span>
-                                                </div>
-                                            </button>
-                                        )}
                                     </div>
-                                    <div className="w-full flex-1 min-h-0 flex flex-col">
-                                        <div className="grid grid-cols-2 h-full divide-x divide-primary min-h-0">
-                                            {columns.map((column, colIndex) => {
-                                                const weekVideo = getWeekVideo(column.weekNumber)
-                                                const videoForThisColumn =
-                                                    periodVideos.length === 2
-                                                        ? weekVideo
-                                                        : singleVideo && colIndex === 0
-                                                        ? singleVideo
-                                                        : null
-                                                const showVideoAboveThisColumn =
-                                                    showVideoAboveColumn && videoForThisColumn
+                                    <ScrollArea className="flex-1 min-h-0">
+                                        <div className="divide-y divide-primary">
+                                            {monthData.weeks.map((week) => {
+                                                const weekKey = `${monthData.year}-${monthData.month}-${week.weekNumber}`
+                                                const weekVideo = videosByWeek.get(weekKey)?.[0] || null
+
                                                 return (
-                                                    <div key={column.weekNumber} className="flex flex-col min-h-0">
-                                                        <div className="border-b border-primary px-4 py-2 text-sm font-semibold bg-primary/30">
-                                                            <span>{column.label}</span>
+                                                    <div key={week.weekNumber}>
+                                                        <div className="px-4 py-2 text-sm font-semibold bg-[#f7f7f4] dark:bg-accent border-b border-primary sticky top-0 z-10">
+                                                            Week {toRomanNumeral(week.weekNumber)}
                                                         </div>
-                                                        {showVideoAboveThisColumn && videoForThisColumn && (
-                                                            <div className="border-b border-primary">
+                                                        {weekVideo && (
+                                                            <div className="p-3 border-b border-primary bg-primary/10">
                                                                 <button
-                                                                    onClick={() => handlePlayVideo(videoForThisColumn)}
-                                                                    className="m-2 aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.01] active:scale-[0.99] transition-all duration-100"
+                                                                    onClick={() => handlePlayVideo(weekVideo)}
+                                                                    className="w-full aspect-video rounded border border-primary overflow-hidden bg-black relative hover:scale-[1.005] active:scale-[0.995] transition-all duration-100"
                                                                 >
                                                                     <img
-                                                                        src={`https://img.youtube.com/vi/${videoForThisColumn.videoId}/hqdefault.jpg`}
-                                                                        alt={videoForThisColumn.title}
+                                                                        src={`https://img.youtube.com/vi/${weekVideo.videoId}/hqdefault.jpg`}
+                                                                        alt={weekVideo.title}
                                                                         className="w-full h-full object-cover"
                                                                     />
-                                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                                        <span className="text-white text-2xl">▶</span>
+                                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                                                        <span className="text-white text-3xl drop-shadow-lg">
+                                                                            ▶
+                                                                        </span>
                                                                     </div>
                                                                 </button>
                                                             </div>
                                                         )}
-                                                        <ScrollArea className="flex-1">
-                                                            <ul className="p-0 m-0 list-none min-h-0">
-                                                                {column.roadmaps.length === 0 ? (
-                                                                    <li className="p-4 text-center text-sm text-secondary opacity-70">
-                                                                        No updates
-                                                                    </li>
-                                                                ) : (
-                                                                    column.roadmaps.map((roadmap) => {
-                                                                        const active = activeRoadmap?.id === roadmap.id
-                                                                        const teamName =
-                                                                            roadmap.teams?.data?.[0]?.attributes?.name
-                                                                        const crestUrl =
-                                                                            roadmap.teams?.data?.[0]?.attributes
-                                                                                ?.miniCrest?.data?.attributes?.url
-                                                                        return (
-                                                                            <li
-                                                                                key={roadmap.id}
-                                                                                className="p-0 m-0 border-b last:border-b-0 border-primary"
+                                                        <ul className="p-0 m-0 list-none">
+                                                            {week.roadmaps.length === 0 ? (
+                                                                <li className="p-4 text-center text-sm text-secondary opacity-70">
+                                                                    No updates
+                                                                </li>
+                                                            ) : (
+                                                                week.roadmaps.map((roadmap) => {
+                                                                    const active = activeRoadmap?.id === roadmap.id
+                                                                    const teamName =
+                                                                        roadmap.teams?.data?.[0]?.attributes?.name
+                                                                    const crestUrl =
+                                                                        roadmap.teams?.data?.[0]?.attributes?.miniCrest
+                                                                            ?.data?.attributes?.url
+
+                                                                    return (
+                                                                        <li
+                                                                            key={roadmap.id}
+                                                                            className="p-0 m-0 border-b last:border-b-0 border-primary"
+                                                                        >
+                                                                            <button
+                                                                                data-scheme="secondary"
+                                                                                className={`group w-full text-left py-2.5 px-4 flex justify-between gap-2 ${
+                                                                                    active
+                                                                                        ? 'bg-primary'
+                                                                                        : 'hover:bg-primary'
+                                                                                }`}
+                                                                                onClick={() =>
+                                                                                    handleRoadmapClick(roadmap)
+                                                                                }
                                                                             >
-                                                                                <button
-                                                                                    data-scheme="secondary"
-                                                                                    className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
-                                                                                        active
-                                                                                            ? 'bg-primary'
-                                                                                            : 'hover:bg-primary'
-                                                                                    }`}
-                                                                                    onClick={() =>
-                                                                                        handleRoadmapClick(roadmap)
-                                                                                    }
-                                                                                >
-                                                                                    <div>
-                                                                                        <h5
-                                                                                            className={`m-0  text-[15px] leading-tight mb-1 ${
-                                                                                                active
-                                                                                                    ? ''
-                                                                                                    : 'group-hover:underline'
-                                                                                            }`}
-                                                                                        >
-                                                                                            {roadmap.title}
-                                                                                        </h5>
-                                                                                        {teamName && (
-                                                                                            <p className="!m-0 text-[13px]">
-                                                                                                {teamName} Team
-                                                                                            </p>
-                                                                                        )}
-                                                                                    </div>
-                                                                                    {crestUrl && (
-                                                                                        <div className="shrink-0 leading-[0]">
-                                                                                            <CloudinaryImage
-                                                                                                className="w-10"
-                                                                                                width={80}
-                                                                                                src={
-                                                                                                    crestUrl as `https://res.cloudinary.com/${string}`
-                                                                                                }
-                                                                                            />
-                                                                                        </div>
+                                                                                <div className="min-w-0">
+                                                                                    <h5
+                                                                                        className={`m-0 text-[15px] leading-tight mb-0.5 ${
+                                                                                            active
+                                                                                                ? ''
+                                                                                                : 'group-hover:underline'
+                                                                                        }`}
+                                                                                    >
+                                                                                        {roadmap.title}
+                                                                                    </h5>
+                                                                                    {teamName && (
+                                                                                        <p className="!m-0 text-[13px] text-secondary">
+                                                                                            {teamName} Team
+                                                                                        </p>
                                                                                     )}
-                                                                                </button>
-                                                                            </li>
-                                                                        )
-                                                                    })
-                                                                )}
-                                                            </ul>
-                                                        </ScrollArea>
+                                                                                </div>
+                                                                                {crestUrl && (
+                                                                                    <div className="shrink-0 leading-[0]">
+                                                                                        <CloudinaryImage
+                                                                                            className="w-10"
+                                                                                            width={80}
+                                                                                            src={
+                                                                                                crestUrl as `https://res.cloudinary.com/${string}`
+                                                                                            }
+                                                                                        />
+                                                                                    </div>
+                                                                                )}
+                                                                            </button>
+                                                                        </li>
+                                                                    )
+                                                                })
+                                                            )}
+                                                        </ul>
                                                     </div>
                                                 )
                                             })}
                                         </div>
-                                    </div>
+                                    </ScrollArea>
                                 </div>
                             </div>
                         )
@@ -921,9 +870,7 @@ export default function Changelog({
     const roadmapsGrouped = useMemo(() => {
         const grouped: {
             [year: number]: {
-                [month: number]: {
-                    [period: number]: { count: number }
-                }
+                [month: number]: { count: number }
             }
         } = {}
 
@@ -931,15 +878,10 @@ export default function Changelog({
             const d = dayjs.utc(roadmap.date)
             const year = d.year()
             const month = d.month() + 1 // 1-12
-            const dayOfMonth = d.date() // 1-31
-            // Bucket into 2 two-week groups per month
-            const week = Math.min(4, Math.floor((dayOfMonth - 1) / 7) + 1) // 1-4
-            const period = Math.min(2, Math.ceil(week / 2)) // 1-2
 
             if (!grouped[year]) grouped[year] = {}
-            if (!grouped[year][month]) grouped[year][month] = {}
-            if (!grouped[year][month][period]) grouped[year][month][period] = { count: 0 }
-            grouped[year][month][period].count += 1
+            if (!grouped[year][month]) grouped[year][month] = { count: 0 }
+            grouped[year][month].count += 1
         })
 
         return grouped
