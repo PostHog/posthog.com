@@ -32,6 +32,7 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
 
 ### Tools that you may find useful and not required
 
+- [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) for recording customer calls - ask Simon or Ben B to invite you
 - [Calendly.com](https://calendly.com/) for shared meeting booking links - ask Simon or Dana to invite you
 - [Clay](https://www.clay.com/) for account and contact enrichment
 - [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
