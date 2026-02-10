@@ -6,3 +6,5 @@ posthog-cli sourcemap upload --directory ./path/to/assets
 The CLI reuses the release stored during injection, so you don't need to pass `--project` or `--version` again.
 
 > **💡 Tip:** You can use `--delete-after` option to clean up sourcemaps after uploading them.
+
+By default, if sourcemaps already exist with a different release, the CLI retries the upload without the release association. To require strict release matching instead, use `--skip-release-on-fail=false`.
