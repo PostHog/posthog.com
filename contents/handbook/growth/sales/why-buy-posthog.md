@@ -14,7 +14,7 @@ AKA our Value Proposition, these are some of the things we've found useful to sh
 
 ### Summary
 
-By integrating PostHog into your app, you’ll be able to track and diagnose errors, roll out and test new features and gain a better understanding of your user behaviour.  With that greater understanding, you'll then be able to take action on it and respond to your user needs quickly and effectively.  Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.
+By integrating PostHog into your app, you’ll be able to track and diagnose errors, roll out and test new features and gain a better understanding of your user behavior.  With that greater understanding, you'll then be able to take action on it and respond to your user needs quickly and effectively.  Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.
 
 ### Use cases
 - [Automated error tracking](/error-tracking) for front and back end, coupled with other capabilities like product analytics and session replay lets you understand where the biggest issues are in your app, see them happening in real time and then diagnose and fix them.
