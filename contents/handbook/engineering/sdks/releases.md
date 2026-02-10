@@ -107,7 +107,8 @@ The release workflow needs access to shared organization secrets. Grant your SDK
 
 ### 5. Add the release workflow
 
-> **Important:** The repository must use Node.js v22 or higher. This is required for [GitHub Actions OIDC token support](https://docs.github.com/en/actions/concepts/security/openid-connect), which our release workflows use for secure authentication.
+> **Important:** Our release workflows use [GitHub Actions OIDC tokens](https://docs.github.com/en/actions/concepts/security/openid-connect) for secure authentication with package registries. Make sure your workflow uses a version that supports OIDC for your registry:
+> - **npm:** Node.js v22+
 
 Copy the release workflow from an existing SDK (e.g., [posthog-go](https://github.com/posthog/posthog-go/blob/main/.github/workflows/release.yml)) and adapt it:
 
