@@ -134,6 +134,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
   - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
   - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
   - A product is counted as paid if the invoice amount for that product is greater than $200
+  - Multiplier changes (both positive and negative) on accounts that have negative growth do not impact quota for that quarter. However, the multiplier change is not carried into next quarter if it was frozen for this reason.
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
   - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
