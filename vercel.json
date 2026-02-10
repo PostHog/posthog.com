@@ -7,6 +7,7 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/hogwars", "destination": "/sparks-joy/hogwars" },
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
@@ -1716,7 +1717,8 @@
             "destination": "/docs/revenue-analytics/troubleshooting"
         },
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
-        { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" }
+        { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
+        { "source": "/professional-services", "destination": "/services" }
     ],
     "headers": [
         {

@@ -72,10 +72,11 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 ## How do I know if I'm on track?
 
 **By the end of month 1:**
- - Have a good grasp of our internal processes and workflows.
- - Be leading customer calls on your own.
- - Converting customers to 'Onboarded'.
- - Passing well-qualified opportunities to Sales via the `Onboarding referral` segment.
+ - You continue learning from the received feedback.
+ - You have a good grasp of our internal processes and workflows.
+ - You lead customer calls on your own.
+ - You convert customers to 'Onboarded'.
+ - You pass well-qualified opportunities to Sales via the `Onboarding referral` segment.
 
 **By the end of month 2:**
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.
@@ -83,8 +84,9 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 
 **By the end of month 3:**
  - You've implemented process and system-level changes to make your job better/more effective.
- - You're the driver, you take initiative, prioritize your time well, and work independently. 
- - Customers are happy after interacting with you.
+ - You're the driver, you take initiative, prioritize your time well, and work independently.
+ - The quality of your outreach is up to the company's standard. 
+ - Customers are happy after interacting with you, and you meaningfully contribute to their success.
 
 ### General expectations
 
@@ -103,11 +105,11 @@ Our customers are always central to our work. There’s time and space to work o
 **Communication and ownership**
 
 - Make sure you read the Handbook page on [Communication](https://posthog.com/handbook/company/communication). Always answer pings, even if it’s just to say “I’ll look into it later”. Emoji reactions can be helpful to indicate that you acknowledged or completed the task.
+- Read the Handbook page on [Feedback](https://posthog.com/handbook/people/feedback)) Share and ask for feedback, take it with grace. Remember that it should be kind and factual, not based on assumptions.
 - Publish your Sprint planning update on time. It should be done on Monday at the latest, so that others have time to read it before the Sprint planning call.
 - Be yourself and stay human. Don’t send AI-generated emails to customers. 
 - Set an autoresponder in your inbox whenever you take a longer time off, and direct your customers to `onboarding@posthog.com` so that we can pick up your conversations.
 - Share your knowledge! Share what you learnt, or found out - the whole team will benefit from it.
-- Share and ask for feedback. Remember that it should be kind and factual, not based on assumptions. More on that [in the Handbook](https://posthog.com/handbook/people/feedback).
 - Don’t be late for calls. It’s rude, the same as eating on them. 
 - Use the Time Off tool to communicate your absence in advance.
 - Keep your promises. If you promised to follow up with a customer or colleague, or work on a project, do it.

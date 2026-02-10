@@ -22,7 +22,7 @@ PostHog and LaunchDarkly have many of the same features and concepts, but differ
 
 Learn more about how they compare in our [PostHog vs LaunchDarkly comparison](/blog/posthog-vs-launchdarkly).
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## Migrating flags and experiments from LaunchDarkly
 
@@ -68,8 +68,8 @@ ld_api_key = "api-1a234567-89ab-cdef-1234-567890abcdef"
 # Get LaunchDarkly experiments
 url = "https://app.launchdarkly.com/api/v2/projects/" + project_key + "/environments/" + environment_key + "/experiments"
 headers = {
-  "Authorization": ld_api_key,
-  "LD-API-Version": "beta"
+"Authorization": ld_api_key,
+"LD-API-Version": "beta"
 }
 
 experiment_response = requests.get(url, headers=headers)
@@ -91,9 +91,9 @@ You can then convert this data into the PostHog format. This requires:
 
 2. Looping through each flag and converting the variations to PostHog variants, values to payloads, and other details.
 
-3. If the flag is an experiment, format the data to match the PostHog experiment format and create it with the [PostHog API](/docs/api/experiments#post-api-projects-project_id-experiments).
+3. If the flag is an experiment, format the data to match the PostHog experiment format and create it with the [PostHog API](/docs/api/experiments #post-api-projects-project_id-experiments).
 
-4. If the flag is not an experiment, format the data to match the PostHog flag format and create it with the [PostHog API](/docs/api/feature-flags#post-api-projects-project_id-feature_flags).
+4. If the flag is not an experiment, format the data to match the PostHog flag format and create it with the [PostHog API](/docs/api/feature-flags #post-api-projects-project_id-feature_flags).
 
 Including the LaunchDarkly requests, this looks like this:
 
@@ -109,8 +109,8 @@ ph_project_id = "12345"
 # Get LaunchDarkly experiments
 url = "https://app.launchdarkly.com/api/v2/projects/" + project_key + "/environments/" + environment_key + "/experiments"
 headers = {
-  "Authorization": ld_api_key,
-  "LD-API-Version": "beta"
+"Authorization": ld_api_key,
+"LD-API-Version": "beta"
 }
 
 experiment_response = requests.get(url, headers=headers)
@@ -119,10 +119,10 @@ experiment_data = experiment_response.json()
 # Get keys from LaunchDarkly experiments
 experiment_keys = []
 for experiment in experiment_data['items']:
-  flags = experiment['currentIteration']['flags']
-  if flags:
-    flag_key = next(iter(flags))
-    experiment_keys.append(flag_key)
+flags = experiment['currentIteration']['flags']
+if flags:
+flag_key = next(iter(flags))
+experiment_keys.append(flag_key)
 
 # Get LaunchDarkly flags
 flags_url = f"https://app.launchdarkly.com/api/v2/flags/{project_key}?env={environment_key}"
@@ -133,99 +133,99 @@ flag_data = flag_response.json()
 
 # Loop through the flags to convert and create experiments and flags in PostHog
 for flag in flag_data['items']:
-  
-  variants = []
-  payloads = {}
-  total_percentage = 0
-  for i, variation in enumerate(flag['variations']):
-    if 'name' not in variation:
-      # Basic boolean flag
-      continue
-    variant = {
-      "key": variation['name'].lower().replace(' ', '_'),
-      "rollout_percentage": 100 // len(flag['variations'])
-    }
-    # Rollout percentage must sum to 100
-    total_percentage += variant["rollout_percentage"]
-    if i == len(flag['variations']) - 1 and total_percentage < 100:
-      variant["rollout_percentage"] += 100 - total_percentage
-    variants.append(variant)
-    
-    # If the value is JSON, convert to string
-    payloads[variant["key"]] = json.dumps(variation['value']) if isinstance(variation['value'], dict) else variation['value']
 
-  if flag['key'] in experiment_keys:
-    # Convert to PostHog experiment
-    ph_experiment = {
-      "name": flag['name'],
-      "description": flag['description'],
-      "feature_flag_key": flag['key'],
-      # Use pageview trend goal as default
-      "filters": {
-        "events": [
-          {
-            "id": "$pageview",
-            "math": "total",
-            "name": "$pageview",
-            "type": "events",
-            "order": 0
-          }
-        ],
-        "display": "ActionsLineGraph",
-        "insight": "TRENDS",
-        "entity_type": "events",
-      },
-      "parameters": {
-        "feature_flag_variants": variants
-      }
-    }
+variants = []
+payloads = {}
+total_percentage = 0
+for i, variation in enumerate(flag['variations']):
+if 'name' not in variation:
+# Basic boolean flag
+continue
+variant = {
+"key": variation['name'].lower().replace(' ', '_'),
+"rollout_percentage": 100 // len(flag['variations'])
+}
+# Rollout percentage must sum to 100
+total_percentage += variant["rollout_percentage"]
+if i == len(flag['variations']) - 1 and total_percentage < 100:
+variant["rollout_percentage"] += 100 - total_percentage
+variants.append(variant)
 
-    # Create experiment in PostHog
-    response = requests.post(
-      "<ph_app_host>/api/projects/{project_id}/experiments/".format(
-        project_id=ph_project_id
-      ),
-      headers={"Authorization": "Bearer {}".format(ph_api_key)},
-      json=ph_experiment
-    ).json()
+# If the value is JSON, convert to string
+payloads[variant["key"]] = json.dumps(variation['value']) if isinstance(variation['value'], dict) else variation['value']
 
-    print(response)
-    continue
+if flag['key'] in experiment_keys:
+# Convert to PostHog experiment
+ph_experiment = {
+"name": flag['name'],
+"description": flag['description'],
+"feature_flag_key": flag['key'],
+# Use pageview trend goal as default
+"filters": {
+"events": [
+{
+"id": "$pageview",
+"math": "total",
+"name": "$pageview",
+"type": "events",
+"order": 0
+}
+],
+"display": "ActionsLineGraph",
+"insight": "TRENDS",
+"entity_type": "events",
+},
+"parameters": {
+"feature_flag_variants": variants
+}
+}
 
-  # Convert to PostHog flag
-  ph_flag = {
-    "created_by": {
-      "first_name": flag['_maintainer']['firstName'],
-      "last_name": flag['_maintainer']['lastName'],
-      "email": flag['_maintainer']['email']
-    },
-    "deleted": flag['archived'],
-    "name": flag['name'] + "\n\n" + flag['description'],
-    "key": flag['key'],
-    "active": flag['environments'][environment_key]['on'],
-    "filters": {
-        # Default release condition to all users
-        "groups": [
-          {
-            "properties": [],
-            "rollout_percentage": 100
-          }
-        ],
-        "multivariate": {"variants": variants} if variants else None,
-        "payloads": payloads
-    }
-  }
+# Create experiment in PostHog
+response = requests.post(
+"<ph_app_host>/api/projects/{project_id}/experiments/".format(
+project_id=ph_project_id
+),
+headers={"Authorization": "Bearer {}".format(ph_api_key)},
+json=ph_experiment
+).json()
 
-  # Create flag in PostHog
-  response = requests.post(
-    "<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
-        ph_project_id=ph_project_id
-    ),
-    headers={"Authorization": "Bearer {}".format(ph_api_key)},
-    json=ph_flag
-  ).json()
-  
-  print(response)
+print(response)
+continue
+
+# Convert to PostHog flag
+ph_flag = {
+"created_by": {
+"first_name": flag['_maintainer']['firstName'],
+"last_name": flag['_maintainer']['lastName'],
+"email": flag['_maintainer']['email']
+},
+"deleted": flag['archived'],
+"name": flag['name'] + "\n\n" + flag['description'],
+"key": flag['key'],
+"active": flag['environments'][environment_key]['on'],
+"filters": {
+# Default release condition to all users
+"groups": [
+{
+"properties": [],
+"rollout_percentage": 100
+}
+],
+"multivariate": {"variants": variants} if variants else None,
+"payloads": payloads
+}
+}
+
+# Create flag in PostHog
+response = requests.post(
+"<ph_app_host>/api/projects/{ph_project_id}/feature_flags/".format(
+ph_project_id=ph_project_id
+),
+headers={"Authorization": "Bearer {}".format(ph_api_key)},
+json=ph_flag
+).json()
+
+print(response)
 ```
 
 This script may need modification depending on the structure of your LaunchDarkly data, but it gives you a start.
@@ -242,24 +242,24 @@ Once you migrate your flags and experiments, you can replace:
 
 2. Your `variation` calls with PostHog's `isFeatureEnabled` calls (or [equivalent](/docs/feature-flags/adding-feature-flag-code)).
 
-For example: 
+For example:
 
 ```js
 // LaunchDarkly initialization
-const ldclient = LDClient.initialize(clientSideID, context);
+const ldclient = LDClient.initialize(clientSideID, context) ;
 
 function render() {
-  const flagValue = ldclient.variation(flagKey, false);
+const flagValue = ldclient.variation(flagKey, false) ;
 }
 
 // PostHog initialization
 posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
+api_host: '<ph_client_api_host>',
+defaults: '<ph_posthog_js_defaults>',
 })
 
 function render() {
-  const flagValue = posthog.isFeatureEnabled(flagKey);
+const flagValue = posthog.isFeatureEnabled(flagKey) ;
 }
 
 ```
