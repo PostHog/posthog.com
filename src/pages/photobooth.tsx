@@ -12,6 +12,7 @@ import { SEO } from 'components/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { AppIcon } from 'components/OSIcons'
+import { useWindow } from '../context/Window'
 
 const numImages = 4
 const initialCount = 3
@@ -41,7 +42,7 @@ const cardTypes = [
     },
     {
         logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/Logo_1_dd78611ddb.png',
-        className: 'bg-dark text-primary-dark',
+        className: 'bg-dark text-white',
     },
 ]
 
@@ -578,18 +579,17 @@ const NameInput = ({ onSubmit, onBack }: { onSubmit: (name: string) => void; onB
 }
 
 const PhotoModal = ({
-    onClose,
     template: initialTemplate,
     onDone,
     onSelectTemplate,
     onNameChange,
 }: {
-    onClose: () => void
     template: string
     onDone: (images: PhotoBoothImage[]) => void
     onSelectTemplate: (template: string) => void
     onNameChange: (name: string) => void
 }) => {
+    const { appWindow } = useWindow()
     const [step, setStep] = useState<'select' | 'name' | 'capture'>('select')
     const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof templates>(initialTemplate)
     const [capturing, setCapturing] = useState(false)
@@ -701,7 +701,6 @@ const PhotoModal = ({
     return (
         <motion.div
             className="not-prose flex justify-center items-center"
-            onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -744,7 +743,10 @@ const PhotoModal = ({
                     {step === 'name' && <NameInput onSubmit={handleNameSubmit} onBack={() => setStep('select')} />}
 
                     {step === 'capture' && (
-                        <div className="flex gap-8 items-center justify-center h-full w-full max-w-7xl mx-auto px-4">
+                        <div
+                            style={{ maxWidth: (appWindow?.size?.width || 0) / 2 }}
+                            className="flex gap-8 items-center justify-center h-full w-full mx-auto px-4"
+                        >
                             <div className="aspect-[3/4] w-[645px] flex-1">
                                 <Camera
                                     onWebcamReady={handleWebcamReady}
@@ -968,12 +970,12 @@ const Card = ({
 }
 
 export default function Photobooth(): JSX.Element {
-    const [modalOpen, setModalOpen] = useState(true)
     const [template, setTemplate] = useState<keyof typeof templates>('love')
     const [images, setImages] = useState<PhotoBoothImage[]>([])
     const [dataURL, setDataURL] = useState<string>()
     const [name, setName] = useState<string>('')
     const [mobile, setMobile] = useState(false)
+    const [templateSelected, setTemplateSelected] = useState<boolean>(false)
 
     useEffect(() => {
         const preloadAllImages = async () => {
@@ -992,32 +994,41 @@ export default function Photobooth(): JSX.Element {
 
     const handleDone = (images: PhotoBoothImage[]) => {
         setImages(images)
-        setModalOpen(false)
     }
 
     useEffect(() => {
         setMobile(typeof window !== 'undefined' && window.innerWidth < 7.68)
     }, [])
 
+    const handleSelectTemplate = (template: string) => {
+        setTemplate(template as keyof typeof templates)
+        setTemplateSelected(true)
+    }
+
     return (
-        <Explorer template="generic" slug="photobooth" fullScreen>
+        <ScrollArea>
             <SEO
                 title="Photo booth - PostHog"
                 description="A photo booth with Max the hedgehog"
                 image={`/images/og/photobooth.png`}
             />
-
             <div className="pt-4 pb-12">
-                <div className="flex flex-col items-center">
-                    {/* <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
+                {!templateSelected && (
+                    <div className="flex flex-col items-center">
+                        {/* <h2 className="text-3xl font-bold inline-flex bg-red-2-dark text-white rounded-sm py-1 px-2 -rotate-2 mb-0">
                         Valentine's Day edition
                     </h2> */}
-                    <AppIcon name="photobooth" className="!size-10" />
+                        <AppIcon name="photobooth" className="!size-10" />
 
-                    <h1 className="text-2xl @3xl:text-4xl font-bold md:px-4 mb-3 mt-3 text-center">
-                        Welcome to the <span className="text-red dark:text-yellow">PostHog photo booth</span>
-                    </h1>
-                </div>
+                        <h1 className="text-2xl @3xl:text-4xl font-bold md:px-4 mb-3 mt-3 text-center">
+                            Welcome to the <span className="text-red dark:text-yellow">PostHog photo booth</span>
+                        </h1>
+                        <p className="font-medium opacity-80 text-center md:px-4">
+                            We've assembled four photo booth templates for your enjoyment. Click your favorite and get
+                            to snappin'.
+                        </p>
+                    </div>
+                )}
                 <AnimatePresence>
                     {mobile ? (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -1045,7 +1056,7 @@ export default function Photobooth(): JSX.Element {
                                         onClick={() => {
                                             setImages([])
                                             setDataURL(undefined)
-                                            setModalOpen(true)
+                                            setTemplateSelected(false)
                                         }}
                                         type="secondary"
                                         size="sm"
@@ -1084,23 +1095,16 @@ export default function Photobooth(): JSX.Element {
                         </>
                     ) : (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <p className="font-medium opacity-80 text-center md:px-4">
-                                We've assembled four photo booth templates for your enjoyment. Click your favorite and
-                                get to snappin'.
-                            </p>
-                            <ScrollArea>
-                                <PhotoModal
-                                    onClose={() => setModalOpen(false)}
-                                    template={template}
-                                    onDone={handleDone}
-                                    onSelectTemplate={setTemplate}
-                                    onNameChange={setName}
-                                />
-                            </ScrollArea>
+                            <PhotoModal
+                                template={template}
+                                onDone={handleDone}
+                                onSelectTemplate={handleSelectTemplate}
+                                onNameChange={setName}
+                            />
                         </motion.div>
                     )}
                 </AnimatePresence>
             </div>
-        </Explorer>
+        </ScrollArea>
     )
 }
