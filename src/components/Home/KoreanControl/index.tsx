@@ -45,8 +45,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
-import LanguageToggle from 'components/Home/LanguageToggle'
-
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -973,7 +971,6 @@ export default function KoreanHome({
                     description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                     image="/images/og/default.png"
                 />
-                <LanguageToggle />
                 <Editor
                     type="mdx"
                     hideToolbar
@@ -1001,7 +998,6 @@ export default function KoreanHome({
                     description="모든 개발자 도구를 한 곳에서."
                     image="/images/og/default.png"
                 />
-                <LanguageToggle />
                 <div className="p-8 text-center text-secondary">
                     <p>한국어 랜딩 페이지 콘텐츠를 불러올 수 없습니다.</p>
                     <Link to="/" className="text-primary underline mt-4 inline-block">
@@ -1020,7 +1016,6 @@ export default function KoreanHome({
                 description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                 image="/images/og/default.png"
             />
-            <LanguageToggle />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody ?? ''}

@@ -43,8 +43,6 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 
-import LanguageToggle from 'components/Home/LanguageToggle'
-
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -1240,7 +1238,6 @@ export default function Home() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
-            <LanguageToggle />
             <MDXEditor
                 hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
