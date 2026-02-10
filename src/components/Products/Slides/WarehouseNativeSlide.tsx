@@ -31,7 +31,7 @@ export default function WarehouseNativeSlide({ variant = 'default' }: WarehouseN
                         Keep data in an existing warehouse and sync the tables and fields you need into PostHog via our warehouse sources. Use warehouse data across PostHog tools such as analytics, feature flags, and surveys. Queries run in PostHog.
                     </p>
                     <OSButton asLink to="/cdp" state={{ newWindow: true }} variant="secondary" size="md">
-                        Explore available data sources
+                        Explore warehouse connections
                     </OSButton>
                 </div>
             </div>
