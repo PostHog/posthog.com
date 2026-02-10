@@ -17,6 +17,10 @@ seo:
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+export const ImgFunnelLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/product-analytics/funnel-light.png"
+export const ImgFunnelDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/product-analytics/funnel-dark.png"
 
 Mobile app analytics tools help you understand how users interact with your app, but the right tool depends on what you're trying to do. Debugging user issues? You'll want session replays. Optimizing conversion funnels? You need retention charts and path analysis. Measuring ad spend? Attribution and ROI tracking are essential.
 
@@ -50,7 +54,12 @@ Here's how some of the most popular mobile app analytics tools compare:
 
 **Best for:** Engineering and product teams
 
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
+<ProductScreenshot
+  imageLight={ImgFunnelLight} 
+  imageDark={ImgFunnelDark} 
+  alt="Funnels insight" 
+  classes="rounded"
+/>
 
 ### What is PostHog?
 
