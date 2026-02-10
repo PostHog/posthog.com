@@ -4686,6 +4686,15 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/product-tours/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
             ],
         },
         {
