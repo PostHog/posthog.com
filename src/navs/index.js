@@ -5938,6 +5938,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Debugging with MCP',
+                    url: '/docs/logs/debugging-with-mcp',
+                    icon: 'IconBolt',
+                    color: 'yellow',
+                },
+                {
                     name: 'Resources',
                 },
                 {
