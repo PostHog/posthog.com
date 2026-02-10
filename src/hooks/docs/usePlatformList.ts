@@ -12,7 +12,7 @@
  *    title: Elixir error tracking installation
  *    platformLogo: elixir
  *    ---
- * 2. Add to sidebar in src/navs/index.js, the order there = order on page
+ * 2. Add to sidebar in src/navs/index.js (platforms are sorted alphabetically)
  * 3. Done!
  *
  * Remove a platform:
@@ -61,31 +61,39 @@ function collectAllUrls(children: any[], parentUrl: string): string[] {
     return urls
 }
 
-/**
- * Searches for a section with the given URL and returns all descendant URLs
- */
-function findSectionChildren(sections: any[], targetUrl: string): string[] {
-    for (const section of sections) {
-        if (section.url === targetUrl && section.children) {
-            return collectAllUrls(section.children, targetUrl)
-        }
-        if (section.children) {
-            const result = findSectionChildren(section.children, targetUrl)
-            if (result.length > 0) return result
-        }
-    }
-    return []
+interface SidebarSection {
+    urls: string[]
+    sortChildrenAlpha?: boolean
 }
 
 /**
- * Extracts platform URLs from sidebar navigation to determine display order
- * Looks up the section within docsMenu and returns child URLs in order
+ * Searches for a section with the given URL and returns its descendant URLs and config
  */
-function getSidebarOrder(sidebarPath: string): string[] {
+function findSection(sections: any[], targetUrl: string): SidebarSection | null {
+    for (const section of sections) {
+        if (section.url === targetUrl && section.children) {
+            return {
+                urls: collectAllUrls(section.children, targetUrl),
+                sortChildrenAlpha: section.sortChildrenAlpha,
+            }
+        }
+        if (section.children) {
+            const result = findSection(section.children, targetUrl)
+            if (result) return result
+        }
+    }
+    return null
+}
+
+/**
+ * Extracts platform URLs and config from sidebar navigation
+ * Looks up the section within docsMenu and returns child URLs and properties
+ */
+function getSidebarSection(sidebarPath: string): SidebarSection | null {
     const sections: any[] = (docsMenu as any).children || []
     const fullPath = `/${sidebarPath}`
 
-    return findSectionChildren(sections, fullPath)
+    return findSection(sections, fullPath)
 }
 
 interface UsePlatformListOptions {
@@ -156,11 +164,11 @@ export default function usePlatformList(
             return platform
         })
 
-    const sidebarOrder = getSidebarOrder(basePath)
+    const section = getSidebarSection(basePath)
 
-    if (sidebarOrder.length > 0) {
+    if (section && section.urls.length > 0) {
         // Warn about MDX files that exist but aren't in the sidenav
-        const orphanedFiles = result.filter((platform: Platform) => !sidebarOrder.includes(platform.url))
+        const orphanedFiles = result.filter((platform: Platform) => !section.urls.includes(platform.url))
         if (orphanedFiles.length > 0) {
             console.warn(
                 `[usePlatformList] Found ${orphanedFiles.length} MDX file(s) in "${basePath}" not listed in sidenav:\n` +
@@ -169,14 +177,11 @@ export default function usePlatformList(
             )
         }
 
-        // Filter to only include items that are in the sidebar, then sort by sidebar order
-        return result
-            .filter((platform: Platform) => sidebarOrder.includes(platform.url))
-            .sort((a: Platform, b: Platform) => {
-                const indexA = sidebarOrder.indexOf(a.url)
-                const indexB = sidebarOrder.indexOf(b.url)
-                return indexA - indexB
-            })
+        // Filter to only include items that are in the sidebar, then sort alphabetically if configured
+        const filtered = result.filter((platform: Platform) => section.urls.includes(platform.url))
+        return section.sortChildrenAlpha
+            ? filtered.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
+            : filtered
     }
 
     return result
