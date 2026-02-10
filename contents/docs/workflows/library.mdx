@@ -30,6 +30,17 @@ This ensures your message displays correctly even when a property is missing.
 
 </CalloutBox>
 
+### Email merge tags
+
+In addition to person properties, PostHog provides these system merge tags for email templates:
+
+| Merge tag | Description |
+|-----------|-------------|
+| `{{unsubscribe_url}}` | Links to a page where recipients can manage their email preferences |
+| `{{unsubscribe_url_one_click}}` | Enables RFC 8058-compliant one-click unsubscribe. When email clients send a POST request to this URL, recipients are automatically unsubscribed from all marketing emails. When clicked directly, it displays an unsubscribe confirmation page. |
+
+Use the one-click unsubscribe URL to improve email deliverability and comply with email regulations like CAN-SPAM. Most modern email clients display a prominent unsubscribe button when they detect proper one-click unsubscribe headers.
+
 ## Email templates
 
 When you click on `new template` you will see a page like this:
