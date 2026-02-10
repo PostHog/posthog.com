@@ -223,3 +223,25 @@ There is an option right above the graph to select the number of steps to displa
 />
 
 Increasing the number of steps will show a longer portion of a user's journey through your product. The drawback is that too many steps can often show a cluttered view. To fix this, see above on how to [exclude certain events](#exclusions).
+
+## FAQ
+
+### Why don't my path numbers match my funnel numbers?
+
+Paths and funnels use different queries and answer different questions, so their numbers aren't meant to match.
+
+**Funnels** count unique users. They answer: *"How many users completed this specific sequence?"* Every user who enters step 1 is counted, and you see how many reached each subsequent step.
+
+**Paths** are an exploration tool for discovering navigation patterns. They answer: *"What are the most common step-by-step transitions people take?"* They show the top 50 most frequent transitions, not comprehensive user counts.
+
+Several technical differences explain the discrepancy:
+
+- **Top 50 transitions** – Paths only return the 50 most common transitions between steps. Less common paths are excluded entirely.
+
+- **Counts transition frequency** – The numbers show how often each transition occurred, not unique users. If one user visits Home→Pricing in three separate sessions, that counts as 3. Funnels count each user only once per step.
+
+- **Path length limit** – Paths only analyze a set number of events per session (controlled by the [step count setting](#setting-the-number-of-steps), default 5). If a user visits pages A→B→C→D→E→F→G, only the first 5 (A through E) are shown – F and G are cut off entirely. If you set both a start and end point, paths preserves both ends and hides the middle with "..." instead, but you still lose visibility into the full journey. Funnels have no such limit – they track whether users reached each defined step regardless of how many events occurred in between.
+
+- **30-minute session windows** – Events more than 30 minutes apart start a new path. Funnels use a conversion window (default 14 days).
+
+**Best practice**: Use paths to explore what patterns exist, then validate specific flows with funnels, and investigate individual behavior with [session replays](/docs/session-replay).
