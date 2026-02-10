@@ -32,7 +32,9 @@ export default function Wrapper() {
         <div
             data-scheme="primary"
             className={`${
-                websiteMode ? 'max-w-7xl mx-auto border-x border-primary' : 'fixed inset-0 size-full'
+                websiteMode
+                    ? 'max-w-7xl mx-auto border-x border-primary bg-primary shadow-xl'
+                    : 'fixed inset-0 size-full'
             } flex flex-col`}
             id="app-container"
         >

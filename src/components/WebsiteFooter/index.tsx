@@ -122,7 +122,7 @@ const legalLinks = [
 
 export default function WebsiteFooter() {
     return (
-        <footer className="@container">
+        <footer className="@container z-40">
             {/* Main footer content */}
             <div data-scheme="secondary" className="bg-primary border-t border-primary">
                 {/* Bottom bar */}

@@ -304,7 +304,7 @@ export default function TaskBarMenu() {
                         menus={menuData}
                         className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
                     />
-                    <aside className="flex items-center gap-0.5 py-1">
+                    <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
                         {/* <MenuBar
                         menus={[
                             {
@@ -360,7 +360,14 @@ export default function TaskBarMenu() {
                                     <Tooltip
                                         trigger={
                                             <span>
-                                                <OSButton size="sm" className="relative top-px">
+                                                <OSButton
+                                                    size="sm"
+                                                    className={`relative top-px ${
+                                                        websiteMode && searchOpen
+                                                            ? 'border border-primary !bg-accent'
+                                                            : ''
+                                                    }`}
+                                                >
                                                     <IconSearch className="size-5" />
                                                 </OSButton>
                                             </span>
