@@ -22,7 +22,7 @@ A handful of people with good judgment and a lot of tokens can now do what used 
 
 Once you cross a certain threshold, however, product velocity stops compounding and starts competing with itself. You're no longer constrained by your capacity to ship new things, but by your users' capacity to adopt them.
 
-As a company that's obsessed with shipping fast, we're acutely familiar with this problem, so I'm sharing how we're solving it, so you can too.
+As a company that's obsessed with [shipping fast](/newsletter/small-teams), we're acutely familiar with this problem, so I'm sharing how we're solving it, so you can too.
 
 <p>
 ![product marketing at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/the_office_meme_a199c5af0a.png)
@@ -147,8 +147,9 @@ Relying on external channels for discovery is brittle. As Andrew Chen argues in 
 Your owned channels can easily make things worse. You've no doubt been a victim of generic product emails without meaningful [segmentation](https://www.reforge.com/blog/what-is-user-segmentation) ("why did I receive this?") or a disruptive in-app experience full of tooltips, banners and popups.
 
 Worst of all are launch videos or press releases that promise "revolutionary" outcomes but don't clearly explain what changed in the product. [Marketing features over benefits](/newsletter/marketing-for-devs) is a good pattern breaker, but be warned: too much focus on "what" rather than "now what" makes product adoption someone else's problem.
-
+<p>
 ![never log off](https://res.cloudinary.com/dmukukwp6/image/upload/community_product_meme_328cb8a9f4.jpg)
+</p>
 
 **Do this instead:**
 
