@@ -19,6 +19,9 @@ seo:
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import {ProductVideo} from 'components/ProductVideo'
+export const OverrideFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-light-mode.mp4"
+export const OverrideFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-dark-mode.mp4"
 
 There's "ready" and then there's "ready for everyone"; if you've ever scrambled to revert a deploy, you know the difference.
 
@@ -52,7 +55,12 @@ Developer-focused tools often go further with:
 
 ### 1. PostHog
 
-![PostHog feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_06_54_638_Z_4426f5fc4f.png)
+<ProductVideo
+    videoLight = {OverrideFeatureFlagLight}
+    videoDark = {OverrideFeatureFlagDark}
+    alt = "How to test your feature flag"
+    classes = "rounded"
+/>
 
 PostHog is an all-in-one developer platform where [feature flags](/feature-flags) aren't a standalone product — they're woven into a broader workflow that includes [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [logs](/logs), and more.
 
@@ -92,9 +100,9 @@ Developers who want feature flags as part of a complete build-measure-learn work
 
 [LaunchDarkly](/blog/best-launchdarkly-alternatives) supports complex boolean logic, multi-dimensional targeting (users, devices, organizations), progressive rollouts, approval workflows, and audit logging. It features a broad SDK coverage, and the streaming architecture delivers flag updates in near real-time without polling.
 
-More recently, LaunchDarkly has expanded into experimentation, release monitoring, and AI model configuration. It also offers "guarded releases" that automatically roll back changes when performance metrics degrade.
+More recently, it has expanded into experimentation, release monitoring, and AI model configuration. It also offers "guarded releases" that automatically roll back changes when performance metrics degrade.
 
-The trade-off is cost. LaunchDarkly's pricing is based on client-side MAUs, and can scale quickly. It also doesn't include session replay or error tracking, so you'll need separate tools for those.
+The trade-off is cost. Their pricing is based on client-side MAUs, and can scale quickly. It also doesn't include session replay or error tracking, so you'll need separate tools for those.
 
 **Strengths:**
 
@@ -146,7 +154,7 @@ Unleash is an [open-source feature flag platform](/blog/best-open-source-feature
 
 Unleash focuses on doing feature flags well without trying to be an analytics or experimentation platform. It supports progressive rollouts, kill switches, custom activation strategies, and environment management.  Under the hood, it's a Node.js and TypeScript backend that uses PostgreSQL for storage, and it's straightforward to deploy via Docker or Kubernetes.
 
-Unleash OSS is positioned as a single-environment setup, and teams that need multiple environments with governance features typically upgrade to Enterprise for things like RBAC, audit logs, and change requests, plus SSO and SCIM.
+Their OSS is positioned as a single-environment setup, and teams that need multiple environments with governance features typically upgrade to Enterprise for things like RBAC, audit logs, and change requests, plus SSO and SCIM.
 
 **Strengths:**
 
@@ -168,9 +176,9 @@ Engineering teams in regulated industries that need self-hosted feature flags wi
 
 ![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_09_52_621_Z_86c1ee217a.png)
 
-Flagsmith is an [open-source feature flag platform](/blog/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises — a rare combination that makes it a strong fit for security-conscious organizations.
+[Flagsmith](/blog/best-flagsmith-alternatives) is an [open-source feature flag platform](/blog/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises — a rare combination that makes it a strong fit for security-conscious organizations.
 
-Flagsmith supports boolean and multivariate flags, user segments, percentage rollouts, A/B testing, remote config, and scheduled flags. Its Edge API routes requests to the nearest data center for low-latency evaluation, and it supports local evaluation for server-side SDKs.
+It supports boolean and multivariate flags, user segments, percentage rollouts, A/B testing, remote config, and scheduled flags. Its Edge API routes requests to the nearest data center for low-latency evaluation, and it supports local evaluation for server-side SDKs.
 
 One area where Flagsmith differs from platforms like PostHog is that it isn't trying to be a full product analytics suite. Flagsmith includes testing features, but if you want deep behavioral analysis, funnels, retention, or replay-led debugging, you'll typically pair it with your existing analytics stack.
 
@@ -196,11 +204,11 @@ Security-conscious teams that need deployment flexibility and remote configurati
 
 ![Statsig](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_10_58_425_Z_edf21cb1a8.png)
 
-Statsig was built by ex-Facebook engineers who wanted to bring Meta's internal experimentation infrastructure to every team. The result is a platform that combines feature flags, experimentation, analytics, and session replay in one unified system.
+[Statsig](/blog/posthog-vs-statsig) was built by ex-Facebook engineers who wanted to bring Meta's internal experimentation infrastructure to every team. The result is a platform that combines feature flags, experimentation, analytics, and session replay in one unified system.
 
-Statsig's standout is its experimentation engine. Every feature flag can be turned into an experiment with automatic metric tracking, CUPED variance reduction, and sequential testing. The platform also includes product analytics, funnels, and session replay, giving teams a full picture of how flags impact user behavior.
+[Statsig's](/blog/best-statsig-alternatives) standout is its experimentation engine. Every feature flag can be turned into an experiment with automatic metric tracking, CUPED variance reduction, and sequential testing. The platform also includes product analytics, funnels, and session replay, giving teams a full picture of how flags impact user behavior.
 
-Statsig markets unlimited flag and config checks on every tier, and the free tier includes 2M events per month plus session replay volume. In practice, that means you can run a lot of flags without paying for every flag check, costs scale mainly with how much you measure and replay.
+It markets unlimited flag and config checks on every tier, and the free tier includes 2M events per month plus session replay volume. In practice, that means you can run a lot of flags without paying for every flag check, costs scale mainly with how much you measure and replay.
 
 **Strengths:**
 
