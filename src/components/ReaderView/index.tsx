@@ -437,12 +437,12 @@ const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): 
                 if (IconComponent) icon = <IconComponent className="size-full" />
             }
         }
-        const isInstallation = item.showIcons || item.name === 'Installation'
-        const children = isInstallation && item.children ? sortAlpha(item.children) : item.children
+        const shouldShowChildrenIcons = item.showChildrenIcons || resolveIcons
+        const children = item.sortChildrenAlpha && item.children ? sortAlpha(item.children) : item.children
         return {
             ...item,
             ...(resolveIcons ? { icon } : {}),
-            children: children ? resolveMenuIcons(children, item.showIcons || resolveIcons) : undefined,
+            children: children ? resolveMenuIcons(children, shouldShowChildrenIcons) : undefined,
         }
     })
 }
