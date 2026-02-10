@@ -24,7 +24,9 @@ Once you cross a certain threshold, however, product velocity stops compounding 
 
 As a company that's obsessed with shipping fast, we're acutely familiar with this problem, so I'm sharing how we're solving it, so you can too.
 
+<p>
 ![product marketing at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/the_office_meme_a199c5af0a.png)
+</p>
 
 ## The Theory of Constraints
 
@@ -87,6 +89,8 @@ Product adoption happens one human at a time, and each individual user has a fin
 **How do you elevate adoption without killing velocity?**
 
 ![no hedgehogs were harmed in the making of this image](https://res.cloudinary.com/dmukukwp6/image/upload/Theory_of_constraints_alt_2_7509e8743f.png)
+
+<NewsletterForm />
 
 ## How to address the real bottleneck of user attention
 
