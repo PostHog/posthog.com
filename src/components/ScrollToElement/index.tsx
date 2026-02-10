@@ -24,6 +24,8 @@ export const scrollToElement = (targetId: string, offset = 0, behavior: 'auto' |
     // In website mode, the viewport exists but doesn't scroll (pages are full height)
     const viewportIsScrollable = scrollViewport && scrollViewport.scrollHeight > scrollViewport.clientHeight
 
+    const taskbarOffset = 49
+
     if (viewportIsScrollable) {
         // Radix ScrollArea scrolling (same logic as ElementScrollLink)
         const parentRect = scrollViewport.getBoundingClientRect()
@@ -36,7 +38,7 @@ export const scrollToElement = (targetId: string, offset = 0, behavior: 'auto' |
         })
     } else {
         // Standard window scrolling fallback (used in website mode or when no viewport exists)
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + offset
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + offset - taskbarOffset
 
         window.scrollTo({
             top: targetPosition,
