@@ -2,7 +2,7 @@
 title: How Arena uses PostHog to ship without bias at the AI frontier
 customer: Arena
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/LM_Arena_57e75a71b4.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/Arena_3b0652e6e9.png
 date: 2026-01-12
 ---
 
