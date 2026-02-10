@@ -147,6 +147,9 @@ export const pendo = {
         workflows: {
             available: true,
         },
+        llm_analytics: {
+            available: 'Agent Analytics',
+        },
     },
     platform: {
         deployment: {

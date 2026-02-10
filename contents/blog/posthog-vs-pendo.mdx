@@ -92,8 +92,9 @@ When it comes their product platforms, here is how they compare:
         'surveys',
         'feature_flags',
         'experiments',
+        'llm_analytics',
         'surveys.features.in_app_prompts_messages',
-        { label: 'Apps/integrations', description: 'Push and pull data to other destinations', values: [true, true] },
+        'product_tours',
         'platform.deployment.open_source',
     ]}
 />
@@ -158,7 +159,7 @@ Pendo is built around in-app guides, tooltips, onboarding flows, and collecting 
 
 [**Workflows**](/docs/workflows) is PostHog's no-code automation builder for sending behavior-triggered messages and actions. You can send emails, Slack messages, and SMS (via Twilio), add delays and branching logic, split audiences, and trigger any CDP destination – all based on live product events. Think onboarding drip campaigns, milestone notifications, or Slack alerts when a user hits a key event.
 
-The main difference from Pendo is approach: Pendo offers a simpler drag-and-drop editor for tooltips and product tours aimed at non-technical PMs. PostHog gives you more flexibility and deeper integration with your product data, but doesn't have Pendo's visual tooltip builder.
+The biggest difference is that Pendo provides tooltips and product tours, which can be set up using its drag-and-drop editor without engineering support. PostHog doesn't offer in-app guides (yet, it's currently in alpha) — instead, it covers user engagement through [Surveys](/surveys) for targeted feedback and [Workflows](/workflows) for behavior-triggered messaging, with deeper integration into your product data.
 
 ### CDP and integrations
 
@@ -271,12 +272,16 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
         { label: 'Web' },
         'platform.libraries.javascript',
         'platform.libraries.react',
-        'platform.libraries.ruby',
         { label: 'Mobile' },
         'platform.libraries.android',
         'platform.libraries.flutter',
         'platform.libraries.ios',
         'platform.libraries.react_native',
+        { label: 'Backend' },
+        'platform.libraries.ruby',
+        { label: 'Python', values: [true, false] },
+        { label: 'Node.js', values: [true, false] },
+        { label: 'Go', values: [true, false] },
     ]}
 />
 </p>
@@ -302,7 +307,7 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
 - **Pendo** – In-app guides, tooltips, walkthroughs, resource centers, and NPS surveys are Pendo's core strength. PostHog covers [surveys](/surveys) and automated messaging via [Workflows](/workflows), but doesn't have Pendo's visual tooltip builder.
 
 **For teams building AI products**
-- **PostHog** – [LLM analytics](/llm-analytics) tracks model performance, token costs, latency, and traces. Pendo has no equivalent.
+- **PostHog** – [LLM analytics](/llm-analytics) tracks model performance, token costs, latency, and traces for engineers debugging and optimizing their AI stack. Pendo's Agent Analytics measures AI agent adoption and user success, but doesn't offer technical LLM observability.
 
 **For privacy-conscious and regulated organizations**
 - Both are SOC 2 certified, GDPR-ready, and HIPAA-ready, with EU data residency options. **PostHog** adds open source code, cookieless tracking, and a built-in [data warehouse](/docs/data-warehouse) for full data ownership. Pendo offers EU hosting (GCP EU multi-region) but doesn't offer self-hosting.
@@ -340,7 +345,7 @@ Pendo is a good fit if your team's primary goal is driving feature adoption and 
 <details>
 <summary>Who is PostHog useful for?</summary>
 
-**PostHog** is built primarily for engineers, technical product managers, and product-focused engineering teams. Beyond product analytics, PostHog includes [feature flags](/feature-flags), [A/B testing](/experiments), [session replays](/session-replay) with console logs and network monitoring, [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), [logs](/logs), [workflows](/workflows) for automated messaging, and a built-in [data warehouse](/data-warehouse) — all with SQL access and extensive APIs.
+**PostHog** is built primarily for engineers, technical product managers, and product-focused engineering teams. Beyond product analytics, PostHog includes [PostHog AI](/ai), [feature flags](/feature-flags), [A/B testing](/experiments), [session replays](/session-replay) with console logs and network monitoring, [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), [logs](/logs), [workflows](/workflows) for automated messaging, and a built-in [data warehouse](/data-warehouse) — all with SQL access and extensive APIs.
 
 PostHog is a good fit if your team wants a single platform that covers the full build-measure-learn cycle: ship with feature flags, track with analytics, debug with replays and error tracking, iterate with experiments...
 
@@ -396,18 +401,18 @@ No. Pendo doesn't offer error tracking, crash monitoring, or exception handling.
 <details>
 <summary>Does Pendo have LLM analytics?</summary>
 
-No. Pendo doesn't offer AI or LLM observability features.
+Pendo offers Agent Analytics for tracking AI agent adoption, conversation effectiveness, and user success — but it's aimed at product managers measuring business impact, not engineers debugging LLM performance.
 
-**PostHog** includes [LLM analytics](/llm-analytics) for tracking AI product usage, monitoring model performance, analyzing token costs and latency, and debugging LLM interactions with traces — useful for any team building AI-powered features.
+**PostHog's** [LLM analytics](/llm-analytics) is developer-focused, tracking traces, token costs, latency, and model performance across your AI stack.
 
 </details>
 
 <details>
 <summary>Which has better session replay — PostHog or Pendo?</summary>
 
-Both offer session replay, but with different strengths. **Pendo** includes session replay on Core plans and above, focused on understanding user journeys through your product alongside in-app guide performance.
+**PostHog** has stronger session replay for developers. Beyond watching user sessions, it includes console logs, network request monitoring, a DOM explorer, and performance metrics — so you can debug issues, not just observe behavior. Replays also link directly to error tracking and feature flag evaluations, so you can see exactly what went wrong and which variant a user was on.
 
-**PostHog** includes more developer-focused replay features: console logs, network request monitoring, DOM explorer, performance metrics, and direct links between replays and error tracking or feature flag evaluations. PostHog's free tier includes 5,000 replays/month; Pendo's free tier does not include replay — it requires at least the Core plan.
+**Pendo** includes session replay on Core plans and above, focused on understanding user journeys alongside in-app guide performance. It doesn't include developer debugging tools. Pendo's free tier doesn't include replay at all; PostHog's free tier includes 5,000 replays/month.
 
 </details>
 
@@ -459,7 +464,7 @@ The top product analytics tools in 2026 include:
 - **[PostHog](/product-analytics)** – Best all-in-one platform combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), and more
 - **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for self-serve product teams wanting fast, flexible analytics
 - **[Amplitude](/blog/posthog-vs-amplitude)** – Best for enterprises wanting warehouse-native analytics and a built-in CDP
-- **[Pendo](https://www.pendo.io/)** – Best for product managers who also need in-app guides and user onboarding
+- **[Pendo](/blog/best-pendo-alternatives)** – Best for product managers who also need in-app guides and user onboarding
 - **[Heap](/blog/posthog-vs-heap)** – Best for teams wanting comprehensive autocapture with minimal instrumentation
 - **[Google Analytics](/blog/posthog-vs-ga4)** – Best for marketing teams already invested in the Google ecosystem
 
