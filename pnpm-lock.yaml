@@ -75,8 +75,8 @@ importers:
         specifier: 0.36.0
         version: 0.36.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/types':
-        specifier: 1.345.0
-        version: 1.345.0
+        specifier: 1.345.1
+        version: 1.345.1
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3175,8 +3175,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/types@1.345.0':
-    resolution: {integrity: sha512-9zcsJhzO9BPBrGQDL/w7M9un3TQ7w0wiwnK5ZFfwvujhxsIS/GfcpBM/P51aE3bgzNhxpEcUkjL+60uthTentA==}
+  '@posthog/types@1.345.1':
+    resolution: {integrity: sha512-IbdkrE1sluCq3PP8k4fiflujBiLzjGxaWQCMtLEHCZP3Ey9DSFK76FsO4aM1KastkQ20wk0C7dPSr3t9ddjBcA==}
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -20528,7 +20528,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/types@1.345.0': {}
+  '@posthog/types@1.345.1': {}
 
   '@preact/signals-core@1.12.1': {}
 
