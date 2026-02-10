@@ -52,7 +52,7 @@ Make sure your early access feature flag includes a `product_key` on the payload
 
 A beta doesn't need to be perfect, but it should provide value to the user and have base elements of functionality. It doesn't need to be feature complete, but it should provide more than a mocked up front end. We aim not to leave items in beta unless they are in active development. All betas should be clearly documented.
 
-Betas do not need to be performant for high-volume users and can have big bugs, but should be clearly marked as such in the UI.
+Betas do not need to be performant for high-volume users and can have big bugs, but if you anticipate this to be the case this case, please consider a vibe check with customer-facing teams (eg in #cs-sales-support), who may bear support burden / customer friction if large customers opt into these and have a bad experience.
 
 <CloudinaryImage
   src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.png"
