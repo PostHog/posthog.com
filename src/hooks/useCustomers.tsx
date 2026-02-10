@@ -206,7 +206,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
             lily_dinh: {
                 name: 'Lily Dinh',
-                role: 'Growth Marketer',
+                role: 'Growth Marketing Lead',
                 image: {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/lily_d_lmarena_7ce598fc8c.jpeg',
                 },
@@ -457,7 +457,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
                 },
                 quotes: [
-                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
                 ],
             },
         },

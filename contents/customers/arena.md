@@ -8,9 +8,9 @@ date: 2026-01-12
 
 [Arena](https://arena.ai/) is where AI models meet for single combat. Users throw in a prompt, get two anonymous LLM responses, and vote for the winner.
 
-It's a simple concept that's hit massive scale. With 5M+ monthly users generating millions of comparisons each month, Arena's product team needs clear insights into how users engage, how UI tweaks affect votes, and where bias might creep in. 
+It's a straightforward concept that's hit massive scale. With 5M+ monthly users generating millions of comparisons each month, Arena's product team needs clear insights into how users engage, how UI tweaks affect votes, and where bias might creep in. 
 
-Matt Hova, Member of Technical Staff, and Lily Dinh, Growth Marketer, shared how Arena uses PostHog to keep the fight fair while shipping fast.
+Matt Hova, Member of Technical Staff, and Lily Dinh, Growth Marketing Lead, shared how Arena uses PostHog to keep the fight fair while shipping fast.
 
 ## Measuring preference without introducing bias
 "The core thing that we're doing is collecting votes," Matt said. "Anytime that we update the UI, we risk affecting the bias of how votes are cast." 
@@ -25,13 +25,13 @@ With dozens of variants running in parallel, knowing which one 'wins' matters as
 
 A similar experimentation loop applies across the board – from product work to top-of-funnel marketing.
 
-"We have leaderboard pages that are basically ranking charts," Lily said. "I personally don't spend much time on them, but through PostHog [analytics](/product-analytics) I found that users were spending, on average, 14 minutes on those pages."
+"We have leaderboard pages that are basically ranking charts," Lily said. "I personally don't spend much time on them, but through PostHog [analytics](/product-analytics) I found that users were spending, on average, 19 minutes on those pages."
 
-"It indicates a lot of value," she said. "But it also makes you wonder: do people want to spend 14 minutes there? Are there features we should pull out so people don't have to parse the whole thing?"
+"It indicates a lot of value," she said. "But it also makes you wonder: do people want to spend 19 minutes there? Are there features we should pull out so people don't have to parse the whole thing?"
 
-Insights like this influenced a new growth marketing effort to build targeted landing pages for specific searches — queries like _best AI for recipes_ or _best AI for UI design_.
+Insights like this influenced a new growth marketing effort to build targeted landing pages for specific searches — queries like _best ai models for image generation_ or _top ranked AI models for coding_.
 
-"All the data PostHog captures is really important for our conversion rate optimization," Lily noted. "It's how we build something backed by data, instead of assuming we know what users want."
+"All the data PostHog captures is really important for better understanding our users," Lily noted. "It's how we build something backed by data, instead of assuming we know what users want."
 
 Matt referenced another example where experimentation helped fix a core usability issue. 
 
