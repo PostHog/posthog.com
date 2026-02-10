@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We get it, nobody likes rules. As we scale the Sales and CS teams we need to be consistent in how we approach contracts to ensure that we are setting ourselves up for future success. If you have a customer situation where you'd like to vary the rules below, get approval from <TeamMember name="Dana Zou" showOnlyFirstName photo />, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> or <TeamMember name="Charles Cook" showOnlyFirstName photo /> first. You should also have them note the approval on the Salesforce opportunity record.
+We are transparent about how we contract with customers, including what discounts are available. It's better for them, and better for us. We are allergic to the phrase 'let me talk to my manager and see what we can do' - we follow a principled approach. 
 
 ## Discounts
 
-> We don't offer discounts to customers paying monthly, irrespective of commitment.
+We don't offer discounts to customers paying monthly, irrespective of commitment.
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
@@ -62,7 +62,7 @@ Beyond optimization, we offer discounts based on four levers:
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
-> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with Ben (TAEs), Simon (TAMs or CSMs), or Charles (as backup), you should assume by default that the deal will not count toward your quota.
+> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs), <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (TAMs or CSMs), or <TeamMember name="Charles Cook" showOnlyFirstName photo /> (as backup), you should assume by default that the deal will not count toward your quota.
 
 ### Why we require up-front payment for credit purchases
 
