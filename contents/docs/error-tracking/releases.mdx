@@ -23,7 +23,7 @@ The CLI finds or creates the release for the project and version it detects, and
 
 ## Uploading artefacts
 
-When you [upload sourcemaps](/docs/error-tracking/upload-source-maps/) using `posthog-cli sourcemap upload`, the artefacts are associated with a release if it was injected. You can then see release details on issues, link between stack traces and code files, and filter issues based on release information.
+When you [upload sourcemaps](/docs/error-tracking/upload-source-maps/) using `posthog-cli sourcemap upload`, the artefacts are associated with a release if it was injected. You can then see release details on issues, link between stack traces and code files, and filter issues based on release information. If the sourcemaps already exist with a different release, the CLI continues the upload without the release association by default.
 
 ## Release context in error tracking
 
