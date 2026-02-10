@@ -1,5 +1,5 @@
 ---
-title: "Build with real product context. PostHog is now available in Vercel’s v0"
+title: "PostHog is now available in Vercel’s v0"
 date: 2026-02-10
 rootPage: /blog
 sidebar: Blog
@@ -15,21 +15,19 @@ tags:
     - Product
 seo:
     {
-        metaTitle: 'Build with real product context. PostHog is now available in Vercel’s v0',
+        metaTitle: 'PostHog is now available in Vercel’s v0',
         metaDescription: 'Build with real product context in Vercel’s v0. Connect PostHog to design UI, experiments, and features based on actual user behavior.',
     }
 ---
-We recently released a [brand-new PostHog × Vercel integration](/blog/vercel-integration). If you’re building on Vercel and using PostHog, you’ve probably already noticed how much smoother things get when feature flags and experiments are properly wired up.
+We've released a [brand new PostHog × Vercel integration](/blog/vercel-integration). That integration made the setup intentionally boring. Flags and experiments are defined in PostHog, synced into Vercel’s native Flags system, credentials are handled automatically, and your app simply consumes them via the Flags SDK.
 
-That integration made the setup intentionally boring. Flags and experiments are defined in PostHog, synced into Vercel’s native Flags system, credentials are handled automatically, and your app simply consumes them via the Flags SDK.
-
-That same product context is now available in [Vercel's v0 via MCP](https://v0.app/).
+That integration focuses on how flags and experiments run in production. Now, we’re extending the same product context into [Vercel's v0 via MCP](https://v0.app/), so it’s available while you’re building.
 
 ## What you can do with PostHog in v0
 
 v0 started as a fast way to turn ideas into working UI. With PostHog as a partner, building context now comes from real product data. v0 can build with an understanding of how users behave, what experiments are showing, and which features are live, gated, or still in progress. 
 
-There are many things you can do with PostHog in v0. Here are some that will spark your imagination: 
+There's so much you can do with PostHog in v0 that we asked our Growth team what types of prompts they'd start with.
 
 ### Act based on experiment results
 
