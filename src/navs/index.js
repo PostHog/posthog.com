@@ -5066,6 +5066,8 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    showChildrenIcons: true,
+                    sortChildrenAlpha: true,
                     featured: true,
                     children: [
                         {
@@ -5359,6 +5361,23 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/link-error-tracking',
                     icon: 'IconWarning',
                     color: 'red',
+                },
+                {
+                    name: 'Collect user feedback',
+                    url: '/docs/llm-analytics/collect-user-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'React integration with useThumbSurvey',
+                            url: '/docs/llm-analytics/user-feedback/use-thumb-survey',
+                        },
+                        {
+                            name: 'Manual event capture',
+                            url: '/docs/llm-analytics/user-feedback/manual-event-capture',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',
