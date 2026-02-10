@@ -254,6 +254,15 @@ Engineering teams that want a fast, lightweight feature flag tool that fits into
 
 ---
 
+<details>
+<summary>Honorable mentions</summary>
+
+- **ConfigCat:** A privacy-first feature flag service with fixed, predictable pricing and a generous free tier (10M requests/month). All evaluations happen locally via SDKs pulling from a global CDN. It doesn't collect end-user data, which simplifies GDPR compliance. The trade-off is no experimentation, analytics, or CI/CD integration — it's intentionally lightweight. Best for teams that want simple, reliable flags without complexity.
+
+- **Harness:** Harness acquired Split in May 2024 and merged its experimentation engine into the broader Harness CI/CD platform. The result is feature flags that go through the same governance and verification workflows as code changes, with A/B testing and metric ingestion from tools like Segment and Sentry. Best for enterprise DevOps teams that want flags tightly integrated into their CI/CD pipeline.
+
+</details>
+
 ## Which feature flag tool should you choose?
 
 - Want to ship behind a flag, measure the impact, and catch errors without switching tools? **[PostHog](/feature-flags)**
@@ -296,7 +305,7 @@ Engineering teams that want a fast, lightweight feature flag tool that fits into
 <details>
   <summary>What are feature flags, and why should developers use them?</summary>
 
-Feature flags (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and trunk-based development. Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
+**Feature flags** (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and trunk-based development. Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
 
 </details>
 
@@ -312,7 +321,7 @@ Feature flags (also called feature toggles) let you control which users see a fe
 
 **LaunchDarkly** is a dedicated feature management platform built for enterprise-scale flag operations. It has the most sophisticated targeting rules, governance workflows, and SDK coverage, but doesn't include analytics, session replay, or error tracking.
 
-**PostHog** takes a different approach by embedding feature flags into an all-in-one developer platform. You can roll out a flag, watch session replays of affected users, check analytics for impact, and catch errors — all without switching tools. It's more affordable for most teams but doesn't match LaunchDarkly's depth in pure feature management.
+**PostHog** takes a different approach by embedding feature flags into an all-in-one developer platform. You can roll out a flag, watch session replays of affected users, check analytics for impact, and catch errors – all without switching tools. It's more affordable for most teams but doesn't match LaunchDarkly's depth in pure feature management.
 
 Choose **LaunchDarkly** if feature flag governance is your primary concern. Choose **PostHog** if you want flags as part of a broader build-measure-learn workflow. [Learn more about the differences in our PostHog vs LaunchDarkly comparison guide](/blog/posthog-vs-launchdarkly). 
 
@@ -323,7 +332,7 @@ Choose **LaunchDarkly** if feature flag governance is your primary concern. Choo
 
 The best LaunchDarkly alternatives depend on what you're optimizing for:
 
-- **[PostHog](/feature-flags)** if you want feature flags bundled with analytics, session replay, experiments, and error tracking — so you can measure the impact of every rollout without switching tools.
+- **[PostHog](/feature-flags)** if you want feature flags bundled with [a broad suite of developer tools](/products), so you can measure the impact of every rollout without switching tools.
 - **[GrowthBook](/blog/best-growthbook-alternatives)** if you want an open-source, warehouse-native alternative with strong experimentation.
 - **[Statsig](/blog/best-statsig-alternatives)** if you want advanced experimentation with free unlimited flags and built-in analytics.
 - **[Flagsmith](/blog/best-flagsmith-alternatives)** if you need flexible deployment options (SaaS, private cloud, on-prem) with an open-source core.
