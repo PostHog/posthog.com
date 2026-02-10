@@ -1,3 +1,5 @@
+import { workflows } from "hooks/productData/workflows";
+
 export const pendo = {
     name: 'Pendo',
     key: 'pendo',
@@ -141,6 +143,9 @@ export const pendo = {
         },
         cdp: {
             available: false,
+        },
+        workflows: {
+            available: true,
         },
     },
     platform: {

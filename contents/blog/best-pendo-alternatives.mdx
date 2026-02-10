@@ -78,8 +78,8 @@ Both PostHog and Pendo are multi-product companies covering many use cases. Pend
 <summary>Main differences between PostHog and Pendo</summary>
 
 - PostHog includes feature flags, A/B testing, and experiments natively; Pendo doesn't offer any of these.
-- PostHog includes error tracking and LLM analytics; Pendo has no equivalent.
-- Pendo has a visual drag-and-drop editor for tooltips, product tours, and onboarding walkthroughs; PostHog doesn't have in-app guide tooling.
+- PostHog includes error tracking and developer-focused LLM analytics (traces, costs, latency); Pendo offers Agent Analytics for measuring AI agent adoption and user success, but has no error tracking.
+- Pendo has a visual drag-and-drop editor for tooltips, product tours, and onboarding walkthroughs; PostHog doesn't have in-app guide tooling yet ([product tours](/docs/product-tours/start-here) are currently in alpha).
 - Pendo includes product validation, roadmap planning, and feedback collection (via Pendo Listen); PostHog covers feedback through surveys and automated messaging through Workflows.
 - PostHog supports SQL access for custom queries; Pendo does not.
 - Pendo includes session replay only on Core plans and above; PostHog includes replay on all plans including free.
@@ -268,7 +268,7 @@ Hotjar has a similar focus to Pendo, helping users create better digital experie
 
 - Both offer session replay for watching real user sessions.
 - Both include surveys for collecting in-app feedback and NPS scores.
-- Both are closed-source, cloud-only platforms now owned by larger companies (Contentsquare and Pendo respectively).
+- Both are closed-source, cloud-only platforms.
 - Both target non-technical users like product managers and designers.
 
 </details>
@@ -325,6 +325,7 @@ Like Whatfix, WalkMe focuses on internal analytics and use cases. Its integratio
         'product_analytics.features.autocapture',
         'product_tours',
         'surveys',
+        'workflows',
         'product_analytics.features.cohorts',
         'session_replay',
         'platform.deployment.eu_hosting',
@@ -757,7 +758,7 @@ No. Pendo does not offer error tracking or crash reporting. If you need to monit
 <details>
 <summary>Does Pendo have LLM analytics?</summary>
 
-No. Pendo does not offer LLM observability or AI analytics features. **PostHog** is currently the only analytics platform on this list that includes [LLM analytics](/llm-analytics) for tracking AI product usage, monitoring model performance, analyzing token costs, and debugging LLM interactions.
+Pendo offers Agent Analytics for tracking AI agent adoption, conversation effectiveness, and user success — but it's aimed at product managers measuring business impact, not engineers debugging LLM performance. **PostHog's** [LLM analytics](/llm-analytics) is developer-focused, tracking traces, token costs, latency, and model performance across your AI stack.
 
 </details>
 
@@ -774,10 +775,10 @@ Yes. Pendo offers EU hosting via GCP's EU multi-region infrastructure. PostHog a
 The top product analytics tools in 2026 include:
 
 - **[PostHog](/product-analytics)** – Best all-in-one platform combining analytics with session replay, feature flags, A/B testing, error tracking, and more
-- **[Amplitude](https://amplitude.com/)** – Best for enterprise teams wanting warehouse-native analytics and a built-in CDP
-- **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for product managers wanting polished analytics with session replay and heatmaps
-- **[Heap](https://www.heap.io/)** – Best for teams wanting comprehensive autocapture with minimal instrumentation
-- **[Pendo](https://www.pendo.io/)** – Best for product managers who also need in-app guides and user onboarding
+- **Amplitude** – Best for enterprise teams wanting warehouse-native analytics and a built-in CDP
+- **Mixpanel** – Best for product managers wanting polished analytics with session replay and heatmaps
+- **Heap** – Best for teams wanting comprehensive autocapture with minimal instrumentation
+- **Pendo** – Best for product managers who also need in-app guides and user onboarding
 
 For detailed comparisons, see our guides to [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Amplitude alternatives](/blog/best-amplitude-alternatives), and [Heap alternatives](/blog/best-heap-alternatives).
 
