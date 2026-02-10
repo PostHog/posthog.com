@@ -4,7 +4,7 @@ title: "PostHog × Vercel: feature flags, minus the plumbing"
 author:
   - sara-miteva
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/this_is_fine_6336efb0ae.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/vercel_integration_7b155713cf.png
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -41,7 +41,9 @@ Here’s how it works:
 
 Alongside flag syncing, the integration also takes care of credentials. Your PostHog Project ID and API key are automatically synced into Vercel environment variables.
 
-This means no copying values between dashboards and no wondering if prod and staging are using the same project. It’s the boring kind of automation – the best kind.
+This means no copying values between dashboards and no wondering if prod and staging are using the same project. It’s the boring kind of automation – the best kind. 
+
+In addition, thanks to the Vercel Marketplace, billing and account management are now both managed in a single location.
 
 The integration also works with [v0 – Vercel's AI agent](v0.app) that helps users create real code and full-stack apps.
 
