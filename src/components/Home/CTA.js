@@ -165,7 +165,7 @@ export default function CTA({ headline = true }) {
                                 : 'PostHog is a web product and cannot be installed by CD.'}
                             <br />
                             {isKo ? (
-                                '플로피 디스크로 보내드린 적은 있는데, 리크롤이었어요.'
+                                '플로피 디스크로 보내드린 적은 있는데, 릭롤이었습니다.'
                             ) : (
                                 <>
                                     We <em>did</em> once send some customers a floppy disk but it was a Rickroll.
