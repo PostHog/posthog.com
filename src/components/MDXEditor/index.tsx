@@ -43,6 +43,7 @@ export default function MDXEditor({
     jsxComponentDescriptors = [],
     cta,
     noEditorWrapper = false,
+    maxWidth,
 }: {
     mdxBody?: string
     body: string
@@ -52,6 +53,7 @@ export default function MDXEditor({
         label: string
     }
     noEditorWrapper?: boolean
+    maxWidth?: number
 }) {
     const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
@@ -131,7 +133,11 @@ export default function MDXEditor({
     }
 
     const content = (
-        <div onClick={handleClick} ref={mdxEditorContainerRef}>
+        <div
+            onClick={handleClick}
+            ref={mdxEditorContainerRef}
+            style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}
+        >
             {(isSSR && mdxBody) || websiteMode ? (
                 <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>

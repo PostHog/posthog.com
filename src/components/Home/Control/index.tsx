@@ -1244,10 +1244,10 @@ export default function Home() {
                 image="/images/og/default.png"
             />
             <MDXEditor
-                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}
+                maxWidth={900}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
