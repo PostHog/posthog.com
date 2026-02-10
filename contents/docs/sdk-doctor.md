@@ -63,24 +63,9 @@ SDK doctor will also notify you if your SDK version isn't officially "outdated",
 
 ## Accessing SDK doctor
 
-There are two ways to access SDK doctor:
+The quickest way to open SDK doctor is via the [command palette](/docs/cmd-k): press `Cmd` + `K` (Mac) or `Ctrl` + `K` (Windows/Linux) > type "SDK doctor" > select **SDK doctor** from the results.
 
-### Command palette
-
-The quickest way to open SDK doctor is via the [command palette](/docs/cmd-k):
-
-1. Press `Cmd` + `K` (Mac) or `Ctrl` + `K` (Windows/Linux)
-2. Type "SDK doctor"
-3. Select **SDK doctor** from the results
-
-### Side panel
-
-You can also access SDK doctor from the side panel:
-
-1. Click the three vertical dots in the lower-right corner of any page
-2. In the resulting menu, click **SDK doctor**
-
-The SDK doctor button will appear in the side panel if you have one or more outdated SDKs in need of an update.
+You can also access SDK doctor from the side panel by clicking the three vertical dots in the lower-right corner of any page > **SDK doctor**. The SDK doctor button will appear in the side panel if you have one or more outdated SDKs in need of an update.
 
 ## Understanding SDK doctor badges
 
