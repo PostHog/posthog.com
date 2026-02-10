@@ -86,4 +86,34 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 | Capture Event | Trigger a PostHog event. This can be a useful way to chain workflows together, or track the effectiveness of workflows in analytics dashboards. |
 | Update Person Properties | Set a specific person property, or create a new one. This can be a useful way to chain workflows together. |
 
+## Conversations actions
 
+If you have [Conversations](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
+
+| Conversations action | Description |
+|---------------------|-------------|
+| Get ticket | Fetch the current ticket's data into workflow variables. Exposes properties like `ticket_id`, `ticket_number`, `status`, `priority`, and `channel_source`. |
+| Update ticket | Change a ticket's status or priority. Status options: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority options: `low`, `medium`, `high`. |
+
+### Example use cases
+
+Use these actions together with [conversation events](#conversation-event-triggers) to automate support workflows:
+
+- **Auto-resolve inactive tickets** - If a customer hasn't replied for 5 days, change the ticket status from `pending` to `resolved`
+- **Escalate priority** - If a message contains the word "refund", update the ticket priority to `high`
+- **Send reminders** - Wait 2 hours after a ticket is created, then send a Slack notification if still unresolved
+
+### Conversation event triggers
+
+When Conversations is enabled, you can trigger workflows using these events:
+
+| Event | Description |
+|-------|-------------|
+| `$conversation_ticket_created` | A new support ticket was created |
+| `$conversation_ticket_status_changed` | Ticket status was updated (includes `old_status` and `new_status` properties) |
+| `$conversation_ticket_priority_changed` | Ticket priority was updated (includes `old_priority` and `new_priority` properties) |
+| `$conversation_ticket_assigned` | Ticket was assigned to a team member or AI |
+| `$conversation_message_sent` | Team member sent a message on a ticket |
+| `$conversation_message_received` | Customer sent a message on a ticket |
+
+All events include the following base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
