@@ -32,40 +32,50 @@ This ensures your message displays correctly even when a property is missing.
 
 ## Email templates
 
-When you click on `new template` you will see a page like this:
+The email editor supports two content types: **Visual** (HTML) and **Plain text**. When you create or edit a template, you'll see a tab switcher at the top of the editor to choose between them.
 
+### Visual emails
+
+The **Visual** tab opens a drag-and-drop email builder for creating HTML emails. This is the default mode when creating a new template.
+
+To save a visual template, give it a name and subject line.
+
+The builder allows you to:
+
+- Drag different types of content into the email like columns, buttons, text, etc.
+- Format the content with blocks, breaking up content into multiple sections
+- Adjust fonts, colors, and padding in the body selector
+- Add custom HTML by dragging the HTML box into your template
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/new_email_template_5a6354e3e7.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/new_email_template_5a6354e3e7.png"
     classes="rounded"
-    alt="empty-email-template"
+    alt="Visual email editor with drag-and-drop builder"
 />
 
-This is our drag-and-drop email builder, which you can use to quickly build email templates. To save the template, you will need to give the template a name, and a subject for the email. 
+When you send a visual email, PostHog automatically generates a plain text fallback from your HTML content.
 
-The builder allows you to:
-
-- Drag different types of content into the email like columns, buttons, text etc.
-- Format the content with blocks, breaking up content into multiple sections for example
-- Adjust fonts, colors and padding in the body selector
-
-Additionally our builder also supports custom HTML — just drag the HTML box into your template to add custom HTML code.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/html_block_3d949750ab.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/html_block_3d949750ab.png"
-    classes="rounded"
-    alt="html-blocks-in-email"
-/>
-
-Once you've mocked up your email, you can preview what the email would look like on different device types (desktop, tablet, and mobile) to ensure it displays correctly across all platforms.
-
+Once you've built your email, preview how it looks on desktop, tablet, and mobile to ensure it displays correctly across all platforms.
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viewing_email_c447c3ef0f.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viewing_email_c447c3ef0f.png"
     classes="rounded"
-    alt="viewing-as-desktop"
+    alt="Preview email on different devices"
 />
+
+### Plain text emails
+
+The **Plain text** tab provides a code editor for creating text-only emails. Use this option when you want:
+
+- Full control over the exact text content
+- Emails without HTML markup or styling
+- To avoid the white background that the visual editor applies
+
+When you save a plain text template, only the text content is stored — any HTML or design data is cleared. The email is sent as text-only with no HTML version.
+
+Plain text emails support [Liquid templating](#liquid-and-merge-tags) and merge tags, so you can still personalize your messages.
+
+When re-opening a template, the editor automatically selects the correct tab based on the saved content: templates with HTML open in **Visual**, while text-only templates open in **Plain text**.
 
 ### Using Liquid in email templates
 
