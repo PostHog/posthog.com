@@ -21,7 +21,7 @@ export default function WarehouseNativeSlide({ variant = 'default' }: WarehouseN
                         Store, query, and model data in PostHog's integrated data warehouse. Use it in warehouse native workflows across other PostHog tools, or in notebooks supporting SQL and Python. Queries run on PostHog infrastructure and your data never needs to travel. 
                     </p>
                     <OSButton asLink to="/data-stack" state={{ newWindow: true }} variant="secondary" size="md">
-                        Learn more about being warehouse native
+                        Learn more about our integrated warehouse
                     </OSButton>
                 </div>
 
