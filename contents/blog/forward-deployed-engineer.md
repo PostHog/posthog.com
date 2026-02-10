@@ -61,7 +61,7 @@ There are more factors beyond requiring tons of customization, though:
 
 ## How are they different from software engineers?
 
-FDEs still do software engineering, but they spend way more time talking to customers and scoping projects [than other software engineers](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87) to decide _what_ to build, and how. Their top priority is to deeply understand a customer's problems so that they can develop something that addresses it.
+FDEs still do software engineering, but they spend way more time [talking to customers](/newsletter/talk-to-users) and scoping projects [than other software engineers](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87) to decide _what_ to build, and how. Their top priority is to deeply understand a customer's problems so that they can develop something that addresses it.
 
 Software engineers on the main product team, on the other hand, focus on building features that are generalizable and maintainable. They're less involved in direct customer conversations and more focused on solutions that work at scale.
 
@@ -69,7 +69,7 @@ Software engineers on the main product team, on the other hand, focus on buildin
 
 The key difference is that FDEs work on product discovery and development with _one_ customer at a time, and generalizability is a second priority. Software engineers typically build with many users in mind from the start, and thinking about scale is baked into their process.
 
-> **Wait, what about product engineers?** Product engineers and FDEs are similar in that they both build quickly while talking to users to ship scrappy solutions that solve problems. The difference is in their setting and goals - product engineers aim to solve a problem that many people have so that they can create a reusable solution along the way, while FDEs are focused on one customer at a time.
+> **Wait, what about product engineers?** [Product engineers](/blog/what-is-a-product-engineer) and FDEs are similar in that they both build quickly while talking to users to ship scrappy solutions that solve problems. The difference is in their setting and goals - product engineers aim to solve a problem that many people have so that they can create a reusable solution along the way, while FDEs are focused on one customer at a time.
 
 ## What kinds of people become forward deployed engineers?
 
@@ -79,11 +79,11 @@ Companies look to [hire](https://builders.ramp.com/post/forward-deployed-enginee
 
 - **Customer empathy.** Are humble, collaborative, and eager to help others with empathy ([OpenAI](https://openai.com/careers/forward-deployed-engineer-gov-washington-dc/)).
 
-- **Excellent communication skills.** Executive presence and ability to represent the company in customer-facing situations ([Lambda](https://jobs.ashbyhq.com/lambda/edf27274-786e-488c-9e8a-0ded1aad1974)).
+- **Excellent [communication skills](/newsletter/communication-mistakes).** Executive presence and ability to represent the company in customer-facing situations ([Lambda](https://jobs.ashbyhq.com/lambda/edf27274-786e-488c-9e8a-0ded1aad1974)).
 
 - **A collaborative attitude.** Strong communication skills to conduct discovery with customers and to convey technical concepts to diverse stakeholders while maintaining a low ego and collaborative approach ([Anthropic](https://job-boards.greenhouse.io/anthropic/jobs/5079562008)).
 
-- **Product sense.** Contribute accelerators, frameworks, and best practices that scale impact across accounts and influence the product roadmap ([Databricks](https://www.databricks.com/company/careers/professional-services-operations/forward-deployed-engineer-fde-8251119002)).
+- **[Product sense](/newsletter/50-product-learnings).** Contribute accelerators, frameworks, and best practices that scale impact across accounts and influence the product roadmap ([Databricks](https://www.databricks.com/company/careers/professional-services-operations/forward-deployed-engineer-fde-8251119002)).
 
 - **Domain expertise.** Experience with customer-facing ownership in biotech, pharma, clinical research, or scientific software; PhD, MS, or equivalent applied experience in a life sciences relevant field encouraged ([OpenAI](https://jobs.ashbyhq.com/openai/d2ab1c9b-5c0c-4b43-a7c3-c9301854c023)).
 
@@ -91,7 +91,7 @@ Companies look to [hire](https://builders.ramp.com/post/forward-deployed-enginee
 
 [Shyam Sankar](https://www.linkedin.com/in/shyamsankar), President and CTO of Palantir, has been [quoted](https://www.youtube.com/watch?v=Zyw-YA0k3xo) that people who are “heretics” or “rebels” in their domain make for perfect FDEs because they have the unique depth, context, and energy that can unlock 3x-10x growth for a business.
 
-(If you haven't noticed yet, all of these are traits that also make for great product engineers and founders. It's no wonder why so many former Palantir employees go on to [start their own companies](https://www.businessinsider.com/palantirs-forward-deployed-engineer-role-churns-out-startup-founders-2025-6).)
+(If you haven't noticed yet, all of these are traits that also make for [great product engineers](/blog/product-engineer-vs-software-engineer) and founders. It's no wonder why so many former Palantir employees go on to [start their own companies](https://www.businessinsider.com/palantirs-forward-deployed-engineer-role-churns-out-startup-founders-2025-6).)
 
 ## When should we hire a forward deployed engineer?
 
