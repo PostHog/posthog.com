@@ -434,7 +434,7 @@ export const dataWarehouse = {
     ],
     questions: [
         {
-            question: 'How do specific user behaviours correlate to MRR?',
+            question: 'How do specific user behaviors correlate to MRR?',
             url: '/tutorials/stripe-reports',
         },
         {
