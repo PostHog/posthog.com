@@ -14,6 +14,8 @@ import qs from 'qs'
 import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
+import MobileDrawer from 'components/MobileDrawer'
+import { useApp } from '../context/App'
 
 export type Event = {
     date: string // YYYY-MM-DD
@@ -157,7 +159,27 @@ const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent:
     return { events, refreshEvents, deleteEvent }
 }
 
-const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
+const EventCard = ({
+    children,
+    onClose,
+    title,
+    isOpen,
+}: {
+    children: React.ReactNode
+    onClose: () => void
+    title: string
+    isOpen: boolean
+}) => {
+    const { isMobile } = useApp()
+
+    if (isMobile) {
+        return (
+            <MobileDrawer isOpen={isOpen} onClose={onClose} title={title}>
+                {children}
+            </MobileDrawer>
+        )
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0, translateX: '-50%' }}
@@ -396,6 +418,8 @@ function Events() {
                         <AnimatePresence>
                             {(editingEvent || creatingEvent) && isModerator ? (
                                 <EventCard
+                                    isOpen={editingEvent || creatingEvent}
+                                    title={editingEvent ? 'Edit event' : 'Add event'}
                                     onClose={() => {
                                         setCreatingEvent(false)
                                         setEditingEvent(false)
@@ -418,9 +442,15 @@ function Events() {
                                 </EventCard>
                             ) : (
                                 selectedEvent && (
-                                    <EventCard onClose={handleCloseEvent}>
+                                    <EventCard
+                                        isOpen={!!selectedEvent}
+                                        title={selectedEvent.name}
+                                        onClose={handleCloseEvent}
+                                    >
                                         <div className="p-4">
-                                            <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
+                                            <h2 className="text-xl font-bold mb-1 pr-12 @3xl:block hidden">
+                                                {selectedEvent.name}
+                                            </h2>
                                             <div className="mb-2 text-secondary">
                                                 {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
                                             </div>
