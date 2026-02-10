@@ -16,6 +16,17 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 > For detailed column definitions, formulas, and platform field mappings, see [Column definitions](/docs/web-analytics/marketing-analytics-schema).
 
+## Getting started
+
+When you first visit the [marketing analytics dashboard](https://app.posthog.com/web/marketing), you'll see a guided onboarding wizard that walks you through setup:
+
+1. **Welcome** – Introduction to Marketing Analytics and its capabilities
+2. **Add source** – Connect your marketing data sources (native integrations, data warehouse, or self-managed sources)
+3. **Conversion goals** – Define what actions count as conversions (optional)
+
+You can skip the conversion goals step and configure them later in [settings](https://app.posthog.com/settings/environment-marketing-analytics). Once you complete onboarding, you'll see the full marketing dashboard with your campaign data.
+
+
 ## Marketing dashboard
 
 The marketing dashboard contains multiple pre-built insights that help you understand your campaigns and costs. 
@@ -70,6 +81,8 @@ The campaign breakdown table provides detailed performance metrics by individual
 />
 
 PostHog supports three types of data sources for marketing analytics. All sources are configured through a unified interface that shows the connection status, required table syncing, and column mapping for each source type.
+
+> **Note:** If you haven't configured any data sources, you'll see an error banner prompting you to add at least one native integration or connect a data warehouse source.
 
 #### Native sources
 
