@@ -56,8 +56,8 @@ This is what PostHog uses to compare the property value to determine whether an 
 | --------------------- | --------------------------------------------------------------------------------------- |
 | = equals              | The property matches the value exactly and can contain multiple values to match against |
 | ≠ doesn't equal       | The property _doesn't_ exactly match any of the values you provided                     |
-| ∈ contains            | The property contains the value as a substring                                          |
-| ∉ doesn't contain     | The property doesn't contain the values as a substring                                  |
+| ∈ contains            | The property contains the value as a substring and can contain multiple values to match against |
+| ∉ doesn't contain     | The property doesn't contain any of the values you provided as a substring                       |
 | ~ matches regex       | The property matches a regex _(only available for strings)_                             |
 | ≁ doesn't match regex | The property doesn't matches a regex _(only available for strings)_                     |
 | > greater than        | The property is greater than a specific value _(only available for numeric properties)_ |
@@ -69,7 +69,7 @@ This is what PostHog uses to compare the property value to determine whether an 
 
 This is the value that PostHog compares to the property using the operation you specified. If the operation returns true, then the event is included in the insight, and if it returns false it is excluded.
 
-Some operations allow you to pass multiple values to compare against, in which case the event is included if any of these values return true when compared.
+Some operations – equals, doesn't equal, contains, and doesn't contain – allow you to pass multiple values to compare against, in which case the event is included if any of these values return true when compared.
 
 ## Types of filters
 
