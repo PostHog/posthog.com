@@ -55,7 +55,7 @@ Beyond optimization, we offer discounts based on four levers:
 - Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
 - To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
-- This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle, and is subject to the maximum total discount below
+- This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
 
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
