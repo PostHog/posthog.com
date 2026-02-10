@@ -1060,7 +1060,7 @@ function TaglineExperiment(): JSX.Element {
             <h1 className="!m-0">
                 Make sense of how people use your product – <em>and how to make it better</em>
             </h1>
-            <p className="!m-0 !mt-2 font-medium">PostHog has all the tools you need to build great products</p>
+            <p className="!m-0 !mt-2 font-medium">PostHog has all the tools you need to build great products.</p>
         </div>
     )
 }
