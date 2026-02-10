@@ -26,7 +26,7 @@ Want to understand the difference between [Pendo](/best-pendo-alternatives) and 
 
 Now it's time for the long answer...
 
-In this article we'll explore the crucial differences and similarities between Pendo (specifically, Pendo Engage) and PostHog. We’ll cover topics such as:
+In this article we'll explore the crucial differences and similarities between Pendo and PostHog. We’ll cover topics such as:
 
 -   Pendo and PostHog's [core features](#comparing-posthog-and-pendo)
 -   [Product analytics](#product-analytics) and [messaging & feedback](#in-app-engagement-messaging-and-feedback) features in detail
@@ -39,11 +39,13 @@ In this article we'll explore the crucial differences and similarities between P
 
 ### 1. PostHog is an all-in one platform
 
-PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust [analytics](/docs/product-analytics), [feature flagging](/docs/feature-flags), [A/B testing](/docs/experiments), [session capturing](/docs/session-replay), [error tracking](/docs/error-tracking) features, and more. Pendo now includes session replay on higher tiers, but still requires separate tools for feature flags, A/B testing, error tracking, and more.
+PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It has robust [analytics](/docs/product-analytics), [feature flagging](/docs/feature-flags), [A/B testing](/docs/experiments), [session recording](/docs/session-replay), [error tracking](/docs/error-tracking), [workflows](/workflows) and more. 
+
+Pendo now includes session replay and user engagement on higher tiers, but still requires separate tools for feature flags, A/B testing, error tracking, and more.
 
 ### 2. PostHog is built for engineers
 
-We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren't available in tools like Pendo, which are built for more general audiences. It also means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want.
+We built PostHog for product and engineering teams — especially [engineers with a product focus](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren't available in tools like Pendo, which are built for more general audiences. It also means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want.
 
 ### 3. Transparent pricing, generous free tiers
 
@@ -61,7 +63,7 @@ We also default to charging as little as possible while still making a sensible 
 
 ## Comparing PostHog and Pendo
 
-**Pendo** has four pricing tiers — Free, Base, Core, and Ultimate – for its main product, Pendo Engage. Pendo's Free plan is limited to 500 monthly active users and doesn't include session replays.
+**Pendo** has four pricing tiers — Free, Base, Core, and Ultimate. Pendo's Free plan is limited to 500 monthly active users and doesn't include session replays.
 
 **PostHog** uses usage-based pricing with a generous free tier – no credit card required, and unlimited teammates on every plan. Every month, you get 1 million events, 5,000 session replays, 1 million feature flag requests, and more for free. After that, you only pay for what you use, and pricing gets cheaper at scale.
 
@@ -78,9 +80,7 @@ Adding a credit card unlocks additional features like advanced paths, correlatio
 - **Workflows**: 10,000 messages per channel/month
 - **PostHog AI**: 2,000 credits/month
 
-> **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups).
-
-To make a clean comparison between PostHog and Pendo, we'll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers.
+When it comes their product platforms, here is how they compare:
 
 <p>
 <ProductComparisonTable
@@ -154,7 +154,7 @@ This difference is reflected in all levels of the product, but especially in pro
 
 Pendo is built around in-app guides, tooltips, onboarding flows, and collecting user feedback. PostHog covers this ground with two dedicated products: [Surveys](/surveys) and [Workflows](/workflows).
 
-[**Surveys**](/docs/surveys) let you collect qualitative feedback directly inside your product – NPS, CSAT, CES, ratings, multiple choice, open text, and link prompts with custom CTAs. Surveys can be displayed as popovers, feedback buttons, or via the API for fully custom UIs. You can target surveys based on person properties, URLs, feature flags, or specific events, and because surveys are part of PostHog, you can see who responded, watch their session replays, and analyze responses alongside your product analytics.
+[**Surveys**](/docs/surveys) let you collect qualitative feedback directly inside your product – NPS, CSAT, CES, ratings, multiple choice, open text, and link prompts with custom CTAs. They can be displayed as popovers, feedback buttons, or via the API for fully custom UIs. You can target surveys based on person properties, URLs, feature flags, or specific events. Because surveys are part of PostHog, you can see the profiles of who responded, watch their session replays, and analyze responses alongside your product analytics.
 
 [**Workflows**](/docs/workflows) is PostHog's no-code automation builder for sending behavior-triggered messages and actions. You can send emails, Slack messages, and SMS (via Twilio), add delays and branching logic, split audiences, and trigger any CDP destination – all based on live product events. Think onboarding drip campaigns, milestone notifications, or Slack alerts when a user hits a key event.
 
@@ -162,9 +162,14 @@ The main difference from Pendo is approach: Pendo offers a simpler drag-and-drop
 
 ### CDP and integrations
 
-Pendo integrates with popular tools like Salesforce, Jira, Slack, and Segment, and supports data export via webhooks and APIs. But it doesn't offer native data pipeline or CDP functionality – you'd need a separate tool like Segment or RudderStack to route data between platforms.
+Pendo integrates with popular tools like Salesforce, Jira, Slack, and Segment, and supports data export via webhooks and APIs. It doesn't offer native data pipeline or CDP functionality – you'd need a separate tool like Segment or RudderStack to route data between platforms.
 
-PostHog includes a built-in [CDP](/cdp) (Customer Data Platform) with three core components: **sources** for ingesting data from 20+ managed integrations (Stripe, Hubspot, Salesforce, Snowflake, BigQuery, Google/Meta/LinkedIn Ads, and more), **transformations** for cleaning and enriching event data in real-time (GeoIP enrichment, PII scrubbing, bot filtering, property standardization), and **destinations** for sending PostHog data to other tools in real-time or via batch export.
+PostHog includes a built-in [CDP](/cdp) (Customer Data Platform) with three core components: 
+
+1. **Sources** for ingesting data from 20+ managed integrations (Stripe, Hubspot, Salesforce, Snowflake, BigQuery, Google/Meta/LinkedIn Ads, and more
+2. **Transformations** for cleaning and enriching event data in real-time (GeoIP enrichment, PII scrubbing, bot filtering, property standardization)
+3. **Destinations** for sending PostHog data to other tools in real-time or via batch export.
+
 
 Because the CDP is built into PostHog, imported data lives alongside your product analytics, session replays, and feature flags – so you can join data with product behavior in a single query without stitching systems together. PostHog also integrates with third-party CDPs like [Segment](/docs/libraries/segment) and [RudderStack](/docs/libraries/rudderstack) if you already have one set up.
 
@@ -315,7 +320,9 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
 <details>
 <summary>What's the difference between PostHog and Pendo?</summary>
 
-**Pendo** is a product experience platform built for product managers. It combines product analytics with in-app guides, tooltips, onboarding flows, NPS surveys, product validation, and roadmap tools. Session replay is available on Core plans and above. **PostHog** is an all-in-one platform built for engineers, combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), [workflows](/workflows), a built-in [data warehouse](/data-warehouse), and more.
+**Pendo** is a product experience platform built for product managers. It combines product analytics with in-app guides, tooltips, onboarding flows, NPS surveys, product validation, and roadmap tools. Session replay is available on Core plans and above. 
+
+**PostHog** is an all-in-one platform built for engineers, combining product analytics with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), [workflows](/workflows), a built-in [data warehouse](/data-warehouse), and more.
 
 The key difference is focus: **Pendo** is optimized for non-technical PMs who want to create in-app guides and collect feedback without code. **PostHog** is optimized for engineering-led teams who want to measure, experiment, and ship — all from one platform.
 
