@@ -876,6 +876,7 @@ export function useMenuData(): MenuType[] {
             ),
             items: logoMenuItems,
             mobileLink: websiteMode ? '/' : undefined,
+            hideChevron: true,
         },
         // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),

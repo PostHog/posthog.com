@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Menubar as RadixMenubar } from 'radix-ui'
-import { IconChevronRight } from '@posthog/icons'
+import { IconChevronDown, IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -28,6 +28,7 @@ export type MenuType = {
     bold?: boolean
     items: MenuItemType[]
     mobileLink?: string // Direct link for the menu trigger on mobile
+    hideChevron?: boolean // Hide the chevron down icon for this menu (when showChevronDown is enabled)
 }
 
 // const { websiteMode } = useApp()
@@ -310,9 +311,16 @@ export interface MenuBarProps {
     className?: string
     customTriggerClasses?: string
     triggerAsChild?: boolean
+    showChevronDown?: boolean
 }
 
-const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
+const MenuBar: React.FC<MenuBarProps> = ({
+    menus,
+    className,
+    triggerAsChild,
+    customTriggerClasses,
+    showChevronDown,
+}) => {
     const { isMobile, websiteMode } = useApp()
 
     const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
@@ -376,6 +384,9 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             }`}
                         >
                             {menu.trigger}
+                            {showChevronDown && !menu.hideChevron && (
+                                <IconChevronDown className="size-5 opacity-60 -mr-2" />
+                            )}
                         </Link>
                     )
                 }
@@ -408,6 +419,9 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             }
                         >
                             {menu.trigger}
+                            {showChevronDown && !menu.hideChevron && (
+                                <IconChevronDown className="size-5 opacity-60 -mr-2" />
+                            )}
                         </RadixMenubar.Trigger>
                         <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content

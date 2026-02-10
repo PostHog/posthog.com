@@ -301,6 +301,7 @@ export default function TaskBarMenu() {
                     }`}
                 >
                     <MenuBar
+                        showChevronDown={websiteMode}
                         menus={menuData}
                         className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
                     />
