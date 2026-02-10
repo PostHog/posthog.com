@@ -16,6 +16,7 @@ import {
     IconSearch,
     IconPin,
     IconCheck,
+    IconChevronLeft,
 } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
@@ -329,6 +330,12 @@ export default function Inbox(props) {
         setSideWidth(newSideWidth)
     }
 
+    const handleBack = () => {
+        if (websiteMode) {
+            navigate(-1)
+        }
+    }
+
     useEffect(() => {
         if (inView && hasMore) {
             fetchMore()
@@ -438,15 +445,13 @@ export default function Inbox(props) {
                     <div
                         data-scheme="secondary"
                         className={`flex @2xl:flex-row flex-col flex-grow min-h-0 ${
-                            websiteMode ? 'gap-4' : 'border-t border-primary'
+                            websiteMode ? '' : 'border-t border-primary'
                         }`}
                     >
                         <aside
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary @2xl:h-full flex-shrink-0 ${
-                                websiteMode
-                                    ? 'rounded h-[calc(100vh-91px)] sticky top-[101px]'
-                                    : '@2xl:border-r border-primary'
+                                websiteMode ? 'h-[calc(100vh-91px)] sticky top-[101px]' : '@2xl:border-r border-primary'
                             }`}
                         >
                             <ScrollArea className="h-full">
@@ -597,6 +602,13 @@ export default function Inbox(props) {
                                                     sideBySide ? 'border-t-0' : ''
                                                 }`}
                                             >
+                                                {websiteMode && (
+                                                    <OSButton
+                                                        size="md"
+                                                        onClick={handleBack}
+                                                        icon={<IconChevronLeft />}
+                                                    />
+                                                )}
                                                 <OSButton
                                                     variant="secondary"
                                                     size="xs"
