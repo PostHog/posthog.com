@@ -88,6 +88,26 @@ This context helps you understand and resolve issues faster.
 </QuestLogItem>
 
 <QuestLogItem
+    title="Automate with Workflows (optional)"
+    subtitle="Optional"
+    icon="IconDecisionTree"
+>
+
+Use [Workflows](/docs/workflows) to automate ticket management based on conversation events. For example:
+
+- Auto-resolve tickets if a customer hasn't replied for 5 days
+- Send a Slack notification when a message contains "refund"
+- Escalate ticket priority based on keywords
+
+When Conversations is enabled, you can trigger workflows using events like `$conversation_ticket_created`, `$conversation_ticket_status_changed`, or `$conversation_message_received`.
+
+<OSButton variant="primary" asLink to="/docs/workflows/workflow-builder#conversations-actions">
+  Set up workflow automation
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
     title="Build a custom UI (optional)"
     subtitle="Optional"
     icon="IconCode"
