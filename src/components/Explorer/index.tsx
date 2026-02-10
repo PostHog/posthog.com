@@ -205,7 +205,7 @@ export default function Explorer({
                         data-app="Explorer"
                         data-scheme="primary"
                         className={`@container flex-1 bg-primary relative h-full ${
-                            websiteMode ? 'border-l border-primary' : ''
+                            websiteMode && leftSidebarContent ? 'border-l border-primary' : ''
                         }`}
                     >
                         {fullScreen ? (
