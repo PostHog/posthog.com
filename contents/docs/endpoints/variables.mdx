@@ -38,9 +38,9 @@ curl -X POST \
 
 ### Materialization
 
-SQL-based endpoints with variables can be [materialized](/docs/endpoints/materialization) when each variable is used in a WHERE clause with a supported comparison operator.
+SQL-based endpoints with variables can be [materialized](/docs/endpoints/materialization) when each variable is used in a `WHERE` clause with a supported comparison operator.
 
-**Supported operators:** `=`, `>=`, `>`, `<`, `<=`
+Supported operators include: `=`, `>=`, `>`, `<`, `<=`
 
 You can use multiple variables in the same query, including range queries on the same column.
 
@@ -60,7 +60,7 @@ WHERE event = {variables.event_name}
   AND hour < {variables.end_hour}
 ```
 
-However, queries with unsupported operators or variable usage outside WHERE clauses cannot be materialized:
+However, queries with unsupported operators or variable usage outside `WHERE` clauses cannot be materialized:
 
 ```sql
 -- Cannot materialize: LIKE operator not supported
