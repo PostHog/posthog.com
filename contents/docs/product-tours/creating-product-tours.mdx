@@ -14,17 +14,46 @@ Product tours are multi-step walkthroughs that highlight elements in your UI. Yo
 
 1. Go to [Product tours](https://us.posthog.com/product-tours) in PostHog
 2. Click **New tour** and select **Product tour**
-3. Enter the URL where you want to build the tour and click **Open toolbar**
+3. Enter the URL where you want to build the tour and click **Launch**
 
-## Select elements
+## Define your tour steps
 
-Click elements on your page to create steps. PostHog generates a CSS selector for each element automatically.
+The Toolbar is where you'll build the "skeleton" of your tour. Create steps, optionally attached to elements on your page, and configure some basic settings for them.
 
->**Note:** If your target elements do not have stable selectors like `id` or `data-*`, the tour may fail to correctly identify them. We're working on a new element-finding algorithm, stay tuned!
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_05_at_10_04_48_PM_129f5894c4.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_05_at_10_04_17_PM_a56ff45a20.png"
+    alt="Product Tour Toolbar editor"
+    classes="rounded"
+/>
 
-## Add step content
+When attaching elements to steps, you'll be able to choose between **Auto** and **Manual** targeting.
 
-The toolbar includes a lightweight editor for basic formatting and images. For more control, edit your tour in the main PostHog app.
+- **Auto**: Click your element and we'll collect data about it so we can reliably find it again during tours.
+- **Manual**: Provide a CSS selector for us to target the element.
+
+To learn more about auto vs. manual element targeting, see [Element selection](/docs/product-tours/element-selection).
+
+### Record your session (optional)
+
+When you first open the toolbar, you'll see a modal asking if you want to enable session replay. If you opt in, PostHog records your DOM interactions while you build the tour – not your screen, camera, or other tabs. This helps us understand how you build product tours so we can build a better product!
+
+The recording respects any `.ph-no-capture` privacy markers on your site. All inputs are masked by default.
+
+## Edit step content
+
+After defining your tour structure in the toolbar, edit step content (text, formatting, images) in the main PostHog app.
+
+Tour-wide settings like styling and display conditions are available in the right panel.
+
+Below the content editor, you'll find step-specific settings like button configuration and targeting precision.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_05_at_10_00_11_PM_d3f39b13c4.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_05_at_9_59_06_PM_bcf1538067.png"
+    alt="Product Tour editor"
+    classes="rounded"
+/>
 
 ## Step progression
 
@@ -32,17 +61,25 @@ Steps can progress via buttons or when the user clicks the target element. Guide
 
 ## Step types
 
-### Element steps
+### Pop-up steps
 
-The default. Highlights a specific element with a tooltip. Positioning is automatic based on available viewport space.
+The default. Show a tooltip with your content, positioned anywhere on the screen or attached to a particular element on the page.
 
-### Modal steps
-
-Screen-positioned dialogs not anchored to any element. Useful for welcome messages or summary screens.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_05_at_9_43_34_PM_3f352cf68b.png"
+    alt="Pop-up step example"
+    classes="rounded"
+/>
 
 ### Survey steps
 
 Embed a survey question mid-tour (open text or rating scale). Responses are captured as events.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_05_at_10_02_02_PM_e335e8f0bb.png"
+    alt="Survey step example"
+    classes="rounded"
+/>
 
 ## Save and launch
 

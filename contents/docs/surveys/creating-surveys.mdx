@@ -112,6 +112,19 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
 Without the parameter, responses are collected anonymously and cannot be linked to users.
 With the parameter, responses are attributed to the specified user, enabling you to see survey data alongside other user events and properties.
 
+#### Adding event properties to hosted survey responses
+
+When directing users to a hosted survey, you can add event properties using URL parameters. These parameters are automatically captured on the survey sent event.
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?order_id=12345
+```
+
+The types for custom properties are automatically inferred with this logic, in this order:
+- `Numeric`: matches regex `/^-?\d+(\.\d+)?$/` (integer or decimal)
+- `Boolean`: exact strings `"true"` and `"false"`
+- `String`: everything else
+
 #### Pre-filling survey responses via URL
 
 You can pre-fill survey answers using URL parameters, which is especially useful for creating one-click survey links in emails. This feature works with single choice, multiple choice, and rating questions.

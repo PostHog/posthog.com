@@ -185,6 +185,7 @@ const Search = ({
                             className={`w-full border-primary list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl ${
                                 websiteMode ? 'border-t' : 'mt-2 rounded-md border'
                             }`}
+                            onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>

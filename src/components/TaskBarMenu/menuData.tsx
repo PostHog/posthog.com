@@ -677,6 +677,11 @@ export function useMenuData(): MenuType[] {
                         },
                         {
                             type: 'item',
+                            label: 'BAA generator (less fun)',
+                            link: '/baa',
+                        },
+                        {
+                            type: 'item',
                             label: 'SOC ✌️',
                             link: '/handbook/company/security#soc-2',
                         },
@@ -689,9 +694,9 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Professional Services',
-                    link: '/professional-services',
-                    icon: <Icons.IconPerson className="size-4 text-seagreen" />,
+                    label: 'Services',
+                    link: '/services',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',

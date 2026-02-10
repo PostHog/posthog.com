@@ -21,9 +21,9 @@ The <SmallTeam slug="docs-wizard" /> is responsible for improving the docs. This
 - Ensuring screenshots and other visual elements are up-to-date
 - Shipping supplementary docs and tutorials based on feedback and emerging use cases
 
-## Ownership in the Docs & Wizard team
+## Ownership within the Docs & Wizard team
 
-We've previously assigned ownership to areas of the product and docs to individuals, but we're presently more project orientated.
+We've previously assigned ownership to areas of the PostHog platform and product docs to individuals, but we're presently more project orientated.
 
 You can view what we're working on right now by:
 
@@ -52,7 +52,7 @@ There are lots of places you can go to find inspiration for what to work on duri
 
 ## FAQ
 
-### I'm really busy, can the content team write docs for me?
+### I'm really busy, can the <SmallTeam slug="docs-wizard" /> team write docs for me?
 
 We can help, but we can't do it all for you. We lack the context necessary to document new features. First drafts of documentation must always come from the relevant product team.
 

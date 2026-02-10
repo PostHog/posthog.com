@@ -1,6 +1,10 @@
 // Paths that have raw markdown available for copying/downloading
 export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook'] as const
 
+// Default avatar fallback (Max the hedgehog)
+export const AVATAR_FALLBACK_URL =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/547324034_92465cc7_daa9_413a_9c77_e72dc38f1c9f_d77ba7e4c2.png'
+
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
 export const CUSTOMER_COUNT = 190254

@@ -1,4 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
+import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import Link from 'components/Link'
@@ -155,10 +156,7 @@ export const TeamMember = (props: any) => {
                         <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10 group-hover:-translate-y-20 transition-all">
                             <CloudinaryImage
                                 width={350}
-                                src={
-                                    avatar?.url ||
-                                    'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                                }
+                                src={avatar?.url || AVATAR_FALLBACK_URL}
                                 imgClassName="w-full h-[calc(50cqh_+_3rem)] object-contain object-right-bottom pl-4 z-10 relative top-[-2px]"
                                 alt={name}
                             />

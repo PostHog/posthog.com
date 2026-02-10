@@ -113,6 +113,28 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
     }
 }
 
+const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>): Record<string, any> => {
+    const collected = new Set<string>()
+
+    const collect = (obj: any) => {
+        if (typeof obj !== 'object' || !obj) return
+        if (obj['$ref']?.startsWith('#/components/schemas/')) {
+            const name = obj['$ref'].replace('#/components/schemas/', '')
+            if (!collected.has(name) && allSchemas[name]) {
+                collected.add(name)
+                collect(allSchemas[name])
+            }
+        }
+        Object.values(obj).forEach(collect)
+    }
+
+    items.forEach((item) => collect(item.operationSpec))
+
+    return {
+        schemas: Object.fromEntries([...collected].map((name) => [name, allSchemas[name]])),
+    }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
@@ -125,6 +147,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const parser = new OpenAPIParser(spec)
     const menu = MenuBuilder.buildStructure(parser, {} as any)
+
+    const allSchemas = spec.components?.schemas || {}
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
     const maxEndpointItems = 20
@@ -149,6 +173,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return endpoint
     })
     all_endpoints.forEach((endpoint) => {
+        const components = findAllReferencedSchemas(endpoint.items, allSchemas)
+
         const node = {
             id: createNodeId(`api_endpoint-${endpoint.name}`),
             internal: {
@@ -157,29 +183,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     items: endpoint.items,
                 }),
             },
-            items: JSON.stringify(
-                endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
-            ),
-            schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
+            items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
+            components: JSON.stringify(components),
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
         }
         createNode(node)
     })
-    createNode({
-        id: createNodeId(`api_endpoint-components`),
-        internal: {
-            type: `ApiComponents`,
-            contentDigest: createContentDigest({
-                components: spec.components,
-            }),
-        },
-        components: JSON.stringify(spec.components),
-    })
 
     const createProductDataNode = async () => {
-        const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+        const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
             'Content-Type': 'application/json',
         }

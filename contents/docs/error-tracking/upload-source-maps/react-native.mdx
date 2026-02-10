@@ -64,6 +64,19 @@ module.exports = config
 
 Automatic source map uploading is handled through the Gradle build process on Android and the Xcode build process on iOS.
 
+<CalloutBox icon="IconWarning" title="EAS Updates" type="action">
+
+If you are using [EAS Updates](https://docs.expo.dev/eas-update/introduction/), source maps must be uploaded manually after running the update command. The automatic upload via Gradle/Xcode only runs during native builds, not during OTA updates.
+
+```bash
+# After running `eas update` or `npx expo export --dump-sourcemap`, upload source maps from the output directory
+posthog-cli exp hermes upload --directory dist
+```
+
+The `dist` folder is the default output directory for EAS updates.
+
+</CalloutBox>
+
 1. Expo: Update the [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins) file in your app's root directory.
 
 Expo Plugins that add modifications can only be used with [prebuilding](https://docs.expo.dev/workflow/continuous-native-generation/) and managed [EAS Build](https://docs.expo.dev/build/introduction/).

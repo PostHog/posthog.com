@@ -1,11 +1,11 @@
 ---
 title: 'The best Sentry alternatives & competitors, compared'
-date: 2025-02-21
+date: 2026-01-26
 author:
     - ian-vanagas
 rootpage: /blog
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/sentry_0369fbe6bf.jpg
 featuredImageType: full
 category: General
 tags:
@@ -14,42 +14,44 @@ tags:
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
+[Sentry](/blog/posthog-vs-sentry) is one of the most widely-used error tracking tools on the market, and for good reason. It's mature, reliable, and most developers have used it at some point.
+
+But Sentry isn't the only option. Whether you're looking for deeper product context, a more generous free tier, or a tool that combines error tracking with analytics and session replay, there are [strong alternatives worth considering](/blog/best-error-tracking-tools).
+
+In this guide, we compare the best Sentry alternatives, including tools that go beyond traditional error monitoring to help you understand *who* is affected and *why* it matters – not just what broke.
+
 ## 1. PostHog
 
--   **Founded:** 2020
--   **Similar to:** Sentry, LogRocket
--   **Typical users:** Engineers and product teams
--   **Typical customers:** Mid-size B2Bs and startups
+- **Founded:** 2020
+- **Similar to:** Sentry, LogRocket
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Mid-size B2Bs and startups
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_11_05_43_2x_4bd442ec11.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_11_06_11_2x_e5928d17d7.png"
-    alt="PostHog interface"
-    classes="rounded"
-/>
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_11_05_43_2x_4bd442ec11.png)
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an open-source platform combining error tracking, session replays, product analytics, A/B testing, feature flags, user surveys, and more into one product. This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but also tools like [Amplitude](/blog/posthog-vs-amplitude) and [LaunchDarkly](/blog/posthog-vs-launchdarkly).
+[PostHog](/) (that's us 👋) is an all-in-one platform combining [error tracking](/error-tracking), [session replays](/session-replay), [product analytics](/product-analytics), [web analytics](/web-analytics), [A/B testing](/experiments), [feature flags](/feature-flags), [user surveys](/surveys), [LLM observability](/llm-analytics), and more into one product. 
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of February 2025, 3,753 of the top 1 million websites deploy PostHog, far fewer than the 73,723 that use Sentry.
+This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but also tools like [Amplitude](/blog/posthog-vs-amplitude) and [LaunchDarkly](/blog/posthog-vs-launchdarkly).
 
 #### Key features
 
--   🚨 **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation). Provide stack traces to debug issues. Correlate with product usage data.
+- **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation). Provide stack traces to debug issues. Correlate with product usage data.
 
--   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, performance monitoring, and 90-day data retention.
 
--   📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
 
--   🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+- **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
--   🧪 **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
--   💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
 ### How does PostHog compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
@@ -72,6 +74,27 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+<details>
+  <summary>Main differences between PostHog and Sentry</summary>
+
+* PostHog offers 100k free errors and 5k free recordings per month vs Sentry's 5k errors and 50 recordings on the free tier.
+* PostHog ties every error to user sessions, product analytics, session recordings, and feature flags. Sentry focuses on stack traces and performance monitoring.
+* PostHog includes SQL querying and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors.
+* Sentry supports 100+ platforms including Unity, Unreal Engine, Rust, and Elixir; PostHog covers major web and mobile frameworks but has narrower SDK coverage.
+
+</details>
+
+<details>
+  <summary>Main similarities between PostHog and Sentry</summary>
+
+* Both capture exceptions with detailed stack traces and environment context.
+* Both recently launched [logs](/docs/logs) and [LLM observability](/llm-analytics) features
+* Both offer AI assistants: [PostHog AI](/ai) can be used for querying data and debugging; Sentry has Seer for automated root cause analysis and fix suggestions.
+* Both integrate with GitHub, Slack, and popular CI/CD tools.
+
+</details>
 
 ### Why do companies use PostHog?
 
@@ -85,14 +108,20 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 > #### Bottom line
 >
-> If you're looking for error tracking and session replay, along with many more tools for making your product better, PostHog is a great alternative to Sentry. This is especially the case for startups and scale ups, thanks to PostHog's generous free tier.
+> If you're looking for [error tracking](/docs/error-tracking) and [session replay](/docs/session-replay), along with many more tools for making your product better, PostHog is a great alternative to Sentry. This is especially the case for startups and scale ups, thanks to PostHog's generous free tier.
+
+<p>
+  <CallToAction to="https://posthog.com/docs/error-tracking/start-here">
+    Get started with PostHog Error Tracking – it's free!
+  </CallToAction>
+</p>
 
 ## 2. Rollbar
 
--   **Founded:** 2012
--   **Similar to:** Sentry, Appsignal, Raygun
--   **Typical users:** Developers, engineers, and operations teams
--   **Typical customers:** Enterprise organizations, SaaS companies, and tech startups
+- **Founded:** 2012
+- **Similar to:** Sentry, Appsignal, Raygun
+- **Typical users:** Developers, engineers, and operations teams
+- **Typical customers:** Enterprise organizations, SaaS companies, and tech startups
 
 ![Rollbar](https://res.cloudinary.com/dmukukwp6/image/upload/rollbar_c04782ffbc.png)
 
@@ -100,20 +129,19 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 [Rollbar](/blog/best-rollbar-alternatives) helps teams find and fix errors in their code fast through real-time error tracking, issue management, and AI-assisted workflows. Their whole platform is designed to help teams quickly detect, prioritize, and resolve issues in their applications.
 
-According to [BuiltWith](https://trends.builtwith.com/widgets/Rollbar), as of February 2025, 4,485 of the top 1 million websites deploy Rollbar, compared to the 73,723 that use Sentry.
-
 #### Key features
 
--   🪲 **Error tracking:** Real-time error detection with automatic grouping and issue tracking.
+- **Error tracking:** Real-time error detection with automatic grouping and issue tracking.
 
--   🚨 **Alerting:** Customizable alerting with notifications where you need them.
+- **Alerting:** Customizable alerting with notifications where you need them.
 
--   🔍 **Error context:** Detailed error context including stack traces, code, and telemetry.
+- **Error context:** Detailed error context including stack traces, code, and telemetry.
 
--   🔄 **Custom workflows**: Use Rollbar's rules engine to trigger API or webhook-based actions.
+- **Custom workflows**: Use Rollbar's rules engine to trigger API or webhook-based actions.
 
 ### How does Rollbar compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['rollbar', 'sentry']}
     rows={[
@@ -136,6 +164,27 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/Rollbar), as of Fe
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+<details>
+  <summary>Main differences between Rollbar and Sentry</summary>
+
+* Sentry includes built-in performance monitoring and distributed tracing; Rollbar focuses purely on error tracking.
+* Sentry offers a self-hosted open-source option; Rollbar is cloud-only and proprietary.
+* Sentry's UI is built for large teams managing multiple projects; Rollbar's simplicity suits smaller setups.
+* Sentry has a larger free tier (5k errors vs Rollbar's limited free plan).
+
+</details>
+
+<details>
+  <summary>Main similarities between Rollbar and Sentry</summary>
+
+* Both provide real-time error detection with automatic grouping and notifications.
+* Both integrate with GitHub, Slack, Jira, and CI/CD pipelines.
+* Both support wide language and framework coverage.
+* Both offer customizable alerting rules and workflow automation.
+
+</details>
 
 ### Why do companies use Rollbar?
 
@@ -166,20 +215,19 @@ Raygun is a full-stack monitoring platform focused on ecommerce and media compan
 
 It provides crashing reporting, performance monitoring, and user experience insights. Its suite of tools enables teams to quickly detect, diagnose, and resolve issues across their entire tech stack. It's also built an AI error resolution system to help with this.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Raygun), as of February 2025, only 504 of the top 1 million websites deploy Raygun.
-
 #### Key features
 
--   🪲 **Error tracking:** Real-time error and crash reporting with detailed stack traces and code-level insights.
+- **Error tracking:** Real-time error and crash reporting with detailed stack traces and code-level insights.
 
--   📈 **Performance monitoring:** Get insights into your app's performance for your users. Track metrics like Core Web Vitals and load times.
+- **Performance monitoring:** Get insights into your app's performance for your users. Track metrics like Core Web Vitals and load times.
 
--   📺 **Application performance monitoring:** Uncover backend performance issues with tracing and visualizations.
+- **Application performance monitoring:** Uncover backend performance issues with tracing and visualizations.
 
--   🧠 **AI error resolution:** Raygun's suite of tools has AI error resolution built in to make all of this easier.
+- **AI error resolution:** Raygun's suite of tools has AI error resolution built in to make all of this easier.
 
 ### How does Raygun compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['raygun', 'sentry']}
     rows={[
@@ -202,6 +250,27 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Raygun), as of F
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+<details>
+  <summary>Main differences between Raygun and Sentry</summary>
+
+* Raygun includes AI-powered error resolution; Sentry recently added Seer AI but it's an add-on.
+* Sentry offers a free tier; Raygun only provides a 14-day free trial.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; Raygun is subscription only.
+* Raygun has a stronger focus on .NET and Flutter SDKs; Sentry has broader framework coverage.
+
+</details>
+
+<details>
+  <summary>Main similarities between Raygun and Sentry</summary>
+
+* Both provide real-time crash reporting with detailed stack traces.
+* Both offer application performance monitoring alongside error tracking.
+* Both integrate with popular issue trackers and notification tools.
+* Both support web, mobile, and backend environments.
+
+</details>
 
 ### Why do companies use Raygun?
 
@@ -219,10 +288,10 @@ According to G2 reviews, Raygun is chosen because:
 
 ## 4. Datadog
 
--   **Founded:** 2010
--   **Similar to:** New Relic
--   **Typical users:** DevOps teams, IT, and software engineers
--   **Typical customers:** Huge, cloud-native enterprises
+- **Founded:** 2010
+- **Similar to:** New Relic
+- **Typical users:** DevOps teams, IT, and software engineers
+- **Typical customers:** Huge, cloud-native enterprises
 
 ![Datadog](https://res.cloudinary.com/dmukukwp6/image/upload/datadog_db7bb8e269.jpeg)
 
@@ -230,20 +299,19 @@ According to G2 reviews, Raygun is chosen because:
 
 Datadog is a cloud observability and monitoring platform that provides real-time visibility into infrastructure, applications, logs, and network performance. It enables organizations to ensure performance, security, and reliability across their entire stack.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/Datadog), as of February 2025, only 4,941 of the top 1 million websites deploy Datadog compared to 73,723 that use Sentry, but this likely underestimates the number of users as much of Datadog's usage is in backend systems.
-
 #### Key features
 
--   📈 **Performance monitoring:** Monitor your app (and infrastructure) performance across your stack, from frontend to workflows to databases. Troubleshoot issues with distributed tracing.
+- **Performance monitoring:** Monitor your app (and infrastructure) performance across your stack, from frontend to workflows to databases. Troubleshoot issues with distributed tracing.
 
--   📝 **Log management:** Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance.
+- **Log management:** Aggregate and analyze logs in real-time to correlate events, identify issues, and gain insight into system performance.
 
--   👷 **Infrastructure monitoring:** Get visibility into your infrastructure's performance, health, and security across your cloud or hybrid environment.
+- **Infrastructure monitoring:** Get visibility into your infrastructure's performance, health, and security across your cloud or hybrid environment.
 
--   🔒 **Security and compliance monitoring:** Ensure your data is secure and compliant with industry standards. Protect against reported vulnerabilities.
+- **Security and compliance monitoring:** Ensure your data is secure and compliant with industry standards. Protect against reported vulnerabilities.
 
 ### How does Datadog compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['datadog', 'sentry']}
     rows={[
@@ -266,8 +334,29 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/Datadog), as of 
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
 
 > **Note:** Although Datadog has a free tier, its 1 day data retention is not enough for real usage.
+
+<details>
+  <summary>Main differences between Datadog and Sentry</summary>
+
+* Datadog is a full observability platform covering infrastructure, APM, logs, and metrics; Sentry focuses on application-level errors and performance.
+* Datadog's RUM includes replay-like functionality tied to backend traces; Sentry treats session replay as a separate product.
+* Datadog pricing is enterprise-scale and can get expensive quickly; Sentry is more accessible for smaller teams.
+* Datadog requires more setup and configuration; Sentry is faster to deploy for error tracking alone.
+
+</details>
+
+<details>
+  <summary>Main similarities between Datadog and Sentry</summary>
+
+* Both provide real-time exception alerts and error grouping.
+* Both integrate with popular frameworks, cloud providers, and deployment tools.
+* Both support distributed tracing across microservices.
+* Both offer team dashboards and notification integrations.
+
+</details>
 
 ### Why do companies use Datadog?
 
@@ -296,22 +385,21 @@ According to G2 reviewers, Datadog is chosen because:
 
 New Relic is a cloud-based observability and analytics platform that provides full-stack visibility into application performance, infrastructure, and user experience. It helps organizations monitor, troubleshoot, and optimize their software in real time, enabling proactive issue resolution and improved customer experiences.
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/New-Relic), as of February 2025, 40,714 of the top 1 million websites deploy New Relic, closest of any of the alternatives on this list to the 73,723 that use Sentry.
-
 #### Key features
 
--   🔍 **Full-stack observability:** Monitor applications, infrastructure, and digital experiences across your entire stack
+- **Full-stack observability:** Monitor applications, infrastructure, and digital experiences across your entire stack
 
--   📊 **Real-time monitoring:** Track performance and errors with AI-powered insights and analysis
+- **Real-time monitoring:** Track performance and errors with AI-powered insights and analysis
 
--   📝 **Log management:** Aggregate and analyze logs with distributed tracing for quick troubleshooting
+- **Log management:** Aggregate and analyze logs with distributed tracing for quick troubleshooting
 
--   🔌 **Integrations:** Connect with over 780 tools and open source ecosystems
+- **Integrations:** Connect with over 780 tools and open source ecosystems
 
--   💰 **Flexible pricing:** Usage-based pricing model with a free tier, makes it cheaper to get started with (than Datadog)
+- **Flexible pricing:** Usage-based pricing model with a free tier, makes it cheaper to get started with (than Datadog)
 
 ### How does New Relic compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['newrelic', 'sentry']}
     rows={[
@@ -334,6 +422,27 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/New-Relic), as o
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+<details>
+  <summary>Main differences between New Relic and Sentry</summary>
+
+* New Relic offers full-stack observability including infrastructure monitoring; Sentry focuses on application errors and performance.
+* New Relic has a more generous free tier (100 GB/month data ingest); Sentry's free tier is limited to 5k errors.
+* New Relic uses AI-powered anomaly detection across all telemetry; Sentry's AI features (Seer) are focused on error resolution.
+* New Relic supports 780+ integrations; Sentry has fewer but deeper developer tool integrations.
+
+</details>
+
+<details>
+  <summary>Main similarities between New Relic and Sentry</summary>
+
+* Both provide real-time error monitoring with stack traces and context.
+* Both offer performance monitoring and distributed tracing.
+* Both integrate with popular CI/CD and collaboration tools.
+* Both support web, mobile, and backend applications.
+
+</details>
 
 ### Why do companies use New Relic?
 
@@ -360,20 +469,19 @@ G2 reviewers like New Relic because:
 
 [LogRocket](/blog/posthog-vs-logrocket) is a product experience platform with product analytics, error tracking, session replay, and performance monitoring. It focuses on helping product managers, engineers, and support teams identify and fix issues.
 
-According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), as of February 2025, 2,525 of the top 1 million websites deploy LogRocket far from the 73,723 that use Sentry.
-
 #### Key features
 
--   🚨 **Error tracking:** Identify and triage the most impactful issues with JavaScript and network errors as well as stack traces.
+- **Error tracking:** Identify and triage the most impactful issues with JavaScript and network errors as well as stack traces.
 
--   📹 **Session replay:** Understand exactly what users are doing on your site. See the screens they visit, places they click, as well as console and network logs, errors, and performance data.
+- **Session replay:** Understand exactly what users are doing on your site. See the screens they visit, places they click, as well as console and network logs, errors, and performance data.
 
--   🏎️ **Performance monitoring:** Monitor frontend performance such as web vitals, CPU and memory usage, and network speed.
+- **Performance monitoring:** Monitor frontend performance such as web vitals, CPU and memory usage, and network speed.
 
--   📈 **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+- **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
 
 ### How does LogRocket compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['logrocket', 'sentry']}
     rows={[
@@ -396,6 +504,27 @@ According to [BuiltWith](https://trends.builtwith.com/widgets/LogRocket), as of 
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+<details>
+  <summary>Main differences between LogRocket and Sentry</summary>
+
+* LogRocket emphasizes frontend debugging with visual session replays; Sentry focuses on backend and full-stack error monitoring.
+* LogRocket captures user interactions, network calls, and console logs together; Sentry treats replay as a supplementary feature.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; LogRocket is cloud-only and proprietary.
+* Sentry has stronger backend error tracking; LogRocket is primarily frontend-focused.
+
+</details>
+
+<details>
+  <summary>Main similarities between LogRocket and Sentry</summary>
+
+* Both detect JavaScript errors with stack traces and source maps.
+* Both integrate with Slack, GitHub, and issue tracking tools.
+* Both offer performance monitoring for frontend applications.
+* Both help engineering teams reduce debugging time.
+
+</details>
 
 ### Why do companies use LogRocket?
 
@@ -424,22 +553,21 @@ According to G2 reviews, customers use LogRocket because:
 
 AppSignal is an application performance monitoring (APM) and error tracking tool designed for developers. It offers insight into errors, performance issues, host metrics, uptime monitoring, and logs in one unified platform. It's known for its ease of setup, developer-friendly experience, and real-time alerting.
 
-AppSignal isn't listed on BuiltWith, as it's largely backend focused, but organic traffic can give us a rough estimate of its popularity. Ahrefs has its monthly organic visits at 1.7k visitors per month compared to the 277k of Sentry.
-
 #### Key features
 
--   🚀 **Error tracking**: Capture exceptions, get alerts, and debug with full request details for your favorite languages like Ruby, Elixir, Python, and more.
+- **Error tracking**: Capture exceptions, get alerts, and debug with full request details for your favorite languages like Ruby, Elixir, Python, and more.
 
--   📊 **Performance monitoring**: Track response times, slow queries, background jobs, and memory leaks. Find and fix bottlenecks.
+- **Performance monitoring**: Track response times, slow queries, background jobs, and memory leaks. Find and fix bottlenecks.
 
--   🖥 **Host monitoring**: Monitor CPU, disk, network, and memory usage across your infrastructure. Compare hosts to see which ones are underperforming.
+- **Host monitoring**: Monitor CPU, disk, network, and memory usage across your infrastructure. Compare hosts to see which ones are underperforming.
 
--   ⚡ **Anomaly detection**: Get real-time alerts for any metric or unusual patterns in app behavior from any of the above sources.
+- **Anomaly detection**: Get real-time alerts for any metric or unusual patterns in app behavior from any of the above sources.
 
--   🔍 **Log management**: Store and search logs with a clean and intuitive UI. Ingest from any source.
+- **Log management**: Store and search logs with a clean and intuitive UI. Ingest from any source.
 
 ### How does AppSignal compare to Sentry?
 
+<p>
 <ProductComparisonTable
     competitors={['appsignal', 'sentry']}
     rows={[
@@ -462,6 +590,27 @@ AppSignal isn't listed on BuiltWith, as it's largely backend focused, but organi
         'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+<details>
+  <summary>Main differences between AppSignal and Sentry</summary>
+
+* AppSignal has deep support for Ruby, Elixir, Node.js, and Python; Sentry supports 100+ platforms.
+* Sentry’s free tier is built around errors/spans/replays; AppSignal’s free plan is request/log–centric (≈ 50k requests, 1 GB logs, 5-day retention).
+* AppSignal includes host monitoring for CPU, memory, and disk; Sentry focuses on application-level metrics.
+* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; AppSignal is SaaS-only.
+
+</details>
+
+<details>
+  <summary>Main similarities between AppSignal and Sentry</summary>
+
+* Both provide real-time error tracking with detailed diagnostics.
+* Both offer performance monitoring and anomaly detection.
+* Both integrate with popular deployment and collaboration tools.
+* Both are designed for developer-friendly workflows.
+
+</details>
 
 ### Why do companies use AppSignal?
 
@@ -473,7 +622,17 @@ According to [reviews on G2](https://www.g2.com/products/appsignal/reviews), App
 
 > #### Bottom line
 >
-> For developers using one of the languages AppSignal supports, it's a great alternative to Sentry. Although their lack of a free tier might be a dealbreaker for some.
+> For developers using one of the languages AppSignal supports, it's a great alternative to Sentry. With OTel support and a lightweight free plan, it’s easy to adopt and covers the essentials without extra complexity.
+
+## Which Sentry alternative should you choose?
+
+* Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, LLM observability, and more? Go with **PostHog**.
+* Need simple, reliable error tracking without complexity? Try **Rollbar**.
+* Looking for AI-powered error resolution and strong .NET/Flutter support? Consider **Raygun**.
+* Enterprise-scale observability across your entire stack? **Datadog** ties everything together.
+* Full-stack monitoring with a generous free tier? **New Relic** is worth exploring.
+* Frontend-focused debugging with visual replays? **LogRocket** excels here.
+* Ruby or Elixir shop wanting deep language support? **AppSignal** is purpose-built for you.
 
 ## Is PostHog right for you?
 
@@ -487,7 +646,62 @@ We're biased, obviously, but we think PostHog is the perfect Sentry replacement 
 
 Check out [error tracking install guide](/docs/error-tracking/installation) and [read our docs](/docs) to learn more.
 
-## Related reading
+<ArrayCTA />
 
-If you're still mapping out your monitoring stack, we also have a broader roundup of the [best error tracking tools](/blog/best-error-tracking-tools) available today. That one looks beyond Sentry to compare tools with capabilities such as session replay, product analytics, and full observability.
+## Frequently asked questions
 
+<details>
+  <summary>What is Sentry used for?</summary>
+
+**Sentry** is an error tracking and performance monitoring platform that helps developers detect, diagnose, and fix bugs in production. It captures exceptions with detailed stack traces, groups similar errors, and integrates with developer tools like GitHub and Slack for streamlined workflows.
+
+</details>
+
+<details>
+  <summary>Why look for Sentry alternatives?</summary>
+
+Common reasons include: needing more context around errors, wanting a more generous free tier, consolidating multiple tools into one platform, or finding Sentry's pricing too expensive as you scale.
+
+</details>
+
+<details>
+  <summary>What's the best Sentry alternative overall?</summary>
+
+**PostHog** is the best all-around Sentry alternative for most teams. It combines [error tracking](/error-tracking) with [session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [LLM analytics](/llm-analytics), and [surveys](/surveys), giving you a complete view of both the technical issue and its user impact.
+
+</details>
+
+<details>
+  <summary>Which Sentry alternatives are open source?</summary>
+
+**PostHog** is fully open source under the MIT license with a public roadmap. **Sentry** itself is also open source (with a more restrictive license) and offers self-hosting. Most other alternatives like **Rollbar**, **Raygun**, **LogRocket**, and **AppSignal** are proprietary and cloud-only.
+
+</details>
+
+<details>
+  <summary>Which Sentry alternative has the best free tier?</summary>
+
+**PostHog** offers 100k free errors/month, plus 1M free analytics events, 5k session replays, and unlimited team members. **New Relic** offers 100 GB/month of data ingest. **Sentry's** free tier is limited to 5k errors and 1 user.
+
+</details>
+
+<details>
+  <summary>Which Sentry alternative is best for frontend debugging?</summary>
+
+**LogRocket** excels at frontend debugging with visual session replays tied to errors. **PostHog** also offers session replay with error correlation, plus broader product analytics capabilities.
+
+</details>
+
+<details>
+  <summary>Which Sentry alternative is best for enterprise observability?</summary>
+
+**Datadog** and **New Relic** are built for enterprise-scale observability, covering infrastructure, APM, logs, and metrics across your entire stack. Both can get expensive at scale, but offer deep visibility into complex systems.
+
+</details>
+
+<details>
+  <summary>What other error tracking tools are available?</summary>
+
+Beyond the tools in this guide, there are many other options worth considering, from simple alerting tools to full observability suites. See our full roundup of the [best error tracking tools](/blog/best-error-tracking-tools) for a broader comparison.
+
+</details>

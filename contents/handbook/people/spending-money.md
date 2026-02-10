@@ -17,7 +17,7 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 
 **If not, think again**.
 
-**When in doubt, ask your team lead for context, not permission.**
+**The goal here is to empower you. However, when in doubt, ask your team lead for context, not permission.** 
 - Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
@@ -40,6 +40,8 @@ Use your Revolut if
 If not, use your Brex.
 
 Why? The company can claim back VAT on these larger purchases - the more money we claim back, the more money we have to #DoMoreWeird
+
+Please make sure that the invoice is addressed to Hiberly and its registered address (this can be found in the company information sheet).
 
 ### Receipts 🧾
 All expenses over $75 or £75 must have itemized receipts attached and memo updated within 14 days of the charge (required for audit documentation).
@@ -170,7 +172,8 @@ _This list will be updated based on common questions/scenarios._
 Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
-  - Apple Studio Displays are only allowed for Product Engineers (high density screen) and Sales (in-built high quality webcam and microphone) teams
+  - Apple Studio Displays are only allowed for Product Engineers (high density screen) and Sales/CS/Onboarding (in-built high quality webcam and microphone) teams
+    - If you order a Studio Display during your probation period but end up leaving PostHog we can recover the cost of the display and you won't need to return it.
   - Guidelines
     - For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 64GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
     - For sales roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
@@ -183,14 +186,14 @@ Coordinate with [Tara](https://posthog.com/community/profiles/34526) who handles
       - UK only: use your Revolut since we claim back the VAT,
       - Do not get Apple care since it doesn't have great value for money.
     - You can request a new laptop if your laptop is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
-    - Part of the Mobile team and need to purchase a new phone? Coordinate with [Tara](https://posthog.com/community/profiles/34526).
+    - Part of the Client Libraries team and need to purchase a new phone? Coordinate with [Tara](https://posthog.com/community/profiles/34526).
 
 #### Yubikey
 We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about security keys in the [multi-factor authentication entry](https://posthog.com/handbook/company/security#multi-factor-authentication).
 
 #### Other equipment
-- Keyboard/mouse/laptop stand: refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
-- If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
+- Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items would work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
+- Desk & Chair - again, refurbished is fine. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.

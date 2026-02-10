@@ -14,3 +14,18 @@ export default function Home() {
   );
 }
 ```
+
+### Using React hooks without PostHogProvider
+
+When PostHog is initialized via `instrumentation-client.ts`, the [React feature flag hooks](/docs/libraries/react#feature-flags) work without wrapping your app in `PostHogProvider`. The hooks default to using the initialized posthog-js singleton:
+
+```js
+'use client'
+import { useFeatureFlagEnabled } from 'posthog-js/react'
+
+export default function FeatureComponent() {
+  const showNewFeature = useFeatureFlagEnabled('new-feature')
+
+  return showNewFeature ? <NewFeature /> : <OldFeature />
+}
+```

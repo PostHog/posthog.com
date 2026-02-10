@@ -109,6 +109,12 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
                 icon={<Icons.IconDecisionTree className={`text-teal size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
             />
+            <FreeTierItem
+                name="Logs"
+                allocation="50 GB ingested"
+                icon={<Icons.IconTerminal className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
         </>
     )
 }

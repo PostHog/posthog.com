@@ -69,7 +69,7 @@ const StickerTrophyWithLabel = React.forwardRef<SVGSVGElement, AllStickers.Stick
                     fill="#423F3F"
                     xmlSpace="preserve"
                     style={{ whiteSpace: 'pre' }}
-                    fontFamily="Londrina Solid"
+                    fontFamily="Squeak"
                     fontSize="14"
                     letterSpacing="0em"
                 >

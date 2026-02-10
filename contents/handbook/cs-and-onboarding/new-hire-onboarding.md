@@ -19,9 +19,8 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools)
   - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
-- If you start on a Monday, join your first CS and Onboarding standup.
+- If you start on a Monday, join your first CS standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Dana will add your GitHub handle to the template.
-- (Onboarding specialist) Book time with Magda / Cameron to go over the nuts and bolts of the role - which leads get onboarding, what signals we're looking for, how to reach out. Start working through leads together.
 
 
 ### Rest of week 1
@@ -33,7 +32,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You can work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
- - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
+ - Read all of the CS section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Customer Success.
 
 ### Week 2
@@ -48,7 +47,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### In-person onboarding
 
-Ideally, this will happen in Week 2 or 3, and will be with a few existing team members (depending on where we do it) and will be 3-4 days covering:
+This typically happens in Week 2 or 3 and runs 3-4 days with a few existing team members, covering:
 
 - Demo practice session with the team.
 - The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
@@ -67,6 +66,7 @@ By the end of month 1:
  - Be starting to solve technical problems for your book with occasional help
  - Be leading customer calls and demos on your own
  - Successfully made contact with _everyone_ in your book of business
+ - Update this page and other relevant handbook pages with what you learned during onboarding
 
 By the end of month 2:
  - Saved your first 'we're going to churn' - it's going to happen, but you're going to save them!
@@ -146,8 +146,6 @@ Add and modify this list as you work through it.
 
 ## Alerting setup (for team leads)
 
-We have certain automations in Vitally and Zapier that your team lead needs to add you to. Please ask your team lead to add you.
+We have certain automations in Vitally that your team lead needs to add you to. Please ask your team lead to add you.
 
-- <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/170c8d04-db4c-4036-997c-8967946a1fd8">Vitally name trait playbook</PrivateLink>: create a new branch that matches assigned CSM to new team member. In this branch, add action to update account trait `CSM name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
-- <PrivateLink url="https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb"> Failed payment alerting </PrivateLink>: in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
-- <PrivateLink url="https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088"> Annual plan credit alerting </PrivateLink>: in step 8 look up table, add new team member's email and Slack member ID 
+- <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/170c8d04-db4c-4036-997c-8967946a1fd8">Vitally name trait playbook</PrivateLink>: create a new branch that matches assigned CSM to new team member. In this branch, add action to update account trait `CSM name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to. 
