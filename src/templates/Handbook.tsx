@@ -27,6 +27,7 @@ import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import Tooltip from 'components/Tooltip'
+import NewsletterForm from 'components/NewsletterForm'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
@@ -337,6 +338,7 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 </OverflowXSection>
             </p>
         ),
+        NewsletterForm,
         ...shortcodes,
     }
 
