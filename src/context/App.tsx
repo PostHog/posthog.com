@@ -2358,6 +2358,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindowsInView(visibleWindows)
     }, [windows])
 
+    useEffect(() => {
+        if (websiteMode && windows.length <= 0) {
+            navigate('/')
+        }
+    }, [windows])
+
     return (
         <Context.Provider
             value={{

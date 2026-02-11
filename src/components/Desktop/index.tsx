@@ -451,7 +451,7 @@ export default function Desktop() {
                     <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt=""
                             width={2574}
                             height={1256}
@@ -522,7 +522,7 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                        <div className="keyboard-garden-images hidden absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
