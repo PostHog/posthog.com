@@ -33,7 +33,7 @@ export default function Wrapper() {
             data-scheme="primary"
             className={`${
                 websiteMode
-                    ? 'max-w-7xl mx-auto border-x border-primary bg-primary shadow-xl'
+                    ? 'max-w-7xl mx-auto border-x border-primary bg-primary shadow-xl min-h-screen'
                     : 'fixed inset-0 size-full'
             } flex flex-col`}
             id="app-container"
