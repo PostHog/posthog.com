@@ -1632,6 +1632,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Product enablement',
+                url: '/handbook/growth/sales/product-enablement',
+            },
+            {
                 name: 'Use cases',
                 url: '',
                 children: [
