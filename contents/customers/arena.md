@@ -29,8 +29,6 @@ A similar experimentation loop applies across the board – from product work to
 
 "It indicates a lot of value," she said. "But it also makes you wonder: do people want to spend 19 minutes there? Are there features we should pull out so people don't have to parse the whole thing?"
 
-![screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/arena_screenshot_a4797ee713.png)
-
 Insights like this influenced a new growth marketing effort to build targeted landing pages for specific searches — queries like _best ai models for image generation_ or _top ranked AI models for coding_.
 
 "All the data PostHog captures is really important for better understanding our users," Lily noted. "It's how we build something backed by data, instead of assuming we know what users want."
@@ -56,20 +54,20 @@ But better engagement wasn't the primary goal – avoiding bias was. Battle mode
 
 Cohort visibility has also proven useful beyond UI testing. "I've seen cases where our engineers noticed something off in the product simply by looking at the cohorts. In one instance, a key action wasn't firing for a group of users, and PostHog gave us immediate visibility just through behavioral signals."
 
+<OSQuote
+  customer="arena"
+  author="lily_dinh"
+  product="product_analytics"
+/>
+
 ## Seeing the full picture
-For a platform built on repeat visits, retention is the north star. "Some key things we care about are monitoring the funnel of users visiting the site, chatting and voting, and returning," Matt explained.
+For a platform built on repeat visits, [retention](/retention) is the north star. "Some key things we care about are monitoring the funnel of users visiting the site, chatting and voting, and returning," Matt explained.
 
 PostHog's ability to track anonymous visitors all the way through to logged-in votes provided a foundation for proper conversion funnels. [PostHog AI](/ai) was another unlock — turning raw [product analytics](/product-analytics) from a specialist skill into something anyone could use.
 
 "I don't normally write SQL," Matt said, "and being able to use PostHog AI has been great. Whether it's adding a custom selector or writing full SQL queries, it's really powerful." That accessibility has changed how the entire team works. 
 
 For Lily, having PostHog AI as a data scientist on demand provides tangible time savings. "It's pretty standard now for anyone on our team to log into PostHog and start a task by asking PostHog AI."
-
-<OSQuote
-  customer="arena"
-  author="lily_dinh"
-  product="product_analytics"
-/>
 
 More recently, the team added [error tracking](/error-tracking) to the mix, connecting product visibility to reliability.
 
@@ -78,7 +76,7 @@ More recently, the team added [error tracking](/error-tracking) to the mix, conn
 ## Why PostHog works for Arena
 So why PostHog? Matt's take: it started as a practical choice, and quickly became foundational.
 
-"Initially we chose PostHog because it was easy to use. It was easy to create charts. The API was clean. Every time I hit a snag like, _how do you hook this up with Next.js in some weird edge case?_, there was always great documentation."
+"Initially we chose PostHog because it was easy to use. It was easy to create [charts](/trends). The API was clean. Every time I hit a snag like, _how do you hook this up with Next.js in some weird edge case?_, there was always great [documentation](/docs)."
 
 As Arena grew, so did the stakes. More experiments, more feature flags, and far more data. Over the past six months alone, event volume increased 19×. 
 
