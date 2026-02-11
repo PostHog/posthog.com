@@ -1643,7 +1643,9 @@ export default function ProfilePage({ params }: PageProps) {
 const TeamMembersList = ({ self, team }) => {
     const selfTeammate = team.attributes.profiles.data.find((teammate) => teammate.id === self.id)
     const otherTeammates = team.attributes.profiles.data.filter((teammate) => teammate.id !== self.id)
-    const teammates = [selfTeammate, ...otherTeammates].filter(Boolean)
+    const teammates = [selfTeammate, ...otherTeammates].filter(
+        (teammate) => teammate?.attributes?.startDate && new Date(teammate.attributes.startDate) <= new Date()
+    )
 
     return (
         <>
