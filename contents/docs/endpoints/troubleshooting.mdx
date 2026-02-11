@@ -45,8 +45,8 @@ If you get `"Version X not found for endpoint"`:
 
 ## Materialization errors
 
-**"Cannot materialize endpoint: ..."**
-- The endpoint has variables (not supported with materialization)
+`"Cannot materialize endpoint: ..."`
+- The endpoint has variables that use unsupported operators or aren't in `WHERE` clauses. See [variables and materialization](/docs/endpoints/variables#materialization) for supported configurations
 - The endpoint is inactive
 
 **"Cannot enable materialization on inactive endpoint"**
