@@ -14,7 +14,7 @@ The event formats we get involved in (and organize ourselves) fall into one of t
 
 -   Hands-on gatherings that enable our users to build better products for their customers
 -   Experiences that allow engineers and founders to flex and grow their skillsets
--   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
+-   Getting [product engineers](/product-engineer-handbook/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
 
 ## Community incubator
