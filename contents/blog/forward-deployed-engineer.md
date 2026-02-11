@@ -62,7 +62,7 @@ There are more factors beyond requiring tons of customization, though:
 
 FDEs still do software engineering, but they spend way more time [talking to customers](/newsletter/talk-to-users) and scoping projects [than other software engineers](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87) to decide _what_ to build, and how. Their top priority is to deeply understand a customer's problems so that they can develop something that addresses it.
 
-Software engineers on the main product team, on the other hand, focus on building features that are generalizable and maintainable. They're less involved in direct customer conversations and more focused on solutions that work at scale.
+Software engineers, on the other hand, focus on building features that are generalizable and maintainable. They're less involved in direct customer conversations and more focused on solutions that work at scale.
 
 [Bob McGrew](https://www.youtube.com/watch?v=Zyw-YA0k3xo), an early executive at Palantir, describes FDEs as the ones who build the rough gravel road for where the product needs to go. Software engineers from the core product team then work on turning that gravel road into a paved superhighway so that the next ten customers can also use it.
 
