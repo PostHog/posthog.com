@@ -334,7 +334,7 @@ const appSettings: AppSettings = {
                 height: 500,
             },
             max: {
-                width: 850,
+                width: 900,
                 height: 1000,
             },
             fixed: false,
