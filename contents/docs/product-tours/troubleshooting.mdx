@@ -1,0 +1,43 @@
+---
+title: Product Tours troubleshooting
+---
+
+This page covers troubleshooting for Product Tours. For setup, see [Getting started](/docs/product-tours/start-here).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## Tours not displaying
+
+There are a few common reasons your Product Tour(s) may not be displaying as expected.
+
+### Tours not enabled in PostHog config
+
+For now, we require product tours to be explicitly enabled in your PostHog init via `disable_product_tours: false`.
+
+Example:
+
+```typescript
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_API_HOST,
+  defaults: '2025-05-24',
+  disable_product_tours: false,
+});
+```
+
+### Old PostHog SDK version
+
+Product tours require `posthog-js` version 1.324.0 or higher. We always recommend updating to the latest to ensure you have the most recent improvements and bug fixes.
+
+## Debugging tool
+
+If the above is not helpful, you can also try our [PostHog Tours Debugger Chrome extension](https://chromewebstore.google.com/detail/posthog-tours-debugger/dpdodohbbgfpiflpolelmgijjefkegem).
+
+This extension will provide some helpful information such as:
+
+- Tours currently active in your project
+- Eligibility status per tour, based on its conditions
+- `posthog-js` version checks
+
+For the latest, download and install the extension manually [from the GitHub source](https://github.com/PostHog/product-tours-debugger).
