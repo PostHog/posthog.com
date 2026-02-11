@@ -373,7 +373,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
         >
             {processedMenus.map((menu, menuIndex) => {
                 // On mobile, if menu has mobileLink, make it a direct link
-                if (isMobile && menu.mobileLink) {
+                if (isMobile && !websiteMode && menu.mobileLink) {
                     return (
                         <Link
                             key={menuIndex}

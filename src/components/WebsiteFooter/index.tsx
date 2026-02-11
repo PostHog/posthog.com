@@ -3,8 +3,8 @@ import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
 import * as Icons from '@posthog/icons'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
+import AppStatus from 'components/AppStatus'
+import OSButton from 'components/OSButton'
 
 interface FooterLink {
     label: string
@@ -120,38 +120,77 @@ const legalLinks = [
     { label: 'HIPAA', url: '/docs/privacy/hipaa-compliance' },
 ]
 
-export default function WebsiteFooter() {
+export default function WebsiteFooter(): React.ReactElement {
     return (
         <footer className="@container z-40">
-            {/* Main footer content */}
             <div data-scheme="secondary" className="bg-primary border-t border-primary">
+                {/* Main footer content */}
+                <div className="p-6 @lg:p-8 border-b border-primary">
+                    <div className="flex flex-col @lg:flex-row gap-8 @lg:gap-12">
+                        {/* Logo and social links - stacks on small, side column on large */}
+                        <div className="flex flex-col gap-4 @lg:gap-6 @lg:w-48 @lg:shrink-0 items-center @lg:items-start">
+                            <Link to="/" className="inline-block">
+                                <Logo className="h-6" />
+                            </Link>
+
+                            {/* Social links */}
+                            <div className="flex flex-wrap gap-1">
+                                {socialLinks.map((social) => (
+                                    <OSButton
+                                        key={social.label}
+                                        icon={social.icon}
+                                        to={social.url}
+                                        asLink
+                                        external
+                                        hideExternalIcon
+                                        tooltip={social.label}
+                                        size="sm"
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Footer columns - responsive grid */}
+                        <div className="grid grid-cols-2 @2xl:grid-cols-4 gap-6 @lg:gap-8 flex-1">
+                            {footerColumns.map((column) => (
+                                <div key={column.title} className="flex flex-col gap-3">
+                                    <Link
+                                        to={column.titleUrl || '#'}
+                                        className="flex items-center gap-2 text-sm font-semibold"
+                                    >
+                                        <span>{column.title}</span>
+                                    </Link>
+                                    <nav className="flex flex-col gap-2">
+                                        {column.links.map((link) => (
+                                            <Link
+                                                key={link.label}
+                                                to={link.url}
+                                                externalNoIcon={link.external}
+                                                className="text-sm underline"
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        ))}
+                                    </nav>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
                 {/* Bottom bar */}
-                <div className="p-4 bg-accent/30">
-                    <div className="flex flex-col @md:flex-row @md:items-center @md:justify-between gap-3">
+                <div className="p-3 @lg:px-8 bg-accent/30 border-t border-primary/10 text-xs">
+                    <div className="flex flex-col @xl:flex-row @xl:items-center @xl:justify-between gap-3">
                         {/* Copyright and status */}
-                        <div className="flex items-center gap-4">
-                            <p className="text-sm text-secondary m-0">
-                                &copy; {new Date().getFullYear()} PostHog, Inc.
-                            </p>
-                            <a
-                                href="https://status.posthog.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-sm text-secondary hover:text-primary transition-colors underline"
-                            >
-                                <span className="size-2 rounded-full bg-green animate-pulse" />
-                                <span>System status</span>
-                            </a>
+                        <div className="flex items-center gap-4 justify-between @xl:justify-start">
+                            <p className="text-secondary m-0">&copy; {new Date().getFullYear()} PostHog, Inc.</p>
+                            <AppStatus textClassName="text-xs underline" />
                         </div>
 
                         {/* Legal links */}
-                        <nav className="flex flex-wrap items-center gap-4">
+                        <nav className="flex flex-wrap items-center gap-x-4 gap-y-2">
                             {legalLinks.map((link) => (
-                                <Link
-                                    key={link.label}
-                                    to={link.url}
-                                    className="text-sm text-secondary hover:text-primary transition-colors underline"
-                                >
+                                <Link key={link.label} to={link.url} className="transition-colors underline">
                                     {link.label}
                                 </Link>
                             ))}
