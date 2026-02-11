@@ -13,7 +13,7 @@ PostHog has a broad and growing set of products, and folks in GTM roles need to 
 - **Uneven expertise**: Knowledge levels vary across the team, leading to inconsistent customer experiences
 - **Missed opportunities**: Without comprehensive product knowledge, we may miss adoption and expansion opportunities with customers
 
-> Rather than hiring an external sales enablement person (who would need significant time to ramp up on PostHog), we're leveraging internal expertise to build and maintain our enablement program.
+> Rather than hiring an external sales enablement person (who would need significant time to ramp up on PostHog and wouldn't speak with customers regularly enough), we're leveraging internal expertise to build and maintain our enablement program.
 
 ## How it works
 
