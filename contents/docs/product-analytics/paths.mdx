@@ -239,7 +239,7 @@ Several technical differences explain the discrepancy:
 
 - **Counts transition frequency** – The numbers show how often each transition occurred, not unique users. If one user visits Home→Pricing in three separate sessions, that counts as 3. Funnels count each user only once per step.
 
-- **Path length limit** – Paths only analyze a set number of events per session (controlled by the [step count setting](#setting-the-number-of-steps), default 5). If a user visits pages A→B→C→D→E→F→G, only the first 5 (A through E) are shown – F and G are cut off entirely. If you set both a start and end point, paths preserves both ends and hides the middle with "..." instead, but you still lose visibility into the full journey. Funnels have no such limit – they track whether users reached each defined step regardless of how many events occurred in between.
+- **Path length limit** – Paths only analyze a set number of events per session which is controlled by the [step count setting](#setting-the-number-of-steps) (default 5). If a user visits pages A→B→C→D→E→F→G, only the first 5 are included. F and G are excluded. If you define both a start and end steps, paths preserve those steps but collapse the middle steps into **"..."**, which limits visibility into the full journey. Funnels don't have this limitation: they track whether users reached each defined step, regardless of how many events occurred in between.
 
 - **30-minute session windows** – Events more than 30 minutes apart start a new path. Funnels use a conversion window (default 14 days).
 
