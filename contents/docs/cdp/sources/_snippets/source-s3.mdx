@@ -95,7 +95,7 @@ The final step is to create a new user and give them access to our bucket by att
 
 ## Step 4: Create the table in PostHog
 
-1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and under self managed, look for **S3** and click **Link**
 3. Fill in the table name.
 4. For the URL pattern, copy the URL from S3, up to the bucket name. Replace the file name with `*`, as Airbyte will split large streams out into multiple files.
