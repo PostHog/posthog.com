@@ -80,7 +80,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'private alpha',
+            status: 'WIP',
         },
         {
             name: 'Coding agent (Twig)',
@@ -91,7 +91,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'brown',
             category: 'automation',
             // slug: 'twig',
-            status: 'alpha',
+            status: 'WIP',
         },
         {
             name: 'Endpoints',
@@ -102,7 +102,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'teal',
             category: 'product_engineering',
             slug: 'docs/endpoints',
-            status: 'private alpha',
+            status: 'WIP',
         },
         {
             name: 'Product tours',

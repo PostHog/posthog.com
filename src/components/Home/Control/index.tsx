@@ -681,7 +681,7 @@ const productCategories = [
     },
     {
         name: 'Feedback & testing',
-        handles: ['experiments', 'no_code_ab_testing', 'surveys', 'messaging', 'user-interviews'],
+        handles: ['experiments', 'surveys', 'no_code_ab_testing', 'messaging', 'support', 'user_interviews'],
     },
     {
         name: 'Tools',
@@ -693,10 +693,10 @@ const MAX_VISIBLE_ITEMS = 7
 const TRUNCATED_VISIBLE = 6
 
 const StatusDot = ({ status }: { status?: string }) => {
-    if (!status || status === 'WIP') return null
+    if (!status) return null
 
     const isBeta = status === 'beta'
-    const isAlpha = status === 'private alpha' || status === 'alpha'
+    const isAlpha = status === 'private alpha' || status === 'alpha' || status === 'WIP'
 
     if (!isBeta && !isAlpha) return null
 
