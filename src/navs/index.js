@@ -2838,6 +2838,10 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/running-behind-proxy',
                                 },
                                 {
+                                    name: 'Session replay storage',
+                                    url: '/docs/self-host/configure/session-replay-storage',
+                                },
+                                {
                                     name: 'Configuring email',
                                     url: '/docs/self-host/configure/email',
                                 },
@@ -3618,7 +3622,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Data retention',
-                    url: '/docs/session-replay/data-retention',
+                    url: '/docs/session-replay/recording-retention',
                     icon: 'IconCalendar',
                     color: 'seagreen',
                 },
@@ -4686,6 +4690,15 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/product-tours/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -5066,6 +5079,8 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    showChildrenIcons: true,
+                    sortChildrenAlpha: true,
                     featured: true,
                     children: [
                         {
@@ -5359,6 +5374,23 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/link-error-tracking',
                     icon: 'IconWarning',
                     color: 'red',
+                },
+                {
+                    name: 'Collect user feedback',
+                    url: '/docs/llm-analytics/collect-user-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'React integration with useThumbSurvey',
+                            url: '/docs/llm-analytics/user-feedback/use-thumb-survey',
+                        },
+                        {
+                            name: 'Manual event capture',
+                            url: '/docs/llm-analytics/user-feedback/manual-event-capture',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',
