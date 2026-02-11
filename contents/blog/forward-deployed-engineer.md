@@ -49,7 +49,7 @@ That said, every company is different. As the role evolves, [variations](https:/
 
 The obvious answer is [AI](https://poly.ai/blog/forward-deployed-ai-engineers-enterprise-deployment/). [Anjor Kanekar](https://anjor.xyz/), an FDE at Palantir for more than seven years, put it [this way](https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers):
 
-> _"AI companies have a problem that the FDE is really well suited to solve. There is a gap between foundational model capabilities and the application of those in enterprise use cases where they can add value. The FDE model is a way of doing the R&D work of figuring out the 'app layer' in a really effective way. AI companies have the models, but they need to figure out what exactly needs to be built using the models to make inroads into large enterprises / public sector."_
+> AI companies have a problem that the FDE is really well suited to solve. There is a gap between foundational model capabilities and the application of those in enterprise use cases where they can add value. The FDE model is a way of doing the R&D work of figuring out the 'app layer' in a really effective way. AI companies have the models, but they need to figure out what exactly needs to be built using the models to make inroads into large enterprises / public sector.
 
 There are more factors beyond requiring tons of customization, though:
 
