@@ -119,7 +119,7 @@ This enablement program is **not**:
 
 When a new product is approaching customer availability:
 
-1. Identify an SME early in the development process (bonus points if you self indentify with a handbook PR)
+1. Identify an SME early in the development process (bonus points if you self identify with a handbook PR)
 2. SME coordinates with the product team to understand capabilities and use cases
 3. SME develops initial training content before general availability
 4. SME delivers a new product training session to the wider GTM team
