@@ -420,7 +420,6 @@ export default function Experiments(): JSX.Element {
             'overview',
             'customers',
             'features',
-            'warehouse-native',
             'posthog-on-posthog',
             'statistical-methods',
             'pricing',
@@ -429,6 +428,7 @@ export default function Experiments(): JSX.Element {
             'docs',
             'pairs-with',
             'getting-started',
+            'warehouse-native',
         ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout

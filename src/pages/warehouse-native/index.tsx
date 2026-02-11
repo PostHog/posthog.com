@@ -38,18 +38,32 @@ export default function WarehouseNative(): JSX.Element {
                 <div className="rounded-lg border border-primary/20 bg-accent/30 p-4 my-6 not-prose">
                     <p className="font-medium mb-2">tl;dr</p>
                     <p>
-                        PostHog offers an integrated data warehouse that enables warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple tools together and provides a single platform for storing and working with data. Alternatively, you can ingest data from an external warehouse, such as Snowflake, and run queries on PostHog compute.
+                        PostHog offers an integrated data warehouse that enables warehouse-native workflows across other
+                        PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch
+                        multiple tools together and provides a single platform for storing and working with data.
+                        Alternatively, you can ingest data from an external warehouse, such as Snowflake, and run
+                        queries on PostHog compute.
                     </p>
                 </div>
 
                 <h2>What does "warehouse native" mean anyway?</h2>
                 <p>
-                    &ldquo;Warehouse native&rdquo; usually means that you have an external tool, such as an analytics platform, that exists outside of your warehouse and does not ingest data. Queries and workloads are created in the external platform, but run on your data warehouse (Snowflake, BigQuery, Databricks, etc.) and the data stays there, never moving into the external tool. In PostHog, this is possible due to an integrated data warehouse which makes your warehouse accessible to other PostHog tools, such as product analytics.  
+                    &ldquo;Warehouse native&rdquo; usually means that you have an external tool, such as an analytics
+                    platform, that exists outside of your warehouse and does not ingest data. Queries and workloads are
+                    created in the external platform, but run on your data warehouse (Snowflake, BigQuery, Databricks,
+                    etc.) and the data stays there, never moving into the external tool. In PostHog, this is possible
+                    due to an integrated data warehouse which makes your warehouse accessible to other PostHog tools,
+                    such as product analytics.
                 </p>
 
                 <h2>What does PostHog support today?</h2>
                 <p>
-                    PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link> which works with other PostHog tools such as product analytics, experiments, and feature flags. If you&apos;re using PostHog as your data warehouse then data stays where it is and can be accessed by other PostHog tools, eliminating the need for additional point solutions. If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, PostHog still enables you to sync data via our warehouse sources; queries then run on PostHog compute.
+                    PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link> which works with
+                    other PostHog tools such as product analytics, experiments, and feature flags. If you&apos;re using
+                    PostHog as your data warehouse then data stays where it is and can be accessed by other PostHog
+                    tools, eliminating the need for additional point solutions. If you&apos;re using an external
+                    warehouse, such as Snowflake, BigQuery, or Databricks, PostHog still enables you to sync data via
+                    our warehouse sources; queries then run on PostHog compute.
                 </p>
 
                 <h2>What does PostHog not support today?</h2>
@@ -57,7 +71,8 @@ export default function WarehouseNative(): JSX.Element {
                     PostHog does not execute queries directly on an external warehouse (e.g. Snowflake, BigQuery, or
                     Databricks). If your requirement is &ldquo;run my analytics queries inside my existing
                     warehouse,&rdquo; that isn&apos;t how PostHog works today. We run queries on PostHog
-                    infrastructure—either in our integrated warehouse or on data synced into PostHog via our warehouse sources.
+                    infrastructure—either in our integrated warehouse or on data synced into PostHog via our warehouse
+                    sources.
                 </p>
 
                 <h2>Why this approach?</h2>
@@ -74,7 +89,8 @@ export default function WarehouseNative(): JSX.Element {
                     PostHog is building a managed warehouse based on DuckDB in addition to the current ClickHouse-based
                     warehouse. The long-term story is:{' '}
                     <strong>warehouse-native in practice because the warehouse is part of PostHog</strong>. If you're
-                    interested in finding out more, we suggest <Link to="/managed-warehouse">joining the waitlist for the managed DuckDB warehouse</Link>.
+                    interested in finding out more, we suggest{' '}
+                    <Link to="/managed-warehouse">joining the waitlist for the managed DuckDB warehouse</Link>.
                 </p>
 
                 <p className="mt-8">
@@ -86,8 +102,6 @@ export default function WarehouseNative(): JSX.Element {
                         PostHog data stack →
                     </Link>
                 </p>
-
-                <CallToAction />
             </ReaderView>
         </>
     )

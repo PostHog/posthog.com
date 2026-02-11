@@ -76,7 +76,6 @@ export default function ProductAnalytics(): JSX.Element {
             'overview',
             'customers',
             'features',
-            'warehouse-native',
             'posthog-on-posthog',
             'answers',
             'pricing',
@@ -85,6 +84,7 @@ export default function ProductAnalytics(): JSX.Element {
             'docs',
             'pairs-with',
             'getting-started',
+            'warehouse-native',
         ],
     })
 

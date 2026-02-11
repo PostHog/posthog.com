@@ -78,7 +78,6 @@ export default function FeatureFlags(): JSX.Element {
             'overview',
             'customers',
             'features',
-            'warehouse-native',
             'posthog-on-posthog',
             'answers',
             'pricing',
@@ -87,6 +86,7 @@ export default function FeatureFlags(): JSX.Element {
             'docs',
             'pairs-with',
             'getting-started',
+            'warehouse-native',
         ],
         content: {
             // answersDescription: 'Control the release of new features to your users', moved to json
