@@ -1,6 +1,6 @@
 ---
 title: WTF is a forward deployed engineer? (and why everyone is hiring them)
-date: 2026-02-09
+date: 2026-02-11
 author:
   - jina-yoon
 showTitle: true
