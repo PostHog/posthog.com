@@ -126,6 +126,6 @@ This is what happened with Ramp, a team that originally started out building for
 
 We pride ourselves on having tools that work out of the box, but there's a difference between "any developer can use PostHog in 10 minutes" and "this Fortune 500 company can migrate their entire analytics stack without spending months on it."
 
-We hired our first FDE to help with these large-scale migrations, but we're doing it PostHog-style. Our FDE is fully remote, async, and focused on building automation. It's a weird experiment for those used to the typical FDE setup, but it makes sense when you think about it. Many of the benefits (deep customer knowledge, faster iterations, etc.) can still work if we use the tons of usage data we already have instead of doing product discovery from scratch.
+We hired our first FDE to help with these large-scale migrations, but we're doing it PostHog-style. Our FDE is fully remote, async, and focused on building automation. It's a weird experiment for those used to the typical FDE setup, but it makes sense for us. Many of the benefits (deep customer knowledge, faster iterations, etc.) can still work if we use the tons of usage data we already have instead of doing product discovery from scratch.
 
 We'll know we're successful when fewer customers need hands-on help because the tooling just keeps getting better.
