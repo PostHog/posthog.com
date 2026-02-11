@@ -639,6 +639,209 @@ const AppCount = () => {
     return APP_COUNT
 }
 
+const productCategories = [
+    {
+        name: 'Analytics',
+        handles: [
+            'web_analytics',
+            'revenue_analytics',
+            'trends',
+            'funnels',
+            'user_paths',
+            'lifecycle',
+            'retention',
+            'stickiness',
+            'correlation_analysis',
+            'group_analytics',
+        ],
+    },
+    {
+        name: 'Data stack',
+        handles: ['data_warehouse', 'cdp', 'data_in', 'sql', 'bi', 'data_modeling', 'data_out'],
+    },
+    {
+        name: 'Feature development',
+        handles: [
+            'coding_agent',
+            'feature_flags',
+            'early_access',
+            'endpoints',
+            'product_tours',
+            'webhooks',
+            'workflows_emails',
+        ],
+    },
+    {
+        name: 'Debugging & analysis',
+        handles: ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles'],
+    },
+    {
+        name: 'AI tools',
+        handles: ['llm_traces', 'llm_generations', 'llm_evals'],
+    },
+    {
+        name: 'Feedback & testing',
+        handles: ['experiments', 'no_code_ab_testing', 'surveys', 'conversations'],
+    },
+    {
+        name: 'Tools',
+        handles: ['posthog_ai', 'dashboards', 'activity', 'notebooks'],
+    },
+]
+
+const MAX_VISIBLE_ITEMS = 7
+const TRUNCATED_VISIBLE = 6
+
+const StatusDot = ({ status }: { status?: string }) => {
+    if (!status || status === 'WIP') return null
+
+    const isBeta = status === 'beta'
+    const isAlpha = status === 'private alpha' || status === 'alpha'
+
+    if (!isBeta && !isAlpha) return null
+
+    const dotColor = isBeta ? 'bg-yellow' : 'bg-red'
+    const label = isBeta ? 'Beta' : 'Alpha'
+
+    return (
+        <Tooltip
+            trigger={<span className={`inline-block size-2 rounded-full ${dotColor} shrink-0`} />}
+            delay={0}
+            side="top"
+        >
+            <span className="text-sm">{label}</span>
+        </Tooltip>
+    )
+}
+
+const ProductCategoryItem = ({
+    product,
+}: {
+    product: { name: string; handle: string; slug?: string; color?: string; Icon?: any; status?: string }
+}) => {
+    const isDisabled = product.status === 'WIP'
+    const icon = product.Icon ? (
+        <product.Icon className={`size-4 shrink-0 ${isDisabled ? 'text-muted' : `text-${product.color || 'gray'}`}`} />
+    ) : null
+
+    const content = (
+        <span className="flex items-center gap-1.5 py-0.5">
+            {icon}
+            <span className={isDisabled ? 'text-muted' : ''}>{product.name}</span>
+            <StatusDot status={product.status} />
+        </span>
+    )
+
+    if (isDisabled || !product.slug) {
+        return <span className="text-sm cursor-default">{content}</span>
+    }
+
+    return (
+        <Link
+            to={`/${product.slug}`}
+            state={{ newWindow: true }}
+            className="text-sm text-primary hover:text-primary !font-normal !no-underline hover:!underline"
+            data-attr="product-grid-item"
+        >
+            {content}
+        </Link>
+    )
+}
+
+const ProductCategoryColumn = ({
+    category,
+    allProducts,
+}: {
+    category: { name: string; handles: string[] }
+    allProducts: any[]
+}) => {
+    const [expanded, setExpanded] = useState(false)
+
+    const products = category.handles.map((handle) => allProducts.find((p: any) => p.handle === handle)).filter(Boolean)
+
+    const needsTruncation = products.length > MAX_VISIBLE_ITEMS
+    const visibleProducts = needsTruncation && !expanded ? products.slice(0, TRUNCATED_VISIBLE) : products
+    const remainingCount = products.length - TRUNCATED_VISIBLE
+
+    return (
+        <div className="flex flex-col gap-0.5">
+            <h3 className="text-sm font-normal text-secondary !tracking-normal m-0 mb-1">{category.name}</h3>
+            {visibleProducts.map((product: any) => (
+                <ProductCategoryItem key={product.handle} product={product} />
+            ))}
+            {needsTruncation && !expanded && (
+                <button
+                    onClick={() => setExpanded(true)}
+                    className="text-sm text-secondary hover:text-primary font-medium text-left py-0.5 flex items-center gap-1.5 cursor-pointer"
+                >
+                    <span className="size-4 shrink-0 flex items-center justify-center text-secondary text-xs font-bold">
+                        &bull;&bull;&bull;
+                    </span>
+                    {remainingCount} more
+                </button>
+            )}
+        </div>
+    )
+}
+
+const ProductCategoryGrid = () => {
+    const allProducts = useProduct() as any[]
+
+    return (
+        <div className="@container mb-12">
+            <div className="grid grid-cols-2 @xl:grid-cols-3 @3xl:grid-cols-4 gap-x-6 gap-y-8">
+                {productCategories.map((category) => (
+                    <ProductCategoryColumn key={category.name} category={category} allProducts={allProducts} />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+const ProductsSection = () => {
+    const posthog = usePostHog()
+    const variant = posthog?.getFeatureFlag?.('homepage-product-groupings')
+
+    if (variant === 'test') {
+        return (
+            <>
+                <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+                    <h2 className="m-0 tracking-tight">Products</h2>
+                    <Link
+                        to="/products"
+                        state={{ newWindow: true }}
+                        className="text-sm font-semibold flex items-center gap-0.5"
+                    >
+                        Explore all products <IconArrowRight className="size-4" />
+                    </Link>
+                </header>
+                <ProductCategoryGrid />
+            </>
+        )
+    }
+
+    // Control: existing UI
+    return (
+        <>
+            <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+                <h2 className="m-0 tracking-tight">
+                    Explore apps{' '}
+                    <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
+                </h2>
+                <aside className="hidden @xl:inline-flex">
+                    <span>
+                        <Link to="/products" state={{ newWindow: true }}>
+                            Browse app library
+                        </Link>{' '}
+                        ({APP_COUNT})
+                    </span>
+                </aside>
+            </header>
+            <CompanyStageTabs />
+        </>
+    )
+}
+
 const CompanyStageTabs = () => {
     const [selectedStage, setSelectedStage] = React.useState('growth')
 
@@ -958,7 +1161,7 @@ const Customers = () => {
     ]
 
     return (
-        <>
+        <div className="inline-block">
             <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
                 <div className="@xl:absolute right-0 -top-8">
                     <OSButton
@@ -1042,7 +1245,7 @@ const Customers = () => {
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
                 Open customers.mdx
             </OSButton>
-        </>
+        </div>
     )
 }
 
@@ -1089,6 +1292,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <CompanyStageTabs />,
+    },
+    {
+        name: 'ProductsSection',
+        kind: 'flow',
+        props: [],
+        Editor: () => <ProductsSection />,
     },
     {
         name: 'CTAs',
