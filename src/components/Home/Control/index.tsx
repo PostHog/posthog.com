@@ -664,11 +664,11 @@ const productCategories = [
         handles: [
             'twig',
             'feature_flags',
-            'early_access',
+            'workflows_emails',
+            'webhooks',
             'endpoints',
             'product_tours',
-            'webhooks',
-            'workflows_emails',
+            'early_access',
         ],
     },
     {
