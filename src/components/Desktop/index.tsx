@@ -522,7 +522,11 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="keyboard-garden-images hidden absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                        <div
+                            className={`absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0 ${
+                                websiteMode ? 'keyboard-garden-images hidden' : ''
+                            }`}
+                        >
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
