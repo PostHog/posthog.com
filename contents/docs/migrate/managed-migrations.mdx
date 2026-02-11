@@ -47,11 +47,17 @@ Each direct import job supports a maximum date range of one year. To migrate dat
 
 When setting up an Amplitude direct import, you can configure the following options:
 
-- **Import events from Amplitude** - Import Amplitude events into PostHog. Enabled by default.
-- **Generate identify events to link user IDs with device IDs** - Automatically generate `$identify` events whenever a new device ID is associated with a user ID. These identify events help maintain proper user identity linking in PostHog by connecting anonymous device IDs with known user IDs. Enabled by default.
-- **Generate group identify events from group property changes** - Generate group identify events when group properties change. Disabled by default.
+| Option | Description | Enabled by default |
+|--------|-------------|-------------------|
+| **Import events from Amplitude** | Import Amplitude events into PostHog. | ✅ Yes |
+| **Generate identify events to link user IDs with device IDs** | Automatically generate `$identify` events whenever a new device ID is associated with a user ID. These identify events help maintain proper user identity linking in PostHog by connecting anonymous device IDs with known user IDs. | ✅ Yes |
+| **Generate group identify events from group property changes** | Generate group identify events when group properties change. | ❌ No |
 
-> **Note:** Groups are not yet supported in Amplitude migrations. Only user events and properties will be imported.
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+
+Groups are not yet supported in Amplitude migrations. Only user events and properties will be imported.
+
+</CalloutBox>
 
 See the [Event transformations](#event-transformations) section for full mapping details and examples. You should also consider running a small test migration first to preview transformations.
 
