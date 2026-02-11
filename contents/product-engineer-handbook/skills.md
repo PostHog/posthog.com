@@ -5,15 +5,15 @@ showTitle: true
 
 Product engineers are T or M-shaped people – i.e. engineers who have deep knowledge and experience in one or more areas, and broad knowledge of several others.
 
-Some will be better at [talking to users](/newsletter/talk-to-users) than others. Some will be stronger at data analysis. Some will be stronger on the front-end than the back-end.
+Some will be better at [talking to users](/newsletter/talk-to-users) than others. Some will be stronger at data analysis. Some will better on the front-end than the back-end.
 
-You don't need to be an expert in everything to be an effective product engineer, but you do need to be proficient in most, and willing to learn the things you don't know. 
+The point is you don't need to be an expert in everything to be an effective product engineer, but you do need to be proficient in most, and willing to learn the things you don't know. 
 
 Being a fundamentally sound engineer is table stakes for any aspiring product engineer, so this chapter is mostly about less obvious, non-technical skills and knowledge.
 
 ## 1. How software businesses work
 
-As a product engineer, you should have a high-level understanding of how software businesses work, so you can properly understand the context in which you're building, and ultimately make good decisions about what to build.
+Understanding how your business work gives product engineers the context they need to make good decisions about what to build.
 
 This starts with understanding basic concepts like [product-market fit](/founders/product-market-fit-game), and the difference between an [ideal customer profile](/newsletter/ideal-customer-profile-framework) and a [user persona](/product-engineers/how-to-create-user-personas). It also includes the business metrics that imply or predict the success of a product, like net revenue retention.
 

@@ -9,7 +9,9 @@ In a traditional product team, engineers often take direction from product manag
 
 This isn't a great system for giving engineers autonomy – it's literally designed to hem them in. Often product managers exist to control engineers, or shield them from organizational dysfunction. Not because they want to, but because execs think it's necessary.
 
-Leaders think "we can give our engineers more time to code if we don’t bother them with other things," so they create layers of processes that PMs are tasked with managing. These systems train engineers to only care about their small area of influence. To disregard the wider impact of their work on customers or the business. 
+[TODO: Bottleneck illustration here]
+
+These systems are motivated by the desire for control, accountability (i.e. "who's to blame for this problem?"), and a lack of trust. They condition engineers to only care about their small area of influence and to disregard the wider impact of their work on customers or the business. 
 
 The result is a maze of half-baked features, and it’s just plain slow. PMs become the bottleneck and gatekeeper for decisions, and engineers feel frustrated. Instead, we have two simple principles that govern how product engineers and product managers work together.
 

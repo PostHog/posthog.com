@@ -3,13 +3,13 @@ title: What is a product engineer?
 showTitle: true
 ---
 
-Software product development is changing. It's faster, less predictable, and more open to disruption than ever before, and the role of software engineers is evolving to match it.
+Welcome to the Product Engineer Handbook. Just like our [public company handbook](/handbook), we made this to share how we work, how we think, and ultimately help engineers prepare for the future. Why? Let's start with something obvious. 
 
-We believed this long before AI coding agents became genuinely useful, but their emergence only intensifies the need to rethink how software gets made. 
+Software product development is changing. It's faster, less predictable. One industrious engineer with a little help from their friends Claude, Codex, and Copilot (lol, only joking, obv not Copilot!) can ship in a week what used to take whole teams of engineers months.
 
-Today, a decent engineer can achieve more than they ever realistically could before. As a consequence, teams that stick to the old assumptions and boundaries of "engineering work" will flounder. Teams that embrace a broader definition will out ship and outperform them, and do so while working within smaller, more efficient teams.
+In this reality, teams and individuals that embrace a broader definition of what constitutes "developer work" will outperform those that cling to old assumptions and norms, and do so while working within [smaller, more efficient teams](/newsletter/small-teams).
 
-We think those high-performing teams will be led by product engineers. Unlike a traditionally defined full stack engineer, a product engineer's job goes beyond shipping code. It's about engineering every aspect of the product and what makes it successful. 
+We think those teams will be lead by product engineers. Unlike a traditionally defined full stack engineer, a product engineer's job goes beyond shipping code. It's about engineering every aspect of the product and what makes it successful. 
 
 Product engineers talk to users. They decide what to build. They own pricing, revenue, and user experience. They support customers directly. They're accountable primarily to their users and paying customers. They own product decisions.
 
@@ -17,9 +17,9 @@ The Product Engineer Handbook is about helping developers embrace this new reali
 
 Reading this handbook will help you understand how to adapt your thinking, the behaviors you should adopt, and the skills you should develop to become a successful product engineer. It'll also help you learn the basic concepts that underpin the business of building successful software businesses.
 
-We'll share how adopting this mentality has helped us grow PostHog, and how others are applying it too. Just like our [company handbook](/handbook) where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product.
+Just like our [company handbook](/handbook) where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product.
 
-If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. Got a request for something we should add to the handbook? Leave a comment anywhere on this page, or in our [community](/questions).
+If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. Got a request for something we should add to the handbook? Leave a comment on this page, or in our [community](/questions).
 
 <NewsletterForm />
 
@@ -56,7 +56,7 @@ Gergely Orosz, The Pragmatic Engineer, describes what he calls [product-minded e
 
 In sum, a product engineer is someone who cares more about the outcomes and impact of their code on users than the implementation. Their goal is creating a great product for users. A product that solves real problems and, ultimately, sparks joy.
 
-## Why become a product engineer?
+## Why product engineers?
 
 Developers used to spend years learning the specifics of a language’s syntax, the architecture of components, and understanding how language turns into a running application. This was core to creating value in software.
 
@@ -68,7 +68,7 @@ AI can't build your business. You can't plug a large language model into your ho
 
 Code that works isn’t just code that compiles, it’s code that creates results. Results for customers who depend on it. Results for the business that maintains it. Code that keeps the lights on gives you more leverage to reach your goals.
 
-Developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, they're more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
+Software developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, they're more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
 
 Embracing the product engineer mindset requires a complete reset of how organizations behave. It requires [smaller teams](/newsletter/small-teams), more autonomy, and transparency. It requires minimal process, time to build, trust and feedback. It requires a culture that gives *everyone* permission to be ambitious.
 
@@ -86,4 +86,4 @@ And, as one of our colleagues, Danilo Campos, shared in Slack recently:
 
 > "We are surrounded by optimists. By people who want things to work, and believe in their bones things CAN work. An astonishing amount is possible when talented people BELIEVE it’s possible. It’s so much fun to do the things you’re good at when everyone is happy you’re good at them."
 
-If this sounds good to you, you should keep reading.
+If this sounds good to you, you should read the next chapter: [Traits of product engineers](/product-engineer-handbook/traits).

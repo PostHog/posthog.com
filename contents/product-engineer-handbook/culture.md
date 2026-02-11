@@ -15,11 +15,7 @@ Products don't get shipped in meetings, so the most important thing a product en
 
 A product engineer's calendar should look like this:
 
-[image\]
-
-Not this.
-
-[image\]
+![calendar](https://res.cloudinary.com/dmukukwp6/image/upload/a0d634a2_bd3e_4229_ae8f_f98269a6c4f7_2268x1473_06595e2e80.jpg)
 
 In many ways, everything we do at PostHog is designed to reduce the need for meetings, but there are a handful of specific things here:
 

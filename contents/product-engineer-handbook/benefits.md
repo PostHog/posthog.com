@@ -3,30 +3,42 @@ title: Why companies should hire product engineers
 showTitle: true
 ---
 
-Any company can benefit from hiring product engineers, but startups are where they're most likely to thrive because startups win on speed, and product engineers are all about creating speed and urgency. 
+Any company can benefit from hiring product engineers, but startups are where they're most likely to thrive because [startups win on speed](/founders/how-come-we-ship-so-much), and product engineers are all about creating speed and urgency. 
 
 Imagine, for a moment, what product development often looks like:
 
-1. Big customer nags sales team about some specific problem they have  
-2. Exec team decides the customer is too important to lose and must be prioritized  
-3. Product managers investigate feedback and turns requirements into issues  
-4. Engineers are given issues and the solution the customer wants  
-5. They push back on the overly bespoke solution for a single customer  
-6. Exec team insists they build it anyway
+```mermaid
+graph LR
+    A["Customer nags sales\nteam about problem"] --> B["Exec intervenes\nto prevent churn"]
+    B --> C["Product managers\ninvestigate feedback"]
+    C --> D["Requirements captured\nand turned into tickets"]
+    D --> E["Engineers given tickets\ndetailing solution\ncustomer wants"]
+    E --> F["They push back on the\noverly bespoke solution"]
+    F --> G["Sales team insists\nthey build it anyway"]
+    G --> H["Everyone jumps on\nTeams calls to argue"]
+    H --> I["Solution is built but\ndoesn't really solve\nthe problem"]
+    I --> J["Customer churns\nanyway"]
+    J --> A
+```
 
 This is an inherently slow process. In this environment, an engineer is mainly consuming requirements, interpreting the intent of users and product managers at a distance, or being told what to build with little input into the direction.
 
 This process isn't interested in an engineer with a strong opinion about what to build, it wants someone who can build to spec even when it's obvious to them it's the wrong path for their product.
 
+It repeats endlessly until a product dies.
+
 ## The product engineer way
 
 How does this work when a product engineer is in the loop? At PostHog, where product engineers own product teams and make product decisions, it often looks something like this:
 
-1. Customer reports a serious issue or request via support  
-2. A product engineer on a support rotation responds  
-3. They dig into their needs and the problem they're trying to solve  
-4. Product engineer decides this is a feature all users would find useful  
-5. They ship a PR the same week (or day) and gather feedback from affected customer
+```mermaid
+graph LR
+    A["Customer reports an\nissue or request\nvia support"] --> B["Product engineer on\nsupport rotation\nresponds"]
+    B --> C["They dig into their\nneeds and the problem\nthey're trying to solve"]
+    C --> D["Product engineer decides\nthis is a feature all\nusers would find useful"]
+    D --> E["They ship a PR the\nsame week or day and\ngather feedback"]
+    E --> A
+```
 
 In this scenario, product engineers gather feedback directly from customers. [User feedback and context](/newsletter/talk-to-users) isn't filtered through someone else. It's direct and without bias.
 
@@ -44,11 +56,11 @@ Speed isn't the only advantage of hiring product engineers, however. Others incl
 
 Customers love it when an engineer listens to their problem and quickly ships a solution with minimum fuss. The naturally rapid feedback loop of product engineers who [talk to users](/newsletter/talk-to-users) and do support creates numerous opportunities to delight customers this way.
 
-\[SCREENSHOT AN EXAMPLE HERE\]
+![sparking joy](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/spark_joy_448d65ec0f.png)
 
 ### 2. Spontaneous creativity
 
-Product engineers who have autonomy to experiment often end up shipping brilliant products and features that an exec or product leader never imagine. Numerous PostHog products and key features, such as session replay, data warehouse, and PostHog AI, came from individual engineers hacking together a proof of concept or MVP. 
+Product engineers who have autonomy to experiment often end up shipping brilliant products and features that an exec or product leader never imagine. Numerous PostHog products and key features, such as [session replay](/session-replay), [data warehouse](/data-warehouse), and [PostHog AI](/ai), came from individual engineers hacking together a proof of concept or MVP. 
 
 ### 3. You can do more at once
 

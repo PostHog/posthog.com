@@ -3,15 +3,13 @@ title: Traits of product engineers
 showTitle: true
 ---
 
-## 1. They take extreme ownership of ideas
+The most effective product engineers at PostHog aren't necessarily the best coders. This isn't to say coding skill doesn't matter, it obviously does, but being a product engineer really starts from how you think and behave.
 
-Product engineers own products from beginning to end. [Talking to users](/newsletter/talk-to-users), shipping minimum lovable products, experimenting and iterating constantly.
+It's a classic "make your own luck" argument, really. Successful product engineers spark joy not because they're the best at coding solutions to intuiting what they want, but because everything they do revolves around finding ways to make a positive impact.
 
-Product engineers are committed to delivering the full vision of an idea, not handing it off to someone else when they get stuck or lose interest. Getting to 80% doesn't count.
+This list could be longer, but these are the most important traits we look for product engineers.
 
-They're great at advocating for their ideas. Mastering the art of writing a persuasive request for comments (RFC), or presenting a spellbinding demo, is an essential skill.
-
-## 2. They're customer obsessed
+## They're customer obsessed
 
 Product engineers care a lot about the people and organizations using their product. This customer obsession manifests in a few ways. 
 
@@ -27,7 +25,15 @@ Third, they love jumping on user problems and solving them. Whether it's an anno
 
 By being customer-obsessed, product engineers become more open-minded. They care more about solving real user problems than dogmatically following best practices just because "that's how it's done."
 
-## 3. They ship early and iterate
+## They take extreme ownership of ideas
+
+Product engineers are committed to delivering the full vision of an idea, not handing it off to someone else when they get stuck or lose interest. Getting to 80% doesn't count.
+
+This requires them to own products from beginning to end. [Talking to users](/newsletter/talk-to-users), shipping minimum lovable products, experimenting and iterating constantly.
+
+This is important because the things that delight users rarely get shipped at the alpha or beta stage of a product, or even when it's generally available. They also rarely originate from someone with little personal investment in what's been built.
+
+## They ship early and iterate
 
 Product engineers prefer prototypes, minimum viable features, and experiments to briefs, proposals, and presentations because they get them closer to building a great product. 
 
@@ -35,7 +41,7 @@ They learn by taking bets, building, [gathering feedback](/newsletter/how-to-giv
 
 This means they use [feature flags tools](https://posthog.com/feature-flags) to [test in production](https://posthog.com/product-engineers/testing-in-production), and run [experiments](https://posthog.com/experiments) to understand the impact of their changes where needed. This mindset, and a willingness to use tools that enable it, allows product engineers to quickly validate ideas with real users, so they learn exponentially faster.
 
-## 4. They genuinely love building
+## They genuinely love building
 
 Product engineers are intrinsically motivated by building useful (and sometimes just interesting) things, more so than career milestones, or status. 
 
@@ -51,11 +57,9 @@ As does [Supabase](https://supabase.com/blog/who-we-hire):
 
 Many of the product engineers at PostHog are former founders, or cut their teeth maintaining open-source projects.
 
-/TO DO: ADD EXAMPLES HERE
-
 <NewsletterForm />
 
-## 5. They have product sense and taste
+## They have product sense and taste
 
 Building successful products requires a little intuition.
 
@@ -71,7 +75,7 @@ Product engineers who ship fast, learn fast. Product engineers who learn fast bu
 
 The momentum is irresistible.
 
-## 6. They understand and care about the broader context
+## They understand and care about the broader context
 
 Because product engineers own their product, they also own the performance and roadmap of that product. This means analyzing usage data and the competitive landscape. They combine this analysis with user feedback, and their own intuition, to figure out what to do next.
 
@@ -79,7 +83,7 @@ Product engineers also understand how their product fits into the business lands
 
 Product engineers love gathering more context because it helps them make better decisions about what to build.
 
-## 7. They constantly search for 1% gains
+## They constantly search for 1% gains
 
 Software isn't made in a vacuum and, more often than not, you're always trying to out ship and outgrow a competitor. Product engineers are aware of this and always looking for ways to work more efficiently, or more successfully.
 
@@ -96,7 +100,7 @@ This also means product engineers are often early adopters of new technologies i
 
 This often stems from an intrinsic curiosity and love of learning. Product engineers love asking questions and understanding the why behind decisions. This is motivated by the desire to improve and perform to a higher level, but sometimes it's just for the pure love of learning with no other specific goal.
 
-## 8. They're optimistic
+## They're optimistic
 
 Building successful products that users genuinely love isn't easy, so you need to be optimistic by default.
 
