@@ -26,12 +26,26 @@ Follow these steps to copy or update the flag in another project:
 1. Navigate to the feature flag you want to copy.
 2. Select the `Projects` tab.
 3. Select the project you want to copy the flag to.
-4. Click `Copy` or `Update` - this depends on whether the flag already exists in the target project.
-5. View the table at the bottom to see the newly created or updated flag.
+4. (Optional) If the feature flag has pending [scheduled changes](/docs/feature-flags/scheduled-flag-changes), check the `Copy schedules` checkbox to include them in the copy. The checkbox will show the number of pending schedules (e.g., "3 pending") and is only enabled when the source flag has scheduled changes.
+5. Click `Copy` or `Update` - this depends on whether the flag already exists in the target project.
+6. View the table at the bottom to see the newly created or updated flag.
 
 <ProductScreenshot
     imageLight={MultiProjectFeatureFlagsLight}
     imageDark={MultiProjectFeatureFlagsDark}
-    alt="Multi-project feature flags" 
+    alt="Multi-project feature flags"
     classes="rounded"
 />
+
+## Copying scheduled changes
+
+When copying a feature flag that has pending [scheduled changes](/docs/feature-flags/scheduled-flag-changes), you can optionally include these schedules in the copy by checking the `Copy schedules` checkbox.
+
+When you copy schedules:
+
+- Only pending (unexecuted) scheduled changes are copied to avoid duplicating completed actions
+- All schedule properties are preserved, including timing, recurrence, payload, and end dates
+- Schedules maintain their original execution times in the destination project
+- User attribution for the schedules is preserved
+
+This is particularly useful when you want to maintain the same release timeline across environments, such as when copying a flag from staging to production with the same scheduled rollout plan.
