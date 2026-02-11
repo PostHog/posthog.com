@@ -1,5 +1,5 @@
 ---
-date: 2024-08-22
+date: 2026-02-11
 title: 'In-depth: PostHog vs Hotjar'
 rootPage: /blog
 sidebar: Blog
@@ -20,28 +20,37 @@ seo:
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
-PostHog and Hotjar both help you understand user behavior, including the ability to watch real user sessions, conduct user research, and book interviews, but there are some important differences:
+PostHog and [Hotjar](/best-hotjar-alternatives) both help you understand how users interact with your product — through session replay, heatmaps, and user surveys. They're popular choices for teams that want to go beyond pageview analytics and see what users actually do.
+
+Hotjar is now part of [Contentsquare](https://contentsquare.com) (which also acquired [Heap](/blog/posthog-vs-heap)). It's still available as a focused user research tool built for UX teams, but pricing and plans now live under the Contentsquare umbrella. 
+
+PostHog combines [replays](/session-replay) and [surveys](/surveys) with a [full suite of developer tools](/products) designed to measure impact from one integrated platform.
+
+In this comparison, we break down how PostHog and Hotjar stack up so you can decide which one is the right fit.
 
 ## How is PostHog different?
 
 ### 1. We're an all-in-one platform
 
-PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web](/web-analytics) analytics, [feature flags](/feature-flags), [A/B testing](/experiments), and a [data warehouse](/data-warehouse). It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web](/web-analytics) analytics, [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [workflows](/workflows), a [data warehouse](/data-warehouse), [data pipelines](/cdp), and more. It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
-### 2. We support both web and mobile apps
+### 2. It's a platform built for developers
 
-We offer integrations for all the most popular web and and mobile SDKs, including [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [React Native](/docs/session-replay/installation/react-native), [Android](/docs/session-replay/installation/android), [iOS](/docs/session-replay/installation/ios), and [Flutter](/docs/session-replay/installation/flutter). Unlike Hotjar, we also support [session replay on mobile apps](/docs/session-replay/mobile), so you can track all versions of your app using PostHog.
+This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and in our [public handbook](/handbook).
+
+And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/cdp) or [data warehouse](/data-warehouse), are ready to switch on whenever you need them.
+
+> Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale
 
 ### 3. We're cheaper and have a generous free tier
 
-Every customer gets 5,000 web recordings and 1 million events for free each month, no matter what plan they're on. Our generous free tier means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
-
-See the [price comparison section](#price-comparison) for more.
+Every customer gets 5,000 web recordings and 1 million events for free each month, no matter what plan they're on. Our [generous free tier](/pricing) means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
 
 ## Product comparison
 
 The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotjar-alternatives), [Heap](/blog/best-heap-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives) rolled into one.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -71,24 +80,82 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
         },
     ]}
 />
+</p>
 
 ### Analytics
 
-Product analytics isn't a core focus for Hotjar, but it does offer basic event tracking, funnels, and trend insights on its most expensive Scale plan.
+Since Hotjar is now part of Contentsquare, the analytics picture has changed. Hotjar already offered funnels, but since the merge, broader product analytics features — like retention, user paths, and custom dashboards — are now available through Contentsquare's Product Analytics. 
+
+Their free tier includes 10,000 monthly sessions, while PostHog's free tier includes 1 million analytics events every month.
 
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
-        'product_analytics.features.custom_events',
-        'product_analytics.trends',
-        'product_analytics.funnels',
-        'dashboards',
-        'product_analytics.funnels.features.correlation_analysis',
-        'product_analytics.group_analytics',
-        'product_analytics.lifecycle',
-        'product_analytics.retention',
-        'product_analytics.stickiness',
-        'product_analytics.user_paths',
+        {
+            label: 'Autocapture',
+            description: 'Automatically capture user interactions without manual instrumentation',
+            values: [true, 'True (Contentsquare)'],
+        },
+        {
+            label: 'Funnels',
+            description: 'Understand conversion between steps and identify drop-offs',
+            values: [true, 'True (Contentsquare)'],
+        },
+        {
+            label: 'Trends',
+            description: 'Visualize how actions are performed over time',
+            values: [true, 'True (Contentsquare)'],
+        },
+        {
+            label: 'Retention',
+            description: 'Track how many users return over time',
+            values: [true, 'True (Contentsquare)'],
+        },
+        {
+            label: 'User paths / journey analysis',
+            description: 'Visualize how users navigate through your product',
+            values: [true, 'True (Contentsquare)'],
+        },
+        {
+            label: 'Dashboards',
+            description: 'Monitor key metrics in one place',
+            values: [true, 'True (Contentsquare)'],
+        },
+        {
+            label: 'AI-powered analysis',
+            description: 'Ask questions about your data in natural language',
+            values: [true, 'Growth+ (Contentsquare)'],
+        },
+        {
+            label: 'Correlation analysis',
+            description: 'Automatically identify factors that affect conversion',
+            values: [true, false],
+        },
+        {
+            label: 'Group analytics',
+            description: 'Track metrics at account or company level',
+            values: [true, 'Pro+ (Contentsquare)'],
+        },
+        {
+            label: 'Lifecycle analysis',
+            description: 'Categorize users as new, returning, resurrecting, or dormant',
+            values: [true, false],
+        },
+        {
+            label: 'Stickiness',
+            description: 'Find out how many days users perform a specific action',
+            values: [true, false],
+        },
+        {
+            label: 'Feature flags',
+            description: 'Roll out features safely to specific users or cohorts',
+            values: [true, false],
+        },
+        {
+            label: 'A/B testing',
+            description: 'Run experiments and measure statistical impact on goal metrics',
+            values: [true, false],
+        },
     ]}
 />
 
@@ -96,8 +163,9 @@ Product analytics isn't a core focus for Hotjar, but it does offer basic event t
 
 Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit.
 
-Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives), though Hotjar doesn't support replays on mobile apps and has no public plans to do so.
+Both Hotjar and PostHog are good options if you're looking for a [FullStory](/blog/best-fullstory-alternatives), [LogRocket](/blog/best-logrocket-alternatives), or [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -117,6 +185,7 @@ Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clar
         'session_replay.export.features.export_to_video',
     ]}
 />
+</p>
 
 ### Heatmaps
 
