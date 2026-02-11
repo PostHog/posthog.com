@@ -657,12 +657,12 @@ const productCategories = [
     },
     {
         name: 'Data stack',
-        handles: ['data_warehouse', 'cdp', 'data_in', 'sql', 'bi', 'data_modeling', 'data_out'],
+        handles: ['data_warehouse', 'cdp', 'data_in', 'sql_editor', 'bi', 'data_modeling', 'data_out'],
     },
     {
         name: 'Feature development',
         handles: [
-            'coding_agent',
+            'twig',
             'feature_flags',
             'early_access',
             'endpoints',
@@ -681,7 +681,7 @@ const productCategories = [
     },
     {
         name: 'Feedback & testing',
-        handles: ['experiments', 'no_code_ab_testing', 'surveys', 'conversations'],
+        handles: ['experiments', 'no_code_ab_testing', 'surveys', 'messaging', 'user-interviews'],
     },
     {
         name: 'Tools',
@@ -719,20 +719,20 @@ const ProductCategoryItem = ({
 }: {
     product: { name: string; handle: string; slug?: string; color?: string; Icon?: any; status?: string }
 }) => {
-    const isDisabled = product.status === 'WIP'
+    const hasLink = !!product.slug
     const icon = product.Icon ? (
-        <product.Icon className={`size-4 shrink-0 ${isDisabled ? 'text-muted' : `text-${product.color || 'gray'}`}`} />
+        <product.Icon className={`size-4 shrink-0 ${!hasLink ? 'text-muted' : `text-${product.color || 'gray'}`}`} />
     ) : null
 
     const content = (
         <span className="flex items-center gap-1.5 py-0.5">
             {icon}
-            <span className={isDisabled ? 'text-muted' : ''}>{product.name}</span>
+            <span className={!hasLink ? 'text-muted' : ''}>{product.name}</span>
             <StatusDot status={product.status} />
         </span>
     )
 
-    if (isDisabled || !product.slug) {
+    if (!hasLink) {
         return <span className="text-sm cursor-default">{content}</span>
     }
 
@@ -1161,27 +1161,28 @@ const Customers = () => {
     ]
 
     return (
-        <div className="inline-block">
-            <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className="@xl:absolute right-0 -top-8">
-                    <OSButton
-                        onClick={toggleBreakdown}
-                        variant="secondary"
-                        size="sm"
-                        className="font-semibold [&_span]:min-w-[146px]"
-                        disabled={isAnimating}
-                    >
-                        {isAnimating ? (
-                            '🔀 Shuffling...'
-                        ) : (
-                            <>
-                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                            </>
-                        )}
-                    </OSButton>
-                </div>
+        <>
+            <div className="inline-block">
+                <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
+                    <div className="@xl:absolute right-0 -top-8">
+                        <OSButton
+                            onClick={toggleBreakdown}
+                            variant="secondary"
+                            size="sm"
+                            className="font-semibold [&_span]:min-w-[146px]"
+                            disabled={isAnimating}
+                        >
+                            {isAnimating ? (
+                                '🔀 Shuffling...'
+                            ) : (
+                                <>
+                                    <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                                </>
+                            )}
+                        </OSButton>
+                    </div>
 
-                {/* 
+                    {/* 
             <select
                 value={currentBreakdown}
                 onChange={(e) => {
@@ -1240,12 +1241,20 @@ const Customers = () => {
                 ))}
             </select>
              */}
+                </div>
+                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+                <OSButton
+                    asLink
+                    to="/customers"
+                    variant="secondary"
+                    size="md"
+                    className="mt-4"
+                    state={{ newWindow: true }}
+                >
+                    Open customers.mdx
+                </OSButton>
             </div>
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
-            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open customers.mdx
-            </OSButton>
-        </div>
+        </>
     )
 }
 
