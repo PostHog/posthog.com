@@ -3,17 +3,17 @@ title: How Arena uses PostHog to ship without bias at the AI frontier
 customer: Arena
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Arena_3b0652e6e9.png
-date: 2026-01-12
+date: 2026-02-10
 ---
 
-[Arena](https://arena.ai/) is where AI models meet for single combat. Users throw in a prompt, get two anonymous LLM responses, and vote for the winner.
+[Arena](https://arena.ai/) is where AI models meet for single combat. Users throw in a prompt, get two anonymous responses, and vote for the winner.
 
 It's a straightforward concept that's hit massive scale. With 5M+ monthly users generating millions of comparisons each month, Arena's product team needs clear insights into how users engage, how UI tweaks affect votes, and where bias might creep in. 
 
 Matt Hova, Member of Technical Staff, and Lily Dinh, Growth Marketing Lead, shared how Arena uses PostHog to keep the fight fair while shipping fast.
 
 ## Measuring preference without introducing bias
-"The core thing that we're doing is collecting votes," Matt said. "Anytime that we update the UI, we risk affecting the bias of how votes are cast." 
+"The core thing that we're doing is collecting quality votes," Matt said. "Anytime that we update the UI, we risk affecting the bias of how votes are cast." 
 
 To manage that risk, Arena uses [feature flags](/feature-flags) and [experiments](/experiments). Website changes get tested with controlled user subsets and outcomes get compared. "Everything we ship has an experiment," Matt explained, "often with multiple treatments to make sure the guardrails stay healthy."
 
@@ -25,9 +25,11 @@ With dozens of variants running in parallel, knowing which one 'wins' matters as
 
 A similar experimentation loop applies across the board – from product work to top-of-funnel marketing.
 
-"We have leaderboard pages that are basically ranking charts," Lily said. "I personally don't spend much time on them, but through PostHog [analytics](/product-analytics) I found that users were spending, on average, 19 minutes on those pages."
+"We have leaderboard pages that are basically ranking charts," Lily said. "Through PostHog [analytics](/product-analytics) I can see that users are spending, on average, 19 minutes on those pages."
 
 "It indicates a lot of value," she said. "But it also makes you wonder: do people want to spend 19 minutes there? Are there features we should pull out so people don't have to parse the whole thing?"
+
+![screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/arena_screenshot_a4797ee713.png)
 
 Insights like this influenced a new growth marketing effort to build targeted landing pages for specific searches — queries like _best ai models for image generation_ or _top ranked AI models for coding_.
 
@@ -55,7 +57,7 @@ But better engagement wasn't the primary goal – avoiding bias was. Battle mode
 Cohort visibility has also proven useful beyond UI testing. "I've seen cases where our engineers noticed something off in the product simply by looking at the cohorts. In one instance, a key action wasn't firing for a group of users, and PostHog gave us immediate visibility just through behavioral signals."
 
 ## Seeing the full picture
-For a platform built on repeat visits, retention is the north star. "The thing we care about most is monitoring the funnel of users visiting the site, chatting and voting, and returning," Matt explained.
+For a platform built on repeat visits, retention is the north star. "Some key things we care about are monitoring the funnel of users visiting the site, chatting and voting, and returning," Matt explained.
 
 PostHog's ability to track anonymous visitors all the way through to logged-in votes provided a foundation for proper conversion funnels. [PostHog AI](/ai) was another unlock — turning raw [product analytics](/product-analytics) from a specialist skill into something anyone could use.
 
