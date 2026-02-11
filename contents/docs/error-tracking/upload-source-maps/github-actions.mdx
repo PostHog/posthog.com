@@ -39,8 +39,8 @@ jobs:
         uses: PostHog/upload-source-maps@v0.4.6
         with:
           directory: dist
-          env-id: ${{ secrets.POSTHOG_ENV_ID }}
-          cli-token: ${{ secrets.POSTHOG_CLI_TOKEN }}
+          env-id: ${{ secrets.POSTHOG_PROJECT_ID }}
+          cli-token: ${{ secrets.POSTHOG_CLI_API_KEY }}
           # host: https://eu.posthog.com # Required only for EU cloud
           # project: my-awesome-project  # Optional; falls back to repo name
           # version: ${{ github.sha }}   # Optional; falls back to current commit SHA
@@ -69,7 +69,7 @@ This step:
 
 </div>
 
-We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `POSTHOG_ENV_ID` and `POSTHOG_CLI_TOKEN`).
+We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `POSTHOG_PROJECT_ID` and `POSTHOG_CLI_API_KEY`).
 
 </Step>
 
