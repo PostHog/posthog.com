@@ -74,8 +74,7 @@ export default function WarehouseNative(): JSX.Element {
                     PostHog is building a managed warehouse based on DuckDB in addition to the current ClickHouse-based
                     warehouse. The long-term story is:{' '}
                     <strong>warehouse-native in practice because the warehouse is part of PostHog</strong>. If you're
-                    interested in finding out more, we suggest [joining the waitlist for the managed DuckDB
-                    warehouse](/managed-warehouse).
+                    interested in finding out more, we suggest <Link to="/managed-warehouse">joining the waitlist for the managed DuckDB warehouse</Link>.
                 </p>
 
                 <p className="mt-8">
