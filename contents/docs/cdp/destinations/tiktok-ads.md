@@ -12,9 +12,9 @@ You should be aware that this destination relies on creating third-party cookies
 
 ## Installation
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
 
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=tiktok) tab.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=tiktok) tab.
 
 3. Search for **TikTok Ads Conversions** and click **+ Create**.
 
