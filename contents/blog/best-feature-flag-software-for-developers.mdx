@@ -22,15 +22,15 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 There's "ready" and then there's "ready for everyone"; if you've ever scrambled to revert a deploy, you know the difference.
 
-Maybe an edge case breaks on mobile, maybe the feature tanks conversion for a segment you didn't test... maybe your new onboarding flow confuses more people than it helps. 
+Maybe an edge case breaks on mobile, maybe the feature tanks conversion for a segment you didn't test, or maybe your new onboarding flow confuses more people than it helps. 
 
-[This is where feature flags come in](/blog/feature-flags-as-a-service): you ship the code when it's ready, and you control who sees it separately.
+[This is where feature flags come in](/blog/decouple-deployment-from-release): you ship the code when it's ready, and you control who sees it separately.
 
 This guide compares the best feature flag tools for developers – what they do well, where they fall short, and which one fits your workflow best.
 
 ## What features do you need in your feature flag tool?
 
-At its core, a feature flag tool lets you toggle features on or off for specific users, groups, or percentages of traffic without redeploying code. But the best tools do a lot more than flip switches.
+At its core, a feature flag tool lets you toggle features on or off for specific users, groups, or percentages of traffic without redeploying code. But the best tools are a lot more than flip switches.
 
 Most solid feature flag tools include:
 
@@ -38,7 +38,7 @@ Most solid feature flag tools include:
 - Percentage-based and targeted rollouts
 - Environment management (dev, staging, production)
 - SDKs for major languages and frameworks
-- A dashboard for non-engineers to manage flags
+- A dashboard for everyone to manage flags
 
 Developer-focused tools often go further with:
 
@@ -56,9 +56,9 @@ Developer-focused tools often go further with:
 
 PostHog is an all-in-one developer platform where [feature flags](/feature-flags) aren't a standalone product – they're woven into a broader workflow that includes [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [logs](/logs), and more.
 
-This means you can [roll out a feature to 10% of users](/docs/feature-flags/phased-rollout), [watch session replays of those users](/docs/session-replay/how-to-watch-recordings), check whether the flag variant increased conversion, and [catch any errors it triggered](/docs/error-tracking/capture) – all without leaving the platform. If something goes wrong, you can disable the flag instantly and measure the impact in analytics.
+This means you can [roll out a feature to 10% of users](/docs/feature-flags/phased-rollout), [watch session replays of those users](/docs/session-replay/how-to-watch-recordings), check whether the flag variant increased conversion, [catch any errors it triggered](/docs/error-tracking/capture), and [get feedback about their experience](/docs/surveys/creating-surveys) – all without leaving the platform.
 
-PostHog supports boolean and multivariate flags, percentage rollouts, user and group targeting, JSON payloads for [remote configuration](/docs/feature-flags/remote-config), and [local evaluation](/docs/feature-flags/local-evaluation) for low-latency flag checks. It also powers PostHog's [A/B testing and experimentation](/experiments) features, so you can go from "ship it behind a flag" to "measure its impact with statistical significance" in a few clicks.
+PostHog supports boolean and multivariate flags, percentage rollouts, user and group targeting, JSON payloads for [remote configuration](/docs/feature-flags/remote-config), and [local evaluation](/docs/feature-flags/local-evaluation) for low-latency flag checks. It also powers PostHog's [experimentation](/experiments) features, so you can go from "ship it behind a flag" to "measure its impact with statistical significance" in a few clicks.
 
 PostHog uses [usage-based pricing](/pricing) with a free tier of 1 million feature flag requests per month – enough for most early-stage teams. You can also set billing caps to prevent surprise charges, and eligible startups can get $50k in free credits through the [PostHog for Startups program](/startups).
 
@@ -94,7 +94,7 @@ Developers who want feature flags as part of a complete build-measure-learn work
 
 More recently, it has expanded into experimentation, release monitoring, and AI model configuration. It also offers "guarded releases" that automatically roll back changes when performance metrics degrade.
 
-The trade-off is cost. Their pricing is based on client-side MAUs, and can scale quickly. It also doesn't include session replay or error tracking, so you'll need separate tools for those.
+The trade-off is cost. Their pricing is based on client-side MAUs, and can scale quickly. It also doesn't include product analytics, session replay, or error tracking, so you'll need separate tools for those.
 
 **Strengths:**
 
@@ -120,7 +120,7 @@ Large engineering teams that need enterprise-grade feature management with deep 
 
 Its feature flag capabilities include targeting rules, percentage rollouts, prerequisite flags, and JSON payloads. You can also turn any flag into an A/B test, define metrics via SQL, and analyze results using Bayesian or Frequentist statistical engines without exporting data or wiring up a separate tool.
 
-[GrowthBook](/blog/best-growthbook-alternatives) is free to self-host; the cloud version has a free tier for up to 3 users, with paid plans starting at $40/user/month for features like multi armed bandits, product analytics, access control, and more.
+[GrowthBook](/blog/best-growthbook-alternatives) is free to self-host; the cloud version has a free tier for up to 3 users, with paid plans starting at $40/user/month for features like multi-armed bandits, product analytics, access control, and more.
 
 **Strengths:**
 
@@ -144,7 +144,7 @@ Data teams and engineers who want experimentation built into their feature relea
 
 Unleash is an [open-source feature flag platform](/blog/best-open-source-feature-flag-tools) designed for teams that need full control over their infrastructure. It’s used in production by large orgs, including Visa, where data sovereignty and compliance aren't optional.
 
-Unleash focuses on doing feature flags well without trying to be an analytics or experimentation platform. It supports progressive rollouts, kill switches, custom activation strategies, and environment management.  Under the hood, it's a Node.js and TypeScript backend that uses PostgreSQL for storage, and it's straightforward to deploy via Docker or Kubernetes.
+Unleash focuses on doing feature flags well without trying to be an analytics or experimentation platform. It supports progressive rollouts, kill switches, custom activation strategies, and environment management. Under the hood, it's a Node.js and TypeScript backend that uses PostgreSQL for storage, and it's straightforward to deploy via Docker or Kubernetes.
 
 Their OSS is positioned as a single-environment setup, and teams that need multiple environments with governance features typically upgrade to Enterprise for things like RBAC, audit logs, and change requests, plus SSO and SCIM.
 
@@ -168,7 +168,7 @@ Engineering teams in regulated industries that need self-hosted feature flags wi
 
 ![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_09_52_621_Z_86c1ee217a.png)
 
-[Flagsmith](/blog/best-flagsmith-alternatives) is an [open-source feature flag platform](/blog/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises – a rare combination that makes it a strong fit for security-conscious organizations.
+[Flagsmith](/blog/best-flagsmith-alternatives) is an [open-source feature flag](/blog/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises – a rare combination that makes it a strong fit for security-conscious organizations.
 
 It supports boolean and multivariate flags, user segments, percentage rollouts, A/B testing, remote config, and scheduled flags. Its Edge API routes requests to the nearest data center for low-latency evaluation, and it supports local evaluation for server-side SDKs.
 
@@ -251,7 +251,7 @@ Engineering teams that want a fast, lightweight feature flag tool that fits into
 
 - **ConfigCat:** A privacy-first feature flag service with fixed, predictable pricing and a generous free tier (10M requests/month). All evaluations happen locally via SDKs pulling from a global CDN. It doesn't collect end-user data, which simplifies GDPR compliance. The trade-off is no experimentation, analytics, or CI/CD integration – it's intentionally lightweight. Best for teams that want simple, reliable flags without complexity.
 
-- **Harness:** Harness acquired **Split** in May 2024 and merged its experimentation engine into the broader Harness CI/CD platform. The result is feature flags that go through the same governance and verification workflows as code changes, with A/B tes ting and metric ingestion from tools like Segment and Sentry. Best for enterprise DevOps teams that want flags tightly integrated into their CI/CD pipeline.
+- **Harness:** Harness acquired **Split** in May 2024 and merged its experimentation engine into the broader Harness CI/CD platform. The result is feature flags that go through the same governance and verification workflows as code changes, with A/B testing and metric ingestion from tools like Segment and Sentry. Best for enterprise DevOps teams that want flags tightly integrated into their CI/CD pipeline.
 
 </details>
 
@@ -297,7 +297,7 @@ Engineering teams that want a fast, lightweight feature flag tool that fits into
 <details>
   <summary>What are feature flags, and why should developers use them?</summary>
 
-**Feature flags** (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and trunk-based development. Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
+**Feature flags** (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and [trunk-based development](/product-engineers/trunk-based-development). Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
 
 </details>
 
@@ -373,7 +373,7 @@ Yes. Feature flags that are never cleaned up become "stale flags" – dead code 
 <details>
   <summary>Do I need a feature flag tool, or can I build my own?</summary>
 
-You can build a basic flag system with config files or a database table. But as your needs grow – targeting rules, percentage rollouts, multi-environment support, audit logs, experimentation – the engineering cost of maintaining a homegrown system adds up fast. Most teams find it's worth adopting a purpose-built tool once they have more than a handful of flags.
+You can build a basic flag system with config files or a database table. But as your needs grow – targeting rules, percentage rollouts, multi-environment support, audit logs, experimentation – the engineering cost of maintaining a homegrown system adds up fast. Most teams find it's [worth adopting a purpose-built feature flag tool](/blog/feature-flags-as-a-service) once they have more than a handful of flags.
 
 </details>
 
@@ -383,7 +383,7 @@ You can build a basic flag system with config files or a database table. But as 
 **PostHog** is more than a feature flag tool. It gives developers full context by combining all the tools needed to build a successful product in one platform.
 
 - **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [LLM analytics](/llm-analytics), and [error tracking](/error-tracking)
-- **Developer-first:** Transparent APIs, [SQL query builder](/docs/product-analytics/sql), open source, and a [public roadmap](/roadmap)
+- **Developer-first:** Transparent APIs, [SQL query builder](/docs/product-analytics/sql), [docs](/docs) that let you self-serve, open source, and a [public roadmap](/roadmap)
 - **Transparent pricing:** Generous free tiers and [usage-based billing](/pricing)
 - **Trusted by teams:** Used by [Supabase, Lovable, ElevenLabs, ResearchGate](/customers), and more
 
