@@ -45,6 +45,7 @@ export default function TaskBarMenu() {
         setSearchOpen,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
+    const [rendered, setRendered] = useState(false)
     const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -72,6 +73,10 @@ export default function TaskBarMenu() {
                 taskbar.removeEventListener('windowMinimized', handleWindowMinimized)
             }
         }
+    }, [])
+
+    useEffect(() => {
+        setRendered(true)
     }, [])
 
     const handleActiveWindowsClick = () => {
@@ -293,7 +298,7 @@ export default function TaskBarMenu() {
                 data-menu-container
                 className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 pl-0.5 pr-2 ${
                     websiteMode ? 'sticky top-0 z-40' : 'bg-accent/75 z-50'
-                }`}
+                } ${rendered ? 'block' : 'hidden'}`}
             >
                 <div
                     className={`mx-auto transition-all duration-300 flex justify-between items-center w-full ${
