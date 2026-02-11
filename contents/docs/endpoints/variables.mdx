@@ -38,34 +38,35 @@ curl -X POST \
 
 ### Materialization
 
-SQL-based endpoints with variables can only be [materialized](/docs/endpoints/materialization) in certain cases.
+SQL-based endpoints with variables can be [materialized](/docs/endpoints/materialization) when each variable is used in a `WHERE` clause with a supported comparison operator.
 
-We're working on expanding what's possible, but for now you can only materialize a SQL-based endpoint that:
-- is using a single variable
-- and the variable is in an equality comparison with a field
+Supported operators include: `=`, `>=`, `>`, `<`, `<=`
 
-For example, the following can be materialized:
+You can use multiple variables in the same query, including range queries on the same column.
+
+For example, the following queries can be materialized:
 
 ```sql
-select
-  count()
-from
-  events
-where
-  properties.customer_name = {variables.customer_name}
+SELECT count()
+FROM events
+WHERE properties.customer_name = {variables.customer_name}
 ```
 
-But, the query below can not be materialized:
+```sql
+SELECT count()
+FROM events
+WHERE event = {variables.event_name}
+  AND hour >= {variables.start_hour}
+  AND hour < {variables.end_hour}
+```
+
+However, queries with unsupported operators or variable usage outside `WHERE` clauses cannot be materialized:
 
 ```sql
-select
-  count()
-from
-  events
-where
-  properties.customer_name = {variables.customer_name}
-  and properties.$os = {variables.os}
-  and toDate(timestamp) > {variables.from_date}
+-- Cannot materialize: LIKE operator not supported
+SELECT count()
+FROM events
+WHERE event LIKE {variables.event_pattern}
 ```
 
 ## Variables in insight-based endpoints
