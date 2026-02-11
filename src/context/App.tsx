@@ -1869,7 +1869,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     useEffect(() => {
         const updateTaskbarHeight = () => {
             const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
-            setTaskbarHeight(height)
+            if (height > 0) {
+                setTaskbarHeight(height)
+            }
         }
 
         updateTaskbarHeight()
