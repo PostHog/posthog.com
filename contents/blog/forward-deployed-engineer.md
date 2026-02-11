@@ -128,4 +128,4 @@ We pride ourselves on having tools that work out of the box, but there's a diffe
 
 We hired our first FDE to help with these large-scale migrations, but we're doing it PostHog-style. Our FDE is fully remote, async, and focused on building automation. It's a weird experiment for those used to the typical FDE setup, but it makes sense for us. Many of the benefits (deep customer knowledge, faster iterations, etc.) can still work if we use the tons of usage data we already have instead of doing product discovery from scratch.
 
-We'll know we're successful when fewer customers need hands-on help because the tooling just keeps getting better.
+As AI capabilities improve, people have higher expectations for what enterprise software can accomplish. We think the FDE role will grow and evolve to meet that demand. And at the end of the day, we're still approaching this as a product engineering problem by staying close to customers – it's just that instead of talking to users, we're going to go _work_ with them.
