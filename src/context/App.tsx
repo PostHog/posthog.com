@@ -1237,6 +1237,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             ? []
             : getInitialWindows(element)
     )
+    const windowsRef = useRef(windows)
+    useEffect(() => {
+        windowsRef.current = windows
+    }, [windows])
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
             (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
@@ -1344,30 +1348,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const menu = injectDynamicChildren(initialMenu)
 
-    const closeWindow = useCallback(
-        (item: AppWindow) => {
-            setTimeout(() => {
-                const windowsFiltered = windows.filter((el) => el.path !== item.path)
-                const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
-                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-                    undefined
-                )
-                if (nextFocusedWindow && !nextFocusedWindow.minimized) {
-                    if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`, {
-                            state: { preventScroll: websiteMode },
-                        })
-                    } else {
-                        bringToFront(nextFocusedWindow)
-                    }
+    const closeWindow = useCallback((item: AppWindow) => {
+        setTimeout(() => {
+            const currentWindows = windowsRef.current
+            const windowsFiltered = currentWindows.filter((el) => el.path !== item.path)
+            const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
+                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                undefined
+            )
+            if (nextFocusedWindow && !nextFocusedWindow.minimized) {
+                if (nextFocusedWindow.path.startsWith('/')) {
+                    navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
                 } else {
-                    navigate('/', { state: { skipPageUpdate: true } })
+                    bringToFront(nextFocusedWindow)
                 }
-                setWindows(windowsFiltered)
-            }, 0)
-        },
-        [windows]
-    )
+            } else {
+                navigate('/', { state: { skipPageUpdate: true } })
+            }
+            setWindows(windowsFiltered)
+        }, 0)
+    }, [])
 
     const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
         setWindows((windows) =>
