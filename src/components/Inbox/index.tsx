@@ -450,8 +450,10 @@ export default function Inbox(props) {
                     >
                         <aside
                             data-scheme="secondary"
-                            className={`w-full @2xl:w-64 bg-primary @2xl:h-full flex-shrink-0 ${
-                                websiteMode ? 'h-[calc(100vh-91px)] sticky top-[101px]' : '@2xl:border-r border-primary'
+                            className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
+                                websiteMode
+                                    ? 'h-[calc(100vh-91px)] sticky top-[101px]'
+                                    : '@2xl:border-r border-primary @2xl:h-full'
                             }`}
                         >
                             <ScrollArea className="h-full">

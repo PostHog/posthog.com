@@ -38,6 +38,7 @@ import { postsMenu as menu } from '../navs/posts'
 import MenuBar from 'components/RadixUI/MenuBar'
 import slugify from 'slugify'
 import { getVideoClasses } from '../constants'
+import { useApp } from '../context/App'
 const A = (props) => <Link {...props} state={{ newWindow: true }} />
 
 export const Intro = ({
@@ -233,8 +234,12 @@ export const getSortOption = (root?: string) =>
     sortOptions[['blog', 'changelog', 'newsletter', 'spotlight'].includes(root) ? 1 : 0]
 
 const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
+    const { websiteMode } = useApp()
     return activeMenu?.children?.length > 0 ? (
-        <div className="mb-1 flex items-center justify-between sticky top-0 bg-primary">
+        <div
+            data-scheme={websiteMode ? 'primary' : 'secondary'}
+            className="mb-1 flex items-center justify-between sticky top-0 bg-primary z-10"
+        >
             <h5 className="m-0 text-sm font-semibold">{activeMenu?.name}</h5>
             <div className="flex items-center">
                 <MenuBar
