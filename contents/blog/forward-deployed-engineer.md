@@ -31,7 +31,6 @@ Being embedded on customer teams lets FDEs get familiar with customers' existing
 
 For example, [when OpenAI was working on their voice models](https://newsletter.pragmaticengineer.com/i/170794709/3-the-fde-role-at-openai), they sent FDEs to a customer working on call center automation. They built [evals](https://youtu.be/cBD7_R-Cizg?si=mgLw_sSyw9ln3zsD&t=540) to verify its performance and took that data back to the core research team to improve it further. Eventually, the customer became the first to deploy it in production, and these improvements became generally available in OpenAI's [Realtime API](https://platform.openai.com/docs/guides/realtime).
 
-
 ## What do forward deployed engineers actually do?
 
 The life of a FDE is pretty similar to other software engineers, except that they are "onsite" to develop for the customer's needs. This means they do a ton of meetings and customer-facing work and are often required to travel 20-50% of the time (unless they only do virtual visits).
