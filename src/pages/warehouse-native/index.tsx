@@ -49,7 +49,7 @@ export default function WarehouseNative(): JSX.Element {
 
                 <h2>What does PostHog support today?</h2>
                 <p>
-                    PostHog offers an [integrated data warehouse](/managed-warehouse) which works with other PostHog tools such as product analytics, experiments, and feature flags. If you&apos;re using PostHog as your data warehouse then data stays where it is and can be accessed by other PostHog tools, eliminating the need for additional point solutions. If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, PostHog still enables you to sync data via our warehouse sources; queries then run on PostHog compute.
+                    PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link> which works with other PostHog tools such as product analytics, experiments, and feature flags. If you&apos;re using PostHog as your data warehouse then data stays where it is and can be accessed by other PostHog tools, eliminating the need for additional point solutions. If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, PostHog still enables you to sync data via our warehouse sources; queries then run on PostHog compute.
                 </p>
 
                 <h2>What does PostHog not support today?</h2>
