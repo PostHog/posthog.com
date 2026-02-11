@@ -152,7 +152,7 @@ Data teams and engineers who want experimentation built into their feature relea
 
 Unleash is an [open-source feature flag platform](/blog/best-open-source-feature-flag-tools) designed for teams that need full control over their infrastructure. It’s used in production by large orgs, including Visa, where data sovereignty and compliance aren't optional.
 
-Unleash focuses on doing feature flags well without trying to be an analytics or experimentation platform. It supports progressive rollouts, kill switches, custom activation strategies, and environment management.  Under the hood, it's a Node.js and TypeScript backend that uses PostgreSQL for storage, and it's straightforward to deploy via Docker or Kubernetes.
+Unleash focuses on doing feature flags well without trying to be an analytics or experimentation platform. It supports progressive rollouts, kill switches, custom activation strategies, and environment management. Under the hood, it's a Node.js and TypeScript backend that uses PostgreSQL for storage, and it's straightforward to deploy via Docker or Kubernetes.
 
 Their OSS is positioned as a single-environment setup, and teams that need multiple environments with governance features typically upgrade to Enterprise for things like RBAC, audit logs, and change requests, plus SSO and SCIM.
 
@@ -176,7 +176,7 @@ Engineering teams in regulated industries that need self-hosted feature flags wi
 
 ![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_09_52_621_Z_86c1ee217a.png)
 
-[Flagsmith](/blog/best-flagsmith-alternatives) is an [open-source feature flag platform](/blog/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises – a rare combination that makes it a strong fit for security-conscious organizations.
+[Flagsmith](/blog/best-flagsmith-alternatives) is an [open-source feature flag](/blog/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises – a rare combination that makes it a strong fit for security-conscious organizations.
 
 It supports boolean and multivariate flags, user segments, percentage rollouts, A/B testing, remote config, and scheduled flags. Its Edge API routes requests to the nearest data center for low-latency evaluation, and it supports local evaluation for server-side SDKs.
 
@@ -259,7 +259,7 @@ Engineering teams that want a fast, lightweight feature flag tool that fits into
 
 - **ConfigCat:** A privacy-first feature flag service with fixed, predictable pricing and a generous free tier (10M requests/month). All evaluations happen locally via SDKs pulling from a global CDN. It doesn't collect end-user data, which simplifies GDPR compliance. The trade-off is no experimentation, analytics, or CI/CD integration – it's intentionally lightweight. Best for teams that want simple, reliable flags without complexity.
 
-- **Harness:** Harness acquired **Split** in May 2024 and merged its experimentation engine into the broader Harness CI/CD platform. The result is feature flags that go through the same governance and verification workflows as code changes, with A/B tes ting and metric ingestion from tools like Segment and Sentry. Best for enterprise DevOps teams that want flags tightly integrated into their CI/CD pipeline.
+- **Harness:** Harness acquired **Split** in May 2024 and merged its experimentation engine into the broader Harness CI/CD platform. The result is feature flags that go through the same governance and verification workflows as code changes, with A/B testing and metric ingestion from tools like Segment and Sentry. Best for enterprise DevOps teams that want flags tightly integrated into their CI/CD pipeline.
 
 </details>
 
@@ -305,7 +305,7 @@ Engineering teams that want a fast, lightweight feature flag tool that fits into
 <details>
   <summary>What are feature flags, and why should developers use them?</summary>
 
-**Feature flags** (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and trunk-based development. Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
+**Feature flags** (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and [trunk-based development](/product-engineers/trunk-based-development). Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
 
 </details>
 
@@ -391,7 +391,7 @@ You can build a basic flag system with config files or a database table. But as 
 **PostHog** is more than a feature flag tool. It gives developers full context by combining all the tools needed to build a successful product in one platform.
 
 - **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [LLM analytics](/llm-analytics), and [error tracking](/error-tracking)
-- **Developer-first:** Transparent APIs, [SQL query builder](/docs/product-analytics/sql), open source, and a [public roadmap](/roadmap)
+- **Developer-first:** Transparent APIs, [SQL query builder](/docs/product-analytics/sql), [docs](/docs) that let you self-serve, open source, and a [public roadmap](/roadmap)
 - **Transparent pricing:** Generous free tiers and [usage-based billing](/pricing)
 - **Trusted by teams:** Used by [Supabase, Lovable, ElevenLabs, ResearchGate](/customers), and more
 
