@@ -18,7 +18,7 @@ We also offer [parental leave](/handbook/people/time-off#parental-leave) for new
 
 As we are fully remote, we provide [all equipment](/handbook/people/spending-money#equipment) you need to have an ergonomic setup at home to be as productive as possible. We provide all team members with a company card for this purpose.
 
-If you ever need change of scenery, we offer a monthly budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
+If you ever need change of scenery, you can use a co-working space, or [WeWork All Access](https://www.wework.com/solutions/wework-all-access). 
 
 > Please message Kendal to get added to our company WeWork account. 
 
@@ -26,7 +26,7 @@ If you ever need change of scenery, we offer a monthly budget towards [coworking
 
 We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
 
-We also give all team members a [$1,500/quarter budget](/handbook/people/spending-money#budget-for-socializing) to meet up in person _in addition_ to the offsite budget
+We encourage our team to meet up in person to solve problems, our [expense policy] is about empowering you to make the right decisions in the best interests of PostHog. This means meeting up with your colleagues when it's right. If you're travelling constantly, this is likely a distraction and not in the best interests of PostHog.
 
 For any work-related travel, we also use [Project Wren](https://www.wren.co/) for carbon offsetting. 
 
