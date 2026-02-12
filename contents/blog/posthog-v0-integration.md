@@ -1,6 +1,6 @@
 ---
 title: "PostHog is now available in Vercel’s v0"
-date: 2026-02-10
+date: 2026-02-12
 rootPage: /blog
 sidebar: Blog
 showTitle: true
