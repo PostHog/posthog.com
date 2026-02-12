@@ -124,7 +124,7 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
 
 ## How we handle inappropriate spending
 
-Expenses that could be construed as personal will be flagged as non-business expenses by auditors,
+Expenses that could be construed as personal will be flagged as non-business expenses by auditors, as they will be considered a taxable benefit that PostHog has provided to you. 
 
 Examples of inappropriate spend include:
 - Personal expenses during business travel (for example: gym sessions/fitness classes, groceries)
