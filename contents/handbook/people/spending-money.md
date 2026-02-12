@@ -44,7 +44,7 @@ All expenses over $75 or £75 must have itemized receipts attached and memo upda
 - Brex: upload the itemized receipt using the [Brex app, text, email or Slack](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-a-specific-expense), and update the memo using the [Brex app, text, email or Slack](https://www.brex.com/support/memos-for-expenses#add-a-memo-to-a-single-expense).
 - Revolut: email your itemized receipts to [ukinvoices@posthog.com](mailto:ukinvoices@posthog.com) along with a memo in the body of the email
 
-In extreme cases, expenses with no receipts above $75 or £75 may be deducted from your pay if we can't verify the business purpose - this is mainly for repeat offenders where someone's clearly ignoring the policy. 
+In extreme cases, expenses with no receipts above $75 or £75 may be deducted from your pay if we can't verify the business purpose - this is mainly for repeat offenders w someone's clearly ignoring the policy. 
 
 We need an _itemized receipt or invoices_ because Brex auto-verifies these using the information on the file. For example, this means the full booking confirmation email for flights/hotels, detailed bill from the restaurant for a team dinner etc. Please do not upload cropped images that show just the amount or just the credit card machine confirmation slip - without context, the receipt is pointless
 
@@ -101,7 +101,7 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
 - What happens if I forgot to assign the right spend limit before using Brex?
   - Go into your Brex account and [re-assign the charge to the correct limit](https://www.brex.com/support/spending-on-spend-limits#assigning-a-card-to-a-different-limit).
 - Can I bulk upload receipts to Brex?
-  - Yes, you can! Here are some helpful articles:
+  - Yes, you can!  are some helpful articles:
     - [Attaching receipts to any expense](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-any-expense)
     - [Attaching receipts for multiple expenses](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-multiple-expenses)
 - What do I do if I have a new tool/enterprise software subscription for the team to use?
@@ -157,7 +157,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
 #### Yubikey
-We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about how to get set up [here](https://posthog.com/handbook/company/security#multi-factor-authentication).
+We enforce the use of hardware security keys wver we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about how to get set up [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication).
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
