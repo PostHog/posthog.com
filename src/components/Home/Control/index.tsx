@@ -1071,7 +1071,7 @@ function Tagline(): JSX.Element {
 
     return (
         <RenderInClient
-            placeholder={<TaglineControl />}
+            placeholder={null}
             render={() =>
                 posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
             }
