@@ -232,3 +232,30 @@ You can use tags to accomplish:
 </CalloutBox>
 
 We recommend reading the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) in detail before using it in production.
+
+
+## Managing and deleting feature flags
+
+After creating feature flags, you may need to manage or delete them to keep your project organized. PostHog provides tools to help you clean up flags at scale.
+
+### Deleting feature flags in bulk
+
+To delete multiple feature flags at once:
+
+1. Go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog.
+2. Use the checkboxes to select the flags you want to delete.
+3. Click the **Delete** button that appears in the toolbar.
+
+**Key features of bulk delete:**
+
+- **Multi-page selection** - Selections persist when navigating between pages, so you can select flags across multiple pages before deleting.
+- **Select all matching** - When you have 100 or more flags selected and more exist matching your current filters, a banner appears offering to select all matching flags at once.
+- **Filter-based selection** - Apply filters (by name, status, or other criteria) to narrow down flags, then use "select all matching" to select all flags that match your filters.
+
+After deletion, PostHog displays a summary of deleted flags along with AI-ready prompts to help you identify and clean up code references to the removed flags.
+
+<CalloutBox icon="IconInfo" title="Deletion is permanent" type="caution">
+
+Deleting a feature flag is permanent and cannot be undone. Make sure you no longer need the flag before deleting it.
+
+</CalloutBox>
