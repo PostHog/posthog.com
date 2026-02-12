@@ -523,8 +523,10 @@ export default function Desktop() {
                             }}
                         />
                         <div
-                            className={`absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0 ${
-                                websiteMode ? 'keyboard-garden-images hidden' : ''
+                            className={`absolute ${
+                                websiteMode
+                                    ? 'bottom-4 -right-4 @[2600px]:right-4'
+                                    : 'bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0'
                             }`}
                         >
                             <CloudinaryImage
@@ -533,7 +535,15 @@ export default function Desktop() {
                                 alt=""
                                 width={1401}
                                 height={1400}
-                                className="size-[300px] md:size-[700px] dark:hidden"
+                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} dark:hidden`}
+                                style={
+                                    websiteMode
+                                        ? {
+                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                          }
+                                        : undefined
+                                }
                             />
                             <CloudinaryImage
                                 loading="lazy"
@@ -541,7 +551,15 @@ export default function Desktop() {
                                 alt=""
                                 width={1401}
                                 height={1400}
-                                className="size-[300px] md:size-[700px] hidden dark:block"
+                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} hidden dark:block`}
+                                style={
+                                    websiteMode
+                                        ? {
+                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                          }
+                                        : undefined
+                                }
                             />
                         </div>
                     </div>

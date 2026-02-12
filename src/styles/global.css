@@ -2646,9 +2646,3 @@ div[data-radix-popper-content-wrapper] {
 .dark .ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
     border-left-color: rgb(30 31 35) !important;
 }
-
-@media (min-width: 2650px) {
-    .keyboard-garden-images {
-        display: block;
-    }
-}
