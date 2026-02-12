@@ -29,6 +29,10 @@ If you’re building on Vercel and using PostHog for [feature flags](/feature-fl
 
 Today, that gets simpler.
 
+> To find out more about what you can do with Vercel x PostHog (plus snacks and strong opinions about shipping), join us at: 
+> - February 26 – [Agentic Product Night: **Boston** w/ Vercel x PostHog](https://posthog.com/events#eventId=160)
+> - March 10 – [Agentic Product Night: **Amsterdam** w/ Vercel x PostHog](https://posthog.com/events#eventId=161)
+
 ## Introducing the PostHog × Vercel integration
 
 [The new PostHog × Vercel integration](/docs/integrations/vercel-marketplace) lets you use PostHog feature flags and experiments directly in Vercel, without custom wiring or creative workarounds.
@@ -52,3 +56,7 @@ The integration also works with [v0 – Vercel's AI agent](v0.app) that helps us
 Feature flags help teams ship more confidently and experiment more easily. This integration keeps that experience simple – letting PostHog handle flags and experiments, and Vercel focus on running your app, without you having to stitch the two together.
 
 If you’re already using PostHog and Vercel, you can enable the integration from the Vercel Marketplace and start syncing flags right away.
+
+> To find out more about what you can do with Vercel x PostHog (plus snacks and strong opinions about shipping), join us at: 
+> - February 26 – [Agentic Product Night: **Boston** w/ Vercel x PostHog](https://posthog.com/events#eventId=160)
+> - March 10 – [Agentic Product Night: **Amsterdam** w/ Vercel x PostHog](https://posthog.com/events#eventId=161)
