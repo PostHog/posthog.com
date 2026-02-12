@@ -32,7 +32,7 @@ For us this means product engineers need to be:
 * Directly responsible for improving the product and building new features.  
 * Opinionated on the roadmap and future of the product.  
 * Able to make design decisions to create great user experiences independently.  
-* Enjoy supporting users directly – all our product engineers also do support.  
+* Supporting users directly – all our product engineers also do support.  
 * More willing to build a product from scratch for users when needed.  
 * Less loyal to features they’ve added in the past.  
 * Aware of how their product and work fits into the company's strategy.  
@@ -42,11 +42,11 @@ We're not alone in thinking this way. [incident.io](http://incident.io) sums up 
 
 > "Care more about outcomes and impact than the exact implementation, or the tools used to solve the problem."
 
-Jean-Michel Lemieux, former VP of Engineering at Shopify, [defines them](https://www.google.com/url?q=https://sherifmansour.medium.com/product-engineers-f424da766871&sa=D&source=docs&ust=1761835262328469&usg=AOvVaw2su1uJJy27pS33s0wD130e) as:
+Jean-Michel Lemieux, former VP of Engineering at Shopify, [defines them](https://sherifmansour.medium.com/product-engineers-f424da766871) as:
 
 > "Engineers who have a thirst for using technologies to leapfrog human/user problems. Those with empathy to reach for magical experiences."
 
-Lee Robinson, VP of Product at Vercel, [says](https://leerob.com/n/product-engineers) product engineers "work backwards from the desired product experience" to the technologies that enable it:
+Lee Robinson, VP of Developer Education at Cursor, [says](https://leerob.com/n/product-engineers) product engineers "work backwards from the desired product experience" to the technologies that enable it:
 
 > "They consider the frontend, backend, design, and everything in between to create a great user experience. They don't need to understand every part deeply, a common misconception of "fullstack". Instead, they have a broad understanding of the available tools and deep experience *applying* those tools to build products."
 
@@ -58,15 +58,15 @@ In sum, a product engineer is someone who cares more about the outcomes and impa
 
 ## Why product engineers?
 
-Developers used to spend years learning the specifics of a language’s syntax, the architecture of components, and understanding how language turns into a running application. This was core to creating value in software.
+Developers used to spend years learning the specifics of a language’s syntax, the architecture of components, and understanding how code turns into a running application. This was core to creating value in software.
 
-Today, the value of these skills is being driven down: anyone can pay $20 for a machine that spits out code that often, sort of, works. In a world where anyone can have enormous piles of mostly-working code, code is not enough on its own to create an advantage.
+Today, the value of these skills is being driven down: anyone can pay $20 for a machine that spits out code that works well enough. In a world where anyone can have enormous piles of mostly-working code, code is not enough on its own to create an advantage.
 
 But here’s the good news: it never was.
 
-AI can't build your business. You can't plug a large language model into your hosting account and expect it to print money.
+AI can't build your business. You can't plug a large language model into your AWS account and expect it to print money.
 
-Code that works isn’t just code that compiles, it’s code that creates results. Results for customers who depend on it. Results for the business that maintains it. Code that keeps the lights on gives you more leverage to reach your goals.
+Code that works isn’t just code that compiles or passes tests, it’s code that creates results. Results for customers who depend on it. Results for the business that maintains it. Code that keeps the lights on gives you more leverage to reach your goals.
 
 Software developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, they're more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
 

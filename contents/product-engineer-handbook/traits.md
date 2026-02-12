@@ -13,7 +13,7 @@ This list could be longer, but these are the most important traits we look for p
 
 Product engineers care a lot about the people and organizations using their product. This customer obsession manifests in a few ways. 
 
-First, they talk to users. While they work with product managers and salespeople to understand user problems, they don't rely on them alone. They go to the source. 
+First, they [talk to users](/newsletter/talk-to-users). While they work with product managers and salespeople to understand user problems, they don't rely on them alone. They go to the source. 
 
 A good product engineer has customers they're friendly with who they can go to at any time to validate a hunch. Product engineers at PostHog often visit customers on-site, work alongside them, and learn more about what they need.
 
@@ -31,7 +31,7 @@ Product engineers are committed to delivering the full vision of an idea, not ha
 
 This requires them to own products from beginning to end. [Talking to users](/newsletter/talk-to-users), shipping minimum lovable products, experimenting and iterating constantly.
 
-This is important because the things that delight users rarely get shipped at the alpha or beta stage of a product, or even when it's generally available. They also rarely originate from someone with little personal investment in what's been built.
+The things that delight users rarely get shipped at the alpha or beta stage of a product, or even when it's generally available. They also rarely originate from someone with little personal investment in what's been built.
 
 ## They ship early and iterate
 
@@ -39,7 +39,7 @@ Product engineers prefer prototypes, minimum viable features, and experiments to
 
 They learn by taking bets, building, [gathering feedback](/newsletter/how-to-give-feedback), and repeating until what they're building sparks joy in their users. They operate under the assumption it's always best to get something into the hands of a user, and learn from them, than to endlessly polish their work before anyone ever sees it. 
 
-This means they use [feature flags tools](https://posthog.com/feature-flags) to [test in production](https://posthog.com/product-engineers/testing-in-production), and run [experiments](https://posthog.com/experiments) to understand the impact of their changes where needed. This mindset, and a willingness to use tools that enable it, allows product engineers to quickly validate ideas with real users, so they learn exponentially faster.
+This means they use [feature flags tools](/feature-flags) to [test in production](/product-engineers/testing-in-production), and run [experiments](/experiments) to understand the impact of their changes where needed. This mindset, and a willingness to use tools that enable it, enables product engineers to quickly validate ideas with real users, so they learn exponentially faster.
 
 ## They genuinely love building
 
@@ -81,7 +81,7 @@ Because product engineers own their product, they also own the performance and r
 
 Product engineers also understand how their product fits into the business landscape. They understand the businesses using their product, and the competitors working on similar products. They know what makes them special, and can continue to build to expand this gap.
 
-Product engineers love gathering more context because it helps them make better decisions about what to build.
+Product engineers love gathering more context because it helps them make better decisions about [what to build](/newsletter/how-we-decide-what-to-build).
 
 ## They constantly search for 1% gains
 

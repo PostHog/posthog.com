@@ -5,7 +5,7 @@ showTitle: true
 
 Product engineers are T or M-shaped people – i.e. engineers who have deep knowledge and experience in one or more areas, and broad knowledge of several others.
 
-Some will be better at [talking to users](/newsletter/talk-to-users) than others. Some will be stronger at data analysis. Some will better on the front-end than the back-end.
+Some are better at [talking to users](/newsletter/talk-to-users) than others. Some are stronger at data analysis. Some are better on the front-end than the back-end.
 
 The point is you don't need to be an expert in everything to be an effective product engineer, but you do need to be proficient in most, and willing to learn the things you don't know. 
 
@@ -15,7 +15,7 @@ Being a fundamentally sound engineer is table stakes for any aspiring product en
 
 Understanding how your business work gives product engineers the context they need to make good decisions about what to build.
 
-This starts with understanding basic concepts like [product-market fit](/founders/product-market-fit-game), and the difference between an [ideal customer profile](/newsletter/ideal-customer-profile-framework) and a [user persona](/product-engineers/how-to-create-user-personas). It also includes the business metrics that imply or predict the success of a product, like net revenue retention.
+This starts with understanding basic concepts like [product-market fit](/founders/product-market-fit-game), and the difference between an [ideal customer profile](/newsletter/ideal-customer-profile-framework) and a [user persona](/product-engineers/how-to-create-user-personas). It also includes the business metrics that imply or predict the success of a product, like net revenue retention or [activation](/newsletter/wtf-is-activation).
 
 You don't need to be an expert in these things or, god forbid, have an MBA, but you do need to understand them at a high level, and actively care about them.
 
@@ -35,7 +35,7 @@ Product engineers don't just fix code problems. They fix product and business pr
 
 ### Uncovering and fixing technical issues
 
-Product engineers need to be comfortable using the full gamut of tools available, such as [error tracking](/docs/error-tracking), [logging](/docs/logs), performance monitoring, user feedback, and more to diagnose root causes and find solutions.
+Product engineers need to be comfortable using the full gamut of tools available, such as [error tracking](/docs/error-tracking), [logging](/docs/logs), performance monitoring, [user feedback](/surveys], and more to diagnose root causes and find solutions.
 
 ### Solving customer problems directly
 
@@ -67,7 +67,7 @@ At a bare minimum it means you:
 
 Product engineers don't need to be data-led per se – over relying on data for decisions is a bit of a red flag, actually – but you do need to be comfortable using data tools, and digging into product usage data when it makes sense to do so.
 
-Product managers can and should support this work, but product engineers shouldn't be wholly reliant on them to gather actionable insights. See [The product's engineer's role in the product team](/product-engineer-handbook/product-engineers-vs-product-managers) for more on how product engineers and product managers can work together.
+Product managers can and should support this work, but product engineers shouldn't be wholly reliant on them to gather actionable insights. See [The product's engineer's role in the product team](/product-engineer-handbook/product-teams) for more on how product engineers and product managers can work together.
 
 ## 5. Technologies beyond languages and frameworks 
 
@@ -89,13 +89,13 @@ Product engineers also need to be practical about choosing the best tool for the
 
 Semantic arguments about what constitutes vibe coding and "real engineering" are a distraction. Ultimately, we're careening toward a future where a majority of software code is AI assisted in some form, and anything that helps a product engineer iterate faster is something you should embrace.
 
-This doesn't invalidate engineering skills and knowledge because not understanding the code an LLM writes is an antipattern. A bad one. Understanding the proper architecture of a software project protects you against the decision-making of the robot. This skill is more essential than ever.
+This doesn't invalidate engineering skills and knowledge because [not understanding the code an LLM writes is an antipattern](/newsletter/ai-coding-mistakes). A bad one. Understanding the proper architecture of a software project protects you against the decision-making of the robot. This skill is more essential than ever.
 
 Ultimately, coding with AI is a specific and vital skill because AI can either help you solve problems, or be an active hindrance if used in the wrong way.
 
 ## 7. Basic design and UX fundamentals
 
-Product engineers don't need to be genius designers, but you need to be a competent frontend developer with taste and the ability to create coherent user experiences.
+Product engineers don't need to be genius designers, but you need to be a competent frontend developer with taste and the ability to create [coherent user experiences](/newsletter/vibe-designing).
 
 This is important because a product engineer should be able to ship without a designer in the loop. At PostHog, designers only get involved in the later stages of feature development, when they want to finesse the experience, or when specifically asked for their input to unpick a difficult design problem.
 
@@ -118,7 +118,7 @@ It *does* mean using techniques like:
 | **User analytics** | Uncovering how users are using a product with analytics, session replays, and A/B testing. |
 | **Feedback and surveys** | Gathering qualitative feedback about how users' experience with the product. |
 
-And, of course, it requires a familiarity with feature flags tools, and [feature flag best practices](https://posthog.com/docs/feature-flags/best-practices), to make this all happen.
+And, of course, it requires a familiarity with feature flags tools, and [feature flag best practices](/docs/feature-flags/best-practices), to make this all happen.
 
 Why is this important? Two reasons, one practical, one philosophical:
 
