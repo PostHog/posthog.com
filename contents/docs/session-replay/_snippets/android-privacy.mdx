@@ -1,3 +1,5 @@
+import SensitiveThirdPartyScreens from "./sensitive-third-party-screens.mdx"
+
 To replace any type of `View` with a redacted version in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
 
 ```xml
@@ -28,6 +30,4 @@ To replace any type of `View` with a redacted version in the recording, set the 
 ...
 ```
 
-### Handling sensitive third-party screens
-
-For third-party components (like payment forms or authentication screens) that can't be masked, you can manually stop and start session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
+<SensitiveThirdPartyScreens />

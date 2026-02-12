@@ -1,3 +1,5 @@
+import SensitiveThirdPartyScreens from "./sensitive-third-party-screens.mdx"
+
 To replace any type of `UIView` with a redacted version in the replay, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) to `ph-no-capture`:
 
 ```swift
@@ -35,6 +37,4 @@ Apps built with Xcode 26 use a new SwiftUI rendering model that changes how Swif
 
 </CalloutBox>
 
-### Handling sensitive third-party screens
-
-For third-party components (like payment forms or authentication screens) that can't be masked, you can manually stop and start session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
+<SensitiveThirdPartyScreens />
