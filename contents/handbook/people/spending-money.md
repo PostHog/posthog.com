@@ -101,7 +101,7 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
 - What happens if I forgot to assign the right spend limit before using Brex?
   - Go into your Brex account and [re-assign the charge to the correct limit](https://www.brex.com/support/spending-on-spend-limits#assigning-a-card-to-a-different-limit).
 - Can I bulk upload receipts to Brex?
-  - Yes, you can!  are some helpful articles:
+  - Yes, you can! Here are some helpful articles:
     - [Attaching receipts to any expense](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-any-expense)
     - [Attaching receipts for multiple expenses](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-multiple-expenses)
 - What do I do if I have a new tool/enterprise software subscription for the team to use?
