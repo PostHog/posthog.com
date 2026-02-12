@@ -42,6 +42,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
+import { RenderInClient } from 'components/RenderInClient'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -1279,8 +1280,16 @@ function TaglineExperiment(): JSX.Element {
 
 function Tagline(): JSX.Element {
     const posthog = usePostHog()
-    const variant = posthog?.getFeatureFlag?.('home-tagline')
-    return variant === 'test' ? <TaglineExperiment /> : <TaglineControl />
+
+    return (
+        <RenderInClient
+            placeholder={null}
+            render={() => {
+                const variant = posthog?.getFeatureFlag?.('home-tagline')
+                return variant === 'test' ? <TaglineExperiment /> : <TaglineControl />
+            }}
+        />
+    )
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
