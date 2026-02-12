@@ -102,6 +102,55 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 </details>
 
+## MCP versions
+
+The PostHog MCP server supports two versions:
+
+- **v1 (default)** - Provides purpose-built tools for common tasks like creating feature flags, running queries, and managing experiments.
+- **v2** - Provides SQL-based data retrieval for advanced users who want to run custom HogQL queries directly against PostHog data.
+
+V2 prioritizes SQL-based retrieval and disables most read tools except for logs and dashboards.
+
+### Enable v2
+
+To enable v2, add one of the following to your MCP configuration:
+
+**Option 1: URL parameter**
+
+Append `?v=2` to the MCP URL:
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp?v=2",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+**Option 2: Header**
+
+Add the `x-posthog-mcp-version` header:
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-mcp-version": "2"
+      }
+    }
+  }
+}
+```
+
+
 
 ## Available Tools
 
@@ -110,6 +159,23 @@ Tools trigger actions on behalf of the user based on the goals and information a
 Here's a list of tools we provide:
 
 <MCPTools />
+
+### V2 tools
+
+V2 introduces SQL-based tools for direct data access:
+
+| Tool | Description |
+|------|-------------|
+| `execute-sql` | Execute SQL/HogQL queries directly against PostHog data. Supports most ClickHouse SQL syntax. |
+| `read-data-schema` | Explore events, properties, and property values in your project. Use this to discover what data exists before writing queries. |
+| `read-data-warehouse-schema` | Retrieve core data warehouse schemas for PostHog tables (events, groups, persons, sessions) and available data warehouse tables. |
+
+When using v2, the agent follows a discovery workflow:
+
+1. Call `read-data-warehouse-schema` to discover available tables and columns
+2. Call `read-data-schema` to discover events and properties
+3. Execute SQL queries using verified table and column names
+
 
 ## Example prompts
 
@@ -144,6 +210,13 @@ The agent will use the `list-errors` tool to fetch error groups sorted by occurr
 **Prompt:** "Show me error logs from the payments service in the last hour"
 
 The agent will use `logs-query` to search for logs filtered by severity level and service name, returning log entries with timestamps, messages, and trace information.
+
+### SQL queries (v2)
+
+**Prompt:** "Write a SQL query to find users who signed up in January but haven't made a purchase"
+
+The agent will first use `read-data-warehouse-schema` and `read-data-schema` to discover your data model, then use `execute-sql` to run a HogQL query that joins person data with event data to identify users matching the criteria.
+
 
 ## Prompts and resources
 
