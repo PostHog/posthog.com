@@ -248,38 +248,4 @@ PostHog::Rails.config.excluded_exceptions = ['MyException']
 
 </Steps>
 
-## Configuration reference
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `auto_capture_exceptions` | Boolean | `false` | Automatically capture exceptions |
-| `report_rescued_exceptions` | Boolean | `false` | Report exceptions Rails rescues |
-| `auto_instrument_active_job` | Boolean | `false` | Instrument ActiveJob |
-| `capture_user_context` | Boolean | `true` | Include user info |
-| `current_user_method` | Symbol | `:current_user` | Controller method for user |
-| `user_id_method` | Symbol | `nil` | Method to extract ID from user object |
-| `excluded_exceptions` | Array | `[]` | Additional exceptions to ignore |
-
-## Troubleshooting
-
-### Exceptions not being captured
-
-1. Verify PostHog is initialized:
-   ```ruby
-   Rails.console
-   > PostHog.initialized?
-   => true
-   ```
-
-2. Check that `auto_capture_exceptions` is set to `true`
-3. Check your excluded exceptions list
-4. Verify middleware is installed:
-   ```ruby
-   Rails.application.middleware
-   ```
-
-### User context not working
-
-1. Verify `current_user_method` matches your controller method
-2. Check that the user object responds to `posthog_distinct_id`, `distinct_id`, or `id`
-3. If using a custom identifier, set `PostHog::Rails.config.user_id_method = :your_method`
+You can learn more about our Rails integration in our [Rails library docs](/docs/libraries/rails).
