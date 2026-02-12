@@ -146,7 +146,7 @@ Add and modify this list as you work through it! Products are added frequently, 
     - Landing page experiments – how to deal with flickering of content when page is first loaded?
 
 #### LLM Analytics
-1. [Implementating with your LLM SDK](/docs/llm-analytics/basics)
+1. [Implementing with your LLM SDK](/docs/llm-analytics/basics)
     - Privacy options
 2. Generations vs traces vs spans vs sessions
 3. [LLM Cost Analysis](/docs/llm-analytics/calculating-costs)
