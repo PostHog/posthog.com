@@ -1,0 +1,200 @@
+There are 2 steps to implement feature flags in Rust:
+
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
+
+```rust
+let is_enabled = client.is_feature_enabled(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, // groups
+    None, // person_properties
+    None, // group_properties
+).await.unwrap();
+
+if is_enabled {
+    // Do something differently for this user
+}
+```
+
+#### Multivariate feature flags
+
+```rust
+use posthog_rs::FlagValue;
+
+match client.get_feature_flag(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, // groups
+    None, // person_properties
+    None, // group_properties
+).await.unwrap() {
+    Some(FlagValue::String(variant)) => {
+        if variant == "variant-key" {
+            // Do something for this variant
+        }
+    }
+    Some(FlagValue::Boolean(enabled)) => {
+        // Handle boolean flag
+    }
+    None => {
+        // Flag not found or disabled
+    }
+}
+```
+
+### Step 2: Include feature flag information in your events
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
+
+<IncludePropertyInEvents />
+
+There are two methods you can use to include feature flag information in your events:
+
+#### Method 1: Include the `$feature/feature_flag_name` property
+
+In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```rust
+let mut event = Event::new("event_name", "distinct_id_of_your_user");
+event.insert_prop("$feature/feature-flag-key", "variant-key").unwrap();
+client.capture(event).unwrap();
+```
+
+#### Method 2: Fetch and include all flags
+
+```rust
+let (flags, _) = client.get_feature_flags(
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await.unwrap();
+
+let mut event = Event::new("event_name", "distinct_id_of_your_user");
+for (key, value) in flags {
+    let prop_key = format!("$feature/{}", key);
+    match value {
+        FlagValue::Boolean(b) => event.insert_prop(&prop_key, b).unwrap(),
+        FlagValue::String(s) => event.insert_prop(&prop_key, s).unwrap(),
+    };
+}
+client.capture(event).unwrap();
+```
+
+### Fetching all flags for a user
+
+You can fetch all flag values for a single user by calling `get_feature_flags()`.
+
+This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+
+```rust
+let (flags, payloads) = client.get_feature_flags(
+    "distinct_id_of_your_user".to_string(),
+    None, // groups
+    None, // person_properties
+    None, // group_properties
+).await.unwrap();
+
+for (key, value) in flags {
+    println!("Flag {}: {:?}", key, value);
+}
+```
+
+### Feature flag payloads
+
+You can retrieve additional data associated with a feature flag using payloads:
+
+```rust
+let payload = client.get_feature_flag_payload(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string()
+).await.unwrap();
+
+if let Some(data) = payload {
+    println!("Payload: {}", data);
+}
+```
+
+### With person properties
+
+You can include person properties for more targeted flag evaluation:
+
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+let mut person_props = HashMap::new();
+person_props.insert("plan".to_string(), json!("enterprise"));
+person_props.insert("country".to_string(), json!("US"));
+
+let flag = client.get_feature_flag(
+    "premium-feature".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, // groups
+    Some(person_props),
+    None, // group_properties
+).await.unwrap();
+```
+
+### With groups (B2B)
+
+For B2B applications with group-based flags:
+
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+let mut groups = HashMap::new();
+groups.insert("company".to_string(), "company-123".to_string());
+
+let mut group_props = HashMap::new();
+let mut company_props = HashMap::new();
+company_props.insert("size".to_string(), json!(500));
+group_props.insert("company".to_string(), company_props);
+
+let flag = client.get_feature_flag(
+    "b2b-feature".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    Some(groups),
+    None, // person_properties
+    Some(group_props),
+).await.unwrap();
+```
+
+### Blocking client
+
+If you're using the blocking client (with `default-features = false`), the API is the same but without `.await`:
+
+```rust
+let is_enabled = client.is_feature_enabled(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).unwrap();
+```
+
+### Error handling
+
+When using the PostHog SDK, handle potential errors that may occur during feature flag operations:
+
+```rust
+match client.get_feature_flag(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await {
+    Ok(Some(value)) => {
+        // Use the flag value
+        println!("Flag value: {:?}", value);
+    }
+    Ok(None) => {
+        // Flag not found or disabled
+        println!("Flag not found");
+    }
+    Err(e) => {
+        // Handle the error appropriately
+        eprintln!("Error fetching feature flag: {}", e);
+        // Fall back to default behavior
+    }
+}
+```

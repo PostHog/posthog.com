@@ -43,7 +43,7 @@ Running evals with AI enables you to batch test hundreds or thousands of traces,
 | Template | What it checks | Best for |
 |----------|---------------|----------|
 | **Relevance** | Whether the output addresses the user's input | Customer support bots, Q&A systems |
-| **Helpfulness** | Whether the response is useful and actionable | Chat assistants, support boys, productivity tools |
+| **Helpfulness** | Whether the response is useful and actionable | Chat assistants, support bots, productivity tools |
 | **Jailbreak** | Attempts to bypass safety guardrails | Security-sensitive applications, apps with PII |
 | **Hallucination** | Made-up facts or unsupported claims | RAG systems, knowledge bases |
 | **Toxicity** | Harmful, offensive, or inappropriate content | User-facing applications |
@@ -125,7 +125,7 @@ Evals are primarily used to prevent negative outputs or regressions, but you can
 - Power users hitting rate limits (upsell opportunity)
 - Feature discovery moments: "Wait, this can do X?" (onboarding gaps)
 
-![evals in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_15_at_11_33_37_AM_2615fb0939.png)
+![evals in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_22_at_9_19_27_AM_00100dd251.png)
 <Caption>Run multiple evals in parallel to spot-check different behaviors.</Caption>
 
 ## Connect evals to your product data

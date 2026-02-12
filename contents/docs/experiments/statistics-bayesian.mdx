@@ -178,10 +178,20 @@ You can directly interpret this as: "There's a 95% probability the true effect l
 A result is marked as "significant" (or decisive) when we have strong evidence:
 
 ```python
-is_significant = chance_to_win > 0.95 or chance_to_win < 0.05
+is_significant = chance_to_win > confidence_level or chance_to_win < (1 - confidence_level)
 ```
 
-This means we're at least 95% confident that one variant is better than the other.
+For example, with a 95% confidence level (the default), a result is significant when the chance to win is above 95% or below 5%.
+
+##### Configuring the confidence level
+
+You can choose between 90%, 95%, or 99% confidence levels:
+
+- **90%**: More lenient threshold - you'll see significant results sooner, but with a higher chance of false positives
+- **95%** (default): The standard balance between speed and accuracy
+- **99%**: More stringent threshold - requires stronger evidence, reducing false positives but requiring more data
+
+To set the default confidence level for all experiments, go to **Experiments > Settings**. You can also override this for individual experiments in the **Statistics** section of the experiment.
 
 ## Mathematical formulas reference
 

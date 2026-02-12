@@ -167,7 +167,7 @@ Run `cargo run` and navigate to `http://localhost:8000` to see our app in action
 
 ## 2. Add PostHog to your app
 
-With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). Make sure you sign for `us.posthog.com` and not `eu.posthog.com` as currently our Rust SDK only supports the US cloud. 
+With our app set up, it's time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
 Add `posthog-rs`  to your `Cargo.toml` to install [PostHog's Rust SDK](/docs/libraries/rust):
 
@@ -175,7 +175,7 @@ Add `posthog-rs`  to your `Cargo.toml` to install [PostHog's Rust SDK](/docs/lib
 # rest of config
 
 [dependencies]
-posthog-rs = "0.2.0"
+posthog-rs = "0.3.5"
 
 # rest of config
 ```

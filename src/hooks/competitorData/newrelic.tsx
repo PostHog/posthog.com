@@ -30,7 +30,7 @@ export const newrelic = {
             },
             integrations: {
                 product_analytics: false,
-                session_replay: false,
+                session_replay: true,
             },
         },
         product_analytics: {
@@ -58,7 +58,7 @@ export const newrelic = {
         },
         developer: {
             api: true,
-            collaboration: false,
+            collaboration: true,
             mobile_sdks: true,
             native_data_sources: true,
             proxies: false,
@@ -68,7 +68,7 @@ export const newrelic = {
         },
         tools: {
             cms: '',
-            notebooks: false,
+            notebooks: true,
             project_management_tools: '',
         },
         integrations: {
@@ -120,7 +120,7 @@ export const newrelic = {
             user_privacy_options: true,
         },
         analytics_integration: {
-            built_in_analytics: false,
+            built_in_analytics: true,
         },
     },
     pricing: {

@@ -3,17 +3,9 @@ title: Creating feature flags
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
+    free: full
     selfServe: full
     enterprise: full
-    features:
-        evaluationContexts:
-            free: false
-            selfServe: false
-            boost: true
-            scale: true
-            enterprise: true
-
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -115,7 +107,7 @@ Learn more about [feature flag dependencies](/docs/feature-flags/dependencies).
 
 <CalloutBox icon="IconInfo" title="Limited dependencies with different run times" type="fyi">
 
-Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+Currently, [feature flag dependencies](/docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
 
 </CalloutBox>
 
@@ -155,7 +147,7 @@ In our experience, the tradeoffs to enabling this are **not** worthwhile for the
 
 ## Step 5. Configure evaluation runtime and contexts (optional)
 
-You can control where your feature flags are evaluated using the **evaluation runtime** and **tags (evaluation contexts)** sections of the form. You can find a detailed explanation of how evaluation contexts work in the [evaluation contexts documentation](docs/feature-flags/evaluation-contexts).
+You can control where your feature flags are evaluated using the **evaluation runtime** and **tags (evaluation contexts)** sections of the form. You can find a detailed explanation of how evaluation contexts work in the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts).
 
 ### Evaluation runtime (optional)
 
@@ -211,7 +203,7 @@ If you're not sure which runtime to use, you can use the following guidelines:
 
 <CalloutBox icon="IconWarning" title="Evaluation contexts are in alpha release" type="caution">
 
-Evaluation contexts are currently in alpha release and require (at least) the **Boost add-on** for the resource tagging feature to function correctly. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
+Evaluation contexts are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access. 
 
 </CalloutBox>
 
@@ -231,7 +223,7 @@ You can use tags to accomplish:
 - **Backward compatible**: Flags without evaluation contexts continue to work as before
 - **Prevent bloat**: Reduce unnecessary flag evaluations by only sending relevant flags to each context
 
-<CalloutBox icon="IconWarning" title="Evaluation context tag behaviour" type="action">
+<CalloutBox icon="IconWarning" title="Evaluation context tag behavior" type="action">
 
 - SDKs must send `evaluation_contexts` parameter with matching tags for the flag to evaluate (the legacy `evaluation_environments` parameter is also supported)
 - Flags with no evaluation context tags will evaluate for all requests (default behavior)
@@ -239,4 +231,4 @@ You can use tags to accomplish:
 
 </CalloutBox>
 
-We recommend reading the [evaluation contexts documentation](docs/feature-flags/evaluation-contexts) in detail before using it in production.
+We recommend reading the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) in detail before using it in production.

@@ -289,7 +289,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ### Calendly
 
-We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account.
+We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Simon in `#sales` to invite you to the PostHog team account.
 
 ## Communication Methods
 

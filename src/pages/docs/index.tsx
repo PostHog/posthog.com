@@ -30,7 +30,7 @@ const processDocsMenu = () => {
 
     const featuredAIPlatformItems = [
         'PostHog AI',
-        'Array',
+        'Twig',
         'Model Context Protocol (MCP)',
         'AI wizard',
         'AI engineering',

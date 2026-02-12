@@ -18,7 +18,7 @@ Minor announcements involve changes which have no noticeable impact on the exper
 We may typically support minor announcements by:
 
 - Including them in the weekly changelog update.
-- Writing a short Twitter and/or LinkedIn post.
+- Writing a short Twitter and/or [LinkedIn post](/handbook/content/linkedin).
 
 An example of a minor announcement is the [UUID format change](/changelog/2023#new-uuid-format-for-posthog-js).
 

@@ -30,6 +30,9 @@ export interface MenuItem {
     url?: string
     icon?: React.ReactNode
     color?: string
+    platformLogo?: string
+    showChildrenIcons?: boolean
+    sortChildrenAlpha?: boolean
     children?: MenuItem[]
 }
 
@@ -483,6 +486,18 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+    },
+    '/services': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 850,
+                height: 1000,
+            },
         },
     },
     start: {

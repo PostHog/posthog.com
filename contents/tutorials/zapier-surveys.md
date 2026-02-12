@@ -44,8 +44,8 @@ You have two options for creating your Zap and setting its trigger:
 
 ### Option 2: Via PostHog's Data pipelines
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations) tab.
 3. Search for **Zapier** and click **+ Create**.
 4. In the **Match events and actions** section, search for and select `survey sent`.
 

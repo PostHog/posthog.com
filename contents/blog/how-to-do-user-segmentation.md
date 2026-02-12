@@ -54,7 +54,7 @@ Segmenting users enables you to focus on understanding, prioritizing and solving
 
 User segmentation is especially important for activities such as:
 
-- **Product personalization:** Tailoring the experience to users, such as by recommending products based on their behaviours, means they’ll be more engaged and more successful.
+- **Product personalization:** Tailoring the experience to users, such as by recommending products based on their behaviors, means they’ll be more engaged and more successful.
 
 - **Marketing:** You need marketing that’s relevant to your users. Sending special offers in English to customers to Japan won't lead to good conversion rates.
 
@@ -72,11 +72,11 @@ There are four key types of segmentation you can use to identify groups of users
 
 * **Technographic:** What technologies do they use to interact with the product (e.g. mobile, desktop or voice assistant)
 
-It's often necessary to combine multiple segmentation types when running analyses. You might, for example, look at the behaviour of older users in France, or early-adopters on mobile. 
+It's often necessary to combine multiple segmentation types when running analyses. You might, for example, look at the behavior of older users in France, or early-adopters on mobile. 
 
 ## How can I segment my userbase?
 
-There are a variety tools available to help you segment users or use the segments to understand their behaviours within your product. These can include basic web analytics tools such as Google Analytics, or all-in-one product analytics tools such as PostHog. 
+There are a variety tools available to help you segment users or use the segments to understand their behaviors within your product. These can include basic web analytics tools such as Google Analytics, or all-in-one product analytics tools such as PostHog. 
 
 PostHog is a powerful tool for user segmentation because you can explore segmented users using tools such as [funnels](/product/funnels), [trends](/product/trends), [paths](/product/user-paths) and more. 
 

@@ -21,12 +21,15 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            NODE_OPTIONS: '--max-old-space-size=8192 --expose-gc'
+            NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
             GATSBY_CPU_COUNT: 1
 
         steps:
             - name: Checkout code
               uses: actions/checkout@v6
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
 
             - name: Setup Node.js
               uses: actions/setup-node@v6

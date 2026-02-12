@@ -85,7 +85,7 @@ The GitHub App needs to bypass certain protections to push release commits direc
 1. Go to your SDK repository settings
 2. Navigate to **Rules** → **Rulesets**
 3. Open the ruleset that requires PRs (may have various names)
-   1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/team-client-libraries` for all files
+   1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/client-libraries-approvers` for all files
 4. Under **Bypass list**, click **Add bypass**
 5. Select your GitHub App (`Releaser (<sdk_name>)`)
 6. Click the three-dot menu and choose **Exempt**
@@ -106,6 +106,9 @@ The release workflow needs access to shared organization secrets. Grant your SDK
 - `SLACK_APPROVALS_CLIENT_LIBRARIES_CHANNEL_ID`
 
 ### 5. Add the release workflow
+
+> **Important:** Our release workflows use [GitHub Actions OIDC tokens](https://docs.github.com/en/actions/concepts/security/openid-connect) for secure authentication with package registries. Make sure your workflow uses a version that supports OIDC for your registry:
+> - **npm:** Node.js v22+
 
 Copy the release workflow from an existing SDK (e.g., [posthog-go](https://github.com/posthog/posthog-go/blob/main/.github/workflows/release.yml)) and adapt it:
 
@@ -129,10 +132,10 @@ Make sure the repository includes the following labels, they're used to trigger 
 
 ### 7. Open a PR
 
-Create a PR with the new `release.yml` workflow and request a review from `@PostHog/group-client-libraries` - there's no SDK team at the moment, this is all collaborative work.
+Create a PR with the new `release.yml` workflow and request a review from `@PostHog/client-libraries-approvers`. There is now a small, dedicated SDK team at PostHog ([@PostHog/team-client-libraries](https://github.com/orgs/PostHog/teams/team-client-libraries)) that helps drive direction and coordination. However, SDK development and maintenance remains a collaborative effort across the engineering organization.
 
 ## Triggering a release
 
-Once set up, releases are triggered by having a `release` label added to the PR alongside a matching `bump-*` tag. Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/group-client-libraries` team will have to approve it on `#approval-support-libraries`.
+Once set up, releases are triggered by having a `release` label added to the PR alongside a matching `bump-*` tag. Once a PR is merged, the environment workflow will kick up and someone from the `@PostHog/client-libraries-approvers` team will have to approve it on `#approval-support-libraries`.
 
 > In the future, we'll attempt to use https://github.com/bruits/sampo everywhere to support changesets like we have on `posthog-js` which means we won't need to worry about the `bump-*` tags.
