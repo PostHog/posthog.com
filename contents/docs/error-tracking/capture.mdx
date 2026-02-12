@@ -88,14 +88,6 @@ posthog.capture_exception(
 
 </MultiLanguage>
 
-<CalloutBox icon="IconWarning" title="Don't do this" type="caution">
-
-  **Do not** use `posthog.capture('$exception', { ... })` and try to attach exception metadata yourself (e.g. `$exception_stack_trace_raw`, `$exception_type`, `$exception_message`). This approach fails in the vast majority of cases because the exception event schema is strict and the SDK does not normalize or validate these properties when you use `capture()`.
-
-  **Do this instead:** use `posthog.captureException(error)`. It accepts an `Error` object (or your runtime's equivalent), extracts stack trace, type, and message correctly, and sends a valid `$exception` event with all required metadata. You can still pass optional properties as the second argument.
-
-</CalloutBox>
-
 ## Customizing exception capture
 
 Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this. 
@@ -288,3 +280,15 @@ import SuppressionRules from './_snippets/suppression-rules.mdx'
 import BurstProtection from './_snippets/burst-protection.mdx'
 
 <BurstProtection />
+
+## Common problems
+
+### Don't use `posthog.capture()` for exceptions
+
+<CalloutBox icon="IconWarning" title="Don't do this" type="caution">
+
+  **Do not** use `posthog.capture('$exception', { ... })` and try to attach exception metadata yourself (e.g. `$exception_stack_trace_raw`, `$exception_type`, `$exception_message`). This approach fails in the vast majority of cases because the exception event schema is strict and the SDK does not normalize or validate these properties when you use `capture()`.
+
+  **Do this instead:** use `posthog.captureException(error)`. It accepts an `Error` object (or your runtime's equivalent), extracts stack trace, type, and message correctly, and sends a valid `$exception` event with all required metadata. You can still pass optional properties as the second argument.
+
+</CalloutBox>
