@@ -3,6 +3,8 @@ title: WTF is a forward deployed engineer? (and why everyone is hiring them)
 date: 2026-02-11
 author:
   - jina-yoon
+seoTitle: WTF is a forward deployed engineer (FDE)?
+seoDescription: What they do, why they’re hot right now, and when you should hire one.
 showTitle: true
 rootpage: /blog
 sidebar: Blog
@@ -19,7 +21,7 @@ crosspost:
 ---
 If you've been living anywhere except under a rock lately, you've probably heard the term **forward deployed engineer** 50 times by now and thought: WTF does that even mean?
 
-This role has been called “the hottest job in startups” according to [a16z](https://x.com/a16z/status/1930774473445142934), with [800% growth](https://www.ft.com/content/91002071-7874-4cb7-9245-08ca0571c408) in 2025, and it's still a [hot topic](https://x.com/tbpn/status/2019520634771108041?t=200) with solid [trajectory](https://www.levels.fyi/t/forward-deployed-engineer) today. Companies that are hiring (or have hired) for this position include [OpenAI](https://openai.com/careers/forward-deployed-engineer-(fde)-sf-san-francisco/), [Anthropic](https://job-boards.greenhouse.io/anthropic/jobs/5079562008), [Databricks](https://www.databricks.com/company/careers/professional-services-operations/forward-deployed-engineer-fde-8251119002), [Ramp](https://builders.ramp.com/post/forward-deployed-engineering), and even [yours truly](https://posthog.com/community/profiles/32997). But why?
+This role has been called “[the hottest job in startups](/newsletter/how-to-get-job-startup)” according to [a16z](https://x.com/a16z/status/1930774473445142934), with [800% growth](https://www.ft.com/content/91002071-7874-4cb7-9245-08ca0571c408) in 2025, and it's still a [hot topic](https://x.com/tbpn/status/2019520634771108041?t=200) with solid [trajectory](https://www.levels.fyi/t/forward-deployed-engineer) today. Companies that are hiring (or have hired) for this position include [OpenAI](https://openai.com/careers/forward-deployed-engineer-(fde)-sf-san-francisco/), [Anthropic](https://job-boards.greenhouse.io/anthropic/jobs/5079562008), [Databricks](https://www.databricks.com/company/careers/professional-services-operations/forward-deployed-engineer-fde-8251119002), [Ramp](https://builders.ramp.com/post/forward-deployed-engineering), and even [yours truly](https://posthog.com/community/profiles/32997). But why?
 
 ## WTF is a forward deployed engineer?
 
@@ -67,8 +69,6 @@ Software engineers, on the other hand, focus on building features that are gener
 [Bob McGrew](https://www.youtube.com/watch?v=Zyw-YA0k3xo), an early executive at Palantir, describes FDEs as the ones who build the rough gravel road for where the product needs to go. Software engineers from the core product team then work on turning that gravel road into a paved superhighway so that the next ten customers can also use it.
 
 The key difference is that FDEs work on product discovery and development with _one_ customer at a time, and generalizability is a second priority. Software engineers typically build with many users in mind from the start, and thinking about scale is baked into their process.
-
-Forward deployed engineer vs. software engineer: Key differences
 
 |  | Forward Deployed Engineer | Software Engineer |
 |--------|--------------------------|-------------------|
