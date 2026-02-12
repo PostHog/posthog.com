@@ -195,17 +195,21 @@ You can view the change history for any individual resource. When viewing a feat
 
 ## Query with PostHog AI
 
-[PostHog AI](/docs/posthog-ai) can answer questions about your activity logs using natural language. Ask questions like:
+[PostHog AI](/docs/posthog-ai) can answer questions about your activity logs using natural language.
 
-- "Who changed the checkout-flow feature flag?"
-- "What experiments were modified last week?"
-- "Show me all dashboard changes by jane@example.com"
+<MaxCTA question="Who changed the checkout-flow feature flag?" />
+
+<MaxCTA question="What experiments were modified last week?" />
+
+<MaxCTA question="Show me all feature flag changes in the last 7 days" />
 
 PostHog AI can filter by scope (resource type), activity type, user, date range, and specific item IDs — the same filters available in the UI.
 
 To use this feature, open [PostHog AI](https://app.posthog.com/#panel=max) and ask your question. PostHog AI queries your activity logs and summarizes the results.
 
-> **Note:** Querying activity logs with PostHog AI requires the audit logs feature, which is available on Scale and Enterprise plans.
+<CalloutBox icon="IconInfo" title="Requires audit logs" type="fyi">
+Querying activity logs with PostHog AI requires the audit logs feature, which is available on Scale and Enterprise plans.
+</CalloutBox>
 
 ## Notifications
 
