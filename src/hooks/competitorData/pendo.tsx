@@ -1,3 +1,5 @@
+import { workflows } from 'hooks/productData/workflows'
+
 export const pendo = {
     name: 'Pendo',
     key: 'pendo',
@@ -98,8 +100,8 @@ export const pendo = {
             },
             analysis: {
                 features: {
-                    console_logs: false,
-                    network_monitor: false,
+                    console_logs: true,
+                    network_monitor: true,
                     performance_monitoring: false,
                 },
             },
@@ -139,10 +141,19 @@ export const pendo = {
                 issue_management: false,
             },
         },
+        cdp: {
+            available: false,
+        },
+        workflows: {
+            available: true,
+        },
+        llm_analytics: {
+            available: 'Agent Analytics',
+        },
     },
     platform: {
         deployment: {
-            eu_hosting: 'Enterprise only',
+            eu_hosting: true,
             open_source: false,
             reverse_proxy: true,
             self_host: false,
@@ -167,7 +178,7 @@ export const pendo = {
         },
         integrations: {
             airbyte: false,
-            azure_blob: false,
+            azure_blob: true,
             bigquery: true,
             ci_cd_integrations: false,
             community_integrations: true,
