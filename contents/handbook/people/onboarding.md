@@ -124,9 +124,9 @@ We use a number of different tools to organise our work and communicate at PostH
 -   Slack - we have an internal workspace and a users Slack as well
 -   Brex (US, RoW) or Revolut (UK, EU) - company cards and expenses tracking
 -   Shopify - powers our merch store
--   CharlieHR - holiday tracking, personal details
--   Gusto - payroll and benefits (US)
--   Deel - contractor payroll (EU and special arrangements)
+-   Time off by Deel (Slack App) - holiday tracking
+-   Bamboo HR - payroll and benefits (US)
+-   Deel - contractor & EOR payroll & HRIS
 
 ### Engineering
 
