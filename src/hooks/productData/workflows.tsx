@@ -25,7 +25,6 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     category: 'automation',
-    status: 'beta',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
@@ -361,7 +360,7 @@ export const workflows = {
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {
-            title: 'How PostHog uses PostHog Workflows',
+            title: 'Automating onboarding with PostHog Workflows',
             author: 'Sara Miteva',
             wistia: '9npwnc8sm6',
             chapters: [

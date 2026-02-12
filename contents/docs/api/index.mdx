@@ -156,5 +156,7 @@ PostHog partners with GitHub to automatically detect exposed API keys in public 
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
 - **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+- **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
+- **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
 This provides an automatic layer of protection, but you should still follow best practices: never commit API keys to version control, use environment variables, and rotate keys if you suspect exposure.

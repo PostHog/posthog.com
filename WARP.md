@@ -9,7 +9,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 - **Clean and restart**: `yarn clean && yarn && yarn start` (when things get weird)
 - **Build production**: `yarn build`
 - **Serve production build locally**: `gatsby build && gatsby serve`
-- **Clean build cache**: `gatsby clean`
+- **Clean build cache**: `pnpm clean`
 
 ### Code Quality
 - **Format code**: `yarn format` (formats all HTML, JS, TS, TSX, JSON, YML, CSS, SCSS)

@@ -1,0 +1,378 @@
+---
+title: Activity logs
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: none
+    scale: full
+    enterprise: full
+---
+
+export const activityLogsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_19_at_15_56_10_f814e9ccbe.png"
+export const activityLogsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_19_at_15_56_24_1f1bc5cecc.png"
+export const activityLogsFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_19_at_16_10_46_8b85213cee.png"
+export const activityLogsFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_19_at_16_10_54_d4b27f7f32.png"
+export const activityLogsSidebarLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_19_at_16_15_34_6d7eaaa13f.png"
+export const activityLogsSidebarDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_01_19_at_16_15_42_d7ee0e6c2b.png"
+
+Activity logs show who changed what, and when. Use them to investigate unexpected changes, track feature flag rollouts, prepare for compliance audits, or understand how your team uses PostHog.
+
+<ProductScreenshot
+    imageLight = {activityLogsLight}
+    imageDark = {activityLogsDark}
+    alt="Activity logs interface showing recent events"
+    classes="rounded"
+/>
+
+## What gets logged
+
+Activity logs capture events at three levels: organization, project, and resource. Each log entry records who performed an action, what changed, and when it occurred.
+
+### Organization-level events
+
+These events track changes to organization-wide settings and membership.
+
+| Event type | Description |
+| --- | --- |
+| Member invited | A new member was invited to the organization |
+| Member joined | A member accepted an invitation and joined |
+| Member removed | A member was removed from the organization |
+| Member role changed | A member's organization role was updated |
+| Role created | A new RBAC role was created |
+| Role updated | An existing role's permissions were modified |
+| Role deleted | A role was removed |
+| SSO configured | SAML or SSO settings were changed |
+| Domain verified | An authentication domain was verified |
+| Organization settings changed | Organization name, logo, or other settings were updated |
+| 2FA enforcement changed | Two-factor authentication requirements were modified |
+| *+ many more* | |
+
+### Project-level events
+
+These events track changes within individual projects.
+
+| Event type | Description |
+| --- | --- |
+| Project created | A new project was created |
+| Project deleted | A project was deleted |
+| Project settings changed | Project configuration was modified |
+| Access control changed | Project access permissions were updated |
+| API key created | A new project API key was generated |
+| API key revoked | An API key was revoked |
+| *+ many more* | |
+
+### Resource-level events
+
+These events track changes to individual resources within projects.
+
+| Resource type | Tracked actions |
+| --- | --- |
+| Feature flags | Created, updated, deleted, enabled, disabled, rollout changed |
+| Experiments | Created, updated, launched, stopped, archived |
+| Dashboards | Created, updated, deleted, shared |
+| Insights | Created, updated, deleted, shared |
+| Surveys | Created, updated, launched, stopped, deleted |
+| Actions | Created, updated, deleted |
+| Cohorts | Created, updated, deleted, duplicated |
+| Notebooks | Created, updated, deleted |
+| Annotations | Created, updated, deleted |
+| Data pipelines | Created, updated, deleted, enabled, disabled |
+| Batch exports | Created, updated, deleted, paused, resumed |
+| Data warehouse sources | Created, updated, deleted |
+| Data warehouse views | Created, updated, deleted |
+| Alerts | Created, updated, deleted |
+| Early access features | Created, updated, deleted |
+| Session replays | Shared, exported |
+| Personal API keys | Created, revoked |
+| Error tracking issues | Updated, resolved, merged |
+| Persons | Updated, merged, split, deleted |
+| Groups | Updated |
+| Event definitions | Updated, verified |
+| Property definitions | Updated, verified |
+| Tags | Created, deleted |
+| Comments | Created, updated, deleted |
+| *+ many more* | |
+
+## Log entry details
+
+Each activity log entry contains the following information:
+
+| Field | Description |
+| --- | --- |
+| Timestamp | When the action occurred (UTC) |
+| Actor | The user who performed the action (name, email) |
+| Action | The type of action performed (created, updated, deleted, etc.) |
+| Scope | The type of resource affected (feature flag, dashboard, etc.) |
+| Target | The specific resource that was affected (name and ID) |
+| Changes | Before and after values for each modified field |
+
+### Example log entry
+
+Here's an example of what a log entry looks like when retrieved via the API:
+
+```json
+{
+  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "activity": "updated",
+  "scope": "FeatureFlag",
+  "item_id": "12345",
+  "detail": {
+    "name": "new-checkout-flow",
+    "short_id": "checkout-v2",
+    "changes": [
+      {
+        "field": "active",
+        "before": false,
+        "after": true
+      },
+      {
+        "field": "rollout_percentage",
+        "before": 0,
+        "after": 50
+      }
+    ]
+  },
+  "user": {
+    "id": 42,
+    "uuid": "user-uuid-here",
+    "email": "jane@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe"
+  },
+  "created_at": "2024-01-15T10:30:00.000000Z",
+  "is_system": false
+}
+```
+
+## Accessing activity logs
+
+There are several ways to view activity logs in PostHog.
+
+### Activity sidebar
+
+The **Activity** panel in the right sidebar shows a context-aware feed of changes. What you see depends on where you are in PostHog:
+
+- **On a specific resource** (e.g., viewing a feature flag): Shows changes to that specific item
+- **On a list page** (e.g., the feature flags list): Shows changes to all items of that type
+- **Elsewhere**: Prompts you to navigate to a supported page
+
+The sidebar also has a **My notifications** tab that shows changes relevant to you, such as updates to resources you've created or recently edited.
+
+<ProductScreenshot
+    imageLight = {activityLogsSidebarLight}
+    imageDark = {activityLogsSidebarDark}
+    alt="Activity sidebar showing recent changes"
+    classes="rounded"
+/>
+
+### Project activity logs
+
+To view the full activity log for your project:
+
+1. Go to **Settings** in the left sidebar
+2. Select **Project** settings
+3. Click **Activity logs**
+
+This shows all changes to resources in your current project, including feature flags, experiments, dashboards, and more.
+
+The activity logs page includes advanced filters to help you drill down into specific events. You can filter by date range, user, resource type, action type, and use text search to find specific changes. Combine multiple filters to find exactly what you're looking for—for example, all feature flags deleted by a specific user in the last 30 days. See [Filtering and searching](#filtering-and-searching) for details.
+
+### Including organization-level events
+
+By default, the activity log shows only changes within your current project. To also see organization-wide events (like member changes and organization settings):
+
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Enable **Include organization-level activity**
+
+This adds organization-level events to your activity feed, such as member invitations, role changes, and SSO configuration updates.
+
+> **Note**: This setting also affects notifications. If you subscribe to activity log notifications, you will only receive notifications for organization-level events if this setting is enabled.
+
+### Resource history
+
+You can view the change history for any individual resource. When viewing a feature flag, dashboard, experiment, or other resource, click the **History** tab to see all changes made to that specific item over time.
+
+## Notifications
+
+You can subscribe to activity log changes and receive notifications via Slack, webhooks, or other destinations when specific events occur.
+
+### Setting up notifications
+
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Scroll to the **Notifications** section
+3. Click **New notification** and select your destination
+4. Configure filters to specify which events trigger notifications
+
+You can also set up notifications directly from the Activity sidebar. When viewing activity for a specific resource or resource type, click the bell icon to create a notification subscription for those events.
+
+### Filtering notifications
+
+Notifications can be filtered by:
+
+- **Resource type**: Only notify for specific resources (e.g., feature flags, experiments)
+- **Action type**: Only notify for specific actions (e.g., created, deleted)
+- **Specific resource**: Only notify for changes to a particular item
+
+For example, you could create a Slack notification that alerts your team whenever a production feature flag is modified, or an email notification when new team members are invited to your organization.
+
+### How it works
+
+Activity log notifications are powered by [data pipelines](/docs/cdp). When an activity is logged, PostHog emits an internal `$activity_log_entry_created` event that can trigger your configured destinations. This means you can use the full power of data pipelines, including custom transformations and multiple destinations.
+
+## Filtering and searching
+
+Activity logs support a range of filters to help you find specific events.
+
+<ProductScreenshot
+    imageLight = {activityLogsFilterLight}
+    imageDark = {activityLogsFilterDark}
+    alt="Activity log filters"
+    classes="rounded"
+/>
+
+### Available filters
+
+**Date range**
+Filter events to a specific time period. Use preset ranges like "Last 7 days" or select custom start and end dates.
+
+**User**
+Filter by the team member who performed the action. Select one or multiple users to see only their changes.
+
+**Scope**
+Filter by resource type. Scopes include Feature flags, Experiments, Dashboards, Insights, Surveys, Cohorts, and more. Select multiple scopes to see changes across different resource types.
+
+**Activity**
+Filter by the type of action performed. Activities include created, updated, deleted, enabled, disabled, merged, split, and others depending on the resource type.
+
+### Advanced filters
+
+Click **More filters** to access additional filtering options:
+
+**Was impersonated?**
+During support sessions, PostHog team members may act as a specific user to help troubleshoot issues. Use this filter to show only impersonated actions, exclude them, or see all actions.
+
+**Is system activity?**
+Filter for activities performed automatically by PostHog's system, such as scheduled tasks or automated workflows. Use this to separate human actions from system-generated ones.
+
+**Item IDs**
+Filter by specific resource IDs. Enter one or more IDs to see activity for only those specific items (e.g., a specific feature flag ID or dashboard ID).
+
+**Detail filters**
+Filter on specific fields within the activity log details. You can filter using three operations: **equals** (exact match), **contains** (partial match), or **is one of** (matches any value in a list). This lets you search for changes to particular fields (like "active" or "filters") or filter by specific before/after values. Useful for finding when a specific setting was changed across multiple resources.
+
+## Exporting and retention
+
+### Retention periods
+
+Activity logs are retained based on your [platform package](/platform-packages). Higher tiers include longer retention periods, with Enterprise plans offering the longest retention and the ability to configure custom retention windows.
+
+See [platform packages](/platform-packages) for current retention periods by addon.
+
+> **Note**: Once logs exceed the retention period, they are permanently deleted and cannot be recovered. Export your logs regularly if you need to maintain records beyond your plan's retention period.
+
+### Export options
+
+Activity logs can be exported for offline analysis, compliance reporting, or integration with external SIEM systems.
+
+**To export activity logs:**
+
+1. Navigate to the activity logs view
+2. Apply any filters to narrow down the events you want to export
+3. Click **Export**
+4. Select your preferred format (CSV or Excel)
+5. The export will be generated and available for download
+
+Exports include all log entry fields and respect any filters you have applied.
+
+## Common use cases
+
+### Investigating unexpected changes
+
+**Scenario**: You notice unexpected changes to a critical feature flag and need to determine who made the changes and when.
+
+**Steps**:
+1. Navigate to the feature flag and click the **History** tab, or go to **Settings** → **Project** → **Activity logs**
+2. Filter by **Scope**: Feature flag
+3. Use the **Item IDs** filter (under More filters) to search for the specific feature flag ID
+4. Review the log entries to see who modified the flag, what changes were made, and the exact timestamp
+5. Click on an entry to see the before and after values for each changed field
+
+### Compliance audit preparation
+
+**Scenario**: Your security team needs documentation of all access control changes for a SOC 2 audit.
+
+**Steps**:
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Enable **Include organization-level activity** to include organization-wide changes
+3. Set the **Date range** to cover the audit period
+4. Filter by **Scope**: select Organization, Organization membership, and Organization invite to capture member and role changes
+5. Export the filtered results as CSV or Excel and provide to your compliance team
+
+### Tracking feature flag rollouts
+
+**Scenario**: A feature rollout caused issues and you need to identify exactly when and how the flag was changed.
+
+**Steps**:
+1. Navigate to the feature flag in question
+2. Click the **History** tab to see all changes
+3. Review the timeline of rollout percentage changes
+4. Identify which change correlates with the reported issues
+5. Contact the user who made the change for more context
+
+### Monitoring API key usage
+
+**Scenario**: You want to ensure API keys are being created and managed according to your security policies.
+
+**Steps**:
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Filter by **Scope**: Personal API key
+3. Optionally filter by **Activity**: select created or deleted to focus on specific actions
+4. Review who is creating keys and whether old keys are being properly rotated
+5. Export regular reports for security review
+
+## API support
+
+PostHog provides API endpoints for programmatic access to activity logs. This enables integration with external monitoring systems, custom dashboards, and automated compliance workflows.
+
+### Authentication
+
+To use the activity log API endpoints, authenticate using one of PostHog's [authentication methods](/docs/api). Personal API keys require the `activity_log:read` scope.
+
+### Endpoints
+
+PostHog provides two activity log endpoints:
+
+| Endpoint | Description |
+| --- | --- |
+| `GET /api/projects/@current/activity_log/` | Basic activity log retrieval with simple filtering |
+| `GET /api/projects/@current/advanced_activity_logs/` | Full-featured endpoint with advanced filtering and export |
+
+Both endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included.
+
+### API reference
+
+For full details on query parameters, request/response formats, and all available options, see the interactive API documentation:
+
+- **US region**: [us.posthog.com/api/schema/swagger-ui/](https://us.posthog.com/api/schema/swagger-ui/)
+- **EU region**: [eu.posthog.com/api/schema/swagger-ui/](https://eu.posthog.com/api/schema/swagger-ui/)
+
+Search for "activity_log" to find the relevant endpoints.
+
+## Security and privacy considerations
+
+### Who can view activity logs
+
+Access to activity logs is controlled by the [access control](/docs/settings/access-control) feature. Organization admins can configure which roles or members have permission to view activity logs.
+
+By default, activity logs are visible to all members. Use access control to restrict visibility if needed—for example, limiting activity log access to admins only, or granting access to specific roles.
+
+### What is not logged
+
+Activity logs focus on tracking changes to resources, not all user actions. There are some gaps in coverage—certain actions or resource types may not be logged. If you're unsure whether a specific action is tracked, [contact support](https://posthog.com/questions) for clarification.
+
+### Log integrity
+
+Activity logs are append-only and cannot be modified or deleted by users. This ensures the integrity of the audit trail for compliance purposes.
+
+> **Important**: Activity logs are retained according to your platform package's retention period. Once logs are deleted due to retention policies, they cannot be recovered. If you require long-term log retention for compliance, export logs regularly or upgrade to an Enterprise plan with extended retention.

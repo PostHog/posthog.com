@@ -16,10 +16,6 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 The Databricks destination is currently in `beta`. This means the configuration and features are subject to change.
 
-You can request access via the [in-app support form](https://app.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
-
-We love feature requests and feedback. Please tell us what you think using the same link above.
-
 </CalloutBox>
 
 ## Requirements
@@ -117,7 +113,7 @@ GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<servi
 
 ## Creating the batch export
 
-1. In PostHog, click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+1. In PostHog, click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Databricks**.
 4. Click the **+ Create** button.

@@ -5,10 +5,7 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import LogsBetaSnippet from '../_snippets/beta.mdx'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
-
-<LogsBetaSnippet />
 
 <Steps>
 
@@ -38,9 +35,11 @@ Add the following dependencies to your `pom.xml`:
 
 <Step title="Get your project API key" badge="required">
 
-You'll need your PostHog project API key to authenticate log requests. This is the same API key you use for capturing events and exceptions.
+You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
 
-You can find your project API key in [Project Settings](https://app.posthog.com/settings/project).
+> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project Variables" → "Project API key".
 
 </Step>
 
@@ -58,8 +57,8 @@ SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
     .addLogRecordProcessor(
         BatchLogRecordProcessor.builder(
             OtlpHttpLogRecordExporter.builder()
-                .setEndpoint("https://us.i.posthog.com/i/v1/logs")
-                .addHeader("Authorization", "Bearer " + YOUR_PROJECT_API_KEY)
+                .setEndpoint("<ph_client_api_host>/i/v1/logs")
+                .addHeader("Authorization", "Bearer <ph_project_api_key>")
                 .build()
         ).build()
     )
@@ -72,7 +71,7 @@ Alternatively, you can pass the API key as a query parameter:
 
 ```java
 OtlpHttpLogRecordExporter.builder()
-    .setEndpoint("https://us.i.posthog.com/i/v1/logs?token=" + YOUR_PROJECT_API_KEY)
+    .setEndpoint("<ph_client_api_host>/i/v1/logs?token=<ph_project_api_key>")
     .build()
 ```
 

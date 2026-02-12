@@ -27,7 +27,26 @@ export const posthog = new PostHog(
 
 # Manual Masking
 
-To replace any type of `React.Component` with a redacted version in the replay, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-capture`:
+There are two ways to manually mask sensitive content in your React Native app:
+
+## Using PostHogMaskView
+
+Wrap any content you want to mask with the `PostHogMaskView` component:
+
+```ts
+import { PostHogMaskView } from 'posthog-react-native'
+
+<PostHogMaskView>
+  <Text>Sensitive content here</Text>
+  <Text>All children will be masked</Text>
+</PostHogMaskView>
+```
+
+This is the recommended approach as it's more explicit and doesn't interfere with accessibility features.
+
+## Using accessibilityLabel
+
+Alternatively, to replace any type of `React.Component` with a redacted version in the replay, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-capture`:
 
 ```ts
 <Text accessibilityLabel="ph-no-capture">Sensitive!</Text>

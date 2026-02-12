@@ -12,9 +12,9 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 <SmallTeam slug="posthog-ai" /> is responsible for the architecture, performance, and UX/UI of the AI platform. We review PRs from product teams to ensure they meet our quality bar. We build and maintain the core tooling (`search`, `read_data`, `read_taxonomy`, `enable_mode`). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products — things like SQL generation or universal filtering.
 
-### The Array team
+### The Twig team
 
-<SmallTeam slug="array" /> is responsible for the Array desktop product, the cloud and local coding agent, and signals and tasks generation. They might at some point own the Wizard or integrate it directly into the main Array product.
+<SmallTeam slug="twig" /> is responsible for the Twig desktop product, the cloud and local coding agent, and signals and tasks generation. They might at some point own the Wizard or integrate it directly into the main Twig product.
 
 ### Product teams
 

@@ -28,6 +28,9 @@ import Slider from 'components/RadixUI/Slider'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
+import * as PostHogIcons from '@posthog/icons'
+import * as OSIcons from '../OSIcons/Icons'
+import { getLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
@@ -419,6 +422,31 @@ export default function ReaderView({
     )
 }
 
+const sortAlpha = (items: MenuItem[]): MenuItem[] =>
+    [...items].sort((a, b) => (a.name === 'Overview' ? -1 : b.name === 'Overview' ? 1 : a.name.localeCompare(b.name)))
+
+const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): MenuItem[] | undefined => {
+    return items?.map((item) => {
+        let icon = item.icon
+        if (resolveIcons) {
+            if (item.platformLogo) {
+                const url = getLogo(item.platformLogo)
+                if (url) icon = <img src={url} className="size-full" />
+            } else if (typeof icon === 'string') {
+                const IconComponent = (PostHogIcons as any)[icon] || (OSIcons as any)[icon]
+                if (IconComponent) icon = <IconComponent className="size-full" />
+            }
+        }
+        const shouldShowChildrenIcons = item.showChildrenIcons || resolveIcons
+        const children = item.sortChildrenAlpha && item.children ? sortAlpha(item.children) : item.children
+        return {
+            ...item,
+            ...(resolveIcons ? { icon } : {}),
+            children: children ? resolveMenuIcons(children, shouldShowChildrenIcons) : undefined,
+        }
+    })
+}
+
 const Menu = (props: { parent: MenuItem }) => {
     const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
 
@@ -456,7 +484,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 }}
                 dataScheme="primary"
             />
-            <TreeMenu key={activeInternalMenu?.url} items={activeInternalMenu?.children} />
+            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(activeInternalMenu?.children)} />
         </>
     )
 }
@@ -480,7 +508,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     {/* Sidebar - overlay on mobile, normal flow on desktop */}
                     <motion.div
                         id="nav"
-                        className="flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
+                        className="flex-shrink-0 overflow-hidden mb-[-36px] @2xl/app-reader:mb-0 text-primary 
                                    fixed left-2 top-[47px] bottom-16 z-50 
                                    @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
                         initial={{
@@ -602,10 +630,17 @@ function ReaderViewContent({
             })
             await Promise.all(imageLoadPromises)
             await new Promise((resolve) => setTimeout(resolve, 100))
-            scrollElement.scrollTo({
-                top: document.getElementById(hash.replace('#', ''))?.offsetTop || 0,
-                behavior: 'smooth',
-            })
+            const targetElement = document.getElementById(hash.replace('#', ''))
+            if (targetElement) {
+                const detailsParent = targetElement.closest('details')
+                if (detailsParent) {
+                    detailsParent.open = true
+                }
+                scrollElement.scrollTo({
+                    top: targetElement.offsetTop || 0,
+                    behavior: 'smooth',
+                })
+            }
         }
 
         if (hash) {
@@ -777,7 +812,7 @@ function ReaderViewContent({
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div
-                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all ${
+                                            className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all [&>span:not(.OSTable):not(.Table)]:block ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? '[&>*:not(.OSTable):not(.Table)]:max-w-full'
                                                     : contentMaxWidthClass ||

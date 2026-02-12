@@ -210,19 +210,6 @@ export default function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Community',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Sign in to PostHog.com',
-                          onClick: handleSignInClick,
-                      },
-                      {
-                          type: 'separator' as const,
-                      },
-                      {
-                          type: 'item' as const,
                           label: 'Go to...',
                           disabled: true,
                       },
@@ -232,6 +219,19 @@ export default function TaskBarMenu() {
                           link: 'https://app.posthog.com',
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
                           external: true,
+                      },
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in to the community',
+                          onClick: handleSignInClick,
                       },
                   ],
         },
