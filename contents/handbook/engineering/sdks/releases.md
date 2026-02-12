@@ -116,11 +116,15 @@ Copy the release workflow from an existing SDK (e.g., [posthog-go](https://githu
 
 #### npm packages: set up trusted publishing before enabling the workflow
 
-If your SDK publishes to npm using OIDC trusted publishing, run the initial setup once for each new package before allowing your GitHub Actions workflow to publish:
+This applies only to npm publishing (not other package registries).
+
+If your SDK publishes to npm using OIDC trusted publishing and the package has never been published before, run this initial setup once before allowing your GitHub Actions workflow to publish:
 
 ```bash
 npx setup-npm-trusted-publish @posthog/<package-name>
 ```
+
+If the package has already been published, you can configure trusted publishing directly in npm package settings instead.
 
 This bootstraps npm trusted publishing for the package so future automated releases can publish successfully.
 
