@@ -27,12 +27,12 @@ showStepsToc: true
     plugins: [
       posthog({
         personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
-        envId: process.env.POSTHOG_ENV_ID, // Environment ID
+        projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
         host: process.env.POSTHOG_HOST, // (optional) defaults to https://us.i.posthog.com
         sourcemaps: { // (optional)
           enabled: true, // (optional) Enable sourcemaps generation and upload, defaults to true
-          project: 'my-application', // (optional) Project name
-          version: '1.0.0', // (optional) Release version
+          releaseName: 'my-application', // (optional) Release name
+          releaseVersion: '1.0.0', // (optional) Release version
           deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
         },
       }),
@@ -47,7 +47,7 @@ showStepsToc: true
   | Environment variable | Description |
   | --- | --- |
   | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
-  | `POSTHOG_ENV_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/environment#variables) |
+  | `POSTHOG_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
   | `POSTHOG_HOST` | (optional) Your PostHog instance URL. Defaults to `https://us.i.posthog.com` |
 
   </div>
