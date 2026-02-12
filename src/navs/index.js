@@ -2838,6 +2838,10 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/running-behind-proxy',
                                 },
                                 {
+                                    name: 'Session replay storage',
+                                    url: '/docs/self-host/configure/session-replay-storage',
+                                },
+                                {
                                     name: 'Configuring email',
                                     url: '/docs/self-host/configure/email',
                                 },
@@ -3618,7 +3622,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Data retention',
-                    url: '/docs/session-replay/data-retention',
+                    url: '/docs/session-replay/recording-retention',
                     icon: 'IconCalendar',
                     color: 'seagreen',
                 },
@@ -4685,6 +4689,15 @@ export const docsMenu = {
                     url: '/docs/product-tours/analytics',
                     icon: 'IconGraph',
                     color: 'orange',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/product-tours/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
                 },
             ],
         },

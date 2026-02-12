@@ -73,6 +73,24 @@ You can also view all responses in a table, and quickly link to the related trac
     alt="Survey thumbs up down ratings"
 />
 
+### View all traces with feedback
+
+Use this SQL expression to filter your LLM traces down to only those with attached survey responses:
+
+```sql
+properties.$ai_trace_id IN (
+  SELECT properties.$ai_trace_id
+  FROM events
+  WHERE event = 'survey sent'
+)
+```
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_11_at_7_36_02_PM_132b44dbea.png" 
+    classes="rounded"
+    alt="SQL expression for filtering LLM traces with feedback"
+/>
+
 ### View individual trace feedback
 
 For an individual trace, navigate to the **Feedback** tab to see survey responses.
