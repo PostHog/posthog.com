@@ -52,18 +52,32 @@ end
 
 # Core PostHog client initialization
 PostHog.init do |config|
-  config.api_key = ENV['POSTHOG_API_KEY']
+  config.api_key = '<ph_project_api_key>'
   config.host = '<ph_client_api_host>'
-
-  config.on_error = proc { |status, msg|
-    Rails.logger.error("PostHog error: #{msg}")
-  }
+  config.on_error = proc { |status, msg| Rails.logger.error("PostHog error: #{msg}") }
 end
 ```
 
 You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings).
 
-> **Note:** We recommend using environment variables for API keys rather than hardcoding them.
+> **Tip:** Use `Rails.application.credentials` to avoid hardcoding API keys. First, add your keys:
+>
+> ```bash
+> rails credentials:edit
+> ```
+>
+> ```yaml file=config/credentials.yml.enc
+> posthog:
+>   api_key: <ph_project_api_key>
+>   host: <ph_client_api_host>
+> ```
+>
+> Then reference them in your initializer:
+>
+> ```ruby file=config/initializers/posthog.rb
+> config.api_key = Rails.application.credentials.posthog[:api_key]
+> config.host = Rails.application.credentials.posthog[:host]
+> ```
 
 </Step>
 
@@ -94,13 +108,10 @@ end
 
 ### Understanding exception tracking options
 
-**`auto_capture_exceptions`** - Master switch for all automatic error tracking (default: `false`)
-- When `true`: All exceptions are automatically captured and sent to PostHog
-- When `false` (default): No automatic error tracking (you must manually call `PostHog.capture_exception`)
-
-**`report_rescued_exceptions`** - Control exceptions that Rails handles gracefully (default: `false`)
-- When `true`: Capture exceptions that Rails rescues and shows error pages for (404s, 500s, etc.)
-- When `false` (default): Only capture truly unhandled exceptions that crash your app
+| Option | Default | `true` | `false` |
+|--------|---------|--------|---------|
+| `auto_capture_exceptions` | `false` | All exceptions are automatically captured and sent to PostHog | No automatic error tracking — you must manually call `PostHog.capture_exception` |
+| `report_rescued_exceptions` | `false` | Capture exceptions that Rails rescues and shows error pages for (404s, 500s, etc.) | Only capture truly unhandled exceptions that crash your app |
 
 **Recommendation:** Enable both options to get complete visibility into all errors.
 
