@@ -23,7 +23,7 @@ If not, think again.
 
 ## How it works
 - All company expenses (offsites, software/tool subscriptions, merch, etc.) will have common company-wide budgets.
-- You'll be assigned a single `User Limit` of $5,000 per month in Brex from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptops and Mac Studio Monitos - ping `#team-people-and-ops` for these), training, etc. If you need an increase in the limit, request it on Brex.
+- You'll be assigned a single `User Limit` of $5,000 per month in Brex from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptops and Mac Studio Monitors - ping `#team-people-and-ops` for these), training, etc. If you need an increase in the limit, request it on Brex.
 
 ### Transparency & accountability
 - All expenses are visible company-wide
