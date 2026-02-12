@@ -32,7 +32,7 @@ import Editor from 'components/Editor'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXProvider } from '@mdx-js/react'
-import SEO from 'components/seo'
+import SEO, { HOME_KO_LANGUAGE_ALTERNATES } from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { PRODUCT_COUNT, APP_COUNT } from '../../../constants'
@@ -45,6 +45,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
+
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -966,10 +967,12 @@ export default function KoreanHome({
         return (
             <LocaleProvider locale="ko">
                 <SEO
+                    lang="ko"
                     title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
                     updateWindowTitle={false}
                     description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                     image="/images/og/default.png"
+                    languageAlternates={HOME_KO_LANGUAGE_ALTERNATES}
                 />
                 <Editor
                     type="mdx"
@@ -993,10 +996,12 @@ export default function KoreanHome({
         return (
             <>
                 <SEO
+                    lang="ko"
                     title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
                     updateWindowTitle={false}
                     description="모든 개발자 도구를 한 곳에서."
                     image="/images/og/default.png"
+                    languageAlternates={HOME_KO_LANGUAGE_ALTERNATES}
                 />
                 <div className="p-8 text-center text-secondary">
                     <p>한국어 랜딩 페이지 콘텐츠를 불러올 수 없습니다.</p>
@@ -1011,10 +1016,12 @@ export default function KoreanHome({
     return (
         <>
             <SEO
+                lang="ko"
                 title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
                 updateWindowTitle={false}
                 description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                 image="/images/og/default.png"
+                languageAlternates={HOME_KO_LANGUAGE_ALTERNATES}
             />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
