@@ -67,8 +67,6 @@ Product engineers use lots of products, think about how they're made, what they 
 
 These habits help them [build taste and product sense](/newsletter/good-taste-great-products) – a gut feel for what a good experience should look like. They still want and need to validate their assumptions with real users, but their intuition makes it easier to go from 0 to 1 quickly.
 
-These habits help them build taste and product sense – a gut feel for what a good experience should look like. They still want and need to validate their assumptions with real users, but their intuition makes it easier to go from 0 to 1 quickly.
-
 Rapid validation loops also mean product engineers develop this intuition faster than engineers who operate in a more conventional, structured way. This has a compounding effect on the products they work on. 
 
 Product engineers who ship fast, learn fast. Product engineers who learn fast build even faster. Teams that ship fast improve their products faster. Products that improve fast, grow faster.
@@ -93,8 +91,6 @@ This takes different forms, such as:
 * Improving developer tooling to reduce time to deployment.
 * [Testing in production](/product-engineers/testing-in-production) – i.e. as close to reality as possible.
 * Experimenting with different tools, agents, models, and frameworks. 
-
-They do this because being a successful product engineer requires making time for things like talking to users, and because shipping faster is a fundamental competitive advantage.
 
 This also means product engineers are often early adopters of new technologies if they believe they can help them ship faster, or learn some new skill that will help them toward their goal.
 
