@@ -114,6 +114,16 @@ Copy the release workflow from an existing SDK (e.g., [posthog-go](https://githu
 3. Update the version bumping logic for your package manager (npm, pip, etc.)
 4. Update the publishing steps for your package registry
 
+#### npm packages: set up trusted publishing before enabling the workflow
+
+If your SDK publishes to npm using OIDC trusted publishing, run the initial setup once for each new package before allowing your GitHub Actions workflow to publish:
+
+```bash
+npx setup-npm-trusted-publish @posthog/<package-name>
+```
+
+This bootstraps npm trusted publishing for the package so future automated releases can publish successfully.
+
 ### 6. Update the README
 
 Add a section to your SDK's README explaining that releases are semi-automatic and link to the `#approvals-client-libraries` Slack channel where approval requests are posted.
