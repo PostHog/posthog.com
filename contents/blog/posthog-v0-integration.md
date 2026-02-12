@@ -37,6 +37,8 @@ When iterating on onboarding or activation flows, existing experiments often alr
 
 > Based on the onboarding experiment testing long vs short signup, show me the metrics and then generate a signup flow aligned with the winning variant.
 
+**Insights from our Growth team:** You can use this when redesigning signup or pricing pages. For example, if a shorter signup form improved completion rate but reduced activation, that tells you friction wasn’t the only issue. You might keep the shorter form but strengthen the first-run experience, add clearer value framing, or tailor the flow by acquisition channel instead of treating all users the same.
+
 ### Turn ideas into multivariate flags
 
 Product changes are rarely binary. v0 can help turn a concrete idea into a properly structured multivariate feature flag that matches PostHog’s experiment model, making it ready to roll out and measure without additional setup.
@@ -44,6 +46,8 @@ Product changes are rarely binary. v0 can help turn a concrete idea into a prope
 **Suggested prompt:**
 
 > Create a multivariate feature flag in PostHog for our new ‘Quick Actions’ button. Variant A is yellow, variant B is green.
+
+**Insights from our Growth team:** Use this for things like CTA color, button placement, or dashboard layout variations. Instead of debating whether a brighter button “feels more clickable,” you can ship both versions behind a multivariate flag and measure downstream impact. Not just clicks, but whether users actually complete the next meaningful action.
 
 ### Ask product questions and act on the answers
 
@@ -53,6 +57,8 @@ Understanding what users do often comes down to a few focused questions. v0 can 
 
 > Show me a funnel from page view to signup, broken down by referral source.
 
+**Insights from our Growth team:** You can use this when evaluating campaign traffic. If paid users convert differently from organic users, you could generate different landing page variants tailored to intent. It’s also helpful before rewriting homepage copy – if most drop-offs happen before pricing is even viewed, the issue likely isn’t the pricing table.
+
 ### Find drop-offs and close the loop
 
 Identifying where users drop off is only useful if it leads to follow-up. With PostHog in v0, you can move directly from analysis to targeted feedback, without stitching together multiple tools.
@@ -60,6 +66,8 @@ Identifying where users drop off is only useful if it leads to follow-up. With P
 **Suggested prompt:** 
 
 > Find my worst-performing funnel, then create a survey targeting users who dropped off asking what went wrong.
+
+**Insights from our Growth team:** You can use this for onboarding steps with unexplained friction. If users consistently abandon at, for example, “Connect your first integration,” you can automatically trigger a short survey for that segment and ask whether it’s confusion, missing documentation, or lack of perceived value. That feedback can immediately shape the next iteration.
 
 ### Create and summarize surveys
 
@@ -69,6 +77,8 @@ Qualitative feedback is most useful when patterns are clear. v0 can help create 
 
 > Create a survey asking users: ‘What’s the one thing you’d change about our product?’ Then group the responses by topic and summarize the main themes.
 
+**Insights from our Growth team:** Try to use this after launches or major UI changes. Instead of manually reading hundreds of open-text responses, look for recurring themes like “navigation confusion” or “missing export options.” That will make it easier to prioritize fixes based on frequency and impact rather than on the loudest individual comment.
+
 ### Debug anticipating user impact 
 
 Errors are easier to prioritize when they’re tied to user impact. v0 can query error data from PostHog so investigation starts with which issues affect the most users, not just which ones appeared most recently.
@@ -76,6 +86,8 @@ Errors are easier to prioritize when they’re tied to user impact. v0 can query
 **Suggested prompt:**
 
 > Show me the top errors affecting the most users this week, and any new errors that appeared after yesterday’s deploy.
+
+**Insights from our Growth team:** This should be useful after releases. If a new deploy introduced an error affecting, let's say, 15% of active users in a critical flow, that takes priority over a rare edge-case bug. It will also help you connect technical issues to real user journeys – for example, whether the error blocks upgrade, onboarding, or core usage.
 
 ### Keep LLM costs visible
 
@@ -85,4 +97,14 @@ When building AI features, cost trends matter as much as functionality. v0 can s
 
 > Which LLM model is costing me the most this week, and how is the spend trending?
 
+**Insights from our Growth team:** This comes handy when testing different models for AI-powered features. If GPT-4-level performance doesn’t meaningfully improve user outcomes compared to a cheaper model, that’s an immediate optimization opportunity. 
+
+---
+
 Product data is most useful when it shows up at the moment decisions are made. With PostHog available in v0, you can build flows, features, and experiments with real context in mind instead of assumptions. Check it out: [v0.app](https://v0.app/)
+
+To find out more about what you can do with v0 x PostHog (plus snacks and strong opinions about shipping), join us at: 
+
+- February 26 – [Agentic Product Night: **Boston** w/ Vercel x PostHog](https://posthog.com/events#eventId=160)
+- March 10 – [Agentic Product Night: **Amsterdam** w/ Vercel x PostHog](https://posthog.com/events#eventId=161)
+
