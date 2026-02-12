@@ -58,3 +58,5 @@ They can choose to reprioritize their projects, change their goals, or come up w
 This creates a healthy tension. Engineers maintain their autonomy in decision-making, but there's a clear feedback loop to ensure those decisions are delivering real value. Without this accountability, autonomy can become directionless.
 
 Product managers are ultimately responsible for ensuring product engineers have the best context possible to make product decisions, but it's the engineers (not the product managers) who are responsible and accountable for acting upon it.
+
+**Next chapter:** [Why companies should hire product engineers](/product-engineer-handbook/benefits)

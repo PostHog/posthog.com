@@ -143,3 +143,5 @@ It's an antipattern to test every change you make – it's often best to just sh
 Whether it's code reviews, UX feedback, or feedback on plans and goals, a huge part of being a product engineer is [understanding when feedback is useful](/newsletter/collaboration-sucks), and delivering it in a way that it's heard.
 
 Likewise, a product engineer needs to be great at hearing the substance of feedback and digging into root causes, whether that feedback is coming from users or their colleagues.
+
+**Next chapter:** [The product engineer's role in the product team](/product-engineer-handbook/product-teams)

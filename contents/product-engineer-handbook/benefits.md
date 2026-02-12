@@ -82,4 +82,6 @@ Startups typically can't compete with Google, Meta, Open AI and co. on compensat
 
 Product engineers are intrinsically motivated because [they love building](/blog/why-product-engineering-is-so-fun). Surround them with people just like them, and they will love their work. People who love their work will stick around and become invested in what you're trying to build. 
 
-Ultimately, building a successful company and product is a team sport, and a long journey. You're much more likely to be successful if the people responsible for building that product feel invested and trusted to build that success. 
+Ultimately, building a successful company and product is a team sport, and a long journey. You're much more likely to be successful if the people responsible for building that product feel invested and trusted to build that success.
+
+**Next chapter:** [Creating a product engineering culture](/product-engineer-handbook/culture)

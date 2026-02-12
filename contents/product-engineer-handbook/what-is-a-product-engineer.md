@@ -86,4 +86,4 @@ And, as one of our colleagues, Danilo Campos, shared in Slack recently:
 
 > "We are surrounded by optimists. By people who want things to work, and believe in their bones things CAN work. An astonishing amount is possible when talented people BELIEVE it’s possible. It’s so much fun to do the things you’re good at when everyone is happy you’re good at them."
 
-If this sounds good to you, you should read the next chapter: [Traits of product engineers](/product-engineer-handbook/traits).
+**Next chapter:** [Traits of product engineers](/product-engineer-handbook/traits).

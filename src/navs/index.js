@@ -1686,7 +1686,7 @@ export const productEngineerHandbookSidebar = [
             },
             {
                 name: "4. The product engineer's role in the product team",
-                url: '/product-engineer-handbook/product-engineers-vs-product-managers',
+                url: '/product-engineer-handbook/product-teams',
             },
             {
                 name: '5. Why companies should hire product engineers',

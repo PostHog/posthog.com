@@ -75,3 +75,4 @@ Get into the habit of writing up notes. They don't have to be super detailed or 
 
 This exercise is all about building and refining your product sense, the less obvious and indefinable things that make a product nice to use or not. Learning the patterns that successful products lean into, and the ones that are common to less successful products.
 
+**Next chapter:** [Further reading for product engineers](/product-engineer-handbook/further-reading)
