@@ -29,6 +29,7 @@ import {
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
+import { useToast } from '../../context/Toast'
 
 interface DocsMenuItem {
     name: string
@@ -315,7 +316,16 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile, websiteMode } = useApp()
+    const {
+        animateClosingAllWindows,
+        windows,
+        setScreensaverPreviewActive,
+        isMobile,
+        websiteMode,
+        siteSettings,
+        updateSiteSettings,
+    } = useApp()
+    const { addToast } = useToast()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -738,6 +748,24 @@ export function useMenuData(): MenuType[] {
                 navigate('/display-options', { state: { newWindow: true } })
             },
             shortcut: [','],
+        },
+        {
+            type: 'item' as const,
+            label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
+            onClick: () => {
+                updateSiteSettings({ ...siteSettings, experience: websiteMode ? 'posthog' : 'boring' })
+                addToast({
+                    title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
+                    description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
+                        websiteMode ? 'website mode' : 'OS mode'
+                    }.`,
+                    duration: 5000,
+                    onUndo: () => {
+                        updateSiteSettings({ ...siteSettings, experience: websiteMode ? 'posthog' : 'boring' })
+                    },
+                })
+            },
+            shortcut: ['Shift', 'M'],
         },
     ]
 

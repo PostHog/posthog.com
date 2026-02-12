@@ -30,7 +30,8 @@ interface Product {
 }
 
 export const useProductLinks = () => {
-    const { posthogInstance, openNewChat } = useApp()
+    const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
+    const { addToast } = useToast()
 
     return [
         {
@@ -101,6 +102,22 @@ export const useProductLinks = () => {
                       source: 'desktop',
                   },
               ]),
+        {
+            label: 'Switch to website mode',
+            Icon: <AppIcon name="switch" />,
+            onClick: () => {
+                updateSiteSettings({ ...siteSettings, experience: 'boring' })
+                addToast({
+                    title: 'Switched to website mode',
+                    description: 'Hover the logo to return to OS mode.',
+                    duration: 5000,
+                    onUndo: () => {
+                        updateSiteSettings({ ...siteSettings, experience: 'posthog' })
+                    },
+                })
+            },
+            source: 'desktop',
+        },
     ]
 }
 
