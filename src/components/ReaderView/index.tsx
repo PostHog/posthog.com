@@ -661,7 +661,7 @@ function ReaderViewContent({
                 {/* Second row - Main Content */}
                 <div
                     data-scheme="secondary"
-                    className={`flex w-full gap-2 min-h-0 flex-grow ${websiteMode ? '' : 'bg-primary'}`}
+                    className={`flex w-full gap-2 min-h-0 flex-grow ${websiteMode ? 'bg-primary' : 'bg-primary'}`}
                 >
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
