@@ -44,7 +44,7 @@ All expenses over $75 or £75 must have itemized receipts attached and memo upda
 - Brex: upload the itemized receipt using the [Brex app, text, email or Slack](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-a-specific-expense), and update the memo using the [Brex app, text, email or Slack](https://www.brex.com/support/memos-for-expenses#add-a-memo-to-a-single-expense).
 - Revolut: email your itemized receipts to [ukinvoices@posthog.com](mailto:ukinvoices@posthog.com) along with a memo in the body of the email
 
-In extreme cases, expenses with no receipts above $75 or £75 may be deducted from your pay if we can't verify the business purpose - this is mainly for repeat offenders w someone's clearly ignoring the policy. 
+In extreme cases, expenses with no receipts above $75 or £75 may be deducted from your pay if we can't verify the business purpose - this is mainly for repeat offenders where someone's clearly ignoring the policy. 
 
 We need an _itemized receipt or invoices_ because Brex auto-verifies these using the information on the file. For example, this means the full booking confirmation email for flights/hotels, detailed bill from the restaurant for a team dinner etc. Please do not upload cropped images that show just the amount or just the credit card machine confirmation slip - without context, the receipt is pointless
 
