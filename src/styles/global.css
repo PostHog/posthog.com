@@ -479,8 +479,8 @@
 }
 
 body {
-    font-family: 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
-        'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
+    font-family: 'IBM Plex Sans Variable', 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next',
+        'avenir', 'segoe ui', 'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
     overflow-x: hidden;
     word-wrap: break-word;
     margin: 0;
