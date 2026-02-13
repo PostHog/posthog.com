@@ -749,24 +749,31 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
-        {
-            type: 'item' as const,
-            label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
-            onClick: () => {
-                updateSiteSettings({ ...siteSettings, experience: websiteMode ? 'posthog' : 'boring' })
-                addToast({
-                    title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
-                    description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
-                        websiteMode ? 'website mode' : 'OS mode'
-                    }.`,
-                    duration: 5000,
-                    onUndo: () => {
-                        updateSiteSettings({ ...siteSettings, experience: websiteMode ? 'posthog' : 'boring' })
-                    },
-                })
-            },
-            shortcut: ['Shift', 'M'],
-        },
+        ...(isMobile
+            ? []
+            : [
+                  {
+                      type: 'item' as const,
+                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
+                      onClick: () => {
+                          updateSiteSettings({ ...siteSettings, experience: websiteMode ? 'posthog' : 'boring' })
+                          addToast({
+                              title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
+                              description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
+                                  websiteMode ? 'website mode' : 'OS mode'
+                              }.`,
+                              duration: 5000,
+                              onUndo: () => {
+                                  updateSiteSettings({
+                                      ...siteSettings,
+                                      experience: websiteMode ? 'posthog' : 'boring',
+                                  })
+                              },
+                          })
+                      },
+                      shortcut: ['Shift', 'M'],
+                  },
+              ]),
     ]
 
     // Process main nav items for mobile menu
