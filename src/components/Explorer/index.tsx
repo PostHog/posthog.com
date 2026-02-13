@@ -205,9 +205,7 @@ export default function Explorer({
                     <main
                         data-app="Explorer"
                         data-scheme="primary"
-                        className={`@container flex-1 bg-primary relative h-full ${
-                            websiteMode && leftSidebarContent ? 'border-l border-primary' : ''
-                        }`}
+                        className="@container flex-1 bg-primary relative h-full"
                     >
                         {fullScreen ? (
                             children
@@ -237,8 +235,8 @@ export default function Explorer({
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className={`@3xl:w-64 bg-primary border-t @md:border-t-0 h-full prose prose-sm dark:prose-invert ${
-                                websiteMode ? '' : '@md:border-r border-primary'
+                            className={`@3xl:w-64 bg-primary border-t @3xl:border-t-0 @3xl:border-r border-primary prose prose-sm dark:prose-invert ${
+                                websiteMode ? '@3xl:h-[calc(100vh-48px)]' : 'h-full'
                             }`}
                         >
                             <ScrollArea className="p-2">
