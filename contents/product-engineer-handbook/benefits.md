@@ -54,7 +54,7 @@ Speed isn't the only advantage of hiring product engineers, however. Others incl
 
 ### 1. Sparking joy in customers
 
-Customers love it when an engineer listens to their problem and quickly ships a solution with minimum fuss. The naturally rapid feedback loop of product engineers who [talk to users](/newsletter/talk-to-users) and do support creates numerous opportunities to delight customers this way.
+Customers love it when an engineer listens to their problem and quickly ships a solution with minimum fuss. The naturally rapid feedback loop of product engineers who [talk to users](/newsletter/talk-to-users) and [do support](/newsletter/engineers-do-support) creates numerous opportunities to delight customers this way.
 
 ![sparking joy](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/spark_joy_448d65ec0f.png)
 

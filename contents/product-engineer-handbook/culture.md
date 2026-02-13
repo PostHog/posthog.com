@@ -29,7 +29,7 @@ In many ways, everything we do at PostHog is designed to reduce the need for mee
 
 There's nothing more motivating for a great product engineer than being surrounded by similarly talented, intrinsically motivated engineers. The opposite is also true.
 
-Needless to say, this is hard, but hiring well is the most important thing any company can do, so it pays to think deeply about what you want here. The rot begins the moment you compromise and hire someone who isn't a "hell, yes!"
+Needless to say, this is hard, but [hiring well](/newsletter/43-lessons-about-hiring-for-startups) is the most important thing any company can do, so it pays to think deeply about what you want here. The rot begins the moment you compromise and hire someone who isn't a "hell, yes!"
 
 You can avoid many problems, and solve them too, simply by nailing hiring 99% of the time. Our default assumption is we should only hire people who either meet or exceed the bar of the existing team, or have an obviously high ceiling.
 
@@ -47,7 +47,7 @@ If a product engineer is struggling to deliver, it may just mean they're not ide
 
 ## 4. Eliminate arbitrary deadlines and approval processes
 
-Most companies love to set artificial deadlines because they’re the easiest way to “increase urgency,” but they have a nasty habit of manifesting into meaningful deadlines. Deadlines that generate mountains of debt and slow you down over time.
+Most companies love to [set artificial deadlines](/newsletter/deadline-doom-loop) because they’re the easiest way to “increase urgency,” but they have a nasty habit of manifesting into meaningful deadlines. Deadlines that generate mountains of debt and slow you down over time.
 
 Instead, we ask product engineers a simple question: why not now? And, provided the "why not" doesn't include some kind of critical problem (security, compliance, privacy, etc) the default should be to always ship something as early as possible. 
 

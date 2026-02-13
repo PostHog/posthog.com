@@ -5,7 +5,7 @@ showTitle: true
 
 Product engineers fundamentally reshape the way product teams work.
 
-In a traditional product team, engineers often take direction from product managers, who gather requirements from stakeholders (i.e. sales teams, founders, customers), prioritize work, and create rigid plans for delivery.
+In a traditional product team, engineers often take direction from [product managers](/blog/product-engineer-vs-product-manager), who gather requirements from stakeholders (i.e. sales teams, founders, customers), prioritize work, and create rigid plans for delivery.
 
 This isn't a great system for giving engineers autonomy – it's literally designed to hem them in. Often product managers exist to control engineers, or shield them from organizational dysfunction. Not because they want to, but because execs think it's necessary.
 
@@ -17,7 +17,7 @@ The result is a maze of half-baked features, and it’s just plain slow. PMs bec
 
 ## 1. Engineers own product decisions
 
-This is the most important principle. At PostHog, PMs don't own the roadmap, make product decisions, or shield engineers from users, or the wider business goals.
+This is the most important principle. At PostHog, PMs don't own the roadmap, make product decisions, or shield engineers from users or the wider business goals.
 
 Instead, product engineers manage product teams. They have complete autonomy. They [talk to users](/newsletter/talk-to-users), [decide how to prioritize the roadmap](/newsletter/how-we-decide-what-to-build), and are ultimately responsible for the impact of their decisions on the business – i.e. revenue, user satisfaction, and retention.
 
@@ -43,17 +43,17 @@ One way they do this at PostHog is by owning growth reviews. Growth reviews exis
 
 They then compile it, put it together in an easy-to-understand format, and conduct a deep dive highlighting interesting findings we should discuss further.
 
-The PM, engineers and exec team then meet to discuss questions like:
+The PM, engineers, and exec team then meet to discuss questions like:
 
 - Are our 10 biggest customers happy users of the product?
-- Do high [ICP](/newsletter/ideal-customer-profile-framework) and non-ICP customers use the product differently?
+- Do [ICP](/newsletter/ideal-customer-profile-framework) and non-ICP customers use the product differently?
 - Why was churn high last month? Can we identify any reasons?
 - Can we find leading indicators that predict long-term product usage?
 - Where in the [onboarding funnel](/blog/how-to-find-and-fix-app-onboarding-drop-off) do new users struggle?
 
 This paints a full picture of how the team and product are doing. It’s then up to the product team lead (an engineer) to decide if the team should continue on their course, or if something needs to change.
 
-They can choose to reprioritize their projects, change their goals, or come up with new projects entirely. It’s the job of the senior leader and product manager to challenge assumptions, ask hard questions, but decisions are driven by the engineers building the product.
+They can choose to reprioritize their projects, [change their goals](/newsletter/quarterly-planning-mistakes), or come up with new projects entirely. It’s the job of the senior leader and product manager to challenge assumptions, ask hard questions, but decisions are driven by the engineers building the product.
 
 This creates a healthy tension. Engineers maintain their autonomy in decision-making, but there's a clear feedback loop to ensure those decisions are delivering real value. Without this accountability, autonomy can become directionless.
 
