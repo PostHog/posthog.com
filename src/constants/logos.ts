@@ -91,6 +91,7 @@ export const LOGOS = {
     postgres: 'https://res.cloudinary.com/dmukukwp6/image/upload/Postgresql_elephant_f6157ebdd3.svg',
     pydanticAI: 'https://res.cloudinary.com/dmukukwp6/image/upload/pydantic_ai_55029bc39b.svg',
     python: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg',
+    rails: 'https://res.cloudinary.com/dmukukwp6/image/upload/rails_581d31c82d.svg',
     railway: 'https://res.cloudinary.com/dmukukwp6/image/upload/logo_dark_f8e870867f.svg',
     react: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg',
     redshift: 'https://res.cloudinary.com/dmukukwp6/image/upload/Amazon_Redshift_Logo_fbd926efbc.svg',
