@@ -2079,6 +2079,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     experience: newExperience,
                 })
 
+                posthog?.capture('switched site mode', {
+                    value: newExperience === 'posthog' ? 'os' : 'website',
+                    source: 'keyboard',
+                })
+
                 // Add toast notification
                 addToast({
                     description: `Switched to ${newExperience === 'posthog' ? 'OS mode' : 'website mode'}`,

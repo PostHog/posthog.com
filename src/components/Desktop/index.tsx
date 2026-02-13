@@ -15,6 +15,7 @@ import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 declare global {
     interface Window {
@@ -32,6 +33,7 @@ interface Product {
 export const useProductLinks = () => {
     const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
     const { addToast } = useToast()
+    const posthog = usePostHog()
 
     return [
         {
@@ -107,6 +109,10 @@ export const useProductLinks = () => {
             Icon: <AppIcon name="switch" />,
             onClick: () => {
                 updateSiteSettings({ ...siteSettings, experience: 'boring' })
+                posthog?.capture('switched site mode', {
+                    value: 'website',
+                    source: 'desktop',
+                })
                 addToast({
                     title: 'Switched to website mode',
                     description: 'Hover the logo to return to OS mode.',

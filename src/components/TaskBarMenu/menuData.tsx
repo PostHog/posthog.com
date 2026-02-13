@@ -30,6 +30,7 @@ import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 interface DocsMenuItem {
     name: string
@@ -326,6 +327,7 @@ export function useMenuData(): MenuType[] {
         updateSiteSettings,
     } = useApp()
     const { addToast } = useToast()
+    const posthog = usePostHog()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -756,7 +758,12 @@ export function useMenuData(): MenuType[] {
                       type: 'item' as const,
                       label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
                       onClick: () => {
-                          updateSiteSettings({ ...siteSettings, experience: websiteMode ? 'posthog' : 'boring' })
+                          const newExperience = websiteMode ? 'posthog' : 'boring'
+                          updateSiteSettings({ ...siteSettings, experience: newExperience })
+                          posthog?.capture('switched site mode', {
+                              value: newExperience === 'posthog' ? 'os' : 'website',
+                              source: 'menu',
+                          })
                           addToast({
                               title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
                               description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
