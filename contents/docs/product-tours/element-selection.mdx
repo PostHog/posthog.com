@@ -8,17 +8,17 @@ import Alpha from './_snippets/alpha.mdx'
 
 <Alpha />
 
-PostHog provides two ways to target specific webpage elements for Product Tours: **auto** and **manual**.
+PostHog provides two ways to target specific webpage elements for Product Tours: **Auto** and **CSS selector**.
 
 ## TL;DR
 
-By default, we use a robust **automatic element targeting** algorithm to find your elements. This is the recommended approach, but may need some configuration tweaks depending on your app.
+By default, we use a robust **Auto** element targeting algorithm to find your elements. This is the recommended approach, but may need some configuration tweaks depending on your app.
 
-If you prefer, you can swap to **manual element targeting**, and provide a CSS selector for us to use for finding tour elements.
+If you prefer, you can swap to **CSS selector** targeting, and provide a CSS selector for us to use for finding tour elements.
 
-## Automatic element targeting
+## Auto targeting
 
-Automatic targeting is the default for all tour steps. This is the recommended option for most cases, but read on to learn when it may not work, or when you may need to tweak its configuration.
+Auto targeting is the default for all tour steps. This is the recommended option for most cases, but read on to learn when it may not work, or when you may need to tweak its configuration.
 
 When you select an element, we collect information such as CSS class names and other attributes so we can reliably find it again later.
 
@@ -33,13 +33,13 @@ This process has proven to be more robust than simply building a single CSS sele
 
 However, it won't always be perfect, so we provide some controls to help in case your tours match unexpected elements.
 
-### Dynamic text
+### Text matching
 
-By default, automatic element targeting uses the element's text as a targeting attribute. For elements with static text, this results in reliable element selection.
+By default, Auto targeting uses the element's text as a targeting attribute. For elements with static text, this results in reliable element selection.
 
-However, if your elements have dynamic text, such as a button that says `"Hello, {first_name}!"`, you should toggle on **Dynamic text** to prevent PostHog from attempting to find the element using its text value.
+However, if your elements have dynamic text, such as a button that says `"Hello, {first_name}!"`, you should set **Text matching** to **Dynamic** to prevent PostHog from attempting to find the element using its text value.
 
-### Targeting precision
+### Precision
 
 If you experience tours failing to find elements (or finding the wrong ones), you can tweak the precision for those elements.
 
@@ -52,10 +52,10 @@ Under the hood, here's how it works:
 
 Generally speaking, a precision of 0 is not recommended unless your tour has other conditions to help prevent matching the wrong elements, such as specific URL targeting.
 
-## Manual element targeting
+## CSS selector targeting
 
-If automatic selection does not work, or you want to guarantee your tours never match the wrong elements, we recommend using **manual** targeting.
+If Auto targeting does not work, or you want to guarantee your tours never match the wrong elements, we recommend using **CSS selector** targeting.
 
-With manual targeting, you simply provide a CSS selector like `[data-attr="dashboard-button"]`, and we'll use that at tour runtime to find your element.
+With CSS selector targeting, you simply provide a CSS selector like `[data-attr="dashboard-button"]`, and we'll use that at tour runtime to find your element.
 
-You should **not use manual targeting** if your element(s) only have selectors that generic, such as class names repeated throughout the page.
+You should **not use CSS selector targeting** if your element(s) only have selectors that are generic, such as class names repeated throughout the page.
