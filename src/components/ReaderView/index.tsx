@@ -973,7 +973,7 @@ function ReaderViewContent({
                                         transition: { duration: 0.05 },
                                     }}
                                 >
-                                    <ScrollArea className={websiteMode ? 'pl-2' : 'px-2'} fadeOverflow>
+                                    <ScrollArea className={websiteMode ? 'pr-4 pl-2' : 'px-2'} fadeOverflow>
                                         {tableOfContents && tableOfContents?.length > 0 && (
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
