@@ -10,11 +10,14 @@ Almost all PRs made to PostHog repositories will need a review from another engi
 
 The best way to get a fast, useful review is to make your PR easy to review.
 
-  - **Self-review your own diff first.** Read through it as if you're seeing it for the first time. You'll catch obvious issues before someone else has to.
+  - **Keep PRs small.** If your change touches many files or mixes unrelated concerns, break it into a stack of smaller PRs. Smaller PRs get reviewed faster and reviewed better.
+  - **Open a draft PR.** This keeps notifications quiet and lets you iterate without pinging reviewers.
+  - **Add AI reviewers** (e.g. Copilot) and resolve their comments. Iterate until they're only leaving nit-level feedback.
+  - **Self-review your own diff.** Read through it as if you're seeing it for the first time. You'll catch obvious issues before someone else has to.
   - **Write a clear description.** Explain what the change does and why. Link the issue. If there's context a reviewer needs, put it in the description — don't make them guess.
   - **Add screenshots or GIFs for UI changes.** A reviewer shouldn't have to pull the branch and navigate to the right page just to see what a button looks like.
-  - **Keep PRs small.** If your change touches many files or mixes unrelated concerns, break it into a stack of smaller PRs. Smaller PRs get reviewed faster and reviewed better.
   - **Make sure CI is green.** Don't ask someone to spend time reviewing code that doesn't pass checks.
+  - **Mark it ready for review.**
 
 ## Have a flick through the code changes
 
