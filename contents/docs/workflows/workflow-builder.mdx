@@ -21,6 +21,21 @@ Workflows are composed of the following components:
 | [Audience splits](#audience-splits) | Target and split your users so you can automate some action for them or send a message with more specificity. |
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
 
+## Draft and enabled workflows
+
+Workflows have two states: **draft** and **enabled**.
+
+| State | Description |
+|-------|-------------|
+| Draft | A work-in-progress workflow that isn't active. You can save drafts with incomplete or invalid configurations. |
+| Enabled | An active workflow that runs when triggered. Full validation is required before enabling. |
+
+When building a workflow, you can save your progress at any time as a draft, even if the configuration is incomplete or has errors. This lets you iteratively build complex workflows without needing a complete, valid configuration at every save.
+
+Validation is only enforced when you enable a workflow. Before enabling, PostHog checks that all required fields are filled and configurations are valid. If there are errors, you'll see a message prompting you to fix them before the workflow can be enabled.
+
+Draft workflows can also be archived, even if they contain invalid configurations.
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are two types of triggers:
