@@ -187,7 +187,7 @@ ORDER BY current_url_count DESC
 
 ### LIMIT
 
-Use `LIMIT` to restrict the number of rows returned by the query. It specifies the maximum number of rows the query should retrieve. By default, PostHog sets it at `100`.
+Use `LIMIT` to restrict the number of rows returned by the query. It specifies the maximum number of rows the query should retrieve. By default, PostHog sets it at `2000`.
 
 ```sql
 SELECT 
@@ -210,7 +210,7 @@ ORDER BY count(*) DESC
 LIMIT 50 OFFSET 100
 ```
 
-> **Note:** SQL insights default to a `LIMIT 100`. If you're adding the insight to a dashboard or using longer date ranges, consider explicitly increasing the limit to ensure all relevant data is shown.
+> **Note:** SQL insights default to a `LIMIT 2000`. If you're adding the insight to a dashboard or using longer date ranges, you can adjust this limit with your own `LIMIT` clause.
 
 ### HAVING
 
