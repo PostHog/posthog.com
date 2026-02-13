@@ -1,5 +1,7 @@
 ;(function () {
     try {
+        const websiteMode = JSON.parse(localStorage.getItem('siteSettings') || '{}').experience === 'boring'
+        if (websiteMode) return
         const LOADING_MESSAGES = [
             'Booting the PostHog.com experience',
             'Sourcing and transforming nodes',
