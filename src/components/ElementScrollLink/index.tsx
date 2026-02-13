@@ -110,7 +110,8 @@ export default function ElementScrollLink({ id, label, element, className = '', 
             })
         } else {
             // Standard window scrolling fallback (used in website mode or when no viewport exists)
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset
+            // Offset by 49px to account for fixed menu height
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 49
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth',
