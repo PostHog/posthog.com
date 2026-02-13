@@ -2230,7 +2230,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Rails',
-                            url: '/docs/libraries/rails',
+                            url: '/docs/libraries/ruby-on-rails',
                         },
                         {
                             name: 'React Router',
@@ -4237,7 +4237,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Rails',
-                            url: '/docs/error-tracking/installation/rails',
+                            url: '/docs/error-tracking/installation/ruby-on-rails',
                         },
                         {
                             name: 'React',

@@ -1,11 +1,11 @@
 ---
-title: Rails
+title: Ruby on Rails
 platformLogo: rails
 ---
 
 import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
 
-PostHog makes it easy to get data about traffic and usage of your Rails app. Integrating PostHog enables analytics, custom events capture, feature flags, and automatic exception tracking.
+PostHog makes it easy to get data about traffic and usage of your Ruby on Rails app. Integrating PostHog enables analytics, custom events capture, feature flags, and automatic exception tracking.
 
 This guide walks you through integrating PostHog into your Rails app using the [posthog-rails gem](https://github.com/PostHog/posthog-ruby/tree/main/posthog-rails).
 
@@ -49,18 +49,6 @@ This creates `config/initializers/posthog.rb` with sensible defaults and documen
 The generated initializer includes all available options:
 
 ```ruby file=config/initializers/posthog.rb
-# Rails-specific configuration
-PostHog::Rails.configure do |config|
-  config.auto_capture_exceptions = true           # Enable automatic exception capture
-  config.report_rescued_exceptions = true         # Report exceptions Rails rescues
-  config.auto_instrument_active_job = true        # Instrument background jobs
-  config.capture_user_context = true              # Include user info in exceptions
-  config.current_user_method = :current_user      # Method to get current user
-
-  # Add additional exceptions to ignore
-  config.excluded_exceptions = ['MyCustomError']
-end
-
 # Core PostHog client initialization
 PostHog.init do |config|
   # Required: Your PostHog API key
@@ -72,10 +60,22 @@ PostHog.init do |config|
   # Optional: Personal API key for feature flags
   config.personal_api_key = 'phx_xxxxxxxxx'
 
-  # Error callback
+  # Error callback to detect misconfiguration
   config.on_error = proc { |status, msg|
     Rails.logger.error("PostHog error: #{msg}")
   }
+end
+
+# Rails-specific configuration
+PostHog::Rails.configure do |config|
+  config.auto_capture_exceptions = true           # Enable automatic exception capture
+  config.report_rescued_exceptions = true         # Report exceptions Rails rescues
+  config.auto_instrument_active_job = true        # Instrument background jobs
+  config.capture_user_context = true              # Include user info in exceptions
+  config.current_user_method = :current_user      # Method to get current user
+
+  # Add additional exceptions to ignore
+  config.excluded_exceptions = ['MyCustomError']
 end
 ```
 
@@ -124,7 +124,7 @@ PostHog.identify(
 
 ## Error tracking
 
-For full details on setting up error tracking with Rails, see our [Rails error tracking installation guide](/docs/error-tracking/installation/rails).
+For full details on setting up error tracking with Rails, see our [Rails error tracking installation guide](/docs/error-tracking/installation/ruby-on-rails).
 
 ### Automatic exception tracking
 
