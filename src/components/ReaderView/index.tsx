@@ -28,6 +28,9 @@ import Slider from 'components/RadixUI/Slider'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
+import * as PostHogIcons from '@posthog/icons'
+import * as OSIcons from '../OSIcons/Icons'
+import { getLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
@@ -419,6 +422,31 @@ export default function ReaderView({
     )
 }
 
+const sortAlpha = (items: MenuItem[]): MenuItem[] =>
+    [...items].sort((a, b) => (a.name === 'Overview' ? -1 : b.name === 'Overview' ? 1 : a.name.localeCompare(b.name)))
+
+const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): MenuItem[] | undefined => {
+    return items?.map((item) => {
+        let icon = item.icon
+        if (resolveIcons) {
+            if (item.platformLogo) {
+                const url = getLogo(item.platformLogo)
+                if (url) icon = <img src={url} className="size-full" />
+            } else if (typeof icon === 'string') {
+                const IconComponent = (PostHogIcons as any)[icon] || (OSIcons as any)[icon]
+                if (IconComponent) icon = <IconComponent className="size-full" />
+            }
+        }
+        const shouldShowChildrenIcons = item.showChildrenIcons || resolveIcons
+        const children = item.sortChildrenAlpha && item.children ? sortAlpha(item.children) : item.children
+        return {
+            ...item,
+            ...(resolveIcons ? { icon } : {}),
+            children: children ? resolveMenuIcons(children, shouldShowChildrenIcons) : undefined,
+        }
+    })
+}
+
 const Menu = (props: { parent: MenuItem }) => {
     const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
 
@@ -456,7 +484,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 }}
                 dataScheme="primary"
             />
-            <TreeMenu key={activeInternalMenu?.url} items={activeInternalMenu?.children} />
+            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(activeInternalMenu?.children)} />
         </>
     )
 }

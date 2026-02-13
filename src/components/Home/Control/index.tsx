@@ -42,6 +42,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
+import { RenderInClient } from 'components/RenderInClient'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -1046,7 +1047,45 @@ const Customers = () => {
     )
 }
 
+function TaglineControl(): JSX.Element {
+    return (
+        <p className="text-base font-medium">
+            We make dev tools that help product engineers build successful products.
+        </p>
+    )
+}
+
+function TaglineExperiment(): JSX.Element {
+    return (
+        <div className="my-4 max-w-[650px]">
+            <h1 className="!m-0">
+                Make sense of how people use your product – <em>and how to make it better</em>
+            </h1>
+            <p className="!m-0 !mt-2 font-medium">PostHog has all the tools you need to build great products.</p>
+        </div>
+    )
+}
+
+function Tagline(): JSX.Element {
+    const posthog = usePostHog()
+
+    return (
+        <RenderInClient
+            placeholder={null}
+            render={() =>
+                posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
+            }
+        />
+    )
+}
+
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
+    {
+        name: 'Tagline',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Tagline />,
+    },
     {
         name: 'AppCount',
         kind: 'flow',
