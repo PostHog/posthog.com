@@ -3,6 +3,7 @@ import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import People from 'components/People'
+import Link from 'components/Link'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { graphql, useStaticQuery } from 'gatsby'
 
@@ -16,7 +17,16 @@ const PeoplePage = () => {
         value: '/people',
         content: (
             <div className="max-w-screen-6xl mx-auto">
-                <h1>People</h1>
+                <div className="flex flex-col gap-3 @[48rem]:flex-row @[48rem]:items-center @[48rem]:justify-between mb-6">
+                    <h1 className="mb-0">People</h1>
+                    <Link
+                        to="/map"
+                        className="inline-flex items-center gap-1 text-primary font-semibold hover:underline"
+                    >
+                        Explore the team map
+                        <span aria-hidden="true">→</span>
+                    </Link>
+                </div>
                 <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
             </div>
         ),

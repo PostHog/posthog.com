@@ -536,6 +536,11 @@ export function useMenuData(): MenuType[] {
                     link: '/people',
                 },
                 {
+                    type: 'item',
+                    label: 'People map',
+                    link: '/map',
+                },
+                {
                     type: 'submenu',
                     label: 'Small teams',
                     items: smallTeamsMenuItems,
