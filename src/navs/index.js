@@ -115,6 +115,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/tiktok-ads',
                 },
                 {
+                    name: 'Snapchat Ads',
+                    url: '/docs/cdp/sources/snapchat-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -2225,6 +2229,10 @@ export const docsMenu = {
                             url: '/docs/libraries/phoenix',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/libraries/ruby-on-rails',
+                        },
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
@@ -4228,6 +4236,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/ruby',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/error-tracking/installation/ruby-on-rails',
+                        },
+                        {
                             name: 'React',
                             url: '/docs/error-tracking/installation/react',
                         },
@@ -4841,6 +4853,10 @@ export const docsMenu = {
                         {
                             name: 'Tiktok Ads',
                             url: '/docs/data-warehouse/sources/tiktok-ads',
+                        },
+                        {
+                            name: 'Snapchat Ads',
+                            url: '/docs/data-warehouse/sources/snapchat-ads',
                         },
                         {
                             name: 'Shopify',
