@@ -90,9 +90,10 @@ This doesn't mean "randomly hassle X who works at PostHog for an intro to Y" –
 
 ## Moar reading
 
-- Got the interview? [Here are the questions](/founders/what-to-ask-in-interviews) you should be asking. 
+- Got the interview? [Here are the questions](/founders/what-to-ask-in-interviews) you should be asking.
 - [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
 - A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
 - How do you make your [first ops hire](/founders/first-ops-hire)?
+- See [how we run our hiring process](/handbook/people/hiring-process) at PostHog
 
 <NewsletterForm />
