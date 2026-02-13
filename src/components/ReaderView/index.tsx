@@ -220,6 +220,68 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
     )
 }
 
+const EditOnGitHubButton = ({ filePath, sourceInstanceName }: { filePath?: string; sourceInstanceName?: string }) => {
+    if (!filePath) {
+        return null
+    }
+
+    return (
+        <OSButton
+            asLink
+            to={`https://github.com/PostHog/${
+                sourceInstanceName === 'posthog-main-repo' ? 'posthog/blob/master' : 'posthog.com/blob/master/contents'
+            }/${filePath}`}
+            icon={<IconPencil />}
+        />
+    )
+}
+
+const EditHistoryPopover = ({ commits }: { commits: any[] }) => {
+    if (!commits?.length || commits.length === 0) {
+        return null
+    }
+
+    return (
+        <Popover
+            trigger={
+                <span>
+                    <OSButton icon={<IconClockRewind />} />
+                </span>
+            }
+            title="Edit history"
+            dataScheme="secondary"
+            contentClassName="w-[260px]"
+        >
+            <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
+                {commits
+                    .filter((commit) => !!commit.author)
+                    .map((commit) => (
+                        <li key={commit.url} className="flex gap-2 justify-between items-center">
+                            <Link to={commit.author.html_url} className="flex items-center gap-2" externalNoIcon>
+                                <div>
+                                    <div className="size-7 bg-accent rounded-full relative">
+                                        <img
+                                            src={commit.author.avatar_url}
+                                            alt={commit.author.login}
+                                            className="size-full rounded-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                <p className="text-sm m-0">{commit.author.login}</p>
+                            </Link>
+                            <div className="flex items-center gap-2">
+                                <p className="text-xs opacity-60 m-0">{dayjs(commit.date).fromNow()}</p>
+                                <Link to={commit.url} externalNoIcon>
+                                    <IconPullRequest className="size-4" />
+                                </Link>
+                            </div>
+                        </li>
+                    ))}
+            </ul>
+        </Popover>
+    )
+}
+
 const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
     const { fullWidthContent, setFullWidthContent, setBackgroundImage, backgroundImage } = useReaderView()
 
@@ -933,17 +995,17 @@ function ReaderViewContent({
                     }`}
                 >
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${websiteMode ? 'pr-4 box-content' : ''} ${
-                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 transition-all min-w-0 ${
+                            websiteMode ? 'pr-4 box-content bg-primary' : ''
+                        } ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'}`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
                     {!compact && (
                         <div
-                            className={`flex-grow flex justify-between items-center text-primary p-2 ${
-                                websiteMode && renderLeftSidebar && isNavVisible ? 'border-l border-primary' : ''
-                            }`}
+                            className={`flex-grow flex justify-between items-center text-primary p-2 border-primary ${
+                                websiteMode && renderLeftSidebar && isNavVisible ? 'border-l' : ''
+                            } ${websiteMode && showSidebar && isTocVisible ? 'border-r' : ''}`}
                         >
                             <div>
                                 <p className="m-0 text-sm">
@@ -978,7 +1040,7 @@ function ReaderViewContent({
                                     .
                                 </p>
                             </div>
-                            {body?.type === 'mdx' && (
+                            {body?.type === 'mdx' && !websiteMode && (
                                 <div>
                                     <AppOptionsButton
                                         lineHeightMultiplier={lineHeightMultiplier}
@@ -991,66 +1053,12 @@ function ReaderViewContent({
                     <motion.div
                         className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 p-2 ${
                             showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        } ${websiteMode && showSidebar && isTocVisible ? '@6xl:bg-primary pl-0 box-content' : ''}`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         <ConditionalMarkdownDropdown pageUrl={appWindow?.path} />
-                        {filePath && (
-                            <OSButton
-                                asLink
-                                to={`https://github.com/PostHog/${
-                                    sourceInstanceName === 'posthog-main-repo'
-                                        ? 'posthog/blob/master'
-                                        : 'posthog.com/blob/master/contents'
-                                }/${filePath}`}
-                                icon={<IconPencil />}
-                            />
-                        )}
-                        {commits?.length && commits.length > 0 && (
-                            <Popover
-                                trigger={
-                                    <span>
-                                        <OSButton icon={<IconClockRewind />} />
-                                    </span>
-                                }
-                                title="Edit history"
-                                dataScheme="secondary"
-                                contentClassName="w-[260px]"
-                            >
-                                <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
-                                    {commits
-                                        .filter((commit) => !!commit.author)
-                                        .map((commit) => (
-                                            <li key={commit.url} className="flex gap-2 justify-between items-center">
-                                                <Link
-                                                    to={commit.author.html_url}
-                                                    className="flex items-center gap-2"
-                                                    externalNoIcon
-                                                >
-                                                    <div>
-                                                        <div className="size-7 bg-accent rounded-full relative">
-                                                            <img
-                                                                src={commit.author.avatar_url}
-                                                                alt={commit.author.login}
-                                                                className="size-full rounded-full object-cover"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <p className="text-sm m-0">{commit.author.login}</p>
-                                                </Link>
-                                                <div className="flex items-center gap-2">
-                                                    <p className="text-xs opacity-60 m-0">
-                                                        {dayjs(commit.date).fromNow()}
-                                                    </p>
-                                                    <Link to={commit.url} externalNoIcon>
-                                                        <IconPullRequest className="size-4" />
-                                                    </Link>
-                                                </div>
-                                            </li>
-                                        ))}
-                                </ul>
-                            </Popover>
-                        )}
+                        <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
+                        <EditHistoryPopover commits={commits} />
                     </motion.div>
                 </div>
             </div>
