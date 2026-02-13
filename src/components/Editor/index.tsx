@@ -586,16 +586,11 @@ export function Editor({
                                             <span className="text-sm font-bold">{filter.label}</span>
                                             <span className="italic">{filter.operator}</span>
                                             <Select
-                                                key={`${Object.keys(filters).length}-${filter.label}`}
+                                                key={`${filter.label}-${index}`}
                                                 disabled={disableFilterChange}
                                                 placeholder={filter.label}
-                                                defaultValue={
-                                                    filter.initialValue === null
-                                                        ? null
-                                                        : filter.initialValue ??
-                                                          filters[filter.value ?? filter.label]?.value ??
-                                                          filter.options[0].value
-                                                }
+                                                defaultValue={filter.initialValue ?? filter.options?.[0]?.value}
+                                                value={filters[filter.value ?? filter.label]?.value}
                                                 groups={[
                                                     {
                                                         label: '',
