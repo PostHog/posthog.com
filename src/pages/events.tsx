@@ -332,7 +332,9 @@ function Events() {
                 >
                     <aside
                         data-scheme="secondary"
-                        className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
+                        className={`basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col ${
+                            websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'
+                        }`}
                     >
                         <div className="border-b border-primary px-4 pt-4 pb-4">
                             <ToggleGroup

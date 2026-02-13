@@ -623,8 +623,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className={`w-64 h-full bg-primary ${
-                                websiteMode ? 'sticky top-[48px]' : 'border-r border-primary'
+                            className={`@3xl:w-64 w-full bg-primary  @3xl:border-r border-t @3xl:border-t-0 border-primary ${
+                                websiteMode ? 'sticky top-[48px] @3xl:h-[calc(100vh-48px)]' : 'h-full'
                             }`}
                         >
                             <ScrollArea className={`p-2`}>
