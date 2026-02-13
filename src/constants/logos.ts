@@ -115,6 +115,7 @@ export const LOGOS = {
     shopify: 'https://res.cloudinary.com/dmukukwp6/image/upload/shopify_glyph_5a3ad7459b.svg',
     smolagents: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/smolagents_logo_1_545072ae17.png',
     slack: 'https://res.cloudinary.com/dmukukwp6/image/upload/Symbol_1_ac11ac22f6.svg',
+    snapchatAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/snapchat_c8237bb4a1.png',
     snowflake: 'https://res.cloudinary.com/dmukukwp6/image/upload/snowflake_color_517158afd5.svg',
     sqlDatabase: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
     stripe: 'https://res.cloudinary.com/dmukukwp6/image/upload/Stripe_Logo_revised_2016_24183d3284.svg',
