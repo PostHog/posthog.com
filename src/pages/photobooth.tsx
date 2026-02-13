@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import { useInView } from 'react-intersection-observer'
-import { toJpeg } from 'html-to-image'
+import { toJpeg, getFontEmbedCSS } from 'html-to-image'
 import { IconDownload } from '@posthog/icons'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
@@ -796,17 +796,31 @@ const FinalPhotoStrip = ({
     const ref = useRef<HTMLDivElement>(null)
     const [downloading, setDownloading] = useState(false)
 
-    const handleDownload = async () => {
-        setDownloading(true)
-        const dataURL = await toJpeg(ref.current, {
+    const getDataURL = async () => {
+        if (!ref.current) return
+        let fontEmbedCSS = ''
+        try {
+            fontEmbedCSS = await getFontEmbedCSS(ref.current)
+        } catch {
+            console.error('Failed to get font embed CSS')
+        }
+        return toJpeg(ref.current, {
             quality: 1,
             backgroundColor: 'white',
+            fontEmbedCSS,
         })
-        const link = document.createElement('a')
-        link.download = `posthog_photobooth.jpeg`
-        link.href = dataURL
-        link.click()
-        link.remove()
+    }
+
+    const handleDownload = async () => {
+        setDownloading(true)
+        const dataURL = await getDataURL()
+        if (dataURL) {
+            const link = document.createElement('a')
+            link.download = `posthog_photobooth.jpeg`
+            link.href = dataURL
+            link.click()
+            link.remove()
+        }
         setDownloading(false)
     }
     return (
@@ -826,13 +840,9 @@ const FinalPhotoStrip = ({
                         rotate: -10,
                         scale: 0.9,
                     }}
-                    onAnimationComplete={() => {
-                        toJpeg(ref.current, {
-                            quality: 1,
-                            backgroundColor: 'white',
-                        }).then((dataURL) => {
-                            onImageReady(dataURL)
-                        })
+                    onAnimationComplete={async () => {
+                        const dataURL = await getDataURL()
+                        if (dataURL) onImageReady(dataURL)
                     }}
                     animate={{
                         opacity: 1,
@@ -887,17 +897,31 @@ const Card = ({
     const [downloading, setDownloading] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
 
-    const handleDownload = async () => {
-        setDownloading(true)
-        const dataURL = await toJpeg(cardRef.current, {
+    const getDataURL = async () => {
+        if (!cardRef.current) return
+        let fontEmbedCSS = ''
+        try {
+            fontEmbedCSS = await getFontEmbedCSS(cardRef.current)
+        } catch {
+            console.error('Failed to get font embed CSS')
+        }
+        return toJpeg(cardRef.current, {
             quality: 1,
             backgroundColor: 'white',
+            fontEmbedCSS,
         })
-        const link = document.createElement('a')
-        link.download = `${name}.jpeg`
-        link.href = dataURL
-        link.click()
-        link.remove()
+    }
+
+    const handleDownload = async () => {
+        setDownloading(true)
+        const dataURL = await getDataURL()
+        if (dataURL) {
+            const link = document.createElement('a')
+            link.download = `${name}.jpeg`
+            link.href = dataURL
+            link.click()
+            link.remove()
+        }
         setDownloading(false)
     }
 
