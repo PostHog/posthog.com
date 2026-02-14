@@ -9,11 +9,11 @@ import { cn } from '../../../utils'
 import Link from 'components/Link'
 
 const replaceMentions = (body: string) => {
-    return body.replace(/@([a-zA-Z0-9_-]+\/[0-9]+|max)/g, (match, username) => {
-        if (username === 'max') {
+    return body.replace(/@((?:[^\s@/]+)\/([0-9]+)|max)/g, (match, full, id) => {
+        if (full === 'max') {
             return `[${match}](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
         }
-        return `[${match}](/community/profiles/${username.split('/')[1]})`
+        return `[${match}](/community/profiles/${id})`
     })
 }
 

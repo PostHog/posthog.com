@@ -200,14 +200,16 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
             exit={{ opacity: 0, translateX: '100%' }}
             className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
         >
-            <OSButton
-                type="button"
-                variant="default"
-                size="xs"
-                icon={<IconX className="w-3" />}
-                className="!p-1 rounded-full absolute top-0.5 right-0.5 z-20"
-                onClick={onClose}
-            />
+            <div className="absolute top-0.5 right-0.5 z-20">
+                <OSButton
+                    type="button"
+                    variant="default"
+                    size="xs"
+                    icon={<IconX />}
+                    className="!p-1 rounded-full bg-primary border border-primary"
+                    onClick={onClose}
+                />
+            </div>
             <ul
                 ref={listRef}
                 className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
