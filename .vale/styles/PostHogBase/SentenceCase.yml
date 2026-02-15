@@ -1,0 +1,7 @@
+extends: capitalization
+message: "'%s' should be in sentence case."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: warning
+scope: heading
+match: $sentence
+# Exceptions are loaded automatically from the PostHog vocabulary (accept.txt)
