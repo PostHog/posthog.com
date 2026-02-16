@@ -101,7 +101,7 @@ jobs:
 
                   # --- PR comment: header + collapsible per-file tables ---
                   {
-                    echo "[Vale lint →](https://posthog.com/handbook/docs-and-wizard/vale) ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestionss"
+                    echo "[Vale lint →](https://posthog.com/handbook/docs-and-wizard/vale) ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
                     echo ""
                     echo "[Full report →](${JOB_SUMMARY_URL}) Copy the linter results into an LLM to batch-fix issues."
                     echo ""
