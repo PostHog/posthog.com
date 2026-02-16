@@ -4,7 +4,6 @@ import { useApp } from '../../../context/App'
 import { IconCollapse45 } from '@posthog/icons'
 import { useWistiaThumbnail } from '../../../hooks/useWistiaThumbnail'
 import { PresentationModeContext } from '../../RadixUI/Tabs'
-import { useWindow } from '../../../context/Window'
 
 interface PostHogOnPostHogSlideProps {
     productData: {
@@ -40,89 +39,18 @@ const VideoPlayerWindow = ({ productData, startTime = 0 }: any) => {
 }
 
 export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogSlideProps) {
-    const { addWindow, siteSettings } = useApp()
-    const { appWindow } = useWindow()
+    const { addWindow } = useApp()
     const [isMaximized, setIsMaximized] = useState(false)
-    const [isThumbnail, setIsThumbnail] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const mainPlayerRef = useRef<any>(null)
-    const [isPortraitMode, setIsPortraitMode] = useState(false)
 
-    // Add context access
+    // Get thumbnail/presentation state from context
     const presentationContext = useContext(PresentationModeContext)
+    const isThumbnail = presentationContext.isThumbnail ?? false
+    const isPortraitMode = presentationContext.isPortrait ?? false
 
     // Add thumbnail fetching
     const { thumbnailUrl, isLoading: thumbnailLoading } = useWistiaThumbnail(productData.videos?.overview?.wistia || '')
-
-    // Determine portrait mode based on context and window size
-    useEffect(() => {
-        const checkPortraitMode = () => {
-            // Use context value if available (for presentation mode)
-            if (presentationContext.isPresenting && presentationContext.isPortrait !== undefined) {
-                setIsPortraitMode(presentationContext.isPortrait)
-                return
-            }
-
-            // For thumbnail mode, check container width
-            if (isThumbnail) {
-                const containerWidth =
-                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                        ? window.innerWidth
-                        : appWindow?.size?.width
-
-                // Below @2xl (672px) should show portrait thumbnails
-                setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
-                return
-            }
-
-            // Default to landscape
-            setIsPortraitMode(false)
-        }
-
-        checkPortraitMode()
-
-        // Listen for window resize to update portrait mode
-        const handleResize = () => {
-            checkPortraitMode()
-        }
-
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [presentationContext, appWindow, siteSettings, isThumbnail])
-
-    // Detect if we're rendered inside a thumbnail context
-    useEffect(() => {
-        const checkThumbnailMode = () => {
-            // Get the root element of this component using the ID we set
-            const rootElement = document.getElementById(`posthog-slide-${productData.videos?.overview?.wistia}`)
-
-            if (rootElement) {
-                const rect = rootElement.getBoundingClientRect()
-
-                // Thumbnails are typically much smaller than full slides
-                // Landscape thumbnails: ~192px wide, Portrait: ~128px wide
-                // Full slides are typically > 600px wide
-                if (rect.width > 0 && rect.width < 250) {
-                    console.log(`PostHogOnPostHogSlide: Detected thumbnail mode (width: ${rect.width}px)`)
-                    setIsThumbnail(true)
-                    return true
-                }
-            }
-            return false
-        }
-
-        // Check immediately
-        if (!checkThumbnailMode()) {
-            // If not detected immediately, check again after layout
-            const timer1 = setTimeout(checkThumbnailMode, 50)
-            const timer2 = setTimeout(checkThumbnailMode, 150)
-
-            return () => {
-                clearTimeout(timer1)
-                clearTimeout(timer2)
-            }
-        }
-    }, [productData.videos?.overview?.wistia])
 
     const handleMaximize = useCallback(() => {
         setIsMaximized(!isMaximized)
