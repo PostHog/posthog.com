@@ -72,19 +72,19 @@ This focuses outbound on accounts that are already engaged with the product (i.e
 
 ```mermaid
 graph LR
-    SF[Salesforce Accounts\nSSoT]
+    SF[Salesforce Accounts - SSoT]
     H[Harmonic API]
-    PG[Postgres\nbilling]
-    CH[ClickHouse\nproduct signals]
+    PG[Postgres]
+    CH[ClickHouse]
     Q[Qualification]
     CL[Clay]
-    LL[Lemlist\nsequencing]
+    LL[Lemlist]
 
-    H -- "enrichment\n(weekly)" --> SF
+    H -- "enrichment (weekly)" --> SF
     SF -- "accounts" --> Q
     PG -- "billing data" --> CH
     CH -- "usage & signals" --> Q
-    Q -- "qualified targets\n(daily)" --> CL
+    Q -- "qualified targets (daily)" --> CL
     CL -- "selected accounts" --> LL
 ```
 
