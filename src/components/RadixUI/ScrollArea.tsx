@@ -16,7 +16,6 @@ interface ScrollAreaProps {
 const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
     (
         {
-            // ADD React.forwardRef
             children,
             className = '',
             dataScheme,
