@@ -110,6 +110,19 @@ If the answer to any of the above questions is 'no' then it's likely that there 
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
 - In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
+### Performance Expectations for Technical Account Executives
+
+There are [cultural](handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance expections for TAEs relative to the annual commmission targets. 
+
+After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
+
+- You are under 80% of your annual quota, and
+- You have finished two consecutive quarters under 70% of your quarterly target
+
+These standards are likely to change as the TAE role evolves. Any changes will be reflected in the handbook. 
+
+Context will always matter in evaluating performance, and will be considered in any related conversation.
+
 ## How commission works - Technical Account Managers
 
 **General principles**
