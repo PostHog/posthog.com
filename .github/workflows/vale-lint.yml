@@ -1,0 +1,47 @@
+name: Vale lint prose
+
+on:
+    pull_request:
+        types:
+            - opened
+            - reopened
+            - synchronize
+
+permissions:
+    contents: read
+
+jobs:
+    vale:
+        name: Lint prose with Vale
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Install Vale
+              env:
+                  VALE_VERSION: '3.13.1'
+              run: |
+                  wget -q "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+                  tar -xzf "vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -C /usr/local/bin vale
+                  vale --version
+
+            - name: Get changed files and run Vale
+              run: |
+                  FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD -- '*.md' '*.mdx')
+                  if [ -z "$FILES" ]; then
+                    echo "No markdown files changed, skipping Vale"
+                    exit 0
+                  fi
+                  echo "Linting changed files:"
+                  echo "$FILES"
+                  OUTPUT=$(echo "$FILES" | xargs vale --output=JSON || true)
+                  echo "$OUTPUT" | jq -r '
+                    to_entries[] | .key as $file | .value[] |
+                    "\($file)\t\(.Line)\t\(.Span[0])\t\(.Line):\(.Span[0])  \(.Severity)  \(.Message)  [\(.Check)]\(if .Link != "" then "%0ALearn more: \(.Link)" else "" end)"
+                  ' | while IFS=$'\t' read -r file line col message; do
+                    echo "::notice file=${file},line=${line},col=${col}::${message}"
+                  done

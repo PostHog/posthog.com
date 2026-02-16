@@ -73,7 +73,6 @@ Postgres
 PostgreSQL
 PostHog
 RBAC
-REST
 SaaS
 SAML
 SDK
@@ -103,7 +102,13 @@ Vue
 WebSocket
 zsh
 
-# Brands and companeis 
+# Proper adjectives (nationalities, languages, etc.)
+American
+British
+[Ee]nglish
+European
+
+# Brands and companies
 ABsmartly
 Accoil
 ActiveCampaign
@@ -208,7 +213,7 @@ Heygen
 Hotjar
 HubSpot
 Hugging Face
-Inkeep
+InKeep
 Intercom
 Istio
 Iterable
