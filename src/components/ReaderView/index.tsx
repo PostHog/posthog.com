@@ -579,6 +579,7 @@ function ReaderViewContent({
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
+    const scrollAreaRef = useRef<HTMLDivElement>(null)
 
     // Check if this is a customer page and get customer key
     const isCustomerPage = appWindow?.path?.startsWith('/customers/')
@@ -652,6 +653,15 @@ function ReaderViewContent({
         }
     }, [appWindow?.path, hash])
 
+    useEffect(() => {
+        if (scrollAreaRef.current) {
+            scrollAreaRef.current.style.outline = 'none'
+            setTimeout(() => {
+                scrollAreaRef.current?.focus({ preventScroll: true })
+            }, 100)
+        }
+    }, [appWindow?.path])
+
     return (
         <SearchProvider>
             <div className="@container/app-reader w-full h-full flex flex-col">
@@ -682,7 +692,38 @@ function ReaderViewContent({
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
+                        ref={scrollAreaRef}
                         dataScheme="primary"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            // Allow keyboard scroll events to work
+                            const scrollableElement = e.currentTarget
+                            if (!scrollableElement) return
+
+                            const scrollAmount = 100
+                            switch (e.key) {
+                                case 'ArrowDown':
+                                    e.preventDefault()
+                                    scrollableElement.scrollTop += scrollAmount
+                                    break
+                                case 'ArrowUp':
+                                    e.preventDefault()
+                                    scrollableElement.scrollTop -= scrollAmount
+                                    break
+                                case 'PageDown':
+                                    e.preventDefault()
+                                    scrollableElement.scrollTop += window.innerHeight * 0.8
+                                    break
+                                case 'PageUp':
+                                    e.preventDefault()
+                                    scrollableElement.scrollTop -= window.innerHeight * 0.8
+                                    break
+                                case ' ':
+                                    e.preventDefault()
+                                    scrollableElement.scrollTop += window.innerHeight * 0.8
+                                    break
+                            }
+                        }}
                         className={`bg-primary border border-primary flex-grow  
                             ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:rounded-l' : 'border-l-0'}
                             ${
