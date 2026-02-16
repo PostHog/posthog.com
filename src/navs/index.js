@@ -4577,25 +4577,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting',
-                    url: '/docs/surveys/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/surveys/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Changelog',
-                    url: '/docs/surveys/changelog',
-                    icon: 'IconRocket',
-                    color: 'purple',
-                },
-                {
                     type: 'divider',
                 },
                 {
@@ -4613,6 +4594,37 @@ export const docsMenu = {
                     icon: 'IconUserPaths',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/surveys/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/surveys/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'SDK Feature Support',
+                    url: '/docs/surveys/sdk-feature-support',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/surveys/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
