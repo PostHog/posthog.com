@@ -1,11 +1,17 @@
 name: Vale lint prose
 
 on:
-    pull_request:
-        types:
-            - opened
-            - reopened
-            - synchronize
+    # pull_request:
+    #     types:
+    #         - opened
+    #         - reopened
+    #         - synchronize
+    workflow_dispatch:
+        inputs:
+            pr_number:
+                description: 'PR number to lint'
+                required: true
+                type: string
 
 permissions:
     contents: read
@@ -16,10 +22,27 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Get PR info
+              id: pr-info
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  if [ -n "${{ inputs.pr_number }}" ]; then
+                    PR_DATA=$(gh pr view ${{ inputs.pr_number }} --repo ${{ github.repository }} --json baseRefName,headRefName,headRefOid)
+                    echo "base_ref=$(echo "$PR_DATA" | jq -r '.baseRefName')" >> "$GITHUB_OUTPUT"
+                    echo "head_ref=$(echo "$PR_DATA" | jq -r '.headRefName')" >> "$GITHUB_OUTPUT"
+                    echo "head_sha=$(echo "$PR_DATA" | jq -r '.headRefOid')" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "base_ref=${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+                    echo "head_ref=${{ github.head_ref }}" >> "$GITHUB_OUTPUT"
+                    echo "head_sha=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+                  fi
+
             - name: Checkout code
               uses: actions/checkout@v6
               with:
                   fetch-depth: 0
+                  ref: ${{ steps.pr-info.outputs.head_sha }}
 
             - name: Install Vale
               env:
@@ -31,7 +54,7 @@ jobs:
 
             - name: Get changed files and run Vale
               run: |
-                  FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD -- '*.md' '*.mdx')
+                  FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ steps.pr-info.outputs.base_ref }}...HEAD -- '*.md' '*.mdx')
                   if [ -z "$FILES" ]; then
                     echo "No markdown files changed, skipping Vale"
                     exit 0
