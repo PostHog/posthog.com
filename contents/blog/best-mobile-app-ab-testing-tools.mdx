@@ -1,5 +1,5 @@
 ---
-date: 2023-12-04
+date: 2026-02-11
 title: The 9 best mobile app A/B testing tools
 rootPage: /blog
 featuredImage: >-
@@ -11,54 +11,85 @@ category: General
 tags:
   - Guides
   - Comparisons
+seo:
+    {
+        metaTitle: 'The best mobile app A/B testing tools, compared',
+        metaDescription: 'Compare the top mobile app A/B testing tools. See how PostHog, VWO, and more stack up for experimentation and optimization.',
+    }
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-A/B tests are a great way to confirm that your product changes have the intended effects. When it comes to mobile apps, there are many different A/B testing tools to choose from, but each one is built with a specific target audience in mind. In this guide, we’ll explore these options so that you can decide which is best for you.
+A/B tests are a great way to confirm that your product changes have the intended effects. When it comes to mobile apps, there are many different A/B testing tools to choose from, but each one is built with a specific target audience in mind.
+
+In this guide, we compare the 9 best mobile app A/B testing tools – from all-in-one platforms to specialized solutions – so you can find the right fit for your team.
+
+## What features do you need in a mobile app A/B testing tool?
+
+A good mobile A/B testing tool lets you experiment with changes to your app and measure their impact on real users – so you're shipping improvements, not guesses.
+
+Most solid tools include:
+
+- A/B and multivariate testing for comparing different variations
+- Statistical analysis to determine when results are significant
+- Mobile SDKs for iOS, Android, React Native, and Flutter
+- Integration with analytics to measure experiment impact on key metrics
+- Feature flags for safely rolling out changes to specific user segments
+
+More advanced tools go further with:
+
+- **Multi-armed bandit experiments** that automatically allocate traffic to the winning variation
+- **Holdout testing** to measure the long-term cumulative impact of your experiments
+- **Visual editors** for creating variations without code changes
+- **Server-side testing** for experiments that need to run on your backend
+- **Product analytics integration** so you can analyze experiment results alongside broader user behavior
+
+Here's how the most popular mobile app A/B testing tools compare:
 
 ## 1. PostHog
 
-- **Free tier:** <span className="text-green text-lg">✔</span>
-- **Open source:** <span className="text-green text-lg">✔</span>
-- **Transparent pricing:** <span className="text-green text-lg">✔</span>
-- **Includes product analytics:** <span className="text-green text-lg">✔</span>
-- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
 - **Best for:** Engineering and product teams
   
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
 
 ### What is PostHog?
 
-[PostHog](https://posthog.com) (that's us!) is an all-in-one platform built to help engineers create better products. It includes A/B testing **and** a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), and [surveys](/surveys).
+[PostHog](/) (that's us!) is an all-in-one developer platform built to help engineers create better products. It includes [experimentation](/experiments) **and** a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and an [AI](/ai) assistant.
+
+Because everything lives in a single platform, you can run an experiment, deploy it behind a feature flag, see how it impacts funnels or retention, and watch session replays of how users in each variant actually behave — without stitching together separate tools or juggling data exports.
 
 It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
-### Which platforms does PostHog support?
-
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **Web:** <span className="text-green text-lg">✔</span>
-- **Server:** <span className="text-green text-lg">✔</span>
-
-### How much does PostHog cost?
-
-PostHog has [transparent pricing](/pricing) based on the usage. It’s free to get started and completely free for the first 1 million A/B testing requests. After this free monthly allowance, you'll pay $0.0001/request, and requests cost progressively less the more you use. You can also set billing limits to ensure you don't get surprise bills. 
-
-While PostHog is open source, its A/B testing features aren't included in the open source release.
-
-> **Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
-
-## 2. VWO
-
-- **Free tier:** <span className="text-red text-lg">✖</span>
-- **Open source:** <span className="text-red text-lg">✖</span>
+- **Free tier:** <span className="text-red text-lg">✔</span>
+- **Open source:** <span className="text-red text-lg">✔</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
 - **Includes product analytics:** <span className="text-green text-lg">✔</span>
 - **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
+
+### Which platforms does PostHog support?
+
+| Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✔ |
+| Flutter | ✔ |
+| Web | ✔ |
+| Server | ✔ |
+
+### How much does PostHog cost?
+
+PostHog has [transparent pricing](/pricing) based on the usage. It's free to get started and completely free for the first 1 million A/B testing requests. After this free monthly allowance, you'll pay $0.0001/request, and requests cost progressively less the more you use. You can also set billing limits to ensure you don't get surprise bills. 
+
+**Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
+
+> #### Bottom line
+>
+> For teams looking for all the tools they need to experiment and improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to its generous free tier.
+
+## 2. VWO
+
 - **Best for:** Non-technical teams
 
 ![VWO mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/vwo-testing.png)
@@ -67,30 +98,35 @@ While PostHog is open source, its A/B testing features aren't included in the op
 
 [VWO](/blog/best-vwo-alternatives) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests and a visual editor. It's useful for non-technical users who need an easy-to-use interface to test in-app messaging and UI copy.
 
-It also offers product analytics, so you don't need a separate platform or integration to link your analytics data to your A/B test results.
+It also offers surveys and behavioral insights (heatmaps, session recordings), plus limited product analytics like funnels. However, its analytics capabilities are basic compared to dedicated tools – most teams will still want a separate product analytics platform for deeper analysis.
+
+- **Free tier:** <span className="text-red text-lg">✖</span> Free trial only
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Transparent pricing:** <span className="text-green text-lg">✖</span>
+- **Includes product analytics:** Limited
+- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
 
 ### Which platforms does VWO support?
 
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-green text-lg">✔</span>
-- **Web:** <span className="text-green text-lg">✔</span>
-- **Server:** <span className="text-green text-lg">✔</span>
+| Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✔ |
+| Flutter | ✔ |
+| Web | ✔ |
+| Server | ✔ |
 
 ### How much does VWO cost?
 
-VWO mobile app A/B tests starts at $1,526 per month for up to 10k users. This is billed annually, so it means an upfront cost of $18,312. Also note that this price is only for mobile A/B tests. If you want to include analytics in your package, prices start at an additional $15,936 per year.
+VWO uses custom, usage-based pricing based on Monthly Tracked Users (MTUs). Web testing, mobile app testing, server-side testing (feature experimentation), behavior analytics, and personalization are all separate products with their own pricing. VWO offers a 30-day free trial but no permanent free tier. You'll need to contact their sales team for a quote.
 
-Lastly, if you also want to run server-side tests, you also need to purchases a separate package. Prices for this start at $28,164 per year.
+> #### Bottom line
+>
+> VWO is great for marketing and product teams who want an easy-to-use visual editor for running experiments without coding. However, its pricing is opaque, and its analytics features are limited compared to dedicated product analytics tools.
 
 ## 3. Optimizely
 
-- **Free tier:** <span className="text-red text-lg">✖</span>
-- **Open source:** <span className="text-red text-lg">✖</span>
-- **Transparent pricing:** <span className="text-red text-lg">✖</span>
-- **Includes product analytics:** <span className="text-red text-lg">✖</span>
-- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
 - **Best for:** Marketing teams
 
 ![Optimizely mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/optimizely-testing.png)
@@ -101,26 +137,29 @@ Lastly, if you also want to run server-side tests, you also need to purchases a 
 
 It's built for marketers in large enterprises looking to optimize their content, apps, and e-commerce experiences.
 
+- **Free tier:** <span className="text-red text-lg">✖</span>
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Transparent pricing:** <span className="text-red text-lg">✖</span>
+- **Includes product analytics:** <span className="text-red text-lg">✖</span>
+- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
+
 ### Which platforms does Optimizely support?
 
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-green text-lg">✔</span>
-- **Web:** <span className="text-green text-lg">✔</span>
-- **Server:** <span className="text-green text-lg">✔</span>
+| Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✔ |
+| Flutter | ✖ (no official SDK) |
+| Web | ✔ |
+| Server | ✔ |
 
 ### How much does Optimizely cost?
 
-Optimizely's pricing is sales-driven and completely opaque, so it's not clear how much it costs. However, according to [Splitbase](https://splitbase.com/blog/optimizely-pricing), Optimizely will cost you at least $36,000 per year.
+Optimizely's pricing is sales-driven and not publicly listed. According to [Splitbase](https://splitbase.com/blog/optimizely-pricing), plans start at a minimum of $36,000 per year, with enterprise plans potentially exceeding $200,000+ depending on traffic and features. Only annual contracts are available.
 
 ## 4. Firebase
 
-- **Free tier:** <span className="text-green text-lg">✔</span>
-- **Open source:** <span className="text-red text-lg">✖</span> 
-- **Transparent pricing:** <span className="text-green text-lg">✔</span>
-- **Includes product analytics:** <span className="text-red text-lg">✖</span>
-- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
 - **Best for:** Apps already using Firebase's other features
 
 ![Firebase mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/firebase.png)
@@ -131,86 +170,103 @@ Optimizely's pricing is sales-driven and completely opaque, so it's not clear ho
 
 It's important to note that using A/B testing on Firebase requires installing [Google Analytics](/blog/posthog-vs-ga4) in your app. It's also not possible to run A/B tests on your web app or server.
 
+- **Free tier:** <span className="text-green text-lg">✔</span>
+- **Open source:** <span className="text-red text-lg">✖</span> 
+- **Transparent pricing:** <span className="text-green text-lg">✔</span>
+- **Includes product analytics:** <span className="text-red text-lg">✖</span>
+- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
+
 ### Which platforms does Firebase support?
 
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-red text-lg">✖</span>
-- **Web:** <span className="text-red text-lg">✖</span>
-- **Server:** <span className="text-red text-lg">✖</span>
+| Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✖ (not officially supported; community libraries exist) |
+| Flutter | ✔ |
+| Web | ✖ |
+| Server | ✖ |
 
 ### How much does Firebase A/B testing cost?
 
 A/B testing with Firebase is completely free. 
 
+> #### Bottom line
+>
+> Firebase A/B testing is the best free option if you're already in the Firebase ecosystem. It's limited to mobile and tightly coupled to Firebase's other services, so it's not ideal if you need cross-platform experimentation.
+
 ## 5. Kameleoon
 
-- **Free tier:** <span className="text-red text-lg">✖</span>
-- **Open source:** <span className="text-red text-lg">✖</span>
-- **Transparent pricing:** <span className="text-red text-lg">✖</span>
-- **Includes product analytics:** <span className="text-red text-lg">✖</span>
-- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
 - **Best for:** E-commerce and healthcare companies
 
 ![Kameleoon mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/kameleoon.png)
 
 ### What is Kameleoon?
 
-[Kameleoon](https://www.kameleoon.com/) is built specifically for mobile apps. It includes an easy to use interface for running experiments on push notifications and in-app messaging. 
+Kameleoon is built specifically for mobile apps. It includes an easy to use interface for running experiments on push notifications and in-app messaging. 
 
 In addition to testing, it offers a real-time personalization engine that's particularly useful for e-commerce apps. It's also [HIPAA-compliant](/blog/best-hipaa-compliant-ab-testing-tools), which makes Kameleoon a viable option for healthcare apps.
 
+- **Free tier:** <span className="text-red text-lg">✖</span> Free trial only
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Transparent pricing:** Partial
+- **Includes product analytics:** <span className="text-red text-lg">✖</span>
+- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
+
 ### Which platforms does Kameleoon support?
 
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-green text-lg">✔</span>
-- **Web:** <span className="text-green text-lg">✔</span>
-- **Server:** <span className="text-green text-lg">✔</span>
+| Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✔ |
+| Flutter | ✔ |
+| Web | ✔ |
+| Server | ✔ |
 
 ### How much does Kameleoon cost?
 
-Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [state](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume.
+Kameleoon's Starter plan begins at $495 per month, which includes web experimentation features. Enterprise plans with mobile app testing, feature management, and advanced capabilities like SSO and CUPED are custom-priced. Kameleoon offers a free trial.
 
 ## 6. Statsig
 
-- **Free tier:** <span className="text-green text-lg">✔</span>
-- **Open source:**<span className="text-red text-lg">✖</span>
-- **Transparent pricing:** Partial
-- **Includes product analytics:** <span className="text-green text-lg">✔</span>
-- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product teams in high-growth startups
 
 ![Statsig mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/statsig.png)
 
 ### What is Statsig?
 
-[Statsig](/blog/best-statsig-alternatives) is platform built for feature management and experimentation. It offers feature flags, A/B testing, and product analytics.
+[Statsig](/blog/best-statsig-alternatives) is a platform built for feature management and experimentation. It offers feature flags, A/B testing, and product analytics.
 
 It offers advanced experimentation techniques, such as multi-armed bandit experiments and [holdout testing](/tutorials/holdout-testing), making it well suited for growth teams in startups.
 
+- **Free tier:** <span className="text-green text-lg">✔</span>
+- **Open source:**<span className="text-red text-lg">✖</span>
+- **Transparent pricing:** Partial
+- **Includes product analytics:** <span className="text-green text-lg">✔</span>
+- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
+
 ### Which platforms does Statsig support?
 
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-green text-lg">✔</span>
-- **Web:** <span className="text-green text-lg">✔</span>
-- **Server:** <span className="text-green text-lg">✔</span>
-  
+ Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✔ |
+| Flutter | ✔ |
+| Web | ✔ |
+| Server | ✔ |
+
 ### How much does Statsig cost?
 
-Statsig has a free tier with an allowance of 1 million events. After that, you'll pay $150 per month for up to 5 million events and $50 for every 1 million events thereafter. They also offer enterprise discounts for large volume customers.
+Statsig's Developer tier is free with 2 million events per month. The Pro tier costs $150 per month with 5 million events included, and additional events cost $0.05 per 1,000. Enterprise plans offer volume discounts and custom pricing.
+
+> #### Bottom line
+>
+> Statsig is a great choice for growth-focused engineering teams who want advanced experimentation with transparent, usage-based pricing. Its unlimited free feature flags are a standout.
 
 ## 7. LaunchDarkly
 
-- **Free tier:** <span className="text-green text-lg">✔</span>
-- **Open source:** <span className="text-red text-lg">✖</span>
-- **Transparent pricing:** Partial
-- **Includes product analytics:** <span className="text-red text-lg">✖</span>
-- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
 - **Best for:** Engineering and product teams
 
 ![LaunchDarkly mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
@@ -221,28 +277,33 @@ Statsig has a free tier with an allowance of 1 million events. After that, you'l
 
 The people who find LaunchDarkly most useful are engineering managers, site reliability engineers, and product managers. 
 
+- **Free tier:** <span className="text-green text-lg">✔</span>
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Transparent pricing:** Partial
+- **Includes product analytics:** <span className="text-red text-lg">✖</span>
+- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
+
 ### Which platforms does LaunchDarkly support?
 
-- **iOS:** <span className="text-green text-lg">✔</span>
-- **Android:** <span className="text-green text-lg">✔</span>
-- **Flutter:** <span className="text-green text-lg">✔</span>
-- **React Native:** <span className="text-green text-lg">✔</span>
-- **Web:** <span className="text-green text-lg">✔</span>
-- **Server:** <span className="text-green text-lg">✔</span>
+| Platform | Supported |
+|---|---|
+| iOS | ✔ |
+| Android | ✔ |
+| React Native | ✔ |
+| Flutter | ✔ |
+| Web | ✔ |
+| Server | ✔ |
 
 ### How much does LaunchDarkly cost?
 
-Experimentation is available on LaunchDarkly's Pro plan, which costs $20 per seat, per month, but experiments are priced separately to this. As per LaunchDarkly's docs:
+LaunchDarkly offers a free Developer tier for small projects. The Foundation plan starts at $10 per service connection per month (billed annually), which includes feature flags, experimentation, and limited client-side MAU. Enterprise and Guardian plans have custom pricing. Experimentation is included in Foundation plans and above, and pricing also scales with client-side MAU ($10 per 1,000 MAU).
 
-> "Experiments are billed monthly based on the number of unique user keys in each experiment. To estimate your Experimentation billing costs, multiply the number of experiments you run each month by the number of unique users in your experiment audience."
+> #### Bottom line
+>
+> LaunchDarkly is the go-to for engineering teams who need enterprise-grade feature flag management and want to add experimentation on top. It's feature-flag-first, not experiment-first.
 
 ## 8. Taplytics
 
-- **Free tier:** <span className="text-red text-lg">✖</span>
-- **Open source:** <span className="text-red text-lg">✖</span>
-- **Transparent pricing:** <span className="text-red text-lg">✖</span>
-- **Includes product analytics:** <span className="text-red text-lg">✖</span>
-- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
 - **Best for:** Product and marketing teams
 
 ![Taplytics mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/taplytics.jpeg)
@@ -250,6 +311,12 @@ Experimentation is available on LaunchDarkly's Pro plan, which costs $20 per sea
 ### What is Taplytics?
 
 [Taplytics](https://taplytics.com/) is an A/B testing platform focusing on mobile. Its no-code experiment builder makes it easy for non-technical users to create and run A/B tests.
+
+- **Free tier:** <span className="text-red text-lg">✖</span>
+- **Open source:** <span className="text-red text-lg">✖</span>
+- **Transparent pricing:** <span className="text-red text-lg">✖</span>
+- **Includes product analytics:** <span className="text-red text-lg">✖</span>
+- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
 
 ### Which platforms does Taplytics support?
 
