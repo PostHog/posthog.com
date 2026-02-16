@@ -42,6 +42,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
+import { RenderInClient } from 'components/RenderInClient'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -636,7 +637,12 @@ const ProductCount = () => {
 }
 
 const AppCount = () => {
-    return APP_COUNT
+    return (
+        <span className="flex items-center gap-1">
+            <Link to="/products">Browse app library</Link>
+            <span>({APP_COUNT})</span>
+        </span>
+    )
 }
 
 const CompanyStageTabs = () => {
@@ -790,6 +796,7 @@ const Customers = () => {
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
+    const { websiteMode } = useApp()
 
     // Get all companies
     const allCompanies = [...COL1, ...COL2]
@@ -960,7 +967,7 @@ const Customers = () => {
     return (
         <>
             <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className="@xl:absolute right-0 -top-8">
+                <div className={websiteMode ? 'mb-2' : `@xl:absolute right-0 -top-8`}>
                     <OSButton
                         onClick={toggleBreakdown}
                         variant="secondary"
@@ -1067,8 +1074,15 @@ function TaglineExperiment(): JSX.Element {
 
 function Tagline(): JSX.Element {
     const posthog = usePostHog()
-    const variant = posthog?.getFeatureFlag?.('home-tagline')
-    return variant === 'test' ? <TaglineExperiment /> : <TaglineControl />
+
+    return (
+        <RenderInClient
+            placeholder={null}
+            render={() =>
+                posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
+            }
+        />
+    )
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
@@ -1269,10 +1283,10 @@ export default function Home() {
                 image="/images/og/default.png"
             />
             <MDXEditor
-                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}
+                maxWidth={900}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
