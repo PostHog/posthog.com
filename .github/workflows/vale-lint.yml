@@ -26,16 +26,21 @@ jobs:
               id: pr-info
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_NUMBER: ${{ inputs.pr_number }}
+                  GITHUB_REPOSITORY: ${{ github.repository }}
+                  BASE_REF: ${{ github.base_ref }}
+                  HEAD_REF: ${{ github.head_ref }}
+                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
               run: |
-                  if [ -n "${{ inputs.pr_number }}" ]; then
-                    PR_DATA=$(gh pr view ${{ inputs.pr_number }} --repo ${{ github.repository }} --json baseRefName,headRefName,headRefOid)
+                  if [ -n "$PR_NUMBER" ]; then
+                    PR_DATA=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json baseRefName,headRefName,headRefOid)
                     echo "base_ref=$(echo "$PR_DATA" | jq -r '.baseRefName')" >> "$GITHUB_OUTPUT"
                     echo "head_ref=$(echo "$PR_DATA" | jq -r '.headRefName')" >> "$GITHUB_OUTPUT"
                     echo "head_sha=$(echo "$PR_DATA" | jq -r '.headRefOid')" >> "$GITHUB_OUTPUT"
                   else
-                    echo "base_ref=${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
-                    echo "head_ref=${{ github.head_ref }}" >> "$GITHUB_OUTPUT"
-                    echo "head_sha=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+                    echo "base_ref=$BASE_REF" >> "$GITHUB_OUTPUT"
+                    echo "head_ref=$HEAD_REF" >> "$GITHUB_OUTPUT"
+                    echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
                   fi
 
             - name: Checkout code
