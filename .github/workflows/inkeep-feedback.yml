@@ -65,9 +65,6 @@ jobs:
 
                       Thanks for working with the Inkeep bot, @${author}! Now that this PR is merged, we'd love your quick feedback to improve the experience.
 
-                      <details>
-                      <summary><b>Click to provide feedback</b></summary>
-
                       ### Rate your experience (1-5):
 
                       **Initial draft accuracy:** 
@@ -75,11 +72,6 @@ jobs:
 
                       **Editing needed:** 
                       _(1 = minimal tweaks, 5 = complete rewrite)_
-
-                      **Overall satisfaction:** 
-                      _(1 = very unsatisfied, 5 = very satisfied)_
-
-                      ### Optional questions:
 
                       **What would make this more helpful?**
 
