@@ -10,4 +10,6 @@ To link Temporal.io:
 
 4. On the next page, set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
 
+The Temporal.io source supports resumable imports for full-refresh syncs. If an import is interrupted, it automatically resumes from where it left off instead of restarting from the beginning. This is useful when syncing large amounts of workflow data.
+
 Once the syncs are complete, you can start using Temporal.io data in PostHog.
