@@ -43,8 +43,12 @@ The user's name is {{user_name}} and their subscription tier is {{tier}}.
 
 ### Prerequisites
 
-- **Personal API key** – Prompt fetching requires a [personal API key](/docs/api#personal-api-keys), not a project API key
+- **Personal API key (`phx_...`)** – Used as Bearer auth for prompt fetches
+- **Project API key (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
 - **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
+
+When you initialize `Prompts` with a PostHog client, the SDK uses the client's project API key automatically. If you initialize `Prompts` directly, you must pass both keys.
+Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
 
 ### Python
 
@@ -63,6 +67,7 @@ prompts = Prompts(posthog)
 # Or initialize directly
 prompts = Prompts(
     personal_api_key='<your_personal_api_key>',
+    project_api_key='<your_project_api_key>',
     host='https://us.posthog.com'
 )
 
@@ -101,6 +106,7 @@ const prompts = new Prompts({ posthog })
 // Or initialize directly (without PostHog client)
 const prompts = new Prompts({
   personalApiKey: '<your_personal_api_key>',
+  projectApiKey: '<your_project_api_key>',
   host: 'https://us.posthog.com'
 })
 
