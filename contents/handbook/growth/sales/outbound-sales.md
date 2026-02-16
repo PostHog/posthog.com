@@ -97,6 +97,46 @@ graph LR
 | Clay | Outbound qualification and personalization | Daily via webhook syncs |
 | Lemlist | Email sequencing and outreach delivery | Via Clay |
 
+### Appendix: full GTM data flow
+
+This is the broader picture of how data moves across all our GTM systems, not just the outbound pipelines above.
+
+```mermaid
+graph TD
+    subgraph PostHog
+        PH[New signup in PostHog]
+        CDP[CDP Destinations - Events, Person Info, Org Info]
+        CF[Contact Form]
+        BILLING[New customer in billing]
+    end
+
+    subgraph Enrichment
+        HARMONIC[Harmonic]
+        CLEARBIT[Clearbit]
+        CLAY[Clay]
+    end
+
+    PH -- "PH destination" --> SF
+    PH -- "new org" --> BILLING
+    CDP --> DEFAULT[Default app]
+    CF --> DEFAULT
+    DEFAULT --> SF
+
+    SF[Salesforce - Contacts + Accounts]
+
+    SF <--> HARMONIC
+    SF <--> CLEARBIT
+    SF <--> CLAY
+    BILLING --> SF
+
+    SF --> VITALLY[Vitally]
+    CIO[Customer.io] --> VITALLY
+    ZENDESK[Zendesk] --> VITALLY
+    PYLON[Pylon] --> VITALLY
+    GMAIL[Gmail] --> VITALLY
+    STRIPE[Stripe] --> VITALLY
+```
+
 ## What will we do on our calls? A simple outbound sales process
 
 As we begin to run outbound sales meetings set via <TeamMember name="Dmytro Sitalo" />’s efforts and our own, we need a lightweight, human-first approach to managing outbound conversations.
