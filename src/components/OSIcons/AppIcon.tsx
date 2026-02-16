@@ -190,6 +190,10 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/computer_coffee_classic_66d12712d9.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/computer_coffee_modern_41959ceb31.png',
     },
+    switch: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/switch_classic_91ff9ab635.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/switch_modern_5aa70666d1.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
@@ -412,7 +416,7 @@ export const AppLink = ({
             </span>
             <figcaption
                 className={`text-[13px] font-medium leading-tight ${
-                    orientation === 'row' ? 'text-left' : 'text-center'
+                    orientation === 'row' ? 'text-left' : 'text-center text-balance'
                 }`}
             >
                 <span className={`inline-block leading-snug`}>
