@@ -1689,7 +1689,7 @@ export const productEngineerHandbookSidebar = [
                 url: '/product-engineer-handbook/product-teams',
             },
             {
-                name: '5. Why companies should hire product engineers',
+                name: '5. Benefits',
                 url: '/product-engineer-handbook/benefits',
             },
             {

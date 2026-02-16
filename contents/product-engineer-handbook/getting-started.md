@@ -35,7 +35,7 @@ If you're an engineer at an existing company, take some time to understand what 
 
 * Who is the ideal customer and why?  
 * What are the user personas who use the product?  
-* How does pricing work and why is that the pricing model?  
+* How does [pricing work](/newsletter/pricing-advice) and why is that the pricing model?  
 * What are the pros and cons of other potential pricing models?  
 * What are some of the key metrics the business tracks?
 
@@ -43,7 +43,7 @@ Talk to people who know about these things. Product managers, execs, finance off
 
 If you think the company you work at is bad, treat this as a learning process not a "I told you so tour." Your goal is to understand why the product and business exists as it does today, not prove how smart you are.
 
-Alternatively, research other companies. PostHog is a good place to start. We have a public company handbook and we frequently share how we work, and the choices we made and why, in our newsletter Product for Engineers.
+Alternatively, research other companies. PostHog is a good place to start. We have a public company [handbook](/handbook) and we frequently share how we work, and the choices we made and why, in our newsletter [Product for Engineers](https://newsletter.posthog.com/).
 
 When choosing companies to research, consider looking at ones that are different from your own – i.e. companies with a different ICP or go-to-market motion. It can be useful to compare and contrast approaches, especially if you look at companies building similar products for different audiences.
 
