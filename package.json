@@ -34,7 +34,8 @@
         "prepare": "husky",
         "format:docs": "git diff --name-only --diff-filter=AM \"*.mdx\" \"*.md\" | xargs node scripts/fix-mdx.js",
         "vale": "vale",
-        "vale:staged": "git diff --cached --name-only --diff-filter=AM -- '*.md' '*.mdx' | xargs vale"
+        "vale:staged": "git diff --cached --name-only --diff-filter=AM -- '*.md' '*.mdx' | xargs vale",
+        "vale:test": "vale .vale/test"
     },
     "dependencies": {
         "@amcharts/amcharts5": "^5.13.6",

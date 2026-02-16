@@ -24,7 +24,6 @@ CTAs
 CTEs
 CVE
 CVEs
-[Dd]evOps
 DNS
 DSN
 ETag
@@ -50,6 +49,7 @@ JWT
 JWTs
 KPIs
 kubectl
+Kubernetes
 Laravel
 LLM
 LLMs
@@ -309,6 +309,7 @@ Superset
 Synthesia
 Tailscale
 Temporal\.io
+Terraform
 TikTok
 Topsort
 Traefik

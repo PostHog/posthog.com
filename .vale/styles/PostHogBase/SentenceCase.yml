@@ -2,6 +2,27 @@ extends: capitalization
 message: "'%s' should be in sentence case."
 link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
 level: warning
+threshold: 1 # Fail all instances of improper casing
 scope: heading
 match: $sentence
-# Exceptions are loaded automatically from the PostHog vocabulary (accept.txt)
+exceptions:
+    - Customer Analytics
+    - Data Pipelines
+    - Data Warehouse
+    - Endpoints
+    - Error Tracking
+    - Experiments
+    - Feature Flags
+    - LLM Analytics
+    - Logs
+    - Marketing Analytics
+    - PostHog AI
+    - PostHog Cloud
+    - Product Analytics
+    - Product Tours
+    - Revenue Analytics
+    - Session Replay
+    - Surveys
+    - Twig
+    - Web Analytics
+    - Workflows

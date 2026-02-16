@@ -79,6 +79,7 @@ deprioritized
 deserialization
 dev
 devfile
+devops
 dogfood
 dotenv
 dotfiles
@@ -116,6 +117,7 @@ idempotency
 impactful
 innersource
 kanban
+linter
 lockfile
 lockfiles
 lookups

@@ -733,6 +733,10 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/docs-style-guide',
             },
             {
+                name: 'Vale (prose linter)',
+                url: '/handbook/docs-and-wizard/vale',
+            },
+            {
                 name: 'MDX and components',
                 url: '/handbook/docs-and-wizard/mdx-and-components',
             },
