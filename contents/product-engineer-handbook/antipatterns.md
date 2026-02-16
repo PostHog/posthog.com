@@ -15,7 +15,7 @@ If in doubt, it's always better to present an opinion and hypothesis that people
 
 There's a fine line between disagreeing with feedback and dismissing it out of hand. Whether it's coming from colleagues you're working with, or users of what you ship, a product engineer needs to be able to deal with [direct feedback](/newsletter/how-to-give-feedback) and respond appropriately.
 
-If you disagree, you need to articulate why and understand why you're receiving that feedback in the first place. Ultimately, being a product engineer requires a love of learning, and that starts by learning how to listen and making good judgements about when feedback is valid.
+If you disagree, you need to articulate why and understand why you're receiving that feedback in the first place. Ultimately, being a product engineer requires a love of learning, and that starts by learning how to listen and making good judgments about when feedback is valid.
 
 ## 3. Not shipping early enough
 
@@ -61,4 +61,4 @@ As noted in an earlier chapter, management should be a part-time activity for a 
 
 A product engineer should be able to describe their [ideal customer profile](/newsletter/ideal-customer-profile-framework) or [user persona](/product-engineers/how-to-create-user-personas), the high-level goals of their company, and the why behind what they're building. Failure to engage on these points is a clear sign someone won't work out. You can't make good decisions about what to build if you don't know, or care to know, the context in which you're building.
 
-**Next chapter:** [Getting started as a product engineer]|(/product-engineer-handbook/getting-started)
+**Next chapter:** [Getting started as a product engineer](/product-engineer-handbook/getting-started)

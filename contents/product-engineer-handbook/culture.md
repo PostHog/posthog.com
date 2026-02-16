@@ -79,7 +79,7 @@ Transparency, both internally and externally, is a core principle for us and an 
 
 Why? Because it's where product engineers get the context they need to make good decisions. The context they need to work autonomously.
 
-We take this to a greater extreme than most. We're open source, so our code and docs are freely available. We also have a public handbook where we share things like our strategy and priorities, how we work, how we hire, and so on.
+We take this to a greater extreme than most. We're open source, so our code and docs are freely available. We also have a public [handbook](/handbook] where we share things like our strategy and priorities, how we work, how we hire, and so on.
 
 These are just the basics, though. Internally, we also share things like:
 

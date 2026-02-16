@@ -3,7 +3,7 @@ title: Getting started as a product engineer
 showTitle: true
 ---
 
-If you've read this far, you should have a reasonably coherent idea of what's needed to work like a product engineer – we suggest going to chapter 1 if you landed here first.
+If you've read this far, you should have a reasonably coherent idea of what's needed to work like a product engineer – we suggest [going to chapter 1](/product-engineer-handbook/what-is-a-product-engineer) if you landed here first.
 
 These tips are intended to help you get started on your journey. This isn't a checklist you need to complete in order, but a series of jumping off points for learning the craft of a product engineer. Start wherever you want and see where you end up.
 
@@ -21,9 +21,9 @@ Real users means people who have signed-up or installed your product, used it, a
 
 Meaningful does not mean:
 
-* Something you built as a proof of concept so you could learn how to build a product from 0 to 1, or learn some new technology. To be clear, this is still a perfectly valid learning activity (a great one, even), but you'll learn more about building successful products by trying to acquire users and iterating on their feedback.
+* Something you built as a proof of concept so you could learn how to build a product from 0 to 1, or learn some new technology. This is still a perfectly valid learning activity (a great one, even), but you'll learn more about building successful products by trying to acquire users and iterating on their feedback.
 
-* A huge, viral success with thousands of users and some renown. 10, 20 or a hundred or so real users is enough to consider a project meaningful. So long as someone is deriving value from what you've built, and you can talk to them about why and what they need, then you're making progress.
+* A huge, viral success with thousands of users and renown. 10, 20, or a hundred real users is enough to consider a project meaningful. So long as someone is deriving value from what you've built, and you can talk to them about why and what they need, then you're making progress.
 
 * Founding a company (unless you really want to). You don't have to apply to Y Combinator and raise a seed round for something to be meaningful, though it's very cool if you do.
 
@@ -39,7 +39,7 @@ If you're an engineer at an existing company, take some time to understand what 
 * What are the pros and cons of other potential pricing models?  
 * What are some of the key metrics the business tracks?
 
-Talk to people who know about these things. Product managers, execs, finance officers. Tell them you want to learn about the business and keep an open mind. Ask the kind of [questions you might ask when applying to a company for a job](https://www.google.com/url?q=https://posthog.com/newsletter/job-interview-questions-engineers&sa=D&source=docs&ust=1766072770672893&usg=AOvVaw2Qv31yeCkMD84CGHZvRQ7y). 
+Talk to people who know about these things. Product managers, execs, finance officers. Tell them you want to learn about the business and keep an open mind. Ask the kind of [questions you might ask when applying to a company for a job](/newsletter/job-interview-questions-engineers). 
 
 If you think the company you work at is bad, treat this as a learning process not a "I told you so tour." Your goal is to understand why the product and business exists as it does today, not prove how smart you are.
 
@@ -49,7 +49,7 @@ When choosing companies to research, consider looking at ones that are different
 
 ## 3. Support some users directly
 
-Product engineers support customers directly, so go do that. We don't mean responding to some tickets, we mean go find a real problem someone has encountered, talk to them about it, ship a solution and iterate on it with them.
+Product engineers [support customers directly](/newsletter/engineers-do-support), so go do that. We don't mean responding to some tickets, we mean go find a real problem someone has encountered, talk to them about it, ship a solution, and iterate on it with them.
 
 Better yet, skip the support queue altogether and go find the users out there complaining in public, on social media, LinkedIn, Reddit, wherever your users hang out. Talk to them. Solve their problems. The more you do this, the more you'll learn how to work with customers and solve their problems in ways that spark joy. 
 

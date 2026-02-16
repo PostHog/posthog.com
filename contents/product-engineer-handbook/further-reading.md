@@ -7,7 +7,7 @@ showTitle: true
 
 Product-market fit is a core concept any product engineer needs to understand. Contrary to received wisdom, it isn't something you find once and forget about. It shifts as your product and market evolves. 
 
-We recommend starting by reading [The only thing matters](https://pmarchive.com/guide_to_startups_part4.html) by Marc Andreesen, who coined the term. After that, try:
+We recommend starting by reading [The only thing matters](https://pmarchive.com/guide_to_startups_part4.html) by Marc Andreessen, who coined the term. After that, try:
 
 * [What we've learned about product-market fit](https://posthog.com/newsletter/what-weve-learned-about-product-market-fit) by Andy Vandervell, a high-level summary of learnings from our newsletter. It also has links to several more useful resources on the topic.
 
@@ -37,7 +37,7 @@ We recommend starting by reading [The only thing matters](https://pmarchive.com/
 
 * [Good taste makes great products](https://posthog.com/newsletter/good-taste-great-products) by Danilo Campos is an essential primer on how to think about design as a product engineer, the issues and concepts you should think about, and how to avoid design jank.
 
-* [What we’ve learned about building AI-powered](https://posthog.com/newsletter/building-ai-features) features by Ian Vanagas is everything we've learned (so far) from building PostHog AI, our AI-powered product manager and data analyst.
+* [What we’ve learned about building AI-powered features](https://posthog.com/newsletter/building-ai-features) features by Ian Vanagas is everything we've learned (so far) from building PostHog AI, our AI-powered product manager and data analyst.
 
 * [Avoid these AI coding mistakes](https://posthog.com/newsletter/ai-coding-mistakes) by Ian Vanagas collates all the things our engineers have learned about using Claude Code et al as part of their workflow.
 

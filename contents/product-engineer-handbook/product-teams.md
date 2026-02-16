@@ -13,7 +13,9 @@ This isn't a great system for giving engineers autonomy – it's literally desig
 
 These systems are motivated by the desire for control, accountability (i.e. "who's to blame for this problem?"), and a lack of trust. They condition engineers to only care about their small area of influence and to disregard the wider impact of their work on customers or the business. 
 
-The result is a maze of half-baked features, and it’s just plain slow. PMs become the bottleneck and gatekeeper for decisions, and engineers feel frustrated. Instead, we have two simple principles that govern how product engineers and product managers work together.
+The result is a maze of half-baked features, and it’s [just plain slow](/newsletter/this-is-why-youre-not-shipping). PMs become the bottleneck and gatekeeper for decisions, and engineers feel frustrated. 
+
+To realize the potential of product engineer as a role, there are two principles your product team needs to follow:
 
 ## 1. Engineers own product decisions
 

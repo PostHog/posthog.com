@@ -35,7 +35,7 @@ Product engineers don't just fix code problems. They fix product and business pr
 
 ### Uncovering and fixing technical issues
 
-Product engineers need to be comfortable using the full gamut of tools available, such as [error tracking](/docs/error-tracking), [logging](/docs/logs), performance monitoring, [user feedback](/surveys], and more to diagnose root causes and find solutions.
+Product engineers need to be comfortable using the full gamut of tools available, such as [error tracking](/docs/error-tracking), [logging](/docs/logs), performance monitoring, [user feedback](/surveys), and more to diagnose root causes and find solutions.
 
 ### Solving customer problems directly
 
@@ -81,7 +81,7 @@ Product engineers work across the entire product, which goes beyond traditional 
 * Integrate APIs and external services with third-party systems like Stripe or Sendgrid  
 * Implement customer flows for onboarding, support tickets, and feedback collection
 
-You don’t need deep specialization everywhere, but you do need enough knowledge to move quickly and make informed trad-offs. To put it another way, you need to know enough about these things to be "dangerous". 
+You don’t need deep specialization everywhere, but you do need enough knowledge to move quickly and make informed trade-offs. To put it another way, you need to know enough about these things to be "dangerous". 
 
 Product engineers also need to be practical about choosing the best tool for the job. Sometimes that might mean adopting a new technology, but often it means adopting the boring tech that's well understood, so you can ship something good quickly.  
 

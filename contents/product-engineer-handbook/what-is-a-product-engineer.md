@@ -9,7 +9,7 @@ Software product development is changing. It's faster, less predictable. One ind
 
 In this reality, teams and individuals that embrace a broader definition of what constitutes "developer work" will outperform those that cling to old assumptions and norms, and do so while working within [smaller, more efficient teams](/newsletter/small-teams).
 
-We think those teams will be lead by product engineers. Unlike a traditionally defined full stack engineer, a product engineer's job goes beyond shipping code. It's about engineering every aspect of the product and what makes it successful. 
+We think those teams will be led by product engineers. Unlike a traditionally defined full stack engineer, a product engineer's job goes beyond shipping code. It's about engineering every aspect of the product and what makes it successful. 
 
 Product engineers talk to users. They decide what to build. They own pricing, revenue, and user experience. They support customers directly. They're accountable primarily to their users and paying customers. They own product decisions.
 
