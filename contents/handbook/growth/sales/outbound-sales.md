@@ -47,7 +47,7 @@ So far we run three automated pipelines that enrich accounts, surface timely sig
 
 ### Salesforce Enrichment (weekly)
 
-Every week, we pull all Salesforce Accounts and enrich them via the Harmonic API with company info like funding history, headcount, and traction metrics. Our SSoT of Accounts (Single Source of truth) is the SalesForce Accounts table. 
+Every week, we pull all Salesforce Accounts and enrich them via the Harmonic API with company info like funding history, headcount, and traction metrics. Our SSoT of Accounts (Single Source of Truth) is the Salesforce Accounts table.
 Before enriching, we filter out personal email domains (Gmail, Yahoo, etc.) and normalize website domains so matching is consistent.
 
 ### Job Switchers → Clay (daily)
@@ -94,7 +94,8 @@ graph LR
 | Harmonic | Company enrichment data (funding, headcount, traction) | Weekly via enrichment pipeline |
 | ClickHouse | Product usage data, job-change signals, ICP scoring | Daily via pipeline queries |
 | Postgres | Organization and billing data | Continuous |
-| Clay | Outbound sequencing and personalization | Daily via webhook syncs |
+| Clay | Outbound qualification and personalization | Daily via webhook syncs |
+| Lemlist | Email sequencing and outreach delivery | Via Clay |
 
 ## What will we do on our calls? A simple outbound sales process
 
