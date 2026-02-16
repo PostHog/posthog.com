@@ -20,6 +20,7 @@ Workflows are composed of the following components:
 | [Delays](#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
 | [Audience splits](#audience-splits) | Target and split your users so you can automate some action for them or send a message with more specificity. |
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
+| [Output variables](#output-variables) | Store data from workflow steps to use in subsequent steps. |
 
 ## Triggers
 
@@ -85,5 +86,52 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 |--------------|-------------|
 | Capture Event | Trigger a PostHog event. This can be a useful way to chain workflows together, or track the effectiveness of workflows in analytics dashboards. |
 | Update Person Properties | Set a specific person property, or create a new one. This can be a useful way to chain workflows together. |
+
+## Output variables
+
+Output variables let you store data from workflow steps and use it in subsequent steps. This is useful when you need to chain together external API calls or pass data between steps in your workflow.
+
+For example, if a webhook step creates a support ticket, you can store the `ticket_id` from the response and use it in a later step to send a Slack message with the ticket link.
+
+### Configuring output variables
+
+To configure output variables for a step:
+
+1. Select the workflow step (e.g., a webhook action).
+2. In the step panel, find the **Output variables** section.
+3. Click **Add variable** to create a new output variable mapping.
+4. Enter a **Variable name** (e.g., `ticket_id`) - this is how you'll reference the value in later steps.
+5. Enter the **Result path** to extract a specific field from the response (e.g., `data.id` or `response.ticket.number`).
+
+### Pick from response
+
+Instead of manually typing the result path, you can use the **Pick from response** feature:
+
+1. Click **Pick from response** to run a test request.
+2. PostHog displays an interactive JSON tree of the actual response.
+3. Click on any key in the tree to automatically fill the result path.
+
+This helps you avoid typos and ensures you're extracting the correct field.
+
+### Storing multiple variables
+
+You can store multiple output variables from a single step. For example, from a ticket creation API response, you might store:
+
+- `ticket_id` with result path `data.id`
+- `ticket_number` with result path `data.number`
+- `ticket_url` with result path `data.url`
+
+Each variable needs a unique name and can have its own result path.
+
+### Using output variables
+
+Once stored, output variables are available in subsequent workflow steps using the `{{ variables.variable_name }}` syntax. For example:
+
+- In a Slack message: `New ticket created: {{ variables.ticket_url }}`
+- In a webhook body: `{"related_ticket": "{{ variables.ticket_id }}"}`
+
+### Size limits
+
+Output variables have a combined size limit of 5KB per workflow step. If your response is larger, use the result path to store only the specific fields you need rather than the entire response.
 
 
