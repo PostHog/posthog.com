@@ -115,6 +115,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/tiktok-ads',
                 },
                 {
+                    name: 'Snapchat Ads',
+                    url: '/docs/cdp/sources/snapchat-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -2225,6 +2229,10 @@ export const docsMenu = {
                             url: '/docs/libraries/phoenix',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/libraries/ruby-on-rails',
+                        },
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
@@ -2836,6 +2844,10 @@ export const docsMenu = {
                                 {
                                     name: 'Running behind a proxy',
                                     url: '/docs/self-host/configure/running-behind-proxy',
+                                },
+                                {
+                                    name: 'Session replay storage',
+                                    url: '/docs/self-host/configure/session-replay-storage',
                                 },
                                 {
                                     name: 'Configuring email',
@@ -3618,7 +3630,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Data retention',
-                    url: '/docs/session-replay/data-retention',
+                    url: '/docs/session-replay/recording-retention',
                     icon: 'IconCalendar',
                     color: 'seagreen',
                 },
@@ -4224,6 +4236,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/ruby',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/error-tracking/installation/ruby-on-rails',
+                        },
+                        {
                             name: 'React',
                             url: '/docs/error-tracking/installation/react',
                         },
@@ -4686,6 +4702,15 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/product-tours/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -4828,6 +4853,10 @@ export const docsMenu = {
                         {
                             name: 'Tiktok Ads',
                             url: '/docs/data-warehouse/sources/tiktok-ads',
+                        },
+                        {
+                            name: 'Snapchat Ads',
+                            url: '/docs/data-warehouse/sources/snapchat-ads',
                         },
                         {
                             name: 'Shopify',
