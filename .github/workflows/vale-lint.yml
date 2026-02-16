@@ -15,6 +15,7 @@ on:
 
 permissions:
     contents: read
+    pull-requests: write
 
 jobs:
     vale:
@@ -31,16 +32,19 @@ jobs:
                   BASE_REF: ${{ github.base_ref }}
                   HEAD_REF: ${{ github.head_ref }}
                   HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+                  EVENT_PR_NUMBER: ${{ github.event.pull_request.number }}
               run: |
                   if [ -n "$PR_NUMBER" ]; then
                     PR_DATA=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json baseRefName,headRefName,headRefOid)
                     echo "base_ref=$(echo "$PR_DATA" | jq -r '.baseRefName')" >> "$GITHUB_OUTPUT"
                     echo "head_ref=$(echo "$PR_DATA" | jq -r '.headRefName')" >> "$GITHUB_OUTPUT"
                     echo "head_sha=$(echo "$PR_DATA" | jq -r '.headRefOid')" >> "$GITHUB_OUTPUT"
+                    echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
                   else
                     echo "base_ref=$BASE_REF" >> "$GITHUB_OUTPUT"
                     echo "head_ref=$HEAD_REF" >> "$GITHUB_OUTPUT"
                     echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+                    echo "pr_number=$EVENT_PR_NUMBER" >> "$GITHUB_OUTPUT"
                   fi
 
             - name: Checkout code
@@ -57,19 +61,166 @@ jobs:
                   tar -xzf "vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -C /usr/local/bin vale
                   vale --version
 
-            - name: Get changed files and run Vale
+            - name: Run Vale on changed files
+              id: vale
               run: |
                   FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ steps.pr-info.outputs.base_ref }}...HEAD -- '*.md' '*.mdx')
                   if [ -z "$FILES" ]; then
                     echo "No markdown files changed, skipping Vale"
+                    echo "has_findings=false" >> "$GITHUB_OUTPUT"
+                    echo "### Vale: no markdown files changed" >> "$GITHUB_STEP_SUMMARY"
                     exit 0
                   fi
                   echo "Linting changed files:"
                   echo "$FILES"
-                  OUTPUT=$(echo "$FILES" | xargs vale --output=JSON || true)
-                  echo "$OUTPUT" | jq -r '
-                    to_entries[] | .key as $file | .value[] |
-                    "\($file)\t\(.Line)\t\(.Span[0])\t\(.Line):\(.Span[0])  \(.Severity)  \(.Message)  [\(.Check)]\(if .Link != "" then "%0ALearn more: \(.Link)" else "" end)"
-                  ' | while IFS=$'\t' read -r file line col message; do
-                    echo "::notice file=${file},line=${line},col=${col}::${message}"
+                  echo "$FILES" | xargs vale --output=JSON > vale-output.json 2>/dev/null || true
+
+                  TOTAL=$(jq '[.[][]] | length' vale-output.json)
+                  if [ "$TOTAL" -eq 0 ]; then
+                    echo "No findings"
+                    echo "has_findings=false" >> "$GITHUB_OUTPUT"
+                    echo "### Vale: all clear" >> "$GITHUB_STEP_SUMMARY"
+                    exit 0
+                  fi
+
+                  echo "has_findings=true" >> "$GITHUB_OUTPUT"
+                  echo "Found $TOTAL findings"
+
+            - name: Generate reports
+              if: steps.vale.outputs.has_findings == 'true'
+              env:
+                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
+                  GITHUB_REPOSITORY: ${{ github.repository }}
+              run: |
+                  PR_FILES_URL="https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}/files"
+                  JOB_SUMMARY_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+                  ERRORS=$(jq '[.[][] | select(.Severity == "error")] | length' vale-output.json)
+                  WARNINGS=$(jq '[.[][] | select(.Severity == "warning")] | length' vale-output.json)
+                  SUGGESTIONS=$(jq '[.[][] | select(.Severity == "suggestion")] | length' vale-output.json)
+
+                  # --- PR comment: header ---
+                  {
+                    echo "### Vale lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                    echo ""
+                    echo "[View full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
+                    echo ""
+                  } > vale-comment.md
+
+                  # --- PR comment: collapsible per-file tables with deep links ---
+                  jq -r 'keys[]' vale-output.json | sort | while IFS= read -r FILE; do
+                    HASH=$(echo -n "$FILE" | sha256sum | cut -d' ' -f1)
+                    COUNT=$(jq --arg f "$FILE" '.[$f] | length' vale-output.json)
+
+                    {
+                      echo "<details>"
+                      echo "<summary><code>${FILE}</code> — ${COUNT} findings</summary>"
+                      echo ""
+                      echo "| Line | Severity | Rule | Message |"
+                      echo "|------|----------|------|---------|"
+
+                      jq -r --arg f "$FILE" --arg url "$PR_FILES_URL" --arg hash "$HASH" '
+                        .[$f][] |
+                        .Message as $msg |
+                        ($msg | gsub("\\|"; "\\\\|") | gsub("\n"; " ")) as $safe_msg |
+                        "| [\(.Line)](\($url)#diff-\($hash)R\(.Line)) | \(.Severity) | `\(.Check)` | \($safe_msg) |"
+                      ' vale-output.json
+
+                      echo ""
+                      echo "</details>"
+                      echo ""
+                    } >> vale-comment.md
                   done
+
+                  # --- Size guardrail: rebuild condensed if comment too large ---
+                  COMMENT_SIZE=$(wc -c < vale-comment.md)
+                  if [ "$COMMENT_SIZE" -gt 60000 ]; then
+                    {
+                      echo "### Vale lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                      echo ""
+                      echo "[View full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
+                      echo ""
+                      echo "> **Note:** Too many findings to show inline. Per-line details are in the Job Summary linked above."
+                      echo ""
+                      echo "| File | Findings |"
+                      echo "|------|----------|"
+                      jq -r 'to_entries | sort_by(.key)[] | "| `\(.key)` | \(.value | length) |"' vale-output.json
+                    } > vale-comment.md
+                  fi
+
+                  # --- Job Summary: LLM-ready plain-text ---
+                  {
+                    echo "### Vale lint results"
+                    echo ""
+                    echo "| Severity | Count |"
+                    echo "|----------|-------|"
+                    echo "| Error | ${ERRORS} |"
+                    echo "| Warning | ${WARNINGS} |"
+                    echo "| Suggestion | ${SUGGESTIONS} |"
+                    echo ""
+                    echo '```'
+                    jq -r '
+                      to_entries | sort_by(.key)[] | .key as $file | .value[] |
+                      "\($file):\(.Line):\(.Span[0])  \(.Severity)  \(.Check)  \(.Message)"
+                    ' vale-output.json
+                    echo '```'
+                  } >> "$GITHUB_STEP_SUMMARY"
+
+            - name: Post or update PR comment
+              if: ${{ !cancelled() }}
+              uses: actions/github-script@v7
+              env:
+                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
+                  HAS_FINDINGS: ${{ steps.vale.outputs.has_findings }}
+              with:
+                  script: |
+                      const fs = require('fs');
+                      const marker = '<!-- vale-lint -->';
+                      const prNumber = parseInt(process.env.PR_NUMBER);
+
+                      if (!prNumber) {
+                        console.log('No PR number available, skipping comment');
+                        return;
+                      }
+
+                      const { data: comments } = await github.rest.issues.listComments({
+                        ...context.repo,
+                        issue_number: prNumber,
+                      });
+
+                      const existing = comments.find(c =>
+                        c.user?.login === 'github-actions[bot]' &&
+                        c.body?.startsWith(marker)
+                      );
+
+                      if (process.env.HAS_FINDINGS !== 'true') {
+                        if (existing) {
+                          await github.rest.issues.deleteComment({
+                            ...context.repo,
+                            comment_id: existing.id,
+                          });
+                          console.log('Deleted stale Vale comment — no findings remain');
+                        } else {
+                          console.log('No findings and no existing comment — nothing to do');
+                        }
+                        return;
+                      }
+
+                      const body = fs.readFileSync('vale-comment.md', 'utf8');
+                      const fullBody = `${marker}\n${body}`;
+
+                      if (existing) {
+                        await github.rest.issues.updateComment({
+                          ...context.repo,
+                          comment_id: existing.id,
+                          body: fullBody,
+                        });
+                        console.log('Updated existing Vale comment');
+                      } else {
+                        await github.rest.issues.createComment({
+                          ...context.repo,
+                          issue_number: prNumber,
+                          body: fullBody,
+                        });
+                        console.log('Created new Vale comment');
+                      }
