@@ -132,7 +132,11 @@ const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProp
                     baseWidth={isPortraitMode ? 720 : 1280}
                     baseHeight={isPortraitMode ? 1280 : 720}
                 >
-                    {slide.rawContent}
+                    <PresentationModeContext.Provider
+                        value={{ isPresenting: false, isThumbnail: true, isPortrait: isPortraitMode }}
+                    >
+                        {slide.rawContent}
+                    </PresentationModeContext.Provider>
                 </ScalableSlide>
                 {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
                 <div className="absolute inset-0 z-10" />
