@@ -89,98 +89,104 @@ jobs:
             - name: Generate reports
               if: steps.vale.outputs.has_findings == 'true'
               env:
-                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
                   GITHUB_REPOSITORY: ${{ github.repository }}
-                  BASE_REF: ${{ steps.pr-info.outputs.base_ref }}
+                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
               run: |
                   JOB_SUMMARY_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+                  PR_FILES_URL="https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}/files"
 
                   ERRORS=$(jq '[.[][] | select(.Severity == "error")] | length' vale-output.json)
                   WARNINGS=$(jq '[.[][] | select(.Severity == "warning")] | length' vale-output.json)
                   SUGGESTIONS=$(jq '[.[][] | select(.Severity == "suggestion")] | length' vale-output.json)
 
-                  # --- PR comment: summary table ---
+                  # --- PR comment: header + collapsible per-file tables ---
                   {
-                    echo "### Vale lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                    echo "**[Vale](https://posthog.com/handbook/docs-and-wizard/vale) lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions**"
                     echo ""
-                    echo "[Full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
+                    echo "[Full report →](${JOB_SUMMARY_URL}) – Copy the linter results into an LLM to batch-fix issues."
                     echo ""
-                    echo "| File | Errors | Warnings | Suggestions |"
-                    echo "|------|--------|----------|-------------|"
-                    jq -r '
-                      to_entries | sort_by(.key)[] |
-                      .key as $file | .value as $findings |
-                      ($findings | map(select(.Severity == "error")) | length) as $e |
-                      ($findings | map(select(.Severity == "warning")) | length) as $w |
-                      ($findings | map(select(.Severity == "suggestion")) | length) as $s |
-                      "| `\($file)` | \($e) | \($w) | \($s) |"
-                    ' vale-output.json
                   } > vale-comment.md
+
+                  jq -r 'keys[]' vale-output.json | sort | while IFS= read -r FILE; do
+                    F_ERRORS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "error")] | length' vale-output.json)
+                    F_WARNINGS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "warning")] | length' vale-output.json)
+                    F_SUGGESTIONS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "suggestion")] | length' vale-output.json)
+                    HASH=$(echo -n "$FILE" | sha256sum | cut -d' ' -f1)
+
+                    {
+                      echo "<details>"
+                      echo "<summary><code>${FILE}</code> — ${F_ERRORS} errors, ${F_WARNINGS} warnings, ${F_SUGGESTIONS} suggestions</summary>"
+                      echo ""
+                      echo ""
+                      echo "| Line | Severity | Message | Rule |"
+                      echo "|------|----------|---------|------|"
+
+                      jq -r --arg f "$FILE" --arg url "$PR_FILES_URL" --arg hash "$HASH" '
+                        .[$f][] |
+                        .Message as $msg |
+                        ($msg | gsub("\\|"; "\\\\|") | gsub("\n"; " ")) as $safe_msg |
+                        "| [\(.Line):\(.Span[0])](\($url)#diff-\($hash)R\(.Line)) | \(.Severity) | \($safe_msg) | `\(.Check)` |"
+                      ' vale-output.json
+
+                      echo ""
+                      echo "</details>"
+                      echo ""
+                    } >> vale-comment.md
+                  done
 
                   # --- Size guardrail: rebuild condensed if comment too large ---
                   COMMENT_SIZE=$(wc -c < vale-comment.md)
                   if [ "$COMMENT_SIZE" -gt 60000 ]; then
                     {
-                      echo "### Vale lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                      echo "**[Vale](https://posthog.com/handbook/docs-and-wizard/vale) lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions**"
                       echo ""
                       echo "[Full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
                       echo ""
                       echo "> **Note:** Too many findings to show inline. See the Job Summary linked above."
                       echo ""
-                      echo "| File | Findings |"
-                      echo "|------|----------|"
-                      jq -r 'to_entries | sort_by(.key)[] | "| `\(.key)` | \(.value | length) |"' vale-output.json
+                      echo "| File | Errors | Warnings | Suggestions |"
+                      echo "|------|--------|----------|-------------|"
+                      jq -r '
+                        to_entries | sort_by(.key)[] |
+                        .key as $file | .value as $findings |
+                        ($findings | map(select(.Severity == "error")) | length) as $e |
+                        ($findings | map(select(.Severity == "warning")) | length) as $w |
+                        ($findings | map(select(.Severity == "suggestion")) | length) as $s |
+                        "| `\($file)` | \($e) | \($w) | \($s) |"
+                      ' vale-output.json
                     } > vale-comment.md
                   fi
 
-                  # --- Review comments: per-file findings tables ---
-                  echo '[]' > vale-review-comments.json
+                  # --- Job Summary: expanded per-file tables + LLM-ready code block ---
+                  {
+                    echo "[Vale](https://posthog.com/handbook/docs-and-wizard/vale) lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                    echo ""
+                  } >> "$GITHUB_STEP_SUMMARY"
+
                   jq -r 'keys[]' vale-output.json | sort | while IFS= read -r FILE; do
-                    # Find first changed line in diff for this file
-                    FIRST_LINE=$(git diff "origin/${BASE_REF}...HEAD" -- "$FILE" \
-                      | grep -m1 '^@@.*+' \
-                      | sed 's/.*+\([0-9]*\).*/\1/')
+                    F_ERRORS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "error")] | length' vale-output.json)
+                    F_WARNINGS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "warning")] | length' vale-output.json)
+                    F_SUGGESTIONS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "suggestion")] | length' vale-output.json)
 
-                    if [ -z "$FIRST_LINE" ] || ! [ "$FIRST_LINE" -gt 0 ] 2>/dev/null; then
-                      FIRST_LINE=1
-                    fi
+                    {
+                      echo "#### \`${FILE}\` — ${F_ERRORS} errors, ${F_WARNINGS} warnings, ${F_SUGGESTIONS} suggestions"
+                      echo ""
+                      echo "| Line | Severity | Message | Rule |"
+                      echo "|------|----------|---------|------|"
 
-                    COUNT=$(jq --arg f "$FILE" '.[$f] | length' vale-output.json)
+                      jq -r --arg f "$FILE" '
+                        .[$f][] |
+                        .Message as $msg |
+                        ($msg | gsub("\\|"; "\\\\|") | gsub("\n"; " ")) as $safe_msg |
+                        "| \(.Line):\(.Span[0]) | \(.Severity) | \($safe_msg) | `\(.Check)` |"
+                      ' vale-output.json
 
-                    # Build the per-file findings table
-                    BODY=$(
-                      {
-                        echo "### ${COUNT} findings"
-                        echo ""
-                        echo "| Line | Severity | Rule | Message |"
-                        echo "|------|----------|------|---------|"
-                        jq -r --arg f "$FILE" '
-                          .[$f][] |
-                          .Message as $msg |
-                          ($msg | gsub("\\|"; "\\\\|") | gsub("\n"; " ")) as $safe_msg |
-                          "| \(.Line) | \(.Severity) | `\(.Check)` | \($safe_msg) |"
-                        ' vale-output.json
-                      }
-                    )
-
-                    # Append to review comments JSON
-                    jq --arg path "$FILE" \
-                       --arg line "$FIRST_LINE" \
-                       --arg body "$BODY" \
-                       '. + [{"path": $path, "line": ($line | tonumber), "side": "RIGHT", "body": $body}]' \
-                       vale-review-comments.json > vale-review-comments-tmp.json
-                    mv vale-review-comments-tmp.json vale-review-comments.json
+                      echo ""
+                    } >> "$GITHUB_STEP_SUMMARY"
                   done
 
-                  # --- Job Summary: LLM-ready plain-text ---
                   {
-                    echo "### Vale lint results"
-                    echo ""
-                    echo "| Severity | Count |"
-                    echo "|----------|-------|"
-                    echo "| Error | ${ERRORS} |"
-                    echo "| Warning | ${WARNINGS} |"
-                    echo "| Suggestion | ${SUGGESTIONS} |"
+                    echo "---"
                     echo ""
                     echo '```'
                     jq -r '
@@ -190,7 +196,7 @@ jobs:
                     echo '```'
                   } >> "$GITHUB_STEP_SUMMARY"
 
-            - name: Post or update PR comment
+            - name: Upsert PR comment
               if: ${{ !cancelled() }}
               uses: actions/github-script@v7
               env:
@@ -203,7 +209,7 @@ jobs:
                       const prNumber = parseInt(process.env.PR_NUMBER);
 
                       if (!prNumber) {
-                        console.log('No PR number available, skipping comment');
+                        console.log('No PR number available');
                         return;
                       }
 
@@ -211,7 +217,6 @@ jobs:
                         ...context.repo,
                         issue_number: prNumber,
                       });
-
                       const existing = comments.find(c =>
                         c.user?.login === 'github-actions[bot]' &&
                         c.body?.startsWith(marker)
@@ -223,63 +228,25 @@ jobs:
                             ...context.repo,
                             comment_id: existing.id,
                           });
-                          console.log('Deleted stale Vale comment — no findings remain');
-                        } else {
-                          console.log('No findings and no existing comment — nothing to do');
+                          console.log('Deleted stale Vale comment');
                         }
                         return;
                       }
 
-                      const body = fs.readFileSync('vale-comment.md', 'utf8');
-                      const fullBody = `${marker}\n${body}`;
+                      const body = `${marker}\n${fs.readFileSync('vale-comment.md', 'utf8')}`;
 
                       if (existing) {
                         await github.rest.issues.updateComment({
                           ...context.repo,
                           comment_id: existing.id,
-                          body: fullBody,
+                          body: body,
                         });
-                        console.log('Updated existing Vale comment');
+                        console.log('Updated Vale comment');
                       } else {
                         await github.rest.issues.createComment({
                           ...context.repo,
                           issue_number: prNumber,
-                          body: fullBody,
+                          body: body,
                         });
-                        console.log('Created new Vale comment');
+                        console.log('Created Vale comment');
                       }
-
-            - name: Post review with per-file comments
-              if: steps.vale.outputs.has_findings == 'true'
-              uses: actions/github-script@v7
-              env:
-                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
-                  HEAD_SHA: ${{ steps.pr-info.outputs.head_sha }}
-              with:
-                  script: |
-                      const fs = require('fs');
-                      const prNumber = parseInt(process.env.PR_NUMBER);
-                      const headSha = process.env.HEAD_SHA;
-
-                      if (!prNumber) {
-                        console.log('No PR number available, skipping review');
-                        return;
-                      }
-
-                      const comments = JSON.parse(fs.readFileSync('vale-review-comments.json', 'utf8'));
-
-                      if (comments.length === 0) {
-                        console.log('No review comments to post');
-                        return;
-                      }
-
-                      await github.rest.pulls.createReview({
-                        ...context.repo,
-                        pull_number: prNumber,
-                        commit_id: headSha,
-                        event: 'COMMENT',
-                        body: 'Vale lint',
-                        comments: comments,
-                      });
-
-                      console.log(`Posted review with ${comments.length} file comment(s)`);
