@@ -88,6 +88,13 @@ posthog.capture_exception(
 
 </MultiLanguage>
 
+### Error boundaries
+
+Error boundaries let you catch rendering errors in your component tree and report them to PostHog. We currently support error boundaries for:
+
+- **React** – Use the `PostHogErrorBoundary` component. See the [React error boundaries guide](/docs/error-tracking/installation/react#set-up-error-boundaries).
+- **React Native** – Use the `PostHogErrorBoundary` component. See the [React Native error boundaries guide](/docs/error-tracking/installation/react-native#set-up-error-boundaries).
+
 ## Customizing exception capture
 
 Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this. 

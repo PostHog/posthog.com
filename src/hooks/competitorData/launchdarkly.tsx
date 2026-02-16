@@ -39,7 +39,7 @@ export const launchdarkly = {
             },
             management: {
                 features: {
-                    approvals: true,
+                    approvals: 'Enterprise',
                     data_source: 'First-party',
                     flag_administration: 'Enterprise',
                     flag_scheduling: 'Enterprise',

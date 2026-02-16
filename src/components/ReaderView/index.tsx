@@ -220,6 +220,68 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
     )
 }
 
+const EditOnGitHubButton = ({ filePath, sourceInstanceName }: { filePath?: string; sourceInstanceName?: string }) => {
+    if (!filePath) {
+        return null
+    }
+
+    return (
+        <OSButton
+            asLink
+            to={`https://github.com/PostHog/${
+                sourceInstanceName === 'posthog-main-repo' ? 'posthog/blob/master' : 'posthog.com/blob/master/contents'
+            }/${filePath}`}
+            icon={<IconPencil />}
+        />
+    )
+}
+
+const EditHistoryPopover = ({ commits }: { commits: any[] }) => {
+    if (!commits?.length || commits.length === 0) {
+        return null
+    }
+
+    return (
+        <Popover
+            trigger={
+                <span>
+                    <OSButton icon={<IconClockRewind />} />
+                </span>
+            }
+            title="Edit history"
+            dataScheme="secondary"
+            contentClassName="w-[260px]"
+        >
+            <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
+                {commits
+                    .filter((commit) => !!commit.author)
+                    .map((commit) => (
+                        <li key={commit.url} className="flex gap-2 justify-between items-center">
+                            <Link to={commit.author.html_url} className="flex items-center gap-2" externalNoIcon>
+                                <div>
+                                    <div className="size-7 bg-accent rounded-full relative">
+                                        <img
+                                            src={commit.author.avatar_url}
+                                            alt={commit.author.login}
+                                            className="size-full rounded-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                <p className="text-sm m-0">{commit.author.login}</p>
+                            </Link>
+                            <div className="flex items-center gap-2">
+                                <p className="text-xs opacity-60 m-0">{dayjs(commit.date).fromNow()}</p>
+                                <Link to={commit.url} externalNoIcon>
+                                    <IconPullRequest className="size-4" />
+                                </Link>
+                            </div>
+                        </li>
+                    ))}
+            </ul>
+        </Popover>
+    )
+}
+
 const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
     const { fullWidthContent, setFullWidthContent, setBackgroundImage, backgroundImage } = useReaderView()
 
@@ -302,38 +364,6 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                <div className="@4xl/app-reader:hidden mb-4">
-                    <Accordion
-                        items={[
-                            {
-                                value: 'table-of-contents',
-                                trigger: title,
-                                content: (
-                                    <ul className="list-none m-0 p-0 flex flex-col">
-                                        {tableOfContents.map((navItem) => {
-                                            return (
-                                                <li className="relative leading-none m-0" key={navItem.url}>
-                                                    <ElementScrollLink
-                                                        id={navItem.url}
-                                                        label={navItem.value}
-                                                        className="hover:underline"
-                                                        element={contentRef}
-                                                        style={{
-                                                            paddingLeft: `${navItem.depth || 0}rem`,
-                                                        }}
-                                                    />
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                ),
-                            },
-                        ]}
-                        defaultValue="table-of-contents"
-                        skin={true}
-                        dataScheme="secondary"
-                    />
-                </div>
                 <div className="hidden @4xl/app-reader:block">
                     {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
                     <ul className="list-none m-0 p-0 flex flex-col">
@@ -490,6 +520,7 @@ const Menu = (props: { parent: MenuItem }) => {
 }
 
 const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
+    const { websiteMode } = useApp()
     const { isNavVisible, toggleNav } = useReaderView()
 
     return (
@@ -508,9 +539,11 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     {/* Sidebar - overlay on mobile, normal flow on desktop */}
                     <motion.div
                         id="nav"
-                        className="flex-shrink-0 overflow-hidden mb-[-36px] @2xl/app-reader:mb-0 text-primary 
-                                   fixed left-2 top-[47px] bottom-16 z-50 
-                                   @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
+                        className={`flex-shrink-0 overflow-hidden text-primary ${
+                            websiteMode
+                                ? 'sticky top-[49px] self-start h-[calc(100vh-48px)] ml-2 -mb-[50px]'
+                                : ` mb-[-47px] fixed left-2 top-[47px] bottom-16 z-50 @2xl/app-reader:static @2xl/app-reader:z-auto @2xl app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto`
+                        }`}
                         initial={{
                             width: '250px',
                             x: isNavVisible ? 0 : -250, // Start off-screen on mobile
@@ -527,7 +560,9 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                         }}
                     >
                         <motion.div
-                            className="h-full bg-primary rounded @2xl/app-reader:rounded-none pt-4 @2xl/app-reader:pt-0"
+                            className={`h-full rounded @2xl/app-reader:rounded-none ${
+                                websiteMode ? 'pt-2' : 'pt-4 bg-primary @2xl/app-reader:pt-0'
+                            }`}
                             initial={{ opacity: 1 }}
                             animate={{
                                 opacity: 1,
@@ -538,7 +573,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                 transition: { duration: 0.05 },
                             }}
                         >
-                            <ScrollArea className="px-4">{children}</ScrollArea>
+                            <ScrollArea className={websiteMode ? '' : 'px-4'}>{children}</ScrollArea>
                         </motion.div>
                     </motion.div>
                 </>
@@ -575,7 +610,7 @@ function ReaderViewContent({
     showAbout = false,
     sourceInstanceName,
 }) {
-    const { openNewChat, compact } = useApp()
+    const { openNewChat, compact, websiteMode } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
@@ -664,32 +699,42 @@ function ReaderViewContent({
 
     return (
         <SearchProvider>
-            <div className="@container/app-reader w-full h-full flex flex-col">
+            <div
+                data-scheme="secondary"
+                className={`@container/app-reader w-full h-full flex flex-col transition-all duration-300 ${
+                    websiteMode ? 'max-w-7xl mx-auto' : 'max-w-full'
+                }`}
+            >
                 {/* <DebugContainerQuery /> */}
                 {/* First row - Header */}
-                <HeaderBar
-                    isNavVisible={isNavVisible}
-                    isTocVisible={isTocVisible}
-                    onToggleNav={toggleNav}
-                    onToggleToc={toggleToc}
-                    showBack
-                    showForward
-                    showSearch
-                    showToc
-                    showSidebar={showSidebar}
-                    hasLeftSidebar={renderLeftSidebar}
-                    searchContentRef={contentRef}
-                    homeURL={homeURL}
-                    bookmark={{
-                        title,
-                        description,
-                    }}
-                    rightActionButtons={rightActionButtons}
-                    isEditing={isEditing}
-                    onSearch={onSearch}
-                />
+                {!websiteMode && (
+                    <HeaderBar
+                        isNavVisible={isNavVisible}
+                        isTocVisible={isTocVisible}
+                        onToggleNav={toggleNav}
+                        onToggleToc={toggleToc}
+                        showBack
+                        showForward
+                        showSearch
+                        showToc
+                        showSidebar={showSidebar}
+                        hasLeftSidebar={renderLeftSidebar}
+                        searchContentRef={contentRef}
+                        homeURL={homeURL}
+                        bookmark={{
+                            title,
+                            description,
+                        }}
+                        rightActionButtons={rightActionButtons}
+                        isEditing={isEditing}
+                        onSearch={onSearch}
+                    />
+                )}
                 {/* Second row - Main Content */}
-                <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
+                <div
+                    data-scheme="secondary"
+                    className={`flex w-full gap-2 min-h-0 flex-grow ${websiteMode ? 'bg-primary' : 'bg-primary'}`}
+                >
                     {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
                         ref={scrollAreaRef}
@@ -725,10 +770,18 @@ function ReaderViewContent({
                             }
                         }}
                         className={`bg-primary border border-primary flex-grow  
-                            ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:rounded-l' : 'border-l-0'}
+                            ${
+                                !websiteMode
+                                    ? renderLeftSidebar && isNavVisible
+                                        ? '@2xl/app-reader:rounded-l'
+                                        : 'border-l-0'
+                                    : `border-t-0 ${renderLeftSidebar && isNavVisible ? '' : 'border-l-0'}`
+                            }
                             ${
                                 showSidebar && isTocVisible
-                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                    ? websiteMode
+                                        ? ''
+                                        : 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
                                     : 'border-r-0'
                             } ${
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
@@ -804,7 +857,7 @@ function ReaderViewContent({
                                 )}
                                 {(body.date || body.contributors || body.tags) && (
                                     <div
-                                        className={`flex items-center space-x-2 mt-4 flex-wrap mx-auto transition-all ${
+                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
                                                 ? 'max-w-full'
                                                 : contentMaxWidthClass || 'max-w-2xl'
@@ -936,7 +989,9 @@ function ReaderViewContent({
                         {showSidebar && isTocVisible && (
                             <motion.div
                                 id="toc"
-                                className="hidden @4xl/app-reader:block flex-shrink-0 overflow-hidden"
+                                className={`${
+                                    websiteMode ? 'sticky top-[49px] self-start pt-2' : 'overflow-hidden'
+                                } @4xl/app-reader:block flex-shrink-0`}
                                 initial={{ width: 250 }}
                                 animate={{
                                     width: 250,
@@ -959,7 +1014,7 @@ function ReaderViewContent({
                                         transition: { duration: 0.05 },
                                     }}
                                 >
-                                    <ScrollArea className="px-2" fadeOverflow>
+                                    <ScrollArea className={websiteMode ? 'pr-4 pl-2' : 'px-2'} fadeOverflow>
                                         {tableOfContents && tableOfContents?.length > 0 && (
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
@@ -974,16 +1029,25 @@ function ReaderViewContent({
                 </div>
 
                 {/* Third row - Footer */}
-                <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 rounded-b">
+                <div
+                    data-scheme="secondary"
+                    className={`flex w-full flex-shrink-0 rounded-b ${
+                        websiteMode ? 'dark:bg-secondary' : 'gap-px bg-primary '
+                    }`}
+                >
                     <motion.div
                         className={`flex-shrink-0 transition-all min-w-0 ${
-                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                            websiteMode ? 'pr-4 box-content bg-primary' : ''
+                        } ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'}`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
                     {!compact && (
-                        <div className="flex-grow flex justify-between items-center text-primary">
+                        <div
+                            className={`flex-grow flex justify-between items-center text-primary p-2 border-primary ${
+                                websiteMode && renderLeftSidebar && isNavVisible ? 'border-l' : ''
+                            } ${websiteMode && showSidebar && isTocVisible ? 'border-r' : ''}`}
+                        >
                             <div>
                                 <p className="m-0 text-sm">
                                     Questions about this page?{' '}
@@ -991,7 +1055,7 @@ function ReaderViewContent({
                                         className="font-semibold underline"
                                         onClick={() =>
                                             openNewChat({
-                                                path: `ask-max-${appWindow?.path}`,
+                                                path: `ask-max${websiteMode ? '' : `-${appWindow?.path}`}`,
                                                 context: [
                                                     {
                                                         type: 'page',
@@ -1017,7 +1081,7 @@ function ReaderViewContent({
                                     .
                                 </p>
                             </div>
-                            {body?.type === 'mdx' && (
+                            {body?.type === 'mdx' && !websiteMode && (
                                 <div>
                                     <AppOptionsButton
                                         lineHeightMultiplier={lineHeightMultiplier}
@@ -1028,68 +1092,14 @@ function ReaderViewContent({
                         </div>
                     )}
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 p-2 ${
                             showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        } ${websiteMode && showSidebar && isTocVisible ? '@6xl:bg-primary pl-0 box-content' : ''}`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         <ConditionalMarkdownDropdown pageUrl={appWindow?.path} />
-                        {filePath && (
-                            <OSButton
-                                asLink
-                                to={`https://github.com/PostHog/${
-                                    sourceInstanceName === 'posthog-main-repo'
-                                        ? 'posthog/blob/master'
-                                        : 'posthog.com/blob/master/contents'
-                                }/${filePath}`}
-                                icon={<IconPencil />}
-                            />
-                        )}
-                        {commits?.length && commits.length > 0 && (
-                            <Popover
-                                trigger={
-                                    <span>
-                                        <OSButton icon={<IconClockRewind />} />
-                                    </span>
-                                }
-                                title="Edit history"
-                                dataScheme="secondary"
-                                contentClassName="w-[260px]"
-                            >
-                                <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
-                                    {commits
-                                        .filter((commit) => !!commit.author)
-                                        .map((commit) => (
-                                            <li key={commit.url} className="flex gap-2 justify-between items-center">
-                                                <Link
-                                                    to={commit.author.html_url}
-                                                    className="flex items-center gap-2"
-                                                    externalNoIcon
-                                                >
-                                                    <div>
-                                                        <div className="size-7 bg-accent rounded-full relative">
-                                                            <img
-                                                                src={commit.author.avatar_url}
-                                                                alt={commit.author.login}
-                                                                className="size-full rounded-full object-cover"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <p className="text-sm m-0">{commit.author.login}</p>
-                                                </Link>
-                                                <div className="flex items-center gap-2">
-                                                    <p className="text-xs opacity-60 m-0">
-                                                        {dayjs(commit.date).fromNow()}
-                                                    </p>
-                                                    <Link to={commit.url} externalNoIcon>
-                                                        <IconPullRequest className="size-4" />
-                                                    </Link>
-                                                </div>
-                                            </li>
-                                        ))}
-                                </ul>
-                            </Popover>
-                        )}
+                        <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
+                        <EditHistoryPopover commits={commits} />
                     </motion.div>
                 </div>
             </div>

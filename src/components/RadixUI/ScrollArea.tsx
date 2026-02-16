@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui'
+import { useApp } from '../../context/App'
 
 interface ScrollAreaProps {
     children: React.ReactNode
@@ -16,7 +17,7 @@ interface ScrollAreaProps {
 const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
     (
         {
-            // ADD React.forwardRef
+    
             children,
             className = '',
             dataScheme,
