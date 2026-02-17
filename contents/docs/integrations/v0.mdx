@@ -32,53 +32,33 @@ Once connected, give v0 this prompt to add PostHog with the Vercel Flags SDK:
 ```text
 ## Add PostHog Analytics and Feature Flags
 
-### Environment Variables
-
-Use Vercel's managed PostHog env vars:
-
-- `NEXT_PUBLIC_POSTHOG_KEY` - PostHog project API key
-- `NEXT_PUBLIC_POSTHOG_HOST` - PostHog host URL
-
-
 ### Packages
 
 `posthog-js`, `flags`, `@flags-sdk/posthog`
 
-### Critical: Distinct ID Synchronization
+### Critical: Let the Client Own the Distinct ID
 
-The main challenge is keeping the same `distinct_id` between server-side flag evaluation and client-side event tracking. Without this, experiment attribution breaks.
-
-**Key insight**: PostHog stores the distinct_id in a cookie named `ph_<api_key>_posthog` as JSON: `{"distinct_id": "..."}`
-
-**Solution**:
-
-1. Server reads distinct_id from PostHog's native cookie format
-2. If no cookie (first visit), generate a UUID
-3. Pass that ID to client-side PostHog via `bootstrap: { distinctID }` option
-4. Both server and client now use the same ID
-
+**Do NOT generate distinct IDs server-side.** The PostHog JS SDK manages its own `distinct_id` via `localStorage+cookie` persistence. If you bootstrap a server-generated ID, every server render can produce a different ID, breaking experiment attribution.
 
 ### Implementation Structure
 
-- `/lib/posthog.ts` - Server helpers: `getPostHogCookieName()` returns `ph_${apiKey}_posthog`, `getDistinctId()` reads cookie or generates UUID
-- `/lib/flags.ts` - Flag definitions using `postHogAdapter.featureFlagValue()` with `identify()` that reads the same cookie format
-- `/components/posthog-provider.tsx` - Client provider that accepts `bootstrapDistinctId` prop and passes it to `posthog.init({ bootstrap: { distinctID } })`
-- `/app/layout.tsx` - Make async, call `getDistinctId()`, pass to `<PostHogProvider bootstrapDistinctId={distinctId}>`
+- `/components/posthog-provider.tsx` - Client provider that initializes `posthog-js` with `persistence: "localStorage+cookie"`. Guard against re-init with `if (posthog.__loaded) return`. No `bootstrap` option needed.
+- `/app/layout.tsx` - Wrap children in `<PostHogProvider>`. No async work or distinct ID generation needed.
+- `/lib/flags.ts` *(optional, for server-side flag evaluation)* - If you need server-side flags, read the distinct ID from PostHog's native cookie `ph_<api_key>_posthog` (JSON format: `{"distinct_id": "..."}`). **Never generate a fallback UUID** -- if the cookie doesn't exist, skip server-side evaluation and let the client handle it.
 
 
-### PostHog MCP Limitations
+### Reading Feature Flags Client-Side
 
-- `Posthog_create-feature-flag` only creates boolean flags, not multivariate
-- Experiments need variants added manually in PostHog UI after creation
-- Use `Posthog_experiment-results-get` and `Posthog_query-run` to check tracking is working
+Use `posthog.onFeatureFlags()` to wait for flags to load, then `posthog.getFeatureFlag("flag-key")` to read the variant. Always wait for flags to be ready before rendering flag-dependent UI.
 
+### PostHog MCP Notes
 
-### Verification
-
-Query recent events with `Posthog_query-run` and check that `$feature_flag_called` events have the same `distinct_id` as other events (e.g., `$pageview`, custom events). If they differ, the bootstrap isn't working correctly.
+- The MCP may default to a different project than the one your API key sends events to. Use `PostHog_projects-get` to list projects and `PostHog_switch-project` to point at the correct one before querying.
+- Use `PostHog_query-run` with HogQL to verify events are flowing.
+- Experiments created via `PostHog_experiment-create` use `control` as the default variant key (not the variant name). Map `control` to your first variant in code.
 ```
 
-The agent will set up the Vercel Flags SDK with proper distinct ID synchronization between server and client, ensuring experiment attribution works correctly.
+The agent will set up PostHog with the client owning identity via `localStorage+cookie` persistence, ensuring reliable experiment attribution.
 
 ## What you can do with the MCP
 
