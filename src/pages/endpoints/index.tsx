@@ -16,6 +16,7 @@ import LangChainLogo from '../../../contents/images/docs/llms/LangChain_Logo.svg
 import LiteLLMLogoLight from '../../../contents/images/docs/llms/LiteLLM_logo_black.png'
 import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_white.png'
 import { useCustomers, type Customer } from 'hooks/useCustomers'
+import EndpointsPlayground from 'components/Docs/EndpointsPlayground'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'endpoints'
@@ -95,6 +96,15 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
     return null
 }
 
+const EndpointsPlaygroundSlide = () => {
+    return (
+        <div>
+            <h2 className="text-5xl text-center text-balance">Endpoints playground</h2>
+            <EndpointsPlayground />
+        </div>
+    )
+}
+
 // Custom ProductOS Benefits slide
 const ProductOSBenefitsSlide = () => {
     return (
@@ -124,7 +134,7 @@ const ProductOSBenefitsSlide = () => {
     )
 }
 
-export default function LLMAnalytics(): JSX.Element {
+export default function Endpoints(): JSX.Element {
     const contentData = useContentData()
 
     // GraphQL query for product data
@@ -184,6 +194,11 @@ export default function LLMAnalytics(): JSX.Element {
                 name: 'Product OS Benefits',
                 component: ProductOSBenefitsSlide,
             },
+            {
+                slug: 'endpoints-playground',
+                name: 'Endpoints playground',
+                component: EndpointsPlaygroundSlide,
+            },
         ],
         templates: {
             overview: 'stacked',
@@ -201,6 +216,7 @@ export default function LLMAnalytics(): JSX.Element {
             'comparison-summary',
             'feature-comparison',
             'product-os-benefits',
+            'endpoints-playground',
             'docs',
             'pricing',
             'getting-started',
