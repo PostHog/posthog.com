@@ -804,47 +804,56 @@ const ProductCategoryGrid = () => {
     )
 }
 
+const ProductsSectionControl = () => (
+    <>
+        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+            <h2 className="m-0 tracking-tight">
+                Explore apps{' '}
+                <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
+            </h2>
+            <aside className="hidden @xl:inline-flex">
+                <span>
+                    <Link to="/products" state={{ newWindow: true }}>
+                        Browse app library
+                    </Link>{' '}
+                    ({APP_COUNT})
+                </span>
+            </aside>
+        </header>
+        <CompanyStageTabs />
+    </>
+)
+
+const ProductsSectionTest = () => (
+    <>
+        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+            <h2 className="m-0 tracking-tight">Products</h2>
+            <Link
+                to="/products"
+                state={{ newWindow: true }}
+                className="text-sm font-semibold flex items-center gap-0.5"
+            >
+                Explore all products <IconArrowRight className="size-4" />
+            </Link>
+        </header>
+        <ProductCategoryGrid />
+    </>
+)
+
 const ProductsSection = () => {
     const posthog = usePostHog()
-    const variant = posthog?.getFeatureFlag?.('homepage-product-groupings')
 
-    if (variant === 'test') {
-        return (
-            <>
-                <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
-                    <h2 className="m-0 tracking-tight">Products</h2>
-                    <Link
-                        to="/products"
-                        state={{ newWindow: true }}
-                        className="text-sm font-semibold flex items-center gap-0.5"
-                    >
-                        Explore all products <IconArrowRight className="size-4" />
-                    </Link>
-                </header>
-                <ProductCategoryGrid />
-            </>
-        )
-    }
-
-    // Control: existing UI
     return (
-        <>
-            <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
-                <h2 className="m-0 tracking-tight">
-                    Explore apps{' '}
-                    <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
-                </h2>
-                <aside className="hidden @xl:inline-flex">
-                    <span>
-                        <Link to="/products" state={{ newWindow: true }}>
-                            Browse app library
-                        </Link>{' '}
-                        ({APP_COUNT})
-                    </span>
-                </aside>
-            </header>
-            <CompanyStageTabs />
-        </>
+        <RenderInClient
+            placeholder={<ProductsSectionControl />}
+            render={() =>
+                posthog?.getFeatureFlag?.('homepage-product-groupings') === 'test' ? (
+                    <ProductsSectionTest />
+                ) : (
+                    <ProductsSectionControl />
+                )
+            }
+        />
     )
 }
 
@@ -1293,12 +1302,6 @@ function Tagline(): JSX.Element {
             render={() =>
                 posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
             }
-          
-            <!--            
-            render={() => {
-                const variant = posthog?.getFeatureFlag?.('home-tagline')
-                return variant === 'test' ? <TaglineExperiment /> : <TaglineControl />
-            }} -->
         />
     )
 }
