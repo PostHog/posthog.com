@@ -20,6 +20,7 @@ Workflows are composed of the following components:
 | [Delays](#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
 | [Audience splits](#audience-splits) | Target and split your users so you can automate some action for them or send a message with more specificity. |
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
+| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps. |
 
 ## Triggers
 
@@ -86,4 +87,43 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 | Capture Event | Trigger a PostHog event. This can be a useful way to chain workflows together, or track the effectiveness of workflows in analytics dashboards. |
 | Update Person Properties | Set a specific person property, or create a new one. This can be a useful way to chain workflows together. |
 
+
+## Output variables
+
+Output variables let you store data from a workflow step's result for use in later steps. This is useful when you need to chain workflow steps together, such as extracting an ID from a webhook response to use in a subsequent API call.
+
+### Configuring output variables
+
+To configure output variables on a step:
+
+1. Click on a workflow step (like a Webhook dispatch)
+2. Expand the **Output variables** section
+3. Click **Add mapping** to add a variable mapping
+4. Select a workflow variable to store the result in
+5. Specify a result path to extract specific data from the response
+
+You can add multiple output variable mappings to a single step to extract different pieces of data. For example, you might extract both a `ticket_id` and `ticket_number` from a single API response.
+
+### Using the property picker
+
+Instead of typing result paths manually, use the **Pick from response** button to select paths interactively:
+
+1. Click **Pick from response** to execute a real HTTP request to the step's endpoint
+2. The response is displayed as an interactive JSON tree
+3. Click on any key in the tree to use it as the result path
+4. If you have multiple variable mappings, select which variable to assign the path to
+
+### Result path syntax
+
+Result paths let you extract specific data from a step's response. Use dot notation for nested objects and bracket notation for arrays:
+
+| Example path | Description |
+|--------------|-------------|
+| `body` | The entire response body |
+| `body.id` | A top-level property from the response |
+| `body.user.email` | A nested property |
+| `body.results[0]` | The first item in an array |
+| `body.results[0].id` | A property from the first array item |
+
+Leave the result path blank to store the entire step result.
 
