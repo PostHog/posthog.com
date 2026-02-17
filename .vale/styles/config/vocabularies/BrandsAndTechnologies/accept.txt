@@ -42,6 +42,7 @@ Bitnami
 [Bb]lend
 [Bb]raze
 Brevo
+Brex
 Bugzilla
 Buildkite
 [Cc]addy
@@ -155,6 +156,7 @@ Logstash
 [Ll]oops
 Lucidchart
 m3ter
+Macbook
 Mailchimp
 Mailgun
 Mailjet
@@ -210,6 +212,7 @@ Redmine
 [Rr]edshift
 [Rr]eplicate
 Replit
+Revolut
 RevX
 [Rr]ipe
 RudderStack
@@ -273,12 +276,13 @@ X
 xAI
 Xtremepush
 Yandex
+Y Combinator
+YC
+Yubikey
 Zabbix
 Zapier
 Zendesk
 Zuora
-Y Combinator
-YC
 
 # Acronyms, languages, frameworks, protocols, etc.
 A/A
@@ -302,6 +306,7 @@ CPUs
 CSS
 CSV
 CSVs
+CTA
 CTAs
 CTEs
 CVE
@@ -419,3 +424,4 @@ American
 British
 [Ee]nglish
 European
+UK
