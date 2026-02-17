@@ -163,7 +163,7 @@ export default function CDP(): JSX.Element {
                 <p>
                     PostHog includes an integrated data warehouse with enough tools that your data never needs to
                     travel. You can store and model data in PostHog&apos;s warehouse, then use it across PostHog tools
-                    such asanalytics, experiments, feature flags, and more without stitching together multiple vendors.
+                    such as analytics, experiments, feature flags, and more, without stitching together multiple vendors.
                     Alternatively, you can connect external warehouses (like Snowflake or BigQuery) as sources to use
                     your warehouse tables inside PostHog.
                     <Link to="/warehouse-native" state={{ newWindow: true }}>
