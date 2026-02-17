@@ -1,0 +1,369 @@
+---
+date: '2026-02-17'
+title: 'How we built automatic clustering for LLM traces'
+author:
+    - andy-maguire
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/TODO_FEATURED_IMAGE
+featuredImageType: full
+category: Engineering
+tags:
+    - Engineering
+    - Product updates
+    - LLM
+---
+
+import { ProductVideo } from 'components/ProductVideo'
+export const demoVideo =
+    'TODO_DEMO_VIDEO_URL'
+
+We're all used to traditional clickstream product analytics data. It's often one of the most important datasets for anyone trying to build something. We're also familiar with backend observability data — metrics, logs, traces — more operational, but still essential.
+
+In the age of AI, though, we now have a different kind of data that combines and mashes aspects of both together. I'm talking about the LLM [traces](/docs/llm-analytics/traces) and [generations](/docs/llm-analytics/generations) your AI agent or agentic workflows produce as they get stuff done.
+
+This data is crucial for seeing whether your agent is actually doing its job, and it's also rich with insights about how your users are using it, what they're trying to do, and even how they feel about the whole interaction.
+
+Think about all your interactions with an AI in the last week and all the subtle (or not so subtle) signals embedded in them. There's a _lot_ of useful information there for the people building the thing you're using — and it all kind of comes for free by the nature of the UX.
+
+> "I need a HUMAN! Get me a HUMAN!" — one of my recent interactions trying to chat with my airline about tickets
+
+So with this in mind, we built a new feature recently, aptly named "Clustering." We probably should have called it "AI-driven magic AI unicorn insights just for you," but I'm bad at names.
+
+Here's a quick demo of the feature, then I'll walk through how the whole pipeline works under the hood, with links to the code if you want to dig deeper.
+
+<ProductVideo videoLight={demoVideo} alt="LLM Analytics clusters demo" classes="rounded" />
+
+## The pipeline
+
+Here's the overall flow from raw traces to clustered insights:
+
+1. **Ingest** — Traces and generations land as PostHog events
+2. **Text representation** — Convert each trace to a readable text format
+3. **Sample** — Hourly sampling of N traces/generations
+4. **Summarize** — LLM-powered structured summarization
+5. **Embed** — Generate embedding vectors from summaries
+6. **Cluster** — UMAP dimensionality reduction + HDBSCAN clustering
+7. **Label** — An AI agent names and describes each cluster
+8. **Display** — Clusters tab with scatter plot and distribution chart
+
+```
+Traces → Text repr → Sample → Summarize → Embed → Cluster → Label → Display
+```
+
+### Design constraints
+
+Before diving in, here were the four questions we kept coming back to:
+
+1. **How do we support huge traces?** Some traces are enormous — we can't just throw them at an LLM and hope for the best.
+2. **How do we keep costs sane?** Running LLMs on every trace would bankrupt us.
+3. **How do we make it zero-config?** It should just work out of the box — no setup required.
+4. **Can we let users steer it later?** Once it's running, can users influence the clustering?
+
+## Step 1: From JSON blobs to readable text
+
+Traces are ingested into [LLM Analytics](/docs/llm-analytics) as normal PostHog events. They have their own loose schema around special [`$ai_*` properties](/docs/llm-analytics/basics) — covering everything from [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) to [sessions](/docs/llm-analytics/sessions) — but also the flexibility of general PostHog events, which means they generally work with any other PostHog feature out of the box.
+
+However, this gives us a blob of JSON at the end of the day with some expected `$ai_` properties, and even within each property the structure and format can vary wildly depending on the LLM provider, framework, or how users have [instrumented their own agents](/docs/llm-analytics/installation).
+
+So we need to figure out how to get from this bag of JSON to something a clustering algorithm can work with — we need numbers. And whenever you need numbers with LLMs, it often means you need embeddings. Our task is to figure out what embeddings to generate that will be useful downstream.
+
+We can't just throw some massive JSON blob at an LLM and expect it to produce a great summary. It might be okay, but we can do better by putting ourselves in the shoes of our LLM: if I can create a general text representation where I myself can easily "read" a trace, then that'll also be a great input for summarization.
+
+So we built a process that renders each trace as a clean, simple text representation — essentially an ASCII tree with line numbering:
+
+```python
+# Simplified trace text representation
+# See: trace_formatter.py
+
+def format_trace(trace_events):
+    """Convert a trace's events into a readable text tree."""
+    lines = []
+    line_num = 1
+
+    for event in sorted(trace_events, key=lambda e: e.timestamp):
+        indent = "  " * event.depth
+        header = f"L{line_num:03d}: {indent}[{event.type}] {event.name}"
+        lines.append(header)
+        line_num += 1
+
+        # Add key properties (input/output summaries, model, tokens, etc.)
+        for key, value in event.important_properties():
+            lines.append(f"L{line_num:03d}: {indent}  {key}: {value}")
+            line_num += 1
+
+    return "\n".join(lines)
+```
+
+> See the actual implementation: [`trace_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/trace_formatter.py)
+
+The line numbering (`L001:`, `L002:`) is important — it gives the downstream summarization LLM a way to reference specific parts of the trace, which makes the structured output much more useful.
+
+### Handling huge traces
+
+Some traces are just too big. We use iterative uniform downsampling to compress them while preserving the most important parts:
+
+```python
+# Simplified uniform downsampling
+# See: message_formatter.py
+
+def reduce_by_uniform_sampling(lines, max_lines, buffer=10):
+    """Drop lines evenly throughout, preserving header and tail."""
+    if len(lines) <= max_lines:
+        return lines
+
+    # Always keep the first and last `buffer` lines
+    header = lines[:buffer]
+    tail = lines[-buffer:]
+    middle = lines[buffer:-buffer]
+
+    # Calculate how many middle lines to keep
+    keep_count = max_lines - len(header) - len(tail)
+    step = len(middle) / keep_count
+    kept = [middle[int(i * step)] for i in range(keep_count)]
+
+    return header + kept + tail
+```
+
+> See the actual implementation: [`message_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/message_formatter.py)
+
+This approach iteratively drops lines evenly throughout the text representation, with a buffer at the start and end that we don't touch. Often this works well because the same information can be passed back and forth within each step of a trace.
+
+## Step 2: Summarization
+
+Now that we have a readable text representation, we can summarize it. We sample N traces per hour (cost management — we're not summarizing _everything_) and send each text representation to an LLM for structured summarization.
+
+The key word there is **structured**. Rather than asking for a free-text summary, we ask for a specific schema:
+
+```python
+# Simplified summarization schema
+# See: schema.py
+
+class SummarizationResponse(BaseModel):
+    title: str              # Short descriptive title
+    flow_diagram: str       # ASCII flow of the trace steps
+    summary_bullets: list[SummaryBullet]  # Key points with line refs
+    interesting_notes: list[str]          # Anything unusual or notable
+
+class SummaryBullet(BaseModel):
+    bullet: str             # The summary point
+    line_refs: list[str]    # e.g., ["L003", "L015"] — back-references
+```
+
+> See the actual implementation: [`schema.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/llm/schema.py)
+
+We use GPT-4.1 nano for this — it's fast, cheap, and the structured output mode means we get reliable, parseable results every time. The line references back to the text representation are particularly useful: they let the summary stay grounded in the actual trace data rather than hallucinating. (If you have sensitive data in your traces, check out [privacy mode](/docs/llm-analytics/privacy-mode) which controls what gets sent.)
+
+These summaries appear as `$ai_trace_summary` and `$ai_generation_summary` events in your project every hour. They also power the on-demand [trace summarization](/docs/llm-analytics/summarization) feature you can use to quickly understand any individual trace or generation without reading through the full conversation.
+
+### Why structured output matters
+
+Structured output is better than a raw summary for one critical reason: downstream embedding quality. When we embed a title + flow diagram + specific bullets with line references, we get a much higher signal representation than embedding a wall of free text. The LLM has already done the work of extracting what matters.
+
+> **Why not RAG?** We considered building a full RAG system — chunking traces, building indices, retrieving at query time. But the complexity of doing that well at PostHog's scale (billions of events across thousands of teams) made us reach for a simpler approach first. Summarization-first means each trace becomes a small, self-contained artifact that's easy to embed and cluster. We may still build RAG for features like natural language search, but for clustering, this works well.
+
+## Step 3: Embedding
+
+Once we have summaries, we format them back into plain text (stripping the line numbers to reduce noise) and [embed](/docs/llm-analytics/embeddings) them:
+
+```python
+# Simplified embedding preparation
+# See: embed_summaries.py
+
+def _format_summary_for_embedding(summary):
+    """Convert structured summary back to embeddable text."""
+    parts = [
+        summary.title,
+        summary.flow_diagram,
+    ]
+
+    for bullet in summary.summary_bullets:
+        parts.append(bullet.bullet)
+
+    for note in summary.interesting_notes:
+        parts.append(note)
+
+    return "\n".join(parts)
+
+# Embed with OpenAI text-embedding-3-large → 3072 dimensions
+embedding = openai.embeddings.create(
+    model="text-embedding-3-large",
+    input=formatted_text
+)
+```
+
+> See the actual implementation: [`embed_summaries.py`](https://github.com/PostHog/posthog/blob/master/ee/hogai/llm_traces_summaries/tools/embed_summaries.py)
+
+Why embed the enriched summary instead of the raw trace? Because the summary lives in a higher-level semantic space. Raw traces contain a lot of noise — [token counts, model versions](/docs/llm-analytics/calculating-costs), repeated system prompts. The summary captures the _intent_ and _flow_, which is exactly what we want our [clusters](/docs/llm-analytics/clusters) to be organized around.
+
+So now, for each trace or generation, we have 3,072 numbers. Time for the fun part.
+
+## Step 4: Clustering
+
+This is where we lean on more "old school" traditional ML techniques. There are still several areas where LLMs haven't eaten the world: recommender engines, clustering, time series modeling, tabular model building, and getting well-calibrated numbers for regression problems. For all of these, you're still better off equipping your agent with the tools to formulate and run traditional algorithms on the data, rather than asking it to do the calculations directly.
+
+### Dimensionality reduction
+
+We can't just cluster the raw 3,072-dimensional vectors — the [curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality) would make distances meaningless. So we first need to reduce dimensions while preserving the important structure.
+
+We actually run UMAP twice, with different goals:
+
+```
+3072-D embeddings
+     ↓
+┌────┴────┐
+↓         ↓
+100-D     2-D
+(UMAP)   (UMAP)
+↓         ↓
+HDBSCAN   Scatter plot
+```
+
+- **3072 → 100 dimensions** for clustering: `min_dist=0.0` packs similar points tightly together, which is what HDBSCAN wants.
+- **3072 → 2 dimensions** for visualization: `min_dist=0.1` keeps some visual separation so the scatter plot is readable.
+
+### HDBSCAN
+
+For the actual clustering, we use [HDBSCAN](https://hdbscan.readthedocs.io/) on the 100-D reduced embeddings:
+
+```python
+# Simplified clustering pipeline
+# See: clustering.py
+
+import umap
+import hdbscan
+import numpy as np
+
+def cluster_embeddings(embeddings: np.ndarray):
+    """Run the full clustering pipeline."""
+
+    # Normalize embeddings
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    normalized = embeddings / norms
+
+    # UMAP for clustering (100-D)
+    reducer_cluster = umap.UMAP(
+        n_components=100,
+        min_dist=0.0,
+        metric="cosine",
+    )
+    embeddings_100d = reducer_cluster.fit_transform(normalized)
+
+    # UMAP for visualization (2-D)
+    reducer_viz = umap.UMAP(
+        n_components=2,
+        min_dist=0.1,
+        metric="cosine",
+    )
+    embeddings_2d = reducer_viz.fit_transform(normalized)
+
+    # HDBSCAN clustering on 100-D embeddings
+    clusterer = hdbscan.HDBSCAN(
+        cluster_selection_method="eom",
+        min_cluster_size=5,
+    )
+    labels = clusterer.fit_predict(embeddings_100d)
+
+    return labels, embeddings_2d
+```
+
+> See the actual implementation: [`clustering.py`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/clustering.py)
+
+HDBSCAN has some nice properties for our use case:
+
+- **No need to pick k** (number of clusters) in advance — it figures this out automatically based on density.
+- **Noise cluster** — items that don't fit any cluster get assigned to cluster -1. These "outliers" can be interesting edge cases you might want to explore.
+- **`cluster_selection_method="eom"`** (Excess of Mass) tends to produce more granular, interpretable clusters compared to the "leaf" method.
+
+After this step, every trace or generation has an integer cluster ID. But an integer doesn't tell you much — we need to make these meaningful.
+
+## Step 5: The labeling agent
+
+Now we have clusters with integer IDs. Cluster 0 has 47 traces, cluster 1 has 23, cluster -1 (noise) has 8. Not exactly actionable.
+
+This is where we bring AI back in — specifically, a [LangGraph](https://langchain-ai.github.io/langgraph/) ReAct agent powered by GPT-5.2. Its job is to explore the clusters and come up with meaningful labels and descriptions.
+
+The agent has access to 8 tools:
+
+| Tool | Purpose |
+|------|---------|
+| `get_clusters_overview` | High-level stats: cluster sizes, counts |
+| `get_all_clusters_with_sample_titles` | Quick scan of what's in each cluster |
+| `get_cluster_trace_titles` | All trace titles for a specific cluster |
+| `get_trace_details` | Full summary for a specific trace |
+| `get_current_labels` | See labels assigned so far |
+| `set_cluster_label` | Set name + description for one cluster |
+| `bulk_set_labels` | Set labels for multiple clusters at once |
+| `finalize_labels` | Signal that labeling is complete |
+
+The agent follows a two-phase strategy:
+
+```python
+# Simplified labeling agent flow
+# See: labeling_agent/
+
+# Phase 1: Bulk labels (guaranteed coverage)
+# Agent calls get_all_clusters_with_sample_titles to get an overview,
+# then bulk_set_labels with initial labels for ALL clusters.
+# This ensures every cluster gets a label even if the agent
+# runs out of budget.
+
+# Phase 2: Refinement
+# Agent iterates through clusters that seem ambiguous,
+# calling get_cluster_trace_titles and get_trace_details
+# to drill deeper, then set_cluster_label to refine.
+
+# Finally: finalize_labels to signal completion.
+```
+
+> See the actual implementation: [`labeling_agent/`](https://github.com/PostHog/posthog/tree/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent)
+
+The two-phase approach is deliberate. If the agent only refined one cluster at a time and hit a token limit or error partway through, you'd end up with half your clusters unlabeled. Bulk-first ensures coverage, then refinement improves quality where it can.
+
+## Step 6: Orchestration with Temporal
+
+All of this needs to run reliably across thousands of teams. We use [Temporal](https://temporal.io/) workflows to orchestrate the pipeline.
+
+A daily coordinator workflow discovers eligible teams (those with enough recent trace data), then spawns child workflows in batches — up to 4 concurrent workflows at a time to manage load:
+
+```python
+# Simplified coordinator
+# See: coordinator.py
+
+# Daily coordinator workflow:
+# 1. Query for teams with recent LLM trace data
+# 2. For each eligible team, spawn a child workflow:
+#    a. Fetch recent embeddings
+#    b. Run clustering pipeline (UMAP + HDBSCAN)
+#    c. Run labeling agent
+#    d. Emit cluster events
+# 3. Max 4 concurrent child workflows
+```
+
+> See the actual implementation: [`coordinator.py`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/coordinator.py)
+
+The output of each child workflow is a set of `$ai_trace_clusters` and `$ai_generation_clusters` events. These are standard PostHog events, which means the [clusters tab](/docs/llm-analytics/clusters) in the UI is just querying events like everything else in PostHog.
+
+## A concrete example
+
+Take another look at the demo video at the top of this post. Here's what you're seeing:
+
+- **Scatter plot** — Each dot is a trace, positioned using the 2-D UMAP coordinates. Colors represent cluster assignments. You can immediately see which groups of traces are similar and how they relate spatially.
+- **Cluster distribution** — A bar chart showing how many traces landed in each cluster, with the agent-generated labels. This gives you a quick sense of what your users are actually doing.
+- **Drill-down** — Click into any cluster to see the individual traces, their summaries, and the full details. This is where you find the patterns — maybe 40% of your traces are "user asking for refund status" and you didn't even know.
+
+The noise cluster (labeled "Unclustered") often contains the most interesting one-off traces — edge cases, unusual workflows, or bugs that don't fit any pattern. Pair this with [evaluations](/docs/llm-analytics/evaluations) (our LLM-as-a-judge feature) to automatically score the quality of generations within each cluster.
+
+## Try it out
+
+If you have any LLM or agentic use cases in your apps, hook them up to PostHog and try clustering for yourself. It runs automatically — no configuration needed.
+
+- **[Clusters documentation](/docs/llm-analytics/clusters)** — Setup guide and feature overview
+- **[Getting started with LLM Analytics](/docs/llm-analytics/start-here)** — Set up tracing for your LLM app in minutes
+- **[Installation guides](/docs/llm-analytics/installation)** — SDKs for OpenAI, Anthropic, LangChain, Vercel AI, and [many more](/docs/llm-analytics/installation)
+- **[Custom properties](/docs/llm-analytics/custom-properties)** — Attach your own metadata to traces for richer clustering
+- **[Privacy mode](/docs/llm-analytics/privacy-mode)** — Control what trace data gets sent to PostHog
+- **Feedback** — Drop us an email at team-llm-analytics@posthog.com or start a thread in the [community](/community)
