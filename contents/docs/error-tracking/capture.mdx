@@ -44,7 +44,13 @@ posthog.init('<ph_project_api_key>', {
 
 ### Manual exception capture
 
-You can also manually call the exception capture method. 
+You can also manually call the exception capture method.
+
+<CalloutBox icon="IconWarning" title="Always use captureException()" type="warning">
+
+Never manually capture `$exception` events using `posthog.capture('$exception', {...})`. Always use `posthog.captureException(error)` instead - it handles the correct event format, stack trace processing, and source map integration automatically.
+
+</CalloutBox>
 
 <MultiLanguage>
 
