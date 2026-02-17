@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import { createSlideConfig, SlidesTemplate, WarehouseNativeSlide } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, IntegratedWarehouseSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { Accordion } from 'components/RadixUI/Accordion'
 
@@ -411,9 +411,9 @@ export default function Experiments(): JSX.Element {
                 component: StatisticalMethodsSlide,
             },
             {
-                slug: 'warehouse-native',
-                name: 'Warehouse-native',
-                component: WarehouseNativeSlide,
+                slug: 'warehouse-integration',
+                name: 'Warehouse integration',
+                component: IntegratedWarehouseSlide,
             },
         ],
         order: [
@@ -428,7 +428,7 @@ export default function Experiments(): JSX.Element {
             'docs',
             'pairs-with',
             'getting-started',
-            'warehouse-native',
+            'warehouse-integration',
         ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout

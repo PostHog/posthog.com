@@ -1,11 +1,11 @@
 ---
-title: Warehouse-native workflows
+title: PostHog's integrated data warehouse
 sidebar: Docs
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-This page explains how PostHog supports warehouse-native workflows through its integrated data warehouse, and what we mean (and don't mean) by "warehouse native."
+This page explains how PostHog&apos;s integrated data warehouse works and how it differs from warehouse-native tools.
 
 > For the full "does PostHog do warehouse native?" answer, check out our [warehouse-native explainer](/warehouse-native).
 
@@ -17,8 +17,8 @@ Data flows into PostHog and all query execution happens in PostHog:
 2. **Storing data** – Data is stored in PostHog infrastructure (unless you're using [custom sources](/docs/data-warehouse/under-the-hood). We do not run your queries inside external data warehouses, such as Snowflake, BigQuery, or Databricks.
 3. **Using data** – Analytics, experiments, feature flags, and other tools enable you to use the data that’s available in PostHog.
 
-If you're using PostHog as your data warehouse, this enables warehouse native workflows because data never leaves your warehouse. You get SQL, unified data, and warehouse-style workflows across many other PostHog tools, such as analytics, feature flags, and surveys.
+If you&apos;re using PostHog as your data warehouse, your data stays in PostHog and is accessible across all PostHog tools. You get SQL, unified data, and can use data in the warehouse across many other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple vendors together—your data never needs to travel between systems.
 
-If you're using an external data warehouse, such as Snowflake, PostHog still enables you to sync the data via our warehouse sources. 
+If you&apos;re using an external data warehouse, such as Snowflake, you can connect it as a source and sync the tables and fields you need into PostHog via our CDP. Queries then run on PostHog compute, enabling you to use warehouse data across PostHog tools. 
 
 For more detail on how data gets into PostHog and where queries run, find out [how the PostHog warehose works under the hood](/docs/data-warehouse/under-the-hood).

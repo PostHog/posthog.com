@@ -4963,8 +4963,8 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Warehouse-native workflows',
-                    url: '/docs/data-warehouse/warehouse-native-workflows',
+                    name: 'Integrated warehouse',
+                    url: '/docs/data-warehouse/integrated-warehouse',
                 },
                 {
                     name: 'SQL commands',

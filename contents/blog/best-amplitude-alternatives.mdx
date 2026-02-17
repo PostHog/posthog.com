@@ -819,10 +819,16 @@ Yes. Amplitude offers warehouse-native analytics that can query data directly fr
 
 **PostHog** offers two approaches to using warehouse data: 
 
-1. [An integrated DuckDB warehouse](/warehouse-native) that works across our products like product analytics and experiments 
-2. The ability to bring data from external sources like [Snowflake, BigQuery, and more](/docs/cdp/sources) for use with all our products. 
+1. **Use PostHog as your integrated warehouse**: Data stays in PostHog and is accessible across many PostHog tools. This eliminates the need to stitch together multiple vendors.
+2. **Connect external warehouses as sources**: Sync tables and fields from Snowflake/BigQuery/Databricks into PostHog via our CDP. Queries run on PostHog compute, enabling you to use warehouse data across PostHog tools.
 
-The managed warehouse approach PostHog offers is better if you want a single platform for analyzing data and using other features, such as surveys and feature flags, as you don't need to maintain an external warehouse in addition to other tools. 
+**PostHog is better if:**
+- You want to eliminate tool sprawl (Amplitude is a point solution that requires separate warehouse tools)
+- You value integrated workflows across analytics, experiments, and feature flags
+- You don&apos;t have a data warehouse yet or want to simplify your stack
+- You want transparent, usage-based pricing (1 million synced rows free per month)
+
+**Amplitude&apos;s approach is better if** you have an existing warehouse and need queries to run directly in Snowflake/BigQuery for compliance or performance reasons.
 
 </details>
 

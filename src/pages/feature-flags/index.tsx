@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate, WarehouseNativeSlide } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, IntegratedWarehouseSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
@@ -68,9 +68,9 @@ export default function FeatureFlags(): JSX.Element {
         },
         custom: [
             {
-                slug: 'warehouse-native',
-                name: 'Warehouse-native',
-                component: WarehouseNativeSlide,
+                slug: 'integrated-warehouse',
+                name: 'Integrated data warehouse',
+                component: IntegratedWarehouseSlide,
                 props: { variant: 'feature-flags' },
             },
         ],
@@ -86,7 +86,7 @@ export default function FeatureFlags(): JSX.Element {
             'docs',
             'pairs-with',
             'getting-started',
-            'warehouse-native',
+            'integrated-warehouse',
         ],
         content: {
             // answersDescription: 'Control the release of new features to your users', moved to json

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate, WarehouseNativeSlide } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate, IntegratedWarehouseSlide } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'product_analytics'
@@ -67,9 +67,9 @@ export default function ProductAnalytics(): JSX.Element {
         exclude: ['videos'],
         custom: [
             {
-                slug: 'warehouse-native',
-                name: 'Warehouse-native',
-                component: WarehouseNativeSlide,
+                slug: 'integrated-warehouse',
+                name: 'Integrated data warehouse',
+                component: IntegratedWarehouseSlide,
             },
         ],
         order: [
@@ -84,7 +84,7 @@ export default function ProductAnalytics(): JSX.Element {
             'docs',
             'pairs-with',
             'getting-started',
-            'warehouse-native',
+            'integrated-warehouse',
         ],
     })
 

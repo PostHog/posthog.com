@@ -287,11 +287,38 @@ export default function CDP(): JSX.Element {
                     zoom={true}
                 />
 
-                <h3>Warehouse-native with PostHog Warehouse</h3>
+                <h3>PostHog&apos;s integrated data warehouse</h3>
                 <p>
-                    PostHog offers an integrated data warehouse that supports warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. Your data never needs to travel and you don't need to stitch together multiple tools into a complex data stack. Alternatively, if you're using an external warehouse, such as Snowflake, you can sync or ingest the data you need into PostHog via our warehouse sources.
+                    PostHog includes an integrated data warehouse with enough in-built tools that your data never needs
+                    to travel anywhere else. This eliminates the need to stitch together multiple vendors, while also
+                    putting your product data and business data in the same place for complex querying.
+                </p>
+                <p>
+                    Instead of managing separate tools for analytics, experimentation, feature flags, and warehousing,
+                    PostHog provides an integrated stack where data flows seamlessly between tools without leaving the
+                    warehouse. Companies like{' '}
+                    <Link to="/customers/headshotpro" state={{ newWindow: true }}>
+                        HeadshotPro
+                    </Link>
+                    ,{' '}
+                    <Link to="/customers/webshare" state={{ newWindow: true }}>
+                        Webshare
+                    </Link>
+                    , and{' '}
+                    <Link to="/customers/elevenlabs" state={{ newWindow: true }}>
+                        ElevenLabs
+                    </Link>{' '}
+                    use PostHog as their single source of truth, eliminating the complexity of managing multiple
+                    systems.
+                </p>
+                <p>
+                    Don&apos;t want to use our warehouse? You can still connect external warehouses (like Snowflake or
+                    BigQuery) as sources to use your warehouse tables inside PostHog. With 1 million synced rows free
+                    per month, it&apos;s cost-effective to sync selective data from your existing warehouse.
+                </p>
+                <p>
                     <Link to="/warehouse-native" state={{ newWindow: true }}>
-                        Learn more about warehouse-native workflows with PostHog
+                        Learn more about PostHog&apos;s integrated warehouse
                     </Link>
                 </p>
 

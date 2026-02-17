@@ -6,7 +6,6 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
-import { CallToAction } from 'components/CallToAction'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -18,15 +17,15 @@ export default function WarehouseNative(): JSX.Element {
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'PostHog warehouse native – Warehouse-native analytics with PostHog Warehouse')
+            setWindowTitle(appWindow, "PostHog's integrated data warehouse")
         }
     }, [appWindow, setWindowTitle])
 
     return (
         <>
             <SEO
-                title="PostHog warehouse native – Warehouse-native analytics with PostHog Warehouse"
-                description="PostHog offers an integrated data warehouse that enables warehouse-native workflows across other PostHog tools, such as analytics, feature flags, and surveys. Alternatively, you can ingest data from existing warehouses for use in PostHog."
+                title="Is PostHog warehouse native? – PostHog integrated data warehouse"
+                description="PostHog includes an integrated data warehouse with enough tools that your data never needs to travel. You can also connect external warehouses as sources to use your warehouse tables inside PostHog."
                 image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
@@ -38,11 +37,12 @@ export default function WarehouseNative(): JSX.Element {
                 <div className="rounded-lg border border-primary/20 bg-accent/30 p-4 my-6 not-prose">
                     <p className="font-medium mb-2">tl;dr</p>
                     <p>
-                        PostHog offers an integrated data warehouse that enables warehouse-native workflows across other
-                        PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch
-                        multiple tools together and provides a single platform for storing and working with data.
-                        Alternatively, you can ingest data from an external warehouse, such as Snowflake, and run
-                        queries on PostHog compute.
+                        PostHog includes an integrated data warehouse with enough tools that your data never needs to
+                        travel. You can store and model data in PostHog&apos;s warehouse, then use it across PostHog
+                        tools such as analytics, experiments, feature flags, and more, without stitching together
+                        multiple vendors. Alternatively, you can connect external warehouses (like Snowflake or
+                        BigQuery) as sources to use your warehouse tables inside PostHog. Queries run on PostHog
+                        compute.
                     </p>
                 </div>
 
@@ -51,19 +51,28 @@ export default function WarehouseNative(): JSX.Element {
                     &ldquo;Warehouse native&rdquo; usually means that you have an external tool, such as an analytics
                     platform, that exists outside of your warehouse and does not ingest data. Queries and workloads are
                     created in the external platform, but run on your data warehouse (Snowflake, BigQuery, Databricks,
-                    etc.) and the data stays there, never moving into the external tool. In PostHog, this is possible
-                    due to an integrated data warehouse which makes your warehouse accessible to other PostHog tools,
-                    such as product analytics.
+                    etc.) and the data stays there, never moving into the external tool. This is what tools like Statsig
+                    and Amplitude offer — they run queries directly in your existing warehouse.
+                </p>
+                <p>
+                    PostHog takes a different approach: we provide an integrated data warehouse that works seamlessly
+                    with PostHog tools. The tools are integrated to the warehouse, rather than being native to an
+                    external warehouse. Alternatively, you can connect external warehouses as sources to use your
+                    warehouse tables inside PostHog and run the queries on PostHog compute.
                 </p>
 
                 <h2>What does PostHog support today?</h2>
                 <p>
                     PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link> which works with
                     other PostHog tools such as product analytics, experiments, and feature flags. If you&apos;re using
-                    PostHog as your data warehouse then data stays where it is and can be accessed by other PostHog
-                    tools, eliminating the need for additional point solutions. If you&apos;re using an external
-                    warehouse, such as Snowflake, BigQuery, or Databricks, PostHog still enables you to sync data via
-                    our warehouse sources; queries then run on PostHog compute.
+                    PostHog as your data warehouse, your data stays in PostHog and can be accessed by other PostHog
+                    tools, eliminating the need to stitch multiple vendors together and maintain complex ETL pipelines.
+                </p>
+                <p>
+                    If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, you can
+                    connect it as a source and sync the tables and fields you need into PostHog via our CDP. Queries
+                    then run on PostHog compute, enabling you to use warehouse data across PostHog tools. This requires
+                    moving data out of the warehouse and running compute in PostHog.
                 </p>
 
                 <h2>What does PostHog not support today?</h2>
@@ -83,19 +92,35 @@ export default function WarehouseNative(): JSX.Element {
                     experience consistently, while also offering users a way to eliminate point solutions that need to
                     be stitched together into complex data stacks.
                 </p>
+                <p>
+                    Companies like{' '}
+                    <Link to="/customers/headshotpro" state={{ newWindow: true }}>
+                        HeadshotPro
+                    </Link>
+                    ,{' '}
+                    <Link to="/customers/webshare" state={{ newWindow: true }}>
+                        Webshare
+                    </Link>
+                    , and{' '}
+                    <Link to="/customers/elevenlabs" state={{ newWindow: true }}>
+                        ElevenLabs
+                    </Link>{' '}
+                    use PostHog&apos;s integrated warehouse as their single source of truth. This eliminates the need to
+                    maintain multiple systems and ETL pipelines.
+                </p>
 
                 <h2>What does this mean for the future?</h2>
                 <p>
                     PostHog is building a managed warehouse based on DuckDB in addition to the current ClickHouse-based
-                    warehouse. The long-term story is:{' '}
-                    <strong>warehouse-native in practice because the warehouse is part of PostHog</strong>. If you're
-                    interested in finding out more, we suggest{' '}
+                    warehouse. The focus is on expanding what integrates with our integrated warehouse, making it easier
+                    to use PostHog as your primary data platform without needing to stitch together multiple tools. If
+                    you&apos;re interested in finding out more, we suggest{' '}
                     <Link to="/managed-warehouse">joining the waitlist for the managed DuckDB warehouse</Link>.
                 </p>
 
                 <p className="mt-8">
                     <Link to="/docs/data-warehouse/warehouse-native-workflows" state={{ newWindow: true }}>
-                        Warehouse-native workflows (docs) →
+                        How PostHog&apos;s integrated warehouse works (docs) →
                     </Link>
                     {' · '}
                     <Link to="/data-stack" state={{ newWindow: true }}>
