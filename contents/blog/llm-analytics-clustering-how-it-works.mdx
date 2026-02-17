@@ -79,7 +79,13 @@ So we need to figure out how to get from this bag of JSON to something a cluster
 
 We can't just throw some massive JSON blob at an LLM and expect it to produce a great summary. It might be okay, but we can do better by putting ourselves in the shoes of our LLM: if I can create a general text representation where I myself can easily "read" a trace, then that'll also be a great input for summarization.
 
-So we built a process that renders each trace as a clean, simple text representation — essentially an ASCII tree with line numbering:
+So we built a process that renders each trace as a clean, simple text representation — essentially an ASCII tree with line numbering. Here's what it looks like in the PostHog UI:
+
+![Text representation view in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/text_repr_example_4b140b221b.png)
+
+You can see the full text representation for this trace in [this gist](https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181) — it's a real example from one of my side projects (a daily factoids chatbot that got into a surprisingly deep conversation about mantis shrimp vision and digital signal processing).
+
+Here's the simplified logic behind generating these:
 
 ```python
 # Simplified trace text representation
