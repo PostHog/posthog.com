@@ -85,7 +85,7 @@ While PostHog is open source, its A/B testing features aren't included in the op
 >
 > For teams looking for all the tools they need to experiment and improve their products, PostHog is a great choice. This is especially true for startups and scaleups thanks to its generous free tier.
 
-> **Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes). Looking for mobile testing tools? See our guide to the [best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools).
+**Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes). Looking for mobile testing tools? See our guide to the [best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools).
 
 ## 2. GrowthBook
 
