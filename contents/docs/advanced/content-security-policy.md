@@ -56,11 +56,11 @@ Depending on your compliance needs you can either:
 
 ### Hedgehog mode
 
-The Toolbar's hedgehog mode renders an animated hedgehog on your site using WebGL via pixi.js. This library uses `new Function()` calls internally, which requires `'unsafe-eval'` in your CSP's `script-src` directive.
+The Toolbar's hedgehog mode renders a playful animated hedgehog on your site — it's a fun Easter egg, not a feature you need for analytics. It uses WebGL via pixi.js, which requires `new Function()` calls internally. This means `'unsafe-eval'` must be in your CSP's `script-src` directive.
 
 If your site has a strict CSP that doesn't include `'unsafe-eval'`, hedgehog mode is automatically disabled. When this happens, the hedgehog mode option in the Toolbar menu shows a tooltip explaining why it's unavailable.
 
-To enable hedgehog mode on sites with strict CSP, add `'unsafe-eval'` to your `script-src` directive:
+If you want to join the fun and enable hedgehog mode, add `'unsafe-eval'` to your `script-src` directive:
 
 ```html
 <meta http-equiv="Content-Security-Policy" content="
@@ -68,7 +68,7 @@ To enable hedgehog mode on sites with strict CSP, add `'unsafe-eval'` to your `s
 ">
 ```
 
-**Note:** Adding `'unsafe-eval'` reduces the security benefits of CSP. Only add it if you need hedgehog mode and understand the implications.
+**Note:** Adding `'unsafe-eval'` reduces the security benefits of CSP by allowing dynamic code execution. Since hedgehog mode is purely for fun, weigh whether the whimsy is worth the tradeoff for your security requirements.
 
 ### Enabling heatmaps
 
