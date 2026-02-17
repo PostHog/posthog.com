@@ -144,7 +144,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
     - If you order a Studio Display during your probation period but end up leaving PostHog, we can recover the cost of the display and you won't need to return it.
   - Laptop guidelines
     - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
-    - For sales & CS roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
+    - For sales & CS roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Grab the smallest SSD (512gb)
     - All other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
     - Apple offers multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large monitor.
     - We only purchase laptops with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave.
