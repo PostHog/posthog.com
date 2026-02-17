@@ -19,6 +19,7 @@ import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
 import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
+import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
@@ -76,6 +77,7 @@ import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
 import { survey_monkey } from '../../hooks/competitorData/survey_monkey'
 import { tealium } from '../../hooks/competitorData/tealium'
+import { tinybird } from '../../hooks/competitorData/tinybird'
 import { umami } from '../../hooks/competitorData/umami'
 import { unleash } from '../../hooks/competitorData/unleash'
 import { userpilot } from '../../hooks/competitorData/userpilot'
@@ -93,6 +95,7 @@ import { brevo } from '../../hooks/competitorData/brevo'
 import { cdpFeatures } from '../../hooks/featureDefinitions/cdp'
 import { dashboardsFeatures } from '../../hooks/featureDefinitions/dashboards'
 import { dataWarehouseFeatures } from '../../hooks/featureDefinitions/data_warehouse'
+import { endpointsFeatures } from '../../hooks/featureDefinitions/endpoints'
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
 import { experimentsFeatures } from '../../hooks/featureDefinitions/experiments'
 import { featureFlagsFeatures } from '../../hooks/featureDefinitions/feature_flags'
@@ -149,6 +152,7 @@ export default function ProductComparisonTable({
         dashboards: dashboardsFeatures,
         data_warehouse: dataWarehouseFeatures,
         error_tracking: errorTrackingFeatures,
+        endpoints: endpointsFeatures,
         experiments: experimentsFeatures,
         feature_flags: featureFlagsFeatures,
         heatmaps: heatmapsFeatures,
@@ -605,6 +609,7 @@ export default function ProductComparisonTable({
         chartmogul,
         chameleon,
         clarity,
+        clickhouse_cloud,
         cloudflare,
         contentsquare,
         crazy_egg,
@@ -662,6 +667,7 @@ export default function ProductComparisonTable({
         survicate,
         survey_monkey,
         tealium,
+        tinybird,
         umami,
         unleash,
         userpilot,

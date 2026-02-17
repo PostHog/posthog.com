@@ -1,0 +1,221 @@
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import { IconRewindPlay, IconToggle, IconTrends, IconWarning, IconArrowUpRight, IconLightBulb } from '@posthog/icons'
+import useProduct from 'hooks/useProduct'
+import FeaturesSlide from 'components/Products/Slides/FeaturesSlide'
+import Link from 'components/Link'
+// Import logo images
+import AnthropicLogo from '../../../contents/images/docs/llms/Anthropic_logo_2025.svg'
+import VercelLogo from '../../../contents/images/docs/llms/Vercel_logo_2025.svg'
+import GeminiLogo from '../../../contents/images/docs/llms/Google_Gemini_logo_2025.svg'
+import OpenRouterLogo from '../../../contents/images/docs/llms/OpenRouter_logo_2025.svg'
+import OpenAILogo from '../../../contents/images/docs/llms/OpenAI_Logo.svg'
+import LangChainLogo from '../../../contents/images/docs/llms/LangChain_Logo.svg'
+import LiteLLMLogoLight from '../../../contents/images/docs/llms/LiteLLM_logo_black.png'
+import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_white.png'
+import { useCustomers, type Customer } from 'hooks/useCustomers'
+
+// Product configuration - change this to adapt for different products
+const PRODUCT_HANDLE = 'endpoints'
+
+export const Subfeature = ({
+    title,
+    description,
+    className = '',
+    icon,
+    color,
+}: {
+    title: string
+    description: string
+    className?: string
+    icon: React.ReactNode
+    color: string
+}): JSX.Element => {
+    return (
+        <li className={`bg-primary rounded p-4 sm:p-6 sm:pb-8  ${className}`}>
+            {icon && (
+                <span className={`inline-block w-10 h-10 mb-4 ${color ? 'text-' + color : 'opacity-50'}`}>{icon}</span>
+            )}
+            <h3 className="text-2xl mb-2">{title}</h3>
+            <p className="text-lg" dangerouslySetInnerHTML={{ __html: description }} />
+        </li>
+    )
+}
+
+const subfeatures = [
+    {
+        title: 'Session replay',
+        description:
+            'Replay AI interactions end-to-end. Inspect user actions, model responses, and UI state together to debug with full context.',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
+    },
+    {
+        title: 'Product analytics',
+        description:
+            'Capture every AI interaction as an event. Analyze usage, variants, and downstream user actions in one place.',
+        icon: <IconTrends />,
+        color: 'blue',
+    },
+    {
+        title: 'Feature flags',
+        description:
+            'Roll out models, prompts, and AI features behind flags. Control exposure by cohort, environment, or percentage.',
+        icon: <IconToggle />,
+        color: 'seagreen',
+    },
+    {
+        title: 'Error tracking',
+        description:
+            'Tie LLM traces directly to errors and exceptions. Inspect inputs, outputs, and stack traces to pinpoint failures fast.',
+        icon: <IconWarning />,
+        color: 'yellow',
+    },
+]
+
+const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; className?: string }) => {
+    const { logo, name } = customer
+
+    if (typeof logo === 'function') {
+        const Logo = logo
+        return <Logo className={`${className} w-auto fill-current object-contain`} />
+    }
+
+    if (logo && 'light' in logo) {
+        return (
+            <>
+                <img src={logo.light} alt={name} className={`${className} w-auto object-contain dark:hidden`} />
+                <img src={logo.dark} alt={name} className={`${className} w-auto object-contain hidden dark:block`} />
+            </>
+        )
+    }
+
+    return null
+}
+
+// Custom ProductOS Benefits slide
+const ProductOSBenefitsSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col justify-center items-center h-full bg-primary text-primary px-8"
+        >
+            <h2 className="text-5xl text-center text-balance">
+                All the LLM observability features you'd expect, but{' '}
+                <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
+            </h2>
+            <p className="mt-4 text-xl text-center">
+                Sure you can use LLM analytics solo, but it's better with other PostHog products.
+            </p>
+
+            <div className="mt-12">
+                <ul
+                    data-scheme="secondary"
+                    className={`grid @lg:grid-cols-2 @2xl:grid-cols-4 gap-4 @2xl:gap-8 list-none p-0`}
+                >
+                    {subfeatures.map((subfeature, index) => (
+                        <Subfeature key={index} {...subfeature} />
+                    ))}
+                </ul>
+            </div>
+        </div>
+    )
+}
+
+export default function LLMAnalytics(): JSX.Element {
+    const contentData = useContentData()
+
+    // GraphQL query for product data
+    const data = useStaticQuery(graphql`
+        query {
+            allProductData {
+                nodes {
+                    products {
+                        name
+                        type
+                        unit
+                        addons {
+                            name
+                            type
+                            unit
+                            plans {
+                                name
+                                plan_key
+                                included_if
+                                features {
+                                    key
+                                    name
+                                    description
+                                    limit
+                                    note
+                                }
+                            }
+                        }
+                        plans {
+                            name
+                            plan_key
+                            free_allocation
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                            tiers {
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    // Create slide configuration with custom templates
+    const slides = createSlideConfig({
+        custom: [
+            {
+                slug: 'product-os-benefits',
+                name: 'Product OS Benefits',
+                component: ProductOSBenefitsSlide,
+            },
+        ],
+        templates: {
+            overview: 'stacked',
+        },
+        exclude: ['answers', 'videos', 'pairs-with', 'feature-platform_integrations'],
+        order: [
+            'overview',
+            'customers',
+            'dashboards',
+            'use_cases',
+            'more',
+            'features',
+            'native_integrations',
+            'posthog-on-posthog',
+            'comparison-summary',
+            'feature-comparison',
+            'product-os-benefits',
+            'docs',
+            'pricing',
+            'getting-started',
+        ],
+        content: {
+            answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
+            answersHeadline: 'What can LLM Analytics help me discover?',
+        },
+    })
+
+    // Merge content data with product data
+    const mergedData = {
+        ...data,
+        ...contentData,
+    }
+
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+}
