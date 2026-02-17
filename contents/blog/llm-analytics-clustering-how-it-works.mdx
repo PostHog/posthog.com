@@ -17,9 +17,6 @@ tags:
     - LLM
 ---
 
-import { ProductVideo } from 'components/ProductVideo'
-export const demoVideo =
-    'TODO_DEMO_VIDEO_URL'
 
 We're all used to traditional clickstream product analytics data. It's often one of the most important datasets for anyone trying to build something. We're also familiar with backend observability data — metrics, logs, traces — more operational, but still essential.
 
@@ -36,7 +33,15 @@ So with this in mind, we built a new feature recently, aptly named "Clustering."
 
 Here's a quick demo of the feature, then I'll walk through how the whole pipeline works under the hood, with links to the code if you want to dig deeper.
 
-<ProductVideo videoLight={demoVideo} alt="LLM Analytics clusters demo" classes="rounded" />
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/dHm3oGdhndA"
+    title="LLM Analytics clusters demo"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
 
 ## The pipeline
 
