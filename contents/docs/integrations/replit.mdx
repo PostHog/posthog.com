@@ -50,11 +50,11 @@ Install packages: posthog-js and @posthog/cli
 Create a PostHog client at client/src/lib/posthog.ts that:
 - Initializes with defaults: '<ph_posthog_js_defaults>', capture_exceptions: true, autocapture: true, capture_pageview: true
 - Uses env vars VITE_POSTHOG_KEY and VITE_POSTHOG_HOST
-- Exports helper functions for captureException and captureEvent
+- Exports a wrapper around posthog.captureException(error) - do NOT manually capture $exception events
 
 Initialize PostHog in App.tsx with useEffect.
 
-Add an error boundary component that captures React errors to PostHog.
+Add an error boundary component that uses posthog.captureException() to capture React errors.
 
 Update `script/build.ts` to:
 - Build with `sourcemap: true`
