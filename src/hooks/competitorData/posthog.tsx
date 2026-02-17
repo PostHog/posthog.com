@@ -123,6 +123,45 @@ export const posthog = {
                 },
             },
         },
+        logs: {
+            available: true,
+            core_logging_and_ingestion: {
+                features: {
+                    centralized_log_ingestion_search: true,
+                    live_tail_real_time_logs: true,
+                    native_open_telemetry_ingest: true,
+                    vendor_agnostic_sdks: true,
+                },
+            },
+            investigation_workflow: {
+                features: {
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
+                    ai_assisted_log_summaries: true,
+                },
+            },
+            debugging_integrations: {
+                features: {
+                    built_in_error_tracking: true,
+                    built_in_session_replay: true,
+                    product_analytics_context: true,
+                },
+            },
+            observability: {
+                features: {
+                    metrics: false,
+                    traces: false,
+                    infra_monitoring: false,
+                },
+            },
+            pricing: {
+                features: {
+                    ingest_only_pricing: true,
+                    no_query_compute_fees: true,
+                    predictable_at_scale: true,
+                },
+            },
+        },
         product_analytics: {
             available: true,
             pricing: {
@@ -281,7 +320,7 @@ export const posthog = {
             },
             management: {
                 features: {
-                    approvals: true,
+                    approvals: 'Scale',
                     data_source: 'First-party',
                     flag_administration: true,
                     flag_scheduling: true,
@@ -483,7 +522,6 @@ export const posthog = {
                 custom_transformations: true,
                 no_code_setup: true,
                 built_in_analytics: true,
-                
             },
         },
         llm_analytics: {
@@ -583,7 +621,7 @@ export const posthog = {
             eu_hosting: true,
             open_source: true,
             reverse_proxy: true,
-            managed_reverse_proxy: true,
+            managed_reverse_proxy: 'Scale',
             self_host: true,
         },
         libraries: {
@@ -676,9 +714,9 @@ export const posthog = {
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: 'Enterprise',
-            role_based_access_control: true,
-            saml_sso: 'Enterprise',
+            history_audit_logs: 'Scale',
+            role_based_access_control: 'Enterprise',
+            saml_sso: 'Scale',
             soc2_certified: true,
             security_certification: 'SOC 2 Type II',
             two_factor_auth: true,

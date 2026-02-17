@@ -62,4 +62,4 @@ If you are forecasted an increased bill because of the price change, we will aut
 
 If you've been waiting for a better reason to try data pipelines out, well… this is it.  
 
-[Head to your pipelines dashboard](https://us.posthog.com/pipeline/destinations) and start batch exporting data or sending events to destinations the cheaper, fairer way.
+[Head to your pipelines dashboard](https://app.posthog.com/data-management/destinations) and start batch exporting data or sending events to destinations the cheaper, fairer way.

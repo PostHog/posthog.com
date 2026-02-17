@@ -71,6 +71,7 @@ const spiritAnimals = [
     { emoji: '🐩', name: 'Poodle' },
     { emoji: '🐇', name: 'Rabbit' },
     { emoji: '🦝', name: 'Raccoon' },
+    { emoji: '🏎️', name: 'Racecar' },
     { emoji: '🐏', name: 'Ram' },
     { emoji: '🦏', name: 'Rhinoceros' },
     { emoji: '🐓', name: 'Rooster' },

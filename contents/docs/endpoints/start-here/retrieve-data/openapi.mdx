@@ -1,0 +1,139 @@
+---
+title: Retrieve data from your endpoint with an OpenAPI SDK
+platformIconName: IconBook
+---
+
+
+Generate type-safe SDKs for any language from your PostHog endpoints using OpenAPI.
+
+## Get your OpenAPI spec
+
+Each endpoint exposes an OpenAPI 3.0 specification:
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/openapi.json"
+```
+
+To get the spec for a specific [version](/docs/endpoints/versioning):
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/openapi.json?version=3"
+```
+
+## Example OpenAPI spec
+
+Here's what an OpenAPI spec looks like for an endpoint called `events_by_day`:
+
+```json
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "events_by_day",
+    "description": "PostHog Endpoint: events_by_day",
+    "version": "1"
+  },
+  "servers": [
+    { "url": "https://us.posthog.com" }
+  ],
+  "paths": {
+    "/api/environments/{project_id}/endpoints/events_by_day/run": {
+      "post": {
+        "operationId": "run_events_by_day",
+        "summary": "Execute events_by_day",
+        "security": [{ "PersonalAPIKey": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EndpointRunRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": { "type": "array", "items": {} },
+                    "columns": { "type": "array", "items": { "type": "string" } },
+                    "hasMore": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "PersonalAPIKey": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
+```
+
+## Generate a typed client
+
+Use [openapi-typescript](https://openapi-ts.dev/) to generate TypeScript types:
+
+```bash
+# Install dependencies
+npm install openapi-typescript --save-dev
+npm install openapi-fetch
+
+# Generate types from your endpoint's OpenAPI spec
+npx openapi-typescript openapi.json -o ./lib/posthog-endpoint.d.ts
+```
+
+Create a typed client:
+
+```typescript
+// lib/posthog-client.ts
+import createClient from "openapi-fetch";
+import type { paths } from "./posthog-endpoint";
+
+export const posthogEndpoint = createClient<paths>({
+  baseUrl: "<ph_app_host>",
+  headers: {
+    Authorization: `Bearer ${process.env.POSTHOG_API_KEY}`,
+  },
+});
+```
+
+Then use it with full type safety:
+
+```typescript
+const { data, error } = await posthogEndpoint.POST(
+  "/api/environments/{project_id}/endpoints/events_by_day/run",
+  { body: { refresh: "cache" } }
+);
+
+console.log(data?.results);
+```
+
+## Supported generators
+
+OpenAPI Generator supports 50+ languages including:
+
+- TypeScript (fetch, axios, node)
+- Python (urllib3, asyncio)
+- Go
+- Ruby
+- Java
+- C#
+- Rust
+- Swift
+- Kotlin
+
+See the full list at [openapi-generator.tech/docs/generators](https://openapi-generator.tech/docs/generators).

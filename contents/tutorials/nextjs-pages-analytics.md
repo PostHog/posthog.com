@@ -295,16 +295,9 @@ import posthog from 'posthog-js'
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  defaults: '2025-11-30'
+  defaults: '2026-01-30'
 });
 ```
-
-<details>
-<summary>Using Next.js 15.2 or older?</summary>
-
-  Older versions of Next.js don't support `instrumentation-client` so you'll need to set up a `PostHogProvider` manually. See our [Next.js docs](/docs/libraries/next-js?tab=Pages+router) for details on how to do this.
-
-</details>
 
 Once saved, restart your app and click around, you should see pageviews and events start to populate in your PostHog instance.
 

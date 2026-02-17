@@ -18,21 +18,21 @@ These docs walk you through pulling, formatting, and ingesting data from Mixpane
 
 To get started, you'll need both a Mixpanel account with data and a PostHog instance. We will use [a tool](https://github.com/stablecog/mixpanel-to-posthog), built by the team at [Stablecog](https://stablecog.com/), to migrate the data and users over.
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## Gathering details
 
-To start with, log in to Mixpanel and go to the project with the data you want to migrate. 
+To start with, log in to Mixpanel and go to the project with the data you want to migrate.
 
 1. Create a service account. Go to **Organization Settings**, click the **Service Accounts** tab, click the **Add Service Account** button, enter a name, then click **Create**.
-2. Hold on to the **username** and **secret** for now. 
+2. Hold on to the **username** and **secret** for now.
 3. You also need your **Project ID** which you can get from your **Project Settings**.
 
 ![Mixpanel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/mixpanel-to-posthog/mixpanel.png)
 
-Next, get the details for PostHog. 
+Next, get the details for PostHog.
 
-1. Get your **project API key** from the getting started flow or [your project settings](https://us.posthog.com/settings/project). 
+1. Get your **project API key** from the getting started flow or [your project settings](https://us.posthog.com/settings/project).
 2. Finally, note your **API host** (either `https://us.i.posthog.com` or `https://eu.i.posthog.com` or a custom domain)
 
 With all this, we are ready to set up the migration tool.
@@ -41,7 +41,7 @@ With all this, we are ready to set up the migration tool.
 
 > **Note:** The Mixpanel to PostHog migration tool is a community-built tool. Test for yourself and use at your own risk.
 
-Go to the [Mixpanel to Posthog Data Migrator repository](https://github.com/stablecog/mixpanel-to-posthog) and [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). 
+Go to the [Mixpanel to Posthog Data Migrator repository](https://github.com/stablecog/mixpanel-to-posthog) and [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
 ```bash
 git clone https://github.com/stablecog/mixpanel-to-posthog.git
@@ -82,11 +82,11 @@ Once successful, you can find your new data in your PostHog instance.
 If you are interested in writing your own script, or just want to learn more about how Mixpanel and PostHog work, here is what the tool is doing:
 
 1. Load the details from the `.env` file and prompt for any missing details (like date range).
-2. Make `GET` requests to the Mixpanel export API using the details. 
+2. Make `GET` requests to the Mixpanel export API using the details.
 3. Decode and format the response data from Mixpanel to one for PostHog. Although Mixpanel's schema is similar, there are many conversions needed to convert to PostHog's Schema. These include:
-    - Changing event names like `$mp_web_page_view` to `$pageview`, 
-    - Changing event properties like `current_url_path` to `$pathname`
-    - Dropping some Mixpanel-specific properties
-    - Formatting the `distinct_id` depending on if it is the `$device_id` or not
+- Changing event names like `$mp_web_page_view` to `$pageview`,
+- Changing event properties like `current_url_path` to `$pathname`
+- Dropping some Mixpanel-specific properties
+- Formatting the `distinct_id` depending on if it is the `$device_id` or not
 4. Return a [slice](https://go.dev/tour/moretypes/7) of formatted `MixpanelDataLine` instances. Basically, a list of formatted event objects ready to import into PostHog.
 5. Loop through the "slice" of formatted `MixpanelDataLine` instances and use the PostHog Client (set up with the `.env` details) to capture events.

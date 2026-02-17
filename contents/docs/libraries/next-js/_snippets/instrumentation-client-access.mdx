@@ -14,3 +14,18 @@ export default function Home() {
   );
 }
 ```
+
+### Using React hooks
+
+The [React feature flag hooks](/docs/libraries/react#feature-flags) work automatically when PostHog is initialized via `instrumentation-client.ts`. The hooks use the initialized posthog-js singleton:
+
+```js
+'use client'
+import { useFeatureFlagEnabled } from 'posthog-js/react'
+
+export default function FeatureComponent() {
+  const showNewFeature = useFeatureFlagEnabled('new-feature')
+
+  return showNewFeature ? <NewFeature /> : <OldFeature />
+}
+```
