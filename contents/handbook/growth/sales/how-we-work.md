@@ -121,7 +121,6 @@ After your ramp period, you should expect to have a performance conversation wit
 
 These standards are likely to change as the TAE role evolves. Any changes will be reflected in the handbook. We will always consider any relevant context when having these conversations with you - quota does not exist in a vacuum!
 
-Context will always matter in evaluating performance, and will be considered in any related conversation.
 
 ## How commission works - Technical Account Managers
 
