@@ -1,0 +1,60 @@
+---
+title: How to use the docs writer agent
+sidebar: Handbook
+showTitle: true
+---
+
+We use Inkeep's Content Writer agent to automatically draft docs PRs in [`posthog.com`](https://github.com/PostHog/posthog.com) when your code changes are merged in [`posthog`](https://github.com/PostHog/posthog). Inkeep is trained on the PostHog website, codebase, and our [docs style guide](/handbook/docs-and-wizard/docs-style-guide), so its drafts are usually a solid starting point — but they still need your review for technical accuracy.
+
+This page covers what to expect and what we need from you.
+
+## Who owns what
+
+**Product engineers** own the docs for their products. When Inkeep opens a docs PR based on your merged code, you're responsible for reviewing it for technical accuracy, iterating on it until it's right, and merging it. You don't need docs team sign-off — treat it like any other PR for your product.
+
+**Docs team** doesn't review every Inkeep PR. Engineers loop us in when they want a second opinion. We're responsible for monitoring Inkeep output quality over time, and tuning and steering the agent.
+
+## The workflow
+
+When you merge a PR in the `posthog` monorepo, Inkeep automatically opens a docs PR on `posthog.com` and tags you as a reviewer. From there:
+
+1. Review the draft for technical accuracy, completeness, code examples, and links.
+2. Iterate until the docs are correct. See [how to make changes](#how-to-make-changes).
+3. Optional: Loop in the docs team if you want a second opinion on style, structure, or information architecture — tag `@team-docs-wizard` as reviewers.
+4. Approve and merge when the docs are ready.
+
+If you tagged `@inkeep` or made changes to the PR, a feedback form is posted after merge. This helps us understand where the agent fell short — please fill it out so we can continue improving the agent.
+
+## How to make changes
+
+You can iterate on an Inkeep docs PR in a few ways:
+
+- Tag `@inkeep` in a PR comment to ask the agent to make specific changes. Describe what you need and Inkeep will push updated commits.
+- Edit the files yourself — either directly on GitHub or by pulling the branch locally. This bypasses the AI loop entirely and is often faster when you know exact changes you want to make.
+
+## What to check
+
+- **Technical accuracy** — Does the documented behavior match what your code actually does?
+- **Completeness** — Are all user-facing changes covered?
+- **Code examples** — Are snippets correct, realistic, and using PostHog conventions?
+- **Links** — Do internal links (website or in-app) point to real pages?
+
+## When to loop in the docs team
+
+You don't need our approval to merge a docs PR. But do loop us in when:
+
+- You need a second pair of eyes on information architecture choices (e.g., new sidebar sections, new landing pages, navigation changes, etc.)
+- You want a style or structure review beyond what you can assess yourself
+- The change is large and you want a second opinion
+
+Tag `@team-docs-wizard` as reviewers on the PR, and we'll help out.
+
+## Feedback
+
+If you tagged `@inkeep` or made changes to the docs PR, a feedback form is posted automatically after merge. It asks you to rate:
+
+- **Initial draft accuracy** (1-5)
+- **Editing effort needed** (1-5)
+- **What would make this more helpful?** (open-ended)
+
+Reply to the comment and tag `@PostHog/team-docs-wizard`. This only shows up when the draft needed work, so your feedback helps us understand where the agent is falling short and how to improve it.
