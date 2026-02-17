@@ -106,6 +106,8 @@ jobs:
                     echo ""
                     echo "[Full report →](${JOB_SUMMARY_URL}) Copy the linter results into an LLM to batch-fix issues."
                     echo ""
+                    echo "Linter being weird? Update the [rules](https://posthog.com/handbook/docs-and-wizard/vale)!"
+                    echo ""
                   } > vale-comment.md
 
                   jq -r 'keys[]' vale-output.json | sort | while IFS= read -r FILE; do
