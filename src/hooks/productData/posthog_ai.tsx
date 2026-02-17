@@ -119,9 +119,9 @@ export const posthog_ai = {
                 'Less digging - more dialogue. PostHog AI lives in your product data. Create insights and dashboards, and generate complex HogQL queries with natural language.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/product_analytics_90a59408f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_5bf99d9574.png',
                     alt: 'Product analytics',
-                    className: 'max-h-64',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -170,9 +170,9 @@ export const posthog_ai = {
                 "Privacy-friendly web analytics that doesn't require selling your soul (or your users' data). PostHog AI surfaces why traffic tanked, and what's actually converting.",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_a2ab8ea550.png',
                     alt: 'Web analytics',
-                    className: 'max-h-56 @2xl:mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -208,47 +208,42 @@ export const posthog_ai = {
             icon: <IconLlmAnalytics className="size-5" />,
             color: 'purple',
             description:
-                "Why was today's token spend more than your salary? Use LLM-as-a-judge for automated evals, then have PostHog AI interpret the scores.",
+                "Why was today's token spend more than your salary? PostHog AI can use LLM analytics to help keep an eye on your AI.",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1742425353/llm_obvs_86706b1ab7.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cde5a95040.png',
                     alt: 'LLM Analytics',
-                    className: 'max-h-40 @2xl:mr-8 @2xl:mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'LLMaaJ evals',
-                    description: 'Use LLM-as-a-judge to evaluate other LLM traces at scale (inception)',
+                    name: 'Usage and adoption',
+                    description: 'Cross-compare AI feature adoption with other events and actions',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 30,
+                    percent: 70,
+                },
+                {
+                    name: 'Cost forecasting',
+                    description:
+                        "Ask PostHog AI to project next month's spend, identify overage risks, or answer ROI questions with SQL",
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 50,
                 },
                 {
                     name: 'LLM trace summarization',
                     description: 'Understand complex interactions without reading full conversation logs',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 30,
+                    percent: 70,
                 },
                 {
-                    name: 'LLM evals generator',
-                    description: 'Create LLM-as-a-judge prompts from manually labeled traces',
+                    name: 'Error investigation',
+                    description: 'Track error rates by model and drill into specific failing traces with PostHog AI',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 50,
                 },
-                {
-                    name: 'Prompt experiments builder',
-                    description: 'Set up system prompt experiments in natural language',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
-                // {
-                //     name: 'Chat with traces',
-                //     description: 'Query your trace data through the PostHog AI chat',
-                //     sticker: <StickerPath className="size-6" />,
-                //     percent: 0,
-                // },
             ],
         },
         {
@@ -265,9 +260,9 @@ export const posthog_ai = {
                 "Don't scrub through hours of recordings — let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/session_replay_67e4cf38de.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_reply_6846989ead.png',
                     alt: 'Session replay',
-                    className: 'max-h-64 @2xl:mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -305,9 +300,9 @@ export const posthog_ai = {
                 'PostHog AI sets up, monitors, manages, and rolls out your feature flags — making releases safe by default.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_ce422c1e73.png',
                     alt: 'Feature Flags',
-                    className: 'max-h-64 @2xl:mt-8 @2xl:mr-4',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                 },
             ],
             skills: [
@@ -348,9 +343,9 @@ export const posthog_ai = {
                 'Ship ideas like a mad scientist. PostHog AI handles setup, flags, and metrics — you decide what deploys (and which experiments never leave the lab).',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/experiments_1dc7831033.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
                     alt: 'Experiments',
-                    className: 'max-h-64 @2xl:mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -395,9 +390,9 @@ export const posthog_ai = {
                 'Find out what broke before your users tweet about it. PostHog AI connects exceptions to user sessions, revenue impact, and business context—not just stack traces.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806655/error_tracking_4e0dff38af.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_53fc0bc180.png',
                     alt: 'Error Tracking',
-                    className: 'max-h-64 @2xl:mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -437,9 +432,9 @@ export const posthog_ai = {
                 "Describe what you want to know, get a working survey in seconds. It's never been easier to get roasted by users (and advised on next steps by PostHog AI).",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/surveys_e13b99220b.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_aeb8302376.png',
                     alt: 'Surveys',
-                    className: 'max-h-64 @2xl:mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -476,9 +471,9 @@ export const posthog_ai = {
                 'Why drag and drop when you can just ask? PostHog AI builds the workflow, sets the triggers, and ships it faster than you can say <em>“if this, then that.”</em>',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1743523365/messaging_crest_8de90d3c39.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_81cfc6f841.png',
                     alt: 'Workflows',
-                    className: 'max-h-64 mt-8 mr-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -513,9 +508,9 @@ export const posthog_ai = {
                 'Dump all your Stripe, Hubspot, and whatever-else data into one place. PostHog AI generates HogQL queries to join tables you forgot existed.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/data_warehouse_99ac92f444.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_db4a9498c8.png',
                     alt: 'Data Warehouse',
-                    className: 'max-h-64 mt-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -547,9 +542,9 @@ export const posthog_ai = {
                 'PostHog AI is your data plumber. It finds the leaks, clears the clogs, and keeps insights flowing without flooding your warehouse.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1742915575/ingestion_f1030194a7.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ingestion_7b729b78f7.png',
                     alt: 'Data Pipelines',
-                    className: 'max-h-64 mt-8 mr-8',
+                    className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
                 },
