@@ -570,6 +570,7 @@ export const handbookSidebar = [
             { name: 'Progression', url: '/handbook/people/career-progression' },
             { name: 'HR processes', url: '/handbook/people/grievances' },
             { name: 'BookHog', url: '/handbook/people/bookhog' },
+            { name: 'Philosophy club', url: '/handbook/people/philosophy-club' },
             { name: 'Offboarding', url: '/handbook/people/offboarding' },
         ],
     },
