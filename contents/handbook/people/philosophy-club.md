@@ -3,7 +3,9 @@ title: Philosophy club
 sidebar: Handbook
 showTitle: true
 ---
-Philosophy club runs once a month, and Charles organizes it. We spend each 30min session discussing one philosophical question in the Socratic tradition. A short text is shared in advance as light pre-reading from the Stanford Encyclopedia of Philosophy. These can be a bit dry, so feel free to use alternatives - the [Crash Course videos](https://thecrashcourse.com/topic/philosophy/) are quite good. 
+Philosophy club runs once a month, and <TeamMember name="Charles Cook" /> organizes it. We spend each 30min session discussing one philosophical question in the Socratic tradition. A short text is shared in advance as light pre-reading from the Stanford Encyclopedia of Philosophy. These can be a bit dry, so feel free to use alternatives - the [Crash Course videos](https://thecrashcourse.com/topic/philosophy/) are quite good. 
+
+If you're interested in joining, ask <TeamMember name="Charles Cook" /> to add you to the recurring event in `#team-people-and-ops`.
 
 ## Structure
 
