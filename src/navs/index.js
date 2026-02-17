@@ -734,10 +734,6 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/docs-ownership',
             },
             {
-                name: 'How to use the docs writer agent',
-                url: '/handbook/docs-and-wizard/docs-writer-agent',
-            },
-            {
                 name: 'Style guide',
                 url: '/handbook/docs-and-wizard/docs-style-guide',
             },
