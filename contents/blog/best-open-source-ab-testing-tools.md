@@ -256,18 +256,18 @@ It depends on the tool. **PostHog** includes full product analytics alongside ex
 
 These are two statistical approaches for analyzing experiment results. 
 
-- **Frequentist** testing uses p-values and confidence intervals — you define a sample size upfront, run the test, and check if results are statistically significant at the end. 
+- **Frequentist** testing uses p-values and confidence intervals – you define a sample size upfront, run the test, and check if results are statistically significant at the end. 
 
 - **Bayesian** testing calculates the probability that one variant is better than another and updates continuously as data comes in, making it easier to interpret mid-experiment.
 
-**PostHog** and **GrowthBook** support both approaches. Most other open-source tools on this list don't include built-in statistical analysis at all — you'll need to calculate significance yourself or use a separate tool.
+**PostHog** and **GrowthBook** support both approaches. Most other open-source tools on this list don't include built-in statistical analysis at all – you'll need to calculate significance yourself or use a separate tool.
 
 </details>
 
 <details>
   <summary>Can I self-host an A/B testing tool?</summary>
 
-Yes — that's one of the main advantages of open-source A/B testing tools. **GrowthBook** offer both cloud and self-hosted options with full experimentation features. **Unleash** and **Flagsmith** can be self-hosted for free with their open-source editions. **Mojito** is self-hosted only. Self-hosting gives you complete control over your data, which is particularly important for teams with strict privacy requirements or regulatory compliance needs.
+Yes – that's one of the main advantages of open-source A/B testing tools. **GrowthBook** offer both cloud and self-hosted options with full experimentation features. **Unleash** and **Flagsmith** can be self-hosted for free with their open-source editions. **Mojito** is self-hosted only. Self-hosting gives you complete control over your data, which is particularly important for teams with strict privacy requirements or regulatory compliance needs.
 
 </details>
 
