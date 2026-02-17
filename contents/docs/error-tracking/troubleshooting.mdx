@@ -109,6 +109,20 @@ To debug:
 3. Watch [session recordings](/docs/session-replay) to see what user actions triggered the error, then reproduce in development
 4. Use a development build which includes full error messages. Only use this for debugging, not production
 
+
+## Grouping or assignment rules disabled
+
+Rules can become disabled if PostHog encounters a processing error while evaluating the rule during exception ingestion. When a rule is disabled, a banner appears in the [error tracking settings](https://app.posthog.com/error_tracking/configuration) showing the error message.
+
+To fix and re-enable a disabled rule:
+
+1. Go to your [custom grouping rules](/docs/error-tracking/grouping-issues#custom-grouping-rule) or [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) in the error tracking settings
+2. Find the rule with the disabled banner and review the error message
+3. Edit the rule to correct the configuration issue
+4. Save the rule – this automatically re-enables it
+
+If the error persists after editing, reach out to support.
+
 ## Solved community questions
 
 <SolvedQuestions

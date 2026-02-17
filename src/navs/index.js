@@ -570,6 +570,7 @@ export const handbookSidebar = [
             { name: 'Progression', url: '/handbook/people/career-progression' },
             { name: 'HR processes', url: '/handbook/people/grievances' },
             { name: 'BookHog', url: '/handbook/people/bookhog' },
+            { name: 'Philosophy club', url: '/handbook/people/philosophy-club' },
             { name: 'Offboarding', url: '/handbook/people/offboarding' },
         ],
     },
@@ -735,6 +736,10 @@ export const handbookSidebar = [
             {
                 name: 'Style guide',
                 url: '/handbook/docs-and-wizard/docs-style-guide',
+            },
+            {
+                name: 'Vale (prose linter)',
+                url: '/handbook/docs-and-wizard/vale',
             },
             {
                 name: 'MDX and components',
