@@ -70,7 +70,7 @@ export default function WarehouseNative(): JSX.Element {
                 </p>
                 <p>
                     If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, you can
-                    connect it as a source and sync the tables and fields you need into PostHog via our CDP. Queries
+                    connect it as a source and sync the tables and fields you need into PostHog via our warehouse sources. Queries
                     then run on PostHog compute, enabling you to use warehouse data across PostHog tools. This requires
                     moving data out of the warehouse and running compute in PostHog.
                 </p>
