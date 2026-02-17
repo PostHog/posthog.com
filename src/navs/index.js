@@ -747,7 +747,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'How to use the content writer agent',
-                url: '/handbook/docs-and-wizard/docs-writer-agent',
+                url: '/handbook/docs-and-wizard/content-writer-agent',
             },
             {
                 name: 'Onboarding docs',
