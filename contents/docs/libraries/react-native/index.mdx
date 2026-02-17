@@ -339,6 +339,45 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
 
+### Error boundaries
+
+You can use the `PostHogErrorBoundary` component to capture React rendering errors thrown by components:
+
+```react-native
+import { PostHogProvider, PostHogErrorBoundary } from 'posthog-react-native'
+import { View, Text } from 'react-native'
+
+const App = () => {
+  return (
+    <PostHogProvider apiKey="<ph_project_api_key>">
+      <PostHogErrorBoundary
+        fallback={YourFallbackComponent}
+        additionalProperties={{ screen: "home" }}
+      >
+        <YourApp />
+      </PostHogErrorBoundary>
+    </PostHogProvider>
+  )
+}
+
+const YourFallbackComponent = ({ error, componentStack }) => {
+  return (
+    <View>
+      <Text>Something went wrong!</Text>
+      <Text>{error instanceof Error ? error.message : String(error)}</Text>
+    </View>
+  )
+}
+```
+
+The `fallback` prop accepts a component to render when an error occurs. The `additionalProperties` prop lets you add custom properties to the captured error event.
+
+<CalloutBox type="caution" title="Duplicate errors with console capture">
+
+If you have both `PostHogErrorBoundary` and `console` capture enabled in your `errorTracking` config, render errors will be captured twice. This is because React logs all errors to the console by default. To avoid this, set `console: []` on `errorTracking.autocapture` (for example, `errorTracking: { autocapture: { console: [] } }`) when using `PostHogErrorBoundary`.
+
+</CalloutBox>
+
 ### Customizing exception capture with before_send
 
 You can use the `before_send` callback to modify, filter, or suppress exception events before they are sent to PostHog. This is useful for:

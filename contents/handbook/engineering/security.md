@@ -30,7 +30,7 @@ In public repos, Actions may run against PRs written by external contributors. T
 
 ### AWS
 
-Application secrets are stored in AWS Secrets Manager. To modify an app's secrets, use <PrivateLink url="https://github.com/PostHog/charts/tree/main/secrets">secrets.py</PrivateLink>.
+Application secrets are stored in AWS Secrets Manager. To modify an app's secrets, use our <PrivateLink url="https://github.com/PostHog/secrets">secrets tool</PrivateLink>.
 
 ### GitHub
 

@@ -637,7 +637,12 @@ const ProductCount = () => {
 }
 
 const AppCount = () => {
-    return APP_COUNT
+    return (
+        <span className="flex items-center gap-1">
+            <Link to="/products">Browse app library</Link>
+            <span>({APP_COUNT})</span>
+        </span>
+    )
 }
 
 const productCategories = [
@@ -994,6 +999,7 @@ const Customers = () => {
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
+    const { websiteMode } = useApp()
 
     // Get all companies
     const allCompanies = [...COL1, ...COL2]
@@ -1284,10 +1290,15 @@ function Tagline(): JSX.Element {
     return (
         <RenderInClient
             placeholder={null}
+            render={() =>
+                posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
+            }
+          
+            <!--            
             render={() => {
                 const variant = posthog?.getFeatureFlag?.('home-tagline')
                 return variant === 'test' ? <TaglineExperiment /> : <TaglineControl />
-            }}
+            }} -->
         />
     )
 }
@@ -1496,10 +1507,10 @@ export default function Home() {
                 image="/images/og/default.png"
             />
             <MDXEditor
-                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}
+                maxWidth={900}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'

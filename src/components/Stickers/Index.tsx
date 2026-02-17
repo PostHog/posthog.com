@@ -35,6 +35,7 @@ const countryFlagMapping: Record<string, keyof typeof AllStickers> = {
     SI: 'StickerFlagSI',
     US: 'StickerFlagUS',
     UY: 'StickerFlagUY',
+    ZW: 'StickerFlagZW',
 }
 
 // Enhanced StickerTrophy component that accepts a label prop

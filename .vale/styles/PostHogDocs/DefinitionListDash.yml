@@ -1,0 +1,7 @@
+extends: existence
+message: 'In lists, use an en dash ( – ) to separate items from descriptions instead of a colon (:).'
+level: warning
+scope: list
+nonword: true
+tokens:
+    - '[A-Z][a-z]+(?:\s[A-Z][a-z]+)+:\s[A-Z]'

@@ -129,11 +129,14 @@ interface AppContextType {
     setConfetti: (isActive: boolean) => void
     confetti: boolean
     posthogInstance?: string
+    websiteMode: boolean
     desktopParams?: string
     copyDesktopParams: () => void
     desktopCopied: boolean
     shareableDesktopURL: string
     windowsInView: AppWindow[]
+    searchOpen: boolean
+    setSearchOpen: (isOpen: boolean) => void
 }
 
 interface AppProviderProps {
@@ -289,11 +292,14 @@ export const Context = createContext<AppContextType>({
     setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
+    websiteMode: false,
     desktopParams: undefined,
     copyDesktopParams: () => {},
     desktopCopied: false,
     shareableDesktopURL: '',
     windowsInView: [],
+    searchOpen: false,
+    setSearchOpen: () => {},
 })
 
 export interface AppSetting {
@@ -315,6 +321,9 @@ export interface AppSetting {
             windows: AppWindow[],
             getDesktopCenterPosition: (size: { width: number; height: number }) => { x: number; y: number }
         ) => { x: number; y: number }
+    }
+    modal?: {
+        type: 'standard' | 'side' | 'floating'
     }
 }
 
@@ -486,6 +495,9 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     '/services': {
@@ -737,6 +749,9 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        modal: {
+            type: 'standard',
+        },
     },
     '/changelog-video': {
         size: {
@@ -831,6 +846,9 @@ const appSettings: AppSettings = {
                 height: 600,
             },
             fixed: false,
+        },
+        modal: {
+            type: 'floating',
         },
     },
     'community-auth-signin': {
@@ -949,6 +967,9 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        modal: {
+            type: 'standard',
+        },
     },
     'cool-tech-jobs-issue': {
         size: {
@@ -1045,6 +1066,9 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     'add-roadmap': {
@@ -1195,6 +1219,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const constraintsRef = useRef<HTMLDivElement>(null)
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
+    const websiteMode = siteSettings.experience === 'boring'
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
@@ -1211,19 +1237,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             ? []
             : getInitialWindows(element)
     )
+    const windowsRef = useRef(windows)
+    useEffect(() => {
+        windowsRef.current = windows
+    }, [windows])
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
             (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
             undefined
         )
     }, [windows])
-    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
     const [confetti, setConfetti] = useState(false)
     const [posthogInstance, setPosthogInstance] = useState<string>()
+    const [searchOpen, setSearchOpen] = useState<boolean>(false)
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
@@ -1318,28 +1348,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const menu = injectDynamicChildren(initialMenu)
 
-    const closeWindow = useCallback(
-        (item: AppWindow) => {
-            setTimeout(() => {
-                const windowsFiltered = windows.filter((el) => el.path !== item.path)
-                const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
-                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-                    undefined
-                )
-                if (nextFocusedWindow && !nextFocusedWindow.minimized) {
-                    if (nextFocusedWindow.path.startsWith('/')) {
-                        navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
-                    } else {
-                        bringToFront(nextFocusedWindow)
-                    }
+    const closeWindow = useCallback((item: AppWindow) => {
+        setTimeout(() => {
+            const currentWindows = windowsRef.current
+            const windowsFiltered = currentWindows.filter((el) => el.path !== item.path)
+            const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
+                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                undefined
+            )
+            if (nextFocusedWindow && !nextFocusedWindow.minimized) {
+                if (nextFocusedWindow.path.startsWith('/')) {
+                    navigate(`${nextFocusedWindow.path}${nextFocusedWindow.location?.search || ''}`)
                 } else {
-                    navigate('/', { state: { skipPageUpdate: true } })
+                    bringToFront(nextFocusedWindow)
                 }
-                setWindows(windowsFiltered)
-            }, 0)
-        },
-        [windows]
-    )
+            } else {
+                navigate('/', { state: { skipPageUpdate: true } })
+            }
+            setWindows(windowsFiltered)
+        }, 0)
+    }, [])
 
     const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
         setWindows((windows) =>
@@ -1355,10 +1383,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const replaceFocusedWindow = useCallback(
         (newWindow: AppWindow) => {
-            if (focusedWindow) {
+            // Find the highest zIndex window, excluding floating modals in websiteMode
+            const windowToReplace = windows
+                .filter((w) => !websiteMode || w.appSettings?.modal?.type !== 'floating')
+                .reduce<AppWindow | undefined>(
+                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                    undefined
+                )
+
+            if (windowToReplace) {
                 setWindows((windows) =>
                     windows.map((w) =>
-                        w === focusedWindow
+                        w === windowToReplace
                             ? {
                                   ...w,
                                   element: newWindow.element,
@@ -1366,6 +1402,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   fromHistory: newWindow.fromHistory,
                                   props: newWindow.props,
                                   location: newWindow.location,
+                                  size: newWindow.size,
                               }
                             : w
                     )
@@ -1374,7 +1411,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setWindows((windows) => [...windows, newWindow])
             }
         },
-        [focusedWindow]
+        [windows, websiteMode]
     )
 
     const setWindowTitle = useCallback((appWindow: AppWindow, title: string) => {
@@ -1591,18 +1628,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
+        if (websiteMode && (newWindow.appSettings?.size.fixed || newWindow.appSettings?.modal)) {
+            newWindow.modal = { type: 'standard' as const, ...newWindow.appSettings?.modal }
+        }
+
         return { ...newWindow, ...options }
     }
 
     const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
-
         if (siteSettings.experience === 'boring') {
-            if (existingWindow) {
-                return bringToFront(existingWindow, element.props.location)
-            }
-            if (newWindow.key.startsWith('/')) {
+            if (!newWindow.appSettings?.size.fixed && !newWindow.appSettings?.modal) {
                 return replaceFocusedWindow(newWindow)
             } else {
                 return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
@@ -1664,6 +1701,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const openSearch = (initialFilter?: string) => {
+        if (websiteMode) {
+            setSearchOpen((prev) => !prev)
+            return
+        }
         addWindow(
             <WindowSearchUI
                 location={{ pathname: `search` }}
@@ -1829,7 +1870,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     useEffect(() => {
         const updateTaskbarHeight = () => {
             const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
-            setTaskbarHeight(height)
+            if (height > 0) {
+                setTaskbarHeight(height)
+            }
         }
 
         updateTaskbarHeight()
@@ -2027,6 +2070,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     }
                 }
             }
+            if (e.shiftKey && e.key.toLowerCase() === 'm') {
+                e.preventDefault()
+                // Toggle between OS mode and website mode
+                const newExperience = siteSettings.experience === 'posthog' ? 'boring' : 'posthog'
+                updateSiteSettings({
+                    ...siteSettings,
+                    experience: newExperience,
+                })
+
+                posthog?.capture('switched site mode', {
+                    value: newExperience === 'posthog' ? 'os' : 'website',
+                    source: 'keyboard',
+                })
+
+                // Add toast notification
+                addToast({
+                    description: `Switched to ${newExperience === 'posthog' ? 'OS mode' : 'website mode'}`,
+                    duration: 2000,
+                })
+            }
             if (e.shiftKey && e.key === 'C') {
                 e.preventDefault()
                 if (!desktopParams) return
@@ -2084,6 +2147,36 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    // In website mode, sync window sizes to browser viewport on resize
+    useEffect(() => {
+        if (!websiteMode || isSSR) return
+
+        const handleResize = () => {
+            const newWidth = window.innerWidth
+            const newHeight = window.innerHeight - taskbarHeight
+
+            setWindows((currentWindows) =>
+                currentWindows.map((w) => ({
+                    ...w,
+                    ...(w.appSettings?.size?.fixed || w.appSettings?.modal
+                        ? {}
+                        : {
+                              size: {
+                                  width: newWidth,
+                                  height: newHeight,
+                              },
+                          }),
+                }))
+            )
+        }
+
+        // Set initial size
+        handleResize()
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [websiteMode, taskbarHeight, isSSR])
 
     useEffect(() => {
         if (compact) {
@@ -2147,6 +2240,24 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }
         }
     }, [])
+
+    useEffect(() => {
+        if (websiteMode) {
+            const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
+            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
+            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed || w.appSettings?.modal)
+            const newWindows = [
+                ...(currentWindow ? [currentWindow] : []),
+                ...(modalWindow
+                    ? [{ ...modalWindow, modal: { type: 'standard' as const, ...modalWindow.appSettings?.modal } }]
+                    : []),
+            ]
+            setWindows(newWindows)
+        } else {
+            const newWindows = windows.map((w) => ({ ...w, modal: undefined }))
+            setWindows(newWindows)
+        }
+    }, [websiteMode])
 
     const convertWindowsToPixels = (windows: any[]) => {
         const innerWidth = window.innerWidth
@@ -2255,6 +2366,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindowsInView(visibleWindows)
     }, [windows])
 
+    useEffect(() => {
+        if (websiteMode && windows.length <= 0) {
+            navigate('/')
+        }
+    }, [windows])
+
     return (
         <Context.Provider
             value={{
@@ -2299,11 +2416,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setConfetti,
                 confetti,
                 posthogInstance,
+                websiteMode,
                 desktopParams,
                 copyDesktopParams,
                 desktopCopied,
                 shareableDesktopURL,
                 windowsInView,
+                searchOpen,
+                setSearchOpen,
             }}
         >
             {children}
