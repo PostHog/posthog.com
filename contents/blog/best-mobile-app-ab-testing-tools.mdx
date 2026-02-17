@@ -41,6 +41,8 @@ More advanced tools go further with:
 - **Holdout testing** to measure the long-term cumulative impact of your experiments
 - **Visual editors** for creating variations without code changes
 - **Server-side testing** for experiments that need to run on your backend
+- **Bayesian vs. Frequentist statistical approaches** for analyzing experiment results
+- **Namespacing** for organizing experiments and avoiding conflicts
 - **Product analytics integration** so you can analyze experiment results alongside broader user behavior
 
 Here's how the most popular mobile app A/B testing tools compare:
@@ -48,9 +50,14 @@ Here's how the most popular mobile app A/B testing tools compare:
 ## 1. PostHog
 
 - **Best for:** Engineering and product teams
-  
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_32_2x_aa22220b10.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_06_2x_49e3ebc85d.png"
+    classes="rounded"
+    alt="PostHog ab testing"
+/>
+  
 ### What is PostHog?
 
 [PostHog](/) (that's us!) is an all-in-one developer platform built to help engineers create better products. It includes [experimentation](/experiments) and a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and an [AI](/ai) assistant.
@@ -148,7 +155,7 @@ It's built for marketers in large enterprises looking to optimize their content,
 | iOS | ✔ |
 | Android | ✔ |
 | React Native | ✔ |
-| Flutter | ✖ (no official SDK) |
+| Flutter | ✔ |
 | Web | ✔ |
 | Server | ✔ |
 
@@ -248,7 +255,7 @@ It offers advanced experimentation techniques, such as multi-armed bandit experi
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Open source:** <span className="text-red text-lg">✖</span>
-- **Transparent pricing:** Partial
+- **Transparent pricing:**  <span className="text-green text-lg">✔</span>
 - **Includes product analytics:** <span className="text-green text-lg">✔</span>
 - **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
 
@@ -285,9 +292,9 @@ The people who find LaunchDarkly most useful are engineering managers, site reli
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Open source:** <span className="text-red text-lg">✖</span>
-- **Transparent pricing:** Partial
+- **Transparent pricing:** <span className="text-green text-lg">✔</span>
 - **Includes product analytics:** <span className="text-green text-lg">✔</span>
-- **Get started without talking to sales:** <span className="text-red text-lg">✖</span>
+- **Get started without talking to sales:** <span className="text-green text-lg">✔</span>
 
 ### Which platforms does LaunchDarkly support?
 
@@ -381,7 +388,7 @@ Apptimize don't share their pricing publicly. You need to ask sales for a custom
 ## Which mobile app A/B testing tool should you choose?
 
 - Want an all-in-one platform that integrates A/B testing with product analytics, session replays, feature flags, error tracking and more, without stitching together multiple tools? Go with **PostHog**.
-- Non-technical team that wants a visual editor for creating experiments without code? Choose **VWO**.
+- Non-technical team that needs an easy-to-use interface for running mobile experiments without heavy developer involvement? Choose **VWO**.
 - Enterprise marketing team with a large budget that needs content management alongside experimentation? Consider **Optimizely**.
 - Already using Firebase for backend services and want free, mobile-only A/B testing? Stick with **Firebase**.
 - E-commerce or healthcare company that needs HIPAA compliance and AI-powered personalization? **Kameleoon** is built for you.
@@ -419,11 +426,13 @@ Unlike web A/B testing where you can deploy changes instantly, mobile experiment
 <details>
   <summary>What's the difference between client-side and server-side A/B testing?</summary>
 
-**Client-side testing** runs experiments directly in the app on the user's device. It's good for UI changes like button colors, layouts, and copy. Tools like **VWO** offer visual editors for this approach.
+Both approaches make requests to a server to determine which variation a user sees — the difference is where that request happens.
 
-**Server-side testing** runs experiments on your backend. It's better for testing algorithms, pricing logic, API responses, and anything that involves backend changes. Tools like **PostHog**, **Statsig**, and **LaunchDarkly** support this approach.
+**Client-side testing** makes the request from the app or browser. It's easier to set up, but can cause "flicker" as the UI updates after the response comes back. Tools like **VWO** offer visual editors for this approach on web.
 
-Most mobile teams need server-side testing because mobile apps can't be updated instantly like websites – you need feature flags to control which variation users see without waiting for an app store review.
+**Server-side testing** makes the request from your backend (e.g. a Django or Node service) before sending anything to the client, which eliminates flicker. It's better for testing algorithms, pricing logic, API responses, and anything involving backend changes. Tools like **PostHog**, **Statsig**, and **LaunchDarkly** support this approach.
+
+Most mobile teams need server-side testing because mobile apps can't be updated instantly like websites — you need [feature flags](/docs/feature-flags) to control which variation users see without waiting for an app store review. You can also use techniques like [bootstrapping](/docs/feature-flags/bootstrapping) and [local evaluation](/docs/feature-flags/local-evaluation) to reduce latency and avoid flicker on the client side.
 
 </details>
 
@@ -475,7 +484,7 @@ However, if your A/B test relies on identifying users across devices or linking 
 <details>
   <summary>What's the best free mobile A/B testing tool?</summary>
 
-**Firebase A/B testing** is completely free with no usage limits, but it's limited to mobile (iOS, Android, Flutter) and requires Google Analytics. **PostHog** offers 1 million A/B testing requests free per month with full cross-platform support. **Statsig** offers 2 million free events per month. **LaunchDarkly** has a free Developer tier for small projects.
+**Statsig** offers 2 million free events per month and free feature flags. **Firebase A/B testing** is completely free with no usage limits, but it's limited to mobile (iOS, Android, Flutter) and requires Google Analytics. **PostHog** offers 1 million A/B testing requests free per month with full cross-platform support. **LaunchDarkly** has a free Developer tier for small projects.
 
 The best choice depends on your needs: **Firebase** for free and simple, **PostHog** or **Statsig** for free with more advanced features and broader platform support.
 
