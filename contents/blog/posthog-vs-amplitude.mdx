@@ -413,7 +413,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 
 Yes, for most use cases. **PostHog** offers all the core analytics features Amplitude provides – funnels, retention, cohorts, user paths, feature flags, A/B testing, session replay, and surveys – plus additional capabilities like error tracking and LLM analytics. 
 
-The main exception is warehouse-native analytics: Amplitude can run queries directly on your data warehouse (Snowflake, BigQuery), while PostHog offers an integrated data warehouse approach. If you use PostHog as your warehouse, data stays in PostHog and is accessible across many PostHog tools. If you use an external warehouse, you can sync tables and fields from Snowflake/BigQuery into PostHog via our CDP; queries then run on PostHog compute.
+The main exception is warehouse-native analytics: Amplitude can run queries directly on your data warehouse (Snowflake, BigQuery), while PostHog offers an integrated data warehouse approach. If you use PostHog as your warehouse, data stays in PostHog and is accessible across many PostHog tools. If you use an external warehouse, you can sync tables and fields from Snowflake/BigQuery into PostHog via our warehouse sources; queries then run on PostHog compute.
 
 **PostHog is better if:**
 - You want to eliminate tool sprawl (Amplitude is a point solution that requires separate warehouse tools)
