@@ -85,34 +85,7 @@ So we built a process that renders each trace as a clean, simple text representa
 
 You can see the full text representation for this trace in [this gist](https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181) — it's a real example from one of my side projects (a daily factoids chatbot that got into a surprisingly deep conversation about mantis shrimp vision and digital signal processing).
 
-Here's the simplified logic behind generating these:
-
-```python
-# Simplified trace text representation
-# See: trace_formatter.py
-
-def format_trace(trace_events):
-    """Convert a trace's events into a readable text tree."""
-    lines = []
-    line_num = 1
-
-    for event in sorted(trace_events, key=lambda e: e.timestamp):
-        indent = "  " * event.depth
-        header = f"L{line_num:03d}: {indent}[{event.type}] {event.name}"
-        lines.append(header)
-        line_num += 1
-
-        # Add key properties (input/output summaries, model, tokens, etc.)
-        for key, value in event.important_properties():
-            lines.append(f"L{line_num:03d}: {indent}  {key}: {value}")
-            line_num += 1
-
-    return "\n".join(lines)
-```
-
-> See the actual implementation: [`trace_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/trace_formatter.py)
-
-The line numbering (`L001:`, `L002:`) is important — it gives the downstream summarization LLM a way to reference specific parts of the trace, which makes the structured output much more useful.
+The line numbering (`L001:`, `L002:`) is important — it gives the downstream summarization LLM a way to reference specific parts of the trace, which makes the structured output much more useful. You can see how this is generated in [`trace_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/trace_formatter.py).
 
 ### Handling huge traces
 
