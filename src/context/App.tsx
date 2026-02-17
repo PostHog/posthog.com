@@ -1101,6 +1101,9 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        modal: {
+            type: 'standard',
+        },
     },
     '/fm': {
         size: {
