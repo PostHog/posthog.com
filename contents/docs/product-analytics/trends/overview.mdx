@@ -112,7 +112,7 @@ Trends is the default insight type, so clicking 'New insight' will always create
 
 ### 2. Configuring your insight
 
-The default event type is `Pageview`. 
+The default event type depends on your project's data: PostHog defaults to `Pageview` if pageview events exist, `Screen` if only screen events exist, or `All events` if neither exist.
 
 To change the event being used, click on the dropdown the dropdown to the right of the <div className="inline-flex items-center justify-center rounded-full border-2 font-semibold" style={{ width: '20px', height: '20px', borderColor: 'rgb(29, 74, 255)', color: 'rgb(29, 74, 255)', backgroundColor: 'rgba(29, 74, 255, 0.15)' }}>A</div> icon.
 

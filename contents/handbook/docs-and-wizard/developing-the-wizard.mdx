@@ -18,7 +18,7 @@ The wizard is a CLI tool that runs locally against developers' projects.
 
 It wraps the [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) to perform the integration, reviewing project code and making edits as needed.
 
-To direct the agent, the wizard uses the PostHog [MCP server](https://github.com/PostHog/posthog/tree/master/products/mcp) as a context provider. The MCP provides the agent with skills and resources, which include workflow prompts, documentation, and example code to improve the correctness and completeness of the integration.
+To direct the agent, the wizard uses the PostHog [MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp) as a context provider. The MCP provides the agent with skills and resources, which include workflow prompts, documentation, and example code to improve the correctness and completeness of the integration.
 
 MCP context packages are derived from the PostHog [context mill repository](https://github.com/PostHog/context-mill), which includes example apps, documentation and prompts. The context mill repo generates a zip file and manifest that determine's the URIs and structure of the context packages. Updating the context mill repo will instantly update the MCP content.
 

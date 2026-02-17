@@ -14,6 +14,8 @@ import qs from 'qs'
 import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
+import MobileDrawer from 'components/MobileDrawer'
+import { useApp } from '../context/App'
 
 export type Event = {
     date: string // YYYY-MM-DD
@@ -157,7 +159,27 @@ const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent:
     return { events, refreshEvents, deleteEvent }
 }
 
-const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
+const EventCard = ({
+    children,
+    onClose,
+    title,
+    isOpen,
+}: {
+    children: React.ReactNode
+    onClose: () => void
+    title: string
+    isOpen: boolean
+}) => {
+    const { isMobile } = useApp()
+
+    if (isMobile) {
+        return (
+            <MobileDrawer isOpen={isOpen} onClose={onClose} title={title}>
+                {children}
+            </MobileDrawer>
+        )
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0, translateX: '-50%' }}
@@ -179,6 +201,7 @@ const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: 
 }
 
 function Events() {
+    const { websiteMode } = useApp()
     const { isModerator } = useUser()
     const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
@@ -301,10 +324,17 @@ function Events() {
                 fullScreen
                 viewportClasses="[&>div>div]:h-full"
             >
-                <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+                <div
+                    data-scheme="primary"
+                    className={`flex flex-col @xl:flex-row text-primary h-full ${
+                        websiteMode ? 'h-[calc(100vh-48px)]' : ''
+                    }`}
+                >
                     <aside
                         data-scheme="secondary"
-                        className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
+                        className={`basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col ${
+                            websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'
+                        }`}
                     >
                         <div className="border-b border-primary px-4 pt-4 pb-4">
                             <ToggleGroup
@@ -396,6 +426,8 @@ function Events() {
                         <AnimatePresence>
                             {(editingEvent || creatingEvent) && isModerator ? (
                                 <EventCard
+                                    isOpen={editingEvent || creatingEvent}
+                                    title={editingEvent ? 'Edit event' : 'Add event'}
                                     onClose={() => {
                                         setCreatingEvent(false)
                                         setEditingEvent(false)
@@ -418,9 +450,15 @@ function Events() {
                                 </EventCard>
                             ) : (
                                 selectedEvent && (
-                                    <EventCard onClose={handleCloseEvent}>
+                                    <EventCard
+                                        isOpen={!!selectedEvent}
+                                        title={selectedEvent.name}
+                                        onClose={handleCloseEvent}
+                                    >
                                         <div className="p-4">
-                                            <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
+                                            <h2 className="text-xl font-bold mb-1 pr-12 @3xl:block hidden">
+                                                {selectedEvent.name}
+                                            </h2>
                                             <div className="mb-2 text-secondary">
                                                 {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
                                             </div>

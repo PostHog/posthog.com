@@ -42,6 +42,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
+import { RenderInClient } from 'components/RenderInClient'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -636,7 +637,12 @@ const ProductCount = () => {
 }
 
 const AppCount = () => {
-    return APP_COUNT
+    return (
+        <span className="flex items-center gap-1">
+            <Link to="/products">Browse app library</Link>
+            <span>({APP_COUNT})</span>
+        </span>
+    )
 }
 
 const CompanyStageTabs = () => {
@@ -790,6 +796,7 @@ const Customers = () => {
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
+    const { websiteMode } = useApp()
 
     // Get all companies
     const allCompanies = [...COL1, ...COL2]
@@ -960,7 +967,7 @@ const Customers = () => {
     return (
         <>
             <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className="@xl:absolute right-0 -top-8">
+                <div className={websiteMode ? 'mb-2' : `@xl:absolute right-0 -top-8`}>
                     <OSButton
                         onClick={toggleBreakdown}
                         variant="secondary"
@@ -1046,7 +1053,45 @@ const Customers = () => {
     )
 }
 
+function TaglineControl(): JSX.Element {
+    return (
+        <p className="text-base font-medium">
+            We make dev tools that help product engineers build successful products.
+        </p>
+    )
+}
+
+function TaglineExperiment(): JSX.Element {
+    return (
+        <div className="my-4 max-w-[650px]">
+            <h1 className="!m-0">
+                Make sense of how people use your product – <em>and how to make it better</em>
+            </h1>
+            <p className="!m-0 !mt-2 font-medium">PostHog has all the tools you need to build great products.</p>
+        </div>
+    )
+}
+
+function Tagline(): JSX.Element {
+    const posthog = usePostHog()
+
+    return (
+        <RenderInClient
+            placeholder={null}
+            render={() =>
+                posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
+            }
+        />
+    )
+}
+
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
+    {
+        name: 'Tagline',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Tagline />,
+    },
     {
         name: 'AppCount',
         kind: 'flow',
@@ -1238,10 +1283,10 @@ export default function Home() {
                 image="/images/og/default.png"
             />
             <MDXEditor
-                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}
+                maxWidth={900}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'

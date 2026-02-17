@@ -30,7 +30,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
  - Work your way through your GitHub onboarding issue that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
- - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
+ - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practice a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [product curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
@@ -57,7 +57,7 @@ Ideally, this will happen in Week 2-3, with the company of a few colleagues (dep
 - Toolkit and internal processes.
 - No stupid questions session.
 
-Detailed training plan available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
+Detailed training plan available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0). This is a checklist for the Manager, you don't have to read it beforehand.
 
 ## Weeks 3-4
 
@@ -72,10 +72,11 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 ## How do I know if I'm on track?
 
 **By the end of month 1:**
- - Have a good grasp of our internal processes and workflows.
- - Be leading customer calls on your own.
- - Converting customers to 'Onboarded'.
- - Passing well-qualified opportunities to Sales via the `Onboarding referral` segment.
+ - You continue learning from the received feedback.
+ - You have a good grasp of our internal processes and workflows.
+ - You lead customer calls on your own.
+ - You convert customers to 'Onboarded'.
+ - You pass well-qualified opportunities to Sales via the `Onboarding referral` segment.
 
 **By the end of month 2:**
  - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team.
@@ -83,8 +84,9 @@ Detailed training plan available in the [new hire onboarding checklist](https://
 
 **By the end of month 3:**
  - You've implemented process and system-level changes to make your job better/more effective.
- - You're the driver, you take initiative, prioritize your time well, and work independently. 
- - Customers are happy after interacting with you.
+ - You're the driver, you take initiative, prioritize your time well, and work independently.
+ - The quality of your outreach is up to the company's standard. 
+ - Customers are happy after interacting with you, and you meaningfully contribute to their success.
 
 ### General expectations
 
@@ -103,11 +105,11 @@ Our customers are always central to our work. There’s time and space to work o
 **Communication and ownership**
 
 - Make sure you read the Handbook page on [Communication](https://posthog.com/handbook/company/communication). Always answer pings, even if it’s just to say “I’ll look into it later”. Emoji reactions can be helpful to indicate that you acknowledged or completed the task.
+- Read the Handbook page on [Feedback](https://posthog.com/handbook/people/feedback)) Share and ask for feedback, take it with grace. Remember that it should be kind and factual, not based on assumptions.
 - Publish your Sprint planning update on time. It should be done on Monday at the latest, so that others have time to read it before the Sprint planning call.
 - Be yourself and stay human. Don’t send AI-generated emails to customers. 
 - Set an autoresponder in your inbox whenever you take a longer time off, and direct your customers to `onboarding@posthog.com` so that we can pick up your conversations.
 - Share your knowledge! Share what you learnt, or found out - the whole team will benefit from it.
-- Share and ask for feedback. Remember that it should be kind and factual, not based on assumptions. More on that [in the Handbook](https://posthog.com/handbook/people/feedback).
 - Don’t be late for calls. It’s rude, the same as eating on them. 
 - Use the Time Off tool to communicate your absence in advance.
 - Keep your promises. If you promised to follow up with a customer or colleague, or work on a project, do it.
