@@ -50,6 +50,10 @@ You can also set custom properties on the error tracking event to filter on. You
 
 Grouping rules are evaluated in the order they are configured and can be reordered. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
 
+### Disabled grouping rules
+
+Grouping rules can become disabled if they encounter processing errors during ingestion. When a rule is disabled, a banner displays the original error message explaining the issue. To re-enable a disabled rule, edit the rule to fix the problem and save your changes. Saving the rule automatically re-enables it. If you need help resolving the issue, reach out to support.
+
 ### Option 2: Client-side fingerprint
 
 Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog during ingestion, which is used for grouping. You can override this by setting the `$exception_fingerprint` property when capturing exceptions.
