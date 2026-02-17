@@ -28,7 +28,7 @@ export default function IntegratedWarehouseSlide({ variant = 'default' }: Integr
                     <h3 className="text-2xl font-bold text-primary mb-2">Use an external data warehouse</h3>
                     <p className="text-lg text-secondary flex-1 mb-4">
                         Keep data in an existing warehouse and just sync the tables and fields you need into PostHog via
-                        our CDP. Keep full control of what data you move, when.
+                        our warehouse sources. Keep full control of what data you move, when.
                     </p>
                     <OSButton asLink to="/cdp" state={{ newWindow: true }} variant="secondary" size="md">
                         Explore warehouse connections
