@@ -106,7 +106,7 @@ export default function WarehouseNative(): JSX.Element {
                         ElevenLabs
                     </Link>{' '}
                     use PostHog&apos;s integrated warehouse as their single source of truth. This eliminates the need to
-                    maintain multiple systems and ETL pipelines.
+                    maintain multiple systems and complex ETL pipelines.
                 </p>
 
                 <h2>What does this mean for the future?</h2>
