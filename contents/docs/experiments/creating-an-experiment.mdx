@@ -52,7 +52,7 @@ By default, all experiments have a `control` and `test` variant. You can add mor
 
 Participants are automatically split equally between variants. If you want assign specific users to a specific variant, see the section below on [distribution and release conditions](#distribution-and-release-conditions).
 
-The **Traffic preview** shows a visual bar chart of how traffic is distributed across your variants based on your split percentages and rollout percentage. Each variant displays as a color-coded section with its letter label (A, B, C, etc.) and the percentage of total traffic it receives. A hatched pattern indicates users excluded from the experiment. This helps you understand the combined effect of your variant split and rollout settings – for example, a 50% rollout with a 50/50 split results in each variant receiving 25% of total traffic.
+TThe **Traffic preview** shows a visual bar chart of how traffic is distributed across your variants based on your split and rollout percentage. The visualization displays the actual bucketing logic of how users are distributed in a rollout. Specifically, you can see that increasing the rollout percentage does not reassign users to other variants; however, changing the split or adding variants might lead to inconsistent experiences for users.
 
 ## Participant type
 
