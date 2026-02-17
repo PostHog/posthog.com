@@ -53,6 +53,23 @@ Depending on your compliance needs you can either:
 
 **NOTE**: This list should be enough at the time of writing. As the PostHog application changes rapidly, it is possible that other directives may be needed over time for loading the Toolbar. If you experience issues after implementing one of the above solutions, you can typically debug in the browser tools which part of the CSP is blocking requests.
 
+
+### Hedgehog mode
+
+The Toolbar's hedgehog mode renders an animated hedgehog on your site using WebGL via pixi.js. This library uses `new Function()` calls internally, which requires `'unsafe-eval'` in your CSP's `script-src` directive.
+
+If your site has a strict CSP that doesn't include `'unsafe-eval'`, hedgehog mode is automatically disabled. When this happens, the hedgehog mode option in the Toolbar menu shows a tooltip explaining why it's unavailable.
+
+To enable hedgehog mode on sites with strict CSP, add `'unsafe-eval'` to your `script-src` directive:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+  script-src 'self' 'unsafe-eval' https://*.posthog.com;
+">
+```
+
+**Note:** Adding `'unsafe-eval'` reduces the security benefits of CSP. Only add it if you need hedgehog mode and understand the implications.
+
 ### Enabling heatmaps
 
 You will need the following CSP to allow heatmaps to render your site in an iframe of ours:
