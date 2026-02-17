@@ -227,6 +227,7 @@ module.exports = {
                 fairytale: ['Computer Modern', 'sans-serif'],
                 serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
+                    'IBM Plex Sans Variable',
                     'IBM Plex Sans',
                     '-apple-system',
                     'BlinkMacSystemFont',
@@ -242,8 +243,8 @@ module.exports = {
                     'sans-serif',
                 ],
                 fancy: ['Zapfino', 'serif'],
-                button: ['IBM Plex Sans', 'sans-serif'],
-                nav: ['IBM Plex Sans', 'sans-serif'],
+                button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
+                nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [

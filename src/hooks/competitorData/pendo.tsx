@@ -1,4 +1,4 @@
-import { workflows } from "hooks/productData/workflows";
+import { workflows } from 'hooks/productData/workflows'
 
 export const pendo = {
     name: 'Pendo',
