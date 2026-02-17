@@ -150,9 +150,12 @@ namespaces
 noob
 noobs
 offboarding
+offsite
+offsites
 onboarding
 pageview
 pageviews
+param
 PascalCase
 passwordless
 performant
