@@ -49,9 +49,14 @@ Here's how the most popular open-source A/B testing tools compare:
 
 ## 1. PostHog
 
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_32_2x_aa22220b10.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_06_2x_49e3ebc85d.png"
+    classes="rounded"
+    alt="PostHog ab testing"
+/>
 
-[PostHog](https://posthog.com) is an open-source developer platform that integrates a [comprehensive A/B testing suite](/experiments) with [many other tools](/products), such as [product analytics](/product-analytics), [feature flags](/feature-flags), [session recording](/session-replay), [error tracking](/error-tracking), and more. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
+[PostHog](/) is an all-in-one developer platform that integrates a [comprehensive A/B testing suite](/experiments) with [many other tools](/products), such as [Product Analytics](/product-analytics), [Feature Flags](/feature-flags), [Session Replay](/session-replay), [Error Tracking](/error-tracking), and more. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
 [PostHog’s experimentation suite](/docs/experiments) supports multivariate experiments, and targeting by geography, user cohorts, and person properties – all of which is built atop PostHog's multivariate [feature flags](/docs/feature-flags). PostHog supports both Bayesian and Frequentist statistical approaches, so you can choose the method that fits your team's workflow.
 
@@ -72,7 +77,7 @@ PostHog is ideal for product teams and engineers, particularly those who don't w
 
 ### How much does PostHog cost?
 
-Experimentation is billed under feature flag requests, which are [free up to 1 million requests](/pricing) per month alongside 1 million analytics events and 5,000 session recordings. After the free monthly allowance, you'll pay $0.0001/request, and requests cost progressively less the more you use. You can set billing limits to ensure you don't get surprise bills. 
+Experiments are billed under feature flag requests, which are [free up to 1 million requests](/pricing) per month alongside 1 million analytics events and 5,000 session recordings. After the free monthly allowance, you'll pay $0.0001/request, and requests cost progressively less the more you use. You can set billing limits to ensure you don't get surprise bills. 
 
 While PostHog is open source, its A/B testing features aren't included in the open source release – you'll need the free cloud tier to access them.
 
