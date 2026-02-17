@@ -1,5 +1,5 @@
 extends: existence
-message: 'In lists, use an end dash ( – ) to separate items from descriptions instead of a colon (:).'
+message: 'In lists, use an en dash ( – ) to separate items from descriptions instead of a colon (:).'
 level: warning
 scope: list
 nonword: true
