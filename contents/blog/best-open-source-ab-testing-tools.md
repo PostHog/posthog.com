@@ -90,7 +90,7 @@ While PostHog is open source, its A/B testing features aren't included in the op
 
 ### Who is GrowthBook for?
 
-[GrowthBook](/blog/best-growthbook-alternatives) is built for data, engineering and product teams who need the power of a customizable platform without having to build it in house.
+[GrowthBook](/blog/best-growthbook-alternatives) is built for data, engineering, and product teams who need the power of a customizable platform without having to build it in house.
 
 ### Features and benefits
 
@@ -120,7 +120,7 @@ You can use Unleash to define the rules of your experiments, but the platform do
 
 ### Who is Unleash for?
 
-Unleash is for autonomous development teams who want a lightweight way to test, validate and rollout new features safely.
+Unleash is for autonomous development teams who want a lightweight way to test, validate, and rollout new features safely.
 
 ### Features and benefits
 
@@ -144,7 +144,7 @@ Unleash's open source self-hosted plan is free with unlimited feature flags and 
 
 ![Unleash - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/img3_Mojito.png)
 
-Mojito is an open split testing stack that lets you build, launch and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions, so you can build your own visualizations for experiment analysis.
+Mojito is an open split testing stack that lets you build, launch, and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions, so you can build your own visualizations for experiment analysis.
 
 It's worth noting that Mojito is maintained by a small consultancy and has a slower development cadence than the other tools on this list. That said, its simplicity is part of the appeal – it's a lightweight, dependency-free option for teams that want full source control over their testing stack.
 
