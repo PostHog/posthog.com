@@ -16,7 +16,7 @@ For tours and announcements, you can create any number of **Translations**.
 
 Each translation is keyed on a [BCP 47 language tag](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag).
 
-When a tour or announcement is displayed, we'll choose the translation based on the user's browser language or a `client_language` override.
+When a tour or announcement is displayed, we'll choose the translation based on the user's browser language or your `override_display_language` config setting.
 
 ## Creating translations
 
@@ -74,7 +74,7 @@ When determining which tour translation to use, we run the following checks in t
 
 By default, we'll use the user's browser language to determine which tour translation to show.
 
-This can be overriden by setting the `client_language` property in `posthog.init`.
+This can be overridden by setting the `override_display_language` property in `posthog.init`.
 
 ```typescript
 // set in posthog.init
@@ -82,7 +82,7 @@ posthog.init('api-key', {
   api_host: 'api-host',
   defaults: '2025-05-24',
   disable_product_tours: false,
-  client_language: 'en-US',
+  override_display_language: 'en-US',
 });
 ```
 
@@ -90,6 +90,32 @@ You can also use the `posthog.set_config` method to change the configuration aft
 
 ```typescript
 posthog.set_config({
-  client_language: 'en-GB',
+  override_display_language: 'en-GB',
 })
 ```
+
+## Tips & tricks
+
+### Which languages should you support?
+
+This will be different for everyone, but you can quickly check common browser languages from your users by running a query like this in the [SQL editor](https://app.posthog.com/sql):
+
+```sql
+SELECT 
+    properties.$browser_language AS language,
+    uniq(distinct_id) AS unique_users
+FROM events
+WHERE event = '$pageview'
+    AND timestamp >= now() - interval 30 day
+GROUP BY language
+ORDER BY unique_users DESC
+LIMIT 100
+```
+
+This will show the top 100 languages based on `$pageview` events, grouped by distinct IDs, in the past 30 days.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_17_at_12_31_33_PM_2dac28a17d.png"
+    alt="Product Tour Translations panel"
+    classes="rounded"
+/>
