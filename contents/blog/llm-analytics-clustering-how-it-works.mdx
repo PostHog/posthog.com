@@ -60,14 +60,15 @@ Here's the overall flow from raw traces to clustered insights:
 Traces → Text repr → Sample → Summarize → Embed → Cluster → Label → Display
 ```
 
-### Design constraints
+### Design considerations
 
-Before diving in, here were the four questions we kept coming back to:
+Before diving into the steps, here are the main considerations we kept coming back to and the choices we made for each:
 
-1. **How do we support huge traces?** Some traces are enormous — we can't just throw them at an LLM and hope for the best.
-2. **How do we keep costs sane?** Running LLMs on every trace would bankrupt us.
-3. **How do we make it zero-config?** It should just work out of the box — no setup required.
-4. **Can we let users steer it later?** Once it's running, can users influence the clustering?
+- **Huge traces** — Some traces are enormous and can't just be thrown at an LLM. Our answer: the uniform downsampling described in step 1. We iteratively drop lines while preserving the overall structure, so even massive traces fit within context limits.
+- **Keeping costs sane** — Running LLMs on every single trace would bankrupt us. So we sample a small random subset each hour, use GPT-4.1 nano for summarization (fast and cheap), and are planning to move to the OpenAI Batch API to optimize further.
+- **One-size-fits-all vs. custom summaries** — It's hard to have a single general summary schema that works perfectly for every type of trace we might see. Ideally, users could steer or bring their own prompts and structured outputs. For now, we started with a general-purpose prompt and summary schema that works well across most use cases — but enabling user-defined summarization is a potential future improvement.
+- **Zero-config** — The Temporal workflows just run in the background. As you send traces to LLM Analytics, clustering will just work once there's enough data to sample from. No setup, no configuration needed.
+- **User steering** — In the future, we'd love for users to define their own clustering configs, filter to specific subpopulations, and even kick off clustering runs on demand. For example, if you know you want to look at just your "refund request" traces, you could define a job for that. We're not there yet, but the architecture supports it.
 
 ## Step 1: From JSON blobs to readable text
 
