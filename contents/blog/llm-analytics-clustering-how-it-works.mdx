@@ -252,14 +252,14 @@ The agent has access to 8 tools:
 
 | Tool | Purpose |
 |------|---------|
-| `get_clusters_overview` | High-level stats: cluster sizes, counts |
-| `get_all_clusters_with_sample_titles` | Quick scan of what's in each cluster |
-| `get_cluster_trace_titles` | All trace titles for a specific cluster |
-| `get_trace_details` | Full summary for a specific trace |
-| `get_current_labels` | See labels assigned so far |
-| `set_cluster_label` | Set name + description for one cluster |
-| `bulk_set_labels` | Set labels for multiple clusters at once |
-| `finalize_labels` | Signal that labeling is complete |
+| [`get_clusters_overview`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L17) | High-level stats: cluster sizes, counts |
+| [`get_all_clusters_with_sample_titles`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L39) | Quick scan of what's in each cluster |
+| [`get_cluster_trace_titles`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L79) | All trace titles for a specific cluster |
+| [`get_trace_details`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L121) | Full summary for a specific trace |
+| [`get_current_labels`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L152) | See labels assigned so far |
+| [`set_cluster_label`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L171) | Set name + description for one cluster |
+| [`bulk_set_labels`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L189) | Set labels for multiple clusters at once |
+| [`finalize_labels`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/tools.py#L212) | Signal that labeling is complete |
 
 The agent follows a two-phase strategy:
 
