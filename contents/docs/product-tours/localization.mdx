@@ -5,6 +5,7 @@ showTitle: true
 ---
 
 import Alpha from './_snippets/alpha.mdx'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <Alpha />
 
@@ -16,17 +17,17 @@ For tours and announcements, you can create any number of **Translations**.
 
 Each translation is keyed on a [BCP 47 language tag](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag).
 
-When a tour or announcement is displayed, we'll choose the translation based on the user's browser language or your `override_display_language` config setting.
+When a tour or announcement is displayed, PostHog chooses the translation based on the user's browser language or your `override_display_language` config setting.
 
 ## Creating translations
 
 ### Set the default language
 
-First, you'll need to set the default language for your tour.
+First, set the default language for your tour.
 
-When you set a default language, all existing tour content will be mapped to the new default.
+When you set a default language, all existing tour content is mapped to the new default.
 
-This will be used as a fallback when the user's language cannot be determined, or your tour does not support the user's provided language.
+This is used as a fallback when the user's language cannot be determined, or when your tour does not support the user's provided language.
 
 Open the **Translations** panel in the editor, and enter a language code that represents your tour's default.
 
@@ -48,9 +49,9 @@ Enter a new language code, click the plus button to add it, then click the langu
     classes="rounded"
 />
 
-Once selected, you'll see a new language code at the top of the editor, and you can make any changes necessary for this translation.
+Once selected, a new language code appears at the top of the editor, and you can make any changes necessary for this translation.
 
-If you have other translatable fields beyond the pop-up content, they will appear below the content editor.
+If you have other translatable fields beyond the pop-up content, they appear below the content editor.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_16_at_8_06_51_PM_f9ac90017b.png"
@@ -62,25 +63,27 @@ If you have other translatable fields beyond the pop-up content, they will appea
 
 When determining which tour translation to use, we run the following checks in this order:
 
-1. **Exact match**: a user with language `en-US` matches a tour with translation `en-US`
-2. **Base match**: if no exact matches are found, we check for translations matching the user's "base" language. For example, a user language `en-GB` will match a tour with translation `en`, if no translation exists specifically for `en-GB`.
-3. **Fallback**: if neither of the above are successful, we fall back to the tour's default language.
+1. **Exact match** – A user with language `en-US` matches a tour with translation `en-US`.
+2. **Base match** – If no exact matches are found, we check for translations matching the user's "base" language. For example, a user language `en-GB` will match a tour with translation `en`, if no translation exists specifically for `en-GB`.
+3. **Fallback** – If neither of the above are successful, we fall back to the tour's default language.
 
-> **Note:** the base matching only works one way; a user with language `en` will not match a tour translation `en-US`.
-> 
-> For this reason we recommend keeping your translation keys as base-only (like `en`), unless you have translations for specific dialects.
+<CalloutBox icon="IconInfo" title="Base matching is one-directional" type="fyi">
+
+A user with language `en` will not match a tour translation `en-US`. For this reason, we recommend keeping your translation keys as base-only (like `en`), unless you have translations for specific dialects.
+
+</CalloutBox>
 
 ## Language overrides
 
-By default, we'll use the user's browser language to determine which tour translation to show.
+By default, PostHog uses the user's browser language to determine which tour translation to show.
 
 This can be overridden by setting the `override_display_language` property in `posthog.init`.
 
 ```typescript
 // set in posthog.init
-posthog.init('api-key', {
-  api_host: 'api-host',
-  defaults: '2025-05-24',
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_app_host>',
+  defaults: '<ph_posthog_js_defaults>',
   disable_product_tours: false,
   override_display_language: 'en-US',
 });
@@ -94,11 +97,10 @@ posthog.set_config({
 })
 ```
 
-## Tips & tricks
 
-### Which languages should you support?
+## Which languages should you support?
 
-This will be different for everyone, but you can quickly check common browser languages from your users by running a query like this in the [SQL editor](https://app.posthog.com/sql):
+This is different for everyone, but you can quickly check common browser languages from your users by running a query like this in the [SQL editor](https://app.posthog.com/sql):
 
 ```sql
 SELECT 
