@@ -31,17 +31,7 @@ Think about all your interactions with an AI in the last week and all the subtle
 
 So with this in mind, we built a new feature recently, aptly named "Clustering." We probably should have called it "Agentic AI-driven magic AI unicorn insights agentic" but I'm bad at names.
 
-Here's a quick demo of the feature, then I'll walk through how the whole pipeline works under the hood, with links to the code if you want to dig deeper.
-
-<iframe
-    width="560"
-    height="315"
-    src="https://www.youtube-nocookie.com/embed/dHm3oGdhndA"
-    title="LLM Analytics clusters demo"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-></iframe>
+Here's how the whole pipeline works under the hood, with links to the code if you want to dig deeper. If you just want to see it in action, skip to the [demo](#a-concrete-example).
 
 ## The pipeline
 
@@ -311,7 +301,17 @@ The output of each child workflow is a set of `$ai_trace_clusters` and `$ai_gene
 
 ## A concrete example
 
-Take another look at the demo video at the top of this post. Here's what you're seeing:
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/dHm3oGdhndA"
+    title="LLM Analytics clusters demo"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+
+Here's what you're seeing in the demo:
 
 - **Scatter plot** — Each dot is a trace, positioned using the 2-D UMAP coordinates. Colors represent cluster assignments. You can immediately see which groups of traces are similar and how they relate spatially.
 - **Cluster distribution** — A bar chart showing how many traces landed in each cluster, with the agent-generated labels. This gives you a quick sense of what your users are actually doing.
