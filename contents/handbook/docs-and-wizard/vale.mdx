@@ -137,9 +137,9 @@ Here's how to choose between them:
 | Yes | HubSpot, JavaScript, ClickHouse, PostHog | `config/vocabularies/BrandsAndTechnologies/accept.txt` |
 | No | webhook, cronjob, heatmaps, stonks | `PostHogBase/spelling-exceptions.txt` |
 
-Vocabularies are case-sensitive regex patterns that enforce exact capitalization. Use for brand names, products, and technologies where casing is a part of correctness.
+1. Vocabularies are case-sensitive regex patterns that enforce exact capitalization. Use for brand names, products, and technologies where casing is a part of correctness. They will be exempt from rules like `SentenceCase.yml`.
 
-Spelling exceptions are case-insensitive words the spell-checker should accept. Use for industry terminology or developer jargon that isn't in standard dictionaries. 
+2. Spelling exceptions are case-insensitive words the spell checker should accept. Use for industry terminology or developer jargon that isn't in standard dictionaries. They will be exempt from the rule `Spelling.yml`.
 
 ### The .vale.ini file
 
