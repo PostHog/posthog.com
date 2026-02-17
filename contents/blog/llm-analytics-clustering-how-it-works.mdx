@@ -156,35 +156,7 @@ Structured output is better than a raw summary for one critical reason: downstre
 
 ## Step 3: Embedding
 
-Once we have summaries, we format them back into plain text (stripping the line numbers to reduce noise) and [embed](/docs/llm-analytics/embeddings) them:
-
-```python
-# Simplified embedding preparation
-# See: embed_summaries.py
-
-def _format_summary_for_embedding(summary):
-    """Convert structured summary back to embeddable text."""
-    parts = [
-        summary.title,
-        summary.flow_diagram,
-    ]
-
-    for bullet in summary.summary_bullets:
-        parts.append(bullet.bullet)
-
-    for note in summary.interesting_notes:
-        parts.append(note)
-
-    return "\n".join(parts)
-
-# Embed with OpenAI text-embedding-3-large → 3072 dimensions
-embedding = openai.embeddings.create(
-    model="text-embedding-3-large",
-    input=formatted_text
-)
-```
-
-> See the actual implementation: [`embed_summaries.py`](https://github.com/PostHog/posthog/blob/master/ee/hogai/llm_traces_summaries/tools/embed_summaries.py)
+Once we have summaries, we [format them back into plain text](https://github.com/PostHog/posthog/blob/master/ee/hogai/llm_traces_summaries/tools/embed_summaries.py) — title, flow diagram, bullets, and notes concatenated together, with line numbers stripped to reduce noise — and [embed](/docs/llm-analytics/embeddings) them using OpenAI's `text-embedding-3-large` model, giving us a 3,072-dimensional vector for each summary.
 
 Why embed the enriched summary instead of the raw trace? Because the summary lives in a higher-level semantic space. Raw traces contain a lot of noise — [token counts, model versions](/docs/llm-analytics/calculating-costs), repeated system prompts. The summary captures the _intent_ and _flow_, which is exactly what we want our [clusters](/docs/llm-analytics/clusters) to be organized around.
 
