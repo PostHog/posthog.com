@@ -19,7 +19,7 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/llm
 
 When a [generation](/docs/llm-analytics/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
 
-You can optionally filter which generations get evaluated using [property filters](/docs/llm-analytics/custom-properties). For example, only evaluate generations from production, from a specific model, or above a certain cost threshold.
+You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
 ## Built-in templates
 
@@ -42,12 +42,12 @@ PostHog provides five pre-built evaluation templates to get you started:
    - **Name**: A descriptive name for the evaluation
    - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
-   - **Property filters** (optional): Narrow which generations to evaluate
+   - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
 5. Enable the evaluation and click **Save**
 
 ## Viewing results
 
-The **Evaluations** tab shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the LLM judge.
+The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the LLM judge.
 
 You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
 
@@ -79,6 +79,6 @@ Explain your reasoning briefly.
 
 Each evaluation run counts as one LLM analytics event toward your quota.
 
-Evaluations use OpenAI to run the LLM judge. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own OpenAI API key in [project settings](https://us.posthog.com/llm-analytics/settings) to keep running evaluations.
+Evaluations use an LLM judge to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Google Gemini, Anthropic, or OpenRouter in [project settings](https://app.posthog.com/llm-analytics/settings) to keep running evaluations.
 
 Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.

@@ -8,7 +8,13 @@ import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
+const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+    if (isMinimalBuild) {
+        return createMinimalPages({ createPage, graphql })
+    }
+
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
@@ -938,4 +944,154 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
         })
     })
+}
+
+async function createMinimalPages({
+    createPage,
+    graphql,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    graphql: Parameters<GatsbyNode['createPages']>[0]['graphql']
+}) {
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
+    const Slugger = require('github-slugger')
+
+    const result = await graphql(`
+        {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            posts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: {
+                        slug: {
+                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
+                        }
+                    }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+        }
+    `)
+
+    if (result.errors) {
+        console.error('Error in content preview GraphQL query:', result.errors)
+        return Promise.reject(result.errors)
+    }
+
+    const menuFlattened = flattenMenu(menu)
+
+    function formatToc(headings: Array<{ depth: number; value: string }>) {
+        const slugger = new Slugger()
+        return headings.map((heading) => {
+            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
+            return {
+                ...heading,
+                depth: heading.depth - 2,
+                url: slugger.slug(cleanValue),
+                value: cleanValue,
+            }
+        })
+    }
+
+    function createHandbookPreviewPosts(data: any[], menuName: string, breadcrumbBase: { name: string; url: string }) {
+        data.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) return
+
+            const tableOfContents = node.headings && formatToc(node.headings)
+            let breadcrumb = null
+
+            menuFlattened.some((item) => {
+                if (item.url === slug) {
+                    breadcrumb = [...item.breadcrumb]
+                    return true
+                }
+                return false
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: HandbookTemplate,
+                context: {
+                    id: node.id,
+                    breadcrumb,
+                    breadcrumbBase,
+                    tableOfContents,
+                    slug,
+                    searchFilter: menuName,
+                    links: [],
+                    nextURL: '',
+                },
+            })
+        })
+    }
+
+    function createBlogPreviewPosts(data: any[], askMax: boolean = false) {
+        data.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) return
+
+            const tableOfContents = node.headings && formatToc(node.headings)
+
+            createPage({
+                path: replacePath(slug),
+                component: BlogPostTemplate,
+                context: {
+                    id: node.id,
+                    tableOfContents,
+                    slug,
+                    post: true,
+                    article: true,
+                    ...(askMax ? { askMax: true } : {}),
+                },
+            })
+        })
+    }
+
+    const data = result.data as {
+        docs: { nodes: any[] }
+        handbook: { nodes: any[] }
+        posts: { nodes: any[] }
+    }
+
+    createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+    createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createBlogPreviewPosts(data.posts.nodes)
 }

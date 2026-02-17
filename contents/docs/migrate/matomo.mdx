@@ -13,11 +13,11 @@ Migrating data from Matomo is a two step process:
 1. Exporting data via Matomo's API
 2. Converting Matomo event data to the PostHog schema and capturing in PostHog
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## 1. Exporting data from Matomo
 
-Matomo provides a [full API](https://developer.matomo.org/api-reference/reporting-api#Live) you can get data from. To get the relevant event data, we make a request to the `Live.getLastVisitsDetails` method.
+Matomo provides a [full API](https://developer.matomo.org/api-reference/reporting-api #Live) you can get data from. To get the relevant event data, we make a request to the `Live.getLastVisitsDetails` method.
 
 To access the API, you need to create an API token. This can be done in your instance's security settings.
 
@@ -41,47 +41,47 @@ filter_limit = "10000"
 url = f"{base_url}{endpoint}"
 
 payload = {
-  "idSite": site_id,
-  "period": period,
-  "date": date,
-  "format": response_format,
-  "token_auth": token_auth,
-  "filter_limit": filter_limit
+"idSite": site_id,
+"period": period,
+"date": date,
+"format": response_format,
+"token_auth": token_auth,
+"filter_limit": filter_limit
 }
 
 response = requests.post(url, data=payload)
 
 if response.status_code == 200:
-  print("Request was successful")
-  events = response.json()
-  
-  with open('events.json', 'w') as json_file:
-    json.dump(events, json_file, indent=4)
+print("Request was successful")
+events = response.json()
+
+with open('events.json', 'w') as json_file:
+json.dump(events, json_file, indent=4)
 else:
-  print(response.text)
-  print(f"Request failed with status code: {response.status_code}")
+print(response.text)
+print(f"Request failed with status code: {response.status_code}")
 ```
 
 To return all rows, set the filter limit to `-1`. Matomo recommends you only export 10,000 rows at a time. If you have more than that amount, you can use a combination of `filter_limit` and `filter_offset` to get sets of rows.
 
 ## 2. Converting Matomo event data to the PostHog schema
 
-The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
 
 The big difference is that Matomo structures its data around **visits** that contain one or more **actions**. Matomo's actions are similar to PostHog's [events](/docs/data/events). You can go through each visit and convert it to PostHog's schema by doing the following:
 
-1. Converting properties like `operatingSystemVersion` to `$os_version`. 
+1. Converting properties like `operatingSystemVersion` to `$os_version`.
 
 2. Omitting properties that aren't relevant like `visitEcommerceStatusIcon`, `plugins`, `timeSpentPretty`, and many more. Matomo includes many more properties on their events than PostHof does.
 
 3. Looping through the `actionDetails`, converting:
-   - Properties like `url` to `$current_url`
-   - Action types like `action` to event names like `$pageview`
-   - Action `timestamp` to an ISO 8601 timestamp
+- Properties like `url` to `$current_url`
+- Action types like `action` to event names like `$pageview`
+- Action `timestamp` to an ISO 8601 timestamp
 
 4. Add visit properties to action properties.
 
-Once this is done, you can capture **each action** into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
+Once this is done, you can capture **each action** into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
 
 Here's an example version of a Python script:
 
@@ -92,168 +92,168 @@ import requests
 import json
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_project_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 key_mapping = {
-  'url': '$current_url',
-  'browserName': '$browser',
-  'browserVersion': '$browser_version',
-  'operatingSystemName': '$os',
-  'operatingSystemVersion': '$os_version',
-  'deviceType': '$device_type',
-  'referrerUrl': '$referrer',
-  'city': '$geoip_city_name',
-  'region': '$geoip_subdivision_1_name',
-  'regionCode': '$geoip_subdivision_1_code',
-  'country': '$geoip_country_name',
-  'countryCode': '$geoip_country_code',
-  'continent': '$geoip_continent_name',
-  'continentCode': '$geoip_continent_code',
-  'latitude': '$geoip_latitude',
-  'longitude': '$geoip_longitude',
-  'visitIp': '$ip',
-  'siteName': '$host',
-  'languageCode': '$browser_language',
-  "referrerUrl": "$referrer"
+'url': '$current_url',
+'browserName': '$browser',
+'browserVersion': '$browser_version',
+'operatingSystemName': '$os',
+'operatingSystemVersion': '$os_version',
+'deviceType': '$device_type',
+'referrerUrl': '$referrer',
+'city': '$geoip_city_name',
+'region': '$geoip_subdivision_1_name',
+'regionCode': '$geoip_subdivision_1_code',
+'country': '$geoip_country_name',
+'countryCode': '$geoip_country_code',
+'continent': '$geoip_continent_name',
+'continentCode': '$geoip_continent_code',
+'latitude': '$geoip_latitude',
+'longitude': '$geoip_longitude',
+'visitIp': '$ip',
+'siteName': '$host',
+'languageCode': '$browser_language',
+"referrerUrl": "$referrer"
 }
 
 omitted_keys = [
-  "accountId",
-  "iconSVG",
-  "idpageview",
-  "pageIdAction",
-  "pageviewPosition",
-  "pageTitle",
-  "serverTimePretty",
-  "subtitle",
-  "timeSpentPretty",
-  "timestamp",
-  "actions",
-  'browser',
-  'browserCode',
-  'browserFamily',
-  'browserFamilyDescription',
-  'browserIcon',
-  'countryFlag',
-  'deviceTypeIcon',
-  'events',
-  'experiments',
-  'fingerprint',
-  'idSite',
-  'idVisit',
-  'language',
-  'lastActionDateTime'
-  'location',
-  'operatingSystem',
-  'operatingSystemCode',
-  'operatingSystemIcon',
-  'plugins',
-  'pluginsIcons',
-  'referrerSearchEngineIcon',
-  'referrerSocialNetworkIcon',
-  'serverDate',
-  'serverDatePretty',
-  'serverDatePrettyFirstAction',
-  'serverTimePretty',
-  'serverTimePrettyFirstAction',
-  'serverTimestamp',
-  'sessionReplayUrl',
-  'siteCurrency',
-  'siteCurrencySymbol',
-  'siteName',
-  'totalAbandonedCarts',
-  'totalAbandonedCartsItems',
-  'totalAbandonedCartsRevenue',
-  'totalEcommerceConversions',
-  'totalEcommerceItems',
-  'totalEcommerceRevenue',
-  'userId',
-  'visitConverted',
-  'visitConvertedIcon',
-  'visitCount',
-  'visitDuration',
-  'visitDurationPretty',
-  'visitEcommerceStatus',
-  'visitEcommerceStatusIcon',
-  'visitLocalHour',
-  'visitLocalTime',
-  'visitServerHour',
-  'lastActionTimestamp',
-  'lastActionDateTime',
-  'firstActionTimestamp',
-  'visitorId',
-  'visitorTypeIcon',
-  'icon'
+"accountId",
+"iconSVG",
+"idpageview",
+"pageIdAction",
+"pageviewPosition",
+"pageTitle",
+"serverTimePretty",
+"subtitle",
+"timeSpentPretty",
+"timestamp",
+"actions",
+'browser',
+'browserCode',
+'browserFamily',
+'browserFamilyDescription',
+'browserIcon',
+'countryFlag',
+'deviceTypeIcon',
+'events',
+'experiments',
+'fingerprint',
+'idSite',
+'idVisit',
+'language',
+'lastActionDateTime',
+'location',
+'operatingSystem',
+'operatingSystemCode',
+'operatingSystemIcon',
+'plugins',
+'pluginsIcons',
+'referrerSearchEngineIcon',
+'referrerSocialNetworkIcon',
+'serverDate',
+'serverDatePretty',
+'serverDatePrettyFirstAction',
+'serverTimePretty',
+'serverTimePrettyFirstAction',
+'serverTimestamp',
+'sessionReplayUrl',
+'siteCurrency',
+'siteCurrencySymbol',
+'siteName',
+'totalAbandonedCarts',
+'totalAbandonedCartsItems',
+'totalAbandonedCartsRevenue',
+'totalEcommerceConversions',
+'totalEcommerceItems',
+'totalEcommerceRevenue',
+'userId',
+'visitConverted',
+'visitConvertedIcon',
+'visitCount',
+'visitDuration',
+'visitDurationPretty',
+'visitEcommerceStatus',
+'visitEcommerceStatusIcon',
+'visitLocalHour',
+'visitLocalTime',
+'visitServerHour',
+'lastActionTimestamp',
+'lastActionDateTime',
+'firstActionTimestamp',
+'visitorId',
+'visitorTypeIcon',
+'icon'
 ]
 
 with open('events.json', 'r') as file:
-  events = json.load(file)
-  for event in events:
+events = json.load(file)
+for event in events:
 
-    distinct_id = event.get("userId") or event.get("visitorId")
-    visitProperties = {}
-    for key, value in event.items():
-      if value == '' or value is None:
-        continue
-      elif key in omitted_keys:
-        continue
-      elif key in key_mapping:
-        if key in ['browserVersion', 'longitude', 'latitude']:
-          visitProperties[key_mapping[key]] = float(value)
-        else:
-          visitProperties[key_mapping[key]] = value
-      elif key == 'actionDetails':
-        # Handle actionDetails separately
-        continue
-      elif key == 'resolution':
-        if value == '':
-          continue
-        visitProperties['$screen_width'] = int(value.split('x')[0])
-        visitProperties['$screen_height'] = int(value.split('x')[1])
-      elif key == 'referrerKeyword':
-        if value != 'Keyword not defined':
-          visitProperties['referrerKeyword'] = value
-      else:
-        visitProperties[key] = value
+distinct_id = event.get("userId") or event.get("visitorId")
+visitProperties = {}
+for key, value in event.items():
+if value == '' or value is None:
+continue
+elif key in omitted_keys:
+continue
+elif key in key_mapping:
+if key in ['browserVersion', 'longitude', 'latitude']:
+visitProperties[key_mapping[key]] = float(value)
+else:
+visitProperties[key_mapping[key]] = value
+elif key == 'actionDetails':
+# Handle actionDetails separately
+continue
+elif key == 'resolution':
+if value == '':
+continue
+visitProperties['$screen_width'] = int(value.split('x')[0])
+visitProperties['$screen_height'] = int(value.split('x')[1])
+elif key == 'referrerKeyword':
+if value != 'Keyword not defined':
+visitProperties['referrerKeyword'] = value
+else:
+visitProperties[key] = value
 
-    actionDetails = event.get('actionDetails', [])
-    for index, action in enumerate(actionDetails):
-      actionProperties = {}
-      for key, value in action.items():
-        if value == '' or value is None:
-          continue
-        if key in omitted_keys:
-          continue
-        if key in key_mapping:
-          actionProperties[key_mapping[key]] = value
-        else:
-          actionProperties[key] = value
-      
-      actionProperties.update(visitProperties)
+actionDetails = event.get('actionDetails', [])
+for index, action in enumerate(actionDetails):
+actionProperties = {}
+for key, value in action.items():
+if value == '' or value is None:
+continue
+if key in omitted_keys:
+continue
+if key in key_mapping:
+actionProperties[key_mapping[key]] = value
+else:
+actionProperties[key] = value
 
-      ph_event_name = action.get('type')
-      if ph_event_name == 'action':
-        ph_event_name = "$pageview"
-      if ph_event_name == 'event':
-        ph_event_name = action.get('eventAction')
-      if ph_event_name == 'goal':
-        # Goal will be a duplicate of another action, so skip it
-        continue
+actionProperties.update(visitProperties)
 
-      ph_timestamp = action.get("timestamp")
-      if ph_timestamp:
-        ph_timestamp = datetime.utcfromtimestamp(ph_timestamp)
+ph_event_name = action.get('type')
+if ph_event_name == 'action':
+ph_event_name = "$pageview"
+if ph_event_name == 'event':
+ph_event_name = action.get('eventAction')
+if ph_event_name == 'goal':
+# Goal will be a duplicate of another action, so skip it
+continue
 
-      posthog.capture(
-        distinct_id=distinct_id,
-        event=ph_event_name,
-        properties=actionProperties,
-        timestamp=ph_timestamp
-      )
+ph_timestamp = action.get("timestamp")
+if ph_timestamp:
+ph_timestamp = datetime.utcfromtimestamp(ph_timestamp)
+
+posthog.capture(
+distinct_id=distinct_id,
+event=ph_event_name,
+properties=actionProperties,
+timestamp=ph_timestamp
+)
 ```
 
 This script may need modification depending on the structure of your Matomo data, but it gives you a start.

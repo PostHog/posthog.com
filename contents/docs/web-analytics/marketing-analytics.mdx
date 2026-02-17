@@ -10,11 +10,30 @@ availability:
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-> **Important:** This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#marketing-analytics). Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
+<CalloutBox icon="IconInfo" title="Beta feature" type="caution">
+
+This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#marketing-analytics). Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
+
+</CalloutBox>
 
 **Marketing analytics** enables you to track marketing campaigns, costs, and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
 
-> For detailed column definitions, formulas, and platform field mappings, see [Column definitions](/docs/web-analytics/marketing-analytics-schema).
+<CalloutBox icon="IconInfo" title="Column definitions" type="fyi">
+
+For detailed column definitions, formulas, and platform field mappings, see [Column definitions](/docs/web-analytics/marketing-analytics-schema).
+
+</CalloutBox>
+
+## Getting started
+
+When you first visit the [marketing analytics dashboard](https://app.posthog.com/web/marketing), you'll see a guided onboarding wizard that walks you through setup:
+
+1. **Welcome** – Introduction to Marketing Analytics and its capabilities
+2. **Add source** – Connect your marketing data sources (native integrations, data warehouse, or self-managed sources)
+3. **Conversion goals** – Define what actions count as conversions (optional)
+
+You can skip the conversion goals step and configure them later in [settings](https://app.posthog.com/settings/environment-marketing-analytics). Once you complete onboarding, you'll see the full marketing dashboard with your campaign data.
+
 
 ## Marketing dashboard
 
@@ -35,7 +54,7 @@ The marketing costs chart displays your total advertising spend across all confi
 - **Time-based trends** help identify spending patterns and budget allocation over the selected date range
 - **Date range filtering** allows you to analyze costs for specific periods using the date picker
 - **Real-time updates** reflect new cost data as it syncs from your configured marketing sources (based on your source sync configuration)
-- **Currency conversion** automatically converts all costs to your configured base currency for consistent reporting
+- **Currency conversion** automatically converts all monetary values (costs and conversion values) to your configured base currency for consistent reporting
 
 ### Campaign breakdown
 
@@ -70,6 +89,12 @@ The campaign breakdown table provides detailed performance metrics by individual
 />
 
 PostHog supports three types of data sources for marketing analytics. All sources are configured through a unified interface that shows the connection status, required table syncing, and column mapping for each source type.
+
+<CalloutBox icon="IconInfo" title="No data sources configured" type="fyi">
+
+If you haven't configured any data sources, you'll see an error banner prompting you to add at least one native integration or connect a data warehouse source.
+
+</CalloutBox>
 
 #### Native sources
 
@@ -106,7 +131,11 @@ You can _optionally_ connect external data warehouse sources (currently BigQuery
 
 You can configure self-managed sources from S3, GCS, Cloudflare R2, and Azure. Like data warehouse sources, you'll need to map the required columns for each table to enable the functionality.
 
-> **Note:** We strongly recommend using JSON format for better support and troubleshooting. You simply need to create a connection between PostHog and your marketing source, map the desired fields, and PostHog will use the marketing data directly from that source.
+<CalloutBox icon="IconInfo" title="Recommended format" type="fyi">
+
+We strongly recommend using JSON format for better support and troubleshooting. You simply need to create a connection between PostHog and your marketing source, map the desired fields, and PostHog will use the marketing data directly from that source.
+
+</CalloutBox>
 
 Please refer to the [data pipeline docs](/docs/cdp/sources) for more information on configuring external data sources.
 
@@ -181,6 +210,8 @@ Map arbitrary `utm_campaign` values to specific campaign names or IDs from your 
 - You're tracking campaigns across multiple channels with different UTM campaign naming
 
 For example, you can map `utm_campaign=summer-promo` to the Google Ads campaign named "Summer Sale 2025" or to campaign ID "123456789", depending on your campaign field preference.
+
+When entering a `utm_campaign` value, PostHog suggests matching campaigns from your advertising platform based on string similarity. Click a suggestion to auto-fill the campaign field. Suggestions show the match percentage and display both the campaign name and ID for clarity.
 
 #### Custom source mappings
 
