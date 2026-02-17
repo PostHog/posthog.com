@@ -281,6 +281,7 @@ Y Combinator
 YC
 
 # Acronyms, languages, frameworks, protocols, etc.
+A/A
 A/B
 ACLs
 AI
@@ -309,6 +310,7 @@ Django
 DNS
 DSN
 [Ee]lixir
+ELI5
 ETag
 FastAPI
 [Ff]lask
@@ -325,6 +327,8 @@ Hono
 HTML
 (?i)HTTP
 (?i)HTTPS
+[Ii]
+ICP
 ID
 IDE
 IDEs
@@ -362,8 +366,11 @@ PascalCase
 [Pp]hoenix
 PHP
 pnpm
+PM
+PMF
 Postgres
 PostgreSQL
+PR
 [Pp]ython
 RBAC
 [Rr]eact
@@ -386,6 +393,7 @@ SSO
 [Ss]velte
 SvelteKit
 TanStack
+TL;DR
 TypeScript
 UI
 UIDs

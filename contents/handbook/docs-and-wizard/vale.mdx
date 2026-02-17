@@ -120,6 +120,10 @@ The [Vale docs](https://vale.sh/docs) have more information on rule types and co
 
 If you add a new rule, update the `test/` directory with examples and run `pnpm vale:test` to see if it works as expected.
 
+You can also test specific rules with the Vale CLI.
+
+`pnpm vale --filter='.Name=="PostHogBase.SentenceCase"' ./docs/error-tracking/pricing.mdx`
+
 </CalloutBox>
 
 ## Breaking the rules 
