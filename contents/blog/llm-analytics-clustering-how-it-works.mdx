@@ -145,7 +145,7 @@ class SummaryBullet(BaseModel):
 
 > See the actual implementation: [`schema.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/llm/schema.py)
 
-We use GPT-4.1 nano for this — it's fast, cheap, and the structured output mode means we get reliable, parseable results every time. The line references back to the text representation are particularly useful: they let the summary stay grounded in the actual trace data rather than hallucinating. (If you have sensitive data in your traces, check out [privacy mode](/docs/llm-analytics/privacy-mode) which controls what gets sent.)
+We use GPT-4.1 nano for this — it's fast, cheap, and the structured output mode means we get reliable, parseable results every time. The line references back to the text representation are particularly useful: they let the summary stay grounded in the actual trace data rather than hallucinating. You can read the actual prompts we use: [`system_detailed.djt`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/prompts/system_detailed.djt) and [`user.djt`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/prompts/user.djt). (If you have sensitive data in your traces, check out [privacy mode](/docs/llm-analytics/privacy-mode) which controls what gets sent.)
 
 These summaries appear as `$ai_trace_summary` and `$ai_generation_summary` events in your project every hour. They also power the on-demand [trace summarization](/docs/llm-analytics/summarization) feature you can use to quickly understand any individual trace or generation without reading through the full conversation.
 
@@ -246,7 +246,7 @@ After this step, every trace or generation has an integer cluster ID. But an int
 
 Now we have clusters with integer IDs. Cluster 0 has 47 traces, cluster 1 has 23, cluster -1 (noise) has 8. Not exactly actionable.
 
-This is where we bring AI back in — specifically, a [LangGraph](https://langchain-ai.github.io/langgraph/) ReAct agent powered by GPT-5.2. Its job is to explore the clusters and come up with meaningful labels and descriptions.
+This is where we bring AI back in — specifically, a [LangGraph](https://langchain-ai.github.io/langgraph/) ReAct agent powered by GPT-5.2. Its job is to explore the clusters and come up with meaningful labels and descriptions. You can read the agent's system prompt in [`prompts.py`](https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/prompts.py).
 
 The agent has access to 8 tools:
 
