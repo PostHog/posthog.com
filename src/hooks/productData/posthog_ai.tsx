@@ -208,7 +208,7 @@ export const posthog_ai = {
             icon: <IconLlmAnalytics className="size-5" />,
             color: 'purple',
             description:
-                "Why was today's token spend more than your salary? PostHog AI can use LLM analytics to help keep an eye on your AI.",
+                "Why was today's token spend more than your salary? PostHog AI and LLM analytics help keep an eye on your AI.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cde5a95040.png',
