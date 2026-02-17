@@ -1,5 +1,5 @@
 ---
-date: 2023-03-16
+date: 2026-02-17
 title: The 6 best free and open-source A/B testing tools
 rootPage: /blog
 sidebar: Blog
@@ -13,8 +13,7 @@ author:
   - andy-vandervell
 category: General
 tags:
-  - Open source
-  - Guides
+  - Comparisons
 ---
 
 Also known as split testing or [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
