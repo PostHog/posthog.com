@@ -54,7 +54,7 @@ The marketing costs chart displays your total advertising spend across all confi
 - **Time-based trends** help identify spending patterns and budget allocation over the selected date range
 - **Date range filtering** allows you to analyze costs for specific periods using the date picker
 - **Real-time updates** reflect new cost data as it syncs from your configured marketing sources (based on your source sync configuration)
-- **Currency conversion** automatically converts all costs to your configured base currency for consistent reporting
+- **Currency conversion** automatically converts all monetary values (costs and conversion values) to your configured base currency for consistent reporting
 
 ### Campaign breakdown
 
@@ -210,6 +210,8 @@ Map arbitrary `utm_campaign` values to specific campaign names or IDs from your 
 - You're tracking campaigns across multiple channels with different UTM campaign naming
 
 For example, you can map `utm_campaign=summer-promo` to the Google Ads campaign named "Summer Sale 2025" or to campaign ID "123456789", depending on your campaign field preference.
+
+When entering a `utm_campaign` value, PostHog suggests matching campaigns from your advertising platform based on string similarity. Click a suggestion to auto-fill the campaign field. Suggestions show the match percentage and display both the campaign name and ID for clarity.
 
 #### Custom source mappings
 

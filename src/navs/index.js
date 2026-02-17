@@ -570,6 +570,7 @@ export const handbookSidebar = [
             { name: 'Progression', url: '/handbook/people/career-progression' },
             { name: 'HR processes', url: '/handbook/people/grievances' },
             { name: 'BookHog', url: '/handbook/people/bookhog' },
+            { name: 'Philosophy club', url: '/handbook/people/philosophy-club' },
             { name: 'Offboarding', url: '/handbook/people/offboarding' },
         ],
     },
@@ -4577,25 +4578,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting',
-                    url: '/docs/surveys/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/surveys/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Changelog',
-                    url: '/docs/surveys/changelog',
-                    icon: 'IconRocket',
-                    color: 'purple',
-                },
-                {
                     type: 'divider',
                 },
                 {
@@ -4613,6 +4595,37 @@ export const docsMenu = {
                     icon: 'IconUserPaths',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/surveys/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/surveys/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'SDK Feature Support',
+                    url: '/docs/surveys/sdk-feature-support',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/surveys/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -5377,6 +5390,16 @@ export const docsMenu = {
                     badge: {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
+                    name: 'Clusters',
+                    url: '/docs/llm-analytics/clusters',
+                    icon: 'IconGraph',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
                 {
