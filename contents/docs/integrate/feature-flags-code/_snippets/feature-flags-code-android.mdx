@@ -1,13 +1,13 @@
 ### Boolean feature flags
 
+`getFeatureFlagResult` returns `null` when the flag doesn't exist or hasn't loaded yet.
+
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.isFeatureEnabled("flag-key")) {
+val result = PostHog.getFeatureFlagResult("flag-key")
+if (result?.enabled == true) {
     // Do something differently for this user
-
-    // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
 }
 ```
 
@@ -16,11 +16,34 @@ if (PostHog.isFeatureEnabled("flag-key")) {
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-key' with the key of your variant
-    // Do something differently for this user
+val result = PostHog.getFeatureFlagResult("flag-key")
+if (result == null) {
+    // Flag doesn't exist or hasn't loaded yet
+} else {
+    when (result.variant) {
+        "variant-a" -> {
+            // Do something for variant A
+        }
+        "variant-b" -> {
+            // Do something for variant B
+        }
+    }
+}
+```
 
-    // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
+### Payloads
+
+```kotlin
+import com.posthog.PostHog
+
+val result = PostHog.getFeatureFlagResult("flag-key")
+result?.payload?.let { payload ->
+    println(payload)
+}
+
+// Deserialize the payload into a typed object
+result?.getPayloadAs<MyConfig>()?.let { config ->
+    println(config)
 }
 ```
 
@@ -40,7 +63,7 @@ import com.posthog.PostHogOnFeatureFlags
 // During SDK initialization
 val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     onFeatureFlags = PostHogOnFeatureFlags {
-        if (PostHog.isFeatureEnabled("flag-key")) {
+        if (PostHog.getFeatureFlagResult("flag-key")?.enabled == true) {
             // do something
         }
     }
@@ -48,7 +71,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
 
 // And/Or manually the SDK is initialized
 PostHog.reloadFeatureFlags {
-    if (PostHog.isFeatureEnabled("flag-key")) {
+    if (PostHog.getFeatureFlagResult("flag-key")?.enabled == true) {
         // do something
     }
 }
@@ -62,4 +85,25 @@ Feature flag values are cached. If something has changed with your user and you'
 import com.posthog.PostHog
 
 PostHog.reloadFeatureFlags()
+```
+
+### Using an older SDK version?
+
+The `getFeatureFlagResult` API is available in `posthog-android` version **3.31.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
+
+```kotlin
+import com.posthog.PostHog
+
+// Boolean check
+if (PostHog.isFeatureEnabled("flag-key")) {
+    // Do something differently for this user
+}
+
+// Multivariate check
+if (PostHog.getFeatureFlag("flag-key") == "variant-key") {
+    // Do something for this variant
+}
+
+// Fetch the payload
+val payload = PostHog.getFeatureFlagPayload("flag-key")
 ```

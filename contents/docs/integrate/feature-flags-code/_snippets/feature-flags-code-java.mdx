@@ -1,25 +1,59 @@
 ### Boolean feature flags
 
-```java
-if (posthog.isFeatureEnabled("distinct_id_of_your_user", "flag-key")) {
-    // Do something differently for this user
+`getFeatureFlagResult` returns `null` when the flag doesn't exist.
 
-    // Optional: fetch the payload
-    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+```java
+FeatureFlagResult result = posthog.getFeatureFlagResult("distinct_id_of_your_user", "flag-key");
+if (result != null && result.getEnabled()) {
+    // Do something differently for this user
 }
 ```
 
 ### Multivariate feature flags
 
 ```java
-if ("variant-key".equals(posthog.getFeatureFlag("distinct_id_of_your_user", "flag-key"))) { // replace 'variant-key' with the key of your variant
-    // Do something differently for this user
+FeatureFlagResult result = posthog.getFeatureFlagResult("distinct_id_of_your_user", "flag-key");
+if (result == null || result.getVariant() == null) {
+    // Flag doesn't exist or has no variant
+} else {
+    switch (result.getVariant()) {
+        case "variant-a":
+            // Do something for variant A
+            break;
+        case "variant-b":
+            // Do something for variant B
+            break;
+    }
+}
+```
 
-    // Optional: fetch the payload
-    Object matchedFlagPayload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+### Payloads
+
+```java
+FeatureFlagResult result = posthog.getFeatureFlagResult("distinct_id_of_your_user", "flag-key");
+if (result != null && result.getPayload() != null) {
+    System.out.println(result.getPayload());
+
+    // Deserialize the payload into a typed object
+    MyConfig config = result.getPayloadAs(MyConfig.class);
 }
 ```
 
 import JavaOverrideServerProperties from './override-server-properties/java.mdx'
 
 <JavaOverrideServerProperties />
+
+### Using an older SDK version?
+
+The `getFeatureFlagResult` API is available in `posthog-server` version **2.3.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
+
+```java
+// Boolean check
+boolean isEnabled = posthog.isFeatureEnabled("distinct_id_of_your_user", "flag-key");
+
+// Multivariate check
+Object variant = posthog.getFeatureFlag("distinct_id_of_your_user", "flag-key");
+
+// Fetch the payload
+Object payload = posthog.getFeatureFlagPayload("distinct_id_of_your_user", "flag-key");
+```

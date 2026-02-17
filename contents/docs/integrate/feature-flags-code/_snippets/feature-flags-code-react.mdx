@@ -9,6 +9,7 @@ PostHog provides several hooks to make it easy to use feature flags in your Reac
 
 | Hook | Description |
 | --- | --- |
+| `useFeatureFlagResult` | Returns the full feature flag result (with `enabled`, `variant`, and `payload`). This sends a `$feature_flag_called` event. |
 | `useFeatureFlagEnabled` | Returns a boolean indicating whether the feature flag is enabled. This sends a `$feature_flag_called` event. |
 | `useFeatureFlagVariantKey` | Returns the variant key of the feature flag. This sends a `$feature_flag_called` event. |
 | `useActiveFeatureFlags` | Returns an array of active feature flags. This does *not* send a `$feature_flag_called` event. |
@@ -17,16 +18,15 @@ PostHog provides several hooks to make it easy to use feature flags in your Reac
 #### Example 1: Using a boolean feature flag
 
 ```react
-import { useFeatureFlagEnabled } from '@posthog/react'
+import { useFeatureFlagResult } from '@posthog/react'
 
 function App() {
-  const showWelcomeMessage = useFeatureFlagEnabled('flag-key')
-  const payload = useFeatureFlagPayload('flag-key')
+  const result = useFeatureFlagResult('flag-key')
 
   return (
     <div className="App">
       {
-        showWelcomeMessage ? (
+        result?.enabled ? (
           <div>
             <h1>Welcome!</h1>
             <p>Thanks for trying out our feature flags.</p>
@@ -48,16 +48,16 @@ export default App;
 #### Example 2: Using a multivariate feature flag
 
 ```react
-import { useFeatureFlagVariantKey } from '@posthog/react'
+import { useFeatureFlagResult } from '@posthog/react'
 
 function App() {
-  const variantKey = useFeatureFlagVariantKey('show-welcome-message')
-  let welcomeMessage = '' 
-  if (variantKey === 'variant-a') {
+  const result = useFeatureFlagResult('show-welcome-message')
+  let welcomeMessage = ''
+  if (result?.variant === 'variant-a') {
     welcomeMessage = 'Welcome to the Alpha!'
-  } else if (variantKey === 'variant-b') {
+  } else if (result?.variant === 'variant-b') {
     welcomeMessage = 'Welcome to the Beta!'
-  }  
+  }
 
   return (
     <div className="App">
@@ -83,34 +83,29 @@ export default App;
 
 #### Example 3: Using a flag payload
 
-<CalloutBox icon="IconWarning" title="Payload hook" type="fyi">
-
-The `useFeatureFlagPayload` hook does *not* send a [`$feature_flag_called`](https://posthog.com/docs/experiments/new-experimentation-engine#experiment-exposure) event, which is required for the experiment to be tracked. To ensure the exposure event is sent, you should **always** use the `useFeatureFlagPayload` hook with either the `useFeatureFlagEnabled` or `useFeatureFlagVariantKey` hook.
-
-</CalloutBox>
-
 ```react
-import { useFeatureFlagPayload } from '@posthog/react'
+import { useFeatureFlagResult } from '@posthog/react'
 
 function App() {
-  const variant = useFeatureFlagEnabled('show-welcome-message')
-  const payload = useFeatureFlagPayload('show-welcome-message')
+  const result = useFeatureFlagResult('show-welcome-message')
 
-    return (
-                <>
-                {
-                    variant ? (
-                        <div className="welcome-message">
-                            <h2>{payload?.welcomeTitle}</h2>
-                            <p>{payload?.welcomeMessage}</p>
-                        </div>
-                    ) : <div>
-                        <h2>No custom welcome message</h2>
-                        <p>Because the feature flag evaluated to false.</p>
-                    </div>
-                }
-        </>
-    )
+  return (
+    <>
+      {
+        result?.enabled ? (
+          <div className="welcome-message">
+            <h2>{result.payload?.welcomeTitle}</h2>
+            <p>{result.payload?.welcomeMessage}</p>
+          </div>
+        ) : (
+          <div>
+            <h2>No custom welcome message</h2>
+            <p>Because the feature flag evaluated to false.</p>
+          </div>
+        )
+      }
+    </>
+  )
 }
 ```
 
@@ -183,35 +178,19 @@ posthog.init('<ph_project_api_key>', {
 )
 ```
 
-### Error handling
+### Using an older SDK version?
 
-When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+The `useFeatureFlagResult` API is available in `@posthog/react` version **1.8.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
 
-```js
-function handleFeatureFlag(client, flagKey, distinctId) {
-    try {
-        const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
-        console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
-        return isEnabled;
-    } catch (error) {
-        console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
-        // Optionally, you can return a default value or throw the error
-        // return false; // Default to disabled
-        throw error;
-    }
-}
+```react
+import { useFeatureFlagEnabled, useFeatureFlagVariantKey, useFeatureFlagPayload } from '@posthog/react'
 
-// Usage example
-try {
-    const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
-    if (flagEnabled) {  
-        // Implement new feature logic
-    } else {
-        // Implement old feature logic
-    }
-} catch (error) {
-    // Handle the error at a higher level
-    console.error('Feature flag check failed, using default behavior');
-    // Implement fallback logic
-} 
+// Boolean check
+const isEnabled = useFeatureFlagEnabled('flag-key')
+
+// Multivariate check
+const variant = useFeatureFlagVariantKey('flag-key')
+
+// Fetch the payload
+const payload = useFeatureFlagPayload('flag-key')
 ```

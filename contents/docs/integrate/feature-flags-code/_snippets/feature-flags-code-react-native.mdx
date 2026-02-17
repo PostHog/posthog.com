@@ -5,59 +5,66 @@ There are two ways to implement feature flags in React Native:
 
 ### Method 1: Using hooks
 
+`useFeatureFlagResult` returns `undefined` when the flag doesn't exist or hasn't loaded yet.
+
 #### Example 1: Boolean feature flags
+
 ```react-native
-import { useFeatureFlag } from 'posthog-react-native'
+import { useFeatureFlagResult } from 'posthog-react-native'
 
 const MyComponent = () => {
-    const booleanFlag = useFeatureFlag('key-for-your-boolean-flag')
-
-    if (booleanFlag === undefined) {
-        // the response is undefined if the flags are being loaded
-        return null
-    }
-
-    // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
-
-    return booleanFlag ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
+    const result = useFeatureFlagResult('flag-key')
+    return result?.enabled
+        ? <Text>Testing feature 😄</Text>
+        : <Text>Not Testing feature 😢</Text>
 }
 ```
 
 #### Example 2: Multivariate feature flags
 
 ```react-native
-import { useFeatureFlag } from 'posthog-react-native'
+import { useFeatureFlagResult } from 'posthog-react-native'
 
 const MyComponent = () => {
-    const multiVariantFeature = useFeatureFlag('key-for-your-multivariate-flag')
-
-    if (multiVariantFeature === undefined) {
-        // the response is undefined if the flags are being loaded
-        return null
-    } else if (multiVariantFeature === 'variant-name') { // replace 'variant-name' with the name of your variant
-      // Do something
+    const result = useFeatureFlagResult('flag-key')
+    switch (result?.variant) {
+        case 'variant-a':
+            return <Text>Variant A</Text>
+        case 'variant-b':
+            return <Text>Variant B</Text>
+        default:
+            return <Text>Default experience</Text>
     }
+}
+```
 
-    // Optional use the 'useFeatureFlagWithPayload' hook for fetching the feature flag payload
+#### Example 3: Using a flag payload
 
-    return <div/>
+```react-native
+import { useFeatureFlagResult } from 'posthog-react-native'
+
+const MyComponent = () => {
+    const result = useFeatureFlagResult('flag-key')
+    return result?.payload
+        ? <Text>{result.payload.welcomeMessage}</Text>
+        : <Text>No custom message</Text>
 }
 ```
 
 ### Method 2: Loading the flag directly
 
 ```react-native
-// Defaults to undefined if not loaded yet or if there was a problem loading
-posthog.isFeatureEnabled('key-for-your-boolean-flag')
+// Returns undefined if not loaded yet or if there was a problem loading
+const result = posthog.getFeatureFlagResult('flag-key')
 
-// Defaults to undefined if not loaded yet or if there was a problem loading
-posthog.getFeatureFlag('key-for-your-boolean-flag')
+// Boolean check
+result?.enabled
 
-// Multivariant feature flags are returned as a string
-posthog.getFeatureFlag('key-for-your-multivariate-flag')
+// Multivariate check
+result?.variant
 
-// Optional fetch the payload returns 'JsonType' or undefined if not loaded yet or if there was a problem loading
-posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
+// Access the payload
+result?.payload
 ```
 
 ### Ensuring flags are loaded before usage
@@ -71,13 +78,13 @@ To handle this, you can use the `onFeatureFlags` callback to wait for the featur
 ```react-native
 posthog.onFeatureFlags((flags) => {
   // feature flags are guaranteed to be available at this point
-  if (posthog.isFeatureEnabled('flag-key')) {
+  if (posthog.getFeatureFlagResult('flag-key')?.enabled) {
     // do something
   }
 })
 ```
 
-### Reloading flags
+### Reloading feature flags
 
 PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag.
 
@@ -125,40 +132,6 @@ export const posthog = new PostHog('<ph_project_api_key>', {
   featureFlagsRequestTimeoutMs: 10000 // Time in milliseconds. Default is 10000 (10 seconds).
 })
 ```
-
-### Error handling
-
-When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
-
-```react-native
-function handleFeatureFlag(client, flagKey, distinctId) {
-    try {
-        const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
-        console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
-        return isEnabled;
-    } catch (error) {
-        console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
-        // Optionally, you can return a default value or throw the error
-        // return false; // Default to disabled
-        throw error;
-    }
-}
-
-// Usage example
-try {
-    const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
-    if (flagEnabled) {
-        // Implement new feature logic
-    } else {
-        // Implement old feature logic
-    }
-} catch (error) {
-    // Handle the error at a higher level
-    console.error('Feature flag check failed, using default behavior');
-    // Implement fallback logic
-}
-```
-
 
 
 ### Overriding server properties
@@ -213,3 +186,18 @@ The list of properties that this overrides:
 7. $geoip_time_zone
 
 This enables any geolocation-based flags to work without manually setting these properties.
+
+### Using an older SDK version?
+
+The `useFeatureFlagResult` API is available in `posthog-react-native` version **4.33.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
+
+```react-native
+// Boolean check
+posthog.isFeatureEnabled('flag-key')
+
+// Multivariate check
+posthog.getFeatureFlag('flag-key')
+
+// Fetch the payload
+posthog.getFeatureFlagPayload('flag-key')
+```

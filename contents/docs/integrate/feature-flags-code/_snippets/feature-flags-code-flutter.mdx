@@ -1,22 +1,37 @@
 ### Boolean feature flags
 
-```dart
-if (await Posthog().isFeatureEnabled('flag-key')) {
-  // Do something differently for this user
+`getFeatureFlagResult` returns `null` when the flag doesn't exist or hasn't loaded yet.
 
-  // Optional: fetch the payload
-  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+```dart
+final result = await Posthog().getFeatureFlagResult('flag-key');
+if (result?.enabled == true) {
+  // Do something differently for this user
 }
 ```
 
 ### Multivariate feature flags
 
 ```dart
-if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') { // replace 'variant-key' with the key of your variant
-  // Do something differently for this user
+final result = await Posthog().getFeatureFlagResult('flag-key');
+switch (result?.variant) {
+  case 'variant-a':
+    // Do something for variant A
+    break;
+  case 'variant-b':
+    // Do something for variant B
+    break;
+  case null:
+    // Flag doesn't exist, hasn't loaded, or has no variant
+    break;
+}
+```
 
-  // Optional: fetch the payload
-  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+### Payloads
+
+```dart
+final result = await Posthog().getFeatureFlagResult('flag-key');
+if (result?.payload != null) {
+  print(result!.payload);
 }
 ```
 
@@ -34,7 +49,7 @@ To handle this, you can use the `onFeatureFlags` callback in your config to be n
 final config = PostHogConfig('<ph_project_api_key>');
 config.host = '<ph_client_api_host>';
 config.onFeatureFlags = () async {
-  if (await Posthog().isFeatureEnabled('flag-key')) {
+  if ((await Posthog().getFeatureFlagResult('flag-key'))?.enabled == true) {
     // do something
   }
 };
@@ -47,4 +62,23 @@ Feature flag values are cached. If something has changed with your user and you'
 
 ```dart
 await Posthog().reloadFeatureFlags();
+```
+
+### Using an older SDK version?
+
+The `getFeatureFlagResult` API is available in version **5.14.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
+
+```dart
+// Boolean check
+if (await Posthog().isFeatureEnabled('flag-key')) {
+    // Do something differently for this user
+}
+
+// Multivariate check
+if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') {
+    // Do something for this variant
+}
+
+// Fetch the payload
+final payload = await Posthog().getFeatureFlagPayload('flag-key');
 ```

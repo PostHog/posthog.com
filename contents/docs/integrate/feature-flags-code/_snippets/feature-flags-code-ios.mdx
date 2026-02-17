@@ -1,22 +1,45 @@
 ### Boolean feature flags
 
-```swift
-if (PostHogSDK.shared.isFeatureEnabled("flag-key")) {
-    // Do something differently for this user
+`getFeatureFlagResult` returns `nil` when the flag doesn't exist or hasn't loaded yet.
 
-    // Optional: fetch the payload
-    let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
+```swift
+let result = PostHogSDK.shared.getFeatureFlagResult("flag-key")
+if result?.enabled == true {
+    // Do something differently for this user
 }
 ```
 
 ### Multivariate feature flags
 
 ```swift
-if (PostHogSDK.shared.getFeatureFlag("flag-key") as? String == "variant-key") { // replace "variant-key" with the key of your variant
-    // Do something differently for this user
+guard let result = PostHogSDK.shared.getFeatureFlagResult("flag-key") else {
+    // Flag doesn't exist or hasn't loaded yet
+    return
+}
 
-    // Optional: fetch the payload
-    let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
+switch result.variant {
+case "variant-a":
+    // Do something for variant A
+    break
+case "variant-b":
+    // Do something for variant B
+    break
+default:
+    break
+}
+```
+
+### Payloads
+
+```swift
+let result = PostHogSDK.shared.getFeatureFlagResult("flag-key")
+if let payload = result?.payload {
+    print(payload)
+}
+
+// Deserialize the payload into a typed struct
+if let config = result?.payloadAs(MyConfig.self) {
+    print(config)
 }
 ```
 
@@ -68,11 +91,30 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 Alternatively, you can use the completion block of the `reloadFeatureFlags(_:)` method. This allows you to execute logic immediately after the flags are reloaded:
 
 
-``` swift
+```swift
 // Reload feature flags and check if a specific feature is enabled
 PostHogSDK.shared.reloadFeatureFlags {
-    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+    if PostHogSDK.shared.getFeatureFlagResult("flag-key")?.enabled == true {
         // do something
     }
 }
+```
+
+### Using an older SDK version?
+
+The `getFeatureFlagResult` API is available in `posthog-ios` version **3.40.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
+
+```swift
+// Boolean check
+if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+    // Do something differently for this user
+}
+
+// Multivariate check
+if PostHogSDK.shared.getFeatureFlag("flag-key") as? String == "variant-key" {
+    // Do something for this variant
+}
+
+// Fetch the payload
+let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
 ```

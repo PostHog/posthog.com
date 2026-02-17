@@ -1,37 +1,71 @@
-`PostHog.FeatureFlags.check/2` is the main function for checking a feature flag in Elixir. More documentation on it can be found in the [HexPM Docs](https://hexdocs.pm/posthog/PostHog.FeatureFlags.html).
+`PostHog.FeatureFlags.get_feature_flag_result/2` is the main function for checking a feature flag in Elixir. More documentation on it can be found in the [HexPM Docs](https://hexdocs.pm/posthog/PostHog.FeatureFlags.html).
 
+### Boolean feature flags
 
-#### Boolean feature flags
+`get_feature_flag_result` returns `{:ok, nil}` when the flag doesn't exist.
 
 ```elixir
-iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
-{:ok, true}
+case PostHog.FeatureFlags.get_feature_flag_result("flag-key", "distinct_id_of_your_user") do
+  {:ok, %{enabled: true}} ->
+    # Do something differently for this user
+
+  {:ok, _result} ->
+    # Flag is disabled or doesn't exist
+
+  {:error, _reason} ->
+    # API error
+end
 ```
 
-It will attempt to take `distinct_id` from the context if it's not provided.
+### Multivariate feature flags
 
 ```elixir
-iex> PostHog.set_context(%{distinct_id: "user123"})
-:ok
-iex> PostHog.FeatureFlags.check("example-feature-flag-1")
-{:ok, true}
+case PostHog.FeatureFlags.get_feature_flag_result("flag-key", "distinct_id_of_your_user") do
+  {:ok, %{variant: "variant-a"}} ->
+    # Do something for variant A
+
+  {:ok, %{variant: "variant-b"}} ->
+    # Do something for variant B
+
+  {:ok, _result} ->
+    # Flag doesn't exist, is disabled, or has an unexpected variant
+
+  {:error, _reason} ->
+    # API error
+end
 ```
 
-
-#### Multivariate feature flags
+### Payloads
 
 ```elixir
-iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
-{:ok, "variant2"}
+case PostHog.FeatureFlags.get_feature_flag_result("flag-key", "distinct_id_of_your_user") do
+  {:ok, %{payload: payload}} when not is_nil(payload) ->
+    IO.inspect(payload)
+
+  _ ->
+    # No payload available
+end
 ```
 
 ### Errors
 
-We'll return an error if the feature flag doesn't exist.
+`get_feature_flag_result` returns `{:ok, nil}` when the flag doesn't exist, and `{:error, reason}` for API failures:
 
 ```elixir
-iex> PostHog.FeatureFlags.check("example-feature-flag-3", "user123")
-{:error, %PostHog.UnexpectedResponseError{message: "Feature flag example-feature-flag-3 was not found in the response", response: ...}}
+iex> PostHog.FeatureFlags.get_feature_flag_result("non-existent-flag", "user123")
+{:ok, nil}
 ```
 
-You can also use `PostHog.FeatureFlags.check!/2` if you're feeling adventurous or running a script and prefer errors to be raised instead.
+You can also use `PostHog.FeatureFlags.get_feature_flag_result!/2` if you prefer errors to be raised for API failures. Note that it returns `nil` (without raising) when a flag is not found, consistent with other PostHog SDKs.
+
+### Using an older SDK version?
+
+The `get_feature_flag_result` API is available in `posthog-elixir` version **2.3.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
+
+```elixir
+# Boolean check (returns {:ok, true/false})
+{:ok, is_enabled} = PostHog.FeatureFlags.check("flag-key", "distinct_id_of_your_user")
+
+# Multivariate check (returns {:ok, "variant-string"} for multivariate flags)
+{:ok, variant} = PostHog.FeatureFlags.check("flag-key", "distinct_id_of_your_user")
+```

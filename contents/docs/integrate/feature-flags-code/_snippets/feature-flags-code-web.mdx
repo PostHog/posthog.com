@@ -1,22 +1,36 @@
 ### Boolean feature flags
 
-```js-web
-if (posthog.isFeatureEnabled('flag-key') ) {
-    // Do something differently for this user
+`getFeatureFlagResult` returns `undefined` when the flag doesn't exist or hasn't loaded yet.
 
-    // Optional: fetch the payload
-    const matchedFlagPayload = posthog.getFeatureFlagPayload('flag-key')
+```js-web
+const result = posthog.getFeatureFlagResult('flag-key')
+if (result?.enabled) {
+    // Do something differently for this user
 }
 ```
 
 ### Multivariate feature flags
 
 ```js-web
-if (posthog.getFeatureFlag('flag-key')  == 'variant-key') { // replace 'variant-key' with the key of your variant
-    // Do something differently for this user
-    
-    // Optional: fetch the payload
-    const matchedFlagPayload = posthog.getFeatureFlagPayload('flag-key')
+const result = posthog.getFeatureFlagResult('flag-key')
+switch (result?.variant) {
+    case 'variant-a':
+        // Do something for variant A
+        break
+    case 'variant-b':
+        // Do something for variant B
+        break
+    default:
+        break
+}
+```
+
+### Payloads
+
+```js-web
+const result = posthog.getFeatureFlagResult('flag-key')
+if (result?.payload) {
+    console.log(result.payload)
 }
 ```
 
@@ -31,7 +45,7 @@ To handle this, you can use the `onFeatureFlags` callback to wait for the featur
 ```js-web
 posthog.onFeatureFlags(function (flags, flagVariants, { errorsLoading }) {
     // feature flags are guaranteed to be available at this point
-    if (posthog.isFeatureEnabled('flag-key')) {
+    if (posthog.getFeatureFlagResult('flag-key')?.enabled) {
         // do something
     }
 })
@@ -126,35 +140,21 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-### Feature flag error handling
+### Using an older SDK version?
 
-When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+The `getFeatureFlagResult` API is available in version **1.336.0** and above. We recommend upgrading to the latest version. Otherwise, use the previous APIs:
 
-```js
-function handleFeatureFlag(client, flagKey, distinctId) {
-  try {
-    const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
-    console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
-    return isEnabled;
-  } catch (error) {
-    console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
-    // Optionally, you can return a default value or throw the error
-    // return false; // Default to disabled
-    throw error;
-  }
+```js-web
+// Boolean check
+if (posthog.isFeatureEnabled('flag-key')) {
+    // Do something differently for this user
 }
 
-// Usage example
-try {
-  const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
-  if (flagEnabled) {  
-    // Implement new feature logic
-  } else {
-    // Implement old feature logic
-  }
-} catch (error) {
-  // Handle the error at a higher level
-  console.error('Feature flag check failed, using default behavior');
-  // Implement fallback logic
+// Multivariate check
+if (posthog.getFeatureFlag('flag-key') === 'variant-key') {
+    // Do something for this variant
 }
+
+// Fetch the payload
+const payload = posthog.getFeatureFlagPayload('flag-key')
 ```
