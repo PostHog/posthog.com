@@ -47,7 +47,7 @@ In PostHog, feature flags support percentage-based rollouts (ship to 5% of users
 - **Internal testing** – Release to your team first (set email contains `@yourcompany.com`), then to beta users, then to everyone.
 - **Operational toggles** – Maintenance mode, circuit breakers, or infrastructure controls that stay permanent.
 
-Feature flags are *not* for measuring which variant performs better. They tell you whether something is on or off, but they don't tell you whether "on" is actually good. That's what experiments are for.
+[There are a lot of benefits that come with using feature flags](/product-engineers/feature-flag-benefits-use-cases), but measuring which variant performs better is *not* one of them. They tell you whether something is on or off, but they don't tell you whether "on" is actually good. That's what experiments are for.
 
 > **Good to know:** PostHog [feature flags](/docs/feature-flags) support web, mobile, and server-side SDKs. Flag evaluations tie directly into [product analytics](/product-analytics), so you can filter any insight, funnel, or [session replay](/session-replay) by flag value without extra setup. You can also deploy [surveys](/surveys) targeting a specific feature flag to collect qualitative feedback alongside your rollout.
 
@@ -61,7 +61,7 @@ This is especially valuable for **mobile apps**, where changes otherwise require
 
 **When to use remote config:**
 
-- **Mobile app configuration** – Change themes, copy, or layouts without waiting for App Store or Play Store approval.
+- **Mobile app configuration** – Change themes, copy, or layouts without waiting for App Store or Play Store approval. We have tutorials for [iOS](/tutorials/ios-remote-config), [Android](/tutorials/android-remote-config), [React Native](/tutorials/react-native-remote-config), and [Flutter](/tutorials/flutter-remote-config).
 - **Parameter tuning** – Adjust timeouts, rate limits, retry counts, or thresholds without a deploy.
 - **API endpoint switching** – Point your app at a different backend for testing or failover.
 - **Environment-specific values** – Different settings for development, staging, and production.
@@ -261,8 +261,11 @@ For a deeper comparison, see our guide to the [best feature flag software for de
 
 - [Why use feature flags? Benefits, types and use cases](/product-engineers/feature-flag-benefits-use-cases)
 - [Feature flags vs configuration](/product-engineers/feature-flags-vs-configuration)
-- [How to do a canary release with feature flags](/tutorials/canary-release)
+- [How to do a canary release with feature flags](/docs/feature-flags/canary-release)
 - [A/B testing examples from real companies](/product-engineers/ab-testing-examples)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 - [Feature flags as a service](/blog/feature-flags-as-a-service)
 - [How we improved feature flag resiliency](/blog/how-we-improved-feature-flags-resiliency)
+- [Testing frontend feature flags with React, Vitest, and PostHog](/blog/testing-frontend-feature-flags)
+- [How to prevent feature flags from being blocked](/tutorials/flags-adblock-prevention)
+- [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
