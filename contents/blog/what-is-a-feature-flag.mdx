@@ -22,15 +22,17 @@ seo:
 
 ![Feature Flags vs Remote Config vs A/B Testing](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_16_T23_17_31_744_Z_c463b5b6de.png)
 
-Feature flags, remote config, and A/B testing all exist because *sometimes* deploying things straight to everyone is a bad idea.
+Feature flags, remote config, and A/B testing all exist because deploying changes straight to everyone is, more often than not, a terrible idea.
 
-They sound similar, they overlap in places, and teams regularly pick the wrong one, resulting in feature flags as makeshift experiments with no statistical rigor, remote config that spirals into a settings system nobody understands, or full-blown A/B tests for rollouts that don't need measurement at all.
+Thoughts and prayers will only get you so far. Sometimes you need a kill switch, sometimes you need to tweak a value without redeploying, and sometimes you need actual data to settle the argument. Sometimes you need all three.
 
-This guide breaks down what each one actually does, when to use it, and how they work together in PostHog — where all three are built on the same infrastructure, share the same data, and ship under one SDK.
+The tricky part is knowing which one to reach for, because they sound similar, they overlap in places, and can be built on top of each other.
+
+This guide breaks down what each one actually does, when to use it, and how they work together in PostHog – where all three are built on the same infrastructure, share the same data, and ship under one SDK.
 
 ## What is a feature flag?
 
-A **feature flag** (also called a feature toggle) is a conditional switch in your code that controls whether a user sees a specific feature. At its simplest, it's an `if` statement that checks a remote value instead of a hardcoded boolean – letting you turn features on or off without deploying new code.
+A [feature flag](/docs/feature-flags) (also called a feature toggle) is a conditional switch in your code that controls whether a user sees a specific feature. At its simplest, it's an `if` statement that checks a remote value instead of a hardcoded boolean – letting you turn features on or off without deploying new code.
 
 Feature flags can be simple booleans (on/off) or multivariate (returning one of several variants). They're the foundation for controlled rollouts, kill switches, and internal testing – and in PostHog, they're also the infrastructure that powers [remote config](/docs/feature-flags/remote-config) and [A/B testing](/experiments).
 
@@ -47,13 +49,7 @@ In PostHog, feature flags support percentage-based rollouts (ship to 5% of users
 
 Feature flags are *not* for measuring which variant performs better. They tell you whether something is on or off, but they don't tell you whether "on" is actually good. That's what experiments are for.
 
-> **Good to know:** PostHog [feature flags](/docs/feature-flags) support web, mobile, and server-side SDKs. Flag evaluations tie directly into [product analytics](/product-analytics), so you can filter any insight, funnel, or [session replay](/session-replay) by flag value without extra setup.
-
-<p>
-  <CallToAction to="https://posthog.com/docs/feature-flags/start-here">
-    Get started with PostHog Feature Flags – it's free!
-  </CallToAction>
-</p>
+> **Good to know:** PostHog [feature flags](/docs/feature-flags) support web, mobile, and server-side SDKs. Flag evaluations tie directly into [product analytics](/product-analytics), so you can filter any insight, funnel, or [session replay](/session-replay) by flag value without extra setup. You can also deploy [surveys](/surveys) targeting a specific feature flag to collect qualitative feedback alongside your rollout.
 
 ## What is remote config?
 
@@ -97,12 +93,6 @@ A/B testing requires sufficient traffic to reach statistical significance. If yo
 
 > **How it works in PostHog:** When you create an [experiment](/docs/experiments), PostHog creates a feature flag underneath with the variants you define. Experiment evaluations are billed under your [feature flag](/pricing) quota – there's no separate experimentation meter. You get a dedicated experiment dashboard with automatic significance calculations and the ability to drill into [session replays](/session-replay) for each variant.
 
-<p>
-  <CallToAction to="https://posthog.com/docs/feature-flags/start-here">
-    Get started with PostHog Experiments – it's free!
-  </CallToAction>
-</p>
-
 ## How they compare
 
 Here's a quick reference for when you're deciding which tool to reach for:
@@ -115,6 +105,12 @@ Here's a quick reference for when you're deciding which tool to reach for:
 | **Statistical rigor** | None | None | Built-in significance testing |
 | **PostHog implementation** | Boolean/multivariate flags with targeting | Payloads attached to flags | Flags + experiment analytics |
 | **Billing** | Per flag request (1M free/month) | Counted in flag quota | Counted in flag quota |
+
+<p>
+  <CallToAction to="https://posthog.com/docs">
+    Learn more about using PostHog
+  </CallToAction>
+</p>
 
 ## The overlap (and where teams go wrong)
 
@@ -170,11 +166,11 @@ PostHog is transparent about where its feature management capabilities have gaps
 - **No approval workflows.** There's no four-eyes review or approval gate for flag changes. Anyone with the right permissions can modify flags in production. Audit trails exist, but governance is limited.
 - **Dynamic cohort targeting limitations.** You can't target flags to cohorts with dynamic attributes, only static, which can be limiting for behavioral targeting use cases.
 
-For many teams – especially engineering-led startups and growth-stage companies – these trade-offs are fine. You get flags, experiments, config, analytics, [session replay](/session-replay), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), and a lot more in one platform with a generous free tier. If you need enterprise governance or advanced experimentation features, tools like LaunchDarkly or Statsig may be better fits for those specific needs.
+For many teams – especially engineering-led startups and growth-stage companies – these trade-offs are fine. You get flags, experiments, config, [analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), and a lot more in one platform with a generous free tier. If you need enterprise governance or advanced experimentation features, tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) or [Statsig](/blog/posthog-vs-statsig) [may be better fits for those specific needs](/blog/best-feature-flag-software-for-developers).
 
 ## Pricing
 
-All three capabilities in PostHog bill under a single, transparent model:
+All three capabilities in PostHog are billed under a single, transparent model:
 
 - **Free tier:** 1M feature flag requests, 1M analytics events per month
 - **After free tier:** $0.0001 per flag request, with volume discounts at higher tiers
