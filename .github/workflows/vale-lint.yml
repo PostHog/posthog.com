@@ -75,7 +75,8 @@ jobs:
                   echo "$FILES"
                   echo "$FILES" | xargs vale --output=JSON > vale-output.json 2>/dev/null || true
 
-                  TOTAL=$(jq '[.[][]] | length' vale-output.json)
+                  TOTAL=$(jq '[.[][]] | length' vale-output.json 2>/dev/null || echo 0)
+                  TOTAL=${TOTAL:-0}
                   if [ "$TOTAL" -eq 0 ]; then
                     echo "No findings"
                     echo "has_findings=false" >> "$GITHUB_OUTPUT"
@@ -101,7 +102,7 @@ jobs:
 
                   # --- PR comment: header + collapsible per-file tables ---
                   {
-                    echo "[Vale lint →](https://posthog.com/handbook/docs-and-wizard/vale) ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                    echo "[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
                     echo ""
                     echo "[Full report →](${JOB_SUMMARY_URL}) Copy the linter results into an LLM to batch-fix issues."
                     echo ""
@@ -138,7 +139,7 @@ jobs:
                   COMMENT_SIZE=$(wc -c < vale-comment.md)
                   if [ "$COMMENT_SIZE" -gt 60000 ]; then
                     {
-                      echo "**[Vale](https://posthog.com/handbook/docs-and-wizard/vale) lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions**"
+                      echo "**[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown**"
                       echo ""
                       echo "[Full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
                       echo ""
@@ -159,7 +160,7 @@ jobs:
 
                   # --- Job Summary: expanded per-file tables + LLM-ready code block ---
                   {
-                    echo "[Vale](https://posthog.com/handbook/docs-and-wizard/vale) lint — ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions"
+                    echo "[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
                     echo ""
                   } >> "$GITHUB_STEP_SUMMARY"
 
