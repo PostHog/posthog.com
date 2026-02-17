@@ -2575,6 +2575,14 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
+                            name: 'Replit integration',
+                            url: '/docs/integrations/replit',
+                        },
+                        {
+                            name: 'v0 integration',
+                            url: '/docs/integrations/v0',
+                        },
+                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
