@@ -89,33 +89,37 @@ The line numbering (`L001:`, `L002:`) is important — it gives the downstream s
 
 ### Handling huge traces
 
-Some traces are just too big. We use iterative uniform downsampling to compress them while preserving the most important parts:
+Some traces are just too big. We use uniform downsampling to shrink them — picking every Nth line from the body while preserving the header. The sampler notes what percentage of lines were kept, and the gaps in line numbers tell the LLM that content was omitted. Using the [mantis shrimp trace from the gist](https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181), here's a snippet of what a downsampled version might look like:
 
-```python
-# Simplified uniform downsampling
-# See: message_formatter.py
-
-def reduce_by_uniform_sampling(lines, max_lines, buffer=10):
-    """Drop lines evenly throughout, preserving header and tail."""
-    if len(lines) <= max_lines:
-        return lines
-
-    # Always keep the first and last `buffer` lines
-    header = lines[:buffer]
-    tail = lines[-buffer:]
-    middle = lines[buffer:-buffer]
-
-    # Calculate how many middle lines to keep
-    keep_count = max_lines - len(header) - len(tail)
-    step = len(middle) / keep_count
-    kept = [middle[int(i * step)] for i in range(keep_count)]
-
-    return header + kept + tail
+```
+L001: ----------------------------------------------------------
+L002:
+[SAMPLED VIEW: ~40% of 136 lines shown]
+L003: AVAILABLE TOOLS: 1
+L005:   web_search(max_results?: integer, query?: any)
+L012: [1] SYSTEM
+L018: Factoid text: The mantis shrimp can perceive 12-16 types
+       of color receptors compared to humans' 3...
+L035: [2] USER
+L037: huh - explain this more to me
+L041: [3] ASSISTANT
+L045:   - web_search(query="mantis shrimp vision 12 vs 16...")
+L049: [4] TOOL
+L051: {"query": "mantis shrimp vision...", "results": [...]}
+L059: [5] ASSISTANT
+L061: It seems counterintuitive, right?...
+L077: [6] USER
+L079: any relation at all to something like DSP or FFT?
+L101: [9] ASSISTANT
+L103: That is a brilliant connection!...
+L122: [10] USER
+L124: oh interesting - k bye i love you
+L130: [1] ASSISTANT
+L132: Haha, well that escalated quickly! I love you too...
+L136: **K bye!**
 ```
 
-> See the actual implementation: [`message_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/message_formatter.py)
-
-This approach iteratively drops lines evenly throughout the text representation, with a buffer at the start and end that we don't touch. Often this works well because the same information can be passed back and forth within each step of a trace.
+Notice the `[SAMPLED VIEW: ~40% of 136 lines shown]` header and the jumps in line numbers (e.g., L051 → L059, L079 → L101). The LLM can still follow the conversation flow — the structure and key turns are preserved, just with less detail in between. This works well in practice because the same context often gets passed back and forth within each step of a trace. See the full implementation in [`message_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/message_formatter.py).
 
 ## Step 2: Summarization
 
