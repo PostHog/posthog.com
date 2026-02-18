@@ -272,6 +272,8 @@ For more options beyond open source, check out our guide to the [best feature fl
 
 In practice, most A/B testing tools — including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
 
+To learn more, read our guide on [what is a feature flag (and how it compares to remote config and A/B testing)](/blog/what-is-a-feature-flag).
+
 </details>
 
 <details>
@@ -295,17 +297,10 @@ Local evaluation means feature flags are checked locally within your application
 
 </details>
 
-<details>
-  <summary>What is OpenFeature?</summary>
-
-OpenFeature is an open standard for feature flag management that provides a vendor-neutral API. It means you can switch between different feature flag providers without rewriting your application code. Several tools on this list support OpenFeature providers, making it easier to migrate between tools if your needs change.
-
-</details>
-
 ## Further reading
 
+- [What is a feature flag (and how it compares to remote config and A/B testing)](/blog/what-is-a-feature-flag)
 - [Feature flag best practices and tips (with examples)](/docs/feature-flags/best-practices)
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
 - [The benefits of feature flags and how to use them](/product-engineers/feature-flag-benefits-use-cases)
-
