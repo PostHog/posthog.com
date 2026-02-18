@@ -55,17 +55,12 @@ if err != nil {
     return
 }
 
-if result.RawPayload != nil {
-    fmt.Println(*result.RawPayload)
-}
-
-// Unmarshal the payload into a typed struct
-var config struct {
-    Color string `json:"color"`
-    Size  int    `json:"size"`
-}
-if err := result.GetPayloadAs(&config); err == nil {
-    fmt.Println(config.Color, config.Size)
+if result.Enabled {
+    // Unmarshal the payload into a typed struct
+    var config MyConfig
+    if err := result.GetPayloadAs(&config); err == nil {
+        fmt.Println(config)
+    }
 }
 ```
 
