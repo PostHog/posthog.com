@@ -242,11 +242,6 @@ export default function Endpoints(): JSX.Element {
     const slides = createSlideConfig({
         custom: [
             {
-                slug: 'product-os-benefits',
-                name: 'Product OS Benefits',
-                component: ProductOSBenefitsSlide,
-            },
-            {
                 slug: 'endpoints-playground',
                 name: 'Endpoints playground',
                 component: EndpointsPlaygroundSlide,
@@ -255,22 +250,18 @@ export default function Endpoints(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'videos', 'pairs-with', 'feature-platform_integrations'],
+        exclude: ['answers', 'videos', 'posthog-on-posthog', 'pricing', 'customers', 'features'],
         order: [
             'overview',
-            'customers',
+            // 'customers',
             'dashboards',
             'use_cases',
             'more',
-            'features',
-            'native_integrations',
-            'posthog-on-posthog',
             'comparison-summary',
             'feature-comparison',
-            'product-os-benefits',
             'endpoints-playground',
             'docs',
-            'pricing',
+            'pairs-with',
             'getting-started',
         ],
         content: {

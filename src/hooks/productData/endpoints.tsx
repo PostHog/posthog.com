@@ -1,44 +1,20 @@
 import React from 'react'
 import {
-    IconBell,
-    IconClockRewind,
     IconDashboard,
     IconGear,
-    IconGraph,
-    IconHandMoney,
-    IconLightBulb,
     IconListTreeConnected,
-    IconLlmAnalytics,
-    IconPiggyBank,
     IconRewindPlay,
-    IconShield,
     IconSparkles,
     IconTarget,
     IconTrends,
     IconUser,
     IconWarning,
-    IconGlobe,
-    IconListCheck,
     IconMagicWand,
-    IconLlmPromptManagement,
     IconLlmPromptEvaluation,
-    IconDatabase,
     IconTerminal,
 } from '@posthog/icons'
-import {
-    IconAnthropic,
-    IconGemini,
-    IconGrid,
-    IconHelicone,
-    IconKeywordsAI,
-    IconLangChain,
-    IconLangfuse,
-    IconOpenAI,
-    IconOpenRouter,
-    IconTag,
-    IconTraceloop,
-    IconVercel,
-} from 'components/OSIcons'
+
+import CloudinaryImage from 'components/CloudinaryImage'
 
 export const endpoints = {
     name: 'Endpoints',
@@ -64,10 +40,10 @@ export const endpoints = {
             'Create custom API endpoints powered by your PostHog data. Use them to build embedded analytics, data feeds, and more.',
     },
     overview: {
-        title: 'ENDPOINTSSSS',
+        title: 'Custom API endpoints powered by your PostHog data',
         description:
-            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features.',
-        textColor: 'text-white',
+            'Create custom API endpoints powered by your PostHog data. Use them to build embedded analytics, data feeds, and more.',
+        textColor: 'text-black',
         layout: 'overlay',
     },
     videos: {
@@ -77,9 +53,9 @@ export const endpoints = {
     },
     screenshots: {
         overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_desktop_2399cc57d6.png',
-            srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
-            alt: 'LLM analytics dashboard',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
+            srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_mobile_de719b9fe0.png',
+            alt: 'Endpoints',
             classes: '',
             // imgClasses: 'rounded-tl-md shadow-2xl',
             classesMobile: '',
@@ -235,7 +211,7 @@ export const endpoints = {
         {
             title: 'More',
             handle: 'more',
-            template: 'stacked',
+            template: 'grid',
             headline: 'When queries need to leave the dashboard',
             description:
                 'Expose the results of PostHog insights or SQL queries so applications can fetch them directly. Insights keep their existing configuration, while SQL queries can be materialized for scheduled execution and higher rate limits.',
@@ -517,7 +493,8 @@ export const endpoints = {
         summary: {
             them: [
                 {
-                    title: 'You want a standalone analytics API and are happy managing data separately',
+                    title: 'You want a standalone analytics API',
+                    subtitle: 'and are happy managing data separately',
                 },
                 {
                     title: 'You’re building analytics directly from raw event data',
@@ -531,13 +508,15 @@ export const endpoints = {
             ],
             us: [
                 {
-                    title: 'You already use PostHog and want to reuse existing insights or SQL queries',
+                    title: 'Reuse existing insights or SQL queries already in PostHog',
                 },
                 {
-                    title: 'You’re building customer-facing dashboards or internal tools with PostHog data',
+                    title: 'You’re building on PostHog data',
+                    subtitle: 'like customer-facing dashboards or internal tools',
                 },
                 {
-                    title: 'You need stable, predefined endpoints for feeds, rankings, or summaries',
+                    title: 'You need stable, predefined endpoints',
+                    subtitle: 'for feeds, rankings, or summaries',
                 },
                 {
                     title: 'You want to move away from ad-hoc Query API calls toward production-ready queries',
@@ -566,19 +545,13 @@ export const endpoints = {
     pairsWith: [
         {
             slug: 'product-analytics',
-            description: 'Correlate AI usage with user behavior and business metrics',
+            description:
+                'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
         },
         {
-            slug: 'dashboards',
-            description: 'Build custom dashboards combining LLM and product metrics',
-        },
-        {
-            slug: 'session-replay',
-            description: 'Watch how users interact with AI features in real sessions',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Roll out AI features gradually and test different models',
+            slug: 'data-stack/managed-warehouse',
+            description:
+                'Combine product analytics data with other datasets using SQL in PostHog’s data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.',
         },
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
