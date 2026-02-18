@@ -165,6 +165,14 @@ The agent will use the `create-feature-flag` tool to create the flag with a 20% 
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+### SQL and HogQL queries
+
+**Prompt:** "Show me the raw events from the last 24 hours where the browser was Chrome"
+
+The agent will use the `execute-sql` tool to run a HogQL query and return matching events with their properties.
+
+**Tip:** By default, large JSON values in results (like full `properties` objects) are truncated to keep responses manageable. If you need complete, untruncated data, ask the agent to use the `truncate: false` parameter, or request specific properties (e.g., `properties.$browser`) instead of selecting the entire object.
+
 ### A/B test creation
 
 **Prompt:** "Create an A/B test for our pricing page that measures conversion to checkout"
