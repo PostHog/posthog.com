@@ -99,7 +99,7 @@ Error capture gives you insights into the errors your users experience.
 To set up custom error capturing, we can create a [React error boundary](https://nextjs.org/docs/pages/building-your-application/configuring/error-handling#handling-client-errors):
 
 1. In the `app` folder, create a file named `error.js`. 
-2. In this file, set up a basic component that uses `usePostHog` to capture an `$exception` event and returns an error page. 
+2. In this file, set up a basic component that uses `usePostHog` to capture the exception with `captureException` and returns an error page. 
 
 It should look like this:
 
@@ -109,9 +109,7 @@ import { usePostHog } from '@posthog/react'
 
 export default function Error({ error }) {
   const posthog = usePostHog()
-  posthog?.capture('$exception', {
-    message: error.message,
-  })
+  posthog?.captureException(error)
   
   return (
     <div>
