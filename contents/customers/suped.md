@@ -5,6 +5,8 @@ featuredImage: >-
    https://res.cloudinary.com/dmukukwp6/image/upload/getcroissant_d26d405d9d.jpg
 date: 2026-02-18
 ---
+
+
 [Suped](https://www.suped.com/) is an email authentication and deliverability platform. The company helps businesses configure DMARC, monitor outbound email security, and resolve deliverability issues before they affect revenue.
 
 Michael Ko, Suped’s Co-Founder and CEO, previously worked in product management while also owning parts of marketing. That combination shaped how he thinks about tooling. He cares less about having more software and more about how systems fit together.
