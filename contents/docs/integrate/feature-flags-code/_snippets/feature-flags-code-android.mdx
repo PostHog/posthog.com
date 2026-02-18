@@ -16,10 +16,7 @@ if (result?.enabled == true) {
 ```kotlin
 import com.posthog.PostHog
 
-val result = PostHog.getFeatureFlagResult("flag-key")
-if (result == null) {
-    // Flag doesn't exist or hasn't loaded yet
-} else {
+PostHog.getFeatureFlagResult("flag-key")?.let { result ->
     when (result.variant) {
         "variant-a" -> {
             // Do something for variant A
