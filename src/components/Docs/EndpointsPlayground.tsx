@@ -260,10 +260,10 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
             {/* Step 1: Query */}
             <button
                 onClick={() => toggleStep(1)}
-                className="w-full px-4 py-2.5 bg-primary flex items-center justify-between hover:bg-accent/30 transition-colors"
+                className="w-full px-4 py-2.5 bg-primary flex items-center justify-between hover:bg-accent/30 "
             >
                 <div className="flex items-center gap-2">
-                    <span className="size-5 rounded-full bg-orange/15 text-orange text-xs font-bold flex items-center justify-center">
+                    <span className="size-5 rounded-full bg-red/15 text-red dark:text-yellow text-xs font-bold flex items-center justify-center">
                         1
                     </span>
                     <span className="text-sm font-semibold text-primary">Write your query</span>
@@ -304,7 +304,10 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                                                                   .split(/(\{variables\.[^}]+\})/)
                                                                   .map((part, idx) =>
                                                                       part.startsWith('{variables.') ? (
-                                                                          <span key={idx} className="text-orange">
+                                                                          <span
+                                                                              key={idx}
+                                                                              className="text-red dark:text-yellow"
+                                                                          >
                                                                               {part}
                                                                           </span>
                                                                       ) : (
@@ -329,10 +332,10 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
             {/* Step 2: Create endpoint */}
             <button
                 onClick={() => toggleStep(2)}
-                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent/30 transition-colors"
+                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent/30 "
             >
                 <div className="flex items-center gap-2">
-                    <span className="size-5 rounded-full bg-orange/15 text-orange text-xs font-bold flex items-center justify-center">
+                    <span className="size-5 rounded-full bg-red/15 text-red dark:text-yellow text-xs font-bold flex items-center justify-center">
                         2
                     </span>
                     <span className="text-sm font-semibold text-primary">Create your endpoint</span>
@@ -360,7 +363,7 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                             setEndpointName(e.target.value)
                                         }
-                                        inputClassName="bg-accent dark:bg-accent-dark border border-primary text-orange rounded px-1.5 py-0.5 focus:outline-none focus:border-orange"
+                                        inputClassName="bg-accent dark:bg-accent-dark border border-primary text-red dark:text-yellow rounded px-1.5 py-0.5 focus:outline-none focus:border-red dark:focus:border-yellow"
                                     />
                                     <span className="">/run</span>
                                 </div>
@@ -370,7 +373,6 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                                 size="md"
                                 onClick={handleCreateEndpoint}
                                 disabled={isCreating || !endpointName.trim()}
-                                icon={<IconTerminal />}
                             >
                                 {isCreating ? 'Creating...' : 'Create endpoint'}
                             </OSButton>
@@ -383,10 +385,10 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
             <button
                 onClick={() => endpointCreated && toggleStep(3)}
                 disabled={!endpointCreated}
-                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary"
+                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent/30  disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary"
             >
                 <div className="flex items-center gap-2">
-                    <span className="size-5 rounded-full bg-orange/15 text-orange text-xs font-bold flex items-center justify-center">
+                    <span className="size-5 rounded-full bg-red/15 text-red dark:text-yellow text-xs font-bold flex items-center justify-center">
                         3
                     </span>
                     <span className="text-sm font-semibold text-primary">Query your endpoint</span>
@@ -410,13 +412,13 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                             <code className="text-sm font-mono flex items-center flex-wrap gap-y-1 py-1 px-2">
                                 <span className="text-green font-semibold">GET</span>
                                 <span className="text-muted ml-1">/api/endpoints/</span>
-                                <span className="text-orange">{createdEndpointName}</span>
+                                <span className="text-red dark:text-yellow">{createdEndpointName}</span>
                                 <span className="text-muted">/run?</span>
                                 <span className="text-primary">{selectedScenario.variable.name}=</span>
                                 <span className="relative inline-flex">
                                     <button
                                         onClick={() => setVariableDropdownOpen(!variableDropdownOpen)}
-                                        className="inline-flex items-center gap-1 text-orange bg-accent dark:bg-accent-dark border border-primary rounded px-1.5 py-0.5 hover:border-orange transition-colors"
+                                        className="inline-flex items-center gap-1 text-red dark:text-yellow bg-accent dark:bg-accent-dark border border-primary rounded px-1.5 py-0.5 hover:border-red dark:hover:border-yellow "
                                     >
                                         <span>{selectedVariable.id}</span>
                                         <IconChevronDown
@@ -438,9 +440,9 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                                                     <button
                                                         key={option.id}
                                                         onClick={() => handleVariableChange(option)}
-                                                        className={`w-full text-left px-3 py-2 text-sm font-mono hover:bg-accent transition-colors ${
+                                                        className={`w-full text-left px-3 py-2 text-sm font-mono hover:bg-accent  ${
                                                             option.id === selectedVariable.id
-                                                                ? 'text-orange'
+                                                                ? 'text-red dark:text-yellow'
                                                                 : 'text-primary'
                                                         }`}
                                                     >
@@ -455,7 +457,7 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                         </div>
 
                         {/* Response JSON */}
-                        <div className="bg-accent dark:bg-accent-dark p-4 font-mono text-sm overflow-auto max-h-[280px]">
+                        <div className="bg-accent p-4 font-mono text-sm overflow-auto max-h-[280px]">
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-xs text-secondary">Response</span>
                                 <span className="text-xs text-green font-medium">200 OK</span>

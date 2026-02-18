@@ -113,7 +113,7 @@ const EndpointsPlaygroundSlide = () => {
                     <span className="relative inline-block">
                         <button
                             onClick={() => setDropdownOpen(!dropdownOpen)}
-                            className="inline-flex items-center font-semibold text-orange"
+                            className="inline-flex items-center font-semibold text-primary underline"
                         >
                             <span>{selectedScenario.name.toLowerCase()}</span>
                             <IconChevronDown
@@ -136,8 +136,10 @@ const EndpointsPlaygroundSlide = () => {
                                                 setSelectedScenarioId(scenario.id)
                                                 setDropdownOpen(false)
                                             }}
-                                            className={`w-full text-left px-3 py-2 hover:bg-accent transition-colors ${
-                                                scenario.id === selectedScenarioId ? 'text-orange' : 'text-primary'
+                                            className={`w-full text-left px-3 py-2 hover:bg-accent ${
+                                                scenario.id === selectedScenarioId
+                                                    ? 'text-red dark:text-yellow'
+                                                    : 'text-primary'
                                             }`}
                                         >
                                             <div className="text-sm font-medium">{scenario.name}</div>
@@ -152,35 +154,6 @@ const EndpointsPlaygroundSlide = () => {
             </div>
             <div className="w-full max-w-3xl">
                 <EndpointsPlayground scenarioId={selectedScenarioId} />
-            </div>
-        </div>
-    )
-}
-
-// Custom ProductOS Benefits slide
-const ProductOSBenefitsSlide = () => {
-    return (
-        <div
-            data-scheme="primary"
-            className="flex flex-col justify-center items-center h-full bg-primary text-primary px-8"
-        >
-            <h2 className="text-5xl text-center text-balance">
-                All the LLM observability features you'd expect, but{' '}
-                <span className="text-red dark:text-yellow">10x better in the PostHog ecosystem</span>
-            </h2>
-            <p className="mt-4 text-xl text-center">
-                Sure you can use LLM analytics solo, but it's better with other PostHog products.
-            </p>
-
-            <div className="mt-12">
-                <ul
-                    data-scheme="secondary"
-                    className={`grid @lg:grid-cols-2 @2xl:grid-cols-4 gap-4 @2xl:gap-8 list-none p-0`}
-                >
-                    {subfeatures.map((subfeature, index) => (
-                        <Subfeature key={index} {...subfeature} />
-                    ))}
-                </ul>
             </div>
         </div>
     )
@@ -242,32 +215,29 @@ export default function Endpoints(): JSX.Element {
     const slides = createSlideConfig({
         custom: [
             {
-                slug: 'endpoints-playground',
-                name: 'Endpoints playground',
+                slug: 'playground',
+                name: 'Playground',
                 component: EndpointsPlaygroundSlide,
             },
         ],
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'videos', 'posthog-on-posthog', 'pricing', 'customers', 'features'],
+        exclude: ['answers', 'videos', 'posthog-on-posthog', 'pricing', 'customers'],
         order: [
             'overview',
             // 'customers',
+            'features',
             'dashboards',
             'use_cases',
             'more',
+            'playground',
             'comparison-summary',
             'feature-comparison',
-            'endpoints-playground',
             'docs',
             'pairs-with',
             'getting-started',
         ],
-        content: {
-            answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
-            answersHeadline: 'What can LLM Analytics help me discover?',
-        },
     })
 
     // Merge content data with product data
