@@ -76,7 +76,7 @@ PostHog supports both encrypted and unencrypted payloads. Encrypted payloads are
 
 One important caveat: remote config in PostHog isn't real-time. Changes take effect when the app refreshes or when the SDK re-fetches flags. And you should keep payloads small and intentional – the more config values you externalize, the harder your system becomes to reason about.
 
-> **A word of caution:** Remote config is powerful, but it can easily become a second settings system that nobody fully understands. Use it for values that genuinely need to change without a deploy. If a value hasn't changed in six months, it probably belongs in your codebase.
+> **A word of caution:** Remote config is powerful, but it can easily become a second settings system nobody fully understands. Keep payloads small and intentional – if a value hasn't changed in six months, it probably belongs in your codebase.
 
 ## What is A/B testing?
 
@@ -149,9 +149,6 @@ You're constantly mapping user IDs across systems, reconciling event timestamps,
 
 ## Practical decision framework
 
-![Practical decision framework](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_17_T15_06_06_569_Z_56440e2692.png)
-note to self: ask daniel to make an on-brand version once copy is approved
-
 When you're staring at a product change and wondering which tool to use, run through this:
 
 **"I need to control who sees this change."** → [Feature flag](/feature-flags). Progressive rollout, kill switch, internal testing, beta access – all flags.
@@ -160,7 +157,7 @@ When you're staring at a product change and wondering which tool to use, run thr
 
 **"I need to know if this change actually improves something."** → [A/B test](/experiments). Set up an experiment with a clear goal metric and let the data tell you.
 
-**"I need to roll out a change AND measure its impact."** → Use both. Feature flag for the rollout, experiment for the measurement. In PostHog, this is the same flag with experiment tracking added.
+**"I need to roll out a change AND measure its impact."** → Use both. Feature flag for the rollout, experiment for the measurement.In PostHog, experiments are built on feature flags – so you get rollout control and measurement in one. Adjust the rollout the same way you would any flag.
 
 **"I need to adjust a value AND measure which value works best."** → Remote config for the mechanism, A/B test for the measurement. Test different timeout values, price points, or copy variations.
 
@@ -168,9 +165,9 @@ When you're staring at a product change and wondering which tool to use, run thr
 
 PostHog is transparent about where its feature management capabilities have gaps, and it's worth knowing before you commit:
 
-- **Not real-time.** Flag changes, config updates, and experiment assignments all require a page or app refresh to take effect. If you need instant propagation, you'll need to handle polling on your side.
+- **Not real-time.** Flag changes and config updates require a page or app refresh to take effect. PostHog SDKs [handle polling automatically](/docs/feature-flags/local-evaluation), but changes won't be instant.
 - **No CUPED or mutex groups.** If you're running sophisticated experiments at scale – variance reduction techniques, overlapping experiment isolation – PostHog doesn't support these yet.
-- **Dynamic cohort targeting limitations.** You can't target flags to cohorts with dynamic attributes, only static, which can be limiting for behavioral targeting use cases.
+- **Dynamic cohort targeting limitations.** You can't target flags to cohorts with dynamic attributes (like "users who did X in the last 7 days"), only static, which can be limiting for behavioral targeting use cases.
 
 For many teams – especially engineering-led startups and growth-stage companies – these trade-offs are fine. You get flags, experiments, config, [analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), and a lot more in one platform with a generous free tier. If you need enterprise governance or advanced experimentation features, tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) or [Statsig](/blog/posthog-vs-statsig) [may be better fits for those specific needs](/blog/best-feature-flag-software-for-developers).
 
@@ -189,14 +186,14 @@ Yes – this is actually the recommended workflow. Use a feature flag for the co
 <details>
 <summary>How quickly can I set up all three?</summary>
 
-Feature flags work as soon as you install the PostHog SDK, which takes minutes. Remote config requires creating a flag and adding a payload – straightforward if you've already set up flags. Experiments need a bit more setup: you'll need event tracking in place and a clear goal metric defined. Technical teams can ship their first experiment within a few days.
+Feature flags and remote config both take minutes – install the [PostHog SDK](/docs/libraries), create a flag, and you're live. Remote config just adds a payload to the flag. Experiments take a little longer because you need a goal metric defined, but you can use [autocaptured events](/docs/product-analytics/autocapture) right away – one of the perks of having analytics and experimentation in the same platform. No separate integration setup.
 
 </details>
 
 <details>
 <summary>How does PostHog handle statistical significance?</summary>
 
-**PostHog** calculates statistical significance automatically in the experiment dashboard. It'll tell you when results are significant and estimate how long an experiment needs to run based on your traffic. It doesn't currently support advanced techniques like CUPED for variance reduction, but covers the fundamentals well for most teams.
+PostHog tracks exposures for each variant, calculates goal metrics across experiment groups, and uses either [Bayesian](/docs/experiments/statistics-bayesian) or frequentist statistics to determine whether the differences are statistically significant. The experiment dashboard shows results in real time and estimates how long an experiment needs to run based on your traffic. PostHog doesn't currently support advanced techniques like CUPED for variance reduction, but covers the fundamentals well for most teams.
 
 </details>
 
@@ -220,6 +217,8 @@ Statistical significance requires a minimum sample size, and low-traffic product
 <summary>Can I migrate from LaunchDarkly or another feature flag tool?</summary>
 
 Yes. **PostHog**'s feature flag SDK is straightforward to adopt incrementally – you can start by creating new flags in PostHog while keeping existing ones in your current tool, then migrate over time. The [feature flags documentation](/docs/feature-flags) covers setup for every major platform.
+
+We also have a dedicated [LaunchDarkly migration guide](/docs/migrate/launchdarkly) if you want to move everything at once. 
 
 </details>
 
@@ -257,13 +256,8 @@ For a deeper comparison, see our guide to the [best feature flag software for de
 
 ## Further reading
 
-- [Why use feature flags? Benefits, types and use cases](/product-engineers/feature-flag-benefits-use-cases)
-- [Feature flags vs configuration](/product-engineers/feature-flags-vs-configuration)
 - [How to do a canary release with feature flags](/docs/feature-flags/canary-release)
 - [A/B testing examples from real companies](/product-engineers/ab-testing-examples)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [Feature flags as a service](/blog/feature-flags-as-a-service)
 - [How we improved feature flag resiliency](/blog/how-we-improved-feature-flags-resiliency)
-- [Testing frontend feature flags with React, Vitest, and PostHog](/blog/testing-frontend-feature-flags)
 - [How to prevent feature flags from being blocked](/tutorials/flags-adblock-prevention)
-- [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
