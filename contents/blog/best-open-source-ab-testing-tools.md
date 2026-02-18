@@ -22,9 +22,9 @@ seo:
 
 Also known as split testing or [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
-There are dozens of A/B testing tools available, but what they offer varies widely. Many lean toward marketing uses cases (i.e. testing website landing pages) and aren't useful for product feature testing, or focus on a narrow subset of companies.
+There are dozens of A/B testing tools available, but what they offer varies widely. Many lean toward marketing use cases (i.e. testing website landing pages) and aren't useful for product feature testing, or only support specific platforms like Shopify or WordPress.
 
-In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to Google Optimize](/blog/google-optimize-alternatives).
+In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to VWO](/blog/best-vwo-alternatives).
 
 ## What features do you need in an open-source A/B testing tool?
 
@@ -247,7 +247,7 @@ Yes, with caveats. GrowthBook's self-hosted open-source version (MIT license) is
 <details>
   <summary>Can you do A/B testing without code?</summary>
 
-Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO or Optimizely](/blog/google-optimize-alternatives) instead, though these are neither free nor open source.
+Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](//blog/best-vwo-alternatives) or [Optimizely](/blog/best-optimizely-alternatives) instead, though these are neither free nor open source.
 
 </details>
 
@@ -284,7 +284,4 @@ Yes – that's one of the main advantages of open-source A/B testing tools. **Gr
 - [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers)
 - [Common A/B testing mistakes](/blog/ab-testing-mistakes)
 - [The best open-source feature flag tools](/blog/best-open-source-feature-flag-tools)
-- [The best open-source analytics tools](/blog/best-open-source-analytics-tools)
 - [PostHog vs. GrowthBook](/blog/posthog-vs-growthbook)
-- [7 best session replay tools for mobile apps](/blog/best-mobile-app-session-replay-tools)
-- [The 7 best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
