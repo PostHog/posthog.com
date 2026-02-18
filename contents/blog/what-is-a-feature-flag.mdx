@@ -21,13 +21,13 @@ seo:
 
 ![Feature Flags vs Remote Config vs A/B Testing](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_16_T23_17_31_744_Z_c463b5b6de.png)
 
-Feature flags, remote config, and A/B testing all exist because deploying changes straight to everyone is, more often than not, a terrible idea.
+Feature flags, remote config, and A/B testing all exist because deploying changes to everyone is, more often than not, a terrible idea.
 
 Thoughts and prayers will only get you so far. Sometimes you need a kill switch, sometimes you need to tweak a value without redeploying, and sometimes you need actual data to settle the argument. Sometimes you need all three.
 
-The tricky part is knowing which one to reach for, because they sound similar, they overlap in places, and can be built on top of each other.
+The tricky part is knowing which tool to reach for, because they sound similar, they overlap in places, and can be built on top of each other.
 
-This guide breaks down what each one actually does, when to use it, and how they work together in PostHog – where all three are built on the same infrastructure, share the same data, and ship under one SDK.
+This guide breaks down what feature flags, remote configs, and A/B tests actually do, when to use them, and how they work together in PostHog – where all three are built on the same infrastructure, share the same data, and ship under one SDK.
 
 ## What is a feature flag?
 
@@ -41,7 +41,7 @@ if (posthog.isFeatureEnabled('flag-key') ) {
 
 Feature flags can be simple booleans (on/off) or multivariate (returning one of several variants). They're the foundation for controlled rollouts, kill switches, and internal testing – and in PostHog, they're also the infrastructure that powers [remote config](/docs/feature-flags/remote-config) and [A/B testing](/experiments).
 
-The core job of a feature flag is to **separate deployment from release**. You merge code to production whenever it's ready, and control who sees it – and when – through the flag.
+The core job of a feature flag is to **[separate deployment from release](/product-engineers/decouple-deployment-from-release)**. You merge code to production whenever it's ready, and control who sees it – and when – through the flag.
 
 In PostHog, feature flags support percentage-based rollouts (ship to 5% of users, then 25%, then everyone), targeting based on [user properties](/docs/product-analytics/person-properties) or [cohorts](/docs/product-analytics/cohorts), and multivariate variants that go beyond simple true/false values.
 
@@ -52,7 +52,7 @@ In PostHog, feature flags support percentage-based rollouts (ship to 5% of users
 - **Internal testing** – Release to your team first (set email contains `@yourcompany.com`), then to beta users, then to everyone.
 - **Operational toggles** – Maintenance mode, circuit breakers, or infrastructure controls that stay permanent.
 
-[Feature flags have a lot of uses](/product-engineers/feature-flag-benefits-use-cases), but measuring performance isn't one of them. They let you turn something on and off, but, on their own they won't tell you whether "on" is actually good. That's when you pair them with [analytics](/docs/product-analytics) and [experiments](/docs/experiments).
+[Feature flags have a lot of uses](/product-engineers/feature-flag-benefits-use-cases), but measuring impact isn't one of them. They let you turn something on and off, but, on their own they won't tell you whether "on" is actually good. That's when you pair them with [analytics](/docs/product-analytics) and [experiments](/docs/experiments).
 
 > **Good to know:** PostHog [feature flags](/docs/feature-flags) support web, mobile, and server-side SDKs. Flag evaluations tie directly into [product analytics](/product-analytics), so you can filter any insight, funnel, or [session replay](/docs/session-replay) by flag value without extra setup. You can also deploy [surveys](/docs/surveys) targeting a specific feature flag to collect qualitative feedback alongside your rollout.
 
@@ -137,7 +137,7 @@ Here's what that looks like in practice:
 
 **Single SDK, single data pipeline.** You install one SDK and get flags, config, and experiments. Every flag evaluation, config fetch, and experiment assignment flows into the same [data warehouse](/data-stack) alongside your analytics events, session recordings, and [error tracking](/error-tracking) data.
 
-**Experiments inherit flag targeting.** Because PostHog experiments are built on feature flags, you get all the same targeting capabilities: user properties, cohorts, percentage rollouts. And you can go from "rolling out a feature" to "running an experiment on that feature" by adding experiment tracking to an existing flag.
+**Experiments inherit flag targeting.** Because PostHog experiments are built on feature flags, you get all the same targeting capabilities: person and group properties, cohorts, percentage rollouts. And you can go from "rolling out a feature" to "running an experiment on that feature" by adding experiment tracking to an existing flag.
 
 **One bill.** Feature flag requests, remote config fetches, and experiment evaluations all count toward the same quota. You get [1M flag requests free per month](/pricing), and everything after that is $0.0001 per request. No separate experiment pricing, no surprise bills from a tool you forgot about.
 
@@ -174,16 +174,6 @@ PostHog is transparent about where its feature management capabilities have gaps
 
 For many teams – especially engineering-led startups and growth-stage companies – these trade-offs are fine. You get flags, experiments, config, [analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), and a lot more in one platform with a generous free tier. If you need enterprise governance or advanced experimentation features, tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) or [Statsig](/blog/posthog-vs-statsig) [may be better fits for those specific needs](/blog/best-feature-flag-software-for-developers).
 
-## Pricing
-
-All three capabilities in PostHog are billed under a single, transparent model:
-
-- **Free tier:** 1M feature flag requests, 1M analytics events per month
-- **After free tier:** $0.0001 per flag request, with volume discounts at higher tiers
-- **No separate meters:** Experiments and remote config both count as flag requests
-- **No seat limits:** Unlimited team members
-
-Most teams use PostHog [completely free](/pricing); you can estimate your costs with the [pricing calculator](/pricing).
 
 <ArrayCTA />
 
@@ -213,7 +203,9 @@ Feature flags work as soon as you install the PostHog SDK, which takes minutes. 
 <details>
 <summary>Is remote config the same as feature flags?</summary>
 
-Not exactly. In **PostHog**, remote config is a payload attached to a feature flag – so it uses the same infrastructure. But the intent is different. A feature flag controls *whether* something is on or off. Remote config controls *what value* something has. A flag might say "show the new pricing page." Remote config on that flag might say "set the price to $29/month." See our [guide on feature flags vs configuration](/product-engineers/feature-flags-vs-configuration) for a deeper dive.
+Not exactly. In **PostHog**, remote config is a payload attached to a feature flag – so it uses the same infrastructure. But the intent is different. A feature flag controls *whether* something is on or off. Remote config controls *what value* something has. A flag might say "show the new pricing page." Remote config on that flag might say "set the price to $29/month." 
+
+See our [guide on feature flags vs configuration](/product-engineers/feature-flags-vs-configuration) for a deeper dive.
 
 </details>
 
