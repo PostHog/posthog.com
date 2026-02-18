@@ -43,3 +43,31 @@ The goal at this stage is to help our customers succeed by getting them the key 
 If your champion is in a key decision making position who can get these changes through, that's great, but if not, this is also a great opportunity to ask your champion for an introduction to the key decision maker so you can work close with them to ensure changes can be prioritized. Another method is to reach out to the team lead, such as the head of engineering or head of product, armed with what their quarterly goals are, and offer your assistance directly. You may establish another strong connection this way.
 
 Companies have conflicting priorities but by demonstrating you understand what their core goal is, and how PostHog could solve the problem, and finding the key decision maker, you have a higher chance of convincing the team to prioritize the changes now rather than wait to add value.
+
+### Founder-Led Engagement Style (YC and Early-Stage)
+
+For YC and early-stage founder-led accounts, the “embedded partner” mindset introduced in Stage 3 often becomes relevant much earlier in the lifecycle. Because these teams often operate at high velocity, the goal is to reduce friction between identifying a problem and deploying a solution.
+
+**Core Principles**
+
+**Diagnostic-First Engagement**
+
+For founder-led teams, traditional “discovery” or “goal setting” calls that larger companies may prefer can introduce unnecessary overhead. If PostHog is already integrated, consider leading with investigation of the customer’s instance. _Example: identifying a friction point in their data and offering a concrete insight early in the relationship._
+
+**Asynchronous-First Communication**
+
+Founder teams often prefer speed and flexibility. Sharing Loom recordings, annotated dashboards, or short written summaries may allow them to consume insights on their own time while maintaining momentum.
+
+**Reduce Technical Friction**
+
+Where possible, it’s great to accelerate time-to-value by proactively building for customers instead of redirecting them to documentation alone. In general, it’s good to be mindful of whether we’re shifting the burden of cognitive load to our customer when it’s actually something we can help with.
+
+**Radical Transparency**
+
+Founder-led teams often value clarity and speed over formal process. When appropriate, offer direct observations. _Example: If you notice unclear metrics or suboptimal setup choices, position feedback as leverage rather than just commentary and/or critique._
+
+**Alignment to Current Focus**
+
+It’s great to have a proactive approach rather than a reactive one. Match output to the team’s immediate priorities. If they are launching a new feature, suggest measurement approaches tied to that launch rather than waiting for them to make a request.
+
+A useful successs criteria when working with early-stage founders may be delivering maximum insight while keeping the administrative overhead minimal. In general, a strong CSM operates as a proactive partner, identifying patterns and proposing solutions early, while keeping the engagement lightweight and action-oriented.
