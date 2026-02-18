@@ -48,7 +48,7 @@ Here's how the most popular open-source feature flag tools compare:
 
 [PostHog](/) is a [popular alternative to LaunchDarkly](/blog/best-launchdarkly-alternatives) and analytics tools like [Amplitude](/blog/best-amplitude-alternatives).
 
-It's an all-in-one platform, which means it offers [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [user surveys](/surveys), [logs](/logs), [LLM analytics](/llm-analytics), and a lot more in addition to feature flags.
+It's an all-in-one platform, which means it offers [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [user surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and a lot more in addition to feature flags.
 
 PostHog's [feature flags](/docs/feature-flags) enable conditional rollouts, multivariate flags, JSON payloads, automated usage reports, local evaluation, and more. They power its [A/B testing features](/docs/experiments), so you can test product changes for their impact on key metrics. 
 
@@ -56,7 +56,7 @@ PostHog also offers an [early access feature management](/docs/feature-flags/ear
 
 #### Supported libraries
 
-- **Client-side:** JavaScript, React Native, React, Android, iOS, Flutter, Remix, Angular, Next.js, Svelte, Capacitor, Unity.
+- **Client-side:** JavaScript, React Native, React, Android, iOS, Flutter, Remix, Angular, Next.js, Svelte, Capacitor, Unity
 
 - **Server-side:** Node.js, Python, PHP, Ruby, Go, Java, .NET, Elixir, Rust
 
