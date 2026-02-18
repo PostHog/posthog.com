@@ -53,7 +53,7 @@ Here's how the most popular open-source A/B testing tools compare:
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_32_2x_aa22220b10.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_06_2x_49e3ebc85d.png"
     classes="rounded"
-    alt="PostHog ab testing"
+    alt="PostHog Experiments"
 />
 
 [PostHog](/) is an all-in-one developer platform that integrates a [comprehensive A/B testing suite](/experiments) with [many other tools](/products), such as [Product Analytics](/product-analytics), [Feature Flags](/feature-flags), [Session Replay](/session-replay), [Error Tracking](/error-tracking), and more. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
@@ -121,7 +121,7 @@ GrowthBook open source (MIT license) is free and includes unlimited experiments.
 
 **Unleash** is a feature management platform that provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting. It's particularly popular with privacy-conscious organizations since it doesn't require you to share user data with third parties.
 
-You can use Unleash to define the rules of your experiments, but the platform doesn’t provide all the tools you need to manage A/B tests end-to-end. Instead, you'll need to connect your experiment with an analytics platform like Posthog, [Google Analytics](/blog/posthog-vs-ga4) or [Mixpanel](/blog/posthog-vs-mixpanel) in order to visualize results.
+You can use Unleash to define the rules of your experiments, but the platform doesn’t provide all the tools you need to manage A/B tests end-to-end. Instead, you'll need to connect your experiment with an analytics platform like PostHog, [Google Analytics](/blog/posthog-vs-ga4) or [Mixpanel](/blog/posthog-vs-mixpanel) in order to visualize results.
 
 ### Who is Unleash for?
 
@@ -147,9 +147,9 @@ Unleash's open source self-hosted plan is free with unlimited feature flags and 
 
 ## 4. Mojito
 
-![Unleash - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/img3_Mojito.png)
+![Mojito - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/mojito_6bd820c223.webp)
 
-Mojito is an open split testing stack that lets you build, launch, and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions, so you can build your own visualizations for experiment analysis.
+**Mojito** is an open source split testing stack that lets you build, launch, and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions, so you can build your own visualizations for experiment analysis.
 
 It's worth noting that Mojito is maintained by a small consultancy and has a slower development cadence than the other tools on this list. That said, its simplicity is part of the appeal – it's a lightweight, dependency-free option for teams that want full source control over their testing stack.
 
@@ -166,7 +166,7 @@ Mojito is a fully source-controlled stack for developers and technical product t
 - No account required – deploy from your own infrastructure
 - Lightweight solution for optimized page load speed
 
-### How much does Mojtio cost?
+### How much does Mojito cost?
 
 Mojito is completely free and open source, and you don’t need an account to get started. It's distributed under a BSD 3-clause license.
 
@@ -231,7 +231,9 @@ It depends on what you need.
 <details>
   <summary>What's the difference between feature flags and A/B testing?</summary>
 
-[Feature flags](/docs/feature-flags) let you toggle features on or off for specific users without deploying new code. [A/B testing](/docs/experiments) uses feature flags to randomly split users into groups (variants) and then measures which variant performs better against a goal metric. In practice, most A/B testing tools on this list – **PostHog**, **GrowthBook**, **Unleash**, **Flagsmith** – are built on top of a feature flagging engine. The distinction matters because tools like **Unleash** and **Flagsmith** are primarily feature flag tools that can be _used_ for A/B testing, while **PostHog** and **GrowthBook** provide end-to-end experimentation with built-in statistical analysis.
+[Feature flags](/docs/feature-flags) let you toggle features on or off for specific users without deploying new code. [A/B testing](/docs/experiments) uses feature flags to randomly split users into groups (variants) and then measures which variant performs better against a goal metric. 
+
+In practice, most A/B testing tools on this list – **PostHog**, **GrowthBook**, **Unleash**, **Flagsmith** – are built on top of a feature flagging engine. The distinction matters because tools like **Unleash** and **Flagsmith** are primarily feature flag tools that can be _used_ for A/B testing, while **PostHog** and **GrowthBook** provide end-to-end experimentation with built-in statistical analysis.
 
 </details>
 
