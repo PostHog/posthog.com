@@ -43,7 +43,7 @@ Feature flags can be simple booleans (on/off) or multivariate (returning one of 
 
 The core job of a feature flag is to **[separate deployment from release](/product-engineers/decouple-deployment-from-release)**. You merge code to production whenever it's ready, and control who sees it – and when – through the flag.
 
-In PostHog, feature flags support percentage-based rollouts (ship to 5% of users, then 25%, then everyone), targeting based on [user properties](/docs/product-analytics/person-properties) or [cohorts](/docs/product-analytics/cohorts), and multivariate variants that go beyond simple true/false values.
+In PostHog, feature flags support percentage-based rollouts (ship to 5% of users, then 25%, then everyone), targeting based on [person](/docs/product-analytics/person-properties)or [group](/docs/product-analytics/group-analytics) properties as well as [cohorts](/docs/product-analytics/cohorts). You can also have a flag return a payload with data in any valid JSON type.
 
 **When to use feature flags:**
 
