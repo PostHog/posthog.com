@@ -337,7 +337,11 @@ export default function HeaderBar({
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (
-                            <div className="hidden @4xl:block [&>span]:inline-block">
+                            <div
+                                className={`[&>span]:inline-block ${
+                                    websiteMode ? 'hidden @4xl/app-reader:block' : 'hidden @4xl:block '
+                                }`}
+                            >
                                 <Tooltip
                                     trigger={
                                         <OSButton

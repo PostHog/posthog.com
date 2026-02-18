@@ -6,6 +6,7 @@ import {
     IconArrowRight,
     IconArrowUpRight,
     IconAsterisk,
+    IconDownload,
     IconClock,
     IconDatabase,
     IconDatabaseBolt,
@@ -72,7 +73,7 @@ export default function CDP(): JSX.Element {
         },
         {
             id: 'data-import',
-            icon: 'IconArrowRight',
+            icon: 'IconDownload',
             title: 'Data sources & import (ELT)',
             url: 'data-stack/sources',
             description:
@@ -90,7 +91,7 @@ export default function CDP(): JSX.Element {
         {
             id: 'modeling-transformation',
             icon: 'IconShuffle',
-            title: 'Data Modeling',
+            title: 'Data modeling',
             badge: 'Beta',
             url: 'data-stack/data-modeling',
             description: 'Build modular, testable data tables that load in an instant.',
@@ -323,6 +324,7 @@ export default function CDP(): JSX.Element {
                             IconDatabaseBolt,
                             IconDatabase,
                             IconPlug,
+                            IconDownload,
                             IconShuffle,
                             IconAsterisk,
                             IconArrowUpRight,
@@ -382,7 +384,7 @@ export default function CDP(): JSX.Element {
 
                 <h3>How our support engineers use the data warehouse</h3>
                 <div>
-                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl mx-auto" />
+                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl" />
                 </div>
                 <p>
                     You can use data in the PostHog warehouse for almost anything, including building custom insights

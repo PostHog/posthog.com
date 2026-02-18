@@ -173,7 +173,7 @@ export default function CDP(): JSX.Element {
                 </p>
 
                 <h2 id="integrations-library">Integrations library</h2>
-                <IntegrationsLibrary />
+                <Link to="/data-stack/integrations-library">Explore our integrations library →</Link>
             </ReaderView>
         </>
     )
