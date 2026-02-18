@@ -4707,6 +4707,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Localization',
+                    url: '/docs/product-tours/localization',
+                    icon: 'IconGlobe',
+                    color: 'orange',
+                },
+                {
                     name: 'Guides',
                 },
                 {
