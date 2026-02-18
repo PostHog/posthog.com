@@ -244,7 +244,7 @@ Here's the (short) sales pitch.
 We're biased, obviously, but we think you'll love PostHog if:
 
 - You value transparency (we're open source and open core)
-- You want tools to ship, track, and analyze new features — like feature flags, A/B testing, analytics, and session replays
+- You want tools to ship, track, and analyze new features – like feature flags, A/B testing, analytics, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
 Check out [our product pages](/feature-flags) and [read our docs](/docs/feature-flags) to learn more.
@@ -258,7 +258,7 @@ Check out [our product pages](/feature-flags) and [read our docs](/docs/feature-
   <summary>What is the best free feature flag tool?</summary>
 
 - **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform — its free tier includes 1 million feature flag requests per month. 
-- **GrowthBook** is the best choice for teams with a data warehouse — it's completely free to self-host with no limits. 
+- **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a tool that is 100% open source with no paid tiers at all. 
 
 For more options beyond open source, check out our guide to the [best feature flag tools for developers](/blog/best-feature-flag-software-for-developers).
@@ -279,14 +279,14 @@ To learn more, read our guide on [what is a feature flag (and how it compares to
 <details>
   <summary>Should I build my own feature flags or use a service?</summary>
 
-For simple boolean flags, building your own is tempting and straightforward. But feature flag tools quickly become complex once you need targeting rules, percentage rollouts, audit logs, multi-environment support, and experimentation. Most teams are better off using an existing tool — especially since open-source options are free to self-host. For a deeper dive, read our guide on [feature flags as a service](/blog/feature-flags-as-a-service).
+For simple boolean flags, building your own is tempting and straightforward. But feature flag tools quickly become complex once you need targeting rules, percentage rollouts, audit logs, multi-environment support, and experimentation. Most teams are better off using an existing tool – especially since open-source options are free to self-host. For a deeper dive, read our guide on [feature flags as a service](/blog/feature-flags-as-a-service).
 
 </details>
 
 <details>
   <summary>Can I self-host a feature flag tool?</summary>
 
-Yes — that's one of the main advantages of open-source feature flag tools. All eight tools on this list can be self-hosted. **PostHog**, **GrowthBook**, **Unleash**, **Flagsmith**, **FeatBit**, and **FeatureHub** offer both cloud and self-hosted options. **Flipt** and **Flipper** are self-hosted first (though Flipper also offers a cloud service). Self-hosting gives you complete control over your data, which is particularly important for teams with strict privacy requirements or regulatory compliance needs.
+Yes – that's one of the main advantages of open-source feature flag tools. All eight tools on this list can be self-hosted. **PostHog**, **GrowthBook**, **Unleash**, **Flagsmith**, **FeatBit**, and **FeatureHub** offer both cloud and self-hosted options. **Flipt** and **Flipper** are self-hosted first (though Flipper also offers a cloud service). Self-hosting gives you complete control over your data, which is particularly important for teams with strict privacy requirements or regulatory compliance needs.
 
 </details>
 
