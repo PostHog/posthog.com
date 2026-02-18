@@ -16,7 +16,10 @@ import LangChainLogo from '../../../contents/images/docs/llms/LangChain_Logo.svg
 import LiteLLMLogoLight from '../../../contents/images/docs/llms/LiteLLM_logo_black.png'
 import LiteLLMLogoDark from '../../../contents/images/docs/llms/LiteLLM_logo_white.png'
 import { useCustomers, type Customer } from 'hooks/useCustomers'
-import EndpointsPlayground from 'components/Docs/EndpointsPlayground'
+import EndpointsPlayground, { scenarios } from 'components/Docs/EndpointsPlayground'
+import { useState } from 'react'
+import { IconChevronDown } from '@posthog/icons'
+import { AnimatePresence, motion } from 'framer-motion'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'endpoints'
@@ -97,14 +100,58 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
 }
 
 const EndpointsPlaygroundSlide = () => {
+    const [selectedScenarioId, setSelectedScenarioId] = useState(scenarios[0].id)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId) || scenarios[0]
+
     return (
-        <div className="flex flex-col items-center h-full px-8 py-12">
+        <div className="flex flex-col items-center h-full px-8 py-12 text-primary">
             <h2 className="text-5xl text-center text-balance mb-4">From HogQL to URL</h2>
-            <p className="text-xl text-center text-secondary mb-8">
-                Write a query, create an endpoint, fetch your data from anywhere.
-            </p>
+            <div className="text-center mb-8">
+                <p className="text-xl inline">
+                    <span className="text-primary">Create an endpoint for</span>{' '}
+                    <span className="relative inline-block">
+                        <button
+                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                            className="inline-flex items-center font-semibold text-orange"
+                        >
+                            <span>{selectedScenario.name.toLowerCase()}</span>
+                            <IconChevronDown
+                                className={`size-6 transition-transform mt-1 ${dropdownOpen ? 'rotate-180' : ''}`}
+                            />
+                        </button>
+                        <AnimatePresence>
+                            {dropdownOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -4 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -4 }}
+                                    transition={{ duration: 0.1 }}
+                                    className="absolute top-full left-0 mt-2 bg-primary border border-primary rounded-md shadow-lg z-50 overflow-hidden min-w-[220px]"
+                                >
+                                    {scenarios.map((scenario) => (
+                                        <button
+                                            key={scenario.id}
+                                            onClick={() => {
+                                                setSelectedScenarioId(scenario.id)
+                                                setDropdownOpen(false)
+                                            }}
+                                            className={`w-full text-left px-3 py-2 hover:bg-accent transition-colors ${
+                                                scenario.id === selectedScenarioId ? 'text-orange' : 'text-primary'
+                                            }`}
+                                        >
+                                            <div className="text-sm font-medium">{scenario.name}</div>
+                                            <div className="text-xs text-muted">{scenario.description}</div>
+                                        </button>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </span>
+                </p>
+            </div>
             <div className="w-full max-w-3xl">
-                <EndpointsPlayground />
+                <EndpointsPlayground scenarioId={selectedScenarioId} />
             </div>
         </div>
     )
