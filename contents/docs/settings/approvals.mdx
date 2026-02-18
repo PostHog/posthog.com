@@ -162,7 +162,7 @@ You can view change requests in a couple of places:
 A reason is required when rejecting to help the requester understand why.
 
 **To cancel a request:**
-Only the original requester can cancel a pending change request, and only before any votes have been cast.
+Only the original requester can cancel a pending change request. Cancellation is blocked if the request has one or more approvals, unless the request is stale. Stale requests can always be canceled since they can never be applied.
 
 ### Validation and staleness
 

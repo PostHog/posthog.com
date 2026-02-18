@@ -40,7 +40,7 @@ Now, when you (or your users) go to your site, PostHog will autocapture pageview
 
 ## How to set up and view heatmaps
 
-PostHog's heatmaps enable you to see where users are clicking on, hovering over, and scrolling. The web snippet you set up autocaptures the data needed for this, but it needs to be enabled in [your project settings](https://us.posthog.com/settings/project-autocapture#heatmaps).
+PostHog's heatmaps enable you to see where users are clicking on, hovering over, and scrolling. The web snippet you set up autocaptures the data needed for this, but it needs to be enabled in [your project settings](https://us.posthog.com/settings/project-heatmaps#heatmaps).
 
 Once enabled, you can access it via the toolbar. To launch the toolbar, go to the [toolbar tab in PostHog](https://us.posthog.com/toolbar), add your URL as an authorized domain, and click **Launch**.
 
