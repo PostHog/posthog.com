@@ -10,8 +10,8 @@ showTitle: true
 
 ```
 .
-├── bin              # Shell scripts for building, testing, and running PostHog
-├── common           # Shared code: PostHog SQL parser, HogVM, shared UI packages
+├── bin              # Shell scripts wrapped by hogli, the unified developer CLI
+├── common           # Shared code: hogli CLI, PostHog SQL parser, HogVM, shared UI packages
 ├── ee               # Enterprise platform package features (separate license)
 ├── frontend         # React/TypeScript frontend application
 │   └── src
@@ -80,6 +80,7 @@ High-performance Rust services including:
 ### `common`
 
 Shared code used across the codebase:
+- `hogli` – Unified developer CLI for building, testing, and running PostHog
 - `hogql_parser` – PostHog SQL parser (C++)
 - `hogvm` – Hog virtual machine
 - `tailwind` – Shared Tailwind configuration
