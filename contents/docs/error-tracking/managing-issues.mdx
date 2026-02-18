@@ -69,3 +69,26 @@ Error tracking issues can also be discovered from the [Logs](https://app.posthog
 ## Assign issues to teammates
 
 Issues can be [assigned to a teammate](/docs/error-tracking/assigning-issues) from the list or issue page. To do this, select the **assignee** option and search for the teammate you want to assign it to, and select them. You can click this dropdown again to remove the assignee.
+
+
+## Find and merge similar issues
+
+PostHog uses AI embeddings to find issues that may be related to the one you're viewing. This helps you identify duplicate issues or exceptions that share a common root cause.
+
+> **Note:** This feature requires AI data processing to be enabled for your organization. You can enable this in [organization settings](https://app.posthog.com/settings/organization-details#organization-ai-consent).
+
+To find similar issues:
+
+1. Open an issue from the issue list.
+2. Click the **Similar issues** panel on the issue page.
+3. PostHog searches for issues with similar characteristics based on AI embeddings.
+
+From the similar issues list, you can:
+
+- Click an issue to view its details in a modal
+- Open an issue in a new tab for side-by-side comparison
+- Merge an issue into the current one
+
+If no similar issues are found, you can expand the search range to find more distant matches.
+
+For more information on how merging works, see the [fingerprints](/docs/error-tracking/fingerprints) documentation.
