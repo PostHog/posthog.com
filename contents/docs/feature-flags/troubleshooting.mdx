@@ -150,6 +150,39 @@ For person or group properties, use one of these operators:
 
 For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
 
+## Why am I getting an 'Invalid operator' error?
+
+When creating or updating a feature flag, you may see an error like:
+
+`"Invalid operator: contains"`
+
+This occurs when you specify an operator that PostHog doesn't recognize in your property filters. Common causes include typos (like `contains` instead of `icontains`) or using non-existent operators.
+
+### Valid operators for feature flag properties
+
+| Operator | Description |
+|----------|-------------|
+| `exact` | Matches exact value |
+| `is_not` | Does not match exact value |
+| `icontains` | Contains substring (case insensitive) |
+| `not_icontains` | Does not contain substring |
+| `regex` | Matches regular expression |
+| `not_regex` | Does not match regular expression |
+| `gt` | Greater than (numeric values) |
+| `gte` | Greater than or equal to |
+| `lt` | Less than |
+| `lte` | Less than or equal to |
+| `is_set` | Property exists |
+| `is_not_set` | Property does not exist |
+| `is_date_before` | Date is before |
+| `is_date_after` | Date is after |
+| `is_date_exact` | Date matches exactly |
+| `semver_gt` | Semantic version greater than |
+| `semver_gte` | Semantic version greater than or equal to |
+| `semver_lt` | Semantic version less than |
+| `semver_lte` | Semantic version less than or equal to |
+| `semver_exact` | Semantic version matches exactly |
+
 ## Why do I see multiple feature flag calls when I only expect one?
 
 This is likely because the `onFeatureFlags()` callback is invoked every time feature flags are reloaded. This happens by default when person properties change, when you call `reloadFeatureFlags()`, or when other flag-reloading triggers happen.
