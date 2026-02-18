@@ -260,7 +260,7 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
             {/* Step 1: Query */}
             <button
                 onClick={() => toggleStep(1)}
-                className="w-full px-4 py-2.5 bg-primary flex items-center justify-between hover:bg-accent/30 "
+                className="w-full px-4 py-2.5 bg-primary flex items-center justify-between hover:bg-accent"
             >
                 <div className="flex items-center gap-2">
                     <span className="size-5 rounded-full bg-red/15 text-red dark:text-yellow text-xs font-bold flex items-center justify-center">
@@ -332,7 +332,7 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
             {/* Step 2: Create endpoint */}
             <button
                 onClick={() => toggleStep(2)}
-                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent/30 "
+                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent"
             >
                 <div className="flex items-center gap-2">
                     <span className="size-5 rounded-full bg-red/15 text-red dark:text-yellow text-xs font-bold flex items-center justify-center">
@@ -385,7 +385,7 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
             <button
                 onClick={() => endpointCreated && toggleStep(3)}
                 disabled={!endpointCreated}
-                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent/30  disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary"
+                className="w-full px-4 py-2.5 border-t border-primary bg-primary flex items-center justify-between hover:bg-accent disabled:bg-accent disabled:cursor-not-allowed disabled:hover:bg-accent"
             >
                 <div className="flex items-center gap-2">
                     <span className="size-5 rounded-full bg-red/15 text-red dark:text-yellow text-xs font-bold flex items-center justify-center">

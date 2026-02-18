@@ -105,15 +105,15 @@ const EndpointsPlaygroundSlide = () => {
     const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId) || scenarios[0]
 
     return (
-        <div className="flex flex-col items-center h-full px-8 py-12 text-primary">
+        <div className="flex flex-col items-center h-full px-8 py-12 text-black bg-teal">
             <h2 className="text-5xl text-center text-balance mb-4">From HogQL to URL</h2>
             <div className="text-center mb-8">
                 <p className="text-xl inline">
-                    <span className="text-primary">Create an endpoint for</span>{' '}
+                    <span className="text-black">Create an endpoint for</span>{' '}
                     <span className="relative inline-block">
                         <button
                             onClick={() => setDropdownOpen(!dropdownOpen)}
-                            className="inline-flex items-center font-semibold text-primary underline"
+                            className="inline-flex items-center font-semibold text-black underline"
                         >
                             <span>{selectedScenario.name.toLowerCase()}</span>
                             <IconChevronDown
@@ -230,7 +230,7 @@ export default function Endpoints(): JSX.Element {
             'features',
             'dashboards',
             'use_cases',
-            'more',
+            'sql_endpoints',
             'playground',
             'comparison-summary',
             'feature-comparison',
