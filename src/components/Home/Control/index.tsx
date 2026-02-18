@@ -847,7 +847,7 @@ const ProductsSection = () => {
         <RenderInClient
             placeholder={<ProductsSectionControl />}
             render={() =>
-                posthog?.getFeatureFlag?.('homepage-product-groupings') === 'test' ? (
+                posthog?.getFeatureFlag?.('homepage-product-groupings') === 'experiment' ? (
                     <ProductsSectionTest />
                 ) : (
                     <ProductsSectionControl />
