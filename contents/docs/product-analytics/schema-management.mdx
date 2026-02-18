@@ -86,6 +86,29 @@ Once you've created property groups and events (either new events you created, o
 
 Events can have multiple property groups, and each group's properties will be included in the generated types.
 
+## Managing schemas via API
+
+Event schemas and property groups can also be managed programmatically via the PostHog API. This is useful for automating schema management or integrating with your CI/CD pipeline.
+
+To access these endpoints, create a [personal API key](https://app.posthog.com/settings/user-api-keys) with the `event_definition` scope.
+
+### Available endpoints
+
+| Resource | Endpoint |
+|----------|----------|
+| Event schemas | `/api/projects/:project_id/event_schemas/` |
+| Property groups | `/api/projects/:project_id/schema_property_groups/` |
+
+These endpoints support standard CRUD operations (list, create, retrieve, update, delete).
+
+### Example: List event schemas
+
+```bash
+curl \
+  -H "Authorization: Bearer <your_personal_api_key>" \
+  https://us.posthog.com/api/projects/<your_project_id>/event_schemas/
+```
+
 ## Downloading your schema with the CLI
 
 The PostHog CLI generates language definitions from your configured schemas.
