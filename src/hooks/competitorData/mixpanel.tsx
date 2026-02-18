@@ -31,7 +31,7 @@ export const mixpanel = {
                         formula_mode: true,
                         ready_made_insight_types: true,
                         sampling: false,
-                        sql_editor: 'JQL only',
+                        sql_editor: false,
                     },
                 },
                 trends: {
@@ -258,7 +258,7 @@ export const mixpanel = {
                     results_visualization: true,
                     side_effect_monitoring: false,
                     statistical_significance: true,
-                    statistics_engine: 'Sequential default; Frequentist option',
+                    statistics_engine: 'Bayesian or Frequentist',
                 },
             },
             platforms: {

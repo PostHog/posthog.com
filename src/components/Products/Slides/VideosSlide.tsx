@@ -7,7 +7,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 
 interface VideoChapter {
     title: string
@@ -355,8 +355,6 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
 
 // Component to fetch and display author's team and pineapple preference
 function AuthorInfo({ name }: { name: string }) {
-    const { graphql, useStaticQuery } = require('gatsby')
-
     const {
         profiles: { nodes },
     } = useStaticQuery(graphql`

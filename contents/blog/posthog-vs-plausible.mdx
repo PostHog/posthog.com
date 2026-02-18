@@ -1,6 +1,6 @@
 ---
 title: 'In-depth: PostHog vs Plausible'
-date: 2024-10-01
+date: 2026-02-03
 author:
     - ian-vanagas
 rootpage: /blog
@@ -15,11 +15,17 @@ seo:
     metaDescription: Looking for the best Google Analytics alternative? Compare PostHog vs Plausible on web analytics, product analytics, integrations, and more to find the right fit.
 ---
 
+[Plausible](/blog/best-plausible-alternatives) is a popular [privacy-first alternative to Google Analytics](/best-gdpr-compliant-analytics-tools). It's lightweight, cookie-free, and open source – making it a great fit for teams who want simple website metrics without the complexity of GA4.
+
+PostHog also offers [web analytics](/web-analytics) with cookieless tracking and a simple dashboard, but it goes much further by integrating [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [feature flags](/feature-flags), [surveys](/surveys), and more.
+
+In this comparison, we break down where these tools overlap, where they differ, and which is the better fit depending on what you need.
+
 ## How is PostHog different?
 
 ### 1. We're free (forever)
 
-Our ["pay-as-you-go" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Plausible, this would cost a minimum of $69/m.
+Our ["pay-as-you-go" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Plausible, this would cost a minimum of $69/m on the starter plan.
 
 Beyond PostHog's free tier, we try to be as cheap as possible and transparent. Want to know how much we'll charge? See our [pricing calculator](/pricing).
 
@@ -27,7 +33,7 @@ Beyond PostHog's free tier, we try to be as cheap as possible and transparent. W
 
 [Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, observe, and deploy your site and app.
 
-These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), and more.
+These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [logs](/logs), [workflows](/workflows), a [CDP](/cdp), and more.
 
 ### 3. We're multi-platform
 
@@ -35,10 +41,17 @@ These include [product analytics](/product-analytics), [session replay](/session
 
 This isn't limited to event capture and features either. Our [data warehouse](/data-warehouse) lets you import and [query data](/docs/data-warehouse/query) from sources like [Stripe](/docs/data-warehouse/setup/stripe), [Hubspot](/docs/data-warehouse/setup/hubspot), and [Postgres](/docs/data-warehouse/setup/postgres), and our data pipelines let you send data to destinations like [Slack](/docs/cdp/destinations/slack), [S3](/docs/cdp/batch-exports/s3), or a custom [HTTP webhook](/docs/cdp/destinations/webhook).
 
+<p>
+  <CallToAction to="https://posthog.com/docs">
+    Learn more about using PostHog
+  </CallToAction>
+</p>
+
 ## Web analytics
 
 Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alternatives), so they're ideal for tracking and analyzing your website.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
@@ -55,11 +68,13 @@ Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alterna
         'web_analytics.features.script_size',
     ]}
 />
+</p>
 
 ## Product analytics
 
 Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing data. Although not a focus of Plausible, it does offer some basic product analytics features for those that need them.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
@@ -77,13 +92,15 @@ Teams rely on [product analytics](/product-analytics) when they need more custom
         'product_analytics.insights.features.sql_editor',
     ]}
 />
+</p>
 
-> 💡 **Good to know:** Many of Plausible's product analytics features, like custom properties and [funnels](/docs/product-analytics/funnels), are on its more expensive "Business" plan. It's roughly twice the price of the Growth plan and includes up to 10 team members and priority support.
+> 💡 **Good to know:** Many of Plausible's product analytics features, like custom properties and [funnels](/docs/product-analytics/funnels), are on its more expensive "Business" plan. It's roughly twice the price of the Starter plan and includes up to 10 sites and 10 team members.
 
 ## Platform
 
 Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together).
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
@@ -95,21 +112,25 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
         'experiments',
         'surveys',
         'feature_flags',
+        'error.tracking',
+        'logs',
         'platform.developer.server_side_sdks',
         'platform.developer.mobile_sdks',
         'platform.developer.api',
     ]}
 />
+</p>
 
 > 💡 **Good to know:**
 >
 > 1. Plausible's API is limited to capturing events and querying aggregate metrics. PostHog's API provides capture, full SQL querying, feature flags, and CRUD operations for all metadata.
-> 2. You can add unlimited teammates to your project in PostHog. Plausible limits you to 3 on their growth plan and 10 on their business plan. For more than that, you need a custom enterprise plan.
+> 2. You can add unlimited teammates to your project in PostHog. Plausible limits you to 1 on their Starter plan, 3 on their Growth plan, and 10 on their Business plan. For more than that, you need a custom enterprise plan.
 
 ## Integrations
 
 Although Plausible has some integrations with other tools, it mostly stands on its own. PostHog has many more features for importing data from other sources as well as sending it to other destinations.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
@@ -127,11 +148,13 @@ Although Plausible has some integrations with other tools, it mostly stands on i
         'platform.integrations.sentry',
     ]}
 />
+</p>
 
 ## Security, compliance, privacy
 
 Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe with it in terms of features. On top of that, PostHog includes many of the features enterprises need for compliance.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'plausible']}
     rows={[
@@ -146,58 +169,156 @@ Plausible prides itself on being privacy-friendly, but PostHog stands toe-to-toe
         'platform.security.saml_sso',
     ]}
 />
+</p>
 
-## Frequently asked questions
+## Pricing comparison
 
-### How much do PostHog and Plausible cost?
+Plausible is a monthly subscription based on usage. There are four plan tiers, each unlocking more features; for up to 10k pageviews a month, you can expect to pay:
 
-Plausible is a monthly subscription based on usage. Plans start at $9/m for 10k events. Its Business plan unlocks more team members, custom properties, funnels, and more for a minimum of $10/m more.
+- **Starter** ($9/mo) – 1 site, 3 team members max, 3-year data retention, goals, custom events, and email/Slack reports
+- **Growth** ($14/mo) – Up to 3 sites, 3 team members, shared links, embedded dashboards, and team management
+- **Business** ($19/mo) – Up to 10 sites, 10 team members, 5-year data retention, custom properties, funnels, ecommerce revenue attribution, Stats API, and Looker Studio connector
+- **Enterprise** (custom) – 10+ sites, SSO, priority support, scheduled raw data exports, and higher API limits
+
+For 1M pageviews a month, the Starter plan lands at $69/mo, the Growth plan at $104/mo, the Business plan at $139/mo, and Enterprise is custom pricing.
 
 PostHog is [entirely usage-based](/pricing). Its free tier includes:
 
-| Feature                       |  Free usage per month  |    Additional cost    |
-| ----------------------------- | :--------------------: | :-------------------: |
-| Product analytics             |    1 million events    |  From $0.00005/event  |
-| Session replay                |    5,000 recordings    | From $0.005/recording |
-| Surveys                       |     1500 responses     |  From $0.10/response  |
-| Feature flags and A/B testing | 1 million API requests | From $0.0001/request  |
-| Data warehouse                | 1 million synced rows  |  From $0.000015/row   |
+| Feature                       |  Free usage per month       |    Additional cost       |
+| ----------------------------- | :-------------------------: | :---------------------:  |
+| Product analytics             |    1 million events         |  From $0.00005/event     |
+| Web analytics                 |    1 million events         |  From $0.00005/event     |
+| Session replay                |    5,000 recordings         |  From $0.005/recording   |
+| Feature flags and A/B testing |    1 million API requests   |  From $0.0001/request    |
+| Surveys                       |    1,500 responses          |  From $0.10/response     |
+| Error tracking                |    100,000 exceptions       |  From $0.00037/exception |
+| LLM analytics                 |    100,000 events           |  From $0.00006/event     |
+| Data warehouse                |    1 million synced rows    |  From $0.000015/row      |
+| Logs                          |    50 GB ingested           |  From $0.25/GB           |
+| Workflows                     |    10,000 messages/channel  |  From $0.003/email       |
+| PostHog AI                    |    2,000 credits            |  From $0.01/credit      |
+
+A lot of products also use volume-based pricing that gets cheaper as you scale – the more you use, the less you pay per unit. See the [calculator](/pricing) for exact rates at your volume.
 
 Basically, we aim to give you the tools you want for as cheap as possible. We split out the products, and features like [group analytics](/docs/product-analytics/group-analytics) and [pipelines](/docs/cdp) within products, to do this.
 
-### Does PostHog offer a free trial?
+## When to choose PostHog vs Plausible
 
-Plausible offers a free trial, but PostHog doesn't, what gives?
+Choosing the right analytics tool depends on what you need it to do. Here's a quick guide:
 
-Instead of a free trial, PostHog offers a free forever tier as long as you stay under the free limits. You don't even need a credit card, but adding one unlocks all the features (we have billing limits you can use too).
+- Building a product, not just a website? **PostHog** goes beyond pageviews with funnels, session replay, experiments, and feature flags – so you won't outgrow it.
+- Need simple, lightweight website analytics with no cookies and minimal setup? **Plausible** is probably the right choice.
 
-### Can I migrate from Google Analytics to PostHog?
+### Recommendations by team type
 
-Yes, see our [Google Analytics to PostHog migration guide](/docs/migrate/google-analytics) for more details.
+**For product and engineering teams**
+- **PostHog** – Track user behavior through funnels and paths, watch session replays to debug issues, run A/B tests, and roll out features with flags – all in one platform with SQL access for power users.
 
-### Isn't Plausible simpler than PostHog?
+**For content sites and blogs**
+- **Plausible** – Clean, real-time dashboard that shows pageviews, referrers, and top pages at a glance. No training needed, no cookie banners, and a script that's significantly smaller than Google Analytics.
 
-Although PostHog has many more features than Plausible, it isn't necessarily more complicated. Our [web analytics](/web-analytics) dashboard is similar to Plausible's:
+**For marketing teams**
+- **Plausible** – UTM campaign tracking, Google Search Console integration, and conversion goals without the complexity of GA4. PostHog also covers these basics via [web analytics](/web-analytics) and can send conversion data to ad platforms like Google and Meta via its [CDP](/docs/cdp), but adds product-level depth most marketers won't need.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_39_58_2x_5dff6baf53.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_01_at_11_40_26_2x_76efad2201.png"
-    classes="rounded"
-    alt="PostHog web analytics dashboard"
-/>
+**For privacy-conscious and regulated organizations**
+- Both are open source, GDPR-ready, and hosted in the EU. PostHog is also SOC 2 certified, HIPAA-ready, and offers a built-in [data warehouse](/data-warehouse) for full data access. Plausible is cookieless by default with no personal data collection, which can eliminate the need for consent banners entirely.
 
-Our [install snippet](/docs/getting-started/install?tab=snippet) is also only a couple of lines:
-
-<Snippet />
-
-Our users range from [individual indie hackers](/customers/headshot-pro) to [YC-backed startups](/customers/mintlify) to [massive enterprises](/customers/researchgate).
-
-### Can I migrate from Plausible?
-
-Yes. See our [Plausible to PostHog migration guide](/docs/migrate/plausible) for more.
-
----
-
-Still deciding? Check out our [roundup of the best web analytics tools](/blog/best-web-analytics-tools) for more options.
+**For early-stage startups**
+- **PostHog** – Start with [web analytics](/docs/web-analytics) and grow into [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) without switching tools or rebuilding your stack. The [generous free tier](/pricing) covers 1 million events/month – 100x more than Plausible's cheapest plan. [Startups can also qualify for $50k in free credits](/startups).
 
 <ArrayCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>How much do PostHog and Plausible cost?</summary>
+
+**Plausible** starts at $9/month for 10k pageviews on its Starter plan. Key features like funnels, custom properties, and ecommerce tracking require the Business plan ($19/mo+). **PostHog** is [entirely usage-based](/pricing) with a free tier that includes 1 million events/month – 100x more than Plausible's cheapest plan – plus 5,000 session replays, 1 million feature flag requests, and more. All features are available on every tier.
+
+</details>
+
+<details>
+<summary>Does PostHog offer a free trial?</summary>
+
+**PostHog** doesn't offer a free trial because it doesn't need one. Instead, it has a free forever tier with no credit card required. Adding a credit card unlocks all features, and you can set [billing limits](/docs/billing/estimating-usage-costs) to avoid surprise charges. **Plausible** offers a 30-day free trial with no credit card required.
+
+</details>
+
+<details>
+<summary>Is Plausible simpler than PostHog?</summary>
+
+For basic website metrics, yes – **Plausible**'s single-page dashboard is hard to beat. But **PostHog**'s [web analytics](/web-analytics) dashboard is similarly clean and simple. The difference is that **PostHog** lets you go deeper when you need to – with funnels, retention charts, session replays, and SQL access – without forcing you to switch tools.
+
+</details>
+
+<details>
+<summary>Can I use PostHog without cookies?</summary>
+
+Yes. Like **Plausible**, **PostHog** supports [cookieless tracking](/docs/privacy) for web analytics. Both tools are GDPR-ready and can be used without cookie consent banners when configured for privacy-first tracking.
+
+</details>
+
+<details>
+<summary>Can I self-host PostHog or Plausible?</summary>
+
+Both are open source and offer self-hosting. **Plausible**'s Community Edition is a lighter version that excludes some premium features like funnels and ecommerce tracking. **PostHog**'s open-source edition is available on [GitHub](https://github.com/PostHog/posthog), though most users opt for PostHog Cloud for managed infrastructure and automatic updates.
+
+</details>
+
+<details>
+<summary>Can I migrate from Plausible to PostHog?</summary>
+
+Yes. See the [Plausible to PostHog migration guide](/docs/migrate/plausible) for step-by-step instructions on importing your historical data.
+
+</details>
+
+<details>
+<summary>Can I migrate from Google Analytics to PostHog?</summary>
+
+Yes. See the [Google Analytics to PostHog migration guide](/docs/migrate/google-analytics) for details on importing your GA data into PostHog.
+
+</details>
+
+<details>
+<summary>Does Plausible have session replay?</summary>
+
+No. **Plausible** focuses exclusively on website analytics and doesn't offer session replay, heatmaps, or any qualitative user behavior tools. If you need replays alongside your analytics, **PostHog** includes [session replay](/docs/session-replay) with console logs, network monitoring, and [error tracking](/docs/error-tracking) integration.
+
+</details>
+
+<details>
+<summary>Does Plausible have A/B testing or feature flags?</summary>
+
+No. **Plausible** doesn't offer experimentation or feature flag tools. If you need to run [A/B tests](/experiments) or roll out features incrementally with [feature flags](/feature-flags), you'll need a separate tool – or use **PostHog**, which includes both natively.
+
+</details>
+
+<details>
+<summary>Which is better for SEO tracking?</summary>
+
+**Plausible** integrates with Google Search Console and displays this data directly on its main dashboard. **PostHog** doesn't have a direct GSC integration, but supports tracking through [web analytics](/web-analytics) with the added ability to connect traffic data to product behavior like sign-ups, conversions, and feature usage.
+
+</details>
+
+<details>
+<summary>What other analytics tools are available?</summary>
+
+Still deciding? Check out our guides to [Google Analytics alternatives](/blog/ga4-alternatives), [Plausible alternatives](/blog/best-plausible-alternatives), [Matomo alternatives](/blog/posthog-vs-matomo), and the [best web analytics tools](/blog/best-web-analytics-tools) for more options.
+
+</details>
+
+<details>
+<summary>What are the best web analytics tools in 2026?</summary>
+
+The [top web analytics tools in 2026](/blog/best-web-analytics-tools) include:
+
+- **PostHog** – Best all-in-one platform combining web analytics with [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), and more
+- **Plausible** – Best lightweight, cookieless analytics for simple website metrics
+- **Fathom** – Privacy-first alternative with simple dashboard and EU hosting
+- **Matomo** – Best self-hosted option with GA-like features and GDPR compliance
+- **GA4** – Best for marketing teams already in the Google ecosystem
+- **Umami** – Lightweight open-source alternative for self-hosting
+
+For a detailed comparison of features, pricing, and use cases, see our full guide to the [best web analytics tools](/blog/best-web-analytics-tools).
+
+</details>

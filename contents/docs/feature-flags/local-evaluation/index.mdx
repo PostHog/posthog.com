@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), and [Java](/docs/libraries/java) SDKs.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs.
 
 > **Note:** In edge/lambda environments and stateless PHP applications, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For these environments, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead.
 
@@ -198,6 +198,36 @@ posthog.getFeatureFlag(
         .build());
 ```
 
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+// Include any person properties, groups, or group properties required to evaluate the flag
+let mut groups = HashMap::new();
+groups.insert("your_group_type".to_string(), "your_group_id".to_string());
+groups.insert("another_group_type".to_string(), "another_group_id".to_string());
+
+let mut person_props = HashMap::new();
+person_props.insert("property_name".to_string(), json!("value"));
+
+let mut group_props = HashMap::new();
+let mut your_group_props = HashMap::new();
+your_group_props.insert("group_property_name".to_string(), json!("value"));
+group_props.insert("your_group_type".to_string(), your_group_props);
+
+let mut another_group_props = HashMap::new();
+another_group_props.insert("group_property_name".to_string(), json!("another value"));
+group_props.insert("another_group_type".to_string(), another_group_props);
+
+let flag = client.get_feature_flag(
+    "flag-key".to_string(),
+    "distinct_id_of_the_user".to_string(),
+    Some(groups),
+    Some(person_props),
+    Some(group_props),
+).await.unwrap();
+```
+
 </MultiLanguage>
 
 ## Reloading flags
@@ -230,6 +260,12 @@ PostHog::loadFlags()
 posthog.reloadFeatureFlags()
 ```
 
+```rust
+// The Rust SDK automatically reloads flags in the background
+// at the interval specified by poll_interval_seconds (default: 30).
+// Manual reload is not currently supported.
+```
+
 </MultiLanguage>
 
 ## Restriction on local evaluation
@@ -244,7 +280,7 @@ Local evaluation is not possible for flags that:
 
 ### Dynamic cohort restrictions
 
-> **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](/docs/libraries/python) SDK.
+> **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, [Rust](/docs/libraries/rust) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](/docs/libraries/python) SDK.
 
 To enable local evaluation of feature flags that depend on [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts), we translate the cohort definition into person properties.
 

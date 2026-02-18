@@ -1,10 +1,16 @@
 ---
-title: AI Wizard
+title: AI wizard
 sidebar: Handbook
 showTitle: true
 ---
 
 Developers love the [wizard](/docs/ai-engineering/ai-wizard): it's the fastest way to get a deep, correct integration of PostHog, with none of the hallucinations that come from naive agent-based attempts.
+
+For users, it is a one-line CLI command which runs an AI agent that automatically instruments PostHog into their codebases.
+
+```bash
+npx -y @posthog/wizard@latest
+```
 
 ## The wizard's architecture
 
@@ -12,64 +18,52 @@ The wizard is a CLI tool that runs locally against developers' projects.
 
 It wraps the [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) to perform the integration, reviewing project code and making edits as needed.
 
-To direct the agent, the wizard uses the PostHog [MCP server](https://github.com/PostHog/posthog/tree/master/products/mcp) as a context provider. The MCP includes workflow prompts, documentation and example code to improve the correctness and completeness of the integration.
+To direct the agent, the wizard uses the PostHog [MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp) as a context provider. The MCP provides the agent with skills and resources, which include workflow prompts, documentation, and example code to improve the correctness and completeness of the integration.
 
-MCP content is derived from the PostHog [examples repository](https://github.com/PostHog/examples), which includes code snippets, documentation and prompts. The examples repo generates a zip file and manifest that determine's the URIs and structure for `prompts` and `resources`. Updating the examples repo will instantly update the MCP content.
+MCP context packages are derived from the PostHog [context mill repository](https://github.com/PostHog/context-mill), which includes example apps, documentation and prompts. The context mill repo generates a zip file and manifest that determine's the URIs and structure of the context packages. Updating the context mill repo will instantly update the MCP content.
 
 ## Developing the wizard
 
-Use these prompts to get your agent started.
+Use the [wizard workbench](https://github.com/PostHog/wizard-workbench) for local, end-to-end development of the wizard. The workbench can run the full wizard stack in local development mode, with hot reload where supported. 
 
-Get the repos:
+The workbench is also responsible for CI and testing the wizard across a matrix of test applications.
 
-```md
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_workbench_flow_38a895e0bb.png"
+    alt="Wizard workbench"
+/>
 
-Clone these repositories:
+## Setting up the workbench
 
-https://github.com/PostHog/wizard-workbench
-https://github.com/PostHog/examples
-https://github.com/PostHog/wizard
+Clone these repos:
 
-(If you don't have it already, the PostHog repo includes the MCP server) https://github.com/PostHog/posthog
+- https://github.com/PostHog/wizard-workbench
+- https://github.com/PostHog/context-mill
+- https://github.com/PostHog/wizard
+- https://github.com/PostHog/posthog (contains the MCP server)
 
-```
 
-Configure the workbench to run the wizard and its local dependencies:
+Next, configure the workbench to run the wizard and its local dependencies. Read the [README.md](https://github.com/PostHog/wizard-workbench/) file in the wizard-workbench repository to get started and create a `.env` file with the paths to the dependent repos.
 
-```md
-
-Read the README.md file in the wizard-workbench repository. Configure a .env file with the paths to the repos.
-
-```
-
-With the workbench now configured, open a terminal at its root and run:
+Open a terminal at the workbench root and run:
 
 ```bash
 mprocs
 ```
 
-This will start the workbench and all its dependencies:
-
-- Making a change to the examples repo will instantly update the MCP content.
-- Editing the wizard's code will automatically rebuild and link the changes globally. Run it against any project on your machine with `wizard --local-mcp`.
-- Review the contents of the MCP server by selecting the **mcp-inspector** tab and opening the link it provides in your browser.
-
 ## Using the MCP inspector
 
-You'll want the link that looks like this from the mcp-inspector tab:
+You'll want the link that looks like this from the `mcp-inspector` mprocs panel:
 
 ```
 http://localhost:6274/?MCP_PROXY_AUTH_TOKEN=97e0ba...
 ```
 
-Look for the text `Open inspector with token pre-filled.
-
-Access the link in your browser, set the transport type to **Streamable HTTP**, and set the URL to **http://localhost:8787/mcp**. (Alternatively, you can also inspect the production MCP by setting the URL to **https://mcp.posthog.com/mcp**).
+Access the link in your browser, set the transport type to **Streamable HTTP**, and set the URL to **http://localhost:8787/mcp** for local development. (Alternatively, you can also inspect the production MCP by setting the URL to **https://mcp.posthog.com/mcp**).
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_12_17_at_4_04_47_PM_df53b1ea2b.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_inspector_auth_c3f67d4db9.png"
     alt="MCP inspector"
-    classes="rounded"
 />
 
 You'll need a PostHog API key to access the MCP server. Get one from the [user API keys settings page](https://app.posthog.com/settings/user-api-keys?preset=mcp_server). Open the **Authentication** tab and paste the key into the **Bearer token** field.

@@ -35,6 +35,7 @@ const countryFlagMapping: Record<string, keyof typeof AllStickers> = {
     SI: 'StickerFlagSI',
     US: 'StickerFlagUS',
     UY: 'StickerFlagUY',
+    ZW: 'StickerFlagZW',
 }
 
 // Enhanced StickerTrophy component that accepts a label prop
@@ -69,7 +70,7 @@ const StickerTrophyWithLabel = React.forwardRef<SVGSVGElement, AllStickers.Stick
                     fill="#423F3F"
                     xmlSpace="preserve"
                     style={{ whiteSpace: 'pre' }}
-                    fontFamily="Londrina Solid"
+                    fontFamily="Squeak"
                     fontSize="14"
                     letterSpacing="0em"
                 >

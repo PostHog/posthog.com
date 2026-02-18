@@ -53,7 +53,7 @@ If another company is interested in building an integration with PostHog, raise 
 <details>
 <summary>Someone wants us to sponsor them</summary>
 
-If it's an [influencer](/handbook/growth/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Ian Vanagas" />.
+If it's an [influencer](/handbook/growth/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
 
 If it's an event, speak to <TeamMember name="Daniel Zaltsman" />.
 </details>

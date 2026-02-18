@@ -1,234 +1,468 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
-import { IconWrench, IconCode2, IconGraph, IconPlay } from '@posthog/icons'
-
 import { CallToAction } from 'components/CallToAction'
-import { Hero } from 'components/Hero'
-import { Subfeature } from 'components/Products/Subfeature'
 import { SEO } from 'components/seo'
-import { useLayoutData } from 'components/Layout/hooks'
+import { IconArrowRightDown, IconArrowUpRight } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
+import CloudinaryImage from 'components/CloudinaryImage'
+import Editor from 'components/Editor'
+import { graphql, useStaticQuery } from 'gatsby'
+import { ScrollToElement } from 'components/ScrollToElement'
+import OSTable from 'components/OSTable'
 
-const subfeaturesItemCount = 4
-const subfeatures = [
-    {
-        title: 'Migration',
-        description: 'Ditch the legacy tools in double quick time with our fully-managed migration services.',
-        icon: <IconPlay />,
-    },
-    {
-        title: 'Instrumentation',
-        description:
-            'Ensure that PostHog is instrumented correctly with your product in line with your tracking and privacy requirements, guided by our experts.',
-        icon: <IconCode2 />,
-    },
-    {
-        title: 'Onboarding',
-        description:
-            "We'll define and build the dashboards that you need to measure your product and then train you to use them effectively.",
-        icon: <IconGraph />,
-    },
-    {
-        title: 'Integration',
-        description: 'Our team will get PostHog integrated into your existing data stack via sources and destinations.',
-        icon: <IconWrench />,
-    },
-]
+const ServiceLink = ({ label, to }: { label: string; to: string }) => (
+    <ScrollToElement targetId={to} as="span" className="group font-semibold cursor-pointer whitespace-nowrap underline">
+        {label}
+        <IconArrowRightDown className="inline-block size-4 invisible group-hover:visible" />
+    </ScrollToElement>
+)
+
+const ServicesTable = () => {
+    const columns = [
+        { name: 'Service', width: '150px', align: 'left' as const },
+        { name: 'What we do', width: '1fr', align: 'left' as const },
+    ]
+
+    const rows = [
+        {
+            cells: [
+                {
+                    content: <ServiceLink label="Migration" to="migration" />,
+                },
+                {
+                    content: (
+                        <ul className="-my-1">
+                            <li>Move you from Amplitude, Mixpanel, Heap, LaunchDarkly, GA, or Pendo</li>
+                            <li>We'll import your historic data and buy out existing contracts</li>
+                        </ul>
+                    ),
+                },
+            ],
+        },
+        {
+            cells: [
+                {
+                    content: <ServiceLink label="Instrumentation" to="instrumentation" />,
+                },
+                {
+                    content: (
+                        <ul className="-my-1">
+                            <li>SDK setup across your stack, event tracking, privacy compliance (HIPAA, SOC 2)</li>
+                            <li>Initial dashboards, feature flags, and surveys</li>
+                        </ul>
+                    ),
+                },
+            ],
+        },
+        {
+            cells: [
+                {
+                    content: <ServiceLink label="Training" to="training" />,
+                },
+                {
+                    content: (
+                        <ul className="-my-1">
+                            <li>Best practices, team onboarding, and hands-on sessions</li>
+                            <li>Remote by default, on-site available</li>
+                        </ul>
+                    ),
+                },
+            ],
+        },
+        {
+            cells: [
+                {
+                    content: <ServiceLink label="Integration" to="integration" />,
+                },
+                {
+                    content: (
+                        <ul className="-my-1">
+                            <li>Connect your data sources (Stripe, Snowflake, Hubspot, Zendesk)</li>
+                            <li>Set up pipelines, destinations, and real-time workflows</li>
+                        </ul>
+                    ),
+                },
+            ],
+        },
+    ]
+
+    return <OSTable columns={columns} rows={rows} size="md" rowAlignment="top" />
+}
+
+const MigrationVendors = () => {
+    const vendors = [
+        { name: 'Amplitude', url: '/docs/migrate/migrate-from-amplitude' },
+        { name: 'Mixpanel', url: '/docs/migrate/mixpanel' },
+        { name: 'Heap', url: '/docs/migrate/heap' },
+        { name: 'LaunchDarkly', url: '/docs/migrate/launchdarkly' },
+        { name: 'Google Analytics', url: '/docs/migrate/google-analytics' },
+        { name: 'Pendo', url: '/docs/migrate/pendo' },
+    ]
+
+    return (
+        <div className="flex flex-wrap gap-2 mt-2">
+            {vendors.map((vendor) => (
+                <Link
+                    key={vendor.name}
+                    to={vendor.url}
+                    className="group inline-flex items-center  text-sm  whitespace-nowrap"
+                    state={{ newWindow: true }}
+                >
+                    {vendor.name}
+                    <IconArrowUpRight className="inline-block size-4 opacity-30 group-hover:opacity-75" />
+                </Link>
+            ))}
+        </div>
+    )
+}
+
+const ProcessStep = ({ number, title, description }: { number: number; title: string; description: string }) => (
+    <div className="flex gap-3">
+        <div className="flex-shrink-0 size-7 rounded-full bg-red dark:bg-yellow text-white dark:text-dark flex items-center justify-center text-sm font-bold">
+            {number}
+        </div>
+        <div>
+            <p className="font-semibold m-0">{title}</p>
+            <p className="text-secondary text-sm m-0">{description}</p>
+        </div>
+    </div>
+)
+
+const TeamProfiles = () => {
+    const { allTeams } = useStaticQuery(graphql`
+        {
+            allTeams: allSqueakTeam {
+                nodes {
+                    id
+                    name
+                    slug
+                    profiles {
+                        data {
+                            id
+                            attributes {
+                                color
+                                firstName
+                                lastName
+                                avatar {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    leadProfiles {
+                        data {
+                            id
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    const salesCSTeam = allTeams.nodes.find((t: any) => t.slug === 'sales-cs')
+    const profiles = salesCSTeam?.profiles?.data || []
+    const leadProfiles = salesCSTeam?.leadProfiles?.data || []
+
+    const sortedProfiles = profiles.slice().sort((a: any, b: any) => {
+        const aIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === a.id)
+        const bIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === b.id)
+        return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
+    })
+
+    if (profiles.length === 0) return null
+
+    const maxDisplay = 8
+    const displayProfiles = sortedProfiles.slice(0, profiles.length > maxDisplay ? 7 : undefined)
+    const remainingCount = profiles.length > maxDisplay ? profiles.length - 7 : 0
+
+    return (
+        <div className="mb-8">
+            <p>
+                We don't do sales pitches or hard sells – just one simple call or quick email thread to find out what
+                you need. We'll then assign a dedicated PostHog staff member to work with you.
+            </p>
+
+            <p>Team members who insist they really do enjoy quick calls include:</p>
+            <div className="flex flex-wrap justify-end ml-3" dir="rtl">
+                {remainingCount > 0 && (
+                    <span className="visible cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-primary">
+                        <Tooltip
+                            trigger={
+                                <div className="size-10 rounded-full bg-accent border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
+                                    {remainingCount}+
+                                </div>
+                            }
+                            side="bottom"
+                        >
+                            {remainingCount} more
+                        </Tooltip>
+                    </span>
+                )}
+                {displayProfiles
+                    .reverse()
+                    .map(({ id, attributes: { firstName, lastName, avatar, color } }: any, index: number) => {
+                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                        const isTeamLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === id)
+
+                        return (
+                            <span
+                                key={`${name}-${index}`}
+                                className={`visible cursor-default -ml-3 relative hover:z-10 transform scale-100 hover:scale-125 transition-all rounded-full border-1 ${
+                                    isTeamLead ? 'border-yellow dark:border-yellow' : 'border-primary'
+                                }`}
+                            >
+                                <Tooltip
+                                    trigger={
+                                        <img
+                                            src={avatar?.data?.attributes?.url}
+                                            className={`size-10 rounded-full bg-${
+                                                color ?? 'accent'
+                                            } border border-light dark:border-dark`}
+                                            alt={name}
+                                        />
+                                    }
+                                    side="bottom"
+                                    delay={0}
+                                >
+                                    {name} {isTeamLead ? '(Team lead)' : ''}
+                                </Tooltip>
+                            </span>
+                        )
+                    })}
+            </div>
+        </div>
+    )
+}
 
 const initialContactValues = {
     talk_about: "I'd like to learn more about PostHog's professional services.",
 }
 
 export const ProfessionalServices = () => {
-    const { fullWidthContent } = useLayoutData()
     return (
         <>
             <SEO
-                title="Professional Services - From SDK to Data Yay!"
-                description="Forward-deployed engineers to get you up and running with PostHog in no time at all."
+                title="Services - PostHog"
+                description="Forward-deployed engineers to help you migrate, instrument, train, and integrate PostHog into your stack."
                 image={`/images/og/deskhog.jpg`}
             />
-            <div
-                className={`${
-                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
-                } px-4 sm:px-5 pt-6 sm:pt-10 pb-10`}
+            <Editor
+                scrollable={false}
+                maxWidth={900}
+                proseSize="base"
+                bookmark={{
+                    title: 'Services',
+                    description: 'Expert help for PostHog setup',
+                }}
             >
-                <Hero
-                    title="Hire a PostHog human to get your team up and running."
-                    subtitle="We do the heavy lifting so that you can get on with delighting your users."
+                <h1 className="text-center @xl:text-left pt-8 mb-4">Hire a PostHog expert</h1>
+
+                <CloudinaryImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png"
+                    width={436}
+                    className="flex justify-center @xl:justify-start @xl:float-right rotate-1 @xl:ml-8 @xl:max-w-64 @2xl:max-w-80 mb-4"
                 />
-                <div className="flex justify-center gap-2 mb-12">
+
+                <p className="text-lg !mt-0 mb-6 text-center @xl:text-left">
+                    From complete installation packages to one-off projects,{' '}
+                    <strong>PostHog's forward-deployed engineers are here to help.</strong>
+                </p>
+
+                <div>
                     <CallToAction
                         href="/talk-to-a-human"
                         type="primary"
+                        size="md"
                         state={{ newWindow: true, initialValues: initialContactValues }}
+                        width="full"
+                        className="@xl:hidden"
                     >
-                        Talk to a human
+                        Get a custom quote
+                    </CallToAction>
+
+                    <CallToAction
+                        href="/talk-to-a-human"
+                        type="primary"
+                        size="md"
+                        state={{ newWindow: true, initialValues: initialContactValues }}
+                        className="hidden @xl:inline-flex"
+                    >
+                        Get a custom quote
                     </CallToAction>
                 </div>
-            </div>
 
-            <div id="features">
-                <section className="max-w-7xl mx-auto px-4 sm:px-5 pb-6">
-                    <div className="mb-4">
-                        <ul
-                            className={`list-none p-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}
-                        >
-                            {subfeatures.map((subfeature, index) => {
-                                return <Subfeature {...subfeature} key={index} />
-                            })}
-                        </ul>
-                    </div>
+                <p className="text-sm text-secondary text-center @xl:text-left mb-12">
+                    Just need some quick help?{' '}
+                    <Link to="/merch?product=30-min-onboarding-consultation" state={{ newWindow: true }}>
+                        Book a 30-minute consultation
+                    </Link>{' '}
+                    with a PostHog expert for $80.
+                </p>
 
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8 pt-12 sm:pt-16 md:pt-20 mb-12 sm:mb-16 md:mb-20">
-                        <div className="flex-1 text-center md:text-left">
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4">
-                                Onsite, fully remote, or hybrid?
-                                <br />
-                                <span className="text-red dark:text-yellow">You choose.</span>
-                            </h2>
-                            <p>
-                                Whilst we are a fully remote company, we understand the value of working face-to-face
-                                with our customers. A typical project with our forward-deployed engineers starts with a
-                                few days of intense in-person work, and then moves to remote days of work in subsequent
-                                weeks. We are flexible though and will happily work the way you do.
-                            </p>
-                        </div>
-                        <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/0d38287aac5596b1a7e59998d61f341b92893db0_3a6af62939.png"
-                                alt="Hogs around the world"
-                                className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[470px]"
-                            />
-                        </aside>
-                    </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-center mb-2 px-2">
-                        Here are the details of what we can do for you.
-                    </h2>
-                    <h3 className="text-lg sm:text-xl text-center font-medium mb-8 sm:mb-12 px-4">AKA Scope of Work</h3>
-                    <div className="grid gap-4 sm:gap-6 md:gap-8 mb-6">
-                        <h3>Migration</h3>
-                        <p>
-                            If you're coming to us from an existing provider, you'll want to bring along your historical
-                            data, and we make that easy.
-                            <ul className={`list-disc m-4`}>
-                                <li>
-                                    We can orchestrate the import of historic analytics data using our automated
-                                    migrators from common vendors
-                                </li>
-                                <li>
-                                    We'll implement the dashboards you have defined already in PostHog, optimising them
-                                    in line with your needs where required
-                                </li>
-                                <li>
-                                    We can also switch feature flags you have already implemented to use PostHog's
-                                    library
-                                </li>
-                            </ul>
-                        </p>
-                        <p>
-                            Here's a non-exhaustive list of the tools we typically migrate users from:
-                            <ul className={`list-disc m-4`}>
-                                <li>Amplitude</li>
-                                <li>Mixpanel</li>
-                                <li>Heap</li>
-                                <li>Fullstory</li>
-                                <li>Hotjar</li>
-                                <li>Pendo</li>
-                                <li>LaunchDarkly</li>
-                                <li>Statsig</li>
-                            </ul>
-                            If your current tool isn't listed - that's not a problem! We can figure out the best
-                            approach for you here.
-                        </p>
-                        <h3>Instrumentation</h3>
-                        <p>
-                            Here, we make sure that PostHog is correctly integrated into your app using one or more of
-                            our SDKs. We can also:
-                            <ul className={`list-disc m-4`}>
-                                <li>
-                                    Implement any user identification or privacy controls that you need based on your
-                                    privacy requirements.
-                                </li>
-                                <li>
-                                    Ensure that event capture is tuned so that you are only tracking the events which
-                                    you need to (including implementing custom events where necessary).
-                                </li>
-                                <li>Integrate the first set of feature flags into your application.</li>
-                                <li>Ensure that everything is set up according to our best practice guidance.</li>
-                            </ul>
-                        </p>
+                {/* Services Table */}
+                <h2 className="!mt-0">How it works</h2>
+                <TeamProfiles />
 
-                        <h3>Onboarding</h3>
-                        <p>
-                            This is where we create the relevant dashboards, reports and other key items in PostHog to
-                            allow you to see value quickly. First, we will help you define what you need here, and then
-                            can also:
-                            <ul className={`list-disc m-4`}>
-                                <li>Build initial reports and dashboards for you</li>
-                                <li>Define and implement a feature flag and a/b testing strategy</li>
-                                <li>
-                                    Create the right cohorts to allow you to gain a deeper understanding of certain
-                                    segments of your user base
-                                </li>
-                                <li>Implement no-code surveys and ensure the results are available in the right way</li>
-                            </ul>
-                        </p>
+                <h2 className="!mt-0">How we can help</h2>
+                <ServicesTable />
 
-                        <h3>Integration</h3>
-                        <p>
-                            PostHog exists in a wider data ecosystem, and we can help you integrate it into your current
-                            data stack. Our team will first of all define your current and desired data architecture and
-                            then the plumbing required for PostHog to integrate into it. We can then also:
-                            <ul className={`list-disc m-4`}>
-                                <li>Implement sources, pulling data into PostHog to be used in the platform</li>
-                                <li>Define views which will make it easier for you to work with data at scale</li>
-                                <li>
-                                    Ensure that data is flowing from PostHog into downstream tools such as CRM systems
-                                    or a warehouse
-                                </li>
-                                <li>Implement workflows to take real-time actions in response to data in PostHog</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8 pt-12 sm:pt-16 md:pt-20 mb-12 sm:mb-16 md:mb-20">
-                        <div className="flex-1 text-center md:text-left">
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4">
-                                How much, though?
-                                <br />
-                                <span className="text-red dark:text-yellow">Transparent pricing.</span>
-                            </h2>
-                            <p>
-                                Whilst the final amount is dependent on how much help you need from us, you should
-                                expect to add around 20% of your first year credit purchase on top, with a $5k minimum
-                                spend. If this is too much for your budget, you can also{' '}
-                                <Link
-                                    to="/merch?product=30-min-onboarding-consultation"
-                                    className="underline font-medium"
-                                >
-                                    get help from our onboarding specialist team.
-                                </Link>
-                            </p>
-                        </div>
-                        <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/9aa7587cac5d4a105afaf5b34358207fa05c7d1f_202edb1ddc.png"
-                                alt="Thinking hog"
-                                className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[470px]"
-                            />
-                        </aside>
-                    </div>
-                    <div className="flex justify-center gap-2 mb-12">
+                <h3 id="migration">Migration</h3>
+                <p>
+                    Ditching Amplitude, Mixpanel, or another legacy tool? We'll handle the entire migration: export your
+                    historic data, map your events to PostHog's schema, and verify everything works.
+                </p>
+                <p>
+                    We'll also <strong>buy out your existing contracts</strong> so you can switch without paying twice.
+                </p>
+                <p className="text-sm text-secondary !mb-2">Guides for migration to PostHog from...</p>
+                <MigrationVendors />
+
+                <h3 id="instrumentation" className="!mt-8">
+                    Instrumentation
+                </h3>
+                <p>
+                    Complex tracking needs? Privacy requirements? We'll set up PostHog correctly for your marketing site
+                    and app—tracking users comprehensively while tuning events so you only pay for what matters.
+                </p>
+                <ul>
+                    <li>
+                        <strong>SDK integration</strong> across web, mobile, and backend
+                    </li>
+                    <li>
+                        <strong>Privacy compliance</strong> setup (HIPAA BAA, SOC 2, GDPR)—use our{' '}
+                        <Link to="/baa" state={{ newWindow: true }}>
+                            BAA
+                        </Link>{' '}
+                        and{' '}
+                        <Link to="/dpa" state={{ newWindow: true }}>
+                            DPA
+                        </Link>{' '}
+                        generators
+                    </li>
+                    <li>
+                        <strong>Initial dashboards, feature flags, and surveys</strong> configured to your specs
+                    </li>
+                </ul>
+
+                <h3 id="training">Training</h3>
+                <p>
+                    We'll make sure your team knows their analytics from their elbows—with minimal meetings. You'll
+                    learn our best practices and how to use PostHog to its fullest.
+                </p>
+                <ul>
+                    <li>
+                        <strong>Remote by default</strong> — async docs, video calls, Slack support
+                    </li>
+                    <li>
+                        <strong>On-site available</strong> if you want face-to-face sessions (we'll travel)
+                    </li>
+                    <li>
+                        <strong>Merch included</strong> — because everyone deserves a hedgehog sticker
+                    </li>
+                </ul>
+
+                <h3 id="integration">Integration</h3>
+                <p>
+                    Whatever tools you use, we'll get them talking to PostHog. We can work with your existing data stack
+                    or help you build one from scratch using PostHog's data warehouse.
+                </p>
+                <ul>
+                    <li>
+                        <Link to="/data-stack/sources" state={{ newWindow: true }}>
+                            <strong>Data sources</strong>
+                        </Link>{' '}
+                        — pull from Stripe, Hubspot, Zendesk, Postgres, and more
+                    </li>
+                    <li>
+                        <Link to="/cdp" state={{ newWindow: true }}>
+                            <strong>Pipeline destinations</strong>
+                        </Link>{' '}
+                        — push to your CRM, data warehouse, or anywhere else
+                    </li>
+                    <li>
+                        <Link to="/workflows" state={{ newWindow: true }}>
+                            <strong>Workflows</strong>
+                        </Link>{' '}
+                        — trigger real-time actions based on user behavior
+                    </li>
+                </ul>
+
+                {/* How it works */}
+                <h2>Our process</h2>
+                <div className="space-y-4 mb-8">
+                    <ProcessStep
+                        number={1}
+                        title="Tell us what you need"
+                        description="Quick call or email—no sales pitch, just understanding your requirements"
+                    />
+                    <ProcessStep
+                        number={2}
+                        title="Get a dedicated engineer"
+                        description="We assign someone from our team who'll own your project end-to-end."
+                    />
+                    <ProcessStep
+                        number={3}
+                        title="We do the work"
+                        description="Migration, setup, training—whatever's in scope. You review, we iterate"
+                    />
+                    <ProcessStep
+                        number={4}
+                        title="You're up and running"
+                        description="Handoff complete. Ongoing support available if you need it."
+                    />
+                </div>
+
+                <h2>Pricing</h2>
+                <p>
+                    Pricing is based on the scope of work, usually amounting to{' '}
+                    <strong>around 20% of your first year credit purchase</strong> with a <strong>$5k minimum.</strong>
+                </p>
+
+                <p className="!m-0 text-sm text-secondary">
+                    Need something smaller?{' '}
+                    <Link
+                        to="/merch?product=30-min-onboarding-consultation"
+                        className="font-semibold"
+                        state={{ newWindow: true }}
+                    >
+                        Book a 30-minute consultation
+                    </Link>{' '}
+                    instead.
+                </p>
+
+                {/* Final CTA */}
+                <div className="border-t border-primary pt-8 mt-8 pb-16">
+                    <h2 className="!mt-0">Ready to get started?</h2>
+                    <p>
+                        Tell us what you're trying to accomplish. We'll figure out the scope together and get you a
+                        quote within a day or two.
+                    </p>
+                    <div className="flex flex-wrap gap-3">
                         <CallToAction
                             href="/talk-to-a-human"
                             type="primary"
+                            size="md"
                             state={{ newWindow: true, initialValues: initialContactValues }}
                         >
-                            Talk to a human
+                            Get a custom quote
+                        </CallToAction>
+                        <CallToAction
+                            href="/merch?product=30-min-onboarding-consultation"
+                            type="secondary"
+                            size="md"
+                            state={{ newWindow: true }}
+                        >
+                            Get a 30 min consultation ($80)
                         </CallToAction>
                     </div>
-                </section>
-            </div>
+                </div>
+            </Editor>
         </>
     )
 }
