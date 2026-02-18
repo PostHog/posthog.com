@@ -42,8 +42,7 @@ export const endpoints = {
     },
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
-        description:
-            'Create custom API endpoints powered by your PostHog data. Use them to build embedded analytics, data feeds, and more.',
+        description: 'Use them to build embedded analytics, data feeds, and more – no backend required.',
         textColor: 'text-black',
         layout: 'overlay',
     },
