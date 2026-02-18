@@ -42,6 +42,10 @@ For example, with a Salesforce `opportunity` table, you can create a funnel that
 
 Each time you add the same table, you can configure different ID, Distinct ID, and Timestamp fields to represent different stages or events in your data.
 
+## Limitations
+
+Data Warehouse tables cannot be combined inline with other events or with each other. The combine events feature in trends only works with standard PostHog events. To analyze multiple Data Warehouse tables together, create separate series for each table.
+
 ## Filters and breakdowns
 
 When using data warehouse tables in insights, you can use properties from those tables to filter and breakdown as you would with any other insight. For example, you could filter `zendesk_tickets` for ones where the `status` is `open` or `hubspot_companies` where `lifecyclestage` is `lead`.
