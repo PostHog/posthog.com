@@ -15,7 +15,7 @@ Data flows into PostHog and all query execution happens in PostHog:
 
 1. **Getting data** – Events and persons are ingested into PostHog directly or via a PostHog SDK or an external CDP (e.g. Segment or RudderStack).
 2. **Storing data** – Data is stored in PostHog infrastructure (unless you're using [custom sources](/docs/data-warehouse/under-the-hood). 
-3. **Using data** – Analytics, experiments, feature flags, and other tools enable you to use the data that’s available in PostHog.
+3. **Using data** – Analytics, experiments, feature flags, and other tools can draw on the data that’s available in your PostHog warehouse.
 
 If you&apos;re using PostHog as your data warehouse, your data stays in PostHog and is accessible across all PostHog tools. You get SQL, unified data, and can use data in the warehouse across many other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple vendors together—your data never needs to travel between systems.
 
