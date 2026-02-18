@@ -33,6 +33,12 @@ This guide breaks down what each one actually does, when to use it, and how they
 
 A [feature flag](/docs/feature-flags) (also called a feature toggle) is a conditional switch in your code that controls whether a user sees a specific feature. At its simplest, it's an `if` statement that checks a remote value instead of a hardcoded boolean – letting you turn features on or off without deploying new code.
 
+```js
+if (posthog.isFeatureEnabled('flag-key') ) {
+  // Do something differently for this user
+}
+```
+
 Feature flags can be simple booleans (on/off) or multivariate (returning one of several variants). They're the foundation for controlled rollouts, kill switches, and internal testing – and in PostHog, they're also the infrastructure that powers [remote config](/docs/feature-flags/remote-config) and [A/B testing](/experiments).
 
 The core job of a feature flag is to **separate deployment from release**. You merge code to production whenever it's ready, and control who sees it – and when – through the flag.
