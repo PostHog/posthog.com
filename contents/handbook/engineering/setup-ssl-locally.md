@@ -139,5 +139,5 @@ nginx -p /usr/local/etc/nginx/ -c /usr/local/etc/nginx/nginx.conf -s stop
 
 7. To run local development, use
 ```bash
-bin/start-http
+bin/hogli start
 ```

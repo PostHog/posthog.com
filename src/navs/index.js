@@ -570,6 +570,7 @@ export const handbookSidebar = [
             { name: 'Progression', url: '/handbook/people/career-progression' },
             { name: 'HR processes', url: '/handbook/people/grievances' },
             { name: 'BookHog', url: '/handbook/people/bookhog' },
+            { name: 'Philosophy club', url: '/handbook/people/philosophy-club' },
             { name: 'Offboarding', url: '/handbook/people/offboarding' },
         ],
     },
@@ -735,6 +736,10 @@ export const handbookSidebar = [
             {
                 name: 'Style guide',
                 url: '/handbook/docs-and-wizard/docs-style-guide',
+            },
+            {
+                name: 'Vale (prose linter)',
+                url: '/handbook/docs-and-wizard/vale',
             },
             {
                 name: 'MDX and components',
@@ -2570,6 +2575,14 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
+                            name: 'Replit integration',
+                            url: '/docs/integrations/replit',
+                        },
+                        {
+                            name: 'v0 integration',
+                            url: '/docs/integrations/v0',
+                        },
+                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
@@ -4278,6 +4291,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/error-tracking/installation/go',
+                        },
+                        {
                             name: 'React Native',
                             url: '/docs/error-tracking/installation/react-native',
                         },
@@ -4691,6 +4708,12 @@ export const docsMenu = {
                     name: 'Button actions',
                     url: '/docs/product-tours/button-actions',
                     icon: 'IconButton',
+                    color: 'orange',
+                },
+                {
+                    name: 'Localization',
+                    url: '/docs/product-tours/localization',
+                    icon: 'IconGlobe',
                     color: 'orange',
                 },
                 {
