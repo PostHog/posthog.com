@@ -98,9 +98,14 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
 
 const EndpointsPlaygroundSlide = () => {
     return (
-        <div>
-            <h2 className="text-5xl text-center text-balance">Endpoints playground</h2>
-            <EndpointsPlayground />
+        <div className="flex flex-col items-center h-full px-8 py-12">
+            <h2 className="text-5xl text-center text-balance mb-4">From HogQL to URL</h2>
+            <p className="text-xl text-center text-secondary mb-8">
+                Write a query, create an endpoint, fetch your data from anywhere.
+            </p>
+            <div className="w-full max-w-3xl">
+                <EndpointsPlayground />
+            </div>
         </div>
     )
 }
