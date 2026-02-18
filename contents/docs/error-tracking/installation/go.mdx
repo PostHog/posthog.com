@@ -11,11 +11,17 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <Step title="Install the Go SDK" badge="required">
 
-Install the PostHog Go SDK:
+Install the [PostHog Go SDK](/docs/libraries/go):
 
 ```bash
 go get github.com/posthog/posthog-go
 ```
+
+<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+
+The Go SDK captures stack traces with file names, line numbers, and function names, but does not yet support source context (displaying the surrounding lines of code in the error tracking UI). Symbol set uploads for Go are not currently available.
+
+</CalloutBox>
 
 </Step>
 
