@@ -266,7 +266,7 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                     <span className="size-5 rounded-full bg-orange/15 text-orange text-xs font-bold flex items-center justify-center">
                         1
                     </span>
-                    <span className="text-sm font-semibold text-primary">Your query</span>
+                    <span className="text-sm font-semibold text-primary">Write your query</span>
                 </div>
                 <IconChevronDown
                     className={`size-4 text-muted transition-transform ${openSteps.has(1) ? 'rotate-180' : ''}`}
