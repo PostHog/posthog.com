@@ -5,6 +5,7 @@ import { useApp } from '../../context/App'
 import { IconChevronDown, IconTerminal } from '@posthog/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import OSButton from 'components/OSButton'
+import AutosizeInput from 'react-input-autosize'
 
 export interface QueryScenario {
     id: string
@@ -354,11 +355,12 @@ export default function EndpointsPlayground({ scenarioId }: EndpointsPlaygroundP
                                 <div className="text-xs text-secondary mb-1.5">Endpoint path</div>
                                 <div className="flex items-center text-sm font-mono text-primary">
                                     <span className="">/api/endpoints/</span>
-                                    <input
-                                        type="text"
+                                    <AutosizeInput
                                         value={endpointName}
-                                        onChange={(e) => setEndpointName(e.target.value)}
-                                        className="bg-accent dark:bg-accent-dark border border-primary text-orange rounded px-1.5 py-0.5 focus:outline-none focus:border-orange w-[178px]"
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                            setEndpointName(e.target.value)
+                                        }
+                                        inputClassName="bg-accent dark:bg-accent-dark border border-primary text-orange rounded px-1.5 py-0.5 focus:outline-none focus:border-orange"
                                     />
                                     <span className="">/run</span>
                                 </div>
