@@ -7,6 +7,15 @@ tags:
  - LLM analytics
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="fyi" title="New: Simpler options available" icon="IconInfo">
+
+Since publishing this post, we've integrated further with OpenRouter. **OpenRouter Broadcast** is the easiest way to capture LLM data in PostHog. Enable it in your OpenRouter settings and all your LLM calls are tracked automatically, with no SDK instrumentation required.
+See the [OpenRouter installation docs](/docs/llm-analytics/installation/openrouter) for details.
+
+</CalloutBox>
+
 OpenRouter makes it easy to use a range of different LLMs. No matter which you use, understanding API usage, costs, and latency is crucial for understanding how users interact with your AI features. In this tutorial, we'll show you how to monitor important metrics such as:
 
 - Total cost across different models
