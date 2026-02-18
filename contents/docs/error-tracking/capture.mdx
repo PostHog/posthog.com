@@ -44,7 +44,13 @@ posthog.init('<ph_project_api_key>', {
 
 ### Manual exception capture
 
-You can also manually call the exception capture method. 
+You can also manually call the exception capture method.
+
+<CalloutBox icon="IconWarning" title="Always use captureException()" type="warning">
+
+Never manually capture `$exception` events using `posthog.capture('$exception', {...})`. Always use `posthog.captureException(error)` instead - it handles the correct event format, stack trace processing, and source map integration automatically.
+
+</CalloutBox>
 
 <MultiLanguage>
 
@@ -86,7 +92,24 @@ posthog.capture_exception(
 )
 ```
 
+```go
+exception := posthog.NewDefaultException(
+    time.Now(),
+    "user_distinct_id",
+    "ErrorType",
+    err.Error(),
+)
+client.Enqueue(exception)
+```
+
 </MultiLanguage>
+
+### Error boundaries
+
+Error boundaries let you catch rendering errors in your component tree and report them to PostHog. We currently support error boundaries for:
+
+- **React** – Use the `PostHogErrorBoundary` component. See the [React error boundaries guide](/docs/error-tracking/installation/react#set-up-error-boundaries).
+- **React Native** – Use the `PostHogErrorBoundary` component. See the [React Native error boundaries guide](/docs/error-tracking/installation/react-native#set-up-error-boundaries).
 
 ## Customizing exception capture
 
@@ -176,6 +199,24 @@ rescue => e
     }
   )
 end
+```
+
+```go
+fingerprint := "CustomExceptionGroup"
+
+exception := posthog.Exception{
+    DistinctId: "user_123",
+    Timestamp:  time.Now(),
+    ExceptionList: []posthog.ExceptionItem{
+        {
+            Type:  "ActivationError",
+            Value: err.Error(),
+        },
+    },
+    // Optional: override the fingerprint for custom grouping
+    ExceptionFingerprint: &fingerprint,
+}
+client.Enqueue(exception)
 ```
 
 </MultiLanguage>

@@ -36,36 +36,51 @@ curl -X POST \
   "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
 ```
 
+### Variable validation
+
+When you create or update an endpoint, PostHog validates that every variable placeholder in your query has a matching variable definition.
+
+For each `{variables.X}` placeholder in your query, you must define a variable with `code_name` set to `X`. Create and manage variables in [data management variables](https://app.posthog.com/data-management/variables).
+
+If validation fails, you'll see one of these errors:
+
+- `"Query references undefined variable(s)"` - Your query uses a placeholder that doesn't have a matching variable definition. Define the variable with the correct `code_name`.
+- `"Variable ID(s) not valid UUIDs"` - Variable IDs must be valid UUIDs.
+- `"Variable ID(s) not found"` - The variable doesn't exist. Create it in data management first.
+
+See [troubleshooting](/docs/endpoints/troubleshooting#variable-errors) for more details.
+
 ### Materialization
 
-SQL-based endpoints with variables can only be [materialized](/docs/endpoints/materialization) in certain cases.
+SQL-based endpoints with variables can be [materialized](/docs/endpoints/materialization) when each variable is used in a `WHERE` clause with a supported comparison operator.
 
-We're working on expanding what's possible, but for now you can only materialize a SQL-based endpoint that:
-- is using a single variable
-- and the variable is in an equality comparison with a field
+Supported operators include: `=`, `>=`, `>`, `<`, `<=`
 
-For example, the following can be materialized:
+You can use multiple variables in the same query, including range queries on the same column.
+
+For example, the following queries can be materialized:
 
 ```sql
-select
-  count()
-from
-  events
-where
-  properties.customer_name = {variables.customer_name}
+SELECT count()
+FROM events
+WHERE properties.customer_name = {variables.customer_name}
 ```
 
-But, the query below can not be materialized:
+```sql
+SELECT count()
+FROM events
+WHERE event = {variables.event_name}
+  AND hour >= {variables.start_hour}
+  AND hour < {variables.end_hour}
+```
+
+However, queries with unsupported operators or variable usage outside `WHERE` clauses cannot be materialized:
 
 ```sql
-select
-  count()
-from
-  events
-where
-  properties.customer_name = {variables.customer_name}
-  and properties.$os = {variables.os}
-  and toDate(timestamp) > {variables.from_date}
+-- Cannot materialize: LIKE operator not supported
+SELECT count()
+FROM events
+WHERE event LIKE {variables.event_pattern}
 ```
 
 ## Variables in insight-based endpoints

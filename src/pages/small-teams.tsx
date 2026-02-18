@@ -5,14 +5,13 @@ import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
-import TeamPatch from 'components/TeamPatch'
-import { useUser } from 'hooks/useUser'
 import OSButton from 'components/OSButton'
 import OSTable from 'components/OSTable'
+import { useApp } from '../context/App'
 
 const SmallTeamsPage = () => {
     const [searchTerm, setSearchTerm] = useState('')
-    const { isModerator } = useUser()
+    const { websiteMode } = useApp()
 
     const { allTeams } = useStaticQuery(graphql`
         {
@@ -208,7 +207,7 @@ const SmallTeamsPage = () => {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/small-teams',
         content: (
-            <div className="max-w-screen-lg mx-auto mt-6 px-4">
+            <div className={`mt-6 px-4 ${websiteMode ? '' : 'max-w-screen-lg mx-auto'}`}>
                 <section data-scheme="primary" className="bg-primary">
                     <div className="mb-8">
                         <h1>Small teams</h1>
@@ -239,6 +238,7 @@ const SmallTeamsPage = () => {
                             className="bg-primary"
                             size="md"
                             rowAlignment="center"
+                            width="full"
                         />
                     </div>
 
