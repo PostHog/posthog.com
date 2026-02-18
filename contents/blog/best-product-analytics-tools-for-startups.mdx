@@ -1,0 +1,170 @@
+---
+title: The best product analytics tools for startups, compared
+date: 2025-02-20
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: 'The best product analytics tools for startups, compared'
+    metaDescription: 'Compare the best product analytics tools for startups. See how PostHog, Mixpanel, Amplitude, and Heap stack up.'
+---
+
+A tale as old as time: a founding team ships their MVP, installs Google Analytics, watches pageview numbers go up, and feels good. 
+
+If you don't want to be a cliche, you've come to the right place. This guide compares...
+
+
+Before getting started, brush up on the basics:
+
+<details>
+<summary>What is product analytics (and why is it different from Google Analytics)?</summary>
+
+**Product analytics** is event-based tracking that measures *how users interact with your product* — not just whether they visit your website. Every button click, feature used, form submitted, and page navigated becomes a data point you can query, filter, build reports, and act against.
+
+Here's the distinction that matters: [Google Analytics](/blog/posthog-vs-ga4) [(or any web analytics tool)](/blog/best-web-analytics-tools) tells you "10,000 people visited your site this week, 40% bounced, average session was 3 minutes." That's useful for marketing, but it's useless for making product decisions.
+
+Product analytics tells you "User 4521 signed up on Tuesday, completed onboarding in 3 minutes, used the core feature twice on Wednesday, then never came back. Meanwhile, User 7803 signed up the same day, skipped onboarding, went straight to the dashboard builder, created three dashboards, invited two teammates, and has logged in every day since."
+
+That's the difference between traffic aggregates and user-level behavior data. 
+
+**The core workflows that matter for startups:**
+
+1. **Funnels** — where do users drop off between signup and activation?
+2. **Retention cohorts** — of users who signed up in January, how many came back in week 2? Week 8?
+3. **Segmentation** — do users from Product Hunt behave differently than those from Google Ads?
+4. **Feature adoption** — you shipped a new feature. Is anyone using it? Are those users retaining better?
+
+If you want to go deeper on how these workflows map to the [AARRR pirate metrics framework](https://posthog.com/product-engineers/aarrr-pirate-funnel), we have a full breakdown, but the short version is: which letter you focus on depends entirely on your startup stage.
+</details>
+
+<details>
+<summary> What to measure at each startup stage: Pre-PMF</summary>
+
+**Your situation:** You have an MVP with a few hundred users. You don't know if they're getting value. Retention is a mystery. The product might look completely different in six weeks.
+
+**The one metric that matters: [activation rate](/product-engineers/activation-metrics)**
+
+Activation rate is the percentage of new users who complete actions correlated with long-term retention. The word *correlated* is key — you're not guessing what matters, you're testing which actions predict whether someone comes back.
+
+**Also measure:** Time-to-value (signup to aha moment), onboarding completion rate (funnel from signup to first meaningful action).
+
+**Pair analytics with:**
+
+- [Session replay](/session-replay) — numbers say 40% drop off at step 3. Replay shows you they couldn't find the "Next" button.
+- [Surveys](/surveys) — run a [PMF survey](/templates/pm-survey) ("How disappointed would you be if you could no longer use this product?"). Pair with exit intent and onboarding feedback surveys.
+- Use [cohort](/docs/data/cohorts) comparisons to segment by acquisition source — HN users vs paid ads users may behave completely differently.
+
+</details>
+
+<details>
+<summary> What to measure at each startup stage: Post-PMF</summary>
+
+**Your situation:** Users are returning. Revenue is growing. You have a small team (5-30 people). The question shifts from "does this work?" to "how do we grow efficiently?" You're running experiments and thinking about conversion optimization.
+
+**The metrics that matter:**
+
+- **Cohort retention curves** — [retention analysis](/docs/product-analytics/retention) by signup week. Is the curve flattening (good) or declining to zero (not actually PMF)?
+- **Engagement depth** — DAU/MAU ratio, session frequency, feature breadth per user
+- **Feature adoption** — what % of activated users tried the new feature? Use [lifecycle analysis](/docs/product-analytics/lifecycle) to see if they retain better
+- **Conversion to paid** — [funnel](/docs/product-analytics/funnels) from trial → paid → retained subscription
+
+**Pair analytics with:**
+
+- [Feature flags](/feature-flags) — gradual rollouts (1% → 10% → 100%), kill switches, user targeting for beta features
+- [A/B testing](/experiments) — test onboarding flows, pricing pages, feature gates. Measure impact against retention or conversion goals.
+- [Error tracking](/error-tracking) — correlate bugs with churn. "Users who hit the checkout error in v2.3.1 churned at 3x the normal rate.
+</details>
+
+<details>
+<summary> What to measure at each startup stage: Scale-up</summary>
+
+**Your situation:** Past 50 employees. You have a data team. Reliability matters as much as growth. Enterprise customers ask about SLAs and data residency.
+
+**The metrics that matter:**
+
+- **Reliability** — crash-free sessions, error rates, p95/p99 latency
+- **Data quality** — event schema compliance, missing properties, taxonomy consistency
+- **Cost-to-serve** — COGS per user, analytics costs as a line item
+- **Net revenue retention** — expansion vs churn at the account level using [group analytics](/docs/product-analytics/group-analytics)
+
+**Pair analytics with:**
+
+- [Feature flags](/feature-flags) — gradual rollouts (1% → 10% → 100%), kill switches, user targeting for beta features
+- [A/B testing](/experiments) — test onboarding flows, pricing pages, feature gates. Measure impact against retention or conversion goals.
+- [Error tracking](/error-tracking) — correlate bugs with churn. "Users who hit the checkout error in v2.3.1 churned at 3x the normal rate.
+</details>
+
+
+## The best product analytics tools for startups
+
+### 1. PostHog
+
+**What it is:** An all-in-one Product OS that bundles [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), [workflows](/workflows), and more. It's open-source at its core, with cloud hosting in both the US and EU.
+
+**Why is PostHog the best tool for startups:**
+
+#### Key features
+
+- [Funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [paths](/docs/product-analytics/paths), [cohorts](/docs/data/cohorts), [lifecycle analysis](/docs/product-analytics/lifecycle) — all included in free tier
+- [Session replay](/session-replay) with console logs, network requests, and performance data
+- [Feature flags](/feature-flags) with targeting rules, percentage rollouts, and kill switches
+- [A/B testing](/experiments) built on feature flags — no separate integration
+- [Surveys](/surveys) with PMF templates, NPS, and targeting by user behavior
+- [Error tracking](/error-tracking) with stack traces alongside user behavior context
+- [Group analytics](/docs/product-analytics/group-analytics) for B2B account-level funnels and retention
+- [Data warehouse](/docs/data-warehouse) for cross-product queries and external source connections
+- Billing limits per product — set a hard cap so you never get a surprise bill
+
+#### Getting started
+
+PostHog is fully self-serve. No sales call, no "request a demo" form.
+
+**Cloud signup:** Create a free account at [posthog.com](/), pick US or EU hosting, and you're in. No credit card needed.
+
+**Install the snippet:** Paste a JavaScript snippet in your `<head>` tag and PostHog starts autocapturing events immediately — pageviews, clicks, form submissions. First data arrives in minutes, not days.
+
+**Or use the CLI wizard:** Run `npx @posthog/wizard@latest` from your project root. The AI-powered setup wizard detects your framework, installs the SDK, adds the correct config, wraps your app with the PostHog provider, and creates Cursor rules for your project — all automated. It currently supports React, Next.js, Svelte, Astro, and React Native.
+
+**SDKs for everything:** JavaScript, Python, Ruby, Go, Node.js, PHP, iOS, Android, React Native, Flutter, Elixir, .NET, and more. Framework-specific guides for Next.js, Django, Angular, WordPress, Webflow.
+
+**Time to first insight:** Minutes for autocapture data. A few hours to set up your first funnel and watch your first session replay. No tracking plan required upfront — [autocapture](/docs/product-analytics/autocapture) gets you data on day one, and you layer [custom events](/docs/product-analytics/capture-events) as you learn what matters.
+
+#### Pricing
+
+| Product | Free tier (monthly) | After free tier |
+|---|---|---|
+| Product analytics | 1M events | $0.00005/event |
+| Session replay | 5K recordings | ~$0.005/recording |
+| Feature flags | 1M requests | $0.0001/request |
+| Surveys | 1,500 responses | $0.10/response |
+| Error tracking | 100K exceptions | $0.00037/exception |
+
+**This matters for startups because it means you can run a full analytics + replay + experimentation stack at $0/month until you have real traction**. No credit card required. No per-seat fees. Unlimited team members on every plan.
+
+No per-seat fees. No per-project fees (up to 6 projects). Billing limits available per product. Use the [pricing calculator](https://posthog.com/pricing) to estimate your costs based on actual volume, and read the [estimating usage guide](https://posthog.com/docs/billing/estimating-usage-costs) to understand how events are counted before you scale.
+
+#### PostHog is for you if...
+
+- You're a technical founder or product engineer who wants one install, not five
+- You want analytics, replay, flags, and experiments sharing one data model
+- You need [group analytics](/docs/product-analytics/group-analytics) for B2B account-level metrics
+- You care about data ownership — self-hosted or EU cloud options
+- You want to start free and only pay when you have real traction
+- You prefer SQL access and APIs over drag-and-drop chart builders
+
+#### PostHog is NOT for you if...
+
+- Your team is entirely non-technical — PMs who need point-and-click everything may find the learning curve steep
+- You only need in-app guides and onboarding flows
+- You want a single-product analytics tool and nothing else
+
+---
