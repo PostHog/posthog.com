@@ -102,6 +102,44 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 </details>
 
+<details>
+
+<summary>Pinning to a specific organization or project?</summary>
+
+If you're building a programmatic integration or want to restrict the MCP session to a specific organization or project, you can pin the context using headers or query parameters.
+
+When you pin the context, the `switch-organization` and `switch-project` tools are automatically excluded from the available tool list:
+
+- When `projectId` is provided: both `switch-organization` and `switch-project` are excluded
+- When only `organizationId` is provided: only `switch-organization` is excluded
+
+**Headers:**
+- `x-posthog-organization-id` - Pin to a specific organization
+- `x-posthog-project-id` - Pin to a specific project
+
+**Query parameters:**
+- `organization_id` - Pin to a specific organization
+- `project_id` - Pin to a specific project
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-organization-id": "your_org_id",
+        "x-posthog-project-id": "your_project_id"
+      }
+    }
+  }
+}
+```
+
+</details>
+
 
 ## Available Tools
 
