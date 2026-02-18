@@ -17,7 +17,7 @@ Data flows into PostHog and all query execution happens in PostHog:
 2. **Storing data** – Data is stored in PostHog infrastructure (unless you're using [custom sources](/docs/data-warehouse/under-the-hood). 
 3. **Using data** – Analytics, experiments, feature flags, and other tools can draw on the data that’s available in your PostHog warehouse.
 
-If you&apos;re using PostHog as your data warehouse, your data stays in PostHog and is accessible across all PostHog tools. You get SQL, unified data, and can use data in the warehouse across many other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple vendors together—your data never needs to travel between systems.
+If you&apos;re using PostHog as your data warehouse, your data stays in PostHog and is accessible across PostHog tools. You get SQL, unified data, and can use data in the warehouse across many other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple vendors together—your data never needs to travel between systems.
 
 If you&apos;re using an external data warehouse, such as Snowflake, you can connect it as a source and sync the tables and fields you need into PostHog via our warehouse sources. Queries then run on PostHog compute, enabling you to use warehouse data across PostHog tools. 
 
