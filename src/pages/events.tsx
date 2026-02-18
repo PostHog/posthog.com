@@ -201,6 +201,7 @@ const EventCard = ({
 }
 
 function Events() {
+    const { websiteMode } = useApp()
     const { isModerator } = useUser()
     const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
@@ -323,10 +324,17 @@ function Events() {
                 fullScreen
                 viewportClasses="[&>div>div]:h-full"
             >
-                <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+                <div
+                    data-scheme="primary"
+                    className={`flex flex-col @xl:flex-row text-primary h-full ${
+                        websiteMode ? 'h-[calc(100vh-48px)]' : ''
+                    }`}
+                >
                     <aside
                         data-scheme="secondary"
-                        className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
+                        className={`basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col ${
+                            websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'
+                        }`}
                     >
                         <div className="border-b border-primary px-4 pt-4 pb-4">
                             <ToggleGroup
