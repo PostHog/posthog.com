@@ -723,7 +723,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'System status',
-                    link: 'https://status.posthog.com',
+                    link: 'https://www.posthogstatus.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
                 },

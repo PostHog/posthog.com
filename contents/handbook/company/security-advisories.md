@@ -6,7 +6,7 @@ showTitle: true
 
 This page contains security advisories and Common Vulnerabilities and Exposures (CVEs) related to PostHog. We maintain this page to ensure transparency and help our users stay informed about any security issues that may impact them. In the event that a security incident leads to a confirmed exposure or requires action from users we will always contact users proactively. 
 
-For coverage of other, [non-security incidents](/handbook/engineering/operations/incidents), please check [our status page](https://status.posthog.com/). 
+For coverage of other, [non-security incidents](/handbook/engineering/operations/incidents), please check [our status page](https://www.posthogstatus.com/). 
 
 ## Our approach to security advisories
 
@@ -38,7 +38,7 @@ Security is everyone's responsibility, so we encourage all our users and staff t
 - **Use strong authentication** - Always enable multi-factor authentication, strong passwords, and SSO where available. PostHog supports all of these. 
 - **Monitor access** - Regularly review who has access to your PostHog data and follow the principle of least privilege by only giving access to things people _actually_ need. 
 
-We will always proactively reach out to affected users in the event of an advisory requiring attention or action. However, if you'd like to stay updated about future incidents or advisories, please [subscribe to our status page](https://status.posthog.com/). If you want to drink updates from the firehose, you can also follow our [GitHub repos](https://github.com/PostHog/posthog) for real-time updates about everything we do, as we're committed to working in the open wherever possible. 
+We will always proactively reach out to affected users in the event of an advisory requiring attention or action. However, if you'd like to stay updated about future incidents or advisories, please [subscribe to our status page](https://www.posthogstatus.com/). If you want to drink updates from the firehose, you can also follow our [GitHub repos](https://github.com/PostHog/posthog) for real-time updates about everything we do, as we're committed to working in the open wherever possible. 
 
 ## Current advisories
 

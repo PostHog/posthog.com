@@ -437,7 +437,7 @@ export function Footer(): JSX.Element {
                     <ul className="m-0 pl-0 pb-32 mdlg:pb-0 list-none sm:ml-auto flex flex-col mdlg:flex-row items-baseline sm:space-x-8 mdlg:space-x-4 mt-2 sm:mt-0 gap-2 mdlg:gap-0">
                         <li>
                             <Link
-                                to="https://status.posthog.com"
+                                to="https://www.posthogstatus.com"
                                 className="font-bold text-sm text-secondary hover:text-primary"
                             >
                                 System status

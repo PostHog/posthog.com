@@ -107,7 +107,7 @@ Sort your tickets by newest so you can easily spot new tickets coming in. This m
 Don't send generic "we're working on it" messages. Use the macro if you created one, or link to the status page, explain what we know about the impact, and give them a real timeline if we have one. If we don't have a timeline, say that too.
 
 Example response:
-> Hey - yes, we're seeing this too. There's an incident affecting feature flag requests right now. You can follow updates on our [status page](https://status.posthog.com), but the short version is that flags are returning but with higher latency than normal. The team is working on it and we'll update the status page as we know more. I'll be sure to let you know when it's resolved.
+> Hey - yes, we're seeing this too. There's an incident affecting feature flag requests right now. You can follow updates on our [status page](https://www.posthogstatus.com), but the short version is that flags are returning but with higher latency than normal. The team is working on it and we'll update the status page as we know more. I'll be sure to let you know when it's resolved.
 
 **Important:** Always attach incident-related tickets to the open incident using the incident.io app in the right-hand sidebar in Zendesk. This helps us track the user impact and keeps everything organized. Anyone on the support team responding to incident-related tickets should do this, not just the person watching the incident.
 

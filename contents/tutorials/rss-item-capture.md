@@ -111,7 +111,7 @@ The final feed to track is the status of the apps we rely on. Many status pages 
 3. Check if it is new.
 4. Capture an event if it is new.
 
-For `https://status.posthog.com/history.rss`, this looks like this:
+For `https://www.posthogstatus.com/history.rss`, this looks like this:
 
 <iframe src="https://www.val.town/embed/ianvph.posthogStatusTracker" height="715" frameBorder="0" allowFullScreen></iframe>
 

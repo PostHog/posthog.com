@@ -17,7 +17,7 @@ category: General
 
 Welcome insight seekers, very British ContentHog here. Some quick updates for you:
 
-- We now have a [public PostHog status page](https://status.posthog.com/)
+- We now have a [public PostHog status page](https://www.posthogstatus.com/)
 - You can vote on what we do on the [new roadmap page](https://posthog.com/roadmap)
 - [The future of PostHog?](https://github.com/PostHog/posthog/issues/12923) 🤔 🤯
 
