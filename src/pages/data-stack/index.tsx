@@ -17,7 +17,6 @@ import {
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { useApp } from '../../context/App'
-import useProduct from '../../hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { useWindow } from '../../context/Window'
 import TeamMember from 'components/TeamMember'
@@ -31,15 +30,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function CDP(): JSX.Element {
-    // Define the specific data products we want to display in order
-    const dataProducts = ['sql', 'data_warehouse', 'cdp', 'api', 'webhooks']
-
-    // Get all products and filter to only the data category ones we want
-    const allProducts = useProduct()
-    const products = Array.isArray(allProducts)
-        ? dataProducts.map((handle) => allProducts.find((product: any) => product.handle === handle)).filter(Boolean)
-        : []
-
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
@@ -168,7 +158,7 @@ export default function CDP(): JSX.Element {
                             </h2>
                         </>
                     ),
-                } as any)}
+                } as { header?: React.ReactNode })}
             >
                 {/* 
                 
@@ -290,8 +280,10 @@ export default function CDP(): JSX.Element {
                 <h3>PostHog&apos;s integrated data warehouse</h3>
                 <p>
                     PostHog includes an integrated data warehouse with enough in-built tools that your data never needs
-                    to travel anywhere else. This eliminates the need to stitch together multiple vendors, while also
-                    putting your product data and business data in the same place for complex querying.
+                    to travel anywhere else. You can query and model data directly in PostHog, or use it across tools
+                    such as feature flags, experiments, and more. This eliminates the need to stitch together multiple
+                    vendors, while also giving you the flexibility to export data via our CDP if you have specific
+                    tooling needs.
                 </p>
                 <p>
                     Instead of managing separate tools for analytics, experimentation, feature flags, and warehousing,

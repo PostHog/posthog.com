@@ -37,12 +37,15 @@ export default function WarehouseNative(): JSX.Element {
                 <div className="rounded-lg border border-primary/20 bg-accent/30 p-4 my-6 not-prose">
                     <p className="font-medium mb-2">tl;dr</p>
                     <p>
-                        PostHog includes an integrated data warehouse with enough tools that your data never needs to
+                        PostHog enables you to connect external warehouses (like Snowflake or BigQuery) as sources to
+                        use warehouse tables inside PostHog. This moves selected data into PostHog and runs queries on
+                        our compute. You keep your data in your existing warehouse while still benefitting from PostHog
+                        tools such as analytics, experiments, and feature flags.
+                    </p>
+                    <p>
+                        Alternatively, you can use PostHog's integrated data warehouse so that your data never needs to
                         travel. You can store and model data in PostHog&apos;s warehouse, then use it across PostHog
-                        tools such as analytics, experiments, feature flags, and more, without stitching together
-                        multiple vendors. Alternatively, you can connect external warehouses (like Snowflake or
-                        BigQuery) as sources to use your warehouse tables inside PostHog. Queries run on PostHog
-                        compute.
+                        tools without stitching together multiple vendors or maintaining complex ETL pipelines.
                     </p>
                 </div>
 
@@ -55,24 +58,27 @@ export default function WarehouseNative(): JSX.Element {
                     and Amplitude offer — they run queries directly in your existing warehouse.
                 </p>
                 <p>
-                    PostHog takes a different approach: we provide an integrated data warehouse that works seamlessly
-                    with PostHog tools. The tools are integrated to the warehouse, rather than being native to an
-                    external warehouse. Alternatively, you can connect external warehouses as sources to use your
-                    warehouse tables inside PostHog and run the queries on PostHog compute.
+                    PostHog takes a different approach: we give you the flexibility to either move selected data into
+                    PostHog from an external warehouse, or to use our integrated data warehouse. Both options enable you
+                    to use warehouse data with PostHog tools and run queries on our compute, while also giving you
+                    complete control of where data is stored.
                 </p>
 
                 <h2>What does PostHog support today?</h2>
                 <p>
-                    PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link> which works with
-                    other PostHog tools such as product analytics, experiments, and feature flags. If you&apos;re using
-                    PostHog as your data warehouse, your data stays in PostHog and can be accessed by other PostHog
-                    tools, eliminating the need to stitch multiple vendors together and maintain complex ETL pipelines.
+                    If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, you can
+                    connect it as a source and sync the tables and fields you need into PostHog via our warehouse
+                    sources. Queries then run on PostHog compute, enabling you to use warehouse data across PostHog
+                    tools. This requires moving data out of the warehouse and running compute in PostHog, but gives you
+                    the flexibility to keep your data in your existing warehouse while still benefitting from PostHog
+                    tools.
                 </p>
                 <p>
-                    If you&apos;re using an external warehouse, such as Snowflake, BigQuery, or Databricks, you can
-                    connect it as a source and sync the tables and fields you need into PostHog via our warehouse sources. Queries
-                    then run on PostHog compute, enabling you to use warehouse data across PostHog tools. This requires
-                    moving data out of the warehouse and running compute in PostHog.
+                    Alternatively, PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link>{' '}
+                    which works with other PostHog tools such as product analytics, experiments, and feature flags. If
+                    you&apos;re using PostHog as your data warehouse, your data stays in PostHog and can be accessed by
+                    other PostHog tools, eliminating the need to stitch multiple vendors together and maintain complex
+                    ETL pipelines.
                 </p>
 
                 <h2>What does PostHog not support today?</h2>
