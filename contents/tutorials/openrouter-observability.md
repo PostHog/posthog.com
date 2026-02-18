@@ -11,8 +11,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox type="fyi" title="New: Simpler options available" icon="IconInfo">
 
-Since publishing this post, we've integrated further with OpenRouter. **OpenRouter Broadcast** is the easiest way to capture LLM data in PostHog. Enable it in your OpenRouter settings and all your LLM calls are tracked automatically, with no SDK instrumentation required.
-See the [OpenRouter installation docs](/docs/llm-analytics/installation/openrouter) for details.
+Since publishing this post, we've integrated further with OpenRouter. You can enable the PostHog integration directly through **OpenRouter Broadcast** — no SDK instrumentation required. All your LLM calls will then be tracked automatically in PostHog's LLM Analytics. See the [OpenRouter installation docs](/docs/llm-analytics/installation/openrouter) for details.
 
 </CalloutBox>
 
