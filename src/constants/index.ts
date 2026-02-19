@@ -1,5 +1,5 @@
 // Paths that have raw markdown available for copying/downloading
-export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook'] as const
+export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook', '/tutorials'] as const
 
 // Default avatar fallback (Max the hedgehog)
 export const AVATAR_FALLBACK_URL =
