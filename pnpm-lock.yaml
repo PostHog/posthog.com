@@ -78,8 +78,8 @@ importers:
         specifier: 0.36.0
         version: 0.36.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/types':
-        specifier: 1.351.2
-        version: 1.351.2
+        specifier: 1.351.4
+        version: 1.351.4
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3241,8 +3241,8 @@ packages:
   '@posthog/types@1.350.0':
     resolution: {integrity: sha512-Z8s3xc70RByHDT9u/xB1lLYHFNmEgY7nveqY8hXRPK39+vKrhosrQQOjnURLKAdyi9fRgoLc0D2yL/qRBKTxvQ==}
 
-  '@posthog/types@1.351.2':
-    resolution: {integrity: sha512-zopbzO9QiKZp6SXgM+3rZ8z1rRbZQd6TSGWXltE/yNqdKjGlaxGLnCgkyoXA/YFFO5JhkkQzE4SM+LHRhnd4CQ==}
+  '@posthog/types@1.351.4':
+    resolution: {integrity: sha512-PMrNdOGVIiUczixF+AkodxIigAr3OM2LMfs565uTPZaIUip7S+njoaZRoIT66VJJviWtbLtzJHR49YJtIRIiWQ==}
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -20695,7 +20695,7 @@ snapshots:
 
   '@posthog/types@1.350.0': {}
 
-  '@posthog/types@1.351.2': {}
+  '@posthog/types@1.351.4': {}
 
   '@preact/signals-core@1.12.1': {}
 
@@ -26182,7 +26182,7 @@ snapshots:
   capital-case@1.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
       upper-case-first: 2.0.2
 
   capture-exit@2.0.0:
@@ -26704,7 +26704,7 @@ snapshots:
   constant-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
       upper-case: 2.0.2
 
   constants-browserify@1.0.0: {}
@@ -30792,7 +30792,7 @@ snapshots:
   header-case@2.0.4:
     dependencies:
       capital-case: 1.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   helpertypes@0.0.19: {}
 
@@ -34696,7 +34696,7 @@ snapshots:
   path-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   path-data-parser@0.1.0: {}
 
@@ -37026,7 +37026,7 @@ snapshots:
   sentence-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
       upper-case-first: 2.0.2
 
   serialize-javascript@4.0.0:
@@ -37298,7 +37298,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.8.1
+      tslib: 2.4.1
 
   snapdragon-node@2.1.1:
     dependencies:
