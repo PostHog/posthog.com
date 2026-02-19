@@ -5899,6 +5899,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Install PostHog SDK',
+                    url: '/docs/workflows/installation',
+                    icon: 'IconTerminal',
+                    color: 'blue',
+                },
+                {
                     name: 'Configure a channel',
                     url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
