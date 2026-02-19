@@ -173,6 +173,12 @@ The **widget session ID** is a persistent UUID that:
 - Is used for access control (only this browser can access its tickets)
 - Survives user identification changes (`posthog.identify()`)
 
+<CalloutBox icon="IconInfo" title="Switching browsers or devices" type="fyi">
+
+Since tickets are tied to the widget session ID, they aren't accessible from a different browser or device. Users can recover their tickets via an email-based restore flow. See the [widget setup docs](/docs/support/widget) for details.
+
+</CalloutBox>
+
 ## User identification
 
 Conversations work with both anonymous and identified users.
@@ -269,6 +275,7 @@ The SDK persists the following data in localStorage:
 This data is cleared when:
 - `posthog.reset()` is called
 - The user clears browser storage
+- The user restores conversations on a new device (widget session ID is replaced)
 
 ## Error handling
 
