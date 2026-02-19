@@ -7,18 +7,7 @@ import AgentPrompt from '../integrate/_snippets/agent-prompt.mdx'
 
 Workflows is a no-code product – you can create and launch Workflows without installing any SDK. However, installing a PostHog SDK unlocks event-based triggers, letting you start Workflows when users perform specific actions in your app.
 
-## Do I need an SDK?
-
-Without an SDK, you can still trigger Workflows programmatically using [webhooks](/docs/workflows/workflow-builder#triggers).
-
-With an SDK installed, you can also trigger Workflows when:
-
-- A user performs any autocaptured event, such as pageviews, clicks, and form submissions
-- You send custom events from your app like `signed_up`, `purchase_completed`, or `onboarding_finished`
-
-## Install PostHog
-
-To enable event-based triggers, install the PostHog SDK for your platform. These are the same SDKs used for [Product Analytics](/docs/product-analytics) – if you already have PostHog installed, you're good to go.
+These are the same SDKs used for [Product Analytics](/docs/product-analytics) – if you already have PostHog installed, you're good to go.
 
 ### Install with the AI wizard
 
@@ -35,6 +24,15 @@ It also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor
 ### Frameworks
 
 <WorkflowsInstallationFrameworks />
+
+<CalloutBox type="fyi" title="Do I need an SDK?">
+
+Without an SDK, you can still trigger Workflows programmatically using [webhooks](/docs/workflows/workflow-builder#triggers). With an SDK installed, you can also trigger Workflows when:
+
+- A user performs any autocaptured event, such as pageviews, clicks, and form submissions
+- You send custom events from your app like `signed_up`, `purchase_completed`, or `onboarding_finished`
+
+</CalloutBox>
 
 ## Set up Workflows
 
