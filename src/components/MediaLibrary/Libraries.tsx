@@ -1,34 +1,31 @@
 import { OSInput, OSSelect } from 'components/OSForm'
 import React, { useState } from 'react'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconChevronDown } from '@posthog/icons'
-
-interface Library {
-    name: string
-    folder: string
-    assetCount: number
-}
-
-const libraries: Library[] = [{ name: 'Hedgehogs', folder: 'hogs', assetCount: 0 }]
+import { IconArrowLeft } from '@posthog/icons'
+import Folder, { MediaFolder } from './Folder'
 
 export default function Libraries(): JSX.Element {
     const [search, setSearch] = useState('')
     const [tag, setTag] = useState('all-tags')
     const [tags] = useState<{ id: string; attributes: { label: string } }[]>([])
+    const [currentFolder, setCurrentFolder] = useState<MediaFolder | null>(null)
+    const [folderStack, setFolderStack] = useState<MediaFolder[]>([])
 
-    const handleSearch = (value: string) => {
-        setSearch(value)
-        // TODO: Implement library search
+    const handleFolderClick = (folder: MediaFolder) => {
+        if (currentFolder) {
+            setFolderStack((prev) => [...prev, currentFolder])
+        }
+        setCurrentFolder(folder)
+        setSearch('')
+    }
+
+    const handleBack = () => {
+        setCurrentFolder(folderStack.at(-1) ?? null)
+        setFolderStack((prev) => prev.slice(0, -1))
+        setSearch('')
     }
 
     const handleTagChange = (value: string) => {
         setTag(value)
-        // TODO: Implement library tag filtering
-    }
-
-    const handleLibraryClick = (library: Library) => {
-        // TODO: Implement library folder navigation
-        console.log('Clicked library:', library)
     }
 
     return (
@@ -42,7 +39,7 @@ export default function Libraries(): JSX.Element {
                         showLabel={false}
                         label="Search libraries"
                         value={search}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
                     />
                 </div>
                 <div className="w-[150px]">
@@ -59,26 +56,24 @@ export default function Libraries(): JSX.Element {
                     />
                 </div>
             </div>
+
+            {currentFolder && (
+                <div className="flex items-center gap-2 mt-2 px-1">
+                    <button
+                        type="button"
+                        onClick={handleBack}
+                        className="flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors"
+                    >
+                        <IconArrowLeft className="size-4" />
+                        Back
+                    </button>
+                    <span className="text-sm text-secondary">/</span>
+                    <span className="text-sm font-medium text-primary">{currentFolder.attributes.name}</span>
+                </div>
+            )}
+
             <div className="flex-grow-1 min-h-0 mt-2">
-                <ScrollArea>
-                    <ul className="list-none m-0 p-0 divide-y divide-border">
-                        {libraries.map((library) => (
-                            <li key={library.folder}>
-                                <button
-                                    type="button"
-                                    onClick={() => handleLibraryClick(library)}
-                                    className="w-full flex items-center justify-between p-2 hover:bg-accent transition-colors text-left rounded"
-                                >
-                                    <div>
-                                        <div className="font-semibold text-primary">{library.name}</div>
-                                        <div className="text-sm text-secondary">{library.assetCount} assets</div>
-                                    </div>
-                                    <IconChevronDown className="size-8 text-secondary -rotate-90" />
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </ScrollArea>
+                <Folder folderId={currentFolder?.id ?? null} search={search} onFolderClick={handleFolderClick} />
             </div>
         </div>
     )
