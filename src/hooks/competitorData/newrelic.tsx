@@ -39,6 +39,50 @@ export const newrelic = {
         session_replay: {
             available: true,
         },
+        logs: {
+            // I have not checked any of this
+            available: true,
+            core_logging_and_ingestion: {
+                features: {
+                    centralized_log_ingestion_search: true,
+                    live_tail_real_time_logs: true,
+                    native_open_telemetry_ingest: true,
+                    vendor_agnostic_sdks: true,
+                },
+            },
+            investigation_workflow: {
+                features: {
+                    click_to_pivot_investigations: false,
+                    logs_scoped_by_investigation_context: false,
+                    ai_assisted_log_summaries: true,
+                },
+            },
+            debugging_integrations: {
+                features: {
+                    built_in_error_tracking: true,
+                    built_in_session_replay: false,
+                    product_analytics_context: false,
+                },
+            },
+            observability: {
+                features: {
+                    metrics: true,
+                    traces: true,
+                    alerting: true,
+                    infra_monitoring: true,
+                },
+            },
+            pricing: {
+                features: {
+                    ingest_only_pricing: false,
+                    no_query_compute_fees: false,
+                    predictable_at_scale: false,
+                },
+            },
+        },
+        llm_analytics: {
+            available: false,
+        },
         surveys: {
             available: false,
         },
@@ -115,6 +159,7 @@ export const newrelic = {
             reverse_proxy: false,
             role_based_access_control: true,
             saml_sso: true,
+            siem: false,
             soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,

@@ -158,7 +158,7 @@ The open-source gem is free with unlimited flags. Flipper Cloud offers a free pl
 
 ### What is FeatBit?
 
-FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like Datadog, Grafana, and Amplitude.
+FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like [Datadog](/blog/best-datadog-alternatives), Grafana, and Amplitude.
 
 FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, and OpenTelemetry for observability. It's capable of supporting over 1 million simultaneous online users.
 

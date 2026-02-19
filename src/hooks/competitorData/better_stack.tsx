@@ -5,6 +5,18 @@ export const better_stack = {
         icon: '/images/competitors/betterstack.png',
     },
     products: {
+        error_tracking: {
+            available: true,
+        },
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        llm_analytics: {
+            available: false,
+        },
         logs: {
             available: true,
             core_logging_and_ingestion: {
@@ -33,6 +45,7 @@ export const better_stack = {
                 features: {
                     metrics: true,
                     traces: true,
+                    alerting: true,
                     infra_monitoring: true,
                 },
             },
@@ -43,6 +56,20 @@ export const better_stack = {
                     predictable_at_scale: true,
                 },
             },
+        },
+    },
+    platform: {
+        deployment: {
+            self_host: false,
+        },
+        pricing: {
+            transparent_pricing: true,
+        },
+        tools: {
+            ai_assistant: true,
+        },
+        security: {
+            siem: false,
         },
     },
 }

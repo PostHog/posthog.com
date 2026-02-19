@@ -5,6 +5,18 @@ export const grafana_loki = {
         icon: '/images/competitors/grafana-loki.png',
     },
     products: {
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        error_tracking: {
+            available: true,
+        },
+        llm_analytics: {
+            available: false,
+        },
         logs: {
             available: true,
             core_logging_and_ingestion: {
@@ -33,6 +45,7 @@ export const grafana_loki = {
                 features: {
                     metrics: true,
                     traces: true,
+                    alerting: true,
                     infra_monitoring: true,
                 },
             },
@@ -43,6 +56,20 @@ export const grafana_loki = {
                     predictable_at_scale: true,
                 },
             },
+        },
+    },
+    platform: {
+        deployment: {
+            self_host: true,
+        },
+        pricing: {
+            transparent_pricing: true,
+        },
+        tools: {
+            ai_assistant: true,
+        },
+        security: {
+            siem: false,
         },
     },
 }

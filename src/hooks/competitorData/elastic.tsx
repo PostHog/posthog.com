@@ -5,6 +5,15 @@ export const elastic = {
         icon: '/images/competitors/elastic.png',
     },
     products: {
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        error_tracking: {
+            available: true,
+        },
         logs: {
             available: true,
             core_logging_and_ingestion: {
@@ -33,6 +42,7 @@ export const elastic = {
                 features: {
                     metrics: true,
                     traces: true,
+                    alerting: true,
                     infra_monitoring: true,
                 },
             },
@@ -43,6 +53,23 @@ export const elastic = {
                     predictable_at_scale: false,
                 },
             },
+        },
+        llm_analytics: {
+            available: true,
+        },
+    },
+    platform: {
+        deployment: {
+            self_host: true,
+        },
+        pricing: {
+            transparent_pricing: false,
+        },
+        tools: {
+            ai_assistant: true,
+        },
+        security: {
+            siem: true,
         },
     },
 }
