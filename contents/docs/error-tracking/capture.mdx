@@ -44,7 +44,13 @@ posthog.init('<ph_project_api_key>', {
 
 ### Manual exception capture
 
-You can also manually call the exception capture method. 
+You can also manually call the exception capture method.
+
+<CalloutBox icon="IconWarning" title="Always use captureException()" type="warning">
+
+Never manually capture `$exception` events using `posthog.capture('$exception', {...})`. Always use `posthog.captureException(error)` instead - it handles the correct event format, stack trace processing, and source map integration automatically.
+
+</CalloutBox>
 
 <MultiLanguage>
 
@@ -84,6 +90,16 @@ posthog.capture_exception(
     custom_list: ['custom_value_1', 'custom_value_2']
   }
 )
+```
+
+```go
+exception := posthog.NewDefaultException(
+    time.Now(),
+    "user_distinct_id",
+    "ErrorType",
+    err.Error(),
+)
+client.Enqueue(exception)
 ```
 
 </MultiLanguage>
@@ -183,6 +199,24 @@ rescue => e
     }
   )
 end
+```
+
+```go
+fingerprint := "CustomExceptionGroup"
+
+exception := posthog.Exception{
+    DistinctId: "user_123",
+    Timestamp:  time.Now(),
+    ExceptionList: []posthog.ExceptionItem{
+        {
+            Type:  "ActivationError",
+            Value: err.Error(),
+        },
+    },
+    // Optional: override the fingerprint for custom grouping
+    ExceptionFingerprint: &fingerprint,
+}
+client.Enqueue(exception)
 ```
 
 </MultiLanguage>
@@ -313,3 +347,15 @@ import SuppressionRules from './_snippets/suppression-rules.mdx'
 import BurstProtection from './_snippets/burst-protection.mdx'
 
 <BurstProtection />
+
+## Common problems
+
+### Don't use `posthog.capture()` for exceptions
+
+<CalloutBox icon="IconWarning" title="Don't do this" type="caution">
+
+  **Do not** use `posthog.capture('$exception', { ... })` and try to attach exception metadata yourself (e.g. `$exception_stack_trace_raw`, `$exception_type`, `$exception_message`). This approach fails in the vast majority of cases because the exception event schema is strict and the SDK does not normalize or validate these properties when you use `capture()`.
+
+  **Do this instead:** use `posthog.captureException(error)`. It accepts an `Error` object (or your runtime's equivalent), extracts stack trace, type, and message correctly, and sends a valid `$exception` event with all required metadata. You can still pass optional properties as the second argument.
+
+</CalloutBox>
