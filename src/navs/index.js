@@ -1645,6 +1645,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Product enablement',
+                url: '/handbook/growth/sales/product-enablement',
+            },
+            {
                 name: 'Use cases',
                 url: '',
                 children: [
@@ -4291,6 +4295,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/error-tracking/installation/go',
+                        },
+                        {
                             name: 'React Native',
                             url: '/docs/error-tracking/installation/react-native',
                         },
@@ -5401,6 +5409,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Prompt management',
+                    url: '/docs/llm-analytics/prompts',
+                    icon: 'IconPencil',
+                    color: 'purple',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
                     name: 'Trace summarization',
                     url: '/docs/llm-analytics/summarization',
                     icon: 'IconAI',
@@ -5893,6 +5911,12 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install PostHog SDK',
+                    url: '/docs/workflows/installation',
+                    icon: 'IconTerminal',
+                    color: 'blue',
                 },
                 {
                     name: 'Configure a channel',

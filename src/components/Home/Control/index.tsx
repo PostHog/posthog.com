@@ -31,6 +31,7 @@ import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
+import { useFeatureFlagVariantKey } from 'posthog-js/react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { PRODUCT_COUNT, APP_COUNT } from '../../../constants'
 import Start from 'components/Start'
@@ -794,7 +795,7 @@ const ProductCategoryGrid = () => {
     const allProducts = useProduct() as any[]
 
     return (
-        <div className="@container mb-12">
+        <div className="product-section-test @container mb-12">
             <div className="grid grid-cols-2 @xl:grid-cols-3 @3xl:grid-cols-4 gap-x-6 gap-y-8">
                 {productCategories.map((category) => (
                     <ProductCategoryColumn key={category.name} category={category} allProducts={allProducts} />
@@ -826,7 +827,7 @@ const ProductsSectionControl = () => (
 
 const ProductsSectionTest = () => (
     <>
-        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+        <header className="product-section-test flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
             <h2 className="m-0 tracking-tight">Products</h2>
             <Link
                 to="/products"
@@ -841,18 +842,12 @@ const ProductsSectionTest = () => (
 )
 
 const ProductsSection = () => {
-    const posthog = usePostHog()
+    const variant = useFeatureFlagVariantKey('homepage-product-groupings')
 
     return (
         <RenderInClient
             placeholder={<ProductsSectionControl />}
-            render={() =>
-                posthog?.getFeatureFlag?.('homepage-product-groupings') === 'experiment' ? (
-                    <ProductsSectionTest />
-                ) : (
-                    <ProductsSectionControl />
-                )
-            }
+            render={() => (variant === 'experiment' ? <ProductsSectionTest /> : <ProductsSectionControl />)}
         />
     )
 }
