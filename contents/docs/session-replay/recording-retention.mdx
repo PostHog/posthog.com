@@ -26,8 +26,23 @@ The longest available retention period depends on your PostHog plan:
 | Scale | Up to 1 year
 | Enterprise | Up to 5 years
 
-> **Note:** When a recording expires, the deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI. Once a recording has been deleted we are unable to restore it - this makes data retention a useful feature if you are subject to data protection regulations.
+<CalloutBox icon="IconInfo" title="Deletion is permanent" type="caution">
+
+When a recording expires or is manually deleted, it is permanently removed and cannot be recovered. Recordings may still appear briefly after the retention period expires, but once fully deleted they cannot be restored. This makes data retention a useful feature if you are subject to data protection regulations.
+
+</CalloutBox>
 
 ## Exporting recordings
 
 You can export individual recordings you want to preserve by clicking **Export to JSON** in the more options menu in the top right of a recording. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
+
+## Deleting recordings
+
+You can permanently delete individual recordings or delete in bulk.
+
+- **Single delete** – Open a recording and click **Delete** in the more options menu in the top right.
+- **Bulk delete** – Select multiple recordings from a playlist and click **Delete**. You can delete up to 100 recordings at a time.
+
+Deleted recordings are permanently destroyed and cannot be recovered. If you or a teammate tries to access a deleted recording, PostHog displays a "Recording permanently deleted" message with the deletion timestamp.
+
+For more on data deletion and GDPR compliance, see [data deletion](/docs/privacy/data-storage#data-deletion).
