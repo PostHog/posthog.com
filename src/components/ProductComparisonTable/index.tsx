@@ -25,6 +25,7 @@ import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
 import { devcycle } from '../../hooks/competitorData/devcycle'
 import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
+import { dynatrace } from '../../hooks/competitorData/dynatrace'
 import { elastic } from '../../hooks/competitorData/elastic'
 import { eppo } from '../../hooks/competitorData/eppo'
 import { fathom } from '../../hooks/competitorData/fathom'
@@ -611,6 +612,7 @@ export default function ProductComparisonTable({
         datadog,
         devcycle,
         dynamic_yield,
+        dynatrace,
         elastic,
         eppo,
         fathom,
