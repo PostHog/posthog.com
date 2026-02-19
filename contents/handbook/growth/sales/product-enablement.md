@@ -73,7 +73,7 @@ All content should include a "last updated" date so team members know they're wo
 |--------------|------------|---------------------|
 | Product analytics | Ben Smith  | - |
 | Web/Customer/Revenue analytics | TBD        | - |
-| Session replay | TBD        | - |
+| Session replay | Dana        | - |
 | Feature flags | Sachin     | - |
 | Experiments | Sachin     | - |
 | Error tracking | Christophe | - |
