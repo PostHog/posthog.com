@@ -46,7 +46,8 @@ export function MediaLibraryProvider({ children }: { children: React.ReactNode }
             const jwt = await getJwt()
             if (!jwt) return
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders`, {
+            const query = qs.stringify({ populate: ['parent', 'children'] }, { encodeValuesOnly: true })
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders?${query}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                 },
@@ -98,63 +99,4 @@ export function useMediaLibraryContext() {
         throw new Error('useMediaLibraryContext must be used within a MediaLibraryProvider')
     }
     return context
-}
-
-interface UseFoldersResult {
-    folders: MediaFolder[]
-    isLoading: boolean
-    error: string | null
-    refresh: () => void
-}
-
-export function useFolders(folderId: number | null): UseFoldersResult {
-    const { getJwt } = useUser()
-    const [folders, setFolders] = useState<MediaFolder[]>([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
-
-    const fetchFolders = useCallback(async () => {
-        try {
-            setIsLoading(true)
-            setError(null)
-            const jwt = await getJwt()
-
-            const isRoot = folderId === null
-            const query = qs.stringify(
-                {
-                    populate: ['children'],
-                    ...(isRoot && {
-                        filters: { parent: { id: { $null: true } } },
-                    }),
-                },
-                { encodeValuesOnly: true }
-            )
-
-            const url = isRoot
-                ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders?${query}`
-                : `${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/${folderId}?${query}`
-
-            const response = await fetch(url, {
-                headers: { Authorization: `Bearer ${jwt}` },
-            })
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch folders')
-            }
-
-            const data = await response.json()
-            setFolders(isRoot ? data.data || [] : data.data?.attributes?.children?.data || [])
-        } catch (err) {
-            console.error('Failed to fetch folders:', err)
-            setError(err instanceof Error ? err.message : 'Failed to fetch folders')
-        } finally {
-            setIsLoading(false)
-        }
-    }, [folderId, getJwt])
-
-    useEffect(() => {
-        fetchFolders()
-    }, [fetchFolders])
-
-    return { folders, isLoading, error, refresh: fetchFolders }
 }

@@ -4,7 +4,7 @@ import { IconArrowLeft, IconChevronDown, IconSpinner } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import Image from './Image'
-import { MediaFolder, useFolders } from './context'
+import { MediaFolder, useMediaLibraryContext } from './context'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
 
 function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => void }) {
@@ -29,8 +29,10 @@ export default function Libraries(): JSX.Element {
     const [currentFolder, setCurrentFolder] = useState<MediaFolder | null>(null)
     const [folderStack, setFolderStack] = useState<MediaFolder[]>([])
 
-    const folderId = currentFolder?.id ?? null
-    const { folders, isLoading: foldersLoading, error: foldersError } = useFolders(folderId)
+    const { folders: allFolders, foldersLoading } = useMediaLibraryContext()
+    const folders = allFolders.filter((f) =>
+        currentFolder ? f.attributes.parent?.data?.id === currentFolder.id : !f.attributes.parent?.data
+    )
     const {
         images,
         isLoading: imagesLoading,
@@ -40,7 +42,7 @@ export default function Libraries(): JSX.Element {
     } = useMediaLibrary({
         showAll: true,
         search,
-        folderId,
+        folderId: currentFolder?.id ?? null,
     })
 
     const isLoading = foldersLoading || imagesLoading
@@ -94,9 +96,7 @@ export default function Libraries(): JSX.Element {
                     </div>
                 )}
 
-                {foldersError && <div className="text-center text-red py-8">{foldersError}</div>}
-
-                {!showLoading && !foldersError && !hasContent && (
+                {!showLoading && !hasContent && (
                     <div className="text-center text-secondary py-8">
                         {currentFolder ? 'This folder is empty' : 'No folders found'}
                     </div>
