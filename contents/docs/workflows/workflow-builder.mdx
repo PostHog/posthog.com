@@ -46,9 +46,16 @@ Every workflow starts with a trigger. Triggers represent actions taken by users 
 | Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
 | Webhook trigger | Programmatically start a workflow with a webhook |
 
+
+<CalloutBox icon="IconInfo" title="SDK installation is optional" type="fyi">
+
+Workflows doesn't require an SDK. Webhook triggers work without any code changes. To use event triggers, install a [PostHog SDK](/docs/getting-started/install) so events are captured and available as workflow triggers.
+
+</CalloutBox>
+
 ### Event triggers
 
-Event triggers are any PostHog event. These can be manually or automatically [autocaptured](/docs/data/autocapture) by our SDKs. They can be filtered by the event properties and persons properties attached to the event. 
+Event triggers fire on any [PostHog event](/docs/data/events). These can be manually captured or automatically [autocaptured](/docs/data/autocapture) by a PostHog SDK. To use event triggers, you need a PostHog SDK installed and capturing events. They can be filtered by the event properties and person properties attached to the event.
 
 To filter your events, click on the three lines icon next to the event name and select **Add filter**.
 
