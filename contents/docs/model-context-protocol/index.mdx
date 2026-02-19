@@ -102,6 +102,44 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 </details>
 
+<details>
+
+<summary>Pinning to a specific organization or project?</summary>
+
+If you're building a programmatic integration or want to restrict the MCP session to a specific organization or project, you can pin the context using headers or query parameters.
+
+When you pin the context, the `switch-organization` and `switch-project` tools are automatically excluded from the available tool list:
+
+- When `projectId` is provided: both `switch-organization` and `switch-project` are excluded
+- When only `organizationId` is provided: only `switch-organization` is excluded
+
+**Headers:**
+- `x-posthog-organization-id` - Pin to a specific organization
+- `x-posthog-project-id` - Pin to a specific project
+
+**Query parameters:**
+- `organization_id` - Pin to a specific organization
+- `project_id` - Pin to a specific project
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-organization-id": "your_org_id",
+        "x-posthog-project-id": "your_project_id"
+      }
+    }
+  }
+}
+```
+
+</details>
+
 
 ## Available Tools
 
@@ -120,6 +158,12 @@ Here are some examples of what you can ask your AI agent to do with the PostHog 
 **Prompt:** "Create a feature flag called 'new-checkout-flow' that's enabled for 20% of users"
 
 The agent will use the `create-feature-flag` tool to create the flag with a 20% rollout and return the configuration including the key, rollout percentage, and a link to the flag in PostHog.
+
+### Multivariate feature flags
+
+**Prompt:** "Create a multivariate feature flag called 'homepage-hero-test' with three variants: control at 34%, variant_a at 33%, and variant_b at 33%"
+
+The agent will use the `create-feature-flag` tool with a `multivariate` configuration to create the flag with multiple variants. Variant rollout percentages must be integers that sum to 100.
 
 ### Analytics queries
 
@@ -161,6 +205,8 @@ The MCP server acts as a proxy to your PostHog instance. It does not store your 
 
 ## Next steps
 
+- [Replit integration](/docs/integrations/replit): Set up PostHog with Replit Agent
+- [v0 integration](/docs/integrations/v0): Set up PostHog with v0 and the Vercel Flags SDK
 - [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp): Check out GitHub repository for the MCP server
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
 - [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?

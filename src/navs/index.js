@@ -115,6 +115,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/tiktok-ads',
                 },
                 {
+                    name: 'Snapchat Ads',
+                    url: '/docs/cdp/sources/snapchat-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -566,6 +570,7 @@ export const handbookSidebar = [
             { name: 'Progression', url: '/handbook/people/career-progression' },
             { name: 'HR processes', url: '/handbook/people/grievances' },
             { name: 'BookHog', url: '/handbook/people/bookhog' },
+            { name: 'Philosophy club', url: '/handbook/people/philosophy-club' },
             { name: 'Offboarding', url: '/handbook/people/offboarding' },
         ],
     },
@@ -731,6 +736,10 @@ export const handbookSidebar = [
             {
                 name: 'Style guide',
                 url: '/handbook/docs-and-wizard/docs-style-guide',
+            },
+            {
+                name: 'Vale (prose linter)',
+                url: '/handbook/docs-and-wizard/vale',
             },
             {
                 name: 'MDX and components',
@@ -1636,6 +1645,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Product enablement',
+                url: '/handbook/growth/sales/product-enablement',
+            },
+            {
                 name: 'Use cases',
                 url: '',
                 children: [
@@ -2225,6 +2238,10 @@ export const docsMenu = {
                             url: '/docs/libraries/phoenix',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/libraries/ruby-on-rails',
+                        },
+                        {
                             name: 'React Router',
                             url: '/docs/libraries/react-router',
                             children: [
@@ -2560,6 +2577,14 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
+                        },
+                        {
+                            name: 'Replit integration',
+                            url: '/docs/integrations/replit',
+                        },
+                        {
+                            name: 'v0 integration',
+                            url: '/docs/integrations/v0',
                         },
                         {
                             name: 'LLM Analytics ↗',
@@ -4228,6 +4253,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/ruby',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/error-tracking/installation/ruby-on-rails',
+                        },
+                        {
                             name: 'React',
                             url: '/docs/error-tracking/installation/react',
                         },
@@ -4264,6 +4293,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/error-tracking/installation/go',
                         },
                         {
                             name: 'React Native',
@@ -4565,25 +4598,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Troubleshooting',
-                    url: '/docs/surveys/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/surveys/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Changelog',
-                    url: '/docs/surveys/changelog',
-                    icon: 'IconRocket',
-                    color: 'purple',
-                },
-                {
                     type: 'divider',
                 },
                 {
@@ -4601,6 +4615,37 @@ export const docsMenu = {
                     icon: 'IconUserPaths',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/surveys/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/surveys/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'SDK Feature Support',
+                    url: '/docs/surveys/sdk-feature-support',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/surveys/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -4667,6 +4712,12 @@ export const docsMenu = {
                     name: 'Button actions',
                     url: '/docs/product-tours/button-actions',
                     icon: 'IconButton',
+                    color: 'orange',
+                },
+                {
+                    name: 'Localization',
+                    url: '/docs/product-tours/localization',
+                    icon: 'IconGlobe',
                     color: 'orange',
                 },
                 {
@@ -4841,6 +4892,10 @@ export const docsMenu = {
                         {
                             name: 'Tiktok Ads',
                             url: '/docs/data-warehouse/sources/tiktok-ads',
+                        },
+                        {
+                            name: 'Snapchat Ads',
+                            url: '/docs/data-warehouse/sources/snapchat-ads',
                         },
                         {
                             name: 'Shopify',
@@ -5361,6 +5416,16 @@ export const docsMenu = {
                     badge: {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
+                    name: 'Clusters',
+                    url: '/docs/llm-analytics/clusters',
+                    icon: 'IconGraph',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
                 {
