@@ -6,6 +6,7 @@ import OSButton from 'components/OSButton'
 import Image from './Image'
 import { MediaFolder, useMediaLibraryContext } from './context'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
+import { useUser } from 'hooks/useUser'
 
 function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => void }) {
     const childCount = folder.attributes.children?.data?.length ?? 0
@@ -25,6 +26,7 @@ function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => vo
 }
 
 export default function Libraries(): JSX.Element {
+    const { fetchUser: refreshUser } = useUser()
     const [search, setSearch] = useState('')
     const [currentFolder, setCurrentFolder] = useState<MediaFolder | null>(null)
     const [folderStack, setFolderStack] = useState<MediaFolder[]>([])
@@ -60,6 +62,11 @@ export default function Libraries(): JSX.Element {
         setCurrentFolder(folderStack.at(-1) ?? null)
         setFolderStack((prev) => prev.slice(0, -1))
         setSearch('')
+    }
+
+    const handleImageMoved = () => {
+        refreshImages()
+        refreshUser()
     }
 
     return (
@@ -119,7 +126,7 @@ export default function Libraries(): JSX.Element {
                                 <ul className="list-none m-0 p-0 space-y-4 my-4">
                                     {images.map((image: any) => (
                                         <li key={image.id}>
-                                            <Image {...image} onMoved={refreshImages} />
+                                            <Image {...image} onMoved={handleImageMoved} />
                                         </li>
                                     ))}
                                 </ul>

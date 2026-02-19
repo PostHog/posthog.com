@@ -40,7 +40,7 @@ const query = (offset: number, options?: UseMediaLibraryOptions) => {
     }
 
     if (folderId) {
-        filters.mediaFolders = {
+        filters.mediaFolder = {
             id: {
                 $eq: folderId,
             },

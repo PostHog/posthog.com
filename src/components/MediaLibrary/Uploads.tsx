@@ -8,6 +8,7 @@ import OSButton from 'components/OSButton'
 import { IconSpinner } from '@posthog/icons'
 import debounce from 'lodash/debounce'
 import { useMediaLibraryContext } from './context'
+import { useUser } from 'hooks/useUser'
 
 interface UploadsProps {
     mediaUploading: number
@@ -15,6 +16,7 @@ interface UploadsProps {
 
 export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
     const { tags } = useMediaLibraryContext()
+    const { fetchUser: refreshUser } = useUser()
     const [showAll, setShowAll] = useState(false)
     const [tag, setTag] = useState('all-tags')
     const [search, setSearch] = useState('')
@@ -41,6 +43,11 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
         tag,
         search: debouncedSearch,
     })
+
+    const handleImageMoved = () => {
+        refresh()
+        refreshUser()
+    }
 
     return (
         <div className="h-full flex flex-col">
@@ -90,7 +97,7 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
                         ) : (
                             images?.map((image: any) => (
                                 <li key={image.id}>
-                                    <Image {...image} onMoved={refresh} />
+                                    <Image {...image} onMoved={handleImageMoved} />
                                 </li>
                             ))
                         )}

@@ -176,7 +176,12 @@ export default function Image({
     }
 
     const handleMoveToFolder = async (targetFolderId: string) => {
-        if (!targetFolderId || targetFolderId === String(currentFolderId)) return
+        if (!targetFolderId) return
+
+        if (targetFolderId === String(currentFolderId)) {
+            await handleRemoveFromFolder()
+            return
+        }
 
         setIsMoving(true)
         try {
@@ -207,6 +212,34 @@ export default function Image({
         } catch (error) {
             console.error('Failed to move to folder:', error)
             addToast({ description: 'Failed to move to folder', error: true, duration: 3000 })
+        } finally {
+            setIsMoving(false)
+        }
+    }
+
+    const handleRemoveFromFolder = async () => {
+        if (!currentFolderId) return
+
+        setIsMoving(true)
+        try {
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+                body: JSON.stringify({ mediaId: id, folderId: currentFolderId }),
+            })
+
+            addToast({
+                description: 'Removed from folder',
+                duration: 3000,
+            })
+
+            onMoved?.()
+        } catch (error) {
+            console.error('Failed to remove from folder:', error)
+            addToast({ description: 'Failed to remove from folder', error: true, duration: 3000 })
         } finally {
             setIsMoving(false)
         }
