@@ -332,6 +332,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             images: {
                                 sort: ['createdAt:desc'],
                                 populate: {
+                                    mediaFolder: true,
                                     tags: true,
                                     related: true,
                                 },

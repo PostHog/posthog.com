@@ -4,22 +4,21 @@ import React, { useEffect, useMemo, useState } from 'react'
 import Image from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
-import { useUser } from 'hooks/useUser'
 import OSButton from 'components/OSButton'
 import { IconSpinner } from '@posthog/icons'
 import debounce from 'lodash/debounce'
+import { useMediaLibraryContext } from './context'
 
 interface UploadsProps {
     mediaUploading: number
 }
 
 export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
-    const { getJwt } = useUser()
+    const { tags } = useMediaLibraryContext()
     const [showAll, setShowAll] = useState(false)
     const [tag, setTag] = useState('all-tags')
     const [search, setSearch] = useState('')
     const [debouncedSearch, setDebouncedSearch] = useState('')
-    const [tags, setTags] = useState<{ id: string; attributes: { label: string } }[]>([])
 
     const debouncedSetSearch = useMemo(
         () =>
@@ -37,31 +36,11 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
         return () => debouncedSetSearch.cancel()
     }, [debouncedSetSearch])
 
-    const { images, isLoading, hasMore, fetchMore } = useMediaLibrary({
+    const { images, isLoading, hasMore, fetchMore, refresh } = useMediaLibrary({
         showAll,
         tag,
         search: debouncedSearch,
     })
-
-    const fetchTags = async () => {
-        try {
-            const jwt = await getJwt()
-            const tags = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`, {
-                headers: {
-                    Authorization: `Bearer ${jwt}`,
-                },
-            })
-                .then((res) => res.json())
-                .then((data) => data.data)
-            setTags(tags)
-        } catch (error) {
-            console.error('Failed to fetch tags:', error)
-        }
-    }
-
-    useEffect(() => {
-        fetchTags()
-    }, [])
 
     return (
         <div className="h-full flex flex-col">
@@ -109,9 +88,9 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
                         ) : images.length === 0 ? (
                             <li className="text-center text-secondary py-8">No images found</li>
                         ) : (
-                            images?.map((image: { id: string | number; [key: string]: unknown }) => (
+                            images?.map((image: any) => (
                                 <li key={image.id}>
-                                    <Image {...image} allTags={tags} fetchTags={fetchTags} />
+                                    <Image {...image} onMoved={refresh} />
                                 </li>
                             ))
                         )}

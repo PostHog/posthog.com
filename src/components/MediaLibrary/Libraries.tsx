@@ -1,19 +1,55 @@
-import { OSInput, OSSelect } from 'components/OSForm'
+import { OSInput } from 'components/OSForm'
 import React, { useState } from 'react'
-import { IconArrowLeft } from '@posthog/icons'
-import Folder, { MediaFolder } from './Folder'
+import { IconArrowLeft, IconChevronDown, IconSpinner } from '@posthog/icons'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from 'components/OSButton'
+import Image from './Image'
+import { MediaFolder, useFolders } from './context'
+import { useMediaLibrary } from 'hooks/useMediaLibrary'
+
+function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => void }) {
+    const childCount = folder.attributes.children?.data?.length ?? 0
+    return (
+        <button
+            type="button"
+            onClick={onClick}
+            className="w-full flex items-center justify-between p-2 hover:bg-accent transition-colors text-left rounded"
+        >
+            <div>
+                <div className="font-semibold text-primary">{folder.attributes.name}</div>
+                {childCount > 0 && <div className="text-sm text-secondary">{childCount} subfolders</div>}
+            </div>
+            <IconChevronDown className="size-8 text-secondary -rotate-90" />
+        </button>
+    )
+}
 
 export default function Libraries(): JSX.Element {
     const [search, setSearch] = useState('')
-    const [tag, setTag] = useState('all-tags')
-    const [tags] = useState<{ id: string; attributes: { label: string } }[]>([])
     const [currentFolder, setCurrentFolder] = useState<MediaFolder | null>(null)
     const [folderStack, setFolderStack] = useState<MediaFolder[]>([])
 
+    const folderId = currentFolder?.id ?? null
+    const { folders, isLoading: foldersLoading, error: foldersError } = useFolders(folderId)
+    const {
+        images,
+        isLoading: imagesLoading,
+        hasMore,
+        fetchMore,
+        refresh: refreshImages,
+    } = useMediaLibrary({
+        showAll: true,
+        search,
+        folderId,
+    })
+
+    const isLoading = foldersLoading || imagesLoading
+    const filteredFolders = folders.filter((f) => f.attributes.name.toLowerCase().includes(search.toLowerCase()))
+    const hasContent = filteredFolders.length > 0 || images.length > 0
+    const showLoading = isLoading && !hasContent
+
     const handleFolderClick = (folder: MediaFolder) => {
-        if (currentFolder) {
-            setFolderStack((prev) => [...prev, currentFolder])
-        }
+        if (currentFolder) setFolderStack((prev) => [...prev, currentFolder])
         setCurrentFolder(folder)
         setSearch('')
     }
@@ -24,38 +60,17 @@ export default function Libraries(): JSX.Element {
         setSearch('')
     }
 
-    const handleTagChange = (value: string) => {
-        setTag(value)
-    }
-
     return (
         <div className="h-full flex flex-col">
-            <div className="flex space-x-2 flex-grow-0 flex-shrink-0">
-                <div className="flex-1">
-                    <OSInput
-                        size="md"
-                        direction="column"
-                        placeholder="Search..."
-                        showLabel={false}
-                        label="Search libraries"
-                        value={search}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-                    />
-                </div>
-                <div className="w-[150px]">
-                    <OSSelect
-                        label="All tags"
-                        showLabel={false}
-                        options={[
-                            { label: 'All tags', value: 'all-tags' },
-                            ...tags.map((tag) => ({ label: tag.attributes.label, value: tag.id })),
-                        ]}
-                        value={tag}
-                        onChange={handleTagChange}
-                        placeholder="Select tag..."
-                    />
-                </div>
-            </div>
+            <OSInput
+                size="md"
+                direction="column"
+                placeholder="Search..."
+                showLabel={false}
+                label="Search libraries"
+                value={search}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+            />
 
             {currentFolder && (
                 <div className="flex items-center gap-2 mt-2 px-1">
@@ -73,7 +88,61 @@ export default function Libraries(): JSX.Element {
             )}
 
             <div className="flex-grow-1 min-h-0 mt-2">
-                <Folder folderId={currentFolder?.id ?? null} search={search} onFolderClick={handleFolderClick} />
+                {showLoading && (
+                    <div className="flex items-center justify-center py-8">
+                        <IconSpinner className="size-6 animate-spin text-secondary" />
+                    </div>
+                )}
+
+                {foldersError && <div className="text-center text-red py-8">{foldersError}</div>}
+
+                {!showLoading && !foldersError && !hasContent && (
+                    <div className="text-center text-secondary py-8">
+                        {currentFolder ? 'This folder is empty' : 'No folders found'}
+                    </div>
+                )}
+
+                {hasContent && (
+                    <ScrollArea>
+                        {filteredFolders.length > 0 && (
+                            <ul className="list-none m-0 p-0 divide-y divide-border">
+                                {filteredFolders.map((folder) => (
+                                    <li key={folder.id}>
+                                        <FolderRow folder={folder} onClick={() => handleFolderClick(folder)} />
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+
+                        {currentFolder && images.length > 0 && (
+                            <>
+                                <ul className="list-none m-0 p-0 space-y-4 my-4">
+                                    {images.map((image: any) => (
+                                        <li key={image.id}>
+                                            <Image {...image} onMoved={refreshImages} />
+                                        </li>
+                                    ))}
+                                </ul>
+                                {hasMore && (
+                                    <div className="px-4 my-2">
+                                        <OSButton
+                                            variant="primary"
+                                            width="full"
+                                            onClick={fetchMore}
+                                            disabled={isLoading}
+                                        >
+                                            {isLoading ? (
+                                                <IconSpinner className="size-5 mx-auto animate-spin" />
+                                            ) : (
+                                                'Load more'
+                                            )}
+                                        </OSButton>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </ScrollArea>
+                )}
             </div>
         </div>
     )
