@@ -13,6 +13,27 @@ import Alpha from './_snippets/alpha.mdx'
 <QuestLog firstSpeechBubble="Let's guide your users!" lastSpeechBubble="You're ready to launch!">
 
 <QuestLogItem
+    title="Configure posthog-js"
+    subtitle="Required"
+    icon="IconCode"
+>
+
+First, ensure you have the SDK configured correctly - otherwise, tours will not be shown on your site.
+
+1. Update to at least `posthog-js` v1.324.0 (we always recommend the latest)
+2. Explicitly enable product tours in your config
+
+```typescript
+posthog.init('api-key', {
+  api_host: 'api-host',
+  defaults: '2025-05-24',
+  disable_product_tours: false, // add this!
+});
+```
+
+</QuestLogItem>
+
+<QuestLogItem
     title="Create your first tour"
     subtitle="Required"
     icon="IconSpotlight"
