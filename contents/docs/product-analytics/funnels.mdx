@@ -87,6 +87,13 @@ Next, add events users must complete to proceed through the funnel, ending with 
     alt="Funnel steps"
 />
 
+
+#### Combine events inline
+
+You can combine multiple events into a single funnel step using inline combination. This lets you treat several events as one step without creating a custom [action](/docs/data/actions).
+
+Select the events to include in a step, and they're combined using a logical `OR` – any occurrence of the selected events counts toward that step. This works the same way as [combining events inline in trends](/docs/product-analytics/trends/overview#combine-events-inline).
+
 By default, funnel steps must be completed **sequentially**, however you are able to change this behavior by selecting one of three different step orders:
 
 1. **Sequential** – Step B must happen after Step A, but any number events can happen between A and B.
