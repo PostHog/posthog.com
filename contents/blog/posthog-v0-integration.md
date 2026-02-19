@@ -25,7 +25,9 @@ That integration focuses on how flags and experiments run in production. Now, we
 
 ## What you can do with PostHog in v0
 
-v0 started as a fast way to turn ideas into working UI. With PostHog as a partner, building context now comes from real product data. v0 can build with an understanding of how users behave, what experiments are showing, and which features are live, gated, or still in progress. 
+v0 can build directly on real codebases, enabling teams to ship production-ready apps and agents rather than prototypes or toy projects.
+
+With PostHog as a partner, v0 doesn’t just generate code against your repository – it can do so with an understanding of how your product actually behaves in production. It has access to experiment results, user behavior patterns, feature flag state, and error impact, which means the software you generate reflects real product data rather than assumptions about how the product should work.
 
 There's so much you can do with PostHog in v0 that we asked our Growth team what types of prompts they'd start with.
 
@@ -101,7 +103,7 @@ When building AI features, cost trends matter as much as functionality. v0 can s
 
 ---
 
-Product data is most useful when it shows up at the moment decisions are made. With PostHog available in v0, you can build flows, features, and experiments with real context in mind instead of assumptions. Check it out: [v0.app](https://v0.app/)
+Product data is most useful when it shows up at the moment decisions are made. With PostHog available in v0, you can build agents, features, and experiments with real context in mind instead of assumptions. Check it out: [v0.app](https://v0.app/)
 
 To find out more about what you can do with v0 x PostHog (plus snacks and strong opinions about shipping), join us at: 
 
