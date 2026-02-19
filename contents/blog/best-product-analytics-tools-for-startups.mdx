@@ -20,7 +20,7 @@ seo:
 
 A tale as old as time: a founding team ships their MVP, installs [Google Analytics](/blog/posthog-vs-ga4), watches pageview numbers go up, and feels good about themselves. Three months later they realize they have no idea why users churn, what "activated" means, or which features actually matter, so they start duct-taping together a bunch of different tools to try to figure it out.
 
-If you're early stage, that's months of valuable context you just missed – context that could've gotten you to [PMF](/founders/product-market-fit-game) faster. If you're later in the game, you might've been flying blind for months or years without realizing it.
+If you're early stage, that's months of valuable context you just missed – context that could've gotten you to [product market fit](/founders/product-market-fit-game) faster. If you're later in the game, you might've been flying blind for months or years without realizing it.
 
 Don't be a cliché.
 
@@ -45,6 +45,15 @@ Before getting started, brush up on the basics:
 4. **[Feature adoption](/docs/product-analytics/lifecycle)** – you shipped a new feature. Is anyone using it? Are those users retaining better?
 
 For a deeper dive, check out our [AARRR pirate metrics framework](/product-engineers/aarrr-pirate-funnel) guide. Building a mobile app? See our comparison of the [best mobile app analytics tools](/blog/best-mobile-app-analytics-tools). If open source matters to you, we've also rounded up the [best open source analytics tools](/blog/best-open-source-analytics-tools).
+
+</details>
+
+<details>
+<summary>What is product-market fit (PMF)?</summary>
+
+Product-market fit means you've built something people actually want – and keep coming back to. It's the point where retention curves flatten instead of declining to zero, users start recommending your product without being asked, and growth feels like it's pulling you forward rather than being pushed.
+
+The problem is that PMF isn't binary – it's a spectrum. Most startups think they have it before they actually do. For a deeper framework on how to think about this, read our founder's take on [the product-market fit game](/founders/product-market-fit-game) – it breaks PMF into five levels you need to clear, from finding a real problem to onboarding your first reference customers. We also have a full guide on [how to measure product-market fit](/founders/measure-product-market-fit) using a combination of surveys, retention data, and word-of-mouth signals.
 
 </details>
 
@@ -144,9 +153,8 @@ If you're an early-stage startup (less than 2 years old, under $5M raised), you 
 - [A/B testing](/experiments) built on feature flags – no separate integration
 - [Surveys](/surveys) with PMF templates, NPS, and targeting by user behavior
 - [Error tracking](/error-tracking) with stack traces alongside user behavior context
-- [Group analytics](/docs/product-analytics/group-analytics) for B2B account-level funnels and retention
+- [LLM analytics](/docs/llm-analytics) to monitor and optimize AI features
 - [Data warehouse](/docs/data-warehouse) for cross-product queries and external source connections
-- Billing limits per product – set a hard cap so you never get a surprise bill
 
 ### Getting started
 
@@ -154,7 +162,9 @@ PostHog is fully self-serve.
 
 **Cloud signup:** Create a free account at [posthog.com](/), pick US or EU hosting, and you're in. No credit card needed.
 
-Getting started takes minutes; [our docs](/docs/getting-started/start-here) walk you through instrumentation step by step, or you can just paste a snippet in your `<head>` tag and [autocapture](/docs/product-analytics/autocapture) starts collecting data immediately. Want to skip the manual setup entirely? You can try out the [PostHog wizard](/docs/ai-engineering/ai-wizard) (`npx @posthog/wizard@latest`), which detects your framework, installs the right SDK, and configures everything for you.
+Getting started takes minutes; [our docs](/docs/getting-started/start-here) walk you through instrumentation step by step, or you can just paste a snippet in your `<head>` tag and [autocapture](/docs/product-analytics/autocapture) starts collecting data immediately. 
+
+Want to skip the manual setup entirely? You can try out the [PostHog wizard](/docs/ai-engineering/ai-wizard) (`npx @posthog/wizard@latest`), which detects your framework, installs the right SDK, and configures everything for you.
 
 **SDKs for everything:** JavaScript, Python, Ruby, Go, Node.js, PHP, iOS, Android, React Native, Flutter, Elixir, .NET, and more. Framework-specific guides for Next.js, Django, Angular, WordPress, Webflow.
 
@@ -167,13 +177,15 @@ Getting started takes minutes; [our docs](/docs/getting-started/start-here) walk
 | Feature flags + experiments | 1M requests | $0.0001/request |
 | Surveys | 1,500 responses | $0.10/response |
 | Error tracking | 100K exceptions | $0.00037/exception |
-| Data warehouse | 1M synced rows | Usage-based |
-| LLM analytics | 100K events | Usage-based |
-| Logs | 50GB ingested | Usage-based |
-| Workflows | 10K messages/channel | Usage-based |
-| PostHog AI | 2,000 credits | Usage-based |
+| Data warehouse | 1M synced rows | $0.000015/row |
+| LLM analytics | 100K events | $0.00006/event |
+| Logs | 50GB ingested | $0.25/GB |
+| Workflows | 10K messages/channel | $0.003000/email |
+| PostHog AI | 2,000 credits | $0.01/credit |
 
-Every product is billed independently – you only pay for what you use beyond the free tier. No per-seat fees, you get unlimited team members on every plan. Use the [pricing calculator](/pricing) to estimate costs based on your actual volume.
+Every product is billed independently – you only pay for what you use beyond the free tier, and there are bulk discounts for higher usage. No per-seat fees, you get unlimited team members on every plan. 
+
+Use the [pricing calculator](/pricing) to estimate costs based on your actual volume.
 
 <details>
 <summary>PostHog is for you if... </summary>
