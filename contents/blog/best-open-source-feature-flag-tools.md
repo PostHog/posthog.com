@@ -9,7 +9,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author:
-  - andy-vandervell
+  - natalia-amorim
 category: General
 tags:
   - Comparisons
@@ -116,7 +116,33 @@ Flagsmith's cloud free plan includes 50,000 requests per month for 1 user and 1 
 >
 > Flagsmith is a solid open-source option for teams that need feature flags with remote configuration and flexible deployment options, including on-premises hosting. Its free cloud tier is limited to a single user, but the self-hosted version has no restrictions.
 
-## 4. Flipt
+## 4. Unleash
+
+![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
+
+### What is Unleash?
+
+**Unleash** is a flag service with a public roadmap and a strong community. Official SDK support is comprehensive and there's a large selection of community maintained SDKs for less popular frameworks, too.
+
+Unleash is particularly popular with privacy-conscious organizations since user data never leaves your infrastructure. You can use it to define targeting rules, gradual rollouts, and custom activation strategies, and it integrates with tools like Jira, [Datadog](/blog/best-datadog-alternatives), Microsoft Teams, and Slack.
+
+### Supported SDKs
+
+- **Client-side:** JavaScript, Android, Flutter, iOS, React, Svelte, Vue.
+
+- **Server-side:** Go, Java, Node.js, PHP, Python, Ruby, Rust, .NET.
+
+- **Community maintained:** Angular, Clojure, C++, ColdBox, Dart, Elixir, Haskell, Laravel, NestJS, React Native, Solid.
+
+### How much does it cost?
+
+Unleash's open-source self-hosted version is free with unlimited feature flags. A self-service Enterprise plan starts at $75 per seat per month with a 5-seat minimum, available as cloud-hosted or self-hosted. Custom Enterprise pricing is available for annual contracts and dedicated support. 
+
+> ### Bottom line
+>
+> Unleash has the largest community and most extensive SDK support of any open-source feature flag tool. Its privacy-first architecture makes it a strong choice for organizations with strict data requirements.
+
+## 5. Flipt
 
 ![flipt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flipt.png)
 
@@ -134,7 +160,7 @@ Flagsmith's cloud free plan includes 50,000 requests per month for 1 user and 1 
 
 Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 license.
 
-## 5. Flipper
+## 6. Flipper
 
 ![flipper](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flipper.png)
 
@@ -152,7 +178,7 @@ The open-source gem is free with unlimited flags. Flipper Cloud offers a free pl
 >
 > Flipper is the best feature flag tool for Ruby on Rails teams. Its developer experience is exceptional, and its fixed-price Cloud plans are straightforward. However, it's Ruby-only, which limits its audience.
 
-## 6. FeatBit
+## 7. FeatBit
 
 ![featbit](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/featbit.png)
 
@@ -176,7 +202,7 @@ All features are completely free. FeatBit monetizes its platform by offering pre
 >
 > FeatBit is a strong choice for teams that want a feature-rich, self-hosted feature flag tool with no artificial feature gates. Its .NET foundation and enterprise-grade scalability make it appealing for larger organizations, though its community is smaller than the other tools on this list.
 
-## 7. FeatureHub
+## 8. FeatureHub
 
 ![featurehub](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/feature-hub.png)
 
@@ -199,32 +225,6 @@ FeatureHub offers a hosted option in addition to its open-source edition, and bo
 > ### Bottom line
 >
 > FeatureHub is a solid, no-frills open-source feature flag tool with a straightforward pricing model. Its smaller community and more limited integrations mean it's best suited for teams that value simplicity and just need the basics done well.
-
-## 8. Unleash
-
-![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
-
-### What is Unleash?
-
-**Unleash** is a flag service with a public roadmap and a strong community. Official SDK support is comprehensive and there's a large selection of community maintained SDKs for less popular frameworks, too.
-
-> **Important note:** Unleash [has deprecated its open-source edition](https://docs.getunleash.io/release-notes), with long-term support starting December 2025 and end-of-life set for **December 31, 2026**. The former Pro plan has also been discontinued. Unleash is transitioning to an Enterprise-only model.
-
-### Supported SDKs
-
-- **Client-side:** JavaScript, Android, Flutter, iOS, React, Svelte, Vue.
-
-- **Server-side:** Go, Java, Node.js, PHP, Python, Ruby, Rust, .NET.
-
-- **Community maintained:** Angular, Clojure, C++, ColdBox, Dart, Elixir, Haskell, Laravel, NestJS, React Native, Solid.
-
-### How much does it cost?
-
-Unleash's open-source self-hosted plan is currently free with unlimited feature flags, but is being deprecated (end-of-life December 2026) and is limited to a single environment. A self-service Enterprise plan starts at $75 per seat per month with a 5-seat minimum, available as cloud-hosted or self-hosted. Custom Enterprise pricing is available for annual contracts and dedicated support.
-
-> ### Bottom line
->
-> Unleash has the largest community and most extensive SDK support of any open-source feature flag tool. However, with its open-source edition being sunsetted, teams choosing Unleash should plan for a future migration or upgrade to the paid Enterprise tier.
 
 ## Which open-source feature flag tool should you choose?
 
