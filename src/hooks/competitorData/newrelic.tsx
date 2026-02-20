@@ -40,28 +40,10 @@ export const newrelic = {
             available: true,
         },
         logs: {
-            // I have not checked any of this
             available: true,
             core_logging_and_ingestion: {
                 features: {
-                    centralized_log_ingestion_search: true,
-                    live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
-                    vendor_agnostic_sdks: true,
-                },
-            },
-            investigation_workflow: {
-                features: {
-                    click_to_pivot_investigations: false,
-                    logs_scoped_by_investigation_context: false,
-                    ai_assisted_log_summaries: true,
-                },
-            },
-            debugging_integrations: {
-                features: {
-                    built_in_error_tracking: true,
-                    built_in_session_replay: false,
-                    product_analytics_context: false,
                 },
             },
             observability: {
@@ -72,15 +54,10 @@ export const newrelic = {
                     infra_monitoring: true,
                 },
             },
-            pricing: {
-                features: {
-                    ingest_only_pricing: false,
-                    no_query_compute_fees: false,
-                    predictable_at_scale: false,
-                },
-            },
         },
         llm_analytics: {
+            // They have some open source tools, but it's not native:
+            // https://newrelic.com/instant-observability/openllm
             available: false,
         },
         surveys: {
@@ -114,6 +91,7 @@ export const newrelic = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             azure_blob: true,

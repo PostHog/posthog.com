@@ -47,7 +47,4 @@ export const dynatrace = {
             siem: false,
         },
     },
-    pricing: {
-        model: 'Usage-based',
-    },
 }
