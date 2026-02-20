@@ -152,6 +152,7 @@ export const posthog = {
                     metrics: false,
                     traces: false,
                     infra_monitoring: false,
+                    alerting: false,
                 },
             },
             pricing: {
@@ -704,6 +705,7 @@ export const posthog = {
             cms: false,
             notebooks: true,
             project_management_tools: false,
+            ai_assistant: true,
         },
         security: {
             bot_blocking: true,
@@ -717,6 +719,7 @@ export const posthog = {
             history_audit_logs: 'Scale',
             role_based_access_control: 'Enterprise',
             saml_sso: 'Scale',
+            siem: false,
             soc2_certified: true,
             security_certification: 'SOC 2 Type II',
             two_factor_auth: true,
