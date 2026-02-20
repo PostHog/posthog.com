@@ -50,11 +50,11 @@ In your SDK repository settings:
 
 1. Go to **Environments** and create a new environment named `Release`
 2. Configure protection rules:
-   - **Required reviewers:** Add `Client libraries` as the team that can review
+   - **Required reviewers:** Add `PostHog/client-libraries-approvers` and `PostHog/team-client-libraries` as the only teams allowed to approve this release
    - **Prevent self-review:** Enable this option
    - **Allow administrators to bypass:** Leave this **unchecked**
 
-![Protection rules](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png)
+![Protection rules]([https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_18_T18_21_01_089_Z_2dd8982a33.png))
 
 3. Add environment secrets:
    - `GH_APP_POSTHOG_<SDK_NAME>_RELEASER_APP_ID` — Copy the App ID from your GitHub App settings
