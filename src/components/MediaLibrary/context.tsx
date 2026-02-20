@@ -53,7 +53,10 @@ export function MediaLibraryProvider({ children }: { children: React.ReactNode }
             const jwt = await getJwt()
             if (!jwt) return
 
-            const query = qs.stringify({ populate: ['parent', 'children'] }, { encodeValuesOnly: true })
+            const query = qs.stringify(
+                { populate: ['parent', 'children'], sort: ['name:asc'] },
+                { encodeValuesOnly: true }
+            )
             const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders?${query}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
