@@ -1522,7 +1522,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Onboarding conversations',
-                        url: '/handbook/onboarding/onboarding-conversations',
+                        url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
                         name: 'Sales handover',
