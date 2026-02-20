@@ -1521,7 +1521,7 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-data',
                     },
                     {
-                        name: 'Onboarding conversations',
+                        name: 'Onboarding conversations playbook',
                         url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
