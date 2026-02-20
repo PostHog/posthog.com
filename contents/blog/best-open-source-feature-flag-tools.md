@@ -230,7 +230,7 @@ FeatureHub offers a hosted option in addition to its open-source edition, and bo
 
 - Want an all-in-one platform that integrates feature flags with product analytics, session replay, A/B testing, error tracking, logs, and more? Go with **PostHog**.
 - Already have a data warehouse and want feature flags combined with powerful experimentation? Choose **GrowthBook**.
-- Need the most extensive SDK support and largest open-source community? **Unleash** is the most established, but be aware its open-source edition is being sunsetted.
+- Need the most extensive SDK support and largest open-source community? **Unleash** is the most established.
 - Need open-source feature flags with remote configuration and on-premises hosting? Try **Flagsmith**.
 - Want a 100% open-source tool with zero paid tiers and Git-native flag management? **Flipt** is for you.
 - Building with Ruby on Rails and want the best developer experience? **Flipper** is purpose-built for your stack.
