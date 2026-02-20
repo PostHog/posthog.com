@@ -16,11 +16,12 @@ Read [writing docs as an engineer](/handbook/engineering/writing-docs) – it's 
 
 The <SmallTeam slug="docs-wizard" /> is responsible for improving the docs. This means:
 
+- Building tools and systems to improve baseline quality and structure
+- Shipping docs content based on prioritized feedback and emerging use cases
 - Reviewing and improving draft documentation created by product teams
 - Improving the subjective docs experience (navigation, discovery, interactivity, etc.)
-- Identifying and improving low quality documentation and making it better
-- Ensuring screenshots and other visual elements are up-to-date
-- Shipping supplementary docs and tutorials based on feedback and emerging use cases
+- Creating context services that power agents like the [AI wizard](/docs/ai-engineering/ai-wizard)
+- Working on large scale docs projects
 
 ## Ownership within the Docs & Wizard team
 
