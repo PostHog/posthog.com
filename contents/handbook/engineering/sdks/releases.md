@@ -50,11 +50,11 @@ In your SDK repository settings:
 
 1. Go to **Environments** and create a new environment named `Release`
 2. Configure protection rules:
-   - **Required reviewers:** Add `Client libraries` as the team that can review
+   - **Required reviewers:** Add `PostHog/client-libraries-approvers` and `PostHog/team-client-libraries` as the only teams allowed to approve this release
    - **Prevent self-review:** Enable this option
    - **Allow administrators to bypass:** Leave this **unchecked**
 
-![Protection rules](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png)
+![Protection rules]([https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_18_T18_21_01_089_Z_2dd8982a33.png))
 
 3. Add environment secrets:
    - `GH_APP_POSTHOG_<SDK_NAME>_RELEASER_APP_ID` — Copy the App ID from your GitHub App settings
@@ -116,6 +116,20 @@ Copy the release workflow from an existing SDK (e.g., [posthog-go](https://githu
 2. Modify the changelog generation logic if needed for your language's conventions
 3. Update the version bumping logic for your package manager (npm, pip, etc.)
 4. Update the publishing steps for your package registry
+
+#### npm packages: set up trusted publishing before enabling the workflow
+
+This applies only to npm publishing (not other package registries).
+
+If your SDK publishes to npm using OIDC trusted publishing and the package has never been published before, run this initial setup once before allowing your GitHub Actions workflow to publish:
+
+```bash
+npx setup-npm-trusted-publish @posthog/<package-name>
+```
+
+If the package has already been published, you can configure trusted publishing directly in npm package settings instead.
+
+This bootstraps npm trusted publishing for the package so future automated releases can publish successfully.
 
 ### 6. Update the README
 
