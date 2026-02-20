@@ -126,7 +126,7 @@ export default function Libraries(): JSX.Element {
                             </ul>
                         )}
 
-                        {currentFolder && images.length > 0 && (
+                        {(currentFolder || !!search) && images.length > 0 && (
                             <>
                                 <ul className="list-none m-0 p-0 space-y-4 my-4">
                                     {images.map((image: any) => (
