@@ -42,6 +42,7 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
         showAll,
         tag,
         search: debouncedSearch,
+        revalidateOnFocus: true,
     })
 
     const handleImageMoved = () => {

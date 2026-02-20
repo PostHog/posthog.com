@@ -29,6 +29,10 @@ interface MediaLibraryContextType {
     tagsLoading: boolean
     fetchFolders: () => Promise<void>
     fetchTags: () => Promise<void>
+    currentFolder: MediaFolder | null
+    setCurrentFolder: React.Dispatch<React.SetStateAction<MediaFolder | null>>
+    folderStack: MediaFolder[]
+    setFolderStack: React.Dispatch<React.SetStateAction<MediaFolder[]>>
 }
 
 const MediaLibraryContext = createContext<MediaLibraryContextType | null>(null)
@@ -39,6 +43,8 @@ export function MediaLibraryProvider({ children }: { children: React.ReactNode }
     const [tags, setTags] = useState<MediaTag[]>([])
     const [foldersLoading, setFoldersLoading] = useState(true)
     const [tagsLoading, setTagsLoading] = useState(true)
+    const [currentFolder, setCurrentFolder] = useState<MediaFolder | null>(null)
+    const [folderStack, setFolderStack] = useState<MediaFolder[]>([])
 
     const fetchFolders = useCallback(async () => {
         try {
@@ -87,7 +93,20 @@ export function MediaLibraryProvider({ children }: { children: React.ReactNode }
     }, [fetchFolders, fetchTags])
 
     return (
-        <MediaLibraryContext.Provider value={{ folders, tags, foldersLoading, tagsLoading, fetchFolders, fetchTags }}>
+        <MediaLibraryContext.Provider
+            value={{
+                folders,
+                tags,
+                foldersLoading,
+                tagsLoading,
+                fetchFolders,
+                fetchTags,
+                currentFolder,
+                setCurrentFolder,
+                folderStack,
+                setFolderStack,
+            }}
+        >
             {children}
         </MediaLibraryContext.Provider>
     )

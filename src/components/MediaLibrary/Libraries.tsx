@@ -1,7 +1,6 @@
 import { OSInput } from 'components/OSForm'
 import React, { useState } from 'react'
 import { IconArrowLeft, IconChevronDown, IconSpinner } from '@posthog/icons'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import Image from './Image'
 import { MediaFolder, useMediaLibraryContext } from './context'
@@ -14,7 +13,7 @@ function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => vo
         <button
             type="button"
             onClick={onClick}
-            className="w-full flex items-center justify-between p-2 hover:bg-accent transition-colors text-left rounded"
+            className="w-full flex items-center justify-between px-2 py-1.5 my-0.5 hover:bg-accent transition-colors text-left rounded"
         >
             <div>
                 <div className="font-semibold text-primary">{folder.attributes.name}</div>
@@ -28,10 +27,15 @@ function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => vo
 export default function Libraries(): JSX.Element {
     const { fetchUser: refreshUser } = useUser()
     const [search, setSearch] = useState('')
-    const [currentFolder, setCurrentFolder] = useState<MediaFolder | null>(null)
-    const [folderStack, setFolderStack] = useState<MediaFolder[]>([])
 
-    const { folders: allFolders, foldersLoading } = useMediaLibraryContext()
+    const {
+        folders: allFolders,
+        foldersLoading,
+        currentFolder,
+        setCurrentFolder,
+        folderStack,
+        setFolderStack,
+    } = useMediaLibraryContext()
     const folders = allFolders.filter((f) =>
         currentFolder ? f.attributes.parent?.data?.id === currentFolder.id : !f.attributes.parent?.data
     )
@@ -45,6 +49,7 @@ export default function Libraries(): JSX.Element {
         showAll: true,
         search,
         folderId: currentFolder?.id ?? null,
+        revalidateOnFocus: true,
     })
 
     const isLoading = foldersLoading || imagesLoading
