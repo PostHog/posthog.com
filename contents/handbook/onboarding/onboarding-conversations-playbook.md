@@ -70,7 +70,7 @@ PostHog features become more powerful when used together (e.g., funnels/error tr
 
 Lastly, if the customer is trending toward growth (usage, team expansion, increasing volume), it’s okay to mention pre-paid credits and the option of dedicated human support early. Framing it as “when you’re ready” gives them time to consider it and makes a future Sales handoff smoother.
 
-## No response?
+#### No response?
 
 Review the list of users on the account: who’s active in PostHog, what roles they have, and who is most likely to own outcomes (implementation, analytics, product, engineering) vs. commercial topics (billing/procurement). Choose a small set of the most relevant people (3-4 total) and avoid repeatedly emailing everyone.
 
