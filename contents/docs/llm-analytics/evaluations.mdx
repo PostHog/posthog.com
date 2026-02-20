@@ -81,4 +81,6 @@ Each evaluation run counts as one LLM analytics event toward your quota.
 
 Evaluations use an LLM judge to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Google Gemini, Anthropic, OpenRouter, or Fireworks in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) to keep running evaluations.
 
+If a provider API key becomes invalid or encounters an error, PostHog displays a warning banner on the evaluations page so you can take action quickly. Update or replace the key in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok).
+
 Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.
