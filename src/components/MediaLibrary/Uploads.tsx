@@ -84,32 +84,30 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
                 </div>
             </div>
             <div className="flex-grow-1 min-h-0">
-                <ScrollArea>
-                    <ul className="list-none m-0 p-0 space-y-4 my-4">
-                        {mediaUploading > 0 &&
-                            Array.from({ length: mediaUploading }).map((_, index) => (
-                                <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
-                            ))}
-                        {isLoading && images.length === 0 ? (
-                            <li className="text-center text-secondary py-8">Loading images...</li>
-                        ) : images.length === 0 ? (
-                            <li className="text-center text-secondary py-8">No images found</li>
-                        ) : (
-                            images?.map((image: any) => (
-                                <li key={image.id}>
-                                    <Image {...image} onMoved={handleImageMoved} />
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                    {hasMore && (
-                        <div className="px-4 my-2">
-                            <OSButton variant="primary" width="full" onClick={fetchMore} disabled={isLoading}>
-                                {isLoading ? <IconSpinner className="size-5 mx-auto animate-spin" /> : 'Load more'}
-                            </OSButton>
-                        </div>
+                <ul className="list-none m-0 p-0 space-y-4 my-4">
+                    {mediaUploading > 0 &&
+                        Array.from({ length: mediaUploading }).map((_, index) => (
+                            <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
+                        ))}
+                    {isLoading && images.length === 0 ? (
+                        <li className="text-center text-secondary py-8">Loading images...</li>
+                    ) : images.length === 0 ? (
+                        <li className="text-center text-secondary py-8">No images found</li>
+                    ) : (
+                        images?.map((image: any) => (
+                            <li key={image.id}>
+                                <Image {...image} onMoved={handleImageMoved} />
+                            </li>
+                        ))
                     )}
-                </ScrollArea>
+                </ul>
+                {hasMore && (
+                    <div className="px-4 my-2">
+                        <OSButton variant="primary" width="full" onClick={fetchMore} disabled={isLoading}>
+                            {isLoading ? <IconSpinner className="size-5 mx-auto animate-spin" /> : 'Load more'}
+                        </OSButton>
+                    </div>
+                )}
             </div>
         </div>
     )

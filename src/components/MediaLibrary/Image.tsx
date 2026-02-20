@@ -315,18 +315,6 @@ export default function Image({
                     </div>
                 )}
                 <div className="mt-2 flex gap-2 items-start">
-                    <div className="flex-1">
-                        <CreatableMultiSelect
-                            label="Add a tag..."
-                            placeholder="Search tags..."
-                            options={availableOptions.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
-                            value={tags.map((tag) => tag.id)}
-                            allowCreate
-                            onChange={handleChangeTags}
-                            onCreate={handleCreateTag}
-                            hideLabel
-                        />
-                    </div>
                     {folders.length > 0 && (
                         <div className="w-[140px] flex-shrink-0">
                             <OSSelect
@@ -345,6 +333,18 @@ export default function Image({
                             />
                         </div>
                     )}
+                    <div className="flex-1">
+                        <CreatableMultiSelect
+                            label="Add a tag..."
+                            placeholder="Search tags..."
+                            options={availableOptions.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
+                            value={tags.map((tag) => tag.id)}
+                            allowCreate
+                            onChange={handleChangeTags}
+                            onCreate={handleCreateTag}
+                            hideLabel
+                        />
+                    </div>
                 </div>
                 {uploader && (
                     <p className="text-xs text-secondary m-0 mt-1">

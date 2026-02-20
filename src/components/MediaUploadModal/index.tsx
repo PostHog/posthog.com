@@ -463,7 +463,7 @@ export default function MediaUploadModal() {
     }, [onDrop, addToast])
 
     return isModerator ? (
-        <ScrollArea className="w-full">
+        <ScrollArea className="w-full" viewportClasses="bg-primary">
             <div data-scheme="primary" className="bg-primary text-primary size-full">
                 <div className="p-4 relative space-y-4 w-full">
                     <div className="grid grid-cols-2 gap-4">

@@ -110,7 +110,7 @@ export default function Libraries(): JSX.Element {
                 )}
 
                 {hasContent && (
-                    <ScrollArea>
+                    <div>
                         {filteredFolders.length > 0 && (
                             <ul className="list-none m-0 p-0 divide-y divide-border">
                                 {filteredFolders.map((folder) => (
@@ -148,7 +148,7 @@ export default function Libraries(): JSX.Element {
                                 )}
                             </>
                         )}
-                    </ScrollArea>
+                    </div>
                 )}
             </div>
         </div>
