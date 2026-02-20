@@ -87,9 +87,11 @@ We use a FinOps tool for cost allocation. The infrastructure team sets up alloca
 
 If your product queries ClickHouse, you'll need to work with #team-clickhouse to get query cost attribution. This is separate from FinOps tagging.
 
-ClickHouse costs are attributed by analyzing `query_log` to see which queries belong to your product. The ClickHouse team can help set up a query or dashboard to track this.
+ClickHouse costs are attributed by analyzing `query_log` to see which queries belong to your product. The ClickHouse team can help set up a query or dashboard to track this. Note that query attribution may require code changes to tag queries with a product identifier — this isn't just a dashboard exercise.
 
 For some products (like Session Replay), ClickHouse query costs are a small percentage of total – queries are lightweight (list/fetch metadata). For analytics-heavy products, ClickHouse costs will be a much larger share.
+
+We run ClickHouse in multiple regions (e.g., US and EU), make sure you account for costs in each.
 
 ### 4. Interpret the tags
 
@@ -137,7 +139,9 @@ margin = (revenue_per_unit - cost_per_unit) / revenue_per_unit
 cost_per_unit = compute_cost/volume + (storage_rate × avg_size × retention_period)
 ```
 
-This helps you understand what drives costs. For storage-heavy products, storage might be 50%+ of costs. For compute-heavy products, compute dominates.
+This helps you understand what drives costs. For storage-heavy products, storage will be significant portion of costs. For compute-heavy products, compute dominates.
+
+**Test your assumptions.** Key inputs like traffic share, retention period, and storage rates are estimates. Check how sensitive your margin is to these — if your traffic proxy is 20% ± 5%, what's the range? If effective retention is 60 days vs 90 days, how much does storage cost swing? If the answer changes materially, document the range rather than a point estimate.
 
 ### 6. Document your assumptions
 
@@ -180,7 +184,15 @@ Healthy products have stable or improving margins as they scale. If margins are 
 
 **Accuracy:** First pass is typically 80-90% complete. Shared resources and edge cases take time. Directionally correct is fine; perfect is not required.
 
-**Maintenance:** Update allocations when architecture changes. New services, new storage backends = ping infra.
+### Keeping it current
+
+Cost models rot. The two main causes:
+
+- **Architecture changes.** When your product adds new services, storage backends, or processing pipelines, the cost allocation needs updating. Build this into your launch process — when shipping a new component, close the loop with infra and your FinOps team to get it tagged before you lose track of it.
+
+- **Tagging breakage.** Warehouse syncs, allocation rules, and report configurations can break silently. If your cost dashboard suddenly drops or flatlines, check the data pipeline before assuming costs actually changed. Set up a staleness check (e.g., alert if latest data is more than 3 days old).
+
+Review your cost model quarterly at minimum, or whenever you ship significant infrastructure changes.
 
 ## Common mistakes
 
@@ -189,6 +201,10 @@ Healthy products have stable or improving margins as they scale. If margins are 
 - **Forgetting network costs.** Inter-AZ data transfer is easy to miss. It can be 5-10% of total costs.
 
 - **Expecting precision.** This is cost allocation, not accounting. You're trying to understand rough margins and trends, not get to the penny.
+
+- - **Double-counting within shared infrastructure tags.** An allocation rule may already bundle multiple resource types together. For example, an ingress tag might include both proxy compute and load balancers. Verify what's inside each tag before adding components separately — otherwise you'll overcount shared costs. 
+
+- **Not involving your FinOps vendor.** If you use a FinOps tool, loop in their support team to validate allocation rules. They can confirm what's bundled inside a tag faster than you can reverse-engineer it from reports.
 
 ## Worked example
 
