@@ -193,6 +193,8 @@ After you've analyzed your experiment metrics and determined a winning variant, 
 
 If you want more precise control over your release, you can also set the release condition for the feature flag and stop the experiment manually.
 
+> **Note:** If you've already manually shipped a variant to 100%, the **End experiment** button remains available so you can formally close out the experiment. Ending the experiment in this case marks it as complete without modifying the feature flag.
+
 Beyond this, we recommend:
 
 1. Sharing the results with your team.
@@ -224,6 +226,8 @@ When you're ready to continue, click **Resume experiment** to start collecting d
 Stopping the experiment will stop counting events in the results. Your feature flag, however, will continue working normally and events will still be tracked. You can reset the experiment later if needed.
 
 When stopping an experiment, set a conclusion (won/lost/inconclusive/stopped early/invalid) based on your analysis of the results. We recommend adding a note to document your reasoning.
+
+If you've already shipped a variant to 100% of users, you can still end the experiment using the **End experiment** button. In this case, the experiment is marked as complete without changing the feature flag.
 
 ## Comparing pausing, stopping, and shipping
 
