@@ -4,6 +4,7 @@ import qs from 'qs'
 
 export interface MediaFolder {
     id: number
+    mediaCount: number
     attributes: {
         name: string
         parent?: {

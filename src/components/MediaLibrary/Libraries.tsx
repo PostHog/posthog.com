@@ -8,7 +8,7 @@ import { useMediaLibrary } from 'hooks/useMediaLibrary'
 import { useUser } from 'hooks/useUser'
 
 function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => void }) {
-    const childCount = folder.attributes.children?.data?.length ?? 0
+    const mediaCount = folder.mediaCount
     return (
         <button
             type="button"
@@ -17,7 +17,9 @@ function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => vo
         >
             <div>
                 <div className="font-semibold text-primary">{folder.attributes.name}</div>
-                {childCount > 0 && <div className="text-sm text-secondary">{childCount} subfolders</div>}
+                <div className="text-sm text-secondary">
+                    {mediaCount} asset{mediaCount === 1 ? '' : 's'}
+                </div>
             </div>
             <IconChevronDown className="size-8 text-secondary -rotate-90" />
         </button>
@@ -130,7 +132,7 @@ export default function Libraries(): JSX.Element {
 
                 {!showLoading && !hasContent && (
                     <div className="text-center text-secondary py-8">
-                        {currentFolder ? 'This folder is empty' : 'No folders found'}
+                        {currentFolder ? 'No assets found in this folder' : 'No folders found'}
                     </div>
                 )}
 
