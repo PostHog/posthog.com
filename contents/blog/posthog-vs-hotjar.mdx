@@ -1,5 +1,5 @@
 ---
-date: 2026-02-11
+date: 2026-02-20
 title: 'In-depth: PostHog vs Hotjar'
 rootPage: /blog
 sidebar: Blog
@@ -10,7 +10,7 @@ featuredImage: >-
 featuredImageType: full
 author:
     - lior-neu-ner
-    - andy-vandervell
+    - natalia-amorim
 tags:
     - Comparisons
 seo:
@@ -20,9 +20,9 @@ seo:
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
-PostHog and [Hotjar](/best-hotjar-alternatives) both help you understand how users interact with your product — through session replay, heatmaps, and user surveys. They're popular choices for teams that want to go beyond pageview analytics and see what users actually do.
+PostHog and [Hotjar](/best-hotjar-alternatives) both help you understand how users interact with your product through session replay, heatmaps, and user surveys. They're popular choices for teams that want to go beyond pageview analytics and see what users actually do.
 
-Hotjar is now part of [Contentsquare](https://contentsquare.com) (which also acquired [Heap](/blog/posthog-vs-heap)). It's still available as a focused user research tool built for UX teams, but pricing and plans now live under the Contentsquare umbrella. 
+Hotjar is now part of [Contentsquare](/blog/best-contentsquare-alternatives) (which also acquired [Heap](/blog/posthog-vs-heap)). It's still available as a focused user research tool built for UX teams, but pricing and plans now live under the Contentsquare umbrella. 
 
 PostHog combines [replays](/session-replay) and [surveys](/surveys) with a [full suite of developer tools](/products) designed to measure impact from one integrated platform.
 
@@ -32,15 +32,15 @@ In this comparison, we break down how PostHog and Hotjar stack up so you can dec
 
 ### 1. We're an all-in-one platform
 
-PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web](/web-analytics) analytics, [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [workflows](/workflows), a [data warehouse](/data-warehouse), [data pipelines](/cdp), and more. It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web analytics](/web-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [workflows](/workflows), a [data warehouse](/data-warehouse), [data pipelines](/cdp), and more. It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
 ### 2. It's a platform built for developers
 
 This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and in our [public handbook](/handbook).
 
-And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/cdp) or [data warehouse](/data-warehouse), are ready to switch on whenever you need them.
+And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/cdp) or [data warehouse](/data-warehouse) are ready to switch on whenever you need them.
 
-> Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale
+> Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale.
 
 ### 3. We're cheaper and have a generous free tier
 
@@ -84,9 +84,11 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
 
 ### Analytics
 
-Since Hotjar is now part of Contentsquare, the analytics picture has changed. Hotjar already offered funnels, but since the merge, broader product analytics features — like retention, user paths, and custom dashboards — are now available through Contentsquare's Product Analytics. 
+Since Hotjar is now part of Contentsquare, the analytics picture has changed. Hotjar already offered funnels, but since the merge, broader product analytics features – like retention, user paths, and custom dashboards – are now available through Contentsquare's Product Analytics.
 
-Their free tier includes 10,000 monthly sessions, while PostHog's free tier includes 1 million analytics events every month.
+Contentsquare splits analytics across two products: Experience Analytics (funnels, heatmaps, dashboards – 200k free monthly sessions) and Product Analytics (trends, retention, journey analysis – 10k free monthly sessions). 
+
+PostHog includes all of this and more in a single product, with 1 million free events every month.
 
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
@@ -124,7 +126,7 @@ Their free tier includes 10,000 monthly sessions, while PostHog's free tier incl
         {
             label: 'AI-powered analysis',
             description: 'Ask questions about your data in natural language',
-            values: [true, 'Growth+ (Contentsquare)'],
+            values: [true, 'Growth+ plan (Contentsquare)'],
         },
         {
             label: 'Correlation analysis',
