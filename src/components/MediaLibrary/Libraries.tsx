@@ -1,6 +1,6 @@
 import { OSInput, OSSelect } from 'components/OSForm'
 import React, { useState } from 'react'
-import { IconArrowLeft, IconChevronDown, IconSpinner } from '@posthog/icons'
+import { IconChevronDown, IconChevronLeft, IconSpinner } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import Image from './Image'
 import { MediaFolder, useMediaLibraryContext } from './context'
@@ -109,17 +109,12 @@ export default function Libraries(): JSX.Element {
             </div>
 
             {currentFolder && (
-                <div className="flex items-center gap-2 mt-2 px-1">
-                    <button
-                        type="button"
-                        onClick={handleBack}
-                        className="flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors"
-                    >
-                        <IconArrowLeft className="size-4" />
-                        Back
-                    </button>
-                    <span className="text-sm text-secondary">/</span>
-                    <span className="text-sm font-medium text-primary">{currentFolder.attributes.name}</span>
+                <div className="flex items-center gap-1 mt-4 px-1 leading-none">
+                    <OSButton size="sm" icon={<IconChevronLeft className="text-secondary" />} onClick={handleBack} />
+                    <span className="font-semibold text-primary text-base">{currentFolder.attributes.name}</span>
+                    <span className="text-secondary text-sm">
+                        {currentFolder.mediaCount} asset{currentFolder.mediaCount === 1 ? '' : 's'}
+                    </span>
                 </div>
             )}
 
@@ -150,7 +145,7 @@ export default function Libraries(): JSX.Element {
 
                         {(currentFolder || !!search || tag !== 'all-tags') && images.length > 0 && (
                             <>
-                                <ul className="list-none m-0 p-0 space-y-4 my-4">
+                                <ul className="list-none m-0 p-0 space-y-4 mb-4 mt-2">
                                     {images.map((image: any) => (
                                         <li key={image.id}>
                                             <Image {...image} onMoved={handleImageMoved} />
