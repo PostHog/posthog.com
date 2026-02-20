@@ -1,4 +1,4 @@
-import { OSInput } from 'components/OSForm'
+import { OSInput, OSSelect } from 'components/OSForm'
 import React, { useState } from 'react'
 import { IconArrowLeft, IconChevronDown, IconSpinner } from '@posthog/icons'
 import OSButton from 'components/OSButton'
@@ -27,6 +27,7 @@ function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => vo
 export default function Libraries(): JSX.Element {
     const { fetchUser: refreshUser } = useUser()
     const [search, setSearch] = useState('')
+    const [tag, setTag] = useState('all-tags')
 
     const {
         folders: allFolders,
@@ -35,6 +36,7 @@ export default function Libraries(): JSX.Element {
         setCurrentFolder,
         folderStack,
         setFolderStack,
+        tags,
     } = useMediaLibraryContext()
     const folders = allFolders.filter((f) =>
         currentFolder ? f.attributes.parent?.data?.id === currentFolder.id : !f.attributes.parent?.data
@@ -48,6 +50,7 @@ export default function Libraries(): JSX.Element {
     } = useMediaLibrary({
         showAll: true,
         search,
+        tag,
         folderId: currentFolder?.id ?? null,
         revalidateOnFocus: true,
     })
@@ -76,15 +79,32 @@ export default function Libraries(): JSX.Element {
 
     return (
         <div className="h-full flex flex-col">
-            <OSInput
-                size="md"
-                direction="column"
-                placeholder="Search..."
-                showLabel={false}
-                label="Search libraries"
-                value={search}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-            />
+            <div className="flex space-x-2 flex-grow-0 flex-shrink-0">
+                <div className="flex-1">
+                    <OSInput
+                        size="md"
+                        direction="column"
+                        placeholder="Search..."
+                        showLabel={false}
+                        label="Search libraries"
+                        value={search}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+                    />
+                </div>
+                <div className="w-[150px]">
+                    <OSSelect
+                        label="All tags"
+                        showLabel={false}
+                        options={[
+                            { label: 'All tags', value: 'all-tags' },
+                            ...tags.map((t) => ({ label: t.attributes.label, value: t.id })),
+                        ]}
+                        value={tag}
+                        onChange={setTag}
+                        placeholder="Select tag..."
+                    />
+                </div>
+            </div>
 
             {currentFolder && (
                 <div className="flex items-center gap-2 mt-2 px-1">
@@ -116,7 +136,7 @@ export default function Libraries(): JSX.Element {
 
                 {hasContent && (
                     <div>
-                        {filteredFolders.length > 0 && (
+                        {tag === 'all-tags' && filteredFolders.length > 0 && (
                             <ul className="list-none m-0 p-0 divide-y divide-border">
                                 {filteredFolders.map((folder) => (
                                     <li key={folder.id}>
@@ -126,7 +146,7 @@ export default function Libraries(): JSX.Element {
                             </ul>
                         )}
 
-                        {(currentFolder || !!search) && images.length > 0 && (
+                        {(currentFolder || !!search || tag !== 'all-tags') && images.length > 0 && (
                             <>
                                 <ul className="list-none m-0 p-0 space-y-4 my-4">
                                     {images.map((image: any) => (
