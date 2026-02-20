@@ -19,14 +19,20 @@ export default function MediaLibrary() {
     const [loading, setLoading] = useState(0)
     const [activeTab, setActiveTab] = useState('libraries')
     const { addToast } = useToast()
-    const { currentFolder } = useMediaLibraryContext()
+    const { currentFolder, setCurrentFolder } = useMediaLibraryContext()
     const isModerator = user?.role?.type === 'moderator'
+
+    const handleTabChange = (value: string) => {
+        setActiveTab(value)
+        setCurrentFolder(null)
+    }
 
     const onDrop = async (acceptedFiles: File[]) => {
         const profileID = user?.profile?.id
         const jwt = await getJwt()
         if (isModerator && profileID && jwt) {
             setActiveTab('uploads')
+            console.log('currentFolder', currentFolder)
             await Promise.all(
                 acceptedFiles.map(async (file: File) => {
                     setLoading((loadingNumber) => loadingNumber + 1)
@@ -43,13 +49,13 @@ export default function MediaLibrary() {
         }
     }
 
+    const { getRootProps, getInputProps, isDragActive, open } = useDropzone({ onDrop, noClick: true })
+
     useEffect(() => {
         if (appWindow) {
             setWindowTitle(appWindow, 'Upload media')
         }
     }, [])
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, noClick: true })
 
     useEffect(() => {
         const handlePaste = async (e: ClipboardEvent) => {
@@ -110,7 +116,7 @@ export default function MediaLibrary() {
                         <div data-scheme="primary" className="h-full">
                             <Tabs.Root
                                 value={activeTab}
-                                onValueChange={setActiveTab}
+                                onValueChange={handleTabChange}
                                 orientation="horizontal"
                                 className="h-full flex-col w-full"
                             >
@@ -134,7 +140,7 @@ export default function MediaLibrary() {
                                     <Libraries />
                                 </Tabs.Content>
                                 <Tabs.Content value="uploads" className="w-full">
-                                    <Uploads mediaUploading={loading} />
+                                    <Uploads mediaUploading={loading} onUploadClick={open} />
                                 </Tabs.Content>
                             </Tabs.Root>
                         </div>

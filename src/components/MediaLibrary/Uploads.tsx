@@ -5,16 +5,17 @@ import Image from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
 import OSButton from 'components/OSButton'
-import { IconSpinner } from '@posthog/icons'
+import { IconSpinner, IconUpload } from '@posthog/icons'
 import debounce from 'lodash/debounce'
 import { useMediaLibraryContext } from './context'
 import { useUser } from 'hooks/useUser'
 
 interface UploadsProps {
     mediaUploading: number
+    onUploadClick: () => void
 }
 
-export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
+export default function Uploads({ mediaUploading, onUploadClick }: UploadsProps): JSX.Element {
     const { tags } = useMediaLibraryContext()
     const { fetchUser: refreshUser } = useUser()
     const [showAll, setShowAll] = useState(false)
@@ -83,6 +84,12 @@ export default function Uploads({ mediaUploading }: UploadsProps): JSX.Element {
                         placeholder="Select tag..."
                     />
                 </div>
+            </div>
+            <div className="flex items-center justify-between gap-1 mt-4 px-1 leading-none">
+                <span className="font-semibold text-primary text-base">Uploads</span>
+                <OSButton icon={<IconUpload className="text-secondary" />} onClick={onUploadClick}>
+                    Upload
+                </OSButton>
             </div>
             <div className="flex-grow-1 min-h-0">
                 <ul className="list-none m-0 p-0 space-y-4 my-4">
