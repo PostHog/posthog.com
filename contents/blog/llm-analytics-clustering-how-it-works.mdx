@@ -68,13 +68,19 @@ However, this gives us a blob of JSON at the end of the day with some expected `
 
 So we need to figure out how to get from this bag of JSON to something a clustering algorithm can work with — we need numbers. And whenever you need numbers with LLMs, it often means you need embeddings. Our task is to figure out what embeddings to generate that will be useful downstream.
 
-We can't just throw some massive JSON blob at an LLM and expect it to produce a great summary. It might be okay, but we can do better by putting ourselves in the shoes of our LLM: if I can create a general text representation where I myself can easily "read" a trace, then that'll also be a great input for summarization.
+We can't just throw some massive JSON blob at an LLM and expect it to produce a great summary. It might be okay, but we can do better by putting ourselves in the shoes of our LLM: if I can create a general text representation where I myself can easily "read" a trace, then that'll also be a great input for summarization. We be [context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) like the AI hipsters we aspire to be.
 
-So we built a process that renders each trace as a clean, simple text representation — essentially an ASCII tree with line numbering. Here's what it looks like in the PostHog UI:
+So we built a process that renders each trace (or any event in it) as a clean, simple text representation — essentially an ASCII tree with line numbering. The Idea here is just some simple text so you can "read" the trace, you know, as a human.
 
-![Text representation view in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/text_repr_example_4b140b221b.png)
+Here's what it looks like in the PostHog UI:
 
-You can see the full text representation for this trace in [this gist](https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181) — it's a real example from one of my side projects (a daily factoids chatbot that got into a surprisingly deep conversation about mantis shrimp vision and digital signal processing).
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/text_view_612c564208.mp4"
+    alt="Text representation view in PostHog"
+    classes="rounded"
+/>
+
+You can see the full text representation for this trace in [this gist](https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181) — it's a real example from one of my side projects (a daily factoids chatbot that got into a surprisingly deep conversation about mantis shrimp vision and digital signal processing). Point being, if its much easier for me as a human to just scan and read it to grok whats going on, the LLM should be able to do a decent job of summarizing it with less risk of getting side tracked by all the other gnarly metadata and structure in the raw JSON.
 
 The line numbering (`L001:`, `L002:`) is important — it gives the downstream summarization LLM a way to reference specific parts of the trace, which makes the structured output much more useful. You can see how this is generated in [`trace_formatter.py`](https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/text_repr/formatters/trace_formatter.py).
 
