@@ -23,7 +23,7 @@ export const grafana_loki = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: 'Supported via agents',
+                    native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                 },
             },

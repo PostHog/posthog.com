@@ -43,7 +43,7 @@ export const newrelic = {
             available: true,
             core_logging_and_ingestion: {
                 features: {
-                    native_open_telemetry_ingest: true,
+                    native_open_telemetry_ingest: 'Limited, proprietary',
                 },
             },
             observability: {

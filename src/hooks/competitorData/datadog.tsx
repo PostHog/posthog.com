@@ -44,7 +44,7 @@ export const datadog = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: 'Supported via agents/pipelines',
+                    native_open_telemetry_ingest: 'Converts to proprietary format',
                     vendor_agnostic_sdks: true,
                 },
             },

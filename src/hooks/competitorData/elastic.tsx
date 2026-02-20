@@ -20,7 +20,7 @@ export const elastic = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: false,
-                    native_open_telemetry_ingest: 'Limited',
+                    native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                 },
             },
