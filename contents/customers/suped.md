@@ -19,6 +19,8 @@ From the beginning, Suped relied on PostHog for [Product Analytics](/product-ana
   quote={0}
 />
 
+![Suped product screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/suped_product_screenshot_20ca42213a.png)
+
 As Suped’s workflows became more complex, particularly around transactional and alert emails, maintaining that split started to feel unnecessary and they decided to migrate to [PostHog Workflows](https://app.posthog.com/workflows).
 
 ## The stack before Workflows
@@ -52,6 +54,10 @@ Today, Suped uses Workflows for:
 
 Instead of piping product data into an external ESP and rebuilding logic there, Suped defines automation in the same environment where user behavior is analyzed. For a technical founder, that architectural simplicity matters more than surface-level features.
 
+This is an example of one of the workflows they set up with PostHog: 
+
+![Workflow product screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/suped_workflow_85cbc44bf4.png)
+
 ## Handling complex transactional emails
 
 Suped’s emails aren’t just simple welcome messages. Many include:
@@ -62,6 +68,10 @@ Suped’s emails aren’t just simple welcome messages. Many include:
 - Custom images and externally generated content
 
 When you’re working with this level of complexity, testing once and hoping for the best isn’t enough. Variables interact with each other, conditional branches change layouts, and edge cases only show up in specific scenarios. The team needs to be able to see exactly what was sent to a specific user, how it rendered, and whether the logic behaved the way they expected.
+
+This is one of the rich emails they created with PostHog: 
+
+![suped rich email example](https://res.cloudinary.com/dmukukwp6/image/upload/suped_rich_email_fc71780c01.png)
 
 Bringing automation into the same system as their product data makes that process more straightforward. Events, user properties, and messaging logic all reference the same source of truth, which reduces the guesswork when something needs to be adjusted. Instead of tracing issues across multiple tools, the team can iterate in one place and move on.
 
