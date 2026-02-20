@@ -1,0 +1,17 @@
+The BuildBetter connector can link interviews, extractions, persons, and companies to PostHog.
+
+To link BuildBetter:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
+
+2. Click **+ New source** and then click **Link** next to BuildBetter.
+
+3. Next, you need an API key from BuildBetter. Go to your [BuildBetter](https://buildbetter.app) account settings and copy your API key.
+
+4. Back in PostHog, paste the API key in the `API key` field and click **Next**.
+
+5. **(Optional)** Add a prefix to your table names.
+
+6. On the next page, set up the schemas you want to sync (interviews, extractions, persons, companies) and modify the method and frequency as needed. Once done, click **Import**.
+
+Once the syncs are complete, you can start using BuildBetter data in PostHog.
