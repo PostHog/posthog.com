@@ -20,7 +20,7 @@ Check out the [Getting people to talk to you](https://posthog.com/handbook/growt
 
 **Your first message is your best chance to earn attention**. It should feel like practical help from a real person - not a pitch. Lead with a specific observation, a clear benefit, and an easy next step.
 
-## Captivating subject lines
+#### Captivating subject lines
 
 Avoid generic subjects (“Checking in”, “Following up”). Instead, experiment with short, specific lines and anchor them to a specific outcome.
 
@@ -50,7 +50,7 @@ Use the following product signals:
 - “Worth a look before your next release”
 ​​- “Are you trying to do [goal]? (I can help)”
 
-## Content
+#### Content
 
 **Keep it short**. Don’t overwhelm the reader. It’s tempting to include every tip and best practice, but concise emails get read and replied to. Share the headline observation and the next step; save the deep dive for the call (or a follow-up).
 
@@ -58,7 +58,7 @@ Use the following product signals:
 
 **Use prior context to be proactive**. Before you write, scan previous conversations. Maybe there’s an old support ticket that never got closure, a Sales note about a previous goal, or a question asked months ago that you can now answer. Picking up that thread with a concrete solution feels personal, and a proactive delight is surely noticed.
 
-## Checking in
+#### Checking in
 
 Don’t just repeat yourself. Avoid rehashing the same observations from your first message. If your earlier advice still hasn’t been implemented, send a small, friendly nudge. Otherwise, bring something new:
 
@@ -116,7 +116,7 @@ AI can help you sanity-check assumptions and surface ideas you might miss. Custo
   - Open an event → check if it’s used in any saved insights/queries
 - **If growth signals are strong, plant the seed early**. If the account is on a positive trajectory, introduce the idea of prepaid credits coming with [a discount](https://posthog.com/handbook/growth/sales/contract-rules) and the option of a dedicated PostHog human. 
 
-## Email Follow up
+### Email Follow up
 
 - Send it the same day. Use the momentum!
 - Include the public Gong recording link.
