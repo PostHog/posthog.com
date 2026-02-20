@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-(a.k.a., things I wish I knew before writing my first newsletter at PostHog)
+_(a.k.a., things I wish I could have told myself before writing my first newsletter at PostHog)_
 
 ## First, a quick pep talk
 
@@ -153,16 +153,6 @@ Writer's block is real and it will happen. Things that can help:
 
 ---
 
-## Newsletters vs. blogs
+That's all for now. You'll get the hang of it in no time, and remember – don't be afraid to ask for help. All of us here want you to do well and enjoy it!
 
-**Newsletters** are for content we're already confident will resonate with our ICP — the kind of thing someone would naturally want to read. They have to stand completely on their own without the reader needing to know PostHog's product or brand. They're not for product marketing. With a 100k+ send list, the quality bar has to be high — our reputation and subscriber count depend on it. Newsletters are for brand, not for growth.
-
-**Blogs** are much more flexible. Almost anyone at PostHog can write and post one, though it usually takes us kicking things off. A blog can also be a good testing ground: write it first, and if it's a banger, turn it into a newsletter later.
-
----
-
-## Miscellaneous tips
-
-- I said it already once, but seriously, don’t be afraid to ask for help while you are learning! Just be sure to ask for feedback constructively – don’t say “help”, say “this section feels forced because of XYZ, what do you think/ do you have any examples/ etc”. Be specific.
-- It’s better to think about infographics, memes, and visuals *while you're outlining*, or at the latest, in your early drafts. It can feel a bit forced if you try to come up with them later.
-- I don't recommend using AI-generated images to convey concepts when requesting hero images. Our designers are awesome and may have better ideas or suggestions in the process. (In other words, if you communicate your idea with a generated image, I think it limits their imagination/realm of possibility since the artifact is too concrete)
+– <TeamMember name="Jina Yoon" />
