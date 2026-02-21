@@ -2,7 +2,7 @@
 title: Send error tracking alerts
 ---
 
-To stay on top of issues, you can set up alerts. These enable you to post to Slack, Discord, Teams, or an HTTP Webhook when an issue is created or reopened.
+To stay on top of issues, you can set up alerts, receive a weekly digest email, or use other PostHog features that trigger on events. Alerts enable you to post to Slack, Discord, Teams, or an HTTP Webhook when an issue is created or reopened.
 
 ## Issue created or reopened
 
@@ -31,6 +31,19 @@ You can filter an alert based on the properties of an issue. This is useful for 
     alt="Error tracking alert assignee filtering"
     classes="rounded"
 />
+
+## Weekly digest email
+
+PostHog sends a weekly email digest summarizing your error tracking activity from the last seven days. The digest is sent every Monday and includes:
+
+- **Total exception count** - the number of exceptions captured across the project
+- **Top issues** - the five most frequent issues by occurrence count, with sparkline trends
+- **New issues** - issues first seen during the past week
+- **Daily exception trend** - a day-by-day breakdown of exception volume
+- **Crash-free session rate** - the percentage of sessions without exceptions
+
+The weekly digest is enabled by default for all project members. To disable it, go to [**Account settings** > **Notifications**](https://app.posthog.com/settings/user#notifications) and toggle off **Error tracking weekly digest**.
+
 
 ## Other alerting options
 
