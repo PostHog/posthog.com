@@ -1,11 +1,13 @@
 import { OSInput, OSSelect } from 'components/OSForm'
 import React, { useState } from 'react'
-import { IconChevronDown, IconChevronLeft, IconSpinner } from '@posthog/icons'
+import { IconChevronDown, IconChevronLeft, IconSparkles, IconSpinner } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import Image from './Image'
 import { MediaFolder, useMediaLibraryContext } from './context'
 import { useMediaLibrary } from 'hooks/useMediaLibrary'
 import { useUser } from 'hooks/useUser'
+import { useApp } from '../../context/App'
+import HedgehogGenerator from 'components/HedgehogGenerator'
 
 function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => void }) {
     const mediaCount = folder.mediaCount
@@ -30,6 +32,7 @@ export default function Libraries(): JSX.Element {
     const { fetchUser: refreshUser } = useUser()
     const [search, setSearch] = useState('')
     const [tag, setTag] = useState('all-tags')
+    const { addWindow } = useApp()
 
     const {
         folders: allFolders,
@@ -79,6 +82,12 @@ export default function Libraries(): JSX.Element {
         refreshUser()
     }
 
+    const handleGenerateClick = () => {
+        addWindow(
+            <HedgehogGenerator newWindow location={{ pathname: `hedgehog-generator` }} key={`hedgehog-generator`} />
+        )
+    }
+
     return (
         <div className="h-full flex flex-col">
             <div className="flex space-x-2 flex-grow-0 flex-shrink-0">
@@ -109,12 +118,23 @@ export default function Libraries(): JSX.Element {
             </div>
 
             {currentFolder && (
-                <div className="flex items-center gap-1 mt-4 px-1 leading-none">
-                    <OSButton size="sm" icon={<IconChevronLeft className="text-secondary" />} onClick={handleBack} />
-                    <span className="font-semibold text-primary text-base">{currentFolder.attributes.name}</span>
-                    <span className="text-secondary text-sm">
-                        {currentFolder.mediaCount} asset{currentFolder.mediaCount === 1 ? '' : 's'}
-                    </span>
+                <div className="mt-6 flex justify-between items-center">
+                    <div className="flex items-center gap-1 leading-none">
+                        <OSButton
+                            size="sm"
+                            icon={<IconChevronLeft className="text-secondary" />}
+                            onClick={handleBack}
+                        />
+                        <span className="font-semibold text-primary text-base">{currentFolder.attributes.name}</span>
+                        <span className="text-secondary text-sm">
+                            {currentFolder.mediaCount} asset{currentFolder.mediaCount === 1 ? '' : 's'}
+                        </span>
+                    </div>
+                    {currentFolder.attributes?.name === 'Hedgehogs' && (
+                        <OSButton size="sm" icon={<IconSparkles />} onClick={handleGenerateClick}>
+                            Generate
+                        </OSButton>
+                    )}
                 </div>
             )}
 

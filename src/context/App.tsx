@@ -971,6 +971,24 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    'hedgehog-generator': {
+        size: {
+            min: {
+                width: 900,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 800,
+            },
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     'cool-tech-jobs-issue': {
         size: {
             min: {
