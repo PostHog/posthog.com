@@ -68,7 +68,7 @@ Your proxy is blocking the HTTP method. Ensure both `GET` and `POST` are allowed
 Your proxy can't reach PostHog. Test connectivity:
 
 ```bash
-curl -I https://us.i.posthog.com/decide?v=3
+curl -I https://us.i.posthog.com/flags?v=2
 ```
 
 If this fails, check DNS, firewall rules (port 443), and internet access. For SSL errors, enable SNI in your proxy settings.
