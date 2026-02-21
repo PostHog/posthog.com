@@ -108,7 +108,7 @@ export default function HedgehogGenerator() {
             }
 
             const data = await response.json()
-            setImage(data.image || null)
+            setImage(data.images?.[0] || null)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to generate image')
         } finally {
