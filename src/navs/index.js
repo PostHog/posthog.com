@@ -5316,6 +5316,11 @@ export const docsMenu = {
                             platformLogo: 'helicone',
                         },
                         {
+                            name: 'OpenClaw',
+                            url: '/docs/llm-analytics/installation/openclaw',
+                            icon: 'IconCode',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
