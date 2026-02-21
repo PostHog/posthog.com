@@ -132,7 +132,7 @@ export default function HedgehogGenerator() {
             <ScrollArea className="w-full" viewportClasses="bg-primary">
                 <SEO title="Hedgehog generator" />
                 <div className="p-6 mx-auto">
-                    <h2 className="text-lg font-semibold mb-3">Generate a hedgehog that...</h2>
+                    <h2 className="text-lg font-semibold mb-4 leading-none">Generate a hedgehog that...</h2>
                     <form onSubmit={handleSubmit} className="relative">
                         <OSInput
                             size="md"
@@ -160,7 +160,7 @@ export default function HedgehogGenerator() {
                     {(image || loading) && (
                         <div className="mt-4">
                             {image && !loading && (
-                                <div className="flex items-center justify-between mb-3 text-primary">
+                                <div className="flex items-center justify-between mb-2 text-primary">
                                     <p className="text-sm m-0">Click the image to save it.</p>
                                     <p className="m-0 flex items-center gap-1 text-sm">
                                         <span className="text-primary/60">Don't like this result?</span>
