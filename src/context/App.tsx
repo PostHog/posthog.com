@@ -974,13 +974,14 @@ const appSettings: AppSettings = {
     'hedgehog-generator': {
         size: {
             min: {
-                width: 900,
-                height: 500,
+                width: 550,
+                height: 650,
             },
             max: {
-                width: 900,
-                height: 800,
+                width: 550,
+                height: 650,
             },
+            autoHeight: true,
         },
         position: {
             center: true,

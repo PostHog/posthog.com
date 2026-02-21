@@ -2,7 +2,8 @@ import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
-import { IconArrowRightDown, IconCheck, IconSend } from '@posthog/icons'
+import { IconArrowRightDown, IconCheck } from '@posthog/icons'
+import { useToast } from '../../context/Toast'
 import { OSInput } from 'components/OSForm'
 
 interface GeneratedImage {
@@ -20,13 +21,8 @@ const DUMMY_IMAGE: GeneratedImage = {
 const USE_DUMMY_DATA = true
 
 function ImageResult({ image }: { image: GeneratedImage }) {
+    const { addToast } = useToast()
     const [downloaded, setDownloaded] = useState(false)
-
-    useEffect(() => {
-        if (!downloaded) return
-        const timeout = setTimeout(() => setDownloaded(false), 2000)
-        return () => clearTimeout(timeout)
-    }, [downloaded])
 
     const handleClick = async () => {
         try {
@@ -41,8 +37,17 @@ function ImageResult({ image }: { image: GeneratedImage }) {
             document.body.removeChild(link)
             URL.revokeObjectURL(blobUrl)
             setDownloaded(true)
+            addToast({
+                description: 'Image downloaded',
+                duration: 2000,
+            })
         } catch (err) {
             console.error('Failed to download image:', err)
+            addToast({
+                description: 'Failed to download image',
+                error: true,
+                duration: 2000,
+            })
         }
     }
 
@@ -50,14 +55,14 @@ function ImageResult({ image }: { image: GeneratedImage }) {
         <button
             type="button"
             onClick={handleClick}
-            className="relative aspect-square border-2 border-primary/20 rounded overflow-hidden hover:border-primary/60 transition-colors cursor-pointer"
+            className={`relative aspect-square border-2 rounded overflow-hidden transition-colors cursor-pointer relative ${
+                downloaded ? 'border-green' : 'border-primary/20 hover:border-primary/60'
+            }`}
         >
             <img src={image.url} alt="Generated hedgehog" className="w-full h-full object-cover" />
             {downloaded && (
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                    <div className="bg-green rounded-full p-2">
-                        <IconCheck className="size-8 text-white" />
-                    </div>
+                <div className="absolute bottom-2 right-2 bg-green rounded-full p-1.5 shadow-lg">
+                    <IconCheck className="size-4 text-white" />
                 </div>
             )}
         </button>
@@ -126,7 +131,7 @@ export default function HedgehogGenerator() {
         <div data-scheme="primary" className="bg-primary text-primary size-full">
             <ScrollArea className="w-full" viewportClasses="bg-primary">
                 <SEO title="Hedgehog generator" />
-                <div className="p-6 max-w-2xl mx-auto">
+                <div className="p-6 mx-auto">
                     <h2 className="text-lg font-semibold mb-3">Generate a hedgehog that...</h2>
                     <form onSubmit={handleSubmit} className="relative">
                         <OSInput
@@ -153,7 +158,7 @@ export default function HedgehogGenerator() {
                     {error && <p className="mt-3 text-sm text-red dark:text-yellow">{error}</p>}
 
                     {(image || loading) && (
-                        <div className="mt-6">
+                        <div className="mt-4">
                             {image && !loading && (
                                 <div className="flex items-center justify-between mb-3 text-primary">
                                     <p className="text-sm m-0">Click the image to save it.</p>
