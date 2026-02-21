@@ -110,7 +110,7 @@ export default function MediaLibrary() {
     return isModerator ? (
         <div {...getRootProps()} className="size-full outline-none">
             <input {...getInputProps()} />
-            <ScrollArea className="w-full" viewportClasses="bg-primary">
+            <ScrollArea className="w-full" dataScheme="primary" viewportClasses="bg-primary">
                 <div data-scheme="primary" className="bg-primary text-primary size-full">
                     <div className="p-4 relative w-full">
                         <div data-scheme="primary" className="h-full">
