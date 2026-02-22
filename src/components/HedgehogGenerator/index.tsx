@@ -7,6 +7,7 @@ import { useToast } from '../../context/Toast'
 import { OSInput } from 'components/OSForm'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 dayjs.extend(duration)
 
@@ -264,10 +265,10 @@ export default function HedgehogGenerator() {
                             <div className="relative size-[100px] mb-4">
                                 <ProgressRing progress={progress} size={100} strokeWidth={6} />
                                 <div className="absolute inset-0 flex items-center justify-center p-3">
-                                    <img
+                                    <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/v1724378609/hogs/sleeping.png"
                                         alt="Sleeping hedgehog"
-                                        className="w-full h-full object-contain animate-[float_4s_ease-in-out_infinite]"
+                                        className="w-full h-full object-contain animate-breathe"
                                     />
                                 </div>
                                 <FloatingZs />

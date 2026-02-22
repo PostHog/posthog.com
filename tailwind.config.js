@@ -400,6 +400,10 @@ module.exports = {
                     '0%, 100%': { transform: 'translateY(0)' },
                     '50%': { transform: 'translateY(-6px)' },
                 },
+                breathe: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.03)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -422,6 +426,7 @@ module.exports = {
                 'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
                 'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
                 float: 'float 2s ease-in-out infinite',
+                breathe: 'breathe 3s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',
