@@ -5,7 +5,7 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
+import { IconCode, IconSearch, IconSettings, IconDatabase } from '@posthog/icons'
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
 
@@ -47,6 +47,26 @@ Navigate to the Logs section in your PostHog dashboard to start exploring your l
 
 <CallToAction type="primary" to="/docs/logs/search">
   Learn how to search logs
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Query logs with SQL"
+  subtitle="Optional"
+  icon="IconDatabase"
+>
+
+For advanced analysis, you can query the `logs` table directly using [SQL/HogQL](/docs/sql). This enables:
+
+- **Custom aggregations** across your log data
+- **Complex filters** using SQL syntax
+- **Joining log data** with other PostHog tables like events and persons
+
+A 50GB query limit per query is applied to prevent expensive full table scans.
+
+<CallToAction type="primary" to="/docs/sql">
+  Learn more about SQL queries
 </CallToAction>
 
 </QuestLogItem>

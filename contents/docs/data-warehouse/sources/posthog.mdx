@@ -2,7 +2,7 @@
 title: Linking PostHog as a data warehouse source
 ---
 
-Much of your PostHog data is available in the data warehouse by default. This includes data like [events](/docs/data/events), [persons](/docs/data/persons), [sessions](/docs/data/sessions), [groups](/docs/product-analytics/group-analytics), and the [query log](/docs/data/query-log).
+Much of your PostHog data is available in the data warehouse by default. This includes data like [events](/docs/data/events), [persons](/docs/data/persons), [sessions](/docs/data/sessions), [groups](/docs/product-analytics/group-analytics), [logs](/docs/logs), and the [query log](/docs/data/query-log).
 
 Using our [SDKs](/docs/libraries) or [API](/docs/api/capture) to [capture events](/docs/getting-started/send-events), [identify users](/docs/getting-started/identify-users), create groups, and add properties adds data to these tables, that you can query using the [SQL editor](/docs/data-warehouse/query).
 
@@ -122,3 +122,27 @@ Like the `sessions` table, the `query_log` table stores all its properties as se
 | [View additional query log fields](/docs/data/query-log#table-schema) | See [full list](/docs/data/query-log#table-schema) of query log properties |
 
 The `query_log` table is the only table with data on you and your team's internal usage of PostHog, making it useful for security, governance, and performance optimization.
+
+### `logs`
+
+If you're using PostHog's [Logs](/docs/logs) product, log data is available for querying via SQL. This enables advanced log analysis beyond what's possible with the standard [logs search interface](/docs/logs/search).
+
+Some of the columns in the `logs` table are:
+
+| Column                 | Description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| `uuid`                 | Unique identifier for the log entry                                         |
+| `trace_id`             | OpenTelemetry trace ID                                                      |
+| `span_id`              | OpenTelemetry span ID                                                       |
+| `message`              | The log message body                                                        |
+| `body`                 | The log message body (alias of `message`)                                   |
+| `attributes`           | JSON object containing log attributes                                       |
+| `timestamp`            | When the log was recorded                                                   |
+| `observed_timestamp`   | When the log was observed                                                   |
+| `severity_text`        | Text representation of log severity (DEBUG, INFO, WARN, ERROR)              |
+| `severity_number`      | Numeric severity level                                                      |
+| `level`                | Log level                                                                   |
+| `resource_attributes`  | JSON object containing resource attributes                                  |
+| `service_name`         | Name of the service that produced the log                                   |
+
+The `logs` table has a 50GB query limit per query to prevent expensive full table scans. Cross-cluster joins between logs and other tables (like `events`) are not supported.
