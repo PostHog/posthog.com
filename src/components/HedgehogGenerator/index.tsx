@@ -74,15 +74,18 @@ function ImageResult({ image }: { image: GeneratedImage }) {
     )
 }
 
-interface TimeLeft {
-    hours: number
-    minutes: number
-    seconds: number
+interface RateLimit {
+    remaining?: number
+    resetTime?: string | null
+    windowMs?: number
 }
 
-function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 60 * 60 * 1000) {
-    const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
+function useRateLimit(rateLimit: RateLimit | undefined) {
+    const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number } | null>(null)
     const [progress, setProgress] = useState(0)
+
+    const resetTime = rateLimit?.remaining === 0 ? rateLimit?.resetTime : null
+    const windowMs = rateLimit?.windowMs ?? 60 * 60 * 1000
 
     useEffect(() => {
         if (!resetTime) {
@@ -102,8 +105,8 @@ function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 6
                 return false
             }
 
-            const elapsed = rateLimitDurationMs - diff
-            setProgress(Math.min(100, Math.max(0, (elapsed / rateLimitDurationMs) * 100)))
+            const elapsed = windowMs - diff
+            setProgress(Math.min(100, Math.max(0, (elapsed / windowMs) * 100)))
 
             const dur = dayjs.duration(diff)
             setTimeLeft({
@@ -123,9 +126,18 @@ function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 6
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [resetTime, rateLimitDurationMs])
+    }, [resetTime, windowMs])
 
-    return { timeLeft, progress }
+    const isActive = timeLeft !== null
+
+    const formattedTime = React.useMemo(() => {
+        if (!timeLeft) return null
+        if (timeLeft.hours > 0) return `${timeLeft.hours}h ${timeLeft.minutes}m`
+        if (timeLeft.minutes > 0) return `${timeLeft.minutes}m ${timeLeft.seconds}s`
+        return `${timeLeft.seconds}s`
+    }, [timeLeft])
+
+    return { isActive, progress, formattedTime }
 }
 
 function FloatingZs() {
@@ -189,19 +201,7 @@ export default function HedgehogGenerator() {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
-    const rateLimit = user?.imageGenerationRateLimit
-    const isRateLimited = rateLimit?.remaining === 0 && !!rateLimit?.resetTime
-    const { timeLeft, progress } = useRateLimitCountdown(
-        isRateLimited ? rateLimit.resetTime : null,
-        rateLimit?.windowMs
-    )
-
-    const formattedTimeRemaining = React.useMemo(() => {
-        if (!timeLeft) return null
-        if (timeLeft.hours > 0) return `${timeLeft.hours}h ${timeLeft.minutes}m`
-        if (timeLeft.minutes > 0) return `${timeLeft.minutes}m ${timeLeft.seconds}s`
-        return `${timeLeft.seconds}s`
-    }, [timeLeft])
+    const { isActive: isRateLimited, progress, formattedTime } = useRateLimit(user?.imageGenerationRateLimit)
 
     const generateImage = async (promptText: string) => {
         setLoading(true)
@@ -260,7 +260,7 @@ export default function HedgehogGenerator() {
             <ScrollArea className="w-full" viewportClasses="bg-primary">
                 <SEO title="Hedgehog generator" />
                 <div className="p-6 mx-auto">
-                    {isRateLimited && timeLeft && !image ? (
+                    {isRateLimited && !image ? (
                         <div className="flex flex-col items-center justify-center py-4 text-center">
                             <div className="relative size-[100px] mb-4">
                                 <ProgressRing progress={progress} size={100} strokeWidth={6} />
@@ -276,7 +276,7 @@ export default function HedgehogGenerator() {
                             <h3 className="text-primary font-bold mb-1 text-lg">The hedgehogs are resting</h3>
                             <p className="text-secondary text-sm m-0">
                                 Try again in{' '}
-                                <span className="font-mono font-semibold text-primary">{formattedTimeRemaining}</span>
+                                <span className="font-mono font-semibold text-primary">{formattedTime}</span>
                             </p>
                         </div>
                     ) : (
@@ -303,10 +303,10 @@ export default function HedgehogGenerator() {
                                     <IconArrowRightDown className="size-5 rotate-90" />
                                 </button>
                             </form>
-                            {isRateLimited && timeLeft && (
+                            {isRateLimited && (
                                 <p className="mt-2 text-sm m-0 p-2 bg-yellow/15 border border-yellow/60 rounded">
                                     Limit reached. Try again in{' '}
-                                    <span className="font-mono font-bold">{formattedTimeRemaining}</span>
+                                    <span className="font-mono font-bold">{formattedTime}</span>
                                 </p>
                             )}
                         </>
