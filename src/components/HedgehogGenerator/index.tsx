@@ -73,13 +73,19 @@ function ImageResult({ image }: { image: GeneratedImage }) {
     )
 }
 
+interface TimeLeft {
+    hours: number
+    minutes: number
+    seconds: number
+}
+
 function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 60 * 60 * 1000) {
-    const [timeRemaining, setTimeRemaining] = useState<string | null>(null)
+    const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
     const [progress, setProgress] = useState(0)
 
     useEffect(() => {
         if (!resetTime) {
-            setTimeRemaining(null)
+            setTimeLeft(null)
             setProgress(0)
             return
         }
@@ -90,7 +96,7 @@ function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 6
             const diff = reset.diff(now)
 
             if (diff <= 0) {
-                setTimeRemaining(null)
+                setTimeLeft(null)
                 setProgress(100)
                 return false
             }
@@ -99,17 +105,11 @@ function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 6
             setProgress(Math.min(100, Math.max(0, (elapsed / rateLimitDurationMs) * 100)))
 
             const dur = dayjs.duration(diff)
-            const hours = Math.floor(dur.asHours())
-            const minutes = dur.minutes()
-            const seconds = dur.seconds()
-
-            if (hours > 0) {
-                setTimeRemaining(`${hours}h ${minutes}m ${seconds}s`)
-            } else if (minutes > 0) {
-                setTimeRemaining(`${minutes}m ${seconds}s`)
-            } else {
-                setTimeRemaining(`${seconds}s`)
-            }
+            setTimeLeft({
+                hours: Math.floor(dur.asHours()),
+                minutes: dur.minutes(),
+                seconds: dur.seconds(),
+            })
             return true
         }
 
@@ -124,7 +124,20 @@ function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 6
         return () => clearInterval(interval)
     }, [resetTime, rateLimitDurationMs])
 
-    return { timeRemaining, progress }
+    return { timeLeft, progress }
+}
+
+function CountdownBlock({ value, label }: { value: number; label: string }) {
+    return (
+        <div className="flex flex-col items-center">
+            <div className="bg-primary/10 dark:bg-white/10 rounded-md px-2.5 py-1.5 min-w-[2.75rem] border border-primary">
+                <span className="font-mono font-bold text-lg text-primary tabular-nums">
+                    {String(value).padStart(2, '0')}
+                </span>
+            </div>
+            <span className="text-[10px] text-secondary mt-0.5 uppercase tracking-wider font-medium">{label}</span>
+        </div>
+    )
 }
 
 function FloatingZs() {
@@ -143,7 +156,7 @@ function FloatingZs() {
 
 function ProgressRing({
     progress,
-    size = 120,
+    size = 100,
     strokeWidth = 6,
 }: {
     progress: number
@@ -190,10 +203,17 @@ export default function HedgehogGenerator() {
 
     const rateLimit = user?.imageGenerationRateLimit
     const isRateLimited = rateLimit?.remaining === 0 && !!rateLimit?.resetTime
-    const { timeRemaining, progress } = useRateLimitCountdown(
+    const { timeLeft, progress } = useRateLimitCountdown(
         isRateLimited ? rateLimit.resetTime : null,
         rateLimit?.windowMs
     )
+
+    const formattedTimeRemaining = React.useMemo(() => {
+        if (!timeLeft) return null
+        if (timeLeft.hours > 0) return `${timeLeft.hours}h ${timeLeft.minutes}m`
+        if (timeLeft.minutes > 0) return `${timeLeft.minutes}m ${timeLeft.seconds}s`
+        return `${timeLeft.seconds}s`
+    }, [timeLeft])
 
     const generateImage = async (promptText: string) => {
         setLoading(true)
@@ -252,24 +272,34 @@ export default function HedgehogGenerator() {
             <ScrollArea className="w-full" viewportClasses="bg-primary">
                 <SEO title="Hedgehog generator" />
                 <div className="p-6 mx-auto">
-                    {isRateLimited && timeRemaining && !image ? (
-                        <div className="flex flex-col items-center justify-center py-6 text-center">
+                    {isRateLimited && timeLeft && !image ? (
+                        <div className="flex flex-col items-center justify-center py-4 text-center">
                             <div className="relative size-[100px] mb-4">
-                                <ProgressRing progress={progress} size={100} strokeWidth={5} />
+                                <ProgressRing progress={progress} size={100} strokeWidth={6} />
                                 <div className="absolute inset-0 flex items-center justify-center p-3">
                                     <img
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/v1724378609/hogs/sleeping.png"
                                         alt="Sleeping hedgehog"
-                                        className="w-full h-full object-contain"
+                                        className="w-full h-full object-contain animate-[float_4s_ease-in-out_infinite]"
                                     />
                                 </div>
                                 <FloatingZs />
                             </div>
-                            <p className="text-primary font-semibold mb-0.5 text-lg">The hedgehogs are resting</p>
+                            <h3 className="text-primary font-bold mb-0.5 text-lg">The hedgehogs are resting</h3>
                             <p className="text-secondary text-sm mb-4">You've reached your limit for now</p>
-                            <div className="inline-flex items-baseline gap-1.5">
-                                <span className="text-sm text-secondary">Try again in</span>
-                                <span className="font-mono font-semibold text-xl text-primary">{timeRemaining}</span>
+                            <p className="text-[10px] text-secondary mb-2 uppercase tracking-wider font-medium">
+                                Try again in
+                            </p>
+                            <div className="flex items-center gap-1.5">
+                                {timeLeft.hours > 0 && (
+                                    <>
+                                        <CountdownBlock value={timeLeft.hours} label="hrs" />
+                                        <span className="text-primary/30 text-lg font-light mb-4">:</span>
+                                    </>
+                                )}
+                                <CountdownBlock value={timeLeft.minutes} label="min" />
+                                <span className="text-primary/30 text-lg font-light mb-4">:</span>
+                                <CountdownBlock value={timeLeft.seconds} label="sec" />
                             </div>
                         </div>
                     ) : (
@@ -296,10 +326,10 @@ export default function HedgehogGenerator() {
                                     <IconArrowRightDown className="size-5 rotate-90" />
                                 </button>
                             </form>
-                            {isRateLimited && timeRemaining && (
+                            {isRateLimited && timeLeft && (
                                 <p className="mt-2 text-sm m-0 p-2 bg-yellow/15 border border-yellow/60 rounded">
                                     Limit reached. Try again in{' '}
-                                    <span className="font-mono font-bold">{timeRemaining}</span>
+                                    <span className="font-mono font-bold">{formattedTimeRemaining}</span>
                                 </p>
                             )}
                         </>
