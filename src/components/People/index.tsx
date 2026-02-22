@@ -464,7 +464,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
 export const teamQuery = graphql`
     query TeamQuery {
         team: allSqueakProfile(
-            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
             sort: { fields: startDate, order: ASC }
         ) {
             teamMembers: nodes {
