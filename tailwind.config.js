@@ -396,6 +396,10 @@ module.exports = {
                         transform: 'translateY(-10px)',
                     },
                 },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-6px)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -417,6 +421,7 @@ module.exports = {
                 'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
                 'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
                 'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
+                float: 'float 2s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',

@@ -35,6 +35,12 @@ export type User = {
             metadata: any
         }[]
     }
+    imageGenerationRateLimit?: {
+        remaining: number
+        limit: number
+        resetTime: string | null
+        windowMs: number
+    }
 }
 
 type UserContextValue = {
