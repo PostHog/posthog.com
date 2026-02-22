@@ -127,19 +127,6 @@ function useRateLimitCountdown(resetTime: string | null, rateLimitDurationMs = 6
     return { timeLeft, progress }
 }
 
-function CountdownBlock({ value, label }: { value: number; label: string }) {
-    return (
-        <div className="flex flex-col items-center">
-            <div className="bg-primary/10 dark:bg-white/10 rounded-md px-2.5 py-1.5 min-w-[2.75rem] border border-primary">
-                <span className="font-mono font-bold text-lg text-primary tabular-nums">
-                    {String(value).padStart(2, '0')}
-                </span>
-            </div>
-            <span className="text-[10px] text-secondary mt-0.5 uppercase tracking-wider font-medium">{label}</span>
-        </div>
-    )
-}
-
 function FloatingZs() {
     return (
         <div className="absolute -top-2 left-4 flex flex-col-reverse items-start text-primary/80 font-medium">
@@ -285,22 +272,11 @@ export default function HedgehogGenerator() {
                                 </div>
                                 <FloatingZs />
                             </div>
-                            <h3 className="text-primary font-bold mb-0.5 text-lg">The hedgehogs are resting</h3>
-                            <p className="text-secondary text-sm mb-4">You've reached your limit for now</p>
-                            <p className="text-[10px] text-secondary mb-2 uppercase tracking-wider font-medium">
-                                Try again in
+                            <h3 className="text-primary font-bold mb-1 text-lg">The hedgehogs are resting</h3>
+                            <p className="text-secondary text-sm m-0">
+                                Try again in{' '}
+                                <span className="font-mono font-semibold text-primary">{formattedTimeRemaining}</span>
                             </p>
-                            <div className="flex items-center gap-1.5">
-                                {timeLeft.hours > 0 && (
-                                    <>
-                                        <CountdownBlock value={timeLeft.hours} label="hrs" />
-                                        <span className="text-primary/30 text-lg font-light mb-4">:</span>
-                                    </>
-                                )}
-                                <CountdownBlock value={timeLeft.minutes} label="min" />
-                                <span className="text-primary/30 text-lg font-light mb-4">:</span>
-                                <CountdownBlock value={timeLeft.seconds} label="sec" />
-                            </div>
                         </div>
                     ) : (
                         <>
