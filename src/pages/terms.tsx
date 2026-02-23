@@ -295,7 +295,21 @@ function Terms() {
                 </h2>
                 <div className="text-center mb-4">
                     <button
-                        onClick={() => window.print()}
+                        onClick={() => {
+                            // Give Safari time to re-render
+                            setTimeout(() => {
+                                try {
+                                    if (!document.execCommand('print', false, null)) {
+                                        window.print()
+                                    }
+                                } catch {
+                                    window.print()
+                                }
+                            }, 500)
+                            return
+
+                            window.print()
+                        }}
                         className="bg-primary border-solid text-primary-dark px-4 py-2 rounded text-sm font-semibold hover:opacity-80 shadow-lg"
                     >
                         🖨️ Print / Save as PDF
