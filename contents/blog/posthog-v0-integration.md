@@ -23,6 +23,8 @@ We've released a [brand new PostHog × Vercel integration](/blog/vercel-integrat
 
 That integration focuses on how flags and experiments run in production. Now, we’re extending the same product context into [Vercel's v0 via MCP](https://v0.app/), so it’s available while you’re building.
 
+<WistiaEmbed mediaId="13hp4af5cc" />
+
 ## What you can do with PostHog in v0
 
 v0 can build directly on real codebases, enabling teams to ship production-ready apps and agents rather than prototypes or toy projects.
