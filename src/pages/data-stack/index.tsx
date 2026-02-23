@@ -305,11 +305,6 @@ export default function CDP(): JSX.Element {
                     systems.
                 </p>
                 <p>
-                    Don&apos;t want to use our warehouse? You can still connect external warehouses (like Snowflake or
-                    BigQuery) as sources to use your warehouse tables inside PostHog. With 1 million synced rows free
-                    per month, it&apos;s cost-effective to sync selective data from your existing warehouse.
-                </p>
-                <p>
                     <Link to="/warehouse-native" state={{ newWindow: true }}>
                         Learn more about PostHog&apos;s integrated warehouse
                     </Link>
