@@ -138,26 +138,7 @@ This occurs because the `in` and `not_in` operators are reserved for **cohort pr
 
 ### What operators should I use instead?
 
-For person or group properties, use one of these operators:
-
-| Operator | Description |
-|----------|-------------|
-| `exact` | Matches when the property value equals any value in the list |
-| `is_not` | Matches when the property value does not equal the specified value(s) |
-| `contains` / `does not contain` | Matches when the property value contains/doesn't contain the substring |
-| `regex` / `does not match regex` | Matches when the property value matches/doesn't match a regular expression |
-| `is set` / `is not set` | Matches when the property exists/doesn't exist |
-| `= (semver)` | Matches when the version is exactly equal to the specified value |
-| `≠ (semver)` | Matches when the version is not equal to the specified value |
-| `> (semver)` | Matches when the version is greater than the specified value |
-| `>= (semver)` | Matches when the version is greater than or equal to the specified value |
-| `< (semver)` | Matches when the version is less than the specified value |
-| `<= (semver)` | Matches when the version is less than or equal to the specified value |
-| `~ (semver)` | Matches versions in the tilde range (e.g., `~1.2.3` matches `>=1.2.3, <1.3.0`) |
-| `^ (semver)` | Matches versions in the caret range (e.g., `^1.2.3` matches `>=1.2.3, <2.0.0`) |
-| `* (semver)` | Matches versions in the wildcard range (e.g., `1.2.*` matches `>=1.2.0, <1.3.0`) |
-
-Semver operators are useful for targeting users based on app or SDK versions. Learn more about [semver targeting](/docs/feature-flags/creating-feature-flags#semantic-version-semver-targeting).
+For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `regex`, `is set`, or any of the [semver operators](/docs/data/property-filters#semver-operators) for version-based targeting.
 
 For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
 

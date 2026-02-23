@@ -2700,6 +2700,10 @@ export const docsMenu = {
                                     url: '/docs/data/event-spec/ecommerce-events',
                                 },
                                 {
+                                    name: 'Property filter operators',
+                                    url: '/docs/data/property-filters',
+                                },
+                                {
                                     name: 'Channel type',
                                     url: '/docs/data/channel-type',
                                 },
