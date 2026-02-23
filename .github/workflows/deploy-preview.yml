@@ -103,4 +103,4 @@ jobs:
                   body: |
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
-                      ❌ Failed — [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+                      ❌ Failed - [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
