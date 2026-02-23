@@ -32,6 +32,7 @@ Major incidents require a **team call** to discuss and learn together:
 1. **Schedule the call** - Invite `engineering@posthog.com` and any key stakeholders related to the incident
 3. **Review as a group** - There may be details and other ideas people come up with in the call - you should be updating the post-mortem as you go to capture these.
 5. **Share outcomes** - Post the final summary in `#incidents` (this should happen automatically when you mark the post-mortem as complete)
+6. If it's a large incident with a lot of customer impact, share post-mortem publicly in the [post-mortem repository](https://github.com/PostHog/post-mortems)
 
 ### For minor incidents
 
