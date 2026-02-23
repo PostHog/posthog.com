@@ -59,7 +59,18 @@ If given a choice, go live. If you can't go live, reduce the task size so you ca
 * We are small, and can only win based on speed and agility.
 * Going live forces a level of completion, on which you can build.
 
-Default to _not_ asking for permission to do something if you are acting in the best interests of PostHog. It is ok to ask for more context though. 
+Default to _not_ asking for permission to do something if you are acting in the best interests of PostHog. It is ok to ask for more context though.
+
+## We're relentlessly data hungry
+
+We build tools that help teams understand their products, so we'd better be obsessed with data ourselves. We don't just appreciate data - we crave it.
+
+* Make decisions based on data, not assumptions or gut feel.
+* Instrument everything. If it's not measured, it didn't happen.
+* Be skeptical of narratives that aren't backed by numbers.
+* When in doubt, look at the data. When certain, still look at the data.
+
+This isn't about dashboards for the sake of dashboards - it's about building a culture where curiosity wins and "I think" gets replaced by "the data shows."
 
 ## We're on the maker's schedule
 
