@@ -99,6 +99,19 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
     return null
 }
 
+const EndpointsPricingSlide = () => (
+    <div className="h-full flex flex-col p-12 text-primary bg-primary">
+        <h2 className="text-4xl font-bold text-primary mb-8">Pricing</h2>
+        <div className="bg-tan dark:bg-dark rounded-lg p-8 max-w-2xl">
+            <p className="text-xl font-bold text-primary mb-4">Pricing is coming soon</p>
+            <p className="text-lg text-secondary">
+                We'll offer usage-based compute pricing with a generous monthly free tier – like we do with all of our
+                paid products.
+            </p>
+        </div>
+    </div>
+)
+
 const EndpointsPlaygroundSlide = () => {
     const [selectedScenarioId, setSelectedScenarioId] = useState(scenarios[0].id)
     const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -215,6 +228,11 @@ export default function Endpoints(): JSX.Element {
     const slides = createSlideConfig({
         custom: [
             {
+                slug: 'pricing',
+                name: 'Pricing',
+                component: EndpointsPricingSlide,
+            },
+            {
                 slug: 'playground',
                 name: 'Playground',
                 component: EndpointsPlaygroundSlide,
@@ -223,7 +241,7 @@ export default function Endpoints(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['answers', 'videos', 'posthog-on-posthog', 'pricing', 'customers'],
+        exclude: ['answers', 'videos', 'posthog-on-posthog', 'customers'],
         order: [
             'overview',
             // 'customers',
@@ -232,6 +250,7 @@ export default function Endpoints(): JSX.Element {
             'use_cases',
             'sql_endpoints',
             'playground',
+            'pricing',
             'comparison-summary',
             'feature-comparison',
             'docs',
