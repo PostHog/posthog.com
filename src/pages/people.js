@@ -19,7 +19,6 @@ const PeoplePage = () => {
         value: '/people',
         content: (
             <div className={` ${websiteMode && 'max-w-7xl mx-auto'}`}>
-                <h1>People</h1>
                 <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
             </div>
         ),
