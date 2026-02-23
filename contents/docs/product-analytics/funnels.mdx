@@ -44,6 +44,9 @@ export const funnelStepBreakdownLight = "https://res.cloudinary.com/dmukukwp6/im
 export const funnelStepBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/funnel-steps-breakdown-dark-mode.png"
 export const converstionOverTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-light-mode.png"
 export const converstionOverTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/funnels/conversion-over-time-using-trends-dark-mode.png"
+export const funnelsInlineEventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_light_fd59b44032.png"
+export const funnelsInlineEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/funnels_inline_events_dark_f9c82e5cd9.png"
+
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=573"
@@ -93,6 +96,13 @@ Next, add events users must complete to proceed through the funnel, ending with 
 You can combine multiple events into a single funnel step using inline combination. This lets you treat several events as one step without creating a custom [action](/docs/data/actions).
 
 Select the events to include in a step, and they're combined using a logical `OR` – any occurrence of the selected events counts toward that step. This works the same way as [combining events inline in trends](/docs/product-analytics/trends/overview#combine-events-inline).
+
+<ProductScreenshot
+    imageLight = {funnelsInlineEventsLight} 
+    imageDark = {funnelsInlineEventsDark}
+    classes="rounded"
+    alt="Inline events"
+/>
 
 By default, funnel steps must be completed **sequentially**, however you are able to change this behavior by selecting one of three different step orders:
 
