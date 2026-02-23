@@ -290,10 +290,6 @@ export const dataPipelines = {
                     },
                 },
                 {
-                    name: 'Mailchimp',
-                    url: '/docs/cdp/destinations/mailchimp',
-                },
-                {
                     name: 'Mailgun',
                     url: '/docs/cdp/destinations/mailgun',
                 },
