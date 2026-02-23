@@ -14,8 +14,8 @@ This page covers troubleshooting for Logs. For setup, see the [installation guid
 
 **Solutions**:
 - Verify you're using the correct project token from [Project Settings](https://app.posthog.com/settings/project)
-- Check the Authorization header format: `Bearer {your-project-api-key}`
-- If using query parameter, verify the format: `?token={your-project-api-key}`
+- Check the Authorization header format: `Bearer {your-project-token}`
+- If using query parameter, verify the format: `?token={your-project-token}`
 - Ensure your project token hasn't been rotated or revoked
 
 ## Connection issues
@@ -58,9 +58,9 @@ This page covers troubleshooting for Logs. For setup, see the [installation guid
 - Check that log attributes are properly structured
 - Use the OpenTelemetry logging APIs instead of raw log libraries
 
-## API key authentication issues
+## Project token authentication issues
 
-**Problem**: Confused about which API key to use or how to authenticate.
+**Problem**: Confused about which key to use or how to authenticate.
 
 **Solutions**:
 - Use your **project token** (the same one you use for capturing events)

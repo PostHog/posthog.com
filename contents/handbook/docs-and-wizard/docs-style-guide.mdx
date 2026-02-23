@@ -103,6 +103,18 @@ Always capitalize PostHog product names as proper nouns. Use "Product Analytics"
 
 However, if you're referring to the general industry term or a feature that isn't specific to PostHog, use lowercase. For examples: "many companies offer product analytics."
 
+### Keys and tokens
+
+| Term | Description |
+|------|-------------|
+| **Project token** | The public identifier (starts with `phc_`) used in SDKs and the snippet to send events. This is NOT an API key. Never call it "project API key." |
+| **Personal API key** | A private key (starts with `phx_`) used for server-side API access. This IS an API key. |
+| **Feature flags secure API key** | A separate key used for local evaluation of feature flags. |
+
+> **Do**: "Add your project token to the PostHog initialization code."
+
+> **Don't**: "Add your project API key to the PostHog initialization code."
+
 ### PostHog platform
 
 | Platform term | Description |
@@ -326,7 +338,7 @@ Be consistent within a single list. If one item is a partial sentence, make all 
 >
 > To set up PostHog:
 > - Install the SDK.
-> - Configure your API key.
+> - Configure your project token.
 > - Start capturing events.
 
 ### Tables
