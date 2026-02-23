@@ -50,7 +50,7 @@ response = requests.post(url, headers=headers, json=body).json()
 
 </MultiLanguage>
 
-The only potentially tricky part of this is the version param. Use `v=3`, as it is the most recent. Unlike the other versions, it returns the feature flag values, any errors that occurred when computing, and any payloads for the flags.
+The only potentially tricky part of this is the version param. Use `v=2`, as it is the most recent. Unlike the other versions, it returns the feature flag values, any errors that occurred when computing, and any payloads for the flags.
 
 Also, if doing a `curl` request, make sure to wrap your URL in quotes to ensure your terminal doesn’t think the `?` is a wildcard character.
 
@@ -107,7 +107,7 @@ Our libraries abstract this functionality away and provides utilities such as ca
 
 ## Evaluating multi-variate flags
 
-The `v=3` endpoint also supports multivariate flags. To test this, create a multi-variate feature flag in PostHog by selecting the "Multiple variants with rollout percentages (A/B test)" as the "Served value." 
+The `v=2` endpoint also supports multivariate flags. To test this, create a multi-variate feature flag in PostHog by selecting the "Multiple variants with rollout percentages (A/B test)" as the "Served value." 
 
 Once you do this, make the same request as above and the response includes the variant data like this:
 
