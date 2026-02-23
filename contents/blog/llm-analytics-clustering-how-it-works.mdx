@@ -289,21 +289,12 @@ The two-phase approach is deliberate. If the agent only refined one cluster at a
 
 All of this needs to run reliably across thousands of teams. We use [Temporal](https://temporal.io/) workflows to orchestrate the pipeline.
 
-A daily coordinator workflow discovers eligible teams (those with enough recent trace data), then spawns child workflows in batches - up to 4 concurrent workflows at a time to manage load:
+A daily coordinator workflow discovers eligible teams (those with enough recent trace data), then spawns child workflows in batches - up to 4 concurrent workflows at a time to manage load. These workflows:
 
-```python
-# Simplified coordinator
-# See: coordinator.py
-
-# Daily coordinator workflow:
-# 1. Query for teams with recent LLM trace data
-# 2. For each eligible team, spawn a child workflow:
-#    a. Fetch recent embeddings
-#    b. Run clustering pipeline (UMAP + HDBSCAN)
-#    c. Run labeling agent
-#    d. Emit cluster events
-# 3. Max 4 concurrent child workflows
-```
+1. Fetch recent embeddings
+2. Run clustering pipeline (UMAP + HDBSCAN)
+3. Run labeling agent
+4. Emit cluster events
 
 > See the actual implementation: <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/coordinator.py" target="_blank" rel="noopener noreferrer"><code>coordinator.py</code></a>
 
