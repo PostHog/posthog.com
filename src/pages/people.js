@@ -30,7 +30,7 @@ const PeoplePage = () => {
     } = useStaticQuery(graphql`
         query PeoplePageQuery {
             team: allSqueakProfile(
-                filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+                filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
                 sort: { fields: startDate, order: ASC }
             ) {
                 teamMembers: nodes {
