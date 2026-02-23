@@ -45,6 +45,7 @@ const CONFIG = {
         '/community/', // powered by Strapi
         '/teams/', // powered by Strapi
         '/careers/', // powered by Ashby
+        '/absolute-path/', // example path
     ],
     SITEMAP_PATH: path.join(process.cwd(), 'public', 'sitemap', 'sitemap-0.xml'),
     CONTENTS_DIR: 'contents',
