@@ -102,9 +102,9 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
 const EndpointsPricingSlide = () => (
     <div className="h-full flex flex-col items-center justify-center p-12 text-primary bg-primary">
         <h2 className="text-4xl font-bold text-primary mb-8 text-center">Pricing</h2>
-        <div className="bg-tan dark:bg-dark rounded-lg p-8 max-w-2xl text-center">
+        <div className="bg-accent dark:bg-accent-dark border border-primary rounded-md p-6 max-w-2xl text-center">
             <p className="text-xl font-bold text-primary mb-4">Pricing is coming soon</p>
-            <p className="text-lg text-secondary">
+            <p className="text-lg text-secondary mb-0">
                 We'll offer usage-based pricing with a generous monthly free tier – like we do with all of our paid
                 products.
             </p>
