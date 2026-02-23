@@ -9,7 +9,7 @@ When calling `posthog.init`, there are various configuration options you can set
 To configure these options, pass them as an object to the `posthog.init` call, like we do with `api_host`, `defaults`, `loaded`, and `autocapture` below.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: function (posthog) {

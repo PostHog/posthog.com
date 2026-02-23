@@ -372,7 +372,7 @@ The Wizard is a CLI tool that runs locally in your development environment. Here
 3. **Code generation**: The Wizard writes the integration code. This includes:
    - Installing the appropriate PostHog SDK via your package manager
    - Adding initialization code in the right location for your framework
-   - Setting up configuration with your project API key
+   - Setting up configuration with your project token
    - Optionally adding example event tracking code
 
 4. **Verification**: The Wizard verifies the integration works by sending a test event to PostHog and confirming it arrives.

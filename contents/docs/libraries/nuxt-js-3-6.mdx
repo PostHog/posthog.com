@@ -53,7 +53,7 @@ Add your PostHog API key and host to your `nuxt.config.js` file. If you've alrea
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<ph_project_api_key>',
+      posthogToken: '<ph_project_token>',
       posthogHost: '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
@@ -65,7 +65,7 @@ Initialize the PostHog Node client where you'd like to use it on the server side
 
 ```js file=server/api/example.js focusOnLines=7-27
 export default defineEventHandler(async (event) => {
-  const rawCookie = getCookie(event, `ph_${runtimeConfig.public.posthogPublicKey}_posthog`)
+  const rawCookie = getCookie(event, `ph_${runtimeConfig.public.posthogToken}_posthog`)
   const distinctID = rawCookie ? JSON.parse(rawCookie)?.distinct_id : undefined
   const url = getRequestURL(event)
   const query = getQuery(event)
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig()
 
   const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
+    runtimeConfig.public.posthogToken,
     { 
       host: runtimeConfig.public.posthogHost, 
     }

@@ -19,7 +19,7 @@ For now, we require product tours to be explicitly enabled in your PostHog init 
 Example:
 
 ```typescript
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN!, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_API_HOST,
   defaults: '2025-05-24',
   disable_product_tours: false,

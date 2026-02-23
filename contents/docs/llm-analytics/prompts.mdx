@@ -44,10 +44,10 @@ The user's name is {{user_name}} and their subscription tier is {{tier}}.
 ### Prerequisites
 
 - **Personal API key (`phx_...`)** – Used as Bearer auth for prompt fetches
-- **Project API key (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
+- **Project Token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
 - **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
 
-When you initialize `Prompts` with a PostHog client, the SDK uses the client's project API key automatically. If you initialize `Prompts` directly, you must pass both keys.
+When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys.
 Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
 
 ### Python

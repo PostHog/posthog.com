@@ -108,7 +108,7 @@ Interaction autocapture records when users interact with UI elements in your app
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
 config.captureElementInteractions = true // Disabled by default
 PostHogSDK.shared.setup(config)
 ```
