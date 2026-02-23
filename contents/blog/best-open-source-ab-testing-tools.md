@@ -11,6 +11,7 @@ featuredImageType: full
 author:
   - hanna-crombie
   - andy-vandervell
+  - natalia-amorim
 category: General
 tags:
   - Comparisons
@@ -134,7 +135,7 @@ Unleash is for autonomous development teams who want a lightweight way to test, 
 - Extensive APIs
 - 25+ official SDKs covering all major languages and frameworks
 - Privacy-first architecture (no user PII leaves your infrastructure)
-- Integrations with Jira, Datadog, Microsoft Teams, and Slack
+- Integrations with Jira, [Datadog](/blog/best-datadog-alternatives), Microsoft Teams, and Slack
 - Self-hosted and managed service available
 
 ### How much does Unleash cost?
@@ -285,3 +286,5 @@ Yes – that's one of the main advantages of open-source A/B testing tools. **Gr
 - [Common A/B testing mistakes](/blog/ab-testing-mistakes)
 - [The best open-source feature flag tools](/blog/best-open-source-feature-flag-tools)
 - [PostHog vs. GrowthBook](/blog/posthog-vs-growthbook)
+
+<NewsletterForm />

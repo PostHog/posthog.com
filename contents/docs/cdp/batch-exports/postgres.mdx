@@ -8,6 +8,8 @@ availability:
     enterprise: full
 ---
 
+import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+
 Batch exports can be used to export data to a Postgres table.
 
 ## Setting up Postgres access
@@ -65,6 +67,8 @@ The schema of the model as created in Postgres is:
 | created_at                 | `TIMESTAMP WITH TIME ZONE`   | The timestamp when the person was created                                                                                          |
 
 The Postgres table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
+
+<PersonsModelNote />
 
 ### Sessions model
 

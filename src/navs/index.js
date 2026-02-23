@@ -750,6 +750,10 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/writing-product-docs',
             },
             {
+                name: 'How to use the content writer agent',
+                url: '/handbook/docs-and-wizard/content-writer-agent',
+            },
+            {
                 name: 'Onboarding docs',
                 url: '/handbook/docs-and-wizard/onboarding-docs',
             },
@@ -1521,8 +1525,8 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-data',
                     },
                     {
-                        name: 'Onboarding conversations',
-                        url: '/handbook/onboarding/onboarding-conversations',
+                        name: 'Onboarding conversations playbook',
+                        url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
                         name: 'Sales handover',
