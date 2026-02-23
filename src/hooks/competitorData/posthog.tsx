@@ -152,6 +152,7 @@ export const posthog = {
                     metrics: false,
                     traces: false,
                     infra_monitoring: false,
+                    alerting: false,
                 },
             },
             pricing: {
@@ -320,7 +321,7 @@ export const posthog = {
             },
             management: {
                 features: {
-                    approvals: true,
+                    approvals: 'Scale',
                     data_source: 'First-party',
                     flag_administration: true,
                     flag_scheduling: true,
@@ -621,7 +622,7 @@ export const posthog = {
             eu_hosting: true,
             open_source: true,
             reverse_proxy: true,
-            managed_reverse_proxy: true,
+            managed_reverse_proxy: 'Scale',
             self_host: true,
         },
         libraries: {
@@ -704,6 +705,7 @@ export const posthog = {
             cms: false,
             notebooks: true,
             project_management_tools: false,
+            ai_assistant: true,
         },
         security: {
             bot_blocking: true,
@@ -714,9 +716,10 @@ export const posthog = {
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: 'Enterprise',
-            role_based_access_control: true,
-            saml_sso: 'Enterprise',
+            history_audit_logs: 'Scale',
+            role_based_access_control: 'Enterprise',
+            saml_sso: 'Scale',
+            siem: false,
             soc2_certified: true,
             security_certification: 'SOC 2 Type II',
             two_factor_auth: true,

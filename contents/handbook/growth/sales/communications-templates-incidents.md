@@ -110,11 +110,13 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 | **Regional Backup (Americas / EMEA / APAC)** | Covers accounts when owners are offline. Takes handoff from CMOC, sends comms, and ensures follow-up continuity. |
 | **Engineering Incident Lead** | Owns technical response and provides updates to CMOC for accurate messaging. |
 
+> All coordination between CMOC and Account Owners should happen in [#cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) transparently so that everyone who manages customers is in the loop.
+
 ### **Workflow**
 
 1. **Incident declared** (Engineering).
 2. **CMOC activated**, notified of impact.
-3. **CMOC drafts the initial message**, shares with the Account Owner.
+3. **CMOC drafts the initial message**, shares with the Account Owners in [#cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
 4. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
 5. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).
 6. **Regional handoffs** coordinated by CMOC.

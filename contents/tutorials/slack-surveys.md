@@ -13,7 +13,7 @@ tags:
 
 It's useful receive Slack notifications as soon as users respond to your surveys. You can do this in PostHog using our [realtime destinations](/docs/cdp/destinations).
 
-After you've created your survey, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations), search for the **Slack** destination and click **+ Create**. Then on the creation screen:
+After you've created your survey, go to the [data pipeline destinations tab](https://app.posthog.com/data-management/destinations), search for the **Slack** destination and click **+ Create**. Then on the creation screen:
 
 1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 
