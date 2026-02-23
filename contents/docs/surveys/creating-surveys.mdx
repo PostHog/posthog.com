@@ -279,7 +279,7 @@ You can display your survey to specific users based on:
 
 -   **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
--   **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
+-   **URL targeting:** Show when URL either contains a string, exactly matches a string, or matches a regex. When using exact matching, trailing slashes are stripped before comparison. The URL targeting is evaluated against `window.location.href`.
 
 -   **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
 

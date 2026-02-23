@@ -159,11 +159,34 @@ Here are some examples of what you can ask your AI agent to do with the PostHog 
 
 The agent will use the `create-feature-flag` tool to create the flag with a 20% rollout and return the configuration including the key, rollout percentage, and a link to the flag in PostHog.
 
+### Multivariate feature flags
+
+**Prompt:** "Create a multivariate feature flag called 'homepage-hero-test' with three variants: control at 34%, variant_a at 33%, and variant_b at 33%"
+
+The agent will use the `create-feature-flag` tool with a `multivariate` configuration to create the flag with multiple variants. Variant rollout percentages must be integers that sum to 100.
+
 ### Analytics queries
 
 **Prompt:** "How many unique users signed up in the last 7 days, broken down by day?"
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
+
+
+### SQL and HogQL queries
+
+Your AI agent can execute complex HogQL queries to analyze both system data and analytics data in PostHog.
+
+**Prompt:** "Query my feature flags to find all flags that are rolled out to less than 50% of users"
+
+The agent will use SQL to query the `system.feature_flags` table and return flags filtered by rollout percentage.
+
+**Prompt:** "Write a HogQL query to find users who triggered the signup event but didn't complete onboarding in the last 30 days"
+
+The agent will construct and execute a HogQL query against the `events` table, using subqueries to find users who signed up but are missing the onboarding completion event.
+
+**Prompt:** "What cohorts contain users who made a purchase in the last week?"
+
+The agent will query `system.cohorts` and cross-reference with purchase events to identify relevant cohorts.
 
 ### A/B test creation
 

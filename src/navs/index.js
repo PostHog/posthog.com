@@ -750,6 +750,10 @@ export const handbookSidebar = [
                 url: '/handbook/docs-and-wizard/writing-product-docs',
             },
             {
+                name: 'How to use the content writer agent',
+                url: '/handbook/docs-and-wizard/content-writer-agent',
+            },
+            {
                 name: 'Onboarding docs',
                 url: '/handbook/docs-and-wizard/onboarding-docs',
             },
@@ -1521,6 +1525,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-data',
                     },
                     {
+                        name: 'Onboarding conversations playbook',
+                        url: '/handbook/onboarding/onboarding-conversations-playbook',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
@@ -1643,6 +1651,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
                 ],
+            },
+            {
+                name: 'Product enablement',
+                url: '/handbook/growth/sales/product-enablement',
             },
             {
                 name: 'Use cases',
@@ -5405,6 +5417,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Prompt management',
+                    url: '/docs/llm-analytics/prompts',
+                    icon: 'IconPencil',
+                    color: 'purple',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
                     name: 'Trace summarization',
                     url: '/docs/llm-analytics/summarization',
                     icon: 'IconAI',
@@ -5897,6 +5919,12 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install PostHog SDK',
+                    url: '/docs/workflows/installation',
+                    icon: 'IconTerminal',
+                    color: 'blue',
                 },
                 {
                     name: 'Configure a channel',
