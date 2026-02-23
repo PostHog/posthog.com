@@ -13,13 +13,13 @@ Like [capturing events](/tutorials/api-capture-events), feature flags get a spec
 
 ## Setting up authentication and feature flags
 
-The `flags` endpoint requires your project API key for authentication. To get this value, go to your project settings, and copy the value under "Project Variables." This is the same value you use to initialize a library.
+The `flags` endpoint requires your project token for authentication. To get this value, go to your project settings, and copy the value under "Project Variables." This is the same value you use to initialize a library.
 
 Obviously you also need to create a flag before you can evaluate it. To create a feature flag, in your PostHog instance, go to the "Feature Flags" tab, click "New feature flag," enter a key, set release conditions to 100% of users, and click save.
 
 ## Request to evaluate a basic feature flag
 
-Once your feature flag is set up, the request to evaluate the flag is straightforward. All you need is the project API key, the distinct ID of the user you want to check, and the version (`v`) as a param. 
+Once your feature flag is set up, the request to evaluate the flag is straightforward. All you need is the project token, the distinct ID of the user you want to check, and the version (`v`) as a param. 
 
 Formatting all this correctly looks like this:
 
@@ -27,7 +27,7 @@ Formatting all this correctly looks like this:
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<PH_PROJECT_API_KEY>",
+  "token": "<ph_project_token>",
   "distinct_id": "ian@posthog.com"
 }' "<ph_app_host>/flags/?v=2"
 ```
@@ -41,7 +41,7 @@ headers = {
 }
 
 body = {
-  "api_key": "<PH_PROJECT_API_KEY>",
+  "api_key": "<ph_project_token>",
   "distinct_id": "ian@posthog.com"
 }
 
@@ -90,7 +90,7 @@ headers = {
 }
 
 body = {
-  "api_key": "<PH_PROJECT_API_KEY>",
+  "api_key": "<ph_project_token>",
   "distinct_id": "ian@posthog.com"
 }
 
@@ -273,7 +273,7 @@ First, we get our evaluation request and variables sorted.
 ```python
 USER_EMAIL = "ian@posthog.com"
 POSTHOG_PERSONAL_API_KEY = "<POSTHOG_PERSONAL_API_KEY>"
-PROJECT_API_KEY = '<PH_PROJECT_API_KEY>'
+PROJECT_API_KEY = '<ph_project_token>'
 FLAG_KEY = 'request-test'
 POSTHOG_PROJECT_ID = <POSTHOG_PROJECT_ID>
 

@@ -8,6 +8,8 @@ availability:
     enterprise: full
 ---
 
+import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+
 Batch exports can be used to export data to Redshift, Amazon's data warehouse product. There are two SQL commands that can be used to export data: `COPY` and `INSERT`. Essentially, `COPY` works by reading and writing entire files in parallel from an S3 bucket, where as `INSERT` works by writing batches of rows. In general, we recommend `COPY` as it offers significantly better performance, but `INSERT` is provided as an alternative that requires less setup.
 
 ## Creating the batch export
@@ -81,6 +83,8 @@ The schema of the model as created in Redshift is:
 | created_at                 | `TIMESTAMP WITH TIME ZONE`    | The timestamp when the person was created                                                                                          |
 
 The Redshift table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
+
+<PersonsModelNote />
 
 ### Sessions model
 

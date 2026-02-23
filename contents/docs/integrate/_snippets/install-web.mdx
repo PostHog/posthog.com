@@ -38,12 +38,12 @@ import InstallWebPackageManagers from "./install-web-package-managers.mdx"
 
 <InstallWebPackageManagers />
 
-And then include it with your project API key and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
+And then include it with your project token and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
 
 ```js-web
 import posthog from 'posthog-js'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
 })
@@ -85,7 +85,7 @@ import "posthog-js/dist/web-vitals"
 import posthog from 'posthog-js/dist/module.no-external'
 
 // All other posthog commands are the same as usual
-posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
+posthog.init('<ph_project_token>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 ```
 
 **Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `@posthog/react` does not work with any module import other than the default.
@@ -99,7 +99,7 @@ If you don't want to send test data while you're developing, you can do the foll
 
 ```js-web
 if (!window.location.host.includes('127.0.0.1') && !window.location.host.includes('localhost')) {
-    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
+    posthog.init('<ph_project_token>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 }
 ```
 
