@@ -128,6 +128,20 @@ posthog.setPersonPropertiesForFlags({
 ```
 
 
+
+## Why can't I create a new feature flag?
+
+PostHog enforces per-team limits on feature flags to protect against memory issues during flag evaluation and caching. If you hit a limit, you'll see one of these errors:
+
+- **Flag count limit** - Each team can have a maximum of 2,000 active (non-deleted) feature flags. This limit is only enforced when creating new flags, not when updating existing ones.
+- **Filter size limit** - A single flag's filter configuration can't exceed 512KB. This limit is enforced on both create and update.
+
+To free up capacity, [delete unused feature flags](https://app.posthog.com/feature_flags) that are no longer needed.
+
+Surveys, web experiments, and product tours also count toward the flag limit because they create backing feature flags. If you're close to the limit, check for flags created by these features as well.
+
+Self-hosted users can adjust these limits using the `MAX_FEATURE_FLAGS_PER_TEAM` and `MAX_FEATURE_FLAG_FILTER_SIZE_BYTES` environment variables.
+
 ## Why am I getting an error about the 'in' operator for properties?
 
 When creating or updating a feature flag, you may see an error like:
