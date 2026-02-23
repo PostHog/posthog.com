@@ -6,9 +6,9 @@ author:
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/interview_thumb_ef4a0f0be9.jpg
 featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
-category: Startups
 tags:
     - Guides
+    - YouTube
 ---
 
 After 2,431 interviews in 2025, we've noticed something: the best candidates ask completely different questions.
@@ -25,3 +25,5 @@ In this video, PostHog co-founder James Hawkins shares the exact questions that 
 - How to spot if founders view engineering as a cost center
 - Red flags in company culture that most people miss
 - Why asking about founder motivations matters more than you think
+
+[Subscribe to PostHog on YouTube](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) for more videos like this.
