@@ -27,7 +27,6 @@ export const endpoints = {
     colorSecondary: 'teal',
     category: 'product_engineering',
     slug: 'endpoints',
-    status: 'beta',
 
     // slider: {
     //     marks: [100000, 1000000, 10000000, 100000000],
