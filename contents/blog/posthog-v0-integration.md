@@ -79,9 +79,9 @@ Qualitative feedback is most useful when patterns are clear. v0 can help create 
 
 **Suggested prompt:** 
 
-> Create a survey asking users: ‘What’s the one thing you’d change about our product?’ Then group the responses by topic and summarize the main themes.
+> Create an open-text survey asking users: 'What's the one thing you'd change about our product?' and target it to users who've been active for at least 30 days.
 
-**Insights from our Growth team:** Try to use this after launches or major UI changes. Instead of manually reading hundreds of open-text responses, look for recurring themes like “navigation confusion” or “missing export options.” That will make it easier to prioritize fixes based on frequency and impact rather than on the loudest individual comment.
+**Insights from our Growth team:** Try to use this after launches or major UI changes. Instead of manually reading hundreds of open-text responses, look for recurring themes like “navigation confusion” or “missing export options.” That will make it easier to prioritize fixes based on frequency and impact rather than on the loudest individual comment. Once survey responses come in, use a follow-up prompt to pull survey stats and identify the most common themes.
 
 ### Debug anticipating user impact 
 
