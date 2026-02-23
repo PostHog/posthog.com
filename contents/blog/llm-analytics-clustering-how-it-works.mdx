@@ -244,7 +244,9 @@ After this step, every trace or generation has an integer cluster ID. But an int
 
 Now we have clusters with integer IDs. Cluster 0 has 47 traces, cluster 1 has 23, cluster -1 (noise) has 8. Not exactly actionable.
 
-This is where we bring AI back in - specifically, a [LangGraph](https://langchain-ai.github.io/langgraph/) ReAct agent powered by GPT-5.2. Its job is to explore the clusters and come up with meaningful labels and descriptions. You can read the agent's system prompt in <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/prompts.py" target="_blank" rel="noopener noreferrer"><code>prompts.py</code></a>.
+This is where we bring AI back in - specifically, a [LangGraph](https://langchain-ai.github.io/langgraph/) ReAct agent powered by GPT-5.2. Its job is to explore the clusters and come up with meaningful labels and descriptions. 
+
+> You can read the agent's system prompt in <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/labeling_agent/prompts.py" target="_blank" rel="noopener noreferrer"><code>prompts.py</code></a>.
 
 The agent has access to 8 tools:
 
