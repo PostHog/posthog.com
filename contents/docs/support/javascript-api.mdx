@@ -295,14 +295,14 @@ The conversations module automatically captures these events:
 
 In addition to the widget events above, the following server-side events are captured when ticket or message state changes. These events can be used as [workflow triggers](/docs/workflows/workflow-builder#conversation-event-triggers) to automate support processes.
 
-| Event | Description |
-|-------|-------------|
-| `$conversation_ticket_created` | A new support ticket was created |
-| `$conversation_ticket_status_changed` | Ticket status was updated. Includes `old_status` and `new_status` properties. |
-| `$conversation_ticket_priority_changed` | Ticket priority was updated. Includes `old_priority` and `new_priority` properties. |
-| `$conversation_ticket_assigned` | Ticket was assigned to a team member or AI. Includes `assignee_type` and `assignee_id` properties. |
-| `$conversation_message_sent` | Team member sent a message on a ticket. Includes `message_id`, `message_content`, `author_type`, and `author_id` properties. |
-| `$conversation_message_received` | Customer sent a message on a ticket. Includes `message_id`, `message_content`, `author_type`, `customer_name`, and `customer_email` properties. |
+| Event | Description | Properties |
+|-------|-------------|------------|
+| `$conversation_ticket_created` | A new support ticket was created | — |
+| `$conversation_ticket_status_changed` | Ticket status was updated | `old_status`, `new_status` |
+| `$conversation_ticket_priority_changed` | Ticket priority was updated | `old_priority`, `new_priority` |
+| `$conversation_ticket_assigned` | Ticket was assigned to a team member or AI | `assignee_type`, `assignee_id` |
+| `$conversation_message_sent` | Team member sent a message on a ticket | `message_id`, `message_content`, `author_type`, `author_id` |
+| `$conversation_message_received` | Customer sent a message on a ticket | `message_id`, `message_content`, `author_type`, `customer_name`, `customer_email` |
 
 All workflow trigger events include these base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
 
