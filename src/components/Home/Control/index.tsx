@@ -31,7 +31,6 @@ import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { PRODUCT_COUNT, APP_COUNT } from '../../../constants'
 import Start from 'components/Start'
@@ -842,12 +841,17 @@ const ProductsSectionTest = () => (
 )
 
 const ProductsSection = () => {
-    const variant = useFeatureFlagVariantKey('homepage-product-groupings')
-
+    const posthog = usePostHog()
     return (
         <RenderInClient
             placeholder={<ProductsSectionControl />}
-            render={() => (variant === 'experiment' ? <ProductsSectionTest /> : <ProductsSectionControl />)}
+            render={() =>
+                posthog?.getFeatureFlag?.('homepage-product-groupings', { fresh: true }) === 'experiment' ? (
+                    <ProductsSectionTest />
+                ) : (
+                    <ProductsSectionControl />
+                )
+            }
         />
     )
 }

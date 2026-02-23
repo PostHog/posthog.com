@@ -30,6 +30,7 @@ export const logsFeatures = {
             },
             native_open_telemetry_ingest: {
                 name: 'Native OpenTelemetry ingestion',
+                description: 'Natively ingest and process telemetry using OpenTelemetry APIs and formats',
             },
             vendor_agnostic_sdks: {
                 name: 'Vendor agnostic SDKs',
@@ -69,9 +70,15 @@ export const logsFeatures = {
         features: {
             metrics: {
                 name: 'Metrics',
+                description: 'System, app performance over time',
             },
             traces: {
                 name: 'Traces',
+                description: 'Traces, request journey, and latency breakdown',
+            },
+            alerting: {
+                name: 'Alerting',
+                description: 'Threshold, anomaly, and forecast alerts',
             },
             infra_monitoring: {
                 name: 'Infra monitoring',
