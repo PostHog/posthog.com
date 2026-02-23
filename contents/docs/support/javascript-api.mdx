@@ -243,6 +243,41 @@ setInterval(async () => {
 }, 5000)
 ```
 
+## Recover tickets across browsers
+
+Tickets are tied to the browser's widget session ID, so switching browsers or clearing storage means losing access. You can recover tickets by requesting a recovery link via email.
+
+### Request a recovery link
+
+```javascript
+await posthog.conversations.requestRestoreLink('user@example.com')
+```
+
+This sends an email containing a recovery link to the provided address. The link includes a `ph_conv_restore` token as a query parameter and expires after one hour.
+
+**Parameters:**
+- `email` (string) - The email address used in previous conversations
+
+The method is rate limited. If you send too many requests, it throws an error with a 429 status.
+
+### Restore tickets from a recovery link
+
+```javascript
+const result = await posthog.conversations.restoreFromUrlToken()
+```
+
+Reads the `ph_conv_restore` query parameter from the current URL and migrates the associated tickets to the current browser session. After processing, the query parameter is removed from the URL.
+
+**Response:**
+```typescript
+interface RestoreResult {
+  status: 'success'
+  migrated_ticket_ids: string[]  // IDs of tickets migrated to this session
+}
+```
+
+The default widget calls `restoreFromUrlToken()` automatically on load, so you only need to call this yourself if you're building a custom UI.
+
 ## Events captured
 
 The conversations module automatically captures these events:
@@ -332,3 +367,5 @@ try {
 | `getTickets(options?)` | Fetch tickets list | `Promise<GetTicketsResponse \| null>` |
 | `getCurrentTicketId()` | Get current ticket ID | `string \| null` |
 | `getWidgetSessionId()` | Get widget session ID | `string \| null` |
+| `requestRestoreLink(email)` | Send a recovery email to restore tickets | `Promise<void>` |
+| `restoreFromUrlToken()` | Restore tickets from URL recovery token | `Promise<RestoreResult \| null>` |

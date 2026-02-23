@@ -18,18 +18,19 @@ The Support widget is a chat interface that appears on your website, allowing us
 4. Configure your settings (see below)
 5. Save
 
-The widget appears as a floating button in the bottom-right corner of your site.
+The widget appears as a floating button on your site. By default it appears in the bottom-right corner, but you can customize its position in the settings.
 
 ## Widget configuration
 
 These settings are configured in the **In-app widget** section of Support settings.
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Enable widget** | Show the chat widget on your site | `false` |
-| **Button color** | Primary color for the widget (hex) | `#5375ff` |
-| **Greeting message** | Welcome text shown when widget opens | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | `[]` (all domains) |
+| Setting | Description | Options | Default |
+|---------|-------------|---------|--------|
+| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
+| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
+| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
+| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
+| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
 
 ## Domain restrictions
 
@@ -77,6 +78,19 @@ posthog.init('YOUR_API_KEY', {
 ```
 
 This is different from hiding the widget – it completely disables the feature.
+
+## Recover tickets across browsers
+
+Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets. The widget includes a **Recover your tickets** link to handle this.
+
+### How recovery works
+
+1. The user clicks **Recover your tickets** in the ticket list
+2. They enter the email address used in previous conversations
+3. A recovery link is sent to that email (expires in one hour)
+4. Clicking the link opens the widget and restores their tickets in the new browser
+
+If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
 
 ## Email notifications
 

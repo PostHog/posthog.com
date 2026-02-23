@@ -164,7 +164,7 @@ We can then import this singleton wherever we need it in the backend. Unfortunat
 
 ## 3. Capturing errors
 
-With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event.
+With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException`.
 
 <MultiLanguage>
 

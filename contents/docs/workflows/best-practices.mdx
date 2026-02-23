@@ -83,6 +83,18 @@ Periodically review metrics: how many messages sent, how many workflows triggere
     classes="rounded"
 />
 
+
+### Manage variable size limits
+
+Workflow variables have a total size limit of 5KB. If an action's output exceeds this limit, the workflow throws an error rather than silently dropping the values.
+
+To stay within the limit, use `result_path` to store only the fields you need from an action's output instead of storing the entire response.
+
+When a variable size error occurs:
+
+- Workflows with `on_error: abort` exit immediately
+- Workflows with `on_error: continue` skip to the next step
+
 ### Be mindful of costs and rate limits
 
 PostHog plans to price Workflows based on the number of real-time destinations and monthly messages after beta. Design workflows to minimize unnecessary messages. For example, avoid sending multiple messages to the same user around the same event, and use batching or deduplication logic where possible. 

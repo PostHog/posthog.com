@@ -40,7 +40,7 @@ Remote config is especially relied on for mobile apps. This is because mobile ap
 
 ## What is a feature flag?
 
-[Feature flags](/docs/feature-flags) function nearly the same as configurations. They are a key that returns a value when called with a service, but they often include detail on the user as well.
+[Feature flags](/blog/what-is-a-feature-flag) function nearly the same as configurations. They are a key that returns a value when called with a service, but they often include detail on the user as well.
 
 > **Note:** For simplicity, we assume you are using an [external feature flag service](/blog/feature-flags-as-a-service). Of course, you could (and many do) build your own feature flag tool. This might include some of the functionality below.
 
@@ -52,7 +52,7 @@ The big difference compared to configurations is feature flags’ expanded funct
 
 To access these, [feature flag services](/blog/best-open-source-feature-flag-tools) often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
 
-Feature flags are almost always remotely configurable, and because they use an external service, developers can modify them at run time. No need to reset or recompile, just call the external service again. These services also provide a simplified UI, creating a centralized location for modifying feature flags and enabling quick rollouts and rollbacks.
+[Feature flags](/docs/feature-flags) are almost always remotely configurable, and because they use an external service, developers can modify them at run time. No need to reset or recompile, just call the external service again. These services also provide a simplified UI, creating a centralized location for modifying feature flags and enabling quick rollouts and rollbacks.
 
 An example use case of a feature flag is rolling a new feature into beta. A conditional statement wraps the beta feature to check the value of the flag. The feature flag service evaluates if the user is part of the beta, and either grants or denies the user access.
 
