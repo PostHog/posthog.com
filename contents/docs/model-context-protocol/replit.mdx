@@ -1,0 +1,22 @@
+---
+title: PostHog MCP for Replit
+---
+import ReplitBadge from 'components/ReplitBadge'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Replit Agent to directly interact with your PostHog data — managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+| Region | Server URL |
+|--------|------------|
+| **US** (default) | `https://mcp.posthog.com/mcp` |
+| **EU** | `https://mcp-eu.posthog.com/mcp` |
+
+## Setup
+
+1. <ReplitBadge mcpConfig="eyJkaXNwbGF5TmFtZSI6IlBvc3RIb2ciLCJiYXNlVXJsIjoiaHR0cHM6Ly9tY3AucG9zdGhvZy5jb20vbWNwIn0=" />
+2. When prompted, log in to PostHog to authorize access
+3. The PostHog MCP server will now be available in your Replit Agent
+
+<SharedContent />

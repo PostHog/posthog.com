@@ -1,0 +1,27 @@
+---
+title: PostHog MCP for Windsurf
+---
+import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Windsurf to directly interact with your PostHog data — managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+| Region | Server URL |
+|--------|------------|
+| **US** (default) | `https://mcp.posthog.com/sse` |
+| **EU** | `https://mcp-eu.posthog.com/sse` |
+
+## Manual setup
+
+1. Open [Windsurf](https://windsurf.com/) and navigate to **Windsurf Settings > Cascade > MCP Servers**
+2. Click **Manage MCP Servers**
+3. Click **View raw config**
+4. Update `mcp_config.json` with the following configuration:
+
+<MCPConfigSnippet variant="windsurf" />
+
+When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+
+<SharedContent />

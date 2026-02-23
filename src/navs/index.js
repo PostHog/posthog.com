@@ -2585,6 +2585,44 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Claude Code',
+                                    url: '/docs/model-context-protocol/claude-code',
+                                },
+                                {
+                                    name: 'Claude Desktop',
+                                    url: '/docs/model-context-protocol/claude-desktop',
+                                },
+                                {
+                                    name: 'Cursor',
+                                    url: '/docs/model-context-protocol/cursor',
+                                },
+                                {
+                                    name: 'Windsurf',
+                                    url: '/docs/model-context-protocol/windsurf',
+                                },
+                                {
+                                    name: 'VS Code',
+                                    url: '/docs/model-context-protocol/vscode',
+                                },
+                                {
+                                    name: 'Zed',
+                                    url: '/docs/model-context-protocol/zed',
+                                },
+                                {
+                                    name: 'Replit',
+                                    url: '/docs/model-context-protocol/replit',
+                                },
+                                {
+                                    name: 'v0',
+                                    url: '/docs/model-context-protocol/v0',
+                                },
+                            ],
                         },
                         {
                             name: 'Replit integration',
