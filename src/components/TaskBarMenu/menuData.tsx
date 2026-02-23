@@ -745,6 +745,11 @@ export function useMenuData(): MenuType[] {
         },
         {
             type: 'item' as const,
+            label: 'Brand assets',
+            link: '/handbook/company/brand-assets',
+        },
+        {
+            type: 'item' as const,
             label: 'Display options',
             onClick: () => {
                 navigate('/display-options', { state: { newWindow: true } })
