@@ -38,9 +38,13 @@ You can create a slider or carousel of images by wrapping them in the `<ImageSli
 
 See an example in our [open-source analytics tools post](/blog/best-open-source-analytics-tools #1-posthog).
 
-## Product videos
+## Videos
 
-Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos.
+There are a few options for embedding videos, and the [style guide](/handbook/content/posthog-style-guide#adding-media) can help you decide which to use.
+
+### Product videos
+
+Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos. It's best for short videos.
 
 1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
 
@@ -65,6 +69,14 @@ classes="rounded"
 
 _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
 
+### Embedding Wistia videos
+
+This can be used in articles like tutorials or blog posts for longer-form videos (where the asset exceeds 20 MB and can't be uploaded to Cloudinary).
+
+```
+<WistiaEmbed mediaId="13hp4af5cc" />
+```
+
 ### Embedding YouTube videos
 
 While not an MDX component, a reminder that when embedding a YouTube video, you should do two things:
@@ -74,6 +86,15 @@ While not an MDX component, a reminder that when embedding a YouTube video, you 
 https://www.youtube-nocookie.com/embed/{VIDEO_ID}
 ```
 2. Add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
+
+Example:
+
+```
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=375"
+    className="rounded shadow-xl"
+/>
+```
 
 ## Code blocks
 
