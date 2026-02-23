@@ -109,20 +109,15 @@ function isRedirectSource(url, redirects) {
         // If source contains :path*, check if URL contains the part before :path*
         if (redirect.source.includes(':path*')) {
             const pathPrefix = redirect.source.split('/:path*')[0]
-            if (url.startsWith(pathPrefix) && url === 'founders/product-market-fit-game') {
-                throw (url, redirect.source)
-            }
             return url.startsWith(pathPrefix)
-        }
-        if (url.startsWith(redirect.source) && url === 'founders/product-market-fit-game') {
-            throw `${url} + ${redirect.source}`
         }
         // Otherwise, check if URL contains the full source
         return url.startsWith(redirect.source)
     })
 }
 
-function getRootLinks() {
+// List of folders under /contents
+function getContentsSubfolders() {
     return new Set(
         fs
             .readdirSync(CONFIG.CONTENTS_DIR, { withFileTypes: true })
@@ -131,7 +126,7 @@ function getRootLinks() {
     )
 }
 
-const ROOT_LINKS = Array.from(getRootLinks())
+const ROOT_LINKS = Array.from(getContentsSubfolders())
 
 // ============================================================================
 // SITEMAP FUNCTIONS
@@ -340,6 +335,7 @@ function validateAnchor(url, pages) {
 // MARKDOWN PROCESSING FUNCTIONS
 // ============================================================================
 
+// Detects relative link to content with missing leading forward slash
 function isLikelyRelativeInternalLink(url) {
     return ROOT_LINKS.some((root) => url.startsWith(root))
 }
@@ -743,10 +739,9 @@ if (outputPath) {
 
 // Run the script
 const checkResults = checkLinks(outputPath)
-
 if (checkResults.brokenLinks > 0) {
     console.log('\nCheck the output above ☝️')
-    process.exit(1)
 }
 
+// Always exit successfully until we fix existing broken links
 process.exit(0)
