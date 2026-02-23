@@ -373,7 +373,6 @@ const products: Product[] = [
             )
         },
         status: 'WIP',
-        badge: 'BETA',
         pricing: {
             cta: {
                 url: '/ai',

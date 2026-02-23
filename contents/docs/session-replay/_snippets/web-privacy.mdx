@@ -5,7 +5,7 @@ import SensitiveThirdPartyScreens from "./sensitive-third-party-screens.mdx"
 As any input element is highly likely to contain sensitive text such as email or password, **we mask these by default**. You can explicitly set this to false to disable the masking. You can then specify inputs types you would like to be masked.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         maskAllInputs: false,
         maskInputOptions: {
@@ -34,7 +34,7 @@ posthog.init('<ph_project_api_key>', {
 You can control the masking more granularly by using `maskInputFn` to customize how the masking behaves. For example, you may want to only redact text that looks like an email address, or comes from inputs that aren't search boxes.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         // `maskInputFn` only applies to selected elements, so make sure to set this to true if you want this to work globally
         maskAllInputs: true,
@@ -59,7 +59,7 @@ General text is not masked by default, but we provide multiple options for maski
 > **IMPORTANT**: The `text` related config options only apply to non-input text. Inputs are masked differently and have separate methods (as detailed [above](#input-elements)).
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         maskTextSelector: "*" // Masks all text elements (not including inputs)
     }
@@ -71,7 +71,7 @@ posthog.init('<ph_project_api_key>', {
 You can use a CSS selector to mask specific elements. For example, you may want to mask all elements with the class `email` or the ID `sensitive`.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         maskTextSelector: ".email, #sensitive" // masks all elements with the class "email" or the ID "sensitive". This does not apply to input elements.
 
@@ -84,7 +84,7 @@ posthog.init('<ph_project_api_key>', {
 You can further control the text that gets masked. For example, by only masking text that looks like an email
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         // `maskTextFn` only applies to selected elements, so make sure to set to "*" if you want this to work globally.
         // This does not apply to input elements.

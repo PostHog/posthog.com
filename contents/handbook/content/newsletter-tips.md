@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog has unusually high editorial standards – higher than anywhere else I've worked.  When I first started writing here, I struggled quite a bit. The feedback was good, but it was a lot, and for a while I couldn't tell if I was actually getting better or just spinning my wheels.
+PostHog has unusually high editorial standards (especially for a B2B SaaS company). When I first started writing here, I struggled quite a bit. The feedback was good, but it was a lot, and for a while I couldn't tell if I was actually getting better or just spinning my wheels.
 
 This handbook page is all the stuff I would tell myself from back then if I could. I wrote it for any future writers who join our editorial team. (It might also be useful for anyone trying to understand our unique developer content marketing and style more deeply.) It won't make the learning curve disappear, but hopefully makes it easier! 
 

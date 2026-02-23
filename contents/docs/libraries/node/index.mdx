@@ -306,7 +306,7 @@ As of `posthog-node` v3.0, the default now is to disregard the server IP, not ad
 You can go back to previous behavior by setting `disableGeoip` to false in your initialization:
 
 ```node
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
   disableGeoip: false
 })

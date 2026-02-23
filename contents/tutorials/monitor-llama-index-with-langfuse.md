@@ -161,7 +161,7 @@ Next we [connect Langfuse to PostHog](/docs/llm-analytics/integrations/langfuse-
 Here's how to connect Langfuse to PostHog:
 
 1. In your [Langfuse dashboard](https://cloud.langfuse.com/), click on your project settings and then on **Integrations**.
-2. On the PostHog integration, click **Configure** and paste in your PostHog host and project API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)).
+2. On the PostHog integration, click **Configure** and paste in your PostHog host and project token (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)).
 3. Click **Enabled** and then **Save**.
 
 Langfuse will now begin sending your LLM analytics to PostHog once a day.
