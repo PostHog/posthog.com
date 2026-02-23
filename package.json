@@ -59,7 +59,7 @@
         "@mdxeditor/editor": "^3.32.3",
         "@popperjs/core": "^2.11.2",
         "@posthog/hedgehog-mode": "^0.0.48",
-        "@posthog/icons": "0.36.0",
+        "@posthog/icons": "0.36.6",
         "@posthog/types": "1.352.1",
         "@radix-ui/react-accordion": "^1.2.3",
         "@radix-ui/react-collapsible": "^1.1.12",

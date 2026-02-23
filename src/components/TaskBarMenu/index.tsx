@@ -203,40 +203,6 @@ export default function TaskBarMenu() {
                                 },
                                 {
                                     type: 'item' as const,
-                                    label: 'My profile',
-                                    link: `/community/profiles/${user?.profile.id}`,
-                                    icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Bookmarks',
-                                    link: '/bookmarks',
-                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                            ]
-                          : []),
-                      ...(isModerator
-                          ? [
-                                {
-                                    type: 'item' as const,
-                                    label: 'Moderator tools',
-                                    disabled: true,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Upload media',
-                                    icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                    onClick: () =>
-                                        addWindow(
-                                            <MediaUploadModal
-                                                newWindow
-                                                location={{ pathname: `media-upload` }}
-                                                key={`media-upload`}
-                                            />
-                                        ),
-                                },
-                                {
-                                    type: 'item' as const,
                                     label: 'Components',
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
