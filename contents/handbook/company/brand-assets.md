@@ -41,7 +41,7 @@ If you're looking for the PostHog logo, you came to the right place. Please keep
 
 When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's face color to white when using on a dark background).
 
-The @2x and @4x versions of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x or @4x logo as it will appear crisper on newer devices, tablets and high resolution mobile devices. Square variants are useful for profile pictures, favicons, and other contexts that require a 1:1 aspect ratio. White background variants are useful when transparency is not supported.
+The @2x and @4x versions of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x or @4x logo as it will appear crisper on newer devices, tablets, and high-resolution mobile devices. Square variants are useful for profile pictures, favicons, and other contexts that require a 1:1 aspect ratio. White background variants are useful when transparency is not supported.
 
 > **Important:** We updated our logo in 2021. (Note the square font and sharp edges on the logomark in the old version.) Please be sure to use the _correct_ version. 👇🏼
 
