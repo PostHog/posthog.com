@@ -44,6 +44,12 @@ If you can pull feature flag data from another tool programmatically, you can us
     classes="rounded"
 />
 
+<CalloutBox icon="IconInfo" title="Feature flag limits" type="fyi">
+
+Each team can have a maximum of 2,000 active feature flags. Individual flag filters are limited to 512KB. These limits are enforced when creating new flags. If you hit a limit, delete unused flags or simplify your filter conditions. See [troubleshooting](/docs/feature-flags/troubleshooting) for more details.
+
+</CalloutBox>
+
 ## Step 2. Add feature flag key and description (required)
 
 This is the _unique_ key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
