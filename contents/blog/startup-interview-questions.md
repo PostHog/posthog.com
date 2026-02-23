@@ -3,8 +3,7 @@ title: 'The startup interview questions that actually matter (most engineers ski
 date: 2026-02-23
 author:
     - james-hawkins
-featuredImage: >-
-    https://i.ytimg.com/vi/KVMZgY2KNto/maxresdefault.jpg
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/interview_thumb_ef4a0f0be9.jpg
 featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 category: Startups
@@ -26,15 +25,3 @@ In this video, PostHog co-founder James Hawkins shares the exact questions that 
 - How to spot if founders view engineering as a cost center
 - Red flags in company culture that most people miss
 - Why asking about founder motivations matters more than you think
-
-## Chapters
-
-- **0:00** – Intro
-- **0:39** – How to use these questions
-- **1:40** – How to ask about product market fit (indirectly)
-- **4:05** – The question that reveals if a company will survive
-- **5:33** – How to show you're a good hire
-- **6:26** – Is their team good?
-- **7:48** – Culture questions that actually work
-- **9:19** – Founder motivations and long-term vision
-- **10:25** – Takeaways
