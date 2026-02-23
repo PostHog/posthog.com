@@ -108,12 +108,29 @@ function isRedirectSource(url, redirects) {
         // If source contains :path*, check if URL contains the part before :path*
         if (redirect.source.includes(':path*')) {
             const pathPrefix = redirect.source.split('/:path*')[0]
-            return url.includes(pathPrefix)
+            if (url.startsWith(pathPrefix) && url === 'founders/product-market-fit-game') {
+                throw (url, redirect.source)
+            }
+            return url.startsWith(pathPrefix)
+        }
+        if (url.startsWith(redirect.source) && url === 'founders/product-market-fit-game') {
+            throw `${url} + ${redirect.source}`
         }
         // Otherwise, check if URL contains the full source
-        return url.includes(redirect.source)
+        return url.startsWith(redirect.source)
     })
 }
+
+function getRootLinks() {
+    return new Set(
+        fs
+            .readdirSync(CONFIG.CONTENTS_DIR, { withFileTypes: true })
+            .filter((dirent) => dirent.isDirectory())
+            .map((dirent) => dirent.name)
+    )
+}
+
+const ROOT_LINKS = Array.from(getRootLinks())
 
 // ============================================================================
 // SITEMAP FUNCTIONS
@@ -322,6 +339,10 @@ function validateAnchor(url, pages) {
 // MARKDOWN PROCESSING FUNCTIONS
 // ============================================================================
 
+function isLikelyRelativeInternalLink(url) {
+    return ROOT_LINKS.some((root) => url.startsWith(root))
+}
+
 // Extract all internal links from a markdown file
 function extractInternalLinks(filePath) {
     const content = fs.readFileSync(filePath, 'utf8')
@@ -345,7 +366,7 @@ function extractInternalLinks(filePath) {
         }
 
         // Only check internal links
-        if (linkUrl.startsWith('/') && !linkUrl.startsWith('//')) {
+        if ((linkUrl.startsWith('/') || isLikelyRelativeInternalLink(linkUrl)) && !linkUrl.startsWith('//')) {
             const beforeMatch = content.substring(Math.max(0, match.index - 75), match.index)
             const afterMatch = content.substring(
                 match.index + match[0].length,
@@ -472,6 +493,20 @@ function processLink(link, file, pages, redirects) {
         }
     }
 
+    if (isLikelyRelativeInternalLink(link.url)) {
+        return {
+            type: 'malformed',
+            brokenItem: {
+                file: file,
+                link: link.url,
+                text: link.text,
+                line: link.line,
+                context: link.context,
+                type: 'malformed-link',
+            },
+        }
+    }
+
     return { type: 'valid' }
 }
 
@@ -479,6 +514,7 @@ function processLink(link, file, pages, redirects) {
 function processAllLinks(fileResults, pages, redirects) {
     const brokenLinks = []
     const brokenAnchors = []
+    const malformedLinks = []
     let totalLinks = 0
     let anchorLinksChecked = 0
     let redirectedLinks = 0
@@ -513,6 +549,9 @@ function processAllLinks(fileResults, pages, redirects) {
                     brokenAnchors.push(processResult.brokenItem)
                     anchorLinksChecked++
                     break
+                case 'malformed':
+                    malformedLinks.push(processResult.brokenItem)
+                    break
                 case 'valid':
                     // Count anchor links for ALL non-excluded, non-redirected links (like original)
                     if (hasAnchor) {
@@ -526,6 +565,7 @@ function processAllLinks(fileResults, pages, redirects) {
     return {
         brokenLinks,
         brokenAnchors,
+        malformedLinks,
         stats: {
             totalLinks,
             excludedLinks,
@@ -540,7 +580,7 @@ function processAllLinks(fileResults, pages, redirects) {
 // ============================================================================
 
 // Create the results object
-function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages) {
+function createResultsObject(brokenLinks, brokenAnchors, malformedLinks, stats, markdownFiles, redirects, pages) {
     return {
         timestamp: new Date().toISOString(),
         summary: {
@@ -550,6 +590,7 @@ function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, r
             brokenLinks: brokenLinks.length,
             anchorLinksChecked: stats.anchorLinksChecked,
             brokenAnchors: brokenAnchors.length,
+            malformedLinks: malformedLinks.length,
             htmlFilesCached: anchorCache.size,
             markdownFiles: markdownFiles.length,
             redirectPatterns: redirects.length,
@@ -576,6 +617,15 @@ function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, r
             line: anchor.line,
             text: anchor.text,
             context: anchor.context,
+        })),
+        malformedLinks: malformedLinks.map((malformed) => ({
+            type: malformed.type,
+            file: path.relative(process.cwd(), malformed.file),
+            page: convertToPostHogUrl(malformed.file),
+            brokenLink: malformed.link,
+            line: malformed.line,
+            text: malformed.text,
+            context: malformed.context,
         })),
     }
 }
@@ -645,8 +695,28 @@ function displayBrokenAnchors(brokenAnchors) {
     })
 }
 
+// Display malformed links
+function displayMalformedLinks(malformedLinks) {
+    if (malformedLinks.length === 0) return
+
+    console.log('\nMalformed internal links found (missing leading slash):\n')
+
+    malformedLinks.forEach((malformed) => {
+        console.log(`Error type: ${malformed.type}`)
+        console.log(`File: ${path.relative(process.cwd(), malformed.file)}`)
+        console.log(`Page: ${convertToPostHogUrl(malformed.file)}`)
+        console.log(`Broken link: ${malformed.link}`)
+        console.log(`Line #: ${malformed.line}`)
+        if (malformed.text) {
+            console.log(`Hyperlinked text: ${malformed.text}`)
+        }
+        console.log(`Context: ${malformed.context}`)
+        console.log('-'.repeat(80))
+    })
+}
+
 // Display summary statistics
-function displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFilesCount) {
+function displaySummaryStats(stats, brokenLinks, brokenAnchors, malformedLinks, markdownFilesCount) {
     console.log(`\nScanned ${markdownFilesCount} markdown files`)
     console.log(`Processed ${stats.totalLinks} internal links`)
     console.log(`Found ${stats.excludedLinks} excluded links (skipped)`)
@@ -654,6 +724,7 @@ function displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFilesCou
     console.log(`Checked ${stats.anchorLinksChecked} anchor links`)
     console.log(`Found ${brokenLinks.length} broken links`)
     console.log(`Found ${brokenAnchors.length} broken anchor links`)
+    console.log(`Found ${malformedLinks.length} malformed internal links (missing leading slash)`)
     console.log(`Cached ${anchorCache.size} HTML files for anchor checking`)
 }
 
@@ -678,28 +749,42 @@ function checkLinks(outputPath) {
     const fileResults = processFilesInBatches(markdownFiles)
 
     // Process and validate all links
-    const { brokenLinks, brokenAnchors, stats } = processAllLinks(fileResults, pages, redirects)
+    const { brokenLinks, brokenAnchors, malformedLinks, stats } = processAllLinks(fileResults, pages, redirects)
 
     // Sort results alphabetically by file
     brokenLinks.sort((a, b) => a.file.localeCompare(b.file))
     brokenAnchors.sort((a, b) => a.file.localeCompare(b.file))
+    malformedLinks.sort((a, b) => a.file.localeCompare(b.file))
 
     // Display broken links
-    displayBrokenLinks(brokenLinks)
     displayBrokenAnchors(brokenAnchors)
+    displayBrokenLinks(brokenLinks)
+    displayMalformedLinks(malformedLinks)
 
-    if (brokenLinks.length === 0 && brokenAnchors.length === 0) {
+    if (brokenLinks.length === 0 && brokenAnchors.length === 0 && malformedLinks.length === 0) {
         console.log('\nNo broken links found! 🎉')
     }
 
     // Display summary stats at the end
-    displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFiles.length)
+    displaySummaryStats(stats, brokenLinks, brokenAnchors, malformedLinks, markdownFiles.length)
 
     // Create and save results at the end
-    const results = createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages)
+    const results = createResultsObject(
+        brokenLinks,
+        brokenAnchors,
+        malformedLinks,
+        stats,
+        markdownFiles,
+        redirects,
+        pages
+    )
     writeResultsToFile(results, outputPath)
 
-    return brokenLinks.length
+    return {
+        brokenLinks: brokenLinks.length,
+        brokenAnchors: brokenAnchors.length,
+        malformedLinks: malformedLinks.length,
+    }
 }
 
 // ============================================================================
@@ -717,12 +802,11 @@ if (outputPath) {
 }
 
 // Run the script
-const brokenCount = checkLinks(outputPath)
+const checkResults = checkLinks(outputPath)
 
-// Only exit with error code if there are broken PAGE links (not just anchor links)
-// This allows the workflow to continue while still reporting issues
-if (brokenCount > 0) {
+if (checkResults.brokenLinks > 0 || checkResults.malformedLinks > 0) {
     console.log('\nCheck the output above ☝️')
+    process.exit(1)
 }
 
-process.exit(0) // Always exit successfully
+process.exit(0)

@@ -116,6 +116,7 @@ jobs:
                       TOTAL_INTERNAL_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Processed [0-9]* internal links" | grep -o "[0-9]*" | head -1 || echo "0")
                       EXCLUDED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* excluded links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
                       REDIRECTED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* redirected links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      MALFORMED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* malformed internal links (missing leading slash)" | grep -o "[0-9]*" | head -1 || echo "0")
                       BROKEN_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken links" | grep -o "[0-9]*" | head -1 || echo "0")
                       BROKEN_ANCHORS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken anchor links" | grep -o "[0-9]*" | head -1 || echo "0")
                     else
@@ -123,6 +124,7 @@ jobs:
                       TOTAL_INTERNAL_LINKS="0"
                       EXCLUDED_LINKS="0"
                       REDIRECTED_LINKS="0"
+                      MALFORMED_LINKS="0"
                       BROKEN_LINKS="0"
                       BROKEN_ANCHORS="0"
                     fi
@@ -153,6 +155,7 @@ jobs:
                         \"links_checked\": \"$TOTAL_INTERNAL_LINKS\",
                         \"excluded_links\": \"$EXCLUDED_LINKS\",
                         \"redirected_links\": \"$REDIRECTED_LINKS\",
+                        \"malformed_links\": \"$MALFORMED_LINKS\",
                         \"broken_links\": \"$BROKEN_LINKS\",
                         \"broken_anchors\": \"$BROKEN_ANCHORS\",
                         \"results_download\": \"$RESULTS_DOWNLOAD\",
