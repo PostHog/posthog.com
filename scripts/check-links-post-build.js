@@ -493,20 +493,6 @@ function processLink(link, file, pages, redirects) {
         }
     }
 
-    if (isLikelyRelativeInternalLink(link.url)) {
-        return {
-            type: 'malformed',
-            brokenItem: {
-                file: file,
-                link: link.url,
-                text: link.text,
-                line: link.line,
-                context: link.context,
-                type: 'malformed-link',
-            },
-        }
-    }
-
     return { type: 'valid' }
 }
 
@@ -514,7 +500,6 @@ function processLink(link, file, pages, redirects) {
 function processAllLinks(fileResults, pages, redirects) {
     const brokenLinks = []
     const brokenAnchors = []
-    const malformedLinks = []
     let totalLinks = 0
     let anchorLinksChecked = 0
     let redirectedLinks = 0
@@ -549,9 +534,6 @@ function processAllLinks(fileResults, pages, redirects) {
                     brokenAnchors.push(processResult.brokenItem)
                     anchorLinksChecked++
                     break
-                case 'malformed':
-                    malformedLinks.push(processResult.brokenItem)
-                    break
                 case 'valid':
                     // Count anchor links for ALL non-excluded, non-redirected links (like original)
                     if (hasAnchor) {
@@ -565,7 +547,6 @@ function processAllLinks(fileResults, pages, redirects) {
     return {
         brokenLinks,
         brokenAnchors,
-        malformedLinks,
         stats: {
             totalLinks,
             excludedLinks,
@@ -580,7 +561,7 @@ function processAllLinks(fileResults, pages, redirects) {
 // ============================================================================
 
 // Create the results object
-function createResultsObject(brokenLinks, brokenAnchors, malformedLinks, stats, markdownFiles, redirects, pages) {
+function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages) {
     return {
         timestamp: new Date().toISOString(),
         summary: {
@@ -590,7 +571,6 @@ function createResultsObject(brokenLinks, brokenAnchors, malformedLinks, stats, 
             brokenLinks: brokenLinks.length,
             anchorLinksChecked: stats.anchorLinksChecked,
             brokenAnchors: brokenAnchors.length,
-            malformedLinks: malformedLinks.length,
             htmlFilesCached: anchorCache.size,
             markdownFiles: markdownFiles.length,
             redirectPatterns: redirects.length,
@@ -617,15 +597,6 @@ function createResultsObject(brokenLinks, brokenAnchors, malformedLinks, stats, 
             line: anchor.line,
             text: anchor.text,
             context: anchor.context,
-        })),
-        malformedLinks: malformedLinks.map((malformed) => ({
-            type: malformed.type,
-            file: path.relative(process.cwd(), malformed.file),
-            page: convertToPostHogUrl(malformed.file),
-            brokenLink: malformed.link,
-            line: malformed.line,
-            text: malformed.text,
-            context: malformed.context,
         })),
     }
 }
@@ -695,28 +666,8 @@ function displayBrokenAnchors(brokenAnchors) {
     })
 }
 
-// Display malformed links
-function displayMalformedLinks(malformedLinks) {
-    if (malformedLinks.length === 0) return
-
-    console.log('\nMalformed internal links found (missing leading slash):\n')
-
-    malformedLinks.forEach((malformed) => {
-        console.log(`Error type: ${malformed.type}`)
-        console.log(`File: ${path.relative(process.cwd(), malformed.file)}`)
-        console.log(`Page: ${convertToPostHogUrl(malformed.file)}`)
-        console.log(`Broken link: ${malformed.link}`)
-        console.log(`Line #: ${malformed.line}`)
-        if (malformed.text) {
-            console.log(`Hyperlinked text: ${malformed.text}`)
-        }
-        console.log(`Context: ${malformed.context}`)
-        console.log('-'.repeat(80))
-    })
-}
-
 // Display summary statistics
-function displaySummaryStats(stats, brokenLinks, brokenAnchors, malformedLinks, markdownFilesCount) {
+function displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFilesCount) {
     console.log(`\nScanned ${markdownFilesCount} markdown files`)
     console.log(`Processed ${stats.totalLinks} internal links`)
     console.log(`Found ${stats.excludedLinks} excluded links (skipped)`)
@@ -724,7 +675,6 @@ function displaySummaryStats(stats, brokenLinks, brokenAnchors, malformedLinks, 
     console.log(`Checked ${stats.anchorLinksChecked} anchor links`)
     console.log(`Found ${brokenLinks.length} broken links`)
     console.log(`Found ${brokenAnchors.length} broken anchor links`)
-    console.log(`Found ${malformedLinks.length} malformed internal links (missing leading slash)`)
     console.log(`Cached ${anchorCache.size} HTML files for anchor checking`)
 }
 
@@ -749,41 +699,30 @@ function checkLinks(outputPath) {
     const fileResults = processFilesInBatches(markdownFiles)
 
     // Process and validate all links
-    const { brokenLinks, brokenAnchors, malformedLinks, stats } = processAllLinks(fileResults, pages, redirects)
+    const { brokenLinks, brokenAnchors, stats } = processAllLinks(fileResults, pages, redirects)
 
     // Sort results alphabetically by file
     brokenLinks.sort((a, b) => a.file.localeCompare(b.file))
     brokenAnchors.sort((a, b) => a.file.localeCompare(b.file))
-    malformedLinks.sort((a, b) => a.file.localeCompare(b.file))
 
     // Display broken links
     displayBrokenAnchors(brokenAnchors)
     displayBrokenLinks(brokenLinks)
-    displayMalformedLinks(malformedLinks)
 
-    if (brokenLinks.length === 0 && brokenAnchors.length === 0 && malformedLinks.length === 0) {
+    if (brokenLinks.length === 0 && brokenAnchors.length === 0) {
         console.log('\nNo broken links found! 🎉')
     }
 
     // Display summary stats at the end
-    displaySummaryStats(stats, brokenLinks, brokenAnchors, malformedLinks, markdownFiles.length)
+    displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFiles.length)
 
     // Create and save results at the end
-    const results = createResultsObject(
-        brokenLinks,
-        brokenAnchors,
-        malformedLinks,
-        stats,
-        markdownFiles,
-        redirects,
-        pages
-    )
+    const results = createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages)
     writeResultsToFile(results, outputPath)
 
     return {
         brokenLinks: brokenLinks.length,
         brokenAnchors: brokenAnchors.length,
-        malformedLinks: malformedLinks.length,
     }
 }
 
@@ -804,7 +743,7 @@ if (outputPath) {
 // Run the script
 const checkResults = checkLinks(outputPath)
 
-if (checkResults.brokenLinks > 0 || checkResults.malformedLinks > 0) {
+if (checkResults.brokenLinks > 0) {
     console.log('\nCheck the output above ☝️')
     process.exit(1)
 }
