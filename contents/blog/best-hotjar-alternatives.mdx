@@ -84,10 +84,10 @@ PostHog also provides session replays and surveys for mobile apps – with nativ
 <details>
 <summary>Main differences between PostHog and Hotjar</summary>
 
-- PostHog includes product analytics with funnels, retention, user paths, and SQL access; Hotjar doesn't offer product analytics natively (available on the full Contentsquare platform as a separate product).
-- PostHog includes error tracking tied to session replays; Contentsquare has basic error detection but no full error tracking.
+- PostHog includes product analytics with funnels, retention, user paths, and SQL access; Hotjar doesn't offer product analytics natively, but it's available on the full Contentsquare platform as a separate product (Heap).
+- PostHog includes error tracking tied to session replays; Hotjar has basic error detection but no full error tracking.
 - PostHog offers mobile session replays and surveys on all plans; Contentsquare's mobile replay is limited to Enterprise plans.
-- Hotjar/Contentsquare includes user interviews and usability tests; PostHog does not.
+- Hotjar includes user interviews and usability tests; PostHog does not.
 
 </details>
 
@@ -186,7 +186,7 @@ Mouseflow is more or less a like-for-like replacement for Hotjar. If you're unha
 
 - Mouseflow includes built-in form analytics for tracking field-level abandonment; Hotjar does not have dedicated form analytics.
 - Mouseflow offers friction scores to automatically surface frustrating sessions; Hotjar relies on rage click detection.
-- Hotjar/Contentsquare includes user interviews and usability testing; Mouseflow does not.
+- Hotjar includes user interviews and usability testing; Mouseflow does not.
 - Mouseflow supports six types of heatmaps (click, move, scroll, attention, geo, live); Hotjar offers click, move, and scroll maps.
 
 </details>
@@ -244,7 +244,7 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig)
 
 Sprig is a decent replacement for Hotjar, especially if you find Hotjar's survey tools lacking. Its support for mobile apps (minus Flutter) is a key differentiator.
 
-Sprig now offers three bundles (Research Core, Digital Experience, Digital Behavior), each starting with a limited free plan. Exact pricing for paid tiers still requires a demo.
+Sprig now offers three bundles (Research Core, Digital Experience, Digital Behavior), each starting with a limited free plan. Exact pricing for paid tiers requires a demo.
 
 <p>
 <ProductComparisonTable
@@ -276,9 +276,9 @@ Sprig now offers three bundles (Research Core, Digital Experience, Digital Behav
 
 - Sprig supports mobile app surveys and replays (iOS, Android, React Native); Hotjar/Contentsquare's mobile replay is Enterprise-only.
 - Sprig focuses on event-triggered research studies; Hotjar captures all sessions broadly.
-- Hotjar/Contentsquare includes user interviews and usability testing; Sprig focuses on automated surveys and replay-based insights.
+- Hotjar includes user interviews and usability testing; Sprig focuses on automated surveys and replay-based insights.
 - Hotjar has transparent pricing with a generous free tier; Sprig's paid pricing requires a demo.
-- Hotjar/Contentsquare offers zone-based heatmaps with revenue attribution; Sprig has standard heatmaps.
+- Hotjar offers zone-based heatmaps with revenue attribution; Sprig has standard heatmaps.
 
 </details>
 
@@ -367,9 +367,9 @@ Lucky Orange is a natural alternative to Hotjar as it covers most of the same fe
 
 - Lucky Orange includes a built-in live chat product for real-time customer support; Hotjar does not.
 - Lucky Orange includes form analytics to track field-level abandonment; Hotjar doesn't have dedicated form analytics.
-- Lucky Orange includes all features on every plan; Hotjar/Contentsquare gates features behind higher tiers.
-- Hotjar/Contentsquare includes user interviews and usability testing; Lucky Orange does not.
-- Hotjar/Contentsquare has zone-based heatmaps with revenue attribution; Lucky Orange has standard dynamic heatmaps.
+- Lucky Orange includes all features on every plan; Hotjar gates features behind higher tiers.
+- Hotjar includes user interviews and usability testing; Lucky Orange does not.
+- Hotjar has zone-based heatmaps with revenue attribution; Lucky Orange has standard dynamic heatmaps.
 
 </details>
 
@@ -462,7 +462,7 @@ It does include some additional capacities beyond Hotjar's with web analytics, A
 - Crazy Egg includes built-in A/B testing with a no-code editor; Hotjar/Contentsquare does not.
 - Crazy Egg includes JavaScript error tracking (on Plus plan and above); Hotjar has basic error detection but no dedicated error tracking.
 - Crazy Egg includes basic web analytics and traffic analysis; Hotjar doesn't offer web analytics natively.
-- Hotjar/Contentsquare includes user interviews and usability testing; Crazy Egg does not.
+- Hotjar includes user interviews and usability testing; Crazy Egg does not.
 - Hotjar has a free tier; Crazy Egg only offers a 30-day free trial.
 - Crazy Egg requires page-specific setup for heatmaps; Hotjar tracks all pages automatically.
 
@@ -555,7 +555,7 @@ It's also one of the few options on this list that offers both mobile surveys an
 - Pendo includes in-app guides, tooltips, and onboarding walkthroughs; Hotjar has no in-app adoption tooling.
 - Pendo includes roadmap planning and product validation tools (Pendo Listen); Hotjar does not.
 - Hotjar includes heatmaps and scroll maps; Pendo does not.
-- Hotjar/Contentsquare includes user interviews and usability testing; Pendo does not.
+- Hotjar includes user interviews and usability testing; Pendo does not.
 - Hotjar has transparent, self-serve pricing with a free tier; Pendo requires sales conversations.
 
 </details>
@@ -650,9 +650,9 @@ It's also free, of course, though it only retains session replay data for 30 day
 
 - Clarity is 100% free with unlimited session recordings; Hotjar's free tier is limited and paid plans can be expensive.
 - Clarity integrates natively with Google Analytics 4 and Microsoft's Copilot AI; Hotjar does not.
-- Hotjar/Contentsquare includes surveys, feedback widgets, user interviews, and usability testing; Clarity has none of these.
+- Hotjar includes surveys, feedback widgets, user interviews, and usability testing; Clarity has none of these.
 - Hotjar/Contentsquare has a product analytics add-on (via [Heap](/blog/posthog-vs-heap)) and zone-based heatmaps; Clarity has basic heatmaps only.
-- Clarity only retains session replay data for 30 days; Hotjar/Contentsquare retains data longer depending on plan.
+- Clarity only retains session replay data for 30 days; Hotjar retains data longer depending on plan.
 
 </details>
 
@@ -707,7 +707,7 @@ Here's a quick guide based on what you're looking for:
 **For product managers needing adoption tools:**
 - **Pendo** – Product analytics, session replay, in-app guides, and feedback collection. Best if you need onboarding flows and tooltips alongside your analytics.
 
-**For a free, no-strings-attached option:**
+**For an 100% free option:**
 - **Microsoft Clarity** – 100% free session replays and heatmaps with unlimited recordings. Best for budget-conscious teams who only need replays and heatmaps.
 
 ## Is PostHog right for you?
@@ -764,7 +764,7 @@ See our [PostHog vs Hotjar comparison](/blog/posthog-vs-hotjar) for a detailed p
 
 **Microsoft Clarity** is the best completely free option – it offers unlimited session replays and heatmaps at no cost, though it lacks surveys and analytics. 
 
-**PostHog** has a generous free tier: 1 million analytics events, 5,000 session replays, 1,500 survey responses, 1 million feature flag requests, and 100,000 error tracking events per month.
+If you want more of the functionality of Hotjar, **PostHog** has a generous free tier: 1 million analytics events, 5,000 session replays, 1,500 survey responses, 1 million feature flag requests, and 100,000 error tracking events per month.
 
 </details>
 
@@ -815,7 +815,7 @@ The top product analytics tools in 2026 include :
 - **[PostHog](/product-analytics)** (best all-in-one for engineering teams)
 - **Amplitude** (best for enterprise warehouse-native analytics)
 - **Mixpanel** (best for product managers)
-- **Heap** (best for autocapture with minimal setup)
+- **Heap** (best for autocapture with minimal setup, also owned by Contentsquare)
 - **Pendo** (best for product managers who also need in-app guides). 
 
 For detailed comparisons, see our guides to [Mixpanel alternatives](/blog/best-mixpanel-alternatives), [Amplitude alternatives](/blog/best-amplitude-alternatives), and [Heap alternatives](/blog/best-heap-alternatives).
