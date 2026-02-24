@@ -62,17 +62,17 @@ function WizardHeader(): JSX.Element {
                 className="hidden dark:block absolute inset-0"
                 imgClassName="h-full w-full"
             />
-            <div className="relative flex flex-col @md:flex-row items-center gap-4 @md:gap-8 px-5 py-8 @md:py-10 max-w-3xl mx-auto">
-                <div className="flex-1 text-center @md:text-left">
+            <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-4 pb-10 max-w-3xl mx-auto">
+                <div className="flex-1 text-center @lg:text-left">
                     <h1 className="text-2xl @sm:text-3xl font-bold">Don't add PostHog to your codebase.</h1>
-                    <p className="!mb-4 text-base">Make AI do it for you – in 8 minutes or less.</p>
+                    <p className="!mb-4 text-base">(Make AI do it for you – in 8 minutes or less.)</p>
                     <CopyableCommand />
                 </div>
                 <div className="shrink-0">
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
                         alt="PostHog Wizard hedgehog"
-                        className="w-32 @sm:w-40 @md:w-48"
+                        className="w-40 @lg:w-56"
                     />
                 </div>
             </div>
