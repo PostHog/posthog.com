@@ -684,6 +684,10 @@ export const handbookSidebar = [
                         url: '/handbook/content/newsletter',
                     },
                     {
+                        name: 'Tips for new writers',
+                        url: '/handbook/content/newsletter-tips',
+                    },
+                    {
                         name: 'Newsletter ads',
                         url: '/handbook/content/newsletter-ads',
                     },
