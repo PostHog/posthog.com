@@ -3,7 +3,10 @@ title: AI wizard
 ---
 
 import WizardInstall from '../getting-started/_snippets/wizard.mdx'
-import List from 'components/List'
+import ProductList from 'components/ProductList'
+
+export const comingSoon = { color: "yellow", tooltip: "Coming soon" }
+export const inDevelopment = { color: "red", tooltip: "In development" }
 
 The PostHog wizard automatically installs and instruments PostHog into your application codebase using AI. It's an agentic CLI tool that handles the entire PostHog integration process on your behalf.
 
@@ -15,61 +18,17 @@ npx -y @posthog/wizard
 
 When it's done, your project is onboarded with: 
 
-<List
+<ProductList
     className="grid gap-4 grid-cols-2 not-prose"
-    items={[
-        {
-            label: "Product Analytics",
-            url: "/docs/product-analytics",
-            icon: "IconGraph",
-            iconColor: "blue",
-        },
-        {
-            label: "Web Analytics",
-            url: "/docs/web-analytics",
-            icon: "IconPieChart",
-            iconColor: "green-2",
-        },
-        {
-            label: "Session Replay",
-            url: "/docs/session-replay",
-            icon: "IconRewindPlay",
-            iconColor: "yellow",
-        },
-        {
-            label: "Error Tracking",
-            url: "/docs/error-tracking",
-            icon: "IconWarning",
-            iconColor: "orange",
-        },
-        {
-            label: "Feature Flags",
-            url: "/docs/feature-flags",
-            icon: "IconToggle",
-            iconColor: "seagreen",
-            badge: "Coming soon",
-        },
-        {
-            label: "Experiments",
-            url: "/docs/experiments",
-            icon: "IconFlask",
-            iconColor: "purple",
-            badge: "Coming soon",
-        },
-        {
-            label: "LLM Analytics",
-            url: "/docs/ai-engineering",
-            icon: "IconLlmAnalytics",
-            iconColor: "fuchsia-dark",
-            badge: "Coming soon",
-        },
-        {
-            label: "Logs",
-            url: "/docs/logs",
-            icon: "IconSearch",
-            iconColor: "blue",
-            badge: "Coming soon",
-        },
+    products={[
+        { handle: "product_analytics" },
+        { handle: "web_analytics" },
+        { handle: "session_replay" },
+        { handle: "error_tracking" },
+        { handle: "feature_flags", indicator: inDevelopment },
+        { handle: "experiments", indicator: inDevelopment },
+        { handle: "llm_analytics", indicator: comingSoon },
+        { handle: "logs", indicator: comingSoon },
     ]}
 />
 
