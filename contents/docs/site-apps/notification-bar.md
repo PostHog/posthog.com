@@ -6,9 +6,9 @@ topics:
   - notification-bar
 ---
 
-The Notification Bar app is a site app which enables you to display a customised banner on your site to notify users about events such as product releases, sales, and events. 
+The Notification Bar is a web script that enables you to display a customized banner on your site to notify users about events such as product releases, sales, and events.
 
-Site apps are a new, big, and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
+Web scripts enable you to inject code from PostHog into your website via `posthog-js`.
 
 ## Requirements
 
@@ -16,13 +16,13 @@ The Notification Bar requires either PostHog Cloud, or a self-hosted PostHog ins
 
 Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
-You'll also need to manually opt in to the site apps feature, as it's currently in beta.
+You'll also need to opt in to the Web scripts feature by setting `opt_in_site_apps: true` in your posthog-js configuration.
 
 ## Installation
 
-First, you need to manually opt in to the site apps beta. You can do this by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk.
+First, configure your `posthog-js` initialization to include `opt_in_site_apps: true`.
 
-Once you've opted in, simply visit the 'Apps' page in your PostHog instance, search for 'Notification Bar' and press install. You can then use the blue gear icon to configure the app. 
+Once you've opted in, visit the [**Web scripts**](https://app.posthog.com/web-scripts) page in PostHog, search for 'Notification Bar' and press install. You can then use the blue gear icon to configure the app.
 
 ## Configuration
 
