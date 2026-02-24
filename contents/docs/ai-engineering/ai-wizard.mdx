@@ -1,5 +1,5 @@
 ---
-title: AI wizard 
+title: AI wizard
 ---
 
 import WizardInstall from '../getting-started/_snippets/wizard.mdx'
@@ -12,46 +12,47 @@ Set up the PostHog platform in minutes, with a single command.
 
 <CopyableCommand />
 
-When it's done, your project is onboarded with: 
+When it's done, your project is onboarded with:
 
-{/*be sure to keep this in sync with @pages/wizard/index.tsx*/}
+<!-- be sure to keep this in sync with @pages/wizard/index.tsx -->
+
 <ProductList
-    className="grid gap-4 grid-cols-2 not-prose"
-    indicatorField="wizardSupport"
-    indicatorColors={{
-        "Coming soon": "yellow",
-        "In development": "red",
-    }}
-    products={[
-        "product_analytics",
-        "web_analytics",
-        "session_replay",
-        "error_tracking",
-        "feature_flags",
-        "experiments",
-        "llm_analytics",
-        "logs",
-    ]}
+className="grid gap-4 grid-cols-2 not-prose"
+indicatorField="wizardSupport"
+indicatorColors={{
+"Coming soon": "yellow",
+"In development": "red",
+}}
+products={[
+"product_analytics",
+"web_analytics",
+"session_replay",
+"error_tracking",
+"feature_flags",
+"experiments",
+"llm_analytics",
+"logs",
+]}
 />
 
 ## How it works
 
-Running the wizard automatically: 
+Running the wizard automatically:
 
 1. Authenticates your PostHog account
 2. Installs the relevant **PostHog SDKs**
 3. Scans your codebase and app architecture
 4. Creates **custom events** based on real product flows
-5. Configures `.env` file with your project credentials 
+5. Configures `.env` file with your project credentials
 6. Writes code and instruments the PostHog SDKs **client-side** and **server-side**
 7. Generates **insights** and **dashboards** in the PostHog app
 8. Optionally installs the [PostHog MCP server](/docs/model-context-protocol) for your AI agent
 
 <ProductVideo
-    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/ai_wizard_install_cursor_331d174d75.mp4" 
-    alt="AI wizard install in Cursor" 
-    classes="rounded"
-    autoPlay={false}
+videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/ai_wizard_install_cursor_331d174d75.mp4"
+alt="AI wizard install in Cursor"
+classes="rounded"
+autoPlay={false}
 />
 
 <Caption>
@@ -62,7 +63,6 @@ The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js applic
 
 <WizardInstall />
 
-We think flows like the AI wizard are pretty cool and the future of developer experience. The AI wizard is our recommended and default method for [installing PostHog](/docs/getting-started/install?tab=wizard) and getting started. 
+We think flows like the AI wizard are pretty cool and the future of developer experience. The AI wizard is our recommended and default method for [installing PostHog](/docs/getting-started/install?tab=wizard) and getting started.
 
 If you have any feedback or requests, we would love to hear from you. Feel free to comment on this page or open an issue on [GitHub](https://github.com/PostHog/wizard/issues).
-
