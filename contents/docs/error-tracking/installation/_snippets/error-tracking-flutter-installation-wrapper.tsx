@@ -6,7 +6,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingFlutterInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{}}>
-            <FlutterInstallation modifySteps={addNextStepsStep} />
+            <FlutterInstallation modifySteps={(steps) => addNextStepsStep(steps, 'flutter')} />
         </OnboardingContentWrapper>
     )
 }

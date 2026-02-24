@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/353483136_5f00599e_346c_44d4_a94c_2cd85c9031a0_3c65d69b45.jpg
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - People
 crosspost:

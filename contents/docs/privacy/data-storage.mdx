@@ -21,7 +21,7 @@ This guide covers the following features:
 
 ## Data storage location
 
-If you require GDPR compliance, there are [specific guidelines](docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
+If you require GDPR compliance, there are [specific guidelines](/docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
 
 ## Processing data before storage
 
@@ -101,6 +101,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 | What to delete | Where to delete | Additional details |
 |----------------|-----------------|-------------------|
+| **Your account** | [Account settings](https://us.posthog.com/settings/user#user-delete) | Account is deleted immediately; all stored data about you is cleared within 30 days. See [deleting your account](/docs/settings/account-settings#deleting-your-account). |
 | **Projects** | [Project settings](https://us.posthog.com/settings/project#project-delete) | All data under the project (including events) are automatically removed |
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | All data under the organization's projects (including events) are automatically removed |
 | **Persons** | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten) | When a person is deleted, all events for that person can be deleted |

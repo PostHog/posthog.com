@@ -11,6 +11,7 @@ featuredImageType: full
 author:
   - hanna-crombie
   - andy-vandervell
+  - natalia-amorim
 category: General
 tags:
   - Comparisons
@@ -285,3 +286,5 @@ Yes – that's one of the main advantages of open-source A/B testing tools. **Gr
 - [Common A/B testing mistakes](/blog/ab-testing-mistakes)
 - [The best open-source feature flag tools](/blog/best-open-source-feature-flag-tools)
 - [PostHog vs. GrowthBook](/blog/posthog-vs-growthbook)
+
+<NewsletterForm />

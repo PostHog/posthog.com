@@ -918,7 +918,6 @@ const CompanyStageTabs = () => {
                             'error_tracking',
                             'experiments',
                             'feature_flags',
-                            'surveys',
                             'logs',
                             'cdp',
                             'workflows_emails',
