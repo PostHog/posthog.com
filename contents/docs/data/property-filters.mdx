@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-Property filters let you narrow down events, persons, groups, and feature flag targeting using operators on property values. These operators are shared across PostHog features including [Feature Flags](/docs/feature-flags), [Surveys](/docs/surveys), [cohorts](/docs/data/cohorts), and [insights](/docs/product-analytics).
+Property filters let you narrow down events, persons, groups, and feature flag targeting using operators on property values. These operators are shared across PostHog features including [Feature Flags](/docs/feature-flags), [Surveys](/docs/surveys), [Cohorts](/docs/data/cohorts), and [Insights](/docs/product-analytics).
 
 ## String operators
 
@@ -43,7 +43,7 @@ Presence operators check whether a property exists on a person or event, regardl
 | `is set` | Matches when the property exists and has any value |
 | `is not set` | Matches when the property does not exist or has no value |
 
-### Semver operators
+## Semver operators
 
 Semver (semantic versioning) operators are additional operators available on string properties that compare values as version strings (e.g., `1.2.3`) instead of plain text. There is no separate semver data type – these operators appear alongside the regular string operators in the filter dropdown, labeled with a `(semver)` suffix.
 
