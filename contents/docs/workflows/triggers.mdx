@@ -1,0 +1,282 @@
+---
+title: Workflow triggers
+sidebar: Docs
+showTitle: true
+---
+
+Every workflow starts with a trigger. Triggers define the conditions that cause your workflow to run. PostHog supports three types of triggers, each suited to different use cases.
+
+| Trigger type | Description | Best for |
+|--------------|-------------|----------|
+| [Event trigger](#event-triggers) | Runs when a PostHog event is captured | Responding to user actions in your app |
+| [Webhook trigger](#webhook-triggers) | Runs when an external system calls a webhook URL | Integrating with third-party services |
+| [Conversation trigger](#conversation-triggers) | Runs when support ticket events occur | Automating support workflows |
+
+## Event triggers
+
+Event triggers start a workflow when a specific [PostHog event](/docs/data/events) is captured. This is the most common trigger type and is ideal for automating responses to user behavior.
+
+### How event triggers work
+
+1. A user performs an action in your app (e.g., signs up, makes a purchase, views a page)
+2. Your PostHog SDK captures the event with its properties
+3. PostHog evaluates the event against your workflow's trigger configuration
+4. If the event matches (including any filters), the workflow starts
+
+### Available data
+
+When an event trigger fires, your workflow has access to the following data:
+
+| Data | Description | Access pattern |
+|------|-------------|----------------|
+| **Event name** | The name of the captured event | `{{ event.event }}` |
+| **Event properties** | Any properties sent with the event | `{{ event.properties.property_name }}` |
+| **Person properties** | Properties of the person who triggered the event | `{{ person.properties.property_name }}` |
+| **Distinct ID** | The unique identifier for the person | `{{ event.distinct_id }}` |
+| **Timestamp** | When the event occurred | `{{ event.timestamp }}` |
+
+#### Example event payload
+
+Here's an example of the data available when a `purchase_completed` event triggers a workflow:
+
+```json
+{
+  "event": {
+    "event": "purchase_completed",
+    "distinct_id": "user_123",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "properties": {
+      "order_id": "ORD-789",
+      "total_amount": 99.99,
+      "currency": "USD",
+      "items_count": 3,
+      "payment_method": "credit_card"
+    }
+  },
+  "person": {
+    "properties": {
+      "email": "customer@example.com",
+      "name": "Jane Doe",
+      "plan": "premium",
+      "signup_date": "2023-06-01"
+    }
+  }
+}
+```
+
+### Filtering event triggers
+
+You can add filters to your event trigger to only start the workflow when specific conditions are met. Click the filter icon next to the event name and select **Add filter**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_filters_light_bbc4307d87.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_filters_dark_423c919d26.png"
+    classes="rounded"
+    alt="Event trigger filter"
+/>
+
+Filters can be based on:
+- **Event properties**: Filter by any property sent with the event (e.g., `total_amount > 100`)
+- **Person properties**: Filter by the person's properties (e.g., `plan = premium`)
+
+### Trigger frequency
+
+You can control how often a person can trigger the same workflow:
+
+| Frequency | Description |
+|-----------|-------------|
+| **One time** | Each person can only trigger this workflow once, ever |
+| **Multiple times** | A person can trigger this workflow multiple times |
+
+Use "One time" for onboarding flows or welcome emails. Use "Multiple times" for transactional messages like purchase confirmations.
+
+### When to use event triggers
+
+Event triggers are ideal when you want to:
+
+- **Send welcome emails** when users sign up (`signed_up` event)
+- **Confirm purchases** when orders are placed (`purchase_completed` event)
+- **Re-engage users** when they visit specific pages (`$pageview` with URL filter)
+- **Trigger onboarding flows** when users complete key actions (`completed_setup` event)
+- **Send notifications** when users achieve milestones (`subscription_upgraded` event)
+
+#### Example: Welcome email workflow
+
+**Trigger:** `signed_up` event
+**Filter:** `person.properties.email` is set
+**Action:** Send welcome email to `{{ person.properties.email }}`
+
+This workflow sends a personalized welcome email immediately after a user signs up, using their name and email from their person properties.
+
+## Webhook triggers
+
+Webhook triggers allow external systems to start your workflow by calling a unique URL. This is useful when you need to trigger workflows from systems that aren't instrumented with PostHog.
+
+### How webhook triggers work
+
+1. PostHog generates a unique webhook URL for your workflow
+2. You configure an external system to call this URL
+3. When the external system sends a request, PostHog starts the workflow
+4. The request payload becomes available as workflow data
+
+### Available data
+
+When a webhook trigger fires, your workflow has access to the data sent in the request:
+
+| Data | Description | Access pattern |
+|------|-------------|----------------|
+| **Request body** | The JSON payload sent in the request | `{{ webhook.body.field_name }}` |
+| **Headers** | HTTP headers from the request | `{{ webhook.headers.header_name }}` |
+
+#### Example webhook payload
+
+Here's an example of a Stripe webhook payload and how to access it:
+
+```json
+{
+  "webhook": {
+    "body": {
+      "type": "invoice.paid",
+      "data": {
+        "object": {
+          "customer_email": "customer@example.com",
+          "amount_paid": 4999,
+          "currency": "usd",
+          "subscription": "sub_1234567890"
+        }
+      }
+    },
+    "headers": {
+      "stripe-signature": "t=1234567890,v1=..."
+    }
+  }
+}
+```
+
+To access the customer email: `{{ webhook.body.data.object.customer_email }}`
+
+### Setting up a webhook trigger
+
+1. Create a new workflow and select **Webhook** as the trigger type
+2. Copy the generated webhook URL
+3. Configure your external service to send POST requests to this URL
+4. Send a test request to verify the integration
+
+### When to use webhook triggers
+
+Webhook triggers are ideal when you want to:
+
+- **Process payment events** from Stripe, Paddle, or other payment providers
+- **Handle form submissions** from Typeform, Tally, or other form tools
+- **Respond to CRM updates** from Salesforce, HubSpot, or other CRMs
+- **Integrate with Zapier or Make** for complex multi-app workflows
+- **Receive alerts** from monitoring tools like PagerDuty or Datadog
+
+#### Example: Stripe payment notification
+
+**Trigger:** Webhook from Stripe (invoice.paid event)
+**Action:** Send Slack message to #sales channel with payment details
+
+When Stripe sends an `invoice.paid` webhook, the workflow sends a Slack notification with the customer email and amount paid.
+
+## Conversation triggers
+
+If you have [Conversations](/docs/support) enabled, you can trigger workflows based on support ticket events. These triggers are useful for automating your support operations.
+
+### Available conversation events
+
+| Event | Description | When it fires |
+|-------|-------------|---------------|
+| `$conversation_ticket_created` | A new support ticket was created | Customer submits a new ticket |
+| `$conversation_ticket_status_changed` | Ticket status was updated | Agent or automation changes status |
+| `$conversation_ticket_priority_changed` | Ticket priority was updated | Agent or automation changes priority |
+| `$conversation_ticket_assigned` | Ticket was assigned | Agent or AI is assigned to ticket |
+| `$conversation_message_sent` | Team member sent a message | Agent replies to customer |
+| `$conversation_message_received` | Customer sent a message | Customer replies on ticket |
+
+### Available data
+
+All conversation events include these base properties:
+
+| Property | Description | Access pattern |
+|----------|-------------|----------------|
+| `ticket_id` | Unique identifier for the ticket | `{{ event.properties.ticket_id }}` |
+| `ticket_number` | Human-readable ticket number | `{{ event.properties.ticket_number }}` |
+| `channel_source` | Where the ticket originated (email, chat, etc.) | `{{ event.properties.channel_source }}` |
+| `status` | Current ticket status | `{{ event.properties.status }}` |
+| `priority` | Current ticket priority | `{{ event.properties.priority }}` |
+
+Additionally, each event type includes specific properties:
+
+#### Status change events
+
+| Property | Description |
+|----------|-------------|
+| `old_status` | Previous ticket status |
+| `new_status` | New ticket status |
+
+#### Priority change events
+
+| Property | Description |
+|----------|-------------|
+| `old_priority` | Previous priority level |
+| `new_priority` | New priority level |
+
+#### Assignment events
+
+| Property | Description |
+|----------|-------------|
+| `assignee_type` | Type of assignee (human or AI) |
+| `assignee_id` | Identifier of the assignee |
+
+#### Message events
+
+| Property | Description |
+|----------|-------------|
+| `message_id` | Unique message identifier |
+| `message_content` | Text content of the message |
+| `author_type` | Type of author (customer, agent, AI) |
+| `author_id` | Identifier of the author (sent messages only) |
+| `customer_name` | Customer's name (received messages only) |
+| `customer_email` | Customer's email (received messages only) |
+
+### When to use conversation triggers
+
+Conversation triggers are ideal when you want to:
+
+- **Auto-escalate urgent tickets** when priority changes to high
+- **Send SLA reminders** when tickets have been open too long
+- **Notify team leads** when tickets are assigned to AI
+- **Close stale tickets** when no customer response after X days
+- **Route tickets** based on message content (e.g., "refund" mentions)
+
+#### Example: Auto-resolve inactive tickets
+
+**Trigger:** `$conversation_ticket_status_changed` event
+**Filter:** `new_status = pending`
+**Delay:** Wait 5 days
+**Condition:** Check if status is still pending
+**Action:** Update ticket status to `resolved`
+
+This workflow automatically resolves tickets that have been pending customer response for 5 days.
+
+## Combining triggers with other workflow components
+
+Triggers are just the starting point. Combine them with other workflow components for powerful automations:
+
+| Component | Use with triggers to... |
+|-----------|------------------------|
+| [Delays](/docs/workflows/workflow-builder#delays) | Wait before taking action (e.g., send reminder after 24 hours) |
+| [Audience splits](/docs/workflows/workflow-builder#audience-splits) | Take different actions based on user properties |
+| [PostHog actions](/docs/workflows/workflow-builder#posthog-actions) | Capture events or update properties when the workflow completes |
+| [Dispatches](/docs/workflows/workflow-builder#dispatches) | Send messages via email, Slack, SMS, or webhooks |
+
+## Best practices
+
+- **Use specific events**: Prefer custom events like `purchase_completed` over generic events like `$pageview` for important workflows
+- **Add filters**: Filter triggers to only run for the users and scenarios you intend
+- **Set appropriate frequency**: Use "One time" for onboarding and "Multiple times" for transactional messages
+- **Test thoroughly**: Use the workflow test feature before enabling in production
+- **Monitor performance**: Check the Metrics and Logs tabs to ensure your workflows are running as expected
+
+See [Workflows best practices](/docs/workflows/best-practices) for more guidance.

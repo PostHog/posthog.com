@@ -5950,6 +5950,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Triggers',
+                    url: '/docs/workflows/triggers',
+                    icon: 'IconBolt',
+                    color: 'yellow',
+                },
+                {
                     name: 'Content library and message templates',
                     url: '/docs/workflows/library',
                     icon: 'IconDatabase',
