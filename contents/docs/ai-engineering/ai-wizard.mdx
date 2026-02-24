@@ -5,9 +5,6 @@ title: AI wizard
 import WizardInstall from '../getting-started/_snippets/wizard.mdx'
 import ProductList from 'components/ProductList'
 
-export const comingSoon = { color: "yellow", tooltip: "Coming soon" }
-export const inDevelopment = { color: "red", tooltip: "In development" }
-
 The PostHog wizard automatically installs and instruments PostHog into your application codebase using AI. It's an agentic CLI tool that handles the entire PostHog integration process on your behalf.
 
 Set up the PostHog platform in minutes, with a single command.
@@ -20,15 +17,20 @@ When it's done, your project is onboarded with:
 
 <ProductList
     className="grid gap-4 grid-cols-2 not-prose"
+    indicatorField="wizardSupport"
+    indicatorColors={{
+        "Coming soon": "yellow",
+        "In development": "red",
+    }}
     products={[
-        { handle: "product_analytics" },
-        { handle: "web_analytics" },
-        { handle: "session_replay" },
-        { handle: "error_tracking" },
-        { handle: "feature_flags", indicator: inDevelopment },
-        { handle: "experiments", indicator: inDevelopment },
-        { handle: "llm_analytics", indicator: comingSoon },
-        { handle: "logs", indicator: comingSoon },
+        "product_analytics",
+        "web_analytics",
+        "session_replay",
+        "error_tracking",
+        "feature_flags",
+        "experiments",
+        "llm_analytics",
+        "logs",
     ]}
 />
 

@@ -3,65 +3,55 @@ import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import useProduct from 'hooks/useProduct'
 
-export interface IndicatorDef {
-    color: string
-    tooltip?: string
-    label?: string
+function Indicator({ color, text }: { color: string; text: string }) {
+    return (
+        <Tooltip delay={0} trigger={<span className={`size-2 rounded-full bg-${color} inline-block`} />}>
+            {text}
+        </Tooltip>
+    )
 }
 
-interface ProductEntry {
-    handle: string
-    indicator?: IndicatorDef
-}
-
-function Indicator({ color, tooltip, label }: { color: string; tooltip?: string; label?: string }) {
-    const dot = <span className={`size-2 rounded-full bg-${color} inline-block`} />
-
-    if (tooltip) {
-        return (
-            <Tooltip delay={0} trigger={dot}>
-                {tooltip}
-            </Tooltip>
-        )
-    }
-
-    if (label) {
-        return (
-            <span className="inline-flex items-center gap-1">
-                {dot}
-                <span className="text-xs text-muted">{label}</span>
-            </span>
-        )
-    }
-
-    return dot
-}
-
-export default function ProductList({ products, className }: { products: ProductEntry[]; className?: string }) {
+export default function ProductList({
+    products,
+    indicatorField,
+    indicatorColors,
+    className,
+}: {
+    products: string[]
+    indicatorField?: string
+    indicatorColors?: Record<string, string>
+    className?: string
+}) {
     const allProducts = useProduct()
 
     const resolved = products
-        .map(({ handle, indicator }) => {
+        .map((handle) => {
             const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
-            return product ? { ...product, indicator } : null
+            return product ?? null
         })
         .filter(Boolean)
 
     return (
         <ul className={`list-none m-0 p-0 ${className ?? ''}`}>
-            {resolved.map((product: any) => (
-                <li key={product.handle}>
-                    <Link to={`/docs/${product.slug}`} className="group flex items-center space-x-2 relative">
-                        {product.Icon && <product.Icon className={`size-6 text-${product.color} shrink-0`} />}
-                        <span className="flex items-center gap-1.5">
-                            <span className="overflow-hidden text-ellipsis whitespace-nowrap group-hover:underline">
-                                {product.name}
+            {resolved.map((product: any) => {
+                const fieldValue = indicatorField ? product[indicatorField] : undefined
+                const indicatorText = typeof fieldValue === 'string' ? fieldValue : undefined
+                const indicatorColor = indicatorText && indicatorColors?.[indicatorText]
+
+                return (
+                    <li key={product.handle}>
+                        <Link to={`/docs/${product.slug}`} className="group flex items-center space-x-2 relative">
+                            {product.Icon && <product.Icon className={`size-6 text-${product.color} shrink-0`} />}
+                            <span className="flex items-center gap-1.5">
+                                <span className="overflow-hidden text-ellipsis whitespace-nowrap group-hover:underline">
+                                    {product.name}
+                                </span>
+                                {indicatorColor && <Indicator color={indicatorColor} text={indicatorText} />}
                             </span>
-                            {product.indicator && <Indicator {...product.indicator} />}
-                        </span>
-                    </Link>
-                </li>
-            ))}
+                        </Link>
+                    </li>
+                )
+            })}
         </ul>
     )
 }
