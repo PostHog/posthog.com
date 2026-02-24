@@ -69,7 +69,7 @@ import posthog from "posthog-js";
 
 function PosthogInit() {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     });

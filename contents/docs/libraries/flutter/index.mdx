@@ -215,7 +215,7 @@ Since version 5.13.0, you can provide a `beforeSend` callback when initializing 
 `beforeSend` gives you one place to edit or redact information before it is sent to PostHog. For example:
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 config.host = '<ph_client_api_host>';
 
 config.beforeSend = (event) {
@@ -263,7 +263,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode during initialization by setting the `debug` option to `true` in the `PostHogConfig` object. A common pattern is to set this to `true` in development environments only using environment variables.
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 config.host = '<ph_client_api_host>';
 config.debug = true; // +
 await Posthog().setup(config);
