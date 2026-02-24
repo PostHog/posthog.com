@@ -109,11 +109,11 @@ export const hotjar = {
             platform_support: {
                 features: {
                     web_app_recordings: true,
-                    mobile_app_recordings: false,
-                    ios_recordings: false,
-                    android_recordings: false,
-                    react_native_recordings: false,
-                    flutter_recordings: false,
+                    mobile_app_recordings: 'Enterprise',
+                    ios_recordings: 'Enterprise',
+                    android_recordings: 'Enterprise',
+                    react_native_recordings: 'Enterprise',
+                    flutter_recordings: 'Enterprise',
                 },
             },
             analysis: {
