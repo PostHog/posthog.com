@@ -16,7 +16,7 @@ Don't compare your ramp-up speed to peers or people who've been here longer. Com
 
 While things are still relatively chill early on, read and absorb as much PostHog content as you can: blogs, newsletters, the handbook. Fix typos or update things as you go. Small PRs are genuinely appreciated and noticed.
 
-(Bonus tip: Keep a daily work journal. The random thoughts, questions, and observations you have as you're onboarding will make for great material later on. Even this guide is based on my notes from onboarding.)
+> **Bonus tip:** Keep a daily work journal. The random thoughts, questions, and observations you have as you're onboarding will make for great material later on. Even this guide is based on my notes from onboarding.
 
 ---
 
