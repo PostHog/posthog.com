@@ -255,6 +255,10 @@ function ExplainerVideo(): JSX.Element {
     )
 }
 
+function Hr(): JSX.Element {
+    return <hr className="my-6 border border-primary" />
+}
+
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     {
         name: 'WizardHeader',
@@ -297,6 +301,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <GetStarted />,
+    },
+    {
+        name: 'Hr',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Hr />,
     },
 ]
 
