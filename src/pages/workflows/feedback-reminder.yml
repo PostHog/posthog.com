@@ -1,0 +1,148 @@
+name: Feedback/Review Reminder (10 Days)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Runs daily. Finds open issues that have been sitting in the Feedback/Review
+# column of the PostHog art request board for 10+ days and posts a reminder
+# comment — but only once per issue (won't spam if already reminded).
+#
+# REQUIRES: A repo secret named PROJECT_PAT.
+# ─────────────────────────────────────────────────────────────────────────────
+
+env:
+    ORG: PostHog
+    REPO: posthog.com
+    PROJECT_NUMBER: 65
+    FEEDBACK_COLUMN: 'Feedback/Review'
+    SNOOZED_COLUMN: 'All projects (snoozed projects)' # issues here are intentionally parked — never nudge these
+    STALE_DAYS: '10'
+
+on:
+    schedule:
+        - cron: '0 9 * * *' # Daily at 9am UTC — adjust to suit your team's timezone
+    workflow_dispatch: # Allows a manual run from the Actions tab (handy for testing)
+
+jobs:
+    remind-feedback:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Find stale Feedback/Review issues and post reminders
+              uses: actions/github-script@v7
+              with:
+                  github-token: ${{ secrets.PROJECT_PAT }}
+                  script: |
+                      const org             = process.env.ORG;
+                      const projectNumber   = parseInt(process.env.PROJECT_NUMBER);
+                      const feedbackColumn  = process.env.FEEDBACK_COLUMN;
+                      const snoozedColumn   = process.env.SNOOZED_COLUMN;
+                      const staleDays       = parseInt(process.env.STALE_DAYS);
+                      const staleMs         = staleDays * 24 * 60 * 60 * 1000;
+                      const now             = Date.now();
+                      // Hidden tag so we can detect whether we already posted a reminder
+                      const reminderTag     = '<!-- art-board-feedback-reminder -->';
+
+                      // ── 1. Page through all items on the project board ────────────────
+                      let items  = [];
+                      let cursor = null;
+
+                      do {
+                        const query = `
+                          query($org: String!, $number: Int!, $cursor: String) {
+                            organization(login: $org) {
+                              projectV2(number: $number) {
+                                items(first: 100, after: $cursor) {
+                                  pageInfo { hasNextPage endCursor }
+                                  nodes {
+                                    updatedAt
+                                    fieldValues(first: 20) {
+                                      nodes {
+                                        ... on ProjectV2ItemFieldSingleSelectValue {
+                                          name
+                                          field { ... on ProjectV2FieldCommon { name } }
+                                        }
+                                      }
+                                    }
+                                    content {
+                                      ... on Issue {
+                                        number
+                                        state
+                                        repository { nameWithOwner }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        `;
+
+                        const result = await github.graphql(query, {
+                          org,
+                          number: projectNumber,
+                          cursor
+                        });
+
+                        const page = result.organization.projectV2.items;
+                        items  = items.concat(page.nodes);
+                        cursor = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null;
+
+                      } while (cursor);
+
+                      console.log(`Fetched ${items.length} project items total.`);
+
+                      // ── 2. Filter to open issues in Feedback/Review that haven't moved ─
+                      const staleItems = items.filter(item => {
+                        const issue = item.content;
+                        if (!issue?.number || issue.state === 'CLOSED') return false;
+
+                        const statusField = item.fieldValues.nodes.find(
+                          f => f.field?.name === 'Status'
+                        );
+                        if (!statusField || statusField.name !== feedbackColumn) return false;
+                        // Never nudge snoozed items
+                        if (statusField.name === snoozedColumn) return false;
+
+                        const ageMs = now - new Date(item.updatedAt).getTime();
+                        return ageMs >= staleMs;
+                      });
+
+                      console.log(`${staleItems.length} item(s) stale in "${feedbackColumn}".`);
+
+                      // ── 3. Post a reminder — skipping any that already have one ────────
+                      for (const item of staleItems) {
+                        const issue = item.content;
+                        const [owner, repo] = issue.repository.nameWithOwner.split('/');
+
+                        const comments = await github.rest.issues.listComments({
+                          owner,
+                          repo,
+                          issue_number: issue.number,
+                          per_page: 100
+                        });
+
+                        const alreadyReminded = comments.data.some(c =>
+                          c.body.includes(reminderTag)
+                        );
+
+                        if (alreadyReminded) {
+                          console.log(`#${issue.number} — reminder already posted, skipping.`);
+                          continue;
+                        }
+
+                        const daysSince = Math.floor(
+                          (now - new Date(item.updatedAt).getTime()) / (24 * 60 * 60 * 1000)
+                        );
+
+                        await github.rest.issues.createComment({
+                          owner,
+                          repo,
+                          issue_number: issue.number,
+                          body: [
+                            reminderTag,
+                            `👋 This issue has been in **${feedbackColumn}** for ${daysSince} days.`,
+                            `Any feedback needed to move it forward?`
+                          ].join('\n')
+                        });
+
+                        console.log(`💬 Reminder posted on #${issue.number} (${daysSince} days stale).`);
+                      }

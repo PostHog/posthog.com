@@ -1,0 +1,94 @@
+name: Close Issue When Moved to Done
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Automatically closes a GitHub issue when it is moved to the Done column
+# on the PostHog art request project board (Project #65).
+#
+# REQUIRES: A repo secret named PROJECT_PAT.
+# ─────────────────────────────────────────────────────────────────────────────
+
+env:
+    ORG: PostHog
+    PROJECT_NUMBER: 65
+    DONE_COLUMN: 'Done' # ← change if your column has a different name
+
+on:
+    projects_v2_item:
+        types: [edited]
+
+jobs:
+    close-issue:
+        runs-on: ubuntu-latest
+        # Only proceed when the Status field specifically was changed
+        if: github.event.projects_v2_item.field_name == 'Status'
+
+        steps:
+            - name: Close linked issue if status is now Done
+              uses: actions/github-script@v7
+              with:
+                  github-token: ${{ secrets.PROJECT_PAT }}
+                  script: |
+                      const projectItemNodeId = context.payload.projects_v2_item.node_id;
+
+                      // ── 1. Fetch the item's current Status and linked issue ────────────
+                      const query = `
+                        query($nodeId: ID!) {
+                          node(id: $nodeId) {
+                            ... on ProjectV2Item {
+                              fieldValues(first: 20) {
+                                nodes {
+                                  ... on ProjectV2ItemFieldSingleSelectValue {
+                                    name
+                                    field { ... on ProjectV2FieldCommon { name } }
+                                  }
+                                }
+                              }
+                              content {
+                                ... on Issue {
+                                  number
+                                  state
+                                  repository { nameWithOwner }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      `;
+
+                      const result = await github.graphql(query, { nodeId: projectItemNodeId });
+                      const item = result.node;
+
+                      // ── 2. Confirm the Status is now "Done" ───────────────────────────
+                      const statusField = item.fieldValues.nodes.find(
+                        f => f.field?.name === 'Status'
+                      );
+
+                      if (!statusField || statusField.name !== process.env.DONE_COLUMN) {
+                        console.log(`Status is "${statusField?.name}" — not Done, nothing to do.`);
+                        return;
+                      }
+
+                      // ── 3. Close the linked issue ─────────────────────────────────────
+                      const issue = item.content;
+
+                      if (!issue?.number) {
+                        console.log('No linked issue on this project item — skipping.');
+                        return;
+                      }
+
+                      if (issue.state === 'CLOSED') {
+                        console.log(`Issue #${issue.number} is already closed — skipping.`);
+                        return;
+                      }
+
+                      const [owner, repo] = issue.repository.nameWithOwner.split('/');
+
+                      await github.rest.issues.update({
+                        owner,
+                        repo,
+                        issue_number: issue.number,
+                        state: 'closed',
+                        state_reason: 'completed'
+                      });
+
+                      console.log(`✅ Closed issue #${issue.number} in ${owner}/${repo}`);
