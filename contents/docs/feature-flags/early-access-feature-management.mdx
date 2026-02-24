@@ -50,9 +50,9 @@ A couple of important notes:
 
 > You can find a full walkthrough of building an app with early access feature management in our [How to set up a public beta program using early access management](/tutorials/public-beta-program) tutorial.
 
-### Option 1: Site app
+### Option 1: Web script
 
-We've prebuilt a site app that adds an early access feature modal to your site. 
+We've prebuilt a web script that adds an early access feature modal to your site. 
 
 ![Create feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png)
 
@@ -60,14 +60,14 @@ To use it:
 
 1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js/config).
 
-2. Search for [Early Access Features App](https://app.posthog.com/apps?search=Early%20Access) in the [Browse Apps](https://app.posthog.com/apps) tab.
+2. Search for [Early Access Features App](https://app.posthog.com/web-scripts) in [**Web scripts**](https://app.posthog.com/web-scripts).
 
 3. Enable it by clicking the blue gear, setting an HTML attribute selector like `data-attr`, `#id`, or `.class` (or enabling "Show features button on the page"), enabling the toggle and pressing save.
 
 <ProductScreenshot
     imageLight={SiteAppLight} 
     imageDark={SiteAppDark}
-    alt="Setting up site app" 
+    alt="Setting up web script" 
     classes="rounded"
 />
 
@@ -161,4 +161,4 @@ const registerInterest = (featureKey) => {
 
 Other useful functions for custom implementations are `isFeatureEnabled()` and `useActiveFeatureFlags()` (React only). These help you differentiate users who have opted into early access features from those who have not.
 
-For a sample implementation, see the [public beta tutorial here](/tutorials/public-beta-program#creating-a-beta-opt-in-page) or [the site app code here](https://github.com/PostHog/early-access-features-app/blob/main/site.ts).
+For a sample implementation, see the [public beta tutorial here](/tutorials/public-beta-program#creating-a-beta-opt-in-page) or [the web script code here](https://github.com/PostHog/early-access-features-app/blob/main/site.ts).
