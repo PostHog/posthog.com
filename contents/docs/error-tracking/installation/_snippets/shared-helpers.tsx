@@ -10,7 +10,7 @@ import { CallToAction } from 'components/CallToAction'
  * Note: For error tracking, we don't have a next steps component yet,
  * but this follows the same pattern as experiments for consistency
  */
-export const addNextStepsStep = (steps: StepDefinition[]): StepDefinition[] => {
+export const addNextStepsStep = (steps: StepDefinition[], platformSlug?: string): StepDefinition[] => {
     // Filter out any existing verify steps from onboarding content
     const filteredSteps = steps.filter(
         (step) =>
@@ -63,7 +63,7 @@ export const addNextStepsStep = (steps: StepDefinition[]): StepDefinition[] => {
                     <CallToAction
                         className="my-2"
                         size="sm"
-                        to="/docs/error-tracking/upload-source-maps"
+                        to={`/docs/error-tracking/upload-source-maps${platformSlug ? `/${platformSlug}` : ''}`}
                         external={true}
                     >
                         Upload source maps
