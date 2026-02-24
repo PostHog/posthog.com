@@ -64,8 +64,10 @@ function WizardHeader(): JSX.Element {
             />
             <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-4 pb-10 max-w-3xl mx-auto">
                 <div className="flex-1 text-center @lg:text-left">
-                    <h1 className="text-2xl @sm:text-3xl font-bold">Don't add PostHog to your codebase.</h1>
-                    <p className="!mb-4 text-base">(Make AI do it for you – in 8 minutes or less.)</p>
+                    <h1 className="text-2xl @sm:text-3xl font-bold !mb-0">Don't add PostHog to your codebase.</h1>
+                    <p className="!mt-2 !mb-4 text-base">
+                        (Make AI do it for you – <em>in 8 minutes or less</em>.)
+                    </p>
                     <CopyableCommand />
                 </div>
                 <div className="shrink-0">
