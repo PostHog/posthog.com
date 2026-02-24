@@ -72,7 +72,7 @@ Query two can be further broken down into several distinct steps:
 - `revise`: Runs linters, tests, and other checks to make sure the changes are valid.
 - `conclude`: Creates dashboards and insights based on events captured. Then, it creates a summary of what's done. 
 
-With this information, I tracked how the Wizard spends on each step:
+With this information, I track how the Wizard spends on each step:
 
 | Step | Turn count | Mean turns | Mean cost | Mean duration | Context at step end | Token input to step end |
 |------|-----------------|------------|-----------|---------------|-----------------|------------------------|
@@ -87,7 +87,7 @@ With this information, I tracked how the Wizard spends on each step:
 
 Which step would you have guessed to cost the most?
 
-Well, the `edit` step is the most expensive. That's what I expected. That's where the important work happens. 
+Well, the `edit` step is the most expensive. That's what I expect. That's where the important work happens. 
 
 What raises eyebrows is the `conclude` step. All the agent does during `conclude` is create some dashboards and a summary report. It's a finite amount of relatively simple tasks. $1.47 per run is hard for me to swallow.
 
@@ -122,7 +122,7 @@ Since the Wizard tracks every event captured in `posthog-events.json`, the `conc
 
 If I can lower costs by clearing this extra context, I can prove the Wizard's wasteful spending.
 
-The easiest way to clear the conversation is just to start a new `query()` or conversation. I made the Wizard switch to running a new query for every step of the flow, and using `continue_conversation` to pass context between steps `begin` through `revise`, where prior context is relevant. The final query call for step `conclude` runs on a fresh context. 
+The easiest way to clear the conversation is just to start a new `query()` or conversation. I make the Wizard switch to running a new query for every step of the flow, and using `continue_conversation` to pass context between steps `begin` through `revise`, where prior context is relevant. The final query call for step `conclude` runs on a fresh context. 
 
 ```mermaid
 flowchart LR
@@ -168,7 +168,7 @@ This results in a 90% reduction in accumulated input, 65% fewer turns, fewer com
  AGGREGATE SUMMARY
 ═══════════════════════════
 
-                        Phased   Non-Phased      Delta
+                Multiple Queries   Single Query      Delta
  ─────────────────────────────────────────────────
  Total Cost             $27.84       $25.12     +10.8%
  Total Duration        39m 14s      32m 23s     +21.2%
@@ -180,7 +180,7 @@ This results in a 90% reduction in accumulated input, 65% fewer turns, fewer com
 
 Wait, _higher cost?_
 
-The "phased" runs under multiple queries actually cost more and took longer. This is because of the way Anthropic prices cached reads and writes:
+The runs that use multiple queries actually cost more and take longer. This is because of the way Anthropic prices cached reads and writes:
 - Cache read: $1.50/1M (cheap)
 - Cache creation: $18.75/1M (12.5x cache read)
 - Uncached input: $15/1M
@@ -189,7 +189,7 @@ Each `query()` call forces you to reconstruct the _entire cache_, even if you us
 
 What this all means is that, you need to **save 12x more tokens to break even** for every token rewritten to the cache.
 
-I also tried retaining the cache by breaking out _only_ step `conclude` into a new `query()`.
+I also try retaining the cache by breaking out _only_ step `conclude` into a new `query()`.
 
 ```mermaid
 flowchart LR
@@ -218,9 +218,9 @@ flowchart LR
     style F fill:#d0021b,stroke:#9a0114,color:#fff
 ```
 
-This was more promising. I saw ideal cases result in a 70% cost reduction.
+This is more promising. I see ideal cases result in a 70% cost reduction.
 
-But it wasn't a clear winner. Some runs were still more expensive than running everything in a single agent loop. The cost difference between the cheapest and most expensive runs is $8 USD, there is a huge variation between the cheapest and most expensive runs.
+But it isn't a clear winner. Some runs are still more expensive than running everything in a single agent loop. The cost difference between the cheapest and most expensive runs is $8 USD, there is a huge variation between the cheapest and most expensive runs.
 
 | Metric | Mean | Std | Min | Max |
 |---|---|---|---|---|
@@ -233,7 +233,7 @@ As counter-intuitive as it sounds, the Wizard running everything in one giant lo
 
 ### What about subagents?
 
-Another common way to clear the context is to use [subagent](https://platform.claude.com/docs/en/agent-sdk/subagents). I tried instructing the main agent to run the `conclude` step instructions in its own subagent. This approach also has a few issues.
+Another common way to clear the context is to use [subagent](https://platform.claude.com/docs/en/agent-sdk/subagents). I try instructing the main agent to run the `conclude` step instructions in its own subagent. This approach also has a few issues.
 
 The first issue is that even though this subagent sits under the same `query()` call, it doesn't share the parent `query()` call's cache. I face the same issue of incurring extra cache write costs.
 
@@ -248,7 +248,7 @@ This is a dead end. Even if sending all the extra context feels wasteful, the da
 
 ## Connecting the dots
 
-While I searched through piles of Wizard logs, I noticed something strange.
+While I search through piles of Wizard logs, I notice something strange.
 
 There is a 150% difference between the Wizard runs with the most and least turns. Maybe I've been misled all along. What if it's not accumulated context? Not just the `conclude` step? What if runaway tool calls are blowing up the number of turns, and in turn, our cost?
 
@@ -266,19 +266,19 @@ But what's going on on the right cluster? There, cost and turns per run show hig
 
 ## The full confession
 
-When I followed the Wizard's path on high-turn, high-cost outlier runs on the right hand cluster, everything started clicking. When I carefully interrogated the Wizard over these runs turn-by-turn, I finally had a full confession.
+When I follow the Wizard's path on high-turn, high-cost outlier runs on the right hand cluster, everything starts clicking. When I carefully interrogate the Wizard over these runs turn-by-turn, I finally have a full confession.
 
 I can break the Wizard's token laundering schemes into three categories:
 
 ### 1. Wizard bureaucracy
 
-In step `conclude`, the Wizard has all it needs to know in `posthog-events.json`. However, I found that the Wizard will sometimes re-read through the code base to confirm that `posthog-events.json` is accurate.
+In step `conclude`, the Wizard has all it needs to know in `posthog-events.json`. However, I find that the Wizard will sometimes re-read through the code base to confirm that `posthog-events.json` is accurate.
 
 While I appreciate that the Wizard claim that "this prevents hallucinations and ensures correctness", all these extra reads, cache writes, and compactions often double the cost of the `conclude` step.
 
 ### 2. Compaction amnesia
 
-Compaction amnesia occurs most commonly in larger projects. I caught the Wizard re-reading a ton of files after a big compaction.
+Compaction amnesia occurs most commonly in larger projects. I catch the Wizard re-reading a ton of files after a big compaction.
 
 Remember that compactions already carry a cost. Re-reading the project files causes a ton of new cache to be written, which are 12x more expensive than cache reads. 
 
@@ -286,11 +286,11 @@ Remember that compactions already carry a cost. Re-reading the project files cau
 
 This is the biggest culprit to exploding costs. Sometimes the Wizard uses subagents to do exploration, run linters, and install packages.
 
-At every level, the subagents edge out more inference costs. Remember that subagents don't share the parent agent's cache. This incurs expensive cache writes.
+With each new subagent, the Wizard embezzles more tokens under the guise of "parallelism" and "context management". Remember that subagents don't share the parent agent's cache. This incurs expensive cache writes.
 
 Agents can also hang and not return after completion. Sometimes the parent agent can set unreliable timeouts to await long-running subagents, often backing off exponentially with 1, 3, 5, 10 minute timeouts. Anthropic's cache has a 5 minute timeout. This means waiting more than 10 minutes for a subagent to return causes the entire cache to be rebuilt.
 
-In an extreme case, I caught our Wizard spawning 5 sub agents, idling for 5 minutes waiting for the subagents to return, then running `KillShell` because 2 of 5 subagents didn't return. This entire process was a waste and took about 15 minutes.
+In an extreme case, I catch our Wizard spawning 5 sub agents, idling for 5 minutes waiting for the subagents to return, then running `KillShell` because 2 of 5 subagents don't return. This entire process is a waste and takes about 15 minutes.
 
 When the Wizard finally returns, it runs `pnpm install` and makes all the necessary edits in just 3 minutes.
 
@@ -324,3 +324,9 @@ Where possible, we keep the flow deterministic. In the `conclude` step, the task
 If possible, spell out the exact steps the agent should take in the prompt and ask it to following them exactly.
 
 Better yet, replace the prompts and MCP calls with a script that the agent can call. MCP tools give the agent freedom to explore, which is great. But when the task is deterministic, it's better to just spell it out.
+
+## Can I do better?
+
+If there's a single takeaway from this piece, it's to challenge intuition with data. Every single one of my intuitions had asterisks attached. It's very likely that the most naive implementation with your LLM agent is already at a local maximum, especially with all the under-the-hood optimizations. Getting out of that local maximum will require creative ideas and solid benchmarks to test your assumptions.
+
+Anthropic's models also change fast. Every few months, I look up, and better models bulldoze our existing assumptions. As I write this piece, Anthropic released [Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), a model that alone can half our costs. It also seems to handle subagents more reliably. I'll be challenging my learnings with Sonnet 4.6 and lots of testing.
