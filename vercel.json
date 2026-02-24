@@ -13,8 +13,9 @@
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
-        { "source": "/teams/words-and-pictures", "destination": "/teams/brand-vibes" },
-        { "source": "/teams/words-pictures", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
+        { "source": "/teams/words-pictures", "destination": "/teams/website" },
+        { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -1325,7 +1326,7 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/website-docs", "destination": "/teams/website" },
         {
             "source": "/questions/manually-merging-persons",
             "destination": "/docs/product-analytics/identify#how-to-merge-userss"

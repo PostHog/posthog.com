@@ -24,7 +24,7 @@ Marketing at PostHog is a collaborative effort across three teams:
   - Special programs (PostHog for Startups)
   - Cross-sell and email marketing
 
-- **Brand & Vibes:**
+- **<SmallTeam slug="website" />:**
   - Design system and visual identity
   - Website design and development
   - Artwork and graphic design
