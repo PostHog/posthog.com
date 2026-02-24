@@ -684,6 +684,10 @@ export const handbookSidebar = [
                         url: '/handbook/content/newsletter',
                     },
                     {
+                        name: 'Tips for new writers',
+                        url: '/handbook/content/newsletter-tips',
+                    },
+                    {
                         name: 'Newsletter ads',
                         url: '/handbook/content/newsletter-ads',
                     },
@@ -2698,6 +2702,10 @@ export const docsMenu = {
                                 {
                                     name: 'Ecommerce events spec',
                                     url: '/docs/data/event-spec/ecommerce-events',
+                                },
+                                {
+                                    name: 'Property filter operators',
+                                    url: '/docs/data/property-filters',
                                 },
                                 {
                                     name: 'Channel type',
