@@ -70,7 +70,7 @@ Here's a quick overview how the most popular tools in the market compare:
         {
             label: 'AI analysis',
             description: 'AI-powered summarization or analysis of survey responses',
-            values: ['Beta', true, true, true, false, false],
+            values: ['Beta', true, true, true, true, true],
         },
         {
             label: 'Built-in session replay',
@@ -85,7 +85,7 @@ Here's a quick overview how the most popular tools in the market compare:
         {
             label: 'Free tier',
             description: 'Offers a free plan or free survey responses',
-            values: ['1,500 responses/mo', '20 responses/mo', '1 survey/mo', '25 responses/mo', 'NPS only', false],
+            values: ['1,500 responses/mo', '20 responses/mo', '25 responses/mo', '25 responses/mo', 'NPS only', false],
         },
         'platform.deployment.open_source',
     ]}
@@ -100,18 +100,19 @@ PostHog (that's us, hi 👋) is an all-in-one developer platform that includes [
 
 This means you can do more than just collect feedback. When a user submits an NPS response, you can [pull up their session replay](/docs/session-replay) to see exactly what experience preceded it, join the response to their event history, or use a feature flag to [target them with a follow-up experiment](/docs/experiments/creating-an-experiment). Everything lives in one place, and all the products are designed to work well together.
 
-[Surveys](/docs/surveys) in PostHog support web and mobile apps, can be triggered by events or feature flags, and include [templates for NPS, PMF, CSAT, and more](/templates). The free tier includes 1,500 responses per month with no credit card required.
+[Surveys](/docs/surveys) in PostHog support web and mobile apps, can be triggered by events or feature flags, and include [templates for NPS, PMF, CSAT, and more](/templates). This lets teams get very granular with when and how to send surveys to users, and do complex analysis with other product tools.
 
-PostHog is also investing heavily in AI features. Surveys have built-in AI summaries and a chat interface for deeper analysis — both currently in beta.
+PostHog is also investing heavily in [AI features](/ai). Built-in AI summaries and the ability to get deeper survey analysis in the PostHog AI chat interface are both currently in Beta.
+
+The free tier includes 1,500 responses per month with no credit card required.
 
 **Strengths:**
 
-- Surveys linked to session replay, analytics, and feature flags
-- Event-triggered and feature flag-targeted surveys
+- Surveys part of a unified suite, linked to session replay, analytics, feature flags, and more
+- Highly customizable event-triggered and feature flag-targeted surveys
 - Web and mobile support (iOS, Android, React Native, Flutter)
-- AI analysis: summarize responses and dig deeper via chat (beta)
+- AI analysis: summarize responses and dig deeper via chat (in Beta)
 - 1,500 free responses/month with usage-based pricing
-- Unified suite: analytics, experiments, error tracking, surveys, and more
 
 <CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
 
@@ -123,11 +124,11 @@ Product and engineering teams who want to connect survey feedback directly to te
 
 ### 2. Hotjar
 
-[Hotjar](/blog/posthog-vs-hotjar) (now part of Contentsquare) is one of the most widely deployed tools for understanding user behavior on websites. Its surveys sit inside a broader toolkit that includes heatmaps, session recordings, and user interviews – making it easy to triangulate between what users say and what they do.
+[Hotjar](/blog/posthog-vs-hotjar) (now part of Contentsquare) is one of the most widely deployed tools for understanding user behavior on websites. Its surveys sit inside a broader toolkit that includes heatmaps, session recordings, and user interviews, making it easy to triangulate between what users say and what they do.
 
 Surveys in Hotjar support NPS, CSAT, and open-ended questions, and can be triggered by exit intent, scroll depth, or specific events. AI-powered sentiment analysis is available on paid plans. You can also recruit and schedule [user interviews](/newsletter/talk-to-users) directly through Hotjar Engage.
 
-The main limitation is that Hotjar is web-only. There's no mobile SDK for native apps. See our [PostHog vs Hotjar](/blog/posthog-vs-hotjar) comparison for a deeper breakdown.
+See our [PostHog vs Hotjar](/blog/posthog-vs-hotjar) comparison for a deeper breakdown.
 
 **Strengths:**
 
@@ -139,7 +140,7 @@ The main limitation is that Hotjar is web-only. There's no mobile SDK for native
 
 <CalloutBox icon="IconStarFilled" title="Hotjar is best for..." type="fyi">
 
-Product, UX, and marketing teams focused on web apps _only_ who want qualitative feedback paired with visual behavior insights.
+Product, UX, and marketing teams focused who want qualitative feedback paired with visual behavior insights.
 
 </CalloutBox>
 
@@ -151,7 +152,7 @@ Sprig is a purpose-built user research platform that links in-product surveys an
 
 In Sprig, you trigger a study in response to a user action, users answer your survey, and the session recording captures the context. AI then analyzes responses across participants to surface common themes automatically so you don't have to manually tag hundreds of open-text answers.
 
-Sprig supports web and most mobile platforms (iOS, Android, but not Flutter). There's no meaningful free tier beyond one active survey per month, and pricing is usage-based without public information on rates.
+Sprig supports web and most mobile platforms (iOS, Android, but not Flutter). Their free tier plan is limited to 25 survey responses per month, and pricing is usage-based without public information on rates.
 
 **Strengths:**
 
@@ -174,7 +175,7 @@ Survicate is a dedicated customer feedback platform built for multi-channel surv
 
 The survey builder supports 13+ question types with branching logic and no code required. An AI-powered Insights Hub groups open-text responses by topic and sentiment, cutting down on manual analysis. Native integrations with HubSpot, Intercom, Salesforce, Zapier, and Slack make it easy to push responses into existing workflows.
 
-The free tier allows 25 responses per month, with paid plans starting at $79/month.
+The free tier allows 25 responses per month, with paid plans starting at $56/month (billed annually).
 
 **Strengths:**
 
@@ -182,9 +183,8 @@ The free tier allows 25 responses per month, with paid plans starting at $79/mon
 - Native iOS and Android SDKs
 - 30+ integrations including HubSpot, Intercom, and Salesforce
 - AI-powered Insights Hub for grouping open-text responses
-- 25 free responses/month
 
-<CalloutBox icon="IconStarFilled" title="Survicate is best for" type="fyi">
+<CalloutBox icon="IconStarFilled" title="Survicate is best for..." type="fyi">
 
 Customer success and product teams who need to collect feedback across multiple channels and route responses directly into their CRM or support tools.
 
@@ -198,7 +198,7 @@ Customer success and product teams who need to collect feedback across multiple 
 
 Surveys in [Pendo](/blog/best-pendo-alternatives) are targeted by user segment or behavior, support web and mobile, and connect to its broader analytics model. The free plan includes Pendo-branded NPS surveys for up to 500 monthly active users, but full survey functionality requires a paid plan.
 
-Pendo's pricing is very opaque and quite hefty. Paid plans start at roughly $15,900/year, which puts it out of reach for most smaller teams and startups. See our [PostHog vs Pendo](/blog/posthog-vs-pendo) comparison for more detail.
+Pendo's pricing is very opaque and quite hefty, which puts it out of reach for most smaller teams and startups. See our [PostHog vs Pendo](/blog/posthog-vs-pendo) comparison for more detail.
 
 **Strengths:**
 
@@ -241,8 +241,8 @@ Teams that need a standalone, full-featured survey platform, especially for mark
 
 ## Which in-app survey tool should you choose?
 
-- Want surveys integrated with analytics, replay, feature flags, and AI analysis? **[PostHog](/surveys)**
-- Need web surveys alongside heatmaps and session replay? **Hotjar**
+- Want surveys integrated with other analytics tools that are easy to trigger from custom events? **[PostHog](/surveys)**
+- Need surveys alongside heatmaps and session replay with AI summaries? **Hotjar**
 - Want in-depth research with AI, surveys, and session replays linked together? **Sprig**
 - Need multi-channel surveys with direct CRM integrations? **Survicate**
 - Want surveys bundled with in-app guides and product analytics? **Pendo**
@@ -305,7 +305,7 @@ Yes, if you use the right tool. **PostHog** links every survey response to the u
 
 - **PostHog**: 1,500 responses/month free
 - **Hotjar**: 20 responses/month free (Ask Basic plan)
-- **Sprig**: 1 active survey/month free
+- **Sprig**: 25 responses/month free
 - **Survicate**: 25 responses/month free
 - **Pendo**: NPS surveys only, up to 500 MAU
 
