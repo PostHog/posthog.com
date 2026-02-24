@@ -206,9 +206,32 @@ function SkillStructure(): JSX.Element {
     )
 }
 
-function GetStartedCommand(): JSX.Element {
+function GetStarted(): JSX.Element {
+    const ExtLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="underline font-bold hover:opacity-75">
+            {children}
+        </a>
+    )
+
     return (
         <div className="not-prose">
+            <p className="mb-4">
+                PostHog Wizard takes around 8 minutes to run. So copy the command below, fire up your terminal, hit
+                enter, and make your way to our <ExtLink href="https://www.youtube.com/posthog">YouTube</ExtLink> where
+                you can watch approximately 1.76{' '}
+                <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfzBX5wsSUHwLj91xuGnH5Ci">
+                    PostHog Demos
+                </ExtLink>
+                , 1.9{' '}
+                <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfyW1w0OZwf8zlnkJNfQ_kki">
+                    PostHog AI tutorials
+                </ExtLink>
+                , or 2.7{' '}
+                <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL">
+                    changelog videos
+                </ExtLink>
+                .
+            </p>
             <CopyableCommand />
         </div>
     )
@@ -268,10 +291,10 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <ExplainerVideo />,
     },
     {
-        name: 'GetStartedCommand',
+        name: 'GetStarted',
         kind: 'flow',
         props: [],
-        Editor: () => <GetStartedCommand />,
+        Editor: () => <GetStarted />,
     },
 ]
 
