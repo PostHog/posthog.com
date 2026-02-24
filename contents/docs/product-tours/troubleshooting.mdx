@@ -40,7 +40,7 @@ If you are using a [reverse proxy](/docs/advanced/proxy) you may encounter some 
 To resolve these issues, be sure to pass the proper [`ui_host` config parameter](/docs/libraries/js/config) when initializing PostHog. Example:
 
 ```typescript
-posthog.init('your-project-token', {
+posthog.init('<ph_project_token>', {
   api_host: '/ingest',
   ui_host: 'https://us.posthog.com', // or 'https://eu.posthog.com`
   defaults: '2025-05-24',
