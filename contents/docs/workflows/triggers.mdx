@@ -4,12 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-Every workflow starts with a trigger. Triggers define the conditions that cause your workflow to run. PostHog supports three types of triggers, each suited to different use cases.
+Every workflow starts with a trigger. Triggers define the conditions that cause your workflow to run. PostHog supports several types of triggers, each suited to different use cases.
 
 | Trigger type | Description | Best for |
 |--------------|-------------|----------|
 | [Event trigger](#event-triggers) | Runs when a PostHog event is captured | Responding to user actions in your app |
 | [Webhook trigger](#webhook-triggers) | Runs when an external system calls a webhook URL | Integrating with third-party services |
+| [Manual trigger](#manual-triggers) | Runs when you click a button in the UI | On-demand workflows and testing |
+| [Scheduled trigger](#scheduled-triggers) | Runs at a specific time in the future | Time-based campaigns and reminders |
+| [Batch trigger](#batch-triggers) | Runs for each person matching a filter | Bulk operations on user segments |
+| [Tracking pixel trigger](#tracking-pixel-triggers) | Runs when a tracking pixel is loaded | Email open tracking |
 | [Conversation trigger](#conversation-triggers) | Runs when support ticket events occur | Automating support workflows |
 
 ## Event triggers
@@ -178,6 +182,190 @@ Webhook triggers are ideal when you want to:
 **Action:** Send Slack message to #sales channel with payment details
 
 When Stripe sends an `invoice.paid` webhook, the workflow sends a Slack notification with the customer email and amount paid.
+
+## Manual triggers
+
+Manual triggers let you run a workflow on-demand by clicking a button in the PostHog UI. This is useful for workflows that don't need to run automatically but should be triggered by a team member when needed.
+
+### How manual triggers work
+
+1. Create a workflow with a **Manual** trigger type
+2. Enable the workflow
+3. Click the **Trigger** button in the workflow header
+4. Optionally configure any workflow variables
+5. The workflow runs immediately
+
+### Available data
+
+When a manual trigger fires, the workflow receives a `$workflow_triggered` event. You can access:
+
+| Data | Description | Access pattern |
+|------|-------------|----------------|
+| **Event name** | Always `$workflow_triggered` | `{{ event.event }}` |
+| **Timestamp** | When the trigger was clicked | `{{ event.timestamp }}` |
+| **Workflow variables** | Any variables you configure | `{{ variables.variable_name }}` |
+
+### When to use manual triggers
+
+Manual triggers are ideal when you want to:
+
+- **Test workflows** before enabling automatic triggers
+- **Send one-off communications** that don't fit a pattern
+- **Trigger maintenance tasks** like data cleanup or syncs
+- **Run ad-hoc reports** or data exports
+- **Manually intervene** in automated processes
+
+#### Example: Manual customer outreach
+
+**Trigger:** Manual
+**Variables:** `customer_email`, `message_template`
+**Action:** Send personalized email to the specified customer
+
+A support manager can use this workflow to send a custom message to a specific customer without setting up an automated trigger.
+
+## Scheduled triggers
+
+Scheduled triggers let you run a workflow at a specific time in the future. This is useful for time-sensitive campaigns, reminders, or scheduled maintenance tasks.
+
+### How scheduled triggers work
+
+1. Create a workflow with a **Schedule** trigger type
+2. Configure the date and time when the workflow should run
+3. Enable the workflow
+4. Click the **Schedule** button to schedule the run
+5. The workflow runs at the specified time
+
+### Available data
+
+When a scheduled trigger fires, the workflow receives a `$workflow_triggered` event. You can access:
+
+| Data | Description | Access pattern |
+|------|-------------|----------------|
+| **Event name** | Always `$workflow_triggered` | `{{ event.event }}` |
+| **Scheduled time** | When the workflow was scheduled to run | `{{ event.timestamp }}` |
+| **Workflow variables** | Any variables you configure | `{{ variables.variable_name }}` |
+
+### When to use scheduled triggers
+
+Scheduled triggers are ideal when you want to:
+
+- **Send time-sensitive announcements** at a specific moment
+- **Schedule marketing campaigns** to launch at optimal times
+- **Run maintenance tasks** during off-peak hours
+- **Send reminders** for upcoming events or deadlines
+- **Coordinate releases** with product launches
+
+#### Example: Product launch announcement
+
+**Trigger:** Scheduled for January 15, 2025 at 9:00 AM
+**Action:** Send email announcement to all subscribers, post to Slack #general channel
+
+Schedule your product launch communications to go out at exactly the right moment, coordinated with your marketing team.
+
+## Batch triggers
+
+Batch triggers let you run a workflow for each person who matches a set of filters. This is useful for bulk operations like sending a message to all users in a segment or updating properties for a group of people.
+
+### How batch triggers work
+
+1. Create a workflow with a **Batch** trigger type
+2. Define person property filters to select your target audience
+3. Optionally schedule the batch for a future time
+4. Enable the workflow
+5. Click the **Trigger** (or **Schedule**) button
+6. The workflow runs once for each matching person
+
+### Available data
+
+When a batch trigger fires for a person, your workflow has access to:
+
+| Data | Description | Access pattern |
+|------|-------------|----------------|
+| **Person properties** | All properties of the current person | `{{ person.properties.property_name }}` |
+| **Distinct ID** | The person's unique identifier | `{{ person.distinct_id }}` |
+| **Workflow variables** | Any variables you configure | `{{ variables.variable_name }}` |
+
+### Configuring batch filters
+
+You can filter which people are included in the batch using:
+
+- **Person properties**: Filter by any person property (e.g., `plan = premium`)
+- **Cohorts**: Include or exclude people in specific cohorts
+- **Feature flags**: Target people with specific feature flag values
+
+The UI shows you an estimate of how many people will be affected before you run the batch.
+
+### When to use batch triggers
+
+Batch triggers are ideal when you want to:
+
+- **Send bulk announcements** to all users or a segment
+- **Migrate data** by updating person properties in bulk
+- **Re-engage inactive users** by targeting people who haven't been active recently
+- **Run promotional campaigns** to specific customer segments
+- **Sync data** to external systems for groups of users
+
+#### Example: Premium user announcement
+
+**Trigger:** Batch with filter `plan = premium`
+**Action:** Send email announcing new premium features
+
+Send an email to all premium users announcing new features available on their plan. The batch runs once for each person matching the filter.
+
+## Tracking pixel triggers
+
+Tracking pixel triggers let you trigger a workflow when a 1x1 invisible image (tracking pixel) is loaded. This is commonly used for email open tracking and other scenarios where you need to detect when content is viewed.
+
+### How tracking pixel triggers work
+
+1. Create a workflow with a **Tracking pixel** trigger type
+2. Copy the generated tracking pixel URL
+3. Embed the tracking pixel in your email or content as an image
+4. When the recipient views the content and loads the image, the workflow triggers
+
+### Available data
+
+When a tracking pixel trigger fires, you can access data from the request:
+
+| Data | Description | Access pattern |
+|------|-------------|----------------|
+| **Query parameters** | Any parameters passed in the URL | `{{ request.params.param_name }}` |
+| **Headers** | HTTP headers from the request | `{{ request.headers.header_name }}` |
+
+### Setting up a tracking pixel
+
+1. Create a new workflow and select **Tracking pixel** as the trigger type
+2. Save the workflow to generate the tracking pixel URL
+3. Copy the URL (it will look like `https://webhooks.posthog.com/public/webhooks/{workflow_id}`)
+4. Embed it in your content:
+
+```html
+<img src="https://webhooks.posthog.com/public/webhooks/{workflow_id}.gif"
+     width="1" height="1" style="display:none;" alt="" />
+```
+
+You can add query parameters to pass data:
+
+```html
+<img src="https://webhooks.posthog.com/public/webhooks/{workflow_id}.gif?email=user@example.com&campaign=welcome"
+     width="1" height="1" style="display:none;" alt="" />
+```
+
+### When to use tracking pixel triggers
+
+Tracking pixel triggers are ideal when you want to:
+
+- **Track email opens** to measure campaign engagement
+- **Detect content views** in places where JavaScript isn't available
+- **Trigger follow-up actions** when users view specific content
+- **Build engagement funnels** that include email interactions
+
+#### Example: Email open tracking
+
+**Trigger:** Tracking pixel with `?email={{ person.email }}&campaign=welcome`
+**Action:** Update person property `opened_welcome_email = true`, capture `email_opened` event
+
+When a user opens your welcome email and the tracking pixel loads, the workflow records that they opened it and captures an event for analytics.
 
 ## Conversation triggers
 

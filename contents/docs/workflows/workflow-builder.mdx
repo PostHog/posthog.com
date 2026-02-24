@@ -39,12 +39,16 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 ## Triggers
 
-Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are three types of triggers:
+Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are several types of triggers:
 
 | Trigger type | Description |
 |--------------|-------------|
 | Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
 | Webhook trigger | Programmatically start a workflow with a webhook |
+| Manual trigger | Run workflow on-demand via a button click |
+| Scheduled trigger | Run workflow at a specific future time |
+| Batch trigger | Run workflow for each person matching filters |
+| Tracking pixel trigger | Run workflow when a 1x1 tracking pixel is loaded |
 | Conversation trigger | Support ticket events (when [Conversations](/docs/support) is enabled) |
 
 For detailed information on each trigger type, including available data, filtering options, and use case examples, see the [Triggers documentation](/docs/workflows/triggers).
