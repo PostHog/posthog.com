@@ -17,6 +17,8 @@ jobs:
         name: Build & cache
         runs-on: ubuntu-latest
         timeout-minutes: 45
+        permissions:
+            contents: read
 
         steps:
             - name: Checkout
