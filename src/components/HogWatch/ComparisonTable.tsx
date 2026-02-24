@@ -35,6 +35,7 @@ function TableHeader({
     sortBy,
     sortDir,
     onSort,
+    sticky,
 }: {
     label: string
     align?: 'left' | 'right' | 'center'
@@ -43,6 +44,7 @@ function TableHeader({
     sortBy?: string | null
     sortDir?: 'asc' | 'desc'
     onSort?: (key: string) => void
+    sticky?: boolean
 }) {
     const text = HEADER_TOOLTIPS[tooltipKey] ?? ''
     const alignClass = align === 'left' ? 'text-left' : align === 'center' ? 'text-center' : 'text-right'
@@ -51,7 +53,7 @@ function TableHeader({
         <th
             className={`group relative cursor-help border border-primary px-4 py-2 font-semibold tracking-posthog-tight text-primary ${alignClass} ${
                 sortKey ? 'cursor-pointer select-none' : ''
-            }`}
+            } ${sticky ? 'sticky left-0 z-10 bg-accent' : ''}`}
             title={text}
             onClick={sortKey ? () => onSort?.(sortKey) : undefined}
         >
@@ -248,8 +250,8 @@ export function ComparisonTable({ results, defaultRate, rateOverrides, onRateOve
                     {displayed.length} of {results.length} channels
                 </span>
             </div>
-            <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-primary text-sm">
+            <div className="overflow-x-auto -mx-px">
+                <table className="w-full min-w-max border-collapse border border-primary text-sm">
                     <thead>
                         <tr className="bg-accent">
                             <TableHeader
@@ -260,6 +262,7 @@ export function ComparisonTable({ results, defaultRate, rateOverrides, onRateOve
                                 sortBy={sortBy}
                                 sortDir={sortDir}
                                 onSort={handleSort}
+                                sticky
                             />
                             <TableHeader
                                 label="Subs"
@@ -352,52 +355,63 @@ export function ComparisonTable({ results, defaultRate, rateOverrides, onRateOve
                     <tbody>
                         {displayed.map((r) => (
                             <tr key={r.channelId} className="hover:bg-accent">
-                                <td className="border border-primary px-4 py-2">
-                                    <div className="flex items-center gap-2">
+                                <td className="sticky left-0 z-10 border border-primary bg-primary px-4 py-2">
+                                    <div className="flex items-center gap-2 min-w-0">
                                         {r.thumbnailUrl ? (
                                             <img
                                                 src={r.thumbnailUrl}
                                                 alt=""
-                                                className="h-8 w-8 rounded-full object-cover"
+                                                className="h-8 w-8 shrink-0 rounded-full object-cover"
                                             />
                                         ) : null}
-                                        <div>
-                                            <span className="font-medium text-primary">{r.title}</span>
-                                            {r.error ? <span className="block text-xs text-red">{r.error}</span> : null}
+                                        <div className="min-w-0">
+                                            <span className="font-medium text-primary truncate block">{r.title}</span>
+                                            {r.error ? (
+                                                <span className="block text-xs text-red">{r.error}</span>
+                                            ) : (
+                                                <a
+                                                    href={`https://socialblade.com/youtube/channel/${r.channelId}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-xs text-red hover:underline"
+                                                >
+                                                    Social Blade
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.subscriberCount.toLocaleString()}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-primary">
+                                <td className="border border-primary px-4 py-2 text-right text-primary whitespace-nowrap">
                                     {r.medianViews.toLocaleString()}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.subscriberCount > 0 ? `${r.subToViewPct.toFixed(1)}%` : '—'}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-primary">
-                                    {r.medianLikes.toLocaleString()}
+                                <td className="border border-primary px-4 py-2 text-right text-primary whitespace-nowrap">
+                                    {Math.round(r.medianLikes).toLocaleString()}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-primary">
-                                    {r.medianComments.toLocaleString()}
+                                <td className="border border-primary px-4 py-2 text-right text-primary whitespace-nowrap">
+                                    {Math.round(r.medianComments).toLocaleString()}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-primary">
+                                <td className="border border-primary px-4 py-2 text-right text-primary whitespace-nowrap">
                                     {r.engagementRatePct.toFixed(2)}%
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.viewCV > 0 ? `${r.viewCV.toFixed(0)}%` : '—'}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.medianLikes > 0 ? r.commentToLikeRatio.toFixed(2) : '—'}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.maxGapDays > 0 ? Math.round(r.maxGapDays) : '—'}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.avgGapDays > 0 ? r.avgGapDays.toFixed(1) : '—'}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-center text-muted">
+                                <td className="border border-primary px-4 py-2 text-center text-muted whitespace-nowrap">
                                     {TREND_SYMBOLS[r.viewTrend]}
                                 </td>
                                 <td className="border border-primary px-4 py-2 text-right">
@@ -438,13 +452,13 @@ export function ComparisonTable({ results, defaultRate, rateOverrides, onRateOve
                                         </button>
                                     )}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right font-semibold text-primary">
+                                <td className="border border-primary px-4 py-2 text-right font-semibold text-primary whitespace-nowrap">
                                     {r.cpm.toFixed(1)}
                                 </td>
-                                <td className="border border-primary px-4 py-2 text-right text-muted">
+                                <td className="border border-primary px-4 py-2 text-right text-muted whitespace-nowrap">
                                     {r.medianViews > 0 ? `$${r.cpv.toFixed(4)}` : '—'}
                                 </td>
-                                <td className="border border-primary px-4 py-2">
+                                <td className="border border-primary px-4 py-2 whitespace-nowrap">
                                     <span
                                         className={`inline-flex rounded border px-2 py-0.5 text-xs font-semibold ${
                                             TIER_STYLES[r.tier] ?? 'bg-accent text-primary border-primary'

@@ -92,19 +92,39 @@ export default function HogWatchPage() {
 
     return (
         <>
-            <SEO title="HogWatch 3000 - PostHog" description="Internal CPM evaluation for YouTube channels" />
+            <SEO
+                title="HogWatch 3000 - PostHog"
+                description="Internal tool to check if creators are worth going into negotiations with"
+            />
             <ReaderView
                 title="HogWatch 3000"
                 leftSidebar={<TreeMenu items={internalToolsNav} />}
-                description="A fast CPM sniff test for YouTube creators. Internal tool."
+                description="A tool to check if creators are worth going into negotiations with or not. Internal use."
                 showQuestions={false}
             >
                 <div className="@container text-primary">
                     <div className="space-y-8">
                         <section>
-                            <div className="bg-accent p-4 rounded border border-primary mt-4">
+                            <div className="bg-accent p-4 rounded border border-primary mt-4 space-y-2">
                                 <p className="mt-0">
-                                    A fast CPM sniff test for YouTube creators. Public data, finite API.
+                                    A tool to check if creators are worth going into negotiations with or not.
+                                </p>
+                                <p className="mb-0 text-sm text-muted">
+                                    <a
+                                        href="/handbook/growth/marketing/influencers#sourcing-and-evaluating-influencers"
+                                        className="text-red hover:underline"
+                                    >
+                                        How we evaluate influencers
+                                    </a>
+                                    {' · '}
+                                    <a
+                                        href="https://us.posthog.com/project/2/dashboard/493906"
+                                        className="text-red hover:underline"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Influencer performance dashboard (PostHog)
+                                    </a>
                                 </p>
                             </div>
                         </section>
@@ -132,7 +152,7 @@ export default function HogWatchPage() {
                                     size="md"
                                     width="fit"
                                     direction="column"
-                                    value={defaultRate}
+                                    value={String(defaultRate)}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                         setDefaultRate(Number(e.target.value) || 500)
                                     }
