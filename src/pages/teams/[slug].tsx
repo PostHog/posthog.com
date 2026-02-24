@@ -18,7 +18,7 @@ import usePostHog from 'hooks/usePostHog'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { Question } from 'components/Squeak'
 import { InProgress } from 'components/Roadmap/InProgress'
-import { useToast } from 'context/Toast'
+import { useToast } from '../../context/Toast'
 import SideModal from 'components/Modal/SideModal'
 import TeamUpdate from 'components/TeamUpdate'
 import { PrivateLink } from 'components/PrivateLink'
@@ -401,7 +401,9 @@ export default function TeamPage(props: TeamPageProps) {
         setFieldValue('teamMembers', [...values.teamMembers, { id: profile.id, attributes: profile }])
         if (profile.startDate && dayjs(profile.startDate).isAfter(dayjs())) {
             addToast({
-                description: `${profile.firstName} ${profile.lastName}'s start date is ${dayjs(profile.startDate).format('MMMM D, YYYY')}. They will appear on the site on that date.`,
+                description: `${profile.firstName} ${profile.lastName}'s start date is ${dayjs(
+                    profile.startDate
+                ).format('MMMM D, YYYY')}. They will appear on the site on that date.`,
             })
         }
     }
