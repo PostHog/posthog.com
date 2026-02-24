@@ -277,7 +277,7 @@ import { PostHogProvider } from '@posthog/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
         // Enable debug mode in development
         loaded: (posthog) => {

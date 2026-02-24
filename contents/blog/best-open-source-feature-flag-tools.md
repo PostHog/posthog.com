@@ -9,6 +9,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author:
+  - andy-vandervell
   - natalia-amorim
 category: General
 tags:
@@ -303,3 +304,5 @@ Local evaluation means feature flags are checked locally within your application
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
 - [The benefits of feature flags and how to use them](/product-engineers/feature-flag-benefits-use-cases)
+
+<NewsletterForm />

@@ -117,7 +117,7 @@ import gzip
 
 # PostHog Python Client
 posthog = Posthog(
-<ph_project_api_key>,
+<ph_project_token>,
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True
@@ -235,7 +235,7 @@ We want to attribute "Application installed" to the user with ID 123, so we need
 
 ```python
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True

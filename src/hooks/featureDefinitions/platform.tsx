@@ -10,6 +10,9 @@ export const platformFeatures = {
                 name: 'Open source',
                 description: 'Audit code, contribute to roadmap, and build integrations',
             },
+            open_core: {
+                name: 'Open core',
+            },
             reverse_proxy: {
                 name: 'Reverse proxy',
                 description: 'Avoid tracking blockers and capture more data',

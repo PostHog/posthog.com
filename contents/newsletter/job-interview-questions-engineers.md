@@ -7,6 +7,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/job_interview_questions_35bb07c898.jpg
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - Product engineers
   - Culture
