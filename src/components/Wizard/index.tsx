@@ -1,34 +1,309 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { JsxComponentDescriptor } from '@mdxeditor/editor'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
+import MDXEditor from 'components/MDXEditor'
+import SEO from 'components/seo'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { ProductVideo } from 'components/ProductVideo'
+import WistiaVideo from 'components/WistiaVideo'
+import TeamMember from 'components/TeamMember'
+import Link from 'components/Link'
+import useProduct from 'hooks/useProduct'
+import { getLogo } from '../../constants/logos'
+import { IconCopy, IconCheck } from '@posthog/icons'
 
-interface WizardProps {
-    // template: 'generic' | 'product' | 'feature'
-    children?: React.ReactNode
-    navigationPosition?: 'top' | 'bottom'
-    leftNavigation?: React.ReactNode
-    rightNavigation?: React.ReactNode
+function WizardHeader(): JSX.Element {
+    const [copied, setCopied] = useState(false)
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText('npx @posthog/wizard')
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
+    return (
+        <header className="relative -mx-5 -mt-4 mb-6 overflow-hidden rounded-t-sm">
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
+                className="dark:hidden absolute inset-0"
+                imgClassName="h-full w-full"
+            />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
+                className="hidden dark:block absolute inset-0"
+                imgClassName="h-full w-full"
+            />
+            <div className="relative flex flex-col @md:flex-row items-center gap-4 @md:gap-8 px-5 py-8 @md:py-10">
+                <div className="flex-1 text-center @md:text-left">
+                    <h1 className="text-2xl @sm:text-3xl font-bold !mt-0 !mb-2">
+                        Add PostHog to your codebase automatically
+                    </h1>
+                    <p className="!mb-4 text-[15px] opacity-75">
+                        One small terminal command, one giant leap for understanding users.
+                    </p>
+                    <button
+                        onClick={handleCopy}
+                        className="inline-flex items-center gap-2 bg-dark dark:bg-white text-white dark:text-dark font-mono text-sm px-4 py-2 rounded-md cursor-pointer border-0 hover:opacity-90 transition-opacity"
+                    >
+                        <code className="!bg-transparent !p-0 !text-inherit">npx @posthog/wizard</code>
+                        {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
+                    </button>
+                </div>
+                <div className="shrink-0">
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
+                        alt="PostHog Wizard hedgehog"
+                        className="w-32 @sm:w-40 @md:w-48"
+                    />
+                </div>
+            </div>
+        </header>
+    )
 }
 
-export default function Wizard({
-    children,
-    leftNavigation,
-    rightNavigation,
-    navigationPosition = 'bottom',
-}: WizardProps) {
+function DemoVideo(): JSX.Element {
     return (
-        <div data-scheme="primary" className="w-full h-full bg-primary flex flex-col text-primary">
-            {navigationPosition === 'top' && (
-                <div className="border-b border-primary w-full flex items-center justify-between px-3 py-2 bg-accent gap-2">
-                    <span>{leftNavigation}</span>
-                    <span>{rightNavigation}</span>
-                </div>
-            )}
-            {children}
-            {(leftNavigation || rightNavigation) && navigationPosition === 'bottom' && (
-                <div className="border-t border-primary w-full flex items-center justify-between px-3 py-2 bg-accent gap-2">
-                    <span>{leftNavigation}</span>
-                    <span>{rightNavigation}</span>
-                </div>
-            )}
+        <ProductVideo
+            videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_wizard_install_cursor_331d174d75.mp4"
+            videoDark=""
+            autoPlay={false}
+            classes="rounded"
+        />
+    )
+}
+
+const supportedProductHandles = [
+    'product_analytics',
+    'web_analytics',
+    'session_replay',
+    'feature_flags',
+    'experiments',
+    'error_tracking',
+    'logs',
+]
+
+function SupportedProducts(): JSX.Element {
+    const allProducts = useProduct()
+
+    const products = supportedProductHandles
+        .map((handle) => (Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined))
+        .filter(Boolean)
+
+    return (
+        <div className="border border-border rounded-md p-4 not-prose @lg:float-right @lg:ml-6 @lg:mb-2 @lg:max-w-[200px]">
+            <p className="text-sm font-semibold mb-2 opacity-70">Supported products</p>
+            <ul className="list-none m-0 p-0 space-y-1.5">
+                {products.map((product: any) => (
+                    <li key={product.handle}>
+                        <Link
+                            to={`/${product.slug}`}
+                            className="flex items-center gap-2 text-sm !text-inherit hover:opacity-75"
+                        >
+                            {product.Icon && <product.Icon className={`size-5 text-${product.color}`} />}
+                            <span>{product.name}</span>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </div>
+    )
+}
+
+const frameworkCategories = [
+    {
+        label: 'Full stack',
+        frameworks: [
+            { name: 'Rails', logo: 'rails' },
+            { name: 'Next.js', logo: 'nextjs' },
+            { name: 'Nuxt', logo: 'nuxt' },
+            { name: 'Remix', logo: 'remix' },
+            { name: 'Tanstack Start', logo: 'tanstack' },
+        ],
+    },
+    {
+        label: 'Frontend',
+        frameworks: [
+            { name: 'React', logo: 'react' },
+            { name: 'Vue', logo: 'vue' },
+            { name: 'Svelte', logo: 'svelte' },
+            { name: 'Angular', logo: 'angular' },
+        ],
+    },
+    {
+        label: 'Backend',
+        frameworks: [
+            { name: 'Laravel', logo: 'laravel' },
+            { name: 'Django', logo: 'django' },
+            { name: 'Flask', logo: 'flask' },
+            { name: 'FastAPI', logo: 'python' },
+        ],
+    },
+    {
+        label: 'Mobile',
+        frameworks: [
+            { name: 'React Native', logo: 'reactNative' },
+            { name: 'iOS', logo: 'ios' },
+            { name: 'Android', logo: 'android' },
+            { name: 'Flutter', logo: 'flutter' },
+        ],
+    },
+]
+
+function SupportedFrameworks(): JSX.Element {
+    return (
+        <div className="grid grid-cols-2 @md:grid-cols-4 gap-4 not-prose">
+            {frameworkCategories.map((category) => (
+                <div key={category.label}>
+                    <p className="text-sm font-semibold mb-2 opacity-60">{category.label}</p>
+                    <ul className="list-none m-0 p-0 space-y-1">
+                        {category.frameworks.map((fw) => {
+                            const logoUrl = getLogo(fw.logo)
+                            return (
+                                <li key={fw.name} className="flex items-center gap-2 text-sm">
+                                    {logoUrl && <img src={logoUrl} alt={fw.name} className="size-5 rounded-sm" />}
+                                    <span>{fw.name}</span>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+function SkillStructure(): JSX.Element {
+    return (
+        <pre className="bg-accent border border-border rounded-md p-4 text-sm font-mono overflow-x-auto not-prose">
+            <code>
+                {`.claude/
+└── skills/
+    └── posthog-nextjs/
+        ├── references/
+        └── SKILL.md`}
+            </code>
+        </pre>
+    )
+}
+
+function GetStartedCommand(): JSX.Element {
+    const [copied, setCopied] = useState(false)
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText('npx @posthog/wizard')
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
+    return (
+        <div
+            onClick={handleCopy}
+            className="group relative bg-accent border border-border rounded-md p-4 font-mono text-sm cursor-pointer not-prose hover:border-border-bold transition-colors"
+        >
+            <code>npx @posthog/wizard</code>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 opacity-50 group-hover:opacity-100 transition-opacity">
+                {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
+            </span>
+        </div>
+    )
+}
+
+function ExplainerVideo(): JSX.Element {
+    return (
+        <div className="not-prose">
+            <div className="border border-border rounded-md overflow-hidden mb-3">
+                <div className="aspect-video">
+                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" />
+                </div>
+            </div>
+            <p className="text-sm opacity-70">
+                Here&apos;s <TeamMember name="Matt Brooker" photo /> explaining the{' '}
+                <Link to="/docs/model-context-protocol">PostHog MCP server</Link>.
+            </p>
+        </div>
+    )
+}
+
+const jsxComponentDescriptors: JsxComponentDescriptor[] = [
+    {
+        name: 'WizardHeader',
+        kind: 'flow',
+        props: [],
+        Editor: () => <WizardHeader />,
+    },
+    {
+        name: 'DemoVideo',
+        kind: 'flow',
+        props: [],
+        Editor: () => <DemoVideo />,
+    },
+    {
+        name: 'SupportedProducts',
+        kind: 'flow',
+        props: [],
+        Editor: () => <SupportedProducts />,
+    },
+    {
+        name: 'SkillStructure',
+        kind: 'flow',
+        props: [],
+        Editor: () => <SkillStructure />,
+    },
+    {
+        name: 'SupportedFrameworks',
+        kind: 'flow',
+        props: [],
+        Editor: () => <SupportedFrameworks />,
+    },
+    {
+        name: 'ExplainerVideo',
+        kind: 'flow',
+        props: [],
+        Editor: () => <ExplainerVideo />,
+    },
+    {
+        name: 'GetStartedCommand',
+        kind: 'flow',
+        props: [],
+        Editor: () => <GetStartedCommand />,
+    },
+]
+
+export default function Wizard() {
+    const {
+        mdx: { rawBody, mdxBody },
+    } = useStaticQuery(graphql`
+        query {
+            mdx(slug: { eq: "wizard" }) {
+                rawBody
+                mdxBody: body
+            }
+        }
+    `)
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'wizard.mdx')
+        }
+    }, [])
+
+    return (
+        <>
+            <SEO
+                title="PostHog Wizard – Add PostHog to your codebase automatically"
+                description="One small terminal command to install and configure PostHog in your codebase. The Wizard analyzes your project and sets up the right tools, custom events, and dashboards."
+                image="/images/og/default.png"
+            />
+            <MDXEditor
+                jsxComponentDescriptors={jsxComponentDescriptors}
+                body={rawBody}
+                mdxBody={mdxBody}
+                maxWidth={900}
+            />
+        </>
     )
 }
