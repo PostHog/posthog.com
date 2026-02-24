@@ -141,14 +141,14 @@ In your application code, update your PostHog initialization to use your proxy s
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -273,14 +273,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:8080',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:8080',
   ui_host: 'https://eu.posthog.com'
 })

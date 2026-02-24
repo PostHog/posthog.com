@@ -16,12 +16,7 @@ const Row = ({ children }: { children: React.ReactNode }) => {
 export default function IntegrationPrompt() {
     return (
         <>
-            <h3>
-                <span className="mr-1">Install with AI in 90 seconds</span>
-                <div className="inline-block bg-blue/10 text-blue px-0.5 rounded-sm text-xs font-medium border border-blue">
-                    BETA
-                </div>
-            </h3>
+            <h3>Install with AI in 90 seconds</h3>
             <p className="text-[15px]">Paste into your terminal or an AI code editor.</p>
             <WizardCommand />
 

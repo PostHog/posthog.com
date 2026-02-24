@@ -94,17 +94,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
-            name: 'Endpoints',
-            Icon: IconTerminal,
-            description: 'Custom API endpoints powered by your PostHog data.',
-            handle: 'endpoints',
-            color: 'teal',
-            colorSecondary: 'teal',
-            category: 'product_engineering',
-            slug: 'docs/endpoints',
-            status: 'WIP',
-        },
-        {
             name: 'Product tours',
             Icon: IconSpotlight,
             description: 'Guide users through your product with interactive tours and announcements.',

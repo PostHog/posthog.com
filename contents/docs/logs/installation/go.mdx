@@ -18,13 +18,13 @@ go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp
 
 </Step>
 
-<Step title="Get your project API key" badge="required">
+<Step title="Get your project token" badge="required">
 
-You'll need your PostHog project API key to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
 
-> **Important:** Use your **project API key** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
 
-You can find your project API key in [Project Settings](https://app.posthog.com/settings/project) under "Project" → "General" → "Project ID".
+You can find your project token in [Project Settings](https://app.posthog.com/project/settings).
 
 </Step>
 
@@ -56,7 +56,7 @@ func main() {
         otlploghttp.WithEndpoint("<ph_region>.i.posthog.com"),
         otlploghttp.WithURLPath("/i/v1/logs"),
         otlploghttp.WithHeaders(map[string]string{
-            "Authorization": "Bearer <ph_project_api_key>",
+            "Authorization": "Bearer <ph_project_token>",
         }),
     )
     if err != nil {
@@ -88,7 +88,7 @@ func main() {
 Alternatively, you can pass the API key as a query parameter by modifying the URL path:
 
 ```go
-otlploghttp.WithURLPath("/i/v1/logs?token=<ph_project_api_key>")
+otlploghttp.WithURLPath("/i/v1/logs?token=<ph_project_token>")
 ```
 
 </Step>

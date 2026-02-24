@@ -50,14 +50,14 @@ Update your PostHog initialization to use your new subdomain:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yoursubdomain.myapp.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yoursubdomain.myapp.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -65,7 +65,7 @@ posthog.init('<ph_project_api_key>', {
 
 </MultiLanguage>
 
-Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project API key**.
+Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project token**.
 
 Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly.
 

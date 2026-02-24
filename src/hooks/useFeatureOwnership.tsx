@@ -127,6 +127,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
