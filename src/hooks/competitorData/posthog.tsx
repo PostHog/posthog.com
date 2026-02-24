@@ -171,7 +171,7 @@ export const posthog = {
             features: {
                 actions: true,
                 advertising_analytics: 'Beta',
-                ai_analysis: false,
+                ai_analysis: true,
                 alerts: true,
                 anomaly_detection: true,
                 any_step_order: true,
