@@ -8,6 +8,7 @@ hideAnchor: true
 author:
   - joe-martin
   - andy-vandervell
+  - natalia-amorim
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
@@ -415,3 +416,5 @@ Yes. **PostHog**, **Plausible**, **Fathom**, **Matomo**, and **TelemetryDeck** a
 **Amplitude** offers EU data residency and SOC 2 certification, so it can be configured for GDPR compliance. However, it's not privacy-first – you'll still need cookie consent banners. If GDPR compliance is a priority, consider [PostHog](/blog/posthog-vs-amplitude) as an alternative with similar features plus transparent pricing.
 
 </details>
+
+<NewsletterForm />

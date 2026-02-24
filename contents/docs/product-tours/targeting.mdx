@@ -20,6 +20,9 @@ Show tours on specific pages using URL matching.
 | **Contains** | URL must contain the string | `/dashboard` matches any URL with `/dashboard` |
 | **Regex** | URL must match the pattern | `/users/[0-9]+` |
 
+
+> **Note:** When using **Exact** matching, trailing slashes are stripped from both the target URL and the current page URL before comparison. This means `https://app.example.com/dashboard` and `https://app.example.com/dashboard/` are treated as the same URL.
+
 The URL is matched against the full `window.location.href`.
 
 ## User targeting

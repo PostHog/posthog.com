@@ -98,7 +98,7 @@ Once a beta is mature enough, you may want to launch it into general availabilit
 
 **If you're planning to launch your product in a specific quarter, you MUST let the Marketing team know at the start of the quarter.**
 
-Smaller features which don't require [major announcements](/handbook/brand/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
+Smaller features which don't require [major announcements](/handbook/marketing/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
 
 You can set the feature flag to release to 100% of users BEFORE the Marketing launch, you don't need to wait for it.
 
