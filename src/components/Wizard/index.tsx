@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import { useApp } from '../../context/App'
@@ -12,17 +12,38 @@ import TeamMember from 'components/TeamMember'
 import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo } from '../../constants/logos'
-import { IconCopy, IconCheck } from '@posthog/icons'
+import { IconCopy, IconChevronRight, IconCheck } from '@posthog/icons'
+import { useToast } from '../../context/Toast'
 
-function WizardHeader(): JSX.Element {
-    const [copied, setCopied] = useState(false)
+export function CopyableCommand({ className = '' }: { className?: string }): JSX.Element {
+    const { addToast } = useToast()
 
     const handleCopy = () => {
         navigator.clipboard.writeText('npx @posthog/wizard')
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+        addToast({
+            description: (
+                <span className="inline-flex items-center gap-1.5">
+                    <IconCheck className="size-4 text-green" />
+                    Copied to clipboard
+                </span>
+            ),
+            duration: 2000,
+        })
     }
 
+    return (
+        <button
+            onClick={handleCopy}
+            className={`group inline-flex items-center gap-2 bg-dark text-white font-mono text-sm pl-3 pr-3 py-2.5 rounded-md cursor-pointer border-0 dark:border border-secondary hover:opacity-90 transition-opacity ${className}`}
+        >
+            <IconChevronRight className="size-4 opacity-50" />
+            <code className="!bg-transparent !p-0 !text-inherit !border-0 mr-1">npx @posthog/wizard</code>
+            <IconCopy className="size-4 opacity-40 group-hover:opacity-70 transition-opacity" />
+        </button>
+    )
+}
+
+function WizardHeader(): JSX.Element {
     return (
         <header
             className="relative -mt-4 mb-6 overflow-hidden rounded-t-sm"
@@ -43,15 +64,9 @@ function WizardHeader(): JSX.Element {
             />
             <div className="relative flex flex-col @md:flex-row items-center gap-4 @md:gap-8 px-5 py-8 @md:py-10 max-w-3xl mx-auto">
                 <div className="flex-1 text-center @md:text-left">
-                    <h1 className="text-2xl @sm:text-3xl font-bold !mt-0 !mb-2">Don't add PostHog to your codebase.</h1>
-                    <p className="!mb-4 text-[15px] text-secondary">Make AI do it for you – in 8 minutes or less.</p>
-                    <button
-                        onClick={handleCopy}
-                        className="inline-flex items-center gap-2 bg-dark dark:bg-white text-white dark:text-dark font-mono text-sm px-4 py-2 rounded-md cursor-pointer border-0 hover:opacity-90 transition-opacity"
-                    >
-                        <code className="!bg-transparent !p-0 !text-inherit">npx @posthog/wizard</code>
-                        {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
-                    </button>
+                    <h1 className="text-2xl @sm:text-3xl font-bold">Don't add PostHog to your codebase.</h1>
+                    <p className="!mb-4 text-base">Make AI do it for you – in 8 minutes or less.</p>
+                    <CopyableCommand />
                 </div>
                 <div className="shrink-0">
                     <img
@@ -70,7 +85,7 @@ function DemoVideo(): JSX.Element {
         <ProductVideo
             videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_wizard_install_cursor_331d174d75.mp4"
             videoDark=""
-            autoPlay={false}
+            autoPlay={true}
             classes="rounded"
         />
     )
@@ -112,38 +127,38 @@ const frameworkCategories = [
     {
         label: 'Full stack',
         frameworks: [
-            { name: 'Rails', logo: 'rails' },
-            { name: 'Next.js', logo: 'nextjs' },
-            { name: 'Nuxt', logo: 'nuxt' },
-            { name: 'Remix', logo: 'remix' },
-            { name: 'Tanstack Start', logo: 'tanstack' },
+            { name: 'Rails', logo: 'rails', url: '/docs/libraries/ruby-on-rails' },
+            { name: 'Next.js', logo: 'nextjs', url: '/docs/libraries/next-js' },
+            { name: 'Nuxt', logo: 'nuxt', url: '/docs/libraries/nuxt-js' },
+            { name: 'Remix', logo: 'remix', url: '/docs/libraries/remix' },
+            { name: 'Tanstack Start', logo: 'tanstack', url: '/docs/libraries/tanstack-start' },
         ],
     },
     {
         label: 'Frontend',
         frameworks: [
-            { name: 'React', logo: 'react' },
-            { name: 'Vue', logo: 'vue' },
-            { name: 'Svelte', logo: 'svelte' },
-            { name: 'Angular', logo: 'angular' },
+            { name: 'React', logo: 'react', url: '/docs/libraries/react' },
+            { name: 'Vue', logo: 'vue', url: '/docs/libraries/vue-js' },
+            { name: 'Svelte', logo: 'svelte', url: '/docs/libraries/svelte' },
+            { name: 'Angular', logo: 'angular', url: '/docs/libraries/angular' },
         ],
     },
     {
         label: 'Backend',
         frameworks: [
-            { name: 'Laravel', logo: 'laravel' },
-            { name: 'Django', logo: 'django' },
-            { name: 'Flask', logo: 'flask' },
-            { name: 'FastAPI', logo: 'python' },
+            { name: 'Laravel', logo: 'laravel', url: '/docs/libraries/laravel' },
+            { name: 'Django', logo: 'django', url: '/docs/libraries/django' },
+            { name: 'Flask', logo: 'flask', url: '/docs/libraries/flask' },
+            { name: 'FastAPI', logo: 'python', url: '/docs/libraries/python' },
         ],
     },
     {
         label: 'Mobile',
         frameworks: [
-            { name: 'React Native', logo: 'reactNative' },
-            { name: 'iOS', logo: 'ios' },
-            { name: 'Android', logo: 'android' },
-            { name: 'Flutter', logo: 'flutter' },
+            { name: 'React Native', logo: 'reactNative', url: '/docs/libraries/react-native' },
+            { name: 'iOS', logo: 'ios', url: '/docs/libraries/ios' },
+            { name: 'Android', logo: 'android', url: '/docs/libraries/android' },
+            { name: 'Flutter', logo: 'flutter', url: '/docs/libraries/flutter' },
         ],
     },
 ]
@@ -154,13 +169,19 @@ function SupportedFrameworks(): JSX.Element {
             {frameworkCategories.map((category) => (
                 <div key={category.label}>
                     <p className="text-sm font-semibold mb-2 opacity-60">{category.label}</p>
-                    <ul className="list-none m-0 p-0 space-y-1">
+                    <ul className="list-none m-0 p-0 space-y-2">
                         {category.frameworks.map((fw) => {
                             const logoUrl = getLogo(fw.logo)
                             return (
-                                <li key={fw.name} className="flex items-center gap-2 text-sm">
-                                    {logoUrl && <img src={logoUrl} alt={fw.name} className="size-5 rounded-sm" />}
-                                    <span>{fw.name}</span>
+                                <li key={fw.name}>
+                                    <Link
+                                        to={fw.url}
+                                        className="flex items-center gap-2 text-sm !text-inherit hover:underline"
+                                        state={{ newWindow: true }}
+                                    >
+                                        {logoUrl && <img src={logoUrl} alt={fw.name} className="size-5 rounded-sm" />}
+                                        <span>{fw.name}</span>
+                                    </Link>
                                 </li>
                             )
                         })}
@@ -173,7 +194,7 @@ function SupportedFrameworks(): JSX.Element {
 
 function SkillStructure(): JSX.Element {
     return (
-        <pre className="bg-accent border border-border rounded-md p-4 text-sm font-mono overflow-x-auto not-prose">
+        <pre className="bg-accent border border-border rounded-md p-4 text-sm font-mono overflow-x-auto not-prose [&_code]:border-0">
             <code>
                 {`.claude/
 └── skills/
@@ -186,23 +207,9 @@ function SkillStructure(): JSX.Element {
 }
 
 function GetStartedCommand(): JSX.Element {
-    const [copied, setCopied] = useState(false)
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText('npx @posthog/wizard')
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-    }
-
     return (
-        <div
-            onClick={handleCopy}
-            className="group relative bg-accent border border-border rounded-md p-4 font-mono text-sm cursor-pointer not-prose hover:border-border-bold transition-colors"
-        >
-            <code>npx @posthog/wizard</code>
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 opacity-50 group-hover:opacity-100 transition-opacity">
-                {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
-            </span>
+        <div className="not-prose">
+            <CopyableCommand />
         </div>
     )
 }
@@ -210,15 +217,15 @@ function GetStartedCommand(): JSX.Element {
 function ExplainerVideo(): JSX.Element {
     return (
         <div className="not-prose">
-            <div className="border border-border rounded-md overflow-hidden mb-3">
-                <div className="aspect-video">
-                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" />
-                </div>
-            </div>
             <p className="text-sm opacity-70">
                 Here&apos;s <TeamMember name="Matt Brooker" photo /> explaining the{' '}
                 <Link to="/docs/model-context-protocol">PostHog MCP server</Link>.
             </p>
+            <div className="mb-3">
+                <div className="aspect-video">
+                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" />
+                </div>
+            </div>
         </div>
     )
 }
