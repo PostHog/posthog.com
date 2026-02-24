@@ -10,7 +10,7 @@ import { ProductVideo } from 'components/ProductVideo'
 import WistiaVideo from 'components/WistiaVideo'
 import TeamMember from 'components/TeamMember'
 import Link from 'components/Link'
-import useProduct from 'hooks/useProduct'
+import ProductList from 'components/ProductList'
 import { getLogo } from '../../constants/logos'
 import { IconCopy, IconCheck } from '@posthog/icons'
 
@@ -76,39 +76,34 @@ function DemoVideo(): JSX.Element {
     )
 }
 
-const supportedProductHandles = [
-    'product_analytics',
-    'web_analytics',
-    'session_replay',
-    'feature_flags',
-    'experiments',
-    'error_tracking',
-    'logs',
-]
+const wizardIndicatorColors = {
+    'Coming soon': 'yellow',
+    'In development': 'blue',
+}
 
 function SupportedProducts(): JSX.Element {
-    const allProducts = useProduct()
-
-    const products = supportedProductHandles
-        .map((handle) => (Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined))
-        .filter(Boolean)
-
     return (
         <div className="border border-border rounded-md p-4 not-prose @lg:float-right @lg:ml-6 @lg:mb-2 @lg:max-w-[200px]">
             <p className="text-sm font-semibold mb-2 opacity-70">Supported products</p>
-            <ul className="list-none m-0 p-0 space-y-1.5">
-                {products.map((product: any) => (
-                    <li key={product.handle}>
-                        <Link
-                            to={`/${product.slug}`}
-                            className="flex items-center gap-2 text-sm !text-inherit hover:opacity-75"
-                        >
-                            {product.Icon && <product.Icon className={`size-5 text-${product.color}`} />}
-                            <span>{product.name}</span>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            {/* be sure to keep this in sync with the products in @contents/docs/ai-engineering/ai-wizard.mdx */}
+            <ProductList
+                products={[
+                    'product_analytics',
+                    'web_analytics',
+                    'session_replay',
+                    'error_tracking',
+                    'feature_flags',
+                    'experiments',
+                    'llm_analytics',
+                    'logs',
+                ]}
+                urlPrefix="/"
+                indicatorField="wizardSupport"
+                indicatorColors={wizardIndicatorColors}
+                className="space-y-1.5"
+                itemClassName="flex items-center gap-2 text-sm !text-inherit hover:opacity-75"
+                iconSize="size-5"
+            />
         </div>
     )
 }

@@ -13,14 +13,20 @@ function Indicator({ color, text }: { color: string; text: string }) {
 
 export default function ProductList({
     products,
+    urlPrefix = '/docs/',
     indicatorField,
     indicatorColors,
     className,
+    itemClassName,
+    iconSize = 'size-6',
 }: {
     products: string[]
+    urlPrefix?: string
     indicatorField?: string
     indicatorColors?: Record<string, string>
     className?: string
+    itemClassName?: string
+    iconSize?: string
 }) {
     const allProducts = useProduct()
 
@@ -40,8 +46,11 @@ export default function ProductList({
 
                 return (
                     <li key={product.handle}>
-                        <Link to={`/docs/${product.slug}`} className="group flex items-center space-x-2 relative">
-                            {product.Icon && <product.Icon className={`size-6 text-${product.color} shrink-0`} />}
+                        <Link
+                            to={`${urlPrefix}${product.slug}`}
+                            className={itemClassName ?? 'group flex items-center space-x-2 relative'}
+                        >
+                            {product.Icon && <product.Icon className={`${iconSize} text-${product.color} shrink-0`} />}
                             <span className="flex items-center gap-1.5">
                                 <span className="overflow-hidden text-ellipsis whitespace-nowrap group-hover:underline">
                                     {product.name}
