@@ -35,6 +35,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/attio',
                 },
                 {
+                    name: 'BuildBetter',
+                    url: '/docs/cdp/sources/buildbetter',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -45,6 +49,10 @@ export const dataPipelines = {
                 {
                     name: 'Klaviyo',
                     url: '/docs/cdp/sources/klaviyo',
+                },
+                {
+                    name: 'Linear',
+                    url: '/docs/cdp/sources/linear',
                 },
                 {
                     name: 'Zendesk',
@@ -4866,6 +4874,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/bigquery',
                         },
                         {
+                            name: 'BuildBetter',
+                            url: '/docs/data-warehouse/sources/buildbetter',
+                        },
+                        {
                             name: 'Chargebee',
                             url: '/docs/data-warehouse/sources/chargebee',
                         },
@@ -4932,6 +4944,10 @@ export const docsMenu = {
                         {
                             name: 'Klaviyo',
                             url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
+                            name: 'Linear',
+                            url: '/docs/data-warehouse/sources/linear',
                         },
                         {
                             name: 'Mailchimp',
