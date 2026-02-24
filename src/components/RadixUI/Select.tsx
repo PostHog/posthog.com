@@ -173,6 +173,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             position={appContainer ? 'popper' : undefined}
                             collisionBoundary={appContainer}
                             className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50]"
+                            style={{ maxHeight: '800px' }}
                             data-scheme={dataScheme}
                         >
                             <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">

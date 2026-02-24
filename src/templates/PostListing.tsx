@@ -108,27 +108,46 @@ export default function Posts({ pageContext }) {
     const [params, setParams] = useState(
         getParams(pageContext.root, pageContext.selectedTag, getSortOption(pageContext.root).sort, selectedAuthor)
     )
-    const allTags = useMemo(
-        () =>
-            allPostCategory.nodes
-                .flatMap((category) => category.attributes.post_tags.data)
-                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label))
-                .filter(
-                    (tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label)
-                ),
-        []
-    )
+    const allTags = useMemo(() => {
+        const result = allPostCategory.nodes
+            .flatMap((category) => category.attributes.post_tags.data)
+            .filter((tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label))
+            .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label, undefined, { sensitivity: 'base' }))
+
+        console.log(
+            'allTags inside useMemo:',
+            result.map((t) => t.attributes.label)
+        )
+        return result
+    }, [])
+
     const selectedCategory = useMemo(
         () => allPostCategory.nodes.find((category) => category.attributes.folder === root),
         [root]
     )
-    const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+    //old line
+    // const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+
+    const tags = useMemo(() => {
+        const rawTags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+        if (!rawTags) return []
+        return [...rawTags].sort((a, b) =>
+            a.attributes.label.localeCompare(b.attributes.label, undefined, { sensitivity: 'base' })
+        )
+    }, [root, selectedCategory, allTags])
+
+    // console.log(
+    //     'tags:',
+    //     tags?.map((tag) => tag.attributes.label)
+    // )
     const allCategories = useMemo(
         () =>
-            allPostCategory.nodes.filter(
-                (category, index, self) =>
-                    index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
-            ),
+            allPostCategory.nodes
+                .filter(
+                    (category, index, self) =>
+                        index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
+                )
+                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label)),
         []
     )
 
