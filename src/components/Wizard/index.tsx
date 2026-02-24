@@ -24,7 +24,13 @@ function WizardHeader(): JSX.Element {
     }
 
     return (
-        <header className="relative -mx-5 -mt-4 mb-6 overflow-hidden rounded-t-sm">
+        <header
+            className="relative -mt-4 mb-6 overflow-hidden rounded-t-sm"
+            style={{
+                width: '100cqw',
+                marginLeft: 'calc(50% - 50cqw)',
+            }}
+        >
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
                 className="dark:hidden absolute inset-0"
@@ -35,14 +41,10 @@ function WizardHeader(): JSX.Element {
                 className="hidden dark:block absolute inset-0"
                 imgClassName="h-full w-full"
             />
-            <div className="relative flex flex-col @md:flex-row items-center gap-4 @md:gap-8 px-5 py-8 @md:py-10">
+            <div className="relative flex flex-col @md:flex-row items-center gap-4 @md:gap-8 px-5 py-8 @md:py-10 max-w-3xl mx-auto">
                 <div className="flex-1 text-center @md:text-left">
-                    <h1 className="text-2xl @sm:text-3xl font-bold !mt-0 !mb-2">
-                        Add PostHog to your codebase automatically
-                    </h1>
-                    <p className="!mb-4 text-[15px] opacity-75">
-                        One small terminal command, one giant leap for understanding users.
-                    </p>
+                    <h1 className="text-2xl @sm:text-3xl font-bold !mt-0 !mb-2">Don't add PostHog to your codebase.</h1>
+                    <p className="!mb-4 text-[15px] text-secondary">Make AI do it for you – in 8 minutes or less.</p>
                     <button
                         onClick={handleCopy}
                         className="inline-flex items-center gap-2 bg-dark dark:bg-white text-white dark:text-dark font-mono text-sm px-4 py-2 rounded-md cursor-pointer border-0 hover:opacity-90 transition-opacity"
