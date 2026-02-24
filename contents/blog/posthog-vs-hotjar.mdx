@@ -44,7 +44,7 @@ And as your needs grow, PostHog grows with you – advanced capabilities such as
 
 ### 3. We're cheaper and have a generous free tier
 
-Every customer gets 5,000 web recordings and 1 million events for free each month, no matter what plan they're on. Our [generous free tier](/pricing) means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
+Every customer gets 5,000 web recordings, 1,500 survey responses, and 1 million events for free each month, no matter what plan they're on. Our [generous free tier](/pricing) means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
 
 <p>
   <CallToAction to="https://posthog.com/docs">
@@ -102,71 +102,18 @@ PostHog includes all of this and more in a single product, with 1 million free e
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
-        {
-            label: 'Autocapture',
-            description: 'Automatically capture user interactions without manual instrumentation',
-            values: [true, false],
-        },
-        {
-            label: 'Funnels',
-            description: 'Understand conversion between steps and identify drop-offs',
-            values: [true, true],
-        },
-        {
-            label: 'Trends',
-            description: 'Visualize how actions are performed over time',
-            values: [true, false],
-        },
-        {
-            label: 'Retention',
-            description: 'Track how many users return over time',
-            values: [true, false],
-        },
-        {
-            label: 'User paths / journey analysis',
-            description: 'Visualize how users navigate through your product',
-            values: [true, false],
-        },
-        {
-            label: 'Dashboards',
-            description: 'Monitor key metrics in one place',
-            values: [true, false],
-        },
-        {
-            label: 'AI-powered analysis',
-            description: 'Ask questions about your data in natural language',
-            values: [true, false],
-        },
-        {
-            label: 'Correlation analysis',
-            description: 'Automatically identify factors that affect conversion',
-            values: [true, false],
-        },
-        {
-            label: 'Group analytics',
-            description: 'Track metrics at account or company level',
-            values: [true, false],
-        },
-        {
-            label: 'Lifecycle analysis',
-            description: 'Categorize users as new, returning, resurrecting, or dormant',
-            values: [true, false],
-        },
-        {
-            label: 'Stickiness',
-            description: 'Find out how many days users perform a specific action',
-            values: [true, false],
-        },
-        {
-            label: 'Feature flags',
-            description: 'Roll out features safely to specific users or cohorts',
-            values: [true, false],
-        },
-        {
-            label: 'A/B testing',
-            description: 'Run experiments and measure statistical impact on goal metrics',
-            values: [true, false],
-        },
+        'product_analytics.features.autocapture',
+        'product_analytics.features.custom_events',
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'dashboards',
+        'product_analytics.funnels.features.correlation_analysis',
+        'product_analytics.group_analytics',
+        'product_analytics.features.ai_analysis',
+        'product_analytics.lifecycle',
+        'product_analytics.retention',
+        'product_analytics.stickiness',
+        'product_analytics.user_paths',
     ]}
 />
 </p>
@@ -259,9 +206,10 @@ PostHog, by contrast, has fully transparent, usage-based pricing for every produ
 | **Heatmaps** | Unlimited (with sessions) | Included with replays |
 | **Analytics events** | 10,000 sessions (Product Analytics) | 1,000,000 events |
 | **Survey responses** | 100/mo | 1,500/mo |
-| **Data retention** | 1 month (Experience Analytics) | 1 year |
+| **Data retention** | 1 month (Experience Analytics) | 7 years |
 | **Feature flags** | ❌ | 1,000,000 requests |
 | **A/B tests** | ❌ | 1,000,000 requests |
+| **Error tracking** | ❌ | 100,000 requests |
 
 Contentsquare does offer 200,000 monthly sessions for its Experience Analytics free plan, which is generous for heatmaps and basic session data. But its Product Analytics free tier is limited to just 10,000 sessions with limited history, and surveys cap at 100 responses per month.
 
@@ -377,7 +325,7 @@ Choosing between PostHog and Hotjar (now Contentsquare) depends on what you need
 - **PostHog** – Native [LLM analytics](/llm-analytics) for tracking model performance, token costs, and debugging AI interactions. Contentsquare doesn't offer AI observability.
 
 **For privacy-conscious and regulated organizations**
-- Both are SOC 2 certified, GDPR-ready, and CCPA-ready. **PostHog** is HIPAA-ready and offers EU hosting with raw data access via its [data warehouse](/data-stack). Contentsquare/Hotjar is not HIPAA-compliant.
+- Both are SOC 2 certified, GDPR-ready, and CCPA-ready. **PostHog** is HIPAA-ready and offers EU hosting with raw data access via its [data warehouse](/data-stack). Contentsquare/Hotjar is not HIPAA-compliant, but they do offer EU hosting.
 
 **For early-stage startups**
 - **PostHog** – A single platform that scales from MVP to growth stage. The generous free tier includes 1 million analytics events, 5,000 replays, and 250 survey responses per month. [Startups can also qualify for $50k in free credits](/startups).
