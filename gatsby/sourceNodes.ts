@@ -78,7 +78,7 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
             const chunk = playlistItems.slice(i, i + chunkSize)
             const idsParam = chunk.map((item) => item.videoId).join(',')
             const params = new URLSearchParams({
-                part: 'snippet',
+                part: 'snippet,contentDetails',
                 id: idsParam,
                 key: apiKey,
                 maxResults: '50',
@@ -96,6 +96,22 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
                 if (!videoId) return
                 const snippet = item?.snippet
                 if (!snippet?.publishedAt) return
+
+                // Filter out Shorts (videos ≤60 seconds)
+                const duration = item?.contentDetails?.duration
+                if (duration) {
+                    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
+                    if (match) {
+                        const hours = parseInt(match[1] || '0', 10)
+                        const minutes = parseInt(match[2] || '0', 10)
+                        const seconds = parseInt(match[3] || '0', 10)
+                        const totalSeconds = hours * 3600 + minutes * 60 + seconds
+                        if (totalSeconds <= 60) {
+                            return // Skip Shorts
+                        }
+                    }
+                }
+
                 videoDetailsMap[videoId] = {
                     videoId,
                     publishedAt: snippet.publishedAt,
@@ -1023,6 +1039,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         events.forEach((event) => {
             const node = {
                 ...event,
+                strapiID: event.id,
                 id: createNodeId(`event-${event.id}`),
                 internal: {
                     type: 'Event',

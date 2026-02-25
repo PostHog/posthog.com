@@ -9,7 +9,7 @@ When calling `posthog.init`, there are various configuration options you can set
 To configure these options, pass them as an object to the `posthog.init` call, like we do with `api_host`, `defaults`, `loaded`, and `autocapture` below.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: function (posthog) {
@@ -58,6 +58,7 @@ Some of the most relevant options are:
 | `mask_all_element_attributes`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                         | Prevent PostHog autocapture from capturing any attributes from your elements.                                                                                                                                                                                                                                  |
 | `opt_out_capturing_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                        | Determines if users should be opted out of PostHog tracking by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`.                                                                                                                                           |
 | `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                      | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`.                                                                                                              |
+| `opt_out_useragent_filter`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                            | Determines if users should be opted out of user agent filtering such as googlebot or other bots. By default we don't send events that match this filter. If set to `true`, PostHog will set `$browser_type` to either `bot` or `browser` instead of dropping those events.                                                    |
 | `persistence`<br/><br/>**Type:** Enum: `localStorage`, `sessionStorage`, `cookie`, `memory`, or `localStorage+cookie`<br/>**Default:** `localStorage+cookie`                              | Determines how PostHog stores information about the user. See [persistence](/docs/libraries/js/persistence) for details.                                                                                                                                                                                       |
 | Attribute | Description |
 | --- | --- |

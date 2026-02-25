@@ -36,22 +36,12 @@ Setting `config.sessionReplay = true` to your PostHog configuration will start s
 
 ### Manually control session recordings
 
-Setting `config.sessionReplay = false` to your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup. 
-
-You can manually control when to start and stop session recordings using the following two methods:
-
-- `startSessionRecording(resumeCurrent: Bool)`
-  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
-  - Set **resumeCurrent** to `false` to start a new session recording. 
-- `stopSessionRecording()` 
-  - Stops/pauses the current session recording.
-
-> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+You can programmatically start and stop session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
 
 ## Configuration options
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+let config = PostHogConfig(apiKey: "<ph_project_token>")
 // Enable session recording. Requires enabling in your project settings as well.
 // Default is false.
 config.sessionReplay = true

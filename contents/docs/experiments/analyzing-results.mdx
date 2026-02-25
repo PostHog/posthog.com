@@ -96,6 +96,8 @@ Click on any variant in the delta chart to access detailed results. This opens a
 
 Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
 
+You can also click **Summarize session replays** to have [PostHog AI](/docs/posthog-ai/session-summaries) analyze recordings across your experiment variants. This identifies behavior patterns, highlighting differences in how users interact with each variant.
+
 ### Time series analysis
 
 The time series chart shows how your experiment results change over time, helping you see if your results are stable or still changing.
@@ -222,6 +224,8 @@ When you're ready to continue, click **Resume experiment** to start collecting d
 Stopping the experiment will stop counting events in the results. Your feature flag, however, will continue working normally and events will still be tracked. You can reset the experiment later if needed.
 
 When stopping an experiment, set a conclusion (won/lost/inconclusive/stopped early/invalid) based on your analysis of the results. We recommend adding a note to document your reasoning.
+
+If you've already shipped a variant to 100% of users, you can still end the experiment using the **End experiment** button. In this case, the experiment is marked as complete without changing the feature flag.
 
 ## Comparing pausing, stopping, and shipping
 

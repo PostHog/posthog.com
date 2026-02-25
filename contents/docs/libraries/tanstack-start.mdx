@@ -18,7 +18,7 @@ npm install @posthog/react posthog-node
 
 ## Initialize PostHog on the client
 
-Wrap your app with `PostHogProvider` in your root route with your project API key, host, and other options. 
+Wrap your app with `PostHogProvider` in your root route with your project token, host, and other options. 
 
 ```tsx file=src/routes/__root.tsx
 // src/routes/__root.tsx
@@ -43,10 +43,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <PostHogProvider
-          apiKey="<ph_project_api_key>"
+          apiKey="<ph_project_token>"
           options={{
             api_host: '<ph_client_api_host>',
-            defaults: '2025-11-30',
+            defaults: '2026-01-30',
             capture_exceptions: true
           }}
         >
@@ -119,7 +119,7 @@ let posthogClient: PostHog | null = null
 export function getPostHogClient() {
   if (!posthogClient) {
     posthogClient = new PostHog(
-      '<ph_project_api_key>',
+      '<ph_project_token>',
       {
         host: '<ph_client_api_host>',
         flushAt: 1,

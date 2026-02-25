@@ -17,7 +17,7 @@ A single-page application (or SPA) dynamically loads content for new pages using
 
 PostHog's JavaScript Web SDK automatically captures pageview events on page load. The problem with SPAs is that **page loads don't happen beyond the initial one**. This means user navigation in your SPA isn't tracked.
 
-Luckily, you can opt-in to tracking this behavior by setting `defaults: '2025-11-30'` when initializing PostHog to use the most recent defaults. This default uses `capture_pageview: 'history_change'`, which captures SPA navigation using the browser [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 
+Luckily, you can opt-in to tracking this behavior by setting `defaults: '2026-01-30'` when initializing PostHog to use the most recent defaults. This default uses `capture_pageview: 'history_change'`, which captures SPA navigation using the browser [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 
 
 This tutorial shows you how to follow the recommended approach for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
 
@@ -33,7 +33,7 @@ This tutorial shows you how to follow the recommended approach for the most popu
 
 ## Tracking pageviews in Next.js (app router)
 
-To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture pageviews, we create a `PostHogProvider` component in the `app` folder, initialize PostHog with our project API key and host (from your [project settings](https://us.posthog.com/project/settings)). PostHog will automatically capture pageviews if initialized with updated defaults.
+To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture pageviews, we create a `PostHogProvider` component in the `app` folder, initialize PostHog with our project token and host (from your [project settings](https://us.posthog.com/project/settings)). PostHog will automatically capture pageviews if initialized with updated defaults.
 
 ```js
 // app/providers.js
@@ -44,7 +44,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -97,7 +97,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: "<ph_posthog_js_defaults>",
   })
@@ -150,7 +150,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
   })
@@ -190,7 +190,7 @@ import posthog from "posthog-js";
 
 export default {
   install(app) {
-    app.config.globalProperties.$posthog = posthog.init("<ph_project_api_key>", {
+    app.config.globalProperties.$posthog = posthog.init("<ph_project_token>", {
       api_host: "<ph_client_api_host>",
       defaults: "<ph_posthog_js_defaults>",
     });
@@ -222,7 +222,7 @@ import { browser } from '$app/environment';
 
 export const load = async () => {
   if (browser) {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -242,7 +242,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js';
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: "<ph_posthog_js_defaults>",
 });

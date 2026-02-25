@@ -40,7 +40,7 @@ Since error tracking works by capturing `$exception` events, PostHog features th
 
 The first way is using [real time destinations](/docs/cdp/destinations). This enables you to send events (like `$exception`) to other tools as soon as they are ingested.
 
-To create a real time destination, go to the [data pipelines tab](https://app.posthog.com/pipeline/overview) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
+To create a real time destination, go to the [data pipelines tab](https://app.posthog.com/data-management/destinations) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
 
 On the destination creation screen, make sure to add an event matcher for the `$exception` event, filter for the properties you want, and set the trigger options.
 
