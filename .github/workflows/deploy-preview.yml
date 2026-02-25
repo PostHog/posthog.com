@@ -45,7 +45,7 @@ jobs:
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
 
-                      | Status | Details | Updated |
+                      | Status | Details | Updated (UTC) |
                       |--------|---------|---------|
                       | 🟡 **Building** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp.outputs.time }} |
 
@@ -121,7 +121,7 @@ jobs:
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
 
-                      | Status | Details | Updated |
+                      | Status | Details | Updated (UTC) |
                       |--------|---------|---------|
                       | 🔴 **Failed** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp-final.outputs.time }} |
 
