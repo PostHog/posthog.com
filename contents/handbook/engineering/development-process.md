@@ -320,7 +320,7 @@ If a deployment appears stuck, reach out in `#team-infrastructure`.
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either <SmallTeam slug="brand" /> or <SmallTeam slug="content" /> teams to document features.
+It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="content" /> teams to document features.
 
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 
@@ -381,9 +381,9 @@ Experiment design is a bit of an art. There are different types of [metrics](/do
 
 Generally, a good pattern is to set up 1-2 primary metrics that you anticipate might be impacted by the A/B test, as well as 3+ secondary metrics that might also be good to keep an eye on, just in case. If you aren't sure what metrics to be testing, just ask! Lots of people are excited to help think this through (especially #team-growth and Raquel!).
 
-### Releasing as a beta
+### Releasing a new product
 
-We can release betas both as publicly available, or opt-in. See: [Releasing a feature as beta](/handbook/product/releasing-as-beta).
+We can release alphas and betas both as publicly available, or opt-in. See: [Releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
 It's always worth letting Marketing know about new betas so they can help raise awareness. [The owner](/handbook/engineering/development-process#assign-an-owner) should tag them on an issue, or drop a message in the Marketing Slack channel.
 

@@ -180,6 +180,14 @@ Each plan can have a list of features, and a price.
 Features are used to infer which features are available in the product, for a customer on that plan.
 You can manually change the plan for a customer by updating the `plans_map` in the billing admin panel.
 
+### Paid features for employee side projects
+
+Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform add-ons:
+
+1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
+
+2. **Long trial**: Create a trial that does not auto-convert with a long `expires_at` date. This works well for temporary access or when you want a clear end date.
+
 ### Updating subscriptions
 
 Stripe subscriptions can be modified relatively freely for example if moving to a custom pricing plan. 

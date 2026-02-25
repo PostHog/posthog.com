@@ -46,10 +46,10 @@ export const vwo = {
                 free_tier: false,
             },
             features: {
-                count_value_metrics: false,
-                custom_goals: false,
+                count_value_metrics: true,
+                custom_goals: true,
                 dynamic_cohorts: false,
-                experiment_analysis: false,
+                experiment_analysis: true,
                 funnel_metrics: false,
                 funnel_tests: true,
                 namespacing: false,
@@ -58,7 +58,7 @@ export const vwo = {
                 ratio_metrics: false,
                 recommended_run_time: false,
                 secondary_metrics: true,
-                shared_metrics_library: false,
+                shared_metrics_library: true,
                 split_testing: false,
                 visual_editor: false,
             },
@@ -96,7 +96,7 @@ export const vwo = {
             },
             analysis: {
                 features: {
-                    results_visualization: false,
+                    results_visualization: true,
                     side_effect_monitoring: false,
                     statistical_significance: false,
                     statistics_engine: false,
@@ -120,7 +120,7 @@ export const vwo = {
             api: false,
             native_data_sources: false,
             proxies: false,
-            sdks: false,
+            sdks: true,
             sql: false,
         },
         tools: {

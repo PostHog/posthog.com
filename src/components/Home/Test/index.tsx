@@ -244,7 +244,7 @@ const Toolkits = () => {
     const toolkits = [
         {
             category: 'Data stack',
-            productTypes: ['cdp', 'data_in', 'visualize', 'data_out'],
+            productTypes: ['cdp', 'data_in', 'sql_editor', 'data_out'],
         },
         {
             category: 'Analytics & data viz',

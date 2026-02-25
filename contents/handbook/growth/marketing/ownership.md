@@ -25,15 +25,15 @@ You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party p
 <details>
 <summary>I want to launch my product out of beta</summary>
 
-Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/brand/product-announcements).
+Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/marketing/product-announcements).
 </details>
 
 <details>
 <summary>I need help with documentation</summary>
 
-Your main contacts are <TeamMember name="Vincent Ge" /> and <TeamMember name="Edwin Lim" /> on the content team, but please read the [docs ownership handbook](/handbook/content/docs-ownership) to understand how best to work with them. 
+Your main contact is the <SmallTeam slug="docs-wizard" />, but please read the [docs ownership handbook](/handbook/docs-and-wizard/docs-ownership) to understand how best to work with them. 
 
-If you just need someone to review something, tag `docs reviewers` in GitHub.
+If you just need someone to review something, tag `Team Docs & Wizard` in GitHub.
 </details>
 
 <details>
@@ -53,7 +53,7 @@ If another company is interested in building an integration with PostHog, raise 
 <details>
 <summary>Someone wants us to sponsor them</summary>
 
-If it's an [influencer](/handbook/growth/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Ian Vanagas" />.
+If it's an [influencer](/handbook/growth/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
 
 If it's an event, speak to <TeamMember name="Daniel Zaltsman" />.
 </details>

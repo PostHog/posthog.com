@@ -10,7 +10,7 @@ isMyFlagEnabled, err := client.IsFeatureEnabled(posthog.FeatureFlagPayload{
     DistinctId: "distinct_id_of_your_user",
 })
 if err != nil {
-    // Handle error (e.g. capture error and fallback to default behaviour)
+    // Handle error (e.g. capture error and fallback to default behavior)
 }
 if isMyFlagEnabled == true {
     // Do something differently for this user
@@ -25,7 +25,7 @@ enabledVariant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
     DistinctId: "distinct_id_of_your_user",
 })
 if err != nil {
-    // Handle error (e.g. capture error and fallback to default behaviour)
+    // Handle error (e.g. capture error and fallback to default behavior)
 }
 if enabledVariant == "variant-key" { // replace 'variant-key' with the key of your variant
     // Do something differently for this user
@@ -103,7 +103,7 @@ You can configure the `FeatureFlagRequestTimeout` parameter when initializing yo
 
 ```go
  client, _ := posthog.NewWithConfig(
-   os.Getenv("<ph_project_api_key>"),
+   os.Getenv("<ph_project_token>"),
    posthog.Config{
       PersonalApiKey:            "your personal API key", // Optional, but much more performant.  If this token is not supplied, then fetching feature flag values will be slower.
       Endpoint:                  "<ph_client_api_host>",

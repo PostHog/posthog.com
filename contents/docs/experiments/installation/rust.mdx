@@ -1,0 +1,95 @@
+---
+title: Rust experiments installation
+showStepsToc: true
+platformLogo: rust
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import RustInstall from '../../integrate/_snippets/install-rust.mdx'
+import StepCreateExperiment from './_snippets/step-create-experiment.mdx'
+import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
+import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
+import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
+import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
+
+<Steps>
+
+<Step title="Install PostHog Rust SDK" badge="required">
+
+<RustInstall />
+
+</Step>
+
+<Step title="Capture conversion event" badge="required">
+
+Once PostHog is initialized, you should be able to capture events. For your experiment to be meaningful, we need to capture an event that we want to measure, such as a conversion event.
+
+For this tutorial, let's report a conversion event when a user clicks a CTA. In server SDKs like Rust, this can be called when a specific route is visited or reported from your client side app.
+
+```rust
+use posthog_rs::Event;
+
+let event = Event::new("cta clicked", "user_distinct_id");
+client.capture(event).await.unwrap();
+```
+
+</Step>
+
+<Step checkpoint title="Validate PostHog events" subtitle="Confirm events are being sent to PostHog">
+
+<StepValidateExperimentEvents />
+
+</Step>
+
+<Step title="Create an experiment" badge="required">
+
+<StepCreateExperiment />
+
+</Step>
+
+<Step title="Add primary metric and launch" badge="required">
+
+<StepAddPrimaryMetric />
+
+</Step>
+
+<Step title="Call feature flag" badge="required">
+
+Use the PostHog SDK to call the experiment flag and update how your page renders based on the assigned variant.
+
+```rust
+use posthog_rs::FlagValue;
+
+match client.get_feature_flag(
+    "your-experiment-key".to_string(),
+    "user_distinct_id".to_string(),
+    None, None, None
+).await.unwrap() {
+    Some(FlagValue::String(variant)) if variant == "test" => {
+        // Show test variant UI
+    }
+    _ => {
+        // Show control variant UI
+    }
+}
+```
+
+Now when a user triggers a `cta clicked` event, PostHog automatically assigns the user to a variant and records an experiment exposure.
+
+By default, users are split equally between variants. If you want to assign specific users to a specific variant, see more about [distribution and release conditions](/docs/experiments/creating-an-experiment#distribution-and-release-conditions).
+
+</Step>
+
+<Step checkpoint title="Validate feature flag calls">
+
+<StepValidateFeatureFlags />
+
+</Step>
+
+<Step title="Evaluate experiment results" badge="recommended">
+
+<StepEvaluateExperimentResults />
+
+</Step>
+
+</Steps>

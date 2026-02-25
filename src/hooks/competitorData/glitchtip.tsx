@@ -13,7 +13,8 @@ export const glitchtip = {
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                mobile_sdk_coverage: false,
+                // https://glitchtip.com/sdkdocs
+                mobile_sdk_coverage: true,
                 source_map_support: true,
                 stack_tracing: true,
                 user_device_context: true,
@@ -64,7 +65,7 @@ export const glitchtip = {
             azure_blob: false,
             bigquery: false,
             cdp: false,
-            ci_cd_integrations: 'Limited',
+            ci_cd_integrations: false,
             community_integrations: false,
             csv_exports: false,
             customer_io: false,

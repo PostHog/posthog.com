@@ -12,12 +12,13 @@ export const fathom = {
             features: {
                 advertising_analytics: false,
                 bounce_rate: true,
-                bounce_rate_tracking: false,
-                breakdown_by_device_and_browser: false,
-                breakdown_by_geoip: false,
+                bounce_rate_tracking: true,
+                breakdown_by_device_and_browser: true,
+                breakdown_by_geoip: true,
                 conversions: true,
+                cookieless_tracking: true,
                 custom_channel_types: false,
-                entry_exit_paths: false,
+                entry_exit_paths: 'Entry only',
                 first_party_cookies: false,
                 hipaa_compliance: false,
                 integration_with_feature_flags: false,
@@ -28,8 +29,8 @@ export const fathom = {
                 open_source: false,
                 outbound_clicks: false,
                 pageviews: true,
-                pre_configured_dashboards: false,
-                real_time_reporting: false,
+                pre_configured_dashboards: true,
+                real_time_reporting: true,
                 revenue_tracking: false,
                 script_size: '<2 kB',
                 search_tools: false,
@@ -38,7 +39,7 @@ export const fathom = {
                 snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,
-                visitor_and_view_tracking: false,
+                visitor_and_view_tracking: true,
                 web_vitals: false,
                 web_vitals_reporting: false,
             },
@@ -53,7 +54,7 @@ export const fathom = {
                 custom_properties: true,
                 monetization_analytics: false,
                 predictive_insights: false,
-                real_time_view: false,
+                real_time_view: true,
                 toolbar: false,
                 user_profiles: false,
                 trends: {
@@ -90,6 +91,7 @@ export const fathom = {
                 insights: {
                     available: false,
                     features: {
+                        ai_insight_builder: false,
                         formula_mode: false,
                         ready_made_insight_types: false,
                         sampling: false,
@@ -134,6 +136,7 @@ export const fathom = {
             collaboration: 'Share web analytics with or without a password',
             mobile_sdks: false,
             server_side_sdks: false,
+            sql: false,
         },
         tools: {
             cms: '',
@@ -143,8 +146,9 @@ export const fathom = {
         integrations: {
             csv_exports: true,
             datadog: false,
-            exports: false,
+            exports: true,
             email_reports: true,
+            google_search_console: false,
             hubspot: false,
             sentry: false,
             slack: false,
@@ -157,7 +161,8 @@ export const fathom = {
         pricing: {
             free_tier: false,
             self_serve: 'Trial only',
-            transparent_pricing: false,
+            // You can see up to 25,000,000 pageviews
+            transparent_pricing: true,
             usage_based_pricing: true,
         },
         security: {

@@ -65,7 +65,7 @@ And we redact bodies if we believe they contain
 ## How to register a callback to inspect and redact each network request
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     session_recording: {
         maskCapturedNetworkRequestFn: (request: CapturedNetworkRequest) => {
             // For example: ignoring a request entirely

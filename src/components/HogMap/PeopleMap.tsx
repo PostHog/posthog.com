@@ -1,5 +1,6 @@
+import { AVATAR_FALLBACK_URL } from 'constants/index'
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
-import { navigate } from 'gatsby'
+import { navigate, graphql, useStaticQuery } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { useUserLocation } from '../../hooks/useUserLocation'
 import {
@@ -12,6 +13,58 @@ import {
     isStyleReady,
     DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
+import Toggle from 'components/Toggle'
+import { IconPineapple, IconPeople, IconDecisionTree } from '@posthog/icons'
+
+type BadgeType = 'none' | 'pineapple' | 'team'
+
+// Create badge element based on type and profile data
+const createBadgeElement = (
+    badgeType: BadgeType,
+    profile: ProfileNode,
+    teamMiniCrestMap: Record<string, string>
+): HTMLElement | null => {
+    if (badgeType === 'none') return null
+
+    const badge = document.createElement('div')
+    badge.className =
+        'absolute -right-1 -bottom-1 size-5 rounded-full flex items-center justify-center text-xs shadow-sm overflow-hidden'
+
+    if (badgeType === 'pineapple') {
+        if (profile.pineappleOnPizza === true) {
+            badge.style.backgroundColor = '#6AA84F'
+            badge.title = 'Loves pineapple on pizza'
+            badge.innerHTML = '🍍'
+        } else if (profile.pineappleOnPizza === false) {
+            badge.style.backgroundColor = '#CC0000'
+            badge.title = 'Does not like pineapple on pizza'
+            badge.innerHTML = '🚫'
+        } else {
+            badge.style.backgroundColor = '#888888'
+            badge.title = 'Undecided about pineapple on pizza'
+            badge.innerHTML = '❓'
+        }
+    } else if (badgeType === 'team') {
+        const teamName = profile.teams?.data?.[0]?.attributes?.name
+        const miniCrestUrl = teamName ? teamMiniCrestMap[teamName] : null
+
+        if (miniCrestUrl) {
+            badge.style.backgroundColor = '#ffffff'
+            badge.title = `${teamName} Team`
+            const img = document.createElement('img')
+            img.src = miniCrestUrl
+            img.alt = `${teamName} Team`
+            img.className = 'w-full h-full object-contain'
+            badge.appendChild(img)
+        } else {
+            badge.style.backgroundColor = '#888888'
+            badge.title = 'No team'
+            badge.innerHTML = '👥'
+        }
+    }
+
+    return badge
+}
 
 const PopupHtml = ({
     name,
@@ -52,7 +105,34 @@ type ProfileNode = {
     country?: string
     location?: string
     avatar?: { url?: string }
+    pineappleOnPizza?: boolean | null
+    teams?: {
+        data?: Array<{
+            id?: string
+            attributes?: {
+                name?: string
+                slug?: string
+            }
+        }>
+    }
 }
+
+const TEAM_MINI_CREST_QUERY = graphql`
+    query TeamMiniCrestQuery {
+        allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
+            nodes {
+                name
+                miniCrest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
 
 const buildMemberQuery = (m: ProfileNode): string | null => {
     const location = m.location && m.location.trim()
@@ -128,7 +208,20 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
 
 export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [showClusters, setShowClusters] = useState(true)
+    const [badgeType, setBadgeType] = useState<BadgeType>('none')
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
+
+    // Fetch team mini crest data
+    const { allSqueakTeam } = useStaticQuery(TEAM_MINI_CREST_QUERY)
+    const teamMiniCrestMap = useMemo(() => {
+        return allSqueakTeam.nodes.reduce((acc: Record<string, string>, team: any) => {
+            if (team.miniCrest?.data?.attributes?.url) {
+                acc[team.name] = team.miniCrest.data.attributes.url
+            }
+            return acc
+        }, {})
+    }, [allSqueakTeam])
 
     useEffect(() => {
         setIsClient(true)
@@ -141,6 +234,9 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     const membersRef = useRef<ProfileNode[]>([])
     const coordsByQueryRef = useRef<Record<string, Coordinates>>({})
     const jitteredPositionsByGroupRef = useRef<Record<string, Array<{ longitude: number; latitude: number }>>>({})
+    const showClustersRef = useRef<boolean>(true)
+    const badgeTypeRef = useRef<BadgeType>('none')
+    const teamMiniCrestMapRef = useRef<Record<string, string>>({})
 
     const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
@@ -159,6 +255,34 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
     useEffect(() => {
         coordsByQueryRef.current = coordsByQuery
     }, [coordsByQuery])
+
+    useEffect(() => {
+        teamMiniCrestMapRef.current = teamMiniCrestMap
+    }, [teamMiniCrestMap])
+
+    useEffect(() => {
+        showClustersRef.current = showClusters
+        // Re-render markers when clusters toggle changes
+        if (mapRef.current && isStyleReady(mapRef.current)) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                // ignore
+            }
+        }
+    }, [showClusters])
+
+    useEffect(() => {
+        badgeTypeRef.current = badgeType
+        // Re-render markers when badge type changes
+        if (mapRef.current && isStyleReady(mapRef.current)) {
+            try {
+                renderMarkersRef.current && renderMarkersRef.current()
+            } catch {
+                // ignore
+            }
+        }
+    }, [badgeType])
 
     // Precompute static spread positions for members that share the same location query
     useEffect(() => {
@@ -231,8 +355,8 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             clearMarkers()
             const zoom = mapRef.current.getZoom()
 
-            // Use Mapbox clusters when zoomed out
-            if (zoom < CLUSTER_ZOOM) {
+            // Use Mapbox clusters when zoomed out and clusters are enabled
+            if (showClustersRef.current && zoom < CLUSTER_ZOOM) {
                 // People clusters
                 const peopleFeatures = membersRef.current
                     .map((m) => {
@@ -277,15 +401,17 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string; key: string }>)
 
             Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label, key }) => {
-                const avatarFallback =
-                    'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
                 const positions = jitteredPositionsByGroupRef.current[key] || []
                 profiles.forEach((p, idx) => {
                     const pos = positions[idx] || { longitude, latitude }
                     const el = document.createElement('div')
-                    el.className = 'size-12 rounded-full flex items-center justify-center overflow-hidden'
+                    el.className = 'relative'
+
+                    const avatarContainer = document.createElement('div')
+                    avatarContainer.className = 'size-12 rounded-full flex items-center justify-center overflow-hidden'
+
                     const img = document.createElement('img')
-                    img.src = p.avatar?.url || avatarFallback
+                    img.src = p.avatar?.url || AVATAR_FALLBACK_URL
                     img.alt = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Team member'
                     img.classList.add(
                         `bg-${p.color ?? 'white'}`,
@@ -297,7 +423,14 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                         'h-full',
                         'object-cover'
                     )
-                    el.appendChild(img)
+                    avatarContainer.appendChild(img)
+                    el.appendChild(avatarContainer)
+
+                    // Add badge based on current badge type
+                    const badge = createBadgeElement(badgeTypeRef.current, p, teamMiniCrestMapRef.current)
+                    if (badge) {
+                        el.appendChild(badge)
+                    }
                     const name = [p.firstName, p.lastName].filter(Boolean).join(' ')
                     const role = p.companyRole || ''
                     const href = p.squeakId ? `/community/profiles/${p.squeakId}` : ''
@@ -413,6 +546,48 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                     <div className="text-primary text-sm">Loading map...</div>
                 </div>
             )}
+            <div className="absolute top-2 left-2 z-10 bg-white dark:bg-dark rounded-md shadow-md px-3 py-2 flex flex-col gap-2">
+                <Toggle
+                    checked={showClusters}
+                    onChange={setShowClusters}
+                    iconRight={<IconPeople className="size-4 ml-1" />}
+                    label="Clustering"
+                />
+                <div className="flex flex-col gap-1">
+                    <span className="text-xs font-semibold text-secondary">Badge</span>
+                    <div className="flex gap-1">
+                        <button
+                            onClick={() => setBadgeType('none')}
+                            className={`px-2 py-1 text-xs rounded text-primary font-medium ${
+                                badgeType === 'none' ? 'bg-accent' : 'bg-primary hover:bg-accent'
+                            }`}
+                            title="No badge"
+                        >
+                            None
+                        </button>
+                        <button
+                            onClick={() => setBadgeType('pineapple')}
+                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${
+                                badgeType === 'pineapple' ? 'bg-accent' : 'bg-primary hover:bg-accent'
+                            }`}
+                            title="Show pineapple preference"
+                        >
+                            <IconPineapple className="size-3" />
+                            Pineapple
+                        </button>
+                        <button
+                            onClick={() => setBadgeType('team')}
+                            className={`px-2 py-1 text-xs rounded flex items-center gap-1 text-primary font-medium ${
+                                badgeType === 'team' ? 'bg-accent' : 'bg-primary hover:bg-accent'
+                            }`}
+                            title="Show small team"
+                        >
+                            <IconDecisionTree className="size-3" />
+                            Team
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div ref={mapContainerRef} className="w-full h-full" />
         </div>
     )

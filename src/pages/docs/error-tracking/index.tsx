@@ -8,7 +8,6 @@ import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
-import Pricing from '../../../components/Pricing/PricingCalculator/SingleProduct'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, IconDatabase } from '@posthog/icons'
 import Card from 'components/Card'
 import Link from 'components/Link'
@@ -146,24 +145,6 @@ export const Content = () => {
                         </Card>
                     ))}
                 </div>
-            </section>
-
-            <section className="mb-8">
-                <h2 className="mb-4">Pricing</h2>
-                <p>
-                    PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our
-                    large free tier means more than 90% of companies <em>use PostHog for free</em>.
-                </p>
-                <p>
-                    No credit card is required to get started. You can also set billing limits to avoid any surprise
-                    charges.
-                </p>
-
-                <Pricing productType="error_tracking" />
-
-                <p>
-                    See our <a href="/pricing">pricing page</a> for more details.
-                </p>
             </section>
 
             <section className="mb-8">

@@ -55,7 +55,7 @@ const cloudinaryCache = {}
 const REPO_CONFIGS = {
     'posthog-main-repo': {
         stripPrefix: '/docs/published/',
-        pathPrefix: '/handbook/engineering',
+        pathPrefix: '',
     },
 }
 
@@ -420,5 +420,13 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 createNodeField({ node, name: 'localFile', value: local.id })
             }
         }
+    }
+    if (node.internal.type === 'PostHogWorkflowTemplate') {
+        const slug = slugify(node.name, { lower: true, strict: true })
+        createNodeField({
+            node,
+            name: 'slug',
+            value: slug,
+        })
     }
 }

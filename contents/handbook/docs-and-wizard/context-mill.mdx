@@ -1,0 +1,26 @@
+---
+title: 🌾 Context mill
+sidebar: Handbook
+showTitle: true
+---
+
+The [context mill](https://github.com/PostHog/context-mill) repo gathers up-to-date context from multiple sources, packaging developer docs, prompts, and working example code into a versioned manifest, which can be shipped anywhere.
+
+The PostHog MCP server currently fetches the context mill repo manifest and exposes it to any MCP-compatible client as resources and slash commands. This is what currently powers the PostHog [AI wizard](/handbook/docs-and-wizard/developing-the-wizard).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/context_mill_5b0f0323b7.png"
+    alt="Context mill"
+/>
+
+The context mill effectively acts as an assembly line for turning disparate PostHog knowledge into something portable, something AI systems can reliably consume.
+
+You can break its context engineering flow into three main stages.
+
+1. **Context sourcing**: The context mill can pull from the entire PostHog developer docs, with pages delivered from posthog.com as raw Markdown. It also includes curated, hand-crafted prompts and working example apps.
+
+2. **Context assembly**: The context mill transforms and packages the sourced context into a zip file manifest, which is meant to be portable and self-contained. We can structure and shape the manifest however we need.
+
+3. **Context delivery**: The context mill creates a versioned release for the manifest, which can be consumed by any agent or MCP server as a skill or resource.
+
+Getting the best results requires some hand-cranking and refining. Context mill packages are created using a simple declarative YAML spec, so it’s worth spending some time experimenting and tuning things until they feel right.

@@ -59,7 +59,7 @@ Opting out status is persisted automatically using:
 For browsers, you can control how long the opt out state is persisted by setting `opt_out_capturing_persistence_type` to either `local_storage` or `cookies`.
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     opt_out_capturing_persistence_type: 'local_storage',
 });
 ```
@@ -153,7 +153,7 @@ import MaskingProductAnalytics from './_snippets/masking-product-analytics.mdx'
 
 ## Masking sensitive information
 
-You can safely capture [session replays](docs/session-replay) events without compromising your users' privacy. PostHog offers a range of masking techniques that let you mask over sensitive information.
+You can safely capture [session replays](/docs/session-replay) events without compromising your users' privacy. PostHog offers a range of masking techniques that let you mask over sensitive information.
 
 The following masking techniques are available:
 
@@ -198,7 +198,7 @@ Masking all inputs and text by default in session replay ensures that data is on
 Before an event is sent to PostHog, you have a final chance to modify it to remove sensitive information. You can do this by using the `before_send` hook. This hook is **only available for the JavaScript Web SDK**.
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',  
   defaults: '<ph_posthog_js_defaults>', 
   before_send: function(event) {

@@ -25,6 +25,16 @@ export type User = {
     role: {
         type: 'authenticated' | 'public' | 'moderator'
     }
+    wallet: {
+        balance: number
+        transactions: {
+            id: number
+            amount: number
+            date: Date
+            type: 'achievement' | 'gift'
+            metadata: any
+        }[]
+    }
 }
 
 type UserContextValue = {
@@ -186,6 +196,19 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                         }),
                     })
                 }
+
+                fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements/check`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userData.jwt}`,
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            date: new Date(),
+                        },
+                    }),
+                })
             } catch (error) {
                 console.error(error)
             }
@@ -352,10 +375,25 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                 },
                             },
                             bookmarks: true,
+                            achievements: {
+                                populate: {
+                                    achievement: {
+                                        populate: {
+                                            image: true,
+                                            icon: true,
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                     role: {
                         fields: ['type'],
+                    },
+                    wallet: {
+                        populate: {
+                            transactions: true,
+                        },
                     },
                 },
             },

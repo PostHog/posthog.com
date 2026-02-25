@@ -1,12 +1,10 @@
 ---
-title: Inbound sales
+title: New business sales
 sidebar: Handbook
 showTitle: true
 ---
 
-This is our playbook for managing inbound sales, ie. customers who have contacted the sales team directly. 
-
-We [build PostHog for product engineers](/handbook/who-we-build-for). While many non-technical folks use PostHog successfully every day, our inbound sales process is built with technical folks in mind. Once implemented, a customer may use PostHog for all manner of things (and we hope they do!).
+We [build PostHog for product engineers](/handbook/who-we-build-for). While many non-technical folks use PostHog successfully every day, our sales process is built with technical folks in mind. Once implemented, a customer may use PostHog for all manner of things (and we hope they do!).
 
 Three other general principles to bear in mind:
 
@@ -45,8 +43,8 @@ They are also available as Opportunity fields in Salesforce and as such you shou
 
 This is an overview for what you should actually be doing with a customer at each stage of the sales process. For details on how to manage this in our CRM, visit our [Salesforce docs](/handbook/growth/sales/crm). The steps are:
 
-1. People contact us
-2. We assign and qualify
+1. You get a lead
+2. You qualify
 3. First call (30 minutes) - Discovery & initial demo
 4. Second call (60 minutes) - Technical deep dive (if needed)
 5. Product evaluation
@@ -54,28 +52,13 @@ This is an overview for what you should actually be doing with a customer at eac
 7. Commercial evaluation
 8. Closed - Won or Lost
 
-### 1. People contact us
+### 1. You get a lead
 
-Most people fill in the [form](/talk-to-a-human) via the website. Some email sales@posthog.com or open a Zendesk ticket.
+We're constantly experimenting with the best lead types, documented [here](/handbook/growth/sales/lead-scoring). Info on _how_ leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). 
 
+### 2. You qualify
 
-#### Big fish
-
-You'll also be assigned **Big fish** leads - these are people from big companies who have already signed up to PostHog.  Generic outreach emails don't work here, you need to check their recent session replays to figure out where they are at and any roadblocks to them trying PostHog out.  It's normally harder to get PostHog up and running in a bigger company so end up not being able to evaluate PostHog using their data.
-
-Specific things you could help with:
-
-- Demoing specific features to them, if they have also been checking out the docs.
-- See where they get stuck in onboarding. If they select specific products, then mention demoing those products to them specifically.
-- Offer to help them set up dashboards, etc., if they have been able to get PostHog connected to their app.
-- Offering to seed some demo data into their account if they need to get hands-on before actually integrating our SDK.  
-- If they are from an existing customer, they may have meant to join an existing org.  Let the PostHog account owner know that they might need to reach out to introduce themself and help the person get up and running in the correct organization.
-
-If you're still not sure what to say, ask your team in Slack to review the replays to see if they can help you be specific.  Again, **generic outreach doesn't work here.**
-
-### 2. We assign and qualify
-
-Info on how leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
+Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
 
 - What is their [Lead Score](/handbook/growth/sales/lead-scoring)?
 - Which products are they looking to use? What's their use case?
@@ -87,7 +70,7 @@ Most companies add friction here by making customers jump on a call first to qua
 
 It's also totally fine to ask a customer questions over email in advance of the demo to make sure you're making the best use of their time - just be specific. A few clarifying questions is fine, a 30 question survey is not.
 
-> **Examples of good discovery questions - this is not a script, just ideas!**
+> **Examples of good discovery questions**
 > - What is the problem? What is this problem affecting?
 > - What metric is impacted as a result of this? What metric would be improved as a result of PostHog?
 > - How important is this problem to the wider team?
@@ -113,6 +96,14 @@ If you can't identify anyone who has recently signed up to PostHog, then ask the
 
 If it's a solicited RFP, you're free to proceed so long as the opportunity is qualified as a whole and you carefully balance the level of effort required in the RFP against the opportunity for you & PostHog. Again, a 500 question RFP may not be worth it if they plan on spending <$20k for PostHog (a 50 question RFP may not even be worth it in this instance)! Use your best judgement, and it is generally still wise to timebox your effort.
 
+#### Bigger Opportunities at Bigger Companies
+
+When you're working a deal north of $100k at a larger company, the playbook shifts. Generally, expect to challenge their stated evaluation criteria early, as well as sell to multiple people and functions within the organization. You need to dig past the surface-level requirements they may list and get to the real decision drivers. Question the "why" and "how" behind their stated criteria, because committee-driven procurement processes can hide the actual priorities behind "just so" rubrics that can obscure the real reasons they will buy (or disqualify). 
+
+On the relationship side, you need a strategy for engaging their leadership and developing champions at multiple levels within the account. If a key leadership stakeholder goes dark, escalate to PostHog leadership to help re-engage. If needed, don't be afraid to translate PostHog titles to something they would understand (e.g. Generic Exec Person = COO). For deals this size, on-site presence can also matter — you should attempt to build relationships in person, not just over Zoom. 
+
+Lastly, take a prescriptive and consultative approach to their evaluation process. The larger the opportunity, the more proactive you need to be about controlling the process. Ask for help from your lead, your team, and in Slack. These opportunities take a team effort. 
+
 #### Startups
 
 If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
@@ -132,7 +123,6 @@ We often get requests for demos from leads or existing customers who are below o
 This makes the demo actually valuable and can be an opportunity for you to learn more and get some demo practice. You'll also find that 90% of these requesters never respond because they are either unable or unwilling to engage with the questions, which allows you to avoid the biggest time sinks.
 
 If you realize that they will be too small (<$20k) to go through our sales-led process and you are unable to get this information from them, you should route to [self-serve](/handbook/growth/sales/crm#self-serve-opportunity-record-type).
-
 
 ### 3. First call (30 minutes) - Discovery & initial demo
 
@@ -197,7 +187,7 @@ When engineers aren't on the call, your goal is to earn a second call with their
 
 #### General demo tips
 
-We have various slide templates - ask someone on the Sales team for an invite to our Pitch account. Use the deck as scaffolding, pulling out relevant slides. Do not spend the demo presenting a deck with an engineering team - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. But sometimes, there is a legitimate need for a deck.
+We have various slide templates - ask someone on the Sales team for an invite to our Pitch account. Use the deck as scaffolding, pulling out relevant slides. **Do not spend the demo presenting a deck with an engineering team** - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. But sometimes, there is a legitimate need for a deck.
 
 Before you demo, make sure there is enough data to properly showcase our features. If needed, you can use [Hogbot](https://github.com/PostHog/hogbot) to generate more synthetic data. This is built by the sales team for the sales team, so if you see anything you want to improve, don't hesitate to submit a PR!
 
@@ -266,7 +256,7 @@ By the end of either the 1st or 2nd call with a customer, you should have a defi
 
 ### 5. Product evaluation
 
-Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. 
+Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. Generally it's better to seek forgiveness than ask permission for adding people to a Slack channel - use your judgement. 
 
 Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up [a Slack channel](/handbook/growth/sales/slack-channels). Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
 
