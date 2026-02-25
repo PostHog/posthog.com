@@ -12,6 +12,7 @@ import {
     IconUpload,
     IconCode,
     IconFeatures,
+    IconPeople,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -212,6 +213,12 @@ export default function TaskBarMenu() {
                                     label: 'Feature matrix',
                                     link: '/feature-matrix',
                                     icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Team',
+                                    link: '/team-directory',
+                                    icon: <IconPeople className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),
