@@ -562,6 +562,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/partnerships': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/data-stack': {
         size: {
             min: {
