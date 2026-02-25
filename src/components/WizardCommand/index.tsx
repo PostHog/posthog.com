@@ -9,7 +9,7 @@ export default function WizardCommand() {
     const cloud = useCloud()
     const { addToast } = useToast()
 
-    const code = `npx -y @posthog/wizard@latest${cloud ? ` --region ${cloud}` : ''}`
+    const code = `npx -y @posthog/wizard${cloud ? ` --region ${cloud}` : ''}`
 
     const handleCopy = async () => {
         try {
@@ -32,7 +32,7 @@ export default function WizardCommand() {
                 {[languageOption]}
             </CodeBlock>
             <div className="-mt-2 mb-6">
-                <CallToAction size="md" childClassName="flex gap-2 items-center" onClick={handleCopy}>
+                <CallToAction size="sm" childClassName="flex gap-2 items-center" onClick={handleCopy}>
                     <IconCopy className="size-5 inline-block" />
                     <span>Copy AI prompt</span>
                 </CallToAction>
