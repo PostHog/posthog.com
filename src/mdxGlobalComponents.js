@@ -68,6 +68,8 @@ import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
+import WizardCommand from './components/WizardCommand'
+import WizardCTA from './components/WizardCTA'
 
 export const shortcodes = {
     ArrayCTA,
@@ -139,4 +141,6 @@ export const shortcodes = {
     RainbowText,
     SolvedQuestions,
     WistiaEmbed,
+    WizardCommand,
+    WizardCTA,
 }
