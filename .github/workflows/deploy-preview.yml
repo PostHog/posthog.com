@@ -32,7 +32,7 @@ jobs:
 
             - name: Get timestamp
               id: timestamp
-              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p UTC')" >> $GITHUB_OUTPUT
+              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
 
             - name: Comment pending
               id: comment
