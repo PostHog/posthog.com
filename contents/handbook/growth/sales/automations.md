@@ -288,3 +288,13 @@ This [Zap](https://zapier.com/editor/198228018/published) applies credit and ass
 5. Updates the following metadata on the Customer Object:
    1. `credit_expires_at`
    2. `is_startup_plan_customer`
+
+## LinkedIn Sales Nav
+To get notified about new hires and other changes to the accounts you manage, you can set up lists of accounts to track in LinkedIn Sales Nav.
+
+1. Search for an account you want and click on their profile.
+Click the star icon on the left, and then choose a list to add them to (see screenshot)
+Optional, tailor the notifications you get [here](https://www.linkedin.com/sales/settings/app-notifications)
+
+
+You will now be notified any time a senior hire joins your account, which will be helpful for tracking folks to reach out to and give advanced signals around potential data science hires.
