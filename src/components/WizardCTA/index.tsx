@@ -20,7 +20,7 @@ export default function WizardCTA(): JSX.Element {
                     <div className="flex-1 text-center @lg:text-left">
                         <p className="text-lg font-bold !mb-0">Install PostHog with one command</p>
                         <p className="!mt-1 !mb-3 text-sm opacity-75">
-                            Make AI do it for you – <em>with one swift terminal command</em>.
+                            Paste this into your terminal and make AI do all the work.
                         </p>
                         <WizardCommand latest={false} />
                     </div>
