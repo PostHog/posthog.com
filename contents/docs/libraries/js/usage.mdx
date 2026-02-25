@@ -290,7 +290,7 @@ The survey objects look like this:
 
 ### Capturing survey events
 
-To capture survey results properly in PostHog, you need to capture 3 types of events:
+To capture survey results properly in PostHog, you need to capture 4 types of events:
 
 ```js-web
 // 1. When a user is shown a survey
@@ -303,7 +303,12 @@ posthog.capture("survey dismissed", {
   $survey_id: survey.id // required
 })
 
-// 3. When a user has responded to a survey
+// 3. When a user has started but not completed a survey
+posthog.capture("survey abandoned", {
+  $survey_id: survey.id // required
+})
+
+// 4. When a user has responded to a survey
 posthog.capture("survey sent", {
   $survey_id: survey.id, // required
   $survey_questions: [
@@ -318,6 +323,8 @@ posthog.capture("survey sent", {
   // e.g., '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': ["response_1", "response_2"]
 })
 ```
+
+The `survey abandoned` event fires when a user answers at least one question in a multi-step survey but navigates away or closes the page before completing all questions. This differs from `survey dismissed`, which fires when a user explicitly closes the survey.
 
 ## Session replay
 
