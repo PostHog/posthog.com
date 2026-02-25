@@ -18,7 +18,9 @@ Engineering has escaped the codebase. The tools, mindset, and identity increasin
 Spend enough time in startup circles and you’ll hear this engineeringification of everything:
 
 > “Oh, I’m a design engineer”
+>
 > “We’re following best practice of GTM engineering”
+>
 > “I need to talk to their sales engineer about implementation”
 
 This raises two questions:
