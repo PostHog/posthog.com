@@ -25,7 +25,7 @@ You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party p
 <details>
 <summary>I want to launch my product out of beta</summary>
 
-Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/brand/product-announcements).
+Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/marketing/product-announcements).
 </details>
 
 <details>

@@ -28,7 +28,7 @@ cd surveys
 npm i posthog-js
 ```
 
-Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
+Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project token and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
 
 ```js
 // app/providers.js
@@ -39,7 +39,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
     useEffect(() => {
-      posthog.init('<ph_project_api_key>', {
+      posthog.init('<ph_project_token>', {
         api_host: '<ph_client_api_host>',
         defaults: '<ph_posthog_js_defaults>',
       })
