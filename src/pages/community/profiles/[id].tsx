@@ -541,9 +541,14 @@ function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
 }
 
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+
 const ModeratorFields = ({ setFieldValue, values, errors }) => {
     const [heightUnit, setHeightUnit] = useState('in')
     const [height, setHeight] = useState(values.height)
+    const tShirt = values.tShirt || { fit: null, size: null, additionalInfo: null }
+    const availableSizes = tShirt.fit === 'female' ? femaleSizes : tShirt.fit === 'unisex' ? unisexSizes : []
 
     useEffect(() => {
         setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(height) : height)
@@ -616,6 +621,106 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                     ]}
                     value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
                     onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
+                />
+            </div>
+            <div>
+                <label className="text-[15px] block mb-1">T-shirt fit</label>
+                <Select
+                    groups={[
+                        {
+                            label: 'Fit',
+                            items: [
+                                { label: 'Unisex', value: 'unisex' },
+                                { label: 'Female', value: 'female' },
+                            ],
+                        },
+                    ]}
+                    value={tShirt.fit || undefined}
+                    onValueChange={(value) => {
+                        const newSizes = value === 'female' ? femaleSizes : unisexSizes
+                        setFieldValue('tShirt', {
+                            ...tShirt,
+                            fit: value,
+                            size: newSizes.includes(tShirt.size) ? tShirt.size : null,
+                        })
+                    }}
+                    placeholder="Select"
+                    dataScheme="primary"
+                    className="bg-primary"
+                />
+            </div>
+            {tShirt.fit && (
+                <div>
+                    <label className="text-[15px] flex items-center gap-2 mb-1">
+                        T-shirt size
+                        {tShirt.fit === 'unisex' ? (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <Link
+                                        to="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_unisex_d6a5af11a2.png"
+                                        externalNoIcon
+                                        className="text-xs text-secondary hover:text-primary underline"
+                                    >
+                                        Size guide <strong>(Canadian sizing)</strong>
+                                    </Link>
+                                }
+                            >
+                                <img
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_unisex_d6a5af11a2.png"
+                                    className="w-[600px]"
+                                />
+                            </Tooltip>
+                        ) : (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <Link
+                                        to="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_womens_f22c7294ab.png"
+                                        externalNoIcon
+                                        className="text-xs text-secondary hover:text-primary underline"
+                                    >
+                                        Size guide
+                                    </Link>
+                                }
+                            >
+                                <img
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_womens_f22c7294ab.png"
+                                    className="w-[400px]"
+                                />
+                            </Tooltip>
+                        )}
+                    </label>
+                    <Select
+                        groups={[
+                            {
+                                label: 'Size',
+                                items: availableSizes.map((size) => ({
+                                    label: size,
+                                    value: size,
+                                })),
+                            },
+                        ]}
+                        value={tShirt.size || undefined}
+                        onValueChange={(value) => setFieldValue('tShirt', { ...tShirt, size: value })}
+                        placeholder="Select"
+                        dataScheme="primary"
+                        className="bg-primary"
+                    />
+                </div>
+            )}
+            <div>
+                <label className="text-[15px] block mb-1">T-shirt additional info</label>
+                <textarea
+                    className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50 w-full resize-y"
+                    name="tShirtAdditionalInfo"
+                    value={tShirt.additionalInfo || ''}
+                    data-scheme="primary"
+                    onChange={(e) => setFieldValue('tShirt', { ...tShirt, additionalInfo: e.target.value })}
+                    placeholder="Any additional notes about t-shirt preferences"
+                    rows={3}
                 />
             </div>
         </div>
@@ -971,6 +1076,7 @@ export default function ProfilePage({ params }: PageProps) {
                         crest: true,
                     },
                 },
+                tShirt: true,
                 ...(isModerator
                     ? {
                           user: true,
@@ -1128,6 +1234,7 @@ export default function ProfilePage({ params }: PageProps) {
             backgroundImage: profile?.backgroundImage,
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
+            tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
         },
         onSubmit: async ({ avatar, images, ...values }) => {
             try {

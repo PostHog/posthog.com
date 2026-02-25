@@ -4,18 +4,19 @@ import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
 import OSButton from 'components/OSButton'
 import { useTeamMembers, TeamMember } from 'hooks/useTeamMembers'
-import { IconSpinner, IconPencil } from '@posthog/icons'
+import { IconSpinner, IconPencil, IconDownload } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const columns = [
     { name: '#', width: 'auto', align: 'center' as const },
+    { name: '', width: '36px', align: 'center' as const },
     { name: 'First name', width: 'minmax(100px,1fr)', align: 'left' as const },
     { name: 'Last name', width: 'minmax(100px,1fr)', align: 'left' as const },
-    { name: 'Email', width: 'minmax(160px,1fr)', align: 'left' as const },
     { name: 'Role', width: 'minmax(180px,1fr)', align: 'left' as const },
     { name: 'Location', width: 'minmax(150px,1fr)', align: 'left' as const },
     { name: 'Country', width: 'minmax(80px,auto)', align: 'left' as const },
-    { name: 'Teams', width: 'minmax(120px,1fr)', align: 'left' as const },
-    { name: 'Leads', width: 'minmax(100px,auto)', align: 'left' as const },
+    { name: 'Teams', width: 'minmax(200px,1fr)', align: 'left' as const },
+    { name: 'Team lead', width: 'minmax(100px,auto)', align: 'left' as const },
     { name: 'Pineapple?', width: 'auto', align: 'center' as const },
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]
@@ -61,9 +62,14 @@ function memberToRow(
         key: String(member.id),
         cells: [
             { content: index + 1 },
+            {
+                content: member.avatarUrl ? (
+                    <img src={member.avatarUrl} alt="" className="size-6 object-contain" />
+                ) : null,
+                className: `!p-1 ${member.color ? `bg-${member.color}` : ''}`,
+            },
             { content: member.firstName || '—', className: 'text-sm' },
             { content: member.lastName || '—', className: 'text-sm' },
-            { content: member.email || '—', className: 'text-sm' },
             { content: member.companyRole || '—', className: 'text-sm' },
             {
                 content: isEditing ? (
@@ -96,6 +102,44 @@ export default function Team(): JSX.Element {
 
     const displayMembers = filteredMembers ?? teamMembers
 
+    const handleDownloadCSV = () => {
+        const headers = [
+            'First name',
+            'Last name',
+            'Role',
+            'Location',
+            'Country',
+            'Teams',
+            'Team lead',
+            'Pineapple?',
+            'Start date',
+            'Avatar URL',
+            'Color',
+        ]
+        const escape = (val: string) => (val.includes(',') || val.includes('"') ? `"${val.replace(/"/g, '""')}"` : val)
+        const rows = displayMembers.map((m) => [
+            m.firstName || '',
+            m.lastName || '',
+            m.companyRole || '',
+            m.location || '',
+            m.country || '',
+            m.teams.map((t) => `${t} Team`).join(', '),
+            m.leadsTeams.map((t) => `${t} Team`).join(', '),
+            m.pineappleOnPizza === true ? 'Yes' : m.pineappleOnPizza === false ? 'No' : '',
+            m.startDate || '',
+            m.avatarUrl || '',
+            m.color || '',
+        ])
+        const csv = [headers, ...rows].map((row) => row.map(escape).join(',')).join('\n')
+        const blob = new Blob([csv], { type: 'text/csv' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'team-directory.csv'
+        a.click()
+        URL.revokeObjectURL(url)
+    }
+
     return (
         <>
             <SEO title="Team directory – PostHog" description="" />
@@ -110,12 +154,20 @@ export default function Team(): JSX.Element {
                     description: 'Internal team directory',
                 }}
                 extraMenuOptions={
-                    <OSButton
-                        size="md"
-                        active={isEditing}
-                        icon={<IconPencil />}
-                        onClick={() => setIsEditing(!isEditing)}
-                    />
+                    <>
+                        <Tooltip
+                            trigger={<OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />}
+                            delay={0}
+                        >
+                            Download CSV
+                        </Tooltip>
+                        <OSButton
+                            size="md"
+                            active={isEditing}
+                            icon={<IconPencil />}
+                            onClick={() => setIsEditing(!isEditing)}
+                        />
+                    </>
                 }
                 availableFilters={[
                     {
@@ -168,6 +220,9 @@ export default function Team(): JSX.Element {
                     <>
                         <p className="!mt-0 mb-2 text-sm text-muted">
                             {displayMembers.length} team member{displayMembers.length !== 1 ? 's' : ''}
+                            {' · '}
+                            Data is loaded at build time. Edits save to Strapi but won't appear here until the next
+                            build.
                         </p>
                         <OSTable
                             columns={columns}

@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
-import qs from 'qs'
+import { useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from './useUser'
 
 export type TeamMember = {
     id: number
+    avatarUrl: string | null
+    color: string | null
     firstName: string | null
     lastName: string | null
-    email: string | null
     companyRole: string | null
     location: string | null
     country: string | null
@@ -18,118 +19,95 @@ export type TeamMember = {
 
 export function useTeamMembers() {
     const { getJwt, isModerator } = useUser()
-    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
-    const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        if (!isModerator) {
-            setLoading(false)
-            return
-        }
-
-        const fetchAllProfiles = async () => {
-            const token = await getJwt()
-            if (!token) {
-                setLoading(false)
-                return
-            }
-
-            const allMembers: TeamMember[] = []
-            let page = 1
-            let hasMore = true
-
-            while (hasMore) {
-                const query = qs.stringify(
-                    {
-                        populate: ['user', 'teams', 'leadTeams', 'avatar'],
-                        filters: {
-                            teams: {
-                                id: { $notNull: true },
-                            },
-                            id: { $ne: 28378 },
-                        },
-                        pagination: {
-                            page,
-                            pageSize: 100,
-                        },
-                    },
-                    { encodeValuesOnly: true }
-                )
-
-                const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-
-                if (!res.ok) break
-
-                const json = await res.json()
-                const profiles = json.data || []
-
-                for (const profile of profiles) {
-                    const attrs = profile.attributes || profile
-                    const user = attrs.user?.data?.attributes || attrs.user || null
-                    const teams = (attrs.teams?.data || attrs.teams || []).map((t: any) => t.attributes?.name || t.name)
-                    const leadsTeams = (attrs.leadTeams?.data || attrs.leadTeams || []).map(
-                        (t: any) => t.attributes?.name || t.name
-                    )
-
-                    allMembers.push({
-                        id: profile.id,
-                        firstName: attrs.firstName || null,
-                        lastName: attrs.lastName || null,
-                        email: user?.username || null,
-                        companyRole: attrs.companyRole || null,
-                        location: attrs.location || null,
-                        country: attrs.country || null,
-                        teams,
-                        leadsTeams,
-                        pineappleOnPizza: attrs.pineappleOnPizza ?? null,
-                        startDate: attrs.startDate || null,
-                    })
-                }
-
-                if (profiles.length < 100) {
-                    hasMore = false
-                } else {
-                    page++
-                }
-            }
-
-            const deduplicated = Array.from(
-                allMembers
-                    .reduce((map, member) => {
-                        if (!map.has(member.id)) {
-                            map.set(member.id, member)
+    const {
+        team: { teamMembers: staticMembers },
+    } = useStaticQuery(graphql`
+        query TeamDirectoryQuery {
+            team: allSqueakProfile(
+                filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
+                sort: { fields: startDate, order: ASC }
+            ) {
+                teamMembers: nodes {
+                    squeakId
+                    avatar {
+                        url
+                    }
+                    color
+                    firstName
+                    lastName
+                    companyRole
+                    country
+                    location
+                    pineappleOnPizza
+                    startDate
+                    teams {
+                        data {
+                            attributes {
+                                name
+                            }
                         }
-                        return map
-                    }, new Map<number, TeamMember>())
-                    .values()
-            )
-            deduplicated.sort((a, b) => (a.startDate || '').localeCompare(b.startDate || ''))
-            setTeamMembers(deduplicated)
-            setLoading(false)
+                    }
+                    leadTeams {
+                        data {
+                            attributes {
+                                name
+                            }
+                        }
+                    }
+                }
+            }
         }
+    `)
 
-        fetchAllProfiles()
-    }, [isModerator])
+    const baseMembers: TeamMember[] = staticMembers.map((m: any) => ({
+        id: m.squeakId,
+        avatarUrl: m.avatar?.url || null,
+        color: m.color || null,
+        firstName: m.firstName || null,
+        lastName: m.lastName || null,
+        companyRole: m.companyRole || null,
+        location: m.location || null,
+        country: m.country || null,
+        teams: (m.teams?.data || []).map((t: any) => t.attributes?.name),
+        leadsTeams: (m.leadTeams?.data || []).map((t: any) => t.attributes?.name),
+        pineappleOnPizza: m.pineappleOnPizza ?? null,
+        startDate: m.startDate || null,
+    }))
+
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>(baseMembers)
 
     const updateLocation = async (profileId: number, location: string) => {
         const token = await getJwt()
         if (!token) return
 
+        const member = teamMembers.find((m) => m.id === profileId)
+        const name = [member?.firstName, member?.lastName].filter(Boolean).join(' ') || `#${profileId}`
+
         setTeamMembers((prev) => prev.map((m) => (m.id === profileId ? { ...m, location } : m)))
 
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
-            method: 'PUT',
-            body: JSON.stringify({ data: { location } }),
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        try {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
+                method: 'PUT',
+                body: JSON.stringify({ data: { location } }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+
+            if (res.ok) {
+                console.log(`%c✓ Saved location for ${name}: "${location}"`, 'color: #22c55e; font-weight: bold')
+            } else {
+                console.log(
+                    `%c✗ Failed to save location for ${name} (${res.status})`,
+                    'color: #ef4444; font-weight: bold'
+                )
+            }
+        } catch (err) {
+            console.log(`%c✗ Network error saving location for ${name}`, 'color: #ef4444; font-weight: bold', err)
+        }
     }
 
-    return { teamMembers, loading, updateLocation }
+    return { teamMembers, loading: false, updateLocation }
 }

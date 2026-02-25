@@ -216,7 +216,7 @@ export default function TaskBarMenu() {
                                 },
                                 {
                                     type: 'item' as const,
-                                    label: 'Team',
+                                    label: 'Team directory',
                                     link: '/team-directory',
                                     icon: <IconPeople className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
