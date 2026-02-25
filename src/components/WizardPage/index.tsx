@@ -235,7 +235,7 @@ function ExplainerVideo(): JSX.Element {
             </p>
             <div className="mb-3">
                 <div className="aspect-video">
-                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" />
+                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" autoPlay={false} />
                 </div>
             </div>
         </div>
