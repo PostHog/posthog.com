@@ -268,6 +268,14 @@ Example endpoints:
 - `/api/projects/@current/dashboards/{dashboard_id}/users_with_access`
 - `/api/projects/@current/users_with_access`
 
+#### 4. Effective access levels
+
+These read-only endpoints return computed effective access levels that consider defaults, role overrides, and organization admin status. Each entry includes the saved override (`access_level`), the computed maximum (`effective_access_level`), and the inherited floor from defaults or roles (`inherited_access_level` with `inherited_access_level_reason`).
+
+- `GET /api/projects/@current/access_control_defaults` – Project and resource default access levels
+- `GET /api/projects/@current/access_control_roles` – Effective access per role
+- `GET /api/projects/@current/access_control_members` – Effective access per member
+
 ### Request and response formats
 
 #### Getting object access controls
@@ -385,6 +393,112 @@ Or with a role:
   "total_count": 1
 }
 ```
+
+#### Getting access control defaults
+
+**Request**: `GET /api/projects/@current/access_control_defaults`
+
+**Response**:
+```json
+{
+  "can_edit": true,
+  "available_project_levels": ["none", "member", "admin"],
+  "available_resource_levels": ["none", "viewer", "editor", "manager"],
+  "project_access_level": "member",
+  "resource_access_levels": {
+    "dashboard": { "access_level": "viewer", "minimum": "none", "maximum": "manager" },
+    "feature_flag": { "access_level": null, "minimum": "none", "maximum": "manager" }
+  }
+}
+```
+
+#### Getting effective access for roles
+
+**Request**: `GET /api/projects/@current/access_control_roles`
+
+**Response**:
+```json
+{
+  "can_edit": true,
+  "results": [
+    {
+      "role_id": "018e0d4f-...",
+      "role_name": "Engineering",
+      "project": {
+        "access_level": "admin",
+        "effective_access_level": "admin",
+        "inherited_access_level": "member",
+        "inherited_access_level_reason": "project_default",
+        "minimum": "none",
+        "maximum": "admin"
+      },
+      "resources": {
+        "dashboard": {
+          "access_level": null,
+          "effective_access_level": null,
+          "inherited_access_level": null,
+          "inherited_access_level_reason": null,
+          "minimum": "none",
+          "maximum": "manager"
+        }
+      }
+    }
+  ]
+}
+```
+
+Each role entry includes:
+- `access_level` – The explicitly saved override, or `null` if none is set
+- `effective_access_level` – The computed maximum of the override and inherited level
+- `inherited_access_level` – The floor from project defaults
+- `inherited_access_level_reason` – Why the inherited level applies (e.g., `project_default`)
+
+#### Getting effective access for members
+
+**Request**: `GET /api/projects/@current/access_control_members`
+
+**Response**:
+```json
+{
+  "can_edit": true,
+  "results": [
+    {
+      "organization_membership_id": "018e0d4f-...",
+      "user": {
+        "uuid": "...",
+        "email": "jane@example.com",
+        "first_name": "Jane",
+        "last_name": "Doe"
+      },
+      "organization_level": 1,
+      "project": {
+        "access_level": null,
+        "effective_access_level": "admin",
+        "inherited_access_level": "admin",
+        "inherited_access_level_reason": "role_override",
+        "minimum": "none",
+        "maximum": "admin"
+      },
+      "resources": {
+        "dashboard": {
+          "access_level": "editor",
+          "effective_access_level": "editor",
+          "inherited_access_level": "viewer",
+          "inherited_access_level_reason": "project_default",
+          "minimum": "none",
+          "maximum": "manager"
+        }
+      }
+    }
+  ]
+}
+```
+
+Each member entry includes the same fields as role entries. The `inherited_access_level_reason` can be one of:
+- `project_default` – Inherited from the project's default access level
+- `role_override` – Inherited from a role assignment
+- `organization_admin` – Organization admins automatically receive the highest access level
+
 
 ### Access sources
 
