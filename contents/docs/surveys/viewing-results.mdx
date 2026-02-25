@@ -42,11 +42,12 @@ For rating questions (including NPS), the trend charts include an **Open as new 
 
 To create insights from survey results, navigate to the [insights tab](https://app.posthog.com/insights) and click on `New insights` button.
 
-There are 3 survey-related events you create insights from:
+There are four survey-related events you can create insights from:
 
-1. `survey dismissed`
-2. `survey shown`
-3. `survey sent` (for responses)
+1. `survey shown` - fires when a survey is displayed to a user
+2. `survey sent` - fires when a user responds to a question (for responses)
+3. `survey dismissed` - fires when a user explicitly closes the survey
+4. `survey abandoned` - fires when a user answers at least one question but navigates away before completing the survey
 
 When creating an insight, select any of these events. To see data for a specific survey, create a filter using the `Survey ID` or `Survey Name` properties.
 
