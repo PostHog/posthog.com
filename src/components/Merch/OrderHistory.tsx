@@ -99,9 +99,16 @@ export default function OrderHistory({ orders }: { orders: any[] }) {
                                                                 {item.sku && `${item.sku} • `}Qty: {item.quantity}
                                                             </p>
                                                         </div>
-                                                        <span className="text-right font-medium text-xs">
-                                                            ${formatPrice(item.price)}
-                                                        </span>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-right font-medium text-xs">
+                                                                ${formatPrice(item.price)}
+                                                            </span>
+                                                            {item.quantity > 1 && (
+                                                                <span className="text-xs text-muted mt-1 ml-2">
+                                                                    ${formatPrice(item.totalPrice)}
+                                                                </span>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                     {parseFloat(item.totalDiscount) > 0 && (
                                                         <div className="text-xs text-muted mt-1 ml-2">
