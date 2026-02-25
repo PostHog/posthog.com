@@ -4,10 +4,12 @@ You can enable this feature from your client-side by setting `captureLogs = true
 ```ios_swift
 let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
 config.sessionReplay = true
-config.sessionReplayConfig.captureLogs = true // TIP: Needs to be configured in code. Project settings won't have an effect.
+config.sessionReplayConfig.captureLogs = true // Capture logs. Default is false.
 
 PostHogSDK.shared.setup(config)
 ```
+
+> **Note:** You can also toggle this remotely from your [Session Replay project settings](https://app.posthog.com/settings/project-replay#replay-log-capture) with iOS SDK version 3.41.1 or higher.
 
 > **Important:** Individual console logs are truncated at 2000 characters. The rest of the log is not sent to PostHog. When truncating a log message we add ...[Truncated] to the message.
 
