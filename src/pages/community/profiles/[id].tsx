@@ -719,19 +719,15 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                 />
             </div>
             <div>
-                <label className="text-[15px] block mb-1">T-shirt fit</label>
-                <Select
-                    groups={[
-                        {
-                            label: 'Fit',
-                            items: [
-                                { label: 'Unisex', value: 'unisex' },
-                                { label: 'Female', value: 'female' },
-                            ],
-                        },
+                <ToggleGroup
+                    title="T-shirt fit"
+                    options={[
+                        { label: 'Unisex', value: 'unisex' },
+                        { label: 'Female', value: 'female' },
                     ]}
                     value={tShirt.fit || undefined}
                     onValueChange={(value) => {
+                        if (!value) return
                         const newSizes = value === 'female' ? femaleSizes : unisexSizes
                         setFieldValue('tShirt', {
                             ...tShirt,
@@ -739,9 +735,6 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                             size: newSizes.includes(tShirt.size) ? tShirt.size : null,
                         })
                     }}
-                    placeholder="Select"
-                    dataScheme="primary"
-                    className="bg-primary"
                 />
             </div>
             {tShirt.fit && (
@@ -754,7 +747,7 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                                 side="right"
                                 trigger={
                                     <span className="text-xs text-secondary hover:text-primary underline cursor-help">
-                                        Size guide
+                                        Unisex size guide
                                     </span>
                                 }
                             >
@@ -766,7 +759,7 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                                 side="right"
                                 trigger={
                                     <span className="text-xs text-secondary hover:text-primary underline cursor-help">
-                                        Size guide
+                                        Women's size guide
                                     </span>
                                 }
                             >
@@ -774,21 +767,15 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                             </Tooltip>
                         )}
                     </label>
-                    <Select
-                        groups={[
-                            {
-                                label: 'Size',
-                                items: availableSizes.map((size) => ({
-                                    label: size,
-                                    value: size,
-                                })),
-                            },
-                        ]}
+                    <ToggleGroup
+                        title="T-shirt size"
+                        hideTitle
+                        options={availableSizes.map((size) => ({ label: size, value: size }))}
                         value={tShirt.size || undefined}
-                        onValueChange={(value) => setFieldValue('tShirt', { ...tShirt, size: value })}
-                        placeholder="Select"
-                        dataScheme="primary"
-                        className="bg-primary"
+                        onValueChange={(value) => {
+                            if (!value) return
+                            setFieldValue('tShirt', { ...tShirt, size: value })
+                        }}
                     />
                 </div>
             )}
