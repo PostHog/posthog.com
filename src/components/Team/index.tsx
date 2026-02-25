@@ -585,7 +585,7 @@ export default function Team({
                                                     <Hedgehog />
                                                 </li>
                                             ))}
-                                            {hedgehogPercentage && (
+                                            {hedgehogPercentage > 0 && (
                                                 <li
                                                     style={{
                                                         width: hedgehogPercentage,

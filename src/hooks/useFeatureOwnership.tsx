@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react'
-import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
-import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -153,7 +151,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     endpoints: {
         feature: 'Endpoints',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
     },
     'error-tracking': {
         feature: 'Error tracking',
