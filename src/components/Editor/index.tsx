@@ -58,6 +58,7 @@ interface EditorProps {
         operator: string
         filter?: (obj: any, value: any) => boolean
         initialValue?: any
+        maxHeight?: string | number
     }[]
     onSearchChange?: (query: string) => void
     showFilters?: boolean
@@ -593,6 +594,7 @@ export function Editor({
                                                     key={`${Object.keys(filters).length}-${filter.label}`}
                                                     disabled={disableFilterChange}
                                                     placeholder={filter.label}
+                                                    maxHeight={filter.maxHeight}
                                                     defaultValue={
                                                         filter.initialValue === null
                                                             ? null
