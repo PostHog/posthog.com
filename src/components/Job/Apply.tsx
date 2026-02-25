@@ -341,18 +341,12 @@ const Form = ({
     )
 }
 
-const code = process.env.SHOPIFY_STICKER_CODE
+const code = process.env.GATSBY_SHOPIFY_STICKER_CODE
 if (!code) {
-    throw new Error('SHOPIFY_STICKER_CODE is not set')
+    throw new Error('GATSBY_SHOPIFY_STICKER_CODE is not set')
 }
 
-const ApplicationSuccess = ({
-    isInExcludedCountry,
-    isInUnitedStates,
-}: {
-    isInExcludedCountry?: boolean
-    isInUnitedStates?: boolean
-}) => {
+const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }) => {
     const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
     const posthog = usePostHog()
@@ -485,7 +479,7 @@ const ApplicationSuccess = ({
                         </div>
                     )}
 
-                    <div className={`mx-6 md:mx-12 pb-2  ${isInExcludedCountry ? '' : 'border-t border-primary pt-6'}`}>
+                    <div className={`mx-6 md:mx-12 pb-2  ${!isInUnitedStates ? '' : 'border-t border-primary pt-6'}`}>
                         <h4 className="mb-0">More cool tech jobs</h4>
                         <p className="text-sm mb-4">
                             While you're waiting to hear back, you might also be interested in exploring our{' '}
@@ -559,15 +553,16 @@ export default function Apply({ id, info }: { id: string; info: any }) {
                 key="application-success"
                 location={{ pathname: 'application-success' }}
                 newWindow
-                isInExcludedCountry={isInExcludedCountry}
                 isInUnitedStates={isInUnitedStates}
             />
         )
-    }, [isInExcludedCountry])
+    }, [isInUnitedStates])
 
     useEffect(() => {
-        setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
-        setIsInUnitedStates(posthog?.isFeatureEnabled?.('are-you-in-the-us'))
+        posthog?.onFeatureFlags?.(() => {
+            setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
+            setIsInUnitedStates(posthog?.isFeatureEnabled?.('are-you-in-the-us'))
+        })
     }, [posthog])
 
     // preview confirmation window
