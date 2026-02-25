@@ -12,6 +12,7 @@ export const logs = {
     color: 'red',
     colorSecondary: 'green-2',
     category: 'product_engineering',
+    wizardSupport: 'Coming soon',
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
         marks: [50, 100, 500, 1000, 5000],

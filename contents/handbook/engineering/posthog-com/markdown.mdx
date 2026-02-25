@@ -489,6 +489,62 @@ Alice->John: See you later!
 </Tab.Panels>
 </Tab.Group>
 
+import ProductList from 'components/ProductList'
+
+## Product list
+
+Use `<ProductList />` to render a list of products sourced from `useProduct` hooks. It links each product to `/{slug}` by default using the product's icon, color, and name.
+
+**Auto-source from a product data field** (e.g. every product where `wizardSupport` is set):
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+/>
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+/>
+
+Products are grouped in `sourceValues` order. Plain values (`true`, `"some string"`) filter without an indicator. Object values (`{ value, color }`) also render a colored dot with tooltip text.
+
+**Manual list of products:**
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList products={["product_analytics", "web_analytics", "session_replay"]} />
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    products={["product_analytics", "web_analytics", "session_replay"]}
+/>
+
+**Manual list with field-based filtering and indicators:**
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList
+    products={["product_analytics", "web_analytics", "feature_flags", "llm_analytics"]}
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
+/>
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    products={["product_analytics", "web_analytics", "feature_flags", "llm_analytics"]}
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
+/>
+
+Only the products whose `wizardSupport` value matches a `sourceValues` entry will render. Other props: `urlPrefix` (default `/`), `className`, `itemClassName`, `iconSize`.
+
 ## Call to action
 
 Adding `<ArrayCTA />` to any article will add this simple CTA:

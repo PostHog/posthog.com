@@ -106,9 +106,3 @@ When building AI features, cost trends matter as much as functionality. v0 can s
 ---
 
 Product data is most useful when it shows up at the moment decisions are made. With PostHog available in v0, you can build agents, features, and experiments with real context in mind instead of assumptions. Check it out: [v0.app](https://v0.app/)
-
-To find out more about what you can do with v0 x PostHog (plus snacks and strong opinions about shipping), join us at: 
-
-- February 26 – [Agentic Product Night: **Boston** w/ Vercel x PostHog](https://posthog.com/events#eventId=160)
-- March 10 – [Agentic Product Night: **Amsterdam** w/ Vercel x PostHog](https://posthog.com/events#eventId=161)
-
