@@ -544,6 +544,101 @@ function convertCentimetersToInches(centimeters: number): number {
 const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
 const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
 
+const unisexSizeDataIn = {
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    rows: [
+        { label: 'Length', values: ['26.25', '27.50', '28.50', '29.50', '30.50', '31.50'] },
+        { label: 'Width', values: ['18.00', '19.50', '21.00', '22.50', '24.00', '25.50'] },
+        { label: 'Sleeve', values: ['16.00', '16.875', '17.75', '18.625', '19.50', '20.375'] },
+    ],
+}
+
+const unisexSizeDataCm = {
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    rows: [
+        { label: 'Length', values: ['66', '69', '72', '74', '77', '80'] },
+        { label: 'Width', values: ['45', '49', '53', '57', '60', '64'] },
+        { label: 'Sleeve', values: ['40', '42', '45', '47', '49', '51'] },
+    ],
+}
+
+const womensSizeDataUS = {
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    rows: [{ label: 'Fits Sizes', values: ['2-6', '6-10', '10-14', '14-18', '18-22', '23-27'] }],
+}
+
+const womensSizeDataUK = {
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    rows: [{ label: 'Fits Sizes', values: ['6-10', '10-14', '14-18', '18-22', '22-26', '27-31'] }],
+}
+
+const UnisexSizeChart = () => {
+    const [unit, setUnit] = useState('in')
+    return (
+        <div className="w-[380px]">
+            <ToggleGroup
+                title="Unit"
+                hideTitle
+                options={[
+                    { label: 'in', value: 'in' },
+                    { label: 'cm', value: 'cm' },
+                ]}
+                value={unit}
+                onValueChange={(value) => value && setUnit(value)}
+                className="mb-2"
+            />
+            <SizeTable data={unit === 'cm' ? unisexSizeDataCm : unisexSizeDataIn} />
+        </div>
+    )
+}
+
+const WomensSizeChart = () => {
+    const [region, setRegion] = useState('US')
+    return (
+        <div>
+            <ToggleGroup
+                title="Region"
+                hideTitle
+                options={[
+                    { label: 'US', value: 'US' },
+                    { label: 'UK', value: 'UK' },
+                ]}
+                value={region}
+                onValueChange={(value) => value && setRegion(value)}
+                className="mb-2"
+            />
+            <SizeTable data={region === 'UK' ? womensSizeDataUK : womensSizeDataUS} />
+        </div>
+    )
+}
+
+const SizeTable = ({ data }: { data: typeof unisexSizeDataIn }) => (
+    <table className="text-xs text-left border-collapse w-full">
+        <thead>
+            <tr>
+                <th className="pr-3 py-1 font-semibold" />
+                {data.sizes.map((s) => (
+                    <th key={s} className="px-2 py-1 font-semibold text-center">
+                        {s}
+                    </th>
+                ))}
+            </tr>
+        </thead>
+        <tbody>
+            {data.rows.map((row) => (
+                <tr key={row.label} className="border-t border-primary">
+                    <td className="pr-3 py-1 font-semibold whitespace-nowrap">{row.label}</td>
+                    {row.values.map((v, i) => (
+                        <td key={i} className="px-2 py-1 text-center">
+                            {v}
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+)
+
 const ModeratorFields = ({ setFieldValue, values, errors }) => {
     const [heightUnit, setHeightUnit] = useState('in')
     const [height, setHeight] = useState(values.height)
@@ -658,38 +753,24 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                                 delay={0}
                                 side="right"
                                 trigger={
-                                    <Link
-                                        to="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_unisex_d6a5af11a2.png"
-                                        externalNoIcon
-                                        className="text-xs text-secondary hover:text-primary underline"
-                                    >
-                                        Size guide <strong>(Canadian sizing)</strong>
-                                    </Link>
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Size guide
+                                    </span>
                                 }
                             >
-                                <img
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_unisex_d6a5af11a2.png"
-                                    className="w-[600px]"
-                                />
+                                <UnisexSizeChart />
                             </Tooltip>
                         ) : (
                             <Tooltip
                                 delay={0}
                                 side="right"
                                 trigger={
-                                    <Link
-                                        to="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_womens_f22c7294ab.png"
-                                        externalNoIcon
-                                        className="text-xs text-secondary hover:text-primary underline"
-                                    >
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
                                         Size guide
-                                    </Link>
+                                    </span>
                                 }
                             >
-                                <img
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/tshirt_womens_f22c7294ab.png"
-                                    className="w-[400px]"
-                                />
+                                <WomensSizeChart />
                             </Tooltip>
                         )}
                     </label>
