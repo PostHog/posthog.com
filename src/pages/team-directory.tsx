@@ -6,6 +6,7 @@ import OSButton from 'components/OSButton'
 import { useTeamMembers, TeamMember } from 'hooks/useTeamMembers'
 import { IconSpinner, IconPencil, IconDownload } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { useUser } from 'hooks/useUser'
 
 const columns = [
     { name: '#', width: 'auto', align: 'center' as const },
@@ -95,6 +96,7 @@ function memberToRow(
 }
 
 export default function Team(): JSX.Element {
+    const { isModerator } = useUser()
     const { teamMembers, loading, updateProfile } = useTeamMembers()
     const [filteredMembers, setFilteredMembers] = useState<TeamMember[] | null>(null)
     const [isEditing, setIsEditing] = useState(false)
@@ -166,20 +168,22 @@ export default function Team(): JSX.Element {
                     description: 'Internal team directory',
                 }}
                 extraMenuOptions={
-                    <>
-                        <Tooltip
-                            trigger={<OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />}
-                            delay={0}
-                        >
-                            Download CSV
-                        </Tooltip>
-                        <OSButton
-                            size="md"
-                            active={isEditing}
-                            icon={<IconPencil />}
-                            onClick={() => setIsEditing(!isEditing)}
-                        />
-                    </>
+                    isModerator ? (
+                        <>
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />}
+                                delay={0}
+                            >
+                                Download CSV
+                            </Tooltip>
+                            <OSButton
+                                size="md"
+                                active={isEditing}
+                                icon={<IconPencil />}
+                                onClick={() => setIsEditing(!isEditing)}
+                            />
+                        </>
+                    ) : null
                 }
                 availableFilters={[
                     {
