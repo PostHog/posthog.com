@@ -503,7 +503,7 @@ posthog.capture("survey sent", {
 
 ## Capture survey lifecycle events
 
-There are three other events you should capture to track the full lifecycle of a survey. They are `survey shown`, `survey dismissed`, and `survey abandoned`:
+There are two other events you should capture to track the full lifecycle of a survey. They are `survey shown` and `survey dismissed`:
 
 ```js-web
 // 1. When a user is shown a survey
@@ -515,13 +515,6 @@ posthog.capture("survey shown", {
 posthog.capture("survey dismissed", {
     $survey_id: survey.id // required
 })
-
-// 3. When a user has started but not completed a survey
-posthog.capture("survey abandoned", {
-    $survey_id: survey.id // required
-})
 ```
 
-The `survey abandoned` event fires when a user answers at least one question in a multi-step survey but navigates away before completing it. This is different from `survey dismissed`, which fires when a user explicitly closes the survey.
-
-Capturing all four events ensures you have a full implementation matching popover surveys and that your analysis is accurate in PostHog.
+Capturing all three events ensures you have a full implementation matching popup surveys and that your analysis is accurate in PostHog.
