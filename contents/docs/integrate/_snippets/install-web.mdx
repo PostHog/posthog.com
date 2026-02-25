@@ -4,6 +4,13 @@ import Snippet from "./install-js-snippet.mdx"
 
 <Snippet />
 
+<details>
+<summary>Keeping the SDK version up to date</summary>
+
+Be careful to avoid things which can cause the SDK version to be cached and fail to update. See: [Ways SDK versions fall behind](/docs/sdk-doctor/keeping-sdks-current#ways-sdk-versions-fall-behind)
+
+</details>
+
 <details id="typescript-script-tag">
 <summary>Using TypeScript with the script tag?</summary>
 
@@ -51,6 +58,30 @@ posthog.init('<ph_project_api_key>', {
 
 See our framework specific docs for [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [Vue](/docs/libraries/vue-js), [Angular](/docs/libraries/angular), [Astro](/docs/libraries/astro), [Remix](/docs/libraries/remix), and [Svelte](/docs/libraries/svelte) for more installation details.
 
+<details>
+<summary>Update early, update often</summary>
+
+We ship weirdly fast, especially for our Javascript web SDK. If you choose the npm package instead of the HTML snippet, be sure to update it frequently:
+
+To actually _update_ the package, you need to update the version constraint in your `package.json` file and then reinstall, or run `update` instead of `install`:
+
+<MultiLanguage>
+
+```bash file=npm
+npm update posthog-js
+```
+
+```bash file=pnpm
+pnpm update posthog-js
+```
+
+```bash file=Yarn
+yarn upgrade posthog-js
+```
+
+</MultiLanguage>
+
+</details>
 <details id="bundle-extensions">
 <summary>Bundle all required extensions (advanced)</summary>
 
@@ -110,3 +141,4 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 The `defaults` is a date, such as `2026-01-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>
+
