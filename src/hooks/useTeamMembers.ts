@@ -15,6 +15,9 @@ export type TeamMember = {
     leadsTeams: string[]
     pineappleOnPizza: boolean | null
     startDate: string | null
+    tShirtFit: string | null
+    tShirtSize: string | null
+    tShirtAdditionalInfo: string | null
 }
 
 export function useTeamMembers() {
@@ -41,6 +44,11 @@ export function useTeamMembers() {
                     location
                     pineappleOnPizza
                     startDate
+                    tShirt {
+                        fit
+                        size
+                        additionalInfo
+                    }
                     teams {
                         data {
                             attributes {
@@ -73,6 +81,9 @@ export function useTeamMembers() {
         leadsTeams: (m.leadTeams?.data || []).map((t: any) => t.attributes?.name),
         pineappleOnPizza: m.pineappleOnPizza ?? null,
         startDate: m.startDate || null,
+        tShirtFit: m.tShirt?.fit || null,
+        tShirtSize: m.tShirt?.size || null,
+        tShirtAdditionalInfo: m.tShirt?.additionalInfo || null,
     }))
 
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>(baseMembers)
