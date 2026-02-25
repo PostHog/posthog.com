@@ -80,6 +80,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     __preview_lazy_load_replay: true,
     __preview_capture_bot_pageviews: true,
     __preview_disable_xhr_credentials: true,
+    disable_web_experiments: false,
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)

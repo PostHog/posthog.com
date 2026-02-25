@@ -91,7 +91,7 @@ const HomeHappyHog = () => {
     )
 }
 
-const CTAs = () => {
+const CTAControl = () => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <div>
@@ -120,6 +120,34 @@ const CTAs = () => {
                 </div>
             </motion.div>
         </div>
+    )
+}
+
+function CTASignupPageCommand() {
+    return <WizardCommand latest={false} />
+}
+
+function CTAButtonDropdown() {
+    return <WizardCommand latest={false} />
+}
+
+const CTAs = () => {
+    const posthog = usePostHog()
+    return (
+        <RenderInClient
+            placeholder={null}
+            render={() => {
+                const variant = posthog?.getFeatureFlag?.('ai-first-cta')
+                switch (variant) {
+                    case 'signup-page-command':
+                        return <CTASignupPageCommand />
+                    case 'button-dropdown':
+                        return <CTAButtonDropdown />
+                    default:
+                        return <CTAControl />
+                }
+            }}
+        />
     )
 }
 
@@ -1273,35 +1301,11 @@ const Customers = () => {
     )
 }
 
-function TaglineControl(): JSX.Element {
+function Tagline(): JSX.Element {
     return (
         <p className="text-base font-medium">
             We make dev tools that help product engineers build successful products.
         </p>
-    )
-}
-
-function TaglineExperiment(): JSX.Element {
-    return (
-        <div className="my-4 max-w-[650px]">
-            <h1 className="!m-0">
-                Make sense of how people use your product – <em>and how to make it better</em>
-            </h1>
-            <p className="!m-0 !mt-2 font-medium">PostHog has all the tools you need to build great products.</p>
-        </div>
-    )
-}
-
-function Tagline(): JSX.Element {
-    const posthog = usePostHog()
-
-    return (
-        <RenderInClient
-            placeholder={null}
-            render={() =>
-                posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
-            }
-        />
     )
 }
 
