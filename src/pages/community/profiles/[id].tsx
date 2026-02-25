@@ -1437,7 +1437,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         <OSButton
                                             asLink
                                             size="md"
-                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
+                                            to={`https://forum.posthog.com/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
                                             tooltip={
                                                 <>
                                                     View in Strapi{' '}
