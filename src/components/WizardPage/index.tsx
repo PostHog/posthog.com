@@ -12,7 +12,6 @@ import TeamMember from 'components/TeamMember'
 import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo } from '../../constants/logos'
-export { default as CopyableCommand } from 'components/WizardCommand'
 import WizardCommand from 'components/WizardCommand'
 
 function WizardHeader(): JSX.Element {
