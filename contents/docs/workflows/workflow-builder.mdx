@@ -41,10 +41,16 @@ Draft workflows can also be archived, even if they contain invalid configuration
 
 Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are two types of triggers:
 
-| Trigger type | Description |
-|--------------|-------------|
-| Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
-| Webhook trigger | Programmatically start a workflow with a webhook |
+| Trigger type | Description | SDK required? |
+|--------------|-------------|---------------|
+| Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) | Yes |
+| Webhook trigger | Programmatically start a workflow with a webhook | No |
+
+<CalloutBox type="fyi" title="Do I need an SDK?">
+
+Event triggers require a [PostHog SDK to be installed](/docs/workflows/installation). Without an SDK, you're limited to webhook and manual triggers. See the [installation guide](/docs/workflows/installation) for setup instructions.
+
+</CalloutBox>
 
 ### Event triggers
 
