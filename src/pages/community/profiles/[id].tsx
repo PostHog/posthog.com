@@ -545,7 +545,7 @@ const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
 const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
 
 const unisexSizeDataIn = {
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: unisexSizes,
     rows: [
         { label: 'Length', values: ['26.25', '27.50', '28.50', '29.50', '30.50', '31.50'] },
         { label: 'Width', values: ['18.00', '19.50', '21.00', '22.50', '24.00', '25.50'] },
@@ -554,7 +554,7 @@ const unisexSizeDataIn = {
 }
 
 const unisexSizeDataCm = {
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: unisexSizes,
     rows: [
         { label: 'Length', values: ['66', '69', '72', '74', '77', '80'] },
         { label: 'Width', values: ['45', '49', '53', '57', '60', '64'] },
@@ -563,12 +563,12 @@ const unisexSizeDataCm = {
 }
 
 const womensSizeDataUS = {
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    sizes: femaleSizes,
     rows: [{ label: 'Fits Sizes', values: ['2-6', '6-10', '10-14', '14-18', '18-22', '23-27'] }],
 }
 
 const womensSizeDataUK = {
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    sizes: femaleSizes,
     rows: [{ label: 'Fits Sizes', values: ['6-10', '10-14', '14-18', '18-22', '22-26', '27-31'] }],
 }
 
@@ -1625,7 +1625,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         <OSButton
                                             asLink
                                             size="md"
-                                            to={`https://forum.posthog.com/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
+                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
                                             tooltip={
                                                 <>
                                                     View in Strapi{' '}

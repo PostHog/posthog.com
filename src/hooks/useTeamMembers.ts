@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from './useUser'
 import qs from 'qs'
 
@@ -22,147 +21,95 @@ export type TeamMember = {
 }
 
 export function useTeamMembers() {
-    const { getJwt, isModerator } = useUser()
-
-    const {
-        team: { teamMembers: staticMembers },
-    } = useStaticQuery(graphql`
-        query TeamDirectoryQuery {
-            team: allSqueakProfile(
-                filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
-                sort: { fields: startDate, order: ASC }
-            ) {
-                teamMembers: nodes {
-                    squeakId
-                    avatar {
-                        url
-                    }
-                    color
-                    firstName
-                    lastName
-                    companyRole
-                    country
-                    location
-                    pineappleOnPizza
-                    startDate
-                    teams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                    leadTeams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const baseMembers: TeamMember[] = staticMembers.map((m: any) => ({
-        id: m.squeakId,
-        avatarUrl: m.avatar?.url || null,
-        color: m.color || null,
-        firstName: m.firstName || null,
-        lastName: m.lastName || null,
-        companyRole: m.companyRole || null,
-        location: m.location || null,
-        country: m.country || null,
-        teams: (m.teams?.data || []).map((t: any) => t.attributes?.name),
-        leadsTeams: (m.leadTeams?.data || []).map((t: any) => t.attributes?.name),
-        pineappleOnPizza: m.pineappleOnPizza ?? null,
-        startDate: m.startDate || null,
-        tShirtFit: null,
-        tShirtSize: null,
-        tShirtAdditionalInfo: null,
-    }))
-
-    const [teamMembers, setTeamMembers] = useState<TeamMember[]>(baseMembers)
+    const { getJwt } = useUser()
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const fetchTShirtData = async () => {
-            const token = await getJwt()
-            if (!token) return
+        const fetchTeamMembers = async () => {
             try {
                 const query = qs.stringify(
                     {
-                        populate: { tShirt: true },
-                        filters: { teams: { id: { $notNull: true } } },
+                        populate: {
+                            avatar: { fields: ['url'] },
+                            teams: { fields: ['name'] },
+                            leadTeams: { fields: ['name'] },
+                            tShirt: true,
+                        },
+                        filters: {
+                            teams: { id: { $notNull: true } },
+                            id: { $ne: 28378 },
+                        },
                         pagination: { pageSize: 300 },
-                        fields: ['id'],
+                        sort: ['startDate:asc'],
                     },
                     { encodeValuesOnly: true }
                 )
-                const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                })
-                if (!res.ok) return
-                const { data } = await res.json()
-                if (!data) return
-                const tShirtMap = new Map<
-                    number,
-                    { fit: string | null; size: string | null; additionalInfo: string | null }
-                >()
-                for (const profile of data) {
-                    if (profile.attributes?.tShirt) {
-                        tShirtMap.set(profile.id, profile.attributes.tShirt)
-                    }
+
+                const token = await getJwt()
+                const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
+
+                const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, { headers })
+                if (!res.ok) {
+                    console.error('Failed to fetch team members', res.status)
+                    setLoading(false)
+                    return
                 }
-                setTeamMembers((prev) =>
-                    prev.map((m) => {
-                        const tShirt = tShirtMap.get(m.id)
-                        if (!tShirt) return m
-                        return {
-                            ...m,
-                            tShirtFit: tShirt.fit || null,
-                            tShirtSize: tShirt.size || null,
-                            tShirtAdditionalInfo: tShirt.additionalInfo || null,
-                        }
-                    })
-                )
+
+                const { data } = await res.json()
+                if (!data) {
+                    setLoading(false)
+                    return
+                }
+
+                const members: TeamMember[] = data.map((m: any) => ({
+                    id: m.id,
+                    avatarUrl: m.attributes?.avatar?.data?.attributes?.url || null,
+                    color: m.attributes?.color || null,
+                    firstName: m.attributes?.firstName || null,
+                    lastName: m.attributes?.lastName || null,
+                    companyRole: m.attributes?.companyRole || null,
+                    location: m.attributes?.location || null,
+                    country: m.attributes?.country || null,
+                    teams: (m.attributes?.teams?.data || []).map((t: any) => t.attributes?.name),
+                    leadsTeams: (m.attributes?.leadTeams?.data || []).map((t: any) => t.attributes?.name),
+                    pineappleOnPizza: m.attributes?.pineappleOnPizza ?? null,
+                    startDate: m.attributes?.startDate || null,
+                    tShirtFit: m.attributes?.tShirt?.fit || null,
+                    tShirtSize: m.attributes?.tShirt?.size || null,
+                    tShirtAdditionalInfo: m.attributes?.tShirt?.additionalInfo || null,
+                }))
+
+                setTeamMembers(members)
+                setLoading(false)
             } catch (err) {
-                console.error('Failed to fetch t-shirt data', err)
+                console.error('Failed to fetch team members', err)
+                setLoading(false)
             }
         }
-        fetchTShirtData()
+
+        fetchTeamMembers()
     }, [])
 
-    const updateLocation = async (profileId: number, location: string) => {
+    const updateProfile = async (profileId: number, updates: Partial<TeamMember>) => {
         const token = await getJwt()
         if (!token) return
 
-        const member = teamMembers.find((m) => m.id === profileId)
-        const name = [member?.firstName, member?.lastName].filter(Boolean).join(' ') || `#${profileId}`
-
-        setTeamMembers((prev) => prev.map((m) => (m.id === profileId ? { ...m, location } : m)))
+        setTeamMembers((prev) => prev.map((m) => (m.id === profileId ? { ...m, ...updates } : m)))
 
         try {
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
                 method: 'PUT',
-                body: JSON.stringify({ data: { location } }),
+                body: JSON.stringify({ data: updates }),
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
             })
-
-            if (res.ok) {
-                console.log(`%c✓ Saved location for ${name}: "${location}"`, 'color: #22c55e; font-weight: bold')
-            } else {
-                console.log(
-                    `%c✗ Failed to save location for ${name} (${res.status})`,
-                    'color: #ef4444; font-weight: bold'
-                )
-            }
         } catch (err) {
-            console.log(`%c✗ Network error saving location for ${name}`, 'color: #ef4444; font-weight: bold', err)
+            console.error('Failed to update profile', err)
         }
     }
 
-    return { teamMembers, loading: false, updateLocation }
+    return { teamMembers, loading, updateProfile }
 }

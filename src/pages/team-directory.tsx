@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
@@ -26,7 +26,6 @@ const columns = [
 
 function EditableLocationCell({ value, onSave }: { value: string | null; onSave: (newValue: string) => void }) {
     const [editValue, setEditValue] = useState(value || '')
-    const inputRef = useRef<HTMLInputElement>(null)
 
     const handleSave = () => {
         const trimmed = editValue.trim()
@@ -37,8 +36,6 @@ function EditableLocationCell({ value, onSave }: { value: string | null; onSave:
 
     return (
         <input
-            ref={inputRef}
-            type="text"
             value={editValue}
             onChange={(e) => setEditValue(e.target.value)}
             onBlur={handleSave}
@@ -59,7 +56,7 @@ function memberToRow(
     member: TeamMember,
     index: number,
     isEditing: boolean,
-    updateLocation: (id: number, location: string) => void
+    updateProfile: (id: number, updates: Partial<TeamMember>) => void
 ) {
     return {
         key: String(member.id),
@@ -76,7 +73,10 @@ function memberToRow(
             { content: member.companyRole || '—', className: 'text-sm' },
             {
                 content: isEditing ? (
-                    <EditableLocationCell value={member.location} onSave={(val) => updateLocation(member.id, val)} />
+                    <EditableLocationCell
+                        value={member.location}
+                        onSave={(val) => updateProfile(member.id, { location: val })}
+                    />
                 ) : (
                     member.location || '—'
                 ),
@@ -95,7 +95,7 @@ function memberToRow(
 }
 
 export default function Team(): JSX.Element {
-    const { teamMembers, loading, updateLocation } = useTeamMembers()
+    const { teamMembers, loading, updateProfile } = useTeamMembers()
     const [filteredMembers, setFilteredMembers] = useState<TeamMember[] | null>(null)
     const [isEditing, setIsEditing] = useState(false)
 
@@ -240,7 +240,7 @@ export default function Team(): JSX.Element {
                             columns={columns}
                             size="sm"
                             rows={displayMembers.map((member, index) =>
-                                memberToRow(member, index, isEditing, updateLocation)
+                                memberToRow(member, index, isEditing, updateProfile)
                             )}
                         />
                     </>
