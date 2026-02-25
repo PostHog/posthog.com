@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from './useUser'
+import qs from 'qs'
 
 export type TeamMember = {
     id: number
@@ -44,11 +45,6 @@ export function useTeamMembers() {
                     location
                     pineappleOnPizza
                     startDate
-                    tShirt {
-                        fit
-                        size
-                        additionalInfo
-                    }
                     teams {
                         data {
                             attributes {
@@ -81,12 +77,60 @@ export function useTeamMembers() {
         leadsTeams: (m.leadTeams?.data || []).map((t: any) => t.attributes?.name),
         pineappleOnPizza: m.pineappleOnPizza ?? null,
         startDate: m.startDate || null,
-        tShirtFit: m.tShirt?.fit || null,
-        tShirtSize: m.tShirt?.size || null,
-        tShirtAdditionalInfo: m.tShirt?.additionalInfo || null,
+        tShirtFit: null,
+        tShirtSize: null,
+        tShirtAdditionalInfo: null,
     }))
 
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>(baseMembers)
+
+    useEffect(() => {
+        const fetchTShirtData = async () => {
+            const token = await getJwt()
+            if (!token) return
+            try {
+                const query = qs.stringify(
+                    {
+                        populate: { tShirt: true },
+                        filters: { teams: { id: { $notNull: true } } },
+                        pagination: { pageSize: 300 },
+                        fields: ['id'],
+                    },
+                    { encodeValuesOnly: true }
+                )
+                const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                if (!res.ok) return
+                const { data } = await res.json()
+                if (!data) return
+                const tShirtMap = new Map<
+                    number,
+                    { fit: string | null; size: string | null; additionalInfo: string | null }
+                >()
+                for (const profile of data) {
+                    if (profile.attributes?.tShirt) {
+                        tShirtMap.set(profile.id, profile.attributes.tShirt)
+                    }
+                }
+                setTeamMembers((prev) =>
+                    prev.map((m) => {
+                        const tShirt = tShirtMap.get(m.id)
+                        if (!tShirt) return m
+                        return {
+                            ...m,
+                            tShirtFit: tShirt.fit || null,
+                            tShirtSize: tShirt.size || null,
+                            tShirtAdditionalInfo: tShirt.additionalInfo || null,
+                        }
+                    })
+                )
+            } catch (err) {
+                console.error('Failed to fetch t-shirt data', err)
+            }
+        }
+        fetchTShirtData()
+    }, [])
 
     const updateLocation = async (profileId: number, location: string) => {
         const token = await getJwt()
