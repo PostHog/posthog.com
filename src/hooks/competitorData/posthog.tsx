@@ -171,7 +171,7 @@ export const posthog = {
             features: {
                 actions: true,
                 advertising_analytics: 'Beta',
-                ai_analysis: false,
+                ai_analysis: true,
                 alerts: true,
                 anomaly_detection: true,
                 any_step_order: true,
@@ -460,7 +460,7 @@ export const posthog = {
                 popover: true,
                 rating: true,
                 sdk_support: true,
-                sentiment_analysis: false,
+                sentiment_analysis: true,
                 slack_integration: true,
                 survey_templates: true,
                 target_by_feature_flag: true,
