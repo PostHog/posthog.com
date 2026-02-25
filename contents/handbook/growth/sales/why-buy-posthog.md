@@ -81,10 +81,8 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 - Our [usage-based pricing](/handbook/how-we-make-money) means that you’ll only pay for what you use and have full control of those costs, unlike opaque software contracts, where the prices go up every year with zero innovation attached.  
 - Plus, [the way we do sales is different](/sales).
 
-## Per-product sales enablement
+## Per-product sales enablement content
 
-The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist in [an internal Sales Enablement repo](https://github.com/PostHog/sales-enablement) and the content is growing over time. Whenever a new product launches, the PMM on that launch will create new content for it. 
 
-- [Managed data warehouse (DuckDB)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
-
-If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  
+If there are additional products or features you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  
