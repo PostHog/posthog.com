@@ -178,6 +178,18 @@ export const HomepageCards = [
         // ImageSize: 'w-[250px] mt-8',
     },
     {
+        top: 'Networking events are your things',
+        bottom: <>We only put on high-quality, value-add events.</>,
+        color: '#FFD89E',
+        Image: (
+            <CloudinaryImage
+                width={250}
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/ru_bizdev_9fcd6556d0.png"
+            />
+        ),
+        // ImageSize: 'w-[250px]',
+    },
+    {
         top: 'You love being out of the loop',
         bottom: (
             <>
