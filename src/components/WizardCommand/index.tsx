@@ -41,7 +41,7 @@ export default function WizardCommand({
                     } ${className}`}
                 >
                     <IconChevronRight className="size-4 opacity-50" />
-                    <code className="!bg-transparent !p-0 !text-inherit !border-0 mr-1">{code}</code>
+                    <code className="!bg-transparent !p-0 !border-0 mr-1 text-white dark:text-yellow">{code}</code>
                     <IconCopy className="size-4 opacity-60 group-hover:opacity-80" />
                 </button>
             </ZoomHover>
