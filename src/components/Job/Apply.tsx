@@ -341,7 +341,10 @@ const Form = ({
     )
 }
 
-const code = 'X7DABDB33723'
+const code = process.env.SHOPIFY_STICKER_CODE
+if (!code) {
+    throw new Error('SHOPIFY_STICKER_CODE is not set')
+}
 
 const ApplicationSuccess = ({
     isInExcludedCountry,
