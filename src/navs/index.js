@@ -557,6 +557,7 @@ export const handbookSidebar = [
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
             { name: 'Advisories & CVEs', url: '/handbook/company/security-advisories' },
+            { name: 'Use of AI tools', url: '/handbook/company/use-of-ai-tools' },
         ],
     },
     {
