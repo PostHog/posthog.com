@@ -93,7 +93,7 @@ jobs:
             - name: Get timestamp (final)
               if: always()
               id: timestamp-final
-              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p UTC')" >> $GITHUB_OUTPUT
+              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
 
             - name: Comment on success
               if: success()
@@ -106,7 +106,7 @@ jobs:
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
 
-                      | Status | Details | Updated |
+                      | Status | Details | Updated (UTC) |
                       |--------|---------|---------|
                       | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
 
