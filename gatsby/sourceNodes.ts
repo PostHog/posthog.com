@@ -1039,6 +1039,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         events.forEach((event) => {
             const node = {
                 ...event,
+                strapiID: event.id,
                 id: createNodeId(`event-${event.id}`),
                 internal: {
                     type: 'Event',

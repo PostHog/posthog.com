@@ -41,20 +41,20 @@ Once connected, give Replit Agent this prompt to add PostHog with error tracking
 Add PostHog to this project for error tracking and analytics with source map uploads.
 
 Use the PostHog MCP to:
-- Get the project API token (from `projects-get`) → set as `VITE_POSTHOG_KEY`
+- Get the project token (from `projects-get`) → set as `VITE_POSTHOG_TOKEN`
 - Get the host URL → set as `VITE_POSTHOG_HOST`
-- Set `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST` as shared environment variables so they work in both development and production
+- Set `VITE_POSTHOG_TOKEN` and `VITE_POSTHOG_HOST` as shared environment variables so they work in both development and production
 
 Install packages: posthog-js and @posthog/cli
 
 Create a PostHog client at client/src/lib/posthog.ts that:
-- Initializes with defaults: '<ph_posthog_js_defaults>', capture_exceptions: true, autocapture: true, capture_pageview: true
-- Uses env vars VITE_POSTHOG_KEY and VITE_POSTHOG_HOST
-- Exports a wrapper around posthog.captureException(error) - do NOT manually capture $exception events
+- Initializes with defaults: `'<ph_posthog_js_defaults>', capture_exceptions: true, autocapture: true, capture_pageview: true`
+- Uses env vars `VITE_POSTHOG_TOKEN` and `VITE_POSTHOG_HOST`
+- Exports a wrapper around `posthog.captureException(error)` - do NOT manually capture $exception events
 
-Initialize PostHog in App.tsx with useEffect.
+Initialize PostHog in `App.tsx` with `useEffect`.
 
-Add an error boundary component that uses posthog.captureException() to capture React errors.
+Add an error boundary component that uses `posthog.captureException()` to capture React errors.
 
 Update `script/build.ts` to:
 - Build with `sourcemap: true`
@@ -124,7 +124,7 @@ Check that `POSTHOG_CLI_TOKEN` and `POSTHOG_CLI_ENV_ID` are set as **secrets** i
 
 ### Events not appearing
 
-Verify `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST` are set correctly and that PostHog is initialized before your app renders.
+Verify `VITE_POSTHOG_TOKEN` and `VITE_POSTHOG_HOST` are set correctly and that PostHog is initialized before your app renders.
 
 ### MCP not connecting
 

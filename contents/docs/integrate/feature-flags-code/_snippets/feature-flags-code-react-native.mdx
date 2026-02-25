@@ -119,7 +119,7 @@ if (lastActiveDate < migrationDate) {
 You can configure the `featureFlagsRequestTimeoutMs` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 10 seconds.
 
 ```react-native
-export const posthog = new PostHog('<ph_project_api_key>', {
+export const posthog = new PostHog('<ph_project_token>', {
   // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
   host: '<ph_client_api_host>',
   featureFlagsRequestTimeoutMs: 10000 // Time in milliseconds. Default is 10000 (10 seconds).

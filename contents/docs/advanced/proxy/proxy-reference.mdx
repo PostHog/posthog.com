@@ -32,14 +32,14 @@ When using a proxy, set both `api_host` and `ui_host`:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -80,14 +80,14 @@ Use a relative path to avoid cross-origin issues:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -97,7 +97,7 @@ posthog.init('<ph_project_api_key>', {
 
 ### Events not appearing
 
-1. **Check your API key**: Find it in [project settings](https://us.posthog.com/settings/project#variables). Use the project API key, not a personal key.
+1. **Check your token**: Find it in [project settings](https://us.posthog.com/settings/project#variables). Use the project token, not a personal key.
 2. **Verify the region**: Must match your PostHog project.
 3. **Wait a few minutes**: Check the [activity feed](https://us.posthog.com/activity/explore) before assuming it's broken.
 

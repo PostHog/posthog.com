@@ -36,15 +36,11 @@ You can create a slider or carousel of images by wrapping them in the `<ImageSli
 </ImageSlider>
 ```
 
-See an example in our [open-source analytics tools post](/blog/best-open-source-analytics-tools #1-posthog).
+See an example in our [open-source analytics tools post](/blog/best-open-source-analytics-tools#1-posthog).
 
 ## Videos
 
-There are a few options for embedding videos, and the [style guide](/handbook/content/posthog-style-guide#adding-media) can help you decide which to use.
-
-### Product videos
-
-Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos. It's best for short videos.
+Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos.
 
 1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
 
@@ -226,7 +222,7 @@ Here is a list of all the languages that are supported in codeblocks:
 | YAML | `yaml` |
 | Git | `git` |
 
-> **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the [imports in languages.tsx](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx #L6) and open a PR.
+> **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the [imports in languages.tsx](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
 
 ### Multi-language code blocks
 
@@ -699,7 +695,7 @@ click here
 
 ### Private links
 
-Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL (like a Slack link or private GitHub repo). Use the `<PrivateLink />` component for this. See an example ([on our share options page.](/handbook/people/share-options #what-are-my-share-options-actually-worth))
+Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL (like a Slack link or private GitHub repo). Use the `<PrivateLink />` component for this. See an example ([on our share options page.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
 ```
 <PrivateLink url="https://path/to/private/link">
