@@ -93,30 +93,17 @@ function DemoVideo(): JSX.Element {
     )
 }
 
-const wizardIndicatorColors = {
-    'Coming soon': 'yellow',
-    'In development': 'blue',
-}
-
 function SupportedProducts(): JSX.Element {
     return (
         <div className="border border-border rounded-md p-4 not-prose @lg:float-right @lg:ml-6 @lg:mb-2 @lg:max-w-[200px]">
             <p className="text-sm font-semibold mb-2 opacity-70">Supported products</p>
-            {/* be sure to keep this in sync with the products in @contents/docs/ai-engineering/ai-wizard.mdx */}
             <ProductList
-                products={[
-                    'product_analytics',
-                    'web_analytics',
-                    'session_replay',
-                    'error_tracking',
-                    'feature_flags',
-                    'experiments',
-                    'llm_analytics',
-                    'logs',
+                sourceField="wizardSupport"
+                sourceValues={[
+                    true,
+                    { value: 'In development', color: 'blue' },
+                    { value: 'Coming soon', color: 'yellow' },
                 ]}
-                urlPrefix="/"
-                indicatorField="wizardSupport"
-                indicatorColors={wizardIndicatorColors}
                 className="space-y-1.5"
                 itemClassName="flex items-center gap-2 text-sm !text-inherit hover:opacity-75"
                 iconSize="size-5"

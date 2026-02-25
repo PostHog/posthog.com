@@ -14,25 +14,11 @@ Set up the PostHog platform in minutes, with a single command.
 
 When it's done, your project is onboarded with:
 
-<!-- be sure to keep this in sync with @pages/wizard/index.tsx -->
-
 <ProductList
 className="grid gap-4 grid-cols-2 not-prose"
-indicatorField="wizardSupport"
-indicatorColors={{
-"Coming soon": "yellow",
-"In development": "red",
-}}
-products={[
-"product_analytics",
-"web_analytics",
-"session_replay",
-"error_tracking",
-"feature_flags",
-"experiments",
-"llm_analytics",
-"logs",
-]}
+urlPrefix="/docs/"
+sourceField="wizardSupport"
+sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
 />
 
 ## How it works
