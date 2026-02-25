@@ -18,8 +18,8 @@ const columns = [
     { name: 'Teams', width: 'minmax(200px,1fr)', align: 'left' as const },
     { name: 'Team lead', width: 'minmax(100px,auto)', align: 'left' as const },
     { name: 'Pineapple?', width: 'auto', align: 'center' as const },
-    { name: 'T-shirt fit', width: 'auto', align: 'left' as const },
-    { name: 'T-shirt size', width: 'auto', align: 'left' as const },
+    { name: 'T-shirt fit', width: 'minmax(82px,auto)', align: 'left' as const },
+    { name: 'T-shirt size', width: 'minmax(92px,auto)', align: 'left' as const },
     { name: 'T-shirt info', width: 'minmax(120px,auto)', align: 'left' as const },
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]

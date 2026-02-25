@@ -28,41 +28,51 @@ export function useTeamMembers() {
     useEffect(() => {
         const fetchTeamMembers = async () => {
             try {
-                const query = qs.stringify(
-                    {
-                        populate: {
-                            avatar: { fields: ['url'] },
-                            teams: { fields: ['name'] },
-                            leadTeams: { fields: ['name'] },
-                            tShirt: true,
-                        },
-                        filters: {
-                            teams: { id: { $notNull: true } },
-                            id: { $ne: 28378 },
-                        },
-                        pagination: { pageSize: 300 },
-                        sort: ['startDate:asc'],
-                    },
-                    { encodeValuesOnly: true }
-                )
-
                 const token = await getJwt()
                 const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
 
-                const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, { headers })
-                if (!res.ok) {
-                    console.error('Failed to fetch team members', res.status)
-                    setLoading(false)
-                    return
+                const allData: any[] = []
+                let page = 1
+                let pageCount = 1
+
+                while (page <= pageCount) {
+                    const query = qs.stringify(
+                        {
+                            populate: {
+                                avatar: { fields: ['url'] },
+                                teams: { fields: ['name'] },
+                                leadTeams: { fields: ['name'] },
+                                tShirt: true,
+                            },
+                            filters: {
+                                teams: { id: { $notNull: true } },
+                                id: { $ne: 28378 },
+                            },
+                            pagination: { page, pageSize: 100 },
+                            sort: ['startDate:asc'],
+                        },
+                        { encodeValuesOnly: true }
+                    )
+
+                    const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, { headers })
+                    if (!res.ok) {
+                        console.error('Failed to fetch team members', res.status)
+                        setLoading(false)
+                        return
+                    }
+
+                    const { data, meta } = await res.json()
+                    if (!data) {
+                        setLoading(false)
+                        return
+                    }
+
+                    allData.push(...data)
+                    pageCount = meta?.pagination?.pageCount || 1
+                    page++
                 }
 
-                const { data } = await res.json()
-                if (!data) {
-                    setLoading(false)
-                    return
-                }
-
-                const members: TeamMember[] = data.map((m: any) => ({
+                const members: TeamMember[] = allData.map((m: any) => ({
                     id: m.id,
                     avatarUrl: m.attributes?.avatar?.data?.attributes?.url || null,
                     color: m.attributes?.color || null,
