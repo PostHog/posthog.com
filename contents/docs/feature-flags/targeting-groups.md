@@ -1,12 +1,37 @@
 ---
-title: 'Targeting feature flags on groups, pages, machines, and more'
+title: ‘Targeting feature flags on devices, groups, pages, machines, and more’
 showTitle: true
 sidebar: Docs
 ---
 
-To decide what value to return, PostHog’s feature flag service uses a flag key and an entity. Which entity to use it up to you, and these don't necessarily need to be _users_ – you can also target organizations, pages, machines, and more. 
+To decide what value to return, PostHog’s feature flag service uses a flag key and an entity. Which entity to use is up to you, and these don’t necessarily need to be _users_ – you can also target devices, organizations, pages, machines, and more.
 
 This tutorial shows you how to target these non-user entities in your use of feature flags.
+
+## Targeting by device
+
+By default, feature flags match by **user**, meaning the flag is evaluated based on the user’s distinct ID. This works well for in-app features where users are logged in.
+
+For flags that target anonymous users — such as landing page experiments, onboarding flows, or signup forms — matching by **device** is often a better choice. When you match by device, PostHog uses the device ID (rather than the user’s distinct ID) to determine the flag value. This ensures a consistent experience on the device, even after the user logs in.
+
+To target by device, change the **Match by** value under **Release conditions** to **Device** when creating or editing your feature flag.
+
+### When to use device targeting
+
+- **Anonymous user experiences:** If a user sees a new signup flow before logging in, matching by device ensures they continue seeing the same variant after they create an account and log in.
+- **Pre-authentication features:** Landing pages, pricing pages, or other features shown before a user is identified.
+- **Experiments on anonymous traffic:** When running A/B tests on pages visited by both anonymous and logged-in users, device targeting prevents users from switching variants mid-experiment.
+
+### How it differs from user targeting
+
+| | Match by user | Match by device |
+|---|---|---|
+| **Evaluation basis** | User’s distinct ID | Device ID |
+| **Best for** | Logged-in, identified users | Anonymous or pre-login experiences |
+| **Consistent across login** | May change if distinct ID changes | Stays consistent on the same device |
+| **Cross-device consistency** | Yes, if user is identified | No, each device is evaluated independently |
+
+> **Note:** Device targeting is a simpler alternative to [persisting flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional). If your flag only needs to be consistent on the same device through the login flow, device targeting achieves this without the performance tradeoffs of flag persistence.
 
 ## Targeting groups, teams, or organizations
 

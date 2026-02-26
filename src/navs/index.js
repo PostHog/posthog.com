@@ -3826,7 +3826,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Target flags with groups',
+                    name: 'Target flags with devices & groups',
                     url: '/docs/feature-flags/targeting-groups',
                     icon: 'IconPeople',
                     color: 'purple',

@@ -80,6 +80,12 @@ This specifies the conditions a user must meet to access the feature flag and re
 
 Condition sets are evaluated from **top to bottom**, and the **first** condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
+By default, release conditions **match by user**, meaning the flag is evaluated based on the user's distinct ID. You can change this using the **Match by** dropdown:
+
+- **User** (default) – Evaluates based on the user's distinct ID. Best for in-app features targeting logged-in users.
+- **Device** – Evaluates based on the device ID. Best for flags targeting anonymous users, as it ensures a consistent experience on the device even after the user logs in. See [targeting by device](/docs/feature-flags/targeting-groups#targeting-by-device) for more details.
+- **Group** (requires [group analytics](/docs/product-analytics/group-analytics)) – Evaluates based on a group key (e.g., company, team, or organization). See [targeting groups](/docs/feature-flags/targeting-groups#targeting-groups-teams-or-organizations) for more details.
+
 Percentage rollouts are available for all flags. More options depend on your PostHog setup:
 
 - If GeoIP is enabled, you can target based on geographic location.
@@ -150,6 +156,8 @@ Automatically track how often this flag is called and what values are returned. 
 Feature flag values are calculated based on a user's properties. Since it's possible for a user to have different properties before and after login, they may receive different feature flag values before and after logging in.
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same.
+
+> **Tip:** If your flag targets anonymous users and you just need the flag value to stay consistent through the login flow on the same device, consider using [device targeting](/docs/feature-flags/targeting-groups#targeting-by-device) instead. It achieves this without the performance tradeoffs below.
 
 However, this feature comes with limitations and tradeoffs. In our experience, these tradeoffs make it **not worthwhile** for the majority of our users.
 
