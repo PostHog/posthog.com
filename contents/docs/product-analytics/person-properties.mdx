@@ -128,6 +128,51 @@ On a person's property list, you can add properties to them by clicking the "New
 
 You can find a list of all person properties in the [properties](https://us.posthog.com/data-management/properties?type=person) tab in **data management**. Just change the dropdown from **event properties** to ***person properties**.
 
+## How to retrieve historical person properties
+
+You can retrieve person properties as they existed at any historical point in time using the API. This reconstructs properties by replaying `$set` and `$set_once` operations from events up to the specified timestamp.
+
+Send a `GET` request to `/api/projects/:project_id/persons/properties_at_time/` with the following query parameters:
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `distinct_id` | `string` | Either this or `person_id` | The distinct ID of the person. Mutually exclusive with `person_id`. |
+| `person_id` | `string` | Either this or `distinct_id` | The person UUID. Mutually exclusive with `distinct_id`. |
+| `timestamp` | `string` | Yes | ISO datetime for the point in time, e.g. `2024-06-15T14:30:00Z`. |
+| `include_set_once` | `boolean` | No | Whether to include `$set_once` operations. Defaults to `false`. |
+
+```bash
+curl \
+  -H "Authorization: Bearer <your_personal_api_key>" \
+  "<ph_app_host>/api/projects/:project_id/persons/properties_at_time/?distinct_id=user123&timestamp=2024-06-15T14:30:00Z"
+```
+
+The response includes the full person object with `properties` replaced by the reconstructed point-in-time values, plus a `point_in_time_metadata` object:
+
+```json
+{
+  "id": 123,
+  "uuid": "01234567-89ab-cdef-0123-456789abcdef",
+  "distinct_ids": ["user123", "user456"],
+  "properties": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "signup_date": "2024-06-01"
+  },
+  "point_in_time_metadata": {
+    "queried_timestamp": "2024-06-15T14:30:00+00:00",
+    "include_set_once": false,
+    "distinct_id_used": "user123",
+    "person_id_used": null,
+    "query_mode": "distinct_id",
+    "distinct_ids_queried": ["user123", "user456"],
+    "distinct_ids_count": 2
+  }
+}
+```
+
+This endpoint requires the `person:read` scope. See the [API docs](/docs/api) for authentication details.
+
 ## Person display name
 
 The display name is the person property value shown in the PostHog UI to represent a user. It is their person `distinct_id` by default, but can be configured in [project settings](https://us.posthog.com/settings/project#person-display-name).
