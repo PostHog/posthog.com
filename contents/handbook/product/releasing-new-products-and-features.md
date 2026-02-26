@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 This guide walks you through the full lifecycle of releasing new products and features at PostHog, from initial planning to general availability.
 
-For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments/blob/main/.github/ISSUE_TEMPLATE/new-product.md).
+For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md).
 
 ## Overview of the product lifecycle
 
@@ -90,7 +90,7 @@ After a week in any new beta, users will trigger an automatic email from the `be
 
 Regardless, emails to this Google Group will sync to the PostHog Feedback Slack channel for general awareness. Team leads are encouraged to respond to beta feedback emails.
 
-Teams can collect additional feedback if needed and the Brand & Vibes team is able to help with creating feedback emails or funnels.
+Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
 
 ## Phase 4: Launching to general availability
 

@@ -70,14 +70,15 @@ These columns are available for all platforms in the marketing analytics dashboa
 
 Each advertising platform provides data using different field names. PostHog normalizes these into the standard columns above.
 
-<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Microsoft Ads', 'TikTok Ads', 'Reddit Ads']}>
+<Tab.Group tabs={['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Bing Ads', 'TikTok Ads', 'Reddit Ads', 'Snapchat Ads']}>
 <Tab.List>
 <Tab>Google Ads</Tab>
 <Tab>Meta Ads</Tab>
 <Tab>LinkedIn Ads</Tab>
-<Tab>Microsoft Ads</Tab>
+<Tab>Bing Ads</Tab>
 <Tab>TikTok Ads</Tab>
 <Tab>Reddit Ads</Tab>
+<Tab>Snapchat Ads</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -185,6 +186,22 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 **Required tables:** `campaigns` and `campaign_report`
 
 </Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Snapchat Ads Field | Notes | Platform Docs |
+|----------------|-------------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | [Snapchat Campaigns API](https://developers.snap.com/api/marketing-api/Ads-API/campaigns) |
+| `ID` | `id` | Campaign ID | [Snapchat Campaigns API](https://developers.snap.com/api/marketing-api/Ads-API/campaigns) |
+| `Impressions` | `impressions` | Impression Count | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Clicks` | `swipes` | Snapchat uses "swipes" as the equivalent of clicks | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Cost` | `spend` | Divided by 1,000,000 (stored in micros). Converted from `currency` if available. | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Reported Conversion` | `conversion_purchases` | # of attributed "PURCHASE" conversion events | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Reported Conversion Value` | `conversion_purchases_value` | Value of attributed "PURCHASE" conversion events (microcurrency in Ad Account's currency) | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| Date field | `start_time` | Start time of reporting period | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+
+**Required tables:** `campaigns` and `campaign_stats`
+
+</Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
 
@@ -200,6 +217,7 @@ PostHog converts all monetary values (costs and conversion values) to your [base
 | Bing Ads | `currency_code` | Base currency |
 | TikTok Ads | `currency` | Base currency |
 | Reddit Ads | `currency` | Base currency |
+| Snapchat Ads | `currency` | Base currency |
 
 ## Related documentation
 

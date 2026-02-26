@@ -30,6 +30,10 @@ jobs:
                   comment-author: 'github-actions[bot]'
                   body-includes: '<!-- cloudflare-pages-preview -->'
 
+            - name: Get timestamp
+              id: timestamp
+              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
+
             - name: Comment pending
               id: comment
               uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
@@ -40,7 +44,10 @@ jobs:
                   body: |
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
-                      🔄 Building... [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+                      | Status | Details | Updated (UTC) |
+                      |--------|---------|---------|
+                      | 🟡 **Building** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp.outputs.time }} |
 
             - name: Checkout
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -71,6 +78,8 @@ jobs:
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
             - name: Deploy to Cloudflare Pages
               id: deploy
@@ -80,6 +89,11 @@ jobs:
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   packageManager: pnpm
                   command: pages deploy public --project-name=posthog-preview --branch=pr-${{ github.event.pull_request.number }}
+
+            - name: Get timestamp (final)
+              if: always()
+              id: timestamp-final
+              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
 
             - name: Comment on success
               if: success()
@@ -91,7 +105,10 @@ jobs:
                   body: |
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
-                      ${{ steps.deploy.outputs.deployment-url }}
+
+                      | Status | Details | Updated (UTC) |
+                      |--------|---------|---------|
+                      | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
 
             - name: Comment on failure
               if: failure()
@@ -103,4 +120,15 @@ jobs:
                   body: |
                       <!-- cloudflare-pages-preview -->
                       ### Deploy preview
-                      ❌ Failed - [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+                      | Status | Details | Updated (UTC) |
+                      |--------|---------|---------|
+                      | 🔴 **Failed** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp-final.outputs.time }} |
+
+                      Push a fix or re-run the workflow to try again.
+
+                      <details><summary>Common culprits</summary>
+
+                      - **MDX issues** - unescaped `<`/`>` characters, unclosed tags, or malformed JSX
+                      - **External API timeouts** - GitHub, Strapi, or Ashby occasionally hiccup
+                      </details>

@@ -6,12 +6,14 @@ import OSButton from 'components/OSButton'
 
 // Helper function to create markdown URL from page path
 export const getMarkdownUrl = (path: string): string => {
+    if (!path || path === '/') return ''
     const origin = typeof window !== 'undefined' ? window.location.origin : 'https://posthog.com'
-    return `${origin}${path}.md`
+    return `${origin}${path.startsWith('/') ? path : `/${path}`}.md`
 }
 
 // Check if the markdown URL exists (returns 200) or not (returns 404)
 export const checkMarkdownUrlExists = async (pageUrl: string): Promise<boolean> => {
+    if (!pageUrl || pageUrl === '/') return false
     try {
         const markdownUrl = getMarkdownUrl(pageUrl)
         const response = await fetch(markdownUrl, { method: 'HEAD' })
@@ -58,8 +60,6 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     const menuItemIconStyles = 'size-4'
 
     const markdownUrl = getMarkdownUrl(pageUrl)
-
-    console.log('markdownUrl', markdownUrl)
 
     const handleCopyMarkdown = async () => {
         setPopoverOpen(false)
