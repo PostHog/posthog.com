@@ -5,6 +5,9 @@ showTitle: true
 date: 2025-09-29
 author:
     - benjackwhite
+tags:
+    - post-mortem
+
 ---
 
 Internal post-mortem: <https://github.com/PostHog/incidents-analysis/pull/120>

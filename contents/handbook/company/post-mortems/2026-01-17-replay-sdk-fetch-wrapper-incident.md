@@ -5,6 +5,8 @@ showTitle: true
 date: 2026-01-17
 author:
     - benjackwhite
+tags:
+    - post-mortem
 ---
 
 **Date:** January 14-19, 2026
