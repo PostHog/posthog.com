@@ -25,6 +25,23 @@ For cached LLM responses, our pricing models include cached token pricing which 
 
 We also take into account the reasoning / thinking tokens for models that support it.
 
+### Cache token accounting
+
+Different providers report cache tokens differently relative to `$ai_input_tokens`:
+
+- **Exclusive** (Anthropic, Claude models): `$ai_input_tokens` does **not** include cache tokens. Cache read and write tokens are reported separately.
+- **Inclusive** (OpenAI, Gemini, and others): `$ai_input_tokens` **includes** cache tokens as a subset.
+
+PostHog auto-detects which style to use based on the `$ai_provider` and `$ai_model` properties.
+If you're capturing events manually through a framework that normalizes token counts (e.g., Pydantic AI reports all providers in the inclusive style), the auto-detection may not match your data and costs can be miscalculated.
+
+You can override the auto-detection by setting `$ai_cache_reporting_exclusive` on the event:
+
+- `true`: cache tokens are **not** included in `$ai_input_tokens`
+- `false`: cache tokens **are** included in `$ai_input_tokens`
+
+When this property is not set, PostHog defaults to `true` for Anthropic provider or Claude models, `false` otherwise.
+
 ## Setting custom pricing
 
 You can override PostHog's automatic cost calculation by providing custom pricing for your LLM models. This is useful when:
