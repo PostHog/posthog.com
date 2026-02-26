@@ -2,6 +2,9 @@
 title: Feature flags service outage
 sidebar: Handbook
 showTitle: true
+date: 2025-09-29
+author:
+    - benjackwhite
 ---
 
 Internal post-mortem: <https://github.com/PostHog/incidents-analysis/pull/120>

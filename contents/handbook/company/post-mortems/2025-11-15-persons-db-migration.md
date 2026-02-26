@@ -2,6 +2,9 @@
 title: Persons database migration
 sidebar: Handbook
 showTitle: true
+date: 2025-11-15
+author:
+    - benjackwhite
 ---
 
 Between November 11 and November 15, 2025 we hit a Postgres limit that required us to migrate our Persons database for US Cloud. This led to ingestion delays which had a knock-on effect for products relying on person data, including feature flags and experiments.

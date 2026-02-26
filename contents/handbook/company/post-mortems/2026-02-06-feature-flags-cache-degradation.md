@@ -2,6 +2,9 @@
 title: Feature flags cache degradation
 sidebar: Handbook
 showTitle: true
+date: 2026-02-06
+author:
+    - benjackwhite
 ---
 
 Between February 2-6, 2026, PostHog's feature flags cache workers experienced escalating memory pressure, resulting in degraded cache update reliability. The issue was stabilized on February 6 at 22:34 UTC.

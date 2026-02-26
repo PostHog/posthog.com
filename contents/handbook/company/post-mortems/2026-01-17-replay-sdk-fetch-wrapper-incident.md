@@ -2,6 +2,9 @@
 title: Replay SDK fetch wrapper incident
 sidebar: Handbook
 showTitle: true
+date: 2026-01-17
+author:
+    - benjackwhite
 ---
 
 **Date:** January 14-19, 2026

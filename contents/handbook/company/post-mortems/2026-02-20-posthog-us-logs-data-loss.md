@@ -2,6 +2,9 @@
 title: Logs data loss
 sidebar: Handbook
 showTitle: true
+date: 2026-02-20
+author:
+    - benjackwhite
 ---
 
 On February 19th, PostHog's Logs product experienced a major incident, which caused the loss of data collected more than 3 days ago in our US region. This data loss only impacted the Logs product, all other PostHog data is intact.

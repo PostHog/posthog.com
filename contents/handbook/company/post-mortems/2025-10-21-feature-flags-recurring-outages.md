@@ -2,6 +2,9 @@
 title: Feature flags recurring outages
 sidebar: Handbook
 showTitle: true
+date: 2025-10-21
+author:
+    - benjackwhite
 ---
 
 Between October 21 and October 30, 2025, the PostHog Feature Flags service experienced four separate incidents, exposing systemic architectural weaknesses that required comprehensive remediation. This post-mortem documents all four incidents and our path to stability.
