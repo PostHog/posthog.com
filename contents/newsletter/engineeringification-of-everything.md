@@ -4,7 +4,7 @@ date: 2026-02-23
 author:
  - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/space_hog_meme_76572a446f.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/space_hog_meme1_586f6b5aed.png
 featuredImageType: full
 tags:
   - Engineering
