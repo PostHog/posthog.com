@@ -58,7 +58,7 @@ We also default to charging as little as possible while still making a sensible 
 
 ## Core features
 
-This comparison will compare all available features, regardless of pricing tier. Visit the [pricing section in the FAQ](#how-much-do-posthog-and-fullstory-cost) for more information on pricing.
+This comparison will compare all available features, regardless of pricing tier. Visit the pricing section [in the FAQ](#frequently-asked-questions) for more information on pricing.
 
 <p>
 <ProductComparisonTable
@@ -168,30 +168,12 @@ PostHog's [session replay](/docs/session-replay) includes console logs, network 
 
 Different types of heatmaps enable you to see where users are focusing their attention – or even precisely where they are looking on a page.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'fullstory']}
     rows={['heatmaps.features.clickmaps', 'heatmaps.features.scrollmaps', 'heatmaps.features.movement_maps']}
 />
-
-### Feature flags and experiments
-
-This is a major differentiator. PostHog includes feature flags, A/B testing, and experiments natively. FullStory doesn't offer any of these – you'd need a separate tool like [LaunchDarkly](/blog/posthog-vs-launchdarkly) or [Optimizely](/blog/posthog-vs-optimizely).
-
-<ProductComparisonTable
-    competitors={['posthog', 'fullstory']}
-    rows={[
-        'feature_flags',
-        'feature_flags.features.multivariate_flags',
-        'feature_flags.features.json_payloads',
-        'feature_flags.implementation.local_evaluation',
-        'experiments',
-        'experiments.features.secondary_metrics',
-        'experiments.implementation.multivariate_testing',
-        'experiments.analysis.statistical_significance',
-    ]}
-/>
-
-> 💡 **Good to know:** PostHog's feature flags and experiments are tightly integrated with analytics and session replay. You can filter replays by feature flag variant, measure experiment impact on funnels and retention, and deploy the winning variant with a single click.
+</p>
 
 ### Integrations and data pipelines
 
