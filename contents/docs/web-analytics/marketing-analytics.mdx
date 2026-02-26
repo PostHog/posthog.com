@@ -1,5 +1,5 @@
 ---
-title: Marketing analytics
+title: Marketing Analytics
 sidebar: Docs
 showTitle: true
 availability:
@@ -16,7 +16,7 @@ This feature is currently an opt-in beta. You can enable it on the [feature prev
 
 </CalloutBox>
 
-**Marketing analytics** enables you to track marketing campaigns, costs, and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
+**Marketing Analytics** enables you to track marketing campaigns, costs, and performance from multiple advertising platforms in your [Marketing Analytics dashboard](https://app.posthog.com/web/marketing).
 
 <CalloutBox icon="IconInfo" title="Column definitions" type="fyi">
 
@@ -26,10 +26,10 @@ For detailed column definitions, formulas, and platform field mappings, see [Col
 
 ## Getting started
 
-When you first visit the [marketing analytics dashboard](https://app.posthog.com/web/marketing), you'll see a guided onboarding wizard that walks you through setup:
+When you first visit the [Marketing Analytics dashboard](https://app.posthog.com/web/marketing), you'll see a guided onboarding wizard that walks you through setup:
 
 1. **Welcome** – Introduction to Marketing Analytics and its capabilities
-2. **Add source** – Connect your marketing data sources (native integrations, data warehouse, or self-managed sources)
+2. **Add source** – Connect your marketing data sources (native integrations, Data Warehouse, or self-managed sources)
 3. **Conversion goals** – Define what actions count as conversions (optional)
 
 You can skip the conversion goals step and configure them later in [settings](https://app.posthog.com/settings/environment-marketing-analytics). Once you complete onboarding, you'll see the full marketing dashboard with your campaign data.
@@ -88,11 +88,11 @@ The campaign breakdown table provides detailed performance metrics by individual
     classes="rounded"
 />
 
-PostHog supports three types of data sources for marketing analytics. All sources are configured through a unified interface that shows the connection status, required table syncing, and column mapping for each source type.
+PostHog supports three types of data sources for Marketing Analytics. All sources are configured through a unified interface that shows the connection status, required table syncing, and column mapping for each source type.
 
 <CalloutBox icon="IconInfo" title="No data sources configured" type="fyi">
 
-If you haven't configured any data sources, you'll see an error banner prompting you to add at least one native integration or connect a data warehouse source.
+If you haven't configured any data sources, you'll see an error banner prompting you to add at least one native integration or connect a Data Warehouse source.
 
 </CalloutBox>
 
@@ -221,13 +221,13 @@ When entering a `utm_campaign` value, PostHog suggests matching campaigns from y
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_12_09_at_3_16_33_PM_64be31b2d2.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_12_09_at_3_15_49_PM_a509d013da.png"
-    alt="Custom source mappings showing whitelisted UTM sources per advertising platform"
+    alt="Custom source mappings showing allowlisted UTM sources per advertising platform"
     classes="rounded"
 />
 
 Control which UTM sources are attributed to each [advertising platform integration](/docs/web-analytics/marketing-analytics#native-sources). For each platform (Google Ads, LinkedIn Ads, Meta Ads, etc.), you can:
 
-- **Whitelist specific sources**: Define which `utm_source` values should be attributed to this platform
+- **Allowlist specific sources**: Define which `utm_source` values should be attributed to this platform
 - **Support multiple sources**: Map multiple UTM source values to a single advertising platform
 
 This is particularly useful when:
@@ -235,9 +235,9 @@ This is particularly useful when:
 - A single campaign spans multiple traffic sources
 
 **Example configuration:**
-- [Google Ads](/docs/cdp/sources/google-ads) integration: Whitelist sources `google`, `google_ads`, `paid_search`
-- [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Whitelist sources `linkedin`, `li`, `linkedin_paid`
-- [Meta Ads](/docs/cdp/sources/meta-ads) integration: Whitelist sources `facebook`, `instagram`, `meta`
+- [Google Ads](/docs/cdp/sources/google-ads) integration: Allowlist sources `google`, `google_ads`, `paid_search`
+- [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Allowlist sources `linkedin`, `li`, `linkedin_paid`
+- [Meta Ads](/docs/cdp/sources/meta-ads) integration: Allowlist sources `facebook`, `instagram`, `meta`
 
 ### Base currency
 
