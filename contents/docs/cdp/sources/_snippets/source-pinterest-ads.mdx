@@ -1,13 +1,13 @@
-You can sync data from Pinterest Ads by configuring it as a source in PostHog. The supported endpoints include Campaigns, Ad Groups, Ads, Campaign Analytics, Ad Group Analytics, and Ad Analytics:
+You can sync data from Pinterest Ads by configuring it as a source in PostHog. The supported entities and reports include campaigns, ad groups, ads, campaign analytics, ad group analytics, and ad analytics:
 
-- [Campaigns](https://developers.pinterest.com/docs/api/v5/campaigns-list/) - Campaign entities from your Pinterest Ads account
-- [Ad Groups](https://developers.pinterest.com/docs/api/v5/ad_groups-list/) - Ad group entities within campaigns
-- [Ads](https://developers.pinterest.com/docs/api/v5/ads-list/) - Individual ad entities within ad groups
-- [Campaign Analytics](https://developers.pinterest.com/docs/api/v5/campaigns-analytics/) - Performance metrics broken down by campaign
-- [Ad Group Analytics](https://developers.pinterest.com/docs/api/v5/ad_groups-analytics/) - Performance metrics broken down by ad group
-- [Ad Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/) - Performance metrics broken down by ad
+- [Campaigns](https://developers.pinterest.com/docs/api/v5/campaigns-list/): Campaign entities from your Pinterest Ads account
+- [Ad Groups](https://developers.pinterest.com/docs/api/v5/ad_groups-list/): Ad group entities within campaigns
+- [Ads](https://developers.pinterest.com/docs/api/v5/ads-list/): Individual ad entities within ad groups
+- [Campaign Analytics](https://developers.pinterest.com/docs/api/v5/campaigns-analytics/): Performance metrics at the campaign level
+- [Ad Group Analytics](https://developers.pinterest.com/docs/api/v5/ad_groups-analytics/): Performance metrics at the ad group level
+- [Ad Analytics](https://developers.pinterest.com/docs/api/v5/ads-analytics/): Performance metrics at the ad level
 
-Additional endpoints will be added based on user feedback we receive via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
+Additional reports will be added based on user feedback we receive via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
 
 ## Requirements
 
@@ -16,7 +16,7 @@ Additional endpoints will be added based on user feedback we receive via our [in
 
 ## Configuring PostHog
 
-Connect PostHog to your Pinterest Ads account using OAuth. The Pinterest account must have permission to access the ad account data.
+Connect PostHog to your Pinterest Ads account. The Pinterest account must have permission to access the ad account data.
 
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/data-management/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.

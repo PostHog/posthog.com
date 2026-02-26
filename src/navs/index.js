@@ -119,6 +119,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/snapchat-ads',
                 },
                 {
+                    name: 'Pinterest Ads',
+                    url: '/docs/cdp/sources/pinterest-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -4912,6 +4916,10 @@ export const docsMenu = {
                         {
                             name: 'Snapchat Ads',
                             url: '/docs/data-warehouse/sources/snapchat-ads',
+                        },
+                        {
+                            name: 'Pinterest Ads',
+                            url: '/docs/data-warehouse/sources/pinterest-ads',
                         },
                         {
                             name: 'Shopify',

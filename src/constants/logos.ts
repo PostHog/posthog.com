@@ -103,6 +103,7 @@ export const LOGOS = {
     retool: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/retool.svg',
     rudderstack:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg',
+    pinterestAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pinterest_ads_563b842dc5.png',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
     rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
