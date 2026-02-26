@@ -20,13 +20,13 @@ A database connection timeout reduction from 1 second to 300 milliseconds coinci
 
 ## Timeline
 
-- **16:58 UTC** - Writer database begins experiencing connection saturation from person ingestion post-deployment workload
+- **16:58 UTC** – Writer database begins experiencing connection saturation from person ingestion post-deployment workload
 
 <img width="3414" height="828" alt="writer database load spike" src="https://github.com/user-attachments/assets/bb9581be-0d29-4eb3-a992-266669a2a11f" />
 
-- **17:02 UTC** - [Unrelated deployment](https://github.com/PostHog/posthog/pull/38686) reduces database connection timeout from 1s to 300ms
+- **17:02 UTC** – [Unrelated deployment](https://github.com/PostHog/posthog/pull/38686) reduces database connection timeout from 1s to 300ms
 
-- **17:05 UTC** - Initial pods begin failing database connections and entering crash loops
+- **17:05 UTC** – Initial pods begin failing database connections and entering crash loops
 
 ```
 {"timestamp":"2025-09-29T16:54:16.154136Z","level":"ERROR","fields":{"message":"Failed to create database pools","error":"Database error: pool timed out while waiting for an open connection"},"target":"feature_flags::server","threadId":"ThreadId(1)"}
@@ -35,14 +35,14 @@ internal error: entered unreachable code: Server exited unexpectedly
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-- **17:12 UTC** - Retry amplification begins overwhelming the writer database
+- **17:12 UTC** – Retry amplification begins overwhelming the writer database
 
-<img width="1907" height="309" alt="kubernetes retry thundering herd" src="https://github.com/user-attachments/assets/1b980447-46f5-498c-a63e-d9d11f6ba62" />
+<img width="1907" height="309" alt="Kubernetes retry thundering herd" src="https://github.com/user-attachments/assets/1b980447-46f5-498c-a63e-d9d11f6ba62" />
 
-- **17:25 UTC** - Incident declared, rollback attempted
-- **17:40 UTC** - Rollback fails due to ArgoCD configuration issues
-- **18:15 UTC** - Manual configuration changes deployed
-- **18:46 UTC** - Service fully restored
+- **17:25 UTC** – Incident declared, rollback attempted
+- **17:40 UTC** – Rollback fails due to ArgoCD configuration issues
+- **18:15 UTC** – Manual configuration changes deployed
+- **18:46 UTC** – Service fully restored
 
 Full service degradation timeline
 
@@ -83,7 +83,7 @@ The incident duration was extended by operational failures: timeout values were 
 
 - **Rollback procedure documentation**: Creating detailed runbooks for ArgoCD rollbacks with proper permission configurations and validation steps.
 
-### Long-term improvements (Q4 2025 - Q1 2026)
+### Long-term improvements (Q4 2025 – Q1 2026)
 
 - Development of specialized tooling for rapid pod termination during incidents
 - Comprehensive load testing to validate connection pool behavior under contention

@@ -24,7 +24,7 @@ Over a 10-day period in October 2025, the feature flags service experienced four
 
 ## Incident timeline
 
-### October 21, 2025 - Redis overload
+### October 21, 2025 – Redis overload
 
 **Duration:** 21:45 to 23:28 UTC (103 minutes)
 **Impact:** ~38% of evaluation requests returning errors in US datacenter
@@ -39,7 +39,7 @@ A deployment intended to reduce timeout errors (PR [#39821](https://github.com/P
 
 **Root causes:**
 
-- **Primary root cause: CPU resource undersizing** - Nodes were too small relative to pod resource requests, causing Kubernetes to pack too many pods per node. This led to CPU saturation exceeding 90%, which caused excessive parallelism and connection pool exhaustion
+- **Primary root cause: CPU resource undersizing** – Nodes were too small relative to pod resource requests, causing Kubernetes to pack too many pods per node. This led to CPU saturation exceeding 90%, which caused excessive parallelism and connection pool exhaustion
 - Symptom-focused fix that didn't address underlying CPU sizing issues
 - Unbounded cache population logic with no rate limiting (on cache miss, synchronous full state load from Postgres to Redis)
 - Envoy retries → more concurrent /flags requests → more pool acquisitions + Redis reads → overload
@@ -49,19 +49,19 @@ A deployment intended to reduce timeout errors (PR [#39821](https://github.com/P
 
 **Timeline:**
 
-- **21:45 UTC** - Deploy timeout handling change
-- **21:47 UTC** - Automated monitoring detects increased error rates
-- **21:49 UTC** - Immediate rollback initiated and completed
-- **21:50 UTC** - Error rates remain elevated despite rollback
-- **22:30 UTC** - Redis metrics show memory exhaustion on ElastiCache
-- **22:35 UTC** - Postgres connection spike observed, overwhelming connection pool
-- **22:45 UTC** - Discovery: Massive data transfer from Postgres to Redis in progress
-- **22:50 UTC** - Root cause identified: Excessive parallelism triggering cache population overload
-- **22:50 UTC** - Status page updated with incident details
-- **23:00 UTC** - Begin throttling connections and Redis writes
-- **23:28 UTC** - Service fully recovered
+- **21:45 UTC** – Deploy timeout handling change
+- **21:47 UTC** – Automated monitoring detects increased error rates
+- **21:49 UTC** – Immediate rollback initiated and completed
+- **21:50 UTC** – Error rates remain elevated despite rollback
+- **22:30 UTC** – Redis metrics show memory exhaustion on ElastiCache
+- **22:35 UTC** – Postgres connection spike observed, overwhelming connection pool
+- **22:45 UTC** – Discovery: Massive data transfer from Postgres to Redis in progress
+- **22:50 UTC** – Root cause identified: Excessive parallelism triggering cache population overload
+- **22:50 UTC** – Status page updated with incident details
+- **23:00 UTC** – Begin throttling connections and Redis writes
+- **23:28 UTC** – Service fully recovered
 
-### October 24, 2025 - Rate limiting misconfiguration
+### October 24, 2025 – Rate limiting misconfiguration
 
 **Duration:** 18:00 to 19:12 UTC (72 minutes)
 **Impact:** ~97% of evaluation requests returning 429 (rate limit) errors worldwide
@@ -77,19 +77,19 @@ Deployed IP-based rate limiting (PR [#40074](https://github.com/PostHog/posthog/
 
 **Timeline:**
 
-- **18:00 UTC** - Deploy IP-based rate limiting to /flags endpoint
-- **18:01 UTC** - Rate limiter begins returning 429 errors for most requests
-- **18:02 UTC** - All traffic appears as single IP to rate limiter
-- **18:10 UTC** - Initial customer reports of widespread failures
-- **18:30 UTC** - More customer reports escalate urgency
-- **18:45 UTC** - Engineering begins investigation into customer reports
-- **19:00 UTC** - Team identifies 429 errors in logs
-- **19:02 UTC** - Root cause identified: rate limiter sees load balancer IP only
-- **19:05 UTC** - Decision to disable rate limiting immediately
-- **19:12 UTC** - Rate limiting disabled, service fully recovered
+- **18:00 UTC** – Deploy IP-based rate limiting to /flags endpoint
+- **18:01 UTC** – Rate limiter begins returning 429 errors for most requests
+- **18:02 UTC** – All traffic appears as single IP to rate limiter
+- **18:10 UTC** – Initial customer reports of widespread failures
+- **18:30 UTC** – More customer reports escalate urgency
+- **18:45 UTC** – Engineering begins investigation into customer reports
+- **19:00 UTC** – Team identifies 429 errors in logs
+- **19:02 UTC** – Root cause identified: rate limiter sees load balancer IP only
+- **19:05 UTC** – Decision to disable rate limiting immediately
+- **19:12 UTC** – Rate limiting disabled, service fully recovered
 - **Note:** Status page was not updated during this incident due to the rapid resolution timeline post-detection (detection to resolution in ~12 minutes)
 
-### October 28, 2025 - Connection pool exhaustion and excessive parallelism
+### October 28, 2025 – Connection pool exhaustion and excessive parallelism
 
 **Duration:** 19:28 to 21:31 UTC (123 minutes)
 **Impact:** ~34% of evaluation requests failing in US datacenter
@@ -100,7 +100,7 @@ A routine deployment with no changes directly related to the flags service trigg
 
 **Root causes:**
 
-- **Primary root cause: CPU resource undersizing** - Same root cause as October 21: nodes too small relative to pod requests, causing too many pods per node and CPU saturation
+- **Primary root cause: CPU resource undersizing** – Same root cause as October 21: nodes too small relative to pod requests, causing too many pods per node and CPU saturation
 - Unrelated deployment triggered feature flags pod rollout
 - New pods failing to connect to Postgres within 20s timeout under CPU pressure (connection pool initialization too slow)
 - Pods entering crash loops, reducing available capacity
@@ -111,26 +111,26 @@ A routine deployment with no changes directly related to the flags service trigg
 
 **Timeline:**
 
-- **19:12 UTC** - Routine deployment triggers feature flags pod rollout in US (no /flags code changes)
-- **19:15 UTC** - New US pods begin failing to connect to Postgres within 20s timeout
-- **19:18 UTC** - Pods enter crash loops, reducing available capacity in US
-- **19:20 UTC** - Massive spike in Redis writes begins in US region
-- **19:23 UTC** - On-call receives high error count alert, initiates incident
-- **19:23 UTC** - Status page updated with incident details
-- **19:25 UTC** - Redis key evictions spike, cache becomes effectively unavailable
-- **19:26 UTC** - Main PostHog app begins experiencing issues due to shared Redis overload
-- **19:28 UTC** - Service degradation begins, ~34% of US requests failing
-- **19:35 UTC** - Team identifies dual failure: pod crashes + Redis overload
-- **19:45 UTC** - Decision to halt rollout and scale US pods to zero
-- **20:00 UTC** - US pods scaled to zero, waiting for Redis to stabilize
-- **20:30 UTC** - Redis begins recovering from write storm
-- **20:53 UTC** - Partial recovery as stable US pods brought back online
-- **21:15 UTC** - Gradual pod scaling continues in US
-- **21:31 UTC** - Full service restored, US region fully operational
+- **19:12 UTC** – Routine deployment triggers feature flags pod rollout in US (no /flags code changes)
+- **19:15 UTC** – New US pods begin failing to connect to Postgres within 20s timeout
+- **19:18 UTC** – Pods enter crash loops, reducing available capacity in US
+- **19:20 UTC** – Massive spike in Redis writes begins in US region
+- **19:23 UTC** – On-call receives high error count alert, initiates incident
+- **19:23 UTC** – Status page updated with incident details
+- **19:25 UTC** – Redis key evictions spike, cache becomes effectively unavailable
+- **19:26 UTC** – Main PostHog app begins experiencing issues due to shared Redis overload
+- **19:28 UTC** – Service degradation begins, ~34% of US requests failing
+- **19:35 UTC** – Team identifies dual failure: pod crashes + Redis overload
+- **19:45 UTC** – Decision to halt rollout and scale US pods to zero
+- **20:00 UTC** – US pods scaled to zero, waiting for Redis to stabilize
+- **20:30 UTC** – Redis begins recovering from write storm
+- **20:53 UTC** – Partial recovery as stable US pods brought back online
+- **21:15 UTC** – Gradual pod scaling continues in US
+- **21:31 UTC** – Full service restored, US region fully operational
 
 **Note:** We initially attempted the same remediation approach from October 21 before implementing other solutions to decrease parallelism.
 
-### October 29-30, 2025 - CPU-bound latency
+### October 29-30, 2025 – CPU-bound latency
 
 **Duration:** 22:30 UTC on October 29 to 05:39 UTC on October 30 (7 hours 9 minutes)
 **Impact:** Slow queries and degraded performance due to node CPU pressure
@@ -141,15 +141,15 @@ Query performance was impacted for over 7 hours. While queries were slow to both
 
 - CPU pressure on nodes exceeding 90% (nodes too small relative to pod requests, causing too many pods per node)
 - Pod resource requests not properly sized, causing unhealthy distribution of pods per node
-- **Critical gap: CPU alerting was completely missing** - No alerts existed for CPU pressure, which allowed the issue to persist undetected for over 7 hours
+- **Critical gap: CPU alerting was completely missing** – No alerts existed for CPU pressure, which allowed the issue to persist undetected for over 7 hours
 - Insufficient observability around CPU-bound failure modes
 
 **Timeline:**
 
-- **22:30 UTC (Oct 29)** - Incident reported, increased error rates and latency detected
-- **22:30 UTC (Oct 29)** - Status page updated with incident details
-- **00:03 UTC (Oct 30)** - Rolled back hardware changes, errors mostly subsided but latencies persist
-- **05:39 UTC** - Incident resolved, query timings returned to normal
+- **22:30 UTC (Oct 29)** – Incident reported, increased error rates and latency detected
+- **22:30 UTC (Oct 29)** – Status page updated with incident details
+- **00:03 UTC (Oct 30)** – Rolled back hardware changes, errors mostly subsided but latencies persist
+- **05:39 UTC** – Incident resolved, query timings returned to normal
 
 **Resolution:** After identifying connectivity issues due to resource exhaustion on feature flags nodes, we applied changes that resolved this resource exhaustion. Increasing pod resource requests for the flag service resulted in a healthier distribution of pods per node, which caused per-node CPU usage to go down and the service to return to a healthy state.
 
@@ -236,42 +236,42 @@ While each incident had specific triggers, three of the four incidents shared th
 
 ### What went well
 
-- **Rapid detection** - Monitoring caught issues within 2 minutes in most cases
-- **Quick initial response** - Rollbacks executed immediately when possible
-- **Systematic investigation** - Teams methodically identified overload patterns
-- **Cross-team collaboration** - Flags, infrastructure, and ingestion teams worked together effectively
+- **Rapid detection** – Monitoring caught issues within 2 minutes in most cases
+- **Quick initial response** – Rollbacks executed immediately when possible
+- **Systematic investigation** – Teams methodically identified overload patterns
+- **Cross-team collaboration** – Flags, infrastructure, and ingestion teams worked together effectively
 
 ### What didn't go well
 
-- **Symptom-focused fixes** - Multiple PRs addressed symptoms rather than root causes
-- **Unbounded operations** - No limits on retries, cache population, or connection creation
-- **Rollback insufficiency** - Data transfers and resource exhaustion persisted after code reverted
-- **Complex failure modes** - Interactions between database, cache, and application layers not well understood
-- **Shared infrastructure** - Flags service overloads impacted main application
-- **Customer comms** - While we generally did a good job of making public-facing status pages during each one of these incidents, one notable gap was that we never made an externally-facing status page update for the rate-limiting incident on October 24th.
-- **Diagnosis delays** - Took significant time to connect symptoms to root causes
-- **Configuration rigidity** - Hardcoded values prevented rapid remediation
-- **Missing CPU alerting** - CPU alerting was completely absent, allowing CPU pressure to escalate undetected for hours
+- **Symptom-focused fixes** – Multiple PRs addressed symptoms rather than root causes
+- **Unbounded operations** – No limits on retries, cache population, or connection creation
+- **Rollback insufficiency** – Data transfers and resource exhaustion persisted after code reverted
+- **Complex failure modes** – Interactions between database, cache, and application layers not well understood
+- **Shared infrastructure** – Flags service overloads impacted main application
+- **Customer comms** – While we generally did a good job of making public-facing status pages during each one of these incidents, one notable gap was that we never made an externally-facing status page update for the rate-limiting incident on October 24th.
+- **Diagnosis delays** – Took significant time to connect symptoms to root causes
+- **Configuration rigidity** – Hardcoded values prevented rapid remediation
+- **Missing CPU alerting** – CPU alerting was completely absent, allowing CPU pressure to escalate undetected for hours
 
 ### Key takeaways
 
-1. **CPU right-sizing is fundamental** - The biggest takeaway: nodes were too small relative to pod resource requests, causing Kubernetes to pack too many pods per node and saturate CPU capacity. This CPU saturation led to excessive parallelism (Envoy retries → concurrent requests → concurrent Redis reads), connection pool exhaustion (pods couldn't initialize Postgres pools under CPU pressure), and slow queries. Right-sizing (fewer pods per node, better-resourced pods) addressed the underlying issues that caused October 21, 28, and 29-30 incidents. This must be a primary consideration for any service deployment.
+1. **CPU right-sizing is fundamental** – The biggest takeaway: nodes were too small relative to pod resource requests, causing Kubernetes to pack too many pods per node and saturate CPU capacity. This CPU saturation led to excessive parallelism (Envoy retries → concurrent requests → concurrent Redis reads), connection pool exhaustion (pods couldn't initialize Postgres pools under CPU pressure), and slow queries. Right-sizing (fewer pods per node, better-resourced pods) addressed the underlying issues that caused October 21, 28, and 29-30 incidents. This must be a primary consideration for any service deployment.
 
-2. **Connection pool management architecture matters** - Each pod maintains its own Postgres connection pool. Creating a pool involves TLS handshakes, authentication, and connection establishment—operations that are computationally expensive, especially when pods are CPU-bound. This complexity, combined with CPU saturation, exacerbated connection pool exhaustion. Better approach: reduce concurrency and run smaller fleets with better-resourced pods rather than larger fleets with CPU-bound pods.
+2. **Connection pool management architecture matters** – Each pod maintains its own Postgres connection pool. Creating a pool involves TLS handshakes, authentication, and connection establishment—operations that are computationally expensive, especially when pods are CPU-bound. This complexity, combined with CPU saturation, exacerbated connection pool exhaustion. Better approach: reduce concurrency and run smaller fleets with better-resourced pods rather than larger fleets with CPU-bound pods.
 
-3. **Shared Redis is a critical single point of failure** - When flags service overloads Redis, it takes down the main app too. This was evident in October 21 and 28 incidents where Redis overload from flags service impacted the main PostHog application. Isolation is critical despite implementation complexity.
+3. **Shared Redis is a critical single point of failure** – When flags service overloads Redis, it takes down the main app too. This was evident in October 21 and 28 incidents where Redis overload from flags service impacted the main PostHog application. Isolation is critical despite implementation complexity.
 
-4. **CPU alerting was completely missing** - CPU alerting was absent throughout these incidents, preventing early detection of CPU saturation that was the root cause of three outages. This was a fundamental gap in our monitoring strategy. CPU metrics must be monitored and alertable from day one.
+4. **CPU alerting was completely missing** – CPU alerting was absent throughout these incidents, preventing early detection of CPU saturation that was the root cause of three outages. This was a fundamental gap in our monitoring strategy. CPU metrics must be monitored and alertable from day one.
 
-5. **Monitor data flow patterns** - Postgres-to-Redis transfer spikes should trigger alerts. Watch for unusual data movement.
+5. **Monitor data flow patterns** – Postgres-to-Redis transfer spikes should trigger alerts. Watch for unusual data movement.
 
-6. **Test under load** - Overload patterns only appeared under production traffic. Load testing is non-negotiable.
+6. **Test under load** – Overload patterns only appeared under production traffic. Load testing is non-negotiable.
 
-7. **Progressive rollouts save lives** - Gradual deployments limit blast radius and enable rapid detection. We're implementing rollout/annotation controls to disable staged rollouts and enable "force-merge" for rolling changes.
+7. **Progressive rollouts save lives** – Gradual deployments limit blast radius and enable rapid detection. We're implementing rollout/annotation controls to disable staged rollouts and enable "force-merge" for rolling changes.
 
-8. **Configuration must be flexible** - Critical settings must be adjustable without full deployment cycles.
+8. **Configuration must be flexible** – Critical settings must be adjustable without full deployment cycles.
 
-9. **Unbounded retries amplify failures** - Retries without bounds in Envoy (between load balancer and endpoint) can cascade failures. We've implemented retry limits to prevent this.
+9. **Unbounded retries amplify failures** – Retries without bounds in Envoy (between load balancer and endpoint) can cascade failures. We've implemented retry limits to prevent this.
 
 ## Moving forward
 

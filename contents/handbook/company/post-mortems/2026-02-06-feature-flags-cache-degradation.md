@@ -23,12 +23,12 @@ The root cause was an internal test automation system that had accumulated exces
 
 All times in UTC.
 
-- **Feb 2-5** - Intermittent OOM kills observed on feature-flags Celery workers; initially appeared low-severity
-- **Feb 6 20:31** - Incident declared as OOMs escalate and 116k task backlog discovered
-- **Feb 6 21:34** - Root cause identified
-- **Feb 6 22:34** - **Stabilized**: OOMs reduced to 0-2 per 5 minutes, backlog clearing
-- **Feb 7** - Internal test automation updated to use isolated environment
-- **Feb 8** - Stale test data cleaned up
+- **Feb 2-5** – Intermittent OOM kills observed on feature-flags Celery workers; initially appeared low-severity
+- **Feb 6 20:31** – Incident declared as OOMs escalate and 116k task backlog discovered
+- **Feb 6 21:34** – Root cause identified
+- **Feb 6 22:34** – **Stabilized**: OOMs reduced to 0-2 per 5 minutes, backlog clearing
+- **Feb 7** – Internal test automation updated to use isolated environment
+- **Feb 8** – Stale test data cleaned up
 
 ## Root cause analysis
 

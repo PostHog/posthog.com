@@ -26,13 +26,13 @@ For internal guidance on how we handle incidents, see [handling an incident](/ha
 
 ## Public post-mortems
 
-- [Logs data loss](/handbook/company/post-mortems/2026-02-20-posthog-us-logs-data-loss) - February 20, 2026
-- [Feature flags cache degradation](/handbook/company/post-mortems/2026-02-06-feature-flags-cache-degradation) - February 6, 2026
-- [Replay SDK fetch wrapper incident](/handbook/company/post-mortems/2026-01-17-replay-sdk-fetch-wrapper-incident) - January 17, 2026
-- [Shai-Hulud supply chain attack](/handbook/company/post-mortems/2025-11-26-shai-hulud-attack) - November 26, 2025
-- [Persons database migration](/handbook/company/post-mortems/2025-11-15-persons-db-migration) - November 15, 2025
-- [Feature flags recurring outages](/handbook/company/post-mortems/2025-10-21-feature-flags-recurring-outages) - October 21, 2025
-- [Surveys SDK bug](/handbook/company/post-mortems/2025-10-03-surveys-sdk-bug) - October 3, 2025
-- [Feature flags service outage](/handbook/company/post-mortems/2025-09-29-flags-is-down) - September 29, 2025
+- [Logs data loss](/handbook/company/post-mortems/2026-02-20-posthog-us-logs-data-loss) – February 20, 2026
+- [Feature flags cache degradation](/handbook/company/post-mortems/2026-02-06-feature-flags-cache-degradation) – February 6, 2026
+- [Replay SDK fetch wrapper incident](/handbook/company/post-mortems/2026-01-17-replay-sdk-fetch-wrapper-incident) – January 17, 2026
+- [Shai-Hulud supply chain attack](/handbook/company/post-mortems/2025-11-26-shai-hulud-attack) – November 26, 2025
+- [Persons database migration](/handbook/company/post-mortems/2025-11-15-persons-db-migration) – November 15, 2025
+- [Feature flags recurring outages](/handbook/company/post-mortems/2025-10-21-feature-flags-recurring-outages) – October 21, 2025
+- [Surveys SDK bug](/handbook/company/post-mortems/2025-10-03-surveys-sdk-bug) – October 3, 2025
+- [Feature flags service outage](/handbook/company/post-mortems/2025-09-29-flags-is-down) – September 29, 2025
 
 

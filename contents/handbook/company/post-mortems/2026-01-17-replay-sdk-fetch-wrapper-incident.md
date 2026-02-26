@@ -32,7 +32,7 @@ The original customer issue remains unresolved, but the customer has been provid
 - At least 6 customers reported issues with the PostHog SDK after the changes were released, not including the customer that reported issues with the SDK initially
 - At least 4 customers reported critical issues with their production systems
 - Customers were forced to remove the PostHog SDK entirely to restore functionality if they did not identify that only network header/body capture needed to be disabled
-- The issue persisted across 5 SDK versions (1.323.0 - 1.328.0)
+- The issue persisted across 5 SDK versions (1.323.0 – 1.328.0)
 - Even customers who use a fixed SDK version and did not update the SDK during this incident were affected
 
 ## Timeline
@@ -52,13 +52,13 @@ The original customer issue remains unresolved, but the customer has been provid
 
 ## Root cause
 
-The initial issue was caused by the SDK fetch wrapper being too simplistic and not passing on request options that are sometimes required - specifically any request with a body of type `ReadableStream` must include the request option `duplex: half` or `duplex: full` on all modern browsers. Even if the customer site _does_ provide this option, the fetch wrapper does not pass it down to the original `window.fetch` method, resulting in a `TypeError`.
+The initial issue was caused by the SDK fetch wrapper being too simplistic and not passing on request options that are sometimes required – specifically any request with a body of type `ReadableStream` must include the request option `duplex: half` or `duplex: full` on all modern browsers. Even if the customer site _does_ provide this option, the fetch wrapper does not pass it down to the original `window.fetch` method, resulting in a `TypeError`.
 
 The fixes that were introduced to attempt to address this caused another issue. The updated fetch wrapper was creating a new `Request` object and passing both this object _and_ the request options to downstream wrappers and `window.fetch`. This was causing the request body to be consumed multiple times which is not a problem for most requests but which results in mismatching boundaries for `FormData` requests. When the FormData boundaries do not match, the request is typically rejected by the server.
 
 A fix for this issue was released (1.327.0) but due to the missing manual approval step, this fix was never actually deployed to the CDN. Customers continued to report problems and, believing the fix to be ineffective, the decision was made to roll back all changes to the fetch wrapper rather than attempt to diagnose further.
 
-The decision to roll back was delayed due to a lack of understanding of the scope of the issue - ultimately we had to rely on reports from customers to get the full picture. This also contributed to the incident not being handled within the usual incident response process.
+The decision to roll back was delayed due to a lack of understanding of the scope of the issue – ultimately we had to rely on reports from customers to get the full picture. This also contributed to the incident not being handled within the usual incident response process.
 
 The incident was prolonged because a recently introduced process requiring manual intervention to publish SDK releases to the PostHog CDN was not followed. There was no verification step to confirm that releases were successfully deployed to the CDN. As a result, the bugfix (1.327.0) and rollback (1.328.0) releases were never actually served to customers.
 
@@ -94,8 +94,8 @@ We are committed to:
 - Adding comprehensive integration tests for fetch wrapper with FormData, ReadableStream, and chained wrappers
     - https://github.com/PostHog/posthog-js/pull/2935
     - https://github.com/PostHog/posthog-js/pull/2936
-- Establishing a more robust testing strategy for the PostHog SDK - we should test lazy loaded extensions with _all_ past versions of the core SDK or implement a way to pin a version of the extensions
-- Implementing monitoring and alerting for SDK errors - consider tracking SDK exception rates, failed network requests, or other client-side signals in PostHog itself to detect issues proactively rather than relying on customer reports
+- Establishing a more robust testing strategy for the PostHog SDK – we should test lazy loaded extensions with _all_ past versions of the core SDK or implement a way to pin a version of the extensions
+- Implementing monitoring and alerting for SDK errors – consider tracking SDK exception rates, failed network requests, or other client-side signals in PostHog itself to detect issues proactively rather than relying on customer reports
 - Documenting and communicating SDK release process changes to the team
 - Adding an automated verification step to confirm releases are successfully deployed to the CDN
 - Implementing an automated notification polling on-call engineers to manually approve new SDK releases

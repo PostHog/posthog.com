@@ -19,7 +19,7 @@ As with most queryable data in PostHog, we store data for Logs in a ClickHouse c
 - optimise the cluster for Logs specific access patterns
 -  isolate our other product from the impact of bugs or load from logs, a very high-data-volume system
 
-This new cluster uses S3 disks in ClickHouse, with data parts being automatically uploaded to S3 after 24 hours - this is what enables us to handle the significant data volume required for Logs (in PostHog, we alone produce about 500MB/s of logs from across our systems, or about 1PB/month uncompressed).
+This new cluster uses S3 disks in ClickHouse, with data parts being automatically uploaded to S3 after 24 hours – this is what enables us to handle the significant data volume required for Logs (in PostHog, we alone produce about 500MB/s of logs from across our systems, or about 1PB/month uncompressed).
 
 A bug in ClickHouse caused it to unexpectedly attempt to delete almost all of the data parts in S3. The Logs database is replicated, with two replicas, however very early on in the project we had enabled "Zero Copy Replication" in the Logs cluster nodes. This is an experimental feature that ClickHouse **does not recommend** in production, for exactly this reason: a bug that should have caused a single replica to be deleted instead deleted the data everywhere.
 
@@ -31,7 +31,7 @@ All times in UTC.
 - **Feb 19: 11:02**: The mutation finished, this triggered a bug in ClickHouse's zero-copy replication which caused one of the replicas to erroneously believe all of the data parts in the database were no longer referenced
 - **Feb 19: 11:02-19:40**: During this time the replicas were busy diligently deleting all of the data stored in S3 for the entire database. As data is only moved to S3 after 24 hours, and the vast majority of our queries are for recent data, no automated alarms were triggered as the volume of query errors was relatively low
 - **Feb 19: 19:40**: One of the nodes in the cluster crashes and restarts, it fails to start up due to the large volume of missing data it can't find. Engineers investigate and after some checks discover that the vast majority of S3-backed data is missing
-- **Feb 19: 21:45**: It is determined that the data is most likely unrecoverable - disaster recovery procedures start
+- **Feb 19: 21:45**: It is determined that the data is most likely unrecoverable – disaster recovery procedures start
 - **Feb 19: 22:15**: Decision is made to cut over to a new table and restore data from Kafka, where we have 3 days of retention
 - **Feb 19: 23:00**: We have switched over to the new table (without zero-copy replication) and caught up on recent messages.
 - **Feb 20: 10:05**: Data backfill from Kafka history begins

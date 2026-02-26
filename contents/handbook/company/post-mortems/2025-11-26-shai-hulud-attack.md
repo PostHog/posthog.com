@@ -9,7 +9,7 @@ tags:
     - post-mortem
 ---
 
-At 4:11 AM UTC on November 24th, a number of our SDKs and other packages were compromised, with a malicious self-replicating worm - [Shai-Hulud 2.0](https://www.wiz.io/blog/shai-hulud-2-0-ongoing-supply-chain-attack). New versions were published to npm, which contained a preinstall script that:
+At 4:11 AM UTC on November 24th, a number of our SDKs and other packages were compromised, with a malicious self-replicating worm – [Shai-Hulud 2.0](https://www.wiz.io/blog/shai-hulud-2-0-ongoing-supply-chain-attack). New versions were published to npm, which contained a preinstall script that:
 
 1. Scanned the environment the install script was running in for credentials of any kind using Trufflehog, an open-source security tool that searches codebases, Git histories, and other data sources for secrets.
 
@@ -106,9 +106,9 @@ Our engineer opened a PR to make this change, and also make some fixes to the sc
 
 This was a dangerous misconception, for a few reasons:
 
-- `on: pull_request_target` only ensures the _workflow_ is being run as defined in the PR target, not the code being run - that's controlled by the checkout step.
+- `on: pull_request_target` only ensures the _workflow_ is being run as defined in the PR target, not the code being run – that's controlled by the checkout step.
 
-- This particular workflow executed code from within the repo - a script called `assign-reviewers.js`, which was initially developed for internal (and crucially, trusted) auto-assignment, but was now being used for external assignment too.
+- This particular workflow executed code from within the repo – a script called `assign-reviewers.js`, which was initially developed for internal (and crucially, trusted) auto-assignment, but was now being used for external assignment too.
 
 - The workflow was modified to manually checkout the git commit of the PR head, rather than the PR base, so that the diffing would work correctly for external contributions, but this meant that the code being run was controlled by the PR author.
 
@@ -122,7 +122,7 @@ Why did this workflow change get merged? Honestly, security is unintuitive.
 
 3. None of us noticed the security hole in the month and a half between the PR being merged and the attack (the PR making this change was merged on the 11th of September). This workflow change was even flagged by one of our static analysis tools before merge, but we explicitly dismissed the alert because we mistakenly thought our usage was safe.
 
-Workflow rules, triggers and execution contexts are hard to reason about - so hard to reason about that [Github is actively making changes to make them simpler](https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/) and closer to our understanding above. Although, in our case, these changes would not have protected us against the initial attack.
+Workflow rules, triggers and execution contexts are hard to reason about – so hard to reason about that [Github is actively making changes to make them simpler](https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/) and closer to our understanding above. Although, in our case, these changes would not have protected us against the initial attack.
 
 Notably, we identified copycat attacks on the following day attempting to leverage the same vulnerability, and while we prevented those, we had to take frustratingly manual and uncertain measures to do so. The changes Github is making to the behaviour of `pull_request_target` would have prevented those copycats automatically for us.
 
@@ -140,6 +140,6 @@ I won't enumerate all the process and posture changes we're implementing here, b
 
 - Re-worked our Github secrets management to make our response to incidents like this faster and more robust.
 
-PostHog is, in many of our engineers minds, first and foremost a data company. We've grown a lot in the last few years, and for that time, our focus has always been on data security - ensuring the data you send us is safe, that our cloud environments are secure, and that we never expose personal information. This kind of attack, being leveraged as an initial vector for an ecosystem-wide worm, simply wasn't something we'd prepared for.
+PostHog is, in many of our engineers minds, first and foremost a data company. We've grown a lot in the last few years, and for that time, our focus has always been on data security – ensuring the data you send us is safe, that our cloud environments are secure, and that we never expose personal information. This kind of attack, being leveraged as an initial vector for an ecosystem-wide worm, simply wasn't something we'd prepared for.
 
 At a higher level, we've started to take broad security a lot more seriously, even prior to this incident. In July, we hired [Tom P](/community/profiles/34651), who's been fully dedicated to improving our overall security posture. Both our incident response and the analysis in this post-mortem simply wouldn't have been possible without the tools and practices he's put in place, and while there's a huge amount still to do, we feel good about the progress we're making. We have to do better here, and we feel confident we will.

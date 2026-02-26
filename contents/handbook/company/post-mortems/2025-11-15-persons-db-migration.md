@@ -32,7 +32,7 @@ By November 15, 6:20 AM UTC we had worked through the backlog of events and full
 ### Scope
 
 - This issue only impacted US Cloud
-- Time window of degraded ingestion performance: Approximately November 11, 16:02 UTC - November 14, 15:02 UTC
+- Time window of degraded ingestion performance: Approximately November 11, 16:02 UTC – November 14, 15:02 UTC
 - Time to fully process backlog and complete recovery: Until November 15, 06:20 UTC
 
 Customers experienced ingestion delays ranging from 10 minutes to up to 2 days. During this period recent events sent to PostHog did not appear, leading to the following potential per-product impact:
