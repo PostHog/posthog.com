@@ -83,6 +83,6 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 ## Per-product sales enablement content
 
-The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist in [an internal Sales Enablement repo](https://github.com/PostHog/sales-enablement) and the content is growing over time. Whenever a new product launches, the PMM on that launch will create new content for it. 
+The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist in the GTM academy. 
 
 If there are additional products or features you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  
