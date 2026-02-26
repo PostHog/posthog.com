@@ -1,0 +1,9 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(xargs -I {} sh -c 'git show :\"\"{}\"\" 2>/dev/null | grep -l \"\"incident-io.svg\"\" || true')",
+            "Bash(grep -r \"children\\\\|childPages\\\\|listChildren\" /Users/benwhite/Development/posthog.com/gatsby/*.ts)",
+            "Bash(find /Users/benwhite/Development/posthog.com/contents/handbook -type d -exec sh -c 'count=$\\(find \"\"$1\"\" -maxdepth 1 -type f \\\\\\( -name \"\"*.md\"\" -o -name \"\"*.mdx\"\" \\\\\\) | wc -l\\); [ \"\"$count\"\" -gt 1 ] && echo \"\"$1: $count files\"\"' _ {} ;)"
+        ]
+    }
+}

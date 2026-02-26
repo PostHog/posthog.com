@@ -50,3 +50,20 @@ But wait! Before you do this you should consider what could have been done bette
 
 > 💡 Remember: **The goal is not to prevent all incidents, but to learn from them and improve our systems and processes.** Every incident is an opportunity to make PostHog more reliable and our team more effective.
 
+## Public post-mortems
+
+Some incidents require a public post-mortem. We publish these on our [public post-mortems page](/handbook/company/post-mortems) because we believe transparency builds trust, and the wider engineering community benefits from shared lessons. A public post-mortem is needed when an incident:
+
+- Results in permanent impact on user data (such as data loss)
+- Directly disrupts customers' own services (such as SDK bugs breaking customer sites)
+- Results in extended unavailability of PostHog services for customers
+
+### Process
+
+Public post-mortems go through an internal review before being published. This isn't to hide anything - we're committed to being transparent about what happened and why. The review exists to make sure we don't accidentally expose sensitive information (such as customer data, internal credentials, or infrastructure details that could be exploited) and to ensure the post-mortem is clear and useful to readers.
+
+1. **Write the internal post-mortem first** - Complete the normal post-mortem process above. The internal version is where you can freely discuss all details without worrying about what's safe to share publicly.
+2. **Draft the public version** - Open a PR against [requests-for-comments-internal](https://github.com/PostHog/requests-for-comments-internal) using the [public post-mortem template](https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/public-post-mortem.md). This gives reviewers a private space to flag anything that shouldn't be public before it lands on the website.
+3. **Get review** - Have the draft reviewed by relevant stakeholders. Focus on making sure the root cause, impact, and remediation are explained clearly enough to be useful, while removing anything that could compromise security or expose customer information.
+4. **Publish** - Once approved, open a PR against [posthog.com](https://github.com/PostHog/posthog.com) adding the post-mortem to `contents/handbook/company/post-mortems/` and update the list on the [public post-mortems page](/handbook/company/post-mortems).
+
