@@ -269,6 +269,18 @@ Customization enables you to change the look, feel, and timing of your popover s
 
 For hosted surveys, you can only customize colors and placeholders.
 
+### Translations
+
+Surveys support translations for displaying survey content in multiple languages. You can add translations at two levels:
+
+-   **Survey-level** - Translate the survey name, description, thank you message header, thank you message description, and close button text.
+-   **Question-level** - Translate individual question text, description, button text, choices, and rating labels (`lowerBoundLabel`, `upperBoundLabel`).
+
+Translations are stored as a mapping of language codes to translated fields. Language codes are flexible strings — you can use standard codes like `"es"` or `"es-MX"`, or custom keys like `"english"` or `"french"`.
+
+When adding translated choices for a question, the translated choices array must have the same number of items as the original choices array.
+
+
 ### Display conditions
 
 > Display conditions are **not available for hosted surveys**. Any user who visits the link is shown the survey, as long as it is launched and still collecting responses.
