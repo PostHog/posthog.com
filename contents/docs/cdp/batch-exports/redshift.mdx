@@ -28,7 +28,7 @@ Regardless of the SQL command used, configuring a batch export targeting Redshif
 
 - **User:** A Redshift user name with permissions to insert data into the specified table and, if the table does not exist, permissions to create the table.
 - **Password:** The password for the Redshift user specified.
-- **Host:** The endpoint of your Redshift cluster, excluding the port number and database name.
+- **Host:** The endpoint of your Redshift cluster, excluding the port number and database name. Must resolve to a publicly accessible address (internal/private IPs are not allowed).
 - **Port:** The port number on which the Redshift cluster is listening (default is 5439).
 - **Database:** The name of the Redshift database to which the data is to be exported.
 - **Schema:** The name of the schema within the database. This determines where the table for exporting data will be located.
