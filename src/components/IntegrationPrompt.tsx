@@ -18,14 +18,7 @@ export default function IntegrationPrompt() {
         <>
             <h3>Install with AI in a single prompt</h3>
             <p className="text-[15px]">Paste into your terminal or code editor and make AI do the work.</p>
-            <WizardCommand />
-
-            <div className="@container">
-                <Link to="/wizard" className="group" state={{ newWindow: true }}>
-                    Learn more about PostHog Wizard{' '}
-                    <IconArrowUpRight className="inline-block size-4 opacity-50 group-hover:opacity-75" />
-                </Link>
-            </div>
+            <WizardCommand latest={false} />
         </>
     )
 }

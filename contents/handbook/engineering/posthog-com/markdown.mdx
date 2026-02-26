@@ -545,6 +545,36 @@ Products are grouped in `sourceValues` order. Plain values (`true`, `"some strin
 
 Only the products whose `wizardSupport` value matches a `sourceValues` entry will render. Other props: `urlPrefix` (default `/`), `className`, `itemClassName`, `iconSize`.
 
+## Wizard command
+
+Use `<WizardCommand />` to render a copyable install button for the PostHog wizard CLI. Clicking the button copies the command to the clipboard and shows a toast notification.
+
+<WizardCommand />
+
+The command automatically includes `--region eu` or `--region us` based on the user's feature flags.
+
+**Props:**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `latest` | `boolean` | `true` | Appends `@latest` to the package name |
+| `slim` | `boolean` | `false` | Hides the "Learn more" link below the button |
+| `className` | `string` | `''` | Additional classes for the button element |
+
+**Slim mode** (button only, no "Learn more" link):
+
+<!-- prettier-ignore -->
+```tsx
+<WizardCommand slim />
+```
+
+**Without `@latest`** (used on the homepage and wizard page):
+
+<!-- prettier-ignore -->
+```tsx
+<WizardCommand latest={false} slim />
+```
+
 ## Call to action
 
 Adding `<ArrayCTA />` to any article will add this simple CTA:
