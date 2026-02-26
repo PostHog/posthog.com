@@ -290,6 +290,9 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         body,
         frontmatter: {
             title,
+            date,
+            tags,
+            contributors,
             seo,
             tableOfContents: frontmatterTableOfContents,
             hideRightSidebar,
@@ -350,7 +353,16 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 imageType="absolute"
             />
             <ReaderView
-                body={{ type: 'mdx', content: body }}
+                body={{
+                    type: 'mdx',
+                    content: body,
+                    contributors,
+                    date,
+                    tags: tags?.map((tag) => ({
+                        label: tag,
+                        url: tag === 'post-mortem' ? '/handbook/company/post-mortems' : `/blog/tags/${tag}`,
+                    })),
+                }}
                 title={title}
                 tableOfContents={frontmatterTableOfContents || tableOfContents}
                 mdxComponents={components}
@@ -452,6 +464,22 @@ export const query = graphql`
                     value
                 }
                 title
+                date(formatString: "MMM DD, YYYY")
+                tags
+                contributors: authorData {
+                    id
+                    name
+                    profile_id
+                    role
+                    profile {
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
+                        }
+                    }
+                }
                 description
                 showTitle
                 hideRightSidebar
