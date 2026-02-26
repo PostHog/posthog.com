@@ -1547,10 +1547,6 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Contributing to docs',
-                        url: '/handbook/growth/sales/contributing-to-docs',
-                    },
-                    {
                         name: 'Tools',
                         url: '/handbook/growth/sales/sales-and-cs-tools',
                     },
@@ -1657,6 +1653,10 @@ export const handbookSidebar = [
                     {
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
+                    },
+                    {
+                        name: 'Contributing to docs',
+                        url: '/handbook/growth/sales/contributing-to-docs',
                     },
                 ],
             },
