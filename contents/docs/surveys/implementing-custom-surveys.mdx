@@ -305,13 +305,25 @@ Both methods return a callback with an array of surveys in this format:
         "No"
       ],
       "question": "Are you enjoying PostHog?",
-      "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
+      "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11",
+      "translations": {
+        "es": {
+          "question": "¿Estás disfrutando PostHog?",
+          "choices": ["Sí", "No"]
+        }
+      }
     }
   ],
   "conditions": null,
   "appearance": {},
   "start_date": "2023-09-19T13:10:49.505000Z",
-  "end_date": null
+  "end_date": null,
+  "translations": {
+    "es": {
+      "name": "Nombre de tu encuesta",
+      "description": "Metadatos que describen tu encuesta"
+    }
+  }
 }]
 ```
 
