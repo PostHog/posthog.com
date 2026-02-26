@@ -373,6 +373,22 @@ const appSettings: AppSettings = {
             },
         },
     },
+    '/wizard': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'home-test': {
         experiment: {
             variant: 'test',
@@ -550,6 +566,22 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 750,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/partnerships': {
+        size: {
+            min: {
+                width: 700,
                 height: 500,
             },
             max: {
