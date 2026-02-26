@@ -225,7 +225,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 - [ ] **Implementation maturity** – basic tracking or advanced setup?
 - [ ] **Known technical issues** – open bugs, workarounds, or frustrations?
 - [ ] **Integration landscape** – what else are they using? Any competitors still in play?
-- [ ] **Product gaps** – feature requests or limitations that are blockers?
+- [ ] **Product gaps** – feature requests or limitations that are blockers? Note any features with committed delivery timelines from our product teams
 - [ ] **Onboarding completeness** – per the [onboarding checklist](/handbook/growth/sales/account-allocation#product-onboarding), which products are properly onboarded?
 
 #### 4. Risks & opportunities
@@ -249,7 +249,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 - **Focus the call on what's not in the data.** You can read Vitally yourself – use the call for relationship context, political dynamics, and unwritten history.
 - **Ask "what would you do next if you were keeping this account?"** This often surfaces the most actionable insight.
 - **Move fast on your intro.** The longer the gap between handover and first contact, the more momentum you lose.
-- **Keep the previous owner in the loop** for the first few weeks if there are open commercial conversations. A clean break is ideal, but a messy one helps nobody.
+- **Keep the previous owner in the loop** for the first few weeks if there are open commercial conversations. In some cases they can also serve as a secondary support point for timezone coverage or as an escalation contact.
 
 ---
 
