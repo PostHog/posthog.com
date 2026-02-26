@@ -95,6 +95,20 @@ Percentage rollouts are available for all flags. More options depend on your Pos
     classes="rounded"
 />
 
+#### Semantic version (semver) targeting
+
+You can target users based on semantic version strings like `$app_version` or `$lib_version` using [semver operators](/docs/data/property-filters#semver-operators). These appear alongside regular string operators in the property filter dropdown, labeled with a `(semver)` suffix.
+
+To use semver targeting:
+
+1. Add a release condition with a string property (e.g., `$app_version`)
+2. Select a semver operator from the dropdown
+3. Enter a version value (e.g., `1.2.0`)
+
+This is especially useful for mobile apps where you want to roll out features to users on specific version ranges, like enabling a feature for everyone on version `>= 2.0.0` or targeting a bug fix at versions `< 1.5.0`.
+
+> **Note:** Semver operators work on any string property, but they are most useful with version-formatted values. The property value should follow semver conventions (e.g., `1.2.3`) for accurate comparisons. Mobile SDKs automatically include `$app_version` – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
+
 #### Advanced release conditions
 
 For more sophisticated feature rollouts, you can also create **feature flag dependencies** where one flag's activation depends on another flag's state. This enables complex scenarios like:
@@ -137,13 +151,16 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same.
 
-> **Note:** This feature requires `person_profiles: 'always'` and calling `posthog.identify` from the JavaScript Web SDK to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
+However, this feature comes with limitations and tradeoffs. In our experience, these tradeoffs make it **not worthwhile** for the majority of our users.
 
-In our experience, the tradeoffs to enabling this are **not** worthwhile for the majority of our users. They include:
+<CalloutBox icon="IconWarning" title="Limitations of persisting feature flags" type="caution">
 
-1. **Slower feature flag response:** Enabling this option introduces additional checks, which can slow down the response time when fetching feature flags.
-2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
-3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
+- **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** The additional checks must be performed on PostHog servers, so local evaluation cannot be used.
+- **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
+- **Only works with Person Profiles:** Requires `person_profiles: 'always'` and calling `posthog.identify` from the JavaScript Web SDK. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
+- **Slower feature flag response:** Enabling this introduces additional server-side checks, which can slow down response time when fetching feature flags.
+
+</CalloutBox>
 
 ## Step 5. Configure evaluation runtime and contexts (optional)
 
