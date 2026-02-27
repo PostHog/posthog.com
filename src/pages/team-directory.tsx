@@ -204,7 +204,11 @@ function memberToRow(
 export default function Team(): JSX.Element {
     const { isModerator } = useUser()
     const { teamMembers, futureJoiners, loading, updateProfile } = useTeamMembers()
-    const [filteredMembers, setFilteredMembers] = useState<TeamMember[] | null>(null)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [activeFilters, setActiveFilters] = useState<Record<
+        string,
+        { value: any; filter: (obj: any, value: any) => boolean }
+    > | null>(null)
     const [isEditing, setIsEditing] = useState(false)
 
     const allTeamNames = useMemo(() => Array.from(new Set(teamMembers.flatMap((m) => m.teams))).sort(), [teamMembers])
@@ -228,7 +232,14 @@ export default function Team(): JSX.Element {
         return { unisex, female }
     }, [teamMembers, futureJoiners])
 
-    const displayMembers = filteredMembers ?? teamMembers
+    const applyFilters = (data: TeamMember[]) => {
+        if (!activeFilters) return data
+        return data.filter((obj) =>
+            Object.values(activeFilters).every(({ value, filter }) => value === null || filter(obj, value))
+        )
+    }
+    const displayMembers = applyFilters(teamMembers)
+    const displayFutureJoiners = applyFilters(futureJoiners)
 
     const handleDownloadCSV = () => {
         const headers = [
@@ -248,7 +259,7 @@ export default function Team(): JSX.Element {
             'Color',
         ]
         const escape = (val: string) => (val.includes(',') || val.includes('"') ? `"${val.replace(/"/g, '""')}"` : val)
-        const rows = [...displayMembers, ...futureJoiners].map((m) => [
+        const rows = [...displayMembers, ...displayFutureJoiners].map((m) => [
             m.firstName || '',
             m.lastName || '',
             m.companyRole || '',
@@ -342,9 +353,24 @@ export default function Team(): JSX.Element {
                             value ? obj.leadsTeams.length > 0 : obj.leadsTeams.length === 0,
                         operator: 'equals',
                     },
+                    {
+                        label: 't-shirt fit',
+                        options: [
+                            { label: 'Any', value: null },
+                            { label: 'Unisex', value: 'unisex' },
+                            { label: 'Female', value: 'female' },
+                        ],
+                        filter: (obj: TeamMember, value: string) => obj.tShirtFit === value,
+                        operator: 'equals',
+                    },
+                    {
+                        label: 't-shirt size',
+                        options: [{ label: 'Any', value: null }, ...allSizes.map((s) => ({ label: s, value: s }))],
+                        filter: (obj: TeamMember, value: string) => obj.tShirtSize === value,
+                        operator: 'equals',
+                    },
                 ]}
-                dataToFilter={teamMembers}
-                onFilterChange={(data: TeamMember[]) => setFilteredMembers(data)}
+                handleFilterChange={(filters) => setActiveFilters(filters as typeof activeFilters)}
             >
                 {loading ? (
                     <div className="flex items-center justify-center py-12">
@@ -367,17 +393,17 @@ export default function Team(): JSX.Element {
                                 memberToRow(member, index, isEditing, updateProfile)
                             )}
                         />
-                        {futureJoiners.length > 0 && (
+                        {displayFutureJoiners.length > 0 && (
                             <>
                                 <h3 className="mt-6 mb-2 text-base font-semibold">Future joiners</h3>
                                 <p className="!mt-0 mb-2 text-sm text-muted">
-                                    {futureJoiners.length} upcoming joiner
-                                    {futureJoiners.length !== 1 ? 's' : ''} with a start date in the future
+                                    {displayFutureJoiners.length} upcoming joiner
+                                    {displayFutureJoiners.length !== 1 ? 's' : ''} with a start date in the future
                                 </p>
                                 <OSTable
                                     columns={columns}
                                     size="sm"
-                                    rows={futureJoiners.map((member, index) =>
+                                    rows={displayFutureJoiners.map((member, index) =>
                                         memberToRow(member, index, isEditing, updateProfile)
                                     )}
                                 />
