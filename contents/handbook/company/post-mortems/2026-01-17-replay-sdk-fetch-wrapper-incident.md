@@ -1,12 +1,12 @@
 ---
 title: Replay SDK fetch wrapper incident
-sidebar: Handbook
-showTitle: true
+showByline: true
 date: 2026-01-17
 author:
-    - tim-glaser
+    - tue-haulund
+    - paul-dambra
 tags:
-    - post-mortem
+    - Post mortems
 ---
 
 **Date:** January 14-19, 2026

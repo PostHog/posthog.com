@@ -1,12 +1,11 @@
 ---
 title: Feature flags service outage
-sidebar: Handbook
-showTitle: true
+showByline: true
 date: 2025-09-29
 author:
-    - tim-glaser
+    - dylan-martin
 tags:
-    - post-mortem
+    - Post mortems
 
 ---
 

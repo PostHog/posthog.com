@@ -1,12 +1,11 @@
 ---
 title: Logs data loss
-sidebar: Handbook
-showTitle: true
+showByline: true
 date: 2026-02-20
 author:
-    - tim-glaser
+    - abe-basu
 tags:
-    - post-mortem
+    - Post mortems
 ---
 
 On February 19th, PostHog's Logs product experienced a major incident, which caused the loss of data collected more than 3 days ago in our US region. This data loss only impacted the Logs product, all other PostHog data is intact.

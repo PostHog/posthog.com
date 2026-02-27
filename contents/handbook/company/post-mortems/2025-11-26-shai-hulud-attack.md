@@ -1,12 +1,11 @@
 ---
 title: Shai-Hulud supply chain attack
-sidebar: Handbook
-showTitle: true
+showByline: true
 date: 2025-11-26
 author:
-    - tim-glaser
+    - cameron-deleone
 tags:
-    - post-mortem
+    - Post mortems
 ---
 
 At 4:11 AM UTC on November 24th, a number of our SDKs and other packages were compromised, with a malicious self-replicating worm – [Shai-Hulud 2.0](https://www.wiz.io/blog/shai-hulud-2-0-ongoing-supply-chain-attack). New versions were published to npm, which contained a preinstall script that:

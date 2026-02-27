@@ -1,12 +1,11 @@
 ---
 title: Surveys SDK bug
-sidebar: Handbook
-showTitle: true
+showByline: true
 date: 2025-10-03
 author:
-    - tim-glaser
+    - lucas-faria
 tags:
-    - post-mortem
+    - Post mortems
 ---
 
 On October 3, 2025, a backwards compatibility issue in the PostHog Surveys SDK (version 1.270.0) caused widespread JavaScript exceptions for customers using SDK versions older than 1.257.1. The issue lasted 5 hours and 26 minutes, affecting 305 teams and disrupting both survey functionality and error tracking metrics.

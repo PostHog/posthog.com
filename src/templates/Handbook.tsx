@@ -33,6 +33,7 @@ import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
+import slugify from 'slugify'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -297,6 +298,7 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
             tableOfContents: frontmatterTableOfContents,
             hideRightSidebar,
             contentMaxWidthClass,
+            showByline,
         },
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
@@ -356,12 +358,19 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 body={{
                     type: 'mdx',
                     content: body,
-                    contributors,
-                    date,
-                    tags: tags?.map((tag) => ({
-                        label: tag,
-                        url: tag === 'post-mortem' ? '/handbook/company/post-mortems' : `/blog/tags/${tag}`,
-                    })),
+                    ...(showByline
+                        ? {
+                              contributors,
+                              date,
+                              tags: tags?.map((tag) => ({
+                                  label: tag,
+                                  url:
+                                      tag === 'Post mortems'
+                                          ? '/handbook/company/post-mortems'
+                                          : `/blog/tags/${slugify(tag, { lower: true })}`,
+                              })),
+                          }
+                        : null),
                 }}
                 title={title}
                 tableOfContents={frontmatterTableOfContents || tableOfContents}
@@ -458,6 +467,7 @@ export const query = graphql`
                 }
             }
             frontmatter {
+                showByline
                 tableOfContents {
                     depth
                     url
