@@ -128,7 +128,7 @@ export default function Libraries(): JSX.Element {
             </div>
 
             {currentFolder && (
-                <div className="mt-6 flex justify-between items-center">
+                <div className="mt-4 flex justify-between items-center">
                     <div className="flex items-center gap-1 leading-none">
                         <OSButton
                             size="sm"
