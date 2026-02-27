@@ -21,7 +21,7 @@ A database connection timeout reduction from 1 second to 300 milliseconds coinci
 
 - **16:58 UTC** – Writer database begins experiencing connection saturation from person ingestion post-deployment workload
 
-<img width="3414" height="828" alt="writer database load spike" src="https://github.com/user-attachments/assets/bb9581be-0d29-4eb3-a992-266669a2a11f" />
+<img width="3414" height="828" alt="writer database load spike" src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/496399089_bb9581be_0d29_4eb3_a992_266669a2a11f_8032f3ba72.png" />
 
 - **17:02 UTC** – [Unrelated deployment](https://github.com/PostHog/posthog/pull/38686) reduces database connection timeout from 1s to 300ms
 
@@ -36,7 +36,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 - **17:12 UTC** – Retry amplification begins overwhelming the writer database
 
-<img width="1907" height="309" alt="Kubernetes retry thundering herd" src="https://github.com/user-attachments/assets/1b980447-46f5-498c-a63e-d9d11f6ba62" />
+<img width="1907" height="309" alt="Kubernetes retry thundering herd" src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/496398990_1b980447_46f5_498c_a63e_d99d11f6ba62_6261bb0efc.png" />
 
 - **17:25 UTC** – Incident declared, rollback attempted
 - **17:40 UTC** – Rollback fails due to ArgoCD configuration issues
@@ -45,7 +45,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 Full service degradation timeline
 
-<img width="1909" height="460" alt="outage timeline" src="https://github.com/user-attachments/assets/a37eabe7-b91a-462b-967e-262c139f82fe" />
+<img width="1909" height="460" alt="outage timeline" src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/496398843_a37eabe7_b91a_462b_967e_262c139f82fe_0e8e7bd3c0.png" />
 
 ## Root cause analysis
 
