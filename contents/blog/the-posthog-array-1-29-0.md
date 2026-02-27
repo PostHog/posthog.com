@@ -83,7 +83,7 @@ If you're interested in better measuring your user engagement, DAU/WAU, WAU/MAU 
 
 ### Other improvements & fixes
 - **Renaming filters** - You will now be able to set custom names for your graph series. Your teammates will now be able to better understand your graphs.
-- **UI improvements** - We're introducing significant UI improvements across the board to better match our [new branding](blog/../postmortem-rebrand). 
+- **UI improvements** - We're introducing significant UI improvements across the board to better match our [new branding](/founders/postmortem-rebrand). 
 - **Column configurator** - You will now be able to select the columns you want to see in your events table.
     <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_29_0-column-configurator.png" alt="" />
 - **Password reset revamp** - We've shipped a lot of improvements to the password reset experience, including a new UI, API processing, and even new email designs 🎨. If you run with SAML-only login, password reset is now disabled.

@@ -57,7 +57,7 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-In `src/main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).
+In `src/main.ts`, initialize PostHog using your project token and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -65,7 +65,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host:'<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
 })

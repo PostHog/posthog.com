@@ -19,7 +19,7 @@ For now, we require product tours to be explicitly enabled in your PostHog init 
 Example:
 
 ```typescript
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN!, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_API_HOST,
   defaults: '2025-05-24',
   disable_product_tours: false,
@@ -29,6 +29,26 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
 ### Old PostHog SDK version
 
 Product tours require `posthog-js` version 1.324.0 or higher. We always recommend updating to the latest to ensure you have the most recent improvements and bug fixes.
+
+## Toolbar issues (with reverse proxy)
+
+If you are using a [reverse proxy](/docs/advanced/proxy) you may encounter some issues with the Toolbar, such as:
+
+- Unable to authenticate the toolbar
+- Links back to PostHog cause 404 errors
+
+To resolve these issues, be sure to pass the proper [`ui_host` config parameter](/docs/libraries/js/config) when initializing PostHog. Example:
+
+```typescript
+posthog.init('<ph_project_token>', {
+  api_host: '/ingest',
+  ui_host: 'https://us.posthog.com', // or 'https://eu.posthog.com`
+  defaults: '2025-05-24',
+  disable_product_tours: false,
+});
+```
+
+See [Troubleshooting and FAQ](/docs/toolbar#troubleshooting-and-faq) for more help with the Toolbar.
 
 ## Debugging tool
 

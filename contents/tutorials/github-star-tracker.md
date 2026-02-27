@@ -16,7 +16,7 @@ Our webhook handler will accept a `POST` request and capture a PostHog event wit
 
 <iframe src="https://www.val.town/embed/ianvph/posthogGitHubStarCapture" height="630" frameBorder="0" allowFullScreen></iframe>
 
-Now create a `phProjectAPIKey` environment variable in [your Val Town settings](https://www.val.town/settings/environment-variables). Set this value to your PostHog project API key, which you can find in [your project settings](https://us.posthog.com/settings/project#variables). Finally, click the three-dot menu next to the**Save** button then copy the HTTP endpoint link.
+Now create a `phProjectAPIKey` environment variable in [your Val Town settings](https://www.val.town/settings/environment-variables). Set this value to your PostHog project token, which you can find in [your project settings](https://us.posthog.com/settings/project#variables). Finally, click the three-dot menu next to the**Save** button then copy the HTTP endpoint link.
 
 ![Val created](https://res.cloudinary.com/dmukukwp6/image/upload/v1711401477/posthog.com/contents/images/tutorials/github-star-tracker/val.png)
 

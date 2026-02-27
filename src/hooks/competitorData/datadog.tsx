@@ -44,7 +44,7 @@ export const datadog = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: 'Supported via agents/pipelines',
+                    native_open_telemetry_ingest: 'Converts to proprietary format',
                     vendor_agnostic_sdks: true,
                 },
             },
@@ -66,6 +66,7 @@ export const datadog = {
                 features: {
                     metrics: true,
                     traces: true,
+                    alerting: true,
                     infra_monitoring: true,
                 },
             },
@@ -79,6 +80,9 @@ export const datadog = {
         },
         surveys: {
             available: false,
+        },
+        llm_analytics: {
+            available: true,
         },
     },
     platform: {
@@ -108,6 +112,7 @@ export const datadog = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             azure_blob: true,
@@ -151,6 +156,7 @@ export const datadog = {
             reverse_proxy: false,
             role_based_access_control: true,
             saml_sso: true,
+            siem: true,
             soc2_certified: false,
             two_factor_auth: true,
             user_privacy_options: true,

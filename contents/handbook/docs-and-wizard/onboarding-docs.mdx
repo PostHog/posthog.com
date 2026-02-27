@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Onboarding docs, or product installation docs, are special because these instructions are **shared** between the [in-app onboarding flow](https://github.com/PostHog/posthog/tree/master/frontend/src/scenes/onboarding) and the getting started pages on the [posthog.com website](https://github.com/PostHog/posthog.com). 
+Onboarding docs, or product installation docs, are special because these instructions are **shared** between the [in-app onboarding flow](https://github.com/PostHog/posthog/tree/master/frontend/src/scenes/onboarding) and the getting started pages on the [PostHog website](https://github.com/PostHog/posthog.com). 
 
 
 These are some of the first pieces of docs a new user will see. They show users how to quickly set up and install a product, so they need to be up to date and accurate.
@@ -30,19 +30,18 @@ This is a relatively new feature, so we're still migrating old onboarding docs t
 | Product | Status |
 |---------|--------|
 | LLM analytics | ✅ Migrated |
-| Product analytics | ✅ Migrated |
-| Web analytics | ✅ Migrated |
-| Web analytics | ✅ Migrated |
-| Session replay | ✅ Migrated |
-| Feature flags | ✅ Migrated |
+| Product Analytics | ✅ Migrated |
+| Web Analytics | ✅ Migrated |
+| Session Replay | ✅ Migrated |
+| Feature Flags | ✅ Migrated |
 | Experiments | ✅ Migrated |
-| Error tracking | ✅ Migrated |
+| Error Tracking | ✅ Migrated |
 | Surveys | ⏳ In progress |
-| Data pipelines | ⏳ Not yet migrated |
-| Data warehouse | ⏳ Not yet migrated |
-| Revenue analytics | ⏳ Not yet migrated |
+| Data Pipelines | ⏳ Not yet migrated |
+| Data Warehouse | ⏳ Not yet migrated |
+| Revenue Analytics | ⏳ Not yet migrated |
 | PostHog AI | ⏳ Not yet migrated |
-| Workflows | ⏳ Not yet migrated |
+| Workflows | ✅ Migrated |
 | Logs | ⏳ Not yet migrated |
 | Endpoints | ⏳ Not yet migrated |
 
@@ -80,6 +79,7 @@ If you need some help with structuring your files, this is the architecture for 
 posthog/posthog
 ├── docs/onboarding/
 │   └── your-product/
+│       ├── index.ts              # Barrel file re-exports all Installation components + snippets
 │       ├── sdk-name.tsx          # getSteps + createInstallation
 │       └── _snippets/
 │           └── reusable-snippet.tsx
@@ -182,23 +182,13 @@ For a complete working example, see the **[Session Replay](/docs/session-replay/
 
 ### Step 2: Create the website stub in posthog/posthog.com
 
-1. To test your changes locally, temporarily edit `gatsby-config.js` to point to your branch:
+1. To test your changes locally, use the `GATSBY_POSTHOG_BRANCH` environment variable to point to your branch:
 
-   ```js
-   {
-       resolve: `gatsby-source-git`,
-       options: {
-           name: `posthog-main-repo`,
-           remote: `https://github.com/posthog/posthog.git`,
-           branch: 'your-branch-name', // Change from 'master' to your branch
-           patterns: ['docs/published/**', 'docs/onboarding/**'],
-       },
-   },
+   ```bash
+   GATSBY_POSTHOG_BRANCH=your-branch-name pnpm start
    ```
 
-   <CalloutBox type="caution" title="Don't forget to revert this change!">
-   Do not merge changes to `gatsby-config.js` that point to a non-master branch. This is only for testing.
-   </CalloutBox>
+   This tells `gatsby-source-git` to pull from your branch instead of `master`.
 
 2. Create a **single TSX wrapper file** at `contents/docs/<product>/installation/_snippets/<prefix>-installation-wrapper.tsx` that exports all SDK wrappers:
 
@@ -264,6 +254,45 @@ For a complete working example, see the **[Session Replay](/docs/session-replay/
 4. Test locally: Run `pnpm start` and verify the page renders correctly at the expected URL.
 5. Commit and merge both the `posthog/posthog` and `posthog/posthog.com` PRs.
 
-<CalloutBox type="caution" title="Before committing">
-Make sure you've reverted any changes to `gatsby-config.js` before pushing your PR.
+## Exceptions to the standard pattern
+
+The architecture described above works well for products that have their own SDK installation steps – but not every product fits this mold. Some products are exceptions, and that's fine. The shared onboarding pattern should only be used when it makes sense.
+
+### Workflows
+
+Installing an SDK for Workflows is optional. Because of this, Workflows doesn't define its own shared doc components. There are **no files in `docs/onboarding/workflows/`**.
+
+Instead, Workflows reuses the Product Analytics `Installation` components directly and transforms them with a `modifySteps` function at the in-app level:
+
+```tsx file=frontend/src/scenes/onboarding/sdks/workflows/WorkflowsSDKInstructions.tsx
+import { ReactInstallation, PythonInstallation } from '@posthog/shared-onboarding/product-analytics'
+import { withOnboardingDocsWrapper } from '../shared/onboardingWrappers'
+
+// Filter out product-analytics-specific steps and add a workflows-specific final step
+function workflowsModifySteps(steps: StepDefinition[]): StepDefinition[] {
+    const installationSteps = steps.filter(
+        (step) => !['Send events', 'Send an event', 'Send events via the API'].includes(step.title)
+    )
+    return [
+        ...installationSteps,
+        {
+            title: 'Set up workflows',
+            badge: 'recommended',
+            content: <WorkflowsFinalStepContent />,
+        },
+    ]
+}
+
+const WorkflowsReactWrapper = withOnboardingDocsWrapper({
+    Installation: ReactInstallation,
+    modifySteps: workflowsModifySteps,
+})
+```
+
+This pattern works because Workflows only needs a PostHog SDK installed (the same installation steps as Product Analytics), then swaps the final "send events" step for a "set up Workflows" step. Everything lives in a single `WorkflowsSDKInstructions.tsx` file – no shared docs directory, no website stubs.
+
+<CalloutBox type="fyi" title="When to use this pattern">
+
+If your product's onboarding is essentially "install the PostHog SDK + do one product-specific thing," consider reusing existing Installation components with `modifySteps` instead of creating a full set of shared doc files. This avoids unnecessary duplication.
+
 </CalloutBox>
