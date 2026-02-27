@@ -1,0 +1,198 @@
+---
+title: How to track user flows from mobile app to web
+date: 2026-01-23
+author:
+  - lricoy
+tags:
+  - configuration
+  - persons
+  - sessions
+  - product analytics
+---
+
+We've already covered [how to track user flows from web to iOS](/tutorials/browser-ios-identification). Now let's do the opposite.
+
+Picture this: your mobile app is humming along, users are engaged, and they're ready to convert. But they need to authenticate on a web page, or you need to move them to a separate site for checkout. They tap the link, a wild browser opens and take them outside your dear app, but all the data is still on the local storage. The new browser has no cookie, no id, no nothing and PostHog has no idea who they are. New session, new anonymous ID, analytics split in two. What happen? Did you loose them to the world wide web?
+
+Well, not if you follow those simple recomendations:
+
+The tl;dr; fix: pass the user's `distinct_id` and `session_id` from your mobile app to the web page, then bootstrap PostHog on the web side.
+
+This comes up a lot with:
+
+- Checkout or payment pages that run in a browser
+- Webview-based onboarding flows
+- Referral links that open in a browser
+- Users opening your app email communication on a device that is configured to use the mobile browser
+- LinkedIn or social campaigns that use the in-app browser
+- Help pages opened from the app
+
+## Understanding the flow
+
+1. Get the user's `distinct_id` and `session_id` from the PostHog mobile SDK
+2. Append them as URL query parameters when opening the web page
+3. On the web page, parse the parameters and pass them to `posthog.init()` via the `bootstrap` option
+
+This works for both authenticated and anonymous users.
+
+## 1. Get the distinct ID and session ID
+
+Call `getDistinctId()` and `getSessionId()` from the PostHog mobile SDK.
+
+<MultiLanguage selector="tabs">
+
+```ios_swift
+import PostHog
+
+let distinctId = PostHogSDK.shared.getDistinctId()
+let sessionId = PostHogSDK.shared.getSessionId() // Returns String?
+```
+
+```android_kotlin
+import com.posthog.PostHog
+
+val distinctId = PostHog.distinctId()
+val sessionId = PostHog.sessionId() // Returns String?
+```
+
+</MultiLanguage>
+
+## 2. Open a web page with the IDs
+
+Append `distinct_id` and `session_id` as query parameters when opening the URL. Here's an example using an in-app browser:
+
+<MultiLanguage selector="tabs">
+
+```ios_swift
+import SafariServices
+import PostHog
+
+func openWebPage(from viewController: UIViewController) {
+    let distinctId = PostHogSDK.shared.getDistinctId()
+    let sessionId = PostHogSDK.shared.getSessionId() ?? ""
+
+    var components = URLComponents(string: "https://your-website.com/checkout")!
+    components.queryItems = [
+        URLQueryItem(name: "distinct_id", value: distinctId),
+        URLQueryItem(name: "session_id", value: sessionId)
+    ]
+
+    guard let url = components.url else { return }
+
+    let safariVC = SFSafariViewController(url: url)
+    viewController.present(safariVC, animated: true)
+}
+```
+
+```android_kotlin
+import android.content.Context
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
+import com.posthog.PostHog
+
+fun openWebPage(context: Context) {
+    val distinctId = PostHog.distinctId()
+    val sessionId = PostHog.sessionId() ?: ""
+
+    val uri = Uri.parse("https://your-website.com/checkout")
+        .buildUpon()
+        .appendQueryParameter("distinct_id", distinctId)
+        .appendQueryParameter("session_id", sessionId)
+        .build()
+
+    val customTabsIntent = CustomTabsIntent.Builder().build()
+    customTabsIntent.launchUrl(context, uri)
+}
+```
+
+</MultiLanguage>
+
+If you want to open the system browser instead of an in-app browser, use `UIApplication.shared.open(url)` on iOS or an `Intent(Intent.ACTION_VIEW, uri)` on Android. The URL construction stays the same.
+
+### When you don't control how the browser opens
+
+Sometimes you can't control how a link opens. Maybe the URL is inside a push notification, an email, or triggered by a third-party SDK.
+
+In those cases, append the `distinct_id` and `session_id` to all outbound links before the user navigates away from the app. For example, when constructing a link that will be shared or embedded, always include the parameters in the URL at the point where the URL is generated.
+
+## 3. Bootstrap PostHog on the web page
+
+On the web side, parse the URL parameters and pass them to `posthog.init()` using the `bootstrap` option. This tells PostHog to continue the same session and identity from the mobile app.
+
+<MultiLanguage selector="tabs">
+
+```js-web file=JavaScript
+import posthog from 'posthog-js'
+
+const urlParams = new URLSearchParams(window.location.search)
+const distinctId = urlParams.get('distinct_id')
+const sessionId = urlParams.get('session_id')
+
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  bootstrap: {
+    distinctID: distinctId || undefined,
+    sessionID: sessionId || undefined,
+  }
+})
+```
+
+```js-web file=Next.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { useSearchParams } from 'next/navigation'
+
+export function PHProvider({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams()
+  const distinctId = searchParams.get('distinct_id')
+  const sessionId = searchParams.get('session_id')
+
+  if (typeof window !== 'undefined' && !posthog.__loaded) {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      bootstrap: {
+        distinctID: distinctId || undefined,
+        sessionID: sessionId || undefined,
+      }
+    })
+  }
+
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+</MultiLanguage>
+
+Once bootstrapped, session replays, feature flag evaluations, and analytics events all connect back to the same user and session from the mobile app.
+
+## Handling authenticated vs. unauthenticated users
+
+The `bootstrap` object also accepts an `isIdentifiedID` flag:
+
+- **Authenticated user on mobile:** The user already called `identify()` (e.g., with their email or user ID). Their `distinct_id` is a stable identifier. Set `isIdentifiedID: true` on the web side.
+
+- **Anonymous user on mobile:** The `distinct_id` is a randomly generated UUID. Set `isIdentifiedID: false`. If the user identifies later on the web page, PostHog merges the events automatically.
+
+```js
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  bootstrap: {
+    distinctID: distinctId || undefined,
+    sessionID: sessionId || undefined,
+    isIdentifiedID: true // set to false for anonymous users
+  }
+})
+```
+
+> **Tip:** If you're using [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, call `posthog.createPersonProfile()` on the mobile side before opening the web page. This ensures initial person properties like `$initial_referrer` are set correctly.
+
+## Further reading
+
+- [How to set up cross-domain tracking](/tutorials/cross-domain-tracking)
+- [How to track user flows from web to iOS](/tutorials/browser-ios-identification)
+- [Client-side bootstrapping](/docs/feature-flags/bootstrapping)
+- [Identifying users](/docs/product-analytics/identify)
+- [Anonymous vs identified events](/docs/data/anonymous-vs-identified-events)
+
+<NewsletterForm />
