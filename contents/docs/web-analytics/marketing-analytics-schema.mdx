@@ -1,5 +1,5 @@
 ---
-title: Marketing analytics column definitions
+title: Marketing Analytics column definitions
 sidebar: Docs
 showTitle: true
 availability:
@@ -196,7 +196,7 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 | `Clicks` | `swipes` | Snapchat uses "swipes" as the equivalent of clicks | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
 | `Cost` | `spend` | Divided by 1,000,000 (stored in micros). Converted from `currency` if available. | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
 | `Reported Conversion` | `conversion_purchases` | # of attributed "PURCHASE" conversion events | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
-| `Reported Conversion Value` | `conversion_purchases_value` | Value of attributed "PURCHASE" conversion events (microcurrency in Ad Account's currency) | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
+| `Reported Conversion Value` | `conversion_purchases_value` | Value of attributed "PURCHASE" conversion events (stored in micro-units of the Ad Account's currency) | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
 | Date field | `start_time` | Start time of reporting period | [Snapchat Measurement API](https://developers.snap.com/api/marketing-api/Ads-API/measurement) |
 
 **Required tables:** `campaigns` and `campaign_stats`
