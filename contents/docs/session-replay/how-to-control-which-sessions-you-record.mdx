@@ -134,6 +134,44 @@ This means:
 
 > **Note:** Sampling reduces the number of sessions you record, but you cannot control which specific sessions are selected — the selection is determined by the session ID hash.
 
+### Mobile SDK sampling
+
+Sampling is also available in the Android and iOS SDKs. You can set a sample rate directly in your SDK configuration:
+
+<Tab.Group tabs={['Android', 'iOS']}>
+    <Tab.List>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+
+```android_kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
+    sessionReplay = true
+    // Sample rate between 0.0 and 1.0. Default is null (all sessions recorded).
+    sessionReplayConfig.sampleRate = 0.5 // Record 50% of sessions
+}
+```
+
+> **Note:** Requires Android SDK version 3.34.0 or higher. Remote configuration via [session replay triggers](https://app.posthog.com/settings/project-replay#replay-triggers) is also supported from this version.
+
+</Tab.Panel>
+        <Tab.Panel>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_token>")
+config.sessionReplay = true
+// Sample rate between 0.0 and 1.0. Default is nil (all sessions recorded).
+config.sessionReplayConfig.sampleRate = 0.5 // Record 50% of sessions
+```
+
+> **Note:** Requires iOS SDK version 3.42.0 or higher. Remote configuration via [session replay triggers](https://app.posthog.com/settings/project-replay#replay-triggers) is also supported from this version.
+
+</Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
 ## Combining controls
 
 Since version 1.238.0 of the web SDK you can control how multiple triggers are combined. Choosing whether recording will start when all triggers match or when any trigger matches.
