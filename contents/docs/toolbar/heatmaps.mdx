@@ -188,3 +188,10 @@ In app, PostHog overlays the heatmap over your site in an iframe. You can allow 
 | --- | --- |
 | US | `Content-Security-Policy: frame-ancestors 'self' https://us.posthog.com;` |
 | EU | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |
+
+
+### Screenshot generation timed out
+
+If you see a "Screenshot generation timed out" error when viewing heatmaps in-app, the background task that generates the screenshot didn't complete in time. This can happen due to temporary server issues like a worker crash or server restart.
+
+PostHog automatically recovers stale screenshots that have been stuck in processing for more than 10 minutes by re-queuing the generation task. If you see a timeout error, you can also click the **Retry** button in the error banner to manually trigger regeneration.
