@@ -29,7 +29,7 @@ function FolderRow({ folder, onClick }: { folder: MediaFolder; onClick: () => vo
 }
 
 export default function Libraries(): JSX.Element {
-    const { fetchUser: refreshUser } = useUser()
+    const { fetchUser: refreshUser, user } = useUser()
     const [search, setSearch] = useState('')
     const [tag, setTag] = useState('all-tags')
     const { addWindow } = useApp()
@@ -82,9 +82,19 @@ export default function Libraries(): JSX.Element {
         refreshUser()
     }
 
+    const handleGenerated = () => {
+        refreshImages()
+        refreshUser()
+    }
+
     const handleGenerateClick = () => {
         addWindow(
-            <HedgehogGenerator newWindow location={{ pathname: `hedgehog-generator` }} key={`hedgehog-generator`} />
+            <HedgehogGenerator
+                newWindow
+                location={{ pathname: `hedgehog-generator` }}
+                key={`hedgehog-generator`}
+                onGenerated={handleGenerated}
+            />
         )
     }
 
@@ -130,7 +140,7 @@ export default function Libraries(): JSX.Element {
                             {currentFolder.mediaCount} asset{currentFolder.mediaCount === 1 ? '' : 's'}
                         </span>
                     </div>
-                    {currentFolder.attributes?.name === 'Hedgehogs' && (
+                    {currentFolder.attributes?.name === 'Hedgehogs' && user?.picasso && (
                         <OSButton size="sm" icon={<IconSparkles />} onClick={handleGenerateClick}>
                             Generate
                         </OSButton>

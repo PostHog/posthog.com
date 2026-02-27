@@ -194,8 +194,8 @@ function ProgressRing({
     )
 }
 
-export default function HedgehogGenerator() {
-    const { isModerator, getJwt, user, fetchUser } = useUser()
+export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () => void }) {
+    const { isModerator, getJwt, user } = useUser()
     const [prompt, setPrompt] = useState('')
     const [image, setImage] = useState<GeneratedImage | null>(null)
     const [loading, setLoading] = useState(false)
@@ -236,7 +236,7 @@ export default function HedgehogGenerator() {
 
             const data = await response.json()
             setImage(data.images?.[0] || null)
-            fetchUser()
+            onGenerated?.()
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to generate image')
         } finally {

@@ -41,6 +41,7 @@ export type User = {
         resetTime: string | null
         windowMs: number
     }
+    picasso?: boolean
 }
 
 type UserContextValue = {
