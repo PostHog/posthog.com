@@ -51,6 +51,15 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     // Ps: it was 500ms (0.5s) by default until version 3.8.2
     // Available from version 3.10.0 (Before it was called debouncerDelayMs)
     sessionReplayConfig.throttleDelayMs = 1000
+
+    // Sample rate for session recordings. A value between 0.0 and 1.0.
+    // 1.0 means 100% of sessions will be recorded. 0.5 means 50%, and so on.
+    // Default is null (all sessions are recorded).
+    //
+    // Support for remote configuration
+    // in the session replay triggers (https://app.posthog.com/settings/project-replay#replay-triggers)
+    // requires SDK version 3.34.0 or higher.
+    sessionReplayConfig.sampleRate = null
 }
 ```
 
