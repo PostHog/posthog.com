@@ -140,7 +140,7 @@ This enables:
 To get started quickly, you can export your existing dashboards as Terraform code using the **Manage with Terraform** button.
 
 You'll see a **Manage with Terraform** button on:
-- **Dashboard pages** - Exports the entire dashboard including all insights, alerts, and hog functions
+- **Dashboard pages** - Exports the entire dashboard including all insights, dashboard layouts, alerts, and hog functions
 - **Insight detail pages** - Exports the individual insight with its associated alerts and hog functions
 
 Click the button to generate HCL code that you can copy directly into your Terraform configuration. This makes it easy to bring existing dashboards under version control without manually recreating them.
@@ -200,6 +200,33 @@ resource "posthog_insight" "pageview_count" {
     }
   })
   tags = ["managed-by:terraform"]
+}
+```
+
+### Example: Defining a dashboard layout
+
+The `posthog_dashboard_layout` resource controls how tiles (insights, text cards) are positioned on a dashboard. Each tile can specify layout coordinates, colors, and text content. When you export a dashboard using **Manage with Terraform**, this resource is generated automatically.
+
+```hcl
+resource "posthog_dashboard_layout" "team_metrics" {
+  dashboard_id = posthog_dashboard.team_metrics.id
+  tiles = [
+    {
+      insight_id = posthog_insight.pageview_count.id
+      layouts_json = jsonencode({
+        "sm": {
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 5
+        }
+      })
+    },
+    {
+      text_body = "Weekly metrics overview"
+      color     = "blue"
+    },
+  ]
 }
 ```
 
