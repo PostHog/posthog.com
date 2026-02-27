@@ -44,6 +44,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg',
         },
         {
+            label: 'iOS',
+            url: '/docs/error-tracking/upload-dsyms/ios',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
+        },
+        {
             label: 'Flutter',
             url: '/docs/error-tracking/upload-source-maps/flutter',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
