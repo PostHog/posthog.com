@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
@@ -25,13 +25,95 @@ const columns = [
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]
 
-function EditableLocationCell({ value, onSave }: { value: string | null; onSave: (newValue: string) => void }) {
-    const [editValue, setEditValue] = useState(value || '')
+// Also defined in src/pages/community/profiles/[id].tsx — update both if changed
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+const allSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL']
 
-    const handleSave = () => {
+const baseInputClass =
+    'w-full bg-transparent border rounded px-1 py-0.5 text-sm text-primary outline-none focus:border-yellow transition-colors duration-300'
+
+function useSaveFlash() {
+    const [saved, setSaved] = useState(false)
+    const timerRef = useRef<ReturnType<typeof setTimeout>>()
+
+    const flash = useCallback(() => {
+        setSaved(true)
+        clearTimeout(timerRef.current)
+        timerRef.current = setTimeout(() => setSaved(false), 1500)
+    }, [])
+
+    const borderClass = saved ? 'border-green' : 'border-primary'
+
+    return { flash, borderClass }
+}
+
+function EditableTShirtFitCell({
+    member,
+    updateProfile,
+}: {
+    member: TeamMember
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
+}) {
+    const { flash, borderClass } = useSaveFlash()
+
+    return (
+        <select
+            className={`${baseInputClass} ${borderClass} cursor-pointer`}
+            value={member.tShirtFit || ''}
+            onChange={async (e) => {
+                const fit = e.target.value || null
+                const newSizes = fit === 'female' ? femaleSizes : unisexSizes
+                const size = member.tShirtSize && newSizes.includes(member.tShirtSize) ? member.tShirtSize : null
+                const ok = await updateProfile(member.id, { tShirtFit: fit, tShirtSize: size })
+                if (ok) flash()
+            }}
+        >
+            <option value="">—</option>
+            <option value="unisex">Unisex</option>
+            <option value="female">Female</option>
+        </select>
+    )
+}
+
+function EditableTShirtSizeCell({
+    member,
+    updateProfile,
+}: {
+    member: TeamMember
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
+}) {
+    const sizes = member.tShirtFit === 'female' ? femaleSizes : member.tShirtFit === 'unisex' ? unisexSizes : allSizes
+    const { flash, borderClass } = useSaveFlash()
+
+    return (
+        <select
+            className={`${baseInputClass} ${borderClass} cursor-pointer`}
+            value={member.tShirtSize || ''}
+            onChange={async (e) => {
+                const ok = await updateProfile(member.id, { tShirtSize: e.target.value || null })
+                if (ok) flash()
+            }}
+        >
+            <option value="">—</option>
+            {sizes.map((s) => (
+                <option key={s} value={s}>
+                    {s}
+                </option>
+            ))}
+        </select>
+    )
+}
+
+function EditableTextCell({ value, onSave }: { value: string | null; onSave: (newValue: string) => Promise<boolean> }) {
+    const [editValue, setEditValue] = useState(value || '')
+    const { flash, borderClass } = useSaveFlash()
+
+    const handleSave = async () => {
         const trimmed = editValue.trim()
         if (trimmed !== (value || '')) {
-            onSave(trimmed)
+            const ok = await onSave(trimmed)
+            if (ok) flash()
         }
     }
 
@@ -48,7 +130,7 @@ function EditableLocationCell({ value, onSave }: { value: string | null; onSave:
                     e.currentTarget.blur()
                 }
             }}
-            className="w-full bg-transparent border border-primary rounded px-1 py-0.5 text-sm text-primary outline-none focus:border-yellow"
+            className={`${baseInputClass} ${borderClass}`}
         />
     )
 }
@@ -57,7 +139,7 @@ function memberToRow(
     member: TeamMember,
     index: number,
     isEditing: boolean,
-    updateProfile: (id: number, updates: Partial<TeamMember>) => void
+    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
 ) {
     return {
         key: String(member.id),
@@ -74,9 +156,9 @@ function memberToRow(
             { content: member.companyRole || '—', className: 'text-sm' },
             {
                 content: isEditing ? (
-                    <EditableLocationCell
+                    <EditableTextCell
                         value={member.location}
-                        onSave={(val) => updateProfile(member.id, { location: val })}
+                        onSave={async (val) => updateProfile(member.id, { location: val })}
                     />
                 ) : (
                     member.location || '—'
@@ -87,9 +169,33 @@ function memberToRow(
             { content: member.teams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.leadsTeams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.pineappleOnPizza === true ? 'Yes' : member.pineappleOnPizza === false ? 'No' : '—' },
-            { content: member.tShirtFit || '—', className: 'text-sm' },
-            { content: member.tShirtSize || '—', className: 'text-sm' },
-            { content: member.tShirtAdditionalInfo || '—', className: 'text-sm' },
+            {
+                content: isEditing ? (
+                    <EditableTShirtFitCell member={member} updateProfile={updateProfile} />
+                ) : (
+                    member.tShirtFit || '—'
+                ),
+                className: 'text-sm',
+            },
+            {
+                content: isEditing ? (
+                    <EditableTShirtSizeCell member={member} updateProfile={updateProfile} />
+                ) : (
+                    member.tShirtSize || '—'
+                ),
+                className: 'text-sm',
+            },
+            {
+                content: isEditing ? (
+                    <EditableTextCell
+                        value={member.tShirtAdditionalInfo}
+                        onSave={async (val) => updateProfile(member.id, { tShirtAdditionalInfo: val })}
+                    />
+                ) : (
+                    member.tShirtAdditionalInfo || '—'
+                ),
+                className: 'text-sm',
+            },
             { content: member.startDate || '—', className: 'text-sm' },
         ],
     }

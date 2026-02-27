@@ -101,23 +101,43 @@ export function useTeamMembers() {
         fetchTeamMembers()
     }, [])
 
-    const updateProfile = async (profileId: number, updates: Partial<TeamMember>) => {
+    const updateProfile = async (profileId: number, updates: Partial<TeamMember>): Promise<boolean> => {
         const token = await getJwt()
-        if (!token) return
+        if (!token) return false
 
+        const current = teamMembers.find((m) => m.id === profileId)
         setTeamMembers((prev) => prev.map((m) => (m.id === profileId ? { ...m, ...updates } : m)))
 
+        const apiData: Record<string, any> = {}
+        const hasTShirtField = 'tShirtFit' in updates || 'tShirtSize' in updates || 'tShirtAdditionalInfo' in updates
+        if (hasTShirtField) {
+            apiData.tShirt = {
+                fit: current?.tShirtFit ?? null,
+                size: current?.tShirtSize ?? null,
+                additionalInfo: current?.tShirtAdditionalInfo ?? null,
+            }
+            if ('tShirtFit' in updates) apiData.tShirt.fit = updates.tShirtFit
+            if ('tShirtSize' in updates) apiData.tShirt.size = updates.tShirtSize
+            if ('tShirtAdditionalInfo' in updates) apiData.tShirt.additionalInfo = updates.tShirtAdditionalInfo
+        }
+        for (const [key, value] of Object.entries(updates)) {
+            if (key === 'tShirtFit' || key === 'tShirtSize' || key === 'tShirtAdditionalInfo') continue
+            apiData[key] = value
+        }
+
         try {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
                 method: 'PUT',
-                body: JSON.stringify({ data: updates }),
+                body: JSON.stringify({ data: apiData }),
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
             })
+            return res.ok
         } catch (err) {
             console.error('Failed to update profile', err)
+            return false
         }
     }
 
