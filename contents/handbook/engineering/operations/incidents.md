@@ -115,7 +115,7 @@ When an incident is declared, the person who raised the incident is the incident
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status page](https://status.posthog.com/). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). If needed, ask the support team for help managing the status page so you can focus on the technical management of the incident. The status page can be updated from:
     - (recommended) the incident Slack channel using `/incident statuspage` (`/inc sp`)
-    - the [status page area](https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now) of the incident.io dashboard (only recommended for corrections / modifications - slack tooling provides better context)
+    - the [status page area](https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now) of the incident.io dashboard (only recommended for corrections/modifications - Slack tooling provides better context)
 
 The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
