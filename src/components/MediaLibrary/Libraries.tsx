@@ -141,7 +141,7 @@ export default function Libraries(): JSX.Element {
                         </span>
                     </div>
                     {currentFolder.attributes?.name === 'Hedgehogs' && user?.picasso && (
-                        <OSButton size="sm" icon={<IconSparkles />} onClick={handleGenerateClick}>
+                        <OSButton icon={<IconSparkles />} onClick={handleGenerateClick}>
                             Generate
                         </OSButton>
                     )}
