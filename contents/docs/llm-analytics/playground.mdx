@@ -1,0 +1,72 @@
+---
+title: Playground
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+The LLM analytics playground lets you test prompts and compare model outputs side-by-side. You can configure multiple prompts, each with its own model, system prompt, tools, and settings, then run them all in parallel to see how different configurations perform.
+
+This is useful for:
+
+- **Prompt engineering** – iterate on system prompts and compare outputs across models.
+- **Model evaluation** – test the same prompt against different providers or model versions.
+- **Debugging** – reproduce a traced generation from your app and tweak it interactively.
+
+## Accessing the playground
+
+Go to [**LLM analytics** > **Playground**](https://app.posthog.com/llm-analytics/playground).
+
+You can also open the playground directly from a trace. Click **Try in playground** on any generation in the [traces](/docs/llm-analytics/traces) view. This pre-fills the playground with the model, system prompt, messages, and tools from that generation.
+
+## Configuring provider keys
+
+The playground calls LLM providers on your behalf. You can either:
+
+- **Use shared keys** – PostHog provides shared API keys with rate limits. No setup required.
+- **Bring your own keys (BYOK)** – Add your own API keys in [**Settings** > **Environment** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) for higher rate limits and access to all models from a provider.
+
+Supported providers include OpenAI, Anthropic, Google Gemini, OpenRouter, and Fireworks.
+
+## Creating prompts
+
+Each prompt is a card in the playground. To add a new prompt, click **Add prompt**. Each prompt card has its own:
+
+- **Model picker** – Select the model and provider. When using BYOK keys, you see all models available for that provider.
+- **System prompt** – A collapsible section for the system-level instructions. You can expand it to edit, copy it, open it in a full-screen modal, or sync it to all other prompt cards.
+- **Messages** – Add user and assistant messages. Each message has a role-colored border and supports text or JSON content. Click **Add message** to append a new message.
+- **Tools** – Define tool/function schemas in JSON. Click the tools button to open a Monaco JSON editor with inline validation.
+- **Settings** – Configure **max tokens** (1–16,384), **reasoning effort** (minimal, low, medium, high), and **thinking** (enable extended thinking for supported models).
+
+## Comparing multiple prompts
+
+The playground uses a horizontal card layout. Add as many prompt cards as you need, then click **Run all** to execute them in parallel. Each card streams its response independently, so you see results as they arrive.
+
+This makes it straightforward to compare:
+
+- Different models with the same prompt
+- Different system prompts with the same model
+- Different tool configurations or message histories
+
+Use the **sync system prompt** action on any card to copy its system prompt to all other cards, keeping everything else independent.
+
+## Understanding results
+
+After execution, each prompt card displays its result directly below the input. The result includes:
+
+- **Response** – The model's output text, streamed in real time.
+- **Time to first token (TTFT)** – How long until the first token arrived.
+- **Latency** – Total time from request to final token.
+- **Token usage** – Prompt tokens (input) and completion tokens (output) for each response.
+
+These metrics help you evaluate not just output quality, but also speed and cost across different models and configurations.
+
+## Try in playground from traces
+
+When reviewing LLM generations in the [traces](/docs/llm-analytics/traces) view, click **Try in playground** to load that generation's configuration into the playground. This copies over:
+
+- The model used
+- The system prompt
+- All messages (user and assistant turns)
+- Tool definitions
+
+Array or object content from traces is automatically converted into readable text. From there, you can tweak the prompt and re-run it to debug or improve the output.
