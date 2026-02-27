@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import OSButton from 'components/OSButton'
 import { OSInput, OSSelect } from 'components/OSForm'
@@ -101,8 +101,15 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
 
     const [environmentInput, setEnvironmentInput] = useState('')
     const [showAdvanced, setShowAdvanced] = useState(false)
+    const advancedRef = useRef<HTMLDivElement>(null)
     const hasAdvancedOptions =
         checkboxes.some((c) => c.group === 'advanced') || inputs.some((i) => i.group === 'advanced')
+
+    useEffect(() => {
+        if (showAdvanced && advancedRef.current) {
+            advancedRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        }
+    }, [showAdvanced])
 
     const generatedCode = useMemo(() => generateCode(config), [config, generateCode])
     const filename = useMemo(() => getFilename(config.selectedValue), [config.selectedValue, getFilename])
@@ -188,7 +195,7 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
             data-scheme="primary"
         >
             {/* Left panel, config options */}
-            <div className="bg-accent p-4 @md:border-r border-primary @md:max-h-[80vh] @md:overflow-y-auto">
+            <div className="bg-accent p-4 @md:border-r border-primary @md:max-h-[80vh] @md:overflow-y-auto scroll-smooth">
                 {optionsHeader && <div className="mb-4">{optionsHeader}</div>}
 
                 {toggle && (
@@ -343,7 +350,7 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
                         </button>
 
                         {showAdvanced && (
-                            <div className="mt-4 space-y-4">
+                            <div ref={advancedRef} className="mt-4 space-y-4">
                                 {advancedCheckboxes.length > 0 && (
                                     <div className="space-y-4">
                                         {advancedCheckboxes.map((checkbox) => (
