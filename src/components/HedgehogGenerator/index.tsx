@@ -17,14 +17,6 @@ interface GeneratedImage {
     status: string
 }
 
-const DUMMY_IMAGE: GeneratedImage = {
-    uid: '114cf27f-3fdf-4bd0-bf61-36a238696ca0',
-    url: 'https://image.exactly.ai/generations/114cf27f-3fdf-4bd0-bf61-36a238696ca0.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXRoIjoiL2dlbmVyYXRpb25zLzExNGNmMjdmLTNmZGYtNGJkMC1iZjYxLTM2YTIzODY5NmNhMC5qcGciLCJleHAiOjE3NzE3MDE2MjYsImlhdCI6MTc3MTY5ODAyNn0.JkupNRXsQYjGFSsHW-2MT2CtciOkR0487smszbVnlac',
-    status: 'completed',
-}
-
-const USE_DUMMY_DATA = false
-
 function ImageResult({ image }: { image: GeneratedImage }) {
     const { addToast } = useToast()
     const [downloaded, setDownloaded] = useState(false)
@@ -209,12 +201,6 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
         setImage(null)
 
         try {
-            if (USE_DUMMY_DATA) {
-                await new Promise((resolve) => setTimeout(resolve, 1000))
-                setImage(DUMMY_IMAGE)
-                return
-            }
-
             const jwt = await getJwt()
             if (!jwt) {
                 throw new Error('You must be logged in to generate images')
