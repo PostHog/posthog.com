@@ -6,6 +6,7 @@ import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
 import { OSSelect } from 'components/OSForm'
 import { useMediaLibraryContext } from './context'
+import Tooltip from 'components/Tooltip'
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
@@ -24,6 +25,7 @@ interface ImageProps {
     tags?: Array<{ id: string; attributes: { label: string } }>
     onMoved?: () => void
     mediaFolder: any
+    prompt?: string
 }
 
 export default function Image({
@@ -38,6 +40,7 @@ export default function Image({
     tags: initialTags = [],
     onMoved,
     mediaFolder,
+    prompt,
 }: ImageProps): JSX.Element {
     const { folders, tags: allTags, fetchTags } = useMediaLibraryContext()
     const { public_id, resource_type } = provider_metadata || {}
@@ -348,7 +351,20 @@ export default function Image({
                 </div>
                 {uploader && (
                     <p className="text-xs text-secondary m-0 mt-1">
-                        Uploaded by{' '}
+                        {prompt ? (
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[300px]">
+                                        <strong>Prompt:</strong> {prompt}
+                                    </div>
+                                )}
+                            >
+                                <span className="underline decoration-dotted cursor-default">Generated</span>
+                            </Tooltip>
+                        ) : (
+                            'Uploaded'
+                        )}{' '}
+                        by{' '}
                         <Link
                             className="text-red dark:text-yellow font-semibold"
                             to={`/community/profiles/${uploader.id}`}
