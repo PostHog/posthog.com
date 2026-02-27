@@ -40,6 +40,7 @@ export type User = {
         limit: number
         resetTime: string | null
         windowMs: number
+        monthlyCount: number
     }
     picasso?: boolean
 }

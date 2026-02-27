@@ -336,6 +336,13 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
                             Example: is holding a phone while sitting on a toilet pondering something
                         </p>
                     )}
+
+                    {user?.imageGenerationRateLimit?.monthlyCount !== undefined && (
+                        <p className="m-0 mt-4 pt-4 border-t border-primary text-secondary text-xs">
+                            {user.imageGenerationRateLimit.monthlyCount} image
+                            {user.imageGenerationRateLimit.monthlyCount === 1 ? '' : 's'} generated this month
+                        </p>
+                    )}
                 </div>
             </ScrollArea>
         </div>
