@@ -9,7 +9,7 @@ const generateCode = (config: ConfigState): string => {
     const configLines: string[] = []
     configLines.push(`    api_host: '${apiHost}',`)
 
-    if (checkboxes.useDefaults) configLines.push(`    defaults: '2025-11-30',`)
+    if (checkboxes.useDefaults) configLines.push(`    defaults: '<ph_posthog_js_defaults>',`)
     if (!checkboxes.enableAutocapture) configLines.push(`    autocapture: false,`)
     if (checkboxes.spaMode) configLines.push(`    capture_pageview: 'history_change',`)
     if (!checkboxes.enableSessionRecording) configLines.push(`    disable_session_recording: true,`)
@@ -50,7 +50,7 @@ export const JSConfigBuilder: React.FC = () => {
                 {
                     id: 'useDefaults',
                     label: 'Use recommended defaults',
-                    description: "Sets defaults: '2025-11-30' which enables the latest recommended behaviors",
+                    description: 'Sets defaults to the latest recommended behaviors',
                     defaultValue: false,
                 },
                 {
@@ -138,9 +138,9 @@ export const JSConfigBuilder: React.FC = () => {
             inputs={[
                 {
                     id: 'apiKey',
-                    label: 'Project API key',
+                    label: 'Project token',
                     type: 'text',
-                    defaultValue: '<ph_project_api_key>',
+                    defaultValue: '<ph_project_token>',
                 },
                 {
                     id: 'persistence',
