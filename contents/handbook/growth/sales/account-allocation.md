@@ -167,17 +167,19 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 
 - They have set up tracking using posthog-js.
 
-### Account handover checklist 
+---
+
+## Account handover checklist 
 
 Every account handover should include a 15-30 minute call between the outgoing and incoming owner. This checklist helps you prep for that call and make sure nothing falls through the cracks.
 
-#### When to use this
+### When to use this
 
 - When a TAE-led customer is being handed over to a TAM after the initial contract is signed
 - When a TAM is taking over an account from another TAM or TAE mid-lifecycle
 - As a prep guide for the 15-30 minute handover call between outgoing and incoming owner
 
-## Before the handover call
+### Before the handover call
 
 The incoming TAM should prepare by reviewing the following in Vitally and SFDC before the call, so the handover conversation can focus on context that *isn't* in the data.
 
