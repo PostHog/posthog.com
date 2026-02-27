@@ -183,9 +183,12 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
         })) || []
 
     return (
-        <div className="my-4 border border-primary rounded grid md:grid-cols-[1fr_1.5fr]" data-scheme="primary">
+        <div
+            className="@container my-4 border border-primary rounded grid @md:grid-cols-[1fr_1.5fr]"
+            data-scheme="primary"
+        >
             {/* Left panel, config options */}
-            <div className="bg-accent p-4 md:border-r border-primary md:max-h-[80vh] md:overflow-y-auto">
+            <div className="bg-accent p-4 @md:border-r border-primary @md:max-h-[80vh] @md:overflow-y-auto">
                 {optionsHeader && <div className="mb-4">{optionsHeader}</div>}
 
                 {toggle && (
@@ -231,7 +234,7 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
                                 <div className="flex-1 -mt-0.5">
                                     <span className="font-semibold">{checkbox.label}</span>
                                     {checkbox.description && (
-                                        <p className="text-sm text-muted m-0 mt-0.5 md:hidden">
+                                        <p className="text-sm text-muted m-0 mt-0.5 @md:hidden">
                                             {checkbox.description}
                                         </p>
                                     )}
@@ -358,7 +361,7 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
                                                 <div className="flex-1 -mt-0.5">
                                                     <span className="font-semibold">{checkbox.label}</span>
                                                     {checkbox.description && (
-                                                        <p className="text-sm text-muted m-0 mt-0.5 md:hidden">
+                                                        <p className="text-sm text-muted m-0 mt-0.5 @md:hidden">
                                                             {checkbox.description}
                                                         </p>
                                                     )}
@@ -406,7 +409,7 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
             </div>
 
             {/* Right panel, config preview */}
-            <div className="bg-primary p-4 border-t md:border-t-0 border-primary min-w-0 md:sticky md:top-4 md:self-start md:max-h-[80vh] md:overflow-y-auto">
+            <div className="bg-primary p-4 border-t @md:border-t-0 border-primary min-w-0 @md:sticky @md:top-4 @md:self-start @md:max-h-[80vh] @md:overflow-y-auto">
                 <div className="flex items-center justify-between mb-2">
                     <label className="block font-semibold">{previewHeader}</label>
                     <OSButton variant="secondary" size="sm" onClick={handleReset}>
