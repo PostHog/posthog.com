@@ -748,6 +748,21 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/code': {
+        size: {
+            min: {
+                width: 900,
+                height: 600,
+            },
+            max: {
+                width: 1200,
+                height: 900,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
     '/kbd': {
         size: {
             min: {

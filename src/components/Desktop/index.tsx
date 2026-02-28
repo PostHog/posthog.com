@@ -85,6 +85,16 @@ export const useProductLinks = () => {
             onClick: () => openNewChat({ path: `ask-max` }),
             source: 'desktop',
         },
+        ...(posthog?.isFeatureEnabled?.('posthog-code-website')
+            ? [
+                  {
+                      label: 'PostHog Code',
+                      Icon: <AppIcon name="script" />,
+                      url: '/code',
+                      source: 'desktop',
+                  },
+              ]
+            : []),
         ...(posthogInstance
             ? [
                   {
