@@ -125,6 +125,15 @@ This is useful if you have a PostHog dashboard on a TV screen for others to see.
 
 **Important:** Auto refresh only works when the browser tab is active.
 
+
+### AI-powered refresh analysis
+
+When you refresh a dashboard, you can also have AI analyze what changed. Click the sparkle icon on the refresh button to refresh and analyze with AI. PostHog snapshots the current dashboard data, refreshes all insights, and then compares the before and after results. You get a summary of significant changes – drops, spikes, and trend reversals – across all insights on the dashboard.
+
+After the analysis completes, you can rate it with a thumbs up or thumbs down.
+
+> **Note:** AI-powered refresh analysis isn't available when dashboard filter overrides, URL filters, or URL variables are applied.
+
 ## Managing dashboards with Terraform
 
 For teams practicing infrastructure-as-code, you can manage PostHog dashboards and insights using the [PostHog Terraform Provider](https://registry.terraform.io/providers/PostHog/posthog/latest).
