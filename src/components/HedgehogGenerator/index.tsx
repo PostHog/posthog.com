@@ -1,5 +1,5 @@
 import { useUser } from 'hooks/useUser'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
 import { IconArrowRightDown, IconCheck } from '@posthog/icons'
@@ -10,6 +10,8 @@ import duration from 'dayjs/plugin/duration'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 dayjs.extend(duration)
+
+const POLL_INTERVAL_MS = 2000
 
 interface GeneratedImage {
     uid: string
@@ -146,6 +148,80 @@ function FloatingZs() {
     )
 }
 
+const EXPECTED_DURATION_MS = 120000
+
+const STATUS_MESSAGES = [
+    'Warming up the studio',
+    'Sharpening the pencils',
+    'Mixing the perfect colors',
+    'Channeling the muse',
+    'Adding extra spikiness',
+    'Perfecting the snoot',
+    'Fluffing the quills',
+    'Consulting the hog gods',
+    'Applying artistic flair',
+    'Making it extra cute',
+]
+
+function GeneratingLoader({ jobStatus }: { jobStatus: 'pending' | 'processing' | null }) {
+    const [elapsedMs, setElapsedMs] = useState(0)
+    const [messageIndex, setMessageIndex] = useState(0)
+    const startTimeRef = useRef<number>(Date.now())
+
+    useEffect(() => {
+        startTimeRef.current = Date.now()
+        setElapsedMs(0)
+        setMessageIndex(0)
+    }, [])
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setElapsedMs(Date.now() - startTimeRef.current)
+        }, 100)
+        return () => clearInterval(timer)
+    }, [])
+
+    useEffect(() => {
+        const messageInterval = EXPECTED_DURATION_MS / STATUS_MESSAGES.length
+        const messageTimer = setInterval(() => {
+            setMessageIndex((prev) => Math.min(prev + 1, STATUS_MESSAGES.length - 1))
+        }, messageInterval)
+        return () => clearInterval(messageTimer)
+    }, [])
+
+    const progress = Math.min(95, (elapsedMs / EXPECTED_DURATION_MS) * 100)
+
+    const formatTime = (ms: number) => {
+        const dur = dayjs.duration(ms)
+        return dur.format('m:ss')
+    }
+
+    return (
+        <div className="aspect-square border-2 border-primary/40 rounded flex flex-col items-center justify-center relative overflow-hidden">
+            <div className="text-center px-4">
+                <div className="flex items-center justify-center gap-3 text-xs text-secondary">
+                    <span className="font-mono">{formatTime(elapsedMs)}</span>
+                    <span>•</span>
+                    <span key={messageIndex} className="animate-slide-up-fade-in">
+                        {STATUS_MESSAGES[messageIndex]}
+                    </span>
+                </div>
+
+                <div className="mt-3 w-48 mx-auto">
+                    <div className="h-1 rounded-full overflow-hidden bg-accent">
+                        <div
+                            className="h-full bg-gradient-to-r from-yellow to-orange rounded-full transition-all duration-300 ease-out"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+                </div>
+
+                <p className="text-primary/70 text-xs mt-3 m-0">Usually takes about 2 minutes</p>
+            </div>
+        </div>
+    )
+}
+
 function ProgressRing({
     progress,
     size = 100,
@@ -191,12 +267,56 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
     const [prompt, setPrompt] = useState('')
     const [image, setImage] = useState<GeneratedImage | null>(null)
     const [loading, setLoading] = useState(false)
+    const [jobStatus, setJobStatus] = useState<'pending' | 'processing' | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const abortControllerRef = useRef<AbortController | null>(null)
 
     const { isActive: isRateLimited, progress, formattedTime } = useRateLimit(user?.imageGenerationRateLimit)
 
+    const pollJobStatus = useCallback(
+        async (jobId: string, jwt: string, signal: AbortSignal): Promise<GeneratedImage | null> => {
+            while (!signal.aborted) {
+                const statusResponse = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/generate/status/${jobId}`,
+                    {
+                        headers: { Authorization: `Bearer ${jwt}` },
+                        signal,
+                    }
+                )
+
+                if (!statusResponse.ok) {
+                    throw new Error(`Failed to check job status (${statusResponse.status})`)
+                }
+
+                const statusData = await statusResponse.json()
+
+                switch (statusData.status) {
+                    case 'completed':
+                        return statusData.result?.images?.[0] || null
+                    case 'failed':
+                        throw new Error(statusData.error || 'Image generation failed')
+                    case 'processing':
+                        setJobStatus('processing')
+                        break
+                    case 'pending':
+                        setJobStatus('pending')
+                        break
+                }
+
+                await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL_MS))
+            }
+            return null
+        },
+        []
+    )
+
     const generateImage = async (promptText: string) => {
+        abortControllerRef.current?.abort()
+        const abortController = new AbortController()
+        abortControllerRef.current = abortController
+
         setLoading(true)
+        setJobStatus('pending')
         setError(null)
         setImage(null)
 
@@ -213,6 +333,7 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
                     Authorization: `Bearer ${jwt}`,
                 },
                 body: JSON.stringify({ prompt: `generate a hedgehog that ${promptText}` }),
+                signal: abortController.signal,
             })
 
             if (!response.ok) {
@@ -221,14 +342,35 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
             }
 
             const data = await response.json()
-            setImage(data.images?.[0] || null)
-            onGenerated?.()
+            const { jobId } = data
+
+            if (!jobId) {
+                throw new Error('No job ID returned from server')
+            }
+
+            const generatedImage = await pollJobStatus(jobId, jwt, abortController.signal)
+            if (generatedImage) {
+                setImage(generatedImage)
+                onGenerated?.()
+            }
         } catch (err) {
+            if (err instanceof Error && err.name === 'AbortError') {
+                return
+            }
             setError(err instanceof Error ? err.message : 'Failed to generate image')
         } finally {
-            setLoading(false)
+            if (!abortController.signal.aborted) {
+                setLoading(false)
+                setJobStatus(null)
+            }
         }
     }
+
+    useEffect(() => {
+        return () => {
+            abortControllerRef.current?.abort()
+        }
+    }, [])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -321,9 +463,7 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
 
                             <div className="">
                                 {loading ? (
-                                    <div className="aspect-square border-2 border-primary/20 rounded flex items-center justify-center bg-primary/5 animate-pulse">
-                                        <div className="text-primary/30">Generating...</div>
-                                    </div>
+                                    <GeneratingLoader jobStatus={jobStatus} />
                                 ) : (
                                     image && <ImageResult key={image.uid} image={image} />
                                 )}
