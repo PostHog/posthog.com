@@ -7,6 +7,17 @@ import Link from 'components/Link'
 import { OSSelect } from 'components/OSForm'
 import { useMediaLibraryContext } from './context'
 import Tooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+
+dayjs.extend(duration)
+
+const formatDuration = (ms: number): string => {
+    const dur = dayjs.duration(ms)
+    const minutes = Math.floor(dur.asMinutes())
+    const seconds = dur.seconds()
+    return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
+}
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
@@ -26,6 +37,7 @@ interface ImageProps {
     onMoved?: () => void
     mediaFolder: any
     prompt?: string
+    generationDurationMs?: number
 }
 
 export default function Image({
@@ -41,6 +53,7 @@ export default function Image({
     onMoved,
     mediaFolder,
     prompt,
+    generationDurationMs,
 }: ImageProps): JSX.Element {
     const { folders, tags: allTags, fetchTags } = useMediaLibraryContext()
     const { public_id, resource_type } = provider_metadata || {}
@@ -52,6 +65,7 @@ export default function Image({
     const [uploader] = profiles
     const [isMoving, setIsMoving] = useState(false)
     const currentFolderId = mediaFolder?.id
+    const formattedDuration = generationDurationMs ? formatDuration(generationDurationMs) : null
 
     useEffect(() => {
         setAvailableOptions(allTags)
@@ -354,8 +368,15 @@ export default function Image({
                         {prompt ? (
                             <Tooltip
                                 content={() => (
-                                    <div className="max-w-[300px]">
-                                        <strong>Prompt:</strong> {prompt}
+                                    <div className="max-w-[300px] space-y-1">
+                                        <p className="m-0">
+                                            <strong>Prompt:</strong> {prompt}
+                                        </p>
+                                        {formattedDuration && (
+                                            <p className="m-0">
+                                                <strong>Duration:</strong> {formattedDuration}
+                                            </p>
+                                        )}
                                     </div>
                                 )}
                             >
