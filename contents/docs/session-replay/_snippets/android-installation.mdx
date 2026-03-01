@@ -39,6 +39,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     sessionReplayConfig.maskAllImages = true
 
     // Capture logs automatically. Default is true.
+    // Remote configuration via project settings requires SDK version 3.32.0 or higher.
     sessionReplayConfig.captureLogcat = true
 
     // Whether replays are created using high quality screenshots. Default is false.

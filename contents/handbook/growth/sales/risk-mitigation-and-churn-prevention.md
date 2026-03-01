@@ -178,16 +178,17 @@ Add the account to the **Churn Risk** segment in Vitally if any of the following
 
 ### Internal process
 
-**1. Post in #customer-churn**
+**1. Add churn risk segment in Vitally**
 
-When you flag an account as at risk, post in the #customer-churn Slack channel with:
+When you flag an account as at risk, add a note in vitally  with:
 
 - Account name and ARR
 - What triggered the risk flag
 - What you know about the situation
 - What help you need (if any)
+- What you are doing to mitigate the churn
 
-This keeps the team informed and surfaces accounts that might need additional support or visibility.
+The churn risk bot should automatically post this in the #customer-churn slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
 
 **2. Weekly at-risk account review**
 

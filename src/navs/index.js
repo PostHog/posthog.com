@@ -35,6 +35,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/attio',
                 },
                 {
+                    name: 'BuildBetter',
+                    url: '/docs/cdp/sources/buildbetter',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -45,6 +49,10 @@ export const dataPipelines = {
                 {
                     name: 'Klaviyo',
                     url: '/docs/cdp/sources/klaviyo',
+                },
+                {
+                    name: 'Linear',
+                    url: '/docs/cdp/sources/linear',
                 },
                 {
                     name: 'Zendesk',
@@ -117,6 +125,10 @@ export const dataPipelines = {
                 {
                     name: 'Snapchat Ads',
                     url: '/docs/cdp/sources/snapchat-ads',
+                },
+                {
+                    name: 'Pinterest Ads',
+                    url: '/docs/cdp/sources/pinterest-ads',
                 },
                 {
                     name: 'Google Sheets',
@@ -557,6 +569,7 @@ export const handbookSidebar = [
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
             { name: 'Advisories & CVEs', url: '/handbook/company/security-advisories' },
+            { name: 'Post-mortems', url: '/handbook/company/post-mortems' },
         ],
     },
     {
@@ -4874,6 +4887,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/bigquery',
                         },
                         {
+                            name: 'BuildBetter',
+                            url: '/docs/data-warehouse/sources/buildbetter',
+                        },
+                        {
                             name: 'Chargebee',
                             url: '/docs/data-warehouse/sources/chargebee',
                         },
@@ -4914,6 +4931,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/snapchat-ads',
                         },
                         {
+                            name: 'Pinterest Ads',
+                            url: '/docs/data-warehouse/sources/pinterest-ads',
+                        },
+                        {
                             name: 'Shopify',
                             url: '/docs/data-warehouse/sources/shopify',
                         },
@@ -4940,6 +4961,10 @@ export const docsMenu = {
                         {
                             name: 'Klaviyo',
                             url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
+                            name: 'Linear',
+                            url: '/docs/data-warehouse/sources/linear',
                         },
                         {
                             name: 'Mailchimp',

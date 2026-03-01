@@ -1718,7 +1718,8 @@
         },
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
         { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
-        { "source": "/professional-services", "destination": "/services" }
+        { "source": "/professional-services", "destination": "/services" },
+        { "source": "/posthug", "destination": "/" }
     ],
     "headers": [
         {
