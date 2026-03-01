@@ -52,6 +52,8 @@ That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions]
 
 To learn more about usage-based pricing beyond free tiers and to calculate potential costs, check out our [pricing page and calculator](/pricing).
 
+*Still exploring CDP alternatives? We compare the tradeoffs in our [guide to the best CDPs for developers.](/blog/best-customer-data-platforms-for-developers)*
+
 ## What's next?
 
 If you're already using pipelines, you don't need to do anything — your billing will automatically switch to the new system starting today and will apply to usage going forward. Your usage up until yesterday is billed under the old pricing scheme and you can see both charges in the billing page for this month. 
@@ -60,4 +62,4 @@ If you are forecasted an increased bill because of the price change, we will aut
 
 If you've been waiting for a better reason to try data pipelines out, well… this is it.  
 
-[Head to your pipelines dashboard](https://us.posthog.com/pipeline/destinations) and start batch exporting data or sending events to destinations the cheaper, fairer way.
+[Head to your pipelines dashboard](https://app.posthog.com/data-management/destinations) and start batch exporting data or sending events to destinations the cheaper, fairer way.

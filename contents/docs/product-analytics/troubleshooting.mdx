@@ -22,7 +22,7 @@ This is the most common reason events don't appear. To debug this, you can try s
 <MultiLanguage>
 
 ```Web
-posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>', defaults: '<ph_posthog_js_defaults>' }) // Replace with the URL you copied from webhook.site
+posthog.init('<ph_project_token>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>', defaults: '<ph_posthog_js_defaults>' }) // Replace with the URL you copied from webhook.site
 ```
 
 ```node
@@ -49,7 +49,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PostHogProvider
-      apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
+      apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_TOKEN}
       options={options}
     >
       <App />
@@ -60,7 +60,7 @@ root.render(
 
 ```ruby
 posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
+  api_key: "<ph_project_token>",
   host: "<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>", # Replace with the URL you copied from webhook.site
   on_error: Proc.new { |status, msg| print msg }
 })
@@ -147,7 +147,7 @@ POST https://[your-instance].com/i/v0/e/
 Content-Type: application/json
 Body:
 {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "event_name",
     "distinct_id": "distinct_id_of_your_user",
     "properties": {
@@ -259,14 +259,6 @@ A smaller time period means less data to process. You can always adjust the peri
 Avoid using `pdi.person.properties.<property>` in your filters and breakdowns, this should only be used if you absolutely need to see what the data for a person looks like right now. Instead, prefer to use `person.properties.<property>` which is much faster.
 
 You can find more details about how these modes works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
-
-**4. Use sampling**
-
-[Sampling](/docs/product-analytics/sampling) speeds up insights and queries by taking a portion of your data to calculate aggregate results.
-
-This can be enabled on insights by clicking the "Sampling" toggle on insights or the prompt when they are querying.
-
-![Sampling](https://res.cloudinary.com/dmukukwp6/image/upload/v1726779686/posthog.com/contents/CleanShot_2024-09-19_at_14.01.02_2x.png)
 
 ### How do I group or combine events?
 

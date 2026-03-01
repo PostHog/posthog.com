@@ -29,12 +29,14 @@ import {
     StickerFlagPL,
     StickerFlagPR,
     StickerFlagPT,
+    StickerFlagRO,
     StickerFlagRS,
     StickerFlagSE,
     StickerFlagSI,
     StickerFlagUnknown,
     StickerFlagUS,
     StickerFlagUY,
+    StickerFlagZW,
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
@@ -125,10 +127,14 @@ const Stickers = ({
                     <StickerFlagPT className="w-8 h-8" />
                 ) : country === 'RS' ? (
                     <StickerFlagRS className="w-8 h-8" />
+                ) : country === 'RO' ? (
+                    <StickerFlagRO className="w-8 h-8" />
                 ) : country === 'SE' ? (
                     <StickerFlagSE className="w-8 h-8" />
                 ) : country === 'UY' ? (
                     <StickerFlagUY className="w-8 h-8" />
+                ) : country === 'ZW' ? (
+                    <StickerFlagZW className="w-8 h-8" />
                 ) : country === 'SI' ? (
                     <StickerFlagSI className="w-8 h-8" />
                 ) : (

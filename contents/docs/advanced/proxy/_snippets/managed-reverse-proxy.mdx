@@ -3,7 +3,13 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
 
-This option requires our [platforms add-ons](https://posthog.com/platform-packages) and access to your domain's DNS settings.
+This option is free for all PostHog Cloud users. You just need access to your domain's DNS settings.
+
+<CalloutBox icon="IconInfo" title="Setting up during onboarding?" type="fyi">
+
+If you're onboarding a web-based product like Web Analytics, Surveys, or LLM Analytics, you'll be guided through managed proxy setup as part of the onboarding flow. The steps below are for setting it up manually from the organization settings.
+
+</CalloutBox>
 
 <Steps>
 
@@ -50,14 +56,14 @@ Update your PostHog initialization to use your new subdomain:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yoursubdomain.myapp.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yoursubdomain.myapp.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -65,7 +71,7 @@ posthog.init('<ph_project_api_key>', {
 
 </MultiLanguage>
 
-Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project API key**.
+Replace `yoursubdomain.myapp.com` with your actual subdomain, and provide your **project token**.
 
 Always set both `api_host` (your proxy) and `ui_host` (PostHog's actual domain) so features like the toolbar work correctly.
 

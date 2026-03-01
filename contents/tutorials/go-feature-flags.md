@@ -93,7 +93,7 @@ To install it, run the following command:
 go get github.com/posthog/posthog-go
 ```
 
-Next, set up the PostHog client in your `main.go` file. To do this, you need your project API key and instance address from [your project settings](https://app.posthog.com/project/settings). You also need to create a personal API key which is done in [your personal settings](https://app.posthog.com/me/settings). Use these values to create a `posthog.Config` to initialize `posthog.NewWithConfig()`.
+Next, set up the PostHog client in your `main.go` file. To do this, you need your project token and instance address from [your project settings](https://app.posthog.com/project/settings). You also need to create a personal API key which is done in [your personal settings](https://app.posthog.com/me/settings). Use these values to create a `posthog.Config` to initialize `posthog.NewWithConfig()`.
 
 After doing all this, add a `$pageview` event capture in your HTTP function handler. Altogether, this looks like this:
 
@@ -109,7 +109,7 @@ import (
 
 func main() {
 	client, _ := posthog.NewWithConfig(
-		"<ph_project_api_key",
+		"<ph_project_token",
 		posthog.Config{
 			PersonalApiKey: "<ph_personal_api_key>",
 			Endpoint: "<ph_client_api_host>",

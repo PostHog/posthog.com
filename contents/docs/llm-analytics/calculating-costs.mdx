@@ -53,7 +53,7 @@ import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_client_api_host>' }
 )
 
@@ -80,7 +80,7 @@ from posthog.ai.openai import OpenAI
 from posthog import Posthog
 
 posthog = Posthog(
-    "<ph_project_api_key>",
+    "<ph_project_token>",
     host="<ph_client_api_host>"
 )
 
@@ -159,5 +159,18 @@ Cost calculation follows this precedence order:
 1. **Pre-calculated costs** (`$ai_input_cost_usd`, `$ai_output_cost_usd`, `$ai_request_cost_usd`, `$ai_web_search_cost_usd`): These values are used directly without any additional calculation
 2. **Custom pricing** (`$ai_input_token_price`, `$ai_output_token_price`, `$ai_request_price`, `$ai_web_search_price`): PostHog calculates costs from token counts and usage metrics using your custom prices
 3. **Automatic model matching**: PostHog matches your model using OpenRouter's pricing data first, then falls back to manually maintained pricing if needed
+
+
+## Cost calculation metadata
+
+When PostHog calculates costs automatically, it sets the following metadata properties on the event to help you understand how costs were determined:
+
+| Property | Description | Examples |
+|----------|-------------|----------|
+| `$ai_model_cost_used` | The model identifier used for cost calculation. May differ from the requested model when a variant or alias is resolved. | `openai/gpt-4o-mini` |
+| `$ai_cost_model_source` | Where the cost data for this model was sourced from. | `openrouter`, `manual`, `custom`, `passthrough` |
+| `$ai_cost_model_provider` | The provider used to look up the cost for this model. | `openai`, `anthropic`, `custom` |
+
+These properties are useful for debugging cost discrepancies or understanding which pricing was applied when using model aliases or custom configurations.
 
 You can find the code for this on [GitHub](https://github.com/PostHog/posthog/tree/master/plugin-server/src/ingestion/ai-costs).

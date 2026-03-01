@@ -1,4 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
+import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import Link from 'components/Link'
@@ -155,10 +156,7 @@ export const TeamMember = (props: any) => {
                         <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10 group-hover:-translate-y-20 transition-all">
                             <CloudinaryImage
                                 width={350}
-                                src={
-                                    avatar?.url ||
-                                    'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                                }
+                                src={avatar?.url || AVATAR_FALLBACK_URL}
                                 imgClassName="w-full h-[calc(50cqh_+_3rem)] object-contain object-right-bottom pl-4 z-10 relative top-[-2px]"
                                 alt={name}
                             />
@@ -374,35 +372,37 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     // handleSearch removed since we use prop-based search
 
     return (
-        <div data-scheme="primary" className="bg-primary h-full relative">
+        <div data-scheme="primary" className="@container bg-primary h-full">
             <SEO title="Team - PostHog" />
-            <ToggleGroup
-                className="absolute top-[-44px] right-0 z-10"
-                title=""
-                hideTitle
-                options={[
-                    {
-                        label: (
-                            <>
-                                <IconList className="size-4 mr-1" />
-                                List
-                            </>
-                        ),
-                        value: 'list',
-                    },
-                    {
-                        label: (
-                            <>
-                                <IconMapPin className="size-4 mr-1" />
-                                Map
-                            </>
-                        ),
-                        value: 'map',
-                    },
-                ]}
-                onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
-                value={activeTab}
-            />
+            <div className="flex items-center justify-between">
+                <h1>People</h1>
+                <ToggleGroup
+                    title=""
+                    hideTitle
+                    options={[
+                        {
+                            label: (
+                                <>
+                                    <IconList className="size-4 mr-1" />
+                                    List
+                                </>
+                            ),
+                            value: 'list',
+                        },
+                        {
+                            label: (
+                                <>
+                                    <IconMapPin className="size-4 mr-1" />
+                                    Map
+                                </>
+                            ),
+                            value: 'map',
+                        },
+                    ]}
+                    onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
+                    value={activeTab}
+                />
+            </div>
             <ScrollArea className="h-full">
                 {activeTab === 'list' && (
                     <>
@@ -464,7 +464,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
 export const teamQuery = graphql`
     query TeamQuery {
         team: allSqueakProfile(
-            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
             sort: { fields: startDate, order: ASC }
         ) {
             teamMembers: nodes {

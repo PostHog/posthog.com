@@ -74,7 +74,7 @@ This reloads the whole table on every sync. This is great for tables with common
 
 ## Syncing
 
-Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://us.posthog.com/pipeline/sources). You can also reload or delete sources here.
+Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://app.posthog.com/data-management/sources). You can also reload or delete sources here.
 
 When you expand each source, you can see:
 
@@ -82,6 +82,10 @@ When you expand each source, you can see:
 - Enable or disable syncing for that table
 - Synced table name in PostHog
 - Time the table was last synced
+
+If you add new tables to your source database, click **Pull new schemas** to discover them without waiting for the next sync. This only updates the list of available schemas – it doesn't trigger a data sync.
+
+To sync all enabled schemas at once, click **Sync now**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
 
 <ProductScreenshot
     imageLight={SettingsLight}

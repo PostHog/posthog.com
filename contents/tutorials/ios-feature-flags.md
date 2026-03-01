@@ -91,7 +91,7 @@ Note that for this tutorial we use version `3.1.3` of the SDK.
 
 ![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-feature-flags/swift-npm.png)
 
-Next, configure your PostHog instance in `App.swift` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Next, configure your PostHog instance in `App.swift` using your project TOKEN and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
 ```swift file=App.swift
 import SwiftUI
@@ -100,10 +100,9 @@ import PostHog
 @main
 struct posthog_feature_flagsApp: App {
     init() {
-        let POSTHOG_API_KEY = "<ph_project_api_key>"
-        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        let POSTHOG_HOST = "<ph_client_api_host>"
-        let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
+        let POSTHOG_TOKEN = "<ph_project_token>"
+        let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+        let configuration = PostHogConfig(apiKey: POSTHOG_TOKEN, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
         PostHogSDK.shared.setup(configuration)
     }
     

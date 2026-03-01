@@ -1,0 +1,69 @@
+---
+title: Error Tracking pricing
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Error Tracking comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies *use PostHog for free*.
+
+No credit card is required to get started. You can also set billing limits to avoid any surprise
+charges.
+
+Error Tracking is billed by the number of `$exception` events you capture. The price per event changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
+
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
+
+<Pricing productType="error_tracking" />
+
+We aim to be significantly cheaper than our competitors. Below are tips to reduce your error tracking costs.
+
+## What contributes to your bill?
+
+Error tracking bills you based on the number of `$exception` events **_ingested_** by PostHog _each month_. This means if you send exception events to PostHog, they will be billed.
+
+This also means:
+- The total number of exceptions stored in PostHog does not contribute to your bill.
+- The number of [issues](/docs/error-tracking/issues-and-exceptions) in PostHog does not affect your bill, only the individual exception events that make up the issues.
+- Merging, resolving, and suppressing issues in PostHog does not reduce your bill.
+
+## Prevent surprises with billing limits
+
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for error tracking. When a project exceeds this limit, PostHog will no longer capture exception events until your billing period resets.
+
+## Tips to reduce your bill
+
+The best way to reduce your bill is to reduce the number of `$exception` events you send to PostHog from the client-side. This means being more selective about which exceptions are captured.
+
+### Configure exception autocapture
+
+By default, we capture all unhandled errors and rejections. This can capture more than you need. To reduce which exceptions that are captured, you can configure which types of exceptions are autocaptured in the JS SDK config like this: 
+
+```json
+{
+  "capture_exceptions": {
+    "capture_unhandled_errors": true,
+    "capture_unhandled_rejections": true,
+    "capture_console_errors": false
+  }
+}
+```
+
+Alternatively, you can disable exception autocapture completely in your [project settings](https://us.posthog.com/error_tracking/configuration).
+
+### Suppression rules
+
+import SuppressionRules from './_snippets/suppression-rules.mdx'
+
+<SuppressionRules />
+
+### Burst protection
+
+import BurstProtection from './_snippets/burst-protection.mdx'
+
+<BurstProtection />
+
+### Using the `before_send` hook
+
+import BeforeSendHook from './_snippets/before-send-hook.mdx'
+
+<BeforeSendHook />
