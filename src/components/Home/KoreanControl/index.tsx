@@ -159,7 +159,7 @@ const HomeHitCounter = () => {
     return (
         <div className="flex flex-col justify-center text-center mt-20">
             {/* Korean: "Thanks for being visitor number" */}
-            <p className="mb-2">방문자 번호로 와주셔서 감사합니다</p>
+            <p className="mb-2">방문자 번호:</p>
             <Tooltip
                 trigger={
                     <div className="inline-flex bg-black divide-x divide-primary">
@@ -808,7 +808,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             <>
                 {/* Korean: "If nothing else has sold you on PostHog, hopefully these classic marketing tactics will." */}
-                <p className="-mt-2">아직 마음이 안 움직이셨다면, 이 클래식한 마케팅 전술이 도움이 되길 바랍니다.</p>
+                <p className="-mt-2">아직도 망설이신다면, 이런 클래식한 마케팅 전술을 써보겠습니다.</p>
                 <CTA headline={false} />
             </>
         ),
@@ -968,7 +968,7 @@ export default function KoreanHome({
             <LocaleProvider locale="ko">
                 <SEO
                     lang="ko"
-                    title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
+                    title="PostHog – 프로덕트 엔지니어를 위한 도구"
                     updateWindowTitle={false}
                     description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                     image="/images/og/default.png"
@@ -997,7 +997,7 @@ export default function KoreanHome({
             <>
                 <SEO
                     lang="ko"
-                    title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
+                    title="PostHog – 프로덕트 엔지니어를 위한 도구"
                     updateWindowTitle={false}
                     description="모든 개발자 도구를 한 곳에서."
                     image="/images/og/default.png"
@@ -1017,7 +1017,7 @@ export default function KoreanHome({
         <>
             <SEO
                 lang="ko"
-                title="PostHog – 프로덕트 엔지니어를 위한 개발자 도구"
+                title="PostHog – 프로덕트 엔지니어를 위한 도구"
                 updateWindowTitle={false}
                 description="모든 개발자 도구를 한 곳에서. PostHog는 엔지니어에게 성공적인 제품을 더 빠르게 구축, 테스트, 측정, 배포할 수 있는 모든 것을 제공합니다. 무료로 시작하세요."
                 image="/images/og/default.png"

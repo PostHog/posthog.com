@@ -263,10 +263,10 @@ export default function CTA({ headline = true }) {
                                 >
                                     {isKo ? '오늘' : 'today'}
                                 </button>
-                                {isKo ? ' 가입했어요. ' : '. '}
+                                {isKo ? ' 가입했습니다. ' : '. '}
                                 <br className="hidden sm:block" />
                                 {isKo
-                                    ? '지금 시작하면 첫 주문에서 $0 할인.'
+                                    ? '지금 시작하면 첫 주문에서 $0 할인 혜택.'
                                     : 'Act now and get $0 off your first order.'}
                             </p>
                         </div>
