@@ -1,0 +1,11 @@
+If you send requests to a backend that uses a PostHog server SDK, you can link backend events to session replays. Configure `__add_tracing_headers` to automatically send session IDs with your requests:
+
+```js
+posthog.init('<ph_project_token>', {
+    __add_tracing_headers: ['your-backend-domain.com']
+});
+```
+
+Or retrieve the session ID manually with `posthog.getSessionId()` and pass it to your backend.
+
+Learn more in our [guide to linking backend events to session replays](/docs/session-replay/link-server-events).

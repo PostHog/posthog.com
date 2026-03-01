@@ -171,6 +171,12 @@ For a detailed error tracking installation guide, including automatic exception 
 
 **PostHog not capturing events:** Ensure you're using optional chaining (`posthog?.capture()`) since `usePostHog()` returns `undefined` during server-side rendering.
 
+## Link backend events to session replays
+
+import LinkSessionReplayFrontend from '../_snippets/link-session-replay-frontend.mdx'
+
+<LinkSessionReplayFrontend />
+
 ## Next steps
 
 For any technical questions for how to integrate specific PostHog features into Nuxt (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDK docs.

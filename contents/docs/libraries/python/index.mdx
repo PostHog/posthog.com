@@ -183,6 +183,12 @@ posthog = Posthog(
 
 You can configure which variables are captured, masked, or ignored. See the [code variables documentation](/docs/error-tracking/code-variables/python) for detailed configuration options.
 
+## Link backend events to session replays
+
+import LinkSessionReplayBackend from '../../_snippets/link-session-replay-backend.mdx'
+
+<LinkSessionReplayBackend />
+
 ## GeoIP properties
 
 Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.

@@ -226,6 +226,12 @@ posthog.capture_exception(
 )
 ```
 
+## Link backend events to session replays
+
+import LinkSessionReplayBackend from '../../_snippets/link-session-replay-backend.mdx'
+
+<LinkSessionReplayBackend />
+
 ## Debug mode
 
 The Ruby SDK debug logs by default. The log level by default is set to `WARN`. You can change it to `DEBUG` if you want to debug the client by running `posthog.logger.level = Logger::DEBUG`, where `posthog` is your initialized `PostHog::Client` instance.

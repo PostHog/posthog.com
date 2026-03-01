@@ -133,6 +133,12 @@ if (await posthog.GetFeatureFlagAsync(
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
 
+## Link backend events to session replays
+
+import LinkSessionReplayBackend from '../../_snippets/link-session-replay-backend.mdx'
+
+<LinkSessionReplayBackend />
+
 ## GeoIP properties
 
 The `posthog-dotnet` library disregards the server IP, does not add the GeoIP properties, and does not use the values for feature flag evaluations.

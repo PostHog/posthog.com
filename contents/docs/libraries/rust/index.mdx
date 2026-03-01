@@ -137,6 +137,12 @@ let flag = client.get_feature_flag(
 ).await.unwrap();
 ```
 
+## Link backend events to session replays
+
+import LinkSessionReplayBackend from '../../_snippets/link-session-replay-backend.mdx'
+
+<LinkSessionReplayBackend />
+
 ## Local evaluation
 
 For improved performance, you can evaluate feature flags locally by enabling local evaluation. This caches flag definitions and evaluates them without making API requests for each flag check.

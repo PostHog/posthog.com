@@ -1,0 +1,162 @@
+---
+title: Link backend events to session replays
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Linking your backend events to frontend session replays gives you full context on what users were doing when a server-side event fired. Instead of seeing an event in isolation, you can watch the actual user session.
+
+## Why link backend events to session replays?
+
+By including session IDs in your backend events, you can:
+- **See the full user journey**: Navigate from any backend event directly to the session replay showing what the user was doing
+- **Debug issues faster**: Watch the exact session where an error, slow request, or unexpected behavior occurred
+- **Correlate backend and frontend**: Match server-side processing with the actual user experience
+
+## How it works
+
+1. Your frontend PostHog SDK generates a session ID
+2. The session ID is sent to your backend (automatically via headers, or manually in the request body)
+3. Your backend includes the session ID as a `$session_id` property when calling `posthog.capture()`
+4. PostHog links the backend event to the session replay
+
+## Implementation
+
+There are two ways to pass session IDs from your frontend to your backend:
+
+1. **Automatic header injection** — posthog-js automatically adds headers to your API requests
+2. **Manual approach** — explicitly pass the session ID in your request body
+
+### Option 1: Automatic header injection (recommended)
+
+Configure posthog-js to automatically inject session headers into requests to your backend:
+
+```javascript
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_client_api_host>',
+  __add_tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
+})
+```
+
+This automatically adds `X-POSTHOG-SESSION-ID` (and `X-POSTHOG-DISTINCT-ID`) headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames.
+
+On your backend, read the header and include it when capturing events:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+app.post('/api/action', async (req, res) => {
+  const sessionId = req.headers['x-posthog-session-id']
+
+  posthog.capture({
+    distinctId: req.userId,
+    event: 'action_processed',
+    properties: {
+      $session_id: sessionId  // Links to session replay
+    }
+  })
+
+  res.json({ success: true })
+})
+```
+
+```python file=Python
+@app.route('/api/action', methods=['POST'])
+def action():
+    session_id = request.headers.get('X-POSTHOG-SESSION-ID')
+
+    posthog.capture(
+        current_user.id,
+        'action_processed',
+        {
+            '$session_id': session_id  # Links to session replay
+        }
+    )
+
+    return jsonify({'success': True})
+```
+
+</MultiLanguage>
+
+### Option 2: Manual approach
+
+If you prefer explicit control, retrieve the session ID on the frontend and pass it in your request body:
+
+```javascript
+// Frontend
+import posthog from 'posthog-js'
+
+const response = await fetch('/api/action', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    data: payload,
+    sessionId: posthog.getSessionId()
+  })
+})
+```
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+// Backend
+app.post('/api/action', async (req, res) => {
+  const { data, sessionId } = req.body
+
+  posthog.capture({
+    distinctId: req.userId,
+    event: 'action_processed',
+    properties: {
+      $session_id: sessionId  // Links to session replay
+    }
+  })
+
+  res.json({ success: true })
+})
+```
+
+```python file=Python
+# Backend
+@app.route('/api/action', methods=['POST'])
+def action():
+    data = request.json
+    session_id = data.get('sessionId')
+
+    posthog.capture(
+        current_user.id,
+        'action_processed',
+        {
+            '$session_id': session_id  # Links to session replay
+        }
+    )
+
+    return jsonify({'success': True})
+```
+
+</MultiLanguage>
+
+## Viewing linked replays
+
+Once you've set up session linking, backend events appear on the session replay timeline alongside frontend events. You can:
+
+1. Open any event in PostHog and click through to the associated session replay
+2. See backend events on the timeline when watching a session replay
+3. Filter session replays by backend events to find relevant sessions
+
+## Use case-specific guides
+
+If you're working with specific PostHog features, see these dedicated guides:
+
+- **LLM analytics**: [Link LLM events to session replays](/docs/llm-analytics/link-session-replay) — includes examples using `@posthog/ai` SDK wrappers
+- **Logs**: [Link logs to session replays](/docs/logs/link-session-replay) — includes OpenTelemetry logging examples
+
+## See also
+
+- [Session replay installation](/docs/session-replay/installation)
+- [JavaScript web SDK](/docs/libraries/js)
+- [Node.js SDK](/docs/libraries/node)
+- [Python SDK](/docs/libraries/python)

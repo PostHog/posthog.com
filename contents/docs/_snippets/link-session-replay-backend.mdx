@@ -1,0 +1,13 @@
+You can link your backend events to frontend session replays by including a `$session_id` property when capturing events. This lets you watch the user session associated with any backend event.
+
+To get the session ID, configure your frontend PostHog SDK to send it automatically via the `__add_tracing_headers` option, then read the `X-POSTHOG-SESSION-ID` header in your backend and pass it as a property:
+
+```
+posthog.capture(
+  distinct_id,
+  'event_name',
+  { '$session_id': session_id }
+)
+```
+
+Learn more in our [guide to linking backend events to session replays](/docs/session-replay/link-server-events).
