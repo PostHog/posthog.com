@@ -157,7 +157,7 @@ Up next is adding PostHog, which you can install by running:
 npm i posthog-js
 ```
 
-Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
+Once done, you need your project token and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
 With these, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration.
 
@@ -171,7 +171,7 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    posthog.init("<ph_project_api_key>", {
+    posthog.init("<ph_project_token>", {
       api_host: "<ph_client_api_host>",
       defaults: "<ph_posthog_js_defaults>",
       debug: true,
@@ -354,7 +354,7 @@ Remix is a full stack framework, parts of it run on both the client and server s
 npm i posthog-node
 ```
 
-Next, we create a `posthog.js` file in the `app` folder. In it, we set up an initialization of the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Again, you need your project API key and instance address from [your project settings](https://app.posthog.com/settings/project).
+Next, we create a `posthog.js` file in the `app` folder. In it, we set up an initialization of the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Again, you need your project token and instance address from [your project settings](https://app.posthog.com/settings/project).
 
 ```js
 // app/posthog.js
@@ -364,7 +364,7 @@ let posthogClient = null;
 
 export default function PostHogClient() {
   if (!posthogClient) {
-    posthogClient = new PostHog('<ph_project_api_key>', {
+    posthogClient = new PostHog('<ph_project_token>', {
       host: '<ph_client_api_host>',
     });
   }
@@ -404,7 +404,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }	
 
   const cookieString = request.headers.get('Cookie') || '';  
-  const projectAPIKey = '<ph_project_api_key>';
+  const projectAPIKey = '<ph_project_token>';
   const cookieName = `ph_${projectAPIKey}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   let distinctId;

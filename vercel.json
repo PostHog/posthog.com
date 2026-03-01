@@ -13,8 +13,9 @@
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
-        { "source": "/teams/words-and-pictures", "destination": "/teams/brand-vibes" },
-        { "source": "/teams/words-pictures", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
+        { "source": "/teams/words-pictures", "destination": "/teams/website" },
+        { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -1325,7 +1326,7 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/website-docs", "destination": "/teams/website" },
         {
             "source": "/questions/manually-merging-persons",
             "destination": "/docs/product-analytics/identify#how-to-merge-userss"
@@ -1648,10 +1649,6 @@
             "destination": "/about"
         },
         {
-            "source": "/services",
-            "destination": "/"
-        },
-        {
             "source": "/platform-addons",
             "destination": "/platform-packages"
         },
@@ -1707,6 +1704,8 @@
         { "source": "/startups/[...slug]", "destination": "/startups" },
         { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
         { "source": "/data-warehouse", "destination": "/data-stack" },
+        { "source": "/sql", "destination": "/data-stack/sql-editor" },
+        { "source": "/bi", "destination": "/data-stack/business-intelligence" },
         { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
         { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
         { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
@@ -1719,7 +1718,8 @@
         },
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
         { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
-        { "source": "/professional-services", "destination": "/services" }
+        { "source": "/professional-services", "destination": "/services" },
+        { "source": "/posthug", "destination": "/" }
     ],
     "headers": [
         {

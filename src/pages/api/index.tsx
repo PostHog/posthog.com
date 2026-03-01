@@ -116,8 +116,7 @@ export default function API() {
                                 <p>Multiple authentication methods to keep your data secure:</p>
                                 <ul>
                                     <li>
-                                        <strong>Project API keys:</strong> For client-side event capture (safe to
-                                        expose)
+                                        <strong>Project token:</strong> For client-side event capture (safe to expose)
                                     </li>
                                     <li>
                                         <strong>Personal API keys:</strong> For server-side operations and data access

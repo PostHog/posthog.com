@@ -67,36 +67,14 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 Surveys are enabled by default. If you want to disable surveys, you can do so when setting up your SDK instance:
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 
 config.surveys = false; // Disable surveys
 ```
 
 ## Supported Features
 
-| Feature                           | Support                |
-| --------------------------------- | ---------------------- |
-| **Questions** | |
-| All question types                | ✅                     |
-| Multi-question surveys            | ✅                     |
-| Confirmation message              | ✅                     |
-| Feedback button presentation      | ❌                     |
-| Conditional questions             | ✅                     |
-| **Customization / Appearance** | |
-| Set colors in PostHog dashboard   | ✅                     |
-| Shuffle questions                 | ❌                     |
-| PostHog branding                  | ❌                     |
-| Delay popup after screen view     | ❌                     |
-| Position config                   | ❌ (always bottom sheet) |
-| HTML content                      | ❌                     |
-| **Display conditions** | |
-| Feature flag & property targeting | ✅                     |
-| Screen/URL targeting              | ❌                     |
-| Device type targeting             | ✅                     |
-| Survey wait period                | ❌                     |
-| Event triggers                    | ✅                     |
-| Action triggers                   | ❌                     |
-| Partial responses                 | ❌                     |
+Not all survey features are available on every SDK. See the [SDK feature support matrix](/docs/surveys/sdk-feature-support) for a full comparison.
 
 ## Limitations
 

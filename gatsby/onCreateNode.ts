@@ -55,7 +55,7 @@ const cloudinaryCache = {}
 const REPO_CONFIGS = {
     'posthog-main-repo': {
         stripPrefix: '/docs/published/',
-        pathPrefix: '/handbook/engineering',
+        pathPrefix: '',
     },
 }
 
