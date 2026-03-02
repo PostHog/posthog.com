@@ -3,9 +3,10 @@ import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
-import OSTable from 'components/OSTable'
 import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, type ToggleOption } from 'components/RadixUI/ToggleGroup'
+import CloudinaryImage from 'components/CloudinaryImage'
+import useProduct from 'hooks/useProduct'
 import ClaudeLogo from '../../../contents/images/docs/llms/claude-logo.svg'
 import OpenAILogo from '../../../contents/images/docs/llms/openai.svg'
 import GeminiLogo from '../../../contents/images/docs/llms/gemini-logo.svg'
@@ -13,22 +14,28 @@ import GranolaIcon from '../../../contents/images/docs/signals/granola-icon.svg'
 import SlackIcon from '../../../contents/images/docs/signals/Slack_icon_2019.svg'
 import LinearIcon from '../../../contents/images/docs/signals/linear-icon-logo.svg'
 import GitHubIcon from '../../../contents/images/docs/signals/GitHub_icon logo.svg'
+import ZendeskIcon from '../../../contents/cdp/thumbnails/zendesk.svg'
 import {
     IconTerminal,
     IconBolt,
     IconNotification,
     IconArrowRight,
-    IconChevronRight,
     IconTarget,
     IconGraph,
     IconGear,
     IconSparkles,
     IconCheck,
     IconWarning,
-    IconTrends,
     IconRewindPlay,
     IconToggle,
     IconCreditCard,
+    IconSearch,
+    IconFilter,
+    IconPlus,
+    IconX,
+    IconGithub,
+    IconExternal,
+    IconSort,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -37,7 +44,6 @@ const sidebarNav = [
     { name: 'Product autonomy', id: 'product-autonomy', icon: <IconSparkles className="size-4" /> },
     { name: 'Signals', id: 'signals', icon: <IconNotification className="size-4" /> },
     { name: 'Agentic environment', id: 'agentic-environment', icon: <IconTerminal className="size-4" /> },
-    { name: 'Agent orchestrator', id: 'orchestrator', icon: <IconGear className="size-4" /> },
     { name: 'Pricing & usage', id: 'pricing', icon: <IconCreditCard className="size-4" /> },
     { name: 'How it works', id: 'how-it-works', icon: <IconBolt className="size-4" /> },
     { name: 'FAQ', id: 'faq', icon: <IconNotification className="size-4" /> },
@@ -65,7 +71,7 @@ const signalSourceGroups: Record<
     native: {
         title: 'Native PostHog products',
         description:
-            'Signals first come from the products you already run on PostHog: analytics, replays, experiments, feature flags, error tracking, surveys, and more.',
+            'PostHog products are a first class data source for Code: analytics, replays, experiments, feature flags, error tracking, and more.',
         sources: [
             {
                 id: 'product-analytics',
@@ -138,6 +144,16 @@ const signalSourceGroups: Record<
                 name: 'Granola',
                 description: 'First‑party ingest and transformation pipelines feeding rich context into signals.',
             },
+            {
+                id: 'zendesk',
+                name: 'Zendesk',
+                description: 'Support tickets, agent workload, and SLA metrics that tie back to product usage.',
+            },
+            {
+                id: 'request',
+                name: 'Request a source',
+                description: "Don't see your tool? Tell us what you need and we'll consider building it.",
+            },
         ],
     },
     mcp: {
@@ -174,18 +190,41 @@ const signalSourceIcons: Record<string, JSX.Element> = {
     'error-tracking': <IconWarning className="size-4 text-red" />,
     surveys: <IconNotification className="size-4 text-salmon" />,
     'llm-analytics': <IconSparkles className="size-4 text-orange" />,
-    linear: <img src={LinearIcon} alt="Linear" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />,
-    slack: <img src={SlackIcon} alt="Slack" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />,
-    github: <img src={GitHubIcon} alt="GitHub" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />,
-    granola: (
-        <img src={GranolaIcon} alt="Granola" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />
-    ),
+    linear: <img src={LinearIcon} alt="Linear" className="h-4 w-auto" />,
+    slack: <img src={SlackIcon} alt="Slack" className="h-4 w-auto" />,
+    github: <img src={GitHubIcon} alt="GitHub" className="h-4 w-auto" />,
+    granola: <img src={GranolaIcon} alt="Granola" className="h-4 w-auto" />,
+    zendesk: <img src={ZendeskIcon} alt="Zendesk" className="h-4 w-auto" />,
     observability: <IconWarning className="size-4 text-yellow" />,
     support: <IconNotification className="size-4 text-salmon" />,
     'internal-tools': <IconGear className="size-4 text-blue" />,
+    request: <IconPlus className="size-4 text-seagreen" />,
+}
+
+const signalSourceCardImages: Record<string, string> = {
+    linear: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_linear_4304fbe957.png',
+    slack: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_slack_650b0242cd.png',
+    github: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_github_537607dd5c.png',
+    granola: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_granola_c4875fc74e.png',
+}
+
+const signalSourceCardLogos: Record<string, JSX.Element> = {
+    linear: <img src={LinearIcon} alt="Linear" className="h-8 w-auto" />,
+    slack: <img src={SlackIcon} alt="Slack" className="h-8 w-auto" />,
+    github: <img src={GitHubIcon} alt="GitHub" className="h-8 w-auto" />,
+    granola: <img src={GranolaIcon} alt="Granola" className="h-8 w-auto" />,
+    zendesk: <img src={ZendeskIcon} alt="Zendesk" className="h-8 w-auto" />,
+    observability: <IconWarning className="size-8 text-yellow" />,
+    support: <IconNotification className="size-8 text-salmon" />,
+    'internal-tools': <IconGear className="size-8 text-blue" />,
+    request: <IconPlus className="size-8 text-seagreen" />,
 }
 
 const SignalSources = () => {
+    const allProducts = useProduct()
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+
     const [activeGroup, setActiveGroup] = useState<SignalSourceGroupKey>('native')
     const [activeSourceId, setActiveSourceId] = useState<string | null>(
         signalSourceGroups.native.sources[0]?.id || null
@@ -199,27 +238,31 @@ const SignalSources = () => {
 
     const group = signalSourceGroups[activeGroup]
     const sources = group.sources
-
     const activeSource =
         sources.find((source) => source.id === activeSourceId) || (sources.length > 0 ? sources[0] : null)
 
+    const activeProductHandle = activeGroup === 'native' && activeSource ? activeSource.id.replace(/-/g, '_') : null
+    const activeProduct = activeProductHandle
+        ? ((Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === activeProductHandle) : null) as any)
+        : null
+
     return (
-        <div className="space-y-4">
+        <div className="space-y-3">
             <ToggleGroup
                 hideTitle
                 title="Signal source type"
                 options={options}
                 value={activeGroup}
                 onValueChange={(value) => {
-                    if (!value) {
-                        return
-                    }
+                    if (!value) return
                     setActiveGroup(value as SignalSourceGroupKey)
                     const first = signalSourceGroups[value as SignalSourceGroupKey].sources[0]
                     setActiveSourceId(first?.id || null)
                 }}
-                className=""
             />
+
+            <p className="text-sm text-secondary m-0">{group.description}</p>
+
             <div className="grid gap-6 @lg:grid-cols-[minmax(0,1.4fr)_minmax(0,2fr)] items-start">
                 <div className="space-y-1.5">
                     {sources.map((source) => (
@@ -243,28 +286,441 @@ const SignalSources = () => {
                         </OSButton>
                     ))}
                 </div>
-                {activeSource && (
+
+                {activeSource && activeSource.id === 'request' ? (
                     <div
                         data-scheme="secondary"
-                        className="@container flex flex-col bg-accent border border-primary rounded-md overflow-hidden"
+                        className="@container flex flex-col bg-accent/50 border border-primary rounded-md overflow-hidden"
                     >
-                        <div className="flex flex-col gap-3 p-5 @lg:p-6">
-                            <header>
-                                <p className="text-xs uppercase tracking-wide text-muted mb-1">Signal source</p>
-                                <h3 className="text-xl font-bold m-0">{activeSource.name}</h3>
-                            </header>
-                            <p className="text-sm text-secondary m-0">{activeSource.description}</p>
-                            <p className="text-xs text-secondary m-0">{group.description}</p>
-                            {activeSource.href && (
-                                <div className="mt-1.5">
-                                    <CallToAction href={activeSource.href} type="secondary" size="sm">
-                                        Learn more
-                                    </CallToAction>
+                        <div className="flex flex-col items-center justify-center text-center p-8 @xl:p-12 gap-4">
+                            <span className="inline-flex items-center justify-center size-12 rounded-full bg-seagreen/20 text-seagreen">
+                                <IconPlus className="size-6" />
+                            </span>
+                            <h3 className="text-xl font-bold tracking-tight m-0">Request a source</h3>
+                            <p className="text-secondary max-w-md m-0">
+                                Don&apos;t see your tool? Tell us what you need and we&apos;ll consider building it.
+                            </p>
+                            <OSButton asLink to="https://posthog.com/questions" external variant="secondary" size="md">
+                                <span className="flex items-center gap-2">
+                                    Request integration
+                                    <IconExternal className="size-4" />
+                                </span>
+                            </OSButton>
+                        </div>
+                    </div>
+                ) : activeSource ? (
+                    activeGroup === 'native' && activeProduct ? (
+                        <div
+                            className={`@container flex flex-col bg-${activeProduct.color} dark:bg-accent border border-transparent dark:border-primary rounded-md overflow-hidden`}
+                        >
+                            <div className="flex flex-col gap-2 @sm:flex-row items-start justify-between p-4 @xl:p-6">
+                                <div className="flex-1 flex gap-3">
+                                    {activeProduct.Icon && (
+                                        <activeProduct.Icon
+                                            className={`size-8 ${activeProduct.overview?.textColor} dark:text-${activeProduct.color}`}
+                                        />
+                                    )}
+                                    <div className={`${activeProduct.overview?.textColor} dark:text-white`}>
+                                        <h3 className="text-xl font-bold tracking-tight m-0">{activeProduct.name}</h3>
+                                        {activeProduct.overview?.title && (
+                                            <p className="m-0 leading-tight">{activeProduct.overview.title}</p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="flex-shrink-0 mt-2 @sm:mt-0 ml-10 @sm:ml-0">
+                                    <OSButton
+                                        asLink
+                                        to={`/${activeProduct.slug}`}
+                                        state={{ newWindow: true }}
+                                        variant="secondary"
+                                        size="md"
+                                    >
+                                        Explore
+                                    </OSButton>
+                                </div>
+                            </div>
+                            {activeProduct.screenshots?.home && (
+                                <div
+                                    className={`flex-1 flex ${
+                                        activeProduct.screenshots.home.classes ||
+                                        'justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4'
+                                    }`}
+                                >
+                                    <CloudinaryImage
+                                        src={
+                                            isDark && activeProduct.screenshots.home.srcDark
+                                                ? activeProduct.screenshots.home.srcDark
+                                                : activeProduct.screenshots.home.src
+                                        }
+                                        alt={activeProduct.screenshots.home.alt}
+                                        width={activeProduct.screenshots.home.width}
+                                        imgClassName={
+                                            activeProduct.screenshots.home.imgClasses || 'rounded-md shadow-2xl'
+                                        }
+                                    />
                                 </div>
                             )}
                         </div>
-                        <div className="flex-1 flex items-end justify-center px-4 pb-4 @lg:px-6 @lg:pb-6">
-                            <div className="w-full max-w-xl h-40 @lg:h-48 rounded-md border border-primary bg-gradient-to-br from-accent to-accent/40 shadow-2xl" />
+                    ) : (
+                        <div
+                            data-scheme="secondary"
+                            className="@container flex flex-col bg-accent/50 border border-primary rounded-md overflow-hidden"
+                        >
+                            <div className="flex items-start gap-3 p-4 @xl:p-6">
+                                {signalSourceCardLogos[activeSource.id] && (
+                                    <span className="flex-shrink-0">{signalSourceCardLogos[activeSource.id]}</span>
+                                )}
+                                <div>
+                                    <h3 className="text-xl font-bold tracking-tight m-0">{activeSource.name}</h3>
+                                    <p className="m-0 mt-1 text-sm text-secondary leading-snug">
+                                        {activeSource.description}
+                                    </p>
+                                </div>
+                            </div>
+                            {signalSourceCardImages[activeSource.id] ? (
+                                <div className="flex-1 flex justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4">
+                                    <CloudinaryImage
+                                        src={
+                                            signalSourceCardImages[
+                                                activeSource.id
+                                            ] as `https://res.cloudinary.com/${string}`
+                                        }
+                                        alt={`${activeSource.name} integration`}
+                                        width={560}
+                                        imgClassName="rounded-md"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="flex-1 flex justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4">
+                                    <div
+                                        className="max-w-xl w-full aspect-[4/3] rounded-md border border-primary bg-accent/30"
+                                        aria-hidden
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    )
+                ) : null}
+            </div>
+        </div>
+    )
+}
+
+interface Signal {
+    id: number
+    title: string
+    description: string
+    date: string
+    weight: number
+    occurrences: number
+    affectedUsers: number
+    relatedIssues: { id: string; title: string; tag: string }[]
+    issueContent?: { heading: string; subheading: string; body: string }
+}
+
+const signalData: Signal[] = [
+    {
+        id: 1,
+        title: 'Dashboard refresh interrupted by filter changes, leaving insights empty',
+        description:
+            'Users experience data loss when modifying dashboard filters during an active refresh cycle. The refresh process terminates prematurely when new filter parameters are applied before the current query completes.',
+        date: 'Mar 2',
+        weight: 135.02,
+        occurrences: 234,
+        affectedUsers: 45,
+        relatedIssues: [{ id: '#51023', title: 'Dashboard filters cause data loss during active refresh', tag: 'bug' }],
+        issueContent: {
+            heading: 'Bug report',
+            subheading: 'Describe the bug',
+            body: 'When changing filters while a dashboard is still loading, all insight tiles go blank and show "No data" instead of the previous results.',
+        },
+    },
+    {
+        id: 2,
+        title: 'Product Tours: Add cooldown period between consecutive tour displays',
+        description:
+            'Users are experiencing tour fatigue when multiple product tours are eligible simultaneously, causing them to display back-to-back without any delay. This creates a poor user experience and may reduce tour effectiveness. The request is to implement a configurable cooldown period (similar to the existing survey functionality) that prevents showing any tour to users who have seen one within the past X days.',
+        date: 'Mar 1',
+        weight: 65.0,
+        occurrences: 67,
+        affectedUsers: 0,
+        relatedIssues: [
+            {
+                id: '#48269',
+                title: 'Product Tours \u2013 "do not show if a user has seen a tour in X days"',
+                tag: 'enhancement',
+            },
+        ],
+        issueContent: {
+            heading: 'Feature request',
+            subheading: 'Is your feature request related to a problem?',
+            body: "If multiple tours are eligible right now, they'll show back to back with no delay.",
+        },
+    },
+    {
+        id: 3,
+        title: 'Funnel breakdowns fail with Extended Person Properties from warehouse',
+        description:
+            'Funnel insights are failing to execute when users attempt to breakdown by Extended Person Properties (Data Warehouse fields joined to persons). This blocks advanced segmentation workflows.',
+        date: 'Mar 1',
+        weight: 61.0,
+        occurrences: 89,
+        affectedUsers: 12,
+        relatedIssues: [
+            { id: '#50891', title: 'Funnel breakdown errors on warehouse-joined person props', tag: 'bug' },
+        ],
+    },
+    {
+        id: 4,
+        title: 'Sessions-on-Events Query Performance: Implement Hybrid Storage Architecture',
+        description:
+            'A prototype design exists to improve sessions property query performance by creating a hybrid storage model. The approach uses session materialized columns for hot queries.',
+        date: 'Mar 1',
+        weight: 57.09,
+        occurrences: 156,
+        affectedUsers: 31,
+        relatedIssues: [
+            { id: '#49742', title: 'Session property queries timing out on large datasets', tag: 'performance' },
+        ],
+    },
+    {
+        id: 5,
+        title: "Survey Slack notification: Top 'Create & enable' button non-functional",
+        description:
+            "Users cannot create Slack notifications for surveys using the 'Create & enable' button in the upper-right corner of the page\u2014only the bottom button works.",
+        date: 'Mar 2',
+        weight: 49.55,
+        occurrences: 43,
+        affectedUsers: 8,
+        relatedIssues: [{ id: '#50102', title: "Survey Slack 'Create & enable' button broken", tag: 'bug' }],
+    },
+    {
+        id: 6,
+        title: 'Feature Request: Dynamic Presentation Builder for Narrative Analytics',
+        description:
+            "Users are requesting a slide-based presentation builder that transforms PostHog's static dashboards into dynamic, personalized narrative analytics presentations.",
+        date: 'Mar 2',
+        weight: 44.0,
+        occurrences: 28,
+        affectedUsers: 0,
+        relatedIssues: [{ id: '#49903', title: 'Add presentation mode for dashboards', tag: 'enhancement' }],
+    },
+    {
+        id: 7,
+        title: 'Email Verification Links Not Delivered During Sign-Up Flow',
+        description:
+            'A user is unable to complete account registration due to missing email verification links. This represents a critical authentication flow break.',
+        date: 'Mar 2',
+        weight: 26.0,
+        occurrences: 15,
+        affectedUsers: 15,
+        relatedIssues: [{ id: '#51102', title: 'Email verification not sent for new signups', tag: 'bug' }],
+    },
+    {
+        id: 8,
+        title: 'Cohort filter not applied when viewing session recordings',
+        description:
+            "The navigation from Cohorts to Session Replay is broken: clicking 'View Session Recordings' from either the cohort list or detail page does not apply the cohort filter.",
+        date: 'Feb 28',
+        weight: 22.45,
+        occurrences: 34,
+        affectedUsers: 7,
+        relatedIssues: [
+            { id: '#50445', title: 'Cohort filter lost when navigating to session recordings', tag: 'bug' },
+        ],
+    },
+    {
+        id: 9,
+        title: 'Amplitude batch migration fails to map session_id to PostHog',
+        description:
+            "The Amplitude to PostHog batch migration process is experiencing a critical failure when attempting to map Amplitude's native session identifiers.",
+        date: 'Feb 28',
+        weight: 20.5,
+        occurrences: 12,
+        affectedUsers: 3,
+        relatedIssues: [{ id: '#50221', title: 'Amplitude migration: session_id mapping fails silently', tag: 'bug' }],
+    },
+    {
+        id: 10,
+        title: 'PostHog CLI and React Native SDK modification request',
+        description:
+            'A GitHub issue has been raised requesting modifications to the PostHog CLI tooling and the posthog-react-native SDK.',
+        date: 'Feb 27',
+        weight: 19.3,
+        occurrences: 8,
+        affectedUsers: 0,
+        relatedIssues: [{ id: '#49801', title: 'CLI and React Native SDK improvements', tag: 'enhancement' }],
+    },
+]
+
+const SignalsInbox = () => {
+    const [selectedId, setSelectedId] = useState<number | null>(2)
+    const [inboxTab, setInboxTab] = useState('signals')
+    const selected = signalData.find((s) => s.id === selectedId) || null
+
+    return (
+        <div data-scheme="secondary" className="bg-primary rounded-md border border-primary overflow-hidden">
+            <div className="flex h-[520px]">
+                {/* Sidebar */}
+                <div className="hidden @2xl:flex w-40 border-r border-primary flex-shrink-0 flex-col bg-primary">
+                    <div className="p-2">
+                        <button className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-secondary hover:text-primary hover:bg-accent rounded transition-colors cursor-pointer">
+                            <IconPlus className="size-3.5" />
+                            New task
+                        </button>
+                    </div>
+                    <div className="px-1 space-y-0.5">
+                        <button className="w-full flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-accent rounded text-primary cursor-default">
+                            <IconNotification className="size-3.5" />
+                            Inbox
+                            <span className="ml-auto text-[10px] bg-red text-white rounded-full px-1.5 py-px font-bold">
+                                99+
+                            </span>
+                        </button>
+                    </div>
+                    <div className="mt-4 px-3">
+                        <div className="flex items-center justify-between text-[11px] font-bold text-muted uppercase tracking-wider">
+                            <span>Tasks</span>
+                            <IconFilter className="size-3 opacity-50" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Signal list */}
+                <div className={`flex-1 flex flex-col min-w-0 ${selected ? 'hidden @xl:flex' : 'flex'}`}>
+                    <div className="flex items-center gap-2 px-4 py-2.5 border-b border-primary bg-accent">
+                        <IconNotification className="size-4" />
+                        <span className="text-sm font-bold">Inbox</span>
+                        <div className="ml-auto">
+                            <ToggleGroup
+                                title="Inbox view"
+                                hideTitle
+                                options={[
+                                    { label: 'Signals', value: 'signals' },
+                                    { label: 'Setup', value: 'setup' },
+                                ]}
+                                value={inboxTab}
+                                onValueChange={(v: string) => v && setInboxTab(v)}
+                                className="!p-0.5"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex items-center justify-between px-4 py-2 border-b border-primary text-sm">
+                        <span className="font-medium text-secondary">Signals (190)</span>
+                        <IconSort className="size-3.5 text-muted" />
+                    </div>
+
+                    <div className="px-4 py-2 border-b border-primary">
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-accent rounded border border-primary text-sm text-muted">
+                            <IconSearch className="size-3.5 flex-shrink-0" />
+                            <span>Search signals...</span>
+                        </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto">
+                        {signalData.map((signal) => (
+                            <button
+                                key={signal.id}
+                                onClick={() => setSelectedId(selectedId === signal.id ? null : signal.id)}
+                                className={`w-full text-left px-4 py-3 border-b border-primary hover:bg-accent transition-colors cursor-pointer ${
+                                    selectedId === signal.id ? 'bg-accent' : ''
+                                }`}
+                            >
+                                <div className="flex items-start gap-2">
+                                    <span className="size-2 rounded-full bg-seagreen flex-shrink-0 mt-2" />
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex items-start justify-between gap-3">
+                                            <span className="text-sm font-bold leading-snug line-clamp-2">
+                                                {signal.title}
+                                            </span>
+                                            <span className="text-xs text-muted flex-shrink-0 text-right whitespace-nowrap">
+                                                <span className="block">{signal.date}</span>
+                                                <span className="block opacity-60">w:{signal.weight.toFixed(2)}</span>
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-muted mt-0.5 line-clamp-1 m-0">
+                                            {signal.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Detail panel */}
+                {selected && (
+                    <div className="w-full @xl:w-80 @xl:max-w-80 border-l border-primary flex-shrink-0 flex flex-col overflow-y-auto">
+                        <div className="p-4 space-y-4">
+                            <div className="flex items-start gap-2">
+                                <h4 className="text-sm font-bold m-0 flex-1 leading-snug">{selected.title}</h4>
+                                <button
+                                    onClick={() => setSelectedId(null)}
+                                    className="flex-shrink-0 p-0.5 hover:bg-accent rounded transition-colors cursor-pointer"
+                                >
+                                    <IconX className="size-4 text-muted" />
+                                </button>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <CallToAction type="outline" size="xs">
+                                    Create task
+                                </CallToAction>
+                                <CallToAction type="primary" size="xs">
+                                    Run cloud
+                                </CallToAction>
+                            </div>
+
+                            <p className="text-sm text-secondary m-0 leading-relaxed">{selected.description}</p>
+
+                            <div className="flex flex-wrap items-center gap-2">
+                                <span className="inline-flex items-center gap-1 text-xs font-medium bg-accent border border-primary rounded px-2 py-1">
+                                    {selected.occurrences} occurrences
+                                </span>
+                                <span className="inline-flex items-center gap-1 text-xs font-medium bg-accent border border-primary rounded px-2 py-1">
+                                    {selected.affectedUsers} affected users
+                                </span>
+                            </div>
+
+                            <div>
+                                <h5 className="text-xs font-bold text-muted m-0 mb-2">
+                                    Signals ({selected.occurrences})
+                                </h5>
+                                <div className="space-y-2">
+                                    {selected.relatedIssues.map((issue) => (
+                                        <div
+                                            key={issue.id}
+                                            className="flex items-start gap-2 p-2 bg-accent rounded border border-primary"
+                                        >
+                                            <IconGithub className="size-3.5 flex-shrink-0 mt-0.5 text-muted" />
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-start justify-between gap-2">
+                                                    <span className="text-xs font-medium leading-snug">
+                                                        {issue.id} {issue.title}
+                                                    </span>
+                                                    <IconExternal className="size-3 flex-shrink-0 text-muted mt-0.5" />
+                                                </div>
+                                                <span className="inline-block mt-1 text-[10px] font-medium bg-primary border border-primary rounded px-1.5 py-0.5 text-muted">
+                                                    {issue.tag}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {selected.issueContent && (
+                                <div className="border-t border-primary pt-3 space-y-2">
+                                    <p className="text-xs font-bold text-muted m-0">
+                                        ### {selected.issueContent.heading}
+                                    </p>
+                                    <p className="text-xs font-medium text-muted m-0">
+                                        ## {selected.issueContent.subheading}
+                                    </p>
+                                    <p className="text-xs text-secondary m-0">{selected.issueContent.body}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
@@ -272,100 +728,6 @@ const SignalSources = () => {
         </div>
     )
 }
-
-const signalRows = [
-    {
-        cells: [
-            {
-                content: (
-                    <span className="inline-flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-red" /> Critical
-                    </span>
-                ),
-            },
-            { content: 'Checkout conversion dropped 12% since deploy #4891' },
-            { content: <span className="opacity-60">Product analytics</span> },
-            { content: <span className="opacity-60">2m ago</span> },
-        ],
-    },
-    {
-        cells: [
-            {
-                content: (
-                    <span className="inline-flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-yellow" /> High
-                    </span>
-                ),
-            },
-            { content: 'Users rage-clicking "Export" button on dashboard page' },
-            { content: <span className="opacity-60">Session replay</span> },
-            { content: <span className="opacity-60">8m ago</span> },
-        ],
-    },
-    {
-        cells: [
-            {
-                content: (
-                    <span className="inline-flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-yellow" /> High
-                    </span>
-                ),
-            },
-            { content: 'Error rate spike in /api/billing endpoint (4.2% -> 11.8%)' },
-            { content: <span className="opacity-60">Error tracking</span> },
-            { content: <span className="opacity-60">14m ago</span> },
-        ],
-    },
-    {
-        cells: [
-            {
-                content: (
-                    <span className="inline-flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-blue" /> Medium
-                    </span>
-                ),
-            },
-            { content: 'Feature flag "new-onboarding" showing 23% lift in activation' },
-            { content: <span className="opacity-60">Experiments</span> },
-            { content: <span className="opacity-60">1h ago</span> },
-        ],
-    },
-    {
-        cells: [
-            {
-                content: (
-                    <span className="inline-flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-blue" /> Medium
-                    </span>
-                ),
-            },
-            { content: 'LLM latency p99 exceeded 4s threshold on summarization endpoint' },
-            { content: <span className="opacity-60">LLM analytics</span> },
-            { content: <span className="opacity-60">2h ago</span> },
-        ],
-    },
-    {
-        cells: [
-            {
-                content: (
-                    <span className="inline-flex items-center gap-1.5">
-                        <span className="size-2 rounded-full bg-green" /> Low
-                    </span>
-                ),
-            },
-            { content: 'Survey "NPS Q1" collected 500+ responses, ready for analysis' },
-            { content: <span className="opacity-60">Surveys</span> },
-            { content: <span className="opacity-60">3h ago</span> },
-        ],
-    },
-]
-
-const signalColumns = [
-    { name: 'Priority', width: '100px' },
-    { name: 'Signal' },
-    { name: 'Source', width: '140px' },
-    { name: 'Time', width: '80px', align: 'right' as const },
-]
 
 const Sidebar = ({ activeSection }: { activeSection: string }) => {
     return (
@@ -525,27 +887,10 @@ export default function Code(): JSX.Element {
                                                 >
                                                     Get early access
                                                 </CallToAction>
-                                                <CallToAction
-                                                    href="#pricing"
-                                                    type="secondary"
-                                                    size="lg"
-                                                    onClick={() => {
-                                                        document
-                                                            .getElementById('pricing')
-                                                            ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                                                    }}
-                                                >
+                                                <CallToAction href="#pricing" type="secondary" size="lg">
                                                     View pricing
                                                 </CallToAction>
-                                                <CallToAction href="#" type="outline" size="lg">
-                                                    Learn more
-                                                </CallToAction>
                                             </div>
-                                        </div>
-
-                                        {/* Abstract graphic element */}
-                                        <div className="hidden @2xl:block absolute right-8 top-1/2 -translate-y-1/2 opacity-[0.08]">
-                                            <IconTerminal className="size-[400px]" />
                                         </div>
                                     </div>
 
@@ -581,9 +926,9 @@ export default function Code(): JSX.Element {
                                     <div className="max-w-4xl">
                                         <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">Product autonomy</h2>
                                         <p className="text-lg text-secondary mb-8 max-w-2xl">
-                                            Imagine a product that improves itself. PostHog already has all of your
-                                            data&mdash;analytics, session replays, feature flags, experiments, error
-                                            tracking, surveys. Code uses these as <strong>signals</strong> to understand
+                                            Imagine a product that improves itself. PostHog already has all of your data
+                                            – analytics, session replays, feature flags, experiments, error tracking,
+                                            surveys. PostHog Code uses these as <strong>signals</strong> to understand
                                             what your product needs, prioritizes the work, and deploys agents to execute
                                             it.
                                         </p>
@@ -633,103 +978,6 @@ export default function Code(): JSX.Element {
                                 {/* Signals inbox */}
                                 <section id="signals" className="border-b border-primary">
                                     <div className="px-6 @lg:px-12 pt-12 @lg:pt-16 pb-4">
-                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">Signals inbox</h2>
-                                        <p className="text-lg text-secondary mb-2 max-w-2xl">
-                                            Every PostHog product becomes a signal source. Conversion drops, rage
-                                            clicks, error spikes, experiment wins, survey feedback&mdash;all ranked by
-                                            impact and surfaced as actionable tasks.
-                                        </p>
-                                    </div>
-
-                                    {/* Mock inbox UI */}
-                                    <div className="px-4 @lg:px-8 pb-8">
-                                        <div
-                                            data-scheme="secondary"
-                                            className="bg-primary rounded-md border border-primary overflow-hidden"
-                                        >
-                                            <div className="flex items-center gap-2 px-4 py-2.5 border-b border-primary bg-accent">
-                                                <IconNotification className="size-4 text-seagreen" />
-                                                <span className="text-sm font-bold">Signals</span>
-                                                <span className="text-xs bg-red text-white rounded-full px-1.5 py-0.5 font-bold ml-1">
-                                                    {signalRows.length}
-                                                </span>
-                                                <div className="ml-auto flex items-center gap-2 text-sm text-muted">
-                                                    <span>All sources</span>
-                                                    <IconChevronRight className="size-3 rotate-90" />
-                                                </div>
-                                            </div>
-                                            <OSTable columns={signalColumns} rows={signalRows} size="sm" />
-                                        </div>
-                                    </div>
-
-                                    {/* Signal detail split */}
-                                    <div className="px-6 @lg:px-12 pb-12 @lg:pb-16">
-                                        <div className="grid @xl:grid-cols-2 gap-6 @lg:gap-8">
-                                            <div>
-                                                <h3 className="text-xl font-bold m-0 mb-3">
-                                                    Not just alerts&mdash;a plan of action
-                                                </h3>
-                                                <p className="text-secondary mb-4">
-                                                    Each signal comes with context: what changed, who is affected, and a
-                                                    suggested fix. Accept the task and an agent starts working
-                                                    immediately, or add it to your backlog for later.
-                                                </p>
-                                                <ul className="list-none m-0 p-0 space-y-3">
-                                                    {[
-                                                        'Aggregates signals from every PostHog product',
-                                                        'Ranks by user impact, revenue risk, and urgency',
-                                                        'Connects external sources (GitHub, Sentry, PagerDuty)',
-                                                        'One-click agent deployment for any task',
-                                                    ].map((item) => (
-                                                        <li key={item} className="flex items-start gap-2 text-sm">
-                                                            <IconCheck className="size-4 text-seagreen flex-shrink-0 mt-0.5" />
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                            <div className="bg-accent rounded-md border border-primary p-5">
-                                                <div className="text-xs font-bold text-muted uppercase tracking-wider mb-3">
-                                                    Signal detail
-                                                </div>
-                                                <div className="space-y-4">
-                                                    <div>
-                                                        <div className="flex items-center gap-2 mb-1">
-                                                            <span className="size-2 rounded-full bg-red" />
-                                                            <span className="font-bold text-sm">Critical</span>
-                                                        </div>
-                                                        <p className="text-sm font-medium m-0">
-                                                            Checkout conversion dropped 12% since deploy #4891
-                                                        </p>
-                                                    </div>
-                                                    <div className="border-t border-primary pt-3">
-                                                        <div className="text-xs font-bold text-muted mb-2">Context</div>
-                                                        <p className="text-xs text-secondary m-0 mb-2">
-                                                            Funnel analysis shows a new JS error in the payment form
-                                                            affecting 340 users in the last hour. Error:
-                                                            <code className="text-xs ml-1">
-                                                                TypeError: Cannot read property &apos;validate&apos; of
-                                                                undefined
-                                                            </code>
-                                                        </p>
-                                                    </div>
-                                                    <div className="border-t border-primary pt-3">
-                                                        <div className="text-xs font-bold text-muted mb-2">
-                                                            Suggested action
-                                                        </div>
-                                                        <p className="text-xs text-secondary m-0 mb-3">
-                                                            Fix null check in PaymentForm.tsx:L142 where stripe
-                                                            validation was removed in deploy #4891
-                                                        </p>
-                                                        <CallToAction type="primary" size="xs">
-                                                            Deploy agent to fix
-                                                        </CallToAction>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="px-6 @lg:px-12 pb-12 @lg:pb-16">
                                         <div className="max-w-4xl mb-6">
                                             <h3 className="text-2xl @lg:text-3xl font-bold m-0 mb-3">Signal sources</h3>
                                             <p className="text-lg text-secondary max-w-2xl m-0">
@@ -739,6 +987,35 @@ export default function Code(): JSX.Element {
                                             </p>
                                         </div>
                                         <SignalSources />
+                                    </div>
+
+                                    <div className="px-6 @lg:px-12 pb-4">
+                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">Signals inbox</h2>
+                                        <p className="text-lg text-secondary mb-2 max-w-2xl">
+                                            Every datapoint becomes a signal source. Conversion drops, rage clicks,
+                                            error spikes, experiment wins, survey feedback – all ranked by impact and
+                                            surfaced as actionable tasks.
+                                        </p>
+                                    </div>
+
+                                    {/* Interactive inbox */}
+                                    <div className="px-4 @lg:px-8 pb-6">
+                                        <SignalsInbox />
+                                    </div>
+
+                                    <div className="px-6 @lg:px-12 pb-12 @lg:pb-16">
+                                        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-secondary">
+                                            {[
+                                                'like a spam filter for product data',
+                                                'impact-ranked prioritization',
+                                                'keep, kill, or iterate code changes',
+                                            ].map((item) => (
+                                                <span key={item} className="flex items-center gap-1.5">
+                                                    <IconCheck className="size-3 text-seagreen" />
+                                                    {item}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
                                 </section>
 
@@ -794,111 +1071,6 @@ export default function Code(): JSX.Element {
                                                 'Connect external data sources',
                                             ]}
                                         />
-                                    </div>
-                                </section>
-
-                                {/* Orchestrator detail */}
-                                <section
-                                    id="orchestrator"
-                                    className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary"
-                                >
-                                    <div className="grid @xl:grid-cols-2 gap-8 @lg:gap-12 items-start">
-                                        <div>
-                                            <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">
-                                                Orchestration that scales
-                                            </h2>
-                                            <p className="text-lg text-secondary mb-6">
-                                                The orchestrator coordinates agents across tasks, manages dependencies,
-                                                resolves conflicts, and maintains a complete audit trail. Think of it as
-                                                a project manager that never sleeps.
-                                            </p>
-                                            <div className="grid @sm:grid-cols-2 gap-4">
-                                                {[
-                                                    {
-                                                        icon: <IconRewindPlay className="size-5" />,
-                                                        title: 'Session replay integration',
-                                                        description:
-                                                            'Agents watch user sessions to understand bugs in context',
-                                                    },
-                                                    {
-                                                        icon: <IconTrends className="size-5" />,
-                                                        title: 'Analytics-informed',
-                                                        description:
-                                                            'Prioritize work based on real product usage patterns',
-                                                    },
-                                                    {
-                                                        icon: <IconToggle className="size-5" />,
-                                                        title: 'Feature flag aware',
-                                                        description:
-                                                            'Agents deploy behind flags and roll out incrementally',
-                                                    },
-                                                    {
-                                                        icon: <IconWarning className="size-5" />,
-                                                        title: 'Error tracking loop',
-                                                        description:
-                                                            'Errors become tasks, fixes become PRs, automatically',
-                                                    },
-                                                ].map((item) => (
-                                                    <div
-                                                        key={item.title}
-                                                        className="bg-accent rounded border border-primary p-4"
-                                                    >
-                                                        <span className="text-seagreen mb-2 block">{item.icon}</span>
-                                                        <h4 className="text-sm font-bold m-0 mb-1">{item.title}</h4>
-                                                        <p className="text-xs text-secondary m-0">{item.description}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* Mock orchestrator view */}
-                                        <div
-                                            data-scheme="secondary"
-                                            className="bg-primary rounded-md border border-primary overflow-hidden"
-                                        >
-                                            <div className="flex items-center gap-2 px-4 py-2.5 border-b border-primary bg-accent">
-                                                <IconGear className="size-4 text-blue" />
-                                                <span className="text-sm font-bold">Agent orchestrator</span>
-                                                <span className="ml-auto text-xs text-muted">3 agents active</span>
-                                            </div>
-                                            <div className="divide-y divide-primary">
-                                                {[
-                                                    {
-                                                        agent: 'Agent #1',
-                                                        task: 'Fix checkout validation',
-                                                        status: 'Writing tests',
-                                                        statusColor: 'text-seagreen',
-                                                    },
-                                                    {
-                                                        agent: 'Agent #2',
-                                                        task: 'Optimize dashboard queries',
-                                                        status: 'PR ready for review',
-                                                        statusColor: 'text-blue',
-                                                    },
-                                                    {
-                                                        agent: 'Agent #3',
-                                                        task: 'Add export retry logic',
-                                                        status: 'Running CI',
-                                                        statusColor: 'text-yellow',
-                                                    },
-                                                ].map((row) => (
-                                                    <div
-                                                        key={row.agent}
-                                                        className="px-4 py-3 flex items-center gap-3 text-sm"
-                                                    >
-                                                        <span className="font-mono text-xs text-muted w-16 flex-shrink-0">
-                                                            {row.agent}
-                                                        </span>
-                                                        <span className="flex-1 truncate font-medium">{row.task}</span>
-                                                        <span
-                                                            className={`text-xs font-medium ${row.statusColor} flex-shrink-0`}
-                                                        >
-                                                            {row.status}
-                                                        </span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
                                     </div>
                                 </section>
 
@@ -1120,12 +1292,13 @@ export default function Code(): JSX.Element {
                                 <section id="get-started" className="px-6 @lg:px-12 py-16 @lg:py-24">
                                     <div className="max-w-2xl mx-auto text-center">
                                         <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-4">
-                                            Build products that build themselves
+                                            Be the first to build with PostHog Code
                                         </h2>
                                         <p className="text-lg text-secondary mb-8">
-                                            PostHog Code is the missing link between your product data and your
-                                            codebase. Stop context-switching between dashboards and your
-                                            editor&mdash;let the data drive the work.
+                                            We're looking for alpha testers who currently work on a real product with
+                                            real users (and want to burn some tokens with us). Stop context-switching
+                                            between dashboards, agent chats and terminals. Let data drive the work with
+                                            PostHog Code.
                                         </p>
                                         <div className="flex flex-wrap justify-center gap-3">
                                             <CallToAction
@@ -1135,8 +1308,8 @@ export default function Code(): JSX.Element {
                                             >
                                                 Get early access
                                             </CallToAction>
-                                            <CallToAction href="/talk-to-a-human" type="secondary" size="lg">
-                                                Talk to a human
+                                            <CallToAction href="https://posthog.com/discord" type="secondary" size="lg">
+                                                Join us on Discord
                                             </CallToAction>
                                         </div>
                                     </div>
