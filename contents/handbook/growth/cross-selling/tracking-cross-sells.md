@@ -71,7 +71,7 @@ If you're giving a customer extended time or capacity to try a product before pa
 
 Cross-sell metrics are tracked in the sales growth review. After each quarter, we should be able to answer:
 
-1. How many cross-sell opps did TAMs create?
+1. How many cross-sell oops did TAMs create?
 2. What was the win rate?
 3. Which products had the highest/lowest conversion?
 4. What was the average deal size?
