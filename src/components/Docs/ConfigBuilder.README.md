@@ -35,11 +35,15 @@ import { ConfigBuilder } from 'components/Docs/ConfigBuilder'
 
 The generated code renders inside `SingleCodeBlock`, which auto-replaces placeholders like `<ph_project_token>`, `<ph_client_api_host>`, and `<ph_posthog_js_defaults>` with the user's actual values (or latest defaults). Use these placeholders in `generateCode` and `defaultValue` fields.
 
+## Structure
+
+The component uses inline `renderCheckbox` and `renderInput` helper functions to avoid duplicating markup between essential and advanced option sections.
+
 ## Layout
 
 - Uses `@container` queries (not media queries) per project guidelines
 - Two-column grid at `@md` breakpoint, single column on narrow containers
-- Left panel: scrollable config options
+- Left panel: scrollable config options with smooth scroll on advanced expand
 - Right panel: sticky code preview with reset button
 - Checkbox descriptions hidden at `@md` to save space in two-column mode
 

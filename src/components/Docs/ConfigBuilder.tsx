@@ -189,6 +189,99 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
             description: o.description,
         })) || []
 
+    const renderCheckbox = (checkbox: CheckboxOption) => (
+        <label
+            key={checkbox.id}
+            className="flex items-start gap-2 cursor-pointer group"
+            htmlFor={`checkbox-${checkbox.id}`}
+        >
+            <Checkbox
+                id={`checkbox-${checkbox.id}`}
+                checked={config.checkboxes[checkbox.id] || false}
+                onCheckedChange={() => handleCheckboxToggle(checkbox.id)}
+                dataScheme="primary"
+            />
+            <div className="flex-1 -mt-0.5">
+                <span className="font-semibold">{checkbox.label}</span>
+                {checkbox.description && (
+                    <p className="text-sm text-muted m-0 mt-0.5 @md:hidden">{checkbox.description}</p>
+                )}
+            </div>
+        </label>
+    )
+
+    const renderInput = (input: InputField) => (
+        <div key={input.id}>
+            <label className="block mb-1.5">
+                <span className="font-semibold">{input.label}</span>
+                {input.description && <span className="text-sm text-muted ml-2 font-normal">{input.description}</span>}
+            </label>
+            {input.type === 'environment-list' ? (
+                <>
+                    <div className="flex gap-2 mb-2">
+                        <div className="flex-1">
+                            <OSInput
+                                label="Environment"
+                                showLabel={false}
+                                type="text"
+                                value={environmentInput}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                    setEnvironmentInput(e.target.value)
+                                }
+                                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                                    e.key === 'Enter' && handleAddEnvironment(input.id)
+                                }
+                                placeholder={input.placeholder || 'e.g., localhost, dev.example.com'}
+                                width="full"
+                                dataScheme="primary"
+                            />
+                        </div>
+                        <OSButton variant="primary" size="lg" onClick={() => handleAddEnvironment(input.id)}>
+                            Add
+                        </OSButton>
+                    </div>
+                    {(config.inputs[input.id] as string[]).length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                            {(config.inputs[input.id] as string[]).map((env) => (
+                                <div
+                                    key={env}
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-accent border border-primary rounded-md text-sm"
+                                >
+                                    <span className="text-primary">{env}</span>
+                                    <button
+                                        onClick={() => handleRemoveEnvironment(input.id, env)}
+                                        className="text-muted hover:text-red dark:hover:text-yellow transition-colors p-0.5 -mr-1"
+                                        aria-label={`Remove ${env}`}
+                                    >
+                                        <IconX className="size-3.5" />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </>
+            ) : (
+                <OSInput
+                    label={input.label}
+                    showLabel={false}
+                    type={input.type === 'number' ? 'number' : 'text'}
+                    value={String(config.inputs[input.id])}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleInputChange(
+                            input.id,
+                            input.type === 'number' ? parseInt(e.target.value) || 0 : e.target.value
+                        )
+                    }
+                    min={input.min}
+                    max={input.max}
+                    placeholder={input.placeholder}
+                    width="full"
+                    dataScheme="primary"
+                />
+            )}
+        </div>
+    )
+
     return (
         <div
             className="@container my-4 border border-primary rounded grid @md:grid-cols-[1fr_1.5fr]"
@@ -225,115 +318,12 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
                 )}
 
                 {essentialCheckboxes.length > 0 && (
-                    <div className="mb-6 mt-4 space-y-4">
-                        {essentialCheckboxes.map((checkbox) => (
-                            <label
-                                key={checkbox.id}
-                                className="flex items-start gap-2 cursor-pointer group"
-                                htmlFor={`checkbox-${checkbox.id}`}
-                            >
-                                <Checkbox
-                                    id={`checkbox-${checkbox.id}`}
-                                    checked={config.checkboxes[checkbox.id] || false}
-                                    onCheckedChange={() => handleCheckboxToggle(checkbox.id)}
-                                    dataScheme="primary"
-                                />
-                                <div className="flex-1 -mt-0.5">
-                                    <span className="font-semibold">{checkbox.label}</span>
-                                    {checkbox.description && (
-                                        <p className="text-sm text-muted m-0 mt-0.5 @md:hidden">
-                                            {checkbox.description}
-                                        </p>
-                                    )}
-                                </div>
-                            </label>
-                        ))}
-                    </div>
+                    <div className="mb-6 mt-4 space-y-4">{essentialCheckboxes.map(renderCheckbox)}</div>
                 )}
 
                 {essentialInputs.map((input) => (
                     <div key={input.id} className="mb-4">
-                        {input.type === 'environment-list' ? (
-                            <>
-                                <label className="block mb-1.5">
-                                    <span className="font-semibold">{input.label}</span>
-                                    {input.description && (
-                                        <span className="text-sm text-muted ml-2 font-normal">{input.description}</span>
-                                    )}
-                                </label>
-                                <div className="flex gap-2 mb-2">
-                                    <div className="flex-1">
-                                        <OSInput
-                                            label="Environment"
-                                            showLabel={false}
-                                            type="text"
-                                            value={environmentInput}
-                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                                setEnvironmentInput(e.target.value)
-                                            }
-                                            onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                                                e.key === 'Enter' && handleAddEnvironment(input.id)
-                                            }
-                                            placeholder={input.placeholder || 'e.g., localhost, dev.example.com'}
-                                            width="full"
-                                            dataScheme="primary"
-                                        />
-                                    </div>
-                                    <OSButton
-                                        variant="primary"
-                                        size="lg"
-                                        onClick={() => handleAddEnvironment(input.id)}
-                                    >
-                                        Add
-                                    </OSButton>
-                                </div>
-                                {(config.inputs[input.id] as string[]).length > 0 && (
-                                    <div className="flex flex-wrap gap-2">
-                                        {(config.inputs[input.id] as string[]).map((env) => (
-                                            <div
-                                                key={env}
-                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-accent border border-primary rounded-md text-sm"
-                                            >
-                                                <span className="text-primary">{env}</span>
-                                                <button
-                                                    onClick={() => handleRemoveEnvironment(input.id, env)}
-                                                    className="text-muted hover:text-red dark:hover:text-yellow transition-colors p-0.5 -mr-1"
-                                                    aria-label={`Remove ${env}`}
-                                                >
-                                                    <IconX className="size-3.5" />
-                                                </button>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </>
-                        ) : (
-                            <>
-                                <label className="block mb-1.5">
-                                    <span className="font-semibold">{input.label}</span>
-                                    {input.description && (
-                                        <span className="text-sm text-muted ml-2 font-normal">{input.description}</span>
-                                    )}
-                                </label>
-                                <OSInput
-                                    label={input.label}
-                                    showLabel={false}
-                                    type={input.type === 'number' ? 'number' : 'text'}
-                                    value={String(config.inputs[input.id])}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                        handleInputChange(
-                                            input.id,
-                                            input.type === 'number' ? parseInt(e.target.value) || 0 : e.target.value
-                                        )
-                                    }
-                                    min={input.min}
-                                    max={input.max}
-                                    placeholder={input.placeholder}
-                                    width="full"
-                                    dataScheme="primary"
-                                />
-                            </>
-                        )}
+                        {renderInput(input)}
                     </div>
                 ))}
 
@@ -352,63 +342,9 @@ export const ConfigBuilder: React.FC<ConfigBuilderProps> = ({
                         {showAdvanced && (
                             <div ref={advancedRef} className="mt-4 space-y-4">
                                 {advancedCheckboxes.length > 0 && (
-                                    <div className="space-y-4">
-                                        {advancedCheckboxes.map((checkbox) => (
-                                            <label
-                                                key={checkbox.id}
-                                                className="flex items-start gap-2 cursor-pointer group"
-                                                htmlFor={`checkbox-${checkbox.id}`}
-                                            >
-                                                <Checkbox
-                                                    id={`checkbox-${checkbox.id}`}
-                                                    checked={config.checkboxes[checkbox.id] || false}
-                                                    onCheckedChange={() => handleCheckboxToggle(checkbox.id)}
-                                                    dataScheme="primary"
-                                                />
-                                                <div className="flex-1 -mt-0.5">
-                                                    <span className="font-semibold">{checkbox.label}</span>
-                                                    {checkbox.description && (
-                                                        <p className="text-sm text-muted m-0 mt-0.5 @md:hidden">
-                                                            {checkbox.description}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </label>
-                                        ))}
-                                    </div>
+                                    <div className="space-y-4">{advancedCheckboxes.map(renderCheckbox)}</div>
                                 )}
-
-                                {advancedInputs.map((input) => (
-                                    <div key={input.id}>
-                                        <label className="block mb-1.5">
-                                            <span className="font-semibold">{input.label}</span>
-                                            {input.description && (
-                                                <span className="text-sm text-muted ml-2 font-normal">
-                                                    {input.description}
-                                                </span>
-                                            )}
-                                        </label>
-                                        <OSInput
-                                            label={input.label}
-                                            showLabel={false}
-                                            type={input.type === 'number' ? 'number' : 'text'}
-                                            value={String(config.inputs[input.id])}
-                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                                handleInputChange(
-                                                    input.id,
-                                                    input.type === 'number'
-                                                        ? parseInt(e.target.value) || 0
-                                                        : e.target.value
-                                                )
-                                            }
-                                            min={input.min}
-                                            max={input.max}
-                                            placeholder={input.placeholder}
-                                            width="full"
-                                            dataScheme="primary"
-                                        />
-                                    </div>
-                                ))}
+                                {advancedInputs.map(renderInput)}
                             </div>
                         )}
                     </div>
