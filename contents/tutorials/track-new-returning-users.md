@@ -37,7 +37,7 @@ For example, when a user first uses your API, set their creation date in their p
 
 ```python
 posthog.capture(
-    '<ph_project_api_key>',
+    '<ph_project_token>',
     event='new_user_created',
     properties={ '$set_once': { 'created_at': '2023-04-24T22:02:02' } }
 )

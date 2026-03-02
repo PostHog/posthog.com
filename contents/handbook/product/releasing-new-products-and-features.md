@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 This guide walks you through the full lifecycle of releasing new products and features at PostHog, from initial planning to general availability.
 
-For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments/blob/main/.github/ISSUE_TEMPLATE/new-product.md).
+For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md).
 
 ## Overview of the product lifecycle
 
@@ -90,7 +90,7 @@ After a week in any new beta, users will trigger an automatic email from the `be
 
 Regardless, emails to this Google Group will sync to the PostHog Feedback Slack channel for general awareness. Team leads are encouraged to respond to beta feedback emails.
 
-Teams can collect additional feedback if needed and the Brand & Vibes team is able to help with creating feedback emails or funnels.
+Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
 
 ## Phase 4: Launching to general availability
 
@@ -98,7 +98,7 @@ Once a beta is mature enough, you may want to launch it into general availabilit
 
 **If you're planning to launch your product in a specific quarter, you MUST let the Marketing team know at the start of the quarter.**
 
-Smaller features which don't require [major announcements](/handbook/brand/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
+Smaller features which don't require [major announcements](/handbook/marketing/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
 
 You can set the feature flag to release to 100% of users BEFORE the Marketing launch, you don't need to wait for it.
 

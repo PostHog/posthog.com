@@ -5,7 +5,7 @@ In  it's possible to declare that a user is currently "active" in a particular g
 To make sure all events get attached to groups, we recommend calling `posthog.group` in `loaded` callback.
 
 ```js
-posthog.init('[your api key]', {
+posthog.init('<ph_project_token>', {
     api_host: 'https://posthog.[your-domain].com',
     loaded: function(posthog) {
         posthog.identify('[user unique id]');

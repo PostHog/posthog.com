@@ -35,6 +35,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/attio',
                 },
                 {
+                    name: 'BuildBetter',
+                    url: '/docs/cdp/sources/buildbetter',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -45,6 +49,10 @@ export const dataPipelines = {
                 {
                     name: 'Klaviyo',
                     url: '/docs/cdp/sources/klaviyo',
+                },
+                {
+                    name: 'Linear',
+                    url: '/docs/cdp/sources/linear',
                 },
                 {
                     name: 'Zendesk',
@@ -117,6 +125,10 @@ export const dataPipelines = {
                 {
                     name: 'Snapchat Ads',
                     url: '/docs/cdp/sources/snapchat-ads',
+                },
+                {
+                    name: 'Pinterest Ads',
+                    url: '/docs/cdp/sources/pinterest-ads',
                 },
                 {
                     name: 'Google Sheets',
@@ -557,6 +569,7 @@ export const handbookSidebar = [
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
             { name: 'Advisories & CVEs', url: '/handbook/company/security-advisories' },
+            { name: 'Post-mortems', url: '/handbook/company/post-mortems' },
         ],
     },
     {
@@ -684,6 +697,10 @@ export const handbookSidebar = [
                         url: '/handbook/content/newsletter',
                     },
                     {
+                        name: 'Tips for new writers',
+                        url: '/handbook/content/newsletter-tips',
+                    },
+                    {
                         name: 'Newsletter ads',
                         url: '/handbook/content/newsletter-ads',
                     },
@@ -748,6 +765,10 @@ export const handbookSidebar = [
             {
                 name: 'How to write product docs',
                 url: '/handbook/docs-and-wizard/writing-product-docs',
+            },
+            {
+                name: 'How to use the content writer agent',
+                url: '/handbook/docs-and-wizard/content-writer-agent',
             },
             {
                 name: 'Onboarding docs',
@@ -1521,6 +1542,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-data',
                     },
                     {
+                        name: 'Onboarding conversations playbook',
+                        url: '/handbook/onboarding/onboarding-conversations-playbook',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
@@ -1643,6 +1668,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
                 ],
+            },
+            {
+                name: 'Product enablement',
+                url: '/handbook/growth/sales/product-enablement',
             },
             {
                 name: 'Use cases',
@@ -2575,6 +2604,14 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
+                            name: 'Replit integration',
+                            url: '/docs/integrations/replit',
+                        },
+                        {
+                            name: 'v0 integration',
+                            url: '/docs/integrations/v0',
+                        },
+                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
@@ -2678,6 +2715,10 @@ export const docsMenu = {
                                 {
                                     name: 'Ecommerce events spec',
                                     url: '/docs/data/event-spec/ecommerce-events',
+                                },
+                                {
+                                    name: 'Property filter operators',
+                                    url: '/docs/data/property-filters',
                                 },
                                 {
                                     name: 'Channel type',
@@ -4283,6 +4324,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/error-tracking/installation/go',
+                        },
+                        {
                             name: 'React Native',
                             url: '/docs/error-tracking/installation/react-native',
                         },
@@ -4699,6 +4744,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Localization',
+                    url: '/docs/product-tours/localization',
+                    icon: 'IconGlobe',
+                    color: 'orange',
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -4836,6 +4887,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/bigquery',
                         },
                         {
+                            name: 'BuildBetter',
+                            url: '/docs/data-warehouse/sources/buildbetter',
+                        },
+                        {
                             name: 'Chargebee',
                             url: '/docs/data-warehouse/sources/chargebee',
                         },
@@ -4876,6 +4931,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/snapchat-ads',
                         },
                         {
+                            name: 'Pinterest Ads',
+                            url: '/docs/data-warehouse/sources/pinterest-ads',
+                        },
+                        {
                             name: 'Shopify',
                             url: '/docs/data-warehouse/sources/shopify',
                         },
@@ -4902,6 +4961,10 @@ export const docsMenu = {
                         {
                             name: 'Klaviyo',
                             url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
+                            name: 'Linear',
+                            url: '/docs/data-warehouse/sources/linear',
                         },
                         {
                             name: 'Mailchimp',
@@ -5381,6 +5444,16 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/evaluations',
                     icon: 'IconTarget',
                     color: 'yellow',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
+                    name: 'Prompt management',
+                    url: '/docs/llm-analytics/prompts',
+                    icon: 'IconPencil',
+                    color: 'purple',
                     badge: {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
@@ -5879,6 +5952,12 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install PostHog SDK',
+                    url: '/docs/workflows/installation',
+                    icon: 'IconTerminal',
+                    color: 'blue',
                 },
                 {
                     name: 'Configure a channel',

@@ -21,7 +21,7 @@ The below example is how you can change the `$pathname` property to include the 
 ```tsx
 import posthog, { CaptureResult } from 'posthog-js'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   before_send: (event: CaptureResult | null): CaptureResult | null => {

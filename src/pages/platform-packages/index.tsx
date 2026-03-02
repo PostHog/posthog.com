@@ -89,12 +89,14 @@ export default function PlatformPackages() {
                         <div>
                             Our platform packages help you manage your teams securely and efficiently on PostHog as you
                             grow. You can{' '}
-                            <Link to="https://app.posthog.com/organization/billing/">
+                            <Link to="https://app.posthog.com/organization/billing/" target="_blank">
                                 {' '}
                                 subscribe to packages after signing up for PostHog
                             </Link>
                             . Need more help getting started?{' '}
-                            <Link to="/services">We also offer service packages.</Link>
+                            <Link to="/services" state={{ newWindow: true }}>
+                                We also offer service packages.
+                            </Link>
                         </div>
                     </div>
 

@@ -373,6 +373,22 @@ const appSettings: AppSettings = {
             },
         },
     },
+    '/wizard': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'home-test': {
         experiment: {
             variant: 'test',
@@ -550,6 +566,22 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 750,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/partnerships': {
+        size: {
+            min: {
+                width: 700,
                 height: 500,
             },
             max: {
@@ -971,6 +1003,25 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    'hedgehog-generator': {
+        size: {
+            min: {
+                width: 550,
+                height: 650,
+            },
+            max: {
+                width: 550,
+                height: 650,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     'cool-tech-jobs-issue': {
         size: {
             min: {
@@ -1100,6 +1151,9 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     '/fm': {
