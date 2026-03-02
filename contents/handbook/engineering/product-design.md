@@ -60,7 +60,13 @@ Sometimes if you have domain knowledge or have been thinking about a project for
 
 If you'd like the help of a product designer on an MVP/v0.1-type project, a 30-60 min Zoom working session is a great way to brainstorm and sketch out ideas. Since our design team is small, we try to avoid too much "homework".
 
-Usually during quick syncs like this, it's enough to help an engineer work through complex UX issues. Reach out to Cory if you're interested in a synchronous session like this.
+Usually during quick syncs like this, it's enough to help an engineer work through complex UX issues. Reach out to the <SmallTeam name="platform-ux" /> if you're interested in a synchronous session like this.
+
+---
+
+In any case, always copy existing UI patterns instead of creating new ones, just because it's more convenient for your product's UI. Take a few moments to look around how other products handle using the same component and emulate what you see there. This includes things like placement, sizing, and styling.
+
+Avoid cramming in custom elements into commonon existing patterns just because there's space for something else. Creating one-offs leads to an inconsistent experience and confusion for end users. There are rare cases where you should deviate from this pattern. Before you do, always check in with the <SmallTeam name="platform-ux" /> to see if there's a better pattern to follow.
 
 ## Product design capacity
 
