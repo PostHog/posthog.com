@@ -183,5 +183,7 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
     classes="rounded"
 />
 
+When an insight with a breakdown returns no data for a period (no matching events), the alert evaluates against a value of 0 rather than entering an error state. This enables you to create alerts that fire when metrics drop to zero.
+
 ## Further reading
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).
