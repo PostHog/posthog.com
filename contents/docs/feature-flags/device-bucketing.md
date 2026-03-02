@@ -37,7 +37,7 @@ Device bucketing is useful when the flag targets users who aren't yet identified
 
 When creating or editing a feature flag, change the **Match by** dropdown under **Release conditions** from **User** to **Device**.
 
-That's it — PostHog will now use the device ID to determine the flag value for that release condition.
+That's it. PostHog will now use the device ID to determine the flag value for that release condition.
 
 ## Relationship to persisting flags across authentication
 
