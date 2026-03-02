@@ -72,12 +72,25 @@ This is useful for:
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('YOUR_API_KEY', {
+posthog.init('<ph_project_token>', {
   disable_conversations: true  // Prevents loading the conversations module
 })
 ```
 
 This is different from hiding the widget – it completely disables the feature.
+
+## Recover tickets across browsers
+
+Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets. The widget includes a **Recover your tickets** link to handle this.
+
+### How recovery works
+
+1. The user clicks **Recover your tickets** in the ticket list
+2. They enter the email address used in previous conversations
+3. A recovery link is sent to that email (expires in one hour)
+4. Clicking the link opens the widget and restores their tickets in the new browser
+
+If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
 
 ## Email notifications
 

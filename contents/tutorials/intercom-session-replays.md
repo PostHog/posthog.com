@@ -16,7 +16,7 @@ To get easy access to session replays in Intercom, you can add them as either us
 Since version 1.256.0, our Web SDK can add session replay and person URLs to Intercom automatically by setting the `integrations` config option to `{ intercom: true }`.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     integrations: {
         intercom: true,
@@ -81,7 +81,7 @@ After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 npm i posthog-js
 ```
 
-Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project API key and instance address (from [your project settings](https://us.posthog.com/settings/project-details)) and export a provider component. If you use a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.
+Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project token and instance address (from [your project settings](https://us.posthog.com/settings/project-details)) and export a provider component. If you use a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.
 
 ```js
 // app/providers.js
@@ -92,7 +92,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       ui_host: '<ph_app_host>',
       defaults: '<ph_posthog_js_defaults>',

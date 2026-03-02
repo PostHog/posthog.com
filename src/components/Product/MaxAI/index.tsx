@@ -54,7 +54,7 @@ import betaMobileImg from './beta-mobile.svg'
 import descriptionDesktopImg from './description-desktop.svg'
 import descriptionMobileImg from './description-mobile.svg'
 import usePostHog from 'hooks/usePostHog'
-import IntegrationPrompt from 'components/IntegrationPrompt'
+import WizardCommand from 'components/WizardCommand'
 
 interface MaxPromptButtonProps {
     text: string
@@ -715,7 +715,7 @@ export const ProductMax = () => {
                                     </span>
                                 </p>
                                 <div className="pl-5">
-                                    <IntegrationPrompt />
+                                    <WizardCommand />
                                 </div>
                             </div>
                             <p className="mb-0">
