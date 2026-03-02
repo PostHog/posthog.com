@@ -12,11 +12,9 @@ Device bucketing is currently in beta. It is supported on the **JavaScript web**
 
 </CalloutBox>
 
-By default, feature flags use the user's distinct ID to determine which value (or variant) to return. This is called **user bucketing** — the distinct ID is hashed against the flag key to assign a result.
+By default, feature flags hash on the user's distinct ID to decide which value to return. This works great for logged-in users, but distinct IDs can change when someone signs up or logs in, which means they might see a different variant after authenticating.
 
-**Device bucketing** uses the device ID instead. This means the flag result is tied to the device rather than the user, which keeps the experience consistent even when the user's distinct ID changes — such as when they log in or create an account.
-
-This distinction matters most for **multivariate flags and experiments**, where you need anonymous visitors to stay in the same variant throughout their session.
+**Device bucketing** hashes on the device ID instead, so the flag result stays the same on that device regardless of whether the user is anonymous or identified. This is most useful for **multivariate flags and experiments** where you need anonymous visitors to stay in the same variant throughout their session.
 
 ## When to use device bucketing
 
