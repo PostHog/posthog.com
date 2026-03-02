@@ -39,6 +39,8 @@ When creating or editing a feature flag, change the **Match by** dropdown under 
 
 That's it. PostHog will now use the device ID to determine the flag value for that release condition.
 
+The device ID is automatically set by the web (JavaScript) SDK, but you can also set it manually if needed.
+
 ## Relationship to persisting flags across authentication
 
 PostHog also offers [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional), which keeps the flag value the same before and after login. However, that feature comes with significant tradeoffs: it's incompatible with local evaluation and bootstrapping, requires person profiles, and introduces slower flag responses.
