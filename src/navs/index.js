@@ -3809,6 +3809,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Device bucketing',
+                    url: '/docs/feature-flags/device-bucketing',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -3826,7 +3832,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Target flags with devices & groups',
+                    name: 'Target flags with groups',
                     url: '/docs/feature-flags/targeting-groups',
                     icon: 'IconPeople',
                     color: 'purple',
