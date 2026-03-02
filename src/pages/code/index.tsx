@@ -18,6 +18,7 @@ import ZendeskIcon from '../../../contents/cdp/thumbnails/zendesk.svg'
 import {
     IconTerminal,
     IconBolt,
+    IconCode,
     IconNotification,
     IconArrowRight,
     IconTarget,
@@ -38,12 +39,14 @@ import {
     IconSort,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
+import PostHogCode from 'components/PostHogCode'
 
 const sidebarNav = [
     { name: 'Overview', id: 'overview', icon: <IconTerminal className="size-4" /> },
     { name: 'Product autonomy', id: 'product-autonomy', icon: <IconSparkles className="size-4" /> },
     { name: 'Signals', id: 'signals', icon: <IconNotification className="size-4" /> },
     { name: 'Agentic environment', id: 'agentic-environment', icon: <IconTerminal className="size-4" /> },
+    { name: 'Code interface', id: 'code-interface', icon: <IconCode className="size-4" /> },
     { name: 'Pricing & usage', id: 'pricing', icon: <IconCreditCard className="size-4" /> },
     { name: 'How it works', id: 'how-it-works', icon: <IconBolt className="size-4" /> },
     { name: 'FAQ', id: 'faq', icon: <IconNotification className="size-4" /> },
@@ -152,7 +155,8 @@ const signalSourceGroups: Record<
             {
                 id: 'request',
                 name: 'Request a source',
-                description: "Don't see your tool? Tell us what you need and we'll consider building it.",
+                description:
+                    "Don't see your tool? Tell us what you need and we'll consider building it. Or better yet, contribute to our open source repo.",
             },
         ],
     },
@@ -1071,6 +1075,24 @@ export default function Code(): JSX.Element {
                                                 'Connect external data sources',
                                             ]}
                                         />
+                                    </div>
+                                </section>
+
+                                {/* Code interface */}
+                                <section
+                                    id="code-interface"
+                                    className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary"
+                                >
+                                    <div className="max-w-4xl mb-6">
+                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">The Code interface</h2>
+                                        <p className="text-lg text-secondary max-w-2xl m-0">
+                                            Explore the agentic coding environment: switch topics in the sidebar, read
+                                            through example conversations, and try typing a message to see how PostHog
+                                            Code responds.
+                                        </p>
+                                    </div>
+                                    <div className="h-[500px] @lg:h-[600px] min-h-0">
+                                        <PostHogCode />
                                     </div>
                                 </section>
 
