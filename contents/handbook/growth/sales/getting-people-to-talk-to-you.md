@@ -102,6 +102,6 @@ To get notified about new hires and other changes to the accounts you manage, yo
 
 1. Search for an account you want and click on their profile.
 2. Click the star icon on the left, and then choose a list to add them to.
-3. Optional, tailor the notifications you get [here](https://www.linkedin.com/sales/settings/app-notifications)
+3. Optional, tailor the notifications you get [in LinkedIn](https://www.linkedin.com/sales/settings/app-notifications)
 
 You will now be notified any time a senior hire joins your account, which will be helpful for tracking folks to reach out to and give advanced signals around potential data science hires.
