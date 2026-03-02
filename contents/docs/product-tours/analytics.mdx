@@ -51,4 +51,10 @@ These properties are set when users interact with tours:
 - `$product_tour_completed/{tour_id}` - Set to `true` when completed
 - `$product_tour_dismissed/{tour_id}` - Set to `true` when dismissed
 
+These properties track when each tour type was last shown (used for [wait period targeting](/docs/product-tours/targeting#wait-period)):
+
+- `$product_tour_last_seen_date/tour` - Timestamp when a tour was last shown
+- `$product_tour_last_seen_date/announcement` - Timestamp when an announcement was last shown
+- `$product_tour_last_seen_date/banner` - Timestamp when a banner was last shown
+
 Use these for targeting other tours or creating [cohorts](/docs/data/cohorts).

@@ -569,6 +569,7 @@ export const handbookSidebar = [
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
             { name: 'Advisories & CVEs', url: '/handbook/company/security-advisories' },
+            { name: 'Post-mortems', url: '/handbook/company/post-mortems' },
         ],
     },
     {
@@ -1459,6 +1460,10 @@ export const handbookSidebar = [
                     {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
+                    },
+                    {
+                        name: 'Tracking cross sells',
+                        url: '/handbook/growth/cross-selling/tracking-cross-sells',
                     },
                     {
                         name: 'Cross sell motions',
