@@ -30,8 +30,8 @@ Device bucketing is useful when the flag targets users who aren't yet identified
 |---|---|---|
 | **Hashes on** | User's distinct ID | Device ID |
 | **Best for** | Logged-in, identified users | Anonymous or pre-login experiences |
-| **Consistent across login** | May change if distinct ID changes | Stays consistent on the same device |
-| **Cross-device consistency** | Yes, if user is identified | No, each device is evaluated independently |
+| **Behavior when logging in** | May change if distinct ID changes | Stays consistent on the same device |
+| **Behavior when switching devices** | Yes, if user is identified | No, each device is evaluated independently |
 
 ## How to set it up
 
