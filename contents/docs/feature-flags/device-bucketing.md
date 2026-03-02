@@ -4,6 +4,14 @@ showTitle: true
 sidebar: Docs
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Beta feature" type="caution">
+
+Device bucketing is currently in beta. It is supported on the **JavaScript web**, **Node.js**, **Python**, and **Go** SDKs, including local evaluation.
+
+</CalloutBox>
+
 By default, feature flags use the user's distinct ID to determine which value (or variant) to return. This is called **user bucketing** — the distinct ID is hashed against the flag key to assign a result.
 
 **Device bucketing** uses the device ID instead. This means the flag result is tied to the device rather than the user, which keeps the experience consistent even when the user's distinct ID changes — such as when they log in or create an account.
