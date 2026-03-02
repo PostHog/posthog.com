@@ -1,7 +1,19 @@
 import React from 'react'
-import { IconChat, IconSparkles, IconGear, IconQuestion, IconCode } from '@posthog/icons'
+import { IconChat, IconSparkles, IconGear, IconCode } from '@posthog/icons'
 import { Section } from './types'
 import Link from 'components/Link'
+
+export const aboutSectionTypewriterSegments = [
+    {
+        type: 'text' as const,
+        value: 'PostHog Code is an AI coding agent that understands your product. It connects directly to your PostHog instance through the ',
+    },
+    { type: 'node' as const, value: <Link to="/docs/model-context-protocol">Model Context Protocol (MCP)</Link> },
+    {
+        type: 'text' as const,
+        value: ', giving it access to your analytics, session recordings, feature flags, and experiments while it writes code.\n\nThis means instead of context-switching between your analytics dashboard and your editor, you can ask PostHog Code to:\n\n• Query your product data while writing code – "Which pages have the highest bounce rate?" then fix them\n• Watch session recordings to understand bugs before fixing them\n• Create and manage feature flags directly from your coding session\n• Set up experiments with proper instrumentation baked in\n• Build dashboards to track the impact of your changes\n\nIt works with Claude Code, Cursor, Windsurf, and any editor that supports MCP. Your data never leaves PostHog – the agent queries it in real time through our API.',
+    },
+]
 
 export const sections: Section[] = [
     {
@@ -165,7 +177,7 @@ export const sections: Section[] = [
                 toolName: 'Bash',
                 toolDetail: 'npx posthog-mcp@latest init',
                 expanded: (
-                    <pre className="m-0 p-3 text-xs font-code text-secondary overflow-x-auto whitespace-pre-wrap">
+                    <pre className="m-0 p-3 text-sm font-code text-secondary overflow-x-auto whitespace-pre-wrap">
                         {`PostHog MCP Server v1.0.0
 
 ? PostHog host: https://us.posthog.com
@@ -204,69 +216,6 @@ Ready! Start a Claude Code session and ask about your product data.`}
                             <Link to="/docs/model-context-protocol">MCP documentation</Link>.
                         </p>
                     </>
-                ),
-            },
-        ],
-    },
-    {
-        id: 'faq',
-        title: 'FAQs',
-        icon: IconQuestion,
-        conversation: [
-            { type: 'user', content: 'Is my data safe?' },
-            {
-                type: 'agent',
-                content: (
-                    <p className="m-0">
-                        Yes. PostHog Code queries your data through the PostHog API using your personal API key. Data is
-                        never stored, cached, or sent anywhere other than to PostHog&apos;s servers. The MCP server runs
-                        locally on your machine, and you control exactly what the agent can access through your API
-                        key&apos;s permissions.
-                    </p>
-                ),
-            },
-            { type: 'user', content: 'What AI models does it work with?' },
-            {
-                type: 'agent',
-                content: (
-                    <>
-                        <p className="m-0 mb-2">
-                            PostHog Code works with any MCP-compatible AI coding agent. Currently supported:
-                        </p>
-                        <ul className="m-0 mb-2 pl-4 list-disc">
-                            <li>Claude Code – Anthropic&apos;s CLI agent</li>
-                            <li>Cursor – AI-native code editor</li>
-                            <li>Windsurf – Codeium&apos;s AI IDE</li>
-                            <li>VS Code + Copilot – with MCP extension</li>
-                        </ul>
-                        <p className="m-0">
-                            The MCP standard is growing fast, so more editors will be supported over time.
-                        </p>
-                    </>
-                ),
-            },
-            { type: 'user', content: 'How much does it cost?' },
-            {
-                type: 'agent',
-                content: (
-                    <p className="m-0">
-                        The PostHog MCP server is free and open source. You just need a PostHog account (the generous
-                        free tier works) and an API key from your AI provider. PostHog Code reads from your existing
-                        PostHog data, so you only pay for the PostHog products you already use. There&apos;s no
-                        additional charge for MCP access.
-                    </p>
-                ),
-            },
-            { type: 'user', content: 'Can it modify my PostHog configuration?' },
-            {
-                type: 'agent',
-                content: (
-                    <p className="m-0">
-                        PostHog Code can both read and write to PostHog, depending on your API key permissions. It can
-                        create feature flags, set up experiments, build dashboards, and define actions. Every write
-                        operation requires explicit approval from the agent&apos;s permission system – nothing happens
-                        without your confirmation.
-                    </p>
                 ),
             },
         ],

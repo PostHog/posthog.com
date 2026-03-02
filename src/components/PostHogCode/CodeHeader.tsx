@@ -15,7 +15,7 @@ export default function CodeHeader({ sidebarOpen, onToggleSidebar, title }: Code
                 style={{ width: sidebarOpen ? '260px' : '48px' }}
             >
                 {sidebarOpen && (
-                    <span className="text-xs font-code text-muted font-medium select-none">PostHog Code</span>
+                    <span className="text-sm font-code text-muted font-medium select-none">PostHog Code</span>
                 )}
                 <button
                     onClick={onToggleSidebar}
@@ -26,7 +26,7 @@ export default function CodeHeader({ sidebarOpen, onToggleSidebar, title }: Code
                 </button>
             </div>
             <div className="flex-1 flex items-center px-3 h-full overflow-hidden">
-                {title && <span className="text-xs font-code text-secondary font-medium truncate">{title}</span>}
+                {title && <span className="text-sm font-code text-secondary font-medium truncate">{title}</span>}
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ import CodeConversation from './CodeConversation'
 import CodeEditor from './CodeEditor'
 import { sections } from './data'
 import { ConversationItem } from './types'
+import { useIntersectionObserver } from 'hooks/useIntersectionObserver'
 
 const LOREM_RESPONSES: React.ReactNode[] = [
     <>
@@ -52,6 +53,7 @@ function pickLoremResponse(): React.ReactNode {
 }
 
 export default function PostHogCode() {
+    const { elementRef, isInView } = useIntersectionObserver({ threshold: 0.15, rootMargin: '80px', triggerOnce: true })
     const [activeSection, setActiveSection] = useState(0)
     const [sidebarOpen, setSidebarOpen] = useState(true)
     const [extraMessages, setExtraMessages] = useState<ConversationItem[]>([])
@@ -107,7 +109,10 @@ export default function PostHogCode() {
     ]
 
     return (
-        <div className="flex flex-col h-full min-h-0 bg-primary border border-primary rounded-md overflow-hidden">
+        <div
+            ref={elementRef}
+            className="flex flex-col h-full min-h-0 bg-primary border border-primary rounded-md overflow-hidden"
+        >
             <CodeHeader
                 sidebarOpen={sidebarOpen}
                 onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
@@ -118,7 +123,11 @@ export default function PostHogCode() {
                     <CodeSidebar sections={sections} activeSection={activeSection} onSectionClick={setActiveSection} />
                 )}
                 <div className="flex flex-col flex-1 min-w-0">
-                    <CodeConversation conversation={conversation} activeSection={activeSection} />
+                    <CodeConversation
+                        conversation={conversation}
+                        activeSection={activeSection}
+                        typewriterTrigger={isInView && activeSection === 0}
+                    />
                     <CodeEditor value={input} onChange={setInput} onSubmit={handleSubmit} disabled={isLoading} />
                 </div>
             </div>

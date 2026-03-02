@@ -18,14 +18,12 @@ import ZendeskIcon from '../../../contents/cdp/thumbnails/zendesk.svg'
 import {
     IconTerminal,
     IconBolt,
-    IconCode,
     IconNotification,
     IconArrowRight,
     IconTarget,
     IconGraph,
     IconGear,
     IconSparkles,
-    IconCheck,
     IconWarning,
     IconRewindPlay,
     IconToggle,
@@ -40,17 +38,17 @@ import {
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import PostHogCode from 'components/PostHogCode'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 const sidebarNav = [
     { name: 'Overview', id: 'overview', icon: <IconTerminal className="size-4" /> },
     { name: 'Product autonomy', id: 'product-autonomy', icon: <IconSparkles className="size-4" /> },
-    { name: 'Signals', id: 'signals', icon: <IconNotification className="size-4" /> },
     { name: 'Agentic environment', id: 'agentic-environment', icon: <IconTerminal className="size-4" /> },
-    { name: 'Code interface', id: 'code-interface', icon: <IconCode className="size-4" /> },
-    { name: 'Pricing & usage', id: 'pricing', icon: <IconCreditCard className="size-4" /> },
     { name: 'How it works', id: 'how-it-works', icon: <IconBolt className="size-4" /> },
-    { name: 'FAQ', id: 'faq', icon: <IconNotification className="size-4" /> },
+    { name: 'Signals', id: 'signals', icon: <IconNotification className="size-4" /> },
+    { name: 'Pricing & usage', id: 'pricing', icon: <IconCreditCard className="size-4" /> },
     { name: 'Get started', id: 'get-started', icon: <IconArrowRight className="size-4" /> },
+    { name: 'FAQ', id: 'faq', icon: <IconNotification className="size-4" /> },
 ]
 
 type SignalSourceGroupKey = 'native' | 'first-party' | 'mcp'
@@ -80,43 +78,48 @@ const signalSourceGroups: Record<
                 id: 'product-analytics',
                 name: 'Product analytics',
                 description:
-                    'Funnel drops, activation issues, and usage regressions across your core product surfaces.',
+                    'Funnel drops, activation issues, and usage regressions that should drive prioritization and code changes.',
                 href: '/product-analytics',
             },
             {
                 id: 'session-replay',
                 name: 'Session replay',
-                description: 'Rage clicks, confusing flows, and broken experiences spotted directly from replays.',
+                description:
+                    'Rage clicks, confusing flows, and broken experiences that agents can investigate and fix from replays.',
                 href: '/session-replay',
             },
             {
                 id: 'feature-flags',
                 name: 'Feature flags',
-                description: 'Rollouts that are under‑performing, stuck at low exposure, or causing regressions.',
+                description:
+                    'Rollouts under‑performing, stuck at low exposure, or causing regressions that agents can adjust.',
                 href: '/feature-flags',
             },
             {
                 id: 'experiments',
                 name: 'Experiments',
-                description: 'Winning and losing variants, plus experiments that are under‑powered or stalled.',
+                description:
+                    'Winning and losing variants, plus under‑powered or stalled experiments that inform rollout and follow‑up work.',
                 href: '/experiments',
             },
             {
                 id: 'error-tracking',
                 name: 'Error tracking',
-                description: 'New errors, noisy endpoints, and regressions tied back to specific deployments.',
+                description:
+                    'New errors, noisy endpoints, and regressions tied to deployments that agents can trace and fix.',
                 href: '/error-tracking',
             },
             {
                 id: 'surveys',
                 name: 'Surveys',
-                description: 'Qualitative feedback from NPS and on‑page surveys, converted into actionable work.',
+                description:
+                    'Qualitative feedback from NPS and on‑page surveys that becomes actionable improvement work.',
                 href: '/surveys',
             },
             {
                 id: 'llm-analytics',
                 name: 'LLM analytics',
-                description: 'LLM latency, quality, and failure patterns surfaced as work for agents to tackle.',
+                description: 'LLM latency, quality, and failure patterns that surface as work for agents to tackle.',
                 href: '/llm-analytics',
             },
         ],
@@ -145,7 +148,8 @@ const signalSourceGroups: Record<
             {
                 id: 'granola',
                 name: 'Granola',
-                description: 'First‑party ingest and transformation pipelines feeding rich context into signals.',
+                description:
+                    'AI meeting notes and summaries from standups, all hands, and one‑off calls that become actionable tasks for agents to execute.',
             },
             {
                 id: 'zendesk',
@@ -180,7 +184,7 @@ const signalSourceGroups: Record<
                 id: 'internal-tools',
                 name: 'Internal tools',
                 description:
-                    'Wire up bespoke internal dashboards or scripts as MCP tools so they can feed into the signal graph.',
+                    'Wire up bespoke internal dashboards or scripts as MCP tools so they can feed into the signals pipeline.',
             },
         ],
     },
@@ -210,6 +214,12 @@ const signalSourceCardImages: Record<string, string> = {
     slack: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_slack_650b0242cd.png',
     github: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_github_537607dd5c.png',
     granola: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_granola_c4875fc74e.png',
+    zendesk: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_zendesk_96683963d6.png',
+    observability:
+        'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/templates/thumbnails/featured/real-time.png',
+    support: 'https://res.cloudinary.com/dmukukwp6/image/upload/zendesk_feature_f2be443a9e.png',
+    'internal-tools':
+        'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/templates/thumbnails/featured/prodcut-analytics.png',
 }
 
 const signalSourceCardLogos: Record<string, JSX.Element> = {
@@ -315,19 +325,20 @@ const SignalSources = () => {
                 ) : activeSource ? (
                     activeGroup === 'native' && activeProduct ? (
                         <div
-                            className={`@container flex flex-col bg-${activeProduct.color} dark:bg-accent border border-transparent dark:border-primary rounded-md overflow-hidden`}
+                            data-scheme="secondary"
+                            className="@container flex flex-col bg-accent/50 border border-primary rounded-md overflow-hidden"
                         >
                             <div className="flex flex-col gap-2 @sm:flex-row items-start justify-between p-4 @xl:p-6">
                                 <div className="flex-1 flex gap-3">
                                     {activeProduct.Icon && (
-                                        <activeProduct.Icon
-                                            className={`size-8 ${activeProduct.overview?.textColor} dark:text-${activeProduct.color}`}
-                                        />
+                                        <activeProduct.Icon className={`size-8 text-${activeProduct.color}`} />
                                     )}
-                                    <div className={`${activeProduct.overview?.textColor} dark:text-white`}>
+                                    <div>
                                         <h3 className="text-xl font-bold tracking-tight m-0">{activeProduct.name}</h3>
-                                        {activeProduct.overview?.title && (
-                                            <p className="m-0 leading-tight">{activeProduct.overview.title}</p>
+                                        {activeSource?.description && (
+                                            <p className="m-0 mt-1 text-sm text-secondary leading-snug">
+                                                {activeSource.description}
+                                            </p>
                                         )}
                                     </div>
                                 </div>
@@ -358,9 +369,7 @@ const SignalSources = () => {
                                         }
                                         alt={activeProduct.screenshots.home.alt}
                                         width={activeProduct.screenshots.home.width}
-                                        imgClassName={
-                                            activeProduct.screenshots.home.imgClasses || 'rounded-md shadow-2xl'
-                                        }
+                                        imgClassName={activeProduct.screenshots.home.imgClasses || 'rounded-md'}
                                     />
                                 </div>
                             )}
@@ -559,7 +568,6 @@ const signalData: Signal[] = [
 
 const SignalsInbox = () => {
     const [selectedId, setSelectedId] = useState<number | null>(2)
-    const [inboxTab, setInboxTab] = useState('signals')
     const selected = signalData.find((s) => s.id === selectedId) || null
 
     return (
@@ -595,19 +603,6 @@ const SignalsInbox = () => {
                     <div className="flex items-center gap-2 px-4 py-2.5 border-b border-primary bg-accent">
                         <IconNotification className="size-4" />
                         <span className="text-sm font-bold">Inbox</span>
-                        <div className="ml-auto">
-                            <ToggleGroup
-                                title="Inbox view"
-                                hideTitle
-                                options={[
-                                    { label: 'Signals', value: 'signals' },
-                                    { label: 'Setup', value: 'setup' },
-                                ]}
-                                value={inboxTab}
-                                onValueChange={(v: string) => v && setInboxTab(v)}
-                                className="!p-0.5"
-                            />
-                        </div>
                     </div>
 
                     <div className="flex items-center justify-between px-4 py-2 border-b border-primary text-sm">
@@ -762,34 +757,6 @@ const Sidebar = ({ activeSection }: { activeSection: string }) => {
     )
 }
 
-const PillarCard = ({
-    icon,
-    title,
-    description,
-    color,
-    features,
-}: {
-    icon: React.ReactNode
-    title: string
-    description: string
-    color: string
-    features: string[]
-}) => (
-    <div className="bg-accent rounded-md border border-primary p-6 @lg:p-8 flex flex-col">
-        <span className={`inline-block mb-4 text-${color}`}>{icon}</span>
-        <h3 className="text-xl @lg:text-2xl font-bold mb-2 m-0">{title}</h3>
-        <p className="text-secondary mb-4">{description}</p>
-        <ul className="list-none m-0 p-0 space-y-2 mt-auto">
-            {features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-sm">
-                    <IconCheck className="size-4 text-seagreen flex-shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                </li>
-            ))}
-        </ul>
-    </div>
-)
-
 const FlowStep = ({
     number,
     title,
@@ -802,9 +769,7 @@ const FlowStep = ({
     icon: React.ReactNode
 }) => (
     <div className="flex gap-4 items-start">
-        <div className="flex-shrink-0 size-10 rounded-full bg-accent border border-primary flex items-center justify-center text-sm font-bold text-seagreen">
-            {number}
-        </div>
+        <span className="flex-shrink-0 font-mono text-sm font-semibold text-muted tabular-nums">{number}</span>
         <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
                 <span className="text-seagreen">{icon}</span>
@@ -977,13 +942,89 @@ export default function Code(): JSX.Element {
                                             </p>
                                         </div>
                                     </div>
+
+                                    <h3
+                                        id="agentic-environment"
+                                        className="text-xl @lg:text-2xl font-bold m-0 mt-10 @lg:mt-12 mb-4"
+                                    >
+                                        Agentic environment
+                                    </h3>
+                                    <div className="h-[500px] @lg:h-[600px] min-h-0">
+                                        <PostHogCode />
+                                    </div>
+                                </section>
+
+                                {/* How it works */}
+                                <section
+                                    id="how-it-works"
+                                    className="px-6 @lg:px-12 pt-12 @lg:pt-16 pb-6 @lg:pb-8 border-b border-primary"
+                                >
+                                    <div className="max-w-4xl mb-12">
+                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">How it works</h2>
+                                        <p className="text-lg text-secondary max-w-2xl m-0">
+                                            PostHog Code connects to your existing PostHog instance and your codebase.
+                                            The loop is simple: data becomes signals, signals become tasks, tasks become
+                                            PRs.
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        <div className="max-w-2xl space-y-8">
+                                            <FlowStep
+                                                number="1"
+                                                title="Connect your codebase"
+                                                description="Point PostHog Code at your repository. It maps your codebase, understands your architecture, and indexes the context agents need to write good code."
+                                                icon={<IconTerminal className="size-5" />}
+                                            />
+                                            <FlowStep
+                                                number="2"
+                                                title="Signals flow in"
+                                                description="PostHog products generate signals automatically: funnel drops, error spikes, experiment results, survey responses, session replay insights. External sources plug in too."
+                                                icon={<IconGraph className="size-5" />}
+                                            />
+                                            <FlowStep
+                                                number="3"
+                                                title="Inbox prioritizes work"
+                                                description="Signals are ranked by user impact, revenue risk, and urgency. Your inbox shows what matters most, with full context and a suggested action for each item."
+                                                icon={<IconNotification className="size-5" />}
+                                            />
+                                            <FlowStep
+                                                number="4"
+                                                title="Agents write the code"
+                                                description="Accept a task and an agent starts working: writing code, adding tests, running CI. Multiple agents work in parallel across different tasks."
+                                                icon={<IconGear className="size-5" />}
+                                            />
+                                            <FlowStep
+                                                number="5"
+                                                title="You review and ship"
+                                                description="Agents open PRs with full context: what signal triggered the change, what was changed, and why. You review, merge, and the loop continues."
+                                                icon={<IconBolt className="size-5" />}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <CalloutBox
+                                                icon="IconSparkles"
+                                                title="AI without context is just autocomplete"
+                                                type="fyi"
+                                            >
+                                                <p className="m-0">
+                                                    PostHog Code combines an agentic coding environment, an agent
+                                                    orchestrator, and a signal-driven inbox into a single integrated
+                                                    platform.
+                                                </p>
+                                            </CalloutBox>
+                                        </div>
+                                    </div>
                                 </section>
 
                                 {/* Signals inbox */}
-                                <section id="signals" className="border-b border-primary">
+                                <section className="border-b border-primary">
                                     <div className="px-6 @lg:px-12 pt-12 @lg:pt-16 pb-4">
                                         <div className="max-w-4xl mb-6">
-                                            <h3 className="text-2xl @lg:text-3xl font-bold m-0 mb-3">Signal sources</h3>
+                                            <h2 id="signals" className="text-3xl @lg:text-4xl font-bold m-0 mb-3">
+                                                Signal sources
+                                            </h2>
                                             <p className="text-lg text-secondary max-w-2xl m-0">
                                                 Signals pull from everywhere your product and team already live: PostHog
                                                 products, first‑party integrations, and custom MCP tools. Switch between
@@ -1007,92 +1048,17 @@ export default function Code(): JSX.Element {
                                         <SignalsInbox />
                                     </div>
 
-                                    <div className="px-6 @lg:px-12 pb-12 @lg:pb-16">
-                                        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-secondary">
-                                            {[
-                                                'like a spam filter for product data',
-                                                'impact-ranked prioritization',
-                                                'keep, kill, or iterate code changes',
-                                            ].map((item) => (
-                                                <span key={item} className="flex items-center gap-1.5">
-                                                    <IconCheck className="size-3 text-seagreen" />
-                                                    {item}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </section>
-
-                                {/* Three pillars */}
-                                <section
-                                    id="agentic-environment"
-                                    className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary"
-                                >
-                                    <div className="mb-8">
-                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">
-                                            Three pillars, one platform
-                                        </h2>
-                                        <p className="text-lg text-secondary max-w-2xl">
-                                            PostHog Code combines an agentic coding environment, an agent orchestrator,
-                                            and a signal-driven inbox into a single integrated platform.
-                                        </p>
-                                    </div>
-
-                                    <div className="grid @lg:grid-cols-3 gap-4 @lg:gap-6">
-                                        <PillarCard
-                                            icon={<IconTerminal className="size-8" />}
-                                            title="Agentic coding environment"
-                                            description="A development environment where agents work alongside you. Write code, review diffs, run tests, and iterate&mdash;with agents handling the tedious parts."
-                                            color="seagreen"
-                                            features={[
-                                                'Full codebase context and understanding',
-                                                'Agents write, test, and iterate on code',
-                                                'Integrated diff review and merge flow',
-                                                'Works with your existing repo and CI/CD',
-                                            ]}
-                                        />
-                                        <PillarCard
-                                            icon={<IconGear className="size-8" />}
-                                            title="Agent orchestrator"
-                                            description="Coordinate multiple agents working in parallel across your codebase. Route tasks, manage dependencies, and keep everything moving."
-                                            color="blue"
-                                            features={[
-                                                'Parallel agent execution across tasks',
-                                                'Dependency-aware task routing',
-                                                'Automatic conflict resolution',
-                                                'Full audit trail of every agent action',
-                                            ]}
-                                        />
-                                        <PillarCard
-                                            icon={<IconNotification className="size-8" />}
-                                            title="Signals inbox + task management"
-                                            description="PostHog data flows into a ranked inbox of prioritized work. Conversion drops, error spikes, and experiment wins become tasks that agents can execute."
-                                            color="yellow"
-                                            features={[
-                                                'Every PostHog product is a signal source',
-                                                'Impact-ranked prioritization',
-                                                'One-click agent deployment per task',
-                                                'Connect external data sources',
-                                            ]}
-                                        />
-                                    </div>
-                                </section>
-
-                                {/* Code interface */}
-                                <section
-                                    id="code-interface"
-                                    className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary"
-                                >
-                                    <div className="max-w-4xl mb-6">
-                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">The Code interface</h2>
-                                        <p className="text-lg text-secondary max-w-2xl m-0">
-                                            Explore the agentic coding environment: switch topics in the sidebar, read
-                                            through example conversations, and try typing a message to see how PostHog
-                                            Code responds.
-                                        </p>
-                                    </div>
-                                    <div className="h-[500px] @lg:h-[600px] min-h-0">
-                                        <PostHogCode />
+                                    <div className="px-6 @lg:px-12 pb-6">
+                                        <CalloutBox
+                                            icon="IconInfo"
+                                            title="Like a spam filter for product data"
+                                            type="fyi"
+                                        >
+                                            <p className="m-0">
+                                                Gmail doesn't show you every email — it filters, ranks, and surfaces
+                                                what matters. PostHog Code does the same for product data.
+                                            </p>
+                                        </CalloutBox>
                                     </div>
                                 </section>
 
@@ -1103,12 +1069,11 @@ export default function Code(): JSX.Element {
                                 >
                                     <div className="max-w-4xl mb-8">
                                         <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">
-                                            Simple beta pricing
+                                            PostHog Code pricing
                                         </h2>
                                         <p className="text-lg text-secondary max-w-2xl m-0">
-                                            While PostHog Code is in beta, pricing is intentionally simple: a single
-                                            seat-based subscription tier, expected to land between $100 and $200 per
-                                            seat per month.
+                                            PostHog Cloud is a multi-player tool with team-based pricing. PostHog Code
+                                            is a single-player tool with seat-based pricing.
                                         </p>
                                     </div>
 
@@ -1145,63 +1110,51 @@ export default function Code(): JSX.Element {
                                     </div>
                                 </section>
 
-                                {/* How it works */}
+                                {/* CTA */}
                                 <section
-                                    id="how-it-works"
-                                    className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary"
+                                    id="get-started"
+                                    className="px-6 @lg:px-12 py-16 @lg:py-24 border-b border-primary"
                                 >
-                                    <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">How it works</h2>
-                                    <p className="text-lg text-secondary mb-10 max-w-2xl">
-                                        PostHog Code connects to your existing PostHog instance and your codebase. The
-                                        loop is simple: data becomes signals, signals become tasks, tasks become PRs.
-                                    </p>
-
-                                    <div className="max-w-2xl space-y-8">
-                                        <FlowStep
-                                            number="1"
-                                            title="Connect your codebase"
-                                            description="Point PostHog Code at your repository. It maps your codebase, understands your architecture, and indexes the context agents need to write good code."
-                                            icon={<IconTerminal className="size-5" />}
-                                        />
-                                        <FlowStep
-                                            number="2"
-                                            title="Signals flow in"
-                                            description="PostHog products generate signals automatically: funnel drops, error spikes, experiment results, survey responses, session replay insights. External sources plug in too."
-                                            icon={<IconGraph className="size-5" />}
-                                        />
-                                        <FlowStep
-                                            number="3"
-                                            title="Inbox prioritizes work"
-                                            description="Signals are ranked by user impact, revenue risk, and urgency. Your inbox shows what matters most, with full context and a suggested action for each item."
-                                            icon={<IconNotification className="size-5" />}
-                                        />
-                                        <FlowStep
-                                            number="4"
-                                            title="Agents write the code"
-                                            description="Accept a task and an agent starts working: writing code, adding tests, running CI. Multiple agents work in parallel across different tasks."
-                                            icon={<IconGear className="size-5" />}
-                                        />
-                                        <FlowStep
-                                            number="5"
-                                            title="You review and ship"
-                                            description="Agents open PRs with full context: what signal triggered the change, what was changed, and why. You review, merge, and the loop continues."
-                                            icon={<IconBolt className="size-5" />}
-                                        />
+                                    <div className="max-w-2xl mx-auto text-center">
+                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-4">
+                                            Be the first to build with PostHog Code
+                                        </h2>
+                                        <p className="text-lg text-secondary mb-8">
+                                            We're looking for alpha testers who currently work on a real product with
+                                            real users, and want to burn some tokens with us.
+                                        </p>
+                                        <div className="flex flex-wrap justify-center gap-3">
+                                            <CallToAction
+                                                href="https://app.posthog.com/signup"
+                                                type="primary"
+                                                size="lg"
+                                            >
+                                                Get early access
+                                            </CallToAction>
+                                            <CallToAction href="https://posthog.com/discord" type="secondary" size="lg">
+                                                Join us on Discord
+                                            </CallToAction>
+                                        </div>
                                     </div>
                                 </section>
 
                                 {/* What Code is not */}
                                 <section className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary">
+                                    <h3 className="text-2xl @lg:text-3xl font-bold m-0 mb-8 text-center">
+                                        What PostHog Code is not
+                                    </h3>
                                     <div className="grid gap-6 @lg:gap-8 @lg:grid-cols-3">
                                         <div className="bg-accent rounded-md border border-primary p-5 flex flex-col gap-3">
-                                            <h3 className="text-lg font-bold m-0">× not another dashboard</h3>
+                                            <h3 className="text-lg font-bold m-0 flex items-center gap-2">
+                                                <IconX className="size-5 shrink-0" />
+                                                not another dashboard
+                                            </h3>
                                             <p className="text-sm text-secondary m-0">
-                                                Signals become tasks, not graphs. Most of the work in twig happens in
-                                                the signals inbox and agent chat. PostHog and twig stay linked, so when
-                                                you <em>do</em> need charts you can jump straight into product
-                                                analytics.
+                                                Signals become tasks, not graphs. PostHog Cloud and Code stay linked, so
+                                                when you <em>do</em> need charts you can jump straight into product
+                                                analytics and chat with PostHog AI.
                                             </p>
-                                            <div className="mt-auto space-y-2">
+                                            <div className="mt-auto">
                                                 <CallToAction href="/product-analytics" type="secondary" size="sm">
                                                     Show me some charts
                                                 </CallToAction>
@@ -1209,11 +1162,13 @@ export default function Code(): JSX.Element {
                                         </div>
 
                                         <div className="bg-accent rounded-md border border-primary p-5 flex flex-col gap-3">
-                                            <h3 className="text-lg font-bold m-0">× not a new model harness</h3>
+                                            <h3 className="text-lg font-bold m-0 flex items-center gap-2">
+                                                <IconX className="size-5 shrink-0" />
+                                                not a model harness
+                                            </h3>
                                             <p className="text-sm text-secondary m-0">
-                                                PostHog Code does not ask you to adopt a new model stack. It uses the
-                                                exact same AI models and harnesses you already use, at the same
-                                                underlying prices&mdash;it just points them at the right work.
+                                                PostHog Code uses the exact same AI models and harnesses you already
+                                                use, at the same prices. It just points the agents at the right work.
                                             </p>
                                             <div className="flex flex-wrap items-center gap-2 text-xs text-secondary">
                                                 <span className="size-10 rounded-md border border-primary bg-primary/40 flex items-center justify-center">
@@ -1244,11 +1199,14 @@ export default function Code(): JSX.Element {
                                         </div>
 
                                         <div className="bg-accent rounded-md border border-primary p-5 flex flex-col gap-3">
-                                            <h3 className="text-lg font-bold m-0">× not a no‑code tool</h3>
+                                            <h3 className="text-lg font-bold m-0 flex items-center gap-2">
+                                                <IconX className="size-5 shrink-0" />
+                                                not a no‑code tool
+                                            </h3>
                                             <p className="text-sm text-secondary m-0">
-                                                twig is built for people who write code. Orchestrate agents to build big
-                                                features, then review and ship the diffs. Hardcore user of another IDE?
-                                                You&apos;ll get the best experience in twig, but if you insist:
+                                                PostHog Code is built for engineers. Orchestrate agents to fix bugs
+                                                while you sleep, and build big features. Hardcore user of another IDE?
+                                                You&apos;ll get the best experience in our editor, but if you insist:
                                             </p>
                                             <div className="mt-auto">
                                                 <div
@@ -1267,18 +1225,58 @@ export default function Code(): JSX.Element {
                                 <section id="faq" className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary">
                                     <div className="max-w-3xl space-y-8">
                                         <h2 className="text-3xl @lg:text-4xl font-bold m-0">FAQ</h2>
-
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">Is my data safe?</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                Yes. PostHog Code queries your data through the PostHog API using your
+                                                personal API key. Data is never stored, cached, or sent anywhere other
+                                                than to PostHog&apos;s servers. The MCP server runs locally on your
+                                                machine, and you control exactly what the agent can access through your
+                                                API key&apos;s permissions.
+                                            </p>
+                                        </div>
                                         <div>
                                             <h3 className="text-xl font-bold m-0 mb-2">
                                                 Does it replace Cursor or Claude Code?
                                             </h3>
                                             <p className="text-sm text-secondary m-0">
-                                                No. Keep your editor. PostHog Code is the part before you open your
-                                                editor&mdash;deciding what is worth working on and starting the work.
-                                                You still review and ship everything.
+                                                Maybe, but not unless you want to. PostHog Code is the missing layer
+                                                between data and writing code. Keep your editor if you like it, but give
+                                                Code a try first.
                                             </p>
                                         </div>
-
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">
+                                                What AI models does it work with?
+                                            </h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                PostHog Code works with any MCP-compatible AI coding agent. Currently
+                                                supported: Claude Code, Cursor, Windsurf, VS Code with Copilot. The MCP
+                                                standard is growing fast, so more editors will be supported over time.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">How much does it cost?</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                PostHog Code is seat-based subscription. The PostHog MCP server is free
+                                                and open source. You just need a PostHog account (the generous free tier
+                                                works) and an API key from your AI provider. PostHog Code reads from
+                                                your existing PostHog data, so you only pay for the PostHog products you
+                                                already use. There&apos;s no additional charge for MCP access.
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">
+                                                Can it modify my PostHog configuration?
+                                            </h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                PostHog Code can both read and write to PostHog, depending on your API
+                                                key permissions. It can create feature flags, set up experiments, build
+                                                dashboards, and define actions. Every write operation requires explicit
+                                                approval from the agent&apos;s permission system – nothing happens
+                                                without your confirmation.
+                                            </p>
+                                        </div>
                                         <div>
                                             <h3 className="text-xl font-bold m-0 mb-2">
                                                 What if I don&apos;t use PostHog yet?
@@ -1286,53 +1284,26 @@ export default function Code(): JSX.Element {
                                             <p className="text-sm text-secondary m-0">
                                                 PostHog Code runs on top of PostHog. You&apos;ll need to be on PostHog
                                                 first. The good news: PostHog is free up to generous limits, and
-                                                installation takes about 90 seconds.
+                                                installation takes about 90 seconds with the wizard.
                                             </p>
                                         </div>
-
                                         <div>
                                             <h3 className="text-xl font-bold m-0 mb-2">Can it make bad decisions?</h3>
                                             <p className="text-sm text-secondary m-0">
-                                                Yes. That is why you set a daily limit and review every PR before it
-                                                ships. Code never merges anything on its own. It surfaces the work. You
-                                                decide what to do with it.
+                                                Sometimes. That is why you set a daily limit for agent actions and
+                                                review PRs before they are merged. PostHog Code never merges anything on
+                                                its own. It surfaces the work. You ship. PostHog Code won&apos;t yolo
+                                                merge without your approval.
                                             </p>
                                         </div>
-
                                         <div>
                                             <h3 className="text-xl font-bold m-0 mb-2">Is my code sent to PostHog?</h3>
                                             <p className="text-sm text-secondary m-0">
-                                                Agents access your GitHub repo to open PRs, similar to any CI/CD
-                                                integration. Your code stays in GitHub. PostHog Code reads your product
-                                                data (already in PostHog) and uses it to direct the agents.
+                                                PostHog Code agents access your GitHub repo to open PRs, similar to any
+                                                CI/CD integration. Your code stays in GitHub. PostHog Code simply reads
+                                                your product data (already in PostHog), and other sources you connect to
+                                                (like Zendesk, Linear, etc.) to direct the agents.
                                             </p>
-                                        </div>
-                                    </div>
-                                </section>
-
-                                {/* CTA */}
-                                <section id="get-started" className="px-6 @lg:px-12 py-16 @lg:py-24">
-                                    <div className="max-w-2xl mx-auto text-center">
-                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-4">
-                                            Be the first to build with PostHog Code
-                                        </h2>
-                                        <p className="text-lg text-secondary mb-8">
-                                            We're looking for alpha testers who currently work on a real product with
-                                            real users (and want to burn some tokens with us). Stop context-switching
-                                            between dashboards, agent chats and terminals. Let data drive the work with
-                                            PostHog Code.
-                                        </p>
-                                        <div className="flex flex-wrap justify-center gap-3">
-                                            <CallToAction
-                                                href="https://app.posthog.com/signup"
-                                                type="primary"
-                                                size="lg"
-                                            >
-                                                Get early access
-                                            </CallToAction>
-                                            <CallToAction href="https://posthog.com/discord" type="secondary" size="lg">
-                                                Join us on Discord
-                                            </CallToAction>
                                         </div>
                                     </div>
                                 </section>
