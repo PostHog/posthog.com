@@ -34,11 +34,11 @@ When you capture your first [identified event](/docs/data/anonymous-vs-identifie
 
 ## Duplicate person profiles
 
-A single real-world user can end up with multiple person profiles in PostHog. This typically happens when someone uses different devices or browsers before being [identified](/docs/product-analytics/identify) — each device generates a separate anonymous distinct ID, which creates a separate profile.
+If your [`identify`](/docs/product-analytics/identify) implementation has gaps, a single real-world user can end up with multiple person profiles. For example, if a user visits your app on a phone and a laptop but `identify` is only called on one device, each device creates its own profile with a separate anonymous distinct ID. This usually points to a misconfiguration — when `identify` is called correctly on every device and session, PostHog merges these into one profile automatically.
 
-This means that counts based on person profiles (such as cohort sizes or feature flag targeting) may be higher than your actual number of unique users.
+Duplicate profiles inflate counts that rely on person profiles, such as cohort sizes and feature flag targeting. If you notice these numbers are higher than expected, check that you're calling [`identify`](/docs/product-analytics/identify) as soon as a user logs in on every device and browser.
 
-To merge duplicate profiles, see [how to merge users](/docs/product-analytics/identify#how-to-merge-users). To prevent duplicates, call [`identify`](/docs/product-analytics/identify) as soon as a user logs in on each device.
+To fix existing duplicates, see [how to merge users](/docs/product-analytics/identify#how-to-merge-users).
 
 ## The persons list
 
