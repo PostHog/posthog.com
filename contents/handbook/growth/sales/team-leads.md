@@ -58,7 +58,7 @@ When we know that a new product is being launched, we need to ensure that Vitall
 
 ### Incident comms
 
-We need to ensure that teams are able to proactively follow our [incident comms process](/handbook/growth/sales/communications-templates-incidents).  We're not quite ready for a full on-call rotation yet, but Simon or Dana take the lead as CMOC when an incident is declared in EU working hours, and Landon or Tyler take the lead when it's during the US working day.
+We need to ensure that teams are able to proactively follow our [incident comms process](/handbook/growth/sales/communications-templates-incidents).  We're not quite ready for a full on-call rotation yet, but Simon or Dana take the lead as Communications Manager On-Call (CMOC) when an incident is declared in EU working hours, and Landon or Tyler take the lead when it's during the US working day.
 
 
 
