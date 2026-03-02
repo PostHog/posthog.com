@@ -145,7 +145,7 @@ Loud Noises is used in the sign the hedgehog is holding:
 
 ---
 
-If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-brand-and-vibes</PrivateLink> - don't just do what feels right to you!
+If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-website</PrivateLink> - don't just do what feels right to you!
 
 
 ## Colors
