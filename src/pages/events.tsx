@@ -326,9 +326,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
         >
             <div
                 data-scheme="primary"
-                className={`flex flex-col @xl:flex-row text-primary h-full ${
-                    websiteMode ? 'h-[calc(100vh-48px)]' : ''
-                }`}
+                className={`flex flex-col @xl:flex-row text-primary ${websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'}`}
             >
                 <aside
                     data-scheme="secondary"
@@ -422,7 +420,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                     </ScrollArea>
                 </aside>
 
-                <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
+                <div className="flex-1 relative border-primary border-t @xl:border-t-0">
                     <AnimatePresence>
                         {(editingEvent || creatingEvent) && isModerator ? (
                             <EventCard
