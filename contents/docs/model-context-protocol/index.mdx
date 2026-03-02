@@ -171,6 +171,23 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
+
+### SQL and HogQL queries
+
+Your AI agent can execute complex HogQL queries to analyze both system data and analytics data in PostHog.
+
+**Prompt:** "Query my feature flags to find all flags that are rolled out to less than 50% of users"
+
+The agent will use SQL to query the `system.feature_flags` table and return flags filtered by rollout percentage.
+
+**Prompt:** "Write a HogQL query to find users who triggered the signup event but didn't complete onboarding in the last 30 days"
+
+The agent will construct and execute a HogQL query against the `events` table, using subqueries to find users who signed up but are missing the onboarding completion event.
+
+**Prompt:** "What cohorts contain users who made a purchase in the last week?"
+
+The agent will query `system.cohorts` and cross-reference with purchase events to identify relevant cohorts.
+
 ### A/B test creation
 
 **Prompt:** "Create an A/B test for our pricing page that measures conversion to checkout"

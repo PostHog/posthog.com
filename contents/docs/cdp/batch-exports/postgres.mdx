@@ -8,6 +8,8 @@ availability:
     enterprise: full
 ---
 
+import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+
 Batch exports can be used to export data to a Postgres table.
 
 ## Setting up Postgres access
@@ -66,6 +68,8 @@ The schema of the model as created in Postgres is:
 
 The Postgres table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
+<PersonsModelNote />
+
 ### Sessions model
 
 You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
@@ -84,7 +88,7 @@ You can view the schema for the sessions model in the configuration form when cr
 Configuring a batch export targeting Postgres requires the following Postgres-specific configuration values:
 * **User:** User for your Postgres database with CREATE TABLE access used by PostHog to login to your database.
 * **Password:** The password of the username provided.
-* **Host:** The host name of the server on which your Postgres database is running.
+* **Host:** The host name of the server on which your Postgres database is running. Must resolve to a publicly accessible address (internal/private IPs are not allowed).
 * **Port:** The TCP port on which the Postgres database server is listening for connections.
 * **Table name:** The name of a Postgres table where to export the data.
 * **Database:** The name of the Postgres database where the table provided to insert data is located.

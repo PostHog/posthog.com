@@ -36,6 +36,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Databases',
         },
         {
+            label: 'BuildBetter',
+            url: '/docs/data-warehouse/sources/buildbetter',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/buildbetter_f523cfd0e6.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Bing Ads',
             url: '/docs/data-warehouse/sources/bing-ads',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
@@ -123,6 +129,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             label: 'Klaviyo',
             url: '/docs/data-warehouse/sources/klaviyo',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+            category: 'SaaS tools',
+        },
+        {
+            label: 'Linear',
+            url: '/docs/data-warehouse/sources/linear',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',
             category: 'SaaS tools',
         },
         {
