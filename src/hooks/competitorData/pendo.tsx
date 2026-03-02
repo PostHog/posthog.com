@@ -87,7 +87,7 @@ export const pendo = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: 'None',
+                free_tier: true,
             },
             features: {
                 event_timeline: true,

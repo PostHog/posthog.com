@@ -558,6 +558,11 @@ export function useMenuData(): MenuType[] {
                     link: '/careers',
                 },
                 {
+                    type: 'item',
+                    label: 'Partnerships',
+                    link: '/partnerships',
+                },
+                {
                     type: 'separator',
                 },
                 {

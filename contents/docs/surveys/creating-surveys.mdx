@@ -399,3 +399,8 @@ All `survey sent` events triggered during a single user's attempt to complete a 
 
 **Billing for partial responses:**
 We charge based on unique survey submissions, not individual `survey sent` events. Therefore, you are charged only once per unique `$survey_submission_id`. For example, if your survey has 5 questions and a user answers 3 of them (triggering multiple `survey sent` events with `$survey_completed: false`), you will still be charged for only one survey response, as all those events will share the same `$survey_submission_id`.
+
+**The `survey abandoned` event:**
+When a user answers at least one question but navigates away or closes the page before completing all questions, PostHog automatically captures a `survey abandoned` event. This event includes the `$survey_id` property identifying the survey. It's different from `survey dismissed`, which fires when a user explicitly closes the survey without answering.
+
+You can use the `survey abandoned` event in [insights](/docs/surveys/viewing-results#2-creating-your-own-insights) to measure drop-off rates and identify which surveys users start but don't finish.

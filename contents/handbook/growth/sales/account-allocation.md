@@ -169,6 +169,92 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 
 ---
 
+## Account handover checklist 
+
+Every account handover should include a 15-30 minute call between the outgoing and incoming owner. This checklist helps you prep for that call and make sure nothing falls through the cracks.
+
+### When to use this
+
+- When a TAE-led customer is being handed over to a TAM after the initial contract is signed
+- When a TAM is taking over an account from another TAM or TAE mid-lifecycle
+- As a prep guide for the 15-30 minute handover call between outgoing and incoming owner
+
+### Before the handover call
+
+The incoming TAM should prepare by reviewing the following in Vitally and SFDC before the call, so the handover conversation can focus on context that *isn't* in the data.
+
+#### Self-serve research (do this first)
+
+- [ ] **Vitally account overview** – MRR, ARR, health score, segments, paid products, usage traits
+- [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits
+- [ ] **Product adoption** – which products are they paying for? What's underutilized?
+- [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
+- [ ] **Support history** – recent Zendesk tickets, tags, severity, resolution status
+- [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
+- [ ] **SFDC opportunity** – deal value, stage, next steps, close date
+- [ ] **Admin emails & user list** – identify who's active, who has admin access, what domains are in play
+- [ ] **The customer's product** – sign up or browse their website. Understand what they do and how they make money
+
+Prepare questions based on gaps in the data. The handover call should focus on things you *can't* learn from Vitally.
+
+### Handover call agenda
+
+This isn't an exhaustive list and not every item needs to be covered every time. Use your judgment based on what's relevant to the account.
+
+#### 1. Relationships & people
+
+This is the most valuable part of the handover – relationship context doesn't live in any tool.
+
+- [ ] **Who is the champion?** Name, role, communication style, what motivates them
+- [ ] **Who is the economic decision-maker?** Who signs off on renewals and expansion?
+- [ ] **Who are the power users?** Engineers, PMs, analysts – who lives in PostHog daily?
+- [ ] **Org structure?** Parent/subsidiary dynamics, relevant teams, reporting lines
+- [ ] **Any recent people changes?** Champions who left, new hires, reorgs
+- [ ] **General vibe?** Easy to work with? High-maintenance? Responsive or hard to reach?
+- [ ] **Preferred communication style?** Slack-first? Email? Regular calls or async?
+- [ ] **Has the customer been told about the handover?** If not, agree on how to introduce the new TAM
+
+#### 2. Commercial context
+
+- [ ] **Open proposals or negotiations** – anything in-flight that needs immediate follow-up?
+- [ ] **Renewal strategy** – what's the plan? Any risks?
+- [ ] **Discount/credit context** – why were discounts given? What was promised?
+- [ ] **Budget & procurement** – annual budget cycle, procurement process, finance contacts
+- [ ] **Expansion potential** – realistic growth ceiling? New teams, new brands, new products?
+
+#### 3. Technical & product state
+
+- [ ] **Implementation maturity** – basic tracking or advanced setup?
+- [ ] **Known technical issues** – open bugs, workarounds, or frustrations?
+- [ ] **Integration landscape** – what else are they using? Any competitors still in play?
+- [ ] **Product gaps** – feature requests or limitations that are blockers? Note any features with committed delivery timelines from our product teams
+- [ ] **Onboarding completeness** – per the [onboarding checklist](/handbook/growth/sales/account-allocation#product-onboarding), which products are properly onboarded?
+
+#### 4. Risks & opportunities
+
+- [ ] **Top risks** – what keeps you up at night? Champion risk, competitor risk, budget risk?
+- [ ] **Top opportunities** – lowest-hanging fruit for expansion or deeper adoption?
+- [ ] **Unfinished business** – anything you wanted to do but didn't get to?
+- [ ] **Anything I should avoid?** Sensitive topics, past friction, internal politics?
+
+### After the handover call
+
+#### Immediate actions (within 1 week)
+
+- [ ] **Update Vitally** – ensure New Owner trait is set, update account plan note with handover context
+- [ ] **Save an account plan** – create or update the [account plan](/handbook/growth/sales/account-planning) as a Vitally note, incorporating handover insights
+- [ ] **Introduce yourself to the customer** – warm intro (ideally the TAE introduces you) or cold intro via Slack/email
+- [ ] **Follow up on any open items** – pick up in-flight proposals, unresolved tickets, or pending conversations
+
+### Tips for a good handover
+
+- **Focus the call on what's not in the data.** You can read Vitally yourself – use the call for relationship context, political dynamics, and unwritten history.
+- **Ask "what would you do next if you were keeping this account?"** This often surfaces the most actionable insight.
+- **Move fast on your intro.** The longer the gap between handover and first contact, the more momentum you lose.
+- **Keep the previous owner in the loop** for the first few weeks if there are open commercial conversations. In some cases they can also serve as a secondary support point for timezone coverage or as an escalation contact.
+
+---
+
 ## High potential customers
 
 For TAE-led customers who will be landing at $100k+ a year or have high expansion potential into new product areas, we should introduce a TAM earlier on than normal.

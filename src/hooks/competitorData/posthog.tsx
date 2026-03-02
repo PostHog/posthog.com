@@ -460,7 +460,7 @@ export const posthog = {
                 popover: true,
                 rating: true,
                 sdk_support: true,
-                sentiment_analysis: false,
+                sentiment_analysis: true,
                 slack_integration: true,
                 survey_templates: true,
                 target_by_feature_flag: true,
