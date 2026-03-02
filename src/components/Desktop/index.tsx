@@ -49,6 +49,12 @@ export const useProductLinks = () => {
             source: 'desktop',
         },
         {
+            label: 'Code',
+            Icon: <AppIcon name="blueScreen" />,
+            url: '/code',
+            source: 'desktop',
+        },
+        {
             label: 'Pricing',
             Icon: <AppIcon name="pricing" />,
             url: '/pricing',

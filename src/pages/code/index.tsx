@@ -5,6 +5,14 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import OSTable from 'components/OSTable'
 import { CallToAction } from 'components/CallToAction'
+import { ToggleGroup, type ToggleOption } from 'components/RadixUI/ToggleGroup'
+import ClaudeLogo from '../../../contents/images/docs/llms/claude-logo.svg'
+import OpenAILogo from '../../../contents/images/docs/llms/openai.svg'
+import GeminiLogo from '../../../contents/images/docs/llms/gemini-logo.svg'
+import GranolaIcon from '../../../contents/images/docs/signals/granola-icon.svg'
+import SlackIcon from '../../../contents/images/docs/signals/Slack_icon_2019.svg'
+import LinearIcon from '../../../contents/images/docs/signals/linear-icon-logo.svg'
+import GitHubIcon from '../../../contents/images/docs/signals/GitHub_icon logo.svg'
 import {
     IconTerminal,
     IconBolt,
@@ -20,6 +28,7 @@ import {
     IconTrends,
     IconRewindPlay,
     IconToggle,
+    IconCreditCard,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -29,9 +38,240 @@ const sidebarNav = [
     { name: 'Signals', id: 'signals', icon: <IconNotification className="size-4" /> },
     { name: 'Agentic environment', id: 'agentic-environment', icon: <IconTerminal className="size-4" /> },
     { name: 'Agent orchestrator', id: 'orchestrator', icon: <IconGear className="size-4" /> },
+    { name: 'Pricing & usage', id: 'pricing', icon: <IconCreditCard className="size-4" /> },
     { name: 'How it works', id: 'how-it-works', icon: <IconBolt className="size-4" /> },
+    { name: 'FAQ', id: 'faq', icon: <IconNotification className="size-4" /> },
     { name: 'Get started', id: 'get-started', icon: <IconArrowRight className="size-4" /> },
 ]
+
+type SignalSourceGroupKey = 'native' | 'first-party' | 'mcp'
+
+interface SignalSource {
+    id: string
+    name: string
+    description: string
+    href?: string
+    label?: string
+}
+
+const signalSourceGroups: Record<
+    SignalSourceGroupKey,
+    {
+        title: string
+        description: string
+        sources: SignalSource[]
+    }
+> = {
+    native: {
+        title: 'Native PostHog products',
+        description:
+            'Signals first come from the products you already run on PostHog: analytics, replays, experiments, feature flags, error tracking, surveys, and more.',
+        sources: [
+            {
+                id: 'product-analytics',
+                name: 'Product analytics',
+                description:
+                    'Funnel drops, activation issues, and usage regressions across your core product surfaces.',
+                href: '/product-analytics',
+            },
+            {
+                id: 'session-replay',
+                name: 'Session replay',
+                description: 'Rage clicks, confusing flows, and broken experiences spotted directly from replays.',
+                href: '/session-replay',
+            },
+            {
+                id: 'feature-flags',
+                name: 'Feature flags',
+                description: 'Rollouts that are under‑performing, stuck at low exposure, or causing regressions.',
+                href: '/feature-flags',
+            },
+            {
+                id: 'experiments',
+                name: 'Experiments',
+                description: 'Winning and losing variants, plus experiments that are under‑powered or stalled.',
+                href: '/experiments',
+            },
+            {
+                id: 'error-tracking',
+                name: 'Error tracking',
+                description: 'New errors, noisy endpoints, and regressions tied back to specific deployments.',
+                href: '/error-tracking',
+            },
+            {
+                id: 'surveys',
+                name: 'Surveys',
+                description: 'Qualitative feedback from NPS and on‑page surveys, converted into actionable work.',
+                href: '/surveys',
+            },
+            {
+                id: 'llm-analytics',
+                name: 'LLM analytics',
+                description: 'LLM latency, quality, and failure patterns surfaced as work for agents to tackle.',
+                href: '/llm-analytics',
+            },
+        ],
+    },
+    'first-party': {
+        title: 'First‑party integrations',
+        description:
+            'Signals also come from tools your team already lives in: planning, code, communication, and incidents.',
+        sources: [
+            {
+                id: 'linear',
+                name: 'Linear',
+                description: 'Backlog, bugs, and roadmap items that should be driven by real product behaviour.',
+            },
+            {
+                id: 'slack',
+                name: 'Slack',
+                description:
+                    'Customer reports, internal triage, and incident channels that should become structured work.',
+            },
+            {
+                id: 'github',
+                name: 'GitHub',
+                description: 'Open PRs, failing checks, and issues that connect directly to product impact.',
+            },
+            {
+                id: 'granola',
+                name: 'Granola',
+                description: 'First‑party ingest and transformation pipelines feeding rich context into signals.',
+            },
+        ],
+    },
+    mcp: {
+        title: 'MCP tools',
+        description:
+            'For everything else, MCP tools let you define new signal sources without waiting on a native integration.',
+        sources: [
+            {
+                id: 'observability',
+                name: 'Observability & alerting',
+                description: 'Pipe in alerts from services like Datadog or PagerDuty and let Code turn them into work.',
+            },
+            {
+                id: 'support',
+                name: 'Support platforms',
+                description:
+                    'Connect helpdesk or CRM tools so that high‑impact customer conversations generate follow‑up tasks.',
+            },
+            {
+                id: 'internal-tools',
+                name: 'Internal tools',
+                description:
+                    'Wire up bespoke internal dashboards or scripts as MCP tools so they can feed into the signal graph.',
+            },
+        ],
+    },
+}
+
+const signalSourceIcons: Record<string, JSX.Element> = {
+    'product-analytics': <IconGraph className="size-4 text-blue" />,
+    'session-replay': <IconRewindPlay className="size-4 text-yellow" />,
+    'feature-flags': <IconToggle className="size-4 text-seagreen" />,
+    experiments: <IconBolt className="size-4 text-purple" />,
+    'error-tracking': <IconWarning className="size-4 text-red" />,
+    surveys: <IconNotification className="size-4 text-salmon" />,
+    'llm-analytics': <IconSparkles className="size-4 text-orange" />,
+    linear: <img src={LinearIcon} alt="Linear" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />,
+    slack: <img src={SlackIcon} alt="Slack" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />,
+    github: <img src={GitHubIcon} alt="GitHub" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />,
+    granola: (
+        <img src={GranolaIcon} alt="Granola" className="h-4 w-auto opacity-80" style={{ filter: 'grayscale(1)' }} />
+    ),
+    observability: <IconWarning className="size-4 text-yellow" />,
+    support: <IconNotification className="size-4 text-salmon" />,
+    'internal-tools': <IconGear className="size-4 text-blue" />,
+}
+
+const SignalSources = () => {
+    const [activeGroup, setActiveGroup] = useState<SignalSourceGroupKey>('native')
+    const [activeSourceId, setActiveSourceId] = useState<string | null>(
+        signalSourceGroups.native.sources[0]?.id || null
+    )
+
+    const options: ToggleOption[] = [
+        { label: 'Native integrations', value: 'native' },
+        { label: 'First‑party', value: 'first-party' },
+        { label: 'MCP', value: 'mcp' },
+    ]
+
+    const group = signalSourceGroups[activeGroup]
+    const sources = group.sources
+
+    const activeSource =
+        sources.find((source) => source.id === activeSourceId) || (sources.length > 0 ? sources[0] : null)
+
+    return (
+        <div className="space-y-4">
+            <ToggleGroup
+                hideTitle
+                title="Signal source type"
+                options={options}
+                value={activeGroup}
+                onValueChange={(value) => {
+                    if (!value) {
+                        return
+                    }
+                    setActiveGroup(value as SignalSourceGroupKey)
+                    const first = signalSourceGroups[value as SignalSourceGroupKey].sources[0]
+                    setActiveSourceId(first?.id || null)
+                }}
+                className=""
+            />
+            <div className="grid gap-6 @lg:grid-cols-[minmax(0,1.4fr)_minmax(0,2fr)] items-start">
+                <div className="space-y-1.5">
+                    {sources.map((source) => (
+                        <OSButton
+                            key={source.id}
+                            align="left"
+                            width="full"
+                            size="md"
+                            hover="background"
+                            active={activeSource?.id === source.id}
+                            onClick={() => setActiveSourceId(source.id)}
+                        >
+                            <span className="flex items-center gap-2">
+                                <span className="inline-flex items-center justify-center">
+                                    {signalSourceIcons[source.id] || (
+                                        <span className="size-1.5 rounded-full bg-seagreen" />
+                                    )}
+                                </span>
+                                <span className="text-sm font-medium">{source.name}</span>
+                            </span>
+                        </OSButton>
+                    ))}
+                </div>
+                {activeSource && (
+                    <div
+                        data-scheme="secondary"
+                        className="@container flex flex-col bg-accent border border-primary rounded-md overflow-hidden"
+                    >
+                        <div className="flex flex-col gap-3 p-5 @lg:p-6">
+                            <header>
+                                <p className="text-xs uppercase tracking-wide text-muted mb-1">Signal source</p>
+                                <h3 className="text-xl font-bold m-0">{activeSource.name}</h3>
+                            </header>
+                            <p className="text-sm text-secondary m-0">{activeSource.description}</p>
+                            <p className="text-xs text-secondary m-0">{group.description}</p>
+                            {activeSource.href && (
+                                <div className="mt-1.5">
+                                    <CallToAction href={activeSource.href} type="secondary" size="sm">
+                                        Learn more
+                                    </CallToAction>
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex-1 flex items-end justify-center px-4 pb-4 @lg:px-6 @lg:pb-6">
+                            <div className="w-full max-w-xl h-40 @lg:h-48 rounded-md border border-primary bg-gradient-to-br from-accent to-accent/40 shadow-2xl" />
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
 
 const signalRows = [
     {
@@ -285,7 +525,19 @@ export default function Code(): JSX.Element {
                                                 >
                                                     Get early access
                                                 </CallToAction>
-                                                <CallToAction href="/blog" type="secondary" size="lg">
+                                                <CallToAction
+                                                    href="#pricing"
+                                                    type="secondary"
+                                                    size="lg"
+                                                    onClick={() => {
+                                                        document
+                                                            .getElementById('pricing')
+                                                            ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                                    }}
+                                                >
+                                                    View pricing
+                                                </CallToAction>
+                                                <CallToAction href="#" type="outline" size="lg">
                                                     Learn more
                                                 </CallToAction>
                                             </div>
@@ -329,7 +581,7 @@ export default function Code(): JSX.Element {
                                     <div className="max-w-4xl">
                                         <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">Product autonomy</h2>
                                         <p className="text-lg text-secondary mb-8 max-w-2xl">
-                                            A product that improves itself. PostHog already has all of your
+                                            Imagine a product that improves itself. PostHog already has all of your
                                             data&mdash;analytics, session replays, feature flags, experiments, error
                                             tracking, surveys. Code uses these as <strong>signals</strong> to understand
                                             what your product needs, prioritizes the work, and deploys agents to execute
@@ -476,6 +728,17 @@ export default function Code(): JSX.Element {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="px-6 @lg:px-12 pb-12 @lg:pb-16">
+                                        <div className="max-w-4xl mb-6">
+                                            <h3 className="text-2xl @lg:text-3xl font-bold m-0 mb-3">Signal sources</h3>
+                                            <p className="text-lg text-secondary max-w-2xl m-0">
+                                                Signals pull from everywhere your product and team already live: PostHog
+                                                products, first‑party integrations, and custom MCP tools. Switch between
+                                                sources to see how they feed the inbox.
+                                            </p>
+                                        </div>
+                                        <SignalSources />
                                     </div>
                                 </section>
 
@@ -639,6 +902,55 @@ export default function Code(): JSX.Element {
                                     </div>
                                 </section>
 
+                                {/* Pricing & usage */}
+                                <section
+                                    id="pricing"
+                                    className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary"
+                                >
+                                    <div className="max-w-4xl mb-8">
+                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0 mb-3">
+                                            Simple beta pricing
+                                        </h2>
+                                        <p className="text-lg text-secondary max-w-2xl m-0">
+                                            While PostHog Code is in beta, pricing is intentionally simple: a single
+                                            seat-based subscription tier, expected to land between $100 and $200 per
+                                            seat per month.
+                                        </p>
+                                    </div>
+
+                                    <div className="grid @lg:grid-cols-2 gap-4 @lg:gap-6">
+                                        <div className="bg-accent rounded-md border border-primary p-5 space-y-2">
+                                            <h3 className="text-base font-bold m-0">Signals</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                Signals are built from what PostHog already knows about your product:
+                                                funnel drops, error spikes, experiment wins, survey responses, LLM
+                                                traces, and more.
+                                            </p>
+                                            <p className="text-sm font-medium m-0">
+                                                While PostHog Code is in beta, <strong>signals are free</strong>. You
+                                                can create, triage, and manage as many signals as you like without
+                                                incremental cost.
+                                            </p>
+                                        </div>
+                                        <div className="bg-accent rounded-md border border-primary p-5 space-y-2">
+                                            <h3 className="text-base font-bold m-0">PostHog data</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                PostHog Code does not introduce a new data bill. Analytics, events,
+                                                session replay, feature flags, experiments, error tracking, and surveys
+                                                are billed exactly as they are in PostHog Cloud.
+                                            </p>
+                                            <p className="text-sm font-medium m-0">
+                                                There is <strong>no difference in data pricing</strong> whether data is
+                                                accessed through twig or directly in PostHog. For full details, see the{' '}
+                                                <a href="/pricing" className="underline">
+                                                    main PostHog pricing page
+                                                </a>
+                                                .
+                                            </p>
+                                        </div>
+                                    </div>
+                                </section>
+
                                 {/* How it works */}
                                 <section
                                     id="how-it-works"
@@ -681,6 +993,126 @@ export default function Code(): JSX.Element {
                                             description="Agents open PRs with full context: what signal triggered the change, what was changed, and why. You review, merge, and the loop continues."
                                             icon={<IconBolt className="size-5" />}
                                         />
+                                    </div>
+                                </section>
+
+                                {/* What Code is not */}
+                                <section className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary">
+                                    <div className="grid gap-6 @lg:gap-8 @lg:grid-cols-3">
+                                        <div className="bg-accent rounded-md border border-primary p-5 flex flex-col gap-3">
+                                            <h3 className="text-lg font-bold m-0">× not another dashboard</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                Signals become tasks, not graphs. Most of the work in twig happens in
+                                                the signals inbox and agent chat. PostHog and twig stay linked, so when
+                                                you <em>do</em> need charts you can jump straight into product
+                                                analytics.
+                                            </p>
+                                            <div className="mt-auto space-y-2">
+                                                <CallToAction href="/product-analytics" type="secondary" size="sm">
+                                                    Show me some charts
+                                                </CallToAction>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-accent rounded-md border border-primary p-5 flex flex-col gap-3">
+                                            <h3 className="text-lg font-bold m-0">× not a new model harness</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                PostHog Code does not ask you to adopt a new model stack. It uses the
+                                                exact same AI models and harnesses you already use, at the same
+                                                underlying prices&mdash;it just points them at the right work.
+                                            </p>
+                                            <div className="flex flex-wrap items-center gap-2 text-xs text-secondary">
+                                                <span className="size-10 rounded-md border border-primary bg-primary/40 flex items-center justify-center">
+                                                    <img
+                                                        src={ClaudeLogo}
+                                                        alt="Claude logo"
+                                                        className="h-5 w-auto opacity-80"
+                                                        style={{ filter: 'grayscale(1)' }}
+                                                    />
+                                                </span>
+                                                <span className="size-10 rounded-md border border-primary bg-primary/40 flex items-center justify-center">
+                                                    <img
+                                                        src={OpenAILogo}
+                                                        alt="OpenAI logo"
+                                                        className="h-5 w-auto opacity-80"
+                                                        style={{ filter: 'grayscale(1)' }}
+                                                    />
+                                                </span>
+                                                <span className="size-10 rounded-md border border-primary bg-primary/40 flex items-center justify-center">
+                                                    <img
+                                                        src={GeminiLogo}
+                                                        alt="Gemini logo"
+                                                        className="h-5 w-auto opacity-80"
+                                                        style={{ filter: 'grayscale(1)' }}
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-accent rounded-md border border-primary p-5 flex flex-col gap-3">
+                                            <h3 className="text-lg font-bold m-0">× not a no‑code tool</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                twig is built for people who write code. Orchestrate agents to build big
+                                                features, then review and ship the diffs. Hardcore user of another IDE?
+                                                You&apos;ll get the best experience in twig, but if you insist:
+                                            </p>
+                                            <div className="mt-auto">
+                                                <div
+                                                    data-scheme="secondary"
+                                                    className="bg-primary border border-primary rounded-md px-3 py-2 text-xs font-mono"
+                                                >
+                                                    <span className="opacity-60 mr-2">$</span>
+                                                    <span>npx @posthog/twig-mcp</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                {/* FAQ */}
+                                <section id="faq" className="px-6 @lg:px-12 py-12 @lg:py-16 border-b border-primary">
+                                    <div className="max-w-3xl space-y-8">
+                                        <h2 className="text-3xl @lg:text-4xl font-bold m-0">FAQ</h2>
+
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">
+                                                Does it replace Cursor or Claude Code?
+                                            </h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                No. Keep your editor. PostHog Code is the part before you open your
+                                                editor&mdash;deciding what is worth working on and starting the work.
+                                                You still review and ship everything.
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">
+                                                What if I don&apos;t use PostHog yet?
+                                            </h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                PostHog Code runs on top of PostHog. You&apos;ll need to be on PostHog
+                                                first. The good news: PostHog is free up to generous limits, and
+                                                installation takes about 90 seconds.
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">Can it make bad decisions?</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                Yes. That is why you set a daily limit and review every PR before it
+                                                ships. Code never merges anything on its own. It surfaces the work. You
+                                                decide what to do with it.
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-xl font-bold m-0 mb-2">Is my code sent to PostHog?</h3>
+                                            <p className="text-sm text-secondary m-0">
+                                                Agents access your GitHub repo to open PRs, similar to any CI/CD
+                                                integration. Your code stays in GitHub. PostHog Code reads your product
+                                                data (already in PostHog) and uses it to direct the agents.
+                                            </p>
+                                        </div>
                                     </div>
                                 </section>
 
