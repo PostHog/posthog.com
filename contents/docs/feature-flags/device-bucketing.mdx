@@ -43,9 +43,7 @@ The device ID is automatically set by the web (JavaScript) SDK, but you can also
 
 ## Relationship to persisting flags across authentication
 
-PostHog also offers [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional), which keeps the flag value the same before and after login. However, that feature comes with significant tradeoffs: it's incompatible with local evaluation and bootstrapping, requires person profiles, and introduces slower flag responses.
-
-Device bucketing is a simpler alternative. If your flag only needs to be consistent on the same device through the login flow, device bucketing achieves this without the performance tradeoffs of flag persistence.
+PostHog also offers [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional), which keeps the flag value the same before and after login. However, that feature comes with significant tradeoffs. Device bucketing is a simpler alternative. If your flag only needs to be consistent on the same device through the login flow, device bucketing achieves this without the performance tradeoffs of flag persistence.
 
 ## Further reading
 
