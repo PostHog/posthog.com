@@ -21,6 +21,12 @@ import SvelteInstallClient from "../integrate/_snippets/install-svelte-client.md
 
 <SvelteInstallClient />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 > ❗️ If you intend on using session replays with a server-side rendered Svelte app ensure that your [asset URLs are configured to be relative](/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
 
 <DetailSetUpReverseProxy />
@@ -98,12 +104,6 @@ To fix this, set the config to not use relative paths in `svelte.config.js`:
      },
  },
 ```
-
-## Link backend events to session replays
-
-import LinkSessionReplayFrontend from '../_snippets/link-session-replay-frontend.mdx'
-
-<LinkSessionReplayFrontend />
 
 ## Next steps
 

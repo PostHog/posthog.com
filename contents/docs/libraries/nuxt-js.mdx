@@ -46,6 +46,12 @@ bun add @posthog/nuxt
 
 </MultiLanguage>
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 ## Configuration
 
 Add the module to your `nuxt.config.ts` file:
@@ -170,12 +176,6 @@ For a detailed error tracking installation guide, including automatic exception 
 **TypeScript errors in posthog config:** Remove the `.nuxt` directory and rebuild your project to regenerate config types.
 
 **PostHog not capturing events:** Ensure you're using optional chaining (`posthog?.capture()`) since `usePostHog()` returns `undefined` during server-side rendering.
-
-## Link backend events to session replays
-
-import LinkSessionReplayFrontend from '../_snippets/link-session-replay-frontend.mdx'
-
-<LinkSessionReplayFrontend />
 
 ## Next steps
 

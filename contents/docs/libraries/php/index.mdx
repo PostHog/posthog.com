@@ -22,6 +22,12 @@ import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 
 <PHPInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ## Capturing events
 
 import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php.mdx'
@@ -135,12 +141,6 @@ PostHog::groupIdentify([
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
-
-## Link backend events to session replays
-
-import LinkSessionReplayBackend from '../../_snippets/link-session-replay-backend.mdx'
-
-<LinkSessionReplayBackend />
 
 ## Config options
 

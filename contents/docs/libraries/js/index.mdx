@@ -25,6 +25,12 @@ import JSInstall from '../../integrate/_snippets/install-web.mdx'
 
 <JSInstall />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 Once you've installed PostHog, see our [features doc](/docs/libraries/js/features) for more information about what you can do with it.
 
 ### Track across marketing website &amp; app
@@ -84,12 +90,6 @@ posthog.project2.capture('other_event')
 ```
 
 > **Note:** You'll probably want to disable autocapture (and some other events) to avoid them from being sent to both instances. Check all of our [config options](/docs/libraries/js/config) to better understand that.
-
-## Link backend events to session replays
-
-import LinkSessionReplayFrontend from '../../_snippets/link-session-replay-frontend.mdx'
-
-<LinkSessionReplayFrontend />
 
 ## Development
 
