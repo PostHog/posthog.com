@@ -1462,6 +1462,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
                     },
                     {
+                        name: 'Tracking cross sells',
+                        url: '/handbook/growth/cross-selling/tracking-cross-sells',
+                    },
+                    {
                         name: 'Cross sell motions',
                         url: '/handbook/growth/cross-selling/cross-sell-motions',
                     },
