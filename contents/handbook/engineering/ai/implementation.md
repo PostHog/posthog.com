@@ -29,6 +29,7 @@ PostHog Code is a desktop agent that turns PostHog signals into shipped code. It
 ### Third-party agents
 
 Engineers who prefer to work in Claude Code, Cursor, Codex, or any other MCP-compatible tool get access to the same PostHog capabilities.
+
 ## Headless first, then UI
 
 Product teams must think about AI features as **headless (UI-less) workflows**. Agents don't need UI – they compose tools and follow skills to accomplish goals. But customers do need UI, and for that we have **MCP Apps**.
@@ -112,9 +113,10 @@ So that users can learn how to use PostHog without worrying about being charged,
 1. **Set up the MCP stack locally.** Run `hogli dev:setup` and add the MCP stack to your local environment.
 2. **Write YAML configs and skills.** Use the monorepo Claude Code skills to scaffold tool definitions and write skills (TODO: dedicated skill for this).
 3. **Build skills and dump them locally.** Run `hogli build:skills` to render all skills, then unzip them into `.agents/skills/` so Claude Code can pick them up during local testing: `unzip -o products/posthog_ai/dist/skills.zip -d .agents/skills/`.
-4. **Add the local MCP server to Claude Code.** Run `claude mcp add --transport http posthog-local http://localhost:8787/mcp` to point Claude Code at your local MCP server.
 4. **Test with headless agents, not UIs.** Forget about UIs – that's for humans. Test your tools and skills by talking to Claude Code or another headless agent. If the agent can accomplish the job, the capability works.
-5. **Test with PostHog Code.** Add a local MCP client to PostHog Code and verify the end-to-end workflow there as well.
+5. **Test with PostHog Code.** Sign in to a local environment in PostHog Code and verify the end-to-end workflow.
+6. **Alternatively, add the local MCP server to Claude Code.** Run `claude mcp add --transport http posthog-local http://localhost:8787/mcp` to point Claude Code at your local MCP server.
+
 
 ## Future directions
 
