@@ -11,7 +11,7 @@ import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manu
 
 <Step title="Add PostHog to your app" badge="required">
 
-Using it requires PostHog's Flutter SDK version >= 5.8.0, but it's recommended to always use [the latest version](/docs/sdk-doctor).
+Using it requires PostHog's Flutter SDK version >= 5.8.0, but version 5.14.0 or later is recommended for the latest survey customization features. You can check your current version in PostHog using the [SDK doctor](/docs/sdk-doctor).
 
 > **Note:** For mobile surveys, you must setup the SDK manually.
 
@@ -67,43 +67,21 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 Surveys are enabled by default. If you want to disable surveys, you can do so when setting up your SDK instance:
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 
 config.surveys = false; // Disable surveys
 ```
 
 ## Supported Features
 
-| Feature                           | Support                |
-| --------------------------------- | ---------------------- |
-| **Questions** | |
-| All question types                | ✅                     |
-| Multi-question surveys            | ✅                     |
-| Confirmation message              | ✅                     |
-| Feedback button presentation      | ❌                     |
-| Conditional questions             | ✅                     |
-| **Customization / Appearance** | |
-| Set colors in PostHog dashboard   | ✅                     |
-| Shuffle questions                 | ❌                     |
-| PostHog branding                  | ❌                     |
-| Delay popup after screen view     | ❌                     |
-| Position config                   | ❌ (always bottom sheet) |
-| HTML content                      | ❌                     |
-| **Display conditions** | |
-| Feature flag & property targeting | ✅                     |
-| Screen/URL targeting              | ❌                     |
-| Device type targeting             | ✅                     |
-| Survey wait period                | ❌                     |
-| Event triggers                    | ✅                     |
-| Action triggers                   | ❌                     |
-| Partial responses                 | ❌                     |
+Not all survey features are available on every SDK. See the [SDK feature support matrix](/docs/surveys/sdk-feature-support) for a full comparison.
 
 ## Limitations
 
 - On Android, requires API >= 26.
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
 - On Web, surveys are powered by the [JavaScript Web SDK](/docs/surveys/installation/web).
-- Requires PostHog Flutter SDK version >= 5.8.0
+- Requires PostHog Flutter SDK version >= 5.8.0 (5.14.0+ recommended for latest features)
 
 ## Troubleshooting
 

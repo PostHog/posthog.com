@@ -42,6 +42,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
+import { RenderInClient } from 'components/RenderInClient'
+import WizardCommand from 'components/WizardCommand'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -636,7 +638,223 @@ const ProductCount = () => {
 }
 
 const AppCount = () => {
-    return APP_COUNT
+    return (
+        <span className="flex items-center gap-1">
+            <Link to="/products">Browse app library</Link>
+            <span>({APP_COUNT})</span>
+        </span>
+    )
+}
+
+const productCategories = [
+    {
+        name: 'Analytics',
+        handles: [
+            'web_analytics',
+            'revenue_analytics',
+            'trends',
+            'funnels',
+            'user_paths',
+            'lifecycle',
+            'retention',
+            'stickiness',
+            'correlation_analysis',
+            'group_analytics',
+        ],
+    },
+    {
+        name: 'Data stack',
+        handles: ['data_warehouse', 'cdp', 'data_in', 'sql_editor', 'bi', 'data_modeling', 'data_out'],
+    },
+    {
+        name: 'Feature development',
+        handles: [
+            'twig',
+            'feature_flags',
+            'workflows_emails',
+            'webhooks',
+            'endpoints',
+            'product_tours',
+            'early_access',
+        ],
+    },
+    {
+        name: 'Debugging & analysis',
+        handles: ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles'],
+    },
+    {
+        name: 'AI tools',
+        handles: ['llm_traces', 'llm_generations', 'llm_evals'],
+    },
+    {
+        name: 'Feedback & testing',
+        handles: ['experiments', 'surveys', 'no_code_ab_testing', 'messaging', 'support', 'user_interviews'],
+    },
+    {
+        name: 'Tools',
+        handles: ['posthog_ai', 'dashboards', 'activity', 'notebooks'],
+    },
+]
+
+const MAX_VISIBLE_ITEMS = 7
+const TRUNCATED_VISIBLE = 6
+
+const StatusDot = ({ status }: { status?: string }) => {
+    if (!status) return null
+
+    const isBeta = status === 'beta'
+    const isAlpha = status === 'private alpha' || status === 'alpha' || status === 'WIP'
+
+    if (!isBeta && !isAlpha) return null
+
+    const dotColor = isBeta ? 'bg-yellow' : 'bg-red'
+    const label = isBeta ? 'Beta' : 'Alpha'
+
+    return (
+        <Tooltip
+            trigger={<span className={`inline-block size-2 rounded-full ${dotColor} shrink-0`} />}
+            delay={0}
+            side="top"
+        >
+            <span className="text-sm">{label}</span>
+        </Tooltip>
+    )
+}
+
+const ProductCategoryItem = ({
+    product,
+}: {
+    product: { name: string; handle: string; slug?: string; color?: string; Icon?: any; status?: string }
+}) => {
+    const hasLink = !!product.slug
+    const icon = product.Icon ? (
+        <product.Icon className={`size-4 shrink-0 ${!hasLink ? 'text-muted' : `text-${product.color || 'gray'}`}`} />
+    ) : null
+
+    const content = (
+        <span className="flex items-center gap-1.5 py-0.5">
+            {icon}
+            <span className={!hasLink ? 'text-muted' : ''}>{product.name}</span>
+            <StatusDot status={product.status} />
+        </span>
+    )
+
+    if (!hasLink) {
+        return <span className="text-sm cursor-default">{content}</span>
+    }
+
+    return (
+        <Link
+            to={`/${product.slug}`}
+            state={{ newWindow: true }}
+            className="text-sm text-primary hover:text-primary !font-normal !no-underline hover:!underline"
+            data-attr="product-grid-item"
+        >
+            {content}
+        </Link>
+    )
+}
+
+const ProductCategoryColumn = ({
+    category,
+    allProducts,
+}: {
+    category: { name: string; handles: string[] }
+    allProducts: any[]
+}) => {
+    const [expanded, setExpanded] = useState(false)
+
+    const products = category.handles.map((handle) => allProducts.find((p: any) => p.handle === handle)).filter(Boolean)
+
+    const needsTruncation = products.length > MAX_VISIBLE_ITEMS
+    const visibleProducts = needsTruncation && !expanded ? products.slice(0, TRUNCATED_VISIBLE) : products
+    const remainingCount = products.length - TRUNCATED_VISIBLE
+
+    return (
+        <div className="flex flex-col gap-0.5">
+            <h3 className="text-sm font-normal text-secondary !tracking-normal m-0 mb-1">{category.name}</h3>
+            {visibleProducts.map((product: any) => (
+                <ProductCategoryItem key={product.handle} product={product} />
+            ))}
+            {needsTruncation && !expanded && (
+                <button
+                    onClick={() => setExpanded(true)}
+                    className="text-sm text-secondary hover:text-primary font-medium text-left py-0.5 flex items-center gap-1.5 cursor-pointer"
+                >
+                    <span className="size-4 shrink-0 flex items-center justify-center text-secondary text-xs font-bold">
+                        &bull;&bull;&bull;
+                    </span>
+                    {remainingCount} more
+                </button>
+            )}
+        </div>
+    )
+}
+
+const ProductCategoryGrid = () => {
+    const allProducts = useProduct() as any[]
+
+    return (
+        <div className="product-section-test @container mb-12">
+            <div className="grid grid-cols-2 @xl:grid-cols-3 @3xl:grid-cols-4 gap-x-6 gap-y-8">
+                {productCategories.map((category) => (
+                    <ProductCategoryColumn key={category.name} category={category} allProducts={allProducts} />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+const ProductsSectionControl = () => (
+    <>
+        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+            <h2 className="m-0 tracking-tight">
+                Explore apps{' '}
+                <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
+            </h2>
+            <aside className="hidden @xl:inline-flex">
+                <span>
+                    <Link to="/products" state={{ newWindow: true }}>
+                        Browse app library
+                    </Link>{' '}
+                    ({APP_COUNT})
+                </span>
+            </aside>
+        </header>
+        <CompanyStageTabs />
+    </>
+)
+
+const ProductsSectionTest = () => (
+    <>
+        <header className="product-section-test flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+            <h2 className="m-0 tracking-tight">Products</h2>
+            <Link
+                to="/products"
+                state={{ newWindow: true }}
+                className="text-sm font-semibold flex items-center gap-0.5"
+            >
+                Explore all products <IconArrowRight className="size-4" />
+            </Link>
+        </header>
+        <ProductCategoryGrid />
+    </>
+)
+
+const ProductsSection = () => {
+    const posthog = usePostHog()
+    return (
+        <RenderInClient
+            placeholder={<ProductsSectionControl />}
+            render={() =>
+                posthog?.getFeatureFlag?.('homepage-product-groupings', { fresh: true }) === 'experiment' ? (
+                    <ProductsSectionTest />
+                ) : (
+                    <ProductsSectionControl />
+                )
+            }
+        />
+    )
 }
 
 const CompanyStageTabs = () => {
@@ -701,7 +919,6 @@ const CompanyStageTabs = () => {
                             'error_tracking',
                             'experiments',
                             'feature_flags',
-                            'surveys',
                             'logs',
                             'cdp',
                             'workflows_emails',
@@ -790,6 +1007,7 @@ const Customers = () => {
     const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
+    const { websiteMode } = useApp()
 
     // Get all companies
     const allCompanies = [...COL1, ...COL2]
@@ -959,26 +1177,27 @@ const Customers = () => {
 
     return (
         <>
-            <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className="@xl:absolute right-0 -top-8">
-                    <OSButton
-                        onClick={toggleBreakdown}
-                        variant="secondary"
-                        size="sm"
-                        className="font-semibold [&_span]:min-w-[146px]"
-                        disabled={isAnimating}
-                    >
-                        {isAnimating ? (
-                            '🔀 Shuffling...'
-                        ) : (
-                            <>
-                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                            </>
-                        )}
-                    </OSButton>
-                </div>
+            <div className="inline-block">
+                <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
+                    <div className="@xl:absolute right-0 -top-8">
+                        <OSButton
+                            onClick={toggleBreakdown}
+                            variant="secondary"
+                            size="sm"
+                            className="font-semibold [&_span]:min-w-[146px]"
+                            disabled={isAnimating}
+                        >
+                            {isAnimating ? (
+                                '🔀 Shuffling...'
+                            ) : (
+                                <>
+                                    <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                                </>
+                            )}
+                        </OSButton>
+                    </div>
 
-                {/* 
+                    {/* 
             <select
                 value={currentBreakdown}
                 onChange={(e) => {
@@ -1037,16 +1256,62 @@ const Customers = () => {
                 ))}
             </select>
              */}
+                </div>
+                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+                <OSButton
+                    asLink
+                    to="/customers"
+                    variant="secondary"
+                    size="md"
+                    className="mt-4"
+                    state={{ newWindow: true }}
+                >
+                    Open customers.mdx
+                </OSButton>
             </div>
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
-            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open customers.mdx
-            </OSButton>
         </>
     )
 }
 
+function TaglineControl(): JSX.Element {
+    return (
+        <p className="text-base font-medium">
+            We make dev tools that help product engineers build successful products.
+        </p>
+    )
+}
+
+function TaglineExperiment(): JSX.Element {
+    return (
+        <div className="my-4 max-w-[650px]">
+            <h1 className="!m-0">
+                Make sense of how people use your product – <em>and how to make it better</em>
+            </h1>
+            <p className="!m-0 !mt-2 font-medium">PostHog has all the tools you need to build great products.</p>
+        </div>
+    )
+}
+
+function Tagline(): JSX.Element {
+    const posthog = usePostHog()
+
+    return (
+        <RenderInClient
+            placeholder={null}
+            render={() =>
+                posthog?.getFeatureFlag?.('home-tagline') === 'test' ? <TaglineExperiment /> : <TaglineControl />
+            }
+        />
+    )
+}
+
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
+    {
+        name: 'Tagline',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Tagline />,
+    },
     {
         name: 'AppCount',
         kind: 'flow',
@@ -1058,6 +1323,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <CompanyStageTabs />,
+    },
+    {
+        name: 'ProductsSection',
+        kind: 'flow',
+        props: [],
+        Editor: () => <ProductsSection />,
     },
     {
         name: 'CTAs',
@@ -1238,10 +1509,10 @@ export default function Home() {
                 image="/images/og/default.png"
             />
             <MDXEditor
-                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}
+                maxWidth={900}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'

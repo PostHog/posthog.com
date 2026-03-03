@@ -92,7 +92,7 @@ Steps 1, 3, and 4 are relatively straightforward, but step 2 requires more expla
 
 Although Amplitude events have a similar structure, you need to convert them to PostHog's schema. Many events and properties have different keys. For example, autocaptured events and properties in PostHog often start with `$`.
 
-You can see Amplitude's event structure in their [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema) and PostHog's autocapture event structure in our [autocapture docs](/docs/product-analytics/autocapture #autocaptured-events).
+You can see Amplitude's event structure in their [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema) and PostHog's autocapture event structure in our [autocapture docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 Some conversions needed include:
 
@@ -117,7 +117,7 @@ import gzip
 
 # PostHog Python Client
 posthog = Posthog(
-<ph_project_api_key>,
+<ph_project_token>,
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True
@@ -219,7 +219,7 @@ This script may need modification depending on the structure of your Amplitude d
 
 > **Why am I seeing "analytics-python queue is full"?** The default queue size for ingesting is 10,000. If you are importing more than 10,000 events, call `posthog.flush()` every 5000 messages to block the thread until the queue empties out.
 
-> **Why are my event and DAU count lower in PostHog than Amplitude?** PostHog blocks bot traffic by default, while Amplitude doesn't. You can see a full list of the bots PostHog blocks [in our docs](/docs/product-analytics/troubleshooting #does-posthog-block-bots-by-default).
+> **Why are my event and DAU count lower in PostHog than Amplitude?** PostHog blocks bot traffic by default, while Amplitude doesn't. You can see a full list of the bots PostHog blocks [in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
 
 ### Aliasing device IDs to user IDs
 
@@ -231,11 +231,11 @@ In addition to capturing the events, we want to combine anonymous and identified
 | Login | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 | Purchase | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 
-We want to attribute "Application installed" to the user with ID 123, so we need to also call [alias](/docs/product-analytics/identify #alias-assigning-multiple-distinct-ids-to-the-same-user) with both the device ID and user ID:
+We want to attribute "Application installed" to the user with ID 123, so we need to also call [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) with both the device ID and user ID:
 
 ```python
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True

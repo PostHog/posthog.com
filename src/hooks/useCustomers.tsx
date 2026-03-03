@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
+import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
@@ -36,6 +37,8 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SupedLogo from '../images/customers/suped-light.png'
+import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
@@ -172,6 +175,49 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: AssemblyAILogo,
         featured: false,
         height: 10,
+    },
+    arena: {
+        name: 'Arena',
+        toolsUsed: [
+            'web_analytics',
+            'product_analytics',
+            'marketing_analytics',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'surveys',
+            'posthog_ai',
+        ],
+        industries: ['LLMs'],
+        users: ['Product', 'Engineering', 'Growth'],
+        notes: 'AI model comparison platform',
+        logo: ArenaLogo,
+        height: 10,
+        featured: true,
+        quotes: {
+            matt_hova: {
+                name: 'Matt Hova',
+                role: 'Member of Technical Staff',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/matt_hova_8c119a92ad.jpeg',
+                },
+                products: {
+                    experiments:
+                        "I can't recommend PostHog enough, especially if you're just getting started out. It really helped us move fast and we've been really happy with it as we continue to scale.",
+                },
+            },
+            lily_dinh: {
+                name: 'Lily Dinh',
+                role: 'Growth Marketing Lead',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/lily_d_lmarena_7ce598fc8c.jpeg',
+                },
+                products: {
+                    product_analytics:
+                        "As a marketer, it's so important to understand which KPIs the company actually cares about. All of that data lives in PostHog. It's our source of truth for company performance.",
+                },
+            },
+        },
     },
     brainboard: {
         name: 'Brainboard',
@@ -316,6 +362,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/suped/michael-suped.png',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
+            },
+        },
+    },
     kilocode: {
         name: 'KiloCode',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
@@ -413,7 +485,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
                 },
                 quotes: [
-                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
                 ],
             },
         },

@@ -127,6 +127,21 @@ posthog.setPersonPropertiesForFlags({
 })
 ```
 
+
+## Why am I getting an error about the 'in' operator for properties?
+
+When creating or updating a feature flag, you may see an error like:
+
+`"The 'in' operator is only valid for cohort properties, not 'person' properties."`
+
+This occurs because the `in` and `not_in` operators are reserved for **cohort properties only**. They cannot be used with person properties, group properties, or other property types in feature flag release conditions.
+
+### What operators should I use instead?
+
+For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `regex`, `is set`, or any of the semver operators for version-based targeting.
+
+For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
+
 ## Why do I see multiple feature flag calls when I only expect one?
 
 This is likely because the `onFeatureFlags()` callback is invoked every time feature flags are reloaded. This happens by default when person properties change, when you call `reloadFeatureFlags()`, or when other flag-reloading triggers happen.

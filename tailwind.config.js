@@ -227,6 +227,7 @@ module.exports = {
                 fairytale: ['Computer Modern', 'sans-serif'],
                 serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
+                    'IBM Plex Sans Variable',
                     'IBM Plex Sans',
                     '-apple-system',
                     'BlinkMacSystemFont',
@@ -242,8 +243,8 @@ module.exports = {
                     'sans-serif',
                 ],
                 fancy: ['Zapfino', 'serif'],
-                button: ['IBM Plex Sans', 'sans-serif'],
-                nav: ['IBM Plex Sans', 'sans-serif'],
+                button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
+                nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
@@ -395,6 +396,14 @@ module.exports = {
                         transform: 'translateY(-10px)',
                     },
                 },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-6px)' },
+                },
+                breathe: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.03)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -416,6 +425,8 @@ module.exports = {
                 'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
                 'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
                 'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
+                float: 'float 2s ease-in-out infinite',
+                breathe: 'breathe 3s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',
