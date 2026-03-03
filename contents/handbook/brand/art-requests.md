@@ -22,6 +22,19 @@ They get a lot of work requests, so they use [a request template](https://github
 
 You can see what they are working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
 
+### Art board automations
+
+The Art & Brand Planning board uses GitHub Actions to keep work moving:
+
+- **Reminders** — A daily job (9 AM UTC) posts one-time comments on issues that have been stuck in...
+  - **Feedback/Review** for 10+ days: asks if any feedback is needed to move the task forward.
+  - **No Status** for 7+ days: asks someone to pick it up or assign it to a column.
+- **Status changes** — When an issue’s Status is changed on the board:
+  - **Moved to "Done"** → the issue is automatically closed (as completed).
+  - **Moved to "Assigned: Daniel", "Assigned: Lottie", or "Assigned: Heidi"** → other default assignees are removed so only the assigned person is on the issue. Internal requests (from the design team) keep all assignees.
+  - These changes do not impact the "Assigned: Cleo" column, as Cleo has a different workload.
+- Workflows run under the **Art Board Bot** GitHub App and live in `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`).
+
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
 Lottie and Daniel usually ask for two weeks minimum notice, but can often work faster on things if needed. If your request is genuinely urgent, please share your request issue in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Daniel, and/or [Cory](https://posthog.com/community/profiles/30200).

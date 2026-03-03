@@ -35,6 +35,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/attio',
                 },
                 {
+                    name: 'BuildBetter',
+                    url: '/docs/cdp/sources/buildbetter',
+                },
+                {
                     name: 'Stripe',
                     url: '/docs/cdp/sources/stripe',
                 },
@@ -45,6 +49,10 @@ export const dataPipelines = {
                 {
                     name: 'Klaviyo',
                     url: '/docs/cdp/sources/klaviyo',
+                },
+                {
+                    name: 'Linear',
+                    url: '/docs/cdp/sources/linear',
                 },
                 {
                     name: 'Zendesk',
@@ -117,6 +125,10 @@ export const dataPipelines = {
                 {
                     name: 'Snapchat Ads',
                     url: '/docs/cdp/sources/snapchat-ads',
+                },
+                {
+                    name: 'Pinterest Ads',
+                    url: '/docs/cdp/sources/pinterest-ads',
                 },
                 {
                     name: 'Google Sheets',
@@ -557,6 +569,7 @@ export const handbookSidebar = [
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
             { name: 'Advisories & CVEs', url: '/handbook/company/security-advisories' },
+            { name: 'Post-mortems', url: '/handbook/company/post-mortems' },
         ],
     },
     {
@@ -663,11 +676,11 @@ export const handbookSidebar = [
             },
             {
                 name: 'Video',
-                url: '/handbook/growth/marketing/video',
+                url: '/handbook/marketing/video',
                 children: [
                     {
                         name: 'Overview',
-                        url: '/handbook/growth/marketing/video',
+                        url: '/handbook/marketing/video',
                     },
                     {
                         name: 'YouTube',
@@ -682,6 +695,10 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/handbook/content/newsletter',
+                    },
+                    {
+                        name: 'Tips for new writers',
+                        url: '/handbook/content/newsletter-tips',
                     },
                     {
                         name: 'Newsletter ads',
@@ -748,6 +765,10 @@ export const handbookSidebar = [
             {
                 name: 'How to write product docs',
                 url: '/handbook/docs-and-wizard/writing-product-docs',
+            },
+            {
+                name: 'How to use the content writer agent',
+                url: '/handbook/docs-and-wizard/content-writer-agent',
             },
             {
                 name: 'Onboarding docs',
@@ -1054,6 +1075,10 @@ export const handbookSidebar = [
                 name: 'Per-product activation',
                 url: '/handbook/growth/growth-engineering/per-product-activation',
             },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/marketing/templates',
+            },
         ],
     },
     {
@@ -1062,44 +1087,50 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/marketing',
+                url: '/handbook/marketing',
             },
             {
-                name: 'Product marketing',
-                url: '/handbook/marketing/product-announcements',
+                name: 'Who can help me?',
+                url: '/handbook/marketing/ownership',
             },
             {
                 name: 'Paid ads',
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'Product positioning',
-                url: '/handbook/marketing/positioning',
-            },
-            {
-                name: 'Incident comms',
-                url: '/handbook/growth/marketing/incident-comms',
-            },
-            {
-                name: 'Events',
+                name: 'IRL Events',
                 url: '/handbook/marketing/events',
             },
             {
-                name: 'Customer case studies',
-                url: '/handbook/marketing/customer-case-studies',
-            },
-            {
-                name: 'Co-marketing',
-                url: '/handbook/marketing/co-marketing',
-            },
-            {
                 name: 'Influencers',
-                url: '/handbook/growth/marketing/influencers',
+                url: '/handbook/marketing/influencers',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/marketing/influencers',
+                    },
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/marketing/open-source-sponsorship',
+                    },
+                ],
             },
             {
-                name: 'Email & comms',
-                url: '',
+                name: 'Product marketing',
+                url: '/handbook/marketing/product-announcements',
                 children: [
+                    {
+                        name: 'Product announcements',
+                        url: '/handbook/marketing/product-announcements',
+                    },
+                    {
+                        name: 'Product positioning',
+                        url: '/handbook/marketing/positioning',
+                    },
+                    {
+                        name: 'Incident comms',
+                        url: '/handbook/marketing/incident-comms',
+                    },
                     {
                         name: 'Email marketing',
                         url: '/handbook/brand/email-comms',
@@ -1108,12 +1139,6 @@ export const handbookSidebar = [
                         name: 'In-app messaging',
                         url: '/handbook/brand/in-app',
                     },
-                ],
-            },
-            {
-                name: 'Partnerships & PR',
-                url: '',
-                children: [
                     {
                         name: 'Partnerships',
                         url: '/handbook/brand/partners',
@@ -1132,29 +1157,15 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Campaigns & coupons',
-                        url: '/handbook/growth/marketing/campaigns-and-coupons',
-                    },
-                ],
-            },
-            {
-                name: 'Who can help me?',
-                url: '/handbook/growth/marketing/ownership',
-            },
-            {
-                name: 'Other',
-                url: '/handbook/growth/marketing/open-source-sponsorship',
-                children: [
-                    {
-                        name: 'Sponsorships',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                        url: '/handbook/marketing/campaigns-and-coupons',
                     },
                     {
-                        name: 'ICP scoring',
-                        url: '/handbook/growth/marketing/icp',
+                        name: 'Customer case studies',
+                        url: '/handbook/marketing/customer-case-studies',
                     },
                     {
-                        name: 'Dashboard templates',
-                        url: '/handbook/growth/marketing/templates',
+                        name: 'Co-marketing',
+                        url: '/handbook/marketing/co-marketing',
                     },
                 ],
             },
@@ -1441,6 +1452,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
                     },
                     {
+                        name: 'Tracking cross sells',
+                        url: '/handbook/growth/cross-selling/tracking-cross-sells',
+                    },
+                    {
                         name: 'Cross sell motions',
                         url: '/handbook/growth/cross-selling/cross-sell-motions',
                     },
@@ -1519,6 +1534,10 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding data',
                         url: '/handbook/onboarding/onboarding-data',
+                    },
+                    {
+                        name: 'Onboarding conversations playbook',
+                        url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
                         name: 'Sales handover',
@@ -1643,6 +1662,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
                 ],
+            },
+            {
+                name: 'Product enablement',
+                url: '/handbook/growth/sales/product-enablement',
             },
             {
                 name: 'Use cases',
@@ -2688,6 +2711,10 @@ export const docsMenu = {
                                     url: '/docs/data/event-spec/ecommerce-events',
                                 },
                                 {
+                                    name: 'Property filter operators',
+                                    url: '/docs/data/property-filters',
+                                },
+                                {
                                     name: 'Channel type',
                                     url: '/docs/data/channel-type',
                                 },
@@ -2740,6 +2767,16 @@ export const docsMenu = {
                         {
                             name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/sdk-doctor',
+                                },
+                                {
+                                    name: 'Keeping SDKs current',
+                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                },
+                            ],
                         },
                         {
                             name: 'Organizations',
@@ -3774,6 +3811,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/evaluation-contexts',
                     icon: 'IconDecisionTree',
                     color: 'red',
+                },
+                {
+                    name: 'Device bucketing',
+                    url: '/docs/feature-flags/device-bucketing',
+                    icon: 'IconLaptop',
+                    color: 'blue',
                 },
                 {
                     name: 'Guides',
@@ -4854,6 +4897,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/bigquery',
                         },
                         {
+                            name: 'BuildBetter',
+                            url: '/docs/data-warehouse/sources/buildbetter',
+                        },
+                        {
                             name: 'Chargebee',
                             url: '/docs/data-warehouse/sources/chargebee',
                         },
@@ -4894,6 +4941,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/snapchat-ads',
                         },
                         {
+                            name: 'Pinterest Ads',
+                            url: '/docs/data-warehouse/sources/pinterest-ads',
+                        },
+                        {
                             name: 'Shopify',
                             url: '/docs/data-warehouse/sources/shopify',
                         },
@@ -4920,6 +4971,10 @@ export const docsMenu = {
                         {
                             name: 'Klaviyo',
                             url: '/docs/data-warehouse/sources/klaviyo',
+                        },
+                        {
+                            name: 'Linear',
+                            url: '/docs/data-warehouse/sources/linear',
                         },
                         {
                             name: 'Mailchimp',
@@ -5365,6 +5420,13 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Tools',
+                    url: '/docs/llm-analytics/tools',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
@@ -5399,6 +5461,16 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/evaluations',
                     icon: 'IconTarget',
                     color: 'yellow',
+                    badge: {
+                        title: 'Alpha',
+                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                    },
+                },
+                {
+                    name: 'Prompt management',
+                    url: '/docs/llm-analytics/prompts',
+                    icon: 'IconPencil',
+                    color: 'purple',
                     badge: {
                         title: 'Alpha',
                         className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
@@ -5897,6 +5969,12 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install PostHog SDK',
+                    url: '/docs/workflows/installation',
+                    icon: 'IconTerminal',
+                    color: 'blue',
                 },
                 {
                     name: 'Configure a channel',

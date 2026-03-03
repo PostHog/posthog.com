@@ -84,14 +84,14 @@ First install `posthog-js`:
 npm install posthog-js
 ```
 
-Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project).
+Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project).
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
  devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<ph_project_api_key>',
+      posthogToken: '<ph_project_token>',
       posthogHost: '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
@@ -115,7 +115,7 @@ import posthog from 'posthog-js'
 
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+  const posthogClient = posthog.init(runtimeConfig.public.posthogToken, {
     api_host: runtimeConfig.public.posthogHost,
     defaults: runtimeConfig.public.posthogDefaults,
   })
@@ -192,7 +192,7 @@ import { PostHog } from 'posthog-node';
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
+    runtimeConfig.public.posthogToken,
     { host: runtimeConfig.public.posthogHost }
   );
 
@@ -219,7 +219,7 @@ import { PostHog } from 'posthog-node';
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig();
   const cookieString =  event.node.req.headers.cookie || '';  
-  const cookieName =`ph_${runtimeConfig.public.posthogPublicKey}_posthog`;
+  const cookieName =`ph_${runtimeConfig.public.posthogToken}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   
   let distinctId;
@@ -228,7 +228,7 @@ export default defineEventHandler(async (event) => {
     if (parsedValue && parsedValue.distinct_id) {
       distinctId = parsedValue.distinct_id;
       const posthog = new PostHog(
-        runtimeConfig.public.posthogPublicKey,
+        runtimeConfig.public.posthogToken,
         { host: runtimeConfig.public.posthogHost }
       );
       posthog.capture({

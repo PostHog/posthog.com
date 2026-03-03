@@ -4,13 +4,31 @@ sidebar: Docs
 showTitle: true
 ---
 
-## 1. Set up a reverse proxy
+## 1. Start with growth events
+
+Before optimizing your analytics setup, make sure you're tracking the events that matter most for your business – your growth events. These are actions like user signups, subscriptions, and purchases that directly indicate whether your product is succeeding.
+
+Many teams – even at large companies – rely on autocapture and miss instrumenting a proper `user_signed_up` event. This makes it difficult to measure [activation](/docs/new-to-posthog/activation), build accurate retention cohorts, and calculate metrics like customer lifetime value.
+
+Track your signup event explicitly from both frontend and backend:
+
+```js
+posthog.capture('user_signed_up', {
+    signup_method: 'email',
+    referral_source: 'google',
+    plan: 'free'
+})
+```
+
+Once you have signup tracking in place, you can build reliable funnels and cohorts for everything else.
+
+## 2. Set up a reverse proxy
 
 Tracking and ad blockers can prevent your events from being sent to PostHog. By setting up a reverse proxy, you can send events to PostHog using your own domain. This means that events are less likely to be blocked and you'll capture more data.
 
 See our docs on [how to set up a reverse proxy](/docs/advanced/proxy) for more details on how to do this.
 
-## 2. Implement a naming convention
+## 3. Implement a naming convention
 
 As your product grows, the amount of analytics data grows with it. Without naming conventions, your data quickly becomes difficult to work with.
 
@@ -64,13 +82,13 @@ All these differences make it more likely that you'll misinterpret your data. Im
 
   - If the property's value is a date or timestamp, include **_date** or **_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
 
-## 3. Version your events
+## 4. Version your events
 
 As your app evolves, so do the events you track. Implementing a versioning system for events ensures you can easily distinguish between older and newer events, especially when significant changes occur.
 
 For example, if you initially tracked an event as `registration:sign_up_button_click` and later revamped your registration flow, you can introduce a new version of this event `registration_v2:sign_up_button_click`. This way, you preserve historical data on the old event while making it easy to compare the impact of your new changes.
 
-## 4. Prefer backend to frontend tracking
+## 5. Prefer backend to frontend tracking
 
 Backend analytics are more reliable than frontend analytics. There are 3 reasons for this:
 
@@ -89,7 +107,7 @@ Where possible, it's a good idea to log events on your server instead of your cl
   - You need accurate data – e.g., the number of users that signed up in the last week.
   - You want to analyze data alongside other business metrics.
 
-## 5. Filter out internal users
+## 6. Filter out internal users
 
 Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
 
@@ -102,7 +120,7 @@ There are a few ways to do this:
 
 See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
 
-## 6. Use the same project for your website and app
+## 7. Use the same project for your website and app
 
 We recommend to track both your marketing site and app in the same [project](/docs/settings/projects). This enables you to do the following:
 

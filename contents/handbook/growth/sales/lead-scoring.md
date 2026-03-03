@@ -25,10 +25,11 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 5. Customers set to roll off startup plan in the next ~100 days with last invoice between $2k–$5k
 6. Customers who are set to roll off the startup plan in the next two months and had a last invoice greater than $1500
 7. [AE named lists](https://posthog.slack.com/docs/TSS5W8YQZ/F0A9W1BVCKE) 
-8. Ben experiments to find more winners
-  1. Emailed sales@ 
-  2. Requests for Trust Center access that require an NDA
-  3. Companies with recent fundraising activity
+
+_Ben experiments to find more winners:_
+1. Emailed sales@ 
+2. Requests for Trust Center access that require an NDA
+3. Companies with recent fundraising activity
 
 **BDR team**
 
@@ -59,7 +60,7 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 - *Role* - from experience we sell best to people in an engineering, product or leadership role.
 - *Country* - from experience we know that certain countries have a higher inclination to pay for software so we weight those.
 
-> Note that we also calculate an [ICP score](/handbook/growth/marketing/icp) in Salesforce.  This is more marketing aligned and designed to show us whether we are capturing [who we are building for](/handbook/who-we-build-for) as inbound leads.
+> Note that we also calculate an ICP score in Salesforce.  This is more marketing aligned and designed to show us whether we are capturing [who we are building for](/handbook/who-we-build-for) as inbound leads.
 
 | Metric         | Value                                                                                                          | Score |
 |----------------|----------------------------------------------------------------------------------------------------------------|-------|

@@ -8,7 +8,7 @@ showTitle: true
 
 We did 45 events in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
-Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
+Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
 
 The event formats we prefer (and organize ourselves) fall into one of these:
 
@@ -76,7 +76,7 @@ Put real effort into this first step. Defining the "what, why and how" of an eve
 -   People LARPing (live action role-playing) as executives
 -   Loudest person pretending to know more than they do
 
-**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
+**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](/founders) [have](/founders/product-market-fit-game) [plenty](/handbook) [of](/about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](/questions) [inspiration](/docs).
 
 **Merch:** We use the [store merch processes](/handbook/company/merch-store) to handle distribution of PostHog-branded merch. We tend to be generous with merch for community events. Outline what you had in mind in the issue.
 
