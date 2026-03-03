@@ -1,6 +1,6 @@
 ---
 title: The best product analytics tools for startups, compared
-date: 2026-02-19
+date: 2026-03-03
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -68,7 +68,7 @@ We also have a full guide on [how to measure product-market fit](/founders/measu
 
 **The metrics that matter**: focus on [building a key metrics dashboard](/founders/early-stage-analytics) and finding your [activation metrics](/product-engineers/activation-metrics), aka the actions correlated with long-term retention. *Correlated* is key – you're not guessing, you're testing which actions predict whether someone comes back.
 
-You should also be looking at [onboarding completion rate](/blog/how-to-find-and-fix-app-onboarding-drop-off) (funnel from signup -> first meaningful action).
+You should also be looking at [onboarding completion rate](/blog/how-to-find-and-fix-app-onboarding-drop-off) (funnel from signup → first meaningful action).
 
 **Pair your analytics tool with:**
 
@@ -92,11 +92,11 @@ We've compared the best [session replay tools](/blog/best-session-replay-tools),
 - **Cohort retention curves** – [retention](/docs/product-analytics/retention) by signup week. Is the curve flattening (good) or declining to zero ([you don't actually have PMF](/newsletter/validating-product-ideas))?
 - **Engagement depth** – DAU/MAU ratio, session frequency, feature breadth per user
 - **Feature adoption** – what % of activated users tried the new feature? Use [lifecycle analysis](/docs/product-analytics/lifecycle) to see if they retain better
-- **Conversion to paid** – [funnel](/docs/product-analytics/funnels) from trial -> paid -> retained subscription
+- **Conversion to paid** – [funnel](/docs/product-analytics/funnels) from trial → paid → retained subscription
 
 **Pair your analytics tool with:**
 
-- [Feature flags](/feature-flags) – gradual rollouts (1% -> 10% -> 100%), kill switches, targeting for beta access
+- [Feature flags](/feature-flags) – gradual rollouts (1% → 10% → 100%), kill switches, targeting for beta access
 - [A/B testing](/experiments) – test onboarding flows, pricing pages, feature gates against retention or conversion goals. 
 - [Error tracking](/error-tracking) – correlate bugs with churn ("Users who hit the checkout error in v2.3.1 churned at 3x the normal rate").
 - [LLM analytics](/llm-analytics) – if you're shipping AI features, track cost, latency, and output quality per model
@@ -236,7 +236,7 @@ Use the [pricing calculator](/pricing) to estimate costs based on your actual vo
 
 [Mixpanel](/blog/posthog-vs-mixpanel) is a product analytics platform focused on funnels, retention, and cohort analysis – with session replay, feature flags, and A/B testing now built in. If analytics depth is your primary requirement, Mixpanel's query interface is fast and polished. The Spark AI builder helps non-technical team members explore data without learning the event model.
 
-[Mixpanel's](/best-mixpanel-alternatives) experiments and feature flags launched in late 2025, so the platform is moving toward a more integrated workflow – though it still doesn't cover surveys or error tracking. Session replay is also relatively new, so it's less mature than dedicated replay tools.
+[Mixpanel's](/blog/best-mixpanel-alternatives) experiments and feature flags launched in late 2025, so the platform is moving toward a more integrated workflow – though it still doesn't cover surveys or error tracking. Session replay is also relatively new, so it's less mature than dedicated replay tools.
 
 The startup program is the headline for eligible teams: companies under 5 years old with ≤$8M raised get the first year free – up to 1B events, 500K replays, and advanced features. The permanent free tier includes 1M events/mo, 10K replays, and 5 saved reports.
 
@@ -536,12 +536,12 @@ Free plan available (500 MAUs). Self-serve for the free tier. Paid plans require
 
 | Tool | Free tier | Pricing model | Self-serve? | Best for | You'll also need... |
 |---|---|---|---|---|---|
-| **PostHog** | 1M events/mo | Events (per product) | ✅ Yes | All-in-one platform | Nothing – it's bundled |
-| **Mixpanel** | 1M events/mo | Events | ✅ Yes | Pure funnel/cohort analysis | Replay, flags, surveys, errors |
+| **PostHog** | 1M events/mo | Events (per product) | Yes | All-in-one platform | Nothing – it's bundled |
+| **Mixpanel** | 1M events/mo | Events | Yes | Pure funnel/cohort analysis | Replay, flags, surveys, errors |
 | **Amplitude** | Self-serve Plus | MTUs | Partial | Retention depth | Replay, flags, surveys, errors |
-| **Heap** | 10K sessions/mo | Sessions | ✅ Yes | Retroactive autocapture | Flags, surveys, errors |
-| **Fullstory** | Contact sales | Contact sales | ❌ No | Replay-first analysis | Flags, surveys, errors |
-| **Pendo** | 500 MAUs | MAUs | ✅ Free tier | Analytics + in-app guides | Replay, flags, errors |
+| **Heap** | 10K sessions/mo | Sessions | Yes | Retroactive autocapture | Flags, surveys, errors |
+| **Fullstory** | Contact sales | Contact sales | No | Replay-first analysis | Flags, surveys, errors |
+| **Pendo** | 500 MAUs | MAUs | Free tier | Analytics + in-app guides | Replay, flags, errors |
 
 ## Which product analytics tool should you choose for your startup?
 
@@ -579,7 +579,7 @@ Some give you the full product at low volume, others gate core features behind p
 | Decision | Best fit | Why |
 |---|---|---|
 | **Stage: Pre-PMF** | PostHog, Mixpanel, Heap | PostHog: one install, autocapture, free tier across 10+ products. Mixpanel: startup program with a free first year. Heap: capture everything, define events later. |
-| **Stage: Post-PMF** | PostHog, Amplitude, Mixpanel | PostHog: connected analytics -> replay -> experiment workflow. Amplitude: deepest retention and cohort math. Mixpanel: polished query builder with experiments built in. |
+| **Stage: Post-PMF** | PostHog, Amplitude, Mixpanel | PostHog: connected analytics → replay → experiment workflow. Amplitude: deepest retention and cohort math. Mixpanel: polished query builder with experiments built in. |
 | **Stage: Scale-up** | PostHog, Amplitude, Mixpanel | PostHog: data warehouse, group analytics, EU hosting, billing limits. Amplitude: type-safe tracking, governance, warehouse-native. Mixpanel: strong warehouse connectors. |
 | **Approach: All-in-one** | PostHog | Only tool that bundles analytics, replay, flags, experiments, surveys, error tracking, and LLM observability with separate free tiers |
 | **Approach: Best-of-breed analytics** | Mixpanel, Amplitude | Mixpanel for funnel/cohort UX. Amplitude for retention depth. Both require separate vendors for surveys, error tracking. |
@@ -598,7 +598,7 @@ Some give you the full product at low volume, others gate core features behind p
 - **Heap** if you don't know what to track yet and want retroactive analysis without a tracking plan
 
 **For post-PMF and scaling teams**
-- **PostHog** if you want connected workflows – funnel drop-off -> replay -> experiment -> deploy – without switching tools
+- **PostHog** if you want connected workflows – funnel drop-off → replay → experiment → deploy – without switching tools
 - **Amplitude** if retention math and cohort comparisons are your primary analytical workflow
 - **Mixpanel** if your team includes non-technical PMs who need a polished, visual query builder
 
@@ -654,7 +654,7 @@ Yes. PostHog has SDKs for iOS, Android, React Native, and Flutter. Mixpanel and 
 <details>
 <summary>What is event-based analytics?</summary>
 
-Instead of tracking pageviews, [event-based analytics](/docs/events) records specific user actions – button clicks, feature usage, form submissions, purchases, API calls – as discrete data points with properties attached. This lets you build funnels across any sequence of actions, segment users by behavior, and answer questions like "what did users who retained do differently in their first session?" 
+Instead of tracking pageviews, [event-based analytics](/docs/data/events) records specific user actions – button clicks, feature usage, form submissions, purchases, API calls – as discrete data points with properties attached. This lets you build funnels across any sequence of actions, segment users by behavior, and answer questions like "what did users who retained do differently in their first session?" 
 
 </details>
 
