@@ -50,7 +50,7 @@ Since PostHog handles the management and evaluation of feature flags, we must se
 npm install posthog-js @posthog/react
 ```
 
-Once installed, import PostHog into `src/main.jsx` and set it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Wrap your app in the React `PostHogProvider` to access PostHog in any component.
+Once installed, import PostHog into `src/main.jsx` and set it up using your project token and host from [your project settings](https://us.posthog.com/settings/project). Wrap your app in the React `PostHogProvider` to access PostHog in any component.
 
 ```jsx
 // src/main.jsx
@@ -61,7 +61,7 @@ import App from './App.jsx'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
 })

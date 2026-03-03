@@ -10,6 +10,7 @@ availability:
 
 Batch exports can be used to export data to a Databricks Delta table.
 
+import PersonsModelNote from '../_snippets/persons-model-note.mdx'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Databricks destination is in beta" type="fyi">
@@ -178,6 +179,8 @@ The schema of the model as created in Databricks is:
 | created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                      |
 
 The Databricks table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
+
+<PersonsModelNote />
 
 ### Sessions model
 

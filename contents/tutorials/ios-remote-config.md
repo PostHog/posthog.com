@@ -32,7 +32,7 @@ Next, we'll add [PostHog’s iOS SDK](/docs/libraries/ios) as a dependency. You 
 
 ![Add package](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_11_at_10_29_512x_c980b2a5de.png)
 
-Now, in `PostHogRemoteConfigApp.swift`, initialize PostHog with your project API key and host (both of which you can get in [your project settings](https://us.posthog.com/settings/project)). 
+Now, in `PostHogRemoteConfigApp.swift`, initialize PostHog with your project token and host (both of which you can get in [your project settings](https://us.posthog.com/settings/project)). 
 
 ```swift
 import SwiftUI
@@ -42,7 +42,7 @@ import PostHog
 struct PostHogRemoteConfigApp: App {
   init() {
     let config = PostHogConfig(
-      apiKey: "<ph_project_api_key>",
+      apiKey: "<ph_project_token>",
       host: "<ph_client_api_host>"
     )
     PostHogSDK.shared.setup(config)
