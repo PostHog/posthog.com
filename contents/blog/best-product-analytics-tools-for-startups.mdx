@@ -22,7 +22,9 @@ A tale as old as time: a founding team ships their MVP, installs [Google Analyti
 
 If you're early stage, that's months of valuable context you just missed – context that could've gotten you to [product market fit](/founders/product-market-fit-game) faster. If you're later in the game, you might've been flying blind for months or years without realizing it.
 
-This guide compares the best product analytics tools for startups, taking into consideration what actually matters at each stage of growth. We cover the core workflows you need to understand user behavior, the tools that do it best, and how to choose the best alternative for your needs.
+[Don't make the same mistakes](/newsletter/first-time-founders).
+
+This guide compares the best product analytics tools for startups, taking into consideration what actually matters at each stage of growth. 
 
 Before getting started, brush up on the basics:
 
@@ -49,7 +51,7 @@ For a deeper dive, check out our [AARRR pirate metrics framework](/product-engin
 <details>
 <summary>What is product-market fit (PMF)?</summary>
 
-Product-market fit means you've built something people actually want – and keep coming back to. It's the point where retention curves flatten instead of declining to zero, users start recommending your product without being asked, and growth feels like it's pulling you forward rather than being pushed.
+Product-market fit means [you've built something people actually want](/founders/making-something-people-want) – and keep coming back to. It's the point where retention curves flatten instead of declining to zero, users start recommending your product without being asked, and [growth feels like it's pulling you forward](/founders/first-1000-users) rather than being pushed.
 
 The problem is that PMF isn't binary – it's a spectrum. Most startups think they have it before they actually do. 
 
@@ -64,15 +66,19 @@ We also have a full guide on [how to measure product-market fit](/founders/measu
 
 **Your situation:** You have an MVP with a few hundred users. You don't know if they're getting value. Retention is a mystery. The product might look completely different in six weeks.
 
-**The metrics that matter**: focus on finding your [activation metrics](/product-engineers/activation-metrics), aka the actions correlated with long-term retention. *Correlated* is key – you're not guessing, you're testing which actions predict whether someone comes back.
+**The metrics that matter**: focus on [building a key metrics dashboard](/founders/early-stage-analytics) and finding your [activation metrics](/product-engineers/activation-metrics), aka the actions correlated with long-term retention. *Correlated* is key – you're not guessing, you're testing which actions predict whether someone comes back.
 
-You should also be looking at time-to-value (signup → aha moment) and [onboarding completion rate](/blog/how-to-find-and-fix-app-onboarding-drop-off) (funnel from signup → first meaningful action).
+You should also be looking at [onboarding completion rate](/blog/how-to-find-and-fix-app-onboarding-drop-off) (funnel from signup -> first meaningful action).
 
 **Pair your analytics tool with:**
 
 - [Session replay](/session-replay) – numbers say 40% drop off at step 3, but replay will show you they couldn't find the "Next" button. Read our roundup of the [best session replay tools for developers and startups](/blog/best-session-replay-tools).
 - [Surveys](/surveys) – run a [PMF survey](/templates) ("How disappointed would you be if you could no longer use this product?"). Add exit intent and onboarding feedback surveys.
 - [Cohort](/docs/data/cohorts) comparisons by acquisition source.
+
+Not sure which tools to use? 
+
+We've compared the best [session replay tools](/blog/best-session-replay-tools), [best open source session replay tools](/blog/best-open-source-session-replay-tools), and [best in-app survey tools](/blog/best-inapp-survey-tools) for developers and startups.
 
 </details>
 
@@ -83,19 +89,21 @@ You should also be looking at time-to-value (signup → aha moment) and [onboard
 
 **The metrics that matter:**
 
-- **Cohort retention curves** – [retention](/docs/product-analytics/retention) by signup week. Is the curve flattening (good) or declining to zero (you don't actually have PMF)?
+- **Cohort retention curves** – [retention](/docs/product-analytics/retention) by signup week. Is the curve flattening (good) or declining to zero ([you don't actually have PMF](/newsletter/validating-product-ideas))?
 - **Engagement depth** – DAU/MAU ratio, session frequency, feature breadth per user
 - **Feature adoption** – what % of activated users tried the new feature? Use [lifecycle analysis](/docs/product-analytics/lifecycle) to see if they retain better
-- **Conversion to paid** – [funnel](/docs/product-analytics/funnels) from trial → paid → retained subscription
+- **Conversion to paid** – [funnel](/docs/product-analytics/funnels) from trial -> paid -> retained subscription
 
 **Pair your analytics tool with:**
 
-- [Feature flags](/feature-flags) – gradual rollouts (1% → 10% → 100%), kill switches, targeting for beta access
+- [Feature flags](/feature-flags) – gradual rollouts (1% -> 10% -> 100%), kill switches, targeting for beta access
 - [A/B testing](/experiments) – test onboarding flows, pricing pages, feature gates against retention or conversion goals. 
 - [Error tracking](/error-tracking) – correlate bugs with churn ("Users who hit the checkout error in v2.3.1 churned at 3x the normal rate").
 - [LLM analytics](/llm-analytics) – if you're shipping AI features, track cost, latency, and output quality per model
 
-Not sure which tools to use? We've compared the best [feature flag tools](/blog/best-feature-flag-tool-software-for-developers), [open source A/B testing tools](/blog/best-ab-testing-tools), [error tracking tools](/blog/best-error-tracking-tools), and [open source LLM observability tools](/blog/best-open-source-llm-observability-tools) for developers and startups.
+Not sure which tools to use? 
+
+We've compared the best [feature flag tools](/blog/best-feature-flag-tool-software-for-developers), [open source A/B testing tools](/blog/best-ab-testing-tools), [error tracking tools](/blog/best-error-tracking-tools), and [open source LLM observability tools](/blog/best-open-source-llm-observability-tools) for developers and startups.
 
 </details>
 
@@ -114,7 +122,7 @@ Not sure which tools to use? We've compared the best [feature flag tools](/blog/
 **Pair your analytics tool with:**
 
 - **[Data warehouse](/data-stack)** – export events for unified BI with revenue and ops data
-- [Group analytics](/docs/product-analytics/group-analytics) – track funnels, retention, and feature adoption at the account level, not just individual users
+- **[Group analytics](/docs/product-analytics/group-analytics)** – track funnels, retention, and feature adoption at the account level, not just individual users
 - **[Logs](/logs)** – debug issues across your backend alongside user behavior and error data
 - **[SQL access](/docs/product-analytics/sql)** – write custom queries when the UI doesn't cover your edge case, build views for your data team
 
@@ -123,7 +131,7 @@ Not sure which tools to use? We've compared the best [feature flag tools](/blog/
 <details>
 <summary>What if I don't have a data team?</summary>
 
-You don't need one to get started. Most product analytics tools are designed so a single engineer or technical founder can set up tracking, build funnels, and run experiments without dedicated data infrastructure.
+You don't need one to get started. A lot of product analytics tools are designed so a single engineer or technical founder can set up tracking, build funnels, and run experiments without dedicated data infrastructure.
 
 Most modern analytics platforms also feature AI-powered tools that let anyone on the team ask questions in plain language instead of writing queries from scratch. 
 
@@ -139,11 +147,13 @@ Now that you know what to measure, here's what to measure it with:
 
 ### What is PostHog and why should startups consider it?
 
-[PostHog](/) is an all-in-one developer platform that bundles [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), [workflows](/workflows), and more. It's open source at its core, with cloud hosting in both the US and EU. PostHog ships fast, so the platform keeps getting better; check the [changelog](/changelog) to see what's new.
+[PostHog](/) is an all-in-one developer platform that bundles [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [LLM observability](/llm-analytics), [workflows](/workflows), and more. It's open source at its core, with cloud hosting in both the US [and EU](/blog/posthog-cloud-eu). 
+
+PostHog ships fast, so the platform keeps getting better; check the [changelog](/changelog) to see what's new.
 
 Every product has its own generous free tier, so you pay nothing until you have real traction. **Over 90% of companies on PostHog pay $0.** [Billing limits](/docs/billing/estimating-usage-costs) per product mean no surprise bills, and you don't need a credit card to get started. Features that other tools gate normally behind enterprise pricing, like [group analytics](/docs/product-analytics/group-analytics) (account-level funnels and retention – great for B2B startups and marketplaces), can be accessed in the free tier.
 
-No sales calls, no need to request a demo (unless you *want* to [talk to a human](/talk-to-a-human)).
+There is no need to jump on a "quick sales call" or to request a demo (unless you *want* to [talk to a human](/talk-to-a-human)).
 
 If you're an early-stage startup (less than 2 years old, under $5M raised), you may also qualify for the [PostHog for Startups program](/startups) – $50,000 in credits for a year, plus partner benefits and merch.
 
@@ -168,6 +178,8 @@ Want to skip the manual setup entirely? You can try out the [PostHog wizard](/do
 (`npx @posthog/wizard@latest`), which detects your framework, installs the right SDK, and configures everything for you.
 
 **SDKs for everything:** JavaScript, Python, Ruby, Go, Node.js, PHP, iOS, Android, React Native, Flutter, Elixir, .NET, and more. Framework-specific guides for Next.js, Django, Angular, WordPress, Webflow.
+
+<WizardCTA />
 
 ### Pricing
 
@@ -534,7 +546,7 @@ Want analytics paired with in-app guides and onboarding flows? **Pendo**
 - **Heap** if you don't know what to track yet and want retroactive analysis without a tracking plan
 
 **For post-PMF and scaling teams**
-- **PostHog** if you want connected workflows – funnel drop-off → replay → experiment → deploy – without switching tools
+- **PostHog** if you want connected workflows – funnel drop-off -> replay -> experiment -> deploy – without switching tools
 - **Amplitude** if retention math and cohort comparisons are your primary analytical workflow
 - **Mixpanel** if your team includes non-technical PMs who need a polished, visual query builder
 
