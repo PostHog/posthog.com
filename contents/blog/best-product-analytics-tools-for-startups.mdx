@@ -15,7 +15,7 @@ tags:
     - Comparisons
 seo:
     metaTitle: 'The best product analytics tools for startups, compared'
-    metaDescription: 'Compare the best product analytics tools for startups. See how PostHog, Mixpanel, Amplitude, and Heap stack up.'
+    metaDescription: 'Compare the best product analytics tools for startups. See how PostHog, Mixpanel, Amplitude, and more stack up.'
 ---
 
 A tale as old as time: a founding team ships their MVP, installs [Google Analytics](/blog/posthog-vs-ga4), watches pageview numbers go up, and feels good about themselves. Three months later they realize they have no idea why users churn, what "activated" means, or which features actually matter, so they start duct-taping together a bunch of different tools to try to figure it out.
@@ -578,16 +578,17 @@ Some give you the full product at low volume, others gate core features behind p
 
 | Decision | Best fit | Why |
 |---|---|---|
-| **Stage: Pre-PMF** | PostHog, Mixpanel, Heap | PostHog: one install, autocapture, free tier across 10+ products. Mixpanel: startup program with a free first year. Heap: capture everything, define events later. |
-| **Stage: Post-PMF** | PostHog, Amplitude, Mixpanel | PostHog: connected analytics → replay → experiment workflow. Amplitude: deepest retention and cohort math. Mixpanel: polished query builder with experiments built in. |
-| **Stage: Scale-up** | PostHog, Amplitude, Mixpanel | PostHog: data warehouse, group analytics, EU hosting, billing limits. Amplitude: type-safe tracking, governance, warehouse-native. Mixpanel: strong warehouse connectors. |
-| **Approach: All-in-one** | PostHog | Only tool that bundles analytics, replay, flags, experiments, surveys, error tracking, and LLM observability with separate free tiers |
-| **Approach: Best-of-breed analytics** | Mixpanel, Amplitude | Mixpanel for funnel/cohort UX. Amplitude for retention depth. Both require separate vendors for surveys, error tracking. |
-| **Pricing: Event-based** | PostHog, Mixpanel | PostHog: $0.00005/event after 1M free. Mixpanel: $0.28/1K events after 1M free. |
-| **Pricing: MTU-based** | Amplitude | Best if your product has high events-per-user – one user generating 500 events costs the same as one generating 5 |
-| **Pricing: Session-based** | Heap | Best for products with short, infrequent sessions |
-| **Pricing: MAU-based** | Pendo | Most predictable if user count is stable and you also need in-app guides |
-| **Free tier: Most generous** | PostHog | 1M events, 5K replays, 1M flag requests, 1,500 surveys, 100K errors – no credit card, no feature restrictions |
+| **Stage: Pre-PMF** | PostHog, Mixpanel, Heap | One install with free tiers (PostHog), free first year via startup program (Mixpanel), or capture everything and define events later (Heap) |
+| **Stage: Post-PMF** | PostHog, Amplitude, Mixpanel | Connected analytics → replay → experiment workflow (PostHog), deepest retention math (Amplitude), or polished query builder (Mixpanel) |
+| **Stage: Scale-up** | PostHog, Amplitude, Mixpanel | Warehouse + group analytics + EU hosting (PostHog), type-safe tracking + governance (Amplitude), or strong warehouse connectors (Mixpanel) |
+| **Approach: All-in-one** | PostHog | Only tool bundling analytics, replay, flags, experiments, surveys, error tracking, LLM observability, and more |
+| **Approach: Replay-first** | Fullstory | Start with sessions, quantify later – AI summaries and frustration detection |
+| **Approach: Analytics + guides** | Pendo | Analytics and in-app onboarding flows in one tool, no engineering required |
+| **Pricing: Event-based** | PostHog, Mixpanel | $0.00005/event after 1M free (PostHog) or $0.28/1K after 1M free (Mixpanel) |
+| **Pricing: MTU-based** | Amplitude | One user generating 500 events costs the same as one generating 5 |
+| **Pricing: Session-based** | Heap | Best for short, infrequent sessions |
+| **Pricing: MAU-based** | Pendo | Most predictable if user count is stable |
+| **Free tier: Most generous** | PostHog | 1M events, 5K replays, 1M flag requests, 1,500 surveys, 100K errors – no credit card |
 | **Free tier: Best startup program** | Mixpanel | First year free, up to 1B events and 500K replays (if eligible) |
 
 ### Recommendations by team type
