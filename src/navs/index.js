@@ -1452,6 +1452,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
                     },
                     {
+                        name: 'Tracking cross sells',
+                        url: '/handbook/growth/cross-selling/tracking-cross-sells',
+                    },
+                    {
                         name: 'Cross sell motions',
                         url: '/handbook/growth/cross-selling/cross-sell-motions',
                     },
@@ -2763,6 +2767,16 @@ export const docsMenu = {
                         {
                             name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/sdk-doctor',
+                                },
+                                {
+                                    name: 'Keeping SDKs current',
+                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                },
+                            ],
                         },
                         {
                             name: 'Organizations',
