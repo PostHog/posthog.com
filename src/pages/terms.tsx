@@ -296,7 +296,6 @@ function Terms() {
                 <div className="text-center mb-4">
                     <button
                         onClick={() => {
-                            console.log('button clicked')
                             window.print()
                         }}
                         className="bg-primary border-solid text-primary-dark px-4 py-2 rounded text-sm font-semibold hover:opacity-80 shadow-lg"
