@@ -397,6 +397,19 @@ In order to ensure a smooth launch [the owner](/handbook/engineering/development
 
 It's _never_ too early to give Marketing a heads-up about something by tagging them in an issue or via the Marketing Slack channel.
 
+### Notifying customers about smaller features
+
+For smaller features — especially ones that specific customers asked for — you should email those customers directly to let them know it shipped.
+
+Use Gmail's built-in mail merge for this. Mail merge sends each recipient an individual email, so you avoid accidentally exposing customer email addresses to each other via CC mistakes.
+
+**How to send a mail merge in Gmail:**
+
+1. Create a Google Sheet with columns for each merge field you need (e.g. `first_name`, `email`). Add a row for each recipient.
+2. In Gmail, click **Compose** and write your email. Use `@` tags to insert merge fields from your sheet (e.g. `@first_name`).
+3. Click the **Mail merge** toggle at the top right of the compose window and select your Google Sheet.
+4. Hit **Send** — Gmail handles the rest and sends individual emails to each recipient.
+
 ### Self-hosted and hobby versions
 
 We have [sunset support for our kubernetes and helm chart managed self-hosted offering](/blog/sunsetting-helm-support-posthog). This means we no longer offer support for fixing to specific versions of PostHog. A [docker image is pushed for each commit to master](https://hub.docker.com/r/posthog/posthog). Each of those versions is immediately deployed to PostHog Cloud.
