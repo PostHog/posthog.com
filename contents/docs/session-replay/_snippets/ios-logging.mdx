@@ -4,7 +4,8 @@ You can enable this feature from your client-side by setting `captureLogs = true
 ```ios_swift
 let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
 config.sessionReplay = true
-config.sessionReplayConfig.captureLogs = true // TIP: Needs to be configured in code. Project settings won't have an effect.
+// Remote configuration via project settings requires SDK version 3.41.1 or higher.
+config.sessionReplayConfig.captureLogs = true
 
 PostHogSDK.shared.setup(config)
 ```

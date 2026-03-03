@@ -1,5 +1,5 @@
 ---
-title: Product Marketing
+title: Product announcements
 sidebar: Handbook
 showTitle: true
 ---
