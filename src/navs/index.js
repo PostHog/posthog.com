@@ -626,6 +626,10 @@ export const handbookSidebar = [
                 name: 'All hands topics',
                 url: '/handbook/exec/all-hands-topics',
             },
+            {
+                name: 'Responsibilities',
+                url: '/handbook/exec/responsibilities',
+            },
         ],
     },
     {
