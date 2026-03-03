@@ -106,11 +106,13 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 </MultiLanguage>
 
 
-## Skipping last_seen_at updates
+## `last_seen_at` field
 
-By default, `last_seen_at` is updated whenever a person sends an event. You can prevent this by setting the `$update_person_last_seen_at` event property to `false`.
+PostHog automatically updates the `last_seen_at` field for a person when an event from them is captured. This gets updated once per hour, and the timestamp is always rounded down to the nearest hour.
 
-This is useful for backend enrichment jobs or server-side events that update [person properties](/docs/product-analytics/person-properties) but don't represent actual user activity.
+You can prevent `last_seen_at` updates by setting the `$update_person_last_seen_at` *event* property to `false`.
+
+This is useful for backend enrichment jobs or server-side events that update [person properties](/docs/product-analytics/person-properties) but don't represent real user activity.
 
 <MultiLanguage selector="tabs">
 
@@ -153,7 +155,7 @@ posthog.capture(
 
 When `$update_person_last_seen_at` is `false`, the event is processed normally but the person's `last_seen_at` timestamp remains unchanged.
 
-> **Note:** This only applies when updating existing persons – `last_seen_at` is always set when a person is first created.
+> **Note:** This only applies when updating existing persons - `last_seen_at` is always set when a person is first created.
 
 ## Limitations
 
