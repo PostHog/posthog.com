@@ -186,6 +186,25 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `name`       | Name of the issue                                 |
 | `description`| Description of the issue                          |
 
+### `system.hog_flows`
+
+The `system.hog_flows` table contains workflow definitions from your project.
+
+| Column          | Description                                    |
+|-----------------|------------------------------------------------|
+| `id`            | Unique identifier for the workflow             |
+| `team_id`       | Team ID the workflow belongs to                |
+| `name`          | Name of the workflow                           |
+| `description`   | Description of the workflow                    |
+| `status`        | Current status of the workflow                 |
+| `version`       | Version number of the workflow                 |
+| `exit_condition`| Exit condition for the workflow                |
+| `trigger`       | JSON containing trigger configuration          |
+| `edges`         | JSON containing workflow edges                 |
+| `actions`       | JSON containing workflow actions               |
+| `created_at`    | When the workflow was created                  |
+| `updated_at`    | When the workflow was last updated             |
+
 ### `system.notebooks`
 
 The `system.notebooks` table contains notebook metadata from your project.
