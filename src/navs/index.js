@@ -676,11 +676,11 @@ export const handbookSidebar = [
             },
             {
                 name: 'Video',
-                url: '/handbook/growth/marketing/video',
+                url: '/handbook/marketing/video',
                 children: [
                     {
                         name: 'Overview',
-                        url: '/handbook/growth/marketing/video',
+                        url: '/handbook/marketing/video',
                     },
                     {
                         name: 'YouTube',
@@ -1075,6 +1075,10 @@ export const handbookSidebar = [
                 name: 'Per-product activation',
                 url: '/handbook/growth/growth-engineering/per-product-activation',
             },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/marketing/templates',
+            },
         ],
     },
     {
@@ -1083,44 +1087,50 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/marketing',
+                url: '/handbook/marketing',
             },
             {
-                name: 'Product marketing',
-                url: '/handbook/marketing/product-announcements',
+                name: 'Who can help me?',
+                url: '/handbook/marketing/ownership',
             },
             {
                 name: 'Paid ads',
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'Product positioning',
-                url: '/handbook/marketing/positioning',
-            },
-            {
-                name: 'Incident comms',
-                url: '/handbook/growth/marketing/incident-comms',
-            },
-            {
-                name: 'Events',
+                name: 'IRL Events',
                 url: '/handbook/marketing/events',
             },
             {
-                name: 'Customer case studies',
-                url: '/handbook/marketing/customer-case-studies',
-            },
-            {
-                name: 'Co-marketing',
-                url: '/handbook/marketing/co-marketing',
-            },
-            {
                 name: 'Influencers',
-                url: '/handbook/growth/marketing/influencers',
+                url: '/handbook/marketing/influencers',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/marketing/influencers',
+                    },
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/marketing/open-source-sponsorship',
+                    },
+                ],
             },
             {
-                name: 'Email & comms',
-                url: '',
+                name: 'Product marketing',
+                url: '/handbook/marketing/product-announcements',
                 children: [
+                    {
+                        name: 'Product announcements',
+                        url: '/handbook/marketing/product-announcements',
+                    },
+                    {
+                        name: 'Product positioning',
+                        url: '/handbook/marketing/positioning',
+                    },
+                    {
+                        name: 'Incident comms',
+                        url: '/handbook/marketing/incident-comms',
+                    },
                     {
                         name: 'Email marketing',
                         url: '/handbook/brand/email-comms',
@@ -1129,12 +1139,6 @@ export const handbookSidebar = [
                         name: 'In-app messaging',
                         url: '/handbook/brand/in-app',
                     },
-                ],
-            },
-            {
-                name: 'Partnerships & PR',
-                url: '',
-                children: [
                     {
                         name: 'Partnerships',
                         url: '/handbook/brand/partners',
@@ -1153,29 +1157,15 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Campaigns & coupons',
-                        url: '/handbook/growth/marketing/campaigns-and-coupons',
-                    },
-                ],
-            },
-            {
-                name: 'Who can help me?',
-                url: '/handbook/growth/marketing/ownership',
-            },
-            {
-                name: 'Other',
-                url: '/handbook/growth/marketing/open-source-sponsorship',
-                children: [
-                    {
-                        name: 'Sponsorships',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                        url: '/handbook/marketing/campaigns-and-coupons',
                     },
                     {
-                        name: 'ICP scoring',
-                        url: '/handbook/growth/marketing/icp',
+                        name: 'Customer case studies',
+                        url: '/handbook/marketing/customer-case-studies',
                     },
                     {
-                        name: 'Dashboard templates',
-                        url: '/handbook/growth/marketing/templates',
+                        name: 'Co-marketing',
+                        url: '/handbook/marketing/co-marketing',
                     },
                 ],
             },
