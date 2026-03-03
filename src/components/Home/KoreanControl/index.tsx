@@ -464,7 +464,7 @@ const ProductCount = () => {
 }
 
 const AppCount = () => {
-    return APP_COUNT
+    return <>{APP_COUNT}</>
 }
 
 const CompanyStageTabs = () => {
@@ -565,7 +565,7 @@ const Button = ({ url, children }: { url: string; children: React.ReactNode }) =
     )
 }
 
-const Image = ({ src, className }: { src: string; className?: string }) => {
+const Image = ({ src, className }: { src: `https://res.cloudinary.com/${string}`; className?: string }) => {
     return <CloudinaryImage src={src} className={className} />
 }
 
@@ -919,7 +919,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             // Korean: "support folks"
             <SmallTeam slug="support" noMiniCrest>
-                서포트 팀원들
+                <span>서포트 팀원들</span>
             </SmallTeam>
         ),
     },
@@ -959,7 +959,7 @@ export default function KoreanHome({
     if (BodyComponent) {
         const components = {
             ...jsxComponentDescriptors.reduce((acc, d) => {
-                acc[d.name] = d.Editor
+                if (d.name) acc[d.name] = d.Editor
                 return acc
             }, {} as Record<string, React.ComponentType<unknown>>),
             Link,
@@ -984,6 +984,7 @@ export default function KoreanHome({
                         label: '무료로 시작하기',
                     }}
                 >
+                    {/* @ts-expect-error MDXProvider return type incompatible with React 18 */}
                     <MDXProvider components={components as import('@mdx-js/react').MDXProviderComponentsProp}>
                         <BodyComponent />
                     </MDXProvider>
