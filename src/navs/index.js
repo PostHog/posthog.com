@@ -1075,6 +1075,10 @@ export const handbookSidebar = [
                 name: 'Per-product activation',
                 url: '/handbook/growth/growth-engineering/per-product-activation',
             },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/marketing/templates',
+            },
         ],
     },
     {
@@ -1084,6 +1088,32 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/marketing',
+            },
+            {
+                name: 'Who can help me?',
+                url: '/handbook/marketing/ownership',
+            },
+            {
+                name: 'Paid ads',
+                url: '/handbook/marketing/paid',
+            },
+            {
+                name: 'IRL Events',
+                url: '/handbook/marketing/events',
+            },
+            {
+                name: 'Influencers',
+                url: '/handbook/marketing/influencers',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/marketing/influencers',
+                    },
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/marketing/open-source-sponsorship',
+                    },
+                ],
             },
             {
                 name: 'Product marketing',
@@ -1136,40 +1166,6 @@ export const handbookSidebar = [
                     {
                         name: 'Co-marketing',
                         url: '/handbook/marketing/co-marketing',
-                    },
-                ],
-            },
-            {
-                name: 'Paid ads',
-                url: '/handbook/marketing/paid',
-            },
-            {
-                name: 'Events',
-                url: '/handbook/marketing/events',
-            },
-            {
-                name: 'Influencers',
-                url: '/handbook/marketing/influencers',
-            },
-            {
-                name: 'Who can help me?',
-                url: '/handbook/marketing/ownership',
-            },
-            {
-                name: 'Other',
-                url: '/handbook/marketing/open-source-sponsorship',
-                children: [
-                    {
-                        name: 'Sponsorships',
-                        url: '/handbook/marketing/open-source-sponsorship',
-                    },
-                    {
-                        name: 'ICP scoring',
-                        url: '/handbook/marketing/icp',
-                    },
-                    {
-                        name: 'Dashboard templates',
-                        url: '/handbook/marketing/templates',
                     },
                 ],
             },

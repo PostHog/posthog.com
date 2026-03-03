@@ -1308,7 +1308,12 @@
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
         },
-        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/marketing/icp" },
+        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/sales/lead-scoring" },
+        {
+            "source": "/handbook/marketing/icp",
+            "destination": "/handbook/growth/sales/lead-scoring",
+            "statusCode": 301
+        },
         { "source": "/teams/pipeline", "destination": "/teams/cdp" },
         { "source": "/teams/feature-success", "destination": "/teams/feature-flags" },
         { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
