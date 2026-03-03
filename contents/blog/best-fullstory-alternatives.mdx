@@ -1,6 +1,6 @@
 ---
 title: 'The best FullStory alternatives & competitors, compared'
-date: 2026-02-25
+date: 2026-03-03
 author:
     - ian-vanagas
     - natalia-amorim
@@ -193,7 +193,7 @@ The feature sets of Smartlook and FullStory are nearly identical. The difference
 - Both offer session replay and heatmaps for understanding user behavior.
 - Both include product analytics with funnels, user paths, and conversion tracking.
 - Both support event autocapture to reduce manual instrumentation.
-- Neither offers feature flags, A/B testing, or surveys natively.
+- Neither offers feature flags or A/B testing natively.
 - Both are designed to be accessible to non-technical teams.
 - Both are closed-source, cloud-only platforms.
 
@@ -292,7 +292,7 @@ According to G2 reviews, Amplitude users appreciate three key aspects:
 
 [Heap](/blog/posthog-vs-heap) describes itself as a digital insights platform. This means Heap offers both product analytics and session replay, and supports marketing use cases with multi-touch attribution.
 
-[Contentsquare](/blog/best-contentsquare-alternatives), a marketing and ecommerce analytics firm, acquired Heap in September 2023 and announced plans to integrate the two products.
+[Contentsquare](/blog/best-contentsquare-alternatives), a marketing and ecommerce analytics firm, acquired Heap in September 2023 and has integrated the two products.
 
 ### Key features
 
@@ -352,7 +352,7 @@ FullStory leans more toward session replay and frustration signals, while Heap i
 - Both offer session replay and heatmaps for understanding user behavior.
 - Both include product analytics with funnels, user paths, and conversion tracking.
 - Both are designed to be accessible to non-technical teams.
-- Neither offers feature flags, A/B testing, or surveys natively.
+- Neither offers feature flags or A/B testing natively.
 - Both are closed-source, cloud-only platforms.
 
 </details>
@@ -430,7 +430,7 @@ Glassbox and FullStory share many of the same features, but Glassbox is not self
 
 - Glassbox includes performance analytics that track app speed and its impact on conversion; FullStory doesn't offer native performance monitoring.
 - Glassbox has proprietary struggle detection and "struggle scores" for identifying user friction; FullStory uses frustration signals like rage clicks and dead clicks.
-- Glassbox offers built-in user feedback collection; FullStory doesn't have native feedback tools.
+- Both now offer user feedback collection – Glassbox has had it longer, while FullStory launched Guides & Surveys in February 2026.
 - FullStory offers a free plan (FullstoryFree) and a 14-day trial; Glassbox is sales-driven with no public pricing or free plan.
 - Glassbox has a stronger focus on native mobile app analytics with dedicated mobile session replay; FullStory supports mobile but requires an add-on for mobile apps.
 
@@ -442,7 +442,7 @@ Glassbox and FullStory share many of the same features, but Glassbox is not self
 - Both offer session replay and heatmaps for understanding user behavior.
 - Both include product analytics with funnels, user paths, and conversion tracking.
 - Both support event autocapture without manual instrumentation.
-- Neither offers feature flags, A/B testing, or experiments natively.
+- Neither offers feature flags or A/B testing natively.
 - Both are closed-source, cloud-only platforms.
 
 </details>
@@ -603,9 +603,8 @@ Although Pendo shares similarities with FullStory, it focuses more on qualitativ
 <details>
 <summary>Main differences between Pendo and FullStory</summary>
 
-- Pendo includes in-app guides for user onboarding, tooltips, and feature announcements; FullStory doesn't offer any in-app messaging.
+- FullStory now offers Guides & Surveys for in-app messaging and targeted surveys, though Pendo's in-app guides are more mature with tooltips, onboarding flows, and feature announcements.
 - Pendo has built-in product validation and roadmap tools for aligning teams on priorities; FullStory focuses purely on analytics and replay.
-- Pendo includes native user feedback collection and NPS surveys; FullStory doesn't offer feedback or survey tools.
 - FullStory's session replay is more mature with frustration signal detection; Pendo's replay is functional but secondary to its product experience tools.
 
 </details>
@@ -726,7 +725,7 @@ FullStory offers a free plan called **FullstoryFree** that includes 30,000 sessi
 <details>
 <summary>Can I migrate from FullStory to PostHog?</summary>
 
-Yes. PostHog supports importing historical event data. You can install PostHog's snippet alongside FullStory to run both in parallel, then transition fully once you're confident in the setup. See [PostHog's docs](/docs) for integration guides and SDKs for every major platform.
+Yes – though there are some caveats. You can export historical event data from FullStory and import it into PostHog using the [historical migrations guide](/docs/migrate). Session replay recordings can't be migrated since they're stored in FullStory's proprietary format. The simplest approach is to install PostHog's snippet alongside FullStory, run both in parallel, and transition fully once you're confident in the setup. 
 
 </details>
 
@@ -740,7 +739,9 @@ Yes. **PostHog** offers EU-hosted cloud with data stored exclusively in the EU. 
 <details>
 <summary>Which alternative is best for mobile app analytics?</summary>
 
-**Glassbox** and **Smartlook** both specialize in mobile app analytics with native mobile session replay, mobile heatmaps, and crash reporting. **PostHog** also supports mobile analytics with SDKs for iOS, Android, React Native, and Flutter, plus session replay for mobile apps. FullStory's mobile app analytics require a paid add-on.
+**Glassbox** and **Smartlook** both specialize in mobile app analytics with native mobile session replay, mobile heatmaps, and crash reporting. **PostHog** also supports mobile analytics with SDKs for iOS, Android, React Native, and Flutter – and is one of the few tools that includes **mobile session replay for free** (2,500 recordings/month). 
+
+FullStory's mobile app analytics require a paid add-on, and most other tools either charge extra for mobile replay or don't offer it at all.
 
 </details>
 

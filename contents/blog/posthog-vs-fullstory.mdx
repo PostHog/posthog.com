@@ -1,5 +1,5 @@
 ---
-date: 2026-02-26
+date: 2026-03-03
 title: 'In-depth: PostHog vs FullStory'
 rootPage: /blog
 sidebar: Blog
@@ -21,14 +21,14 @@ seo:
 
 PostHog and FullStory are both popular tools for understanding user behavior, but how are they different? Here's the short answer.
 
--   **PostHog** is an all-in-one [developer platform](/products) built to help engineers build successful products. It offers a wide range of features to help teams build better products, including [analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [a CDP](/cdp), [error tracking](/error-tracking), [experiments](/experiments), and more.
+-   **PostHog** is an all-in-one [developer platform] (/products) built to help engineers build successful products. It offers a wide range of features to help teams build better products, including [analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [experiments](/experiments), and more.
 
 -   **FullStory** is a behavioral data and analytics platform focused on session replay, product analytics, and frustration signal detection. It has expanded in recent years with StoryAI (AI-powered insights), Guides and Surveys, and Anywhere (data warehouse sync and real-time activation).
 
 In this comparison, we'll explore, compare and contrast PostHog and FullStory in detail, so you can decide which tool is right for you. We'll look at areas such as...
 
 -   [Core features and product focus](#core-feature-comparison)
--   [Product analytics](#product-analytics), [session replay](#session-replays), and [heatmapping](#heatmaps-clickmaps-and-scrollmaps) features
+-   [Product analytics](#product-analytics), [Session replay](#session-replays), and [Heatmapping](#heatmaps-clickmaps-and-scrollmaps) features
 -   [Integrations with other software](#apps-integrations-and-plugins)
 -   [Event tracking and data management](#event-tracking)
 -   [Privacy, security and compliance](#security-and-compliance)
@@ -40,7 +40,7 @@ In this comparison, we'll explore, compare and contrast PostHog and FullStory in
 
 FullStory has expanded beyond session replay into analytics, AI insights, and in-app messaging, but it still doesn't include feature flags, A/B testing, or error tracking.
 
-In contrast, PostHog is a comprehensive, all-in-one platform that has robust [analytics](/docs/product-analytics), [A/B testing](/docs/experiments), [session recording](/docs/session-replay), [surveys](/surveys), [error tracking](/docs/error-tracking), a [CDP](/cdp), [data warehouse](/data-stack), [workflows](/workflows) and more. 
+In contrast, PostHog is a comprehensive, all-in-one platform that has robust [analytics](/docs/product-analytics), [feature flagging](/docs/feature-flags), [A/B testing](/docs/experiments), [session recording](/docs/session-replay), [error tracking](/docs/error-tracking), [workflows](/workflows) and more. 
 
 It easily replaces an entire stack of traditional tools, such as [LaunchDarkly](/blog/posthog-vs-launchdarkly), [Amplitude](/blog/posthog-vs-amplitude), and [FullStory](/blog/best-fullstory-alternatives).
 
@@ -48,7 +48,7 @@ It easily replaces an entire stack of traditional tools, such as [LaunchDarkly](
 
 PostHog is designed from the ground up to meet the needs of developers, and product-focused engineers. Session replay includes advanced tools for debugging errors and performance issues, while feature flags make it easy to test, and roll out, new features at scale. You get [SQL access](/docs/product-analytics/sql), a fully documented [API](/docs/api), and [SDKs](/docs/libraries) for every major platform.
 
-### 3. Transparent pricing, generous free tiers
+### 3. Transparent pricing, generous free tiers 
 
 Our [pricing](/pricing) is 100% transparent. There are no hidden fees or surprise overages – what you see is exactly what you'll pay.
 
@@ -92,13 +92,13 @@ This comparison will compare all available features, regardless of pricing tier.
 
 - **Product analytics:** Both FullStory and PostHog offer product analytics, but _what_ they offer is drastically different. We explore this comparison in greater detail below.
 
--  **Data warehouse:** PostHog includes a built-in [data warehouse](/data-warehouse) for importing and querying external data as well as [batch exports](/docs/cdp/batch-exports) for your warehouse. FullStory offers Anywhere: Warehouse for exporting behavioral data to BigQuery, Snowflake, Redshift, and Databricks, and Anywhere: Activation for real-time behavioral triggers – but these are paid add-ons.
+-  **Data warehouse:** PostHog includes a built-in [data warehouse](/data-warehouse) for importing and querying external data. FullStory offers Anywhere: Warehouse for exporting behavioral data to BigQuery, Snowflake, Redshift, and Databricks, and Anywhere: Activation for real-time behavioral triggers – but these are paid add-ons.
 
 > **Further reading:** [How FullStory compares to other PostHog alternatives](/blog/posthog-alternatives)
 
 ### Product Analytics
 
-FullStory is aimed at UX designers, general product managers, and customer success teams, while PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [SQL for detailed analysis](/docs/sql).
+FullStory is aimed at UX designers, general product managers, and customer success teams, while PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [its own SQL dialect for detailed analysis](/docs/sql).
 
 <p>
 <ProductComparisonTable
@@ -126,11 +126,15 @@ You can also do this in reverse by filtering for session replays where particula
 
 FullStory's StoryAI (powered by Google Gemini) can summarize sessions, answer natural language questions, and proactively surface friction points – but it's a premium add-on and doesn't connect to experiments or feature flags since FullStory lacks those features.
 
-> **PostHog ships weirdly fast.** We never stop shipping. Visit [the weekly changelog](/changelog) to keep up to date, or take a look at what we’re planning in [our public roadmap](/roadmap)!
+> **PostHog ships weirdly fast.** We never stop shipping. Visit [the weekly changelog](/changelog/2023) to keep up to date, or take a look at what we’re planning in [our public roadmap](/roadmap)!
 
 ### Session replay
 
 FullStory is well-known for session replay, while PostHog is an all-in-one platform. The gap between them on replay has narrowed significantly, with PostHog offering developer-focused debugging tools that FullStory doesn't.
+
+PostHog's [session replay](/docs/session-replay) includes console logs, network request monitoring, a DOM explorer, performance metrics, and [AI-powered session summaries](/docs/session-replay/session-summaries) – making it more powerful for debugging. Data retention [varies depending on the plan you choose](/docs/session-replay/recording-retention).
+
+FullStory's strength is its frustration signal detection (rage clicks, dead clicks, error clicks) and StoryAI-powered session summaries. It offers a 30,000 sessions per month free tier with 12 month retention, but limited features.
 
 <p>
 <ProductComparisonTable
@@ -151,18 +155,10 @@ FullStory is well-known for session replay, while PostHog is an all-in-one platf
         'session_replay.analysis.features.network_monitor',
         'session_replay.export.features.export_to_json',
         'session_replay.export.features.retention_policy',
-        { label: 'Free tier', values: ['5,000 sessions/mo', '30,000 sessions/mo**'] },
+        { label: 'Free tier', values: ['5,000 sessions/mo', '30,000 sessions/mo'] },
     ]}
 />
 </p>
-
-<div>
-    <sup>*</sup> Data retention increases on more expensive plans.
-    <br />
-    <sup>**</sup> FullStory offers a 30,000 sessions per month free tier with 12 month retention, but limited features.
-</div>
-
-PostHog's [session replay](/docs/session-replay) includes console logs, network request monitoring, a DOM explorer, and performance metrics – making it more powerful for debugging. FullStory's strength is its frustration signal detection (rage clicks, dead clicks, error clicks) and StoryAI-powered session summaries.
 
 ### Heatmaps, clickmaps and scrollmaps
 
@@ -177,7 +173,7 @@ Different types of heatmaps enable you to see where users are focusing their att
 
 ### Integrations and data pipelines
 
-PostHog includes a built-in [CDP](/cdp) with sources, transformations, and destinations, as well as a [built-in data warehouse](/data-stack). FullStory offers the "Anywhere" paid add-on which includes both "Warehouse" (hourly data sync to BigQuery, Snowflake, Redshift, S3, GCS, Azure Blob, and Databricks) and "Activation" (real-time behavioral triggers).
+PostHog includes a built-in [CDP](/cdp) with sources, transformations, and destinations, as well as a [built-in data warehouse](/data-stack). FullStory offers Anywhere: Warehouse (hourly data sync to BigQuery, Snowflake, Redshift, S3, GCS, Azure Blob, and Databricks) and Anywhere: Activation (real-time behavioral triggers) – both are paid add-ons.
 
 Below are some of the most popular integrations for FullStory and PostHog:
 
@@ -246,12 +242,12 @@ Both PostHog and FullStory support a broad range of tracking options, manual eve
 ## When to choose PostHog vs FullStory
 
 - Want to understand user behavior, debug issues, run experiments, and ship features – all without switching tools? Go with **PostHog**.
-- Need session replay with frustration detection, in-app guides for non-technical teams, or real-time personalization? **FullStory** is built for that.
+- Need session replay with frustration detection, AI-powered behavioral insights, and in-app guides for non-technical teams? **FullStory** is built for that.
 
 ### Recommendations by team type
 
 **For engineering-led product teams**
-- **PostHog** – SQL access, public [APIs](/docs/api), [SDKs](/docs/libraries) for every major platform, error tracking, LLM analytics, and tight integration between analytics, feature flags, and experiments. Built by engineers, for engineers.
+- **PostHog** – SQL access, [MCP server](/docs/model-context-protocol) for AI coding tools, [SDKs](/docs/libraries) for every major platform, error tracking, LLM analytics, and tight integration between analytics, feature flags, and experiments. Built by engineers, for engineers.
 
 **For UX and customer success teams**
 - **FullStory** – Frustration signal detection, StoryAI-powered session summaries, and in-app Guides and Surveys make it accessible to non-technical teams who want to diagnose user problems and improve digital experiences.
@@ -327,7 +323,7 @@ Yes. FullStory launched **Guides and Surveys** in February 2026, adding in-app t
 
 **StoryAI** is FullStory's suite of AI-powered features, powered by Google Gemini. It includes session summaries, natural language queries (Ask StoryAI), proactive opportunity detection, and AI-suggested elements. Session summaries are included on Advanced and Enterprise plans; Opportunities and Ask StoryAI require StoryAI Premium.
 
-PostHog also offers AI features including session replay summaries, an [AI insight builder](/docs/product-analytics/sql), and [PostHog AI](/ai) for natural language queries across your data.
+PostHog also offers AI features including [session replay summaries](/docs/session-replay/session-summaries), an [MCP server](/docs/model-context-protocol) for AI coding tools like Cursor and Claude Code, and [PostHog AI](/ai) for generating insights and querying your data in natural language.
 
 </details>
 
@@ -348,7 +344,7 @@ Both are strong but serve different needs. **PostHog's** replay includes console
 <details>
 <summary>Can I migrate from FullStory to PostHog?</summary>
 
-Yes. You can install PostHog's snippet alongside FullStory to run both in parallel, then transition fully once you're confident in the setup. PostHog supports importing historical event data. See [PostHog's docs](/docs) for integration guides and SDKs for every major platform.
+Yes – though there are some caveats. You can export historical event data from FullStory and import it into PostHog using the [historical migrations guide](/docs/migrate). Session replay recordings can't be migrated since they're stored in FullStory's proprietary format. The simplest approach is to install PostHog's snippet alongside FullStory, run both in parallel, and transition fully once you're confident in the setup. 
 
 </details>
 
