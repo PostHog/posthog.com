@@ -335,12 +335,13 @@ const MenuBar: React.FC<MenuBarProps> = ({
     }, [websiteMode])
 
     React.useEffect(() => {
-        if (!rootRef.current) {
+        if (websiteMode || !rootRef.current) {
+            setPortalContainer(null)
             return
         }
         const container = rootRef.current.closest('[data-menu-container]')
         setPortalContainer(container instanceof HTMLElement ? container : null)
-    }, [])
+    }, [websiteMode])
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
