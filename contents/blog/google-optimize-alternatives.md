@@ -51,7 +51,7 @@ PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 mill
 
 - **Y Combinator:** Startup accelerator – [read how they increased engagement by 40%](/customers/ycombinator)
 - **Pry:** Financial planning software – [read how they boosted registrations by 30%](/customers/pry)
-- **Vendasta:** SaaS marketplace – [read how they cut onboarding drop-off by 50%](/customers/vendasta)
+- **Lovable:** AI web app builder – [read their customer story](/customers/lovable)
 - **Joybird:** Furniture e-commerce store
 
 ## 2. Unbounce
