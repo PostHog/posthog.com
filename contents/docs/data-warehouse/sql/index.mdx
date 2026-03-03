@@ -172,7 +172,7 @@ FROM events
 WHERE properties.$current_url LIKE '%docs%'
 ```
 
-### AS
+### AS and colon alias syntax
 
 Use `AS` to alias columns or tables with different names. This makes the query and results more readable.
 
@@ -184,6 +184,19 @@ FROM events
 GROUP BY current_url
 ORDER BY current_url_count DESC
 ```
+
+PostHog also supports DuckDB's colon alias syntax as a shorthand. Place the alias before the expression, separated by a colon (`alias: expression`):
+
+```sql
+SELECT 
+   current_url: properties.$current_url,
+   current_url_count: count()
+FROM events
+GROUP BY current_url
+ORDER BY current_url_count DESC
+```
+
+> **Note:** Reserved keywords like `SELECT`, `FROM`, or `WHERE` can't be used as aliases with the colon syntax.
 
 ### LIMIT
 
