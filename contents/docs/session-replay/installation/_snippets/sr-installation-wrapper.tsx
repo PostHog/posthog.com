@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     // Web SDK installations
-    JSWebInstallation,
+    WebInstallation,
     NextJSInstallation,
     HTMLSnippetInstallation,
     ReactInstallation,
@@ -33,7 +33,7 @@ const SNIPPETS = {
 // Web SDK wrappers
 export const SRJSWebInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
-        <JSWebInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
