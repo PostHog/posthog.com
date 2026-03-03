@@ -66,6 +66,8 @@ In the **Served value** section, you can configure the type of feature flag you 
 
 You can select the type of feature flag by toggling between the selectors. Then, configure the payload and release conditions for the flag if applicable.
 
+> **Tip:** You can create a draft [experiment](/docs/experiments) directly from a multivariate feature flag. Open your flag, go to the **Experiments** tab, and fill in the experiment name. The flag must have multiple variants including a `control` variant. You'll configure metrics after creating the draft.
+
 ### Payloads
 
 A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).
