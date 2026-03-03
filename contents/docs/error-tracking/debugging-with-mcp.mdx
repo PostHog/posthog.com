@@ -12,6 +12,7 @@ For example, with MCP, your agents can:
 - **Inspect error details**: Accessing full stack traces, error messages, and relevant metadata.
 - **Explain or reproduce errors**: Identifying failure points and performing root cause analysis using the captured stack trace context.
 - **Debug and create fixes**: Proposing or even generating code fixes based on the error details.
+- **Update issue status**: Marking issues as resolved, archived, suppressed, or pending release directly from your code editor.
 
 All of this happens directly inside the MCP client, like Cursor, Windsurf, or Claude Code, so you can investigate and resolve product issues without ever leaving the code editor.
 
@@ -30,9 +31,11 @@ Try these example questions and directives with your MCP-enabled agent:
 
 ```
 - Show me my most common errors.  
-- What’s the full stack trace for the most recent error?  
+- What's the full stack trace for the most recent error?  
 - Create a fix and show me how to reproduce the error with the highest severity.
 - Which error is causing the most crashes in production?  
+- Mark this issue as resolved.  
+- Set all high-severity errors from today to suppressed.  
 ```
 
 ## Install the MCP server
