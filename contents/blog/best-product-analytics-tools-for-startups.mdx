@@ -175,9 +175,7 @@ PostHog is fully self-serve. Create a free account at [posthog.com](/), pick US 
 Getting started takes minutes; [our docs](/docs/getting-started/start-here) walk you through instrumentation step by step, or you can just paste a snippet in your `<head>` tag and [autocapture](/docs/product-analytics/autocapture) starts collecting data immediately. 
 
 Want to skip the manual setup entirely? You can try out the [PostHog wizard](/docs/ai-engineering/ai-wizard) 
-(`npx @posthog/wizard@latest`), which detects your framework, installs the right SDK, and configures everything for you.
-
-**SDKs for everything:** JavaScript, Python, Ruby, Go, Node.js, PHP, iOS, Android, React Native, Flutter, Elixir, .NET, and more. Framework-specific guides for Next.js, Django, Angular, WordPress, Webflow.
+(`npx @posthog/wizard@latest`), which detects your framework, installs [the right SDK](/docs/libraries), and configures everything for you.
 
 <WizardCTA />
 
@@ -205,8 +203,8 @@ Use the [pricing calculator](/pricing) to estimate costs based on your actual vo
 
 - You just launched your MVP and wants to get analytics up and running quickly
 - You're a technical founder or product engineer who'd rather install one tool than manage five
+- You want [AI-powered analytics](/ai) with natural language queries, and an [MCP server](/docs/model-context-protocol) to integrate PostHog data into your AI workflows
 - You're building B2B and need [group analytics](/docs/product-analytics/group-analytics) to track retention at the account level, not just individual users
-- You want SQL access, APIs, and an open source core
 - You need EU hosting for privacy and compliance
 - You want to start free and only pay when you have momentum
 
@@ -216,8 +214,8 @@ Use the [pricing calculator](/pricing) to estimate costs based on your actual vo
 <summary>PostHog is not for you if... </summary>
 
 - Your team is entirely non-technical – PMs who need point-and-click everything may find the learning curve steep
-- You only need in-app guides and onboarding flows ([Product Tours](/docs/product-tours/start-here) are still in alpha)
-- You're already locked into a data stack and just need a lightweight analytics layer on top
+- You *only* need in-app guides and onboarding flows ([Product Tours](/docs/product-tours/start-here) are still in alpha)
+- You want a warehouse-native analytics tool that sits on top of your existing BigQuery, Snowflake, or Databricks setup – PostHog has its own [data warehouse](/docs/data-warehouse) and can sync data in and out, but it's not designed to be a query layer for an external warehouse you already own
 
 </details>
 
