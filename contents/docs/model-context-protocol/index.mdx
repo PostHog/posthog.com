@@ -1,7 +1,6 @@
 ---
 title: Model Context Protocol (MCP)
 ---
-import CalloutBox from '../../../src/components/Docs/CalloutBox'
 import Tab from "components/Tab"
 import CursorSnippet from "./_snippets/cursor.mdx"
 import ClaudeDesktopSnippet from "./_snippets/claude-desktop.mdx"
@@ -28,12 +27,6 @@ We're working on adding more supported tools to the wizard. If you're using anot
 ## Manual install
 
 Add the MCP configuration to your client. When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
-
-<CalloutBox icon="IconFlag" title="EU region users" type="fyi">
-
-If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` instead.
-
-</CalloutBox>
 
 <Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit', 'v0']}>
     <Tab.List>

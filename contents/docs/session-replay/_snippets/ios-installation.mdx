@@ -78,6 +78,12 @@ config.sessionReplayConfig.screenshotMode = true
 // A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
 // Note: Previously known as `debouncerDelay` before version 3.21.0
 config.sessionReplayConfig.throttleDelay = 1.0
+
+// Sample rate for session replay. A value between 0.0 and 1.0 that determines the percentage
+// of sessions to record. For example, 0.5 means 50% of sessions will be recorded.
+// Default is nil (no client-side sampling, server-side settings apply).
+// Requires SDK version 3.42.0 or higher.
+config.sessionReplayConfig.sampleRate = nil
 ```
 
 ## Limitations
