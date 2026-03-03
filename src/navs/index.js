@@ -2777,6 +2777,16 @@ export const docsMenu = {
                         {
                             name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/sdk-doctor',
+                                },
+                                {
+                                    name: 'Keeping SDKs current',
+                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                },
+                            ],
                         },
                         {
                             name: 'Organizations',
