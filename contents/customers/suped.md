@@ -11,7 +11,7 @@ date: 2026-03-03
 
 Michael Ko, Suped’s Co-Founder and CEO, previously worked in product management while also owning parts of marketing. That combination shaped how he thinks about tooling. He cares less about having more software and more about how systems fit together.
 
-From the beginning, Suped relied on PostHog for [Product Analytics](/product-analytics) and [Session Replay](/session-replay). Understanding user behavior inside the product was critical. But Suped also needed onboarding flows, transactional emails, and alert notifications tied directly to product events. Initially, those lived in a separate system.
+From the beginning, Suped relied on PostHog for [Product Analytics](/product-analytics) and [Session Replay](/session-replay). Understanding user behavior inside the product was critical and those tools helped the team understand the problems users were trying to solve. But, they also wanted to _do_ things with that data. They needed onboarding flows, transactional emails, and alert notification systems that could trigger based on user actions. Initially, those lived in Customer.io.
 
 <OSQuote
   customer="suped"
@@ -21,7 +21,7 @@ From the beginning, Suped relied on PostHog for [Product Analytics](/product-ana
 
 ![Suped product screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/suped_product_screenshot_20ca42213a.png)
 
-As Suped’s workflows became more complex, particularly around transactional and alert emails, maintaining that split started to feel unnecessary and they decided to migrate to [PostHog Workflows](https://app.posthog.com/workflows).
+Over time, it became more and more difficult to maintain these comms in a separate point solution, particularly for transactional emails. The team started looking around for a new solution and when [PostHog Workflows](/workflows) launched they realized they didn't need to maintain a separate platform for sending emails at all. 
 
 ## The stack before Workflows
 
@@ -69,13 +69,13 @@ Suped’s emails aren’t just simple welcome messages. Many include:
 
 When you’re working with this level of complexity, testing once and hoping for the best isn’t enough. Variables interact with each other, conditional branches change layouts, and edge cases only show up in specific scenarios. The team needs to be able to see exactly what was sent to a specific user, how it rendered, and whether the logic behaved the way they expected.
 
-This is one of the rich emails they created with PostHog: 
+This is one of the emails they created with PostHog: 
 
 ![suped rich email example](https://res.cloudinary.com/dmukukwp6/image/upload/suped_rich_email_fc71780c01.png)
 
 Bringing automation into the same system as their product data makes that process more straightforward. Events, user properties, and messaging logic all reference the same source of truth, which reduces the guesswork when something needs to be adjusted. Instead of tracing issues across multiple tools, the team can iterate in one place and move on.
 
-_“If we add a new event in the product, we can immediately use it in a workflow. There’s no separate sync, no waiting on another system. It makes experimentation a lot more straightforward.”_
+_“If we add a new event in the product, we can immediately use it in a workflow. There’s no separate sync, no waiting on another system. It makes experimentation a lot more straightforward.”_ - Michael Ko, Co-founder @ Suped
 
 ## Why consolidation matters
 
@@ -86,7 +86,7 @@ Cost played a role in the move away from Customer.io, but it wasn’t the primar
 - Less engineering time spent maintaining integrations
 - A single source of truth for user behavior and messaging
 
-_“If product data and messaging are going to be tightly connected anyway, it makes sense for them to live in the same place.”_
+_“If product data and messaging are going to be tightly connected anyway, it makes sense for them to live in the same place.”_ - Michael Ko, Co-founder @ Suped
 
 Running [Workflows](https://app.posthog.com/workflow) inside PostHog removes a layer of maintenance from their stack. That leaves the team with more time to work on their core product instead of managing how their tools talk to each other.
 
