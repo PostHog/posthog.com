@@ -3813,6 +3813,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Device bucketing',
+                    url: '/docs/feature-flags/device-bucketing',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                },
+                {
                     name: 'Guides',
                 },
                 {
