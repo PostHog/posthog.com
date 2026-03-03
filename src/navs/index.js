@@ -5420,6 +5420,13 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Tools',
+                    url: '/docs/llm-analytics/tools',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
