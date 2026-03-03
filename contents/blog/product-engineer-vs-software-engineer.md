@@ -95,5 +95,6 @@ Picking what's right is up to the company and its goals. If you're a small team 
 - [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)
+- [WTF is a forward-deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer)
 
 <NewsletterForm />
