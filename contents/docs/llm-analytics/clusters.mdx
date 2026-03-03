@@ -48,6 +48,12 @@ Navigate to **LLM analytics** > **Clusters** to see the overview.
     classes="rounded"
 />
 
+### Filtering events
+
+Click the **Filters** button in the Clusters view to configure which traces or generations are included in clustering. Use property filters to scope clustering to specific events — for example, filtering by model name, user segment, or custom properties.
+
+Configured filters persist and apply to both automated daily clustering runs and [trace summarization](/docs/llm-analytics/summarization) runs.
+
 ### Trace vs generation clustering
 
 Clusters can operate at two levels:
@@ -74,6 +80,20 @@ The interactive 2D scatter plot visualizes how items are distributed across clus
     videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_scatter_plot_e0648875d0.mp4"
     classes="rounded"
 />
+
+<details>
+<summary>How to read the scatter plot</summary>
+
+Unlike a typical scatter plot, the X and Y axes here don't represent any specific metric — there are no axis labels on purpose. Each trace or generation is converted into a high-dimensional embedding (a numerical fingerprint of its content), which is then projected down to 2D for visualization.
+
+**The only thing that matters is distance: similar items are closer together, different items are farther apart.** Think of it as a map of your LLM usage where related conversations form neighborhoods.
+
+This means:
+- A tight group of dots = traces or generations that your LLM handled in a similar way
+- Dots far from any group = outliers or unusual behavior
+- The absolute position on the chart doesn't mean anything — only relative distances between dots matter
+
+</details>
 
 | Feature | Description |
 |---------|-------------|

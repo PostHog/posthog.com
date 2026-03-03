@@ -7,6 +7,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/job_interview_questions_35bb07c898.jpg
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - Product engineers
   - Culture
@@ -30,7 +31,7 @@ What follows are some questions we wish people would ask us more often. They com
 
 This is the single most important thing a company can do to survive and grow, so you need to figure out if a startup already has it, or how likely they are to get there.
 
-There's an entire internet of writing on [how to find product-market fit](/founders/product-market-fit-game), and [how to measure it](founders/measure-product-market-fit), but broadly speaking you need three things:
+There's an entire internet of writing on [how to find product-market fit](/founders/product-market-fit-game), and [how to measure it](/founders/measure-product-market-fit), but broadly speaking you need three things:
 
 1. Non-trivial growth in a specific market.
 2. Meaningful usage after people sign-up.

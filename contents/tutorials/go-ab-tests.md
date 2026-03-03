@@ -63,14 +63,14 @@ Run `go run main.go` and navigate to `http://localhost:8080` to see your app in 
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `go mod init go-ab-tests` to initialize our project and then install [PostHog’s Go library](docs/libraries/go):
+To start, run `go mod init go-ab-tests` to initialize our project and then install [PostHog’s Go library](/docs/libraries/go):
 
 ```bash
 go mod init go-ab-tests
 go get github.com/posthog/posthog-go
 ```
 
-Next, we set up the PostHog client in `main.go`. To do this, you need your project API key and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize `posthog.NewWithConfig()`. Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event in our HTTP function handler. 
+Next, we set up the PostHog client in `main.go`. To do this, you need your project token and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize `posthog.NewWithConfig()`. Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event in our HTTP function handler. 
 
 Altogether, the code looks like this:
 
@@ -86,7 +86,7 @@ import (
 
 func main() {
   client, _ := posthog.NewWithConfig(
-    "<ph_project_api_key",
+    "<ph_project_token",
     posthog.Config{
         PersonalApiKey: "<ph_personal_api_key>",
         Endpoint: "<ph_client_api_host>",

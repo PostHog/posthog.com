@@ -62,7 +62,7 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    posthog.init("<ph_project_api_key>", {
+    posthog.init("<ph_project_token>", {
       api_host: "<ph_client_api_host>",
       defaults: "<ph_posthog_js_defaults>",
     });
@@ -110,6 +110,12 @@ export default function App() {
 ```
 
 When you run your app now, PostHog will automatically capture events and pageviews. You can also use the other features of PostHog by importing and using the `usePostHog` hook in your components.
+
+## Identifying users
+
+import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
 
 <DetailSetUpReverseProxy />
 

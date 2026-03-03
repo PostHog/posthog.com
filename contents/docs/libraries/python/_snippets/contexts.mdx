@@ -112,7 +112,7 @@ If you're using the PostHog JavaScript Web SDK on your frontend, it generates a 
 You can pass it to your backend by adding your backend domain to `__add_tracing_headers` in your config. This will automatically add tracing headers to your requests.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     __add_tracing_headers: ['your-backend-domain.com'] // +
 });
 ```

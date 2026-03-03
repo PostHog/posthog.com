@@ -17,7 +17,7 @@ Migrating data from Matomo is a two step process:
 
 ## 1. Exporting data from Matomo
 
-Matomo provides a [full API](https://developer.matomo.org/api-reference/reporting-api #Live) you can get data from. To get the relevant event data, we make a request to the `Live.getLastVisitsDetails` method.
+Matomo provides a [full API](https://developer.matomo.org/api-reference/reporting-api#Live) you can get data from. To get the relevant event data, we make a request to the `Live.getLastVisitsDetails` method.
 
 To access the API, you need to create an API token. This can be done in your instance's security settings.
 
@@ -66,7 +66,7 @@ To return all rows, set the filter limit to `-1`. Matomo recommends you only exp
 
 ## 2. Converting Matomo event data to the PostHog schema
 
-The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
+The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 The big difference is that Matomo structures its data around **visits** that contain one or more **actions**. Matomo's actions are similar to PostHog's [events](/docs/data/events). You can go through each visit and convert it to PostHog's schema by doing the following:
 
@@ -81,7 +81,7 @@ The big difference is that Matomo structures its data around **visits** that con
 
 4. Add visit properties to action properties.
 
-Once this is done, you can capture **each action** into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
+Once this is done, you can capture **each action** into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
 
 Here's an example version of a Python script:
 
@@ -92,7 +92,7 @@ import requests
 import json
 
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True
