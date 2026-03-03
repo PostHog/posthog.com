@@ -7,14 +7,26 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
+        {
+            "source": "/handbook/growth/marketing/:path*",
+            "destination": "/handbook/marketing/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/customer-personas",
+            "destination": "/handbook/strategy/ideal-customer-persona"
+        },
+        { "source": "/blog/carbon-offset-wren", "destination": "/handbook/people/spending-money" },
         { "source": "/hogwars", "destination": "/sparks-joy/hogwars" },
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/words-and-pictures/product-announcements"
         },
-        { "source": "/teams/words-and-pictures", "destination": "/teams/brand-vibes" },
-        { "source": "/teams/words-pictures", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
+        { "source": "/teams/words-pictures", "destination": "/teams/website" },
+        { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -179,7 +191,7 @@
         },
         {
             "source": "/handbook/growth/marketing/Customer-personas",
-            "destination": "/handbook/growth/marketing/customer-personas"
+            "destination": "/handbook/strategy/ideal-customer-persona"
         },
         { "source": "/handbook/engineering/product-team", "destination": "/handbook/product/product-team" },
         {
@@ -202,7 +214,7 @@
         { "source": "/handbook/engineering/feature-parity", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/strategy/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/docs/contribute/updating-documentation", "destination": "/docs/contribute" },
-        { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/growth/marketing" },
+        { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/marketing" },
         {
             "source": "/handbook/growth/handbook/engineering/support-hero",
             "destination": "/handbook/growth/handbook/support-hero"
@@ -647,6 +659,7 @@
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
+        { "source": "/docs/session-replay/data-retention", "destination": "/docs/session-replay/recording-retention" },
         {
             "source": "/docs/session-replay/_snippets/react-native-installation",
             "destination": "/docs/session-replay/installation/react-native"
@@ -872,7 +885,7 @@
         { "source": "/docs/cdp/github-star-sync", "destination": "/tutorials/github-star-tracker" },
         { "source": "/docs/cdp/twitter-followers", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/gitlab-release-tracker", "destination": "/docs/cdp" },
-        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
+        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/company/story", "destination": "/handbook/story" },
@@ -1296,7 +1309,12 @@
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
         },
-        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/marketing/icp" },
+        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/sales/lead-scoring" },
+        {
+            "source": "/handbook/marketing/icp",
+            "destination": "/handbook/growth/sales/lead-scoring",
+            "statusCode": 301
+        },
         { "source": "/teams/pipeline", "destination": "/teams/cdp" },
         { "source": "/teams/feature-success", "destination": "/teams/feature-flags" },
         { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
@@ -1324,7 +1342,7 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/brand-vibes" },
+        { "source": "/teams/website-docs", "destination": "/teams/website" },
         {
             "source": "/questions/manually-merging-persons",
             "destination": "/docs/product-analytics/identify#how-to-merge-userss"
@@ -1647,10 +1665,6 @@
             "destination": "/about"
         },
         {
-            "source": "/services",
-            "destination": "/"
-        },
-        {
             "source": "/platform-addons",
             "destination": "/platform-packages"
         },
@@ -1706,6 +1720,8 @@
         { "source": "/startups/[...slug]", "destination": "/startups" },
         { "source": "/customer-data-infrastructure/:path*", "destination": "/data-stack" },
         { "source": "/data-warehouse", "destination": "/data-stack" },
+        { "source": "/sql", "destination": "/data-stack/sql-editor" },
+        { "source": "/bi", "destination": "/data-stack/business-intelligence" },
         { "source": "/docs/error-tracking/common-questions", "destination": "/docs/error-tracking/troubleshooting" },
         { "source": "/docs/web-analytics/faq", "destination": "/docs/web-analytics/troubleshooting" },
         { "source": "/docs/feature-flags/common-questions", "destination": "/docs/feature-flags/troubleshooting" },
@@ -1718,7 +1734,8 @@
         },
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
         { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
-        { "source": "/professional-services", "destination": "/services" }
+        { "source": "/professional-services", "destination": "/services" },
+        { "source": "/posthug", "destination": "/" }
     ],
     "headers": [
         {

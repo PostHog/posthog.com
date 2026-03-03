@@ -20,7 +20,15 @@ Once commit signing is configured, enable the option in your [GitHub Profile](ht
 
 ### GitHub Actions
 
-Great care should be taken when writing or modifying a GitHub Actions workflow.
+Great care should be taken when writing or modifying a GitHub Actions workflow. Actions can access (and exfiltrate) secrets scoped to the repo. We scan workflows with Semgrep and CodeQL for common misconfigurations.
+
+#### Authentication
+
+Most Actions use the default `GITHUB_TOKEN`, whose permissions can be scoped via the `permissions` property. However, `GITHUB_TOKEN` cannot trigger other workflows — so commits or PRs created by an Action won't run CI, leaving PRs unmergeable without manual intervention. The workaround is a Personal Access Token (PAT) or GitHub App. We use GitHub Apps because PATs are tied to an individual user and break when that user leaves PostHog.
+
+Scope each GitHub App to its use case and ideally a single repo. Prefer creating a new App over expanding an existing one's permissions, otherwise every Action using that App inherits permissions it doesn't need.
+
+Send a message in #team-security if you need help setting up a new GitHub App.
 
 #### External contributors
 
@@ -30,7 +38,7 @@ In public repos, Actions may run against PRs written by external contributors. T
 
 ### AWS
 
-Application secrets are stored in AWS Secrets Manager. To modify an app's secrets, use <PrivateLink url="https://github.com/PostHog/charts/tree/main/secrets">secrets.py</PrivateLink>.
+Application secrets are stored in AWS Secrets Manager. To modify an app's secrets, use our <PrivateLink url="https://github.com/PostHog/secrets">secrets tool</PrivateLink>.
 
 ### GitHub
 

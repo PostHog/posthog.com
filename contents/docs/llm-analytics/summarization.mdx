@@ -2,14 +2,6 @@
 title: Trace summarization
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconInfo" title="Summarization is in beta" type="fyi">
-
-Summarization is currently in beta. We'd love to [hear your feedback](https://app.posthog.com/llm-analytics#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
-
-</CalloutBox>
-
 Trace summarization uses AI to generate human-readable summaries of your LLM [traces](/docs/llm-analytics/traces) and events. This helps you quickly understand complex multi-step AI interactions without reading through raw inputs and outputs.
 
 ## How it works
@@ -32,11 +24,11 @@ Choose between two summarization modes based on your needs:
 
 ## Requirements
 
-### AI data processing consent
+### AI data analysis consent
 
 Summarization requires AI data processing to be enabled for your organization. When you first use the feature, you'll be prompted to approve AI data processing. This consent applies organization-wide.
 
-To manage this setting, go to **Settings** → **Organization** → **AI data processing**.
+To manage this setting, go to **Settings** → **Organization** → **General** → **PostHog AI data analysis**.
 
 ### Rate limits
 

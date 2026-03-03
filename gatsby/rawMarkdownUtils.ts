@@ -366,7 +366,7 @@ export const generateLlmsTxt = (pages) => {
         pagesBySection[section].push({
             title,
             slug,
-            url: `https://posthog.com${slug}.md`,
+            url: !slug || slug === '/' ? 'https://posthog.com/llms.txt' : `https://posthog.com${slug}.md`,
         })
     }
 

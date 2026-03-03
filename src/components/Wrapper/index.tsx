@@ -5,8 +5,8 @@ import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
-import Dock from 'components/Desktop/Dock'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
+import WebsiteFooter from 'components/WebsiteFooter'
 
 export default function Wrapper() {
     const {
@@ -16,6 +16,8 @@ export default function Wrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
+        websiteMode,
+        searchOpen,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -27,9 +29,17 @@ export default function Wrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div className="fixed inset-0 size-full flex flex-col">
+        <div
+            data-scheme="primary"
+            className={`${
+                websiteMode
+                    ? 'max-w-7xl mx-auto border-x border-primary bg-primary shadow-xl min-h-screen'
+                    : 'fixed inset-0 size-full'
+            } flex flex-col`}
+            id="app-container"
+        >
             {!compact && <TaskBarMenu />}
-            <div ref={constraintsRef} className="flex-grow relative">
+            <div ref={constraintsRef} className={`flex-grow relative`}>
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item, index) => {
@@ -63,6 +73,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
+            {websiteMode && <WebsiteFooter />}
             {/*             
             {!compact && <Dock />}
             */}
