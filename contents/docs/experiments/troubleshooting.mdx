@@ -14,6 +14,24 @@ This page covers troubleshooting for Experiments. For setup, see the [installati
 
 <AskAIInput placeholder="Type your question and hit enter..." />
 
+
+## Why do I see "Experiments require a multivariate flag" warning?
+
+When viewing the **Experiments** tab on a feature flag page, you may see a warning that says: "Experiments require a multivariate flag with multiple variants and a control variant."
+
+This means your feature flag doesn't meet the requirements for use with experiments:
+
+- The flag must be a **multivariate** flag (not a boolean on/off flag)
+- It must have **at least two variants**
+- One variant must be named **`control`**
+
+To fix this, you can either:
+
+1. **Create a new experiment** and let PostHog automatically create a properly configured feature flag for you.
+2. **Modify your existing flag** to be multivariate with at least two variants including one named `control`.
+
+For more details on flag requirements, see [creating an experiment](/docs/experiments/creating-an-experiment#feature-flag-key).
+
 ## How do I use an existing feature flag in an experiment?
 
 We generally don't recommend this, since experiment feature flags need to be in a specific format (see below) or otherwise they won't work.
