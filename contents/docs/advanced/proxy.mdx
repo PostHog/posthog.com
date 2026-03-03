@@ -46,6 +46,14 @@ We do use our own infrastructure. But ad blockers specifically target well-known
 
 Your proxy works because ad blockers haven't visited your domain to catalog your setup. They don't know what to block.
 
+### What about DNS cloaking?
+
+Some more advanced ad blockers use a technique called DNS cloaking detection (also known as CNAME cloaking detection). Instead of relying on a static blocklist, these blockers perform DNS lookups on your subdomain to check if it resolves to a known analytics provider's IP address. If it does, the request is blocked.
+
+Most ad blockers don't do this. Basic blockers only match requests against maintained lists of known tracking domains and URL patterns. DNS cloaking detection is a feature of more advanced blockers like uBlock Origin or NextDNS.
+
+A reverse proxy on your own infrastructure avoids DNS cloaking detection because your subdomain (like `e.yourdomain.com`) resolves to your own server's IP address, not PostHog's. The blocker has no way to tell the request is analytics-related from the DNS response alone.
+
 ### Does PostHog provide static IP addresses?
 
 No. Our domains use AWS infrastructure with load balancing, which rotates IPs for performance and reliability.
