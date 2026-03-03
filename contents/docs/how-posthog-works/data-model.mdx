@@ -39,6 +39,19 @@ Each person contains the following base fields within PostgreSQL:
 | **properties** | `jsonb`       | A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments |
 | **version**    | `bigint`      | Incremented every time a person is updated. Helps to keep ClickHouse and PostgreSQL in sync.                                 |
 
+By default, `last_seen_at` is updated whenever a person sends an event. You can prevent this by setting the `$update_person_last_seen_at` event property to `false`. This is useful for backend enrichment jobs or server-side events that update person properties but don't represent actual user activity.
+
+```js
+posthog.capture('backend_enrichment', {
+    $update_person_last_seen_at: false,
+    $set: {
+        enriched_property: 'value'
+    }
+})
+```
+
+When `$update_person_last_seen_at` is `false`, the event is processed normally but the person's `last_seen_at` timestamp remains unchanged. This only applies when updating existing persons – `last_seen_at` is always set when a person is first created.
+
 Persons are stored in PostgreSQL but are additionally replicated into ClickHouse for certain queries. For example, when viewing the global list of persons from the dashboard, this information is retrieved from ClickHouse.
 
 Person properties are also stored directly on each event. Their value is determined during ingestion by looking up the person who sent the event in PostgreSQL and combining these values with any updates from the event itself.
