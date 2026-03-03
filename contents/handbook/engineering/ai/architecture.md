@@ -54,7 +54,7 @@ graph TB
 
 1. **The agent uses dynamic modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
 
-2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client. PostHog AI, Deep Research, Session Summaries, PostHog Code, Wizard, and third-party tools like Claude Code all consume the same MCP server.
+2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client. PostHog AI, PostHog Code, Session Summaries, Wizard, and third-party tools like Claude Code all consume the same MCP server.
 
 3. **Task generation feeds PostHog Code**: Signals from PostHog data, PostHog AI conversations, and Deep Research investigations are processed into structured tasks that PostHog Code can execute.
 
