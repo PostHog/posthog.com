@@ -16,7 +16,7 @@ Some of the influencers we sponsor include:
 
 ## Sourcing and evaluating influencers
 
-- You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we’ve already sponsored, inbound, and [Passionfroot](https://www.passionfroot.me/).
+- You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we've already sponsored, inbound, and [Passionfroot](https://www.passionfroot.me/).
 
 - Their audience needs to be relevant to us, ideally targeting our [ICP](/handbook/who-we-build-for), but broadly engineers and founders.
 
@@ -32,21 +32,21 @@ Some of the influencers we sponsor include:
 
 - Above 5k views per video. Anything below this is just not worth your time. This number will likely grow over time. Larger influencers, although they charge a lot more, are often more efficient, so we don't have an upper limit for size. 
 
-- Both short video creators and podcasters **haven’t** worked well for us in terms of conversion and signups. We’re open to trying this again in the future though.
+- Both short video creators and podcasters **haven't** worked well for us in terms of conversion and signups. We're open to trying this again in the future though.
 
 ## Negotiating with influencers
 
 - Make sure you know what type of slot it is: pre-roll, mid-roll, end-roll, integration.
 
-- Ask for examples of other ad slots they’ve run to judge the quality of ad read.
+- Ask for examples of other ad slots they've run to judge the quality of ad read.
 
-- For influencers we’ve never worked with, you should negotiate quite aggressively. The number they give is usually pulled out of a hat and is often 2-3x higher than it should be.
+- For influencers we've never worked with, you should negotiate quite aggressively. The number they give is usually pulled out of a hat and is often 2-3x higher than it should be.
 
 - Use <PrivateLink url="https://docs.google.com/spreadsheets/d/1nqF-oNqSaWw-LjLBHySlf8hbyQs79nEHFwv_-bR-F7s/edit?usp=sharing">our model for how much a placement should cost</PrivateLink> to get to a better number and work towards that. Feel free to make changes to the model if you think it's not accurate.
 
 - Make sure the link is in the top 3 lines of the description.
 
-- We pay invoices net 30 (30 days after they’ve sent them to us).
+- We pay invoices net 30 (30 days after they've sent them to us).
 
 ## What should the placement actually look like?
 

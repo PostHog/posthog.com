@@ -104,8 +104,8 @@ It's worth sharing in their Slack channels directly as they don't see everything
 
 ### 5. Paid ads + newsletters
 
-You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/growth/marketing/open-source-sponsorship) for more.
+You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/marketing/open-source-sponsorship) for more.
 
-If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/growth/marketing/paid-ads).
+If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/marketing/paid).
 
 It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646).

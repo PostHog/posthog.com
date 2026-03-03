@@ -6,37 +6,12 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across three teams:
-
-- **Content:**
-  - Content marketing
-  - SEO and LLM brand visibility
-  - Newsletters
-  - Social content
-  - Maintaining and improving documentation
-  - Video production
-
-- **Marketing:**
-  - Product marketing
-  - Paid advertising
-  - Product positioning
-  - Marketing events
-  - Special programs (PostHog for Startups)
-  - Cross-sell and email marketing
-
-- **<SmallTeam slug="website" />:**
-  - Design system and visual identity
-  - Website design and development
-  - Artwork and graphic design
-  - Brand assets and merchandise design
-  - Visual content creation
-
-See [Who can help me?](/handbook/growth/marketing/ownership) for more on who to talk to.
+Marketing at PostHog is a collaborative effort across several teams. It is also specifically a multi-disciplinary creative team in it's own right. If that's confusing, you can check [Who can help me?](/handbook/marketing/ownership) for more on who to talk to.
 
 ## Marketing values
 
 1. Be opinionated
-2. Pull, don’t push
+2. Pull, don't push
 3. No sneaky shit
 
 ### 1. Be opinionated
@@ -55,7 +30,7 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
 
 _We focus on word of mouth by default._ 
 
-We believe customers will judge us first and foremost on our product (i.e. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
+We believe customers will judge us first and foremost on our product (i.e. our app, our website, and our docs). We won't set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
@@ -119,7 +94,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros (Cory, Lottie) to help.
 
-- **Developer influencers:** We [sponsor creators](/handbook/growth/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
+- **Developer influencers:** We [sponsor creators](/handbook/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
 - **Billboards:** Billboards are a way to get our brand in front of a lot of people.
 
