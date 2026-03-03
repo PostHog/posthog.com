@@ -28,6 +28,7 @@ Each ticket has the following properties:
 | **Session ID** | The PostHog session for events and exceptions |
 | **Session Replay ID** | The session recording (if replay is enabled) |
 | **Distinct ID** | PostHog distinct_id for person linking |
+| **SLA** | Due date for ticket resolution. Displays time remaining or overdue status |
 
 ## Status workflow
 
@@ -46,9 +47,35 @@ The ticket inbox supports filtering by:
 - **Status** - Filter by ticket status
 - **Priority** - Filter by priority level
 {/*- **Channel source** - Filter by where the ticket came from*/}
+- **SLA** - Filter by SLA status (`breached`, `at-risk`, `on-track`)
 - **Assignee** - Unassigned, specific user, or specific role
 - **Date range** - Filter by creation date
 - **Search** - Search by ticket number, customer name, or email
+
+## SLA tracking
+
+SLA (Service Level Agreement) tracking helps you monitor response time commitments for support tickets. When an SLA is set on a ticket, the inbox displays a countdown to the deadline.
+
+### SLA states
+
+Tickets with an SLA are categorized into three states:
+
+| State | Meaning |
+|-------|---------|
+| **On track** | More than one hour remains before the deadline |
+| **At risk** | Less than one hour remains before the deadline |
+| **Breached** | The deadline has passed |
+
+The SLA column in the ticket list shows relative time (e.g., "in 2 hours") color-coded by state – green for on track, yellow for at risk, and red for breached.
+
+### Setting SLAs
+
+SLAs can be set:
+
+- Manually by updating a ticket's SLA field
+- Automatically via [Workflows](/docs/workflows/workflow-builder) using the **Update ticket** action
+- Programmatically through the external ticket API
+
 
 ## Ticket assignment
 
