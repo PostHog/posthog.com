@@ -37,6 +37,8 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SupedLogo from '../images/customers/suped-light.png'
+import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
@@ -357,6 +359,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     workflows:
                         'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
+            },
+        },
+    },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/suped/michael-suped.png',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
             },
         },
     },
