@@ -127,6 +127,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
@@ -314,11 +315,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',

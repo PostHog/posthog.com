@@ -457,6 +457,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         url: String
     }
     type EventPhotoData {
+        id: ID
         attributes: EventPhotoAttributes
     }
     type EventPhoto {
@@ -476,6 +477,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         name: String
         description: String
         date: Date
+        startTime: String
         private: Boolean
         format: [String]
         audience: [String]
@@ -491,6 +493,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         speakers: EventSpeaker
     }
     type Event implements Node {
+        strapiID: Int
         attributes: EventAttributes
     }
     type ChangelogVideo implements Node {

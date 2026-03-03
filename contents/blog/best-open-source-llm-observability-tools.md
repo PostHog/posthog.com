@@ -99,7 +99,7 @@ OpenLLMetry is an open-source observability product for LLM applications based o
 
 Traceloop is free up to 50k spans per month and 5 seats, but this only provides 24-hour data retention. Beyond this, you’ll need to talk to sales. 
 
-OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to Datadog to Honeycomb.
+OpenLLMetry can capture data from a range of LLM providers, vector DBs, and LLM frameworks. It can then send this data to a range of supported destinations from Traceloop to [Datadog](/blog/best-datadog-alternatives) to Honeycomb.
 
 ![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_aa916c3921.png)
 

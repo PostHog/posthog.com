@@ -8,6 +8,8 @@ availability:
   enterprise: full
 ---
 
+import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+
 Batch exports can be used to export data to a BigQuery table.
 
 ## Setting up BigQuery access
@@ -105,6 +107,8 @@ The schema of the model as created in BigQuery is:
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
+<PersonsModelNote />
+
 ### Sessions model
 
 You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
@@ -139,18 +143,17 @@ For the purposes of these examples, assume that these two batch exports have alr
 
 ### Example: Count unique persons that have triggered an event
 
-The following query can be used to count the number of unique persons that have triggered events:
+The following query counts unique persons that have triggered events.
+It uses `COALESCE` to fall back to `distinct_id` for events where the person has no profile in the persons export (for example, anonymous users when [person profile processing is disabled](/docs/data/anonymous-vs-identified-events)):
 
 ```sql runInPostHog=false
 SELECT
   event,
-  COUNT(persons.person_id) AS unique_persons_count
+  COUNT(DISTINCT COALESCE(persons.person_id, events.distinct_id)) AS unique_persons_count
 FROM
   example.events AS events
 LEFT JOIN
   example.persons AS persons ON events.distinct_id = persons.distinct_id AND events.team_id = persons.team_id
-WHERE
-  persons.person_id IS NOT NULL
 GROUP BY
   event
 ORDER BY

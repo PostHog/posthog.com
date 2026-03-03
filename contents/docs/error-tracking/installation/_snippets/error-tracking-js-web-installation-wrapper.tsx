@@ -7,7 +7,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingJSWebInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{ JSEventCapture }}>
-            <JSWebInstallation modifySteps={addNextStepsStep} />
+            <JSWebInstallation modifySteps={(steps) => addNextStepsStep(steps, 'web')} />
         </OnboardingContentWrapper>
     )
 }

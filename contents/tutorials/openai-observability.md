@@ -121,7 +121,7 @@ In the `app` folder, create an `api` folder, a `generate` folder inside it, and 
 
 Next, set up:
 
-1. The PostHog Node client using our project API key and instance address which you can get from [your project settings](https://us.posthog.com/settings/project). 
+1. The PostHog Node client using our project token and instance address which you can get from [your project settings](https://us.posthog.com/settings/project). 
 2. The OpenAI client which requires an API key.
 
 With both of these set up, we simply call the `openai.chat.completions.create` method with the input and model then return the response.
@@ -132,7 +132,7 @@ import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_api_client_host>' }
 )
 
