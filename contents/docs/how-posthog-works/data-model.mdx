@@ -35,22 +35,9 @@ Each person contains the following base fields within PostgreSQL:
 | **team_id**    | `integer`     | Foreign key which links to the team                                                                                          |
 | **uuid**       | `UUID`        | UUID of the person within ClickHouse. This is referenced by the `person_id` field on events                                  |
 | **created_at** | `timestamptz` | The timestamp of the earliest event associated with this person                                                              |
-| **last_seen_at** | `timestamptz` | The timestamp of the person's most recent event, rounded to the hour                                                         |
+| **last_seen_at** | `timestamptz` | The timestamp of the person's most recent event, rounded to the hour. See [skipping last_seen_at updates](/docs/product-analytics/person-properties#skipping-last_seen_at-updates). |
 | **properties** | `jsonb`       | A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments |
 | **version**    | `bigint`      | Incremented every time a person is updated. Helps to keep ClickHouse and PostgreSQL in sync.                                 |
-
-By default, `last_seen_at` is updated whenever a person sends an event. You can prevent this by setting the `$update_person_last_seen_at` event property to `false`. This is useful for backend enrichment jobs or server-side events that update person properties but don't represent actual user activity.
-
-```js
-posthog.capture('backend_enrichment', {
-    $update_person_last_seen_at: false,
-    $set: {
-        enriched_property: 'value'
-    }
-})
-```
-
-When `$update_person_last_seen_at` is `false`, the event is processed normally but the person's `last_seen_at` timestamp remains unchanged. This only applies when updating existing persons – `last_seen_at` is always set when a person is first created.
 
 Persons are stored in PostgreSQL but are additionally replicated into ClickHouse for certain queries. For example, when viewing the global list of persons from the dashboard, this information is retrieved from ClickHouse.
 
