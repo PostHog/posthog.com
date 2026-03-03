@@ -106,7 +106,7 @@ So that users can learn how to use PostHog without worrying about being charged,
 
 **PostHog Code** is a desktop product for single-engineer use. It's separate from PostHog AI because the workflow is different – you're not asking questions, you're letting an AI agent watch PostHog for problems and automatically fix them in your codebase. Think of it as an AI assistant that lives in your development environment.
 
-**MCP** is for users who prefer to work in third-party tools like Claude Code, Cursor, or Codex. You get access to PostHog's data and can combine it with other MCP servers (like Hubspot or Zendesk). The trade-off is you don't get PostHog AI's polished UX or PostHog-specific training.
+**MCP** is for users who prefer to work in third-party tools like Claude Code, Cursor, or Codex. You get access to PostHog's data and can combine it with other MCP servers (like Hubspot or Zendesk). The trade-off is you don't get PostHog AI's polished UX or PostHog-specific optimizations.
 
 ## How to develop and test
 
