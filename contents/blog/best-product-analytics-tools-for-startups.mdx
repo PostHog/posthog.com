@@ -477,11 +477,11 @@ All tiers (Business, Advanced, Enterprise) require contacting sales. Mobile anal
 
 ### What is Pendo and why should startups consider it?
 
-[Pendo](/blog/posthog-vs-pendo) pairs product analytics with in-app guides, tooltips, walkthroughs, and NPS surveys. Its strength is the insight-to-action loop: see that 60% of users never discover your highest-retention feature, then build an in-app guide pointing them to it – same tool, no engineering sprint, no switching platforms.
+[Pendo](/blog/posthog-vs-pendo) pairs product analytics with in-app guides, tooltips, walkthroughs, and NPS surveys. Its strength is the insight-to-action loop: see that 60% of users never discover your highest-retention feature, then build an in-app guide pointing them to it.
 
-The free plan includes 500 MAUs with retroactive analytics, in-app guides, NPS, and roadmap tools. If your primary need is onboarding users *and* measuring their behavior in the same tool, Pendo's integration between analytics and guides is tighter than bolting separate tools together. MAU-based pricing makes costs predictable if your user count is stable.
+The free plan includes 500 MAUs with retroactive analytics, in-app guides, NPS, and roadmap tools. If your primary need is onboarding users *and* measuring their behavior in the same tool, Pendo's integration between analytics and guides is solid. 
 
-The trade-off: Pendo excludes anonymous users from retention analysis entirely, so if you have a large unidentified user base you'll get an incomplete picture. It's also less technical than PostHog or Mixpanel – no SQL access, limited API depth. For session replay, feature flags, and error tracking, you'll need separate vendors.
+The trade-off: Pendo excludes anonymous users from retention analysis entirely, so if you have a large unidentified user base you'll get an incomplete picture. For session replay, feature flags, and error tracking, you'll need separate vendors.
 
 ### Key features
 
@@ -494,8 +494,6 @@ The trade-off: Pendo excludes anonymous users from retention analysis entirely, 
 ### Getting started
 
 Free plan available (500 MAUs). Self-serve for the free tier. Paid plans require contacting sales for MAU-based pricing.
-
-**Time to first insight:** A few days. Install the snippet, wait for data, then use path and funnel reports.
 
 ### Pricing
 
@@ -544,14 +542,55 @@ Free plan available (500 MAUs). Self-serve for the free tier. Paid plans require
 | **Fullstory** | Contact sales | Contact sales | ❌ No | Replay-first analysis | Flags, surveys, errors |
 | **Pendo** | 500 MAUs | MAUs | ✅ Free tier | Analytics + in-app guides | Replay, flags, errors |
 
-## Which product analytics tool should you choose?
+## Which product analytics tool should you choose for your startup?
 
-Want one platform for analytics, replay, flags, experiments, and error tracking? **PostHog**
-Need the deepest retention and cohort analysis? **Amplitude**
-Want polished standalone analytics with a generous startup program? **Mixpanel**
-Prefer autocapture with retroactive event definition? **Heap**
-Need replay-first analysis with AI session summaries? **Fullstory**
-Want analytics paired with in-app guides and onboarding flows? **Pendo**
+### Step 1: Know your stage
+
+**Pre-PMF:** You need speed, not depth. Install something in an afternoon, get data flowing immediately, and focus on three questions: are users signing up, are they reaching core value, are they coming back? You don't need a tracking plan, a data team, or a 6-month vendor evaluation. You need autocapture, a funnel, and session replay.
+
+- Best picks: **PostHog** ([easy install](/wizard) and [generous free tiers](/pricing)), **Heap** (autocapture with retroactive event definition), or **Mixpanel** on the startup program (free first year with up to 1B events).
+
+**Post-PMF (growing, but not yet scaling):** You've validated the product. Now you need to understand *why* it works and how to grow efficiently. Retention cohorts, A/B testing, feature flags, and conversion funnels become your daily workflow. This is where the tool you chose at the MVP stage either scales with you or becomes technical debt.
+
+- Best picks: **PostHog** (analytics -> replay -> experiment -> deploy in one workflow), **Amplitude** (deepest retention math and cohort overlays), or **Mixpanel** (polished query builder with experiments now built in).
+
+**Scale-up (data team, enterprise customers, governance needs):** Reliability, data quality, and cost control matter as much as insights. You need warehouse integrations, tracking plan enforcement, group analytics for B2B accounts, and compliance features like EU residency and SSO.
+
+-  Best picks: **Amplitude** (Ampli CLI for type-safe tracking, governance tools, warehouse-native on Enterprise), **Mixpanel** (strong warehouse connectors for Snowflake, BigQuery, Databricks), or **PostHog** ([data warehouse](/docs/data-warehouse), [group analytics](/docs/product-analytics/group-analytics), EU hosting, and [billing limits](/docs/billing/estimating-usage-costs) per product).
+
+### Step 2: Decide what you need in one platform vs. separate tools
+
+This is the most consequential decision. Every additional vendor means another data model, another integration to maintain, and another place where user context gets lost.
+
+If you want **everything in one install** – analytics, session replay, feature flags, A/B testing, surveys, error tracking, and LLM observability – **PostHog** is the only tool that bundles all of these with separate free tiers for each product.
+
+If you're okay with **analytics as a standalone tool** and managing separate vendors for replay, flags, and experiments, then the question becomes which analytics UX fits your team best:
+
+- **Mixpanel** if you want the most polished funnel and cohort query builder, a strong startup program, and don't mind adding other tools later
+- **Amplitude** if retention math is your primary workflow and you want the deepest cohort analysis in the category
+- **Heap** if you don't know what to track yet and want to capture everything now, define events later
+- **Fullstory** if you start every investigation by watching what users did, then quantify it
+- **Pendo** if you need analytics *and* in-app guides in the same tool without engineering help
+
+### Step 3: Match the pricing model to your product
+
+Pricing models aren't interchangeable – the wrong one can cost you 2-5x more depending on your product's usage pattern.
+
+- **Event-based (PostHog, Mixpanel):** You pay per action tracked. Best for products with moderate events per user. Watch out for high-frequency events like real-time updates or messaging features that can inflate volume.
+- **MTU-based (Amplitude):** You pay per unique user. Best for high-engagement products where each user triggers hundreds of events. Watch out for anonymous traffic – unidentified visitors count as separate MTUs until merged.
+- **Session-based (Heap):** You pay per session. Best for products with short, focused user sessions. Watch out for products where users return multiple times per day.
+- **MAU-based (Pendo):** You pay per monthly active user. Most predictable if your user count is stable. Watch out for rapid growth – costs scale linearly with users regardless of how much data you collect.
+
+### Step 4: Check what's actually free
+
+"Free tier" means very different things across tools:
+
+- **PostHog:** 1M events, 5K replays, 1M flag requests, 1,500 survey responses, 100K error exceptions – truly generous across the board, with no credit card required to start
+- **Mixpanel:** 1M events, 10K replays, but limited to 5 saved reports, no behavioral cohorts, no account-level analytics, no experiments or flags without upgrading
+- **Amplitude:** 50K MTUs, 10M events, unlimited flags, session replay, AI chat – generous, but advanced features like causal insights and predictive audiences require Growth or Enterprise
+- **Heap:** 10K sessions, 6 months data retention – no flags, no experiments, no surveys
+- **Fullstory:** No free tier. Contact sales for all plans.
+- **Pendo:** 500 MAUs with analytics, guides, and NPS – very limited scale, but includes in-app guides that others charge for
 
 ### Recommendations by team type
 
@@ -580,7 +619,7 @@ Want analytics paired with in-app guides and onboarding flows? **Pendo**
 - **Amplitude** if you're already using Amplitude for analytics and want to layer experiments on top of AI features
 - **Mixpanel** if you need to track AI feature adoption and conversion funnels but handle observability separately with a dedicated tool
 
-<ArrayCTA />
+<WizardCTA />
 
 ## FAQs
 
@@ -588,6 +627,8 @@ Want analytics paired with in-app guides and onboarding flows? **Pendo**
 <summary>How do I track analytics for my MVP?</summary>
 
 Start minimal. Install PostHog's [autocapture](/docs/product-analytics/autocapture) snippet (or run `npx @posthog/wizard@latest`). You get data immediately. Define your activation hypothesis, build one funnel, watch 5-10 [session replays](/session-replay) a week. You need to answer three questions: are users signing up, are they reaching core value, are they coming back? Everything else can wait.
+
+<WizardCommand slim />
 
 </details>
 
@@ -615,21 +656,25 @@ Yes. PostHog has SDKs for iOS, Android, React Native, and Flutter. Mixpanel and 
 <details>
 <summary>What is event-based analytics?</summary>
 
-Instead of tracking pageviews, event-based analytics records specific user actions – button clicks, feature usage, form submissions, purchases, API calls – as discrete data points with properties attached. This lets you build funnels across any sequence of actions, segment users by behavior, and answer questions like "what did users who retained do differently in their first session?" PostHog, Mixpanel, and Amplitude are all event-based.
+Instead of tracking pageviews, [event-based analytics](/docs/events) records specific user actions – button clicks, feature usage, form submissions, purchases, API calls – as discrete data points with properties attached. This lets you build funnels across any sequence of actions, segment users by behavior, and answer questions like "what did users who retained do differently in their first session?" 
 
 </details>
 
 <details>
 <summary>What's the difference between autocapture and manual event tracking?</summary>
 
-[Autocapture](/docs/product-analytics/autocapture) automatically records every user interaction (clicks, page views, form submissions) without you writing code for each one. You get data immediately but may need to filter noise. Manual tracking requires you to define and instrument each event explicitly – more setup time, but cleaner data from day one. PostHog and Heap support autocapture. Mixpanel added web autocapture recently. Amplitude focuses on manual instrumentation with the Ampli CLI for type-safe tracking.
+[Autocapture](/docs/product-analytics/autocapture) automatically records every user interaction (clicks, page views, form submissions) without you writing code for each one. You get data immediately but may need to filter noise. Manual tracking requires you to define and instrument each event explicitly – more setup time, but cleaner data from day one. 
+
+PostHog and Heap support autocapture. Mixpanel added web autocapture recently. Amplitude focuses on manual instrumentation with the Ampli CLI for type-safe tracking.
 
 </details>
 
 <details>
 <summary>Should I switch from Google Analytics to product analytics?</summary>
 
-You probably don't need to switch – you need to add. GA4 is fine for marketing attribution and traffic analysis. Product analytics covers everything after signup: funnel drop-off, retention cohorts, feature adoption, behavioral segmentation. Most teams keep GA4 for marketing and add a product analytics tool for in-product behavior. Read our [GA4 comparison](/blog/posthog-vs-ga4) for a deeper breakdown.
+You probably don't need to switch – you need to add. GA4 is fine for marketing attribution and traffic analysis. Product analytics covers everything after signup: funnel drop-off, retention cohorts, feature adoption, behavioral segmentation. Most teams keep GA4 for marketing and add a product analytics tool for in-product behavior. 
+
+Read our [GA4 comparison](/blog/posthog-vs-ga4) for a deeper breakdown.
 
 </details>
 
@@ -658,6 +703,8 @@ A [cohort](/docs/data/cohorts) is a group of users who share a characteristic �
 <summary>How do product analytics tools handle user privacy and GDPR?</summary>
 
 Most tools offer EU hosting, data residency options, and consent management. PostHog offers both US and EU cloud hosting plus self-hosted deployment for full data control. Amplitude has EU data residency on enterprise plans. Mixpanel provides EU data residency and supports data deletion requests. If GDPR compliance is critical, check whether the tool processes data in the EU, supports consent-based tracking, and offers data deletion APIs.
+
+Read our guide on the [best GDPR compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) for more details.
 
 </details>
 
