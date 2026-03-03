@@ -546,51 +546,48 @@ Free plan available (500 MAUs). Self-serve for the free tier. Paid plans require
 
 ### Step 1: Know your stage
 
-**Pre-PMF:** You need speed, not depth. Install something in an afternoon, get data flowing immediately, and focus on three questions: are users signing up, are they reaching core value, are they coming back? You don't need a tracking plan, a data team, or a 6-month vendor evaluation. You need autocapture, a funnel, and session replay.
+**Pre-PMF:** You need speed, not depth. Install something in an afternoon, get data flowing immediately, and focus on three questions: are users signing up, are they reaching core value, are they coming back? You don't need a tracking plan, a data team, or a 6-month vendor evaluation. You need to [see if your product has legs](/newsletter/what-weve-learned-about-product-market-fit).
 
-- Best picks: **PostHog** ([easy install](/wizard) and [generous free tiers](/pricing)), **Heap** (autocapture with retroactive event definition), or **Mixpanel** on the startup program (free first year with up to 1B events).
+**Post-PMF:** You've validated the product. Now you need to understand *why* it works and how to grow efficiently. This is where the tool you chose at the MVP stage either scales with you or becomes technical debt.
 
-**Post-PMF (growing, but not yet scaling):** You've validated the product. Now you need to understand *why* it works and how to grow efficiently. Retention cohorts, A/B testing, feature flags, and conversion funnels become your daily workflow. This is where the tool you chose at the MVP stage either scales with you or becomes technical debt.
-
-- Best picks: **PostHog** (analytics -> replay -> experiment -> deploy in one workflow), **Amplitude** (deepest retention math and cohort overlays), or **Mixpanel** (polished query builder with experiments now built in).
-
-**Scale-up (data team, enterprise customers, governance needs):** Reliability, data quality, and cost control matter as much as insights. You need warehouse integrations, tracking plan enforcement, group analytics for B2B accounts, and compliance features like EU residency and SSO.
-
--  Best picks: **Amplitude** (Ampli CLI for type-safe tracking, governance tools, warehouse-native on Enterprise), **Mixpanel** (strong warehouse connectors for Snowflake, BigQuery, Databricks), or **PostHog** ([data warehouse](/docs/data-warehouse), [group analytics](/docs/product-analytics/group-analytics), EU hosting, and [billing limits](/docs/billing/estimating-usage-costs) per product).
+**Scale-up:** Reliability, data quality, and cost control matter as much as insights. You need warehouse integrations, group analytics for B2B accounts, tracking plan enforcement, and compliance features like EU residency and SSO.
 
 ### Step 2: Decide what you need in one platform vs. separate tools
 
-This is the most consequential decision. Every additional vendor means another data model, another integration to maintain, and another place where user context gets lost.
+Every additional vendor means another data model, another integration to maintain, and another place where user context gets lost. Ask yourself: do you want analytics, session replay, feature flags, experiments, surveys, and error tracking in one tool – or are you okay stitching together best-of-breed point solutions?
 
-If you want **everything in one install** – analytics, session replay, feature flags, A/B testing, surveys, error tracking, and LLM observability – **PostHog** is the only tool that bundles all of these with separate free tiers for each product.
-
-If you're okay with **analytics as a standalone tool** and managing separate vendors for replay, flags, and experiments, then the question becomes which analytics UX fits your team best:
-
-- **Mixpanel** if you want the most polished funnel and cohort query builder, a strong startup program, and don't mind adding other tools later
-- **Amplitude** if retention math is your primary workflow and you want the deepest cohort analysis in the category
-- **Heap** if you don't know what to track yet and want to capture everything now, define events later
-- **Fullstory** if you start every investigation by watching what users did, then quantify it
-- **Pendo** if you need analytics *and* in-app guides in the same tool without engineering help
+The bundled approach means less setup, shared context across products, and one bill. The unbundled approach gives you more flexibility to swap individual tools, but you'll spend more time integrating and lose the ability to go from, say, a funnel drop-off to a session replay to an experiment without leaving the platform.
 
 ### Step 3: Match the pricing model to your product
 
-Pricing models aren't interchangeable – the wrong one can cost you 2-5x more depending on your product's usage pattern.
+Pricing models aren't interchangeable – the wrong one can cost you significantly more depending on your product's usage pattern.
 
-- **Event-based (PostHog, Mixpanel):** You pay per action tracked. Best for products with moderate events per user. Watch out for high-frequency events like real-time updates or messaging features that can inflate volume.
-- **MTU-based (Amplitude):** You pay per unique user. Best for high-engagement products where each user triggers hundreds of events. Watch out for anonymous traffic – unidentified visitors count as separate MTUs until merged.
-- **Session-based (Heap):** You pay per session. Best for products with short, focused user sessions. Watch out for products where users return multiple times per day.
-- **MAU-based (Pendo):** You pay per monthly active user. Most predictable if your user count is stable. Watch out for rapid growth – costs scale linearly with users regardless of how much data you collect.
+- **Event-based:** You pay per **action tracked**. Best for products with moderate events per user. Watch out for high-frequency events like real-time updates or messaging that inflate volume.
+- **MTU-based:** You pay per **unique user**. Best for high-engagement products where each user triggers hundreds of events. Watch out for anonymous traffic – unidentified visitors count as separate MTUs until merged.
+- **Session-based:** You pay per **session**. Best for products with short, focused sessions. Watch out for products where users return multiple times per day.
+- **MAU-based:** You pay per **monthly active user**. Most predictable if your user count is stable. Watch out for rapid growth – costs scale linearly with users regardless of data volume.
 
 ### Step 4: Check what's actually free
 
-"Free tier" means very different things across tools:
+"Free tier" means very different things across tools.
 
-- **PostHog:** 1M events, 5K replays, 1M flag requests, 1,500 survey responses, 100K error exceptions – truly generous across the board, with no credit card required to start
-- **Mixpanel:** 1M events, 10K replays, but limited to 5 saved reports, no behavioral cohorts, no account-level analytics, no experiments or flags without upgrading
-- **Amplitude:** 50K MTUs, 10M events, unlimited flags, session replay, AI chat – generous, but advanced features like causal insights and predictive audiences require Growth or Enterprise
-- **Heap:** 10K sessions, 6 months data retention – no flags, no experiments, no surveys
-- **Fullstory:** No free tier. Contact sales for all plans.
-- **Pendo:** 500 MAUs with analytics, guides, and NPS – very limited scale, but includes in-app guides that others charge for
+Some give you the full product at low volume, others gate core features behind paid plans and call the rest "free." Before committing, check: how many events/sessions/users are included? Which features are restricted? Do you need a credit card to start? How long is data retained? Are features like cohort analysis, experiments, or account-level analytics included or paywalled?
+
+### Our recommendations
+
+| Decision | Best fit | Why |
+|---|---|---|
+| **Stage: Pre-PMF** | PostHog, Mixpanel, Heap | PostHog: one install, autocapture, free tier across 10+ products. Mixpanel: startup program with a free first year. Heap: capture everything, define events later. |
+| **Stage: Post-PMF** | PostHog, Amplitude, Mixpanel | PostHog: connected analytics -> replay -> experiment workflow. Amplitude: deepest retention and cohort math. Mixpanel: polished query builder with experiments built in. |
+| **Stage: Scale-up** | PostHog, Amplitude, Mixpanel | PostHog: data warehouse, group analytics, EU hosting, billing limits. Amplitude: type-safe tracking, governance, warehouse-native. Mixpanel: strong warehouse connectors. |
+| **Approach: All-in-one** | PostHog | Only tool that bundles analytics, replay, flags, experiments, surveys, error tracking, and LLM observability with separate free tiers |
+| **Approach: Best-of-breed analytics** | Mixpanel, Amplitude | Mixpanel for funnel/cohort UX. Amplitude for retention depth. Both require separate vendors for surveys, error tracking. |
+| **Pricing: Event-based** | PostHog, Mixpanel | PostHog: $0.00005/event after 1M free. Mixpanel: $0.28/1K events after 1M free. |
+| **Pricing: MTU-based** | Amplitude | Best if your product has high events-per-user – one user generating 500 events costs the same as one generating 5 |
+| **Pricing: Session-based** | Heap | Best for products with short, infrequent sessions |
+| **Pricing: MAU-based** | Pendo | Most predictable if user count is stable and you also need in-app guides |
+| **Free tier: Most generous** | PostHog | 1M events, 5K replays, 1M flag requests, 1,500 surveys, 100K errors – no credit card, no feature restrictions |
+| **Free tier: Best startup program** | Mixpanel | First year free, up to 1B events and 500K replays (if eligible) |
 
 ### Recommendations by team type
 
