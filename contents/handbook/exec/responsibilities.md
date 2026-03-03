@@ -1,12 +1,12 @@
 ---
-title: Exec responsibilities
+title: Blitzscale responsibilities
 sidebar: Handbook
 showTitle: true
 ---
 
-This page lists which product teams each exec team member is responsible for.
+This page lists which product teams each Blitzscale team member is responsible for.
 
-| Exec | Teams |
+| Person | Teams |
 |------|-------|
 | James Hawkins | [PostHog AI](/teams/posthog-ai), [Signals](/teams/signals), [LLM Analytics](/teams/llm-analytics), [Platform UX](/teams/platform-ux), [Conversations](/teams/conversations), [Website](/teams/website), Code |
 | Tim Glaser | [DevEx](/teams/developer-experience), [Ops](/teams/ops), [Growth](/teams/growth) |
