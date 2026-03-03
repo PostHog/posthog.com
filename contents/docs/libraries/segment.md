@@ -1,7 +1,6 @@
 ---
 title: Segment
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/segment.svg
+platformLogo: segment
 ---
 
 Segment is a customer data platform (CDP) that enables you to capture data from many sources and send it to many destinations. This is a guide for our favorite one of those destinations: PostHog. 
@@ -16,7 +15,7 @@ Make sure you have a [Segment account](https://segment.com/docs/#getting-started
 
 2. After selecting PostHog, click **Add Destination**, choose your source(s), add a name, and click **Create destination**.
 
-3. With the destination created, get your project API key and instance address from [your project settings](https://us.posthog.com/settings/project). Add them to the fields under **Connection Settings**.
+3. With the destination created, get your project token and instance address from [your project settings](https://us.posthog.com/settings/project). Add them to the fields under **Connection Settings**.
 
 4. Once added, flip the toggle to enable the destination, and when you capture events from the source, you'll start to see them in PostHog.
 
@@ -39,7 +38,7 @@ The simple Segment destination only supports tracking of pageviews, custom event
     analytics.load("<your-segment-key>");
 
     analytics.ready(() => {
-        window.posthog.init("<ph_project_api_key>", {
+        window.posthog.init("<ph_project_token>", {
             api_host: '<ph_client_api_host>', // Use eu.i.posthog.com for EU instances
             segment: window.analytics, // Pass window.analytics here - NOTE: `window.` is important
             capture_pageview: false, // You want this false if you are going to use segment's `analytics.page()` for pageviews

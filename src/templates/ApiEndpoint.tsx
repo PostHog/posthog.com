@@ -237,9 +237,6 @@ function Params({ params, objects, object, depth = 0 }) {
                                         </div>
                                     </>
                                 )}
-                                <div className="text-sm pt-2">
-                                    <ReactMarkdown>{param.schema.description || param.description}</ReactMarkdown>
-                                </div>
                             </div>
                         </div>
 
@@ -561,8 +558,6 @@ interface ApiEndpointData {
         name: string
         nextURL?: string
         items: string
-    }
-    apiComponents: {
         components: string
     }
     allMdx: {
@@ -574,10 +569,7 @@ interface ApiEndpointData {
 }
 
 export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
-    const {
-        apiComponents: { components: apiComponents },
-        allMdx,
-    } = data
+    const { allMdx } = data
     const name = data.data.name
     const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
@@ -590,13 +582,13 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     }
     // Filter PUT as it's basically the same as PATCH
     const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
-    items.map((item) => {
-        if (!paths[item.path]) {
-            paths[item.path] = {}
+    items.forEach((item) => {
+        if (!paths[item.pathName]) {
+            paths[item.pathName] = {}
         }
-        paths[item.path][item.httpVerb] = item.operationSpec
+        paths[item.pathName][item.httpVerb] = item
     })
-    const objects = JSON.parse(apiComponents)
+    const objects = JSON.parse(data.data.components)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
     const contentContainerRef = useRef<HTMLDivElement>(null)
@@ -613,7 +605,8 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     }, [])
 
     // Find overview.mdx node for this API entity
-    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
+    // Note: name uses underscores (from OpenAPI), but file slugs use hyphens
+    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name.replace(/_/g, '-')}/overview`)
 
     const [hovered, setHovered] = useState(false)
 
@@ -640,12 +633,9 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         </div>
                     )}
 
-                    <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
-
                     <Endpoints paths={paths} containerRef={contentContainerRef} />
 
                     {items.map((item, index) => {
-                        item = item.operationSpec
                         const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
                         return (
@@ -768,8 +758,6 @@ export const query = graphql`
             name
             url
             nextURL
-        }
-        apiComponents: apiComponents {
             components
         }
     }

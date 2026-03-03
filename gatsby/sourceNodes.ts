@@ -10,6 +10,147 @@ import type {
 } from '../src/templates/merch/types'
 import dayjs from 'dayjs'
 
+const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
+
+type ChangelogPlaylistVideo = {
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
+const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]> => {
+    const apiKey = process.env.YOUTUBE_API_KEY_CHANGELOG
+    if (!apiKey) {
+        console.warn('YOUTUBE_API_KEY_CHANGELOG not set. Skipping changelog playlist ingestion.')
+        return []
+    }
+
+    const playlistId = process.env.CHANGELOG_YOUTUBE_PLAYLIST_ID || DEFAULT_CHANGELOG_PLAYLIST_ID
+    if (!playlistId) {
+        console.warn('No playlist ID provided for changelog videos. Set CHANGELOG_YOUTUBE_PLAYLIST_ID.')
+        return []
+    }
+
+    try {
+        const playlistItems: Array<{ videoId: string; position: number }> = []
+        let nextPageToken: string | undefined
+
+        do {
+            const params = new URLSearchParams({
+                part: 'snippet,contentDetails',
+                playlistId,
+                maxResults: '50',
+                key: apiKey,
+            })
+            if (nextPageToken) {
+                params.set('pageToken', nextPageToken)
+            }
+
+            const response = await fetch(
+                `https://www.googleapis.com/youtube/v3/playlistItems?${params.toString()}`
+            ).then((res) => res.json())
+
+            if (!response.items) {
+                console.warn('Unexpected response while fetching changelog playlist items', response)
+                break
+            }
+
+            response.items.forEach((item: any) => {
+                const videoId = item?.contentDetails?.videoId || item?.snippet?.resourceId?.videoId
+                if (videoId) {
+                    playlistItems.push({
+                        videoId,
+                        position: typeof item?.snippet?.position === 'number' ? item.snippet.position : 0,
+                    })
+                }
+            })
+
+            nextPageToken = response.nextPageToken
+        } while (nextPageToken)
+
+        if (playlistItems.length === 0) {
+            return []
+        }
+
+        const videoDetailsMap: Record<string, ChangelogPlaylistVideo> = {}
+        const chunkSize = 50
+        for (let i = 0; i < playlistItems.length; i += chunkSize) {
+            const chunk = playlistItems.slice(i, i + chunkSize)
+            const idsParam = chunk.map((item) => item.videoId).join(',')
+            const params = new URLSearchParams({
+                part: 'snippet,contentDetails',
+                id: idsParam,
+                key: apiKey,
+                maxResults: '50',
+            })
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?${params.toString()}`).then(
+                (res) => res.json()
+            )
+
+            if (!response.items) {
+                continue
+            }
+
+            response.items.forEach((item: any) => {
+                const videoId = item?.id
+                if (!videoId) return
+                const snippet = item?.snippet
+                if (!snippet?.publishedAt) return
+
+                // Filter out Shorts (videos ≤60 seconds)
+                const duration = item?.contentDetails?.duration
+                if (duration) {
+                    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
+                    if (match) {
+                        const hours = parseInt(match[1] || '0', 10)
+                        const minutes = parseInt(match[2] || '0', 10)
+                        const seconds = parseInt(match[3] || '0', 10)
+                        const totalSeconds = hours * 3600 + minutes * 60 + seconds
+                        if (totalSeconds <= 60) {
+                            return // Skip Shorts
+                        }
+                    }
+                }
+
+                videoDetailsMap[videoId] = {
+                    videoId,
+                    publishedAt: snippet.publishedAt,
+                    title: snippet.title,
+                }
+            })
+        }
+
+        return Object.values(videoDetailsMap).sort(
+            (a, b) => dayjs(b.publishedAt).valueOf() - dayjs(a.publishedAt).valueOf()
+        )
+    } catch (error) {
+        console.warn('Failed to fetch changelog playlist videos', error)
+        return []
+    }
+}
+
+const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>): Record<string, any> => {
+    const collected = new Set<string>()
+
+    const collect = (obj: any) => {
+        if (typeof obj !== 'object' || !obj) return
+        if (obj['$ref']?.startsWith('#/components/schemas/')) {
+            const name = obj['$ref'].replace('#/components/schemas/', '')
+            if (!collected.has(name) && allSchemas[name]) {
+                collected.add(name)
+                collect(allSchemas[name])
+            }
+        }
+        Object.values(obj).forEach(collect)
+    }
+
+    items.forEach((item) => collect(item.operationSpec))
+
+    return {
+        schemas: Object.fromEntries([...collected].map((name) => [name, allSchemas[name]])),
+    }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
@@ -22,6 +163,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const parser = new OpenAPIParser(spec)
     const menu = MenuBuilder.buildStructure(parser, {} as any)
+
+    const allSchemas = spec.components?.schemas || {}
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
     const maxEndpointItems = 20
@@ -46,6 +189,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return endpoint
     })
     all_endpoints.forEach((endpoint) => {
+        const components = findAllReferencedSchemas(endpoint.items, allSchemas)
+
         const node = {
             id: createNodeId(`api_endpoint-${endpoint.name}`),
             internal: {
@@ -54,29 +199,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     items: endpoint.items,
                 }),
             },
-            items: JSON.stringify(
-                endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
-            ),
-            schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
+            items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
+            components: JSON.stringify(components),
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
         }
         createNode(node)
     })
-    createNode({
-        id: createNodeId(`api_endpoint-components`),
-        internal: {
-            type: `ApiComponents`,
-            contentDigest: createContentDigest({
-                components: spec.components,
-            }),
-        },
-        components: JSON.stringify(spec.components),
-    })
 
     const createProductDataNode = async () => {
-        const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+        const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -130,6 +263,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             },
                         },
                     },
+                    githubUrls: true,
+                    githubPRMetadata: true,
                 },
             },
             {
@@ -162,6 +297,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 media: cloudinaryMedia,
                 type: category,
                 year,
+                projectedCompletion,
+                dateCompleted,
                 ...other,
             }
             const roadmapNode = {
@@ -179,6 +316,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     await createRoadmapItems()
+
+    const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
+    changelogPlaylistVideos.forEach((video) => {
+        const nodeData = {
+            videoId: video.videoId,
+            publishedAt: video.publishedAt,
+            title: video.title,
+        }
+        const node = {
+            id: createNodeId(`changelog-video-${video.videoId}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `ChangelogVideo`,
+                contentDigest: createContentDigest(nodeData),
+            },
+            ...nodeData,
+        }
+        createNode(node)
+    })
 
     const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
         (res) => res.json()
@@ -805,6 +962,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     await sourceGithubNodes()
 
+    const fetchWorkflowTemplates = async () => {
+        const data = await fetch('https://us.posthog.com/api/public_hog_flow_templates?limit=350').then((res) =>
+            res.json()
+        )
+        data.results.forEach((template) => {
+            const node = {
+                id: createNodeId(`posthog-workflow-template-${template.id}`),
+                internal: {
+                    type: 'PostHogWorkflowTemplate',
+                    contentDigest: createContentDigest({ template }),
+                },
+                templateId: template.id,
+                ...template,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchWorkflowTemplates()
+
     const fetchReferences = async (page = 1) => {
         const referenceQuery = qs.stringify(
             {
@@ -862,6 +1039,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         events.forEach((event) => {
             const node = {
                 ...event,
+                strapiID: event.id,
                 id: createNodeId(`event-${event.id}`),
                 internal: {
                     type: 'Event',
@@ -873,4 +1051,67 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
     }
     await fetchEvents()
+
+    const fetchAchievements = async () => {
+        const query = qs.stringify({
+            populate: ['icon', 'achievement_group.achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
+            res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-${achievement.id}`),
+                internal: {
+                    type: 'Achievement',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchAchievementGroups = async () => {
+        const query = qs.stringify({
+            populate: ['achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
+            (res) => res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-group-${achievement.id}`),
+                internal: {
+                    type: 'AchievementGroup',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchRewards = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/rewards`).then((res) =>
+            res.json()
+        )
+        data.forEach((reward) => {
+            const node = {
+                id: createNodeId(`reward-${reward.handle}`),
+                internal: {
+                    type: 'Reward',
+                    contentDigest: createContentDigest(reward),
+                },
+                ...reward,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchAchievements()
+    await fetchAchievementGroups()
+    await fetchRewards()
 }

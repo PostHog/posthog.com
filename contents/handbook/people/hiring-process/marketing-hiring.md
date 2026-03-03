@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Marketing hiring at PostHog
 
-Our [Content](/teams/content) team is small and we don't hire into this team very often. Please check our [careers page](/careers) for our open roles. 
+Our <SmallTeam slug="content" /> is small and we don't hire into this team very often. Please check our [careers page](/careers) for our open roles. 
 
 ### What we are looking for in marketing hires
 

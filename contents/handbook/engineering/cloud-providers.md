@@ -8,14 +8,22 @@ showTitle: true
 
 ### How do I get access?
 
-Create a PR to the `posthog-cloud-infra` repository to add your details [here](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
+Create a PR to the `posthog-cloud-infra` repository to add your details in the [identity center Terraform configuration](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
 
 To give someone access
 1. Add the new user to the cloud infra repo (see link above)
 2. Use their email address as their username
 3. Add them to the "Developers" and "DevelopersRO" groups (just use `groups = local.default_groups`)
-4. Add team infra as reviewer. 
+4. Add team infra as reviewer.
 5. Once this is merged, tell them to use http://go/aws to log in
+
+### Elevating permissions via `#aws-access`
+
+To access the dev AWS environment, use the `/awsaccess` slash command in the `#aws-access` Slack channel and fill out the form that appears. Make sure to set up your AWS config file as described in our <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/ACCESS.md">docs</PrivateLink>.
+
+A dedicated `secrets-editor` role is available for managing secrets. Use this role across all AWS environments.
+
+EKS access via `#aws-access` is currently in development. In the near future, expect all AWS access to be managed through the `#aws-access` channel.
 
 ### Permissions errors using AWS CLI
 
@@ -43,7 +51,7 @@ unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKE
 
 ### Deploying PostHog
 
-See docs [here](/docs/self-host/deploy/aws).
+See the [AWS self-host deployment guide](/docs/self-host/deploy/aws).
 
 
 ## GCP
@@ -56,7 +64,7 @@ To give someone access: Navigate to [PostHog project IAM](https://console.cloud.
 
 ### Deploying PostHog
 
-See docs [here](/docs/self-host/deploy/gcp).
+See the [GCP self-host deployment guide](/docs/self-host/deploy/gcp).
 
 
 ## DigitalOcean
@@ -75,4 +83,4 @@ The code and setup files are in [digitalocean/marketplace-kubernetes repository]
 
 ### Deploying PostHog
 
-See docs [here](/docs/self-host/deploy/digital-ocean).
+See the [DigitalOcean self-host deployment guide](/docs/self-host/deploy/digital-ocean).

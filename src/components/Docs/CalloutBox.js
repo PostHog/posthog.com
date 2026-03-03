@@ -21,7 +21,7 @@ export const CalloutBox = ({ icon, title, type, children }) => {
                 )}
                 <strong className="text-lg">{title}</strong>
             </div>
-            <div className="ph-text pl-8 text-[15px] [&_p]:text-[15px] [&_*]:text-[15px] [&>*:last-child]:mb-0 !leading-relaxed">
+            <div className="ph-text pl-8 text-[15px] [&_p]:text-[15px] [&_*]:text-[15px] [&>*:last-child]:mb-0 [&_code]:text-[13px] [&_pre]:text-[13px] [&_code]:bg-primary [&_pre]:bg-primary !leading-relaxed">
                 {children}
             </div>
         </div>

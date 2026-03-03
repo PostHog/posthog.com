@@ -51,6 +51,8 @@ Instead, use them to brainstorm, plant the seed of an idea before sharing it mor
 
 If 1:1s become just about problems you have, they become a chore that no one enjoys.
 
+<NewsletterForm />
+
 ## 2. You need another team to approve your work
 
 This can happen for all sorts of reasons:
@@ -115,7 +117,7 @@ PostHog currently comprises 91 people, the vast majority of whom have "engineer"
 
 * Hire customer success and sales people with a technical background.
 
-* Hire support engineers who have software development experience.
+* Hire [support engineers who have software development experience](/newsletter/engineeringification-of-everything).
 
 * [Use GitHub as our content management system](/blog/github-cms).
 

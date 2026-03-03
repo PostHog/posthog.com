@@ -1,0 +1,20 @@
+---
+title: Upload source maps for Flutter
+showStepsToc: true
+---
+
+<CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
+
+A minimum CLI version of [0.5.25](https://github.com/PostHog/posthog/releases/tag/posthog-cli-v0.5.25) is required, but we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli) to ensure you have all of error tracking's features.
+
+</CalloutBox>
+
+If you are using Flutter Web, ensure source maps are generated
+
+```bash
+# example command
+# Files are usually under the 'build/web' folder
+flutter build web --source-maps
+```
+
+Then use our standard [CLI approach](/docs/error-tracking/upload-source-maps/cli) to inject and upload them.

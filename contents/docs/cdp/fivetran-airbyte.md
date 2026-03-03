@@ -30,6 +30,7 @@ PostHog batch exports support all major data warehouses:
 - [Databricks](/docs/cdp/batch-exports/databricks)
 - [Postgres](/docs/cdp/batch-exports/postgres)
 - [S3](/docs/cdp/batch-exports/s3) (for custom destinations)
+- [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
 
 ## Real-time alternatives
 
@@ -42,7 +43,7 @@ For use cases requiring real-time data, consider:
 
 If you're currently using an ETL tool with PostHog, migrating to batch exports is straightforward:
 
-1. **Create a new batch export** in PostHog's [Data pipelines](https://app.posthog.com/pipeline) interface
+1. **Create a new batch export** in PostHog's [Data pipelines](https://app.posthog.com/data-management/destinations) interface
 2. **Configure your destination** using the same credentials you used with the ETL tool
 3. **Test the configuration** using PostHog's built-in testing
 4. **Start the export** and verify data appears in your warehouse

@@ -1,7 +1,6 @@
 ---
 title: Hono
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg
+platformLogo: hono
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -24,7 +23,7 @@ Start by installing the `posthog-node` package using your package manager.
 npm install --save posthog-node
 ```
 
-Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
+Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to **export** your [project token](https://us.posthog.com/settings/project#variables) as an environment variable.
 
 ```js file=index.ts
 import { env } from 'hono/adapter'

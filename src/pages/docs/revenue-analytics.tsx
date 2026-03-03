@@ -28,8 +28,8 @@ export const Content = ({ quickLinks = true }) => {
                 description="Track and analyze your revenue metrics to understand your business performance and growth."
                 buttonText="Setup guide"
                 buttonLink="/docs/revenue-analytics/start-here"
-                imageColumnClasses="max-w-96"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_hog_81ae754b5e.png"
+                imageClasses="max-h-48 md:max-h-64"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_coin_a6fb991e80.png"
             />
 
             <AskMax

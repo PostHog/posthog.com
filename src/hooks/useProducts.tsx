@@ -16,8 +16,11 @@ import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { posthog_ai } from './productData/posthog_ai'
 import { llmAnalytics } from './productData/llm_analytics'
+import { workflows } from './productData/workflows'
 import { revenueAnalytics } from './productData/revenue_analytics'
+import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
+import { endpoints } from './productData/endpoints'
 
 const initialProducts = [
     productAnalytics,
@@ -33,6 +36,9 @@ const initialProducts = [
     posthog_ai,
     llmAnalytics,
     revenueAnalytics,
+    logs,
+    workflows,
+    endpoints,
 ]
 
 export default function useProducts() {
@@ -44,7 +50,9 @@ export default function useProducts() {
 
     const [products, setProducts] = useState(
         initialProducts.map((product) => {
-            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
+            const billingData =
+                product.billingData ||
+                billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to

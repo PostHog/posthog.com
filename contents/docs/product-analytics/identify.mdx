@@ -103,10 +103,10 @@ posthog.alias(previous_id='frontend_id', distinct_id='backend_id')
 ```
 
 ```php
-PostHog::alias(array(
+PostHog::alias([
   'distinctId' => 'frontend_id',
   'alias' => 'backend_id'
-));
+]);
 ```
 
 ```ruby
@@ -129,7 +129,7 @@ posthog.alias("frontend_id", "backend_id");
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "properties": {
         "distinct_id": "frontend_id",
         "alias": "backend_id"
@@ -176,10 +176,10 @@ posthog.alias('user2', 'user1');
 # Assume we previously identified a user with 'user1' using posthog.identify('user1')
 # ❌ The following is not possible:
 # You cannot use user1 as an alias for user2
-PostHog::alias(array(
+PostHog::alias([
   'distinctId' => 'user2',
   'alias' => 'user1'
-));
+]);
 ```
 
 ```ruby
@@ -351,7 +351,7 @@ posthog.capture({
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "properties": {
       "alias": "distinct_id_of_user_to_be_merged"
     },

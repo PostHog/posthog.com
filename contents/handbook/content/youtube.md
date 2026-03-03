@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> See also [how we do video at PostHog](/handbook/growth/marketing/video).
+> See also [how we do video at PostHog](/handbook/marketing/video).
 
 We experimented with [YouTube](https://www.youtube.com/@PostHog) from November 2022 to July 2023, but have paused creation and publishing for now. We may try again in the future.
 
@@ -32,7 +32,7 @@ We also were starting to run out of obvious tutorial and SEO blog content to tur
 
 YouTube comments are posted to [Slack](https://posthog.slack.com/archives/C083NMDUVPW) using [Make](https://www.make.com/). It's a tool similar to Zapier, except Zapier doesn't support YouTube comments.
 
-For access to Make, ask anyone in the [Content team](https://posthog.com/teams/content). They're all admins and so they can add you.
+For access to Make, ask anyone in the <SmallTeam slug="content" />. They're all admins and so they can add you.
 
 ## Thumbnails
 

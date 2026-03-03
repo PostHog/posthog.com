@@ -49,6 +49,7 @@ export default function ColumnsTemplate({
                     {description && (
                         <p
                             className={`text-2xl leading-snug opacity-80`}
+                            // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation content from CMS, not user input
                             dangerouslySetInnerHTML={{ __html: description }}
                         />
                     )}

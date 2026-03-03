@@ -46,6 +46,8 @@ When a team realizes they need a different goal, they have [the autonomy to chan
 
 Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would two months ago.
 
+<NewsletterForm />
+
 ## 2. You have to prepare asynchronously
 
 Goals planning can really go off the rails in meetings, especially if:
@@ -173,4 +175,4 @@ This process creates enough direction to make both the company and the small tea
 
 5. **Being dependent on other teams.** I've found that almost every time a goal is dependent on another team, it gets delayed or doesn't get done. The beauty of small teams is that they are autonomous. Dependency breaks this. Flag these in your plans before they become a problem.
 
-<NewsletterCTA />
+<NewsletterForm />

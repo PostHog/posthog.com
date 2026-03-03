@@ -5,6 +5,42 @@ import { calculatePrice, formatUSD } from '../../PricingSlider/pricingSliderLogi
 import { PricingTiers } from '../../Plans'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
+import pluralizeWord from 'pluralize'
+
+const TriggerEventsModal = ({ onClose, isVisible }) => {
+    return (
+        <>
+            <div
+                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${
+                    !isVisible ? 'hidden' : 'z-[1000000]'
+                }`}
+                onClick={() => onClose()}
+            />
+            <div
+                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
+          ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
+            >
+                <div className="w-full h-fit flex justify-between p-4 border-b border-primary">
+                    <span className="font-bold text-xl">Trigger events, explained</span>
+                    <button onClick={() => onClose()}>
+                        <IconX className="size-5" />
+                    </button>
+                </div>
+                <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
+                    <p className="mb-4 text-[15px]">
+                        Trigger Events are the events that actually kick off destinations in your pipelines.
+                    </p>
+                    <p className="text-[15px]">
+                        As an example lets say a <em>sign up event</em> is the trigger for 5 different slack
+                        destinations you have configured. Every time a sign up event is processed, it will trigger 5
+                        different slack messages but you will be charged only once not five times. The sign up event is
+                        a trigger event in this case.
+                    </p>
+                </div>
+            </div>
+        </>
+    )
+}
 
 const SliderRow = ({
     label = '',
@@ -71,7 +107,8 @@ const SliderRow = ({
                             freeAllocationText
                         ) : (
                             <>
-                                First {Math.round(freeAllocation).toLocaleString()} {unit}s free –&nbsp;
+                                First {Math.round(freeAllocation).toLocaleString()}{' '}
+                                {pluralizeWord(unit, Math.round(freeAllocation))} free –&nbsp;
                                 <em>every month!</em>
                             </>
                         )}
@@ -82,11 +119,15 @@ const SliderRow = ({
     )
 }
 
+const isDataPipelines = (product) =>
+    product?.categoryName === 'Data pipelines' || product?.handle === 'realtime_destinations'
+
 export default function StandaloneAddonsTab({ activeProduct, setVolume, setProduct }) {
     const [mainVolume, setMainVolume] = useState(activeProduct.volume || 0)
     const [mainCost, setMainCost] = useState(0)
     const [showBreakdown, setShowBreakdown] = useState(false)
     const [mainCostByTier, setMainCostByTier] = useState([])
+    const [triggerEventsModalOpen, setTriggerEventsModalOpen] = useState(false)
 
     const [addonData, setAddonData] = useState(
         () =>
@@ -159,8 +200,23 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     return (
         <div className="mb-4">
+            <TriggerEventsModal onClose={() => setTriggerEventsModalOpen(false)} isVisible={triggerEventsModalOpen} />
+            {isDataPipelines(activeProduct) && (
+                <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
+                    Trigger Events are the events that actually kick off destinations in your pipelines (
+                    <button
+                        onClick={() => setTriggerEventsModalOpen(true)}
+                        className="text-red dark:text-yellow font-semibold text-sm not-italic"
+                    >
+                        see explanation
+                    </button>
+                    ).
+                </div>
+            )}
             <div className="mb-4">
-                <h4 className="mb-3 text-base font-semibold">{activeProduct.name}</h4>
+                <h4 className="mb-3 text-base font-semibold">
+                    {activeProduct.productVariantName || activeProduct.name}
+                </h4>
                 <SliderRow
                     label={activeProduct.billingData.unit}
                     sliderConfig={activeProduct.slider}
@@ -230,7 +286,9 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                         </p>
                         <div className="space-y-8">
                             <div>
-                                <h4 className="text-lg m-0">{activeProduct.name}</h4>
+                                <h4 className="text-lg m-0">
+                                    {activeProduct.productVariantName || activeProduct.name}
+                                </h4>
                                 <p className="opacity-70 m-0 text-sm mb-2">
                                     <strong>{mainVolume.toLocaleString()}</strong> {activeProduct.billingData.unit}s
                                 </p>

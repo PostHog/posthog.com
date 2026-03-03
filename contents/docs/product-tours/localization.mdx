@@ -1,0 +1,123 @@
+---
+title: Localization
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Alpha />
+
+Configure your tours, banners, and announcements to display in the user's locale.
+
+## How it works
+
+For tours and announcements, you can create any number of **Translations**.
+
+Each translation is keyed on a [BCP 47 language tag](https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag).
+
+When a tour or announcement is displayed, PostHog chooses the translation based on the user's browser language or your `override_display_language` config setting.
+
+## Creating translations
+
+### Set the default language
+
+First, set the default language for your tour.
+
+When you set a default language, all existing tour content is mapped to the new default.
+
+This is used as a fallback when the user's language cannot be determined, or when your tour does not support the user's provided language.
+
+Open the **Translations** panel in the editor, and enter a language code that represents your tour's default.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_16_at_7_45_43_PM_c55596a1e6.png"
+    alt="Product Tour Translations panel"
+    classes="rounded"
+/>
+
+### Add a new language
+
+Once the default is set, you can add more languages in the same **Translations** panel.
+
+Enter a new language code, click the plus button to add it, then click the language card to select it.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_16_at_8_04_07_PM_53f2b73cdc.png"
+    alt="Product Tour Translations panel"
+    classes="rounded"
+/>
+
+Once selected, a new language code appears at the top of the editor, and you can make any changes necessary for this translation.
+
+If you have other translatable fields beyond the pop-up content, they appear below the content editor.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_16_at_8_06_51_PM_f9ac90017b.png"
+    alt="Product Tour Translations panel"
+    classes="rounded"
+/>
+
+## Language code matching
+
+When determining which tour translation to use, we run the following checks in this order:
+
+1. **Exact match** – A user with language `en-US` matches a tour with translation `en-US`.
+2. **Base match** – If no exact matches are found, we check for translations matching the user's "base" language. For example, a user language `en-GB` will match a tour with translation `en`, if no translation exists specifically for `en-GB`.
+3. **Fallback** – If neither of the above are successful, we fall back to the tour's default language.
+
+<CalloutBox icon="IconInfo" title="Base matching is one-directional" type="fyi">
+
+A user with language `en` will not match a tour translation `en-US`. For this reason, we recommend keeping your translation keys as base-only (like `en`), unless you have translations for specific dialects.
+
+</CalloutBox>
+
+## Language overrides
+
+By default, PostHog uses the user's browser language to determine which tour translation to show.
+
+This can be overridden by setting the `override_display_language` property in `posthog.init`.
+
+```typescript
+// set in posthog.init
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_app_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  disable_product_tours: false,
+  override_display_language: 'en-US',
+});
+```
+
+You can also use the `posthog.set_config` method to change the configuration after initialization.
+
+```typescript
+posthog.set_config({
+  override_display_language: 'en-GB',
+})
+```
+
+
+## Which languages should you support?
+
+This is different for everyone, but you can quickly check common browser languages from your users by running a query like this in the [SQL editor](https://app.posthog.com/sql):
+
+```sql
+SELECT 
+    properties.$browser_language AS language,
+    uniq(distinct_id) AS unique_users
+FROM events
+WHERE event = '$pageview'
+    AND timestamp >= now() - interval 30 day
+GROUP BY language
+ORDER BY unique_users DESC
+LIMIT 100
+```
+
+This will show the top 100 languages based on `$pageview` events, grouped by distinct IDs, in the past 30 days.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_02_17_at_12_31_33_PM_2dac28a17d.png"
+    alt="Product Tour Translations panel"
+    classes="rounded"
+/>

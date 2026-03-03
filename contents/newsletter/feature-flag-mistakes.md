@@ -98,6 +98,8 @@ Ideally, use flags in as few places as possible and abstract as much as possible
 
 Good goals for avoiding this mistake are to only use the feature flag in a single spot and making it easy to remove. Achieving both keeps your code well-structured.
 
+<NewsletterForm />
+
 ## 2. Being surprised when flags are turned off
 
 ![Shocked by feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/maxachu_meme_eacc429b59.jpg)

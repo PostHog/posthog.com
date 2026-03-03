@@ -14,6 +14,8 @@ Among other things, they
 2. organize [user interviews](/handbook/product/user-feedback)
 3. coach product engineers on ["how to do product"](/handbook/engineering/product-engineering)
 
+For a more in-depth look at the product role at PostHog, see [What product managers do at PostHog](/handbook/product/product-manager-role).
+
 # How PMs work
 
 ## Small team membership
@@ -27,46 +29,54 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   [Analytics Platform](/teams/analytics-platform)
--   [Data Stack](/teams/data-stack)
--   [Product Analytics](/teams/product-analytics)
--   [Web Analytics](/teams/web-analytics)
+-   <SmallTeam slug="data-stack" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   [Feature Flags](/teams/feature-flags)
--   [Experiments](/teams/experiments)
--   [PostHog AI](/teams/posthog-ai)
+-   <SmallTeam slug="feature-flags" />
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="posthog-ai" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Cory Slater" photo /></legend>
 
--   [Error Tracking](/teams/error-tracking)
--   [Surveys](/teams/surveys)
--   [Session Replay](/teams/session-replay)
+-   <SmallTeam slug="error-tracking" />
+-   <SmallTeam slug="surveys" />
+-   <SmallTeam slug="replay" />
 
 </fieldset>
 
 <fieldset>
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
--   [Workflows](/teams/workflows)
--   [Batch Exports (light support)](/teams/batch-exports)
+-   <SmallTeam slug="workflows" />
+-   <SmallTeam slug="batch-exports" />*
 -   Endpoints
 -   Logs
+
+*light support
+
+</fieldset>
+
+<fieldset>
+<legend><TeamMember name="Mike Warren" photo /></legend>
+
+-   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="web-analytics" />
+-   <SmallTeam slug="analytics-platform" />
 
 </fieldset>
 
 <fieldset>
 <legend>Teams with no PM currently</legend>
 
--   [Customer Analytics](/teams/customer-analytics)
--   [LLM Analytics](/teams/llm-analytics)
+-   <SmallTeam slug="customer-analytics" />
+-   <SmallTeam slug="llm-analytics" />
 
 </fieldset>
 

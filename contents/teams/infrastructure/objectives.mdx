@@ -1,20 +1,14 @@
-### 🪵 LogHog
-> Ship that v1!
+### 🛤️ Golden path for Terraform/Terragrunt - Drivers: <TeamMember name="Michael Kutsch" /> <TeamMember name="Daniel Jaramillo" />
+> Establish and apply a golden path for terraform/terragrunt in our infra-repo. Clean up terragrunt across all accounts and tackle root account cleanup.
 
-### ↔ Managed reverse proxy for everyone
-> Try this with istio gateway or another alternative
+### 🚀 The Application™ - effortless app deployments - Drivers: <TeamMember name="Sven Lange" /> <TeamMember name="Bryan Ciaraldi" />
+> Roll out The Application™ to all our apps, making it a breeze to deploy new services. Also fix pgbouncer so it's no longer a config pain.
 
-### 🔒DevEx friendly Secrets Management
-> Iterate on the current secrets management and make it a DevEx-centered self-service which is not needing us to operate. 
+### 🌐 Replace AWS CNI with Cilium - Drivers: <TeamMember name="Tom Piccirello" /> <TeamMember name="Daniel Jaramillo" /> <TeamMember name="Bryan Ciaraldi" />
+> Replace AWS CNI with something better for egress traffic control, observability, and performance. Cilium is the leading candidate.
 
-### 💽 Help team ingestion make persons split happening
-> To meet performance and scaling demands, we need to split out some services from using the main DB. We lead this effort as this is cross-team! Also make sure that we can run db migrations for several clusters safely and reliably
+### 🎯 Dedicated load balancer for Capture
+> Move capture to their own load balancer and Contour. Set up dedicated (N)LB for us|eu.i.posthog.com, own contour-ingress mirroring all routes, migrate traffic, and coordinate SDK adjustments if needed.
 
-### 📄 Make bigger chart adjustments less risky
-> We're currently replacing helm charts in place on all envs, we need a better approach so we can test this safely per environment without hefty workarounds
-
-### 🧹 Clean AWS Account and kubernetes bootstrapping
-> Spinning up new EKS clusters should be easy and fast, so that we can move towards immutable infrastructure - clickhouse-* accounts as an example
-
-### Security
-See [security goals](https://github.com/PostHog/posthog-cloud-infra/issues/5217)
+### 📦 Dependency upgrades (<TeamMember name="Bryan Ciaraldi" /> coordinating, support hero executing)
+> Bryan owns coordination and prioritization of dependency upgrades, with the support hero executing the work.

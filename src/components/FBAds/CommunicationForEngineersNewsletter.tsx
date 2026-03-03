@@ -1,6 +1,7 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
+import SmallTeam from 'components/SmallTeam'
 
 export default function CommunicationForEngineersNewsletter(): JSX.Element {
     return (
@@ -173,9 +174,9 @@ export default function CommunicationForEngineersNewsletter(): JSX.Element {
                 </p>
 
                 <p>
-                    But this only works if it comes from the top. At PostHog, the{' '}
-                    <Link to="/teams/blitzscale">Blitzscale Team</Link> shares details that are often private at other
-                    companies, like <Link to="/handbook/people/finance">company finances</Link>, slides from{' '}
+                    But this only works if it comes from the top. At PostHog, the <SmallTeam slug="blitscale" /> shares
+                    details that are often private at other companies, like{' '}
+                    <Link to="/handbook/people/finance">company finances</Link>, slides from{' '}
                     <Link to="/handbook/exec/annual-planning">board meetings</Link>, or the reasons for{' '}
                     <Link to="/handbook/strong-team#a-small-group-of-stronger-people-and-compensation">
                         letting people go

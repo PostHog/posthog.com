@@ -19,7 +19,7 @@ const ProductDetails = () => (
             </span>
             <span className="uppercase font-semibold text-xs text-white">Eco-friendly</span>
         </span>
-        <p className="text-4xl font-bold m-0 md:mt-2">PostHog Cloud</p>
+        <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Cloud</p>
         <p className="opacity-50 m-0 mb-4 text-sm">Digital download*</p>
     </>
 )
@@ -63,7 +63,7 @@ export default function CTA({ headline = true }) {
 
     return (
         <>
-            <section id="cta" ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0">
+            <section id="cta" ref={ref} className="pt-8 @xl:pt-0 px-5 lg:px-0">
                 {headline && (
                     <>
                         <h2 className={heading('lg')}>
@@ -75,11 +75,11 @@ export default function CTA({ headline = true }) {
                     </>
                 )}
 
-                <div className="md:hidden py-12">
+                <div className="@xl:hidden py-12">
                     <ProductDetails />
                 </div>
 
-                <div className="md:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto">
+                <div className="@xl:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto">
                     <div className="relative text-right">
                         <div className="mb-2">
                             <CloudinaryImage
@@ -88,7 +88,7 @@ export default function CTA({ headline = true }) {
                                 className="max-w-[443px]"
                             />
                         </div>
-                        <div className="absolute -left-4 bottom-12 md:left-[-8px] md:bottom-24">
+                        <div className="absolute -left-4 bottom-12 @xl:left-[-8px] @xl:bottom-24">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
                                 alt="People on G2 think we're great"
@@ -101,7 +101,7 @@ export default function CTA({ headline = true }) {
                                 transition={{ duration: 1, type: 'tween' }}
                                 initial={{ translateX: '-100vw' }}
                                 animate={{ translateX: 0 }}
-                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 md:right-auto rounded md:rounded-none"
+                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
                             >
                                 <span className="text-sm font-bold text-white">
                                     3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
@@ -128,7 +128,7 @@ export default function CTA({ headline = true }) {
                         </p>
                     </div>
                     <div>
-                        <div className="hidden md:block">
+                        <div className="hidden @xl:block">
                             <ProductDetails />
                         </div>
 

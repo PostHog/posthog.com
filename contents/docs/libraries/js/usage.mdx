@@ -95,7 +95,7 @@ We recommend reading our docs on [alias](/docs/data/identify#alias-assigning-mul
 
 [Group analytics](/docs/product-analytics/group-analytics) enables you to associate the events for that person's session with a group (e.g. teams, organizations, etc.).
 
-> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
 This is done by calling the `group` method with a group type and group ID.
 
@@ -224,7 +224,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 ## Early access feature management
 
-Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found [here](/docs/feature-flags/early-access-feature-management).
+Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found in the [early access feature management guide](/docs/feature-flags/early-access-feature-management).
 
 ```js-web
 posthog.getEarlyAccessFeatures((previewItemData) => {
@@ -311,11 +311,11 @@ posthog.capture("survey sent", {
       id: "d8462827-1575-4e1e-ab1d-b5fddd9f829c",
       question: "What is your favorite color?",
     }
-  ]
-  $survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c: survey_response // required. `survey_response` must be a text value.
+  ],
+  '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': survey_response // required. `survey_response` must be a text value.
   // Convert numbers to text e.g. 8 should be converted to "8".
   // For multiple choice select surveys, `survey_response` must be an array of values with the selected choices.
-  // e.g., $survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c: ["response_1", "response_2"]
+  // e.g., '$survey_response_d8462827-1575-4e1e-ab1d-b5fddd9f829c': ["response_1", "response_2"]
 })
 ```
 
@@ -394,7 +394,7 @@ Since version 1.187.0, you can provide a `before_send` function when initializin
 <summary>Redact URLs in event properties</summary>
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     before_send: (event: CaptureResult | null): CaptureResult | null => {
         if (!event) {
             return null
@@ -458,7 +458,7 @@ posthog.init('<ph_project_api_key>', {
 <summary>Redact person properties in $set or $set_once</summary>
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     before_send: (event: CaptureResult | null): CaptureResult | null => {
         if (!event) {
             return null
@@ -484,7 +484,7 @@ posthog.init('<ph_project_api_key>', {
 
 Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
 
-Some functions of PostHog, for example much of web analytics, rely on receiving all events. Sampling `$pageview ` or `$pageleave` events in particular can cause unexpected results.
+Some functions of PostHog, for example much of web analytics, rely on receiving all events. Sampling `$pageview` or `$pageleave` events in particular can cause unexpected results.
 
 #### Sampling events using our provided customization
 
@@ -495,7 +495,7 @@ We offer a pre-built `sampleByEvent` function to sample by event name. You can i
 ```ts file=Import
 import { sampleByEvent } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   // capture only half of dead click and web vitals events
   before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
@@ -505,7 +505,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   // capture only half of dead click and web vitals events
   before_send: posthogCustomizations.sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
@@ -521,7 +521,7 @@ This can be used to sample events by name, distinct ID, session ID, or custom fu
 When working locally it can be useful to see what PostHog would do, without actually sending the data to PostHog
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: (event: CaptureResult | null): CaptureResult | null => {
     if (event) {
       console.log('posthog event: ' + event.event, event)
@@ -545,7 +545,7 @@ We offer a pre-built `sampleByDistinctId` function to sample a percentage of eve
 ```ts file=Import
 import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: sampleByDistinctId(0.4)
 })
 ```
@@ -554,7 +554,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: posthogCustomizations.sampleByDistinctId(0.4)
 })
 ```
@@ -575,7 +575,7 @@ We offer a pre-built `sampleBySessionId` function to sample a percentage of even
 ```ts file=Import
 import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: sampleBySessionId(0.25)
 })
 ```
@@ -584,7 +584,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host:
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: posthogCustomizations.sampleBySessionId(0.25)
 })
 ```
@@ -599,7 +599,7 @@ posthog.init('<ph_project_api_key>', {
 If none of the provided sampling functions meet your needs, you can provide a custom function to sample events.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: (event: CaptureResult | null): CaptureResult | null => {
     if (!event) {
       return null
@@ -624,7 +624,7 @@ posthog.init('<ph_project_api_key>', {
 You can provide an array of functions to be called one after the other:
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   before_send: [
     sampleByDistinctId(0.5), // only half of people
     sampleByEvent(['$web_vitals'], 0.1), // and they capture all events except 10% of web vitals
@@ -642,7 +642,7 @@ If you see an unusual number of visitors in your project, you can try and unders
 If a specific user agent is causing problems (many more events than other user agents), you can block it by adding it to `custom_blocked_useragents` in your PostHog initialization:
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   custom_blocked_useragents: ['<user_agent_string>']
 })
 ```
@@ -659,7 +659,7 @@ const LIGHTHOUSE_USER_AGENTS = [
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
 ]
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   custom_blocked_useragents: LIGHTHOUSE_USER_AGENTS
 })
 ```
@@ -677,7 +677,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode by setting the `debug` option to `true` in the `init` call. A common pattern is to set this to `true` in development environments only using environment variables.
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   debug: true // Set this to true in development environments only using environment variables
 })
 ```

@@ -62,7 +62,7 @@ That’s it. There are dozens of tools you can use for different tasks, but 90% 
 
 > **Remember This:** SEO tools are just that: tools. They might make your life a little easier, but they won’t magically generate growth. An easy way to fail is to spend too much time learning or researching SEO tools, and not enough doing the important bit: the content.
 
-<br/>
+<NewsletterForm />
 
 ## 3. Low volume + a problem you solve = winning
 
@@ -250,6 +250,7 @@ _Words by [Andy Vandervell](https://www.linkedin.com/in/andyvandervell/), who ra
 *   **[Make an Org Chart You Want to Ship](https://review.firstround.com/make-an-org-chart-you-want-to-ship-advice-from-linear-on-how-heirloom-tomatoes-should-inspire-team-design) – Nan Yo, Linear’s Head of Product**
 *   **[13 Undesirable Behaviors in Software Engineers](https://newsletter.techleadmentor.com/p/13-undesirable-behaviors-in-software) –**
 
+<NewsletterForm />
 
 [^1]: I’m not going to list my CV here – see LinkedIn for that – but websites I’ve managed have ranked top of Google for “best black Friday deals” on Black Friday, “best Netflix series” in the middle of the pandemic, and “iPhone rumors” back when a new iPhone was still a big deal. I view myself as a writer and editor with a lot of SEO knowledge, rather than a full-time SEO expert, but I’ve been at this for a while.
 

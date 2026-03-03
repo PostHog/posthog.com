@@ -57,7 +57,7 @@ These folks do [glue work](https://www.noidea.dog/glue?utm_source=newsletter.pos
 
 Think, auth. Not flashy, not a standalone product line, yet it keeps the product together in one piece. It makes or breaks enterprise deals, or a user’s day.
 
-[Billing](/teams/billing)? The ultimate glue. That’s systems, UI, and accounting, all in one. The spice must flow.
+Billing? The ultimate glue. That’s systems, UI, and accounting, all in one. The spice must flow. That's <SmallTeam slug="billing" /> at PostHog.
 
 The folks owning these areas should be talking to users, they should be owning product metrics.
 
@@ -85,11 +85,14 @@ Distributed ownership is the name of the game for those internal aspects. It tak
 
 It’s not their full-time job, and it shouldn’t be yet. And, for the hairiest problems, you agree to spin up a **short-lived** project team to address that specifically.
 
-Obviously, some back-office work is an early must-have. You won’t get far without a clear [owner of data infra](/teams/infrastructure), especially if you run a data-intensive SaaS like we do at [PostHog](/).[^2]
+
+Obviously, some back-office work is an early must-have. You won’t get far without a clear owner of data infra, especially if you run a data-intensive SaaS like we do at [PostHog](/).[^2] That's <SmallTeam slug="infrastructure" /> at PostHog.
 
 But, beyond the absolute essentials, only start a back-office team when you can honestly call its resources a rounding error compared to product development. Backend infra at 20 engineers, anything else at 50+.
 
 Until then, a little bit of chaos is valuable: desirable, even. It teaches everyone which problems actually matter.
+
+<NewsletterForm />
 
 ## Address must-have gaps
 
@@ -110,7 +113,7 @@ Those glue areas don’t bring product-market fit by themselves, but neglecting 
 And remember: an org that over indexes on back-office teams early will:
 
 1. Optimize for fluffy internal goals more than real value.
-2. Create an approval culture that erodes autonomy and slows you down.
+2. Create an [approval culture that erodes autonomy](/newsletter/how-startups-lose-their-edge) and slows you down.
 
 That’s a death sentence, so choose wisely.
 
@@ -118,14 +121,15 @@ _If you liked this, consider [sharing it on Hacker News](https://news.ycombinato
 
 ---
 
-## **🧠 Good reads for people who build cool stuff**
+## 🧠 Good reads for people who build cool stuff
 
 -   [**How we use PostHog's built-in data warehouse**](/blog/data-warehouse-at-posthog) **– Ian Vanagas**
 -   [**Why LLMs Can't Really Build Software**](https://zed.dev/blog/why-llms-cant-build-software?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Conrad Irwin**
 -   [**Everything I know about good system design**](https://www.seangoedecke.com/good-system-design?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Sean Goedecke**
 -   [**If you're remote, ramble**](https://stephango.com/ramblings?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Steph Ango**
 
+<NewsletterForm />
+
 [^1]: This article is specifically about engineering teams. There are many non-engineering teams, such as support or customer success, that you could call glue teams, too.
 [^2]: Still, with so much of hosting outsourced to cloud providers, infra is leaner than ever. More so if you run on Vercel + Supabase.
 
-<NewsletterForm />

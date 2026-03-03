@@ -185,7 +185,7 @@ Users who don't get full value out of your product are more likely the churn, an
 
 ### 8. Focus on customer success
 
-Customer success > outbound sales a lot of the time. [Our customer success team](/teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
+Customer success > outbound sales a lot of the time. Our <SmallTeam slug="customer-success" /> owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
 
 ### 9. Re-engage your users
 

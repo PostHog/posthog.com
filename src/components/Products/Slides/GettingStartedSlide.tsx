@@ -4,7 +4,6 @@ import WordArt, { wordArtThemes } from 'components/WordArt'
 import MSPaint from 'components/MSPaint'
 import StopImage from '../../../../static/images/stop.png'
 import { SignupCTA } from 'components/SignupCTA'
-import IntegrationPrompt from 'components/IntegrationPrompt'
 import { IconCheck, IconCopy } from '@posthog/icons'
 import { useToast } from '../../../context/Toast'
 import { Link } from 'gatsby'
@@ -95,7 +94,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     <br />
                     <div className="relative">
                         <SignupCTA
-                            size="absurd"
+                            size="xl"
                             type="primary"
                             className="animate-grow mt-2 mb-1"
                             state={{ initialTab: 'signup' }}

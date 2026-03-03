@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
+import SmallTeam from 'components/SmallTeam'
 
 export interface Feature {
     slug: string
@@ -78,7 +79,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'client-libraries': {
         feature: 'Client libraries',
-        owner: [],
+        owner: ['client-libraries'],
         notes: <em>See SDKs</em>,
         label: false,
     },
@@ -114,6 +115,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Dashboards',
         owner: ['product-analytics', 'analytics-platform'],
     },
+    'dashboard-templates': {
+        feature: 'Dashboard templates',
+        owner: ['analytics-platform'],
+    },
     'data-colors-themes': {
         feature: 'Data colors & themes',
         owner: ['analytics-platform'],
@@ -122,6 +127,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
@@ -145,6 +151,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['feature-flags'],
         label: 'feature/feature-flags',
     },
+    endpoints: {
+        feature: 'Endpoints',
+        owner: ['data-stack'],
+    },
     'error-tracking': {
         feature: 'Error tracking',
         owner: ['error-tracking'],
@@ -158,13 +168,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Feature flags',
         owner: ['feature-flags'],
     },
+    feed: {
+        feature: 'Feed',
+        owner: ['growth'],
+    },
     'group-analytics': {
         feature: 'Group analytics',
         owner: ['customer-analytics'],
     },
     heatmaps: {
         feature: 'Heatmaps',
-        owner: ['replay'],
+        owner: ['web-analytics'],
     },
     hogql: {
         feature: 'HogQL',
@@ -205,16 +219,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: [],
         notes: (
             <>
-                <TeamMember name="David Newell" photo />
+                Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks
+                is owned by product analytics)
             </>
         ),
+        owner: ['platform-features'],
+        label: 'feature/notebooks',
     },
     onboarding: {
         feature: 'Onboarding',
         owner: ['growth'],
+    },
+    'organization-management-deletion': {
+        feature: 'Organization Management & Deletion',
+        owner: ['platform-features'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -246,7 +266,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
-        owner: ['data-stack'],
+        owner: ['warehouse-sources'],
         label: 'feature/pipelines',
     },
     platform: {
@@ -295,15 +315,15 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
-        owner: [],
+        owner: ['client-libraries'],
         notes: (
             <>
                 Shared responsibility, with features owned by the relevant small team, or try{' '}
@@ -317,7 +337,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 .
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
+                <strong>
+                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
+                    first.
+                </strong>
             </>
         ),
         label: 'feature/libraries',
@@ -329,18 +352,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: ['mobile'],
+        owner: ['client-libraries'],
         notes: (
             <>
-                Shared responsibility with the relevant small team for feature-owned areas.
-                <br />
-                <br /> Start with the{' '}
-                <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile team
-                </a>{' '}
-                for triage, loop in
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
-                needed.
+                Shared responsibility, with features owned by the relevant small team, or try{' '}
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
+                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
+                    incident.io schedule
+                </PrivateLink>
+                .
             </>
         ),
         label: 'feature/mobile',
@@ -370,11 +391,20 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/sessions',
     },
+    'session-explorer': {
+        feature: 'Session explorer',
+        owner: ['web-analytics'],
+        label: 'feature/session-explorer',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
         notes: <>All teams manage their own settings</>,
         label: 'feature/settings',
+    },
+    'source-maps': {
+        feature: 'Source maps',
+        owner: ['error-tracking'],
     },
     'sql-editor': {
         feature: 'SQL editor',
@@ -406,6 +436,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Table exports',
         owner: ['analytics-platform'],
     },
+    terraform: {
+        feature: 'Terraform integration',
+        owner: ['analytics-platform'],
+        label: 'feature/terraform',
+    },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
         owner: ['platform-ux'],
@@ -432,6 +467,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['workflows'],
         label: 'feature/pipelines',
     },
+    'weekly-digest': {
+        feature: 'Weekly digest',
+        owner: ['growth'],
+    },
     workflows: {
         feature: 'Workflows',
         owner: ['workflows'],
@@ -439,12 +478,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: [],
-        notes: (
-            <>
-                Owned by <TeamMember name="Danilo Campos" photo />, with help from Team Array
-            </>
-        ),
+        owner: ['docs-wizard'],
     },
 }
 

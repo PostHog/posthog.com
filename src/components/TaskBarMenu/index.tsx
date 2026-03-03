@@ -11,14 +11,12 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
-    IconCheck,
-    IconCopy,
-    IconShare,
     IconFeatures,
+    IconPeople,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
-import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -29,12 +27,11 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { Popover } from 'components/RadixUI/Popover'
+import { SearchUI } from 'components/SearchUI'
 
 export default function TaskBarMenu() {
     const {
         windows,
-        bringToFront,
-        focusedWindow,
         openSearch,
         openSignIn,
         siteSettings,
@@ -44,9 +41,12 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
-        copyDesktopParams,
+        websiteMode,
+        searchOpen,
+        setSearchOpen,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
+    const [rendered, setRendered] = useState(false)
     const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -76,6 +76,10 @@ export default function TaskBarMenu() {
         }
     }, [])
 
+    useEffect(() => {
+        setRendered(true)
+    }, [])
+
     const handleActiveWindowsClick = () => {
         setIsActiveWindowsPanelOpen(true)
     }
@@ -86,6 +90,14 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
+    }
+
+    const handleSearchOpenChange = (open: boolean) => {
+        if (websiteMode) {
+            setSearchOpen(open)
+        } else {
+            openSearch()
+        }
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -202,6 +214,12 @@ export default function TaskBarMenu() {
                                     link: '/feature-matrix',
                                     icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Team directory',
+                                    link: '/team-directory',
+                                    icon: <IconPeople className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
                             ]
                           : []),
                       {
@@ -217,19 +235,6 @@ export default function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Community',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Sign in to PostHog.com',
-                          onClick: handleSignInClick,
-                      },
-                      {
-                          type: 'separator' as const,
-                      },
-                      {
-                          type: 'item' as const,
                           label: 'Go to...',
                           disabled: true,
                       },
@@ -239,6 +244,19 @@ export default function TaskBarMenu() {
                           link: 'https://app.posthog.com',
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
                           external: true,
+                      },
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in to the community',
+                          onClick: handleSignInClick,
                       },
                   ],
         },
@@ -250,14 +268,23 @@ export default function TaskBarMenu() {
                 ref={taskbarRef}
                 id="taskbar"
                 data-scheme="primary"
-                className="w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
+                data-menu-container
+                className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 pl-0.5 pr-2 ${
+                    websiteMode ? 'sticky top-0 z-40' : 'bg-accent/75 z-50'
+                } ${rendered ? 'block' : 'hidden'}`}
             >
-                <MenuBar
-                    menus={menuData}
-                    className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
-                />
-                <aside className="flex items-center gap-0.5 py-1">
-                    {/* <MenuBar
+                <div
+                    className={`mx-auto transition-all duration-300 flex justify-between items-center w-full ${
+                        websiteMode ? 'max-w-7xl' : 'max-w-full'
+                    }`}
+                >
+                    <MenuBar
+                        showChevronDown={websiteMode}
+                        menus={menuData}
+                        className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
+                    />
+                    <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
+                        {/* <MenuBar
                         menus={[
                             {
                                 trigger: <span className="text-red font-semibold">Get started - free</span>,
@@ -288,73 +315,98 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                    <div className="relative mr-1">
-                        <OSButton
-                            variant="primary"
-                            size="md"
-                            asLink
-                            to={posthogInstance ? posthogInstance.replace(/"/g, '') : 'https://app.posthog.com/signup'}
-                            className=""
-                        >
-                            {posthogInstance ? 'Dashboard' : 'Get started – free'}
-                        </OSButton>
-                    </div>
-                    <Tooltip
-                        trigger={
-                            <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
-                                <IconSearch className="size-5" />
-                            </OSButton>
-                        }
-                    >
-                        <div className="flex flex-col items-center gap-1">
-                            <p className="text-sm mb-0">Search</p>
-                            <KeyboardShortcut text="/" size="sm" />
-                        </div>
-                    </Tooltip>
-                    <Tooltip
-                        trigger={
+                        <div className="relative mr-1">
                             <OSButton
-                                onClick={() => openNewChat({ path: `ask-max` })}
-                                size="sm"
-                                className="relative top-px"
+                                variant="primary"
+                                size="md"
+                                asLink
+                                to={
+                                    posthogInstance
+                                        ? posthogInstance.replace(/"/g, '')
+                                        : 'https://app.posthog.com/signup'
+                                }
+                                className=""
                             >
-                                <IconChatHelp className="size-5" />
+                                {posthogInstance ? 'Dashboard' : 'Get started – free'}
                             </OSButton>
-                        }
-                    >
-                        <div className="flex flex-col items-center gap-1">
-                            <p className="text-sm mb-0">Ask PostHog AI</p>
-                            <div className="flex items-center gap-1">
-                                <KeyboardShortcut text="Shift" size="sm" />
-                                <KeyboardShortcut text="?" size="sm" />
-                            </div>
                         </div>
-                    </Tooltip>
-                    {siteSettings.experience === 'posthog' && (
-                        <motion.div
-                            animate={
-                                isAnimating
-                                    ? {
-                                          scale: [1, 1.2, 1],
-                                          rotate: [0, -5, 5, -5, 5, 0],
-                                      }
-                                    : {}
+                        <Popover
+                            open={searchOpen}
+                            dataScheme="primary"
+                            onOpenChange={handleSearchOpenChange}
+                            trigger={
+                                <span>
+                                    <Tooltip
+                                        trigger={
+                                            <span>
+                                                <OSButton
+                                                    size="sm"
+                                                    className={`relative top-px ${
+                                                        websiteMode && searchOpen
+                                                            ? 'border border-primary !bg-accent'
+                                                            : ''
+                                                    }`}
+                                                >
+                                                    <IconSearch className="size-5" />
+                                                </OSButton>
+                                            </span>
+                                        }
+                                    >
+                                        <div className="flex flex-col items-center gap-1">
+                                            <p className="text-sm mb-0">Search</p>
+                                            <KeyboardShortcut text="/" size="sm" />
+                                        </div>
+                                    </Tooltip>
+                                </span>
                             }
-                            transition={{
-                                duration: 0.5,
-                                ease: 'easeInOut',
-                                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                            }}
+                            contentClassName="w-[450px] border border-primary rounded !p-0 overflow-hidden"
                         >
-                            {totalWindows <= 0 ? (
-                                <Tooltip
-                                    trigger={
-                                        <button
-                                            onClick={handleActiveWindowsClick}
-                                            disabled={totalWindows <= 0}
-                                            data-scheme="primary"
-                                            data-active-windows
-                                            className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
+                            <SearchUI />
+                        </Popover>
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    onClick={() => openNewChat({ path: `ask-max` })}
+                                    size="sm"
+                                    className="relative top-px"
+                                >
+                                    <IconChatHelp className="size-5" />
+                                </OSButton>
+                            }
+                        >
+                            <div className="flex flex-col items-center gap-1">
+                                <p className="text-sm mb-0">Ask Max</p>
+                                <div className="flex items-center gap-1">
+                                    <KeyboardShortcut text="Shift" size="sm" />
+                                    <KeyboardShortcut text="?" size="sm" />
+                                </div>
+                            </div>
+                        </Tooltip>
+                        {siteSettings.experience === 'posthog' && (
+                            <motion.div
+                                animate={
+                                    isAnimating
+                                        ? {
+                                              scale: [1, 1.2, 1],
+                                              rotate: [0, -5, 5, -5, 5, 0],
+                                          }
+                                        : {}
+                                }
+                                transition={{
+                                    duration: 0.5,
+                                    ease: 'easeInOut',
+                                    times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+                                }}
+                            >
+                                {totalWindows <= 0 ? (
+                                    <Tooltip
+                                        trigger={
+                                            <button
+                                                onClick={handleActiveWindowsClick}
+                                                disabled={totalWindows <= 0}
+                                                data-scheme="primary"
+                                                data-active-windows
+                                                className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
                                             border-[1.5px] 
                                             border-t-4 
                                             
@@ -372,28 +424,28 @@ export default function TaskBarMenu() {
                                                     : 'bg-accent border-primary dark:border-[#eaecf6]'
                                             }
                                         `}
-                                        >
-                                            <span className="text-[13px] font-semibold relative -top-px">
-                                                {totalWindows}
-                                            </span>
-                                        </button>
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="max-w-48 text-center">
-                                        <p className="text-sm mb-0">You have no open windows</p>
-                                        <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
-                                            (But if you did, you could manage them here!)
-                                        </p>
-                                    </div>
-                                </Tooltip>
-                            ) : (
-                                <button
-                                    onClick={handleActiveWindowsClick}
-                                    disabled={totalWindows <= 0}
-                                    data-scheme="primary"
-                                    data-active-windows
-                                    className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
+                                            >
+                                                <span className="text-[13px] font-semibold relative -top-px">
+                                                    {totalWindows}
+                                                </span>
+                                            </button>
+                                        }
+                                        delay={0}
+                                    >
+                                        <div className="max-w-48 text-center">
+                                            <p className="text-sm mb-0">You have no open windows</p>
+                                            <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
+                                                (But if you did, you could manage them here!)
+                                            </p>
+                                        </div>
+                                    </Tooltip>
+                                ) : (
+                                    <button
+                                        onClick={handleActiveWindowsClick}
+                                        disabled={totalWindows <= 0}
+                                        data-scheme="primary"
+                                        data-active-windows
+                                        className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
                                     border-[1.5px] 
                                     border-t-4 
                                     
@@ -411,14 +463,17 @@ export default function TaskBarMenu() {
                                             : 'bg-accent border-primary dark:border-[#eaecf6]'
                                     }
                                 `}
-                                >
-                                    <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
-                                </button>
-                            )}
-                        </motion.div>
-                    )}
-                    <MenuBar menus={accountMenu} className="[&_button]:px-2" />
-                </aside>
+                                    >
+                                        <span className="text-[13px] font-semibold relative -top-px">
+                                            {totalWindows}
+                                        </span>
+                                    </button>
+                                )}
+                            </motion.div>
+                        )}
+                        <MenuBar menus={accountMenu} className="[&_button]:px-2" />
+                    </aside>
+                </div>
             </div>
             <ActiveWindowsPanel />
         </>

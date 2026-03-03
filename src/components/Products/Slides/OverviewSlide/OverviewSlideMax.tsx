@@ -1,8 +1,7 @@
-import React, { version } from 'react'
+import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Link from 'components/Link'
 
-const skills = [
+export const skills = [
     'Put on a data analyst hat and explore your PostHog data in depth',
     'Create dashboards and generate PostHog data visualizations, such as insights',
     'Interact natively with the PostHog UI, for example by editing filters',
@@ -11,6 +10,8 @@ const skills = [
     'Create surveys using natural language',
     'Write Hog functions to power your realtime destinations',
 ]
+
+export const skillTitle = `Unlike other agents, PostHog AI can:`
 
 export default function OverviewSlideMax() {
     return (
@@ -31,7 +32,7 @@ export default function OverviewSlideMax() {
                         <p className="text-2xl text-secondary mx-auto">
                             PostHog AI is deeply connected with your data, and lives inside of the PostHog app.
                         </p>
-                        <h3 className="text-2xl mt-4 text-primary">Unlike other agents, PostHog AI can:</h3>
+                        <h3 className="text-2xl mt-4 text-primary">{skillTitle}</h3>
                         <ul>
                             {skills.map((skill: string) => (
                                 <li key={skills.indexOf(skill)} className="text-xl text-primary">

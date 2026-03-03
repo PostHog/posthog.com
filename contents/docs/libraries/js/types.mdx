@@ -1,0 +1,108 @@
+---
+title: TypeScript types for script tag installation
+sidebar: Docs
+showTitle: true
+---
+
+If you're loading PostHog via a `<script>` tag and want TypeScript types for `window.posthog`, you can install the `@posthog/types` package.
+
+## When to use this package
+
+### You need this package if:
+
+You're loading PostHog via a `<script>` tag and want TypeScript types for `window.posthog`:
+
+```html
+<!-- You load PostHog like this -->
+<script>
+    !function(t,e){...}(document,window.posthog||[]);
+    posthog.init('your-api-key', { api_host: 'https://us.i.posthog.com' })
+</script>
+```
+
+### You don't need this package if:
+
+You're installing any Javascript/Typescript PostHog library via npm, yarn, or pnpm. The types are **already included**:
+
+| Package | Description |
+|---------|-------------|
+| `posthog-js` | Browser SDK |
+| `posthog-js-lite` | Lighter browser SDK (types are different) |
+| `posthog-node` | Node.js SDK |
+| `posthog-react-native` | React Native SDK |
+| `@posthog/react` | React hooks and components |
+
+```typescript
+// Types are already available when you install posthog-js
+import posthog from 'posthog-js'
+
+posthog.init('your-api-key')
+posthog.capture('my_event') // ✅ Fully typed
+```
+
+## Installation
+
+```bash
+npm install @posthog/types
+# or
+yarn add @posthog/types
+# or
+pnpm add @posthog/types
+```
+
+## Usage
+
+### Typing `window.posthog` (script tag usage)
+
+Create a type declaration file to type `window.posthog`:
+
+```typescript
+// posthog.d.ts
+import type { PostHog } from '@posthog/types'
+
+declare global {
+    interface Window {
+        posthog?: PostHog
+    }
+}
+
+export {}
+```
+
+Now you can use `window.posthog` with full type safety:
+
+```typescript
+// Your code
+window.posthog?.capture('button_clicked', { button_id: 'signup' })
+window.posthog?.identify('user-123', { email: 'user@example.com' })
+
+const flagValue = window.posthog?.getFeatureFlag('my-flag')
+if (flagValue === 'variant-a') {
+    // ...
+}
+```
+
+### Typing configuration objects
+
+You can also use the types to ensure your configuration objects are correctly typed:
+
+```typescript
+import type { PostHogConfig, Properties } from '@posthog/types'
+
+// Type your configuration
+const config: Partial<PostHogConfig> = {
+    api_host: 'https://us.i.posthog.com',
+    autocapture: true,
+    capture_pageview: 'history_change',
+}
+
+// Type event properties
+const eventProps: Properties = {
+    button_id: 'signup',
+    page: '/pricing',
+}
+```
+
+## Version synchronization
+
+The `@posthog/types` package version is synchronized with `posthog-js`. They are always released together with matching version numbers, ensuring type definitions stay in sync with the SDK.

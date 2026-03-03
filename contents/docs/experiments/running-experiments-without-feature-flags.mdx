@@ -83,13 +83,13 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id',
   'event' => 'event_name_of_your_goal_metric',
-  'properties' => array(
-    '$feature/experiment-feature-flag-key'  = 'variant-name'
-  )
-));
+  'properties' => [
+    '$feature/experiment-feature-flag-key' => 'variant-name'
+  ]
+]);
 ```
 
 ```ruby
@@ -209,14 +209,14 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id',
   'event' => '$feature_flag_called',
-  'properties' => array(
-    '$feature_flag_response'  = 'variant-name',
-    '$feature_flag': 'feature-flag-key'
-  )
-));
+  'properties' => [
+    '$feature_flag_response' => 'variant-name',
+    '$feature_flag' => 'feature-flag-key'
+  ]
+]);
 ```
 
 ```ruby

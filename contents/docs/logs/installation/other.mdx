@@ -1,0 +1,75 @@
+---
+title: Other languages logs installation
+platformIconName: IconCode
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+The key requirements are:
+- Use OTLP (OpenTelemetry Protocol) for log export over HTTP
+- Send logs to your PostHog logs endpoint (see configuration step below)
+- Include your project token in the Authorization header or as a `?token=` query parameter
+
+Find the OpenTelemetry SDK for your language in the [official registry](https://opentelemetry.io/ecosystem/registry/).
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Configure your OpenTelemetry SDK to send logs to PostHog.
+
+**Endpoint:**
+
+```
+<ph_client_api_host>/i/v1/logs
+```
+
+**Authentication:** Include your project token either as an `Authorization` header:
+
+```
+Authorization: Bearer <ph_project_token>
+```
+
+Or as a query parameter on the endpoint:
+
+```
+<ph_client_api_host>/i/v1/logs?token=<ph_project_token>
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>

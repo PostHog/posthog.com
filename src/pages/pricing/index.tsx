@@ -16,6 +16,8 @@ import ReaderView from 'components/ReaderView'
 
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
+import { scrollToElement } from 'components/ScrollToElement'
+import { useApp } from '../../context/App'
 
 export default function Pricing() {
     const [activePlan, setActivePlan] = useState('free')
@@ -23,6 +25,7 @@ export default function Pricing() {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const [defaultTab, setDefaultTab] = useState('plans')
     const { search } = useLocation()
+    const { websiteMode } = useApp()
 
     const pricingTableOfContents = [
         { url: 'cloud', value: 'PostHog Cloud', depth: 0 },
@@ -145,12 +148,16 @@ export default function Pricing() {
         if (tab) {
             setDefaultTab(tab)
         }
+        const calculator = params.get('calculator')
+        if (calculator) {
+            scrollToElement('calculator')
+        }
     }, [search])
 
     return (
         <ReaderView
             hideLeftSidebar
-            tableOfContents={pricingTableOfContents}
+            tableOfContents={websiteMode ? [] : pricingTableOfContents}
             showQuestions={false}
             hideMobileTableOfContents
         >

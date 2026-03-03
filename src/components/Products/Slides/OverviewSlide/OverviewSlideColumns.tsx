@@ -34,9 +34,8 @@ export default function OverviewSlideColumns({
                     <span className={`text-xl font-bold ${overview?.textColor || 'text-black'}`}>{productName}</span>
                     {status === 'beta' && (
                         <span
-                            className={`font-bold uppercase border-2 border-white px-1 rounded-md text-lg ${
-                                overview?.textColor || 'text-primary'
-                            }`}
+                            className={`font-bold uppercase border-2 ${overview?.textColor === 'text-black' ? 'border-black' : 'border-white'} px-1 rounded-md text-lg ${overview?.textColor || 'text-primary'
+                                }`}
                         >
                             Beta
                         </span>

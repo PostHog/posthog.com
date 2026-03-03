@@ -1,0 +1,245 @@
+---
+title: API specifications
+sidebar: Handbook
+showTitle: true
+---
+
+PostHog's API specifications are (mostly) generated automatically from the OpenAPI spec. We have a tooling to generate the API specification markdown files from the OpenAPI spec.
+
+## Where we publish the API specifications
+
+When ever you run the app locally, the API specification is available at [`/api/schema/`](https://app.posthog.com/api/schema/), and you can view it using [Swagger UI](https://app.posthog.com/api/schema/swagger-ui/).
+
+On the website, the API specification is available at [`/docs/api/`](https://posthog.com/docs/api). Some of these pages are hand-rolled, and some are generated from the OpenAPI spec.
+
+| Page | Type |
+|------|------|
+| [Overview](https://posthog.com/docs/api) | hand-rolled |
+| [Capture](https://posthog.com/docs/api/capture) | hand-rolled |
+| [Flags](https://posthog.com/docs/api/flags) | hand-rolled |
+| [Queries](https://posthog.com/docs/api/queries) | hand-rolled |
+| [Actions](https://posthog.com/docs/api/actions) | generated |
+| [Alerts](https://posthog.com/docs/api/alerts) | generated |
+| [Activity log](https://posthog.com/docs/api/activity-log) | generated |
+| [Annotations](https://posthog.com/docs/api/annotations) | generated |
+| [Batch exports](https://posthog.com/docs/api/batch-exports) | generated |
+| [Cohorts](https://posthog.com/docs/api/cohorts) | generated |
+| [Dashboards](https://posthog.com/docs/api/dashboards) | generated |
+| [Dashboard templates](https://posthog.com/docs/api/dashboard-templates) | generated |
+| [Early access features](https://posthog.com/docs/api/early-access-feature) | generated |
+| [Endpoints](https://posthog.com/docs/api/endpoints) | generated |
+| [Environments](https://posthog.com/docs/api/environments) | generated |
+| [Event definitions](https://posthog.com/docs/api/event-definitions) | generated |
+| [Events](https://posthog.com/docs/api/events) | generated |
+| [Experiments](https://posthog.com/docs/api/experiments) | generated |
+| [Feature flags](https://posthog.com/docs/api/feature-flags) | generated |
+| [Groups](https://posthog.com/docs/api/groups) | generated |
+| [Groups types](https://posthog.com/docs/api/groups-types) | generated |
+| [Hog functions](https://posthog.com/docs/api/hog-functions) | generated |
+| [Insights](https://posthog.com/docs/api/insights) | generated |
+| [Invites](https://posthog.com/docs/api/invites) | generated |
+| [Members](https://posthog.com/docs/api/members) | generated |
+| [Notebooks](https://posthog.com/docs/api/notebooks) | generated |
+| [Organizations](https://posthog.com/docs/api/organizations) | generated |
+| [Persons](https://posthog.com/docs/api/persons) | generated |
+| [Projects](https://posthog.com/docs/api/projects) | generated |
+| [Property definitions](https://posthog.com/docs/api/property-definitions) | generated |
+| [Query](https://posthog.com/docs/api/query) | generated |
+| [Roles](https://posthog.com/docs/api/roles) | generated |
+| [Session recordings](https://posthog.com/docs/api/session-recordings) | generated |
+| [Session recording playlists](https://posthog.com/docs/api/session-recording-playlists) | generated |
+| [Sessions](https://posthog.com/docs/api/sessions) | generated |
+| [Subscriptions](https://posthog.com/docs/api/subscriptions) | generated |
+| [Surveys](https://posthog.com/docs/api/surveys) | generated |
+| [Users](https://posthog.com/docs/api/users) | generated |
+| [Web Analytics](https://posthog.com/docs/api/web-analytics) | generated |
+
+## How the website ingests the OpenAPI spec
+
+The website ingests the OpenAPI specification during the Gatsby build process in two stages:
+
+1. **During `sourceNodes`**: The OpenAPI spec is fetched and parsed using `OpenAPIParser` and `MenuBuilder` from the `redoc` library. This creates a structured menu of API endpoints that's used for navigation. The menu groups endpoints and handles pagination for groups with more than 20 items.
+1. **During `onPostBuild`**: The build process fetches the OpenAPI spec from `https://app.posthog.com/api/schema/` (or from the `POSTHOG_OPEN_API_SPEC_URL` environment variable if set). The spec is then passed to `generateApiSpecMarkdown()`, which:
+   - Iterates through all paths and HTTP methods in the spec
+   - For each endpoint with an `operationId`, creates a markdown file named after the operation ID
+   - Recursively extracts all referenced component schemas for each endpoint
+   - Generates markdown files containing the endpoint's OpenAPI JSON in a code block
+   - Writes these files to `public/docs/open-api-spec/`
+
+The generated markdown files are then available at `/docs/open-api-spec/{operationId}.md` and are included in the documentation site's API reference section.
+
+## How to update the OpenAPI spec
+
+Any of the automatically generated pages sources from the OpenAPI spec. To update the content of an automatically generated page, you need to update the OpenAPI spec by making changes to the [PostHog/posthog](https://github.com/PostHog/posthog) repository.
+
+### Updating the page title and description
+
+> These updates happen in the `PostHog/posthog.com` repository.
+
+**Page title**: Update the `titleMap` object in [`src/templates/ApiEndpoint.tsx`](https://github.com/PostHog/posthog.com/blob/master/src/templates/ApiEndpoint.tsx#L85-L120). For example, to change the "Actions" page title, modify the `actions` entry in the map.
+
+**Page description**: Create or update an `overview.mdx` file in the corresponding API folder. The file should be located at `contents/docs/api/{name}/overview.mdx`, where `{name}` matches the API endpoint name (e.g., `events`, `feature-flags`). 
+
+Example: [`contents/docs/api/events/overview.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/api/events/overview.mdx) contains the description that appears at the top of the Events API page.
+
+### Updating the endpoint title and description
+
+> These updates happen in the `PostHog/posthog` repository.
+
+**Endpoint title**: The title is auto-generated from the `operationId` in the OpenAPI spec using the `generateName()` function in [`src/templates/ApiEndpoint.tsx`](https://github.com/PostHog/posthog.com/blob/master/src/templates/ApiEndpoint.tsx#L128-L137). To customize it, update the `operationId` or description in the Django viewset in the PostHog repository. You basically need to update the path to update the title.
+
+**Endpoint description**: Create an MDX file named after the endpoint's `operationId` in the appropriate API folder. The file should be located at `contents/docs/api/{name}/{operationId}.mdx`.
+
+Example: [`contents/docs/api/feature-flags/feature_flags_list.mdx`](hxttps://github.com/PostHog/posthog.com/blob/master/contents/docs/api/feature-flags/feature_flags_list.mdx) adds custom content that appears under the "List all feature flags" endpoint. The content from this file is rendered above the endpoint's description from the OpenAPI spec.
+
+### Updating the endpoint parameters and responses
+
+The endpoint request body parameters, query parameters, path parameters, response body, response headers, API key scopes, etc. are all defined in the Django serializers and viewsets in the PostHog repository. 
+
+Generally, there are two types of "views" in Django and they require different annotations to generate accurate OpenAPI specs.
+
+1. **Model-based CRUD views**: These are views that are backed by Django models. These CRUD views are backed by models defined in the Django ORM. They map literally to Django model fields, and generally don't need any additional annotations for accurate request and response definitions.
+2. **Function-based views**: These are views that are backed by Python functions. These views are not backed by models, and generally annotated with `@action` decorators. For these views, we need to manually annotate request and response definitions.
+
+If an endpoint needs additional annotation, you can use the `@validated_request` decorator to annotate the view. This decorator will use the serializers passed in for **both** validation and annotation of the request bodies, query parameters, and response bodies, ensuring the OpenAPI spec stays accurate (or we know when they're not).
+
+#### Basic usage
+
+The `@validated_request` decorator wraps a view function and provides validation for request and response data:
+
+```python
+from posthog.api.mixins import validated_request
+from drf_spectacular.utils import OpenApiResponse
+from rest_framework import serializers, status
+from rest_framework.response import Response
+
+# Django uses serializer to validate request body data, validated request can infer the request and response schemas from the serializer definitions.
+class EventCaptureRequestSerializer(serializers.Serializer):
+    event = serializers.CharField(max_length=200, help_text="Event name")
+    distinct_id = serializers.CharField(max_length=200, help_text="User distinct ID")
+    properties = serializers.DictField(required=False, default=dict)
+
+class EventCaptureResponseSerializer(serializers.Serializer):
+    status = serializers.ChoiceField(choices=["ok", "queued"])
+    event_id = serializers.UUIDField()
+    distinct_id = serializers.CharField()
+
+@validated_request(
+    request_serializer=EventCaptureRequestSerializer,
+    responses={
+        200: OpenApiResponse(response=EventCaptureResponseSerializer),
+    },
+    summary="Capture an event",
+    description="Sends an event to PostHog for tracking",
+)
+def capture_event(self, request):
+    # Access validated request body data
+    event_name = request.validated_data["event"]
+    distinct_id = request.validated_data["distinct_id"]
+    
+    # Process the event...
+    
+    return Response(
+        {
+            "status": "ok",
+            "event_id": str(uuid.uuid4()),
+            "distinct_id": distinct_id,
+        },
+        status=status.HTTP_200_OK,
+    )
+```
+
+#### Validating query parameters
+
+Use `query_serializer` to validate query parameters:
+
+```python
+class QueryParamSerializer(serializers.Serializer):
+    page = serializers.IntegerField(required=False, default=1)
+    limit = serializers.IntegerField(required=False, default=10, max_value=100)
+    include_deleted = serializers.BooleanField(required=False, default=False)
+
+@validated_request(
+    query_serializer=QueryParamSerializer,
+    responses={
+        200: OpenApiResponse(response=ListResponseSerializer),
+    },
+)
+def list_items(self, request):
+    # Access validated query parameters
+    page = request.validated_query_data["page"]
+    limit = request.validated_query_data["limit"]
+    
+    # Use validated query params...
+    return Response(...)
+```
+
+#### Multiple response status codes
+
+Declare multiple possible response status codes:
+
+```python
+@validated_request(
+    request_serializer=EventCaptureRequestSerializer,
+    responses={
+        200: OpenApiResponse(response=EventCaptureResponseSerializer),
+        400: OpenApiResponse(response=ErrorResponseSerializer),
+        500: OpenApiResponse(response=ErrorResponseSerializer),
+    },
+)
+def capture_event(self, request):
+    try:
+        # Process event...
+        return Response(..., status=status.HTTP_200_OK)
+    except ValidationError as e:
+        return Response(
+            {"type": "validation_error", "code": "invalid", "detail": str(e)},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+```
+
+#### No response body
+
+Declare status codes with no response body using `None`:
+
+```python
+@validated_request(
+    responses={
+        204: None,  # No response body
+    },
+)
+def delete_item(self, request, pk):
+    # Delete the item...
+    return Response(status=status.HTTP_204_NO_CONTENT)
+```
+
+#### Validation modes
+
+By default, `@validated_request` uses strict validation for requests (raises on invalid data) and non-strict for responses (logs warnings in DEBUG mode). You can control this:
+
+```python
+@validated_request(
+    request_serializer=MySerializer,
+    responses={200: OpenApiResponse(response=MyResponseSerializer)},
+    strict_request_validation=False,  # Log warnings instead of raising
+    strict_response_validation=True,   # Raise on invalid responses
+)
+def my_endpoint(self, request):
+    # ...
+```
+
+## Which endpoints have validated request and response definitions
+
+The `@validated_request` decorator is new and many endpoints have not been annotated yet. The following endpoints have been annotated:
+- `tasks`
+- `task-runs`
+- `feature_flags`
+- `feature_value`
+
+We plan on slowly annotating all endpoints with the `@validated_request` decorator through Q1 2026.
+
+## The special case for `Capture`
+
+Ingestion is basically an entirely different service and not included in the OpenAPI spec. It also has special limitations like batching, rate limiting, etc that need to be documented separately. It doesn't fit the classic patterns for a RESTful API as well as other endpoints.
+
+The ingestion team and docs team will need to work together to update the OpenAPI spec for the `Capture` endpoint. 

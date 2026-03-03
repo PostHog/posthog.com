@@ -1,0 +1,48 @@
+---
+title: Upload mappings for Android
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+> [CLI v0.5.16](https://github.com/PostHog/posthog/blob/master/cli/CHANGELOG.md) or later
+
+<CLIDownload/>
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Inject and upload" badge="required">
+
+> [AGP v8](https://developer.android.com/build/releases/gradle-plugin) or later
+
+Automatic mappings uploading is handled through the Gradle build process on Android.
+
+Install the [PostHog Android Gradle Plugin](https://github.com/PostHog/posthog-android/blob/main/posthog-android-gradle-plugin/CHANGELOG.md) on your app's `build.gradle.kts` file.
+
+```kotlin
+// Available through mavenCentral()
+plugins {
+    id("com.android.application")
+    id("com.posthog.android") version "$version"
+    ...
+}
+```
+
+</Step>
+
+<StepVerifySymbolSetsUpload symbolType="mappings" />
+
+</Steps>

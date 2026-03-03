@@ -108,7 +108,7 @@ That form will be shared with the relevant team Blitzscale member, so they can h
 
 ### Weave
 
-We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see how their numbers compare to averages across the company. 
+We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see their numbers and those of other engineers. 
 
 We understand that all the work an engineer does can't be properly represented in a tool that just looks at PR output. Data in Weave is _not_ the decision-maker for whether someone is succeeding in their role at PostHog. It can be, however, a part of the conversation.
 

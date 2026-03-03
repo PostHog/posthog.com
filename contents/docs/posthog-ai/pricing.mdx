@@ -1,0 +1,77 @@
+---
+title: PostHog AI pricing
+---
+
+import { IconSparkles } from '@posthog/icons'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct'
+
+AI features in PostHog consume **AI credits**. Each time you interact with an AI-powered feature – whether you're asking PostHog AI to write SQL, summarize data, or analyze sessions – credits are spent based on the resources required to complete your request.
+
+This means you pay for what you use. There’s no fixed subscription and every organization gets a monthly free tier worth $20 (2,000 AI credits) to explore PostHog AI's features.
+
+For reference, **1,000 AI credits = $10**.
+
+We apply a simple, consistent 20% markup over the underlying LLM provider’s cost. So 1 PostHog AI credit corresponds to $0.008333 of raw inference.
+
+<Pricing productType="posthog_ai" />
+
+## What consumes AI credits
+
+AI credits are consumed whenever PostHog performs intelligent work for you. You’ll spot these features by the <span className="inline-block"><IconSparkles className="h-4 w-4" /></span> icon or when using the in-app chat.
+
+Examples include:
+
+- Searching for session recordings in natural language  
+- Summarizing experiment results  
+- Writing or debugging SQL with AI
+
+## What doesn't consume AI credits
+
+Getting help on how to use PostHog (i.e., asking questions about our docs) does not use AI credits.
+
+AI features in beta are also free to use.
+
+## How AI credit usage works
+
+AI credits are based on the **underlying token costs**, which reflect the effort required to complete your request.
+
+- Simple queries like "What were my daily active users in October?" use very few tokens, and therefore very few credits.
+- More complex tasks like analyzing hundreds of session recordings or rewriting a SQL query multiple times use more tokens and consume more credits.
+- PostHog automatically selects the most efficient model for each AI feature. 
+
+While exact usage varies, credit consumption usually scales with complexity – more advanced tasks cost more but can deliver deeper insights and time savings. You’ll always see **real-time cost information** while using AI features.
+
+## Track your AI credit usage
+
+Stay on top of your AI credit spend in real time:
+
+1. Type [`/usage`](https://app.posthog.com/#panel=max:!/usage) in chat to see the current cost of your conversation  
+2. Check the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages to view your total monthly consumption  
+3. (Coming soon) A dashboard showing which AI features use the most credits  
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251202_rado_2_81783b4e80.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20251202_raiy_029e63db10.png"
+    alt="/usage command in chat"
+    classes="rounded"
+/>
+
+<Caption>
+The /usage command in chat shows your current AI credit usage
+</Caption>
+
+<CalloutBox icon="IconInfo" title="Important" type="fyi">
+
+Credit data may take up to 24 hours to appear on the billing overview and billing usage pages.
+
+</CalloutBox>
+
+## Control your AI credit spend
+
+You’re always in control of your AI credit usage:
+
+- **Real-time tracking:** See costs as you go  
+- **Custom billing limit:** Set hard caps to prevent overspending
+- **Default billing limit:** PostHog sets a default $150 billing limit so you don't accidentally rack up costs without a ceiling 
+- **Usage alerts:** Get notified when you hit key thresholds  

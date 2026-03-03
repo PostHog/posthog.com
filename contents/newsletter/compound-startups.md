@@ -73,6 +73,8 @@ Other advantages include:
 
 - **Value:** Compound startups can generate more value for customers, and are more ambitious and valuable themselves as a result.
 
+<NewsletterForm />
+
 ## Arguments against compound startups
 
 The arguments against are basically the ones that dictate it’s better to focus on one thing and do it well. And, a lot of the time, that’s still valid advice.
@@ -91,10 +93,10 @@ So, next time you’re considering what bets to take with your startup, consider
 
 - **[Tips for Writing Great One-Pagers](https://medium.com/@johnpcutler/great-one-pagers-592ebbaf80ec) – John Cutler:** One-pagers are “short, space-constrained, descriptions of a proposed product bet.” A great guide on how to build arguments for big, transformative bets.
 
-- **[How to find your blind spots](https://www.zeptonaut.com/posts/find-your-blind-spots/?utm_source=posthog-newsletter&utm_medium=email) – Charlie Andrews:** Argues that (1) success is a bad measure of success – e.g. you can play a good game of chess and lose – and (2) identifying minigames is the key to improving your skill.
+- **[How to find your blind spots](https://www.zeptonaut.com/posts/find-your-blind-spots/) – Charlie Andrews:** Argues that (1) success is a bad measure of success – e.g. you can play a good game of chess and lose – and (2) identifying minigames is the key to improving your skill.
 
-- **[Numbers To Know For Managing Software Teams](https://blog.staysaasy.com/p/numbers-to-know-for-managing-software?utm_source=posthog-newsletter&utm_medium=email) – StaySaaSy:** Some practical tips on managing (and hiring for) software teams, including the number people use when they’re very unhappy.
+- **[Numbers To Know For Managing Software Teams](https://blog.staysaasy.com/p/numbers-to-know-for-managing-software) – StaySaaSy:** Some practical tips on managing (and hiring for) software teams, including the number people use when they’re very unhappy.
 
-- **[Why we use GitHub as our CMS](https://posthog.com/blog/github-cms?utm_source=posthog-newsletter&utm_medium=email) – Ian Vanagas:** GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.”
+- **[Why we use GitHub as our CMS](/blog/github-cms) – Ian Vanagas:** GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages [non-technical people to be more technical](/blog/github-cms).”
 
 <NewsletterForm />

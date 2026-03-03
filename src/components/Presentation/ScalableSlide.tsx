@@ -26,7 +26,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     const updateScale = useCallback(() => {
         if (!containerRef.current) {
             if (mode === 'thumbnail') {
-                console.log(`📏 ScalableSlide updateScale: No containerRef for thumbnail mode`)
+                // console.log(`📏 ScalableSlide updateScale: No containerRef for thumbnail mode`)
             }
             return
         }
@@ -35,19 +35,19 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
         const containerRect = container.getBoundingClientRect()
 
         if (mode === 'thumbnail') {
-            console.log(`📏 ScalableSlide thumbnail updateScale:`, {
-                containerWidth: containerRect.width,
-                containerHeight: containerRect.height,
-                baseWidth,
-                baseHeight,
-                retryCount: retryCountRef.current,
-            })
+            // console.log(`📏 ScalableSlide thumbnail updateScale:`, {
+            //     containerWidth: containerRect.width,
+            //     containerHeight: containerRect.height,
+            //     baseWidth,
+            //     baseHeight,
+            //     retryCount: retryCountRef.current,
+            // })
         }
 
         // Don't calculate if container has no dimensions yet
         if (containerRect.width === 0 || containerRect.height === 0) {
             if (mode === 'thumbnail') {
-                console.log(`📏 ScalableSlide thumbnail: Zero dimensions, retrying...`)
+                // console.log(`📏 ScalableSlide thumbnail: Zero dimensions, retrying...`)
             }
             // More aggressive retry for thumbnails, less for others
             const maxRetries = mode === 'thumbnail' ? 25 : 15
@@ -66,7 +66,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
         // by checking if the container is very small (indicating animation in progress)
         if (containerRect.width < 50 || containerRect.height < 30) {
             if (mode === 'thumbnail') {
-                console.log(`📏 ScalableSlide thumbnail: Container too small (animation?), retrying...`)
+                // console.log(`📏 ScalableSlide thumbnail: Container too small (animation?), retrying...`)
             }
             // Retry after AppWindow animation should be complete (500ms to be safe)
             if (retryCountRef.current < 8) {
@@ -115,13 +115,13 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
             const originalScale = newScale
             newScale = Math.max(newScale, 0.05) // Minimum 5% scale
             newScale = Math.min(newScale, 0.5) // Maximum 50% scale
-            console.log(`📏 ScalableSlide thumbnail: Scale calculated`, {
-                scaleX,
-                scaleY,
-                originalScale,
-                finalScale: newScale,
-                wasClipped: originalScale !== newScale,
-            })
+            // console.log(`📏 ScalableSlide thumbnail: Scale calculated`, {
+            //     scaleX,
+            //     scaleY,
+            //     originalScale,
+            //     finalScale: newScale,
+            //     wasClipped: originalScale !== newScale,
+            // })
         } else {
             newScale = Math.max(newScale, 0.1) // Minimum 10% scale
             newScale = Math.min(newScale, 2) // Maximum 200% scale

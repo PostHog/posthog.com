@@ -1,0 +1,28 @@
+## Q1 2026
+
+### Objective 1: Signals & Tasks APIs (for app + Array consumption)
+
+What we’ll ship:
+- Scheduled summarization creating signal groups, which are then turned into tasks (Alex)  
+- Way to schedule summarization: (Alex)  
+  - let user provide golden paths  
+  - let user provide features they care about
+
+### Objective 2: Video-first session summarization
+
+What we’ll ship:
+- Re-architect session summarization to analyze full videos (Michael)  
+- Basic evals, and lots of prompt tuning for quality (Michael)  
+- Models iteration (Gemini 3/Claude instead of o3) (Alex)
+
+### Objective 3: Correlating signals across products
+
+What we’ll ship:
+- To experiment with: 1\. Matching signals based on relevant time ranges, 2\. Vector similarity search between signal types, 3\. Agent to run search tools to correlate signal types  
+- Vector search DB (Olly)
+
+### Objective 4: Video exports infra for exporting a double-digit % of sessions
+
+What we’ll ship:
+- Filter periods of inactivity from Replay and skip them when recording/analyzing (Olly)  
+- Replace Playwright with Puppeteer for better quality/FPS of the videos exported (Olly)

@@ -2,10 +2,17 @@ import React from 'react'
 import * as Icons from '@posthog/icons'
 
 // Popular products to highlight in the menu
-export const popularProducts = ['web_analytics', 'product_analytics', 'session_replay', 'feature_flags', 'experiments']
+export const popularProducts = [
+    'posthog_ai',
+    'web_analytics',
+    'product_analytics',
+    'session_replay',
+    'feature_flags',
+    'experiments',
+]
 
 // Newest products to highlight in the menu
-export const newestProducts = ['posthog_ai', 'llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
+export const newestProducts = ['logs', 'endpoints', 'posthog_ai', 'llm_analytics', 'workflows_emails']
 
 // Category ordering for display
 export const categoryOrder = [
@@ -22,7 +29,7 @@ export const categoryOrder = [
 
 // Display names for categories
 export const categoryDisplayNames: Record<string, string> = {
-    data: 'Customer data infrastructure',
+    data: 'PostHog data stack',
     product_engineering: 'Product engineering',
     analytics: 'Analytics dashboards',
     dataviz: 'Data visualization',
@@ -49,8 +56,18 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Product ordering within categories
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
-    data: ['customer-data-infrastructure', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
-    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'error_tracking', 'early_access'],
+    data: [
+        'data-stack',
+        'cdp',
+        'data_in',
+        'transformations',
+        'data_modeling',
+        'data_warehouse',
+        'sql_editor',
+        'bi',
+        'data_out',
+    ],
+    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'logs', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
         'product_analytics',
@@ -60,70 +77,33 @@ export const productOrder: Record<string, string[]> = {
         'group_analytics',
         'custom_dashboards',
     ],
-    dataviz: [
-        'trends',
-        'funnels',
-        'user_paths',
-        'correlation_analysis',
-        'retention',
-        'stickiness',
-        'lifecycle',
-        'sql',
-        'bi',
-    ],
-    automation: ['posthog_ai', 'webhooks', 'workflows'],
-    communication: ['surveys', 'messaging', 'user-interviews'],
-    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    dataviz: ['trends', 'funnels', 'user_paths', 'correlation_analysis', 'retention', 'stickiness', 'lifecycle'],
+    automation: ['posthog_ai', 'workflows', 'webhooks'],
+    communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
 }
 
 // Non-product pages that appear in the product navigation
 // These need manual icon and link configuration
-export const nonProductPages = {
-    cdp: {
-        slug: 'cdp',
-        url: '/cdp',
-        icon: 'IconPlug',
-        color: 'sky-blue',
-    },
-    'data-warehouse': {
-        slug: 'data-warehouse',
-        url: '/data-warehouse',
-        icon: 'IconAsterisk',
-        color: 'purple',
-    },
-    'customer-data-infrastructure': {
-        slug: 'customer-data-infrastructure',
-        url: '/customer-data-infrastructure',
-        icon: 'IconDocument',
-        color: 'blue',
-        description: 'CDP manifesto',
-    },
-    'customer-data-infrastructure/sources': {
-        slug: 'customer-data-infrastructure/sources',
-        url: '/customer-data-infrastructure/sources',
-        icon: 'IconArrowRight',
-        color: 'orange',
-    },
-    'customer-data-infrastructure/transformations': {
-        slug: 'customer-data-infrastructure/transformations',
-        url: '/customer-data-infrastructure/transformations',
-        icon: 'IconRefresh',
-        color: 'green',
-    },
-    'customer-data-infrastructure/destinations': {
-        slug: 'customer-data-infrastructure/destinations',
-        url: '/customer-data-infrastructure/destinations',
-        icon: 'IconDecisionTree',
-        color: 'purple',
-    },
-}
+export const nonProductPages = {}
 
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {
     const products = allProducts.filter((product: any) => product.category === category)
-    const customOrder = productOrder[category]
+    const customOrder = productOrder[category] || []
 
-    if (customOrder && customOrder.length > 0) {
+    // Handle case where customOrder contains product that isn't its official category
+    const secondaryCategoryProducts = customOrder.filter(
+        (product: string) => !products.find((p) => p.handle === product)
+    )
+    secondaryCategoryProducts.forEach((productHandle: string) => {
+        const product = allProducts.find((p) => p.handle === productHandle)
+        if (product) {
+            products.push(product)
+        }
+    })
+
+    if (customOrder.length > 0) {
         return products.sort((a: any, b: any) => {
             const aIndex = customOrder.indexOf(a.handle)
             const bIndex = customOrder.indexOf(b.handle)
@@ -242,7 +222,7 @@ export function buildCategoryMenuItems(category: string, allProducts: any[]): an
 // Helper function to build menu items for all products sorted alphabetically
 export function buildAllProductsMenuItems(allProducts: any[]): any[] {
     // Handles to filter out
-    const filteredHandles = ['ai', 'annika', 'marius', 'customer-data-infrastructure', 'data_in', 'data_out']
+    const filteredHandles = ['ai', 'annika', 'marius', 'data-stack', 'data_in', 'data_out']
 
     // Label overrides by slug
     const labelOverrides: Record<string, string> = {

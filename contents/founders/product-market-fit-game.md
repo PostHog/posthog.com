@@ -56,7 +56,7 @@ Here are some pointers:
 
 - **Known problems are easier to validate,** but your solution must be very different. If you want to build a venture-scale business, your solution must be 10x better, or 10x cheaper, than the existing solutions.
 
-- **Be careful when validating problems no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
+- **Be careful when [validating problems](/newsletter/validating-product-ideas) no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
 
 - **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ [using the latest technology](/newsletter/choosing-technologies). Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
 
@@ -368,7 +368,7 @@ The five levels of product-market fit should help you work out when you need to 
 
 - **Be decisive.** During our YC batch, we saw a few companies have one founder work on X, while another worked on Y. Finding product-market fit is already complex, so don't make it harder by dividing your effort. Pick one idea and go all in. If you fail, quickly move to the other idea.[^3]
 
-- ** _Do not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
+- **_Do not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
 
 ## Final thoughts
 

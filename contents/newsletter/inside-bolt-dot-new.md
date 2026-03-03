@@ -56,6 +56,8 @@ WebContainer is Bolt’s superpower. Most AI app builders spin up a fresh contai
 
 ![webcontainer runtime](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/webcontainer22_dd15ae34e8.png)
 
+<NewsletterForm />
+
 ## Why squeezing Node.js into a browser tab is hard – and how Bolt pulled it off
 
 Building this superpower wasn’t as easy as being bitten by a radioactive spider.

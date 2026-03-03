@@ -15,3 +15,40 @@ template: team
 ## How to work with the Error Tracking team
 
 Reach out in our Slack channel [#team-error-tracking](https://posthog.slack.com/messages/team-error-tracking)
+
+## Who are we building for?
+
+### Primary (building for, churn indicates product failure)
+
+#### Product & Growth Engineers
+- JTBD: Get notified when new issues happen / escalate, identify impact, have context to fix
+- Why prioritize: champion persona who adopts ET
+
+#### Founders
+- JTBD: Same as above but specifically want to know when early users face **any** exception
+- Why prioritize: YC/high-potential, core to get-in-first strategy at product-led startups shipping multiple times/week
+
+
+### Who we somewhat support (product will fully support them in time but we’re ok with churn in the short term)
+
+#### DevOps/SRE Engineer
+- JTBD: Cost control, release tracking, cross-service correlation, custom grouping for high-volume services
+- Why: we will ideally support these use cases but do not have full coverage right now (missing releases UI, automatic request ID instrumentation, complex snoozing / alerting rules based on thresholds, logs integration)
+
+#### AI/ML Engineer (emerging)
+- JTBD: Track LLM quality degradation, hallucinations, cost explosions (non-traditional "exceptions")
+- Why: might churn to specialized tools while we work on integrating deeper with LLMA
+
+#### Support Engineer
+- JTBD: Quick context on user-reported errors to triage severity, share details with product engineers
+- Why: not a regular user but happy to support requirements that are a subset of the primary persona
+
+
+### Who we’re not building for (do not expect the product to be of great value)
+
+#### Product Managers
+- JTBD: Understand which bugs block conversion/revenue, help prioritize by business impact
+
+#### Vibe coders
+- JTBD: Be informed of improvement to metrics from automatic bug fixes
+- Why: Engineers in our ICP companies (high-growth startups, and those who could become that) generally do not vibe code their products

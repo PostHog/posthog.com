@@ -1,1 +1,13 @@
-> **⚠️ Warning:** These endpoints are effectively deprecated and kept only for backwards compatibility.
+<CalloutBox icon="IconWarning" title="The events API is deprecated" type="action">
+
+The events API is deprecated. If you're using the events API to export data, you need to migrate to [data pipeline batched exports](/docs/cdp/batch-exports) ASAP.
+
+Currently, the events have the following restrictions imposed:
+
+- Pagination `offset` values larger than 50000 are disabled
+- If no `after` parameter is specified, only events in the last 24 hours are returned
+- The maximum range between `before` and `after` is limited to **less than 1 year**
+
+The API is due for removal at a future date, migrate to [data pipeline batched exports](/docs/cdp/batch-exports).
+
+</CalloutBox>

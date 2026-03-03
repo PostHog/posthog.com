@@ -1,10 +1,12 @@
 ---
-title: Logs troubleshooting and FAQs
+title: Logs troubleshooting
 ---
 
-import Beta from './_snippets/beta.mdx'
+This page covers troubleshooting for Logs. For setup, see the [installation guide](/docs/logs/installation).
 
-<Beta />
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
 
 ## Authentication errors
 
@@ -12,8 +14,8 @@ import Beta from './_snippets/beta.mdx'
 
 **Solutions**:
 - Verify you're using the correct project token from [Project Settings](https://app.posthog.com/settings/project)
-- Check the Authorization header format: `Bearer {your-project-token}`
-- If using query parameter, verify the format: `?token={your-project-token}`
+- Check the Authorization header format: `Bearer <ph_project_token>`
+- If using query parameter, verify the format: `?token=<ph_project_token>`
 - Ensure your project token hasn't been rotated or revoked
 
 ## Connection issues
@@ -56,16 +58,16 @@ import Beta from './_snippets/beta.mdx'
 - Check that log attributes are properly structured
 - Use the OpenTelemetry logging APIs instead of raw log libraries
 
-## Token authentication issues
+## Project token authentication issues
 
-**Problem**: Confused about which token to use or how to authenticate.
+**Problem**: Confused about which key to use or how to authenticate.
 
 **Solutions**:
 - Use your **project token** (the same one you use for capturing events)
 - Find it in [Project Settings](https://app.posthog.com/settings/project)
 - You can authenticate in two ways:
-  - **Header**: `Authorization: Bearer {your-project-token}`
-  - **Query param**: `?token={your-project-token}`
+  - **Header**: `Authorization: Bearer <ph_project_token>`
+  - **Query param**: `?token=<ph_project_token>`
 - Do not use your personal API key or other authentication methods
 
 ## Self-hosted endpoint issues

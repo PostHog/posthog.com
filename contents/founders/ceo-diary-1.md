@@ -27,7 +27,7 @@ PostHog Fact: Tim (my co-founder) incorrectly believes this is the side entrance
 
 There are tons of competitors in product analytics, and they've pretty much all got 300+ person teams, around $100M or more in funding, and years and years of headstart. Yet, we're totally confident we can win as a late mover.
 
-A losing strategy for us would look like this:
+A [losing strategy](/newsletter/how-startups-lose-their-edge) for us would look like this:
 
 1. Investing in (even more) sales assets, people, tools, and training
 2. Building features that the salespeople need to sell to big companies, which makes our product feel like everyone else's

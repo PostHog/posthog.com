@@ -8,7 +8,6 @@ import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
-import Pricing from '../../../components/Pricing/PricingCalculator/SingleProduct'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, IconDatabase } from '@posthog/icons'
 import Card from 'components/Card'
 import Link from 'components/Link'
@@ -58,11 +57,14 @@ const errorTrackingFeatures = [
     { text: 'Capture exceptions', url: '/docs/error-tracking/capture' },
     { text: 'Autocapture', url: '/docs/error-tracking/capture#automatic-exception-capture' },
     { text: 'Stack traces', url: '/docs/error-tracking/stack-traces' },
+    { text: 'Code variables capture', url: '/docs/error-tracking/code-variables' },
     { text: 'Custom error grouping', url: '/docs/error-tracking/grouping-issues' },
     { text: 'Issue management', url: '/docs/error-tracking/managing-issues' },
     { text: 'Team assignments', url: '/docs/error-tracking/assigning-issues' },
     { text: 'Alerts', url: '/docs/error-tracking/alerts' },
-    { text: 'Integrations with Linear and GitHub', url: '/docs/error-tracking/external-tracking' },
+    { text: 'Integrations with Linear, GitHub, and GitLab', url: '/docs/error-tracking/external-tracking' },
+    { text: 'Track releases and deploys', url: '/docs/error-tracking/releases' },
+    { text: 'Mobile support', url: '/docs/error-tracking/installation' },
     { text: 'MCP integration', url: '/docs/error-tracking/debugging-with-mcp' },
     { text: 'Fix with AI', url: '/docs/error-tracking/fix-with-ai-prompts' },
 ]
@@ -75,9 +77,8 @@ export const Content = () => {
                 <div>
                     <p>
                         Error tracking enables you to capture, monitor, and resolve exceptions within your app, so you
-                        can ship quickly and confidently. Built on our{' '}
-                        <Link to="/customer-data-infrastructure">customer data infrastructure</Link>, PostHog error
-                        tracking connects issues to user data and product context for faster, more effective debugging.
+                        can ship quickly and confidently. Connect issues to user data and product context for faster,
+                        more effective debugging.
                     </p>
                     <p>It's particularly useful for engineers who:</p>
                     <ul>
@@ -125,6 +126,7 @@ export const Content = () => {
                         return rows
                     }, [] as any[])}
                     size="sm"
+                    width="full"
                 />
             </section>
 
@@ -143,25 +145,6 @@ export const Content = () => {
                         </Card>
                     ))}
                 </div>
-            </section>
-
-            <section className="mb-8">
-                <h2 className="mb-4">Pricing</h2>
-                <p>
-                    PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our
-                    large free tier means more than 90% of companies <em>use PostHog for free</em>.
-                </p>
-                <p>
-                    No credit card is required to get started. You can also set billing limits to avoid any surprise
-                    charges.
-                </p>
-                <div className="px-8 rounded-md border-primary border">
-                    <Pricing productType="error_tracking" />
-                </div>
-
-                <p>
-                    See our <a href="/pricing">pricing page</a> for more details.
-                </p>
             </section>
 
             <section className="mb-8">

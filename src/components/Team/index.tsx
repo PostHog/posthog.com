@@ -1,3 +1,4 @@
+import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { PineappleText } from 'components/Job/Sidebar'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { Question } from 'components/Squeak'
@@ -183,14 +184,7 @@ export const TeamMemberCard = ({
                 </div>
             </div>
             <div className="ml-auto -mb-4 -mr-4 mt-2">
-                <img
-                    src={
-                        avatar?.data?.attributes?.url ||
-                        avatar?.url ||
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                    }
-                    className="w-[165px]"
-                />
+                <img src={avatar?.data?.attributes?.url || avatar?.url || AVATAR_FALLBACK_URL} className="w-[165px]" />
             </div>
         </div>
     )
@@ -752,6 +746,7 @@ export default function Team({
                     <h2>Goals</h2>
                     <div className="article-content team-page-content">
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - team objectives from CMS, not user input */}
                             <div dangerouslySetInnerHTML={{ __html: objectives }} />
                         </MDXProvider>
                     </div>

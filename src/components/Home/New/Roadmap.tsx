@@ -7,10 +7,9 @@ import { IconArrowRight, IconCalendar, IconThumbsUp, IconUndo } from '@posthog/i
 import OSTabs from 'components/OSTabs'
 import Markdown from 'markdown-to-jsx'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { Authentication } from 'components/Squeak/components/Authentication'
-import SideModal from 'components/Modal/SideModal'
+import { useApp } from '../../../context/App'
 import { CallToAction } from 'components/CallToAction'
-import { User, useUser } from 'hooks/useUser'
+import { useUser } from 'hooks/useUser'
 import ProgressBar from 'components/ProgressBar'
 import { preparePreviewText } from 'components/Editor/SearchUtils'
 const Table = ({ columns, rows }: { columns: any; rows: any }) => {
@@ -33,69 +32,47 @@ const VoteButton = ({ roadmap, onLike }: { roadmap: any; onLike: () => void }) =
         attributes: { title },
     } = roadmap
     const { likeRoadmap, user } = useUser()
+    const { openSignIn } = useApp()
     const [loading, setLoading] = React.useState(false)
-    const [authModalOpen, setAuthModalOpen] = React.useState(false)
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
 
     useEffect(() => {
         setLoading(false)
     }, [liked])
 
-    const like = async (user?: User) => {
+    const like = async () => {
         setLoading(true)
         await likeRoadmap({ id, title, user, unlike: liked })
         onLike?.()
     }
 
-    const onAuth = (user: User) => {
-        like(user)
-        setAuthModalOpen(false)
-    }
-
     return (
-        <>
-            <SideModal title={roadmap.attributes.name} open={authModalOpen} setOpen={setAuthModalOpen}>
-                <h4 className="mb-4">Sign into PostHog.com</h4>
-                <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-
-                <Authentication initialView="sign-in" onAuth={onAuth} showBanner={false} showProfile={false} />
-            </SideModal>
-            <CallToAction
-                disabled={loading}
-                onClick={() => {
-                    if (user) {
-                        like(user)
-                    } else {
-                        setAuthModalOpen(true)
-                    }
-                }}
-                size="sm"
-                type={liked ? 'outline' : 'primary'}
-            >
-                <span className="flex items-center space-x-1">
-                    {liked ? (
-                        <>
-                            <IconUndo className="w-4 h-4" />
-                            <span>Unvote</span>
-                        </>
-                    ) : (
-                        <>
-                            <IconThumbsUp className="w-4 h-4" />
-                            <span>Vote</span>
-                        </>
-                    )}
-                </span>
-            </CallToAction>
-        </>
+        <CallToAction
+            disabled={loading}
+            onClick={() => {
+                if (user) {
+                    like()
+                } else {
+                    openSignIn()
+                }
+            }}
+            size="sm"
+            type={liked ? 'outline' : 'primary'}
+        >
+            <span className="flex items-center space-x-1">
+                {liked ? (
+                    <>
+                        <IconUndo className="w-4 h-4" />
+                        <span>Unvote</span>
+                    </>
+                ) : (
+                    <>
+                        <IconThumbsUp className="w-4 h-4" />
+                        <span>Vote</span>
+                    </>
+                )}
+            </span>
+        </CallToAction>
     )
 }
 

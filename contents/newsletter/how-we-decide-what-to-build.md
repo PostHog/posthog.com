@@ -64,7 +64,7 @@ This brings us to our next point…
 
 At a lower level, individual teams also have an idea of what all the potential features they can build are. To discover these, they use [user feedback](/product-engineers/10x-engineers-do-user-interviews), metrics, experience, product principles, and personal opinions.
 
-Our small teams use their offsites to map these options. Below is an example of a [Team Replay](/teams/replay) 2x2 grid from a recent offsite (notes in the top right are high effort and high impact):
+Our small teams use their offsites to map these options. Below is an example of a <SmallTeam slug="replay" /> 2x2 grid from a recent offsite (notes in the top right are high effort and high impact):
 
 ![2x2](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/2x2.jpeg)
 
@@ -76,7 +76,7 @@ For example, **mobile replay**, in the top right corner (high impact, high effor
 
 ## 4. Make ownership clear
 
-This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for validating the idea, implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
+This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for [validating the idea](/newsletter/validating-product-ideas), implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
 
 The unique qualities of [product engineers](/blog/what-is-a-product-engineer) are key here. They have all the skills needed to take an idea to a fully-featured, revenue-generating product. This enables them to work with a high degree of autonomy and speed.
 
@@ -124,7 +124,7 @@ Another way we test with minimal effort is by building on what we’ve already d
 
 3. Also around this time, Marius shipped [site apps](https://github.com/PostHog/posthog/issues/9479). This enabled MVPs of feedback, user interview, and NPS survey apps, which got solid usage internally and some usage externally.
 
-4. At our [Aruba offsite](/blog/aruba-hackathon), the [Feature Success team](/teams/feature-success) was doing roadmap planning. They decided they had good ways to measure success quantitatively, but not qualitatively. To ensure PostHog “provides every tool needed for evaluating success” (a core strategy point), it made sense to build surveys out further.
+4. At our [Aruba offsite](/blog/aruba-hackathon), the Feature Success team was doing roadmap planning. They decided they had good ways to measure success quantitatively, but not qualitatively. To ensure PostHog “provides every tool needed for evaluating success” (a core strategy point), it made sense to build surveys out further.
 
 5. [Li](/community/profiles/129) took ownership of surveys and built on top of site apps (initially), feature flags, and product analytics. Throughout the process, she got feedback (sometimes using surveys, very meta), and shipped towards launch.
 

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useLocation } from '@reach/router'
+import { useApp } from '../../context/App'
 
 interface TabItem {
     value: string
@@ -33,6 +34,7 @@ interface OSTabsProps {
     centerTabs?: boolean
     tabTriggerClassName?: string
     tabContentClassName?: string
+    tabContentDataScheme?: string
     scrollable?: boolean
     scrollAreaClasses?: string
 }
@@ -53,6 +55,7 @@ export default function OSTabs({
     centerTabs = false,
     tabTriggerClassName,
     tabContentClassName,
+    tabContentDataScheme = 'primary',
     scrollable = true,
     scrollAreaClasses = '',
 }: OSTabsProps): JSX.Element {
@@ -65,6 +68,7 @@ export default function OSTabs({
         orientation === 'horizontal' ? (initialOrderedTabs?.length > 0 ? initialOrderedTabs : [tabs]) : [tabs]
     )
     const ref = useRef<HTMLDivElement>(null)
+    const { websiteMode } = useApp()
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
@@ -193,7 +197,7 @@ export default function OSTabs({
                 defaultValue={defaultValue || tabs[0]?.value}
                 value={value || controlledValue}
                 className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
-                    padding ? 'pt-1  px-2 pb-2' : ''
+                    padding && !websiteMode ? 'pt-1  px-2 pb-2' : ''
                 } min-h-0 bg-primary ${className}`}
             >
                 <div className={tabContainerClassName}>
@@ -233,6 +237,7 @@ export default function OSTabs({
                             viewportClasses={scrollAreaClasses}
                         >
                             <div
+                                data-scheme={tabContentDataScheme}
                                 className={`@container ${contentPadding ? 'p-4 @2xl:p-6' : ''} ${tabContentClassName}`}
                             >
                                 {tab.content}

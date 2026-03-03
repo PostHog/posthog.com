@@ -253,7 +253,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Marketing',
-                url: '/handbook/growth/marketing',
+                url: '/handbook/marketing',
             },
         ],
     },
@@ -271,7 +271,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelog/2025',
+                url: '/changelogå',
             },
             {
                 title: 'People',

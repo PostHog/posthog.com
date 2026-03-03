@@ -64,12 +64,22 @@ This is needed as Flutter renders your app using a browser canvas element.
   classes="rounded"
 />
 
-## Step three: Configure replay settings 
+## Step three: Configure replay settings
 
-Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+### Automatically start session recordings
+
+Setting `config.sessionReplay = true` in your PostHog configuration will start session recordings on SDK setup.
+
+### Manually control session recordings
+
+You can programmatically start and stop session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
+
+### Configuration options
+
+You can customize session replay behavior with the following configuration options:
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 /// Enable Recording of Session replay for Android and iOS.
 /// Requires Record user sessions to be enabled in the PostHog Project Settings.
 /// Defaults to false.
@@ -93,7 +103,7 @@ config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 - On Android, requires API >= 26.
 - On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
 - Wireframe mode isn't supported, only screenshot mode.
-- [Network performance recording](docs/session-replay/network-recording) isn't supported yet.
+- [Network performance recording](/docs/session-replay/network-recording) isn't supported yet.
 
 ## Limitations for flutter web session replay
 
@@ -105,8 +115,8 @@ config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 - Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
 - Make sure you have disabled automatic SDK intialization. 
 - Run a clean build if you experience issues.
-- For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup).
+- For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation/flutter#widget-and-observer-setup).
 - For blank recordings for flutter web session replay, be sure to enable [Canvas capture](/docs/session-replay/canvas-recording).
 - If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
-    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug [here](https://github.com/PostHog/posthog-ios/issues/263).
-    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request [here](https://github.com/PostHog/posthog-android/issues/250).
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).

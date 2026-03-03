@@ -49,8 +49,9 @@ Here are some examples:
 - ❌ "Developers want to track bugs."
 - ✅ "When a developer hits an error, they want to log a bug quickly and hand it off, so that they can get back into their flow."
 
-
 For the rest of this post, we'll use the issue tracker example and create a tiny bug tracker called BugSplat 🐞💥
+
+<NewsletterForm />
 
 ## Step 2: Steal like a product engineer
 
@@ -420,3 +421,5 @@ You can be a designer too. The process is learnable and can get you shipping in 
 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
 <Caption>You to your team now, probably.</Caption>
+
+<NewsletterForm />

@@ -10,7 +10,7 @@ interface AISlideProps {
 
 export default function AISlide({ ai, productName }: AISlideProps) {
     return (
-        <div className="h-full p-8 flex flex-col justify-center bg-ai">
+        <div className="bg-[#dd99ff] h-full p-8 flex flex-col justify-center bg-ai">
             <div className="bg-white/80 backdrop-blur-lg h-full rounded-lg shadow-2xl flex flex-col @2xl:flex-row gap-8 @2xl:gap-12 p-8">
                 <aside className="text-center">
                     <CloudinaryImage

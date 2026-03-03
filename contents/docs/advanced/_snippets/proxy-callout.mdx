@@ -1,0 +1,9 @@
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Before you start" type="fyi">
+
+- If you use a self-hosted proxy, PostHog can't help troubleshoot. Use [our managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) if you want support.
+- Use domains matching your PostHog region: `us.i.posthog.com` for US, `eu.i.posthog.com` for EU.
+- Don't use obvious path names like `/analytics`, `/tracking`, `/telemetry`, or `/posthog`. Blockers will catch them. Use something unique to your app instead.
+
+</CalloutBox>

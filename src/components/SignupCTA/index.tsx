@@ -21,7 +21,7 @@ export const SignupCTA = ({
     type?: string
     width?: string
     event?: any
-    size?: 'lg' | 'sm' | 'md' | 'absurd'
+    size?: 'lg' | 'sm' | 'md' | 'xl'
     state?: any
 }): JSX.Element => {
     const posthog = usePostHog()

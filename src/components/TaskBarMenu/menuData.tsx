@@ -29,6 +29,8 @@ import {
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
+import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 interface DocsMenuItem {
     name: string
@@ -315,7 +317,17 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile } = useApp()
+    const {
+        animateClosingAllWindows,
+        windows,
+        setScreensaverPreviewActive,
+        isMobile,
+        websiteMode,
+        siteSettings,
+        updateSiteSettings,
+    } = useApp()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -388,6 +400,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: "Don't get discount bamboozled",
+                    link: '/discounts',
+                },
+                {
+                    type: 'item',
                     label: 'Social validation for enterprise',
                     link: '/enterprise',
                 },
@@ -445,6 +462,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Cool tech jobs',
                     link: '/cool-tech-jobs',
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Places',
+                    link: '/places',
+                    icon: <Icons.IconMap className="size-4 text-red" />,
                 },
                 {
                     type: 'separator',
@@ -509,7 +532,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Changelog',
-                    link: '/changelog/2025',
+                    link: '/changelog',
                 },
                 {
                     type: 'item',
@@ -533,6 +556,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Careers',
                     link: '/careers',
+                },
+                {
+                    type: 'item',
+                    label: 'Partnerships',
+                    link: '/partnerships',
                 },
                 {
                     type: 'separator',
@@ -573,7 +601,7 @@ export function useMenuData(): MenuType[] {
                         {
                             type: 'item',
                             label: 'Instagram',
-                            link: 'https://www.instagram.com/posthog',
+                            link: 'https://www.instagram.com/teamposthog',
                             icon: <IconInstagram className="size-4" />,
                             external: true,
                         },
@@ -638,6 +666,12 @@ export function useMenuData(): MenuType[] {
                         })),
                     ],
                 },
+                // {
+                //     type: 'item',
+                //     label: 'Video library',
+                //     link: '/videos',
+                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
+                // },
                 {
                     type: 'submenu',
                     label: 'Sexy legal documents',
@@ -660,6 +694,11 @@ export function useMenuData(): MenuType[] {
                         },
                         {
                             type: 'item',
+                            label: 'BAA generator (less fun)',
+                            link: '/baa',
+                        },
+                        {
+                            type: 'item',
                             label: 'SOC ✌️',
                             link: '/handbook/company/security#soc-2',
                         },
@@ -669,6 +708,12 @@ export function useMenuData(): MenuType[] {
                             link: '/docs/privacy/hipaa-compliance',
                         },
                     ],
+                },
+                {
+                    type: 'item',
+                    label: 'Services',
+                    link: '/services',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',
@@ -711,6 +756,36 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
+        ...(isMobile
+            ? []
+            : [
+                  {
+                      type: 'item' as const,
+                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
+                      onClick: () => {
+                          const newExperience = websiteMode ? 'posthog' : 'boring'
+                          updateSiteSettings({ ...siteSettings, experience: newExperience })
+                          posthog?.capture('switched site mode', {
+                              value: newExperience === 'posthog' ? 'os' : 'website',
+                              source: 'menu',
+                          })
+                          addToast({
+                              title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
+                              description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
+                                  websiteMode ? 'website mode' : 'OS mode'
+                              }.`,
+                              duration: 5000,
+                              onUndo: () => {
+                                  updateSiteSettings({
+                                      ...siteSettings,
+                                      experience: websiteMode ? 'posthog' : 'boring',
+                                  })
+                              },
+                          })
+                      },
+                      shortcut: ['Shift', 'M'],
+                  },
+              ]),
     ]
 
     // Process main nav items for mobile menu
@@ -792,53 +867,68 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isMobile
         ? [
-            {
-                type: 'item' as const,
-                label: 'home.mdx',
-                link: '/',
-            },
-            { type: 'separator' as const },
-            // Main navigation items processed for mobile
-            ...processMobileNavItems(),
-            { type: 'separator' as const },
-            // System items
-            ...baseLogoMenuItems,
-        ]
+              {
+                  type: 'item' as const,
+                  label: 'home.mdx',
+                  link: '/',
+              },
+              { type: 'separator' as const },
+              // Main navigation items processed for mobile
+              ...processMobileNavItems(),
+              { type: 'separator' as const },
+              // System items
+              ...baseLogoMenuItems,
+          ]
         : [
-            // Desktop: only show system items
-            ...baseLogoMenuItems,
-            { type: 'separator' as const },
-            {
-                type: 'item' as const,
-                label: 'Start screensaver',
-                onClick: () => {
-                    setScreensaverPreviewActive(true)
-                },
-                shortcut: ['Shift', 'Z'],
-            },
-            {
-                type: 'item' as const,
-                label: 'Close all windows',
-                disabled: windows.length < 1,
-                onClick: () => {
-                    animateClosingAllWindows()
-                },
-                shortcut: ['Shift', 'X'],
-            },
-        ]
+              // Desktop: only show system items
+              ...baseLogoMenuItems,
+              ...(!websiteMode
+                  ? [
+                        { type: 'separator' as const },
+                        {
+                            type: 'item' as const,
+                            label: 'Start screensaver',
+                            onClick: () => {
+                                setScreensaverPreviewActive(true)
+                            },
+                            shortcut: ['Shift', 'Z'],
+                        },
+                        {
+                            type: 'item' as const,
+                            label: 'Close all windows',
+                            disabled: windows.length < 1,
+                            onClick: () => {
+                                animateClosingAllWindows()
+                            },
+                            shortcut: ['Shift', 'X'],
+                        },
+                    ]
+                  : []),
+          ]
 
     return [
         {
             trigger: (
                 <>
                     <div className="flex items-center">
-                        <Logo noText className="size-8 2xs:hidden md:block md:size-6" fill="primary" classic />
-                        <Logo className="hidden 2xs:flex md:hidden h-5 w-auto" fill="primary" classic />
+                        <Logo
+                            noText
+                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
+                            fill="primary"
+                            classic
+                        />
+                        <Logo
+                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
+                            fill="primary"
+                            classic
+                        />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
             items: logoMenuItems,
+            mobileLink: websiteMode ? '/' : undefined,
+            hideChevron: true,
         },
         // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),
@@ -904,6 +994,19 @@ export const SparksJoyItems = {
         },
     ],
     notGames: [
+        {
+            label: 'PostHog FM',
+            link: '/fm',
+            iconName: null,
+            customIcon: (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path
+                        fill="#000"
+                        d="M21.5 5.75a.25.25 0 0 0-.25-.25H2.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h18.5a.25.25 0 0 0 .25-.25zM10 12a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0m7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0m1.5 0a3 3 0 0 1-3 3h-7a3 3 0 1 1 3-3c0 .547-.15 1.058-.405 1.5h1.81A3 3 0 0 1 12.5 12a3 3 0 1 1 6 0m4.5 6.25A1.75 1.75 0 0 1 21.25 20H2.75A1.75 1.75 0 0 1 1 18.25V5.75C1 4.784 1.784 4 2.75 4h18.5c.966 0 1.75.784 1.75 1.75z"
+                    />
+                </svg>
+            ),
+        },
         {
             label: 'Photobooth',
             link: '/photobooth',

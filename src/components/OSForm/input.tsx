@@ -21,6 +21,9 @@ interface InputProps {
     value?: string
     className?: string
     containerClassName?: string
+    actionButton?: {
+        label: string
+    } & React.ButtonHTMLAttributes<HTMLButtonElement>
     [key: string]: any
 }
 
@@ -43,6 +46,7 @@ const Input = ({
     value,
     className = '',
     containerClassName = '',
+    actionButton,
     ...props
 }: InputProps) => {
     const sizeClasses = {
@@ -74,25 +78,37 @@ const Input = ({
         >
             {showLabel && (
                 <div className={`${direction === 'column' ? 'w-full' : labelWidth || 'w-[90px]'}`}>
-                    <label htmlFor={inputId} className={`${labelSizeClasses[size]}`}>
-                        <span>
-                            {label}
-                            {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
-                        </span>
-                        {tooltip && (
+                    <div className="flex justify-between">
+                        <label htmlFor={inputId} className={`${labelSizeClasses[size]}`}>
                             <span>
-                                <Tooltip
-                                    trigger={
-                                        <IconInfo className="ml-1 relative -top-px inline-block size-4 text-secondary hover:text-primary" />
-                                    }
-                                    delay={0}
-                                    sideOffset={-3}
-                                >
-                                    {tooltip}
-                                </Tooltip>
+                                {label}
+                                {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
                             </span>
+                            {tooltip && (
+                                <span>
+                                    <Tooltip
+                                        trigger={
+                                            <IconInfo className="ml-1 relative -top-px inline-block size-4 text-secondary hover:text-primary" />
+                                        }
+                                        delay={0}
+                                        sideOffset={-3}
+                                    >
+                                        {tooltip}
+                                    </Tooltip>
+                                </span>
+                            )}
+                        </label>
+                        {actionButton && (
+                            <button
+                                {...actionButton}
+                                className={`text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed text-red dark:text-yellow ${
+                                    actionButton.className || ''
+                                }`}
+                            >
+                                {actionButton.label}
+                            </button>
                         )}
-                    </label>
+                    </div>
                     {description && <p className="text-sm text-secondary m-0 mt-0.5">{description}</p>}
                 </div>
             )}

@@ -3,6 +3,7 @@ import SEO from 'components/seo'
 import { Script } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SalesforceForm from 'components/SalesforceForm'
+import { useWindow } from '../../context/Window'
 
 interface ContactSalesProps {
     formConfig?: {
@@ -50,14 +51,17 @@ interface ContactSalesProps {
 }
 
 export default function ContactSales({ formConfig }: ContactSalesProps) {
+    const { appWindow } = useWindow()
     if (!formConfig) {
         return null
     }
 
+    const initialValues = appWindow?.location?.state?.initialValues ?? undefined
+
     return (
         <>
             <Script id="default-form-script" src="/scripts/default-form-script.js" />
-            <SalesforceForm {...formConfig} />
+            <SalesforceForm {...formConfig} initialValues={initialValues} />
         </>
     )
 }

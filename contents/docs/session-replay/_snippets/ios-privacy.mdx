@@ -1,3 +1,5 @@
+import SensitiveThirdPartyScreens from "./sensitive-third-party-screens.mdx"
+
 To replace any type of `UIView` with a redacted version in the replay, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) to `ph-no-capture`:
 
 ```swift
@@ -26,20 +28,13 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
     .postHogNoMask()
   ```
 
-### Handling sensitive third-party screens
 
-Third-party components (like payment forms or authentication screens) are often rendered in separate view hierarchies that can't be accessed or modified for masking.
+<CalloutBox title="SwiftUI and Xcode 26" type="caution" icon="IconInfo">
 
-For these cases, manually controlling the recording state is the only reliable solution. For example:
+Apps built with Xcode 26 use a new SwiftUI rendering model that changes how SwiftUI views map to UIKit. This can cause `postHogMask()` and `postHogNoMask()` to behave inconsistently on primitive views like `Text`, `Image`, and `Button`.
 
-```ios_swift
-// Stop session recording before showing a third-party payment sheet
-PostHogSDK.shared.stopSessionRecording()
+**If you're building with Xcode 26**, update to [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later to ensure these modifiers work correctly.
 
-// Present third-party payment sheet
-presentPaymentSheet()
+</CalloutBox>
 
-// ... 
-// Some time later when the sheet is dismissed, resume recording
-PostHogSDK.shared.startSessionRecording()
-```
+<SensitiveThirdPartyScreens />

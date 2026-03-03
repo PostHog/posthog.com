@@ -38,6 +38,7 @@ const teamQuery = (slug: string) =>
                 },
                 miniCrest: true,
                 tagline: true,
+                spiritAnimal: true,
             },
         },
         { encodeValuesOnly: true }

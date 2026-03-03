@@ -46,10 +46,10 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
                 id={id}
                 aria-label={ariaLabel}
                 data-scheme={dataScheme}
-                className={`flex size-5 items-center justify-center rounded border border-primary bg-primary text-primary outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-accent data-[state=checked]:border-accent ${className}`}
+                className={`flex size-5 items-center justify-center rounded border border-primary bg-primary dark:bg-accent text-primary outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-dark dark:data-[state=checked]:bg-light data-[state=checked]:border-dark dark:data-[state=checked]:border-light data-[state=checked]:text-white dark:data-[state=checked]:text-dark ${className}`}
             >
-                <RadixCheckbox.Indicator className="text-primary">
-                    <IconCheck className="size-4" />
+                <RadixCheckbox.Indicator className="">
+                    <IconCheck className="size-3" />
                 </RadixCheckbox.Indicator>
             </RadixCheckbox.Root>
         )

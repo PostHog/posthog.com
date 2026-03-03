@@ -1,0 +1,103 @@
+---
+title: Experiment troubleshooting
+---
+export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
+export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
+export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
+
+This page covers troubleshooting for Experiments. For setup, see the [installation guides](/docs/experiments/installation).
+
+## Have a question? Ask PostHog AI
+
+<AskAIInput placeholder="Type your question and hit enter..." />
+
+## How do I use an existing feature flag in an experiment?
+
+We generally don't recommend this, since experiment feature flags need to be in a specific format (see below) or otherwise they won't work.
+
+However, if you insist on doing this (for example, you don't want to make code change), you can do this for **multiple variant feature flags only** by doing the following:
+
+1. Delete the existing [feature flag](https://app.posthog.com/feature_flags) you'd like to use in the experiment
+2. Create a new experiment and give your feature flag the same key as the feature flag you deleted in step 1.
+3. Name the first variant in your new feature flag 'control'.
+
+<ProductScreenshot
+    imageLight = {ReuseFeatureFlagLight}
+    imageDark = {ReuseFeatureFlagDark}
+    alt = "Reuse an existing feature flag for an experiment"
+    classes = "rounded"
+/>
+
+> **Note:** Deleting a flag is equivalent to disabling it, so it is off for however long it takes you to create the draft experiment. The flag is enabled as soon as you create the experiment (not launched).
+
+## How do I run a second experiment using the same feature flag as the first experiment?
+
+This is similar to running an experiment using an [existing feature flag](#how-do-i-use-an-existing-feature-flag-in-an-experiment). If you want to re-run an experiment (using the same feature flag key) while preserving the previous experiment results, delete the existing feature flag (not the experiment) and use the same key in the new experiment.
+
+## How can I run experiments with my custom feature flag setup?
+
+See our docs on [how to run an experiment without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## How do I assign a specific person to the control/test variant in an experiment?
+
+Once you create the experiment, go to the feature flag, scroll down to "Release Conditions". For each condition, there is an "Optional Override". This enables you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
+
+<ProductVideo
+    videoLight = {AssignAnOverrideLight}
+    videoDark = {AssignAnOverrideDark}
+    alt = "How to assign an experiment override"
+    classes = "rounded"
+/>
+
+import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
+
+<FAQFalseOrNoneEvents />
+
+## Why are my A/B test event numbers lower than when I create an insight directly?
+
+Experiment results only count events that include the experiment's feature flag data. Sometimes, when you capture experiment events, the flags are not loaded yet. This means users don't see the experiment, their events won't have the flag data, and they are not included in the results calculation.
+
+By default, insights count all the events, whether they include flag data or not. This is why they show a higher number. To confirm this, break down an insight by your experiment's flag and check the number of events with the value `None`.
+
+A situation where this happens is using pageviews as your goal metric. Because pageviews are captured as soon as PostHog loads, the flag data may not have loaded yet, especially for first time users where flags aren't cached. Thus, the pageview count in insights might be higher than in your experiment.
+
+To fix this, you make sure flags are immediately available on a page load. There are two options to do this:
+
+1. [Wait for feature flags to load](/docs/feature-flags/adding-feature-flag-code#ensuring-flags-are-loaded-before-usage) before showing the page (low engineering effort, but slows page down by ~200ms).
+2. Use [client-side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast).
+
+## Why am I seeing unexpected results in my A/A test?
+
+If you're [running an A/A test](/tutorials/aa-testing) (where both variants are identical) and seeing significant differences between variants, there are a few things to check:
+
+1. **Feature flag calls**: Create a trend insight of unique users for `$feature_flag_called` events and verify they are equally split between variants. An uneven split suggests issues with flag evaluation.
+
+2. **Implementation verification**:
+   - Use feature flag overrides (like `posthog.featureFlags.overrideFeatureFlags({ flags: {'flag-key': 'test'}})`) to test each variant
+   - Check the code runs identically across different states (logged in/out), browsers, and parameters
+   - Verify that user properties and group assignments are set correctly before flag evaluation
+
+3. **Session replays**: Watch session recordings filtered by your feature flag to spot any unexpected differences between variants.
+
+4. **Random variation**: While A/A tests should theoretically show no difference, random chance can sometimes cause temporary statistical significance, especially with smaller sample sizes.
+
+Remember: A successful A/A test validates your experimentation setup, while an "unsuccessful" one helps identify issues you can fix to improve your process. If you're still seeing unexplained significant differences, [contact support](https://app.posthog.com/home#supportModal=bug%3Aexperiments) for help troubleshooting.
+
+## Why do I need a minimum number of exposures to run an experiment?
+
+Experiments require a minimum of 50 exposures per variant before showing experiment results. This is necessary because, with too few exposures, the results may not be statistically significant and could lead to incorrect conclusions. This threshold ensures that the experiment data is reliable enough to make a decision.
+
+You can check your current exposure count on the experiment results page. If your experiment is not reaching the minimum number of exposures, you can try the following:
+
+- Verify your feature flag implementation.
+- Consider increasing your feature flag's rollout percentage.
+- Ensure your exposure events are firing correctly.
+
+## Solved community questions
+
+<SolvedQuestions
+    topicLabel="Experiments"
+/>

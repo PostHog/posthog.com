@@ -4,7 +4,11 @@ import { useChat } from 'hooks/useChat'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
 
-export default function InkeepEmbeddedChat(): JSX.Element {
+interface InkeepEmbeddedChatProps {
+    codePrompt?: string
+}
+
+export default function InkeepEmbeddedChat({ codePrompt }: InkeepEmbeddedChatProps): JSX.Element {
     const chatFunctionsRef = useRef(null)
     const lottieRef = useRef(null)
     const [initialQuestionAsked, setInitialQuestionAsked] = useState(false)
@@ -30,15 +34,25 @@ export default function InkeepEmbeddedChat(): JSX.Element {
         }
     }, [chatRefReady])
 
+    const enhancedAiChatSettings = {
+        ...aiChatSettings,
+        chatFunctionsRef: setChatFunctionsRef,
+        syntaxHighlighter: {
+            lightTheme: 'oneLight',
+            darkTheme: 'vsDark',
+        },
+        enableMarkdownRendering: true,
+        ...(codePrompt && {
+            prompts: [...(aiChatSettings?.prompts || []), codePrompt],
+        }),
+    }
+
     return (
         <>
             {EmbeddedChat ? (
                 <div id="embedded-chat-target" className="h-full">
                     <Container>
-                        <EmbeddedChat
-                            aiChatSettings={{ ...aiChatSettings, chatFunctionsRef: setChatFunctionsRef }}
-                            baseSettings={baseSettings}
-                        />
+                        <EmbeddedChat aiChatSettings={enhancedAiChatSettings} baseSettings={baseSettings} />
                     </Container>
                 </div>
             ) : (

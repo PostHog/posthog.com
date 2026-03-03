@@ -32,18 +32,18 @@ posthog.capture(
 ```
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
     'distinctId' => 'distinct_id',
     'event' => '$set',
-    'properties' => array(
-        '$set' => array(
+    'properties' => [
+        '$set' => [
             'name' => 'Max Hedgehog'
-        ),
-        '$set_once' => array(
+        ],
+        '$set_once' => [
             'initial_url' => '/blog'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 ```ruby
@@ -91,7 +91,7 @@ posthog.capture("distinct_id", "$set", new HashMap<String, Object>() {
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "properties": {
       "$set": {"name": "Max Hedgehog" },
       "$set_once": {"initial_url": "/blog"}

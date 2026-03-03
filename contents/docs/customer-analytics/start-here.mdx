@@ -1,0 +1,84 @@
+---
+title: Getting started with customer analytics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+Customer Analytics helps you understand your users without building dashboards from scratch. It tracks active users, signups, conversions, and engagement – the metrics that matter when you're building toward product-market fit.
+
+<QuestLog firstSpeechBubble="Let's understand your customers!" lastSpeechBubble="Now go talk to them!">
+
+<QuestLogItem
+    title="Configure dashboard events"
+    subtitle="Required"
+    icon="IconGraph"
+>
+
+The [customer analytics dashboard](https://app.posthog.com/customer_analytics) works immediately with `$pageview` events. To extract its full potential, configure it with your events in [customer analytics configurations](https://app.posthog.com/customer_analytics/configuration).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_18_T18_45_30_373_Z_c57f043668.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_18_T18_46_37_819_Z_a0c5ad7667.png"
+    alt="Customer Analytics dashboard event configs"
+    classes="rounded"
+/>
+
+Tips for nailing the setup:
+
+- Use [PostHog AI](/docs/customer-analytics/configure-dashboard-with-ai) to help you find the events
+- Create actions to group multiple events under a single name for easier analysis
+- Be as specific as possible with event definitions. Sloppy definitions = sloppy metrics.
+
+
+<OSButton variant="primary" asLink to="https://app.posthog.com/customer_analytics/configuration" external>
+    Open dashboard configurations
+</OSButton>
+</QuestLogItem>
+
+<QuestLogItem
+    title="Define usage metrics"
+    subtitle="Recommended"
+    icon="IconTrends"
+>
+
+[Create usage metrics](/docs/customer-analytics/create-usage-metrics) to track custom activity for each interaction they have with your product. These appear on customer profiles and help you identify power users and churn risks.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_24_16_161_Z_0fde31684b.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_23_19_968_Z_a4de4c95f4.png"
+    alt="Usage metrics creation form"
+    classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="https://app.posthog.com/customer_analytics/configuration?tab=customer-analytics-usage-metrics#selectedSetting=customer-analytics-usage-metrics" external>
+    Set up usage metrics
+</OSButton>
+</QuestLogItem>
+
+<QuestLogItem
+    title="Explore customer profiles"
+    subtitle="Optional"
+    icon="IconPerson"
+>
+
+[Customer profiles](/docs/customer-analytics/customer-profiles) consolidate everything about a customer in one place: their events, [errors](/docs/error-tracking), [LLM traces](/docs/ai-engineering/observability), and support tickets.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_34_040_Z_e0dea14b33.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_19_T12_30_59_919_Z_8a54ff12bf.png"
+    alt="Person profile"
+    classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="https://app.posthog.com/persons" external>
+    Explore customer profiles
+</OSButton>
+
+</QuestLogItem>
+</QuestLog>

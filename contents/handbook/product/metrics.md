@@ -14,7 +14,7 @@ If as a new product manager or team lead you want to look at a wider range of me
 
 ### Revenue
 
-These queries are written and owned by the billing team. They are standardised across products, and match the combined PostHog revenue queries. If you are intending a change, please chat to the billing team first.
+These queries are written and owned by the <SmallTeam slug="billing" />. They are standardised across products, and match the combined PostHog revenue queries. If you are intending a change, please chat to the billing team first.
 
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/198672">Link to combined revenue dashboard</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/215472">Link to per-product revenue dashboard</PrivateLink>
@@ -39,7 +39,7 @@ Note that currently, refunds are not removed from per-product revenue, which is 
 
 ### Usage
 
-Product usage metrics are defined by the PM or small team lead. When setting up metrics for a new product, it’s recommended to start with a longer list and trim it once user behaviour is better understood. We recommend adding all relevant product metrics to one dashboard that is accessible, kept up to date and reviewed by the whole small team. For better discoverability, some of us use the appendix ™ to mark the primary usage dashboard.
+Product usage metrics are defined by the PM or small team lead. When setting up metrics for a new product, it’s recommended to start with a longer list and trim it once user behavior is better understood. We recommend adding all relevant product metrics to one dashboard that is accessible, kept up to date and reviewed by the whole small team. For better discoverability, some of us use the appendix ™ to mark the primary usage dashboard.
 
 This dashboard can also include NPS & support metrics (see below).
 

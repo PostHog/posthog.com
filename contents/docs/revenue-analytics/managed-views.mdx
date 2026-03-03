@@ -11,7 +11,9 @@ Revenue analytics works by automatically transforming the data coming from your 
 
 These views are automatically created once you [add a revenue source](/docs/revenue-analytics/payment-platforms).
 
-These views are not exclusive to the revenue analytics dashboard: you can use them in other parts of PostHog where you'd be able to use views, more importantly the [SQL editor](/docs/data-warehouse/query).
+These views are not exclusive to the revenue analytics dashboard: you can query them in the [SQL editor](/docs/data-warehouse/query).
+
+> **Note:** These views cannot currently be used in the visual Insights builder (Trends, Funnels, etc.). For currency conversion in Trends, use the `convertCurrency()` HogQL function instead - see [our FAQ](/docs/revenue-analytics/common-questions#why-isnt-currency-being-converted-in-my-trends-insight) for details.
 
 There are 5 sets of views. 
 - For event sources they're named in the format `revenue_analytics.events.<event_name>.revenue_analytics_<view_type>` 

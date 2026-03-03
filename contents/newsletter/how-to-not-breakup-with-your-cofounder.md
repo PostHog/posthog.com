@@ -39,6 +39,8 @@ Therefore, I’d argue you should just minimize the risk of you and your cofound
 
 Despite our differences in experience, I frequently feel I’m underperforming relative to Tim and need to remind myself how effective we’ve been together.
 
+<NewsletterForm />
+
 ## 2. Good relationships aren’t set and forget
 
 You need to be intentional about the way you work together day-to-day.
@@ -155,4 +157,4 @@ It’s more fun, too.
 
  _Words by James Hawkins, Pizza Margherita fundamentalist._
 
-<NewsletterForm />
+ <NewsletterForm />

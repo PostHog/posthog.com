@@ -1,0 +1,11 @@
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Avoid reusing deleted distinct IDs" type="caution">
+
+User deletion requests are not immediate, but processed asynchronously. We recommend that you _avoid_ reusing a deleted `distinct_id` value for a new user, as it may lead to unexpected results while the deletion is being processed. Once the deletion process is fully processed, PostHog does not retain any data associated with the deleted `distinct_id`. 
+
+If you must reuse the `distinct_id`, you can do so using the **Reset deleted person** tool, available from the dropdown at the top-right of the [**persons page**](https://app.posthog.com/persons). This tool enables you to reset a deleted `distinct_id` so that future events associated with it create a new person profile.  
+
+If you instead want to split a person with multiple IDs (e.g. to isolate bad data tied to a specific `distinct_id`), use the **Split IDs** button on their person profile.
+
+</CalloutBox>

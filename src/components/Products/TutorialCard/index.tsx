@@ -16,6 +16,7 @@ export const TutorialCard = ({ title, description, url }: TutorialCardProps): JS
     return (
         <li className="bg-accent p-6 rounded flex flex-col items-start">
             <p className="text-lg font-bold m-0 leading-tight mb-1">{title}</p>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - CMS content, not user input */}
             <p className="text-sm flex-1" dangerouslySetInnerHTML={{ __html: description }} />
             <CallToAction to={url} type="secondary" size="sm">
                 Read more

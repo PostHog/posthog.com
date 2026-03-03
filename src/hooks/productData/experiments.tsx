@@ -13,6 +13,7 @@ export const experiments = {
     color: 'purple',
     colorSecondary: 'lilac',
     category: 'product_engineering',
+    wizardSupport: 'In development',
     seo: {
         title: 'Experiments – Run A/B tests and validate ideas with PostHog',
         description:
@@ -263,7 +264,7 @@ export const experiments = {
         },
     ],
     postHogOnPostHog: {
-        title: 'How PostHog uses experiments',
+        title: 'How PostHog uses Experiments',
         benefits: [
             {
                 title: 'A/B tests',

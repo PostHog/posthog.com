@@ -1,6 +1,20 @@
-### Q4 2025 Objectives
+### Q1 2026 Objectives
 
-- *Grow native Messaging*: Drive adoption to match or exceed all other workflow destinations combined.
-- *Workflows as a platform*: Evolve the Workflows product's workflows engine into a customer-facing data pipeline and automation tool.
-- *Destination ergonomics*: Improve the user experience, onboarding, and support process for destinations.
-- *AI-powered workflows*: Let MaxAI build workflows from natural language prompts _and_ execute automated tasks within them.
+- *Going deeper on messaging*: 
+  - Messaging is still the most common Workflows use case, and we want to serve it really well before focusing broadly on Workflows features.
+	- What we’ll ship: 
+    - The most-requested features from our users
+    - Broadcasts (aka Batch workflows)
+    - Recurring / cron-job workflows
+    - New native PostHog messaging channels (Push, SMS)
+    - Behavioral targeting (do _X_ only if user has not performed _Y_ event in last _N_ days)
+- *Gear up for Workflows General Availability*:
+	- As we prepare Workflows for a broader release, we’re focusing on reliability and day-to-day usability, especially when things go wrong.
+  - What we'll ship:
+    - Improved observability (clear run history for past and future workflow invocations, logs, and debugging tools)
+    - Better previews for messages on all channels so that users feel confident in their comms
+    - High level insights around email deliverability to allow users to proactively monitor spam reputation
+    - More product documentation for new and existing users
+- *Inter-product triggers*: 
+	- Today, Workflows is powerful, but integrations across PostHog product aren’t yet consistent
+	- What we’ll ship: At least one solid, repeatable integration pattern for triggering workflows from other PostHog products, or letting users configure workflows based on product events

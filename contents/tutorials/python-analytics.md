@@ -146,7 +146,7 @@ Run `python3 app.py` and navigate to `http://localhost:8000` to see our app in a
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-Run `pip3 install posthog` to install [PostHog's Python SDK](/docs/libraries/python). Then, initialize PostHog in `app.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Run `pip3 install posthog` to install [PostHog's Python SDK](/docs/libraries/python). Then, initialize PostHog in `app.py` using your project token and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
 ```py file=app.py
 package main
@@ -154,7 +154,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from posthog import Posthog
 
 posthog = Posthog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   host='<ph_client_api_host>'
 )
 

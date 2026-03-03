@@ -274,7 +274,7 @@ export default function Tabbed() {
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
     const { products: initialProducts, setVolume, setProduct, monthlyTotal } = useProducts()
-    const products = initialProducts.filter((product) => !!product.unit)
+    const products = initialProducts.filter((product) => !!product.unit && !product.hideFromPricingTableAndCalculator)
     const activeProduct = products[activeTab]
     const initialProductAddons = useMemo(() => {
         const initialAddons = []

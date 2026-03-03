@@ -84,9 +84,10 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
             if (typeof window === 'undefined' || !containerRef.current) return
 
-            // Check if we're inside a small container (likely a thumbnail)
+            // Check if we're inside a very small container (likely a thumbnail in a grid)
+            // Allow mobile sizes (down to ~200px width) for legitimate video players
             const rect = containerRef.current.getBoundingClientRect()
-            if (rect.width < 300 || rect.height < 200) {
+            if (rect.width < 200 || rect.height < 100) {
                 console.log('Skipping video initialization - detected thumbnail size', rect.width, rect.height)
                 return
             }
@@ -131,6 +132,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         playerColor: '000000',
                         captionsOn: false, // Disable native captions
                         captionsDefault: false,
+                        playsinline: true, // Critical for mobile Safari
+                        preload: 'auto', // Preload video metadata
                     },
                     onReady: (video: any) => {
                         playerRef.current = video
@@ -147,19 +150,38 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     }
                                 },
                                 play: () => {
-                                    if (playerRef.current && playerRef.current.play) {
-                                        playerRef.current.play()
-                                    } else if (video && video.play) {
-                                        video.play()
+                                    const playPromise = playerRef.current?.play ? playerRef.current.play() : video?.play()
+                                    if (playPromise && typeof playPromise.catch === 'function') {
+                                        playPromise.catch((error: any) => {
+                                            console.warn('Play was prevented:', error)
+                                        })
                                     }
                                 },
-                                time: () => {
-                                    if (playerRef.current && playerRef.current.time) {
-                                        return playerRef.current.time()
-                                    } else if (video && video.time) {
-                                        return video.time()
+                                time: (seconds?: number) => {
+                                    if (seconds !== undefined) {
+                                        // Setter: seek to specific time
+                                        if (playerRef.current && playerRef.current.time) {
+                                            playerRef.current.time(seconds)
+                                        } else if (video && video.time) {
+                                            video.time(seconds)
+                                        }
+                                    } else {
+                                        // Getter: return current time
+                                        if (playerRef.current && playerRef.current.time) {
+                                            return playerRef.current.time()
+                                        } else if (video && video.time) {
+                                            return video.time()
+                                        }
+                                        return 0
                                     }
-                                    return 0
+                                },
+                                state: () => {
+                                    if (playerRef.current && playerRef.current.state) {
+                                        return playerRef.current.state()
+                                    } else if (video && video.state) {
+                                        return video.state()
+                                    }
+                                    return 'paused'
                                 },
                                 currentTime: 0,
                             }
@@ -475,7 +497,12 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
 
                         // Set initial states using refs
                         if (autoPlayRef.current) {
-                            video.play()
+                            const playPromise = video.play()
+                            if (playPromise && typeof playPromise.catch === 'function') {
+                                playPromise.catch((error: any) => {
+                                    console.warn('Autoplay was prevented:', error)
+                                })
+                            }
                         }
                         if (mutedRef.current) {
                             video.volume(0)
@@ -546,7 +573,12 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                 if (isPlaying) {
                     playerRef.current.pause()
                 } else {
-                    playerRef.current.play()
+                    const playPromise = playerRef.current.play()
+                    if (playPromise && typeof playPromise.catch === 'function') {
+                        playPromise.catch((error: any) => {
+                            console.warn('Play was prevented:', error)
+                        })
+                    }
                 }
             }
         }, [isPlaying, isReady])

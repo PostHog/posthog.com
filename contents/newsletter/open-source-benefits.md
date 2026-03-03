@@ -28,7 +28,7 @@ Throughout this evolution, we've learned a lot the benefits (and the downsides) 
 >
 > Note that:
 >
-> 1. PostHog can be tricky to self-host due to our breadth of products, but many people have managed to do so. Our DevEx team is working on unifying the dev environment with self hosted to make this better.
+> 1. PostHog can be tricky to self-host due to our breadth of products, but many people have managed to do so. Our <SmallTeam slug="developer-experience" /> is working on unifying the dev environment with self hosted to make this better.
 >
 > 2. It is totally fair for you to have a different definition of open source (some would call us “open core”), but this is where we're coming from.
 
@@ -67,6 +67,8 @@ The second group is **buyers**. They have been burned by closed-source options a
 Both these groups boost open-source startups in launches and beyond. They create word-of-mouth and bottoms up growth.
 
 We continue to see this. There are many reasons to choose PostHog, but we still get many signups where being open source is the most important one.
+
+<NewsletterForm />
 
 ## 2. It helps you hire great talent
 
@@ -173,7 +175,7 @@ Eventually, we made the [tough decision to shut it down](/blog/sunsetting-helm-s
 ### 3. You might be competing with yourself
 It can be hard to balance a free, open-source product and a paid, hosted option. No matter what you do, you'll face allegations that you are making the open-source version worse intentionally (whether that is true or not).
 
-To be honest, five years in, and we are still figuring this one out. PostHog has become more complex to host, even for us (our [infra team](/teams/infrastructure) has grown to 5 people). We continue to offer a generous free tier, but many people still want to self-host and find it difficult to do so. Again, we're [working on it](/teams/developer-experience#goals)!
+To be honest, five years in, and we are still figuring this one out. PostHog has become more complex to host, even for us (our <SmallTeam slug="infrastructure" /> has grown to 5 people). We continue to offer a generous free tier, but many people still want to self-host and find it difficult to do so. Again, we're [working on it](/teams/developer-experience#goals)!
 
 What hasn't changed is open source being a [core value](/handbook/values) of our company. We have a broader definition of open source than most. We think it's not just the code you write, but your overall culture. We try to be open source in all the ways we can. Our [handbook](/handbook), [roadmap](/roadmap), and even this [newsletter](/newsletter) are all testaments to this.
 

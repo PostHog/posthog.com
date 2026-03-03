@@ -429,7 +429,7 @@ export default function TeamPatch({
                                     textAnchor="middle"
                                     x="138"
                                 >
-                                    <tspan y="258.218">{name}</tspan>
+                                    <tspan y="262">{name}</tspan>
                                 </TeamName>
                             </g>
                         </g>

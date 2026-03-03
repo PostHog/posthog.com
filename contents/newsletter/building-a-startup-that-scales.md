@@ -48,6 +48,8 @@ I joined PostHog when we were 11 people and had sold nothing. 5 years later, we�
 
 12. Copy the bits you like about other, more successful companies or leaders – don’t import them in their entirety. Remember, you are probably not as smart as Jensen Huang.
 
+<NewsletterForm />
+
 ## Product and engineering
 
 13. [Small teams](/newsletter/small-teams) scale extremely well. One of the best things we’ve ever done is to keep engineering teams to six people or fewer.
@@ -80,7 +82,7 @@ I joined PostHog when we were 11 people and had sold nothing. 5 years later, we�
 
 <Caption>Our DPA generator. Legal docs can be fun too.</Caption>
 
-24. As you grow and serve a wider audience, it’s easy to become less [opinionated](/handbook/growth/marketing#1-be-opinionated). This is the best way to lose your ICP’s interest.
+24. As you grow and serve a wider audience, it’s easy to become less [opinionated](/handbook/marketing#1-be-opinionated). This is the best way to lose your ICP’s interest.
 
 25. Keep building a great product, then telling people about it. If you are product-led, ask yourself why you think paid ads are now how you grow your business if they weren’t before.
 

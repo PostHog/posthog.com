@@ -18,6 +18,7 @@ const FeatureItem = ({ name, description, size }) => (
                 className={`${
                     size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
                 } text-secondary mb-0`}
+                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - addon description from codebase, not user input
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>

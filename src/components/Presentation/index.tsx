@@ -12,6 +12,12 @@ import { useApp } from '../../context/App'
 import ContactSales from 'components/ContactSales'
 import PresentationForm from './Utilities/PresentationForm'
 
+// Mapping for team query parameter - makes URL less conspicuous
+const TEAM_QUERY_MAP: Record<string, string> = {
+    '1': 'sales-cs',
+    '2': 'sales-product-led',
+}
+
 interface AccordionItem {
     title: string
     content: React.ReactNode
@@ -49,6 +55,7 @@ interface PresentationProps {
         teamSlug?: string
     }
     salesRep?: SalesRep | null
+    rightActionButtons?: React.ReactNode
 }
 
 const SidebarContent = ({
@@ -106,6 +113,17 @@ const getPanelStateFromURL = (param: string, configDefault?: boolean): boolean =
     return value !== null ? value === 'true' : configDefault ?? true
 }
 
+// Get team slug from URL query param, with mapping for less conspicuous URLs
+const getTeamSlugFromURL = (configDefault?: string): string | undefined => {
+    if (typeof window === 'undefined') return configDefault
+    const params = new URLSearchParams(window.location.search)
+    const teamParam = params.get('t')
+    if (teamParam && TEAM_QUERY_MAP[teamParam]) {
+        return TEAM_QUERY_MAP[teamParam]
+    }
+    return configDefault
+}
+
 export default function Presentation({
     accentImage,
     sidebarContent,
@@ -116,8 +134,9 @@ export default function Presentation({
     presenterNotes,
     config,
     salesRep,
+    rightActionButtons,
 }: PresentationProps) {
-    const { siteSettings } = useApp()
+    const { siteSettings, websiteMode } = useApp()
     const { appWindow } = useWindow()
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
 
@@ -133,6 +152,9 @@ export default function Presentation({
         getPanelStateFromURL('form', config?.form ?? false)
     )
     const [drawerHeight, setDrawerHeight] = useState<number>(90)
+
+    // Determine effective team slug - URL param overrides config
+    const effectiveTeamSlug = getTeamSlugFromURL(config?.teamSlug)
     const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
     const [isDragging, setIsDragging] = useState<boolean>(false)
     const [dragStartHeight, setDragStartHeight] = useState<number>(0)
@@ -247,16 +269,23 @@ export default function Presentation({
     useEffect(() => {
         if (slides.length === 0) return
 
+        // In websiteMode, listen to window scroll; otherwise use ScrollArea
+        const useWindowScroll = websiteMode
+
         const scrollContainerSelector = slideId
             ? `[data-presentation-id="${slideId}"] [data-radix-scroll-area-viewport]`
             : '[data-app="Presentation"] [data-radix-scroll-area-viewport]'
-        const scrollContainer = document.querySelector(scrollContainerSelector)
-        if (!scrollContainer) return
+        const scrollContainer = useWindowScroll ? null : document.querySelector(scrollContainerSelector)
+
+        // In non-websiteMode, we need a scroll container
+        if (!useWindowScroll && !scrollContainer) return
 
         const handleScroll = () => {
-            const containerRect = scrollContainer.getBoundingClientRect()
-            const containerTop = containerRect.top
-            const containerBottom = containerRect.bottom
+            // Use viewport bounds for websiteMode, container bounds otherwise
+            const containerTop = useWindowScroll ? 0 : scrollContainer!.getBoundingClientRect().top
+            const containerBottom = useWindowScroll
+                ? window.innerHeight
+                : scrollContainer!.getBoundingClientRect().bottom
 
             let bestSlideIndex = 0
             let maxVisibleArea = 0
@@ -286,13 +315,14 @@ export default function Presentation({
         // Initial check
         handleScroll()
 
-        // Listen for scroll events
-        scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+        // Listen for scroll events on window or container
+        const scrollTarget = useWindowScroll ? window : scrollContainer!
+        scrollTarget.addEventListener('scroll', handleScroll, { passive: true })
 
         return () => {
-            scrollContainer.removeEventListener('scroll', handleScroll)
+            scrollTarget.removeEventListener('scroll', handleScroll)
         }
-    }, [slides.length, slideId])
+    }, [slides.length, slideId, websiteMode])
 
     useEffect(() => {
         const handleResize = () => {
@@ -336,7 +366,13 @@ export default function Presentation({
 
     return (
         <>
-            <div ref={containerRef} className="@container w-full h-full flex flex-col min-h-1">
+            <div
+                ref={containerRef}
+                data-scheme="secondary"
+                className={`@container w-full transition-all duration-300 h-full flex flex-col min-h-1 ${
+                    websiteMode ? 'h-[calc(100vh_-_49px)] ' : 'max-w-full'
+                }`}
+            >
                 <div
                     data-scheme="secondary"
                     className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
@@ -353,9 +389,9 @@ export default function Presentation({
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`bg-primary @2xl:border-y-0 border-y ${
-                                isNavVisible ? '@2xl:border-r' : 'border-b-0'
-                            } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
+                            className={`${websiteMode ? '' : 'bg-primary border-primary @2xl:border-y-0 border-y'} ${
+                                isNavVisible && !websiteMode ? '@2xl:border-r' : 'border-b-0'
+                            } overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
@@ -376,11 +412,12 @@ export default function Presentation({
                         data-app="Presentation"
                         data-presentation-id={slideId}
                         data-scheme="secondary"
-                        className="@container flex-1 flex flex-col bg-primary relative h-full"
+                        className={`@container flex-1 flex flex-col relative h-full ${websiteMode ? '' : 'bg-primary'}`}
                     >
                         {!fullScreen && (
                             <>
                                 <HeaderBar
+                                    rightActionButtons={rightActionButtons}
                                     hasLeftSidebar={sidebarContent ? { enabled: true, alwaysShow: true } : false}
                                     showSidebar
                                     showSearch
@@ -408,9 +445,9 @@ export default function Presentation({
                                 </div>
                                 <div
                                     data-scheme="primary"
-                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${
+                                    className={`bg-primary border-t border-primary overflow-hidden ${
                                         !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                    }`}
+                                    } ${websiteMode ? 'sticky bottom-0 left-0 right-0 z-50' : 'flex-none relative'}`}
                                     style={{
                                         height: isDrawerOpen ? drawerHeight : 0,
                                         maxHeight: 300,
@@ -450,6 +487,7 @@ export default function Presentation({
                                         <div className="p-4 text-sm prose dark:prose-invert prose-sm">
                                             {currentSlideNotes ? (
                                                 typeof currentSlideNotes === 'string' ? (
+                                                    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation notes from CMS, not user input
                                                     <div dangerouslySetInnerHTML={{ __html: currentSlideNotes }} />
                                                 ) : (
                                                     currentSlideNotes
@@ -469,7 +507,7 @@ export default function Presentation({
                             data-scheme="secondary"
                             className="w-80 h-full bg-primary border-l border-primary hidden @2xl:block"
                         >
-                            <PresentationForm teamSlug={config?.teamSlug} salesRep={salesRep} />
+                            <PresentationForm teamSlug={effectiveTeamSlug} salesRep={salesRep} />
                         </aside>
                     )}
                 </div>

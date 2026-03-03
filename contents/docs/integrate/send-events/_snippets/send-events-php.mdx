@@ -5,10 +5,10 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_the_user',
   'event' => 'user_signed_up'
-));
+]);
 ```
 
 <NamingTip />
@@ -16,14 +16,14 @@ PostHog::capture(array(
 <SettingProperties />
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_the_user',
   'event' => 'user_signed_up',
-  'properties' => array(
+  'properties' => [
     'login_type' => 'email',
     'is_free_trial' => 'true'
-  )
-));
+  ]
+]);
 ```
 
 ### Sending page views
@@ -31,11 +31,11 @@ PostHog::capture(array(
 If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_the_user',
   'event' => '$pageview',
-  'properties' => array(
+  'properties' => [
     '$current_url' => 'https://example.com'
-  )
-));
+  ]
+]);
 ```

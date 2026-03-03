@@ -67,6 +67,8 @@ Every small improvement inches your product towards greatness.
 
 - When doing support, they are familiar with the potential fixes because they were involved with (or wrote) the code related to the issue.
 
+<NewsletterForm />
+
 ## 2. Creating a support process built for engineers
 
 The second problem many companies run into is trying to smush engineers into an existing support process. Our support process for engineers isn't wildly different from what you might expect, but we've done a lot of work to tailor it to them.

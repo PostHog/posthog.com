@@ -1,50 +1,77 @@
-### Implement two way sync for community questions with Zendesk
-- **Owner:** <TeamMember name="Christian Rafferty" photo />
-- **Rationale:** A centralised tool for managing both community and non-community tickets will give the support team full visibility into all customer questions without splitting focus across multiple platforms. This also creates the groundwork for being able to offer some level of support to free customers.
-- **What we'll ship:** When a community question is posted, ensure that it is raised in Zendesk and assigned to the correct agent group. When follow up replies are posted on the community question thread, ensure that these are posted onto the Zendesk ticket and the ticket status changes appropriately. Allow agents to post their reply in Zendesk as a public comment which will be posted to the community thread (internal comments will remain only in Zendesk). Ensure that the desired behaivour is achieved relative to existing triggers and automations that exist in Zendesk.
-- **We'll know we're successful when:** All community tickets and their replies are tracked in Zendesk, community tickets follow the same status rules as non-community tickets, and we are able to start considering target response times for community questions.
-- **Stretch Goal:** Set the `Org plan level` on the ticket.
-
-### Create a reliable way to surface if we are experiencing a customer facing incident
-- **Owner:** <TeamMember name="Joshua Ordehi" photo />
-- **Rationale:** Being able to surface incidents faster means that we as a company can jump on those incidents and fix them sooner.
-- **What we'll ship:** Improvements to the existing reporting and alerting that Joshua has created which looks at support tickets created from customer facing errors. The goal is to make the detection more accurate (considering both specific product areas and being able to identify cross-functional issues) and less noisy. The next stage of implementation will also look at the related error tracking issue to discover if more customers are experiencing this error/incident (within a specific timeframe) but aren't reporting it in support tickets.
-- **We'll know we're successful when:** We feel confident enough in the accuracy of the incident identification to put the alert into #tell-posthog-anything.
-
-### Make it more obvious how to submit tickets during the login workflow
-- **Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
-- **Rationale:** Prevent customer frustration and improve support experience by making it more obvious how to submit tickets during the login workflow.
-- **What we'll ship:** Implement a more obvious prompt to the user for how to submit a support ticket.
-- **We'll know we're successful when:** Fewer tickets with the `email-closed` tag that have been created due to issues encountered during the login workflow.
-
-### Develop a framework that will give us confidence in how PostHog AI is being used as a support tool
-- **Owner:** <TeamMember name="Luke Belton" photo />
-- **Rationale:** PostHog AI is being used as a support tool and we don't really know what the quality of that support is. We want to ensure that users are receiving the best support experience and that PostHog AI is monitored with that in mind. If PostHog AI gives bad support advice then we will confuse our customers and worst case leave them looking for solutions from PostHog alternatives.
-- **What we'll ship:** This is a research piece that will outline a future framework for evaluating PostHog AI as a 'member' of the support team.
-- **We'll know we're successful when:** We have a clear route forwards on how we want to be testing PostHog AI support output. We'll have a good understanding of how to feedback PostHog AI performance on support and iterate to improve it.
-
-### Get SDK Doctor into active beta and collecting feedback from users
+### Get SDK Doctor out of beta and leveled-up
 - **Owner:** <TeamMember name="Steven Shults" photo />
-- **Rationale:** Getting SDK doctor into active beta will help our customers understand if they are staying up to date with the latest version of our SDKs or if they are trying to call feature flags too soon. Having this in active beta will allow us to see how users respond (and address some feedback) before extending the functionality of SDK doctor.
-- **What we'll ship:** We'll complete all beta prep including creating public documentation, getting the code reviewed by engineering, tightening up and extending our test cases, and generally shipping SDK doctor into an active beta state. We can also implement any feedback we receive from customers that we think is reasonable.
-- **We'll know we're successful when:** SDK doctor is in active beta and feedback tickets about SDK Doctor are coming into Zendesk from customers.
+- *Rationale:* Officially moving SDK doctor out of beta and into general availability will help our customers trust SDK Doctor for staying up to date with the latest version of our SDKs. Further extending functionality will help customers keep their data in good shape, and enhance the support we provide.
+- *What we'll ship:* Additional functionality (new debug properties in events for use by SDK Doctor, subscriptions, SDK info added to support tickets, improved internal tracking), moving from beta to official general availability, continued improvements based on feedback
+- *We'll know we're successful when:* SDK doctor is further enhanced, out of beta, and helping customers keep their PostHog integration humming along smoothly
 
-### Investigate and design a tool that will become our omnisearch and source of knowledge that we use while solving tickets
-- **Owner:** <TeamMember name="Ben Lea" photo />, <TeamMember name="Ben Haynes" photo />
-- **Rationale:** Having better AI tooling and search ability for support engineers makes us more efficient in diagnosing issues and answering support tickets.
-- **What we'll ship:** Do investigation into approaches we can take to create this tool (whether we use a third party or something homegrown). Design and implement a minimum prototype of this tool that can be used by the support team.
-- **We'll know we're successful when:** We have a design for this tool and have a prototype we can build on.
+### Allow some customers to be able to view and respond to tickets from the support sidebar
+- **Owner:** <TeamMember name="Ben Lea" photo />
+- **Rationale:** Allowing customers to view their tickets from the sidebar provides an easy access source of truth for the status of their tickets. This should make it clearer when we are waiting on information from a customer and hopefully prevent situations where customers don't see responses that get lost in their email filters.
+- **What we'll ship:** A way for customers to be able to view their tickets from within the support sidebar. They should be able to see the status of the ticket, respond to the ticket directly within the sidebar, and link out to the Zendesk help center. We will get this live behind a feature flag and roll it out to customers who are keen to test out this feature. 
+- **We'll know we're successful when:** Some customers are able to reliably view the status of their tickets and respond from the sidebar, and we are receiving feedback from these users.
 
-### Design a tool that helps us to troubleshoot customer implementations of PostHog
+### Develop a framework for how support apps and tools are deployed
+- **Owner:** <TeamMember name="Ben Lea" photo />
+- **Rationale:** Having a known and consistent way of deploying our support apps makes us more efficient in the development of our tooling.
+- **What we'll ship:** Consider the best approach for deploying our support tooling and support apps. We'll create and document a deployment framework and test this on at least one of our apps.
+- **We'll know we're successful when:** We have a clear and understood way forward for how we'd like to deploy our support apps, and we've deployed at least one app using this framework.
+
+### Improve the ticket creation experience to be simpler, smarter, and more PostHog
+- **Owner:** <TeamMember name="Ben Haynes" photo />
+- **Rationale:** Creating tickets is the primary way that customers get in contact with us and it's important that this experience is as seamless as possible. We should be looking for ways to automatically capture as much context and data as we can, without the need to ask additional questions of the customer. As PostHog grows and ships more products, this experience should evolve to stay clear, efficient, whilst also continuing to spark joy.
+- **What we'll ship:** Investigate, design, and ship improvements to the ticket creation flow. This includes: simplifying or rethinking product selection, improving how context and urgency are captured, and exploring where relevant context can be automatically surfaced.
+- **We'll know we're successful when:** We've begun implementing improvements to the ticket creation flow which gives more context to our support team, and requires less manual input from customers.
+- **Stretch Goal:** We may consider dynamically asking the customer additional questions or gathering additional context for particular types of support tickets.
+
+### Explore how product tours can be used as a support tool
+- **Owner:** <TeamMember name="Joshua Ordehi" photo />
+- **Rationale:** It's important that we continue to consider new and better ways that we can help and share information with our customers to improve the support experience.
+- **What we'll ship:** Consider where product tours can be used as a support tool and where they could be used as a replacement for screenshots that we provide to the customer. Additionally consider the ways we could use product tours as a way of enabling/helping customers, leading to a reduction in ticket creation.
+- **We'll know we're successful when:** We've determined how useful product tours can be as a support tool and identified use cases that have been shared with the support team.
+
+### Explore AI accessibility for product capabilities
+- **Owner:** <TeamMember name="Joshua Ordehi" photo />
+- **Rationale:** Keeping AI tools in sync with product changes currently requires manual updates. If we expose which operations are valid and what parameters they require as queryable product capabilities, AI could inherit this automatically and stay consistent with the API and UI. Improving PostHog AI to keep up to date with the latest changes in the product helps improve PostHog AI's answers and in turn should reduce the support load.
+- **What we'll ship:** Extract domain rules for one product (surveys) into a layer that both existing surfaces and AI tools can consume. Design validation flows that let PostHog AI query what operations are valid.
+- **We'll know we're successful when:** PostHog AI is able to validate against shared domain rules for our surveys product, and those rules update automatically when the product changes without requiring manual sync.
+
+### Capture more context at the time a ticket is raised
+- **Owner:** <TeamMember name="Luke Belton" photo />
+- **Rationale:** The more context that we can capture when a ticket is created, the less time we spend investigating and going looking for that information, and the fewer back and forths we need to have with the customer. This puts us in a better position to deliver a high quality, efficient, and enjoyable support experience.
+- **What we'll ship:** Get the 'feedback recording' hackathon project into production (#2571 and #41380) so that customers can provide a screenshare with voiceover as a new way to talk us through an issue they're facing. Also investigate other ways to automatically gather context around an issue - for example using PostHog Signals.
+- **We'll know we're successful when:** We find ourselves having to ask clarifying questions on fewer tickets. Correspondingly, we may see a reduction in average responses per ticket and faster time to resolution.
+
+### Implement a tool that helps us to troubleshoot customer implementations of PostHog
 - **Owner:** <TeamMember name="Kyle Swank" photo />
 - **Rationale:** Having better tooling for support engineers makes us more efficient in diagnosing issues and answering support tickets.
-- **What we'll ship:** Design a tool (we'll consider browser extensions, using the toolbar, implementations in PostHog, etc) which helps support engineers to more easily troubleshoot customer's implementations of PostHog. Consider two of the most common things we as support engineers need to surface from a customer's implementation when troubleshooting, and design a tool which can more easily surface these things.
-- **We'll know we're successful when:** We have a design for this tool and have begun implementing a minimum functioning version of it.
+- **What we'll ship:** Continue work on the support browser extension that begin in the previous quarter and refine it for use by the support team. We'll ship the support browser extension, along with appropriate documentation (readme, handbook), and get it into general use by the support team, gathering team feedback.
+- **We'll know we're successful when:** This tooling is streamlining support investigations for the team, and the team is providing feedback and suggestions for new features. Extra credit if released to sales and customer success.
+- **Stretch Goal:** Ship changes to the events view to allow for saved views and built-in debug based views.
+
+### Streamline security and impersonation logic
+- **Owner:** <TeamMember name="Christian Rafferty" photo />
+- **Rationale:** Enhance existing impersonation security logic to enable a smoother, more controlled process for requesting data access from organizations that have explicitly opted out of impersonation. This should enable us to work on support tickets quickly and efficiently whilst maintaining our security procedures.
+- **What we'll ship:** Options in the support sidebar for customers who have opted out of impersonation, allowing time-bound access to their data (for example, the duration of an active support ticket). We should also consider a direct mechanism for requesting data access from customers who have opted out of impersonation.
+- **We'll know we're successful when:** Users who opt out of impersonation feel confident their data remains protected, while support teams can still provide fast, hands-on assistance when needed.
+- **Stretch Goals:**
+* Launch two-way community ticket sync, address smaller follow-up issues, and provide continued support post-launch.
+* Enable updates to support messaging in the sidebar without requiring a pull request.
+
+### Ensure all tickets have up-to-date and complete organization information (organization, plan, priority)
+- **Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
+- **Rationale:** Having this information automatically set for all tickets improves ticket workflows, management, data accuracy, and saves support engineer time.
+- **What we'll ship:** An automation that updates missing organization, plan, and priority information for tickets in Zendesk, ensuring tickets are complete when they are created.
+- **We'll know we're successful when:** There are almost no tickets without the required details (org, plan, priority), SLAs are applied correctly and the team spends less time updating fields manually.
+
+### Create a Superday task for the Billing Support role
+- **Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
+- **Rationale:** Creating this superday task allows us to be better prepared for future hiring and expansion of the billing support specialists on the team.
+- **What we'll ship:** A Superday task for this role that simulates close-to-real-life work, with clear instructions, and expectations.
+- **We'll know we're successful when:** We have a ready-to-use Superday task for future hiring, and the hiring team feels confident it reflects the real work of the role and makes it easier to evaluate candidates fairly.
 
 ### Things <TeamMember name="Abigail Richardson" photo /> is focusing on this quarter:
-- Implementing Support Zero weeks to enable the team to reach more of our quarterly goals
-- Outlining a strategy for SMEs and how we get there to enable the team to deal with the rising complexity in tickets
-- Outlining a strategy for products coming out of beta and into support
-- Outlining a strategy for community support
+- Implementing a strategy for community support
+- Implementing a strategy for SMEs and how we get there to enable the team to deal with the rising complexity in tickets
 - Hiring and onboarding to improve support coverage
-- Improving reporting, especially on coverage and where tickets come from
+- Outlining a strategy for products coming out of beta and into support
+- Improving reporting, especially on accounts/billing related tickets, and when tickets should be flagged

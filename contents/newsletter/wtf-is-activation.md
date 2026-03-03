@@ -66,6 +66,8 @@ That leaves **activation** and **retention** as the responsibilities of product 
 
 As cringe as it is to say it, activation creates “ALIGNMENT” and figuring it out can create a lot of value for your organization as a whole.
 
+<NewsletterForm />
+
 ## How we find activation metrics at PostHog
 
 ![Message](https://res.cloudinary.com/dmukukwp6/image/upload/message_4119900c6c.png)

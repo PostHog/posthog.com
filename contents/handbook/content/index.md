@@ -25,7 +25,7 @@ We do this by:
 
 Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
-Our latest goals can be found on the [content team page](/teams/content). You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
+Our latest goals can be found on the <SmallTeam slug="content" /> page. You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
 
 ## Who is our audience?
 
@@ -82,21 +82,7 @@ Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on s
 
 Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. To post using the company account, use [Buffer](https://buffer.com/) (ask <TeamMember name="Andy Vandervell" /> to add you to it if you don't have access).
 
-Tips for writing a good post:
-
-- The **image** is really what makes or breaks a post. Ideally, it should standalone. [Graphics](https://www.linkedin.com/posts/andyvandervell_in-the-last-two-months-weve-had-900-people-activity-7231695253437661186-j5hg) and [memes](https://www.linkedin.com/posts/andyvandervell_whats-the-difference-between-a-software-activity-7245386804491620355-4dR6) work well.
-
-  - If you are posting a changelog update, you can create nice images when clicking **Add entry** in the [changelog](/changelog/). It's under the **Social sharing** header.
-
-- Don't just share the link. Write out an intriguing summary or introduction of the post. Here's a [good example](https://www.linkedin.com/feed/update/urn:li:activity:7257340218159116289). Make sure to include an image or the link will be downranked by LinkedIn's algorithm.
-
-- Keep the link in the main post, and don't do that annoying thing of saying "link is in the comments".
-
-- Make a bold first sentence, even if it takes more words to do it. LinkedIn truncates posts so readers need to click `...more` to see the rest after 250 characters. A blank new line counts as ~150 characters.
-
-- Lists like [this one](https://www.linkedin.com/posts/andyvandervell_at-many-companies-product-management-looks-activity-7270439313199226881-MH4z) work well.
-
-- Some people to look to for inspiration: [Andy Vandervell](https://www.linkedin.com/in/andyvandervell/), [Jordan Cutler](https://www.linkedin.com/in/jordancutler1), [Ashish Pratap Singh](https://www.linkedin.com/in/ashishps1/)
+See our [LinkedIn posting advice](/handbook/content/linkedin) for more.
 
 ### 3. Twitter / X
 
@@ -118,8 +104,8 @@ It's worth sharing in their Slack channels directly as they don't see everything
 
 ### 5. Paid ads + newsletters
 
-You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/growth/marketing/open-source-sponsorship) for more.
+You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/marketing/open-source-sponsorship) for more.
 
-If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/growth/marketing/paid-ads).
+If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/marketing/paid).
 
-It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646)
+It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646).

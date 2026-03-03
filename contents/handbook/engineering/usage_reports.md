@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Tracking and managing usage is one of the core responsibilities of the Growth team. If we do it wrong, we don't get paid. 
+Tracking and managing usage is one of the core responsibilities of the <SmallTeam slug="billing" />. If we do it wrong, we don't get paid. 
 
 Each organization's usage is calculated once per day and saved in a usage report. This usage report is sent to the billing service, which saves the report and sends the usage along to Stripe for the customer's subscription, if one exists.
 

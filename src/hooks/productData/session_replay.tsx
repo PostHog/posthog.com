@@ -17,6 +17,7 @@ export const sessionReplay = {
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
+    wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
@@ -29,6 +30,11 @@ export const sessionReplay = {
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
+    },
+    videos: {
+        overview: {
+            wistia: 'a1480fky0u',
+        },
     },
     screenshots: {
         overview: {
@@ -115,7 +121,7 @@ export const sessionReplay = {
                         <div className="shrink">
                             <h4 className="text-lg">Your code</h4>
                             <CodeBlock
-                                code={`posthog.init('<ph_project_api_key>', {
+                                code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   enable_recording_console_log: true,
@@ -244,7 +250,7 @@ export const sessionReplay = {
                 <div>
                     <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
                     <CodeBlock
-                        code={`posthog.init('<ph_project_api_key>', {
+                        code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   disable_session_recording: true,
@@ -399,6 +405,35 @@ window.posthog.onFeatureFlags(function () {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses Session Replay',
+        benefits: [
+            {
+                title: 'Gather context',
+                description: 'by seeing what led to each rageclick',
+            },
+            {
+                title: 'Debug issues',
+                description: 'by watching the prelude to each bug',
+            },
+            {
+                title: 'Assess performance',
+                description: 'by measuring first contentful paint and load time',
+            },
+            {
+                title: 'Resolve experiments',
+                description: 'by seeing how users interact with new features',
+            },
+            {
+                title: 'Build user empathy',
+                description: 'by watching their entire product journey',
+            },
+            {
+                title: 'Improve conversion',
+                description: 'by using context to solve stubborn problems',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Why are users dropping off in my funnel?',

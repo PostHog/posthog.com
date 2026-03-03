@@ -212,6 +212,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
+    const pinnedQuestions = data?.[0]?.pinnedQuestions
 
     return {
         hasMore,
@@ -219,5 +220,6 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         fetchMore: () => setSize(size + 1),
         isLoading: isLoading || isValidating,
         refresh: () => mutate(),
+        pinnedQuestions,
     }
 }

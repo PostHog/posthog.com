@@ -22,7 +22,7 @@ In this post, we define the role of a product engineer, break down the character
 
 ## What is a product engineer?
 
-A product engineer, at its most basic, is a software engineer building products. They do similar work to software engineers: writing code and shipping features. Usually, they write fullstack code with a focus on the frontend.
+A product engineer, at its most basic, is a [software engineer building products](/blog/product-engineer-vs-software-engineer). They do similar work to software engineers: writing code and shipping features. Usually, they write fullstack code with a focus on the frontend.
 
 What makes them unique is their focus on creating a product for users. They care about building a solution to problems that provides value to users. They must be empathetic to users, and this means caring about user feedback and usage data.
 
@@ -127,5 +127,6 @@ As long as building great products is an important goal for many companies, prod
 - [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
 - [How to harness the awesome power of growth loops](/product-engineers/growth-loops)
 - [22 ways PostHog makes it easier to build great products](/blog/using-posthog)
+- [WTF is a forward-deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer)
 
 <NewsletterForm />

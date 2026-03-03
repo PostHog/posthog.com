@@ -65,6 +65,8 @@ Typing "companies that hire product engineers" into Google doesn't work. ChatGPT
 
 * **Enterprise-ey vibes.** White and blue websites. No public pricing. Generic messaging. These are all signs that a company is going to be sales-led and focused on selling big contracts to slow-moving companies. Many huge companies are built this way, but they’re not a great place for product engineers.
 
+<NewsletterForm />
+
 ## 2. How and where to find them
 
 You're unlikely to find these companies and their open roles on Indeed.
@@ -191,5 +193,7 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 * [How to get a job at a startup](/newsletter/how-to-get-job-startup)  
 * [Interview questions engineers should ask (but don’t)](/newsletter/job-interview-questions-engineers)  
 * [What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see)
+
+<NewsletterForm />
 
 [^1]: Figuring this out isn’t straightforward. If you pay for LinkedIn Premium, you can look up the spread of roles at a company via the “Insights” tab on a company’s page. This data isn’t perfect, but it is directionally useful.

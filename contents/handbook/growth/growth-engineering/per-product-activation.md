@@ -25,7 +25,7 @@ this dashboard</PrivateLink>.
 
 ### Picking the right activation criteria
 
-The ideal activation metric strikes a balance: enough companies should reach activation (so it's not too restrictive), while those who activate should have high retention (so it's not too easy). To find a couple of potential definitions, you want to look at product usage and think about what behaviour *could* correlate with successful activation (aka the "aha-moment"). This could be things such as
+The ideal activation metric strikes a balance: enough companies should reach activation (so it's not too restrictive), while those who activate should have high retention (so it's not too easy). To find a couple of potential definitions, you want to look at product usage and think about what behavior *could* correlate with successful activation (aka the "aha-moment"). This could be things such as
 
 1. Has done a key event once (such as launched an experiment)
 2. Has done a key event multiple times (such as analyzed 2 insights)
@@ -67,7 +67,7 @@ To write your own, we also recommend copying one of the <PrivateLink url="https:
 
 We use SQL queries to analyze activation. In addition, we track product intents and activation in the code. We do this so that in the future we could act on this, e.g. someone showed intent, but they didn't activate? Show them in an-app banner or send them an email.
 
-To add a new product to this, you can add the activation criteria [here](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
+To add a new product to this, you can add the activation criteria in the [product intent model](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
 
 This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
 

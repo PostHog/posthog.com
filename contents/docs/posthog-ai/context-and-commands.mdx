@@ -1,0 +1,36 @@
+---
+title: PostHog AI context and commands
+---
+
+## Adding context
+
+PostHog AI automatically detects the active tab or page you're on to infer context. But you can also manually add other data points from your project for PostHog AI to reference as context.
+
+Click the **@ Add context** button in the chat to include:
+
+- Insights like trends, funnels, retention, etc.
+- Events and actions from your data model
+- Dashboards with insights
+
+<ProductVideo
+  videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/add_context_81218e0b5d.mp4" 
+  alt="Add context" 
+  classes="rounded"
+  autoPlay={true}
+/>
+
+<Caption>
+  Select data points to include as context
+</Caption>
+
+When you add context, PostHog AI can reference the specific queries, filters, or data from those items when answering your questions.
+
+## Chat commands
+
+PostHog AI supports the following slash `/` commands in the chat. 
+
+| Command | Description |
+| ---     | ----        |
+| `/init`   | PostHog AI collects information about your product and company to save to memory. |
+| `/remember` | Saves your text input to memory. |
+| `/usage` | Displays a breakdown of your [AI credit](/docs/posthog-ai/pricing) usage. |

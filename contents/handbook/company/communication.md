@@ -215,7 +215,7 @@ We use RFCs to communicate and gather feedback on a decision. RFCs are useful be
 Here are the steps for an RFC:
 
 1. Identify a problem and a decision to be made
-2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/product-internal/tree/main/requests-for-comments/templates).
+2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES).
     - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
@@ -289,7 +289,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ### Calendly
 
-We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account.
+We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Simon in `#sales` to invite you to the PostHog team account.
 
 ## Communication Methods
 

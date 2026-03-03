@@ -61,21 +61,58 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
     }
 }
 
+export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions }) => {
+    actions.setBabelPlugin({
+        name: '@babel/plugin-transform-react-jsx',
+        options: {
+            runtime: 'automatic',
+        },
+    })
+}
+
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
+        ...(process.env.GATSBY_MINIMAL === 'true'
+            ? {
+                  devtool: false,
+              }
+            : null),
         cache: process.env.NODE_ENV === 'development' || {
             compression: 'gzip',
         },
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
+            modules: [
+                path.resolve(__dirname, '.cache', 'gatsby-source-git', 'posthog-main-repo', 'docs'),
+                path.resolve(__dirname, 'contents', 'docs'),
+                'node_modules',
+            ],
             alias: {
                 '~': path.resolve(__dirname, 'src'),
                 lib: path.resolve(__dirname, 'src', 'lib'),
                 types: path.resolve(__dirname, 'src', 'types'),
                 images: path.resolve(__dirname, 'src', 'images'),
                 components: path.resolve(__dirname, 'src', 'components'),
+                constants: path.resolve(__dirname, 'src', 'constants'),
                 logic: path.resolve(__dirname, 'src', 'logic'),
                 hooks: path.resolve(__dirname, 'src', 'hooks'),
+                // Mapping
+                docs: path.resolve(__dirname, '.cache', 'gatsby-source-git', 'posthog-main-repo', 'docs'),
+                onboarding: path.resolve(
+                    __dirname,
+                    '.cache',
+                    'gatsby-source-git',
+                    'posthog-main-repo',
+                    'docs',
+                    'onboarding'
+                ),
+                'scenes/onboarding/OnboardingDocsContentWrapper': path.resolve(
+                    __dirname,
+                    'src',
+                    'components',
+                    'Docs',
+                    'OnboardingContentWrapper.tsx'
+                ),
             },
         },
     })
