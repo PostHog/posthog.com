@@ -14,9 +14,9 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### The PostHog Code team
 
-<SmallTeam slug="twig" /> builds PostHog Code, an agent development environment for product engineers. Working with coding agents today is bottlenecked by messy workflows — switching between agents, branches, worktrees, and manually managing PRs across multiple applications. PostHog Code solves this by giving each task its own isolated workspace where an agent works, with everything related to a task in one place instead of scattered across your terminal, editor, and GitHub.
+<SmallTeam slug="posthog-code" /> builds PostHog Code, an agent development environment for product engineers. Working with coding agents today is bottlenecked by messy workflows — switching between agents, branches, worktrees, and manually managing PRs across multiple applications. PostHog Code solves this by giving each task its own isolated workspace where an agent works, with everything related to a task in one place instead of scattered across your terminal, editor, and GitHub.
 
-The Twig team owns the desktop app and the task execution pipeline.
+The PostHog Code team owns the desktop app and the task execution pipeline.
 
 ### The Signals team
 

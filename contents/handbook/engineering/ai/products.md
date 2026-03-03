@@ -329,7 +329,7 @@ Even inspiration-driven features (not from user data) benefit from PostHog Code'
 
 ### Current status
 
-Right now we're focused on dogfooding — getting the <SmallTeam slug="twig" /> to build everything using PostHog Code itself. This lets us refine product quality and identify friction fast.
+Right now we're focused on dogfooding — getting the <SmallTeam slug="posthog-code" /> to build everything using PostHog Code itself. This lets us refine product quality and identify friction fast.
 
 ### For engineers not using PostHog Code
 
@@ -337,7 +337,7 @@ When PostHog Code isn't the right fit (maybe you don't trust AI to ship code aut
 
 ### Ownership
 
-The dedicated <SmallTeam slug="twig" /> owns the product. The <SmallTeam slug="posthog-ai" /> owns the background sandboxed agents. See [Team Structure](/handbook/engineering/ai/team-structure) for collaboration details.
+The dedicated <SmallTeam slug="posthog-code" /> owns the product. The <SmallTeam slug="posthog-ai" /> owns the background sandboxed agents. See [Team Structure](/handbook/engineering/ai/team-structure) for collaboration details.
 
 ## Wizard: AI-powered onboarding [General availability]
 

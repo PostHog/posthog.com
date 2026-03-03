@@ -1684,6 +1684,8 @@
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        { "source": "/teams/twig", "destination": "/teams/posthog-code" },
+        { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
