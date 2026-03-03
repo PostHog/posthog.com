@@ -8,6 +8,7 @@ import WindsurfSnippet from "./_snippets/windsurf.mdx"
 import VSCodeSnippet from "./_snippets/vscode.mdx"
 import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
 import ZedSnippet from "./_snippets/zed.mdx"
+import CodexSnippet from "./_snippets/codex.mdx"
 import ReplitSnippet from "./_snippets/replit.mdx"
 import MCPTools from '../../../src/components/Docs/MCPTools'
 import V0Snippet from "./_snippets/v0.mdx"
@@ -16,7 +17,7 @@ The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/intro
 
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **VS Code** and **Zed**.
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code** and **Zed**.
 
 ```bash
 npx @posthog/wizard mcp add
@@ -28,10 +29,11 @@ We're working on adding more supported tools to the wizard. If you're using anot
 
 Add the MCP configuration to your client. When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
 
-<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit', 'v0']}>
+<Tab.Group tabs={['claude-code', 'claude-desktop', 'codex', 'cursor', 'windsurf', 'vscode', 'zed', 'replit', 'v0']}>
     <Tab.List>
         <Tab>Claude Code</Tab>
         <Tab>Claude Desktop</Tab>
+        <Tab>Codex</Tab>
         <Tab>Cursor</Tab>
         <Tab>Windsurf</Tab>
         <Tab>VS Code</Tab>
@@ -45,6 +47,9 @@ Add the MCP configuration to your client. When you first use the MCP server, you
         </Tab.Panel>
         <Tab.Panel>
             <ClaudeDesktopSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <CodexSnippet />
         </Tab.Panel>
         <Tab.Panel>
             <CursorSnippet />
