@@ -1,0 +1,75 @@
+---
+title: PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) can help you create experiments, analyze results, and make data-driven shipping decisions – all through natural language conversation.
+
+## Create experiments with natural language
+
+You can ask PostHog AI to create an experiment for you. Describe what you want to test and PostHog AI sets up the experiment with the right variants, traffic allocation, and metrics.
+
+Try prompts like:
+
+```
+Set up an A/B test with a 70/30 split for a new red button on the homepage
+```
+
+```
+Create an experiment to test whether a shorter sign-up form improves conversion
+```
+
+```
+Set up a multivariate experiment with three pricing page layouts
+```
+
+PostHog AI uses the `create_experiment` tool to configure the experiment directly in your project.
+
+## Summarize and analyze experiment results
+
+Once your experiment has collected data, PostHog AI can summarize the results and help you interpret what happened.
+
+Try prompts like:
+
+```
+Summarize experiment results for my latest feature rollout
+```
+
+```
+Which of my running experiments have reached statistical significance?
+```
+
+```
+What's the impact of the checkout redesign experiment on conversion rate?
+```
+
+PostHog AI uses the `experiment_results_summary` tool to pull your experiment data, then provides a plain-language breakdown of metrics, significance, and what it all means for your decision.
+
+## Understand statistical significance
+
+If you're unsure how to interpret confidence intervals, p-values, or Bayesian credible intervals, ask PostHog AI to explain your specific results.
+
+Try prompts like:
+
+```
+Explain the statistical significance of my current experiment results
+```
+
+```
+Is my experiment's sample size large enough to be confident in the results?
+```
+
+```
+What does a 95% credible interval of [-2%, 8%] mean for my experiment?
+```
+
+## Use MCP for AI-assisted experimentation
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes experiment tools to any MCP client like Cursor, Windsurf, or Claude Code. This lets your AI coding assistant create experiments and check results without leaving your editor.
+
+Install the MCP server with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for setup details.
