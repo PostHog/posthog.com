@@ -1,0 +1,67 @@
+---
+title: PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) can help you create and manage feature flags using natural language. Instead of manually configuring flags through the UI, you can describe what you need and PostHog AI handles the setup for you.
+
+## Create feature flags with natural language
+
+PostHog AI has access to the `create_feature_flag` tool, which lets it create fully configured feature flags based on your description. You can specify the flag type, targeting rules, and rollout percentages in plain language.
+
+To get started, open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in PostHog and describe the flag you want to create.
+
+For example, you can ask PostHog AI to:
+
+- Create a boolean flag for a specific feature rollout
+- Set up a multivariate flag with custom variant percentages
+- Configure targeting rules based on user properties or cohorts
+- Create a remote config flag with a JSON payload
+
+## Example prompts
+
+Try these prompts to create feature flags with PostHog AI:
+
+```
+Create a boolean feature flag called "new-checkout-flow" that's rolled out to 25% of users.
+```
+
+```
+Create a multivariate feature flag for dark mode with three variants: control, dark, and dim, split 50/25/25.
+```
+
+```
+Set up a feature flag called "beta-dashboard" that only targets users where plan is "enterprise".
+```
+
+```
+Create a remote config flag called "homepage-hero" with a JSON payload containing a title and subtitle.
+```
+
+You can also ask PostHog AI to navigate to your [feature flags](https://app.posthog.com/feature_flags) or check which flags are currently active:
+
+```
+Show me which flags are currently active in production.
+```
+
+```
+Navigate to my feature flags list.
+```
+
+## Use MCP for AI-assisted flag management
+
+If you use an AI coding agent like Cursor, Windsurf, or Claude Code, you can manage feature flags through the [PostHog MCP server](/docs/model-context-protocol). This lets your coding agent interact with PostHog's API directly from your editor.
+
+Install the MCP server using the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+## Learn more
+
+- [PostHog AI overview](/docs/posthog-ai) – Learn about all PostHog AI capabilities
+- [PostHog AI tools](/docs/posthog-ai/tools) – See the full list of tools PostHog AI can use
+- [Example prompts](/docs/posthog-ai/example-prompts) – Browse prompts for all PostHog products
+- [Creating feature flags](/docs/feature-flags/creating-feature-flags) – Manual guide for creating flags through the UI
