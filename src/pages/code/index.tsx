@@ -6,7 +6,7 @@ import { navigate } from 'gatsby'
 
 export default function CodePage() {
     const posthog = usePostHog()
-    const enabled = posthog?.isFeatureEnabled?.('posthog-code-website')
+    const enabled = !posthog?.isFeatureEnabled?.('posthog-code-website')
 
     React.useEffect(() => {
         if (posthog && !enabled) {
