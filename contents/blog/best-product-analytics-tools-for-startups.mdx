@@ -20,7 +20,7 @@ seo:
 
 A tale as old as time: a founding team ships their MVP, installs [Google Analytics](/blog/posthog-vs-ga4), watches pageview numbers go up, and feels good about themselves. 
 
-Three months later they realize they have no idea why users churn, what "activated" means, or which features actually matter, so they start duct-taping together a bunch of different tools to try to figure it out.
+Three months later they realize they have no idea why users churn, what ["activated"](/newsletter/wtf-is-activation) means, or which features actually matter, so they start duct-taping together a bunch of different tools to try to figure it out.
 
 If you're early stage, that's months of valuable context you just missed by not setting yourself up with the right solution from the start – context that could've gotten you to [product market fit](/founders/product-market-fit-game) faster. 
 
@@ -37,7 +37,7 @@ Before getting started, let's brush up on the basics:
 
 [Product analytics](/docs/product-analytics) tells you "User 4521 signed up Tuesday, completed onboarding in 3 minutes, used the core feature twice, then never came back."
 
-**What to look at as a startup:**
+**What to look in product analytics tools at as a startup:**
 
 1. **[Funnels](/docs/product-analytics/funnels)** – where do users drop off between signup and activation?
 2. **[Retention cohorts](/docs/product-analytics/retention)** – of users who signed, how many came back?
@@ -123,7 +123,7 @@ We've compared the best [feature flag tools](/blog/best-feature-flag-tool-softwa
 
 **Pair your analytics tool with:**
 
-- **[Data warehouse](/data-stack)** – export events for unified BI with revenue and ops data
+- **[Data warehouse](/data-stack)** – create a single source of truth and query data from across product analytics, sales, finances, ops, and more. 
 - **[Group analytics](/docs/product-analytics/group-analytics)** – track funnels, retention, and feature adoption at the account level, not just individual users
 - **[Logs](/logs)** – debug issues across your backend alongside user behavior and error data
 - **[SQL access](/docs/product-analytics/sql)** – write custom queries when the UI doesn't cover your edge case, build views for your data team
@@ -166,7 +166,7 @@ If you're an early-stage startup (less than 2 years old, under $5M raised), you 
 - [AI-powered analytics](/ai) with natural language queries, SQL generation, session replay summaries, and an [MCP server](/docs/model-context-protocol) for AI workflows
 - [Funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [paths](/docs/product-analytics/paths), [cohorts](/docs/data/cohorts), [lifecycle analysis](/docs/product-analytics/lifecycle) – all included in free tier
 - [Session replay](/session-replay) with console logs, network requests, and performance data
-- [A/B testing](/experiments) built on [feature flags](/feature-flags)
+- [Experimentation](/experiments) with statistical significance built on [feature flags](/feature-flags)
 - [Surveys](/surveys) with PMF templates, NPS, and targeting by user behavior
 - [Error tracking](/error-tracking) with stack traces alongside user behavior context
 - [LLM analytics](/docs/llm-analytics) to monitor and optimize AI features
@@ -390,7 +390,7 @@ If you already have data flowing through Segment or a warehouse, Heap supports t
 
 | Plan | Price | Includes |
 |---|---|---|
-| Free | $0 | 10K sessions/mo, core charts, 6 months data |
+| Free | $0 | 10K sessions/mo, core charts, 6 month data retention |
 | Growth | Install snippet for estimate | Session-based pricing |
 | Pro/Enterprise | Contact sales | Advanced features, longer retention |
 
