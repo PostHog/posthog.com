@@ -1,6 +1,6 @@
 ---
 title: The best product analytics tools for startups, compared
-date: 2026-03-03
+date: 2026-03-04
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -155,11 +155,9 @@ Now that you have a rough idea of what to measure, here's what to measure it wit
 
 PostHog ships fast, so the platform keeps getting better; check the [changelog](/changelog) to see what's new.
 
-Every product has its own generous free tier, so you pay nothing until you have real traction. Over 90% of companies on PostHog pay $0! 
+Every product has its own generous free tier, so you pay nothing until you have real traction. Over 90% of companies on PostHog pay $0! If you're an early-stage startup (less than 2 years old, under $5M raised), you may also qualify for the [PostHog for Startups program](/startups) – $50,000 in credits for a year, plus partner benefits and merch.
 
 [Billing limits](/docs/billing/estimating-usage-costs) per product mean no surprise bills, and you don't need a credit card to get started. Features that other tools gate normally behind enterprise pricing, like [reverse proxy](/docs/advanced/proxy), can be accessed in the free tier.
-
-If you're an early-stage startup (less than 2 years old, under $5M raised), you may also qualify for the [PostHog for Startups program](/startups) – $50,000 in credits for a year, plus partner benefits and merch.
 
 ### Key features
 
@@ -328,7 +326,7 @@ For data already in a warehouse, connect Snowflake, BigQuery, or Redshift direct
 |---|---|---|
 | Starter | Free | 50K MTUs, 10M events, unlimited flags, session replay, AI chat |
 | Plus | From $49/mo (annual) | 300K MTUs or 25M events, behavioral cohorts, saved charts, web experiments |
-| Growth | Contact sales | Custom MTUs, causal insights, predictive audiences, full Experiment |
+| Growth | Contact sales | Custom MTUs, causal insights, predictive audiences, feature experimentation |
 | Enterprise | Contact sales | Cross-product analytics, multi-armed bandits, warehouse-native, EU residency |
 
 Guides & Surveys, extra session replay volume, and additional automated syncs are available as add-ons on Plus plans.
@@ -587,7 +585,7 @@ Some tools give you the full product at low volume. Others gate core features be
 - **Mixpanel** if your team includes non-technical PMs who need a polished, visual query builder
 
 **For engineering-heavy teams**
-- **PostHog** if you want SQL access, API-first design, open source, and everything in one data model
+- **PostHog** if you want SQL access, an [MCP server](/docs/model-context-protocol), open source, and everything in one data model
 - **Amplitude** if you need type-safe tracking (Ampli CLI) and governance tooling as your data team grows
 - **Mixpanel** if you have a data warehouse and want strong warehouse connectors with experiments built in
 
@@ -663,7 +661,7 @@ This lets you build funnels across any sequence of actions, segment users by beh
 
 **Manual tracking** requires you to define and instrument each event explicitly – more setup time, but cleaner data from day one.
 
-PostHog and Heap support autocapture. Mixpanel added web autocapture recently. Amplitude focuses on manual instrumentation with the Ampli CLI for type-safe tracking.
+PostHog, Amplitude, and Heap support autocapture. Mixpanel added web autocapture recently.
 
 </details>
 
