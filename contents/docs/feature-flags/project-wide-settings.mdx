@@ -42,6 +42,14 @@ Custom messages are limited to 500 characters and can help provide context speci
 
 ## Default release conditions
 
+When enabled, newly created feature flags are pre-populated with the release conditions you configure here. This helps teams maintain consistent rollout patterns across flags without relying on manual processes.
+
+Default release conditions include property filters and rollout percentages, just like regular release conditions on individual flags. Users can still modify or remove these conditions during flag creation.
+
+> **Note:** Default release conditions don't apply to remote config flags, which always have a fixed 100% rollout. When applying a flag template, default conditions are prepended before the template's conditions.
+
+## Default release conditions
+
 When enabled, newly created feature flags are pre-populated with a set of default release conditions. This helps teams enforce consistent rollout patterns (e.g., targeting specific user segments or rollout percentages) without relying on manual setup each time.
 
 To configure, navigate to [**Settings** > **Feature Flags** > **Default release conditions**](https://app.posthog.com/settings/environment-feature-flags#feature-flag-default-release-conditions) and toggle **Apply default release conditions to new flags**. Then use the release conditions editor to define your default groups, including property filters and rollout percentages.
