@@ -99,7 +99,7 @@ When a variable size error occurs:
 
 PostHog plans to price Workflows based on the number of real-time destinations and monthly messages after beta. Design workflows to minimize unnecessary messages. For example, avoid sending multiple messages to the same user around the same event, and use batching or deduplication logic where possible. 
 
-Clean up unused/outdated workflows to reduce unnecessary triggers and costs.
+Clean up unused/outdated workflows to reduce unnecessary triggers and costs. Archive workflows you no longer need, then bulk delete them from the archived tab by selecting multiple workflows and clicking **Delete selected**.
 
 ## Maintainability
 
@@ -107,7 +107,7 @@ Clean up unused/outdated workflows to reduce unnecessary triggers and costs.
 
 Give workflows descriptive names like `welcome_email_on_signup`, `drip_7_day_followup`, etc. Avoid ambiguous names like `workflow1`. Version your workflows when you make significant logic changes, or at least document changes in a changelog, so you know which version ran when.
 
-When a workflow becomes obsolete (e.g. onboarding process changed, or a campaign ended), archive or delete it to avoid accidental triggering and reduce maintenance burden.
+When a workflow becomes obsolete (e.g. onboarding process changed, or a campaign ended), archive or delete it to avoid accidental triggering and reduce maintenance burden. To clean up many workflows at once, archive them and use the bulk delete option in the **Archived** tab to select and delete multiple workflows simultaneously.
 
 ### Document workflows: what they do, why they exist, who owns them
 
