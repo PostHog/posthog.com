@@ -22,16 +22,45 @@ Workflows are composed of the following components:
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
 | [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps. |
 
-## Draft and enabled workflows
+## Auto-save and drafts
+
+Workflows auto-save five seconds after your last edit — no manual save is required. New workflows created at `/workflows/new` are automatically saved as a draft, and the URL updates to `/workflows/{id}` after the first save.
 
 Workflows have two states: **draft** and **enabled**.
 
 | State | Description |
 |-------|-------------|
-| Draft | A work-in-progress workflow that isn't active. You can save drafts with incomplete or invalid configurations. |
+| Draft | A work-in-progress workflow that auto-saves. You can build incrementally without needing a complete configuration. |
 | Enabled | An active workflow that runs when triggered. Full validation is required before enabling. |
 
-When building a workflow, you can save your progress at any time as a draft, even if the configuration is incomplete or has errors. This lets you iteratively build complex workflows without needing a complete, valid configuration at every save.
+How saving works depends on the workflow state:
+
+| Workflow state | Save behavior |
+|----------------|---------------|
+| Draft | Changes save directly to the workflow on auto-save. |
+| Enabled (active) | Changes save as a separate draft. The live workflow is unaffected until you publish. |
+
+### Editing an active workflow
+
+When you edit an enabled workflow, your changes are saved as a draft. The live version continues running unchanged. An **Unpublished changes** banner appears to indicate a draft exists.
+
+The header actions change to:
+
+- **Publish** - Apply the draft to the live workflow
+- **Discard changes** - Revert to the live state and delete the draft
+
+The **Enable/Disable** toggle is locked while a draft exists. Publish or discard the draft first.
+
+### Visual indicators
+
+The workflow builder highlights unsaved changes with visual cues:
+
+- **New or modified steps** - Dashed orange border with reduced opacity
+- **Deleted steps** - Shown as "ghost nodes" with a red dashed border, strikethrough name, and reduced opacity. You can restore a deleted step using the revert button on the node. Ghost nodes are permanently removed on save or publish.
+
+### Name and description changes
+
+Edits to the workflow name or description save directly to the server two seconds after you stop typing. These are independent of the draft system.
 
 Validation is only enforced when you enable a workflow. Before enabling, PostHog checks that all required fields are filled and configurations are valid. If there are errors, you'll see a message prompting you to fix them before the workflow can be enabled.
 
