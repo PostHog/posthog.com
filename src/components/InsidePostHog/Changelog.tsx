@@ -5,9 +5,9 @@ import { useRoadmaps } from 'hooks/useRoadmaps'
 import React from 'react'
 
 type RoadmapItem = {
+    id: number
     attributes?: {
         title?: string
-        squeakId?: number | string
         image?: {
             data?: {
                 attributes?: {
@@ -60,17 +60,17 @@ export default function Changelog(): JSX.Element {
             <p className="m-0 opacity-70 mb-4">Here's what we've shipped in the last two weeks.</p>
             <ul className="list-none p-0 m-0 space-y-4 @lg:space-y-4 mb-4">
                 {roadmaps.map((roadmap: RoadmapItem) => {
-                    const { title, squeakId, image, topic, teams } = roadmap?.attributes || {}
+                    const { title, image, topic, teams } = roadmap?.attributes || {}
                     const topicName = topic?.data?.attributes?.label
                     const topicKey = topicName?.toLowerCase() as keyof typeof topicIcons | undefined
                     const Icon = topicKey ? topicIcons[topicKey] : null
                     const imageURL = image?.data?.attributes?.formats?.small?.url
 
                     return (
-                        <li key={squeakId} className="border-t border-primary first:border-t-0 pt-4">
+                        <li key={roadmap.id} className="border-t border-primary first:border-t-0 pt-4">
                             <Link
                                 className="grid md:grid-cols-8 gap-x-4 items-center text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
-                                to={`/changelog?id=${squeakId}`}
+                                to={`/changelog?id=${roadmap.id}`}
                             >
                                 <div className="md:col-span-5">
                                     <p className="m-0 opacity-50 flex space-x-1 items-center text-[15px]">
