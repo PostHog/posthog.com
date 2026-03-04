@@ -22,20 +22,28 @@ Workflows are composed of the following components:
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
 | [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps. |
 
-## Draft and enabled workflows
+## Workflow states
 
-Workflows have two states: **draft** and **enabled**.
+Workflows have three states: **draft**, **enabled**, and **archived**.
 
 | State | Description |
 |-------|-------------|
 | Draft | A work-in-progress workflow that isn't active. You can save drafts with incomplete or invalid configurations. |
 | Enabled | An active workflow that runs when triggered. Full validation is required before enabling. |
+| Archived | An inactive workflow removed from the main list. Archived workflows can be restored or permanently deleted. |
 
 When building a workflow, you can save your progress at any time as a draft, even if the configuration is incomplete or has errors. This lets you iteratively build complex workflows without needing a complete, valid configuration at every save.
 
 Validation is only enforced when you enable a workflow. Before enabling, PostHog checks that all required fields are filled and configurations are valid. If there are errors, you'll see a message prompting you to fix them before the workflow can be enabled.
 
 Draft workflows can also be archived, even if they contain invalid configurations.
+
+### Delete archived workflows
+
+Only archived workflows can be permanently deleted. You can delete them in two ways:
+
+- **Single delete** – Click the **More** menu on an archived workflow row and select **Delete**.
+- **Bulk delete** – Select multiple archived workflows using the checkboxes, then click **Delete selected (N)** to remove them all at once. Use the **Select all** checkbox at the top of the table to select every archived workflow.
 
 ## Triggers
 
