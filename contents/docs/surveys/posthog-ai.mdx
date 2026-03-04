@@ -1,0 +1,67 @@
+---
+title: PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) can help you create surveys faster and extract insights from your response data — all through natural language.
+
+## Create surveys with natural language
+
+PostHog AI can generate complete surveys based on a description of your research goals. It understands different question types (freeform text, rating scales, single and multiple choice) and can set up display conditions and targeting for you.
+
+Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the survey you want to create. PostHog AI handles the rest — choosing appropriate question types, writing copy, and configuring settings.
+
+Try prompts like:
+
+```
+Create an NPS survey for users who have been active for at least 30 days.
+```
+
+```
+Build a product satisfaction survey with a rating question and a follow-up text question asking what we can improve.
+```
+
+```
+Help me create a churn survey that asks users why they're canceling.
+```
+
+```
+Generate a post-purchase feedback survey with multiple choice and freeform text questions.
+```
+
+For more on creating surveys manually, see [creating surveys](/docs/surveys/creating-surveys).
+
+## Analyze survey responses
+
+PostHog AI can analyze your survey responses to extract common themes, summarize sentiment, and surface actionable insights. This is especially useful for open-text responses where manual review is time-consuming.
+
+Try prompts like:
+
+```
+What are the main themes in the responses to my NPS survey?
+```
+
+```
+Summarize the feedback from my latest product satisfaction survey.
+```
+
+```
+Which survey responses mention performance issues?
+```
+
+```
+What are the most common reasons users gave for canceling?
+```
+
+For more on viewing survey data, see [viewing survey results](/docs/surveys/viewing-results).
+
+## Use AI agents with MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) lets external AI agents — like Cursor, Claude Code, and Windsurf — interact with your PostHog data, including surveys.
+
+Install the MCP server with:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+Check the [MCP server documentation](/docs/model-context-protocol) for setup instructions and supported clients.
