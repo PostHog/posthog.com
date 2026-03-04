@@ -1,0 +1,73 @@
+---
+title: PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) can help you explore your data warehouse schema, write complex HogQL queries, and debug SQL errors – all from the chat panel inside PostHog.
+
+## Explore your data warehouse schema
+
+PostHog AI can read your full data warehouse schema, including linked sources like Stripe, Hubspot, and Postgres. Ask it what tables and columns are available without leaving the app.
+
+Try prompts like:
+
+```
+What tables do I have in my data warehouse?
+```
+
+```
+Show me the schema for my Stripe charges table.
+```
+
+```
+What columns are available in the hubspot_contacts source?
+```
+
+This is helpful when you're unsure of exact table or column names before writing a query.
+
+## Generate HogQL queries
+
+PostHog AI can write and tweak [HogQL](/docs/sql) queries based on natural language descriptions. Describe the data you want and it generates the SQL for you.
+
+Try prompts like:
+
+```
+Write a query that shows total Stripe revenue by month.
+```
+
+```
+Show me the top 10 users by event count in the last 30 days, joined with their Hubspot contact data.
+```
+
+```
+Create a query that compares pageview counts between users who have a Stripe subscription and those who don't.
+```
+
+PostHog AI uses the `generate_hogql_query` tool to produce queries tailored to your schema and data.
+
+## Debug and fix SQL queries
+
+If a query returns an error or produces unexpected results, PostHog AI can diagnose and fix it. It uses the `fix_hogql_query` tool to automatically correct syntax issues, missing columns, and other common problems.
+
+Try prompts like:
+
+```
+Fix this query: SELECT * FORM events WHERE timestamp > now() - interval 7 day
+```
+
+```
+My query is returning no results. Can you help me debug it?
+```
+
+You can also open PostHog AI directly from the [SQL editor](https://app.posthog.com/sql) by clicking the PostHog AI icon in the corner of your screen.
+
+## Use AI agents with MCP
+
+For AI-assisted workflows outside of PostHog, you can use the [PostHog MCP server](/docs/model-context-protocol) to connect your data warehouse to external AI agents in tools like Cursor, Windsurf, or Claude Code.
+
+Install the MCP server with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for setup details.
