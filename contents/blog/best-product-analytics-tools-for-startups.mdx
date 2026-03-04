@@ -18,11 +18,11 @@ seo:
     metaDescription: 'Compare the best product analytics tools for startups. See how PostHog, Mixpanel, Amplitude, and more stack up.'
 ---
 
-A tale as old as time: a founding team ships their MVP, installs [Google Analytics](/blog/posthog-vs-ga4), watches pageview numbers go up, and feels good about themselves. Three months later they realize they have no idea why users churn, what "activated" means, or which features actually matter, so they start duct-taping together a bunch of different tools to try to figure it out.
+A tale as old as time: a founding team ships their MVP, installs [Google Analytics](/blog/posthog-vs-ga4), watches pageview numbers go up, and feels good about themselves. 
 
-If you're early stage, that's months of valuable context you just missed – context that could've gotten you to [product market fit](/founders/product-market-fit-game) faster. If you're later in the game, you might've been flying blind for months or years without realizing it.
+Three months later they realize they have no idea why users churn, what "activated" means, or which features actually matter, so they start duct-taping together a bunch of different tools to try to figure it out.
 
-[Don't make the same mistakes](/newsletter/first-time-founders).
+[If you're early stage](/newsletter/first-time-founders), that's months of valuable context you just missed – context that could've gotten you to [product market fit](/founders/product-market-fit-game) faster. 
 
 This guide compares the best product analytics tools for startups, taking into consideration what actually matters at each stage of growth. 
 
@@ -31,9 +31,9 @@ Before getting started, brush up on the basics:
 <details>
 <summary>What is product analytics (and how is it different from Google Analytics)?</summary>
 
-**Product analytics** is [event-based tracking](/docs/product-analytics/capture-events) that measures *how users interact with your product* – not just whether they visit your website. Every button click, feature used, form submitted, and page navigated becomes a data point you can query, filter, and act on.
+**Product analytics** is [event-based tracking](/docs/product-analytics/capture-events) that measures how users interact with your product, not just whether they visit your website. Every button click, feature used, form submitted, and page navigated becomes a data point you can query, filter, and act on.
 
-[Google Analytics](/blog/best-ga4-alternatives) (and [other web analytics tools](/blog/best-web-analytics-tools)) tells you "10,000 people visited your site this week, 40% bounced, average session was 3 minutes." Useful for marketing, less useful for product decisions.
+[Google Analytics](/blog/best-ga4-alternatives) tells you "10,000 people visited your site this week, 40% bounced, average session was 3 minutes." Useful for marketing, less useful for product decisions.
 
 [Product analytics](/docs/product-analytics) tells you "User 4521 signed up Tuesday, completed onboarding in 3 minutes, used the core feature twice, then never came back. User 7803 signed up the same day, skipped onboarding, built three dashboards, invited two teammates, and has logged in every day since."
 
@@ -42,9 +42,11 @@ Before getting started, brush up on the basics:
 1. **[Funnels](/docs/product-analytics/funnels)** – where do users drop off between signup and activation?
 2. **[Retention cohorts](/docs/product-analytics/retention)** – of users who signed, how many came back?
 3. **[Segmentation](/docs/data/cohorts)** – do users coming from X behave differently than those from Y?
-4. **[Feature adoption](/docs/product-analytics/lifecycle)** – you shipped a new feature. Is anyone using it? Are those users retaining better?
+4. **[Feature adoption](/tutorials/feature-retention)** – you shipped a new feature. Is anyone using it? Are those users retaining better?
 
-For a deeper dive, check out our [AARRR pirate metrics framework](/product-engineers/aarrr-pirate-funnel) guide. Building a mobile app? See our comparison of the [best mobile app analytics tools](/blog/best-mobile-app-analytics-tools). If open source matters to you, we've also rounded up the [best open source analytics tools](/blog/best-open-source-analytics-tools).
+For a deeper dive, check out our [AARRR pirate metrics framework](/product-engineers/aarrr-pirate-funnel) guide. 
+
+Building a mobile app? See our comparison of the [best mobile app analytics tools](/blog/best-mobile-app-analytics-tools). If open source matters to you, we've also rounded up the [best open source analytics tools](/blog/best-open-source-analytics-tools).
 
 </details>
 
@@ -72,7 +74,7 @@ You should also be looking at [onboarding completion rate](/blog/how-to-find-and
 
 **Pair your analytics tool with:**
 
-- [Session replay](/session-replay) – numbers say 40% drop off at step 3, but replay will show you they couldn't find the "Next" button. Read our roundup of the [best session replay tools for developers and startups](/blog/best-session-replay-tools).
+- [Session replay](/session-replay) – numbers say 40% drop off at step 3, but replay will show you they couldn't find the "Next" button.
 - [Surveys](/surveys) – run a [PMF survey](/templates) ("How disappointed would you be if you could no longer use this product?"). Add exit intent and onboarding feedback surveys.
 - [Cohort](/docs/data/cohorts) comparisons by acquisition source.
 
@@ -153,9 +155,9 @@ Now that you know what to measure, here's what to measure it with:
 
 PostHog ships fast, so the platform keeps getting better; check the [changelog](/changelog) to see what's new.
 
-Every product has its own generous free tier, so you pay nothing until you have real traction. **Over 90% of companies on PostHog pay $0.** [Billing limits](/docs/billing/estimating-usage-costs) per product mean no surprise bills, and you don't need a credit card to get started. Features that other tools gate normally behind enterprise pricing, like [group analytics](/docs/product-analytics/group-analytics) (account-level funnels and retention – great for B2B startups and marketplaces), can be accessed in the free tier.
+Every product has its own generous free tier, so you pay nothing until you have real traction. Over 90% of companies on PostHog pay $0! 
 
-There is no need to jump on a "quick sales call" or to request a demo (unless you *want* to [talk to a human](/talk-to-a-human)).
+[Billing limits](/docs/billing/estimating-usage-costs) per product mean no surprise bills, and you don't need a credit card to get started. Features that other tools gate normally behind enterprise pricing, like [reverse proxy](/docs/advanced/proxy), can be accessed in the free tier.
 
 If you're an early-stage startup (less than 2 years old, under $5M raised), you may also qualify for the [PostHog for Startups program](/startups) – $50,000 in credits for a year, plus partner benefits and merch.
 
@@ -172,14 +174,15 @@ If you're an early-stage startup (less than 2 years old, under $5M raised), you 
 
 ### Getting started
 
-PostHog is fully self-serve. Create a free account at [posthog.com](/), pick US or EU hosting, and you're in. No credit card needed.
+There is no need to jump on a "quick sales call" or to request a demo (unless you *want* to [talk to a human](/talk-to-a-human)), PostHog is fully self-serve. 
+
+Create a free account at [posthog.com](/), pick US or EU hosting, and you're in. No credit card needed.
 
 Getting started takes minutes; [our docs](/docs/getting-started/start-here) walk you through instrumentation step by step, or you can just paste a snippet in your `<head>` tag and [autocapture](/docs/product-analytics/autocapture) starts collecting data immediately. 
 
-Want to skip the manual setup entirely? You can try out the [PostHog wizard](/docs/ai-engineering/ai-wizard) 
-(`npx @posthog/wizard@latest`), which detects your framework, installs [the right SDK](/docs/libraries), and configures everything for you.
+Want to skip the manual setup entirely? You can try out the [PostHog wizard](/docs/ai-engineering/ai-wizard), which detects your framework, installs [the right SDK](/docs/libraries), and configures everything for you.
 
-<WizardCTA />
+<WizardCommand />
 
 ### Pricing
 
@@ -222,11 +225,7 @@ Use the [pricing calculator](/pricing) to estimate costs based on your actual vo
 
 </details>
 
-<p>
-  <CallToAction to="https://posthog.com/docs">
-    Learn more about using PostHog
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## 2. Mixpanel
 
