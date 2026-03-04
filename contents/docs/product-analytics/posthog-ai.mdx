@@ -1,0 +1,89 @@
+---
+title: PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) can help you analyze product data, create insights, build dashboards, and write SQL queries – all through natural language conversation.
+
+Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app by clicking the PostHog AI icon in the corner.
+
+## Create and edit insights
+
+PostHog AI can create [insights](/docs/product-analytics/insights) for you based on a natural-language description. It uses the `create_and_query_insight` tool to build trends, funnels, retention charts, and more.
+
+You can also navigate to an existing insight and ask PostHog AI to modify it – for example, changing the date range, adding a breakdown, or switching the chart type.
+
+Try these prompts:
+
+```
+Create an insight showing daily active users for the past 30 days.
+```
+
+```
+Break down this insight by browser.
+```
+
+```
+Show me a funnel from sign-up to first purchase.
+```
+
+## Search insights
+
+Use PostHog AI to search across all saved insights in your project using the `search.insights` tool. This is useful when you know the question but aren't sure if someone already built the insight.
+
+```
+Do we have an insight tracking weekly retention?
+```
+
+```
+Find insights related to onboarding conversion.
+```
+
+## Create and manage dashboards
+
+PostHog AI can create entire dashboards with multiple insights using the `create_dashboard` tool. If you're already viewing a dashboard, it can add insights to it with `edit_current_dashboard`.
+
+After refreshing a dashboard, you can also ask PostHog AI to summarize what changed using `analyze_dashboard_refresh`.
+
+```
+Create a dashboard for monitoring our signup funnel and activation metrics.
+```
+
+```
+Add a weekly active users trend to this dashboard.
+```
+
+```
+What changed on this dashboard since the last refresh?
+```
+
+## Write and debug SQL queries
+
+PostHog AI can generate [HogQL](/docs/sql) queries from natural language using the `generate_hogql_query` tool, and fix broken queries with `fix_hogql_query`. This works in the SQL editor and anywhere you can write HogQL.
+
+```
+Write a query that shows the top 10 most viewed pages this week.
+```
+
+```
+Fix the syntax error in my current SQL query.
+```
+
+For a full walkthrough, see [Write and edit SQL with PostHog AI](/docs/posthog-ai/write-and-edit-sql).
+
+## Use MCP with external AI agents
+
+You can also interact with your Product Analytics data through external AI agents like Cursor, Windsurf, or Claude Code using the [PostHog MCP server](/docs/model-context-protocol).
+
+The MCP server lets agents read your PostHog data, search insights, and query events directly from your code editor. Install it with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+See the [MCP server documentation](/docs/model-context-protocol) for detailed setup instructions.
+
+## Learn more
+
+- [PostHog AI overview](/docs/posthog-ai) – Full documentation on PostHog AI features and capabilities
+- [Tools and capabilities](/docs/posthog-ai/tools) – Complete list of tools PostHog AI can use
+- [Example prompts](/docs/posthog-ai/example-prompts) – More prompts for Product Analytics and other products
