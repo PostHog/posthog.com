@@ -1,0 +1,59 @@
+---
+title: PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) can help you configure and manage your data pipelines directly from the chat interface. Instead of manually setting up filters, writing transformation code, or configuring function inputs, you can describe what you want in plain language and let PostHog AI handle it.
+
+PostHog AI has access to three Data Pipelines tools:
+
+- **Create function filters** - Set up function filters for quick pipeline configuration
+- **Create function inputs** - Manage function variables in [Hog](/docs/hog) functions
+- **Write transformation functions** - Write and tweak Hog code for transformations
+
+## Configure pipeline filters
+
+PostHog AI can set up filters for your realtime destinations and transformations. Describe the events or conditions you want to filter on and PostHog AI creates the filter configuration for you.
+
+Try these example prompts:
+
+```
+- Only send purchase events to my Slack destination.
+- Filter this pipeline to trigger on $pageview events from users in the US.
+- Set up a filter so this destination only fires for events where the plan property is "enterprise".
+```
+
+## Write Hog transformation functions
+
+PostHog AI can write and edit [Hog](/docs/hog) code for your [transformations](/docs/cdp/transformations). Describe the transformation logic you need and PostHog AI generates the function code.
+
+Try these example prompts:
+
+```
+- Write a transformation that adds a "processed" property to all events.
+- Modify this transformation to drop events where the email property contains "@test.com".
+- Create a Hog function that enriches events with a computed "session_duration" property.
+```
+
+## Manage function inputs
+
+PostHog AI can configure the input variables for your Hog functions. This is useful when you need to set up or update the variables your pipeline functions depend on.
+
+Try these example prompts:
+
+```
+- Set the webhook URL input for this destination.
+- Update the API key variable in my Hog function.
+- Show me what inputs are configured for this transformation.
+```
+
+## Use MCP for pipeline management
+
+You can also manage pipelines from external AI agents using the [PostHog MCP server](/docs/model-context-protocol). This enables AI coding assistants like Cursor, Windsurf, and Claude Code to interact with your Data Pipelines setup.
+
+Install the MCP server using the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more details.
