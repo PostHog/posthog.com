@@ -1,21 +1,8 @@
 import React from 'react'
 import PostHogCode from 'components/PostHogCode'
 import SEO from 'components/seo'
-import usePostHog from 'hooks/usePostHog'
-import { navigate } from 'gatsby'
 
 export default function CodePage() {
-    const posthog = usePostHog()
-    const enabled = !posthog?.isFeatureEnabled?.('posthog-code-website')
-
-    React.useEffect(() => {
-        if (posthog && !enabled) {
-            navigate('/')
-        }
-    }, [posthog, enabled])
-
-    if (!enabled) return null
-
     return (
         <>
             <SEO
