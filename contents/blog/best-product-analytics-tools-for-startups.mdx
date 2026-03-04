@@ -538,25 +538,23 @@ Free plan available (500 MAUs). Self-serve for the free tier. Paid plans require
 
 ### Step 1: Know your stage
 
-**Pre-PMF:** You need speed, not depth. Install something in an afternoon, get data flowing immediately, and focus on three questions: are users signing up, are they reaching core value, are they coming back? You need to [see if your product has legs](/newsletter/validating-product-ideas).
+**Pre-PMF:** Speed over depth. Get data flowing in an afternoon and focus on three questions: are users signing up, are they reaching core value, are they coming back? [See if your product has legs](/newsletter/validating-product-ideas).
 
-**Post-PMF:** You've [validated the product](/newsletter/what-weve-learned-about-product-market-fit). Now you need to understand why it works and how to grow efficiently. This is where the tool you chose at the MVP stage either scales with you or becomes technical debt.
+**Post-PMF:** You've [validated the product](/newsletter/what-weve-learned-about-product-market-fit). Now you need to understand why it works and how to grow efficiently. The tool you chose at the MVP stage either scales with you or becomes technical debt.
 
-**Scale-up:** Reliability, data quality, and cost control matter as much as insights. You need warehouse integrations, group analytics for B2B accounts, tracking plan enforcement, and compliance features like EU residency and SSO.
+**Scale-up:** Reliability, data quality, and cost control matter as much as insights. You need warehouse integrations, group analytics for B2B accounts, and compliance features like EU residency and SSO.
 
 ### Step 2: Decide what you need in one platform vs. separate tools
 
-Ask yourself: do you want multiple functionalities in one tool or are you okay stitching together best-of-breed point solutions?
+The bundled approach means less setup, shared context across products, and one bill. 
 
-The bundled approach means less setup, shared context across products, and one bill. Every additional vendor means another data model, another integration to maintain, and another place where user context gets lost. 
-
-The unbundled approach gives you more flexibility to swap individual tools, but you'll spend more time integrating and lose the ability to go from, say, a funnel drop-off to a session replay to an experiment without leaving the platform.
+The unbundled approach gives you flexibility to swap individual tools, but every additional vendor means another data model, another integration, and another place where user context gets lost.
 
 ### Step 3: Match the pricing model to your product
 
-Pricing models aren't interchangeable – the wrong one can cost you significantly more depending on your product's usage pattern.
+The wrong pricing model can cost you significantly more depending on your product's usage pattern.
 
-- **Event-based:** You pay per **action tracked**. Best for products with moderate events per user. Watch out for high-frequency events like real-time updates or messaging that inflate volume.
+- **Event-based:** You pay per **action tracked**. Best for products with moderate events per user. Watch out for high-frequency events that inflate volume.
 - **MTU-based:** You pay per **unique user**. Best for high-engagement products where each user triggers hundreds of events. Watch out for anonymous traffic – unidentified visitors count as separate MTUs until merged.
 - **Session-based:** You pay per **session**. Best for products with short, focused sessions. Watch out for products where users return multiple times per day.
 - **MAU-based:** You pay per **monthly active user**. Most predictable if your user count is stable. Watch out for rapid growth – costs scale linearly with users regardless of data volume.
@@ -565,9 +563,7 @@ Pricing models aren't interchangeable – the wrong one can cost you significant
 
 "Free tier" means very different things across tools.
 
-Some give you the full product at low volume, others gate core features behind paid plans and call the rest "free." 
-
-Before committing, check: how many events/sessions/users are included? Which features are restricted? Do you need a credit card to start? How long is data retained? Are features like cohort analysis, experiments, or account-level analytics included or paywalled?
+Some tools give you the full product at low volume. Others gate core features behind paid plans and call the rest "free." Before committing, check: how many events/sessions/users are included? Which features are restricted? Do you need a credit card? How long is data retained?
 
 | Tool | Free tier | Pricing model | Self-serve? | Best for | You'll also need... |
 |---|---|---|---|---|---|
@@ -687,7 +683,7 @@ Read our [GA4 comparison](/blog/posthog-vs-ga4) for a deeper breakdown.
 
 **Product analytics** = user-level event streams for real-time product decisions. **BI** = aggregated reporting for finance and ops. 
 
-Post-PMF startups export product events to a [data warehouse](/docs/data-warehouse) (Snowflake, BigQuery) for unified reporting that combines product behavior with revenue data. Product analytics feeds the warehouse; [BI tools]](/blog/best-open-source-business-intelligence-tools) visualize the combined data.
+Post-PMF startups export product events to a [data warehouse](/docs/data-warehouse) (Snowflake, BigQuery) for unified reporting that combines product behavior with revenue data. Product analytics feeds the warehouse; [BI tools](/blog/best-open-source-business-intelligence-tools) visualize the combined data.
 
 </details>
 
