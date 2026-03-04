@@ -41,6 +41,7 @@ import TeamFeatures from 'components/TeamFeatures'
 import SpiritAnimal from 'components/Team/SpiritAnimal'
 import SmallTeam from 'components/SmallTeam'
 import { normalizeSlug } from 'components/Team/utils'
+import NotFoundPage from 'components/NotFoundPage'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -272,6 +273,7 @@ export default function TeamPage(props: TeamPageProps) {
     const { totalCount: totalSlackEmojis } = data?.allSlackEmoji || {}
     const allTeams = data?.allTeamsData || { nodes: [] }
     const allAshbyJobPosting = data?.allAshbyJobPosting || { nodes: [] }
+    const hasTeam = Boolean((team as any)?.id || teamData || body || objectives)
     const existingTeamSlugs = useMemo(
         () => new Set((data?.allSqueakTeam?.nodes || []).map((node: any) => node?.slug?.toLowerCase()).filter(Boolean)),
         [data?.allSqueakTeam?.nodes]
@@ -576,6 +578,10 @@ export default function TeamPage(props: TeamPageProps) {
                 </OSButton>
             </>
         ) : null
+
+    if (!loading && !hasTeam) {
+        return <NotFoundPage />
+    }
 
     return (
         <>
