@@ -27,7 +27,7 @@ The guide below was written by [Alexander Hodes from B42](https://www.linkedin.c
 
 We liked how concrete and practical it is, so we’re reposting it here.
 
-([Originally published on DEV.to by Alexander Hodes.](https://dev.to/b42/posthog-workflows-tips-and-tricks-51kp))
+> Originally published on [DEV.to by Alexander Hodes](https://dev.to/b42/posthog-workflows-tips-and-tricks-51kp).
 
 ---
 At the beginning of the year, PostHog released [Workflows](/docs/workflows) from beta. At B42, we had been using PostHog for analytics for over a year, but our customer journeys ran in a separate tool. Now after migrating to PostHog Workflow we have everything in one tool. After the Workflows release, we migrated everything in 2 days. Here's what we learned.
