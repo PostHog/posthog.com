@@ -90,7 +90,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'twig',
+            // slug: 'posthog-code',
             status: 'WIP',
         },
         {
