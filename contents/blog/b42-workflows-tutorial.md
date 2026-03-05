@@ -17,7 +17,7 @@ tags:
     - Tutorials
 seo:
     {
-        metaTitle: 'PostHog Workflows Tutorial: i18n, Push Notifications & Webhooks',
+        metaTitle: 'A complete guide to Workflows: Emails, i18n, push notifications, webhooks, and more',
         metaDescription: 'Learn how B42 uses PostHog Workflows to automate customer journeys, trigger emails from product events, and keep all outreach powered by real product data.',
     }
 ---
