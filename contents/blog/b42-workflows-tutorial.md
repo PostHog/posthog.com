@@ -164,7 +164,7 @@ Another exciting feature is [delays](/docs/workflows/workflow-builder#delays), w
 
 ![delays with workflows](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/b42_workflows_scr9_a44289298d.webp)
 
-### Webhook Logs
+### Webhook logs
 
 For webhooks, it's recommended to activate logs. This logs the requests as well as the status codes of the responses. This makes debugging and error analysis much easier.
 
