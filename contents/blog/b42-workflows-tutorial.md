@@ -143,6 +143,7 @@ It probably won't be long before push notifications are directly supported in Po
 However, the webhook can continue to be used to execute internal processing or processes.
 
 ### Using variables in emails or webhooks
+
 Like push notifications, emails can be personalized with template syntax.
 
 Typical use cases include the email address, which can be retrieved with `{{ person.properties.email }}`. This accesses the person property email.
