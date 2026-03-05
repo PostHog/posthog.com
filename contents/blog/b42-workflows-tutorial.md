@@ -132,7 +132,7 @@ Variables from the event or user can also be used in the JSON body to personaliz
     />
 </p>
 
-#### Using Custom Header Fields
+#### Using custom header fields
 
 To prevent your webhook from being misused, you can also send custom header fields, such as `x-webhook-secret=random-value`. If the value doesn't match the defined secret, you can return a 401 Unauthorized error.
 
