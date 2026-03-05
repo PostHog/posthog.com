@@ -79,6 +79,7 @@ export const LOGOS = {
     mongodb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Mongo_DB_Logo_f095b5aca0.svg',
     mysql: 'https://res.cloudinary.com/dmukukwp6/image/upload/mysql_logo_0ce3cfe493.svg',
     n8n: 'https://res.cloudinary.com/dmukukwp6/image/upload/n8n_color_ce6a4e9c92.svg',
+    nestjs: 'https://res.cloudinary.com/dmukukwp6/image/upload/nestjs_logo_034b054f38.svg',
     netlify: 'https://res.cloudinary.com/dmukukwp6/image/upload/netlify_original_cdea69c2b5.svg',
     nextjs: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg',
     nginx: 'https://res.cloudinary.com/dmukukwp6/image/upload/nginx_icon_872690f0fe.svg',

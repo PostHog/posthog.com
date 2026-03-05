@@ -2227,6 +2227,10 @@ export const docsMenu = {
                             url: '/docs/libraries/hono',
                         },
                         {
+                            name: 'NestJS',
+                            url: '/docs/libraries/nestjs',
+                        },
+                        {
                             name: 'Laravel',
                             url: '/docs/libraries/laravel',
                         },
@@ -4324,6 +4328,10 @@ export const docsMenu = {
                         {
                             name: 'Hono',
                             url: '/docs/error-tracking/installation/hono',
+                        },
+                        {
+                            name: 'NestJS',
+                            url: '/docs/error-tracking/installation/nestjs',
                         },
                         {
                             name: 'Android',
