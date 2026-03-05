@@ -121,7 +121,7 @@ export async function POST(req: Request, res: Response) {
     return res.status(200).json({ success: true })
 }
 ```
-#### Variables for Content Personalization
+#### Variables for content personalization
 
 Variables from the event or user can also be used in the JSON body to personalize the content.
 
