@@ -1,0 +1,54 @@
+---
+title: PostHog AI for Session Replay
+sidebar: Docs
+showTitle: true
+---
+
+import { IconSparkles } from '@posthog/icons'
+
+PostHog AI can summarize your session recordings, identify behavior patterns, and help you find specific recordings using natural language — so you don't have to watch every replay manually.
+
+> **Not set up yet?** See [Getting started with PostHog AI](/docs/posthog-ai/start-here) for access and setup instructions.
+
+## What you can do
+
+- **Summarize recordings**: Ask PostHog AI to summarize filtered session recordings and categorize them by behavior patterns.
+- **Search with natural language**: Find specific recordings by describing what you're looking for (e.g., rage clicks, navigation usage, errors).
+- **Analyze experiment replays**: Summarize session replays across experiment variants to understand *why* users behaved differently.
+
+## Summarizing recordings
+
+In the [PostHog AI chat](/docs/posthog-ai/chat), ask PostHog AI to summarize your session recordings. It picks up on any filters you've applied and generates a categorized summary report.
+
+You can ask follow-up questions and request specific recordings to review.
+
+## Searching for specific recordings
+
+Click the <span className="inline-block"><IconSparkles className="h-4 w-4" /> </span> icon next to the session recording filters to search for recordings using natural language.
+
+For example, you can ask PostHog AI to find all recordings where a user rage clicked or got stuck on a particular page.
+
+## Summarizing experiment replays
+
+You can summarize session replays directly from the [Experiments](/docs/experiments) interface:
+
+1. Go to an experiment that has started and has results.
+2. Click the **Summarize session replays** button.
+3. PostHog AI analyzes user behavior patterns across your experiment variants.
+
+This helps you understand behavioral differences between variants — not just *what* happened, but *why*.
+
+## Example prompts
+
+```
+Summarize my session recordings from this week
+Find session replays where users got stuck
+Show me recordings where users rage clicked
+Find recordings of users who used the navigation menu
+Summarize session replays from my experiment
+```
+
+## Further reading
+
+- [Session replay summaries with PostHog AI](/docs/posthog-ai/session-summaries) for detailed walkthroughs and videos
+- [Getting started with PostHog AI](/docs/posthog-ai/start-here) for setup instructions
