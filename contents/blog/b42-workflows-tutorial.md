@@ -68,6 +68,7 @@ There's always an exit. You can also define earlier exists if certain conditions
 During the implementation of workflows, we encountered some smaller challenges, such as messaging in different languages or sending push notifications.
 
 ### i18n
+
 Currently, it's not yet directly possible to translate texts. However, [Conditional Branches](/docs/workflows/workflow-builder#audience-splits) can be used to check variables and customize the further course of the flow depending on conditions.
 
 We check the user's language with Conditional Branches, which we store in the person. This allows us to split the flow based on language and ensure that the user receives emails or push notifications in the correct language.
