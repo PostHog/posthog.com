@@ -1,8 +1,7 @@
 ---
 title: 'A complete guide to Workflows: Emails, i18n, push notifications, webhooks, and more'
 date: 2026-03-03
-rootPage: /blog
-sidebar: Blog
+sidebar: Docs
 showTitle: true
 hideAnchor: true
 author:
@@ -179,22 +178,10 @@ For webhooks, it's recommended to activate logs. This logs the requests as well 
 
 There are some common issues which we experienced during implementation.
 
-**Issue**: Workflow not triggering
+**Issue**: Workflow not triggering > **Solution**: Check event name matches exactly (case-sensitive)
 
-**Solution**: Check event name matches exactly (case-sensitive)
+**Issue**: Variables not rendering > **Solution**: Ensure property exists before workflow trigger
 
-**Issue**: Variables not rendering
+**Issue**: Email not sending > **Solution**: Check if the sender is selected correctly
 
-**Solution**: Ensure property exists before workflow trigger
-
-**Issue**: Email not sending
-
-**Solution**: Check if the sender is selected correctly
-
-**Issue**: Webhook request without body
-
-**Solution**: Check if `Content-Type` header is set correctly, e.g. `application/json`
-
-## What's next?
-
-We've built 15+ workflows at B42 since migrating from welcome sequences to multi-language onboarding. What challenges are you facing with customer journey automation? Drop a comment or connect with me on [LinkedIn](https://www.linkedin.com/in/alexander-hodes/)!
+**Issue**: Webhook request without body > **Solution**: Check if `Content-Type` header is set correctly, e.g. `application/json`
