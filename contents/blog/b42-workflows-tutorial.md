@@ -194,8 +194,3 @@ There are some common issues which we experienced during implementation.
 ## What's next?
 
 We've built 15+ workflows at B42 since migrating from welcome sequences to multi-language onboarding. What challenges are you facing with customer journey automation? Drop a comment or connect with me on [LinkedIn](https://www.linkedin.com/in/alexander-hodes/)!
-
----
-Big thanks to Alexander Hodes and [the B42 team](https://www.b-42.com/en-us) for sharing this.
-
-It’s always interesting to see how different teams use Workflows in practice, and this guide shows how far you can get with a few simple building blocks. If you’re experimenting with [Workflows](https://app.posthog.com/workflows) yourself, hopefully it gives you a few ideas to try.
