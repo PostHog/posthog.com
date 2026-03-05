@@ -1,0 +1,59 @@
+---
+title: Analyzing surveys with PostHog AI
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes function calling tools to any MCP client, enabling AI agents to interact with your PostHog data via the MCP protocol.
+
+When combining the MCP server with surveys, your AI agents can query and analyze survey data directly from your code editor or AI client.
+
+For example, with MCP, your agents can:
+
+- **Analyze responses**: Query survey response data using HogQL to find patterns and trends.
+- **Track NPS scores**: Calculate average NPS scores and break them down by user properties, time periods, or cohorts.
+- **Find feedback patterns**: Identify common themes in open-text survey responses.
+- **Monitor completion rates**: Compare survey performance across different surveys and time periods.
+- **Build custom insights**: Write HogQL queries that join survey events with other PostHog data.
+
+All of this happens directly inside your MCP client, like Cursor, Windsurf, or Claude Code.
+
+## Example prompts
+
+Try these example questions and directives with your MCP-enabled agent:
+
+```
+- Show me all survey responses from the last 7 days.
+- What's the average NPS score from our onboarding survey?
+- Find users who gave negative feedback in surveys.
+- Write a query to analyze survey responses by user properties.
+- Which surveys have the highest completion rates?
+- Break down survey responses by country for the last month.
+```
+
+### Querying survey events
+
+Survey data is captured as events. When prompting your agent, it helps to know the four survey-related events:
+
+| Event | Description |
+|---|---|
+| `survey shown` | Fires when a survey is displayed to a user |
+| `survey sent` | Fires when a user responds to a question |
+| `survey dismissed` | Fires when a user explicitly closes the survey |
+| `survey abandoned` | Fires when a user navigates away before completing (if partial completion is enabled) |
+
+You can filter by a specific survey using the `Survey ID` or `Survey Name` properties.
+
+To break down responses by answer, use the built-in SQL function `getSurveyResponse(question_index, question_id, is_multiple_choice)` in your HogQL queries. See [viewing survey results](/docs/surveys/viewing-results) for more details.
+
+## Install the MCP server
+
+To start analyzing surveys with PostHog MCP, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more detailed instructions and information.
