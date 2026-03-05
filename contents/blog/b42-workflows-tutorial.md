@@ -192,6 +192,7 @@ There are some common issues which we experienced during implementation.
 **Solution**: Check if `Content-Type` header is set correctly, e.g. `application/json`
 
 ## What's next?
+
 We've built 15+ workflows at B42 since migrating from welcome sequences to multi-language onboarding. What challenges are you facing with customer journey automation? Drop a comment or connect with me on [LinkedIn](https://www.linkedin.com/in/alexander-hodes/)!
 
 ---
