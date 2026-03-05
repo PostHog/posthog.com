@@ -1,5 +1,5 @@
 ---
-title: 'PostHog Workflows Tutorial: i18n, Push Notifications & Webhooks'
+title: 'A complete guide to Workflows: Emails, i18n, push notifications, webhooks, and more'
 date: 2026-03-03
 rootPage: /blog
 sidebar: Blog
