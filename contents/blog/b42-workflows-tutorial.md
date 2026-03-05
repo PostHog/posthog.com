@@ -77,7 +77,8 @@ We check the user's language with conditional branches, which we store in the pe
 
 As a prerequisite, you need to sync the language code of the user with PostHog. The default value can be used for a fallback language like English.
 
-### Sending Push Notifications
+### Sending push notifications
+
 Sending push notifications is currently not yet possible. As a workaround, webhooks can be used. You can integrate an endpoint in your application that receives a POST request with a specific body, for example:
 
 ```json
