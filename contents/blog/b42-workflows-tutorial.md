@@ -18,7 +18,7 @@ tags:
 seo:
     {
         metaTitle: 'A complete guide to Workflows: Emails, i18n, push notifications, webhooks, and more',
-        metaDescription: 'Learn how B42 uses PostHog Workflows to automate customer journeys, trigger emails from product events, and keep all outreach powered by real product data.',
+        metaDescription: 'Learn how B42 uses PostHog Workflows to automate customer journeys, trigger emails from product events, build templates, translate and personalize content, send push notifications, debug issues, and more.',
     }
 ---
 [Workflows](/workflows) lets you trigger actions directly from your product data – things like sending emails, calling webhooks, or updating user properties when something happens in your app.
