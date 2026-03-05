@@ -1,0 +1,44 @@
+---
+title: Managing feature flags with PostHog AI
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes function calling tools to any MCP client, enabling AI agents to interact with PostHog's API via the MCP protocol.
+
+When combining our MCP server with feature flags, your AI agents can create and manage flags directly from your code editor. This means you can set up rollouts, create multivariate flags, and query flag status without leaving Cursor, Windsurf, or Claude Code.
+
+For example, with MCP, your agents can:
+
+- **Create feature flags**: Set up new boolean or multivariate flags with specified rollout percentages.
+- **List flags**: Fetch all feature flags in your project with their current status and rollout configuration.
+- **Query flag status**: Check which flags are enabled for a specific user.
+- **Find flags by rollout**: Use HogQL to query flags filtered by rollout percentage or other criteria.
+
+## Example prompts
+
+Try these example questions and directives with your MCP-enabled agent:
+
+```
+- Create a feature flag called 'new-checkout-flow' that's enabled for 20% of users.
+- Create a multivariate feature flag called 'homepage-hero-test' with three variants: control at 34%, variant_a at 33%, and variant_b at 33%.
+- List all my feature flags.
+- What flags are currently enabled for the user with ID 'user123'?
+- Show me flags that are rolled out to less than 50% of users.
+```
+
+### Multivariate flags
+
+When creating multivariate feature flags, the agent uses the `create-feature-flag` tool with a `multivariate` configuration. Variant rollout percentages must be integers that sum to 100.
+
+## Install the MCP server
+
+To start managing feature flags with PostHog MCP, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more detailed instructions and information.
