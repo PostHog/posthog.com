@@ -172,6 +172,7 @@ For webhooks, it's recommended to activate logs. This logs the requests as well 
 ![webhook logs](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr10_2441a55027.webp)
 
 ## Common issues & solutions
+
 There are some common issues which we experienced during implementation.
 
 **Issue**: Workflow not triggering
