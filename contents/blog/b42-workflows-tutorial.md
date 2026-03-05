@@ -54,6 +54,7 @@ In the template itself, global settings such as colors, font, or alignment can a
 ![editing email templates with workflows](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr3_72d043fc04.webp)
 
 ### Building workflows
+
 Building workflows is very intuitive. First, a [trigger](/docs/workflows/workflow-builder#triggers) for the workflow is selected. This can be a specific event, a manual trigger, a webhook, tracking pixel, or schedule.
 
 Further steps and actions can be added, like emails, webhooks or third party integrations like Slack.
