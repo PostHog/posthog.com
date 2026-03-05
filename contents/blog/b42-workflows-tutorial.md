@@ -64,6 +64,7 @@ Further steps and actions can be added, like emails, webhooks or third party int
 There's always an exit. You can also define earlier exists if certain conditions match.
 
 ## Small hacks
+
 During the implementation of workflows, we encountered some smaller challenges, such as messaging in different languages or sending push notifications.
 
 ### i18n
