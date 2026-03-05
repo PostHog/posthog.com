@@ -1,0 +1,50 @@
+---
+title: Querying data with PostHog AI
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes function calling tools to any MCP client, enabling AI agents to interact with your data warehouse directly.
+
+When combining our MCP server with the data warehouse, your AI agents can write and run complex SQL queries across both PostHog data and linked external sources — all without leaving your code editor.
+
+For example, with MCP, your agents can:
+
+- **Query linked sources**: Run SQL against external data from Stripe, HubSpot, Postgres, and other [connected sources](/docs/data-warehouse/sources).
+- **Join external and PostHog data**: Combine revenue, CRM, or other external data with your PostHog events and persons.
+- **Explore your schema**: List available tables, columns, and sources in your data warehouse.
+- **Write HogQL queries**: Generate complex queries with filters, aggregations, and subqueries.
+- **Create views**: Save reusable queries as views for use across PostHog.
+
+All of this happens directly inside your MCP client, like Cursor, Windsurf, or Claude Code.
+
+## Example prompts
+
+Try these example questions and directives with your MCP-enabled agent:
+
+```
+- What tables are available in my data warehouse?
+- Write a HogQL query to join my Stripe charges with PostHog events.
+- Show me revenue data from my linked Stripe source by month.
+- Create a query joining HubSpot contacts with PostHog user events.
+- Find users who triggered the signup event but didn't complete onboarding in the last 30 days.
+- Query my feature flags to find all flags that are rolled out to less than 50% of users.
+```
+
+## Using PostHog AI in the SQL editor
+
+You can also use PostHog AI directly inside the app. In the [SQL editor](https://us.posthog.com/sql), click the AI icon in the corner of your screen and ask it to write or tweak your query for you.
+
+This is useful when you want to iterate on queries visually and take advantage of the built-in [visualizations](/docs/data-warehouse/query#sql-visualizations) and [execution details](/docs/data-warehouse/query#query-execution-details).
+
+## Install the MCP server
+
+To start querying your data warehouse with an AI agent, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more detailed instructions and information.
