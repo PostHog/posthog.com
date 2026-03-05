@@ -183,5 +183,23 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
     classes="rounded"
 />
 
+
+## Automatically disabled alerts
+
+PostHog automatically disables alerts that have an invalid configuration. When this happens, subscribed users receive an email notification explaining the reason the alert was disabled.
+
+Common reasons an alert may be auto-disabled:
+
+- The insight was modified and is no longer compatible with the alert configuration (e.g., the insight query type changed from a trend to a funnel)
+- The series referenced by the alert was removed from the insight
+- A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
+- An absolute value alert was configured with a percentage threshold
+
+<CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
+
+Disabled alerts don't re-enable themselves. After fixing the configuration issue, go to the **Alerts** tab on the insight and manually re-enable the alert.
+
+</CalloutBox>
+
 ## Further reading
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).
