@@ -71,7 +71,7 @@ During the implementation of workflows, we encountered some smaller challenges, 
 
 Currently, it's not yet directly possible to translate texts. However, [conditional branches](/docs/workflows/workflow-builder#audience-splits) can be used to check variables and customize the further course of the flow depending on conditions.
 
-We check the user's language with Conditional Branches, which we store in the person. This allows us to split the flow based on language and ensure that the user receives emails or push notifications in the correct language.
+We check the user's language with conditional branches, which we store in the person. This allows us to split the flow based on language and ensure that the user receives emails or push notifications in the correct language.
 
 ![adding conditional branches with workflows](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr5_bf612110fe.webp)
 
