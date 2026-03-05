@@ -41,14 +41,18 @@ Add entries under each question with your initials/name like: "- (your name): My
 - Hope
   - What are you most excited about this quarter?
   - What exploration do you want to do?
+  - What becomes possible for your product once AI is doing more of the work?
 - Obstruction
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
+  - What would prevent an AI agent from successfully using your product today?
+    - _How could we make our product dramatically easier for AI agents to use?_
 - Growth
   - What single thing would move the needle the most this quarter?
     - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
   - What are users asking for? Which of these are we ignoring?
     - _Check Vitally for feature requests (if applicable for your team/product)_
+  - How will users interact with your product in 1 year's time and what can we do now to get this ready?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?
@@ -56,7 +60,6 @@ Add entries under each question with your initials/name like: "- (your name): My
 ## Themes (20 minutes - do as a team)
 
 What themes can we distill from the above HOGS list? What are categories of things we should consider working on? What are other things we might want to consider?
-
 
 ## New goals (15 minutes - do as a team)
 
