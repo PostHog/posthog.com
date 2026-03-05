@@ -1,0 +1,41 @@
+---
+title: Running experiments with PostHog AI
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes function calling tools to any MCP client, enabling AI agents to interact with PostHog's API via the MCP protocol.
+
+When combining our MCP server with experiments, your AI agents can manage the full experiment lifecycle directly from your code editor.
+
+For example, with MCP, your agents can:
+
+- **Create experiments**: Set up A/B tests with control/test variants and configure funnel metrics for measuring conversions.
+- **Check experiment status**: Query running experiments and review their current state.
+- **Analyze results**: Check which experiments have reached statistical significance and review conversion data.
+
+All of this happens directly inside the MCP client, like Cursor, Windsurf, or Claude Code, so you can set up and monitor experiments without leaving your code editor.
+
+## Example prompts
+
+Try these example questions and directives with your MCP-enabled agent:
+
+```
+- Create an A/B test for our pricing page that measures conversion to checkout.
+- Show me all running experiments.
+- What's the current status of the onboarding experiment?
+- Create an experiment testing a new signup flow with conversion to first purchase as the goal.
+- Which experiments have reached statistical significance?
+```
+
+## Install the MCP server
+
+To start running experiments with PostHog MCP, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more detailed instructions and information.
