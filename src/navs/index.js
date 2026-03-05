@@ -5510,6 +5510,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Sentiment classification',
+                    url: '/docs/llm-analytics/sentiment',
+                    icon: 'IconThumbsUp',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Link Session Replay',
                     url: '/docs/llm-analytics/link-session-replay',
                     icon: 'IconRewindPlay',
