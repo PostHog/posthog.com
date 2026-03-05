@@ -2,9 +2,9 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 export const skills = [
-    'Put on a data analyst hat and explore your data in depth',
+    'Understand and explore your product data in depth',
     'Synthesize context across multiple sources',
-    'Create dashboards and data visualizations, such as insights',
+    'Create dashboards and data visualizations in PostHog',
     'Interact natively with the PostHog UI, for example by editing filters',
     'Generate and edit complex SQL queries',
     "Answer questions from PostHog's product documentation",
@@ -14,7 +14,7 @@ export const skillTitle = `Unlike other agents, PostHog AI can:`
 
 export default function OverviewSlideMax() {
     return (
-        <div className="h-full bg-[#dd99ff]">
+        <div className="h-full bg-[#b8e0d8]">
             <div className="size-full bg-ai p-8 flex flex-col justify-center">
                 <div className="bg-white/80 dark:bg-black/80 backdrop-blur-lg h-full rounded-md shadow-2xl flex flex-col @2xl:flex-row gap-8 @2xl:gap-12 p-8">
                     <aside className="text-center">
@@ -29,9 +29,9 @@ export default function OverviewSlideMax() {
                             PostHog AI is deeply connected with your data
                         </h2>
                         <p className="text-2xl text-secondary mx-auto">
-                            You can ask it to build insights, write HogQL queries, summarize session recordings, create
-                            surveys, set up feature flags – basically handle the grunt work that normally takes 20
-                            minutes of clicking around.
+                            Ask it to build insights, write HogQL queries, summarize session recordings, create surveys,
+                            set up feature flags – basically handle the grunt work that would normally take 20 minutes
+                            of clicking around.
                         </p>
                         <h3 className="text-2xl mt-4 text-primary">{skillTitle}</h3>
                         <ul>

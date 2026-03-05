@@ -128,28 +128,28 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Insight generation',
-                    description: 'Build insights and entire dashboards from a single prompt',
+                    name: 'Build insights from plain English',
+                    description: 'Describe the data you want to see visualized as an insight or dashboard',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 90,
+                },
+                {
+                    name: 'Write and explain HogQL',
+                    description: 'Create complex SQL queries and get an explanation of the logic behind them',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Query assistance',
-                    description: 'Create optimized HogQL queries and get an explanation of the logic behind them',
+                    name: 'Deep dive into your product data',
+                    description: 'Try research mode for deeper analysis across multiple context sources',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 50,
+                    percent: 90,
                 },
                 {
-                    name: 'Deep dive',
-                    description: 'Get suggestions for what to investigate next',
+                    name: 'Navigate the UI',
+                    description: 'Edit filters, set breakdowns, build retention curves (and more) with simple prompts',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 30,
-                },
-                {
-                    name: 'Auto-naming',
-                    description: 'Automatically generate descriptive names for insights and dashboards',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 30,
+                    percent: 70,
                 },
                 // {
                 //     name: 'Anomaly detection',
@@ -179,24 +179,30 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Conversational filters',
-                    description: 'Apply filters by page path, geography, device type, or referrer using plain language',
+                    name: 'Prompt to apply filters',
+                    description:
+                        'Filter web traffic by page path, geography, device type, or referrer using plain language',
                     sticker: <StickerPath className="size-12" />,
                     percent: 70,
                 },
                 {
-                    name: 'Insight generation',
-                    description:
-                        'Create insights with text prompts to analyze traffic patterns, conversion funnels, or user journeys',
+                    name: 'Decode acquisition channels',
+                    description: 'Understand which channels are actually driving quality visitors, not just volume',
                     sticker: <StickerPath className="size-12" />,
-                    percent: 30,
+                    percent: 50,
                 },
                 {
-                    name: 'Anomaly analysis',
-                    description:
-                        'Detect unusual traffic spikes or drops and get PostHog AI to explain potential causes',
+                    name: 'Correlate web traffic with product data',
+                    description: 'Connect what happens on the marketing site to what users do inside your product',
                     sticker: <StickerPath className="size-12" />,
-                    percent: 0,
+                    percent: 70,
+                },
+                {
+                    name: 'Analyze web vitals',
+                    description:
+                        'Investigate traffic spikes, dips, and other anomalies to optimize website performance',
+                    sticker: <StickerPath className="size-12" />,
+                    percent: 70,
                 },
             ],
         },
@@ -220,27 +226,26 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Usage and adoption',
-                    description: 'Cross-compare AI feature adoption with other events and actions',
+                    name: 'Summarize LLM traces',
+                    description: 'Understand complex, multi-step interactions without reading full logs',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 70,
+                    percent: 90,
                 },
                 {
-                    name: 'Cost forecasting',
-                    description:
-                        "Ask PostHog AI to project next month's spend, identify overage risks, or answer ROI questions with SQL",
+                    name: 'Monitor usage and adoption',
+                    description: 'Connect AI feature usage with other events and user actions in your product',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 90,
+                },
+                {
+                    name: 'Forecast costs and token consumption',
+                    description: "Ask PostHog AI to project next month's spend based on last month's usage",
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'LLM trace summarization',
-                    description: 'Understand complex interactions without reading full conversation logs',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 70,
-                },
-                {
-                    name: 'Error investigation',
-                    description: 'Track error rates by model and drill into specific failing traces with PostHog AI',
+                    name: 'Discover patterns in LLM usage',
+                    description: 'Get AI-generated summaries for clusters of similar LLM traces',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
@@ -269,23 +274,29 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Session search',
-                    description: 'Find specific replays using natural language (e.g., "users who abandoned checkout")',
+                    name: 'Search for specific recordings',
+                    description: 'Filter recordings using natural language (e.g., "users who abandoned checkout")',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 90,
+                },
+                {
+                    name: 'Summarize user behavior',
+                    description:
+                        'Get a summary of one or more recordings, including patterns, errors, and key findings',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Session summaries',
-                    description: 'Get a summary of one or more session replays',
+                    name: 'Cluster similar sessions',
+                    description: 'Group similar sessions and surface representative examples from thousands',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 50,
+                    percent: 70,
                 },
                 {
-                    name: 'Session clustering',
-                    description:
-                        'Ask PostHog AI to group similar sessions and surface representative examples from thousands',
+                    name: 'Rank sessions by signal',
+                    description: 'Ask PostHog AI for session recordings worth watching based on specific criteria',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 30,
+                    percent: 50,
                 },
             ],
         },
@@ -307,28 +318,29 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Feature flag setup',
-                    description: 'Create and configure feature flags using natural language',
+                    name: 'Configure flags with natural language',
+                    description: 'Describe the flag you want to create and PostHog AI will handle the rest',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Stale feature flag detection',
-                    description: 'Detect stale feature flags and automatically remove them from your app and codebase',
+                    name: 'Detect stale flags',
+                    description:
+                        'Scan for feature flags not in use, and automatically remove them from your app and codebase',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 30,
+                    percent: 50,
                 },
                 {
-                    name: 'Monitoring & anomaly detection',
-                    description: 'Replace manual checks with automated performance reports',
+                    name: 'Monitor flags in production',
+                    description: 'Replace manual checks with prompts to get a clear picture of flag performance',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 50,
                 },
                 {
-                    name: 'Invisible rollout automation',
-                    description: 'Delegate rule-based flag rollouts to AI',
+                    name: 'Understand rollout rules',
+                    description: 'Get a simple explanation of how a flag is configured and who it is targeting',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 50,
                 },
             ],
         },
@@ -352,30 +364,30 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Experiment builder',
-                    description: 'Create and configure A/B tests using natural language prompts',
+                    name: 'Set up A/B tests with prompts',
+                    description:
+                        'Create and configure experiments, variants, and target metrics using natural language',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Interpret experiment results',
+                    description:
+                        'Identify winning variants through AI summaries, and get recommendations for next steps',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Results analysis',
-                    description:
-                        'Identify winning variants through AI summaries, and get recommendations for next steps',
+                    name: 'Troubleshoot setup issues',
+                    description: 'Ensure statistically valid and reliable results by scanning for common issues',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
                 {
-                    name: 'Experiments doctor',
-                    description: 'Troubleshoot setup issues with AI to ensure statistically valid and reliable results',
+                    name: 'Connect wins to downstream metrics',
+                    description: 'Analyze the impact of winning experiments across product metrics and user behavior',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
-                {
-                    name: 'Opportunity detection',
-                    description:
-                        'Surface testing opportunities by analyzing metrics, behavior, and code changes with AI',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 50,
                 },
             ],
         },
@@ -399,22 +411,28 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Exception search',
-                    description: 'Ask PostHog AI to find specific errors with natural language queries',
+                    name: 'Search for specific errors',
+                    description: 'Ask PostHog AI to find specific errors with natural language prompts',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Impact scoring',
-                    description: 'Surface high-impact exceptions based on affected users and business context',
+                    name: 'Score errors by impact',
+                    description: 'Ask PostHog AI to surface exceptions worth investigating based on downstream impact',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 70,
+                    percent: 50,
                 },
                 {
-                    name: 'Semantic grouping',
-                    description: 'Group exceptions by root cause with AI analysis, not just stack traces',
+                    name: 'Summarize a stack trace',
+                    description: 'Understand the likely cause of an exception without reading every line',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 50,
+                },
+                {
+                    name: 'Add context to exceptions',
+                    description: 'Use natural language to get the full context of affected users and related sessions',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
                 },
             ],
         },
@@ -441,22 +459,28 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Survey creation',
-                    description: 'Generate questions, configure targeting, and launch surveys with natural language',
+                    name: 'Create surveys with prompts',
+                    description: 'Generate questions, set up targeting, and launch surveys with natural language',
                     sticker: <StickerPath className="size-6" />,
                     percent: 90,
                 },
                 {
-                    name: 'Response synthesis',
-                    description: 'Ask PostHog AI to surface themes and patterns from aggregated feedback',
+                    name: 'Summarize survey responses',
+                    description: 'Ask PostHog AI to surface themes and patterns from aggregated user feedback',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Sentiment search',
-                    description: 'Ask questions about survey responses and get answers by meaning, not keywords',
+                    name: 'Filter responses by sentiment',
+                    description: 'Sort through responses by meaning, not just keywords',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 30,
+                },
+                {
+                    name: 'Craft questions with AI',
+                    description: 'Use the right question types for your research goal, not just generic options',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 50,
                 },
             ],
         },
@@ -480,17 +504,22 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Email template builder',
-                    description: 'Ask PostHog AI to generate dynamic templates in your content library',
+                    name: 'Generate email templates',
+                    description: 'Ask PostHog AI to build dynamic templates in your content library',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Workflow builder',
-                    description:
-                        'Create multi-step workflows using natural language to automate actions or send messages',
+                    name: 'Set up multi-step workflows',
+                    description: 'Describe the conditions, triggers, and actions, get a working workflow in seconds',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 30,
+                },
+                {
+                    name: 'Connect workflows to business metrics',
+                    description: 'Get recommendations for which workflows to build and when to run them',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
                 },
             ],
         },
@@ -517,24 +546,31 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'SQL error fixing',
+                    name: 'Fix SQL errors',
                     description:
                         'Use PostHog AI to correct syntax and logic errors to ensure queries return the data you need',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Join tables with AI',
+                    description:
+                        'Use natural language to join PostHog data with external sources and visualize the results',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Query autocomplete',
-                    description: 'Complete code automatically so you can focus on analysis',
+                    name: 'Translate complex queries',
+                    description: 'Get an explanation of what a query does and what it returns in plain English',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 0,
+                    percent: 70,
                 },
             ],
         },
         {
             title: 'Data Pipelines',
             headline: 'Data Pipelines',
-            team: 'workflows',
+            team: 'data-modeling',
             layout: 'ai',
             icon: <IconPlug className="size-5" />,
             color: 'blue',
@@ -551,14 +587,21 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Destination setup',
-                    description: 'Configure integrations with AI-generated HogQL and automatic event filtering',
+                    name: 'Set up data pipelines with prompts',
+                    description: 'Configure a Slack alert, webhook, or warehouse export from a simple description',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Data transformation',
-                    description: 'Ask PostHog AI to Write custom logic to modify and enrich event data',
+                    name: 'Transform your event data',
+                    description: 'Ask PostHog AI to write custom logic to modify and enrich event data',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Audit your data pipeline',
+                    description:
+                        "Summarize which destinations are active, what they're receiving, and any anomalies worth investigating",
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
@@ -813,8 +856,8 @@ export const posthog_ai = {
         },
     ],
     presenterNotes: {
-        overview:
-            "<strong>Presenter notes:</strong> PostHog AI is an AI agent that lives inside PostHog and actually understands your product data. It's not a chatbot slapped onto a dashboard. You can ask it to build insights, write HogQL queries, summarize session recordings, create surveys, set up feature flags—basically handle the grunt work that normally takes 20 minutes of clicking around. It routes complex tasks to specialized AI agents and uses context from your actual data. The big difference: it's trained on PostHog's data model and your specific setup, so it actually knows what it's doing.",
+        // overview:
+        //     "<strong>Presenter notes:</strong> PostHog AI is an AI agent that lives inside PostHog and actually understands your product data. It's not a chatbot slapped onto a dashboard. You can ask it to build insights, write HogQL queries, summarize session recordings, create surveys, set up feature flags—basically handle the grunt work that normally takes 20 minutes of clicking around. It routes complex tasks to specialized AI agents and uses context from your actual data. The big difference: it's trained on PostHog's data model and your specific setup, so it actually knows what it's doing.",
         'posthog-on-posthog':
             "We use PostHog AI constantly. Like, genuinely use it—not in a 'marketing uses our own product once for a screenshot' way. Our engineers use it to write complex SQL queries against our data warehouse without having to remember every table schema. Product managers use it to build dashboards in seconds instead of bothering engineering. Support uses it to summarize session replays when debugging user issues. We trained it on our blog and docs too, so it can answer questions about how to use PostHog without you having to search through documentation. It's become the fastest way to go from question to answer.",
         features:
