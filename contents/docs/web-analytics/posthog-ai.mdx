@@ -1,0 +1,44 @@
+---
+title: Analyzing web traffic with PostHog AI
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes function calling tools to any MCP client, enabling AI agents to interact with your web analytics data via the MCP protocol.
+
+When combining the MCP server with web analytics, your AI agents can analyze traffic patterns and surface insights without leaving your code editor or AI client.
+
+For example, with MCP, your agents can:
+
+- **Analyze traffic patterns**: Query pageviews, unique visitors, and session counts over any time range.
+- **Break down referral sources**: Identify which channels, referrers, and UTM campaigns drive the most traffic.
+- **Investigate performance**: Surface web vitals data and find pages with high bounce rates or slow load times.
+- **Compare time periods**: Spot trends by comparing traffic week-over-week or month-over-month.
+- **Segment by device or geography**: Break down sessions by country, browser, operating system, or device type.
+
+## Example prompts
+
+Try these example questions and directives with your MCP-enabled agent:
+
+```
+- What are my top traffic sources this week?
+- Show me pageviews broken down by country.
+- Which pages have the highest bounce rate?
+- How has my web traffic changed compared to last month?
+- What's the average session duration for mobile vs desktop users?
+- Which UTM campaigns are driving the most conversions?
+```
+
+For a full walkthrough of investigating web traffic with PostHog AI, including a video demo and example prompts, see the [investigate web traffic guide](/docs/posthog-ai/investigate-web-traffic).
+
+## Install the MCP server
+
+To start analyzing web traffic with PostHog MCP, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more detailed instructions and information.
