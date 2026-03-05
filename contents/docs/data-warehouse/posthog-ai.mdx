@@ -1,0 +1,59 @@
+---
+title: PostHog AI for data warehouse
+sidebar: Docs
+showTitle: true
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+[PostHog AI](/docs/posthog-ai) can help you write, debug, and optimize SQL queries for your data warehouse — no SQL expertise required. Just describe what you want in natural language and PostHog AI generates the HogQL query for you.
+
+## What PostHog AI can do
+
+When working with the data warehouse, PostHog AI can:
+
+- **Write SQL queries** from natural language descriptions
+- **Debug queries** that return unexpected results or errors
+- **Optimize slow queries** by suggesting more efficient alternatives
+- **Explain queries** so you understand what existing HogQL does
+- **Join multiple sources** like combining Stripe, HubSpot, or Postgres data with your PostHog events
+
+## How to access
+
+Click the [PostHog AI](https://app.posthog.com/#panel=max) icon in the corner of your screen while in the [SQL editor](https://us.posthog.com/sql) or anywhere in PostHog. PostHog AI automatically detects you're working in the SQL editor and uses your data warehouse schema as context.
+
+You can also add specific insights, dashboards, events, or actions as context using the **Add context** button.
+
+## Example prompts
+
+Try these prompts with PostHog AI:
+
+```
+Write a SQL query to find the top 10 events by count
+```
+
+```
+Join my Stripe charges with PostHog events by user email
+```
+
+```
+Debug this query — it's returning no results
+```
+
+```
+Optimize this slow query
+```
+
+```
+Explain what this HogQL query does
+```
+
+```
+Query my HubSpot contacts and show their PostHog activity
+```
+
+For best results, add your current query or insight as context before asking PostHog AI to debug or optimize it.
+
+## Getting started
+
+If you haven't set up PostHog AI yet, see the [getting started guide](/docs/posthog-ai/start-here) for setup instructions.
