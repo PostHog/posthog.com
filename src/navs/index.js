@@ -2614,16 +2614,19 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Replit integration',
+                            name: 'Platform integrations',
+                        },
+                        {
+                            name: 'Lovable',
+                            url: '/docs/integrations/lovable',
+                        },
+                        {
+                            name: 'Replit',
                             url: '/docs/integrations/replit',
                         },
                         {
-                            name: 'v0 integration',
+                            name: 'v0',
                             url: '/docs/integrations/v0',
-                        },
-                        {
-                            name: 'Lovable integration',
-                            url: '/docs/integrations/lovable',
                         },
                         {
                             name: 'LLM Analytics ↗',
