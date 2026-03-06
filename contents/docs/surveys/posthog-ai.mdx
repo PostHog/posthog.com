@@ -1,0 +1,41 @@
+---
+title: Using PostHog AI with Surveys
+---
+
+[PostHog AI](/docs/posthog-ai) can help you create surveys and analyze responses directly from the chat interface. It has two dedicated survey tools:
+
+- **`analyze_survey_responses`** – Extract themes and actionable insights from your survey response data
+- **`create_survey`** – Create new surveys in seconds from a text description
+
+## What you can do
+
+With PostHog AI and Surveys, you can:
+
+- **Analyze survey responses** – Identify common themes, sentiment patterns, and key takeaways from open-ended and structured responses
+- **Create surveys** – Describe the survey you want and PostHog AI builds it for you, including question types and targeting
+- **Query response data with SQL** – Use PostHog AI to write HogQL queries against your survey response events
+- **Correlate responses with behavior** – Combine survey data with product analytics to understand how responses relate to feature adoption, retention, or conversion
+- **Find users from responses** – Locate session replays or user profiles for respondents who gave specific answers
+
+## Example prompts
+
+Try these prompts with [PostHog AI](https://app.posthog.com/#panel=max):
+
+- [`Create a new survey to collect feedback on pricing`](https://app.posthog.com/#panel=max:!Create%20a%20new%20survey%20to%20collect%20feedback%20on%20pricing)
+- [`Analyze responses from the latest NPS survey`](https://app.posthog.com/#panel=max:!Analyze%20responses%20from%20the%20latest%20NPS%20survey)
+- [`Show me NPS scores broken down by user cohort`](https://app.posthog.com/#panel=max:!Show%20me%20NPS%20scores%20broken%20down%20by%20user%20cohort)
+- [`What are the most common themes in our open-ended survey responses?`](https://app.posthog.com/#panel=max:!What%20are%20the%20most%20common%20themes%20in%20our%20open-ended%20survey%20responses?)
+- [`Find users who gave low NPS scores and show their session replays`](https://app.posthog.com/#panel=max:!Find%20users%20who%20gave%20low%20NPS%20scores%20and%20show%20their%20session%20replays)
+- [`Analyze how survey responses correlate with feature adoption`](https://app.posthog.com/#panel=max:!Analyze%20how%20survey%20responses%20correlate%20with%20feature%20adoption)
+
+## MCP integration
+
+You can also interact with PostHog survey data through the [PostHog MCP server](/docs/model-context-protocol), which enables AI agents in tools like Cursor, Windsurf, and Claude Code to query your PostHog data – including survey responses – using HogQL.
+
+Install the MCP server with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup details.
