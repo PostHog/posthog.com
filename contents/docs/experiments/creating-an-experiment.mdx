@@ -27,7 +27,13 @@ export const ImprovementCalculatorDark = "https://res.cloudinary.com/dmukukwp6/v
 
 To create a new experiment, go to the [A/B testing tab](https://app.posthog.com/experiments) in the PostHog app, and click on the **New experiment** button in the top right.
 
-This presents you with a form where you can complete the details of your new experiment:
+This opens a guided creation wizard that walks you through three steps:
+
+1. **Description** – Name your experiment, write a hypothesis, and set the feature flag key
+2. **Variant rollout** – Configure variants, split percentages, and rollout percentage
+3. **Analytics** – Set inclusion criteria and add metrics to measure impact
+
+You can click through all steps before filling them in. Validation errors appear when you navigate away from a step or change an input. When you're done, click **Save as draft** or **Launch** to finalize.
 
 <ProductScreenshot
     imageLight={CreateExperimentLight} 
@@ -36,23 +42,23 @@ This presents you with a form where you can complete the details of your new exp
     classes="rounded"
 />
 
-Here's a breakdown of each field in the form:
+Here's a breakdown of each step in the wizard:
 
 ## Feature flag key
 
 Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to.
 
-You can use an existing feature flag if it has multiple variants and `'control'` as the first variant. Otherwise, the feature flag will be created for you automatically when the experiment is created.
+By default, the wizard creates a new feature flag for you automatically when the experiment is saved. The flag key is auto-generated from your experiment name, but you can customize it. If you already have a feature flag you'd like to use, click **Select existing flag** to link it instead. The existing flag must have multiple variants with `'control'` as the first variant.
 
 > **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you're using a different third-party library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ## Experiment variants
 
-By default, all experiments have a `control` and `test` variant. You can add more variants if you like. If you need to modify the variants after you've created the experiment, you can do so from the feature flag page.
+By default, all experiments have a `control` and `test` variant. You can add more variants in the **Variant rollout** step of the wizard. Participants are automatically split equally between variants.
 
-Participants are automatically split equally between variants. If you want assign specific users to a specific variant, or generally control the rollout, see the section below on [rollout and release conditions](#rollout-and-release-conditions).
+If you link an existing feature flag, the **Variant rollout** step becomes read-only. You can adjust the flag's variants from the feature flag page after saving the experiment.
 
-The **Traffic preview** shows a visual bar chart of how traffic is distributed across your variants based on your split and rollout percentage. The visualization displays the actual bucketing logic of how users are distributed in a rollout. Specifically, you can see that increasing the rollout percentage does not reassign users to other variants; however, changing the split or adding variants might lead to inconsistent experiences for users.
+The **Traffic preview** shows a visual bar chart of how traffic is distributed across your variants based on your split and rollout percentage. The visualization displays the actual bucketing logic of how users are distributed in a rollout. Increasing the rollout percentage does not reassign users to other variants; however, changing the split or adding variants might lead to inconsistent experiences for users.
 
 ## Participant type
 
@@ -60,7 +66,7 @@ By default, PostHog runs experiments at a user-level. This means that participan
 
 ## Rollout and release conditions
 
-By default, your experiment rolls out to 100% of participants. You can adjust the **Rollout percentage** in the variants panel during experiment creation to limit the percentage of users who are included in the experiment. This is useful when you don't want to expose all users to the experiment.
+By default, your experiment rolls out to 100% of participants. In the **Variant rollout** step of the wizard, you can adjust the **Rollout percentage** to limit the percentage of users included in the experiment. This is useful when you don't want to expose all users to the experiment.
 
 For more advanced release conditions – such as targeting specific user properties, cohorts, or groups – click **Manage distribution** or **Manage release conditions** _after_ saving your experiment as a draft. This modifies the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) for the underlying feature flag.
 
