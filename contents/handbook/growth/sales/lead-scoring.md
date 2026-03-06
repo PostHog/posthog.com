@@ -35,10 +35,14 @@ _Ben experiments to find more winners:_
 
 Campaigns are all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) - these change week-to-week. 
 
+Manual (Lorena):
+1. [Engaged on LinkedIn](https://app.clay.com/workspaces/268768/workbooks/wb_0t9o249G9vVhMBfEZaB)
+2. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
+3. Churned accounts that churned 5+ months ago 
+
+Automated (Abhischek):
 1. [Warmbound](https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2) - $100-499 MRR at some point in the account's history
 2. [Job switchers](https://app.clay.com/workspaces/268768/workbooks/wb_0t97hmjqzXJdsutTGzw/tables/t_0t9bam77eQE4YsqmPSS/views/gv_0t9bam8gorPiig8kgZT)
-3. [Engaged on LinkedIn](https://app.clay.com/workspaces/268768/workbooks/wb_0t9o249G9vVhMBfEZaB)
-4. Closed lost opportunities 4-6 months old where reason was 'unresponsive' (list to be built)
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 
