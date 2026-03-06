@@ -1,0 +1,38 @@
+---
+title: Using PostHog AI with Experiments
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) enables AI agents to create and manage experiments directly from your code editor. Ask your agent to set up A/B tests, configure metrics, and analyze results without switching to the PostHog app.
+
+With MCP, your agents can:
+
+- **Create A/B tests** – Set up experiments with control/test variants and configure rollout percentages.
+- **Define funnel metrics** – Add conversion metrics that measure how variants impact user behavior.
+- **Query experiment results** – Use HogQL to analyze experiment data and get statistical insights.
+- **Manage experiments** – List, inspect, and monitor running experiments in your project.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, and others.
+
+## Example prompts
+
+Try these prompts with your MCP-enabled agent:
+
+- "Create an A/B test for our pricing page that measures conversion to checkout."
+- "Set up an experiment to test the new signup flow against the current one."
+- "What experiments are currently running in my project?"
+- "Analyze the results of the 'homepage-test' experiment."
+- "Create a multivariate experiment with three variants for the onboarding flow."
+
+## Experiment tools
+
+The MCP server provides the `experiment-create` tool for working with experiments:
+
+| Tool | Description |
+|------|-------------|
+| `experiment-create` | Create an experiment with control/test variants and configure funnel metrics to measure conversion. |
+
+You can also use `query-run` to execute HogQL queries against experiment data for custom analysis, and `create-feature-flag` to set up the underlying feature flags that power your experiments.
+
+## Get started
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.
