@@ -23,37 +23,35 @@ To understand local evaluation, it helps to see how **remote evaluation** (the d
 With remote evaluation, your server sends a request to PostHog's `/flags` API every time you check a flag. PostHog looks up all the data it needs — flag definitions, person properties, group properties, and cohort memberships — from its own database, evaluates the flag, and returns the result:
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph your-server ["Your server"]
         app["Your app"]
     end
     subgraph posthog ["PostHog"]
-        api["/flags API"]
         db[("Database")]
+        api["/flags API"]
     end
     app -- "getFeatureFlag('flag-key', 'user-123')" --> api
-    db -- "flag definitions" --> api
-    db -- "person properties" --> api
-    db -- "group properties" --> api
-    db -- "cohort memberships" --> api
+    db -- "flag definitions, person properties,
+    group properties, cohort memberships" --> api
     api -- "true / false / variant" --> app
 ```
 
 With local evaluation, you shift the work to your server. The SDK periodically fetches **flag definitions** from PostHog (the only network call). When you evaluate a flag, the SDK uses those cached definitions along with the **person and group properties that you provide in your code** — no network request at evaluation time:
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph posthog ["PostHog"]
-        api["/local_evaluation API"]
         db[("Database")]
+        api["/local_evaluation API"]
     end
     subgraph your-server ["Your server"]
         sdk["PostHog SDK"]
         app["Your app"]
     end
     db -- "flag definitions" --> api
-    api -- "flag definitions\n(every 30s)" --> sdk
-    app -- "getFeatureFlag('flag-key', 'user-123',\npersonProperties, groupProperties)" --> sdk
+    api -- "flag definitions (every 30s)" --> sdk
+    app -- "personProperties, groupProperties" --> sdk
     sdk -- "true / false / variant" --> app
 ```
 
