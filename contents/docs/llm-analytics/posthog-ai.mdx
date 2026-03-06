@@ -1,0 +1,39 @@
+---
+title: Using PostHog AI to analyze your LLM data
+---
+
+[PostHog AI](/docs/posthog-ai) can query and analyze the LLM data you're capturing with [LLM Analytics](/docs/llm-analytics). Ask questions in natural language and get answers based on your `$ai_generation` events, traces, and spans.
+
+## What you can do
+
+- **Query generation data with SQL** – PostHog AI writes and runs HogQL queries against your LLM events so you don't have to.
+- **Analyze token usage and costs** – Break down [input and output tokens](/docs/llm-analytics/generations) and [costs](/docs/llm-analytics/calculating-costs) across models and providers.
+- **Find slow or expensive generations** – Identify generations with high latency or cost to optimize performance.
+- **Identify error patterns** – Surface [error trends](/docs/llm-analytics/errors) in your LLM calls by model, provider, or time period.
+- **Analyze user feedback** – Explore [user feedback](/docs/llm-analytics/collect-user-feedback) on AI responses to find quality issues.
+
+## Example prompts
+
+Try these prompts in the [PostHog AI chat](https://app.posthog.com/#panel=max):
+
+- [`Show me LLM token usage by model for the last week`](https://app.posthog.com/#panel=max:!Show%20me%20LLM%20token%20usage%20by%20model%20for%20the%20last%20week)
+- [`What's my average cost per LLM generation?`](https://app.posthog.com/#panel=max:!What's%20my%20average%20cost%20per%20LLM%20generation?)
+- [`Find the slowest LLM generations`](https://app.posthog.com/#panel=max:!Find%20the%20slowest%20LLM%20generations)
+- [`Which prompts have the highest error rate?`](https://app.posthog.com/#panel=max:!Which%20prompts%20have%20the%20highest%20error%20rate?)
+- [`Compare latency between GPT-4 and Claude`](https://app.posthog.com/#panel=max:!Compare%20latency%20between%20GPT-4%20and%20Claude)
+- [`Summarize traces for the latest model deployment`](https://app.posthog.com/#panel=max:!Summarize%20traces%20for%20the%20latest%20model%20deployment)
+- [`Create a dashboard showing LLM cost trends over the past 30 days`](https://app.posthog.com/#panel=max:!Create%20a%20dashboard%20showing%20LLM%20cost%20trends%20over%20the%20past%2030%20days)
+
+For more prompt ideas across all PostHog products, see the [PostHog AI example prompts](/docs/posthog-ai/example-prompts) page.
+
+## Use with MCP
+
+You can also analyze your LLM data through the [PostHog MCP server](/docs/model-context-protocol). This lets AI agents in tools like Cursor, Claude Code, and Windsurf query your LLM Analytics data using HogQL – directly from your code editor.
+
+Install the MCP server with:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.
