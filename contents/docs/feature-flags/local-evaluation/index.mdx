@@ -32,8 +32,7 @@ flowchart TD
         api["/flags API"]
     end
     app -- "getFeatureFlag('flag-key', 'user-123')" --> api
-    db -- "flag definitions, person properties,
-    group properties, cohort memberships" --> api
+    db -- "flag definitions, person properties, group properties, cohort memberships" --> api
     api -- "true / false / variant" --> app
 ```
 
