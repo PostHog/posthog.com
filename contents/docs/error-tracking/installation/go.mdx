@@ -36,7 +36,7 @@ import (
 
 func main() {
     client, _ := posthog.NewWithConfig(
-        "<ph_project_api_key>",
+        "<ph_project_token>",
         posthog.Config{
             Endpoint: "<ph_client_api_host>",
         },
@@ -115,7 +115,7 @@ import (
 )
 
 client, _ := posthog.NewWithConfig(
-    "<ph_project_api_key>",
+    "<ph_project_token>",
     posthog.Config{
         Endpoint: "<ph_client_api_host>",
     },

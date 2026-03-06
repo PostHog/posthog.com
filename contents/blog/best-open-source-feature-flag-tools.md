@@ -10,6 +10,7 @@ featuredImage: >-
 featuredImageType: full
 author:
   - andy-vandervell
+  - natalia-amorim
 category: General
 tags:
   - Comparisons
@@ -70,6 +71,8 @@ PostHog's free tier includes 1 million feature flag requests per month. After th
 >
 > PostHog is the best choice if you want feature flags alongside [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [A/B testing](/experiments), and more in a single platform. Its [generous free tier](/pricing) makes it especially appealing for [startups and scaleups](/startups).
 
+<WizardCTA />
+
 ## 2. GrowthBook
 
 ![GrowthBook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/growthbook.png)
@@ -116,7 +119,33 @@ Flagsmith's cloud free plan includes 50,000 requests per month for 1 user and 1 
 >
 > Flagsmith is a solid open-source option for teams that need feature flags with remote configuration and flexible deployment options, including on-premises hosting. Its free cloud tier is limited to a single user, but the self-hosted version has no restrictions.
 
-## 4. Flipt
+## 4. Unleash
+
+![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
+
+### What is Unleash?
+
+**Unleash** is a flag service with a public roadmap and a strong community. Official SDK support is comprehensive and there's a large selection of community maintained SDKs for less popular frameworks, too.
+
+Unleash is particularly popular with privacy-conscious organizations since user data never leaves your infrastructure. You can use it to define targeting rules, gradual rollouts, and custom activation strategies, and it integrates with tools like Jira, [Datadog](/blog/best-datadog-alternatives), Microsoft Teams, and Slack.
+
+### Supported SDKs
+
+- **Client-side:** JavaScript, Android, Flutter, iOS, React, Svelte, Vue.
+
+- **Server-side:** Go, Java, Node.js, PHP, Python, Ruby, Rust, .NET.
+
+- **Community maintained:** Angular, Clojure, C++, ColdBox, Dart, Elixir, Haskell, Laravel, NestJS, React Native, Solid.
+
+### How much does it cost?
+
+Unleash's open-source self-hosted version is free with unlimited feature flags. A self-service Enterprise plan starts at $75 per seat per month with a 5-seat minimum, available as cloud-hosted or self-hosted. Custom Enterprise pricing is available for annual contracts and dedicated support. 
+
+> ### Bottom line
+>
+> Unleash has the largest community and most extensive SDK support of any open-source feature flag tool. Its privacy-first architecture makes it a strong choice for organizations with strict data requirements.
+
+## 5. Flipt
 
 ![flipt](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flipt.png)
 
@@ -134,7 +163,7 @@ Flagsmith's cloud free plan includes 50,000 requests per month for 1 user and 1 
 
 Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 license.
 
-## 5. Flipper
+## 6. Flipper
 
 ![flipper](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/flipper.png)
 
@@ -152,13 +181,13 @@ The open-source gem is free with unlimited flags. Flipper Cloud offers a free pl
 >
 > Flipper is the best feature flag tool for Ruby on Rails teams. Its developer experience is exceptional, and its fixed-price Cloud plans are straightforward. However, it's Ruby-only, which limits its audience.
 
-## 6. FeatBit
+## 7. FeatBit
 
 ![featbit](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/featbit.png)
 
 ### What is FeatBit?
 
-FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like Datadog, Grafana, and Amplitude.
+FeatBit is an open-source feature flag and A/B testing tool that's available in Standard (for small businesses) and Professional (for enterprises) flavors – the Standard edition is easier deploy due to fewer dependencies. It supports custom user segments, rolling out by percentages, and feature flag scheduling. A/B testing data can also be exported to tools like [Datadog](/blog/best-datadog-alternatives), Grafana, and Amplitude.
 
 FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, and OpenTelemetry for observability. It's capable of supporting over 1 million simultaneous online users.
 
@@ -176,7 +205,7 @@ All features are completely free. FeatBit monetizes its platform by offering pre
 >
 > FeatBit is a strong choice for teams that want a feature-rich, self-hosted feature flag tool with no artificial feature gates. Its .NET foundation and enterprise-grade scalability make it appealing for larger organizations, though its community is smaller than the other tools on this list.
 
-## 7. FeatureHub
+## 8. FeatureHub
 
 ![featurehub](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/feature-hub.png)
 
@@ -200,37 +229,11 @@ FeatureHub offers a hosted option in addition to its open-source edition, and bo
 >
 > FeatureHub is a solid, no-frills open-source feature flag tool with a straightforward pricing model. Its smaller community and more limited integrations mean it's best suited for teams that value simplicity and just need the basics done well.
 
-## 8. Unleash
-
-![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
-
-### What is Unleash?
-
-**Unleash** is a flag service with a public roadmap and a strong community. Official SDK support is comprehensive and there's a large selection of community maintained SDKs for less popular frameworks, too.
-
-> **Important note:** Unleash [has deprecated its open-source edition](https://docs.getunleash.io/release-notes), with long-term support starting December 2025 and end-of-life set for **December 31, 2026**. The former Pro plan has also been discontinued. Unleash is transitioning to an Enterprise-only model.
-
-### Supported SDKs
-
-- **Client-side:** JavaScript, Android, Flutter, iOS, React, Svelte, Vue.
-
-- **Server-side:** Go, Java, Node.js, PHP, Python, Ruby, Rust, .NET.
-
-- **Community maintained:** Angular, Clojure, C++, ColdBox, Dart, Elixir, Haskell, Laravel, NestJS, React Native, Solid.
-
-### How much does it cost?
-
-Unleash's open-source self-hosted plan is currently free with unlimited feature flags, but is being deprecated (end-of-life December 2026) and is limited to a single environment. A self-service Enterprise plan starts at $75 per seat per month with a 5-seat minimum, available as cloud-hosted or self-hosted. Custom Enterprise pricing is available for annual contracts and dedicated support.
-
-> ### Bottom line
->
-> Unleash has the largest community and most extensive SDK support of any open-source feature flag tool. However, with its open-source edition being sunsetted, teams choosing Unleash should plan for a future migration or upgrade to the paid Enterprise tier.
-
 ## Which open-source feature flag tool should you choose?
 
 - Want an all-in-one platform that integrates feature flags with product analytics, session replay, A/B testing, error tracking, logs, and more? Go with **PostHog**.
 - Already have a data warehouse and want feature flags combined with powerful experimentation? Choose **GrowthBook**.
-- Need the most extensive SDK support and largest open-source community? **Unleash** is the most established, but be aware its open-source edition is being sunsetted.
+- Need the most extensive SDK support and largest open-source community? **Unleash** is the most established.
 - Need open-source feature flags with remote configuration and on-premises hosting? Try **Flagsmith**.
 - Want a 100% open-source tool with zero paid tiers and Git-native flag management? **Flipt** is for you.
 - Building with Ruby on Rails and want the best developer experience? **Flipper** is purpose-built for your stack.
@@ -247,9 +250,9 @@ We're biased, obviously, but we think you'll love PostHog if:
 - You want tools to ship, track, and analyze new features – like feature flags, A/B testing, analytics, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/feature-flags) and [read our docs](/docs/feature-flags) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -303,3 +306,5 @@ Local evaluation means feature flags are checked locally within your application
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
 - [The benefits of feature flags and how to use them](/product-engineers/feature-flag-benefits-use-cases)
+
+<NewsletterForm />

@@ -19,6 +19,7 @@ export const LOGOS = {
     azureSql: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
     bigquery: 'https://res.cloudinary.com/dmukukwp6/image/upload/bigquery_8546771248.svg',
     bingAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
+    buildBetter: 'https://res.cloudinary.com/dmukukwp6/image/upload/buildbetter_f523cfd0e6.png',
     bubble: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/bubble.svg',
     caddy: 'https://res.cloudinary.com/dmukukwp6/image/upload/caddy_c78a5a013f.svg',
     capacitor: 'https://res.cloudinary.com/dmukukwp6/image/upload/capacitor_e75d2fdcd8.svg',
@@ -62,6 +63,7 @@ export const LOGOS = {
     klaviyo: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
     kubernetes: 'https://res.cloudinary.com/dmukukwp6/image/upload/kubernetes_svgrepo_com_b9716be409.svg',
     langgraph: 'https://res.cloudinary.com/dmukukwp6/image/upload/langgraph_e5fee77551.svg',
+    linear: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',
     laravel:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/laravel.svg',
     linkedinAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/4221chis9yaztef5phd0v3lal_12c6e6b2a1.svg',
@@ -77,6 +79,7 @@ export const LOGOS = {
     mongodb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Mongo_DB_Logo_f095b5aca0.svg',
     mysql: 'https://res.cloudinary.com/dmukukwp6/image/upload/mysql_logo_0ce3cfe493.svg',
     n8n: 'https://res.cloudinary.com/dmukukwp6/image/upload/n8n_color_ce6a4e9c92.svg',
+    nestjs: 'https://res.cloudinary.com/dmukukwp6/image/upload/nestjs_logo_034b054f38.svg',
     netlify: 'https://res.cloudinary.com/dmukukwp6/image/upload/netlify_original_cdea69c2b5.svg',
     nextjs: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg',
     nginx: 'https://res.cloudinary.com/dmukukwp6/image/upload/nginx_icon_872690f0fe.svg',
@@ -103,6 +106,7 @@ export const LOGOS = {
     retool: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/retool.svg',
     rudderstack:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg',
+    pinterestAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pinterest_ads_563b842dc5.png',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
     rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',

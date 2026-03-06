@@ -26,7 +26,7 @@ import Vue from 'vue'
 
 export default function({ app: { router } }, inject) {
   // Init PostHog
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false,

@@ -112,6 +112,13 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
+Sampling is supported on the following SDKs:
+
+- **Web** - posthog-js 1.85.0+
+- **Android** - 3.34.0+
+- **iOS** - 3.42.0+
+- **React Native** - 4.37.0+
+
 <ProductScreenshot
     imageLight={ImgSampleConfigLight} 
     imageDark={ImgSampleConfigDark}
@@ -166,7 +173,7 @@ There are two modes for how minimum duration is enforced, controlled by the `str
 In legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the **total session age**. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   session_recording: {
     strictMinimumDuration: false // +
@@ -188,7 +195,7 @@ In strict mode (`strictMinimumDuration: true`), the minimum duration is checked 
 **Note**: This will become the default behavior in a future release. To opt in now, add to your config:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   session_recording: {
     strictMinimumDuration: true // +
