@@ -217,7 +217,9 @@ When you're ready to continue, click **Resume experiment** to start collecting d
 
 ### Resetting analysis
 
-Resetting analysis clears the experiment's collected data, returning it to a draft state. This doesn't affect the feature flag or variant rollout – it only resets the analysis data.
+Resetting analysis clears the experiment's results and returning it to a draft state. This doesn't affect the feature flag or variant rollout, so variants stay visible to users. It does also not delete any collected data.
+
+Technically speaking it resets the experiment's start and end dates. All events collected thus far will still exist, but won't be applied to the experiment unless you manually change the start date after launching the experiment again.
 
 This is useful when you need to restart data collection, for example after fixing a bug in your experiment setup or changing metric definitions.
 
@@ -230,4 +232,4 @@ Here's how the actions differ:
 | **Running** | Enabled | Multiple variants | Continues | Updating | N/A |
 | **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
 | **Ending** | Modified to roll out chosen variant to all users | Chosen variant | Continues (chosen variant only) | Fixed | No |
-| **Resetting** | Unchanged | Multiple variants | Resets | Cleared | Yes (relaunch) |
+| **Resetting** | Unchanged | Multiple variants | Continues | Cleared | Yes (relaunch) |
