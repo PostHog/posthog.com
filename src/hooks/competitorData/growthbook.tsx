@@ -15,7 +15,7 @@ export const growthbook = {
                 automation: true,
                 boolean_flags: true,
                 early_access_management: false,
-                multivariate_flags: false,
+                multivariate_flags: true,
                 json_payloads: true,
                 release_conditions: false,
             },
@@ -23,8 +23,8 @@ export const growthbook = {
                 features: {
                     local_evaluation: true,
                     bootstrapping: false,
-                    api_access: false,
-                    sdk_support: false,
+                    api_access: true,
+                    sdk_support: true,
                 },
             },
             targeting: {
@@ -32,13 +32,13 @@ export const growthbook = {
                     target_by_percentage: true,
                     target_by_person_properties: true,
                     target_by_cohorts: false,
-                    geographic_targeting: false,
-                    group_targeting: false,
+                    geographic_targeting: true,
+                    group_targeting: true,
                 },
             },
             management: {
                 features: {
-                    approvals: false,
+                    approvals: 'Enterprise',
                     data_source: 'Third-party',
                     flag_administration: false,
                     flag_scheduling: true,
@@ -114,7 +114,7 @@ export const growthbook = {
             },
             implementation: {
                 features: {
-                    api_access: false,
+                    api_access: true,
                     feature_flag_foundation: false,
                     json_payloads: false,
                     multivariate_testing: true,
