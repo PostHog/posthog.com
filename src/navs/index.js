@@ -941,6 +941,14 @@ export const handbookSidebar = [
                         name: 'Team structure and collaboration',
                         url: '/handbook/engineering/ai/team-structure',
                     },
+                    {
+                        name: 'Implementing MCP tools',
+                        url: '/handbook/engineering/ai/implementing-mcp-tools',
+                    },
+                    {
+                        name: 'Writing AI skills',
+                        url: '/handbook/engineering/ai/writing-skills',
+                    },
                 ],
             },
             {
