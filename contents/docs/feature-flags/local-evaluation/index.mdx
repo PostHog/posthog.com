@@ -26,33 +26,26 @@ With remote evaluation, your server sends a request to PostHog's `/flags` API ev
 sequenceDiagram
     participant App as Your app
     participant PH as PostHog
-    App->>PH: getFeatureFlag('flag-key', 'user-123')
-    Note right of PH: Looks up from database:<br/>Flag definitions<br/>Person properties<br/>Group properties<br/>Cohort memberships
+    App->>PH: flag key + user ID
+    Note right of PH: Resolves using stored flag definitions,<br/>person properties, group properties,<br/>and cohort memberships
     PH-->>App: true / false / variant
 ```
 
-Every flag check is a round trip. PostHog already has all the data it needs — flag definitions, person properties, group properties, cohort memberships — so you just pass the flag key and a user ID.
+Every flag check is a round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
 
-With local evaluation, the picture changes. The SDK periodically fetches **flag definitions** from PostHog (the only network call). When you evaluate a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
 
 ```mermaid
 sequenceDiagram
-    participant PH as PostHog
-    participant SDK as PostHog SDK (your server)
     participant App as Your app
-    rect rgba(0, 0, 0, 0.03)
-    Note over PH,SDK: Background sync (every 30s)
-    PH->>SDK: Flag definitions
-    end
-    rect rgba(0, 0, 0, 0.03)
-    Note over SDK,App: Evaluation time (no network call)
-    App->>SDK: flag key + personProperties + groupProperties
-    Note right of SDK: Evaluates using cached<br/>definitions + the properties<br/>you provided
+    participant SDK as PostHog SDK
+    participant PH as PostHog
+    PH-->>SDK: Flag definitions (background, every 30s)
+    App->>SDK: flag key + person properties + group properties
     SDK-->>App: true / false / variant
-    end
 ```
 
-The key tradeoff: with remote evaluation, PostHog already knows everything about your users. With local evaluation, **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
+Notice that PostHog is not involved at evaluation time. The tradeoff: **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
 
 There are 3 steps to enable local evaluation:
 
