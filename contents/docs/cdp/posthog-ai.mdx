@@ -1,0 +1,44 @@
+---
+title: Using PostHog AI with Data Pipelines
+---
+
+[PostHog AI](/docs/posthog-ai) can help you manage and understand your data pipelines. Ask questions in natural language to analyze event flow, debug destination issues, and understand how your transformations are processing data.
+
+## What you can do
+
+- **Query data flowing through pipelines** – Ask PostHog AI to analyze event volumes, identify which events are being sent to which destinations, and spot trends in your data flow.
+- **Understand transformation logic** – Get explanations of how your transformations are filtering or modifying events before they reach destinations.
+- **Debug destination issues** – Investigate why events aren't reaching a specific destination by querying pipeline activity and error logs.
+- **Analyze event volume by destination** – Break down how many events each destination is receiving over a given time period.
+
+## Example prompts
+
+Try these prompts with PostHog AI:
+
+```
+Show me the volume of events sent to each destination this week.
+```
+
+```
+Which transformations are processing the most events?
+```
+
+```
+Help me debug why events aren't reaching my Slack destination.
+```
+
+```
+What events are being filtered out by my transformations?
+```
+
+## Use with MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) enables AI agents in tools like Cursor, Claude Code, and Windsurf to query your PostHog data directly. Your agent can run HogQL queries to analyze pipeline activity, check destination health, and investigate data flow – all without leaving your code editor.
+
+Install the MCP server with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions and the full list of available tools.
