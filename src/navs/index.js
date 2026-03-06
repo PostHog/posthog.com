@@ -4169,6 +4169,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Changing distribution after rollout',
+                    url: '/docs/experiments/changing-distribution-after-rollout',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
                     name: 'Experiments without Feature Flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
