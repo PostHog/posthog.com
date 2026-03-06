@@ -1108,6 +1108,12 @@ export const handbookSidebar = [
             {
                 name: 'IRL Events',
                 url: '/handbook/marketing/events',
+                children: [
+                    {
+                        name: 'Speaker guide',
+                        url: '/handbook/marketing/speaker-guide',
+                    },
+                ],
             },
             {
                 name: 'Influencers',
