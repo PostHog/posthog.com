@@ -1,0 +1,75 @@
+---
+title: Using PostHog AI with Product Analytics
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) gives AI agents direct access to your product analytics data. Query events, build insights, write HogQL, and create dashboards without leaving your code editor.
+
+With MCP, your agents can:
+
+- **Query events and user behavior** – Run trends queries, count unique users, and break down events by properties or time periods.
+- **Create insights programmatically** – Build funnels, retention charts, and lifecycle analyses through natural language.
+- **Write and run HogQL queries** – Execute complex SQL-style queries against your events, persons, and system tables.
+- **Build dashboards** – Assemble dashboards from multiple insights to monitor key metrics.
+- **Analyze funnels, retention, and paths** – Investigate conversion rates, drop-off points, and user journeys.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, and others.
+
+## Example prompts
+
+Try these prompts with your MCP-enabled agent:
+
+### Trends and event analysis
+
+- "How many unique users signed up in the last 7 days, broken down by day?"
+- "Show me the top events by volume this week."
+- "What's the daily active user count for the past 30 days?"
+
+### Funnels and conversions
+
+- "Create a funnel from signup to first purchase."
+- "What's the conversion rate from page view to sign up this month?"
+- "Where are users dropping off between onboarding steps?"
+
+### Retention and lifecycle
+
+- "What's the retention rate for users who signed up last month?"
+- "Show me the lifecycle analysis for the past 8 weeks."
+
+### HogQL queries
+
+- "Write a HogQL query to find users who triggered the signup event but didn't complete onboarding in the last 30 days."
+- "Query the top 10 most active users by event count this week."
+- "What cohorts contain users who completed a purchase in the last 7 days?"
+
+### Dashboards
+
+- "Create a dashboard with daily active users, top events, and signup conversion funnel."
+
+## Analytics tools
+
+The MCP server provides tools for working with your product analytics data:
+
+| Tool | Description |
+|------|-------------|
+| `query-run` | Execute trends, funnels, retention, and other analytics queries. Supports breakdowns, filters, and date ranges. |
+| `query-run` (SQL mode) | Run HogQL queries against events, persons, cohorts, and system tables for advanced analysis. |
+
+A typical workflow:
+
+1. Ask your agent a product question in natural language.
+2. The agent uses `query-run` to execute the appropriate query type.
+3. Results are returned directly in your MCP client for review.
+
+## Install the MCP server
+
+To start using PostHog AI with Product Analytics, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for detailed instructions and the full list of available tools.
