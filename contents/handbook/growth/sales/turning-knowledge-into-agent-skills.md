@@ -60,15 +60,15 @@ Your handbook contributions can become skills that:
 
 ## The Wizard and how it helps customers
 
-The Wizard is agentic software that runs on our docs. When you write something down, the Wizard can execute it as a skill – it's like turning documentation into executable code.
-
-The [AI Wizard](/handbook/docs-and-wizard/developing-the-wizard) is a one-line `npx` command that runs an agent to integrate PostHog:
+The [AI Wizard](/docs/ai-engineering/ai-wizard) is a one-line `npx` command that runs an agent to integrate PostHog:
 
 ```bash
 npx -y @posthog/wizard@latest
 ```
 
 Here's what it does automatically:
+
+- Instruments multiple products like Product Analytics, Web Analytics, Session Replay, Error Tracking, and [others]((/docs/ai-engineering/ai-wizard))
 - Installs the right SDKs for their stack
 - Scans their codebase to understand their product
 - Creates 10-15 custom events based on product flows it identifies
@@ -77,16 +77,11 @@ Here's what it does automatically:
 
 This dramatically reduces manual integration work – what might take 3-5 hours happens in minutes. And it produces customized code tailored to each customer's setup.
 
-### Products supported today
+The Wizard is agentic software that runs on our docs. When you write something down, the Wizard can execute it as a skill – it's like turning documentation into executable code.
 
-- Product Analytics
-- Web Analytics
-- Session Replay
-- Error Tracking
-- LLM Analytics
-- Logs
+So ask yourself: if an agent can read, analyze, and understand a user's codebase, what else could it  discover or build to help the user get value from PostHog faster? 
 
-Coming soon: Feature Flags and Experiments.
+Those answers can become Wizard skills – and new ways of creating customers. 
 
 ## How this helps you help customers
 
