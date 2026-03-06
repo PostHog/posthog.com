@@ -1,0 +1,52 @@
+---
+title: Using PostHog AI with Feature Flags
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) enables AI agents to create, manage, and analyze [Feature Flags](/docs/feature-flags) directly from your code editor. Ask your agent to set up rollouts, create multivariate flags, or query flag configurations without switching to the PostHog app.
+
+With MCP, your agents can:
+
+- **Create feature flags** – Set up boolean or multivariate flags with specific rollout percentages
+- **List and inspect flags** – View all flags in your project with their current configurations
+- **Update flag settings** – Modify rollout percentages, add conditions, or disable flags
+- **Query flag data** – Run SQL queries against the `system.feature_flags` table to analyze flag configurations
+- **Manage rollouts** – Enable, disable, or adjust flags as part of your development workflow
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, and others.
+
+## Example prompts
+
+Try these prompts with your MCP-enabled agent:
+
+```
+- Create a feature flag called 'new-checkout-flow' that's enabled for 20% of users.
+- Create a multivariate feature flag called 'homepage-hero-test' with three variants: control at 34%, variant_a at 33%, and variant_b at 33%.
+- List all feature flags in my project.
+- Query my feature flags to find all flags that are rolled out to less than 50% of users.
+- Disable the 'beta-feature' flag.
+```
+
+## Feature flag tools
+
+The MCP server provides tools for managing Feature Flags:
+
+| Tool | Description |
+|------|-------------|
+| `create-feature-flag` | Create a new feature flag with a key, rollout percentage, and optional multivariate configuration. Variant rollout percentages must be integers that sum to 100. |
+| `list-feature-flags` | List existing feature flags in your project with their current status and configuration. |
+| `update-feature-flag` | Modify an existing flag's rollout percentage, conditions, or enabled state. |
+| `query-run` | Execute SQL queries against `system.feature_flags` to analyze flag configurations programmatically. |
+
+## Get started
+
+To start managing Feature Flags with PostHog MCP, install the MCP server in your preferred MCP client.
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server documentation](/docs/model-context-protocol) for detailed instructions.
