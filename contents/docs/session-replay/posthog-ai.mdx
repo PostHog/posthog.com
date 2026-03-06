@@ -1,0 +1,56 @@
+---
+title: Using PostHog AI with Session Replay
+---
+
+import { IconSparkles } from '@posthog/icons'
+
+[PostHog AI](/docs/posthog-ai) helps you get more out of [Session Replay](/docs/session-replay) by summarizing recordings, finding relevant sessions, and identifying user behavior patterns – without watching every replay yourself.
+
+## Session summaries
+
+PostHog AI can summarize your session recordings, categorizing them by behavior patterns and generating a report for you to review.
+
+Open the [in-app chat](/docs/posthog-ai/platform-and-chat-ui) and ask PostHog AI to summarize your recordings. It picks up on any filters you've applied to the session recording list and uses them as context.
+
+See the [session summaries documentation](/docs/posthog-ai/session-summaries) for a full walkthrough.
+
+## Find relevant sessions
+
+You can ask PostHog AI to search for sessions matching specific criteria. Click the <span className="inline-block"><IconSparkles className="h-4 w-4" /> </span> icon next to the session recording filters to get started.
+
+For example, you can ask PostHog AI to:
+
+- Find sessions where users experienced errors
+- Show sessions where users rage-clicked
+- Surface sessions from users who signed up but didn't complete onboarding
+- Find sessions where users visited the pricing page but didn't convert
+
+PostHog AI translates your request into the appropriate filters and returns matching recordings.
+
+## Analyze user behavior
+
+Beyond finding individual sessions, PostHog AI can identify patterns across multiple recordings. Try prompts like:
+
+- "Summarize what happened in this session"
+- "What are the common behaviors in sessions where users churned?"
+- "How do users in my experiment's control group behave differently from the test group?"
+
+You can also summarize session replays directly from the [Experiments](/docs/experiments) interface to understand how users in different variants behave.
+
+## Example prompts
+
+Here are some prompts to get started:
+
+```
+Find sessions where users experienced errors on the checkout page.
+Show me sessions where users rage-clicked in the last 7 days.
+Summarize what happened in this session.
+Find sessions from users who signed up but didn't complete onboarding.
+What patterns do you see in sessions from users who converted?
+```
+
+## Use with MCP
+
+If you use the [PostHog MCP server](/docs/model-context-protocol), your AI coding agents can query session recordings directly. This enables workflows like investigating user-reported bugs by pulling up relevant sessions from your code editor.
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.
