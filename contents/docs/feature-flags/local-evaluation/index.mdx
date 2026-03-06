@@ -23,38 +23,36 @@ To understand local evaluation, it helps to see how **remote evaluation** (the d
 With remote evaluation, your server sends a request to PostHog's `/flags` API every time you check a flag. PostHog looks up all the data it needs — flag definitions, person properties, group properties, and cohort memberships — from its own database, evaluates the flag, and returns the result:
 
 ```mermaid
-flowchart TD
-    subgraph your-server ["Your server"]
-        app["Your app"]
-    end
-    subgraph posthog ["PostHog"]
-        db[("Database")]
-        api["/flags API"]
-    end
-    app -- "getFeatureFlag('flag-key', 'user-123')" --> api
-    db -- "flag definitions, person properties, group properties, cohort memberships" --> api
-    api -- "true / false / variant" --> app
+sequenceDiagram
+    participant App as Your app
+    participant PH as PostHog
+    App->>PH: getFeatureFlag('flag-key', 'user-123')
+    Note right of PH: Looks up from database:<br/>Flag definitions<br/>Person properties<br/>Group properties<br/>Cohort memberships
+    PH-->>App: true / false / variant
 ```
 
-With local evaluation, you shift the work to your server. The SDK periodically fetches **flag definitions** from PostHog (the only network call). When you evaluate a flag, the SDK uses those cached definitions along with the **person and group properties that you provide in your code** — no network request at evaluation time:
+Every flag check is a round trip. PostHog already has all the data it needs — flag definitions, person properties, group properties, cohort memberships — so you just pass the flag key and a user ID.
+
+With local evaluation, the picture changes. The SDK periodically fetches **flag definitions** from PostHog (the only network call). When you evaluate a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
 
 ```mermaid
-flowchart TD
-    subgraph posthog ["PostHog"]
-        db[("Database")]
-        api["/local_evaluation API"]
+sequenceDiagram
+    participant PH as PostHog
+    participant SDK as PostHog SDK (your server)
+    participant App as Your app
+    rect rgba(0, 0, 0, 0.03)
+    Note over PH,SDK: Background sync (every 30s)
+    PH->>SDK: Flag definitions
     end
-    subgraph your-server ["Your server"]
-        sdk["PostHog SDK"]
-        app["Your app"]
+    rect rgba(0, 0, 0, 0.03)
+    Note over SDK,App: Evaluation time (no network call)
+    App->>SDK: flag key + personProperties + groupProperties
+    Note right of SDK: Evaluates using cached<br/>definitions + the properties<br/>you provided
+    SDK-->>App: true / false / variant
     end
-    db -- "flag definitions" --> api
-    api -- "flag definitions (every 30s)" --> sdk
-    app -- "personProperties, groupProperties" --> sdk
-    sdk -- "true / false / variant" --> app
 ```
 
-The key difference: with remote evaluation, PostHog already has all the data it needs. With local evaluation, **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
+The key tradeoff: with remote evaluation, PostHog already knows everything about your users. With local evaluation, **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
 
 There are 3 steps to enable local evaluation:
 
