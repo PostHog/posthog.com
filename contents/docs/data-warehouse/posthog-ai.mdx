@@ -1,0 +1,27 @@
+---
+title: Using PostHog AI with Data Warehouse
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) gives AI agents direct access to your data warehouse. Ask your agent to write and run HogQL queries, join external sources with PostHog data, and build insights – all without leaving your code editor.
+
+With MCP, your agents can:
+
+- **Write and execute HogQL queries** – Query any table in your data warehouse, including [linked external sources](/docs/data-warehouse/sources) like Stripe, HubSpot, Postgres, and more.
+- **Join PostHog events with external data** – Combine product analytics with revenue, CRM, or operational data in a single query.
+- **Create and query views** – Build reusable [views](/docs/data-warehouse/views) that combine data from multiple sources.
+- **Build SQL-based insights** – Generate visualizations from query results and save them to dashboards.
+
+## Example prompts
+
+Try these prompts with your MCP-enabled agent:
+
+- "Write a HogQL query to join user events with Stripe payment data."
+- "Show me users who signed up but haven't made a purchase, joined with their HubSpot contact info."
+- "Query my Postgres database for users created this week."
+- "Create a view that combines product usage with revenue data."
+- "What cohorts contain users who made a purchase in the last week?"
+- "Find the top 10 customers by event count and join with their Stripe subscription status."
+
+## Get started
+
+See the [MCP server documentation](/docs/model-context-protocol) for setup instructions.
