@@ -1669,6 +1669,10 @@ export const handbookSidebar = [
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
+                    {
+                        name: 'Turning knowledge into agent skills',
+                        url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
+                    },
                 ],
             },
             {
