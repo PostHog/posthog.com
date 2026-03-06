@@ -133,8 +133,8 @@ posthog.setPersonPropertiesForFlags({
 
 PostHog enforces per-team limits on feature flags to protect against memory issues during flag evaluation and caching. If you hit a limit, you'll see one of these errors:
 
-- **Flag count limit** - Each team can have a maximum of 2,000 active (non-deleted) feature flags. This limit is only enforced when creating new flags, not when updating existing ones.
-- **Filter size limit** - A single flag's filter configuration can't exceed 512KB. This limit is enforced on both create and update.
+- **Flag count limit** – Each team can have a maximum of 2,000 active (non-deleted) feature flags. This limit is only enforced when creating new flags, not when updating existing ones.
+- **Filter size limit** – A single flag's filter configuration can't exceed 512KB. This limit is enforced on both create and update.
 
 To free up capacity, [delete unused feature flags](https://app.posthog.com/feature_flags) that are no longer needed.
 
