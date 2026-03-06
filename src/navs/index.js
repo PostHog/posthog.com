@@ -1655,8 +1655,8 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/metabase-account-analysis',
                     },
                     {
-                        name: 'Contributing to docs',
-                        url: '/handbook/growth/sales/contributing-to-docs',
+                        name: 'Turning knowledge into agent skills',
+                        url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
                 ],
             },
