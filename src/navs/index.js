@@ -2622,6 +2622,10 @@ export const docsMenu = {
                             url: '/docs/integrations/v0',
                         },
                         {
+                            name: 'Lovable integration',
+                            url: '/docs/integrations/lovable',
+                        },
+                        {
                             name: 'LLM Analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
