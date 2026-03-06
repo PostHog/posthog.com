@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-When things break, we need to make sure users know what's happening and feel supported through it. This page covers how the support team handles incidents - what we do, when we do it, and how we stay aligned with [engineering](https://posthog.com/handbook/engineering/operations/incidents), [marketing](https://posthog.com/handbook/growth/marketing/incident-comms), and [sales](https://posthog.com/handbook/growth/sales/communications-templates-incidents).
+When things break, we need to make sure users know what's happening and feel supported through it. This page covers how the support team handles incidents - what we do, when we do it, and how we stay aligned with [engineering](https://posthog.com/handbook/engineering/operations/incidents), [marketing](https://posthog.com/handbook/marketing/incident-comms), and [sales](https://posthog.com/handbook/growth/sales/communications-templates-incidents).
 
 ## Raising an incident
 
@@ -132,7 +132,7 @@ You don't need to copy every single update from the incident channel. Just share
 
 ## Working with the Comms Lead
 
-For an incident that requires external comms, Marketing will appoint a [Comms Lead](https://posthog.com/handbook/growth/marketing/incident-comms). They own external communication strategy. We don't.
+For an incident that requires external comms, Marketing will appoint a [Comms Lead](https://posthog.com/handbook/marketing/incident-comms). They own external communication strategy. We don't.
 
 As the support team member watching the incident, you should coordinate with the Comms Lead:
 - Coordinate on macro creation (see 'Creating a macro for the incident' above)

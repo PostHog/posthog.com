@@ -69,7 +69,7 @@ Our typical monthly marketing spend looks like this:
 
 - The 50-50 split is coincidental. 
 
-If you want to learn more about how we implement these things in practice at PostHog, it’s all in our [public handbook](/handbook/growth/marketing). 
+If you want to learn more about how we implement these things in practice at PostHog, it’s all in our [public handbook](/handbook/marketing). 
 
 ## Going deeper on paid ads
 
@@ -113,6 +113,6 @@ Let me know!
 
 - Make sure you're covering [all your marketing bases](/blog/dev-marketing-for-startups).
 - Read about [how our marketing team uses PostHog](/blog/posthog-marketing).
-- Check out [PostHog’s marketing handbook](/handbook/growth/marketing) – and copy it if you want to!
+- Check out [PostHog’s marketing handbook](/handbook/marketing) – and copy it if you want to!
 
 <NewsletterForm />

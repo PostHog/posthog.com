@@ -8,7 +8,7 @@ showTitle: true
 
 We did 45 events in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
-Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
+Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
 
 The event formats we prefer (and organize ourselves) fall into one of these:
 
