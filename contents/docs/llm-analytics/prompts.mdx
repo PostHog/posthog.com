@@ -197,10 +197,8 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 
 - **Default TTL**: 5 minutes (300 seconds)
 - **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
-- **Version-aware caching**: Latest prompts and version-pinned prompts are cached separately
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
-- **Manual cache clearing**: Use `clear_cache()` / `clearCache()` to clear all cached prompts, `clear_cache(name)` / `clearCache(name)` to clear all cached versions for one prompt, or `clear_cache(name, version=2)` / `clearCache(name, 2)` to clear one cached version. Passing a version without a prompt name raises an error.
 
 ## Linking prompts to traces
 
