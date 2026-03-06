@@ -181,7 +181,7 @@ To confirm your workflow is delivering messages, look for these signs:
 | Issue | Solution |
 | --- | --- |
 | Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
-| Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
+| Spam folder issues? | Ensure SPF/DKIM/DMARC records are properly configured. DMARC will show as pending in PostHog since automatic verification is not available. |
 | Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
 
 </Step>
