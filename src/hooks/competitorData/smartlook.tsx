@@ -66,7 +66,7 @@ export const smartlook = {
             },
             analysis: {
                 features: {
-                    performance_monitoring: false,
+                    performance_monitoring: true,
                     network_monitor: true,
                 },
             },
@@ -129,7 +129,7 @@ export const smartlook = {
         },
         integrations: {
             exports: true,
-            imports: true,
+            imports: false,
         },
         security: {
             gdpr_ready: true,

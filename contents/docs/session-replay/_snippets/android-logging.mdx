@@ -6,6 +6,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     // Default is false.
     sessionReplay = true
     // Capture logs automatically. Default is true.
+    // Remote configuration via project settings requires SDK version 3.32.0 or higher.
     sessionReplayConfig.captureLogcat = true
     ...
 }
