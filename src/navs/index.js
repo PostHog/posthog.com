@@ -4346,6 +4346,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/go',
                         },
                         {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/installation/ios',
+                        },
+                        {
                             name: 'React Native',
                             url: '/docs/error-tracking/installation/react-native',
                         },
