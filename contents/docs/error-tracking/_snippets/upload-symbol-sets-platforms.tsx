@@ -51,7 +51,7 @@ const UploadSymbolSetsPlatforms = () => {
         {
             label: 'iOS',
             url: '/docs/error-tracking/upload-source-maps/ios',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/apple.svg',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
         },
         {
             label: 'Rollup',

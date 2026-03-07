@@ -115,14 +115,55 @@ POSTHOG_INCLUDE_SOURCE=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 
 Build your app in Xcode. The dSYM upload script will automatically run and upload symbols to PostHog.
 
-Check the build log output for confirmation:
+Check the build log output for confirmation.
 
+</Step>
+
+<Step title="Force a test crash" badge="optional">
+
+To verify everything is working end-to-end, force a test crash and confirm it appears in PostHog.
+
+1. Add a crash trigger button to your app:
+
+<MultiLanguage>
+
+```swift file=SwiftUI
+Button("Test Crash") {
+    fatalError("PostHog test crash")
+}
 ```
-Running script '[CP User] Upload PostHog symbols'
-Found 3 dSYM bundles in /path/to/build/dSYMs
-Uploading MyApp.app.dSYM (UUID: 12345678-1234-1234-1234-123456789012)...
-✓ Successfully uploaded symbols
+
+```swift file=UIKit
+let button = UIButton(type: .system)
+button.setTitle("Test Crash", for: .normal)
+button.addTarget(self, action: #selector(testCrash), for: .touchUpInside)
+view.addSubview(button)
+
+@objc func testCrash() {
+    fatalError("PostHog test crash")
+}
 ```
+
+</MultiLanguage>
+
+2. Build and run your app in Xcode, 
+    - Make sure the debugger is not attached, since it will intercept the crash and prevent the report from being collected. You can: 
+        - Detach the debugger (click the stop button in Xcode) and run the app directly from the device/simulator home screen
+        - Or uncheck "Debug executable" in the scheme settings before running
+
+3. Reopen the app from your device or simulator's home screen (not from Xcode).
+
+4. Tap the **Test Crash** button. The app will crash. The exception is collected but **not yet sent** to PostHog.
+
+5. Reopen the app once more. This triggers the SDK to send the previously collected crash report to PostHog.
+
+6. Check the [error tracking dashboard](https://us.posthog.com/error_tracking) for your test crash.
+
+<CalloutBox icon="IconInfo" type="info">
+
+Remove the crash trigger button before shipping to production.
+
+</CalloutBox>
 
 </Step>
 
@@ -132,7 +173,7 @@ Uploading MyApp.app.dSYM (UUID: 12345678-1234-1234-1234-123456789012)...
 
 ## Troubleshooting
 
-### Script fails with "posthog-cli not found"
+### Script fails with "error: posthog-cli not found"
 
 Install the CLI using one of these methods:
 
