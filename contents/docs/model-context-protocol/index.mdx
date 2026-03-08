@@ -8,15 +8,17 @@ import WindsurfSnippet from "./_snippets/windsurf.mdx"
 import VSCodeSnippet from "./_snippets/vscode.mdx"
 import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
 import ZedSnippet from "./_snippets/zed.mdx"
+import CodexSnippet from "./_snippets/codex.mdx"
 import ReplitSnippet from "./_snippets/replit.mdx"
 import MCPTools from '../../../src/components/Docs/MCPTools'
 import V0Snippet from "./_snippets/v0.mdx"
+import LovableSnippet from "./_snippets/lovable.mdx"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
 
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **VS Code** and **Zed**.
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code** and **Zed**.
 
 ```bash
 npx @posthog/wizard mcp add
@@ -28,14 +30,16 @@ We're working on adding more supported tools to the wizard. If you're using anot
 
 Add the MCP configuration to your client. When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
 
-<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit', 'v0']}>
+<Tab.Group tabs={['claude-code', 'claude-desktop', 'codex', 'cursor', 'windsurf', 'vscode', 'zed', 'lovable', 'replit', 'v0']}>
     <Tab.List>
         <Tab>Claude Code</Tab>
         <Tab>Claude Desktop</Tab>
+        <Tab>Codex</Tab>
         <Tab>Cursor</Tab>
         <Tab>Windsurf</Tab>
         <Tab>VS Code</Tab>
         <Tab>Zed</Tab>
+        <Tab>Lovable</Tab>
         <Tab>Replit</Tab>
         <Tab>v0</Tab>
     </Tab.List>
@@ -45,6 +49,9 @@ Add the MCP configuration to your client. When you first use the MCP server, you
         </Tab.Panel>
         <Tab.Panel>
             <ClaudeDesktopSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <CodexSnippet />
         </Tab.Panel>
         <Tab.Panel>
             <CursorSnippet />
@@ -57,6 +64,9 @@ Add the MCP configuration to your client. When you first use the MCP server, you
         </Tab.Panel>
         <Tab.Panel>
             <ZedSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LovableSnippet />
         </Tab.Panel>
         <Tab.Panel>
             <ReplitSnippet />
@@ -199,6 +209,24 @@ The agent will use the `list-errors` tool to fetch error groups sorted by occurr
 
 The agent will use `logs-query` to search for logs filtered by severity level and service name, returning log entries with timestamps, messages, and trace information.
 
+### Prompt management
+
+**Prompt:** "List all prompts stored in my project"
+
+The agent will use the `prompt-list` tool to retrieve all team prompts and return a summary with names, versions, and timestamps.
+
+**Prompt:** "Create a prompt called 'code-reviewer' with instructions for reviewing pull requests"
+
+The agent will use the `prompt-create` tool to create a new prompt with the specified name and content, making it available for use across all MCP-connected agents in your team.
+
+**Prompt:** "Get the latest version of my 'support-assistant' prompt"
+
+The agent will use the `prompt-get` tool to retrieve the full prompt content by name. You can also request a specific version if needed.
+
+**Prompt:** "Update the 'onboarding-guide' prompt to include a section about feature flags"
+
+The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
@@ -209,12 +237,13 @@ Currently we support Next.js, with more frameworks in progress.
 
 - **Privacy Policy:** [posthog.com/privacy](/privacy)
 - **Terms of Service:** [posthog.com/terms](/terms)
-- **Support:** [posthog.com/questions](/questions) or email support@posthog.com
+- **Support:** [posthog.com/questions](/questions) or [in-app support](https://app.posthog.com/home#supportModal)
 
 The MCP server acts as a proxy to your PostHog instance. It does not store your analytics data - all queries are executed against your PostHog project and results are returned directly to your AI client.
 
 ## Next steps
 
+- [Lovable integration](/docs/integrations/lovable): Set up PostHog in your Lovable project
 - [Replit integration](/docs/integrations/replit): Set up PostHog with Replit Agent
 - [v0 integration](/docs/integrations/v0): Set up PostHog with v0 and the Vercel Flags SDK
 - [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp): Check out GitHub repository for the MCP server

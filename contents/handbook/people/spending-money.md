@@ -193,4 +193,4 @@ Individual software is down to your personal preference, and we encourage you to
 - If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill. At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
 
 ### Sponsorships
-If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/growth/marketing/open-source-sponsorship).
+If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).

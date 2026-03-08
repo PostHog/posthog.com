@@ -19,7 +19,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Magda](/community/profiles/33065), who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g., schedules, family time, etc.).
 - Setup relevant [tools](/handbook/growth/sales/sales-and-cs-tools) and check out [tools](https://posthog.com/handbook/onboarding/onboarding-team#tooling) specific for the Onboarding team.
-  - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
+  - Integrate Gmail with Salesforce and Vitally to enable centralized communication history.
 - If you start on a Monday, join your first PostHog All Hands (at 4.30 pm UK/8.30 am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Onboarding standup.
   - We fill in a GitHub issue every week before this meeting, so we are prepared for the discussion topics. Magda will add your GitHub handle to the template.

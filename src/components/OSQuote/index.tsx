@@ -40,7 +40,7 @@ export const OSQuote: React.FC<OSQuoteProps> = ({ customer, author, product, quo
                         <CloudinaryImage
                             src={authorData.image.thumb as `https://res.cloudinary.com/${string}`}
                             alt={authorData.name}
-                            className="size-12"
+                            imgClassName="size-12 object-cover object-center"
                         />
                     </div>
                 </div>
