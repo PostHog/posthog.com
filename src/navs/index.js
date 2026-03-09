@@ -1106,7 +1106,7 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'IRL Events',
+                name: 'Events (IRL)',
                 url: '/handbook/marketing/events',
                 children: [
                     {
