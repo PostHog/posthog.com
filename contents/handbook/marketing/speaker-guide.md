@@ -114,7 +114,7 @@ If you receive a question that you believe is off-topic or unfitting for the set
 
 ## **9. After the talk**
 
-* **Expresss an willingness to keep the conversation going** - by letting the audience know that you (and any other team members in the room) are sticking around to chat more.
+* **Express an willingness to keep the conversation going** - by letting the audience know that you (and any other team members in the room) are sticking around to chat more.
 * **Write down the questions you couldn't answer** — do this right away so you don't forget and can focus on interacting with attendees the remainder of the event.
 * **Tell the marketing team** — a 2-line Slack in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
 * **Share your slides** — Share them on social, QR code, email, path of least resistance. Don't make people hunt.
