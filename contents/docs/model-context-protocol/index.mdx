@@ -175,6 +175,16 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
 
+### Path analysis
+
+**Prompt:** "What are the most common paths users take after signing up?"
+
+The agent will use the `query-run` tool with a PathsQuery to analyze user journeys, returning the flow of events users follow after signup.
+
+**Prompt:** "Show me the navigation paths from the pricing page to checkout"
+
+The agent will execute a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take.
+
 ### SQL and HogQL queries
 
 Your AI agent can execute complex HogQL queries to analyze both system data and analytics data in PostHog.
