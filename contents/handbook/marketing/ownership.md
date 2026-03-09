@@ -55,7 +55,7 @@ Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug
 
 If it's an [influencer](/handbook/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
 
-If it's an event, speak to <TeamMember name="Daniel Zaltsman" />.
+If it's an event, speak to <SmallTeam slug="irl-events" />.
 </details>
 
 <details>
