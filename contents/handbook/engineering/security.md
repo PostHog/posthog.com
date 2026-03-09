@@ -14,7 +14,46 @@ Generate a new key reserved only for use with GitHub. The key should be generate
 
 ### Commit signing
 
-A git commit's `Author` field is completely user controllable and can be forged. Signing your commits allows others to verify their authenticity. Generate your signing key with [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/git-commit-signing/).
+A git commit's `Author` field is completely user controllable and can be forged. Signing your commits cryptographically proves you authored them, preventing impersonation and confusion.
+
+You can sign commits with either [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/git-commit-signing/). We have a slight preference for Secretive because it stores your key in the macOS Secure Enclave, ensuring the key can never be exported or extracted, even by malware.
+
+#### Setting up with Secretive
+
+1. Open Secretive, then go to **Secretive > Integrations** in the menu bar.
+2. Click **Git Signing** and enter your PostHog email. This should be the same email as your git config — run `git config user.email` to check.
+3. Copy and paste the config snippets Secretive provides into the files it specifies. If you already have content in `~/.gitconfig`, merge the new sections into the existing file rather than replacing it.
+4. Select your shell on the left side of Secretive and set the `SSH_AUTH_SOCK` environment variable as instructed. For zsh, add the following to your `~/.zshrc`:
+
+   ```bash
+   export SSH_AUTH_SOCK=/Users/<your-username>/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+   ```
+
+   Then run `source ~/.zshrc` to apply it.
+
+5. Your `~/.gitconfig` now has a `signingkey` pointing to a file. Copy your public key to the clipboard:
+
+   ```bash
+   cat <path-from-signingkey> | pbcopy
+   ```
+
+6. Go to your [GitHub SSH keys settings](https://github.com/settings/keys) and add a new SSH key. Paste your public key and set the key type to **Signing Key**.
+7. Test it by creating an empty commit on a new branch:
+
+   ```bash
+   git commit --allow-empty -m "test signing"
+   ```
+
+   Push the branch to GitHub — you should see a green **Verified** badge on the commit.
+
+   ![Signed commit](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/signed_commit_ea0c0b0cb0.png)
+
+
+#### Setting up with 1Password
+
+Follow the [1Password git commit signing guide](https://developer.1password.com/docs/ssh/git-commit-signing/).
+
+#### After setup
 
 Once commit signing is configured, enable the option in your [GitHub Profile](https://github.com/settings/keys) to "Flag unsigned commits as unverified".
 
