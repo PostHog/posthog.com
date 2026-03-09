@@ -121,9 +121,9 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 3. Inform them they can take advantage of this offer, which allows them to:
    - purchase credits equivalent to ~12 months of usage (expiring 12 months after the contract start date), and
    - receive ~2 months of additional usage for free, applied before the contract start date.
-7. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of <amount> (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with an expiration 12 months from the start date."
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with an expiration 12 months from the start date."
 
 For contracting purposes, these free credits should be applied before the contract term. Adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
 
