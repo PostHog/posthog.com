@@ -7,6 +7,7 @@ import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import OSButton from 'components/OSButton'
 import OSTable from 'components/OSTable'
+import TeamMember from 'components/TeamMember'
 import { useApp } from '../context/App'
 
 const SmallTeamsPage = () => {
@@ -34,6 +35,13 @@ const SmallTeamsPage = () => {
                                 firstName
                                 lastName
                                 color
+                                leadTeams {
+                                    data {
+                                        attributes {
+                                            name
+                                        }
+                                    }
+                                }
                                 avatar {
                                     data {
                                         attributes {
@@ -118,14 +126,14 @@ const SmallTeamsPage = () => {
 
     // Create table rows
     const tableRows = sortedTeams.map((team: any, index: number) => {
-        // Find the lead profile by matching IDs
-        const leadId = team.leadProfiles?.data?.[0]?.id
-        const leadProfile = leadId ? team.profiles?.data?.find((profile: any) => profile.id === leadId) : null
+        // Find the lead profile by matching leadTeams to the team name
+        const leadProfile = team.profiles?.data?.find((profile: any) => {
+            const leadTeams = profile.attributes?.leadTeams?.data || []
+            return leadTeams.some((t: any) => t.attributes?.name === team.name)
+        })
         const leadName = leadProfile
             ? `${leadProfile.attributes?.firstName || ''} ${leadProfile.attributes?.lastName || ''}`.trim()
             : 'No lead'
-        const leadAvatar = leadProfile?.attributes?.avatar?.data?.attributes?.url
-        const leadColor = leadProfile?.attributes?.color
 
         return {
             key: team.id,
@@ -171,31 +179,7 @@ const SmallTeamsPage = () => {
                 },
                 {
                     content: leadProfile ? (
-                        <Link
-                            to={`/community/profiles/${leadProfile.id}`}
-                            className="flex items-center gap-2"
-                            state={{ newWindow: true }}
-                        >
-                            {leadAvatar ? (
-                                <img
-                                    src={leadAvatar}
-                                    alt={leadName}
-                                    className={`size-8 rounded-full border border-primary object-cover bg-${
-                                        leadColor ?? 'accent dark:bg-accent-dark'
-                                    }`}
-                                />
-                            ) : (
-                                <div
-                                    className={`size-8 rounded-full border border-primary flex items-center justify-center text-xs font-bold bg-${
-                                        leadColor ?? 'accent dark:bg-accent-dark'
-                                    }`}
-                                >
-                                    {leadProfile.attributes?.firstName?.[0]}
-                                    {leadProfile.attributes?.lastName?.[0]}
-                                </div>
-                            )}
-                            <span className="text-sm">{leadName}</span>
-                        </Link>
+                        <TeamMember name={leadName} photo />
                     ) : (
                         <span className="text-sm text-muted">—</span>
                     ),
@@ -208,7 +192,7 @@ const SmallTeamsPage = () => {
         value: '/small-teams',
         content: (
             <div className={`mt-6 px-4 ${websiteMode ? '' : 'max-w-screen-lg mx-auto'}`}>
-                <section data-scheme="primary" className="bg-primary">
+                <section data-scheme="primary" className="bg-primary pb-24">
                     <div className="mb-8">
                         <h1>Small teams</h1>
                         <p className="mt-0">
