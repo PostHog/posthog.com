@@ -66,7 +66,7 @@ Put real effort into this first step. Defining the "what, why and how" of an eve
 
 ### Getting support
 
-**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically fals in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagament. 
+**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically falls in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagement. 
 
 **Speakers:** Want a speaker in our ecosystem ([team PostHog](/people), customers, partners)? We’ll try our best. When considering speakers for your events try to avoid:
 
@@ -104,7 +104,7 @@ We often get invited to sponsor events - these range in size, location, and audi
 
 If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). 
 
-For first-time yappers, reference the [speaker's guide](/handbook/marketing/speaker-guide). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. And at this point people are interested in not just what we build but how we did it. 
+For first-time yappers, reference the [speaker's guide](/handbook/marketing/speaker-guide). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. This includes integrations and implementations with other products. And at this point people are interested in not just what we build but how we did it. 
 
 
 ## Sponsoring student organizations

@@ -12,7 +12,7 @@ You volunteered or have been asked  to speak at a dev meetup, give a demo at a c
 
 Before you build anything, answer three questions:
 
-**Who's in the room?** A meetup for early-stage founders is different from a Clickhouse conference. Find out: Are they product engineers? What sized team do they work at? What stack? What company stage? Also, how many people will be in the room? Ask the organizer — they want your talk to land too.
+**Who's in the room?** A meetup for early-stage founders is different from a Clickhouse conference. Find out: their [persona](/handbook/who-we-build-for). Are they product engineers or founders? What sized team do they work at? What stack? What company stage? Also, how many people will be in the room? Ask the organizer — they want your talk to land too.
 
 **What format are you filling?** Confirm the exact setup:
 
@@ -110,10 +110,13 @@ Don't introduce yourself first. The host does that. You start with the thing. Th
 
 We always want to encourage Q&A after our talks as it builds conversation and connection. Someone will ask a question you can't answer. Don't bullshit. The right response: *"I don't know — but here's how I'd find out, and I'll follow up with you."* Then actually follow up.
 
+If you receive a question that you believe is off-topic or unfitting for the setting, you can let the asked know this and express an interest in moving on to the next one.
+
 ## **9. After the talk**
 
-* **Write down the questions you couldn't answer** — do this right away so you don't forget and can focus on interacting with attendees the remainder of the event  
-* **Tell the marketing team** — a 2-line Slack in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.  
+* **Expresss an willingness to keep the conversation going** - by letting the audience know that you (and any other team members in the room) are sticking around to chat more.
+* **Write down the questions you couldn't answer** — do this right away so you don't forget and can focus on interacting with attendees the remainder of the event.
+* **Tell the marketing team** — a 2-line Slack in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
 * **Share your slides** — Share them on social, QR code, email, path of least resistance. Don't make people hunt.
 
 ---
