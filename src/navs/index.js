@@ -2620,11 +2620,18 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Replit integration',
+                            name: 'Platform integrations',
+                        },
+                        {
+                            name: 'Lovable',
+                            url: '/docs/integrations/lovable',
+                        },
+                        {
+                            name: 'Replit',
                             url: '/docs/integrations/replit',
                         },
                         {
-                            name: 'v0 integration',
+                            name: 'v0',
                             url: '/docs/integrations/v0',
                         },
                         {
@@ -4166,6 +4173,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Guides',
+                },
+                {
+                    name: 'Changing distribution after rollout',
+                    url: '/docs/experiments/changing-distribution-after-rollout',
+                    icon: 'IconGraph',
+                    color: 'orange',
                 },
                 {
                     name: 'Experiments without Feature Flags',
