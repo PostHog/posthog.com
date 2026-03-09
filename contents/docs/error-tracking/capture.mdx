@@ -102,6 +102,17 @@ exception := posthog.NewDefaultException(
 client.Enqueue(exception)
 ```
 
+
+```swift file=iOS
+@_spi(Experimental) import PostHog
+
+do {
+    try riskyOperation()
+} catch {
+    PostHogSDK.shared.captureException(error)
+}
+```
+
 </MultiLanguage>
 
 ### Error boundaries
@@ -217,6 +228,23 @@ exception := posthog.Exception{
     ExceptionFingerprint: &fingerprint,
 }
 client.Enqueue(exception)
+```
+
+
+```swift file=iOS
+@_spi(Experimental) import PostHog
+
+do {
+    try riskyOperation()
+} catch {
+    PostHogSDK.shared.captureException(
+        error,
+        properties: [
+            "custom_property": "custom_value",
+            "$exception_fingerprint": "CustomExceptionGroup"
+        ]
+    )
+}
 ```
 
 </MultiLanguage>
