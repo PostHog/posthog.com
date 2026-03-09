@@ -12,8 +12,8 @@ const tabs = [
         content: null,
     },
     {
-        value: '/what-were-working-on',
-        label: "What we're working on",
+        value: '/wip',
+        label: 'WIP',
         content: null,
     },
     {
