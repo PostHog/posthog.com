@@ -46,6 +46,17 @@ We do use our own infrastructure. But ad blockers specifically target well-known
 
 Your proxy works because ad blockers haven't visited your domain to catalog your setup. They don't know what to block.
 
+### Why am I seeing an adblocker warning during setup?
+
+During SDK onboarding, PostHog checks whether requests to our ingestion endpoint are being blocked. If an adblocker or privacy extension is preventing the SDK from sending events, you'll see a warning that your browser may be blocking PostHog requests.
+
+To verify your installation:
+
+1. **Temporarily disable your adblocker** and refresh the page. If events start appearing, your SDK is installed correctly.
+2. **Set up a reverse proxy** before going to production to ensure events aren't blocked for your users.
+
+This warning only appears during initial setup and won't affect your production users if you have a reverse proxy configured.
+
 ### What about DNS uncloaking?
 
 DNS uncloaking (also called CNAME uncloaking) is a technique where a DNS resolver follows the CNAME chain of a subdomain to check whether it ultimately points to a known analytics provider. If it does, the resolver blocks the request before it ever reaches the browser.
