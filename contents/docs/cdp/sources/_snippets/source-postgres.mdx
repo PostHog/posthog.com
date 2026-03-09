@@ -1,17 +1,24 @@
-The Postgres connector can link your database tables to PostHog.
+The Postgres connector can link your database tables to PostHog. There are two access methods:
 
-To link Postgres:
+- **Sync to warehouse** (default): Syncs selected tables into PostHog-managed storage for querying. You can join this data with your PostHog data.
+- **Query directly** (beta): Runs queries live against your Postgres connection without copying data. Data from this source can't be joined with PostHog data.
+
+## Sync to warehouse
+
+To sync Postgres data into PostHog:
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and select Postgres
-3. Enter your database connection details:
-    - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
-    - **Port:** The port your database server is listening to. The default is `5432`.
+3. Select **Sync to warehouse** as the access method
+4. Enter your database connection details:
+    - **Host:** The hostname or IP of your database server like `db.example.com` or `123.132.1.100`.
+    - **Port:** The port your database server is listening on. The default is `5432`.
     - **Database:** The name of the database you want like `analytics_db`.
     - **User:** The username with the necessary permissions to access the database.
     - **Password:** The password for the user.
     - **Schema:** The schema for your database where your tables are located. The default is `public`.
-4. Click **Link**
+5. Optionally set a **Table prefix** and **Description** for the source
+6. Select the tables and sync method for each, then click **Import**
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
 
@@ -30,3 +37,26 @@ import InboundIpAddresses from '../../_snippets/inbound-ip-addresses.mdx'
 <InboundIpAddresses />
 
 > **Note:** We currently don't support connections using IPv6, therefore, you may need to enable IPv4 connections to your database. This is required for Supabase, for example.
+
+## Query directly
+
+<CalloutBox icon="IconFlag" title="Beta" type="info">
+
+Direct query access for Postgres is in beta. This feature is being actively developed.
+
+</CalloutBox>
+
+The direct query method lets you run queries against your Postgres database without syncing data into PostHog. This is useful when you want to query live data or avoid duplicating large tables.
+
+To set up a direct Postgres connection:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Postgres
+3. Select **Query directly** as the access method
+4. Enter a **Name** for the connection (shown in the query editor when selecting this Postgres connection)
+5. Enter your database connection details (host, port, database name, user, and password)
+6. Select which tables should be available for querying, then click **Save tables**
+
+Your enabled tables are immediately available in the SQL editor.
+
+> **Note:** Direct query sources don't support SSH tunnels. Data from direct query sources can't be joined with PostHog data.
