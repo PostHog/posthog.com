@@ -1,20 +1,20 @@
 <MultiLanguage>
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     opt_out_capturing_by_default: true,
 });
 ```
 
 ```ios_swift        
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
 config.optOut = true
 PostHogSDK.shared.setup(config)
 ```
 
 ```android
 val config = PostHogAndroidConfig(
-    apiKey = <ph_project_api_key>,
+    apiKey = <ph_project_token>,
     host = <ph_client_api_host> 
 )
 config.optOut = true
@@ -22,7 +22,7 @@ PostHogAndroid.setup(this, config)
 ```
 
 ```react-native
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     opt_out_capturing_by_default: true,
 });
 ```

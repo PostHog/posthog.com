@@ -11,6 +11,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
 import SmallTeam from 'components/SmallTeam'
+import { useApp } from '../../context/App'
 
 // Process docsMenu to extract structure
 const processDocsMenu = () => {
@@ -30,7 +31,7 @@ const processDocsMenu = () => {
 
     const featuredAIPlatformItems = [
         'PostHog AI',
-        'Twig',
+        'PostHog Code',
         'Model Context Protocol (MCP)',
         'AI wizard',
         'AI engineering',
@@ -125,13 +126,19 @@ export const DocsIndex = () => {
     const imagePositioning =
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
 
+    const { websiteMode } = useApp()
+
     return (
-        <div data-scheme="secondary" className="bg-primary h-full text-primary">
+        <div data-scheme="secondary" className={`${!websiteMode && 'bg-primary'} h-full text-primary`}>
             <SEO title="Documentation - PostHog" />
-            <ScrollArea>
+            <ScrollArea className={`${websiteMode ? '@container' : ''}`}>
                 <section
                     id="hero"
-                    className="@container not-prose relative aspect-[3/1] @2xl:aspect-[4/1] @6xl:aspect-[5/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]"
+                    className={`@container not-prose relative aspect-[3/1] overflow-hidden border-b border-primary bg-red-carpet bg-[length:150px_150px] ${
+                        websiteMode
+                            ? '@2xl:aspect-none h-36 @6xl:h-48 w-full'
+                            : '@2xl:aspect-[4/1] @6xl:aspect-[5/1] mb-4'
+                    }`}
                 >
                     {/* Background container for positioned graphics */}
                     {/* Example of positioned graphics - replace with your actual graphics */}
@@ -308,74 +315,71 @@ export const DocsIndex = () => {
                         </div>
                     </div>
                 </section>
-                <div className="flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full p-2 @xl:p-4">
+                <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 px-2 @xl:px-4`}>
                     <section className="flex-1">
                         <SearchUI
                             initialFilter="docs"
                             hideFilters
                             isRefinedClassName="bg-white"
-                            className="mb-4"
+                            className={`mb-4 ${
+                                websiteMode ? 'border border-primary rounded overflow-hidden [&_input]:bg-white' : ''
+                            }`}
                             autoFocus={false}
                         />
-                        <ScrollArea>
-                            <div className="@md:-ml-3">
-                                {accordionItems.map((item, index) => (
-                                    <Accordion
-                                        key={index}
-                                        skin={false}
-                                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                                        defaultValue={item.value}
-                                        items={[item]}
-                                    />
-                                ))}
-                            </div>
-                        </ScrollArea>
+                        <div className="@md:-ml-3">
+                            {accordionItems.map((item, index) => (
+                                <Accordion
+                                    key={index}
+                                    skin={false}
+                                    triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                    defaultValue={item.value}
+                                    items={[item]}
+                                />
+                            ))}
+                        </div>
                     </section>
 
                     <aside className="@4xl:max-w-xs text-sm">
-                        <ScrollArea>
-                            <h6 className="text-lg">About our docs</h6>
-                            <p>There are a few ways to explore our docs:</p>
-                            <p>
-                                <strong className="text-base">On our website</strong> (You are here)
-                            </p>
-                            <p>
-                                <AskMax linkOnly className="underline font-medium">
-                                    Ask PostHog AI
-                                </AskMax>
-                                , our trusty AI chatbot. Start a chat on any docs page and PostHog AI will have the
-                                relevant context.
-                            </p>
-                            <p>
-                                Search with the <IconSearch className="size-4 inline-block" /> icon at the top right.
-                            </p>
-                            <p>
-                                You can also ask a question at the end of each docs article. They get cross-posted to
-                                our{' '}
-                                <Link to="/questions" className="underline font-medium" state={{ newWindow: true }}>
-                                    community forums
-                                </Link>
-                                .
-                            </p>
-                            <p>
-                                <strong className="text-base">In the product</strong>
-                            </p>
-                            <p>Look for tooltips that link to docs - they open right inside the product.</p>
-                            <p>Ask PostHog AI in the product.</p>
+                        <h6 className="text-lg">About our docs</h6>
+                        <p>There are a few ways to explore our docs:</p>
+                        <p>
+                            <strong className="text-base">On our website</strong> (You are here)
+                        </p>
+                        <p>
+                            <AskMax linkOnly className="underline font-medium">
+                                Ask PostHog AI
+                            </AskMax>
+                            , our trusty AI chatbot. Start a chat on any docs page and PostHog AI will have the relevant
+                            context.
+                        </p>
+                        <p>
+                            Search with the <IconSearch className="size-4 inline-block" /> icon at the top right.
+                        </p>
+                        <p>
+                            You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
+                            <Link to="/questions" className="underline font-medium" state={{ newWindow: true }}>
+                                community forums
+                            </Link>
+                            .
+                        </p>
+                        <p>
+                            <strong className="text-base">In the product</strong>
+                        </p>
+                        <p>Look for tooltips that link to docs - they open right inside the product.</p>
+                        <p>Ask PostHog AI in the product.</p>
 
-                            <hr className="my-4" />
+                        <hr className="my-4" />
 
-                            <h6 className="text-lg">Feedback</h6>
+                        <h6 className="text-lg">Feedback</h6>
 
-                            <p>
-                                Our docs are perpetually a work in progress. The
-                                <SmallTeam slug="content" /> is responsible for what you see here.
-                            </p>
-                            <p>
-                                At the end of each page, you can provide feedback about what was (or wasn't) helpful. We
-                                read all feedback.
-                            </p>
-                        </ScrollArea>
+                        <p>
+                            Our docs are perpetually a work in progress. The
+                            <SmallTeam slug="content" /> is responsible for what you see here.
+                        </p>
+                        <p>
+                            At the end of each page, you can provide feedback about what was (or wasn't) helpful. We
+                            read all feedback.
+                        </p>
                     </aside>
                 </div>
             </ScrollArea>

@@ -49,7 +49,7 @@ Start by installing the `posthog-js` SDK:
 npm i posthog-js
 ```
 
-Next, create a `providers.js` file in your `app` folder. In it, initialize PostHog with your project API key and instance address and export a provider component.
+Next, create a `providers.js` file in your `app` folder. In it, initialize PostHog with your project token and instance address and export a provider component.
 
 ```js
 // app/providers.js
@@ -59,7 +59,7 @@ import { PostHogProvider } from '@posthog/react'
 
 export function PHProvider({ children }) {
 	if (typeof window !== 'undefined') {
-	  posthog.init('<ph_project_api_key>', {
+	  posthog.init('<ph_project_token>', {
 	    api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
 	  })
@@ -156,7 +156,7 @@ import { generateId } from './genId'
 
 export async function getBootstrapData() {
   let distinct_id = ''
-  const phProjectAPIKey = '<ph_project_api_key>'
+  const phProjectAPIKey = '<ph_project_token>'
   const phCookieName = `ph_${phProjectAPIKey}_posthog`
   const cookieStore = cookies()
   const phCookie = cookieStore.get(phCookieName)
@@ -218,7 +218,7 @@ import { PostHogProvider } from '@posthog/react'
 
 export default function PHProvider({ children, bootstrapData }) {
   if (typeof window !== 'undefined') {
-    posthog.init("<ph_project_api_key>", {
+    posthog.init("<ph_project_token>", {
       api_host: "<ph_client_api_host>",
       bootstrap: bootstrapData
     })

@@ -22,7 +22,7 @@ Using it requires PostHog's iOS SDK version >= 3.31.0, but it's recommended to a
 To enable surveys in your iOS app, enable surveys in your PostHog configuration:
 
 ```swift
-let POSTHOG_API_KEY = "<ph_project_api_key>"
+let POSTHOG_API_KEY = "<ph_project_token>"
 // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
 let POSTHOG_HOST = "<ph_client_api_host>"
 let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
@@ -41,29 +41,7 @@ PostHogSDK.shared.setup(config)
 
 ## Supported Features
 
-| Feature                           | Support                            |
-| --------------------------------- | ---------------------------------- |
-| **Questions** | |
-| All question types                | ✅                                 |
-| Multi-question surveys            | ✅                                 |
-| Confirmation message              | ✅                                 |
-| Feedback button presentation      | ❌                                 |
-| Conditional questions             | ✅                                 |
-| **Customization / Appearance** | |
-| Set colors in PostHog dashboard   | ✅                                 |
-| Shuffle questions                 | ❌                                 |
-| PostHog branding                  | ❌                                 |
-| Delay popup after screen view     | ❌                                 |
-| Position config                   | ❌ (always bottom sheet)             |
-| HTML content                      | ❌                                 |
-| **Display conditions** | |
-| Feature flag & property targeting | ✅                                 |
-| Screen targeting                  | ❌                                 |
-| Device type targeting             | ✅                                 |
-| Survey wait period                | ❌                                 |
-| Event triggers                    | ✅                                 |
-| Action triggers                   | ❌                                 |
-| Partial responses                 | ❌                                 |
+Not all survey features are available on every SDK. See the [SDK feature support matrix](/docs/surveys/sdk-feature-support) for a full comparison.
 
 ## Limitations
 

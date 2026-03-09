@@ -26,6 +26,12 @@ import VueSetup from "../../integrate/_snippets/vuejs/vue-setup.mdx"
 
 <VueSetup />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 ## Capturing custom events, using feature flags, and more
 
 Once you have PostHog initialized, there is a lot more you can do with it beyond autocapture, pageviews, and pageleaves. You can find the full details in our [JavaScript SDK docs](/docs/libraries/js/features), but we'll cover a few examples here.
@@ -56,28 +62,6 @@ import PluginEvents from "./_snippets/plugin-events.mdx"
 <DetailGroupProductsInOneProject />
 
 <DetailPostHogIPs />
-
-## Other setup options
-
-import ProvideInjectInstall from "./_snippets/provide-inject-install.mdx"
-import PrototypeInstall from "./_snippets/prototype-install.mdx"
-
-<Tab.Group tabs={[
-    'Vue 3: Provide/inject', 
-    'Vue 2: Vue.prototype']}>
-    <Tab.List>
-        <Tab>Vue 3: Provide/inject</Tab>
-        <Tab>Vue 2: Vue.prototype</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <ProvideInjectInstall />
-        </Tab.Panel>
-        <Tab.Panel>
-            <PrototypeInstall />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
 
 ## Next steps
 

@@ -54,7 +54,7 @@ import betaMobileImg from './beta-mobile.svg'
 import descriptionDesktopImg from './description-desktop.svg'
 import descriptionMobileImg from './description-mobile.svg'
 import usePostHog from 'hooks/usePostHog'
-import IntegrationPrompt from 'components/IntegrationPrompt'
+import WizardCommand from 'components/WizardCommand'
 
 interface MaxPromptButtonProps {
     text: string
@@ -451,7 +451,7 @@ const subfeatures = [
     {
         title: 'Session replays',
         description:
-            'Tell PostHog AI what behaviours you are looking for and he can find the matching session recordings',
+            'Tell PostHog AI what behaviors you are looking for and he can find the matching session recordings',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
@@ -526,7 +526,7 @@ const PairsWithArray = [
     },
     {
         title: 'Session Replay',
-        description: 'Create filters and playlists based on user behaviours',
+        description: 'Create filters and playlists based on user behaviors',
         icon: <IconRewindPlay />,
         product: 'Session Replay',
         url: '/session-replay',
@@ -715,7 +715,7 @@ export const ProductMax = () => {
                                     </span>
                                 </p>
                                 <div className="pl-5">
-                                    <IntegrationPrompt />
+                                    <WizardCommand />
                                 </div>
                             </div>
                             <p className="mb-0">

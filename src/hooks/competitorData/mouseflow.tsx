@@ -71,7 +71,7 @@ export const mouseflow = {
             role_based_access_control: '',
         },
         pricing: {
-            transparent_pricing: '',
+            transparent_pricing: true,
             self_serve: true,
         },
         tools: {
