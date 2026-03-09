@@ -25,7 +25,7 @@ PostHog and [LaunchDarkly](/blog/best-launchdarkly-alternatives) both help you [
 
 But how are they different? If you remember nothing else, remember these two points:
 
-1. LaunchDarkly only does feature flags and experiments.
+1. LaunchDarkly is a dedicated feature management platform built for enterprise release governance – flags, experiments, and release monitoring.
 
 2. PostHog is an all-in-one platform that does flags, experiments and [a whole bunch more](/products).
 
@@ -49,7 +49,7 @@ Our [pricing](/pricing) is transparent, too – no opaque add-ons or surprise ex
 
 PostHog is built for high-growth startups. It's simple to implement – we have many [SDKs](/docs/libraries), [tutorials](/tutorials), an [MCP server](/docs/model-context-protocol) for AI workflows, and docs to help you get started quickly with any type of app – and will grow with you as you scale. 
 
-When you need advanced product analytics such as [a CDP](/cdp) or [data warehouse](/data-stack), you can just turn those features on. LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more focus on governance and integrations.
+When you need more – [a CDP](/cdp), [data warehouse](/data-stack), or advanced analytics – you can just turn those features on. LaunchDarkly is built for enterprise teams and DevOps, with a focus on governance, compliance, and integrations that are often gated behind expensive enterprise contracts.
 
 <WizardCTA />
 
@@ -57,7 +57,7 @@ When you need advanced product analytics such as [a CDP](/cdp) or [data warehous
 
 ### Platform
 
-Both tools offer everything you need to use flags and experiments effectivelym but PostHog offers a wider range of tools with greater transparency in all aspects.
+Both tools offer everything you need to use flags and experiments effectively, but PostHog offers a wider range of tools with greater transparency in all aspects.
 
 <p>
 <ProductComparisonTable
@@ -165,8 +165,8 @@ LaunchDarkly's pricing is harder to model without knowing your specific setup.
 Backend usage is measured in "service connections" – each microservice, replica, and environment counts as one – which doesn't map cleanly to team size or request volume. Frontend usage is billed per client-side MAU at $10/1k/month. If you want an accurate number, use LaunchDarkly's pricing calculator or request a quote directly.
 
 - **Startup (1M requests/mo):** PostHog **$0** (free tier). LaunchDarkly Foundation – depends on service connections and MAU, but a small setup with ~5 connections and 5k MAUs = ~$110/mo minimum.
-- **Scaleup (10M requests/mo):** PostHog **$460/mo**. LaunchDarkly – a mid-size setup with ~20 connections and 25k MAUs = ~$490/mo, not counting Experimentation MAU.
-- **Enterprise (50M requests/mo):** PostHog **$1,460/mo** (tiered discounts applied). LaunchDarkly – custom Enterprise pricing, contact sales
+- **Scaleup (10M requests/mo):** PostHog **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045). LaunchDarkly – a mid-size setup with ~20 connections and 25k MAUs = ~$490/mo, not counting Experimentation MAU.
+- **Enterprise (50M requests/mo):** PostHog **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025). LaunchDarkly – ??? custom Enterprise pricing, contact sales.
 
 ### Reporting and analytics
 
@@ -227,7 +227,7 @@ Both PostHog and LaunchDarkly enable companies to remain secure and compliant wi
         {
             label: 'SAML SSO',
             description: 'Use SAML or single sign-on authentication',
-            values: ['Enterprise', '$10/seat/month or Enterprise'],
+            values: ['Enterprise', 'Foundation and above'],
         },
         'feature_flags.management.features.approvals',
         {
@@ -298,7 +298,7 @@ Yes. See our [LaunchDarkly to PostHog migration guide](/docs/migrate/launchdarkl
 <details>
 <summary>Does LaunchDarkly or PostHog offer free trials?</summary>
 
-LaunchDarkly's Developer tier is free but limited to one project, three environments, and 1,000 client-side MAU – not suitable for real production use.
+LaunchDarkly's Developer tier is free but limited to 5 service connections and 1,000 client-side MAU – not suitable for real production use.
 
 PostHog's free tier is genuinely usable in production. You get 1M flag requests, 1M events, and 5,000 recordings free every month, with no time limit. Most small teams never pay anything.
 
