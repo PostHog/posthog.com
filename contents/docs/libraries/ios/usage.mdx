@@ -222,6 +222,54 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
+
+## Error tracking
+
+> **Note:** Error tracking for the iOS SDK is currently experimental. It's available on iOS, macOS, and tvOS only – watchOS and visionOS are not supported due to platform limitations.
+
+To use error tracking, import PostHog with the experimental SPI:
+
+```swift
+@_spi(Experimental) import PostHog
+```
+
+### Automatic exception capture
+
+Enable automatic exception capture in your PostHog configuration:
+
+```swift
+@_spi(Experimental) import PostHog
+
+let config = PostHogConfig(apiKey: "<ph_project_token>", host: "<ph_client_api_host>")
+config.errorTrackingConfig.autoCapture = true
+
+PostHogSDK.shared.setup(config)
+```
+
+When enabled, this automatically captures `$exception` events for:
+
+- Mach exceptions (e.g., `EXC_BAD_ACCESS`, `EXC_CRASH`)
+- POSIX signals (e.g., `SIGSEGV`, `SIGABRT`, `SIGBUS`)
+- Uncaught NSExceptions
+
+Crashes are persisted to disk and sent on the next app launch.
+
+### Manual exception capture
+
+Capture exceptions manually using `captureException`:
+
+```swift
+@_spi(Experimental) import PostHog
+
+do {
+    try riskyOperation()
+} catch {
+    PostHogSDK.shared.captureException(error)
+}
+```
+
+For more information, see the [error tracking installation guide](/docs/error-tracking/installation/ios) and [capturing exceptions](/docs/error-tracking/capture).
+
 ## Debug mode 
 
 If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
