@@ -60,7 +60,7 @@ npm i posthog-js
 After installing, go to `src/main.jsx` and set up the PostHog provider. To do this:
 
 1. Import `posthog` from `posthog-js` and the `PostHogProvider` from `@posthog/react`
-2. Initialize `posthog` with your project API key and host from [your project settings](https://us.posthog.com/settings/project).
+2. Initialize `posthog` with your project token and host from [your project settings](https://app.posthog.com/settings/project).
 3. Wrap your `App` component in the `PostHogProvider` with the initialized `posthog` as a `client` property
 
 ```jsx
@@ -72,7 +72,7 @@ import './index.css'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
 })
@@ -99,7 +99,7 @@ Once done, run `npm run dev` again then go to your app and click the button, ent
 
 With our React app and PostHog set up as well as some data, we can get a heatmap of this data using the toolbar. 
 
-In PostHog, click the [Toolbar tab](https://us.posthog.com/toolbar) on the left menu, then add `http://localhost:5173` to the authorized URLs, and click **Launch**. This takes you to your site with the PostHog toolbar active.
+In PostHog, click the [Toolbar tab](https://app.posthog.com/toolbar) on the left menu, then add `http://localhost:5173` to the authorized URLs, and click **Launch**. This takes you to your site with the PostHog toolbar active.
 
 ![Toolbar](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_11_09_51_2x_8b962cbfd6.png)
 

@@ -31,7 +31,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 If you followed one of our guides to [set up error tracking](/docs/error-tracking/installation) and you [enabled exception auto capture](https://app.posthog.com/error_tracking/configuration), you'll have automatic exception capture enabled.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_api_client_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_exceptions: {
@@ -158,7 +158,7 @@ try {
 ```python
 import posthog
 
-posthog.api_key = '<ph_project_api_key>'
+posthog.api_key = '<ph_project_token>'
 posthog.host = '<ph_client_api_host>'
 
 # With context
@@ -241,7 +241,7 @@ The process is slightly different depending on the SDK you're using.
   In [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
 
   ```javascript 
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
   api_host:'<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   before_send: (event) => {
@@ -267,7 +267,7 @@ The process is slightly different depending on the SDK you're using.
   In [React Native](/docs/libraries/react-native), you can override the default properties by passing a `before_send` callback when initializing PostHog. This callback is called before any exception is captured.
 
   ```react-native
-  const posthog = new PostHog('<ph_project_api_key>', {
+  const posthog = new PostHog('<ph_project_token>', {
     host: '<ph_client_api_host>',
     before_send: (event) => {
       if (event.event === '$exception') {
@@ -294,7 +294,7 @@ The process is slightly different depending on the SDK you're using.
   ```python
   import posthog
 
-  posthog.api_key = '<ph_project_api_key>'
+  posthog.api_key = '<ph_project_token>'
   posthog.host = '<ph_client_api_host>'
 
   # With context
@@ -347,3 +347,15 @@ import SuppressionRules from './_snippets/suppression-rules.mdx'
 import BurstProtection from './_snippets/burst-protection.mdx'
 
 <BurstProtection />
+
+## Common problems
+
+### Don't use `posthog.capture()` for exceptions
+
+<CalloutBox icon="IconWarning" title="Don't do this" type="caution">
+
+  **Do not** use `posthog.capture('$exception', { ... })` and try to attach exception metadata yourself (e.g. `$exception_stack_trace_raw`, `$exception_type`, `$exception_message`). This approach fails in the vast majority of cases because the exception event schema is strict and the SDK does not normalize or validate these properties when you use `capture()`.
+
+  **Do this instead:** use `posthog.captureException(error)`. It accepts an `Error` object (or your runtime's equivalent), extracts stack trace, type, and message correctly, and sends a valid `$exception` event with all required metadata. You can still pass optional properties as the second argument.
+
+</CalloutBox>

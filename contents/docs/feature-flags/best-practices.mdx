@@ -26,11 +26,13 @@ function useBetaFeature() {
 }
 ```
 
-## 3. Identify users
+## 3. Targeting
 
-Because PostHog evaluates flags based on the user's distinct ID, having different IDs can cause the same user to receive different flag values across different sessions, devices, and platforms. By [identifying](/docs/getting-started/identify-users) them, you can ensure they consistent flag values.
+PostHog evaluates flags based on the user's distinct ID, having different IDs can cause the same user to receive different flag values across different sessions, devices, and platforms. By [identifying](/docs/getting-started/identify-users) them, you can ensure consistent flag values.
 
 The same applies to identifying [groups](/docs/product-analytics/group-analytics) for group-level flags.
+
+For flags targeting anonymous users, such as signup flows or landing page experiments, consider using [device bucketing](/docs/feature-flags/device-bucketing) instead. This evaluates the flag based on the device ID, ensuring a consistent experience on the device even after the user logs in.
 
 ## 4. Use server-side local evaluation for faster flags
 
@@ -68,7 +70,7 @@ For example, at PostHog we often roll out the flag to just the responsible devel
 
 Leaving flags in your code for too long can confuse future developers and create technical debt, especially if it's already rolled out and integrated. Be sure to remove stale flags once they are completely rolled out or no longer needed.
 
-To clean up multiple flags at once, use the **bulk delete** feature in the feature flags list view. Select the flags you want to remove using the checkboxes (shift-click to select a range), then click **Delete selected**. PostHog validates that flags aren't used by experiments, early access features, or other dependent flags before deletion.
+When you have many flags to clean up, use [bulk delete](/docs/feature-flags/creating-feature-flags#deleting-feature-flags-in-bulk) to select and delete multiple flags at once. Select flags using checkboxes (shift-click to select a range), or filter by name or status and use "select all matching" to select all flags that match your criteria. PostHog validates that flags aren't used by experiments, early access features, or other dependent flags before deletion.
 
 ## 9. Fallback to working code
 
