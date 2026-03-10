@@ -34,6 +34,17 @@ For example, if you sync your billing data to Postgres using a cron job daily an
   classes="rounded"
 />
 
+## Managing materialization via API
+
+You can programmatically manage materialization using the [PostHog API](/docs/api) with a [personal API key](/docs/api/overview#personal-api-keys). Your key needs the `warehouse_view:write` scope.
+
+Two endpoints are available:
+
+- **`POST /api/projects/{project_id}/warehouse_saved_queries/{id}/materialize/`** - Enables materialization for a saved query with a 24-hour sync frequency.
+- **`POST /api/projects/{project_id}/warehouse_saved_queries/{id}/revert_materialization/`** - Reverts materialization, deleting the materialized table and its schedule.
+
+These endpoints are rate limited to five requests per hour per saved query.
+
 ## Tips for materializing views
 
 - The purpose of materialization is to speed up queries, so you don't need to materialize views that are already fast.
