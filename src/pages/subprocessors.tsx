@@ -3,7 +3,6 @@ import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import OSTable from 'components/OSTable'
-import { OSSelect } from 'components/OSForm'
 import subprocessors from '../data/subprocessors.json'
 
 type TabKey = 'all' | 'core' | 'ai' | 'internal'
@@ -34,15 +33,14 @@ const internalSubprocessors: SubprocessorRecord[] = [
 ]
 
 const tabs: { key: TabKey; label: string }[] = [
+    { key: 'core', label: 'Third-Party Subprocessors (Core Services)' },
+    { key: 'ai', label: 'Third-Party AI Subprocessors (Only if AI Features are Enabled)' },
+    { key: 'internal', label: 'Internal Subprocessors' },
     { key: 'all', label: 'All' },
-    { key: 'core', label: 'Core services' },
-    { key: 'ai', label: 'AI features' },
-    { key: 'internal', label: 'Internal' },
 ]
 
 function SubprocessorsPage(): JSX.Element {
-    const [activeTab, setActiveTab] = useState<TabKey>('all')
-    const [regionFilter, setRegionFilter] = useState('All regions')
+    const [activeTab, setActiveTab] = useState<TabKey>('core')
 
     const coreSubprocessors = useMemo(
         () => subprocessors.filter((subprocessor) => subprocessor.type === 'cloud') as unknown as SubprocessorRecord[],
@@ -52,13 +50,6 @@ function SubprocessorsPage(): JSX.Element {
         () => subprocessors.filter((subprocessor) => subprocessor.type === 'ai') as unknown as SubprocessorRecord[],
         []
     )
-
-    const allRegions = useMemo(() => {
-        const cloudRegions = [...coreSubprocessors, ...aiSubprocessors].flatMap((subprocessor) => subprocessor.regions)
-        const internalRegions = internalSubprocessors.flatMap((subprocessor) => subprocessor.regions)
-
-        return ['All regions', ...Array.from(new Set([...cloudRegions, ...internalRegions]))]
-    }, [aiSubprocessors, coreSubprocessors])
 
     const activeRows = useMemo(() => {
         if (activeTab === 'all') {
@@ -76,27 +67,19 @@ function SubprocessorsPage(): JSX.Element {
         return internalSubprocessors
     }, [activeTab, aiSubprocessors, coreSubprocessors])
 
-    const filteredRows = useMemo(() => {
-        return activeRows.filter((subprocessor) => {
-            const matchesRegion = regionFilter === 'All regions' || subprocessor.regions.includes(regionFilter)
-
-            return matchesRegion
-        })
-    }, [activeRows, regionFilter])
-
     const tableColumns = useMemo(
         () => [
             { name: 'Subprocessor', align: 'left' as const, width: 'minmax(260px,1.1fr)' },
             { name: 'Nature and purpose of processing', align: 'left' as const, width: 'minmax(320px,1.4fr)' },
-            { name: 'Location of processing', align: 'left' as const, width: 'minmax(420px,1.7fr)' },
-            { name: 'Additional information', align: 'left' as const, width: 'minmax(520px,2fr)' },
+            { name: 'Location of processing', align: 'left' as const, width: 'minmax(300px,1.1fr)' },
+            { name: 'Additional information', align: 'left' as const, width: 'minmax(460px,1.6fr)' },
         ],
         []
     )
 
     const tableRows = useMemo(
         () =>
-            filteredRows.map((subprocessor) => ({
+            activeRows.map((subprocessor) => ({
                 key: subprocessor.name,
                 cells: [
                     {
@@ -131,21 +114,8 @@ function SubprocessorsPage(): JSX.Element {
                     },
                 ],
             })),
-        [filteredRows]
+        [activeRows]
     )
-
-    const tabCount = (key: TabKey): number => {
-        if (key === 'all') {
-            return coreSubprocessors.length + aiSubprocessors.length + internalSubprocessors.length
-        }
-        if (key === 'core') {
-            return coreSubprocessors.length
-        }
-        if (key === 'ai') {
-            return aiSubprocessors.length
-        }
-        return internalSubprocessors.length
-    }
 
     return (
         <>
@@ -153,7 +123,7 @@ function SubprocessorsPage(): JSX.Element {
 
             <div className="max-w-6xl mx-auto px-4 py-8 mb-4 prose dark:prose-invert @container">
                 <h1 className="mb-2">Subprocessors</h1>
-                <p className="text-sm opacity-70 m-0">Last updated: March 2026</p>
+                <p className="text-sm opacity-70 m-0">Last updated: March 10, 2026</p>
                 <p>
                     PostHog, Inc. together with any of its affiliates and/or subsidiaries (“<strong>PostHog</strong>”, “
                     <strong>we</strong>” or “<strong>us</strong>”) engages certain third-party vendors listed below as
@@ -184,24 +154,12 @@ function SubprocessorsPage(): JSX.Element {
                                     key={tab.key}
                                     onClick={() => setActiveTab(tab.key)}
                                     active={activeTab === tab.key}
+                                    className="border border-primary"
                                 >
-                                    {tab.label} ({tabCount(tab.key)})
+                                    {tab.label}
                                 </OSButton>
                             ))}
                         </div>
-                    </div>
-                    <div>
-                        <OSSelect
-                            label="Region"
-                            showLabel={false}
-                            value={regionFilter}
-                            onChange={(value) => setRegionFilter(value)}
-                            options={allRegions.map((region) => ({ label: region, value: region }))}
-                            placeholder="All regions"
-                            searchable={false}
-                            size="md"
-                            className="min-w-[160px]"
-                        />
                     </div>
                 </div>
 
@@ -224,9 +182,9 @@ function SubprocessorsPage(): JSX.Element {
                     </div>
                 </div>
 
-                {filteredRows.length === 0 && (
+                {activeRows.length === 0 && (
                     <p className="not-prose mt-3 text-sm opacity-70">
-                        No subprocessors matched your filters. Try changing category or region.
+                        No subprocessors matched your selected category.
                     </p>
                 )}
 
