@@ -1,10 +1,15 @@
+---
+title: Tracking Skills Usage in Claude Code Plugins
+sidebar: Handbook
+showTitle: true
+---
+
 ## Tracking Skills Usage in Claude Code Plugins
 
 ### Overview
 
 Track which skills and commands users invoke by hooking into the `UserPromptSubmit` event and sending events to PostHog.
 
-This approach has been verified against [PostHog's Capture API documentation](https://posthog.com/docs/api/capture#single-event).
 
 ### 1. Create the Hook Configuration
 
