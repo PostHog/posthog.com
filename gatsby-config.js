@@ -395,7 +395,7 @@ module.exports = {
             options: {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
-                branch: 'surveys-onboarding' || 'main',
+                branch: 'surveys-onboarding-1' || 'main',
                 patterns: ['docs/published/**', 'docs/onboarding/**'],
             },
         },
