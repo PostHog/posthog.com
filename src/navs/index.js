@@ -5553,7 +5553,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Sentiment classification',
+                    name: 'Sentiment',
                     url: '/docs/llm-analytics/sentiment',
                     icon: 'IconThumbsUp',
                     color: 'green',
