@@ -1,5 +1,5 @@
 ---
-date: 2026-03-09
+date: 2026-03-10
 title: 8 best open source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
@@ -52,7 +52,6 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 </details>
 
-<br/>
 
 ## The best open source analytics tools
 
@@ -92,7 +91,7 @@ This guide covers the best open source analytics tools you can self-host, from f
 
 [PostHog](/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), [logs](/logs), and more.
 
-Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/product-analytics/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
+Beyond the core [product analytics features](/product-analytics), it also supports creating [custom insights using SQL](/docs/data-warehouse/sql), and offers a [built-in data warehouse](/docs/data-warehouse) so you can import data from external sources like Stripe, Hubspot, and Zendesk.
 
 #### Who should use PostHog?
 
@@ -115,7 +114,7 @@ Developers and startups who need an in-depth understanding of what users are doi
 
 Several. The built-in product analytics is an alternative to tools such as [Mixpanel](/blog/best-mixpanel-alternatives), [Amplitude](/blog/best-amplitude-alternatives), and [Heap](/blog/best-heap-alternatives) and it can [replace Google Analytics](/blog/posthog-vs-ga4) for website and marketing analytics.
 
-With heatmaps plus session replay for both web and mobile apps, PostHog can replace the likes of [Hotjar](/blog/best-hotjar-alternatives) and [FullStory](/blog/best-fullstory-alternatives). It even includes feature flag and experiment features like those found in [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+With heatmaps plus session replay for both web and mobile apps, PostHog can replace the likes of [Hotjar](/blog/best-hotjar-alternatives) and [FullStory](/blog/best-fullstory-alternatives). It even includes feature flag and experiment features like those found in [LaunchDarkly](/blog/best-launchdarkly-alternatives) or error tracking like [Sentry](/blog/posthog-vs-sentry). 
 
 </details>
 
@@ -225,7 +224,7 @@ Companies that want to analyze product and company data that's already stored in
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Connects to all popular closed and open-source databases    | Requires separate event collection and storage setup        |
 | Visual query builder for building simple queries            | Less accessible for non-technical users                     |
-| Full SQL editor for advanced users and queries              |                                                             |
+| Full SQL editor for advanced users and queries              | Lacks features beyond BI                                     |
 | Join and query data from multiple sources                   |                                                             |
 | Light hosting requirements                                  |                                                             |
 
@@ -284,7 +283,7 @@ Anyone who wants easy-to-use website analytics that doesn't want to use Google A
 |-------------------------------------------------------------|-------------------------------------------------------------|
 | Fast and easy to use                                        | Limited analytics features                                  |
 | Minimal impact on website performance                       | Open-source release only updated twice a year               |
-| Cookieless GDPR-compliance                                  |                                                             |
+| Cookieless GDPR-compliance                                  |  No free tier on hosted version                      |
 | Google Analytics import available                           |                                                             |
 | Will scale to large traffic requirements                    |                                                             |
 
@@ -598,7 +597,7 @@ You can, but for most teams PostHog Cloud is the better choice – even if open 
 
 Here's why:
 
-- **Active development:** PostHog Cloud gets continuous updates and new features as soon as they ship. The self-hosted release is a snapshot, so you'll always be running slightly behind and responsible for keeping it up to date yourself.
+- **Automatic updates:** PostHog Cloud gets continuous updates and new features as soon as they ship. When self-hosting, you'll need to manage these updates yourself or you'll always be running slightly behind.
 - **Generous free tier:** PostHog Cloud includes 1 million events, 5,000 session recordings, 1 million feature flag requests every month, and a lot more at no cost. **Around 90% of PostHog users pay nothing**. It's hard to beat free with zero infrastructure overhead.
 - **Scaling complexity:** PostHog only recommends self-hosting for deployments up to ~300k events per month. Beyond that, managing the infrastructure yourself becomes a real engineering burden.
 - **Easy to get started:** You can be up and running in minutes with no servers to provision. The [PostHog setup wizard](/wizard) detects your framework, installs the right SDK, and configures everything automatically – no manual setup required.
@@ -612,7 +611,7 @@ The main reason to self-host is strict data residency requirements that can't be
 <details>
   <summary>Which open source analytics tools are best for GDPR compliance?</summary>
 
-**Plausible** and **Umami** are cookieless by default and collect no personal data, making them the simplest path to GDPR compliance. **Matomo** is widely used by government and enterprise organizations specifically for its GDPR compliance features, including data anonymization and consent management. **PostHog** offers EU Cloud hosting if you want a managed option with EU data residency.
+**Plausible** and **Umami** are cookieless by default and collect no personal data, making them the simplest path to GDPR compliance. **Matomo** is widely used by government and enterprise organizations specifically for its GDPR compliance features, including data anonymization and consent management. **PostHog** offers cookieless tracking and EU Cloud hosting if you want a managed option with EU data residency.
 
 For a deeper breakdown, see our guide to the [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools).
 
@@ -640,7 +639,7 @@ See [PostHog's pricing page](/pricing) for full details.
 PostHog is more than an analytics tool. It combines everything developers need to build and improve their product in one platform:
 
 - **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), and [LLM analytics](/llm-analytics)
-- **Open source:** MIT-licensed and [actively maintained](https://github.com/PostHog/posthog) with 24k+ GitHub stars
+- **Open source:** MIT-licensed and [actively maintained](https://github.com/PostHog/posthog) with 31k+ GitHub stars
 - **Generous free tier:** 1M events, 5K recordings, and 1M flag requests per month at no cost
 - **Developer-first:** Transparent APIs, [SQL access](/docs/product-analytics/sql), and a [public roadmap](/roadmap)
 

@@ -1,5 +1,5 @@
 ---
-date: 2026-03-09
+date: 2026-03-10
 title: The 7 best HIPAA-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
@@ -85,7 +85,7 @@ That said, surveys and error tracking still aren't included natively, so you'd l
 -   **BAA available:** <span className="text-green text-lg">✔</span>
 -   **BAA plan:** Enterprise plan – contact sales for pricing
 
-A BAA is available on Mixpanel's Enterprise plan. You'll need to sign separate BAAs with any other analytics you wish to integrate with Mixpanel.
+A BAA is available on Mixpanel's Enterprise plan.
 
 **See also:** [The most popular Mixpanel alternatives](/blog/best-mixpanel-alternatives)
 
@@ -113,7 +113,7 @@ This makes Countly a good option if you'd prefer to [self-host your analytics](/
 
 **Freshpaint** isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies.
 
-Freshpaint sits between data sources (e.g data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as [Google Analytics](/blog/ga4-alternatives), safe in the knowledge you're not accidentally passing PHI into them.
+Freshpaint sits between data sources (e.g. data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as [Google Analytics](/blog/ga4-alternatives), safe in the knowledge you're not accidentally passing PHI into them.
 
 #### Freshpaint and HIPAA compliance
 
