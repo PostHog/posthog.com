@@ -26,6 +26,40 @@ The AI platform solves these problems by providing:
 3. **Consistent UX**: Standard patterns for AI interactions, loading states, error handling, and result presentation
 4. **Platform-level improvements**: When we improve the core agent (better reasoning, faster responses, cheaper inference), all products benefit automatically
 
+## Vision: Product autonomy
+
+The overarching goal of PostHog's AI direction is **product autonomy** — a closed loop where PostHog data automatically drives product improvements with minimal human intervention.
+
+Here's how the loop works:
+
+1. **Signals**: PostHog collects signals across all products — error patterns, frustration in session recordings, experiment results, survey responses, insight thresholds, and more. These signals represent real problems or opportunities.
+
+2. **Enrichment**: PostHog AI processes and enriches these signals, deduplicating across data sources and adding context. A vague signal like "users seem frustrated during checkout" becomes a concrete, contextualized finding.
+
+3. **Plans**: The enriched signals are transformed into structured plans — similar to how Claude Code works, but driven by data rather than human prompts. Each plan describes what needs to happen, why, and what evidence supports it.
+
+4. **Execution**: A sandboxed coding agent takes these plans and acts on them. Today, we're focused on automatically creating pull requests. The agent also handles instrumentation automatically — adding tracking events, feature flags, and experiments as part of the code it ships. Better instrumentation produces better signals, making the entire loop smarter over time. In the future, other artifact types will be supported — decks, growth reviews, and more.
+
+5. **Review**: Product engineers review, iterate on, and merge (or decline) the proposed changes.
+
+6. **Feedback**: Once a change ships, a new signal is created so the system can evaluate what happened after the PR was merged. Did the metric improve? Did new errors appear? This feeds back into step 1.
+
+7. **Loop**: The cycle continues until the agent finds an exit condition — low actionability, non-important signals, noisy signals, de-prioritized work, etc.
+
+```mermaid
+graph LR
+    Signals[Signals<br/>Errors, frustration,<br/>experiments, surveys] --> Enrichment[Enrichment<br/>PostHog AI processes<br/>and contextualizes]
+    Enrichment --> Plans[Plans<br/>Structured, data-driven<br/>action items]
+    Plans --> Execution[Execution<br/>Coding agent creates<br/>PRs and artifacts]
+    Execution --> Review[Review<br/>Human oversight,<br/>iterate or merge]
+    Review --> Feedback[Feedback<br/>New signal created<br/>from shipped changes]
+    Feedback --> Signals
+```
+
+This vision is what connects all the individual AI products. Signals surfaces the data, PostHog AI enriches it, PostHog AI background agents execute on it, PostHog Code is where you collaborate with agents on these changes, and the loop closes when shipped changes generate new signals.
+
+For how product teams can contribute to this vision, see [Integration vectors for product teams](/handbook/engineering/ai/team-structure#integration-vectors-for-product-teams).
+
 ## Architecture at a glance
 
 The AI platform has three main layers:
@@ -59,7 +93,7 @@ For a detailed technical overview, see [AI platform architecture](/handbook/engi
 
 ## Products overview
 
-### PostHog AI [Beta]
+### PostHog AI [General availability]
 Your primary interface for working with PostHog. Instead of clicking through forms and menus, describe what you want in natural language. PostHog AI can create dashboards, write SQL queries, set up surveys, and answer questions about your data — all through conversation.
 
 **Best for**: Quick answers, creating resources, learning PostHog, iterative exploration
@@ -67,7 +101,7 @@ Your primary interface for working with PostHog. Instead of clicking through for
 
 [Learn more →](/handbook/engineering/ai/products#posthog-ai)
 
-### Deep research [Under development]
+### Deep research [Beta]
 When you need to investigate complex, open-ended problems, Deep research digs deep. It systematically explores your data — session recordings, analytics, error logs — and produces comprehensive research reports that would take a human analyst hours to create.
 
 **Best for**: Understanding why metrics changed, investigating user behavior patterns, root cause analysis
@@ -114,10 +148,11 @@ For a list of key concepts definitions, see the [Glossary](/handbook/engineering
 
 ### For users
 - **Want to try PostHog AI?** Open the chat interface in PostHog and start asking questions. See [user documentation](/docs/posthog-ai).
+- **Prefer working in your editor or coding agent?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 - **Need deep investigation?** Toggle to Deep research feature in PostHog AI.
-- **Prefer working in your editor?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 
 ### For engineers building AI features
+- **Not sure where to start?** See [Integration vectors for product teams](/handbook/engineering/ai/team-structure#integration-vectors-for-product-teams) for the different ways your team can contribute — MCP tools, skills, signals, and more.
 - **Adding AI to your product?** Start with [Team structure and collaboration](/handbook/engineering/ai/team-structure) to understand the process.
 - **Want to add a new agent mode?** See [Architecture](/handbook/engineering/ai/architecture) for technical details.
 - **Need implementation guidance?** Check [Implementation guide](/handbook/engineering/ai/implementation) for best practices and patterns.
