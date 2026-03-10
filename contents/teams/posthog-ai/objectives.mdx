@@ -1,60 +1,95 @@
-### Q4 2025 objectives
+### Q1 2026 objectives
 
-💼 PostHog AI covers the main "jobs to be done" within PostHog <TeamMember name="Annika Schmid" /> + everyone on the team
-- Do a study on PostHog users habits using the JTBD framework
-- Make sure that PostHog AI nails the main jobs
-- Create skills and toolkits that map directly to these jobs
 
-🧠 Context API <TeamMember name="Georgiy Tarasov" />
-- Enable support for all types of entities within PostHog as context for the agent
-    - Insights
-    - Dashboards
-    - Session replays
-    - Errors
-    - Feature Flags
-    - Experiments
-    - LLM traces
+🏆 Background agents (ultimate goal)
 
-🔌 Teams API <TeamMember name="Georgiy Tarasov" /> <TeamMember name="Emanuele Capparelli" />
-- Enable teams to create custom modes for specific workflows
-- Support building complete agents that integrate with PostHog AI or other products
+- Background agents
+  - Implement the report: plan, implement, and push it
+  - Settings for product autonomy
+  - Automatic instrumentation of PRs: Background & PostHog Code
+  - Connect sandboxed agents to PostHog Workflows
+  - Spawn background agents for people to do chores
+    - JTBD: When I have a dashboard that I analyze every day and I care about the metrics there and customer experience, I want to get analysis every day in a channel, so I can quickly analyze the experience, don't spend time on it, and act on signals from the summary.
+    - JTBD: When I have a list of customers that I care about and I want to learn about their experience, I want to improve the experience for them, so I feel that I care about customers.
+    - JTBD: When I have a list of feedback and I act on it, I want to automate it in some way, so I can get more done better and customers feel cared about.
+    - JTBD: Iterate on metrics (experiments, feature flags, etc.)
 
-🗄️ SQL improvement <TeamMember name="Alessandro Pogliaghi" />
 
-#### Should have
+🌐 PostHog AI in web (very high)
 
-🔗 MCP 2.0 <TeamMember name="Georgiy Tarasov" />
-- Expose PostHog AI tooling and modes to the MCP
+- UI library for the web app and MCP apps (PostHog AI, PostHog Code, MCP apps)
+  - (?) Remap existing components to the new tool structure or create a new one
+  - Figure out how we render UI in PostHog Code (MCP apps)
+  - Implement
+- Render the components with a tool for SQL queries
+- Sandboxed agent infra for PostHog AI
+  - SSE streaming
+  - Default environment (image, tools, repo)
+  - Reduce latency
+- Migration path
+  - Migrated UI
+  - Context injection (UI & agent)
+  - Switch between v1 and v2
+  - Split test
+  - Convert conversations to a text format for the new agent
+  - Use the sandboxed agent for PostHog AI v2
+- Permission system and subsetting tools (for conversations)
+- Research mode in PostHog AI (step 2)
 
-📊 Evals 2.0 <TeamMember name="Georgiy Tarasov" />
-- Improve our evals library
 
-🧹 Remove contextual MaxTools <TeamMember name="Emanuele Capparelli" />
-- Rethink contextual tools as backend-first tooling
+🛡️ Reliability (very high)
 
-### Nice to have
+- LLM gateway in PostHog AI
+- Fallback providers for Anthropic (AWS Bedrock + GCP)
+- Fallback providers for OpenAI (Azure)
+- Improve observability of PostHog AI
 
-🔄 Twig integration <TeamMember name="Georgiy Tarasov" />
-- Connect with Twig (Tasks) and expose PostHog AI as MCP to Twig
 
-🔍 Enterprise search + MCP integrations <TeamMember name="Emanuele Capparelli" />
-- Enable searching across connected enterprise tools (Notion, Confluence, etc.)
-- Build MCP integrations for popular data sources
+🔌 MCP (high)
 
-📐 Large data schemas <TeamMember name="Georgiy Tarasov" />
-- Support working with larger data schemas for larger organizations
+- Steering data injection (timezone, project ID, data volume, etc.)
+- Convert more PostHog AI tools to MCP (+skills)
+  - Insights
+  - Dashboards
+  - Session recordings & summarization
+- Disable AI features if the consent is not given
+- Convert legacy manually written tools to codegenerated MCP tools
+  - actions: `create`, `delete`, `get`, `getAll`, `update`
+  - documentation: `inkeepApi`, `searchDocs`
+  - errorTracking: `errorDetails`, `listErrors`, `updateIssueStatus`
+  - experiments: `create`, `delete`, `get`, `getAll`, `getResults`, `update`
+  - featureFlags: `create`, `delete`, `getAll`, `getDefinition`, `update`
+  - insights: `create`, `delete`, `get`, `getAll`, `query`, `update`
+  - llmAnalytics: `getLLMCosts`
+  - logs: `listAttributeValues`, `listAttributes`, `query`
+  - organizations: `getDetails`, `getOrganizations`, `setActive`
+  - query: `generateHogQLFromQuestion`, `run`
+  - search: `entitySearch`
+  - surveys: `create`, `delete`, `get`, `getAll`, `global-stats`, `stats`, `update`
+- Improve data retrieval experience for larger organizations (read-data-schema)
+- Optimized property and property value searches with query examples (read-data-schema)
 
-📱 More channels <TeamMember name="Alessandro Pogliaghi" /> <TeamMember name="Georgiy Tarasov" />
-- Add support for PostHog AI in Slack and mobile app
 
-📓 Data notebooks <TeamMember name="Emanuele Capparelli" />
-- Start working on notebooks 2.0, moving from text rich documents to data notebooks
+🧙 Skills (high)
 
-🔁 Restart from checkpoints <TeamMember name="Georgiy Tarasov" />
-- Enable restarting agent workflows from checkpoints
+- Wizard skills in PostHog Code
+- Skill distribution: CI for posthog/skills and PostHog coding agent plugins
+- Handle access control in skills when we mention unavailable resources
+- Customer skills (low priority)
 
-✅ Approval flows <TeamMember name="Alessandro Pogliaghi" />
-- Implement approval workflows for agent actions
 
-👁️ Tool call results in UI <TeamMember name="Alessandro Pogliaghi" />
-- Display tool call results in the user interface
+📊 Evals (medium)
+
+- Offline evals
+- MCP evals
+- Update existing evals
+
+
+🏢 Enterprise features (low)
+
+- HIPAA
+  - Azure account with BAA (schedule a call with Michi) and use Terraform for that
+  - OpenAI commitment (min $50k) – check the sentiment of AI teams and sign the contract
+- Regional processing (GDPR/EU)
+  - Use AWS Bedrock in the EU for Anthropic models across all deployments
+  - Use regional processing for OpenAI models across all deployments

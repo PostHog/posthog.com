@@ -180,3 +180,11 @@ We're slowly migrating all SDKs to use [`sampo`](https://github.com/bruits/sampo
 If you're feeling inspired, I highly recommend you build an adapter for Sampo for the language you're working on. We'll all thank you for that.
 
 </CalloutBox>
+
+## Troubleshooting
+
+### `Access token expired or revoked` when running `npm publish`
+
+If you see the error **"Access token expired or revoked. Please try logging in again"** when publishing with `npm publish` — even though your credentials and tokens are correctly configured — the issue may be with npm's token handling itself.
+
+**Solution:** Migrate your project to use a pnpm workspace and publish with `pnpm publish` instead. pnpm handles authentication differently and isn't affected by this issue.

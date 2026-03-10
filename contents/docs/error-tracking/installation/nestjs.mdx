@@ -1,0 +1,138 @@
+---
+title: NestJS Error Tracking installation
+platformLogo: nestjs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the PostHog Node SDK" badge="required">
+
+Install the [PostHog Node SDK](/docs/libraries/node):
+
+```bash
+npm install posthog-node
+# or
+yarn add posthog-node
+# or
+pnpm add posthog-node
+```
+
+</Step>
+
+<Step title="Initialize the client and interceptor" badge="required">
+
+Create a PostHog client and register the `PostHogInterceptor` globally with `captureExceptions` enabled:
+
+```ts file=main.ts
+import { NestFactory } from '@nestjs/core'
+import { PostHog } from 'posthog-node'
+import { PostHogInterceptor } from 'posthog-node/nestjs'
+import { AppModule } from './app.module'
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule)
+
+  const posthog = new PostHog('<ph_project_token>', {
+    host: '<ph_client_api_host>',
+  })
+
+  app.useGlobalInterceptors(
+    new PostHogInterceptor(posthog, { captureExceptions: true })
+  )
+
+  await app.listen(3000)
+}
+bootstrap()
+```
+
+This automatically captures unhandled exceptions (5xx) and sends them to PostHog as `$exception` events, including stack traces and request context.
+
+### Configuration options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `captureExceptions` | `boolean \| object` | `false` | Enable exception capture. Pass `true` for defaults or an object to configure. |
+| `captureExceptions.minStatusToCapture` | `number` | `500` | Minimum HTTP status code to capture. Exceptions with a lower status (e.g. 4xx) are skipped. |
+
+To also capture 4xx errors:
+
+```ts
+app.useGlobalInterceptors(
+  new PostHogInterceptor(posthog, {
+    captureExceptions: { minStatusToCapture: 400 },
+  })
+)
+```
+
+<CalloutBox icon="IconInfo" title="How it works">
+
+The interceptor observes exceptions transparently using an RxJS `catchError` without interfering with NestJS's exception filter pipeline. It skips already-captured errors and `HttpException`s below the configured threshold, then re-throws so your exception filters still work.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Connect frontend context" badge="recommended">
+
+To link server-side errors with client sessions and users, configure `__add_tracing_headers` in your frontend [PostHog JS](/docs/libraries/js) setup:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    __add_tracing_headers: ['your-nestjs-backend.com']
+})
+```
+
+This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically to attach session and user context to captured exceptions.
+
+</Step>
+
+<Step title="Manual exception capture (optional)" badge="optional">
+
+You can also manually capture exceptions anywhere in your NestJS application using `captureException`:
+
+```ts file=app.controller.ts
+import { Controller, Post, Body } from '@nestjs/common'
+import { PostHog } from 'posthog-node'
+
+@Controller()
+export class AppController {
+  constructor(private readonly posthog: PostHog) {}
+
+  @Post('checkout')
+  async checkout(@Body() body: any) {
+    try {
+      await processPayment(body)
+    } catch (error) {
+      this.posthog.captureException(error, 'user_distinct_id', {
+        path: '/checkout',
+        method: 'POST',
+      })
+      throw error
+    }
+  }
+}
+```
+
+</Step>
+
+<Step title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm events are being sent to PostHog. Add a test route to your controller:
+
+```ts
+@Get('debug-error')
+debugError() {
+  throw new Error('Test exception from NestJS')
+}
+```
+
+Visit `/debug-error` in your browser and check the [activity feed](https://app.posthog.com/activity/explore) for the `$exception` event.
+
+</Step>
+
+</Steps>
