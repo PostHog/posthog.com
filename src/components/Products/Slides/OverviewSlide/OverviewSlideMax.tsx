@@ -29,7 +29,7 @@ export default function OverviewSlideMax() {
                             PostHog AI is deeply connected with your data
                         </h2>
                         <p className="text-2xl text-secondary mx-auto">
-                            Ask it to build insights, write HogQL queries, summarize session recordings, create surveys,
+                            Ask it to build insights, write PostHog SQL queries, summarize session recordings, create surveys,
                             set up feature flags – basically handle the grunt work that would normally take 20 minutes
                             of clicking around.
                         </p>
