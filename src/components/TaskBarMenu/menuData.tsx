@@ -531,6 +531,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'WIP',
+                    link: '/wip',
+                },
+                {
+                    type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
                 },
