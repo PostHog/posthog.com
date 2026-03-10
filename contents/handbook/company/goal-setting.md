@@ -57,7 +57,6 @@ Add entries under each question with your initials/name like: "- (your name): My
 
 What themes can we distill from the above HOGS list? What are categories of things we should consider working on? What are other things we might want to consider?
 
-
 ## New goals (15 minutes - do as a team)
 
 This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
@@ -72,10 +71,24 @@ What we'll ship:
 
 If you aren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
 
-## Why we do this
+## Publishing and viewing goals 
 
-- Sense of winning / losing - this bonds teams, increases urgency and creates satisfaction when we achieve things
-- Clarifies our direction
+When a team has set their quarterly goals it is the responsibility of the [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead) to document the goals on their team page, [publicly](/handbook/values). This enables teams to see what each other are working on, helps us hold teams accountable to their goals, and creates a shared sense of urgency and direction. 
+
+You can easily see what goals teams have set on the [WIP](//wip) page, which pulls all goals from the respective team pages. 
+
+Teams can choose to document their goals publicly in a number of formats, but below is a useful template for getting started. Individuals may also choose to create planning issues to track their work in greater detail.
+
+```
+<details>
+<summary>Write the goal here (owner)</summary>
+
+- **Rationale:** Why is this important?
+- **What we'll ship:** Keep this brief
+- **We'll know we're successful when:** Metric or outcome
+
+</details>
+```
 
 ## Good goal setting
 
