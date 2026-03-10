@@ -38,6 +38,19 @@ Try these example questions and directives with your MCP-enabled agent:
 - Set all high-severity errors from today to suppressed.  
 ```
 
+## Visual UI apps
+
+MCP clients that support UI rendering – like [Claude Desktop](https://claude.ai/download) – display rich visual interfaces when you query error tracking data. Instead of plain text responses, you get interactive components that mirror the PostHog app experience.
+
+These UI apps include:
+
+- **Paginated issue lists** - Browse your error issues in a sortable table with status badges and first-seen dates
+- **Detailed issue views** - See issue status, assignee, description, and linked external issues (e.g. GitHub, Linear)
+- **Error event details** - View exception type, message, browser/OS info, and other metadata
+- **Interactive stack traces** - Expand individual frames to see source code context, with in-app frames auto-expanded and vendor frames labeled
+
+This gives you a richer debugging experience directly inside your MCP client, making it faster to triage and investigate errors without switching to the PostHog app.
+
 ## Install the MCP server
 
 To start debugging with PostHog MCP, install the MCP server in your preferred MCP client. 
