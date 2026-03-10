@@ -3,7 +3,6 @@ import {
     // Web SDK installations
     WebInstallation,
     NextJSInstallation,
-    HTMLSnippetInstallation,
     ReactInstallation,
     VueInstallation,
     AngularInstallation,
@@ -55,7 +54,7 @@ export const WANextJSInstallationWrapper = () => (
 
 export const WAHTMLSnippetInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
-        <HTMLSnippetInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

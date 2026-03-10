@@ -3,7 +3,6 @@ import {
     // Web SDK installations
     WebInstallation,
     NextJSInstallation,
-    HTMLSnippetInstallation,
     ReactInstallation,
     VueInstallation,
     AngularInstallation,
@@ -45,7 +44,7 @@ export const SRNextJSInstallationWrapper = () => (
 
 export const SRHTMLSnippetInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
-        <HTMLSnippetInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
