@@ -145,24 +145,20 @@ PostHog and LaunchDarkly take opposing approaches.
 />
 </p>
 
-**PostHog’s** [feature flag pricing](/feature-flags#pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
+**PostHog’s** [feature flag pricing](/pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available. You can calculate your cost exactly on the [pricing page](/pricing).
 
-**LaunchDarkly** has recently restructured its plans. The current tiers are:
+**LaunchDarkly**'s pricing is harder to model without knowing your specific setup. The current tiers are:
 
 - **Developer (free):** Up to 5 service connections, 1,000 client-side MAU, and 100k experimentation MAU. Suitable for passion projects.
 - **Foundation:** $12/service connection/month + $10/1k client-side MAU/month. Includes unlimited seats, projects, and SSO. Experimentation is included but MAU for experiments is billed separately at $3/1k/month.
 - **Enterprise:** Custom pricing, need to contact sales. Everything in Foundation plus release automation, approval workflows, scheduling, SAML/SCIM, and custom roles.
 - **Guardian:** Custom pricing, need to contact sales. Everything in Enterprise plus guarded rollouts, automatic rollback, proactive failure notifications, and advanced release monitoring.
 
-As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at the opaque "Enterprise" level.
+Backend usage is measured in "service connections" – each microservice, replica, and environment counts as one – which doesn't map cleanly to team size or request volume. Frontend usage is billed per client-side MAU at $10/1k/month. If you want an accurate number, use LaunchDarkly's pricing calculator or request a quote directly.
+
+As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at Enterprise level.
 
 #### Example scenarios
-
-PostHog's pricing is straightforward to estimate: 1M flag requests/month are free, then $0.0001/request with volume discounts above 2M. You can calculate your cost exactly on the [pricing page](/pricing).
-
-LaunchDarkly's pricing is harder to model without knowing your specific setup. 
-
-Backend usage is measured in "service connections" – each microservice, replica, and environment counts as one – which doesn't map cleanly to team size or request volume. Frontend usage is billed per client-side MAU at $10/1k/month. If you want an accurate number, use LaunchDarkly's pricing calculator or request a quote directly.
 
 - **Startup (1M requests/mo):** PostHog **$0** (free tier). LaunchDarkly Foundation – depends on service connections and MAU, but a small setup with ~5 connections and 5k MAUs = ~$110/mo minimum.
 - **Scaleup (10M requests/mo):** PostHog **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045). LaunchDarkly – a mid-size setup with ~20 connections and 25k MAUs = ~$490/mo, not counting Experimentation MAU.
@@ -172,6 +168,7 @@ Backend usage is measured in "service connections" – each microservice, replic
 
 Although LaunchDarkly has basic reporting features, PostHog has a more expansive analytics suite. Visualizations, funnels, retention, SQL querying, and session replays are all integrated with flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
@@ -184,11 +181,13 @@ Although LaunchDarkly has basic reporting features, PostHog has a more expansive
         { label: 'Non-flag data', description: 'Combine flag data with other product data', values: [true, false] },
     ]}
 />
+</p>
 
 ### Integrations
 
 Both PostHog and LaunchDarkly have a range of integrations that enable them to import, export, enhance, and make use of data.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
@@ -204,6 +203,7 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
         { label: 'Edge tools', description: 'Use edge networks', values: [false, true] },
     ]}
 />
+</p>
 
 LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
 
@@ -329,18 +329,5 @@ The best alternatives to LaunchDarkly depend on what you're optimizing for:
 - **Unleash** if you need full self-hosting and data sovereignty
 
 For a full breakdown, see our guide to the [best LaunchDarkly alternatives](/blog/best-launchdarkly-alternatives).
-
-</details>
-
-<details>
-<summary>How is PostHog different from LaunchDarkly?</summary>
-
-LaunchDarkly is a dedicated feature management platform focused on enterprise release governance – approval workflows, audit logs, compliance, and deep DevOps integrations. It doesn't include product analytics, session replay, or error tracking.
-
-PostHog takes a different approach. Feature flags are one tool inside a broader platform that also includes [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [LLM analytics](/llm-analytics). You can roll out a flag, watch session replays of affected users, check analytics for impact, and catch errors – all without switching tools.
-
-Choose **LaunchDarkly** if feature governance and enterprise compliance are your primary concern. 
-
-Choose **PostHog** if you want flags as part of a broader build-measure-learn workflow at a fraction of the cost.
 
 </details>
