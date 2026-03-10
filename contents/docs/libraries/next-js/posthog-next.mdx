@@ -110,7 +110,7 @@ bun add @posthog/next
 
 <Step title="Add your environment variables" badge="required">
 
-Add these to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
+Add these to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project token in your [project settings](https://app.posthog.com/project/settings).
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
@@ -180,7 +180,7 @@ export function TrackButton() {
 }
 ```
 
-**Feature flags:**
+**Feature Flags:**
 
 ```tsx
 'use client'
@@ -213,7 +213,7 @@ You can also read [the full `posthog-js` documentation](/docs/libraries/js/featu
 
 <Step title="Identify your user" badge="recommended">
 
-Call `posthog.identify()` on the client after login to link events to a known user. This connects event captures, [session replays](/docs/session-replay), [LLM traces](/docs/ai-engineering), and [error tracking](/docs/error-tracking) to the same person across client and server.
+Call `posthog.identify()` on the client after login to link events to a known user. This connects event captures, [session replays](/docs/session-replay), [LLM traces](/docs/ai-engineering), and [Error Tracking](/docs/error-tracking) to the same person across client and server.
 
 ```tsx
 'use client'
@@ -259,7 +259,7 @@ See our guide on [identifying users](/docs/getting-started/identify-users) for m
 
 <Step title="Further reading" badge="recommended">
 
-- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js analytics, Feature Flags, and more](/tutorials/nextjs-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 
 </Step>
