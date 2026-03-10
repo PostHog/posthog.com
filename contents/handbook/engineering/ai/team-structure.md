@@ -34,56 +34,10 @@ Once you ship a tool or skill, it's automatically available across every surface
 
 ## How the teams connect
 
-Together, these teams form the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy):
-
 - **Signals** surfaces useful data from PostHog, creates a task with context, and the cloud agent works on it. You review and iterate in PostHog Code.
 - **PostHog AI** owns the background sandboxed agents and can start coding agent tasks during chats. These tasks are inspectable in both the web product and PostHog Code.
 - **PostHog Code** is where engineers review, guide, and manage agent work across all their tasks in one place.
 - **Product teams** ship their own MCP tools and skills independently. Once shipped, these are automatically available across every surface.
-
-## Integration vectors for product teams
-
-There are multiple ways product teams can contribute to PostHog's [product autonomy vision](/handbook/engineering/ai/ai-platform#vision-product-autonomy). These are listed roughly in order of effort, from easiest to most ambitious.
-
-### MCP: Expose your APIs to agents
-
-The most obvious and lowest-effort vector. Expose your product's APIs through the MCP server so agents can interact with your features.
-
-**Effort**: Low
-
-**Consumers**: PostHog AI, PostHog Code, coding agents (Claude Code, Codex, etc.), Wizard, vibecoding platforms (Lovable, Replit, etc.), ChatGPT & Claude Desktop, and more.
-
-### Skills: Teach agents how to do jobs
-
-If you've already exposed your APIs, the next step is explaining how an agent should accomplish typical jobs-to-be-done — analyzing activity in PostHog, debugging why a feature flag was turned off, implementing enterprise features, etc. Skills combine tools, domain knowledge, and step-by-step workflows into templates agents can follow.
-
-**Effort**: Medium, but the impact is very high.
-
-**Consumers**: PostHog AI, PostHog Code, coding agents (Claude Code, Codex, etc.), ChatGPT & Claude Desktop, and more.
-
-### Signals: Feed the autonomy loop
-
-If your product produces actionable or near-actionable signals — an insight threshold reached, a new error-tracking issue, a frustration pattern detected — use the signals API so agents can discover these hints and act on them later. Signals are what enable the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy). PostHog Code acts on plans generated from these signals.
-
-**Effort**: Low to medium.
-
-**Consumers**: PostHog Code (local development) and PostHog AI (background agents).
-
-### PostHog Code: Features for the agentic development environment
-
-PostHog Code is an agentic development environment where coding agents work on tasks in isolated workspaces. If your product area can make those agents smarter or the engineer's workflow faster, you can build features directly into it. Think PR reviews that check session recordings for regressions, QA steps that verify instrumentation coverage, or task prioritization that weighs your product's signals. This is the highest-effort vector but also the most deeply integrated.
-
-**Effort**: High.
-
-**Consumers**: PostHog Code.
-
-### Automations & background agents
-
-Run PostHog AI based on triggers from PostHog Workflows, CRON, Temporal, etc., to automate complex workflows. Example use cases: analyze an incoming support ticket based on indexed documentation and respond to the customer, or spawn a new signal like "here is a bug, fix it."
-
-**Effort**: Medium to high.
-
-**Consumers**: Your persona using the web browser (UI), PostHog AI, PostHog Code, coding agents (Claude Code, Codex, etc.), Wizard, vibecoding platforms (Lovable, Replit, etc.), ChatGPT & Claude Desktop, and more.
 
 ## How to get started
 
