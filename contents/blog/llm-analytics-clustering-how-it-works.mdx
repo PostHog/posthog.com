@@ -55,8 +55,8 @@ Before diving into the steps, here are the main considerations we kept coming ba
 - **Keeping costs sane** - Running LLM summarization on every single trace would cost a _lot_. So we sample a small random subset each hour, use GPT-4.1 nano for summarization (fast and cheap), and are planning to move to the OpenAI Batch API to optimize further, as well as some BYOK approaches for "on demand" steering and triggering of the whole pipeline.
 - **One-size-fits-all vs. custom summaries** - It's hard to have a single general summary schema that works perfectly for every type of trace we might see. Ideally, users could steer or bring their own prompts and structured outputs. For now, we started with a general-purpose prompt and summary schema that works well across most use cases, but enabling user-defined summarization is a potential future improvement.
 - **No existing embeddings to lean on** - PostHog doesn't already have a RAG system or embeddings index over all LLM analytics events. Rather than building that infrastructure first, we took a shortcut: convert traces to text, summarize them with an LLM, then embed the summaries. This gives us high-quality, semantically rich vectors without needing a full RAG pipeline - and the summaries are useful on their own as a feature.
-- **Zero-config** - The Temporal workflows just run in the background. As you send traces to LLM Analytics, clustering will just work once there's enough data to sample from. No setup, no configuration needed.
-- **User steering** - In the future, we'd love for users to define their own clustering configs, filter to specific subpopulations, and even kick off clustering runs on demand. For example, if you know you want to look at just your "refund request" traces, you could define a job for that. We're not there yet, but the architecture supports it.
+- **Zero-config by default, customizable when you need it** - The Temporal workflows just run in the background. As you send traces to LLM Analytics, clustering will just work once there's enough data to sample from. No setup needed — but if you want more control, you can now create [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs) to steer what gets clustered (more on this below).
+- **User steering** - We recently shipped [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs), which let you define up to five independent clustering configurations per project. Each job can target a specific analysis level (traces or generations) and apply event filters to scope which data gets included — for example, you could create a job that only clusters traces from a specific model or a particular user segment. Jobs run automatically during the next scheduled cycle.
 
 ## Step 1: From JSON blobs to readable text
 
@@ -304,9 +304,20 @@ Here's what you're seeing in the demo:
 
 The noise cluster (labeled "Outliers") often contains the most interesting one-off traces – edge cases, unusual workflows, or bugs that don't fit any pattern. Pair this with [evaluations](/docs/llm-analytics/evaluations) (our LLM-as-a-judge feature) to automatically score the quality of generations within each cluster.
 
+## Steering with clustering jobs
+
+Since launching this pipeline, we've added [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs) — a way to create independent clustering configurations so you can steer what gets analyzed. Instead of one big clustering run across all your data, you can define up to five jobs per project, each with its own analysis level (traces or generations) and event filters.
+
+For example, you might create separate jobs for:
+- Traces from your production GPT-4o agent
+- Generations from your RAG pipeline
+- Only traces where a specific custom property matches (e.g., `$ai_model = "claude-sonnet-4-20250514"`)
+
+Each job runs automatically during the next scheduled cycle, and the run selector on the Clusters page shows which job produced each run. See the [clustering jobs docs](/docs/llm-analytics/clusters#managing-clustering-jobs) for the full setup guide.
+
 ## Try it now
 
-If you're already using [LLM Analytics](/llm-analytics) in PostHog, clustering runs automatically – no configuration needed. Once you have enough trace data flowing in, clusters will appear in the clusters tab. If you're not using LLM Analytics yet, you can [get started in minutes](/docs/llm-analytics/start-here) with SDKs for [OpenAI](/docs/llm-analytics/installation/openai), [Anthropic](/docs/llm-analytics/installation/anthropic), [LangChain](/docs/llm-analytics/installation/langchain), [Vercel AI](/docs/llm-analytics/installation/vercel-ai), and [many more](/docs/llm-analytics/installation).
+If you're already using [LLM Analytics](/llm-analytics) in PostHog, clustering runs automatically – no configuration needed. Want more control? Set up [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs) to define exactly what gets clustered. If you're not using LLM Analytics yet, you can [get started in minutes](/docs/llm-analytics/start-here) with SDKs for [OpenAI](/docs/llm-analytics/installation/openai), [Anthropic](/docs/llm-analytics/installation/anthropic), [LangChain](/docs/llm-analytics/installation/langchain), [Vercel AI](/docs/llm-analytics/installation/vercel-ai), and [many more](/docs/llm-analytics/installation).
 
 <p>
 	<CallToAction to="https://app.posthog.com/llm-analytics/clusters">
