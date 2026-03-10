@@ -10,22 +10,24 @@ If you need help with the website, go to `#posthogdotcom`.
 
 Here's a quick guide to who to ask if you want help with a specific marketing activity.
 
-<details>
-<summary>I want to send an email to a lot of users</summary>
 
-We run email campaigns through Customer.io. Speak to <TeamMember name="Joe Martin" /> to get started. See: [Email comms](/handbook/brand/email-comms)
+<details>
+<summary>I need a product marketer, but I don't know which</summary>
+
+Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #team-marketing in Slack and tag the team lead. 
 </details>
+
 
 <details>
 <summary>I'm interested in running, attending, or speaking at an event</summary>
 
-You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party planner". Read the [events strategy handbook](/handbook/marketing/events) for more. 
+You should speak to <SmallTeam slug="irl-events" />, our resident party planners. Read the [events strategy handbook](/handbook/marketing/events) for more. 
 </details>
 
 <details>
 <summary>I want to launch my product out of beta</summary>
 
-Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/marketing/product-announcements).
+Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
 </details>
 
 <details>
@@ -45,26 +47,23 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 <details>
 <summary>Someone wants to partner with us</summary>
 
-Refer them to <TeamMember name="Joe Martin" />. He'll give them the bad news / explore any opportunities.
-
-If another company is interested in building an integration with PostHog, raise this with our integrations engineer.
+Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="marketing" /> know. 
 </details>
 
 <details>
 <summary>Someone wants us to sponsor them</summary>
 
-If it's an [influencer](/handbook/growth/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
+If it's an [influencer](/handbook/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
 
-If it's an event, speak to <TeamMember name="Daniel Zaltsman" />.
+If it's an event, speak to <SmallTeam slug="irl-events" />.
 </details>
-
 
 <details>
 <summary>I want to create a video, or have a video idea we should try...</summary>
 
 To start with, post ideas in the `#content-and-video-ideas` Slack channel. <TeamMember name="Alex van Leeuwen" /> and <TeamMember name="Jordo Dibb" /> on the content team are your main points of contact here.
 
-Please also read [How we do video at PostHog](/handbook/growth/marketing/video). We're still figuring things out, though, so very interested in suggestions.
+Please also read [How we do video at PostHog](/handbook/marketing/video). We're still figuring things out, though, so very interested in suggestions.
 
 If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim" /> as well.
 </details>

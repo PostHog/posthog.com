@@ -277,6 +277,7 @@ Local evaluation is not possible for flags that:
 1. Have experience continuity enabled, which is set when you check ['persist flag across authentication steps'](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) on your feature flag.
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
+4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
 
 ### Dynamic cohort restrictions
 
