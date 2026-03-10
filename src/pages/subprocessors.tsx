@@ -149,11 +149,7 @@ function SubprocessorsPage(): JSX.Element {
 
     return (
         <>
-            <SEO
-                title="Subprocessors - PostHog"
-                description="Subprocessor inventory for PostHog Cloud and AI features."
-                image="/images/og/privacy.png"
-            />
+            <SEO title="Subprocessors - PostHog" description="Subprocessors for PostHog Cloud and AI features." />
 
             <div className="max-w-6xl mx-auto px-4 py-8 mb-4 prose dark:prose-invert @container">
                 <h1 className="mb-2">Subprocessors</h1>
