@@ -65,6 +65,7 @@ Being an all-in-one platform has two further benefits:
 
 -   **Self-hostable:** <span className="text-green text-lg">✔</span>
 -   **BAA available:** <span className="text-green text-lg">✔</span>
+-   **BAA plan:** [Platform packages](/platform-packages) – $250/mo
 
 A BAA is available on PostHog's [platform packages](/platform-packages), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
@@ -82,6 +83,7 @@ That said, surveys and error tracking still aren't included natively, so you'd l
 
 -   **Self-hostable:** <span className="text-red text-lg">✖</span>
 -   **BAA available:** <span className="text-green text-lg">✔</span>
+-   **BAA plan:** Enterprise plan – contact sales for pricing
 
 A BAA is available on Mixpanel's Enterprise plan. You'll need to sign separate BAAs with any other analytics you wish to integrate with Mixpanel.
 
@@ -117,6 +119,7 @@ Freshpaint sits between data sources (e.g data warehouses) and third-party data 
 
 -   **Self-hostable:** <span className="text-red text-lg">✖</span>
 -   **BAA available:** <span className="text-green text-lg">✔</span>
+-   **BAA plan:** Compliance plan – contact sales for pricing
 
 Freshpaint is a cloud-only product specifically designed for healthcare companies, so it offers a BAA (available on the Compliance plan, which requires contacting sales for pricing).
 
@@ -130,6 +133,7 @@ Freshpaint is a cloud-only product specifically designed for healthcare companie
 
 -   **Self-hostable:** <span className="text-green text-lg">✔</span>
 -   **BAA available:** <span className="text-green text-lg">✔</span>
+-   **BAA plan:** Enterprise plan – contact sales for pricing
 
 PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by signing a BAA or by self-hosting, giving you maximum flexibility.
 
@@ -143,6 +147,7 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 
 -   **Self-hostable:** <span className="text-red text-lg">✖</span>
 -   **BAA available:** <span className="text-green text-lg">✔</span>
+-   **BAA plan:** Enterprise plan – contact sales for pricing
 
 Amplitude offers a BAA on its Enterprise plan, which includes advanced security features and custom data governance controls. You can also use its product analytics tool on top of a Snowflake data warehouse, which may be an option for HIPAA compliance if you're already storing analytics data in Snowflake.
 
