@@ -626,6 +626,10 @@ export const handbookSidebar = [
                 name: 'All hands topics',
                 url: '/handbook/exec/all-hands-topics',
             },
+            {
+                name: 'Responsibilities',
+                url: '/handbook/exec/responsibilities',
+            },
         ],
     },
     {
@@ -4377,6 +4381,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/go',
                         },
                         {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/installation/ios',
+                        },
+                        {
                             name: 'React Native',
                             url: '/docs/error-tracking/installation/react-native',
                         },
@@ -4432,6 +4440,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/upload-source-maps/ios',
                         },
                         {
                             name: 'Rollup',
@@ -5516,8 +5528,8 @@ export const docsMenu = {
                     icon: 'IconPencil',
                     color: 'purple',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
                 {
@@ -5541,7 +5553,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Sentiment classification',
+                    name: 'Sentiment',
                     url: '/docs/llm-analytics/sentiment',
                     icon: 'IconThumbsUp',
                     color: 'green',
