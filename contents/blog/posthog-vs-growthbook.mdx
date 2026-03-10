@@ -1,6 +1,6 @@
 ---
 title: 'In-depth: PostHog vs GrowthBook'
-date: 2026-03-09
+date: 2026-03-10
 author:
     - ian-vanagas
     - natalia-amorim
@@ -186,7 +186,7 @@ PostHog's [feature flag pricing](/pricing) is pay-per-request (and A/B tests use
 
 Like PostHog, GrowthBook is free to self-host. GrowthBook Cloud uses a seat-based model. The Starter plan is free for up to 3 users with basic features. The Pro plan is $40/user/month for up to 50 users and unlocks advanced statistics, the visual editor, CUPED, sequential testing, and more. 
 
-They claim this provides "unlimited traffic" (MAUs), but CDN requests are capped at 1M/month on Starter and 2M/month on Pro, after which you pay overage fees or need an Enterprise plan.
+GrowthBook uses usage-based pricing for CDN requests — capped at 1M/month on Starter and 2M/month on Pro, with overage fees beyond that.
 
 Features, like flag scheduling, permissions, custom fields, and the visual editor are only available on the GrowthBook Pro paid plan.
 
@@ -314,7 +314,7 @@ Both PostHog and GrowthBook enable companies to remain secure and compliant with
 - Both are SOC 2 certified and GDPR-ready. Both can be self-hosted. PostHog is also HIPAA-ready with EU hosting. GrowthBook is SOC 2 and ISO 27001 certified.
 
 **For teams migrating from Statsig**
-- Both are viable options. GrowthBook has released a Statsig migration kit and offers a warehouse-native approach. PostHog offers a [comparable feature set](/blog/best-statsig-alternatives) with the added benefit of analytics, replay, and error tracking built in.
+- Both are viable options. GrowthBook has released a Statsig migration kit and offers a warehouse-native approach. PostHog [also has a migration guide](/docs/migrate/statsig) and offers a [comparable feature set](/blog/best-statsig-alternatives) with the added benefit of analytics, replay, and error tracking built in.
 
 <WizardCTA />
 
