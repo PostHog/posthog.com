@@ -42,6 +42,15 @@ For example, with a Salesforce `opportunity` table, you can create a funnel that
 
 Each time you add the same table, you can configure different ID, Distinct ID, and Timestamp fields to represent different stages or events in your data.
 
+
+## Data warehouse funnels
+
+When building [funnels](/docs/product-analytics/funnels) using data warehouse tables, there are a few differences from standard event-based funnels:
+
+- **Per-step aggregation** - For funnels where all steps are data warehouse tables, the global "Aggregating by" dropdown is disabled. Instead, configure the **Aggregation target** field within each individual step's settings.
+
+- **Correlation analysis unavailable** - [Correlation analysis](/docs/product-analytics/correlation) is not available for funnels containing data warehouse sources.
+
 ## Filters and breakdowns
 
 When using data warehouse tables in insights, you can use properties from those tables to filter and breakdown as you would with any other insight. For example, you could filter `zendesk_tickets` for ones where the `status` is `open` or `hubspot_companies` where `lifecyclestage` is `lead`.
