@@ -2,7 +2,7 @@
 title: Send error tracking alerts
 ---
 
-To stay on top of issues, you can set up alerts. These enable you to post to Slack, Discord, Teams, or an HTTP Webhook when an issue is created or reopened.
+To stay on top of issues, you can set up alerts. These enable you to post to Slack, Discord, Teams, or an HTTP Webhook when an issue is created, reopened, or spiking.
 
 ## Issue created or reopened
 
@@ -20,6 +20,17 @@ Choosing an option brings you to a page to configure the alert. This may require
 This will then send alerts to your chosen destination when an issue is created or reopened like this:
 
 ![Slack notification](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_14_02_41_2x_2410295066.png)
+
+## Issue spiking
+
+You can also alert when an issue is spiking – meaning it's receiving significantly more exceptions than its baseline. This helps you catch sudden increases in error rates.
+
+To set up a spike alert, go to [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-alerting#selectedSetting=error-tracking-alerting), click **Alerting**, then **New notification**. Select **Issue spiking** as the trigger. You can configure alerts for Slack, Discord, or Microsoft Teams.
+
+Spike alerts show:
+- The exception count in the last five minutes
+- How many times over baseline the current rate is
+- A link to view the issue in PostHog
 
 ## Issue properties and assignments
 
