@@ -36,7 +36,6 @@ const tabs: { key: TabKey; label: string }[] = [
     { key: 'core', label: 'Third-Party Subprocessors (Core Services)' },
     { key: 'ai', label: 'Third-Party AI Subprocessors (Only if AI Features are Enabled)' },
     { key: 'internal', label: 'Internal Subprocessors' },
-    { key: 'all', label: 'All' },
 ]
 
 function SubprocessorsPage(): JSX.Element {
