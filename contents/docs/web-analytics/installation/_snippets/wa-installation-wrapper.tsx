@@ -1,9 +1,8 @@
 import React from 'react'
 import {
     // Web SDK installations
-    JSWebInstallation,
+    WebInstallation,
     NextJSInstallation,
-    HTMLSnippetInstallation,
     ReactInstallation,
     VueInstallation,
     AngularInstallation,
@@ -43,7 +42,7 @@ const MOBILE_SNIPPETS = {
 // Web SDK wrappers
 export const WAJSWebInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
-        <JSWebInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
@@ -55,7 +54,7 @@ export const WANextJSInstallationWrapper = () => (
 
 export const WAHTMLSnippetInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
-        <HTMLSnippetInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
