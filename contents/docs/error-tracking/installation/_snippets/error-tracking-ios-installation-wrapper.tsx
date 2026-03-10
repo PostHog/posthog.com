@@ -6,7 +6,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingIOSInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{}}>
-            <IOSInstallation modifySteps={addNextStepsStep} />
+            <IOSInstallation modifySteps={(steps) => addNextStepsStep(steps, 'ios')} />
         </OnboardingContentWrapper>
     )
 }
