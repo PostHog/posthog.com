@@ -531,8 +531,8 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: "What we're working on",
-                    link: '/what-were-working-on',
+                    label: 'WIP',
+                    link: '/wip',
                 },
                 {
                     type: 'item',
