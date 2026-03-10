@@ -36,6 +36,17 @@ When viewing or editing a prompt, click the markdown icon next to the **Prompt**
 - Only letters, numbers, hyphens, and underscores allowed (`^[a-zA-Z0-9_-]+$`)
 - Names must be unique within your project
 
+## Testing prompts in the playground
+
+You can test prompts in the playground before using them in production code.
+
+1. Open a prompt from **LLM analytics** > **Prompts**
+2. Click **Open in Playground**
+3. Configure your model and temperature settings
+4. Add test messages and run the request
+
+The playground stays linked to the prompt, so you can iterate on the system prompt and save changes back as a new version.
+
 ## Managing prompts via MCP
 
 You can also manage prompts through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
