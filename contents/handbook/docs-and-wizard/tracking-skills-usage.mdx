@@ -1,0 +1,125 @@
+## Tracking Skills Usage in Claude Code Plugins
+
+### Overview
+
+Track which skills and commands users invoke by hooking into the `UserPromptSubmit` event and sending events to PostHog.
+
+This approach has been verified against [PostHog's Capture API documentation](https://posthog.com/docs/api/capture#single-event).
+
+### 1. Create the Hook Configuration
+
+Add a `hooks/hooks.json` that triggers on every user prompt:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/track-command-usage.sh",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### 2. Parse the User Prompt
+
+The hook receives JSON via stdin. Extract the prompt and detect `/command` patterns:
+
+```bash
+input=$(cat)
+user_prompt=$(echo "$input" | jq -r '.prompt // ""')
+
+# Match /kit:command or /command format
+if [[ "$user_prompt" =~ ^/([a-zA-Z0-9_-]+):([a-zA-Z0-9_-]+) ]]; then
+  feature_name="${BASH_REMATCH[2]}"
+elif [[ "$user_prompt" =~ ^/([a-zA-Z0-9_-]+) ]]; then
+  feature_name="${BASH_REMATCH[1]}"
+fi
+```
+
+### 3. Identify the Feature Type
+
+Check if it's a command (`.md` file) or skill (directory):
+
+```bash
+if [ -f "${CLAUDE_PLUGIN_ROOT}/commands/${feature_name}.md" ]; then
+  event_name="command_used"
+elif [ -d "${CLAUDE_PLUGIN_ROOT}/skills/${feature_name}" ]; then
+  event_name="skill_used"
+fi
+```
+
+### 4. Build the Event Payload
+
+PostHog's capture endpoint requires three fields: `api_key`, `event`, and `distinct_id`. The `properties` and `timestamp` fields are optional.
+
+```bash
+event_payload=$(jq -n \
+  --arg api_key "$POSTHOG_API_KEY" \
+  --arg event "$event_name" \
+  --arg distinct_id "$session_id_hash" \
+  --arg plugin_name "$PLUGIN_NAME" \
+  --arg feature_name "$feature_name" \
+  --arg feature_type "$feature_type" \
+  --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+  --arg claude_version "${CLAUDE_VERSION:-unknown}" \
+  '{
+    api_key: $api_key,
+    event: $event,
+    distinct_id: $distinct_id,
+    timestamp: $timestamp,
+    properties: {
+      plugin_name: $plugin_name,
+      feature_name: $feature_name,
+      feature_type: $feature_type,
+      claude_version: $claude_version,
+      "$process_person_profile": false
+    }
+  }')
+```
+
+**Note:** Use `--arg` to pass bash variables into jq. Referencing `$VARIABLE` directly inside a jq JSON string creates a literal string, not variable expansion.
+
+### 5. Send to PostHog (Non-Blocking)
+
+Fire the event asynchronously so it doesn't slow down the user:
+
+```bash
+(
+  curl -X POST "https://eu.i.posthog.com/i/v0/e/" \
+    -H "Content-Type: application/json" \
+    -d "$event_payload" \
+    --max-time 3 --silent > /dev/null 2>&1 || true
+) &
+```
+
+Use the correct host for your region:
+- **US Cloud:** `https://us.i.posthog.com`
+- **EU Cloud:** `https://eu.i.posthog.com`
+
+### Privacy Considerations
+
+**Anonymous events:** Setting `$process_person_profile: false` tells PostHog to skip person processing. No person profile is created or updated, which reduces costs and avoids storing user data.
+
+**Hashed identifiers:** Hash the session identifier to avoid storing PII while maintaining consistent session grouping:
+
+```bash
+session_id_hash=$(echo -n "$transcript_path" | shasum -a 256 | cut -c1-10)
+```
+
+### Debugging
+
+PostHog returns `200 OK` even when events are invalid (empty `distinct_id`, missing `event` name). If events aren't appearing, verify:
+
+1. `api_key` is correct
+2. `event` is non-empty
+3. `distinct_id` is non-empty
+4. You're hitting the correct regional endpoint
