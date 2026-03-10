@@ -52,13 +52,13 @@ Some analytics tools, such as [Google Analytics](/blog/ga4-alternatives), don't 
 
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
-[PostHog](/) is an open-source platform that combines [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), and [user surveys](/surveys), and a lot more into one platform. 
+[PostHog](/) is a developer platform that combines [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [user surveys](/surveys), and a lot more.
 
 It gives you every tool you need to understand user behavior and, unlike typical analytics tools that rely on third-party integrations, all these tools work together seamlessly.
 
 Being an all-in-one platform has two further benefits:
 
-1. PostHog can replace multiple products – e.g. [Mixpanel](/blog/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/blog/best-launchdarkly-alternatives) for feature management, etc.
+1. PostHog can replace multiple products – e.g. [Mixpanel](/blog/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/blog/best-launchdarkly-alternatives) for feature management, [Sentry](/blog/best-sentry-alternatives) for error tracking, etc.
 2. You only need to sign one BAA to get all these tools, reducing legal complexity and risk.
 
 #### PostHog and HIPAA compliance
@@ -74,11 +74,9 @@ A BAA is available on PostHog's [platform packages](/platform-packages), which a
 
 ![Mixpanel - hipaa analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/mixpanel.png)
 
-#### Overview
+[Mixpanel](/blog/posthog-vs-mixpanel) is a product analytics tool with genuinely strong funnel and behavioral analysis – useful for healthcare teams tracking complex user journeys. It added session replay and feature flags in late 2025, which means more functionality under a single BAA than before.
 
-[Mixpanel](/blog/posthog-vs-mixpanel) is a product analytics tool focused on funnel and behavioral analysis. It added session replay and feature flags in late 2025, though these are newer additions and less mature than dedicated tools. 
-
-It still doesn't include surveys or error tracking natively, so you'd need additional tools – and separate BAAs – for those.
+That said, surveys and error tracking still aren't included natively, so you'd likely need additional tools – and separate BAAs – for those.
 
 #### Mixpanel and HIPAA compliance
 
@@ -111,8 +109,6 @@ This makes Countly a good option if you'd prefer to [self-host your analytics](/
 
 ![freshpaint](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/freshpaint.png)
 
-#### Overview
-
 **Freshpaint** isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies.
 
 Freshpaint sits between data sources (e.g data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as [Google Analytics](/blog/ga4-alternatives), safe in the knowledge you're not accidentally passing PHI into them.
@@ -122,13 +118,11 @@ Freshpaint sits between data sources (e.g data warehouses) and third-party data 
 -   **Self-hostable:** <span className="text-red text-lg">✖</span>
 -   **BAA available:** <span className="text-green text-lg">✔</span>
 
-Freshpaint is a cloud-only product specifically designed for healthcare companies, so offers a BAA for HIPAA compliance.
+Freshpaint is a cloud-only product specifically designed for healthcare companies, so it offers a BAA (available on the Compliance plan, which requires contacting sales for pricing).
 
 ### 5. Piwik PRO
 
 ![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
-
-#### Overview
 
 **Piwik PRO** is a commercial analytics and customer data platform spun out of the open-source analytics tool, [Matomo](/blog/best-matomo-alternatives). As such, it's more a web analytics tool than other options in this list, though you can use it on mobile and web apps. Because it's based on Europe, Piwik PRO is popular among companies also seeking GDPR compliance – it has a built-in compliance manager to assist with this, too.
 
@@ -143,8 +137,6 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 
 ![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
 
-#### Overview
-
 [Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, A/B testing, and Guides & Surveys. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."
 
 #### Amplitude and HIPAA compliance
@@ -156,23 +148,6 @@ Amplitude offers a BAA on its Enterprise plan, which includes advanced security 
 
 **See also:** [The most popular Amplitude alternatives](/blog/best-amplitude-alternatives)
 
-### 7. Heap
-
-![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
-
-#### Overview
-
-[Heap](/blog/posthog-vs-heap) is a product analytics tool that, like PostHog, Mixpanel and Amplitude, helps you understand user behavior using trends and funnel analysis. It also offers a basic session replay tool. Like Amplitude, it caters more to non-technical users, such as marketing and e-commerce teams focused on optimizing conversions.
-
-#### Heap and HIPAA compliance
-
--   **Self-hostable:** <span className="text-red text-lg">✖</span>
--   **BAA available:** <span className="text-green text-lg">✔</span>
-
-Heap has been incorporated into Contentsquare following an acquisition. If HIPAA compliance is a requirement, verify directly with Heap/Contentsquare sales whether a BAA is still available and which plan it applies to before committing.
-
-**See also:** [The most popular Heap alternatives](/blog/best-heap-alternatives)
-
 ## Which HIPAA-compliant analytics tool should you choose?
 
 - Want one platform for product analytics, session replay, feature flags, and more – with a single BAA covering everything? **[PostHog](/platform-packages)**
@@ -181,7 +156,6 @@ Heap has been incorporated into Contentsquare following an acquisition. If HIPAA
 - Already using non-HIPAA-compliant tools and need a PHI firewall in front of them? **Freshpaint**
 - Need web analytics and a CDP with both BAA and self-hosting options? **Piwik PRO**
 - Want retention-focused product analytics with a BAA and warehouse-native options? **Amplitude**
-- Prefer autocapture-based analytics with BAA support – but verify current availability given Heap's Contentsquare acquisition? **Heap**
 
 <WizardCTA />
 
@@ -226,6 +200,17 @@ If you're in healthcare, you'll need to either use a HIPAA-compliant analytics t
 </details>
 
 <details>
+<summary>Is Heap HIPAA compliant?</summary>
+
+No – [Heap](/blog/posthog-vs-heap) does not offer a BAA and is not HIPAA compliant. This has been a long-standing limitation, and it didn't change when [Contentsquare](/blog/best-contentsquare-alternatives) acquired Heap. 
+
+Contentsquare itself also does not sign BAAs, meaning neither the standalone Heap product nor the broader Contentsquare platform (which also includes [Hotjar](/blog/posthog-vs-hotjar)) is suitable for handling PHI.
+
+If you need session replay or product analytics with HIPAA compliance, you'll need to look at alternatives like PostHog, Mixpanel, or Amplitude.
+
+</details>
+
+<details>
   <summary>What are the best HIPAA-compliant analytics tools in 2026?</summary>
 
 Based on our research, the best HIPAA-compliant analytics tools right now are:
@@ -236,21 +221,15 @@ Based on our research, the best HIPAA-compliant analytics tools right now are:
 4. **Freshpaint** – Best for teams that need a PHI-safe layer in front of existing non-compliant tools
 5. **Piwik PRO** – Best for web analytics with both BAA and self-hosting options
 6. **Amplitude** – Best for retention-focused analytics with warehouse-native HIPAA options
-7. **Heap** – Autocapture-based analytics with historical BAA support (verify current availability given Contentsquare acquisition)
 
 </details>
 
 <details>
   <summary>How is PostHog different from other HIPAA-compliant analytics tools?</summary>
 
-**PostHog** is the only tool in this list that covers the full product development stack – product analytics, web analytics, session replay, feature flags, A/B testing, surveys, error tracking, LLM analytics, logs, and more – all under a single BAA.
+**PostHog** is the only tool in this list that covers the full product development stack – product analytics, web analytics, session replay, feature flags, A/B testing, surveys, error tracking, LLM analytics, logs, and more – all under a single BAA. All products offer generous free tiers and [usage-based billing](/pricing) with no surprise overages.
 
 That matters for HIPAA compliance because every additional vendor means another BAA to negotiate, another data-sharing agreement to manage, and another potential liability surface.
-
-- **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and more
-- **Single BAA:** One agreement covers every PostHog product
-- **Open source:** MIT-licensed and self-hostable if you need full data sovereignty
-- **Transparent pricing:** Generous free tiers and [usage-based billing](/pricing) with no surprise overages
 
 </details>
 
