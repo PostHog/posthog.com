@@ -45,7 +45,7 @@ export const flagsmith = {
             management: {
                 features: {
                     approvals: true,
-                    data_source: true,
+                    data_source: 'Third-party',
                     flag_administration: false,
                     flag_scheduling: true,
                     history_activity: true,

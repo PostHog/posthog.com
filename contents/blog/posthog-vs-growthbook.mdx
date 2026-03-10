@@ -125,7 +125,7 @@ Experimentation is where PostHog and GrowthBook's functionality diverges. Both s
 
 ![Experiment creation flow](https://res.cloudinary.com/dmukukwp6/video/upload/Experiments_03ca00f08f.mp4)
 
-GrowthBook's visual editor is similar to PostHog's [toolbar](/docs/toolbar). It enables you to select an element to modify using an A/B test. The editor is limited to server-side rendered apps.
+GrowthBook's visual editor is similar to PostHog's [toolbar](/docs/toolbar). It enables you to select an element to modify using an A/B test, but the editor is limited to server-side rendered apps.
 
 <p>
 <ProductComparisonTable
@@ -295,10 +295,6 @@ Both PostHog and GrowthBook enable companies to remain secure and compliant with
 - Want feature flags, experiments, analytics, session replay, error tracking, and surveys in one platform? Go with **PostHog**.
 - Already have a mature data warehouse and want a warehouse-native experimentation tool with advanced statistical methods? **GrowthBook** is a solid choice.
 
-## When to choose PostHog vs GrowthBook
-
-- Want feature flags, experiments, analytics, session replay, error tracking, and surveys in one platform – no data warehouse required? Go with **PostHog**.
-- Already have a mature data warehouse and want a warehouse-native experimentation tool with advanced statistical methods? **GrowthBook** is a solid choice.
 
 ### Recommendations by team type
 
@@ -388,7 +384,7 @@ Because PostHog is an all-in-one platform, you reuse the same implementation (us
 <details>
 <summary>How long does it take to implement GrowthBook?</summary>
 
-Longer than PostHog, mainly because GrowthBook requires integrating external tools and writing SQL. A typical implementation from scratch involves: signing up or self-hosting, creating an SDK endpoint and installing the SDK, defining target attributes in-app and in GrowthBook, setting up an analytics tool and integrating it, connecting your data warehouse with SQL configuration, and creating flags or experiments with SQL-based tracking metrics.
+Longer than PostHog, mainly because GrowthBook requires integrating external tools and writing SQL. A typical implementation from scratch involves: signing up or self-hosting, creating an SDK endpoint and installing the SDK, defining target attributes in-app, and in GrowthBook, setting up an analytics tool and integrating it, connecting your data warehouse with SQL configuration, and creating flags or experiments with SQL-based tracking metrics.
 
 GrowthBook provides templates for common integrations, but the multi-step setup across multiple tools adds time.
 
