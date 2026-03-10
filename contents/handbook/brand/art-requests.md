@@ -1,13 +1,13 @@
 ---
-title: Art and branding request
+title: Art, brand, and merch requests
 sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
 
-> 🎨 **Need artwork?** Please request it using the [new art request template](https://github.com/PostHog/posthog.com/issues/new/choose). Do not request artwork over Slack or email.
+> 🎨 **Need artwork or merch?** Please request it using the [request templates](https://github.com/PostHog/posthog.com/issues/new/choose). Do not request art or merch over Slack or email.
 
-[Lottie](https://posthog.com/community/profiles/27881), our Illustration Lead, and [Daniel](https://posthog.com/community/profiles/34810), our Production Designer, handle all requests for branding and artwork. 
+All artwork and merch requests are handled by <TeamMember name="Lottie Coxon" />, <TeamMember name="Heidi Berton" />, and <TeamMember name="Daniel Hawkins" /> on the <SmallTeam slug="marketing" /> team.
 
 They can help you with things like:
 
@@ -18,9 +18,9 @@ They can help you with things like:
 - Branded merch 
 - Animated UI elements
 
-They get a lot of work requests, so they use [a request template](https://github.com/PostHog/posthog.com/issues/new/choose) to help them prioritize. All art requests should use this template, which automatically assigns work to their project board. 
+They get a lot of work requests, so they use two separate project boards to organize work – [one for merch](https://github.com/orgs/PostHog/projects/178) and [one for other art projects](https://github.com/orgs/PostHog/projects/65/views/2). This reflects that merch projects often have much longer timelines and need to be handled differently. 
 
-You can see what they are working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
+Whenever you want to request a new merch design or other artwork, you should [use the relevant design request templates in the posthog.com repo](https://github.com/PostHog/posthog.com/issues/new/choose) – one template for merch, one for other art requests. Each template automatically assigns work to the correct project board. 
 
 ### Art board automations
 

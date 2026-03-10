@@ -22,7 +22,7 @@
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
-            "destination": "/handbook/words-and-pictures/product-announcements"
+            "destination": "/handbook/marketing/product-announcements"
         },
         { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
@@ -1684,6 +1684,8 @@
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        { "source": "/teams/twig", "destination": "/teams/posthog-code" },
+        { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
