@@ -201,6 +201,17 @@ The agent will construct and execute a HogQL query against the `events` table, u
 
 The agent will query `system.cohorts` and cross-reference with purchase events to identify relevant cohorts.
 
+
+### Cohort management
+
+**Prompt:** "Show me all cohorts in my project"
+
+The agent will use the `cohorts-list` tool to retrieve all cohorts and display them in a sortable data table showing name, type (static or dynamic), person count, and creation date.
+
+**Prompt:** "Open the 'power-users' cohort"
+
+The agent will use the `cohorts-retrieve` tool to fetch the cohort details and display a visual view with metadata like person count, creation date, and created by.
+
 ### A/B test creation
 
 **Prompt:** "Create an A/B test for our pricing page that measures conversion to checkout"
