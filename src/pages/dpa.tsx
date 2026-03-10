@@ -1131,13 +1131,11 @@ function DpaGenerator() {
                             <p>
                                 5.1. The Company provides Processor with general authorization to engage the
                                 Subprocessors set out on{' '}
-                                <Link to="/subprocessors" state={{ newWindow: true }}>
-                                    https://posthog.com/subprocessors
-                                </Link>{' '}
-                                (the “<strong>Subprocessor Page</strong>”). These will differ depending on the Data
-                                Center Location chosen by the Company. In addition, Company provides Processor with
-                                general authorization to engage other third parties as Subprocessors, in accordance with
-                                this Section 5.
+                                <a href="https://posthog.com/subprocessors">https://posthog.com/subprocessors</a> (the “
+                                <strong>Subprocessor Page</strong>”). These will differ depending on the Data Center
+                                Location chosen by the Company. In addition, Company provides Processor with general
+                                authorization to engage other third parties as Subprocessors, in accordance with this
+                                Section 5.
                             </p>
                             <p>
                                 5.2. Processor shall enter into a written contract with any Subprocessor and this
