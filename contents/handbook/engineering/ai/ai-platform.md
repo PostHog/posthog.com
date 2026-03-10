@@ -56,7 +56,7 @@ graph LR
     Feedback --> Signals
 ```
 
-This vision is what connects all the individual AI products. Signals surfaces the data, PostHog AI enriches it, PostHog Code executes on it, and the loop closes when shipped changes generate new signals.
+This vision is what connects all the individual AI products. Signals surfaces the data, PostHog AI enriches it, PostHog AI background agents execute on it, PostHog Code is where you collaborate with agents on these changes, and the loop closes when shipped changes generate new signals.
 
 For how product teams can contribute to this vision, see [Integration vectors for product teams](/handbook/engineering/ai/team-structure#integration-vectors-for-product-teams).
 
