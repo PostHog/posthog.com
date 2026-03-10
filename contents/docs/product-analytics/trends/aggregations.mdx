@@ -57,6 +57,8 @@ Property aggregation enables you to combine and plot the values of a property. P
 | 95th percentile      | The 95th percentile of the distribution of values (95% of events have a property value less than this) |
 | 99th percentile      | The 99th percentile of the distribution of values (99% of events have a property value less than this) |
 
+When aggregating properties that represent currency values, PostHog formats the results using your project's base currency setting. You can configure your base currency in [project settings](https://app.posthog.com/settings/project#base-currency).
+
 ## SQL expressions
 
 You can also create your own aggregation using [SQL](/docs/sql/expressions). This enables you to use SQL operators and functions to customize how data is formatted and calculated. For an example, see our tutorial on [the power of SQL's sum() aggregation](/tutorials/hogql-sum-aggregation).
