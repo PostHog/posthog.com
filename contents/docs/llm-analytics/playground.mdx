@@ -1,0 +1,69 @@
+---
+title: Playground
+---
+
+import BetaCallout from "./_snippets/beta.mdx"
+
+<BetaCallout />
+
+The playground is a sandbox for testing and iterating on LLM prompts directly in PostHog. You can experiment with different models, system prompts, and configurations — then save your work back to [prompts](/docs/llm-analytics/prompts) or [evaluations](/docs/llm-analytics/evaluations).
+
+To open the playground, navigate to [**LLM analytics** > **Playground**](https://us.posthog.com/llm-analytics/playground).
+
+## Opening the playground from existing data
+
+You can open the playground pre-populated with context from several places in LLM analytics using the **Open in Playground** button:
+
+- **From a prompt** – Opens the playground with the prompt's system prompt loaded. Navigate to **LLM analytics** > [**Prompts**](/docs/llm-analytics/prompts), select a prompt, then click **Open in Playground**.
+- **From an evaluation** – Opens the playground with the evaluation's prompt and model configuration loaded. This is available for LLM judge [evaluations](/docs/llm-analytics/evaluations) only. Navigate to **LLM analytics** > **Evaluations**, select an evaluation, then click **Open in Playground**.
+- **From a trace or generation** – Opens the playground with the model, system prompt, and conversation messages from that [trace](/docs/llm-analytics/traces) or [generation](/docs/llm-analytics/generations).
+
+When you open the playground from a prompt or evaluation, the playground stays **linked** to that source. This means you can save changes back to it directly.
+
+## Testing prompts
+
+In the playground you can:
+
+1. Write or edit a **system prompt** to define the LLM's behavior.
+2. Select a **model** and **provider** from your configured API keys.
+3. Add **user and assistant messages** to simulate a conversation.
+4. Define **tools** (function calling) by providing a JSON schema.
+5. Click **Run** to send the request and see the model's response.
+
+You can adjust model parameters like temperature and toggle features like thinking mode to see how they affect output quality.
+
+### Using multiple tabs
+
+The playground supports multiple prompt tabs. Click **+** to add a new tab so you can compare different system prompts or model configurations side by side. Each tab retains its own state as you navigate around PostHog.
+
+## Saving and loading
+
+The save menu (the prompt icon button next to **Run**) lets you persist your playground work.
+
+### Save to linked source
+
+If you opened the playground from a prompt or evaluation, you can save your changes back to the original:
+
+- **For prompts** – This publishes a new version of the linked prompt with the current system prompt content.
+- **For evaluations** – This updates the linked evaluation's prompt and model configuration.
+
+### Save as new
+
+You can also save your current playground state as a brand new resource:
+
+- **Save as new prompt** – Creates a new [prompt](/docs/llm-analytics/prompts) with the current system prompt content.
+- **Save as new evaluation** – Creates a new LLM judge [evaluation](/docs/llm-analytics/evaluations) with the current system prompt and model configuration.
+
+After saving as new, the playground automatically links to the newly created resource.
+
+### Load existing
+
+To load an existing prompt or evaluation into the playground, use the **Load prompt** or **Load evaluation** options from the save menu. These take you to the respective list pages where you can click **Open in Playground** on any item.
+
+### Unlink from source
+
+If the playground is linked to a prompt or evaluation and you want to work independently, click **Unlink from source**. This removes the link so future saves won't affect the original resource.
+
+## Resetting the playground
+
+Click the **Reset** button to clear all playground state back to defaults. This removes any loaded prompts, messages, and model selections.
