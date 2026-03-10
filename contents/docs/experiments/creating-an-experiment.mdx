@@ -52,6 +52,8 @@ This step captures the core details of your experiment: its name, hypothesis, an
 
 Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to.
 
+You can use an existing feature flag if it has at least 2 variants (including one named `'control'`). Otherwise, the feature flag will be created for you automatically when the experiment is created.
+
 By default, the wizard creates a new feature flag for you automatically when the experiment is saved. The flag key is auto-generated from your experiment name, but you can customize it. If you already have a feature flag you'd like to use, click **Select existing flag** to link it instead. The existing flag must have multiple variants with `'control'` as the first variant.
 
 > **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you're using a different third-party library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
@@ -59,6 +61,8 @@ By default, the wizard creates a new feature flag for you automatically when the
 ## Step 2: Variant rollout
 
 This step controls who sees which variant. You configure the variants themselves, how traffic is split between them, and what percentage of your users are included.
+
+Experiments require at least 2 variants: a `control` and one or more test variants. By default, all experiments have a `control` and `test` variant. You can add more variants if you like (up to 9 test variants). If you need to modify the variants after you've created the experiment, you can do so from the feature flag page.
 
 ### Experiment variants
 
