@@ -85,6 +85,18 @@ Return true if the response follows these guidelines, false otherwise.
 Explain your reasoning briefly.
 ```
 
+### Testing evaluation prompts in the playground
+
+You can test and iterate on LLM judge evaluation prompts in the [playground](/docs/llm-analytics/playground) before saving them.
+
+1. Open an LLM judge evaluation from **LLM analytics** > **Evaluations**
+2. Click **Open in Playground** in the evaluation editor
+3. Configure your model and test with sample inputs
+4. Iterate on the prompt until you're satisfied
+5. Save changes back to the evaluation
+
+The playground stays linked to the evaluation, so you can save your refined prompt directly. See [playground](/docs/llm-analytics/playground) for full details.
+
 ## Code-based evaluations (Hog)
 
 Code-based evaluations run [Hog](/docs/hog) code you write against each generation. They execute in milliseconds with zero LLM cost, making them ideal for high-volume, deterministic checks.
