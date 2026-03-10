@@ -3,6 +3,7 @@ title: 'In-depth: PostHog vs Sentry'
 date: 2026-01-26
 author:
     - ian-vanagas
+    - natalia-amorim
 rootpage: /blog
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/sentry_0369fbe6bf.jpg
@@ -48,11 +49,7 @@ PostHog offers more flexibility and breadth. It's built for developers but also 
 
 More examples of this flexibility include PostHog's simpler [custom event capture](/docs/getting-started/send-events#2-capture-custom-events), the ability to [import and use data from external sources](/data-warehouse), and [direct SQL querying](/docs/sql).
 
-<p>
-  <CallToAction to="https://posthog.com/docs">
-    Learn more about using PostHog
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## Comparing PostHog and Sentry
 
@@ -274,7 +271,7 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 | **Feature flags and A/B testing** | 1 million API requests   |
 | **Data warehouse**                | 1 million synced rows    |
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -324,7 +321,7 @@ Do you know what is better than a free trial? Being free forever. This is what w
 <details>
   <summary>How long does it take to implement PostHog?</summary>
 
-You can get started with **PostHog** in less than 90 seconds using our [AI install wizard](/docs/getting-started/install?tab=wizard). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
+You can get started with **PostHog** in less than 90 seconds using our [AI install wizard](/wizard). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
 
 </details>
 
@@ -420,7 +417,7 @@ Both platforms offer broad SDK support. Sentry supports 100+ platforms including
 <details>
   <summary>What's the learning curve for each platform?</summary>
 
-Both platforms are designed for quick setup. **Sentry** and **PostHog** offer [comprehensive documentation](docs/error-tracking), active community support, and autocapture features that start collecting data immediately after SDK installation, no manual instrumentation required for basic usage.
+Both platforms are designed for quick setup. **Sentry** and **PostHog** offer [comprehensive documentation](/docs/error-tracking), active community support, and autocapture features that start collecting data immediately after SDK installation, no manual instrumentation required for basic usage.
 
 **PostHog** also offers an [AI install wizard](/docs/getting-started/install?tab=wizard) that gets you up and running in under 90 seconds. The broader feature set (analytics, replays, flags, experiments) means there's more to explore, but you can adopt features incrementally as your needs grow.
 
@@ -446,3 +443,5 @@ Most tools automatically scrub common PII patterns (emails, credit cards, passwo
 For native mobile crash reporting with deep symbolication, **Sentry** has more mature SDKs. For understanding user behavior alongside errors, **PostHog** provides session replay and analytics context. Both support iOS, Android, React Native, and Flutter. Other mobile-focused options include **Bugsnag** and **Firebase Crashlytics**.
 
 </details>
+
+<NewsletterForm />

@@ -135,5 +135,6 @@ From our experience, we'd recommend the technical and entrepreneurial growth eng
 - [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer)
 - [What we've learned about multi-product pricing (so far)](/blog/multi-product-pricing)
 - [Why 'Product Engineer' is the most fun role I've had in tech](/blog/why-product-engineering-is-so-fun)
+- [WTF is a forward-deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer)
 
 <NewsletterForm />

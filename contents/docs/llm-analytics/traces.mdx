@@ -27,6 +27,14 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 <Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
 
 
+## Tool calls
+
+Traces display any [tools](/docs/llm-analytics/tools) called by the generations within them, shown as tags in the traces list. This makes it easy to see which conversations involved tool use at a glance.
+
+## Sentiment classification
+
+PostHog can classify the sentiment of user messages in a trace as negative, neutral, or positive. Sentiment is computed on-demand using a local model when you view a trace — no data is sent to third-party services. Each trace gets an overall sentiment label and score, with a per-generation and per-message breakdown. See [Sentiment classification](/docs/llm-analytics/sentiment) for more details.
+
 ## AI event hierarchy
 
 ```mermaid

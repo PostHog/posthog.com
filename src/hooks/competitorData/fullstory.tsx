@@ -153,10 +153,10 @@ export const fullstory = {
             available: false,
         },
         surveys: {
-            available: false,
+            available: true,
             platforms: {
                 features: {
-                    web: false,
+                    web: true,
                     mobile: false,
                 },
             },

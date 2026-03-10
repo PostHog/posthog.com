@@ -64,7 +64,7 @@ If you use PostHog with cookies on your website (for logged out users), you shou
 
 ### Data must be handled securely
 
-You're required to handle data securely by implementing “appropriate technical and organizational measures.” [Learn more about access control features in PostHog](docs/privacy/data-storage#data-access-control).
+You're required to handle data securely by implementing “appropriate technical and organizational measures.” [Learn more about access control features in PostHog](/docs/privacy/data-storage#data-access-control).
 
 This means both technical measures (like encrypting data) and organizational measures (like staff training and limiting access to personal data).
 
@@ -127,6 +127,22 @@ If a user **opts out** then you must stop all **data capturing and processing**.
 PostHog provides tools to control what data is [collected](/docs/privacy/data-collection) and [stored](/docs/privacy/data-storage). These tools let you redact data before it is sent to PostHog servers and before it is stored by PostHog.
 
 If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should use the before storage [realtime transformations](/docs/privacy/data-storage#processing-data-before-storage) to anonymize user data.
+
+#### IP data capture configuration
+
+IP addresses can be considered personal data under GDPR. You can control IP data capture at both the organization and project levels to help maintain compliance.
+
+**Organization-level defaults:**
+
+For organizations using PostHog Cloud EU, IP data capture is automatically disabled by default for all new projects. This ensures that client IP addresses are not collected unless explicitly enabled, helping maintain GDPR compliance across all environments.
+
+You can configure this default setting at the organization level in **Settings** > **Organization** > **General** under the **IP data capture default** setting. This allows you to ensure consistent privacy controls across all new projects without requiring manual configuration for each environment.
+
+For organizations using PostHog Cloud US or self-hosted instances, you can manually configure this setting to disable IP data capture by default for enhanced privacy compliance.
+
+**Project-level configuration:**
+
+Individual projects can also configure their own IP data capture setting, which overrides the organization default if needed. To configure at the project level, go to **Settings** > **Project** > **General** and find the **IP data capture configuration** setting.
 
 ### Step 6: Complying with 'right to be forgotten' requests
 

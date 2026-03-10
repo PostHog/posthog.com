@@ -1,0 +1,4 @@
+> **Note:** The persons model only includes persons that have a person profile in PostHog.
+> If your project has [person profile processing disabled](/docs/data/anonymous-vs-identified-events) (via `person_profiles: 'identified_only'`, `person_profiles: 'never'`, or by sending events with `$process_person_profile: false`), anonymous users who have never been identified will **not** appear in the persons export.
+> To count unique users including those without person profiles, you can fall back to `distinct_id` from the events model.
+> See the example queries in each destination's documentation for details.

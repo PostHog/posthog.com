@@ -1,0 +1,257 @@
+name: Vale lint prose
+
+on:
+    pull_request:
+        types:
+            - opened
+            - reopened
+            - synchronize
+    workflow_dispatch:
+        inputs:
+            pr_number:
+                description: 'PR number to lint'
+                required: true
+                type: string
+
+permissions:
+    contents: read
+    pull-requests: write
+
+jobs:
+    vale:
+        name: Lint prose with Vale
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Get PR info
+              id: pr-info
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_NUMBER: ${{ inputs.pr_number }}
+                  GITHUB_REPOSITORY: ${{ github.repository }}
+                  BASE_REF: ${{ github.base_ref }}
+                  HEAD_REF: ${{ github.head_ref }}
+                  HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+                  EVENT_PR_NUMBER: ${{ github.event.pull_request.number }}
+              run: |
+                  if [ -n "$PR_NUMBER" ]; then
+                    PR_DATA=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json baseRefName,headRefName,headRefOid)
+                    echo "base_ref=$(echo "$PR_DATA" | jq -r '.baseRefName')" >> "$GITHUB_OUTPUT"
+                    echo "head_ref=$(echo "$PR_DATA" | jq -r '.headRefName')" >> "$GITHUB_OUTPUT"
+                    echo "head_sha=$(echo "$PR_DATA" | jq -r '.headRefOid')" >> "$GITHUB_OUTPUT"
+                    echo "pr_number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "base_ref=$BASE_REF" >> "$GITHUB_OUTPUT"
+                    echo "head_ref=$HEAD_REF" >> "$GITHUB_OUTPUT"
+                    echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+                    echo "pr_number=$EVENT_PR_NUMBER" >> "$GITHUB_OUTPUT"
+                  fi
+
+            - name: Checkout code
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+                  ref: ${{ steps.pr-info.outputs.head_sha }}
+
+            - name: Install Vale
+              env:
+                  VALE_VERSION: '3.13.1'
+              run: |
+                  wget -q "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+                  tar -xzf "vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -C /usr/local/bin vale
+                  vale --version
+
+            - name: Run Vale on changed files
+              id: vale
+              env:
+                  PR_INFO_BASE_REF: ${{ steps.pr-info.outputs.base_ref }}
+              run: |
+                  FILES=$(git diff --name-only --diff-filter=ACMR "origin/$PR_INFO_BASE_REF...HEAD" -- '*.md' '*.mdx')
+                  if [ -z "$FILES" ]; then
+                    echo "No markdown files changed, skipping Vale"
+                    echo "has_findings=false" >> "$GITHUB_OUTPUT"
+                    echo "### Vale: no markdown files changed" >> "$GITHUB_STEP_SUMMARY"
+                    exit 0
+                  fi
+                  echo "Linting changed files:"
+                  echo "$FILES"
+                  echo "$FILES" | xargs vale --output=JSON > vale-output.json 2>/dev/null || true
+
+                  TOTAL=$(jq '[.[][]] | length' vale-output.json 2>/dev/null || echo 0)
+                  TOTAL=${TOTAL:-0}
+                  if [ "$TOTAL" -eq 0 ]; then
+                    echo "No findings"
+                    echo "has_findings=false" >> "$GITHUB_OUTPUT"
+                    echo "### Vale: all clear" >> "$GITHUB_STEP_SUMMARY"
+                    exit 0
+                  fi
+
+                  echo "has_findings=true" >> "$GITHUB_OUTPUT"
+                  echo "Found $TOTAL findings"
+
+            - name: Generate reports
+              if: steps.vale.outputs.has_findings == 'true'
+              env:
+                  GITHUB_REPOSITORY: ${{ github.repository }}
+                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
+              run: |
+                  JOB_SUMMARY_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+                  PR_FILES_URL="https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}/files"
+
+                  ERRORS=$(jq '[.[][] | select(.Severity == "error")] | length' vale-output.json)
+                  WARNINGS=$(jq '[.[][] | select(.Severity == "warning")] | length' vale-output.json)
+                  SUGGESTIONS=$(jq '[.[][] | select(.Severity == "suggestion")] | length' vale-output.json)
+
+                  # --- PR comment: header + collapsible per-file tables ---
+                  {
+                    echo "[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
+                    echo ""
+                    echo "[Full report →](${JOB_SUMMARY_URL}) Copy the linter results into an LLM to batch-fix issues."
+                    echo ""
+                    echo "Linter being weird? Update the [rules](https://posthog.com/handbook/docs-and-wizard/vale)!"
+                    echo ""
+                  } > vale-comment.md
+
+                  jq -r 'keys[]' vale-output.json | sort | while IFS= read -r FILE; do
+                    F_ERRORS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "error")] | length' vale-output.json)
+                    F_WARNINGS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "warning")] | length' vale-output.json)
+                    F_SUGGESTIONS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "suggestion")] | length' vale-output.json)
+                    HASH=$(echo -n "$FILE" | sha256sum | cut -d' ' -f1)
+
+                    {
+                      echo "<details>"
+                      echo "<summary><code>${FILE}</code> — ${F_ERRORS} errors, ${F_WARNINGS} warnings, ${F_SUGGESTIONS} suggestions</summary>"
+                      echo ""
+                      echo ""
+                      echo "| Line | Severity | Message | Rule |"
+                      echo "|------|----------|---------|------|"
+
+                      jq -r --arg f "$FILE" --arg url "$PR_FILES_URL" --arg hash "$HASH" '
+                        .[$f][] |
+                        .Message as $msg |
+                        ($msg | gsub("\\|"; "\\\\|") | gsub("\n"; " ")) as $safe_msg |
+                        "| [\(.Line):\(.Span[0])](\($url)#diff-\($hash)R\(.Line)) | \(.Severity) | \($safe_msg) | `\(.Check)` |"
+                      ' vale-output.json
+
+                      echo ""
+                      echo "</details>"
+                      echo ""
+                    } >> vale-comment.md
+                  done
+
+                  # --- Size guardrail: rebuild condensed if comment too large ---
+                  COMMENT_SIZE=$(wc -c < vale-comment.md)
+                  if [ "$COMMENT_SIZE" -gt 60000 ]; then
+                    {
+                      echo "**[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown**"
+                      echo ""
+                      echo "[Full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
+                      echo ""
+                      echo "> **Note:** Too many findings to show inline. See the Job Summary linked above."
+                      echo ""
+                      echo "| File | Errors | Warnings | Suggestions |"
+                      echo "|------|--------|----------|-------------|"
+                      jq -r '
+                        to_entries | sort_by(.key)[] |
+                        .key as $file | .value as $findings |
+                        ($findings | map(select(.Severity == "error")) | length) as $e |
+                        ($findings | map(select(.Severity == "warning")) | length) as $w |
+                        ($findings | map(select(.Severity == "suggestion")) | length) as $s |
+                        "| `\($file)` | \($e) | \($w) | \($s) |"
+                      ' vale-output.json
+                    } > vale-comment.md
+                  fi
+
+                  # --- Job Summary: expanded per-file tables + LLM-ready code block ---
+                  {
+                    echo "[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
+                    echo ""
+                  } >> "$GITHUB_STEP_SUMMARY"
+
+                  jq -r 'keys[]' vale-output.json | sort | while IFS= read -r FILE; do
+                    F_ERRORS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "error")] | length' vale-output.json)
+                    F_WARNINGS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "warning")] | length' vale-output.json)
+                    F_SUGGESTIONS=$(jq --arg f "$FILE" '[.[$f][] | select(.Severity == "suggestion")] | length' vale-output.json)
+
+                    {
+                      echo "#### \`${FILE}\` — ${F_ERRORS} errors, ${F_WARNINGS} warnings, ${F_SUGGESTIONS} suggestions"
+                      echo ""
+                      echo "| Line | Severity | Message | Rule |"
+                      echo "|------|----------|---------|------|"
+
+                      jq -r --arg f "$FILE" '
+                        .[$f][] |
+                        .Message as $msg |
+                        ($msg | gsub("\\|"; "\\\\|") | gsub("\n"; " ")) as $safe_msg |
+                        "| \(.Line):\(.Span[0]) | \(.Severity) | \($safe_msg) | `\(.Check)` |"
+                      ' vale-output.json
+
+                      echo ""
+                    } >> "$GITHUB_STEP_SUMMARY"
+                  done
+
+                  {
+                    echo "---"
+                    echo ""
+                    echo '```'
+                    jq -r '
+                      to_entries | sort_by(.key)[] | .key as $file | .value[] |
+                      "\($file):\(.Line):\(.Span[0])  \(.Severity)  \(.Check)  \(.Message)"
+                    ' vale-output.json
+                    echo '```'
+                  } >> "$GITHUB_STEP_SUMMARY"
+
+            - name: Upsert PR comment
+              if: ${{ !cancelled() }}
+              uses: actions/github-script@v7
+              env:
+                  PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
+                  HAS_FINDINGS: ${{ steps.vale.outputs.has_findings }}
+              with:
+                  script: |
+                      const fs = require('fs');
+                      const marker = '<!-- vale-lint -->';
+                      const prNumber = parseInt(process.env.PR_NUMBER);
+
+                      if (!prNumber) {
+                        console.log('No PR number available');
+                        return;
+                      }
+
+                      const { data: comments } = await github.rest.issues.listComments({
+                        ...context.repo,
+                        issue_number: prNumber,
+                      });
+                      const existing = comments.find(c =>
+                        c.user?.login === 'github-actions[bot]' &&
+                        c.body?.startsWith(marker)
+                      );
+
+                      if (process.env.HAS_FINDINGS !== 'true') {
+                        if (existing) {
+                          await github.rest.issues.deleteComment({
+                            ...context.repo,
+                            comment_id: existing.id,
+                          });
+                          console.log('Deleted stale Vale comment');
+                        }
+                        return;
+                      }
+
+                      const body = `${marker}\n${fs.readFileSync('vale-comment.md', 'utf8')}`;
+
+                      if (existing) {
+                        await github.rest.issues.updateComment({
+                          ...context.repo,
+                          comment_id: existing.id,
+                          body: body,
+                        });
+                        console.log('Updated Vale comment');
+                      } else {
+                        await github.rest.issues.createComment({
+                          ...context.repo,
+                          issue_number: prNumber,
+                          body: body,
+                        });
+                        console.log('Created Vale comment');
+                      }
