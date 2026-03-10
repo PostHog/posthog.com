@@ -49,6 +49,17 @@ This is useful if you have a complex query and you want to test parts of it with
   classes="rounded"
 />
 
+## Why is my CSV data not parsing correctly?
+
+If your CSV data appears garbled, has missing columns, or shows unexpected characters, it may be due to incorrect quote handling settings.
+
+When linking a CSV file, PostHog provides a **CSV quote handling** option with two modes:
+
+- **RFC 4180 double quotes** - Use this when your CSV uses standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`)
+- **Literal quotes** - Use this when quotes in your data should be treated as regular characters (default)
+
+To fix parsing issues, try recreating the table with the other quote handling option selected.
+
 ## Solved community questions
 
 <SolvedQuestions
