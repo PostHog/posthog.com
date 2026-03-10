@@ -44,7 +44,7 @@ Some of the columns in the `persons` table are:
 |-----------------|--------------------------------------------------------------------------------------------------|
 | `id`            | UUID of the person. Relates to `person_id` in the `events` table.                                |
 | `created_at`    | Date and time when the person was first created (ISO 8601 format).                               |
-| `last_seen_at`  | Date and time of the person's most recent event (ISO 8601 format), rounded to the hour.          |
+| `last_seen_at`  | Date and time of the person's most recent event (ISO 8601 format), rounded to the hour. See [skipping `last_seen_at` updates](/docs/product-analytics/person-properties#skipping-last_seen_at-updates).          |
 | `properties`    | Object containing all properties associated with the person (stored as a String).                |
 | `is_identified` | Indicates if the person is identified (`1`) or anonymous (`0`).                                  |
 
@@ -185,6 +185,25 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `status`     | Current status of the issue                       |
 | `name`       | Name of the issue                                 |
 | `description`| Description of the issue                          |
+
+### `system.hog_flows`
+
+The `system.hog_flows` table contains workflow definitions from your project.
+
+| Column          | Description                                    |
+|-----------------|------------------------------------------------|
+| `id`            | Unique identifier for the workflow             |
+| `team_id`       | Team ID the workflow belongs to                |
+| `name`          | Name of the workflow                           |
+| `description`   | Description of the workflow                    |
+| `status`        | Current status of the workflow                 |
+| `version`       | Version number of the workflow                 |
+| `exit_condition`| Exit condition for the workflow                |
+| `trigger`       | JSON containing trigger configuration          |
+| `edges`         | JSON containing workflow edges                 |
+| `actions`       | JSON containing workflow actions               |
+| `created_at`    | When the workflow was created                  |
+| `updated_at`    | When the workflow was last updated             |
 
 ### `system.notebooks`
 

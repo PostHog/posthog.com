@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdxCodeBlock } from '../../CodeBlock'
 
-type ConfigVariant = 'cursor' | 'claude-desktop' | 'windsurf' | 'vscode' | 'claude-code' | 'zed'
+type ConfigVariant = 'cursor' | 'claude-desktop' | 'windsurf' | 'vscode' | 'claude-code' | 'zed' | 'codex'
 
 interface MCPConfigSnippetProps {
     variant?: ConfigVariant
@@ -43,6 +43,10 @@ const EDITOR_CONFIGS = {
         language: 'json',
         content: () =>
             JSON.stringify({ context_servers: { posthog: { enabled: true, ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
+    },
+    codex: {
+        language: 'bash',
+        content: () => `codex mcp add posthog --url https://mcp.posthog.com/mcp`,
     },
 } as const
 

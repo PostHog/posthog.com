@@ -36,7 +36,7 @@ showTitle: true
 
 ## What does success look like?
 
-1. We make a variety of high quality videos. We trust our taste for this. Brand and content are cornerstones of PostHog’s marketing and video should contribute to this.
+1. We make a variety of high quality videos. We trust our taste for this. Brand and content are cornerstones of PostHog's marketing and video should contribute to this.
 
 2. Videos support our marketing goals, like new product launches and helping founders and developers succeed.
 
