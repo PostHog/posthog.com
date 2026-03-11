@@ -26,7 +26,7 @@ At one point, they were preparing to hire a Python developer to build an interme
   product="endpoints"
 />
 
-With Endpoints, the architecture became much simpler. CounterPress now creates Insights inside PostHog and converts them directly into API endpoints that their React dashboard consumes, with no additional backend services.
+With Endpoints, the architecture became much simpler. CounterPress now creates insights inside PostHog and converts them directly into API endpoints that their React dashboard consumes, with no additional backend services.
 
 ## How CounterPress stays flexible
 
