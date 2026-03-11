@@ -140,7 +140,7 @@ If the inappropriate spend was due to a misunderstanding, e.g. you genuinely tho
 Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
-  - Apple Studio Displays are only for Product Engineers (high density screen) and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) You can purchase these using your personal limit.
+  - Apple Studio Displays are only for Product Engineers (high density screen) and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
     - If you order a Studio Display during your probation period but end up leaving PostHog, we can recover the cost of the display and you won't need to return it.
   - Laptop guidelines
     - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
@@ -161,7 +161,7 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
-- Desk & chair - again, refurbished is usually. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
+- Desk & chair - again, refurbished is a great way to get high quality for less. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
