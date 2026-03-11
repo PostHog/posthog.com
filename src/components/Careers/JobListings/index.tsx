@@ -13,6 +13,7 @@ import Mark from 'mark.js'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useWindow } from '../../../context/Window'
 import { OSInput } from 'components/OSForm'
+import { useLocation } from '@reach/router'
 
 const query = graphql`
     query JobListings {
@@ -202,6 +203,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         allAshbyJobPosting: { departments, jobs: originalJobs },
         allTeams: { nodes: allTeams },
     } = useStaticQuery(query)
+    const { search } = useLocation()
 
     const { appWindow } = useWindow()
     const [searchQuery, setSearchQuery] = useState('')
@@ -731,7 +733,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 )}
                                 <OSButton
                                     asLink
-                                    to={selectedJob.fields.slug}
+                                    to={`${selectedJob.fields.slug}${search || ''}`}
                                     size="md"
                                     variant="primary"
                                     state={{ newWindow: true }}

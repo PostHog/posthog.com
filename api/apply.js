@@ -22,6 +22,13 @@ const handler = async (req, res) => {
             const data = {
                 applicationForm: JSON.stringify({ fieldSubmissions }),
                 jobPostingId: fields['jobPostingId'][0],
+                utmData: JSON.stringify({
+                    utm_source: req.query?.utm_source || '',
+                    utm_medium: req.query?.utm_medium || '',
+                    utm_campaign: req.query?.utm_campaign || '',
+                    utm_content: req.query?.utm_content || '',
+                    utm_term: req.query?.utm_term || '',
+                }),
                 [resumeKey]: {
                     value: fs.createReadStream(file.path),
                     options: {
@@ -43,6 +50,7 @@ const handler = async (req, res) => {
         },
         formData,
     }
+
     const submission = await new Promise((resolve, reject) => {
         request(options, function (err, res) {
             if (err) throw new Error(err)

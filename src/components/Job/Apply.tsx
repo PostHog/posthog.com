@@ -14,6 +14,7 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconSpinner } from '@posthog/icons'
+import { useLocation } from '@reach/router'
 
 const allowedFileTypes = ['application/pdf']
 
@@ -215,6 +216,7 @@ const Form = ({
     isInExcludedCountry?: boolean
 }) => {
     const { setConfetti } = useApp()
+    const { search } = useLocation()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -242,7 +244,7 @@ const Form = ({
 
             form.append('jobPostingId', id)
 
-            const res = await fetch('/api/apply', {
+            const res = await fetch(`/api/apply${search || ''}`, {
                 method: 'POST',
                 body: form,
             })
