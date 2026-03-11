@@ -27,6 +27,7 @@ You run one command. Stripe Projects provisions your stack -- including PostHog 
 On the PostHog side specifically, that means you get analytics, feature flags, session replay, and everything else we offer configured and ready from the moment your project spins up. 
 
 And if you want to go further with AI, you can. Use [PostHog AI](/ai) to ask questions about your data or write SQL queries for you. Add other PostHog products at a later date with [the Wizard](/wizard). Integrate with your own agents and AI tools via [the MCP](/docs/model-context-protocol). 
+
 The reason we wanted to partner with Stripe specifically is that they sit at the centre of how developers build and pay for infrastructure. Building on that foundation -- rather than creating yet another provisioning silo -- felt like the right way to make this genuinely useful rather than just [adding to the problem](https://xkcd.com/927/).
 
 AI is fundamentally changing the way teams build, and the pace of that change is accelerating. We don't see any sign of it slowing down and, as a team that is already [shipping dangerously fast](https://newsletter.posthog.com/p/the-hidden-danger-of-shipping-fast), we're excited to see how much faster we -- and our users -- can go when we cut the time from “I have an idea” to “I have a working, instrumented product” to be as short as possible. 
