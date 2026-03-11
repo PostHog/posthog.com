@@ -49,7 +49,7 @@ This keeps charts readable and relevant without overwhelming users with unnecess
 
 ## Performance and materialization
 
-Because CounterPress is not storing analytics data themselves, performance is tightly linked to how quickly PostHog can compute and return results.
+Because CounterPress isn't storing analytics data themselves, performance is tightly linked to how quickly PostHog can compute and return results.
 
 On first load, some dashboards can take a few seconds to resolve since the data is not cached elsewhere. Materialized endpoints, which cache computed results on PostHog’s side, are particularly important for them. Once enabled, they expect noticeable improvements in speed and overall user experience.
 
