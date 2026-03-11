@@ -99,25 +99,25 @@ Here's a table of available frontmatter fields:
 
 ### Magic `<placeholders>`
 
-You can use magic placeholders or strings to replace the project API key, project name, app host, region, and proxy path in the code block with values from the user's project.
+You can use magic placeholders or strings to replace the project token, project name, app host, region, and proxy path in the code block with values from the user's project.
 
 -   If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
 -   If the user is not logged into the PostHog app, the placeholder will display as is.
 
 | Placeholder                | Description                   | Default                                         |
 | -------------------------- | ----------------------------- | ----------------------------------------------- |
-| `<ph_project_api_key>`     | Your PostHog project API key  | n/a                                             |
+| `<ph_project_token>`       | Your PostHog project token    | n/a                                             |
 | `<ph_project_name>`        | Your PostHog project name     | n/a                                             |
 | `<ph_app_host>`            | Your PostHog instance URL     | n/a                                             |
 | `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
 | `<ph_region>`              | Your PostHog region (us/eu)   | n/a                                             |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-11-30`                                    |
-| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project API key) |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2026-01-30`                                    |
+| `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project token)   |
 
 You can use these placeholders in the code block like this:
 
 ```js
-const client = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
+const client = new PostHog('<ph_project_token>', { host: '<ph_client_api_host>' })
 ```
 
 ## Docs components

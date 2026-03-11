@@ -18,7 +18,7 @@ This tutorial shows you how to combine PostHog’s [early access management](/do
 
 To create a beta feature in PostHog, go to the [early access management tab](https://app.posthog.com/early_access_features) and click "Create feature". Add a name like "new page beta," click "Save as draft," and then "Release beta." This also automatically creates a [feature flag](/docs/feature-flags) we use to control the display of the feature.
 
-On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/pipeline/new/site-app/hog-template-early-access-features). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
+On the draft page, click "Implement public opt-in" and go to the [opt-in app page](https://app.posthog.com/apps). Enable the app and set "Show features button on the page" to "Yes." This adds a modal to control early access features with no extra setup.
 
 ![Creating beta feature video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/beta.mp4)
 
@@ -39,7 +39,7 @@ cd beta-page
 npm i posthog-js
 ```
 
-Once installed, go into the `app` folder and create a `providers.js` file. In this file, initialize PostHog with your project API key and instance address which you can get in [your project settings](https://app.posthog.com/project/settings). Make sure to set the `opt_in_site_apps` property to `true` so we can use the early access opt-in app. Finally, return a `PostHogProvider` initialized with the PostHog client.
+Once installed, go into the `app` folder and create a `providers.js` file. In this file, initialize PostHog with your project token and instance address which you can get in [your project settings](https://app.posthog.com/project/settings). Make sure to set the `opt_in_site_apps` property to `true` so we can use the early access opt-in app. Finally, return a `PostHogProvider` initialized with the PostHog client.
 
 ```js
 // app/providers.js
@@ -50,7 +50,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
       opt_in_site_apps: true

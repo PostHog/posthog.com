@@ -127,6 +127,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
@@ -134,7 +135,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -142,8 +143,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Data warehouse',
-        owner: ['data-stack'],
+        feature: 'Managed warehouse',
+        owner: ['managed-warehouse'],
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -152,7 +153,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     endpoints: {
         feature: 'Endpoints',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
     },
     'error-tracking': {
         feature: 'Error tracking',
@@ -295,7 +296,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -314,11 +315,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
@@ -395,6 +396,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/session-explorer',
     },
+    'session-summaries': {
+        feature: 'Session summaries',
+        owner: ['signals'],
+        label: 'feature/session-summaries',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
@@ -407,11 +413,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
         label: false,
     },
     sso: {

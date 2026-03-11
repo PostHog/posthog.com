@@ -152,12 +152,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use PostHog\PostHog;
 
 PostHog::init(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   ['host' => '<ph_client_api_host>']
 );
 ```
 
-You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings).
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
 
 With this set up, we're ready to capture events.
 
@@ -170,7 +170,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use PostHog\PostHog;
 
 PostHog::init(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   ['host' => '<ph_client_api_host>']
 );
 

@@ -36,6 +36,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Databases',
         },
         {
+            label: 'BuildBetter',
+            url: '/docs/data-warehouse/sources/buildbetter',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/buildbetter_f523cfd0e6.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Bing Ads',
             url: '/docs/data-warehouse/sources/bing-ads',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
@@ -126,6 +132,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'SaaS tools',
         },
         {
+            label: 'Linear',
+            url: '/docs/data-warehouse/sources/linear',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Mailchimp',
             url: '/docs/data-warehouse/sources/mailchimp',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_37_02_666_Z_2c8f3e8398.png',
@@ -147,6 +159,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             label: 'Postgres',
             url: '/docs/data-warehouse/sources/postgres',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Postgresql_elephant_f6157ebdd3.svg',
+            category: 'Databases',
+        },
+        {
+            label: 'Redshift',
+            url: '/docs/data-warehouse/sources/redshift',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Amazon_Redshift_Logo_fbd926efbc.svg',
             category: 'Databases',
         },
         {

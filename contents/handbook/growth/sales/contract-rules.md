@@ -4,88 +4,65 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We get it, nobody likes rules. As we scale the Sales and CS teams we need to be consistent in how we approach contracts to ensure that we are setting ourselves up for future success. If you have a customer situation where you'd like to vary the rules below, get approval from <TeamMember name="Dana Zou" showOnlyFirstName photo />, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> or <TeamMember name="Charles Cook" showOnlyFirstName photo /> first. You should also have them note the approval on the Salesforce opportunity record.
+We are transparent about how we contract with customers, including what discounts are available. It's better for them, and better for us. We are allergic to the phrase 'let me talk to my manager and see what we can do' - we follow a principled approach. 
 
 ## Discounts
 
-> We don't offer discounts to customers paying monthly, irrespective of commitment.
+We don't offer discounts to customers paying monthly, irrespective of commitment.
 
-Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We can be super transparent about the levers we have in discounting PostHog:
+Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
-1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
-2. **Prepaid credit:** We offer a 20% discount on a paid-up-front plan of >$20k, because it's beneficial to PostHog to have a customer committed.
-3. **Higher spend:** We offer an additional 5% and then 15% on top of the prepaid credit plans when the customer spends above $60k and $100k respectively.
-4. **Multi-year:** We offer an additional 5% for each additional committed credit renewal under a prepaid contract, as longer commitments are beneficial to PostHog (see table below). Credits rollover in-between for multi-year contracts.
-5. **Up-front payment:** We offer an additional 2.5% per year where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
+### The 4 discount levers & why they matter to us
 
-> We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
+Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
+1. **Volume:** The amount of credits purchased - *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
+2. **Timing of Cash:** When we receive payment - *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
+3. **Length of Commitment:** Contract duration - *Longer commitments reduce our customer acquisition costs. We spend less on people doing renewals and can invest more in product development*
+4. **Ability to Forecast:** Mutual agreement to timing - *When both parties commit to specific dates (contract close, renewal timing), it helps us plan resources and helps customers secure budget*
 
-> You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
+Every discount reflects a value exchange that provides a sound basis for our pricing. We don't offer unilateral concessions - better pricing comes from moving on one or more of these levers. This framework gives both sides a clear frame of reference for what drives pricing decisions.
 
-The below table summarizes the discount levels contained in points 2-4:
+### How our discounts work
 
-<table>
-<thead>
-<tr>
-<th>Annual Spend</th>
-<th><strong>Commitment</strong></th>
-<th><strong>Minimum Credit</strong></th>
-<th><strong>Discount</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td rowspan="3">between $20k and $60k</td>
-<td><strong>1 year</strong></td>
-<td>$25,000</td>
-<td>20%</td>
-</tr>
-<tr>
-<td class="pl-4"><strong>2 year</strong></td>
-<td>$26,666</td>
-<td>25%</td>
-</tr>
-<tr>
-<td class="pl-4"><strong>3 year</strong></td>
-<td>$28,572</td>
-<td>30%</td>
-</tr>
-<tr>
-<td rowspan="3">between $60k and $100k</td>
-<td><strong>1 year</strong></td>
-<td>$80,000</td>
-<td>25%</td>
-</tr>
-<tr>
-<td class="pl-4"><strong>2 year</strong></td>
-<td>$85,715</td>
-<td>30%</td>
-</tr>
-<tr>
-<td class="pl-4"><strong>3 year</strong></td>
-<td>$92,308</td>
-<td>35%</td>
-</tr>
-<tr>
-<td rowspan="3">$100k or more</td>
-<td><strong>1 year</strong></td>
-<td>$153,847</td>
-<td>35%</td>
-</tr>
-<tr>
-<td class="pl-4"><strong>2 year</strong></td>
-<td>$166,667</td>
-<td>40%</td>
-</tr>
-<tr>
-<td class="pl-4"><strong>3 year</strong></td>
-<td>$181,819</td>
-<td>45%</td>
-</tr>
-</tbody>
-</table>
+In our consumption-based pricing model, the first way for a customer to reduce spend is to ensure that they are only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 
-Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. Pre-paid discounts must be paid up-front. We do not offer monthly or quarterly payment plans for discounted contracts. If a customer prefers quarterly or monthly payments, we can offer them a lower credit value, which will reduce their discount.
+Beyond optimization, we offer discounts based on four levers:
+
+#### 1. Volume discount (based on credit purchase amount)
+- **$25-59k:** 20% base discount
+- **$60-99k:** 25% base discount
+- **$100-249k:** 30% base discount
+- **$250-499k:** 35% base discount
+- **$500-999k:** 40% base discount
+- **$1M+:** Contact us for custom pricing
+
+#### 2. Length of commitment discount (additive)
+- **1-year commitment:** No additional discount
+- **2-year commitment:** +3% additional discount
+- **3-year commitment:** +5% additional discount (doesn't stack)
+- **4-years or more:** Contact us for custom pricing
+
+#### 3. Timing of cash discount (additive)
+- **Net 30 (our standard):** No additional discount
+- **Multi-year deals:** +2.5% per additional year paid upfront (i.e. +2.5% for 2 years, +5% for 3 years)
+- **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
+
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
+
+#### 4. Ability to forecast - mutual commitment to timing (additive)
+
+**For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
+- Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
+- To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
+- This is about creating predictability for both sides, not artificial deadlines
+- This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
+
+**For renewals:** +5% additional discount
+- Early renewal commitment (60+ days before expiration)
+
+**If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
+
+> You shouldn't offer discounts above the levels outlined here. If you go outside of these rules without clearing it with <TeamMember name="Ben Bradley" showOnlyFirstName photo /> (TAEs), <TeamMember name="Simon Fisher" showOnlyFirstName photo /> (TAMs or CSMs), or <TeamMember name="Charles Cook" showOnlyFirstName photo /> (as backup), you should assume by default that the deal will not count toward your quota.
 
 ### Why we require up-front payment for credit purchases
 
@@ -108,15 +85,17 @@ Requirements for self-serve discounts:
 
 Additional notes on self-serve discounts:
 
--   For credit purchases between $3,333 and $25,000, the discount is 10% off. Above $25,000 follows the standard volume discount structure above.
+-   For credit purchases below $25,000, the discount is 10% off. Credit purchases of $25,000 and above follow the standard volume discount structure above.
 -   Instead of providing all credits upfront, we apply 1/12 of the credits each month for the next 12 months. These credits do not expire for 1 year after they've been applied.
 -   If a customer uses all credits in a month, they will be billed for extra usage at the standard rate.
 
 ### Non-profit discounts
 
-We do offer additional discounts to non-profits and  non-profit discounts at 15% regardless of spend.
+We offer additional discounts to non-profits:
 
-If signing for a prepaid credit plan with a credit purchase between $25k and $80k, an additional 5% non-profit discount is applied. For example, purchasing $25k in credits with an additional 5% non-profit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
+- For credit purchases below $25k: 15% discount (instead of standard 10% self-serve or no discount)
+- For credit purchases $25k - $100k: An additional 5% on top of standard volume discount
+- For credit purchases above $100k: Standard volume discounts apply (no additional non-profit discount)
 
 We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
@@ -124,7 +103,7 @@ When evaluating a discount, it’s important to <PrivateLink url="https://docs.g
 
 To set up the non-profit discount in Stripe, [follow these instructions](/handbook/growth/sales/billing#coupons-and-discounts).
 
-> Non-profit discounts only stack with prepaid discounts at a rate of 5%, and only if the credit purchase amount is less than $80,000.
+> Non-profit discounts only provide an additional 5% on top of standard volume discounts, and only for credit purchases between $25,000 and $100,000.
 
 ### Legacy discounts
 
@@ -140,16 +119,13 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
 3. Inform them they can take advantage of this offer, which allows them to:
-   - purchase credits equivalent to ~10 months of usage (expiring 10 months after the contract start date), and
+   - purchase credits equivalent to ~12 months of usage (expiring 12 months after the contract start date), and
    - receive ~2 months of additional usage for free, applied before the contract start date.
-4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
-5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
-   - two months of this free usage should again be applied before the contract start date, unless explicitly priced and included under Special Terms.
-7. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
 
-For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
 
 ### Margin negative deals
 
@@ -159,15 +135,15 @@ In exceptional circumstances, we may explore providing additional discounts whic
 2. We are taking their business from a competitor.
 3. We are preventing them from churning to a competitor.
 
-If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with Charles.  If he's happy that it's the right thing to do, then you also need to check with Raquel from a product support perspective.
+If you believe you have a customer who falls into one of these categories and would like to provide additional credit/discount then in the first instance run through the opportunity details including margin calculation with your manager, who will then clear it with Simon (TAMs/CSMs) or Charles (TAEs).
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
+As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
 
-## Price Guarantees & Lock-ins
+## Price guarantees & lock-ins
 
-Our default stance is to not offer price guarantees for the following reasons:
+We do not offer price guarantees for the following reasons:
 
 1. We regularly *lower* prices, which would result in higher costs for customers who've locked in a price
 2. We occasionally split or restructure products (e.g. Data Pipelines unbundled), which makes guarantees administratively complex
@@ -198,7 +174,7 @@ You can see a signed multi-year contract set up in this way by navigating to Doc
 Customers only get an uptime SLA if:
 
 1. They have subscribed to the Enterprise add-on; or
-2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR post discount
+2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR _post_ discount (i.e. $ spend, not credit usage). 
 
 An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
 
@@ -208,7 +184,7 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
 
-For customers purchasing credits upfront, bank transfer is the default and highly preferred payment method for the following reasons:
+For customers purchasing credits upfront, we only take bank transfers because:
 
 - For large payment amounts, the fees we incur are higher for credit card payments.
 - Our Sales Ops automations are set up to handle bank transfer payments.
@@ -220,11 +196,11 @@ You should confirm ahead of the customer signing the order form that they are ha
 
 If your customer must pay via credit card, you absolutely _need_ to let Mine (Simon as backup) know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
 
-> We absolutely do not allow payment by check.
+> We absolutely do not allow payment by check. This is made clear on order forms. 
 
 ## Contract buyouts
 
-> **Want to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
+> **Are you a potential customer who wants to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
@@ -262,9 +238,9 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
-For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the spend.
+For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the credit purchase amount.
 
-> In scenario one above, if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract. We won't issue a refund for the difference in spend when the expansion order form discount tier is greater than the discount tier of the original order form.
+> In scenario one above, if their expansion credit purchase takes them into a higher volume discount tier, we should include this discount tier for them in the expansion contract. We won't issue a refund for the difference in discount when the expansion order form discount tier is greater than the discount tier of the original order form.
 
 ### When they will end the contract term with credit remaining
 

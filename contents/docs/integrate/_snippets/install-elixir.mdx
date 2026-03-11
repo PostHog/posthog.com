@@ -5,7 +5,7 @@ The package can be installed by adding `posthog` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:posthog, "~> 2.0.0"}
+    {:posthog, "~> 2.2.0"}
   ]
 end
 ```
@@ -16,7 +16,7 @@ end
 config :posthog,
   enable: true,
   api_host: "<ph_client_api_host>",
-  api_key: "<ph_project_api_key>",
+  api_key: "<ph_project_token>",
   in_app_otp_apps: [:my_app]
 ```
 

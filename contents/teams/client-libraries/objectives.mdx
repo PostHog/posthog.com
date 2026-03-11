@@ -14,11 +14,7 @@
 * [Flutter native exceptions support](https://github.com/PostHog/posthog-flutter/issues/238)
 * [Flutter web error tracking](https://github.com/PostHog/posthog-flutter/issues/237)
 
-#### Goal 3: Wider SDK coverage - (Driver: <TeamMember name="Manoel Aranda Neto" />)
-
-* [Flutter desktop support](https://github.com/PostHog/posthog-flutter/issues/51) (Windows and Linux)
-
-### Goal 4: Make it easier to run the team - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+#### Goal 3: Make it easier to run the team - (Driver: <TeamMember name="Manoel Aranda Neto" />)
 
 * Internal metrics (e.g. how many mobile SDK users use different products)
     * feature usage breakdown per SDK
@@ -29,6 +25,22 @@
     * Flutter
     * RN session replay plugin
 * Hire and onboard another SDK engineer
+
+### Goal 4: Foundational work for snippet versioning - (Driver: <TeamMember name="Dustin Byrne" />)
+
+* Allow for configuration of JS snippet version constraints within PostHog settings
+* Retain and serve historical versions of the Web SDK
+* [This allows us to safely start working towards a v2 of the Web SDK](https://github.com/PostHog/posthog-js/issues/2673)
+
+### Goal 5: First class support for Next.js - (Driver: <TeamMember name="Dustin Byrne" />)
+
+* A single package exists to integrate PostHog into Next.js applications.
+* Simplified and consistent identity across client and server rendered pages and components.
+
+### Goal 6: Reduce Web SDK bundle size - (Driver: <TeamMember name="Dustin Byrne" />)
+
+* [Reduce the size of the Web SDK](https://github.com/PostHog/posthog-js/issues/65)                                                                                                                              
+* Customers can exclude unused features to further reduce bundle size
 
 #### Stretch goal: Improve experience for mobile customers using feature flags - (Driver: <TeamMember name="Ioannis Josephides" />)
 

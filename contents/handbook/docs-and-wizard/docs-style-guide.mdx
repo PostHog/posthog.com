@@ -13,13 +13,19 @@ This style guide helps you write docs based on these assumptions.
 
 These are *guidelines*, not rules. They exist to keep our docs consistent and polished, but good judgement matters more than strict adherence when you're writing. If something makes the docs clearer, more helpful, or just plain better, do it. 
 
-<CalloutBox type="fyi" title="Tools to enforce style">
+See the [style guide](/handbook/content/posthog-style-guide) from the <SmallTeam slug="editorial" /> for additional writing guidelines.
 
-Tools like Vale and LLMs are effective at catching style guide violations that humans often miss. Use them to check your writing against this entire guide.
+---
 
-</CalloutBox>
+## Tools to enforce style
 
-See the [style guide](/handbook/content/style-guide) from the <SmallTeam slug="editorial" /> for additional writing advice.
+Tools like prose linters and LLMs are effective at catching style guide violations that humans often miss. Use them to check your writing against this entire guide.
+
+We apply style guides through multiple tools.
+
+- [Vale](/handbook/docs-and-wizard/vale) – enforces style guide rules through prose linting in PRs
+- **InKeep docs writer** – an AI agent that uses style guides as context when drafting docs PRs
+- **Skill** – (coming soon) agent skills that uses style guides as references for writing docs
 
 ---
 
@@ -96,6 +102,20 @@ Always capitalize PostHog product names as proper nouns. Use "Product Analytics"
 > **Don't**: "Use session replay to understand user behavior."
 
 However, if you're referring to the general industry term or a feature that isn't specific to PostHog, use lowercase. For examples: "many companies offer product analytics."
+
+### Keys and tokens
+
+| Term | Description |
+|------|-------------|
+| **Project token** | The public identifier (starts with `phs_`) used in SDKs and the snippet to send events. This is NOT an API key. Never call it `project API key`. |
+| **Personal API key** | A private key (starts with `phx_`) used for server-side API access. This IS an API key. |
+| **Feature flags secure API key** | A separate key used for local evaluation of feature flags. |
+
+> **Do**: "Add your project token to the PostHog initialization code."
+
+<!-- vale PostHogBase.ProjectToken = NO -->
+> **Don't**: "Add your project API key to the PostHog initialization code."
+<!-- vale PostHogBase.ProjectToken = YES -->
 
 ### PostHog platform
 
@@ -270,6 +290,22 @@ Use numbered lists when ordering, ranking, or hierarchy matters.
 > 2. Select your event
 > 3. Click **Save**
 
+### Definition-style lists
+
+When listing items with descriptions, use a dash ( - ) to separate the item from its description. Don't use a colon.
+
+> **Do**:
+>
+> - **Product Analytics** - Track user behavior and measure conversions
+> - **Session Replay** - Watch real user sessions to debug issues
+> - **Feature Flags** - Control feature rollouts and run experiments
+
+> **Don't**:
+>
+> - **Product Analytics:** Track user behavior and measure conversions
+> - **Session Replay:** Watch real user sessions to debug issues
+> - **Feature Flags:** Control feature rollouts and run experiments
+
 ### Punctuation in lists
 
 Use a period when each item is a complete and standalone sentence (has a subject and verb and is an independent thought). 
@@ -304,7 +340,7 @@ Be consistent within a single list. If one item is a partial sentence, make all 
 >
 > To set up PostHog:
 > - Install the SDK.
-> - Configure your API key.
+> - Configure your project token.
 > - Start capturing events.
 
 ### Tables
@@ -326,9 +362,9 @@ Use tables for listing multiple items across multiple attributes. When a bullete
 
 Use bold for structured information and visual formatting like callout labels, definition lists, and problem/solution patterns.
 
-- **Callout labels:** `**Note:**`, `**Important:**`, `**Warning:**`, `**Tip:**`
-- **Definition lists:** `**Term:** Description` patterns
-- **Problem/Solution labels:** `**Problem:**` and `**Solution:**` in troubleshooting docs
+- **Callout labels** - `**Note:**`, `**Important:**`, `**Warning:**`, `**Tip:**`
+- **Definition lists** - `**Term** - Description` patterns
+- **Problem/Solution labels** - `**Problem:**` and `**Solution:**` in troubleshooting docs
 
 > **Do**: "**Note:** Use feature flags to control rollouts."
 

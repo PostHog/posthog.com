@@ -84,14 +84,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -197,14 +197,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -223,7 +223,7 @@ Confirm events are flowing through your proxy:
 1. Test the proxy directly:
 
     ```bash
-    curl -I https://e.yourdomain.com/decide?v=3
+    curl -I https://e.yourdomain.com/flags?v=2
     ```
 
     You should see a `200 OK` response without authentication prompts.
