@@ -30,7 +30,7 @@ With Endpoints, the architecture became much simpler. CounterPress now creates i
 
 ## How CounterPress stays flexible
 
-The V1 release focuses on core web analytics, presented in a way that feels native to their platform rather than embedded from a third party.
+The V1 release presents core web analytics in a way that feels native to their platform rather than embedded from a third party.
 
 Customers can see:
 
