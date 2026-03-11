@@ -1010,6 +1010,72 @@ export const DocsItemsStart = [
 export const DocsItemsEnd = [
     { type: 'separator' as const },
     {
+        type: 'submenu' as const,
+        label: 'AI platform',
+        icon: <Icons.IconLlmPromptEvaluation className="size-4 text-red" />,
+        items: [
+            {
+                type: 'item' as const,
+                label: 'Overview',
+                link: '/docs/ai-engineering',
+            },
+            {
+                type: 'item' as const,
+                label: 'PostHog AI',
+                link: '/docs/posthog-ai/platform-and-chat-ui',
+            },
+            {
+                type: 'item' as const,
+                label: 'MCP',
+                link: '/docs/model-context-protocol',
+            },
+            {
+                type: 'item' as const,
+                label: 'AI Wizard',
+                link: '/docs/ai-engineering/ai-wizard',
+            },
+            {
+                type: 'submenu' as const,
+                label: 'Integrations',
+                items: (() => {
+                    const findByName = (items: DocsMenuItem[], name: string): DocsMenuItem | undefined => {
+                        for (const item of items) {
+                            if (item.name === name) {
+                                return item
+                            }
+                            if (item.children) {
+                                const found = findByName(item.children, name)
+                                if (found) {
+                                    return found
+                                }
+                            }
+                        }
+                        return undefined
+                    }
+
+                    const aiPlatformSection = findByName((docsMenu as DocsMenu).children, 'AI platform')
+                    const children = aiPlatformSection?.children || []
+
+                    const integrationsIndex = children.findIndex((child) => child.name === 'Integrations')
+                    if (integrationsIndex === -1) {
+                        return []
+                    }
+
+                    const integrations = children.slice(integrationsIndex + 1)
+
+                    return integrations
+                        .filter((child) => child.url)
+                        .map((child) => ({
+                            type: 'item' as const,
+                            label: child.name,
+                            link: child.url as string,
+                            ...(child.url?.startsWith('http') ? { external: true } : {}),
+                        }))
+                })(),
+            },
+        ],
+    },
+    {
         type: 'item' as const,
         label: 'Tutorials',
         link: '/tutorials',
