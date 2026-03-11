@@ -32,9 +32,9 @@ The overarching goal of PostHog's AI direction is **product autonomy** — a clo
 
 Here's how the loop works:
 
-1. **Signals**: PostHog collects signals across all products — error patterns, frustration in session recordings, experiment results, survey responses, insight thresholds, and more. These signals represent real problems or opportunities.
+1. **Signals**: PostHog collects signals from all products and external sources — error patterns, frustration in session recordings, experiment results, survey responses, insight thresholds, support tickets, Slack threads, and more. These signals represent real problems or opportunities.
 
-2. **Enrichment**: PostHog AI processes and enriches these signals, deduplicating across data sources and adding context. A vague signal like "users seem frustrated during checkout" becomes a concrete, contextualized finding.
+2. **Enrichment**: PostHog processes and enriches these signals, deduplicating across data sources and adding context. A vague signal like "users seem frustrated during checkout" becomes a concrete, contextualized finding.
 
 3. **Plans**: The enriched signals are transformed into structured plans — similar to how Claude Code works, but driven by data rather than human prompts. Each plan describes what needs to happen, why, and what evidence supports it.
 
@@ -48,7 +48,7 @@ Here's how the loop works:
 
 ```mermaid
 graph LR
-    Signals[Signals<br/>Errors, frustration,<br/>experiments, surveys] --> Enrichment[Enrichment<br/>PostHog AI processes<br/>and contextualizes]
+    Signals[Signals<br/>Internal: errors, recordings, experiments<br/>External: support tickets, Slack] --> Enrichment[Enrichment<br/>ML & agentic pipelines<br/>deduplicate, contextualize, prioritize]
     Enrichment --> Plans[Plans<br/>Structured, data-driven<br/>action items]
     Plans --> Execution[Execution<br/>Coding agent creates<br/>PRs and artifacts]
     Execution --> Review[Review<br/>Human oversight,<br/>iterate or merge]
@@ -56,7 +56,7 @@ graph LR
     Feedback --> Signals
 ```
 
-This vision is what connects all the individual AI products. Signals surfaces the data, PostHog AI enriches it, PostHog AI background agents execute on it, PostHog Code is where you collaborate with agents on these changes, and the loop closes when shipped changes generate new signals.
+This vision connects all the individual AI products. PostHog products and external sources (support tickets, Slack) generate signals, ML and agentic pipelines enrich them into structured plans, background and local coding agents execute on those plans, and product engineers review and collaborate on the changes. The loop closes when shipped changes generate new signals that feed back into the cycle.
 
 For how product teams can contribute to this vision, see [Integration vectors for product teams](/handbook/engineering/ai/team-structure#integration-vectors-for-product-teams).
 
