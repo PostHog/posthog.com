@@ -84,20 +84,6 @@ A mode for investigating errors and exceptions in your product.
 
 ### LLM analytics
 
-A mode for searching and analyzing LLM traces to understand model usage, costs, latency, and errors.
-
-**Best for:**
-- Searching and filtering LLM traces by date, model, or other criteria
-- Analyzing LLM usage costs and latency
-- Investigating errors in LLM calls
-- Reading detailed trace information
-
-**Mode-specific tools:**
-- `search_llm_traces` - Search and filter LLM traces by date range, model, error status, and other properties
-
-
-### LLM analytics
-
 A mode for searching and analyzing [LLM traces](/docs/llm-analytics/traces) to understand model usage, costs, latency, and errors.
 
 **Best for:**
@@ -108,6 +94,37 @@ A mode for searching and analyzing [LLM traces](/docs/llm-analytics/traces) to u
 
 **Mode-specific tools:**
 - `search_llm_traces` - Search for traces based on date range, model, error status, and other properties
+
+### Survey
+
+A mode for creating, editing, and analyzing surveys.
+
+**Best for:**
+- Creating NPS, feedback, and custom surveys
+- Targeting surveys by URL, user properties, or feature flags
+- Analyzing survey responses for themes and sentiment
+- Editing and managing existing surveys
+
+**Mode-specific tools:**
+- `create_survey` - Create new surveys with targeting rules
+- `edit_survey` - Modify, stop, or archive existing surveys
+- `analyze_survey_responses` - Extract themes, sentiment, and insights from responses
+
+### Feature flags
+
+A mode for creating and managing feature flags and experiments.
+
+**Best for:**
+- Creating feature flags with rollout percentages
+- Setting up property-based targeting rules
+- Creating A/B test experiments with multivariate flags
+- Analyzing experiment results
+
+**Mode-specific tools:**
+- `create_feature_flag` - Create feature flags with targeting and rollout settings
+- `create_experiment` - Set up A/B tests linked to feature flags
+- `experiment_results_summary` - Analyze experiment results with statistical summaries
+- `experiment_session_replays_summary` - Summarize session recordings across experiment variants
 
 ## Default tools (available in all modes)
 
