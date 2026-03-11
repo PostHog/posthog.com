@@ -75,7 +75,7 @@ If you aren't on a product team, replace 'product' with the equivalent 'thing' o
 
 When a team has set their quarterly goals it is the responsibility of the [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead) to document the goals on their team page, [publicly](/handbook/values). This enables teams to see what each other are working on, helps us hold teams accountable to their goals, and creates a shared sense of urgency and direction. 
 
-You can easily see what goals teams have set on the [WIP](//wip) page, which pulls all goals from the respective team pages. 
+You can easily see what goals teams have set on the [WIP](/wip) page, which pulls all goals from the respective team pages. 
 
 Teams can choose to document their goals publicly in a number of formats, but below is a useful template for getting started. Individuals may also choose to create planning issues to track their work in greater detail.
 
