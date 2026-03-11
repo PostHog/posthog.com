@@ -2607,21 +2607,33 @@ export const docsMenu = {
                 },
                 {
                     name: 'AI platform',
-                    url: '/docs/ai-engineering',
+                    url: '/docs/ai-platform',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'red',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/ai-engineering',
+                            url: '/docs/ai-platform',
                         },
                         {
                             name: 'AI wizard',
-                            url: '/docs/ai-engineering/ai-wizard',
+                            url: '/docs/ai-platform/ai-wizard',
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
+                        },
+                        {
+                            name: 'Markdown and llms.txt',
+                            url: '/docs/ai-platform/markdown-llms-txt',
+                        },
+                        {
+                            name: 'PostHog AI ↗',
+                            url: 'https://posthog.com/docs/posthog-ai',
+                        },
+                        {
+                            name: 'LLM Analytics ↗',
+                            url: 'https://posthog.com/docs/llm-analytics',
                         },
                         {
                             name: 'Integrations',
@@ -2637,14 +2649,6 @@ export const docsMenu = {
                         {
                             name: 'v0',
                             url: '/docs/integrations/v0',
-                        },
-                        {
-                            name: 'LLM Analytics ↗',
-                            url: 'https://posthog.com/docs/llm-analytics',
-                        },
-                        {
-                            name: 'Markdown and llms.txt',
-                            url: '/docs/ai-engineering/markdown-llms-txt',
                         },
                     ],
                 },
