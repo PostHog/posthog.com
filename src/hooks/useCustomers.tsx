@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CounterPressLogo from '../images/customers/counterpress-light.svg'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
@@ -369,6 +371,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product'],
         notes: 'Publishing platform for sports journalism',
         featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
         height: 6,
         quotes: {
             jay_collett: {
@@ -379,7 +385,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
                 products: {
                     endpoints:
-                        'The endpoints API has basically saved us hiring someone to build a platform to consume data and create endpoints.',
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
                 },
                 quotes: [
                     'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
