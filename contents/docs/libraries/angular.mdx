@@ -18,6 +18,12 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
 <AngularInstall />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 > **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
 >
 > Given the nature of this library, you might need to completely clear your `.npm` cache to get this to work as expected. Make sure your clear your CI's cache as well.
@@ -32,7 +38,7 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
 ## Tracking pageviews
 
-PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2025-11-30`.
+PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2026-01-30`.
 
 ## Capture custom events
 

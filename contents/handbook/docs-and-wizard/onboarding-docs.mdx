@@ -4,181 +4,295 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Onboarding docs are special because these instructions are **shared** between the [in-app onboarding](https://github.com/PostHog/posthog/tree/master/frontend/src/scenes/onboarding) flow and the getting started pages on the [posthog.com website](https://github.com/PostHog/posthog.com). These are the first pieces of docs a new user will see, so they need to be up to date and accurate. 
+Onboarding docs, or product installation docs, are special because these instructions are **shared** between the [in-app onboarding flow](https://github.com/PostHog/posthog/tree/master/frontend/src/scenes/onboarding) and the getting started pages on the [PostHog website](https://github.com/PostHog/posthog.com). 
 
-To help keep in-app and website onboarding docs in sync, there is a **single source** of truth for the onboarding docs in the [`posthog/posthog`](https://github.com/PostHog/posthog) repository under the [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This means you only need to update the in-app onboarding docs in the `posthog/posthog` repository, and the website docs will be updated automatically.
 
-### Which products have shared onboarding docs
+These are some of the first pieces of docs a new user will see. They show users how to quickly set up and install a product, so they need to be up to date and accurate.
 
-This is a relatively new feature, so we're still migrating old onboarding docs to the new system. As of December 2025:
+To help keep in-app and website onboarding docs in sync, there is a **single source** of truth for the onboarding docs in the [`posthog/posthog`](https://github.com/PostHog/posthog) repository under the [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This means you only need to update the in-app onboarding docs in the PostHog monorepo, and the website docs will be updated automatically.
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/posthog_onboarding_docs_13eddf168e.mp4" 
+    alt="How shared onboarding docs work" 
+    classes="rounded"
+    autoPlay={false}
+    muted={false}
+/>
+
+<Caption>
+Video explainer of how onboarding docs and shared rendering work
+</Caption>
+
+## Which products have shared onboarding docs
+
+This is a relatively new feature, so we're still migrating old onboarding docs to the new system. As of February 2026:
 
 | Product | Status |
 |---------|--------|
 | LLM analytics | ✅ Migrated |
-| Product analytics | ✅ Migrated |
-| Web analytics | ⏳ Not yet migrated |
-| Session replay | ⏳ Not yet migrated |
-| Feature flags | ✅ Migrated |
-| Experiments | ⏳ Not yet migrated |
-| Error tracking | ⏳ Not yet migrated |
-| Surveys | ⏳ Not yet migrated |
-| Data pipelines | ⏳ Not yet migrated |
-| Data warehouse | ⏳ Not yet migrated |
-| Revenue analytics | ⏳ Not yet migrated |
+| Product Analytics | ✅ Migrated |
+| Web Analytics | ✅ Migrated |
+| Session Replay | ✅ Migrated |
+| Feature Flags | ✅ Migrated |
+| Experiments | ✅ Migrated |
+| Error Tracking | ✅ Migrated |
+| Surveys | ⏳ In progress |
+| Data Pipelines | ⏳ Not yet migrated |
+| Data Warehouse | ⏳ Not yet migrated |
+| Revenue Analytics | ⏳ Not yet migrated |
 | PostHog AI | ⏳ Not yet migrated |
-| Workflows | ⏳ Not yet migrated |
+| Workflows | ✅ Migrated |
 | Logs | ⏳ Not yet migrated |
-| Endpoints | ⏳ Not yet migrated | 
+| Endpoints | ⏳ Not yet migrated |
 
-### How to update onboarding docs
+## How it all works
 
-1. Find the shared content file in the [`posthog/posthog`](https://github.com/PostHog/posthog) repository under [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding). For example, `docs/onboarding/llm-analytics/openai.tsx`.
-2. Edit the `.tsx` file directly in the `posthog/posthog` repository. Make your changes to the component.
-3. Test locally by running the app in development mode and verifying the changes in the in-app onboarding. You can trigger onboarding by navigating to `localhost:8010/products`.
-4. Commit and open a PR to merge your changes into `master` in `posthog/posthog`. This will trigger a Vercel preview build of the website. Verify these changes and merge the PR.
-5. If you need more confidence, verify the website locally by setting the `GATSBY_POSTHOG_BRANCH` environment variable to your PR branch and rebuilding the website locally.
-6. Verify on website: The website will automatically pull the changes on its next build.
+Onboarding content is written once as React components in the [`posthog/posthog`](https://github.com/PostHog/posthog) repo, then rendered in two places:
 
-### How to create/migrate onboarding docs
+1. **PostHog monorepo:** For in-app onboarding, the PostHog app imports these docs components directly and wraps them with [`OnboardingDocsContentWrapper`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx), which provides UI components like `Steps`, `CodeBlock`, etc.
+2. **Posthog.com repo:** The website pulls the docs components from the monorepo via `gatsby-source-git`, a Gatsby plugin, and then renders them through MDX stub files that use a similar but different [`OnboardingContentWrapper`](https://github.com/PostHog/posthog.com/blob/master/src/components/Docs/OnboardingContentWrapper.tsx) to provide compatible UI components.
 
-**Step 1: Create the shared component in `posthog/posthog`**
+Both wrappers provide the same component names (`Steps`, `CodeBlock`, `CalloutBox`, etc.) so the shared content renders correctly in either place. When you merge changes to `master` in `posthog/posthog`, the website automatically pulls the updated content on its next build.
 
-1. Navigate to the product directory in `docs/onboarding/`. If it doesn't exist, create it (e.g., `docs/onboarding/your-product/`).
-2. Create a new `.tsx` file (e.g., `docs/onboarding/your-product/filename.tsx`).
-3. Export a named component that contains your onboarding content. Use the `useMDXComponents` hook to access shared components:
+```mermaid
+flowchart LR
+    subgraph website["<strong>posthog.com repo</strong>"]
+        gatsby["gatsby-source-git<br/>(pulls on build)"]
+        mdx["MDX stub files"]
+        wrapper2["OnboardingContentWrapper"]
+        ui2["Docs pages"]
+        gatsby --> mdx --> wrapper2 --> ui2
+    end
 
-```tsx file=docs/onboarding/llm-analytics/google.tsx
-import { useMDXComponents } from 'scenes/onboarding/OnboardingDocsContentWrapper'
-
-export const GoogleInstallation = (): JSX.Element => {
-    const {
-        Steps,
-        Step,
-        CodeBlock,
-        CalloutBox,
-        ProductScreenshot,
-        OSButton,
-        Markdown,
-        Blockquote,
-        dedent,
-        snippets,
-    } = useMDXComponents()
-    
-    const NotableGenerationProperties = snippets?.NotableGenerationProperties
-    return (
-        <Steps>
-            <Step title="Install the PostHog SDK" badge="required">
-                <Markdown>
-                    Setting up analytics starts with installing the PostHog SDK for your language. LLM analytics works best with our Python and Node SDKs.
-                </Markdown>
-
-                <CodeBlock
-                    blocks={[
-                        {
-                            language: 'bash',
-                            file: 'Python',
-                            code: dedent`
-                                pip install posthog
-                            `,
-                        },
-                        {
-                            language: 'bash',
-                            file: 'Node',
-                            code: dedent`
-                                npm install @posthog/ai posthog-node
-                            `,
-                        },
-                    ]}
-                />
-            </Step>
-            {/* ... more steps ... */}
-    </Steps>
-    )
-}
+    subgraph monorepo["<strong>posthog/posthog repo</strong>"]
+        docs["docs/onboarding/*.tsx<br/>product installation docs"]
+        wrapper1["OnboardingDocsContentWrapper"]
+        ui1["In-app onboarding flow"]
+        docs --> wrapper1 --> ui1
+    end
+    docs -.->|"auto-sync"| gatsby
 ```
 
-4. For reusable snippets, create them in `docs/onboarding/<product>/_snippets/` (e.g., `docs/onboarding/your-product/_snippets/example-snippet.tsx`). Export a named component.
-5. Create or update a scene in the `posthog/posthog` repository to import and use your new component. See [example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/LLMAnalyticsSDKInstructions.tsx).
-6. Test in the app by updating the in-app onboarding scene to import and use your new component. See [example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/8LMAnalyticsSDKInstructions.tsx).
-7. Reference existing examples in [`docs/onboarding/llm-analytics`](https://github.com/PostHog/posthog/tree/master/docs/onboarding/llm-analytics) for patterns.
+If you need some help with structuring your files, this is the architecture for each repo:
 
-**Step 2: Create the website stub in `posthog/posthog.com`**
+```
+posthog/posthog
+├── docs/onboarding/
+│   └── your-product/
+│       ├── index.ts              # Barrel file re-exports all Installation components + snippets
+│       ├── sdk-name.tsx          # getSteps + createInstallation
+│       └── _snippets/
+│           └── reusable-snippet.tsx
+│
+└── frontend/src/scenes/onboarding/
+    └── sdks/your-product/
+        └── YourProductSDKInstructions.tsx  # withOnboardingDocsWrapper
 
-1. Run a build to pull the latest from `posthog/posthog` with the `GATSBY_POSTHOG_BRANCH` environment variable set to your PR branch:
-   ```bash
-   pnpm clean && pnpm && GATSBY_POSTHOG_BRANCH=<your-pr-branch> pnpm start
+posthog/posthog.com
+└── contents/docs/your-product/
+    └── installation/
+        ├── sdk-name.mdx          # MDX stub
+        └── _snippets/
+            ├── prefix-installation-wrapper.tsx  # Single file with ALL wrappers
+            └── shared-helpers.tsx               # modifySteps helpers
+```
+
+For a complete working example, see the **[Session Replay](/docs/session-replay/installation)** implementation:
+
+| Repo | File |
+|------|------|
+| posthog/posthog | [`docs/onboarding/session-replay/`](https://github.com/PostHog/posthog/blob/master/docs/onboarding/session-replay/) |
+| posthog.com | [`react.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/session-replay/installation/react.mdx) |
+| posthog.com | [`sr-installation-wrapper.tsx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/session-replay/installation/_snippets/sr-installation-wrapper.tsx) (single file with all wrappers) |
+
+## How to create/migrate new onboarding docs
+
+### Step 1: Create the shared component in posthog/posthog
+
+1. Navigate to the product directory in `docs/onboarding/`. If it doesn't exist, create it: `docs/onboarding/your-product/`
+2. Create a new `.tsx` file: `docs/onboarding/your-product/filename.tsx`
+3. Export a step function and Installation component. Use `createInstallation` to automatically handle the rendering:
+
+   ```tsx file=docs/onboarding/feature-flags/python.tsx
+   import { OnboardingComponentsContext, createInstallation } from 'scenes/onboarding/OnboardingDocsContentWrapper'
+   import { getPythonSteps as getPythonStepsPA } from '../product-analytics/python'
+   import { StepDefinition } from '../steps'
+
+   // Step function receives a single context object with all components
+   export const getPythonSteps = (ctx: OnboardingComponentsContext): StepDefinition[] => {
+       const { CodeBlock, Markdown, dedent, snippets } = ctx
+
+       // Reuse installation steps from product-analytics
+       const installationSteps = getPythonStepsPA(ctx)
+
+       // Add feature-flag-specific steps
+       const flagSteps: StepDefinition[] = [
+           {
+               title: 'Evaluate feature flags',
+               badge: 'required',
+               content: (
+                   <>
+                       <Markdown>Check if a feature flag is enabled:</Markdown>
+                       {snippets?.BooleanFlagSnippet && <snippets.BooleanFlagSnippet />}
+                   </>
+               ),
+           },
+       ]
+
+       return [...installationSteps, ...flagSteps]
+   }
+
+   // createInstallation wraps your step function into a ready-to-use component
+   export const PythonInstallation = createInstallation(getPythonSteps)
    ```
-   This will fetch the shared content into `.cache/gatsby-source-git/posthog-main-repo/docs/onboarding/`.
 
-2. Create the MDX stub file in the appropriate docs location:
-   - For installation pages: `contents/docs/<product>/installation/<name>.mdx`
-   - For other pages: `contents/docs/<product>/<path>.mdx`
-   - Example: `contents/docs/llm-analytics/installation/openai.mdx`
+  <CalloutBox type="fyi" title="Key patterns">
 
-3. Add frontmatter with title, `tableOfContents`, etc.:
+    - You can reuse installation steps from product analytics by calling their step function with the same context.
+    - Step badges include `required`, `optional`, or `recommended`.
 
-```mdx
----
-title: Your Product Installation
-showStepsToc: true
-tableOfContents: [
-    {
-        url: 'step-1',
-        value: 'Step 1 title',
-        depth: 1,
-    },
-]
----
+  </CalloutBox>
+
+4. For reusable snippets, create them in `docs/onboarding/<product>/_snippets/` and export a named component.
+5. Create the in-app wrapper in `frontend/src/scenes/onboarding/sdks/your-product/`. Use the `withOnboardingDocsWrapper` helper:
+
+   ```tsx file=frontend/src/scenes/onboarding/sdks/feature-flags/FeatureFlagsSDKInstructions.tsx
+   import { PythonInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from '@posthog/shared-onboarding/feature-flags'
+   import { PythonEventCapture } from '@posthog/shared-onboarding/product-analytics'
+   import { withOnboardingDocsWrapper } from '../shared/onboardingWrappers'
+
+   const PYTHON_SNIPPETS = {
+       PythonEventCapture,
+       BooleanFlagSnippet,
+       MultivariateFlagSnippet,
+   }
+
+   const FeatureFlagsPythonInstructionsWrapper = withOnboardingDocsWrapper({
+       Installation: PythonInstallation,
+       snippets: PYTHON_SNIPPETS,
+   })
+
+   export const FeatureFlagsSDKInstructions: SDKInstructionsMap = {
+       [SDKKey.PYTHON]: FeatureFlagsPythonInstructionsWrapper,
+       // ... other SDKs
+   }
+   ```
+
+6. Test in the app by running the monorepo locally and navigate to `localhost:8010/onboarding`. From this page, you can select your product and test.
+
+### Step 2: Create the website stub in posthog/posthog.com
+
+1. To test your changes locally, use the `GATSBY_POSTHOG_BRANCH` environment variable to point to your branch:
+
+   ```bash
+   GATSBY_POSTHOG_BRANCH=your-branch-name pnpm start
+   ```
+
+   This tells `gatsby-source-git` to pull from your branch instead of `master`.
+
+2. Create a **single TSX wrapper file** at `contents/docs/<product>/installation/_snippets/<prefix>-installation-wrapper.tsx` that exports all SDK wrappers:
+
+   ```tsx file=contents/docs/session-replay/installation/_snippets/sr-installation-wrapper.tsx
+   import React from 'react'
+   import {
+       JSWebInstallation,
+       ReactInstallation,
+       NextJSInstallation,
+       // ... import all SDK installations
+       SessionReplayFinalSteps,
+   } from 'onboarding/session-replay'
+   import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+   import { addNextStepsStep } from './shared-helpers'
+
+   const SNIPPETS = {
+       SessionReplayFinalSteps,
+   }
+
+   // Export a wrapper for each SDK
+   export const SRJSWebInstallationWrapper = () => (
+       <OnboardingContentWrapper snippets={SNIPPETS}>
+           <JSWebInstallation modifySteps={addNextStepsStep} />
+       </OnboardingContentWrapper>
+   )
+
+   export const SRReactInstallationWrapper = () => (
+       <OnboardingContentWrapper snippets={SNIPPETS}>
+           <ReactInstallation modifySteps={addNextStepsStep} />
+       </OnboardingContentWrapper>
+   )
+
+   export const SRNextJSInstallationWrapper = () => (
+       <OnboardingContentWrapper snippets={SNIPPETS}>
+           <NextJSInstallation modifySteps={addNextStepsStep} />
+       </OnboardingContentWrapper>
+   )
+
+   // ... repeat for all SDKs
+   ```
+
+   The `modifySteps` prop lets you add website-specific steps (like "Next steps") that aren't needed in-app.
+
+3. Create an MDX stub file for each SDK at `contents/docs/<product>/installation/<name>.mdx`:
+
+   ```mdx file=contents/docs/session-replay/installation/react.mdx
+   ---
+   title: React session replay installation
+   platformLogo: react
+   showStepsToc: true
+   ---
+
+   <!--
+   This page imports shared onboarding content from the main PostHog repo.
+   Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/session-replay/react.tsx
+   -->
+
+   import { SRReactInstallationWrapper } from './_snippets/sr-installation-wrapper.tsx'
+
+   <SRReactInstallationWrapper />
+   ```
+
+4. Test locally: Run `pnpm start` and verify the page renders correctly at the expected URL.
+5. Commit and merge both the `posthog/posthog` and `posthog/posthog.com` PRs.
+
+## Exceptions to the standard pattern
+
+The architecture described above works well for products that have their own SDK installation steps – but not every product fits this mold. Some products are exceptions, and that's fine. The shared onboarding pattern should only be used when it makes sense.
+
+### Workflows
+
+Installing an SDK for Workflows is optional. Because of this, Workflows doesn't define its own shared doc components. There are **no files in `docs/onboarding/workflows/`**.
+
+Instead, Workflows reuses the Product Analytics `Installation` components directly and transforms them with a `modifySteps` function at the in-app level:
+
+```tsx file=frontend/src/scenes/onboarding/sdks/workflows/WorkflowsSDKInstructions.tsx
+import { ReactInstallation, PythonInstallation } from '@posthog/shared-onboarding/product-analytics'
+import { withOnboardingDocsWrapper } from '../shared/onboardingWrappers'
+
+// Filter out product-analytics-specific steps and add a workflows-specific final step
+function workflowsModifySteps(steps: StepDefinition[]): StepDefinition[] {
+    const installationSteps = steps.filter(
+        (step) => !['Send events', 'Send an event', 'Send events via the API'].includes(step.title)
+    )
+    return [
+        ...installationSteps,
+        {
+            title: 'Set up workflows',
+            badge: 'recommended',
+            content: <WorkflowsFinalStepContent />,
+        },
+    ]
+}
+
+const WorkflowsReactWrapper = withOnboardingDocsWrapper({
+    Installation: ReactInstallation,
+    modifySteps: workflowsModifySteps,
+})
 ```
 
-4. Add the source comment at the top (after frontmatter) to track the source of the content:
+This pattern works because Workflows only needs a PostHog SDK installed (the same installation steps as Product Analytics), then swaps the final "send events" step for a "set up Workflows" step. Everything lives in a single `WorkflowsSDKInstructions.tsx` file – no shared docs directory, no website stubs.
 
-```html
-<!--
-This page imports shared onboarding content from the main PostHog repo.
-Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/your-product/installation.tsx
-See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
--->
-```
+<CalloutBox type="fyi" title="When to use this pattern">
 
-5. Import and render the shared component:
+If your product's onboarding is essentially "install the PostHog SDK + do one product-specific thing," consider reusing existing Installation components with `modifySteps` instead of creating a full set of shared doc files. This avoids unnecessary duplication.
 
-```mdx
-import { YourProductInstallation } from 'onboarding/your-product/installation.tsx'
-import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
-
-<OnboardingContentWrapper snippets={{ ...snippets }}>
-    <YourProductInstallation />
-</OnboardingContentWrapper>
-```
-
-6. If you need snippets, import them and pass to the wrapper:
-   - First, create snippet stubs in `contents/docs/<product>/_snippets/` (e.g., `contents/docs/llm-analytics/_snippets/example-snippet.mdx`):
-
-```mdx
-<!--
-This snippet imports shared onboarding content from the main PostHog repo.
-Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/your-product/_snippets/example-snippet.tsx
-See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
--->
-
-import { OnboardingContentWrapper } from "components/Docs/OnboardingContentWrapper"
-import { ExampleSnippet } from "onboarding/your-product/_snippets/example-snippet.tsx" // +
-
-<OnboardingContentWrapper snippets={{ ExampleSnippet }}> // +
-</OnboardingContentWrapper>
-```
-
-7. Test locally: Run `pnpm start` and verify the page renders correctly at the expected URL.
-8. Commit and merge both the `posthog/posthog` and `posthog/posthog.com` PRs.
-
-### How changes propagate to the website
-
-1. Content is written in the `posthog/posthog` repository's [`docs/onboarding`](https://github.com/PostHog/posthog/tree/master/docs/onboarding) directory. This shared directory can be imported from the `posthog/posthog` repo and used in the `posthog/posthog.com` repo.
-2. Onboarding scenes ([example](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/sdks/llm-analytics/LLMAnalyticsSDKInstructions.tsx)) in the `posthog/posthog` repository import the shared onboarding docs. The [wrapper component](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx) passes snippets and components through a context to the shared onboarding docs.
-3. Because component and snippet implementations differ between the app and website, the in-app onboarding docs use a [wrapper component](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/onboarding/OnboardingDocsContentWrapper.tsx) that renders the shared onboarding docs with the appropriate components and snippets.
-4. The website uses `gatsby-source-git` to import the shared onboarding docs from the `posthog/posthog` repository. You can find them after running build in the `.cache/gatsby-source-git/posthog-main-repo/docs/onboarding` directory.
-5. The website uses aliases to map the import paths to `onboarding/*` (e.g. [`onboarding/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx)).
-6. The website uses the same [`OnboardingContentWrapper`](https://github.com/PostHog/posthog.com/blob/master/src/components/Docs/OnboardingContentWrapper.tsx) component to render the onboarding docs. This wrapper passes snippets and components through a context to the shared onboarding docs. Usage example: [`onboarding/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx).
-7. To allow for different implementations such as front matter, different titles, and additional content, the website uses MDX stubs like [`contents/docs/llm-analytics/google.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/installation/google.mdx) and snippet stubs like [`contents/docs/llm-analytics/_snippets/embedding-event.mdx`](https://github.com/PostHog/posthog.com/blob/master/contents/docs/llm-analytics/_snippets/embedding-event.mdx) with comments to indicate the source of the content.
-
+</CalloutBox>

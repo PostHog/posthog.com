@@ -35,6 +35,7 @@ Each person contains the following base fields within PostgreSQL:
 | **team_id**    | `integer`     | Foreign key which links to the team                                                                                          |
 | **uuid**       | `UUID`        | UUID of the person within ClickHouse. This is referenced by the `person_id` field on events                                  |
 | **created_at** | `timestamptz` | The timestamp of the earliest event associated with this person                                                              |
+| **last_seen_at** | `timestamptz` | The timestamp of the person's most recent event, rounded to the hour. See [skipping `last_seen_at` updates](/docs/product-analytics/person-properties#skipping-last_seen_at-updates). |
 | **properties** | `jsonb`       | A JSON object with all the properties for a user, which can be altered using the `$set`, `$set_once`, and `$unset` arguments |
 | **version**    | `bigint`      | Incremented every time a person is updated. Helps to keep ClickHouse and PostgreSQL in sync.                                 |
 

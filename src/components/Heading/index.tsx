@@ -8,6 +8,7 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
     const { href } = useLocation()
     const handleClick = () => {
         const url = `${href.replace(/#.*/, '')}#${id}`
+        window.history.replaceState(null, '', `#${id}`)
         navigator.clipboard.writeText(url)
         setVisible(true)
         setTimeout(() => {

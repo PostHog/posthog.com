@@ -70,6 +70,7 @@ export const exportToPdf = async ({ slideId, filename }: ExportToPdfOptions = {}
                     quality: 0.8, // Reduced quality for compression
                     pixelRatio: 1.5, // Reduced from 2 to 1.5
                     backgroundColor: '#ffffff',
+                    skipFonts: true,
                 })
 
                 // Add new page for each slide (except the first one)

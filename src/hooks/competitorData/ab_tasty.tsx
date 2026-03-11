@@ -68,7 +68,7 @@ export const ab_tasty = {
             api: 'Edit only',
         },
         security: {
-            history_audit_logs: false,
+            history_audit_logs: true,
             role_based_access_control: true,
         },
         tools: {

@@ -3,13 +3,13 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
+import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
-import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CounterPressLogo from '../images/customers/counterpress-light.svg'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
@@ -37,6 +39,8 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SupedLogo from '../images/customers/suped-light.png'
+import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
@@ -48,10 +52,8 @@ import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
-import Link from 'components/Link'
 import useProducts from './useProducts'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
-import { posthog_ai } from './productData/posthog_ai'
 
 export interface Customer {
     slug: string
@@ -77,7 +79,8 @@ export interface Customer {
                 thumb: string
                 url?: string
             }
-            products: Record<string, string>
+            products?: Record<string, string>
+            quotes?: string[]
         }
     >
     featured: boolean
@@ -108,7 +111,8 @@ interface BaseCustomer {
                 thumb: string
                 url?: string
             }
-            products: Record<string, string>
+            products?: Record<string, string>
+            quotes?: string[]
         }
     >
     featured: boolean
@@ -173,6 +177,49 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: AssemblyAILogo,
         featured: false,
         height: 10,
+    },
+    arena: {
+        name: 'Arena',
+        toolsUsed: [
+            'web_analytics',
+            'product_analytics',
+            'marketing_analytics',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'surveys',
+            'posthog_ai',
+        ],
+        industries: ['LLMs'],
+        users: ['Product', 'Engineering', 'Growth'],
+        notes: 'AI model comparison platform',
+        logo: ArenaLogo,
+        height: 10,
+        featured: true,
+        quotes: {
+            matt_hova: {
+                name: 'Matt Hova',
+                role: 'Member of Technical Staff',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/matt_hova_8c119a92ad.jpeg',
+                },
+                products: {
+                    experiments:
+                        "I can't recommend PostHog enough, especially if you're just getting started out. It really helped us move fast and we've been really happy with it as we continue to scale.",
+                },
+            },
+            lily_dinh: {
+                name: 'Lily Dinh',
+                role: 'Growth Marketing Lead',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/lily_d_lmarena_7ce598fc8c.jpeg',
+                },
+                products: {
+                    product_analytics:
+                        "As a marketer, it's so important to understand which KPIs the company actually cares about. All of that data lives in PostHog. It's our source of truth for company performance.",
+                },
+            },
+        },
     },
     brainboard: {
         name: 'Brainboard',
@@ -261,7 +308,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     grantable: {
         name: 'Grantable',
         toolsUsed: [
-            'workflows',
+            'workflows_emails',
             'feature_flags',
             'session_replay',
             'experiments',
@@ -293,7 +340,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     croissant: {
         name: 'Croissant',
-        toolsUsed: ['workflows', 'product_analytics', 'surveys', 'web_analytics'],
+        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
         industries: ['SaaS'],
         users: ['Growth', 'Product', 'Marketing'],
         notes: 'Workspace finder',
@@ -314,6 +361,88 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     workflows:
                         'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
+            },
+        },
+    },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
+            },
+        },
+    },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/suped/michael-suped.png',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
+            },
+        },
+    },
+    kilocode: {
+        name: 'KiloCode',
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
+        industries: ['AI'],
+        users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+        },
+        quotes: {
+            job_rietbergen: {
+                // This is the author handle used in OSQuote
+                name: 'Job Rietbergen',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/job_rietbergen_a86584acfc.jpeg',
+                },
+
+                quotes: [
+                    "In other setups, you end up with four different tools–analytics, experiments, recordings,and they don't really talk to each other. With PostHog, you can actually see the full picture.",
+                    "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
+                    "Everything we do is about speed. PostHog helps us move fast without losing visibility into what's actually happening.",
+                ],
             },
         },
     },
@@ -358,7 +487,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI video editor',
         logo: HeygenLogo,
         featured: true,
-        height: 8,
+        height: 12,
     },
     hostai: {
         name: 'HostAI',
@@ -387,7 +516,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
                 },
                 quotes: [
-                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
                 ],
             },
         },

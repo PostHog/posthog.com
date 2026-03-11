@@ -46,6 +46,14 @@ We do use our own infrastructure. But ad blockers specifically target well-known
 
 Your proxy works because ad blockers haven't visited your domain to catalog your setup. They don't know what to block.
 
+### What about DNS uncloaking?
+
+DNS uncloaking (also called CNAME uncloaking) is a technique where a DNS resolver follows the CNAME chain of a subdomain to check whether it ultimately points to a known analytics provider. If it does, the resolver blocks the request before it ever reaches the browser.
+
+This is **only possible at the DNS level** — it requires a custom DNS resolver or network-level tool like NextDNS or Pi-hole. Browser ad blocker extensions (like uBlock Origin) cannot perform DNS lookups. They only see HTTP requests after DNS resolution has already happened, so they rely on static blocklists of known domains and URL patterns.
+
+DNS resolvers with uncloaking support maintain their own lists of known analytics domains. When your subdomain's CNAME chain resolves to one of these domains, the resolver can detect and block it. For the small percentage of users running these DNS configurations, a reverse proxy may not fully bypass blocking.
+
 ### Does PostHog provide static IP addresses?
 
 No. Our domains use AWS infrastructure with load balancing, which rotates IPs for performance and reliability.

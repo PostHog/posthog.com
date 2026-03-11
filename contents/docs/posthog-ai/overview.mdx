@@ -9,6 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 [PostHog AI](https://app.posthog.com/#panel=max) is an AI-powered product analyst and assistant that lives in PostHog. PostHog AI can:
 
 - **Research answers** to product questions by querying the data.
+- **Search the web** for additional context about your product, company, or industry.
 - **Get things done** quickly in the PostHog UI for you like update filters, create insights, write SQL, find session replays, make surveys, and more.
 - **Explain PostHog** features and how to use them based on our docs.
 - **Chit-chat** about anything PostHog-related really.
@@ -45,14 +46,16 @@ Unlike other agents, PostHog AI can:
 - Interact natively with the PostHog UI, for example by editing filters.
 - Generate complex [HogQL](/docs/sql) (our version of SQL) queries.
 - Answer questions from PostHog's documentation.
+- Search the web for relevant context about your product and industry.
 - Create [surveys](/docs/surveys/creating-surveys) using natural language.
+- Create [alerts](/docs/alerts) to monitor insight metrics and get notified when thresholds are breached.
 - Write [Hog](/docs/hog) functions to power your realtime destinations.
 
 
 And soon, PostHog AI will be able to:
 - Watch and summarize your session replays.
 - Create [feature flags](/docs/feature-flags) and [experiments](/docs/experiments).
-- Conduct deep research.
+- Conduct research.
 - and more...
 
 Check our [roadmap](/ai#roadmap) to see what's coming, and vote on our upcoming features.
@@ -64,6 +67,7 @@ You can help PostHog AI give better answers by adding context to your conversati
 - Insights from anywhere in your project, or from the current page you're viewing
 - Dashboards with all their insights
 - Events and actions from your data model
+- Notebooks with their full content
 
 When you add context, PostHog AI can reference the specific queries, filters, and data from those items when answering your questions. Context automatically resets when you navigate to a different page, but persists as you move around the same page. You can also manually remove context items.
 
@@ -75,6 +79,9 @@ While working with PostHog AI, you will certainly share some information with it
 - Actions and cohorts
 - Event and property definitions
 - Data warehouse schema
+- Saved insights and dashboards
+
+PostHog AI respects your project's [access controls](/docs/settings/access-control). You can only access insights and dashboards you have permission to view.
 
 Based on that context, PostHog AI comes up with queries, runs them, and summarizes the results. Those results can be as high-level as a single number, or as detailed as a list of users with all their properties.
 
@@ -85,9 +92,6 @@ We use third-party providers to power PostHog AI, so messages and all data acces
 Our list of data subprocessors includes:
 - OpenAI and Anthropic – responsible for the core of PostHog AI's functionality, have access to user messages and all data types.
 - Azure – responsible for semantic search across PostHog, has access to actions and cohorts (including their filters)
-
-Other providers that are not data subprocessors:
-- Perplexity – responsible for providing context about your product and/or company, has access to domain name (for websites) or application bundle ID (for mobile applications). We do not send any of your data.
 
 ## How can I get PostHog AI to remember information?
 

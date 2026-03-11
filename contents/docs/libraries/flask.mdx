@@ -19,7 +19,7 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from posthog import Posthog
 
 posthog = Posthog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   host='<ph_client_api_host>'
 )
 
@@ -33,7 +33,13 @@ def api_dashboard():
 
 ```
 
-You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings).
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
+
+## Identifying users
+
+import IdentifyBackendCallout from '../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
 
 ## Error tracking
 

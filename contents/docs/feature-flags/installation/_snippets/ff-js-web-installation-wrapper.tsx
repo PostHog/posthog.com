@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    JSWebInstallation,
+    WebInstallation,
     BooleanFlagSnippet,
     MultivariateFlagSnippet,
     FlagPayloadSnippet,
@@ -23,7 +23,7 @@ export const FFJSWebInstallationWrapper = () => {
                 ReloadFlagsSnippet,
             }}
         >
-            <JSWebInstallation modifySteps={addNextStepsStep} />
+            <WebInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

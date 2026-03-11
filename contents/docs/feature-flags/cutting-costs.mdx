@@ -4,8 +4,17 @@ sidebar: Docs
 showTitle: true
 ---
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct'
 
-We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your feature flag costs.
+PostHog Feature Flags comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies *use PostHog for free*.
+
+No credit card is required to get started. You can also set billing limits to avoid any surprise charges.
+
+Feature Flags is billed by the number of API requests you make to evaluate flags. The price per request changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
+
+<Pricing productType="feature_flags" />
+
+We aim to be significantly cheaper than our competitors. Below are tips to reduce your feature flag costs.
 
 ## Understanding your bill
 
@@ -123,7 +132,7 @@ The key settings are:
 // Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
 
     // Disable all flag requests in test environments
@@ -149,7 +158,7 @@ posthog.init('<ph_project_api_key>', {
 // Detect test/CI environment
 val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
 
-val config = PostHogConfig(apiKey = "<ph_project_api_key>").apply {
+val config = PostHogConfig(apiKey = "<ph_project_token>").apply {
     if (isTestEnv) {
         // Disable flag requests entirely
         preloadFeatureFlags = false
@@ -173,7 +182,7 @@ if (isTestEnv) {
 // Detect test/CI environment
 let isTestEnv = ProcessInfo.processInfo.environment["CI"] != nil
 
-let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+let config = PostHogConfig(apiKey: "<ph_project_token>")
 
 if isTestEnv {
     config.preloadFeatureFlags = false
@@ -194,7 +203,7 @@ if isTestEnv {
 // Detect test/CI environment
 final isTestEnv = Platform.environment['CI'] != null;
 
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 
 if (isTestEnv) {
     config.preloadFeatureFlags = false;
@@ -215,7 +224,7 @@ if (isTestEnv) {
 // Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
-const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_token>', {
     host: '<ph_client_api_host>',
     ...(isTestEnv && {
         preloadFeatureFlags: false,
@@ -258,7 +267,7 @@ This shows you every SDK, domain, and version currently making requests, so you 
 If you find environments that don't need feature flags, replays, or surveys, disable them entirely using `advanced_disable_feature_flags`:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   advanced_disable_feature_flags: true // Disables feature flags, surveys, and session recording
 })
 ```

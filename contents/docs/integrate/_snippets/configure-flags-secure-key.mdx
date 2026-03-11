@@ -2,7 +2,7 @@
 
 ```node
 const client = new PostHog(
-    '<ph_project_api_key>',
+    '<ph_project_token>',
     { 
         host: '<ph_client_api_host>',
         personalApiKey: 'your feature flags secure API key from step 1',
@@ -13,7 +13,7 @@ const client = new PostHog(
 
 ```ruby
 posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
+  api_key: "<ph_project_token>",
   host: "<ph_client_api_host>",
   personal_api_key: 'your feature flags secure API key from step 1',
   feature_flags_polling_interval: 30 # Optional. Measured in seconds. Defaults to 30.
@@ -45,7 +45,7 @@ func main() {
 ```
 
 ```php
-PostHog::init("<ph_project_api_key>",
+PostHog::init("<ph_project_token>",
   ['host' => '<ph_client_api_host>'],
   null, // or custom http client
  'your feature flags secure API key from step 1'
@@ -56,7 +56,7 @@ PostHog::init("<ph_project_api_key>",
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', 
+posthog = Posthog('<ph_project_token>', 
     host='<ph_client_api_host>',
     poll_interval=30, # Optional. Measured in seconds. Defaults to 30.
     personal_api_key='your feature flags secure API key from step 1'
@@ -69,7 +69,7 @@ posthog = Posthog('<ph_project_api_key>',
 // api key in a secrets manager.
 var client = new PostHogClient(
     new PostHogOptions {
-        ProjectApiKey = "<ph_project_api_key>",
+        ProjectApiKey = "<ph_project_token>",
         PersonalApiKey = "your feature flags secure API key from step 1"
     });
 ```
@@ -79,13 +79,27 @@ import com.posthog.server.PostHog;
 import com.posthog.server.PostHogConfig;
 import com.posthog.server.PostHogInterface;
 
-PostHogConfig config = PostHogConfig.builder("<ph_project_api_key>")
+PostHogConfig config = PostHogConfig.builder("<ph_project_token>")
     .host("<ph_client_api_host>")
     .personalApiKey("your feature flags secure API key from step 1")
     .pollIntervalSeconds(30)  // Optional. Measured in seconds. Defaults to 30.
     .build();
 
 PostHogInterface posthog = PostHog.with(config);
+```
+
+```rust
+use posthog_rs::ClientOptionsBuilder;
+
+let options = ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>")
+    .personal_api_key("your feature flags secure API key from step 1")
+    .enable_local_evaluation(true)
+    .poll_interval_seconds(30) // Optional. Measured in seconds. Defaults to 30.
+    .build()
+    .unwrap();
+
+let client = posthog_rs::client(options).await;
 ```
 
 </MultiLanguage>
