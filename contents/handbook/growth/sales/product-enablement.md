@@ -82,7 +82,7 @@ All content should include a "last updated" date so team members know they're wo
 | Data warehouse | Ryan       | - |
 | LLM Analytics | Leo        | - |
 | Workflows | Phil        | - |
-| Twig | Landon     | - |
+| PostHog Code | Landon     | - |
 
 ## For SMEs
 

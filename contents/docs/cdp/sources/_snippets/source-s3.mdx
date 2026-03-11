@@ -101,6 +101,9 @@ The final step is to create a new user and give them access to our bucket by att
 4. For the URL pattern, copy the URL from S3, up to the bucket name. Replace the file name with `*`, as Airbyte will split large streams out into multiple files.
     - For example: `https://your-bucket.s3.amazonaws.com/airbyte/invoices/*`
 5. For file format, select Parquet. Fill in the access key and secret key.
+6. When using CSV format, a **CSV quote handling** dropdown appears with two options:
+    - **RFC 4180 double quotes** - Use this if your CSV uses standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`)
+    - **Literal quotes** - Use this if quotes in your CSV should be treated as literal characters. This is the default.
 
 > You'll want to repeat this step for each "stream" or folder that Airbyte created in your S3 bucket.
 
@@ -117,3 +120,7 @@ Amazing! You can now [query](/docs/data-warehouse/query) your new table.
 - **Create table failed: Access was denied when reading the provided file**: Make sure your access policies are correct.
 
 - **Create table failed: The provided file is not in Parquet format**: Make sure you've selected the correct file format.
+
+- **Create table failed: Some files in the bucket are archived**: Files stored in S3 Glacier or S3 Intelligent-Tiering archive storage classes cannot be accessed directly. Restore the files to Standard storage class or narrow your URL pattern to exclude archived files.
+
+- **CSV parsing failed with the selected quote setting**: Try switching the **CSV quote handling** option. Select **RFC 4180 double quotes** if your CSV uses standard quoting, or **Literal quotes** if quotes should be treated as-is.

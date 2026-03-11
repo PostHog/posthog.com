@@ -481,7 +481,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI video editor',
         logo: HeygenLogo,
         featured: true,
-        height: 8,
+        height: 12,
     },
     hostai: {
         name: 'HostAI',
