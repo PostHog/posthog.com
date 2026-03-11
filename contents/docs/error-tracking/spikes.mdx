@@ -1,18 +1,18 @@
 ---
-title: Detect spikes in error volume
+title: Detect spikes in exception volume
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Spike detection automatically monitors each issue for sudden increases in error volume, so you can catch regressions and incidents the moment they happen — without manually watching dashboards.
+Spike detection automatically monitors each issue for sudden increases in exception volume, so you can catch regressions and incidents the moment they happen — without manually watching dashboards.
 
 ## How spike detection works
 
-PostHog continuously tracks the error rate for every issue using a rolling baseline. Every hour, we measure activity in 5-minute buckets. When the current bucket's exception count exceeds the baseline by a configurable **multiplier**, we emit a spike event for that issue.
+PostHog continuously tracks the exception rate for every issue using a rolling baseline. Every hour, we measure activity in 5-minute buckets. When the current bucket's exception count exceeds the baseline by a configurable **multiplier**, we emit a spike event for that issue.
 
 ### Baseline calculation
 
-The baseline represents the expected error rate for an issue. If an issue has enough historical data, we calculate its baseline from its own activity over the past hour.
+The baseline represents the expected exception rate for an issue. If an issue has enough historical data, we calculate its baseline from its own activity over the past hour.
 
 If an issue is too new or hasn't had enough activity to establish a meaningful baseline, we fall back to an **average baseline derived from your other existing issues**. This ensures new issues can still trigger spikes without needing a warm-up period.
 
