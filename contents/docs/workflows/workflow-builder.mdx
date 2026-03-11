@@ -106,10 +106,55 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 
 If you have [Conversations](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
 
-| Conversations action | Description | Properties / Options |
-|---------------------|-------------|---------------------|
-| Get ticket | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source` |
-| Update ticket | Change a ticket's status, priority, or assignee | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
+| Conversations action | Description |
+|---------------------|-------------|
+| Get ticket | Fetch the current ticket's data into workflow variables |
+| Update ticket | Change a ticket's status, priority, assignee, or tags |
+
+### Get ticket fields
+
+The Get ticket action returns the following fields as workflow variables:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ticket_id` | string | The ticket's unique identifier |
+| `ticket_number` | number | The ticket number |
+| `status` | string | Ticket status (`new`, `open`, `pending`, `on_hold`, `resolved`) |
+| `priority` | string | Ticket priority (`low`, `medium`, `high`) |
+| `channel_source` | string | Where the ticket originated (e.g., `widget`) |
+| `distinct_id` | string | The customer's distinct ID |
+| `created_at` | string | ISO timestamp of when the ticket was created |
+| `updated_at` | string | ISO timestamp of when the ticket was last updated |
+| `message_count` | number | Total number of messages on the ticket |
+| `last_message_at` | string | ISO timestamp of the last message |
+| `last_message_text` | string | Content of the last message |
+| `unread_team_count` | number | Number of unread messages for the team |
+| `unread_customer_count` | number | Number of unread messages for the customer |
+| `sla_due_at` | string | ISO timestamp of the SLA deadline (if set) |
+| `assignee` | object | The ticket assignee (see structure below) |
+| `current_url` | string | URL where the customer was when creating the ticket |
+| `tags` | array | List of tag names attached to the ticket |
+
+The `assignee` object has the following structure:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | string | User ID or role ID of the assignee |
+| `type` | string | Either `user` or `role` |
+| `user` | object | User details with `email` property (if type is `user`) |
+| `role` | object | Role details with `name` property (if type is `role`) |
+
+### Update ticket options
+
+The Update ticket action can modify the following fields:
+
+| Option | Values |
+|--------|--------|
+| Status | `new`, `open`, `pending`, `on_hold`, `resolved` |
+| Priority | `low`, `medium`, `high` |
+| Assignee | User or role |
+| SLA due at | Timestamp |
+| Tags | List of tag names |
 
 ### Example use cases
 
