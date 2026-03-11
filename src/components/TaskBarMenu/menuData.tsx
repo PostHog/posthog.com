@@ -281,6 +281,61 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             label: 'Categories',
             disabled: true,
         },
+        {
+            type: 'submenu',
+            label: 'AI platform',
+            icon: <Icons.IconSparkles className="size-4 text-purple" />,
+            items: [
+                {
+                    type: 'item',
+                    label: 'LLM Analytics',
+                    link: '/llm-analytics',
+                },
+                {
+                    type: 'item',
+                    label: 'PostHog AI',
+                    link: '/ai',
+                },
+                {
+                    type: 'item',
+                    label: 'MCP',
+                    link: '/docs/model-context-protocol',
+                },
+                {
+                    type: 'item',
+                    label: 'AI Wizard',
+                    link: '/wizard',
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Integrations',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Lovable',
+                    link: '/docs/integrations/lovable',
+                },
+                {
+                    type: 'item',
+                    label: 'Replit',
+                    link: '/docs/integrations/replit',
+                },
+                {
+                    type: 'item',
+                    label: 'v0',
+                    link: '/docs/integrations/v0',
+                },
+                {
+                    type: 'item',
+                    label: 'Markdown & llms.txt',
+                    link: '/docs/ai-engineering/markdown-llms-txt',
+                },
+            ],
+        },
     ]
 
     // Add category submenus

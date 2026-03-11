@@ -158,15 +158,20 @@ export default function WhatWereWorkingOn(): JSX.Element {
     const [expandedObjectives, setExpandedObjectives] = useState<Record<string, boolean>>({})
     const { quarter, year } = getCurrentQuarter()
 
-    const { allSqueakTeam } = useStaticQuery<{ allSqueakTeam: { nodes: TeamNode[] } }>(graphql`
+    const { allSqueakTeam, allObjectives } = useStaticQuery<{
+        allSqueakTeam: { nodes: TeamNode[] }
+        allObjectives: {
+            nodes: {
+                fields?: { slug?: string }
+                body?: string
+                excerpt?: string
+            }[]
+        }
+    }>(graphql`
         {
             allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
                 nodes {
                     id
-                    objectives {
-                        body
-                        excerpt(pruneLength: 250)
-                    }
                     name
                     slug
                     crest {
@@ -178,12 +183,49 @@ export default function WhatWereWorkingOn(): JSX.Element {
                     }
                 }
             }
+            allObjectives: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+/objectives$/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    body
+                    excerpt(pruneLength: 250)
+                }
+            }
         }
     `)
 
+    const objectivesByTeamSlug = useMemo(() => {
+        const map: Record<string, { body?: string; excerpt?: string }> = {}
+
+        allObjectives.nodes.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) {
+                return
+            }
+            const match = slug.match(/^\/teams\/([^/]+)\/objectives$/)
+            if (!match) {
+                return
+            }
+            const teamSlug = match[1]
+            map[teamSlug] = {
+                body: node.body,
+                excerpt: node.excerpt,
+            }
+        })
+
+        return map
+    }, [allObjectives.nodes])
+
     const teams = useMemo(
-        () => [...allSqueakTeam.nodes].sort((a, b) => a.name.localeCompare(b.name)),
-        [allSqueakTeam.nodes]
+        () =>
+            [...allSqueakTeam.nodes]
+                .map((team) => ({
+                    ...team,
+                    objectives: objectivesByTeamSlug[team.slug] || null,
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name)),
+        [allSqueakTeam.nodes, objectivesByTeamSlug]
     )
 
     const filteredTeams = useMemo(() => {

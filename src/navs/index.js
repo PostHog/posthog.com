@@ -2606,7 +2606,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'AI engineering',
+                    name: 'AI platform',
                     url: '/docs/ai-engineering',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'red',
@@ -2624,7 +2624,7 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Platform integrations',
+                            name: 'Integrations',
                         },
                         {
                             name: 'Lovable',
