@@ -269,6 +269,13 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+
+### LLM cost analysis
+
+**Prompt:** "Show me the LLM costs for my project broken down by model"
+
+The agent will use the `get-llm-total-costs-for-project` tool to retrieve cost data and display a breakdown table showing total costs and recent spending per model.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
