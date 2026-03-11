@@ -12,7 +12,7 @@ Craig Hollington leads the engineering team at CloudPeek – and when PostHog la
 
 ## The debugging gap
 
-Before PostHog launched Logs, CloudPeek's team didn't have a dedicated logging tool. They were already using PostHog for [Error tracking](/error-tracking), so they'd see exceptions fire – but tracing back to a root cause meant SSHing into servers and searching local log files with grep.
+Before PostHog launched Logs, CloudPeek's team didn't have a dedicated logging tool. They were already using PostHog for [error tracking](/error-tracking), so they'd see exceptions fire – but tracing back to a root cause meant SSHing into servers and searching local log files with grep.
 
 _"We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally."_
 
