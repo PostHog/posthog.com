@@ -54,7 +54,6 @@ This was also the reason they passed on CloudWatch – OpenTelemetry meant they 
 
 That collaboration piece has been just as important as the speed. When two or three developers are working on the same issue, they can share links to specific log entries, add comments, and split up the investigation – one person tracing the root cause while another reviews the affected service. Their overall service reliability has improved significantly as a result, with the team now able to identify and resolve issues before they compound.
 
-## From Error Tracking into Logs: one investigation flow
 
 One of the most impactful changes for CloudPeek is how error tracking and logs work together.
 
