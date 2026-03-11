@@ -1712,7 +1712,10 @@
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
         { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
         { "source": "/professional-services", "destination": "/services" },
-        { "source": "/posthug", "destination": "/" }
+        { "source": "/posthug", "destination": "/" },
+        { "source": "/docs/ai-engineering", "destination": "/docs/ai-platform" },
+        { "source": "/docs/ai-engineering/ai-wizard", "destination": "/docs/ai-platform/ai-wizard" },
+        { "source": "/docs/ai-engineering/markdown-llms-txt", "destination": "/docs/ai-platform/markdown-llms-txt" }
     ],
     "headers": [
         {

@@ -1,12 +1,12 @@
 ---
-title: AI engineering with PostHog
+title: PostHog AI platform
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 [AI engineering](https://www.latent.space/p/ai-engineer) is the practice of integrating, building, and shipping software that utilizes LLMs. 
 
-At the cutting edge, this might mean building multimodal RAG pipelines and productionizing fine-tuned models at scale. But in our opinion, it also encompasses the practical work of tinkering with prompts, coding in Cursor, or installing the OpenAI SDKs, anything that helps developers leverage AI to build great products.
+At the cutting edge, this might mean building multimodal RAG pipelines and productionizing fine-tuned models at scale. But in our opinion, it also encompasses the practical work of tinkering with prompts, coding with agents, or installing MCPs, anything that helps developers leverage AI to build great products.
 
 You'll find this page and its resources useful if you're:
 
@@ -15,9 +15,9 @@ You'll find this page and its resources useful if you're:
 - A vibe coder or engineer who uses AI agents and tools
 - Just here to try cool AI features in PostHog
 
-PostHog is all the dev tools you need in one. When you add AI on top of that, and with enough data, your product should be able to build itself. That's our long-term vision for AI at PostHog, so we're building the tools you need to get there. 
+PostHog is all the dev tools you need in one. When you add AI on top of that, and with enough data, your product should be able to build itself. 
 
-It's a bit like the dream of a self-driving car, but for your product.
+That's our long-term vision for AI at PostHog. We call it *product autonomy*.
 
 ## AI features
 
@@ -26,10 +26,10 @@ Here are the AI products, tools, and resources we offer so far:
 | AI feature | Use case | Vibe | Repo |
 |------------|----------|------|------|
 | [PostHog AI](/docs/posthog-ai) | Ask our in-app AI agent anything about your product data and PostHog. PostHog AI can write SQL, create dashboards, find session replays, and more. | 🤖 | <Link to="https://github.com/PostHog/posthog/tree/master/ee/hogai" external>Code</Link> |
-| [AI wizard](/docs/ai-engineering/ai-wizard) | Magically add PostHog to your codebase with a single CLI command using AI. | 🧙 | <Link to="https://github.com/PostHog/wizard" external>Code</Link> |
+| [AI wizard](/docs/ai-platform/ai-wizard) | Magically add PostHog to your codebase with a single CLI command using AI. | 🧙 | <Link to="https://github.com/PostHog/wizard" external>Code</Link> |
 | [PostHog MCP](/docs/model-context-protocol) | Enable your AI agents to interact with PostHog – create feature flags, run experiments, and query data using HogQL.  | 🧰 | <Link to="https://github.com/PostHog/posthog/tree/master/services/mcp" external>Code</Link> |
 | [LLM analytics](/docs/llm-analytics) | Track and analyze the usage of LLMs in your applications, including token usage, latency, and cost. | 📊 | <Link to="https://github.com/PostHog/posthog/tree/master/products/llm_analytics" external>Code</Link> |
-| [Markdown and llms.txt](/docs/ai-engineering/markdown-llms-txt) | Feed your AI agents more context. All of our docs pages are available in raw Markdown. | 📚 | <Link to="https://posthog.com/llms.txt" external>Code</Link> |
+| [Markdown and llms.txt](/docs/ai-platform/markdown-llms-txt) | Feed your AI agents more context. All of our docs pages are available in raw Markdown. | 📚 | <Link to="https://posthog.com/llms.txt" external>Code</Link> |
 
 Everything here is open source. Feel free to take our AI code, fork it, and use it yourself. Just remember to check the license and open a PR if you have any feedback.
 
@@ -48,6 +48,9 @@ The listed projects are licensed under either:
 
 If you're interested in AI engineering and how we approach it here at PostHog, we recommend these blog posts:
 
+- [How we caught our AI agent embezzling tokens](/blog/optimizing-agent-cost)
+- [What the AI Wizard taught us about LLM code generation at scale](/blog/correct-llm-code-generation)
+- [8 learnings from 1 year of agents – PostHog AI](/blog/8-learnings-from-1-year-of-agents-posthog-ai)
 - [Avoid these AI coding mistakes](/newsletter/ai-coding-mistakes)
 - [What we've learned about building AI-powered features](/newsletter/building-ai-features)
 - [We built an AI envoy, you can too](/blog/envoy-wizard-llm-agent)

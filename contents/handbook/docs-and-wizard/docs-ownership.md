@@ -20,7 +20,7 @@ The <SmallTeam slug="docs-wizard" /> is responsible for improving the docs. This
 - Shipping docs content based on prioritized feedback and emerging use cases
 - Reviewing and improving draft documentation created by product teams
 - Improving the subjective docs experience (navigation, discovery, interactivity, etc.)
-- Creating context services that power agents like the [AI wizard](/docs/ai-engineering/ai-wizard)
+- Creating context services that power agents like the [AI wizard](/docs/ai-platform/ai-wizard)
 - Working on large scale docs projects
 
 ## Ownership within the Docs & Wizard team

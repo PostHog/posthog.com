@@ -307,6 +307,11 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                     link: '/wizard',
                 },
                 {
+                    type: 'item',
+                    label: 'Markdown & llms.txt',
+                    link: '/docs/ai-platform/markdown-llms-txt',
+                },
+                {
                     type: 'separator',
                 },
                 {
@@ -328,11 +333,6 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                     type: 'item',
                     label: 'v0',
                     link: '/docs/integrations/v0',
-                },
-                {
-                    type: 'item',
-                    label: 'Markdown & llms.txt',
-                    link: '/docs/ai-engineering/markdown-llms-txt',
                 },
             ],
         },
@@ -1017,7 +1017,7 @@ export const DocsItemsEnd = [
             {
                 type: 'item' as const,
                 label: 'Overview',
-                link: '/docs/ai-engineering',
+                link: '/docs/ai-platform',
             },
             {
                 type: 'item' as const,
@@ -1032,7 +1032,7 @@ export const DocsItemsEnd = [
             {
                 type: 'item' as const,
                 label: 'AI Wizard',
-                link: '/docs/ai-engineering/ai-wizard',
+                link: '/docs/ai-platform/ai-wizard',
             },
             {
                 type: 'submenu' as const,
