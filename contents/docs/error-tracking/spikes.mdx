@@ -10,6 +10,13 @@ Spike detection automatically monitors each issue for sudden increases in except
 
 PostHog continuously tracks the exception rate for every issue using a rolling baseline. Every hour, we measure activity in 5-minute buckets. When the current bucket's exception count exceeds the baseline by a configurable **multiplier**, we emit a spike event for that issue.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_11_T15_25_15_975_Z_bd4e418d5c.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_11_T15_24_52_984_Z_ce05d97ce6.png"
+    alt="How spike detection works"
+    classes="rounded"
+/>
+
 ### Baseline calculation
 
 The baseline represents the expected exception rate for an issue. If an issue has enough historical data, we calculate its baseline from its own activity over the past hour.
