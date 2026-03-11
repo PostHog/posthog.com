@@ -41,7 +41,6 @@ Customers can see:
 - Geographic location
 - A pages table with path-level metrics
 
-
 When a user clicks into a specific page, the entire dashboard dynamically filters to that path. This makes the experience feel cohesive rather than a collection of isolated charts.
 
 Flexibility is built into the architecture. For longer date ranges, CounterPress uses endpoints that break data down by day. For shorter ranges, such as the last 48 hours, the frontend switches to endpoints that break data down by hour. The logic is simple: if the selected range is short, fetch from the hourly endpoint instead of the daily one.
