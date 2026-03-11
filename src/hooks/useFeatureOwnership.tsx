@@ -153,7 +153,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     endpoints: {
         feature: 'Endpoints',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
     },
     'error-tracking': {
         feature: 'Error tracking',
