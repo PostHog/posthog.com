@@ -23,7 +23,7 @@ Each ticket has the following properties:
 | **Ticket number** | Auto-incremented unique number (e.g., #1, #2, #3) |
 | **Status** | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | **Priority** | `low`, `medium`, `high` (optional) |
-| **Channel** | Where the ticket came from (currently `widget` only) |
+| **Channel** | Where the ticket came from (`widget` or `slack`) |
 | **Assignee** | User or role responsible for the ticket |
 | **Session ID** | The PostHog session for events and exceptions |
 | **Session Replay ID** | The session recording (if replay is enabled) |
@@ -45,7 +45,7 @@ The ticket inbox supports filtering by:
 
 - **Status** - Filter by ticket status
 - **Priority** - Filter by priority level
-{/*- **Channel source** - Filter by where the ticket came from*/}
+- **Channel** - Filter by where the ticket came from (widget or Slack)
 - **Assignee** - Unassigned, specific user, or specific role
 - **Date range** - Filter by creation date
 - **Search** - Search by ticket number, customer name, or email
@@ -146,6 +146,12 @@ Other tickets from the same person. Useful for:
 - Understanding their history with support
 - Identifying recurring issues
 - Seeing how previous issues were resolved
+
+<CalloutBox icon="IconInfo" title="Context panels for widget tickets only" type="fyi">
+
+Session recording, recent events, exceptions, and previous tickets panels are only available for tickets from the widget channel. Slack tickets don't include session context, so these panels are hidden.
+
+</CalloutBox>
 
 ## Tips for efficient support
 
