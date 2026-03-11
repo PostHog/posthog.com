@@ -417,7 +417,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-tools'],
+        owner: ['product-analytics'],
         label: false,
     },
     sso: {
