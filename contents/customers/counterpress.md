@@ -10,7 +10,7 @@ When Jay Collett and his team at [CounterPress](https://counterpress.media/) dec
 - Hire a Python developer to build an internal data service
 - Find a way to turn PostHog into a scalable analytics backend
 
-They chose the second option. Today, their React dashboard pulls from 11+ PostHog endpoints, supports dynamic filtering, and delivers performance metrics that rival much larger competitors without building a separate analytics infrastructure.
+They chose the second option. Today, their React dashboard pulls from 11+ [PostHog endpoints](/endpoints), supports dynamic filtering, and delivers performance metrics that rival much larger competitors without building a separate analytics infrastructure.
 
 ## From dashboards to endpoints
 
