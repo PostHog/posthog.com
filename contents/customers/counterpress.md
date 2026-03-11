@@ -14,7 +14,7 @@ They chose the second option. Today, their React dashboard pulls from 11+ [PostH
 
 ## From dashboards to endpoints
 
-CounterPress initially powered their customer analytics using PostHog’s Dashboard API. The setup was simple: create a dashboard inside PostHog, fetch it into their React app, and display it to users.
+CounterPress initially powered their customer analytics using PostHog’s dashboard API. The setup was simple: create a dashboard inside PostHog, fetch it into their React app, and display it to users.
 
 It worked well for getting started. But as their product vision evolved, they needed more flexibility. Each customer domain required its own dashboard, and they wanted dynamic date ranges, richer filtering, and different breakdowns depending on context. The dashboard approach wasn’t wrong – it just wasn’t designed for a fully productized analytics layer.
 
