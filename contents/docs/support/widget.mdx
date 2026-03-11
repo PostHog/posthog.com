@@ -111,6 +111,25 @@ Configure your team to receive email alerts when new tickets arrive.
 
 Recipients must have access to the team to receive notifications.
 
+## Restoring conversations across devices
+
+Tickets are tied to a browser's widget session ID, so switching to a new browser or device means you lose access to your previous conversations. The restore flow lets you recover your tickets via email.
+
+How it works:
+
+1. Request a restore link from the widget by providing your email address
+2. If the email matches existing tickets, PostHog sends an email with a secure restore link
+3. Open the link in your new browser – it contains a `ph_conv_restore` query parameter that the SDK detects automatically
+4. The SDK redeems the token and reassigns your tickets to the new browser session
+
+Restore tokens are one-time use and expire after 60 minutes. Only hashed tokens are stored, and responses are generic to prevent email enumeration.
+
+<CalloutBox icon="IconInfo" title="Email must match" type="fyi">
+
+The email you provide must match the one associated with your existing tickets. If no matching tickets are found, PostHog still returns a success response for security reasons.
+
+</CalloutBox>
+
 ## Public token
 
 The widget uses a public token for authentication. This token is automatically generated and shown in your Support settings. It's safe to expose in client-side code.
