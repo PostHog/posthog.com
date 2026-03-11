@@ -257,9 +257,7 @@ When it comes to experimentation, Optimizely and LaunchDarkly have all the core 
 
 - Optimizely includes a CMS, marketing tools, and ecommerce optimization. LaunchDarkly focuses on feature management and release governance.
 - Optimizely's feature flags are secondary to its web experimentation and content tools. LaunchDarkly's flags are the core product with richer targeting and lifecycle management.
-- Optimizely added warehouse-native experimentation analytics (GA in 2025) and integrates with third-party tools like GA4 and Adobe Analytics. LaunchDarkly has native observability via Highlight and warehouse-native analytics via Houseware.
-
-</details>
+- Optimizely added warehouse-native experimentation analytics (GA in 2025) and integrates with third-party tools like GA4 and Adobe Analytics. LaunchDarkly has native observability and has recently added heatmaps and session replay.
 
 <details>
 <summary>Main similarities between Optimizely and LaunchDarkly</summary>
@@ -267,7 +265,6 @@ When it comes to experimentation, Optimizely and LaunchDarkly have all the core 
 - Both support A/B and multivariate testing with statistical significance.
 - Both offer feature flags for progressive rollouts and targeted delivery.
 - Both target enterprise customers with custom pricing and dedicated support.
-- Both now offer warehouse-native experimentation analytics – Optimizely via its native Snowflake/BigQuery integration, LaunchDarkly via Houseware.
 
 </details>
 
@@ -341,7 +338,7 @@ Both Harness and LaunchDarkly have a broad, enterprise focus. The difference is 
 <summary>Main differences between Harness and LaunchDarkly</summary>
 
 - Harness includes a full CI/CD pipeline, making it a broader DevOps platform. LaunchDarkly is mostly a feature management and release intelligence tool.
-- LaunchDarkly has richer feature flag targeting, experimentation, and (via Highlight) full observability – session replay, error monitoring, logs, distributed traces. Harness offers release monitoring and alerting, with the ability to ingest data from external tools like Sentry, Datadog, and Segment.
+- LaunchDarkly has richer feature flag targeting, experimentation, and (via Highlight) full observability – session replay, error monitoring, logs, distributed traces. Harness offers release monitoring and alerting, with the ability to ingest data from external tools like [Sentry](/blog/best-sentry-alternatives), [Datadog](/blog/best-datadog-alternatives), and [Segment](/blog/best-customer-data-platforms-for-developers).
 - LaunchDarkly's Guardian plan adds automated rollback and release monitoring. Harness offers similar automated rollback via its release monitoring capabilities connected to flags.
 - Harness's experimentation (powered by Split) is now mature with a real-time analytics engine. LaunchDarkly's stats engine and experiment management UI remain more polished for product teams.
 
@@ -427,10 +424,9 @@ Like Optimizely, VWO has a larger feature set than LaunchDarkly, but less of a f
 <details>
 <summary>Main differences between VWO and LaunchDarkly</summary>
 
-- VWO includes heatmaps, session replay, surveys, and personalization. LaunchDarkly focuses on feature flag management and release governance.
 - VWO's feature flags are designed for front-end rollouts and web experiments. LaunchDarkly's flags support full-stack targeting with richer lifecycle management.
-- LaunchDarkly has enterprise engineering governance: approval workflows, SCIM provisioning, and automated rollback. VWO doesn't offer these – it's an experimentation and CRO tool, not a release management platform.
-- VWO targets CRO and marketing teams. LaunchDarkly targets engineering and DevOps teams.
+- LaunchDarkly has enterprise engineering governance: approval workflows, SCIM provisioning, and automated rollback. VWO is an experimentation and CRO tool, not a release management platform.
+- VWO targets marketing teams. LaunchDarkly targets engineering and DevOps teams.
 
 </details>
 
@@ -609,7 +605,6 @@ DevCycle has many of the feature flagging features but misses out A/B testing.
 - Both are built for engineering teams with a developer-first SDK experience.
 - Both integrate with tools like GitHub, Jira, and Datadog.
 - Both offer a free tier for getting started without a sales call.
-- Both are now backed by larger platforms with observability ambitions – DevCycle by Dynatrace, LaunchDarkly via its Highlight acquisition.
 
 </details>
 
@@ -688,13 +683,6 @@ For a broader comparison, see our [guide to the best open-source feature flag to
 <summary>Does LaunchDarkly have session replay?</summary>
 
 Yes – LaunchDarkly acquired Highlight in April 2025 and now offers session replay, error monitoring, logs, and distributed traces as part of its observability suite. These features are designed for release monitoring (tying sessions and errors to flag evaluations) rather than general product analytics or user research.
-
-</details>
-
-<details>
-<summary>Does LaunchDarkly have product analytics?</summary>
-
-LaunchDarkly added warehouse-native product analytics in 2025 via its acquisition of Houseware, which lets teams run experiments and analyze results using their existing data warehouse. It doesn't offer the kind of standalone product analytics suite – funnels, retention, user paths, cohorts – that tools like **PostHog** or [Amplitude](/blog/best-amplitude-alternatives) provide.
 
 </details>
 

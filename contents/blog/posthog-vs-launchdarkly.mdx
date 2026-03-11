@@ -1,6 +1,6 @@
 ---
 title: 'In-depth: PostHog vs LaunchDarkly'
-date: 2026-03-10
+date: 2026-03-12
 author:
     - ian-vanagas
     - natalia-amorim
@@ -27,7 +27,7 @@ But how are they different? If you remember nothing else, remember these two poi
 
 1. LaunchDarkly is a dedicated feature management platform built for enterprise release governance – flags, experiments, and release monitoring.
 
-2. PostHog is an all-in-one platform that does flags, experiments and [a whole bunch more](/products).
+2. PostHog is an all-in-one platform that does flags, experiments, and [a whole bunch more](/products).
 
 In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and frequently asked questions about both.
 
@@ -63,16 +63,15 @@ Both tools offer everything you need to use flags and experiments effectively, b
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
-        'platform.deployment.open_source',
         'platform.pricing.self_serve',
-        'platform.developer.sdks',
         'platform.deployment.reverse_proxy',
         'platform.developer.api',
         'feature_flags.implementation.local_evaluation',
         'feature_flags.implementation.bootstrapping',
         'platform.developer.sql',
         'session_replay',
-        'surveys',
+        'error_tracking',
+        'logs',
         'cdp',
         'data_warehouse',
         'platform.tools.notebooks',
@@ -110,8 +109,6 @@ LaunchDarkly’s enterprise plan unlocks advanced workflow features like schedul
 
 PostHog and LaunchDarkly have relatively similar experimentation feature sets, enabling you to run [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate if they have a statistically significant impact.
 
-One key difference on cost: PostHog includes experimentation in its free tier. LaunchDarkly includes experimentation in its Foundation plan and above, but bills Experimentation MAU separately at $3/1k/month.
-
 <p>
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
@@ -133,18 +130,6 @@ PostHog automatically calculates a recommended run time based on past data and m
 
 PostHog and LaunchDarkly take opposing approaches.
 
-<p>
-<ProductComparisonTable
-    competitors={['posthog', 'launchdarkly']}
-    rows={[
-        { label: 'Pricing', values: ['Per-request pricing', 'Based on MAU + add-ons'] },
-        { label: 'Free plan', values: [true, true] },
-        { label: 'Free experiments', values: [true, false] },
-        { label: 'Free collaboration', values: [true, false] },
-    ]}
-/>
-</p>
-
 **PostHog’s** [feature flag pricing](/pricing) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available. You can calculate your cost exactly on the [pricing page](/pricing).
 
 **LaunchDarkly**'s pricing is harder to model without knowing your specific setup. The current tiers are:
@@ -160,9 +145,9 @@ As mentioned earlier, many of the security, approval, and workflow features that
 
 #### Example scenarios
 
-- **Startup (1M requests/mo):** PostHog **$0** (free tier). LaunchDarkly Foundation – depends on service connections and MAU, but a small setup with ~5 connections and 5k MAUs = ~$110/mo minimum.
-- **Scaleup (10M requests/mo):** PostHog **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045). LaunchDarkly – a mid-size setup with ~20 connections and 25k MAUs = ~$490/mo, not counting Experimentation MAU.
-- **Enterprise (50M requests/mo):** PostHog **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025). LaunchDarkly – ??? custom Enterprise pricing, contact sales.
+- **Startup (1M requests/mo):** PostHog **$0** (free tier). LaunchDarkly Foundation – depends on service connections and MAU, but a small setup with ~5 connections and 5k MAUs** = ~$110/mo minimum.**
+- **Scaleup (10M requests/mo):** PostHog **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045). LaunchDarkly – a mid-size setup with ~20 connections and 25k MAUs** = ~$490/mo, not counting Experimentation MAU.**
+- **Enterprise (50M requests/mo):** PostHog **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025). LaunchDarkly** – ??? **custom Enterprise pricing, contact sales.
 
 ### Reporting and analytics
 
@@ -215,6 +200,7 @@ PostHog’s [data warehouse](/docs/data-warehouse) lets you import external data
 
 Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'launchdarkly']}
     rows={[
@@ -237,6 +223,7 @@ Both PostHog and LaunchDarkly enable companies to remain secure and compliant wi
         },
     ]}
 />
+</p>
 
 Many of LaunchDarkly’s advanced compliance tools are only available on its enterprise plans. PostHog also features SSO and SAML in its enterprise edition.
 

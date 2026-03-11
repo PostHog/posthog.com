@@ -73,7 +73,7 @@ export const launchdarkly = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: true,
+                free_tier: '100k MAU',
             },
             features: {
                 count_value_metrics: true,
@@ -218,7 +218,7 @@ export const launchdarkly = {
     platform: {
         deployment: {
             eu_hosting: true,
-            open_source: 'Partial',
+            open_source: false,
             reverse_proxy: true,
             self_host: false,
         },
