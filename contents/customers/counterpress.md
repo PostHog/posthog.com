@@ -45,7 +45,7 @@ When a user clicks into a specific page, the entire dashboard dynamically filter
 
 Flexibility is built into the architecture. For longer date ranges, CounterPress uses endpoints that break data down by day. For shorter ranges, such as the last 48 hours, the frontend switches to endpoints that break data down by hour. The logic is simple: if the selected range is short, fetch from the hourly endpoint instead of the daily one.
 
-This keeps charts readable and relevant without overwhelming users with unnecessary data points. Because everything begins as an Insight in PostHog’s UI, Jay can iterate quickly. When a new metric or breakdown is needed, he creates the insight, converts it into an endpoint, and connects it to the dashboard.
+This keeps charts readable and relevant without overwhelming users with unnecessary data points. Because everything begins as an insight in PostHog’s UI, Jay can iterate quickly. When a new metric or breakdown is needed, he creates the insight, converts it into an endpoint, and connects it to the dashboard.
 
 ## Performance and materialization
 
