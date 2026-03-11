@@ -1,5 +1,5 @@
 ---
-date: 2023-08-25
+date: 2026-03-12
 title: The 9 best GA4 alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog
@@ -7,13 +7,14 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
+  - natalia-amorim
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ'
 category: General
 tags:
-  - Guides
+  - Comparisons
 ---
 
 In July 2023, Google closed Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.
