@@ -6,7 +6,7 @@ featuredImage: >-
 date: 2026-03-10
 ---
 
-[CloudPeek](https://cloudpeek.io) is an agentic AI platform for next-generation cybersecurity. It sits above an organisation's existing security stack as a reasoning and orchestration layer – connecting to any tool, understanding the specific environment, and letting operators automate complex workflows with full control and auditability.
+[CloudPeek](https://cloudpeek.io) is an agentic platform for next-generation cybersecurity. It sits above an organisation's existing security stack as a reasoning and orchestration layer – connecting to any tool, understanding the specific environment, and letting operators automate complex workflows with full control and auditability.
 
 Craig Hollington leads the engineering team at CloudPeek – and when PostHog launched [Logs](/docs/logs), his team jumped on it immediately.
 
