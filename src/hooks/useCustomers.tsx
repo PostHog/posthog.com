@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CounterPressLogo from '../images/customers/counterpress-light.svg'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
@@ -359,6 +361,35 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     workflows:
                         'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
                 },
+            },
+        },
+    },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
             },
         },
     },
