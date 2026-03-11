@@ -10,13 +10,6 @@ Spike detection automatically monitors each issue for sudden increases in error 
 
 PostHog continuously tracks the error rate for every issue using a rolling baseline. Every hour, we measure activity in 5-minute buckets. When the current bucket's exception count exceeds the baseline by a configurable **multiplier**, we emit a spike event for that issue.
 
-<ProductScreenshot
-    imageLight=""
-    imageDark=""
-    alt="Spike detection chart"
-    classes="rounded"
-/>
-
 ### Baseline calculation
 
 The baseline represents the expected error rate for an issue. If an issue has enough historical data, we calculate its baseline from its own activity over the past hour.
@@ -28,9 +21,9 @@ If an issue is too new or hasn't had enough activity to establish a meaningful b
 You can configure spike detection in the [error tracking configuration page](https://us.posthog.com/project/2/error_tracking?activeTab=configuration&selectedSetting=error-tracking-spike-detection).
 
 <ProductScreenshot
-    imageLight=""
-    imageDark=""
-    alt="Spike detection configuration"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_11_T12_43_56_983_Z_9b524d4498.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_11_T12_42_39_103_Z_77b881e459.png"
+    alt="Spike detection chart"
     classes="rounded"
 />
 
@@ -44,10 +37,4 @@ The following options are available:
 
 ## Getting notified about spikes
 
-Once spike detection is active, you can set up alerts to be notified when a spike occurs. Head to the [alerts tab](/docs/error-tracking/alerts) to configure notifications to Slack, Discord, Teams, or an HTTP Webhook.
-
-<CalloutBox icon="IconInfo" title="Spike vs. issue created alerts" type="fyi">
-
-Spike alerts and issue-created alerts are separate. Spike alerts fire when an existing issue suddenly increases in volume. Issue-created alerts fire when a brand new issue is seen for the first time.
-
-</CalloutBox>
+You can set up alerts to be notified when a spike occurs. Head to the [alerts tab](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-spike-detection) to configure notifications to Slack, Discord, Teams, or an HTTP Webhook.
