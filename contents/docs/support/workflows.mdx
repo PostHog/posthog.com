@@ -11,7 +11,13 @@ import Alpha from './_snippets/alpha.mdx'
 Support integrates with [Workflows](/docs/workflows) to automate ticket management. Tickets emit events that trigger workflows, and workflow actions can update tickets — setting SLAs, changing status, assigning tickets, and more.
 
 ```
-Ticket event → Workflow trigger matches → Hog function executes → Ticket updated
+Ticket event
+    ↓
+Workflow trigger matches
+    ↓
+Hog function executes
+    ↓
+Ticket updated
 ```
 
 Updates made by workflows do **not** re-emit ticket events, so you won't get infinite loops.
