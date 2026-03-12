@@ -230,14 +230,14 @@ SET assignee = Support role
 
 Route tickets to different teams based on where they came from.
 
-**Trigger:** New ticket created
+```
+Trigger event = New ticket created
 
-**Flow:**
-
-1. **If** `event.properties.channel_source` equals `slack`
-   - **Update ticket:** `assignee` = Engineering role
-2. **Else**
-   - **Update ticket:** `assignee` = Support role
+IF event.properties.channel_source = slack
+   SET assignee = Engineering role
+ELSE
+   SET assignee = Support role
+```
 
 ### 5. Move ticket to Open when team replies
 
