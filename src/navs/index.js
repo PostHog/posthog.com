@@ -67,6 +67,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/salesforce',
                 },
                 {
+                    name: 'Sentry',
+                    url: '/docs/cdp/sources/sentry',
+                },
+                {
                     name: 'MySQL',
                     url: '/docs/cdp/sources/mysql',
                 },
@@ -5069,6 +5073,10 @@ export const docsMenu = {
                         {
                             name: 'Salesforce',
                             url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Sentry',
+                            url: '/docs/data-warehouse/sources/sentry',
                         },
                         {
                             name: 'Snowflake',
