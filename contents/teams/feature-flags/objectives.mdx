@@ -1,6 +1,6 @@
 ### Q2 2026 Objectives
 
-#### Objective 1: AI-first flag management ONLY for PostHog employees (Driver: <TeamMember name="Dylan Martin" />)
+#### AI-first flag management ONLY for PostHog employees (Driver: <TeamMember name="Dylan Martin" />)
 
 We have loads of people who work with feature flags internally, so let's dogfood the shit out of this. The bet is that teams will manage their entire feature flag lifecycle (this includes both flag and cohort-based targeting) through AI coding agents without ever opening the PostHog UI (or exclusively through PostHog AI). If agents can create, modify, and reason about flags autonomously, we become the default flags tool in agentic workflows rather than losing to DIY implementations.
 
@@ -11,7 +11,7 @@ We have loads of people who work with feature flags internally, so let's dogfood
 - Proactive signals pushed to agents: rollout changes, stale flag detection, evaluation anomalies
 - Add MCP support for early access features
 
-#### Objective 2: Real-time Cohorts (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
+#### Real-time cohorts (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
 
 This is our most-requested feature. Dynamic cohorts today are computed on a delay, which makes them useless for real-time targeting decisions like "user did X in the last 5 minutes." If we can make cohort membership evaluate in real-time at the point of flag evaluation, we collapse a whole category of custom targeting logic people currently build themselves.
 
@@ -21,7 +21,7 @@ This is our most-requested feature. Dynamic cohorts today are computed on a dela
 - Cohort membership change signals for MCP / webhooks
 - Migration path from existing dynamic cohorts
 
-#### Objective 3: Close the Targeting Gap (Driver: <TeamMember name="Dylan Martin" />)
+#### Close the targeting functionality gap (Driver: <TeamMember name="Dylan Martin" />)
 
 User and group targeting in the same flag is the most requested targeting capability we don't fully support. Every time someone hits this wall, they either hack around it or leave. This is table-stakes work that unblocks expansion in accounts already using flags.
 
