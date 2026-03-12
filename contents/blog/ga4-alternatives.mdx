@@ -64,11 +64,11 @@ Some teams also avoid GA4 for privacy reasons. GA4 is not GDPR-compliant by defa
 
 [PostHog](/) (that's us 👋) is an [all-in-one developer platform](/products) that includes [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), [user surveys](/surveys), and more – pretty much everything you need to track user behavior in an app or website, basically. 
 
-This means it's not just a GA4 alternative, but also a replacement for tools like [Mixpanel](/blog/best-mixpanel-alternatives), [LaunchDarkly](/blog/best-launchdarkly-alternatives), and [FullStory](/blog/best-fullstory-alternatives). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), [Supabase](/customers/supabase), and [Lovable](/customers/lovable).
+This means it's not just a GA4 alternative, but also a replacement for tools like [Mixpanel](/blog/best-mixpanel-alternatives), [LaunchDarkly](/blog/best-launchdarkly-alternatives), and [FullStory](/blog/best-fullstory-alternatives). 
+
+Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), [Supabase](/customers/supabase), and [Lovable](/customers/lovable).
 
 Like GA4, PostHog is an [event-based platform](/docs/data/events). It's priced on per event used, though it offers a generous [1 million events for free](/pricing) each month, so many users can use it for free.
-
-See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) for more.
 
 ### How does PostHog compare to GA4?
 
@@ -80,18 +80,21 @@ GA4 doesn't have any of these features built-in, so you'd need to integrate with
 <ProductComparisonTable
     competitors={['posthog', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -149,21 +152,25 @@ Matomo is session-based like Universal Analytics, making it a more natural migra
 <ProductComparisonTable
     competitors={['matomo', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
+
 <details>
 <summary>Main differences between Matomo and GA4</summary>
 
@@ -211,18 +218,21 @@ Kissmetrics and GA4 serve different masters. GA4 is built for traffic and market
 <ProductComparisonTable
     competitors={['kissmetrics', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -274,18 +284,21 @@ TelemetryDeck does far less than GA4 by design. It's intentionally lean – no u
 <ProductComparisonTable
     competitors={['telemetrydeck', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -339,18 +352,21 @@ Plausible covers the basics of web analytics without the complexity. It's not a 
 <ProductComparisonTable
     competitors={['plausible', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -401,18 +417,21 @@ Vercel Web Analytics is a convenience product, not a GA4 replacement. If you're 
 <ProductComparisonTable
     competitors={['vercel_analytics', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -462,18 +481,21 @@ Piwik PRO is particularly strong for regulated industries and enterprise teams t
 <ProductComparisonTable
     competitors={['piwik_pro', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -525,18 +547,21 @@ Like Plausible, Fathom is intentionally simple. It provides clean, unsampled web
 <ProductComparisonTable
     competitors={['fathom', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>
@@ -588,18 +613,21 @@ Counter is about as minimal as analytics gets. It does just enough to answer "ho
 <ProductComparisonTable
     competitors={['counter', 'ga4']}
     rows={[
-        'web_analytics',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
+        'web_analytics.features.pageviews',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+		'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.features.user_profiles',
         'session_replay',
-        'heatmaps',
-        'feature_flags',
         'experiments',
+        'feature_flags',
         'error_tracking',
-        'surveys',
-        'platform.deployment.eu_hosting',
         'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
     ]}
 />
 </p>

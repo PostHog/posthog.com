@@ -4,14 +4,29 @@ export const kissmetrics = {
     products: {
         web_analytics: {
             available: true,
+            features: {
+                pageviews: true,
+                bounce_rate: false,
+                traffic_breakdown: 'Partial',
+                utm_tracking: 'Partial',
+                web_vitals: false,
+                cookieless_tracking: false,
+            },
         },
         product_analytics: {
             available: true,
             features: {
                 autocapture: false,
+                user_profiles: true,
             },
             group_analytics: {
                 available: false,
+            },
+            funnels: {
+                available: true,
+            },
+            retention: {
+                available: true,
             },
         },
         session_replay: {

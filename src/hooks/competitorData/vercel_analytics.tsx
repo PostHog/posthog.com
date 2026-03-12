@@ -4,13 +4,28 @@ export const vercel_analytics = {
     products: {
         web_analytics: {
             available: true,
+            features: {
+                pageviews: true,
+                bounce_rate: true,
+                traffic_breakdown: true,
+                utm_tracking: 'Web Analytics Plus / Enterprise',
+                web_vitals: 'via Vercel Speed Insights',
+                cookieless_tracking: true,
+            },
         },
         product_analytics: {
             available: false,
             features: {
                 autocapture: false,
+                user_profiles: false,
             },
             group_analytics: {
+                available: false,
+            },
+            funnels: {
+                available: false,
+            },
+            retention: {
                 available: false,
             },
         },

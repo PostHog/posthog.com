@@ -4,14 +4,29 @@ export const telemetrydeck = {
     products: {
         web_analytics: {
             available: 'Partial',
+            features: {
+                pageviews: true,
+                bounce_rate: false,
+                traffic_breakdown: 'Partial',
+                utm_tracking: true,
+                web_vitals: false,
+                cookieless_tracking: true,
+            },
         },
         product_analytics: {
             available: true,
             features: {
                 autocapture: false,
+                user_profiles: false,
             },
             group_analytics: {
                 available: false,
+            },
+            funnels: {
+                available: true,
+            },
+            retention: {
+                available: true,
             },
         },
         session_replay: {

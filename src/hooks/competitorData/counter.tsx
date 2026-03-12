@@ -1,16 +1,33 @@
+import { Funnel } from 'lucide-react'
+
 export const counter = {
     name: 'Counter',
     key: 'counter',
     products: {
         web_analytics: {
             available: true,
+            features: {
+                pageviews: true,
+                bounce_rate: false,
+                traffic_breakdown: 'Partial',
+                utm_tracking: false,
+                web_vitals: false,
+                cookieless_tracking: true, // no cookies
+            },
         },
         product_analytics: {
             available: false,
             features: {
                 autocapture: false,
+                user_profiles: false,
             },
             group_analytics: {
+                available: false,
+            },
+            funnels: {
+                available: false,
+            },
+            retention: {
                 available: false,
             },
         },
