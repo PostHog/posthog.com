@@ -57,7 +57,7 @@ This keeps charts readable and relevant without overwhelming users with unnecess
 
 Because CounterPress isn't storing analytics data themselves, performance is tightly linked to how quickly PostHog can compute and return results.
 
-On first load, some dashboards can take a few seconds to resolve since the data isn’t cached elsewhere. Materialized endpoints – which cache computed results on PostHog’s side – are particularly important here and should noticeably improve response times once enabled.
+Materialized endpoints, which cache computed results on PostHog’s side, are particularly important for them. By using materialization CounterPress sees noticeable improvements in speed and overall user experience.
 
 CounterPress has been one of the earlier teams using Endpoints in this way, and their feedback has helped highlight areas where performance can improve. The PostHog team is actively working on caching and response time improvements so setups like this become faster as the product matures.
 
@@ -84,6 +84,6 @@ Instead of hiring a Python developer to build and maintain a custom analytics la
 - Converted them into endpoints
 - Connected them directly to their React dashboard
 
-They launched built-in analytics to their first customers with a system that is flexible, extensible, and deeply integrated into their product. Endpoints didn’t just simplify their stack. They allowed CounterPress to treat PostHog as an analytics backend and focus their time on building product experience rather than infrastructure.
+They launched built-in analytics to their first customers with a system that is flexible, extensible, and deeply integrated into their product. Endpoints allowed CounterPress to treat PostHog as an analytics backend and focus their time on building product experience rather than infrastructure.
 
 

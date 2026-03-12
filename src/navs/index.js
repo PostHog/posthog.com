@@ -67,6 +67,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/salesforce',
                 },
                 {
+                    name: 'Sentry',
+                    url: '/docs/cdp/sources/sentry',
+                },
+                {
                     name: 'MySQL',
                     url: '/docs/cdp/sources/mysql',
                 },
@@ -1342,6 +1346,10 @@ export const handbookSidebar = [
             {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
+            },
+            {
+                name: 'Per-product cost & margin analysis',
+                url: '/handbook/product/per-product-cost-margin-analysis',
             },
             {
                 name: 'Prioritizing work for mature products',
@@ -4896,6 +4904,18 @@ export const docsMenu = {
                     icon: 'IconInbox',
                     color: 'orange',
                 },
+                {
+                    name: 'Slack integration',
+                    url: '/docs/support/slack',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Workflow automation',
+                    url: '/docs/support/workflows',
+                    icon: 'IconDecisionTree',
+                    color: 'orange',
+                },
             ],
         },
         ...[dataPipelines],
@@ -5065,6 +5085,10 @@ export const docsMenu = {
                         {
                             name: 'Salesforce',
                             url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Sentry',
+                            url: '/docs/data-warehouse/sources/sentry',
                         },
                         {
                             name: 'Snowflake',
