@@ -4904,6 +4904,18 @@ export const docsMenu = {
                     icon: 'IconInbox',
                     color: 'orange',
                 },
+                {
+                    name: 'Slack integration',
+                    url: '/docs/support/slack',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Workflow automation',
+                    url: '/docs/support/workflows',
+                    icon: 'IconDecisionTree',
+                    color: 'orange',
+                },
             ],
         },
         ...[dataPipelines],
