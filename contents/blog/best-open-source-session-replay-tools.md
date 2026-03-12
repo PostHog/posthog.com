@@ -113,7 +113,7 @@ Session replay was added in 2023 and is tightly integrated with Sentry's error d
 
 Sentry is for developers and engineering teams, not UX or product teams. Sentry approaches replay from an error-first perspective – it's most valuable when you want to understand what a user was doing right before something broke.
 
-### Features and benefits
+### Key features
 
 - **Session replay:** Video-like reproduction of user interactions including page visits, mouse movements, clicks, taps, and scrolls.
 - **Error-linked replay:** Every error automatically links to the relevant session replay for instant context.
@@ -139,60 +139,188 @@ All plans include 50 session recordings. Self-hosting is free via Docker Compose
 ## 4. UXWizz
 ![UXWizz - self hosted session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
 
-**UXWizz** is a simplified, self-hosted product analytics tool offering features like visitor insights, session recording, segments and A/B testing. 
+**UXWizz** is a self-hosted product analytics tool offering visitor insights, session recording, heatmaps, segments, and basic A/B testing.
 
 It offers a lightweight version of session recording that only stores the URL of the page and the user actions. This is designed to optimize your data storage and remove the manual maintenance otherwise required by UXWizz.
-
-UXWizz is maintained by a single developer.
 
 ### Who is UXWizz for?
 
 UXWizz is a good choice for individuals and small businesses who want quick, qualitative insights and session recordings. A Wordpress plugin is also available.
 
-### Features and benefits
-
-- Broad range of engagement-focused insights
-- Low database usage with lightweight version
-- Unlimited usage with one-time license fee
+### Key features
+ 
+- **Session recording:** Lightweight and full DOM recording modes.
+- **Heatmaps:** Click, move, and scroll heatmaps.
+- **Visitor segmentation:** Filter and group visitors by behavior, device, or custom properties.
+- **A/B testing:** Basic split testing built in.
+- **Error tracking:** Monitor and log JavaScript errors.
+- **AI analysis:** Ask AI to generate stats and charts using natural language queries.
+- **WordPress plugin:** Easy installation for WordPress sites.
 
 ### How much does UXWizz cost?
 
-UXWizz is available as a self-hosted solution only and with prices starting at £129 for a lifetime license, including 1-year support. Additional updates and support are priced as add-on subscriptions.
+UXWizz is self-hosted only with a one-time license fee. 
+
+- The **Personal** license is CA$419 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
+- The **Company** license is CA$1,119 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
+- The **Agency** license is CA$3,459 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers — intended for agencies managing analytics on behalf of clients. 
+
+All tiers include one year of free support and updates, with extensions available as paid add-ons. There is no cloud version and no free tier, though a free trial is available.
+
+> #### Bottom line
+>
+> UXWizz is a good fit for individuals and small businesses who want basic self-hosted analytics and session recording without a monthly bill. The single-developer maintenance model is a real risk for long-term reliability, but the one-time pricing makes it a low-stakes option to try.
 
 ## 5. UXlens
 ![UXlens - self hosted session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img4_UXlens.png)
 
-[UXlens](https://uxlens.com/) is a developer-first session recording tool that provides insight into user interface and conversion issues. It does not include any additional analytics tools, but does have useful segment filtering features that help businesses locate blocks in their funnel.
+**UXlens** is a developer-first session recording tool that provides insight into user interface and conversion issues. It does not include any additional analytics tools, but does have useful segment filtering features that help businesses locate blocks in their funnel.
 
 ### Who is UXlens for?
 
 UXlens is a good choice for UX designers and product teams who want to study the impact of their UI on the user journey without spending too much.
 
-### Strengths
-
-- Customizable filters to track sessions on specific user segments
-- Input elements masked by default to protect user data
-- UI to assist with complex filter building
+### Key features
+ 
+- **Session recording:** Lightweight recordings focused on user interactions.
+- **Segment filtering:** Customizable filters to track sessions by user segment, device, or page.
+- **Privacy by default:** Input elements masked by default to protect user data.
+- **Self-hosting:** Docker-based self-hosted deployment available.
 
 ### How much does UXlens cost?
 
-The cloud version starts at just $6 per month for 6,000 recordings. Lifetime self-host licenses start at $200.
+UXlens offers both cloud subscriptions and self-hosted lifetime licenses. Cloud plans start at **$6/month** (Starter, 6,000 recordings) and go up to **$70/month** (Business Plus, 80,000 recordings), with Professional at $12/month (12k) and Business at $30/month (32k). 
+
+All cloud plans include a 30-day recording history and conversion funnels. Enterprise plans are available on request.
+ 
+Self-hosted lifetime licenses start at **$200 one-time** (Startup — up to 3 websites, 10 admin seats) and **$500 one-time** (Agency — unlimited websites, 10 admin seats). An Agency Plus tier with REST API access is available on a yearly basis (contact for pricing), and a free license is available for non-commercial and personal use.
+
+> #### Bottom line
+>
+> UXlens is a minimal, affordable session recording tool for small teams who just need the basics. It lacks the depth of analytics and developer tools found in PostHog, OpenReplay, or Sentry, but its low price point and self-hosting option make it worth considering for simple use cases.
 
 ## 6. [Matomo](/blog/posthog-vs-matomo)
 ![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
-[Matomo](/blog/posthog-vs-matomo) is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
+[Matomo](/blog/posthog-vs-matomo) is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the on-premise marketplace.
 
 ### Who is Matomo for?
 
-Matomo is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release. To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
+[Matomo](blog/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
 
-### Features and benefits
+To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
 
-- Funnels, acquisition analysis and other insight features
-- Unlimited session recordings
-- Out-of-the-box solution meaning no developer required to get set up
+### Key features
+ 
+- **Web analytics:** Traffic, referrers, goals, funnels, and acquisition analysis.
+- **Session recording:** Available as a paid add-on for self-hosted; included in cloud Business plan.
+- **Heatmaps:** Click and scroll heatmaps, also a paid add-on for self-hosted.
+- **GDPR compliance:** Built-in consent management and EU data hosting options.
+- **Self-hosting:** Full on-premise deployment with no data sent to third parties.
 
 ### How much does Matomo cost?
 
-The session recording add-on for a self-hosted Matomo solution has a 30-day free trial, after which the cost ranges from $199 to $599 per year depending on the number of users in your team. Session recording is also included in Matomo’s cloud Business plan. Pricing is calculated depending on the volume of your site traffic.
+Matomo On-Premise is free and open source — the core analytics platform costs nothing to self-host, with optional paid plugins available separately. 
+
+Matomo Cloud is priced by monthly hit volume: starting at **$26/month** for 50,000 hits, $42/month for 100,000 hits, $85/month for 300,000 hits, and scaling up to $399/month for 2 million hits and beyond. 
+
+All cloud plans include session recording. Enterprise plans for very high volumes are available on request.
+
+> #### Bottom line
+>
+> Matomo is the best option on this list if you primarily want website analytics and want session recording as a secondary add-on. The session recording feature is not included in the free open source release, which limits its appeal compared to tools where replay is a core feature.
+
+## Which open source session replay tool should you choose?
+ 
+- Want an all-in-one platform with session replay, product analytics, feature flags, error tracking, and more? Go with **PostHog**.
+- Need a powerful self-hosted option with advanced DevTools, co-browsing, and strict data residency requirements? Choose **OpenReplay**.
+- Already using Sentry for error monitoring and want replay without adding another vendor? Stick with **Sentry**.
+- Want basic self-hosted recording and heatmaps with no monthly fees? **UXWizz** or **UXlens** are your best bets.
+- Need open source web analytics with session recording as part of the package? Try **Matomo**.
+ 
+## Is PostHog right for you?
+ 
+Here's the (short) sales pitch.
+ 
+We're biased, obviously, but we think PostHog is the best open source session replay tool if:
+ 
+- You want session replay tightly connected to product analytics, feature flags, and error tracking.
+- You need mobile replay (iOS, Android, React Native, Flutter) on all plans including free.
+- You want transparent, usage-based pricing with a generous free tier and no sales calls.
+- You want open source code you can audit, self-host, or contribute to.
+ 
+It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or check out [our docs](/docs) to do it yourself.
+ 
+<WizardCTA />
+ 
+## Frequently asked questions
+ 
+<details>
+<summary>What is open source session replay?</summary>
+ 
+Open source session replay tools record how users interact with your website or app – clicks, scrolls, mouse movements, and form interactions – and let you replay those sessions to understand user behavior. 
+
+Unlike proprietary tools like Hotjar or FullStory, open source tools give you access to the source code, the ability to self-host, and full control over your data. This matters for teams with strict privacy requirements, data residency needs, or who simply want to avoid vendor lock-in.
+ 
+</details>
+ 
+<details>
+<summary>What's the difference between open source and self-hosted session replay?</summary>
+ 
+**Open source** means the source code is publicly available and you can audit, modify, or contribute to it. 
+
+**Self-hosted** means you run the tool on your own infrastructure rather than using a vendor's cloud. 
+
+Most open source session replay tools can be self-hosted, but not all self-hosted tools are open source. For example, Sentry uses a Business Source License (source-available, not fully open source) but can still be self-hosted for free.
+ 
+</details>
+ 
+<details>
+<summary>Which open source session replay tool has the best free tier?</summary>
+ 
+**PostHog** has the most [generous free cloud tier](/pricing): 5,000 web session replays, 2,500 mobile replays, and 1 million analytics events per month. 
+
+**OpenReplay** and **Sentry** offer free self-hosted versions with no  usage limits if you're willing to manage your own infrastructure. 
+ 
+</details>
+ 
+<details>
+<summary>Which tools support mobile session replay?</summary>
+ 
+**PostHog** is the strongest option for mobile, supporting iOS, Android, React Native, and Flutter with 2,500 free mobile recordings per month included on all plans. **OpenReplay** has added mobile support in recent releases (iOS and Android). **Sentry** supports session replay for mobile apps. Most other tools on this list are web-only.
+ 
+</details>
+ 
+<details>
+<summary>Is Highlight.io still available?</summary>
+ 
+Highlight.io was acquired by [LaunchDarkly](/blog/posthog-vs-launchdarkly) in March 2025. Existing accounts are being migrated to LaunchDarkly's observability platform; it is no longer recommended as a standalone tool for new deployments.
+ 
+</details>
+ 
+<details>
+<summary>What happened to Hotjar?</summary>
+ 
+[Hotjar](/blog/posthog-vs-hotjar) merged into Contentsquare. New customers sign up through Contentsquare, and existing Hotjar customers are being migrated to the Contentsquare platform. 
+
+The core Hotjar tools (session replay, heatmaps, surveys) still exist within Contentsquare's offering. See our guide to [Hotjar alternatives](/blog/best-hotjar-alternatives) for more.
+ 
+</details>
+ 
+<details>
+<summary>What are the best session replay tools overall (not just open source)?</summary>
+ 
+The top session replay tools in 2026 include:
+ 
+- **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
+- **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option with unlimited recordings
+- **[Smartlook](/blog/smartlook-alternatives)** – Best for mobile-first apps with crash reports
+- **[LogRocket](/blog/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
+- **[FullStory](/blog/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
+ 
+See our full guide to the [best session replay tools](/blog/best-session-replay-tools) for more options.
+ 
+</details>
+ 
+<NewsletterForm />
+ 
