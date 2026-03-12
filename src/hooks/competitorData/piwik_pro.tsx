@@ -70,6 +70,12 @@ export const piwik_pro = {
         heatmaps: {
             available: true,
         },
+        error_tracking: {
+            available: 'Basic error monitoring', // https://help.piwik.pro/support/collecting-data/track-javascript-errors/#:~:text=JavaScript%20error%20tracking%20helps%20you,recorded%20in%20the%20following%20way:
+        },
+        surveys: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

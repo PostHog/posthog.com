@@ -32,12 +32,12 @@ export const telemetrydeck = {
         surveys: {
             available: false,
         },
-        platform: {
-            available: true,
-            deployment: {
-                eu_hosting: true,
-                open_source: false,
-            },
+    },
+    platform: {
+        available: true,
+        deployment: {
+            eu_hosting: false,
+            open_source: false,
         },
     },
 }

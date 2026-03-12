@@ -32,12 +32,12 @@ export const counter = {
         surveys: {
             available: false,
         },
-        platform: {
-            available: true,
-            deployment: {
-                eu_hosting: true,
-                open_source: true,
-            },
+    },
+    platform: {
+        available: true,
+        deployment: {
+            eu_hosting: false,
+            open_source: false,
         },
     },
 }

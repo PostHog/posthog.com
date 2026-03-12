@@ -32,12 +32,12 @@ export const vercel_analytics = {
         surveys: {
             available: false,
         },
-        platform: {
-            available: true,
-            deployment: {
-                eu_hosting: false,
-                open_source: false,
-            },
+    },
+    platform: {
+        available: true,
+        deployment: {
+            eu_hosting: false,
+            open_source: false,
         },
     },
 }

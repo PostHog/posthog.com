@@ -134,6 +134,9 @@ export const matomo = {
         feature_flags: {
             available: false,
         },
+        error_tracking: {
+            available: 'Basic error monitoring', // https://matomo.org/faq/how-to/how-do-i-enable-basic-javascript-error-tracking-and-reporting-in-matomo-browser-console-error-messages/#:~:text=Use%20cases-,How%20do%20I%20enable%20basic%20JavaScript%20error%20tracking%20and%20reporting,Notes:
+        },
     },
     platform: {
         analytics_integration: {
