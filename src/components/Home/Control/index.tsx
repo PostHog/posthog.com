@@ -669,7 +669,7 @@ const productCategories = [
     {
         name: 'Feature development',
         handles: [
-            'twig',
+            'posthog_code',
             'feature_flags',
             'workflows_emails',
             'webhooks',

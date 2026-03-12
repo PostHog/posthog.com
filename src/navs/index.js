@@ -67,6 +67,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/salesforce',
                 },
                 {
+                    name: 'Sentry',
+                    url: '/docs/cdp/sources/sentry',
+                },
+                {
                     name: 'MySQL',
                     url: '/docs/cdp/sources/mysql',
                 },
@@ -626,6 +630,10 @@ export const handbookSidebar = [
                 name: 'All hands topics',
                 url: '/handbook/exec/all-hands-topics',
             },
+            {
+                name: 'Responsibilities',
+                url: '/handbook/exec/responsibilities',
+            },
         ],
     },
     {
@@ -676,11 +684,11 @@ export const handbookSidebar = [
             },
             {
                 name: 'Video',
-                url: '/handbook/growth/marketing/video',
+                url: '/handbook/marketing/video',
                 children: [
                     {
                         name: 'Overview',
-                        url: '/handbook/growth/marketing/video',
+                        url: '/handbook/marketing/video',
                     },
                     {
                         name: 'YouTube',
@@ -941,6 +949,14 @@ export const handbookSidebar = [
                         name: 'Team structure and collaboration',
                         url: '/handbook/engineering/ai/team-structure',
                     },
+                    {
+                        name: 'Implementing MCP tools',
+                        url: '/handbook/engineering/ai/implementing-mcp-tools',
+                    },
+                    {
+                        name: 'Writing AI skills',
+                        url: '/handbook/engineering/ai/writing-skills',
+                    },
                 ],
             },
             {
@@ -1075,6 +1091,10 @@ export const handbookSidebar = [
                 name: 'Per-product activation',
                 url: '/handbook/growth/growth-engineering/per-product-activation',
             },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/marketing/templates',
+            },
         ],
     },
     {
@@ -1083,44 +1103,56 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/growth/marketing',
+                url: '/handbook/marketing',
             },
             {
-                name: 'Product marketing',
-                url: '/handbook/marketing/product-announcements',
+                name: 'Who can help me?',
+                url: '/handbook/marketing/ownership',
             },
             {
                 name: 'Paid ads',
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'Product positioning',
-                url: '/handbook/marketing/positioning',
-            },
-            {
-                name: 'Incident comms',
-                url: '/handbook/growth/marketing/incident-comms',
-            },
-            {
-                name: 'Events',
+                name: 'Events (IRL)',
                 url: '/handbook/marketing/events',
-            },
-            {
-                name: 'Customer case studies',
-                url: '/handbook/marketing/customer-case-studies',
-            },
-            {
-                name: 'Co-marketing',
-                url: '/handbook/marketing/co-marketing',
+                children: [
+                    {
+                        name: 'Speaker guide',
+                        url: '/handbook/marketing/speaker-guide',
+                    },
+                ],
             },
             {
                 name: 'Influencers',
-                url: '/handbook/growth/marketing/influencers',
+                url: '/handbook/marketing/influencers',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/marketing/influencers',
+                    },
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/marketing/open-source-sponsorship',
+                    },
+                ],
             },
             {
-                name: 'Email & comms',
-                url: '',
+                name: 'Product marketing',
+                url: '/handbook/marketing/product-announcements',
                 children: [
+                    {
+                        name: 'Product announcements',
+                        url: '/handbook/marketing/product-announcements',
+                    },
+                    {
+                        name: 'Product positioning',
+                        url: '/handbook/marketing/positioning',
+                    },
+                    {
+                        name: 'Incident comms',
+                        url: '/handbook/marketing/incident-comms',
+                    },
                     {
                         name: 'Email marketing',
                         url: '/handbook/brand/email-comms',
@@ -1129,12 +1161,6 @@ export const handbookSidebar = [
                         name: 'In-app messaging',
                         url: '/handbook/brand/in-app',
                     },
-                ],
-            },
-            {
-                name: 'Partnerships & PR',
-                url: '',
-                children: [
                     {
                         name: 'Partnerships',
                         url: '/handbook/brand/partners',
@@ -1153,29 +1179,15 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Campaigns & coupons',
-                        url: '/handbook/growth/marketing/campaigns-and-coupons',
-                    },
-                ],
-            },
-            {
-                name: 'Who can help me?',
-                url: '/handbook/growth/marketing/ownership',
-            },
-            {
-                name: 'Other',
-                url: '/handbook/growth/marketing/open-source-sponsorship',
-                children: [
-                    {
-                        name: 'Sponsorships',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                        url: '/handbook/marketing/campaigns-and-coupons',
                     },
                     {
-                        name: 'ICP scoring',
-                        url: '/handbook/growth/marketing/icp',
+                        name: 'Customer case studies',
+                        url: '/handbook/marketing/customer-case-studies',
                     },
                     {
-                        name: 'Dashboard templates',
-                        url: '/handbook/growth/marketing/templates',
+                        name: 'Co-marketing',
+                        url: '/handbook/marketing/co-marketing',
                     },
                 ],
             },
@@ -1336,6 +1348,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
+                name: 'Per-product cost & margin analysis',
+                url: '/handbook/product/per-product-cost-margin-analysis',
+            },
+            {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
             },
@@ -1460,6 +1476,10 @@ export const handbookSidebar = [
                     {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
+                    },
+                    {
+                        name: 'Tracking cross sells',
+                        url: '/handbook/growth/cross-selling/tracking-cross-sells',
                     },
                     {
                         name: 'Cross sell motions',
@@ -1666,6 +1686,10 @@ export const handbookSidebar = [
                     {
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
+                    },
+                    {
+                        name: 'Turning knowledge into agent skills',
+                        url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
                 ],
             },
@@ -2233,6 +2257,10 @@ export const docsMenu = {
                             url: '/docs/libraries/hono',
                         },
                         {
+                            name: 'NestJS',
+                            url: '/docs/libraries/nestjs',
+                        },
+                        {
                             name: 'Laravel',
                             url: '/docs/libraries/laravel',
                         },
@@ -2604,11 +2632,18 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Replit integration',
+                            name: 'Platform integrations',
+                        },
+                        {
+                            name: 'Lovable',
+                            url: '/docs/integrations/lovable',
+                        },
+                        {
+                            name: 'Replit',
                             url: '/docs/integrations/replit',
                         },
                         {
-                            name: 'v0 integration',
+                            name: 'v0',
                             url: '/docs/integrations/v0',
                         },
                         {
@@ -2773,6 +2808,16 @@ export const docsMenu = {
                         {
                             name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/sdk-doctor',
+                                },
+                                {
+                                    name: 'Keeping SDKs current',
+                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                },
+                            ],
                         },
                         {
                             name: 'Organizations',
@@ -3809,6 +3854,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Device bucketing',
+                    url: '/docs/feature-flags/device-bucketing',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -4136,6 +4187,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Changing distribution after rollout',
+                    url: '/docs/experiments/changing-distribution-after-rollout',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
                     name: 'Experiments without Feature Flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
@@ -4316,6 +4373,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/hono',
                         },
                         {
+                            name: 'NestJS',
+                            url: '/docs/error-tracking/installation/nestjs',
+                        },
+                        {
                             name: 'Android',
                             url: '/docs/error-tracking/installation/android',
                         },
@@ -4326,6 +4387,10 @@ export const docsMenu = {
                         {
                             name: 'Go',
                             url: '/docs/error-tracking/installation/go',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/installation/ios',
                         },
                         {
                             name: 'React Native',
@@ -4383,6 +4448,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/upload-source-maps/ios',
                         },
                         {
                             name: 'Rollup',
@@ -4485,6 +4554,13 @@ export const docsMenu = {
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                    featured: true,
+                },
+                {
+                    name: 'Detect spikes',
+                    url: '/docs/error-tracking/spikes',
+                    icon: 'IconGraph',
+                    color: 'yellow',
                     featured: true,
                 },
                 {
@@ -4999,6 +5075,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/salesforce',
                         },
                         {
+                            name: 'Sentry',
+                            url: '/docs/data-warehouse/sources/sentry',
+                        },
+                        {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/sources/snowflake',
                         },
@@ -5349,6 +5429,11 @@ export const docsMenu = {
                             platformLogo: 'helicone',
                         },
                         {
+                            name: 'OpenClaw',
+                            url: '/docs/llm-analytics/installation/openclaw',
+                            icon: 'IconCode',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
@@ -5410,6 +5495,13 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Tools',
+                    url: '/docs/llm-analytics/tools',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
@@ -5455,8 +5547,8 @@ export const docsMenu = {
                     icon: 'IconPencil',
                     color: 'purple',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
                 {
@@ -5474,6 +5566,16 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/clusters',
                     icon: 'IconGraph',
                     color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Sentiment',
+                    url: '/docs/llm-analytics/sentiment',
+                    icon: 'IconThumbsUp',
+                    color: 'green',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
