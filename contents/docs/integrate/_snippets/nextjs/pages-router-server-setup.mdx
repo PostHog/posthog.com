@@ -37,7 +37,7 @@ export async function getServerSideProps(ctx) {
 
   if (session) {
     const client = new PostHog(
-      process.env.NEXT_PUBLIC_POSTHOG_KEY,
+      process.env.NEXT_PUBLIC_POSTHOG_TOKEN,
       {
         host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
       }

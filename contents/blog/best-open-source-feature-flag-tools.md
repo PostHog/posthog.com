@@ -9,6 +9,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 author:
+  - andy-vandervell
   - natalia-amorim
 category: General
 tags:
@@ -69,6 +70,8 @@ PostHog's free tier includes 1 million feature flag requests per month. After th
 > ### Bottom line
 >
 > PostHog is the best choice if you want feature flags alongside [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [A/B testing](/experiments), and more in a single platform. Its [generous free tier](/pricing) makes it especially appealing for [startups and scaleups](/startups).
+
+<WizardCTA />
 
 ## 2. GrowthBook
 
@@ -247,9 +250,9 @@ We're biased, obviously, but we think you'll love PostHog if:
 - You want tools to ship, track, and analyze new features – like feature flags, A/B testing, analytics, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/feature-flags) and [read our docs](/docs/feature-flags) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -303,3 +306,5 @@ Local evaluation means feature flags are checked locally within your application
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
 - [The benefits of feature flags and how to use them](/product-engineers/feature-flag-benefits-use-cases)
+
+<NewsletterForm />

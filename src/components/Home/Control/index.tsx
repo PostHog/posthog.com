@@ -43,6 +43,7 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
+import WizardCommand from 'components/WizardCommand'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -668,7 +669,7 @@ const productCategories = [
     {
         name: 'Feature development',
         handles: [
-            'twig',
+            'posthog_code',
             'feature_flags',
             'workflows_emails',
             'webhooks',
@@ -918,7 +919,6 @@ const CompanyStageTabs = () => {
                             'error_tracking',
                             'experiments',
                             'feature_flags',
-                            'surveys',
                             'logs',
                             'cdp',
                             'workflows_emails',

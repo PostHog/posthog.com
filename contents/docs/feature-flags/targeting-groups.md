@@ -88,7 +88,7 @@ To do this, start by capturing an event with the entity ID (like server ID).
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 posthog.capture(
   "canada-cloud-1", 
@@ -106,7 +106,7 @@ Finally, add your feature flag call using your server ID:
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 posthog.feature_enabled('server-rollout', 'canada-cloud-1')
 ```
@@ -126,7 +126,7 @@ Next, implement the flag and add a capture call after the flag to flip the `is_f
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 is_first_interaction = posthog.feature_enabled(
   'first-interaction', 

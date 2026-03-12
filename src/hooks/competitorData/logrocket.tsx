@@ -185,7 +185,7 @@ export const logrocket = {
     },
     platform: {
         deployment: {
-            eu_hosting: true,
+            eu_hosting: false,
             open_source: false,
             self_host: 'Enterprise',
             reverse_proxy: true,
@@ -228,11 +228,11 @@ export const logrocket = {
             microsoft_teams: false,
             redshift: true,
             rudderstack: false,
-            s3: false,
+            s3: true,
             salesforce: true,
             segment: true,
             slack: true,
-            snowflake: false,
+            snowflake: true,
             sentry: true,
             stripe: true,
             zapier: true,

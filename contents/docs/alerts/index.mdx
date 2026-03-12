@@ -100,6 +100,26 @@ To view all the alerts set, click [Product analytics](https://app.posthog.com/in
 />
 
 
+## Create alerts with PostHog AI
+
+You can also create and manage alerts using [PostHog AI](/docs/posthog-ai/overview) with natural language commands. Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the alert you want.
+
+**Example commands:**
+
+- "Alert me when daily signups drop below 100"
+- "Create an alert when pageviews increase by more than 50%"
+- "Notify me if revenue drops more than 20% week over week"
+- "Change my alert threshold to 200"
+- "Disable the signups alert"
+
+PostHog AI can create alerts on existing insights or generate new trend insights and set up alerts on them automatically. To update existing alerts, PostHog AI finds the alert by name and applies your changes.
+
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+
+PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). Other insight types like funnels and retention don't support alerts.
+
+</CalloutBox>
+
 ## Relative alerts
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
@@ -162,6 +182,24 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
     alt="alert on breakdown" 
     classes="rounded"
 />
+
+
+## Automatically disabled alerts
+
+PostHog automatically disables alerts that have an invalid configuration. When this happens, subscribed users receive an email notification explaining the reason the alert was disabled.
+
+Common reasons an alert may be auto-disabled:
+
+- The insight was modified and is no longer compatible with the alert configuration (e.g., the insight query type changed from a trend to a funnel)
+- The series referenced by the alert was removed from the insight
+- A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
+- An absolute value alert was configured with a percentage threshold
+
+<CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
+
+Disabled alerts don't re-enable themselves. After fixing the configuration issue, go to the **Alerts** tab on the insight and manually re-enable the alert.
+
+</CalloutBox>
 
 ## Further reading
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).

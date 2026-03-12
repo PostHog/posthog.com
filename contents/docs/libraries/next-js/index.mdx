@@ -25,6 +25,8 @@ This guide walks you through integrating PostHog into your Next.js app using the
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
+> **Try `@posthog/next` (pre-release):** A simplified Next.js integration with synchronized client/server identity, server-side flag bootstrapping, and a built-in API proxy. [Read the setup guide →](/docs/libraries/next-js/posthog-next)
+
 ## Prerequisites
 
 To follow this guide along, you need:
@@ -41,6 +43,12 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 <NextJSInstall />
+
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
 
 <DetailSetUpReverseProxy />
 
@@ -76,7 +84,7 @@ Next.js overrides the default `fetch` behavior on the server to introduce their 
 You can override that configuration when initializing PostHog, but make sure you understand the pros/cons of using Next.js's cache and that you might get cached results rather than the actual result our server would return. This is important for feature flags, for example.
 
 ```tsx
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   // ... your configuration
   fetch_options: {
     cache: 'force-cache', // Use Next.js cache
