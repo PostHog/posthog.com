@@ -137,6 +137,8 @@ export const config = {
 
 Setting `proxy: true` routes PostHog API calls through your domain at `/ingest`, which helps avoid ad blockers. You can customize the path prefix by passing `proxy: { pathPrefix: '/analytics' }` instead.
 
+> **Note:** Middleware requires a server runtime and is not available with `output: 'export'` (fully static sites). If you can't use middleware, you can set up a [reverse proxy](/docs/advanced/proxy) separately to route traffic through your domain.
+
 </Step>
 
 <Step title="Wrap your app with PostHogProvider" badge="required">
