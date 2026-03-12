@@ -139,23 +139,22 @@ export default function Explorer({
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            {!fullScreen ||
-                (!websiteMode && (
-                    <>
-                        <HeaderBar
-                            {...getHeaderBarProps()}
-                            searchContentRef={searchContainerRef}
-                            rightActionButtons={rightActionButtons}
-                            onSearch={onSearch}
-                        />
-                        <AddressBar
-                            selectOptions={selectOptions}
-                            currentPath={currentPath}
-                            handleValueChange={handleValueChange}
-                            selectedCategory={selectedCategory}
-                        />
-                    </>
-                ))}
+            {(!fullScreen || !websiteMode) && (
+                <>
+                    <HeaderBar
+                        {...getHeaderBarProps()}
+                        searchContentRef={searchContainerRef}
+                        rightActionButtons={rightActionButtons}
+                        onSearch={onSearch}
+                    />
+                    <AddressBar
+                        selectOptions={selectOptions}
+                        currentPath={currentPath}
+                        handleValueChange={handleValueChange}
+                        selectedCategory={selectedCategory}
+                    />
+                </>
+            )}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
