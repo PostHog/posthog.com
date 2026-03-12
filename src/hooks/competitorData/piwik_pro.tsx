@@ -17,6 +17,7 @@ export const piwik_pro = {
                 snippet_install: true,
                 traffic_breakdown: true,
                 utm_tracking: true,
+                web_vitals_reporting: true,
             },
         },
         product_analytics: {
