@@ -220,11 +220,11 @@ ELSE
 
 Assign every new ticket to the "Support" role automatically.
 
-**Trigger:** New ticket created
+```
+Trigger event = New ticket created
 
-**Flow:**
-
-1. **Update ticket:** `assignee` = Support role
+SET assignee = Support role
+```
 
 ### 4. Auto-assign based on channel
 
