@@ -182,7 +182,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -276,7 +276,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'PostHog.com': {
         feature: 'PostHog.com',
-        owner: ['brand'],
+        owner: ['website'],
         label: false,
     },
     'posthog-ai': {
@@ -312,6 +312,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     replay: {
         feature: 'Replay',
         owner: ['replay'],
+    },
+    reverse_proxy: {
+        feature: 'Reverse proxy',
+        owner: [],
+        notes: (
+            <>
+                <TeamMember name="Rafael Audibert" photo />
+                <TeamMember name="Daniel Esneider" photo />
+            </>
+        ),
     },
     'revenue-analytics': {
         feature: 'Revenue analytics',
