@@ -183,14 +183,14 @@ variables.ticket.channel_source = "widget"
 
 Set different SLA deadlines based on whether a ticket came from Slack (internal) or the widget (customer-facing).
 
-**Trigger:** New ticket created
+```
+Trigger event = New ticket created
 
-**Flow:**
-
-1. **If** `event.properties.channel_source` equals `slack`
-   - **Update ticket:** SLA = 24 hours
-2. **Else**
-   - **Update ticket:** SLA = 4 hours
+IF event.properties.channel_source = slack
+    SET SLA = 24 hours
+ELSE
+    SET SLA = 4 hours
+```
 
 Update ticket config for the widget path:
 
