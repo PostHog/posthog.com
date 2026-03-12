@@ -1344,6 +1344,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
+                name: 'Per-product cost & margin analysis',
+                url: '/handbook/product/per-product-cost-margin-analysis',
+            },
+            {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
             },
@@ -4546,6 +4550,13 @@ export const docsMenu = {
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                    featured: true,
+                },
+                {
+                    name: 'Detect spikes',
+                    url: '/docs/error-tracking/spikes',
+                    icon: 'IconGraph',
+                    color: 'yellow',
                     featured: true,
                 },
                 {
