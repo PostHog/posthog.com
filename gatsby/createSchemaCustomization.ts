@@ -529,6 +529,33 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                 },
             },
         }),
+        schema.buildObjectType({
+            name: 'SqueakTeam',
+            interfaces: ['Node'],
+            fields: {
+                objectives: {
+                    type: 'Mdx',
+                    resolve: async (source, _args, context) => {
+                        if (!source?.slug) {
+                            return null
+                        }
+
+                        return context.nodeModel.findOne({
+                            type: 'Mdx',
+                            query: {
+                                filter: {
+                                    fields: {
+                                        slug: {
+                                            eq: `/teams/${source.slug}/objectives`,
+                                        },
+                                    },
+                                },
+                            },
+                        })
+                    },
+                },
+            },
+        }),
     ])
 
     createTypes(
