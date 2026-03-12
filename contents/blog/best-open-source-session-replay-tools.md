@@ -163,7 +163,7 @@ UXWizz is self-hosted only with a one-time license fee.
 
 - The **Personal** license is CA$419 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
 - The **Company** license is CA$1,119 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
-- The **Agency** license is CA$3,459 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers — intended for agencies managing analytics on behalf of clients. 
+- The **Agency** license is CA$3,459 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers – intended for agencies managing analytics on behalf of clients. 
 
 All tiers include one year of free support and updates, with extensions available as paid add-ons. There is no cloud version and no free tier, though a free trial is available.
 
@@ -193,7 +193,7 @@ UXlens offers both cloud subscriptions and self-hosted lifetime licenses. Cloud 
 
 All cloud plans include a 30-day recording history and conversion funnels. Enterprise plans are available on request.
  
-Self-hosted lifetime licenses start at **$200 one-time** (Startup — up to 3 websites, 10 admin seats) and **$500 one-time** (Agency — unlimited websites, 10 admin seats). An Agency Plus tier with REST API access is available on a yearly basis (contact for pricing), and a free license is available for non-commercial and personal use.
+Self-hosted lifetime licenses start at **$200 one-time** (Startup – up to 3 websites, 10 admin seats) and **$500 one-time** (Agency – unlimited websites, 10 admin seats). An Agency Plus tier with REST API access is available on a yearly basis (contact for pricing), and a free license is available for non-commercial and personal use.
 
 > #### Bottom line
 >
@@ -220,7 +220,7 @@ To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
 
 ### How much does Matomo cost?
 
-Matomo On-Premise is free and open source — the core analytics platform costs nothing to self-host, with optional paid plugins available separately. 
+Matomo On-Premise is free and open source – the core analytics platform costs nothing to self-host, with optional paid plugins available separately. 
 
 Matomo Cloud is priced by monthly hit volume: starting at **$26/month** for 50,000 hits, $42/month for 100,000 hits, $85/month for 300,000 hits, and scaling up to $399/month for 2 million hits and beyond. 
 
