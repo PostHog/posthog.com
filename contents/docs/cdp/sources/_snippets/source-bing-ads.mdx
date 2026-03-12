@@ -20,6 +20,17 @@ Additional reports will be added based on user feedback we receive via our [in-a
     alt="Bing Ads account ID"
 />
 
+<CalloutBox icon="IconWarning" title="Don't confuse Account Number with Account ID" type="caution">
+
+Microsoft Advertising has two different identifiers:
+
+- **Account Number** - An alphanumeric, 8-character value (e.g., `AB12CD34`). This is displayed prominently in the UI but is **not** what PostHog needs.
+- **Account ID** - A numeric-only value (e.g., `123456789`). This is required for the API and is what you should enter in PostHog.
+
+You can find your **Account ID** in Microsoft Advertising under **Settings** > **Account Settings**. Make sure you use the numeric **Account ID**, not the alphanumeric **Account Number**.
+
+</CalloutBox>
+
 ## Configuring PostHog
 
 Connect PostHog to your Bing Ads account using a Microsoft account. The Microsoft account must have administrator or standard access to your Bing Ads account to view campaign data and reports.
