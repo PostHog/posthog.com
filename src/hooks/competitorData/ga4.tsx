@@ -1,3 +1,5 @@
+import { logs } from 'hooks/productData/logs'
+
 export const ga4 = {
     name: 'GA4',
     key: 'ga4',
@@ -128,6 +130,15 @@ export const ga4 = {
         },
         dashboards: {
             available: true,
+        },
+        error_tracking: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
+        logs: {
+            available: false,
         },
     },
     platform: {

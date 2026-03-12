@@ -31,7 +31,7 @@ If you're looking for a [GA4 alternative](/blog/ga4-alternatives) – whether fo
 
 ### 1. We're an all-in-one platform
 
-PostHog combines [product analytics](/product-analytics) and [web analytics](/web-analytics) with [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [A/B testing](/experiments), [surveys](/surveys), and a baked-in [data warehouse](/docs/data-warehouse) into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog combines [product analytics](/product-analytics) and [web analytics](/web-analytics) with [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [experiments](/experiments), [surveys](/surveys), a baked-in [data warehouse](/docs/data-warehouse, and more into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
 GA4 is a powerful web analytics tool, but it doesn't include session replay, feature flags, A/B testing, error tracking, or surveys. For those features, you'd need separate tools like [FullStory](/blog/posthog-vs-fullstory), [LaunchDarkly](/blog/posthog-vs-launchdarkly), and [Optimizely](/blog/posthog-vs-optimizely), and a way to stitch the data together.
 
@@ -73,7 +73,6 @@ GA4 is primarily built for web analytics, so this is where the comparison matter
         'web_analytics.features.web_vitals',
         'web_analytics.features.cookieless_tracking',
         'web_analytics.features.search_tools',
-        'web_analytics.features.migration',
     ]}
 />
 </p>
@@ -305,14 +304,18 @@ Google also offers various [privacy controls](https://support.google.com/analyti
 
 For teams that consistently hit these limits, **Google Analytics 360 (GA360)** is the enterprise tier. Pricing isn't publicly listed – it's sold through Google's reseller network and can land at anywhere from 50 to 150,000+/year.
 
-**PostHog** uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required. Every month you get 1 million analytics events, 5,000 web session replays, 1 million feature flag requests, 1,500 survey responses, and more for free. After the free allowance, you pay only for what you use, with pricing that scales down at volume. You can set per-product billing caps to avoid surprises.
+**PostHog** uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required. Every month you get 1 million analytics events, 5,000 web session replays, 1 million feature flag requests, 1,500 survey responses, and more for free. 
+
+After the free allowance, you pay only for what you use, with pricing that scales down at volume. You can set per-product billing caps to avoid surprises.
 
 </details>
 
 <details>
 <summary>Does PostHog offer a free trial?</summary>
 
-With PostHog, it's free to get started – no trial needed. You get a generous monthly free allowance of events, replays, feature flag requests, and more. If you stay within those limits, PostHog is free forever. See our [pricing page](/pricing) for the full breakdown.
+With PostHog, it's free to get started – no trial needed. You get a generous monthly free allowance of events, replays, feature flag requests, and more. If you stay within those limits, PostHog is free forever. 
+
+See our [pricing page](/pricing) for the full breakdown.
 
 </details>
 
@@ -326,7 +329,9 @@ Yes – see our [Google Analytics to PostHog migration guide](/docs/migrate/goog
 <details>
 <summary>Does PostHog block bots by default?</summary>
 
-Yes. **PostHog** automatically filters known bots from your event data. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default). In GA4, bot filtering is also on by default, but the filter lists differ – this can cause discrepancies between the two tools.
+Yes, **PostHog** automatically filters known bots from your event data. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default). 
+
+In GA4, bot filtering is also on by default, but the filter lists differ – this can cause discrepancies between the two tools.
 
 </details>
 
@@ -335,7 +340,7 @@ Yes. **PostHog** automatically filters known bots from your event data. See the 
 
 We recommend [deploying a reverse proxy](/docs/advanced/proxy), which lets you send events to PostHog using your own domain. Events sent from your own domain are far less likely to be intercepted by tracking blockers, giving you more complete data. 
 
-We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS CloudFront, Caddy, Cloudflare, Netlify, Vercel, Railway, and more.
+We have reverse proxy setup guidesfor AWS CloudFront, Caddy, Cloudflare, Netlify, Vercel, Railway, and more.
 
 </details>
 
@@ -365,14 +370,18 @@ Yes – as of recent updates, GA4 includes a free native BigQuery export, capped
 <details>
 <summary>Is PostHog GDPR-compliant and HIPAA-compliant?</summary>
 
-Yes. **PostHog** offers EU-hosted cloud with data stored exclusively in the EU, HIPAA-readiness (with BAA available on platform packages), cookieless tracking, and SOC 2 certification. GA4 is GDPR-ready with privacy controls, but does not support HIPAA and doesn't offer EU-only data residency.
+Yes. **PostHog** offers EU-hosted cloud with data stored exclusively in the EU, HIPAA-readiness (with BAA available on platform packages), cookieless tracking, and SOC 2 certification. 
+
+GA4 does not support HIPAA and doesn't offer EU-only data residency.
 
 </details>
 
 <details>
 <summary>Are there discounts for non-profits and startups?</summary>
 
-Yes. Non-profit organizations can contact our team and [are typically eligible for a discount](/handbook/growth/sales/contract-rules). Startups can apply for $50,000 in free credits (plus additional perks) through the [PostHog for Startups program](/startups).
+Yes. Non-profit organizations can contact our team and [are typically eligible for a discount](/handbook/growth/sales/contract-rules). 
+
+Startups can apply for $50,000 in free credits (plus additional perks) through the [PostHog for Startups program](/startups).
 
 </details>
 
