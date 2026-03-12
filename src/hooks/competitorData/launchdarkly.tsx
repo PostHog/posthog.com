@@ -214,6 +214,12 @@ export const launchdarkly = {
         heatmaps: {
             available: true,
         },
+        error_tracking: {
+            available: true, // https://launchdarkly.com/docs/home/observability/errors
+        },
+        logs: {
+            available: true, // https://launchdarkly.com/docs/home/observability/logs
+        },
     },
     platform: {
         deployment: {
