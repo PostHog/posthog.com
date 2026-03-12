@@ -119,16 +119,13 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 1. Review the customer's average monthly cost
 2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
 3. Inform them they can take advantage of this offer, which allows them to:
-   - purchase credits equivalent to ~10 months of usage (expiring 10 months after the contract start date), and
+   - purchase credits equivalent to ~12 months of usage (expiring 12 months after the contract start date), and
    - receive ~2 months of additional usage for free, applied before the contract start date.
-4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts)
-5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
-   - two months of this free usage should again be applied before the contract start date, unless explicitly priced and included under Special Terms.
-7. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
 
-For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date.
+For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
 
 ### Margin negative deals
 
