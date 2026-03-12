@@ -130,6 +130,7 @@ Fetches the full ticket into workflow variables. Use this when you need fields b
 | `unread_customer_count` | int | Unread messages for the customer |
 | `sla_due_at` | string or null | SLA deadline, or null if none |
 
+The output fields are availalbe as `{variables.ticket.*}`.
 ### Update ticket
 
 Changes one or more fields on a ticket. Only the fields you provide are changed.
