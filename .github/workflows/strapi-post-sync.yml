@@ -1,0 +1,37 @@
+name: Sync Strapi posts
+
+on:
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+jobs:
+    sync-strapi-posts:
+        name: Sync Strapi posts from Markdown
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Sync Strapi posts
+              run: pnpm sync:strapi-posts
+              env:
+                  GATSBY_SQUEAK_API_HOST: ${{ secrets.GATSBY_SQUEAK_API_HOST }}
+                  STRAPI_TOKEN: ${{ secrets.STRAPI_TOKEN }}
