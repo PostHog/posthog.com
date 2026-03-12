@@ -131,8 +131,7 @@ Fetches the full ticket into workflow variables. Use this when you need fields b
 | `sla_due_at` | string or null | SLA deadline, or null if none |
 
 The output fields are available as `{variables.ticket.*}`.
-The output fields are available as `{variables.ticket.*}`.
-The output fields are available as `{variables.ticket.*}`.
+
 ### Update ticket
 
 Changes one or more fields on a ticket. Only the fields you provide are changed.
@@ -250,6 +249,10 @@ Automatically change status from New to Open when a team member first replies.
 1. **If** `event.properties.status` equals `new`
    - **Update ticket:** `status` = `open`
 
+```
+status = "open"
+```
+
 ### 6. Move ticket to Pending after team reply
 
 After a teammate replies, set the ticket to Pending (waiting for customer response).
@@ -258,7 +261,11 @@ After a teammate replies, set the ticket to Pending (waiting for customer respon
 
 **Flow:**
 
-1. **Update ticket:** `status` = `pending`
+1. **Update ticket:**
+
+```
+status = "pending"
+```
 
 ### 7. Reopen ticket when customer replies
 
@@ -280,9 +287,18 @@ Tag tickets from specific customer domains for prioritization.
 **Flow:**
 
 1. **If** `event.properties.customer_email` contains `@bigcorp.com`
-   - **Update ticket:** `tags` = `["enterprise", "priority"]`
+   - **Update ticket:**
+
+```
+tags = ["enterprise", "priority"]
+```
+
 2. **Else if** `event.properties.customer_email` contains `@startup.io`
-   - **Update ticket:** `tags` = `["startup"]`
+   - **Update ticket:**
+
+```
+tags = ["startup"]
+```
 
 ### 9. Escalate high-priority tickets
 
@@ -293,8 +309,14 @@ Immediately set a tight SLA and assign to senior support when a high-priority ti
 **Flow:**
 
 1. **If** `event.properties.priority` equals `high`
-   - **Update ticket:** `sla_amount` = `30`, `sla_unit` = `minute`, `assignee` = Senior Support role
-   - **Update ticket:** `tags` = `["escalated"]`
+   - **Update ticket:**
+
+```
+sla_amount = "30"
+sla_unit = "minute"
+assignee = Senior Support role
+tags = ["escalated"]
+```
 
 ### 10. Tag tickets moving to Pending
 
@@ -304,7 +326,11 @@ Track how many tickets go through the pending state by adding a tag.
 
 **Flow:**
 
-1. **Update ticket:** `tags` = `["awaiting-customer"]`
+1. **Update ticket:**
+
+```
+tags = ["awaiting-customer"]
+```
 
 ### 11. Full SLA workflow with priority and channel
 
@@ -316,11 +342,35 @@ A comprehensive example combining multiple conditions for SLA, priority, and ass
 
 1. **Get ticket** (to access full ticket data)
 2. **If** `event.properties.channel_source` equals `slack`
-   - **Update ticket:** `priority` = `low`, `sla_amount` = `24`, `sla_unit` = `hour`, `assignee` = Engineering role
+   - **Update ticket:**
+
+```
+priority = "low"
+sla_amount = "24"
+sla_unit = "hour"
+assignee = Engineering role
+```
+
 3. **Else if** `event.properties.customer_email` contains `@enterprise.com`
-   - **Update ticket:** `priority` = `high`, `sla_amount` = `1`, `sla_unit` = `hour`, `assignee` = Senior Support role, `tags` = `["enterprise", "vip"]`
+   - **Update ticket:**
+
+```
+priority = "high"
+sla_amount = "1"
+sla_unit = "hour"
+assignee = Senior Support role
+tags = ["enterprise", "vip"]
+```
+
 4. **Else**
-   - **Update ticket:** `priority` = `medium`, `sla_amount` = `4`, `sla_unit` = `hour`, `assignee` = Support role
+   - **Update ticket:**
+
+```
+priority = "medium"
+sla_amount = "4"
+sla_unit = "hour"
+assignee = Support role
+```
 
 ## SLA reference
 
