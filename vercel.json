@@ -1,4 +1,9 @@
 {
+    "git": {
+        "deploymentEnabled": {
+            "master": true
+        }
+    },
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
@@ -7,11 +12,22 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
+        {
+            "source": "/handbook/growth/marketing/:path*",
+            "destination": "/handbook/marketing/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/customer-personas",
+            "destination": "/handbook/strategy/ideal-customer-persona"
+        },
+        { "source": "/blog/carbon-offset-wren", "destination": "/handbook/people/spending-money" },
         { "source": "/hogwars", "destination": "/sparks-joy/hogwars" },
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
-            "destination": "/handbook/words-and-pictures/product-announcements"
+            "destination": "/handbook/marketing/product-announcements"
         },
         { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
@@ -180,7 +196,7 @@
         },
         {
             "source": "/handbook/growth/marketing/Customer-personas",
-            "destination": "/handbook/growth/marketing/customer-personas"
+            "destination": "/handbook/strategy/ideal-customer-persona"
         },
         { "source": "/handbook/engineering/product-team", "destination": "/handbook/product/product-team" },
         {
@@ -203,7 +219,7 @@
         { "source": "/handbook/engineering/feature-parity", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/strategy/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/docs/contribute/updating-documentation", "destination": "/docs/contribute" },
-        { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/growth/marketing" },
+        { "source": "/handbook/growth/marketing/messaging_framework", "destination": "/handbook/marketing" },
         {
             "source": "/handbook/growth/handbook/engineering/support-hero",
             "destination": "/handbook/growth/handbook/support-hero"
@@ -874,7 +890,7 @@
         { "source": "/docs/cdp/github-star-sync", "destination": "/tutorials/github-star-tracker" },
         { "source": "/docs/cdp/twitter-followers", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/gitlab-release-tracker", "destination": "/docs/cdp" },
-        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
+        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/company/story", "destination": "/handbook/story" },
@@ -1298,7 +1314,12 @@
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
         },
-        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/marketing/icp" },
+        { "source": "/handbook/growth/sales/icp", "destination": "/handbook/growth/sales/lead-scoring" },
+        {
+            "source": "/handbook/marketing/icp",
+            "destination": "/handbook/growth/sales/lead-scoring",
+            "statusCode": 301
+        },
         { "source": "/teams/pipeline", "destination": "/teams/cdp" },
         { "source": "/teams/feature-success", "destination": "/teams/feature-flags" },
         { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
@@ -1668,6 +1689,8 @@
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
         { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        { "source": "/teams/twig", "destination": "/teams/posthog-code" },
+        { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"

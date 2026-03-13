@@ -1,5 +1,5 @@
 ---
-title: Product Marketing
+title: Product announcements
 sidebar: Handbook
 showTitle: true
 ---
@@ -20,7 +20,7 @@ We may typically support minor announcements by:
 - Including them in the weekly changelog update.
 - Writing a short Twitter and/or [LinkedIn post](/handbook/content/linkedin).
 
-An example of a minor announcement is the [UUID format change](/changelog/2023#new-uuid-format-for-posthog-js).
+An example of a minor announcement is the [UUID format change](/changelog?id=1923).
 
 ### Medium announcements
 Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
@@ -31,14 +31,14 @@ We may typically support medium announcements by:
 - Creating an in-app changelog notification.
 - Writing a Twitter and LinkedIn post.
 
-An example of a medium announcement includes the [launch of the NPS app](/changelog/2023#nps-survey-app).
+An example of a medium announcement includes the [launch of the NPS app](/changelog?id=1787).
 
 ### Major announcements
 Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
 
 We might do anything and everything for a major announcement.
 
-Examples of major announcements include [the surveys beta](/changelog/2023#user-surveys-beta) or [the analytics pricing change](/changelog/2023#reduced-pricing-for-product-analytics).
+Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
 
 ### New product announcements
 New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements. 

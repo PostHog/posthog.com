@@ -52,3 +52,7 @@ Some pointers on what to pay attention to in Vitally while checking for prior Sa
 If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. 
 
 If it’s clear there’s a duplication issue and we shouldn’t be involved, ping Mine to double-check the logic.
+
+### What to do when Sales is involved?
+
+If an account is in the `Onboarding Lead` segment, but there are recent Active Conversations in Vitally from a TAE/TAM (or scheduled meetings), and TAE/TAM confirms they are already actively engaged with the account, add a Vitally note saying: “Removing from Onboarding Lead segment — Sales already engaged.” Then remove the account from the segment and delete both the pipeline trait and the timestamp.
