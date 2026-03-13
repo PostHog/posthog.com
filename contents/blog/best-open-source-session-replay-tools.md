@@ -286,21 +286,21 @@ Most open source session replay tools can be self-hosted, but not all self-hoste
  
 <details>
 <summary>Which tools support mobile session replay?</summary>
- 
+
 **PostHog** is the strongest option for mobile, supporting iOS, Android, React Native, and Flutter with 2,500 free mobile recordings per month included on all plans. **OpenReplay** has added mobile support in recent releases (iOS and Android). **Sentry** supports session replay for mobile apps. Most other tools on this list are web-only.
  
 </details>
  
 <details>
 <summary>Is Highlight.io still available?</summary>
- 
+
 Highlight.io was acquired by [LaunchDarkly](/blog/posthog-vs-launchdarkly) in March 2025. Existing accounts are being migrated to LaunchDarkly's observability platform; it is no longer recommended as a standalone tool for new deployments.
  
 </details>
  
 <details>
 <summary>What happened to Hotjar?</summary>
- 
+
 [Hotjar](/blog/posthog-vs-hotjar) merged into Contentsquare. New customers sign up through Contentsquare, and existing Hotjar customers are being migrated to the Contentsquare platform. 
 
 The core Hotjar tools (session replay, heatmaps, surveys) still exist within Contentsquare's offering. See our guide to [Hotjar alternatives](/blog/best-hotjar-alternatives) for more.
@@ -309,7 +309,7 @@ The core Hotjar tools (session replay, heatmaps, surveys) still exist within Con
  
 <details>
 <summary>What are the best session replay tools overall (not just open source)?</summary>
- 
+
 The top session replay tools in 2026 include:
  
 - **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
@@ -321,6 +321,6 @@ The top session replay tools in 2026 include:
 See our full guide to the [best session replay tools](/blog/best-session-replay-tools) for more options.
  
 </details>
- 
+
 <NewsletterForm />
  
