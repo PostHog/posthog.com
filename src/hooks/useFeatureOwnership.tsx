@@ -315,7 +315,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'reverse-proxy': {
         feature: 'Reverse proxy',
-        owner: ['platform'],
+        owner: ['platform-features'],
         label: 'feature/reverse-proxy',
     },
     'revenue-analytics': {
