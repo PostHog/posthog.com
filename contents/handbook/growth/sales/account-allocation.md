@@ -58,11 +58,11 @@ If an account is struggling on these dimensions, that's a signal you need to inv
 
 At the start of each quarter, CSMs should review their book of business with the following constraints in mind:
 
-**Target book size:** ~30 accounts accumulating to ~$1.5M ARR. CSM books are larger in account count than TAM books because the focus is retention rather than active expansion — these are fully-expanded customers where the goal is ensuring continued success and stickiness.
+**Target book size:** ~35 accounts accumulating to ~$1.5M ARR. CSM books are larger in account count than TAM books because the focus is retention rather than active expansion — these are fully-expanded customers where the goal is ensuring continued success and stickiness. There are also less movement in CSM books because retention is measured over a longer time. 
 
 **Coverage growth:** Coverage amount grows ~10% quarterly to match our growth targets. When rebalancing accounts (e.g. if accounts drop below the $20k threshold), your book will be brought up to the current quarter's target amount.
 
-**Segment tracking:** We use the `CSM Managed` Segment in Vitally to track this. CSMs should not assign this themselves — that's up to Dana or Charles.
+**Segment tracking:** We use the `CSM Managed` Segment in Vitally to track this. CSMs should not assign this themselves — that's up to Dana.
 
 **Primary metric:** Your success is measured on [revenue retention (NRR)](/handbook/cs-and-onboarding/how-we-work#how-contractual-bonus-works---technical-csms), not expansion. The focus is on ensuring customers continue to get value from PostHog and remain happy with the products they're already paying for.
 
@@ -72,7 +72,7 @@ Before the quarter starts, review each account and remove those that meet any of
 
 - **Churned or dropped below $20k ARR** – same threshold as TAM accounts. Unless you have a documented, specific plan to recover them this quarter, they should come off your book.
 - **Expansion opportunity identified** – if an account is no longer fully expanded (e.g. they've dropped a primary product, or a new primary product has launched that they don't have), they should move to a TAM who can focus on getting them back to full adoption. Flag these to your Team Lead.
-- **No longer a good fit for CSM** – if the account's situation has fundamentally changed (e.g. major downsizing, pivoted away from their core use case), discuss with your Team Lead and Simon about the right path forward.
+- **No longer a good fit for CSM** – if the account's situation has fundamentally changed (e.g. major downsizing, pivoted away from their core use case), discuss with your Dana about the right path forward.
 
 ### What is NOT a valid reason to hand off
 
