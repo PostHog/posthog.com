@@ -4,6 +4,9 @@ export const brevo = {
         workflows: {
             available: true,
             features: {
+                visual_builder: true,
+                ai_assistant: false,
+                campaign_tracking: false,
                 real_time_triggers: true,
                 email_editor: true,
                 cohort_targeting: true,
@@ -16,6 +19,15 @@ export const brevo = {
                 experiment_triggers: false,
                 webhook_actions: true,
                 run_based_pricing: false,
+            },
+            channels: {
+                features: {
+                    email: false,
+                    sms: false,
+                    push: false,
+                    webhooks: false,
+                    whatsapp: false,
+                },
             },
         },
     },
