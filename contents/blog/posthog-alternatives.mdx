@@ -14,6 +14,9 @@ featuredImageType: full
 category: General
 tags:
   - Comparisons
+seo:
+  metaTitle: The most popular PostHog alternatives, compared
+  metaDescription: Looking for a PostHog alternative? Compare the best options for product analytics, session replay, feature flags, and more.
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
@@ -26,11 +29,11 @@ As an all-in-one platform, it replaces _a lot_ of legacy tools. PostHog is great
 2. Want easy control over new features roll outs, kill switches, and feature gating
 3. Desire one integrated tool over a complex stack of discrete solutions
 
-This guide is an overview of some popular alternatives to PostHog, how they compare, and [why people choose PostHog](#why-people-choose-posthog).
+This guide covers the most popular PostHog alternatives honestly – what they're good at, where they fall short, and who they're actually for.
 
 <details>
 <summary>What does PostHog actually do?</summary>
- 
+
 PostHog is a product development platform that includes:
 
 - **[PostHog AI](/ai):** Built-in AI tools including natural language querying, AI-powered session summaries, and more.
@@ -41,6 +44,7 @@ PostHog is a product development platform that includes:
 - **[Error tracking](/error-tracking):** Monitor exceptions linked to session replays and user behavior.
 - **[Surveys](/surveys):** Targeted, multi-step surveys with NPS, CSAT, and PMF templates.
 - **[Web analytics](/web-analytics):** Traffic sources, pageviews, UTM tracking, and conversion goals.
+- **[LLM analytics](/docs/llm-analytics):** Track token usage, latency, costs, and user feedback across your AI pipelines.
 - **[Data warehouse](/data-warehouse):** Query your external data sources alongside PostHog data in one place.
 - **[CDP](/cdp):** Send data to and from PostHog with a library of integrations and transformations.
 - **[Logs](/logs):** Capture and search log data alongside your analytics and session replays.
@@ -54,7 +58,7 @@ PostHog is built by engineers, for engineers. Everything is open source, and the
  
 <details>
 <summary>When should you consider a PostHog alternative?</summary>
- 
+
 PostHog isn't the right fit for everyone. You might want an alternative if:
 
 - **You need product tours or in-app guides** – PostHog has no no-code guide builder for tooltips, walkthroughs, or banners. [Pendo](/blog/posthog-vs-pendo) is the go-to here.
@@ -66,7 +70,7 @@ PostHog isn't the right fit for everyone. You might want an alternative if:
 
 <details>
 <summary>Is it hard to deploy PostHog?</summary>
- 
+
 Not at all for PostHog Cloud. Our [AI setup wizard](/wizard) walks you through installation and configuration in a few minutes – paste a snippet, answer a few questions, and you're tracking events. No credit card required, and you don't need to jump on a sales call. Most teams are up and running within a single session.
 
 <WizardCommand />
@@ -78,113 +82,92 @@ Self-hosting is a different story – it's more involved and requires managing y
 For most teams, PostHog Cloud (with US or [EU hosting options](/blog/posthog-cloud-eu)) is the right choice.
 
 </details>
+
+<details>
+<summary>Is PostHog for me?</summary>
+
+If one or more of these sounds like you, yes:
  
+- **You're an engineer or technical founder** – PostHog is built for people who like SQL, MCPs, APIs, and open-source code. You'll feel at home.
+- **You're an early-stage startup or solo founder launching your MVP** – The free tier covers most early-stage needs, and [PostHog for Startups](/startups) offers $50k in additional credits. You won't need to swap tools as you scale.
+- **You're building an AI product** – PostHog has first-class support for [LLM analytics](/llm-analytics), error tracking for AI pipelines, and an MCP server that connects your product data to your AI coding tools.
+- **You don't want to pay upfront** – No credit card, no sales call, no minimum contract. You only pay when you exceed the [(very generous) free tier](/pricing).
+- **You want one source of truth** – Instead of stitching together multiple tools (Mixpanel, LaunchDarkly, Sentry, and Hotjar), PostHog gives you the same capabilities and keeps all your product data in one place. Start with one product and expand into others without ever having to migrate your data.
+
+If you're primarily a marketer, a non-technical product manager, or a customer success team that needs in-app guides, PostHog might not be the best fit. 
+
+Keep reading to explore the alternatives.
+
+</details>
+
+<WizardCTA />
 
 ## Amplitude
 
-![amplitude vs posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
+![amplitude vs posthog](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/amplitude.jpeg)
 
 - **Founded:** 2012
 - **Similar to:** Mixpanel, Heap
 - **Best known for:** Product analytics
 - **Useful for:** Product managers, growth and marketing teams
 
-Amplitude is most known as a product analytics platform, though it also offers separate A/B testing and Customer Data Platform products. Here's how Amplitude describes itself:
+### What is Amplitude?
 
-> "We are a digital analytics platform. We help every business optimize the business value of digital product innovation. We’re the competitive edge to not only survive—but thrive—in the new era."
+[Amplitude](/blog/posthog-vs-amplitude) is a product analytics platform with a strong focus on behavioral analytics, retention, and growth. It's well-established in the product analytics space and has built a broader platform that includes a CDP and a separate A/B testing product (Amplitude Experiment). 
 
-### Amplitude vs PostHog summary
+[Amplitude](/blog/best-amplitude-alternatives) is particularly strong for marketing and growth teams who need multi-touch attribution and predictive analytics.
 
-<OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Amplitude</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
-        	<td className="w-3/12 text-center"></td>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr>
-        	<td>Product analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze user behavior</td>
-    	</tr>
-		<tr>
-        	<td>Autocapture</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Fast to implement</td>
-    	</tr>
-		<tr>
-        	<td>Session replay</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Watch real user sessions</td>
-    	</tr>
-    	<tr>
-        	<td>Feature flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-          <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Manage feature access and rollouts</td>
-    	</tr>
-    	<tr>
-        	<td>A/B testing</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">CRO and test in production</td>
-    	</tr>
-    	<tr>
-        	<td>Group analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze groups (e.g. companies and teams)</td>
-    	</tr>
-    	<tr>
-        	<td>SQL access</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Write your own queries and filters</td>
-    	</tr>
-    	<tr>
-       	<td>Transparent pricing</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Know exactly what you'll pay</td>
-    	</tr>
-    	<tr>
-       	<td>Billing limits</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Prevent surprise bills</td>
-    	</tr>
-    	<tr>
-        	<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Open core, build your own integrations</td>
-   		</tr>
-    	<tr>
-        	<td>Cute hedgehogs</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Joy</td>
-   		</tr>
-	</tbody>
-</table>
-</OverflowXSection>
+### Key features
+ 
+- **Behavioral analytics:** Charts, funnels, user paths, and retention with a polished interface.
+- **Predictive analytics:** AI-powered forecasting and propensity scoring.
+- **Multi-touch attribution:** Track the full marketing funnel and channel impact on conversion.
+- **Guides and Surveys:** Behavior-based in-app tooltips, walkthroughs, NPS surveys, and popups triggered by cohorts and behavioral data.
+- **Amplitude CDP:** Built-in customer data platform for managing user data and identity resolution.
+- **Amplitude Experiment:** Separate A/B testing product with feature flagging.
+- **Amplitude AI:** A suite of AI capabilities including AI Agents, AI Feedback, and an MCP server for querying Amplitude data from Claude, Cursor, and other AI tools.
+
+### How does Amplitude compare to PostHog?
+
+<p>
+<ProductComparisonTable
+    competitors={['amplitude', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+		'product_analytics.group_analytics',
+		'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+		'logs',
+		'workflows',
+        'surveys',
+		'platform.tools.ai_assistant',
+		'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 ### Key differences
 
-1. **Breadth of features:** PostHog combines product analytics, session replay, feature management, and A/B testing into one integrated platform. Amplitude is primarily a product analytics tool, and doesn't include any session replay capability.
+1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, a CDP, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
 
-2. **Marketing use cases:** Amplitude offers more useful features for marketing teams, such as predictive forecasting, and multi-touch attribution. PostHog is primarily designed for technical users, and product teams.
+2. **AI capabilities:** Both have AI assistants and MCP servers for querying data from tools like Claude and Cursor. Amplitude's AI Feedback stands out for marketing teams – it aggregates and synthesizes user signals from Zendesk, G2, Reddit, app store reviews, and more into prioritized product insights. PostHog has first-class [LLM analytics](/docs/llm-analytics) for AI product teams – tracking token usage, latency, costs, and user feedback across AI pipelines – something Amplitude doesn't have.
 
-3. **Free tier:** PostHog offers a generous 1 million events and 5k session recordings for free. Amplitude's free plan is limited to 100k monthly tracks users, and doesn't include important features, such as cohorts or data tables.
+3. **Pricing:** 
 
-### What people like about Amplitude
+- Amplitude's free Starter plan includes 10K MTUs (up to 10M events), 1,000 session recordings, and unlimited feature flags – enough for early exploration, but teams that need behavioral cohorts, advanced segmentation, or feature experimentation will need to upgrade. Growth and Enterprise pricing requires contacting sales.
+
+- PostHog's free tier covers 1 million analytics events, 5,000 web session replays, 100k flag requests and more with no MTU cap. Pricing is [transparent and entirely usage-based](/pricing), with discounts for bulk purchases.
+
+<details>
+<summary>What people like about Amplitude</summary>
+
+*Source: G2 reviews*
 
 Users consistently praise Amplitude's range of visualizations:
 
@@ -198,7 +181,12 @@ Users also praise its accessibility for non-technical users, such as marketing a
 
 - "As a senior product designer... for the first time, I feel comfortable exploring data.
 
-### What people dislike about Amplitude
+</details>
+
+<details>
+<summary>What people dislike about Amplitude</summary>
+
+*Source: G2 reviews*
 
 High prices are a frequent complaint:
 
@@ -212,7 +200,13 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 - "I do feel amplitude makes it difficult to parse out nuanced information on data. For more technical people, like myself, SQL is better for really digging into data."
 
-**Read more: [The best Amplitude alternatives, compared](/blog/best-amplitude-alternatives)
+Read more: [The best Amplitude alternatives, compared](/blog/best-amplitude-alternatives)
+
+</details>
+
+> #### Bottom line
+>
+> Amplitude is the better choice for growth and marketing teams who need multi-touch attribution and predictive analytics. PostHog is the better choice for engineering and product teams who want session replay, feature flags, error tracking, LLM analytics, and more alongside their core analytics.
 
 ## Mixpanel
 
@@ -223,104 +217,63 @@ More technical users sometimes find it inflexible and the documentation lacking:
 - **Best known for:** Product analytics
 - **Useful for:** Product managers and growth teams
 
-Mixpanel is purely focused on product analytics, going so far as to shut down other popular products it offered to renew its focus on analytics. According to Mixpanel, it lets you:
+### What is Mixpanel?
 
-> "...explore data freely, without SQL. Set up your metrics to measure growth and retention. Slice and dice data to uncover trends and see live updates on how people are using your app."
+[Mixpanel](/blog/posthog-vs-mixpanel) is a platform that has expanded significantly beyond its analytics-only roots. It launched a full Experiments product with feature flagging and statistical analysis, and added session replay and heatmaps to their lineup in 2024. 
 
-### Mixpanel vs PostHog summary
+[Mixpanel](/blog/best-mixpanel-alternatives) is strong on event-based analysis, funnel visualization, and its usage-based pricing model, which makes it popular with startups.
 
-<OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Mixpanel</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
-        	<td className="w-3/12 text-center"></td>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr>
-        	<td>Product analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze user behavior</td>
-    	</tr>
-		<tr>
-        	<td>Autocapture</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Easy to implement</td>
-    	</tr>
-		<tr>
-        	<td>Session replay</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Watch real user sessions</td>
-    	</tr>
-    	<tr>
-        	<td>Feature flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-          <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Manage feature access and rollouts</td>
-    	</tr>
-    	<tr>
-        	<td>A/B testing</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">CRO and test in production</td>
-    	</tr>
-    	<tr>
-        	<td>Group analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze groups (e.g. companies and teams)</td>
-    	</tr>
-    	<tr>
-        	<td>SQL access</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>  
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Write your own queries and filters</td>
-    	</tr>
-    	<tr>
-       	<td>Transparent pricing</td>
-      		<td className="text-center"><span className="text-green text-lg">✔</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Know exactly what you'll pay</td>
-    	</tr>
-    	<tr>
-       	<td>Billing limits</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Prevent surprise bills</td>
-    	</tr>
-    	<tr>
-        	<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Open core, build your own integrations</td>
-   		</tr>
-    	<tr>
-        	<td>Cute hedgehogs</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Joy</td>
-   		</tr>
-	</tbody>
-</table>
-</OverflowXSection>
+### Key features
+ 
+- **Event analytics:** Trends, funnels, user paths, and retention analysis.
+- **Experiments:** End-to-end A/B testing with feature flags, cohort targeting, sticky bucketing, and statistical significance across primary, secondary, and guardrail metrics.
+- **Session replay:** Available on all plans (10k replays/month free), integrated directly with funnel and cohort analysis.
+- **Heatmaps:** Click and scroll heatmaps built into the same workflow as analytics and replay.
+- **Metric trees:** Interactive, living frameworks that map relationships between metrics, track goals, and connect experiment results to business outcomes.
+- **Warehouse connectors:** Sync data bidirectionally with BigQuery, Snowflake, Redshift, and Databricks.
+- **Spark AI:** Natural language querying across your analytics data.
+ 
+### How does Mixpanel compare to PostHog?
 
-**Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
+<p>
+<ProductComparisonTable
+    competitors={['mixpanel', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+		'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 ### Key differences
+ 
+1. **Scope:** Mixpanel and PostHog now overlap more than they used to – both have analytics, session replay, A/B testing, and feature flags. Where PostHog pulls ahead is error tracking, surveys, logs, CDP, LLM analytics, and data warehouse. Where Mixpanel stands out: metric trees (interactive frameworks that map relationships between metrics, connect experiment results to business outcomes, and track goals in a living dashboard), and a funnel and path analysis UI that non-technical users might find more approachable than PostHog's.
 
-1. **Autocapture:** PostHog automatically captures events, which means you don't have to manually decide what events to track, unless you want to. It saves time for engineers and product managers, and ensures you'll always have usable data even if you forgot to create a custom event. 
+2. **Developer experience:** PostHog is open source and has an MCP server that lets engineers query their product data directly from AI coding tools like Cursor and Claude. Mixpanel is more accessible to non-technical users but offers less for engineering-led teams who want to inspect the codebase or integrate deeply with their dev tooling.
 
-2. **Single tool vs all-in-one:** While it offers integrations with third-party A/B testing, feature flag, and session replay tools, Mixpanel doesn't offer much outside typical product analytics features like event tracking and visualization. PostHog integrates all these features into one platform.
+3. **Pricing:**
 
-3. **Dev tool integrations:** As a platform built to engineers, PostHog offer numerous integrations with popular dev tools, such as Sentry, GitHub, and GitLab.
+- Mixpanel's free plan includes up to 1M events/month and 10K session replays, but features such as cohorts, custom properties, and feature flags are not available; their startup program gives eligible companies (under 5 years old, under $8M raised) their first year completely free – 1B events, 500k replays, all features unlocked.
 
-### What people like about Mixpanel
+- PostHog's free tier includes 1M analytics events, 5,000 session replays, 1M feature flag requests, [and much more](/pricing); [PostHog for Startups](/startups) offers $50k in credits for qualifying early-stage companies.
+
+<details>
+<summary>What people like about Mixpanel</summary>
+
+*Source: G2 reviews*
 
 Users frequently praise Mixpanel's customer support:
 
@@ -334,7 +287,12 @@ Most also think it's easy to use:
 
 - "I appreciate Mixpanel for its uncomplicated and intuitive design, which makes it a pleasure to use."
 
-### What people dislike about Mixpanel
+</details>
+
+<details>
+<summary>What people dislike about Mixpanel</summary>
+
+*Source: G2 reviews*
 
 Users frequently complain about Flows, Mixpanel's user path feature:
 
@@ -352,7 +310,13 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 - "I also would like to be able to get data using SQL; nowadays, Mixpanel has JQL, which is excellent but has a difficult learning curve for those familiar with SQL."
 
-**Read more:** [In-depth PostHog vs Mixpanel comparison](/blog/posthog-vs-mixpanel) 
+**Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
+
+</details>
+
+> #### Bottom line
+>
+> Mixpanel is a strong choice for teams who want polished product analytics with session replay, A/B testing, and metric trees in one focused tool. Once you also need error tracking, surveys, logs, or a data warehouse, the case for PostHog gets significantly stronger.
 
 ## FullStory
 
@@ -363,128 +327,94 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 - **Best known for:** Session replay
 - **Useful for:** Product managers, UX researchers, customer support
 
-FullStory is primarily a session replay tool, though it also includes some product analytics features. According to FullStory, it is:
+### What is FullStory?
+ 
+[FullStory](/blog/posthog-vs-fullstory) is a digital experience intelligence platform best known for [session replay](/blog/best-session-replay-tools). It captures every user interaction automatically and lets teams search, filter, and analyze sessions without manual event setup. 
 
-> "...equipping organizations with the information needed to perfect digital experiences—so that it’s ultimately easier for everyone to get things done online."
+[FullStory](/blog/best-fullstory-alternatives) is particularly popular with enterprise UX and customer experience teams who need to diagnose friction, understand user journeys at scale, and share session evidence across product, support, and design.
 
-### FullStory vs PostHog summary
+### Key features
+ 
+- **Session replay:** Full DOM capture with autocapture of all user interactions.
+- **Heatmaps:** Click, scroll, and cursor movement heatmaps.
+- **Frustration signals:** Automatic detection of rage clicks, dead clicks, and error clicks.
+- **DX Data:** FullStory's proprietary behavioral data layer for querying sessions retroactively.
+- **Funnels and journeys:** Visualize user flows and drop-off points.
+- **Guides and Surveys:** No-code product tours, onboarding checklists, banners, smart tips, and in-app NPS surveys triggered based on behavioral data.
+- **StoryAI:** Built-in AI agents that automatically summarize sessions, surface friction points prioritized by conversion impact, and answer behavioral questions in natural language.
 
-<OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>FullStory</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
-        	<td className="w-3/12 text-center"></td>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr>
-        	<td>Product analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze user behavior</td>
-    	</tr>
-		<tr>
-        	<td>Autocapture</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Easy to implement</td>
-    	</tr>
-		<tr>
-        	<td>Session replay</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Watch real user sessions</td>
-    	</tr>
-    	<tr>
-        	<td>Feature flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-          <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Manage feature access and rollouts</td>
-    	</tr>
-    	<tr>
-        	<td>A/B testing</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">CRO and test in production</td>
-    	</tr>
-    	<tr>
-        	<td>Group analytics</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze groups (e.g. companies and teams)</td>
-    	</tr>
-    	<tr>
-        	<td>SQL access</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Write your own queries and filters</td>
-    	</tr>
-    	<tr>
-       	<td>Transparent pricing</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Know exactly what you'll pay</td>
-    	</tr>
-    	<tr>
-       	<td>Billing limits</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Prevent surprise bills</td>
-    	</tr>
-    	<tr>
-        	<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Open core, build your own integrations</td>
-   		</tr>
-    	<tr>
-        	<td>Cute hedgehogs</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Joy</td>
-   		</tr>
-	</tbody>
-</table>
-</OverflowXSection>
+### How does FullStory compare to PostHog?
+ 
+<p>
+<ProductComparisonTable
+    competitors={['fullstory', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 ### Key differences
 
-1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 5k recordings per month), and all pricing is transparent. 
+1. **Session replay depth:** FullStory's replay tooling – frustration signal detection, cursor heatmaps, and DX Data retroactive querying – is more mature than PostHog's for dedicated UX research. PostHog's replay is strong for product and engineering use cases but less focused on pure UX research workflows.
 
-2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/toolbar), but FullStory goes further to offer cursor heatmaps and scroll tracking, making it more useful for UX researchers.
+2. **Feature breadth:** PostHog includes feature flags, A/B testing, error tracking, logs, and more. FullStory is primarily a session replay and analytics tool (which also features Guides & Surveys) – teams using it typically need other tools to cover the rest of the stack.
 
-3. **Use cases:** FullStory is a session replay tool first – it's ideal for UX researchers and customer support. PostHog is useful for UX researchers and customer support too, but it's primarily designed for technical users (e.g. engineering and product teams) rather than support.
+3. **Pricing and access:** PostHog offers 5,000 free session replays per month with [transparent, self-serve pricing](/pricing). FullStory's pricing is opaque – getting started requires a conversation with sales.
 
-### What people like about FullStory
+<details>
+<summary>What people like about FullStory</summary>
 
-Customer experience and UX researchers like FullStory for troubleshooting:
+*Source: G2 reviews*
+ 
+Users praise the depth of its session replay and UX research capabilities:
+ 
+- "FullStory's ability to replay any session without any pre-configuration is incredible. You can go back and find the exact moment a user got confused."
+ 
+- "The frustration signals – rage clicks, dead clicks – surface problems automatically. We find bugs we never would have caught otherwise."
+ 
+Enterprise teams also value its integrations and reliability:
+ 
+- "FullStory integrates seamlessly with our existing CRM and support stack. For enterprise use it's rock solid."
+ 
+</details>
+ 
+<details>
+<summary>What people dislike about FullStory</summary>
 
-- "I like how I can look specifically into a feature to figure out how users are actually using it. It's also great for debugging and seeing issues with flows."
+*Source: G2 reviews*
+ 
+Cost is by far the most common complaint:
+ 
+- "FullStory is incredibly expensive. We had to cut our session capture rate significantly just to stay within budget."
+ 
+- "Pricing is very opaque. You have to go through sales to get any numbers, and the contract renewal process is painful."
+ 
+Some users note the lack of broader product tooling:
+ 
+- "We love FullStory for replay, but we still have to use Mixpanel for analytics and LaunchDarkly for feature flags. It's a lot of tools to maintain."
+ 
+**Read more:** [The best FullStory alternatives, compared](/blog/best-fullstory-alternatives)
+ 
+</details>
 
-- "It's been indispensable for our customer service and our tech teams and has helped us understand user behavior."
-
-Autocapture is also popular:
-
-- "A huge benefit is not requiring development work to set up new events or track site behavior as fullstory does this automatically."
-
-### What people dislike about FullStory
-
-High costs and pay walled features are frequently complaints:
-
-- "Due to the high subscription prices, we're forced to pick and choose which sections we want to track and when to turn Full Story on or off."
-
-- "FullStory not only charges more than leading competitors, but it also charges a lot more for premium features like conversions, journeys and detections. Plus, beware of their contract renewal terms; it can be confusing."
-
-While users like FullStory's session replay features, some find it falls short for deeper analysis:
-
-- "FullStory lacks a strong data analysis capability and requires researchers to export to other tools for in-depth qualitative analysis."
-
-- "Wish the dashboards had a bit more flexibility in layout, setup and management--they can be pretty basic."
-
-**Read more:** [In-depth PostHog vs FullStory comparison](/blog/posthog-vs-fullstory) 
+> #### Bottom line
+>
+> FullStory is the better choice for dedicated UX research teams who need advanced heatmaps and frustration signal detection and have budget for an enterprise contract. PostHog is the better choice for product and engineering teams who want session replay as part of a broader platform – and who want transparent pricing and a free tier.
 
 ## Heap
 
@@ -495,130 +425,94 @@ While users like FullStory's session replay features, some find it falls short f
 - **Best known for:** Product analytics
 - **Useful for:** Product managers, marketing teams
 
-Heap is very similar to Amplitude and Mixpanel, though it added session replay features in 2022 through the acquisition of Auryc. Heap describes itself as:
+### What is Heap?
+ 
+[Heap](/blog/posthog-vs-heap) was acquired by [Contentsquare](/blog/best-contentsquare-alternatives). Contentsquare is in the process of migrating Heap customers onto its own platform. If you're evaluating Heap as a new tool, it's worth knowing that you may be migrated to Contentsquare rather than Heap long-term.
+ 
+[Heap's](/blog/best-heap-alternatives) key innovation was autocapture combined with retroactive event definition – you capture everything, then define what matters later. This remains genuinely useful for teams who don't know what they'll need to analyze in advance.
 
-> "...the only solution that shows you every action by every user on your product or site, then provides direction on the improvements that will most impact your business."
+### Key features
+ 
+- **Autocapture:** Capture every user interaction automatically, define events retroactively.
+- **Visual labeling:** Tag events through a visual interface without code.
+- **Session replay:** Available through the Heap platform.
+- **Funnels and paths:** Analyze user journeys and drop-off points.
+- **Sense AI:** Chat-based AI analyst that answers plain-language questions about user behavior, builds charts on demand, and suggests follow-up questions.
+- **Illuminate:** A data science layer that automatically surfaces insights from your behavioral data – including top events influencing conversion and group suggestions to identify high-impact segments – without requiring you to know what to look for in advance.
+- **Data connectors:** Sync to data warehouses including BigQuery and Snowflake.
 
-### Heap vs PostHog at a glance
-
-<OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Heap</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
-        	<td className="w-3/12 text-center"></td>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr>
-        	<td>Product analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze user behavior</td>
-    	</tr>
-		<tr>
-        	<td>Autocapture</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Easy to implement</td>
-    	</tr>
-		<tr>
-        	<td>Session replay</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Watch real user sessions</td>
-    	</tr>
-    	<tr>
-        	<td>Feature flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-          <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Manage feature access and rollouts</td>
-    	</tr>
-    	<tr>
-        	<td>A/B testing</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Optimize and test in production</td>
-    	</tr>
-    	<tr>
-        	<td>Group analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze groups (e.g. companies and teams)</td>
-    	</tr>
-    	<tr>
-        	<td>SQL access</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Write your own queries and filters</td>
-    	</tr>
-    	<tr>
-       	<td>Transparent pricing</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Know exactly what you'll pay</td>
-    	</tr>
-    	<tr>
-       	<td>Billing limits</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Prevent surprise bills</td>
-    	</tr>
-    	<tr>
-        	<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Open core, build your own integrations</td>
-   		</tr>
-    	<tr>
-        	<td>Cute hedgehogs</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Joy</td>
-   		</tr>
-	</tbody>
-</table>
-</OverflowXSection>
+### How does Heap compare to PostHog?
+ 
+<p>
+<ProductComparisonTable
+    competitors={['heap', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 ### Key differences
+ 
+1. **Retroactive event definition:** Heap's visual labeling is genuinely powerful – you can define and retroactively apply event definitions without code or engineering support. PostHog's autocapture captures everything too, but labeling events requires more technical involvement.
+ 
+2. **Feature breadth:** Heap covers session replay, web analytics, and heatmaps alongside its analytics core – but PostHog goes further with feature flags, experiments, error tracking, surveys, logs, and more. The Contentsquare merger may also eventually give Heap users access to an even broader feature set as the platforms converge.
+ 
+3. **Pricing:** 
 
-1. **Technical features:** PostHog offers more features for technical users, such as console logs and network activity on session replays, built-in feature flags, and a SQL query builder.
+- Heap's free plan covers up to 10k monthly sessions with core analytics and 6 months of data history. Growth and Pro plans are usage-based with custom pricing – you need to install the snippet to get an estimate, and session replay is an add-on rather than included. 
 
-2. **Marketing uses cases:** Both tools are useful for marketing teams, but Heap goes further by supporting multi-touch attribution for marketing campaigns.
+- PostHog's free tier covers 1M analytics events and 5,000 session replays with [transparent, self-serve pricing](/pricing) and no sales call required.
 
-3. **Free tier:** Heap's free tier is limited to just 10,000 monthly sessions, and doesn't include session replay. All PostHog users get 1 million events and 5k recordings for free, every month.
+<details>
+<summary>What people like about Heap</summary>
 
-**Read more:** [In-depth PostHog vs Heap comparison](/blog/posthog-vs-heap) 
+*Source: G2 reviews*
+ 
+Retroactive event querying is the most praised capability:
+ 
+- "The fact that Heap captures everything means I can answer questions that came up after the fact. I've never lost data because I forgot to instrument something."
+ 
+- "Visual labeling is a game-changer for non-technical PMs. I can define events myself without waiting for engineering."
+ 
+</details>
+ 
+<details>
+<summary>What people dislike about Heap</summary>
 
-### What people like about Heap
+*Source: G2 reviews*
+ 
+Data volume and performance issues come up frequently:
+ 
+- "Capturing everything sounds great until your data volume makes queries slow. We had to be selective about what we actually kept."
+ 
+- "Heap's UI can feel sluggish with large datasets. Running complex cohort queries takes longer than it should."
+ 
+The acquisition uncertainty is also on users' minds:
+ 
+- "We're on Heap and worried about what the Contentsquare migration means for our data and workflows. It's created a lot of uncertainty."
+ 
+**Read more:** [The best Heap alternatives, compared](/blog/best-heap-alternatives)
+ 
+</details>
 
-Heap's visual labeling tool, which allows non-technical user to define events, is very popular:
-
-- "If I need more client-side events, the visual labeling tool is convenient. I don't need to bother a developer to defined these events for me."
-
-- "Visual labeling has been a lot of help when figuring out which UI elements are reporting and determining analytics based on."
-
-As autocapture, a feature it shares with PostHog:
-
-- "I like the sheer *amount* of information I can access with Heap. I can parse out a lot of data and gain a ton of insight by using this tool."
-
-- "Most importantly, data is collected from Day 1 - even if the event hasn't been defined, unlike other platforms. This is really useful as requests for analysis often ask for things you haven't been actively tracking."
-
-### What people dislike about Heap
-
-Users frequently find it unintuitive:
-
-- "Heap is not the easiest tool to use, in my opinion. I have used other data analytics platforms like Looker, [Split](/blog/best-split-alternatives) and FullStory, and I find Heap to be very difficult to learn."
-
-- "Not intuitive enough for deep analysis of funnels and journeys. It's difficult for me to understand what's happening between two points in a flow and to determine what the cause for drop-off rates may be."
-
-Some users also complain about performance:
-
-- "I dislike that Heap caches so much – sometimes the tool can get really slow due to this."
-
-- "Running large queries, especially exporting data for further anlaysis/customization can be very slow, even not load at times."
+> #### Bottom line
+>
+> Heap's retroactive event labeling remains genuinely useful for non-technical teams, but, if you're evaluating it today, it's worth understanding the broader Contentsquare platform and how it fits into your needs.
 
 ## LogRocket
 
@@ -629,167 +523,177 @@ Some users also complain about performance:
 - **Best known for:** Session replay and front-end monitoring
 - **Useful for:** Customer support, engineering teams
 
-LogRocket is similar to FullStory in many respects, but with a greater focus on developers – particularly front-end developers. Here's how LogRocket describes itself:
+### What is LogRocket?
+ 
+[LogRocket](/blog/posthog-vs-logrocket) positions itself between FullStory and [Sentry](/blog/posthog-vs-sentry) – it combines session replay with front-end error monitoring and some product analytics. 
 
-> "LogRocket combines session replay, error tracking, and product analytics – empowering software teams to create the ideal web and mobile product experience."
+It's popular with engineering teams who want a developer-focused session replay tool with performance monitoring built in. [LogRocket](/blog/best-logrocket-alternatives) has also added Galileo, an AI layer that surfaces issues and recommendations proactively. 
 
-### LogRocket vs PostHog summary
+### Key features
+ 
+- **Session replay:** Full DOM replay with console logs, network requests, and Redux state.
+- **Front-end monitoring:** JavaScript error tracking and performance profiling.
+- **Heatmaps:** Click, rage click, and scroll maps.
+- **Product analytics:** Basic funnels, user paths, and conversion tracking.
+- **Galileo AI:** Proactive issue detection and UX recommendations.
 
-<OverflowXSection>
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>LogRocket</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
-        	<td className="w-3/12 text-center"></td>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr>
-        	<td>Product analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze user behavior</td>
-    	</tr>
-		<tr>
-        	<td>Autocapture</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Fast to implement</td>
-    	</tr>
-		<tr>
-        	<td>Session replay</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Watch real user sessions</td>
-    	</tr>
-    	<tr>
-        	<td>Feature flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-          <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Manage feature access and rollouts</td>
-    	</tr>
-    	<tr>
-        	<td>A/B testing</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">CRO and test in production</td>
-    	</tr>
-    	<tr>
-        	<td>Group analytics</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Analyze groups (e.g. companies and teams)</td>
-    	</tr>
-    	<tr>
-        	<td>SQL access</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Write your own queries and filters</td>
-    	</tr>
-    	<tr>
-       	<td>Transparent pricing</td>
-      		<td className="text-center"><span className="text-green text-lg">✔</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Know exactly what you'll pay</td>
-    	</tr>
-    	<tr>
-       	<td>Billing limits</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Prevent surprise bills</td>
-    	</tr>
-    	<tr>
-        	<td>Open source</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Open core, build your own integrations</td>
-   		</tr>
-    	<tr>
-        	<td>Cute hedgehogs</td>
-      		<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">Joy</td>
-   		</tr>
-	</tbody>
-</table>
-</OverflowXSection>
+### How does LogRocket compare to PostHog?
+
+<p>
+<ProductComparisonTable
+    competitors={['logrocket', 'posthog']}
+    rows={[
+        'product_analytics',
+        'product_analytics.features.autocapture',
+        'product_analytics.group_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'workflows',
+        'surveys',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 ### Key differences
+ 
+1. **Session replay focus:** LogRocket's replay tooling includes Redux/state management capture and Galileo AI proactive issue detection – features aimed squarely at front-end engineers. PostHog's replay is broader, connecting sessions directly to feature flags, experiments, and funnel analysis.
+ 
+2. **Product analytics:** PostHog's product analytics are significantly deeper – cohorts, retention, paths, SQL access, and group analytics. LogRocket's analytics are basic and supplementary to its replay core.
+ 
+3. **Pricing:** 
 
-1. **Analytics features:** While LogRocket includes some product analytics features, it lacks important data analysis features like support for custom formulas, group analytics, and a SQL query builder that are built into PostHog.
+- LogRocket's free tier covers 1,000 sessions/month with 1 month of data retention. Paid plans start at $139/month for 25k sessions on a monthly commitment (annual plans are cheaper). Session replay is the core product – analytics, heatmaps, and error tracking are included, but you're primarily paying for session volume. 
 
-2. **Heat maps and scroll maps:** PostHog supports click maps, but LogRocket offers more in-depth heat maps and scroll depth visualizations, which are ideal for UX research and click-through optimization.
+- PostHog's free tier covers 5,000 session replays plus 1M analytics events, feature flags, and more; [pricing is transparent and usage-based](/pricing) across the whole platform.
+ 
+<details>
+<summary>What people like about LogRocket</summary>
 
-3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 5k session recordings for free every month, and all the core features.
+*Source: G2 reviews*
+ 
+The engineering-focused replay experience is consistently praised:
+ 
+- "LogRocket is the best tool I've used for debugging front-end issues. Seeing the exact Redux state at the moment something broke saves hours."
+ 
+- "Galileo surfaces issues I never would have noticed manually. It proactively flags where users are getting stuck."
+ 
+Ease of setup is also cited frequently:
+ 
+- "LogRocket was the fastest tool to get running. We had replays within an hour of adding the snippet."
+ 
+</details>
+ 
+<details>
+<summary>What people dislike about LogRocket</summary>
 
-### What people like about LogRocket
+*Source: G2 reviews*
+ 
+Limited analytics depth is a common complaint:
+ 
+- "LogRocket's analytics are pretty basic. We still need a separate tool for funnels, retention, and cohort analysis."
+ 
+- "The product analytics feel like an afterthought. Great for replay, not so much for deeper product insights."
+ 
+Pricing at scale is also flagged:
+ 
+- "LogRocket gets expensive quickly once you exceed the free tier. Session volume pricing can surprise you if you're not tracking it closely."
+ 
+**Read more:** [The best LogRocket alternatives, compared](/blog/best-logrocket-alternatives)
+ 
+</details>
 
-Users find LogRocket invaluable for debugging user problems:
+> #### Bottom line
+>
+> LogRocket is a strong choice for engineering teams who want developer-focused session replay with front-end performance monitoring. PostHog is the better choice if you also need deep product analytics, feature flags, A/B testing, or a single platform for your whole stack.
 
-- "Logrocket is a tool we can't live without for: improving our UX experience; debugging user problems in an almost live fashion. Integrating it is ridiculously easy, and then you immediately can watch every user's experience, all the time."
+## Which PostHog alternative should you choose?
+   
+**Choose Amplitude if** you're a growth or marketing team that needs multi-touch attribution, predictive analytics, or AI-powered brand visibility tracking in LLMs. Amplitude has built a genuine marketing platform on top of its analytics core – PostHog hasn't. If your primary users are marketers rather than engineers, Amplitude will feel more at home.
+ 
+**Choose Mixpanel if** you want polished, focused product analytics with a strong free tier and don't need the broader PostHog platform. Mixpanel has closed the gap significantly – it now has session replay, A/B testing, feature flags, and metric trees – and its startup program is also genuinely generous.
+ 
+**Choose FullStory if** dedicated UX research is your primary use case and you have enterprise budget. FullStory's session replay tooling – frustration signals, DX Data retroactive querying, StoryAI, and Guides & Surveys – is more mature than PostHog's for teams doing deep qualitative research at scale. 
+ 
+**Choose LogRocket if** you're a front-end engineering team that primarily wants session replay connected to Redux state, console logs, and network monitoring. PostHog's replay is strong, but LogRocket's is built specifically for front-end debugging workflows. If replay is 90% of what you need, LogRocket is worth considering – just know you'll likely need other tools alongside it.
+ 
+**Approach Heap carefully** if you're evaluating it as a new tool. The retroactive event definition and Illuminate/Sense AI features are genuinely useful for non-technical teams, but the Contentsquare migration trajectory adds uncertainty. If the autocapture-first approach appeals to you, PostHog has it too – with a broader platform and clearer long-term ownership.
 
-- "The combination of full DOM preservation through the whole timeline, plus the ability to set up filters to search this tree, is killer. This means that we can isolate specific features and interactions without the expensive up-front work of a traditional analytics installation."
+## Is PostHog right for you?
+ 
+Here's the honest version.
+ 
+PostHog is the best choice if:
+ 
+- You want one platform with a full suite of tools, keeping all your data and user context in one place.
+- You're a startup, an engineer, or a technical product team that values SQL access, an MCP server, and open-source code.
+- You want to try before you commit – PostHog is fully self-serve with a generous free tier and no sales call required.
 
-It's also easy to implement:
+It's free to get started with no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes.
+ 
+<WizardCTA />
 
-- "It starts with easy implementation and a straightforward process, especially supporting iframes, which was merely a single configuration property addition."
+## Frequently asked questions
+ 
+<details>
+<summary>What is the best free PostHog alternative?</summary>
 
-- "LogRocket integrates easily with our existing tech stack, including error-tracking and project management tools, making it a cohesive part of our workflow."
+For product analytics, **Mixpanel** has the most comparable free tier to PostHog. For session replay specifically, **Microsoft Clarity** is free and unlimited (though not open source). For error tracking, **Sentry** has a free tier. 
 
-### What people dislike about LogRocket
+But PostHog's free tier – 1M analytics events, 5,000 replays, 1M feature flag requests, and more per product – is the most comprehensive single-platform free tier available.
+ 
+</details>
+ 
+<details>
+<summary>Can PostHog replace Mixpanel?</summary>
 
-While users consider LogRocket better value than FullStory, some complain about limited data retention and the cost of upgrading: 
+Yes, for most teams. PostHog covers everything Mixpanel does (funnels, retention, user paths, cohorts) and adds session replay, feature flags, A/B testing, and error tracking. Teams at [AssemblyAI](/customers/assemblyai) and others have made this switch. 
 
-- "I absolutely don't like the fact that we can't extend our session retention without upgrading our plan to a much higher level."
+See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details.
+ 
+</details>
+ 
+<details>
+<summary>Can PostHog replace Amplitude?</summary>
 
-- "The costs limit our usage a bit - we've had to reduce our session count significantly because we kept exceeding the rate limit before the next cycle."
+For engineering and product teams, yes. For growth and marketing teams who rely on multi-touch attribution and predictive analytics, Amplitude has capabilities PostHog doesn't. 
 
-Users consistently praise LogRocket's session replay tools, but other features are less developed:
+See our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison.
+ 
+</details>
+ 
+<details>
+<summary>Can PostHog replace FullStory?</summary>
 
-- "LogRocket's additional features outside session replay are harder to set up and understand. We have not been able to fully maximize our platform use or find extra value outside of session replay."
+For most session replay use cases, yes. FullStory has more advanced heatmaps and frustration signal detection, so dedicated UX research teams may find it more powerful. But PostHog's session replay covers most needs – and comes with analytics, feature flags, and error tracking included. 
 
-- "The metrics feature is promising, but not a substitute for traditional product analytics tools."
+See our [PostHog vs FullStory](/blog/posthog-vs-fullstory) comparison.
+ 
+</details>
+ 
+<details>
+<summary>Does PostHog have in-app guides like Pendo?</summary>
 
-**Read more:** [In-depth PostHog vs LogRocket comparison](/blog/posthog-vs-logrocket)
+No. PostHog doesn't have a no-code in-app guide builder for tooltips, walkthroughs, or banners. If in-app guidance is a core requirement, [Pendo](/blog/posthog-vs-pendo) is the better choice. 
 
-## Why people choose PostHog
+PostHog does have surveys for collecting in-app user feedback.
+ 
+</details>
 
-**AssemblyAI** [switched from Mixpanel to PostHog](https://posthog.com/customers/assemblyai) because Mixpanel's pricing caused them to throttle events. Using PostHog also meant they could combine analytics and A/B testing within a single platform.
+<details>
+<summary>What's the best PostHog alternative for enterprise?</summary>
+ 
+For enterprise product analytics, **Amplitude** has the most established enterprise track record. For enterprise session replay, **FullStory** has deep enterprise integrations and a mature DX Data layer.
 
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/alberto.jpg"
-        size="sm"
-        name="Alberto Santos"
-        title="Web & Brand Lead, AssemblyAI"
-        quote={`“PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
-    />
-</BorderWrapper>
+PostHog also has an enterprise plan with SSO, SAML, and a dedicated customer success team.
+ 
+</details>
 
-**Contra** chose PostHog to [replace a complex stack of separate tools](https://posthog.com/customers/contra), including "Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for replays". Adopting PostHog eliminated numerous data inconsistencies.
-
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/allison.jpg"
-        size="sm"
-        name="Allison Nulty"
-        title="Head of Product, Contra "
-        quote={`“A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions. At Contra, we apply these same principles of collaborating with our community to build our product.”`}
-    />
-</BorderWrapper>
-
-**Netdata** chose PostHog because they [wanted a developer-centric tool](/customers/netdata) built for startups. It also enabled them to replace Smartlook, their previous session replay too:
-
-<BorderWrapper>
-    <Quote
-        imageSource="/images/customers/andrewmaguire.jpeg"
-        size="sm"
-        name="Andy Maguire"
-        title="Analytics & Machine Learning Lead, Netdata"
-        quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.”`}
-    />
-</BorderWrapper>
-
-Still not sure? [Request a call](/demo) from our customer success team.
+<NewsletterForm />
