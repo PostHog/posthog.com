@@ -5564,6 +5564,13 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Playground',
+                    url: '/docs/llm-analytics/playground',
+                    icon: 'IconFlask',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Trace summarization',
                     url: '/docs/llm-analytics/summarization',
                     icon: 'IconAI',
