@@ -67,7 +67,7 @@ When creating or editing a feature flag:
 
 **This step is essential** – after adding evaluation contexts to your flag, you must update your SDK configuration to declare which contexts your application represents. The SDK's `evaluation_contexts` parameter must match the contexts you've configured in the UI.
 
-> **Note:** Newer SDK versions use `evaluation_contexts` (or `evaluationContexts` depending on the language). Older versions use `evaluation_environments` (or `evaluationEnvironments`). Both parameters are supported for backward compatibility — see the [SDK support](#sdk-support) section for version details.
+> **Note:** Newer SDK versions use `evaluation_contexts` (or `evaluationContexts` depending on the language). Older versions use `evaluation_environments` (or `evaluationEnvironments`). Both parameters are supported for backward compatibility – see the [SDK support](#sdk-support) section for version details.
 
 Update your SDK initialization to include evaluation contexts:
 

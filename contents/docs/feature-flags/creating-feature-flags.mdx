@@ -267,10 +267,10 @@ Add contexts to describe where the flag is used in your application. Some common
 
 When evaluation contexts are configured, the feature flag only evaluates when the SDK provides matching contexts in the `/flags` request. You can use evaluation contexts to accomplish:
 
-- **Application isolation** - Prevent flags from evaluating in unintended contexts (e.g., marketing site vs. app vs. docs)
-- **Cost optimization** - Reduce unnecessary flag evaluations and associated costs
-- **Better organization** - Group flags by their intended usage context
-- **Prevent bloat** - Only send relevant flags to each context
+- **Application isolation** – Prevent flags from evaluating in unintended contexts (e.g., marketing site vs. app vs. docs)
+- **Cost optimization** – Reduce unnecessary flag evaluations and associated costs
+- **Better organization** – Group flags by their intended usage context
+- **Prevent bloat** – Only send relevant flags to each context
 
 Flags without evaluation contexts continue to evaluate for all requests (default behavior).
 
@@ -305,9 +305,9 @@ To delete multiple feature flags at once:
 
 **Key features of bulk delete:**
 
-- **Multi-page selection** - Selections persist when navigating between pages, so you can select flags across multiple pages before deleting.
-- **Select all matching** - When you have 100 or more flags selected and more exist matching your current filters, a banner appears offering to select all matching flags at once.
-- **Filter-based selection** - Apply filters (by name, status, or other criteria) to narrow down flags, then use "select all matching" to select all flags that match your filters.
+- **Multi-page selection** – Selections persist when navigating between pages, so you can select flags across multiple pages before deleting.
+- **Select all matching** – When you have 100 or more flags selected and more exist matching your current filters, a banner appears offering to select all matching flags at once.
+- **Filter-based selection** – Apply filters (by name, status, or other criteria) to narrow down flags, then use "select all matching" to select all flags that match your filters.
 
 After deletion, PostHog displays a summary of deleted flags along with AI-ready prompts to help you identify and clean up code references to the removed flags.
 
