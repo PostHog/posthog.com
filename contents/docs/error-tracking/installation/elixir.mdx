@@ -1,0 +1,78 @@
+---
+title: Elixir error tracking installation
+platformLogo: elixir
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the Elixir SDK" badge="required">
+
+Add the [PostHog Elixir SDK](/docs/libraries/elixir) to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:posthog, "~> 2.2.0"}
+  ]
+end
+```
+
+Then run:
+
+```bash
+mix deps.get
+```
+
+</Step>
+
+<Step title="Configure PostHog" badge="required">
+
+Add your project token and API host to your config:
+
+```elixir file=config/config.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>"
+```
+
+</Step>
+
+<Step title="Error tracking captures automatically" badge="required">
+
+Error tracking is enabled by default. The SDK is built on top of Elixir's `Logger` module, so it automatically captures:
+
+- Exceptions thrown by your application
+- Any `Logger.error` calls
+
+No additional code is needed.
+
+<CalloutBox icon="IconInfo" title="Disabling error tracking" type="fyi">
+
+You can disable automatic error tracking by setting `enable_error_tracking` to `false`:
+
+```elixir
+config :posthog,
+  enable_error_tracking: false
+```
+
+</CalloutBox>
+
+</Step>
+
+<Step checkpoint title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm errors are being sent to PostHog. You should see them appear in the [Error Tracking](https://app.posthog.com/error_tracking) tab.
+
+```elixir
+require Logger
+
+Logger.error("Test error from Elixir")
+```
+
+</Step>
+
+</Steps>
