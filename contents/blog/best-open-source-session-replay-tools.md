@@ -61,7 +61,7 @@ It also supports replay for mobile apps running that use Android, iOS, React Nat
 
 ### How much does PostHog cost?
 
-PostHog Cloud is free up to 1 million captured events, 5,000 web recordings and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. 
+PostHog is free up to 1 million captured events, 5,000 web recordings, and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. 
 
 > #### Bottom line
 >
@@ -72,7 +72,7 @@ PostHog Cloud is free up to 1 million captured events, 5,000 web recordings and 
 ## 2. OpenReplay
 ![OpenReplay - open source session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
-[OpenReplay](/) is an open-source [alternative to Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) that offers more advanced, technical features for engineers on top of basic session replay. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
+**OpenReplay** is an open-source [alternative to Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) that offers more advanced, technical features for engineers on top of basic session replay. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
 
 ### Who is OpenReplay for?
 
@@ -161,9 +161,9 @@ UXWizz is a good choice for individuals and small businesses who want quick, qua
 
 UXWizz is self-hosted only with a one-time license fee. 
 
-- The **Personal** license is CA$419 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
-- The **Company** license is CA$1,119 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
-- The **Agency** license is CA$3,459 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers – intended for agencies managing analytics on behalf of clients. 
+- The **Personal** license is $299 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
+- The **Company** license is $799 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
+- The **Agency** license is $2,490 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers – intended for agencies managing analytics on behalf of clients. 
 
 All tiers include one year of free support and updates, with extensions available as paid add-ons. There is no cloud version and no free tier, though a free trial is available.
 
@@ -199,7 +199,7 @@ Self-hosted lifetime licenses start at **$200 one-time** (Startup – up to 3 we
 >
 > UXlens is a minimal, affordable session recording tool for small teams who just need the basics. It lacks the depth of analytics and developer tools found in PostHog, OpenReplay, or Sentry, but its low price point and self-hosting option make it worth considering for simple use cases.
 
-## 6. [Matomo](/blog/posthog-vs-matomo)
+## 6. Matomo
 ![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
 [Matomo](/blog/posthog-vs-matomo) is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the on-premise marketplace.
@@ -224,7 +224,7 @@ Matomo On-Premise is free and open source – the core analytics platform costs 
 
 Matomo Cloud is priced by monthly hit volume: starting at **$26/month** for 50,000 hits, $42/month for 100,000 hits, $85/month for 300,000 hits, and scaling up to $399/month for 2 million hits and beyond. 
 
-All cloud plans include session recording. Enterprise plans for very high volumes are available on request.
+All cloud plans include 150 session recordings and 1,500 heatmap pageviews per month, but it's unclear how this scales. Enterprise plans for very high volumes are available on request.
 
 > #### Bottom line
 >
@@ -254,10 +254,10 @@ It's completely free to get started – no credit card required. Our [AI setup w
 <WizardCTA />
 
 ## Frequently asked questions
- 
+
 <details>
 <summary>What is open source session replay?</summary>
- 
+
 Open source session replay tools record how users interact with your website or app – clicks, scrolls, mouse movements, and form interactions – and let you replay those sessions to understand user behavior. 
 
 Unlike proprietary tools like Hotjar or FullStory, open source tools give you access to the source code, the ability to self-host, and full control over your data. This matters for teams with strict privacy requirements, data residency needs, or who simply want to avoid vendor lock-in.
@@ -266,7 +266,7 @@ Unlike proprietary tools like Hotjar or FullStory, open source tools give you ac
  
 <details>
 <summary>What's the difference between open source and self-hosted session replay?</summary>
- 
+
 **Open source** means the source code is publicly available and you can audit, modify, or contribute to it. 
 
 **Self-hosted** means you run the tool on your own infrastructure rather than using a vendor's cloud. 
@@ -277,10 +277,10 @@ Most open source session replay tools can be self-hosted, but not all self-hoste
  
 <details>
 <summary>Which open source session replay tool has the best free tier?</summary>
- 
+
 **PostHog** has the most [generous free cloud tier](/pricing): 5,000 web session replays, 2,500 mobile replays, and 1 million analytics events per month. 
 
-**OpenReplay** and **Sentry** offer free self-hosted versions with no  usage limits if you're willing to manage your own infrastructure. 
+**OpenReplay** and **Sentry** offer free self-hosted versions with no usage limits if you're willing to manage your own infrastructure. 
  
 </details>
  
