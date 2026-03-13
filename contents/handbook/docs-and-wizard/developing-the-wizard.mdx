@@ -89,6 +89,8 @@ Find [a previous release version number](https://github.com/PostHog/wizard/relea
 
 To roll back, [submit a PR](https://github.com/PostHog/wizard/pulls) that reverts the bad commits. The PR title must use a [conventional commit](https://www.conventionalcommits.org/) prefix (e.g. `revert: rollback to pre-X.Y.Z`). Once merged, [release-please](https://github.com/PostHog/wizard/blob/main/.github/workflows/release-please.yml) will auto-create a release PR with the version bump. Merge that release PR, and the [publish workflow](https://github.com/PostHog/wizard/blob/main/.github/workflows/publish.yml) will publish the reverted code to npm.
 
+Remember to do a quick sanity check after release with `npm @posthog/wizard@latest` to see if your fix actually worked.
+
 ### Declare an incident
 
 If an upstream dependent PostHog service like OAuth or the LLM gateway is down, an incident may already in progress. Check the #incidents channel for any related alerts. If not, [declare an incident](/handbook/engineering/operations/incidents), describing the highest-level issue that's causing the wizard to fail.
