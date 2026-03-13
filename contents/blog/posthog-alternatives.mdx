@@ -1,12 +1,13 @@
 ---
 title: 'The most popular PostHog alternatives, compared'
-date: 2023-06-23
+date: 2026-03-13
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
+  - natalia-amorim
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
@@ -15,7 +16,11 @@ tags:
   - Comparisons
 ---
 
-As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is great if you:
+import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+PostHog is a developer platform that combines [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
+
+As an all-in-one platform, it replaces _a lot_ of legacy tools. PostHog is great if you:
 
 1. Need quantitative _and_ qualitative insights into user behavior
 2. Want easy control over new features roll outs, kill switches, and feature gating
@@ -23,7 +28,57 @@ As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is 
 
 This guide is an overview of some popular alternatives to PostHog, how they compare, and [why people choose PostHog](#why-people-choose-posthog).
 
-> **Note:** _User reviews and comments are hand curated from G2.com_
+<details>
+<summary>What does PostHog actually do?</summary>
+ 
+PostHog is a product development platform that includes:
+
+- **[PostHog AI](/ai):** Built-in AI tools including natural language querying, AI-powered session summaries, and more.
+- **[Product analytics](/product-analytics):** Funnels, retention, user paths, cohorts, and trends. SQL access for power users.
+- **[Session replay](/session-replay):** Watch real user sessions with console logs, network monitoring, and a DOM explorer.
+- **[Feature flags](/feature-flags):** Roll out features to specific users or groups without redeploying.
+- **[Experiments](/experiments):** Run multivariate experiments tied directly to your analytics data.
+- **[Error tracking](/error-tracking):** Monitor exceptions linked to session replays and user behavior.
+- **[Surveys](/surveys):** Targeted, multi-step surveys with NPS, CSAT, and PMF templates.
+- **[Web analytics](/web-analytics):** Traffic sources, pageviews, UTM tracking, and conversion goals.
+- **[Data warehouse](/data-warehouse):** Query your external data sources alongside PostHog data in one place.
+- **[CDP](/cdp):** Send data to and from PostHog with a library of integrations and transformations.
+- **[Logs](/logs):** Capture and search log data alongside your analytics and session replays.
+- **[Workflows](/workflows):** Automate actions and notifications based on product events.
+ 
+It's priced per product with a [generous free tier](/pricing) – 90% of companies use PostHog for free!
+
+PostHog is built by engineers, for engineers. Everything is open source, and the [MCP server](/docs/model-context-protocol) means your AI coding assistant can query your product data without leaving your editor.
+ 
+</details>
+ 
+<details>
+<summary>When should you consider a PostHog alternative?</summary>
+ 
+PostHog isn't the right fit for everyone. You might want an alternative if:
+
+- **You need product tours or in-app guides** – PostHog has no no-code guide builder for tooltips, walkthroughs, or banners. [Pendo](/blog/posthog-vs-pendo) is the go-to here.
+- **You need multi-touch attribution** – PostHog doesn't have marketing attribution modeling. [Amplitude](/blog/posthog-vs-amplitude) is stronger for growth and marketing teams who need this.
+- **You only need one specific tool for a lightweight use case** – For example, you just want cookieless, privacy-friendly traffic stats with a minimal script and no consent banners, a focused tool like [Plausible](/blog/posthog-vs-plausible) or [Fathom](/blog/best-fathom-alternatives) might be simpler and cheaper than a full platform.
+- **You prefer to fully self-host** – PostHog can be self-hosted, but it's operationally complex at scale. Tools like [Matomo](/blog/posthog-vs-matomo) or [OpenReplay](/blog/best-open-source-session-replay-tools) are designed with self-hosting as the primary deployment model.
+
+</details>
+
+<details>
+<summary>Is it hard to deploy PostHog?</summary>
+ 
+Not at all for PostHog Cloud. Our [AI setup wizard](/wizard) walks you through installation and configuration in a few minutes – paste a snippet, answer a few questions, and you're tracking events. No credit card required, and you don't need to jump on a sales call. Most teams are up and running within a single session.
+
+<WizardCommand />
+
+If you want to go further, PostHog has [SDKs for every major platform and framework](/docs/libraries), and the docs cover everything from basic pageview tracking to advanced group analytics and feature flag targeting.
+ 
+Self-hosting is a different story – it's more involved and requires managing your own infrastructure. 
+
+For most teams, PostHog Cloud (with US or [EU hosting options](/blog/posthog-cloud-eu)) is the right choice.
+
+</details>
+ 
 
 ## Amplitude
 
