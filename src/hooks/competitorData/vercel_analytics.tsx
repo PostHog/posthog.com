@@ -8,8 +8,8 @@ export const vercel_analytics = {
                 pageviews: true,
                 bounce_rate: true,
                 traffic_breakdown: true,
-                utm_tracking: 'Web Analytics Plus / Enterprise',
-                web_vitals: 'via Vercel Speed Insights',
+                utm_tracking: 'Plus/Enterprise',
+                web_vitals: 'via Speed Insights',
                 cookieless_tracking: true,
             },
         },
@@ -36,7 +36,7 @@ export const vercel_analytics = {
             available: false,
         },
         feature_flags: {
-            available: false,
+            available: "Via integrations",
         },
         experiments: {
             available: false,

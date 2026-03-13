@@ -39,7 +39,7 @@ export const telemetrydeck = {
             available: false,
         },
         experiments: {
-            available: 'A/B testing only',
+            available: 'Basic analysis only',
         },
         error_tracking: {
             available: false,
@@ -51,7 +51,7 @@ export const telemetrydeck = {
     platform: {
         available: true,
         deployment: {
-            eu_hosting: false,
+            eu_hosting: true,
             open_source: false,
         },
     },

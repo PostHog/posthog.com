@@ -31,13 +31,13 @@ If you're looking for a [GA4 alternative](/blog/ga4-alternatives) – whether fo
 
 ### 1. We're an all-in-one platform
 
-PostHog combines [product analytics](/product-analytics) and [web analytics](/web-analytics) with [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [experiments](/experiments), [surveys](/surveys), a baked-in [data warehouse](/docs/data-warehouse, and more into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog combines [product analytics](/product-analytics) and [web analytics](/web-analytics) with [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [experiments](/experiments), [surveys](/surveys), a baked-in [data warehouse](/docs/data-warehouse), and more into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
 GA4 is a powerful web analytics tool, but it doesn't include session replay, feature flags, A/B testing, error tracking, or surveys. For those features, you'd need separate tools like [FullStory](/blog/posthog-vs-fullstory), [LaunchDarkly](/blog/posthog-vs-launchdarkly), and [Optimizely](/blog/posthog-vs-optimizely), and a way to stitch the data together.
 
 ### 2. It's built for developers
 
-This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), an [MCP server](/docs/model-context-protocol) for querying your data directly from AI coding tool, and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want. 
+This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), an [MCP server](/docs/model-context-protocol) for querying your data directly from AI coding tool, and a [SQL query builder](/docs/product-analytics/sql) so you can analyze data how you want. 
 
 We're open source, so you can inspect [our source code](https://github.com/PostHog). And we ship fast – check out [the weekly changelog](/changelog) to see what's new.
 
@@ -47,7 +47,7 @@ GA4 is primarily designed for marketers and growth teams. It integrates tightly 
 
 We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on D-list comedians to host an annual convention you'll never attend. Want to know how much we'll charge? See our [pricing calculator](/pricing).
 
-GA4's core product is free, but once you hit the limits of the free tier you'll need to evaluate GA360, which starts at approximately [$50,000/year according to third party sources](https://visionlabs.com/calculator/ga360/) (Google doesn't publish pricing).
+GA4's core product is free, but once you hit the limits of the free tier you'll need to evaluate GA360, which starts at approximately [$50,000/year according to third party sources](/blog/google-analytics-cost) (Google doesn't publish pricing).
 
 <WizardCTA />
 
@@ -302,7 +302,7 @@ Google also offers various [privacy controls](https://support.google.com/analyti
 
 **Google Analytics 4** is free for most users. However, there are limits: GA4 free caps data retention at 14 months, applies data sampling to large exploration queries (over 10M events), and limits the BigQuery export to 1 million events per day.
 
-For teams that consistently hit these limits, **Google Analytics 360 (GA360)** is the enterprise tier. Pricing isn't publicly listed – it's sold through Google's reseller network and can land at anywhere from 50 to 150,000+/year.
+For teams that consistently hit these limits, **Google Analytics 360 (GA360)** is the enterprise tier. Pricing isn't publicly listed – it's sold through Google's reseller network and can land at anywhere from 50-150k+/year.
 
 **PostHog** uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required. Every month you get 1 million analytics events, 5,000 web session replays, 1 million feature flag requests, 1,500 survey responses, and more for free. 
 
@@ -340,7 +340,7 @@ In GA4, bot filtering is also on by default, but the filter lists differ – thi
 
 We recommend [deploying a reverse proxy](/docs/advanced/proxy), which lets you send events to PostHog using your own domain. Events sent from your own domain are far less likely to be intercepted by tracking blockers, giving you more complete data. 
 
-We have reverse proxy setup guidesfor AWS CloudFront, Caddy, Cloudflare, Netlify, Vercel, Railway, and more.
+We have reverse proxy setup guides for AWS CloudFront, Caddy, Cloudflare, Netlify, Vercel, Railway, and more.
 
 </details>
 
@@ -364,6 +364,8 @@ Yes. PostHog includes both [feature flags](/feature-flags) and [experiments](/ex
 <summary>Does GA4 support BigQuery export for free?</summary>
 
 Yes – as of recent updates, GA4 includes a free native BigQuery export, capped at 1 million events per day. This is a significant improvement over the historical restriction that required GA360. If you exceed 1 million events/day, you'll need GA360, which removes the daily cap.
+
+Not that you asked, but PostHog also has a [BigQuery batch export](/docs/cdp/batch-exports/bigquery). 
 
 </details>
 

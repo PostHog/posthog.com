@@ -1,4 +1,3 @@
-import { Funnel } from 'lucide-react'
 
 export const counter = {
     name: 'Counter',
@@ -54,7 +53,7 @@ export const counter = {
         available: true,
         deployment: {
             eu_hosting: false,
-            open_source: false,
+            open_source: true,
         },
     },
 }

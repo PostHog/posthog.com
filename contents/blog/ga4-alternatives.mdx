@@ -23,7 +23,7 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 The transition from Universal Analytics forced millions of users onto a platform that thinks and behaves very differently. 
 
-GA4's event-based model is more powerful than its predecessor in theory, but in practice, many teams find it harder to use, harder to query, and harder to trust. Add in data sampling on large exploration queries, a 14-month retention limit, [privacy concerns under GDPR](/blog/best-gdpr-compliant-analytics-tools), and a UI that frustrates marketers and developers alike – and it's easy to understand why so many teams are looking for alternatives.
+GA4's event-based model is more powerful than its predecessor in theory, but in practice, many teams find it harder to use, harder to query, and harder to trust. Add in data sampling on large exploration queries, a 14-month retention limit, [privacy concerns under GDPR](/blog/best-gdpr-compliant-analytics-tools), [opaque pricing](/blog/google-analytics-cost), and a UI that frustrates marketers and developers alike – and it's easy to understand why so many teams are looking for alternatives.
 
 Whether you're leaving GA4 for privacy reasons, because you've outgrown its free tier limits, or because you simply need more than web analytics, this guide covers the best GA4 alternatives available today.
 
@@ -62,13 +62,13 @@ Some teams also avoid GA4 for privacy reasons. GA4 is not GDPR-compliant by defa
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-[PostHog](/) (that's us 👋) is an [all-in-one developer platform](/products) that includes [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), [user surveys](/surveys), and more – pretty much everything you need to track user behavior in an app or website, basically. 
+[PostHog](/) (that's us 👋) is an [all-in-one developer platform](/products) that includes [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), [user surveys](/surveys), and more – pretty much everything you need to track user behavior in an app or website. 
 
 This means it's not just a GA4 alternative, but also a replacement for tools like [Mixpanel](/blog/best-mixpanel-alternatives), [LaunchDarkly](/blog/best-launchdarkly-alternatives), and [FullStory](/blog/best-fullstory-alternatives). 
 
 Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), [Supabase](/customers/supabase), and [Lovable](/customers/lovable).
 
-Like GA4, PostHog is an [event-based platform](/docs/data/events). It's priced on per event used, though it offers a generous [1 million events for free](/pricing) each month, so many users can use it for free.
+Like GA4, PostHog is an [event-based platform](/docs/data/events). It's priced per event captured, though it offers a generous [1 million events for free](/pricing) each month, so many users can use it for free.
 
 ### How does PostHog compare to GA4?
 
@@ -142,7 +142,7 @@ Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an 
 
 [Matomo](/blog/posthog-vs-matomo) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
 
-It also shares some weaknesses inherent in Universal Analytics. While [Matomo](/blog/best-matomo-alternatives) has added more advanced analytics features, it's better suited to traditional website analytics than tracking desktop and mobile apps. Like PostHog, it's open source, so can be self-hosted if you prefer.
+It also shares some weaknesses inherent in Universal Analytics. While [Matomo](/blog/best-matomo-alternatives) has added more advanced analytics features, it's better suits traditional website analytics than tracking desktop and mobile apps. Like PostHog, it's open source, so can be self-hosted if you prefer.
 
 ### How does Matomo compare to GA4?
 
@@ -272,7 +272,7 @@ Kissmetrics and GA4 serve different masters. GA4 is built for traffic and market
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
-While it can be used on websites, **TelemetryDeck** is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model – TelemetryDeck calls them signals. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), and Javascript (node and web apps).
+While it can be used on websites, **TelemetryDeck** is primarily a privacy-minded analytics tool for mobile apps. As such, it uses an event-based tracking model – TelemetryDeck calls them signals. It has first-party SDKs for Swift (iOS, macOS etc. apps), Kotlin (Android and Java apps), and Javascript (Node and web apps).
 
 TelemetryDeck makes it easy for app developers to track things like active users, OS version, app version, and basic user metadata like user location. It also supports basic retention and conversion funnel insights. TelemetryDeck doesn't collect any personally identifiable metadata, so you don't need tracking consent banners.
 
@@ -327,7 +327,7 @@ TelemetryDeck does far less than GA4 by design. It's intentionally lean – no u
 
 > #### Bottom line
 > 
-> TelemetryDeck is a good option for those who want basic app analytics, but it falls someway short of feature parity with GA4. It's not a full GA4 replacement for teams that need revenue tracking, ad attribution, or user profiles – but it's a great fit for indie developers and privacy-first teams.
+> TelemetryDeck is a good option for those who want basic app analytics, but it falls short of feature parity with GA4. It's not a full GA4 replacement for teams that need revenue tracking, ad attribution, or user profiles – but it's a great fit for indie developers and privacy-first teams.
 
 ## 5. Plausible
 
@@ -340,7 +340,7 @@ TelemetryDeck does far less than GA4 by design. It's intentionally lean – no u
 
 [Plausible](/blog/posthog-vs-plausible) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
 
-[Plausible](/blog/best-plausible-alternatives), and others like it, can only track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
+[Plausible](/blog/best-plausible-alternatives) can only track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
 
 But, if you just want basic website analytics, it gets the job done, and won't adversely impact the performance of your website thanks to its lightweight tracking script.
 
@@ -764,7 +764,7 @@ No. GA4 does not include session replay. If you need session replay alongside we
 <details>
 <summary>Does GA4 have feature flags or A/B testing?</summary>
 
-No. GA4 does not offer native feature flags or A/B testing. Google Optimize (GA4's A/B testing product) was shut down in 2023. For feature flags and experimentation tightly integrated with analytics, **PostHog** is the best alternative. 
+No. GA4 does not offer native feature flags or A/B testing. [Google Optimize](/blog/optimize-to-posthog) (GA4's A/B testing product) was shut down in 2023. For feature flags and experimentation tightly integrated with analytics, **PostHog** is the best alternative. 
 
 See our guide to the [best LaunchDarkly alternatives](/blog/best-launchdarkly-alternatives) for more options.
 

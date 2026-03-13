@@ -1,4 +1,3 @@
-import { logs } from 'hooks/productData/logs'
 
 export const ga4 = {
     name: 'GA4',
