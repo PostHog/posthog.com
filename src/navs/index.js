@@ -3403,6 +3403,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Path cleaning',
+                    url: '/docs/product-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'Stickiness',
                     url: '/docs/product-analytics/stickiness',
                     icon: 'IconStickiness',
@@ -3578,6 +3584,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Path cleaning',
+                    url: '/docs/web-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
                 },
                 {
                     name: 'Marketing analytics',
