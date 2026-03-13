@@ -8,10 +8,13 @@ import {
     SurveysFinalSteps,
 } from 'onboarding/surveys'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
 
 const SURVEYS_SNIPPETS_WEB = {
     SurveysFinalSteps,
     JSEventCapture,
+    JSHtmlSnippet: WebsiteJSHtmlSnippet,
+    JSInitSnippet: WebsiteJSInitSnippet,
 }
 
 const SURVEYS_SNIPPETS_MOBILE = {
