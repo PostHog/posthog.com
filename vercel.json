@@ -12,6 +12,17 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "archive.posthog.com"
+                }
+            ],
+            "destination": "https://posthog.com/:path*",
+            "permanent": true
+        },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
         {
             "source": "/handbook/growth/marketing/:path*",
