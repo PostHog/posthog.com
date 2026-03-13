@@ -100,7 +100,7 @@ export const matomo = {
             },
         },
         session_replay: {
-            available: 'Plugin',
+            available: true,
             features: {
                 canvas_recording: false,
                 privacy_masking: true,
