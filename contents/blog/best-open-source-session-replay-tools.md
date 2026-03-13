@@ -252,7 +252,7 @@ We're biased, obviously, but we think PostHog is the best open source session re
 It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or check out [our docs](/docs) to do it yourself.
  
 <WizardCTA />
- 
+
 ## Frequently asked questions
  
 <details>
