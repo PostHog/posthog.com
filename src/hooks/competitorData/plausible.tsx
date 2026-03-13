@@ -140,6 +140,9 @@ export const plausible = {
         workflows: {
             available: false,
         },
+        error_tracking: {
+            available: false,
+        },
     },
     platform: {
         analytics_integration: {

@@ -67,6 +67,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/salesforce',
                 },
                 {
+                    name: 'Sentry',
+                    url: '/docs/cdp/sources/sentry',
+                },
+                {
                     name: 'MySQL',
                     url: '/docs/cdp/sources/mysql',
                 },
@@ -626,6 +630,10 @@ export const handbookSidebar = [
                 name: 'All hands topics',
                 url: '/handbook/exec/all-hands-topics',
             },
+            {
+                name: 'Responsibilities',
+                url: '/handbook/exec/responsibilities',
+            },
         ],
     },
     {
@@ -941,6 +949,14 @@ export const handbookSidebar = [
                         name: 'Team structure and collaboration',
                         url: '/handbook/engineering/ai/team-structure',
                     },
+                    {
+                        name: 'Implementing MCP tools',
+                        url: '/handbook/engineering/ai/implementing-mcp-tools',
+                    },
+                    {
+                        name: 'Writing AI skills',
+                        url: '/handbook/engineering/ai/writing-skills',
+                    },
                 ],
             },
             {
@@ -1098,8 +1114,14 @@ export const handbookSidebar = [
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'IRL Events',
+                name: 'Events (IRL)',
                 url: '/handbook/marketing/events',
+                children: [
+                    {
+                        name: 'Speaker guide',
+                        url: '/handbook/marketing/speaker-guide',
+                    },
+                ],
             },
             {
                 name: 'Influencers',
@@ -1324,6 +1346,10 @@ export const handbookSidebar = [
             {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
+            },
+            {
+                name: 'Per-product cost & margin analysis',
+                url: '/handbook/product/per-product-cost-margin-analysis',
             },
             {
                 name: 'Prioritizing work for mature products',
@@ -1660,6 +1686,10 @@ export const handbookSidebar = [
                     {
                         name: 'Metabase account analysis',
                         url: '/handbook/onboarding/metabase-account-analysis',
+                    },
+                    {
+                        name: 'Turning knowledge into agent skills',
+                        url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
                 ],
             },
@@ -2602,11 +2632,18 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'Replit integration',
+                            name: 'Platform integrations',
+                        },
+                        {
+                            name: 'Lovable',
+                            url: '/docs/integrations/lovable',
+                        },
+                        {
+                            name: 'Replit',
                             url: '/docs/integrations/replit',
                         },
                         {
-                            name: 'v0 integration',
+                            name: 'v0',
                             url: '/docs/integrations/v0',
                         },
                         {
@@ -3366,6 +3403,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Path cleaning',
+                    url: '/docs/product-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'Stickiness',
                     url: '/docs/product-analytics/stickiness',
                     icon: 'IconStickiness',
@@ -3541,6 +3584,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Path cleaning',
+                    url: '/docs/web-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
                 },
                 {
                     name: 'Marketing analytics',
@@ -4150,6 +4199,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Changing distribution after rollout',
+                    url: '/docs/experiments/changing-distribution-after-rollout',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
                     name: 'Experiments without Feature Flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
@@ -4346,6 +4401,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/go',
                         },
                         {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/installation/ios',
+                        },
+                        {
                             name: 'React Native',
                             url: '/docs/error-tracking/installation/react-native',
                         },
@@ -4401,6 +4460,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/upload-source-maps/flutter',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/error-tracking/upload-source-maps/ios',
                         },
                         {
                             name: 'Rollup',
@@ -4503,6 +4566,13 @@ export const docsMenu = {
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                    featured: true,
+                },
+                {
+                    name: 'Detect spikes',
+                    url: '/docs/error-tracking/spikes',
+                    icon: 'IconGraph',
+                    color: 'yellow',
                     featured: true,
                 },
                 {
@@ -4846,6 +4916,18 @@ export const docsMenu = {
                     icon: 'IconInbox',
                     color: 'orange',
                 },
+                {
+                    name: 'Slack integration',
+                    url: '/docs/support/slack',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Workflow automation',
+                    url: '/docs/support/workflows',
+                    icon: 'IconDecisionTree',
+                    color: 'orange',
+                },
             ],
         },
         ...[dataPipelines],
@@ -5015,6 +5097,10 @@ export const docsMenu = {
                         {
                             name: 'Salesforce',
                             url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Sentry',
+                            url: '/docs/data-warehouse/sources/sentry',
                         },
                         {
                             name: 'Snowflake',
@@ -5485,8 +5571,8 @@ export const docsMenu = {
                     icon: 'IconPencil',
                     color: 'purple',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
                 {
@@ -5510,7 +5596,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Sentiment classification',
+                    name: 'Sentiment',
                     url: '/docs/llm-analytics/sentiment',
                     icon: 'IconThumbsUp',
                     color: 'green',
