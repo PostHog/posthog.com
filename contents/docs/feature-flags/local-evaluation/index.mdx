@@ -26,7 +26,7 @@ With remote evaluation, your server sends a request to PostHog's `/flags` API ev
 sequenceDiagram
     participant App as Your app
     participant SDK as PostHog SDK
-    participant PH as PostHog /flags
+    participant PH as PostHog
     App->>SDK: flag key + user ID
     SDK->>PH: POST /flags
     Note right of PH: Resolves using stored flag definitions,<br/>person properties, group properties,<br/>and cohort memberships
@@ -42,8 +42,11 @@ With local evaluation, the SDK periodically fetches **flag definitions** from Po
 sequenceDiagram
     participant App as Your app
     participant SDK as PostHog SDK
-    participant PH as PostHog /local_evaluation
-    PH-->>SDK: Flag definitions (background, every 30s)
+    participant PH as PostHog
+    Note over SDK,PH: Background (every 30s)
+    SDK->>PH: GET /local_evaluation
+    PH-->>SDK: Flag definitions
+    Note over App,SDK: At evaluation time
     App->>SDK: flag key + person properties + group properties
     Note right of SDK: Evaluates locally using<br/>cached flag definitions +<br/>properties you provided
     SDK-->>App: true / false / variant
