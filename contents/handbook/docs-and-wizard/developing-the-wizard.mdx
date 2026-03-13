@@ -83,7 +83,7 @@ Potential points of upstream failure:
 
 The wizard has the above upstream dependencies. It is also a bundle of client code, subject to various bugs and distribution mishaps. If upstream services are healthy but the wizard is still failing, it's likely a bug in the wizard itself.
 
-Find [a previous release version number](https://github.com/PostHog/wizard/releases) and run `npx @posthog/wizard@<version>` against an example project. You can find options known to work in the [wizard-workbench](https://github.com/PostHog/wizard-workbench) repository. If the wizard runs successfully, you can compare the logs to the current release to see what changed. This will also confirm a safe rollback path.
+Find [a previous release version number](https://github.com/PostHog/wizard/releases) and run `npx @posthog/wizard@<version>` against an example project. You can find projects known to work in the [wizard-workbench](https://github.com/PostHog/wizard-workbench/tree/main/apps) repository. If the wizard runs successfully, you can compare the logs to the current release to see what changed. This will also confirm a safe rollback path.
 
 To roll back, [submit a PR](https://github.com/PostHog/wizard/pulls) that reverts the bad commits. The PR title must use a [conventional commit](https://www.conventionalcommits.org/) prefix (e.g. `revert: rollback to pre-X.Y.Z`). Once merged, [release-please](https://github.com/PostHog/wizard/blob/main/.github/workflows/release-please.yml) will auto-create a release PR with the version bump. Merge that release PR, and the [publish workflow](https://github.com/PostHog/wizard/blob/main/.github/workflows/publish.yml) will publish the reverted code to npm.
 
