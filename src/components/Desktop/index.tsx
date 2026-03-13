@@ -555,7 +555,7 @@ export default function Desktop() {
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                alt=""
+                                alt="Hedgehogs tending a garden of keyboard keys during the day that spell out POSTHOG. They're very dedicated to their work."
                                 width={1401}
                                 height={1400}
                                 className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} dark:hidden`}
@@ -567,11 +567,12 @@ export default function Desktop() {
                                           }
                                         : undefined
                                 }
+                                draggable={false}
                             />
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt=""
+                                alt="Hedgehogs tending a garden of keyboard keys at night that spell out POSTHOG. They're very dedicated to their work."
                                 width={1401}
                                 height={1400}
                                 className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} hidden dark:block`}
@@ -583,6 +584,7 @@ export default function Desktop() {
                                           }
                                         : undefined
                                 }
+                                draggable={false}
                             />
                         </div>
                     </div>
