@@ -24,7 +24,7 @@ We track whether a customer is paying for each product in Vitally using the `Pay
 
 ---
 
-## Quarterly book planning
+## TAM quarterly book planning
 
 At the start of each quarter, TAMs should prepare their book of business with the following constraints in mind:
 
@@ -49,6 +49,40 @@ Low engagement or an account being "difficult to work with" is not a reason to p
 - Champion left and you haven't re-established relationships
 - Low user activity or poor health score
 - You don't like working with them / they don't like you
+
+If an account is struggling on these dimensions, that's a signal you need to invest more effort – not hand them off. You should only hand off accounts that are in a **good state**.
+
+---
+
+## CSM quarterly book planning
+
+At the start of each quarter, CSMs should review their book of business with the following constraints in mind:
+
+**Target book size:** ~30 accounts accumulating to ~$1.5M ARR. CSM books are larger in account count than TAM books because the focus is retention rather than active expansion — these are fully-expanded customers where the goal is ensuring continued success and stickiness.
+
+**Coverage growth:** Coverage amount grows ~10% quarterly to match our growth targets. When rebalancing accounts (e.g. if accounts drop below the $20k threshold), your book will be brought up to the current quarter's target amount.
+
+**Segment tracking:** We use the `CSM Managed` Segment in Vitally to track this. CSMs should not assign this themselves — that's up to Dana or Charles.
+
+**Primary metric:** Your success is measured on [revenue retention (NRR)](/handbook/cs-and-onboarding/how-we-work#how-contractual-bonus-works---technical-csms), not expansion. The focus is on ensuring customers continue to get value from PostHog and remain happy with the products they're already paying for.
+
+### Accounts to remove from your book
+
+Before the quarter starts, review each account and remove those that meet any of the following criteria:
+
+- **Churned or dropped below $20k ARR** – same threshold as TAM accounts. Unless you have a documented, specific plan to recover them this quarter, they should come off your book.
+- **Expansion opportunity identified** – if an account is no longer fully expanded (e.g. they've dropped a primary product, or a new primary product has launched that they don't have), they should move to a TAM who can focus on getting them back to full adoption. Flag these to your Team Lead.
+- **No longer a good fit for CSM** – if the account's situation has fundamentally changed (e.g. major downsizing, pivoted away from their core use case), discuss with your Team Lead and Simon about the right path forward.
+
+### What is NOT a valid reason to hand off
+
+The same principles apply as for TAMs. Low engagement or difficult accounts are not a reason to pass them off — retention requires proactive effort. Specifically:
+
+- Account doesn't respond to your outreach
+- Champion left and you haven't re-established relationships
+- Low user activity or poor health score
+- You don't like working with them / they don't like you
+- Account feels "boring" because there's no expansion to pursue — retention IS the job
 
 If an account is struggling on these dimensions, that's a signal you need to invest more effort – not hand them off. You should only hand off accounts that are in a **good state**.
 
@@ -175,13 +209,14 @@ Every account handover should include a 15-30 minute call between the outgoing a
 
 ### When to use this
 
-- When a TAE-led customer is being handed over to a TAM after the initial contract is signed
-- When a TAM is taking over an account from another TAM or TAE mid-lifecycle
+- When a TAE-led customer is being handed over to a TAM or CSM after the initial contract is signed
+- When a TAM or CSM is taking over an account from another TAM, CSM, or TAE mid-lifecycle
+- When an account is transitioning between TAM and CSM (in either direction)
 - As a prep guide for the 15-30 minute handover call between outgoing and incoming owner
 
 ### Before the handover call
 
-The incoming TAM should prepare by reviewing the following in Vitally and SFDC before the call, so the handover conversation can focus on context that *isn't* in the data.
+The incoming TAM or CSM should prepare by reviewing the following in Vitally and SFDC before the call, so the handover conversation can focus on context that *isn't* in the data.
 
 #### Self-serve research (do this first)
 
@@ -212,7 +247,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 - [ ] **Any recent people changes?** Champions who left, new hires, reorgs
 - [ ] **General vibe?** Easy to work with? High-maintenance? Responsive or hard to reach?
 - [ ] **Preferred communication style?** Slack-first? Email? Regular calls or async?
-- [ ] **Has the customer been told about the handover?** If not, agree on how to introduce the new TAM
+- [ ] **Has the customer been told about the handover?** If not, agree on how to introduce the new owner
 
 #### 2. Commercial context
 
@@ -243,7 +278,7 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 - [ ] **Update Vitally** – ensure New Owner trait is set, update account plan note with handover context
 - [ ] **Save an account plan** – create or update the [account plan](/handbook/growth/sales/account-planning) as a Vitally note, incorporating handover insights
-- [ ] **Introduce yourself to the customer** – warm intro (ideally the TAE introduces you) or cold intro via Slack/email
+- [ ] **Introduce yourself to the customer** – warm intro (ideally the outgoing owner introduces you) or cold intro via Slack/email
 - [ ] **Follow up on any open items** – pick up in-flight proposals, unresolved tickets, or pending conversations
 
 ### Tips for a good handover
