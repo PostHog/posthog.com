@@ -1489,6 +1489,10 @@ export const handbookSidebar = [
                         name: 'Error Tracking cross-sell',
                         url: '/handbook/growth/cross-selling/error-tracking-cross-sell',
                     },
+                    {
+                        name: 'Proof of concepts',
+                        url: '/handbook/growth/cross-selling/proof-of-concepts',
+                    },
                 ],
             },
             {
