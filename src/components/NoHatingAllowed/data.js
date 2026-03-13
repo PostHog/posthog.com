@@ -5,23 +5,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 
 export const HomepageCards = [
     {
-        top: 'You enjoy "jumping on a quick call" with sales',
-        bottom: (
-            <>
-                Sorry, we don't force you to talk to anyone. But you can <Link to="/demo">watch a recorded demo</Link>{' '}
-                (at your own pace) or <Link to="/talk-to-a-human">request a personalized demo</Link> if you like.
-            </>
-        ),
-        color: '#FFD89E',
-        Image: (
-            <CloudinaryImage
-                width={250}
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/i_love_telemarketing_d72bc8079b.png"
-            />
-        ),
-        // ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
-    },
-    {
         top: 'You love needlessly wasting company money',
         bottom: (
             <>
@@ -83,23 +66,6 @@ export const HomepageCards = [
         // ImageSize: 'w-[230px] mt-6',
     },
     {
-        top: "You're desperate for commitment",
-        bottom: (
-            <>
-                Sadly, we don't offer annual contracts (unless you <Link to="/talk-to-a-human">ask for one</Link>
-                ).
-            </>
-        ),
-        color: '#DCE7D0',
-        Image: (
-            <CloudinaryImage
-                width={250}
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/commitment_issues_d433b343b5.png"
-            />
-        ),
-        // ImageSize: 'w-full mt-4',
-    },
-    {
         top: 'You loathe new features, and bug fixes',
         bottom: (
             <>
@@ -140,13 +106,21 @@ export const HomepageCards = [
         // ImageSize: 'w-[230px] mt-4',
     },
     {
-        top: 'You think CSMs are your friends',
-        bottom: <>Honey, those emails are automated.</>,
-        color: '#D9E1FC',
-        Image: (
-            <CloudinaryImage width={250} src="https://res.cloudinary.com/dmukukwp6/image/upload/csms_ce310839fd.png" />
+        top: 'You enjoy talking to non-technical sales people',
+        bottom: (
+            <>
+                Actually, we don't force you to talk to anyone to use PostHog. But you can <Link to="/demo">watch a recorded demo</Link>{' '}
+                (at your own pace) or <Link to="/talk-to-a-human">request a personalized demo</Link> if you like.
+            </>
         ),
-        // ImageSize: 'w-[230px]',
+        color: '#FFD89E',
+        Image: (
+            <CloudinaryImage
+                width={250}
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/i_love_telemarketing_d72bc8079b.png"
+            />
+        ),
+        // ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
     },
     {
         top: 'You enjoy sitting through hours of training more than using the product',
