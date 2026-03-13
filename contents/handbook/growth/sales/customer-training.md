@@ -1,7 +1,7 @@
 ---
 title: Running product training sessions
 sidebar: Handbook
-showTitle: true
+showTitle: false
 ---
 
 # Running product training sessions for managed accounts
@@ -70,7 +70,7 @@ This is the only session that's guaranteed. If they never show up for Session 2,
 
 ### Topics to cover
 
-#### Intro to PostHog (five min)
+#### Intro to PostHog (5 min)
 
 - We want to jump into the product as quickly as possible – keep this brief. It's not a sales pitch but rather an overview of the platform and why it can help product engineers build more successful products.
 
@@ -152,7 +152,7 @@ Ask the audience to build a Session Replay filter using PostHog AI or the UI.
 
 - Show subscriptions: schedule a weekly dashboard email to their team. (Single best way to keep PostHog in people's inboxes without any TAM effort.)
 
-#### Quick overview of what else exists (five min)
+#### Quick overview of what else exists (5 min)
 
 Don't demo any of these. Name them so the room knows what's available and that they're tied to events.
 
@@ -289,7 +289,7 @@ Build on what they learned in Session 1, applied to marketing use cases.
 
 - PostHog AI moment – "why are users dropping off between step 2 and 3?"
 
-#### Surveys (seven min)
+#### Surveys (7 min)
 
 - Create a popover survey targeting a real page or user segment.
 
@@ -301,7 +301,7 @@ Build on what they learned in Session 1, applied to marketing use cases.
 
 - PostHog AI moment – summarize responses using AI.
 
-#### Session Replay for marketing (five min)
+#### Session Replay for marketing (5 min)
 
 - Filter replays to users from a specific traffic source or landing page.
 
@@ -309,7 +309,7 @@ Build on what they learned in Session 1, applied to marketing use cases.
 
 - "Watch three replays of users who hit your pricing page but didn't sign up" is a strong closer for marketing audiences.
 
-#### Workflows (three min)
+#### Workflows (3 min)
 
 - Reach out to users at the right time based on their behavior.
 
