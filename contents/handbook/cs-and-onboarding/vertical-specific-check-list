@@ -1,0 +1,50 @@
+| title | sidebar | showTitle |
+| :--- | :--- | :--- |
+| Vertical-Specific Checklist | Handbook | true |
+
+While every customer is unique, most follow repeatable patterns based on their vertical. Use these vertical-specific checks to uncover more tailored "value nuggets" during your audit.
+
+Essential features and common configurations cover the most commonly used PostHog features and their configurations. Gotchas are small details that are easily overlooked during an account review and can cause long-term data integrity issues.
+
+## B2C
+
+### Ecommerce
+
+**Essential features and common configurations**
+* **Custom Event:** Ensure the core funnel is captured via custom events: `product_view`, `add_to_cart`, and `purchase`. 
+* **Funnel Insights:** 
+    * `product_view` -> `add_to_cart`
+    * `add_to_cart` -> `purchase`
+    * [Add other industry-standard funnels here]
+* **(more examples)**
+
+**Gotchas**
+* **Missing Internal User Filters:** Team members often test checkout flows on production. Without filters, these "test purchases" skew conversion rates and revenue metrics.
+* **Lack of Product Variant Tracking:** Most customers need to see behavior at the variant level (size, color, SKU). If they only track the parent product, they lose the granular data needed for inventory or preference analysis.
+
+### AI Services
+
+**Essential features and common configurations**
+* **(more examples)**
+
+**Gotchas**
+* **Example 1**
+* **Example 2**
+
+## B2B
+
+### Data Warehouse
+
+**Essential features and common configurations**
+* **[Placeholder text]**
+
+**Gotchas**
+* **[Placeholder text]**
+
+### Project Management
+
+**Essential features and common configurations**
+* **[Placeholder text]**
+
+**Gotchas**
+* **[Placeholder text]**
