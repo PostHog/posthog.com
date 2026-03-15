@@ -34,6 +34,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 - Adding the contact on LinkedIn and sending a very human video or audio message can work really well - even for technical people (use the LinkedIn mobile app).  
 - Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn’t an engineer to talk to us given engineers don’t want to.
 - If they submit a support request, jump in and respond yourself to try and build a relationship. 
+- Subscribe to your customers' newsletters, set up Google Alerts, use their products and follow their X or Reddit communities. This lets you time your outreach for when they've just shipped something - making it about them, not you. For example, if they just launched an AI feature, you can reach out the next day to the PM or engineer and congratulate them whilst they are energized and then connect it to a PostHog product they might not be using yet that helps them make their new product better. 
 - Ask the wider team for help - we have to get creative here! You'd be surprised how often somebody knows someone...
 
 > Before you do any of this stuff, [get to know](/handbook/onboarding/onboarding-team#account-analysis) your customer as well as you possibly can. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
