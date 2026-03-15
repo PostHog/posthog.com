@@ -667,6 +667,8 @@ function Privacy() {
                             <li>Salesforce - customer relationship management</li>
                             <li>Slack - internal communications tool</li>
                             <li>Zendesk - customer support tool</li>
+                            <li>OpenAI - AI model APIs and services </li>
+                            <li>Anthropic - AI model APIs and services</li>
                         </ul>
                         <p>
                           <strong>This list is meant to be representative and not exhaustive</strong>. We may engage additional or different service providers and partners over time as we see fit to support our business needs. 
