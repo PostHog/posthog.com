@@ -31,6 +31,7 @@ type SelectProps = {
     groups: SelectGroup[]
     dataScheme?: string
     className?: string
+    maxHeight?: string | number
 }
 
 const Icon = ({
@@ -92,6 +93,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             groups,
             className,
             dataScheme,
+            maxHeight,
         },
         ref
     ) => {
@@ -173,6 +175,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             position={appContainer ? 'popper' : undefined}
                             collisionBoundary={appContainer}
                             className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50]"
+                            style={maxHeight ? { maxHeight } : undefined}
                             data-scheme={dataScheme}
                         >
                             <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">
