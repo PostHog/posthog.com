@@ -2457,6 +2457,10 @@ export const docsMenu = {
                             url: '/docs/api/cohorts',
                         },
                         {
+                            name: 'Comments',
+                            url: '/docs/api/comments',
+                        },
+                        {
                             name: 'Dashboards',
                             url: '/docs/api/dashboards',
                         },
