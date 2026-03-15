@@ -18,7 +18,6 @@ import {
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { useApp } from '../../context/App'
-import useProduct from '../../hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { useWindow } from '../../context/Window'
 import TeamMember from 'components/TeamMember'
@@ -32,15 +31,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function CDP(): JSX.Element {
-    // Define the specific data products we want to display in order
-    const dataProducts = ['sql', 'data_warehouse', 'cdp', 'api', 'webhooks']
-
-    // Get all products and filter to only the data category ones we want
-    const allProducts = useProduct()
-    const products = Array.isArray(allProducts)
-        ? dataProducts.map((handle) => allProducts.find((product: any) => product.handle === handle)).filter(Boolean)
-        : []
-
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
@@ -169,7 +159,7 @@ export default function CDP(): JSX.Element {
                             </h2>
                         </>
                     ),
-                } as any)}
+                } as { header?: React.ReactNode })}
             >
                 {/* 
                 
@@ -287,6 +277,38 @@ export default function CDP(): JSX.Element {
                     classes="rounded"
                     zoom={true}
                 />
+
+                <h3>PostHog&apos;s integrated data warehouse</h3>
+                <p>
+                    PostHog includes an integrated data warehouse with enough in-built tools that your data never needs
+                    to travel anywhere else. You can query and model data directly in PostHog, or use it across tools
+                    such as feature flags, experiments, and more. This eliminates the need to stitch together multiple
+                    vendors, while also giving you the flexibility to export data via our CDP if you have specific
+                    tooling needs.
+                </p>
+                <p>
+                    Instead of managing separate tools for analytics, experimentation, feature flags, and warehousing,
+                    PostHog provides an integrated stack where data flows seamlessly between tools without leaving the
+                    warehouse. Companies like{' '}
+                    <Link to="/customers/headshotpro" state={{ newWindow: true }}>
+                        HeadshotPro
+                    </Link>
+                    ,{' '}
+                    <Link to="/customers/webshare" state={{ newWindow: true }}>
+                        Webshare
+                    </Link>
+                    , and{' '}
+                    <Link to="/customers/elevenlabs" state={{ newWindow: true }}>
+                        ElevenLabs
+                    </Link>{' '}
+                    use PostHog as their single source of truth, eliminating the complexity of managing multiple
+                    systems.
+                </p>
+                <p>
+                    <Link to="/warehouse-native" state={{ newWindow: true }}>
+                        Learn more about PostHog&apos;s integrated warehouse
+                    </Link>
+                </p>
 
                 <h3>Data stack products</h3>
                 <p>This is what we offer built-in - but feel free to bring your own tools if that's what you need.</p>

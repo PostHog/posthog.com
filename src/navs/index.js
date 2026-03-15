@@ -5163,6 +5163,10 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
+                    name: 'Integrated warehouse',
+                    url: '/docs/data-warehouse/integrated-warehouse',
+                },
+                {
                     name: 'SQL commands',
                     url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
