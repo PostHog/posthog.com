@@ -22,7 +22,9 @@ API queries enable you to query your data in PostHog. This is useful for:
 Using API queries requires:
 
 1. A PostHog project and its project ID which you can get from [your project settings](https://us.posthog.com/settings/project#variables).
-2. A personal API key for your project with the **Query Read** permission. You can create this in [your user settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys).
+2. An API key with query permissions. You can use either:
+   - A **personal API key** with the **Query Read** scope. Create one in [your user settings](https://us.posthog.com/settings/user-api-keys#personal-api-keys).
+   - A **project secret API key** with the `query:read` scope. This is ideal for server-to-server integrations where you don't want to tie access to a specific user. See the [API overview](/docs/api#project-secret-api-keys) for more details.
 
 ## Creating a query
 

@@ -21,6 +21,50 @@ import InstallAPI from '../integrate/_snippets/install-api.mdx'
 
 <InstallAPI />
 
+## Project secret API keys
+
+Project secret API keys (`phs_` prefix) are API keys scoped to a specific project rather than a user. They're useful for server-to-server integrations and automated workflows where you don't want to tie API access to an individual user account.
+
+### When to use project secret API keys
+
+- **Server-to-server integrations**: When your backend needs to query PostHog without a user context.
+- **Automated workflows**: For CI/CD pipelines or scheduled jobs that interact with the API.
+- **Shared team access**: When multiple systems need API access without depending on a specific user's credentials.
+
+### Differences from personal API keys
+
+| Feature | Personal API key (`phx_`) | Project secret API key (`phs_`) |
+|---------|---------------------------|----------------------------------|
+| Tied to | Individual user | Project (team) |
+| Scopes | Optional (legacy keys have no scopes) | Required (must specify explicit scopes) |
+| Wildcard scope | Supported (`*`) | Not supported |
+| Limit | 10 per user | 10 per project |
+
+### Available scopes
+
+Project secret API keys require explicit scopes. Currently supported scopes:
+
+- `query:read` – Read access to the query API
+- `query:write` – Write access to the query API
+
+### Authentication
+
+Use the `Authorization` header with a Bearer token:
+
+```bash
+curl \
+  -H "Authorization: Bearer phs_your_project_secret_api_key" \
+  <ph_app_host>/api/projects/:project_id/query/
+```
+
+Alternatively, you can pass the key in the request body as `secret_api_key` or `project_secret_api_key`.
+
+### Managing project secret API keys
+
+Project secret API keys can be created, listed, updated, rolled (rotated), and deleted via the API. Keys track when they were last used (`last_used_at`) and last rolled (`last_rolled_at`).
+
+To roll (rotate) a key, send a `POST` request to `/api/projects/:project_id/project_secret_api_keys/:key_id/roll/`. This generates a new key value while keeping the same key ID and configuration.
+
 ## Rate limiting
 
 Private `GET`, `POST`, `PATCH`, `DELETE` endpoints are rate limited. Public POST-only endpoints are **not** rate limited. A rule of thumb for whether rate limits apply is if the personal API key is used for authentication.
@@ -155,7 +199,7 @@ You can then just call the `"next"` URL to get the next set of results.
 PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
-- **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+- **Project secret API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key via the API or project settings.
 - **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
 - **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
