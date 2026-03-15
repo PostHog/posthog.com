@@ -177,7 +177,11 @@ client.Enqueue(posthog.Capture{
 // capturing events. It sends a `$groupidentify` event to create
 // or update the group. It will also create the group type if it
 // doesn't exist.
-posthog.groupIdentify('company', 'company_id_in_your_db')
+posthog.groupIdentify({
+  distinctId: 'user_distinct_id',
+  groupType: 'company',
+  groupKey: 'company_id_in_your_db'
+})
 
 // Once the group is created, you can associate events with it by
 // passing the `groups` property. The `groups` property is required
