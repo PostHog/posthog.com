@@ -44,6 +44,8 @@ For example:
 - If you choose **sum of revenue**, we calculate total revenue per user, then take the mean across users.
 - If you select **average revenue** (not supported yet, but coming soon), we first compute each user's average (total revenue / number of events), then average those values across users.
 
+You can also use custom [HogQL expressions](/docs/sql/expressions) as the aggregation method. This supports both numeric functions like `sum()` and `avg()` as well as non-numeric functions like `uniqExact()` and `count()`. For example, `uniqExact(properties.category)` counts the number of unique category values per user, even when the property contains strings.
+
 ### Ratio
 
 Use ratio metrics to calculate the relationship between two different metrics. This is useful when you want to measure metrics like revenue per user, items per order, or conversion rate with a custom denominator (different from the users exposed to the experiment).
