@@ -156,6 +156,8 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
+For how company laptops are managed after purchase, including replacements and returns, see the [laptop provisioning](/handbook/people/laptop-provisioning) page.
+
 #### Yubikey
 We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about how to get set up [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication).
 
