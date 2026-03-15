@@ -36,11 +36,14 @@ import { useLocation } from '@reach/router'
 import { getProseClasses, MARKDOWN_CONTENT_PATHS } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
+import { useLayoutData } from 'components/Layout/hooks'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { scrollToElement } from 'components/ScrollToElement'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 import { Blockquote } from 'components/BlockQuote'
@@ -618,6 +621,9 @@ function ReaderViewContent({
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
+    const { compact: layoutCompact } = useLayoutData()
+    const breakpoints = useBreakpoint()
+    const scrollOffset = layoutCompact ? -70 : breakpoints?.md ? -56 : -108
 
     // Check if this is a customer page and get customer key
     const isCustomerPage = appWindow?.path?.startsWith('/customers/')
@@ -675,10 +681,7 @@ function ReaderViewContent({
                 if (detailsParent) {
                     detailsParent.open = true
                 }
-                scrollElement.scrollTo({
-                    top: targetElement.offsetTop || 0,
-                    behavior: 'smooth',
-                })
+                scrollToElement(hash.replace('#', ''), scrollOffset, 'smooth')
             }
         }
 
@@ -689,7 +692,7 @@ function ReaderViewContent({
                 top: 0,
             })
         }
-    }, [appWindow?.path, hash])
+    }, [appWindow?.path, hash, scrollOffset])
 
     return (
         <SearchProvider>
