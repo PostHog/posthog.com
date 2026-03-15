@@ -172,8 +172,28 @@ This will publish the workflow and start delivering messages to your users when 
 
 Once the workflow is enabled, you can monitor your workflow in the **Metrics** and **Logs** tabs of the workflow builder.
 
+The **Metrics** tab shows an overview of your workflow's performance:
+
+| Metric | Description |
+| --- | --- |
+| **Started** | Total number of workflow runs started |
+| **In progress** | Total number of workflow runs currently in progress |
+| **Completed** | Total number of workflow runs completed |
+| **Emails sent** | Total number of emails attempted to be sent |
+
+For email workflows, a table below the overview shows a per-email breakdown with the following columns:
+
+| Column | Description |
+| --- | --- |
+| **Sent** | Total emails sent to recipients |
+| **Delivered** | Successfully delivered emails (sent minus bounced and blocked) |
+| **Opened** | Emails opened by recipients |
+| **Clicked** | Times links in emails were clicked |
+
+Click on an individual email node in the workflow builder to see additional per-node email metrics including **Bounced**, **Blocked**, and **Marked as spam**.
+
 To confirm your workflow is delivering messages, look for these signs:
-- In the **Metrics** tab, you should see a line chart showing the number of **succeeded** and **triggered** messages.
+- In the **Metrics** tab, check that the **Started** and **Completed** counts are increasing and the email metrics table shows deliveries.
 - In the **Logs** tab, you can see logs of recently triggered workflows. Confirm that there aren't any errors.
 - See the message delivered in your inbox.
 
