@@ -34,7 +34,7 @@ export const ToggleGroup = ({
         <>
             {!hideTitle && <label className="pt-1.5 text-[15px] block mb-1">{title}</label>}
             <RadixToggleGroup.Root
-                className={`flex space-x-px rounded p-1 bg-primary border border-primary ${className}`}
+                className={`flex space-x-px rounded overflow-hidden p-1 bg-primary border border-primary ${className}`}
                 type="single"
                 data-scheme="primary"
                 defaultValue={defaultValue}
