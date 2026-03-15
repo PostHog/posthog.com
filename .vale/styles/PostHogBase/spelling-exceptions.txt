@@ -24,6 +24,7 @@ backport
 backported
 backporting
 bcrypt
+bg
 boolean
 booleans
 bot
@@ -45,6 +46,7 @@ changesets
 chatbot
 chatbots
 checksummed
+cloudfront
 clonable
 cofounder
 composable
@@ -81,6 +83,7 @@ dev
 devfile
 devops
 dogfood
+displaay
 dotenv
 dotfiles
 downvoted
@@ -96,6 +99,7 @@ failsafe
 falsy
 fanbase
 favicon
+favicons
 faq
 frontend
 fullstack
@@ -108,6 +112,7 @@ hardcode
 hardcoded
 heatmap
 heatmaps
+hoggy
 hostname
 hostnames
 hotfix
@@ -122,6 +127,7 @@ lockfile
 lockfiles
 lookups
 loopback
+logomark
 matcher
 matchers
 memoization
@@ -142,6 +148,7 @@ mockups
 monorepo
 monorepos
 monospace
+monoline
 multiline
 mutex
 namespace
@@ -154,6 +161,7 @@ offboarded
 offboarding
 offsite
 offsites
+OTFs
 onboard
 onboarded
 onboarding
@@ -165,6 +173,7 @@ passwordless
 performant
 posthog.com
 plaintext
+PNGs
 playbook
 playbooks
 prebuild
@@ -199,6 +208,7 @@ runbook
 runbooks
 runtime
 runtimes
+semibold
 serverless
 sidepanel
 sidepanels
@@ -235,6 +245,7 @@ tooltips
 toolchain
 toolkit
 truthy
+uncomment
 unminify
 unminified
 uptime
@@ -247,6 +258,7 @@ viewports
 waitlist
 walkthrough
 walkthroughs
+webfont
 webhook
 webhooks
 webserver
