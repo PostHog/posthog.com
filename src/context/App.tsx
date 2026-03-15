@@ -528,6 +528,22 @@ const appSettings: AppSettings = {
             },
         },
     },
+    '/code': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     start: {
         size: {
             min: {

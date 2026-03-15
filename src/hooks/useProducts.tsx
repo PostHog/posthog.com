@@ -21,6 +21,7 @@ import { revenueAnalytics } from './productData/revenue_analytics'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
+import { posthogCode } from './productData/code'
 
 const initialProducts = [
     productAnalytics,
@@ -39,6 +40,7 @@ const initialProducts = [
     logs,
     workflows,
     endpoints,
+    posthogCode,
 ]
 
 export default function useProducts() {
