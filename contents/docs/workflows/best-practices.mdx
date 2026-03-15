@@ -71,7 +71,7 @@ Before a full rollout: test with internal users or a small percentage of real us
 
 ### Monitor and log
 
-Ensure that failures (e.g. email bounce, webhook error) are captured and surfaced. When facing a problem, check the “[Troubleshooting & FAQs](/docs/workflows/troubleshooting)” section for Workflows.
+Ensure that failures (e.g. email bounce, webhook error) are captured and surfaced. Recipients who experience hard bounces (permanent delivery failures) are automatically opted out of future emails, which helps maintain your sender reputation and deliverability. When facing a problem, check the “[Troubleshooting & FAQs](/docs/workflows/troubleshooting)” section for Workflows.
 
 For long-running workflows (with delays), track user state (which step they are in), and provide a way to debug or abort if something goes wrong.
 Periodically review metrics: how many messages sent, how many workflows triggered, bounce/failure rate, etc.
