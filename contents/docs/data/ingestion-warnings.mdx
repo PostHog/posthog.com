@@ -35,6 +35,7 @@ List of ingestion warnings:
 - [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
+- [Event rejected due to schema validation failure](#event-rejected-due-to-schema-validation-failure)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -85,3 +86,16 @@ The replay event timestamp is more than 7 days in the future and the session rep
 ## Invalid set operations on exception events
 
 The `$set` or `$set_once` properties are ignored on exception events and should not be sent.
+
+## Event rejected due to schema validation failure
+
+This warning appears when an event is rejected because it doesn't match an enforced [event schema](/docs/product-analytics/schema-management#enforcing-schemas-at-ingestion). When schema enforcement mode is set to "reject" for an event definition, PostHog validates incoming events against the schema's required properties before ingestion.
+
+Events can be rejected for two reasons:
+
+- **Missing required property** - A property marked as required in the schema is not present on the event
+- **Type mismatch** - A property value doesn't match the expected type (e.g., a string where a number is expected)
+
+The warning details show the event name, distinct ID, event UUID, and which properties caused the rejection.
+
+To fix this, update your instrumentation to include all required properties with the correct types, or adjust the schema enforcement settings in **Data Management** > **Events**.
