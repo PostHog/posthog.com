@@ -28,6 +28,21 @@ Filtering out these sorts of users can be especially important for large organiz
 
 To make it easier to get accurate insights, PostHog includes tools to filter internal users out — and here’s how to use them. 
 
+## Automatic filtering for new teams
+
+New PostHog teams automatically have internal user filtering set up. When you create a new team, PostHog:
+
+1. Creates a cohort called **"Internal / Test users"** that contains users with the `$internal_or_test_user` person property set to `true`.
+2. Configures your test account filters to exclude this cohort by default.
+
+To mark someone as an internal or test user, set the `$internal_or_test_user` property to `true` on their person profile. They'll automatically be added to the cohort and filtered out of your analytics.
+
+The steps below are for teams that:
+
+- Were created before this automatic setup was available
+- Want to customize filtering beyond the default cohort
+- Need to add additional filters on top of the automatic cohort
+
 ## Step 1: Navigate to project settings
 
 PostHog identifies internal users on a project-by-project basis, so head to [your project setting](https://us.posthog.com/settings/project#internal-user-filtering) to get started. If your PostHog instance spans multiple projects then you must repeat this tutorial for each project. 
