@@ -1002,6 +1002,12 @@ export const SparksJoyItems = {
             iconName: null,
             customIcon: <IconDictator />,
         },
+        {
+            label: 'Brick Break',
+            link: '/sparks-joy/brick-break',
+            iconName: null,
+            customIcon: null,
+        },
     ],
     notGames: [
         {
