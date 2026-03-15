@@ -17,9 +17,14 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
             type: 'item',
             disabled: isExternal,
             children: isExternal ? (
-                <span>Open in new PostHog window</span>
+                <span className="px-2.5">Open in new PostHog window</span>
             ) : (
-                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
+                <Link
+                    to={url}
+                    state={{ ...state, newWindow: true }}
+                    contextMenu={false}
+                    className="w-full h-full flex items-center px-2.5 no-underline text-primary"
+                >
                     Open in new PostHog window
                 </Link>
             ),
@@ -27,14 +32,22 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
         {
             type: 'item',
             children: (
-                <a href={url} target="_blank" rel="noreferrer">
+                <a
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full h-full flex items-center px-2.5 no-underline text-primary"
+                >
                     Open in new browser tab
                 </a>
             ),
         },
         {
             type: 'item',
-            children: <span onClick={() => navigator.clipboard.writeText(fullUrl)}>Copy link address</span>,
+            children: <span className="px-2.5">Copy link address</span>,
+            onClick: () => {
+                navigator.clipboard.writeText(fullUrl)
+            },
         },
     ]
 }
