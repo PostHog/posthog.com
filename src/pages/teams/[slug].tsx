@@ -655,7 +655,7 @@ export default function TeamPage(props: TeamPageProps) {
                                             <Hedgehog />
                                         </li>
                                     ))}
-                                    {hedgehogPercentage && (
+                                    {hedgehogPercentage > 0 && (
                                         <li
                                             style={{
                                                 width: hedgehogPercentage,
