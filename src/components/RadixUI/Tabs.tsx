@@ -46,6 +46,7 @@ const TabsContext = React.createContext<TabSize>('sm')
 interface PresentationModeContextValue {
     isPresenting: boolean
     isPortrait?: boolean
+    isThumbnail?: boolean
 }
 
 const PresentationModeContext = React.createContext<PresentationModeContextValue>({ isPresenting: false })
