@@ -53,7 +53,6 @@ GithubIcon
 GlossaryElement
 Heading
 Home
-HostingOption
 Icons
 ImageBlock
 IngestionPipelinesList
@@ -91,8 +90,6 @@ Savings
 SelfHost
 PricingCTA
 ProductAnchorNavbar
-ProductFeature
-ProductFeaturePlugin
 ProductFooter
 ProductIcons
 ProductPage
