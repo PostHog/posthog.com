@@ -104,7 +104,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 | **Your account** | [Account settings](https://us.posthog.com/settings/user#user-delete) | Account is deleted immediately; all stored data about you is cleared within 30 days. See [deleting your account](/docs/settings/account-settings#deleting-your-account). |
 | **Projects** | [Project settings](https://us.posthog.com/settings/project#project-delete) | All data under the project (including events) are automatically removed |
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | All data under the organization's projects (including events) are automatically removed |
-| **Persons** | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten) | When a person is deleted, all events for that person can be deleted |
+| **Persons** | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten) | When a person is deleted, all events and [session recordings](/docs/session-replay) for that person can be deleted |
 
 ### Right to be forgotten
 
@@ -146,17 +146,17 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter:
+To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter. To also delete their session recordings, add `delete_recordings=true`:
 
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true" \
+curl -X DELETE "https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true&delete_recordings=true" \
      -H "Authorization: Bearer <personal_api_key>"
 ```
 
 ```javascript
-fetch('https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true', {
+fetch('https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true&delete_recordings=true', {
   method: 'DELETE',
   headers: {
     'Authorization': 'Bearer <personal_api_key>'
@@ -174,7 +174,7 @@ api_key = "<personal_api_key>"
 project_id = "<project_id>"
 person_uuid = "<person_uuid>"
 
-url = "https://app.posthog.com/api/projects/{}/persons/{}?delete_events=true".format(
+url = "https://app.posthog.com/api/projects/{}/persons/{}?delete_events=true&delete_recordings=true".format(
     project_id, person_uuid
 )
 headers = {"Authorization": "Bearer {}".format(api_key)}
@@ -185,7 +185,7 @@ print(response.json())
 
 </MultiLanguage>
 
-This request will delete all events of the person(s) that have been captured before the deletion request.
+This request deletes all events of the person(s) captured before the deletion request. When `delete_recordings=true` is set, all session recordings for the person are permanently destroyed using crypto-shredding, which irreversibly deletes the encryption keys making recordings unreadable. This process cannot be undone.
 
 ### Manual data deletion
 
