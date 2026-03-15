@@ -59,6 +59,54 @@ function Terms() {
             const h2s = fullTerms.querySelectorAll(':nth-child(odd) h2')
             setHeaders(Array.from(h2s) as HTMLElement[])
         }
+
+        const beforePrint = () => {
+            // Target Gatsby's root wrappers specifically
+            document
+                .querySelectorAll('#gatsby-focus-wrapper, #___gatsby, main, [class*="overflow"], body > div')
+                .forEach((el) => {
+                    const htmlEl = el as HTMLElement
+                    htmlEl.style.overflow = 'visible !important'
+                    htmlEl.style.height = 'auto !important'
+                    htmlEl.style.maxHeight = 'none !important'
+                })
+
+            // Also walk all elements for any remaining overflow/height constraints
+            document.body.classList.add('printing')
+            document.querySelectorAll('*').forEach((el) => {
+                const htmlEl = el as HTMLElement
+                const computed = window.getComputedStyle(htmlEl)
+                if (
+                    computed.overflow === 'hidden' ||
+                    computed.overflowY === 'hidden' ||
+                    computed.height.includes('vh')
+                ) {
+                    htmlEl.dataset.printFixed = 'true'
+                    htmlEl.style.overflow = 'visible'
+                    htmlEl.style.height = 'auto'
+                }
+            })
+        }
+
+        const afterPrint = () => {
+            document.body.classList.remove('printing')
+
+            // Restore overridden elements
+            document.querySelectorAll('[data-print-fixed]').forEach((el) => {
+                const htmlEl = el as HTMLElement
+                htmlEl.style.overflow = ''
+                htmlEl.style.height = ''
+                delete htmlEl.dataset.printFixed
+            })
+        }
+
+        window.addEventListener('beforeprint', beforePrint)
+        window.addEventListener('afterprint', afterPrint)
+
+        return () => {
+            window.removeEventListener('beforeprint', beforePrint)
+            window.removeEventListener('afterprint', afterPrint)
+        }
     }, [])
 
     return (
@@ -194,10 +242,67 @@ function Terms() {
                     </Tweet>
                 </div>
 
+                <style>{`
+                 //style for print - hide all non-essential elements and make the terms easy to read on paper or PDF
+      @media print {
+        nav, footer, header, .cookie-banner, [class*="banner"] {
+            display: none !important;
+        }
+        .table-of-contents {
+            display: none !important;
+        }
+        button {
+            display: none !important;
+        }
+        html, body {
+            height: auto !important;
+            overflow: visible !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 12pt;
+            color: black;
+        }
+        * {
+            max-width: 100% !important;
+            overflow: visible !important;
+        }
+        .full-terms {
+            display: block !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            height: auto !important;
+        }
+        .full-terms > div {
+            width: 100% !important;
+            padding: 0 8px !important;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .full-terms > div:nth-child(even) {
+            border-left: none !important;
+            font-style: italic;
+            opacity: 0.7;
+        }
+             [class*="@container"], [class*="container"] {
+        container-type: normal !important;
+    }
+    }
+  `}</style>
                 <h2 id="full-terms" className="text-[2.5rem] mb-4 md:mb-8 px-4 md:text-center">
                     The full <span className="text-red dark:text-yellow">(but still easy to understand)</span> terms
                 </h2>
-
+                <div className="text-center mb-4">
+                    <button
+                        onClick={() => {
+                            window.print()
+                        }}
+                        className="bg-primary border-solid text-primary-dark px-4 py-2 rounded text-sm font-semibold hover:opacity-80 shadow-lg"
+                    >
+                        🖨️ Print / Save as PDF
+                    </button>
+                </div>
                 <div className="max-w-2xl mx-auto">
                     <p className="">For your sanity, we've summarized each paragraph of legalese with plain English.</p>
                     <p className=" text-secondary">
@@ -224,7 +329,6 @@ function Terms() {
                     </p>
                     <p className=" text-secondary">(Can you believe we actually had to clarify this?)</p>
                 </div>
-
                 <div className="pt-4">
                     <ol
                         data-scheme="primary"
@@ -248,7 +352,6 @@ function Terms() {
                         ))}
                     </ol>
                 </div>
-
                 <div className={`${termsClasses}`}>
                     <div>
                         <h2 id="intro" className="mb-1 text-4xl">
