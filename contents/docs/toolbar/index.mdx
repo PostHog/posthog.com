@@ -182,7 +182,33 @@ Ad blockers can block the toolbar from loading or displaying. Turning off your a
 
 ### Toolbar authentication issue (with reverse proxy)
 
-If you are having issues authenticating your toolbar and are using a [reverse proxy](/docs/advanced/proxy), be sure to pass the proper `ui_host` config parameter when initializing (like `ui_host: 'https://us.posthog.com'`). This ensures PostHog makes the authentication request to the correct host.
+If you are using a [reverse proxy](/docs/advanced/proxy), you may encounter authentication issues with the toolbar, such as:
+
+- Unable to authenticate the toolbar
+- OAuth redirects failing or going to the wrong URL
+- A modal appearing asking you to configure `ui_host`
+
+To resolve these issues, set the `ui_host` config parameter when initializing PostHog. This ensures toolbar OAuth redirects to the correct PostHog app URL instead of your proxy:
+
+<MultiLanguage>
+
+```js file=US
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://your-proxy.com',
+  ui_host: 'https://us.posthog.com'
+})
+```
+
+```js file=EU
+posthog.init('<ph_project_api_key>', {
+  api_host: 'https://your-proxy.com',
+  ui_host: 'https://eu.posthog.com'
+})
+```
+
+</MultiLanguage>
+
+If `ui_host` is not configured and toolbar authentication fails, a configuration modal will appear with guidance on how to set this up.
 
 ### Toolbar not working with older Nuxt versions
 
