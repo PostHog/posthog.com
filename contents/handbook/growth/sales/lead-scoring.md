@@ -38,7 +38,8 @@ Campaigns are all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nL
 Manual (Lorena):
 1. [Engaged on LinkedIn](https://app.clay.com/workspaces/268768/workbooks/wb_0t9o249G9vVhMBfEZaB)
 2. Closed lost opportunities (new biz _and_ renewals) 5+ months old where reason was 'unresponsive'
-3. Churned accounts that churned 5+ months ago 
+3. Churned accounts that churned 5+ months ago
+4. Event attendees
 
 Automated (Abhischek):
 1. [Warmbound](https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2) - $100-499 MRR at some point in the account's history
