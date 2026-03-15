@@ -9,6 +9,12 @@ declare module '*.png' {
     export default content
 }
 
+declare module '*.mdx' {
+    import type { ComponentType } from 'react'
+    const component: ComponentType
+    export default component
+}
+
 declare global {
     interface Window {
         __setPreferredTheme: (theme: string) => void

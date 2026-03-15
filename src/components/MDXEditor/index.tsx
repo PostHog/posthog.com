@@ -122,8 +122,8 @@ export default function MDXEditor({
     }, [activeEditor])
 
     useEffect(() => {
-        setIsSSR(false)
-    }, [])
+        if (!staticOnly) setIsSSR(false)
+    }, [staticOnly])
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')

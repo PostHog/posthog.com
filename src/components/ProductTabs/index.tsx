@@ -45,6 +45,7 @@ const Image = ({
 interface ProductTabsProps {
     productHandles: string[]
     className?: string
+    selectedStage?: string
 }
 
 interface Product {

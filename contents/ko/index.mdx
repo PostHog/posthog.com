@@ -1,0 +1,190 @@
+---
+title: 홈
+template: custom
+images:
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_light_998b77b1a0.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_dark_43ef120c80.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_dark_5610c405b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_light_97bc52e8f9.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_dark_8f465ecfaa.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_light_3dfb9f57e9.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_dark_a492c37d9c.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_light_313729cacc.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_dark_20eb61e4b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_light_6a7b1dfc70.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_dark_f091ddfb9b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_light_703f700a5b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_dark_ef481dc7a5.png
+---
+
+
+<div class="text-center @xl:text-left">
+
+<h1 class="[&_p]:m-0 flex gap-2 flex-wrap justify-center @xl:justify-start">
+    <Logo />
+</h1>
+
+<span class="text-base font-medium mb-0">프로덕트 엔지니어를 위한 도구</span>
+
+<CTAs />
+
+궁금한 점이 있으신가요? [데모 보기](/demo) 아니면 [사람과 상담](/talk-to-a-human).
+
+
+</div>
+
+<header class="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+
+## 앱 둘러보기 <span class="text-secondary text-sm font-normal tracking-normal">회사 단계별</span>
+
+<aside class="hidden @xl:inline-flex">
+
+<span class="[&_p]:m-0">
+    <Link to="/products">앱 라이브러리 보기</Link> (<AppCount />)
+</span>
+
+</aside>
+</header>
+
+<p class="text-secondary text-sm mt-1 mb-0">PostHog는 현재 영어로만 제공됩니다. 이 페이지는 안내 목적으로만 제공됩니다.</p>
+
+<CompanyStageTabs />
+
+<div id="customers">
+
+## 누가 PostHog를 사용하나요?
+
+<p class="@xl:mr-52">저희 유료 고객 중 일부입니다. (네, 실제로 사용 중이에요. 2년 전에 한번 써본 개발자가 아니라요.)</p>
+
+<Customers />
+
+</div>
+
+<div class="space-y-8 pt-2">
+
+<div id="customer-infrastructure">
+
+## 데이터 팀을 위한, 프로덕트 팀도 사랑하는 PostHog 데이터 스택
+
+<div class="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative pb-[120px] @md:pb-4 @md:pr-[220px] @lg:pr-6 @lg:pb-[120px]">
+
+<p class="my-0 [&_p]:my-0">
+
+**기본 제공, Product OS에 들어 있는 것:**
+
+</p>
+
+<span class="[&_ul]:mb-0">
+
+-   데이터 웨어하우스 <TooltipDW />
+-   120개 이상의 소스/목적지
+-   SQL 에디터 + BI + 데이터 시각화
+-   사용자 활동 피드 (CDP-lite)
+-   API, 웹훅
+
+</span>
+
+<ImageDW />
+
+</div>
+
+고객이 제품을 어떻게 쓰는지 분석할 때는 _전체 데이터_를 봐야 해요. 제품 밖에서 일어나는 일들까지요.
+
+여기에는 _제품 밖에서_ 일어나는 고객 정보도 포함됩니다:
+
+-   Stripe 결제 내역
+-   에러 트래킹 도구의 예외 정보
+-   고객 지원 플랫폼의 티켓
+
+모든 데이터를 한 곳에 모아야 다음에 뭘 만들지 제대로 결정할 수 있어요.
+
+PostHog Product OS는 단순한 분석 도구가 아니에요 – 한눈에 파악할 수 있게 해주는 도구 모음입니다.
+
+<ButtonDataStack />
+
+</div>
+
+<div id="pricing">
+
+## 사용량 기반 가격 책정
+
+<ImageMoney />
+
+저희 철학은 간단해요: 가격 걱정 없이 쓰셔야 한다는 거죠.
+
+유료 제품도 쓰신 만큼만 내시면 되고, 월 무료 한도도 넉넉해요. 실제로 고객 98%는 무료로 쓰고 계십니다.
+
+저희는 스케일 키워도 제일 싸게 쓰실 수 있게 할 거예요. PostHog 쓰는 건 당연한 선택이어야 하고, 영업이랑 "잠깐 통화"할 필요 없습니다.
+
+주요 제품 요금 예시:
+
+<Pricing />
+
+<ButtonPricing />
+
+</div>
+
+<div id="ai">
+
+## "AI가 데이터 분석과 제품 개발을 어떻게 더 빠르게 도와줄 수 있을까요?"
+
+저희는 여러 팀에서 다양한 방향으로 AI를 개발하고 있어요. PostHog AI는 PostHog 전체에서 쓰이고, 단순히 인사이트만 뽑아주는 게 아니에요.
+
+PostHog AI는 정보 수집과 요약 같은 반복 작업을 자동화하고, 곧 버그 수정과 코드 개선까지 할 수 있게 될 거예요
+
+<ButtonAI />
+
+</div>
+
+<div id="why-posthog">
+
+## 왜 PostHog인가요?
+
+저희가 다른 회사와 다른 점이 몇 가지 있습니다:
+
+- **투명성.** 회사 핸드북, 영업 매뉴얼, 회사 전략 모두 공개돼 있어요.
+- **빠른 속도.** 변경 로그를 확인해보세요.
+- **_진짜_ 기술 지원.** 저희 서포트 팀원들은 다 엔지니어 출신입니다.
+
+<ButtonAbout />
+
+</div>
+
+<div id="bedtime-reading">
+
+## 잠들기 전 읽을거리
+
+<ImageReading1 />
+
+아직 여기 계신가요? 그럼 재미있는 링크 몇 개 드리겠습니다:
+
+<ImageReading2 />
+
+-   [demo.mov](/demo)
+-   [기술 문서](/docs)
+-   [API](/docs/api)
+-   [질문하기](/questions)
+-   [PostHog의 스몰 팀](/teams)
+
+</div>
+
+<div id="shameless-cta">
+
+## 뻔뻔한 CTA
+
+<CTA />
+
+</div>
+</div>
+
+<HomeHitCounter />
