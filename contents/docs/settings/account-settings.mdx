@@ -39,7 +39,24 @@ To enable 2FA, go to [your account settings](https://us.posthog.com/settings/use
 
 ## Notifications
 
-You can choose which email notifications you receive in [your account settings](https://us.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notification, such as [Alerts](/docs/alerts), have separate configurations in each product.
+You can choose which email notifications you receive in [your account settings](https://us.posthog.com/settings/user#notifications) under **Notifications**. You can enable or disable specific notifications with toggles. Product-specific notifications, such as [Alerts](/docs/alerts), have separate configurations in each product.
+
+Available notifications include:
+
+- **Security alerts** - Password changes, 2FA, login activity, and API key exposure. Always enabled.
+- **Weekly digest** - A summary of activity across your organization, with per-project controls.
+- **Data pipeline errors** - Alerts when destinations or batch exports fail, with a configurable failure rate threshold.
+- **Issue assigned** - Notifies you when an [Error Tracking](/docs/error-tracking) issue is assigned to you or your role.
+- **Error Tracking weekly digest** - A weekly summary of exceptions across your projects, sent every Monday.
+- **Comment mentions** - Notifies you when someone mentions you in a discussion.
+- **Private API key exposure** - Alerts when private API keys are publicly exposed.
+- **Materialized view sync failures** - Alerts when a materialized view fails to sync.
+
+### Error Tracking weekly digest
+
+The Error Tracking weekly digest sends a weekly email every Monday summarizing exceptions caught across your projects. The email is organized by organization, with a section for each enabled project.
+
+You can select which projects to include in the digest under [**Notifications**](https://us.posthog.com/settings/user#notifications). If you haven't selected any projects, PostHog automatically picks the project with the most exceptions on the first digest run. Once you manually select projects, this automatic selection won't happen.
 
 ## Theming and customization
 
