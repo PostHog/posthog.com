@@ -25,51 +25,61 @@ const mapVerbsColor = {
     delete: 'red',
 }
 
-// Divider component for visual separation
-const Divider = ({ className = '' }) => <hr className={`border-0 border-t border-primary my-6 ${className}`} />
+// Lightweight divider between endpoint sections
+const SectionDivider = ({ className = '' }) => (
+    <hr className={`border-0 border-t border-primary/15 my-6 ${className}`} />
+)
 
-// Section divider with more spacing for major sections
-const SectionDivider = ({ className = '' }) => <hr className={`border-0 border-t-2 border-primary my-8 ${className}`} />
+// Lightweight label for sub-sections (replaces heavy h4s)
+const SectionLabel = ({ children }) => (
+    <p className="text-[13px] font-semibold uppercase tracking-wide text-primary/50 mb-2 mt-0">{children}</p>
+)
 
 function Endpoints({
     paths,
+    items,
     containerRef,
 }: {
     paths: Record<string, Record<string, unknown>>
+    items: Array<{ httpVerb: string; pathName: string; operationId: string }>
     containerRef: React.RefObject<HTMLDivElement>
 }) {
     return (
         <div>
             <h3>Endpoints</h3>
-            <table className="table-auto">
-                <tbody className="list-none m-0 p-0 flex flex-col">
-                    {Object.entries(paths).map(([path, value]) => (
-                        <React.Fragment key={path}>
-                            {Object.keys(value as Record<string, unknown>).map((verb) => (
-                                <tr key={verb} className="border-0">
-                                    <td className="py-1 px-0">
-                                        <code
-                                            className={`method text-${
-                                                mapVerbsColor[verb as keyof typeof mapVerbsColor]
-                                            }`}
-                                        >
-                                            {verb.toUpperCase()}
-                                        </code>
-                                    </td>
-                                    <td className="py-1 px-4">
-                                        <ElementScrollLink
-                                            id={pathID(verb, path)}
-                                            label={<code>{path.replaceAll('{', ':').replaceAll('}', '')}</code>}
-                                            element={containerRef}
-                                            className="cursor-pointer hover:underline"
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-                        </React.Fragment>
-                    ))}
-                </tbody>
-            </table>
+            <div className="flex flex-col gap-0.5 text-sm">
+                {Object.entries(paths).map(([path, value]) => (
+                    <React.Fragment key={path}>
+                        {Object.keys(value as Record<string, unknown>).map((verb) => {
+                            const item = items.find((i) => i.httpVerb === verb && i.pathName === path)
+                            return (
+                                <ElementScrollLink
+                                    key={verb}
+                                    id={pathID(verb, path)}
+                                    element={containerRef}
+                                    className="cursor-pointer hover:bg-accent/50 rounded px-2 py-1.5 -mx-2 flex items-center gap-2 group"
+                                    label={
+                                        <>
+                                            <code
+                                                className={`method shrink-0 text-xs font-bold w-[56px] text-center text-${
+                                                    mapVerbsColor[verb as keyof typeof mapVerbsColor]
+                                                }`}
+                                            >
+                                                {verb.toUpperCase()}
+                                            </code>
+                                            <span className="text-primary/80 group-hover:text-primary text-sm">
+                                                {item
+                                                    ? generateName(item)
+                                                    : path.replaceAll('{', ':').replaceAll('}', '')}
+                                            </span>
+                                        </>
+                                    }
+                                />
+                            )
+                        })}
+                    </React.Fragment>
+                ))}
+            </div>
         </div>
     )
 }
@@ -126,14 +136,19 @@ const verbMap = {
     delete: 'Delete',
 }
 function generateName(item) {
-    let name = item.operationId.split('_')
-    name = name.slice(0, name.length - 1).join(' ')
-    name = name.replace(' partial', '')
+    const parts = item.operationId.split('_')
+    // Last segment is the verb suffix (_list, _create, _retrieve, etc.) — strip it
+    const nameParts = parts.slice(0, parts.length - 1)
+    // Strip action words that duplicate the HTTP verb or are OpenAPI suffixes
+    const verb = verbMap[item.httpVerb]?.toLowerCase()
+    const actionWords = new Set([verb, 'partial', 'create', 'retrieve', 'list', 'destroy', 'update', 'delete'])
+    const cleaned = nameParts.filter((p) => !actionWords.has(p)).join(' ')
+
     if (item.operationId.includes('_list')) {
-        return 'List all ' + name.toLowerCase()
+        return 'List all ' + cleaned.toLowerCase()
     }
 
-    return verbMap[item.httpVerb] + ' ' + name.toLowerCase()
+    return verbMap[item.httpVerb] + ' ' + cleaned.toLowerCase()
 }
 
 function pathID(verb, path) {
@@ -157,87 +172,63 @@ function Params({ params, objects, object, depth = 0 }) {
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
                     <li key={index} className="py-3 border-b border-primary last:border-0">
-                        <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
-                            <div className="flex flex-col">
+                        <div>
+                            <div className="flex items-baseline gap-2 flex-wrap">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
-                                {param.schema.items?.$ref && (
-                                    <>
-                                        {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
-                                            <div
-                                                type="link"
-                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-accent hover:bg-primary  hover:bg-accent-hover leading-[8px] text-black dark:text-white"
-                                                onClick={() => {
-                                                    setOpenSubParams(
-                                                        openSubParams.filter((item) => item !== param.schema.items.$ref)
-                                                    )
-                                                }}
-                                            >
-                                                <svg
-                                                    className="fill-current opacity-90 group-hover:opacity-100"
-                                                    width="16"
-                                                    height="5"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <title>Click to close</title>
-                                                    <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
-                                                </svg>
-                                            </div>
-                                        ) : (
-                                            <>
-                                                <div
-                                                    type="link"
-                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-primary border hover:bg-primary hover:bg-accent-hover leading-[8px] text-black dark:text-white"
-                                                    onClick={() =>
-                                                        setOpenSubParams([...openSubParams, param.schema.items.$ref])
-                                                    }
-                                                >
-                                                    <svg
-                                                        className="fill-current opacity-50 group-hover:opacity-75"
-                                                        width="16"
-                                                        height="5"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <title>Click to open</title>
-                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.80 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
-                                                    </svg>
-                                                </div>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </div>
-                            <div className="">
-                                <div>
-                                    <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                        {param.schema.type}
+                                {(param.schema.type || param.schema.$ref || param.schema.items) && (
+                                    <span className="type bg-accent inline-block px-[4px] py-[2px] text-xs rounded-sm text-primary/70">
+                                        {param.schema.type ||
+                                            (param.schema.$ref ? 'object' : null) ||
+                                            (param.schema.items ? 'array' : 'any')}
                                     </span>
-                                </div>
-                                {param.schema.default !== undefined && param.schema.default !== null && (
-                                    <>
-                                        <div>
-                                            <span className="text-sm">
-                                                Default: <code>{String(param.schema.default)}</code>
-                                            </span>
-                                        </div>
-                                    </>
                                 )}
                                 {param.schema.enum && (
-                                    <>
-                                        <div className="text-sm">
-                                            One of:{' '}
-                                            {param.schema.enum
-                                                .filter((item) => item && item !== '')
-                                                .map((item) => (
-                                                    <code className="mr-1" key={item}>
-                                                        "{item}"
-                                                    </code>
-                                                ))}{' '}
-                                        </div>
-                                    </>
+                                    <span className="text-xs text-primary/60">
+                                        One of:{' '}
+                                        {param.schema.enum
+                                            .filter((item) => item && item !== '')
+                                            .map((item) => (
+                                                <code className="mr-1" key={item}>
+                                                    "{item}"
+                                                </code>
+                                            ))}
+                                    </span>
+                                )}
+                                {param.schema.default !== undefined && param.schema.default !== null && (
+                                    <span className="text-xs text-primary/60">
+                                        Default: <code>{String(param.schema.default)}</code>
+                                    </span>
                                 )}
                             </div>
+                            {param.schema.items?.$ref && (
+                                <button
+                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center bg-accent hover:bg-accent-hover leading-[8px] text-black dark:text-white"
+                                    onClick={() => {
+                                        if (openSubParams.indexOf(param.schema.items.$ref) > -1) {
+                                            setOpenSubParams(
+                                                openSubParams.filter((item) => item !== param.schema.items.$ref)
+                                            )
+                                        } else {
+                                            setOpenSubParams([...openSubParams, param.schema.items.$ref])
+                                        }
+                                    }}
+                                >
+                                    <svg
+                                        className="fill-current opacity-60 group-hover:opacity-100"
+                                        width="16"
+                                        height="5"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <title>
+                                            {openSubParams.indexOf(param.schema.items.$ref) > -1
+                                                ? 'Collapse'
+                                                : 'Expand'}
+                                        </title>
+                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
+                                    </svg>
+                                </button>
+                            )}
                         </div>
 
                         {param.schema.items?.$ref && (
@@ -271,14 +262,13 @@ function Parameters({ item, objects }) {
         <>
             {pathParams?.length > 0 && (
                 <div>
-                    <h4>Path parameters</h4>
+                    <SectionLabel>Path parameters</SectionLabel>
                     <Params params={pathParams} objects={objects} />
-                    {queryParams?.length > 0 && <Divider />}
                 </div>
             )}
             {queryParams?.length > 0 && (
                 <div>
-                    <h4>Query parameters</h4>
+                    <SectionLabel>Query parameters</SectionLabel>
                     <Params params={queryParams} objects={objects} />
                 </div>
             )}
@@ -293,7 +283,7 @@ function Security({ item }) {
         <>
             {personaApiKeyScopes?.length && (
                 <div>
-                    <h4>Required API key scopes</h4>
+                    <SectionLabel>Required API key scopes</SectionLabel>
                     <div className="flex items-center gap-2">
                         {personaApiKeyScopes.map((x) => (
                             <code key={x}>{x}</code>
@@ -314,7 +304,7 @@ function RequestBody({ item, objects }) {
 
     return (
         <div>
-            <h4>Request parameters</h4>
+            <SectionLabel>Request parameters</SectionLabel>
             <Params
                 params={Object.entries(object.properties)
                     .map(([name, schema]) => {
@@ -336,19 +326,30 @@ function ResponseBody({ item, objects }) {
         .at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
+    if (!object?.properties) return null
     const [showResponse, setShowResponse] = useState(false)
 
     return (
         <>
-            <h4>Response</h4>
+            <SectionLabel>Response</SectionLabel>
             <div className="response-wrapper">
-                <button className="mt-2 text-sm text-red font-semibold" onClick={() => setShowResponse(!showResponse)}>
+                <button
+                    className="mt-1 text-sm font-medium text-primary/60 hover:text-primary/90 flex items-center gap-1 cursor-pointer"
+                    onClick={() => setShowResponse(!showResponse)}
+                >
+                    <svg
+                        className={`w-3 h-3 transition-transform ${showResponse ? 'rotate-90' : ''}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                     {showResponse ? 'Hide' : 'Show'} response body
                 </button>
-                <br />
                 {showResponse && (
-                    <>
-                        <Divider className="my-4" />
+                    <div className="mt-3">
                         <Params
                             params={Object.entries(object.properties)
                                 .map(([name, schema]) => {
@@ -360,7 +361,7 @@ function ResponseBody({ item, objects }) {
                                 .filter((item) => !item.schema.readOnly)}
                             objects={objects}
                         />
-                    </>
+                    </div>
                 )}
             </div>
         </>
@@ -451,7 +452,7 @@ response = requests.${item.httpVerb}(
             currentLanguage={currentLanguage}
             onChange={({ language }) => setExampleLanguage(language)}
             label={
-                <div className="code-example flex text-xs space-x-1.5 my-1">
+                <div className="code-example flex text-sm space-x-1.5 my-1">
                     <code className={`shrink-0 text-${mapVerbsColor[item.httpVerb]}`}>
                         {item.httpVerb.toUpperCase()}{' '}
                     </code>
@@ -515,41 +516,34 @@ function ResponseExample({ item, objects, objectKey }) {
     }
 
     return (
-        <SingleCodeBlock
-            showCopy={false}
-            label={<span className="text-xs font-semibold">RESPONSE</span>}
-            language="javascript"
-        >
-            {response}
-        </SingleCodeBlock>
+        <div className="max-h-[400px] overflow-auto">
+            <SingleCodeBlock
+                showCopy={false}
+                label={<span className="text-xs font-semibold">RESPONSE</span>}
+                language="javascript"
+            >
+                {response}
+            </SingleCodeBlock>
+        </div>
     )
 }
 
 const pathDescription = (item) => {
     const name = humanReadableName(item.operationId).toLowerCase()
     if (item.operationId.includes('_list')) {
-        return (
-            <>
-                Returns a list of {name}. The {name} are returned in sorted order, with the most recent charges
-                appearing first.
-            </>
-        )
+        return <>Returns a list of {name}, sorted with the most recently created first.</>
     }
     if (item.httpVerb === 'get') {
-        return <>Returns a single {name.slice(0, -1)}, which you can request by passing through an id in the url. </>
+        return <>Returns a single {name.slice(0, -1)} by its ID.</>
     }
     if (item.httpVerb === 'post') {
-        return (
-            <>
-                Create {name}. You need to pass through any required fields, and you can optionally pass through other
-                fields.
-            </>
-        )
+        return <>Creates a new {name.slice(0, -1)}. Pass any required fields in the request body.</>
     }
     if (item.httpVerb === 'patch') {
-        return (
-            <>Update {name} by setting the values of the parameters passed. Any parameters not set will be unchanged.</>
-        )
+        return <>Updates an existing {name.slice(0, -1)}. Only the fields you pass will be changed.</>
+    }
+    if (item.httpVerb === 'delete') {
+        return <>Permanently deletes a {name.slice(0, -1)}.</>
     }
 }
 
@@ -608,8 +602,6 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     // Note: name uses underscores (from OpenAPI), but file slugs use hyphens
     const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name.replace(/_/g, '-')}/overview`)
 
-    const [hovered, setHovered] = useState(false)
-
     return (
         <ScrollSpyProvider>
             <ReaderView>
@@ -617,12 +609,13 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                     <SEO title={`${title} API Reference - PostHog`} />
 
                     <h2 className="!mt-0">{title}</h2>
-                    <blockquote className="p-6 mb-4 rounded bg-accent">
-                        <p>
-                            For instructions on how to authenticate to use this endpoint, see{' '}
-                            <a href="/docs/api/overview">API overview</a>.
-                        </p>
-                    </blockquote>
+                    <div className="border-l-4 border-blue/50 bg-accent/50 px-4 py-3 mb-4 rounded-r text-sm">
+                        For instructions on how to authenticate to use this endpoint, see{' '}
+                        <a href="/docs/api/overview" className="font-semibold">
+                            API overview
+                        </a>
+                        .
+                    </div>
 
                     {overviewNode?.body && (
                         <div className="article-content mt-6">
@@ -633,7 +626,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         </div>
                     )}
 
-                    <Endpoints paths={paths} containerRef={contentContainerRef} />
+                    <Endpoints paths={paths} items={items} containerRef={contentContainerRef} />
 
                     {items.map((item, index) => {
                         const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
@@ -643,10 +636,10 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                 {index > 0 && <SectionDivider />}
 
                                 <div
-                                    className="grid grid-cols-1 @xl:grid-cols-2 gap-8 items-start"
+                                    className="grid grid-cols-1 @xl:grid-cols-2 gap-6 items-start"
                                     id={pathID(item.httpVerb, item.pathName)}
                                 >
-                                    <div className="space-y-6">
+                                    <div className="space-y-4">
                                         <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
                                             {generateName(item)}
                                         </Heading>
@@ -667,60 +660,38 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                         </ReactMarkdown>
 
                                         <Security item={item} objects={objects} />
-                                        {item.security?.[0]?.['PersonalAPIKeyAuth']?.length && <Divider />}
-
                                         <Parameters item={item} objects={objects} />
-                                        {item.parameters?.filter((param) => param.in === 'path' || param.in === 'query')
-                                            ?.length > 0 && <Divider />}
-
                                         <RequestBody item={item} objects={objects} />
-                                        {item.requestBody && <Divider />}
-
                                         <ResponseBody item={item} objects={objects} />
                                     </div>
-                                    <div className="lg:sticky top-[108px] space-y-6">
-                                        <div>
-                                            <h4>Example request</h4>
-                                            <RequestExample
-                                                name={name}
-                                                item={item}
-                                                objects={objects}
-                                                exampleLanguage={exampleLanguage}
-                                                setExampleLanguage={setExampleLanguage}
-                                            />
-                                        </div>
-                                        <div>
-                                            <h4>Example response</h4>
-                                            {Object.keys(item.responses).map((statusCode) => {
-                                                const response = item.responses[statusCode]
-                                                return (
-                                                    <div key={statusCode} className="mb-4">
-                                                        <h5 className="text-sm font-semibold mb-2">
-                                                            <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                                Status {statusCode}
-                                                            </span>{' '}
-                                                            {response.description}
-                                                        </h5>
-                                                        <ResponseExample
-                                                            item={item}
-                                                            objects={objects}
-                                                            objectKey={
-                                                                response.content?.['application/json']?.schema['$ref']
-                                                                    ?.split('/')
-                                                                    .at(-1) ||
-                                                                response.content?.['application/json']?.schema.items?.[
-                                                                    '$ref'
-                                                                ]
-                                                                    ?.split('/')
-                                                                    .at(-1)
-                                                            }
-                                                            exampleLanguage={exampleLanguage}
-                                                            setExampleLanguage={setExampleLanguage}
-                                                        />
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
+                                    <div className="lg:sticky top-[108px] space-y-3">
+                                        <RequestExample
+                                            name={name}
+                                            item={item}
+                                            objects={objects}
+                                            exampleLanguage={exampleLanguage}
+                                            setExampleLanguage={setExampleLanguage}
+                                        />
+                                        {Object.keys(item.responses).map((statusCode) => {
+                                            const response = item.responses[statusCode]
+                                            return (
+                                                <ResponseExample
+                                                    key={statusCode}
+                                                    item={item}
+                                                    objects={objects}
+                                                    objectKey={
+                                                        response.content?.['application/json']?.schema['$ref']
+                                                            ?.split('/')
+                                                            .at(-1) ||
+                                                        response.content?.['application/json']?.schema.items?.['$ref']
+                                                            ?.split('/')
+                                                            .at(-1)
+                                                    }
+                                                    exampleLanguage={exampleLanguage}
+                                                    setExampleLanguage={setExampleLanguage}
+                                                />
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             </div>
