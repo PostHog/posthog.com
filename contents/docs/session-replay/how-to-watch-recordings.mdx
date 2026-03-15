@@ -191,6 +191,43 @@ Both features are available in the bottom right corner of the recording player a
     Screen capture and clip capture features in session replay
 </Caption>
 
+## Kiosk mode
+
+Kiosk mode plays recordings continuously in fullscreen without user interaction – ideal for office displays or team dashboards. Go to [**Session Replay** > **Kiosk**](https://app.posthog.com/replay/kiosk) to open the setup screen.
+
+Before playback begins, you can configure optional filters:
+
+- **Visited page** – only play recordings that visited a specific URL
+- **Date range** – limit recordings to a time window (e.g. last 7 days)
+- **Minimum active duration** – skip short recordings below a threshold in seconds
+
+Test accounts are always filtered out. Click **Start** to begin playback.
+
+### Bookmarkable kiosk URLs
+
+Add query params to skip the setup screen and start playback automatically:
+
+```
+https://app.posthog.com/replay/kiosk?visited_page=/welcome&date_from=-7d&min_duration=10&play=1
+```
+
+| Parameter | Description | Example |
+|-----------|-------------|----------|
+| `visited_page` | Filter by visited URL path | `/welcome` |
+| `date_from` | Start of date range | `-7d`, `-24h` |
+| `min_duration` | Minimum active seconds | `10` |
+| `play` | Skip setup and start immediately | `1` |
+
+### Playback behavior
+
+- Recordings play back-to-back automatically
+- Every 10 recordings, fresh results are fetched from the API
+- If no new recordings are available, existing ones loop
+- Every 50 recordings, the page reloads to free memory
+- On network failure, playback retries after a 5-second delay
+
+Press **Escape** to exit kiosk mode.
+
 ## Further reading
 
 - [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
