@@ -7,7 +7,7 @@ tags:
   - Growth engineering
 ---
 
-Every no-code A/B testing tool makes the same pitch: growth runs experiments, engineers ship product, nobody waits on anybody.
+Every no-code A/B testing tool makes the same pitch: run experiments without relying on engineers.
 
 The problem is that most of these tools work by injecting changes _after_ the page renders. On client-rendered pages and single-page applications (React, Vue, Angular), your browser loads the original page, then the tool swaps in the variant. Users see the original content flash before the change kicks in. That's flicker. On SPAs it's even worse: the framework can re-render and revert your changes entirely. Some of this can be mitigated and no-code experiments [can work well on server-rendered apps](/docs/experiments/no-code-web-experiments#limitations-and-use-cases) where the page doesn't re-render on the client. 
 
