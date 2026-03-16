@@ -10,7 +10,7 @@ export const SiteAppLight = "https://res.cloudinary.com/dmukukwp6/image/upload/p
 
 > **Note:** Early access management is only available in the [JavaScript Web SDK](/docs/libraries/js) and does not support [Groups](/docs/product-analytics/group-analytics).
 
-Early access feature management enables your users to opt in (and out) of features at different stages of development, from early concepts through general availability. You can run beta programs, create waitlists for upcoming features, and let users control their own product experience — all without building a custom solution.
+Early access feature management enables your users to opt in (and out) of features at different stages of development, from early concepts through general availability. You can run beta programs, create waitlists for upcoming features, and let users control their own product experience – all without building a custom solution.
 
 ## How it works
 
@@ -38,7 +38,7 @@ Early access features progress through six stages that control visibility and fe
 | Stage | Flag enabled for opted-in users? | Purpose |
 |-------|----------------------------------|---------|
 | **Draft** | No | Initial state. The feature is not visible to users and no flag changes occur. Use this while setting up the feature. |
-| **Concept** | No | Users can opt in to register interest, but the feature flag is **not** enabled for them. Use this for roadmap items where you want to gauge demand before building. |
+| **Concept** | No | You can opt in to register interest, but the feature flag is **not** enabled. Use this for roadmap items where you want to gauge demand before building. |
 | **Alpha** | Yes | Early testing phase. Opted-in users have the feature flag enabled. Use this for limited testing with a small group. |
 | **Beta** | Yes | Wider testing phase. Opted-in users have the feature flag enabled. This is the default stage shown to users in the opt-in UI. |
 | **General availability** | Yes | Feature is stable and fully released. The feature becomes read-only in PostHog after promotion. Opted-in users retain access. |
@@ -54,7 +54,7 @@ When you change a feature's stage, two things happen:
 
 ## Payloads
 
-Each early access feature can include a JSON payload — custom metadata that is delivered to users via the Early Access Features API and `posthog-js`. Use payloads to attach configuration, release notes, or UI customization data to a feature.
+Each early access feature can include a JSON payload – custom metadata that is delivered to users via the Early Access Features API and `posthog-js`. Use payloads to attach configuration, release notes, or UI customization data to a feature.
 
 The EAF payload is **separate from the feature flag payload**:
 
@@ -166,7 +166,7 @@ useEffect(() => {
 }, [activeFlags])
 ```
 
-`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates the user's opt-in status for the feature.
+`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates your opt-in status for the feature.
 
 ```react
 const toggleFeature = (featureKey) => {
