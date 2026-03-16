@@ -85,8 +85,8 @@ export default function FeatureFlags(): JSX.Element {
             'feature-comparison',
             'docs',
             'pairs-with',
-            'getting-started',
             'integrated-warehouse',
+            'getting-started',
         ],
         content: {
             // answersDescription: 'Control the release of new features to your users', moved to json
