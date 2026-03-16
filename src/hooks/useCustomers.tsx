@@ -484,7 +484,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [], // TODO: Add toolsUsed
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
-        notes: 'AI video editor',
+        notes: 'AI video generator',
         logo: HeygenLogo,
         featured: true,
         height: 12,
