@@ -100,7 +100,7 @@ export const matomo = {
             },
         },
         session_replay: {
-            available: 'Plugin',
+            available: true,
             features: {
                 canvas_recording: false,
                 privacy_masking: true,
@@ -133,6 +133,9 @@ export const matomo = {
         },
         feature_flags: {
             available: false,
+        },
+        error_tracking: {
+            available: 'Limited', // https://matomo.org/faq/how-to/how-do-i-enable-basic-javascript-error-tracking-and-reporting-in-matomo-browser-console-error-messages/
         },
     },
     platform: {

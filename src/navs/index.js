@@ -6,13 +6,19 @@ export const dataPipelines = {
     description: 'Collect, enrich, and send data to your destinations',
     children: [
         {
+            name: 'Data pipelines',
+        },
+        {
             name: 'Overview',
             url: '/docs/cdp',
             icon: 'IconHome',
             color: 'seagreen',
         },
         {
-            name: 'Sources',
+            name: 'Getting started',
+        },
+        {
+            name: 'Link sources',
             url: '/docs/cdp/sources',
             icon: 'IconBook',
             color: 'blue',
@@ -447,15 +453,31 @@ export const dataPipelines = {
         },
 
         {
+            name: 'Guides',
+        },
+        {
+            name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
+            url: '/docs/cdp/fivetran-airbyte',
+        },
+        {
+            name: 'PostHog AI',
+        },
+        {
+            name: 'Write Hog functions with PostHog AI',
+            url: '/docs/cdp/hog-functions-ai',
+            icon: 'IconSparkles',
+            color: 'purple',
+            featured: true,
+        },
+        {
+            name: 'Resources',
+        },
+        {
             name: 'Troubleshooting',
             url: '/docs/cdp/troubleshooting',
             icon: 'IconQuestion',
             color: 'blue',
             featured: true,
-        },
-        {
-            name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
-            url: '/docs/cdp/fivetran-airbyte',
         },
         {
             name: 'Changelog',
@@ -1696,6 +1718,10 @@ export const handbookSidebar = [
             {
                 name: 'Product enablement',
                 url: '/handbook/growth/sales/product-enablement',
+            },
+            {
+                name: 'Team leads',
+                url: '/handbook/growth/sales/team-leads',
             },
             {
                 name: 'Use cases',
@@ -3244,6 +3270,9 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/product-analytics/installation',
                     icon: 'IconBook',
@@ -3308,41 +3337,7 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Best practices',
-                    url: '/docs/product-analytics/best-practices',
-                    icon: 'IconStar',
-                    color: 'red',
-                },
-                {
-                    name: 'Troubleshooting',
-                    url: '/docs/product-analytics/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'blue',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/product-analytics/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'red',
-                    featured: true,
-                },
-                {
-                    name: 'Cutting costs',
-                    url: '/docs/product-analytics/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'purple',
-                },
-                {
-                    name: 'Changelog',
-                    url: '/docs/product-analytics/changelog',
-                    icon: 'IconRocket',
-                    color: 'purple',
-                },
-                {
-                    type: 'divider',
-                },
-                {
-                    name: 'Analysis views',
+                    name: 'Concepts',
                 },
                 {
                     name: 'Trends',
@@ -3403,6 +3398,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Path cleaning',
+                    url: '/docs/product-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'Stickiness',
                     url: '/docs/product-analytics/stickiness',
                     icon: 'IconStickiness',
@@ -3433,13 +3434,13 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Tools',
+                    name: 'Guides',
                 },
                 {
-                    name: 'LLM insights',
-                    url: 'https://posthog.com/docs/llm-analytics',
-                    icon: 'IconAIText',
-                    color: 'yellow',
+                    name: 'Best practices',
+                    url: '/docs/product-analytics/best-practices',
+                    icon: 'IconStar',
+                    color: 'red',
                 },
                 {
                     name: 'Autocapture',
@@ -3497,6 +3498,50 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Use PostHog AI to analyze data',
+                    url: '/docs/product-analytics/analyze-data-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Build insights with MCP',
+                    url: '/docs/product-analytics/build-insights-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Cutting costs',
+                    url: '/docs/product-analytics/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/product-analytics/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'red',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/product-analytics/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/product-analytics/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
+                },
             ],
         },
         {
@@ -3515,6 +3560,9 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                     featured: true,
+                },
+                {
+                    name: 'Getting started',
                 },
                 {
                     name: 'Installation',
@@ -3550,10 +3598,13 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Start here',
                     url: '/docs/web-analytics/getting-started',
                     icon: 'IconGraduationCap',
                     color: 'salmon',
+                },
+                {
+                    name: 'Concepts',
                 },
                 {
                     name: 'Dashboard',
@@ -3580,6 +3631,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Path cleaning',
+                    url: '/docs/web-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'Marketing analytics',
                     url: '/docs/web-analytics/marketing-analytics',
                     icon: 'IconGraph',
@@ -3598,6 +3655,25 @@ export const docsMenu = {
                             url: '/docs/web-analytics/marketing-analytics-schema',
                         },
                     ],
+                },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Investigate traffic with PostHog AI',
+                    url: '/docs/web-analytics/investigate-traffic-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Query traffic with MCP',
+                    url: '/docs/web-analytics/query-traffic-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Troubleshooting',
@@ -3629,6 +3705,9 @@ export const docsMenu = {
                     url: '/docs/session-replay',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
                 },
                 {
                     name: 'Installation',
@@ -3677,29 +3756,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Troubleshooting',
-                    url: '/docs/session-replay/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'purple',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/session-replay/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Changelog',
-                    url: '/docs/session-replay/changelog',
-                    icon: 'IconRocket',
-                    color: 'purple',
-                },
-                {
-                    type: 'divider',
-                },
-                {
-                    name: 'Features',
+                    name: 'Concepts',
                 },
                 {
                     name: 'Network performance',
@@ -3742,6 +3799,50 @@ export const docsMenu = {
                     url: '/docs/session-replay/canvas-recording',
                     icon: 'IconPalette',
                     color: 'blue',
+                },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Summarize sessions with PostHog AI',
+                    url: '/docs/session-replay/session-summaries-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Find replays with PostHog AI',
+                    url: '/docs/session-replay/find-replays-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'Search replays with MCP',
+                    url: '/docs/session-replay/search-replays-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/session-replay/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/session-replay/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/session-replay/changelog',
+                    icon: 'IconRocket',
+                    color: 'purple',
                 },
             ],
         },
@@ -3922,6 +4023,22 @@ export const docsMenu = {
                     url: '/docs/feature-flags/property-overrides',
                     icon: 'IconPerson',
                     color: 'blue',
+                },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Manage flags with PostHog AI',
+                    url: '/docs/feature-flags/manage-flags-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create flags with MCP',
+                    url: '/docs/feature-flags/create-flags-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
                 },
                 {
                     name: 'Resources',
@@ -4258,6 +4375,22 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Analyze experiments with PostHog AI',
+                    url: '/docs/experiments/analyze-experiments-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create experiments with MCP',
+                    url: '/docs/experiments/create-experiments-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
                     name: 'Resources',
                 },
                 {
@@ -4585,7 +4718,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Debugging with MCP',
-                    url: '/docs/error-tracking/debugging-with-mcp',
+                    url: '/docs/error-tracking/debug-errors-mcp',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'green',
                     featured: true,
@@ -4670,6 +4803,9 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/surveys/installation',
                     icon: 'IconBook',
@@ -4703,10 +4839,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    type: 'divider',
-                },
-                {
-                    name: 'Features',
+                    name: 'Concepts',
                 },
                 {
                     name: 'Destinations',
@@ -4722,7 +4855,20 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    type: 'divider',
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Create surveys with PostHog AI',
+                    url: '/docs/surveys/create-surveys-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Summarize responses with PostHog AI',
+                    url: '/docs/surveys/summarize-responses-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
                 },
                 {
                     name: 'Resources',
@@ -5198,6 +5344,22 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Write SQL with PostHog AI',
+                    url: '/docs/data-warehouse/write-sql-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Run SQL with MCP',
+                    url: '/docs/data-warehouse/run-sql-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
                     name: 'Resources',
                 },
                 {
@@ -5446,6 +5608,11 @@ export const docsMenu = {
                             icon: 'IconCode',
                         },
                         {
+                            name: 'Pi Coding Agent',
+                            url: '/docs/llm-analytics/installation/pi',
+                            icon: 'IconCode',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
@@ -5562,6 +5729,22 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Analyze traces with PostHog AI',
+                    url: '/docs/llm-analytics/analyze-traces-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Query traces with MCP',
+                    url: '/docs/llm-analytics/query-traces-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
                 },
                 {
                     name: 'Trace summarization',
@@ -5780,6 +5963,22 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/managed-views',
                     icon: 'IconCalculator',
                     color: 'salmon',
+                },
+                {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Analyze revenue with PostHog AI',
+                    url: '/docs/revenue-analytics/analyze-revenue-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Query revenue with MCP',
+                    url: '/docs/revenue-analytics/query-revenue-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
                 },
                 {
                     name: 'Resources',
@@ -6124,6 +6323,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Create emails with PostHog AI',
+                    url: '/docs/workflows/create-emails-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Resources',
                 },
                 {
@@ -6206,8 +6415,18 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'PostHog AI',
+                },
+                {
+                    name: 'Search logs with PostHog AI',
+                    url: '/docs/logs/search-logs-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Debugging with MCP',
-                    url: '/docs/logs/debugging-with-mcp',
+                    url: '/docs/logs/debug-logs-mcp',
                     icon: 'IconBolt',
                     color: 'yellow',
                 },
