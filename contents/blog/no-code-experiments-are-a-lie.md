@@ -23,7 +23,7 @@ But there's a deeper issue: you're not actually removing dev work, you're deferr
 
 With AI code generation, experiment coding is now fast and cheap. The bottleneck isn't writing code anymore, it's reviewing it. That means we can shift the dev team's role from "build experiments" to "review experiments."
 
-Growth describes an experiment in normal language, gets consultation on how to experiment right, and then gets _real code_ (not injected DOM hacks) that engineers just review and merge. Like a pull request from a very fast junior developer who never sleeps and doesn't have opinions about tabs vs. spaces.
+Growth describes an experiment in normal language, gets consultation on how to experiment right, and then gets _real code_ (not injected DOM hacks) that engineers just review and merge.
 
 This is what [PostHog MCP](https://github.com/PostHog/mcp-server) does. It connects PostHog to your development environment through [Claude](https://www.anthropic.com/claude), [Cursor](https://cursor.com/), or any editor that supports the [Model Context Protocol](https://modelcontextprotocol.io/introduction). You describe what you want to test, and it generates:
 
