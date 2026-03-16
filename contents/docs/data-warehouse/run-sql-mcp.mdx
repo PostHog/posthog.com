@@ -1,8 +1,8 @@
 ---
-title: Run SQL with MCP
+title: Run SQL and manage views with MCP
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries and explore your [Data Warehouse](/docs/data-warehouse) schema directly from your code editor. Query events, external sources, and warehouse tables – without switching to the PostHog app.
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, and explore your schema directly from your code editor. Query events, create and materialize views, and work with warehouse tables – without switching to the PostHog app.
 
 This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
 
@@ -15,6 +15,7 @@ With MCP, your coding agent can:
 - **Explore your schema** – "What tables do I have?" or "Show me the columns in `stripe_charges`" to discover available data
 - **Generate queries from questions** – "Write a HogQL query to find the top users by event count" to get a query you can refine
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
+- **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
 
 ## SQL tools
 
@@ -27,6 +28,22 @@ The MCP server provides these tools for running SQL:
 | `property-definitions` | List all event and person properties in your project. Useful for understanding what data is available before writing a query. |
 | `event-definitions-list` | List all event definitions in your project with volume and usage data. |
 
+## View management tools
+
+The MCP server also provides tools for managing [Data Warehouse views](/docs/data-warehouse/views):
+
+| Tool | Description |
+|------|-------------|
+| `warehouse-saved-queries-list` | List all saved views in your project with their materialization status, sync frequency, and column schema. |
+| `warehouse-saved-queries-retrieve` | Get full details of a specific view by ID, including its HogQL query and run history. |
+| `warehouse-saved-queries-create` | Create a new view from a HogQL query. Upserts by name if a view with the same name exists. |
+| `warehouse-saved-queries-partial-update` | Update a view's name, HogQL query, or sync frequency. |
+| `warehouse-saved-queries-destroy` | Delete a view (soft delete). |
+| `warehouse-saved-queries-materialize-create` | Enable materialization for a view with a 24-hour refresh schedule. |
+| `warehouse-saved-queries-revert-materialization-create` | Revert a materialized view back to a virtual query. |
+| `warehouse-saved-queries-run-create` | Trigger a manual refresh of a materialized view. |
+| `warehouse-saved-queries-run-history-retrieve` | Get the last 5 materialization run statuses for a view. |
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:
@@ -37,6 +54,14 @@ Try these with your MCP-enabled agent:
 - `Generate a HogQL query to calculate weekly active users by cohort.`
 - `Show me 5 sample rows from the hubspot_contacts table.`
 - `What properties are available on the purchase_completed event?`
+
+For view management:
+
+- `List all my saved views in the data warehouse.`
+- `Create a view called 'daily_active_users' that counts distinct user_ids per day.`
+- `Materialize my 'revenue_summary' view for faster queries.`
+- `Trigger a refresh of my 'user_metrics' materialized view.`
+- `Show me the run history for my 'sales_data' view.`
 
 ## Install the MCP server
 
