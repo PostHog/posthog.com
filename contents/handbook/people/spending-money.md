@@ -163,6 +163,11 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 - Desk & chair - again, refurbished is a great way to get high quality for less. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
 
+As a guide, here's what we'd consider reasonable spend:
+- Desk - up to $500
+- Chair - up to $500
+- Keyboard - up to $250
+
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
 
