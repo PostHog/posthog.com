@@ -90,6 +90,75 @@ postHogCapture({
 Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`, but, in this case, the request is queued to a background task, a 201 Created response is returned, and the event is ingested asynchronously.
 
 
+## Returning custom HTTP responses
+
+By default, incoming webhooks return a JSON response with status information. You can customize the HTTP response by returning an object with an `httpResponse` property.
+
+### Response object structure
+
+The `httpResponse` object supports the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `status` | number | The HTTP status code to return (e.g., `200`, `201`, `400`) |
+| `body` | string or object | The response body. Objects are returned as JSON. |
+| `contentType` | string | The content type header (e.g., `text/plain`, `image/gif`) |
+| `isBase64Encoded` | boolean | Set to `true` when `body` contains base64-encoded binary data |
+
+### Example: returning a tracking pixel
+
+You can use incoming webhooks to serve tracking pixels for email opens or other scenarios where you need to return binary data. Here's how to return a 1x1 transparent GIF:
+
+```hog
+// Capture an event from query parameters
+if(not empty(inputs.distinct_id) and not empty(inputs.event)) {
+  postHogCapture({
+    'event': inputs.event,
+    'distinct_id': inputs.distinct_id,
+    'properties': inputs.properties
+  })
+}
+
+// Return a 1x1 transparent GIF as the HTTP response
+return {
+  'httpResponse': {
+    'status': 200,
+    'body': 'R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+    'contentType': 'image/gif',
+    'isBase64Encoded': true
+  }
+}
+```
+
+When `isBase64Encoded` is `true`, PostHog decodes the base64 string server-side and returns the binary data with the correct content type header.
+
+### Example: returning JSON
+
+For simple JSON responses, you can return an object as the body:
+
+```hog
+return {
+  'httpResponse': {
+    'status': 200,
+    'body': { 'success': true, 'message': 'Event captured' }
+  }
+}
+```
+
+### Example: returning an error
+
+```hog
+if (empty(request.body.required_field)) {
+  return {
+    'httpResponse': {
+      'status': 400,
+      'body': 'Missing required_field in request body',
+      'contentType': 'text/plain'
+    }
+  }
+}
+```
+
 ## Troubleshooting
 
 ### Testing your webhook
