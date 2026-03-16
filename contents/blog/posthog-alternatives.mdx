@@ -36,7 +36,7 @@ This guide covers the most popular PostHog alternatives honestly – what they'r
 
 PostHog is a product development platform that includes:
 
-- **[PostHog AI](/ai):** Built-in AI tools including natural language querying, AI-powered session summaries, and more.
+- **[PostHog AI](/ai):** Built-in AI tools including an MCP server, natural language querying, AI-powered session summaries, and more.
 - **[Product analytics](/product-analytics):** Funnels, retention, user paths, cohorts, and trends. SQL access for power users.
 - **[Session replay](/session-replay):** Watch real user sessions with console logs, network monitoring, and a DOM explorer.
 - **[Feature flags](/feature-flags):** Roll out features to specific users or groups without redeploying.
@@ -71,7 +71,7 @@ PostHog isn't the right fit for everyone. You might want an alternative if:
 <details>
 <summary>Is it hard to deploy PostHog?</summary>
 
-Not at all for PostHog Cloud. Our [AI setup wizard](/wizard) walks you through installation and configuration in a few minutes – paste a snippet, answer a few questions, and you're tracking events. No credit card required, and you don't need to jump on a sales call. Most teams are up and running within a single session.
+Not at all for PostHog Cloud. Our [AI setup wizard](/wizard) walks you through installation and configuration in a few minutes – run the command, answer a few questions, and you're tracking events. No credit card required, and you don't need to jump on a sales call. Most teams are up and running within a single session.
 
 <WizardCommand />
 
@@ -616,15 +616,17 @@ Pricing at scale is also flagged:
 
 ## Which PostHog alternative should you choose?
 
-- **Choose Amplitude if** you're a growth or marketing team that needs multi-touch attribution, predictive analytics, or AI-powered brand visibility in LLMs. Amplitude has built a genuine marketing platform, while PostHog is more geared towards technical users.
+Choose...
+
+- **Amplitude** if you're a growth or marketing team that needs multi-touch attribution, predictive analytics, or AI-powered brand visibility in LLMs. Amplitude has built a genuine marketing platform, while PostHog is more geared towards technical users.
  
-- **Choose Mixpanel if** you want polished product analytics with session replay, A/B testing, and feature flags but don't need the broader PostHog platform. The free tier is generous and the startup program is excellent.
+- **Mixpanel** if you want polished product analytics with session replay, A/B testing, and feature flags but don't need the broader PostHog platform. The free tier is generous and the startup program is excellent.
  
-- **Choose FullStory if** dedicated UX research is your primary use case and you have enterprise budget. Its session replay tooling – frustration signals, StoryAI, Guides & Surveys – is more mature than PostHog's for deep qualitative research.
+- **FullStory** if dedicated UX research is your primary use case and you have enterprise budget. Its session replay tooling – frustration signals, StoryAI, Guides & Surveys – is more mature than PostHog's for deep qualitative research.
  
-- **Choose LogRocket if** you're a front-end engineering team that wants session replay connected to Redux state, console logs, and network monitoring. Strong for debugging workflows, though you'll need other tools alongside it.
+- **LogRocket** if you're a front-end engineering team that wants session replay connected to Redux state, console logs, and network monitoring. Strong for debugging workflows, though you'll need other tools alongside it.
  
-- **Consider Heap** if autocapture and retroactive event definition appeal to you – it's a solid tool. Just make sure you understand what the full Contentsquare platform looks like before committing.
+- **Heap** if autocapture and retroactive event definition appeal to you – it's a solid tool. Just make sure you understand what the full Contentsquare platform looks like before committing.
 
 <details>
 <summary>Honourable mentions</summary>
@@ -639,7 +641,7 @@ These tools didn't make the main list but are worth knowing about depending on y
  
 **[GrowthBook](/blog/posthog-vs-growthbook)** is an open-source A/B testing and feature flagging platform. If experimentation is your primary need and you want full control over your data and infrastructure, GrowthBook is worth evaluating. PostHog's experiments are more integrated but GrowthBook's statistical engine is more flexible.
 
-[VWO](/blog/best-vwo-alternatives) and **AB Tasty** are website experimentation platforms aimed at marketing and CRO teams – visual editors, no-code test creation, personalization, and funnel analysis. The two companies are merging soon. PostHog's experiments require more technical setup; these tools are built for non-engineers running conversion optimization programs.
+**[VWO](/blog/best-vwo-alternatives)** and **AB Tasty** are website experimentation platforms aimed at marketing and CRO teams – visual editors, no-code test creation, personalization, and funnel analysis. The two companies are merging soon. PostHog's experiments require more technical setup; these tools are built for non-engineers running conversion optimization programs.
 
 **[Statsig](/blog/posthog-vs-statsig)** is a feature flagging and experimentation platform popular with engineering teams who want rigorous statistical analysis, warehouse-native data pipelines, and scalable flag infrastructure. More technically focused than PostHog's experiments, less of a full analytics platform.
  
@@ -677,7 +679,7 @@ But PostHog's free tier – 1M analytics events, 5,000 replays, 1M feature flag 
 
 Yes, for most teams. PostHog covers everything Mixpanel does (funnels, retention, user paths, cohorts) and adds session replay, feature flags, A/B testing, and error tracking. Teams at [AssemblyAI](/customers/assemblyai) and others have made this switch. 
 
-See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details.
+See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details or get started with [our managed migration](/migrate/managed-migrations) for an easy switch.
  
 </details>
  
@@ -686,7 +688,7 @@ See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details.
 
 For engineering and product teams, yes. For growth and marketing teams who rely on multi-touch attribution and predictive analytics, Amplitude has capabilities PostHog doesn't. 
 
-See our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison.
+See our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison or get started with [our managed migration](/migrate/managed-migrations) for an easy switch.
  
 </details>
  
@@ -710,11 +712,11 @@ PostHog does have surveys for collecting in-app user feedback.
 
 <details>
 <summary>What's the best PostHog alternative for enterprise?</summary>
- 
+
 For enterprise product analytics, **Amplitude** has the most established enterprise track record. For enterprise session replay, **FullStory** has deep enterprise integrations and a mature DX Data layer.
 
 PostHog also has an enterprise plan with SSO, SAML, and a dedicated customer success team.
- 
+
 </details>
 
 <NewsletterForm />
