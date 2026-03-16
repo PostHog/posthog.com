@@ -25,7 +25,7 @@ With AI code generation, experiment coding is now fast and cheap. The bottleneck
 
 Growth describes an experiment in normal language, gets consultation on how to experiment right, and then gets _real code_ (not injected DOM hacks) that engineers just review and merge.
 
-This is what [PostHog MCP](https://github.com/PostHog/mcp-server) does. It connects PostHog to your development environment through [Claude](https://www.anthropic.com/claude), [Cursor](https://cursor.com/), or any editor that supports the [Model Context Protocol](https://modelcontextprotocol.io/introduction). You describe what you want to test, and it generates:
+This is what [PostHog MCP](/docs/model-context-protocol) does. It connects PostHog to your development environment through Claude, Cursor, or any editor that supports the [Model Context Protocol](https://modelcontextprotocol.io/introduction). You describe what you want to test, and it generates:
 
 - The actual code change implementing your variant
 - An [experiment](/docs/experiments) in PostHog with your success metric
