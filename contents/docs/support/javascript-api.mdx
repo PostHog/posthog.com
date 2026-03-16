@@ -150,6 +150,7 @@ interface GetTicketsResponse {
 interface Ticket {
   id: string
   status: string
+  channel_detail?: string   // How ticket was created: 'slack_channel_message' | 'slack_bot_mention' | 'slack_emoji_reaction' | 'widget_embedded' | 'widget_api'
   last_message?: string
   last_message_at?: string
   message_count: number
