@@ -5,6 +5,7 @@ export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video
 export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
 export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
 export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
 
@@ -66,18 +67,7 @@ import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-ev
 
 ## Why are returning users not showing as exposed to my experiment?
 
-The `$feature_flag_called` event that tracks [exposures](/docs/experiments/exposures) is deduplicated by the SDK — once emitted for a given flag and value, it won't fire again unless `identify` (with a new distinct ID) or `reset` is called. This means that if a user checked the flag **before** your experiment launched, the event was already cached and won't re-emit when the experiment starts. Returning users who don't trigger `identify` or `reset` will appear to have no exposure.
-
-To fix this, enable `advanced_feature_flags_dedup_per_session` in your [PostHog config](/docs/libraries/js/config#advanced-configuration):
-
-```js
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    advanced_feature_flags_dedup_per_session: true,
-})
-```
-
-When enabled, the deduplication cache resets with each new session, so `$feature_flag_called` is re-emitted for every flag checked in that session. This ensures that experiments launched after a flag was already in use will still capture exposures for returning users.
+<ReturningUsersExposures />
 
 ## Why are my A/B test event numbers lower than when I create an insight directly?
 
