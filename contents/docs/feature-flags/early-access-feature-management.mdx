@@ -52,6 +52,17 @@ When you change a feature's stage, two things happen:
 
 2. **User notification**: Enrolled users (those who opted in) receive a `$feature_enrollment_update` event that your application can use to notify them of the stage change (for example, "Feature X has moved to Beta").
 
+### Promoting to general availability
+
+When you promote a feature to **General availability**, a confirmation dialog appears with a **"Roll out to all users – include users who previously opted out"** checkbox.
+
+- **Checked** – The feature flag's opt-in/opt-out conditions are removed and the flag is set to 100% rollout. All users receive the feature, including those who previously opted out.
+- **Unchecked** (default) – Opted-out users remain opted out. Only users who opted in (or match the flag's existing release conditions) see the feature.
+
+This is useful because, by default, users who opted out during a beta still have an overriding opt-out condition on the flag. Checking the rollout option clears those conditions so the feature reaches everyone.
+
+> **Note:** Once promoted to General Availability, the early access feature can no longer be edited.
+
 ## Payloads
 
 Each early access feature can include a JSON payload – custom metadata that is delivered to users via the Early Access Features API and `posthog-js`. Use payloads to attach configuration, release notes, or UI customization data to a feature.
