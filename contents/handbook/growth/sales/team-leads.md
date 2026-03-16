@@ -32,7 +32,7 @@ Technical Account Managers (TAMs) own a book of business of nominally around 15 
 
 ### Customer Success
 
-Customer Success Managers (CSMs) own a book of business of around 30 customers with an ARR of $2.5m and focus mainly on keeping them as customers (retention).
+Customer Success Managers (CSMs) own a book of business of around 30 customers with an ARR of $1.5m and focus mainly on keeping them as customers (retention).
 
 - Once a CSM's book is full, work to balance customers across the team ideally with a reasonable timezone overlap with the customer.
 - Take the lead in driving churn risk team calls, ensuring that we stick to planning and next steps rather than storytelling.
