@@ -24,15 +24,15 @@ Early access features can be created and edited from the [Early Access Managemen
 
 Features can be in different stages:
 
-- **Concept**: Features that are not yet available for testing. These are added to the Coming Soon tab, so users can register interest in advance. Gate your code behind a separate feature flag at this stage so they don't actually see the feature.
-- **Beta**: Features that are available for testing. Users can opt in to try them out.
+- **Concept**: Features that are not yet available for testing. These are added to the Coming Soon tab, so you can register interest in advance. Gate your code behind a separate feature flag at this stage so they don't actually see the feature.
+- **Beta**: Features that are available for testing. You can opt in to try them out.
 - **Alpha** and **General availability** are also available for more granular feature lifecycle management.
 
 > **Note:** Early access features must currently be released before they can assigned to a stage. 
 
-### Promoting to General Availability
+### Promoting to general availability
 
-When you promote a feature to **General availability**, a confirmation dialog appears with a **"Roll out to all users — include users who previously opted out"** checkbox.
+When you promote a feature to **General availability**, a confirmation dialog appears with a **"Roll out to all users – include users who previously opted out"** checkbox.
 
 - **Checked** – The feature flag's opt-in/opt-out conditions are removed and the flag is set to 100% rollout. All users receive the feature, including those who previously opted out.
 - **Unchecked** (default) – Opted-out users remain opted out. Only users who opted in (or match the flag's existing release conditions) see the feature.
@@ -41,7 +41,7 @@ This is useful because, by default, users who opted out during a beta still have
 
 > **Note:** Once promoted to General Availability, the early access feature can no longer be edited.
 
-For beta features, feature flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
+For beta features, Feature Flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help you understand what the feature is for.
 
 <ProductScreenshot
     imageLight={CreateNewFeatureFlagLight} 
@@ -54,7 +54,7 @@ Once created, you can opt users in or out manually on the feature detail screen 
 
 A couple of important notes:
 
-* Early access feature opt-in is an *overriding condition*. This means that a user opt-in or opt-out overrides any existing release condition on the feature flag. Only when a user has not explicitly selected to opt in or out will the release conditions on the feature flag be used to determine feature flag availability.
+* Early access feature opt-in is an *overriding condition*. This means that your opt-in or opt-out overrides any existing release condition on the feature flag. Only when you have not explicitly selected to opt in or out will the release conditions on the feature flag be used to determine feature flag availability.
 * The feature flag is assigned to the user in all stages, including the **concept** stage. If you don't want them to see the feature in a given stage, you should use a separate feature flag.
 
 ## Creating a public opt-in
@@ -65,7 +65,7 @@ A couple of important notes:
 
 We've prebuilt a site app that adds an early access feature modal to your site. 
 
-![Create feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png)
+![Create Feature Flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png)
 
 To use it:
 
@@ -131,7 +131,7 @@ useEffect(() => {
 }, [activeFlags])
 ```
 
-`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates the user's opt-in status for the feature.
+`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates your opt-in status for the feature.
 
 ```react
 const toggleBeta = (betaKey) => {
