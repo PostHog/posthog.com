@@ -21,19 +21,29 @@ This guide covers the following features:
 
 ## Data storage location
 
-If you require GDPR compliance, there are [specific guidelines](docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
+If you require GDPR compliance, there are [specific guidelines](/docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
 
 ## Processing data before storage
 
 PostHog supports [realtime transformations](/docs/cdp/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
 
-- [Redacting PII data](https://posthog.com/tutorials/property-filter) before it's stored in PostHog
-- Disabling default [GeoIP enrichment transformations](https://us.posthog.com/pipeline/transformations)
-- [Dropping events](https://us.posthog.com/pipeline/new/transformation/hog-template-drop-events) based on a filter
-- [Hashing PII data](https://us.posthog.com/pipeline/new/transformation/hog-template-pii-hashing)
-- [IP anonymization](https://us.posthog.com/pipeline/new/transformation/hog-template-ip-anonymization)
+- [Hashing PII data](https://posthog.com/docs/cdp/transformations/template-hash-properties) before it's stored in PostHog
+- Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/cdp/transformations/template-geoip)
+- [Dropping events](https://posthog.com/docs/cdp/transformations/drop-events) based on a filter
+- [IP anonymization](https://posthog.com/docs/cdp/transformations/template-ip-anonymization)
 
-When in doubt, you can always create your own [custom transformation](https://us.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
+When in doubt, you can always create your own [custom transformation](https://app.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
+
+### Discarding IP addresses at project level
+
+You can configure your project to discard client IP addresses from stored events. Navigate to [**Settings** > **Project** > **IP data capture configuration**](https://app.posthog.com/settings/project#datacapture) and enable the **Discard client IP data** toggle.
+
+When this setting is enabled:
+
+- Client IP addresses are **not stored** with your events
+- Transformations like [GeoIP enrichment](https://posthog.com/docs/cdp/transformations/template-geoip) and [bot detection](https://posthog.com/docs/cdp/transformations/template-bot-detection) can **still use the IP** before it is discarded
+
+This allows you to enrich your events with location data or filter out bot traffic while ensuring raw IP addresses are not retained in your data.
 
 <details>
 <summary>See all default event properties collected</summary>
@@ -91,6 +101,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 | What to delete | Where to delete | Additional details |
 |----------------|-----------------|-------------------|
+| **Your account** | [Account settings](https://us.posthog.com/settings/user#user-delete) | Account is deleted immediately; all stored data about you is cleared within 30 days. See [deleting your account](/docs/settings/account-settings#deleting-your-account). |
 | **Projects** | [Project settings](https://us.posthog.com/settings/project#project-delete) | All data under the project (including events) are automatically removed |
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | All data under the organization's projects (including events) are automatically removed |
 | **Persons** | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten) | When a person is deleted, all events for that person can be deleted |
@@ -135,22 +146,20 @@ response = requests.get(
 
 </MultiLanguage>
 
-To delete the persons and their events, you can use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id)
-
-To do that, iterate through the persons returned in the previous step and use the person's `id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
+To delete persons and their events, use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id) with the person's UUID (returned as `id` in the persons API response). To delete the person's corresponding events, add the `delete_events=true` parameter:
 
 <MultiLanguage>
 
 ```bash
-curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true" \
-     -H "Authorization: Bearer {YOUR_API_KEY}"
+curl -X DELETE "https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true" \
+     -H "Authorization: Bearer <personal_api_key>"
 ```
 
 ```javascript
-fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true", {
+fetch('https://app.posthog.com/api/projects/<project_id>/persons/<person_uuid>?delete_events=true', {
   method: 'DELETE',
   headers: {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
+    'Authorization': 'Bearer <personal_api_key>'
   }
 })
 .then(response => response.json())
@@ -161,10 +170,14 @@ fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?d
 ```python
 import requests
 
-url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true"
-headers = {
-    'Authorization': 'Bearer {YOUR_API_KEY}'
-}
+api_key = "<personal_api_key>"
+project_id = "<project_id>"
+person_uuid = "<person_uuid>"
+
+url = "https://app.posthog.com/api/projects/{}/persons/{}?delete_events=true".format(
+    project_id, person_uuid
+)
+headers = {"Authorization": "Bearer {}".format(api_key)}
 
 response = requests.delete(url, headers=headers)
 print(response.json())

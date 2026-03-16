@@ -214,14 +214,14 @@ In your application code, update your PostHog initialization to use your proxy p
 <MultiLanguage>
 
 ```js file=US
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -340,7 +340,7 @@ requestHeaders.delete('cookie')
 Alternatively, configure PostHog to use `localStorage` instead of cookies:
 
 ```js
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   persistence: 'localStorage'
 })

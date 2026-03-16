@@ -16,7 +16,7 @@ graph TB
         PostHogAIUI[PostHog AI<br/>In-app Agent]
         DeepResearch[Deep Research]
         SessionSum[Session Summaries]
-        ArrayApp[Array<br/>Desktop App]
+        PostHogCode[PostHog Code<br/>Desktop App]
         Wizard[Wizard<br/>CLI Tool]
         ClaudeCode[Claude Code /<br/>Other AI Tools]
     end
@@ -32,34 +32,33 @@ graph TB
         TaskGen[Task Generation<br/>Temporal Jobs]
     end
 
-    Agent --> PostHogAIUI
-    Agent --> DeepResearch
-    Agent --> SessionSum
-
     Agent --> CoreTools
     Agent --> Modes
 
     Modes --> MCP
 
-    MCP --> ArrayApp
+    MCP --> PostHogAIUI
+    MCP --> DeepResearch
+    MCP --> SessionSum
+    MCP --> PostHogCode
     MCP --> Wizard
     MCP --> ClaudeCode
 
     SessionSum --> TaskGen
     DeepResearch --> TaskGen
 
-    TaskGen --> ArrayApp
+    TaskGen --> PostHogCode
 ```
 
 ### Key integration points
 
 1. **The agent uses dynamic modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
 
-2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client, including Array, Wizard, and third-party tools like Claude Code.
+2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client. PostHog AI, PostHog Code, Session Summaries, Wizard, and third-party tools like Claude Code all consume the same MCP server.
 
-3. **Task generation feeds Array**: Signals from PostHog data, PostHog AI conversations, and Deep Research investigations are processed into structured tasks that Array can execute automatically.
+3. **Task generation feeds PostHog Code**: Signals from PostHog data, PostHog AI conversations, and Deep Research investigations are processed into structured tasks that PostHog Code can execute.
 
-4. **Shared features**: Array, Wizard, and external tools all consume the same agent features through the MCP, ensuring consistency across the platform.
+4. **Shared features**: Every surface consumes the same agent features through the MCP, ensuring consistency across the platform.
 
 ## Single-loop agent architecture
 
@@ -173,11 +172,11 @@ The problem we needed to solve: PostHog AI and the MCP server were developed by 
 
 The solution is an abstraction layer. Agent modes expose both high-level LLM tools (like "create a funnel with these parameters") and low-level API endpoint tools (like "call POST /api/projects/{id}/insights"). Both PostHog AI and the MCP have access to the same features, just through different interfaces.
 
-## How Array and Wizard Fit In
+## How PostHog Code and Wizard fit in
 
-Both Array and the Wizard currently consume the MCP. This integration gives them access to all the agent modes we're building. If Claude Code (which Array uses for code generation) ever becomes a bottleneck, we could swap in PostHog's own single-loop agent since they share the same mental model. We'd need to copy over Claude Code's terminal and file system tools (bash, grep, etc.) and add them as core tools.
+Both PostHog Code and the Wizard currently consume the MCP. This integration gives them access to all the agent modes we're building. If Claude Code (which PostHog Code uses for code generation) ever becomes a bottleneck, we could swap in PostHog's own single-loop agent since they share the same mental model. We'd need to copy over Claude Code's terminal and file system tools (bash, grep, etc.) and add them as core tools.
 
-We could also tag modes for specific interfaces. For example, a `CodingMode(tags=["array"])` would only be exposed to the Array agent, not to PostHog AI, because it's specific to code generation workflows.
+We could also tag modes for specific interfaces. For example, a `CodingMode(tags=["posthog-code"])` would only be exposed to the PostHog Code agent, not to PostHog AI, because it's specific to code generation workflows.
 
 ## Glossary
 

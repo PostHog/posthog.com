@@ -4,42 +4,43 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Want PostHog to be involved in your event, go to [Community events](#community-events). Want to start a local co-working group for builders, go to [Community incubator](#community-incubator). And if your event will include PostHog and you'd like to add it to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/>.
+> Want PostHog to be involved in your event? See how we do [Community events](#community-events). Want to start a co-working group for builders? Check out our [Community incubator](#community-incubator) program and submit the [form](/community-incubator#apply). If you'd like to add an IRL event to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/> or <TeamMember name="Kliment Minchev"/>.
 
-We did 45 events in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
+We did 45 events in real life (IRL) in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
-Events have to focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
+Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
 
-The event formats we get involved in (and organize ourselves) fall into one of these:
+The event formats we prefer (and organize ourselves) fall into one of these:
 
 -   Hands-on gatherings that enable our users to build better products for their customers
--   Experiences that allow engineers and founders to flex and grow their skillsets
+-   Experiences that allow engineers and founders to walk away with unique product engineering insights
 -   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
 
 ## Community incubator
 
-We connect builders around the world by helping them start micro-communities that gather for recurring co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person with other people who have a bias for action.
+We connect builders around the world by helping them start IRL micro-communities that gather for recurring co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person with other people who have a bias for action.
 
 We have already seen how this format makes a higher impact on communities because of the velocity built over weeks and months of communal work, collaboration, and creativity.
 
-![Austin incubator](https://res.cloudinary.com/dmukukwp6/image/upload/Austin_community_incubator_photo_1049a2853e.png)
+![Philadelphia incubator](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/taj_phl_builder_group_f00b7c9abd.jpg)
 
-<Caption>Kliment leading community incubator, Austin</Caption>
+<Caption>Taj leading his builder group in Philadelphia</Caption>
 
 ### Geographies
-
-The [pilot program](/community-incubator) started in tech hubs mostly in North America, UK, and EU (Austin, Singapore, New York, Barcelona, and Lahore). At this time, we're open to groups starting in any city with a population of more than half of a million people.
+The [pilot program](/community-incubator) started in tech hubs mostly in North America, UK, and EU. We now have communities in Austin, Philadelphia, Singapore, New York, Barcelona, and Lahore. At this time, we're open to groups starting in any city with a population of more than half of a million people.
 
 ### Co-working structure
 
-The focus is on weekly, bi-weekly, or monthly gatherings with small groups of ~10 people. 
+The focus is on weekly, bi-weekly, or monthly gatherings with small groups of ~10 people. Gatherings typically take place during weekday evenings or weekends and go for about 3 hours. 
 
-Gatherings typically take place during weekday evenings or weekends and go for about 3 hours. We suggest starting with intros, at least 2-2.5 hours for building, and then closing with demos to show off what you built. Outside of co-working, the group is encouraged to get together for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
+<Caption>Discuss → Build → Demo</Caption>
+
+We suggest starting with a roundtable discussion of the latest dev news and trends, then each builder can set their own goals for the session. Allow at least 2 hours for building, and then close out the session with demos to show off what you built. Outside of co-working, the group is encouraged to get together to connect for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
 
 ### Venues
 
-The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) They are typically held in tech or VC offices that have an available room. If you have a venue and want to host, [reach out](mailto:daniel.z@posthog.com) directly.
+The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) They are typically held in tech or VC offices that have an available room, libraries, and co-working spaces. If you have a venue and want to host a builder group, reach out to [Daniel](mailto:daniel.z@posthog.com) directly.
 
 ## Community events
 
@@ -65,9 +66,7 @@ Put real effort into this first step. Defining the "what, why and how" of an eve
 
 ### Getting support
 
-> We use GitHub for everything so When you’re ready to submit an event for support, create an issue [using this template](https://github.com/PostHog/requests-for-comments/issues/new?template=community-event.md) and assign it to [@Zaltsman](https://github.com/zaltsman). 
-
-**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically fals in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagament. 
+**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically falls in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagement. 
 
 **Speakers:** Want a speaker in our ecosystem ([team PostHog](/people), customers, partners)? We’ll try our best. When considering speakers for your events try to avoid:
 
@@ -75,7 +74,7 @@ Put real effort into this first step. Defining the "what, why and how" of an eve
 -   People LARPing (live action role-playing) as executives
 -   Loudest person pretending to know more than they do
 
-**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
+**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](/founders) [have](/founders/product-market-fit-game) [plenty](/handbook) [of](/about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](/questions) [inspiration](/docs).
 
 **Merch:** We use the [store merch processes](/handbook/company/merch-store) to handle distribution of PostHog-branded merch. We tend to be generous with merch for community events. Outline what you had in mind in the issue.
 
@@ -99,13 +98,15 @@ Community events are better when organizers share what happened, what you learne
 
 ## Sponsoring external events
 
-We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
 
 ## Speaking at events
 
-If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. And at this point people are interested in not just what we build but how we did it. 
+If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). 
+
+For first-time yappers, reference the [speaker's guide](/handbook/marketing/speaker-guide). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. This includes integrations and implementations with other products. And at this point people are interested in not just what we build but how we did it. 
 
 
 ## Sponsoring student organizations
 
-Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.

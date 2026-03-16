@@ -1,0 +1,41 @@
+extends: capitalization
+message: "'%s' heading should be in sentence case, and product names should be capitalized."
+link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+level: warning
+threshold: 1 # Fail all instances of improper casing
+scope: heading
+match: $sentence
+# Exempt prefixes so the word after can be capitalized:
+#   - Anything up to a colon   e.g. "Step 1: Title here"
+#   - Alphanumeric + period    e.g. "1. Title here", "Step 3. Title here"
+#   - Alphanumeric + paren     e.g. "a) Title here"
+prefix: '^[^:]+:\s+|^[\w\s]+[.)]\s+'
+# All entries in vocabularies/BrandsAndTechnologies/accept.txt are exempt from this rule
+exceptions:
+    # For product names: The strings in this list are enforced with exact casing
+    - Customer Analytics
+    - Data Pipelines
+    - Data Warehouse
+    - Endpoints
+    - endpoints # adding because the generic term is too commonly used
+    - Error Tracking
+    - Experiments
+    - experiments # adding because the generic term is too commonly used
+    - Feature Flags
+    - feature flags # adding because the generic term is too commonly used
+    - LLM Analytics
+    - Logs
+    - logs # adding because the generic term is too commonly used
+    - Marketing Analytics
+    - PostHog AI
+    - PostHog Cloud
+    - PostHog Code
+    - Product Analytics
+    - Product Tours
+    - Revenue Analytics
+    - Session Replay
+    - Surveys
+    - surveys # adding because the generic term is too commonly used
+    - Web Analytics
+    - Workflows
+    - workflows # adding because the generic term is too commonly used

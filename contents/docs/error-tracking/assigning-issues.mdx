@@ -30,7 +30,7 @@ Want to assign issues to a **team** rather than an individual teammate? You can 
 
 ## Automatic issue assignment
 
-You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment) using **auto assignment rules**.
+You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-auto-assignment) using **auto assignment rules**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
@@ -65,13 +65,17 @@ You can also set custom properties on the error tracking event to filter on. For
 
 Issue assignment filters are evaluated in the order they are configured. They can also be reordered once created. The first filter that matches is used to assign the issue. This means you should configure the most specific filters first, and then the more general filters later.
 
+### Disabled assignment rules
+
+Assignment rules can become disabled if an error occurs during ingestion. When a rule is disabled, a banner displays the original error message. To re-enable the rule, edit it to fix the problem and save your changes. If the issue persists, reach out to support.
+
 ### Alerting based on assignment 
 
 A common use case for automatic issue assignment is to alert assignees of new issues. Once the issues are automatically assigned, you can set up alerts to notify the assignee. See the [alerts](/docs/error-tracking/alerts) guide for more information.
 
 ## Create external issues
 
-You can also create issues in external tracking systems like GitHub Issues, Linear, or GitLab. 
+You can also create issues in external tracking systems like GitHub Issues, Linear, GitLab, or Jira. 
 
 First, set up an [integration](/docs/error-tracking/integrations) with your tracking system. Then, from an issue's details page, under **External references**, click **Create issue**.
 

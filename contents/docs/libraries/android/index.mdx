@@ -151,7 +151,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 
 ```kotlin
 val config = PostHogAndroidConfig(
-    apiKey = <ph_project_api_key>,
+    apiKey = <ph_project_token>,
     host = <ph_client_api_host> 
 )
 config.optOut = true
@@ -336,9 +336,10 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Preload feature flags automatically. (on/true by default)
     preloadFeatureFlags = true
 
-    // Environment tags that constrain which feature flags are evaluated. (not set by default)
-    // When set, only flags with matching evaluation tags (or no evaluation tags) will be returned.
-    evaluationEnvironments = listOf("production", "android", "mobile")
+    // Evaluation context tags that constrain which feature flags are evaluated. (not set by default)
+    // When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned.
+    // Available in version 3.25.0+. The legacy parameter `evaluationEnvironments` (version 3.24.0+) is also supported.
+    evaluationContexts = listOf("production", "android", "mobile")
 
     // Callback that is called when feature flags are loaded (not set by default)
     onFeatureFlags = { ... }

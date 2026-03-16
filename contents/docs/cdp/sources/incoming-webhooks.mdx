@@ -25,9 +25,13 @@ https://webhooks.us.posthog.com/public/webhooks/<UUID>
 ```
 
 
+### Payload size limits
+
+Incoming webhook requests have a maximum payload size of 500KB. Requests exceeding this limit receive a `413` status code with the message "Request entity too large".
+
 ## Transforming the webhook payload
 
-We recommend starting from the default [HTTP incoming webhook template](/docs/cdp/source_webhooks/source-webhook). For most use cases, you can transform the incoming webhook to the required properties simply using our [Hog templating language](/docs/hog).
+We recommend starting from the default [HTTP incoming webhook template](/docs/hog#hog-by-example-webhook). For most use cases, you can transform the incoming webhook to the required properties simply using our [Hog templating language](/docs/hog).
 
 
 ### The request object
@@ -96,7 +100,8 @@ Currently you have to save the webhook to test it as it directly hits the endpoi
 
 ### Common issues
 
-- **401 Unauthorized**: Check that your authorization header matches the configured value
-- **400 Bad Request**: Verify that required fields (`event` and `distinct_id`) are provided
-- **Timeout errors**: Ensure your webhook processing completes within the time limit
+- 401 Unauthorized - Check that your authorization header matches the configured value
+- 400 Bad Request - Verify that required fields (`event` and `distinct_id`) are provided
+- Timeout errors - Ensure your webhook processing completes within the time limit
+- 413 Request Entity Too Large - Your request payload exceeds the 500KB size limit. Reduce the payload size or split into multiple requests.
 

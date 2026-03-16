@@ -38,7 +38,7 @@ Measuring feature success at PostHog is a multi-step process that goes hand-in-h
 
 1. **Quantitative data** – Usage metrics showing users have a specific problem 
 2. **Qualitative feedback** – Support tickets, direct user feedback, session replays etc.
-3. **Personal experience** – Dog fooding is old advice, but good advice.
+3. **Personal experience** – Dog fooding is old advice, but [good advice](/newsletter/how-i-get-good-advice).
 
 In this case, Yakko decided to work on data sampling because:
 1. Slow results on complex queries were causing frustrations for large customers. This ties to the <SmallTeam slug="product-analytics" /> objective of "[make PostHog performance frustration free for our 10 largest customers](/teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
@@ -63,7 +63,7 @@ A feature is successful at this stage if it solves the issue, isn’t broken, an
 
 Once an MVP of a feature ships, it continues the process of evaluation by rolling out further. More members of our team try out the feature and provide feedback.
 
-For sampling, Yakko added more insights that supported sampling and then started polishing. He asked the team to try out the feature, wrote [docs](/docs/product-analytics/sampling), and discussed with his team what sampling should look and feel like. He also started to take Michael's UI feedback more seriously.
+For sampling, Yakko added more insights that supported sampling and then started polishing. He asked the team to try out the feature, wrote docs, and discussed with his team what sampling should look and feel like. He also started to take Michael's UI feedback more seriously.
 
 If a specific user requested the feature or has a problem potentially solved by it, we might roll it out to them with the expectation that it is a recently built, beta feature. Feature flags enable us to adjust the rollout and do this fast. We communicate with the user through this process, and ideally receive feedback that helps us improve it.
 

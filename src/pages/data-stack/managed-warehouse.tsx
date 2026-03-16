@@ -30,8 +30,8 @@ const duckDBBenefits: DuckDBBenefit[] = [
         description: 'Easy local prototyping, beautiful query language',
     },
     {
-        title: 'Managed metadata store',
-        description: 'Read your data from anywhere, Ducklake open table format',
+        title: 'Managed DuckLake metadata store',
+        description: 'DuckLake catalog for open table format data',
     },
     {
         title: 'Single tenant instances',
@@ -88,14 +88,14 @@ export default function ManagedWarehouse(): JSX.Element {
                     </div>
                 </div>
                 <p>
-                    Each warehouse customer receives a <span className="font-bold">dedicated DuckDB instance</span>{' '}
-                    managed by PostHog. This means you get the performance, reliability, and simplicity of DuckDB
-                    without the operational overhead.
+                    Each warehouse customer receives a <span className="font-bold">dedicated data store</span> and
+                    flexible compute, managed by PostHog. This means you get the performance, reliability, and
+                    simplicity of a DuckDB-powered warehouse without the operational overhead.
                 </p>
                 <p>
                     And it's not a locked box, either. We give you the credentials so you have{' '}
-                    <span className="font-bold">direct access to your DuckDB instance</span>, which means you can bring
-                    your favorite tools for BI, modeling, and more. Or, use our built-in tools to get started quickly.
+                    <span className="font-bold">direct access to your data</span>, which means you can bring your
+                    favorite tools for BI, modeling, and more. Or, use our built-in tools to get started quickly.
                 </p>
                 <h2>All your PostHog data, loaded in for free</h2>
                 <p>

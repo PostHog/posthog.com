@@ -95,7 +95,7 @@ With our app set up, the next step is to add PostHog to it. To start, create a n
 ---
 <script is:inline>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>'
   })
@@ -180,7 +180,7 @@ With the feature flag, go back to your home page at `components/posthog.astro`. 
 ---
 <script is:inline>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: (posthog) => {
@@ -206,7 +206,7 @@ So far, we have only used PostHog on the client side. We can also set up PostHog
 npm i posthog-node
 ```
 
-In the `src` folder, create a `posthog.js` file. This is where we set up the code to create the PostHog Node client using our project API key and instance address.
+In the `src` folder, create a `posthog.js` file. This is where we set up the code to create the PostHog Node client using our project token and instance address.
 
 ```js
 // src/posthog.js
@@ -216,7 +216,7 @@ let posthogClient = null;
 
 export default function PostHogClient() {
   if (!posthogClient) {
-    posthogClient = new PostHog('<ph_project_api_key>', {
+    posthogClient = new PostHog('<ph_project_token>', {
       host: '<ph_client_api_host>',
     });
   }
@@ -264,13 +264,13 @@ export default defineConfig({
 });
 ```
 
-Next, we use the `Astro.cookies` utility to get the cookie using our project API key.
+Next, we use the `Astro.cookies` utility to get the cookie using our project token.
 
 ```js
 ---
 // src/pages/index.astro
 // ... imports
-const projectAPIKey = '<ph_project_api_key>'
+const projectAPIKey = '<ph_project_token>'
 const cookie = Astro.cookies.get(`ph_${projectAPIKey}_posthog`)
 let distinctId = cookie?.json().distinct_id
 // ... rest of code
@@ -327,7 +327,7 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
 ---
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: function(posthog) {
@@ -361,7 +361,7 @@ import Layout from '../layouts/Layout.astro';
 import PostHogClient from '../posthog.js';
 import crypto from 'node:crypto';
 
-const projectAPIKey = '<ph_project_api_key>'
+const projectAPIKey = '<ph_project_token>'
 const cookie = Astro.cookies.get(`ph_${projectAPIKey}_posthog`)
 let distinctId = cookie?.json().distinct_id
 if (!distinctId) {
@@ -389,7 +389,7 @@ Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
 ---
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: function(posthog) {

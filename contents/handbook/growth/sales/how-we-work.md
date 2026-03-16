@@ -108,7 +108,19 @@ If the answer to any of the above questions is 'no' then it's likely that there 
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+
+### Performance expectations for Technical Account Executives
+
+There are [cultural](/handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
+
+After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
+
+- You are under 80% of your annual quota, _and_
+- You have finished two consecutive quarters under 70% of your quarterly target
+
+These standards are likely to change as the TAE role evolves. Any changes will be reflected in the handbook. We will always consider any relevant context when having these conversations with you - quota does not exist in a vacuum!
+
 
 ## How commission works - Technical Account Managers
 
@@ -130,7 +142,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
-  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse and PostHog AI.
+  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
   - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
   - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
   - A product is counted as paid if the invoice amount for that product is greater than $200

@@ -154,6 +154,8 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 > [Slack recap](https://slack.com/help/articles/25076892548883-Guide-to-AI-features-in-Slack#01JM0PAPCT4K0TWNWGJRQDXTBA) is a great way to learn from others by adding channels like `#ask-max` and `#today-i-learned` to the recap. You can also use it to keep tabs on teams you may not directly work on, but still want to know what's being discussed.
 
+> [Slackbot](https://slack.com/features/slackbot) is a handy AI agent that can search across the PostHog workspace in Slack to help answer your questions. If you're looking for information or trying to find a past conversation, Slackbot is a great place to start.
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
@@ -289,7 +291,7 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ### Calendly
 
-We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account.
+We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Simon in `#sales` to invite you to the PostHog team account.
 
 ## Communication Methods
 
