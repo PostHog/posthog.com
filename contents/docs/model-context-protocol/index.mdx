@@ -269,6 +269,22 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Reverse proxy management
+
+Reverse proxies route events through your own domain, improving data accuracy by avoiding ad blockers and tracking prevention.
+
+**Prompt:** "List all reverse proxies configured for my organization"
+
+The agent will use the `proxy-list` tool to retrieve all managed reverse proxies and return their domains, CNAME targets, and provisioning status.
+
+**Prompt:** "Create a reverse proxy for e.example.com"
+
+The agent will use the `proxy-create` tool to set up a new managed reverse proxy and return the CNAME target you need to add to your DNS records.
+
+**Prompt:** "Check the status of my reverse proxy"
+
+The agent will use the `proxy-get` tool to retrieve the proxy details, including DNS verification status and any error messages.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
