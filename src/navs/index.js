@@ -73,6 +73,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/salesforce',
                 },
                 {
+                    name: 'Sentry',
+                    url: '/docs/cdp/sources/sentry',
+                },
+                {
                     name: 'MySQL',
                     url: '/docs/cdp/sources/mysql',
                 },
@@ -1366,6 +1370,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
+                name: 'Per-product cost & margin analysis',
+                url: '/handbook/product/per-product-cost-margin-analysis',
+            },
+            {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
             },
@@ -1710,6 +1718,10 @@ export const handbookSidebar = [
             {
                 name: 'Product enablement',
                 url: '/handbook/growth/sales/product-enablement',
+            },
+            {
+                name: 'Team leads',
+                url: '/handbook/growth/sales/team-leads',
             },
             {
                 name: 'Use cases',
@@ -3386,6 +3398,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Path cleaning',
+                    url: '/docs/product-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                },
+                {
                     name: 'Stickiness',
                     url: '/docs/product-analytics/stickiness',
                     icon: 'IconStickiness',
@@ -3611,6 +3629,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Path cleaning',
+                    url: '/docs/web-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
                 },
                 {
                     name: 'Marketing analytics',
@@ -5026,6 +5050,18 @@ export const docsMenu = {
                     icon: 'IconInbox',
                     color: 'orange',
                 },
+                {
+                    name: 'Slack integration',
+                    url: '/docs/support/slack',
+                    icon: 'IconMessage',
+                    color: 'orange',
+                },
+                {
+                    name: 'Workflow automation',
+                    url: '/docs/support/workflows',
+                    icon: 'IconDecisionTree',
+                    color: 'orange',
+                },
             ],
         },
         ...[dataPipelines],
@@ -5195,6 +5231,10 @@ export const docsMenu = {
                         {
                             name: 'Salesforce',
                             url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Sentry',
+                            url: '/docs/data-warehouse/sources/sentry',
                         },
                         {
                             name: 'Snowflake',
