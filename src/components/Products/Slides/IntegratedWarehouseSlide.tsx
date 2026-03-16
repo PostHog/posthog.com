@@ -7,12 +7,12 @@ interface IntegratedWarehouseSlideProps {
 
 export default function IntegratedWarehouseSlide({ variant = 'default' }: IntegratedWarehouseSlideProps) {
     return (
-        <div className="h-full p-8 @md:p-12 flex flex-col justify-center bg-light dark:bg-dark">
+        <div className="h-full p-8 @md:p-12 flex flex-col justify-center bg-primary">
             <h2 className="text-4xl font-bold text-primary mb-2 text-center">Working with your data warehouse</h2>
             <p className="text-xl text-secondary max-w-3xl mx-auto mb-8 text-center"></p>
 
             <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-4 @2xl:gap-6 mb-8">
-                <div className="border-2 border-primary rounded-lg p-6 bg-primary flex flex-col">
+                <div className="border border-primary rounded-md p-6 bg-accent flex flex-col">
                     <h3 className="text-2xl font-bold text-primary mb-2">Use our integrated data warehouse</h3>
                     <p className="text-lg text-secondary flex-1 mb-4">
                         Tired of maintaining ETL pipelines? Keep data in our managed warehouse and use it across a
@@ -24,7 +24,7 @@ export default function IntegratedWarehouseSlide({ variant = 'default' }: Integr
                     </OSButton>
                 </div>
 
-                <div className="border-2 border-primary rounded-lg p-6 bg-primary flex flex-col">
+                <div className="border border-primary rounded-md p-6 bg-accent flex flex-col">
                     <h3 className="text-2xl font-bold text-primary mb-2">Use an external data warehouse</h3>
                     <p className="text-lg text-secondary flex-1 mb-4">
                         Keep data in an existing warehouse and just sync the tables and fields you need into PostHog via
