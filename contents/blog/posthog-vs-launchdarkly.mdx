@@ -141,13 +141,17 @@ PostHog and LaunchDarkly take opposing approaches.
 
 Backend usage is measured in "service connections" – each microservice, replica, and environment counts as one – which doesn't map cleanly to team size or request volume. Frontend usage is billed per client-side MAU at $10/1k/month. If you want an accurate number, use LaunchDarkly's pricing calculator or request a quote directly.
 
-As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at Enterprise level.
+As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at Enterprise or Guardian levels.
 
 #### Example scenarios
 
 - **Startup (1M requests/mo):** PostHog **$0** (free tier). LaunchDarkly Foundation – depends on service connections and MAU, but a small setup with ~5 connections and 5k MAUs** = ~$110/mo minimum.**
 - **Scaleup (10M requests/mo):** PostHog **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045). LaunchDarkly – a mid-size setup with ~20 connections and 25k MAUs** = ~$490/mo, not counting Experimentation MAU.**
-- **Enterprise (50M requests/mo):** PostHog **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025). LaunchDarkly** – ??? **custom Enterprise pricing, contact sales.
+| Scenario | PostHog Pricing | LaunchDarkly Pricing |
+|---|---|---|
+| **Startup (1M requests/mo)** | **$0** (free tier) | Foundation plan depends on service connections and MAU. Example: ~5 connections + 5k MAU ≈ **$110/mo minimum** |
+| **Scaleup (10M requests/mo)** | **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045) | Mid-size setup: ~20 connections + 25k MAU ≈ **$490/mo**, not counting Experimentation MAU |
+| **Enterprise (50M requests/mo)** | **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025) | **Custom Enterprise pricing — contact sales** |
 
 ### Reporting and analytics
 
