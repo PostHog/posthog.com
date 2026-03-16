@@ -427,8 +427,8 @@ export default function Experiments(): JSX.Element {
             'feature-comparison',
             'docs',
             'pairs-with',
-            'getting-started',
             'warehouse-integration',
+            'getting-started',
         ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
