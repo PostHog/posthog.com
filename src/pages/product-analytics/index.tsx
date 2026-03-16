@@ -83,8 +83,8 @@ export default function ProductAnalytics(): JSX.Element {
             'feature-comparison',
             'docs',
             'pairs-with',
-            'getting-started',
             'integrated-warehouse',
+            'getting-started',
         ],
     })
 
