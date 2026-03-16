@@ -4694,7 +4694,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Debugging with MCP',
-                    url: '/docs/error-tracking/debugging-with-mcp',
+                    url: '/docs/error-tracking/debug-errors-mcp',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'green',
                     featured: true,
@@ -6381,7 +6381,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Debugging with MCP',
-                    url: '/docs/logs/debugging-with-mcp',
+                    url: '/docs/logs/debug-logs-mcp',
                     icon: 'IconBolt',
                     color: 'yellow',
                 },

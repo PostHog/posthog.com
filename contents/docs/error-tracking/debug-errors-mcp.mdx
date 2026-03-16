@@ -1,18 +1,18 @@
 ---
-title: Debugging with MCP
+title: Debug Error Tracking with MCP
 ---
 
 The [PostHog MCP server](/docs/model-context-protocol) exposes function calling tools to any MCP client, enabling AI agents to interact with PostHog's API via the MCP protocol.
 
-When combining our MCP server with error tracking, your AI agents can take actions based on PostHog data which unlocks powerful, autonomous debugging capabilities.
+When combining our MCP server with Error Tracking, your AI agents can take actions based on PostHog data which unlocks powerful, autonomous debugging capabilities.
 
 For example, with MCP, your agents can: 
 
-- **Triage issues** - Fetch the latest issues with details like status, frequency, users affected, last seen, etc.
-- **Inspect error details** - Access full stack traces, error messages, and relevant metadata.
-- **Explain or reproduce errors** - Identify failure points and perform root cause analysis using the captured stack trace context.
-- **Debug and create fixes** - Propose or even generate code fixes based on the error details.
-- **Update issue status** - Mark issues as resolved, archived, suppressed, or pending release directly from your code editor.
+- **Triage issues** – Fetch the latest issues with details like status, frequency, users affected, last seen, etc.
+- **Inspect error details** – Access full stack traces, error messages, and relevant metadata.
+- **Explain or reproduce errors** – Identify failure points and perform root cause analysis using the captured stack trace context.
+- **Debug and create fixes** – Propose or even generate code fixes based on the error details.
+- **Update issue status** – Mark issues as resolved, archived, suppressed, or pending release directly from your code editor.
 
 All of this happens directly inside the MCP client, like Cursor, Windsurf, or Claude Code, so you can investigate and resolve product issues without ever leaving the code editor.
 
