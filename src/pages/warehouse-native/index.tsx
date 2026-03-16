@@ -34,7 +34,7 @@ export default function WarehouseNative(): JSX.Element {
                     PostHog and Snowflake's relationship status: It's complicated.
                 </p>
 
-                <div className="rounded-lg border border-primary/20 bg-accent/30 p-4 my-6 not-prose">
+                <div className="rounded-md border border-primary bg-accent p-4 my-6 not-prose">
                     <p className="font-medium mb-2">tl;dr</p>
                     <p>
                         PostHog enables you to connect external warehouses (like Snowflake or BigQuery) as sources to
@@ -128,7 +128,8 @@ export default function WarehouseNative(): JSX.Element {
                     <Link to="/docs/data-warehouse/warehouse-native-workflows" state={{ newWindow: true }}>
                         How PostHog&apos;s integrated warehouse works (docs) →
                     </Link>
-                    {' · '}
+                </p>
+                <p>
                     <Link to="/data-stack" state={{ newWindow: true }}>
                         PostHog data stack →
                     </Link>
