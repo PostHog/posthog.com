@@ -1,5 +1,5 @@
 ---
-title: "No-code experiments are a lie"
+title: "AI is killing no-code experiments"
 date: 2026-03-03
 author: ["leonhard-prinz"]
 tags:
