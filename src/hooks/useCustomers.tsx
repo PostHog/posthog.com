@@ -17,6 +17,8 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CounterPressLogo from '../images/customers/counterpress-light.svg'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
@@ -37,6 +39,8 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SupedLogo from '../images/customers/suped-light.png'
+import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
@@ -360,6 +364,61 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
+            },
+        },
+    },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/suped/michael-suped.png',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
+            },
+        },
+    },
     kilocode: {
         name: 'KiloCode',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
@@ -428,7 +487,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI video editor',
         logo: HeygenLogo,
         featured: true,
-        height: 8,
+        height: 12,
     },
     hostai: {
         name: 'HostAI',

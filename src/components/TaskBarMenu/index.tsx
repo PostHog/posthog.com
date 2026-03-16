@@ -12,6 +12,7 @@ import {
     IconUpload,
     IconCode,
     IconFeatures,
+    IconPlay,
     IconPeople,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
@@ -219,6 +220,12 @@ export default function TaskBarMenu() {
                                     label: 'Team directory',
                                     link: '/team-directory',
                                     icon: <IconPeople className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'HogWatch 3000',
+                                    link: '/hogwatch',
+                                    icon: <IconPlay className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),

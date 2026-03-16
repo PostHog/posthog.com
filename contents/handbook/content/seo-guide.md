@@ -71,7 +71,7 @@ A more dialog-like tone can also help capture featured snippets or *People Also 
 
 > **Good Q&A example**  
 > - **Heading**: How do we reduce churn?   
-> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
+> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
 
 ### 6. Don’t put all our eggs in one keyword basket
 
