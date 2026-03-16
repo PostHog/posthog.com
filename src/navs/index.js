@@ -5462,6 +5462,11 @@ export const docsMenu = {
                             icon: 'IconCode',
                         },
                         {
+                            name: 'Pi Coding Agent',
+                            url: '/docs/llm-analytics/installation/pi',
+                            icon: 'IconCode',
+                        },
+                        {
                             name: 'Manual capture',
                             url: '/docs/llm-analytics/installation/manual-capture',
                             icon: 'IconCode',
