@@ -43,6 +43,16 @@ Assignment conditions are evaluated against the properties of the exception even
 
 Issues can be automatically assigned to a **role** or **user** by configuring a set of filters. These filters can be configured to match **any** or **all** of the criteria.
 
+### Testing assignment rules
+
+Click **Test rule** to check how many exceptions your rule matches. The test shows:
+
+- The number of matching exceptions in the last 7 days (expandable to 30 or 90 days)
+- The number of issues those exceptions belong to
+- Links to view the matching exceptions and issues
+
+Use this to verify your rule matches the expected exceptions before saving.
+
 You can configure automatic assignment to filter on any [event property](/docs/data/events) in PostHog. When there are multiple values for a property, the filters return true if it matches **any** of the values. For example, if you have multiple `exception_functions` values, the filters returns true if it matches **any** of the functions.
 
 Here are some common properties you can filter on:
