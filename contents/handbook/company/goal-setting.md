@@ -41,8 +41,8 @@ Add entries under each question with your initials/name like: "- (your name): My
 - Hope
   - What are you most excited about this quarter?
   - What exploration do you want to do?
-  - For Error Tracking/Session Replay/Experiments/Conversations/Experiments/Conversations/Product Analytics/LLM Analytics/Surveys:
-    We want to make PostHog proactive. How do we programmatically emit research prompts for an agent with code access & PostHog MCP (AKA signals) that will result in quality concrete code changes?
+  - For Error Tracking/Session Replay/Experiments/Conversations/Experiments/Conversations/Product Analytics/LLM Analytics:
+    We want to make PostHog proactive. How do we programmatically emit signals - i.e. research prompts for an agent with code access & PostHog MCP – that will result in quality concrete code changes?
 - Obstruction
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
