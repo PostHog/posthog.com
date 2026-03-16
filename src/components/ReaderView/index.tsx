@@ -931,6 +931,7 @@ function ReaderViewContent({
                                             <a href="/llm-analytics">LLM analytics</a>,{' '}
                                             <a href="/logs">logs</a>,{' '}
                                             <a href="/workflows">workflows</a>,{' '}
+                                            <a href="/endpoints">endpoints</a>,{' '}
                                             <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
                                             <a href="/ai">AI product assistant</a> to help debug your code, ship
                                             features faster, and keep all your usage and customer data in one stack.
