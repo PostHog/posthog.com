@@ -117,7 +117,7 @@ The line between technical and non-technical work isn’t disappearing, it’s b
 
 - For **engineers**, congrats! The world is investing a ton in making YOU more powerful. Use these same tools to turn yourself into a full stack shipping machine AKA a [product engineer](/blog/what-is-a-product-engineer). For example, you can use [Exa](https://exa.ai/) for competitive research, [BuildBetter](https://buildbetter.ai/) for user interviews, Figma Make to design a UI, and [PostHog AI](/ai) to analyze your product usage.
 
-For **startups**, build for these new types of engineers. At a minimum, let people do engineering: have an API, make your docs [machine readable](/docs/ai-engineering/markdown-llms-txt) (I love a “Copy as Markdown” button), publish an MCP server, and connect with other tools.
+For **startups**, build for these new types of engineers. At a minimum, let people do engineering: have an API, make your docs [machine readable](/docs/ai-platform/markdown-llms-txt) (I love a “Copy as Markdown” button), publish an MCP server, and connect with other tools.
 
 Those who embrace the engineeringification of everything will find themselves riding the wave it is creating. The billions trillions invested here has to benefit someone. Why not you?
 
