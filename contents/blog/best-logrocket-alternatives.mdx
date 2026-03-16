@@ -1,8 +1,9 @@
 ---
 title: 'The best LogRocket alternatives & competitors, compared'
-date: 2023-11-14
+date: 2026-03-19
 author:
     - ian-vanagas
+    - natalia-amorim
 rootpage: /blog
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
@@ -10,9 +11,18 @@ featuredImageType: full
 category: General
 tags:
     - Comparisons
+seo:
+  metaTitle: 'The best LogRocket alternatives & competitors, compared'
+  metaDescription: Looking for a LogRocket alternative? Compare the best options, including PostHog, FullStory, Sentry, Glassbox, Hotjar, and more.
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
+
+[LogRocket](/blog/posthog-vs-logrocket) combines session replay, front-end error monitoring, and basic product analytics into one tool. It's particularly popular with engineering teams who want to debug issues by replaying sessions alongside console logs, network requests, and Redux state.
+ 
+But LogRocket isn't right for everyone. Maybe you want more product analytics features, or you want to be able to run experiments and surveys in the same tool. Maybe you want a more transparent pricing model, or [an open source alternative](/blog/best-open-source-session-replay-tools).
+ 
+This guide compares the best LogRocket alternatives honestly – what they're good at, where they fall short, and who they're actually for.
 
 ## 1. PostHog
 
@@ -25,47 +35,69 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an open-source platform combining product analytics, session replay, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to LogRocket, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly) and [Amplitude](/blog/posthog-vs-amplitude).
+[PostHog](/) (that's us 👋) is a developer platform combining [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [user surveys](/user-surveys), and [a lot more](/products) into one product. 
+
+This means it's not just an alternative to LogRocket, but also tools like [LaunchDarkly](/blog/posthog-vs-launchdarkly), [Sentry](/blog/posthog-vs-sentry), [FullStory](/blog/posthog-vs-fullstory), and [Amplitude](/blog/posthog-vs-amplitude).
 
 Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [Supabase](/customers/supabase), [ElevenLabs](/customers/elevenlabs), [Lovable](/customers/lovable), and Airbus.
 
 ### Key features
 
--   📈 **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
+- **Session replay:** Full DOM replay with event timelines, console logs, network activity, performance metrics, AI session summaries, and 90-day data retention.
 
--   📺 **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
+- **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports SQL insights for power users.
 
--   🚩 **Feature flags** with local evaluation (for faster performance) and JSON payloads.
+- **Feature flags:** Boolean and multivariate flags with local evaluation (for faster performance) and JSON payloads.
 
--   🧪 **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **Experiments:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
--   💬 **Surveys:** Target surveys by event or person properties. Templates for Net Promoter Score (NPS), product-market fit (PMF) surveys, and more.
+- **Error tracking:** Exceptions linked directly to session replays and user context.
+
+- **PostHog AI:** Natural language querying, AI session summaries, and an [MCP server](/docs/mcp) for querying PostHog from Claude, Cursor, and other AI coding tools.
 
 ### How does PostHog compare to LogRocket?
 
 PostHog has more tools for shipping new features and understanding their impact, while LogRocket focuses on surfacing issues and errors with your app's experience.
 
+If replay is 90% of your use case and you're primarily debugging front-end issues, LogRocket is worth considering. If you want replay connected to a full product development platform, PostHog is the stronger choice.
+
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
-        'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is PostHog?
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHog is much more popular than LogRocket. As of January 2024, 4,732 (0.5%) of the top 1 million websites deploy PostHog, over triple LogRocket's 1,104 (0.1%).
+<details>
+<summary>Main differences between PostHog and LogRocket</summary>
+ 
+- LogRocket is focused on session replay and front-end monitoring. PostHog covers that plus full product analytics, feature flags, A/B testing, error tracking, surveys, logs, and a data warehouse — all in one platform with a shared data model.
+- PostHog adds SQL access, open-source code, and an MCP server for AI coding tools. It [ships new features constantly](/changelog) and is built to keep up with engineering teams who want their tools to do more over time.
+- LogRocket's free tier covers 1,000 sessions/month with 1 month of data retention; paid plans start at $139/month for 25k sessions. PostHog's free tier covers 5,000 session replays plus 1M analytics events, feature flags, and more; [pricing is transparent and usage-based](/pricing) across the whole platform.
+ 
+</details>
+ 
+<details>
+<summary>Main similarities between PostHog and LogRocket</summary>
+ 
+- Both offer session replay with console logs, network monitoring, and performance tracking.
+- Both have front-end error tracking with stack traces.
+- Both have AI assistants — LogRocket's Galileo proactively surfaces struggle patterns; PostHog AI supports natural language querying and session summaries.
+- Both integrate with GitHub, Slack, and popular developer tools.
+ 
+</details>
 
 ### Why do companies use PostHog?
 
@@ -92,21 +124,21 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Glassbox?
 
-Glassbox is a session replay and analytics platform with a particular focus on mobile apps and e-commerce use cases. Customers include UK retailer Sainsbury's, Marriott, and Experian.
+**Glassbox** is a session replay and analytics platform with a particular focus on mobile apps and e-commerce use cases. Customers include UK retailer Sainsbury's, Marriott, and Experian.
 
 Glassbox is predominantly used by business analysts and support teams in enterprise B2C companies.
 
 ### Key features
 
--   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+- **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
--   📊 **Product analytics:** Understand user paths and struggle points.
+- **Product analytics:** Understand user paths and struggle points.
 
--   🏎️ **Performance analytics:** Track app performance and its impact on conversion rates.
+- **Performance analytics:** Track app performance and its impact on conversion rates.
 
--   🔥 **Click, scroll, and heatmaps:** Understand where users interact with your app.
+- **Click, scroll, and heatmaps:** Understand where users interact with your app.
 
--   ✅ **User feedback:** Gather satisfaction and user feedback on the app experience.
+- **User feedback:** Gather satisfaction and user feedback on the app experience.
 
 ### How does Glassbox compare to LogRocket?
 
@@ -115,26 +147,22 @@ On a feature-by-feature basis, Glassbox and LogRocket are nearly identical. Glas
 <ProductComparisonTable
     competitors={['glassbox', 'logrocket']}
     rows={[
-        'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is Glassbox?
-
-As of January 2024, just 386 of the top 1 million websites deploy Glassbox. This is a quarter of LogRocket's 1,104.
-
-That said, Glassbox's focus on mobile apps isn't reflected in these figures.
 
 ### Why do companies use Glassbox?
 
@@ -165,15 +193,15 @@ According to G2 reviews, customers use Glassbox for:
 
 ### Key features
 
--   📹 **Session replay:** See all the details of an issue with context like DOM events, console logs, and network calls.
+- **Session replay:** See all the details of an issue with context like DOM events, console logs, and network calls.
 
--   ➡️ **Tracing:** Identify performance issues with an end-to-end distributed trace to see how calls and queries do across the stack.
+- **Tracing:** Identify performance issues with an end-to-end distributed trace to see how calls and queries do across the stack.
 
--   ⚠️ **Error tracking:** Capture errors and events leading up to them to make reproduction and fixes simpler.
+- **Error tracking:** Capture errors and events leading up to them to make reproduction and fixes simpler.
 
--   🏎️ **Performance monitoring:** See how your app and queries perform. Find and fix slow areas.
+- **Performance monitoring:** See how your app and queries perform. Find and fix slow areas.
 
--   1️⃣ **Release tracking:** Connect issues to releases. Gives the context to making debugging easier.
+- **Release tracking:** Connect issues to releases. Gives the context to making debugging easier.
 
 ### How does Sentry compare to LogRocket?
 
@@ -182,24 +210,22 @@ Both [Sentry](/blog/best-sentry-alternatives) and LogRocket focus on mitigating 
 <ProductComparisonTable
     competitors={['sentry', 'logrocket']}
     rows={[
-        'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is Sentry?
-
-According to data from [BuiltWith](https://trends.builtwith.com/javascript/Sentry), as of January 2024, 63,463 of the top 1 million sites use Sentry, much more than LogRocket's 1,104.
 
 ### Why do companies use Sentry?
 
@@ -230,15 +256,15 @@ Smartlook is an analytics platform combining session replays with product analyt
 
 ### Key features
 
--   📹 **Session recordings:** Understand how users are actually using your app and where issues occur.
+- **Session recordings:** Understand how users are actually using your app and where issues occur.
 
--   📊 **Event-based analytics:** See how often users behave in the ways important to you.
+- **Event-based analytics:** See how often users behave in the ways important to you.
 
--   🔥 **Heatmaps:** Figure out what parts of the page users click and scroll to.
+- **Heatmaps:** Figure out what parts of the page users click and scroll to.
 
--   🛣️ **Funnels and paths:** See how users move through your app with custom visuals for key flows.
+- **Funnels and paths:** See how users move through your app with custom visuals for key flows.
 
--   📉 **Crash reports:** Learn what happens before a crash without reproduction.
+- **Crash reports:** Learn what happens before a crash without reproduction.
 
 ### How does Smartlook compare to LogRocket?
 
@@ -249,22 +275,21 @@ Smartlook's combination of session replay and analytics with a focus on issues i
     rows={[
         'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is Smartlook?
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/Smartlook), as of January 2024, 3,186 of the top 1 million websites use Smartlook. This is more than LogRocket's 1,104.
 
 ### Why do companies use Smartlook?
 
@@ -291,45 +316,43 @@ According to G2 reviewers, Smartlook users benefit from:
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
+[FullStory](/blog/posthog-vs-fullstory) describes itself as Digital Experience Intelligence, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
 ### Key features
 
--   📹 **Session replay:** Watch and analyze real user sessions on web and mobile apps.
+- **Session replay:** Watch and analyze real user sessions on web and mobile apps.
 
--   📊 **Product analytics:** Understand user paths and struggle points.
+- **Product analytics:** Understand user paths and struggle points.
 
--   📈 **Event autocapture:** Tagless event capture that ensures the tracking of all events.
+- **Event autocapture:** Tagless event capture that ensures the tracking of all events.
 
--   🔥 **Heatmaps:** Find out where users click and frustration points.
+- **Heatmaps:** Find out where users click and frustration points.
 
--   📱 **Mobile app analytics:** Crash analytics and user path analysis.
+- **Mobile app analytics:** Crash analytics and user path analysis.
 
 ### How does FullStory compare to LogRocket?
 
-Both FullStory and LogRocket have tools to understand user experience, but LogRocket captures more data on errors and issues.
+Both [FullStory](/best-fullstory-alternatives) and LogRocket have tools to understand user experience, but LogRocket captures more data on errors and issues.
 
 <ProductComparisonTable
     competitors={['fullstory', 'logrocket']}
     rows={[
-        'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is FullStory?
-
-According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of January 2024, 8,430 of the top 1 million websites in the world deploy FullStory. This is much more than LogRocket's 1,104.
 
 ### Why do companies use FullStory?
 
@@ -360,13 +383,13 @@ According to reviews on G2, companies use FullStory for:
 
 ### Key features
 
--   📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+- **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
 
--   🦮 **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
+- **In-app guides:** Deliver personalized guidance to customers, directly inside your app.
 
--   📝 **User feedback:** Capture and analyze customer feedback at scale.
+- **User feedback:** Capture and analyze customer feedback at scale.
 
--   🗺️ **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
+- **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
 
 ### How does Pendo compare to LogRocket?
 
@@ -375,24 +398,22 @@ Pendo focuses more on in-app guides and feedback. It doesn't have the monitoring
 <ProductComparisonTable
     competitors={['pendo', 'logrocket']}
     rows={[
-        'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is Pendo?
-
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo), as of January 2024, 3,711 of the top 1 million websites used Pendo. This is triple LogRocket's 1,104.
 
 ### Why do companies use Pendo?
 
@@ -419,45 +440,43 @@ According to G2 reviews, customers use Pendo for:
 
 ### What is Hotjar?
 
-[Hotjar](/blog/best-hotjar-alternatives) focuses on user behavior rather than analytics. This means using heatmaps, replays, feedback, and interviews to understand the qualitative aspects of your site and app.
+[Hotjar](/blog/posthog-vs-hotjar) focuses on user behavior rather than analytics. This means using heatmaps, replays, feedback, and interviews to understand the qualitative aspects of your site and app.
 
 ### Key features
 
--   🔥 **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
+- **Heatmaps:** See what parts of your pages get attention and how far down the page users get.
 
--   🎥 **Recordings:** Replay real user sessions and see what they see.
+- **Recordings:** Replay real user sessions and see what they see.
 
--   🗣️ **Feedback:** Learn what your users are thinking. Find out their likes and dislikes.
+- **Feedback:** Learn what your users are thinking. Find out their likes and dislikes.
 
--   📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+- **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
 
--   👔 **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
+- **Interviews:** Talk to real users to share ideas, test designs, and get live feedback.
 
 ### How does Hotjar compare to LogRocket?
 
-LogRocket focuses on analytics and error tracking, while Hotjar focuses on tools for talking to users like feedback, surveys, and interviews.
+LogRocket focuses on analytics and error tracking, while [Hotjar](/blog/best-hotjar-alternatives) focuses on tools for talking to users like feedback, surveys, and interviews.
 
 <ProductComparisonTable
     competitors={['hotjar', 'logrocket']}
     rows={[
-        'platform.pricing.self_serve',
         'session_replay',
-        'heatmaps',
-        'product_analytics',
-        'product_analytics.features.autocapture',
-        'product_analytics.group_analytics',
-        'experiments',
+        'session_replay.analysis.console_logs',
         'session_replay.analysis.performance_monitoring',
+        'session_replay.analysis.heatmaps',
+        'session_replay.features.crash_reports',
         'error_tracking',
-        'error_tracking.features.issue_management',
-        'product_analytics.insights.alerts',
-        'platform.deployment.open_source',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.monitoring.source_map_support',
+        'error_tracking.monitoring.performance_monitoring',
+        'product_analytics',
+        'feature_flags',
+        'experiments',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
     ]}
 />
-
-### How popular is Hotjar?
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/Hotjar), as of January 2024, Hotjar is much more popular than LogRocket. A massive 73,874 of the top 1 million sites use Hotjar. LogRocket is only used on 1,104.
 
 ### Why do companies use Hotjar?
 
