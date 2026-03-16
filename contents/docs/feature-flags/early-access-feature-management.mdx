@@ -33,7 +33,7 @@ Once created, you can opt users in or out manually on the feature detail screen 
 
 ## Feature lifecycle stages
 
-Early access features progress through six stages that control visibility and feature flag behavior:
+Early access features progress through five stages that control visibility and feature flag behavior:
 
 | Stage | Flag enabled for opted-in users? | Purpose |
 |-------|----------------------------------|---------|
@@ -42,13 +42,12 @@ Early access features progress through six stages that control visibility and fe
 | **Alpha** | Yes | Early testing phase. Opted-in users have the feature flag enabled. Use this for limited testing with a small group. |
 | **Beta** | Yes | Wider testing phase. Opted-in users have the feature flag enabled. This is the default stage shown to users in the opt-in UI. |
 | **General availability** | Yes | Feature is stable and fully released. The feature becomes read-only in PostHog after promotion. Opted-in users retain access. |
-| **Archived** | No | Feature has been retired. The feature flag enrollment condition is removed for all users. The feature record is preserved for historical reference. |
 
 ### What happens during stage transitions
 
 When you change a feature's stage, two things happen:
 
-1. **Feature flag update**: Moving to an active stage (Alpha, Beta, or General availability) adds an enrollment condition to the linked feature flag so that opted-in users get the flag enabled. Moving to an inactive stage (Draft, Concept, or Archived) removes this condition.
+1. **Feature flag update**: Moving to an active stage (Alpha, Beta, or General availability) adds an enrollment condition to the linked feature flag so that opted-in users get the flag enabled. Moving to an inactive stage (Draft or Concept) removes this condition.
 
 2. **User notification**: Enrolled users (those who opted in) receive a `$feature_enrollment_update` event that your application can use to notify them of the stage change (for example, "Feature X has moved to Beta").
 
