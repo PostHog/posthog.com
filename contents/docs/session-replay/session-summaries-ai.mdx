@@ -1,0 +1,50 @@
+---
+title: Summarize sessions with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) generates summaries of [session recordings](/docs/session-replay), so you can understand what happened in a session without watching the full replay. Each summary analyzes the events and actions within a recording and produces a concise description of what the user did.
+
+## How it works
+
+A session summary typically includes:
+
+- **Key actions** – pages visited, buttons clicked, forms submitted, and features used
+- **Behavioral patterns** – repeated actions, navigation loops, hesitation, or rage clicks
+- **Errors encountered** – JavaScript errors, failed network requests, or captured exceptions
+- **Session outcome** – whether the user completed a goal, dropped off, or experienced issues
+
+## How summaries work
+
+PostHog AI reads the event stream from a recording – every page view, click, input, scroll, error, and custom event – and produces a human-readable summary. It doesn't watch the video; it analyzes the structured event data, which means summaries are fast even for long sessions.
+
+This makes it practical to summarize sessions in bulk. Instead of watching 20 recordings to spot a pattern, ask PostHog AI to summarize all of them and surface what's common.
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Summarize the last 5 session replays where users dropped off during checkout`](https://app.posthog.com/#panel=max:Summarize%20the%20last%205%20session%20replays%20where%20users%20dropped%20off%20during%20checkout)
+- [`What patterns do you see in sessions with rage clicks?`](https://app.posthog.com/#panel=max:What%20patterns%20do%20you%20see%20in%20sessions%20with%20rage%20clicks%3F)
+- [`Summarize sessions from users who signed up today`](https://app.posthog.com/#panel=max:Summarize%20sessions%20from%20users%20who%20signed%20up%20today)
+- [`What are users struggling with on the pricing page?`](https://app.posthog.com/#panel=max:What%20are%20users%20struggling%20with%20on%20the%20pricing%20page%3F)
+
+## Summarize sessions across experiment variants
+
+Session summaries are especially useful for understanding [Experiment](/docs/experiments) results. Metrics tell you *which* variant won, but summaries tell you *why*.
+
+Ask PostHog AI to summarize replays for each variant to spot behavioral differences between control and test groups – like different navigation patterns, different points of confusion, or different feature usage.
+
+- [`Summarize session replays for the control group in my checkout experiment`](https://app.posthog.com/#panel=max:Summarize%20session%20replays%20for%20the%20control%20group%20in%20my%20checkout%20experiment)
+- [`What behavioral differences do you see between variant A and variant B?`](https://app.posthog.com/#panel=max:What%20behavioral%20differences%20do%20you%20see%20between%20variant%20A%20and%20variant%20B%3F)
+
+## Tips for better results
+
+- **Ask about specific behaviors** – "What do users do after seeing the upgrade prompt?" gives you more targeted summaries than "Summarize recent sessions"
+- **Batch for patterns** – Summarizing multiple sessions at once (e.g. "the last 10 sessions with errors") helps PostHog AI identify recurring issues
+- **Combine with user properties** – "Summarize sessions from enterprise users who churned" narrows the focus to the most relevant recordings
+- **Use with experiments** – Comparing summaries across variants reveals behavioral differences that raw metrics might miss
+- **Ask follow-up questions** – After getting a summary, ask "What's the most common point of drop-off?" or "Were there any errors?" to drill deeper
+
+## Get started
+
+To use session summaries, [set up PostHog AI](/docs/posthog-ai/start-here). Session summaries require you to enable [Session Replay](/docs/session-replay) in your project.

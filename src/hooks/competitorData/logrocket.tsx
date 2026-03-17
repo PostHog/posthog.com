@@ -182,6 +182,12 @@ export const logrocket = {
         dashboards: {
             available: true,
         },
+        logs: {
+            available: true,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

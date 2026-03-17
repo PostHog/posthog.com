@@ -547,6 +547,9 @@ export const posthog = {
         workflows: {
             available: true,
             features: {
+                visual_builder: true,
+                ai_assistant: false,
+                campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
                 cohort_targeting: true,
@@ -559,6 +562,15 @@ export const posthog = {
                 experiment_triggers: true,
                 webhook_actions: true,
                 run_based_pricing: true,
+            },
+            channels: {
+                features: {
+                    email: true,
+                    sms: true,
+                    push: false,
+                    webhooks: true,
+                    whatsapp: false,
+                },
             },
         },
         data_warehouse: {

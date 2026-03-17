@@ -142,6 +142,26 @@ The `system.actions` table contains action definitions created in your project.
 | `updated_at` | When the action was last updated               |
 | `steps_json` | JSON containing the action's step definitions  |
 
+
+### `system.annotations`
+
+The `system.annotations` table contains annotation data from your project. Annotations are timestamped notes used to mark product changes, incidents, or releases on charts.
+
+| Column             | Description                                                   |
+|--------------------|---------------------------------------------------------------|
+| `id`               | Unique identifier for the annotation                          |
+| `team_id`          | Team ID the annotation belongs to                             |
+| `content`          | Text content of the annotation                                |
+| `scope`            | Scope of the annotation: `project`, `organization`, `dashboard`, or `dashboard_item` |
+| `creation_type`    | How the annotation was created: `USR` (user) or `GIT` (automated) |
+| `date_marker`      | Timestamp shown on charts (ISO 8601 format)                   |
+| `deleted`          | Whether the annotation is deleted (1 = yes, 0 = no)           |
+| `dashboard_item_id`| Linked insight ID (if scoped to an insight)                   |
+| `dashboard_id`     | Linked dashboard ID (if scoped to a dashboard)                |
+| `created_by_id`    | User ID of the annotation creator                             |
+| `created_at`       | When the annotation was created                               |
+| `updated_at`       | When the annotation was last updated                          |
+
 ### `system.cohort_calculation_history`
 
 The `system.cohort_calculation_history` table tracks cohort calculation runs, useful for monitoring cohort computation status and debugging.

@@ -183,12 +183,19 @@ export const fullstory = {
         dashboards: {
             available: true,
         },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
             open_source: false,
             reverse_proxy: true,
             self_host: false,
+            eu_hosting: true,
         },
         pricing: {
             free_tier: true,
