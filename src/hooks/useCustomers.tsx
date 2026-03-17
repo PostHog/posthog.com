@@ -27,6 +27,7 @@ import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
+import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesignStudioLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
@@ -47,6 +48,7 @@ import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import UKGovtLogo from '../components/CustomerLogos/UKGovtLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
 import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
@@ -166,7 +168,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
-        height: 9,
+        height: 8,
         featured: true,
     },
     assemblyai: {
@@ -260,7 +262,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Backend web app platform',
         logo: ConvexLogo,
         featured: true,
-        height: 7,
+        height: 8,
     },
     creatify: {
         name: 'Creatify',
@@ -826,6 +828,26 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: TrustWalletLogo,
         featured: true,
         height: 10,
+    },
+    ukgovt: {
+        name: 'UK Government',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Most popular country with a Queen',
+        logo: UKGovtLogo,
+        featured: true,
+        height: 9,
+    },
+    nationaldesignstudio: {
+        name: 'National Design Studio',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Design studio of the US Government',
+        logo: NationalDesignStudioLogo,
+        featured: true,
+        height: 12,
     },
     vendasta: {
         name: 'Vendasta',
