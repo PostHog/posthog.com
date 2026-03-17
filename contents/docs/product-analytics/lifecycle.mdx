@@ -22,7 +22,7 @@ export const detailDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v17
 export const viewSessionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/view-session-reply-light-mode.png"
 export const viewSessionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/view-session-reply-dark-mode.png"
 
-The lifecycle insight visualizes new, returning, resurrecting, and dormant users.
+The lifecycle insight visualizes new, returning, resurrecting, and dormant users. You can use it with both PostHog events and [data warehouse](/docs/data-warehouse) tables.
 
 It shows what's below the surface of your user growth. For example, you could have stellar growth due to marketing efforts, but users churn quickly. This can lead to trouble as you're unable to retain existing users. 
 
@@ -51,9 +51,19 @@ The below examples show the `Sent a message` event to define user activity:
     alt="Set up a new lifecycle analysis with custom event 'Sent a message'"
 />
 
+#### Data warehouse tables
+
+Instead of a PostHog event, you can select a [data warehouse](/docs/data-warehouse) table as your lifecycle series. This enables analyzing lifecycle patterns for any entity in your data warehouse, not just PostHog users.
+
+When you select a data warehouse table, you must configure three fields:
+
+- **Timestamp** – A timestamp field representing when the activity occurred.
+- **Created at** – A timestamp field representing when the entity was first created. This is used to determine "new" vs "returning" status.
+- **Aggregation target** – A field identifying the entity you want to track (e.g., customer ID, order ID).
+
 #### Aggregation type
 
-The default aggregation is by user. However, you can also aggregate events by [groups](/docs/product-analytics/group-analytics) if you have any set up.
+The default aggregation is by user. However, you can also aggregate events by [groups](/docs/product-analytics/group-analytics) if you have any set up. When using a data warehouse table, you can also select **Custom entities** as the aggregation type for entities that can't be mapped to a person or group (such as orders or subscriptions). When using custom entity aggregation, the person modal is not available when clicking on the chart.
 
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1718625075/posthog.com/contents/Screenshot_2024-06-17_at_1.49.16_PM.png"} 
@@ -150,4 +160,13 @@ You can then click through to look at these individual users behavior in the eve
     classes="rounded"
     alt="View session recordings"
 />
+
+## Limitations when using data warehouse tables
+
+When using data warehouse tables in lifecycle insights, the following features are not available:
+
+- Test account filters
+- Sampling
+
+Property filters must use properties from the selected data warehouse table.
 
