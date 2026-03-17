@@ -1,5 +1,3 @@
-import { workflows } from 'hooks/productData/workflows'
-
 export const pendo = {
     name: 'Pendo',
     key: 'pendo',
@@ -91,6 +89,7 @@ export const pendo = {
             },
             features: {
                 event_timeline: true,
+                crash_reports: false,
             },
             platform_support: {
                 features: {
@@ -139,6 +138,10 @@ export const pendo = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: false,
+            },
+            monitoring: {
+                performance_monitoring: false,
             },
         },
         cdp: {
@@ -233,6 +236,7 @@ export const pendo = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
 }

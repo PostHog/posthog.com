@@ -247,6 +247,7 @@ export const logrocket = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,

@@ -177,6 +177,7 @@ export const fullstory = {
             features: {
                 issue_management: false,
                 performance_monitoring: false,
+                stack_tracing: true, // https://help.fullstory.com/hc/en-us/articles/360020828533-How-do-I-use-the-Fullstory-Console
             },
         },
         dashboards: {
@@ -231,6 +232,7 @@ export const fullstory = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,
