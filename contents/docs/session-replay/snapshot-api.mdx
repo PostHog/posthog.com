@@ -24,6 +24,21 @@ We store session replay data in more than one place as it is ingested. A "source
 
 > **Important:** For batch exports of recordings, it is safest to only export recordings that started more than 24 hours ago. We cut off sessions after 24 hours and so you know the recording is immutable at that point.
 
+
+## Rate limiting
+
+Rate limits apply only to requests authenticated with a [personal API key](/docs/api/overview#personal-api-key-recommended). Requests using session authentication (logged-in users in the PostHog app) or sharing tokens bypass rate limiting entirely.
+
+Limits are determined by your organization's plan tier:
+
+| Tier | Burst limit | Sustained limit |
+|------|------------|----------------|
+| Free | 30 requests/minute | 150 requests/hour |
+| Paid (Scale, Teams) | 90 requests/minute | 500 requests/hour |
+| Enterprise | 120 requests/minute | 600 requests/hour |
+
+Rate limit tier results are cached for 12 hours per team. If there's an error determining your tier, the API falls back to free-tier rates.
+
 ## Using the snapshot API (Version 2)
 
 We (Pawel 🦸) have released our new version of the ingestion pipeline that is way more efficient and uses way less resources. Last time we improved the ingestion pipeline and let our new costs settle, we were able to [reduce prices](/blog/session-replay-pricing)... (investors hate this one weird trick 😅).
