@@ -242,3 +242,42 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `version`         | Version number of the notebook                     |
 | `created_at`      | When the notebook was created                      |
 | `last_modified_at`| When the notebook was last modified                |
+
+### `system.source_schemas`
+
+The `system.source_schemas` table contains per-table sync configuration for external data sources. Each row represents one table or entity being synced from an external source.
+
+| Column         | Description                                           |
+|----------------|-------------------------------------------------------|
+| `id`           | Unique identifier for the schema                      |
+| `team_id`      | Team ID the schema belongs to                         |
+| `name`         | Schema/table name (e.g., `customers`, `invoices`)     |
+| `source_id`    | ID of the external data source                        |
+| `table_id`     | ID of the associated data warehouse table             |
+| `should_sync`  | Whether this schema is enabled for syncing            |
+| `status`       | Current sync status                                   |
+| `sync_type`    | Sync strategy type                                    |
+| `last_synced_at`| When the schema was last synced                      |
+| `latest_error` | Most recent error message                             |
+| `created_at`   | When the schema was created                           |
+| `updated_at`   | When the schema was last updated                      |
+| `deleted`      | Whether the schema is deleted (1 = yes, 0 = no)       |
+| `deleted_at`   | When the schema was deleted                           |
+
+### `system.source_sync_jobs`
+
+The `system.source_sync_jobs` table tracks individual sync job runs for external data sources. Use this table to monitor sync progress, troubleshoot errors, and analyze sync performance.
+
+| Column         | Description                                           |
+|----------------|-------------------------------------------------------|
+| `id`           | Unique identifier for the sync job                    |
+| `team_id`      | Team ID the sync job belongs to                       |
+| `pipeline_id`  | ID of the pipeline                                    |
+| `schema_id`    | ID of the schema being synced                         |
+| `status`       | Current job status                                    |
+| `rows_synced`  | Number of rows synced in this job                     |
+| `billable`     | Whether this sync job is billable                     |
+| `latest_error` | Most recent error message                             |
+| `created_at`   | When the sync job was created                         |
+| `finished_at`  | When the sync job finished                            |
+| `updated_at`   | When the sync job was last updated                    |
