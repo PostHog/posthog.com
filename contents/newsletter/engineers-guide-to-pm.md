@@ -82,7 +82,7 @@ When the team meets again in the following month, they'll review what worked and
 
 Here's an example from our [Error Tracking](/docs/error-tracking) team:
 
-1. **The problem:** [Cory](/community/profiles/34160), the PM, noticed that [churn rates](/product-engineers/churn-rate-vs-retention-rate) were disproportionately high, even though new customer acquisition was strong.
+1. **The problem:** <TeamMember name="Cory Slater" />, the PM, noticed that [churn rates](/product-engineers/churn-rate-vs-retention-rate) were disproportionately high, even though new customer acquisition was strong.
 
 2. **The context:** A series of customer interviews all pointed to the same theme: trust. Users were leaving because of rough edges, such as missing recordings or unhandled stack trace edge cases.
 
