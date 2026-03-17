@@ -208,7 +208,7 @@ const COL1 = [
     'heygen',
 ]
 
-const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'convex', 'hasura', 'raycast', 'wisprflow', 'posthog']
+const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'convex', 'hasura', 'raycast', 'greptile', 'wisprflow', 'posthog']
 
 const companyBreakdowns = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
@@ -248,6 +248,7 @@ const companyAttributes = {
         'researchgate',
         'exa',
         'heygen',
+        // 'greptile',
         // 'wisprflow',
         // "posthog"
     ],
@@ -269,6 +270,7 @@ const companyAttributes = {
         // 'nationaldesignstudio',
         // 'ukgovt',
         // 'wisprflow',
+        // 'greptile',
         'posthog',
     ],
     hardware: [
@@ -288,6 +290,7 @@ const companyAttributes = {
         // 'exa',
         // 'nationaldesignstudio',
         // 'wisprflow',
+        // 'greptile',
         'ukgovt',
         'posthog',
     ],
@@ -309,6 +312,7 @@ const companyAttributes = {
         // "heygen",
         // 'exa',
         // 'wisprflow',
+        // 'greptile',
         // "posthog"
     ],
     highValue: [
@@ -329,6 +333,7 @@ const companyAttributes = {
         // "heygen",
         // 'exa',
         // 'wisprflow',
+        // 'greptile',
         // "posthog"
     ],
     caseStudy: [
@@ -348,6 +353,7 @@ const companyAttributes = {
         // "heygen",
         // 'nationaldesignstudio',
         // 'wisprflow',
+        // 'greptile',
         // 'ukgovt',
         'posthog',
     ],
@@ -368,6 +374,7 @@ const companyAttributes = {
         'heygen',
         'posthog',
         'wisprflow',
+        // 'greptile',
         // 'nationaldesignstudio',
         'ukgovt',
     ],
@@ -388,6 +395,7 @@ const companyAttributes = {
         // "heygen",
         'nationaldesignstudio',
         'wisprflow',
+        // 'greptile',
         // 'ukgovt',
         'posthog',
     ],
@@ -408,6 +416,7 @@ const companyAttributes = {
         'nationaldesignstudio',
         'ukgovt',
         'wisprflow',
+        // 'greptile',
         // "heygen",
         // "posthog"
     ],
@@ -426,6 +435,7 @@ const companyAttributes = {
         // "researchgate",
         'exa',
         'heygen',
+        // 'greptile',
         // 'nationaldesignstudio',
         'wisprflow',
         'ukgovt',
@@ -448,6 +458,7 @@ const companyAttributes = {
         // "heygen",
         'nationaldesignstudio',
         // 'ukgovt',
+        // 'greptile',
         'wisprflow',
         'posthog',
     ],
@@ -469,6 +480,7 @@ const companyAttributes = {
         'nationaldesignstudio',
         // 'ukgovt',
         'wisprflow',
+        'greptile',
         'posthog',
     ],
     pokemon: [
@@ -489,6 +501,7 @@ const companyAttributes = {
         // 'wisprflow',
         // 'nationaldesignstudio',
         // 'ukgovt',
+        'greptile',
         // "posthog"
     ],
     arr: [
@@ -507,6 +520,7 @@ const companyAttributes = {
         'exa',
         'heygen',
         'wisprflow',
+        'greptile',
         // 'ukgovt',
         // 'nationaldesignstudio',
         'posthog',
