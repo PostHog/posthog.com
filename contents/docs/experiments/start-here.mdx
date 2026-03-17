@@ -12,6 +12,9 @@ import { ProductVideo } from 'components/ProductVideo'
 import { IconRewindPlay, IconToggle, IconFlask, IconGraph } from '@posthog/icons'
 import ExperimentInstallationPlatforms from './installation/_snippets/installation-platforms.tsx'
 
+export const CreateExperimentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png"
+export const CreateExperimentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png"
+
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to start experimenting!">
 
 <QuestLogItem 
@@ -38,20 +41,24 @@ The first step is to install PostHog with the library you want to run experiment
   icon="IconFlask"
 >
 
-Once PostHog is installed, create your experiment by going to the [experiments tab](https://app.posthog.com/experiments) and clicking **New experiment**.
+Once PostHog is installed, create your experiment by going to the [Experiments](https://app.posthog.com/experiments) section and clicking **New experiment**.
+
+This opens a guided creation wizard that walks you through three steps:
+
+1. **Description** – Name your experiment, write a hypothesis, and set the feature flag key
+2. **Variant rollout** – Configure variants, split percentages, and rollout percentage
+3. **Analytics** – Set inclusion criteria and add metrics to measure results
+
+When you're done, click **Save as draft** on the final step. You can launch the experiment from its detail page after saving.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
-    alt="How to create an experiment in PostHog" 
+    imageLight={CreateExperimentLight}
+    imageDark={CreateExperimentDark}
+    alt="How to create an experiment in PostHog"
     classes="rounded"
 />
 
-Fill in the experiment details:
-- **Feature flag key**: This will be used in your code to check which variant a user gets
-- **Variants**: By default, you get `control` and `test` variants (you can add more)
-- **Participants**: Choose between user-level or group-level experiments
-
+The following section goes into more detail on each step.
 <OSButton variant="primary" asLink to="/docs/experiments/creating-an-experiment">
   Create an experiment
 </OSButton>
@@ -91,19 +98,14 @@ That's it! When you call `getFeatureFlag()`, PostHog automatically tracks exposu
   icon="IconGraph"
 >
 
-Before launching, add at least one metric to measure your experiment's success. Go to your experiment and click **Add metric** in the Primary metrics section.
+Metrics define how you measure the experiment's impact. You can add them in step 3 of the creation wizard, after saving the experiment, or even after launching the experiment.
 
-Choose from:
-- **Funnel metrics**: For conversion rates (e.g., signup → purchase)
-- **Mean metrics**: For averages and sums (e.g., revenue per user)  
-- **Ratio metrics**: For custom calculations (e.g., revenue per order)
+There are two categories:
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_22_2x_e0b179b143.png"
-    alt="Primary metrics in PostHog experiments"
-    classes="rounded"
-/>
+- **Primary metrics** – The main measurements that determine whether your experiment succeeded.
+- **Secondary metrics** – Additional measurements to monitor for side effects or supplementary insights.
+
+You can create metrics directly or reuse **shared metrics** defined at the project level. We recommend defining your metrics upfront to avoid biasing your analysis.
 
 <OSButton variant="primary" asLink to="/docs/experiments/metrics">
   Learn about experiment metrics

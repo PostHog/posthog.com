@@ -23,6 +23,7 @@ import { clarity } from '../../hooks/competitorData/clarity'
 import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
+import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
 import { devcycle } from '../../hooks/competitorData/devcycle'
@@ -47,6 +48,7 @@ import { helicone } from '../../hooks/competitorData/helicone'
 import { hightouch } from '../../hooks/competitorData/hightouch'
 import { hotjar } from '../../hooks/competitorData/hotjar'
 import { kameleoon } from '../../hooks/competitorData/kameleoon'
+import { kissmetrics } from '../../hooks/competitorData/kissmetrics'
 import { klaviyo } from 'hooks/competitorData/klaviyo'
 import { langfuse } from '../../hooks/competitorData/langfuse'
 import { langsmith } from '../../hooks/competitorData/langsmith'
@@ -83,6 +85,7 @@ import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
 import { survey_monkey } from '../../hooks/competitorData/survey_monkey'
+import { telemetrydeck } from 'hooks/competitorData/telemetrydeck'
 import { tealium } from '../../hooks/competitorData/tealium'
 import { tinybird } from '../../hooks/competitorData/tinybird'
 import { umami } from '../../hooks/competitorData/umami'
@@ -90,6 +93,7 @@ import { unleash } from '../../hooks/competitorData/unleash'
 import { userpilot } from '../../hooks/competitorData/userpilot'
 import { userflow } from '../../hooks/competitorData/userflow'
 import { uxcam } from '../../hooks/competitorData/uxcam'
+import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
@@ -620,6 +624,7 @@ export default function ProductComparisonTable({
         clickhouse_cloud,
         cloudflare,
         contentsquare,
+        counter,
         crazy_egg,
         datadog,
         devcycle,
@@ -644,6 +649,7 @@ export default function ProductComparisonTable({
         hotjar,
         hightouch,
         kameleoon,
+        kissmetrics,
         klaviyo,
         langfuse,
         langsmith,
@@ -680,6 +686,7 @@ export default function ProductComparisonTable({
         stripe,
         survicate,
         survey_monkey,
+        telemetrydeck,
         tealium,
         tinybird,
         umami,
@@ -687,6 +694,7 @@ export default function ProductComparisonTable({
         userpilot,
         userflow,
         uxcam,
+        vercel_analytics,
         vwo,
         walkme,
         whatfix,
