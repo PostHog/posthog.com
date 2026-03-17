@@ -12,15 +12,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function WarehouseNative(): JSX.Element {
-    const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
-
-    useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, "PostHog's integrated data warehouse")
-        }
-    }, [appWindow, setWindowTitle])
-
     return (
         <>
             <SEO

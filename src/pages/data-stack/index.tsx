@@ -305,7 +305,7 @@ export default function CDP(): JSX.Element {
                     systems.
                 </p>
                 <p>
-                    <Link to="/warehouse-native" state={{ newWindow: true }}>
+                    <Link to="/data-stack/warehouse-native" state={{ newWindow: true }}>
                         Learn more about PostHog&apos;s integrated warehouse
                     </Link>
                 </p>
