@@ -12,6 +12,7 @@ import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
@@ -51,12 +52,12 @@ import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
 import UKGovtLogo from '../components/CustomerLogos/UKGovtLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
+import WisprFlowLogo from 'components/CustomerLogos/WisprFlow'
 import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
-import ExaLogo from 'components/CustomerLogos/ExaLogo'
 
 export interface Customer {
     slug: string
@@ -574,6 +575,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: true,
     },
+    nationaldesignstudio: {
+        name: 'National Design Studio',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Design studio of the US Government',
+        logo: NationalDesignStudioLogo,
+        featured: true,
+        height: 12,
+    },
     netdata: {
         name: 'Netdata',
         toolsUsed: ['session_replay', 'product_analytics'],
@@ -839,16 +850,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 9,
     },
-    nationaldesignstudio: {
-        name: 'National Design Studio',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
-        // users: [], // TODO: Add users
-        notes: 'Design studio of the US Government',
-        logo: NationalDesignStudioLogo,
-        featured: true,
-        height: 12,
-    },
     vendasta: {
         name: 'Vendasta',
         toolsUsed: ['experiments', 'cdp'],
@@ -868,6 +869,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: WebshareLogo,
         featured: false,
         height: 10,
+    },
+    wisprflow: {
+        name: 'WisprFlow',
+        //toolsUsed: [''],
+        //industries: ['Devtool'],
+        // users: ['Marketing', 'Leadership', 'Customer Success'],
+        notes: 'AI voice dictation',
+        logo: WisprFlowLogo,
+        featured: true,
+        height: 9,
     },
     wittyworks: {
         name: 'Witty Works',

@@ -198,17 +198,17 @@ const HomeHitCounter = () => {
 const COL1 = [
     'ycombinator',
     'airbus',
+    'ukgovt',
+    'nationaldesignstudio',
     'trust',
     'lovable',
     'startengine',
     'researchgate',
     'exa',
     'heygen',
-    'nationaldesignstudio',
-    'ukgovt',
 ]
 
-const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'convex', 'hasura', 'raycast', 'posthog']
+const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'convex', 'hasura', 'raycast', 'wisprflow', 'posthog']
 
 const companyBreakdowns = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
@@ -248,6 +248,7 @@ const companyAttributes = {
         'researchgate',
         'exa',
         'heygen',
+        // 'wisprflow',
         // "posthog"
     ],
     colorful: [
@@ -267,6 +268,7 @@ const companyAttributes = {
         // 'exa',
         // 'nationaldesignstudio',
         // 'ukgovt',
+        // 'wisprflow',
         'posthog',
     ],
     hardware: [
@@ -285,6 +287,7 @@ const companyAttributes = {
         // "heygen",
         // 'exa',
         // 'nationaldesignstudio',
+        // 'wisprflow',
         'ukgovt',
         'posthog',
     ],
@@ -305,6 +308,7 @@ const companyAttributes = {
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'wisprflow',
         // "posthog"
     ],
     highValue: [
@@ -324,6 +328,7 @@ const companyAttributes = {
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'wisprflow',
         // "posthog"
     ],
     caseStudy: [
@@ -342,6 +347,7 @@ const companyAttributes = {
         'exa',
         // "heygen",
         // 'nationaldesignstudio',
+        // 'wisprflow',
         // 'ukgovt',
         'posthog',
     ],
@@ -361,6 +367,7 @@ const companyAttributes = {
         'exa',
         'heygen',
         'posthog',
+        'wisprflow',
         // 'nationaldesignstudio',
         'ukgovt',
     ],
@@ -380,6 +387,7 @@ const companyAttributes = {
         //'exa',
         // "heygen",
         'nationaldesignstudio',
+        'wisprflow',
         // 'ukgovt',
         'posthog',
     ],
@@ -399,6 +407,7 @@ const companyAttributes = {
         'exa',
         'nationaldesignstudio',
         'ukgovt',
+        'wisprflow',
         // "heygen",
         // "posthog"
     ],
@@ -418,6 +427,7 @@ const companyAttributes = {
         'exa',
         'heygen',
         // 'nationaldesignstudio',
+        'wisprflow',
         'ukgovt',
         'posthog',
     ],
@@ -438,6 +448,7 @@ const companyAttributes = {
         // "heygen",
         'nationaldesignstudio',
         // 'ukgovt',
+        'wisprflow',
         'posthog',
     ],
     american: [
@@ -457,6 +468,7 @@ const companyAttributes = {
         'heygen',
         'nationaldesignstudio',
         // 'ukgovt',
+        'wisprflow',
         'posthog',
     ],
     pokemon: [
@@ -474,6 +486,7 @@ const companyAttributes = {
         // "researchgate",
         'exa',
         'heygen',
+        // 'wisprflow',
         // 'nationaldesignstudio',
         // 'ukgovt',
         // "posthog"
@@ -493,8 +506,9 @@ const companyAttributes = {
         'researchgate',
         'exa',
         'heygen',
-        // 'nationaldesignstudio',
+        'wisprflow',
         // 'ukgovt',
+        // 'nationaldesignstudio',
         'posthog',
     ],
 }
