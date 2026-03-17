@@ -228,7 +228,9 @@ const PresentationMode = ({ slides, onExit, initialSlideIndex = 0 }: Presentatio
                                         baseWidth={slideConfig.baseWidth}
                                         baseHeight={slideConfig.baseHeight}
                                     >
-                                        <PresentationModeContext.Provider value={{ isPresenting: true, isPortrait }}>
+                                        <PresentationModeContext.Provider
+                                            value={{ isPresenting: true, isThumbnail: true, isPortrait }}
+                                        >
                                             {thumbnailContent}
                                         </PresentationModeContext.Provider>
                                     </ScalableSlide>
