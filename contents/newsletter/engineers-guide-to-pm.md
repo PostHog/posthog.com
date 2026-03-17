@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-In our last issue, Ian Vanagas wrote about how [engineering has escaped the codebase](/newsletter/engineeringification-of-everything). How engineering tools, mindset, and identity increasingly shape every function, especially at startups.
+In our last issue, <TeamMember name="Ian Vanagas" /> wrote about how [engineering has escaped the codebase](/newsletter/engineeringification-of-everything). How engineering tools, mindset, and identity increasingly shape every function, especially at startups.
 
 We've seen this first-hand at PostHog, but it's not an isolated trend. The lines between product management and engineering are blurring, too.
 
