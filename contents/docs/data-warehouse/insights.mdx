@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends) insight like you would event or person data. 
+After [linking your source](/docs/cdp/sources), you can use its data in [trend](/docs/product-analytics/trends) and [lifecycle](/docs/product-analytics/lifecycle) insights like you would event or person data.
 
 > You can also create graphs and visualizations directly [with the SQL editor](/docs/data-warehouse/query#sql-visualizations).
 
@@ -41,6 +41,24 @@ For example, with a Salesforce `opportunity` table, you can create a funnel that
 - **Opportunity closed** - using `close_date` as the timestamp
 
 Each time you add the same table, you can configure different ID, Distinct ID, and Timestamp fields to represent different stages or events in your data.
+
+## Lifecycle insights
+
+You can use data warehouse tables in lifecycle insights to analyze new, returning, resurrecting, and dormant patterns for any entity.
+
+When using a data warehouse table in a lifecycle insight, you must configure three fields:
+
+| Field | Description |
+|-------|-------------|
+| **Timestamp** | When the activity occurred. |
+| **Created at** | When the entity was first created. Used to determine "new" vs "returning" status. |
+| **Aggregation target** | The field identifying the entity to track. |
+
+This enables lifecycle analysis beyond just users. For example, you can track orders, subscriptions, or any entity with activity timestamps and creation dates.
+
+> **Note:** Filters, test account filters, and sampling are not available when using data warehouse tables in lifecycle insights.
+
+For more on interpreting lifecycle charts, see the [lifecycle insight docs](/docs/product-analytics/lifecycle).
 
 ## Filters and breakdowns
 
