@@ -4,7 +4,7 @@ date: 2026-03-11
 author:
   - jina-yoon
 featuredImage: >-
-  PLACEHOLDER
+  https://res.cloudinary.com/dmukukwp6/image/upload/WTF_18f252d2d3.png
 featuredImageType: full
 tags:
   - Engineering
@@ -28,6 +28,8 @@ Providing context is a product manager's most important job.
 
 What exactly do we mean by context? In the same way that sailors used to navigate by the stars, engineers depend on **context** to make the right product decisions.
 
+![Max the hedgehog navigating a ship via the stars](https://res.cloudinary.com/dmukukwp6/image/upload/WTF_18f252d2d3.png)
+
 Good context points teams in the right direction; great context can change a company's entire trajectory.
 
 Take Duolingo for example.
@@ -50,7 +52,7 @@ Product metrics like CURR and DAU in Duolingo's story are just one form of conte
 
 - **Customer feedback.** What do current customers say they want, and is it actually what they want? When Linear users requested "custom fields", they dug deeper and built [Customer Requests](https://linear.app/now/building-what-customers-need) to track support tickets, Slack messages, and calls.
 
-![PLACEHOLDER](PLACEHOLDER)
+![Duolingo gainz](https://res.cloudinary.com/dmukukwp6/image/upload/buff_duolingo_meme_4a9811129d.png)
 
 Gathering context can be difficult since it's not always obvious what information is useful at any given point in time. You could spend weeks analyzing bug reports to improve feature adoption, only to realize after one user interview that it was a discoverability problem all along.
 
@@ -62,7 +64,7 @@ Don't wait around for someone else to give you the right context for your produc
 
 In addition to helping you ship faster, this gives you an unfiltered view of the data. For example, [talking to users](/newsletter/talk-to-users) provides clearer insight than reading secondhand notes from your PM since information gets lost at each step along the way.
 
-![Information is compressed at each stage from user to PM to engineer](PLACEHOLDER)
+![Information bottleneck](https://res.cloudinary.com/dmukukwp6/image/upload/v1713894881/posthog.com/contents/images/newsletter/talk-to-users/bottleneck3.png)
 
 Another reason engineers should do this is that your teammates might not understand the technical options and constraints as well as you do. Sometimes only the person with the full context of a problem can ask the right questions.
 
@@ -94,7 +96,7 @@ Without Cory's investigation, the team could have easily spent months on new fea
 
 Feedback loops like these create accountability and, in turn, give developers more autonomy. Engineers at PostHog can make product decisions more freely (without PMs micromanaging roadmaps) since the system ensures they're always contributing to the company's bottom line.
 
-![PLACEHOLDER](PLACEHOLDER)
+![PM feedback loop](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143750_0c85431f48.png)
 
 ### Takeaway for engineers
 
@@ -142,7 +144,7 @@ This is better, but why? It reduces friction by surfacing important information 
 
 This is where all three skills come together. Product managers know **what** information to provide thanks to all the context they've gathered and feedback loops they've experienced. And **how** they deliver it – by communicating actionably – makes all the difference.
 
-![PLACEHOLDER](PLACEHOLDER)
+![PM chad communication](https://res.cloudinary.com/dmukukwp6/image/upload/chad_meme_a8478c5a08.png)
 
 ### Takeaway for engineers
 
@@ -156,19 +158,5 @@ But when the next step is unclear and you need to bring it up for discussion, **
 > 2. What you've already investigated
 > 3. At least one other option and the trade-offs
 > 4. Which one you'd pick and why
-
-*Words by Jina Yoon, reformed PM who once learned the dark arts and now shares the secrets with you.*
-
-## From the library
-
-- [Your Best Thinking Is Wasted on the Wrong Decisions](https://www.iankduncan.com/engineering/2026-02-07-your-best-thinking-is-wasted-on-the-wrong-decisions/) – Ian Duncan
-
-- [Product Management is Communication](https://www.focusedchaos.co/p/product-management-is-communication) – Ben Yoskovitz
-
-- [How close is AI to replacing product managers?](https://www.lennysnewsletter.com/p/how-close-is-ai-to-replacing-product) – Lenny Rachitsky & Mike Taylor
-
-- [A GitHub Issue Title Compromised 4,000 Developer Machines](https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another) – grith.ai
-
-- [How we built automatic clustering for LLM traces](/blog/stop-ai-slop) – Andy Maguire
 
 <NewsletterForm />
