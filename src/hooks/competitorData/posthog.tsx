@@ -566,7 +566,7 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: true,
+                    push: false,
                     webhooks: true,
                     whatsapp: false,
                 },

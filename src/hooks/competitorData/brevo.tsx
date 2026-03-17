@@ -6,7 +6,7 @@ export const brevo = {
             features: {
                 visual_builder: true,
                 ai_assistant: false,
-                campaign_tracking: false,
+                campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
                 cohort_targeting: true,
@@ -22,13 +22,21 @@ export const brevo = {
             },
             channels: {
                 features: {
-                    email: false,
-                    sms: false,
-                    push: false,
-                    webhooks: false,
-                    whatsapp: false,
+                    email: true,
+                    sms: true,
+                    push: "Professional",
+                    webhooks: true,
+                    whatsapp: "Professional",
                 },
             },
+        },
+    },
+    platform: {
+        pricing: {
+            free_tier: true,
+        },
+        deployment: {
+            open_source: false,
         },
     },
 }
