@@ -15,6 +15,9 @@ category: General
 tags:
   - Open source
   - Comparisons
+seo:
+  metaTitle: 7 best free and open source LLM observability tools
+  metaDescription: Compare the best free and open source LLM observability tools, including PostHog, Langfuse, Opik, OpenLLMetry, Phoenix, and Helicone.
 ---
 
 To build LLM-powered apps, developers need to know how users are using their app. 
