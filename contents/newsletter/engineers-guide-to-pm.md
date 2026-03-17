@@ -28,8 +28,6 @@ Providing context is a product manager's most important job.
 
 What exactly do we mean by context? In the same way that sailors used to navigate by the stars, engineers depend on **context** to make the right product decisions.
 
-![Max the hedgehog navigating a ship via the stars](https://res.cloudinary.com/dmukukwp6/image/upload/WTF_18f252d2d3.png)
-
 Good context points teams in the right direction; great context can change a company's entire trajectory.
 
 Take Duolingo for example.
