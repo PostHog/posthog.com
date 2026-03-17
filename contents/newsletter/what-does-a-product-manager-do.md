@@ -12,6 +12,10 @@ tags:
 crosspost:
   - Product engineers
   - Blog
+seo:
+    metaTitle: 'What does a Product Manager do?  A practical guide for engineers'
+    metaDescription: >-
+        A breakdown of what product managers do, from gathering context to running feedback loops, and how engineers can apply these skills to build better products
 ---
 
 In our last issue, <TeamMember name="Ian Vanagas" /> wrote about how [engineering has escaped the codebase](/newsletter/engineeringification-of-everything). How engineering tools, mindset, and identity increasingly shape every function, especially at startups.
