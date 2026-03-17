@@ -9,42 +9,42 @@ export const launchdarkly = {
         feature_flags: {
             available: true,
             pricing: {
-                free_tier: false,
+                free_tier: true,
             },
             features: {
                 automation: true,
                 boolean_flags: true,
-                early_access_management: false,
+                early_access_management: true,
                 multivariate_flags: true,
                 json_payloads: true,
-                release_conditions: false,
+                release_conditions: true,
             },
             implementation: {
                 features: {
                     local_evaluation: true,
                     bootstrapping: true,
-                    api_access: false,
-                    sdk_support: false,
+                    api_access: true,
+                    sdk_support: true,
                 },
             },
             targeting: {
                 features: {
-                    custom_targeting: false,
+                    custom_targeting: true,
                     target_by_percentage: true,
                     target_by_person_properties: true,
-                    target_by_cohorts: false,
-                    geographic_targeting: false,
-                    group_targeting: false,
+                    target_by_cohorts: true,
+                    geographic_targeting: true,
+                    group_targeting: true,
                 },
             },
             management: {
                 features: {
-                    approvals: true,
+                    approvals: 'Enterprise',
                     data_source: 'First-party',
-                    flag_administration: false,
+                    flag_administration: 'Enterprise',
                     flag_scheduling: 'Enterprise',
-                    history_activity: false,
-                    instant_rollbacks: false,
+                    history_activity: true,
+                    instant_rollbacks: true,
                     lifecycle: 'Enterprise',
                     multi_environment: true,
                     permissioning: true,
@@ -54,13 +54,13 @@ export const launchdarkly = {
             testing: {
                 features: {
                     flag_overrides: false,
-                    toolbar_integration: false,
-                    user_assignment: false,
+                    toolbar_integration: true,
+                    user_assignment: true,
                 },
             },
             experimentation: {
                 features: {
-                    experimentation: false,
+                    experimentation: true,
                     correlation_analysis: false,
                 },
             },
@@ -73,52 +73,52 @@ export const launchdarkly = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: 'None, paid add-on',
+                free_tier: '100k MAU',
             },
             features: {
-                count_value_metrics: false,
+                count_value_metrics: true,
                 custom_goals: true,
                 dynamic_cohorts: false,
-                experiment_analysis: false,
-                funnel_metrics: false,
+                experiment_analysis: true,
+                funnel_metrics: true,
                 funnel_tests: true,
                 namespacing: false,
-                native_goal_tracking: false,
+                native_goal_tracking: true,
                 no_code_experiments: false,
                 ratio_metrics: false,
                 recommended_run_time: false,
                 secondary_metrics: true,
-                shared_metrics_library: false,
+                shared_metrics_library: true,
                 split_testing: true,
                 visual_editor: false,
             },
             supported_tests: {
                 features: {
-                    aa_testing: false,
-                    ab_testing: false,
-                    abn_testing: false,
-                    data_warehouse_experiments: false,
+                    aa_testing: true,
+                    ab_testing: true,
+                    abn_testing: true,
+                    data_warehouse_experiments: true,
                     fake_door_testing: false,
-                    holdout_testing: false,
-                    multi_armed_bandit: false,
-                    mutually_exclusive_experiments: false,
+                    holdout_testing: true,
+                    multi_armed_bandit: true,
+                    mutually_exclusive_experiments: true,
                     redirect_testing: false,
                 },
             },
             targeting: {
                 features: {
-                    cohort_integration: false,
+                    cohort_integration: true,
                     exclusion_rules: false,
-                    geographic_targeting: false,
-                    group_level_experiments: false,
-                    holdouts: false,
-                    target_by_percentage: false,
+                    geographic_targeting: true,
+                    group_level_experiments: true,
+                    holdouts: true,
+                    target_by_percentage: true,
                 },
             },
             implementation: {
                 features: {
-                    api_access: false,
-                    feature_flag_foundation: false,
+                    api_access: true,
+                    feature_flag_foundation: true,
                     json_payloads: false,
                     multivariate_testing: true,
                 },
@@ -126,21 +126,21 @@ export const launchdarkly = {
             analysis: {
                 features: {
                     llm_support: true,
-                    results_visualization: false,
-                    side_effect_monitoring: false,
+                    results_visualization: true,
+                    side_effect_monitoring: true,
                     statistical_significance: true,
                     statistics_engine: 'Bayesian, Frequentist',
                 },
             },
             platforms: {
                 features: {
-                    mobile: false,
-                    web: false,
+                    mobile: true,
+                    web: true,
                 },
             },
         },
         product_analytics: {
-            available: 'Requires third-party data warehouse',
+            available: true,
             features: {
                 advertising_analytics: false,
                 autocapture: false,
@@ -167,11 +167,11 @@ export const launchdarkly = {
                     features: {},
                 },
                 funnels: {
-                    available: false,
+                    available: true,
                     features: {},
                 },
                 retention: {
-                    available: false,
+                    available: true,
                     features: {},
                 },
                 user_paths: {
@@ -212,19 +212,25 @@ export const launchdarkly = {
             },
         },
         heatmaps: {
-            available: false,
+            available: true,
+        },
+        error_tracking: {
+            available: true, // https://launchdarkly.com/docs/home/observability/errors
+        },
+        logs: {
+            available: true, // https://launchdarkly.com/docs/home/observability/logs
         },
     },
     platform: {
         deployment: {
             eu_hosting: true,
-            open_source: 'Partial',
+            open_source: false,
             reverse_proxy: true,
             self_host: false,
         },
         developer: {
-            api: 'Pro',
-            native_data_sources: false,
+            api: true,
+            native_data_sources: true,
             sdks: true,
             sql: false,
         },
@@ -234,9 +240,9 @@ export const launchdarkly = {
             project_management_tools: true,
         },
         pricing: {
-            free_tier: false,
+            free_tier: true,
             transparent_pricing: true,
-            self_serve: false,
+            self_serve: true,
             usage_based_pricing: true,
         },
         integrations: {
@@ -261,6 +267,6 @@ export const launchdarkly = {
         },
     },
     pricing: {
-        model: 'Seat-based + usage',
+        model: 'Usage-based',
     },
 }

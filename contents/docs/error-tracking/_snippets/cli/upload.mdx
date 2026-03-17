@@ -1,8 +1,8 @@
 ```bash
 # Upload injected sourcemaps to their release
-posthog-cli sourcemap upload --directory ./path/to/assets
+posthog-cli sourcemap upload --directory ./path/to/assets --release-name my-app --release-version 1.2.3
 ```
 
-The CLI reuses the release stored during injection, so you don't need to pass `--project` or `--version` again.
+The CLI will create or reuse the [release](/docs/error-tracking/releases) for the detected or supplied release name and version. The CLI will try to detect release name and version information, but you can set them explicitly with `--release-name` and `--release-version`. We recommend setting the release name, and letting the CLI detect the version, if your project is continuously deployed (the version will be the git commit hash at build time).
 
 > **💡 Tip:** You can use `--delete-after` option to clean up sourcemaps after uploading them.

@@ -18,6 +18,7 @@ const CUSTOMER_ORDER = [
     'lovable',
     'raycast',
     'airbus',
+    'arena',
     'researchgate',
     'startengine',
     'exa',

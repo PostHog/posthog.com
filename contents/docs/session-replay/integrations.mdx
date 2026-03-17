@@ -1,0 +1,50 @@
+---
+title: Integrations
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+export const ImgReplayIntegrationsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_integrations_settings_31b509f0a9.png"
+export const ImgReplayCreateIssueLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_create_issue_integration_1f5024f66d.png"
+export const ImgReplayLinkedIssuesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_linked_issue_linear_c02cb216d1.png"
+
+Session replay integrates with issue tracking tools like **Linear**, **GitHub**, and **GitLab**. This enables you to create and link issues directly from a replay, making it easy to track bugs and share context with your team.
+
+## Setting up integrations
+
+To enable integrations, go to your project settings and connect your Linear, GitHub, or GitLab account. Once connected, you can select which projects or repositories you want to link issues to.
+
+<ProductScreenshot
+    imageLight={ImgReplayIntegrationsLight}
+    alt="Integrations settings in PostHog"
+    classes="rounded"
+/>
+
+## Creating issues from a replay
+
+When viewing a session replay, click the **Create issue** button to open the issue creation modal. From here you can:
+
+1. Select which integration to use (Linear, GitHub, or GitLab)
+2. Choose the project or repository
+3. Add a title and description
+4. Create the issue
+
+The issue will automatically include a link back to the session replay, giving your team full context on what happened.
+
+<ProductScreenshot
+    imageLight={ImgReplayCreateIssueLight}
+    alt="Creating an issue from a session replay"
+    classes="rounded"
+/>
+
+## Viewing linked issues
+
+Once an issue is linked to a replay, it will appear in the replay sidebar. You can click on the issue to open it directly in Linear, GitHub, or GitLab.
+
+<ProductScreenshot
+    imageLight={ImgReplayLinkedIssuesLight}
+    alt="Linked issues in session replay"
+    classes="rounded"
+/>

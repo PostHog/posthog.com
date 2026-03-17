@@ -148,7 +148,7 @@ analytics.track('user_signed_up', {
 # Call $groupidentify to create or update a group.
 # It will also create the group type if it doesn't exist.
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "$groupidentify",
     "distinct_id": "static_string_used_for_all_group_events",
     "properties": {
@@ -161,7 +161,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 # passing the `$groups` property. The `$groups` property is required
 # for every event that should be associated with the group.
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "user_signed_up",
     "distinct_id": "user_distinct_id",
     "properties": {

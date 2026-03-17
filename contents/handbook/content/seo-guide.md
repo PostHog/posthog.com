@@ -71,7 +71,7 @@ A more dialog-like tone can also help capture featured snippets or *People Also 
 
 > **Good Q&A example**  
 > - **Heading**: How do we reduce churn?   
-> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
+> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
 
 ### 6. Don’t put all our eggs in one keyword basket
 
@@ -139,6 +139,14 @@ The goal is to make our content the easiest, clearest, most trustworthy answer i
 - **Favor Q&A format:** Perplexity loves conversational answers and listicles (think “Top 5 tools for X”).  
 - **Consistency matters:** Keep facts about PostHog accurate and aligned across different pieces of content.  
 - **Watch competitors:** Monitor what SGE cites and improve on those answers to outrank them.
+
+### 11. Steelman competitors
+
+Many other companies "straw man" their competitors. They claim their competitors are worse than reality, focus on differences that don't matter, and make hyperbolic claims about how much better they are. We don't do this.
+
+When writing about competitors, be honest about their capabilities. Assume they are reading and will dunk on you for being dishonest. PostHog may not have all the features competitors have today, that's okay. Our reputation and trust with readers is more important than whatever "marketing win" being dishonest gives us. 
+
+It's also okay to make mistakes here. Competitors change faster than we can keep up. Whenever we find a mistake, we fix it as soon as we realize. We also happily accept updates from competitors if they make our post more accurate. 
 
 ### Additional tips
 

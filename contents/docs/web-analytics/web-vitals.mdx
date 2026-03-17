@@ -148,7 +148,7 @@ You can provide a client side config to tune web vitals autocapture. These are s
 
 ## When and how are events captured?
 
-The SDK attempts to send as many of the available metrics as possible in each `$web_vitals` event. By default, we wait up to 5 seconds since the page load or last `$web_vitals` event to try and catch all four metrics in one event. See the section on [configuring web vitals](#configuring-web-vitals-autocapture) capture to change this behaviour.
+The SDK attempts to send as many of the available metrics as possible in each `$web_vitals` event. By default, we wait up to 5 seconds since the page load or last `$web_vitals` event to try and catch all four metrics in one event. See the section on [configuring web vitals](#configuring-web-vitals-autocapture) capture to change this behavior.
 
 Metrics are made available when the [web vitals library](https://github.com/GoogleChrome/web-vitals) triggers them:
 
@@ -172,7 +172,7 @@ You can also roll your own function if you prefer a tighter control over the sam
 ```ts file=Import
 import { sampleByEvent } from 'posthog-js/lib/src/customizations'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     // Capture only half of web vitals events
     before_send: sampleByEvent(['$web_vitals'], 0.5)
 })
@@ -182,7 +182,7 @@ posthog.init('<ph_project_api_key>', {
 // Add this script to your site, may need to change the script src to match your API host (`us` vs `eu`):
 // <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     // Capture only half of web vitals events
     before_send: posthogCustomizations.sampleByEvent(['$web_vitals'], 0.5)
 })

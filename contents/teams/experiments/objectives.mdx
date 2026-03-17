@@ -19,8 +19,5 @@ We will extend data warehouse experiment support to funnels. We will also improv
 #### AI generated experiments <TeamMember name="Juraj Majerik" photo />
 We will help users come up with experiment ideas interactively via chat. We will use existing insights, recordings and "signals" as input, combine them with user-provided context. Then we will generate an experiment idea, set up the experiment with metrics, and recommend how to implement it in code.
 
-#### Great results loading experience <TeamMember name="Marcel Poelker" photo />
-We already precompute timeseries results. We will use these timeseries as the main experiment results, so users see freshly calculated results when they open the app, instead of having to refresh manually and wait.
-
-#### Retire legacy experiments to a read-only mode <TeamMember name="Marcel Poelker" photo />
-Legacy experiments take up a large part of our codebase. We will cleanly separate them and move them to a read-only mode: still visible for audit and reference, but no longer editable or recalculable. This will reduce support burden and simplify the codebase.
+#### Experiments for agents <TeamMember name="Marcel Poelker" photo />
+Agents (PostHog AI and MCP) need to create and manage experiments just like users do through the UI. Today, the tooling either bypasses our APIs or reimplements logic that already exists in our serializers. We will clean up the experiment API to make operations explicit and obvious, unify how agents interact with experiments through a single well-defined interface, and make sure anything you can do in the UI, an agent can do too.

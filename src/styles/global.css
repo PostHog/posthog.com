@@ -479,8 +479,8 @@
 }
 
 body {
-    font-family: 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
-        'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
+    font-family: 'IBM Plex Sans Variable', 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next',
+        'avenir', 'segoe ui', 'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
     overflow-x: hidden;
     word-wrap: break-word;
     margin: 0;
@@ -498,6 +498,13 @@ p {
 
 code {
     @apply font-code font-medium text-sm border border-primary bg-accent rounded-sm px-1 py-0.5;
+    /* Double-clicking inline code selects its full contents instead of bleeding into surrounding text */
+    user-select: all;
+}
+
+pre code {
+    /* Restore normal word-level selection inside fenced code blocks, where user-select: all would be annoying */
+    user-select: text;
 }
 
 hr {
@@ -2586,6 +2593,10 @@ article.reader-view-content-container:has(.quest-sidebar) {
     iframe {
         @apply w-full aspect-video; /* attempt to make youtube videos full width with hopefully no negative consequences... */
     }
+}
+
+div[data-radix-popper-content-wrapper] {
+    @apply !z-50; /* layer website mode menu over menubar for y-overflowing menus */
 }
 
 .product-description {

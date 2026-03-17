@@ -79,7 +79,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'client-libraries': {
         feature: 'Client libraries',
-        owner: [],
+        owner: ['client-libraries'],
         notes: <em>See SDKs</em>,
         label: false,
     },
@@ -127,6 +127,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'data-management': {
         feature: 'Data management',
         owner: ['analytics-platform'],
+        notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
     'data-table': {
         feature: 'Data table',
@@ -134,7 +135,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -142,8 +143,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Data warehouse',
-        owner: ['data-stack'],
+        feature: 'Managed warehouse',
+        owner: ['managed-warehouse'],
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -152,7 +153,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     endpoints: {
         feature: 'Endpoints',
-        owner: ['data-stack'],
+        owner: ['data-modeling'],
     },
     'error-tracking': {
         feature: 'Error tracking',
@@ -265,7 +266,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
-        owner: ['data-stack'],
+        owner: ['warehouse-sources'],
         label: 'feature/pipelines',
     },
     platform: {
@@ -295,7 +296,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -312,17 +313,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Replay',
         owner: ['replay'],
     },
+    'reverse-proxy': {
+        feature: 'Reverse proxy',
+        owner: ['platform-features'],
+        label: 'feature/reverse-proxy',
+    },
     'revenue-analytics': {
         feature: 'Revenue analytics',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     'revenue-data-management': {
         feature: 'Revenue data management',
-        owner: ['customer-analytics', 'growth'],
+        owner: ['customer-analytics'],
     },
     sdks: {
         feature: 'SDKs & client libraries (web, server-side)',
-        owner: [],
+        owner: ['client-libraries'],
         notes: (
             <>
                 Shared responsibility, with features owned by the relevant small team, or try{' '}
@@ -336,7 +342,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 .
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
+                <strong>
+                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
+                    first.
+                </strong>
             </>
         ),
         label: 'feature/libraries',
@@ -348,14 +357,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: ['mobile'],
+        owner: ['client-libraries'],
         notes: (
             <>
-                Shared responsibility with the relevant small team for feature-owned areas.
-                <br />
-                <br /> Start with the <SmallTeam slug="mobile" /> for triage, loop in
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
-                needed.
+                Shared responsibility, with features owned by the relevant small team, or try{' '}
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
+                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
+                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
+                    incident.io schedule
+                </PrivateLink>
+                .
             </>
         ),
         label: 'feature/mobile',
@@ -390,23 +401,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
         label: 'feature/session-explorer',
     },
+    'session-summaries': {
+        feature: 'Session summaries',
+        owner: ['signals'],
+        label: 'feature/session-summaries',
+    },
     settings: {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
         notes: <>All teams manage their own settings</>,
         label: 'feature/settings',
     },
-        'source-maps': {
+    'source-maps': {
         feature: 'Source maps',
         owner: ['error-tracking'],
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-stack'],
+        owner: ['product-analytics'],
         label: false,
     },
     sso: {

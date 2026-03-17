@@ -36,14 +36,14 @@ PostHog batch exports support all major data warehouses:
 
 For use cases requiring real-time data, consider:
 
-- [Real-time destinations](/docs/cdp/real-time) for streaming data to external systems
+- [Real-time destinations](/docs/cdp/destinations) for streaming data to external systems
 - [Webhooks](/docs/webhooks) for event-driven integrations
 
 ## Migration from ETL tools
 
 If you're currently using an ETL tool with PostHog, migrating to batch exports is straightforward:
 
-1. **Create a new batch export** in PostHog's [Data pipelines](https://app.posthog.com/pipeline) interface
+1. **Create a new batch export** in PostHog's [Data pipelines](https://app.posthog.com/data-management/destinations) interface
 2. **Configure your destination** using the same credentials you used with the ETL tool
 3. **Test the configuration** using PostHog's built-in testing
 4. **Start the export** and verify data appears in your warehouse
