@@ -1260,7 +1260,10 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
-    if (isMobile || compact) {
+    const websiteModeParam =
+        typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('experience') === 'website'
+
+    if (isMobile || compact || websiteModeParam) {
         siteSettings.experience = 'boring'
     }
 
