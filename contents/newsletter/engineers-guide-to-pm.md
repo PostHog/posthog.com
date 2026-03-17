@@ -18,7 +18,7 @@ In our last issue, Ian Vanagas wrote about how [engineering has escaped the code
 
 We've seen this first-hand at PostHog, but it's not an isolated trend. The lines between product management and engineering are blurring, too.
 
-Thanks to LLMs, figuring out what to build is now a greater bottleneck than how to build it, and it's forcing engineers to think more like product managers (PMs).
+Thanks to LLMs, figuring out what to build is now a greater bottleneck than how to build it, and it's forcing engineers to think more like [product managers](/newsletter/product-management-is-broken) (PMs).
 
 In this issue, we'll help you take advantage of what product managers have already figured out by going over the top three skills in their playbook.
 
@@ -34,7 +34,7 @@ Good context points teams in the right direction; great context can change a com
 
 Take Duolingo for example.
 
-In [a guest edition of Lenny's Newsletter](https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth), Duolingo's Head of Product, Jorge Mazal, recounted how the company fixed its stalling growth problem. The team initially focused on friend referrals, premium trials, and in-game mechanics. Nothing worked, and daily active users (DAU) continued to decline.
+In [a guest edition of Lenny's Newsletter](https://www.lennysnewsletter.com/p/how-duolingo-reignited-user-growth), Duolingo's Head of Product, Jorge Mazal, recounted how the company fixed its stalling growth problem. The team initially focused on friend referrals, premium trials, and in-game mechanics. Nothing worked, and [daily active users (DAU)](/newsletter/wtf-is-activation) continued to decline.
 
 But then Mazal and the data science team discovered that current user retention rates (CURR) were **5x more impactful** on DAU than any other projected metric. That single piece of context completely shifted the product roadmap.
 
@@ -74,7 +74,7 @@ Another reason engineers should do this is that your teammates might not underst
 
 ## 2. Track success with feedback loops
 
-All that context is useless if your team doesn't know if they're winning.
+All that context is useless if your team doesn't know if they're [winning](/newsletter/think-like-a-growth-engineer).
 
 Product managers at PostHog track and ensure success by running [growth reviews](/handbook/product/per-product-growth-reviews): monthly meetings where they go over revenue trends, user feedback, usage metrics, and [quarterly goals](/newsletter/quarterly-planning-mistakes) with the engineers building the product.
 
