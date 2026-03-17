@@ -21,7 +21,7 @@ AI code generation made experiment coding fast and cheap. Writing the code stopp
 
 In a way, teams are still "building experiments," just not implementing them by writing code themselves. Growth describes an experiment in normal language, gets consultation on how to experiment right, and then gets _real code_ (not injected DOM hacks) that engineers just review and merge.
 
-This is what [PostHog MCP](/docs/model-context-protocol) does. It connects PostHog to your development environment through Claude, Cursor, or any editor that supports the [Model Context Protocol](https://modelcontextprotocol.io/introduction). You describe what you want to test, and it generates:
+This is what the [PostHog MCP](/docs/model-context-protocol) does. It connects PostHog to your development environment through Claude, Cursor, or any editor that supports the [Model Context Protocol](https://modelcontextprotocol.io/introduction). You describe what you want to test, and it generates:
 
 - The actual code change implementing your variant
 - An [experiment](/docs/experiments) in PostHog with your success metric
