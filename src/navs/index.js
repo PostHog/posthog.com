@@ -4245,6 +4245,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Managing lifecycle',
+                    url: '/docs/experiments/managing-lifecycle',
+                    icon: 'IconRewind',
+                    color: 'green',
+                },
+                {
                     name: 'No-code experiments',
                     url: '/docs/experiments/no-code-web-experiments',
                     icon: 'IconToolbar',
