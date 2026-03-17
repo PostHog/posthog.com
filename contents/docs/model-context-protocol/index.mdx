@@ -283,6 +283,20 @@ The agent will use the `annotations-list` tool to retrieve annotations, letting 
 
 The agent will create an annotation with `scope` set to `organization` so it appears across all projects in your organization.
 
+### Activity log queries
+
+**Prompt:** "Show me all recent feature flag changes in the project"
+
+The agent will use the `activity-logs-list` tool with `scope` set to `FeatureFlag` to return recent activity logs showing who created, updated, or deleted feature flags, including the specific fields that changed.
+
+**Prompt:** "Who made changes to dashboard 42?"
+
+The agent will use the `activity-logs-list` tool with `scope` set to `Dashboard` and `item_id` set to `42` to return all modifications to that specific dashboard, including who made each change and when.
+
+**Prompt:** "What has changed in the project recently?"
+
+The agent will use the `activity-logs-list` tool to return all recent activity across the project, ordered by most recent first, including feature flag updates, insight creations, experiment launches, and other changes.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
