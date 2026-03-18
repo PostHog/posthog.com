@@ -166,7 +166,7 @@ export default function CDP(): JSX.Element {
                     feature flags, experiments, and more. This eliminates the need to stitch together multiple vendors
                     in complex ETL pipelines, though you can still export data via our CDP if you have specific tooling
                     needs Alternatively, you can connect external warehouses (like Snowflake or BigQuery) as sources to
-                    use your warehouse tables inside PostHog.
+                    use your warehouse tables inside PostHog.{' '}
                     <Link to="/data-stack/warehouse-native" state={{ newWindow: true }}>
                         Learn more about PostHog&apos;s integrated warehouse
                     </Link>
