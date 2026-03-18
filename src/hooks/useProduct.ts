@@ -83,14 +83,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
-            name: 'Coding agent (Twig)',
+            name: 'Coding agent (PostHog Code)',
             Icon: IconCode,
             description: 'AI coding agent that understands your product analytics.',
-            handle: 'twig',
+            handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'twig',
+            // slug: 'posthog-code',
             status: 'WIP',
         },
         {

@@ -182,10 +182,16 @@ export const logrocket = {
         dashboards: {
             available: true,
         },
+        logs: {
+            available: true,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
-            eu_hosting: true,
+            eu_hosting: false,
             open_source: false,
             self_host: 'Enterprise',
             reverse_proxy: true,
@@ -228,11 +234,11 @@ export const logrocket = {
             microsoft_teams: false,
             redshift: true,
             rudderstack: false,
-            s3: false,
+            s3: true,
             salesforce: true,
             segment: true,
             slack: true,
-            snowflake: false,
+            snowflake: true,
             sentry: true,
             stripe: true,
             zapier: true,
@@ -247,6 +253,7 @@ export const logrocket = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,

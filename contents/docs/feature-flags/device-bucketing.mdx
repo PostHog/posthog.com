@@ -1,0 +1,48 @@
+---
+title: Device bucketing
+showTitle: true
+sidebar: Docs
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Beta feature" type="action">
+
+Device bucketing is currently in beta. It is supported on **JavaScript web**, **Node.js**, **Python**, and **Go** SDKs, including local evaluation.
+
+</CalloutBox>
+
+By default, feature flags with a rollout percentage or multiple variants use the user's distinct ID to decide which value to return. This works great for logged-in users, but for anonymous users, the distinct ID could change when logging in. To prevent feature flag values from changing due to the distinct ID changing, PostHog supports [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional). However, this feature comes with significant tradeoffs: slower flag evaluations, local evaluation not supported and no support for bootstrapping values.
+
+**Device bucketing** uses the device ID instead of the distinct ID to determine the flag value. Since the device ID doesn't change when a user logs in, the flag value stays consistent throughout their session. This is the recommended solution for **feature flags and experiments** targeting anonymous users.
+
+## When to use device bucketing
+
+Device bucketing is useful when the flag targets users who aren't yet identified:
+
+- **Signup and onboarding flows:** A user sees a new signup form before logging in. Device bucketing ensures they continue seeing the same variant after they create an account.
+- **Pre-authentication pages:** Landing pages, pricing pages, or other features shown before a user is identified.
+- **Experiments on anonymous traffic:** When running A/B tests on pages visited by both anonymous and logged-in users, device bucketing prevents users from switching variants mid-experiment.
+
+## User bucketing vs. device bucketing
+
+| | User bucketing | Device bucketing |
+|---|---|---|
+| **Hashes on** | User's distinct ID | Device ID |
+| **Best for** | Logged-in, identified users | Anonymous or pre-login experiences |
+| **Behavior when logging in** | May change if distinct ID changes | Stays consistent on the same device |
+| **Behavior when switching devices** | Yes, if user is identified | No, each device is evaluated independently |
+
+## How to set it up
+
+When creating or editing a feature flag, change the **Match by** dropdown under **Release conditions** from **User** to **Device**.
+
+That's it. PostHog will now use the device ID to determine the flag value for that release condition.
+
+The device ID is automatically set by the web SDK (`posthog-js` `v1.307.1` and above), but you can also set it manually if needed.
+
+## Further reading
+
+- [Creating feature flags](/docs/feature-flags/creating-feature-flags)
+- [Feature flag best practices](/docs/feature-flags/best-practices)
+- [Target flags with groups, pages, machines, and more](/docs/feature-flags/targeting-groups)

@@ -377,7 +377,7 @@ You can capture these events using `posthog.capture()`:
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_response: value, // required
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -437,7 +437,7 @@ export default function Index() {
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_response: value, // required
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

@@ -10,81 +10,133 @@ export const SiteAppLight = "https://res.cloudinary.com/dmukukwp6/image/upload/p
 
 > **Note:** Early access management is only available in the [JavaScript Web SDK](/docs/libraries/js) and does not support [Groups](/docs/product-analytics/group-analytics).
 
-Early access feature management enables your users to opt in (and out) of betas and in-progress features as well as collect details for users interested in items on your roadmap.
-
-This is useful if you want to:
-- Run a beta program without building a custom solution
-- Provide access to features that are not yet ready for general release
-- Allow users to control their own product experience
-- Create waitlists for features in development
+Early access feature management enables your users to opt in (and out) of features at different stages of development, from early concepts through general availability. You can run beta programs, create waitlists for upcoming features, and let users control their own product experience – all without building a custom solution.
 
 ## How it works
 
 Early access features can be created and edited from the [Early Access Management](https://app.posthog.com/early_access_features) tab in PostHog.
 
-Features can be in different stages:
+Each feature progresses through stages that control whether opted-in users get the feature flag enabled. When you create a feature, PostHog automatically creates a linked feature flag (or you can link an existing one). Each feature can also include a description, documentation link, and a payload with custom metadata.
 
-- **Concept**: Features that are not yet available for testing. These are added to the Coming Soon tab, so users can register interest in advance. Gate your code behind a separate feature flag at this stage so they don't actually see the feature.
-- **Beta**: Features that are available for testing. Users can opt in to try them out.
-- **Alpha** and **General availability** are also available for more granular feature lifecycle management.
-
-> **Note:** Early access features must currently be released before they can assigned to a stage. 
-
-For beta features, feature flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
+When users opt in to a feature, PostHog adds an enrollment condition to the linked feature flag. Whether that condition actually enables the flag depends on the feature's current stage.
 
 <ProductScreenshot
-    imageLight={CreateNewFeatureFlagLight} 
+    imageLight={CreateNewFeatureFlagLight}
     imageDark={CreateNewFeatureFlagDark}
-    alt="Create a feature flag" 
+    alt="Create a feature flag"
     classes="rounded"
 />
 
-Once created, you can opt users in or out manually on the feature detail screen by searching for them in PostHog. You can also implement a public opt-in flow which we detail below.
+Once created, you can opt users in or out manually on the feature detail screen by searching for them in PostHog. You can also implement a public opt-in flow, which we detail below.
 
-A couple of important notes:
+> **Important:** Early access feature opt-in is an *overriding condition*. When a user opts in or out, this overrides any other release conditions on the feature flag. Only when a user has not explicitly opted in or out will the flag's regular release conditions apply.
 
-* Early access feature opt-in is an *overriding condition*. This means that a user opt-in or opt-out overrides any existing release condition on the feature flag. Only when a user has not explicitly selected to opt in or out will the release conditions on the feature flag be used to determine feature flag availability.
-* The feature flag is assigned to the user in all stages, including the **concept** stage. If you don't want them to see the feature in a given stage, you should use a separate feature flag.
+## Feature lifecycle stages
+
+Early access features progress through five stages that control visibility and feature flag behavior:
+
+| Stage | Flag enabled for opted-in users? | Purpose |
+|-------|----------------------------------|---------|
+| **Draft** | No | Initial state. The feature is not visible to users and no flag changes occur. Use this while setting up the feature. |
+| **Concept** | No | You can opt in to register interest, but the feature flag is **not** enabled. Use this for roadmap items where you want to gauge demand before building. |
+| **Alpha** | Yes | Early testing phase. Opted-in users have the feature flag enabled. Use this for limited testing with a small group. |
+| **Beta** | Yes | Wider testing phase. Opted-in users have the feature flag enabled. This is the default stage shown to users in the opt-in UI. |
+| **General availability** | Yes | Feature is stable and fully released. The feature becomes read-only in PostHog after promotion. Opted-in users retain access. |
+
+### What happens during stage transitions
+
+When you change a feature's stage, two things happen:
+
+1. **Feature flag update**: Moving to an active stage (Alpha, Beta, or General availability) adds an enrollment condition to the linked feature flag so that opted-in users get the flag enabled. Moving to an inactive stage (Draft or Concept) removes this condition.
+
+2. **User notification**: Enrolled users (those who opted in) receive a `$feature_enrollment_update` event that your application can use to notify them of the stage change (for example, "Feature X has moved to Beta").
+
+### Promoting to general availability
+
+When you promote a feature to **General availability**, a confirmation dialog appears with a **"Roll out to all users – include users who previously opted out"** checkbox.
+
+- **Checked** – The feature flag's opt-in/opt-out conditions are removed and the flag is set to 100% rollout. All users receive the feature, including those who previously opted out.
+- **Unchecked** (default) – Opted-out users remain opted out. Only users who opted in (or match the flag's existing release conditions) see the feature.
+
+This is useful because, by default, users who opted out during a beta still have an overriding opt-out condition on the flag. Checking the rollout option clears those conditions so the feature reaches everyone.
+
+> **Note:** Once promoted to General Availability, the early access feature can no longer be edited.
+
+## Payloads
+
+Each early access feature can include a JSON payload – custom metadata that is delivered to users via the Early Access Features API and `posthog-js`. Use payloads to attach configuration, release notes, or UI customization data to a feature.
+
+The EAF payload is **separate from the feature flag payload**:
+
+- **EAF payload**: Returned when users browse available features via `getEarlyAccessFeatures()`. Use it for metadata your opt-in UI displays, such as descriptions, release notes, or settings.
+- **Feature flag payload**: Returned during flag evaluation via `posthog.getFeatureFlagPayload()`. Use it for runtime configuration that affects feature behavior.
+
+### Example
+
+Set the payload in the PostHog UI as a JSON object:
+
+```json
+{
+  "releaseNotes": "New dashboard with sorting and filtering",
+  "maxItems": 50,
+  "theme": "dark"
+}
+```
+
+Access it in your opt-in UI:
+
+```js
+posthog.getEarlyAccessFeatures((features) => {
+  features.forEach(feature => {
+    console.log(feature.name, feature.payload)
+    // { releaseNotes: "New dashboard...", maxItems: 50, theme: "dark" }
+  })
+})
+```
 
 ## Creating a public opt-in
 
 > You can find a full walkthrough of building an app with early access feature management in our [How to set up a public beta program using early access management](/tutorials/public-beta-program) tutorial.
 
-### Option 1: Site app
+### Option 1: Early access features widget
 
-We've prebuilt a site app that adds an early access feature modal to your site. 
+PostHog includes a prebuilt widget that adds an early access feature modal to your site.
 
-![Create feature flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png)
+![Early access features widget demo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png)
 
 To use it:
 
 1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js/config).
 
-2. Search for [Early Access Features App](https://app.posthog.com/apps?search=Early%20Access) in the [Browse Apps](https://app.posthog.com/apps) tab.
+2. Search for [Early Access Features App](https://app.posthog.com/early_access_features) in your PostHog project.
 
-3. Enable it by clicking the blue gear, setting an HTML attribute selector like `data-attr`, `#id`, or `.class` (or enabling "Show features button on the page"), enabling the toggle and pressing save.
+3. Enable it by clicking the blue gear, setting an HTML attribute selector like `data-attr`, `#id`, or `.class` (or enabling "Show features button on the page"), enabling the toggle, and pressing save.
 
 <ProductScreenshot
-    imageLight={SiteAppLight} 
+    imageLight={SiteAppLight}
     imageDark={SiteAppDark}
-    alt="Setting up site app" 
+    alt="Setting up the early access features widget"
     classes="rounded"
 />
 
 4. If you did set an HTML attribute selector, add a component with that selector into your app. For example, if you set your selector to `#beta-button`, you need to add an element like `<button id="beta-button">Public Betas</button>`.
 
-Once set up, early access features appear on this panel for users to opt in or out of. The panel includes tabs for both **Previews** (beta features) and **Coming soon**** features, enabling users to either try available features or register interest in upcoming ones.
+Once set up, early access features appear on this panel for users to opt in or out of. The panel includes tabs for both **Previews** (active features) and **Coming soon** (concept features), enabling users to either try available features or register interest in upcoming ones.
 
 ### Option 2: Custom implementation
 
 You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js/features#early-access-feature-management).
 
-`getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, documentation link, and stage. You can use this to build a UI for users to opt in or out of features or register interest features coming soon.
+`getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, documentation link, stage, and payload. You can use this to build a UI for users to opt in or out of features or register interest in features coming soon.
 
-You can also specify which stages of features to retrieve by passing an array of stages as the third parameter, e.g., `getEarlyAccessFeatures(callback, force_reload, ['concept', 'beta'])`.
+You can filter which stages of features to retrieve by passing an array of stages as the third parameter:
 
-> **Note:** Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh. 
-> 
+```js
+posthog.getEarlyAccessFeatures(callback, force_reload, ['concept', 'beta', 'alpha'])
+```
+
+> **Note:** Available early access features are cached per browser load. This means if you have a browser open and create a new early access feature, you wouldn't see it until you refresh.
+>
 > If you want the latest values always available, include the `force_reload` parameter in your `getEarlyAccessFeatures` call. This makes a network request to get the updated list instead of using the cache. The downside is that this can delay when early access features are available on load.
 
 ```react
@@ -98,54 +150,58 @@ const [comingSoonFeatures, setComingSoonFeatures] = useState([])
 useEffect(() => {
   posthog.getEarlyAccessFeatures((features) => {
     // Filter features by stage
-    const betaFeatures = features.filter(feature => feature.stage === 'beta')
-    const conceptFeatures = features.filter(feature => feature.stage === 'concept')
-    
+    const activeFeatures = features.filter(
+      feature => ['alpha', 'beta'].includes(feature.stage)
+    )
+    const conceptFeatures = features.filter(
+      feature => feature.stage === 'concept'
+    )
+
     setComingSoonFeatures(conceptFeatures)
 
     if (!activeFlags || activeFlags.length === 0) {
-      setInactiveBetas(betaFeatures)
+      setInactiveBetas(activeFeatures)
       return
     }
 
-    const activeBetas = betaFeatures.filter(
-			beta => activeFlags.includes(beta.flagKey)
-		);
-    const inactiveBetas = betaFeatures.filter(
-			beta => !activeFlags.includes(beta.flagKey)
-		);
-    setActiveBetas(activeBetas)
-    setInactiveBetas(inactiveBetas)
-  }, true, ['concept', 'beta'])
+    const enrolled = activeFeatures.filter(
+      feature => activeFlags.includes(feature.flagKey)
+    );
+    const notEnrolled = activeFeatures.filter(
+      feature => !activeFlags.includes(feature.flagKey)
+    );
+    setActiveBetas(enrolled)
+    setInactiveBetas(notEnrolled)
+  }, true, ['concept', 'alpha', 'beta'])
 }, [activeFlags])
 ```
 
-`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates the user's opt-in status for the feature.
+`updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature or to register interest in a feature coming soon. This updates your opt-in status for the feature.
 
 ```react
-const toggleBeta = (betaKey) => {
+const toggleFeature = (featureKey) => {
   if (activeBetas.some(
-    beta => beta.flagKey === betaKey
+    feature => feature.flagKey === featureKey
   )) {
     posthog.updateEarlyAccessFeatureEnrollment(
-      betaKey, 
+      featureKey,
       false
     )
     setActiveBetas(
-      prevActiveBetas => prevActiveBetas.filter(
-        item => item.flagKey !== betaKey
+      prev => prev.filter(
+        item => item.flagKey !== featureKey
       )
     );
     return
   }
 
   posthog.updateEarlyAccessFeatureEnrollment(
-    betaKey,
+    featureKey,
     true
   )
   setInactiveBetas(
-    prevInactiveBetas => prevInactiveBetas.filter(
-      item => item.flagKey !== betaKey
+    prev => prev.filter(
+      item => item.flagKey !== featureKey
     )
   );
 }

@@ -180,6 +180,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'SaaS tools',
         },
         {
+            label: 'Sentry',
+            url: '/docs/data-warehouse/sources/sentry',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/sentry_f4b69c4d4b.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Shopify',
             url: '/docs/data-warehouse/sources/shopify',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/shopify_1aa4658e01.png',
