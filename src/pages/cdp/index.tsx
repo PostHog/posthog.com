@@ -159,6 +159,19 @@ export default function CDP(): JSX.Element {
                     <li>Automate support ticket creation</li>
                 </ul>
 
+                <h2>How does PostHog work with data warehouses?</h2>
+                <p>
+                    PostHog includes an integrated data warehouse that works with other PostHog tools. Your data never
+                    needs to travel because you can model and query data in PostHog, or use it across tools such as
+                    feature flags, experiments, and more. This eliminates the need to stitch together multiple vendors
+                    in complex ETL pipelines, though you can still export data via our CDP if you have specific tooling
+                    needs Alternatively, you can connect external warehouses (like Snowflake or BigQuery) as sources to
+                    use your warehouse tables inside PostHog.{' '}
+                    <Link to="/data-stack/warehouse-native" state={{ newWindow: true }}>
+                        Learn more about PostHog&apos;s integrated warehouse
+                    </Link>
+                </p>
+
                 <h2 id="integrations-library">Integrations library</h2>
                 <Link to="/data-stack/integrations-library">Explore our integrations library →</Link>
             </ReaderView>
