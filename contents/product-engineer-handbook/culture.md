@@ -104,6 +104,6 @@ Small teams don't require a bunch of coordination and process to keep them align
 
 An effective small team should have one leader, be able to ship and make decisions autonomously with minimal dependencies on other teams, and have their own mission, long-term goals, key metrics, and target customers.
 
-At the time of writing this, PostHog is 150 people organized into 35 teams with an average team size of 4.2 people. Each team lead reports to a member of our exec team, keeping our company structure flat and our teams tight, fast moving, and autonomous.
+At the time of writing this, PostHog is 187 people organized into 47 teams with an average team size of 4.2 people. Each team lead reports to a member of our exec team, keeping our company structure flat and our teams tight, fast moving, and autonomous.
 
 **Next chapter:** [Antipatterns for product engineers](/product-engineer-handbook/antipatterns)
