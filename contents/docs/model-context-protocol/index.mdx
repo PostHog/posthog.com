@@ -297,6 +297,28 @@ The agent will use the `activity-logs-list` tool with `scope` set to `Dashboard`
 
 The agent will use the `activity-logs-list` tool to return all recent activity across the project, ordered by most recent first, including feature flag updates, insight creations, experiment launches, and other changes.
 
+### Alert management
+
+**Prompt:** "Create a daily alert on my pageview insight that fires when the value exceeds 500"
+
+The agent will use the `alert-create` tool to create an alert with an absolute threshold. It will set up the alert to monitor the specified insight and notify subscribed users when the threshold is breached.
+
+**Prompt:** "List all my alerts and show their current state"
+
+The agent will use the `alerts-list` tool to retrieve all alerts in the project, returning their names, thresholds, current state (firing or not), and check intervals.
+
+**Prompt:** "Update my pageview alert to fire when the value increases by more than 50% compared to the previous period"
+
+The agent will use the `alert-update` tool to change the alert condition to a relative increase with a percentage threshold.
+
+**Prompt:** "Snooze my pageview alert for 2 hours"
+
+The agent will use the `alert-update` tool to set `snoozed_until` to temporarily pause notifications.
+
+**Prompt:** "Delete the old weekly report alert"
+
+The agent will use the `alerts-list` tool to find the alert by name, then use `alert-delete` to permanently remove it.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
