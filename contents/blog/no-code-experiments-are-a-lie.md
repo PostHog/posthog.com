@@ -2,6 +2,8 @@
 title: "AI is killing no-code experiments"
 date: 2026-03-03
 author: ["leonhard-prinz"]
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/robocop_8939115965.png
 tags:
   - Experiments
   - Growth engineering
