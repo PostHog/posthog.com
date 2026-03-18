@@ -65,7 +65,10 @@ export default function WarehouseNative(): JSX.Element {
                     tools.
                 </p>
                 <p>
-                    Alternatively, PostHog offers an <Link to="/managed-warehouse">integrated data warehouse</Link>{' '}
+                    Alternatively, PostHog offers an{' '}
+                    <Link to="/docs/data-warehouse/integrated-warehouse" state={{ newWindow: true }}>
+                        integrated data warehouse
+                    </Link>{' '}
                     which works with other PostHog tools such as product analytics, experiments, and feature flags. If
                     you&apos;re using PostHog as your data warehouse, your data stays in PostHog and can be accessed by
                     other PostHog tools, eliminating the need to stitch multiple vendors together and maintain complex
@@ -112,17 +115,14 @@ export default function WarehouseNative(): JSX.Element {
                     warehouse. The focus is on expanding what integrates with our integrated warehouse, making it easier
                     to use PostHog as your primary data platform without needing to stitch together multiple tools. If
                     you&apos;re interested in finding out more, we suggest{' '}
-                    <Link to="/managed-warehouse">joining the waitlist for the managed DuckDB warehouse</Link>.
-                </p>
-
-                <p className="mt-8">
-                    <Link to="/docs/data-warehouse/warehouse-native-workflows" state={{ newWindow: true }}>
-                        How PostHog&apos;s integrated warehouse works (docs) →
+                    <Link to="/data-stack/managed-warehouse">
+                        joining the waitlist for the managed DuckDB warehouse
                     </Link>
+                    .
                 </p>
-                <p>
-                    <Link to="/data-stack" state={{ newWindow: true }}>
-                        PostHog data stack →
+                <p className="mt-8">
+                    <Link to="/docs/data-warehouse/integrated-warehouse" state={{ newWindow: true }}>
+                        How PostHog&apos;s integrated warehouse works (docs) →
                     </Link>
                 </p>
             </ReaderView>
