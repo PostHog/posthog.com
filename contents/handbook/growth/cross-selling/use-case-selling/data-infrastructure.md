@@ -4,7 +4,6 @@ showTitle: true
 hideAnchor: false
 ---
 
-> **Status:** Draft in progress
 
 ## What is the job to be done?
 
