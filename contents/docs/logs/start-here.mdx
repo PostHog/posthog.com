@@ -5,9 +5,9 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
+import { IconBell, IconCode, IconSearch, IconSettings } from '@posthog/icons'
 
-<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="You're all set to monitor your logs!">
 
 <QuestLogItem 
     title="Install and configure logging"
@@ -47,6 +47,26 @@ Navigate to the Logs section in your PostHog dashboard to start exploring your l
 
 <CallToAction type="primary" to="/docs/logs/search">
   Learn how to search logs
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Set up alerts"
+  subtitle="Recommended"
+  icon="IconBell"
+>
+
+Get notified when your logs match specific conditions. Create alerts to:
+
+- **Monitor error spikes** — Alert when error log counts exceed a threshold
+- **Track specific services** — Watch for issues in critical services
+- **Filter by attributes** — Set up granular alerts based on log attributes
+
+Configure alerting rules in your project settings to stay on top of issues as they happen.
+
+<CallToAction type="primary" to="/docs/logs/alerts">
+  Configure log alerts
 </CallToAction>
 
 </QuestLogItem>
