@@ -4,14 +4,14 @@ title: Traffic allocation
 
 Experiment traffic allocation controls which users see which variant in your experiment. There are two main levels of control:
 
-1. **Rollout percentage** - What percentage of your users are included in the experiment (e.g., 100% means all users are included).
-2. **Variant split** - How included users are distributed across variants (e.g., 50/50 between control and test). Defaults to an even split across all variants.
+1. **Rollout percentage** – What percentage of your users are included in the experiment (e.g., 100% means all users are included).
+2. **Variant split** – How included users are distributed across variants (e.g., 50/50 between control and test). Defaults to an even split across all variants.
 
 Both are configured in the **Variant rollout** step of the experiment creation wizard, or from the **Manage distribution** button on a running experiment. More advanced configurations are available after you create the experiment, either via the **Manage release conditions** button on the **Variants** tab, or via the underlying feature flag directly.
 
 ## How variants work
 
-Each experiment is backed by a multivariate [feature flag](/docs/feature-flags) (unless you [run without feature flags](/docs/experiments/running-experiments-without-feature-flags)). Experiments support one control variant and up to nine test variants. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even across different sessions and devices.
+Each experiment is backed by a multivariate [feature flag](/docs/feature-flags) (unless you [run without Feature Flags](/docs/experiments/running-experiments-without-feature-flags)). Experiments support one control variant and up to nine test variants. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even across different sessions and devices.
 
 By default, users are split evenly across all variants. You can customize the split by clicking the edit icon next to the **Split** column.
 
