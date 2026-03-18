@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We own the shared developer tooling and workflows that cut across all product teams: local dev, CI, builds, framework upgrades, codebase structure, type systems, migration safety, and more. If it affects how fast and safely you can work on code and ship it, it's probably our thing.
+The DevEx team owns the shared developer tooling and workflows that cut across all product teams: local dev, CI, builds, framework upgrades, codebase structure, type systems, migration safety, and more. If it affects how fast and safely engineers can work on code and ship it, it's probably this team's thing.
 
 ## Scope
 
-| Area | What we own |
+| Area | What's owned |
 |------|------------|
 | **Local dev** | Local stack, hogli CLI, startup time, worktrees, Docker Compose, cloud envs |
 | **CI** | Pipeline speed, cost, reliability, flaky test triage, PR previews |
@@ -37,8 +37,8 @@ We own the shared developer tooling and workflows that cut across all product te
 - **Claude Code skills** — agent guidance for hogli, migrations, DRF endpoints
 - **Product isolation** — tach-enforced boundaries between products
 
-## How to work with us
+## How to work with this team
 
-**Tell us what's slowing you down** — flaky tests, slow builds, local dev friction, tooling that doesn't work right. A lot of it is known but we might have missed something.
+**Report what's slowing you down** — flaky tests, slow builds, local dev friction, tooling that doesn't work right. A lot of it is known but there might be stuff that's been missed.
 
-**Pull us into conversations early** — if your team is making decisions that touch shared tooling, CI, code architecture, or conventions, loop us in. We'd rather be in the discussion than clean up after it. Think: new products, services, big refactors, dependency changes, CI workflow tweaks.
+**Loop the team into conversations early** — if your team is making decisions that touch shared tooling, CI, code architecture, or conventions, bring DevEx in. Better to be in the discussion than clean up after it. Think: new products, services, big refactors, dependency changes, CI workflow tweaks.
