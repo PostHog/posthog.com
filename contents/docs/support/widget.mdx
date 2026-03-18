@@ -32,6 +32,19 @@ These settings are configured in the **In-app widget** section of Support settin
 | **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
 | **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
 
+## Identification form
+
+You can optionally require users to identify themselves before starting a conversation:
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| **Require email** | Users must enter their email to start chatting | `false` |
+| **Collect name** | Additionally collect the user's name | `false` |
+| **Form title** | Heading shown on the identification form | `"Before we start..."` |
+| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+
+When enabled, the form appears before the user can send their first message. The collected information is used to link the ticket to a person in PostHog.
+
 ## Domain restrictions
 
 You can restrict which domains the widget appears on for security:
@@ -110,6 +123,21 @@ Configure your team to receive email alerts when new tickets arrive.
 - Direct link to the ticket
 
 Recipients must have access to the team to receive notifications.
+
+<CalloutBox icon="IconLightBulb" title="Use workflows for advanced notifications" type="info">
+
+For more control over notifications — like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags — use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
+
+</CalloutBox>
+
+## Browser notifications
+
+Individual team members can enable browser notifications for new ticket activity.
+
+1. Go to **Support** in PostHog
+2. Enable **Browser notifications** in the notification settings
+
+When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications — you can use one or both.
 
 ## Public token
 

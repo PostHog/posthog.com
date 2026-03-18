@@ -64,6 +64,26 @@ The widget automatically captures:
 </QuestLogItem>
 
 <QuestLogItem
+    title="Connect Slack"
+    subtitle="Optional"
+    icon="IconMessage"
+>
+
+Connect your Slack workspace to turn Slack messages into support tickets. The **SupportHog** bot enables two-way sync — messages in Slack create tickets, and your replies in PostHog are posted back to the Slack thread.
+
+Three ways to create tickets from Slack:
+
+1. **Support channel** — every message in a dedicated channel becomes a ticket
+2. **Bot mention** — `@SupportHog` in any channel
+3. **Emoji reaction** — react with a configurable emoji (default `:ticket:`)
+
+<OSButton variant="primary" asLink to="/docs/support/slack">
+  Set up Slack integration
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
     title="View and respond to tickets"
     subtitle="Required"
     icon="IconInbox"
@@ -88,29 +108,27 @@ This context helps you understand and resolve issues faster.
 </QuestLogItem>
 
 <QuestLogItem
-    title="Automate with Workflows (optional)"
+    title="Automate with Workflows"
     subtitle="Optional"
     icon="IconDecisionTree"
 >
 
-Use [Workflows](/docs/workflows) to automate ticket management based on conversation events. For example:
+Use [Workflows](/docs/workflows) to automate ticket management. Support emits events that trigger workflows, and workflow actions can update tickets automatically. For example:
 
-- Auto-resolve tickets if a customer hasn't replied for 5 days
-- Send a Slack notification when a message contains "refund"
-- Escalate ticket priority based on keywords
+- **Set SLAs** — automatically set a 4-hour SLA on widget tickets and 24-hour SLA on Slack tickets
+- **Auto-assign** — route tickets to different teams based on channel or customer domain
+- **Status automation** — move tickets to Pending after a team reply, reopen when a customer replies
+- **Tagging** — auto-tag tickets based on customer email domain for prioritization
+- **Escalation** — set tight SLAs and assign to senior support for high-priority tickets
 
-When Conversations is enabled, you can trigger workflows using events like `$conversation_ticket_created`, `$conversation_ticket_status_changed`, or `$conversation_message_received`.
-
-<OSButton variant="primary" asLink to="/docs/workflows/workflow-builder#conversations-actions">
-
-  Set up workflow automation
-  
+<OSButton variant="primary" asLink to="/docs/support/workflows">
+  See all workflow examples
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-    title="Build a custom UI (optional)"
+    title="Build a custom UI"
     subtitle="Optional"
     icon="IconCode"
 >

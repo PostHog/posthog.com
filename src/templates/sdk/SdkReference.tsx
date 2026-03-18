@@ -14,6 +14,7 @@ import Chip from '../../components/Chip'
 import ReaderView from 'components/ReaderView'
 import { Popover } from 'components/RadixUI/Popover'
 import { IconChevronDown } from '@posthog/icons'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export interface Parameter {
     name: string
@@ -284,15 +285,17 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                         open={versionPopoverOpen}
                                         onOpenChange={setVersionPopoverOpen}
                                     >
-                                        {availableVersions.map((version) => (
-                                            <button
-                                                key={version.version}
-                                                onClick={() => handleVersionChange(version.version)}
-                                                className="flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full"
-                                            >
-                                                <span>{version.version}</span>
-                                            </button>
-                                        ))}
+                                        <ScrollArea className="max-h-[60vh] !overflow-y-auto">
+                                            {availableVersions.map((version) => (
+                                                <button
+                                                    key={version.version}
+                                                    onClick={() => handleVersionChange(version.version)}
+                                                    className="flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full"
+                                                >
+                                                    <span>{version.version}</span>
+                                                </button>
+                                            ))}
+                                        </ScrollArea>
                                     </Popover>
                                 </div>
                             </div>

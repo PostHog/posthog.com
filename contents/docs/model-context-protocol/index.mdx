@@ -269,6 +269,34 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Annotation management
+
+**Prompt:** "Create an annotation for today saying 'Deployed v2.5 with new checkout flow'"
+
+The agent will use the `annotation-create` tool to create an annotation with the content and date, scoped to your current project. Annotations appear on charts to mark deployments, releases, and other significant changes.
+
+**Prompt:** "List all annotations from the last month"
+
+The agent will use the `annotations-list` tool to retrieve annotations, letting you review existing markers on your charts and dashboards.
+
+**Prompt:** "Add an organization-wide annotation for March 15th marking our company rebrand"
+
+The agent will create an annotation with `scope` set to `organization` so it appears across all projects in your organization.
+
+### Activity log queries
+
+**Prompt:** "Show me all recent feature flag changes in the project"
+
+The agent will use the `activity-logs-list` tool with `scope` set to `FeatureFlag` to return recent activity logs showing who created, updated, or deleted feature flags, including the specific fields that changed.
+
+**Prompt:** "Who made changes to dashboard 42?"
+
+The agent will use the `activity-logs-list` tool with `scope` set to `Dashboard` and `item_id` set to `42` to return all modifications to that specific dashboard, including who made each change and when.
+
+**Prompt:** "What has changed in the project recently?"
+
+The agent will use the `activity-logs-list` tool to return all recent activity across the project, ordered by most recent first, including feature flag updates, insight creations, experiment launches, and other changes.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.

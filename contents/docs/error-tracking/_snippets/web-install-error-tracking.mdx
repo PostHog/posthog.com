@@ -1,8 +1,22 @@
 > **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping [up to date with the latest version](/docs/sdk-doctor) to ensure you have all of error tracking's features.
 
-You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#exception-autocapture). 
+You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#exception-autocapture).
 
-When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
+When enabled, this automatically captures `$exception` events by default for unhandled errors and unhandled promise rejections. You can fine-tune which errors are captured by passing a configuration object to `capture_exceptions`:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_api_client_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    capture_exceptions: {
+        capture_unhandled_errors: true,       // captures window.onerror (default: true)
+        capture_unhandled_rejections: true,    // captures unhandled promise rejections (default: true)
+        capture_console_errors: false,         // captures console.error calls (default: false)
+    }
+})
+```
+
+See the [autocapture options](/docs/error-tracking/capture#automatic-exception-capture) for more details.
 
 #### Manual error capture
 
