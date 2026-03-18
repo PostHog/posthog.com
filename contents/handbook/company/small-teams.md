@@ -95,6 +95,10 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 -   [ ] [Create a new launch plan issue](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md)
 -   [ ] Continue to communicate timelines / updates in the Slack channel created
 
+## Leading quarterly goal setting
+
+Team leads are responsible for organizing [quarterly goal setting](/handbook/company/goal-setting) within their team, leading the goal-setting session, and documenting the goals on their team page. 
+
 ## How do small teams and product managers work together?
 
 With our engineering-led culture, the engineers on the small team are normally responsible for their area of the product.

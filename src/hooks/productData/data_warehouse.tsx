@@ -320,7 +320,7 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'S3 & BigQuery',
-                    description: 'Query data directly from cloud storage',
+                    description: 'Run SQL in PostHog over data in your object storage',
                 },
             ],
         },

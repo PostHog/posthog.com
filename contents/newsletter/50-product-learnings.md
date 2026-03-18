@@ -78,7 +78,7 @@ To celebrate 50k subscribers to Product for Engineers, here are the 50 most impo
 
 ![Make ownership clear](https://res.cloudinary.com/dmukukwp6/image/upload/compress_ead5743c15.webp)  
 
-27. Instead of controlling the engineers, [product managers](https://newsletter.posthog.com/i/152182724/product-managers-give-engineers-context) should create context for product teams by analyzing product analytics, conducting user research, doing competitor research, and more.  
+27. Instead of controlling the engineers, [product managers](https://newsletter.posthog.com/i/152182724/product-managers-give-engineers-context) should [create context](/newsletter/what-does-a-product-manager-do) for product teams by analyzing product analytics, conducting user research, doing competitor research, and more.  
 
 28. Most people aren't Steve Jobs. They don't just "know" what to build from the start or have a grand vision. Instead, they ship things, get them into the hands of users, iterate on feedback, and repeat. The faster you do this, the better your product will be.  
 

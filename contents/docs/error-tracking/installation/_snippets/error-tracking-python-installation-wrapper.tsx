@@ -7,7 +7,9 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingPythonInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{ PythonEventCapture }}>
-            <PythonInstallation modifySteps={addNextStepsStep} />
+            <PythonInstallation
+                modifySteps={(steps) => addNextStepsStep(steps).filter((s) => s.title !== 'Upload source maps')}
+            />
         </OnboardingContentWrapper>
     )
 }
