@@ -31,7 +31,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 
 1. **Progressive rollout:** Team wants to ship a risky change to 5% of users, monitor, then expand gradually. Feature flags give them the gate; they quickly want metrics to know when it's safe to expand (Experiments).
 2. **Kill switch:** After a bad deploy that took hours to roll back, engineering wants instant off-switches for new features. Feature flags are the answer.
-3. **Growth team bridge:** The growth team wants to run an A/B test on the signup flow. Experiments requires Feature Flags, which requires engineering to implement. Engineering gets pulled into PostHog through the growth team's request. (See the [Growth & Marketing](/handbook/growth/cross-selling/use-case-selling/growth-and-marketing) playbook for this entry path.)
+3. **Growth team bridge:** The growth team wants to run an A/B test on the signup flow. Experiments requires Feature Flags, which requires engineering to implement. Engineering gets pulled into PostHog through the growth team's request. (See the [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) playbook for this entry path.)
 
 ### Primary expansion path
 
@@ -44,9 +44,9 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 
 ### Alternate expansion paths
 
-**Starting from Experiments (growth-driven):** The growth team wants to A/B test, which requires engineering to implement flags. Engineering discovers they can use the same flag infrastructure for all their releases. This is the reverse entry: growth team is the catalyst, engineering becomes the power user. The growth team stays in [Growth & Marketing](/handbook/growth/cross-selling/use-case-selling/growth-and-marketing); engineering lands in Release Engineering.
+**Starting from Experiments (growth-driven):** The growth team wants to A/B test, which requires engineering to implement flags. Engineering discovers they can use the same flag infrastructure for all their releases. This is the reverse entry: growth team is the catalyst, engineering becomes the power user. The growth team stays in [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing); engineering lands in Release Engineering.
 
-**AI product teams:** After a prompt or model change, engineering wants to verify quality hasn't regressed. AI Evals catches regressions that traditional error tracking misses. This bridges into [AI/LLM Observability](/handbook/growth/cross-selling/use-case-selling/ai-llm-observability).
+**AI product teams:** After a prompt or model change, engineering wants to verify quality hasn't regressed. AI Evals catches regressions that traditional error tracking misses. This bridges into [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability).
 
 ## Business impact of solving the problem
 
