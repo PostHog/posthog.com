@@ -42,6 +42,7 @@ export type Event = {
     presentation?: string
     link?: string
     startTime?: string // HH:mm format
+    online?: boolean
     id: number
 }
 
