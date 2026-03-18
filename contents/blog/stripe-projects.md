@@ -22,7 +22,7 @@ So, we’re fixing it. In partnership with Stripe, we’ve built [an all-in-one 
 ## What this means for you
 If you're starting a new project today, here's what this actually looks like in practice.
 
-You run one command. Stripe Projects provisions your stack -- including PostHog -- and hands back real credentials that just work, in your own accounts, without any dashboard hopping. No copy-pasting keys between tabs. No half-finished setup docs. It just works.
+You run one command. Stripe Projects provisions your stack – including PostHog – and hands back real credentials that just work, in your own accounts, without any dashboard hopping. No copy-pasting keys between tabs. No half-finished setup docs. It just works.
 
 On the PostHog side specifically, that means you get analytics, feature flags, session replay, and everything else we offer configured and ready from the moment your project spins up. 
 
