@@ -324,6 +324,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
             title="Cool tech events"
             fullScreen
             viewportClasses="[&>div>div]:h-full"
+            showAddressBar={false}
         >
             <div
                 data-scheme="primary"
