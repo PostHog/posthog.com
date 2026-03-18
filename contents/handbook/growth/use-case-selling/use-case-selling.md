@@ -16,12 +16,12 @@ Each use case has a full playbook with discovery questions, competitive position
  
 | Use case | Job to be done | Core buyer | Status |
 |---|---|---|---|
-| [Product Intelligence](/handbook/growth/cross-selling/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders | *Draft* |
-| [Release Engineering](/handbook/growth/cross-selling/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers | *Draft* |
-| [Observability](/handbook/growth/cross-selling/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps | *Draft* |
-| [Growth & Marketing](/handbook/growth/cross-selling/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers | **Complete** |
-| [AI/LLM Observability](/handbook/growth/cross-selling/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders | *Draft* |
-| [Data Infrastructure](/handbook/growth/cross-selling/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops | *Draft* |
+| [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence) | "Help me understand what users do, why they do it, and what to build next." | PMs, designers, product engineers, founders | *Draft* |
+| [Release Engineering](/handbook/growth/use-case-selling/release-engineering) | "Help me ship faster without breaking things." | Engineering managers, platform teams, developers | *Draft* |
+| [Observability](/handbook/growth/use-case-selling/observability) | "Help me know when things break, understand why, and fix them fast." | SREs, platform engineers, DevOps | *Draft* |
+| [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers | **Complete** |
+| [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders | *Draft* |
+| [Data Infrastructure](/handbook/growth/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops | *Draft* |
  
 ## Product coverage matrix
  
