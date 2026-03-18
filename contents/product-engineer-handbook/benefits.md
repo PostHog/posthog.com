@@ -3,48 +3,25 @@ title: Why companies should hire product engineers
 showTitle: true
 ---
 
-Any company can benefit from hiring product engineers, but startups are where they're most likely to thrive because [startups win on speed](/founders/how-come-we-ship-so-much), and product engineers are all about creating speed and urgency. 
+Any company can benefit from hiring product engineers, but startups are where they're most likely to thrive because [startups win on speed](/founders/how-come-we-ship-so-much), and product engineers are all about creating speed and urgency.
 
-Imagine, for a moment, what product development often looks like:
+Without product engineers in the loop, engineers mainly consume requirements, interpreting the intent of users and product managers at a distance, or being told what to build with little input into the direction.
 
-```mermaid
-graph LR
-    A["Customer nags sales\nteam about problem"] --> B["Exec intervenes\nto prevent churn"]
-    B --> C["Product managers\ninvestigate feedback"]
-    C --> D["Requirements captured\nand turned into tickets"]
-    D --> E["Engineers given tickets\ndetailing solution\ncustomer wants"]
-    E --> F["They push back on the\noverly bespoke solution"]
-    F --> G["Sales team insists\nthey build it anyway"]
-    G --> H["Everyone jumps on\nTeams calls to argue"]
-    H --> I["Solution is built but\ndoesn't really solve\nthe problem"]
-    I --> J["Customer churns\nanyway"]
-    J --> A
-```
+Layers of people exist to keep them away from users. Customers complain to sales about problems they have or features they want, sales teams pass them onto product managers who go away and capture requirements, make estimates. Meetings are organized to debate solutions, share progress, and keep customers updated.
 
-This is an inherently slow process. In this environment, an engineer is mainly consuming requirements, interpreting the intent of users and product managers at a distance, or being told what to build with little input into the direction.
+This process isn't interested in an engineer with a strong opinion about what to build, it wants someone who can build to spec even when it's obvious to them it's the wrong path for their product. 
 
-This process isn't interested in an engineer with a strong opinion about what to build, it wants someone who can build to spec even when it's obvious to them it's the wrong path for their product.
-
-It repeats endlessly until a product dies.
+It's slow and frequently loops endless until a product slowly dies.
 
 ## The product engineer way
 
-How does this work when a product engineer is in the loop? At PostHog, where product engineers own product teams and make product decisions, it often looks something like this:
-
-```mermaid
-graph LR
-    A["Customer reports an\nissue or request\nvia support"] --> B["Product engineer on\nsupport rotation\nresponds"]
-    B --> C["They dig into their\nneeds and the problem\nthey're trying to solve"]
-    C --> D["Product engineer decides\nthis is a feature all\nusers would find useful"]
-    D --> E["They ship a PR the\nsame week or day and\ngather feedback"]
-    E --> A
-```
+How does this work when a product engineer is in the loop? At PostHog, where product engineers own product teams and make product decisions, it often as simple as an engineer on a support rotation responding to a user problem or request, deciding it's something all users would benefit from, shipping a PR the same day or week, and looping back to the user to gather more feedback on the solution.
 
 In this scenario, product engineers gather feedback directly from customers. [User feedback and context](/newsletter/talk-to-users) isn't filtered through someone else. It's direct and without bias.
 
 A product engineer, having both direct context from users, [product sense](/newsletter/good-taste-great-products), and the technical knowledge of what is actually possible, can quickly figure out what to build and how to build it, test it with users, ship it and iterate. Speed compounds. You learn faster. Grow faster. The more you do it, the better it gets. 
 
-In arguments against this, people often argue that speed comes at the expense of polish. They say you can have one but not the other, but this is nonsense. Polish comes from shipping fast. The faster you ship, the faster you can polish and improve what you do. 
+In arguments against this, people often argue that speed comes at the expense of polish. They say you can have one but not the other. We disagree. Polish comes from shipping fast. The faster you ship, the faster you can polish and improve what you do. 
 
 The first version of something you ship may be worse than a team who takes longer to ship, but the team that ships fast and (critically) remains focused, will improve their product faster.
 
@@ -55,8 +32,6 @@ Speed isn't the only advantage of hiring product engineers, however. Others incl
 ### 1. Sparking joy in customers
 
 Customers love it when an engineer listens to their problem and quickly ships a solution with minimum fuss. The naturally rapid feedback loop of product engineers who [talk to users](/newsletter/talk-to-users) and [do support](/newsletter/engineers-do-support) creates numerous opportunities to delight customers this way.
-
-![sparking joy](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/spark_joy_448d65ec0f.png)
 
 ### 2. Spontaneous creativity
 
