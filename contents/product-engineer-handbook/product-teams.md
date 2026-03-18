@@ -9,7 +9,6 @@ In a traditional product team, engineers often take direction from [product mana
 
 This isn't a great system for giving engineers autonomy – it's literally designed to hem them in. Often product managers exist to control engineers, or shield them from organizational dysfunction. Not because they want to, but because execs think it's necessary.
 
-[TODO: Bottleneck illustration here]
 
 These systems are motivated by the desire for control, accountability (i.e. "who's to blame for this problem?"), and a lack of trust. They condition engineers to only care about their small area of influence and to disregard the wider impact of their work on customers or the business. 
 
