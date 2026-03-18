@@ -4,9 +4,6 @@ showTitle: true
 hideAnchor: false
 ---
  
- 
-## The premise
- 
 We sell products. Customers buy solutions.
  
 When we pitch "add Surveys," it sounds like we're trying to increase their bill. When we pitch "here's how to close the loop on why users drop off," it sounds like we're solving their problem. Same product. Different framing. Very different conversion rate.
