@@ -55,7 +55,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 
 **Starting from Session Replay:** Some accounts come in through Session Replay first (debugging, QA, customer support use cases). They realize they need Product Analytics to quantify what they're seeing qualitatively. The expansion path reverses: Replay → Analytics → Surveys → Experiments.
 
-**Product teams that ship AI features:** If the product has AI components, AI Evals can proactively surface where users are struggling based on output quality. This bridges Product Intelligence into [AI/LLM Observability](/handbook/growth/cross-selling/use-case-selling/ai-llm-observability).
+**Product teams that ship AI features:** If the product has AI components, AI Evals can proactively surface where users are struggling based on output quality. This bridges Product Intelligence into [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability).
 
 ## Business impact of solving the problem
 
