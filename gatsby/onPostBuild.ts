@@ -484,6 +484,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
+    if (process.env.GATSBY_MINIMAL === 'true') return
     // Generate API spec markdown files first
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'

@@ -6,6 +6,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
 
 Exposures are the foundation of experiment analysis in PostHog. A user must be **exposed** to your experiment before they can be included in any metric calculations. Understanding how exposures work is crucial for running successful experiments.
 
@@ -52,6 +53,10 @@ The exposures chart shows:
 | **Distribution percentage** | How users are split across variants |
 | **Exposure criteria** | The event being used to determine exposure |
 
+## Ensuring exposures for returning users
+
+<ReturningUsersExposures />
+
 ## Custom exposure events
 
 While the default `$feature_flag_called` event works for most experiments, you might need a custom exposure event when:
@@ -64,9 +69,9 @@ While the default `$feature_flag_called` event works for most experiments, you m
 
 To configure a custom exposure event:
 
-1. Click **Edit exposure criteria** in your experiment
-2. Select **Custom** exposure type
-3. Choose your exposure event (e.g., "viewed_checkout_page", "api_endpoint_called")
+1. In the experiment creation form or experiment settings, find the **Include people when** dropdown. For saved experiments, click **Edit exposure criteria** in your experiment
+2. Select **Custom event**
+3. Choose your exposure event (e.g., `viewed_checkout_page`, `api_endpoint_called`)
 4. Add any property filters to refine the exposure criteria
 
 <ProductScreenshot
@@ -106,7 +111,7 @@ Users are analyzed based on the first variant they were exposed to, regardless o
 
 ## Sample ratio mismatch detection
 
-Sample ratio mismatch (SRM) is an automatic check that compares your actual user distribution across variants against your configured rollout percentages. PostHog uses a chi-squared statistical test to detect when the observed distribution is significantly different from what's expected.
+Sample ratio mismatch (SRM) is an automatic check that compares your actual user distribution across variants against your configured split percentages. PostHog uses a chi-squared statistical test to detect when the observed distribution is significantly different from what's expected.
 
 ### Why SRM matters
 
@@ -134,7 +139,7 @@ PostHog automatically calculates SRM once your experiment has at least 100 total
   alt="Screenshot of sample ratio mismatch indicator"
 />
 
-- **Green checkmark**: Distribution matches your rollout percentages. The observed difference is within normal random variation.
+- **Green checkmark**: Distribution matches your split percentages. The observed difference is within normal random variation.
 - **Yellow warning**: Sample ratio mismatch detected. The distribution is significantly different from expected.
 
 PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-value is displayed alongside the status—a lower p-value indicates stronger evidence of a mismatch.

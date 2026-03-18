@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         PostHog::init(
-            '<ph_project_api_key>',
+            '<ph_project_token>',
             [
                 'host' => '<ph_client_api_host>'
             ]
@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings). 
 
 ## Usage
 

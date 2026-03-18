@@ -18,7 +18,7 @@ export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upl
     className="rounded shadow-xl"
 />
 
-People in PostHog represent the users behind your events. You can view them in the [People tab](https://us.posthog.com/persons).
+People in PostHog represent the users behind your events. You can view them in the [People tab](https://app.posthog.com/persons).
 
 People have **person profiles** with [properties](/docs/product-analytics/person-properties). This enables you to do things like:
 
@@ -32,9 +32,35 @@ People have **person profiles** with [properties](/docs/product-analytics/person
 
 When you capture your first [identified event](/docs/data/anonymous-vs-identified-events) for a user, it creates a **person profile** for them. Then, any future events captured are attributed to this profile. You can also [set properties](/docs/product-analytics/person-properties) for the person.
 
+## Duplicate person profiles
+
+If your [`identify`](/docs/product-analytics/identify) implementation has gaps, a single real-world user can end up with multiple person profiles. For example, if a user visits your app on a phone and a laptop but `identify` is only called on one device, each device creates its own profile with a separate anonymous distinct ID. This usually points to a misconfiguration — when `identify` is called correctly on every device and session, PostHog merges these into one profile automatically.
+
+The most common cause of duplicate profiles is using different distinct IDs for the same user across systems without calling [`alias`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to link them. When PostHog can't merge two already-identified profiles, it blocks the merge and logs a "Refused to merge an already identified user" [ingestion warning](/docs/data/ingestion-warnings). If you're seeing this warning, it means your users are accumulating duplicate profiles that won't be merged automatically.
+
+Duplicate profiles inflate counts that rely on person profiles, such as cohort sizes and feature flag targeting. If you notice these numbers are higher than expected, check your [ingestion warnings](/docs/data/ingestion-warnings) and verify that you're calling [`identify`](/docs/product-analytics/identify) as soon as a user logs in on every device and browser.
+
+To fix existing duplicates, see [how to merge users](/docs/product-analytics/identify#how-to-merge-users).
+
+## The persons list
+
+The [People tab](https://app.posthog.com/persons) displays a list of all people in your project. By default, the list includes the following columns:
+
+> **Note:** The "Last Seen" column has been temporarily removed from the Persons table and column configuration options while we resolve a known issue. It will be restored in a future update.
+
+- **Person** - display name for the person
+- **ID** - the person's distinct ID
+- **Created at** - when the person profile was first created
+- **Last seen** - when the person was last active, rounded to the nearest hour
+- **Delete** - option to delete the person
+
+The **Last seen** column updates hourly, so it may not reflect the exact timestamp of a person's latest event. If a person was active within the last hour, the column displays "last hour" instead of a specific time.
+
+You can sort the list by any column, including last seen, to find recently active or inactive users. To customize which columns are visible, click the **Configure columns** button above the table.
+
 ## Viewing person profiles
 
-Clicking on a person in the [People tab](https://us.posthog.com/persons) opens their profile and shows all their properties.
+Clicking on a person in the [People tab](https://app.posthog.com/persons) opens their profile and shows all their properties.
 
 <ProductScreenshot
     imageLight={personProfileLight}

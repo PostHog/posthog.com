@@ -93,14 +93,14 @@ In your application code, update your PostHog initialization to use your proxy p
 <MultiLanguage>
 
 ```js file=US
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
   api_host: '/ph',
   ui_host: 'https://eu.posthog.com'
 })
@@ -164,8 +164,8 @@ Solutions:
 2. Use `<link rel="canonical">` to specify the preferred URL for search engines
 3. Ensure your sitemap only includes one URL format
 
-### 401 errors or "No project API key provided"
+### 401 errors or "No project token provided"
 
-If you see authentication errors and have verified your API key is correct, this usually indicates a region mismatch. Ensure the domains in your rewrites match your PostHog project's region (`us` or `eu`).
+If you see authentication errors and have verified your project token is correct, this usually indicates a region mismatch. Ensure the domains in your rewrites match your PostHog project's region (`us` or `eu`).
 
-Some hosting platforms also strip the request body during rewrites, losing the API key. If this happens, use [Next.js proxy](/docs/advanced/proxy/nextjs-middleware) instead.
+Some hosting platforms also strip the request body during rewrites, losing the project token. If this happens, use [Next.js proxy](/docs/advanced/proxy/nextjs-middleware) instead.

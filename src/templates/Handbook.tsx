@@ -34,6 +34,7 @@ import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
+import slugify from 'slugify'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -291,10 +292,14 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
         body,
         frontmatter: {
             title,
+            date,
+            tags,
+            contributors,
             seo,
             tableOfContents: frontmatterTableOfContents,
             hideRightSidebar,
             contentMaxWidthClass,
+            showByline,
         },
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
@@ -352,7 +357,23 @@ export default function Handbook({ data: { post }, pageContext: { breadcrumbBase
                 imageType="absolute"
             />
             <ReaderView
-                body={{ type: 'mdx', content: body }}
+                body={{
+                    type: 'mdx',
+                    content: body,
+                    ...(showByline
+                        ? {
+                              contributors,
+                              date,
+                              tags: tags?.map((tag) => ({
+                                  label: tag,
+                                  url:
+                                      tag === 'Post mortems'
+                                          ? '/handbook/company/post-mortems'
+                                          : `/blog/tags/${slugify(tag, { lower: true })}`,
+                              })),
+                          }
+                        : null),
+                }}
                 title={title}
                 tableOfContents={frontmatterTableOfContents || tableOfContents}
                 mdxComponents={components}
@@ -448,12 +469,29 @@ export const query = graphql`
                 }
             }
             frontmatter {
+                showByline
                 tableOfContents {
                     depth
                     url
                     value
                 }
                 title
+                date(formatString: "MMM DD, YYYY")
+                tags
+                contributors: authorData {
+                    id
+                    name
+                    profile_id
+                    role
+                    profile {
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
+                        }
+                    }
+                }
                 description
                 showTitle
                 hideRightSidebar

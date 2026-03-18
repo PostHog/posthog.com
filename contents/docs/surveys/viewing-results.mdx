@@ -29,6 +29,12 @@ You can view your results by selecting your survey from the [surveys tab](https:
 
 Depending your [question type](/docs/surveys/creating-surveys#question-type), you may also see charts with your responses.
 
+For rating and multiple choice questions, you can click on any bar in the chart to filter responses by that answer. For rating questions, a single click filters by that score. For multiple choice questions, click once to select a choice, then click again to confirm the filter. Click an active filter to clear it, or click a different bar to switch.
+
+For rating questions (including NPS), the trend charts include an **Open as new insight** button. Click it to save the chart as a new insight, which you can then add to a [dashboard](/docs/product-analytics/dashboards).
+
+Each question card also includes a **Copy response key** button. This copies the question's response key (e.g., `$survey_response_{question_id}`) to your clipboard. You can use this key when building custom [insights](/docs/product-analytics/insights) or setting up [destinations](/docs/surveys/destinations) like Slack notifications.
+
 <ProductScreenshot
     imageLight={surveyResultsLight}
     imageDark={surveyResultsDark}
@@ -40,11 +46,12 @@ Depending your [question type](/docs/surveys/creating-surveys#question-type), yo
 
 To create insights from survey results, navigate to the [insights tab](https://app.posthog.com/insights) and click on `New insights` button.
 
-There are 3 survey-related events you create insights from:
+There are four survey-related events you can create insights from:
 
-1. `survey dismissed`
-2. `survey shown`
-3. `survey sent` (for responses)
+1. `survey shown` - fires when a survey is displayed to a user
+2. `survey sent` - fires when a user responds to a question
+3. `survey dismissed` - fires when a user explicitly closes the survey
+4. `survey abandoned` - (for surveys with partial completion enabled) fires when a user navigates away from the page before completing the survey
 
 When creating an insight, select any of these events. To see data for a specific survey, create a filter using the `Survey ID` or `Survey Name` properties.
 

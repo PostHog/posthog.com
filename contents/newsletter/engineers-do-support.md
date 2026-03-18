@@ -51,7 +51,7 @@ This helps us create good word of mouth, and it’s motivating for engineers whe
 
 Sometimes an issue only affects the requester, but often it impacts hundreds or thousands of users who silently tolerate an issue, or stop using your product.
 
-For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](https://posthog.com/community/profiles/30455) added 1-7 as [an option](https://posthog.com/changelog/2024#surveys-now-support-7-point-likert-scale-responses), making our survey product more accurate for that user and future ones.
+For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](/community/profiles/30455) added 1-7 as [an option](/changelog?id=2057), making our survey product more accurate for that user and future ones.
 
 Every small improvement inches your product towards greatness.
 

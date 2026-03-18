@@ -114,7 +114,7 @@ We've found three details are key to getting the most out of dogfooding:
 
 Dogfooding too much can cause you to think you are building what users want, but really only build what you want. To ensure this doesn't happen, here are some pitfalls to avoid: 
 
-- **Dogfooding as a silver bullet.** Dogfooding shouldn't be the only strategy you use to develop your product. Your goal should be to build something your users want, not just yourself. To do this, [talk to users](/newsletter/talk-to-users), research your industry and competitors, build, get feedback, and iterate.
+- **Dogfooding as a silver bullet.** Dogfooding shouldn't be the only strategy you use to develop your product. Your goal should be to build something your users want, not just yourself. To do this, [talk to users](/newsletter/talk-to-users), [research your industry and competitors](/newsletter/what-does-a-product-manager-do), build, get feedback, and iterate.
 
 - **Overly dogfooding.** Dogfooding too much can slow you down and cause you to focus on small fixes. You must be comfortable with shipping big features before they are fully ready because real-world feedback is what really matters.
 

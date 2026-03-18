@@ -21,12 +21,13 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 />
 
 1. Alerts are based off of [insights](/docs/product-analytics/insights). You can pick any existing trend insight or create a new one.
-2. Click the **Alerts** button on the top right of the insight page. This shows you all the alerts for this insight.
+2. Click **Actions** in the sidebar and select **Alerts**. This shows you all the alerts for this insight.
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_button_dark_c2f642fde3.png"
-    alt="alerts button"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_26_AM_ccce74247b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_34_AM_ee7c2e9444.png"
+  alt="Alert button in actions bar"
+  classes="rounded"
 />
 
 3. Click the **New alert** button.
@@ -73,7 +74,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 
 9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
 
-10. Pick who should be notified when the alert is triggered. The alert will send an email to everyone in this list when the alert is triggered.
+10. Pick who should be notified when the alert is triggered. You can add email recipients, Slack channels, or webhook URLs directly in the alert form.
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
@@ -100,6 +101,37 @@ To view all the alerts set, click [Product analytics](https://app.posthog.com/in
 />
 
 
+## Create alerts with PostHog AI
+
+You can also create and manage alerts using [PostHog AI](/docs/posthog-ai/overview) with natural language commands. Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the alert you want.
+
+**Example commands:**
+
+- "Alert me when daily signups drop below 100"
+- "Create an alert when pageviews increase by more than 50%"
+- "Notify me if revenue drops more than 20% week over week"
+- "Change my alert threshold to 200"
+- "Disable the signups alert"
+
+PostHog AI can create alerts on existing insights or generate new trend insights and set up alerts on them automatically. To update existing alerts, PostHog AI finds the alert by name and applies your changes.
+
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+
+PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). Other insight types like funnels and retention don't support alerts.
+
+</CalloutBox>
+
+### Manage alerts via MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, create, update, and delete alerts directly from your AI coding agent. This is useful for integrating alert management into your development workflow.
+
+**Example prompts:**
+
+- "Create an alert when daily signups exceed 1000"
+- "List all my alerts and their current state"
+- "Update my pageview alert threshold to 5000"
+- "Delete the old conversion alert"
+
 ## Relative alerts
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
@@ -119,42 +151,28 @@ We support both **absolute value** thresholds (insight value more than or less t
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
 
 
-## Notification
-Alerts support sending email notifications and triggering CDP destinations for when the thresholds are breached.
+## Notifications
 
-### CDP destinations
-1. Once you save an alert, you will see the option to create CDP notifications that fire when the alert fires.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_start_7d6ad68f13.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_start_331ef652eb.png"
-    alt="relative alert picker" 
-    classes="rounded"
-/>
-2. When you click 'New notification', it will give you templates to choose from, like sending slack notifications.
-3. Click 'Create' on the destination you want.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_picker_3d34c291f5.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_picker_f0980da598.png"
-    alt="relative alert picker" 
-    classes="rounded"
-/>
-4. You will be brought to the page to configure options for the CDP destination. 
-In case of slack notifications, you just need to select the Slack connection and the channel you want the message to be sent in.
-You can optionally configure the message that's sent in the channel using the 'Blocks' option.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_configure_77171f28da.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_configure_d36720023d.png"
-    alt="relative alert picker" 
-    classes="rounded"
-/>
-5. Once you click 'Create & enable', you notification is set up and when you navigate back to the alert, you will see the newly created destination showing up.
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_saved_94673f216f.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_saved_595e519537.png"
-    alt="relative alert picker" 
-    classes="rounded"
-/>
+Alerts support email notifications, Slack messages, and webhooks. You can configure these directly when creating or editing an alert.
 
+### Add Slack or webhook notifications
+
+When creating or editing an alert, you can add notification destinations inline:
+
+1. In the **Destinations** section, select **Slack** or **Webhook** from the dropdown.
+
+2. For Slack notifications:
+   - If you haven't connected Slack yet, click **Connect to Slack** to set up the integration.
+   - Once connected, select the channel where you want alerts sent.
+
+3. For webhook notifications:
+   - Enter the webhook URL where you want alerts sent.
+
+4. Click **Add notification** to add the destination.
+
+5. Click **Create alert** or **Save** to apply your changes.
+
+You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 
 ## Advanced options
 You can configure alerts to skip checking on weekends. 
@@ -176,6 +194,24 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
     alt="alert on breakdown" 
     classes="rounded"
 />
+
+
+## Automatically disabled alerts
+
+PostHog automatically disables alerts that have an invalid configuration. When this happens, subscribed users receive an email notification explaining the reason the alert was disabled.
+
+Common reasons an alert may be auto-disabled:
+
+- The insight was modified and is no longer compatible with the alert configuration (e.g., the insight query type changed from a trend to a funnel)
+- The series referenced by the alert was removed from the insight
+- A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
+- An absolute value alert was configured with a percentage threshold
+
+<CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
+
+Disabled alerts don't re-enable themselves. After fixing the configuration issue, go to the **Alerts** tab on the insight and manually re-enable the alert.
+
+</CalloutBox>
 
 ## Further reading
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).

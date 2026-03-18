@@ -57,7 +57,7 @@ To start, install the [JavaScript web SDK](/docs/libraries/js):
 npm i posthog-js
 ```
 
-In `src/main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).
+In `src/main.ts`, initialize PostHog using your project token and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -65,7 +65,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host:'<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
 })
@@ -427,7 +427,7 @@ export class AppComponent {
     localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: this.surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${value}` // required. Convert numbers to string
+      $survey_response: `${value}` // required. Convert numbers to string
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -505,7 +505,7 @@ export class AppComponent {
     localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
     posthog.capture("survey sent", {
       $survey_id: this.surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: `${value}` // required. Convert numbers to string
+      $survey_response: `${value}` // required. Convert numbers to string
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

@@ -51,10 +51,10 @@ export const smartlook = {
             },
         },
         web_analytics: {
-            available: false,
+            available: true,
         },
         product_tours: {
-            available: true,
+            available: false,
         },
         session_replay: {
             available: true,
@@ -66,7 +66,7 @@ export const smartlook = {
             },
             analysis: {
                 features: {
-                    performance_monitoring: false,
+                    performance_monitoring: true,
                     network_monitor: true,
                 },
             },
@@ -129,13 +129,13 @@ export const smartlook = {
         },
         integrations: {
             exports: true,
-            imports: true,
+            imports: false,
         },
         security: {
             gdpr_ready: true,
             hipaa_ready: false,
-            soc2_certified: false,
-            saml_sso: false,
+            soc2_certified: true,
+            saml_sso: true,
             two_factor_auth: true,
             user_privacy_options: true,
         },
