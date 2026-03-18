@@ -42,6 +42,7 @@ import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -296,7 +297,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
         logo: ExaLogo,
-        height: 10,
+        height: 9,
         featured: true,
     },
     gankster: {
@@ -594,7 +595,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Design studio of the US Government',
         logo: NationalDesignStudioLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     netdata: {
         name: 'Netdata',
@@ -719,7 +720,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     rayfit: {
         name: 'RayFit',
@@ -764,6 +765,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: ResearchGateLogo,
         height: 8,
         featured: true,
+    },
+    resend: {
+        name: 'Resend',
+        // toolsUsed: ['product_analytics', 'experiments'],
+        notes: 'Email delivery service',
+        logo: ResendLogo,
+        featured: true,
+        height: 7,
     },
     significa: {
         name: 'Significa',
