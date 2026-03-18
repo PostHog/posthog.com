@@ -1068,6 +1068,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/feature-ownership',
             },
             {
+                name: 'Developer experience',
+                url: '/handbook/engineering/developer-experience',
+            },
+            {
                 name: 'Bug prioritization',
                 url: '/handbook/engineering/bug-prioritization',
             },
