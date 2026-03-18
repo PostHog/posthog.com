@@ -129,6 +129,7 @@ export const LOGOS = {
     svelte: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg',
     tanstack: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logo_color_600_391d28faae.png',
     temporal: 'https://res.cloudinary.com/dmukukwp6/image/upload/Temporal_Symbol_dark_66b0582c1b.svg',
+    typeform: 'https://res.cloudinary.com/dmukukwp6/image/upload/typeform_a12822b2db.png',
     tiktokAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/tiktok_svgrepo_com_9315a2fa30.svg',
     togetherAI: 'https://res.cloudinary.com/dmukukwp6/image/upload/together_ai_cdee2c04f2.svg',
     unity: 'https://res.cloudinary.com/dmukukwp6/image/upload/unity_9f9c332941.svg',
