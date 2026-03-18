@@ -198,7 +198,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     video: values.video || undefined,
                     presentation: values.presentation || undefined,
                     link: values.link || undefined,
-                    speakers: { connect: values.speakers },
+                    speakers: { set: values.speakers },
                     location: {
                         label: values.locationLabel,
                         lat: values.locationLat ? Number(values.locationLat) : undefined,
