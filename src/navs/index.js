@@ -1495,6 +1495,37 @@ export const handbookSidebar = [
                     },
                 ],
             },
+
+            {
+                name: 'Use-case selling',
+            url: '/handbook/growth/use-case-selling/use-case-selling',
+            children: [
+                {
+                    name: 'Product Intelligence',
+                    url: '/handbook/growth/use-case-selling/product-intelligence',
+                },
+                {
+                    name: 'Release Engineering',
+                    url: '/handbook/growth/use-case-selling/release-engineering',
+                },
+                {
+                    name: 'Observability',
+                    url: '/handbook/growth/use-case-selling/observability',
+                },
+                {
+                    name: 'Growth & Marketing',
+                    url: '/handbook/growth/use-case-selling/growth-and-marketing',
+                },
+                {
+                    name: 'AI/LLM Observability',
+                    url: '/handbook/growth/use-case-selling/ai-llm-observability',
+                },
+                {
+                    name: 'Data Infrastructure',
+                    url: '/handbook/growth/use-case-selling/data-infrastructure',
+                },
+            ],
+            },
             {
                 name: 'Cross-selling',
                 url: '',
@@ -1503,36 +1534,6 @@ export const handbookSidebar = [
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/growth/cross-selling/how-we-upsell-and-cross-sell',
                     },
-                    {
-            name: 'Use-case selling',
-            url: '/handbook/growth/cross-selling/use-case-selling/use-case-selling.md',
-            children: [
-                {
-                    name: 'Product Intelligence',
-                    url: '/handbook/growth/cross-selling/use-case-selling/product-intelligence',
-                },
-                {
-                    name: 'Release Engineering',
-                    url: '/handbook/growth/cross-selling/use-case-selling/release-engineering',
-                },
-                {
-                    name: 'Observability',
-                    url: '/handbook/growth/cross-selling/use-case-selling/observability',
-                },
-                {
-                    name: 'Growth & Marketing',
-                    url: '/handbook/growth/cross-selling/use-case-selling/growth-and-marketing',
-                },
-                {
-                    name: 'AI/LLM Observability',
-                    url: '/handbook/growth/cross-selling/use-case-selling/ai-llm-observability',
-                },
-                {
-                    name: 'Data Infrastructure',
-                    url: '/handbook/growth/cross-selling/use-case-selling/data-infrastructure',
-                },
-            ],
-        },
                     {
                         name: 'Tracking cross sells',
                         url: '/handbook/growth/cross-selling/tracking-cross-sells',
