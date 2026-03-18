@@ -68,7 +68,7 @@ export default function CDP(): JSX.Element {
             title: 'PostHog AI',
             url: '/data-stack/posthog-ai',
             description:
-                "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+                "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             perfectFor: 'product teams, data engineers, and analysts',
         },
         {
@@ -245,10 +245,10 @@ export default function CDP(): JSX.Element {
 
                 <h3>
                     Fully wired with our{' '}
-                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">omnicient AI</span>
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">omniscient AI</span>
                 </h3>
                 <p>
-                    With all your data in one place, PostHog AI becomes truly omnicient about your business. Generate
+                    With all your data in one place, PostHog AI becomes truly omniscient about your business. Generate
                     SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to
                     work faster than ever before.
                 </p>
