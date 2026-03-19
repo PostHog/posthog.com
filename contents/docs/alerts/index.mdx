@@ -21,12 +21,13 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 />
 
 1. Alerts are based off of [insights](/docs/product-analytics/insights). You can pick any existing trend insight or create a new one.
-2. Click the **Alerts** button on the top right of the insight page. This shows you all the alerts for this insight.
+2. Click **Actions** in the sidebar and select **Alerts**. This shows you all the alerts for this insight.
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_button_dark_c2f642fde3.png"
-    alt="alerts button"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_26_AM_ccce74247b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_34_AM_ee7c2e9444.png"
+  alt="Alert button in actions bar"
+  classes="rounded"
 />
 
 3. Click the **New alert** button.
@@ -120,6 +121,17 @@ PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). O
 
 </CalloutBox>
 
+### Manage alerts via MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, create, update, and delete alerts directly from your AI coding agent. This is useful for integrating alert management into your development workflow.
+
+**Example prompts:**
+
+- "Create an alert when daily signups exceed 1000"
+- "List all my alerts and their current state"
+- "Update my pageview alert threshold to 5000"
+- "Delete the old conversion alert"
+
 ## Relative alerts
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
@@ -147,7 +159,7 @@ Alerts support email notifications, Slack messages, and webhooks. You can config
 
 When creating or editing an alert, you can add notification destinations inline:
 
-1. In the **CDP Destinations** section, select **Slack** or **Webhook** from the dropdown.
+1. In the **Destinations** section, select **Slack** or **Webhook** from the dropdown.
 
 2. For Slack notifications:
    - If you haven't connected Slack yet, click **Connect to Slack** to set up the integration.

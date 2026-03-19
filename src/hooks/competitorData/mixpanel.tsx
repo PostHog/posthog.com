@@ -372,6 +372,12 @@ export const mixpanel = {
                 sql_access: false,
             },
         },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
@@ -428,6 +434,7 @@ export const mixpanel = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
     pricing: {

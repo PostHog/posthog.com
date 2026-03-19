@@ -712,6 +712,11 @@ export function useMenuData(): MenuType[] {
                             label: 'HIPAA',
                             link: '/docs/privacy/hipaa-compliance',
                         },
+                        {
+                            type: 'item',
+                            label: 'Subprocessors',
+                            link: '/subprocessors',
+                        },
                     ],
                 },
                 {

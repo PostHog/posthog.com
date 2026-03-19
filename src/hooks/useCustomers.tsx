@@ -12,13 +12,18 @@ import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_T
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
+import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
+import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CounterPressLogo from '../images/customers/counterpress-light.svg'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
@@ -26,6 +31,7 @@ import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
+import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesignStudioLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
@@ -38,6 +44,7 @@ import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -46,14 +53,15 @@ import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import UKGovtLogo from '../components/CustomerLogos/UKGovtLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
+import WisprFlowLogo from 'components/CustomerLogos/WisprFlow'
 import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
-import ExaLogo from 'components/CustomerLogos/ExaLogo'
 
 export interface Customer {
     slug: string
@@ -165,7 +173,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
-        height: 9,
+        height: 8,
         featured: true,
     },
     assemblyai: {
@@ -279,6 +287,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 8,
     },
+    convex: {
+        name: 'Convex',
+        toolsUsed: [],
+        industries: ['SaaS'],
+        users: [],
+        notes: 'Backend web app platform',
+        logo: ConvexLogo,
+        featured: true,
+        height: 8,
+    },
     creatify: {
         name: 'Creatify',
         toolsUsed: ['web_analytics', 'product_analytics'],
@@ -309,7 +327,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
         logo: ExaLogo,
-        height: 10,
+        height: 9,
         featured: true,
     },
     gankster: {
@@ -392,6 +410,35 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
+            },
+        },
+    },
     suped: {
         name: 'Suped',
         toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
@@ -445,6 +492,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    greptile: {
+        name: 'Greptile',
+        // toolsUsed: ['product_analytics'],
+        industries: ['SaaS'],
+        // users: ['Engineering', 'Product'],
+        notes: 'AI code reviewer',
+        logo: GreptileLogo,
+        featured: true,
+        height: 10,
+    },
     groove: {
         name: 'Groove',
         toolsUsed: ['experiments', 'product_analytics', 'surveys'],
@@ -483,7 +540,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [], // TODO: Add toolsUsed
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
-        notes: 'AI video editor',
+        notes: 'AI video generator',
         logo: HeygenLogo,
         featured: true,
         height: 12,
@@ -559,6 +616,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: MistralAILogo,
         height: 12,
         featured: true,
+    },
+    nationaldesignstudio: {
+        name: 'National Design Studio',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Design studio of the US Government',
+        logo: NationalDesignStudioLogo,
+        featured: true,
+        height: 11,
     },
     netdata: {
         name: 'Netdata',
@@ -683,7 +750,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     rayfit: {
         name: 'RayFit',
@@ -728,6 +795,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: ResearchGateLogo,
         height: 8,
         featured: true,
+    },
+    resend: {
+        name: 'Resend',
+        // toolsUsed: ['product_analytics', 'experiments'],
+        notes: 'Email delivery service',
+        logo: ResendLogo,
+        featured: true,
+        height: 7,
     },
     significa: {
         name: 'Significa',
@@ -815,6 +890,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 10,
     },
+    ukgovt: {
+        name: 'UK Government',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Most popular country with a Queen',
+        logo: UKGovtLogo,
+        featured: true,
+        height: 9,
+    },
     vendasta: {
         name: 'Vendasta',
         toolsUsed: ['experiments', 'cdp'],
@@ -834,6 +919,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: WebshareLogo,
         featured: false,
         height: 10,
+    },
+    wisprflow: {
+        name: 'WisprFlow',
+        //toolsUsed: [''],
+        //industries: ['Devtool'],
+        // users: ['Marketing', 'Leadership', 'Customer Success'],
+        notes: 'AI voice dictation',
+        logo: WisprFlowLogo,
+        featured: true,
+        height: 9,
     },
     wittyworks: {
         name: 'Witty Works',

@@ -1,0 +1,51 @@
+---
+title: Create Experiments with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent create and manage [Experiments](/docs/experiments) directly from your code editor. Set up A/B tests, check results, and manage Experiment lifecycle – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+With MCP, your coding agent can:
+
+- **Create Experiments alongside your code** – Set up an A/B test for a feature you're building without leaving your editor
+- **Check results before shipping** – "What are the results of the checkout Experiment?" to decide whether to merge
+- **Manage Experiment lifecycle** – Update targeting, adjust traffic splits, or archive completed Experiments
+- **Validate implementation** – Check that you correctly configured your feature flag before launching
+
+## Experiment tools
+
+The MCP server provides these tools for working with Experiments:
+
+| Tool | Description |
+|------|-------------|
+| `experiment-create` | Create a new Experiment with specified variants, traffic split, and goal metrics. Automatically creates the backing feature flag. |
+| `experiment-get` | Get details for a specific Experiment, including current status and configuration. |
+| `experiment-get-all` | List all Experiments in the current project. |
+| `experiment-results-get` | Get the statistical results of an Experiment, including confidence intervals and significance. |
+| `experiment-update` | Update an Experiment's name, description, or configuration. |
+| `experiment-delete` | Delete an Experiment. |
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Create an A/B test for the new checkout flow with a 70/30 split. Use purchase_completed as the goal metric.`
+- `What are the results of my new-pricing-page Experiment?`
+- `List all running Experiments in this project.`
+- `Is the dark-mode-test Experiment statistically significant yet?`
+- `Archive the old-onboarding Experiment.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

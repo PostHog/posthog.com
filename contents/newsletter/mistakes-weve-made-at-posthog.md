@@ -29,7 +29,7 @@ It was the engineering team who persuaded them otherwise during a feedback sessi
 
 > “Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company.
 > 
-> “Compellingly, Paolo – then, one of our engineers – had proactively acted like a product manager. He gathered deep feedback from dozens of users, which he summarized at the start of the offsite to everyone.
+> “Compellingly, Paolo – then, one of our engineers – had proactively acted like a [product manager](/newsletter/what-does-a-product-manager-do). He gathered deep feedback from dozens of users, which he summarized at the start of the offsite to everyone.
 >
 > It was incredibly useful (and influenced us going broad with our product, giving us a much better strategy).”
 
