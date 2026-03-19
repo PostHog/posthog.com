@@ -541,5 +541,13 @@
         "link_type": "github",
         "link_url": "https://github.com/haacked",
         "profile_id": 32501
+    },
+    {
+        "handle": "andy-maguire",
+        "name": "Andy Maguire",
+        "role": "AI Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/andrewm4894",
+        "profile_id": 37401
     }
 ]

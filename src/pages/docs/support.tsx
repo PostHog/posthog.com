@@ -56,6 +56,22 @@ const Support: React.FC = () => {
                         gatsbyImage={undefined}
                         type={undefined}
                     />
+                    <ResourceItem
+                        title="Slack integration"
+                        description="Connect Slack for two-way sync — messages become tickets, replies sync back to threads."
+                        url="/docs/support/slack"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Workflow automation"
+                        description="Automate ticket management with workflows — set SLAs, auto-assign, tag, and route tickets."
+                        url="/docs/support/workflows"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
                 </ul>
             </section>
         </ReaderView>

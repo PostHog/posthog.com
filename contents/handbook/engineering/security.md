@@ -20,25 +20,28 @@ You can sign commits with either [Secretive](https://github.com/maxgoedjen/secre
 
 #### Setting up with Secretive
 
-1. Open Secretive, then go to **Secretive > Integrations** in the menu bar.
-2. Click **Git Signing** and enter your PostHog email. This should be the same email as your git config — run `git config user.email` to check.
-3. Copy and paste the config snippets Secretive provides into the files it specifies. If you already have content in `~/.gitconfig`, merge the new sections into the existing file rather than replacing it.
-4. Select your shell on the left side of Secretive and set the `SSH_AUTH_SOCK` environment variable as instructed. For zsh, add the following to your `~/.zshrc`:
+1. Open Secretive and click the + button to create a new key.
+2. Name your key "Git signing key" and select **Notify** in the Protection Level dropdown.
+3. Go to **Secretive > Integrations** in the menu bar.
+4. Click **Git Signing** and select "Git signing key" from the **Secret** dropdown.
+5. Copy and paste the `~/.gitconfig` and `~/.gitallowedsigners` snippets into their respective files
+    - If you already have content in `~/.gitconfig`, merge the new sections into the existing file rather than replacing it.
+6. Select your shell on the left side of Secretive and set the `SSH_AUTH_SOCK` environment variable as instructed. For zsh, add the following to your `~/.zshrc`:
 
    ```bash
-   export SSH_AUTH_SOCK=/Users/<your-username>/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+   export SSH_AUTH_SOCK=~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
    ```
 
    Then run `source ~/.zshrc` to apply it.
 
-5. Your `~/.gitconfig` now has a `signingkey` pointing to a file. Copy your public key to the clipboard:
+7. Your `~/.gitconfig` now has a `signingkey` pointing to a file. Copy your public key to the clipboard:
 
    ```bash
    cat <path-from-signingkey> | pbcopy
    ```
 
-6. Go to your [GitHub SSH keys settings](https://github.com/settings/keys) and add a new SSH key. Paste your public key and set the key type to **Signing Key**.
-7. Test it by creating an empty commit on a new branch:
+8. Go to your [GitHub SSH keys settings](https://github.com/settings/keys) and add a new SSH key. Paste your public key and set the key type to **Signing Key**.
+9. Test it by creating an empty commit on a new branch:
 
    ```bash
    git commit --allow-empty -m "test signing"

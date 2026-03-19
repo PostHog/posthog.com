@@ -220,6 +220,23 @@ Click **Generate with AI** in the code editor to open Max, PostHog's AI assistan
 - Debug errors in your existing code
 - Iterate on the logic by testing and refining
 
+## Managing evaluations via MCP
+
+You can also manage evaluations through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
+
+The MCP server provides six evaluation management tools:
+
+| Tool | Description |
+|------|-------------|
+| `evaluations-get` | List evaluations with optional search and enabled filter |
+| `evaluation-get` | Get a specific evaluation by UUID |
+| `evaluation-create` | Create LLM judge or Hog code evaluations |
+| `evaluation-update` | Update evaluation config, name, or enabled status |
+| `evaluation-delete` | Delete an evaluation (soft delete) |
+| `evaluation-run` | Trigger an async evaluation run on a specific generation event |
+
+This enables teams to manage evaluations programmatically from agent workflows without using the web UI.
+
 ## Viewing results
 
 The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the evaluation.
