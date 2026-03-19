@@ -73,13 +73,13 @@ When we let people go for performance reasons, we share the reasons with everyon
 
 This brings us neatly to our next point...
 
-## 6. Embrace extreme transparency
+## 6. Embrace transparency
 
 Transparency, both internally and externally, is a core principle for us and an important part of what a product engineer needs to be successful.
 
 Why? Because it's where product engineers get the context they need to make good decisions. The context they need to work autonomously.
 
-We take this to a greater extreme than most. We're open source, so our code and docs are freely available. We also have a public [handbook](/handbook] where we share things like our strategy and priorities, how we work, how we hire, and so on.
+We take this to a greater extreme than most. We're open source, so anyone can contrinute to our code and docs. We also have a public [handbook](/handbook) where we share things like our strategy and priorities, how we work, how we hire, and so on.
 
 These are just the basics, though. Internally, we also share things like:
 
