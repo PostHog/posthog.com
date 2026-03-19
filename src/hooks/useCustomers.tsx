@@ -7,6 +7,8 @@ import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
+import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
@@ -246,6 +248,11 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering'],
         notes: 'Agentic AI platform for cybersecurity',
         featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
         quotes: {
             craig_hollington: {
                 name: 'Craig Hollington',
