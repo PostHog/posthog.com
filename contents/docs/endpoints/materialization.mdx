@@ -57,12 +57,6 @@ Not all variables work with materialization. Compatibility depends on the operat
 | Variables in `HAVING` clauses | ❌ No | Cannot be materialized |
 | Variables in `OR` conditions | ❌ No | Cannot be materialized |
 
-When using range variables on timestamp columns, certain aggregate functions cannot be re-aggregated and are incompatible:
-
-- `avg` / `avgWeighted`
-- `uniq` / `uniqExact` / `countDistinct`
-
-Only re-aggregatable functions like `count`, `sum`, `min`, and `max` (and their combinator variants like `countIf`, `sumIf`) work with timestamp range variables.
 
 ## Timestamp bucketing
 
