@@ -28,6 +28,7 @@ export const LOGOS = {
     clerk: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_36_01_806_Z_30c81aea20.png',
     cloudflare: 'https://res.cloudinary.com/dmukukwp6/image/upload/cloudflare_icon_ef34353f85.svg',
     cohere: 'https://res.cloudinary.com/dmukukwp6/image/upload/cohere_0ddf02d545.svg',
+    convex: 'https://res.cloudinary.com/dmukukwp6/image/upload/convex_d8dcddcd63.svg',
     crewai: 'https://res.cloudinary.com/dmukukwp6/image/upload/crewai_67ee9f5eb6.svg',
     cloudflareR2: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
