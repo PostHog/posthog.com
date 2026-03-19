@@ -3,9 +3,9 @@ title: Traits of product engineers
 showTitle: true
 ---
 
-The most effective product engineers at PostHog aren't necessarily the best coders. This isn't to say coding skill doesn't matter, it obviously does, but being a product engineer really starts from how you think and behave.
+The most effective product engineers at PostHog aren't necessarily the best coders. This doesn't mean coding skill doesn't matter, it obviously does, but being a product engineer really starts from how you think and behave.
 
-It's a classic "make your own luck" argument, really. Successful product engineers spark joy not because they're the best at coding solutions to intuiting what they want, but because everything they do revolves around finding ways to make a positive impact.
+It's a classic "make your own luck" argument situation. Successful product engineers spark joy not because they're the best at coding solutions, but because everything they do revolves around finding ways to make a positive impact.
 
 This list could be longer, but these are the most important traits we look for product engineers.
 
@@ -13,15 +13,13 @@ This list could be longer, but these are the most important traits we look for p
 
 Product engineers care a lot about the people and organizations using their product. This customer obsession manifests in a few ways. 
 
-First, they [talk to users](/newsletter/talk-to-users). While they work with product managers and salespeople to understand user problems, they don't rely on them alone. They go to the source. 
-
-A good product engineer has customers they're friendly with who they can go to at any time to validate a hunch. Product engineers at PostHog often visit customers on-site, work alongside them, and learn more about what they need.
+First, they [talk to users](/newsletter/talk-to-users). While they work with product managers and salespeople to understand user problems, they don't rely on them alone. They go to the source. A good product engineer has customers they're friendly with and use to validate hunches.
 
 Second, they're more motivated by work that directly benefits users, and getting this work into their hands as quickly as possible. [Fly.io](http://fly.io) defines this by saying:
 
 > "We're ruthless about working on stuff that our users will see and care about. We are not ruthless about shaping and polishing our code into a radiant-cut gem of perfection."
 
-Third, they love jumping on user problems and solving them. Whether it's an annoying paper cut they can solve quickly, or a useful feature that other users will benefit from, product engineers live for sparking joy by proactively solving problems.
+Third, they love jumping on user problems and solving them. Whether it's an papercut they can solve quickly, or a useful feature that other users will benefit from, product engineers live for sparking joy by proactively solving problems.
 
 By being customer-obsessed, product engineers become more open-minded. They care more about solving real user problems than dogmatically following best practices just because "that's how it's done."
 
@@ -92,9 +90,7 @@ This takes different forms, such as:
 * [Testing in production](/product-engineers/testing-in-production) – i.e. as close to reality as possible.
 * Experimenting with different tools, agents, models, and frameworks. 
 
-This also means product engineers are often early adopters of new technologies if they believe they can help them ship faster, or learn some new skill that will help them toward their goal.
-
-This often stems from an intrinsic curiosity and love of learning. Product engineers love asking questions and understanding the why behind decisions. This is motivated by the desire to improve and perform to a higher level, but sometimes it's just for the pure love of learning with no other specific goal.
+Product engineers are often early adopters of new technologies if they believe they can help them ship faster, or learn some new skill that will help them toward their goal. They love learning for the sake of it, even when there's no specific goal to task to complete.
 
 ## They're optimistic
 
