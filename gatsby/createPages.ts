@@ -912,7 +912,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return acc
     }, {} as Record<string, Record<string, any>>)
 
-    result.data.allSdkReferences.nodes.forEach((node) => {
+    result.data.allSdkReferences.nodes.filter((n) => n.version.includes('latest')).forEach((node) => {
         if (node.version.includes('latest')) {
             createPage({
                 path: `/docs/references/${node.referenceId}`,
@@ -941,7 +941,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     })
 
-    result.data.allSdkTypes.nodes.forEach((node) => {
+    result.data.allSdkTypes.nodes.filter((n) => n.version.includes('latest')).forEach((node) => {
         node.types?.forEach((type) => {
             if (type.id && (type.properties || type.example)) {
                 if (node.version.includes('latest')) {
