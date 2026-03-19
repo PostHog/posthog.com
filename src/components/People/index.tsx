@@ -11,7 +11,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { ToggleGroup as RadixToggleGroup } from 'radix-ui'
 import Fuse from 'fuse.js'
 import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
@@ -330,34 +330,56 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     return (
         <div data-scheme="primary" className="@container bg-primary h-full">
             <SEO title="Team - PostHog" />
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2">
                 <h1>People</h1>
-                <ToggleGroup
-                    title=""
-                    hideTitle
-                    options={[
-                        {
-                            label: (
-                                <>
-                                    <IconList className="size-4 mr-1" />
-                                    List
-                                </>
-                            ),
-                            value: 'list',
-                        },
-                        {
-                            label: (
-                                <>
-                                    <IconMapPin className="size-4 mr-1" />
-                                    Map
-                                </>
-                            ),
-                            value: 'map',
-                        },
-                    ]}
-                    onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
-                    value={activeTab}
-                />
+                <div
+                    className="flex items-center rounded p-1 bg-primary border border-primary gap-px"
+                    data-scheme="primary"
+                >
+                    <div className="relative flex items-center">
+                        <IconSearch className="absolute left-2 size-3.5 opacity-50 pointer-events-none" />
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            value={localSearchTerm}
+                            onChange={(e) => setLocalSearchTerm(e.target.value)}
+                            className="pl-7 pr-6 py-1 bg-transparent text-primary text-sm focus:outline-none w-32 @md:w-44"
+                        />
+                        {localSearchTerm && (
+                            <button
+                                onClick={() => setLocalSearchTerm('')}
+                                className="absolute right-1 top-1/2 -translate-y-1/2 opacity-50 hover:opacity-100"
+                            >
+                                <IconX className="size-3.5" />
+                            </button>
+                        )}
+                    </div>
+                    <div className="w-px self-stretch bg-border mx-0.5" />
+                    <RadixToggleGroup.Root
+                        className="flex space-x-px"
+                        type="single"
+                        value={activeTab}
+                        onValueChange={(val) => val && setActiveTab(val as 'list' | 'map')}
+                        aria-label="View mode"
+                    >
+                        <RadixToggleGroup.Item
+                            className="flex border border-transparent p-1 items-center justify-center bg-primary leading-4 text-sm font-medium text-primary rounded hover:bg-accent focus:outline-none data-[state=on]:bg-accent"
+                            value="list"
+                            aria-label="List"
+                        >
+                            <IconList className="size-4 mr-1" />
+                            List
+                        </RadixToggleGroup.Item>
+                        <RadixToggleGroup.Item
+                            className="flex border border-transparent p-1 items-center justify-center bg-primary leading-4 text-sm font-medium text-primary rounded hover:bg-accent focus:outline-none data-[state=on]:bg-accent"
+                            value="map"
+                            aria-label="Map"
+                        >
+                            <IconMapPin className="size-4 mr-1" />
+                            Map
+                        </RadixToggleGroup.Item>
+                    </RadixToggleGroup.Root>
+                </div>
             </div>
             <ScrollArea className="h-full">
                 {activeTab === 'list' && (
@@ -390,28 +412,10 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                                 </Link>
                             </p>
                         </div>
-                        <div className="relative mt-8 mb-4 max-w-lg">
-                            <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 opacity-50 pointer-events-none" />
-                            <input
-                                type="text"
-                                placeholder="Search by name, location, or team..."
-                                value={localSearchTerm}
-                                onChange={(e) => setLocalSearchTerm(e.target.value)}
-                                className="w-full pl-9 pr-9 py-2 rounded border border-input bg-light dark:bg-dark text-primary text-sm focus:outline-none focus:ring-1 focus:ring-primary/50"
-                            />
-                            {localSearchTerm && (
-                                <button
-                                    onClick={() => setLocalSearchTerm('')}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 opacity-50 hover:opacity-100"
-                                >
-                                    <IconX className="size-4" />
-                                </button>
-                            )}
-                        </div>
                         {filteredTeamMembers.length === 0 && activeSearchTerm && (
                             <p className="text-sm opacity-60 mt-4">No results for "{activeSearchTerm}"</p>
                         )}
-                        <ul className="not-prose list-none mt-4 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
+                        <ul className="not-prose list-none mt-8 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
                             {filteredTeamMembers.map((teamMember: any) => {
                                 // Calculate if this person is a team lead of any team
                                 const isTeamLead = teamMember.leadTeams?.data?.length > 0
