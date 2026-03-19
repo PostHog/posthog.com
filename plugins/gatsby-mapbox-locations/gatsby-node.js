@@ -60,6 +60,8 @@ const sourceNodes = async (options, pluginOptions) => {
                 })
                 .send()
 
+            console.log(JSON.stringify(response.body.batch, null, 2))
+
             // Match results with original profiles
             response.body.batch.forEach((entry, i) => {
                 if (entry.features.length > 0) {

@@ -937,7 +937,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     // Null checks, only affects type crosslinking, won't break build
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
-                defer: true,
             })
         }
     })
@@ -968,7 +967,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                             slugPrefix: node.id,
                         },
-                        defer: true,
                     })
                 }
             }
