@@ -993,11 +993,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     page,
                     pageSize: 100,
                 },
-                filters: {
-                    version: {
-                        $contains: 'latest',
-                    },
-                },
             },
             {
                 encodeValuesOnly: true,

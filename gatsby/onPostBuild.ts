@@ -553,11 +553,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)) as { data: { allSdkReferences: { nodes: SdkReferenceData[] } } }
 
-    sdkReferencesQuery.data.allSdkReferences.nodes
-        .filter((node) => node.version?.includes('latest'))
-        .forEach((node) => {
-            generateSdkReferencesMarkdown(node)
-        })
+    sdkReferencesQuery.data.allSdkReferences.nodes.forEach((node) => {
+        generateSdkReferencesMarkdown(node)
+    })
 
     // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
     // Convert HTML files to markdown using turndown
