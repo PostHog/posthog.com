@@ -1,0 +1,176 @@
+---
+title: Using prompts as a shared skills store
+---
+
+import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
+
+<PromptsAlpha />
+
+Your team's coding agents (Claude Code, Cursor, Codex, Windsurf, and others) all support [MCP](/docs/model-context-protocol). PostHog [Prompts](/docs/llm-analytics/prompts) combined with MCP gives you a centralized, versioned place to store and share reusable agent skills — across any tool, for any team member.
+
+## Why use prompts as a skills store?
+
+- **Works in any MCP-connected agent** — Claude Code, Cursor, Codex, Windsurf, VS Code, and more
+- **Centrally managed** — Update a skill once, every team member gets the latest version on their next fetch
+- **Full version history** — See exactly what changed between versions using the [diff view](/docs/llm-analytics/prompts#compare-versions)
+- **No vendor lock-in** — Not tied to a specific agent or IDE
+- **Non-engineers can contribute** — Anyone on your team can create and maintain skills through the PostHog UI
+- **Skills evolve with proper versioning** — You or your agent can update skills, and every change is tracked
+
+## How it works
+
+The pattern has three layers:
+
+1. **PostHog Prompts** stores the skill content as versioned markdown
+2. **MCP prompt tools** (`prompt-get`, `prompt-list`) let agents fetch skills at runtime
+3. **An optional local bridge skill** makes invocation seamless (e.g., a Claude Code slash command that auto-fetches from PostHog)
+
+When a team member invokes a skill, their agent fetches the latest version from PostHog via MCP, reads the instructions, and follows them. No local files to sync, no git repos to pull — just one source of truth.
+
+## Prerequisites
+
+- A PostHog account with LLM analytics enabled
+- The [PostHog MCP server](/docs/model-context-protocol) configured in your coding agent
+
+## Step 1: Create a skill
+
+A skill is just a PostHog prompt that contains agent instructions instead of an LLM system prompt. Let's create one — a skill called `hog-release-notes` that writes release notes in PostHog's voice.
+
+### Via the PostHog UI
+
+1. Navigate to **LLM analytics** > **Prompts**
+2. Click **New prompt**
+3. Name it `hog-release-notes`
+4. Paste your skill content (see example below)
+5. Click **Create prompt**
+
+### Via MCP
+
+Ask your agent to create the skill:
+
+```text
+Use the PostHog MCP prompt-create tool to create a prompt named
+"hog-release-notes" with the content I'll provide.
+```
+
+Or call `prompt-create` directly:
+
+```
+Tool: prompt-create
+Name: hog-release-notes
+Content: (see example below)
+```
+
+### Example skill content
+
+```markdown
+# Hog release notes writer
+
+You write release notes for PostHog features. Follow these rules:
+
+## Voice and tone
+- Direct and concise — no marketing fluff
+- Technical but approachable
+- Use second person ("you") not third person ("users")
+- Be specific about what changed and why it matters
+
+## Structure
+1. **One-line summary** — What shipped, in plain language
+2. **What it does** — 2-3 sentences on the feature or fix
+3. **How to use it** — Concrete steps or code snippets
+4. **Why we built it** — The problem this solves (one sentence)
+
+## Rules
+- Start with a verb (Add, Fix, Improve, Remove)
+- Include links to relevant docs pages
+- If it's a breaking change, lead with that
+- Keep it under 200 words
+
+## Context
+Read the git diff or PR description provided, then write the release
+notes following the structure above.
+```
+
+## Step 2: Use a skill from any agent
+
+Once a skill exists in PostHog, any team member with the MCP server configured can use it.
+
+### Discover available skills
+
+Ask your agent:
+
+```text
+List all available PostHog prompts so I can see what skills the team has.
+```
+
+This calls `prompt-list` and returns all prompts in your project.
+
+### Fetch and run a skill
+
+Ask your agent to fetch a specific skill and follow its instructions:
+
+```text
+Fetch the PostHog prompt "hog-release-notes" and use its instructions
+to write release notes for the changes in my current branch.
+```
+
+The agent calls `prompt-get` with the name `hog-release-notes`, receives the skill content, and follows the instructions — writing release notes based on your branch's changes.
+
+This works identically in Claude Code, Cursor, Codex, or any other MCP-connected agent. The skill lives in PostHog, not in any particular tool.
+
+## Step 3: Set up a bridge skill (optional)
+
+For agents that support local slash commands (like Claude Code), you can create a lightweight local skill that automatically fetches from PostHog. This way, team members just type a slash command instead of asking the agent to fetch a prompt.
+
+### Claude Code example
+
+Create a file at `.claude/skills/hog-release-notes/SKILL.md`:
+
+```markdown
+---
+name: hog-release-notes
+description: Write release notes in PostHog's voice
+---
+
+Fetch the PostHog prompt named "hog-release-notes" using the
+prompt-get MCP tool, then follow the instructions it contains.
+
+Apply those instructions to the user's current request.
+```
+
+Now any team member can type `/hog-release-notes` in Claude Code and the agent automatically fetches the latest skill from PostHog and runs it.
+
+The bridge skill is intentionally thin — all the real instructions live in PostHog, so updates propagate without changing local files.
+
+## Updating and versioning skills
+
+Skills are versioned just like any other PostHog prompt. Every edit creates a new immutable version.
+
+### Edit a skill
+
+**Via the UI:** Open the prompt, click **Edit latest**, make changes, and click **Publish version**.
+
+**Via MCP:** Ask your agent to update the skill:
+
+```text
+Update the PostHog prompt "hog-release-notes" to also include
+a "Known limitations" section in the release notes structure.
+```
+
+This calls `prompt-update` and creates a new version.
+
+### Review changes
+
+Use the [Compare versions](/docs/llm-analytics/prompts#compare-versions) feature to see a diff between any two versions. This is especially useful when an agent has updated a skill — you can review exactly what it changed before the rest of your team picks it up.
+
+### Automatic propagation
+
+Team members automatically get the latest version on their next fetch. No PRs, no syncing, no manual updates — just one source of truth in PostHog.
+
+## Team workflow tips
+
+- **Use descriptive, kebab-case names** — `review-frontend-pr`, `write-api-docs`, `check-security-headers`
+- **Discover before you create** — Run `prompt-list` to see what skills your team already has before creating a duplicate
+- **Port local skills to PostHog** — If you have useful instructions saved locally, move them to PostHog so the whole team benefits
+- **Keep skills focused** — One task per skill. A skill that does "everything" is a skill that does nothing well
+- **Let agents update skills** — After an agent follows a skill, ask it to suggest improvements, then update the prompt via MCP
