@@ -9,7 +9,7 @@ author:
   - ian-vanagas
   - natalia-amorim
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/llmo_9f0a2b3f3f.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Film_Noir_Hog_Evals_beta_announcement_blog_95685493eb.png
 featuredImageType: full
 category: General
 tags:
@@ -71,9 +71,9 @@ Use the [setup wizard](/wizard) to get started in minutes – no sales call or e
 - GitHub stars: 23.3k as of March 2026
 - [Langfuse on GitHub](https://github.com/langfuse/langfuse)
 
-[Langfuse](/docs/llm-analytics/integrations/langfuse-posthog) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
+[Langfuse](/docs/llm-analytics/integrations/langfuse-posthog) (recently acquired by ClickHouse) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
 
-Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $59/m for 100k events with additional events at $8/m more.
+Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $29/m for 100k events with additional events at $8/m more.
 
 ![Langfuse dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_6db7c2d9e7.png)
 
@@ -93,7 +93,7 @@ Langfuse is also the most fully-featured LLM observability tool. Its pricing pag
 
 Opik is an open source platform for evaluating, testing, and monitoring LLM apps. It provides tracing, annotations, a prompt and model playground, evaluation, and more. It’s built by Comet, an end-to-end model evaluation platform for developers.
 
-Opik’s free hosted plan provides 25k spans per month with unlimited team members and a 60-day data retention. Beyond this, its Pro plan is $39 per month for 100k spans per month with every extra 100k spans costing $5.
+Opik’s free hosted plan provides 25k spans per month with unlimited team members and a 60-day data retention. Beyond this, its Pro plan is $19 per month for 100k spans per month with every extra 100k spans costing $5.
 
 ![Opik dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/opik_7fcc9b0840.png)
 
@@ -147,7 +147,9 @@ Like Opik, Phoenix is connected to a broader AI development platform. Unique to 
 
 [Helicone](/docs/llm-analytics/integrations/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
 
-Its hosted version is free up to 10,000 requests with some features limited to the $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
+Recently acquired by Mintlify, it will continue operating in maintenance mode.
+
+Its hosted version is free up to 10,000 requests with some features limited to the $79/m pro and $799/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
 
 ![Helicone dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/helicone_0a6eeadac6.png)
 
@@ -229,6 +231,8 @@ Most tools on this list are free to start, so there's no reason to wait.
 <summary>Do I need a separate LLM observability tool if I already use PostHog?</summary>
 
 No. PostHog's [LLM analytics](/docs/llm-analytics) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
+
+[Getting started](docs/llm-analytics/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
 
 </details>
 
