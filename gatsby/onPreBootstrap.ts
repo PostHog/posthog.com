@@ -17,7 +17,8 @@ const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-man
  * This prevents stale docs from being served when switching GATSBY_POSTHOG_BRANCH.
  */
 function invalidateGitCacheIfBranchChanged(): void {
-    const currentBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
+    // IMPORTANT: this fallback must match the one in gatsby-config.js for gatsby-source-git
+    const currentBranch = process.env.GATSBY_POSTHOG_BRANCH || 'docs/llm-analytics-otel-convex'
 
     // Read the stored branch from the manifest file
     let storedBranch: string | null = null
