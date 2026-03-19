@@ -15,17 +15,23 @@ Product engineers talk to users. They decide what to build. They own pricing, re
 
 The Product Engineer Handbook is about helping developers embrace this new reality. The good news? You can wake up tomorrow and decide to be one. You don't need anyone's permission, least of all ours. All you need is an open mind, a love of building, and the desire to learn.
 
-Reading this handbook will help you understand how to adapt your thinking, the behaviors you should adopt, and the skills you should develop to become a successful product engineer. It'll also help you learn the basic concepts that underpin the business of building successful software businesses.
+Reading this handbook will help you understand how to adapt your thinking, the behaviors you should adopt, and the skills you should develop to become a successful product engineer.
 
-Just like our [company handbook](/handbook) where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product.
+Just like our [company handbook](/handbook), where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product. Consider this version a minimum lovable product.
 
-If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. Got a request for something we should add to the handbook? Leave a comment on this page, or in our [community](/questions).
+If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. 
+
+Got a request for something we should add to the handbook? Leave a comment on this page, or in our [community](/questions).
 
 <NewsletterForm />
 
 ## Defining the product engineer
 
-In the most general terms, a product engineer is a software developer who builds products for *real users*, writes full stack code, and cares deeply about solving the "hair on fire" problems of their users.
+In the most general terms, a product engineer is a software developer who:
+
+- Builds products for *real users*
+- Writes full stack code
+- Cares deeply about solving the "hair on fire" problems of their users
 
 For us this means product engineers need to be: 
 
@@ -56,7 +62,7 @@ Gergely Orosz, The Pragmatic Engineer, describes what he calls [product-minded e
 
 In sum, a product engineer is someone who cares more about the outcomes and impact of their code on users than the implementation. Their goal is creating a great product for users. A product that solves real problems and, ultimately, sparks joy.
 
-## Why product engineers?
+## Why they're necessary
 
 Developers used to spend years learning the specifics of a language’s syntax, the architecture of components, and understanding how code turns into a running application. This was core to creating value in software.
 
@@ -68,7 +74,7 @@ AI can't build your business. You can't plug a large language model into your AW
 
 Code that works isn’t just code that compiles or passes tests, it’s code that creates results. Results for customers who depend on it. Results for the business that maintains it. Code that keeps the lights on gives you more leverage to reach your goals.
 
-Software developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, they're more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
+Developers who understand and embrace a broader definition of their role, who obsess over the impact of their work on real users, are more valuable to the teams and products they work on. They're more likely to find satisfaction in their work.
 
 Embracing the product engineer mindset requires a complete reset of how organizations behave. It requires [smaller teams](/newsletter/small-teams), more autonomy, and transparency. It requires minimal process, time to build, trust and feedback. It requires a culture that gives *everyone* permission to be ambitious.
 
@@ -82,7 +88,7 @@ As Ant Wilson, CTO and co-founder of Supabase, [notes](https://supabase.com/blog
 
 > "When you find all of the above traits in a single person, your definition of the word ‘feasible’ changes dramatically. At the start of every product cycle, we ask the question “what is the most ambitious thing we can hope to achieve in the next 3 months?”, and the team never fails to push the boundary on what we previously considered reasonable." 
 
-And, as one of our colleagues, Danilo Campos, shared in Slack recently:
+And, as one of our colleagues, Danilo Campos, shared in Slack:
 
 > "We are surrounded by optimists. By people who want things to work, and believe in their bones things CAN work. An astonishing amount is possible when talented people BELIEVE it’s possible. It’s so much fun to do the things you’re good at when everyone is happy you’re good at them."
 
