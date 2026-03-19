@@ -149,6 +149,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/temporal',
                 },
                 {
+                    name: 'Typeform',
+                    url: '/docs/cdp/sources/typeform',
+                },
+                {
                     name: 'DoIt',
                     url: '/docs/cdp/sources/doit',
                 },
@@ -5292,6 +5296,10 @@ export const docsMenu = {
                         {
                             name: 'Temporal.io',
                             url: '/docs/data-warehouse/sources/temporal',
+                        },
+                        {
+                            name: 'Typeform',
+                            url: '/docs/data-warehouse/sources/typeform',
                         },
                         {
                             name: 'Vitally',
