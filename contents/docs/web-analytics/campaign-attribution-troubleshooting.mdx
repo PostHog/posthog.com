@@ -14,13 +14,7 @@ This page covers troubleshooting for campaign attribution issues. For general we
 
 If you see UTM parameters on `$pageview` events but conversions aren't attributed correctly, the issue is almost always **identity fragmentation** – not a UTM capture problem.
 
-### Understanding person profiles and identity
-
-A [person profile](/docs/data/persons) is the record PostHog uses to tie all of a user's events together. When the PostHog SDK loads, it generates a random `distinct_id` to identify the current device. All events from that device are tagged with this ID. When the user later identifies themselves (e.g., on sign-up or login), you call `identify()`, which links the anonymous `distinct_id` to a known identifier such as an email or user ID. PostHog then stitches all prior anonymous events to the same person profile.
-
-### How the distinct_id can change
-
-For campaign attribution to work, the `distinct_id` must stay consistent from landing to conversion:
+For campaign attribution to work, the user's [person profile](/docs/data/persons) must stay connected from landing to conversion. A person profile is PostHog's representation of a user, identified by a `distinct_id`. Here's the typical flow:
 
 1. User lands with UTMs
 2. PostHog captures UTMs on `$pageview`
@@ -29,32 +23,19 @@ For campaign attribution to work, the `distinct_id` must stay consistent from la
 5. `identify()` is called
 6. All prior events with that same `distinct_id` get stitched to the person
 
-If the `distinct_id` changes at any point before conversion, attribution breaks. Common causes include:
+If the `distinct_id` changes at any point before conversion, attribution breaks.
 
-- Switching from an in-app browser to the system browser
-- Memory-only persistence resetting on page load
-- PostHog being reinitialized (e.g., separate apps or multiple PostHog instances)
-- Subdomain cookie mismatches
+### Why does the `distinct_id` change?
 
-You can debug this by finding cases where the same device has multiple persons:
+The `distinct_id` can change when:
 
-```sql
-select
-    properties.$ip,
-    properties.$raw_user_agent,
-    uniq(person_id) as persons,
-    uniq(distinct_id) as distinct_ids
-from events
-where timestamp >= today() - 30
-and properties.utm_source = 'linkedin'
-group by properties.$ip, properties.$raw_user_agent
-having persons > 1
-limit 100
-```
+- **Storage is cleared or isolated** – Browsers like Safari aggressively clear cookies and localStorage, especially for third-party contexts
+- **Users switch browsers or devices** – Each browser/device gets a new anonymous `distinct_id`
+- **In-app browsers are involved** – Apps like LinkedIn, Instagram, and Facebook use embedded webviews with isolated storage
+- **Persistence is set to memory** – Without persistent storage, every page load creates a new identity
+- **PostHog reinitializes** – Multi-app architectures or SSR apps may create duplicate PostHog instances
 
-If `persons > 1` for the same IP and user agent, identity fragmentation is likely. Note that IP address and user agent are not a guaranteed fingerprint – different users can share the same combination – but this is a useful approximation for identifying the problem.
-
-You can also compare conversion IPs to ad click IPs. If you see conversions from the same IP/user agent as your ad clicks, the traffic is arriving – it's just not being stitched to the right person.
+When any of these happen before `identify()` is called, the original `distinct_id` (with the UTM data) becomes orphaned from the conversion event.
 
 ### How do I check if this is happening?
 
@@ -78,7 +59,15 @@ If you see different `distinct_id` or `person_id` values for pageviews and conve
 
 ## Why are users from LinkedIn/Meta ads not being attributed?
 
-This is common when ads are clicked from native apps like LinkedIn, Facebook, or Instagram. These apps open links in their own in-app browser rather than the system browser. For example, a user clicks your LinkedIn ad, views your landing page inside the LinkedIn app's webview, then later opens their regular browser to sign up. Because the in-app browser and system browser don't share storage, PostHog treats these as two separate users.
+This is a common issue when running ads on social media platforms that open links in their native in-app browsers. Here's a typical scenario:
+
+1. A user sees your ad in the LinkedIn mobile app
+2. They tap the link, which opens in LinkedIn's in-app browser (webview)
+3. PostHog captures the `$pageview` with UTM parameters and assigns a `distinct_id`
+4. The user decides to sign up but prefers using their main browser
+5. They tap "Open in Safari" or navigate to your site directly
+6. A new `distinct_id` is created because Safari doesn't share storage with LinkedIn's webview
+7. The conversion event is now tied to a different person profile than the original pageview
 
 In-app browsers (LinkedIn webview, Meta webview, Instagram) cause attribution issues because:
 
@@ -89,11 +78,11 @@ In-app browsers (LinkedIn webview, Meta webview, Instagram) cause attribution is
 
 You can detect this by checking user agents containing `linkedin`, `fbav`, or `instagram`. If a large share of your traffic comes from these sources, expect higher identity fragmentation.
 
-The best fix depends on each case, but it usually involves propagating UTMs or the `distinct_id`/`session_id` as much as possible:
+The best fix depends on your specific situation, but it usually involves propagating UTMs or the `distinct_id`/session ID as much as possible:
 
-1. Encouraging users to open links in their browser
-2. Identifying users as early as possible in the funnel
-3. Using [cross-domain tracking](/tutorials/cross-domain-tracking) if you have separate marketing and app domains
+1. Pass UTM parameters through your signup flow (e.g., in hidden form fields or URL parameters)
+2. Identify users as early as possible in the funnel
+3. Use [cross-domain tracking](/tutorials/cross-domain-tracking) if you have separate marketing and app domains
 
 ## Why does attribution break when users navigate between pages?
 
@@ -109,14 +98,14 @@ posthog.init("key", {
 })
 ```
 
-**2. PostHog is reset between pages**
+**2. PostHog is reset**
 
-If PostHog is reinitialized without preserving the `distinct_id`, the user gets a new identity. This can happen with:
+PostHog may reinitialize without preserving the `distinct_id` if:
 
-- Full page reloads that reinitialize the SDK
-- SSR apps that create a new PostHog instance per request
-- Multi-app architectures with separate PostHog instances
-- Separate marketing and app codebases
+- Your landing page and signup page reload the entire app
+- You're using SSR apps or multi-app architectures
+- You have separate marketing and app codebases
+- You're using two different PostHog instances (e.g., different project tokens for marketing vs app)
 
 Ensure PostHog initializes once and the `distinct_id` persists across pages.
 
@@ -152,6 +141,27 @@ This disproportionately impacts mobile campaign attribution. Cross-device attrib
 
 Unless you explicitly connect those identities with `identify()`, the mobile pageviews remain separate from the desktop conversion.
 
+## How do I debug identity fragmentation?
+
+Run this query to find cases where the same device has multiple persons:
+
+```sql
+select
+    properties.$ip,
+    properties.$raw_user_agent,
+    uniq(person_id) as persons,
+    uniq(distinct_id) as distinct_ids
+from events
+where timestamp >= today() - 30
+and properties.utm_source = 'linkedin'
+group by properties.$ip, properties.$raw_user_agent
+having persons > 1
+limit 100
+```
+
+If `persons > 1` for the same IP and user agent, you have likely found identity fragmentation. Note that IP and user agent matching is not a guaranteed fingerprint – multiple users can share the same IP (e.g., office networks, VPNs) and user agent combination. However, it's a useful approximation for detecting fragmentation patterns.
+
+You can also compare conversion IPs to ad click IPs. If you see conversions from the same IP/user agent as your ad clicks, the traffic is arriving – it's just not being stitched to the right person.
 
 ## How do I fix attribution issues?
 
