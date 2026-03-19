@@ -19,13 +19,12 @@ Your team's coding agents (Claude Code, Cursor, Codex, Windsurf, and others) all
 
 ## How it works
 
-The pattern has three layers:
+The pattern is simple:
 
 1. **PostHog Prompts** stores the skill content as versioned markdown
-2. **MCP prompt tools** (`prompt-get`, `prompt-list`) let agents fetch skills at runtime
-3. **A single local bridge skill** (optional) makes invocation seamless — one slash command that can fetch and run any skill from PostHog
+2. **MCP prompt tools** (`prompt-get`, `prompt-list`) let agents fetch and run skills at runtime
 
-When a team member invokes a skill, their agent fetches the latest version from PostHog via MCP, reads the instructions, and follows them. No local files to sync, no git repos to pull — just one source of truth.
+When a team member wants to use a skill, they ask their agent to fetch it from PostHog via MCP. The agent reads the instructions and follows them. No local files to sync, no git repos to pull — just one source of truth.
 
 ## Prerequisites
 
@@ -93,34 +92,42 @@ notes following the structure above.
 
 ## Step 2: Use a skill from any agent
 
-Once a skill exists in PostHog, any team member with the MCP server configured can use it.
+Once a skill exists in PostHog, any team member with the MCP server configured can use it. No extra setup needed — just ask your agent. Since PostHog MCP is already connected, your agent can fetch and run skills directly.
 
 ### Discover available skills
 
-Ask your agent:
-
 ```text
-List all available PostHog prompts so I can see what skills the team has.
+Use PostHog MCP prompts to list all available skills.
 ```
 
 This calls `prompt-list` and returns all prompts in your project.
 
 ### Fetch and run a skill
 
-Ask your agent to fetch a specific skill and follow its instructions:
-
 ```text
-Fetch the PostHog prompt "hog-release-notes" and use its instructions
-to write release notes for the changes in my current branch.
+Use PostHog MCP prompts to fetch "hog-release-notes" and follow its
+instructions to write release notes for the changes in my current branch.
 ```
 
 The agent calls `prompt-get` with the name `hog-release-notes`, receives the skill content, and follows the instructions — writing release notes based on your branch's changes.
 
-This works identically in Claude Code, Cursor, Codex, or any other MCP-connected agent. The skill lives in PostHog, not in any particular tool.
+That's it. This works identically in Claude Code, Cursor, Codex, or any other MCP-connected agent. The skill lives in PostHog, not in any particular tool. You can also create and update skills the same way:
 
-## Step 3: Set up a bridge skill (optional)
+```text
+Use PostHog MCP prompts to create a new skill called "review-api-pr"
+that reviews PRs against our API design guidelines.
+```
 
-For agents that support local slash commands (like Claude Code), you can set up a single generic bridge skill that connects your agent to the entire PostHog skills store. You don't create a local skill per prompt — you create **one** bridge that can fetch and run any skill by name.
+```text
+Use PostHog MCP prompts to update "hog-release-notes" to add a
+"Breaking changes" section.
+```
+
+## Step 3: Set up a bridge skill (optional shortcut)
+
+Step 2 is all you need — but if your agent supports local slash commands (like Claude Code), you can optionally set up a bridge skill to make invocation a bit more convenient. Instead of typing "use PostHog MCP prompts to..." each time, you get a slash command.
+
+You create **one** generic bridge that can fetch and run any skill by name:
 
 ### Claude Code example
 
@@ -144,29 +151,15 @@ Fetch the full instructions from PostHog:
 2. Follow the instructions in the returned prompt
 ```
 
-This bridge is intentionally thin — it just bootstraps into PostHog, where the real instructions live. The `posthog-skills-store` prompt in PostHog contains the full logic for listing, fetching, creating, and updating skills.
-
-### Using it
-
-Once the bridge is set up, team members interact with the entire skills store through natural language:
+This bridge is intentionally thin — it just bootstraps into PostHog, where the real instructions live. Now team members can type things like:
 
 ```text
-# Run a skill by name
 /posthog-skills-store run hog-release-notes on my current branch
-
-# Create a new skill
 /posthog-skills-store create a skill called "review-api-pr"
-that reviews PRs against our API design guidelines
-
-# List available skills
 /posthog-skills-store list all skills
-
-# Update an existing skill
-/posthog-skills-store update hog-release-notes to add a
-"Breaking changes" section
 ```
 
-One local file, unlimited remote skills. When you update a skill in PostHog, every team member gets the new version automatically — no local files to change, no PRs to merge.
+One local file, unlimited remote skills. But again, this is purely a convenience — everything the bridge does, you can do by asking your agent to use PostHog MCP prompts directly.
 
 ## Updating and versioning skills
 
