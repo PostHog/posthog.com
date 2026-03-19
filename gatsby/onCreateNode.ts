@@ -59,6 +59,19 @@ const REPO_CONFIGS = {
     },
 }
 
+let hogFunctionTemplatesCache: any[] | null = null
+
+async function getHogFunctionTemplates(): Promise<any[]> {
+    if (hogFunctionTemplatesCache) return hogFunctionTemplatesCache
+    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates?limit=350/`)
+    if (res.status !== 200) {
+        throw `Got status code ${res.status}`
+    }
+    const body = await res.json()
+    hogFunctionTemplatesCache = body.results
+    return hogFunctionTemplatesCache
+}
+
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     if (
         !process.env.CLOUDINARY_API_KEY ||
@@ -241,15 +254,9 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
             try {
                 const templateConfigs: { templateId: string; inputs_schema: any; name: string; type: string }[] = []
+                const templates = await getHogFunctionTemplates()
                 for (const templateId of templateIds) {
-                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates?limit=350/`)
-
-                    if (res.status !== 200) {
-                        throw `Got status code ${res.status}`
-                    }
-
-                    const body = await res.json()
-                    const config = body.results.find((template: { id: string }) => template?.id === templateId)
+                    const config = templates.find((template: { id: string }) => template?.id === templateId)
                     const inputs_schema = config?.inputs_schema
                     const name = config?.name
                     const type = config?.type
