@@ -149,6 +149,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/temporal',
                 },
                 {
+                    name: 'Typeform',
+                    url: '/docs/cdp/sources/typeform',
+                },
+                {
                     name: 'DoIt',
                     url: '/docs/cdp/sources/doit',
                 },
@@ -1494,6 +1498,37 @@ export const handbookSidebar = [
                         ],
                     },
                 ],
+            },
+
+            {
+                name: 'Use-case selling',
+            url: '/handbook/growth/use-case-selling/use-case-selling',
+            children: [
+                {
+                    name: 'Product Intelligence',
+                    url: '/handbook/growth/use-case-selling/product-intelligence',
+                },
+                {
+                    name: 'Release Engineering',
+                    url: '/handbook/growth/use-case-selling/release-engineering',
+                },
+                {
+                    name: 'Observability',
+                    url: '/handbook/growth/use-case-selling/observability',
+                },
+                {
+                    name: 'Growth & Marketing',
+                    url: '/handbook/growth/use-case-selling/growth-and-marketing',
+                },
+                {
+                    name: 'AI/LLM Observability',
+                    url: '/handbook/growth/use-case-selling/ai-llm-observability',
+                },
+                {
+                    name: 'Data Infrastructure',
+                    url: '/handbook/growth/use-case-selling/data-infrastructure',
+                },
+            ],
             },
             {
                 name: 'Cross-selling',
@@ -5313,6 +5348,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/temporal',
                         },
                         {
+                            name: 'Typeform',
+                            url: '/docs/data-warehouse/sources/typeform',
+                        },
+                        {
                             name: 'Vitally',
                             url: '/docs/data-warehouse/sources/vitally',
                         },
@@ -5809,6 +5848,13 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/query-traces-mcp',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'green',
+                },
+                {
+                    name: 'Playground',
+                    url: '/docs/llm-analytics/playground',
+                    icon: 'IconFlask',
+                    color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Trace summarization',
