@@ -43,10 +43,10 @@ export default defineNuxtConfig({
         execSync("posthog-cli sourcemap inject --directory '.output'", { // +
           stdio: 'inherit', // +
         }) // +
-        execSync("posthog-cli sourcemap upload --directory '.output'", { // +
+        execSync("posthog-cli sourcemap upload --directory '.output' --delete-after", { // +
           stdio: 'inherit', // +
-        }) // + 
-        console.log('PostHog sourcemap injection completed successfully') 
+        }) // +
+        console.log('PostHog sourcemap injection completed successfully')
       } catch (error) {
         console.error('PostHog sourcemap injection failed:', error)
       }
@@ -71,7 +71,7 @@ Post-build scripts should automatically generate and upload source maps to PostH
 
 Before proceeding, confirm that source maps are being properly uploaded.
 
-You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
+You can verify the injection is successful by checking your `.mjs` bundle files for `//# chunkId=` comments. The `--delete-after` flag removes the `.map` files after upload so they won't be exposed in your public deployment — PostHog already has them. Make sure to serve the injected JS bundles in production, PostHog will use the `//# chunkId` comments to match them with the uploaded source maps.
 
 <OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
