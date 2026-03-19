@@ -5538,6 +5538,11 @@ export const docsMenu = {
                             platformLogo: 'ollama',
                         },
                         {
+                            name: 'AWS Bedrock',
+                            url: '/docs/llm-analytics/installation/aws-bedrock',
+                            platformLogo: 'awsBedrock',
+                        },
+                        {
                             name: 'Azure OpenAI',
                             url: '/docs/llm-analytics/installation/azure-openai',
                             platformLogo: 'azureOpenAI',

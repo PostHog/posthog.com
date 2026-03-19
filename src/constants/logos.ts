@@ -14,6 +14,7 @@ export const LOGOS = {
     astro: 'https://res.cloudinary.com/dmukukwp6/image/upload/astro_icon_dark_23a13977ad.svg',
     attio: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T13_32_15_602_Z_3d36e826ca.png',
     autogen: 'https://res.cloudinary.com/dmukukwp6/image/upload/autogen_7747bfd3ae.svg',
+    awsBedrock: 'https://res.cloudinary.com/dmukukwp6/image/upload/bedrock_5c06698148.png',
     azureBlob: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_blob_storage_a5110351f6.svg',
     azureOpenAI: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_openai_884ba0124a.svg',
     azureSql: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
