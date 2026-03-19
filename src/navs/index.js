@@ -4385,6 +4385,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Elixir',
+                            url: '/docs/error-tracking/installation/elixir',
+                        },
+                        {
                             name: 'Go',
                             url: '/docs/error-tracking/installation/go',
                         },
