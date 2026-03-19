@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import Link from 'components/Link'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
@@ -13,10 +13,9 @@ import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import Fuse from 'fuse.js'
-import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
-import { IconMapPin, IconList } from '@posthog/icons'
+import { IconMapPin, IconList, IconSearch, IconX } from '@posthog/icons'
 
 export const TeamMember = (props: any) => {
     const {
@@ -287,14 +286,14 @@ interface PeopleProps {
 
 export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
     const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
+    const [localSearchTerm, setLocalSearchTerm] = useState('')
 
     const {
         team: { teamMembers },
         allTeams,
     } = useStaticQuery(teamQuery)
-    const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
 
-    // Use filteredMembers from props if provided
+    // Use filteredMembers from props if provided (Editor-level filters)
     const baseMembers = filteredMembers !== null && filteredMembers !== undefined ? filteredMembers : teamMembers
 
     const teamSize = teamMembers.length - 1
@@ -304,6 +303,8 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
         acc[team.name] = team.crest?.data?.attributes?.url
         return acc
     }, {})
+
+    const activeSearchTerm = localSearchTerm || searchTerm || ''
 
     const fuse = useMemo(() => {
         return new Fuse(baseMembers, {
@@ -321,55 +322,10 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
         })
     }, [baseMembers])
 
-    const debouncedSearch = useCallback(
-        debounce((query: string) => {
-            if (!query.trim()) {
-                setFilteredTeamMembers(baseMembers)
-                return
-            }
-
-            const results = fuse.search(query)
-            const filtered = results.map((result) => result.item)
-            setFilteredTeamMembers(filtered)
-        }, 300),
-        [fuse, baseMembers]
-    )
-
-    // Effect to handle search term changes from prop
-    useEffect(() => {
-        if (searchTerm !== undefined) {
-            debouncedSearch(searchTerm)
-        }
-    }, [searchTerm, debouncedSearch])
-
-    // Effect to handle filtered members changes
-    useEffect(() => {
-        if (filteredMembers !== null && filteredMembers !== undefined) {
-            // If we have filtered members from props, apply search on those
-            if (searchTerm && searchTerm.trim()) {
-                const fuse = new Fuse(filteredMembers, {
-                    keys: [
-                        {
-                            name: 'fullName',
-                            getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
-                        },
-                        'teams.data.attributes.name',
-                        'companyRole',
-                        'location',
-                        'country',
-                    ],
-                    threshold: 0.3,
-                })
-                const results = fuse.search(searchTerm)
-                const filtered = results.map((result) => result.item)
-                setFilteredTeamMembers(filtered)
-            } else {
-                setFilteredTeamMembers(filteredMembers)
-            }
-        }
-    }, [filteredMembers, searchTerm])
-
-    // handleSearch removed since we use prop-based search
+    const filteredTeamMembers = useMemo(() => {
+        if (!activeSearchTerm.trim()) return baseMembers
+        return fuse.search(activeSearchTerm).map((result) => result.item)
+    }, [baseMembers, activeSearchTerm, fuse])
 
     return (
         <div data-scheme="primary" className="@container bg-primary h-full">
@@ -434,7 +390,28 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                                 </Link>
                             </p>
                         </div>
-                        <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
+                        <div className="relative mt-8 mb-4 max-w-lg">
+                            <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 opacity-50 pointer-events-none" />
+                            <input
+                                type="text"
+                                placeholder="Search by name, location, or team..."
+                                value={localSearchTerm}
+                                onChange={(e) => setLocalSearchTerm(e.target.value)}
+                                className="w-full pl-9 pr-9 py-2 rounded border border-input bg-light dark:bg-dark text-primary text-sm focus:outline-none focus:ring-1 focus:ring-primary/50"
+                            />
+                            {localSearchTerm && (
+                                <button
+                                    onClick={() => setLocalSearchTerm('')}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 opacity-50 hover:opacity-100"
+                                >
+                                    <IconX className="size-4" />
+                                </button>
+                            )}
+                        </div>
+                        {filteredTeamMembers.length === 0 && activeSearchTerm && (
+                            <p className="text-sm opacity-60 mt-4">No results for "{activeSearchTerm}"</p>
+                        )}
+                        <ul className="not-prose list-none mt-4 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
                             {filteredTeamMembers.map((teamMember: any) => {
                                 // Calculate if this person is a team lead of any team
                                 const isTeamLead = teamMember.leadTeams?.data?.length > 0
