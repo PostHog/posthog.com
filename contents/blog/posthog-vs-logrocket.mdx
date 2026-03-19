@@ -61,7 +61,8 @@ PostHog and LogRocket overlap on session replay and frontend monitoring, but div
         'error_tracking',
         'surveys',
         'experiments',
-        'heatmaps',
+        'llm analytics',
+        'logs',
         'cdp',
         'platform.tools.ai_assistant',
         'platform.pricing.transparent_pricing',
@@ -112,6 +113,7 @@ Both PostHog and LogRocket offer developer-focused [session replay tools](/blog/
     rows={[
         'session_replay.platform_support.features.web_app_recordings',
         'session_replay.platform_support.features.mobile_app_recordings',
+        'session_replay.features.ai_summaries',
         'session_replay.identity.features.identity_detection',
         'session_replay.analysis.features.console_logs',
         'session_replay.organization.features.playlists',
@@ -239,7 +241,7 @@ Both PostHog and LogRocket are SOC 2 certified and GDPR-ready. PostHog adds HIPA
 
 - Want session replay connected to feature flags, A/B testing, product analytics, error tracking, and more – all in one platform with transparent pricing? Go with **PostHog**.
 
-- Need frontend debugging with Redux/state management capture and a focus on front-end engineering workflows? **LogRocket** is built for that.
+- Need debugging with a focus on front-end engineering workflows? **LogRocket** is built for that.
 
 ### Recommendations by team type
 
@@ -247,7 +249,7 @@ Both PostHog and LogRocket are SOC 2 certified and GDPR-ready. PostHog adds HIPA
 - **PostHog** – SQL access, open-source code, an [MCP server](/docs/model-context-protocol) for AI coding tools, feature flags, error tracking, and session replay connected to your full analytics. Everything lives in one platform with a shared data model.
 
 **For frontend engineers debugging production issues**
-- **LogRocket** – Redux/Vuex state capture, Galileo AI proactive issue surfacing, and session replay paired with console logs and network monitoring are purpose-built for front-end debugging workflows. PostHog's replay is strong but doesn't match LogRocket here.
+- **LogRocket** – Galileo AI proactive issue surfacing and session replay paired with console logs and network monitoring are purpose-built for front-end debugging workflows. PostHog's replay is strong but doesn't match LogRocket here.
 
 **For teams who need feature flags and A/B testing**
 - **PostHog** – LogRocket has no feature flags or experiments natively. PostHog includes both, tightly integrated with analytics and session replay so you can measure impact and filter replays by flag variant.
@@ -268,7 +270,7 @@ Both PostHog and LogRocket are SOC 2 certified and GDPR-ready. PostHog adds HIPA
 <details>
 <summary>What's the difference between PostHog and LogRocket?</summary>
 
-**LogRocket** is a frontend monitoring tool focused on session replay, JavaScript error tracking, and performance profiling. Its standout features for engineering teams are Redux/Vuex state management capture and Galileo AI, which proactively surfaces user struggle patterns and UX issues without manual review.
+**LogRocket** is a frontend monitoring tool focused on session replay, JavaScript error tracking, and performance profiling. One standout features for engineering teams is Galileo AI, which proactively surfaces user struggle patterns and UX issues without manual review.
 
 **PostHog** is an all-in-one developer platform combining [session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. The platform includes SQL access, an MCP server for AI coding tools, and an open-source codebase.
 
@@ -297,7 +299,7 @@ PostHog's session replay captures console logs, network requests, DOM events, an
 <details>
 <summary>Can PostHog replace LogRocket?</summary>
 
-For most teams, yes. PostHog covers session replay, error tracking, and product analytics – and adds feature flags, A/B testing, and surveys that LogRocket doesn't have. The main gap is Redux/Vuex state management capture and Galileo AI's proactive issue surfacing, which LogRocket does better for dedicated frontend debugging workflows.
+For most teams, yes. PostHog covers session replay, error tracking, and product analytics – and adds feature flags, A/B testing, and surveys that LogRocket doesn't have.
 
 Check out the [best LogRocket alternatives](/blog/best-logrocket-alternatives) if you're evaluating multiple options.
 

@@ -53,7 +53,7 @@ PostHog [ships new features constantly](/changelog) and is built to keep up with
 
 - **Experiments:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
 
-- **Error tracking:** Exceptions linked directly to session replays and user context.
+- **Error tracking:** Capture exceptions with full stack traces and source maps, linked directly to the session replay of what the user was doing when the error happened.
 
 - **PostHog AI:** Natural language querying and an [MCP server](/docs/mcp) for using PostHog from Claude, Cursor, and other AI coding tools.
 
@@ -72,6 +72,8 @@ If replay is 90% of your use case and you're primarily debugging front-end issue
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.heatmaps',
         'session_replay.features.crash_reports',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking',
         'error_tracking.features.stack_tracing',
         'error_tracking.monitoring.performance_monitoring',
@@ -90,7 +92,7 @@ If replay is 90% of your use case and you're primarily debugging front-end issue
 - LogRocket is focused on session replay and front-end monitoring. PostHog covers that plus a full suite of developer tools.
 - LogRocket captures Redux/Vuex state alongside replays, which is uniquely useful for debugging React and Vue apps. PostHog doesn't have this yet.
 - PostHog is fully open source; LogRocket is proprietary. 
-- PostHog's free tier covers 5,000 replays + 1M analytics events per month; LogRocket's covers 1,000 replays/mo only.
+- PostHog's free tier covers 5,000 web replays + 2,500 mobile replays + 1M analytics events per month; LogRocket's covers 1,000 replays/mo only (web or mobile).
 
 </details>
  
@@ -162,6 +164,8 @@ On a feature-by-feature basis, Glassbox and LogRocket are nearly identical. Glas
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.heatmaps',
         'session_replay.features.crash_reports',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking',
         'error_tracking.features.stack_tracing',
         'error_tracking.monitoring.performance_monitoring',
@@ -177,7 +181,7 @@ On a feature-by-feature basis, Glassbox and LogRocket are nearly identical. Glas
 <details>
 <summary>Main differences between Glassbox and LogRocket</summary>
 
-- Glassbox has a stronger focus on mobile app analytics and enterprise B2C use cases. LogRocket is primarily web-oriented.
+- Glassbox is built for large retail, financial services, and travel companies – its struggle scores, funnel analysis, and mobile analytics are oriented around conversion and customer journey optimization at scale. LogRocket serves a broader engineering audience across web and mobile apps of all sizes.
 - Glassbox is used by business analysts, support, and marketing teams in enterprise B2C companies. LogRocket skews toward engineers and front-end developers.
 - Both can get expensive at scale, but LogRocket has a transparent free tier and published pricing. Glassbox is enterprise-only with no published pricing.
 
@@ -247,6 +251,8 @@ Both [Sentry](/blog/best-sentry-alternatives) and LogRocket overlap on session r
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.heatmaps',
         'session_replay.features.crash_reports',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking',
         'error_tracking.features.stack_tracing',
         'error_tracking.monitoring.source_map_support',
@@ -331,6 +337,8 @@ Smartlook's combination of session replay and analytics with a focus on issues i
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.heatmaps',
         'session_replay.features.crash_reports',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking',
         'error_tracking.features.stack_tracing',
         'error_tracking.monitoring.source_map_support',
@@ -421,6 +429,8 @@ Both [FullStory](/best-fullstory-alternatives) and LogRocket have tools to under
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.heatmaps',
         'session_replay.features.crash_reports',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking',
         'error_tracking.features.stack_tracing',
         'error_tracking.monitoring.source_map_support',
@@ -490,7 +500,7 @@ According to reviews on G2, companies use FullStory for:
 
 - **Product validation and roadmaps:** Plan your product improvements and roadmap using data from Pendo.
 
-- **Session replay:** Available on higher-tier plans (Core and Ultimate).
+- **Session replay:** Available on higher-tier plans (Core and Ultimate), Pendo's session replay supports web and mobile, includes frustration signal detection, and has no recording caps or data retention limits. 
 
 ### How does Pendo compare to LogRocket?
 
@@ -505,6 +515,8 @@ Pendo focuses more on in-app guides and feedback. It doesn't have the monitoring
         'session_replay.analysis.performance_monitoring',
         'session_replay.analysis.heatmaps',
         'session_replay.features.crash_reports',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking',
         'error_tracking.features.stack_tracing',
         'error_tracking.monitoring.source_map_support',
@@ -593,6 +605,8 @@ LogRocket focuses on analytics and error tracking, while [Hotjar](/blog/best-hot
         'session_replay.features.crash_reports',
         'error_tracking',
         'error_tracking.features.stack_tracing',
+        'session_replay.features.ai_summaries',
+        'session_replay.features.mobile_app_recordings',
         'error_tracking.monitoring.source_map_support',
         'error_tracking.monitoring.performance_monitoring',
         'product_analytics',
