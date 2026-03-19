@@ -11,21 +11,23 @@ Layers of people exist to keep them away from users. Customers complain to sales
 
 This process isn't interested in an engineer with a strong opinion about what to build, it wants someone who can build to spec even when it's obvious to them it's the wrong path for their product. 
 
-It's slow and frequently loops endless until a product slowly dies.
+It's slow and frequently loops endlessly until a product slowly dies.
 
 ## The product engineer way
 
-How does this work when a product engineer is in the loop? At PostHog, where product engineers own product teams and make product decisions, it often as simple as an engineer on a support rotation responding to a user problem or request, deciding it's something all users would benefit from, shipping a PR the same day or week, and looping back to the user to gather more feedback on the solution.
+How does this work when a product engineer is in the loop? 
+
+When product engineers own product teams and make product decisions, it often as simple as an engineer on a support rotation responding to a user problem or request, deciding it's something all users would benefit from, shipping a PR the same day or week, and looping back to the user to gather more feedback on the solution.
 
 In this scenario, product engineers gather feedback directly from customers. [User feedback and context](/newsletter/talk-to-users) isn't filtered through someone else. It's direct and without bias.
 
-A product engineer, having both direct context from users, [product sense](/newsletter/good-taste-great-products), and the technical knowledge of what is actually possible, can quickly figure out what to build and how to build it, test it with users, ship it and iterate. Speed compounds. You learn faster. Grow faster. The more you do it, the better it gets. 
+A product engineer, having both direct context from users, [product sense](/newsletter/good-taste-great-products), and the technical knowledge of what is actually possible, can quickly figure out what to build and how to build it, test it with users, ship it and iterate. 
 
-In arguments against this, people often argue that speed comes at the expense of polish. They say you can have one but not the other. We disagree. Polish comes from shipping fast. The faster you ship, the faster you can polish and improve what you do. 
+Speed compounds. You learn faster. Grow faster. The more you do it, the better it gets. 
+
+People often argue that speed comes at the expense of polish. We disagree. Polish comes from shipping fast. The faster you ship, the faster you can polish and improve what you do. 
 
 The first version of something you ship may be worse than a team who takes longer to ship, but the team that ships fast and (critically) remains focused, will improve their product faster.
-
-## More reasons to hire product engineers
 
 Speed isn't the only advantage of hiring product engineers, however. Others include:
 
@@ -51,7 +53,7 @@ A team of six or fewer product engineers at PostHog can out ship teams two or th
 
 ### 6. Attracting strong talent
 
-Startups typically can't compete with Google, Meta, Open AI and co. on compensation or prestige alone, so creating a culture where product engineers can thrive is a great way to attract talent you otherwise couldn't. Talent, like speed, compounds.
+Startups typically can't compete with Google, Meta, OpenAI and co. on compensation or prestige alone, so creating a culture where product engineers can thrive is a great way to attract talent you otherwise couldn't. Talent, like speed, compounds.
 
 ### 7. Happiness
 
