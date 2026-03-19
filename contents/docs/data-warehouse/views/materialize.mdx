@@ -23,7 +23,7 @@ Once materialized, you can query the view like any other.
 
 ## Scheduling a materialized view
 
-After you create a view, you can also schedule it to be updated at a specific interval, anywhere from never to every five minutes to every month. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. 
+After you create a view, you can also schedule it to be updated at a specific interval, anywhere from never to every 15 minutes to every month. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. 
 
 For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set up a materialized view with that billing data to resync daily as well. 
 
@@ -40,6 +40,6 @@ For example, if you sync your billing data to Postgres using a cron job daily an
 
 - You can materialize only the slow part of a larger query, like a `with` expression or a subquery. Often times, materializing a subset is a good way to create a resource that's reusable, including insights and other data warehouse views.
 
-- Datasets generated from materialized views are only updated at the specified intervals and not in real-time. This means that if you have a view that is used in a dashboard or relied upon for another query, the dashboard will not update until the materialized view is updated. We offer a 5-minute refresh interval, but if the query takes longer than that to execute, it will only be updated once the query is finished and rerun at the next 5-minute interval.
+- Datasets generated from materialized views are only updated at the specified intervals and not in real-time. This means that if you have a view that is used in a dashboard or relied upon for another query, the dashboard will not update until the materialized view is updated. We offer a 15-minute refresh interval, but if the query takes longer than that to execute, it will only be updated once the query is finished and rerun at the next 15-minute interval.
 
 - Materialization runs have more compute and memory resources allocated to them than standard queries, but they still can timeout for inefficient queries. We time out after 1 hour of processing time.
