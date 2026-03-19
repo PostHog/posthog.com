@@ -2,7 +2,7 @@
 title: Why you need logs
 ---
 
-Logs are records of what happens inside your application at runtime: the requests it handled, the errors it hit, the decisions it made. Most engineers first encounter them as `console.log` statements scattered around code to debug a problem, then deleted before pushing. But production logging (structured, centralized, queryable logging) is a different thing entirely.
+Logs are records of what happens inside your application at runtime. It includes the requests it handled, the errors it hit, and the decisions it made. Most engineers first encounter them as `console.log` statements scattered around code to debug a problem, then deleted before pushing. But production logging (structured, centralized, queryable logging) is a different thing entirely.
 
 This page covers what that visibility actually looks like and why it matters, especially now that AI tools can query your logs for you.
 
@@ -16,7 +16,7 @@ Your application has three layers of visibility:
 | **[Error Tracking](/docs/error-tracking)** | What broke | "TypeError: Cannot read property 'id' of undefined" |
 | **Logs** | What happened in between | "Stripe API returns 402, retries 3 times, then returns a new error format we don't handle" |
 
-Errors tell you something broke. Analytics tell you what users did. Logs tell you **why things happened the way they did**: the internal state, decisions, and flows your code executed along the way.
+Errors tell you something broke. Analytics tell you what users did. Logs tell you **why things happened the way they did**. They're the internal state, decisions, and flows your code executed along the way.
 
 Without logs, debugging production issues means reading code and guessing what path it took. With logs, you see exactly what happened.
 
@@ -24,9 +24,9 @@ Without logs, debugging production issues means reading code and guessing what p
 
 ### A user reports "it's slow"
 
-Without logs, you check your monitoring dashboards and everything looks fine - p95 latency is normal. The issue is intermittent and user-specific.
+Without logs, you check your monitoring dashboards and everything looks fine. The p95 latency is normal. The issue is intermittent and user-specific.
 
-With logs, you filter by that user's ID and see their request hits a cache miss, falls through to a cold database query, then waits 8 seconds for a third-party geocoding API that was rate-limiting your IP. You fix it in minutes instead of days.
+With logs, you filter by that user's ID and see their request hits a cache miss, falls through to a cold database query, then waits eight seconds for a third-party geocoding API that was rate-limiting your IP. You fix it in minutes instead of days.
 
 ### A deploy silently breaks something
 
@@ -38,13 +38,13 @@ With logs, you see the payment gateway starts returning a new response format af
 
 A scheduled job processes invoices overnight. One morning, finance reports missing invoices. There's no UI, no user session, no browser to inspect.
 
-Logs are your only window: you see the job starts, processes 847 invoices, hits a malformed record at row 848, and the batch processor swallows the exception and exits silently. Without logs, you'd be reading code line by line trying to reproduce it.
+Logs are your only window. You see the job starts, processes 847 invoices, hits a malformed record at row 848, and the batch processor swallows the exception and exits silently. Without logs, you'd be reading code line by line trying to reproduce it.
 
 ### "It works on my machine"
 
 Production has different config, different data shapes, different scale. A feature works perfectly in development but fails for 2% of users in production.
 
-Logs show the actual runtime state: the environment variables that are loaded, the [Feature Flag](/docs/feature-flags) values that are evaluated, the exact payload that triggers the edge case. You see what production *actually does*, not what you think it should do.
+Logs show the actual runtime state, including the environment variables that are loaded, the [Feature Flag](/docs/feature-flags) values that are evaluated, the exact payload that triggers the edge case. You see what production *actually does*, not what you think it should do.
 
 ### AI coding agents need logs to help you
 
@@ -52,7 +52,7 @@ Tools like Claude Code, Cursor, and Windsurf can connect to your logs via [MCP (
 
 Instead of manually searching a log dashboard, you describe the bug to your AI agent. The agent queries your logs, finds the relevant entries, correlates them with the error, and suggests a fix, all without you leaving your editor. But this only works if you have structured, centralized logs for the agent to query.
 
-Logs also matter when your application *uses* AI. If you're building with LLMs, tool calling, or MCP servers, a user reporting "the AI gave a weird answer" is impossible to debug without logs capturing each step: the prompt, the tool calls, the responses, the final generation. Logs let you trace the exact decision path and find where the reasoning went sideways.
+Logs also matter when your application *uses* AI. If you're building with LLMs, tool calling, or MCP servers, a user reporting "the AI gave a weird answer" is impossible to debug without logs capturing the prompt, the tool calls, the responses, and the final generation. Logs let you trace the exact decision path and find where the reasoning went sideways.
 
 ## What good logging looks like
 
@@ -62,7 +62,7 @@ Most logging is bad. Not because people don't log enough, but because they log t
 
 1. **Structured, not plaintext** – Log JSON with consistent fields, not human-readable strings. `{"service": "payments", "user_id": "abc", "stripe_status": 402}` is queryable. `"Payment failed for user"` is not.
 
-2. **Rich context, not breadcrumbs** – Instead of six log lines tracking each step of a request, emit one rich event per request with all the context attached: who made the request, what they asked for, what happened, and how long it took.
+2. **Rich context, not breadcrumbs** – Instead of six log lines tracking each step of a request, emit one rich event per request with who made the request, what they asked for, what happened, and how long it took.
 
 3. **Business context, not just technical signals** – Include the user ID, the plan they're on, the feature flag variant they saw. When something breaks, you need to know *who* was affected and *what* they were trying to do.
 
