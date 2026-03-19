@@ -23,7 +23,7 @@ The pattern has three layers:
 
 1. **PostHog Prompts** stores the skill content as versioned markdown
 2. **MCP prompt tools** (`prompt-get`, `prompt-list`) let agents fetch skills at runtime
-3. **An optional local bridge skill** makes invocation seamless (e.g., a Claude Code slash command that auto-fetches from PostHog)
+3. **A single local bridge skill** (optional) makes invocation seamless — one slash command that can fetch and run any skill from PostHog
 
 When a team member invokes a skill, their agent fetches the latest version from PostHog via MCP, reads the instructions, and follows them. No local files to sync, no git repos to pull — just one source of truth.
 
@@ -120,27 +120,53 @@ This works identically in Claude Code, Cursor, Codex, or any other MCP-connected
 
 ## Step 3: Set up a bridge skill (optional)
 
-For agents that support local slash commands (like Claude Code), you can create a lightweight local skill that automatically fetches from PostHog. This way, team members just type a slash command instead of asking the agent to fetch a prompt.
+For agents that support local slash commands (like Claude Code), you can set up a single generic bridge skill that connects your agent to the entire PostHog skills store. You don't create a local skill per prompt — you create **one** bridge that can fetch and run any skill by name.
 
 ### Claude Code example
 
-Create a file at `.claude/skills/hog-release-notes/SKILL.md`:
+Create a file at `.claude/skills/posthog-skills-store/SKILL.md`:
 
 ```markdown
 ---
-name: hog-release-notes
-description: Write release notes in PostHog's voice
+name: posthog-skills-store
+description: Access and run shared team skills stored in PostHog.
+  Use when the user asks to list, run, or manage PostHog skills/prompts.
+user-invocable: true
+allowed-tools: mcp__posthog__prompt-list, mcp__posthog__prompt-get,
+  mcp__posthog__prompt-create, mcp__posthog__prompt-update
 ---
 
-Fetch the PostHog prompt named "hog-release-notes" using the
-prompt-get MCP tool, then follow the instructions it contains.
+# PostHog Skills Store
 
-Apply those instructions to the user's current request.
+Fetch the full instructions from PostHog:
+
+1. Call `prompt-get(name="posthog-skills-store")` to load the latest version
+2. Follow the instructions in the returned prompt
 ```
 
-Now any team member can type `/hog-release-notes` in Claude Code and the agent automatically fetches the latest skill from PostHog and runs it.
+This bridge is intentionally thin — it just bootstraps into PostHog, where the real instructions live. The `posthog-skills-store` prompt in PostHog contains the full logic for listing, fetching, creating, and updating skills.
 
-The bridge skill is intentionally thin — all the real instructions live in PostHog, so updates propagate without changing local files.
+### Using it
+
+Once the bridge is set up, team members interact with the entire skills store through natural language:
+
+```text
+# Run a skill by name
+/posthog-skills-store run hog-release-notes on my current branch
+
+# Create a new skill
+/posthog-skills-store create a skill called "review-api-pr"
+that reviews PRs against our API design guidelines
+
+# List available skills
+/posthog-skills-store list all skills
+
+# Update an existing skill
+/posthog-skills-store update hog-release-notes to add a
+"Breaking changes" section
+```
+
+One local file, unlimited remote skills. When you update a skill in PostHog, every team member gets the new version automatically — no local files to change, no PRs to merge.
 
 ## Updating and versioning skills
 
