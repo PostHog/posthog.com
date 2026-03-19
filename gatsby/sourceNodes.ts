@@ -832,8 +832,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         }
 
-        await createGitHubStatsNode('posthog', 'posthog')
-        await createGitHubStatsNode('posthog', 'posthog.com')
+        await Promise.all([
+            createGitHubStatsNode('posthog', 'posthog'),
+            createGitHubStatsNode('posthog', 'posthog.com'),
+        ])
 
         const integrations = await fetch(
             'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
@@ -955,9 +957,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             )
         }
 
-        await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
-        await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
-        await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
+        await Promise.all([
+            fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', '')),
+            fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', '')),
+            fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', '')),
+        ])
     }
 
     await sourceGithubNodes()
@@ -1111,7 +1115,5 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    await fetchAchievements()
-    await fetchAchievementGroups()
-    await fetchRewards()
+    await Promise.all([fetchAchievements(), fetchAchievementGroups(), fetchRewards()])
 }
