@@ -26,6 +26,29 @@ You can save workflows as reusable templates to share across your team. When sav
 
 Organization-scoped templates are accessible to all teams within the same organization. Any team member can use and update these shared templates. Templates remain isolated to their organization and aren't visible to other organizations.
 
+### Built-in templates
+
+PostHog includes a set of pre-built workflow templates to help you get started quickly. These are available when you click **New workflow** and cover common use cases like onboarding, engagement, and alerting:
+
+| Template | Description |
+|----------|-------------|
+| **Celebrate milestone** | Send congrats when users reach an important product milestone |
+| **Feature adoption tips** | Guide users with a drip campaign after they adopt a feature |
+| **Re-engagement workflow** | Detect inactive users and remind them to come back |
+| **Trial ending reminder** | Remind users before their trial expires so they can upgrade |
+| **Heavy usage detected** | Notify users when they're close to their usage limit |
+| **Negative survey response** | Alert your team in Slack when a user submits negative feedback |
+| **User stuck in onboarding** | Alert your team when users start but don't complete onboarding |
+| **Support ticket notification** | Notify your support team in Slack when a new ticket is created |
+| **Unresolved ticket alert** | Escalate support tickets that remain unresolved after a set time |
+| **High intent notification** | Alert your sales team when a user shows strong buying intent |
+| **Repeated failure alert** | Alert your team when a user action fails repeatedly |
+| **Unlocking advanced features** | Unlock features and notify users when they complete a key action |
+| **Unused features education** | Send tips to users who haven't tried an important feature yet |
+| **User upgrade webhook** | Send a webhook to external systems when a user upgrades |
+
+Each template includes pre-configured triggers, delays, and dispatch steps that you can customize for your needs.
+
 ## Liquid and merge tags
 
 All template types support [Liquid templating](https://shopify.github.io/liquid/) to personalize your messages with user properties and data. You can type liquid directly, or use the merge tag dropdown in your message templates, which will show you the entire list of available person properties (see email example below).
