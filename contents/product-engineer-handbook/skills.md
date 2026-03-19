@@ -5,15 +5,13 @@ showTitle: true
 
 Product engineers are T or M-shaped people – i.e. engineers who have deep knowledge and experience in one or more areas, and broad knowledge of several others.
 
-Some are better at [talking to users](/newsletter/talk-to-users) than others. Some are stronger at data analysis. Some are better on the front-end than the back-end.
-
-The point is you don't need to be an expert in everything to be an effective product engineer, but you do need to be proficient in most, and willing to learn the things you don't know. 
+You don't need to be an expert in everything to be an effective product engineer, but you do need to be proficient in most, and willing to learn the things you don't know. 
 
 Being a fundamentally sound engineer is table stakes for any aspiring product engineer, so this chapter is mostly about less obvious, non-technical skills and knowledge.
 
 ## 1. How software businesses work
 
-Understanding how your business work gives product engineers the context they need to make good decisions about what to build.
+Understanding how a business work gives product engineers the context they need to make good decisions about what to build.
 
 This starts with understanding basic concepts like [product-market fit](/founders/product-market-fit-game), and the difference between an [ideal customer profile](/newsletter/ideal-customer-profile-framework) and a [user persona](/product-engineers/how-to-create-user-personas). It also includes the business metrics that imply or predict the success of a product, like net revenue retention or [activation](/newsletter/wtf-is-activation).
 
@@ -59,7 +57,7 @@ At a bare minimum it means you:
 * Are comfortable creating high-level trend, funnel, retention insights for their product  
 * Regularly watch replays of user sessions to understand how they use the product
 
- At a more advanced level, it could mean:
+At a more advanced level, it could mean:
 
 * Performing deeper analysis by joining multiple data sources  
 * Running growth reviews for the products and features you own  
@@ -87,13 +85,11 @@ Product engineers also need to be practical about choosing the best tool for the
 
 ## 6. Coding with AI
 
-Semantic arguments about what constitutes vibe coding and "real engineering" are a distraction. Ultimately, we're careening toward a future where a majority of software code is AI assisted in some form, and anything that helps a product engineer iterate faster is something you should embrace.
+You can't be a truly effective product engineer without AI asisstance anymore. This is a straightforward fact. It's too powerful a tool to ignore, so learning how to use AI effectively is table stakes for a product engineer.
 
-This doesn't invalidate engineering skills and knowledge because [not understanding the code an LLM writes is an antipattern](/newsletter/ai-coding-mistakes). A bad one. Understanding the proper architecture of a software project protects you against the decision-making of the robot. This skill is more essential than ever.
+This doesn't, however, invalidate invalidate traditional engineering skills and knowledge because understanding the proper architecture of a software project protects you against the decision-making of the robot.
 
-Ultimately, coding with AI is a specific and vital skill because AI can either help you solve problems, or be an active hindrance if used in the wrong way.
-
-## 7. Basic design and UX fundamentals
+## 7. Design and UX fundamentals
 
 Product engineers don't need to be genius designers, but you need to be a competent frontend developer with taste and the ability to create [coherent user experiences](/newsletter/vibe-designing).
 
@@ -109,8 +105,7 @@ This *does not* mean committing to main every time you make a change, randomly c
 
 It *does* mean using techniques like:
 
-| Real user monitoring | Tracking app, query, and site performance, as well as error rate and logs.  |
-| :---- | :---- |
+| **Real user monitoring** | Tracking app, query, and site performance, as well as error rate and logs.  |
 | **Load, spike, soak testing** | Planning for scale by checking code for issues and performance when under a high volume or stressful load. |
 | **Shadowing, mirroring, dark launches** | Evaluating new code with duplicated or mirrored production data hidden or separated from users. |
 | **Integration testing** | Checking services, features, and infrastructure work together once deployed. |
@@ -118,21 +113,17 @@ It *does* mean using techniques like:
 | **User analytics** | Uncovering how users are using a product with analytics, session replays, and A/B testing. |
 | **Feedback and surveys** | Gathering qualitative feedback about how users' experience with the product. |
 
-And, of course, it requires a familiarity with feature flags tools, and [feature flag best practices](/docs/feature-flags/best-practices), to make this all happen.
-
 Why is this important? Two reasons, one practical, one philosophical:
 
-1. Testing in production reveals problems with code not surfaced by local testing, so you can find problems and fix them faster. Product engineers should always be optimizing for speed, so testing in production unlocks gains here.
+1. Testing in production reveals problems with code not surfaced by local testing, so you can find problems and fix them faster. Product engineers should always be optimizing for speed, so testing in production unlocks gains here. It's impossible to create a development environment that perfectly mimics the real world.
 
 2. Testing in production gets features into the hands of real users faster. Ultimately, a product engineer learns by iterating on user feedback as quickly as possible. It's always best to test the earliest viable version of something with a real person, and testing in production makes this easier.
-
-No matter how hard you try, it's impossible to create a development environment that perfectly mimics the real world.
 
 ## 9. How (and when) to run experiments
 
 Product engineers need an experimental mindset generally, so it's useful if you can learn how to run successful product experiments. 
 
-This means being familiar with product experiment tools and core concepts, such as [how to write a good hypothesis, best practices](/newsletter/what-we've-learned-about-ab-testing), and when it's useful (or not) to run an experiment in the first place.
+This means being familiar with product experiment tools and core concepts, such as [how to write a good hypothesis](/newsletter/what-we've-learned-about-ab-testing), and when it's useful (or not) to run an experiment in the first place.
 
 It's an antipattern to test every change you make – it's often best to just ship something – but a product engineer who is comfortable running product experiments is a hugely valuable addition to any team. 
 
