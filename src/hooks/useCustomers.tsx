@@ -256,6 +256,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 quotes: [
                     "We're probably five to ten times faster at debugging now, and it's enabled us to collaboratively work on issues as a team in a way we just couldn't before.",
                     'We spot an exception in Error Tracking and pivot straight into Logs to understand the full context of what went wrong. That link between the two is huge for us.',
+                    "We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally.",
+                    "We automatically get AI to write triage scripts and fire them to see what works, and then from there we review the log files to see what it did and what it didn't do.",
                 ],
             },
         },

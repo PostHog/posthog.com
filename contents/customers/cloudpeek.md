@@ -2,19 +2,23 @@
 title: How CloudPeek cut debugging time by 10x with PostHog Logs and Error Tracking
 customer: CloudPeek
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/cloudpeek_posthog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/cloudpeek_0b047d9eab.png
 date: 2026-03-10
 ---
 
 [CloudPeek](https://cloudpeek.io) is an agentic platform for next-generation cybersecurity. It sits above an organisation's existing security stack as a reasoning and orchestration layer – connecting to any tool, understanding the specific environment, and letting operators automate complex workflows with full control and auditability.
 
-Craig Hollington leads the engineering team at CloudPeek – and when PostHog launched [Logs](/docs/logs), his team jumped on it immediately.
+Craig Hollington is the CTO & co-founder at CloudPeek – and when PostHog launched [Logs](/docs/logs), his team jumped on it immediately.
 
 ## The debugging gap
 
 Before PostHog launched Logs, CloudPeek's team didn't have a dedicated logging tool. They were already using PostHog for [error tracking](/error-tracking), so they'd see exceptions fire – but tracing back to a root cause meant SSHing into servers and searching local log files with grep.
 
-_"We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally."_
+<OSQuote
+  customer="cloudpeek"
+  author="craig_hollington"
+  quote={2}
+/>
 
 For a fast-moving team shipping AI-driven security tooling across diverse environments, this created a real bottleneck. Issues on a server were manageable. But when something happened on a less accessible device, the trail often went cold.
 
@@ -26,21 +30,25 @@ Craig had used dedicated logging tools in previous roles but both were too costl
 
 Today, the team uses two primary debugging workflows. The first starts from a specific exception: they take the URL or ID from the fired alert, narrow the time window down to about a minute either side, and trace through exactly what happened to cause the issue.
 
-_"We try to really narrow down our point of time, so it's only like maybe a minute either side of when the alarm fired. So we can trace through very granularly what happened."_
+They try to really narrow down the time window to about a minute either side of when the alarm fired, so they can trace through very granularly what happened.
 
 The second approach uses PostHog's MCP integration to search more broadly when they don't have a precise starting point.
 
 The team also uses AI-generated test scripts to simulate edge cases and user behavior. They fire these scripts, then watch the logs live to see what breaks and what doesn't – which lets them ship hot fixes quickly.
 
-_"We automatically get AI to write triage scripts and fire them to see what works, and then from there we review the log files to see what it did and what it didn't do."_
+<OSQuote
+  customer="cloudpeek"
+  author="craig_hollington"
+  quote={3}
+/>
 
 ## Why OpenTelemetry was the deciding factor
 
-CloudPeek works with customers who have strict audit requirements, particularly in the UK government. The fact that PostHog Logs uses OpenTelemetry under the hood turned out to be the single biggest factor in their adoption.
+CloudPeek works with customers who have strict audit requirements, particularly when working with high consequence organizations. The fact that PostHog Logs uses OpenTelemetry under the hood turned out to be the single biggest factor in their adoption.
 
 Because it's built on an open standard, CloudPeek can tell customers who want their own logs to simply set a few environment variables and point to their own collector. No custom integrations, no bespoke pipelines.
 
-_"It was a drop-in change for us. Instead of us having to deal with anything custom, we can just tell them: 'You want your own logs? Great. Set these environment variables and you're good to go.'"_
+It was a drop-in change for them. Instead of dealing with anything custom, they can tell customers who want their own logs to simply set a few environment variables and they're good to go.
 
 This was also the reason they passed on CloudWatch – OpenTelemetry meant they didn't need to support multiple custom logging systems or rebuild anything when a new customer had different requirements.
 
