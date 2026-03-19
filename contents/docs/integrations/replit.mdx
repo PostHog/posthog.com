@@ -52,19 +52,19 @@ Update `script/build.ts` to:
 - Build with `sourcemap: true`
 - After build, run `posthog-cli sourcemap inject` then `posthog-cli sourcemap upload`
 - Delete `.map` files from dist after upload (keep them private)
-- Skip upload gracefully if `POSTHOG_CLI_TOKEN` or `POSTHOG_CLI_ENV_ID` aren't set
+- Skip upload gracefully if `POSTHOG_CLI_API_KEY` or `POSTHOG_CLI_PROJECT_ID` aren't set
 
 For the source map upload secrets:
-- Prompt me to provide POSTHOG_CLI_TOKEN as a secret
-- Prompt me to provide POSTHOG_CLI_ENV_ID as a secret
+- Get the project ID from `projects-get` → tell me to set it as `POSTHOG_CLI_PROJECT_ID`
+- Prompt me to provide `POSTHOG_CLI_API_KEY` as a secret (I'll create a personal API key)
 ```
 
-The agent will get your project credentials from the MCP, set up shared environment variables, install the SDKs, add an error boundary, and configure source map uploads. It will prompt you to provide the CLI secrets needed for source map uploads.
+The agent will get your project credentials from the MCP, set up shared environment variables, install the SDKs, add an error boundary, and configure source map uploads. It will tell you the project ID and prompt you to create a personal API key.
 
 For source maps to work in production, add these as [Production app secrets](https://docs.replit.com/replit-workspace/workspace-features/secrets) (go to **Publish** → **Adjust settings**):
 
-- `POSTHOG_CLI_TOKEN` - create a [personal API key](https://us.posthog.com/settings/user-api-keys) with the MCP Server preset
-- `POSTHOG_CLI_ENV_ID` - from your [error tracking settings](https://us.posthog.com/settings/project-error-tracking)
+- `POSTHOG_CLI_API_KEY` - create a [personal API key](https://us.posthog.com/settings/user-api-keys) with the MCP Server preset
+- `POSTHOG_CLI_PROJECT_ID` - the agent will provide this from the MCP (it's the number in your project URL, e.g. the `12345` in `us.posthog.com/project/12345`)
 
 ## What you can do with the MCP
 
@@ -112,7 +112,7 @@ See [all available MCP tools](/docs/model-context-protocol#available-tools) for 
 
 ### Source maps not uploading
 
-Check that `POSTHOG_CLI_TOKEN` and `POSTHOG_CLI_ENV_ID` are set as **secrets** in Replit. If they're not set, the build will succeed but source maps won't be uploaded.
+Check that `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` are set as **secrets** in Replit. If they're not set, the build will succeed but source maps won't be uploaded.
 
 ### Events not appearing
 
