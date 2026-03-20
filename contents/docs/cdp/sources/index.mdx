@@ -56,7 +56,7 @@ When choosing incremental replication, you must select a field to identify new a
 - `datetime`
 - `date`
 - `timestamp`
-- `numeric` (for Snowflake)
+- `number` or `numeric` (for Snowflake)
 
 The one downside to incremental syncing is that deletions of data won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
 
