@@ -119,4 +119,4 @@ Person property values can be strings, booleans, numbers, objects, or arrays.  F
 > - Mobile apps batching events while the device is offline
 > - Server-side SDKs with delayed flushes or network retries
 >
-> In these cases, a late-arriving event can overwrite a `$set` value or claim a `$set_once` key before the "true first" event is ingested. If ordering matters for your use case, prefer `$set_once` for values that should not change, and be aware that `$set` always reflects the last *ingested* value, not the last *timestamped* value.
+> In these cases, a late-arriving event can overwrite a `$set` value or claim a `$set_once` key before the "true first" event is ingested. If ordering matters for your use case, prefer `$set_once` for values that should not change (though note that `$set_once` is still subject to ingestion ordering — the first ingested event claims the key, not necessarily the earliest event by timestamp). Be aware that `$set` always reflects the last *ingested* value, not the last *timestamped* value.
