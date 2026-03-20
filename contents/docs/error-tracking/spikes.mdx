@@ -25,7 +25,7 @@ If an issue is too new or hasn't had enough activity to establish a meaningful b
 
 ## Configuring spike detection
 
-You can configure spike detection in the [error tracking configuration page](https://us.posthog.com/project/2/error_tracking?activeTab=configuration#selectedSetting=error-tracking-spike-detection).
+You can configure spike detection in the [error tracking configuration page](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-spike-detection).
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_11_T12_43_56_983_Z_9b524d4498.png"
@@ -41,6 +41,22 @@ The following options are available:
 | **Minimum threshold** | Issues with fewer occurrences than this value in a 5-minute bucket will never trigger a spike. This prevents noise from low-volume issues. |
 | **Multiplier** | How many times the current bucket must exceed the baseline for the spike to fire. A higher multiplier means only more dramatic surges trigger an alert. |
 | **Snooze duration** | After a spike fires for an issue, you won't be notified again for this many minutes — even if the issue continues spiking. This prevents alert fatigue during sustained incidents. |
+
+
+## Viewing recent spikes
+
+Detected spike events are stored and displayed in the **Recent Spikes** table on the [error tracking configuration page](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-spike-detection). This gives you a historical view of when spikes occurred across your issues.
+
+The table shows the following for each spike event:
+
+| Column | Description |
+| --- | --- |
+| **Issue** | The issue that spiked. |
+| **Detected at** | When the spike was detected. |
+| **Baseline** | The computed baseline value at the time of detection. |
+| **Bucket value** | The current bucket value that triggered the spike. |
+
+Spike events are automatically removed after 30 days.
 
 ## Getting notified about spikes
 
