@@ -1,5 +1,7 @@
 Using `set` replaces any property value that may have been set on a person profile. In contrast, `set_once` only sets the property if it has never been set before.
 
+> **Note:** `set_once` checks whether the property key currently exists on the person profile — it is not based on event timestamps. If events arrive out of order (e.g. due to mobile batching or historical imports), the first *ingested* event claims the key, even if a logically earlier event arrives later.
+
 `set` is typically used for properties that may change over time – e.g., email, current plan, organization name. `set_once` is typically only used for information that is guaranteed to never change – e.g., the first URL a user visited, or the date a user first logged in.
 
 For example:
