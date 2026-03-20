@@ -28,3 +28,21 @@ If your Stripe account is in a language other than English, we suggest you updat
 > For Stripe tables, incremental syncs will only sync new records and not update existing records. This is a limitation of the Stripe API in which it's not possible to query for updated data. 
 
 The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Webhook sync mode
+
+Webhook sync enables real-time updates from Stripe, syncing data as changes occur instead of on a schedule. This addresses the limitation of scheduled incremental syncs, which only sync new records and can't update existing ones.
+
+### Automatic webhook setup
+
+During source setup, PostHog attempts to automatically create the necessary Stripe webhook. If your API key has sufficient permissions, the webhook is created and configured without any additional steps.
+
+### Manual webhook setup
+
+If automatic webhook creation fails (e.g., due to API key permissions), you can set up the webhook manually:
+
+1. In PostHog, copy the webhook URL shown during source setup.
+2. In Stripe, go to **Developers** > **Webhooks** and click **Add endpoint**.
+3. Paste the webhook URL from PostHog and select the relevant events.
+4. After creating the webhook, copy the **Signing secret** from Stripe.
+5. Back in PostHog, enter the signing secret to complete the setup.
