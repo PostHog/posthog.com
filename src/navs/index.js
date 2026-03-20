@@ -2695,21 +2695,58 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                        },
-                        {
-                            name: 'Platform integrations',
-                        },
-                        {
-                            name: 'Lovable',
-                            url: '/docs/integrations/lovable',
-                        },
-                        {
-                            name: 'Replit',
-                            url: '/docs/integrations/replit',
-                        },
-                        {
-                            name: 'v0',
-                            url: '/docs/integrations/v0',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Code editors',
+                                },
+                                {
+                                    name: 'Claude Code',
+                                    url: '/docs/model-context-protocol/claude-code',
+                                },
+                                {
+                                    name: 'Claude Desktop',
+                                    url: '/docs/model-context-protocol/claude-desktop',
+                                },
+                                {
+                                    name: 'Codex',
+                                    url: '/docs/model-context-protocol/codex',
+                                },
+                                {
+                                    name: 'Cursor',
+                                    url: '/docs/model-context-protocol/cursor',
+                                },
+                                {
+                                    name: 'VS Code',
+                                    url: '/docs/model-context-protocol/vscode',
+                                },
+                                {
+                                    name: 'Windsurf',
+                                    url: '/docs/model-context-protocol/windsurf',
+                                },
+                                {
+                                    name: 'Zed',
+                                    url: '/docs/model-context-protocol/zed',
+                                },
+                                {
+                                    name: 'Platforms',
+                                },
+                                {
+                                    name: 'Lovable',
+                                    url: '/docs/integrations/lovable',
+                                },
+                                {
+                                    name: 'Replit',
+                                    url: '/docs/integrations/replit',
+                                },
+                                {
+                                    name: 'v0',
+                                    url: '/docs/integrations/v0',
+                                },
+                            ],
                         },
                         {
                             name: 'LLM Analytics ↗',
