@@ -6,6 +6,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
 
 Exposures are the foundation of experiment analysis in PostHog. A user must be **exposed** to your experiment before they can be included in any metric calculations. Understanding how exposures work is crucial for running successful experiments.
 
@@ -51,6 +52,10 @@ The exposures chart shows:
 | **Total exposures** | The absolute number of users in each variant |
 | **Distribution percentage** | How users are split across variants |
 | **Exposure criteria** | The event being used to determine exposure |
+
+## Ensuring exposures for returning users
+
+<ReturningUsersExposures />
 
 ## Custom exposure events
 

@@ -6,7 +6,9 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingRubyInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{}}>
-            <RubyInstallation modifySteps={addNextStepsStep} />
+            <RubyInstallation
+                modifySteps={(steps) => addNextStepsStep(steps).filter((s) => s.title !== 'Upload source maps')}
+            />
         </OnboardingContentWrapper>
     )
 }

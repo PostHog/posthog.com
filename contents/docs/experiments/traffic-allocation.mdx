@@ -2,8 +2,21 @@
 title: Traffic allocation
 ---
 
-By default, we use PostHog's multivariate [feature flags](/docs/feature-flags) to evenly assign people to variations (unless you choose to run an experiment [without feature flags](/docs/experiments/running-experiments-without-feature-flags)). The experiment feature flag is initialized automatically when you create your experiment.
+Experiment traffic allocation controls which users see which variant in your experiment. There are two main levels of control:
 
-In any experiment, there is one control group and up to nine test groups. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even across different sessions and devices.
+1. **Rollout percentage** – What percentage of your users are included in the experiment (e.g., 100% means all users are included).
+2. **Variant split** – How included users are distributed across variants (e.g., 50/50 between control and test). Defaults to an even split across all variants.
+
+Both are configured in the **Variant rollout** step of the experiment creation wizard, or from the **Manage distribution** button on a running experiment. More advanced configurations are available after you create the experiment, either via the **Manage release conditions** button on the **Variants** tab, or via the underlying feature flag directly.
+
+## How variants work
+
+Each experiment is backed by a multivariate [feature flag](/docs/feature-flags) (unless you [run without Feature Flags](/docs/experiments/running-experiments-without-feature-flags)). Experiments support one control variant and up to nine test variants. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even across different sessions and devices.
+
+By default, users are split evenly across all variants. You can customize the split by clicking the edit icon next to the **Split** column.
+
+Keep in mind that the more variants you add, the more traffic you need to reach reliable results. It's recommended to split traffic equally between variants – the lower the traffic a variant receives, the longer it takes to reach statistical significance.
+
+## Handle low data volumes
 
 It's important to note that when dealing with low data volumes (less than 1,000 users per variant), the difference in variant exposure can be as much as 20%. This means a test variant could have only 800 people, while the control variant has 1,000. All our calculations take this exposure discrepancy into account.
