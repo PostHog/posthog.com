@@ -62,10 +62,20 @@ Content: (see example below)
 
 ### Example skill content
 
+A good skill gives the agent all the context it needs — where to find information, what format to use, and any project-specific knowledge. Here's what `hog-release-notes` might look like:
+
 ```markdown
 # Hog release notes writer
 
-You write release notes for PostHog features. Follow these rules:
+You write release notes for PostHog. Follow these rules.
+
+## Where to find what's new
+- Check the changelog at contents/docs/llm-analytics/changelog.mdx
+  for what's already been published
+- Look at merged PRs since the last changelog entry using
+  `git log --oneline --since="2 weeks ago"`
+- Read PR descriptions and commit messages for context on each change
+- Cross-reference with the GitHub milestone if one exists
 
 ## Voice and tone
 - Direct and concise — no marketing fluff
@@ -73,7 +83,7 @@ You write release notes for PostHog features. Follow these rules:
 - Use second person ("you") not third person ("users")
 - Be specific about what changed and why it matters
 
-## Structure
+## Structure for each entry
 1. **One-line summary** — What shipped, in plain language
 2. **What it does** — 2-3 sentences on the feature or fix
 3. **How to use it** — Concrete steps or code snippets
@@ -83,12 +93,14 @@ You write release notes for PostHog features. Follow these rules:
 - Start with a verb (Add, Fix, Improve, Remove)
 - Include links to relevant docs pages
 - If it's a breaking change, lead with that
-- Keep it under 200 words
+- Keep each entry under 200 words
+- Skip dependency bumps and minor refactors
 
-## Context
-Read the git diff or PR description provided, then write the release
-notes following the structure above.
+## Output
+Write the release notes as markdown, ready to append to the changelog.
 ```
+
+Notice the skill includes everything the agent needs to work autonomously — where to look for changes, what's already published, and how to format the output. The more context you bake in, the less you need to explain each time you run it.
 
 ## Step 2: Use a skill from any agent
 
@@ -160,6 +172,62 @@ This bridge is intentionally thin — it just bootstraps into PostHog, where the
 ```
 
 One local file, unlimited remote skills. But again, this is purely a convenience — everything the bridge does, you can do by asking your agent to use PostHog MCP prompts directly.
+
+## Example: a full session
+
+Here's what using the skills store looks like in practice — from running a skill, to updating it mid-session, to a teammate picking up the changes automatically.
+
+### Running the skill
+
+```text
+> Use PostHog MCP prompts to fetch "hog-release-notes" and generate
+  release notes for the latest changes.
+
+Agent fetches the skill via prompt-get("hog-release-notes"), reads the
+instructions, checks the changelog, runs git log, reads PR descriptions,
+and drafts the release notes.
+
+✓ Here are the release notes for the last two weeks:
+
+  ## Add prompt version diffing
+  You can now compare any two versions of a prompt side-by-side...
+  ...
+```
+
+The agent had everything it needed — the skill told it where to find what's already published, how to discover what's new, and how to format the output.
+
+### Updating the skill mid-session
+
+After reviewing the output, you decide the skill could be better:
+
+```text
+> Great, but let's update the hog-release-notes skill — add a rule to
+  always include a fun hedgehog fact at the end of each set of
+  release notes.
+
+Agent calls prompt-get("hog-release-notes") to fetch the current version,
+adds the new rule, then calls prompt-update with the updated content and
+base_version for conflict detection.
+
+✓ Updated "hog-release-notes" to version 2. Added rule:
+  "End each set of release notes with a fun hedgehog fact."
+```
+
+That's it — the skill is updated in PostHog. You can [review the diff](/docs/llm-analytics/prompts#compare-versions) in the PostHog UI to see exactly what changed.
+
+### A teammate benefits automatically
+
+The next day, a teammate runs the same skill from their own agent (Claude Code, Cursor, or anything with PostHog MCP):
+
+```text
+> Use PostHog MCP prompts to run "hog-release-notes" for this week.
+
+Agent fetches version 2 of the skill (the latest), follows the updated
+instructions, and includes a hedgehog fact at the end — without the
+teammate needing to know anything changed.
+```
+
+No sync, no PR, no "hey I updated the skill" message in Slack. The skill evolved, and everyone got the new version on their next fetch.
 
 ## Updating and versioning skills
 
