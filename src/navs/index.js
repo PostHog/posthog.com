@@ -5794,6 +5794,12 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Prompts as a skills store',
+                    url: '/docs/llm-analytics/skills-store',
+                    icon: 'IconStack',
+                    color: 'blue',
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
