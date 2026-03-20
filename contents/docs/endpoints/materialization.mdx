@@ -73,6 +73,17 @@ Supported bucket granularities:
 
 By default, PostHog uses `toStartOfDay` to bucket your data. This means each row in the materialized result represents one day of pre-aggregated data.
 
+### Configuring bucket size
+
+You can customize the bucket granularity for each timestamp column directly in the **Configuration** tab. When materialization is enabled and your query has timestamp range variables, a dropdown appears for each timestamp column, letting you select a bucket size:
+
+- **Hour**
+- **Day**
+- **Week**
+- **Month**
+
+Smaller buckets give more precise results, while larger buckets produce less granular results.
+
 Bucketed materialization only works with aggregate functions that can be re-aggregated across buckets: `count`, `sum`, `min`, `max`, and their combinator variants like `countIf` and `sumIf`. Functions like `avg`, `uniq`, and `countDistinct` cannot be re-aggregated and are not supported.
 
 ## How materialization works with execution
