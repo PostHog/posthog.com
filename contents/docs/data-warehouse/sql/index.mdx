@@ -266,6 +266,38 @@ WINDOW w AS (ORDER BY timestamp)
 ORDER BY timestamp DESC
 ```
 
+### QUALIFY
+
+Use `QUALIFY` to filter rows based on window function results. While `WHERE` filters rows before window functions run and `HAVING` filters after aggregation, `QUALIFY` filters after window functions are calculated. This makes it easier to write queries that need to select specific rows based on ranking or ordering within partitions.
+
+For example, to get the most recent pageview for each user:
+
+```sql
+SELECT 
+    distinct_id,
+    properties.$current_url,
+    timestamp
+FROM events
+WHERE event = '$pageview'
+QUALIFY row_number() OVER (PARTITION BY distinct_id ORDER BY timestamp DESC) = 1
+```
+
+This is equivalent to using a subquery, but more concise:
+
+```sql
+SELECT distinct_id, current_url, timestamp
+FROM (
+    SELECT 
+        distinct_id,
+        properties.$current_url as current_url,
+        timestamp,
+        row_number() OVER (PARTITION BY distinct_id ORDER BY timestamp DESC) as rn
+    FROM events
+    WHERE event = '$pageview'
+)
+WHERE rn = 1
+```
+
 ### CASE
 
 Use `CASE` within the `SELECT` command to implement conditional logic within your SQL queries. It allows you to execute different SQL expressions based on conditions. It is similar to if/else statements in programming.
