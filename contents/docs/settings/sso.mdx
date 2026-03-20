@@ -339,6 +339,15 @@ SCIM enables you to automatically sync users and their roles from your identity 
 - Users with matching emails in PostHog are updated to match the IdP details and roles.
 - Roles are matched by name (case-sensitive).
 
+### Pagination
+
+SCIM list endpoints support pagination via `startIndex` and `count` query parameters, following the SCIM 2.0 specification. This is useful when syncing large numbers of users or groups.
+
+- `startIndex` (optional) – 1-based index of the first result. Defaults to 1.
+- `count` (optional) – Maximum number of results per page. Defaults to 200. Maximum is 200.
+
+When syncing, your identity provider sends requests with `startIndex` and `count`. The response includes `totalResults`, `itemsPerPage`, and `Resources`. The IdP advances `startIndex` by `itemsPerPage` until `Resources` is empty.
+
 ### Prerequisites
 
 Before setting up SCIM, you need:
