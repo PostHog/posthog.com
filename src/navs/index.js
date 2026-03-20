@@ -1502,33 +1502,33 @@ export const handbookSidebar = [
 
             {
                 name: 'Use-case selling',
-            url: '/handbook/growth/use-case-selling/use-case-selling',
-            children: [
-                {
-                    name: 'Product Intelligence',
-                    url: '/handbook/growth/use-case-selling/product-intelligence',
-                },
-                {
-                    name: 'Release Engineering',
-                    url: '/handbook/growth/use-case-selling/release-engineering',
-                },
-                {
-                    name: 'Observability',
-                    url: '/handbook/growth/use-case-selling/observability',
-                },
-                {
-                    name: 'Growth & Marketing',
-                    url: '/handbook/growth/use-case-selling/growth-and-marketing',
-                },
-                {
-                    name: 'AI/LLM Observability',
-                    url: '/handbook/growth/use-case-selling/ai-llm-observability',
-                },
-                {
-                    name: 'Data Infrastructure',
-                    url: '/handbook/growth/use-case-selling/data-infrastructure',
-                },
-            ],
+                url: '/handbook/growth/use-case-selling/use-case-selling',
+                children: [
+                    {
+                        name: 'Product Intelligence',
+                        url: '/handbook/growth/use-case-selling/product-intelligence',
+                    },
+                    {
+                        name: 'Release Engineering',
+                        url: '/handbook/growth/use-case-selling/release-engineering',
+                    },
+                    {
+                        name: 'Observability',
+                        url: '/handbook/growth/use-case-selling/observability',
+                    },
+                    {
+                        name: 'Growth & Marketing',
+                        url: '/handbook/growth/use-case-selling/growth-and-marketing',
+                    },
+                    {
+                        name: 'AI/LLM Observability',
+                        url: '/handbook/growth/use-case-selling/ai-llm-observability',
+                    },
+                    {
+                        name: 'Data Infrastructure',
+                        url: '/handbook/growth/use-case-selling/data-infrastructure',
+                    },
+                ],
             },
             {
                 name: 'Cross-selling',
@@ -5546,6 +5546,11 @@ export const docsMenu = {
                             platformLogo: 'ollama',
                         },
                         {
+                            name: 'AWS Bedrock',
+                            url: '/docs/llm-analytics/installation/aws-bedrock',
+                            platformLogo: 'awsBedrock',
+                        },
+                        {
                             name: 'Azure OpenAI',
                             url: '/docs/llm-analytics/installation/azure-openai',
                             platformLogo: 'azureOpenAI',
@@ -5659,6 +5664,11 @@ export const docsMenu = {
                             name: 'OpenClaw',
                             url: '/docs/llm-analytics/installation/openclaw',
                             icon: 'IconCode',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/llm-analytics/installation/convex',
+                            platformLogo: 'convex',
                         },
                         {
                             name: 'Pi Coding Agent',
@@ -5782,6 +5792,12 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'Prompts as a skills store',
+                    url: '/docs/llm-analytics/skills-store',
+                    icon: 'IconStack',
+                    color: 'blue',
                 },
                 {
                     name: 'PostHog AI',

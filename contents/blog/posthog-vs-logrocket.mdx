@@ -1,5 +1,5 @@
 ---
-date: 2024-01-11
+date: 2026-03-19
 title: 'In-depth: PostHog vs LogRocket'
 rootPage: /blog
 sidebar: Blog
@@ -10,6 +10,7 @@ featuredImage: >-
 featuredImageType: full
 author:
     - joe-martin
+    - natalia-amorim
 category: General
 tags:
     - Comparisons
@@ -22,47 +23,64 @@ Want to know how PostHog and LogRocket compare? If you remember nothing else, re
 
 1. **LogRocket** is a frontend monitoring tool that helps developers detect and solve issues.
 
-2. **PostHog** goes beyond just frontend monitoring by integrating powerful analytics, session replay, feature management, A/B testing tools into one platform.
+2. **PostHog** goes beyond just frontend monitoring by integrating powerful [analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [experiments](/experiments), and more into one platform.
 
 ## How is PostHog different?
 
 ### 1. PostHog replaces multiple tools
 
-LogRocket is a narrow tool. It does one thing – and it does it well. PostHog includes many of the same tools, such as session replay, [error tracking](/docs/error-tracking), and console logs, but augments them with powerful dev tools, such as product analytics, feature flags, A/B testing, and surveys. It's everything you need to both squash bugs _and_ understand every aspect of user behavior.
+[LogRocket](/blog/best-logrocket-alternatives) is a narrow tool. It does one thing, frontend monitoring, and it does it well. PostHog includes many of the same tools, such as [session replay](/docs/session-replay), [error tracking](/docs/error-tracking), and console logs, but augments them with powerful dev tools, such as [product analytics](/docs/product-analytics), [feature flags](/docs/feature-flags), [A/B testing](/docs/experiments), [surveys](/docs/surveys), and more. It's everything you need to both squash bugs _and_ understand every aspect of user behavior.
 
-### 2. PostHog is open source and transparent
+### 2. PostHog is for engineers, technical users, _builders_
 
-PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable developers to [build their own integrations](/docs/apps/build), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
+PostHog is designed from the ground up to meet the needs of developers, and product-focused engineers. Session replay includes advanced tools for debugging errors and performance issues, while feature flags make it easy to test, and roll out, new features at scale. You get [SQL access](/docs/product-analytics/sql), an [MCP server](/docs/model-context-protocol), a fully documented [API](/docs/api), and [SDKs](/docs/libraries) for every major platform.
 
-### 3. PostHog constantly ships new features
+### 3. Transparent pricing, generous free tiers 
 
-We ship weirdly fast. We update [our changelog](/changelog) every week and often there’s even more features in beta testing. And that’s without counting all the apps and integrations submitted by our community! We work hard to keep PostHog on the cutting edge and we’re transparent about the ways we do that.
+Our [pricing](/pricing) is 100% transparent. There are no hidden fees or surprise overages – what you see is exactly what you'll pay.
+
+We also default to charging as little as possible while still making a sensible margin, and every product comes with a generous free tier. In fact, more than 90% of companies use PostHog for free!
+
+Getting started takes minutes. Our [AI setup wizard](/wizard) handles framework detection, SDK configuration, and initial event setup automatically – so you're capturing data without any manual instrumentation work.
+
+<WizardCTA />
 
 ## Comparing PostHog and LogRocket
 
+PostHog and LogRocket overlap on session replay and frontend monitoring, but diverge significantly on breadth. PostHog includes a wider range of tools that LogRocket doesn't offer, while LogRocket focuses on doing frontend debugging exceptionally well.
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
         'product_analytics',
         'web_analytics',
         'session_replay',
+        'heatmaps',
         'feature_flags',
+        'error_tracking',
         'surveys',
         'experiments',
-        'heatmaps',
+        'llm analytics',
+        'logs',
         'cdp',
+        'platform.tools.ai_assistant',
+        'platform.pricing.transparent_pricing',
         'platform.deployment.open_source',
     ]}
 />
-
--   **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit [our feature flag page](/feature-flags) for more information. LogRocket doesn’t have any in-built feature flag functions.
-
--   **Experiments:** PostHog offers multivariate experimentation, which enables you to test changes and discover statistically relevant insights. Visit [the experimentation page](/experiments) for more information. LogRocket doesn’t have any in-built experimentation features.
+</p>
 
 ### Product analytics
 
-While LogRocket offers some product analytics features, it isn’t primarily intended as a product analytics tool and lacks many things product managers and engineers require. PostHog is a more capable product analytics app, offering advanced features such as correlation analysis, custom formulas, and a flexible SQL query editor.
 
+While LogRocket offers some product analytics features, it isn't primarily a product analytics tool and lacks many things product managers and engineers require. PostHog is a more capable product analytics app, offering advanced features such as correlation analysis, custom formulas, and a flexible SQL query editor.
+
+- **Correlation analysis:** Enables you to [automatically find correlated events or properties](/docs/product-analytics/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn't offer any such automated correlation discovery, meaning users must search for correlating factors without assistance.
+
+- **SQL access:** PostHog gives you full access to your data by [writing your own SQL queries](/docs/sql). LogRocket doesn't offer SQL access.
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
@@ -79,20 +97,23 @@ While LogRocket offers some product analytics features, it isn’t primarily int
         'product_analytics.insights.features.sql_editor',
     ]}
 />
-
--   **Correlation analysis:** This feature enables you to [automatically find correlated events or properties](/manual/correlation) which affect the conversion rate of users within a funnel. LogRocket doesn’t offer any such automated correlation discovery, meaning users must search for correlating factors manually and without assistance.
-
-> **Further reading:** [Comparing the most popular LogRocket alternatives](/blog/best-logrocket-alternatives)
+</p>
 
 ### Session replay
 
-LogRocket and PostHog both offer robust, full-featured [session replay tools](/blog/best-open-source-session-replay-tools) that outperform even dedicated tools, such as Hotjar.
+Both PostHog and LogRocket offer developer-focused [session replay tools](/blog/best-session-replay-tools) that goes beyond what dedicated UX research tools like [Hotjar](/blog/posthog-vs-hotjar) provide.
 
+- **Redux/state capture:** LogRocket captures Redux and Vuex state at the moment of each action – a powerful feature for debugging React and Vue apps. PostHog doesn't have native state management capture.
+
+- **AI session summaries:** PostHog includes [AI-powered session summaries](/docs/posthog-ai/session-summaries) as part of PostHog AI. LogRocket has Galileo AI, which proactively surfaces user struggle patterns and UX recommendations across sessions.
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
         'session_replay.platform_support.features.web_app_recordings',
         'session_replay.platform_support.features.mobile_app_recordings',
+        'session_replay.features.ai_summaries',
         'session_replay.identity.features.identity_detection',
         'session_replay.analysis.features.console_logs',
         'session_replay.organization.features.playlists',
@@ -100,20 +121,41 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
         'session_replay.privacy.features.privacy_masking',
         'session_replay.targeting.features.conditional_recording',
         'session_replay.export.features.export_to_json',
+        'heatmaps.features.heatmaps', 
+        'heatmaps.features.clickmaps', 
+        'heatmaps.features.scrollmaps',
     ]}
 />
+</p>
 
-### Heatmaps and click tracking
+### Error tracking
+ 
+LogRocket focuses on frontend JavaScript error tracking paired with session replay – you see the error alongside the full replay context of what the user was doing. 
 
+PostHog's [error tracking](/error-tracking) connects exceptions to session replays, user behavior, and feature flag changes, but is less mature than [dedicated tools for deep observability workflows](/blog/best-error-tracking-tools).
+ 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
-    rows={['heatmaps.features.heatmaps', 'heatmaps.features.clickmaps', 'heatmaps.features.scrollmaps']}
+    rows={[
+        'error_tracking',
+        'error_tracking.features.exception_capture',
+        'error_tracking.features.error_grouping',
+        'error_tracking.features.stack_tracing',
+        'error_tracking.features.console_log_capture',
+        'error_tracking.monitoring.performance_monitoring',
+        'error_tracking.monitoring.release_tracking',
+        'error_tracking.integrations.session_replay',
+        'error_tracking.integrations.product_analytics',
+    ]}
 />
+</p>
 
-### Tracking & SDKs
+### SDKs and tracking
 
-**Tl;dr:** Both support a broad range of tracking options and libraries, and manual event instrumentation, as well as autocapture, but LogRocket lacks server-side features.
+Both PostHog and LogRocket support broad tracking options, manual event instrumentation, and autocapture. PostHog supports a wide range of web, mobile, and server libraries, although not all features are available across all of them. LogRocket lacks server-side library support.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
@@ -124,16 +166,6 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
         'platform.developer.cross_domain_tracking',
         { label: 'Server-side tracking', description: 'Send events from your server', values: [true, false] },
         { label: 'Capture API', description: 'Send events through an API', values: [true, true] },
-    ]}
-/>
-
-### Library support
-
-PostHog supports a wide range of web, mobile, and server libraries, but not all features are equally available across all of them. LogRocket lacks support for server-side libraries.
-
-<ProductComparisonTable
-    competitors={['posthog', 'logrocket']}
-    rows={[
         'platform.libraries.features.javascript',
         'platform.libraries.features.python',
         'platform.libraries.features.node',
@@ -143,11 +175,13 @@ PostHog supports a wide range of web, mobile, and server libraries, but not all 
         'platform.libraries.features.react_native',
     ]}
 />
+</p>
 
 ### Data pipelines
 
-[PostHog offers more than 50 integrations and apps](/cdp), while [LogRocket offers slightly fewer](https://logrocket.com/features/integrations). As an open-source application, PostHog welcomes contributions from the community. If an integration you need isn’t available, [it’s possible to create it](/docs/apps/build)!
+PostHog offers [more than 50 integrations](/cdp), while LogRocket offers slightly fewer. Both tools integrate with popular third-party services.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
@@ -163,13 +197,15 @@ PostHog supports a wide range of web, mobile, and server libraries, but not all 
         'platform.integrations.airbyte',
     ]}
 />
+</p>
 
-### Popular integrations
+#### Popular integrations
 
-Below, we've listed a few of the most popular integrations used across PostHog and LogRocket. See our [app directory](/cdp) for a full list.
+See our [library](/data-stack/integrations-library) for a full list.
 
+<p>
 <ProductComparisonTable
-    competitors={['logrocket', 'posthog']}
+    competitors={['posthog', 'logrocket']}
     rows={[
         'platform.integrations.hubspot',
         'platform.integrations.salesforce',
@@ -181,9 +217,13 @@ Below, we've listed a few of the most popular integrations used across PostHog a
         'platform.integrations.segment',
     ]}
 />
+</p>
 
 ### Compliance
 
+Both PostHog and LogRocket are SOC 2 certified and GDPR-ready. PostHog adds HIPAA compliance, cookieless tracking, and an open-source codebase you can audit – useful for teams in regulated industries or with strict data residency requirements.
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'logrocket']}
     rows={[
@@ -194,43 +234,123 @@ Below, we've listed a few of the most popular integrations used across PostHog a
         'platform.security.soc2_certified',
         'platform.security.saml_sso',
         'platform.security.two_factor_auth',
+        'platform.deployment.eu_hosting',
     ]}
 />
+</p>
+
+## When to choose PostHog vs LogRocket
+
+- Want session replay connected to feature flags, A/B testing, product analytics, error tracking, and more – all in one platform with transparent pricing? Go with **PostHog**.
+
+- Need debugging with a focus on front-end engineering workflows? **LogRocket** is built for that.
+
+### Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – SQL access, open-source code, an [MCP server](/docs/model-context-protocol) for AI coding tools, feature flags, error tracking, and session replay connected to your full analytics. Everything lives in one platform with a shared data model.
+
+**For frontend engineers debugging production issues**
+- **LogRocket** – Galileo AI proactive issue surfacing and session replay paired with console logs and network monitoring are purpose-built for front-end debugging workflows. PostHog's replay is strong but doesn't match LogRocket here.
+
+**For teams who need feature flags and A/B testing**
+- **PostHog** – LogRocket has no feature flags or experiments natively. PostHog includes both, tightly integrated with analytics and session replay so you can measure impact and filter replays by flag variant.
+
+**For teams building AI products**
+- **PostHog** – [LLM analytics](/llm-analytics) tracks model performance, token costs, latency, and traces. The [MCP server](/docs/model-context-protocol) lets AI coding tools like Cursor and Claude Code query your product data without leaving the editor. LogRocket doesn't offer AI observability tooling.
+
+**For privacy-conscious and regulated organizations**
+- Both are SOC 2 certified and GDPR-ready. **PostHog** adds open-source code, cookieless tracking, EU data residency, and HIPAA compliance. LogRocket supports GDPR and CCPA but is closed source and doesn't publish HIPAA compliance.
+
+**For early-stage startups**
+- **PostHog** – A generous free tier across every product (1M events, 5k replays, 1M flag requests/mo), transparent pricing you can model in advance, and [startups can qualify for $50k in free credits](/startups). LogRocket's free tier is limited to 1,000 sessions/month with 1 month of data retention.
+
+<WizardCTA />
 
 ## Frequently asked questions
 
-Got another question? You can [ask the PostHog team anything you want](/questions)!
+<details>
+<summary>What's the difference between PostHog and LogRocket?</summary>
 
-### How much does PostHog cost?
+**LogRocket** is a frontend monitoring tool focused on session replay, JavaScript error tracking, and performance profiling. One standout features for engineering teams is Galileo AI, which proactively surfaces user struggle patterns and UX issues without manual review.
 
-PostHog has transparent pricing based on usage with a generous free tier:
+**PostHog** is an all-in-one developer platform combining [session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. The platform includes SQL access, an MCP server for AI coding tools, and an open-source codebase.
 
-|                       | **Free usage per month** |
-| --------------------- | ------------------------ |
-| **Product analytics** | 1 million events         |
-| **Session replay**    | 5,000 recordings         |
-| **Feature flags**     | 1 million API requests   |
-| **A/B testing**       | 1 million API requests   |
-| **Surveys**           | 1500 responses           |
+The key difference is scope: **LogRocket** is optimized for frontend engineers who want focused debugging tooling. **PostHog** is optimized for engineering-led teams who want to measure, experiment, and ship – all from one platform.
 
-We charge progressively less the more you use once you exceed your monthly free allowance. Volume, non-profit and [startup discounts](/startups) are also available.
+</details>
 
-### How can I estimate my usage?
+<details>
+<summary>Does LogRocket have feature flags or A/B testing?</summary>
 
-The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
+No. LogRocket doesn't offer native feature flags, A/B testing, or experimentation. You'd need a separate tool like LaunchDarkly, Statsig, or PostHog for this.
 
-### Does PostHog block bots by default?
+**PostHog** includes both [feature flags](/feature-flags) and [experimentation](/experiments) natively, tightly integrated with analytics and session replay. You can roll out features gradually, measure experiment impact on funnels and retention, and filter session replays to specific flag variants.
 
-Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
+</details>
 
-### What about ad blockers?
+<details>
+<summary>Does PostHog have Redux state capture like LogRocket?</summary>
 
-We recommend all users deploy a reverse proxy, which enables you to send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+Not natively. LogRocket's Redux/Vuex state management capture is one of its strongest differentiators for React and Vue engineering teams – you can see the exact application state at the moment something went wrong.
 
-### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
+PostHog's session replay captures console logs, network requests, DOM events, and performance metrics, but not Redux state directly. If Redux state capture is essential to your debugging workflow, LogRocket is the better choice for that specific use case.
 
-Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
+</details>
 
-### Where can I learn more about session replay tools beyond PostHog and LogRocket?
+<details>
+<summary>Can PostHog replace LogRocket?</summary>
 
-If you want a broader comparison across FullStory, Hotjar, OpenReplay, Replay.io, and more, check out our full guide to the [best session replay tools for developers](/blog/best-session-replay-tools).
+For most teams, yes. PostHog covers session replay, error tracking, and product analytics – and adds feature flags, A/B testing, and surveys that LogRocket doesn't have.
+
+Check out the [best LogRocket alternatives](/blog/best-logrocket-alternatives) if you're evaluating multiple options.
+
+</details>
+ 
+<details>
+<summary>How much does LogRocket cost?</summary>
+
+LogRocket's free Developer tier covers 1,000 sessions/month with 1 month of data retention. Team plans start at $69/month and scale by session count and user seats. Professional is custom pricing and includes performance monitoring and advanced reporting.
+
+</details>
+ 
+<details>
+<summary>How much does PostHog cost?</summary>
+
+PostHog uses transparent, usage-based [pricing](/pricing). It's free to get started – no credit card required – and every month you get 1 million analytics events, 5,000 session replays, and 1 million feature flag requests for free.
+
+After the free tier, you pay only for what you use, and pricing gets cheaper at scale. You can set billing limits per product to avoid surprises. Volume discounts and [startup credits of $50k](/startups) are available. More than 90% of PostHog users stay on the free tier.
+
+</details>
+ 
+<details>
+<summary>Does PostHog offer EU hosting?</summary>
+
+Yes. PostHog offers EU-hosted cloud with data stored exclusively in the EU. PostHog is SOC 2 certified, GDPR-ready, and HIPAA-ready, with cookieless tracking options and an open-source codebase you can audit.
+
+LogRocket supports GDPR and CCPA compliance but doesn't publish EU-specific data residency options.
+
+</details>
+ 
+<details>
+<summary>Is there a free LogRocket alternative?</summary>
+
+Yes. PostHog's free tier covers 5,000 session replays/month – 5x LogRocket's 1,000 – plus product analytics, feature flags, and more. Microsoft Clarity is completely free with unlimited sessions (though it has no product analytics or error tracking). Hotjar has a free tier for basic heatmaps and recordings.
+
+</details>
+ 
+<details>
+<summary>Does LogRocket have an MCP server?</summary>
+
+Yes, LogRocket has an MCP server that lets you query session data from AI coding tools. PostHog also has an [MCP server](/docs/model-context-protocol) that connects your full product data – analytics, feature flags, session replays, and more – to tools like Cursor and Claude Code.
+
+</details>
+ 
+<details>
+<summary>Where can I learn more about session replay tools beyond PostHog and LogRocket?</summary>
+
+For a broader comparison, check out our full guide to the [best LogRocket alternatives](/blog/best-logrocket-alternatives), which covers FullStory, Sentry, Glassbox, Smartlook, and Hotjar. For a wider view across the session replay market, see our guide to the [best session replay tools for developers](/blog/best-session-replay-tools).
+
+</details>
+
+<NewsletterForm />
