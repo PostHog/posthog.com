@@ -192,13 +192,17 @@ Here are some examples of what you can ask your AI agent to do with the PostHog 
 
 **Prompt:** "Create a feature flag called 'new-checkout-flow' that's enabled for 20% of users"
 
-The agent will use the `create-feature-flag` tool to create the flag with a 20% rollout and return the configuration including the key, rollout percentage, and a link to the flag in PostHog.
+The agent will use the `create-feature-flag` tool to create the flag with a 20% rollout. In clients that support MCP UI apps (like Claude Desktop), the response includes interactive visualizations showing the flag configuration, rollout percentage, and a direct link to the flag in PostHog.
+
+**Prompt:** "Show me all my feature flags"
+
+The agent will use the `feature-flag-get-all` tool to retrieve your flags. In supported clients, this displays as an interactive table with status badges, rollout bars, and clickable links to each flag's detail view.
 
 ### Multivariate feature flags
 
 **Prompt:** "Create a multivariate feature flag called 'homepage-hero-test' with three variants: control at 34%, variant_a at 33%, and variant_b at 33%"
 
-The agent will use the `create-feature-flag` tool with a `multivariate` configuration to create the flag with multiple variants. Variant rollout percentages must be integers that sum to 100.
+The agent will use the `create-feature-flag` tool with a `multivariate` configuration to create the flag with multiple variants. Variant rollout percentages must be integers that sum to 100. In supported clients, the response displays a variant table showing each variant's key, name, and rollout percentage.
 
 ### Analytics queries
 
