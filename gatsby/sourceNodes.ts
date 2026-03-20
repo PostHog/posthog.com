@@ -1114,4 +1114,47 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     await fetchAchievements()
     await fetchAchievementGroups()
     await fetchRewards()
+
+    const fetchIntegrationTemplates = async () => {
+        const STATUS_PRIORITY: Record<string, number> = { stable: 0, beta: 1, alpha: 2 }
+        const ALLOWED_STATUSES = new Set(['stable', 'beta', 'alpha'])
+
+        try {
+            const { results } = await fetch(
+                'https://us.posthog.com/api/projects/2/hog_function_templates?types=destination&limit=500'
+            ).then((res) => res.json())
+
+            const deduped = new Map<string, any>()
+            for (const template of results) {
+                if (!ALLOWED_STATUSES.has(template.status)) continue
+                const existing = deduped.get(template.name)
+                if (!existing || (STATUS_PRIORITY[template.status] ?? 99) < (STATUS_PRIORITY[existing.status] ?? 99)) {
+                    deduped.set(template.name, template)
+                }
+            }
+
+            for (const template of deduped.values()) {
+                const node = {
+                    id: createNodeId(`integration-template-${template.id}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'IntegrationTemplate',
+                        contentDigest: createContentDigest(template),
+                    },
+                    templateId: template.id,
+                    name: template.name,
+                    description: template.description || '',
+                    iconUrl: template.icon_url || '',
+                    status: template.status,
+                    categories: JSON.stringify(template.category || []),
+                }
+                createNode(node)
+            }
+        } catch (err) {
+            console.warn('Failed to fetch integration templates:', err)
+        }
+    }
+
+    await fetchIntegrationTemplates()
 }

@@ -1,21 +1,38 @@
 import React, { useState, useMemo } from 'react'
 import { PageProps, navigate, graphql, useStaticQuery } from 'gatsby'
-import Explorer from 'components/Explorer'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import * as Icons from '@posthog/icons'
-import {
-    integrations,
-    integrationSlug,
-    POSTHOG_PRODUCT_COLORS,
-    POSTHOG_CDN_ICONS,
-    DOCS_URL_OVERRIDES,
-    type Integration,
-} from './data'
+import useIntegrations, { POSTHOG_PRODUCT_COLORS, POSTHOG_CDN_ICONS, type Integration } from 'hooks/useIntegrations'
 
 const CDN_BASE = 'https://us.posthog.com'
+
+const PRODUCT_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+    'Product Analytics': Icons.IconGraph,
+    CDP: Icons.IconPlug,
+    'Data Warehouse': Icons.IconDatabase,
+    'Error Tracking': Icons.IconWarning,
+    'Feature Flags': Icons.IconToggle,
+    Experiments: Icons.IconFlask,
+    Workflows: Icons.IconDecisionTree,
+    'LLM Analytics': Icons.IconAI,
+}
+
+const PRODUCT_URLS: Record<string, string> = {
+    'Product Analytics': '/product-analytics',
+    CDP: '/cdp',
+    'Data Warehouse': '/data-warehouse',
+    'Error Tracking': '/error-tracking',
+    'Feature Flags': '/feature-flags',
+    Experiments: '/experiments',
+    Workflows: '/workflows',
+    'Session Replay': '/session-replay',
+    Surveys: '/surveys',
+    'Web Analytics': '/web-analytics',
+    'LLM Analytics': '/llm-analytics',
+}
 
 // --- Shared helpers (duplicated from index.tsx to keep pages independent) ---
 
@@ -29,24 +46,11 @@ const INTEGRATION_TYPE_COLORS: Record<string, string> = {
 }
 
 function getIconSrc(integration: Integration): string | null {
+    if (integration.iconUrl) return integration.iconUrl
     const cdnPath = POSTHOG_CDN_ICONS[integration.name]
     if (cdnPath) return cdnPath.startsWith('http') ? cdnPath : `${CDN_BASE}${cdnPath}`
-    return `https://logo.clearbit.com/${integration.domain}`
-}
-
-function getDocsUrl(integration: Integration): string {
-    const override = DOCS_URL_OVERRIDES[integration.name]
-    if (override) return override
-    const { posthogProducts } = integration
-    if (posthogProducts.includes('Error Tracking')) return '/docs/error-tracking/integrations'
-    if (posthogProducts.includes('LLM Analytics')) return '/docs/llm-analytics'
-    if (posthogProducts.includes('Feature Flags') || posthogProducts.includes('Experiments'))
-        return '/docs/feature-flags'
-    if (posthogProducts.includes('Data Warehouse')) return '/docs/data-warehouse/sources'
-    if (posthogProducts.includes('CDP')) return '/docs/cdp/destinations'
-    if (posthogProducts.includes('Workflows')) return '/docs/workflows'
-    if (posthogProducts.includes('Product Analytics')) return '/docs/product-analytics'
-    return '/docs'
+    if (integration.domain) return `https://logo.clearbit.com/${integration.domain}`
+    return null
 }
 
 // --- Logo component ---
@@ -161,8 +165,8 @@ function RelatedContentSection({ integration }: { integration: Integration }) {
 
     return (
         <div className="mt-10">
-            <h2 className="text-base font-semibold text-primary mb-4">Related content</h2>
-            <div className="border border-border rounded-lg overflow-hidden">
+            <h2 className="text-base font-semibold text-primary mb-4">News</h2>
+            <div className="border border-border rounded overflow-hidden">
                 <table className="w-full text-sm">
                     <thead>
                         <tr className="border-b border-border bg-accent/50">
@@ -253,6 +257,50 @@ function RelatedContentSection({ integration }: { integration: Integration }) {
 
 // --- Documentation section ---
 
+const DOC_SECTION_LABELS: Record<string, string> = {
+    cdp: 'CDP',
+    'data-warehouse': 'Data Warehouse',
+    'product-analytics': 'Product Analytics',
+    'session-replay': 'Session Replay',
+    'feature-flags': 'Feature Flags',
+    experiments: 'Experiments',
+    'error-tracking': 'Error Tracking',
+    'llm-analytics': 'LLM Analytics',
+    surveys: 'Surveys',
+    workflows: 'Workflows',
+    'web-analytics': 'Web Analytics',
+    libraries: 'SDKs',
+    integrate: 'Getting Started',
+    integrations: 'Integrations',
+    webhooks: 'Webhooks',
+    api: 'API',
+    toolbar: 'Toolbar',
+    'data-pipelines': 'Data Pipelines',
+    actions: 'Actions',
+    apps: 'Apps',
+    migration: 'Migration',
+    hogql: 'HogQL',
+    hog: 'Hog',
+    notebooks: 'Notebooks',
+    'getting-started': 'Getting Started',
+    advanced: 'Advanced',
+}
+
+function getDocLabel(slug: string): string {
+    const parts = slug.replace(/^\/docs\//, '').split('/')
+    for (const part of parts) {
+        if (DOC_SECTION_LABELS[part]) return DOC_SECTION_LABELS[part]
+    }
+    const first = parts[0]
+    if (first) {
+        return first
+            .split('-')
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' ')
+    }
+    return 'Docs'
+}
+
 function DocumentationSection({ integration }: { integration: Integration }) {
     const data = useIntegrationPageData()
 
@@ -273,22 +321,93 @@ function DocumentationSection({ integration }: { integration: Integration }) {
         <div className="mt-10">
             <h2 className="text-base font-semibold text-primary mb-4">Documentation</h2>
             <div className="grid @sm:grid-cols-2 gap-3">
-                {items.map((item) => (
-                    <Link
-                        key={item.fields.slug}
-                        to={item.fields.slug}
-                        state={{ newWindow: true }}
-                        className="flex items-center gap-3 p-3.5 rounded-lg border border-border bg-accent/30 hover:bg-accent hover:border-border transition-colors group no-underline"
-                    >
-                        <div className="size-9 rounded-md bg-green/10 border border-green/20 flex items-center justify-center flex-shrink-0">
-                            <Icons.IconBook className="size-4.5 text-green" />
-                        </div>
-                        <span className="text-sm font-medium text-primary group-hover:text-primary leading-snug line-clamp-2">
-                            {item.frontmatter.title}
-                        </span>
-                        <Icons.IconArrowRight className="size-4 text-muted ml-auto flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </Link>
-                ))}
+                {items.map((item) => {
+                    const label = getDocLabel(item.fields.slug)
+                    return (
+                        <Link
+                            key={item.fields.slug}
+                            to={item.fields.slug}
+                            state={{ newWindow: true }}
+                            className="flex items-center gap-3 p-3.5 rounded border border-border bg-accent/30 hover:bg-accent hover:border-border transition-colors group no-underline"
+                        >
+                            <div className="size-9 rounded-md bg-green/10 border border-green/20 flex items-center justify-center flex-shrink-0">
+                                <Icons.IconBook className="size-4.5 text-green" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                                <span className="text-sm font-medium text-primary group-hover:text-primary leading-snug line-clamp-2 block">
+                                    {item.frontmatter.title}
+                                </span>
+                                <span className="text-2xs text-muted mt-0.5 block">{label}</span>
+                            </div>
+                            <Icons.IconArrowRight className="size-4 text-muted ml-auto flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </Link>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
+// --- Sidebar listing all integrations ---
+
+const IntegrationSidebarLogo = ({ integration }: { integration: Integration }) => {
+    const [errored, setErrored] = useState(false)
+    const src = getIconSrc(integration)
+
+    if (!src || errored) {
+        return (
+            <div className="size-5 rounded flex items-center justify-center bg-accent border border-border text-secondary font-bold flex-shrink-0 text-2xs">
+                {integration.name.charAt(0).toUpperCase()}
+            </div>
+        )
+    }
+    return (
+        <img
+            src={src}
+            alt=""
+            className="size-5 object-contain flex-shrink-0 rounded"
+            onError={() => setErrored(true)}
+        />
+    )
+}
+
+const IntegrationsSidebar = ({
+    currentSlug,
+    allIntegrations,
+}: {
+    currentSlug: string
+    allIntegrations: Integration[]
+}) => {
+    const sorted = useMemo(() => [...allIntegrations].sort((a, b) => a.name.localeCompare(b.name)), [allIntegrations])
+
+    return (
+        <div className="py-2">
+            <Link
+                to="/integrations"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted hover:text-primary transition-colors mb-1"
+            >
+                <Icons.IconChevronLeft className="size-3" />
+                All integrations
+            </Link>
+            <div className="px-3 py-1 text-xs font-semibold text-muted uppercase tracking-wide">Integrations</div>
+            <div className="mt-1 space-y-px">
+                {sorted.map((i) => {
+                    const isActive = i.slug === currentSlug
+                    return (
+                        <Link
+                            key={i.name}
+                            to={`/integrations/${i.slug}`}
+                            className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded transition-colors no-underline ${
+                                isActive
+                                    ? 'bg-accent text-primary font-semibold'
+                                    : 'text-secondary hover:bg-accent hover:text-primary'
+                            }`}
+                        >
+                            <IntegrationSidebarLogo integration={i} />
+                            <span className="truncate">{i.name}</span>
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     )
@@ -298,8 +417,8 @@ function DocumentationSection({ integration }: { integration: Integration }) {
 
 export default function IntegrationDetailPage({ params }: PageProps) {
     const { slug } = params
-    const integration = integrations.find((i) => integrationSlug(i.name) === slug)
-    const docsUrl = integration ? getDocsUrl(integration) : '/docs'
+    const { integrations, getIntegration } = useIntegrations()
+    const integration = getIntegration(slug)
 
     return (
         <>
@@ -307,141 +426,126 @@ export default function IntegrationDetailPage({ params }: PageProps) {
                 title={integration ? `${integration.name} – PostHog Integrations` : 'Integration not found'}
                 description={integration?.useCase}
             />
-            <Explorer
-                template="generic"
-                slug={`integrations/${slug}`}
+            <ReaderView
                 title={integration?.name ?? 'Integration'}
-                showTitle={false}
-                headerBarOptions={['showBack', 'showForward', 'showSearch']}
-                padding={false}
-                fullScreen={true}
+                hideTitle={true}
+                leftSidebar={<IntegrationsSidebar currentSlug={slug} allIntegrations={integrations} />}
+                hideRightSidebar={true}
+                padding={true}
+                contentMaxWidthClass="max-w-2xl"
             >
-                <div className="@container h-full overflow-hidden">
-                    <ScrollArea className="h-full">
-                        <div className="max-w-2xl mx-auto px-6 py-10">
-                            {!integration ? (
-                                <div className="text-center py-20">
-                                    <p className="text-lg text-muted mb-4">Integration not found.</p>
-                                    <OSButton variant="secondary" size="sm" asLink to="/integrations">
-                                        Back to integrations
-                                    </OSButton>
-                                </div>
-                            ) : (
-                                <>
-                                    {/* Back link */}
-                                    <button
-                                        onClick={() => navigate('/integrations')}
-                                        className="flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors mb-8 group"
-                                    >
-                                        <Icons.IconChevronLeft className="size-4 group-hover:-translate-x-0.5 transition-transform" />
-                                        All integrations
-                                    </button>
-
-                                    {/* Header */}
-                                    <div className="flex items-start gap-5 mb-8">
-                                        <IntegrationLogo integration={integration} size="xl" />
-                                        <div className="flex-1 min-w-0">
-                                            <h1 className="text-3xl font-bold text-primary m-0 leading-tight">
-                                                {integration.name}
-                                            </h1>
-                                        </div>
-                                    </div>
-
-                                    {/* Description */}
-                                    <p className="text-base text-secondary leading-relaxed mb-8">
-                                        {integration.useCase}
-                                    </p>
-
-                                    {/* CTA */}
-                                    <OSButton
-                                        variant="primary"
-                                        size="lg"
-                                        asLink
-                                        to={docsUrl}
-                                        state={{ newWindow: true }}
-                                        icon={<Icons.IconBook className="size-5" />}
-                                        className="mb-10"
-                                    >
-                                        Installation guide
-                                    </OSButton>
-
-                                    {/* Meta grid */}
-                                    <div className="border-t border-primary pt-8 grid @md:grid-cols-2 gap-6">
-                                        {integration.categories.length > 0 && (
-                                            <div>
-                                                <div className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
-                                                    Category
-                                                </div>
-                                                <div className="flex flex-wrap gap-1.5">
-                                                    {integration.categories.map((c) => (
-                                                        <button
-                                                            key={c}
-                                                            onClick={() =>
-                                                                navigate(
-                                                                    `/integrations?category=${encodeURIComponent(c)}`
-                                                                )
-                                                            }
-                                                            className="text-sm px-2.5 py-1 rounded-md bg-accent text-secondary border border-border hover:text-primary hover:border-border transition-colors"
-                                                        >
-                                                            {c}
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        <div>
-                                            <div className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
-                                                PostHog products
-                                            </div>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                {integration.posthogProducts.map((p) => {
-                                                    const color = POSTHOG_PRODUCT_COLORS[p] || 'blue'
-                                                    return (
-                                                        <span
-                                                            key={p}
-                                                            className={`text-sm px-2.5 py-1 rounded-md bg-${color}/10 text-${color} font-medium`}
-                                                        >
-                                                            {p}
-                                                        </span>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-
-                                        {integration.integrationTypes.length > 0 && (
-                                            <div>
-                                                <div className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
-                                                    Integration type
-                                                </div>
-                                                <div className="flex flex-wrap gap-1.5">
-                                                    {integration.integrationTypes.map((t) => {
-                                                        const color = INTEGRATION_TYPE_COLORS[t] || 'muted'
-                                                        return (
-                                                            <span
-                                                                key={t}
-                                                                className={`text-sm px-2.5 py-1 rounded-md bg-${color}/10 text-${color} border border-${color}/20 font-medium`}
-                                                            >
-                                                                {t}
-                                                            </span>
-                                                        )
-                                                    })}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Documentation */}
-                                    <DocumentationSection integration={integration} />
-
-                                    {/* Related content */}
-                                    <RelatedContentSection integration={integration} />
-                                </>
-                            )}
+                <div className="not-prose pt-6 pb-12">
+                    {!integration ? (
+                        <div className="text-center py-20">
+                            <p className="text-lg text-muted mb-4">Integration not found.</p>
+                            <OSButton variant="secondary" size="sm" asLink to="/integrations">
+                                Back to integrations
+                            </OSButton>
                         </div>
-                    </ScrollArea>
+                    ) : (
+                        <>
+                            {/* Header */}
+                            <div className="flex items-start gap-5 mb-8">
+                                <IntegrationLogo integration={integration} size="xl" />
+                                <div className="flex-1 min-w-0">
+                                    <h1 className="text-3xl font-bold text-primary m-0 leading-tight">
+                                        {integration.name}
+                                    </h1>
+                                </div>
+                            </div>
+
+                            {/* Description */}
+                            <p className="text-base text-secondary leading-relaxed mb-8">{integration.useCase}</p>
+
+                            {/* Meta grid */}
+                            <div className="border-t border-primary pt-8 grid @md/reader-content:grid-cols-2 gap-6">
+                                {integration.categories.length > 0 && (
+                                    <div>
+                                        <div className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
+                                            Category
+                                        </div>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {integration.categories.map((c) => (
+                                                <button
+                                                    key={c}
+                                                    onClick={() =>
+                                                        navigate(`/integrations?category=${encodeURIComponent(c)}`)
+                                                    }
+                                                    className="text-sm px-2.5 py-1 rounded-md bg-accent text-secondary border border-border hover:text-primary hover:border-border transition-colors"
+                                                >
+                                                    {c}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div>
+                                    <div className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
+                                        PostHog products
+                                    </div>
+                                    <div className="flex flex-col gap-1">
+                                        {integration.posthogProducts.map((p) => {
+                                            const color = POSTHOG_PRODUCT_COLORS[p] || 'blue'
+                                            const ProductIcon = PRODUCT_ICONS[p]
+                                            const url = PRODUCT_URLS[p]
+                                            const content = (
+                                                <>
+                                                    {ProductIcon && <ProductIcon className={`size-4 text-${color}`} />}
+                                                    {p}
+                                                </>
+                                            )
+                                            return url ? (
+                                                <Link
+                                                    key={p}
+                                                    to={url}
+                                                    className="flex items-center gap-1.5 text-sm text-primary hover:opacity-70"
+                                                >
+                                                    {content}
+                                                </Link>
+                                            ) : (
+                                                <span
+                                                    key={p}
+                                                    className="flex items-center gap-1.5 text-sm text-primary"
+                                                >
+                                                    {content}
+                                                </span>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+
+                                {integration.integrationTypes.length > 0 && (
+                                    <div>
+                                        <div className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
+                                            Integration type
+                                        </div>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {integration.integrationTypes.map((t) => {
+                                                const color = INTEGRATION_TYPE_COLORS[t] || 'muted'
+                                                return (
+                                                    <span
+                                                        key={t}
+                                                        className={`text-sm px-2.5 py-1 rounded-md bg-${color}/10 text-${color} border border-${color}/20 font-medium`}
+                                                    >
+                                                        {t}
+                                                    </span>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Documentation */}
+                            <DocumentationSection integration={integration} />
+
+                            {/* Related content */}
+                            <RelatedContentSection integration={integration} />
+                        </>
+                    )}
                 </div>
-            </Explorer>
+            </ReaderView>
         </>
     )
 }
