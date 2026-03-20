@@ -77,10 +77,10 @@ By default, PostHog uses `toStartOfDay` to bucket your data. This means each row
 
 You can customize the bucket granularity for each timestamp column directly in the **Configuration** tab. When materialization is enabled and your query has timestamp range variables, a dropdown appears for each timestamp column, letting you select a bucket size:
 
-- **Hour** - More precise results, more rows stored
-- **Day** - Default granularity
-- **Week** - Less granular results, fewer rows stored
-- **Month** - Least granular results
+- **Hour**
+- **Day**
+- **Week**
+- **Month**
 
 Smaller buckets give more precise results, while larger buckets produce less granular results.
 
