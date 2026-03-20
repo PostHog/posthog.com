@@ -269,6 +269,10 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+**Prompt:** "Duplicate the 'support-assistant' prompt to 'support-assistant-v2'"
+
+The agent will use the `prompt-duplicate` tool to copy the latest version of the source prompt to a new prompt with the specified name. The new prompt starts at version 1. This is useful when prompt names are immutable and you need to create a variation or fork for testing.
+
 ### Annotation management
 
 **Prompt:** "Create an annotation for today saying 'Deployed v2.5 with new checkout flow'"
