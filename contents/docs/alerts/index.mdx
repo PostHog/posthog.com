@@ -132,6 +132,18 @@ The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, c
 - "Update my pageview alert threshold to 5000"
 - "Delete the old conversion alert"
 
+### Simulate anomaly detectors
+
+You can use PostHog AI or MCP to test anomaly detection configurations on historical insight data before creating an alert. The simulation is read-only and doesn't create any alert or check records.
+
+**Example prompts:**
+
+- "Simulate a zscore detector on my daily signups trend"
+- "Test anomaly detection on my pageviews insight using isolation forest"
+- "Preview how an ensemble detector with zscore and mad would perform on my revenue trend"
+
+You can also specify how far back to simulate (e.g. `-30d`, `-48h`) and which series to analyze.
+
 ## Relative alerts
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
@@ -149,6 +161,31 @@ This will then also enable you to set a percentage threshold.
 ### Thresholds
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
+
+## Anomaly detection alerts
+
+As an alternative to threshold-based alerts, you can use anomaly detection to automatically identify unusual patterns in your data. This is available through [PostHog AI](/docs/posthog-ai/overview) and the [MCP server](/docs/model-context-protocol).
+
+Supported detector types:
+
+- **zscore** - Detects outliers based on standard deviations from the mean
+- **mad** - Median Absolute Deviation, robust to outliers in the training data
+- **iqr** - Interquartile Range, flags points outside the typical distribution
+- **threshold** - Simple upper/lower bound checking
+- **isolation_forest** - Machine learning approach that isolates anomalies
+- **knn** - K-Nearest Neighbors based anomaly scoring
+- **ensemble** - Combines two or more detectors with AND/OR logic
+
+Key configuration parameters:
+
+- **threshold** - Sensitivity from 0 to 1 (default 0.9). Higher values mean fewer anomalies are flagged.
+- **window** - Window size for rolling calculations
+
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+
+Anomaly detection alerts are currently available via PostHog AI and MCP tools. Use the [simulate tool](#simulate-anomaly-detectors) to test a detector configuration on historical data before creating an alert.
+
+</CalloutBox>
 
 
 ## Notifications
