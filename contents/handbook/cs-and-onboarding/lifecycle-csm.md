@@ -48,8 +48,8 @@ Here are a couple examples that have came up previously:
 
 ## What "deeply embedded" actually looks like
 At this stage, you're "deployed" in the field with them and collaborating on implementation decisions:
-- Providing custom solutions: Working with their engineers to define and implement custom events that map to their core business metrics. For example, you're meeting with them and mapping their user journeys to specific tracking plans. You're properly embedded at this point, almost like their own team member who's an expert at PostHog.
-- Further deepening their connection with PostHog via real-time destinations and usage of our data warehouse; your presence on their team should accelerate the centralization of their data.
+- Providing custom solutions - Working with their engineers to define and implement custom events that map to their core business metrics. For example, you're meeting with them and mapping their user journeys to specific tracking plans. You're properly embedded at this point, almost like their own team member who's an expert at PostHog.
+- Further deepening their connection with PostHog via Real-Time Destinations and usage of our Data Warehouse; your presence on their team should accelerate the centralization of their data.
 - Helping their team design a structured experimentation program using our suite of products — what to test, how to measure it, and what it means for shipping new features on their end. You have influence as a trusted subject matter expert, so they should look to you for how to design programs that ladder up to *their* business goals.
 - **Note**: While you're embedded, make sure to document any new setups, experiment designs, etc so their team can maintain it without you.
 
