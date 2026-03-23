@@ -10,6 +10,7 @@ import {
     SvelteInstallation,
     NuxtInstallation,
     RemixInstallation,
+    ReactRouterInstallation,
     // Mobile SDK installations
     IOSInstallation,
     AndroidInstallation,
@@ -87,6 +88,12 @@ export const SRNuxtInstallationWrapper = () => (
 export const SRRemixInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
         <RemixInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const SRReactRouterInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={SNIPPETS}>
+        <ReactRouterInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

@@ -394,8 +394,8 @@ module.exports = {
             resolve: `gatsby-source-git`,
             options: {
                 name: `posthog-main-repo`,
-                remote: `https://github.com/posthog/posthog.git`,
-                branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
+                remote: `https://github.com/the-artifabrian/posthog.git`,
+                branch: process.env.GATSBY_POSTHOG_BRANCH || 'feat/react-router-onboarding-sdk',
                 patterns: ['docs/published/**', 'docs/onboarding/**'],
             },
         },
