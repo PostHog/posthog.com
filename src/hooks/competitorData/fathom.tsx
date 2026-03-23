@@ -120,6 +120,9 @@ export const fathom = {
                 scrollmaps: false,
             },
         },
+        error_tracking: {
+            available: false,
+        },
     },
     platform: {
         analytics_integration: {

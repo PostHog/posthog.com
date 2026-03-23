@@ -357,6 +357,12 @@ export const amplitude = {
         llm_analytics: {
             available: false,
         },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
@@ -406,6 +412,7 @@ export const amplitude = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
     pricing: {

@@ -41,11 +41,12 @@ Add entries under each question with your initials/name like: "- (your name): My
 - Hope
   - What are you most excited about this quarter?
   - What exploration do you want to do?
-  - We want to make products proactive by default and feeding into signals. Is this possible and what would it look like?
+  - For Error Tracking/Session Replay/Experiments/Conversations/Experiments/Conversations/Product Analytics/LLM Analytics:
+    We want to make PostHog proactive. How do we programmatically emit signals - i.e. research prompts for an agent with code access & PostHog MCP – that will result in quality concrete code changes?
 - Obstruction
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
-  - Does your product work with our MCP server? Could this be improved?
+  - Can your product be used by agents (Claude Code/Cursor/etc.) via our MPC server? What MCP tools or skills are missing right now?
 - Growth
   - What single thing would move the needle the most this quarter?
     - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._

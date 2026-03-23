@@ -214,6 +214,10 @@ export const hotjar = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: false,
+            },
+            monitoring: {
+                performance_monitoring: false,
             },
         },
         dashboards: {
@@ -265,6 +269,7 @@ export const hotjar = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             ccpa_ready: true,

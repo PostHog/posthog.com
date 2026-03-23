@@ -60,7 +60,7 @@ That leaves **activation** and **retention** as the responsibilities of product 
 
 - For product teams, it shows the impact of product launches and changes.
 
-- For engineers, it clarifies what to work on better than “general usage.”
+- For engineers, it clarifies [what to work on](/newsletter/what-does-a-product-manager-do) better than “general usage.”
 
 - For customer-facing teams, it’s a warning that users aren’t succeeding.
 
