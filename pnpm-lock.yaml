@@ -254,6 +254,9 @@ importers:
       glob:
         specifier: ^10.3.10
         version: 10.4.5
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
       html-to-image:
         specifier: ^1.11.11
         version: 1.11.13
