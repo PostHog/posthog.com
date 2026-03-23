@@ -290,6 +290,38 @@ PostHogSDK.shared.identify("distinct_id_two",
 </MultiLanguage>
 
 
+### When are merges blocked?
+
+PostHog blocks certain merges to prevent accidentally combining distinct users. Here's exactly when a merge is refused:
+
+**For `identify` and `alias` calls:**
+
+A merge is blocked when the **source** person (the `$anon_distinct_id` or `alias` side) already has `is_identified` set to `true`. This flag is set whenever a person has previously been the target of an `identify`, `alias`, or `$merge_dangerously` call.
+
+For example:
+
+```js-web
+// User A identifies — their person is now marked as identified
+posthog.identify('user-A')
+
+// Later, someone tries to merge User A into User C
+// This is BLOCKED because User A's person is already identified
+posthog.identify('user-C', {}, {}, { $anon_distinct_id: 'user-A' })
+```
+
+**For `$merge_dangerously`:**
+
+There are **no merge restrictions**. This is why it's called "dangerously" — it bypasses all safety checks. Use it only for recovery from implementation issues.
+
+**What happens when a merge is blocked?**
+
+1. The event is still ingested normally.
+2. The merge is silently skipped (no error returned to the client).
+3. An [ingestion warning](/manual/data-management#ingestion-warnings) of type `cannot_merge_already_identified` is logged, visible in **Data management > Ingestion warnings**.
+4. The two persons remain separate.
+
+> **Note:** Regular `capture()` calls never set the `is_identified` flag, regardless of whether they come from a frontend or backend SDK. Only `identify`, `alias`, and `$merge_dangerously` events set this flag.
+
 ### How to merge users
 
 It may happen that, due to implementation issues, the same user in your product has multiple users in PostHog associated with them. In these cases, you can use `$merge_dangerously` to merge multiple PostHog users into a single user.
