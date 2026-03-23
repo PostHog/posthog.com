@@ -480,7 +480,7 @@ export default function Desktop() {
                 <div
                     data-scheme="primary"
                     data-app="Desktop"
-                    className={`fixed size-full ${websiteMode ? '-z-10 inset-0' : ''}`}
+                    className={`fixed size-full ${websiteMode ? '-z-10 inset-0' : 'top-0 pt-12'}`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >

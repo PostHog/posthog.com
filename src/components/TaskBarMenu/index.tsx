@@ -277,8 +277,8 @@ export default function TaskBarMenu() {
                 data-scheme="primary"
                 data-menu-container
                 className={`w-full bg-primary/50 backdrop-blur-3xl skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-b border-secondary top-0 pl-0.5 pr-2 ${
-                    websiteMode ? 'sticky top-0 z-40' : 'bg-[#f5e8cb] z-50'
-                } ${rendered ? 'block' : 'hidden'}`}
+                    websiteMode ? 'sticky top-0 z-40' : 'z-50 shadow-2xl'
+                } ${rendered ? 'fixed top-0 z-40' : 'hidden'}`}
             >
                 <div
                     className={`mx-auto transition-all duration-300 flex justify-between items-center w-full ${

@@ -39,7 +39,7 @@ export default function Wrapper() {
             id="app-container"
         >
             {!compact && <TaskBarMenu />}
-            <div ref={constraintsRef} className={`flex-grow relative`}>
+            <div ref={constraintsRef} className={`flex-grow relative pt-12`}>
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item, index) => {
