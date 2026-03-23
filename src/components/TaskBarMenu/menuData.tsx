@@ -249,6 +249,13 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             mobileDestination: '/products',
         },
         {
+            type: 'item',
+            label: 'Integrations',
+            link: '/integrations',
+            icon: <Icons.IconPlug className="size-4 text-seagreen" />,
+            mobileDestination: '/integrations',
+        },
+        {
             type: 'separator',
         },
         {
@@ -1061,6 +1068,11 @@ export function useMenuSelectOptions() {
                     value: 'products',
                     label: 'Product OS',
                     icon: <Icons.IconApps className="size-4 text-red" />,
+                },
+                {
+                    value: 'integrations',
+                    label: 'Integrations',
+                    icon: <Icons.IconPlug className="size-4 text-seagreen" />,
                 },
             ],
         },
