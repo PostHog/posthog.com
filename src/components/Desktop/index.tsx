@@ -527,15 +527,7 @@ export default function Desktop() {
 
                     {/* Keyboard garden */}
                     <div className="hidden select-none wallpaper-keyboard-garden:block">
-                        <div
-                            className="absolute inset-0 opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_03a349af5c.png')",
-                                backgroundSize: '100px 100px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
+                        <div className="absolute inset-0 opacity-100 bg-gradient-to-b from-[#FDEECD] to-[#FFFEF4]" />
                         <div
                             className="absolute inset-0 opacity-0 dark:opacity-100"
                             style={{
@@ -549,15 +541,15 @@ export default function Desktop() {
                             className={`absolute ${
                                 websiteMode
                                     ? 'bottom-4 -right-4 @[2600px]:right-4'
-                                    : 'bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0'
+                                    : 'bottom-4 md:bottom-0 -right-4 xs:right-8 md:right-0'
                             }`}
                         >
                             <CloudinaryImage
                                 loading="lazy"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                width={1401}
-                                height={1400}
-                                className={`${websiteMode ? '' : 'size-[300px] md:size-[700px]'} dark:hidden`}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hedges_ec3edc2a40.png"
+                                width={1802}
+                                height={1512}
+                                className={`${websiteMode ? '' : 'w-[300px] md:w-[700px]'} dark:hidden`}
                                 style={
                                     websiteMode
                                         ? {
