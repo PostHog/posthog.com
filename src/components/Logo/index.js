@@ -4,8 +4,8 @@ export default function Logo({ noText = false, color = '', fill = '', className 
     return (
         <svg
             className={`${className} ${fill ? 'fill-' + fill : ''}`}
-            width={noText ? '52' : '161'}
-            height="28"
+            // width={noText ? '52' : '161'}
+            // height="28"
             viewBox={`0 0 ${noText ? '52' : '161'} 28`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

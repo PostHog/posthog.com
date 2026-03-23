@@ -1264,8 +1264,14 @@ const HomeLogo = () => {
     const { siteSettings } = useApp()
     return (
         <>
-            <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
-            <span className="relative -top-0.5">is where you build.</span>
+            <Logo className="inline-block h-8 mr-1" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+            <span className="relative -top-px -left-px font-matter text-[1.75rem]">
+                is where you{' '}
+                <span className="relative inline-flex px-2 after:h-[3px] after:bg-black after:absolute after:top-full after:left-0 after:right-0 after:rounded-full after:content-['']">
+                    build
+                </span>
+                .
+            </span>
         </>
     )
 }
