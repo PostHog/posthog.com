@@ -52,12 +52,14 @@ Each query send to ClickHouse must have the following tags:
 
   * name: ?String - you can name your queries,
   * http_request_id: ?String - HTTP request that initiated a query, set only if is a proper UUID.
+  * source_file: ?String - the relative path to the Python file that initiated the query, automatically populated via stack inspection,
+  * source_line: ?Int64 - the line number in the source file that initiated the query, automatically populated via stack inspection.
 
 Types were reverse engineered from our ClickHouse `system.query_log.log_comment` column.
 
 ### Current state of log_comment
 
-We use at least 42 unique tags:
+We use at least 44 unique tags:
 
 | Tag Key | Occurrences |
 |---------|-------------|
@@ -103,6 +105,8 @@ We use at least 42 unique tags:
 | clickhouse_exception_type | 556 |
 | usage_report | 25 |
 | batch_export_id | 16 |
+| source_file | (new) |
+| source_line | (new) |
 
 
 #### Queries to dive into `log_comment`
