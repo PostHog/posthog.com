@@ -6430,6 +6430,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/workflows/best-practices',
                     icon: 'IconStar',
