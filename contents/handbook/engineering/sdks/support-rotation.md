@@ -23,7 +23,7 @@ Firstly, try to stay on top of new escalated Zendesk tickets and GitHub issues, 
 
 Next, please work on SDK tickets in Zendesk, and GitHub issues labelled `SDK Support Hero` (and unlabelled, but please label these!). You can use your own judgement to decide which issues to work on but please consider effort / reward / urgency / your skill set. For example, `posthog-js` usually has the most issues, but if you're a Python expert, you might want to focus on `posthog-python`.
 
-For mobile SDK issues, prioritize accordingly — rolling out fixes on mobile apps may take weeks or even months, so faster turnaround on these is important.
+For mobile SDK issues, prioritize accordingly — rolling out fixes on mobile apps may take weeks or even months, so faster turnaround on these is important. Make sure, however, to validate changes carefully, avoid breaking changes and think through edge cases before shipping, since our ability to correct mistakes after release is significantly constrained.
 
 At the end of the week, please write a public handover message in `#support-client-libraries`, to let the next person know what work is in progress, let the team know how the support rotation is going in general, and to share any learnings or feedback.
 
