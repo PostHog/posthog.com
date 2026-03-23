@@ -479,11 +479,8 @@
 }
 
 body {
-    font-family: 'IBM Plex Sans Variable', 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next',
-        'avenir', 'segoe ui', 'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
-    overflow-x: hidden;
+    @apply font-sans overflow-x-hidden m-0;
     word-wrap: break-word;
-    margin: 0;
 }
 body.light {
     background-color: #eeefe9;
@@ -1927,9 +1924,7 @@ li.squeak-left-border {
 }
 
 .text-gradient {
-    @apply text-transparent bg-clip-text animate-text-gradient 
-         bg-[linear-gradient(90deg,#30ABC6,#F35454,#2F80FA)] 
-    dark:bg-[linear-gradient(90deg,#F54E00,#F7A501,#29DBBB,#EB9D2A,#F54E00)];
+    @apply text-transparent bg-clip-text animate-text-gradient bg-text-gradient-light dark:bg-text-gradient-dark;
 }
 
 .hide-number-arrows::-webkit-outer-spin-button,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { IconRewindPlay, IconX } from '@posthog/icons'
+import { IconHome, IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
@@ -38,7 +38,7 @@ export const useProductLinks = () => {
     return [
         {
             label: 'home.mdx',
-            Icon: <AppIcon name="doc" />,
+            Icon: <IconHome className="inline-block size-5 text-primary" />,
             url: '/',
             source: 'desktop',
         },
@@ -529,6 +529,16 @@ export default function Desktop() {
                     <div className="hidden select-none wallpaper-keyboard-garden:block">
                         <div className="absolute inset-0 opacity-100 bg-gradient-to-b from-[#FDEECD] to-[#FFFEF4]" />
                         <div
+                            className="absolute inset-0 opacity-100"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/grass_2x_3dc2ffb4bc.jpg')",
+                                backgroundSize: 'cover',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: 'right bottom',
+                            }}
+                        />
+                        <div
                             className="absolute inset-0 opacity-0 dark:opacity-100"
                             style={{
                                 backgroundImage:
@@ -544,7 +554,7 @@ export default function Desktop() {
                                     : 'bottom-4 md:bottom-0 -right-4 xs:right-8 md:right-0'
                             }`}
                         >
-                            <CloudinaryImage
+                            {/* <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/hedges_ec3edc2a40.png"
                                 width={1802}
@@ -553,13 +563,13 @@ export default function Desktop() {
                                 style={
                                     websiteMode
                                         ? {
-                                              width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
-                                              height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
-                                          }
+                                            width: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                            height: 'clamp(8rem, calc(4rem + (100vw - 80rem) * 0.45), 42rem)',
+                                        }
                                         : undefined
                                 }
                                 draggable={false}
-                            />
+                            /> */}
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"

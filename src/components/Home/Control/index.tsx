@@ -44,6 +44,7 @@ import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
 import WizardCommand from 'components/WizardCommand'
+
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -92,33 +93,22 @@ const HomeHappyHog = () => {
 }
 
 const CTAs = () => {
-    const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <div>
-            <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
+            <WizardCommand latest={false} />
+            <br />
+            <span className="text-sm">
+                or{' '}
                 <CallToAction
                     to="https://app.posthog.com/signup"
-                    size="md"
+                    size="sm"
                     state={{ newWindow: true, initialTab: 'signup' }}
+                    type="custom"
+                    className="text-sm"
                 >
-                    Get started - free
+                    sign up in the browser
                 </CallToAction>
-                <CallToAction type="secondary" size="md" onClick={() => setShowIntegrationPrompt(true)}>
-                    Install with AI
-                </CallToAction>
-            </div>
-            <motion.div
-                className="overflow-hidden"
-                initial={{ height: 0 }}
-                animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
-            >
-                <div
-                    data-scheme="secondary"
-                    className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
-                >
-                    <IntegrationPrompt />
-                </div>
-            </motion.div>
+            </span>
         </div>
     )
 }
@@ -1231,9 +1221,18 @@ const Customers = () => {
 
 function TaglineControl(): JSX.Element {
     return (
-        <p className="text-base font-medium">
-            We make dev tools that help product engineers build successful products.
-        </p>
+        <>
+            <p className="text-base font-medium">
+                PostHog is the first platform that{' '}
+                <strong>closes the loop between what's broken, who it's affecting, and the fix</strong> —{' '}
+                <em>without a human playing telephone between analytics, error tracking, and a code editor.</em>
+            </p>
+            <p className="text-base font-medium">
+                It's more than analytics, more than an AI coding tool. PostHog is{' '}
+                <strong>an ecosystem of builders</strong> who are learning and growing together. Join us as we build the
+                future.
+            </p>
+        </>
     )
 }
 
@@ -1263,7 +1262,12 @@ function Tagline(): JSX.Element {
 
 const HomeLogo = () => {
     const { siteSettings } = useApp()
-    return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+    return (
+        <>
+            <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+            <span className="relative -top-0.5">is where you build.</span>
+        </>
+    )
 }
 
 const HomeCTA = () => (
