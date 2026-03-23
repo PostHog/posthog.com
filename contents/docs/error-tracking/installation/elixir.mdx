@@ -212,7 +212,7 @@ In development, if `root_source_code_paths` is set and source files are accessib
 | `enable_source_code_context` | boolean | `false` | Enable source code context in stack frames. |
 | `root_source_code_paths` | list of strings | `[]` | Root paths to scan for source files. |
 | `source_code_path_pattern` | string | `"**/*.ex"` | Glob pattern for files to include. |
-| `source_code_exclude_patterns` | list of regexes | `[]` | Patterns to exclude (e.g., `[~r"/_build/", ~r"/deps/"]`). |
+| `source_code_exclude_patterns` | list of regexes | `[~r"^_build/", ~r"^priv/", ~r"^test/"]` | Patterns to exclude. |
 | `context_lines` | integer | `5` | Number of lines to include before and after the error line. |
 | `source_code_map_path` | string | `nil` | Custom path to a packaged source map file. |
 
