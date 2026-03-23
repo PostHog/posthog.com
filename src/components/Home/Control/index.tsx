@@ -25,7 +25,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import Editor from 'components/Editor'
+import Viewer from 'components/Viewer'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -1360,12 +1360,12 @@ export default function Home() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
-            <Editor type="mdx" maxWidth={900}>
+            <Viewer maxWidth={900}>
                 {/* @ts-expect-error MDXProvider React types mismatch */}
                 <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
-            </Editor>
+            </Viewer>
         </>
     )
 }

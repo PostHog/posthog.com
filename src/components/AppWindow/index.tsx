@@ -11,6 +11,8 @@ import {
     IconArrowLeft,
     IconArrowRight,
     IconTerminal,
+    IconSearch,
+    IconDrag,
 } from '@posthog/icons'
 import { Menu, MenuItem, useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
@@ -610,19 +612,19 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 data-scheme="tertiary"
                                 suppressHydrationWarning
                                 className={`@container absolute !select-auto flex flex-col ${
-                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
+                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary/50 backdrop-blur-3xl'
                                 } ${
                                     siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                         ? 'border-b border-primary'
                                         : `${
                                               focusedWindow === item
-                                                  ? 'shadow-2xl border-primary'
+                                                  ? 'shadow-2xl border-secondary'
                                                   : 'shadow-lg border-input'
                                           } ${dragging ? '[&_*]:select-none' : ''} ${
                                               item.minimal
                                                   ? '!shadow-none'
                                                   : `flex flex-col ${
-                                                        siteSettings.experience === 'boring' ? '' : 'border rounded'
+                                                        siteSettings.experience === 'boring' ? '' : 'border rounded-lg'
                                                     }`
                                           }`
                                 } ${chrome ? 'overflow-hidden' : ''}`}
@@ -724,214 +726,174 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 onAnimationComplete={onAnimationComplete}
                             >
                                 {!item.minimal && !compact && siteSettings.experience !== 'boring' && (
-                                    <div
-                                        data-scheme="tertiary"
-                                        onDoubleClick={handleDoubleClick}
-                                        className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary/50 backdrop-blur-3xl skin-classic:bg-primary border-b border-input ${
-                                            siteSettings.experience === 'boring' ? '' : 'cursor-move'
-                                        }`}
-                                        onPointerDown={(e) => controls.start(e)}
-                                    >
-                                        <MenuBar
-                                            menus={[
-                                                {
-                                                    trigger: (
-                                                        <>
-                                                            <IconDocument className="size-5" />
-                                                            <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
-                                                        </>
-                                                    ),
-                                                    items: [
-                                                        ...(pageOptions || defaultPageOptions),
-                                                        {
-                                                            type: 'item',
-                                                            label: 'Close',
-                                                            onClick: handleClose,
-                                                            shortcut: ['Shift', 'W'],
-                                                        },
-                                                    ],
-                                                },
-                                            ]}
-                                        />
-
-                                        <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
-                                            {hasDeveloperMode ? (
-                                                <ToggleGroup
-                                                    title="View mode"
-                                                    hideTitle
-                                                    options={[
-                                                        {
-                                                            label: 'Slides',
-                                                            value: 'marketing',
-                                                        },
-                                                        {
-                                                            label: 'Dev mode',
-                                                            value: 'developer',
-                                                        },
-                                                    ]}
-                                                    value={view}
-                                                    onValueChange={(value) =>
-                                                        setView(value as 'marketing' | 'developer')
-                                                    }
-                                                />
-                                            ) : menu && menu.length > 0 ? (
-                                                <Popover
-                                                    trigger={
-                                                        <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                            {(item.meta?.title && item.meta.title) ||
-                                                                activeInternalMenu?.name}
-                                                            <IconChevronDown className="size-6 -m-1" />
-                                                        </button>
-                                                    }
-                                                    dataScheme="primary"
-                                                    contentClassName="w-auto p-0 border border-primary"
-                                                    header={false}
-                                                >
-                                                    <FileMenu menu={menu} />
-                                                </Popover>
-                                            ) : (
-                                                <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                    {item.meta?.title && item.meta.title}
-                                                </div>
-                                            )}
+                                    <>
+                                        <div
+                                            className="group absolute left-2 top-2 w-full cursor-move touch-none z-10"
+                                            onPointerDown={(e) => controls.start(e)}
+                                        >
+                                            <IconDrag className="size-5 opacity-25 group-hover:opacity-50" />
                                         </div>
-                                        <div className="flex justify-end">
-                                            {siteSettings.experience !== 'boring' && (
-                                                <>
-                                                    <OSButton size="xs" onClick={handleMinimize} className="">
-                                                        <IconMinus className="size-4 relative top-1" />
-                                                    </OSButton>
-
-                                                    <ContextMenu.Root
-                                                        onOpenChange={() => setWindowOptionsTooltipVisible(false)}
-                                                    >
-                                                        <ContextMenu.Trigger
-                                                            className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
-                                                            asChild
+                                        <div
+                                            data-scheme="tertiary"
+                                            onDoubleClick={handleDoubleClick}
+                                            className="absolute z-20 right-1 top-1 inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100"
+                                        >
+                                            <div className="flex justify-end">
+                                                {siteSettings.experience !== 'boring' && (
+                                                    <>
+                                                        <OSButton
+                                                            windowButton
+                                                            size="xs"
+                                                            icon={<IconSearch />}
+                                                            iconClassName="size-5"
+                                                        />
+                                                        <OSButton
+                                                            windowButton
+                                                            size="xs"
+                                                            onClick={handleMinimize}
+                                                            className=""
                                                         >
-                                                            {!item.fixedSize && (
-                                                                <OSButton
-                                                                    size="xs"
-                                                                    onClick={() => {
-                                                                        setWindowOptionsTooltipVisible(false)
-                                                                        if (size.width >= window?.innerWidth) {
-                                                                            collapseWindow()
-                                                                        } else {
-                                                                            expandWindow()
-                                                                        }
-                                                                    }}
-                                                                    onMouseEnter={() => {
-                                                                        setWindowOptionsTooltipVisible(true)
-                                                                    }}
-                                                                    onMouseLeave={() => {
-                                                                        setWindowOptionsTooltipVisible(false)
-                                                                    }}
-                                                                    className=" group"
-                                                                >
-                                                                    <Tooltip
-                                                                        trigger={
-                                                                            <span>
-                                                                                <IconSquare className="size-5 group-hover:hidden" />
-                                                                                {!isSSR &&
-                                                                                size.width >= window?.innerWidth ? (
-                                                                                    <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                                ) : (
-                                                                                    <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                                )}
-                                                                            </span>
-                                                                        }
-                                                                        open={windowOptionsTooltipVisible}
-                                                                    >
-                                                                        Right click for more options
-                                                                    </Tooltip>
-                                                                </OSButton>
-                                                            )}
-                                                        </ContextMenu.Trigger>
-                                                        <ContextMenu.Portal>
-                                                            <ContextMenu.Content
-                                                                className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
-                                                                data-scheme="primary"
+                                                            <IconMinus className="size-5 relative top-1 px-0.5" />
+                                                        </OSButton>
+
+                                                        <ContextMenu.Root
+                                                            onOpenChange={() => setWindowOptionsTooltipVisible(false)}
+                                                        >
+                                                            <ContextMenu.Trigger
+                                                                className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
+                                                                asChild
                                                             >
-                                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                                    Snap to...
-                                                                </ContextMenu.Label>
-                                                                <ContextMenu.Item
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={() => handleSnapToSide('left')}
-                                                                >
-                                                                    Left half
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                                        <KeyboardShortcut
-                                                                            text={
-                                                                                <IconArrowLeft className="size-3 inline-block" />
+                                                                {!item.fixedSize && (
+                                                                    <OSButton
+                                                                        windowButton
+                                                                        size="xs"
+                                                                        onClick={() => {
+                                                                            setWindowOptionsTooltipVisible(false)
+                                                                            if (size.width >= window?.innerWidth) {
+                                                                                collapseWindow()
+                                                                            } else {
+                                                                                expandWindow()
                                                                             }
-                                                                            size="xs"
-                                                                        />
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                                <ContextMenu.Item
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={() => handleSnapToSide('right')}
-                                                                >
-                                                                    Right half
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                                        <KeyboardShortcut
-                                                                            text={
-                                                                                <IconArrowRight className="size-3 inline-block" />
+                                                                        }}
+                                                                        onMouseEnter={() => {
+                                                                            setWindowOptionsTooltipVisible(true)
+                                                                        }}
+                                                                        onMouseLeave={() => {
+                                                                            setWindowOptionsTooltipVisible(false)
+                                                                        }}
+                                                                        className=" group"
+                                                                    >
+                                                                        <Tooltip
+                                                                            trigger={
+                                                                                <span>
+                                                                                    <IconSquare className="size-5 group-hover:hidden" />
+                                                                                    {!isSSR &&
+                                                                                    size.width >= window?.innerWidth ? (
+                                                                                        <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                                    ) : (
+                                                                                        <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                                    )}
+                                                                                </span>
                                                                             }
-                                                                            size="xs"
-                                                                        />
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                                <ContextMenu.Separator className="m-[5px] h-px bg-border" />
-                                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                                    Resize
-                                                                </ContextMenu.Label>
-                                                                <ContextMenu.Item
-                                                                    disabled={
-                                                                        size.width === (isSSR ? 0 : window?.innerWidth)
-                                                                    }
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={expandWindow}
+                                                                            open={windowOptionsTooltipVisible}
+                                                                        >
+                                                                            Right click for more options
+                                                                        </Tooltip>
+                                                                    </OSButton>
+                                                                )}
+                                                            </ContextMenu.Trigger>
+                                                            <ContextMenu.Portal>
+                                                                <ContextMenu.Content
+                                                                    className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
+                                                                    data-scheme="primary"
                                                                 >
-                                                                    Maximize
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                                        <KeyboardShortcut
-                                                                            text={
-                                                                                <IconArrowRight className="size-3 inline-block -rotate-90" />
-                                                                            }
-                                                                            size="xs"
-                                                                        />
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                            </ContextMenu.Content>
-                                                        </ContextMenu.Portal>
-                                                    </ContextMenu.Root>
-                                                </>
-                                            )}
-                                            <Tooltip
-                                                trigger={<OSButton size="md" onClick={handleClose} icon={<IconX />} />}
-                                            >
-                                                <div className="flex flex-col items-center gap-2">
-                                                    <span>Close window</span>
-                                                    <div>
-                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                        &nbsp;
-                                                        <KeyboardShortcut text="W" size="xs" />
+                                                                    <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                                        Snap to...
+                                                                    </ContextMenu.Label>
+                                                                    <ContextMenu.Item
+                                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                        onClick={() => handleSnapToSide('left')}
+                                                                    >
+                                                                        Left half
+                                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                            <KeyboardShortcut text="Shift" size="xs" />
+                                                                            <KeyboardShortcut
+                                                                                text={
+                                                                                    <IconArrowLeft className="size-3 inline-block" />
+                                                                                }
+                                                                                size="xs"
+                                                                            />
+                                                                        </div>
+                                                                    </ContextMenu.Item>
+                                                                    <ContextMenu.Item
+                                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                        onClick={() => handleSnapToSide('right')}
+                                                                    >
+                                                                        Right half
+                                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                            <KeyboardShortcut text="Shift" size="xs" />
+                                                                            <KeyboardShortcut
+                                                                                text={
+                                                                                    <IconArrowRight className="size-3 inline-block" />
+                                                                                }
+                                                                                size="xs"
+                                                                            />
+                                                                        </div>
+                                                                    </ContextMenu.Item>
+                                                                    <ContextMenu.Separator className="m-[5px] h-px bg-border" />
+                                                                    <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                                        Resize
+                                                                    </ContextMenu.Label>
+                                                                    <ContextMenu.Item
+                                                                        disabled={
+                                                                            size.width ===
+                                                                            (isSSR ? 0 : window?.innerWidth)
+                                                                        }
+                                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                        onClick={expandWindow}
+                                                                    >
+                                                                        Maximize
+                                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                            <KeyboardShortcut text="Shift" size="xs" />
+                                                                            <KeyboardShortcut
+                                                                                text={
+                                                                                    <IconArrowRight className="size-3 inline-block -rotate-90" />
+                                                                                }
+                                                                                size="xs"
+                                                                            />
+                                                                        </div>
+                                                                    </ContextMenu.Item>
+                                                                </ContextMenu.Content>
+                                                            </ContextMenu.Portal>
+                                                        </ContextMenu.Root>
+                                                    </>
+                                                )}
+                                                <Tooltip
+                                                    trigger={
+                                                        <OSButton
+                                                            windowButton
+                                                            size="md"
+                                                            onClick={handleClose}
+                                                            icon={<IconX />}
+                                                        />
+                                                    }
+                                                >
+                                                    <div className="flex flex-col items-center gap-2">
+                                                        <span>Close window</span>
+                                                        <div>
+                                                            <KeyboardShortcut text="Shift" size="xs" />
+                                                            &nbsp;
+                                                            <KeyboardShortcut text="W" size="xs" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </Tooltip>
+                                                </Tooltip>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </>
                                 )}
                                 <div
                                     ref={contentRef}
-                                    className={`size-full flex-grow ${
-                                        chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
-                                    }`}
+                                    className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
                                 >
                                     {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                         <Router
