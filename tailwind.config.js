@@ -464,6 +464,9 @@ module.exports = {
         function ({ addUtilities }) {
             addUtilities({
                 '.container-size': { 'container-type': 'size' },
+                '.text-shadow-desktop': {
+                    'text-shadow': '0 1px 3px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 0, 0, 0.3)',
+                },
             })
         },
         require('tailwindcss-animated'),

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { IconHome, IconRewindPlay, IconX } from '@posthog/icons'
+import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon, IconChangelogThumb, GradientGlyphIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -30,6 +30,9 @@ interface Product {
     color?: string
 }
 
+const HOME_ICON_PATH =
+    'M13.132 1.977a1.75 1.75 0 0 0-2.264 0L3.618 8.13A1.75 1.75 0 0 0 3 9.463v9.787c0 .966.784 1.75 1.75 1.75h3.5A1.75 1.75 0 0 0 10 19.25v-3.99a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.99c0 .966.784 1.75 1.75 1.75h3.5A1.75 1.75 0 0 0 21 19.25V9.463a1.75 1.75 0 0 0-.618-1.334l-7.25-6.152Z'
+
 export const useProductLinks = () => {
     const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
     const { addToast } = useToast()
@@ -37,8 +40,8 @@ export const useProductLinks = () => {
 
     return [
         {
-            label: 'home.mdx',
-            Icon: <IconHome className="inline-block size-5 text-primary" />,
+            label: 'Home',
+            Icon: <GradientGlyphIcon path={HOME_ICON_PATH} />,
             url: '/',
             source: 'desktop',
         },

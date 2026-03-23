@@ -369,8 +369,9 @@ export const AppLink = ({
         }
 
         if (React.isValidElement(iconToRender)) {
+            const existingClassName = (iconToRender as React.ReactElement<any>).props.className || ''
             return React.cloneElement(iconToRender as React.ReactElement<any>, {
-                className: `${parentIcon ? '' : `text-${color}`} ${className}`,
+                className: `${existingClassName} ${parentIcon ? '' : `text-${color}`} ${className || ''}`.trim(),
             })
         }
 
@@ -424,7 +425,7 @@ export const AppLink = ({
             >
                 <span className={`inline-block leading-snug`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0 text-shadow-desktop`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}
@@ -434,7 +435,7 @@ export const AppLink = ({
         </>
     )
 
-    const commonClassName = 'group items-center select-none text-primary'
+    const commonClassName = 'group items-center select-none text-white font-medium'
 
     const orientationClassName =
         orientation === 'row'
@@ -447,7 +448,7 @@ export const AppLink = ({
                 <Link
                     to={url}
                     {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
-                    className={`${commonClassName} ${orientationClassName}`}
+                    className={`${commonClassName} ${orientationClassName} drop-shadow-lg`}
                     onClick={(e) => {
                         if (hasDragged) {
                             e.preventDefault()
@@ -467,7 +468,7 @@ export const AppLink = ({
                             onClick()
                         }
                     }}
-                    className={`${commonClassName} ${orientationClassName}`}
+                    className={`${commonClassName} ${orientationClassName} drop-shadow-lg`}
                 >
                     {content}
                 </button>
