@@ -401,10 +401,7 @@ export const AppLink = ({
     }
 
     const baseBackgroundColors = `
-        bg-[rgba(238,239,233,0.75)] 
-        group-hover:bg-[rgba(238,239,233,1)] 
-        dark:bg-[rgba(1,1,1,0.75)] 
-        dark:group-hover:bg-[rgba(1,1,1,1)]
+        
     `
 
     const themeSpecificColors = getThemeSpecificBackgroundColors()

@@ -276,8 +276,8 @@ export default function TaskBarMenu() {
                 id="taskbar"
                 data-scheme="primary"
                 data-menu-container
-                className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 pl-0.5 pr-2 ${
-                    websiteMode ? 'sticky top-0 z-40' : 'bg-accent/75 z-50'
+                className={`w-full bg-primary/50 backdrop-blur-3xl skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-b border-secondary top-0 pl-0.5 pr-2 ${
+                    websiteMode ? 'sticky top-0 z-40' : 'bg-[#f5e8cb] z-50'
                 } ${rendered ? 'block' : 'hidden'}`}
             >
                 <div
