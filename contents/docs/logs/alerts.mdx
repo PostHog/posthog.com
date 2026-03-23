@@ -1,0 +1,89 @@
+---
+title: Set up log alerts
+---
+
+Log alerts notify you when the volume of logs matching specific filters crosses a threshold. Use them to catch spikes in errors, drops in expected traffic, or unusual patterns across your services.
+
+Alerts are checked every minute and can be configured with noise-reduction settings to avoid false positives from brief, one-off spikes.
+
+## Create an alert
+
+1. Go to [**Settings** > **Environment** > **Logs** > **Alerting**](https://app.posthog.com/settings/environment-logs#logs-alerting).
+2. Click **New alert**.
+3. Give your alert a descriptive name (e.g. "API 5xx errors").
+4. Configure your [filters](#configure-filters), [threshold rules](#set threshold-rules), and optionally [advanced options](#advanced-options).
+5. Click **Create alert**.
+
+## Configure filters
+
+Every alert requires at least one filter. Filters determine which logs are counted against your threshold. You can combine multiple filter types.
+
+### Severity
+
+Filter by log severity levels (e.g. `ERROR`, `WARN`, `INFO`). Select one or more levels from the dropdown.
+
+### Service
+
+Filter by service name. Select one or more services from the dropdown to scope the alert to specific parts of your infrastructure.
+
+### Attributes
+
+Filter by log attributes, resource attributes, or other log properties. Use the attribute search to find and add filters. These work the same way as filters in the [log search](/docs/logs/search) view.
+
+## Set threshold rules
+
+Threshold rules define the condition that triggers the alert. Configure:
+
+- **Operator** – whether the log count must go **above** or **below** the threshold
+- **Count** – the number of matching logs that triggers the alert (default: 100)
+- **Window** – the time window to check, one of 5, 10, 15, 30, or 60 minutes (default: 10 minutes)
+
+For example, "alert if count goes above 100 in the last 10 minutes" fires when more than 100 matching logs are observed in a rolling 10-minute window.
+
+## Advanced options
+
+### Reduce noise
+
+By default, an alert fires as soon as a single check breaches the threshold. To prevent notifications from brief spikes, require multiple consecutive checks to match before firing.
+
+Configure this with two values:
+
+- **Datapoints to alarm** – how many checks must breach the threshold (default: 1)
+- **Evaluation periods** – the total number of recent checks to consider (default: 1, max: 10)
+
+For example, setting "3 of 5 checks must match to fire" means the threshold must be breached in at least three of the last five check windows before the alert triggers.
+
+The alert auto-resolves once the condition is no longer met.
+
+### Notification cooldown
+
+After an alert fires, you can set a cooldown period (in minutes) before another notification is sent. Set to 0 to notify on every check that matches. The default is 0.
+
+## Manage alerts
+
+The [alerting settings page](https://app.posthog.com/settings/environment-logs#logs-alerting) shows a table of all your alerts with the following columns:
+
+| Column | Description |
+|--------|-------------|
+| **Name** | The alert name. Click to edit. |
+| **Status** | Current alert state (see below). |
+| **Threshold** | Summary of the threshold rule (e.g. `> 100 in 10m`). |
+| **Enabled** | Toggle to enable or disable the alert without deleting it. |
+
+### Alert states
+
+| State | Description |
+|-------|-------------|
+| **OK** | The alert condition is not met. |
+| **Firing** | The alert condition is met and notifications are being sent. |
+| **Resolving** | The condition was previously met but is no longer breaching the threshold. |
+| **Errored** | Something went wrong evaluating the alert. |
+| **Snoozed** | The alert is temporarily silenced. |
+
+### Edit an alert
+
+Click the alert name in the table, or click the **⋯** menu and select **Edit**. Update any fields and click **Save**.
+
+### Delete an alert
+
+Click the **⋯** menu next to the alert and select **Delete**. Confirm the deletion in the dialog. This action can't be undone.
