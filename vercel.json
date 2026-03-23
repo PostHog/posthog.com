@@ -1,7 +1,8 @@
 {
     "git": {
         "deploymentEnabled": {
-            "master": true
+            "master": true,
+            "*": false
         }
     },
     "rewrites": [
