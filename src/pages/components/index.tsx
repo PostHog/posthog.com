@@ -17,6 +17,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
+import Logo from 'components/Logo'
 
 // Create table of contents for right sidebar
 const tableOfContents = [
@@ -122,9 +123,7 @@ export default function Components(): JSX.Element {
                     }
                 }
             }
-            allProfiles: allSqueakProfile(
-                filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
-            ) {
+            allProfiles: allSqueakProfile(filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }) {
                 nodes {
                     id
                     squeakId
@@ -220,9 +219,25 @@ export default function Components(): JSX.Element {
                     <div className="space-y-12">
                         <section>
                             <div className="bg-accent p-4 rounded border border-primary mt-4">
-                                <p className="mt-0">This is an internal playground for some React components that are used throughout the site.</p>
-                                <p className="mb-0">If you're looking for components to be used in articles (like blog posts and docs), check out the <Link to="/handbook/engineering/posthog-com/markdown" state={{ newWindow: true }}>MDX components handbook page</Link>.</p>
+                                <p className="mt-0">
+                                    This is an internal playground for some React components that are used throughout
+                                    the site.
+                                </p>
+                                <p className="mb-0">
+                                    If you're looking for components to be used in articles (like blog posts and docs),
+                                    check out the{' '}
+                                    <Link to="/handbook/engineering/posthog-com/markdown" state={{ newWindow: true }}>
+                                        MDX components handbook page
+                                    </Link>
+                                    .
+                                </p>
                             </div>
+                        </section>
+                        <section id="logo">
+                            <h2>Logo</h2>
+
+                            <Logo />
+                            <Logo noText />
                         </section>
                         <section id="og-templates">
                             <h2>Open graph image templates</h2>
@@ -2092,8 +2107,8 @@ export default function Components(): JSX.Element {
                             </h3>
 
                             <p className="mb-6 text-secondary">
-                                A multi-select combobox component with search, keyboard navigation, and optional creation of
-                                new options. Perfect for tags, categories, and multi-value selections.
+                                A multi-select combobox component with search, keyboard navigation, and optional
+                                creation of new options. Perfect for tags, categories, and multi-value selections.
                             </p>
 
                             {/* Basic Examples */}
@@ -2335,8 +2350,8 @@ export default function Components(): JSX.Element {
 
                             <p className="mb-6 text-secondary">
                                 A complex multi-select component for choosing team members from small teams. Features
-                                collapsible team sections, search functionality, avatar display, and deduplication across
-                                teams.
+                                collapsible team sections, search functionality, avatar display, and deduplication
+                                across teams.
                             </p>
 
                             {/* Basic Example */}
@@ -2353,7 +2368,8 @@ export default function Components(): JSX.Element {
                                     />
                                     {teamMemberSelection.length > 0 && (
                                         <div className="text-sm text-secondary">
-                                            Selected: {teamMemberSelection.map((m) => `${m.firstName} ${m.lastName}`).join(', ')}
+                                            Selected:{' '}
+                                            {teamMemberSelection.map((m) => `${m.firstName} ${m.lastName}`).join(', ')}
                                         </div>
                                     )}
                                 </div>
@@ -2402,8 +2418,8 @@ export default function Components(): JSX.Element {
                                 <h4 className="font-semibold mb-4">Data structure</h4>
                                 <div className="text-sm">
                                     <p className="mb-2 text-secondary">
-                                        The component receives teams with nested profiles and returns selected members with
-                                        full metadata:
+                                        The component receives teams with nested profiles and returns selected members
+                                        with full metadata:
                                     </p>
                                     <div className="bg-accent p-4 rounded border border-primary">
                                         <pre className="text-xs overflow-x-auto">
