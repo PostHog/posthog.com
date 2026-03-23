@@ -33,6 +33,12 @@ interface Product {
 const HOME_ICON_PATH =
     'M13.132 1.977a1.75 1.75 0 0 0-2.264 0L3.618 8.13A1.75 1.75 0 0 0 3 9.463v9.787c0 .966.784 1.75 1.75 1.75h3.5A1.75 1.75 0 0 0 10 19.25v-3.99a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.99c0 .966.784 1.75 1.75 1.75h3.5A1.75 1.75 0 0 0 21 19.25V9.463a1.75 1.75 0 0 0-.618-1.334l-7.25-6.152Z'
 
+const APPS_ICON_PATH =
+    'M6.75 13.5a3.75 3.75 0 1 1 0 7.5 3.75 3.75 0 0 1 0-7.5M17.25 13.5a3.75 3.75 0 1 1 0 7.5 3.75 3.75 0 0 1 0-7.5M6.75 3a3.75 3.75 0 1 1 0 7.5 3.75 3.75 0 0 1 0-7.5M17.25 3a3.75 3.75 0 1 1 0 7.5 3.75 3.75 0 0 1 0-7.5'
+
+const LIBRARY_ICON_PATH =
+    'M4.25 5C5.216 5 6 5.784 6 6.75v12.5A1.75 1.75 0 0 1 4.25 21h-.5A1.75 1.75 0 0 1 2 19.25V6.75C2 5.784 2.784 5 3.75 5zm8-2c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0 1 12.25 21h-3.5A1.75 1.75 0 0 1 7 19.25V4.75C7 3.784 7.784 3 8.75 3zm4.624 2.775a1.75 1.75 0 0 1 2.165 1.2l3.169 11.054a1.75 1.75 0 0 1-1.2 2.165l-1.442.413a1.75 1.75 0 0 1-2.164-1.199l-3.17-11.054a1.75 1.75 0 0 1 1.2-2.166zM9.25 15.5a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5zm0-8.5a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5z'
+
 export const useProductLinks = () => {
     const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
     const { addToast } = useToast()
@@ -47,8 +53,14 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: <GradientGlyphIcon path={APPS_ICON_PATH} />,
             url: '/products',
+            source: 'desktop',
+        },
+        {
+            label: 'Library',
+            Icon: <GradientGlyphIcon path={LIBRARY_ICON_PATH} />,
+            url: '/posts',
             source: 'desktop',
         },
         {

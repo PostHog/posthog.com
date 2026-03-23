@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useId, useRef } from 'react'
 
 export interface GradientStop {
     offset: string
@@ -44,6 +44,10 @@ export default function GradientGlyphIcon({
     className,
 }: GradientGlyphIconProps) {
     const svgRef = useRef<SVGSVGElement>(null)
+    const id = useId().replace(/:/g, '')
+
+    const gradId = `${id}-grad`
+    const glowId = `${id}-glow`
 
     const handleMouseEnter = () => {
         const anim = svgRef.current?.querySelector('animateTransform') as SVGAnimationElement | null
@@ -59,7 +63,7 @@ export default function GradientGlyphIcon({
         >
             <defs>
                 <linearGradient
-                    id="glyph-grad"
+                    id={gradId}
                     gradientUnits="userSpaceOnUse"
                     spreadMethod="repeat"
                     x1="0"
@@ -80,7 +84,7 @@ export default function GradientGlyphIcon({
                         fill="remove"
                     />
                 </linearGradient>
-                <filter id="glyph-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur in="SourceGraphic" stdDeviation={glowRadius} result="blur" />
                     <feFlood floodColor={glowColor} floodOpacity="0.8" result="color" />
                     <feComposite in="color" in2="blur" operator="in" result="glow" />
@@ -90,8 +94,8 @@ export default function GradientGlyphIcon({
                     </feMerge>
                 </filter>
             </defs>
-            <g filter="url(#glyph-glow)">
-                <path d={path} fill="url(#glyph-grad)" />
+            <g filter={`url(#${glowId})`}>
+                <path d={path} fill={`url(#${gradId})`} />
             </g>
         </svg>
     )
