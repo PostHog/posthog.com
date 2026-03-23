@@ -1,5 +1,5 @@
 ---
-title: Elixir error tracking installation
+title: Elixir Error Tracking installation
 platformLogo: elixir
 showStepsToc: true
 ---
@@ -29,7 +29,7 @@ mix deps.get
 
 <CalloutBox icon="IconInfo" title="Source code context" type="fyi">
 
-The Elixir SDK supports displaying the surrounding lines of source code in the error tracking UI. Since Elixir is a compiled language, source files must be packaged at build time. See the [source context step](#enable-source-code-context-optional) below for setup instructions.
+The Elixir SDK supports displaying the surrounding lines of source code in the Error Tracking UI. Since Elixir is a compiled language, source files must be packaged at build time. See the [source context step](#enable-source-code-context-optional) below for setup instructions.
 
 </CalloutBox>
 
@@ -37,7 +37,7 @@ The Elixir SDK supports displaying the surrounding lines of source code in the e
 
 <Step title="Configure PostHog" badge="required">
 
-Add your project API key and host to your config:
+Add your project token and host to your config:
 
 ```elixir file=config/config.exs
 config :posthog,
@@ -45,7 +45,7 @@ config :posthog,
   api_key: "<ph_project_token>"
 ```
 
-To get the most out of error tracking, set `in_app_otp_apps` to your application name. This marks stacktrace frames from your code as "in-app", making it easier to identify relevant frames in the PostHog UI:
+To get the most out of Error Tracking, set `in_app_otp_apps` to your application name. This marks stack trace frames from your code as "in-app", making it easier to identify relevant frames in the PostHog UI:
 
 ```elixir file=config/config.exs
 config :posthog,
@@ -58,10 +58,10 @@ config :posthog,
 
 <Step title="Errors are captured automatically" badge="required">
 
-Error tracking is **enabled by default**. The SDK hooks into Elixir's built-in [`Logger`](https://hexdocs.pm/logger/Logger.html) handler system, so it automatically captures:
+Error Tracking is **enabled by default**. The SDK hooks into Elixir's built-in [`Logger`](https://hexdocs.pm/logger/Logger.html) handler system, so it automatically captures:
 
-- **Unhandled exceptions** — crashes in GenServers, Tasks, and other OTP processes
-- **Logger.error calls** — any `Logger.error/1` message at or above the configured level
+- **Unhandled exceptions** – crashes in GenServers, Tasks, and other OTP processes
+- **Logger.error calls** – any `Logger.error/1` message at or above the configured level
 
 No additional code is needed. Any crash or error log in your application is sent to PostHog as a `$exception` event with full stack traces.
 
@@ -69,8 +69,8 @@ No additional code is needed. Any crash or error log in your application is sent
 
 The handler captures log messages based on two rules:
 
-1. **Crash reasons are always captured** — any log with a `crash_reason` metadata (e.g., GenServer/Task crashes) is captured regardless of log level.
-2. **Log level filtering** — other messages at or above the configured `capture_level` (default: `:error`) are captured.
+1. **Crash reasons are always captured** – any log with a `crash_reason` metadata (e.g., GenServer/Task crashes) is captured regardless of log level.
+2. **Log level filtering** – other messages at or above the configured `capture_level` (default: `:error`) are captured.
 
 </CalloutBox>
 
@@ -107,7 +107,7 @@ This automatically includes `$current_url`, `$host`, `$pathname`, and `$ip` on e
 
 <Step title="Identify users on errors (recommended)" badge="recommended">
 
-By default, errors are attributed to `"unknown"`. To associate errors with specific users, set a context with a `distinct_id` early in your request lifecycle — for example, in a Plug pipeline after authentication:
+By default, errors are attributed to `"unknown"`. To associate errors with specific users, set a context with a `distinct_id` early in your request lifecycle – for example, in a Plug pipeline after authentication:
 
 ```elixir
 PostHog.set_context(%{distinct_id: current_user.id})
@@ -146,7 +146,7 @@ end
 
 <Step title="Configure error tracking options (optional)" badge="optional">
 
-The SDK supports several configuration options for error tracking:
+The SDK supports several configuration options for Error Tracking:
 
 ```elixir file=config/config.exs
 config :posthog,
@@ -170,14 +170,14 @@ config :posthog,
 | `in_app_otp_apps` | list of atoms | `[]` | OTP app names whose stacktrace frames are marked as "in_app" in the UI. |
 | `capture_level` | log level or `nil` | `:error` | Minimum log level to capture. Crashes with `crash_reason` are always captured. Set to `nil` to only capture crashes. |
 | `metadata` | list of atoms or `:all` | `[]` | Logger metadata keys to include as event properties. |
-| `enable_error_tracking` | boolean | `true` | Set to `false` to disable automatic error tracking entirely. |
+| `enable_error_tracking` | boolean | `true` | Set to `false` to disable automatic Error Tracking entirely. |
 | `global_properties` | map | `%{}` | Properties added to all captured events (not just errors). |
 
 </Step>
 
 <Step title="Enable source code context (optional)" badge="optional">
 
-Since Elixir is a compiled language, source files aren't available at runtime by default. To display the surrounding lines of code in PostHog's error tracking UI, you need to package your source code at build time.
+Since Elixir is a compiled language, source files aren't available at runtime by default. To display the surrounding lines of code in PostHog's Error Tracking UI, you need to package your source code at build time.
 
 **Step 1:** Enable source context in your config:
 
@@ -201,7 +201,7 @@ This reads all `.ex` files from your project, compresses them into `priv/posthog
 
 <CalloutBox icon="IconInfo" title="Development mode" type="fyi">
 
-In development, if `root_source_code_paths` is set and source files are accessible on disk, the SDK reads them directly at startup — no packaging step needed.
+In development, if `root_source_code_paths` is set and source files are accessible on disk, the SDK reads them directly at startup – no packaging step needed.
 
 </CalloutBox>
 
