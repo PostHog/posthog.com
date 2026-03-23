@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import Editor from 'components/Editor'
+import Viewer from 'components/Viewer'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import OSTable from 'components/OSTable'
@@ -149,61 +150,54 @@ export default function Customers(): JSX.Element {
     return (
         <>
             <SEO title="customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor
-                showFilters
-                title="customers"
-                type="mdx"
-                slug="/customers"
-                bookmark={{
-                    title: 'Customers',
-                    description: 'Customers who use PostHog',
-                }}
-                availableFilters={[
-                    {
-                        label: 'product(s) used',
-                        options: [
-                            { label: 'Any', value: null },
-                            ...Array.from(
-                                new Set(
-                                    customers
-                                        .filter((customer) => customer.toolsUsed?.length)
-                                        .flatMap((customer) => customer.toolsUsed || [])
-                                )
-                            ).map((tool) => ({
-                                label: tool,
-                                value: tool,
-                            })),
-                        ],
-                        filter: (obj, value) => obj['toolsUsed']?.includes(value),
-                        operator: 'includes',
-                    },
-                    {
-                        label: 'case study',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'TRUE', value: true },
-                            { label: 'FALSE', value: false },
-                        ],
-                        filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
-                        operator: 'equals',
-                    },
-                    {
-                        label: 'featured',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'TRUE', value: true },
-                            { label: 'FALSE', value: false },
-                        ],
-                        filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
-                        operator: 'equals',
-                        initialValue: true,
-                    },
-                ]}
-                dataToFilter={customers}
-                onFilterChange={handleFilterChange}
-            >
+            <Viewer title="customers" type="mdx">
                 <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
-                <p className="!mt-0">You can use the filters (above) to read how they use different products.</p>
+                <p className="!mt-0">You can use the filters below to read how they use different products.</p>
+                <ViewerFilters
+                    availableFilters={[
+                        {
+                            label: 'Product',
+                            options: [
+                                { label: 'Any', value: null },
+                                ...Array.from(
+                                    new Set(
+                                        customers
+                                            .filter((customer) => customer.toolsUsed?.length)
+                                            .flatMap((customer) => customer.toolsUsed || [])
+                                    )
+                                ).map((tool) => ({
+                                    label: tool,
+                                    value: tool,
+                                })),
+                            ],
+                            filter: (obj, value) => obj['toolsUsed']?.includes(value),
+                            operator: 'includes',
+                        },
+                        {
+                            label: 'Case study?',
+                            options: [
+                                { label: 'Any', value: null },
+                                { label: 'Yes', value: true },
+                                { label: 'No', value: false },
+                            ],
+                            filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
+                            operator: 'equals',
+                        },
+                        {
+                            label: 'Featured',
+                            options: [
+                                { label: 'Any', value: null },
+                                { label: 'Yes', value: true },
+                                { label: 'No', value: false },
+                            ],
+                            filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
+                            operator: 'equals',
+                            initialValue: true,
+                        },
+                    ]}
+                    dataToFilter={customers}
+                    onFilterChange={handleFilterChange}
+                />
                 <OSTable
                     columns={columns}
                     rows={(filteredCustomers || customers).map((customer: any, index: number) => {
@@ -214,7 +208,7 @@ export default function Customers(): JSX.Element {
                         })
                     })}
                 />
-            </Editor>
+            </Viewer>
         </>
     )
 }

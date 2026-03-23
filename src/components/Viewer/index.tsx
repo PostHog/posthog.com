@@ -1,44 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Select } from '../RadixUI/Select'
-import {
-    IconSearch,
-    IconMessage,
-    IconFilter,
-    IconGear,
-    IconTextWidthFixed,
-    IconTextWidth,
-    IconRefresh,
-    IconPlus,
-} from '@posthog/icons'
-import { useLocation } from '@reach/router'
+import { IconSearch, IconGear, IconTextWidthFixed, IconTextWidth, IconRefresh } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
-import {
-    StrikethroughIcon,
-    TextAlignLeftIcon,
-    TextAlignCenterIcon,
-    TextAlignRightIcon,
-    FontBoldIcon,
-    FontItalicIcon,
-    ReloadIcon,
-} from '@radix-ui/react-icons'
-import { IconLink } from '../OSIcons/Icons'
-import useProduct from 'hooks/useProduct'
 import { SearchProvider } from './SearchProvider'
 import { SearchBar } from './SearchBar'
 import { getProseClasses } from '../../constants/index'
 import { useApp } from '../../context/App'
 import Share from 'components/Share'
 import { useWindow } from '../../context/Window'
-import Cher from 'components/Cher'
 import BookmarkButton from 'components/BookmarkButton'
 import MediaPlayer from 'components/MediaPlayer'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
-import { WEBSITE_MODE_CLASSES } from '../../constants'
 
 interface ViewerProps {
     slug?: string
@@ -47,37 +23,7 @@ interface ViewerProps {
     maxWidth?: number | string
     children?: React.ReactNode
     hasTabs?: boolean
-    availableFilters?: {
-        label: string
-        value?: any
-        options: {
-            label: string
-            value: any
-        }[]
-        onChange?: (value: string) => void
-        operator: string
-        filter?: (obj: any, value: any) => boolean
-        initialValue?: any
-    }[]
     onSearchChange?: (query: string) => void
-    showFilters?: boolean
-    disableFilterChange?: boolean
-    dataToFilter?: any
-    onFilterChange?: (data: any) => void
-    handleFilterChange?: (filters: any) => void
-    availableGroups?: {
-        label: string
-        value: string
-    }[]
-    onGroupChange?: (group: string) => void
-    sortOptions?: {
-        label: string
-        value: string
-        icon?: string
-        color?: string
-    }[]
-    onSortChange?: (sort: string) => void
-    defaultSortValue?: string
     proseSize?: 'sm' | 'base' | 'lg'
     cta?: {
         url: string
@@ -95,18 +41,6 @@ interface ViewerProps {
 
 const ScrollWrapper = ({ scrollable, children }: { scrollable: boolean; children: React.ReactNode }) =>
     scrollable ? <ScrollArea>{children}</ScrollArea> : <>{children}</>
-
-const filterData = (data: any, filters: any) => {
-    return data.filter((obj: any) => {
-        return Object.keys(filters).every((key) => {
-            const { value, filter } = filters[key]
-            if (value === null) {
-                return true
-            }
-            return filter(obj, value)
-        })
-    })
-}
 
 const contentWidthOptions: ToggleOption[] = [
     {
@@ -202,18 +136,8 @@ export function Viewer({
     type,
     hasTabs = false,
     children,
-    availableFilters,
     maxWidth: initialMaxWidth,
     onSearchChange,
-    showFilters: initialShowFilters = false,
-    disableFilterChange = false,
-    dataToFilter,
-    onFilterChange,
-    availableGroups,
-    onGroupChange,
-    sortOptions,
-    onSortChange,
-    defaultSortValue,
     proseSize = 'sm',
     cta,
     bookmark,
@@ -221,20 +145,12 @@ export function Viewer({
     articleRef,
     hideToolbar = false,
     scrollable = true,
-    ...other
 }: ViewerProps) {
     const [showCher, setShowCher] = useState(false)
-    const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
-    const [filters, setFilters] = useState({})
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
-    const products = useProduct() as { slug: string; name: string; type: string }[]
-    // take the product name passed in and check the useProduct hook to get the product's display name
-    const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
-    // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
-    const { search } = useLocation()
     const { addWindow, focusedWindow, websiteMode } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
@@ -256,14 +172,6 @@ export function Viewer({
             children: (
                 <>
                     <OSButton size="md" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
-                    {availableFilters && availableFilters.length > 0 && (
-                        <OSButton
-                            size="md"
-                            active={showFilters}
-                            icon={<IconFilter />}
-                            onClick={() => setShowFilters(!showFilters)}
-                        />
-                    )}
                     {extraMenuOptions}
                     {bookmark && <BookmarkButton bookmark={bookmark} />}
                     <Options
@@ -335,39 +243,6 @@ export function Viewer({
             ),
         },
     ]
-
-    const handleFilterChange = (key: string, value: any, filter: (obj: any, value: any) => boolean) => {
-        const newFilters = { ...filters, [key]: { value, filter } }
-        setFilters(newFilters)
-        if (other.handleFilterChange) {
-            other.handleFilterChange(newFilters)
-        } else {
-            const filteredData = filterData(dataToFilter, newFilters)
-            onFilterChange?.(filteredData)
-        }
-    }
-
-    useEffect(() => {
-        if (availableFilters && availableFilters.length > 0) {
-            const searchParams = new URLSearchParams(search)
-            if (searchParams.size <= 0) return
-            const newFilters = {}
-
-            searchParams.forEach((value, key) => {
-                const filter = availableFilters.find((f) => (f.value || f.label).toLowerCase() === key.toLowerCase())
-                if (filter) {
-                    newFilters[filter.value || filter.label] = { value, filter: filter.filter, initialValue: value }
-                }
-            })
-            setFilters(newFilters)
-            if (other.handleFilterChange) {
-                other.handleFilterChange(newFilters)
-            } else {
-                const filteredData = filterData(dataToFilter, newFilters)
-                onFilterChange?.(filteredData)
-            }
-        }
-    }, [availableFilters])
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -445,90 +320,6 @@ export function Viewer({
                             onSearch={onSearchChange}
                         />
 
-                        {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-20 ">
-                                <div className={`flex flex-wrap ${websiteMode && WEBSITE_MODE_CLASSES}`}>
-                                    {availableFilters?.map((filter, index) => {
-                                        return (
-                                            <div key={filter.label} className="flex items-center gap-1">
-                                                <span>{index === 0 ? 'where' : 'and'}</span>
-                                                <span className="text-sm font-bold">{filter.label}</span>
-                                                <span className="italic">{filter.operator}</span>
-                                                <Select
-                                                    key={`${Object.keys(filters).length}-${filter.label}`}
-                                                    disabled={disableFilterChange}
-                                                    placeholder={filter.label}
-                                                    defaultValue={
-                                                        filter.initialValue === null
-                                                            ? null
-                                                            : filter.initialValue ??
-                                                              filters[filter.value ?? filter.label]?.value ??
-                                                              filter.options[0].value
-                                                    }
-                                                    groups={[
-                                                        {
-                                                            label: '',
-                                                            items: filter.options.map((option) => ({
-                                                                label: option.label,
-                                                                value: option.value,
-                                                            })),
-                                                        },
-                                                    ]}
-                                                    onValueChange={(value) =>
-                                                        handleFilterChange(
-                                                            filter.value ?? filter.label,
-                                                            value,
-                                                            filter.filter
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                    {availableGroups && availableGroups.length > 0 && (
-                                        <div className="@xl:ml-auto flex items-center space-x-1">
-                                            <span className="text-sm font-bold">Group by</span>
-                                            <Select
-                                                placeholder="Group by"
-                                                defaultValue="none"
-                                                groups={[
-                                                    {
-                                                        label: '',
-                                                        items: [
-                                                            { label: 'None', value: 'none' },
-                                                            ...availableGroups.map((group) => ({
-                                                                label: group.label,
-                                                                value: group.value,
-                                                            })),
-                                                        ],
-                                                    },
-                                                ]}
-                                                onValueChange={(value) => onGroupChange?.(value)}
-                                            />
-                                        </div>
-                                    )}
-                                    {sortOptions && sortOptions.length > 0 && (
-                                        <div className="ml-auto flex items-center space-x-2">
-                                            <span className="text-sm font-bold">Sort by:</span>
-                                            <Select
-                                                placeholder="Sort by"
-                                                defaultValue={defaultSortValue}
-                                                groups={[
-                                                    {
-                                                        label: '',
-                                                        items: sortOptions.map((option) => ({
-                                                            label: option.label,
-                                                            value: option.value,
-                                                        })),
-                                                    },
-                                                ]}
-                                                onValueChange={(value) => onSortChange?.(value)}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
                         {hasTabs ? (
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article

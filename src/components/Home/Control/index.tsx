@@ -95,7 +95,7 @@ const HomeHappyHog = () => {
 const CTAs = () => {
     return (
         <div>
-            <WizardCommand latest={false} />
+            <WizardCommand latest={false} slim />
             <br />
             <span className="text-sm">
                 or{' '}
@@ -751,58 +751,6 @@ const ProductCategoryGrid = () => {
     )
 }
 
-const ProductsSectionControl = () => (
-    <>
-        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
-            <h2 className="m-0 tracking-tight">
-                Explore apps{' '}
-                <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
-            </h2>
-            <aside className="hidden @xl:inline-flex">
-                <span>
-                    <Link to="/products" state={{ newWindow: true }}>
-                        Browse app library
-                    </Link>{' '}
-                    ({APP_COUNT})
-                </span>
-            </aside>
-        </header>
-        <CompanyStageTabs />
-    </>
-)
-
-const ProductsSectionTest = () => (
-    <>
-        <header className="product-section-test flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
-            <h2 className="m-0 tracking-tight">Products</h2>
-            <Link
-                to="/products"
-                state={{ newWindow: true }}
-                className="text-sm font-semibold flex items-center gap-0.5"
-            >
-                Explore all products <IconArrowRight className="size-4" />
-            </Link>
-        </header>
-        <ProductCategoryGrid />
-    </>
-)
-
-const ProductsSection = () => {
-    const posthog = usePostHog()
-    return (
-        <RenderInClient
-            placeholder={<ProductsSectionControl />}
-            render={() =>
-                posthog?.getFeatureFlag?.('homepage-product-groupings', { fresh: true }) === 'experiment' ? (
-                    <ProductsSectionTest />
-                ) : (
-                    <ProductsSectionControl />
-                )
-            }
-        />
-    )
-}
-
 const CompanyStageTabs = () => {
     const [selectedStage, setSelectedStage] = React.useState('growth')
 
@@ -1203,7 +1151,7 @@ const Customers = () => {
             </select>
              */}
                 </div>
-                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" className="bg-white" />
                 <OSButton
                     asLink
                     to="/customers"
@@ -1289,7 +1237,6 @@ const mdxComponents: Record<string, React.ComponentType<any>> = {
     Tagline,
     AppCount,
     CompanyStageTabs,
-    ProductsSection,
     CTAs,
     HomeHitCounter,
     Pricing,
