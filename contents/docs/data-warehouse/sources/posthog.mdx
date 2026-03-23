@@ -143,6 +143,24 @@ The `system.actions` table contains action definitions created in your project.
 | `steps_json` | JSON containing the action's step definitions  |
 
 
+### `system.activity_logs`
+
+The `system.activity_logs` table tracks user and system actions across PostHog entities, providing an audit trail of changes to feature flags, insights, dashboards, experiments, and more.
+
+| Column       | Description                                                        |
+|--------------|--------------------------------------------------------------------||
+| `id`         | Unique identifier for the activity log entry                       |
+| `team_id`    | Team ID the activity belongs to                                    |
+| `activity`   | Action performed (e.g., `created`, `updated`, `deleted`)           |
+| `item_id`    | ID of the entity being logged                                      |
+| `scope`      | Entity type being logged (e.g., `FeatureFlag`, `Insight`)          |
+| `detail`     | JSON containing structured details about the change                |
+| `created_at` | When the activity occurred                                         |
+
+Common scopes include `FeatureFlag`, `Insight`, `Dashboard`, `Experiment`, `Cohort`, `Survey`, `Notebook`, `Action`, `Person`, `Replay`, and `ErrorTrackingIssue`.
+
+> **Note:** Only team-scoped activity logs are visible. Organization-level logs (like membership changes) are not included because they are not associated with a specific team.
+
 ### `system.annotations`
 
 The `system.annotations` table contains annotation data from your project. Annotations are timestamped notes used to mark product changes, incidents, or releases on charts.
