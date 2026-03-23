@@ -46,7 +46,7 @@ Once you've configured your Twilio destination, click **Start testing** to verif
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destinations on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_twilio.py) is available on GitHub.
+PostHog is open-source and so are all the destinations on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/twilio/twilio.template.ts) is available on GitHub.
 
 ### What happens if the SMS body exceeds 1600 characters?
 

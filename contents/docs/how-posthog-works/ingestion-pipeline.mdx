@@ -84,7 +84,7 @@ In the sections below we will dive deeper into each step:
 4. [Writing to ClickHouse](#4-writing-to-clickhouse)
 5. [Apps - `onEvent`](#5-apps---onevent)
 
-If you would like to dive even deeper the related source code can be found in the [event pipeline implementation](https://github.com/PostHog/posthog/blob/master/plugin-server/src/worker/ingestion/event-pipeline).
+If you would like to dive even deeper the related source code can be found in the [event pipeline implementation](https://github.com/PostHog/posthog/tree/master/nodejs/src/worker/ingestion/event-pipeline).
 
 ### 1. Apps - `processEvent`
 
@@ -155,6 +155,14 @@ If we determined that this is a new `$distinct_id`, then we create a new person 
 Once we finish determining the person associated with the event we are processing, we can finish by updating their properties within PostgreSQL.
 
 This step takes into account any `$set`, `$set_once` or `$unset` arguments provided on the event, and merges these with any existing values for the person.
+
+> **Important:** Person properties are applied in **ingestion order** (the order PostHog receives and processes events), not by event timestamp. This means:
+>
+> - `$set` unconditionally overwrites the property value — the last *ingested* event wins, regardless of its timestamp.
+> - `$set_once` sets the property only if the key does not already exist on the person profile — it does not compare timestamps.
+> - A late-arriving event (e.g. from a mobile app that was offline, a server-side SDK retry, or a [historical import](/docs/migrate)) can overwrite values that were already set by a more recent event that was ingested earlier.
+>
+> Keep this in mind any time events may arrive out of order relative to when they actually occurred.
 
 > **Further reading:** [How to set and use person properties](/docs/product-analytics/person-properties)
 

@@ -24,7 +24,7 @@ We also care about net dollar retention for this segment, but we treat it as an 
 
 ### Which customers get onboarding?
 
-The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $100 forecast are routed to us. We also handle a couple of other segments:
+The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
 
 -   YC program participants at the roll-off of the plan.
 -   Startup customers rolling off, who have generated a first bill in the $500-$1500 range.

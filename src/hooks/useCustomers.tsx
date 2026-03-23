@@ -7,6 +7,8 @@ import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
+import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
@@ -42,6 +44,7 @@ import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -246,6 +249,34 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 10,
     },
+    cloudpeek: {
+        name: 'CloudPeek',
+        toolsUsed: ['logs', 'error_tracking', 'llm_analytics'],
+        industries: ['Cybersecurity'],
+        users: ['Engineering'],
+        notes: 'Agentic AI platform for cybersecurity',
+        featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
+        quotes: {
+            craig_hollington: {
+                name: 'Craig Hollington',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/craig-hollington.png',
+                },
+                quotes: [
+                    "We're probably five to ten times faster at debugging now, and it's enabled us to collaboratively work on issues as a team in a way we just couldn't before.",
+                    'We spot an exception in Error Tracking and pivot straight into Logs to understand the full context of what went wrong. That link between the two is huge for us.',
+                    "We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally.",
+                    "We automatically get AI to write triage scripts and fire them to see what works, and then from there we review the log files to see what it did and what it didn't do.",
+                ],
+            },
+        },
+    },
     contra: {
         name: 'Contra',
         toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
@@ -296,7 +327,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
         logo: ExaLogo,
-        height: 10,
+        height: 9,
         featured: true,
     },
     gankster: {
@@ -594,7 +625,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Design studio of the US Government',
         logo: NationalDesignStudioLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     netdata: {
         name: 'Netdata',
@@ -719,7 +750,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     rayfit: {
         name: 'RayFit',
@@ -764,6 +795,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: ResearchGateLogo,
         height: 8,
         featured: true,
+    },
+    resend: {
+        name: 'Resend',
+        // toolsUsed: ['product_analytics', 'experiments'],
+        notes: 'Email delivery service',
+        logo: ResendLogo,
+        featured: true,
+        height: 7,
     },
     significa: {
         name: 'Significa',

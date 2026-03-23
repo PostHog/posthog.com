@@ -40,7 +40,7 @@ export const posthog = {
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
-                stack_tracing: false,
+                stack_tracing: true,
                 user_device_context: true,
             },
             monitoring: {
@@ -115,6 +115,7 @@ export const posthog = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
+                    heatmaps: true,
                 },
             },
             ai: {

@@ -24,9 +24,9 @@ export const brevo = {
                 features: {
                     email: true,
                     sms: true,
-                    push: "Professional",
+                    push: 'Professional',
                     webhooks: true,
-                    whatsapp: "Professional",
+                    whatsapp: 'Professional',
                 },
             },
         },
