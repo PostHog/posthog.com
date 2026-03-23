@@ -367,6 +367,25 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 <JSIdentifyCrossPlatform/>
 
+### How to link server-side events to frontend users
+
+When your frontend makes API calls to your backend, and your backend captures PostHog events during those requests, those server events won't automatically be associated with the frontend user's session. You can fix this using **tracing headers**.
+
+Enable tracing headers in posthog-js to automatically inject identity headers on every request to your backend:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    __add_tracing_headers: ['your-api-domain.com'],
+})
+```
+
+This injects `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers on every request to the specified domain. The posthog-python Django middleware (or equivalent in other SDKs) picks these up and attaches them to any server-side events captured during that request.
+
+**When this works:** For server events triggered by user actions in the browser hitting your API (e.g., a user clicks "Create API key" → your backend captures `api_key_created`).
+
+**When this doesn't work:** For server events triggered by external webhooks or background jobs (e.g., a Firebase post-creation hook calling your backend). In those cases, you need to [pass the distinct ID manually](#common-pitfall-multi-id-authentication-flows) using `alias`.
+
 ### How to split a merged user back into separate users
 
 If you've accidentally linked distinct IDs together that represent different users, or you've made a mistake when merging users, it's possible to split their combined user back into separate users. You can do this in the PostHog app by navigating to the user you'd like split, and then clicking "Split IDs" in the top right corner.
