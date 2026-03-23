@@ -22,12 +22,12 @@ import Pricing from 'components/Home/New/Pricing'
 import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { JsxComponentDescriptor } from '@mdxeditor/editor'
-
 import Logo from 'components/Logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import MDXEditor from 'components/MDXEditor'
+import Editor from 'components/Editor'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
@@ -1261,188 +1261,90 @@ function Tagline(): JSX.Element {
     )
 }
 
-const jsxComponentDescriptors: JsxComponentDescriptor[] = [
-    {
-        name: 'Tagline',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Tagline />,
-    },
-    {
-        name: 'AppCount',
-        kind: 'flow',
-        props: [],
-        Editor: () => <AppCount />,
-    },
-    {
-        name: 'CompanyStageTabs',
-        kind: 'flow',
-        props: [],
-        Editor: () => <CompanyStageTabs />,
-    },
-    {
-        name: 'ProductsSection',
-        kind: 'flow',
-        props: [],
-        Editor: () => <ProductsSection />,
-    },
-    {
-        name: 'CTAs',
-        kind: 'flow',
-        props: [],
-        Editor: () => <CTAs />,
-    },
-    {
-        name: 'HomeHitCounter',
-        kind: 'flow',
-        props: [],
-        Editor: () => <HomeHitCounter />,
-    },
-    {
-        name: 'Pricing',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Pricing />,
-    },
-    {
-        name: 'Customers',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Customers />,
-    },
-    {
-        name: 'CTA',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <>
-                <p className="-mt-2">
-                    If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
-                </p>
-                <CTA headline={false} />
-            </>
-        ),
-    },
-    {
-        name: 'Logo',
-        kind: 'flow',
-        props: [],
-        Editor: () => {
-            const { siteSettings } = useApp()
-            return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
-        },
-    },
-    {
-        name: 'ButtonDataStack',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
-    },
-    {
-        name: 'ButtonPricing',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Button url="/pricing">Explore pricing</Button>,
-    },
-    {
-        name: 'ButtonAI',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Button url="/ai">Learn about PostHog AI</Button>,
-    },
-    {
-        name: 'ButtonAbout',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Button url="/about">Read more about us</Button>,
-    },
-    {
-        name: 'ImageDW',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <Image
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-                className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
-            />
-        ),
-    },
-    {
-        name: 'ImageMoney',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <Image
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
-                className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
-            />
-        ),
-    },
-    {
-        name: 'ImageReading1',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <Image
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-                className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
-            />
-        ),
-    },
-    {
-        name: 'ImageReading2',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <Image
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
-                className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
-            />
-        ),
-    },
-    {
-        name: 'TooltipDW',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <Tooltip
-                trigger={
-                    <span>
-                        <IconInfo className="size-4 inline-block relative -top-px" />
-                    </span>
-                }
-                delay={0}
-            >
-                <p className="text-sm mb-0">You can also connect your own!</p>
-            </Tooltip>
-        ),
-    },
-    {
-        name: 'SupportSmallTeamLink',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <SmallTeam slug="support" noMiniCrest>
-                support folks
-            </SmallTeam>
-        ),
-    },
-]
+const HomeLogo = () => {
+    const { siteSettings } = useApp()
+    return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+}
+
+const HomeCTA = () => (
+    <>
+        <p className="-mt-2">
+            If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+        </p>
+        <CTA headline={false} />
+    </>
+)
+
+const mdxComponents: Record<string, React.ComponentType<any>> = {
+    Tagline,
+    AppCount,
+    CompanyStageTabs,
+    ProductsSection,
+    CTAs,
+    HomeHitCounter,
+    Pricing,
+    Customers,
+    CTA: HomeCTA,
+    Logo: HomeLogo,
+    ButtonDataStack: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+    ButtonPricing: () => <Button url="/pricing">Explore pricing</Button>,
+    ButtonAI: () => <Button url="/ai">Learn about PostHog AI</Button>,
+    ButtonAbout: () => <Button url="/about">Read more about us</Button>,
+    ImageDW: () => (
+        <Image
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
+            className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
+        />
+    ),
+    ImageMoney: () => (
+        <Image
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
+            className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+        />
+    ),
+    ImageReading1: () => (
+        <Image
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
+            className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+        />
+    ),
+    ImageReading2: () => (
+        <Image
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
+            className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
+        />
+    ),
+    TooltipDW: () => (
+        <Tooltip
+            trigger={
+                <span>
+                    <IconInfo className="size-4 inline-block relative -top-px" />
+                </span>
+            }
+            delay={0}
+        >
+            <p className="text-sm mb-0">You can also connect your own!</p>
+        </Tooltip>
+    ),
+    SupportSmallTeamLink: () => (
+        <SmallTeam slug="support" noMiniCrest>
+            support folks
+        </SmallTeam>
+    ),
+}
 
 export default function Home() {
     const {
-        mdx: { rawBody, mdxBody },
+        mdx: { mdxBody },
     } = useStaticQuery(graphql`
         query {
             mdx(slug: { eq: "" }) {
-                rawBody
                 mdxBody: body
             }
         }
     `)
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
-    const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
@@ -1458,18 +1360,12 @@ export default function Home() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
-            <MDXEditor
-                jsxComponentDescriptors={jsxComponentDescriptors}
-                body={rawBody}
-                mdxBody={mdxBody}
-                maxWidth={900}
-                cta={{
-                    url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                    }.posthog.com/signup`,
-                    label: 'Get started - free',
-                }}
-            />
+            <Editor type="mdx" maxWidth={900}>
+                {/* @ts-expect-error MDXProvider React types mismatch */}
+                <MDXProvider components={{ a: Link, ...mdxComponents }}>
+                    <MDXRenderer>{mdxBody}</MDXRenderer>
+                </MDXProvider>
+            </Editor>
         </>
     )
 }
