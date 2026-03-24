@@ -31,6 +31,7 @@ interface IProps {
         ctaLocation?: 'top' | 'bottom'
         showToField?: boolean
         rowPadding?: string
+        secondaryButtons?: { label: string; to: string }[]
     }
     autoValidate?: boolean
     form: {
@@ -274,15 +275,22 @@ interface CTAButtonProps {
     icon?: React.ReactNode
     label?: string
     rowPadding?: string
+    secondaryButtons?: { label: string; to: string }[]
 }
 
-const CTAButton = ({ location, width, size, variant, icon, label, rowPadding }: CTAButtonProps) => {
+const CTAButton = ({ location, width, size, variant, icon, label, rowPadding, secondaryButtons }: CTAButtonProps) => {
     return (
         <div
             className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-1'} ${
                 rowPadding || ''
-            }`}
+            } ${location === 'bottom' && secondaryButtons?.length ? 'flex items-center justify-end gap-2' : ''}`}
         >
+            {location === 'bottom' &&
+                secondaryButtons?.map(({ label: btnLabel, to }) => (
+                    <OSButton key={to} asLink to={to} size={size || 'md'} variant="secondary">
+                        {btnLabel}
+                    </OSButton>
+                ))}
             <OSButton
                 width={width || 'auto'}
                 size={size || 'md'}
@@ -404,6 +412,7 @@ export default function SalesforceForm({
         variant: form.ctaButton?.type as CTAButtonProps['variant'] | undefined,
         icon: form.ctaButton?.icon || undefined,
         label: form.ctaButton?.label,
+        secondaryButtons: formOptions?.secondaryButtons,
     }
 
     return form.fields.length > 0 ? (
