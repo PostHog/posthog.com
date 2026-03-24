@@ -4,152 +4,186 @@ title: PostHog's architecture
 
 This section covers PostHog's [data model](/docs/how-posthog-works/data-model), [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), [ClickHouse setup](/docs/how-posthog-works/clickhouse) and [data querying](/docs/how-posthog-works/queries). This page provides an overview of how PostHog is structured.
 
-> For PostHog staff, you can see the very detailed diagram at https://runbooks.posthog.com/architecture
-
 ## Broad overview
 
-There are only a few systems to consider. 
+PostHog has a few main systems:
 
-- A website and API for users
-- An API for client apps
-- A plugin service for processing events on ingestion
-- A worker service for processing events in response to triggers
+- **Web app and API** – Django serves the UI and REST API for users
+- **Rust microservices** – High-throughput services for event capture, feature flag evaluation, and session replay ingestion
+- **Kafka** – Central message bus connecting ingestion to storage
+- **Background workers** – Celery (short tasks), Temporal (reliable workflows), and Dagster (scheduled data pipelines)
+- **CDP** (Customer Data Platform) – Processes events on ingestion and exports to destinations
 
 ```mermaid
 graph LR
-    u[User]
     sdk[Client Apps/SDKs]
-    ex[Export Sink]
-    dj[Web/API]
-    p[plugin/worker service]
-    c[Celery]
-    ds[(Data stores)]
-    u-->dj
-    sdk --> dj
-    p --> ex
-    dj --> p
-    p <--> ds
-    dj-->c
-    c <--> ds
-    dj <--> ds
+    u[User]
+    ex[Export destinations]
+
+    capture[Capture services<br/>Rust]
+    web[Web/API<br/>Django]
+    cdp[CDP<br/>Node.js]
+    workers[Background workers<br/>Celery · Temporal · Dagster]
+    kafka{{Kafka}}
+    ds[(Data stores<br/>ClickHouse · PostgreSQL · Redis · Blob storage)]
+
+    sdk -->|events & recordings| capture
+    sdk -->|feature flags| capture
+    u --> web
+
+    capture --> kafka
+    kafka --> cdp
+    cdp --> kafka
+    kafka --> ds
+
+    cdp --> ex
+    web <--> ds
+    workers <--> ds
+    web --> workers
 ```
 
 ## Zooming closer
 
-Adding detail reveals the flow between parts of the system.
+Adding detail reveals the individual services and how data flows between them.
 
 ```mermaid
 graph LR
     u[User]
     sdk[Client Apps/SDKs]
-    ex[Export Sink]
-    ds[(Data stores)]
+    ex[Export destinations]
 
-    subgraph Web/API
-        w[Web]
-        c[Capture API]
-        d[Flags API]
-        cr[cron]
-        ce[Celery]
+    subgraph "Rust services"
+        cap[Capture]
+        flags[Feature flags]
+        replay[Replay capture]
     end
 
-    subgraph "plugin/worker service"
-        i[Ingestion]
-        a[Async]
-        t[timer]
+    subgraph "Django"
+        web[Web app]
+        api[REST API]
     end
 
-    u-->|views insights and more|w
-    sdk-->|send events|c
-    sdk-->|read|d
-    w-->ds
-    c-->|write events|i
-    i-->|onEvent|a
-    i-->|save events|ds
-    t-->|onTimer|a
-    a-->|export events|ex
-    d-->|e.g. read flags|ds
-    ds-->|read events|a
-    w-->|start task|ce
-    cr-->|on schedule|ce
-    ce-->ds
+    kafka{{Kafka}}
+
+    subgraph "CDP (Node.js)"
+        transform[Transformations]
+        ingest[Ingestion worker]
+        dest[Destinations]
+    end
+
+    subgraph "Background workers"
+        celery[Celery]
+        temporal[Temporal]
+        dagster[Dagster]
+    end
+
+    pg[(PostgreSQL)]
+    ch[(ClickHouse)]
+    redis[(Redis)]
+    blob[(Blob storage)]
+
+    sdk -->|send events| cap
+    sdk -->|evaluate flags| flags
+    sdk -->|send recordings| replay
+
+    u -->|views insights etc.| web
+
+    cap --> kafka
+    replay --> kafka
+    kafka --> ingest
+    ingest --> transform
+    transform --> ingest
+    ingest -->|processed events| kafka --> ch
+    ingest <-->|persons| pg
+    ingest --> dest --> ex
+
+    flags --> redis
+    flags --> pg
+
+    web --> celery
+    web <--> pg
+    web <--> ch
+    web <--> redis
+    celery <--> pg
+    celery <--> ch
+    temporal <--> pg
+    temporal <--> ch
+    dagster <--> ch
+
+    replay --> blob
 ```
 
-## Zoomed right in
+## Infrastructure view
+
+This shows the major infrastructure components as deployed on PostHog Cloud (AWS).
 
 ```mermaid
 flowchart TD
-    subgraph K8s ["K8s PostHog namespace"]
-        Ingress(Ingress)
-        PG[(Postgres Stateful service)]
-        Kafka[(Kafka Stateful Service)]
+    subgraph K8s ["EKS cluster"]
+        Ingress(Ingress / ALB)
 
-        KafkaEvents[(Kafka Stateful Service)]
-        Redis[(Redis SS)]
-
-        ServiceLB([Service Load Balancer])
-        ServiceLBReads([Service Load Balancer])
-
-        subgraph ServicesDB [K8s Services]
-            PGBouncer
+        subgraph RustServices ["Rust services"]
+            Capture[Capture]
+            Flags[Feature flags]
+            ReplayCapture[Replay capture]
+            PropDefs[Property definitions]
         end
 
-        subgraph CH ["ClickHouse Cluster (Operator Managed)"]
-            CH1[(Replica 1 Shard 1)]
-            CH2[(Replica 1 Shard 2)]
-            CH3[(Replica 2 Shard 1)]
-            CH4[(Replica 2 Shard 2)]
+        subgraph DjangoServices ["Django"]
+            Web[Web app / API]
         end
 
-        subgraph ZK [K8s ZooKeeper cluster]
-            ZK1
-            ZK2
-            ZK3
+        subgraph Workers ["Background workers"]
+            Celery[Celery workers]
+            TemporalWorker[Temporal workers]
+            DagsterWorker[Dagster workers]
         end
 
-        subgraph AppServices [K8s Services]
-            Events(Events Service)
-            App(Web Service)
-
-            na
-        end
-
-
-        subgraph WorkerServices [K8s Services]
-            Plugins[Plugin Service]
-            Worker[Worker Service]
+        subgraph CDPServices ["CDP"]
+            CDPNode[Ingestion / Destinations<br/>Node.js]
         end
     end
 
-    AppServices --> ServiceLB --> ServicesDB --> PG
+    subgraph DataStores ["Data stores"]
+        PG[(Aurora PostgreSQL)]
+        Redis[(Redis / Valkey)]
+        Blob[(S3)]
 
-    Events --> KafkaEvents --> Plugins --> Kafka --Write path--> CH
-    WorkerServices --> ServiceLBReads
-    WorkerServices --> ServiceLB
-    ServiceLBReads --Read path--> CH
+        subgraph CH ["ClickHouse cluster (self-managed EC2)"]
+            CH1[(Shard 1<br/>replicated)]
+            CH2[(Shard 2<br/>replicated)]
+        end
 
+        Kafka{{Kafka / WarpStream}}
+    end
 
-    AppServices --> ServiceLBReads
+    ClientApps(Client Apps / SDKs) --> Ingress
+    Users(Users) --> Ingress
 
-    CH --> ZK
+    Ingress --> RustServices
+    Ingress --> DjangoServices
 
-    CH1 <--> CH2
-    CH3 <--> CH4
+    Capture --> Kafka
+    ReplayCapture --> Kafka
+    ReplayCapture --> Blob
+    Kafka --> CDPNode
+    CDPNode --> Kafka
+    Kafka --> CH
 
-    ClientApps(Client Apps)--- Ingress
+    CDPNode <--> PG
+    PropDefs <--> PG
 
-    %% KLUDGE: Use invisible nodes for styling purposes
-    Ingress --- na[ ]
-    na --Other traffic--> App
-    na --Events endpoint --> Events
-    style na height:0px,width:0px
+    DjangoServices <--> PG
+    DjangoServices <--> CH
+    DjangoServices <--> Redis
 
-    Redis -.- WorkerServices
-    AppServices -.- Redis
+    Flags --> Redis
+    Flags --> PG
 
-    AppServices-.Optional Utilization telemetry.->Telemetry(Posthog License Telemetry service)
+    Workers <--> PG
+    Workers <--> CH
 
-    class K8s,ServicesDB,CH,ZK,AppServices,WorkerServices sgraph;
+    RustServices -.- Redis
+
+    class K8s,RustServices,DjangoServices,Workers,CDPServices,DataStores,CH sgraph;
 ```
-
-No communication is needed into or out of this namespace other than the ingress controller for the app and collecting data.
