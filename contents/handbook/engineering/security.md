@@ -21,7 +21,7 @@ You can sign commits with either [Secretive](https://github.com/maxgoedjen/secre
 #### Setting up with Secretive
 
 1. Open Secretive and click the + button to create a new key.
-2. Name your key "Git signing key" and select **Notify** in the Protection Level dropdown.
+2. Name your key "Git signing key" and select **Notify** in the **Protection Level** dropdown.
 3. Go to **Secretive > Integrations** in the menu bar.
 4. Click **Git Signing** and select "Git signing key" from the **Secret** dropdown.
 5. Copy and paste the `~/.gitconfig` and `~/.gitallowedsigners` snippets into their respective files
@@ -59,6 +59,12 @@ Follow the [1Password git commit signing guide](https://developer.1password.com/
 #### After setup
 
 Once commit signing is configured, enable the option in your [GitHub Profile](https://github.com/settings/keys) to "Flag unsigned commits as unverified".
+
+#### Troubleshooting
+
+- If using iTerm/Cursor/GitHub Desktop/Sourcetree/etc., you may be endlessly prompted to "access data from other apps". You can fix this by granting the app **Full Disk Access** in **System Settings > Privacy & Security > Full Disk Access**.
+
+- If you are prompted to complete Touch ID each time you commit, your signing key is using a **Protection Level** of **Require Authentication**. Re-follow the instructions above to generate a new signing key with a **Protection Level** of **Notify**.
 
 ### GitHub Actions
 
