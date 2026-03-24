@@ -108,7 +108,9 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 ## `last_seen_at` field
 
-PostHog automatically updates the `last_seen_at` field for a person when an event from them is captured. This gets updated once per hour, and the timestamp is always rounded down to the nearest hour.
+`last_seen_at` tracking is disabled by default. To enable it, go to [Settings](https://app.posthog.com/settings/environment-product-analytics#person-last-seen-at) > **Product analytics** > **Person last seen tracking**.
+
+Once enabled, PostHog automatically updates the `last_seen_at` field for a person when an event from them is captured. This gets updated once per hour, and the timestamp is always rounded down to the nearest hour.
 
 You can prevent `last_seen_at` updates by setting the `$update_person_last_seen_at` *event* property to `false`.
 
