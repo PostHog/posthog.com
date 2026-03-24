@@ -380,104 +380,46 @@ export const generateLlmsTxt = (pages) => {
         }
     }
 
-    // Human-readable section title mapping
-    const sectionTitleMap: Record<string, string> = {
-        'docs-getting-started': 'Getting Started',
+    // Title overrides for section keys where auto-derivation doesn't produce a good name.
+    // Default behavior: strip 'docs-' prefix, split on '-', title-case each word.
+    const sectionTitleOverrides: Record<string, string> = {
         'docs-libraries': 'SDKs and Libraries',
-        'docs-product-analytics': 'Product Analytics',
-        'docs-web-analytics': 'Web Analytics',
-        'docs-session-replay': 'Session Replay',
-        'docs-feature-flags': 'Feature Flags',
         'docs-experiments': 'A/B Testing and Experiments',
-        'docs-error-tracking': 'Error Tracking',
-        'docs-surveys': 'Surveys',
         'docs-llm-analytics': 'LLM Analytics and Observability',
-        'docs-data-warehouse': 'Data Warehouse',
-        'docs-revenue-analytics': 'Revenue Analytics',
-        'docs-workflows': 'Workflows',
-        'docs-product-tours': 'Product Tours',
-        'docs-logs': 'Logs',
-        'docs-alerts': 'Alerts',
         'docs-cdp': 'Customer Data Platform (CDP)',
         'docs-api': 'API',
-        'docs-api-reference': 'API Reference',
-        'docs-integrate': 'Integration',
-        'docs-hog': 'Hog (Query Language)',
         'docs-hogql': 'HogQL',
         'docs-sql': 'SQL and ClickHouse',
-        'docs-advanced': 'Advanced',
-        'docs-data': 'Data and Events',
-        'docs-privacy': 'Privacy',
-        'docs-billing': 'Billing',
-        'docs-self-host': 'Self-Hosting',
-        'docs-migrate': 'Migrations',
-        'docs-toolbar': 'Toolbar',
-        'docs-notebooks': 'Notebooks',
-        'docs-ai-engineering': 'AI Engineering',
+        'docs-hog': 'Hog (Query Language)',
         'docs-model-context-protocol': 'Model Context Protocol (MCP)',
-        'docs-settings': 'Settings',
+        'docs-ai-engineering': 'AI Engineering',
     }
 
-    // Explicit section ordering: products first, then platform, then reference
-    const sectionOrder = [
-        'docs-getting-started',
-        'docs-libraries',
-        'docs-integrate',
-        'docs-product-analytics',
-        'docs-web-analytics',
-        'docs-session-replay',
-        'docs-feature-flags',
-        'docs-experiments',
-        'docs-error-tracking',
-        'docs-surveys',
-        'docs-llm-analytics',
-        'docs-data-warehouse',
-        'docs-revenue-analytics',
-        'docs-workflows',
-        'docs-product-tours',
-        'docs-logs',
-        'docs-alerts',
-        'docs-cdp',
-        'docs-data',
-        'docs-hog',
-        'docs-hogql',
-        'docs-sql',
-        'docs-ai-engineering',
-        'docs-model-context-protocol',
-        'docs-advanced',
-        'docs-privacy',
-        'docs-toolbar',
-        'docs-notebooks',
-        'docs-migrate',
-        'docs-billing',
-        'docs-self-host',
-        'docs-settings',
-        'docs-api',
-    ]
+    const formatSectionTitle = (section: string): string => {
+        if (sectionTitleOverrides[section]) return sectionTitleOverrides[section]
+        if (section.startsWith('docs-')) {
+            return section
+                .replace('docs-', '')
+                .split('-')
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')
+        }
+        return section.charAt(0).toUpperCase() + section.slice(1)
+    }
 
-    // Sort sections: explicit order first, then remaining docs sections alphabetically,
-    // then non-docs sections, with api-reference always last (in Optional section)
+    // Sort: docs sections first (alphabetically), then non-docs (tutorials first, then alphabetical).
+    // API reference is excluded here and added as an Optional section at the end.
     const sections = Object.keys(pagesBySection)
         .filter((s) => s !== 'docs-api-reference')
         .sort((a, b) => {
-            const aIndex = sectionOrder.indexOf(a)
-            const bIndex = sectionOrder.indexOf(b)
             const aIsDocs = a.startsWith('docs')
             const bIsDocs = b.startsWith('docs')
-
-            // Both in explicit order
-            if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex
-            // One in explicit order
-            if (aIndex !== -1) return -1
-            if (bIndex !== -1) return 1
-            // Both are docs but not in explicit order
-            if (aIsDocs && bIsDocs) return a.localeCompare(b)
-            // Docs before non-docs
             if (aIsDocs && !bIsDocs) return -1
             if (!aIsDocs && bIsDocs) return 1
-            // Non-docs: tutorials first, then alphabetical
-            if (a === 'tutorials') return -1
-            if (b === 'tutorials') return 1
+            if (!aIsDocs && !bIsDocs) {
+                if (a === 'tutorials') return -1
+                if (b === 'tutorials') return 1
+            }
             return a.localeCompare(b)
         })
 
@@ -532,15 +474,7 @@ posthog.init('<ph_project_api_key>', {
 
     // Add sections with file lists
     for (const section of sections) {
-        const sectionTitle =
-            sectionTitleMap[section] ||
-            (section.startsWith('docs-')
-                ? section
-                      .replace('docs-', '')
-                      .split('-')
-                      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                      .join(' ')
-                : section.charAt(0).toUpperCase() + section.slice(1))
+        const sectionTitle = formatSectionTitle(section)
 
         llmsTxtContent += `## ${sectionTitle}\n\n`
 
