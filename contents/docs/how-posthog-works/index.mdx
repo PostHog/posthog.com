@@ -47,70 +47,31 @@ graph LR
 Adding detail reveals the individual services and how data flows between them.
 
 ```mermaid
-graph LR
-    u[User]
-    sdk[Client Apps/SDKs]
-    ex[Export destinations]
+graph TD
+    u[User] --> web[Django web app / API]
+    sdk[Client Apps/SDKs] -->|events| cap[Capture]
+    sdk -->|flags| flags[Feature flags]
+    sdk -->|recordings| replay[Replay capture]
 
-    subgraph "Rust services"
-        cap[Capture]
-        flags[Feature flags]
-        replay[Replay capture]
-    end
+    web <--> redis[(Redis)]
+    web --> workers[Background workers<br/>Celery · Temporal · Dagster]
 
-    subgraph "Django"
-        web[Web app]
-        api[REST API]
-    end
-
-    kafka{{Kafka}}
-
-    subgraph "CDP (Node.js)"
-        transform[Transformations]
-        ingest[Ingestion worker]
-        dest[Destinations]
-    end
-
-    subgraph "Background workers"
-        celery[Celery]
-        temporal[Temporal]
-        dagster[Dagster]
-    end
-
-    pg[(PostgreSQL)]
-    ch[(ClickHouse)]
-    redis[(Redis)]
-    blob[(Blob storage)]
-
-    sdk -->|send events| cap
-    sdk -->|evaluate flags| flags
-    sdk -->|send recordings| replay
-
-    u -->|views insights etc.| web
-
-    cap --> kafka
+    cap --> kafka{{Kafka}}
     replay --> kafka
-    kafka --> ingest
-    ingest --> transform
-    transform --> ingest
-    ingest -->|processed events| kafka --> ch
-    ingest <-->|persons| pg
-    ingest --> dest --> ex
+    replay --> blob[(Blob storage)]
 
-    flags --> redis
-    flags --> pg
+    kafka --> cdp[CDP worker]
+    cdp -->|processed events| kafka
+    cdp --> ex[Export destinations]
 
-    web --> celery
-    web <--> pg
-    web <--> ch
-    web <--> redis
-    celery <--> pg
-    celery <--> ch
-    temporal <--> pg
-    temporal <--> ch
-    dagster <--> ch
+    web <--> ch[(ClickHouse)]
+    workers <--> ch
+    kafka --> ch
 
-    replay --> blob
+    web <--> pg[(PostgreSQL)]
+    workers <--> pg
+    flags <--> pg
+    cdp <--> pg
 ```
 
 ## Infrastructure view
@@ -118,31 +79,36 @@ graph LR
 On PostHog Cloud, the application services run in an EKS (Kubernetes) cluster on AWS, while the data stores are managed separately.
 
 ```mermaid
-flowchart LR
-    Internet(Internet) --> ALB[ALB]
+flowchart TD
+    ClientApps("Client Apps / SDKs") --> ALB
 
     subgraph EKS ["EKS cluster (Kubernetes)"]
+        ALB --> Django["Django (web app, API)"]
         ALB --> Rust["Rust services<br/>(capture, feature flags, replay)"]
-        ALB --> Django["Django<br/>(web app, API)"]
-        CDP["CDP worker<br/>(Node.js)"]
         Workers["Background workers<br/>(Celery, Temporal, Dagster)"]
+        CDP["CDP worker (Node.js)"]
     end
+
+    Django <--> Redis[("Redis / Valkey")]
+    Rust --> S3[("S3 (recordings, exports)")]
 
     Rust --> Kafka{{Kafka / WarpStream}}
     Kafka --> CDP
     CDP --> Kafka
-    Kafka --> CH
 
-    CH[("ClickHouse<br/>(sharded, self-managed EC2)")]
-    PG[("Aurora PostgreSQL")]
-    Redis[("Redis / Valkey")]
-    S3[("S3<br/>(recordings, exports)")]
+    Django --read path--> CH
+    Workers --read path--> CH
+    Kafka --write path--> CH
 
-    Django <--> PG
-    Django <--> CH
-    Django <--> Redis
-    CDP <--> PG
-    Workers <--> PG
-    Workers <--> CH
-    Rust --> S3
+    subgraph CH ["ClickHouse cluster (self-managed EC2)"]
+        direction LR
+        S1["Shard 1<br/>(Replica A · Replica B)"] ~~~ SN["... Shard N<br/>(Replica A · Replica B)"]
+    end
+
+    CH -.- ZK[ZooKeeper]
+
+    Django --> RDSProxy
+    Workers --> RDSProxy
+    CDP --> RDSProxy
+    RDSProxy[RDS Proxy] --> PG[("Aurora PostgreSQL")]
 ```
