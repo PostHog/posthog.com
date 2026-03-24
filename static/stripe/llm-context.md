@@ -9,11 +9,20 @@ After provisioning, you received:
 - **api_key** (starts with `phc_`) — Your PostHog project API key. Used to initialize PostHog SDKs. Safe to expose in frontend code.
 - **api_host** — Your PostHog instance URL. Either `https://us.i.posthog.com` (US) or `https://eu.i.posthog.com` (EU).
 
-Set these as environment variables:
+Set these as environment variables. The exact variable names depend on your framework:
 
 ```bash
+# Generic
+POSTHOG_KEY=phc_...
+POSTHOG_HOST=https://us.i.posthog.com
+
+# Next.js (needs NEXT_PUBLIC_ prefix for client-side access)
 NEXT_PUBLIC_POSTHOG_KEY=phc_...
 NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
+
+# Vite (needs VITE_ prefix for client-side access)
+VITE_POSTHOG_KEY=phc_...
+VITE_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 ## Recommended: use the PostHog wizard
