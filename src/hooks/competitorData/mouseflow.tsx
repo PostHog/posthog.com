@@ -6,7 +6,7 @@ export const mouseflow = {
     },
     products: {
         product_analytics: {
-            available: false,
+            available: 'Funnels only',
         },
         web_analytics: {
             available: false,
