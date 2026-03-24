@@ -27,9 +27,9 @@ export const toolbarFeatureFlagsDark = "https://res.cloudinary.com/dmukukwp6/vid
 
 > **Note:** The PostHog toolbar is only available for the [JavaScript web SDK](/docs/libraries/js).
 
-The toolbar is like "Inspect Element" for PostHog features and data. 
+The toolbar is like "Inspect Element" for PostHog features and data.
 
-When enabled, the toolbar appears as an overlay **on your product or website** – it's not visible to your users. 
+When enabled, the toolbar appears as an overlay **on your product or website** – it's not visible to your users.
 
 With it, you can interact with elements to [create actions](/tutorials/how-to-capture-events-the-easy-way), visualize heatmaps, override feature flags, and more.
 
@@ -37,26 +37,26 @@ With it, you can interact with elements to [create actions](/tutorials/how-to-ca
 
 1. In your PostHog instance, go to [Launch Toolbar](https://app.posthog.com/toolbar) in the left-hand menu
 2. Add the URLs you wish to enable the toolbar for. Only you will be able to see it – not your users.
-3. Click **Save** and then **Launch**.    
+3. Click **Save** and then **Launch**.
 4. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
 
 <ProductVideo
     videoLight = {setupLight}
     videoDark = {setupDark}
-    alt="How to setup the PostHog toolbar" 
+    alt="How to setup the PostHog toolbar"
     classes = {"rounded"}
 />
 
 ## Creating actions using the toolbar
 
-The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website. 
+The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website.
 
 To do this, click on the 🔍 Inspect button on the toolbar. This will add a blue overlay to your website. Then, if you click on an element, you will be shown the option to create an action from it.
 
 <ProductVideo
     videoLight = {createNewActionLight}
     videoDark = {createNewActionDark}
-    alt="How to create a new action using the toolbar" 
+    alt="How to create a new action using the toolbar"
     classes = {"rounded"}
 />
 
@@ -64,15 +64,15 @@ You can also create a more advanced action using the following additional option
 
 ### 1. Add another element
 
-If you want your action to cover more than one element, you can click **Add another element** right above **Create Action**. 
+If you want your action to cover more than one element, you can click **Add another element** right above **Create Action**.
 
-This is an `OR` operation, meaning that the action will be recorded if either Element A _or_ Element B are clicked. 
+This is an `OR` operation, meaning that the action will be recorded if either Element A _or_ Element B are clicked.
 
-This is useful if you have various buttons that take you to the same page, for instance, and only care that the user clicks one of them. A common use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
+This is useful if you have various buttons that take you to the same page, for instance, and only care that the user clicks one of them. A common use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels).
 
 ### 2. Element filters
 
-These are used by PostHog to find the specific element you're creating the action for. 
+These are used by PostHog to find the specific element you're creating the action for.
 
 - **Link target:** Where a click on the element leads to (if available).
 
@@ -85,7 +85,7 @@ These are used by PostHog to find the specific element you're creating the actio
 <ProductVideo
     videoLight = {typeItLight}
     videoDark = {typeItDark}
-    alt="The create action modal showing the selector text box being used to edit the selector" 
+    alt="The create action modal showing the selector text box being used to edit the selector"
     classes = {"rounded"}
 />
 
@@ -114,31 +114,31 @@ You can view your existing actions on your page by clicking the **Actions** butt
 
 By clicking on a specific element, you can update or delete the action.
 
-The number in the green box on the top left of the element is the **action's index** in your list of actions (and **does not** represent how many times that action was triggered). 
+The number in the green box on the top left of the element is the **action's index** in your list of actions (and **does not** represent how many times that action was triggered).
 
 The number in the yellow box next to the "Actions" button in the toolbar represents the total number of actions you have created.
 
 <ProductScreenshot
     imageLight = {toolbarViewActionsLight}
     imageDark = {toolbarViewActionsDark}
-    alt="Viewing actions in the toolbar]" 
+    alt="Viewing actions in the toolbar]"
     classes = {"rounded"}
 />
 
 ## Override feature flags using the toolbar
 
-The toolbar enables you to test your feature flags. 
+The toolbar enables you to test your feature flags.
 
 You can enable, disable, or override your feature flags, and then view how your website or app changes with the new feature flags values.
 
-To do this, click on the **Feature Flags** button in the toolbar, search for any feature flag, and click on the toggles to change its value. 
+To do this, click on the **Feature Flags** button in the toolbar, search for any feature flag, and click on the toggles to change its value.
 
-This will only affect *your browser*, not other users or your flags evaluated on the backend. You may also need to refresh the page to see how your change affect your website. 
+This will only affect *your browser*, not other users or your flags evaluated on the backend. You may also need to refresh the page to see how your change affect your website.
 
 <ProductVideo
     videoLight = {toolbarFeatureFlagsLight}
     videoDark = {toolbarFeatureFlagsDark}
-    alt="How to override feature flags using the toolbar" 
+    alt="How to override feature flags using the toolbar"
     classes = {"rounded"}
 />
 
@@ -188,7 +188,7 @@ If you are having issues authenticating your toolbar and are using a [reverse pr
 
 The PostHog toolbar doesn't work for older Nuxt versions because Nuxt overwrote the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`.
 
-The fix is to update to a newer version of Nuxt. It is fixed as of `^3.16.2` (we checked). 
+The fix is to update to a newer version of Nuxt. It is fixed as of `^3.16.2` (we checked).
 
 ### Toolbar non-functional on Wordpress website
 
@@ -196,7 +196,7 @@ Some Wordpress plugins, notably WPCodebox, rewrite the CSS of our toolbar. If yo
 
 ### Toolbar disppearing on transition with Astro
 
-[Astro](/tutorials/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can: 
+[Astro](/tutorials/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can:
 
 1. Retrieve the `__posthog` JSON from the URL on `astro:page-load`.
 2. Prevent the toolbar from loading on `astro:before-swap`.
@@ -250,15 +250,3 @@ connect-src 'self' https://eu.posthog.com https://eu-assets.i.posthog.com;
 ```
 
 If your site uses iframes, you may also need to add `frame-src` or `frame-ancestors` directives for `https://us.posthog.com` (or `https://eu.posthog.com`).
-
-### Toolbar authentication fails with CORS error (fetch interceptors)
-
-Some apps monkey-patch `window.fetch` to inject custom headers on every request (e.g., `x-app-version`, `x-correlation-id`). Since the toolbar runs in your page context and uses `window.fetch`, these injected headers get added to the toolbar's OAuth token exchange request. If those headers aren't in PostHog's CORS allowlist, the browser blocks the preflight request.
-
-**Symptoms:**
-- Toolbar loads but authentication fails with a network error toast
-- Console error like `Access to fetch at 'https://us.posthog.com/oauth/token/' from origin '...' has been blocked by CORS policy: Request header field x-app-version is not allowed by Access-Control-Allow-Headers in preflight response`
-
-**Fix:** This has been fixed server-side in PostHog Cloud — the backend now echoes back all requested headers for toolbar OAuth preflight requests. No action needed on your end.
-
-If you're **self-hosting** and seeing this issue, upgrade to a PostHog version that includes this fix.
