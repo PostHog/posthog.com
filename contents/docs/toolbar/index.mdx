@@ -235,18 +235,16 @@ If your site has a `Content-Security-Policy` header (often set by a CDN like Clo
 - Console errors like `Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://us-assets.i.posthog.com/static/toolbar.js`
 - Console errors like `<script> source URI is not allowed in this document`
 
-**Fix:** Add the PostHog domains to your CSP header. For **US Cloud**:
+**Fix:** You need to add PostHog domains to your CSP header. See our [Content Security Policy docs](/docs/advanced/content-security-policy#enabling-the-toolbar) for the required directives.
 
-```
-script-src 'self' https://us-assets.i.posthog.com;
-connect-src 'self' https://us.posthog.com https://us-assets.i.posthog.com;
-```
+### Toolbar authentication fails with CORS error (fetch interceptors)
 
-For **EU Cloud**, replace `us` with `eu` in the domains above:
+Some apps monkey-patch `window.fetch` to inject custom headers on every request (e.g., `x-app-version`, `x-correlation-id`). Since the toolbar runs in your page context and uses `window.fetch`, these injected headers get added to the toolbar's OAuth token exchange request. If those headers aren't in PostHog's CORS allowlist, the browser blocks the preflight request.
 
-```
-script-src 'self' https://eu-assets.i.posthog.com;
-connect-src 'self' https://eu.posthog.com https://eu-assets.i.posthog.com;
-```
+**Symptoms:**
+- Toolbar loads but authentication fails with a network error toast
+- Console error like `Access to fetch at 'https://us.posthog.com/oauth/token/' from origin '...' has been blocked by CORS policy: Request header field x-app-version is not allowed by Access-Control-Allow-Headers in preflight response`
 
-If your site uses iframes, you may also need to add `frame-src` or `frame-ancestors` directives for `https://us.posthog.com` (or `https://eu.posthog.com`).
+**Fix:** This has been fixed server-side in PostHog Cloud — the backend now echoes back all requested headers for toolbar OAuth preflight requests. No action needed on your end.
+
+If you're **self-hosting** and seeing this issue, upgrade to a PostHog version that includes this fix.
