@@ -47,53 +47,53 @@ Then you need to do the following:
 
 # What to think about?
 
-   **Problem and motivation**
-   * Why should we introduce this tool now? What problem does it solve?
-   * How large is the benefit vs. the status quo? Is this solving a real issue or just something interesting to try?
-   * What existing tools or processes would it replace?
-   * Could this be solved using an existing tool or by building something directly in PostHog?
+**Problem and motivation**
+* Why should we introduce this tool now? What problem does it solve?
+* How large is the benefit vs. the status quo? Is this solving a real issue or just something interesting to try?
+* What existing tools or processes would it replace?
+* Could this be solved using an existing tool or by building something directly in PostHog?
    
-   **Trial/Proof of concept**
-   * Have you tested the tool in a small, reversible context (spike or sandbox)?
-   * Can it be evaluated without sending real data?
-   * What did you learn from the trial?
+**Trial/Proof of concept**
+* Have you tested the tool in a small, reversible context (spike or sandbox)?
+* Can it be evaluated without sending real data?
+* What did you learn from the trial?
   
-   **Data exposure and privacy**
-   * What type of data would be sent to the tool/vendor and does the benefit justify that risk?
+**Data exposure and privacy**
+* What type of data would be sent to the tool/vendor and does the benefit justify that risk?
 
-     From least to most sensitive:
-       * General data – publicly accessible information
-       * Business data – internal PostHog data without customer data
-       * Customer data – customer PII (name, email, address, IP addresses, etc.)
-       * Customer’s customers’ data – end-user PII
+  From least to most sensitive:
+  * General data – publicly accessible information
+  * Business data – internal PostHog data without customer data
+  * Customer data – customer PII (name, email, address, IP addresses, etc.)
+  * Customer’s customers’ data – end-user PII
 
-   Also consider:
-   * Where will the data be stored or processed? (significant preference toward EU/US as these jurisdictions are lower risk, well vetted, and have robust privacy frameworks)
-   * Can we avoid sending customer or end-user PII?
-   * Can data be aggregated, redacted or irreversibly anonymized before leaving our systems?
+Also consider:
+* Where will the data be stored or processed? (significant preference toward EU/US as these jurisdictions are lower risk, well vetted, and have robust privacy frameworks)
+* Can we avoid sending customer or end-user PII?
+* Can data be aggregated, redacted or irreversibly anonymized before leaving our systems?
 
-   **Vendor due diligence**
-   * Where is the company that provides the proposed tool headquartered and where do they operate?
-   * Who are their customers? How long have they been around?
-   * Do they demonstrate a credible security posture (SOC2, GDPR, HIPAA, etc.)?
-   * Are they a well-established tool in the industry, or something experimental and less well known?
+**Vendor due diligence**
+* Where is the company that provides the proposed tool headquartered and where do they operate?
+* Who are their customers? How long have they been around?
+* Do they demonstrate a credible security posture (SOC2, GDPR, HIPAA, etc.)?
+* Are they a well-established tool in the industry, or something experimental and less well known?
   
-   **Alternatives and competition**
-   * Why this tool instead of competitors?
-   * What other credible options exist and how do they compare (cost, security, reputation, risk)?
-   * What are other companies in our space using?
+**Alternatives and competition**
+* Why this tool instead of competitors?
+* What other credible options exist and how do they compare (cost, security, reputation, risk)?
+* What are other companies in our space using?
   
-   **Internal impact**
-   * Have other engineers been consulted about technical impact or prior experience?
-   * Are relevant teams supportive of introducing this tool?
-   * Has security/infra reviewed the vendor and given their thoughts on their security posture?
-   * Has legal chimed in and given their thoughts on risks? Is this tool going to qualify as a subprocessor such that customers will need to be aware we’re sending them data?
-   * Would using this tool impact how sales pitches the PostHog product to potential customers?
-   * Does this change anything about how we need to communicate with existing customers (marketing/support)?
+**Internal impact**
+* Have other engineers been consulted about technical impact or prior experience?
+* Are relevant teams supportive of introducing this tool?
+* Has security/infra reviewed the vendor and given their thoughts on their security posture?
+* Has legal chimed in and given their thoughts on risks? Is this tool going to qualify as a subprocessor such that customers will need to be aware we’re sending them data?
+* Would using this tool impact how sales pitches the PostHog product to potential customers?
+* Does this change anything about how we need to communicate with existing customers (marketing/support)?
 
-   **Customer defensibility**
-   * If a customer asked why we use this tool/vendor and send data to them, could we clearly and transparently justify the decision?
-   * Would a reasonable customer view this as a standard and responsible choice?
+**Customer defensibility**
+* If a customer asked why we use this tool/vendor and send data to them, could we clearly and transparently justify the decision?
+* Would a reasonable customer view this as a standard and responsible choice?
 
 These are guidelines, not a rigid checklist.  The goal is for everyone to be thinking about the overall impact of introducing a new tool, and to allow for a holistic review of the risks against the benefits.
    
@@ -105,53 +105,53 @@ Once a decision has been made to adopt a tool/vendor, the person proposing the t
 
 **1. Finalize business terms**
 
-   Work with the vendor to negotiate the commercial and business terms, such as:
-   * Cost
-   * Number of licenses or usage terms and limits
-   * Contract length
-   * Any implementation or onboarding details
+Work with the vendor to negotiate the commercial and business terms, such as:
+* Cost
+* Number of licenses or usage terms and limits
+* Contract length
+* Any implementation or onboarding details
 
-   Once the business terms are mostly settled, the vendor’s documents will need to go through legal review before anything is signed.
+Once the business terms are mostly settled, the vendor’s documents will need to go through legal review before anything is signed.
 
-   Typically, these includes:
-   * **Master Services Agreement** – the primary contract governing the relationship.
-   * **Data Processing Agreement** – required if the vendor processes personal data.
-   * **Security/compliance documentation** – e.g. SOC 2, ISO certifications, or similar.
+Typically, these includes:
+* **Master Services Agreement** – the primary contract governing the relationship.
+* **Data Processing Agreement** – required if the vendor processes personal data.
+* **Security/compliance documentation** – e.g. SOC 2, ISO certifications, or similar.
 
-   As soon as it looks like we intend to move forward with the vendor, post in #legal, and give a heads-up that:
-   * A decision has been made to use the vendor.
-   * Business terms are being negotiated.
-   * Contract documents will be shared for review shortly.
-   * As much context you can provide as possible to aid in the review.
+As soon as it looks like we intend to move forward with the vendor, post in #legal, and give a heads-up that:
+* A decision has been made to use the vendor.
+* Business terms are being negotiated.
+* Contract documents will be shared for review shortly.
+* As much context you can provide as possible to aid in the review.
 
-   As soon as documents are available for review, send the documents to #legal (in an editable format such as .docx).
+As soon as documents are available for review, send the documents to #legal (in an editable format such as .docx).
 
 **2. Plan time for legal review**
 
-   Legal review usually takes a few business days depending on bandwidth, priorities, and existing obligations, and negotiations may take longer depending on the use case, the vendor’s contract terms and how quickly they review and negotiate proposed changes.
+Legal review usually takes a few business days depending on bandwidth, priorities, and existing obligations, and negotiations may take longer depending on the use case, the vendor’s contract terms and how quickly they review and negotiate proposed changes.
    
-   Plan accordingly and involve legal early. If you have a deadline for implementing the tool or there is another reason the standard timeline above needs to be expedited, please make sure to let legal know ahead of time.
+Plan accordingly and involve legal early. If you have a deadline for implementing the tool or there is another reason the standard timeline above needs to be expedited, please make sure to let legal know ahead of time.
 
 **3. Additional requirements for Subprocessors**
 
-   If a vendor qualifies as a **subprocessor**, the review process will usually be more involved.
+If a vendor qualifies as a **subprocessor**, the review process will usually be more involved.
    
-   Generally speaking, a subprocessor is a vendor or tool that is going to be used to processes customer or end-user data as fundamental part of the PostHog product or infrastructure. For example, infrastructure providers (like cloud hosting) or services that process production data are clearly subprocessors.
+Generally speaking, a subprocessor is a vendor or tool that is going to be used to processes customer or end-user data as fundamental part of the PostHog product or infrastructure. For example, infrastructure providers (like cloud hosting) or services that process production data are clearly subprocessors.
    
-   Many internal tools used for productivity or operations (for example, documentation and productivity tools) are not *necessarily* subprocessors.
+Many internal tools used for productivity or operations (for example, documentation and productivity tools) are not *necessarily* subprocessors.
    
-   As a rule of thumb, any vendor that needs to have access to customer end-user data in order for a part of the PostHog product to function should raise alarm bells, but if you are unsure whether a tool/vendor qualifies as a subprocessor, always check with #legal early.
+As a rule of thumb, any vendor that needs to have access to customer end-user data in order for a part of the PostHog product to function should raise alarm bells, but if you are unsure whether a tool/vendor qualifies as a subprocessor, always check with #legal early.
    
-   For new subprocessors:
+For new subprocessors:
 
-   * Customers must receive 14 days’ notice after the agreement is finalized before the vendor can be used in production.
-   * Because of this requirement, and because the legal and compliance documents for a subprocessor are generally going to be reviewed with careful detail, implementations involving new subprocessors will likely take additional time.
+* Customers must receive 14 days’ notice after the agreement is finalized before the vendor can be used in production.
+* Because of this requirement, and because the legal and compliance documents for a subprocessor are generally going to be reviewed with careful detail, implementations involving new subprocessors will likely take additional time.
 
- **4. Using the tool**
+**4. Using the tool**
 
-   Once:
-   * Legal review is complete.
-   * Contract documents are finalized and signed.
-   * Any required subprocessor notice period has passed.
+Once:
+* Legal review is complete.
+* Contract documents are finalized and signed.
+* Any required subprocessor notice period has passed.
    
-   ...the tool can be used in production.
+...the tool can be used in production.
