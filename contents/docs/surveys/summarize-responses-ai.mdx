@@ -1,0 +1,50 @@
+---
+title: Summarize Surveys with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) analyzes and summarizes your [Survey](/docs/surveys) responses, extracting themes, sentiment, and actionable insights from open-text and structured answers. Instead of reading hundreds of responses manually, ask PostHog AI to surface the patterns.
+
+## How it works
+
+PostHog AI reads through your Survey responses and produces:
+
+- **Theme extraction** – groups responses into common topics (e.g. "pricing concerns," "onboarding confusion," "missing features")
+- **Sentiment analysis** – classifies feedback as positive, neutral, or negative
+- **Actionable insights** – highlights specific suggestions and recurring requests
+- **Segment comparisons** – differences in feedback between user groups (e.g. free vs paid, new vs returning)
+
+You can ask follow-up questions to drill into specific themes, like "what do detractors say about pricing?" or "compare feedback from mobile vs desktop users."
+
+## Example
+
+When you ask PostHog AI to summarize an NPS Survey, it goes beyond the score. It analyzes open-text responses across the promoter, passive, and detractor groups to explain *why* users scored the way they did.
+
+A typical NPS summary might include:
+
+- **Promoters (9-10)** love the speed and ease of use, frequently mention the onboarding experience.
+- **Passives (7-8)** are satisfied but want better documentation and more integrations.
+- **Detractors (0-6)** cite pricing concerns and missing features like custom dashboards.
+
+This turns a single number into actionable feedback you can act on.
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Summarize responses from my latest NPS Survey`](https://app.posthog.com/#panel=max:Summarize%20responses%20from%20my%20latest%20NPS%20Survey)
+- [`What are the top themes in our checkout feedback Survey?`](https://app.posthog.com/#panel=max:What%20are%20the%20top%20themes%20in%20our%20checkout%20feedback%20Survey%3F)
+- [`What do detractors (NPS 0-6) complain about most?`](https://app.posthog.com/#panel=max:What%20do%20detractors%20%28NPS%200-6%29%20complain%20about%20most%3F)
+- [`Compare feedback from free vs paid users on the onboarding Survey`](https://app.posthog.com/#panel=max:Compare%20feedback%20from%20free%20vs%20paid%20users%20on%20the%20onboarding%20Survey)
+- [`What actionable improvements do users suggest most frequently?`](https://app.posthog.com/#panel=max:What%20actionable%20improvements%20do%20users%20suggest%20most%20frequently%3F)
+
+## Tips for better results
+
+- **Name the Survey** – "from the checkout feedback Survey" helps PostHog AI find the right dataset
+- **Filter by segment** – "from enterprise users" or "from detractors only" narrows the analysis to the most relevant responses
+- **Ask about specific themes** – "What do users say about pricing?" focuses the summary on a single topic
+- **Request actionable output** – "What are the top three things we should fix?" prompts PostHog AI to prioritize its findings
+- **Compare segments** – "How does feedback differ between free and paid users?" reveals differences you might not spot manually
+
+## Get started
+
+To start summarizing Survey responses with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here). Survey summarization requires an active Survey with collected responses.

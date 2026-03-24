@@ -195,199 +195,31 @@ const HomeHitCounter = () => {
     )
 }
 
-const AIAgents = () => {
-    const columns = [
-        { name: '', width: 'auto', align: 'center' as const },
-        { name: 'Agent', width: 'minmax(150px,300px)', align: 'left' as const },
-        { name: 'Skills', width: 'minmax(auto,1fr)', align: 'left' as const },
-    ]
+const COL1 = [
+    'ycombinator',
+    'airbus',
+    'ukgovt',
+    'nationaldesignstudio',
+    'trust',
+    'lovable',
+    'startengine',
+    'researchgate',
+    'heygen',
+]
 
-    const rows = [
-        {
-            cells: [
-                { content: 1 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <Link to="/ai" state={{ newWindow: true }}>
-                                            <img
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
-                                                className="w-16 -m-2"
-                                            />
-                                        </Link>
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
-                                            Hi, I'm PostHog AI
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <Link to="/ai" state={{ newWindow: true }}>
-                                    PostHog AI
-                                </Link>
-                                <span className="text-sm text-secondary">Helpful chatbot, data concierge</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content: 'Writes SQL, builds data transformations, gathers context in insights',
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 2 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <Link to="/raquel" state={{ newWindow: true }}>
-                                            <img
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png"
-                                                className="w-16 -m-2"
-                                            />
-                                        </Link>
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">
-                                            Hi, I'm Raquel
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <span>
-                                    <Link to="/raquel" state={{ newWindow: true }}>
-                                        Raquel
-                                    </Link>{' '}
-                                    – <em>beta</em>
-                                </span>
-                                <span className="text-sm text-secondary">Hands-on exec</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content: 'Researches complex data problems, summarizes session recordings',
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 3 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png"
-                                            className="w-16 -m-2"
-                                        />
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">
-                                            Hi, I'm Annika
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <span>
-                                    <strong>Annika</strong> – <em>beta</em>
-                                </span>
-                                <span className="text-sm text-secondary">Product manager</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content:
-                        'Identifies errors and UX bugs, writes requirements docs, monitors code changes with phased rollouts',
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 4 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png"
-                                            className="w-16 -m-2"
-                                        />
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
-                                            Hi, I'm Marius
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <span>
-                                    <strong>Marius</strong> – <em>beta</em>
-                                </span>
-                                <span className="text-sm text-secondary">10x engineer</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content:
-                        'Implements bug fixes, creates and configures feature flags, writes code and generates pull requests',
-                    className: 'text-sm',
-                },
-            ],
-        },
-    ]
-
-    return <OSTable columns={columns} rows={rows} size="sm" />
-}
-
-const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
-
-const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
+const COL2 = [
+    'supabase',
+    'mistralai',
+    'elevenlabs',
+    'convex',
+    'hasura',
+    'exa',
+    'raycast',
+    'resend',
+    'greptile',
+    'wisprflow',
+    'posthog',
+]
 
 const companyBreakdowns = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
@@ -406,6 +238,8 @@ const companyBreakdowns = {
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
+    arr: { col1: 'Measured in ARR', col2: 'Measured in GDP' },
+    devTool: { col1: 'Trendy devtool', col2: 'Trendy, but not a devtool' },
 }
 
 const companyAttributes = {
@@ -413,6 +247,9 @@ const companyAttributes = {
         'ycombinator',
         'airbus',
         // "elevenlabs",
+        // 'convex',
+        'nationaldesignstudio',
+        'ukgovt',
         'trust',
         'lovable',
         // "supabase",
@@ -420,15 +257,19 @@ const companyAttributes = {
         'startengine',
         // "mistralai",
         // "raycast",
+        // "resend",
         'researchgate',
-        'exa',
+        // 'exa',
         'heygen',
+        // 'greptile',
+        // 'wisprflow',
         // "posthog"
     ],
     colorful: [
         'ycombinator',
         // "airbus",
         // "elevenlabs",
+        'convex',
         'trust',
         'lovable',
         'supabase',
@@ -436,15 +277,21 @@ const companyAttributes = {
         'startengine',
         'mistralai',
         'raycast',
+        // 'resend',
         // "researchgate",
-        // "heygen",
+        'heygen',
         // 'exa',
+        // 'nationaldesignstudio',
+        // 'ukgovt',
+        // 'wisprflow',
+        // 'greptile',
         'posthog',
     ],
     hardware: [
         // "ycombinator",
         'airbus',
         // "elevenlabs",
+        // 'convex',
         // "trust",
         // "lovable",
         // "supabase",
@@ -452,15 +299,23 @@ const companyAttributes = {
         // "startengine",
         // "mistralai",
         // "raycast",
+        // 'resend',
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'nationaldesignstudio',
+        // 'wisprflow',
+        // 'greptile',
+        'ukgovt',
         'posthog',
     ],
     planes: [
         // "ycombinator",
         'airbus',
+        // 'nationaldesignstudio',
+        'ukgovt',
         // "elevenlabs",
+        // 'convex',
         // "trust",
         // "lovable",
         // "supabase",
@@ -468,31 +323,41 @@ const companyAttributes = {
         // "startengine",
         // "mistralai",
         // "raycast",
+        // 'resend',
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'wisprflow',
+        // 'greptile',
         // "posthog"
     ],
     highValue: [
+        'ukgovt',
         'airbus',
         'elevenlabs',
+        // 'convex',
         // "ycombinator",
         'lovable',
         'supabase',
+        // 'nationaldesignstudio',
         'hasura',
         // "trust",
         // "startengine",
         'mistralai',
         // "raycast",
+        // 'resend',
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'wisprflow',
+        // 'greptile',
         // "posthog"
     ],
     caseStudy: [
         'ycombinator',
         // "airbus",
         'elevenlabs',
+        // 'convex',
         // "trust",
         'lovable',
         'supabase',
@@ -500,9 +365,14 @@ const companyAttributes = {
         // "startengine",
         // "mistralai",
         // "raycast",
+        // 'resend',
         'researchgate',
         'exa',
         // "heygen",
+        // 'nationaldesignstudio',
+        // 'wisprflow',
+        // 'greptile',
+        // 'ukgovt',
         'posthog',
     ],
     easyToYell: [
@@ -510,31 +380,43 @@ const companyAttributes = {
         'airbus',
         // "elevenlabs",
         'trust',
+        'convex',
         // "lovable",
         // "supabase",
         // "hasura",
         // "startengine",
         // "mistralai",
         'raycast',
+        'resend',
         // "researchgate",
         'exa',
         'heygen',
         'posthog',
+        'wisprflow',
+        // 'greptile',
+        // 'nationaldesignstudio',
+        'ukgovt',
     ],
     goodBandName: [
         // "ycombinator",
         'elevenlabs',
         'lovable',
         // "hasura",
+        'convex',
         'trust',
         // "airbus",
         // "supabase",
         'startengine',
         // "mistralai",
         'raycast',
+        'resend',
         'researchgate',
         //'exa',
         // "heygen",
+        'nationaldesignstudio',
+        'wisprflow',
+        // 'greptile',
+        // 'ukgovt',
         'posthog',
     ],
     explainable: [
@@ -542,6 +424,7 @@ const companyAttributes = {
         'airbus',
         // "trust",
         'lovable',
+        // 'convex',
         // "elevenlabs",
         // "supabase",
         // "hasura",
@@ -549,7 +432,12 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        // 'resend',
         'exa',
+        'nationaldesignstudio',
+        'ukgovt',
+        'wisprflow',
+        // 'greptile',
         // "heygen",
         // "posthog"
     ],
@@ -558,20 +446,27 @@ const companyAttributes = {
         'airbus',
         'trust',
         'lovable',
+        'convex',
         // "elevenlabs",
         // "supabase",
         'hasura',
         // "startengine",
         // "mistralai",
         'raycast',
+        'resend',
         // "researchgate",
         'exa',
         'heygen',
+        // 'greptile',
+        // 'nationaldesignstudio',
+        'wisprflow',
+        'ukgovt',
         'posthog',
     ],
     realWords: [
         // "ycombinator",
         'airbus',
+        'convex',
         'trust',
         'lovable',
         'elevenlabs',
@@ -580,15 +475,21 @@ const companyAttributes = {
         'startengine',
         // "mistralai",
         // "raycast",
+        'resend',
         'researchgate',
         //'exa',
         // "heygen",
+        'nationaldesignstudio',
+        // 'ukgovt',
+        // 'greptile',
+        'wisprflow',
         'posthog',
     ],
     american: [
         'ycombinator',
         // "airbus",
         // "elevenlabs",
+        'convex',
         'trust',
         // "lovable",
         'supabase',
@@ -596,9 +497,14 @@ const companyAttributes = {
         'startengine',
         // "mistralai",
         // "raycast",
+        'resend',
         'researchgate',
         'exa',
         'heygen',
+        'nationaldesignstudio',
+        // 'ukgovt',
+        'wisprflow',
+        'greptile',
         'posthog',
     ],
     pokemon: [
@@ -607,15 +513,65 @@ const companyAttributes = {
         // "elevenlabs",
         // "trust",
         'lovable',
+        'convex',
         'supabase',
         'hasura',
         // "startengine",
         'mistralai',
         'raycast',
+        'resend',
         // "researchgate",
         'exa',
         'heygen',
+        // 'wisprflow',
+        // 'nationaldesignstudio',
+        // 'ukgovt',
+        'greptile',
         // "posthog"
+    ],
+    arr: [
+        'ycombinator',
+        'airbus',
+        'elevenlabs',
+        'trust',
+        'lovable',
+        'convex',
+        'supabase',
+        'hasura',
+        'startengine',
+        'mistralai',
+        'raycast',
+        'resend',
+        'researchgate',
+        'exa',
+        'heygen',
+        'wisprflow',
+        'greptile',
+        // 'ukgovt',
+        // 'nationaldesignstudio',
+        'posthog',
+    ],
+    devTool: [
+        'ycombinator',
+        // 'airbus',
+        'elevenlabs',
+        // 'trust',
+        // 'lovable',
+        'convex',
+        'supabase',
+        'hasura',
+        // 'startengine',
+        'mistralai',
+        'raycast',
+        'resend',
+        // 'researchgate',
+        'exa',
+        // 'heygen',
+        // 'wisprflow',
+        'greptile',
+        // 'ukgovt',
+        // 'nationaldesignstudio',
+        'posthog',
     ],
 }
 
@@ -652,7 +608,7 @@ const productCategories = [
         handles: [
             'web_analytics',
             'revenue_analytics',
-            'trends',
+            'trenationaldesignstudio',
             'funnels',
             'user_paths',
             'lifecycle',
@@ -1341,12 +1297,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HomeHitCounter />,
-    },
-    {
-        name: 'AIAgents',
-        kind: 'flow',
-        props: [],
-        Editor: () => <AIAgents />,
     },
     {
         name: 'Pricing',

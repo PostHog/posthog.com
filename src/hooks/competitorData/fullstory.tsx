@@ -177,10 +177,17 @@ export const fullstory = {
             features: {
                 issue_management: false,
                 performance_monitoring: false,
+                stack_tracing: true, // https://help.fullstory.com/hc/en-us/articles/360020828533-How-do-I-use-the-Fullstory-Console
             },
         },
         dashboards: {
             available: true,
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
         },
     },
     platform: {
@@ -188,6 +195,7 @@ export const fullstory = {
             open_source: false,
             reverse_proxy: true,
             self_host: false,
+            eu_hosting: true,
         },
         pricing: {
             free_tier: true,
@@ -231,6 +239,7 @@ export const fullstory = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,
