@@ -115,75 +115,34 @@ graph LR
 
 ## Infrastructure view
 
-This shows the major infrastructure components as deployed on PostHog Cloud (AWS).
+On PostHog Cloud, the application services run in an EKS (Kubernetes) cluster on AWS, while the data stores are managed separately.
 
 ```mermaid
-flowchart TD
-    subgraph K8s ["EKS cluster"]
-        Ingress(Ingress / ALB)
+flowchart LR
+    Internet(Internet) --> ALB[ALB]
 
-        subgraph RustServices ["Rust services"]
-            Capture[Capture]
-            Flags[Feature flags]
-            ReplayCapture[Replay capture]
-            PropDefs[Property definitions]
-        end
-
-        subgraph DjangoServices ["Django"]
-            Web[Web app / API]
-        end
-
-        subgraph Workers ["Background workers"]
-            Celery[Celery workers]
-            TemporalWorker[Temporal workers]
-            DagsterWorker[Dagster workers]
-        end
-
-        subgraph CDPServices ["CDP"]
-            CDPNode[Ingestion / Destinations<br/>Node.js]
-        end
+    subgraph EKS ["EKS cluster (Kubernetes)"]
+        ALB --> Rust["Rust services<br/>(capture, feature flags, replay)"]
+        ALB --> Django["Django<br/>(web app, API)"]
+        CDP["CDP worker<br/>(Node.js)"]
+        Workers["Background workers<br/>(Celery, Temporal, Dagster)"]
     end
 
-    subgraph DataStores ["Data stores"]
-        PG[(Aurora PostgreSQL)]
-        Redis[(Redis / Valkey)]
-        Blob[(S3)]
-
-        subgraph CH ["ClickHouse cluster (self-managed EC2)"]
-            CH1[(Shard 1<br/>replicated)]
-            CH2[(Shard 2<br/>replicated)]
-        end
-
-        Kafka{{Kafka / WarpStream}}
-    end
-
-    ClientApps(Client Apps / SDKs) --> Ingress
-    Users(Users) --> Ingress
-
-    Ingress --> RustServices
-    Ingress --> DjangoServices
-
-    Capture --> Kafka
-    ReplayCapture --> Kafka
-    ReplayCapture --> Blob
-    Kafka --> CDPNode
-    CDPNode --> Kafka
+    Rust --> Kafka{{Kafka / WarpStream}}
+    Kafka --> CDP
+    CDP --> Kafka
     Kafka --> CH
 
-    CDPNode <--> PG
-    PropDefs <--> PG
+    CH[("ClickHouse<br/>(sharded, self-managed EC2)")]
+    PG[("Aurora PostgreSQL")]
+    Redis[("Redis / Valkey")]
+    S3[("S3<br/>(recordings, exports)")]
 
-    DjangoServices <--> PG
-    DjangoServices <--> CH
-    DjangoServices <--> Redis
-
-    Flags --> Redis
-    Flags --> PG
-
+    Django <--> PG
+    Django <--> CH
+    Django <--> Redis
+    CDP <--> PG
     Workers <--> PG
     Workers <--> CH
-
-    RustServices -.- Redis
-
-    class K8s,RustServices,DjangoServices,Workers,CDPServices,DataStores,CH sgraph;
+    Rust --> S3
 ```
