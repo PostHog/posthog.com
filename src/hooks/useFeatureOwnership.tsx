@@ -313,6 +313,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Replay',
         owner: ['replay'],
     },
+    'reverse-proxy': {
+        feature: 'Reverse proxy',
+        owner: ['platform-features'],
+        label: 'feature/reverse-proxy',
+    },
     'revenue-analytics': {
         feature: 'Revenue analytics',
         owner: ['customer-analytics'],
@@ -322,7 +327,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['customer-analytics'],
     },
     sdks: {
-        feature: 'SDKs & client libraries (web, server-side)',
+        feature: 'SDKs & client libraries',
         owner: ['client-libraries'],
         notes: (
             <>
@@ -335,36 +340,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     incident.io schedule
                 </PrivateLink>
                 .
-                <br />
-                <br />
-                <strong>
-                    For Mobile SDK issues, defer to the Mobile folks (@mobile-folks or @client-libraries-folks on Slack)
-                    first.
-                </strong>
             </>
         ),
-        label: 'feature/libraries',
+        label: ['feature/libraries', 'feature/mobile'],
     },
     'sdks-doctor': {
         feature: 'SDK doctor',
         owner: ['growth'],
         label: 'feature/sdk-doctor',
-    },
-    'sdks-mobile': {
-        feature: 'SDKs (mobile)',
-        owner: ['client-libraries'],
-        notes: (
-            <>
-                Shared responsibility, with features owned by the relevant small team, or try{' '}
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink>.
-                There is an engineer assigned to SDK support on a rotating schedule. Check the{' '}
-                <PrivateLink url="https://app.incident.io/posthog/on-call/schedules/01K8WVCP2MA3TWXS41E7Y5N4AQ">
-                    incident.io schedule
-                </PrivateLink>
-                .
-            </>
-        ),
-        label: 'feature/mobile',
     },
     search: {
         feature: 'Search',

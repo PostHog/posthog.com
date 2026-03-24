@@ -100,14 +100,17 @@ If the answer to any of the above questions is 'no' then it's likely that there 
   - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
-- Commission is paid out quarterly, and in any case after an invoice is paid
-  - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
-    - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
-  - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
+- Commission is paid out quarterly, and is subject to clawbacks if the invoices remain unpaid.
+  - We want you to secure upfront payment - which helps PostHog and helps you.
+    - If you close an annual contract with monthly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
+  - We want you to ensure the customer has paid, and we don't want AEs to throw invoice chasing to a finance person
+    -  This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay.
   - For monthly customers, commission is only paid after all 3 invoices have been paid
     - Commission is still paid out quarterly even if the customer pays monthly
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
+  - Overdue invoices from the current quarter will be excluded from commission payouts, with the cutoff being the 14th of the calendar month following the quarter (January, April, July, and October)
+  - Invoices that are issued in the final period of the current quarter, but are due at a date beyond the 14th of the calendar month following the quarter (January, April, July, and October), will be paid on the good faith assumption that the customer will pay on time and you will assist in securing timely payment. If the invoice becomes overdue in a future quarter, it will be subject to a clawback in that quarter. 
+  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis or via clawback.
+  - Commission payments are made at the end of January, April, July, and October. Fraser will send you an email that breaks down your commission and explains how you did.
 - In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 
 ### Performance expectations for Technical Account Executives
