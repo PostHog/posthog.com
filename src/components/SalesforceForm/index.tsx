@@ -281,7 +281,7 @@ interface CTAButtonProps {
 const CTAButton = ({ location, width, size, variant, icon, label, rowPadding, secondaryButtons }: CTAButtonProps) => {
     return (
         <div
-            className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-4'} ${
+            className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-1'} ${
                 rowPadding || ''
             } ${location === 'bottom' && secondaryButtons?.length ? 'flex items-center justify-end gap-2' : ''}`}
         >
@@ -465,7 +465,7 @@ export default function SalesforceForm({
                     <div className="flex-1">
                         <ScrollArea className="min-h-0">
                             <div className="@container">
-                                <div className={`grid grid-cols-12 gap-2 ${formOptions?.rowPadding || ''}`}>
+                                <div className={`grid grid-cols-12 gap-2 pt-4 ${formOptions?.rowPadding || ''}`}>
                                     {formOptions?.showToField && (
                                         <>
                                             <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
