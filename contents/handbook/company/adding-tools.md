@@ -4,7 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# What is it?
+
+## What is it?
 
 In [the software section of our spending money page](/handbook/people/spending-money#software) we say:
 
@@ -16,11 +17,11 @@ It is inspired by [this post on "fad resilience" from Slack](https://slack.engin
 
 What makes us fad resilient is that you are free (and encouraged) to try new things. But by introducing new things, you become responsible for rolling them out. And for replacing anything they make obsolete.
 
-# What is it *not*?
+## What is it *not*?
 
 This doesn't apply to making "cheap decisions". A cheap decision is one that can be easily completed or reversed, or one that only affects your work not other people's; for those types of decisions you should continue to follow the guidance in the [the software section of our spending money page](/handbook/people/spending-money#software). This is about larger scale, broad based adoption of new company-wide tools, or implementation of vendors that are going to be used in the PostHog product. 
 
-# How does it work?
+## How does it work?
 
 If you find yourself saying something like:
 
@@ -31,21 +32,21 @@ Then you need to do the following:
 
 **1. Try the tool in a low-risk context**
 
-   Use the tool in a context where it is easily replaced and does not involve sensitive data. If you have doubts about what information can be shared at this stage, check with #legal first. Similar to [a spike](https://wiki.c2.com/?SpikeSolution).
+Use the tool in a context where it is easily replaced and does not involve sensitive data. If you have doubts about what information can be shared at this stage, check with #legal first. Similar to [a spike](https://wiki.c2.com/?SpikeSolution).
 
-   The goal is to:
-   * Check whether the tool works as well as you expect
-   * Understand the consequences of introducing it
-   * Learn what data the tool may have access to
-   * Give others a way to see it in action
+The goal is to:
+* Check whether the tool works as well as you expect
+* Understand the consequences of introducing it
+* Learn what data the tool may have access to
+* Give others a way to see it in action
 
 **2. Open an issue in [Company Internal](https://github.com/PostHog/company-internal)**
 
-   At the same time open an issue describing why we should adopt the tool. Anyone proposing a new vendor should think about the impact on the *whole* company, not just their team or use case.
+At the same time open an issue describing why we should adopt the tool. Anyone proposing a new vendor should think about the impact on the *whole* company, not just their team or use case.
 
-   You should carefully be thinking about and your proposal should consider the types of things described below:
+You should carefully be thinking about and your proposal should consider the types of things described below:
 
-# What to think about?
+## What to think about?
 
 **Problem and motivation**
 * Why should we introduce this tool now? What problem does it solve?
@@ -67,7 +68,7 @@ Then you need to do the following:
   * Customer data – customer PII (name, email, address, IP addresses, etc.)
   * Customer’s customers’ data – end-user PII
 
-Also consider:
+  Also consider:
 * Where will the data be stored or processed? (significant preference toward EU/US as these jurisdictions are lower risk, well vetted, and have robust privacy frameworks)
 * Can we avoid sending customer or end-user PII?
 * Can data be aggregated, redacted or irreversibly anonymized before leaving our systems?
@@ -99,7 +100,7 @@ These are guidelines, not a rigid checklist.  The goal is for everyone to be thi
    
 Many proposals will not make it past this stage – that's good. We don't want a stack that changes constantly, but we also don't want one that never improves.
 
-# After a decision is made: Review process
+## After a decision is made: Review process
 
 Once a decision has been made to adopt a tool/vendor, the person proposing the tool is responsible for coordinating the next steps.
 
