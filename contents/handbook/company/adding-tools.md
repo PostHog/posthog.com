@@ -62,13 +62,13 @@ Then you need to do the following:
    * What type of data would be sent to the tool/vendor and does the benefit justify that risk?
 
      From least to most sensitive:
-       * General data - publicly accessible information
+       * General data – publicly accessible information
        * Business data – internal PostHog data without customer data
        * Customer data – customer PII (name, email, address, IP addresses, etc.)
        * Customer’s customers’ data – end-user PII
 
    Also consider:
-   * Where will the data be stored or processed? (significant preference toward EU/US as these jurisdictions are lower risk, well vetted, and have robust privacy framerworks)
+   * Where will the data be stored or processed? (significant preference toward EU/US as these jurisdictions are lower risk, well vetted, and have robust privacy frameworks)
    * Can we avoid sending customer or end-user PII?
    * Can data be aggregated, redacted or irreversibly anonymized before leaving our systems?
 
@@ -114,9 +114,9 @@ Once a decision has been made to adopt a tool/vendor, the person proposing the t
    Once the business terms are mostly settled, the vendor’s documents will need to go through legal review before anything is signed.
 
    Typically, these includes:
-   * **Master Services Agreement** - the primary contract governing the relationship.
-   * **Data Processing Agreement** - required if the vendor processes personal data.
-   * **Security/compliance documentation** - e.g. SOC 2, ISO certifications, or similar.
+   * **Master Services Agreement** – the primary contract governing the relationship.
+   * **Data Processing Agreement** – required if the vendor processes personal data.
+   * **Security/compliance documentation** – e.g. SOC 2, ISO certifications, or similar.
 
    As soon as it looks like we intend to move forward with the vendor, post in #legal, and give a heads-up that:
    * A decision has been made to use the vendor.
@@ -128,7 +128,7 @@ Once a decision has been made to adopt a tool/vendor, the person proposing the t
 
 **2. Plan time for legal review**
 
-   Legal review usually takes a few business days depending on bandwidth, priorities and existing obligations, and negotiations may take longer depending on the use case, the vendor’s contract terms and how quickly they review and negotiate proposed changes.
+   Legal review usually takes a few business days depending on bandwidth, priorities, and existing obligations, and negotiations may take longer depending on the use case, the vendor’s contract terms and how quickly they review and negotiate proposed changes.
    
    Plan accordingly and involve legal early. If you have a deadline for implementing the tool or there is another reason the standard timeline above needs to be expedited, please make sure to let legal know ahead of time.
 
