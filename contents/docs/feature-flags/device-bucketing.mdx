@@ -41,6 +41,48 @@ That's it. PostHog will now use the device ID to determine the flag value for th
 
 The device ID is automatically set by the web SDK (`posthog-js` `v1.307.1` and above), but you can also set it manually if needed.
 
+## Older SDK versions
+
+If you're using an older SDK version that doesn't natively support device bucketing, you can still achieve the same behavior by passing `$device_id` as a person property when evaluating feature flags.
+
+### JavaScript / Browser
+
+```js
+// Get the device ID from posthog-js
+const deviceId = posthog.get_property('$device_id')
+
+// Pass it as a person property for flag evaluation
+posthog.setPersonPropertiesForFlags({
+    '$device_id': deviceId
+})
+```
+
+### Node.js
+
+```node
+await client.getFeatureFlag(
+    'flag-key',
+    'distinct_id_of_the_user',
+    {
+        personProperties: {
+            '$device_id': deviceId
+        }
+    }
+)
+```
+
+### Python
+
+```python
+posthog.get_feature_flag(
+    'flag-key',
+    'distinct_id_of_the_user',
+    person_properties={
+        '$device_id': device_id
+    }
+)
+```
+
 ## Further reading
 
 - [Creating feature flags](/docs/feature-flags/creating-feature-flags)
