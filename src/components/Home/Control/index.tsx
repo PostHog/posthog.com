@@ -55,6 +55,7 @@ import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
 import WizardCommand from 'components/WizardCommand'
+import HeroCarousel from 'components/Home/HeroCarousel'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -1220,6 +1221,15 @@ const Customers = () => {
     )
 }
 
+function HeroImage(): JSX.Element {
+    return (
+        <CloudinaryImage
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
+            className="w-64 @2xl:float-right @2xl:ml-4"
+        />
+    )
+}
+
 function TaglineControl(): JSX.Element {
     return (
         <>
@@ -1264,7 +1274,7 @@ const HomeLogo = () => {
     const { siteSettings } = useApp()
     return (
         <>
-            <Logo className="inline-block h-8 mr-1" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+            <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
         </>
     )
 }
@@ -1325,11 +1335,13 @@ const mdxComponents: Record<string, React.ComponentType<any>> = {
     AppCount,
     CompanyStageTabs,
     CTAs,
+    HeroCarousel,
     HomeHitCounter,
     Pricing,
     Customers,
     CTA: HomeCTA,
     Logo: HomeLogo,
+    HeroImage,
     ButtonDataStack: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
     ButtonPricing: () => <Button url="/pricing">Explore pricing</Button>,
     ButtonAI: () => <Button url="/ai">Learn about PostHog AI</Button>,
