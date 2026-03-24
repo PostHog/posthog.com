@@ -136,6 +136,37 @@ You can also exclude people who completed certain events between two specific st
 
 These people are completely excluded from the entire funnel.
 
+### Using data warehouse tables
+
+You can use [data warehouse](/docs/data-warehouse) tables as steps in your funnel alongside regular PostHog events and actions. This enables you to build funnels that combine product analytics data with external data from sources like Salesforce, Stripe, Hubspot, and more.
+
+To add a data warehouse table as a funnel step:
+
+1. Click on a step in your funnel
+2. Go to the **Data warehouse tables** tab
+3. Select the table you want to use
+
+When using a data warehouse table, you must configure three fields:
+
+| Field | Description |
+|-------|-------------|
+| Unique ID | A unique row identifier used to detect missing or duplicate records. |
+| Timestamp | A timestamp field used to order step timing and apply the funnel date range. |
+| Aggregation target | The field used to match people or groups across funnel steps. Must match your PostHog person or group ID. |
+
+You can use the same data warehouse table multiple times in a single funnel with different field configurations. For example, with a Salesforce `opportunity` table:
+
+- **Step 1** - Opportunity created, using `created_date` as the timestamp
+- **Step 2** - Opportunity closed, using `close_date` as the timestamp
+
+<CalloutBox icon="IconInfo" title="Exclusion steps" type="fyi">
+
+Exclusion steps are not supported for data warehouse tables. You can only exclude events and actions from funnels, not data warehouse table rows.
+
+</CalloutBox>
+
+For more on using data warehouse tables in insights, see [visualizing data warehouse data](/docs/data-warehouse/insights).
+
 ### Conversion rate calculation
 
 There are two options for showing conversion rates in a funnel:
