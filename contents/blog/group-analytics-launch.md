@@ -25,7 +25,7 @@ Group Analytics are used for tracking and analyzing multiples of any event type 
     size="md"
     name="Weyert de Boer"
     title="Senior Software Engineer, Tapico"
-    quote={`“The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. Group Analytics also give us more detailed insight into user behaviour between instances. We love it!”`}
+    quote={`“The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. Group Analytics also give us more detailed insight into user behavior between instances. We love it!”`}
 />
 </BorderWrapper>
 

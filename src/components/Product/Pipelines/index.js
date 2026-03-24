@@ -150,7 +150,7 @@ const PairsWithArray = [
         color: 'blue',
         product: 'Product analytics',
         description:
-            'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
+            'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviors.',
         url: '/product-analytics',
     },
     {

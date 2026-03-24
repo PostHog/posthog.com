@@ -176,6 +176,22 @@ If the server fails to start, the first troubleshooting step is to clear cache. 
 pnpm clean && mkdir .cache && pnpm install && pnpm start
 ```
 
+### Minimal mode
+
+For faster builds, you can run in minimal mode:
+
+```bash
+pnpm build:minimal
+```
+
+Minimal mode only builds:
+- Docs pages (`/docs/*`)
+- Handbook pages (`/handbook/*`)
+- Blog/content posts (`/blog/*`, `/tutorials/*`, `/library/*`, `/founders/*`, `/product-engineers/*`, `/newsletter/*`, `/spotlight/*`, `/customers/*`)
+- All pages in `src/pages/` (product pages, pricing, etc.)
+
+Everything else (apps, CDP, templates, jobs, API docs, SDK references, pagination/category/tag pages) won't exist - they'll 404. Next/previous navigation links and GitHub data for roadmaps/jobs will also be absent. Sourcemap generation is disabled.
+
 ### Environment variables
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
@@ -191,6 +207,26 @@ Once you have cloned the repo, the `contents/` directory contains a few key area
 -   `blog/` = our blog posts
 
 Inside each of these are a series of markdown files for you to edit.
+
+### Posts and blog filtering
+
+There are two ways to filter posts by tag:
+
+1. **Query param** — Add a `post_tags` query param to the URL, e.g., `/posts?post_tags=Comparisons`. This works on the main posts listing and allows saving/sharing filtered URLs.
+
+2. **Static tag pages** — For SEO purposes, we generate static pages at `/{category}/{tag}`, e.g., `/blog/session-replay`. These are generated at build time in `gatsby/createPages.ts`.
+
+#### Hidden from index
+
+Some categories and tags are intentionally hidden from the main posts index view. They still appear when you filter directly to that category or tag.
+
+**Categories hidden from index:** `customers`, `spotlight`, `changelog`, `comparisons`, `notes`, `repost`
+
+**Tags hidden from index:** `Comparisons`
+
+Posts can also set `hideFromIndex: true` in their frontmatter to be excluded.
+
+These exclusions are defined in `src/components/Edition/Posts.tsx` and `src/templates/BlogPost.tsx`.
 
 ## Making edits
 

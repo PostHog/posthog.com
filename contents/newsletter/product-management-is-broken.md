@@ -213,7 +213,7 @@ The magic of small teams isn't just about speed – it's about ownership. When s
 This is our playbook in its simplest terms:
 
 - **Great PMs don't control the team or roadmap**. They uncover insights that amplify the team’s impact, and ensure they don’t drift off course.
-- **Great product engineers don't need instructions**. They drive product decisions using context PMs provide, and their knowledge of what’s possible.
+- **Great product engineers don't need instructions**. They drive product decisions using [context PMs provide](/newsletter/what-does-a-product-manager-do), and their knowledge of what’s possible.
 
 Getting this dynamic right is how we ship fast, build right, and win
 

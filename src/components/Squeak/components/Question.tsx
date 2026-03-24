@@ -23,7 +23,7 @@ import {
 } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import { Check2, Close } from 'components/Icons'
 import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'

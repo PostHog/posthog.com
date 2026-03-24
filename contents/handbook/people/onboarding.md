@@ -77,7 +77,7 @@ It is important that you make the most out of the sync time with the new joiner 
 Your first week can definitely be a bit overwhelming at any new company, so here's what you can (roughly) expect!
 - You will meet (either in person or virtually) your team lead to discuss goals and aims over the next 30/60/90 days and beyond
 - You will get all your equipment set up and get access to all the accounts you need
-- You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company
+- You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company)
 - You should try and set up a few calls with a range of people to introduce yourself
 - You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
 - You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
@@ -124,9 +124,9 @@ We use a number of different tools to organise our work and communicate at PostH
 -   Slack - we have an internal workspace and a users Slack as well
 -   Brex (US, RoW) or Revolut (UK, EU) - company cards and expenses tracking
 -   Shopify - powers our merch store
--   CharlieHR - holiday tracking, personal details
--   Gusto - payroll and benefits (US)
--   Deel - contractor payroll (EU and special arrangements)
+-   Time off by Deel (Slack App) - holiday tracking
+-   Bamboo HR - payroll and benefits (US)
+-   Deel - contractor & EOR payroll & HRIS
 
 ### Engineering
 

@@ -1,0 +1,48 @@
+---
+title: Analyze data with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) generates [insights](/docs/product-analytics/insights), builds [dashboards](/docs/product-analytics/dashboards), and answers questions about your product data using natural language. Describe what you want to see, and PostHog AI creates the visualization with the right events, filters, and breakdowns pre-configured.
+
+## How it works
+
+PostHog AI identifies the right insight type (trends, funnels, retention, paths, or lifecycle), selects the relevant events and properties from your project, applies filters, breakdowns, and date ranges based on your description, and generates the visualization.
+
+You can refine results by asking follow-up questions – like "break this down by country" or "change the date range to last 90 days" – and PostHog AI updates the insight in place.
+
+## Supported insight types
+
+PostHog AI creates every insight type in Product Analytics:
+
+| Insight type | What it shows |
+|-------------|--------------|
+| **Trends** | Event counts over time |
+| **Funnels** | Conversion rates between steps |
+| **Retention** | How often users return |
+| **Paths** | How users navigate your product |
+| **Lifecycle** | New, returning, and dormant users |
+| **Stickiness** | How many days users perform an action |
+
+Beyond insights, PostHog AI can also build full [dashboards](/docs/product-analytics/dashboards), create [alerts](/docs/product-analytics/alerts) on trend metrics, and run [correlation analysis](/docs/product-analytics/correlation) to find patterns.
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`What changed across my product this week?`](https://app.posthog.com/#panel=max:!What%20changed%20across%20my%20product%20this%20week?)
+- [`Build a dashboard for tracking onboarding metrics`](https://app.posthog.com/#panel=max:!Build%20a%20dashboard%20for%20tracking%20onboarding%20metrics)
+- [`Show me a funnel from sign up to first project created`](https://app.posthog.com/#panel=max:!Show%20me%20a%20funnel%20from%20sign%20up%20to%20first%20project%20created)
+- [`Which events have the highest drop-off rate in the past 7 days?`](https://app.posthog.com/#panel=max:!Which%20events%20have%20the%20highest%20drop-off%20rate%20in%20the%20past%207%20days?)
+- [`Alert me when daily signups drop below 100`](https://app.posthog.com/#panel=max:!Alert%20me%20when%20daily%20signups%20drop%20below%20100)
+
+## Tips for better results
+
+- **Name your events explicitly** – "Show me `user_signed_up` events" works better than "show me signups" if PostHog AI can't match the event name
+- **Specify time ranges** – "in the last 30 days" or "this week" helps PostHog AI scope the query correctly
+- **Describe the visualization you want** – "as a funnel" or "broken down by browser" tells PostHog AI which insight type and breakdown to use
+- **Iterate with follow-ups** – Ask PostHog AI to adjust filters, add breakdowns, or change the chart type after it creates the initial insight
+- **Ask questions, not just commands** – "What changed this week?" and "Why did signups drop?" trigger PostHog AI to investigate and explain, not just build a chart
+
+## Get started
+
+To start analyzing data with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

@@ -129,5 +129,4 @@ The dashboard fires a `posthog:dimensions` event when it loads and you can use t
 
 ### Refreshing shared dashboards
 
-Dashboards are only refreshable by *internal* users, not external viewers. This functionality is on our roadmap. To support and follow progress, see this [issue on GitHub](https://github.com/PostHog/posthog/issues/10563).
-
+Shared and embedded dashboards auto-refresh every 30 minutes while the page is open. Auto-refresh pauses when the browser tab is inactive and resumes when the tab becomes visible again.

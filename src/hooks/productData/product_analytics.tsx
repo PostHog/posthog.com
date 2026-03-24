@@ -23,6 +23,7 @@ export const productAnalytics = {
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
+    wizardSupport: true,
     seo: {
         title: 'Product Analytics – Understand your product with PostHog',
         description:

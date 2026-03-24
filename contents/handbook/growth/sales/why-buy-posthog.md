@@ -14,7 +14,7 @@ AKA our Value Proposition, these are some of the things we've found useful to sh
 
 ### Summary
 
-By integrating PostHog into your app, you’ll be able to track and diagnose errors, roll out and test new features and gain a better understanding of your user behaviour.  With that greater understanding, you'll then be able to take action on it and respond to your user needs quickly and effectively.  Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.
+By integrating PostHog into your app, you’ll be able to track and diagnose errors, roll out and test new features and gain a better understanding of your user behavior.  With that greater understanding, you'll then be able to take action on it and respond to your user needs quickly and effectively.  Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.
 
 ### Use cases
 - [Automated error tracking](/error-tracking) for front and back end, coupled with other capabilities like product analytics and session replay lets you understand where the biggest issues are in your app, see them happening in real time and then diagnose and fix them.
@@ -59,7 +59,6 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 - [Easily connect revenue data](/revenue-analytics) with a few clicks to get a deeper understanding of which marketing efforts drive the most revenue.
 - [Ad platform connection](/docs/cdp/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
 
-
 ## Data Engineers
 
 ### One-liner
@@ -81,3 +80,11 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 - Analytics is an after-the-fact passive activity, but your events in PostHog can be so much more than that. You can use PostHog events to react to customer behaviors, without investing engineering time to make those workflows.
 - Our [usage-based pricing](/handbook/how-we-make-money) means that you’ll only pay for what you use and have full control of those costs, unlike opaque software contracts, where the prices go up every year with zero innovation attached.  
 - Plus, [the way we do sales is different](/sales).
+
+## Per-product sales enablement
+
+The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+
+- [Managed data warehouse (DuckDB)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
+
+If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  

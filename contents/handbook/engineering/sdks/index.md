@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-There is no dedicated SDK team at PostHog. Instead, SDK development and maintenance is a collaborative effort across the engineering organization. [@PostHog/team-client-libraries](https://github.com/orgs/PostHog/teams/team-client-libraries) exists in GitHub to coordinate the collaboration for those who are more interested than normal in the development of these SDKs.
+There is now a small, dedicated SDK team at PostHog ([@PostHog/team-client-libraries](https://github.com/orgs/PostHog/teams/team-client-libraries)) that helps drive direction and coordination. However, SDK development and maintenance remains a collaborative effort across the engineering organization. [@PostHog/client-libraries-approvers](https://github.com/orgs/PostHog/teams/client-libraries-approvers) exists in GitHub to coordinate the collaboration for those who are more interested than normal in the development of these SDKs.
 
 ## How SDK work gets done
 
@@ -18,13 +18,13 @@ This distributed model means SDKs get attention from engineers with diverse expe
 
 ### Want to get more deeply involved?
 
-If you're interested in contributing to our SDKs — whether that's fixing bugs, adding features, or improving documentation — drop a message in **#feature-client-libraries**. We're always happy to have more people helping out, and it's a great way to learn about different parts of the PostHog ecosystem.
+If you're interested in contributing to our SDKs — whether that's fixing bugs, adding features, or improving documentation — drop a message in **#team-client-libraries**. We're always happy to have more people helping out, and it's a great way to learn about different parts of the PostHog ecosystem.
 
 You can also sign up for the [SDK support rotation](/handbook/engineering/sdks/support-rotation) to get hands-on experience with SDK issues.
 
 ## Slack channels
 
-- **#feature-client-libraries** — Main channel for SDK discussions and general questions
+- **#team-client-libraries** — Main channel for SDK discussions and general questions
 - **#support-client-libraries** — Main channel for SDK support discussions, handovers between support rotation engineers 
 - **#approvals-client-libraries** — Where release approval requests are posted (see [Releases](/handbook/engineering/sdks/releases))
 

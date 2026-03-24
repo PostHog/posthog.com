@@ -22,7 +22,7 @@ We'll explain how they work, why we chose this structure, and the tradeoffs we a
 
 ## How small teams work at PostHog
 
-Right now we're 47 people spread across ten countries working asynchronously and [shipping fast](/changelog/2024). And we’re organized into 15 small teams.
+Right now we're 47 people spread across ten countries working asynchronously and [shipping fast](/changelog). And we’re organized into 15 small teams.
 
 Most teams cover individual products, such as data warehouse, replay, pipeline, or product analytics, but we also have small teams covering people and operations, marketing, and growth.
 

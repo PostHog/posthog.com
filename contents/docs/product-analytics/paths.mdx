@@ -34,8 +34,6 @@ export const usersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v17
 export const usersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/users-dark-mode.png"
 export const exclusionslight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/exclusions-light-mode.png"
 export const exclusionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/exclusions-dark-mode.png"
-export const pathLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/path-cleaning-light-mode.png"
-export const pathDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/path-cleaning-dark-mode.png"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=714"
@@ -172,27 +170,11 @@ When using wildcards on custom events, the pattern will be matched against the e
 
 ### Path cleaning rules
 
-Path cleaning rules are an advanced version of [wildcard groups](#wildcard-groups). They use regex to match instead of the simple `*` wildcard.
+Path cleaning rules are an advanced version of [wildcard groups](#wildcard-groups). They use regex to match dynamic URL segments and replace them with a readable alias, reducing the cardinality of your path data.
 
-Path cleaning rules consist of two parts:
+For example, URLs like `/user/123`, `/user/456`, and `/user/789` can all be cleaned into `/user/:id` so they appear as a single row in your path tables.
 
-- **Regex** – used to match the various URLs you would like to combine.
-- **Alias** – used to replace the portion that matched the regex.
-
-Path cleaning rules can either be added directly to an insight, or you can configure global path cleaning rules in your [project settings](https://us.posthog.com/settings/project-product-analytics#path-cleaning).
-
-<ProductScreenshot
-    imageLight = {pathLight} 
-    imageDark = {pathDark}
-    classes="rounded"
-    alt= "Create path cleaning dialogue"
-/>
-
-As an example, say your app uses a URL structure of the form `/merchant/<merchant_id>/dashboard`. Within your paths insight, you don't want to show different URLs for each merchant dashboard.
-
-To combine them all into a single step, use the regex `\/merchant\/\d+\/dashboard$` and set `/merchant/dashboard` as the alias. Now, any pageview events that match the regex will have their path replaced with `/merchant/dashboard`.
-
-For example, `https://example.com/merchant/12345/dashboard` `https://example.com/merchant/6789/dashboard` would both become `https://example.com/merchant/dashboard` and be shown as a single step.
+For details on configuring path cleaning rules, including examples and where they apply, see the [path cleaning](/docs/product-analytics/path-cleaning) docs.
 
 ### Exclusions
 
@@ -223,3 +205,24 @@ There is an option right above the graph to select the number of steps to displa
 />
 
 Increasing the number of steps will show a longer portion of a user's journey through your product. The drawback is that too many steps can often show a cluttered view. To fix this, see above on how to [exclude certain events](#exclusions).
+
+
+## Why don't my path numbers match my funnel numbers?
+
+Paths and funnels use different queries and answer different questions, so their numbers aren't meant to match.
+
+**Funnels** count unique users. They answer: *"How many users completed this specific sequence?"* Every user who enters step 1 is counted, and you see how many reached each subsequent step.
+
+**Paths** are an exploration tool for discovering navigation patterns. They answer: *"What are the most common step-by-step transitions people take?"* They show the top 50 most frequent transitions, not comprehensive user counts.
+
+Several technical differences explain the discrepancy:
+
+- **Top 50 transitions** – Paths only return the 50 most common transitions between steps. Less common paths are excluded entirely.
+
+- **Counts transition frequency** – The numbers show how often each transition occurred, not unique users. If one user visits Home→Pricing in three separate sessions, that counts as 3. Funnels count each user only once per step.
+
+- **Path length limit** – Paths only analyze a set number of events per session which is controlled by the [step count setting](#setting-the-number-of-steps) (default 5). If a user visits pages A→B→C→D→E→F→G, only the first 5 are included. F and G are excluded. If you define both a start and end steps, paths preserve those steps but collapse the middle steps into **"..."**, which limits visibility into the full journey. Funnels don't have this limitation: they track whether users reached each defined step, regardless of how many events occurred in between.
+
+- **30-minute session windows** – Events more than 30 minutes apart start a new path. Funnels use a conversion window (default 14 days).
+
+The best practice is to use paths to explore what patterns exist, then validate specific flows with funnels, and investigate individual behavior with [session replays](/docs/session-replay).

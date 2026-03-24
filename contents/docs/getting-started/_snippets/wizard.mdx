@@ -1,16 +1,153 @@
 
-import AgentPrompt from "../../integrate/_snippets/agent-prompt.mdx"
+import WizardCommand from 'components/WizardCommand'
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+import List from 'components/List'
+import { getLogo } from 'constants/logos'
 
-Install PostHog in seconds with our wizard by running this command in your project directory with your terminal (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+Install PostHog in minutes with our wizard by running this command in your project directory:
 
-<AgentPrompt />
+<WizardCommand />
 
 Wait for it to finish and test the setup once the wizard is complete.
 
-The wizard supports React, Next.js, Svelte, and React Native. We've got more on the way.
+## Frameworks and languages
+
+The wizard supports the following frameworks and languages:
+
+<List
+    className="grid gap-4 grid-cols-2 not-prose"
+    items={[
+        {
+            label: "Android (Kotlin)",
+            url: "/docs/libraries/android",
+            image: getLogo('android'),
+        },
+        {
+            label: "Angular",
+            url: "/docs/libraries/angular",
+            image: getLogo('angular'),
+        },
+        {
+            label: "Astro",
+            url: "/docs/libraries/astro",
+            image: getLogo('astro'),
+        },
+        {
+            label: "Django",
+            url: "/docs/libraries/django",
+            image: getLogo('django'),
+        },
+        {
+            label: "FastAPI",
+            url: "https://github.com/PostHog/wizard",
+            image: getLogo('python'),
+        },
+        {
+            label: "Flask",
+            url: "/docs/libraries/flask",
+            image: getLogo('flask'),
+        },
+        {
+            label: "Laravel",
+            url: "/docs/libraries/laravel",
+            image: getLogo('laravel'),
+        },
+        {
+            label: "Next.js",
+            url: "/docs/libraries/next-js",
+            image: getLogo('nextjs'),
+        },
+        {
+            label: "Nuxt",
+            url: "/docs/libraries/nuxt",
+            image: getLogo('nuxt'),
+        },
+        {
+            label: "Python",
+            url: "/docs/libraries/python",
+            image: getLogo('python'),
+        },
+        {
+            label: "React Native",
+            url: "/docs/libraries/react-native",
+            image: getLogo('reactNative'),
+        },
+        {
+            label: "React",
+            url: "/docs/libraries/react",
+            image: getLogo('react'),
+        },
+        {
+            label: "Ruby",
+            url: "/docs/libraries/ruby",
+            image: getLogo('ruby'),
+        },
+        {
+            label: "Ruby on Rails",
+            url: "/docs/libraries/rails",
+            image: getLogo('rails'),
+        },
+        {
+            label: "React Router",
+            url: "/docs/libraries/react-router",
+            image: getLogo('reactRouter'),
+        },
+        {
+            label: "SvelteKit",
+            url: "/docs/libraries/svelte",
+            image: getLogo('svelte'),
+        },
+        {
+            label: "Swift (iOS/macOS)",
+            url: "/docs/libraries/ios",
+            image: getLogo('ios'),
+        },
+        {
+            label: "TanStack Start",
+            url: "https://github.com/PostHog/wizard",
+            image: getLogo('tanstack'),
+        },
+        {
+            label: "Vue",
+            url: "/docs/libraries/vue-js",
+            image: getLogo('vue'),
+        },
+        {
+            label: "Elixir",
+            url: "/docs/libraries/elixir",
+            image: getLogo('elixir'),
+            badge: "Coming soon",
+        },
+        {
+            label: "Flutter",
+            url: "/docs/libraries/flutter",
+            image: getLogo('flutter'),
+            badge: "Coming soon",
+        },
+        {
+            label: "Go",
+            url: "/docs/libraries/go",
+            image: getLogo('go'),
+            badge: "Coming soon",
+        },
+        {
+            label: "Java",
+            url: "/docs/libraries/java",
+            image: getLogo('java'),
+            badge: "Coming soon",
+        },
+        {
+            label: "Rust",
+            url: "/docs/libraries/rust",
+            image: getLogo('rust'),
+            badge: "Coming soon",
+        },
+    ]}
+/>
+
+We've got more on the way. 
 
 Check out the wizard's [GitHub repo](https://github.com/PostHog/wizard) for more details.
 

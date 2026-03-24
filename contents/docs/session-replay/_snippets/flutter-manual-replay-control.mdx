@@ -1,0 +1,13 @@
+> Requires PostHog Flutter SDK version >= [5.14.0](https://github.com/PostHog/posthog-flutter/releases/5.14.0). Available on iOS, Android, and Web.
+
+Setting `config.sessionReplay = false` in your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup.
+
+You can manually control when to start and stop session recordings using the following methods:
+
+- `startSessionRecording({bool resumeCurrent = true})`
+  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
+  - Set **resumeCurrent** to `false` to start a new session recording. 
+- `stopSessionRecording()` 
+  - Stops/pauses the current session recording.
+
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).

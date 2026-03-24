@@ -127,7 +127,7 @@ Why did this workflow change get merged? Honestly, security is unintuitive.
 
 Workflow rules, triggers and execution contexts are hard to reason about - so hard to reason about that [Github is actively making changes to make them simpler](https://github.blog/changelog/2025-11-07-actions-pull_request_target-and-environment-branch-protections-changes/) and closer to our understanding above. Although, in our case, these changes would not have protected us against the initial attack.
 
-Notably, we identified copycat attacks on the following day attempting to leverage the same vulnerability, and while we prevented those, we had to take frustratingly manual and uncertain measures to do so. The changes Github is making to the behaviour of `pull_request_target` would have prevented those copycats automatically for us.
+Notably, we identified copycat attacks on the following day attempting to leverage the same vulnerability, and while we prevented those, we had to take frustratingly manual and uncertain measures to do so. The changes Github is making to the behavior of `pull_request_target` would have prevented those copycats automatically for us.
 
 ## How are we preventing it from happening again?
 

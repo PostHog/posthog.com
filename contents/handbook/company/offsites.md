@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-While we have set up the company to work asynchronously as much as possible, there's a very real benefit in getting together in real life. We've learned that our best ideas come from working together.
+While we’re async by default, there’s a very real upside to being in the same room - we’ve consistently found that a lot of our best ideas come from actually building things together in real life.
 
 We understand organizing travel can be a challenge when you have personal/family commitments to manage, so we try to take a balanced approach to meetups:
 
@@ -89,22 +89,29 @@ You should assign someone on the small team to be responsible for planning the o
 
 ## Hedge House
 
-PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites and for in-person onboarding. We'd recommend using the Hedge House for small team offsites for cost and convenience reasons if you are in Europe. 
+PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger one in London. They are actual houses (yes, with a few bedrooms attached!) designed for small teams to run their offsites, host in-person onboardings, or come together for larger internal events like hackathons. Anyone at PostHog is welcome to use them as much as they like. We'd recommend using the Hedge House for small team offsites if you are in Europe as it removes a lot of the friction of finding somewhere new, and they're genuinely great places to get work done at a very high standard.
 
-Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
+### Cambridge
+Message <TeamMember name="Kendal Ijeh" photo /> to check availability or make a booking at the Cambridge Hedge House.
 
-If you'd like to book it, please message Kendal in the #team-people-and-ops channel to check availability. 
+### London
+Our light-filled, studious office is a reliable homebase between Farringdon and Barbican. It’s entirely ours, open 24/7 and the perfect place to stay if you're visiting from abroad.  Use the [Hedge House London](https://posthog.slack.com/archives/D0AAA9M06R2) slack tool to see the full address, book a room and/or desk, plus see who else will be there during the week you visit. This means you can easily self-serve, but ask <TeamMember name="Kendal Ijeh" photo /> with any questions.
+
+> If you're planning an offsite or onboarding in San Francisco, [Hogpatch](https://posthog.com/handbook/people/hogpatch-operations) is the perfect spot to focus, talk to users and get product feedback.
 
 ## London hotel recommendations
 
-For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
+For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.: 
 
+- [Marrable's Farringdon hotel](https://marrableshotel.com/)
+- [The Zetter Clerkenwell](https://thezetter.com/clerkenwell/)
+- [Hotel Indigo Clerkenwell](https://www.ihg.com/hotelindigo/hotels/gb/en/london/lonrc/hoteldetail?cm_mmc=GoogleMaps-_-IN-_-GB-_-LONRC)
+- [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Z Hotel City](https://www.thezhotels.com/hotels/city/)
 - [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
 - [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
 - [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
 - [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
-- [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
 - [Ruby Stella hotel](https://www.ruby-hotels.com/en/destinations/london/ruby-stella)
 

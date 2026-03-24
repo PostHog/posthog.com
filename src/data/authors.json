@@ -371,7 +371,7 @@
     {
         "handle": "danilo-campos",
         "name": "Danilo Campos",
-        "role": "Technical Content Marketer",
+        "role": "Robopsychologist",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/danilo-campos/",
         "profile_id": 31731
@@ -509,5 +509,45 @@
         "link_type": "linkedin",
         "link_url": "https://dk.linkedin.com/in/chriseynius",
         "profile_id": 35037
+    },
+    {
+        "handle": "lucas-faria",
+        "name": "Lucas Faria",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/lucasheriques",
+        "profile_id": 32387
+    },
+    {
+        "handle": "cameron-deleone",
+        "name": "Cameron DeLeone",
+        "role": "Customer Success",
+        "link_type": "github",
+        "link_url": "https://github.com/camerondeleone",
+        "profile_id": 28622
+    },
+    {
+        "handle": "tue-haulund",
+        "name": "Tue Haulund",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/TueHaulund",
+        "profile_id": 34861
+    },
+    {
+        "handle": "phil-haack",
+        "name": "Phil Haack",
+        "role": "Platform Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/haacked",
+        "profile_id": 32501
+    },
+    {
+        "handle": "andy-maguire",
+        "name": "Andy Maguire",
+        "role": "AI Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/andrewm4894",
+        "profile_id": 37401
     }
 ]

@@ -82,7 +82,7 @@ export function Cart(props: CartProps): React.ReactElement {
                     </div>
                 )}
 
-                <Checkout className="my-2" isEmpty={isEmpty} />
+                {!isEmpty && <Checkout className="my-2" />}
             </>
         </div>
     )

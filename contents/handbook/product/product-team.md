@@ -14,6 +14,8 @@ Among other things, they
 2. organize [user interviews](/handbook/product/user-feedback)
 3. coach product engineers on ["how to do product"](/handbook/engineering/product-engineering)
 
+For a more in-depth look at the product role at PostHog, see [What product managers do at PostHog](/handbook/product/product-manager-role).
+
 # How PMs work
 
 ## Small team membership
@@ -27,10 +29,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
--   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="data-stack" />
--   <SmallTeam slug="product-analytics" />
--   <SmallTeam slug="web-analytics" />
 
 </fieldset>
 
@@ -61,6 +60,15 @@ Here is a overview that shows which of our PMs currently works with which team:
 -   Logs
 
 *light support
+
+</fieldset>
+
+<fieldset>
+<legend><TeamMember name="Mike Warren" photo /></legend>
+
+-   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="web-analytics" />
+-   <SmallTeam slug="analytics-platform" />
 
 </fieldset>
 

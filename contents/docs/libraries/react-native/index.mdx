@@ -62,7 +62,8 @@ You can further customize how PostHog works through its configuration on initial
 | `enableSessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | Enable Recording of Session replay for Android and iOS.                                                                                                                                                                                                                                                    |
 | `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `null`                                 | Session replay configuration. See the [replay install docs](/docs/session-replay/installation) for more details.                                                                                                                                                                                                       |
 | `enablePersistSessionIdAcrossRestart`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | When true, persists the `$session_id` across app restarts. If false, `$session_id` always resets on app restart.                                                                                                                                                                                           |
-| `evaluationEnvironments`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. |
+| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 4.8.0+. The legacy parameter `evaluationEnvironments` (version 4.7.2+) is also supported for backward compatibility. |
+| `before_send`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                              | A callback function that is called before each event is sent to PostHog. You can use it to modify, filter, or suppress events. Return `null` to drop the event, or return the modified event to send it. See [customizing exception capture](#customizing-exception-capture-with-before_send) for details. |
 
 ## Capturing events
 
@@ -198,7 +199,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your PostHog config:
 
 ```javascript
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     opt_out_capturing_by_default: true,
 });
 ```
@@ -338,6 +339,82 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
 
+### Error boundaries
+
+You can use the `PostHogErrorBoundary` component to capture React rendering errors thrown by components:
+
+```react-native
+import { PostHogProvider, PostHogErrorBoundary } from 'posthog-react-native'
+import { View, Text } from 'react-native'
+
+const App = () => {
+  return (
+    <PostHogProvider apiKey="<ph_project_token>">
+      <PostHogErrorBoundary
+        fallback={YourFallbackComponent}
+        additionalProperties={{ screen: "home" }}
+      >
+        <YourApp />
+      </PostHogErrorBoundary>
+    </PostHogProvider>
+  )
+}
+
+const YourFallbackComponent = ({ error, componentStack }) => {
+  return (
+    <View>
+      <Text>Something went wrong!</Text>
+      <Text>{error instanceof Error ? error.message : String(error)}</Text>
+    </View>
+  )
+}
+```
+
+The `fallback` prop accepts a component to render when an error occurs. The `additionalProperties` prop lets you add custom properties to the captured error event.
+
+<CalloutBox type="caution" title="Duplicate errors with console capture">
+
+If you have both `PostHogErrorBoundary` and `console` capture enabled in your `errorTracking` config, render errors will be captured twice. This is because React logs all errors to the console by default. To avoid this, set `console: []` on `errorTracking.autocapture` (for example, `errorTracking: { autocapture: { console: [] } }`) when using `PostHogErrorBoundary`.
+
+</CalloutBox>
+
+### Customizing exception capture with before_send
+
+You can use the `before_send` callback to modify, filter, or suppress exception events before they are sent to PostHog. This is useful for:
+
+- Adding custom properties to exceptions
+- Overriding exception fingerprints for custom grouping
+- Suppressing specific types of exceptions
+- Redacting sensitive information
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  before_send: (event) => {
+    if (event.event === '$exception') {
+      const exceptionList = event.properties?.['$exception_list'] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null
+
+      if (exception) {
+        // Add custom properties
+        event.properties['custom_property'] = 'custom_value'
+
+        // Override fingerprint for custom grouping
+        event.properties['$exception_fingerprint'] = 'MyCustomGroup'
+      }
+
+      // Suppress specific exception types
+      if (exception?.['$exception_type'] === 'IgnoredError') {
+        return null // Drop the event
+      }
+    }
+    return event
+  },
+})
+```
+
+You can also use `before_send` to sample or filter other event types. See the [JavaScript Web SDK documentation](/docs/libraries/js/usage#amending-or-sampling-events) for more examples.
+
 ## Session replay
 
 To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the React Native SDK and the Session replay plugin, then follow the [instructions to enable Session Replay](/docs/session-replay/installation/react-native) for React Native.
@@ -357,7 +434,7 @@ You can enable debug mode by setting the `debug` option to `true` in the `PostHo
 ```react-native
 <PostHogProvider
     debug: {true}
-    apiKey="<ph_project_api_key>"
+    apiKey="<ph_project_token>"
     options={{
         host: "<ph_client_api_host>",
     }}
@@ -381,7 +458,7 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 
 export function MyApp() {
     return (
-        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+        <PostHogProvider apiKey="<ph_project_token>" options={{
             // Disable PostHog in development (or whatever other logic you choose)
             disabled: __DEV__,
         }}>
@@ -415,7 +492,7 @@ Events such as `Application Installed` and `Application Updated` that require pr
 
 import PostHog from 'posthog-react-native'
 
-await PostHog.setup('<ph_project_api_key>', {
+await PostHog.setup('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>',
     captureApplicationLifecycleEvents: false, // Replaced by 'PostHogProvider'
@@ -433,7 +510,7 @@ PostHog.capture("foo")
 // V2 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>', 
     // Add any other options here.
@@ -445,7 +522,7 @@ posthog.capture("foo")
 // V3 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>',
     // Add any other options here.
@@ -457,7 +534,7 @@ posthog.capture("foo")
 // V4 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>',
     captureAppLifecycleEvents: true, // instead of `captureNativeAppLifecycleEvents` or `autocapture={{ captureLifecycleEvents: true }}`,

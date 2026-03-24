@@ -8,13 +8,53 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), and [Java](/docs/libraries/java) SDKs.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs.
 
 > **Note:** In edge/lambda environments and stateless PHP applications, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For these environments, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead.
 
 Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
 
 It is best practice to use local evaluation flags when possible, since this enables you to resolve flags faster and with fewer API calls.
+
+## How local evaluation works
+
+To understand local evaluation, it helps to see how **remote evaluation** (the default) works first.
+
+With remote evaluation, your server sends a request to PostHog's `/flags` API every time you check a flag. PostHog looks up all the data it needs — flag definitions, person properties, group properties, and cohort memberships — from its own database, evaluates the flag, and returns the result:
+
+```mermaid
+sequenceDiagram
+    participant App as Your app
+    participant SDK as PostHog SDK
+    participant PH as PostHog
+    App->>SDK: flag key + user ID
+    SDK->>PH: POST /flags
+    Note right of PH: Resolves using stored flag definitions,<br/>person properties, group properties,<br/>and cohort memberships
+    PH-->>SDK: true / false / variant
+    SDK-->>App: true / false / variant
+```
+
+Every flag check is a network round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
+
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/api/feature_flag/local_evaluation` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+
+```mermaid
+sequenceDiagram
+    participant App as Your app
+    participant SDK as PostHog SDK
+    participant PH as PostHog
+    Note over SDK,PH: Background (every 30s)
+    SDK->>PH: GET /local_evaluation
+    PH-->>SDK: Flag definitions
+    Note over App,SDK: At evaluation time
+    App->>SDK: flag key + person properties + group properties
+    Note right of SDK: Evaluates locally using<br/>cached flag definitions +<br/>properties you provided
+    SDK-->>App: true / false / variant
+```
+
+Notice that PostHog is not involved at evaluation time. The tradeoff: **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
+
+Local evaluation is also more cost-effective: with remote evaluation, every flag check is a billable request, whereas local evaluation only bills for the periodic request to fetch flag definitions (counted as 10 flag requests each). For high-traffic services, this can significantly reduce your flag usage costs.
 
 There are 3 steps to enable local evaluation:
 
@@ -198,6 +238,36 @@ posthog.getFeatureFlag(
         .build());
 ```
 
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+// Include any person properties, groups, or group properties required to evaluate the flag
+let mut groups = HashMap::new();
+groups.insert("your_group_type".to_string(), "your_group_id".to_string());
+groups.insert("another_group_type".to_string(), "another_group_id".to_string());
+
+let mut person_props = HashMap::new();
+person_props.insert("property_name".to_string(), json!("value"));
+
+let mut group_props = HashMap::new();
+let mut your_group_props = HashMap::new();
+your_group_props.insert("group_property_name".to_string(), json!("value"));
+group_props.insert("your_group_type".to_string(), your_group_props);
+
+let mut another_group_props = HashMap::new();
+another_group_props.insert("group_property_name".to_string(), json!("another value"));
+group_props.insert("another_group_type".to_string(), another_group_props);
+
+let flag = client.get_feature_flag(
+    "flag-key".to_string(),
+    "distinct_id_of_the_user".to_string(),
+    Some(groups),
+    Some(person_props),
+    Some(group_props),
+).await.unwrap();
+```
+
 </MultiLanguage>
 
 ## Reloading flags
@@ -230,6 +300,12 @@ PostHog::loadFlags()
 posthog.reloadFeatureFlags()
 ```
 
+```rust
+// The Rust SDK automatically reloads flags in the background
+// at the interval specified by poll_interval_seconds (default: 30).
+// Manual reload is not currently supported.
+```
+
 </MultiLanguage>
 
 ## Restriction on local evaluation
@@ -241,10 +317,11 @@ Local evaluation is not possible for flags that:
 1. Have experience continuity enabled, which is set when you check ['persist flag across authentication steps'](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps) on your feature flag.
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
+4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
 
 ### Dynamic cohort restrictions
 
-> **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](/docs/libraries/python) SDK.
+> **Note:** This restriction **does not apply** to our [Go](/docs/libraries/go) SDK, [Rust](/docs/libraries/rust) SDK, v2.6.0 and above of our [Node](/docs/libraries/node) SDK, and to v2.4.0 and above of our [Python](/docs/libraries/python) SDK.
 
 To enable local evaluation of feature flags that depend on [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts), we translate the cohort definition into person properties.
 

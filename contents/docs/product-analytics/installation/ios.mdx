@@ -40,7 +40,7 @@ import PostHog
 @main
 struct YourGreatApp: App {
     init() {
-        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_API_KEY = "<ph_project_token>"
         let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
 
         let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)

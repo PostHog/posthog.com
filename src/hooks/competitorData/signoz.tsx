@@ -5,6 +5,30 @@ export const signoz = {
         icon: '/images/competitors/signoz.svg',
     },
     products: {
+        logs: {
+            available: true,
+            core_logging_and_ingestion: {
+                features: {
+                    native_open_telemetry_ingest: true,
+                },
+            },
+            observability: {
+                features: {
+                    metrics: true,
+                    traces: true,
+                    alerting: true,
+                },
+            },
+        },
+        product_analytics: {
+            available: false,
+        },
+        session_replay: {
+            available: false,
+        },
+        llm_analytics: {
+            available: true,
+        },
         error_tracking: {
             available: true,
             features: {
@@ -59,12 +83,14 @@ export const signoz = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: false,
         },
         integrations: {
             azure_blob: false,
             bigquery: false,
             cdp: false,
-            ci_cd_integrations: 'Partial',
+            // https://signoz.io/blog/ci-cd-observability-opentelemetry/
+            ci_cd_integrations: true,
             community_integrations: false,
             csv_exports: false,
             customer_io: false,
@@ -102,6 +128,7 @@ export const signoz = {
             history_audit_logs: false,
             reverse_proxy: false,
             saml_sso: false,
+            siem: false,
             soc2_certified: false,
             two_factor_auth: false,
             user_privacy_options: false,

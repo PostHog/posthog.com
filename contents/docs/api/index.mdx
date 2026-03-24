@@ -9,7 +9,7 @@ PostHog has a powerful API that enables you to capture, evaluate, create, update
 
 The API is available for all users and instances. It contains two types of endpoints:
 
-1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project API key](https://app.posthog.com/project/settings) to handle the request.
+1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project token](https://app.posthog.com/project/settings) to handle the request.
 
 2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key.
 
@@ -39,7 +39,7 @@ There are separate limits for different kinds of resources.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 
-> **Want to use the PostHog API beyond these limits?** [Reach out to us](https://posthog.com/talk-to-a-human) and tell us about your use case. We don't guarantee raising rate limits and might point you to some of our other products that are more appropriate for your use case.
+> At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence.
 
 ## Responses
 
@@ -53,7 +53,7 @@ These limits apply to **the entire team** (i.e. all users within your PostHog or
 }
 ```
 
-**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (`api_key`) is valid. It **does not** imply that events are valid and will be ingested. As mentioned in [invalid events](/docs/api/capture#invalid-events), certain event validation errors may cause an event not to be ingested.
+**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project token (`token`) is valid. It **does not** imply that events are valid and will be ingested. As mentioned in [invalid events](/docs/api/capture#invalid-events), certain event validation errors may cause an event not to be ingested.
 
 ### Status code: 400
 
@@ -89,11 +89,11 @@ These limits apply to **the entire team** (i.e. all users within your PostHog or
 {
   "type": "authentication_error",
   "code": "invalid_api_key",
-  "detail": "Project API key invalid. You can find your project API key in PostHog project settings."
+  "detail": "Project token invalid. You can find your project token in your PostHog project settings."
 }
 ```
 
-**Meaning:** The project API key you provided is invalid.
+**Meaning:** The project token you provided is invalid.
 
 ```json
 {
@@ -148,7 +148,7 @@ You can then just call the `"next"` URL to get the next set of results.
 
 - The maximum size of a POST request body is governed by `settings.DATA_UPLOAD_MAX_MEMORY_SIZE`, and is 20MB by default.
 
-- By default, the PostHog API returns results from the last project you visited in the UI. To override this behavior, you can pass in your project API key as a query parameter in the request like `api/event/?token=my_project_api_key`.
+- By default, the PostHog API returns results from the last project you visited in the UI. To override this behavior, you can pass in your project token as a query parameter in the request like `api/event/?token=my_project_token`.
 
 ## GitHub secret scanning
 
@@ -156,5 +156,7 @@ PostHog partners with GitHub to automatically detect exposed API keys in public 
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
 - **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+- **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
+- **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
 This provides an automatic layer of protection, but you should still follow best practices: never commit API keys to version control, use environment variables, and rotate keys if you suspect exposure.

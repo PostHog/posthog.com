@@ -4,14 +4,12 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Sales & CS Tools
-Here are the common tools the Sales & CS teams use daily.
+## Sales, CS & Onboarding Tools
+Here are the common tools the Sales, CS, and Onboarding teams use daily.
 
 ### Tools through Google and Single Sign-On (SSO)
 
-- [BuildBetter](https://app.buildbetter.app)
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
-- [PostHog Billing](https://billing.posthog.com)
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances. Login to both as this is needed for admin access
   - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
 - [Pylon](https://usepylon.com/) - use Slack SSO
@@ -22,8 +20,11 @@ Here are the common tools the Sales & CS teams use daily.
 
 ### Tools by invitation
 [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) can help you out for access or invites for the following tools:
-
+- [Gong](https://us-26000.app.gong.io/home?workspace-id=8823646477612786274) - ask Simon or your team lead to invite you
+  - Download the [Gong Meeting Manager](https://workspace.google.com/marketplace/app/gong_meeting_manager/779001639133) extension to trigger a user consent page when joining calls
+  - Connect your Calendly link (if using one) with the Gong consent page [through this guide on Slack](https://posthog.slack.com/archives/C01MGUHFH6G/p1770157267662229?thread_ts=1770157176.458439&cid=C01MGUHFH6G)
 - [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) - ask Mine for an invite if needed
+- [PostHog Billing](https://billing.posthog.com) - ask <PrivateLink url='https://posthog.slack.com/archives/C08ERRQT41E'>#team-billing</PrivateLink>
 - [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you if not done already
 - [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
 - [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
@@ -32,6 +33,7 @@ Here are the common tools the Sales & CS teams use daily.
 
 ### Tools that you may find useful and not required
 
+- [BuildBetter](https://app.buildbetter.app) for historic meeting recordings
 - [Calendly.com](https://calendly.com/) for shared meeting booking links - ask Simon or Dana to invite you
 - [Clay](https://www.clay.com/) for account and contact enrichment
 - [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
@@ -41,6 +43,8 @@ Here are the common tools the Sales & CS teams use daily.
 - [spark](https://sparkmailapp.com/) (app) AI powered inbox
 - [Superhuman](https://superhuman.com/) (app) AI powered inbox
 - [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
+- [Wappalyzer](https://www.wappalyzer.com/) for identifying tech stack on customer sites (also as a Chrome/Firefox extension). Credentials in 1Password
+- [Alfred](https://alfred.app/) / [Raycast](https://www.raycast.com/) for automated workflows. 
 - An IDE, like VS Code, Zed, or Cursor. It will come in handy for coding and development tasks.
 - Your next favorite tool!
 
@@ -49,6 +53,7 @@ Here are the common tools the Sales & CS teams use daily.
 - <PrivateLink url='https://posthog.slack.com/archives/C08M011SBCM'>#team-customer-success</PrivateLink> - the Customer Success team.
 - <PrivateLink url='https://posthog.slack.com/archives/C09677WV1GW'>#team-new-business-sales</PrivateLink> - the New Business sales team.
 - <PrivateLink url='https://posthog.slack.com/archives/C093XHYMGBE'>#team-product-led-sales</PrivateLink> - the Product-led sales team.
+- <PrivateLink url='https://posthog.slack.com/archives/C098D86DZDZ'>#team-onboarding</PrivateLink> - the Onboarding team.
 - <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#cs-sales-support</PrivateLink> - cross-team discussion for everyone who owns customers.
 - <PrivateLink url='https://posthog.slack.com/archives/C01MGUHFH6G'>#sales</PrivateLink> - for general sales topics.
 - <PrivateLink url='https://posthog.slack.com/archives/C03V7SP3Z3K'>#incidents</PrivateLink> - for notifications of incidents which may impact customers.  Make sure you set this to alert you for every message so that you know when something is up.
@@ -57,4 +62,6 @@ Here are the common tools the Sales & CS teams use daily.
 - <PrivateLink url='https://posthog.slack.com/archives/C08MYQX74KH'>#legal</PrivateLink> - for requests from our legal folks.
 - <PrivateLink url='https://posthog.slack.com/archives/C08UNFX75ST'>#closed-won</PrivateLink> - yay!
 - <PrivateLink url='https://posthog.slack.com/archives/C096DC85NH5'>#closed-lost</PrivateLink> - boo!
-- <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn-retros</PrivateLink> - retros from big churns.
+- <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn</PrivateLink> - discussion of potential and actual customer churn.
+- <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#changelog</PrivateLink> - product launches.
+- <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.

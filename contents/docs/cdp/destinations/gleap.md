@@ -12,8 +12,8 @@ You'll also need access to the relevant Gleap account.
 
 ## Installation
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=gleap) tab.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=gleap) tab.
 3. Search for **Gleap** and click **+ Create**.
 4. Add your Gleap access token at the configuration step.
 5. Press **Create & Enable** and watch your 'Contacts' list get populated in Gleap!

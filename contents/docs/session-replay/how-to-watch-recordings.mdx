@@ -29,7 +29,7 @@ To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) p
 
 1. Choose whether to watch just one of your user's windows, or follow user activity between windows
 
-2. Share the private link to the recording, create a public link, or link the recording in an issue in a tool like Linear or GitHub
+2. Share the private link to the recording or create a public link
 
 3. Add the recording to a collection so you can find it easily in future
 
@@ -37,7 +37,7 @@ To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) p
 
 5. Click **Inspect DOM** to interact with the DOM of the page. It may not be 100% accurate, but should be close enough to help you debug. You can interact with the content below but most things won't work as it is only a snapshot of your app. Use your browser's developer tools (`CMD`+`Opt`+`I` on Mac and `Ctrl`+`Shift`+`I` on PC for Chrome) to inspect the content.
 
-6. Use the HTML from the session recording as the background to view your heatmap data
+6. Click **View heatmap** to use the HTML from the session recording as the background for your heatmap data. This generates a screenshot of your site that can be used when [creating a new heatmap](/docs/toolbar/heatmaps).
 
 7. Change the playback speed, as well as select the option **Skip inactivity** which skips parts of the recording where the user was inactive on the page
 
@@ -121,7 +121,7 @@ It's possible to create a dynamic list of replays that you're interested in.
 To do so:
 
 1. Click **Show filters**.
-2. Create your filter with options for date, active duration, events, properties, console logs, and more.
+2. Create your filter with options for date, active duration, events, properties, console logs, feature flags, and more.
 3. Once done, click **Add to "Saved filters"**.
 
 <ProductScreenshot
@@ -136,6 +136,8 @@ To do so:
 </Caption>
 
 This will then be accessible to anyone in your project via the **Shared filters** tab and new replays will automatically be added to it.
+
+You can also search for and apply saved filters directly from the filter dropdown. When adding filters to your recording list, saved filters appear as a category in the dropdown and you can type to search through them.
 
 ## How to create a collection
 
@@ -153,6 +155,21 @@ To do so, click **+ Add to collection** next to the **Share** button on a replay
 <Caption>
     Session replay collection
 </Caption>
+
+## Built-in collections
+
+PostHog provides built-in collections that automatically surface relevant recordings. These collections are available to all users and update dynamically.
+
+| Name | Description |
+|------|-------------|
+| **Watch history** | Recordings you have watched |
+| **Recordings with comments** | Recordings that have team comments |
+| **Shared recordings** | Recordings that have been shared externally |
+| **Exported recordings** | Recordings that have been exported as clips or screenshots |
+| **Expiring soon** | Recordings that will expire in the next 10 days |
+| **Frustration signals** | Sessions with significant frustration signals (multiple rage clicks or exceptions) in the last 7 days |
+
+You can find these collections in the [collections list](https://app.posthog.com/replay/playlists).
 
 ## Capturing and sharing moments
 

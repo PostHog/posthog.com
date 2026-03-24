@@ -29,9 +29,9 @@ export const repeatingSurveyLight =
 export const repeatingSurveyDark =
     'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg'
 export const presentationTypesLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_51_26_PM_ca79895d6b.png'
 export const presentationTypesDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_52_53_PM_066c87466c.png'
 export const copySurveyLinkLight =
     'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg'
 export const copySurveyLinkDark =
@@ -39,16 +39,9 @@ export const copySurveyLinkDark =
 
 <iframe src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900" className="rounded shadow-xl" />
 
-To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) in the PostHog app, and click on the "New survey" button in the top right. This presents you with a collection of [survey templates](/templates?filter=type&value=survey) or you can click "Create blank survey" in the top right to create your own.
+To create a new survey, go to the [surveys tab](https://app.posthog.com/surveys) in the PostHog app, and click on the **New survey** button in the top right. This opens the survey wizard where you can choose from popular [survey templates](/templates?filter=type&value=survey), create a survey using PostHog AI, or open the full editor for more control.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-light.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-dark.png"
-    alt="Survey templates"
-    classes="rounded"
-/>
-
-After choosing one, you are brought to a form where you can complete the details of your new survey:
+After choosing a template, you are brought to a form where you can complete the details of your new survey:
 
 <ProductScreenshot imageLight={newSurveyLight} imageDark={newSurveyDark} alt="Create a survey" classes="rounded" />
 
@@ -86,7 +79,7 @@ There are three options for displaying a survey:
 
 3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
 
-4. **Hosted surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
+4. **Hosted surveys**: Create a survey accessible via an external link or embedded in an iframe, hosted by PostHog. Responses are anonymous by default, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
 
 <ProductScreenshot
     imageLight={presentationTypesLight}
@@ -111,6 +104,19 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
 
 Without the parameter, responses are collected anonymously and cannot be linked to users.
 With the parameter, responses are attributed to the specified user, enabling you to see survey data alongside other user events and properties.
+
+#### Adding event properties to hosted survey responses
+
+When directing users to a hosted survey, you can add event properties using URL parameters. These parameters are automatically captured on the survey sent event.
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?order_id=12345
+```
+
+The types for custom properties are automatically inferred with this logic, in this order:
+- `Numeric`: matches regex `/^-?\d+(\.\d+)?$/` (integer or decimal)
+- `Boolean`: exact strings `"true"` and `"false"`
+- `String`: everything else
 
 #### Pre-filling survey responses via URL
 
@@ -187,6 +193,35 @@ Now you can send your survey link with the NPS question pre-filled, like this:
 - Invalid indices are silently ignored
 - Pre-filling only works with choice and rating questions (not open text)
 
+#### Embedding hosted surveys in iframes
+
+You can embed hosted surveys directly on a page using an iframe. This is useful if you're working in a no-code site builder, or otherwise want to display a survey inline without creating an [API survey](/docs/surveys/implementing-custom-surveys).
+
+To create an embedded survey:
+1. Create a hosted survey - select **Hosted Survey** as the [presentation type](#presentation)
+2. Enable **Allow embedding in iframes** in the survey settings
+3. Save and launch your survey
+4. On the overview page, click **Copy embed code** to get the HTML snippet
+5. Paste the code snippet wherever you like - done!
+
+Here's an example with Framer:
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/embedded_surveys_6e058da781.mp4" 
+    alt="How to create an embedded survey in Framer" 
+    classes="rounded"
+    autoPlay={false}
+/>
+
+**Notes:**
+- **Person identification:** If the PostHog SDK is enabled on your site, the default embed code will automatically attach the Person's distinct ID (via `window.posthog.get_distinct_id()`) to all embedded survey responses. Otherwise, the responses will be anonymous.
+- **URL pre-fill:** URL pre-filling is supported with embedded surveys, you'll just need to update your embed code to include the pre-fill query params.
+- **Embed customization:** The default embed code provides automatic height adjustment and minimal styling. For more control, you can create your own iframe using the hosted survey's URL + `?embed=true`. Example:
+
+```
+https://us.posthog.com/external_surveys/my-survey-id/?embed=true
+```
+
 ### Steps
 
 Steps is where you set up your question(s), label, choice(s), description, button text, and confirmation message. You must [subscribe](https://us.posthog.com/organization/billing) to surveys to add multiple questions.
@@ -237,7 +272,7 @@ You can display your survey to specific users based on:
 
 -   **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
--   **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
+-   **URL targeting:** Show when URL either contains a string, exactly matches a string, or matches a regex. When using exact matching, trailing slashes are stripped before comparison. The URL targeting is evaluated against `window.location.href`.
 
 -   **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
 
@@ -357,3 +392,8 @@ All `survey sent` events triggered during a single user's attempt to complete a 
 
 **Billing for partial responses:**
 We charge based on unique survey submissions, not individual `survey sent` events. Therefore, you are charged only once per unique `$survey_submission_id`. For example, if your survey has 5 questions and a user answers 3 of them (triggering multiple `survey sent` events with `$survey_completed: false`), you will still be charged for only one survey response, as all those events will share the same `$survey_submission_id`.
+
+**The `survey abandoned` event:**
+When a user answers at least one question but navigates away or closes the page before completing all questions, PostHog automatically captures a `survey abandoned` event. This event includes the `$survey_id` property identifying the survey. It's different from `survey dismissed`, which fires when a user explicitly closes the survey without answering.
+
+You can use the `survey abandoned` event in [insights](/docs/surveys/viewing-results#2-creating-your-own-insights) to measure drop-off rates and identify which surveys users start but don't finish.

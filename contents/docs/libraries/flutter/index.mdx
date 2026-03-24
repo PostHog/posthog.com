@@ -168,7 +168,7 @@ To set up error tracking in your project, follow the [Flutter installation guide
 
 To set up [session replay web](/docs/session-replay) or [mobile session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Flutter SDK, follow the [additional installation instructions](/docs/session-replay/installation/flutter), and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
-If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).  
+If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).
 This is needed as Flutter renders your app using a browser canvas element.
 
 ## Surveys
@@ -206,6 +206,56 @@ To check if a user is opted out:
 await Posthog().isOptedOut();
 ```
 
+## Amending or dropping events
+
+Since version 5.13.0, you can provide a `beforeSend` callback when initializing the SDK to amend or drop events before they are sent to PostHog.
+
+### Redacting information in events
+
+`beforeSend` gives you one place to edit or redact information before it is sent to PostHog. For example:
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
+
+config.beforeSend = (event) {
+  // Redact email from properties
+  if (event.properties?['email'] != null) {
+    event.properties?['email'] = '***@***.***';
+  }
+  return event;
+};
+
+await Posthog().setup(config);
+```
+
+### Dropping events
+
+Return `null` from the callback to drop the event:
+
+```dart
+config.beforeSend = (event) {
+  // Drop events you don't want to send
+  if (event.event == 'ignored_event') {
+    return null;
+  }
+  return event;
+};
+```
+
+### Limitations
+
+The `beforeSend` callback only applies to events captured via Dart APIs:
+- `Posthog().capture()` - custom events
+- `Posthog().screen()` - screen events (event name is `$screen`)
+- `Posthog().captureException()` - exception events (event name is `$exception`)
+
+It does **not** intercept native-initiated events such as:
+- Session replay events (`$snapshot`)
+- Application lifecycle events (`Application Opened`, etc.)
+
+Additionally, only user-provided properties are available in the callback. System properties (like `$device_type`, `$session_id`) are added by the native SDK at a later stage.
+
 ## Debug mode 
 
 If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
@@ -213,7 +263,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode during initialization by setting the `debug` option to `true` in the `PostHogConfig` object. A common pattern is to set this to `true` in development environments only using environment variables.
 
 ```dart
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 config.host = '<ph_client_api_host>';
 config.debug = true; // +
 await Posthog().setup(config);

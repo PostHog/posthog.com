@@ -1,0 +1,60 @@
+---
+title: How to use the content writer agent
+sidebar: Handbook
+showTitle: true
+---
+
+We built an agent that automatically drafts docs PRs in [`posthog.com`](https://github.com/PostHog/posthog.com) when your code changes are merged into the [`posthog`](https://github.com/PostHog/posthog) monorepo. 
+
+The content writer agent leverages the Inkeep platform to index and reference the PostHog website, codebase, and our [docs style guide](/handbook/docs-and-wizard/docs-style-guide), so its drafts are usually a solid starting point — but they still need your review for technical accuracy.
+
+## Who owns what
+
+**Product engineers** [own the docs](/handbook/docs-and-wizard/docs-ownership) for their products. When the agent opens a docs PR based on your merged code, you're responsible for reviewing it for technical accuracy, iterating on it until it's right, and merging it. You don't need docs team sign-off — treat it like any other PR for your product.
+
+**The <SmallTeam slug="docs-wizard" /> team** does not review every docs PR. Engineers loop us in when they want a second opinion. We're responsible for building the system, monitoring its output quality over time, and tuning and steering the agent.
+
+<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/pasted_image_2026_02_20_T15_28_26_049_Z_07aa633ea5.png" alt="Agent system" />
+
+<Caption>
+Agent system for the content writer
+</Caption>
+
+## The workflow
+
+When you merge a PR in the `posthog` monorepo, the Inkeep bot automatically opens a docs PR on `posthog.com` and tags you as a reviewer. From there:
+
+1. Review the draft for technical accuracy, completeness, code examples, and links.
+2. Iterate until the docs are correct. See [how to make changes](#how-to-make-changes).
+3. (Optional) Loop in the docs team if you want a second opinion on style, structure, or information architecture — tag `@team-docs-wizard` as reviewers.
+4. Approve and merge when the docs are ready.
+
+<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_20_T15_46_55_337_Z_ea3dfc42d6.png" alt="Inkeep docs PR" />
+
+If you tagged `@inkeep` or made changes to the PR, a feedback form is posted after merge. This helps us understand where the agent fell short — please fill it out so we can continue improving the agent.
+
+## How to make changes
+
+You can iterate on an Inkeep docs PR in a few ways:
+
+- Tag `@inkeep` in a PR comment to ask the agent to make specific changes. Describe what you need and Inkeep will push updated commits.
+- Edit the files yourself — either by pulling the branch locally or directly on GitHub. This bypasses the AI loop entirely and is often faster when you know exact changes you want to make.
+
+<ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_20_T15_36_45_867_Z_c00d06aae5.png" alt="Tag the agent" />
+
+## What to check
+
+- **Technical accuracy** — Does the documented behavior match what your code actually does?
+- **Completeness** — Are all user-facing changes covered?
+- **Code examples** — Are snippets correct, realistic, and using PostHog conventions?
+- **Links** — Do internal links (website or in-app) point to real pages?
+
+## When to loop in the docs team
+
+You don't need our approval to merge a docs PR. But do loop us in when:
+
+- You need a second pair of eyes on information architecture choices (e.g., new sidebar sections, new landing pages, navigation changes, etc.)
+- You want a style or structure review beyond what you can assess yourself
+- The change is large and you want a second opinion
+
+Tag `@team-docs-wizard` as reviewers on the PR, and we'll help out.

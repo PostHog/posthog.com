@@ -108,7 +108,7 @@ export default function Products(): JSX.Element {
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
     const { appWindow } = useWindow()
-    const { siteSettings } = useApp()
+    const { siteSettings, websiteMode } = useApp()
     const isDark = siteSettings.theme === 'dark'
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -214,7 +214,7 @@ export default function Products(): JSX.Element {
                     />
                 }
                 rightSidebarPanel={
-                    sidePanelProduct ? (
+                    websiteMode ? null : sidePanelProduct ? (
                         <div>
                             <ScrollArea className="h-[calc(100vh-12rem)]">
                                 <div className="flex flex-col items-center justify-between p-4">

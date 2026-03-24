@@ -1,0 +1,10 @@
+extends: spelling
+message: "'%s' is a possible misspelling."
+level: warning
+ignore:
+    - PostHogBase/spelling-exceptions.txt
+# Ignore filters
+filters:
+    - '\b_\w+\b' # _leading_underscore
+    - '\b\w+_\w+(_\w+)*\b' # snake_case and multi_word_snake
+    - '\b\w+-\w+(-\w+)*\b' # kebab-case (file-name.txt, like-this)

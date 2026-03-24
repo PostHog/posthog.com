@@ -373,7 +373,6 @@ const products: Product[] = [
             )
         },
         status: 'WIP',
-        badge: 'BETA',
         pricing: {
             cta: {
                 url: '/ai',
@@ -573,6 +572,21 @@ const products: Product[] = [
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2168,
+    },
+    {
+        name: 'Support',
+        Icon: IconChatHelp,
+        color: 'blue',
+        description: 'Built-in customer support with chat widget and unified inbox.',
+        types: ['Support'],
+        status: 'WIP',
+        badge: 'ALPHA',
+        pricing: {
+            cta: {
+                url: '/docs/support',
+                text: 'Learn more',
+            },
+        },
     },
     {
         name: 'AI docs chat',

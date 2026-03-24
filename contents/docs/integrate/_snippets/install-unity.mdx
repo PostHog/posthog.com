@@ -41,16 +41,16 @@ You can also create the settings asset manually via **Assets > Create > PostHog 
 For more control, initialize PostHog in your game's startup script:
 
 ```csharp
-using PostHog;
+using PostHogUnity;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Monobehavior
 {
     void Start()
     {
         PostHog.Setup(new PostHogConfig
         {
-            ApiKey = "<ph_project_api_key>",
+            ApiKey = "<ph_project_token>",
             Host = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         });
     }
@@ -67,7 +67,7 @@ All options below can be set via the Unity Inspector or in code:
 PostHog.Setup(new PostHogConfig
 {
     // Required
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
 
     // Optional
     Host = "<ph_client_api_host>",         // PostHog instance URL (default: https://us.i.posthog.com)

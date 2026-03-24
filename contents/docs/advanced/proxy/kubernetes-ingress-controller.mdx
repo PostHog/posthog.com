@@ -167,14 +167,14 @@ In your application code, update your PostHog initialization to use your proxy s
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -331,14 +331,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -486,14 +486,14 @@ In your application code, update your PostHog initialization to use your subpath
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/posthog',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/posthog',
   ui_host: 'https://eu.posthog.com'
 })
@@ -581,7 +581,7 @@ If PostHog returns `401 Unauthorized`:
 
 1. Verify the `upstream-vhost` annotation (or equivalent) is set to PostHog's domain
 2. Check that your PostHog region matches in all places
-3. Confirm your project API key is correct in the SDK initialization
+3. Confirm your project token is correct in the SDK initialization
 
 The Host header must be set to PostHog's domain (e.g., `us.i.posthog.com`), not your subdomain. Without this, PostHog can't authenticate your requests.
 
@@ -649,7 +649,7 @@ If events don't appear in PostHog:
    kubectl run -it --rm debug --image=curlimages/curl --restart=Never -- \
      curl -X POST https://e.yourdomain.com/e/ \
      -H "Content-Type: application/json" \
-     -d '{"api_key": "your-project-api-key", "event": "test_event", "distinct_id": "test_user"}'
+     -d '{"api_key": "your-project-token", "event": "test_event", "distinct_id": "test_user"}'
 ```
 
 4. Check your application's network tab for the actual error response from PostHog

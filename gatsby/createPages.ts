@@ -8,7 +8,13 @@ import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
+const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+    if (isMinimalBuild) {
+        return createMinimalPages({ createPage, graphql })
+    }
+
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
@@ -17,8 +23,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
-    const DashboardTemplate = path.resolve(`src/templates/Template.js`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
+    const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
+    const EventTemplate = path.resolve(`src/templates/Event.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
     const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
@@ -156,6 +164,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
                 nodes {
                     id
+                    fields {
+                        slug
+                    }
+                }
+            }
+            workflowTemplates: allPostHogWorkflowTemplate {
+                nodes {
+                    templateId
                     fields {
                         slug
                     }
@@ -425,6 +441,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     if (result.error) {
         return Promise.reject(result.error)
+    }
+
+    const eventsResult = (await graphql(`
+        {
+            allEvent {
+                nodes {
+                    id
+                    strapiID
+                }
+            }
+        }
+    `)) as any
+
+    if (eventsResult.error) {
+        return Promise.reject(eventsResult.error)
     }
 
     const menuFlattened = flattenMenu(menu)
@@ -726,6 +757,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         },
     })
 
+    eventsResult.data.allEvent.nodes.forEach((node) => {
+        if (!node?.strapiID) return
+        createPage({
+            path: `/events/${node.strapiID}`,
+            component: EventTemplate,
+            context: {
+                id: node.id,
+                strapiID: node.strapiID,
+            },
+        })
+    })
+
     result.data.spotlights.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
@@ -795,6 +838,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    // Create workflow template pages
+    result.data.workflowTemplates.nodes.forEach((node) => {
+        createPage({
+            path: `/templates/workflow/${node.fields.slug}`,
+            component: WorkflowTemplate,
+            context: {
+                slug: node.fields.slug,
+            },
+        })
+    })
+
     if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {
         for (node of result.data.jobs.nodes) {
             const { id, parent } = node
@@ -804,23 +858,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
-                for (const issue of issues) {
-                    if (!issue) continue
-                    const { html_url, number, title, labels } = await fetch(
-                        `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
-                        {
-                            headers: {
-                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                            },
-                        }
-                    ).then((res) => res.json())
-                    gitHubIssues.push({
-                        url: html_url,
-                        number,
-                        title,
-                        labels,
-                    })
-                }
+                gitHubIssues = await Promise.all(
+                    issues
+                        .filter((issue) => issue)
+                        .map((issue) =>
+                            fetch(`https://api.github.com/repos/${repo}/issues/${issue.trim()}`, {
+                                headers: {
+                                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                                },
+                            })
+                                .then((res) => res.json())
+                                .then(({ html_url, number, title, labels }) => ({
+                                    url: html_url,
+                                    number,
+                                    title,
+                                    labels,
+                                }))
+                        )
+                )
             }
             createPage({
                 path: slug,
@@ -918,4 +973,154 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
         })
     })
+}
+
+async function createMinimalPages({
+    createPage,
+    graphql,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    graphql: Parameters<GatsbyNode['createPages']>[0]['graphql']
+}) {
+    const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
+    const Slugger = require('github-slugger')
+
+    const result = await graphql(`
+        {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/" } }, frontmatter: { title: { ne: "" } } }) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            handbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/handbook/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            posts: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: {
+                        slug: {
+                            regex: "/^/(blog|library|founders|product-engineers|features|newsletter|spotlight|customers|tutorials)/"
+                        }
+                    }
+                }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+        }
+    `)
+
+    if (result.errors) {
+        console.error('Error in content preview GraphQL query:', result.errors)
+        return Promise.reject(result.errors)
+    }
+
+    const menuFlattened = flattenMenu(menu)
+
+    function formatToc(headings: Array<{ depth: number; value: string }>) {
+        const slugger = new Slugger()
+        return headings.map((heading) => {
+            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
+            return {
+                ...heading,
+                depth: heading.depth - 2,
+                url: slugger.slug(cleanValue),
+                value: cleanValue,
+            }
+        })
+    }
+
+    function createHandbookPreviewPosts(data: any[], menuName: string, breadcrumbBase: { name: string; url: string }) {
+        data.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) return
+
+            const tableOfContents = node.headings && formatToc(node.headings)
+            let breadcrumb = null
+
+            menuFlattened.some((item) => {
+                if (item.url === slug) {
+                    breadcrumb = [...item.breadcrumb]
+                    return true
+                }
+                return false
+            })
+
+            createPage({
+                path: replacePath(slug),
+                component: HandbookTemplate,
+                context: {
+                    id: node.id,
+                    breadcrumb,
+                    breadcrumbBase,
+                    tableOfContents,
+                    slug,
+                    searchFilter: menuName,
+                    links: [],
+                    nextURL: '',
+                },
+            })
+        })
+    }
+
+    function createBlogPreviewPosts(data: any[], askMax: boolean = false) {
+        data.forEach((node) => {
+            const slug = node.fields?.slug
+            if (!slug) return
+
+            const tableOfContents = node.headings && formatToc(node.headings)
+
+            createPage({
+                path: replacePath(slug),
+                component: BlogPostTemplate,
+                context: {
+                    id: node.id,
+                    tableOfContents,
+                    slug,
+                    post: true,
+                    article: true,
+                    ...(askMax ? { askMax: true } : {}),
+                },
+            })
+        })
+    }
+
+    const data = result.data as {
+        docs: { nodes: any[] }
+        handbook: { nodes: any[] }
+        posts: { nodes: any[] }
+    }
+
+    createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+    createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createBlogPreviewPosts(data.posts.nodes)
 }

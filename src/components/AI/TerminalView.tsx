@@ -7,6 +7,7 @@ import TerminalDemo from 'components/AI/TerminalDemo'
 import TerminalVideos from 'components/AI/TerminalVideos'
 import TerminalPersonas from 'components/AI/TerminalPersonas'
 import TerminalRoadmap from 'components/AI/TerminalRoadmap'
+import TerminalCapabilities from 'components/AI/TerminalCapabilities'
 import { posthog_ai } from 'hooks/productData/posthog_ai'
 import { skills, skillTitle } from 'components/Products/Slides/OverviewSlide/OverviewSlideMax'
 import Link from 'components/Link'
@@ -149,6 +150,13 @@ export default function TerminalView(): JSX.Element {
                 {/* Demo */}
                 <TerminalSection id="demo" title="Chat with your data">
                     <TerminalDemo />
+                </TerminalSection>
+
+                <SectionDivider />
+
+                {/* Advanced Modes */}
+                <TerminalSection id="capabilities" title="Advanced Modes">
+                    <TerminalCapabilities />
                 </TerminalSection>
 
                 <SectionDivider />

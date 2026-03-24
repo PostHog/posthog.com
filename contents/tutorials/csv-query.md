@@ -47,7 +47,7 @@ With our bucket setup and `.csv` upload, we are ready to connect it to PostHog.
 
 With these, we can add the bucket to PostHog:
 
-1. Go to the [sources tab](https://us.posthog.com/pipeline/sources) of the data pipeline section in PostHog.
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click [**New source**](https://us.posthog.com/project/52792/pipeline/new/source) and under self managed, look for **Cloudflare R2** and click **Link.**
 3. Fill the table name for use in PostHog (like `csv_users`), then use the data from Cloudflare to fill out the rest of the fields:
     - For files URL pattern, use the jurisdiction-specific endpoint URL with your bucket and file name like `https://b27344y7bd543c.r2.cloudflarestorage.com/posthog-warehouse/my_users.csv`.

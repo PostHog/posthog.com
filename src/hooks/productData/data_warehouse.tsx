@@ -1,23 +1,23 @@
 import React from 'react'
-import { IconAsterisk } from '@posthog/icons'
+import { IconDatabase } from '@posthog/icons'
 import Link from 'components/Link'
 
-// this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'visualize' handle.
+// this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
 export const dataWarehouse = {
-    parentIcon: 'SQL',
-    Icon: IconAsterisk,
-    name: 'Data warehouse', // Query & visualize data
+    parentIcon: 'dataWarehouse',
+    Icon: IconDatabase,
+    name: 'Managed warehouse', // Query & visualize data
     handle: 'data_warehouse',
     type: 'data_warehouse',
-    slug: 'data-warehouse',
+    slug: 'data-stack/managed-warehouse',
     color: 'purple',
     colorSecondary: 'lilac',
-    // category: 'data',
+    category: 'data',
+    status: 'beta',
     seo: {
-        title: 'Data Warehouse – Sync and query product data in PostHog',
-        description:
-            "Centralize your product data with PostHog's Data Warehouse. Query events, sync external sources, and visualize results in one place.",
+        title: 'Managed DuckDB warehouse - PostHog',
+        description: 'Fast, scalable, and easy-to-use data warehouse managed by PostHog.',
     },
     overview: {
         title: 'Query & visualize product and third party data together',
@@ -320,7 +320,7 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'S3 & BigQuery',
-                    description: 'Query data directly from cloud storage',
+                    description: 'Run SQL in PostHog over data in your object storage',
                 },
             ],
         },
@@ -434,7 +434,7 @@ export const dataWarehouse = {
     ],
     questions: [
         {
-            question: 'How do specific user behaviours correlate to MRR?',
+            question: 'How do specific user behaviors correlate to MRR?',
             url: '/tutorials/stripe-reports',
         },
         {

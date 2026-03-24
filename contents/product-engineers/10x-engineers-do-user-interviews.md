@@ -22,7 +22,7 @@ The best way to do this? Speak directly to them.
 
 ## Solving the information bottleneck
 
-In traditional tech companies, information flows from the user to the product manager (PM) by an interview, and then from the PM to the engineer through a bunch of tickets:
+In traditional tech companies, information flows from the user to the [product manager](/newsletter/what-does-a-product-manager-do) (PM) by an interview, and then from the PM to the engineer through a bunch of tickets:
 
 ![PM to engineer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
 

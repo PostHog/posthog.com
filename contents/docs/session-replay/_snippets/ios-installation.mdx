@@ -13,7 +13,7 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 <CalloutBox title="Xcode 26" type="caution" icon="IconWarning">
 
 SwiftUI rendering behavior changed for apps built with Xcode 26 (when running on iOS 26).
-If you're building with Xcode 26, please use PostHog iOS SDK version &gt;= [3.36.1](https://github.com/PostHog/posthog-ios/releases/tag/3.36.1), which includes a partial fix for this issue.
+If you're building with Xcode 26, please use PostHog iOS SDK version &gt;= [3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2), which includes a fix for this issue.
 
 </CalloutBox>
 
@@ -36,22 +36,12 @@ Setting `config.sessionReplay = true` to your PostHog configuration will start s
 
 ### Manually control session recordings
 
-Setting `config.sessionReplay = false` to your PostHog configuration will prevent PostHog from automatically starting session recordings on SDK setup. 
-
-You can manually control when to start and stop session recordings using the following two methods:
-
-- `startSessionRecording(resumeCurrent: Bool)`
-  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
-  - Set **resumeCurrent** to `false` to start a new session recording. 
-- `stopSessionRecording()` 
-  - Stops/pauses the current session recording.
-
-> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+You can programmatically start and stop session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
 
 ## Configuration options
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+let config = PostHogConfig(apiKey: "<ph_project_token>")
 // Enable session recording. Requires enabling in your project settings as well.
 // Default is false.
 config.sessionReplay = true
@@ -68,9 +58,14 @@ config.sessionReplayConfig.maskAllImages = true
 // Default is true.
 config.sessionReplayConfig.maskAllSandboxedViews = true
 
+// Whether logs are captured in recordings. Default is false.
+// Remote configuration via project settings requires SDK version 3.41.1 or higher.
+config.sessionReplayConfig.captureLogs = false
+
 // Whether network requests are captured in recordings. Default is true
 // Only metric-like data like speed, size, and response code are captured. 
 // No data is captured from the request or response body.
+// Remote configuration via project settings requires SDK version 3.41.1 or higher.
 config.sessionReplayConfig.captureNetworkTelemetry = true
 
 // Whether replays are created using high quality screenshots. Default is false.
@@ -83,6 +78,12 @@ config.sessionReplayConfig.screenshotMode = true
 // A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
 // Note: Previously known as `debouncerDelay` before version 3.21.0
 config.sessionReplayConfig.throttleDelay = 1.0
+
+// Sample rate for session replay. A value between 0.0 and 1.0 that determines the percentage
+// of sessions to record. For example, 0.5 means 50% of sessions will be recorded.
+// Default is nil (no client-side sampling, server-side settings apply).
+// Requires SDK version 3.42.0 or higher.
+config.sessionReplayConfig.sampleRate = nil
 ```
 
 ## Limitations

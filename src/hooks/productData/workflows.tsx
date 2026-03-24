@@ -25,7 +25,6 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     category: 'automation',
-    status: 'beta',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
@@ -351,8 +350,7 @@ export const workflows = {
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     presenterNotes: {
-        overview:
-            '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
+        overview: '',
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
@@ -361,7 +359,7 @@ export const workflows = {
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {
-            title: 'How PostHog uses PostHog Workflows',
+            title: 'Automating onboarding with PostHog Workflows',
             author: 'Sara Miteva',
             wistia: '9npwnc8sm6',
             chapters: [

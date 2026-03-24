@@ -71,6 +71,6 @@ So that’s the new part.
 
 But under the hood, you’re building an interface to your existing services. If you’ve built an API or delivered client code, you already know how to do this.
 
-Again, if you want some code to steal or learn from, you can [grab ours](https://github.com/PostHog/posthog/tree/master/products/mcp). It runs on Cloudflare Workers using [Durable Objects](https://developers.cloudflare.com/durable-objects/), so you can adapt and deploy your own version easily.
+Again, if you want some code to steal or learn from, you can [grab ours](https://github.com/PostHog/posthog/tree/master/services/mcp). It runs on Cloudflare Workers using [Durable Objects](https://developers.cloudflare.com/durable-objects/), so you can adapt and deploy your own version easily.
 
 We’ll talk some more about [MCP next time](/blog/machine-copy-paste-mcp-intro). But for now: play around with these ideas a bit. What else can you do to [make a developer’s robot friend more helpful](/newsletter/building-ai-features)?

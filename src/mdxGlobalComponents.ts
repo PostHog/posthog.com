@@ -32,6 +32,9 @@ import SmallTeam from './components/SmallTeam'
 import { StarRepoButton } from './components/StarRepoButton'
 import TaskOwnershipTable from './components/TaskOwnershipTable'
 import TeamMember from './components/TeamMember'
+import WistiaEmbed from './components/WistiaEmbed'
+import WizardCommand from './components/WizardCommand'
+import WizardCTA from './components/WizardCTA'
 
 // Global MDX components
 export const shortcodes = {
@@ -70,4 +73,7 @@ export const shortcodes = {
     FeatureOwnershipTable,
     TaskOwnershipTable,
     RainbowText,
+    WistiaEmbed,
+    WizardCommand,
+    WizardCTA,
 }

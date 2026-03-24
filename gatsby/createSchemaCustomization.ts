@@ -457,6 +457,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         url: String
     }
     type EventPhotoData {
+        id: ID
         attributes: EventPhotoAttributes
     }
     type EventPhoto {
@@ -476,6 +477,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         name: String
         description: String
         date: Date
+        startTime: String
         private: Boolean
         format: [String]
         audience: [String]
@@ -491,12 +493,29 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         speakers: EventSpeaker
     }
     type Event implements Node {
+        strapiID: Int
         attributes: EventAttributes
     }
     type ChangelogVideo implements Node {
         videoId: String!
         publishedAt: Date! @dateformat
         title: String!
+    }
+    type PostHogWorkflowTemplateCreatedBy {
+        first_name: String
+        last_name: String
+    }
+    type PostHogWorkflowTemplateFields {
+        slug: String
+    }
+    type PostHogWorkflowTemplate implements Node {
+        templateId: String
+        name: String
+        description: String
+        image_url: String
+        created_at: Date
+        created_by: PostHogWorkflowTemplateCreatedBy
+        fields: PostHogWorkflowTemplateFields
     }
   `)
     createTypes([
@@ -507,6 +526,33 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                 isFuture: {
                     type: 'Boolean!',
                     resolve: (source) => new Date(source.frontmatter.date) > new Date(),
+                },
+            },
+        }),
+        schema.buildObjectType({
+            name: 'SqueakTeam',
+            interfaces: ['Node'],
+            fields: {
+                objectives: {
+                    type: 'Mdx',
+                    resolve: async (source, _args, context) => {
+                        if (!source?.slug) {
+                            return null
+                        }
+
+                        return context.nodeModel.findOne({
+                            type: 'Mdx',
+                            query: {
+                                filter: {
+                                    fields: {
+                                        slug: {
+                                            eq: `/teams/${source.slug}/objectives`,
+                                        },
+                                    },
+                                },
+                            },
+                        })
+                    },
                 },
             },
         }),

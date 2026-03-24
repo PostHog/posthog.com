@@ -1,26 +1,21 @@
 ---
-title: Vercel AI LLM analytics installation
-platformIconName: IconVercel
+title: Vercel AI SDK LLM analytics installation
+platformLogo: vercel
 showStepsToc: true
 tableOfContents: [
     {
-        url: 'install-posthog-sdk',
-        value: 'Install the PostHog SDK',
+        url: 'install-dependencies',
+        value: 'Install dependencies',
         depth: 1,
     },
     {
-        url: 'install-vercel-ai-sdk',
-        value: 'Install the Vercel AI SDK',
+        url: 'set-up-the-opentelemetry-exporter',
+        value: 'Set up the OpenTelemetry exporter',
         depth: 1,
     },
     {
-        url: 'initialize-posthog-and-vercel-ai',
-        value: 'Initialize PostHog and Vercel AI',
-        depth: 1,
-    },
-    {
-        url: 'call-vercel-ai',
-        value: 'Call Vercel AI',
+        url: 'call-vercel-ai-with-telemetry-enabled',
+        value: 'Call Vercel AI with telemetry enabled',
         depth: 1,
     },
     {
@@ -34,13 +29,14 @@ tableOfContents: [
 <!--
 This page imports shared onboarding content from the main PostHog repo.
 Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/llm-analytics/vercel-ai.tsx
-See the docs runbook for more info: https://posthog.com/handbook/content/docs-runbook
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
 -->
 
 import { VercelAIInstallation } from 'onboarding/llm-analytics/vercel-ai.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 
 <OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
-    <VercelAIInstallation />
+    <VercelAIInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>

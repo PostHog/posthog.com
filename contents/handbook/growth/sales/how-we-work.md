@@ -100,15 +100,30 @@ If the answer to any of the above questions is 'no' then it's likely that there 
   - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
-- Commission is paid out quarterly, and in any case after an invoice is paid
-  - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
-    - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
-  - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
+- Commission is paid out quarterly, and is subject to clawbacks if the invoices remain unpaid.
+  - We want you to secure upfront payment - which helps PostHog and helps you.
+    - If you close an annual contract with monthly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
+  - We want you to ensure the customer has paid, and we don't want AEs to throw invoice chasing to a finance person
+    -  This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay.
   - For monthly customers, commission is only paid after all 3 invoices have been paid
     - Commission is still paid out quarterly even if the customer pays monthly
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how qoutas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+  - Overdue invoices from the current quarter will be excluded from commission payouts, with the cutoff being the 14th of the calendar month following the quarter (January, April, July, and October)
+  - Invoices that are issued in the final period of the current quarter, but are due at a date beyond the 14th of the calendar month following the quarter (January, April, July, and October), will be paid on the good faith assumption that the customer will pay on time and you will assist in securing timely payment. If the invoice becomes overdue in a future quarter, it will be subject to a clawback in that quarter. 
+  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis or via clawback.
+  - Commission payments are made at the end of January, April, July, and October. Fraser will send you an email that breaks down your commission and explains how you did.
+- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+
+### Performance expectations for Technical Account Executives
+
+There are [cultural](/handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
+
+After your ramp period, you should expect to have a performance conversation with your lead and Charles if:
+
+- You are under 80% of your annual quota, _and_
+- You have finished two consecutive quarters under 70% of your quarterly target
+
+These standards are likely to change as the TAE role evolves. Any changes will be reflected in the handbook. We will always consider any relevant context when having these conversations with you - quota does not exist in a vacuum!
+
 
 ## How commission works - Technical Account Managers
 
@@ -130,7 +145,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
-  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse and PostHog AI.
+  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, LLM Analytics, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
   - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
   - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
   - A product is counted as paid if the invoice amount for that product is greater than $200

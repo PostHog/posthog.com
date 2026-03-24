@@ -49,6 +49,7 @@ export const llmAnalytics = {
     color: 'purple',
     colorSecondary: 'green-2',
     category: 'analytics',
+    wizardSupport: 'Coming soon',
     slider: {
         marks: [100000, 1000000, 10000000, 100000000],
         min: 100000,
@@ -87,7 +88,7 @@ export const llmAnalytics = {
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
             alt: 'LLM Analytics screenshot',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
-            imgClasses: 'rounded-tl-lg shadow-2xl',
+            imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
     // hog: {

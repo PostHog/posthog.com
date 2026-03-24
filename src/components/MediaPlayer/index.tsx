@@ -3,6 +3,7 @@ import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolum
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
 import React, { useEffect, useRef, useState } from 'react'
+import { useApp } from '../../context/App'
 
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
@@ -21,6 +22,7 @@ interface MediaPlayerProps {
 }
 
 export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0 }: MediaPlayerProps) {
+    const { websiteMode } = useApp()
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,
@@ -336,7 +338,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                 <main
                     data-app="MediaPlayer"
                     data-scheme="primary"
-                    className="@container flex-1 bg-primary relative h-full"
+                    className={`@container flex-1 bg-primary relative h-full ${websiteMode && 'max-w-7xl mx-auto'}`}
                 >
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
@@ -349,8 +351,8 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         </div>
 
                         {/* Scrubbing bar */}
-                        <div className="w-full px-2 py-1 bg-[#EFF7DE] border border-primary rounded-sm flex items-center gap-2">
-                            <span className="text-sm font-semibold text-right dark:text-yellow w-24">
+                        <div className="w-full px-2 py-1 bg-[#EFF7DE] dark:bg-primary border border-primary rounded-sm flex items-center gap-2">
+                            <span className="text-sm font-semibold text-right dark:text-white w-24">
                                 {Math.floor((isScrubbing ? scrubTime : playerState.currentTime) / 60)}:
                                 {Math.floor((isScrubbing ? scrubTime : playerState.currentTime) % 60)
                                     .toString()
@@ -394,7 +396,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                             <div className="col-span-3 flex flex-row gap-2 items-center">
                                 <button
                                     onClick={toggleMute}
-                                    className="text-sm font-semibold text-right dark:text-yellow"
+                                    className="text-sm font-semibold text-right dark:text-white"
                                 >
                                     {playerState.isMuted ? (
                                         <IconVolumeMuted className="size-6" />
@@ -461,11 +463,11 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                                             ],
                                         },
                                     ]}
-                                    className="text-sm font-semibold text-right dark:text-yellow"
+                                    className="text-sm font-semibold text-right dark:text-white"
                                 />
                                 <button
                                     onClick={toggleFullscreen}
-                                    className="text-sm font-semibold text-right dark:text-yellow"
+                                    className="text-sm font-semibold text-right dark:text-white"
                                 >
                                     <IconFullScreen className="size-5" />
                                 </button>

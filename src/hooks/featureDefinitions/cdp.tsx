@@ -8,7 +8,15 @@ export const cdpFeatures = {
     features: {
         realtime_streaming: {
             name: 'Realtime event streaming',
-            description: 'Send events to Slack, webhooks, and 40+ tools as they happen',
+            description: 'Send events to Slack, webhooks, and other tools as they happen',
+        },
+         custom_transformations: {
+            name: 'Custom transformations',
+            description: 'Filter, modify, and enrich data before sending to destinations',
+        },
+            no_code_setup: {
+                name: 'No-code setup',
+                description: 'Configure sources and destinations through the UI',
         },
     },
     sources_destinations: {
@@ -20,7 +28,7 @@ export const cdpFeatures = {
             },
             no_code_setup: {
                 name: 'No-code setup',
-                description: 'Configure sources and destinations through the UI, no engineering required',
+                description: 'Configure sources and destinations through the UI',
             },
         },
     },

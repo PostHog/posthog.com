@@ -1,119 +1,37 @@
 ---
 title: Model Context Protocol (MCP)
 ---
-import CalloutBox from '../../../src/components/Docs/CalloutBox'
-import Tab from "components/Tab"
-import CursorSnippet from "./_snippets/cursor.mdx"
-import ClaudeDesktopSnippet from "./_snippets/claude-desktop.mdx"
-import WindsurfSnippet from "./_snippets/windsurf.mdx"
-import VSCodeSnippet from "./_snippets/vscode.mdx"
-import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
-import ZedSnippet from "./_snippets/zed.mdx"
-import ReplitSnippet from "./_snippets/replit.mdx"
-import MCPTools from '../../../src/components/Docs/MCPTools'
+import SharedContent from "./_snippets/shared.mdx"
+import MCPClients from "./_snippets/mcp-clients.tsx"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
 
+## Server URL
+
+| Region | URL |
+|--------|-----|
+| **US** (default) | `https://mcp.posthog.com/mcp` |
+| **EU** | `https://mcp-eu.posthog.com/mcp` |
+
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **VS Code** and **Zed**.
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code** and **Zed**.
 
 ```bash
 npx @posthog/wizard mcp add
 ```
 
-We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below.
+We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions for your specific client:
 
-## Manual install
+<MCPClients />
 
-Add the MCP configuration to your client. When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+<SharedContent />
 
-<CalloutBox icon="IconFlag" title="EU region users" type="fyi">
+## Next steps
 
-If your PostHog project is on EU Cloud, add `?region=eu` to the MCP URLs. For example: `https://mcp.posthog.com/mcp?region=eu`
-
-</CalloutBox>
-
-<Tab.Group tabs={['claude-code', 'claude-desktop', 'cursor', 'windsurf', 'vscode', 'zed', 'replit']}>
-    <Tab.List>
-        <Tab>Claude Code</Tab>
-        <Tab>Claude Desktop</Tab>
-        <Tab>Cursor</Tab>
-        <Tab>Windsurf</Tab>
-        <Tab>VS Code</Tab>
-        <Tab>Zed</Tab>
-        <Tab>Replit</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <ClaudeCodeSnippet />
-        </Tab.Panel>
-        <Tab.Panel>
-            <ClaudeDesktopSnippet />
-        </Tab.Panel>
-        <Tab.Panel>
-            <CursorSnippet />
-        </Tab.Panel>
-        <Tab.Panel>
-            <WindsurfSnippet />
-        </Tab.Panel>
-        <Tab.Panel>
-            <VSCodeSnippet />
-        </Tab.Panel>
-        <Tab.Panel>
-            <ZedSnippet />
-        </Tab.Panel>
-        <Tab.Panel>
-            <ReplitSnippet />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
-
-Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
-
-<details>
-
-<summary>Using an API key instead of OAuth?</summary>
-
-If your MCP client doesn't support OAuth, you can authenticate manually:
-
-1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset (this scopes access to a specific project)
-2. Add the `Authorization: Bearer YOUR_API_KEY` header to your MCP configuration
-
-Example for Cursor (add to `.cursor/mcp.json`):
-
-```json
-{
-  "mcpServers": {
-    "posthog": {
-      "url": "https://mcp.posthog.com/mcp",
-      "headers": {
-        "Authorization": "Bearer phx_your_api_key_here"
-      }
-    }
-  }
-}
-```
-
-</details>
-
-
-## Available Tools
-
-Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. PostHog tools are also available in our [agent toolkit](/docs/ai-engineering/agent-toolkit) which can be integrated with AI agent frameworks like Vercel's AI SDK and LangChain.
-
-Here's a list of tools we provide:
-
-<MCPTools />
-
-## Prompts and resources
-
-The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
-
-Currently we support Next.js, with more frameworks in progress.
-
-## Next Steps
-
-- [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/products/mcp): Check out GitHub repository for the MCP server
+- [Lovable integration](/docs/integrations/lovable): Set up PostHog in your Lovable project
+- [Replit integration](/docs/integrations/replit): Set up PostHog with Replit Agent
+- [v0 integration](/docs/integrations/v0): Set up PostHog with v0 and the Vercel Flags SDK
+- [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/services/mcp): Check out GitHub repository for the MCP server
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
 - [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?

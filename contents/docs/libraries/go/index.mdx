@@ -12,6 +12,7 @@ features:
   groupAnalytics: true
   surveys: false
   llmAnalytics: false
+  errorTracking: true
 ---
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
@@ -21,6 +22,12 @@ This library uses an internal queue to make calls fast and non-blocking. It also
 import GoInstall from '../../integrate/_snippets/install-go.mdx'
 
 <GoInstall />
+
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
 
 ## Capturing events
 
@@ -105,7 +112,7 @@ variant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
     DistinctId: "user_distinct_id",
 })
 if err != nil {
-    // Handle error (e.g. capture error and fallback to default behaviour)
+    // Handle error (e.g. capture error and fallback to default behavior)
 }
 if variant == "variant-name" {
     // Do something
@@ -113,6 +120,40 @@ if variant == "variant-name" {
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Error tracking
+
+You can capture exceptions and errors using the Go SDK. There are two approaches:
+
+**Direct capture** using `NewDefaultException`, which automatically generates a stack trace:
+
+```go
+exception := posthog.NewDefaultException(
+    time.Now(),
+    "user_distinct_id",
+    "DatabaseError",      // type - rendered as title in the UI
+    "connection refused",  // value - rendered as description in the UI
+)
+client.Enqueue(exception)
+```
+
+**Automatic capture** using the `SlogCaptureHandler`, which wraps Go's `log/slog` and sends log records at warning level and above as exceptions:
+
+```go
+baseHandler := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+    Level: slog.LevelInfo,
+})
+logger := slog.New(posthog.NewSlogCaptureHandler(baseHandler, client,
+    posthog.WithDistinctIDFn(func(ctx context.Context, r slog.Record) string {
+        return "user_distinct_id"
+    }),
+))
+
+// Automatically captured as an exception in PostHog
+logger.Warn("Something broke", "error", fmt.Errorf("connection refused"))
+```
+
+For the full setup guide, see the [Go error tracking installation docs](/docs/error-tracking/installation/go).
 
 ## Group analytics
 

@@ -1,0 +1,124 @@
+---
+title: Rust feature flags installation
+platformLogo: rust
+---
+
+import RustInstall from '../../integrate/_snippets/install-rust.mdx'
+
+<RustInstall />
+
+## Using feature flags
+
+### Boolean feature flags
+
+```rust
+let is_enabled = client.is_feature_enabled(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, // groups
+    None, // person_properties
+    None, // group_properties
+).await.unwrap();
+
+if is_enabled {
+    // Do something differently for this user
+}
+```
+
+### Multivariate feature flags
+
+```rust
+use posthog_rs::FlagValue;
+
+match client.get_feature_flag(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await.unwrap() {
+    Some(FlagValue::String(variant)) => {
+        if variant == "variant-key" {
+            // Do something for this variant
+        }
+    }
+    Some(FlagValue::Boolean(enabled)) => {
+        // Handle boolean flag
+    }
+    None => {
+        // Flag not found or disabled
+    }
+}
+```
+
+### Fetching all flags
+
+```rust
+let (flags, payloads) = client.get_feature_flags(
+    "distinct_id_of_your_user".to_string(),
+    None, None, None
+).await.unwrap();
+
+for (key, value) in flags {
+    println!("Flag {}: {:?}", key, value);
+}
+```
+
+### Feature flag payloads
+
+```rust
+let payload = client.get_feature_flag_payload(
+    "flag-key".to_string(),
+    "distinct_id_of_your_user".to_string()
+).await.unwrap();
+
+if let Some(data) = payload {
+    println!("Payload: {}", data);
+}
+```
+
+### With person properties
+
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+let mut person_props = HashMap::new();
+person_props.insert("plan".to_string(), json!("enterprise"));
+person_props.insert("country".to_string(), json!("US"));
+
+let flag = client.get_feature_flag(
+    "premium-feature".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    None,
+    Some(person_props),
+    None
+).await.unwrap();
+```
+
+### With groups
+
+For B2B applications with group-based flags:
+
+```rust
+use std::collections::HashMap;
+use serde_json::json;
+
+let mut groups = HashMap::new();
+groups.insert("company".to_string(), "company-123".to_string());
+
+let mut group_props = HashMap::new();
+let mut company_props = HashMap::new();
+company_props.insert("size".to_string(), json!(500));
+group_props.insert("company".to_string(), company_props);
+
+let flag = client.get_feature_flag(
+    "b2b-feature".to_string(),
+    "distinct_id_of_your_user".to_string(),
+    Some(groups),
+    None,
+    Some(group_props)
+).await.unwrap();
+```
+
+import FFNextSteps from './_snippets/ff-next-steps.mdx'
+
+<FFNextSteps />

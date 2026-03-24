@@ -367,8 +367,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         return allStrapiPostCategories.find((category) => category === data)
     }
 
-    await getAllStrapiPosts()
-    await getAllStrapiPostCategories()
+    await Promise.all([getAllStrapiPosts(), getAllStrapiPostCategories()])
     const postsToCreateOrUpdate: any = []
     for (const {
         frontmatter: {
@@ -444,9 +443,11 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         postsToCreateOrUpdate.push({ data, existingPostId: existingPost?.id })
     }
 
-    for (const { data, existingPostId } of postsToCreateOrUpdate) {
-        await createOrUpdateStrapiPost(data, existingPostId)
-    }
+    await Promise.all(
+        postsToCreateOrUpdate.map(({ data, existingPostId }) =>
+            limit(() => createOrUpdateStrapiPost(data, existingPostId))
+        )
+    )
 
     await Promise.all(
         roadmaps.map(({ title, date: roadmapDate, media, description, cta }) => {
@@ -484,6 +485,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
+    if (process.env.GATSBY_MINIMAL === 'true') return
     // Generate API spec markdown files first
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'

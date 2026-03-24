@@ -30,6 +30,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
                         className={`rounded-full ${imgClassName}`}
                         publicId={cloudinaryPublicId}
                         cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                        secure
                     >
                         <Transformation width="100" crop="scale" />
                     </Image>

@@ -78,7 +78,7 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
             const chunk = playlistItems.slice(i, i + chunkSize)
             const idsParam = chunk.map((item) => item.videoId).join(',')
             const params = new URLSearchParams({
-                part: 'snippet',
+                part: 'snippet,contentDetails',
                 id: idsParam,
                 key: apiKey,
                 maxResults: '50',
@@ -96,6 +96,22 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
                 if (!videoId) return
                 const snippet = item?.snippet
                 if (!snippet?.publishedAt) return
+
+                // Filter out Shorts (videos ≤60 seconds)
+                const duration = item?.contentDetails?.duration
+                if (duration) {
+                    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
+                    if (match) {
+                        const hours = parseInt(match[1] || '0', 10)
+                        const minutes = parseInt(match[2] || '0', 10)
+                        const seconds = parseInt(match[3] || '0', 10)
+                        const totalSeconds = hours * 3600 + minutes * 60 + seconds
+                        if (totalSeconds <= 60) {
+                            return // Skip Shorts
+                        }
+                    }
+                }
+
                 videoDetailsMap[videoId] = {
                     videoId,
                     publishedAt: snippet.publishedAt,
@@ -113,6 +129,28 @@ const fetchChangelogPlaylistVideos = async (): Promise<ChangelogPlaylistVideo[]>
     }
 }
 
+const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>): Record<string, any> => {
+    const collected = new Set<string>()
+
+    const collect = (obj: any) => {
+        if (typeof obj !== 'object' || !obj) return
+        if (obj['$ref']?.startsWith('#/components/schemas/')) {
+            const name = obj['$ref'].replace('#/components/schemas/', '')
+            if (!collected.has(name) && allSchemas[name]) {
+                collected.add(name)
+                collect(allSchemas[name])
+            }
+        }
+        Object.values(obj).forEach(collect)
+    }
+
+    items.forEach((item) => collect(item.operationSpec))
+
+    return {
+        schemas: Object.fromEntries([...collected].map((name) => [name, allSchemas[name]])),
+    }
+}
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
@@ -125,6 +163,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const parser = new OpenAPIParser(spec)
     const menu = MenuBuilder.buildStructure(parser, {} as any)
+
+    const allSchemas = spec.components?.schemas || {}
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
     const maxEndpointItems = 20
@@ -149,6 +189,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return endpoint
     })
     all_endpoints.forEach((endpoint) => {
+        const components = findAllReferencedSchemas(endpoint.items, allSchemas)
+
         const node = {
             id: createNodeId(`api_endpoint-${endpoint.name}`),
             internal: {
@@ -157,29 +199,18 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     items: endpoint.items,
                 }),
             },
-            items: JSON.stringify(
-                endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
-            ),
-            schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
+            items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
+            components: JSON.stringify(components),
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
         }
         createNode(node)
     })
-    createNode({
-        id: createNodeId(`api_endpoint-components`),
-        internal: {
-            type: `ApiComponents`,
-            contentDigest: createContentDigest({
-                components: spec.components,
-            }),
-        },
-        components: JSON.stringify(spec.components),
-    })
 
+    // --- Begin parallel sourcing of independent data ---
     const createProductDataNode = async () => {
-        const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+        const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
             'Content-Type': 'application/json',
         }
@@ -205,8 +236,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
         createNode(node)
     }
-    await createProductDataNode()
-
     const createRoadmapItems = async (page = 1) => {
         const roadmapQuery = qs.stringify(
             {
@@ -285,53 +314,52 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
-    await createRoadmapItems()
+    const sourceChangelogVideos = async () => {
+        const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
+        changelogPlaylistVideos.forEach((video) => {
+            const nodeData = {
+                videoId: video.videoId,
+                publishedAt: video.publishedAt,
+                title: video.title,
+            }
+            const node = {
+                id: createNodeId(`changelog-video-${video.videoId}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `ChangelogVideo`,
+                    contentDigest: createContentDigest(nodeData),
+                },
+                ...nodeData,
+            }
+            createNode(node)
+        })
+    }
 
-    const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
-    changelogPlaylistVideos.forEach((video) => {
-        const nodeData = {
-            videoId: video.videoId,
-            publishedAt: video.publishedAt,
-            title: video.title,
-        }
-        const node = {
-            id: createNodeId(`changelog-video-${video.videoId}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `ChangelogVideo`,
-                contentDigest: createContentDigest(nodeData),
-            },
-            ...nodeData,
-        }
-        createNode(node)
-    })
+    const sourcePostCategories = async () => {
+        const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
+            (res) => res.json()
+        )
 
-    const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
-        (res) => res.json()
-    )
+        postCategories.data.forEach(({ id, ...other }) => {
+            const node = {
+                id: createNodeId(`post-category-${id}`),
+                internal: {
+                    type: `PostCategory`,
+                    contentDigest: createContentDigest(other),
+                },
+                ...other,
+            }
+            createNode(node)
+        })
+    }
 
-    postCategories.data.forEach(({ id, ...other }) => {
-        const node = {
-            id: createNodeId(`post-category-${id}`),
-            internal: {
-                type: `PostCategory`,
-                contentDigest: createContentDigest(other),
-            },
-            ...other,
-        }
-        createNode(node)
-    })
+    const sourceShopifyNodes = async () => {
+        const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
+        const shopifyAdminAPIVersion = process.env.GATSBY_SHOPIFY_ADMIN_API_VERSION
+        const shopifyAdminAPIAPIPassword = process.env.SHOPIFY_APP_PASSWORD
 
-    /**
-     * Source a list of metaobjects from shopify representing the nav list of collections
-     * and create new Gatsby nodes
-     */
-    const shopifyURL = process.env.GATSBY_MYSHOPIFY_URL
-    const shopifyAdminAPIVersion = process.env.GATSBY_SHOPIFY_ADMIN_API_VERSION
-    const shopifyAdminAPIAPIPassword = process.env.SHOPIFY_APP_PASSWORD
-
-    if (shopifyURL && shopifyAdminAPIVersion && shopifyAdminAPIAPIPassword) {
+        if (!shopifyURL || !shopifyAdminAPIVersion || !shopifyAdminAPIAPIPassword) return
         let responseData: MetaobjectsResponseData | undefined
 
         try {
@@ -605,8 +633,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         }
 
-        await createShopifyNodesByCollectionHandle('frontpage')
-        await createShopifyNodesByCollectionHandle('kits')
+        await Promise.all([
+            createShopifyNodesByCollectionHandle('frontpage'),
+            createShopifyNodesByCollectionHandle('kits'),
+        ])
     }
 
     const fetchSlackEmojis = async () => {
@@ -629,9 +659,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
     }
-    if (process.env.SLACK_API_KEY) {
+    const sourceSlackEmojis = async () => {
+        if (!process.env.SLACK_API_KEY) return
         await fetchSlackEmojis()
     }
+
     const fetchG2Reviews = async (url) => {
         const g2Token = process.env.G2_API_KEY
         const { data, links } = await fetch(url, {
@@ -656,14 +688,19 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             await fetchG2Reviews(links.next)
         }
     }
-    if (process.env.G2_API_KEY) {
+
+    const sourceG2Reviews = async () => {
+        if (!process.env.G2_API_KEY) return
         await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
     }
-    if (
-        process.env.CLOUDINARY_API_KEY &&
-        process.env.CLOUDINARY_API_SECRET &&
-        process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-    ) {
+
+    const sourceCloudinaryImages = async () => {
+        if (
+            !process.env.CLOUDINARY_API_KEY ||
+            !process.env.CLOUDINARY_API_SECRET ||
+            !process.env.GATSBY_CLOUDINARY_CLOUD_NAME
+        )
+            return
         const { resources } = await fetch(
             `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`
         ).then((res) => res.json())
@@ -685,12 +722,77 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const githubHeaders: HeadersInit = { Authorization: `token ${process.env.GITHUB_API_KEY}` }
 
-        const postHogIssues = await fetch(
+        const fetchIssuesPromise = fetch(
             'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5',
             {
                 headers: githubHeaders,
             }
         ).then((res) => res.json())
+
+        const fetchPullsPromise = fetch(
+            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
+            {
+                headers: githubHeaders,
+            }
+        ).then((res) => res.json())
+
+        const fetchIntegrationsPromise = fetch(
+            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
+            { headers: githubHeaders }
+        ).then((res) => res.json())
+
+        const createGitHubStatsNode = async (owner, repo) => {
+            const [repoStats, contributors, commits] = await Promise.all([
+                fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+                    headers: githubHeaders,
+                }).then((res) => res.json()),
+                fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
+                    headers: githubHeaders,
+                }).then((res) => {
+                    const link = parseLinkHeader(res.headers.get('link'))
+                    const number = link?.last?.page
+                    return number && Number(number)
+                }),
+                fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
+                    headers: githubHeaders,
+                }).then((res) => {
+                    const link = parseLinkHeader(res.headers.get('link'))
+                    const number = link?.last?.page
+                    return number && Number(number)
+                }),
+            ])
+            const { stargazers_count, forks_count } = repoStats
+
+            const data = {
+                owner,
+                repo,
+                stars: stargazers_count,
+                forks: forks_count,
+                commits,
+                contributors,
+            }
+
+            const node = {
+                id: createNodeId(`github-stats-${repo}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `GitHubStats`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        }
+
+        const [postHogIssues, postHogPulls, integrations] = await Promise.all([
+            fetchIssuesPromise,
+            fetchPullsPromise,
+            fetchIntegrationsPromise,
+            createGitHubStatsNode('posthog', 'posthog'),
+            createGitHubStatsNode('posthog', 'posthog.com'),
+        ]).then(([issues, pulls, integrations]) => [issues, pulls, integrations])
+
         postHogIssues.forEach((issue) => {
             const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
             const data = {
@@ -725,12 +827,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
 
-        const postHogPulls = await fetch(
-            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
-            {
-                headers: githubHeaders,
-            }
-        ).then((res) => res.json())
         postHogPulls.forEach((issue) => {
             const { html_url, title, number, user, labels, body, updated_at } = issue
             const data = {
@@ -760,55 +856,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
 
-        const createGitHubStatsNode = async (owner, repo) => {
-            const repoStats = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-                headers: githubHeaders,
-            }).then((res) => res.json())
-            const contributors = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
-                headers: githubHeaders,
-            }).then((res) => {
-                const link = parseLinkHeader(res.headers.get('link'))
-                const number = link?.last?.page
-                return number && Number(number)
-            })
-            const commits = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
-                headers: githubHeaders,
-            }).then((res) => {
-                const link = parseLinkHeader(res.headers.get('link'))
-                const number = link?.last?.page
-                return number && Number(number)
-            })
-            const { stargazers_count, forks_count } = repoStats
-
-            const data = {
-                owner,
-                repo,
-                stars: stargazers_count,
-                forks: forks_count,
-                commits,
-                contributors,
-            }
-
-            const node = {
-                id: createNodeId(`github-stats-${repo}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `GitHubStats`,
-                    contentDigest: createContentDigest(data),
-                },
-                ...data,
-            }
-            createNode(node)
-        }
-
-        await createGitHubStatsNode('posthog', 'posthog')
-        await createGitHubStatsNode('posthog', 'posthog.com')
-
-        const integrations = await fetch(
-            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
-            { headers: githubHeaders }
-        ).then((res) => res.json())
         integrations.forEach((integration) => {
             const { name, url, ...other } = integration
             const node = {
@@ -925,12 +972,30 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             )
         }
 
-        await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
-        await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
-        await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
+        await Promise.all([
+            fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', '')),
+            fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', '')),
+            fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', '')),
+        ])
     }
 
-    await sourceGithubNodes()
+    const fetchWorkflowTemplates = async () => {
+        const data = await fetch('https://us.posthog.com/api/public_hog_flow_templates?limit=350').then((res) =>
+            res.json()
+        )
+        data.results.forEach((template) => {
+            const node = {
+                id: createNodeId(`posthog-workflow-template-${template.id}`),
+                internal: {
+                    type: 'PostHogWorkflowTemplate',
+                    contentDigest: createContentDigest({ template }),
+                },
+                templateId: template.id,
+                ...template,
+            }
+            createNode(node)
+        })
+    }
 
     const fetchReferences = async (page = 1) => {
         const referenceQuery = qs.stringify(
@@ -963,8 +1028,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchReferences(page + 1)
     }
 
-    await fetchReferences()
-
     const fetchEvents = async (page = 1) => {
         const eventsQuery = qs.stringify(
             {
@@ -989,6 +1052,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         events.forEach((event) => {
             const node = {
                 ...event,
+                strapiID: event.id,
                 id: createNodeId(`event-${event.id}`),
                 internal: {
                     type: 'Event',
@@ -999,7 +1063,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
     }
-    await fetchEvents()
 
     const fetchAchievements = async () => {
         const query = qs.stringify({
@@ -1060,7 +1123,21 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    await fetchAchievements()
-    await fetchAchievementGroups()
-    await fetchRewards()
+    await Promise.all([
+        createProductDataNode(),
+        createRoadmapItems(),
+        sourceChangelogVideos(),
+        sourcePostCategories(),
+        sourceShopifyNodes(),
+        sourceSlackEmojis(),
+        sourceG2Reviews(),
+        sourceCloudinaryImages(),
+        sourceGithubNodes(),
+        fetchWorkflowTemplates(),
+        fetchReferences(),
+        fetchEvents(),
+        fetchAchievements(),
+        fetchAchievementGroups(),
+        fetchRewards(),
+    ])
 }

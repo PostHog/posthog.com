@@ -28,7 +28,7 @@ export const ToggleGroup = ({
     hideTitle = false,
     className = '',
 }: ToggleGroupProps) => {
-    const defaultValue = options.find((option) => option.default)?.value || options[0]?.value
+    const defaultValue = value ? options.find((option) => option.default)?.value || options[0]?.value : undefined
 
     return (
         <>

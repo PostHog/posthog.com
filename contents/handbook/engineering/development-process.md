@@ -320,7 +320,7 @@ If a deployment appears stuck, reach out in `#team-infrastructure`.
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either <SmallTeam slug="brand" /> or <SmallTeam slug="content" /> teams to document features.
+It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="content" /> teams to document features.
 
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 
@@ -351,7 +351,7 @@ Opt-in betas can have rough edges, but public betas and full releases should be 
 
 Engineers should apply the following best practices for _all_ new releases:
 
--   Ensure Marketing is aware of the launch, so [a launch plan](/handbook/growth/marketing/product-announcements) can be created.
+-   Ensure Marketing is aware of the launch, so [a launch plan](/handbook/marketing/product-announcements) can be created.
 -   Ensure docs are updated to reflect the new release.
 -   Ensure all new features include at least one pre-made template (or equivalent) for users.
 
@@ -391,7 +391,7 @@ Betas are usually announced as milestones on the public roadmap and included in 
 
 ### Product announcements
 
-Announcements, whether for beta or final updates, are a Marketing responsibility. See: [Product announcements](/handbook/growth/marketing/product-announcements).
+Announcements, whether for beta or final updates, are a Marketing responsibility. See: [Product announcements](/handbook/marketing/product-announcements).
 
 In order to ensure a smooth launch [the owner](/handbook/engineering/development-process#assign-an-owner) should tell Marketing about upcoming updates as soon as possible, or include them in an All-Hands update.
 

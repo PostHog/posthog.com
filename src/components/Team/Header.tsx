@@ -18,6 +18,9 @@ export default function Header({
     setFieldValue,
     values,
     handleChange,
+    onBlur,
+    touched,
+    errors,
     loading,
 }: {
     teamName: string
@@ -29,6 +32,9 @@ export default function Header({
     setFieldValue: (field: string, value: any) => void
     values: any
     handleChange: (e: React.ChangeEvent<any>) => void
+    onBlur?: (e: React.FocusEvent<any>) => void
+    touched?: any
+    errors?: any
     loading: boolean
 }): JSX.Element {
     return (
@@ -38,7 +44,16 @@ export default function Header({
                     {loading ? (
                         <div className="h-8 w-full bg-accent rounded" />
                     ) : (
-                        <TeamName teamName={teamName} handleChange={handleChange} values={values} editing={editing} />
+                        <TeamName
+                            teamName={teamName}
+                            handleChange={handleChange}
+                            onBlur={onBlur}
+                            setFieldValue={setFieldValue}
+                            values={values}
+                            editing={editing}
+                            touched={touched}
+                            errors={errors}
+                        />
                     )}
                     {loading ? (
                         <div className="flex flex-col gap-2">

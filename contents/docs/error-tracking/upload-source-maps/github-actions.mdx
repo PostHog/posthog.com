@@ -36,14 +36,14 @@ jobs:
 
       # Inject and upload source maps using the PostHog action
       - name: Inject & upload source maps to PostHog
-        uses: PostHog/upload-source-maps@v0.4.6
+        uses: PostHog/upload-source-maps@v2
         with:
           directory: dist
-          env-id: ${{ secrets.POSTHOG_ENV_ID }}
-          cli-token: ${{ secrets.POSTHOG_CLI_TOKEN }}
+          project-id: ${{ secrets.POSTHOG_PROJECT_ID }}
+          api-key: ${{ secrets.POSTHOG_CLI_API_KEY }}
           # host: https://eu.posthog.com # Required only for EU cloud
-          # project: my-awesome-project  # Optional; falls back to repo name
-          # version: ${{ github.sha }}   # Optional; falls back to current commit SHA
+          # release-name: my-awesome-project  # Optional; falls back to repo name
+          # release-version: ${{ github.sha }}   # Optional; falls back to current commit SHA
 ```
 
 This step:
@@ -61,15 +61,15 @@ This step:
 | **Name** | **Required** | **Description** |
 | --- | --- | --- |
 | `directory` | Yes | Directory containing built assets (for example, `dist`) |
-| `env-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/environment#variables) |
-| `cli-token` | Yes | Personal API key with error tracking write and organization read scopes. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
-| `project` | No | Project identifier. Defaults to the Git repository name when available |
-| `version` | No | Release/version (for example, commit SHA). Defaults to current commit SHA when available |
+| `project-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/project#variables) |
+| `api-key` | Yes | Personal API key with error tracking write and organization read scopes. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `release-name` | No | Release name. Defaults to the Git repository name when available |
+| `release-version` | No | Release version (for example, commit SHA). Defaults to current commit SHA when available |
 | `host` | No | PostHog host URL. Defaults to `https://us.posthog.com`. For EU cloud, set it to `https://eu.posthog.com` |
 
 </div>
 
-We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `POSTHOG_ENV_ID` and `POSTHOG_CLI_TOKEN`).
+We recommend storing `project-id` and `api-key` in GitHub Secrets (for example, `POSTHOG_PROJECT_ID` and `POSTHOG_CLI_API_KEY`).
 
 </Step>
 

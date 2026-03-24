@@ -84,8 +84,14 @@ Territories
 - Europe & Africa
 - Asia & Middle East
 - Australia & New Zealand (ANZ)
+- Territory 1 (U.S. state unknown)
+- Territory 3 (Unknown, but otherwise qualified)
 
 Each territory runs its own round robin assignment for new, unowned accounts.
+
+### Stale task reassignment
+
+If a task is assigned to a someone but remains untouched for 10 days, it will be automatically reassigned once via round robin. If it remains untouched after reassignment, it will be automatically disqualified with a "Stale - autoclosed" reason.
 
 ### Converting tasks to opportunities
 

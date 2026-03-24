@@ -57,6 +57,7 @@ Developer-focused tools go further with:
 
 Here's how some of the most popular session replay tools compare:
 
+<p>
 <ProductComparisonTable
     competitors={['posthog','logrocket','fullstory','hotjar','openreplay','microsoft_clarity','replay_io']}
     rows={[
@@ -72,17 +73,17 @@ Here's how some of the most popular session replay tools compare:
         {
             label: 'Mobile SDK support',
             description: 'Native SDKs for iOS, Android, and React Native applications',
-            values: [true, true, true, false, true, true, false],
+            values: [true, true, true, false, "Beta", true, false],
         },
         {
             label: 'Built-in product analytics',
             description: 'Native product analytics tools integrated in the platform',
-            values: [true, true, true, false, false, false, false],
+            values: [true, true, true, "Funnels only", true, false, false],
         },
         {
             label: 'Built-in error tracking',
             description: 'Native error monitoring and tracking integrated in the platform',
-            values: [true, true, false, false, false, false, false],
+            values: [true, true, false, false, "Limited", false, false],
         },
            {
             label: 'Built-in A/B testing',
@@ -102,6 +103,7 @@ Here's how some of the most popular session replay tools compare:
         },
     ]}
 />
+</p>
 
 ## What's the best session replay tool for developers?
 
@@ -133,7 +135,7 @@ Developers who want full context behind user behavior, and fast-growing startups
 
 LogRocket focuses on giving developers a clear, structured view of what happened during a user session. When something breaks, it shows the exact sequence of user actions along with DOM snapshots, console output, JS errors, network calls, and even Redux or Vuex state mutations.
 
-It integrates well with existing systems too. You can open a replay from a Sentry issue, send logs to Datadog, and attach recordings directly to Jira tickets.
+It integrates well with existing systems too. You can open a replay from a Sentry issue, send logs to [Datadog](/blog/best-datadog-alternatives), and attach recordings directly to Jira tickets.
 
 LogRocket supports both web and mobile apps, though the mobile replay experience isn't as deep as the web version.
 

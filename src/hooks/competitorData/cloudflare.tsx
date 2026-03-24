@@ -57,8 +57,8 @@ export const cloudflare = {
             self_serve: true,
         },
         developer: {
-            // Cloudflare’s Analytics data is accessible via their GraphQL Analytics API.
-            api: true,
+            // Cloudflare’s Analytics data is accessible via their GraphQL Analytics API, but not event capture or customization.
+            api: 'Partial',
             sql: false,
             client_side_sdks: false,
             server_side_sdks: false,

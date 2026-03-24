@@ -6,18 +6,18 @@ import { IconPlug } from '@posthog/icons'
 export const cdp = {
     parentIcon: 'spreadsheetSearch',
     Icon: IconPlug,
-    name: 'CDP', // Integrations library (145+)
+    name: 'CDP',
     description: 'Get data into PostHog and send it where it needs to go.',
-    handle: 'cdp',
-    type: 'cdp',
+    handle: 'cdp', // integrations
+    type: 'cdp', // integrations
     slug: 'cdp',
     color: 'sky-blue',
     colorSecondary: 'blue',
-    // category: 'data',
+    category: 'data',
     hideFromPricingTableAndCalculator: true,
     seo: {
-        title: 'CDP sources & destinations - PostHog',
-        description: 'Get all your data into PostHog with 60+ sources & destinations',
+        title: 'Ingest, transform, and send data between hundreds of tools',
+        description: 'Import data from a warehouse, sync with event data, and export to other products',
     },
     answersDescription: 'Ingest, transform, and send data between 145+ tools',
     overview: {
@@ -30,6 +30,11 @@ export const cdp = {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
             alt: "Screenshot of PostHog's CDP",
+            classes: '',
+        },
+        library: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_09_03_T13_24_20_613_Z_5ce971dd31.png',
+            alt: 'CDP integrations library',
             classes: '',
         },
         home: {
@@ -161,7 +166,7 @@ export const cdp = {
         {
             slug: 'product-analytics',
             description:
-                'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
+                'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviors.',
         },
         {
             slug: 'data-warehouse',

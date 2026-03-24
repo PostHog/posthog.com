@@ -1,0 +1,157 @@
+---
+title: Variables in endpoints
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+
+
+Variables let you customize endpoint results at execution time without creating multiple endpoints.
+
+## Variables in SQL-based endpoints
+
+For SQL-based endpoints, use **variables** to inject values into your query at runtime.
+
+<CalloutBox icon="IconWarning" type="caution" title="Variables are required">
+
+If your query defines a variable, you **must** pass a value for it when executing the endpoint. Requests without required variables will fail. This is a safety feature to prevent accidentally returning unfiltered data to your customers.
+
+</CalloutBox>
+
+Define variables in your query using the `{variables.variable_name}` syntax:
+
+```sql
+SELECT count()
+FROM events
+WHERE properties.$country = {variables.country}
+```
+
+Then pass values when executing:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"country": "US"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+### Variable validation
+
+When you create or update an endpoint, PostHog validates that every variable placeholder in your query has a matching variable definition.
+
+For each `{variables.X}` placeholder in your query, you must define a variable with `code_name` set to `X`. Create and manage variables in [data management variables](https://app.posthog.com/data-management/variables).
+
+If validation fails, you'll see one of these errors:
+
+- `"Query references undefined variable(s)"` - Your query uses a placeholder that doesn't have a matching variable definition. Define the variable with the correct `code_name`.
+- `"Variable ID(s) not valid UUIDs"` - Variable IDs must be valid UUIDs.
+- `"Variable ID(s) not found"` - The variable doesn't exist. Create it in data management first.
+
+See [troubleshooting](/docs/endpoints/troubleshooting#variable-errors) for more details.
+
+### Materialization
+
+SQL-based endpoints with variables can be [materialized](/docs/endpoints/materialization) when each variable is used in a `WHERE` clause with a supported comparison operator.
+
+Supported operators include: `=`, `>=`, `>`, `<`, `<=`
+
+You can use multiple variables in the same query, including range queries on the same column.
+
+For example, the following queries can be materialized:
+
+```sql
+SELECT count()
+FROM events
+WHERE properties.customer_name = {variables.customer_name}
+```
+
+```sql
+SELECT count()
+FROM events
+WHERE event = {variables.event_name}
+  AND hour >= {variables.start_hour}
+  AND hour < {variables.end_hour}
+```
+
+However, queries with unsupported operators or variable usage outside `WHERE` clauses cannot be materialized:
+
+```sql
+-- Cannot materialize: LIKE operator not supported
+SELECT count()
+FROM events
+WHERE event LIKE {variables.event_pattern}
+```
+
+## Variables in insight-based endpoints
+
+For insight-based endpoints, variables work differently. Instead of defining them in your query, certain **magic variables** are automatically available based on your insight configuration.
+
+### Breakdown property variables
+
+If your insight has breakdowns configured, each breakdown property name automatically becomes a variable. For example, if your TrendsQuery breaks down by `$browser`, you can filter results by passing that property as a variable:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"$browser": "Chrome"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+This filters the results to only return data where `$browser` equals "Chrome".
+
+### Multiple breakdowns
+
+For insights with multiple breakdowns, each breakdown property becomes a separate variable. Pass all breakdown variables when executing:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"$browser": "Chrome", "$os": "Mac OS X"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+This filters the results to only return data where both `$browser` equals "Chrome" and `$os` equals "Mac OS X".
+
+Breakdown variables work with:
+- TrendsQuery
+- FunnelsQuery
+- RetentionQuery
+
+### Date variables
+
+For non-materialized insight endpoints, you can also use `date_from` and `date_to` variables to filter by date:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"date_from": "2024-01-01", "date_to": "2024-01-31"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+You can combine date variables with breakdown variables:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"$browser": "Chrome", "date_from": "2024-01-01", "date_to": "2024-01-31"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+### Materialization
+
+Materialized insight-based endpoints only support breakdown property variables. Date variables (`date_from`, `date_to`) are not available for materialized endpoints because the data is pre-computed.
+
+If your insight has a breakdown, you can still filter by that property:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"$browser": "Chrome"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```

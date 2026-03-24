@@ -1,34 +1,12 @@
 import React from 'react'
-import { getReactSteps } from 'onboarding/product-analytics/react.tsx'
-import { OnboardingContentWrapper, useMDXComponents } from 'components/Docs/OnboardingContentWrapper'
-import { JSEventCapture } from 'onboarding/product-analytics/_snippets/js-event-capture.tsx'
+import { ReactInstallation, JSEventCapture } from 'onboarding/product-analytics'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './pa-shared-helpers'
-import { dedent } from '~/utils'
-
-const ReactInstallationContent = () => {
-    const { Steps, Step, CodeBlock, Markdown, CalloutBox, snippets } = useMDXComponents()
-
-    const steps = addNextStepsStep(getReactSteps(CodeBlock, Markdown, CalloutBox, dedent, snippets))
-
-    return (
-        <Steps>
-            {steps.map((step, index) => (
-                <Step key={index} title={step.title} badge={step.badge}>
-                    {step.content}
-                </Step>
-            ))}
-        </Steps>
-    )
-}
 
 export const ReactInstallationWrapper = () => {
     return (
-        <OnboardingContentWrapper
-            snippets={{
-                JSEventCapture,
-            }}
-        >
-            <ReactInstallationContent />
+        <OnboardingContentWrapper snippets={{ JSEventCapture }}>
+            <ReactInstallation modifySteps={addNextStepsStep} />
         </OnboardingContentWrapper>
     )
 }

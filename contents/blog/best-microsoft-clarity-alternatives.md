@@ -27,7 +27,7 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 [PostHog](/) (that's us 👋) is an open-source platform that combines session replay, product analytics, feature flags, A/B testing, and user surveys into one product. This means it's not just an alternative to Microsoft Clarity, but also tools like [Statsig](/blog/posthog-vs-statsig) and [Mixpanel](/blog/posthog-vs-mixpanel).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of Feb 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. Microsoft Clarity is used by [45,820 of the top 1 million websites](https://trends.builtwith.com/analytics/Microsoft-Clarity). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [Webshare](/customers/webshare), [AssemblyAI](/customers/assemblyai), and [Purplewave](/customers/purplewave).
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of Feb 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. Microsoft Clarity is used by [45,820 of the top 1 million websites](https://trends.builtwith.com/analytics/Microsoft-Clarity). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), [Supabase](/customers/supabase), and [Lovable](/customers/lovable).
 
 #### Key features
 

@@ -2,10 +2,6 @@
 title: Search logs
 ---
 
-import LogsBetaSnippet from './_snippets/beta.mdx'
-
-<LogsBetaSnippet />
-
 The logs search accepts multiple tokens and quoted phrases to help you find the exact log lines you need.
 
 - **Space-separated words** are combined with implicit AND: the log must contain all positive tokens
@@ -53,4 +49,8 @@ The logs search accepts multiple tokens and quoted phrases to help you find the 
 - **Standalone exclamation mark:** A standalone `!` by itself is ignored — use `!` followed by text to exclude that text
 - **Multiple negative tokens:** List multiple `!tokens` (e.g., `!debug !trace`) to exclude logs that contain any of those tokens
 - **Punctuation:** Quotes and escapes are handled using shell-like parsing rules, so complex tokens should be quoted if they contain spaces or special characters
+
+## Get more from search with structured logs
+
+Search works best when your logs are consistent and structured. Adding key-value context like `user_id`, `endpoint`, and `status_code` to every log line makes filtering faster and more precise. See our [logging best practices guide](/docs/logs/best-practices) for patterns that make logs easier to search and query.
 

@@ -314,24 +314,6 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
     return null
 }
 
-const AIEngineers = () => {
-    const { getCustomers } = useCustomers()
-    const aiEngineers = getCustomers(['grantable', 'hostai', 'juicebox', 'zealot'])
-
-    return (
-        <div className="mt-8 text-center">
-            <p className="text-lg text-secondary mb-4">and AI product engineers at...</p>
-            <div className="grid grid-cols-4 gap-4">
-                {aiEngineers.map((customer) => (
-                    <div key={customer.slug} className="flex items-center justify-center">
-                        <CustomerLogo customer={customer} />
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
-}
-
 // Custom ProductOS Benefits slide
 const ProductOSBenefitsSlide = () => {
     return (
@@ -455,18 +437,6 @@ export default function LLMAnalytics(): JSX.Element {
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
             answersHeadline: 'What can LLM Analytics help me discover?',
-        },
-        overrides: {
-            customers: {
-                props: {
-                    belowContent: <AIEngineers />,
-                },
-            },
-            overview: {
-                props: {
-                    className: '!bg-purple bg-llm-analytics',
-                },
-            },
         },
     })
 

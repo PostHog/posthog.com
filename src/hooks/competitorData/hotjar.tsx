@@ -1,5 +1,3 @@
-import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
-
 export const hotjar = {
     name: 'Hotjar',
     key: 'hotjar',
@@ -27,7 +25,7 @@ export const hotjar = {
                     available: true,
                     features: {
                         formula_mode: false,
-                        ready_made_insight_types: false,
+                        ready_made_insight_types: true,
                         sampling: false,
                         sql_editor: false,
                     },
@@ -69,51 +67,53 @@ export const hotjar = {
             available: false,
         },
         product_tours: {
-            available: true,
+            available: false,
         },
         session_replay: {
             available: true,
             pricing: {
-                free_tier: '35/day',
+                free_tier: true,
             },
             features: {
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
-                conditional_recording: false,
+                conditional_recording: true,
                 event_timeline: true,
                 crash_reports: false,
                 export_to_json: true,
                 export_to_video: false,
-                filter_by_user_or_event: false,
+                // https://help.hotjar.com/hc/en-us/articles/36819988557329-How-Do-I-Filter-Session-Data
+                filter_by_user_or_event: true,
                 highlights: true,
                 identity_detection: false,
-                iframe_recording: false,
+                iframe_recording: 'Limited',
                 minimum_duration: false,
                 movement_maps: false,
                 notes_on_replays: false,
                 playlists: false,
-                privacy_masking: false,
-                retention_policy: false,
+                // https://help.hotjar.com/hc/en-us/articles/36819956605329-How-to-Suppress-Text-Images-Videos-and-User-Input-from-Collected-Data
+                privacy_masking: true,
+                retention_policy: true,
                 screenshot_mode: false,
                 scrollmaps: false,
                 search_by_network: false,
                 sentiment_scores: true,
-                share_replays: false,
-                single_page_app: false,
+                share_replays: true,
+                single_page_app: true,
                 target_by_feature_flag: false,
                 target_by_sample: false,
-                target_by_url: false,
+                target_by_url: true,
                 wireframe_mode: false,
             },
             platform_support: {
                 features: {
                     web_app_recordings: true,
-                    mobile_app_recordings: false,
-                    ios_recordings: false,
-                    android_recordings: false,
-                    react_native_recordings: false,
-                    flutter_recordings: false,
+                    mobile_app_recordings: 'Enterprise',
+                    ios_recordings: 'Enterprise',
+                    android_recordings: 'Enterprise',
+                    react_native_recordings: 'Enterprise',
+                    flutter_recordings: 'Enterprise',
                 },
             },
             analysis: {
@@ -127,7 +127,8 @@ export const hotjar = {
             },
             ai: {
                 features: {
-                    ai_summaries: false,
+                    // https://www.hotjar.com/product/recordings/ "Sense"
+                    ai_summaries: true,
                 },
             },
         },
@@ -145,7 +146,7 @@ export const hotjar = {
         surveys: {
             available: true,
             features: {
-                api_access: false,
+                api_access: true,
                 csat_surveys: true,
                 custom_html: '',
                 feedback_button: true,
@@ -163,6 +164,10 @@ export const hotjar = {
                     popover: true,
                     feedback_button: true,
                     hosted_surveys: true,
+                    custom_ui: true,
+                    custom_html: false,
+                    // https://help.hotjar.com/hc/en-us/articles/36819957395217-How-to-Embed-a-Survey-on-Your-Site
+                    iframe_embedding: true,
                 },
             },
             platforms: {
@@ -209,6 +214,10 @@ export const hotjar = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: false,
+            },
+            monitoring: {
+                performance_monitoring: false,
             },
         },
         dashboards: {
@@ -227,6 +236,7 @@ export const hotjar = {
             transparent_pricing: true,
             usage_based_pricing: false,
         },
+        // https://help.hotjar.com/hc/en-us/articles/36819973021457-Integrations-with-Hotjar
         integrations: {
             azure_blob: false,
             bigquery: false,
@@ -238,14 +248,14 @@ export const hotjar = {
             exports: true,
             gcs: false,
             google_ads: false,
-            hubspot: false,
+            hubspot: true,
             imports: false,
-            intercom: true,
+            intercom: false,
             microsoft_teams: true,
             redshift: false,
             postgres: false,
             s3: false,
-            salesforce: true,
+            salesforce: false,
             segment: true,
             slack: true,
             snowflake: false,
@@ -259,17 +269,18 @@ export const hotjar = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             ccpa_ready: true,
             cookieless_tracking: false,
             data_anonymization: true,
             gdpr_ready: true,
-            hipaa_ready: true,
+            hipaa_ready: false,
             history_audit_logs: false,
-            saml_sso: false,
-            soc2_certified: false,
-            two_factor_auth: false,
+            saml_sso: true,
+            soc2_certified: true,
+            two_factor_auth: true,
             user_privacy_options: true,
         },
     },

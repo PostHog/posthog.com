@@ -10,13 +10,7 @@ You need to give your API key the following **Read** permissions in the **Permis
 |---------------|------------------------------------------------------------------------------|
 | Core          | Balance transaction sources, Charges, Customers, Disputes, Payouts, Products |
 | Billing       | Credit notes, Invoices, Prices, Subscriptions                                |
-| Connect       | Application Fees, Transfers (Or click **Read** in the **Connect** header)    |
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/dashboard_stripe_com_acct_1_R8q1_EH_Qa_RQ_6_Nzlt_apikeys_create_3_3e382d2380.png"
-  alt="Stripe API key permissions"
-  classes="rounded"
-/>
+| Connect       | Click **Read** in the **Connect** header                                     |
 
 If you aren't concerned with giving us more permissions than necessary, you can also simply click **Read** on the **Core**, **Billing**, and **Connect** headers to give us the necessary permissions.
 
@@ -24,7 +18,7 @@ If your Stripe account is in a language other than English, we suggest you updat
 
 ## Adding a data source 
 
-1. In PostHog, go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) select the **Sources** tab.
+1. In PostHog, go to the [Data pipeline page](https://app.posthog.com/data-management/sources) select the **Sources** tab.
 2. Click **+ New source** button and select Stripe by clicking the **Link** button.
 3. In Stripe, get your Account ID by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
 4. Get your API key from the [previous section](#creating-a-stripe-api-key)
@@ -33,4 +27,4 @@ If your Stripe account is in a language other than English, we suggest you updat
 
 > For Stripe tables, incremental syncs will only sync new records and not update existing records. This is a limitation of the Stripe API in which it's not possible to query for updated data. 
 
-The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data pipeline sources tab](https://us.posthog.com/pipeline/sources).
+The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).

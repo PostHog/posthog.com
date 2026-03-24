@@ -11,7 +11,6 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 type CheckoutProps = {
     className?: string
-    isEmpty?: boolean
 }
 function notNull<TValue>(value: TValue | null | undefined): value is TValue {
     return value !== null && value !== undefined
@@ -34,7 +33,7 @@ export function getCheckoutUrl(cart: Cart | null, couponCode: string | null): st
 }
 
 export function Checkout(props: CheckoutProps): React.ReactElement {
-    const { className, isEmpty } = props
+    const { className } = props
     const [adjustedItems, setAdjustedItems] = React.useState<AdjustedLineItem[]>([])
     const { cartItems, setCartItems, removeAll, cartId, setCartId } = useCartStore((state) => ({
         cartItems: state.cartItems,
@@ -165,37 +164,34 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     return (
         <div className={classes}>
             {adjustedItems.length > 0 && <AdjustedLineItems className="my-4" lineItems={adjustedItems} />}
-
-            {!isEmpty && (
-                <div className="flex justify-end">
-                    <CallToAction
-                        onClick={handleCheckout}
-                        type="primary"
-                        className={cn('relative text-center w-full', className)}
-                    >
-                        <>
-                            <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
-                                Checkout
-                            </span>
-                            <span
-                                className={cn(
-                                    'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
-                                    showAdjustments && 'visible',
-                                    isCheckingOut && 'invisible'
-                                )}
-                            >
-                                Proceed to Checkout
-                            </span>
-                            <LoaderIcon
-                                className={cn(
-                                    'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
-                                    !showAdjustments && isCheckingOut && 'visible'
-                                )}
-                            />
-                        </>
-                    </CallToAction>
-                </div>
-            )}
+            <div className="flex justify-end">
+                <CallToAction
+                    onClick={handleCheckout}
+                    type="primary"
+                    className={cn('relative text-center w-full', className)}
+                >
+                    <>
+                        <span className={cn('mx-16', showAdjustments && 'invisible', isCheckingOut && 'invisible')}>
+                            Checkout
+                        </span>
+                        <span
+                            className={cn(
+                                'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full',
+                                showAdjustments && 'visible',
+                                isCheckingOut && 'invisible'
+                            )}
+                        >
+                            Proceed to Checkout
+                        </span>
+                        <LoaderIcon
+                            className={cn(
+                                'invisible absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2',
+                                !showAdjustments && isCheckingOut && 'visible'
+                            )}
+                        />
+                    </>
+                </CallToAction>
+            </div>
         </div>
     )
 }
