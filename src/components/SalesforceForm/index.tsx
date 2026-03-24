@@ -281,7 +281,7 @@ interface CTAButtonProps {
 const CTAButton = ({ location, width, size, variant, icon, label, rowPadding, secondaryButtons }: CTAButtonProps) => {
     return (
         <div
-            className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-1'} ${
+            className={`flex-[0_0_auto] ${location === 'top' ? 'py-2 border-primary border-b mb-4' : 'pt-4'} ${
                 rowPadding || ''
             } ${location === 'bottom' && secondaryButtons?.length ? 'flex items-center justify-end gap-2' : ''}`}
         >
