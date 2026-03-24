@@ -1,0 +1,112 @@
+---
+title: Email channel
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+The email channel connects your support email address (e.g. support@company.com) to PostHog Support, enabling two-way email between your team and your customers.
+
+- **Inbound** – customer emails are forwarded to PostHog and automatically create support tickets
+- **Outbound** – team replies in PostHog are sent as emails from your address, so customers see responses in their inbox
+
+## Connecting an email address
+
+1. Go to **Support > Settings** in PostHog
+2. In the **Email channel** section, enter the email address customers will contact you at (e.g. `support@company.com`)
+3. Enter a display name (e.g. "Acme Support") – this appears as the sender name on outbound emails
+4. Click **Connect email**
+
+PostHog registers your domain for outbound sending and generates a forwarding address you'll use in the next step.
+
+<CalloutBox icon="IconInfo" title="One domain per team" type="fyi">
+
+Each domain can only be connected to one team. If another team in your organization has already connected the same domain, you'll see an error. Coordinate with your team to avoid conflicts.
+
+</CalloutBox>
+
+## Setting up email forwarding
+
+After connecting, PostHog displays a forwarding address (e.g. `team-abc123@inbound.yourdomain.com`). Configure your email provider to forward incoming messages to this address.
+
+### Gmail
+
+1. Open Gmail and go to **Settings** > **Forwarding**
+2. Click **Add a forwarding address**
+3. Paste the forwarding address from PostHog
+4. Confirm the forwarding address
+
+### Outlook
+
+1. Go to **Settings** > **Mail** > **Forwarding**
+2. Enable forwarding
+3. Paste the forwarding address from PostHog
+
+### Other providers
+
+Set up a forwarding rule to send all incoming emails to the forwarding address shown in PostHog.
+
+## Verifying your domain
+
+Domain verification adds SPF and DKIM records to your domain so outbound emails from PostHog aren't flagged as spam. Without verification, you can receive emails as tickets but can't send replies from PostHog.
+
+1. In **Support > Settings**, find the **Domain verification** section
+2. Copy the DNS records shown in the **Sending records (SPF/DKIM)** table
+3. Add these records to your domain's DNS settings through your domain registrar or DNS provider
+4. Return to PostHog and click **Verify domain**
+
+Each record shows its current status:
+
+| Status | Meaning |
+|--------|---------|
+| **Valid** | Record detected and verified |
+| **Pending** | Record not yet detected – DNS changes can take up to 48 hours to propagate |
+
+Once all records are valid, the domain status changes to **Domain verified** and outbound email is active.
+
+<CalloutBox icon="IconInfo" title="DNS propagation can take time" type="fyi">
+
+DNS changes can take anywhere from a few minutes to 48 hours to propagate. If verification fails, wait and try clicking **Re-verify domain** again later.
+
+</CalloutBox>
+
+## Sending a test email
+
+After your domain is verified, you can send a test email to confirm the outbound pipeline works end-to-end.
+
+1. Click **Send test email** in the domain verification section
+2. A test email is sent to your PostHog account email address
+3. Check your inbox for the test message
+
+If the test email arrives, your email channel is fully configured for two-way communication.
+
+## Two-way sync
+
+### Inbound (email to PostHog)
+
+- Forwarded customer emails automatically create new support tickets
+- Subsequent emails in the same thread are added as messages on the existing ticket
+
+### Outbound (PostHog to email)
+
+- Team replies to email-sourced tickets are sent as emails from your configured address
+- The sender appears as your display name (e.g. "Acme Support") with your connected email address
+
+**Private notes** (internal notes) are never sent to the customer.
+
+## Viewing email tickets
+
+Email-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget and Slack tickets. You can filter the ticket list by channel source to see only email tickets.
+
+## Disconnecting
+
+To remove the email channel:
+
+1. Go to **Support > Settings**
+2. Click **Disconnect email** in the email channel section
+3. Confirm the disconnection
+
+This stops creating tickets from forwarded emails and removes the sending domain. Existing tickets are not affected – they remain in your inbox.
