@@ -1,0 +1,95 @@
+---
+title: Customer journeys
+sidebar: Docs
+showTitle: true
+---
+
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+Customer journeys let you visualize how users move through key conversion steps in your product. They combine [funnels](/docs/product-analytics/funnels) and [paths](/docs/product-analytics/paths) into interactive flow graphs, so you can see both **where** users convert and **what they do** between steps.
+
+## What is a customer journey?
+
+A customer journey is a funnel-based flow graph. Each journey defines a series of conversion steps (like `Pageview → Sign up → Payment`), and PostHog renders them as an interactive visualization showing:
+
+- **Conversion rates** between each step
+- **Drop-off points** where users leave the funnel
+- **Paths users take** between, before, and after funnel steps
+
+This makes it easy to spot friction, discover unexpected user behavior, and find opportunities to improve conversion.
+
+## Creating a journey
+
+To create a new journey, go to **[Customer analytics → Journeys](https://us.posthog.com/customer_analytics/journeys/new)** and click **New journey**. You have three options:
+
+### Using templates
+
+PostHog provides pre-built journey templates to help you get started quickly:
+
+- **Signup conversion** – Tracks the path from a user's first pageview to signing up.
+- **Free-to-paid conversion** – Tracks the path from signing up to completing a payment.
+
+Select a template and PostHog creates the journey with pre-configured funnel steps. You can then customize the steps as needed.
+
+### From an existing funnel
+
+If you already have a saved [funnel insight](/docs/product-analytics/funnels), you can import it as a customer journey:
+
+1. Click **New journey**.
+2. Select **Start from an existing insight**.
+3. Choose a saved funnel insight from the list.
+
+PostHog converts your funnel steps into a journey flow graph.
+
+### Building from scratch
+
+To build a journey manually:
+
+1. Click **New journey**, then select **Start from scratch**.
+2. Add funnel steps by selecting events (e.g., `$pageview`, `sign_up`, `purchase`).
+3. Configure each step as **required** or **optional**.
+4. Save your journey.
+
+## Viewing your journeys
+
+Navigate to **[Customer analytics](https://us.posthog.com/customer_analytics)** and select a saved journey from the journey selector in the header. The flow graph displays your funnel steps with conversion rates and drop-off indicators.
+
+## Exploring paths
+
+Click on any funnel step in the flow graph to explore what users do around that step. You can view:
+
+- **Paths between steps** – See which events users trigger between two consecutive funnel steps.
+- **Paths before a step** – Discover what users do before reaching a specific step.
+- **Paths after drop-off** – Understand what users do after dropping out of the funnel.
+
+Path nodes appear as intermediate nodes in the flow graph, giving you a detailed picture of user behavior between conversion steps.
+
+### Adding path events as steps
+
+When exploring paths, you may discover events that are important to your conversion flow. You can add any path event as a new funnel step:
+
+1. Click on a path node in the flow graph.
+2. Choose to add it as a **required** or **optional** step.
+
+This lets you iteratively refine your journey as you learn more about how users actually navigate your product.
+
+## Editing a journey
+
+To edit an existing journey:
+
+1. Open the journey you want to modify.
+2. Click **Edit** to open the journey builder.
+3. Add, remove, or reorder funnel steps.
+4. Save your changes.
+
+## Deleting a journey
+
+To delete a journey you no longer need:
+
+1. Open the journey.
+2. Click the **more options** menu (⋯).
+3. Select **Delete journey** and confirm.
+
+> **Note:** Deleting a journey is permanent and cannot be undone.
