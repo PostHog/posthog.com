@@ -3,7 +3,15 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight, IconInfo, IconRefresh } from '@posthog/icons'
+import {
+    IconArrowRight,
+    IconArrowUpRight,
+    IconHeadset,
+    IconInfo,
+    IconPlayFilled,
+    IconRefresh,
+    IconVideoCamera,
+} from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -16,6 +24,8 @@ import {
     Digit8,
     Digit9,
     DigitDash,
+    IconMCP,
+    IconYouTube,
 } from 'components/OSIcons'
 import Roadmap from 'components/Home/New/Roadmap'
 import Pricing from 'components/Home/New/Pricing'
@@ -94,23 +104,65 @@ const HomeHappyHog = () => {
 }
 
 const CTAs = () => {
+    const { setConfetti } = useApp()
     return (
-        <div>
-            <WizardCommand latest={false} slim />
-            <br />
-            <span className="text-sm">
-                or{' '}
+        <>
+            <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-1">
+                    <WizardCommand
+                        latest={false}
+                        slim
+                        className="border border-primary"
+                        onCopy={() => setConfetti(true)}
+                    />
+                    <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
+                        <div className="max-w-sm">
+                            <p className="text-sm mb-1">
+                                <strong className="block mb-1">Add PostHog to your project in ~8 minutes.</strong> The
+                                wizard starts by analyzing your codebase, then it automagically sets up the right tools,
+                                custom events, and dashboards for your product.
+                            </p>
+                            <p className="text-sm mb-0">
+                                <Link to="/wizard" state={{ newWindow: true }}>
+                                    <span className="underline font-bold">Learn more</span>{' '}
+                                    <IconArrowUpRight className="size-4 inline-block" />
+                                </Link>
+                            </p>
+                        </div>
+                    </Tooltip>
+                </div>
+                <span className="text-sm">or </span>
                 <CallToAction
                     to="https://app.posthog.com/signup"
                     size="sm"
                     state={{ newWindow: true, initialTab: 'signup' }}
-                    type="custom"
-                    className="text-sm"
+                    type="plain"
+                    className=""
                 >
-                    sign up in the browser
+                    signup with email
                 </CallToAction>
-            </span>
-        </div>
+            </div>
+            <p className="text-sm flex items-center gap-2">
+                <Link
+                    to="/docs/model-context-protocol"
+                    state={{ newWindow: true }}
+                    className="text-secondary hover:text-primary"
+                >
+                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
+                    <span className="underline font-semibold">MCP</span>
+                </Link>
+                <span className="text-secondary">•</span>
+                <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
+                    <span className="underline font-semibold">Watch a demo</span>
+                </Link>
+                <span className="text-secondary">•</span>
+                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
+                    <span className="underline font-semibold">Talk to a human</span>
+                </Link>
+            </p>
+        </>
     )
 }
 

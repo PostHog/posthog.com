@@ -1953,6 +1953,20 @@ li.squeak-left-border {
     }
 }
 
+.text-gradient-wizard-flash {
+    animation: wizard-copied-flash 1500ms ease-out forwards;
+}
+
+@keyframes wizard-copied-flash {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .hide-number-arrows::-webkit-outer-spin-button,
 .hide-number-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;
