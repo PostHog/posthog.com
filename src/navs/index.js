@@ -6204,6 +6204,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Create customer journeys',
+                    url: '/docs/customer-analytics/create-customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'PostHog AI',
                 },
                 {
