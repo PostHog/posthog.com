@@ -36,12 +36,12 @@ export default function WizardCommand({
             <ZoomHover size="lg">
                 <button
                     onClick={handleCopy}
-                    className={`group inline-flex items-center gap-2 bg-dark text-white font-mono text-sm pl-3 pr-3 py-2.5 rounded-md cursor-pointer border-0 dark:border border-secondary ${
+                    className={`group inline-flex items-center gap-2 bg-white text-black font-mono text-sm pl-3 pr-3 py-2.5 rounded-md cursor-pointer border-0 ${
                         !slim ? 'relative z-10' : ''
                     } ${className}`}
                 >
                     <IconChevronRight className="size-4 opacity-50" />
-                    <code className="!bg-transparent !p-0 !border-0 mr-1 text-white dark:text-yellow">{code}</code>
+                    <code className="!bg-transparent !p-0 !border-0 mr-1 text-gradient-wizard">{code}</code>
                     <IconCopy className="size-4 opacity-60 group-hover:opacity-80" />
                 </button>
             </ZoomHover>

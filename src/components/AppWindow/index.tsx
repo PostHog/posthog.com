@@ -612,7 +612,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 data-scheme="tertiary"
                                 suppressHydrationWarning
                                 className={`@container absolute !select-auto flex flex-col ${
-                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary/50 backdrop-blur-3xl'
+                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary/75 backdrop-blur-3xl'
                                 } ${
                                     siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                         ? 'border-b border-primary'

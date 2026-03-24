@@ -173,7 +173,7 @@
     h4,
     h5,
     h6 {
-        @apply font-bold;
+        @apply font-bold font-matter;
     }
 
     .prose-sm {
@@ -1925,6 +1925,32 @@ li.squeak-left-border {
 
 .text-gradient {
     @apply text-transparent bg-clip-text animate-text-gradient bg-text-gradient-light dark:bg-text-gradient-dark;
+}
+
+.text-gradient-wizard {
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(
+        90deg,
+        #0143cb 0%,
+        #2b6ff4 24.04%,
+        #d23401 46.63%,
+        #ff651f 65.87%,
+        #fba000 83.17%,
+        #0143cb 100%
+    );
+    background-size: 200% 100%;
+    animation: text-gradient-wizard-scroll 3s linear infinite;
+}
+
+@keyframes text-gradient-wizard-scroll {
+    0% {
+        background-position-x: 0%;
+    }
+    100% {
+        background-position-x: 200%;
+    }
 }
 
 .hide-number-arrows::-webkit-outer-spin-button,

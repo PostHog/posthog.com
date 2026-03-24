@@ -1171,15 +1171,14 @@ const Customers = () => {
 function TaglineControl(): JSX.Element {
     return (
         <>
-            <p className="text-base font-medium">
-                PostHog is the first platform that{' '}
-                <strong>closes the loop between what's broken, who it's affecting, and the fix</strong> —{' '}
-                <em>without a human playing telephone between analytics, error tracking, and a code editor.</em>
+            <h1 className="!text-2xl">The new way to build products</h1>
+            <p>
+                Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling
+                out changes.
             </p>
-            <p className="text-base font-medium">
-                It's more than analytics, more than an AI coding tool. PostHog is{' '}
-                <strong>an ecosystem of builders</strong> who are learning and growing together. Join us as we build the
-                future.
+
+            <p>
+                PostHog is the only platform to empower you (and your AI agents) to do it all <em>autonomously</em>.
             </p>
         </>
     )
@@ -1214,13 +1213,6 @@ const HomeLogo = () => {
     return (
         <>
             <Logo className="inline-block h-8 mr-1" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
-            <span className="relative -top-px -left-px font-matter text-[1.75rem]">
-                is where you{' '}
-                <span className="relative inline-flex px-2 after:h-[3px] after:bg-black after:absolute after:top-full after:left-0 after:right-0 after:rounded-full after:content-['']">
-                    build
-                </span>
-                .
-            </span>
         </>
     )
 }
