@@ -111,7 +111,7 @@ Tags can also be set automatically via [workflow automation](/docs/support/workf
 
 | Author type | Description |
 |-------------|-------------|
-| **Customer** | Messages sent by the end user via the widget |
+| **Customer** | Messages sent by the end user via the widget or email |
 | **Support** | Messages sent by your team from PostHog |
 | **AI** | Messages from AI (reserved for future use) |
 
@@ -124,7 +124,7 @@ Messages you send to customers display delivery status indicators:
 | **Sent** | Message has been delivered to the customer |
 | **Read** | Customer has viewed the message |
 
-Status indicators appear on messages sent by your team. They help you understand whether customers have seen your responses.
+For **widget** conversations, "Read" means the customer viewed the message in the chat widget. For **email** conversations, "Sent" confirms the email was successfully delivered via SMTP. Read tracking is not available for email messages.
 
 ### Private notes
 
@@ -151,7 +151,7 @@ When you open a ticket, you'll see several panels with context:
 
 ### Chat thread
 
-The main conversation with the customer. Send replies here – they'll appear in the customer's widget.
+The main conversation with the customer. Send replies here – they'll appear in the customer's widget or be sent as an email, depending on the ticket's channel.
 
 ### Session recording panel
 
