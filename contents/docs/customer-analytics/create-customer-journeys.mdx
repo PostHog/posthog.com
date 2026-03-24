@@ -1,0 +1,39 @@
+---
+title: Create customer journeys
+sidebar: Docs
+showTitle: true
+---
+
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+To create a new journey, go to [**Customer analytics → Journeys**](https://app.posthog.com/customer_analytics/journeys) and click **New journey**. You have three options:
+
+### Using templates
+
+PostHog provides pre-built journey templates to help you get started quickly:
+
+- **Signup conversion** – Tracks the path from a user's first pageview to signing up.
+- **Free-to-paid conversion** – Tracks the path from signing up to completing a payment.
+
+Select a template and PostHog creates the journey with pre-configured funnel steps. You can then customize the steps as needed.
+
+### From an existing funnel
+
+If you already have a saved [funnel insight](/docs/product-analytics/funnels), you can import it as a customer journey:
+
+1. Click **New journey**.
+2. Select **Start from an existing insight**.
+3. Choose a saved funnel insight from the list.
+
+PostHog converts your funnel steps into a journey flow graph.
+
+### Building from scratch
+
+To build a journey manually:
+
+1. Click **New journey**, then select **Start from scratch**.
+2. Add funnel steps by selecting events (e.g., `$pageview`, `sign_up`, `purchase`).
+3. Configure each step as **required** or **optional**.
+4. Save your journey.
