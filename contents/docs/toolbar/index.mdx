@@ -194,7 +194,7 @@ The fix is to update to a newer version of Nuxt. It is fixed as of `^3.16.2` (we
 
 Some Wordpress plugins, notably WPCodebox, rewrite the CSS of our toolbar. If you're running PostHog on a Wordpress website and run into issues with formatting in the toolbar, it's possible a plugin is to blame.
 
-### Toolbar disppearing on transition with Astro
+### Toolbar disappearing on transition with Astro
 
 [Astro](/tutorials/astro-analytics) with [view transitions enabled](https://docs.astro.build/en/guides/view-transitions/) can cause the toolbar to disappear on transition. To prevent this, you can: 
 
@@ -225,3 +225,11 @@ Some Wordpress plugins, notably WPCodebox, rewrite the CSS of our toolbar. If yo
     });
 </script>
 ```
+
+### Toolbar not loading when using port numbers in authorized URLs
+
+If you've added authorized URLs with port numbers (for example, `http://localhost:8000`), the toolbar may not load. Authorized URLs should not include port numbers.
+
+For example, use `http://localhost` or `https://mysite.com` instead of `http://localhost:8000` or `https://mysite.com:3000`.
+
+> **Note:** Port numbers *can* work if the authorized URL exactly matches the URL you visit, including the port. For example, if your app runs at `http://localhost:3000`, adding `http://localhost:3000` as the authorized URL should work. The most common issue is a mismatch between the two, e.g., adding `http://localhost` but visiting `http://localhost:3000`, or vice versa.
