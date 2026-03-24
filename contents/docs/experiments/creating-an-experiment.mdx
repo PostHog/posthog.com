@@ -8,21 +8,29 @@ availability:
   enterprise: full
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const CreateExperimentLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png"
-export const CreateExperimentDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png"
-export const ExperimentGoalWarningLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-goal-warning-light-mode.png"
-export const ExperimentGoalWarningDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-goal-warning-dark-mode.png"
+import { ProductScreenshot } from "components/ProductScreenshot";
+export const CreateExperimentLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_light_c7e16a15d1.png";
+export const CreateExperimentDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_step_1_dark_ddc4372ce6.png";
+export const ExperimentGoalWarningLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-goal-warning-light-mode.png";
+export const ExperimentGoalWarningDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-goal-warning-dark-mode.png";
 
-import { ProductVideo} from 'components/ProductVideo'
-export const SetExperimentLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-light-mode.mp4"
-export const SetExperimentDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-dark-mode.mp4"
-export const ImprovementCalculatorLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-light-mode.mp4"
-export const ImprovementCalculatorDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-dark-mode.mp4"
+import { ProductVideo } from "components/ProductVideo";
+export const SetExperimentLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-light-mode.mp4";
+export const SetExperimentDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/set-experiment-rollout-dark-mode.mp4";
+export const ImprovementCalculatorLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-light-mode.mp4";
+export const ImprovementCalculatorDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/improvement-calculator-dark-mode.mp4";
 
 <iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=847"
-    className="rounded shadow-xl"
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=847"
+  className="rounded shadow-xl"
 />
 
 To create a new experiment, go to the [Experiments](https://app.posthog.com/experiments) section in the PostHog app, and click on the **New experiment** button in the top right.
@@ -38,10 +46,10 @@ A Guide panel on the right provides contextual tips for each step.
 When you're done, click **Save as draft** on the final step. You can launch the experiment from its detail page after saving.
 
 <ProductScreenshot
-    imageLight={CreateExperimentLight}
-    imageDark={CreateExperimentDark}
-    alt="How to create an experiment in PostHog"
-    classes="rounded"
+  imageLight={CreateExperimentLight}
+  imageDark={CreateExperimentDark}
+  alt="How to create an experiment in PostHog"
+  classes="rounded"
 />
 
 ## Step 1: Description
@@ -55,6 +63,8 @@ Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In yo
 You can use an existing feature flag if it has at least 2 variants (including one named `'control'`). Otherwise, the feature flag will be created for you automatically when the experiment is created.
 
 By default, the wizard creates a new feature flag for you automatically when the experiment is saved. The flag key is auto-generated from your experiment name, but you can customize it. If you already have a feature flag you'd like to use, click **Select existing flag** to link it instead. The existing flag must have multiple variants with `'control'` as the first variant.
+
+If your project has **Flag persistence default** enabled in [project settings](/docs/feature-flags/project-wide-settings#flag-persistence-default), the experiment's feature flag will automatically have persistence enabled. You can override this in the experiment creation form.
 
 > **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you're using a different third-party library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
@@ -85,9 +95,11 @@ For more advanced release conditions – such as targeting specific user propert
 > **Note:** If you select a server-side event, you may see a warning that no feature flag information can be detected with the event. To resolve this issue, see [step 2 of adding your experiment code and how to submit feature flag information with your events](/docs/experiments/adding-experiment-code#step-2-server-side-only-add-the-feature-flag-property-to-your-events).
 >
 > <ProductScreenshot
+
     imageLight={ExperimentGoalWarningLight}
     imageDark={ExperimentGoalWarningDark}
     alt="Experiment goal warning" classes="rounded"
+
 />
 
 ## Step 3: Analytics
