@@ -44,7 +44,7 @@ export const useProductLinks = () => {
         },
         {
             label: 'Product OS',
-            Icon: <AppIcon name="folder" />,
+            Icon: <AppIcon name={posthog?.getFeatureFlag?.('data-positioning') === 'test' ? 'notebook' : 'folder'} />,
             url: '/products',
             source: 'desktop',
         },
@@ -674,11 +674,24 @@ export default function Desktop() {
             </ContextMenu>
             <NotificationsPanel />
             {confetti && (
-                <div className="fixed inset-0">
+                <div className="fixed inset-0 pointer-events-none">
                     <ReactConfetti
                         onConfettiComplete={() => setConfetti(false)}
                         recycle={false}
-                        numberOfPieces={1000}
+                        numberOfPieces={1200}
+                        gravity={0.12}
+                        initialVelocityY={20}
+                        initialVelocityX={10}
+                        tweenDuration={200}
+                    />
+                    <ReactConfetti
+                        recycle={false}
+                        numberOfPieces={800}
+                        confettiSource={{ x: 0, y: 0, w: window.innerWidth, h: window.innerHeight }}
+                        initialVelocityY={-8}
+                        initialVelocityX={5}
+                        gravity={0.15}
+                        tweenDuration={1}
                     />
                 </div>
             )}
