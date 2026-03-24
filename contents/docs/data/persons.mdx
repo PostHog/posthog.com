@@ -46,12 +46,10 @@ To fix existing duplicates, see [how to merge users](/docs/product-analytics/ide
 
 The [People tab](https://app.posthog.com/persons) displays a list of all people in your project. By default, the list includes the following columns:
 
-> **Note:** The "Last Seen" column has been temporarily removed from the Persons table and column configuration options while we resolve a known issue. It will be restored in a future update.
-
 - **Person** - display name for the person
 - **ID** - the person's distinct ID
 - **Created at** - when the person profile was first created
-- **Last seen** - when the person was last active, rounded to the nearest hour
+- **Last seen** - when the person was last active, rounded to the nearest hour. This column is only available when **Person last seen tracking** is enabled in your [project settings](https://us.posthog.com/settings/environment-product-analytics#person-last-seen-at). Enabling this setting requires admin access.
 - **Delete** - option to delete the person
 
 The **Last seen** column updates hourly, so it may not reflect the exact timestamp of a person's latest event. If a person was active within the last hour, the column displays "last hour" instead of a specific time.
