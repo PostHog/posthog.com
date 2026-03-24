@@ -1,4 +1,10 @@
 {
+    "git": {
+        "deploymentEnabled": {
+            "master": true,
+            "*": false
+        }
+    },
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
@@ -720,6 +726,8 @@
             "source": "/docs/session-replay/cutting-costs",
             "destination": "/docs/session-replay/how-to-control-which-sessions-you-record"
         },
+        { "source": "/docs/error-tracking/debugging-with-mcp", "destination": "/docs/error-tracking/debug-errors-mcp" },
+        { "source": "/docs/logs/debugging-with-mcp", "destination": "/docs/logs/debug-logs-mcp" },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/replay" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },

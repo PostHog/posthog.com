@@ -210,6 +210,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Databases',
         },
         {
+            label: 'Typeform',
+            url: '/docs/data-warehouse/sources/typeform',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/typeform_a12822b2db.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Temporal.io',
             url: '/docs/data-warehouse/sources/temporal',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Temporal_Symbol_dark_66b0582c1b.svg',

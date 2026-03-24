@@ -521,7 +521,20 @@ No. Mixpanel doesn't offer native survey functionality. If you need to collect u
 <details>
 <summary>Can I use Mixpanel with my data warehouse?</summary>
 
-Yes. Mixpanel offers warehouse connectors that sync data bidirectionally with Snowflake, BigQuery, and other warehouses. **Amplitude** goes further with warehouse-native analytics that queries your data directly without moving it. **PostHog** takes a different approach with a [built-in data warehouse](/data-stack) that imports external data for unified analysis.
+Yes. Mixpanel offers warehouse-native analytics that can query data directly from Snowflake, BigQuery, and Databricks. **Statsig** and **Amplitude** also offer strong data warehouse integrations. 
+
+**PostHog** offers two approaches to using warehouse data: 
+
+1. **Use PostHog as your integrated warehouse**: Data stays in PostHog and is accessible across many PostHog tools. This eliminates the need to stitch together multiple vendors and maintain multiple complex ETL pipelines.
+2. **Connect external warehouses as sources**: Sync tables and fields from Snowflake/BigQuery/Databricks into PostHog via our CDP. Queries run on PostHog compute, enabling you to use warehouse data across PostHog tools.
+
+**PostHog is better if:**
+- You want to eliminate tool sprawl (Mixpanel is analytics-focused with warehouse connectivity as an add-on)
+- You value having the warehouse and analytics in one platform
+- You want features Mixpanel doesn&apos;t offer, like surveys
+- You want transparent, usage-based pricing (1 million synced rows free per month)
+
+The managed warehouse approach PostHog offers is better if you want a single platform for analyzing data and using other features, such as surveys and feature flags, as you don't need to maintain an external warehouse in addition to other tools. 
 
 </details>
 

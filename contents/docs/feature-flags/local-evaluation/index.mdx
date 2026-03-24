@@ -16,6 +16,46 @@ Evaluating feature flags requires making a request to PostHog for each flag. How
 
 It is best practice to use local evaluation flags when possible, since this enables you to resolve flags faster and with fewer API calls.
 
+## How local evaluation works
+
+To understand local evaluation, it helps to see how **remote evaluation** (the default) works first.
+
+With remote evaluation, your server sends a request to PostHog's `/flags` API every time you check a flag. PostHog looks up all the data it needs — flag definitions, person properties, group properties, and cohort memberships — from its own database, evaluates the flag, and returns the result:
+
+```mermaid
+sequenceDiagram
+    participant App as Your app
+    participant SDK as PostHog SDK
+    participant PH as PostHog
+    App->>SDK: flag key + user ID
+    SDK->>PH: POST /flags
+    Note right of PH: Resolves using stored flag definitions,<br/>person properties, group properties,<br/>and cohort memberships
+    PH-->>SDK: true / false / variant
+    SDK-->>App: true / false / variant
+```
+
+Every flag check is a network round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
+
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/api/feature_flag/local_evaluation` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+
+```mermaid
+sequenceDiagram
+    participant App as Your app
+    participant SDK as PostHog SDK
+    participant PH as PostHog
+    Note over SDK,PH: Background (every 30s)
+    SDK->>PH: GET /local_evaluation
+    PH-->>SDK: Flag definitions
+    Note over App,SDK: At evaluation time
+    App->>SDK: flag key + person properties + group properties
+    Note right of SDK: Evaluates locally using<br/>cached flag definitions +<br/>properties you provided
+    SDK-->>App: true / false / variant
+```
+
+Notice that PostHog is not involved at evaluation time. The tradeoff: **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
+
+Local evaluation is also more cost-effective: with remote evaluation, every flag check is a billable request, whereas local evaluation only bills for the periodic request to fetch flag definitions (counted as 10 flag requests each). For high-traffic services, this can significantly reduce your flag usage costs.
+
 There are 3 steps to enable local evaluation:
 
 ## Step 1: Find your feature flags secure API key
