@@ -6180,6 +6180,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Customer journeys',
+                    url: '/docs/customer-analytics/customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
