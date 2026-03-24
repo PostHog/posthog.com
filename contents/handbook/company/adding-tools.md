@@ -29,7 +29,7 @@ If you find yourself saying something like:
 
 Then you need to do the following:
 
-1. **Try the tool in a low-risk context**
+**1. Try the tool in a low-risk context**
 
 Use the tool in a context where it is easily replaced and does not involve sensitive data. If you have doubts about what information can be shared at this stage, check with #legal first. Similar to [a spike](https://wiki.c2.com/?SpikeSolution).
 
@@ -39,7 +39,7 @@ The goal is to:
 * Learn what data the tool may have access to
 * Give others a way to see it in action
 
-2. **Open an issue in [Company Internal](https://github.com/PostHog/company-internal)**
+**2. Open an issue in [Company Internal](https://github.com/PostHog/company-internal)**
 
 At the same time open an issue describing why we should adopt the tool. Anyone proposing a new vendor should think about the impact on the *whole* company, not just their team or use case.
 
@@ -103,7 +103,7 @@ Many proposals will not make it past this stage – that's good. We don't want a
 
 Once a decision has been made to adopt a tool/vendor, the person proposing the tool is responsible for coordinating the next steps.
 
-1. **Finalize business terms**
+**1. Finalize business terms**
 
 Work with the vendor to negotiate the commercial and business terms, such as:
 * Cost
@@ -126,13 +126,13 @@ As soon as it looks like we intend to move forward with the vendor, post in #leg
 
 As soon as documents are available for review, send the documents to #legal (in an editable format such as .docx).
 
-2. **Plan time for legal review**
+**2. Plan time for legal review**
 
 Legal review usually takes a few business days depending on bandwidth, priorities, and existing obligations, and negotiations may take longer depending on the use case, the vendor’s contract terms and how quickly they review and negotiate proposed changes.
    
 Plan accordingly and involve legal early. If you have a deadline for implementing the tool or there is another reason the standard timeline above needs to be expedited, please make sure to let legal know ahead of time.
 
-3. **Additional requirements for Subprocessors**
+**3. Additional requirements for Subprocessors**
 
 If a vendor qualifies as a **subprocessor**, the review process will usually be more involved.
    
@@ -147,7 +147,7 @@ For new subprocessors:
 * Customers must receive 14 days’ notice after the agreement is finalized before the vendor can be used in production.
 * Because of this requirement, and because the legal and compliance documents for a subprocessor are generally going to be reviewed with careful detail, implementations involving new subprocessors will likely take additional time.
 
-4. **Using the tool**
+**4. Using the tool**
 
 Once:
 * Legal review is complete.
