@@ -17,10 +17,8 @@ export const microsoft_clarity = {
         },
         session_replay: {
             available: true,
-            pricing: {
-                free_tier: true, // Completely free forever
-            },
             features: {
+                ai_summaries: true,
                 canvas_recording: false, // Cannot render canvas elements
                 chat_with_recordings: true, // No AI chat feature
                 clickmaps: true, // Yes
@@ -67,10 +65,8 @@ export const microsoft_clarity = {
                     dom_explorer: false, // No DOM explorer
                 },
             },
-            ai: {
-                features: {
-                    ai_summaries: true, // Yes, Copilot AI summaries
-                },
+            pricing: {
+                free_tier: true, // Completely free forever
             },
         },
         heatmaps: {
@@ -95,11 +91,11 @@ export const microsoft_clarity = {
         },
         error_tracking: {
             available: false,
-                },
-            monitoring: {
-                features: {
-                    performance_monitoring: false,
-                },
+        },
+        monitoring: {
+            features: {
+                performance_monitoring: false,
+            },
         },
     },
     platform: {
