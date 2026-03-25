@@ -8,15 +8,15 @@ availability:
   enterprise: full
 ---
 
-<iframe 
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=658"
-    className="rounded shadow-xl"
+<iframe
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=658"
+  className="rounded shadow-xl"
 />
 
 Retention shows you how many users return during subsequent periods. It's useful for answering questions like:
 
 - Are new sign ups coming back to use your product after trying it?
-- Is a new feature or user experience getting people to return? 
+- Is a new feature or user experience getting people to return?
 - What type of user retains the best?
 
 Retention insights are also a vital tool for evaluating whether you've [achieved product-market fit](/founders/product-market-fit-game).
@@ -24,10 +24,10 @@ Retention insights are also a vital tool for evaluating whether you've [achieved
 ## Creating a retention insight
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_f69d5f3c7c.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_51d858a4d0.png"}
-    alt="Retention config" 
-    classes="rounded"
+  imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/retention_f69d5f3c7c.png"}
+  imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_51d858a4d0.png"}
+  alt="Retention config"
+  classes="rounded"
 />
 
 Retention insights support both [events](/docs/data/events) and [actions](/docs/data/actions).
@@ -35,15 +35,19 @@ Retention insights support both [events](/docs/data/events) and [actions](/docs/
 When you create a retention insight, you're defining two things:
 
 1. A start event - an event or action that determines if the user or group should be included in the retention cohorts.
-2. A return event - an event or action that the same user or group *returns* to perform. This tells us if they were *retained*.
+2. A return event - an event or action that the same user or group _returns_ to perform. This tells us if they were _retained_.
 
 It often, but not always, makes sense to use the same event or action for both.
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_product_interactions_light_5deef6c314.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_product_interactions_dark_d3c93467e9.png"}
-    alt="Retention config" 
-    classes="rounded"
+  imageLight={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/retention_product_interactions_light_5deef6c314.png"
+  }
+  imageDark={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/retention_product_interactions_dark_d3c93467e9.png"
+  }
+  alt="Retention config"
+  classes="rounded"
 />
 
 In the example above, we use an action called **Product Interactions** for both. We group by **Unique users** and chose users who did the **Product Interactions** action for the first time during a seven-week period.
@@ -54,7 +58,7 @@ You can also:
 
 - Define the retention period by any number of hours, days, weeks, or months. To analyze retention across a whole year, for example, you should configure your insight to say "in the last 12 months".
 
-- Filter your retention insights using filter groups, such as event properties (country, device, etc.), person properties (job title, company name, etc.), feature flags (users who have a flag enabled), and existing [cohorts](/docs/data/cohorts) (pre-defined groups of users).
+- Filter your retention insights using filter groups, such as event properties (country, device, etc.), person properties (job title, company name, etc.), [extended person properties](/docs/data-warehouse/join#person-joins) from data warehouse joins, feature flags (users who have a flag enabled), and existing [cohorts](/docs/data/cohorts) (pre-defined groups of users).
 
 - Choose between **first time** and **recurring** retention. **Recurring retention** counts a user or group as part of a cohort if they performed the start event during that time period, irrespective of if it was their first time or not. **First time retention** only counts a user or group as part of the cohort if it was their first time performing the start event.
 
@@ -72,15 +76,15 @@ Retention insights are visualized in two ways:
 By default, both show the percentage of users who retained in each cohort relative to 'Week 0'.
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_c319006162.png"}
-    alt="Retention config" 
-    classes="rounded"
+  imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png"}
+  imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/retention_dark_c319006162.png"}
+  alt="Retention config"
+  classes="rounded"
 />
 
 Here's a breakdown of the columns in the table:
 
-- **Column A** denotes the cohort. This retention insight is grouped by week, so it shows the date range of the six most recent weeks, and the seventh currently incomplete week. 
+- **Column A** denotes the cohort. This retention insight is grouped by week, so it shows the date range of the six most recent weeks, and the seventh currently incomplete week.
 
 - **Column B** shows the size of each individual cohort. As noted earlier, retention insights default to unique users, but they can also use groups.
 
@@ -110,15 +114,19 @@ Here's a breakdown of the columns in the table:
 
 There are two options for calculating retention percentage over time:
 
-1. **Starting cohort size (default)**. The percentage of users or groups who returned compared to the *initial cohort size*. For example, if Day 3 shows 25% for a cohort, it means that 25% of the users who performed the start event returned on Day 3.
+1. **Starting cohort size (default)**. The percentage of users or groups who returned compared to the _initial cohort size_. For example, if Day 3 shows 25% for a cohort, it means that 25% of the users who performed the start event returned on Day 3.
 
-2. **Previous period**. The percentage of users or groups who returned compared to the *previous period*. With this option if Day 3 shows 40%, it means that 40% of the number of users who returned on Day 2 returned on Day 3. The option helps to see which time interval has the biggest percentage increase/drop offs in users.
+2. **Previous period**. The percentage of users or groups who returned compared to the _previous period_. With this option if Day 3 shows 40%, it means that 40% of the number of users who returned on Day 2 returned on Day 3. The option helps to see which time interval has the biggest percentage increase/drop offs in users.
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_light_991ef62419.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_dark_2b08408b59.png"}
-    alt="Retention reference toggle" 
-    classes="rounded"
+  imageLight={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_light_991ef62419.png"
+  }
+  imageDark={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/retention_toggle_dark_2b08408b59.png"
+  }
+  alt="Retention reference toggle"
+  classes="rounded"
 />
 
 ### Returning time criteria
@@ -139,18 +147,18 @@ You can choose between two different calculation options for the mean/average re
 
 ## Breakdowns
 
-You can break down your retention numbers and graph on event, person, group properties, and more. For example, breaking down the retention numbers by **Country Name** can help to see which countries have higher retention for the feature.
+You can break down your retention numbers and graph on event, person, [extended person properties](/docs/data-warehouse/join#person-joins), group properties, and more. For example, breaking down the retention numbers by **Country Name** can help to see which countries have higher retention for the feature.
 
 When using breakdowns, you see the mean retention for each breakdown value and can click on each row to expand and show each cohort with that breakdown value. There is also a dropdown selector which lets you filter the graph and table for a specific breakdown value.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_05_11_57dcd61f8c.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_04_52_389ae5f3c6.png"
-    alt="Retention breakdown" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_05_11_57dcd61f8c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_29_at_15_04_52_389ae5f3c6.png"
+  alt="Retention breakdown"
+  classes="rounded"
 />
 
-The breakdown logic is implemented such that **both** the start and return event must have the same breakdown value. For example, when breaking down by browser, if the user performs the start event in Google Chrome but performs the return event in Firefox, the return event won't be counted in the breakdown results for Google Chrome. 
+The breakdown logic is implemented such that **both** the start and return event must have the same breakdown value. For example, when breaking down by browser, if the user performs the start event in Google Chrome but performs the return event in Firefox, the return event won't be counted in the breakdown results for Google Chrome.
 
 ## Displaying retention insights
 
@@ -159,11 +167,11 @@ When saving a retention insight, there are two things to consider:
 1. Whether you want it to show as a line or bar chart. Choose this on the chart when creating an insight.
 2. Whether you want it to show as a chart or a table (or both) on a dashboard. Choose this after saving the insight by clicking on **Options** and then set it to **Show table only**, **Show graph only**, or **Show both**.
 
-##  Retention vs. Stickiness
+## Retention vs. Stickiness
 
 [Stickiness](/docs/product-analytics/stickiness) and retention insights can look very similar, but they tell you different things:
 
--  **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
--  **Stickiness** measures **how many** times within a period a user performed an event
+- **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
+- **Stickiness** measures **how many** times within a period a user performed an event
 
 Retention is good for seeing how well you're doing at keeping users engaged overall. Stickiness is useful for seeing deeply users are engaging with your product and helps you identify the most engaged users.
