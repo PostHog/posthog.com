@@ -21,7 +21,7 @@ export const microsoft_clarity = {
                 free_tier: true, // Completely free forever
             },
             features: {
-                ai_summaries: true, // Yes, Copilot AI summaries
+                ai_summaries: true,
                 canvas_recording: false, // Cannot render canvas elements
                 chat_with_recordings: true, // No AI chat feature
                 clickmaps: true, // Yes
