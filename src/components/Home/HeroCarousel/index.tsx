@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
@@ -6,10 +6,38 @@ import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } 
 const SLIDE_DURATION = 5000
 
 const tabs = [
-    { value: 'one-place', label: 'One place for product data', content: <OnePlaceSlide /> },
-    { value: 'understand-usage', label: 'Understand product usage', content: <UnderstandUsageSlide /> },
-    { value: 'debug-fix', label: 'Debug & fix issues', content: <DebugFixSlide /> },
-    { value: 'test-rollout', label: 'Test & roll out changes', content: <TestRolloutSlide /> },
+    {
+        value: 'one-place',
+        label: 'One place for product data',
+        content: <OnePlaceSlide />,
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+    },
+    {
+        value: 'understand-usage',
+        label: 'Understand product usage',
+        content: <UnderstandUsageSlide />,
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+    {
+        value: 'debug-fix',
+        label: 'Debug & fix issues',
+        content: <DebugFixSlide />,
+        color: 'bg-salmon',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+    {
+        value: 'test-rollout',
+        label: 'Test & roll out changes',
+        content: <TestRolloutSlide />,
+        color: 'bg-purple',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
 ]
 
 export default function HeroCarousel() {
@@ -17,9 +45,6 @@ export default function HeroCarousel() {
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
     const [progressKey, setProgressKey] = useState(0)
-    const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-    const startTimeRef = useRef(Date.now())
-    const remainingRef = useRef(SLIDE_DURATION)
 
     const effectivelyPaused = isPaused || isHovering
 
@@ -28,84 +53,81 @@ export default function HeroCarousel() {
             const idx = tabs.findIndex((t) => t.value === prev)
             return tabs[(idx + 1) % tabs.length].value
         })
-        remainingRef.current = SLIDE_DURATION
         setProgressKey((k) => k + 1)
     }, [])
 
-    useEffect(() => {
-        if (effectivelyPaused) {
-            if (timerRef.current) {
-                clearTimeout(timerRef.current)
-                timerRef.current = null
-                const elapsed = Date.now() - startTimeRef.current
-                remainingRef.current = Math.max(0, remainingRef.current - elapsed)
-            }
-            return
-        }
-
-        startTimeRef.current = Date.now()
-        timerRef.current = setTimeout(advance, remainingRef.current)
-
-        return () => {
-            if (timerRef.current) {
-                clearTimeout(timerRef.current)
-                timerRef.current = null
-            }
-        }
-    }, [effectivelyPaused, progressKey, advance])
-
     const handleTabChange = (value: string) => {
         setActiveTab(value)
-        remainingRef.current = SLIDE_DURATION
         setProgressKey((k) => k + 1)
     }
+
+    const activeIndex = tabs.findIndex((t) => t.value === activeTab)
+    const activeColor = tabs[activeIndex]?.color || 'bg-yellow'
+    const isFirst = activeIndex === 0
+    const isLast = activeIndex === tabs.length - 1
 
     return (
         <div className="@container" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
             <Tabs.Root value={activeTab} onValueChange={handleTabChange} className="flex flex-col">
-                <Tabs.List className="flex items-center gap-0 border-b border-primary">
+                <Tabs.List className="flex items-center gap-0">
                     <div className="flex flex-wrap @sm:flex-nowrap flex-1 min-w-0">
-                        {tabs.map((tab) => (
-                            <Tabs.Trigger
-                                key={tab.value}
-                                value={tab.value}
-                                className="relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold text-secondary data-[state=active]:text-primary cursor-default select-none transition-colors text-balance"
-                            >
-                                {tab.label}
-                                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-border overflow-hidden">
-                                    {activeTab === tab.value && (
-                                        <div
-                                            key={progressKey}
-                                            className="h-full bg-primary"
-                                            style={{
-                                                animation: `hero-carousel-progress ${SLIDE_DURATION}ms linear forwards`,
-                                                animationPlayState: effectivelyPaused ? 'paused' : 'running',
-                                            }}
-                                        />
-                                    )}
-                                </div>
-                            </Tabs.Trigger>
-                        ))}
+                        {tabs.map((tab) => {
+                            const isActive = activeTab === tab.value
+                            return (
+                                <Tabs.Trigger
+                                    key={tab.value}
+                                    value={tab.value}
+                                    className={`relative flex-1 min-w-[200px] @sm:min-w-0 px-3 py-2.5 text-sm font-semibold cursor-pointer select-none transition-colors text-balance rounded-t-md ${
+                                        isActive ? `${tab.color} ${tab.activeText}` : 'text-secondary'
+                                    }`}
+                                >
+                                    {tab.label}
+                                    <div className="absolute bottom-0 left-2 right-2 h-[3px] overflow-hidden">
+                                        {isActive && (
+                                            <div
+                                                key={progressKey}
+                                                className={`h-full rounded-full ${tab.progressBar}`}
+                                                style={{
+                                                    animation: `hero-carousel-progress ${SLIDE_DURATION}ms linear forwards`,
+                                                    animationPlayState: effectivelyPaused ? 'paused' : 'running',
+                                                }}
+                                                onAnimationEnd={advance}
+                                            />
+                                        )}
+                                    </div>
+                                </Tabs.Trigger>
+                            )
+                        })}
                     </div>
                 </Tabs.List>
 
-                <div className="min-h-[300px] @[820px]:min-h-[400px] p-6 border border-t-0 border-primary rounded-b-md bg-white relative">
-                    <button
-                        onClick={() => setIsPaused((p) => !p)}
-                        className="absolute top-2 right-0 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10"
-                        aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
-                    >
-                        {isPaused ? <IconPlayFilled className="size-3.5" /> : <IconPauseFilled className="size-3.5" />}
-                    </button>
-                    {tabs.map((tab) => (
-                        <Tabs.Content
-                            key={tab.value}
-                            value={tab.value}
-                            className="data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out]"
+                <div
+                    className={`min-h-[300px] @[820px]:min-h-[400px] p-2 rounded-b-md rounded-t-md ${
+                        isFirst ? '@sm:rounded-tl-none' : ''
+                    } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
+                >
+                    <div className="bg-light dark:bg-dark rounded p-4 flex-1 w-full shadow-2xl">
+                        <button
+                            onClick={() => setIsPaused((p) => !p)}
+                            className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light dark:bg-dark"
+                            aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
                         >
-                            {tab.content}
-                        </Tabs.Content>
-                    ))}
+                            {isPaused ? (
+                                <IconPlayFilled className="size-3.5" />
+                            ) : (
+                                <IconPauseFilled className="size-3.5" />
+                            )}
+                        </button>
+                        {tabs.map((tab) => (
+                            <Tabs.Content
+                                key={tab.value}
+                                value={tab.value}
+                                className="data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out]"
+                            >
+                                {tab.content}
+                            </Tabs.Content>
+                        ))}
+                    </div>
                 </div>
             </Tabs.Root>
 
