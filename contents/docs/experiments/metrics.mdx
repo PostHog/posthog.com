@@ -59,7 +59,7 @@ Common use cases:
 - **Items per session**: Measure engagement by dividing total interactions by unique sessions
 - **Custom conversion rates**: Calculate conversions with a denominator other than exposed users (e.g., conversions per active user)
 
-Both the numerator and denominator support all aggregation methods (count, sum, average, unique values). You can even use the same event with different properties for each part of the ratio, such as dividing total revenue by total quantity sold from purchase events.
+Both the numerator and denominator can be either a Mean or Funnel metric type, and each supports all of its respective aggregation methods. You can even use the same event with different properties for each part of the ratio, such as dividing total revenue by total quantity sold from purchase events.
 
 ### Retention
 
@@ -157,7 +157,7 @@ The control (baseline) is always shown in gray. Other bars will be green or redâ
 
 ## Shared metrics
 
-Create a shared metric to easily reuse a funnel or a trend metric across experiments. This is ideal for key company metrics like conversion, revenue, churn, and more.
+Create a shared metric to easily reuse a metric configuration across experiments. This is ideal for key company metrics like conversion, revenue, churn, and more.
 
 To create one, go to the [shared metrics tab](https://us.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
 

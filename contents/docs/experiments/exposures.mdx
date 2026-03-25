@@ -101,13 +101,13 @@ Users might be exposed to different variants if:
 - There's an implementation error
 - They're part of a gradual rollout
 
-PostHog provides two strategies for handling these cases:
+PostHog provides two strategies for handling these cases, controlled by the `multiple_variant_handling` setting:
 
 ### Exclude from analysis (recommended)
-Users exposed to multiple variants are completely removed from the experiment analysis. This ensures the cleanest results by eliminating any cross-contamination between variants.
+Users exposed to multiple variants are completely removed from the experiment analysis. This ensures the cleanest results by eliminating any cross-contamination between variants. This is the `EXCLUDE` option and the default behavior.
 
 ### Use first seen variant
-Users are analyzed based on the first variant they were exposed to, regardless of subsequent exposures. This maximizes sample size but may introduce some noise into your results.
+Users are analyzed based on the first variant they were exposed to, regardless of subsequent exposures. This maximizes sample size but may introduce some noise into your results. This is the `INCLUDE` option.
 
 ## Sample ratio mismatch detection
 
