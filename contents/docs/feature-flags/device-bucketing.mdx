@@ -45,9 +45,9 @@ The device ID is automatically set by the web SDK (`posthog-js` `v1.307.1` and a
 
 If you're using an older SDK version that doesn't natively support device bucketing, you can still achieve the same behavior by passing `$device_id` as a person property when evaluating feature flags.
 
-### JavaScript / Browser
+<MultiLanguage>
 
-```js
+```js-web
 // Get the device ID from posthog-js
 const deviceId = posthog.get_property('$device_id')
 
@@ -56,8 +56,6 @@ posthog.setPersonPropertiesForFlags({
     '$device_id': deviceId
 })
 ```
-
-### Node.js
 
 ```node
 await client.getFeatureFlag(
@@ -71,8 +69,6 @@ await client.getFeatureFlag(
 )
 ```
 
-### Python
-
 ```python
 posthog.get_feature_flag(
     'flag-key',
@@ -82,6 +78,8 @@ posthog.get_feature_flag(
     }
 )
 ```
+
+</MultiLanguage>
 
 ## Further reading
 
