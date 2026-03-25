@@ -43,7 +43,7 @@ Click to add a new node after your trigger and select **cohort branch.** This is
 
 ### Step 3: Configure your split
 
-Name your branches and add the percentage split. We added "test" and "control" for this example.
+Name your branches and add the percentage split. We added "test" and "control" for this example and split them evenly.
 
 ![configure your split](https://res.cloudinary.com/dmukukwp6/image/upload/Configure_your_split_60b0258813.png)
 
