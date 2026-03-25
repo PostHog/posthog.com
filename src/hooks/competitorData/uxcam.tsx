@@ -38,7 +38,7 @@ export const uxcam = {
             platform_support: {
                 features: {
                     mobile_app_recordings: true,
-                    web_app_recordings: false,
+                    web_app_recordings: true,
                 },
             },
             ai: {
