@@ -365,7 +365,7 @@ const appSettings: AppSettings = {
                 if (windowRight > keyboardGardenImageLeft) {
                     const newX = x - (windowRight - keyboardGardenImageLeft)
                     return {
-                        x: newX < 115 ? x : newX,
+                        x: Math.max(newX, Math.min(x, 145)),
                         y,
                     }
                 }
@@ -422,7 +422,7 @@ const appSettings: AppSettings = {
                 if (windowRight > keyboardGardenImageLeft) {
                     const newX = x - (windowRight - keyboardGardenImageLeft)
                     return {
-                        x: newX < 115 ? x : newX,
+                        x: Math.max(newX, Math.min(x, 145)),
                         y,
                     }
                 }
@@ -459,7 +459,7 @@ const appSettings: AppSettings = {
                 if (windowRight > keyboardGardenImageLeft) {
                     const newX = x - (windowRight - keyboardGardenImageLeft)
                     return {
-                        x: newX < 0 ? x : newX,
+                        x: Math.max(newX, 0),
                         y,
                     }
                 }
