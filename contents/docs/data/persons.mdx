@@ -46,17 +46,23 @@ To fix existing duplicates, see [how to merge users](/docs/product-analytics/ide
 
 The [People tab](https://app.posthog.com/persons) displays a list of all people in your project. By default, the list includes the following columns:
 
-> **Note:** The "Last Seen" column has been temporarily removed from the Persons table and column configuration options while we resolve a known issue. It will be restored in a future update.
-
 - **Person** - display name for the person
 - **ID** - the person's distinct ID
 - **Created at** - when the person profile was first created
-- **Last seen** - when the person was last active, rounded to the nearest hour
+- **Last seen** - when the person was last active, rounded to the nearest hour (opt-in, see below)
 - **Delete** - option to delete the person
 
-The **Last seen** column updates hourly, so it may not reflect the exact timestamp of a person's latest event. If a person was active within the last hour, the column displays "last hour" instead of a specific time.
+You can sort the list by any column and customize which columns are visible by clicking the **Configure columns** button above the table.
 
-You can sort the list by any column, including last seen, to find recently active or inactive users. To customize which columns are visible, click the **Configure columns** button above the table.
+### Last seen
+
+The **Last seen** column tracks when a person was last active. This feature is **opt-in** — to enable it for your project, go to [Settings > Product analytics > Person last seen tracking](https://app.posthog.com/settings/environment-product-analytics#person-last-seen-at). When disabled, the column is not updated after the person is first created.
+
+When enabled:
+
+- The value updates **hourly** — the event timestamp is rounded down to the nearest hour, so multiple events within the same hour won't cause repeated writes.
+- If a person was active within the last hour, the column displays "last hour" instead of a specific time.
+- Individual events can opt out of updating this value by setting the event property `$update_person_last_seen_at` to `false`.
 
 ## Viewing person profiles
 

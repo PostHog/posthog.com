@@ -25,9 +25,12 @@ import {
 } from 'onboarding/session-replay'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './sr-shared-helpers'
+import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
 
 const SNIPPETS = {
     SessionReplayFinalSteps,
+    JSHtmlSnippet: WebsiteJSHtmlSnippet,
+    JSInitSnippet: WebsiteJSInitSnippet,
 }
 
 // Web SDK wrappers
