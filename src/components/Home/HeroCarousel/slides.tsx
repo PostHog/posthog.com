@@ -215,18 +215,18 @@ const ScatteredProduct = ({ product, className = '' }: { product: any; className
  */
 const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, number]; '@3xl': [number, number] }[] =
     [
-        { handle: 'web_analytics', '@xl': [14, 10], '@2xl': [12, 14], '@3xl': [24, 6] },
-        { handle: 'product_analytics', '@xl': [42, 2], '@2xl': [30, 4], '@3xl': [14, 22] },
-        { handle: 'revenue_analytics', '@xl': [72, 2], '@2xl': [70, 4], '@3xl': [74, 6] },
-        { handle: 'session_replay', '@xl': [26, 24], '@2xl': [24, 28], '@3xl': [10, 40] },
-        { handle: 'funnels', '@xl': [26, 24], '@2xl': [24, 28], '@3xl': [6, 60] },
-        { handle: 'heatmaps', '@xl': [76, 24], '@2xl': [76, 28], '@3xl': [80, 22] },
-        { handle: 'trends', '@xl': [76, 24], '@2xl': [76, 28], '@3xl': [90, 36] },
-        { handle: 'lifecycle', '@xl': [4, 30], '@2xl': [4, 42], '@3xl': [10, 78] },
-        { handle: 'user_paths', '@xl': [6, 54], '@2xl': [8, 62], '@3xl': [6, 96] },
-        { handle: 'llm_evals', '@xl': [92, 10], '@2xl': [88, 14], '@3xl': [90, 56] },
-        { handle: 'llm_traces', '@xl': [96, 30], '@2xl': [96, 30], '@3xl': [86, 74] },
-        { handle: 'llm_generations', '@xl': [94, 54], '@2xl': [92, 58], '@3xl': [90, 90] },
+        { handle: 'web_analytics', '@xl': [14, 10], '@2xl': [26, 6], '@3xl': [24, 6] },
+        { handle: 'product_analytics', '@xl': [42, 2], '@2xl': [16, 22], '@3xl': [14, 22] },
+        { handle: 'revenue_analytics', '@xl': [72, 2], '@2xl': [72, 6], '@3xl': [74, 6] },
+        { handle: 'session_replay', '@xl': [26, 24], '@2xl': [10, 38], '@3xl': [10, 40] },
+        { handle: 'funnels', '@xl': [26, 24], '@2xl': [5, 59], '@3xl': [6, 60] },
+        { handle: 'heatmaps', '@xl': [76, 24], '@2xl': [78, 22], '@3xl': [80, 22] },
+        { handle: 'trends', '@xl': [76, 24], '@2xl': [88, 36], '@3xl': [90, 36] },
+        { handle: 'lifecycle', '@xl': [4, 30], '@2xl': [6, 78], '@3xl': [10, 78] },
+        { handle: 'user_paths', '@xl': [6, 54], '@2xl': [8, 96], '@3xl': [6, 96] },
+        { handle: 'llm_evals', '@xl': [92, 10], '@2xl': [95, 56], '@3xl': [90, 56] },
+        { handle: 'llm_traces', '@xl': [96, 30], '@2xl': [92, 74], '@3xl': [86, 74] },
+        { handle: 'llm_generations', '@xl': [94, 54], '@2xl': [88, 90], '@3xl': [90, 90] },
     ]
 
 const ArcProducts = ({ products }: { products: any[] }) => {
