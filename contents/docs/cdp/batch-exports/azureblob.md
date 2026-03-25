@@ -3,21 +3,14 @@ title: Azure Blob Storage destination for batch exports
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
+import InboundIpAddresses from '../\_snippets/inbound-ip-addresses.mdx'
 
 With batch exports, data can be exported to Azure Blob Storage.
-
-<CalloutBox icon="IconInfo" title="Azure Blob Storage destination is in beta" type="fyi">
-
-The Azure Blob Storage destination is currently in `beta`. This means the configuration and features are subject to change.
-
-</CalloutBox>
 
 ## Setting up Azure Blob Storage access
 
@@ -60,13 +53,13 @@ You can view the schema for each model inside the batch export configuration in 
 
 Configuring a batch export targeting Azure Blob Storage requires the following Azure-specific configuration values:
 
-* **Azure connection:** Select or configure your Azure Blob Storage connection using your connection string.
-* **Container name:** The name of the Azure Blob Storage container where the data is to be exported. The container must already exist and follow Azure's naming rules.
-* **Blob prefix (optional):** A prefix to use for each blob created. This prefix can include [template variables](#blob-prefix-template-variables) to organize your data.
-* **Format:** Select a file format to use in the export. See the [file formats section](#file-formats) for details on which file formats are supported.
-* **Max file size (MiB) (optional):** If the size of the exported data exceeds this value, the data is split into multiple files. (Note that this is approximate and the actual file size may be slightly larger). If this value is not set, or is set to 0, the data is exported as a single file.
-* **Compression:** Select a compression method (like gzip, brotli, or zstd) to use for exported files or no compression. See the [compression section](#compression) for details on which compression methods are supported.
-* **Events to exclude:** A list of events to omit from the exported data.
+- **Azure connection:** Select or configure your Azure Blob Storage connection using your connection string.
+- **Container name:** The name of the Azure Blob Storage container where the data is to be exported. The container must already exist and follow Azure's naming rules.
+- **Blob prefix (optional):** A prefix to use for each blob created. This prefix can include [template variables](#blob-prefix-template-variables) to organize your data.
+- **Format:** Select a file format to use in the export. See the [file formats section](#file-formats) for details on which file formats are supported.
+- **Max file size (MiB) (optional):** If the size of the exported data exceeds this value, the data is split into multiple files. (Note that this is approximate and the actual file size may be slightly larger). If this value is not set, or is set to 0, the data is exported as a single file.
+- **Compression:** Select a compression method (like gzip, brotli, or zstd) to use for exported files or no compression. See the [compression section](#compression) for details on which compression methods are supported.
+- **Events to exclude:** A list of events to omit from the exported data.
 
 ### Blob prefix template variables
 
@@ -74,18 +67,18 @@ The blob prefix provided for data exporting can include template variables which
 
 Template variables include:
 
-* Date and time variables:
-  * `year`
-  * `month`
-  * `day`
-  * `hour`
-  * `minute`
-  * `second`
-* Name of the table exported (for example, 'events' or 'persons')
-  * `table`
-* Batch export data bounds:
-  * `data_interval_start`
-  * `data_interval_end`
+- Date and time variables:
+  - `year`
+  - `month`
+  - `day`
+  - `hour`
+  - `minute`
+  - `second`
+- Name of the table exported (for example, 'events' or 'persons')
+  - `table`
+- Batch export data bounds:
+  - `data_interval_start`
+  - `data_interval_end`
 
 So, as an example, setting `{year}-{month}-{day}_{table}/` as a blob prefix, will produce files prefixed with keys like `2023-07-28_events/`.
 
@@ -93,8 +86,8 @@ So, as an example, setting `{year}-{month}-{day}_{table}/` as a blob prefix, wil
 
 PostHog Azure Blob Storage batch exports support two file formats for exporting data:
 
-* [JSON lines](https://jsonlines.org/)
-* [Apache Parquet](https://parquet.apache.org/) (latest version of the format specification is the only one supported)
+- [JSON lines](https://jsonlines.org/)
+- [Apache Parquet](https://parquet.apache.org/) (latest version of the format specification is the only one supported)
 
 The batch export format is selected via a drop down menu when creating or editing an export.
 
@@ -104,8 +97,8 @@ Each file format supports a variety of compression methods. The compression meth
 
 The following compression methods are supported:
 
-* **Parquet:** zstd, gzip, brotli, lz4, snappy
-* **JSONLines:** gzip, brotli
+- **Parquet:** zstd, gzip, brotli, lz4, snappy
+- **JSONLines:** gzip, brotli
 
 > **Note on Parquet compression:** The compression type is included in the file extension, even for Parquet files. For example, files compressed with zstd will have the extension `.parquet.zst`, lz4 will be `.parquet.lz4`, and snappy will be `.parquet.sz`. Since compression is embedded in the format itself, the file should be read directly as a Parquet file and not uncompressed first.
 
