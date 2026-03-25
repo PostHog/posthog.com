@@ -49,7 +49,7 @@ Name your branches and add the percentage split. We added "test" and "control" f
 
 ### Step 4: Build your branches
 
-You can send an email, trigger an in-app message, update a property – whatever you're testing via the test branch. The control branch can, but doesn't have to do anything. Alternatively, you can test different stuff on different branches.
+You can send an email, trigger an in-app message, update a property – whatever you're testing via the test branch. The control branch can, but doesn't have to, do anything. Alternatively, you can test different nodes or content on different branches.
 
 ![build your branches](https://res.cloudinary.com/dmukukwp6/image/upload/Build_your_branches_5f6fe23303.png)
 
