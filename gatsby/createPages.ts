@@ -884,23 +884,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
-                for (const issue of issues) {
-                    if (!issue) continue
-                    const { html_url, number, title, labels } = await fetch(
-                        `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
-                        {
-                            headers: {
-                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                            },
-                        }
-                    ).then((res) => res.json())
-                    gitHubIssues.push({
-                        url: html_url,
-                        number,
-                        title,
-                        labels,
-                    })
-                }
+                gitHubIssues = await Promise.all(
+                    issues
+                        .filter((issue) => issue)
+                        .map((issue) =>
+                            fetch(`https://api.github.com/repos/${repo}/issues/${issue.trim()}`, {
+                                headers: {
+                                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                                },
+                            })
+                                .then((res) => res.json())
+                                .then(({ html_url, number, title, labels }) => ({
+                                    url: html_url,
+                                    number,
+                                    title,
+                                    labels,
+                                }))
+                        )
+                )
             }
             createPage({
                 path: slug,

@@ -156,6 +156,14 @@ Once we finish determining the person associated with the event we are processin
 
 This step takes into account any `$set`, `$set_once` or `$unset` arguments provided on the event, and merges these with any existing values for the person.
 
+> **Important:** Person properties are applied in **ingestion order** (the order PostHog receives and processes events), not by event timestamp. This means:
+>
+> - `$set` unconditionally overwrites the property value — the last *ingested* event wins, regardless of its timestamp.
+> - `$set_once` sets the property only if the key does not already exist on the person profile — it does not compare timestamps.
+> - A late-arriving event (e.g. from a mobile app that was offline, a server-side SDK retry, or a [historical import](/docs/migrate)) can overwrite values that were already set by a more recent event that was ingested earlier.
+>
+> Keep this in mind any time events may arrive out of order relative to when they actually occurred.
+
 > **Further reading:** [How to set and use person properties](/docs/product-analytics/person-properties)
 
 ### 3. Event processing

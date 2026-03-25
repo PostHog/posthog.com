@@ -8,9 +8,37 @@ showTitle: true
 
 ### SSH Keys
 
-Connecting to GitHub generally requires the use of an SSH key (unless connecting over https). Keys stored on your filesystem are susceptible to theft and misuse by malware.
+Connecting to GitHub requires an SSH key (unless using HTTPS). Traditional SSH keys live as text files on your filesystem, making them vulnerable to theft or misuse by malware. We explicitly prohibit the use of SSH keys stored on your filesystem.
 
-Generate a new key reserved only for use with GitHub. The key should be generated with [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/manage-keys/). ECDSA/Ed25519 is preferable to RSA - don't use RSA.
+Use [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/manage-keys/) to generate and store your SSH key. We have a slight preference for Secretive because it stores your key in the macOS Secure Enclave, ensuring the key can never be exported or extracted, even by malware. Always use ECDSA or Ed25519 — don't use RSA.
+
+#### Setting up with Secretive
+
+1. Open [Secretive](https://github.com/maxgoedjen/secretive/) and click the + button to create a new key.
+2. Name your key "GitHub SSH" and select **Notify** in the **Protection Level** dropdown.
+    - For additional protection, select **Require Authentication** instead. This will require you to use Touch ID each time the key is accessed.
+3. Go to **Secretive > Integrations** in the menu bar.
+4. Select your shell on the left side set the `SSH_AUTH_SOCK` environment variable as instructed. For zsh, add the following to your `~/.zshrc`:
+
+   ```sh
+   export SSH_AUTH_SOCK=~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+   ```
+
+   Then run `source ~/.zshrc` to apply it.
+
+5. Click on your new key in Secretive and copy the public key.
+6. Go to your [GitHub SSH keys settings](https://github.com/settings/keys) and add a new SSH key. Paste your public key and set the key type to **Authentication Key**.
+7. Test it by running:
+
+   ```bash
+   ssh -T git@github.com
+   ```
+
+   You should see a message like "Hi username! You've successfully authenticated".
+
+#### Setting up with 1Password
+
+Follow the [1Password SSH key management guide](https://developer.1password.com/docs/ssh/manage-keys/).
 
 ### Commit signing
 
@@ -21,7 +49,7 @@ You can sign commits with either [Secretive](https://github.com/maxgoedjen/secre
 #### Setting up with Secretive
 
 1. Open Secretive and click the + button to create a new key.
-2. Name your key "Git signing key" and select **Notify** in the Protection Level dropdown.
+2. Name your key "Git signing key" and select **Notify** in the **Protection Level** dropdown.
 3. Go to **Secretive > Integrations** in the menu bar.
 4. Click **Git Signing** and select "Git signing key" from the **Secret** dropdown.
 5. Copy and paste the `~/.gitconfig` and `~/.gitallowedsigners` snippets into their respective files
@@ -59,6 +87,12 @@ Follow the [1Password git commit signing guide](https://developer.1password.com/
 #### After setup
 
 Once commit signing is configured, enable the option in your [GitHub Profile](https://github.com/settings/keys) to "Flag unsigned commits as unverified".
+
+#### Troubleshooting
+
+- If using iTerm/Cursor/GitHub Desktop/Sourcetree/etc., you may be endlessly prompted to "access data from other apps". You can fix this by granting the app **Full Disk Access** in **System Settings > Privacy & Security > Full Disk Access**.
+
+- If you are prompted to complete Touch ID each time you commit, your signing key is using a **Protection Level** of **Require Authentication**. Re-follow the instructions above to generate a new signing key with a **Protection Level** of **Notify**.
 
 ### GitHub Actions
 

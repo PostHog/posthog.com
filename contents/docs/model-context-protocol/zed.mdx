@@ -1,0 +1,37 @@
+---
+title: PostHog MCP for Zed
+sidebarTitle: Zed
+---
+
+import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Zed to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+| Region | URL |
+|--------|-----|
+| **US** (default) | `https://mcp.posthog.com/mcp` |
+| **EU** | `https://mcp-eu.posthog.com/mcp` |
+
+## Quick install
+
+The [PostHog Wizard](https://github.com/PostHog/wizard) can install the MCP server directly into Zed:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+## Manual setup
+
+1. Open [Zed](https://zed.dev) and update `settings.json` with the following configuration:
+
+<MCPConfigSnippet variant="zed" />
+
+2. **Save** the configuration file
+3. The PostHog MCP server will be available
+
+When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+
+<SharedContent />

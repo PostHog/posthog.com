@@ -1502,33 +1502,33 @@ export const handbookSidebar = [
 
             {
                 name: 'Use-case selling',
-            url: '/handbook/growth/use-case-selling/use-case-selling',
-            children: [
-                {
-                    name: 'Product Intelligence',
-                    url: '/handbook/growth/use-case-selling/product-intelligence',
-                },
-                {
-                    name: 'Release Engineering',
-                    url: '/handbook/growth/use-case-selling/release-engineering',
-                },
-                {
-                    name: 'Observability',
-                    url: '/handbook/growth/use-case-selling/observability',
-                },
-                {
-                    name: 'Growth & Marketing',
-                    url: '/handbook/growth/use-case-selling/growth-and-marketing',
-                },
-                {
-                    name: 'AI/LLM Observability',
-                    url: '/handbook/growth/use-case-selling/ai-llm-observability',
-                },
-                {
-                    name: 'Data Infrastructure',
-                    url: '/handbook/growth/use-case-selling/data-infrastructure',
-                },
-            ],
+                url: '/handbook/growth/use-case-selling/use-case-selling',
+                children: [
+                    {
+                        name: 'Product Intelligence',
+                        url: '/handbook/growth/use-case-selling/product-intelligence',
+                    },
+                    {
+                        name: 'Release Engineering',
+                        url: '/handbook/growth/use-case-selling/release-engineering',
+                    },
+                    {
+                        name: 'Observability',
+                        url: '/handbook/growth/use-case-selling/observability',
+                    },
+                    {
+                        name: 'Growth & Marketing',
+                        url: '/handbook/growth/use-case-selling/growth-and-marketing',
+                    },
+                    {
+                        name: 'AI/LLM Observability',
+                        url: '/handbook/growth/use-case-selling/ai-llm-observability',
+                    },
+                    {
+                        name: 'Data Infrastructure',
+                        url: '/handbook/growth/use-case-selling/data-infrastructure',
+                    },
+                ],
             },
             {
                 name: 'Cross-selling',
@@ -2745,21 +2745,58 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                        },
-                        {
-                            name: 'Platform integrations',
-                        },
-                        {
-                            name: 'Lovable',
-                            url: '/docs/integrations/lovable',
-                        },
-                        {
-                            name: 'Replit',
-                            url: '/docs/integrations/replit',
-                        },
-                        {
-                            name: 'v0',
-                            url: '/docs/integrations/v0',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Code editors',
+                                },
+                                {
+                                    name: 'Claude Code',
+                                    url: '/docs/model-context-protocol/claude-code',
+                                },
+                                {
+                                    name: 'Claude Desktop',
+                                    url: '/docs/model-context-protocol/claude-desktop',
+                                },
+                                {
+                                    name: 'Codex',
+                                    url: '/docs/model-context-protocol/codex',
+                                },
+                                {
+                                    name: 'Cursor',
+                                    url: '/docs/model-context-protocol/cursor',
+                                },
+                                {
+                                    name: 'VS Code',
+                                    url: '/docs/model-context-protocol/vscode',
+                                },
+                                {
+                                    name: 'Windsurf',
+                                    url: '/docs/model-context-protocol/windsurf',
+                                },
+                                {
+                                    name: 'Zed',
+                                    url: '/docs/model-context-protocol/zed',
+                                },
+                                {
+                                    name: 'Platforms',
+                                },
+                                {
+                                    name: 'Lovable',
+                                    url: '/docs/integrations/lovable',
+                                },
+                                {
+                                    name: 'Replit',
+                                    url: '/docs/integrations/replit',
+                                },
+                                {
+                                    name: 'v0',
+                                    url: '/docs/integrations/v0',
+                                },
+                            ],
                         },
                         {
                             name: 'LLM Analytics ↗',
@@ -5596,6 +5633,11 @@ export const docsMenu = {
                             platformLogo: 'ollama',
                         },
                         {
+                            name: 'AWS Bedrock',
+                            url: '/docs/llm-analytics/installation/aws-bedrock',
+                            platformLogo: 'awsBedrock',
+                        },
+                        {
                             name: 'Azure OpenAI',
                             url: '/docs/llm-analytics/installation/azure-openai',
                             platformLogo: 'azureOpenAI',
@@ -5709,6 +5751,11 @@ export const docsMenu = {
                             name: 'OpenClaw',
                             url: '/docs/llm-analytics/installation/openclaw',
                             icon: 'IconCode',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/llm-analytics/installation/convex',
+                            platformLogo: 'convex',
                         },
                         {
                             name: 'Pi Coding Agent',
@@ -5832,6 +5879,12 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                },
+                {
+                    name: 'Prompts as a skills store',
+                    url: '/docs/llm-analytics/skills-store',
+                    icon: 'IconStack',
+                    color: 'blue',
                 },
                 {
                     name: 'PostHog AI',
@@ -6477,6 +6530,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
+                },
+                {
+                    name: 'Why you need logs',
+                    url: '/docs/logs/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Start here',

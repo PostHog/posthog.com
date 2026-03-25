@@ -104,7 +104,7 @@ You can do this in five ways:
 - Click on the '...' icon at the top of the dashboard and click 'Edit layout'
 - Click on the '...' icon on any insight card and click 'Edit layout'
 - Hover near the edge of any insight card and click when the resize cursor appears
-- Click or start dragging on any insight card or text card (outside the interactive chart area)
+- Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
 
 Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
 
@@ -112,13 +112,36 @@ Tapping 'F' enables fullscreen mode.
 
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
 
+### Insight card options
+
+Each insight card on a dashboard has a **⋯** menu with quick visualization toggles. These let you adjust how an insight displays without opening the full insight editor.
+
+- **Show legend** / **Hide legend** – Toggle the chart legend on or off. Available for Trends, Stickiness, and Lifecycle insights.
+- **Show values on series** / **Hide values on series** – Toggle data value labels on chart series. Available for Trends, Stickiness, Lifecycle, and Funnel (trends view) insights. For pie charts, this appears as **Show labels on series** / **Hide labels on series**.
+
+These options require editor access to the insight.
+
 ### Adding text cards
 
-Clicking the dropdown on the 'Add insight button' reveals the option to add a text card to your dashboards.
+Click the dropdown on the **Add...** button and select **Text card** to add a text card to your dashboard.
 
 Text cards support Markdown formatting for text. You can also drag and drop images.
 
 You can use text cards to annotate your dashboard – useful for adding context for other users of the dashboard. For more in-depth analysis, however, we recommend [creating a notebook](/docs/notebooks).
+
+### Adding button tiles
+
+Click the dropdown on the **Add...** button and select **Button** to add a clickable button tile to your dashboard.
+
+Button tiles let you link to other pages within PostHog or external URLs. This is useful for creating navigation shortcuts to related dashboards or external resources.
+
+When creating a button tile, you can configure:
+
+- **URL** - The destination link. Use a path like `/dashboards` for internal PostHog pages, or a full URL like `https://example.com` for external sites.
+- **Button text** - The label displayed on the button.
+- **Placement** - Align the button to the left or right side of the tile.
+- **Style** - Choose between primary (filled) or secondary (outlined) button styles.
+- **Transparent background** - Toggle to remove the tile's background for a cleaner look.
 
 ### Sharing a dashboard
 
@@ -229,7 +252,7 @@ resource "posthog_insight" "pageview_count" {
 
 ### Example: Defining a dashboard layout
 
-The `posthog_dashboard_layout` resource controls how tiles (insights, text cards) are positioned on a dashboard. Each tile can specify layout coordinates, colors, and text content. When you export a dashboard using **Manage with Terraform**, this resource is generated automatically.
+The `posthog_dashboard_layout` resource controls how tiles (insights, text cards, button tiles) are positioned on a dashboard. Each tile can specify layout coordinates, colors, and text content. When you export a dashboard using **Manage with Terraform**, this resource is generated automatically.
 
 ```hcl
 resource "posthog_dashboard_layout" "team_metrics" {
