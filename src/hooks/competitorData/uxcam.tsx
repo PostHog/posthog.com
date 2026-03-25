@@ -26,8 +26,10 @@ export const uxcam = {
             features: {
                 canvas_recording: false,
                 crash_reports: true,
+                conditional_reporting: true,
                 event_timeline: true,
                 filter_by_user_or_event: true,
+                privacy_masking: true,
             },
             analysis: {
                 features: {
@@ -66,10 +68,14 @@ export const uxcam = {
             available: false,
             features: {},
         },
+        error_tracking: {
+            available: true,
+        },
     },
     platform: {
         deployment: {
             open_source: false,
+            eu_hosting: true,
         },
         pricing: {
             self_serve: false,
