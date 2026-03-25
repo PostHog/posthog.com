@@ -105,6 +105,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/chargebee',
                 },
                 {
+                    name: 'Convex',
+                    url: '/docs/cdp/sources/convex',
+                },
+                {
                     name: 'BigQuery',
                     url: '/docs/cdp/sources/bigquery',
                 },
@@ -5213,6 +5217,10 @@ export const docsMenu = {
                         {
                             name: 'Clerk',
                             url: '/docs/data-warehouse/sources/clerk',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/data-warehouse/sources/convex',
                         },
                         {
                             name: 'DoIt',
