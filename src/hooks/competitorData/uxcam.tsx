@@ -62,6 +62,9 @@ export const uxcam = {
             available: false,
             features: {},
         },
+        error_tracking: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
