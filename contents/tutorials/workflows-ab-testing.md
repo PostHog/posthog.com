@@ -25,7 +25,7 @@ Cohort branches add a fork in the road, randomly splitting users into groups so 
 
 Think of it as multivariate testing baked right into your automation layer. Set it up once, let it run, then check your funnels.
 
-> Heads up: These cohorts are not the same as the cohorts you create in People & Groups. Workflow cohorts live entirely inside the workflow and are just a splitting mechanism. Don't go looking for them in your sidebar.
+> **Heads up**: These cohorts are not the same as the [cohorts you create in People & Groups](/docs/data/cohorts). Workflow cohorts live entirely inside the workflow, are just a splitting mechanism, and aren't reusable across workflows. Don't go looking for them in your sidebar.
 
 ## How to set it up?
 
