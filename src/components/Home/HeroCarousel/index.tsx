@@ -106,7 +106,7 @@ export default function HeroCarousel() {
                         isFirst ? '@sm:rounded-tl-none' : ''
                     } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
                 >
-                    <div className="flex flex-col bg-light dark:bg-dark rounded p-4 flex-1 w-full shadow-2xl">
+                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl">
                         <button
                             onClick={() => setIsPaused((p) => !p)}
                             className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light/75 dark:bg-dark/75 backdrop-blur"
@@ -139,6 +139,12 @@ export default function HeroCarousel() {
                 @keyframes hero-carousel-fade-in {
                     from { opacity: 0; }
                     to { opacity: 1; }
+                }
+                @keyframes scattered-float {
+                    0%, 100% { transform: translate(-50%, -50%); }
+                    25% { transform: translate(calc(-50% + 2px), calc(-50% - 1.5px)); }
+                    50% { transform: translate(calc(-50% - 1px), calc(-50% + 2px)); }
+                    75% { transform: translate(calc(-50% + 1.5px), calc(-50% + 1px)); }
                 }
             `}</style>
         </div>

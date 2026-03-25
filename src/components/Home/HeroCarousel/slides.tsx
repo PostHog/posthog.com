@@ -1,11 +1,12 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { IconShare } from '@posthog/icons'
+import { IconShare, IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import { getLogo } from 'constants/logos'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const dataSources = [
     { key: 'postgres', label: 'Postgres', url: '/docs/data-warehouse/sources/postgres' },
@@ -29,6 +30,8 @@ const analyticsHandles = [
     'llm_traces',
     'llm_generations',
     'llm_evals',
+    'session_replay',
+    'heatmaps',
 ] as const
 
 const debugHandles = ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles', 'surveys', 'support'] as const
@@ -78,7 +81,7 @@ export const OnePlaceSlide = () => {
     const exportProducts = dataExportHandles.map((h) => allProducts.find((p: any) => p.handle === h))
 
     return (
-        <div className="flex flex-col h-full">
+        <div className="rounded p-4 flex flex-col h-full">
             <div>
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
@@ -194,29 +197,129 @@ const ScatteredProduct = ({ product, className = '' }: { product: any; className
     )
 }
 
-export const UnderstandUsageSlide = () => {
-    const allProducts = useProduct() as any[]
-    const products = analyticsHandles.map((h) => allProducts.find((p: any) => p.handle === h))
+/*
+ * ArcProducts slot positions
+ *
+ * Each entry maps a product handle to [x%, y%] at three @container breakpoints.
+ * Coordinates are percentages of the overlay container:
+ *   x: 0 = left edge, 50 = center, 100 = right edge
+ *   y: 0 = top edge, 50 = middle, 100 = bottom edge
+ * Items are centered on their point via translate(-50%, -50%).
+ *
+ * Breakpoints match Tailwind @container sizes:
+ *   @xl  (≥ 36rem / 576px)
+ *   @2xl (≥ 42rem / 672px)
+ *   @3xl (≥ 48rem / 768px)
+ *
+ * Below @xl, products render as a simple 2-column grid above the image.
+ */
+const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, number]; '@3xl': [number, number] }[] =
+    [
+        { handle: 'web_analytics', '@xl': [14, 10], '@2xl': [12, 14], '@3xl': [24, 6] },
+        { handle: 'product_analytics', '@xl': [42, 2], '@2xl': [30, 4], '@3xl': [14, 22] },
+        { handle: 'revenue_analytics', '@xl': [72, 2], '@2xl': [70, 4], '@3xl': [74, 6] },
+        { handle: 'session_replay', '@xl': [26, 24], '@2xl': [24, 28], '@3xl': [10, 40] },
+        { handle: 'funnels', '@xl': [26, 24], '@2xl': [24, 28], '@3xl': [6, 60] },
+        { handle: 'heatmaps', '@xl': [76, 24], '@2xl': [76, 28], '@3xl': [80, 22] },
+        { handle: 'trends', '@xl': [76, 24], '@2xl': [76, 28], '@3xl': [90, 36] },
+        { handle: 'lifecycle', '@xl': [4, 30], '@2xl': [4, 42], '@3xl': [10, 78] },
+        { handle: 'user_paths', '@xl': [6, 54], '@2xl': [8, 62], '@3xl': [6, 96] },
+        { handle: 'llm_evals', '@xl': [92, 10], '@2xl': [88, 14], '@3xl': [90, 56] },
+        { handle: 'llm_traces', '@xl': [96, 30], '@2xl': [96, 30], '@3xl': [86, 74] },
+        { handle: 'llm_generations', '@xl': [94, 54], '@2xl': [92, 58], '@3xl': [90, 90] },
+    ]
+
+const ArcProducts = ({ products }: { products: any[] }) => {
+    const productMap = Object.fromEntries(products.map((p: any) => [p.handle, p]))
+
+    const renderSlots = (breakpoint: '@xl' | '@2xl' | '@3xl') =>
+        productSlots.map(({ handle, ...pos }, i) => {
+            const product = productMap[handle]
+            if (!product) return null
+            const [x, y] = pos[breakpoint]
+            const duration = 4 + (i % 5) * 0.9
+            const delay = -(i * 1.1)
+            return (
+                <div
+                    key={handle}
+                    className="absolute whitespace-nowrap animate-[scattered-float_ease-in-out_infinite]"
+                    style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: 'translate(-50%, -50%)',
+                        animationDuration: `${duration}s`,
+                        animationDelay: `${delay}s`,
+                    }}
+                >
+                    <ScatteredProduct product={product} />
+                </div>
+            )
+        })
 
     return (
-        <div className="relative">
-            <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-6">
+        <>
+            {/* Below @xl: simple 2-column grid */}
+            <div className="z-10 @xl:hidden grid grid-cols-2 gap-x-4 gap-y-1 mb-2">
+                {productSlots.map(({ handle }) => {
+                    const product = productMap[handle]
+                    if (!product) return null
+                    return <ScatteredProduct key={handle} product={product} />
+                })}
+            </div>
+            {/* @xl to @2xl */}
+            <div className="absolute inset-0 z-10 pointer-events-none [&_a]:pointer-events-auto hidden @xl:block @2xl:hidden">
+                {renderSlots('@xl')}
+            </div>
+            {/* @2xl to @3xl */}
+            <div className="absolute inset-0 z-10 pointer-events-none [&_a]:pointer-events-auto hidden @2xl:block @3xl:hidden">
+                {renderSlots('@2xl')}
+            </div>
+            {/* @3xl+ */}
+            <div className="absolute inset-0 z-10 pointer-events-none [&_a]:pointer-events-auto hidden @3xl:block">
+                {renderSlots('@3xl')}
+            </div>
+        </>
+    )
+}
+
+export const UnderstandUsageSlide = () => {
+    const allProducts = useProduct() as any[]
+    const products = analyticsHandles.map((h) => allProducts.find((p: any) => p.handle === h)).filter(Boolean)
+
+    return (
+        <div className="rounded p-4 relative h-full flex flex-col bg-[#F3F4F0] dark:bg-[#131316]">
+            <h2 className="my-0">Understand what users are doing</h2>
+            <DebugContainerQuery />
+            <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-2">
                 <div>
-                    <h2 className="mt-0">Understand what users are doing</h2>
                     <p className="text-secondary text-sm">
                         Measure engagement, track conversion, and understand usage patterns &mdash; whether it's by
                         person, company, or AI feature.
                     </p>
                 </div>
                 <div>
-                    <p className="text-secondary text-sm @lg:mt-9">
-                        Work smarter with PostHog AI ✨ to get direct answers to questions about your data.
+                    <p className="text-secondary text-sm">
+                        Work smarter with <IconSparkles className="size-4 text-purple inline-block" />{' '}
+                        <Link to="/ai" state={{ newWindow: true }} className="font-semibold">
+                            PostHog AI
+                        </Link>{' '}
+                        to get direct answers to questions about your data.
                     </p>
                 </div>
             </div>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-2 justify-around">
-                {products.map((product: any) => product && <ScatteredProduct key={product.handle} product={product} />)}
+            <div className="relative mt-auto flex-1 min-h-[160px]">
+                <ArcProducts products={products} />
+                <div className="text-center max-w-[496px] mx-auto relative">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_8daa46cb81.png"
+                        className="dark:hidden"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_512e216c3a.png"
+                        className="hidden dark:block"
+                    />
+                </div>
             </div>
         </div>
     )
@@ -227,7 +330,7 @@ export const DebugFixSlide = () => {
     const products = debugHandles.map((h) => allProducts.find((p: any) => p.handle === h))
 
     return (
-        <div>
+        <div className="rounded p-4">
             <div className="grid grid-cols-1 @lg:grid-cols-[1fr_auto] gap-x-8 gap-y-4">
                 <div>
                     <h2 className="mt-0">Diagnose what went wrong</h2>
@@ -256,7 +359,7 @@ export const TestRolloutSlide = () => {
     const products = featureDevHandles.map((h) => allProducts.find((p: any) => p.handle === h))
 
     return (
-        <div>
+        <div className="rounded p-4">
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
                 className="@lg:float-right @lg:ml-4 mb-4 @lg:mb-0 w-48"

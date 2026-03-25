@@ -661,14 +661,15 @@ function HeroImage(): JSX.Element {
 function TaglineControl(): JSX.Element {
     return (
         <>
-            <h1 className="!text-2xl">The new way to build products</h1>
+            <h1 className="!text-2xl pt-8">The new way to build products</h1>
             <p>
                 Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling
-                out changes.
+                out changes using dozens of tools.
             </p>
 
             <p>
-                PostHog is the only platform to empower you (and your AI agents) to do it all <em>autonomously</em>.
+                PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all &mdash;{' '}
+                <em>autonomously</em>.
             </p>
         </>
     )
