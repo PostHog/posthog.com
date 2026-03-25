@@ -4604,6 +4604,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Elixir',
+                            url: '/docs/error-tracking/installation/elixir',
+                        },
+                        {
                             name: 'Go',
                             url: '/docs/error-tracking/installation/go',
                         },
@@ -6188,6 +6192,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Customer journeys',
+                    url: '/docs/customer-analytics/customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -6202,6 +6213,13 @@ export const docsMenu = {
                     url: '/docs/customer-analytics/create-usage-metrics',
                     icon: 'IconG',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create customer journeys',
+                    url: '/docs/customer-analytics/create-customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
