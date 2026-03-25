@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
 import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
 
 <CustomerAnalyticsBetaWarning />
@@ -38,7 +39,10 @@ If you already have a saved [funnel insight](/docs/product-analytics/funnels), y
 
 PostHog converts your funnel steps into a journey flow graph.
 
-> **Note:** Changes to the original funnel insight will not be reflected in the journey. Once created, you can only edit the journey from the journey UI.
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+Changes to the original funnel insight will not be reflected in the journey. Once created, you can only edit the journey from the journey UI.
+</CalloutBox>
 
 ### Build from scratch
 
