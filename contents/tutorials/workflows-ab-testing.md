@@ -19,7 +19,7 @@ seo:
 ---
 [Workflows](https://app.posthog.com/workflows) let you automate actions based on things your users do (or don't do). A user signs up? Send them an email. Someone hits a paywall three times? Ping your sales team. A trial's about to expire? Update a property and trigger a re-engagement sequence.
 
-The building blocks are simple: triggers fire when something happens, then nodes, like sending messages, updating person properties, or capturing events, execute in sequence. Which brings us to a particularly fun node type – cohorts.
+The building blocks are simple: triggers fire when something happens and then nodes, like sending messages, updating person properties, or capturing events, execute in sequence. Which brings us to a particularly fun node type – **cohorts**.
 
 Cohort branches add a fork in the road, randomly splitting users into groups so you can test whether that onboarding email, that nudge notification, or that property update actually moves the needle.
 
