@@ -78,23 +78,27 @@ export const OnePlaceSlide = () => {
     const exportProducts = dataExportHandles.map((h) => allProducts.find((p: any) => p.handle === h))
 
     return (
-        <div>
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-                className="@lg:float-right @lg:ml-4 mb-4 @lg:mb-0 w-60"
-            />
-            <h2 className="mt-0">Build better products with better data</h2>
-            <p className="text-secondary text-sm">
-                These aren't integrations. Third party data is imported into PostHog's CDP and warehouse and lives as a
-                first-class citizen. This means you can query third party data <em>and</em> product usage data together,
-                leading to more informed decisions.
-            </p>
+        <div className="flex flex-col h-full">
+            <div>
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
+                    className="@lg:float-right @lg:ml-4 mb-4 @lg:mb-0 w-60"
+                />
+                <h2 className="mt-0">Build better products with better data</h2>
+                <p className="text-secondary text-sm">
+                    These aren't integrations. Third party data is imported into PostHog's CDP and warehouse and lives
+                    as a first-class citizen. This means you can query third party data <em>and</em> product usage data
+                    together, leading to more informed decisions.
+                </p>
+            </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 flex-1">
                 {/* Data sources & import */}
                 <div className="flex flex-col gap-3">
-                    <div className="text-center text-secondary text-sm font-semibold">Data sources &amp; import</div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 justify-center">
+                    <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
+                        Data sources &amp; import
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center">
                         {dataSources.map(({ key, label, url }) => (
                             <Link
                                 key={key}
@@ -107,7 +111,7 @@ export const OnePlaceSlide = () => {
                             </Link>
                         ))}
                     </div>
-                    <div className="text-center mt-auto">
+                    <div className="@lg:text-center mt-auto leading-tight">
                         <Link
                             to="/docs/data-warehouse/sources"
                             state={{ newWindow: true }}
@@ -120,13 +124,15 @@ export const OnePlaceSlide = () => {
 
                 {/* Manage & query */}
                 <div className="flex flex-col gap-3">
-                    <div className="text-center text-secondary text-sm font-semibold">Manage &amp; query</div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 justify-center">
+                    <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
+                        Manage &amp; query
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center">
                         {manageProducts.map(
                             (product: any) => product && <ProductItem key={product.handle} product={product} />
                         )}
                     </div>
-                    <div className="text-center mt-auto">
+                    <div className="@lg:text-center mt-auto leading-tight">
                         <Link to="/data-stack" state={{ newWindow: true }} className="text-sm font-semibold">
                             Data stack README
                         </Link>
@@ -135,8 +141,10 @@ export const OnePlaceSlide = () => {
 
                 {/* Data export */}
                 <div className="flex flex-col gap-3">
-                    <div className="text-center text-secondary text-sm font-semibold">Data export</div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 justify-center">
+                    <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
+                        Data export
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center">
                         {exportProducts.map(
                             (product: any) => product && <ProductItem key={product.handle} product={product} />
                         )}
@@ -149,7 +157,7 @@ export const OnePlaceSlide = () => {
                             <span>Batch exports</span>
                         </Link>
                     </div>
-                    <div className="text-center mt-auto">
+                    <div className="@lg:text-center mt-auto leading-tight">
                         <Link
                             to="/data-stack/integrations-library?type=destination"
                             state={{ newWindow: true }}

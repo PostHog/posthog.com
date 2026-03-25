@@ -106,10 +106,10 @@ export default function HeroCarousel() {
                         isFirst ? '@sm:rounded-tl-none' : ''
                     } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
                 >
-                    <div className="bg-light dark:bg-dark rounded p-4 flex-1 w-full shadow-2xl">
+                    <div className="flex flex-col bg-light dark:bg-dark rounded p-4 flex-1 w-full shadow-2xl">
                         <button
                             onClick={() => setIsPaused((p) => !p)}
-                            className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light dark:bg-dark"
+                            className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light/75 dark:bg-dark/75 backdrop-blur"
                             aria-label={isPaused ? 'Play carousel' : 'Pause carousel'}
                         >
                             {isPaused ? (
@@ -122,7 +122,7 @@ export default function HeroCarousel() {
                             <Tabs.Content
                                 key={tab.value}
                                 value={tab.value}
-                                className="data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out]"
+                                className="data-[state=active]:animate-[hero-carousel-fade-in_300ms_ease-out] flex-1"
                             >
                                 {tab.content}
                             </Tabs.Content>

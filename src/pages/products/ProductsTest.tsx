@@ -7,6 +7,7 @@ import { IconApple } from 'components/OSIcons'
 import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
@@ -141,6 +142,10 @@ export default function ProductsTest(): JSX.Element {
                 <div className="space-y-10">
                     {/* Hero */}
                     <header className="space-y-4">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/coderhog_80987dd905.png"
+                            className="@xl:float-right @xl:ml-4 w-56"
+                        />
                         <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
                             The cracked technical co-founder that handles all the stuff you used to worry about
                         </h1>
