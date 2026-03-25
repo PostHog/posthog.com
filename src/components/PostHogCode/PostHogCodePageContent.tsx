@@ -6,18 +6,18 @@ import { RadioGroup } from 'components/RadixUI/RadioGroup'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import CloudinaryImage from 'components/CloudinaryImage'
 import {
-    IconX,
     IconGitBranch,
     IconBolt,
     IconCode,
-    IconWarning,
+    IconCloud,
+    IconLaptop,
     IconMagicWand,
     IconListCheck,
     IconSparkles,
 } from '@posthog/icons'
 import { getLogo, type LogoKey } from 'constants/logos'
-import { CodeCapabilities } from './CodeCapabilities'
-import { SignalsInboxFlow } from './SignalsInboxFlow'
+import { AutonomousBuildingCapability, CodeCapabilities } from './CodeCapabilities'
+import { BuildModePipelineHeader, MaintenanceModePipelineHeader } from './SignalsInboxFlow'
 
 const HOG_HERO = 'https://res.cloudinary.com/dmukukwp6/image/upload/code_hero_image_6feaee4045.png'
 const HOG_FAST = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
@@ -39,6 +39,14 @@ const grid12 = 'grid @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10
 const span7 = 'col-span-12 @lg/reader-content:col-span-7'
 const span5 = 'col-span-12 @lg/reader-content:col-span-5'
 
+/** Body copy rhythm used across PostHog Code marketing sections. */
+const bodyComfort = 'text-[15px] leading-relaxed text-secondary'
+const hogImageMax = 'w-full max-w-[280px] @lg/reader-content:max-w-[320px]'
+const hogInboxShell = 'w-full max-w-60 @md:max-w-64 @lg:max-w-72'
+
+/** Matches inbox lead-in (“AI without context…”) for section eyebrows. */
+const sectionLeadIn = 'text-lg font-medium leading-snug text-secondary @md/reader-content:text-xl'
+
 const sectionY = 'py-10 @md/reader-content:py-14'
 const sectionBorder = 'border-b border-input'
 
@@ -46,6 +54,24 @@ const HERO_OVERVIEW_LINES: { label: string; Icon: typeof IconBolt }[] = [
     { label: 'Multi-model agent orchestration – use Claude Code and Codex in one place', Icon: IconMagicWand },
     { label: 'Product signals inbox – triage issues and prioritize product work', Icon: IconListCheck },
     { label: 'Agentic development environment – build features as fast as your roadmap', Icon: IconCode },
+]
+
+const INBOX_WORK_MODE_LINES: { title: string; description: string; Icon: typeof IconGitBranch }[] = [
+    {
+        title: 'Worktree',
+        description: 'Create a copy of your local project to work in parallel',
+        Icon: IconGitBranch,
+    },
+    {
+        title: 'Local',
+        description: 'Edits your repo directly on current branch',
+        Icon: IconLaptop,
+    },
+    {
+        title: 'Cloud',
+        description: 'Runs in isolated sandbox',
+        Icon: IconCloud,
+    },
 ]
 
 function HeroOverviewLabel({ label }: { label: string }) {
@@ -71,21 +97,10 @@ const Section = ({ id, children, className = '' }: { id: string; children: React
     </section>
 )
 
-function CautionLink({ href, children }: { href: string; children: React.ReactNode }) {
-    return (
-        <Link to={href} className="group mt-4 inline-flex items-start gap-2 text-sm font-semibold text-primary">
-            <IconWarning className="mt-0.5 size-4 shrink-0 text-orange" aria-hidden />
-            <span className="underline decoration-dotted underline-offset-4 group-hover:decoration-solid">
-                {children}
-            </span>
-        </Link>
-    )
-}
-
 function Hog({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
     return (
         <div className={`flex items-end justify-center ${className}`}>
-            <img src={src} alt={alt} className="w-full max-w-[280px] @lg/reader-content:max-w-[320px]" loading="lazy" />
+            <img src={src} alt={alt} className={hogImageMax} loading="lazy" />
         </div>
     )
 }
@@ -105,28 +120,6 @@ function AskAiCta({ href, label, iconSrc }: { href: string; label: string; iconS
                 {label}
             </span>
         </CallToAction>
-    )
-}
-
-function DataFlow() {
-    return (
-        <aside
-            data-scheme="primary"
-            className="rounded-sm border border-input bg-accent px-4 py-5 @md/reader-content:px-6 @md/reader-content:py-6"
-        >
-            <div className="flex gap-3 @md/reader-content:gap-4">
-                <IconSparkles className="mt-0.5 size-5 shrink-0 text-yellow @md/reader-content:size-6" aria-hidden />
-                <div className="min-w-0 flex-1">
-                    <p className="m-0 text-base font-bold leading-snug text-primary @md/reader-content:text-lg">
-                        It&apos;s not magic, it&apos;s data
-                    </p>
-                    <p className="m-0 mt-3 text-sm leading-relaxed text-secondary @md/reader-content:text-[15px]">
-                        Your product data shouldn’t just inform decisions — it should decide what gets built. The
-                        autonomous, informed development loop is finally complete.
-                    </p>
-                </div>
-            </div>
-        </aside>
     )
 }
 
@@ -247,48 +240,51 @@ const FAQ_ITEMS = [
 
 function NotCard({ heading, body, link, modelRow, searchPlaceholder }: (typeof NOT_CARDS)[number]) {
     return (
-        <div className="relative flex h-full flex-col border border-input bg-accent p-5 @md/reader-content:p-6">
-            <IconX className="absolute right-2.5 top-2.5 size-3.5 text-muted/40" aria-hidden />
-            <h3 className="m-0 mb-2 pr-6 font-code text-[10px] font-bold uppercase tracking-wide text-primary">
-                {heading}
-            </h3>
-            <p className="m-0 flex-1 text-sm leading-relaxed text-secondary">{body}</p>
+        <div className="flex h-full flex-col overflow-hidden rounded-md border border-primary">
+            <div className="flex flex-1 flex-col px-5 py-4 @md/reader-content:px-5 @md/reader-content:py-5">
+                <h3 className="m-0 mb-2 text-[10px] font-semibold uppercase tracking-wide text-secondary">{heading}</h3>
+                <p className="m-0 flex-1 text-sm leading-relaxed text-secondary">{body}</p>
+                {link ? (
+                    <Link
+                        to={link.href}
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                        external={link.href.startsWith('http')}
+                    >
+                        {link.label}
+                        <span aria-hidden>→</span>
+                    </Link>
+                ) : null}
+            </div>
             {modelRow ? (
-                <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-input pt-4">
-                    {MODEL_LOGOS.map((key) => {
-                        const src = getLogo(key)
-                        if (!src) return null
-                        return (
-                            <div
-                                key={key}
-                                className="flex size-9 items-center justify-center rounded-sm border border-input bg-primary p-1.5"
-                            >
-                                <CloudinaryImage
-                                    src={src as `https://res.cloudinary.com/${string}`}
-                                    alt={key}
-                                    className="max-h-5 max-w-full object-contain"
-                                />
-                            </div>
-                        )
-                    })}
+                <div className="border-t border-primary bg-accent px-5 py-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                        {MODEL_LOGOS.map((key) => {
+                            const src = getLogo(key)
+                            if (!src) return null
+                            return (
+                                <div
+                                    key={key}
+                                    className="flex size-8 items-center justify-center rounded-sm border border-primary bg-primary p-1.5"
+                                >
+                                    <CloudinaryImage
+                                        src={src as `https://res.cloudinary.com/${string}`}
+                                        alt={key}
+                                        className="max-h-4 max-w-full object-contain"
+                                    />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             ) : null}
-            {link ? (
-                <Link
-                    to={link.href}
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-                    external={link.href.startsWith('http')}
-                >
-                    {link.label}
-                    <span aria-hidden>→</span>
-                </Link>
-            ) : null}
             {searchPlaceholder ? (
-                <div
-                    className="mt-4 rounded-sm border border-input bg-primary px-3 py-2 font-code text-xs text-muted"
-                    aria-hidden
-                >
-                    {searchPlaceholder}
+                <div className="border-t border-primary px-5 py-4">
+                    <div
+                        className="rounded-sm border border-primary bg-accent px-3 py-2 font-code text-[11px] text-secondary"
+                        aria-hidden
+                    >
+                        {searchPlaceholder}
+                    </div>
                 </div>
             ) : null}
         </div>
@@ -313,10 +309,10 @@ export default function PostHogCodePageContent() {
                         <h1 className="m-0 mb-4 text-3xl font-bold leading-tight text-primary @md/reader-content:text-4xl @lg/reader-content:text-[2.5rem]">
                             Switch on self-driving development for your product
                         </h1>
-                        <p className="m-0 mb-6 max-w-xl text-[15px] leading-relaxed text-secondary">
-                            PostHog Code is an agentic development environment that understands your product signals,
-                            reasons about user behavior, and ships PRs without you needing to steer. You stay in the
-                            loop, but not in the weeds.
+                        <p className={`m-0 mb-6 max-w-xl ${bodyComfort}`}>
+                            Imagine a product that builds itself. PostHog Code is an agentic development environment
+                            that understands your product signals, reasons about user behavior, and ships PRs without
+                            you needing to steer.
                         </p>
                         <ul className="m-0 mb-6 list-none space-y-3 p-0">
                             {HERO_OVERVIEW_LINES.map(({ label, Icon }) => (
@@ -346,6 +342,61 @@ export default function PostHogCodePageContent() {
                         <Hog src={HOG_HERO} alt="PostHog Code" className="mt-4 @lg/reader-content:mt-0" />
                     </div>
                 </div>
+
+                <div className="mt-8 grid gap-6 @md/reader-content:mt-10 @md/reader-content:grid-cols-3">
+                    {NOT_CARDS.map((card) => (
+                        <NotCard key={card.heading} {...card} />
+                    ))}
+                </div>
+
+                <div
+                    id="inbox-centric"
+                    className="scroll-mt-20 mt-10 border-t border-input pt-10 @md/reader-content:mt-12 @md/reader-content:pt-12"
+                >
+                    <div className={grid12}>
+                        <div className={span7}>
+                            <div className="mb-3 flex flex-col gap-2 @md/reader-content:mb-4 @md/reader-content:gap-3">
+                                <p className={`m-0 ${sectionLeadIn}`}>
+                                    AI without context is just{' '}
+                                    <span className="relative inline-flex items-baseline gap-0.5 rounded-sm border border-input bg-accent px-2 py-0.5 font-code text-base font-medium text-primary @md/reader-content:text-lg">
+                                        autocomplete
+                                        <span
+                                            className="mb-px inline-block h-3 w-px shrink-0 animate-pulse bg-blue"
+                                            aria-hidden
+                                        />
+                                    </span>
+                                </p>
+                                <h2 className="m-0 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                    PostHog Code is a more intuitive way to build a software product
+                                </h2>
+                            </div>
+                            <p className={`m-0 mb-5 ${bodyComfort}`}>
+                                The biggest limit to productivity today is context. PostHog Code is where you get it.
+                                Orchestrate context signals across our database and ship code tailored for performance.
+                                You stay in the loop, but not in the weeds.
+                            </p>
+                            <ul className="m-0 list-none space-y-3 p-0">
+                                {INBOX_WORK_MODE_LINES.map(({ title, description, Icon }) => (
+                                    <li key={title} className="flex items-center gap-2.5">
+                                        <span className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
+                                            <Icon className="size-4 text-blue" aria-hidden />
+                                        </span>
+                                        <p className="m-0 text-sm leading-relaxed">
+                                            <span className="font-semibold text-primary">{title}</span>
+                                            <span className="text-secondary"> – {description}</span>
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className={`${span5} flex justify-center`}>
+                            <div className={`mt-6 @md/reader-content:mt-0 ${hogInboxShell}`}>
+                                <Hog src={HOG_HERO} alt="PostHog Code" className="w-full" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <CodeCapabilities />
             </Section>
 
@@ -356,7 +407,7 @@ export default function PostHogCodePageContent() {
                         <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
                             Pull signals from tools your team already uses
                         </h2>
-                        <p className="m-0 text-[15px] leading-relaxed text-secondary">
+                        <p className={`m-0 ${bodyComfort}`}>
                             PostHog Code combines first-party product data and external integrations into one ranked
                             stream of work, so agents can act with context instead of guesswork.
                         </p>
@@ -475,163 +526,111 @@ export default function PostHogCodePageContent() {
                     <div
                         className={`${span5} flex justify-center @lg/reader-content:justify-end @lg/reader-content:pt-1`}
                     >
-                        <div className="w-full max-w-[300px] p-5 @md/reader-content:max-w-[360px] @md/reader-content:p-6 @lg/reader-content:max-w-[420px] @lg/reader-content:p-8">
+                        <div className="w-full max-w-xs p-5 @md/reader-content:max-w-sm @md/reader-content:p-6 @lg/reader-content:max-w-md @lg/reader-content:p-8">
                             <img src={CODE_INTEGRATIONS} alt="" className="w-full object-contain" loading="lazy" />
                         </div>
                     </div>
                 </div>
             </Section>
 
-            <Section id="signals-pipeline" className={`${sectionBorder} ${sectionY}`}>
-                <SignalsInboxFlow />
-            </Section>
-
-            {/* PRODUCT AUTONOMY */}
-            <Section id="product-autonomy" className={`${sectionBorder} ${sectionY}`}>
-                <div className={grid12}>
-                    <div className={span7}>
-                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                            Self-driving development for the work you don&apos;t need to think about
-                        </h2>
-                        <p className="m-0 text-[15px] leading-relaxed text-secondary">
-                            With bug fixes and consumer feedback taken care of on autopilot, you can focus on
-                            higher-leverage work that demand creativity. You stay in the loop, but out of the weeds.
-                        </p>
-                        <CautionLink href="/docs/ai-engineering">
-                            Discover what&apos;s next with code quality filters for the same models you use
-                        </CautionLink>
-                    </div>
-                    <div className={`${span5} flex @lg/reader-content:justify-end`}>
-                        <Hog src={HOG_FAST} alt="Self-driving development" className="mt-6 @lg/reader-content:mt-0" />
-                    </div>
-                </div>
-            </Section>
-
-            {/* AGENTIC ENVIRONMENT */}
-            <Section id="agentic-environment" className={`${sectionBorder} ${sectionY}`}>
-                <DataFlow />
-            </Section>
-
-            {/* INBOX-CENTRIC */}
-            <Section id="inbox-centric" className={`${sectionBorder} ${sectionY}`}>
-                <div className={grid12}>
-                    <div className={span7}>
-                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                            A more intuitive way to build a software product
-                        </h2>
-                        <p className="m-0 mb-5 text-[15px] leading-relaxed text-secondary">
-                            The biggest limit to productivity today is context. PostHog Code is where you get it.
-                            Orchestrate context signals across our database and ship code tailored for performance.
-                        </p>
-                        <ul className="m-0 list-none space-y-4 p-0">
-                            {[
-                                'Maintain focus on user needs instead of ticket sprawl',
-                                'Dramatically lower the cost of engineering output',
-                                'Continuous release cadence',
-                            ].map((line) => (
-                                <li key={line} className="flex gap-3">
-                                    <span className="mt-1.5 flex size-2 shrink-0 rounded-sm bg-brown" aria-hidden />
-                                    <p className="m-0 text-sm leading-relaxed text-secondary">{line}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className={`${span5} flex @lg/reader-content:justify-end`}>
-                        <Hog
-                            src={HOG_BUILD}
-                            alt="Building with PostHog Code"
-                            className="mt-6 @lg/reader-content:mt-0"
-                        />
-                    </div>
-                </div>
-                <div className="mt-8 grid gap-4 @md/reader-content:grid-cols-3">
-                    {NOT_CARDS.map((card) => (
-                        <NotCard key={card.heading} {...card} />
-                    ))}
-                </div>
-            </Section>
+            <div className={`${sectionBorder} ${sectionY}`}>
+                <AutonomousBuildingCapability />
+            </div>
 
             {/* MAINTENANCE VS BUILD */}
             <Section id="maintenance-and-build" className={`${sectionBorder} ${sectionY}`}>
-                <div className="grid gap-8 @lg/reader-content:grid-cols-2 @lg/reader-content:gap-x-10 @lg/reader-content:items-start">
-                    <div className="min-w-0">
-                        <div className="mb-6 max-w-lg">
-                            <ToggleGroup
-                                title="Maintenance or build mode"
-                                hideTitle
-                                className="w-full"
-                                options={[
-                                    { label: 'Maintenance mode', value: 'maintenance' },
-                                    { label: 'Build mode', value: 'build' },
-                                ]}
-                                value={maintenanceBuildMode}
-                                onValueChange={(v) => {
-                                    if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
-                                }}
-                            />
+                <div className="flex flex-col">
+                    <div className={grid12}>
+                        <div className={span7}>
+                            <div className="mb-6 max-w-lg">
+                                <ToggleGroup
+                                    title="Maintenance or build mode"
+                                    hideTitle
+                                    className="w-full"
+                                    options={[
+                                        { label: 'Maintenance mode', value: 'maintenance' },
+                                        { label: 'Build mode', value: 'build' },
+                                    ]}
+                                    value={maintenanceBuildMode}
+                                    onValueChange={(v) => {
+                                        if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
+                                    }}
+                                />
+                            </div>
+                            {maintenanceBuildMode === 'maintenance' ? (
+                                <>
+                                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                        Maintenance mode
+                                    </h2>
+                                    <p className="m-0 mb-4 text-sm font-medium text-secondary">
+                                        When the product tells you something is wrong—errors, funnel drops, regressions,
+                                        noisy experiments—you want a clear queue, not another tab to babysit.
+                                    </p>
+                                    <p className={`m-0 ${bodyComfort}`}>
+                                        PostHog Code ranks those signals into an inbox so you see impact before you pick
+                                        what to unblock. Agents pull replay, stack traces, and usage context into
+                                        reviewable PRs; you stay in approve-and-ship mode instead of re-explaining the
+                                        same incident in chat. It&apos;s the loop you already run for production health,
+                                        with less manual glue between analytics and engineering.
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                        Build mode
+                                    </h2>
+                                    <p className="m-0 mb-4 text-sm font-medium text-secondary">
+                                        When you&apos;re not firefighting, you&apos;re still shipping: roadmap bets,
+                                        polish, refactors, and net-new capability your team already prioritized.
+                                    </p>
+                                    <p className={`m-0 ${bodyComfort}`}>
+                                        The same task and PR workflow applies, but the work starts from your specs and
+                                        ideas—not from an alert. Tasks break into shippable chunks; instrumentation,
+                                        flags, and experiments ride along when you care about safe rollout or proof of
+                                        impact. Maintenance mode reacts to what the product surface is screaming about;
+                                        build mode is how you clear the backlog you chose before anything broke.
+                                    </p>
+                                </>
+                            )}
                         </div>
-                        {maintenanceBuildMode === 'maintenance' ? (
-                            <>
-                                <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                    Maintenance mode
-                                </h2>
-                                <p className="m-0 text-[15px] leading-relaxed text-secondary">
-                                    When bugs, errors, and funnel drops show up in your product data, PostHog Code
-                                    triages them into a prioritized inbox. Agents propose fixes as reviewable PRs so you
-                                    can merge, QA, and ship without pasting context into a chat for every paper cut.
-                                </p>
-                            </>
-                        ) : (
-                            <>
-                                <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                    Build mode
-                                </h2>
-                                <p className="m-0 mb-3 text-sm font-semibold text-primary">What kinds of tasks?</p>
-                                <p className="m-0 mb-4 text-[15px] leading-relaxed text-secondary">
-                                    PostHog Code isn&apos;t just for data-driven bug fixes. The system for shipping a
-                                    fix is the same as the system for shipping any feature. A vague task needs
-                                    definition, then breaking into chunks, then shipping with proper releases planned. A
-                                    small, well-defined task just needs a one-shot fix and QA.
-                                </p>
-                                <p className="m-0 text-[15px] leading-relaxed text-secondary">
-                                    Even inspiration-driven features (not from user data) benefit from PostHog
-                                    Code&apos;s workflow: add event tracking, ship behind a flag, automatically message
-                                    users for feedback, set up an experiment to measure impact. PostHog Code productizes
-                                    best practices for shipping features, not just fixing bugs.
-                                </p>
-                            </>
-                        )}
+                        <div className={`${span5} flex justify-center @lg/reader-content:justify-end`}>
+                            <div className="w-full max-w-xs @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
+                                <Hog
+                                    src={maintenanceBuildMode === 'maintenance' ? HOG_FAST : HOG_BUILD}
+                                    alt={
+                                        maintenanceBuildMode === 'maintenance'
+                                            ? 'Maintenance mode: triage and ship fixes from product data'
+                                            : 'Build mode: ship prioritized product work from your backlog'
+                                    }
+                                    className="mt-6 @lg/reader-content:mt-0"
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex justify-center @lg/reader-content:justify-end">
-                        <div className="w-full max-w-[320px] @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
-                            <Hog
-                                src={maintenanceBuildMode === 'maintenance' ? HOG_FAST : HOG_BUILD}
-                                alt={
-                                    maintenanceBuildMode === 'maintenance'
-                                        ? 'Maintenance mode: triage and ship fixes from product data'
-                                        : 'Build mode: ship features with the same workflow as fixes'
-                                }
-                                className="mt-2 @lg/reader-content:mt-0"
-                            />
-                        </div>
+                    <div className="mt-4 w-full @md/reader-content:mt-5" key={maintenanceBuildMode}>
+                        {maintenanceBuildMode === 'maintenance' ? (
+                            <MaintenanceModePipelineHeader />
+                        ) : (
+                            <BuildModePipelineHeader />
+                        )}
                     </div>
                 </div>
             </Section>
 
             {/* GET STARTED */}
-            <Section id="get-started" className={`${sectionBorder} ${sectionY}`}>
-                <div className={grid12}>
+            <Section id="get-started" className="pt-10 pb-4 @md/reader-content:pt-14 @md/reader-content:pb-5">
+                <div className="grid items-start @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-2">
                     <div className={span7}>
                         <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                            Waking up to three crisp PRs for paper cuts that would have derailed your day? oh,
+                            Waking up to three crisp PRs for paper cuts that would have derailed your day? ah,
                             that&apos;s bliss.
                         </h2>
-                        <p className="m-0 mb-6 text-[15px] leading-relaxed text-secondary">
+                        <p className={`m-0 mb-5 ${bodyComfort}`}>
                             Cursor and Claude Code are great in the editor. PostHog Code keeps identifying product
                             issues from live usage and proposing improvements—so work keeps surfacing without you
                             stitching context together by hand.
                         </p>
-                        <p className="m-0 mb-3 text-sm font-semibold text-primary">
+                        <p className="m-0 mb-5 text-sm font-semibold text-primary @md/reader-content:mb-6">
                             Not sure if PostHog Code is right for you?
                         </p>
                         <div className="flex flex-wrap items-center gap-2">
@@ -649,42 +648,14 @@ export default function PostHogCodePageContent() {
                         </div>
                     </div>
                     <div className={`${span5} flex @lg/reader-content:justify-end`}>
-                        <Hog src={HOG_VIBES} alt="" className="mt-8 @lg/reader-content:mt-0" />
-                    </div>
-                </div>
-            </Section>
-
-            {/* FAQ */}
-            <Section id="faq" className={`${sectionBorder} ${sectionY}`}>
-                <div className={grid12}>
-                    <div className="col-span-12 @lg/reader-content:col-span-4">
-                        <p className="m-0 mb-1 font-code text-[10px] font-semibold uppercase tracking-widest text-muted">
-                            FAQ
-                        </p>
-                        <h2 className="m-0 mb-4 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                            Questions we actually get asked
-                        </h2>
-                        <Hog
-                            src={HOG_GROUP}
-                            alt=""
-                            className="hidden @lg/reader-content:mt-8 @lg/reader-content:flex @lg/reader-content:justify-start"
-                        />
-                    </div>
-                    <div className="col-span-12 @lg/reader-content:col-span-8">
-                        <Accordion
-                            type="single"
-                            skin={true}
-                            items={FAQ_ITEMS}
-                            triggerClassName="!px-3 !py-2 @md/reader-content:!px-4"
-                            contentClassName="!px-3 !py-2.5 @md/reader-content:!px-4 @md/reader-content:!py-3"
-                        />
+                        <Hog src={HOG_VIBES} alt="" className="mt-3 @lg/reader-content:mt-0" />
                     </div>
                 </div>
             </Section>
 
             {/* Final CTA — window-style card (matches in-page demos) */}
-            <div className={sectionY}>
-                <div className="overflow-hidden rounded-md border border-input bg-primary shadow-[0_12px_40px_-16px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+            <div className={`${sectionBorder} pt-4 pb-10 @md/reader-content:pt-5 @md/reader-content:pb-14`}>
+                <div className="overflow-hidden rounded-md border border-input bg-primary shadow-xl dark:shadow-2xl">
                     <div className="flex h-9 min-h-9 shrink-0 items-center gap-3 border-b border-input bg-accent px-3">
                         <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
                             <span className="size-2.5 rounded-full bg-red" />
@@ -738,7 +709,7 @@ export default function PostHogCodePageContent() {
                                     <img
                                         src={HOG_SIGN}
                                         alt=""
-                                        className="block w-full max-w-[200px] object-contain object-bottom @md/reader-content:max-w-[260px]"
+                                        className="block w-full max-w-52 object-contain object-bottom @md/reader-content:max-w-64"
                                         loading="lazy"
                                     />
                                 </div>
@@ -747,6 +718,32 @@ export default function PostHogCodePageContent() {
                     </div>
                 </div>
             </div>
+
+            {/* FAQ */}
+            <Section id="faq" className={`${sectionBorder} ${sectionY}`}>
+                <div className={grid12}>
+                    <div className="col-span-12 @lg/reader-content:col-span-4">
+                        <p className={`m-0 mb-2 @md/reader-content:mb-3 ${sectionLeadIn}`}>FAQ</p>
+                        <h2 className="m-0 mb-4 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                            Questions we actually get asked
+                        </h2>
+                        <Hog
+                            src={HOG_GROUP}
+                            alt=""
+                            className="hidden @lg/reader-content:mt-8 @lg/reader-content:flex @lg/reader-content:justify-start"
+                        />
+                    </div>
+                    <div className="col-span-12 @lg/reader-content:col-span-8">
+                        <Accordion
+                            type="single"
+                            skin={true}
+                            items={FAQ_ITEMS}
+                            triggerClassName="!px-3 !py-2 @md/reader-content:!px-4"
+                            contentClassName="!px-3 !py-2.5 @md/reader-content:!px-4 @md/reader-content:!py-3"
+                        />
+                    </div>
+                </div>
+            </Section>
         </div>
     )
 }

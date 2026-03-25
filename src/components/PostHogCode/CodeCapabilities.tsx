@@ -3,149 +3,168 @@ import {
     IconGear,
     IconGitBranch,
     IconSearch,
-    IconSparkles,
     IconPlus,
     IconCloud,
-    IconLaptop,
     IconX,
     IconGithub,
+    IconGraph,
+    IconToggle,
+    IconFlask,
+    IconWarning,
 } from '@posthog/icons'
-import { IconGrid } from 'components/OSIcons/Icons'
+import Link from 'components/Link'
+import { IconGrid, IconGemini, IconOpenAI, IconAnthropic } from 'components/OSIcons/Icons'
+import { LOGOS, type LogoKey } from 'constants/logos'
 
-interface Skill {
-    id: string
-    title: string
+const HOG_FAST = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
+
+const grid12 = 'grid @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-8'
+const span7 = 'col-span-12 @lg/reader-content:col-span-7'
+const span5 = 'col-span-12 @lg/reader-content:col-span-5'
+
+const bodyComfort = 'text-[15px] leading-relaxed text-secondary'
+const hogArtMax = 'w-full max-w-[280px] @lg/reader-content:max-w-[320px]'
+
+type MCPServerRow = {
+    name: string
     description: string
-    tools?: string[]
-    workflow?: string[]
+    logoKey: LogoKey
 }
 
-const skillsList: Skill[] = [
+/** Logos from `LOGOS` only; copy aligned with common MCP server capabilities. */
+const mcpServerRows: MCPServerRow[] = [
     {
-        id: 'instrument-product-analytics',
-        title: 'Instrument product analytics',
-        description: 'Track meaningful user actions and connect them to PostHog.',
-        tools: ['Read', 'Grep', 'Write', 'Shell'],
-        workflow: [
-            'Identify key user journeys',
-            'Add events and properties',
-            'Ship behind a feature flag',
-            'Verify with test sessions',
-        ],
+        name: 'Attio',
+        description: 'Manage Attio CRM contacts, companies, and deals.',
+        logoKey: 'attio',
     },
     {
-        id: 'instrument-feature-flags',
-        title: 'Instrument feature flags',
-        description: 'Gate new functionality with safe rollouts.',
+        name: 'HubSpot',
+        description: 'Sync contacts, companies, and marketing lifecycle for richer agent context.',
+        logoKey: 'hubspot',
     },
     {
-        id: 'instrument-error-tracking',
-        title: 'Instrument error tracking',
-        description: 'Capture exceptions with stack traces.',
+        name: 'Stripe',
+        description: 'Look up customers, subscriptions, and invoices from billing.',
+        logoKey: 'stripe',
     },
     {
-        id: 'cleaning-up-stale-flags',
-        title: 'Clean up stale feature flags',
-        description: 'Detect unused flags and propose safe removal.',
+        name: 'Salesforce',
+        description: 'Query accounts, opportunities, and CRM records your agents need in context.',
+        logoKey: 'salesforce',
+    },
+    {
+        name: 'Sentry',
+        description: 'Pull issues, releases, and stack traces so agents debug against real errors.',
+        logoKey: 'sentry',
     },
 ]
 
-function SkillsPreview() {
-    const expanded = skillsList[0]
-    const rest = skillsList.slice(1)
-
+function MCPServersPreview() {
     return (
-        <div className="flex flex-1 flex-col overflow-hidden border-t border-primary">
-            <div className="bg-accent border-b border-primary px-4 py-3">
-                <div className="flex items-center gap-2">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-sm border border-primary bg-primary">
-                        <IconSparkles className="size-4 text-yellow" />
-                    </span>
-                    <div>
-                        <p className="m-0 text-xs font-bold text-primary">{expanded.title}</p>
-                        <p className="m-0 mt-0.5 text-[11px] text-secondary leading-snug">{expanded.description}</p>
-                    </div>
-                </div>
-                <div className="mt-3 flex items-start gap-6">
-                    {expanded.tools && (
-                        <div className="min-w-0">
-                            <p className="m-0 text-[10px] font-semibold text-orange uppercase tracking-wide">Tools</p>
-                            <div className="mt-1 flex flex-wrap gap-1">
-                                {expanded.tools.map((t) => (
-                                    <span
-                                        key={t}
-                                        className="rounded border border-primary bg-primary px-1.5 py-0.5 text-[10px] font-medium text-secondary"
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                    {expanded.workflow && (
-                        <div className="min-w-0 flex-1">
-                            <p className="m-0 text-[10px] font-semibold text-orange uppercase tracking-wide">
-                                Workflow
-                            </p>
-                            <ol className="m-0 mt-1 pl-4 text-[11px] text-secondary list-decimal space-y-0.5">
-                                {expanded.workflow.map((step) => (
-                                    <li key={step}>{step}</li>
-                                ))}
-                            </ol>
-                        </div>
-                    )}
-                </div>
-            </div>
-            {rest.map((skill, i) => (
+        <div className="relative flex h-full min-h-0 flex-1 flex-col overflow-hidden border-t border-primary">
+            {mcpServerRows.map((row, i) => (
                 <div
-                    key={skill.id}
-                    className={`flex items-center gap-2.5 px-4 py-2.5 ${
-                        i < rest.length - 1 ? 'border-b border-primary' : ''
+                    key={row.logoKey}
+                    className={`flex min-h-0 flex-1 items-start gap-2.5 px-4 py-3 ${
+                        i < mcpServerRows.length - 1 ? 'border-b border-primary' : ''
                     }`}
                 >
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-sm border border-primary bg-accent">
-                        <IconSparkles className="size-3.5 text-yellow" />
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-sm border border-primary bg-primary">
+                        <img
+                            src={LOGOS[row.logoKey]}
+                            alt=""
+                            className="max-h-4 w-auto max-w-5 object-contain"
+                            aria-hidden
+                        />
                     </span>
                     <div className="min-w-0 flex-1">
-                        <p className="m-0 text-xs font-semibold text-primary">{skill.title}</p>
-                        <p className="m-0 mt-0.5 text-[11px] text-secondary leading-snug line-clamp-1">
-                            {skill.description}
+                        <p className="m-0 text-xs font-semibold text-primary">{row.name}</p>
+                        <p className="m-0 mt-0.5 text-[11px] text-secondary leading-snug line-clamp-2">
+                            {row.description}
                         </p>
                     </div>
                 </div>
             ))}
+            <div
+                className="ph-code-mcp-list-fade pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20"
+                aria-hidden
+            />
+        </div>
+    )
+}
+
+const frontierMetaChipClass = 'rounded border px-1.5 py-0.5 text-[10px] font-medium leading-none'
+
+function ProductAutonomyPitch() {
+    return (
+        <div
+            id="product-autonomy"
+            className="scroll-mt-20 mt-10 border-t border-input pt-10 @md/reader-content:mt-12 @md/reader-content:pt-12"
+        >
+            <div className={grid12}>
+                <div className={span7}>
+                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                        Self-driving development for the work you don&apos;t need to think about
+                    </h2>
+                    <p className={`m-0 ${bodyComfort}`}>
+                        With bug fixes and consumer feedback taken care of on autopilot, you can focus on
+                        higher-leverage work that demand creativity. You stay in the loop, but out of the weeds.
+                    </p>
+                    <Link
+                        to="/docs/ai-engineering"
+                        className="group mt-4 inline-flex items-start gap-2 text-sm font-semibold text-primary"
+                    >
+                        <IconWarning className="mt-0.5 size-4 shrink-0 text-orange" aria-hidden />
+                        <span className="underline decoration-dotted underline-offset-4 group-hover:decoration-solid">
+                            Discover what&apos;s next with code quality filters for the same models you use
+                        </span>
+                    </Link>
+                </div>
+                <div className={`${span5} flex @lg/reader-content:justify-end`}>
+                    <div className="flex w-full items-end justify-center">
+                        <img
+                            src={HOG_FAST}
+                            alt="Self-driving development"
+                            className={`mt-6 @lg/reader-content:mt-0 ${hogArtMax}`}
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
 function EmptyCell() {
     return (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center">
-            <span className="flex items-center gap-1.5 rounded border border-dashed border-primary px-3 py-1.5 text-xs text-secondary">
-                <IconPlus className="size-3" />
+        <div className="flex h-full min-h-0 w-full flex-col items-center justify-center gap-1 px-2 py-2 text-center">
+            <span className="flex items-center gap-1 rounded border border-dashed border-primary px-2 py-1 text-[10px] text-secondary">
+                <IconPlus className="size-2.5 shrink-0" />
                 Add task
             </span>
-            <span className="text-[11px] text-secondary/50">or drag a task from the sidebar</span>
+            <span className="text-[9px] leading-tight text-secondary/50">or drag from sidebar</span>
         </div>
     )
 }
 
 function ActiveTaskCell() {
     return (
-        <div className="flex h-full w-full flex-col gap-3 p-4">
-            <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-primary">Fix onboarding step 3</span>
+        <div className="flex h-full min-h-0 w-full flex-col gap-1.5 p-2">
+            <div className="flex items-center justify-between gap-2">
+                <span className="min-w-0 truncate text-[10px] font-semibold text-primary">
+                    Fix race in webhook retry queue
+                </span>
                 <span className="shrink-0 rounded-sm bg-green/10 px-1.5 py-0.5 text-[10px] font-medium text-green dark:bg-green/20">
                     Running
                 </span>
             </div>
-            <div className="flex-1 rounded border border-primary bg-accent p-2.5 font-mono text-[10px] leading-relaxed text-secondary">
-                <p className="m-0 text-green">✓ Identified root cause in OnboardingStep3.tsx</p>
-                <p className="m-0 text-green">✓ Applied fix: null-check on user.preferences</p>
-                <p className="m-0 text-blue">→ Running 12 affected tests...</p>
+            <div className="rounded border border-primary bg-accent px-2 py-1.5 font-code text-[9px] leading-snug text-secondary">
+                <p className="m-0 text-green">✓ Serialize retries with mutex</p>
+                <p className="m-0 text-blue">→ Running affected integration tests…</p>
             </div>
-            <div className="h-1 w-full overflow-hidden rounded-full bg-accent">
-                <div className="h-full w-[72%] rounded-full bg-green" />
+            <div className="mt-auto h-1 w-full overflow-hidden rounded-full bg-accent">
+                <div className="h-full w-3/4 rounded-full bg-green" />
             </div>
         </div>
     )
@@ -153,38 +172,38 @@ function ActiveTaskCell() {
 
 function CommandCenterPreview() {
     return (
-        <div className="flex flex-1 flex-col overflow-hidden border-t border-primary">
-            <div className="flex items-center justify-between border-b border-primary px-4 py-2.5">
-                <div className="flex items-center gap-2">
-                    <IconGrid className="size-4 text-secondary" />
-                    <span className="text-xs font-semibold text-primary">Command Center</span>
+        <div className="flex h-full min-h-0 flex-1 flex-col overflow-hidden border-t border-primary">
+            <div className="shrink-0 flex items-center justify-between border-b border-primary px-3 py-1.5">
+                <div className="flex items-center gap-1.5">
+                    <IconGrid className="size-3.5 text-secondary" />
+                    <span className="text-[10px] font-semibold text-primary">Command Center</span>
                 </div>
             </div>
-            <div className="flex items-center justify-between border-b border-primary px-4 py-2">
-                <div className="flex items-center gap-3">
-                    <span className="rounded border border-primary px-2 py-0.5 text-xs text-secondary">2x2</span>
-                    <div className="flex items-center gap-1 text-xs text-secondary">
-                        <IconSearch className="size-3" />
+            <div className="shrink-0 flex items-center justify-between border-b border-primary px-3 py-1.5">
+                <div className="flex items-center gap-2">
+                    <span className="rounded border border-primary px-1.5 py-0.5 text-[10px] text-secondary">2x2</span>
+                    <div className="flex items-center gap-1 text-[10px] text-secondary">
+                        <IconSearch className="size-2.5" />
                         <span>100%</span>
-                        <IconGear className="size-3" />
+                        <IconGear className="size-2.5" />
                     </div>
                 </div>
-                <div className="flex items-center gap-3">
-                    <span className="text-xs font-medium text-red">Stop All</span>
-                    <span className="text-xs text-secondary">Clear</span>
+                <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-medium text-red">Stop All</span>
+                    <span className="text-[10px] text-secondary">Clear</span>
                 </div>
             </div>
-            <div className="flex-1 grid grid-cols-2 grid-rows-2">
-                <div className="border-r border-b border-primary">
+            <div className="grid min-h-0 flex-1 grid-cols-2 grid-rows-[repeat(2,minmax(4.5rem,1fr))] border-t border-primary">
+                <div className="flex min-h-0 overflow-hidden border-r border-b border-primary">
                     <ActiveTaskCell />
                 </div>
-                <div className="border-b border-primary">
+                <div className="flex min-h-0 overflow-hidden border-b border-primary">
                     <EmptyCell />
                 </div>
-                <div className="border-r border-primary">
+                <div className="flex min-h-0 overflow-hidden border-r border-primary">
                     <EmptyCell />
                 </div>
-                <div>
+                <div className="flex min-h-0 overflow-hidden">
                     <EmptyCell />
                 </div>
             </div>
@@ -286,7 +305,7 @@ function SignalsInboxPreview() {
             </div>
 
             {selected && (
-                <div className="hidden @md/reader-content:flex w-[320px] flex-col border-l border-primary shrink-0">
+                <div className="hidden w-80 shrink-0 flex-col border-l border-primary @md/reader-content:flex">
                     <div className="p-4 border-b border-primary">
                         <div className="flex items-start justify-between gap-2">
                             <p className="m-0 text-xs font-semibold leading-snug text-primary">{selected.title}</p>
@@ -360,132 +379,149 @@ function CapabilityCard({ title, description, children }: CapabilityCardProps) {
     )
 }
 
-const executionModes = [
+type FrontierModelRow = {
+    id: string
+    title: string
+    Icon: React.ComponentType<{ className?: string }>
+    iconClassName: string
+    /** Coding-capable models exposed for this provider (update as APIs ship new IDs). */
+    models?: string[]
+    comingSoon?: boolean
+}
+
+const frontierModelRows: FrontierModelRow[] = [
     {
-        icon: IconGitBranch,
-        title: 'Worktree',
-        label: 'Recommended for parallel work',
-        description:
-            'Creates an isolated copy of your local project so an agent can work alongside you without conflicts. You keep coding on your branch while the agent works on its own.',
+        id: 'openai',
+        title: 'OpenAI · Codex',
+        Icon: IconOpenAI,
+        iconClassName: 'text-primary',
+        models: ['GPT-5.2', 'GPT-5.3-codex'],
     },
     {
-        icon: IconLaptop,
-        title: 'Local',
-        label: 'Most permissionless',
-        description:
-            'Runs directly on your machine, editing files in-place like a second pair of hands. Closest to how developers use AI coding tools today, with full access to your local environment and tools.',
+        id: 'anthropic',
+        title: 'Anthropic · Claude Code',
+        Icon: IconAnthropic,
+        iconClassName: 'text-primary',
+        models: ['Claude Sonnet 4.6', 'Claude Opus 4.6', 'Claude Haiku 4.5'],
     },
     {
-        icon: IconCloud,
-        title: 'Cloud',
-        label: 'Preferred for async work',
-        description:
-            'Tasks execute in a cloud sandbox. The agent clones your repo, does its work, and pushes to a branch. Assign tasks before you leave and wake up to PRs ready for review.',
+        id: 'gemini',
+        title: 'Google · Gemini',
+        Icon: IconGemini,
+        iconClassName: '',
+        comingSoon: true,
+    },
+    {
+        id: 'byok',
+        title: 'BYOK and other models',
+        Icon: IconGear,
+        iconClassName: 'text-brown',
+        comingSoon: true,
     },
 ]
 
-function ExecutionModes() {
-    return (
-        <div className="grid gap-px overflow-hidden rounded-md border border-primary @md/reader-content:grid-cols-3">
-            {executionModes.map((mode, i) => (
-                <div
-                    key={mode.title}
-                    className={`flex flex-col px-5 py-5 ${
-                        i < executionModes.length - 1
-                            ? '@md/reader-content:border-r border-b @md/reader-content:border-b-0 border-primary'
-                            : ''
-                    }`}
-                >
-                    <mode.icon className="size-6 text-primary" />
-                    <p className="m-0 mt-3 text-base font-bold text-primary">{mode.title}</p>
-                    <p className="m-0 mt-0.5 text-xs font-medium text-orange">{mode.label}</p>
-                    <p className="m-0 mt-2 text-sm leading-relaxed text-secondary">{mode.description}</p>
-                </div>
-            ))}
-        </div>
-    )
-}
-
 function UnderTheHood() {
     return (
-        <div className="flex flex-1 flex-col overflow-hidden border-t border-primary">
-            <div className="flex-1 overflow-hidden px-5 py-4 @md/reader-content:px-6">
-                <p className="m-0 text-sm leading-relaxed text-secondary">
-                    PostHog Code runs on the same frontier models you already use — at the same prices you already pay.
-                    No markup, no lock-in, no proprietary model you&apos;re forced to trust. Bring the model you know is
-                    best right now. Swap it when something better ships.
-                </p>
-                <div className="mt-3 flex items-start gap-2 text-sm leading-relaxed text-secondary">
-                    <IconGear className="mt-0.5 size-4 text-brown" aria-hidden />
-                    <span>Same models. Same pricing. No lock-in.</span>
-                </div>
-            </div>
+        <div className="flex h-full min-h-0 flex-1 flex-col overflow-hidden border-t border-primary">
+            {frontierModelRows.map((row, i) => {
+                const RowIcon = row.Icon
+                return (
+                    <div
+                        key={row.id}
+                        className={`flex min-h-0 flex-1 items-start gap-2.5 px-4 py-3 ${
+                            i < frontierModelRows.length - 1 ? 'border-b border-primary' : ''
+                        }`}
+                    >
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-sm border border-primary bg-primary">
+                            <RowIcon className={`size-4 ${row.iconClassName}`} aria-hidden />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                            <p className="m-0 text-xs font-semibold text-primary">{row.title}</p>
+                            {row.comingSoon ? (
+                                <span
+                                    className={`mt-1.5 inline-flex border-input bg-accent text-muted opacity-80 ${frontierMetaChipClass}`}
+                                >
+                                    Coming soon
+                                </span>
+                            ) : row.models && row.models.length > 0 ? (
+                                <ul className="m-0 mt-1.5 flex list-none flex-wrap gap-1 p-0">
+                                    {row.models.map((name) => (
+                                        <li
+                                            key={name}
+                                            className={`border-primary bg-primary text-secondary ${frontierMetaChipClass}`}
+                                        >
+                                            {name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : null}
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
-const instrumentationCards = [
+type InstrumentationCard = {
+    title: string
+    body: string
+    Icon: React.ComponentType<{ className?: string }>
+    /** Matches product color tokens from `useProducts` / product data */
+    iconClassName: string
+}
+
+const instrumentationCards: InstrumentationCard[] = [
     {
-        title: 'Feature flag setup',
-        body: 'Writes the flag, wires the SDK calls, scopes the rollout — as part of the same PR that ships the feature. Instrumentation isn’t a follow-up ticket.',
-        code: 'posthog.isFeatureEnabled()',
+        title: 'Event tracking in the PR',
+        body: 'Adds posthog.capture for the journeys that matter so you have real charts when you merge, not a ticket for next sprint.',
+        Icon: IconGraph,
+        iconClassName: 'text-blue',
     },
     {
-        title: 'Managed rollouts',
-        body: 'Staged rollout by percentage, cohort, or user property. Ramps automatically. Pauses on a spike. You define the exit criteria; it handles the gates.',
-        code: 'rollout: 5% → 25% → 100%',
+        title: 'Feature flags and rollouts',
+        body: 'Creates the flag, wires isFeatureEnabled, and configures staged rollout in the same change set.',
+        Icon: IconToggle,
+        iconClassName: 'text-seagreen',
     },
     {
-        title: 'Health checks on a cron',
-        body: 'Schedules a check-in after launch — error rate, conversion, p99 latency, whatever you care about. Comes back with a verdict. No one has to remember to look.',
-        code: 'Cron: 24h post-deploy',
+        title: 'Experiments',
+        body: 'Scaffolds variants, split, and goal metric so you can read a winner before you iterate again.',
+        Icon: IconFlask,
+        iconClassName: 'text-purple',
     },
     {
-        title: 'Stale flag removal',
-        body: 'Finds flags that have been at 100% rollout for 30 days and nobody’s touched. Opens a PR to remove the branch, clean the calls, delete the flag. Your codebase stays readable.',
-        code: 'cleanup: 30d : 100% rollout',
+        title: 'Error tracking',
+        body: 'Wires exception capture so new code surfaces in PostHog with stack traces, not only in server logs.',
+        Icon: IconWarning,
+        iconClassName: 'text-orange',
     },
-    {
-        title: 'Event tracking, written for you',
-        body: 'Reads the feature you build, infers what matters to track, and adds the posthog.capture() calls. You get a PostHog dashboard on day one, not three weeks later.',
-        code: "posthog.capture('feature_used')",
-    },
-    {
-        title: 'A/B test scaffolding',
-        body: 'Sets up the experiment, splits the variants, attaches the goal metric. When the cron checks in, it knows whether to call it or keep running.',
-        code: 'experiment: control vs variant_a',
-    },
-] as const
+]
 
 function InstantInstrumentation() {
     return (
-        <div className="flex flex-1 flex-col overflow-hidden border-t border-primary">
-            <div className="flex-1 overflow-hidden px-5 py-4 @md/reader-content:px-6">
-                <p className="m-0 text-sm leading-relaxed text-secondary">
-                    Most teams treat instrumentation as an afterthought — a ticket that lives at the bottom of the
-                    backlog until someone notices the metrics are wrong. PostHog Code makes instrumentation part of the
-                    build, not a follow-up task for next sprint.
-                </p>
-
-                <div className="mt-4 grid grid-cols-2 gap-2 overflow-hidden">
-                    {instrumentationCards.map((card) => (
-                        <div key={card.title} className="flex flex-col rounded-sm border border-input bg-primary/5 p-2">
-                            <div className="flex items-start justify-between gap-2">
-                                <p className="m-0 text-[11px] font-semibold text-primary line-clamp-1">{card.title}</p>
-                                <span className="flex size-6 items-center justify-center rounded-sm border border-input bg-accent shrink-0">
-                                    <IconSparkles className="size-3 text-yellow" aria-hidden />
-                                </span>
-                            </div>
-                            <p className="m-0 mt-1 text-sm leading-relaxed text-secondary line-clamp-3">{card.body}</p>
-                            <div className="mt-2">
-                                <span className="inline-flex max-w-full items-center rounded-sm border border-input bg-accent px-2 py-1 font-mono text-[10px] text-muted truncate">
-                                    {card.code}
-                                </span>
-                            </div>
+        <div className="flex h-full min-h-0 flex-1 flex-col overflow-hidden border-t border-primary">
+            {instrumentationCards.map((card, i) => {
+                const RowIcon = card.Icon
+                return (
+                    <div
+                        key={card.title}
+                        className={`flex min-h-0 flex-1 items-start gap-2.5 px-4 py-3 ${
+                            i < instrumentationCards.length - 1 ? 'border-b border-primary' : ''
+                        }`}
+                    >
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-sm border border-primary bg-primary">
+                            <RowIcon className={`size-4 ${card.iconClassName}`} aria-hidden />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                            <p className="m-0 text-xs font-semibold text-primary">{card.title}</p>
+                            <p className="m-0 mt-0.5 text-[11px] text-secondary leading-snug line-clamp-2">
+                                {card.body}
+                            </p>
                         </div>
-                    ))}
-                </div>
-            </div>
+                    </div>
+                )
+            })}
         </div>
     )
 }
@@ -494,39 +530,60 @@ export function CodeCapabilities() {
     return (
         <div className="mt-10 @md/reader-content:mt-14 flex flex-col gap-6">
             <div className="grid gap-6 @md/reader-content:grid-cols-2">
-                <CapabilityCard title="Under the hood" description="We're the engine. You pick the fuel.">
-                    <UnderTheHood />
-                </CapabilityCard>
-
-                <CapabilityCard title="Instant instrumentation" description="Shipped isn’t done until it’s measured.">
-                    <InstantInstrumentation />
-                </CapabilityCard>
-            </div>
-
-            <div className="grid gap-6 @md/reader-content:grid-cols-2">
                 <CapabilityCard
-                    title="Connected to your company"
-                    description="Skills package your tools, repos, and workflows into repeatable automations any agent can run."
+                    title="No compromises on coding"
+                    description="We're the engine. You pick the fuel. PostHog Code runs on the same frontier models you already use — at the same prices you already pay."
                 >
-                    <SkillsPreview />
+                    <UnderTheHood />
                 </CapabilityCard>
 
                 <CapabilityCard
                     title="Agent orchestration"
-                    description="Delegate individual coding tasks, or use the command center to spin up to 3x3 parallel agents. Our engineers call it dopamine mode (you'll understand why)."
+                    description="Delegate individual tasks, or use the command center to spin up parallel agents. Our engineers call it dopamine mode (you'll see why)."
                 >
                     <CommandCenterPreview />
                 </CapabilityCard>
             </div>
 
+            <ProductAutonomyPitch />
+
+            <div className="grid gap-6 @md/reader-content:grid-cols-2">
+                <CapabilityCard
+                    title="MCP servers"
+                    description="Manage MCP servers for your AI agents. Connect external services to extend your agent's capabilities."
+                >
+                    <MCPServersPreview />
+                </CapabilityCard>
+
+                <CapabilityCard
+                    title="Instant instrumentation"
+                    description="Events, flags, experiments, and error tracking land in the same PR as the product change."
+                >
+                    <InstantInstrumentation />
+                </CapabilityCard>
+            </div>
+        </div>
+    )
+}
+
+export function AutonomousBuildingCapability() {
+    return (
+        <div className="flex flex-col gap-5 @md/reader-content:gap-6">
+            <div>
+                <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                    The signals inbox – like a spam filter for product data
+                </h2>
+                <p className={`m-0 max-w-3xl ${bodyComfort}`}>
+                    Signals are clustered and ranked by impact and urgency. You see a triaged inbox, not an overwhelming
+                    wall of data.
+                </p>
+            </div>
             <CapabilityCard
                 title="Autonomous building for the whole team"
                 description="Signals surface what matters most, turning product data into prioritized tasks agents execute."
             >
                 <SignalsInboxPreview />
             </CapabilityCard>
-
-            <ExecutionModes />
         </div>
     )
 }

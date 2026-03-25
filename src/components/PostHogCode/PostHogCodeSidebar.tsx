@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconBolt, IconBook, IconHome, IconMagicWand, IconQuestion, IconRocket, IconWrench } from '@posthog/icons'
+import { IconBolt, IconBook, IconHome, IconQuestion, IconRocket, IconWrench } from '@posthog/icons'
 
 /** Labels follow the V2 mockup; `id` values match on-page section anchors. */
 const NAV_ITEMS = [
     { id: 'overview', name: 'Overview', icon: IconHome },
     { id: 'product-autonomy', name: 'Product autonomy', icon: IconRocket },
-    { id: 'agentic-environment', name: 'Agentic environment', icon: IconMagicWand },
     { id: 'signals', name: 'Signals', icon: IconBolt },
     { id: 'maintenance-and-build', name: 'Maintenance & build', icon: IconWrench },
     { id: 'get-started', name: 'Get started', icon: IconBook },
