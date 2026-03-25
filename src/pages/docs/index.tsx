@@ -55,6 +55,12 @@ const processDocsMenu = () => {
                 icon: 'IconMagicWand',
                 color: 'purple',
             },
+            {
+                name: 'PostHog Code',
+                url: '/posthog-code',
+                icon: 'IconCode',
+                color: 'brown',
+            },
         ],
     }
 

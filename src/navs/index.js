@@ -2693,6 +2693,12 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/ai-wizard',
                         },
                         {
+                            name: 'PostHog Code',
+                            url: '/posthog-code',
+                            icon: 'IconCode',
+                            color: 'brown',
+                        },
+                        {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
                             children: [

@@ -1,0 +1,752 @@
+import React, { useState } from 'react'
+import { CallToAction } from 'components/CallToAction'
+import Link from 'components/Link'
+import { Accordion } from 'components/RadixUI/Accordion'
+import { RadioGroup } from 'components/RadixUI/RadioGroup'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import CloudinaryImage from 'components/CloudinaryImage'
+import {
+    IconX,
+    IconGitBranch,
+    IconBolt,
+    IconCode,
+    IconWarning,
+    IconMagicWand,
+    IconListCheck,
+    IconSparkles,
+} from '@posthog/icons'
+import { getLogo, type LogoKey } from 'constants/logos'
+import { CodeCapabilities } from './CodeCapabilities'
+import { SignalsInboxFlow } from './SignalsInboxFlow'
+
+const HOG_HERO = 'https://res.cloudinary.com/dmukukwp6/image/upload/code_hero_image_6feaee4045.png'
+const HOG_FAST = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
+const HOG_BUILD = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_build_3e19fb38f5.png'
+const CODE_INTEGRATIONS = 'https://res.cloudinary.com/dmukukwp6/image/upload/code_integrations_9862a03308.png'
+const HOG_GROUP = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_group_6585f20d72.png'
+const HOG_VIBES = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_vibes_ec21263650.png'
+const HOG_SIGN = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_sign_77c93a843c.png'
+
+/** Square favicons for “Ask …” CTAs (Google favicon cache, 64px). */
+const ASK_AI_FAVICONS = {
+    chatgpt: 'https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64',
+    claude: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=64',
+    gemini: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64',
+} as const
+
+/** Matches teams / reader patterns: 12-col grid inside @container/reader-content */
+const grid12 = 'grid @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-8'
+const span7 = 'col-span-12 @lg/reader-content:col-span-7'
+const span5 = 'col-span-12 @lg/reader-content:col-span-5'
+
+const sectionY = 'py-10 @md/reader-content:py-14'
+const sectionBorder = 'border-b border-input'
+
+const HERO_OVERVIEW_LINES: { label: string; Icon: typeof IconBolt }[] = [
+    { label: 'Multi-model agent orchestration – use Claude Code and Codex in one place', Icon: IconMagicWand },
+    { label: 'Product signals inbox – triage issues and prioritize product work', Icon: IconListCheck },
+    { label: 'Agentic development environment – build features as fast as your roadmap', Icon: IconCode },
+]
+
+function HeroOverviewLabel({ label }: { label: string }) {
+    const parts = label.split(' – ')
+    if (parts.length < 2) {
+        return <span className="text-sm font-medium text-primary">{label}</span>
+    }
+
+    const [head, ...tailParts] = parts
+    const tail = tailParts.join(' – ')
+
+    return (
+        <>
+            <span className="text-sm font-medium text-primary">{head}</span>
+            <span className="text-sm text-secondary"> – {tail}</span>
+        </>
+    )
+}
+
+const Section = ({ id, children, className = '' }: { id: string; children: React.ReactNode; className?: string }) => (
+    <section id={id} className={`scroll-mt-20 ${className}`}>
+        {children}
+    </section>
+)
+
+function CautionLink({ href, children }: { href: string; children: React.ReactNode }) {
+    return (
+        <Link to={href} className="group mt-4 inline-flex items-start gap-2 text-sm font-semibold text-primary">
+            <IconWarning className="mt-0.5 size-4 shrink-0 text-orange" aria-hidden />
+            <span className="underline decoration-dotted underline-offset-4 group-hover:decoration-solid">
+                {children}
+            </span>
+        </Link>
+    )
+}
+
+function Hog({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
+    return (
+        <div className={`flex items-end justify-center ${className}`}>
+            <img src={src} alt={alt} className="w-full max-w-[280px] @lg/reader-content:max-w-[320px]" loading="lazy" />
+        </div>
+    )
+}
+
+function AskAiCta({ href, label, iconSrc }: { href: string; label: string; iconSrc: string }) {
+    return (
+        <CallToAction type="secondary" size="md" href={href} externalNoIcon>
+            <span className="inline-flex items-center justify-center gap-2">
+                <img
+                    src={iconSrc}
+                    alt=""
+                    width={16}
+                    height={16}
+                    className="size-4 shrink-0 object-contain"
+                    loading="lazy"
+                />
+                {label}
+            </span>
+        </CallToAction>
+    )
+}
+
+function DataFlow() {
+    return (
+        <aside
+            data-scheme="primary"
+            className="rounded-sm border border-input bg-accent px-4 py-5 @md/reader-content:px-6 @md/reader-content:py-6"
+        >
+            <div className="flex gap-3 @md/reader-content:gap-4">
+                <IconSparkles className="mt-0.5 size-5 shrink-0 text-yellow @md/reader-content:size-6" aria-hidden />
+                <div className="min-w-0 flex-1">
+                    <p className="m-0 text-base font-bold leading-snug text-primary @md/reader-content:text-lg">
+                        It&apos;s not magic, it&apos;s data
+                    </p>
+                    <p className="m-0 mt-3 text-sm leading-relaxed text-secondary @md/reader-content:text-[15px]">
+                        Your product data shouldn’t just inform decisions — it should decide what gets built. The
+                        autonomous, informed development loop is finally complete.
+                    </p>
+                </div>
+            </div>
+        </aside>
+    )
+}
+
+const MODEL_LOGOS: LogoKey[] = ['cohere', 'mistral', 'azureOpenAI', 'togetherAI', 'deepseek']
+
+const NOT_CARDS: {
+    heading: string
+    body: string
+    link?: { href: string; label: string }
+    modelRow?: boolean
+    searchPlaceholder?: string
+}[] = [
+    {
+        heading: 'not another dashboard',
+        body: 'Skip straight to product analytics that drive code changes—not another dashboard you scroll past instead of shipping.',
+        link: { href: '/docs', label: 'Show me dashboarding' },
+    },
+    {
+        heading: 'not a model harness',
+        body: 'We are the engine that powers the agent—context in, prioritized work out—not a thin harness on a single model vendor.',
+        modelRow: true,
+    },
+    {
+        heading: 'not a one-size fits all',
+        body: 'Built for engineers: open source, forkable, and meant to fit how your team ships—not a rigid hosted black box.',
+        link: { href: 'https://github.com/PostHog/posthog', label: 'See open source repo' },
+        searchPlaceholder: 'Search everything…',
+    },
+]
+
+const FAQ_ITEMS = [
+    {
+        trigger: 'Why is PostHog building a code editor?',
+        content: (
+            <p className="m-0">
+                We&apos;re connecting product data to how code ships: an inbox and agent surface grounded in real usage,
+                with PRs as the handoff—not a generic IDE replacement.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Is my data safe?',
+        content: (
+            <p className="m-0">
+                PostHog takes infrastructure and privacy seriously. See{' '}
+                <Link to="/privacy" className="font-semibold underline">
+                    Privacy
+                </Link>{' '}
+                and{' '}
+                <Link to="/dpa" className="font-semibold underline">
+                    DPA
+                </Link>{' '}
+                for how we handle customer data.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Does PostHog Code replace Cursor, Copilot or Claude Code?',
+        content: (
+            <p className="m-0">
+                No. Those tools excel at editing in your IDE. PostHog Code prioritizes work from product signals and
+                turns it into reviewable PRs. Many teams will use both.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I modify my training configuration?',
+        content: (
+            <p className="m-0">
+                PostHog Code is model-agnostic. You choose providers and bring your own API keys; configuration is yours
+                to adjust.
+            </p>
+        ),
+    },
+    {
+        trigger: "What if I don't use PostHog yet?",
+        content: (
+            <p className="m-0">
+                Sign up for PostHog and join the waitlist. PostHog Code is built on the same project and permissions
+                model as the rest of the platform.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can it make its own decisions?',
+        content: (
+            <p className="m-0">
+                Agents propose plans and diffs; you stay in the loop to approve, edit, or reject. Nothing merges without
+                your review.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Is my code used in PostHog?',
+        content: (
+            <p className="m-0">
+                Your repository stays yours. How we process product and integration data is described in our{' '}
+                <Link to="/privacy" className="font-semibold underline">
+                    Privacy
+                </Link>{' '}
+                policy—talk to us if you need a deeper review.
+            </p>
+        ),
+    },
+    {
+        trigger: 'How much does PostHog Code cost?',
+        content: (
+            <p className="m-0">
+                Pricing is still being finalized for general availability. Check{' '}
+                <Link to="/pricing" className="font-semibold underline">
+                    Pricing
+                </Link>{' '}
+                for current PostHog plans and watch this page for Code-specific details.
+            </p>
+        ),
+    },
+]
+
+function NotCard({ heading, body, link, modelRow, searchPlaceholder }: (typeof NOT_CARDS)[number]) {
+    return (
+        <div className="relative flex h-full flex-col border border-input bg-accent p-5 @md/reader-content:p-6">
+            <IconX className="absolute right-2.5 top-2.5 size-3.5 text-muted/40" aria-hidden />
+            <h3 className="m-0 mb-2 pr-6 font-code text-[10px] font-bold uppercase tracking-wide text-primary">
+                {heading}
+            </h3>
+            <p className="m-0 flex-1 text-sm leading-relaxed text-secondary">{body}</p>
+            {modelRow ? (
+                <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-input pt-4">
+                    {MODEL_LOGOS.map((key) => {
+                        const src = getLogo(key)
+                        if (!src) return null
+                        return (
+                            <div
+                                key={key}
+                                className="flex size-9 items-center justify-center rounded-sm border border-input bg-primary p-1.5"
+                            >
+                                <CloudinaryImage
+                                    src={src as `https://res.cloudinary.com/${string}`}
+                                    alt={key}
+                                    className="max-h-5 max-w-full object-contain"
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+            ) : null}
+            {link ? (
+                <Link
+                    to={link.href}
+                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                    external={link.href.startsWith('http')}
+                >
+                    {link.label}
+                    <span aria-hidden>→</span>
+                </Link>
+            ) : null}
+            {searchPlaceholder ? (
+                <div
+                    className="mt-4 rounded-sm border border-input bg-primary px-3 py-2 font-code text-xs text-muted"
+                    aria-hidden
+                >
+                    {searchPlaceholder}
+                </div>
+            ) : null}
+        </div>
+    )
+}
+
+export default function PostHogCodePageContent() {
+    const [waitlistAudience, setWaitlistAudience] = useState('already_posthog')
+    const [maintenanceBuildMode, setMaintenanceBuildMode] = useState<'maintenance' | 'build'>('maintenance')
+    const [signalsSourceMode, setSignalsSourceMode] = useState<'products' | 'integrations'>('products')
+    const mcpIntegrationLogos: LogoKey[] = ['sentry', 'slack', 'linear', 'github']
+
+    return (
+        <div className="not-prose w-full pb-8">
+            {/* OVERVIEW */}
+            <Section
+                id="overview"
+                className={`${sectionBorder} pb-10 @md/reader-content:pb-14 pt-3 @md/reader-content:pt-5`}
+            >
+                <div className={grid12}>
+                    <div className={span7}>
+                        <h1 className="m-0 mb-4 text-3xl font-bold leading-tight text-primary @md/reader-content:text-4xl @lg/reader-content:text-[2.5rem]">
+                            Switch on self-driving development for your product
+                        </h1>
+                        <p className="m-0 mb-6 max-w-xl text-[15px] leading-relaxed text-secondary">
+                            PostHog Code is an agentic development environment that understands your product signals,
+                            reasons about user behavior, and ships PRs without you needing to steer. You stay in the
+                            loop, but not in the weeds.
+                        </p>
+                        <ul className="m-0 mb-6 list-none space-y-3 p-0">
+                            {HERO_OVERVIEW_LINES.map(({ label, Icon }) => (
+                                <li key={label} className="flex items-center gap-2.5">
+                                    <span className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
+                                        <Icon className="size-4 text-brown" aria-hidden />
+                                    </span>
+                                    <HeroOverviewLabel label={label} />
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="flex flex-wrap items-center gap-2">
+                            <CallToAction type="primary" size="sm" href="https://app.posthog.com/signup">
+                                Get early access
+                            </CallToAction>
+                            <CallToAction
+                                type="secondary"
+                                size="sm"
+                                href="https://github.com/PostHog/posthog"
+                                externalNoIcon
+                            >
+                                View our source code
+                            </CallToAction>
+                        </div>
+                    </div>
+                    <div className={`${span5} flex @lg/reader-content:justify-end`}>
+                        <Hog src={HOG_HERO} alt="PostHog Code" className="mt-4 @lg/reader-content:mt-0" />
+                    </div>
+                </div>
+                <CodeCapabilities />
+            </Section>
+
+            {/* SIGNALS */}
+            <Section id="signals" className={`${sectionBorder} ${sectionY}`}>
+                <div className={grid12}>
+                    <div className={span7}>
+                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                            Pull signals from tools your team already uses
+                        </h2>
+                        <p className="m-0 text-[15px] leading-relaxed text-secondary">
+                            PostHog Code combines first-party product data and external integrations into one ranked
+                            stream of work, so agents can act with context instead of guesswork.
+                        </p>
+                        <div className="mt-5 max-w-xl">
+                            <ToggleGroup
+                                title="Signal source mode"
+                                hideTitle
+                                className="w-full"
+                                options={[
+                                    { label: 'PostHog products', value: 'products' },
+                                    { label: 'External integrations', value: 'integrations' },
+                                ]}
+                                value={signalsSourceMode}
+                                onValueChange={(v) => {
+                                    if (v === 'products' || v === 'integrations') setSignalsSourceMode(v)
+                                }}
+                            />
+                        </div>
+                        <div className="mt-4 rounded-sm border border-input bg-accent p-4">
+                            <div className="flex items-start justify-between gap-3">
+                                <div className="flex items-start gap-3">
+                                    <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-primary">
+                                        <IconSparkles className="size-4 text-yellow" aria-hidden />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="m-0 text-sm font-semibold text-primary">
+                                            {signalsSourceMode === 'products'
+                                                ? 'Native sources inside PostHog'
+                                                : 'External sources via MCP'}
+                                        </p>
+                                        <p className="m-0 mt-1 text-sm leading-relaxed text-secondary">
+                                            {signalsSourceMode === 'products'
+                                                ? 'PostHog turns product behavior into signals agents can act on.'
+                                                : 'MCP connects tools once, then normalizes results into the same task schema.'}
+                                        </p>
+                                    </div>
+                                </div>
+                                <span
+                                    className={`shrink-0 rounded-sm border px-2 py-1 text-[11px] font-semibold ${
+                                        signalsSourceMode === 'products'
+                                            ? 'border-orange/40 bg-orange/10 text-orange'
+                                            : 'border-blue/40 bg-blue/10 text-blue'
+                                    }`}
+                                >
+                                    {signalsSourceMode === 'products' ? 'PostHog' : 'MCP'}
+                                </span>
+                            </div>
+
+                            <div className="mt-3 rounded-sm border border-input bg-primary/10 p-3">
+                                {signalsSourceMode === 'products' ? (
+                                    <>
+                                        <p className="m-0 text-[11px] font-semibold uppercase tracking-wide text-orange">
+                                            What agents already get
+                                        </p>
+                                        <ul className="mt-2 space-y-1.5">
+                                            {[
+                                                'Product analytics',
+                                                'Session replay',
+                                                'Experiments',
+                                                'Error tracking',
+                                            ].map((label) => (
+                                                <li key={label} className="flex items-center gap-2">
+                                                    <span className="size-2 rounded-sm bg-brown" aria-hidden />
+                                                    <span className="text-sm text-secondary">{label}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="flex items-center justify-between gap-3">
+                                            <p className="m-0 text-[11px] font-semibold uppercase tracking-wide text-secondary">
+                                                Possible via MCP
+                                            </p>
+                                            <div className="flex items-center gap-2">
+                                                {mcpIntegrationLogos.map((key) => {
+                                                    const src = getLogo(key)
+                                                    if (!src) return null
+                                                    return (
+                                                        <div
+                                                            key={key}
+                                                            className="flex size-8 items-center justify-center rounded-sm border border-input bg-primary p-1.5"
+                                                        >
+                                                            <CloudinaryImage
+                                                                src={src as `https://res.cloudinary.com/${string}`}
+                                                                alt={key}
+                                                                className="max-h-4 max-w-full object-contain"
+                                                            />
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                        <ul className="mt-2 space-y-1.5">
+                                            {['Alerts & incidents', 'Support and CRM notes', 'Repo context'].map(
+                                                (label) => (
+                                                    <li key={label} className="flex items-center gap-2">
+                                                        <span className="size-2 rounded-sm bg-brown" aria-hidden />
+                                                        <span className="text-sm text-secondary">{label}</span>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </>
+                                )}
+
+                                <div className="mt-3 flex items-start gap-2">
+                                    <IconGitBranch className="mt-0.5 size-4 text-brown" aria-hidden />
+                                    <p className="m-0 text-sm leading-relaxed text-secondary">
+                                        Same signals pipeline, same task schema, same agent workflow.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        className={`${span5} flex justify-center @lg/reader-content:justify-end @lg/reader-content:pt-1`}
+                    >
+                        <div className="w-full max-w-[300px] p-5 @md/reader-content:max-w-[360px] @md/reader-content:p-6 @lg/reader-content:max-w-[420px] @lg/reader-content:p-8">
+                            <img src={CODE_INTEGRATIONS} alt="" className="w-full object-contain" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </Section>
+
+            <Section id="signals-pipeline" className={`${sectionBorder} ${sectionY}`}>
+                <SignalsInboxFlow />
+            </Section>
+
+            {/* PRODUCT AUTONOMY */}
+            <Section id="product-autonomy" className={`${sectionBorder} ${sectionY}`}>
+                <div className={grid12}>
+                    <div className={span7}>
+                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                            Self-driving development for the work you don&apos;t need to think about
+                        </h2>
+                        <p className="m-0 text-[15px] leading-relaxed text-secondary">
+                            With bug fixes and consumer feedback taken care of on autopilot, you can focus on
+                            higher-leverage work that demand creativity. You stay in the loop, but out of the weeds.
+                        </p>
+                        <CautionLink href="/docs/ai-engineering">
+                            Discover what&apos;s next with code quality filters for the same models you use
+                        </CautionLink>
+                    </div>
+                    <div className={`${span5} flex @lg/reader-content:justify-end`}>
+                        <Hog src={HOG_FAST} alt="Self-driving development" className="mt-6 @lg/reader-content:mt-0" />
+                    </div>
+                </div>
+            </Section>
+
+            {/* AGENTIC ENVIRONMENT */}
+            <Section id="agentic-environment" className={`${sectionBorder} ${sectionY}`}>
+                <DataFlow />
+            </Section>
+
+            {/* INBOX-CENTRIC */}
+            <Section id="inbox-centric" className={`${sectionBorder} ${sectionY}`}>
+                <div className={grid12}>
+                    <div className={span7}>
+                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                            A more intuitive way to build a software product
+                        </h2>
+                        <p className="m-0 mb-5 text-[15px] leading-relaxed text-secondary">
+                            The biggest limit to productivity today is context. PostHog Code is where you get it.
+                            Orchestrate context signals across our database and ship code tailored for performance.
+                        </p>
+                        <ul className="m-0 list-none space-y-4 p-0">
+                            {[
+                                'Maintain focus on user needs instead of ticket sprawl',
+                                'Dramatically lower the cost of engineering output',
+                                'Continuous release cadence',
+                            ].map((line) => (
+                                <li key={line} className="flex gap-3">
+                                    <span className="mt-1.5 flex size-2 shrink-0 rounded-sm bg-brown" aria-hidden />
+                                    <p className="m-0 text-sm leading-relaxed text-secondary">{line}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className={`${span5} flex @lg/reader-content:justify-end`}>
+                        <Hog
+                            src={HOG_BUILD}
+                            alt="Building with PostHog Code"
+                            className="mt-6 @lg/reader-content:mt-0"
+                        />
+                    </div>
+                </div>
+                <div className="mt-8 grid gap-4 @md/reader-content:grid-cols-3">
+                    {NOT_CARDS.map((card) => (
+                        <NotCard key={card.heading} {...card} />
+                    ))}
+                </div>
+            </Section>
+
+            {/* MAINTENANCE VS BUILD */}
+            <Section id="maintenance-and-build" className={`${sectionBorder} ${sectionY}`}>
+                <div className="grid gap-8 @lg/reader-content:grid-cols-2 @lg/reader-content:gap-x-10 @lg/reader-content:items-start">
+                    <div className="min-w-0">
+                        <div className="mb-6 max-w-lg">
+                            <ToggleGroup
+                                title="Maintenance or build mode"
+                                hideTitle
+                                className="w-full"
+                                options={[
+                                    { label: 'Maintenance mode', value: 'maintenance' },
+                                    { label: 'Build mode', value: 'build' },
+                                ]}
+                                value={maintenanceBuildMode}
+                                onValueChange={(v) => {
+                                    if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
+                                }}
+                            />
+                        </div>
+                        {maintenanceBuildMode === 'maintenance' ? (
+                            <>
+                                <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                    Maintenance mode
+                                </h2>
+                                <p className="m-0 text-[15px] leading-relaxed text-secondary">
+                                    When bugs, errors, and funnel drops show up in your product data, PostHog Code
+                                    triages them into a prioritized inbox. Agents propose fixes as reviewable PRs so you
+                                    can merge, QA, and ship without pasting context into a chat for every paper cut.
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                    Build mode
+                                </h2>
+                                <p className="m-0 mb-3 text-sm font-semibold text-primary">What kinds of tasks?</p>
+                                <p className="m-0 mb-4 text-[15px] leading-relaxed text-secondary">
+                                    PostHog Code isn&apos;t just for data-driven bug fixes. The system for shipping a
+                                    fix is the same as the system for shipping any feature. A vague task needs
+                                    definition, then breaking into chunks, then shipping with proper releases planned. A
+                                    small, well-defined task just needs a one-shot fix and QA.
+                                </p>
+                                <p className="m-0 text-[15px] leading-relaxed text-secondary">
+                                    Even inspiration-driven features (not from user data) benefit from PostHog
+                                    Code&apos;s workflow: add event tracking, ship behind a flag, automatically message
+                                    users for feedback, set up an experiment to measure impact. PostHog Code productizes
+                                    best practices for shipping features, not just fixing bugs.
+                                </p>
+                            </>
+                        )}
+                    </div>
+                    <div className="flex justify-center @lg/reader-content:justify-end">
+                        <div className="w-full max-w-[320px] @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
+                            <Hog
+                                src={maintenanceBuildMode === 'maintenance' ? HOG_FAST : HOG_BUILD}
+                                alt={
+                                    maintenanceBuildMode === 'maintenance'
+                                        ? 'Maintenance mode: triage and ship fixes from product data'
+                                        : 'Build mode: ship features with the same workflow as fixes'
+                                }
+                                className="mt-2 @lg/reader-content:mt-0"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* GET STARTED */}
+            <Section id="get-started" className={`${sectionBorder} ${sectionY}`}>
+                <div className={grid12}>
+                    <div className={span7}>
+                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                            Waking up to three crisp PRs for paper cuts that would have derailed your day? oh,
+                            that&apos;s bliss.
+                        </h2>
+                        <p className="m-0 mb-6 text-[15px] leading-relaxed text-secondary">
+                            Cursor and Claude Code are great in the editor. PostHog Code keeps identifying product
+                            issues from live usage and proposing improvements—so work keeps surfacing without you
+                            stitching context together by hand.
+                        </p>
+                        <p className="m-0 mb-3 text-sm font-semibold text-primary">
+                            Not sure if PostHog Code is right for you?
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2">
+                            <AskAiCta
+                                href="https://chatgpt.com"
+                                label="Ask ChatGPT"
+                                iconSrc={ASK_AI_FAVICONS.chatgpt}
+                            />
+                            <AskAiCta href="https://claude.ai" label="Ask Claude" iconSrc={ASK_AI_FAVICONS.claude} />
+                            <AskAiCta
+                                href="https://gemini.google.com/app"
+                                label="Ask Gemini"
+                                iconSrc={ASK_AI_FAVICONS.gemini}
+                            />
+                        </div>
+                    </div>
+                    <div className={`${span5} flex @lg/reader-content:justify-end`}>
+                        <Hog src={HOG_VIBES} alt="" className="mt-8 @lg/reader-content:mt-0" />
+                    </div>
+                </div>
+            </Section>
+
+            {/* FAQ */}
+            <Section id="faq" className={`${sectionBorder} ${sectionY}`}>
+                <div className={grid12}>
+                    <div className="col-span-12 @lg/reader-content:col-span-4">
+                        <p className="m-0 mb-1 font-code text-[10px] font-semibold uppercase tracking-widest text-muted">
+                            FAQ
+                        </p>
+                        <h2 className="m-0 mb-4 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                            Questions we actually get asked
+                        </h2>
+                        <Hog
+                            src={HOG_GROUP}
+                            alt=""
+                            className="hidden @lg/reader-content:mt-8 @lg/reader-content:flex @lg/reader-content:justify-start"
+                        />
+                    </div>
+                    <div className="col-span-12 @lg/reader-content:col-span-8">
+                        <Accordion
+                            type="single"
+                            skin={true}
+                            items={FAQ_ITEMS}
+                            triggerClassName="!px-3 !py-2 @md/reader-content:!px-4"
+                            contentClassName="!px-3 !py-2.5 @md/reader-content:!px-4 @md/reader-content:!py-3"
+                        />
+                    </div>
+                </div>
+            </Section>
+
+            {/* Final CTA — window-style card (matches in-page demos) */}
+            <div className={sectionY}>
+                <div className="overflow-hidden rounded-md border border-input bg-primary shadow-[0_12px_40px_-16px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)]">
+                    <div className="flex h-9 min-h-9 shrink-0 items-center gap-3 border-b border-input bg-accent px-3">
+                        <span className="flex shrink-0 items-center gap-1.5" aria-hidden>
+                            <span className="size-2.5 rounded-full bg-red" />
+                            <span className="size-2.5 rounded-full bg-yellow" />
+                            <span className="size-2.5 rounded-full bg-seagreen" />
+                        </span>
+                        <span className="min-w-0 truncate font-code text-[11px] font-medium text-muted">
+                            Get early access
+                        </span>
+                    </div>
+                    <div className={`${grid12} items-stretch gap-y-0`}>
+                        <div className={`${span7} p-6 @md/reader-content:p-8`}>
+                            <h2 className="m-0 mb-3 text-xl font-bold leading-tight text-primary @md/reader-content:text-2xl">
+                                If you&apos;re looking for a sign, this is it: try PostHog Code.
+                            </h2>
+                            <p className="m-0 mb-3 text-sm leading-relaxed text-secondary">
+                                PostHog Code is designed for experienced product engineers who already use AI coding
+                                tools regularly. We&apos;re explicitly not targeting non-technical &ldquo;vibe
+                                coders&rdquo; or hobbyist users.
+                            </p>
+                            <p className="m-0 mb-5 text-sm leading-relaxed text-secondary">
+                                Our initial customer profile is early-stage startups with 2&ndash;10 engineers and
+                                hundreds to low thousands of users.
+                            </p>
+                            <div className="mb-5">
+                                <RadioGroup
+                                    title="PostHog experience"
+                                    value={waitlistAudience}
+                                    onValueChange={setWaitlistAudience}
+                                    options={[
+                                        {
+                                            label: "Already using PostHog? Yes, I'm ready for the future.",
+                                            value: 'already_posthog',
+                                        },
+                                        {
+                                            label: 'Just getting started? Answer a few quick questions.',
+                                            value: 'getting_started',
+                                        },
+                                    ]}
+                                />
+                            </div>
+                            <CallToAction type="primary" href="https://app.posthog.com/signup">
+                                Join the waitlist
+                            </CallToAction>
+                        </div>
+                        <div
+                            className={`${span5} flex h-full min-h-0 flex-col border-t border-input bg-accent/25 @lg/reader-content:border-l @lg/reader-content:border-t-0`}
+                        >
+                            <div className="mt-auto flex w-full justify-center px-6 pt-8 @md/reader-content:px-8 @md/reader-content:pt-10">
+                                <div className="leading-none">
+                                    <img
+                                        src={HOG_SIGN}
+                                        alt=""
+                                        className="block w-full max-w-[200px] object-contain object-bottom @md/reader-content:max-w-[260px]"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

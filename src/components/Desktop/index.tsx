@@ -153,6 +153,12 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
+        label: 'PostHog Code',
+        Icon: <AppIcon name="posthog_code" />,
+        url: '/posthog-code',
+        source: 'desktop',
+    },
+    {
         label: 'Store',
         Icon: <AppIcon name="shoppingBag" />,
         url: '/merch',
