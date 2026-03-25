@@ -215,18 +215,18 @@ const ScatteredProduct = ({ product, className = '' }: { product: any; className
  */
 const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, number]; '@3xl': [number, number] }[] =
     [
-        { handle: 'web_analytics', '@xl': [14, 10], '@2xl': [26, 6], '@3xl': [24, 6] },
-        { handle: 'product_analytics', '@xl': [42, 2], '@2xl': [16, 22], '@3xl': [14, 22] },
-        { handle: 'revenue_analytics', '@xl': [72, 2], '@2xl': [72, 6], '@3xl': [74, 6] },
-        { handle: 'session_replay', '@xl': [26, 24], '@2xl': [10, 38], '@3xl': [10, 40] },
-        { handle: 'funnels', '@xl': [26, 24], '@2xl': [5, 59], '@3xl': [6, 60] },
-        { handle: 'heatmaps', '@xl': [76, 24], '@2xl': [78, 22], '@3xl': [80, 22] },
-        { handle: 'trends', '@xl': [76, 24], '@2xl': [88, 36], '@3xl': [90, 36] },
-        { handle: 'lifecycle', '@xl': [4, 30], '@2xl': [6, 78], '@3xl': [10, 78] },
-        { handle: 'user_paths', '@xl': [6, 54], '@2xl': [8, 96], '@3xl': [6, 96] },
-        { handle: 'llm_evals', '@xl': [92, 10], '@2xl': [95, 56], '@3xl': [90, 56] },
-        { handle: 'llm_traces', '@xl': [96, 30], '@2xl': [92, 74], '@3xl': [86, 74] },
-        { handle: 'llm_generations', '@xl': [94, 54], '@2xl': [88, 90], '@3xl': [90, 90] },
+        { handle: 'web_analytics', '@xl': [28, 4], '@2xl': [26, 6], '@3xl': [24, 6] },
+        { handle: 'product_analytics', '@xl': [18, 22], '@2xl': [16, 22], '@3xl': [14, 22] },
+        { handle: 'revenue_analytics', '@xl': [72, 4], '@2xl': [72, 6], '@3xl': [74, 6] },
+        { handle: 'session_replay', '@xl': [10, 36], '@2xl': [10, 38], '@3xl': [10, 40] },
+        { handle: 'funnels', '@xl': [7, 6], '@2xl': [5, 59], '@3xl': [6, 60] },
+        { handle: 'heatmaps', '@xl': [76, 22], '@2xl': [78, 22], '@3xl': [80, 22] },
+        { handle: 'trends', '@xl': [86, 36], '@2xl': [88, 36], '@3xl': [90, 36] },
+        { handle: 'lifecycle', '@xl': [6, 84], '@2xl': [6, 78], '@3xl': [10, 78] },
+        { handle: 'user_paths', '@xl': [12, 96], '@2xl': [8, 96], '@3xl': [6, 96] },
+        { handle: 'llm_evals', '@xl': [94, 16], '@2xl': [95, 56], '@3xl': [90, 56] },
+        { handle: 'llm_traces', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
+        { handle: 'llm_generations', '@xl': [90, 94], '@2xl': [88, 90], '@3xl': [90, 90] },
     ]
 
 const ArcProducts = ({ products }: { products: any[] }) => {
@@ -289,7 +289,6 @@ export const UnderstandUsageSlide = () => {
     return (
         <div className="rounded p-4 relative h-full flex flex-col bg-[#F3F4F0] dark:bg-[#131316]">
             <h2 className="my-0">Understand what users are doing</h2>
-            <DebugContainerQuery />
             <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-2">
                 <div>
                     <p className="text-secondary text-sm">
