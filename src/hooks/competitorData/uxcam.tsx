@@ -24,6 +24,7 @@ export const uxcam = {
         session_replay: {
             available: true,
             features: {
+                ai_summaries: false,
                 canvas_recording: false,
                 crash_reports: true,
                 event_timeline: true,
@@ -39,11 +40,6 @@ export const uxcam = {
                 features: {
                     mobile_app_recordings: true,
                     web_app_recordings: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: false,
                 },
             },
         },

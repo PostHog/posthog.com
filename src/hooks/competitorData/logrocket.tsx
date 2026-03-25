@@ -74,6 +74,7 @@ export const logrocket = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: true,
@@ -119,11 +120,6 @@ export const logrocket = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: true,
                 },
             },
         },
