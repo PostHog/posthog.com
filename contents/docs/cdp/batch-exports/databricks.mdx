@@ -10,14 +10,7 @@ availability:
 
 Batch exports can be used to export data to a Databricks Delta table.
 
-import PersonsModelNote from '../_snippets/persons-model-note.mdx'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconInfo" title="Databricks destination is in beta" type="fyi">
-
-The Databricks destination is currently in `beta`. This means the configuration and features are subject to change.
-
-</CalloutBox>
+import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
 ## Requirements
 
@@ -69,19 +62,20 @@ Service principals give automated tools and scripts API-only access to Databrick
 2. Navigate to the **Secrets** tab.
 3. Click **Generate secret**.
 4. Choose a lifetime for the new secret.
-4. Copy and save both the **Client ID** (also the same as the service principal UUID) and **Secret** securely - you'll need these for PostHog configuration.
+5. Copy and save both the **Client ID** (also the same as the service principal UUID) and **Secret** securely - you'll need these for PostHog configuration.
 
 > **Important:** The client secret is only shown once. Make sure to save it securely before closing the dialog.
-
 
 ### 5. Grant permissions to the service principal
 
 The service principal needs the following permissions:
 
 **At the catalog level:**
+
 - `USE CATALOG` - Required to access the catalog
 
 **At the schema level:**
+
 - `USE SCHEMA` - Required to access the schema
 - `CREATE TABLE` - Required to create new tables (if the destination table doesn't exist)
 - `CREATE VOLUME` - Required to create temporary volumes for staging data
@@ -111,7 +105,6 @@ GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<servi
 
 > **Note:** Replace `<catalog_name>`, `<schema_name>`, `<table_name>`, and `<service_principal_id_or_group>` with your actual values. You can either assign permissions to the service principal directly or via a [group](https://docs.databricks.com/aws/en/admin/users-groups/groups).
 
-
 ## Creating the batch export
 
 1. In PostHog, click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
@@ -132,17 +125,19 @@ GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<servi
 You'll need to specify the following configuration settings in PostHog:
 
 **Connection settings:**
-* **Integration:** Select the Databricks integration you created (or create a new one). The integration stores your server hostname and OAuth credentials securely.
-* **HTTP Path:** The HTTP path value for your SQL warehouse or all-purpose compute cluster (e.g. `/sql/1.0/warehouses/abc123def456`).
+
+- **Integration:** Select the Databricks integration you created (or create a new one). The integration stores your server hostname and OAuth credentials securely.
+- **HTTP Path:** The HTTP path value for your SQL warehouse or all-purpose compute cluster (e.g. `/sql/1.0/warehouses/abc123def456`).
 
 **Destination settings:**
-* **Catalog:** The name of the Databricks catalog where the table will be created.
-* **Schema:** The name of the schema within the catalog where the table will be created.
-* **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically (this is the recommended approach).
+
+- **Catalog:** The name of the Databricks catalog where the table will be created.
+- **Schema:** The name of the schema within the catalog where the table will be created.
+- **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically (this is the recommended approach).
 
 **Advanced settings (optional):**
-* **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields (like `properties` and `person_properties`). Enabled by default. The `VARIANT` type is optimized for semi-structured data and provides better querying performance. However, it requires **Databricks Runtime 15.3 or above**. If you're using an older runtime version, disable this setting to use `STRING` type instead.
 
+- **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields (like `properties` and `person_properties`). Enabled by default. The `VARIANT` type is optimized for semi-structured data and provides better querying performance. However, it requires **Databricks Runtime 15.3 or above**. If you're using an older runtime version, disable this setting to use `STRING` type instead.
 
 ## Models
 
@@ -154,29 +149,29 @@ This section describes the models that can be exported to Databricks.
 
 This is the default model for Databricks batch exports. The schema of the model as created in Databricks is:
 
-| Field                          | Type        | Description                                                    |
-|--------------------------------|-------------|----------------------------------------------------------------|
-| uuid                           | `STRING`    | The unique ID of the event within PostHog                      |
-| event                          | `STRING`    | The name of the event that was sent                            |
-| properties                     | `VARIANT` or `STRING` | A JSON object with all the properties sent along with an event |
-| distinct_id                    | `STRING`    | The `distinct_id` of the user who sent the event               |
-| team_id                        | `BIGINT`    | The `team_id` for the event                                    |
-| timestamp                      | `TIMESTAMP` | The timestamp associated with an event                         |
-| databricks_ingested_timestamp  | `TIMESTAMP` | An additional metadata column, indicating when the event was ingested into Databricks          |
+| Field                         | Type                  | Description                                                                           |
+| ----------------------------- | --------------------- | ------------------------------------------------------------------------------------- |
+| uuid                          | `STRING`              | The unique ID of the event within PostHog                                             |
+| event                         | `STRING`              | The name of the event that was sent                                                   |
+| properties                    | `VARIANT` or `STRING` | A JSON object with all the properties sent along with an event                        |
+| distinct_id                   | `STRING`              | The `distinct_id` of the user who sent the event                                      |
+| team_id                       | `BIGINT`              | The `team_id` for the event                                                           |
+| timestamp                     | `TIMESTAMP`           | The timestamp associated with an event                                                |
+| databricks_ingested_timestamp | `TIMESTAMP`           | An additional metadata column, indicating when the event was ingested into Databricks |
 
 ### Persons model
 
 The schema of the model as created in Databricks is:
 
-| Field                      | Type        | Description                                                                                                    |
-|----------------------------|-------------|----------------------------------------------------------------------------------------------------------------|
-| team_id                    | `BIGINT`    | The id of the project (team) the person belongs to                                                             |
-| distinct_id                | `STRING`    | A `distinct_id` associated with the person                                                                     |
-| person_id                  | `STRING`    | The id of the person associated to this (`team_id`, `distinct_id`) pair                                        |
-| properties                 | `VARIANT` or `STRING` | A JSON object with all the latest properties of the person                                           |
-| person_version             | `BIGINT`    | Internal version of the person properties, used by batch export in merge operation                             |
-| person_distinct_id_version | `BIGINT`    | Internal version of the person to `distinct_id` mapping, used by batch export in merge operation               |
-| created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                      |
+| Field                      | Type                  | Description                                                                                      |
+| -------------------------- | --------------------- | ------------------------------------------------------------------------------------------------ |
+| team_id                    | `BIGINT`              | The id of the project (team) the person belongs to                                               |
+| distinct_id                | `STRING`              | A `distinct_id` associated with the person                                                       |
+| person_id                  | `STRING`              | The id of the person associated to this (`team_id`, `distinct_id`) pair                          |
+| properties                 | `VARIANT` or `STRING` | A JSON object with all the latest properties of the person                                       |
+| person_version             | `BIGINT`              | Internal version of the person properties, used by batch export in merge operation               |
+| person_distinct_id_version | `BIGINT`              | Internal version of the person to `distinct_id` mapping, used by batch export in merge operation |
+| created_at                 | `TIMESTAMP`           | The timestamp when the person was created                                                        |
 
 The Databricks table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
@@ -215,18 +210,20 @@ The batch export process follows a consistent pattern regardless of the model be
 8. Delete the stage table and temporary volume.
 
 The merge operation for mutable models ensures that:
+
 - Rows that match in the destination table and have newer version fields in the stage table are updated.
 - New rows not found in the destination table are inserted.
 - Your data always reflects the latest state while maintaining historical records that haven't been updated.
 
-
 ### Should I use VARIANT or STRING type for JSON fields?
 
 We recommend using `VARIANT` (the default) for the following reasons:
+
 - Better query performance
 - Native support for JSON operators and functions
 
 However, you should use `STRING` if:
+
 - You're using Databricks Runtime older than 15.3
 - You need to export the data to another system that doesn't support VARIANT
 - You prefer to handle JSON parsing in your application code
