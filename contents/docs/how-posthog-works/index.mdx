@@ -107,8 +107,8 @@ flowchart TD
 
     CH -.- ZK[ZooKeeper]
 
-    Django --> RDSProxy
-    Workers --> RDSProxy
-    CDP --> RDSProxy
-    RDSProxy[RDS Proxy] --> PG[("Aurora PostgreSQL")]
+    Django --> PgBouncer
+    Workers --> PgBouncer
+    CDP --> PgBouncer
+    PgBouncer[PgBouncer] --> PG[("Aurora PostgreSQL")]
 ```
