@@ -55,7 +55,7 @@ You can send an email, trigger an in-app message, update a property – whatever
 
 ### Step 5: Add tags for measurement
 
-At the end of each branch, update a person property or capture a custom event. This is how you find these users later in funnels and insights.
+At the end of each branch, update a person property or capture a custom event, similar to how you would [run an experiment without a feature flag](/docs/experiments/running-experiments-without-feature-flags). This is how you find these users later in funnels and insights.
 
 ![add tags for measurement](https://res.cloudinary.com/dmukukwp6/image/upload/Tag_your_users_for_measurement_978da34c31.png)
 
