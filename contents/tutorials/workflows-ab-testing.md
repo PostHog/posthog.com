@@ -84,7 +84,7 @@ Here are some good candidates for workflow A/B tests:
 Also, before you start building your test with Workflows, consider this:
 
 - **Always tag both branches.** If you only tag the test group, you can't build a clean comparison. Set the control group's property to `false` (or capture a separate event) so you have an explicit baseline – not just "everyone who didn't get tagged."
-- **Don't over-split.** Running five variants with 20% each sounds scientific. In practice, you'll wait forever for significance. Start with two branches unless you have serious volume.
+- **Don't over-split.** Running five variants with 20% each sounds thorough, but you'll be waiting a long time for useful results. Start with two branches unless you have serious volume.
 - **Name things like a human will read them.** Six months from now, someone (probably you) will see `wf_test_v3_final_FINAL` in a funnel breakdown and quietly suffer. Be kind to future-you.
 
 Workflows is already inside PostHog, meaning it already has your event data, your person properties, and your funnels. Adding cohort branches means you can run experiments on the same platform where you measure them. Now, [go test something](https://app.posthog.com/workflows).
