@@ -105,6 +105,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/chargebee',
                 },
                 {
+                    name: 'Convex',
+                    url: '/docs/cdp/sources/convex',
+                },
+                {
                     name: 'BigQuery',
                     url: '/docs/cdp/sources/bigquery',
                 },
@@ -5215,6 +5219,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/clerk',
                         },
                         {
+                            name: 'Convex',
+                            url: '/docs/data-warehouse/sources/convex',
+                        },
+                        {
                             name: 'DoIt',
                             url: '/docs/data-warehouse/sources/doit',
                         },
@@ -6428,6 +6436,12 @@ export const docsMenu = {
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconDatabase',
                     color: 'blue',
+                },
+                {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconDatabase',
+                    color: 'orange',
                 },
                 {
                     name: 'Best practices',
