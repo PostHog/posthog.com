@@ -8,20 +8,20 @@ availability:
   enterprise: full
 ---
 
-The real power of the data warehouse is the ability to combine data from multiple tables in a single query. Joins enable you to do this. They enable you to choose fields that act as connections between PostHog and external sources. 
+The real power of the data warehouse is the ability to combine data from multiple tables in a single query. Joins enable you to do this. They enable you to choose fields that act as connections between PostHog and external sources.
 
 ## Table joins
 
-You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table. 
+You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table.
 
 To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
 
-For example, if you import your Stripe data, you can define a join between the PostHog's `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`. 
+For example, if you import your Stripe data, you can define a join between the PostHog's `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/join_light_9b369cc72f.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/join_light_9b369cc72f.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/join_dark_41d32574ec.png"
-  alt="Create a join" 
+  alt="Create a join"
   classes="rounded"
 />
 
@@ -31,23 +31,23 @@ To edit or delete a table join, click the three dots next to your source table, 
 
 ## Person joins
 
-Person joins are a special type of table joins. They are joins on the `persons` table in PostHog. When you join external data on this table, we enable you to use it like a person filter in insights. 
+Person joins are a special type of table joins. They are joins on the `persons` table in PostHog. When you join external data on this table, we enable you to use it like a person filter in insights. Extended person properties from these joins can be used in [Trends](/docs/product-analytics/trends), [Funnels](/docs/product-analytics/funnels), and [Retention](/docs/product-analytics/retention) insights.
 
 > **Note:** To see `extended person properties` in filters, be sure to start the join on the `persons` table as the source table. To do that, go to the [SQL editor](https://app.posthog.com/sql), find the persons table in the left column, click the three dots next to the `persons` table, and click **Add join**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/p_light_b0d3101335.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/p_dark_fc9634f06e.png"
-    alt="Filter on joined person properties" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/p_light_b0d3101335.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/p_dark_fc9634f06e.png"
+  alt="Filter on joined person properties"
+  classes="rounded"
 />
 
-> **Note:** Be sure that your joined keys actually match. For example `persons.id` returns a UUID, even if you use an email as a `distinct_id` when capturing events. You might need to add a person property  like `email`. 
+> **Note:** Be sure that your joined keys actually match. For example `persons.id` returns a UUID, even if you use an email as a `distinct_id` when capturing events. You might need to add a person property like `email`.
 
 ## Query joins
 
 If you only want to join data together for a single insight or query, you can use SQL commands like `WHERE IN` and `JOIN` SQL commands.
 
-import QueryJoinExample from './_snippets/query-join-example.mdx'
+import QueryJoinExample from "./_snippets/query-join-example.mdx";
 
 <QueryJoinExample />
