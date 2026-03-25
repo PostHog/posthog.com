@@ -19,13 +19,13 @@ seo:
 ---
 [Workflows](https://app.posthog.com/workflows) let you automate actions based on things your users do (or don't do). A user signs up? Send them an email. Someone hits a paywall three times? Ping your sales team. A trial's about to expire? Update a property and trigger a re-engagement sequence.
 
-The building blocks are simple: triggers fire when something happens, then nodes, like sending messages, updating person properties, or capturing events, execute in sequence. Which brings us to a particularly fun node type – cohorts.
+The building blocks are simple: triggers fire when something happens and then nodes, like sending messages, updating person properties, or capturing events, execute in sequence. Which brings us to a particularly fun node type – **cohorts**.
 
 Cohort branches add a fork in the road, randomly splitting users into groups so you can test whether that onboarding email, that nudge notification, or that property update actually moves the needle.
 
 Think of it as multivariate testing baked right into your automation layer. Set it up once, let it run, then check your funnels.
 
-> Heads up: These cohorts are not the same as the cohorts you create in People & Groups. Workflow cohorts live entirely inside the workflow and are just a splitting mechanism. Don't go looking for them in your sidebar.
+> **Heads up**: These cohorts are not the same as the [cohorts you create in People & Groups](/docs/data/cohorts). Workflow cohorts live entirely inside the workflow, are just a splitting mechanism, and aren't reusable across workflows. Don't go looking for them in your sidebar.
 
 ## How to set it up?
 
@@ -43,7 +43,7 @@ Click to add a new node after your trigger and select **cohort branch.** This is
 
 ### Step 3: Configure your split
 
-Name your branches and add the percentage split. We added "test" and "control" for this example.
+Name your branches and add the percentage split. We added "test" and "control" for this example and split them evenly.
 
 ![configure your split](https://res.cloudinary.com/dmukukwp6/image/upload/Configure_your_split_60b0258813.png)
 
@@ -55,7 +55,7 @@ You can send an email, trigger an in-app message, update a property – whatever
 
 ### Step 5: Add tags for measurement
 
-At the end of each branch, update a person property or capture a custom event. This is how you find these users later in funnels and insights.
+At the end of each branch, update a person property or capture a custom event, similar to how you would [run an experiment without a feature flag](/docs/experiments/running-experiments-without-feature-flags). This is how you find these users later in funnels and insights.
 
 ![add tags for measurement](https://res.cloudinary.com/dmukukwp6/image/upload/Tag_your_users_for_measurement_978da34c31.png)
 
