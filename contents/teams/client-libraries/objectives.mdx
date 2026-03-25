@@ -6,12 +6,13 @@ E.g. the default dashboard relies on `$pageview` events, which doesn’t work we
 
 What we'll ship:
 
-* A tracker to identify where our SDKs and defaults fall short
-  * Enables faster iteration and helps highlight gaps to the right teams
+* Discover where our SDKs and defaults fall short (via dogfooding and conversations with customers)
+  * We don't yet have a clear picture of the gaps, step one is understanding what they are and how big the work is, so we can decide whether to focus on them or pick them up incrementally
 
 * Proactive user research
   * Conduct interviews with mobile-heavy and backend-heavy customers
   * Don’t rely only on reactive feedback from unhappy users
+  * Run surveys targeting those customers
 
 * AI improvements
   * Leverage insights from the wizard team to understand what users are asking from SDKs
@@ -59,7 +60,7 @@ What we'll ship:
       * Swift error messages (likely requires vendoring PLCrashReporter)
         * https://github.com/PostHog/posthog-ios/issues/522
   * Breadcrumbs
-    * TBD, align with error tracking team
+    * Error tracking team to design the approach and coordinate with us on SDK implementation
 
 * Flutter desktop support (Windows/Linux) (<TeamMember name="Ioannis Josephides" />)
   * https://github.com/PostHog/posthog-flutter/issues/51
@@ -70,8 +71,10 @@ What we'll ship:
 
 * Complete the SDK test harness and integrate it into CI to ensure consistency across SDKs
   * https://github.com/PostHog/posthog-sdk-test-harness
+  * https://github.com/PostHog/posthog/issues/51493
 * Take ownership of the SDK rotation
 * Align and standardize SDK configuration naming (API token vs API key)
+  * https://github.com/PostHog/posthog/issues/48234
 * Support and contribute to the new ingestion rate limiting project
   * https://github.com/PostHog/requests-for-comments-internal/pull/1036
 * Migrate and consolidate `/decide`, `/flags`, and `/static/array.js` into a unified remote config (`/static/token/config`)
