@@ -17,9 +17,6 @@ export const microsoft_clarity = {
         },
         session_replay: {
             available: true,
-            pricing: {
-                free_tier: true, // Completely free forever
-            },
             features: {
                 ai_summaries: true,
                 canvas_recording: false, // Cannot render canvas elements
@@ -67,6 +64,9 @@ export const microsoft_clarity = {
                     network_monitor: false, // No network monitoring
                     dom_explorer: false, // No DOM explorer
                 },
+            },
+            pricing: {
+                free_tier: true, // Completely free forever
             },
         },
         heatmaps: {
