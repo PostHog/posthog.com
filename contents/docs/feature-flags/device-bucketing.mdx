@@ -37,9 +37,64 @@ Device bucketing is useful when the flag targets users who aren't yet identified
 
 When creating or editing a feature flag, change the **Match by** dropdown under **Release conditions** from **User** to **Device**.
 
-That's it. PostHog will now use the device ID to determine the flag value for that release condition.
+PostHog will now use the device ID to determine the flag value for that release condition.
 
-The device ID is automatically set by the web SDK (`posthog-js` `v1.307.1` and above), but you can also set it manually if needed.
+### JavaScript web (automatic)
+
+The browser SDK handles device bucketing automatically with no extra configuration. A device ID (`$device_id`) is generated on first page load and persists in browser storage across sessions. It is included in every flag evaluation request automatically.
+
+```js-web
+// No special setup needed — device bucketing just works
+const variant = posthog.getFeatureFlag('my-experiment')
+
+// The variant stays the same after the user logs in
+posthog.identify('user@example.com')
+const sameVariant = posthog.getFeatureFlag('my-experiment')
+```
+
+### Node.js
+
+The Node SDK is stateless and does not generate or persist device IDs. You must pass `$device_id` explicitly via `personProperties`. You can read the device ID from the PostHog cookie set by the browser SDK.
+
+```node
+const variant = await posthog.getFeatureFlag(
+    'my-experiment',
+    'user_123',
+    {
+        personProperties: {
+            $device_id: 'device-uuid-from-cookie'
+        }
+    }
+)
+```
+
+### Python
+
+The Python SDK supports a dedicated `device_id` parameter on all flag evaluation methods:
+
+```python
+variant = posthog.get_feature_flag(
+    'my-experiment',
+    'user_123',
+    device_id='device-uuid-from-cookie',
+)
+```
+
+## How `reset()` affects device bucketing
+
+In the JavaScript web SDK:
+
+- `posthog.reset()` **preserves** the device ID. Flag values stay consistent even after logout.
+- `posthog.reset(true)` **regenerates** the device ID. Use this for shared devices (e.g., kiosks) where each session should be treated as a new device.
+
+## What happens when no device ID is provided
+
+If a flag is configured for device bucketing but no device ID is available:
+
+| Scenario | Behavior |
+|---|---|
+| **JavaScript web** | The SDK always includes `$device_id` automatically, so this only happens in [cookieless mode](/docs/libraries/js#cookieless-tracking), where flags fall back to distinct ID bucketing. |
+| **Node.js / Python** | Local evaluation fails and the SDK falls back to the `/decide` API endpoint. If `onlyEvaluateLocally` is `true`, the flag returns `undefined` (Node) or `None` (Python). |
 
 ## Older SDK versions
 
