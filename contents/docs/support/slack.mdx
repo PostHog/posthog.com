@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import Alpha from "./_snippets/alpha.mdx";
 
 <Alpha />
 
@@ -14,6 +14,12 @@ The **SupportHog** Slack bot connects your Slack workspace to PostHog Support, e
 - **PostHog to Slack** — team replies in PostHog are posted back to the Slack thread
 
 This is separate from PostHog's main Slack integration (used for alerts and dashboards). SupportHog has its own bot, credentials, and event handling.
+
+<CalloutBox icon="IconInfo" title="Organization admin required" type="action">
+
+Connecting and disconnecting the Slack integration requires organization admin permissions. Non-admin members can view settings but can't modify the connection.
+
+</CalloutBox>
 
 ## Connecting Slack
 
@@ -33,11 +39,11 @@ Each PostHog project can connect to one Slack workspace. If the workspace is alr
 
 After connecting, configure the integration in **Support > Settings**:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | — |
-| **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
-| **Bot mentions** | Always active — `@SupportHog` in any channel creates a ticket from that message. | — |
+| Setting             | Description                                                                                       | Default    |
+| ------------------- | ------------------------------------------------------------------------------------------------- | ---------- |
+| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | —          |
+| **Ticket emoji**    | React with this emoji on any message in any channel to create a ticket from it.                   | `:ticket:` |
+| **Bot mentions**    | Always active — `@SupportHog` in any channel creates a ticket from that message.                  | —          |
 
 ### Picking a support channel
 
@@ -94,6 +100,8 @@ Slack-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widg
 You can filter the ticket list by channel source to see only Slack tickets.
 
 ## Disconnecting
+
+> **Note:** Disconnecting requires organization admin permissions.
 
 To remove the Slack integration:
 
