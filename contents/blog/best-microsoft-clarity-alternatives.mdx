@@ -20,8 +20,8 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 Microsoft Clarity is hard to beat on price – it's completely free with no traffic limits, session caps, or paid tiers. It offers heatmaps, session recordings, rage click detection, and an AI-powered Copilot that generates session takeaways. It also supports web, Android, iOS, React Native, and Flutter.
  
-But Clarity has its limitations; you'll need another tool if you want more than basic behavior analysis, or you want deeper debugging tools, mobile analytics, or a full product development platform.
- 
+It's worth noting that Clarity is free because Microsoft uses the anonymized behavioral data it collects to improve its own machine learning models – that's the trade-off. You'll also need another tool if you want more than basic behavior analysis, deeper debugging tools, mobile analytics, or a full product development platform.
+
 This guide compares the best Microsoft Clarity alternatives: what they do better, where they fall short, and who they're actually for.
 
 ## 1. PostHog
@@ -84,6 +84,7 @@ rows={[
 
 - PostHog includes a built-in [data warehouse](/data-warehouse); you can import data from Stripe, HubSpot, Postgres, Snowflake, and more, then query it with SQL alongside your product analytics and session data in one place. Clarity has no equivalent.
 - PostHog supports group analytics for account-level analysis (useful for B2B SaaS). Clarity only tracks individual visitors.
+- PostHog offers EU hosting. Clarity stores data in Microsoft's US-based Azure cloud; EU customers are covered by cross-border data transfer agreements (SCCs) but have no data residency option.
 - PostHog is open source with a public roadmap. Clarity is a closed-source Microsoft product.
 
 </details>
@@ -632,6 +633,12 @@ Microsoft Clarity is a free behavior analytics tool for websites and mobile apps
 <summary>Is Microsoft Clarity really free?</summary>
 
 Yes. Microsoft Clarity is free with no paid tiers, and it includes unlimited session recordings, heatmaps, and Copilot AI insights. 
+
+It's free because Microsoft uses the anonymized behavioral data it collects to train and improve the machine learning models that power its own products and services. 
+
+Clarity is, in part, how Microsoft gathers that data at scale. If that trade-off gives your team pause, PostHog is open source with transparent data handling, and offers EU hosting for teams with stricter data residency requirements.
+
+See our guide to the [best open source session replay tools](/blog/best-open-source-session-replay-tools) for more privacy-friendly options.
 
 </details>
 
