@@ -52,9 +52,11 @@ posthog.identify('user@example.com')
 const sameVariant = posthog.getFeatureFlag('my-experiment')
 ```
 
-### Node.js
+### Server-side SDKs
 
-The Node SDK is stateless and does not generate or persist device IDs. You must pass `$device_id` explicitly via `personProperties`. You can read the device ID from the PostHog cookie set by the browser SDK.
+For all server-side SDKs, you can use device bucketing by passing the device ID as a person property (`$device_id`) when evaluating flags. There is no difference in evaluation behavior whether the device ID is passed as a person property or as an explicit parameter.
+
+<MultiLanguage>
 
 ```node
 const variant = await posthog.getFeatureFlag(
@@ -68,9 +70,19 @@ const variant = await posthog.getFeatureFlag(
 )
 ```
 
-### Python
+```python
+variant = posthog.get_feature_flag(
+    'my-experiment',
+    'user_123',
+    person_properties={
+        '$device_id': 'device-uuid-from-cookie'
+    },
+)
+```
 
-The Python SDK supports a dedicated `device_id` parameter on all flag evaluation methods:
+</MultiLanguage>
+
+The Python SDK (v7.6.0+) also supports passing `device_id` as an explicit parameter, similar to `distinct_id`:
 
 ```python
 variant = posthog.get_feature_flag(
@@ -79,6 +91,8 @@ variant = posthog.get_feature_flag(
     device_id='device-uuid-from-cookie',
 )
 ```
+
+Other server-side SDKs will be updated to support this as well.
 
 ## How `reset()` affects device bucketing
 
@@ -95,46 +109,6 @@ If a flag is configured for device bucketing but no device ID is available:
 |---|---|
 | **JavaScript web** | The SDK always includes `$device_id` automatically, so this only happens in [cookieless mode](/docs/libraries/js#cookieless-tracking), where flags fall back to distinct ID bucketing. |
 | **Node.js / Python** | Local evaluation fails and the SDK falls back to the `/decide` API endpoint. If `onlyEvaluateLocally` is `true`, the flag returns `undefined` (Node) or `None` (Python). |
-
-## Older SDK versions
-
-If you're using an older SDK version that doesn't natively support device bucketing, you can still achieve the same behavior by passing `$device_id` as a person property when evaluating feature flags.
-
-<MultiLanguage>
-
-```js-web
-// Get the device ID from posthog-js
-const deviceId = posthog.get_property('$device_id')
-
-// Pass it as a person property for flag evaluation
-posthog.setPersonPropertiesForFlags({
-    '$device_id': deviceId
-})
-```
-
-```node
-await client.getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    {
-        personProperties: {
-            '$device_id': deviceId
-        }
-    }
-)
-```
-
-```python
-posthog.get_feature_flag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    person_properties={
-        '$device_id': device_id
-    }
-)
-```
-
-</MultiLanguage>
 
 ## Further reading
 
