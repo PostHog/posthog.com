@@ -178,8 +178,8 @@ export const HomepageCards = [
         // ImageSize: 'w-[250px] mt-8',
     },
     {
-        top: 'Networking events are your things',
-        bottom: <>We put on an event once. It was a disaster. Never again.</>,
+        top: 'Webinars are your thing',
+        bottom: <>Webinars are boring. Our events offer actual value for builders.</>,
         color: '#FFD89E',
         Image: (
             <CloudinaryImage

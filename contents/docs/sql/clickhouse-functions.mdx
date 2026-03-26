@@ -256,8 +256,8 @@ If the function's name includes a leading underscore, then it's not safe and sim
 
 ## Strings
 
-- `left`
-- `right`
+- `left` – operates on UTF-8 characters, not bytes (maps to ClickHouse's `leftUTF8`)
+- `right` – operates on UTF-8 characters, not bytes (maps to ClickHouse's `rightUTF8`)
 - `lengthUTF8`
 - `leftPad` or `lpad`
 - `rightPad` or `rpad`

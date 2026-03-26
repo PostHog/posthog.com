@@ -29,7 +29,6 @@ jobs:
                       hashicorp/
                       PostHog/
                       tailscale/
-                      inkeep/
 
     semgrep-js:
         runs-on: ubuntu-latest

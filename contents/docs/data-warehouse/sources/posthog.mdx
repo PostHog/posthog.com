@@ -44,7 +44,7 @@ Some of the columns in the `persons` table are:
 |-----------------|--------------------------------------------------------------------------------------------------|
 | `id`            | UUID of the person. Relates to `person_id` in the `events` table.                                |
 | `created_at`    | Date and time when the person was first created (ISO 8601 format).                               |
-| `last_seen_at`  | Date and time of the person's most recent event (ISO 8601 format), rounded to the hour.          |
+| `last_seen_at`  | Date and time of the person's most recent event (ISO 8601 format), rounded to the hour. See [skipping `last_seen_at` updates](/docs/product-analytics/person-properties#skipping-last_seen_at-updates).          |
 | `properties`    | Object containing all properties associated with the person (stored as a String).                |
 | `is_identified` | Indicates if the person is identified (`1`) or anonymous (`0`).                                  |
 
@@ -142,6 +142,44 @@ The `system.actions` table contains action definitions created in your project.
 | `updated_at` | When the action was last updated               |
 | `steps_json` | JSON containing the action's step definitions  |
 
+
+### `system.activity_logs`
+
+The `system.activity_logs` table tracks user and system actions across PostHog entities, providing an audit trail of changes to feature flags, insights, dashboards, experiments, and more.
+
+| Column       | Description                                                        |
+|--------------|--------------------------------------------------------------------|
+| `id`         | Unique identifier for the activity log entry                       |
+| `team_id`    | Team ID the activity belongs to                                    |
+| `activity`   | Action performed (e.g., `created`, `updated`, `deleted`)           |
+| `item_id`    | ID of the entity being logged                                      |
+| `scope`      | Entity type being logged (e.g., `FeatureFlag`, `Insight`)          |
+| `detail`     | JSON containing structured details about the change                |
+| `created_at` | When the activity occurred                                         |
+
+Common scopes include `FeatureFlag`, `Insight`, `Dashboard`, `Experiment`, `Cohort`, `Survey`, `Notebook`, `Action`, `Person`, `Replay`, and `ErrorTrackingIssue`.
+
+> **Note:** Only team-scoped activity logs are visible. Organization-level logs (like membership changes) are not included because they are not associated with a specific team.
+
+### `system.annotations`
+
+The `system.annotations` table contains annotation data from your project. Annotations are timestamped notes used to mark product changes, incidents, or releases on charts.
+
+| Column             | Description                                                   |
+|--------------------|---------------------------------------------------------------|
+| `id`               | Unique identifier for the annotation                          |
+| `team_id`          | Team ID the annotation belongs to                             |
+| `content`          | Text content of the annotation                                |
+| `scope`            | Scope of the annotation: `project`, `organization`, `dashboard`, or `dashboard_item` |
+| `creation_type`    | How the annotation was created: `USR` (user) or `GIT` (automated) |
+| `date_marker`      | Timestamp shown on charts (ISO 8601 format)                   |
+| `deleted`          | Whether the annotation is deleted (1 = yes, 0 = no)           |
+| `dashboard_item_id`| Linked insight ID (if scoped to an insight)                   |
+| `dashboard_id`     | Linked dashboard ID (if scoped to a dashboard)                |
+| `created_by_id`    | User ID of the annotation creator                             |
+| `created_at`       | When the annotation was created                               |
+| `updated_at`       | When the annotation was last updated                          |
+
 ### `system.cohort_calculation_history`
 
 The `system.cohort_calculation_history` table tracks cohort calculation runs, useful for monitoring cohort computation status and debugging.
@@ -185,6 +223,25 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `status`     | Current status of the issue                       |
 | `name`       | Name of the issue                                 |
 | `description`| Description of the issue                          |
+
+### `system.hog_flows`
+
+The `system.hog_flows` table contains workflow definitions from your project.
+
+| Column          | Description                                    |
+|-----------------|------------------------------------------------|
+| `id`            | Unique identifier for the workflow             |
+| `team_id`       | Team ID the workflow belongs to                |
+| `name`          | Name of the workflow                           |
+| `description`   | Description of the workflow                    |
+| `status`        | Current status of the workflow                 |
+| `version`       | Version number of the workflow                 |
+| `exit_condition`| Exit condition for the workflow                |
+| `trigger`       | JSON containing trigger configuration          |
+| `edges`         | JSON containing workflow edges                 |
+| `actions`       | JSON containing workflow actions               |
+| `created_at`    | When the workflow was created                  |
+| `updated_at`    | When the workflow was last updated             |
 
 ### `system.notebooks`
 

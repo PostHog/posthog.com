@@ -741,6 +741,7 @@ if (outputPath) {
 const checkResults = checkLinks(outputPath)
 if (checkResults.brokenLinks > 0) {
     console.log('\nCheck the output above ☝️')
+    process.exit(1)
 }
 
 // Always exit successfully until we fix existing broken links

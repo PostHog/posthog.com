@@ -22,7 +22,7 @@ import { APP_COUNT, getProseClasses, PRODUCT_COUNT } from '../../../constants'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import CloudinaryImage from 'components/CloudinaryImage'
-import IntegrationPrompt from 'components/IntegrationPrompt'
+import WizardCommand from 'components/WizardCommand'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import {
@@ -137,7 +137,7 @@ const AppCount = () => {
 }
 
 const CTAs = () => {
-    const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
+    const [showInstall, setShowInstall] = useState(false)
     return (
         <div className="mb-4">
             <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
@@ -148,20 +148,17 @@ const CTAs = () => {
                 >
                     Get started - free
                 </CallToAction>
-                <CallToAction type="secondary" size="md" onClick={() => setShowIntegrationPrompt(true)}>
+                <CallToAction type="secondary" size="md" onClick={() => setShowInstall(true)}>
                     Install with AI
                 </CallToAction>
             </div>
             <motion.div
                 className="overflow-hidden"
                 initial={{ height: 0 }}
-                animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
+                animate={{ height: showInstall ? 'auto' : 0 }}
             >
-                <div
-                    data-scheme="secondary"
-                    className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
-                >
-                    <IntegrationPrompt />
+                <div className="mt-4">
+                    <WizardCommand latest={false} slim />
                 </div>
             </motion.div>
         </div>

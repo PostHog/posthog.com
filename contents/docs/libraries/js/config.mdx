@@ -4,21 +4,20 @@ sidebar: Docs
 showTitle: true
 ---
 
+import JSConfigBuilder from './_snippets/JSConfigBuilder'
+
 When calling `posthog.init`, there are various configuration options you can set to customize and control the behavior of PostHog.
 
-To configure these options, pass them as an object to the `posthog.init` call, like we do with `api_host`, `defaults`, `loaded`, and `autocapture` below.
+## Configuration builder
 
-```ts
-posthog.init('<ph_project_token>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
-    loaded: function (posthog) {
-        posthog.identify('[user unique id]')
-    },
-    autocapture: false,
-    // ... more options
-})
-```
+Use this interactive builder to generate your `posthog.init` configuration. Select the options you need and copy the generated code.
+
+<JSConfigBuilder />
+
+### Next steps
+
+1. Copy the generated code and add it to your app where PostHog is initialized.
+2. See the [full JavaScript SDK docs](/docs/libraries/js) for more features like identifying users, capturing custom events, and using feature flags.
 
 You can also use the `posthog.set_config` method to change the configuration after initialization.
 
@@ -107,7 +106,10 @@ These are features for advanced users and may lead to unintended side effects if
 | `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | Will keep `/flags` running, but without any feature flag requests. Important: do not use this argument if using surveys, as display conditions rely on feature flags internally.                                                                                                                                                                                                                                                       |
 | `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.                                                                                                                                                                                                                                                  |
 | `advanced_only_evaluate_survey_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`  | Determines whether PostHog should only evaluate feature flags for surveys. Useful for when you want to use this library to evaluate feature flags for surveys only but you have additional feature flags that you evaluate on the server side.
+| `advanced_feature_flags_dedup_per_session`<br/><br/>**Type:** Boolean<br/>**Default:** `false`     | Scopes `$feature_flag_called` deduplication to the current session instead of per identity. Useful for [experiments](/docs/experiments) where a flag was evaluated before the experiment launched. Without this, returning users won't generate new [exposures](/docs/experiments/exposures). Mobile SDKs already deduplicate per session by default. |
 | `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000`               | Sets timeout for fetching feature flags                                                                                                                                                                                                                                                                                                                                                                                                |
+| `feature_flag_cache_ttl_ms`<br/><br/>**Type:** Integer<br/>**Default:** `0` (disabled) | Sets a time-to-live for cached feature flag values. When enabled, `getFeatureFlag()` returns `undefined` instead of stale cached values if the cache is older than the TTL, and stale `$feature/` properties are not attached to events. This is useful when `/flags` requests fail (e.g., due to ad blockers or network issues) and you want to avoid using outdated flag values indefinitely. By default (`0` or `undefined`), cached values never expire. |
+| `remote_config_refresh_interval_ms`<br/><br/>**Type:** Integer<br/>**Default:** `300000` (5 minutes) | Controls how often feature flags and remote config are automatically refreshed in long-running sessions. Shorter intervals mean fresher flags but more network requests. Longer intervals reduce traffic but flag changes propagate slower. Set to `0` to disable periodic refresh entirely — flags will only update on page load or when you manually call `posthog.reloadFeatureFlags()`. |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS.                                                                                                                                                                                                                                                                                                                         |
 | `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`                           | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) )                                                                                                                                                                                                                                                                                                                               |
 | `fetch_options.cache` <br/><br/>**Type:** string<br/>**Default:** `undefined`                      | `fetch` call cache behavior (see [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#cache) to understand available options). It's important when using NextJS, see [companion documentation](https://nextjs.org/docs/app/api-reference/functions/fetch#fetchurl-options). This is a tricky option, avoid using it unless you are aware of the changes this could cause - such as cached feature flag values, etc. |

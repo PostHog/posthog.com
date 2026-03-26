@@ -83,7 +83,7 @@ At **PostHog**, we achieve this in a bunch of different ways:
 
 * **$300 monthly co-working budget**.** This makes it easy for people to meet up and work together if they already live in the same city.
 
-* **$1,500 quarterly meet-up budget** for ad hoc in-person collaboration with colleagues. This can cover flights, accommodation, and other expenses. At PostHog, Paul and Ben used this recently to meet for a week in Italy and ship our new [heatmap and scroll depth feature](/changelog/2024#mouse-and-scroll-depth-tracking-launched).
+* **$1,500 quarterly meet-up budget** for ad hoc in-person collaboration with colleagues. This can cover flights, accommodation, and other expenses. At PostHog, Paul and Ben used this recently to meet for a week in Italy and ship our new [heatmap and scroll depth feature](/changelog?id=2010).
 
 * **In-person onboarding.** When new people join the company, we prioritize organizing an in-person onboarding session as soon as possible. This helps people get to know each other and share important context.
 

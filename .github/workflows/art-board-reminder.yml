@@ -1,0 +1,135 @@
+name: Art board project reminder (reusable)
+
+# Reusable workflow: paginates a Projects V2 board, finds issues stuck in a
+# given column for too long, and posts a one-time reminder comment.
+
+permissions:
+    contents: read
+
+on:
+    workflow_call:
+        inputs:
+            column:
+                required: true
+                type: string
+            stale_days:
+                required: true
+                type: number
+            match_missing_status:
+                description: Also match items with no Status field set (for "No Status" columns)
+                required: false
+                type: boolean
+                default: false
+            reminder_tag:
+                description: HTML comment used to deduplicate reminders
+                required: true
+                type: string
+            message:
+                description: 'Comment body — use {days} as a placeholder'
+                required: true
+                type: string
+        secrets:
+            GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID:
+                required: true
+            GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY:
+                required: true
+
+jobs:
+    remind:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get app token
+              id: app-token
+              uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+              with:
+                  app-id: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
+                  private-key: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
+            - name: Find stale issues and post reminders
+              uses: actions/github-script@v7
+              env:
+                  INPUT_COLUMN: ${{ inputs.column }}
+                  INPUT_STALE_DAYS: ${{ inputs.stale_days }}
+                  INPUT_MATCH_MISSING: ${{ inputs.match_missing_status }}
+                  INPUT_TAG: ${{ inputs.reminder_tag }}
+                  INPUT_MESSAGE: ${{ inputs.message }}
+              with:
+                  github-token: ${{ steps.app-token.outputs.token }}
+                  script: |
+                      const column       = process.env.INPUT_COLUMN;
+                      const staleDays    = parseInt(process.env.INPUT_STALE_DAYS);
+                      const matchMissing = process.env.INPUT_MATCH_MISSING === 'true';
+                      const reminderTag  = process.env.INPUT_TAG;
+                      const msgTemplate  = process.env.INPUT_MESSAGE;
+                      const snoozed      = 'All projects (snoozed projects)';
+                      const staleMs      = staleDays * 86_400_000;
+                      const now          = Date.now();
+
+                      // ── Paginate all project items ────────────────────────────────
+                      const QUERY = `
+                        query($org: String!, $num: Int!, $cursor: String) {
+                          organization(login: $org) {
+                            projectV2(number: $num) {
+                              items(first: 100, after: $cursor) {
+                                pageInfo { hasNextPage endCursor }
+                                nodes {
+                                  updatedAt
+                                  fieldValues(first: 20) {
+                                    nodes {
+                                      ... on ProjectV2ItemFieldSingleSelectValue {
+                                        name
+                                        field { ... on ProjectV2FieldCommon { name } }
+                                      }
+                                    }
+                                  }
+                                  content {
+                                    ... on Issue { number state repository { nameWithOwner } }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }`;
+
+                      let items = [], cursor = null;
+                      do {
+                        const res = await github.graphql(QUERY, { org: 'PostHog', num: 65, cursor });
+                        const page = res.organization.projectV2.items;
+                        items = items.concat(page.nodes);
+                        cursor = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null;
+                      } while (cursor);
+
+                      // ── Filter stale items ────────────────────────────────────────
+                      const stale = items.filter(item => {
+                        const issue = item.content;
+                        if (!issue?.number || issue.state === 'CLOSED') return false;
+
+                        const status = item.fieldValues.nodes.find(f => f.field?.name === 'Status');
+                        if (status?.name === snoozed) return false;
+
+                        const matches = matchMissing
+                          ? (!status || status.name === column)
+                          : (status?.name === column);
+                        if (!matches) return false;
+
+                        return (now - new Date(item.updatedAt).getTime()) >= staleMs;
+                      });
+
+                      console.log(`${stale.length} stale item(s) in "${column}".`);
+
+                      // ── Post one-time reminders ───────────────────────────────────
+                      for (const item of stale) {
+                        const issue = item.content;
+                        const [owner, repo] = issue.repository.nameWithOwner.split('/');
+
+                        const { data: comments } = await github.rest.issues.listComments({
+                          owner, repo, issue_number: issue.number, per_page: 100,
+                        });
+                        if (comments.some(c => c.body.includes(reminderTag))) continue;
+
+                        const days = Math.floor((now - new Date(item.updatedAt).getTime()) / 86_400_000);
+                        await github.rest.issues.createComment({
+                          owner, repo, issue_number: issue.number,
+                          body: `${reminderTag}\n${msgTemplate.replace('{days}', days)}`,
+                        });
+                        console.log(`Reminded #${issue.number} (${days} days).`);
+                      }

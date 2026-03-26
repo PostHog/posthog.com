@@ -12,36 +12,7 @@ import TeamMember from 'components/TeamMember'
 import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo } from '../../constants/logos'
-import { IconCopy, IconChevronRight, IconCheck } from '@posthog/icons'
-import { useToast } from '../../context/Toast'
-
-export function CopyableCommand({ className = '' }: { className?: string }): JSX.Element {
-    const { addToast } = useToast()
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText('npx @posthog/wizard')
-        addToast({
-            description: (
-                <span className="inline-flex items-center gap-1.5">
-                    <IconCheck className="size-4 text-green" />
-                    Copied to clipboard
-                </span>
-            ),
-            duration: 2000,
-        })
-    }
-
-    return (
-        <button
-            onClick={handleCopy}
-            className={`group inline-flex items-center gap-2 bg-dark text-white font-mono text-sm pl-3 pr-3 py-2.5 rounded-md cursor-pointer border-0 dark:border border-secondary hover:opacity-90 transition-opacity ${className}`}
-        >
-            <IconChevronRight className="size-4 opacity-50" />
-            <code className="!bg-transparent !p-0 !text-inherit !border-0 mr-1">npx @posthog/wizard</code>
-            <IconCopy className="size-4 opacity-40 group-hover:opacity-70 transition-opacity" />
-        </button>
-    )
-}
+import WizardCommand from 'components/WizardCommand'
 
 function WizardHeader(): JSX.Element {
     return (
@@ -68,7 +39,7 @@ function WizardHeader(): JSX.Element {
                     <p className="!mt-2 !mb-4 text-base">
                         (Make AI do it for you – <em>with one swift terminal command</em>.)
                     </p>
-                    <CopyableCommand />
+                    <WizardCommand latest={false} slim />
                 </div>
                 <div className="shrink-0">
                     <img
@@ -147,7 +118,6 @@ const frameworkCategories = [
             { name: 'React Native', logo: 'reactNative', url: '/docs/libraries/react-native' },
             { name: 'iOS', logo: 'ios', url: '/docs/libraries/ios' },
             { name: 'Android', logo: 'android', url: '/docs/libraries/android' },
-            { name: 'Flutter', logo: 'flutter', url: '/docs/libraries/flutter' },
         ],
     },
 ]
@@ -221,7 +191,7 @@ function GetStarted(): JSX.Element {
                 </ExtLink>
                 .
             </p>
-            <CopyableCommand />
+            <WizardCommand latest={false} slim />
         </div>
     )
 }

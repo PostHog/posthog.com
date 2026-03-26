@@ -23,7 +23,7 @@ Each ticket has the following properties:
 | **Ticket number** | Auto-incremented unique number (e.g., #1, #2, #3) |
 | **Status** | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | **Priority** | `low`, `medium`, `high` (optional) |
-| **Channel** | Where the ticket came from (currently `widget` only) |
+| **Channel** | Where the ticket came from: `widget`, `slack`, or `email` |
 | **Assignee** | User or role responsible for the ticket |
 | **Session ID** | The PostHog session for events and exceptions |
 | **Session Replay ID** | The session recording (if replay is enabled) |
@@ -45,7 +45,9 @@ The ticket inbox supports filtering by:
 
 - **Status** - Filter by ticket status
 - **Priority** - Filter by priority level
-{/*- **Channel source** - Filter by where the ticket came from*/}
+- **Channel** - Filter by source: widget, Slack, or email
+- **SLA state** - On track, at risk, or breached
+- **Tags** - Filter by tags attached to tickets
 - **Assignee** - Unassigned, specific user, or specific role
 - **Date range** - Filter by creation date
 - **Search** - Search by ticket number, customer name, or email
@@ -62,7 +64,7 @@ Tickets can be assigned to:
 1. Open a ticket
 2. Click the **Assignee** dropdown in the sidebar
 3. Search for and select a user or role
-4. The assignment is saved automatically
+4. Click **Save changes**
 
 <CalloutBox icon="IconInfo" title="How assignment works" type="fyi">
 
@@ -76,6 +78,32 @@ In the ticket list, use the assignee filter:
 - **Unassigned** - Show tickets with no assignment
 - **User: [name]** - Show tickets assigned to a specific user
 - **Role: [name]** - Show tickets assigned to a specific role
+
+## SLAs
+
+SLA deadlines are set via [workflow automation](/docs/support/workflows) — there's no built-in SLA configuration UI. You create a workflow that triggers on ticket creation (or priority change) and uses the **Update ticket** action to set a deadline.
+
+SLA states are derived from the deadline:
+
+| State | Condition |
+|-------|-----------|
+| **On track** | More than 1 hour until deadline |
+| **At risk** | 1 hour or less until deadline |
+| **Breached** | Past the deadline |
+
+The ticket list supports filtering and sorting by SLA state. The SLA deadline is also displayed in the ticket detail sidebar.
+
+See [workflow automation](/docs/support/workflows) for examples of setting SLAs based on channel, priority, or customer domain.
+
+## Tags
+
+Tickets support free-form tags for categorization and filtering.
+
+- Tags are shared across the project — any tag used on one ticket is available on all tickets
+- Add or remove tags from the ticket detail sidebar
+- Filter the ticket list by tags
+
+Tags can also be set automatically via [workflow automation](/docs/support/workflows#8-auto-tag-tickets-by-customer-email-domain).
 
 ## Messages
 
@@ -98,14 +126,14 @@ Messages you send to customers display delivery status indicators:
 
 Status indicators appear on messages sent by your team. They help you understand whether customers have seen your responses.
 
-### Private messages
+### Private notes
 
-Messages can be marked as private. Private messages:
-- Are only visible to your team in PostHog
-- Are hidden from customers in the widget
+Messages can be marked as private notes, which are:
+- Only visible to your team in PostHog
+- Hidden from customers in the widget
 - Useful for internal notes or handoff context
 
-To send a private message, toggle the **Private** option before sending.
+To send a private note, toggle the **Private** option before sending.
 
 ### Unread tracking
 
@@ -147,9 +175,13 @@ Other tickets from the same person. Useful for:
 - Identifying recurring issues
 - Seeing how previous issues were resolved
 
+### Activity log
+
+A history of all changes made to the ticket — status changes, assignment updates, priority changes, and more. This helps you understand the full timeline of a ticket's lifecycle.
+
 ## Tips for efficient support
 
-1. **Use private messages** for internal notes when handing off tickets
+1. **Use private notes** for internal notes when handing off tickets
 2. **Check [session replay](/docs/session-replay)** before asking the user to describe what happened
 3. **Look at exceptions** to quickly identify bugs
 4. **Review previous tickets** to avoid asking repeat questions

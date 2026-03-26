@@ -1,0 +1,41 @@
+---
+title: Write Hog functions with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) writes [Hog functions](/docs/cdp) for transformations, filters, and realtime destinations using natural language. Describe what you want the function to do, and PostHog AI generates the code with the correct inputs, event handling, and API calls.
+
+## How it works
+
+Describe what you need and PostHog AI generates the function code, configures the correct inputs and variables, handles the event structure and property access patterns, and adds the right API calls for destinations like Slack or webhooks.
+
+You can iterate on the generated code by asking follow-up questions like "add a filter for internal IPs" or "also send the user's email in the Slack message."
+
+## Function types PostHog AI can write
+
+| Type | What it does |
+|------|-------------|
+| **Transformation** | Adds, modifies, or removes event properties before they're stored |
+| **Filter** | Drops events that match specific conditions |
+| **Destination** | Sends event data to an external service |
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Create a Hog function that filters out internal traffic by IP`](https://app.posthog.com/#panel=max:Create%20a%20Hog%20function%20that%20filters%20out%20internal%20traffic%20by%20IP)
+- [`Parse event timestamps into day, week, and month properties`](https://app.posthog.com/#panel=max:Parse%20event%20timestamps%20into%20day%2C%20week%2C%20and%20month%20properties)
+- [`Drop events where test_mode is true or the environment is staging`](https://app.posthog.com/#panel=max:Drop%20events%20where%20test_mode%20is%20true%20or%20the%20environment%20is%20staging)
+- [`Write a transformation that adds a user_tier property based on plan type`](https://app.posthog.com/#panel=max:Write%20a%20transformation%20that%20adds%20a%20user_tier%20property%20based%20on%20plan%20type)
+- [`Create a destination function that sends high-value events to Slack`](https://app.posthog.com/#panel=max:Create%20a%20destination%20function%20that%20sends%20high-value%20events%20to%20Slack)
+
+## Tips for better results
+
+- **Describe the input and output** – "Take `$pageview` events and add a `page_category` property based on the URL path" gives PostHog AI enough context to write the transformation
+- **Name specific events and properties** – Reference your actual event names (like `purchase_completed`) and properties (like `plan_type`) so the generated code matches your data
+- **Specify the destination** – For destination functions, name the service (Slack, webhook, email) and describe what data to send
+- **Include edge cases** – "Handle cases where `user_email` is null" helps PostHog AI write more robust code
+- **Describe the logic, not the implementation** – "Categorize pages into marketing, product, and docs based on URL prefix" lets PostHog AI choose the right approach
+
+## Get started
+
+To start writing Hog functions with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).
