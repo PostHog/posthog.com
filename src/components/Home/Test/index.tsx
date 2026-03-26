@@ -880,16 +880,16 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 ]
 
 export default function HomeTest() {
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "" }) {
+    const data = useStaticQuery(graphql`
+        query HomeTestMdx {
+            homepageMdx: mdx(fileAbsolutePath: { regex: "/contents/index\\.mdx/" }) {
                 rawBody
                 mdxBody: body
             }
         }
     `)
+    const rawBody = data?.homepageMdx?.rawBody
+    const mdxBody = data?.homepageMdx?.mdxBody
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()

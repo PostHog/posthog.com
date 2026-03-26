@@ -39,6 +39,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
+import HeroCarousel from 'components/Home/HeroCarousel'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
@@ -1427,19 +1428,56 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             </SmallTeam>
         ),
     },
+    {
+        name: 'HeroCarousel',
+        kind: 'flow',
+        props: [],
+        Editor: () => <HeroCarousel />,
+    },
+    {
+        name: 'HeroImage',
+        kind: 'flow',
+        props: [],
+        Editor: () => (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
+                className="w-64 @2xl:float-right @2xl:ml-4"
+            />
+        ),
+    },
+    {
+        name: 'FAQ',
+        kind: 'flow',
+        props: [{ name: 'children', type: 'expression' }],
+        Editor: ({ children }: any) => <div>{children}</div>,
+    },
+    {
+        name: 'FAQItem',
+        kind: 'flow',
+        props: [
+            { name: 'trigger', type: 'string' },
+            { name: 'children', type: 'expression' },
+        ],
+        Editor: ({ trigger, children }: any) => (
+            <details>
+                <summary className="font-bold cursor-pointer">{trigger}</summary>
+                {children}
+            </details>
+        ),
+    },
 ]
 
 export default function Home() {
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql`
         query {
-            mdx(slug: { eq: "" }) {
+            homepageMdx: mdx(fileAbsolutePath: { regex: "/contents/index\\.mdx/" }) {
                 rawBody
                 mdxBody: body
             }
         }
     `)
+    const rawBody = data?.homepageMdx?.rawBody
+    const mdxBody = data?.homepageMdx?.mdxBody
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
