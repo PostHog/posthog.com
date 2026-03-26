@@ -8,49 +8,32 @@ import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-const dataSources = [
-    { key: 'postgres', label: 'Postgres', url: '/docs/data-warehouse/sources/postgres' },
-    { key: 'snowflake', label: 'Snowflake', url: '/docs/data-warehouse/sources/snowflake' },
-    { key: 'salesforce', label: 'Salesforce', url: '/docs/data-warehouse/sources/salesforce' },
-    { key: 'stripe', label: 'Stripe', url: '/docs/data-warehouse/sources/stripe' },
-    { key: 'zendesk', label: 'Zendesk', url: '/docs/data-warehouse/sources/zendesk' },
-    { key: 'googleAds', label: 'Google Ads', url: '/docs/data-warehouse/sources/google-ads' },
-    { key: 'hubspot', label: 'HubSpot', url: '/docs/data-warehouse/sources/hubspot' },
-    { key: 'bigquery', label: 'BigQuery', url: '/docs/data-warehouse/sources/bigquery' },
-    { key: 'redshift', label: 'Redshift', url: '/docs/data-warehouse/sources/redshift' },
-    { key: 'mysql', label: 'MySQL', url: '/docs/data-warehouse/sources/mysql' },
-    { key: 'github', label: 'GitHub', url: '/docs/data-warehouse/sources/github' },
-    { key: 'mongodb', label: 'MongoDB', url: '/docs/data-warehouse/sources/mongodb' },
-] as const
+const pickedSourceSlugs = [
+    'postgres',
+    'snowflake',
+    'salesforce',
+    'stripe',
+    'zendesk',
+    'google-ads',
+    'hubspot',
+    'bigquery',
+    'redshift',
+    'mysql',
+    'github',
+    'mongodb',
+]
 
-const exportDestinations = [
+const batchExportItems = [
     { label: 'BigQuery', url: '/docs/cdp/batch-exports/bigquery', logoKey: 'bigquery' },
     { label: 'Snowflake', url: '/docs/cdp/batch-exports/snowflake', logoKey: 'snowflake' },
     { label: 'Amazon S3', url: '/docs/cdp/batch-exports/s3', logoKey: 's3' },
     { label: 'PostgreSQL', url: '/docs/cdp/batch-exports/postgres', logoKey: 'postgres' },
     { label: 'Redshift', url: '/docs/cdp/batch-exports/redshift', logoKey: 'redshift' },
-    { label: 'Zapier', url: '/docs/cdp/destinations/zapier', logoKey: 'zapier' },
-    { label: 'HubSpot', url: '/docs/cdp/destinations/hubspot', logoKey: 'hubspot' },
-    { label: 'Salesforce', url: '/docs/cdp/destinations/salesforce', logoKey: 'salesforce' },
-    {
-        label: 'Intercom',
-        url: '/docs/cdp/destinations/intercom',
-        image: 'https://us.posthog.com/static/services/intercom.png',
-    },
-    {
-        label: 'Customer.io',
-        url: '/docs/cdp/destinations/customerio',
-        image: 'https://us.posthog.com/static/services/customerio.png',
-    },
-    { label: 'Zendesk', url: '/docs/cdp/destinations/zendesk', logoKey: 'zendesk' },
-    {
-        label: 'HTTP Webhook',
-        url: '/docs/cdp/destinations/webhook',
-        image: 'https://us.posthog.com/static/services/webhook.png',
-    },
-    // { label: 'Airtable', url: '/docs/cdp/destinations/airtable', image: 'https://us.posthog.com/static/services/airtable.png' },
-    // { label: 'Mailgun', url: '/docs/cdp/destinations/mailgun', image: 'https://us.posthog.com/static/services/mailgun.png' },
 ]
+
+const pickedDestinationSlugs = ['zapier', 'hubspot', 'salesforce', 'intercom', 'customerio', 'zendesk', 'webhook']
+
+const getIconUrl = (iconUrl: string) => (iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`)
 
 const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehouse', 'bi'] as const
 
@@ -103,14 +86,41 @@ export const OnePlaceSlide = () => {
     const platforms = usePlatformList('docs/data-warehouse/sources', 'as a source')
     const sourceCount = platforms.length + 1
 
-    const { destinations } = useStaticQuery(graphql`
-        query HeroDestinationCount {
-            destinations: allPostHogPipeline(filter: { type: { eq: "destination" }, status: { ne: "coming_soon" } }) {
+    const { allDestinations } = useStaticQuery(graphql`
+        query HeroDestinationData {
+            allDestinations: allPostHogPipeline(
+                filter: { type: { eq: "destination" }, status: { ne: "coming_soon" } }
+            ) {
                 totalCount
+                nodes {
+                    slug
+                    name
+                    icon_url
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
+                }
             }
         }
     `)
-    const destinationCount = destinations?.totalCount || 0
+    const destinationCount = allDestinations?.totalCount || 0
+
+    const pickedSources = pickedSourceSlugs
+        .map((slug) => platforms.find((p: any) => p.url.endsWith(`/${slug}`)))
+        .filter(Boolean)
+
+    const pickedDestinations = pickedDestinationSlugs
+        .map((slug) => allDestinations?.nodes?.find((n: any) => n.slug === slug))
+        .filter(Boolean)
+        .map((n: any) => ({
+            label: n.name,
+            url: n.mdx?.fields?.slug || `/docs/cdp/destinations/${n.slug}`,
+            image: getIconUrl(n.icon_url),
+        }))
+
+    const exportDestinations = [...batchExportItems, ...pickedDestinations]
 
     const manageProducts = manageQueryHandles.map((h) => allProducts.find((p: any) => p.handle === h))
     return (
@@ -135,20 +145,22 @@ export const OnePlaceSlide = () => {
                         Data sources &amp; import
                     </div>
                     <div className="flex flex-wrap gap-x-6 gap-y-2 @lg:justify-center">
-                        {dataSources.map(({ key, label, url }, i) => {
-                            const fromEnd = dataSources.length - 1 - i
+                        {pickedSources.map((source: any, i: number) => {
+                            const fromEnd = pickedSources.length - 1 - i
                             const fadeSteps = [0.2, 0.2, 0.35, 0.35, 0.5, 0.5, 0.65, 0.65, 0.8, 0.8]
                             const opacity = fromEnd < fadeSteps.length ? fadeSteps[fromEnd] : 1
                             return (
                                 <Link
-                                    key={key}
-                                    to={url}
+                                    key={source.url}
+                                    to={source.url}
                                     state={{ newWindow: true }}
                                     className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
                                     style={opacity < 1 ? { opacity } : undefined}
                                 >
-                                    <img src={getLogo(key)} alt={label} className="size-4 object-contain" />
-                                    <span>{label}</span>
+                                    {source.image && (
+                                        <img src={source.image} alt={source.label} className="size-4 object-contain" />
+                                    )}
+                                    <span>{source.label}</span>
                                 </Link>
                             )
                         })}
