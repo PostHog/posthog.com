@@ -26,7 +26,7 @@ export const activeViewersDark = "https://res.cloudinary.com/dmukukwp6/image/upl
 export const areaLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099337/posthog.com/contents/docs/product-analytics/trends/area-chart-light.png"
 export const areaDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099340/posthog.com/contents/docs/product-analytics/trends/area-chart-dark.png"
 
-There are nine charts and visualization options in trends. They're split into two categories:
+There are ten charts and visualization options in trends. They're split into two categories:
 
 - **Time series**, which show you how tracked events and data points fluctuate over a time period.
 - **Total value**, which show the total number of tracked events or data points in any given time period.
@@ -83,6 +83,22 @@ Additional series or breakdowns you add to a bar chart will appear stacked, so y
 
 Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stacked bar chart, but render the data in a line chart showing how each data point contributes to the total.
 
+
+### Box plot
+
+The box plot displays the statistical distribution of a numeric property's values over time. Each box shows:
+
+- **Min** – the minimum value
+- **25th percentile (Q1)** – the value below which 25% of observations fall
+- **Median** – the middle value (50th percentile)
+- **Mean** – the average value
+- **75th percentile (Q3)** – the value below which 75% of observations fall
+- **Max** – the maximum value
+
+Box plots are useful for understanding how the distribution of a metric changes across time intervals and for spotting outliers.
+
+Box plots require you to select a numeric property (such as `$session_duration` or a custom numeric property). Breakdowns and formulas are not available for box plots.
+
 ## Total value 
 
 ### Number
@@ -121,6 +137,8 @@ Try using a [breakdown](/docs/product-analytics/trends/breakdowns) in combinatio
 />
 
 The table view displays the raw numerical values of a series over the _entire date range_.
+
+When you enable **Compare to previous period**, comparison values appear in a dedicated column next to the current values, making it easy to compare them side-by-side.
 
 ### Pie
 

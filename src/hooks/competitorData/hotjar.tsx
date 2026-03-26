@@ -75,6 +75,7 @@ export const hotjar = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
@@ -109,11 +110,11 @@ export const hotjar = {
             platform_support: {
                 features: {
                     web_app_recordings: true,
-                    mobile_app_recordings: false,
-                    ios_recordings: false,
-                    android_recordings: false,
-                    react_native_recordings: false,
-                    flutter_recordings: false,
+                    mobile_app_recordings: 'Enterprise',
+                    ios_recordings: 'Enterprise',
+                    android_recordings: 'Enterprise',
+                    react_native_recordings: 'Enterprise',
+                    flutter_recordings: 'Enterprise',
                 },
             },
             analysis: {
@@ -123,12 +124,6 @@ export const hotjar = {
                     performance_monitoring: false,
                     network_monitor: false,
                     dom_explorer: false,
-                },
-            },
-            ai: {
-                features: {
-                    // https://www.hotjar.com/product/recordings/ "Sense"
-                    ai_summaries: true,
                 },
             },
         },
@@ -214,6 +209,10 @@ export const hotjar = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: false,
+            },
+            monitoring: {
+                performance_monitoring: false,
             },
         },
         dashboards: {
@@ -265,6 +264,7 @@ export const hotjar = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             ccpa_ready: true,

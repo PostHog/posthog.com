@@ -13,6 +13,7 @@ export const featureFlags = {
     color: 'seagreen',
     colorSecondary: 'seagreen',
     category: 'product_engineering',
+    wizardSupport: 'In development',
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:

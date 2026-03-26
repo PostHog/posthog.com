@@ -8,39 +8,52 @@ icon: >-
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import Tab from "components/Tab"
 
-The Vercel Marketplace integration adds PostHog feature flags and experiments to your Vercel projects with billing handled through Vercel.
+The Vercel Marketplace integration adds PostHog to your Vercel projects. There are two ways to set it up:
 
-Choose this integration if you do not already have a PostHog account and you prefer to consolidate payment for PostHog inside your Vercel invoice.
+- **Add** – Creates a new PostHog organization with billing through Vercel
+- **Link Existing Account** – Connects an existing PostHog organization. Billing stays with PostHog.
 
-<CalloutBox icon="IconInfo" title="New organizations only" type="fyi">
+<CalloutBox icon="IconInfo" title="Billing depends on how you install" type="fyi">
 
-This integration creates a new PostHog organization. You cannot migrate an existing PostHog organization to be billed through Vercel.
+New accounts created through the **Add** flow are billed through Vercel. Linked accounts keep their existing PostHog billing. You cannot migrate an existing PostHog organization to Vercel billing.
 
 </CalloutBox>
 
 ## Installing the integration
 
-1. Go to the [PostHog integration page](https://vercel.com/integrations/posthog) on Vercel Marketplace
-2. Click **Install**
+### Add (new account)
 
-This creates a PostHog organization and project, and adds environment variables to your Vercel project.
+1. Go to the [PostHog integration page](https://vercel.com/integrations/posthog) on Vercel Marketplace
+2. Click **Add**
+
+This creates a new PostHog organization and project, and adds environment variables to your Vercel project. Billing goes through your Vercel account.
+
+### Link Existing Account
+
+If you already have a PostHog account, you can connect it to Vercel instead:
+
+1. Go to the [PostHog integration page](https://vercel.com/integrations/posthog) on Vercel Marketplace
+2. Click **Link Existing Account**
+3. Log in to your PostHog account if prompted
+4. Select the organization you want to link
+5. Click **Connect organization**
+
+You must have admin or owner access to the PostHog organization to link it. Billing stays with PostHog for linked accounts.
 
 ## Environment variables
 
 The integration adds these environment variables to your Vercel project:
 
-- `POSTHOG_PROJECT_API_KEY` - Your [project token](https://us.posthog.com/project/settings), used to initialize the PostHog SDK
-- `POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
+- `NEXT_PUBLIC_POSTHOG_KEY` - Your project API key, used to initialize the PostHog SDK
+- `NEXT_PUBLIC_POSTHOG_HOST` - The PostHog API host URL (either `https://us.i.posthog.com` or `https://eu.i.posthog.com`)
 
-For client-side frameworks, you'll need to rename these variables in your Vercel project settings to expose them to the browser:
+These `NEXT_PUBLIC_*` variable names work automatically in Next.js for both client and server environments. For other frameworks, you may need to copy the values to framework-specific variable names:
 
 | Framework | Rename to |
 |-----------|-----------|
 | Next.js | `NEXT_PUBLIC_POSTHOG_TOKEN`, `NEXT_PUBLIC_POSTHOG_HOST` |
 | Vite/SvelteKit | `VITE_POSTHOG_TOKEN`, `VITE_POSTHOG_HOST` |
 | Nuxt | `NUXT_PUBLIC_POSTHOG_TOKEN`, `NUXT_PUBLIC_POSTHOG_HOST` |
-
-Server-side code can use the original names directly.
 
 ## Installing the SDK
 
@@ -112,7 +125,10 @@ For full documentation:
 
 ## Billing
 
-Billing goes through your Vercel account. View usage in Vercel under **Integrations** → **PostHog**.
+Billing depends on how you installed the integration:
+
+- **Add (new account)** – Billed through your Vercel account. View usage in Vercel under **Integrations** → **PostHog**.
+- **Link Existing Account** – Billed through your existing PostHog account. View usage in [PostHog billing settings](https://app.posthog.com/organization/billing).
 
 See [our pricing page](/pricing) for more details.
 

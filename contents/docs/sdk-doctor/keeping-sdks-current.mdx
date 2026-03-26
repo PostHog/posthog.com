@@ -1,0 +1,247 @@
+---
+title: Keeping SDKs current
+sidebar: Docs
+showTitle: true
+---
+[SDK doctor](/docs/sdk-doctor) identifies when your PostHog SDKs are outdated, but understanding why they fall behind, and how to prevent it, helps avoid the problem in the first place.
+## Ways SDK versions fall behind
+
+### HTML snippet for the JavaScript web SDK
+
+The [HTML snippet](/docs/web-analytics/installation/html-snippet) loads `posthog-js` directly from our CDN. When a new version is released, visitors to your site should get the latest version automatically.
+
+However, there are a few things which can break the intended auto-update behavior:
+
+- **Invalid changes to the HTML snippet** - Making changes to the HTML snippet, other than those covered in the [config](/docs/libraries/js/config) and [reference](/docs/references/posthog-js) docs, can cause problems. For example: wrapping the snippet in an additional `if (!window.posthog)` check will cause the browser to serve the old SDK from cache, so the browser gets stuck on the first version they loaded (until/unless the end-user does a hard refresh). This error is often a result of LLMs "defensively" trying to prevent the snippet from being loaded twice, even though the snippet already handles that.
+
+- **Outdated snippet code** - The snippet itself (the loader stub) occasionally needs updating, to make sure you're initializing PostHog in a way that includes more recent bug fixes and improvements. To make sure you're using the most recent version of the snippet, copy the HTML snippet directly from your [project settings](https://app.posthog.com/settings/project-details#snippet) and paste it directly into the `<head>` section of the HTML for your site or app. (Be sure to remove the old version while you're at it.)
+
+- **See also** - [Caching layers](#caching-layers) for more causes of stale SDK versions hanging around long past the expiry date, when using the HTML snippet.
+
+ > **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available version of the SDK.
+
+### npm and package manager lockfiles
+
+When you install `posthog-js` (or any npm package) via a package manager, your lockfile pins the exact version. So, running `npm install` again in the future just reproduces the lockfile; it won't update to a newer version even if one is available. This leaves you stuck on the version you originally installed.
+
+To actually _update_ the package, you need to update the version constraint in your `package.json` file and then reinstall, or run `update` instead of `install`:
+
+<MultiLanguage>
+
+```bash file=npm
+npm update posthog-js
+```
+
+```bash file=pnpm
+pnpm update posthog-js
+```
+
+```bash file=Yarn
+yarn upgrade posthog-js
+```
+
+</MultiLanguage>
+
+Other patterns that cause version drift in npm setups:
+
+- **Micro-frontends** - Each micro-frontend may bundle its own version of `posthog-js`. If they're updated independently, you can end up with multiple versions active simultaneously.
+- **Monorepos** - Different packages in a monorepo may depend on different versions of `posthog-js`, especially if each has its own lockfile.
+- **Dependabot or Renovate misconfiguration** - Automated dependency tools may be configured to ignore or pin PostHog packages, preventing updates from being proposed.
+
+> **Fix:** [Staying current automatically](#staying-current-automatically) covers how to configure Dependabot and Renovate to keep PostHog packages updated safely.
+
+### Caching layers
+
+Even after you've deployed an updated version of `posthog-js`, some users may continue to receive the old version due to caching at various layers:
+
+- **CDN/edge caching** (CloudFront, Vercel, Netlify, etc.) may serve a cached copy of your JavaScript bundle for minutes, hours, or longer after a new deploy.
+- **Service workers** that cache your app's assets may continue serving an old bundle until the service worker itself is updated.
+- **ISP and/or corporate proxy caching** can intercept and serve stale responses before they reach the browser.
+- **Browser extensions** may intercept or modify network requests in ways that prevent updates from loading.
+
+One effective way to prevent CDN and proxy caching from impacting the PostHog web SDK HTML snippet is to [deploy a reverse proxy](/docs/advanced/proxy). Our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) sets a cache header of 60 seconds. You can also [roll your own reverse proxy](/docs/advanced/proxy#deploy-your-own-proxy) for full control.
+
+> **See also:** [HTML snippet](#html-snippet-for-the-javascript-web-sdk). Errors in the snippet make caching problems more likely.
+
+### Build and deploy issues
+
+Caching at the CDN layer is closely related to how you build and deploy your app:
+
+- **Incremental deploys without clean builds** - If your build system only rebuilds changed files, old JavaScript chunks may still reference the old version of `posthog-js`. This can result in different versions of the library being active at the same time within the same session.
+- **Tag manager templates** (GTM, Segment, etc.) can pin a specific version of `posthog-js`. These templates need to be manually updated when you want to move to a newer version of the HTML snippet.
+- **Multiple entry points** - Apps with multiple build entry points may load different builds of `posthog-js`, some updated, some not, depending on which entry point a user lands on.
+
+---
+## Ways to keep SDK versions current
+
+### Staying current automatically
+
+> For our [JavaScript web SDK](/docs/libraries/js) (a package within the `posthog-js` monorepo) we recommend the [HTML snippet](/docs/web-analytics/installation/html-snippet), which will serve the latest/current version automatically.
+
+#### JavaScript web HTML snippet
+1. Copy your snippet from [project settings](https://app.posthog.com/settings/project-details#snippet). This ensures you're using the current snippet code with your project API key pre-populated.
+2. Do NOT add an `if (!window.posthog)` guard wrapping the snippet.
+3. The snippet loads `posthog-js` from our CDN and will auto-update on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
+
+#### JavaScript web npm package
+Dependabot and Renovate can open pull requests when new versions of PostHog packages are published, making it easier to stay current without manual monitoring.
+
+##### Security considerations
+
+Before enabling auto-merge for dependency updates, it's worth understanding a risk that we learned about the hard way, in November of 2025. During the [Shai-Hulud supply chain attack](/blog/nov-24-shai-hulud-attack-post-mortem), malicious versions of several PostHog npm packages were published and began propagating via `npm install`. The attack was identified and the malicious packages removed within hours, but teams with auto-merge enabled, and no delay, would have been exposed immediately.
+
+The key safeguard is setting a **minimum release age** before auto-merging dependency updates, or requiring human review before merging. This gives the security community, package registries, and library maintainers time to identify and remove malicious packages before they reach your codebase.
+
+PostHog's recommendation (from the post-mortem) is to set a minimum release age of **3 days** or more.
+
+**pnpm:** Add to `.npmrc`:
+```
+minimum-release-age=3 days
+```
+
+**yarn:** Check your yarn version's documentation for the equivalent `minimumReleaseAge` setting.
+
+**Renovate:** Use `minimumReleaseAge` or `stabilityDays` in your `renovate.json`:
+```json
+{
+  "packageRules": [
+    {
+      "matchPackageNames": ["posthog-js", "posthog-node", "posthog-react-native"],
+      "minimumReleaseAge": "3 days",
+      "automerge": true
+    }
+  ]
+}
+```
+
+**Dependabot:** Dependabot does not support native release age gating. The safest approach is to require human review before merging Dependabot PRs for PostHog packages rather than using auto-merge.
+
+> **Note:** The Shai-Hulud attack only affected PostHog npm packages. **PostHog customers using our HTML snippet to load our web SDK were not affected**, since the worm spread via the `preinstall` step during `npm install`.
+
+Also note that PostHog switched to **pnpm 10** after this incident, which disables `preinstall` and `postinstall` scripts by default, providing an additional layer of protection.
+
+### Staying current manually
+
+#### JavaScript web SDK npm package
+
+Run the appropriate update command for your package manager:
+
+<MultiLanguage>
+
+```bash file=npm
+npm update posthog-js
+```
+
+```bash file=pnpm
+pnpm update posthog-js
+```
+
+```bash file=Yarn
+yarn upgrade posthog-js
+```
+
+</MultiLanguage>
+
+> **Note:** yarn's update command is named `upgrade` in yarn v1, or `up` in yarn v2+.
+
+If you're on a major version behind (e.g., v1.x when v2.x is available), you may need to update your `package.json` directly:
+
+```json
+{
+  "dependencies": {
+    "posthog-js": "^2.0.0"
+  }
+}
+```
+
+Then run your package manager's install command.
+
+#### Other PostHog npm packages
+
+##### Frontend SDKs
+
+<MultiLanguage>
+
+```bash file=@posthog/react
+# Updates the @posthog/react package:
+npm update @posthog/react
+```
+
+```bash file=@posthog/nuxt
+# Updates the @posthog/nuxt package:
+npm update @posthog/nuxt
+```
+
+</MultiLanguage>
+
+##### Backend SDKs
+
+<MultiLanguage>
+
+```bash file=Python
+# Updates the `posthog-python` package:
+pip install --upgrade posthog
+```
+
+```bash file=Ruby
+# Updates the `posthog-ruby` package:
+bundle update posthog-ruby
+```
+
+```bash file=PHP
+# Updates the `posthog-php` package:
+composer update posthog/posthog-php
+```
+
+```bash file=Go
+# Updates the `posthog-go` package:
+go get -u github.com/PostHog/posthog-go@latest
+```
+
+```bash file=Elixir
+# To update the `posthog-elixir` package:
+# in mix.exs, update the posthog version, then:
+mix deps.update posthog
+```
+
+```bash file=.NET
+# Updates the `posthog-dotnet` package:
+dotnet add package PostHog
+```
+
+</MultiLanguage>
+
+##### Mobile SDKs
+
+<MultiLanguage>
+
+```bash file=iOS
+# To update the `posthog-ios` package:
+# Update version in Package.swift or Podfile
+# then resolve packages
+```
+
+```bash file=Android
+# To update the `posthog-android` package:
+# Update version in build.gradle
+# then sync project
+```
+
+```bash file=React Native
+# Updates the `posthog-react-native` package:
+npm update posthog-react-native
+```
+
+```bash file=Flutter
+# To update the `posthog-flutter` package:
+# Update version in pubspec.yaml, then:
+flutter pub upgrade
+```
+
+</MultiLanguage>
+
+> **Note:** SDK doctor applies more lenient outdatedness thresholds for mobile SDKs (six months vs. four months for other SDKs). This is intentional, since your users control when they update their apps. So, it's normal to see older versions in mobile event data, well after you've released an update.
+
+#### Services, CMS no-code builders, etc.
+
+If you're loading PostHog via a [service](/docs/services) like [Google Tag Manager](/docs/libraries/google-tag-manager), the template or integration may pin a specific version of `posthog-js`. Check your tag manager's template settings and update to the latest version if one is available.

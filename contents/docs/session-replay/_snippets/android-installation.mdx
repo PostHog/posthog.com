@@ -39,6 +39,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     sessionReplayConfig.maskAllImages = true
 
     // Capture logs automatically. Default is true.
+    // Remote configuration via project settings requires SDK version 3.32.0 or higher.
     sessionReplayConfig.captureLogcat = true
 
     // Whether replays are created using high quality screenshots. Default is false.
@@ -50,6 +51,12 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     // Ps: it was 500ms (0.5s) by default until version 3.8.2
     // Available from version 3.10.0 (Before it was called debouncerDelayMs)
     sessionReplayConfig.throttleDelayMs = 1000
+
+    // Sample rate for session replay. A value between 0.0 and 1.0 that determines the percentage
+    // of sessions to record. For example, 0.5 means 50% of sessions will be recorded.
+    // Default is null (no client-side sampling, server-side settings apply).
+    // Requires SDK version 3.34.0 or higher.
+    sessionReplayConfig.sampleRate = null
 }
 ```
 

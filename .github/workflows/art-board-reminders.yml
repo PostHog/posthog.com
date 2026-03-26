@@ -1,0 +1,33 @@
+name: Art board reminders
+
+permissions:
+    contents: read
+
+on:
+    schedule:
+        - cron: '0 9 * * *' # daily 9 AM UTC
+    workflow_dispatch:
+
+jobs:
+    feedback-review:
+        uses: ./.github/workflows/art-board-reminder.yml
+        with:
+            column: 'Feedback/Review'
+            stale_days: 10
+            reminder_tag: '<!-- art-board-feedback-reminder -->'
+            message: 'This issue has been in **Feedback/Review** for {days} days. Any feedback needed to move it forward?'
+        secrets:
+            GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
+            GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
+
+    no-status:
+        uses: ./.github/workflows/art-board-reminder.yml
+        with:
+            column: 'No Status'
+            stale_days: 7
+            match_missing_status: true
+            reminder_tag: '<!-- art-board-no-status-reminder -->'
+            message: 'This issue has been sitting without an owner for {days} days. Can someone pick this up or assign it to a column on the board?'
+        secrets:
+            GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
+            GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}

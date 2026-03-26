@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> See also [how we do video at PostHog](/handbook/growth/marketing/video).
+> See also [how we do video at PostHog](/handbook/marketing/video).
 
 We experimented with [YouTube](https://www.youtube.com/@PostHog) from November 2022 to July 2023, but have paused creation and publishing for now. We may try again in the future.
 

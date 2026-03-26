@@ -12,6 +12,7 @@ export const clarity = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,

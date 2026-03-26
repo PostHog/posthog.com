@@ -42,7 +42,7 @@ Beta is when you open up the product to all users who want to opt-in. Betas do n
 
 <CalloutBox icon="IconInfo" title="Moving from Concept to Beta" type="fyi">
 
-Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
+Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, update the stage from `concept` to `beta` (or `alpha`). This triggers an automatic notification to all subscribed users letting them know that the beta is available. Users who registered interest during the Concept stage can then opt in to enable the feature.
 
 Make sure your early access feature flag includes a `product_key` on the payload field to give people access to the product in their sidebar. Check the new product RFC for more details.
 
@@ -78,7 +78,7 @@ Product teams are responsible for [writing documentation](/handbook/engineering/
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
-  It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+  It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
 
 </CalloutBox>
 

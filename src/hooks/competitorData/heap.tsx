@@ -1,3 +1,5 @@
+import { workflows } from 'hooks/productData/workflows'
+
 export const heap = {
     name: 'Heap',
     key: 'heap',
@@ -248,6 +250,12 @@ export const heap = {
                 rage_clicks: false,
             },
         },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
@@ -273,6 +281,7 @@ export const heap = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             ci_cd_integrations: false,
