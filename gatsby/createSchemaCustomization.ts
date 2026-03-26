@@ -83,6 +83,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      sourceId: String
     }
     type TeamData {
       name: String
@@ -332,6 +333,29 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secret: Boolean
       required: Boolean
       description: String
+    }
+    type PostHogSource implements Node {
+      mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
+      sourceId: String
+      name: String
+      slug: String
+      icon_url: String
+      docsUrl: String
+      unreleased: Boolean
+      beta: Boolean
+      featured: Boolean
+      caption: String
+      fields: [PostHogSourceField]
+      permissionsCaption: String
+      featureFlag: String
+    }
+    type PostHogSourceField {
+      name: String
+      label: String
+      type: String
+      required: Boolean
+      placeholder: String
+      caption: String
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo

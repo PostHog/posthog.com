@@ -40,6 +40,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
+    const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
+    const SourceRedirect = path.resolve(`src/templates/SourceRedirect.tsx`)
     const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
     const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
@@ -379,6 +381,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     name
                     slug
                     type
+                }
+            }
+            postHogSources: allPostHogSource(filter: { mdx: { id: { eq: null } }, unreleased: { ne: true } }) {
+                nodes {
+                    id
+                    name
+                    slug
+                }
+            }
+            postHogSourcesWithDocs: allPostHogSource(filter: { mdx: { id: { ne: null } }, unreleased: { ne: true } }) {
+                nodes {
+                    id
+                    slug
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                 }
             }
             allSdkReferences {
@@ -921,6 +941,28 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             path: `/docs/cdp/${node.type}s/${node.slug}`,
             component: DataPipeline,
             context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+
+    result.data.postHogSources.nodes.forEach((node) => {
+        createPage({
+            path: `/docs/cdp/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
+        createPage({
+            path: `/docs/data-warehouse/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+
+    // Create data-warehouse/sources/* redirects for sources that have hand-written docs
+    result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
+        createPage({
+            path: `/docs/data-warehouse/sources/${node.slug}`,
+            component: SourceRedirect,
+            context: { redirectTo: `/docs/cdp/sources/${node.slug}` },
         })
     })
 

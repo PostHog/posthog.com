@@ -1123,6 +1123,46 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const fetchDataWarehouseSources = async () => {
+        const response = await fetch('http://localhost:8010/api/public_source_configs?format=json')
+        // const response = await fetch('https://us.posthog.com/api/public_source_configs')
+        const configs = await response.json()
+
+        if (!Array.isArray(configs)) {
+            console.warn('Failed to fetch data warehouse sources: unexpected response', configs)
+            return
+        }
+
+        for (const config of configs) {
+            const displayName = config.label || config.name
+            const slug = displayName
+                .toLowerCase()
+                .replace(/\./g, '')
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '')
+
+            createNode({
+                id: createNodeId(`posthog-source-${config.name}`),
+                internal: {
+                    type: 'PostHogSource',
+                    contentDigest: createContentDigest(config),
+                },
+                sourceId: config.name,
+                slug,
+                name: displayName,
+                icon_url: `https://us.posthog.com${config.iconPath}`,
+                docsUrl: config.docsUrl || null,
+                unreleased: config.unreleasedSource || false,
+                beta: config.betaSource || false,
+                featured: config.featured || false,
+                caption: config.caption || null,
+                fields: config.fields || [],
+                permissionsCaption: config.permissionsCaption || null,
+                featureFlag: config.featureFlag || null,
+            })
+        }
+    }
+
     await Promise.all([
         createProductDataNode(),
         createRoadmapItems(),
@@ -1139,5 +1179,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         fetchAchievements(),
         fetchAchievementGroups(),
         fetchRewards(),
+        fetchDataWarehouseSources(),
     ])
 }
