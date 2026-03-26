@@ -61,23 +61,9 @@ jobs:
                       const prNumber = context.payload.pull_request.number;
                       const author = context.payload.pull_request.user.login;
 
-                      const feedbackComment = `## Inkeep feedback
+                      const feedbackComment = `How was the Inkeep-generated draft?
 
-                      Thanks for working with the Inkeep bot, @${author}! Now that this PR is merged, we'd love your quick feedback to improve the experience.
-
-                      ### Rate your experience (1-5):
-
-                      **Initial draft accuracy:** 
-                      _(1 = very inaccurate, 5 = excellent)_
-
-                      **Editing needed:** 
-                      _(1 = minimal tweaks, 5 = complete rewrite)_
-
-                      **What would make this more helpful?**
-
-                      ---
-                      *Just reply to this comment with your ratings and tag @PostHog/team-docs-wizard. Thanks for helping us improve this workflow!*
-                      </details>`;
+                      [![](https://img.shields.io/badge/👍-Good_draft-brightgreen)](https://us.posthog.com/external_surveys/019c7216-5ce5-0000-d164-5511f6b1340e?q0=1)  [![](https://img.shields.io/badge/👎-Needs_work-red)](https://us.posthog.com/external_surveys/019c7216-5ce5-0000-d164-5511f6b1340e?q0=2)`;
 
                       await github.rest.issues.createComment({
                         owner: context.repo.owner,

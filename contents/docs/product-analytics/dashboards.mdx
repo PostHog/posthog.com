@@ -50,6 +50,15 @@ If you already have some insights set up, an alternative approach is to click **
 
 > **Important:** Insights can appear on multiple dashboards at the same time, so you don't have to create multiple copies of the same insight.
 
+## Organizing dashboards into folders
+
+You can organize dashboards into folders for easier navigation. There are two ways to move a dashboard into a folder:
+
+- **From the dashboards list page** - Click the **...** menu next to a dashboard and select **Move to another folder**.
+- **From an individual dashboard** - Use the sidebar to move it to a folder.
+
+> **Note:** Moving a dashboard to a folder requires editor access.
+
 ## Dates and filters
 
 ### Date range overrides
@@ -89,23 +98,55 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode. 
 
-You can do this in three ways:
+You can do this in five ways:
 
 - Tap 'E' on your keyboard
 - Click on the '...' icon at the top of the dashboard and click 'Edit layout'
 - Click on the '...' icon on any insight card and click 'Edit layout'
+- Hover near the edge of any insight card and click when the resize cursor appears
+- Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
+
+Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
 
 Tapping 'F' enables fullscreen mode.
 
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
 
+### Insight card options
+
+Each insight card on a dashboard has a **⋯** menu with quick visualization toggles. These let you adjust how an insight displays without opening the full insight editor.
+
+- **Show legend** / **Hide legend** – Toggle the chart legend on or off. Available for Trends, Stickiness, and Lifecycle insights.
+- **Show values on series** / **Hide values on series** – Toggle data value labels on chart series. Available for Trends, Stickiness, Lifecycle, and Funnel (trends view) insights. For pie charts, this appears as **Show labels on series** / **Hide labels on series**.
+
+These options require editor access to the insight.
+
 ### Adding text cards
 
-Clicking the dropdown on the 'Add insight button' reveals the option to add a text card to your dashboards.
+Click the dropdown on the **Add...** button and select **Text card** to add a text card to your dashboard.
 
 Text cards support Markdown formatting for text. You can also drag and drop images.
 
 You can use text cards to annotate your dashboard – useful for adding context for other users of the dashboard. For more in-depth analysis, however, we recommend [creating a notebook](/docs/notebooks).
+
+### Adding button tiles
+
+Click the dropdown on the **Add...** button and select **Button** to add a clickable button tile to your dashboard.
+
+Button tiles let you link to other pages within PostHog or external URLs. This is useful for creating navigation shortcuts to related dashboards or external resources.
+
+When creating a button tile, you can configure:
+
+- **URL** - The destination link. Use a path like `/dashboards` for internal PostHog pages, or a full URL like `https://example.com` for external sites.
+- **Button text** - The label displayed on the button.
+- **Placement** - Align the button to the left or right side of the tile.
+- **Style** - Choose between primary (filled) or secondary (outlined) button styles.
+- **Transparent background** - Toggle to remove the tile's background for a cleaner look.
+
+
+### Toggling labels and values on insights
+
+You can toggle the visibility of labels or values on insight charts directly from the dashboard without editing the insight. Click the **...** icon on an insight card and select the toggle option. For pie charts, the option is **Show/Hide labels on series**. For other supported chart types (trends, lifecycle, stickiness, and funnel trends), the option is **Show/Hide values on series**. This change is saved to the insight.
 
 ### Sharing a dashboard
 
@@ -125,6 +166,17 @@ This is useful if you have a PostHog dashboard on a TV screen for others to see.
 
 **Important:** Auto refresh only works when the browser tab is active.
 
+Shared and embedded dashboards (via public links) auto-refresh every 30 minutes by default. This requires no configuration – it's enabled automatically when the page is open. See the [sharing and embedding docs](/docs/product-analytics/sharing) for more on shared dashboards.
+
+
+### AI-powered refresh analysis
+
+When you refresh a dashboard, you can also have AI analyze what changed. Click the sparkle icon on the refresh button to refresh and analyze with AI. PostHog snapshots the current dashboard data, refreshes all insights, and then compares the before and after results. You get a summary of significant changes – drops, spikes, and trend reversals – across all insights on the dashboard.
+
+After the analysis completes, you can rate it with a thumbs up or thumbs down.
+
+> **Note:** AI-powered refresh analysis isn't available when dashboard filter overrides, URL filters, or URL variables are applied.
+
 ## Managing dashboards with Terraform
 
 For teams practicing infrastructure-as-code, you can manage PostHog dashboards and insights using the [PostHog Terraform Provider](https://registry.terraform.io/providers/PostHog/posthog/latest).
@@ -140,7 +192,7 @@ This enables:
 To get started quickly, you can export your existing dashboards as Terraform code using the **Manage with Terraform** button.
 
 You'll see a **Manage with Terraform** button on:
-- **Dashboard pages** - Exports the entire dashboard including all insights, alerts, and hog functions
+- **Dashboard pages** - Exports the entire dashboard including all insights, dashboard layouts, alerts, and hog functions
 - **Insight detail pages** - Exports the individual insight with its associated alerts and hog functions
 
 Click the button to generate HCL code that you can copy directly into your Terraform configuration. This makes it easy to bring existing dashboards under version control without manually recreating them.
@@ -200,6 +252,33 @@ resource "posthog_insight" "pageview_count" {
     }
   })
   tags = ["managed-by:terraform"]
+}
+```
+
+### Example: Defining a dashboard layout
+
+The `posthog_dashboard_layout` resource controls how tiles (insights, text cards, button tiles) are positioned on a dashboard. Each tile can specify layout coordinates, colors, and text content. When you export a dashboard using **Manage with Terraform**, this resource is generated automatically.
+
+```hcl
+resource "posthog_dashboard_layout" "team_metrics" {
+  dashboard_id = posthog_dashboard.team_metrics.id
+  tiles = [
+    {
+      insight_id = posthog_insight.pageview_count.id
+      layouts_json = jsonencode({
+        "sm": {
+          "x": 0,
+          "y": 0,
+          "w": 6,
+          "h": 5
+        }
+      })
+    },
+    {
+      text_body = "Weekly metrics overview"
+      color     = "blue"
+    },
+  ]
 }
 ```
 

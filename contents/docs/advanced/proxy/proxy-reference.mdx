@@ -23,7 +23,7 @@ Check your project URL in the [PostHog app](https://app.posthog.com) to confirm 
 - Allow `GET` and `POST`** on all paths.
 - Support 64MB request bodies, session recordings can be large.
 - Forward `X-Forwarded-For` to preserve client IPs for geolocation.
-- Avoid obvious paths** like `/analytics` or `/posthog`, use `/e` or `/ph` instead.
+- Avoid obvious paths like `/analytics`, `/posthog`, or `/ph`. Use `/e` or `/ingest` instead.
 
 ### SDK configuration
 
@@ -81,14 +81,14 @@ Use a relative path to avoid cross-origin issues:
 
 ```js file=US
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/ingest',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
 posthog.init('<ph_project_token>', {
-  api_host: '/ph',
+  api_host: '/ingest',
   ui_host: 'https://eu.posthog.com'
 })
 ```
@@ -120,4 +120,4 @@ You're missing `ui_host` in your SDK config. See [SDK configuration](#sdk-config
 
 ## Still having issues?
 
-For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](mailto:support@posthog.com).
+For self-hosted proxies, check your proxy's logs and documentation, or ask in the [PostHog community](/community). If you're using the [managed reverse proxy](/docs/advanced/proxy), [contact support](https://app.posthog.com/home#supportModal).

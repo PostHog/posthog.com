@@ -4,36 +4,76 @@ import React, { useEffect, useState } from 'react'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
+import { OSSelect } from 'components/OSForm'
+import { useMediaLibraryContext } from './context'
+import Tooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+
+dayjs.extend(duration)
+
+const formatDuration = (ms: number): string => {
+    const dur = dayjs.duration(ms)
+    const minutes = Math.floor(dur.asMinutes())
+    const seconds = dur.seconds()
+    return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
+}
 
 const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
+interface ImageProps {
+    name?: string
+    previewUrl?: string
+    provider_metadata?: {
+        public_id: string
+        resource_type: string
+    }
+    ext?: string
+    width?: number
+    height?: number
+    id: number | string
+    profiles?: Array<{ id: number; firstName?: string; lastName?: string }>
+    tags?: Array<{ id: string; attributes: { label: string } }>
+    onMoved?: () => void
+    mediaFolder: any
+    prompt?: string
+    generationDurationMs?: number
+}
+
 export default function Image({
-    name,
+    name = '',
     previewUrl,
     provider_metadata,
-    ext,
+    ext = '',
     width,
     height,
-    allTags,
-    fetchTags,
     id,
     profiles = [],
-    ...other
-}: any) {
+    tags: initialTags = [],
+    onMoved,
+    mediaFolder,
+    prompt,
+    generationDurationMs,
+}: ImageProps): JSX.Element {
+    const { folders, tags: allTags, fetchTags } = useMediaLibraryContext()
     const { public_id, resource_type } = provider_metadata || {}
     const { addToast } = useToast()
     const { getJwt, fetchUser } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
-    const [tags, setTags] = useState<any[]>(other.tags || [])
-    const [availableOptions, setAvailableOptions] = useState<any[]>(allTags)
+    const [tags, setTags] = useState(initialTags)
+    const [availableOptions, setAvailableOptions] = useState(allTags)
     const [uploader] = profiles
+    const [isMoving, setIsMoving] = useState(false)
+    const currentFolderId = mediaFolder?.id
+    const formattedDuration = generationDurationMs ? formatDuration(generationDurationMs) : null
 
     useEffect(() => {
         setAvailableOptions(allTags)
     }, [allTags])
 
     const isImage =
-        resource_type === 'image' && ['png', 'jpg', 'jpeg', 'webp'].some((format) => ext.toLowerCase().includes(format))
+        resource_type === 'image' &&
+        ['png', 'jpg', 'jpeg', 'webp'].some((format) => ext?.toLowerCase().includes(format))
 
     const resizeSizes = [200, 500, 800, 1000, 1600, 2000]
     const maxDimension = Math.max(width || 0, height || 0)
@@ -46,7 +86,7 @@ export default function Image({
         } else if (size === 'orig-optimized') {
             return `${CLOUDINARY_BASE}/${resource_type}/upload/q_auto,f_auto/${public_id}${ext}`
         } else {
-            const isPortrait = height > width
+            const isPortrait = (height || 0) > (width || 0)
             const transformation = isPortrait ? `h_${size}` : `w_${size}`
             return `${CLOUDINARY_BASE}/${resource_type}/upload/${transformation},c_limit,q_auto,f_auto/${public_id}${ext}`
         }
@@ -76,7 +116,7 @@ export default function Image({
         setTimeout(() => setLoadingSize(null), 500)
     }
 
-    const addTagToMedia = async (tagId: any, jwt: string) => {
+    const addTagToMedia = async (tagId: string, jwt: string) => {
         await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/add-media`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
@@ -85,7 +125,7 @@ export default function Image({
         await fetchUser()
     }
 
-    const removeTagFromMedia = async (tagId: any, jwt: string) => {
+    const removeTagFromMedia = async (tagId: string, jwt: string) => {
         await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/remove-media`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
@@ -94,12 +134,14 @@ export default function Image({
         await fetchUser()
     }
 
-    const handleChangeTags = async (tagIds: any[]) => {
+    const handleChangeTags = async (tagIds: string[]) => {
         const oldTagIds = tags.map((tag) => tag.id)
-        const addedTagIds = tagIds.filter((id) => !oldTagIds.includes(id))
-        const removedTagIds = oldTagIds.filter((id) => !tagIds.includes(id))
+        const addedTagIds = tagIds.filter((tagId) => !oldTagIds.includes(tagId))
+        const removedTagIds = oldTagIds.filter((tagId) => !tagIds.includes(tagId))
 
-        const newTags = tagIds.map((tagId) => availableOptions.find((t) => t.id === tagId)).filter(Boolean)
+        const newTags = tagIds
+            .map((tagId) => availableOptions.find((t) => t.id === tagId))
+            .filter(Boolean) as typeof tags
         setTags(newTags)
 
         const jwt = await getJwt()
@@ -139,18 +181,84 @@ export default function Image({
 
             if (response.ok) {
                 const { data } = await response.json()
-
                 setAvailableOptions((prev) => [...prev, data])
-
                 setTags((prev) => [...prev, data])
-
                 await addTagToMedia(data.id, jwt)
-
                 fetchTags()
             }
         } catch (error) {
             console.error('Failed to create tag:', error)
             addToast({ description: 'Failed to create tag', error: true, duration: 3000 })
+        }
+    }
+
+    const handleMoveToFolder = async (targetFolderId: string) => {
+        if (!targetFolderId) return
+
+        if (targetFolderId === String(currentFolderId)) {
+            await handleRemoveFromFolder()
+            return
+        }
+
+        setIsMoving(true)
+        try {
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            if (currentFolderId) {
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+                    body: JSON.stringify({ mediaId: id, folderId: currentFolderId }),
+                })
+            }
+
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/add-media`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+                body: JSON.stringify({ mediaId: id, folderId: Number(targetFolderId) }),
+            })
+
+            const targetFolder = folders.find((f) => f.id === Number(targetFolderId))
+            addToast({
+                description: `Moved to ${targetFolder?.attributes?.name || 'folder'}`,
+                duration: 3000,
+            })
+
+            onMoved?.()
+        } catch (error) {
+            console.error('Failed to move to folder:', error)
+            addToast({ description: 'Failed to move to folder', error: true, duration: 3000 })
+        } finally {
+            setIsMoving(false)
+        }
+    }
+
+    const handleRemoveFromFolder = async () => {
+        if (!currentFolderId) return
+
+        setIsMoving(true)
+        try {
+            const jwt = await getJwt()
+            if (!jwt) return
+
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+                body: JSON.stringify({ mediaId: id, folderId: currentFolderId }),
+            })
+
+            addToast({
+                description: 'Removed from folder',
+                duration: 3000,
+            })
+
+            onMoved?.()
+        } catch (error) {
+            console.error('Failed to remove from folder:', error)
+            addToast({ description: 'Failed to remove from folder', error: true, duration: 3000 })
+        } finally {
+            setIsMoving(false)
         }
     }
 
@@ -223,21 +331,61 @@ export default function Image({
                         </button>
                     </div>
                 )}
-                <div className="mt-2">
-                    <CreatableMultiSelect
-                        label="Add a tag..."
-                        placeholder="Search tags..."
-                        options={availableOptions.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
-                        value={tags.map((tag) => tag.id)}
-                        allowCreate
-                        onChange={handleChangeTags}
-                        onCreate={handleCreateTag}
-                        hideLabel
-                    />
+                <div className="mt-2 flex gap-2 items-start">
+                    {folders.length > 0 && (
+                        <div className="w-[140px] flex-shrink-0">
+                            <OSSelect
+                                label="Move to folder"
+                                showLabel={false}
+                                placeholder={isMoving ? 'Moving...' : 'Move to...'}
+                                options={folders.map((folder) => ({
+                                    label: folder.attributes.name,
+                                    value: String(folder.id),
+                                }))}
+                                value={currentFolderId ? String(currentFolderId) : ''}
+                                onChange={handleMoveToFolder}
+                                disabled={isMoving}
+                                searchable={false}
+                                className="h-[38px]"
+                            />
+                        </div>
+                    )}
+                    <div className="flex-1">
+                        <CreatableMultiSelect
+                            label="Add a tag..."
+                            placeholder="Search tags..."
+                            options={availableOptions.map((tag) => ({ label: tag.attributes.label, value: tag.id }))}
+                            value={tags.map((tag) => tag.id)}
+                            allowCreate
+                            onChange={handleChangeTags}
+                            onCreate={handleCreateTag}
+                            hideLabel
+                        />
+                    </div>
                 </div>
                 {uploader && (
                     <p className="text-xs text-secondary m-0 mt-1">
-                        Uploaded by{' '}
+                        {prompt ? (
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[300px] space-y-1">
+                                        <p className="m-0">
+                                            <strong>Prompt:</strong> {prompt}
+                                        </p>
+                                        {formattedDuration && (
+                                            <p className="m-0">
+                                                <strong>Duration:</strong> {formattedDuration}
+                                            </p>
+                                        )}
+                                    </div>
+                                )}
+                            >
+                                <span className="underline decoration-dotted cursor-default">Generated</span>
+                            </Tooltip>
+                        ) : (
+                            'Uploaded'
+                        )}{' '}
+                        by{' '}
                         <Link
                             className="text-red dark:text-yellow font-semibold"
                             to={`/community/profiles/${uploader.id}`}

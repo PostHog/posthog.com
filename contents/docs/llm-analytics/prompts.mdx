@@ -13,7 +13,7 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 - **Update prompts without code deploys** – Change prompts instantly from the PostHog UI
 - **Non-engineers can iterate** – Product and content teams can tweak prompts without touching code
 - **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
-- **(soon) Versioning** – Support for prompt versioniong and tagging
+- **Versioning** – Every change creates an immutable version you can view, compare, or restore
 - **(soon) A/B testing** – Support for testing different prompt variants using Experiments
 
 ## Creating prompts
@@ -22,13 +22,34 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 2. Click **New prompt**
 3. Enter a name for your prompt
 4. Write your prompt content, using `{{variables}}` for dynamic values
-5. Click **Save**
+5. Click **Create prompt**
+
+This creates version 1 of your prompt. Each subsequent edit creates a new immutable version.
+
+### Markdown preview
+
+When viewing a prompt, markdown rendering is enabled by default, formatting your prompt text with headings, lists, bold, and other markdown elements. Click the markdown icon next to the **Prompt** label to toggle it off and view plain text. When editing a prompt, the view switches to plain text automatically.
 
 ### Prompt naming rules
 
 - Names are **immutable** after creation (cannot be changed)
 - Only letters, numbers, hyphens, and underscores allowed (`^[a-zA-Z0-9_-]+$`)
 - Names must be unique within your project
+
+## Managing prompts via MCP
+
+You can also manage prompts through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
+
+The MCP server provides four prompt management tools:
+
+| Tool | Description |
+|------|-------------|
+| `prompt-list` | List all team prompts with optional name filtering |
+| `prompt-get` | Get a prompt by name, including full content |
+| `prompt-create` | Create a new prompt with a unique name and content |
+| `prompt-update` | Update an existing prompt's content by name |
+
+This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
 ## Template variables
 
@@ -38,6 +59,54 @@ Use double curly braces to define variables in your prompts:
 You are a helpful assistant for {{company_name}}.
 The user's name is {{user_name}} and their subscription tier is {{tier}}.
 ```
+
+Variable names can include letters, numbers, underscores, hyphens, and dots.
+
+## Versioning
+
+Every prompt change creates a new immutable version. Previous versions are preserved and accessible.
+
+### How versioning works
+
+- The first save creates version 1
+- Each subsequent publish increments the version number
+- Previous versions are never modified
+- By default, the SDK fetches the latest version
+
+### Publish a new version
+
+1. Open a prompt and click **Edit latest**
+2. Make your changes
+3. Click **Publish version**
+
+If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+
+### Restore a previous version
+
+1. Open a prompt and select a version from the **Version history** sidebar
+2. Click **Use as latest**
+3. Edit the prompt content if needed
+4. Click **Publish version**
+
+This publishes the old content as a new version. The original version remains unchanged.
+
+### Compare versions
+
+Compare the content of two prompt versions side-by-side to see what changed. This is available for prompts with two or more versions.
+
+To compare versions:
+
+1. Open a prompt and click **Compare versions** next to the **Prompt** label
+2. The diff view shows the current version against the previous version by default
+3. Use the version dropdown to change the comparison target
+
+You can also click the compare icon on any version in the **Version history** sidebar to compare it with the currently selected version. The comparison target is highlighted with a **Comparing** tag in the sidebar.
+
+Unchanged regions are automatically collapsed in the diff view. Click **Compare versions** again to exit the diff view.
+
+### Archive a prompt
+
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
 
 ## Using prompts in code
 
@@ -71,11 +140,18 @@ prompts = Prompts(
     host='https://us.posthog.com'
 )
 
-# Fetch a prompt with optional fallback
+# Fetch the latest version of a prompt
 template = prompts.get(
     'support-system-prompt',
     cache_ttl_seconds=600,  # Override default 5-minute cache
     fallback='You are a helpful assistant.'  # Used if fetch fails
+)
+
+# Or fetch a specific version
+template = prompts.get(
+    'support-system-prompt',
+    version=2,
+    fallback='You are a helpful assistant.'
 )
 
 # Compile with variables
@@ -110,9 +186,15 @@ const prompts = new Prompts({
   host: 'https://us.posthog.com'
 })
 
-// Fetch a prompt
+// Fetch the latest version of a prompt
 const template = await prompts.get('support-system-prompt', {
   cacheTtlSeconds: 600,
+  fallback: 'You are a helpful assistant.'
+})
+
+// Or fetch a specific version
+const template = await prompts.get('support-system-prompt', {
+  version: 2,
   fallback: 'You are a helpful assistant.'
 })
 
@@ -138,7 +220,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 
 ## Linking prompts to traces
 
-To track which prompts are used in which generations, include the `$ai_prompt_name` property when capturing:
+To track which prompts and versions are used in which generations, include the `$ai_prompt_name` and `$ai_prompt_version` properties when capturing:
 
 <MultiLanguage>
 
@@ -147,7 +229,8 @@ response = client.chat.completions.create(
     model="gpt-5",
     messages=[{"role": "system", "content": system_prompt}],
     posthog_properties={
-        "$ai_prompt_name": "support-system-prompt"
+        "$ai_prompt_name": "support-system-prompt",
+        "$ai_prompt_version": 2
     }
 )
 ```
@@ -157,7 +240,8 @@ const response = await openai.chat.completions.create({
     model: "gpt-5",
     messages: [{ role: "system", content: systemPrompt }],
     posthogProperties: {
-        $ai_prompt_name: "support-system-prompt"
+        $ai_prompt_name: "support-system-prompt",
+        $ai_prompt_version: 2
     }
 })
 ```
@@ -165,6 +249,12 @@ const response = await openai.chat.completions.create({
 </MultiLanguage>
 
 Once linked, you can:
-- Filter generations by prompt name
+- Filter generations by prompt name and version
 - View related traces from the prompt detail page
-- Analyze which prompts perform best
+- See which specific version was used in each trace
+- Analyze which prompt versions perform best
+
+## Limits
+
+- **Maximum prompt size** - 1MB per prompt
+- **Maximum versions per prompt** - 2,000

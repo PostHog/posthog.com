@@ -38,6 +38,9 @@ id,name,email
 3. Fill the table name, then use the data from Cloudflare: 
     - For files URL pattern, use the jurisdiction-specific endpoint URL with your bucket name and file name like `https://b27247d543c.r2.cloudflarestorage.com/posthog-warehouse/cool_data.csv`. You can also use `*` to query multiple files.
     - Choose the correct file format
+    - When using CSV format, you can configure **CSV quote handling** to control how quotes are processed:
+      - **RFC 4180 double quotes** – for CSVs that use standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`)
+      - **Literal quotes** – for CSVs where quote characters are treated as literal values (default)
     - For access key, use your Access Key ID
     - For secret key, use your Secret Access Key
 4. Click **Next**

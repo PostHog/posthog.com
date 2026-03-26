@@ -1,0 +1,401 @@
+---
+title: Workflow automation
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+Support integrates with [Workflows](/docs/workflows) to automate ticket management. Tickets emit events that trigger workflows, and workflow actions can update tickets — setting SLAs, changing status, assigning tickets, and more.
+
+```
+Ticket event
+    ↓
+Workflow trigger matches
+    ↓
+Hog function executes
+    ↓
+Ticket updated
+```
+
+Updates made by workflows do **not** re-emit ticket events, so you won't get infinite loops.
+
+## Trigger events
+
+When ticket or message state changes, certain events are emitted and can be used as workflow triggers:
+
+
+All events include these base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
+
+### New ticket created
+
+- **Event ID:** `$conversation_ticket_created`
+- **Event description:** A customer creates a new ticket.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `ticket_id` | string (UUID) | The ticket's unique ID |
+| `ticket_number` | int | Human-readable ticket number |
+| `channel_source` | string | `widget`, `email`, or `slack` |
+| `status` | string | Always `new` for this trigger |
+| `priority` | string or null | `low`, `medium`, `high`, or null |
+| `customer_name` | string | Customer name |
+| `customer_email` | string | Customer email |
+
+### Ticket status changed
+
+- **Event ID:** `$conversation_ticket_status_changed`
+- **Event description*:* Ticket status changes (e.g. new → pending → resolved). You can filter on `new_status` to trigger only for specific transitions.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `old_status` | string | Previous status |
+| `new_status` | string | New status (`new`, `open`, `pending`, `on_hold`, `resolved`) |
+
+### Ticket priority changed
+
+- **Event ID:** `$conversation_ticket_priority_changed`
+- **Event description:** Ticket priority is set or changed.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `old_priority` | string or null | Previous priority |
+| `new_priority` | string or null | New priority |
+
+### Ticket assigned
+
+- **Event ID:** `$conversation_ticket_assigned`
+- **Event description:** Ticket is assigned or unassigned.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `assignee_type` | string | `user` or `role` |
+| `assignee_id` | int or null | ID of the assigned user or role |
+
+### Ticket message sent (team reply)
+
+- **Event ID:** `$conversation_message_sent`
+- **Event description:** A team member sends a reply.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `message_id` | string | The message UUID |
+| `message_content` | string | Message text (truncated to 1,000 chars) |
+| `author_type` | string | Always `team` |
+| `author_id` | int or null | PostHog user ID of the sender |
+
+### Ticket message received (customer message)
+
+- **Event ID:** `$conversation_message_received`
+- **Event description:** A customer sends a message.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `message_id` | string | The message UUID |
+| `message_content` | string | Message text (truncated to 1,000 chars) |
+| `author_type` | string | Always `customer` |
+| `customer_name` | string | Customer name |
+| `customer_email` | string | Customer email |
+
+## Actions
+
+Two workflow actions are available for ticket management:
+
+### Get ticket action
+
+Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla_due_at`).
+
+
+| Input field | Type | Default |
+|-------|------|---------|
+| `ticket_id` | string | `{event.properties.ticket_id}` |
+
+
+| Output field | Type | Description |
+|-------|------|-------------|
+| `id` | string (UUID) | Ticket ID |
+| `ticket_number` | int | Per-team ticket number |
+| `status` | string | `new`, `open`, `pending`, `on_hold`, `resolved` |
+| `priority` | string or null | `low`, `medium`, `high`, or null |
+| `channel_source` | string | `widget`, `email`, or `slack` |
+| `distinct_id` | string | Customer's PostHog distinct ID |
+| `created_at` | string (ISO 8601) | When the ticket was created |
+| `updated_at` | string (ISO 8601) | Last update timestamp |
+| `message_count` | int | Total messages on the ticket |
+| `last_message_at` | string or null | Timestamp of last message |
+| `last_message_text` | string or null | Preview of last message |
+| `unread_team_count` | int | Unread messages for the team |
+| `unread_customer_count` | int | Unread messages for the customer |
+| `sla_due_at` | string or null | SLA deadline, or null if none |
+
+The output fields are available as `{variables.ticket.*}`.
+
+### Update ticket
+
+Changes one or more fields on a ticket. Only the fields you provide are changed.
+
+
+| Input field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `ticket_id` | string | Yes | UUID of the ticket to update |
+| `status` | choice | No | `new`, `open`, `pending`, `on_hold`, `resolved` |
+| `priority` | choice | No | `low`, `medium`, `high` |
+| `sla_amount` | string | No | Duration until SLA expires. Use `clear` to remove. |
+| `sla_unit` | choice | No | `minute`, `hour`, or `day` (default: `hour`) |
+| `assignee` | assignee | No | Assign to a user or role. Set to null to unassign. |
+| `tags` | tags | No | Replace all tags on the ticket. |
+
+<CalloutBox icon="IconWarning" title="Tags replace, not append" type="caution">
+
+The `tags` input replaces all existing tags on the ticket. If you want to add a tag without removing existing ones, use **Get ticket** first to read the current tags, then merge them in your workflow logic.
+
+</CalloutBox>
+
+## Building conditions
+
+Use `if/else` blocks in your workflow to branch logic.
+
+### Conditions on event properties
+
+```
+event.properties.channel_source = "slack"
+event.properties.status = "new"
+event.properties.priority = "high"
+event.properties.customer_email contains "@enterprise.com"
+event.properties.new_status = "resolved"
+event.properties.message_content contains "urgent"
+```
+
+### Conditions on ticket data
+
+```
+variables.ticket.message_count > 5
+variables.ticket.sla_due_at is set
+variables.ticket.unread_team_count > 0
+variables.ticket.channel_source = "widget"
+```
+
+## Examples
+
+### 1. Set SLA based on channel
+
+Set different SLA deadlines based on whether a ticket came from Slack (internal) or the widget (customer-facing).
+
+```
+Trigger event = New ticket created
+
+IF event.properties.channel_source = slack
+    SET SLA = 24 hours
+ELSE
+    SET SLA = 4 hours
+```
+
+Update ticket config for the widget path:
+
+| Input | Value |
+|-------|-------|
+| `ticket_id` | `{event.properties.ticket_id}` |
+| `sla_amount` | `4` |
+| `sla_unit` | `hour` |
+
+### 2. Set SLA based on priority
+
+Adjust the SLA deadline when a ticket's priority changes.
+
+```
+Trigger event = `$conversation_ticket_priority_changed`
+
+IF event.properties.new_priority = high
+   SET SLA = 1 hour
+ELSE IF event.properties.new_priority = medium
+   SET SLA = 4 hours
+ELSE
+   SET SLA = 24 hours
+```
+
+### 3. Auto-assign new tickets to a role
+
+Assign every new ticket to the "Support" role automatically.
+
+```
+Trigger event = New ticket created
+
+SET assignee = Support role
+```
+
+### 4. Auto-assign based on channel
+
+Route tickets to different teams based on where they came from.
+
+```
+Trigger event = New ticket created
+
+IF event.properties.channel_source = slack
+   SET assignee = Engineering role
+ELSE
+   SET assignee = Support role
+```
+
+### 5. Move ticket to Open when team replies
+
+Automatically change status from New to Open when a team member first replies.
+
+**Trigger:** Ticket message sent
+
+**Flow:**
+
+1. **If** `event.properties.status` equals `new`
+   - **Update ticket:** `status` = `open`
+
+```
+status = "open"
+```
+
+### 6. Move ticket to Pending after team reply
+
+After a teammate replies, set the ticket to Pending (waiting for customer response).
+
+**Trigger:** Ticket message sent
+
+**Flow:**
+
+1. **Update ticket:**
+
+```
+status = "pending"
+```
+
+### 7. Reopen ticket when customer replies
+
+When a customer sends a message on a pending or resolved ticket, reopen it.
+
+**Trigger:** Ticket message received
+
+**Flow:**
+
+1. **If** `event.properties.status` equals `pending` **or** `event.properties.status` equals `resolved`
+   - **Update ticket:** `status` = `open`
+
+### 8. Auto-tag tickets by customer email domain
+
+Tag tickets from specific customer domains for prioritization.
+
+**Trigger:** New ticket created
+
+**Flow:**
+
+1. **If** `event.properties.customer_email` contains `@bigcorp.com`
+   - **Update ticket:**
+
+```
+tags = ["enterprise", "priority"]
+```
+
+2. **Else if** `event.properties.customer_email` contains `@startup.io`
+   - **Update ticket:**
+
+```
+tags = ["startup"]
+```
+
+### 9. Escalate high-priority tickets
+
+Immediately set a tight SLA and assign to senior support when a high-priority ticket is created.
+
+**Trigger:** New ticket created
+
+**Flow:**
+
+1. **If** `event.properties.priority` equals `high`
+   - **Update ticket:**
+
+```
+sla_amount = "30"
+sla_unit = "minute"
+assignee = Senior Support role
+tags = ["escalated"]
+```
+
+### 10. Tag tickets moving to Pending
+
+Track how many tickets go through the pending state by adding a tag.
+
+**Trigger:** Ticket status changed (filter: `new_status` = `pending`)
+
+**Flow:**
+
+1. **Update ticket:**
+
+```
+tags = ["awaiting-customer"]
+```
+
+### 11. Full SLA workflow with priority and channel
+
+A comprehensive example combining multiple conditions for SLA, priority, and assignment.
+
+**Trigger:** New ticket created
+
+**Flow:**
+
+1. **Get ticket** (to access full ticket data)
+2. **If** `event.properties.channel_source` equals `slack`
+   - **Update ticket:**
+
+```
+priority = "low"
+sla_amount = "24"
+sla_unit = "hour"
+assignee = Engineering role
+```
+
+3. **Else if** `event.properties.customer_email` contains `@enterprise.com`
+   - **Update ticket:**
+
+```
+priority = "high"
+sla_amount = "1"
+sla_unit = "hour"
+assignee = Senior Support role
+tags = ["enterprise", "vip"]
+```
+
+4. **Else**
+   - **Update ticket:**
+
+```
+priority = "medium"
+sla_amount = "4"
+sla_unit = "hour"
+assignee = Support role
+```
+
+## SLA reference
+
+SLAs are set as a duration from "now" (the time the workflow runs). The `sla_due_at` field on the ticket stores the absolute deadline.
+
+| `sla_amount` | `sla_unit` | Resulting deadline |
+|--------------|------------|-------------------|
+| `30` | `minute` | 30 minutes from now |
+| `1` | `hour` | 1 hour from now |
+| `4` | `hour` | 4 hours from now |
+| `24` | `hour` | 24 hours from now |
+| `1` | `day` | 1 day from now |
+| `clear` | (ignored) | Removes the SLA |
+
+In the ticket list, SLAs show as one of three states:
+
+| SLA state | Condition |
+|-----------|-----------|
+| **On track** | More than 1 hour until deadline |
+| **At risk** | 1 hour or less until deadline |
+| **Breached** | Past the deadline |
+
+## Important notes
+
+- **No infinite loops** — updates made by workflows (via the external API) do not re-emit ticket events. A workflow that changes a ticket's status will not trigger the "status changed" workflow again.
+- **Event properties vs ticket data** — event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
+- **Tags replace, not append** — the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
+- **Rate limits** — the external API used by workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.
