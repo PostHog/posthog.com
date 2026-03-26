@@ -10,7 +10,7 @@ showTitle: false
 > **Format** - Two live group sessions for up to 30 people across product, marketing, and engineering.
 > **Total TAM time** - ~2.5–3.5 hours live delivery, plus ~one hour prep per session.
 
-This document tells you what to cover in a training session and why it matters. It's not a script or the only way to approach training. Consider this a good baseline but you will want to always run it in your own voice, in whatever order fits the customer's needs.
+This document tells you what to cover in a training session and why it matters. It's not a script or the only way to approach training. Consider this a good baseline but you will want to always run it in your own voice, in whatever order fits the customer's needs. Product training is a separate and optional activity you can run with an account if you believe it will increase usage and help them derive more value from PostHog. 
 
 PostHog AI and MCP should be woven into every demo and practical. Don't teach them as standalone features. Use them as the way you build things in front of the room. The goal is for everyone to leave thinking AI-assisted analytics is the normal way to work.
 
