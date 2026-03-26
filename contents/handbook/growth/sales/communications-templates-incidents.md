@@ -116,7 +116,7 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 
 1. **Incident declared** (Engineering).
 2. **CMOC activated**, notified of impact.
-3. **Assess customer impact**, this [insight](https://us.posthog.com/project/2/insights/EBiXOD91) will help you understand which customers are using which components in which cloud environment.
+3. **Assess customer impact**, this <PrivateLink url="https://us.posthog.com/project/2/insights/EBiXOD91">insight</PrivateLink> (or this <PrivateLink url="https://docs.google.com/spreadsheets/d/1EyV55L0vWTfD4W02j5A3Vx3YZYPUODmQQC1toFPcKXU/edit?gid=1396499197#gid=1396499197">Google Sheet</PrivateLink> as a backup) will help you understand which customers are using which components in which cloud environment.
 4. **CMOC drafts the initial message**, shares with the Account Owners in [#cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
 5. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
 6. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).

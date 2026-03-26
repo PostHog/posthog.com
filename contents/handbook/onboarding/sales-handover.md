@@ -42,12 +42,15 @@ The automation flips the Vitally's Onboarding pipeline trait to `Sales Handoff` 
 
 Some pointers on what to pay attention to in Vitally while checking for prior Sales engagement:
 
+- Pin `temporary owner` trait in your Vitally sidebar - the trait is set when a Salesforce lead task exists (otherwise it's "null")
 - Segments (e.g. TAM/CSM Candidate, $20k MRR, Active Trial, Active Self-serve Trial, Annual Plan, etc.)
 - Slack channel (following the naming convention `#posthog-[company name]`)
 - Key Roles (is someone assigned to the account?)
 - Trial Status widget in the Onboarding dashboard
 - Active Conversations and Meetings (any trace of a booked call or an ongoing conversation)
 - Notes
+
+If Sales are already engaged, there's no need to create an `Onboarding Referral`. 
 
 If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. 
 
