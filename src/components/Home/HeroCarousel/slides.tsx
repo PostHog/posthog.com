@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { IconShare, IconSparkles } from '@posthog/icons'
+import { IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import { getLogo } from 'constants/logos'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -14,10 +14,45 @@ const dataSources = [
     { key: 'salesforce', label: 'Salesforce', url: '/docs/data-warehouse/sources/salesforce' },
     { key: 'stripe', label: 'Stripe', url: '/docs/data-warehouse/sources/stripe' },
     { key: 'zendesk', label: 'Zendesk', url: '/docs/data-warehouse/sources/zendesk' },
+    { key: 'googleAds', label: 'Google Ads', url: '/docs/data-warehouse/sources/google-ads' },
+    { key: 'hubspot', label: 'HubSpot', url: '/docs/data-warehouse/sources/hubspot' },
+    { key: 'bigquery', label: 'BigQuery', url: '/docs/data-warehouse/sources/bigquery' },
+    { key: 'redshift', label: 'Redshift', url: '/docs/data-warehouse/sources/redshift' },
+    { key: 'mysql', label: 'MySQL', url: '/docs/data-warehouse/sources/mysql' },
+    { key: 'github', label: 'GitHub', url: '/docs/data-warehouse/sources/github' },
+    { key: 'mongodb', label: 'MongoDB', url: '/docs/data-warehouse/sources/mongodb' },
 ] as const
 
-const manageQueryHandles = ['data_modeling', 'cdp', 'data_warehouse', 'bi', 'sql_editor'] as const
-const dataExportHandles = ['data_out'] as const
+const exportDestinations = [
+    { label: 'BigQuery', url: '/docs/cdp/batch-exports/bigquery', logoKey: 'bigquery' },
+    { label: 'Snowflake', url: '/docs/cdp/batch-exports/snowflake', logoKey: 'snowflake' },
+    { label: 'Amazon S3', url: '/docs/cdp/batch-exports/s3', logoKey: 's3' },
+    { label: 'PostgreSQL', url: '/docs/cdp/batch-exports/postgres', logoKey: 'postgres' },
+    { label: 'Redshift', url: '/docs/cdp/batch-exports/redshift', logoKey: 'redshift' },
+    { label: 'Zapier', url: '/docs/cdp/destinations/zapier', logoKey: 'zapier' },
+    { label: 'HubSpot', url: '/docs/cdp/destinations/hubspot', logoKey: 'hubspot' },
+    { label: 'Salesforce', url: '/docs/cdp/destinations/salesforce', logoKey: 'salesforce' },
+    {
+        label: 'Intercom',
+        url: '/docs/cdp/destinations/intercom',
+        image: 'https://us.posthog.com/static/services/intercom.png',
+    },
+    {
+        label: 'Customer.io',
+        url: '/docs/cdp/destinations/customerio',
+        image: 'https://us.posthog.com/static/services/customerio.png',
+    },
+    { label: 'Zendesk', url: '/docs/cdp/destinations/zendesk', logoKey: 'zendesk' },
+    {
+        label: 'HTTP Webhook',
+        url: '/docs/cdp/destinations/webhook',
+        image: 'https://us.posthog.com/static/services/webhook.png',
+    },
+    // { label: 'Airtable', url: '/docs/cdp/destinations/airtable', image: 'https://us.posthog.com/static/services/airtable.png' },
+    // { label: 'Mailgun', url: '/docs/cdp/destinations/mailgun', image: 'https://us.posthog.com/static/services/mailgun.png' },
+]
+
+const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehouse', 'bi'] as const
 
 const analyticsHandles = [
     'web_analytics',
@@ -78,41 +113,45 @@ export const OnePlaceSlide = () => {
     const destinationCount = destinations?.totalCount || 0
 
     const manageProducts = manageQueryHandles.map((h) => allProducts.find((p: any) => p.handle === h))
-    const exportProducts = dataExportHandles.map((h) => allProducts.find((p: any) => p.handle === h))
-
     return (
         <div className="rounded p-4 flex flex-col h-full">
-            <div>
+            <div className="mb-6">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-                    className="@lg:float-right @lg:ml-4 mb-4 @lg:mb-0 w-60"
+                    className="@lg:float-right @lg:ml-8 mb-4 @lg:mb-0 w-60"
                 />
-                <h2 className="mt-0">Build better products with better data</h2>
-                <p className="text-secondary text-sm">
-                    These aren't integrations. Third party data is imported into PostHog's CDP and warehouse and lives
-                    as a first-class citizen. This means you can query third party data <em>and</em> product usage data
-                    together, leading to more informed decisions.
+                <h2 className="mt-0 mb-2">Build better products with better data</h2>
+                <p className="text-secondary text-[15px]">
+                    Not your mama's data integrations. Third party data is imported into PostHog's CDP and warehouse and
+                    lives as a first-class citizen. This means you can query third party data <em>and</em> product usage
+                    data, leading to more informed decisions.
                 </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-4 flex-1">
+            <div className="grid grid-cols-1 @lg:grid-cols-2 @2xl:grid-cols-3 gap-8 @2xl:gap-6 @3xl:gap-8 flex-1">
                 {/* Data sources & import */}
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 order-1">
                     <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
                         Data sources &amp; import
                     </div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center">
-                        {dataSources.map(({ key, label, url }) => (
-                            <Link
-                                key={key}
-                                to={url}
-                                state={{ newWindow: true }}
-                                className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
-                            >
-                                <img src={getLogo(key)} alt={label} className="size-4 object-contain" />
-                                <span>{label}</span>
-                            </Link>
-                        ))}
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 @lg:justify-center">
+                        {dataSources.map(({ key, label, url }, i) => {
+                            const fromEnd = dataSources.length - 1 - i
+                            const fadeSteps = [0.2, 0.2, 0.35, 0.35, 0.5, 0.5, 0.65, 0.65, 0.8, 0.8]
+                            const opacity = fromEnd < fadeSteps.length ? fadeSteps[fromEnd] : 1
+                            return (
+                                <Link
+                                    key={key}
+                                    to={url}
+                                    state={{ newWindow: true }}
+                                    className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
+                                    style={opacity < 1 ? { opacity } : undefined}
+                                >
+                                    <img src={getLogo(key)} alt={label} className="size-4 object-contain" />
+                                    <span>{label}</span>
+                                </Link>
+                            )
+                        })}
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
@@ -120,45 +159,38 @@ export const OnePlaceSlide = () => {
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
-                            Explore {sourceCount} data sources
-                        </Link>
+                            Explore data sources
+                        </Link>{' '}
+                        <span className="text-secondary text-xs inline-flex items-center justify-center bg-accent rounded-full px-1.5 py-0.5">
+                            {sourceCount}
+                        </span>
                     </div>
                 </div>
 
-                {/* Manage & query */}
-                <div className="flex flex-col gap-3">
+                {/* Reverse ETL & export */}
+                <div className="flex flex-col gap-3 order-3 @lg:order-2 @2xl:order-3">
                     <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
-                        Manage &amp; query
+                        Reverse ETL &amp; export
                     </div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center">
-                        {manageProducts.map(
-                            (product: any) => product && <ProductItem key={product.handle} product={product} />
-                        )}
-                    </div>
-                    <div className="@lg:text-center mt-auto leading-tight">
-                        <Link to="/data-stack" state={{ newWindow: true }} className="text-sm font-semibold">
-                            Data stack README
-                        </Link>
-                    </div>
-                </div>
-
-                {/* Data export */}
-                <div className="flex flex-col gap-3">
-                    <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
-                        Data export
-                    </div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center">
-                        {exportProducts.map(
-                            (product: any) => product && <ProductItem key={product.handle} product={product} />
-                        )}
-                        <Link
-                            to="/docs/cdp/batch-exports"
-                            state={{ newWindow: true }}
-                            className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
-                        >
-                            <IconShare className="size-4 text-purple" />
-                            <span>Batch exports</span>
-                        </Link>
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 @lg:justify-center">
+                        {exportDestinations.map((dest: any, i: number) => {
+                            const fromEnd = exportDestinations.length - 1 - i
+                            const fadeSteps = [0.2, 0.2, 0.35, 0.35, 0.5, 0.5, 0.65, 0.65, 0.8, 0.8]
+                            const opacity = fromEnd < fadeSteps.length ? fadeSteps[fromEnd] : 1
+                            const iconSrc = (dest.logoKey ? getLogo(dest.logoKey) : dest.image) || ''
+                            return (
+                                <Link
+                                    key={dest.label}
+                                    to={dest.url}
+                                    state={{ newWindow: true }}
+                                    className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
+                                    style={opacity < 1 ? { opacity } : undefined}
+                                >
+                                    <img src={iconSrc} alt={dest.label} className="size-4 object-contain" />
+                                    <span>{dest.label}</span>
+                                </Link>
+                            )
+                        })}
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
@@ -166,7 +198,27 @@ export const OnePlaceSlide = () => {
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
-                            Explore {destinationCount} destinations
+                            Explore destinations
+                        </Link>{' '}
+                        <span className="text-secondary text-xs inline-flex items-center justify-center bg-accent rounded-full px-1.5 py-0.5">
+                            {destinationCount}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Manage & query — last in DOM, but visually middle at @2xl+ */}
+                <div className="flex flex-col gap-3 order-2 @lg:order-3 @2xl:order-2 @lg:col-span-2 @2xl:col-span-1">
+                    <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
+                        Manage &amp; query
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-2 @lg:justify-center @lg:max-w-xs @lg:mx-auto @xl:max-w-none">
+                        {manageProducts.map(
+                            (product: any) => product && <ProductItem key={product.handle} product={product} />
+                        )}
+                    </div>
+                    <div className="@lg:text-center mt-auto leading-tight">
+                        <Link to="/data-stack" state={{ newWindow: true }} className="text-sm font-semibold">
+                            Data stack README
                         </Link>
                     </div>
                 </div>
