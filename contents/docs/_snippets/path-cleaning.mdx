@@ -8,11 +8,11 @@ Many websites include dynamic segments in URLs — user IDs, product slugs, sess
 
 Common examples of noisy URLs:
 
-| Original URL | Problem |
-|---|---|
-| `/user/123/profile` | User ID creates a unique row per user |
-| `/product/blue-widget-v2` | Product slug creates a unique row per product |
-| `/merchant/8421/dashboard` | Merchant ID fragments your dashboard data |
+| Original URL                 | Problem                                       |
+| ---------------------------- | --------------------------------------------- |
+| `/user/123/profile`          | User ID creates a unique row per user         |
+| `/product/blue-widget-v2`    | Product slug creates a unique row per product |
+| `/merchant/8421/dashboard`   | Merchant ID fragments your dashboard data     |
 | `/post/2024/01/my-blog-post` | Date and slug make each post a separate entry |
 
 Path cleaning solves this by using regex to match these patterns and replace them with a readable alias.
@@ -69,4 +69,4 @@ Path cleaning rules apply to the following tiles on the [web analytics dashboard
 
 Path cleaning also applies when using [trends insights](/docs/product-analytics/trends) with a path breakdown.
 
-Rules also apply across [product analytics](/docs/product-analytics/paths) insights.
+Rules are also applied by default to new [Paths](/docs/product-analytics/paths) insights. When you create a new Paths insight, your global path cleaning rules are automatically applied. You can disable this by toggling off **Apply global path URL cleaning** in the insight settings if you prefer to see raw, uncleaned paths.
