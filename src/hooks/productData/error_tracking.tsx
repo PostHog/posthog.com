@@ -10,6 +10,7 @@ export const errorTracking = {
     colorSecondary: 'red',
     category: 'product_engineering',
     wizardSupport: true,
+    shortDescription: 'Catch and fix issues with full context',
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:

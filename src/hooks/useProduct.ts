@@ -83,14 +83,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
-            name: 'Coding agent (PostHog Code)',
+            name: 'PostHog Code',
             Icon: IconCode,
             description: 'AI coding agent that understands your product analytics.',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'posthog-code',
+            slug: 'code',
             status: 'WIP',
         },
         {
@@ -204,7 +204,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'User profiles',
             Icon: IconPeople,
-            description: 'Analyze multi-seat accounts and other groups.',
+            description: 'Full event history for individuals and multi-seat accounts',
             handle: 'profiles',
             color: 'blue',
             colorSecondary: 'purple',

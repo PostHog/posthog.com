@@ -52,7 +52,7 @@ const analyticsHandles = [
     'heatmaps',
 ] as const
 
-const debugHandles = ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles', 'surveys', 'support'] as const
+const debugHandles = ['error_tracking', 'logs', 'session_replay', 'profiles'] as const
 
 const featureDevHandles = [
     'feature_flags',
@@ -64,6 +64,8 @@ const featureDevHandles = [
     'webhooks',
     'workflows_emails',
     'posthog_code',
+    'surveys',
+    'support',
 ] as const
 
 const ProductItem = ({ product }: { product: any }) => {
@@ -245,14 +247,14 @@ const statusDotColor: Record<string, string> = {
     WIP: 'bg-red',
 }
 
-const ScatteredProduct = ({ product, className = '' }: { product: any; className?: string }) => {
+const ProductStatusLink = ({ product, className = '' }: { product: any; className?: string }) => {
     if (!product) return null
     const { Icon, color, name, slug, status } = product
     return (
         <Link
             to={`/${slug}`}
             state={{ newWindow: true }}
-            className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm whitespace-nowrap ${className}`}
+            className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm whitespace-nowrap relative top-0.5 ${className}`}
         >
             {Icon && <Icon className={`size-4 text-${color}`} />}
             <span>{name}</span>
@@ -315,7 +317,7 @@ const ArcProducts = ({ products }: { products: any[] }) => {
                         animationDelay: `${delay}s`,
                     }}
                 >
-                    <ScatteredProduct product={product} />
+                    <ProductStatusLink product={product} />
                 </div>
             )
         })
@@ -327,7 +329,7 @@ const ArcProducts = ({ products }: { products: any[] }) => {
                 {productSlots.map(({ handle }) => {
                     const product = productMap[handle]
                     if (!product) return null
-                    return <ScatteredProduct key={handle} product={product} />
+                    return <ProductStatusLink key={handle} product={product} />
                 })}
             </div>
             {/* @xl to @2xl */}
@@ -393,25 +395,53 @@ export const DebugFixSlide = () => {
     const products = debugHandles.map((h) => allProducts.find((p: any) => p.handle === h))
 
     return (
-        <div className="rounded p-4">
-            <div className="grid grid-cols-1 @lg:grid-cols-[1fr_auto] gap-x-8 gap-y-4">
-                <div>
-                    <h2 className="mt-0">Diagnose what went wrong</h2>
-                    <p className="text-secondary text-sm">
-                        Slice and dice data with a variety of tools that help you explore in different ways.
-                    </p>
-                    <p className="text-secondary text-sm">
-                        You can also see what users are doing in your product and pinpoint when things go wrong.
-                    </p>
-                </div>
-                <div>
-                    <p className="text-secondary text-xs font-semibold mb-2 @lg:mt-9">Debugging &amp; analysis</p>
-                    <div className="flex flex-col gap-1.5">
-                        {products.map(
-                            (product: any) => product && <ScatteredProduct key={product.handle} product={product} />
-                        )}
-                    </div>
-                </div>
+        <div className="rounded pt-4 px-4 bg-primary">
+            <h2 className="mt-0 mb-2">Triage issues, fix them automatically</h2>
+            <p className="text-secondary text-sm">
+                Use PostHog's debugging tools to quickly find issues and the get context to fix them.
+            </p>
+            <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
+                <p className="text-secondary text-sm my-3">
+                    <strong>New:</strong>{' '}
+                    <Link to="/code" state={{ newWindow: true }} className="font-semibold">
+                        PostHog Code
+                    </Link>{' '}
+                    proactively finds bugs, fixes them, and creates pull requests automatically.
+                </p>
+            </div>
+            <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
+                {products.map((product: any) => {
+                    if (!product) return null
+                    return (
+                        <div key={product.handle} className="rounded p-2">
+                            <ProductStatusLink product={product} className="top-0" />
+                            <p className="text-secondary text-[13px] mt-1 ml-[calc(16px+.375rem)] mb-0 leading-snug">
+                                {product.shortDescription || product.description}
+                            </p>
+                        </div>
+                    )
+                })}
+            </div>
+
+            <div className="@xl:hidden -mx-4 leading-[0]">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/debug_mobile_light_ea5c6b2c8b.png"
+                    className="w-full dark:hidden"
+                />
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/debug_mobile_dark_b2dd35e12d.png"
+                    className="hidden w-full dark:block"
+                />
+            </div>
+            <div className="hidden @xl:block -mx-4 -mt-4 leading-[0]">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/debug_desktop_light_fd5d72221c.png"
+                    className="w-full dark:hidden"
+                />
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/debug_desktop_dark_471e9d86d6.png"
+                    className="hidden w-full dark:block"
+                />
             </div>
         </div>
     )
@@ -444,7 +474,9 @@ export const TestRolloutSlide = () => {
             </p>
 
             <div className="grid grid-cols-2 @lg:grid-cols-3 gap-x-6 gap-y-2 clear-both pt-2">
-                {products.map((product: any) => product && <ScatteredProduct key={product.handle} product={product} />)}
+                {products.map(
+                    (product: any) => product && <ProductStatusLink key={product.handle} product={product} />
+                )}
             </div>
         </div>
     )
