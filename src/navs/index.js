@@ -4394,6 +4394,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Tracking long-term metrics',
+                    url: '/docs/experiments/tracking-long-term-metrics',
+                    icon: 'IconClock',
+                    color: 'purple',
+                },
+                {
                     name: 'Changing distribution after rollout',
                     url: '/docs/experiments/changing-distribution-after-rollout',
                     icon: 'IconGraph',
