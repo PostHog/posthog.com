@@ -77,7 +77,7 @@ const ProductItem = ({ product }: { product: any }) => {
         <Link
             to={`/${slug}`}
             state={{ newWindow: true }}
-            className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
+            className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium"
         >
             {Icon && <Icon className={`size-4 text-${color}`} />}
             <span>{name}</span>
@@ -158,7 +158,7 @@ export const OnePlaceSlide = () => {
                                     key={source.url}
                                     to={source.url}
                                     state={{ newWindow: true }}
-                                    className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
+                                    className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium"
                                     style={opacity < 1 ? { opacity } : undefined}
                                 >
                                     {source.image && (
@@ -199,7 +199,7 @@ export const OnePlaceSlide = () => {
                                     key={dest.label}
                                     to={dest.url}
                                     state={{ newWindow: true }}
-                                    className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm"
+                                    className="flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium"
                                     style={opacity < 1 ? { opacity } : undefined}
                                 >
                                     <img src={iconSrc} alt={dest.label} className="size-4 object-contain" />
@@ -296,7 +296,7 @@ const ProductStatusLink = ({ product, className = '' }: { product: any; classNam
         <Link
             to={`/${slug}`}
             state={{ newWindow: true }}
-            className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm whitespace-nowrap relative top-0.5 ${className}`}
+            className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium whitespace-nowrap relative top-0.5 ${className}`}
         >
             {content}
         </Link>
