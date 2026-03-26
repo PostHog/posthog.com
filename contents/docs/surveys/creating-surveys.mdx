@@ -3,63 +3,71 @@ title: Creating surveys
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
 
 export const newSurveyLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-light-mode.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-light-mode.png";
 export const newSurveyDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png";
 export const delaySurveyLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_57_AM_fb3b007108.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_57_AM_fb3b007108.png";
 export const delaySurveyDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png";
 export const displayConditionsLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png";
 export const displayConditionsDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png";
 export const surveyTriggeredByEventLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg";
 export const surveyTriggeredByEventDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg";
 export const repeatingSurveyLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg";
 export const repeatingSurveyDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg";
 export const presentationTypesLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_51_26_PM_ca79895d6b.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_51_26_PM_ca79895d6b.png";
 export const presentationTypesDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_52_53_PM_066c87466c.png'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_01_20_at_5_52_53_PM_066c87466c.png";
 export const copySurveyLinkLight =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg";
 export const copySurveyLinkDark =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_39_26_2x_11ecb9914d.jpg'
+  "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_39_26_2x_11ecb9914d.jpg";
 
-<iframe src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900" className="rounded shadow-xl" />
+<iframe
+  src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
+  className="rounded shadow-xl"
+/>
 
 To create a new survey, go to the [surveys tab](https://app.posthog.com/surveys) in the PostHog app, and click on the **New survey** button in the top right. This opens the survey wizard where you can choose from popular [survey templates](/templates?filter=type&value=survey), create a survey using PostHog AI, or open the full editor for more control.
 
 After choosing a template, you are brought to a form where you can complete the details of your new survey:
 
-<ProductScreenshot imageLight={newSurveyLight} imageDark={newSurveyDark} alt="Create a survey" classes="rounded" />
+<ProductScreenshot
+  imageLight={newSurveyLight}
+  imageDark={newSurveyDark}
+  alt="Create a survey"
+  classes="rounded"
+/>
 
 ## PostHog AI and surveys
 
 [PostHog AI](/docs/posthog-ai), PostHog's AI-powered assistant, can help you create surveys quickly using natural language. PostHog AI understands different question types and can:
 
--   Generate complete surveys based on your research goals
--   Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
--   Help you set up display conditions and targeting
--   Recommend survey templates for common use cases
+- Generate complete surveys based on your research goals
+- Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
+- Help you set up display conditions and targeting
+- Recommend survey templates for common use cases
 
 You can ask PostHog AI things like:
 
--   "Create an NPS survey for my mobile app users"
--   "Build a product satisfaction survey with rating questions"
--   "Help me create a survey to understand why users churn"
--   "Generate a post-purchase feedback survey"
+- "Create an NPS survey for my mobile app users"
+- "Build a product satisfaction survey with rating questions"
+- "Help me create a survey to understand why users churn"
+- "Generate a post-purchase feedback survey"
 
 To get started, click "PostHog AI" in the top right corner of the PostHog app and describe what kind of survey you want to create.
 
@@ -82,10 +90,10 @@ There are three options for displaying a survey:
 4. **Hosted surveys**: Create a survey accessible via an external link or embedded in an iframe, hosted by PostHog. Responses are anonymous by default, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
 
 <ProductScreenshot
-    imageLight={presentationTypesLight}
-    imageDark={presentationTypesDark}
-    alt="Survey presentation types"
-    classes="rounded"
+  imageLight={presentationTypesLight}
+  imageDark={presentationTypesDark}
+  alt="Survey presentation types"
+  classes="rounded"
 />
 
 Popover, API, and feedback button surveys are considered _in-app_ surveys, meaning they are displayed directly in your application using our SDKs. Hosted surveys are displayed via an external URLs, hosted by PostHog.
@@ -114,6 +122,7 @@ https://us.posthog.com/external_surveys/your-survey-id?order_id=12345
 ```
 
 The types for custom properties are automatically inferred with this logic, in this order:
+
 - `Numeric`: matches regex `/^-?\d+(\.\d+)?$/` (integer or decimal)
 - `Boolean`: exact strings `"true"` and `"false"`
 - `String`: everything else
@@ -134,24 +143,28 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&
 **Examples:**
 
 **Single choice question:**
+
 ```
 # Pre-select the 3rd choice (index 2) for the first question
 ?distinct_id=user123&q0=2
 ```
 
 **Rating question:**
+
 ```
 # Pre-fill a rating of 9 out of 10
 ?distinct_id=user123&q0=9
 ```
 
 **Multiple choice question:**
+
 ```
 # Pre-select choices at index 0 and 2 (use repeated parameters)
 ?distinct_id=user123&q0=0&q0=2
 ```
 
 **Multiple questions:**
+
 ```
 # Pre-fill first question (choice 3) and second question (rating 8)
 ?distinct_id=user123&q0=3&q1=8
@@ -164,12 +177,14 @@ https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123&q0=2&
 Survey questions that are pre-filled will be skipped (not shown to the user) if they are set to "Automatically submit on selection". Additionally, if partial responses are enabled for your survey, these responses will be recorded automatically on page load.
 
 Here's how it works:
+
 - User clicks link to open survey page
 - Starting at the first question, we automatically advance through questions which are both prefilled **and** set to automatically submit on selection
 - If partial responses are enabled for your survey, responses are immediately stored for the questions we skipped
 - We always start the survey at the first non-prefilled question, regardless of whether some questions in the middle are pre-filled
 
 Additional notes:
+
 - If all questions are pre-filled, the user will only see a confirmation message ("Thanks! Your response was recorded")
 - If some questions in the middle of your survey are pre-filled, regardless of whether the question is set to auto-submit on selection, the user will still see the pre-selected response, and may change it
 
@@ -177,17 +192,20 @@ Example: one-click NPS with optional follow-up
 Say you want to send an email with a "one-click" NPS survey that includes an optional follow-up question.
 
 Create your survey with the following configuration:
+
 1. Create your first question as a Rating question, with **"Automatically submit on selection" enabled**
 2. Create a second question as Freeform text
 3. Ensure partial responses are enabled (Completion conditions > Response collection > **Any question**)
 
 Now you can send your survey link with the NPS question pre-filled, like this:
+
 ```
 # pre-fill the first question (index 0) with the value 8
 {survey_url}?q0=8
 ```
 
 **Important notes:**
+
 - Question indices are 0-based (first question is `q0`, second is `q1`, etc.)
 - Choice indices are also 0-based (first choice is `0`, second is `1`, etc.)
 - Invalid indices are silently ignored
@@ -198,6 +216,7 @@ Now you can send your survey link with the NPS question pre-filled, like this:
 You can embed hosted surveys directly on a page using an iframe. This is useful if you're working in a no-code site builder, or otherwise want to display a survey inline without creating an [API survey](/docs/surveys/implementing-custom-surveys).
 
 To create an embedded survey:
+
 1. Create a hosted survey - select **Hosted Survey** as the [presentation type](#presentation)
 2. Enable **Allow embedding in iframes** in the survey settings
 3. Save and launch your survey
@@ -207,13 +226,14 @@ To create an embedded survey:
 Here's an example with Framer:
 
 <ProductVideo
-    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/embedded_surveys_6e058da781.mp4" 
-    alt="How to create an embedded survey in Framer" 
-    classes="rounded"
-    autoPlay={false}
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/embedded_surveys_6e058da781.mp4"
+  alt="How to create an embedded survey in Framer"
+  classes="rounded"
+  autoPlay={false}
 />
 
 **Notes:**
+
 - **Person identification:** If the PostHog SDK is enabled on your site, the default embed code will automatically attach the Person's distinct ID (via `window.posthog.get_distinct_id()`) to all embedded survey responses. Otherwise, the responses will be anonymous.
 - **URL pre-fill:** URL pre-filling is supported with embedded surveys, you'll just need to update your embed code to include the pre-fill query params.
 - **Embed customization:** The default embed code provides automatic height adjustment and minimal styling. For more control, you can create your own iframe using the hosted survey's URL + `?embed=true`. Example:
@@ -245,19 +265,19 @@ PostHog supports multiple question types which are all available for both popove
 
 Customization enables you to change the look, feel, and timing of your popover survey:
 
--   The color of the background, border, and buttons.
--   The position of the popover at the bottom of the screen.
--   The placeholder text.
--   The visibility of the PostHog branding.
--   Whether to shuffle the order of the choices and questions.
--   The delay (in seconds) before the survey appears on the page.
--   Whether the confirmation message auto disappears after 5 seconds.
+- The color of the background, border, and buttons.
+- The position of the popover at the bottom of the screen.
+- The placeholder text.
+- The visibility of the PostHog branding.
+- Whether to shuffle the order of the choices and questions.
+- The delay (in seconds) before the survey appears on the page.
+- Whether the confirmation message auto disappears after 5 seconds.
 
 <ProductScreenshot
-    imageLight={delaySurveyLight}
-    imageDark={delaySurveyDark}
-    alt="Delay survey customization"
-    classes="rounded"
+  imageLight={delaySurveyLight}
+  imageDark={delaySurveyDark}
+  alt="Delay survey customization"
+  classes="rounded"
 />
 
 For hosted surveys, you can only customize colors and placeholders.
@@ -270,25 +290,25 @@ This specifies the conditions a user must meet to be shown an in-app survey. A u
 
 You can display your survey to specific users based on:
 
--   **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
+- **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
--   **URL targeting:** Show when URL either contains a string, exactly matches a string, or matches a regex. When using exact matching, trailing slashes are stripped before comparison. The URL targeting is evaluated against `window.location.href`.
+- **URL targeting:** Show when URL either contains a string, exactly matches a string, or matches a regex. When using exact matching, trailing slashes are stripped before comparison. The URL targeting is evaluated against `window.location.href`.
 
--   **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
+- **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
 
--   **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
+- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
--   **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
+- **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
 
--   **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
+- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
--   **User sends events:** Display a survey to users who have sent a specific event during their session.
+- **User sends events:** Display a survey to users who have sent a specific event during their session.
 
 <ProductScreenshot
-    imageLight={displayConditionsLight}
-    imageDark={displayConditionsDark}
-    alt="Display conditions"
-    classes="rounded"
+  imageLight={displayConditionsLight}
+  imageDark={displayConditionsDark}
+  alt="Display conditions"
+  classes="rounded"
 />
 
 ### Completion conditions
@@ -306,33 +326,33 @@ For surveys triggered by a specific event, you can configure the survey to repea
 If you want to trigger a survey on a specific event, but only show it once per user, select the `Just once` option.
 
 <ProductScreenshot
-    imageLight={surveyTriggeredByEventLight}
-    imageDark={surveyTriggeredByEventDark}
-    alt="Survey triggered by events under display conditions"
-    classes="rounded"
+  imageLight={surveyTriggeredByEventLight}
+  imageDark={surveyTriggeredByEventDark}
+  alt="Survey triggered by events under display conditions"
+  classes="rounded"
 />
 
 ### Complete conditions
 
 Under complete conditions, there's two options that can be configured so the survey is shown again:
 
--   `Repeat on a schedule`
--   `Every time the display conditions are met`
+- `Repeat on a schedule`
+- `Every time the display conditions are met`
 
 #### Repeat on a schedule
 
 You can also configure in-app surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
 
 <ProductScreenshot
-    imageLight={repeatingSurveyLight}
-    imageDark={repeatingSurveyDark}
-    alt="Repeating surveys"
-    classes="rounded"
+  imageLight={repeatingSurveyLight}
+  imageDark={repeatingSurveyDark}
+  alt="Repeating surveys"
+  classes="rounded"
 />
 
 For example, you can configure settings like:
 
--   **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
+- **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
 
 | Date          | Event                                  | Explanation                                                               |
 | ------------- | -------------------------------------- | ------------------------------------------------------------------------- |
@@ -368,11 +388,32 @@ If you've created an [API survey](#presentation), you'll need to add your [custo
 When you launch a [hosted survey](#presentation), you'll get a link you can share with your users. You can also copy it by clicking **Copy URL**.
 
 <ProductScreenshot
-    imageLight={copySurveyLinkLight}
-    imageDark={copySurveyLinkDark}
-    alt="Copy survey link"
-    classes="rounded"
+  imageLight={copySurveyLinkLight}
+  imageDark={copySurveyLinkDark}
+  alt="Copy survey link"
+  classes="rounded"
 />
+
+## Copying surveys to another project
+
+If you want to test a survey in staging before launching it in production, or use the same survey across multiple projects, you can copy surveys between [projects](/docs/settings/projects).
+
+To copy a survey to another project:
+
+1. Navigate to the survey you want to copy.
+2. Click the **three-dot menu** (⋯) at the top of the survey.
+3. Select **Copy to another project**.
+4. Choose the destination project and confirm.
+
+> **Note:** You need more than one project in your organization for this option to appear.
+
+When copying a survey, the following rules apply:
+
+- **Linked feature flags are not copied.** Any feature flag linked to the survey (including targeting and internal flags) is excluded. You need to set up flags separately in the target project.
+- **Linked insights are copied** to the target project.
+- **Actions linked to the survey are copied** to the target project.
+- **Dynamic cohorts** used in display conditions are copied if a cohort with the same name doesn't exist in the target project.
+- **Static cohorts** are copied but will be empty, since the associated persons may not exist in the target project.
 
 ## How PostHog handles partial survey responses
 
