@@ -199,7 +199,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your PostHog config:
 
 ```javascript
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     opt_out_capturing_by_default: true,
 });
 ```
@@ -349,7 +349,7 @@ import { View, Text } from 'react-native'
 
 const App = () => {
   return (
-    <PostHogProvider apiKey="<ph_project_api_key>">
+    <PostHogProvider apiKey="<ph_project_token>">
       <PostHogErrorBoundary
         fallback={YourFallbackComponent}
         additionalProperties={{ screen: "home" }}
@@ -388,7 +388,7 @@ You can use the `before_send` callback to modify, filter, or suppress exception 
 - Redacting sensitive information
 
 ```react-native
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
   before_send: (event) => {
     if (event.event === '$exception') {
@@ -434,7 +434,7 @@ You can enable debug mode by setting the `debug` option to `true` in the `PostHo
 ```react-native
 <PostHogProvider
     debug: {true}
-    apiKey="<ph_project_api_key>"
+    apiKey="<ph_project_token>"
     options={{
         host: "<ph_client_api_host>",
     }}
@@ -458,7 +458,7 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 
 export function MyApp() {
     return (
-        <PostHogProvider apiKey="<ph_project_api_key>" options={{
+        <PostHogProvider apiKey="<ph_project_token>" options={{
             // Disable PostHog in development (or whatever other logic you choose)
             disabled: __DEV__,
         }}>
@@ -492,7 +492,7 @@ Events such as `Application Installed` and `Application Updated` that require pr
 
 import PostHog from 'posthog-react-native'
 
-await PostHog.setup('<ph_project_api_key>', {
+await PostHog.setup('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>',
     captureApplicationLifecycleEvents: false, // Replaced by 'PostHogProvider'
@@ -510,7 +510,7 @@ PostHog.capture("foo")
 // V2 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>', 
     // Add any other options here.
@@ -522,7 +522,7 @@ posthog.capture("foo")
 // V3 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>',
     // Add any other options here.
@@ -534,7 +534,7 @@ posthog.capture("foo")
 // V4 Setup difference
 import PostHog from 'posthog-react-native'
 
-const posthog = new PostHog('<ph_project_api_key>', {
+const posthog = new PostHog('<ph_project_token>', {
     // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     host: '<ph_client_api_host>',
     captureAppLifecycleEvents: true, // instead of `captureNativeAppLifecycleEvents` or `autocapture={{ captureLifecycleEvents: true }}`,

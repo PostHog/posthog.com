@@ -85,7 +85,7 @@ You will need the following CSP to allow heatmaps to render your site in an ifra
 You may choose to use a `nonce` in your CSP in order to ensure every script/style loaded has the matching `nonce` for the current page load. This can be done via two config options in `posthog-js` like so:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   prepare_external_dependency_script: (script) => {
     script.nonce = '<your-nonce-value>'
     return script

@@ -10,7 +10,7 @@ Then, initialize the PostHog Node client where you'd like to use it on the serve
 import { PostHog } from 'posthog-node';
 
 export async function load() {
-  const posthog = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' });
+  const posthog = new PostHog('<ph_project_token>', { host: '<ph_client_api_host>' });
 
   posthog.capture({
     distinctId: 'distinct_id_of_the_user',

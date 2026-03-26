@@ -11,6 +11,7 @@ export const webAnalytics = {
     color: 'green-2',
     colorSecondary: '[#37945D]',
     category: 'analytics',
+    wizardSupport: true,
     billedWith: 'Product analytics',
     seo: {
         title: 'Web Analytics – Track and measure traffic with PostHog',

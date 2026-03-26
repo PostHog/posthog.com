@@ -110,17 +110,20 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 | **Regional Backup (Americas / EMEA / APAC)** | Covers accounts when owners are offline. Takes handoff from CMOC, sends comms, and ensures follow-up continuity. |
 | **Engineering Incident Lead** | Owns technical response and provides updates to CMOC for accurate messaging. |
 
+> All coordination between CMOC and Account Owners should happen in [#cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) transparently so that everyone who manages customers is in the loop.
+
 ### **Workflow**
 
 1. **Incident declared** (Engineering).
 2. **CMOC activated**, notified of impact.
-3. **CMOC drafts the initial message**, shares with the Account Owner.
-4. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
-5. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).
-6. **Regional handoffs** coordinated by CMOC.
-7. **Resolution**: CMOC drafts closure; AM/AE/CSM (or backup) sends.
-8. **Post-incident**: CMOC archives thread; GTM logs feedback and follow-ups.
-9. **Postmortem**: Engineering writes technical summary; GTM adds comms learnings.
+3. **Assess customer impact**, this <PrivateLink url="https://us.posthog.com/project/2/insights/EBiXOD91">insight</PrivateLink> (or this <PrivateLink url="https://docs.google.com/spreadsheets/d/1EyV55L0vWTfD4W02j5A3Vx3YZYPUODmQQC1toFPcKXU/edit?gid=1396499197#gid=1396499197">Google Sheet</PrivateLink> as a backup) will help you understand which customers are using which components in which cloud environment.
+4. **CMOC drafts the initial message**, shares with the Account Owners in [#cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
+5. **AM/AE/CSM sends to accounts**; backup sends if primary is offline.
+6. **Updates** drafted by CMOC (30–60 min for SEV1, 1–2 hrs for SEV2).
+7. **Regional handoffs** coordinated by CMOC.
+8. **Resolution**: CMOC drafts closure; AM/AE/CSM (or backup) sends.
+9. **Post-incident**: CMOC archives thread; GTM logs feedback and follow-ups.
+10. **Postmortem**: Engineering writes technical summary; GTM adds comms learnings.
 
 ## **Example Slack workflow (Critical)**
 

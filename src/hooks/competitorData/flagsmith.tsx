@@ -18,7 +18,7 @@ export const flagsmith = {
             },
             features: {
                 automation: true,
-                boolean_flags: false,
+                boolean_flags: true,
                 early_access_management: false,
                 json_payloads: true,
                 multivariate_flags: true,
@@ -29,8 +29,8 @@ export const flagsmith = {
                 features: {
                     local_evaluation: true,
                     bootstrapping: false,
-                    api_access: false,
-                    sdk_support: false,
+                    api_access: true,
+                    sdk_support: true,
                 },
             },
             targeting: {
@@ -48,9 +48,9 @@ export const flagsmith = {
                     data_source: 'Third-party',
                     flag_administration: false,
                     flag_scheduling: true,
-                    history_activity: false,
+                    history_activity: true,
                     instant_rollbacks: false,
-                    multi_environment: false,
+                    multi_environment: true,
                     permissioning: true,
                 },
             },
@@ -58,7 +58,7 @@ export const flagsmith = {
                 features: {
                     flag_overrides: false,
                     toolbar_integration: false,
-                    user_assignment: false,
+                    user_assignment: true,
                 },
             },
             experimentation: {
@@ -111,10 +111,10 @@ export const flagsmith = {
             free_tier: true,
         },
         developer: {
-            sdks: false,
+            sdks: true,
             native_data_sources: false,
             proxies: false,
-            api: false,
+            api: true,
             sql: false,
         },
         tools: {
@@ -123,23 +123,22 @@ export const flagsmith = {
             project_management_tools: '',
         },
         integrations: {
-            datadog: false,
-
+            datadog: true,
             imports: false,
             exports: false,
-            slack: false,
+            slack: true,
             microsoft_teams: false,
             zapier: false,
-            sentry: false,
+            sentry: true,
         },
         security: {
-            gdpr_ready: false,
-            hipaa_ready: false,
+            gdpr_ready: true,
+            hipaa_ready: true,
             history_audit_logs: true,
             role_based_access_control: true,
-            saml_sso: false,
-            soc2_certified: false,
-            two_factor_auth: false,
+            saml_sso: true,
+            soc2_certified: true,
+            two_factor_auth: true,
             user_privacy_options: false,
         },
         analytics_integration: {

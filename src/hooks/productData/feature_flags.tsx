@@ -13,6 +13,7 @@ export const featureFlags = {
     color: 'seagreen',
     colorSecondary: 'seagreen',
     category: 'product_engineering',
+    wizardSupport: 'In development',
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
@@ -216,7 +217,7 @@ export const featureFlags = {
                         instantly.
                     </p>
                     <CodeBlock
-                        code={`posthog.init('<ph_project_api_key>', {
+                        code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   bootstrap: {

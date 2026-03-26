@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 const MCP_TOOLS_URL =
-    'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/tool-definitions.json'
+    'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/tool-definitions-all.json'
 
 interface MCPTool {
     category?: string

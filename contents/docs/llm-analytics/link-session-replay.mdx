@@ -30,7 +30,7 @@ There are two ways to pass session IDs from your frontend to your backend:
 Configure posthog-js to automatically inject session headers into requests to your backend:
 
 ```javascript
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   __add_tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
 })

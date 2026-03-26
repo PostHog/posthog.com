@@ -1,12 +1,13 @@
 ---
 title: 7 best free open source business intelligence tools right now
-date: 2025-09-09
+date: 2026-03-24
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
   - ian-vanagas
+  - natalia-amorim
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
@@ -65,7 +66,7 @@ Because it can easily combine product and business data, [PostHog](#1-posthog) i
 ### 1. PostHog
 
 - License: MIT
-- GitHub stars: 25.6k
+- GitHub stars: 32.1k as of March 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
 <ProductScreenshot
@@ -75,13 +76,13 @@ Because it can easily combine product and business data, [PostHog](#1-posthog) i
   classes="rounded"
 />
 
-PostHog is an open source, all-in-one platform that combines business intelligence with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
+PostHog is an all-in-one developer platform that combines business intelligence with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [surveys](/surveys), and more.
 
 Its business intelligence stack contains three key pieces:
 
-1. A [data warehouse](/data-warehouse) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
+1. A [data warehouse](/data-stack) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
 
-2. Product analytics which provides a simple but powerful interface for building dashboards and insights including trends, funnels, retention graphs, user paths, and more. 
+2. [Product analytics](/docs/product-analytics) which provides a simple but powerful interface for building dashboards and insights including trends, funnels, retention graphs, user paths, and more. 
 
 3. An [SQL editor](/docs/data-warehouse/query) for direct access to your data along with its own set of visualizations and customization.
 
@@ -90,6 +91,14 @@ Its business intelligence stack contains three key pieces:
 PostHog has the flexibility of a business intelligence tool, while including a full suite of tools product and engineering teams need to build successful products. You have less data spaghetti trying to connect them all together. 
 
 For example, not only can you analyze [A/B tests from warehouse data](/docs/experiments/data-warehouse) in PostHog, but you can actually set up and run them natively using our experimentation and feature flag products. You don't need to set up four different products, just PostHog.
+
+[PostHog AI](/ai) can also generate and fix SQL queries, answer questions about your data, and more. The [MCP server](/docs/model-context-protocol) enables your AI agents and tools to directly interact with PostHog's products.
+
+PostHog comes with 1 million events and 1 million rows synced for free every month, and has [transparent and usage-based pricing](/pricing).
+
+You can use the [setup wizard](/wizard) to get started in minutes – no credit card required.
+
+<WizardCTA />
 
 #### FAQ
 
@@ -120,7 +129,7 @@ Yes. PostHog AI can generate and fix SQL queries for you, answer questions about
 ### 2. Metabase
 
 - License: AGPLv3
-- GitHub stars: 43.6k
+- GitHub stars: 46.5k as of March 2026
 - [Metabase on GitHub](https://github.com/metabase/metabase)
 
 ![Metabase](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/metabase_fa7dbf71d9.png)
@@ -165,7 +174,7 @@ Yes. Metabot lets you generate SQL queries, summarize charts, and answer docs qu
 ### 3. Superset
 
 - License: Apache 2.0
-- GitHub stars: 67.9k
+- GitHub stars: 71k as of March 2026
 - [Superset on GitHub](https://github.com/apache/superset)
 
 ![Superset](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/superset_6f35a66cc9.jpg)
@@ -210,7 +219,7 @@ Preset's *AI Assist* lets you write SQL queries with ease, but is only available
 ### 4. Grafana
 
 - License: AGPLv3
-- GitHub stars: 69.8k
+- GitHub stars: 72.7k as of March 2026
 - [Grafana on GitHub](https://github.com/grafana/grafana)
 
 ![Grafana](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/grafana_dashboard_english_2fe2b3cb4d.png)
@@ -230,7 +239,7 @@ This means they are very popular with their core customer: infrastructure engine
 <details>
   <summary>What tools does Grafana replace?</summary>
 
-Grafana focuses on replacing monitoring visualization, and logging tools like Kibana, Datadog, New Relic, and Splunk.
+Grafana focuses on replacing monitoring visualization, and logging tools like Kibana, [Datadog](/blog/best-datadog-alternatives), New Relic, and Splunk.
 
 </details>
 <details>
@@ -255,7 +264,7 @@ Some data sources, like Azure Data Explorer, have AI query generation. Grafana h
 ### 5. Evidence
 
 - License: MIT
-- GitHub stars: 5.5k
+- GitHub stars: 6k as of March 2026
 - [Evidence on GitHub](https://github.com/evidence-dev/evidence)
 
 ![Evidence](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/evidence_c0c74bbd76.png)
@@ -302,7 +311,7 @@ Evidence's AI agent can look up documentation, check your schema, and write quer
 ### 6. Redash
 
 - License: BSD-2
-- GitHub stars: 27.7k
+- GitHub stars: 28.3k as of March 2026
 - [Redash on GitHub](https://github.com/getredash/redash)
 
 ![Redash](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/redash_b3a8f5a223.png)
@@ -355,7 +364,7 @@ Redash doesn't have AI query generation.
 ### 7. Lightdash
 
 - License: MIT
-- GitHub stars: 5k
+- GitHub stars: 5.6k as of March 2026
 - [Lightdash on GitHub](https://github.com/lightdash/lightdash)
 
 ![Lightdash](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/lightdash_63940e2642.webp)
@@ -399,12 +408,128 @@ Lightdash provides context-specific AI analysts that automatically select the mo
 
 </details>
 
-## What is the best free and open source business intelligence tool? 
+## Which open source BI tool should you choose?
 
-We're biased, but we think [PostHog](#1-posthog) is one of the best free BI tools around, especially for startups and scale-ups who also need things like product analytics, feature flags, experiments, and error tracking. 
+- Need one BI platform for your whole product stack – analytics, session replay, feature flags, error tracking, and more included? **PostHog**.
+- Need fast, accessible dashboards for non-technical users with a new semantic layer? **Metabase**.
+- Building an enterprise data platform with a semantic layer and 40+ visualization types? **Superset**.
+- Running infrastructure and need observability dashboards, alerting, and real-time monitoring? **Grafana**.
+- Want to build polished data products with code-first workflows and version control? **Evidence**.
+- Need a simple, lightweight self-hosted SQL + dashboard tool with minimal overhead? **Redash**.
+- Already using dbt and want a BI layer that treats dashboards as code? **Lightdash**.
+
+## Is PostHog right for you?
+ 
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think you'll love PostHog if:
+
+- You value transparency (we're open source and open core)
+- You want an all in one platform, keeping your data in one place
+- You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+  <summary>What are BI tools?</summary>
+
+Business intelligence (BI) tools help teams connect to data sources, query them, and turn the results into dashboards and visualizations that decision-makers can understand and act on. 
+
+They're typically used for reporting on business metrics (e.g. revenue, operations, marketing performance) rather than tracking user behavior in a product.
+
+</details>
+
+<details>
+  <summary>What features do you need in a BI tool?</summary>
+
+A good open source BI tool gives you visibility into your data without locking you into a proprietary platform. Most solid tools include:
+
+- **SQL query editor** for writing and running queries directly against your database
+- **Visual query builder** for non-technical users who don't want to write SQL
+- **Dashboard and chart builder** for sharing insights across your team
+- **Database connectors** for the sources you already use (Postgres, BigQuery, Snowflake, etc.)
+- **Self-hosting options** so your data doesn't leave your infrastructure
+
+More advanced tools add:
+
+- **Semantic layer** for defining reusable metrics and dimensions across your org
+- **AI query generation** for writing SQL from natural language
+- **Embedded analytics** for putting dashboards in your own product
+- **Scheduling and alerts** for keeping teams informed without manual checks
+- **Version control and CI/CD** for treating dashboards as code
+
+</details>
+
+<details>
+  <summary>What is the difference between BI tools and product analytics?</summary>
+
+**BI tools** connect to your existing databases and data warehouses to query, visualize, and share business data – revenue, operations, marketing performance, and so on. They're built around SQL and dashboards.
+
+**Product analytics tools** are designed specifically to track user behavior in your product – events, funnels, retention, user paths, and cohorts. They typically handle their own event ingestion and are optimized for behavioral data rather than general-purpose SQL queries.
+
+**PostHog** bridges both: it captures product events natively and connects to your external data sources through a built-in data warehouse, so you can query product and business data together in one place.
+
+</details>
+
+<details>
+  <summary>What is the difference between data analytics and business intelligence?</summary>
+
+The terms are often used interchangeably, but **business intelligence** is typically backward-looking – it answers "what happened?" by reporting on historical data through dashboards and scheduled reports. 
+
+**Data analytics** is broader and includes forward-looking analysis: finding patterns, building models, and answering "why did it happen?" and "what might happen next?"
+
+In practice, most BI tools are optimized for the reporting layer. 
+
+Data analytics tools go deeper – running ad hoc queries, statistical analysis, and cohort breakdowns on behavioral data.
+
+ **PostHog** sits closer to the data analytics end: it's less about static revenue dashboards and more about understanding user behavior, running experiments, and making product decisions from live data.
+
+</details>
+
+<details>
+  <summary>What is the best free and open source business intelligence tool? </summary>
+
+We're biased, but we think [PostHog](#1-posthog) is one of the best free BI tools around, especially for startups and scale-ups who also need things like product analytics, feature flags, experiments, and error tracking.
 
 It offers easy connectors to the sources you already use, easy-to-use visualizations, and a full SQL querying, and it puts all your data in one place so you can query product and company data together. 
 
-There's a generous free tier of 1 million events and 1 million rows synced for free every month if you [sign up for our Cloud hosted version](https://app.posthog.com/signup), too.
+There's a generous free tier of 1 million events and 1 million rows synced for free every month if you [sign up for our Cloud hosted version](/signup), too.
 
-If you don't want an all-in-one platform like PostHog, the next best option is [Metabase](#2-metabase)
+If you don't want an all-in-one platform like PostHog, the next best option is [Metabase](#2-metabase).
+
+</details>
+
+<details>
+  <summary>Should I self-host a BI tool?</summary>
+
+It depends on your team's infrastructure capacity and data requirements. Self-hosting gives you full control over where your data lives – important for teams with strict data residency or compliance requirements. But it also means managing upgrades, backups, and scaling yourself.
+
+For most teams, a managed cloud option (PostHog Cloud, Metabase Cloud, Grafana Cloud) is the lower-effort path. For teams with existing DevOps capacity or strict data sovereignty requirements, self-hosting Metabase or Superset is a strong option.
+
+</details>
+
+<details>
+  <summary>Can I use PostHog as a BI tool?</summary>
+
+Yes. PostHog includes a [data warehouse](/data-stack) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
+
+You can query this data alongside your product events using PostHog's [SQL editor](/docs/data-warehouse/query), build dashboards, and share insights across your team – all from the same platform where you run product analytics, session replay, and feature flags.
+
+</details>
+
+<details>
+  <summary>What is the best open source alternative to Tableau?</summary>
+
+**Superset** is the most direct open source alternative to Tableau for enterprise data teams – it has 40+ visualization types, a semantic layer, and scales to petabyte-level data. 
+
+**Metabase** is a simpler, more accessible alternative for teams that want Tableau-like dashboards without the complexity. 
+
+For product and engineering teams, **PostHog** covers most BI needs alongside product analytics in a single platform.
+ 
+</details>
+ 
+<NewsletterForm />

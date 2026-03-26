@@ -52,7 +52,7 @@ PostHog will manage our survey and track our results. To use [PostHog's React SD
 npm install posthog-js @posthog/react
 ```
 
-Once installed, import PostHog into `src/main.jsx` and set up a client using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
+Once installed, import PostHog into `src/main.jsx` and set up a client using your project token and host from [your project settings](https://us.posthog.com/settings/project). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
 
 ```jsx
 // src/main.jsx
@@ -63,7 +63,7 @@ import App from './App.jsx'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
 })
@@ -412,7 +412,7 @@ You can capture these events using `posthog.capture()`:
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_response: value, // required
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -488,7 +488,7 @@ function App() {
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true')
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+      $survey_response: value, // required
       $survey_questions: [
         {
           id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

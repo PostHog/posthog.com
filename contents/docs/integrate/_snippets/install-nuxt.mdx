@@ -12,7 +12,7 @@ import InstallWebPackageManagers from "./install-web-package-managers.mdx"
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      posthogPublicKey: process.env.NUXT_PUBLIC_POSTHOG_KEY || '<ph_project_api_key>',
+      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_TOKEN || '<ph_project_token>',
       posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     },
@@ -29,7 +29,7 @@ import posthog from 'posthog-js'
 
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+  const posthogClient = posthog.init(runtimeConfig.public.posthogToken, {
     api_host: runtimeConfig.public.posthogHost,
     defaults: runtimeConfig.public.posthogDefaults,
     loaded: (posthog) => {

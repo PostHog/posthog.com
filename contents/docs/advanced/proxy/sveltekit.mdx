@@ -158,7 +158,7 @@ import { browser } from '$app/environment'
 export function initPostHog() {
   if (!browser) return
 
-  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+  posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
     api_host: '/ph',
     ui_host: 'https://us.posthog.com',
     persistence: 'localStorage'
@@ -174,7 +174,7 @@ import { browser } from '$app/environment'
 export function initPostHog() {
   if (!browser) return
 
-  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+  posthog.init(import.meta.env.VITE_POSTHOG_TOKEN, {
     api_host: '/ph',
     ui_host: 'https://eu.posthog.com',
     persistence: 'localStorage'

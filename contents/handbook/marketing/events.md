@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Want PostHog to be involved in your event? See how we do [Community events](#community-events). <br /> Want to start a co-working group for builders? Check out our [Community incubator](#community-incubator) program and submit the [form](/community-incubator#apply). <br /> If your event will include PostHog and you'd like to add it to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/> or <TeamMember name="Kliment Minchev"/>.
+> Want PostHog to be involved in your event? See how we do [Community events](#community-events). Want to start a co-working group for builders? Check out our [Community incubator](#community-incubator) program and submit the [form](/community-incubator#apply). If you'd like to add an IRL event to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/> or <TeamMember name="Kliment Minchev"/>.
 
-We did 45 events in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
+We did 45 events in real life (IRL) in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
-Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
+Events have to be focused on and valuable to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, hence we mostly pass on big conferences. And we [prefer pull](/handbook/marketing#2-pull-dont-push) over push, so we gravitate towards content and formats that educate and activate while avoiding booths, badge-scanning, buying attendee lists, paying to speak, and webinars.
 
 The event formats we prefer (and organize ourselves) fall into one of these:
 
@@ -16,6 +16,8 @@ The event formats we prefer (and organize ourselves) fall into one of these:
 -   Experiences that allow engineers and founders to walk away with unique product engineering insights
 -   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
+
+All plans come together – from conception through to final delivery – on our [event management tool](https://www.notion.so/2f552be1aa2f808494f3e7f9bf4e258c?v=2f552be1aa2f80009544000c428b8082) which centralizes owners, logstics and feedback in one place.
 
 ## Community incubator
 
@@ -66,9 +68,7 @@ Put real effort into this first step. Defining the "what, why and how" of an eve
 
 ### Getting support
 
-> We use GitHub for everything so When you’re ready to submit an event for support, create an issue [using this template](https://github.com/PostHog/requests-for-comments/issues/new?template=community-event.md) and assign it to [@Zaltsman](https://github.com/zaltsman). 
-
-**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically fals in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagament. 
+**Financial support:** We are happy to support the growing ecosystem of PostHog users and product engineers more broadly through financial sponsorship. We do this often for events that align with everything outlined on this page. Budgetary support typically falls in the range from $500 to $3,500. When we support monetarily, it almost always involves some added level of engagement. 
 
 **Speakers:** Want a speaker in our ecosystem ([team PostHog](/people), customers, partners)? We’ll try our best. When considering speakers for your events try to avoid:
 
@@ -76,7 +76,7 @@ Put real effort into this first step. Defining the "what, why and how" of an eve
 -   People LARPing (live action role-playing) as executives
 -   Loudest person pretending to know more than they do
 
-**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
+**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](/founders) [have](/founders/product-market-fit-game) [plenty](/handbook) [of](/about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](/questions) [inspiration](/docs).
 
 **Merch:** We use the [store merch processes](/handbook/company/merch-store) to handle distribution of PostHog-branded merch. We tend to be generous with merch for community events. Outline what you had in mind in the issue.
 
@@ -100,13 +100,15 @@ Community events are better when organizers share what happened, what you learne
 
 ## Sponsoring external events
 
-We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
 
 ## Speaking at events
 
-If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. And at this point people are interested in not just what we build but how we did it. 
+If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). 
+
+For first-time yappers, reference the [speaker's guide](/handbook/marketing/speaker-guide). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. This includes integrations and implementations with other products. And at this point people are interested in not just what we build but how we did it. 
 
 
 ## Sponsoring student organizations
 
-Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.

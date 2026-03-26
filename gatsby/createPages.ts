@@ -26,6 +26,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
     const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
+    const EventTemplate = path.resolve(`src/templates/Event.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
     const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
@@ -442,6 +443,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return Promise.reject(result.error)
     }
 
+    const eventsResult = (await graphql(`
+        {
+            allEvent {
+                nodes {
+                    id
+                    strapiID
+                }
+            }
+        }
+    `)) as any
+
+    if (eventsResult.error) {
+        return Promise.reject(eventsResult.error)
+    }
+
     const menuFlattened = flattenMenu(menu)
 
     const findNext = (menu, currentURL) => {
@@ -741,6 +757,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         },
     })
 
+    eventsResult.data.allEvent.nodes.forEach((node) => {
+        if (!node?.strapiID) return
+        createPage({
+            path: `/events/${node.strapiID}`,
+            component: EventTemplate,
+            context: {
+                id: node.id,
+                strapiID: node.strapiID,
+            },
+        })
+    })
+
     result.data.spotlights.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
@@ -830,23 +858,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
             let gitHubIssues = []
             if (issues) {
-                for (const issue of issues) {
-                    if (!issue) continue
-                    const { html_url, number, title, labels } = await fetch(
-                        `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
-                        {
-                            headers: {
-                                Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                            },
-                        }
-                    ).then((res) => res.json())
-                    gitHubIssues.push({
-                        url: html_url,
-                        number,
-                        title,
-                        labels,
-                    })
-                }
+                gitHubIssues = await Promise.all(
+                    issues
+                        .filter((issue) => issue)
+                        .map((issue) =>
+                            fetch(`https://api.github.com/repos/${repo}/issues/${issue.trim()}`, {
+                                headers: {
+                                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
+                                },
+                            })
+                                .then((res) => res.json())
+                                .then(({ html_url, number, title, labels }) => ({
+                                    url: html_url,
+                                    number,
+                                    title,
+                                    labels,
+                                }))
+                        )
+                )
             }
             createPage({
                 path: slug,

@@ -7,7 +7,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingSvelteInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{ JSEventCapture }}>
-            <SvelteInstallation modifySteps={addNextStepsStep} />
+            <SvelteInstallation modifySteps={(steps) => addNextStepsStep(steps, 'web')} />
         </OnboardingContentWrapper>
     )
 }

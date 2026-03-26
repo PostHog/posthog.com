@@ -5,8 +5,6 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/replit_logo_9526a2cdb8.svg
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
 <iframe
     width="560"
     height="315"
@@ -27,12 +25,6 @@ import ReplitBadge from 'components/ReplitBadge'
 2. When prompted, log in to PostHog to authorize access
 3. The PostHog MCP server is now available in your Replit Agent
 
-<CalloutBox icon="IconFlag" title="EU region users" type="fyi">
-
-If your PostHog project is on EU Cloud, use `https://mcp-eu.posthog.com/mcp` instead.
-
-</CalloutBox>
-
 ## Set up PostHog in your project
 
 Once connected, give Replit Agent this prompt to add PostHog with error tracking and source maps:
@@ -41,38 +33,38 @@ Once connected, give Replit Agent this prompt to add PostHog with error tracking
 Add PostHog to this project for error tracking and analytics with source map uploads.
 
 Use the PostHog MCP to:
-- Get the project API token (from `projects-get`) → set as `VITE_POSTHOG_KEY`
+- Get the project token (from `projects-get`) → set as `VITE_POSTHOG_TOKEN`
 - Get the host URL → set as `VITE_POSTHOG_HOST`
-- Set `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST` as shared environment variables so they work in both development and production
+- Set `VITE_POSTHOG_TOKEN` and `VITE_POSTHOG_HOST` as shared environment variables so they work in both development and production
 
 Install packages: posthog-js and @posthog/cli
 
 Create a PostHog client at client/src/lib/posthog.ts that:
-- Initializes with defaults: '<ph_posthog_js_defaults>', capture_exceptions: true, autocapture: true, capture_pageview: true
-- Uses env vars VITE_POSTHOG_KEY and VITE_POSTHOG_HOST
-- Exports a wrapper around posthog.captureException(error) - do NOT manually capture $exception events
+- Initializes with defaults: `'<ph_posthog_js_defaults>', capture_exceptions: true, autocapture: true, capture_pageview: true`
+- Uses env vars `VITE_POSTHOG_TOKEN` and `VITE_POSTHOG_HOST`
+- Exports a wrapper around `posthog.captureException(error)` - do NOT manually capture $exception events
 
-Initialize PostHog in App.tsx with useEffect.
+Initialize PostHog in `App.tsx` with `useEffect`.
 
-Add an error boundary component that uses posthog.captureException() to capture React errors.
+Add an error boundary component that uses `posthog.captureException()` to capture React errors.
 
 Update `script/build.ts` to:
 - Build with `sourcemap: true`
 - After build, run `posthog-cli sourcemap inject` then `posthog-cli sourcemap upload`
 - Delete `.map` files from dist after upload (keep them private)
-- Skip upload gracefully if `POSTHOG_CLI_TOKEN` or `POSTHOG_CLI_ENV_ID` aren't set
+- Skip upload gracefully if `POSTHOG_CLI_API_KEY` or `POSTHOG_CLI_PROJECT_ID` aren't set
 
 For the source map upload secrets:
-- Prompt me to provide POSTHOG_CLI_TOKEN as a secret
-- Prompt me to provide POSTHOG_CLI_ENV_ID as a secret
+- Get the project ID from `projects-get` → tell me to set it as `POSTHOG_CLI_PROJECT_ID`
+- Prompt me to provide `POSTHOG_CLI_API_KEY` as a secret (I'll create a personal API key)
 ```
 
-The agent will get your project credentials from the MCP, set up shared environment variables, install the SDKs, add an error boundary, and configure source map uploads. It will prompt you to provide the CLI secrets needed for source map uploads.
+The agent will get your project credentials from the MCP, set up shared environment variables, install the SDKs, add an error boundary, and configure source map uploads. It will tell you the project ID and prompt you to create a personal API key.
 
 For source maps to work in production, add these as [Production app secrets](https://docs.replit.com/replit-workspace/workspace-features/secrets) (go to **Publish** → **Adjust settings**):
 
-- `POSTHOG_CLI_TOKEN` - create a [personal API key](https://us.posthog.com/settings/user-api-keys) with the MCP Server preset
-- `POSTHOG_CLI_ENV_ID` - from your [error tracking settings](https://us.posthog.com/settings/project-error-tracking)
+- `POSTHOG_CLI_API_KEY` - create a [personal API key](https://us.posthog.com/settings/user-api-keys) with the MCP Server preset
+- `POSTHOG_CLI_PROJECT_ID` - the agent will provide this from the MCP (it's the number in your project URL, e.g. the `12345` in `us.posthog.com/project/12345`)
 
 ## What you can do with the MCP
 
@@ -120,11 +112,11 @@ See [all available MCP tools](/docs/model-context-protocol#available-tools) for 
 
 ### Source maps not uploading
 
-Check that `POSTHOG_CLI_TOKEN` and `POSTHOG_CLI_ENV_ID` are set as **secrets** in Replit. If they're not set, the build will succeed but source maps won't be uploaded.
+Check that `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` are set as **secrets** in Replit. If they're not set, the build will succeed but source maps won't be uploaded.
 
 ### Events not appearing
 
-Verify `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST` are set correctly and that PostHog is initialized before your app renders.
+Verify `VITE_POSTHOG_TOKEN` and `VITE_POSTHOG_HOST` are set correctly and that PostHog is initialized before your app renders.
 
 ### MCP not connecting
 
@@ -133,7 +125,7 @@ Try disconnecting and reconnecting the PostHog MCP server. Make sure you're logg
 ## Next steps
 
 - [Error tracking docs](/docs/error-tracking) - Learn more about error tracking features
-- [Source maps guide](/docs/error-tracking/source-maps) - Detailed source map configuration
+- [Source maps guide](/docs/error-tracking/upload-source-maps) - Detailed source map configuration
 - [Feature flags](/docs/feature-flags) - Set up feature flags in your code
 - [MCP tools reference](/docs/model-context-protocol#available-tools) - All available MCP tools
 

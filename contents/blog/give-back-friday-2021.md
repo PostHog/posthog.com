@@ -67,7 +67,7 @@ Some other matters of small print:
 1. There's a maximum donation of $50,000 in total. 
 2. The total sum of donations shall be divided equally between projects. 
 3. Donations are at the discretion of PostHog and all decisions are final. 
-4. Donations are in addition to [our usual, ongoing open-source sponsorship](https://posthog.com/handbook/growth/marketing/open-source-sponsorship).
+4. Donations are in addition to [our usual, ongoing open-source sponsorship](https://posthog.com/handbook/marketing/open-source-sponsorship).
 
 That's it. 
 

@@ -538,6 +538,15 @@ export function Editor({
     // Add Shift+F keyboard shortcut for search
     useEffect(() => {
         const handleSearchKeyDown = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement
+            if (
+                target.tagName === 'INPUT' ||
+                target.tagName === 'TEXTAREA' ||
+                target.shadowRoot ||
+                (target instanceof HTMLElement && target.closest('.mdxeditor'))
+            ) {
+                return
+            }
             // Only handle Shift+F if this window is the focused/active window
             if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
                 e.preventDefault()

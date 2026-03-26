@@ -83,25 +83,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
-            name: 'Coding agent (Twig)',
+            name: 'Coding agent (PostHog Code)',
             Icon: IconCode,
             description: 'AI coding agent that understands your product analytics.',
-            handle: 'twig',
+            handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'twig',
-            status: 'WIP',
-        },
-        {
-            name: 'Endpoints',
-            Icon: IconTerminal,
-            description: 'Custom API endpoints powered by your PostHog data.',
-            handle: 'endpoints',
-            color: 'teal',
-            colorSecondary: 'teal',
-            category: 'product_engineering',
-            slug: 'docs/endpoints',
+            // slug: 'posthog-code',
             status: 'WIP',
         },
         {
@@ -2641,7 +2630,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'PostHog AI - PostHog data stack',
                 description:
-                    "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+                    "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
         {

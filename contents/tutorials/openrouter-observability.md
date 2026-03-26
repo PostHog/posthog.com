@@ -132,7 +132,7 @@ import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_api_client_host>' }
 )
 

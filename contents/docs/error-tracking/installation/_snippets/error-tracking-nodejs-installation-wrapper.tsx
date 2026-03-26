@@ -6,7 +6,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingNodeJSInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{}}>
-            <NodeJSInstallation modifySteps={addNextStepsStep} />
+            <NodeJSInstallation modifySteps={(steps) => addNextStepsStep(steps, 'node')} />
         </OnboardingContentWrapper>
     )
 }

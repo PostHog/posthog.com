@@ -49,6 +49,7 @@ export const llmAnalytics = {
     color: 'purple',
     colorSecondary: 'green-2',
     category: 'analytics',
+    wizardSupport: 'Coming soon',
     slider: {
         marks: [100000, 1000000, 10000000, 100000000],
         min: 100000,

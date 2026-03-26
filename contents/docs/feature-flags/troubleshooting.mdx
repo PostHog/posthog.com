@@ -138,15 +138,7 @@ This occurs because the `in` and `not_in` operators are reserved for **cohort pr
 
 ### What operators should I use instead?
 
-For person or group properties, use one of these operators:
-
-| Operator | Description |
-|----------|-------------|
-| `exact` | Matches when the property value equals any value in the list |
-| `is_not` | Matches when the property value does not equal the specified value(s) |
-| `contains` / `does not contain` | Matches when the property value contains/doesn't contain the substring |
-| `regex` / `does not match regex` | Matches when the property value matches/doesn't match a regular expression |
-| `is set` / `is not set` | Matches when the property exists/doesn't exist |
+For person or group properties, use any of the [string, numeric, presence, or semver operators](/docs/data/property-filters). For example: `exact`, `contains`, `regex`, `is set`, or any of the semver operators for version-based targeting.
 
 For cohort targeting, use the cohort property type with `in` or `not_in` operators to target users who are or aren't members of a specific cohort.
 

@@ -92,7 +92,7 @@ You can configure the following options:
 Here's a full example of how to configure autocapture:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     autocapture: {
@@ -124,7 +124,7 @@ You can disable autocapture in two ways:
 
 ```js-web
 // Before initialization
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     autocapture: false,
@@ -242,7 +242,7 @@ Autocaptured events display as the autocaptured interaction type in the [activit
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
 
 config.captureElementInteractions = true // Disabled by default
 
@@ -274,7 +274,7 @@ For more details on how to setup masking for session replay, please refer to our
 The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen. To enable this, set the `captureTouches` config option to true in your autocapture config like this:
 
 ```jsx
-<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+<PostHogProvider apiKey="<ph_project_token>" autocapture={{
     captureTouches: true,
 }}>
     ...
@@ -297,7 +297,7 @@ You can configure the following options:
 | `propsToCapture` | **Type:** `string[]`. List of props to capture from the component hierarchy. By default, identifiers and text content are captured. |
 
 ```jsx
-<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+<PostHogProvider apiKey="<ph_project_token>" autocapture={{
     captureTouches: true,
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
@@ -315,7 +315,7 @@ You can configure the following options:
 To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` (or your custom `noCaptureProp`) as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
 
 ```jsx
-<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+<PostHogProvider apiKey="<ph_project_token>" autocapture={{
     captureTouches: true,
     noCaptureProp: "ph-no-capture", // Optionally, you can use a custom prop like "data-no-capture"
     // ...
@@ -362,7 +362,7 @@ You can configure the following options:
 For example, your initialization code might look like this:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_pageview: 'history_change',
@@ -379,7 +379,7 @@ You can disable `$pageview` and `$pageleave` autocapture in two ways:
 For example:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false,
@@ -417,7 +417,7 @@ Screen navigation autocapture is not enabled by default. You can enable it by se
 For example, your initialization code might look like this:
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(apiKey: <ph_project_token>, host: <ph_client_api_host>)
 
 config.captureElementInteractions = true // Disabled by default
 config.captureApplicationLifecycleEvents = true // Disabled by default
@@ -489,7 +489,7 @@ You can collect dead clicks with the Web SDK by enabling them in [your project s
 Or by setting your config:
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_dead_clicks: true,
@@ -549,7 +549,7 @@ Autocaptured events can also be filtered by its CSS selector. For example, you c
 <Tab.Panels>
 <Tab.Panel>
 
-Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://app.posthog.com/data-management/properties) or in [the references](/docs/references/posthog-js/types/Properties).
+Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://app.posthog.com/data-management/properties) or in [the references](/docs/references/posthog-js).
 
 | Name                        | Key                      | Example value                  |
 |-----------------------------|--------------------------|--------------------------------|

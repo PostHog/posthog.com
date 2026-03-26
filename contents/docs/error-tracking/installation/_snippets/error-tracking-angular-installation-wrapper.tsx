@@ -7,7 +7,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingAngularInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{ JSEventCapture }}>
-            <AngularInstallation modifySteps={addNextStepsStep} />
+            <AngularInstallation modifySteps={(steps) => addNextStepsStep(steps, 'angular')} />
         </OnboardingContentWrapper>
     )
 }

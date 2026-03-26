@@ -141,14 +141,14 @@ In your application code, update your PostHog initialization to use your proxy s
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -167,7 +167,7 @@ Confirm events are flowing through your proxy:
 1. Test the proxy directly with curl:
 
     ```bash
-    curl -I https://e.yourdomain.com/decide?v=3
+    curl -I https://e.yourdomain.com/flags?v=2
     ```
 
     You should see a `200 OK` response.
@@ -273,14 +273,14 @@ In your application code, update your PostHog initialization:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:8080',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:8080',
   ui_host: 'https://eu.posthog.com'
 })
@@ -299,7 +299,7 @@ Confirm events are flowing through your proxy:
 1. Test the proxy directly:
 
     ```bash
-    curl -I http://localhost:8080/decide?v=3
+    curl -I http://localhost:8080/flags?v=2
     ```
 
 2. Open your browser's developer tools and go to the **Network** tab
@@ -322,7 +322,7 @@ If nginx returns `502 Bad Gateway`, it can't reach PostHog's servers:
 
 1. Verify your server can make HTTPS requests to PostHog domains:
    ```bash
-   curl -I https://us.i.posthog.com/decide?v=3
+   curl -I https://us.i.posthog.com/flags?v=2
    ```
 2. Check that `proxy_ssl_server_name on` is set in your config
 3. For Docker, ensure the `resolver` directive is configured

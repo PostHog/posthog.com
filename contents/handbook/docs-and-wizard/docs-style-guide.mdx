@@ -13,7 +13,7 @@ This style guide helps you write docs based on these assumptions.
 
 These are *guidelines*, not rules. They exist to keep our docs consistent and polished, but good judgement matters more than strict adherence when you're writing. If something makes the docs clearer, more helpful, or just plain better, do it. 
 
-See the [style guide](/handbook/content/style-guide) from the <SmallTeam slug="editorial" /> for additional writing guidelines.
+See the [style guide](/handbook/content/posthog-style-guide) from the <SmallTeam slug="editorial" /> for additional writing guidelines.
 
 ---
 
@@ -102,6 +102,20 @@ Always capitalize PostHog product names as proper nouns. Use "Product Analytics"
 > **Don't**: "Use session replay to understand user behavior."
 
 However, if you're referring to the general industry term or a feature that isn't specific to PostHog, use lowercase. For examples: "many companies offer product analytics."
+
+### Keys and tokens
+
+| Term | Description |
+|------|-------------|
+| **Project token** | The public identifier (starts with `phs_`) used in SDKs and the snippet to send events. This is NOT an API key. Never call it `project API key`. |
+| **Personal API key** | A private key (starts with `phx_`) used for server-side API access. This IS an API key. |
+| **Feature flags secure API key** | A separate key used for local evaluation of feature flags. |
+
+> **Do**: "Add your project token to the PostHog initialization code."
+
+<!-- vale PostHogBase.ProjectToken = NO -->
+> **Don't**: "Add your project API key to the PostHog initialization code."
+<!-- vale PostHogBase.ProjectToken = YES -->
 
 ### PostHog platform
 
@@ -326,7 +340,7 @@ Be consistent within a single list. If one item is a partial sentence, make all 
 >
 > To set up PostHog:
 > - Install the SDK.
-> - Configure your API key.
+> - Configure your project token.
 > - Start capturing events.
 
 ### Tables

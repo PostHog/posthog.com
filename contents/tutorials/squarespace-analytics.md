@@ -18,7 +18,7 @@ First, you need a Squarespace site to add PostHog to. Sign up, go through the tu
 
 ## Add PostHog to your Squarespace site
 
-In PostHog, get your HTML install snippet with your project API key and instance from [your project settings](https://us.posthog.com/settings/project). It looks like this:
+In PostHog, get your HTML install snippet with your project token and instance from [your project settings](https://us.posthog.com/settings/project). It looks like this:
 
 <Snippet />
 
