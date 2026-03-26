@@ -11,7 +11,8 @@ export const posthog = new PostHog(
     enableSessionReplay: true,
     sessionReplayConfig: {
       // Capture logs automatically. Default is true.
-      // Android only (Native Logcat only)
+      // Android (Native Logcat only)
+      // iOS (stdout, stderr, OSLog, NSLog)
       // Remote configuration via project settings requires SDK version 4.35.0 or higher.
       captureLog: true,
       ...
