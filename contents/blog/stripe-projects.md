@@ -1,6 +1,6 @@
 ---
 title: 'We’re partnering with Stripe to solve the most annoying problem for product builders'
-date: 2026-03-19
+date: 2026-03-26
 author:
     - joe-martin
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_features_12f2008503.jpg
