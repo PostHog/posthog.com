@@ -1,0 +1,61 @@
+---
+title: Sentiment classification
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Sentiment classification is in beta" type="fyi">
+
+Sentiment classification is currently in beta. We'd love to [hear your feedback](https://app.posthog.com/llm-analytics#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
+
+</CalloutBox>
+
+Sentiment classification automatically labels user messages in your LLM [traces](/docs/llm-analytics/traces) and [generations](/docs/llm-analytics/generations) as **positive**, **neutral**, or **negative**. This helps you understand how users feel during conversations with your AI features without reading every message.
+
+## Why use sentiment classification?
+
+- **Spot unhappy users** – Identify traces where users are frustrated or confused so you can investigate and improve your prompts or agent behavior.
+- **Monitor quality trends** – Track sentiment across models, features, or user segments over time.
+- **Prioritize improvements** – Focus on the conversations that matter most by filtering for negative sentiment.
+
+## How it works
+
+Sentiment is computed **on-demand** when you view traces or generations in the PostHog UI. No batch pipeline or upfront processing is needed.
+
+1. When you open the **Traces** or **Generations** tab, PostHog sends a request for each visible row to classify sentiment.
+2. A local ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest), converted to ONNX) classifies each user message as positive, neutral, or negative.
+3. Results are cached for 24 hours so subsequent views load instantly.
+
+**No data is sent to third-party services.** The model runs entirely within PostHog's infrastructure.
+
+## What you'll see
+
+### Traces table
+
+Each trace in the traces table shows a sentiment bar indicating the overall sentiment. The bar is color-coded:
+
+- **Green** – Positive
+- **Gray** – Neutral
+- **Red** – Negative
+
+Hover over the bar to see the sentiment score as a percentage, along with the maximum positive and negative scores across all messages in the trace.
+
+### Trace detail view
+
+When you click into a trace, the trace header displays an overall sentiment bar. Each generation within the trace also shows its own sentiment, so you can see how sentiment changes across the conversation.
+
+### Generations tab
+
+The generations table also supports sentiment classification. Each generation row shows a sentiment bar based on the user messages in that specific generation.
+
+## Per-message breakdown
+
+Sentiment is classified at the individual message level. Each user message within a generation gets its own sentiment score. The overall trace or generation sentiment is the average of all per-message scores, giving you both a high-level view and the ability to drill into specific messages.
+
+## Privacy
+
+Sentiment classification runs on PostHog's infrastructure using a local ONNX model. Your data is not sent to any third-party AI provider. The model only processes user messages (the `$ai_input` property) — it does not process LLM outputs.
+
+## Requirements
+
+- **LLM events captured** – Set up event capture using the [installation guide](/docs/llm-analytics/installation).

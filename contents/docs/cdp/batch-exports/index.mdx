@@ -137,6 +137,11 @@ The start date of a backfill may be adjusted depending on when the earliest avai
 
 If the estimation finds no matching data to export, the backfill completes immediately rather than creating empty batch runs.
 
+The backfills table includes a **Total rows** column that displays the estimated or final number of rows exported. For in-progress backfills, the count is shown as an approximate value (e.g. `~1,000`). For completed backfills, the final row count is displayed.
+
+### Cancelling backfills
+
+You can cancel a running backfill from within the backfills view. This will also cancel any runs associated with the backfill.
 
 ## FAQ
 

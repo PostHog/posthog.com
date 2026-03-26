@@ -87,11 +87,9 @@ WHERE event LIKE {variables.event_pattern}
 
 For insight-based endpoints, variables work differently. Instead of defining them in your query, certain **magic variables** are automatically available based on your insight configuration.
 
-### The breakdown property variable
+### Breakdown property variables
 
-If your insight has a single breakdown configured, the breakdown property name automatically becomes a variable. For example, if your TrendsQuery breaks down by `$browser`, you can filter results by passing that property as a variable:
-
-> **Note:** The breakdown variable is only available for insights with a single breakdown. Insights with multiple breakdowns can still be used as endpoints, but you will not be able to filter by the variables.
+If your insight has breakdowns configured, each breakdown property name automatically becomes a variable. For example, if your TrendsQuery breaks down by `$browser`, you can filter results by passing that property as a variable:
 
 ```bash
 curl -X POST \
@@ -102,6 +100,20 @@ curl -X POST \
 ```
 
 This filters the results to only return data where `$browser` equals "Chrome".
+
+### Multiple breakdowns
+
+For insights with multiple breakdowns, each breakdown property becomes a separate variable. Pass all breakdown variables when executing:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"$browser": "Chrome", "$os": "Mac OS X"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+This filters the results to only return data where both `$browser` equals "Chrome" and `$os` equals "Mac OS X".
 
 Breakdown variables work with:
 - TrendsQuery
@@ -120,7 +132,7 @@ curl -X POST \
   "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run"
 ```
 
-You can combine date variables with the breakdown variable:
+You can combine date variables with breakdown variables:
 
 ```bash
 curl -X POST \
@@ -132,7 +144,7 @@ curl -X POST \
 
 ### Materialization
 
-Materialized insight-based endpoints only support the breakdown property variable. Date variables (`date_from`, `date_to`) are not available for materialized endpoints because the data is pre-computed.
+Materialized insight-based endpoints only support breakdown property variables. Date variables (`date_from`, `date_to`) are not available for materialized endpoints because the data is pre-computed.
 
 If your insight has a breakdown, you can still filter by that property:
 

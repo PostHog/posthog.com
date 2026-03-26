@@ -21,12 +21,13 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 />
 
 1. Alerts are based off of [insights](/docs/product-analytics/insights). You can pick any existing trend insight or create a new one.
-2. Click the **Alerts** button on the top right of the insight page. This shows you all the alerts for this insight.
+2. Click **Actions** in the sidebar and select **Alerts**. This shows you all the alerts for this insight.
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_button_4ecd022cd6.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_button_dark_c2f642fde3.png"
-    alt="alerts button"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_26_AM_ccce74247b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_34_AM_ee7c2e9444.png"
+  alt="Alert button in actions bar"
+  classes="rounded"
 />
 
 3. Click the **New alert** button.
@@ -120,6 +121,17 @@ PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). O
 
 </CalloutBox>
 
+### Manage alerts via MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, create, update, and delete alerts directly from your AI coding agent. This is useful for integrating alert management into your development workflow.
+
+**Example prompts:**
+
+- "Create an alert when daily signups exceed 1000"
+- "List all my alerts and their current state"
+- "Update my pageview alert threshold to 5000"
+- "Delete the old conversion alert"
+
 ## Relative alerts
 Relative alerts check for change in the value of an insight.
 For example, if a value increases by 5% in a week.
@@ -147,7 +159,7 @@ Alerts support email notifications, Slack messages, and webhooks. You can config
 
 When creating or editing an alert, you can add notification destinations inline:
 
-1. In the **CDP Destinations** section, select **Slack** or **Webhook** from the dropdown.
+1. In the **Destinations** section, select **Slack** or **Webhook** from the dropdown.
 
 2. For Slack notifications:
    - If you haven't connected Slack yet, click **Connect to Slack** to set up the integration.
@@ -182,6 +194,24 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
     alt="alert on breakdown" 
     classes="rounded"
 />
+
+
+## Automatically disabled alerts
+
+PostHog automatically disables alerts that have an invalid configuration. When this happens, subscribed users receive an email notification explaining the reason the alert was disabled.
+
+Common reasons an alert may be auto-disabled:
+
+- The insight was modified and is no longer compatible with the alert configuration (e.g., the insight query type changed from a trend to a funnel)
+- The series referenced by the alert was removed from the insight
+- A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
+- An absolute value alert was configured with a percentage threshold
+
+<CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
+
+Disabled alerts don't re-enable themselves. After fixing the configuration issue, go to the **Alerts** tab on the insight and manually re-enable the alert.
+
+</CalloutBox>
 
 ## Further reading
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).

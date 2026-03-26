@@ -39,6 +39,7 @@ interface ExplorerProps {
     rightActionButtons?: React.ReactNode
     onSearch?: (query: string) => void
     viewportClasses?: string
+    showAddressBar?: boolean
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -92,6 +93,7 @@ export default function Explorer({
     rightActionButtons,
     onSearch,
     viewportClasses = '',
+    showAddressBar = true,
 }: ExplorerProps) {
     const { websiteMode } = useApp()
     const { appWindow } = useWindow()
@@ -139,23 +141,25 @@ export default function Explorer({
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            {!fullScreen ||
-                (!websiteMode && (
-                    <>
-                        <HeaderBar
-                            {...getHeaderBarProps()}
-                            searchContentRef={searchContainerRef}
-                            rightActionButtons={rightActionButtons}
-                            onSearch={onSearch}
-                        />
+            {(!fullScreen || !websiteMode) && (
+                <>
+                    <HeaderBar
+                        {...getHeaderBarProps()}
+                        searchContentRef={searchContainerRef}
+                        rightActionButtons={rightActionButtons}
+                        onSearch={onSearch}
+                        className={!showAddressBar ? 'border-b border-primary' : ''}
+                    />
+                    {showAddressBar && (
                         <AddressBar
                             selectOptions={selectOptions}
                             currentPath={currentPath}
                             handleValueChange={handleValueChange}
                             selectedCategory={selectedCategory}
                         />
-                    </>
-                ))}
+                    )}
+                </>
+            )}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"

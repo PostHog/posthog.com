@@ -20,7 +20,7 @@ export const devcycle = {
             },
         },
         experiments: {
-            available: false,
+            available: true,
             features: {
                 funnel_tests: false,
             },
@@ -41,8 +41,8 @@ export const devcycle = {
     platform: {
         deployment: {
             open_source: false,
-            self_host: false,
-            eu_hosting: false,
+            self_host: 'Hybrid',
+            eu_hosting: 'Enterprise',
         },
         developer: {
             api: true,
@@ -52,11 +52,11 @@ export const devcycle = {
             transparent_pricing: true,
         },
         security: {
-            history_audit_logs: false,
+            history_audit_logs: 'Business',
             role_based_access_control: true,
         },
     },
     pricing: {
-        model: 'Subscription',
+        model: 'MAUs',
     },
 }

@@ -119,7 +119,7 @@ When an incident is declared, the person who raised the incident is the incident
 
 The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
-Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/growth/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
+Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
 
 [You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
@@ -133,7 +133,7 @@ When updating the status page, make sure to mark the affected component appropri
 
 ### Getting help from a comms lead
 
-Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/growth/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
+Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
 
 The best way to ask for support from a Comms Lead is to post in the incident channel and use the `@all-marketers` group tag. This will alert the all relevant marketing teams. 
 

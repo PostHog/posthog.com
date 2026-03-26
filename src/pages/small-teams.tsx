@@ -120,7 +120,7 @@ const SmallTeamsPage = () => {
     const tableRows = sortedTeams.map((team: any, index: number) => {
         // Find the lead profile by matching IDs
         const leadId = team.leadProfiles?.data?.[0]?.id
-        const leadProfile = leadId ? team.profiles?.data?.find((profile: any) => profile.id === leadId) : null
+        const leadProfile = leadId ? team.profiles?.data?.find((profile: any) => Number(profile.id) === leadId) : null
         const leadName = leadProfile
             ? `${leadProfile.attributes?.firstName || ''} ${leadProfile.attributes?.lastName || ''}`.trim()
             : 'No lead'

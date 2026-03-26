@@ -26,11 +26,13 @@ function useBetaFeature() {
 }
 ```
 
-## 3. Identify users
+## 3. Targeting
 
-Because PostHog evaluates flags based on the user's distinct ID, having different IDs can cause the same user to receive different flag values across different sessions, devices, and platforms. By [identifying](/docs/getting-started/identify-users) them, you can ensure they consistent flag values.
+PostHog evaluates flags based on the user's distinct ID, having different IDs can cause the same user to receive different flag values across different sessions, devices, and platforms. By [identifying](/docs/getting-started/identify-users) them, you can ensure consistent flag values.
 
 The same applies to identifying [groups](/docs/product-analytics/group-analytics) for group-level flags.
+
+For flags targeting anonymous users, such as signup flows or landing page experiments, consider using [device bucketing](/docs/feature-flags/device-bucketing) instead. This evaluates the flag based on the device ID, ensuring a consistent experience on the device even after the user logs in.
 
 ## 4. Use server-side local evaluation for faster flags
 

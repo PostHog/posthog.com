@@ -2,22 +2,15 @@
 title: Clusters
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
-
-<CalloutBox icon="IconInfo" title="Clusters is in beta" type="fyi">
-
-Clusters is currently in beta. We'd love to [hear your feedback](https://app.posthog.com/llm-analytics#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
-
-</CalloutBox>
 
 <details>
 <summary>Requirements</summary>
 
 - **Traces or generations captured** – Set up LLM event capture using the [installation guide](/docs/llm-analytics/installation).
 - **AI data processing enabled** – Your organization must have AI data processing consent enabled, the same requirement as [trace summarization](/docs/llm-analytics/summarization).
-- **Automatic daily runs** – Clustering runs automatically every day. No manual setup is needed.
+- **Automatic daily runs** – Clustering runs automatically based on your configured [clustering jobs](#managing-clustering-jobs). No manual setup is needed.
 
 </details>
 
@@ -37,7 +30,7 @@ Clusters automatically group similar LLM [traces](/docs/llm-analytics/traces) or
 3. AI generates a title and description for each cluster.
 4. Metrics like average cost, latency, token usage, and error rate are computed per cluster.
 
-Clustering runs automatically every day — no setup needed beyond having [traces captured](/docs/llm-analytics/installation).
+Enabled clustering jobs run automatically during the next scheduled cycle — no manual intervention needed beyond having [traces captured](/docs/llm-analytics/installation).
 
 ## Viewing clusters
 
@@ -48,11 +41,18 @@ Navigate to **LLM analytics** > **Clusters** to see the overview.
     classes="rounded"
 />
 
-### Filtering events
+### Managing clustering jobs
 
-Click the **Filters** button in the Clusters view to configure which traces or generations are included in clustering. Use property filters to scope clustering to specific events — for example, filtering by model name, user segment, or custom properties.
+Clustering jobs let you define independent clustering configurations — for example, one job for traces from a specific model and another for all generations. Click the **Jobs** button in the Clusters view to open the jobs management panel.
 
-Configured filters persist and apply to both automated daily clustering runs and [trace summarization](/docs/llm-analytics/summarization) runs.
+Each job has the following settings:
+
+- **Name** – A label to identify the job (e.g. "Production GPT-4o")
+- **Analysis level** – Whether to cluster traces (entire conversations) or generations (individual LLM calls)
+- **Event filters** – Property filters to scope which traces or generations are included. Leave empty to include all.
+- **Enabled** – Toggle a job on or off without deleting it
+
+You can create up to five clustering jobs per team. Jobs run automatically during the next scheduled clustering and summarization cycle. The run selector on the Clusters page includes the job name so you can identify which job produced each run.
 
 ### Trace vs generation clustering
 
@@ -61,7 +61,7 @@ Clusters can operate at two levels:
 - **Traces** – Cluster entire conversations, giving you a high-level view of what users are doing.
 - **Generations** – Cluster individual LLM calls, useful for analyzing specific model interactions.
 
-Toggle between them using the selector at the top of the page.
+The analysis level is configured per job in the [jobs panel](#managing-clustering-jobs). You can also use the level toggle at the top of the Clusters page to filter which runs are displayed.
 
 <ProductVideo
     videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/llma_clustering_traces_vs_generations_2_64a866dffd.mp4"
