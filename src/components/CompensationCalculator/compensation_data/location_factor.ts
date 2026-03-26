@@ -480,7 +480,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Denver/Boulder, Colorado',
-        locationFactor: 0.8,
+        locationFactor: 0.85,
         currency: 'USD',
     },
     {

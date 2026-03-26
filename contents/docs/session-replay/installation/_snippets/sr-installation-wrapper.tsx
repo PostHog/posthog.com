@@ -1,9 +1,8 @@
 import React from 'react'
 import {
     // Web SDK installations
-    JSWebInstallation,
+    WebInstallation,
     NextJSInstallation,
-    HTMLSnippetInstallation,
     ReactInstallation,
     VueInstallation,
     AngularInstallation,
@@ -25,15 +24,18 @@ import {
 } from 'onboarding/session-replay'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './sr-shared-helpers'
+import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
 
 const SNIPPETS = {
     SessionReplayFinalSteps,
+    JSHtmlSnippet: WebsiteJSHtmlSnippet,
+    JSInitSnippet: WebsiteJSInitSnippet,
 }
 
 // Web SDK wrappers
 export const SRJSWebInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
-        <JSWebInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 
@@ -45,7 +47,7 @@ export const SRNextJSInstallationWrapper = () => (
 
 export const SRHTMLSnippetInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
-        <HTMLSnippetInstallation modifySteps={addNextStepsStep} />
+        <WebInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

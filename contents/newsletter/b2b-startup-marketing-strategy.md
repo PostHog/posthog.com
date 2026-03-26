@@ -48,7 +48,7 @@ To avoid this, we break our work down by:
 
 Optimizing paid ads, for example, sounds like a good use of time. Who wants to waste money, right? But is getting them from 7/10 to 10/10 going to move the dial for us? We don’t think so, so we’re happy to get them to 7/10.
 
-We cover what we care about in more detail in the [marketing section of our handbook](https://posthog.com/handbook/growth/marketing). Your things may be different to ours, but we typically prioritize more leveraged, long-term activity (e.g. SEO, word-of-mouth, etc.) over high-effort campaigns (e.g. ProductHunt launches).
+We cover what we care about in more detail in the [marketing section of our handbook](https://posthog.com/handbook/marketing). Your things may be different to ours, but we typically prioritize more leveraged, long-term activity (e.g. SEO, word-of-mouth, etc.) over high-effort campaigns (e.g. ProductHunt launches).
 
 Above all, don’t get distracted by rivals doing something better than you. Stick to what you want to be great at.
 

@@ -85,10 +85,11 @@ export const pendo = {
         session_replay: {
             available: true,
             pricing: {
-                free_tier: 'None',
+                free_tier: true,
             },
             features: {
                 event_timeline: true,
+                crash_reports: false,
             },
             platform_support: {
                 features: {
@@ -98,8 +99,8 @@ export const pendo = {
             },
             analysis: {
                 features: {
-                    console_logs: false,
-                    network_monitor: false,
+                    console_logs: true,
+                    network_monitor: true,
                     performance_monitoring: false,
                 },
             },
@@ -137,12 +138,25 @@ export const pendo = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: false,
             },
+            monitoring: {
+                performance_monitoring: false,
+            },
+        },
+        cdp: {
+            available: false,
+        },
+        workflows: {
+            available: true,
+        },
+        llm_analytics: {
+            available: 'Agent Analytics',
         },
     },
     platform: {
         deployment: {
-            eu_hosting: 'Enterprise only',
+            eu_hosting: true,
             open_source: false,
             reverse_proxy: true,
             self_host: false,
@@ -161,13 +175,13 @@ export const pendo = {
         pricing: {
             free_tier: true,
             transparent_pricing: false,
-            usage_based_pricing: false,
-            model: 'Seat-based',
+            usage_based_pricing: true,
+            model: 'MAU-based',
             self_serve: true,
         },
         integrations: {
             airbyte: false,
-            azure_blob: false,
+            azure_blob: true,
             bigquery: true,
             ci_cd_integrations: false,
             community_integrations: true,
@@ -199,7 +213,7 @@ export const pendo = {
             data_anonymization: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: false,
+            history_audit_logs: true,
             saml_sso: true,
             soc2_certified: true,
             two_factor_auth: true,
@@ -222,6 +236,7 @@ export const pendo = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
 }

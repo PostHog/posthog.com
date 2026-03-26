@@ -1,5 +1,5 @@
 ---
-date: 2024-08-22
+date: 2026-02-20
 title: 'In-depth: PostHog vs Hotjar'
 rootPage: /blog
 sidebar: Blog
@@ -10,7 +10,7 @@ featuredImage: >-
 featuredImageType: full
 author:
     - lior-neu-ner
-    - andy-vandervell
+    - natalia-amorim
 tags:
     - Comparisons
 seo:
@@ -20,28 +20,39 @@ seo:
 
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
-PostHog and Hotjar both help you understand user behavior, including the ability to watch real user sessions, conduct user research, and book interviews, but there are some important differences:
+[PostHog](/) and [Hotjar](/blog/best-hotjar-alternatives) both help you understand how users interact with your product through session replay, heatmaps, and user surveys. They're popular choices for teams that want to go beyond pageview analytics and see what users actually do.
+
+Hotjar is now part of [Contentsquare](/blog/best-contentsquare-alternatives) (which also acquired [Heap](/blog/posthog-vs-heap)). It's still available as a focused user research tool built for UX teams, but pricing and plans now live under the Contentsquare umbrella. 
+
+PostHog combines [replays](/session-replay) and [surveys](/surveys) with a [full suite of developer tools](/products) designed to measure impact from one integrated platform.
+
+In this comparison, we break down how PostHog and Hotjar stack up so you can decide which one is the right fit.
 
 ## How is PostHog different?
 
 ### 1. We're an all-in-one platform
 
-PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web](/web-analytics) analytics, [feature flags](/feature-flags), [A/B testing](/experiments), and a [data warehouse](/data-warehouse). It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web analytics](/web-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [workflows](/workflows), a [data warehouse](/data-warehouse), [data pipelines](/cdp), and more. It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
-### 2. We support both web and mobile apps
+### 2. It's a platform built for developers
 
-We offer integrations for all the most popular web and and mobile SDKs, including [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [React Native](/docs/session-replay/installation/react-native), [Android](/docs/session-replay/installation/android), [iOS](/docs/session-replay/installation/ios), and [Flutter](/docs/session-replay/installation/flutter). Unlike Hotjar, we also support [session replay on mobile apps](/docs/session-replay/mobile), so you can track all versions of your app using PostHog.
+This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/product-analytics/sql), so you can analyze data how you want. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and in our [public handbook](/handbook).
+
+And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/cdp) or [data warehouse](/data-warehouse) are ready to switch on whenever you need them.
+
+> Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale.
 
 ### 3. We're cheaper and have a generous free tier
 
-Every customer gets 5,000 web recordings and 1 million events for free each month, no matter what plan they're on. Our generous free tier means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
+Every customer gets 5,000 web recordings, 1,500 survey responses, and 1 million events for free each month, no matter what plan they're on. Our [generous free tier](/pricing) means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. You also get 2,500 free recordings on mobile apps.
 
-See the [price comparison section](#price-comparison) for more.
+<WizardCTA />
 
 ## Product comparison
 
 The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotjar-alternatives), [Heap](/blog/best-heap-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives) rolled into one.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -71,33 +82,49 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
         },
     ]}
 />
+</p>
 
 ### Analytics
 
-Product analytics isn't a core focus for Hotjar, but it does offer basic event tracking, funnels, and trend insights on its most expensive Scale plan.
+Since Hotjar is now part of Contentsquare, the analytics picture has changed. 
 
+Hotjar already offered funnels, but since the merge, broader product analytics features – like retention, user paths, and custom dashboards – are now available through Contentsquare's plans.
+
+Contentsquare splits analytics across two products: Experience Analytics (funnels, heatmaps, dashboards – 200k free monthly sessions) and Product Analytics (trends, retention, journey analysis – 10k free monthly sessions). A significant number of features like user ID and custom variable filters, session summaries, and their AI assistant are all on their paid Growth tier or higher.
+
+PostHog includes all of this and more in a single product, with 1 million free events every month.
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
+        'product_analytics.features.autocapture',
         'product_analytics.features.custom_events',
         'product_analytics.trends',
         'product_analytics.funnels',
         'dashboards',
         'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.group_analytics',
+        'product_analytics.features.ai_analysis',
         'product_analytics.lifecycle',
         'product_analytics.retention',
         'product_analytics.stickiness',
         'product_analytics.user_paths',
     ]}
 />
+</p>
 
 ### Session replay
 
 Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit.
 
-Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives), though Hotjar doesn't support replays on mobile apps and has no public plans to do so.
+Since joining Contentsquare, Hotjar's session replay capabilities have expanded – recordings now include AI-powered summaries, error detection, and frustration signals. Mobile app session replay is also available through Contentsquare's Enterprise plan. 
 
+PostHog supports [mobile session replay](/docs/session-replay/mobile) with 2,500 recordings free every month, including [Android](/docs/session-replay/installation/android), [iOS](/docs/session-replay/installation/ios), [React Native](/docs/session-replay/installation/react-native), and [Flutter](/docs/session-replay/installation/flutter).
+
+Both PostHog and Hotjar are good options if you're looking for a [FullStory](/blog/best-fullstory-alternatives), [LogRocket](/blog/best-logrocket-alternatives), or [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives).
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -117,11 +144,13 @@ Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clar
         'session_replay.export.features.export_to_video',
     ]}
 />
+</p>
 
 ### Heatmaps
 
 Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, give a clearer overview of how users behave.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -133,11 +162,15 @@ Heatmaps visualize where people click and navigate to on your app or website and
         'heatmaps.features.toolbar',
     ]}
 />
+</p>
 
 ### Surveys
 
-Hotjar supports more survey types than PostHog, but fewer targeting options.
+Hotjar's surveys are now part of Contentsquare's Voice of Customer product. They've added AI-generated surveys, AI summary reports with sentiment analysis, and increased free response limits. 
 
+Hotjar still supports more survey types than PostHog, including unmoderated user tests and interview scheduling, but PostHog offers more precise targeting options.
+
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -150,74 +183,61 @@ Hotjar supports more survey types than PostHog, but fewer targeting options.
         'surveys.templates.user_interview_requests',
         'surveys.implementation.api_access',
         'surveys.features.webhooks',
+        'surveys.targeting.features',
     ]}
 />
-
-Using PostHog's product analytics and surveys together unlocks more precise targeting options for surveys, such as using feature flags and pre-defined cohorts.
-
-<ProductComparisonTable competitors={['posthog', 'hotjar']} rows={['surveys.targeting.features']} />
+</p>
 
 ## Price comparison
 
-> **Note:** Prices correct as of Aug 21, 2024.
+Hotjar's old pricing tiers (Business and Scale) no longer exist. Since the Contentsquare merger, Hotjar's tools are now sold under Contentsquare's pricing structure, which is split across three separate products – Experience Analytics (replays, heatmaps), Voice of Customer (surveys, interviews), and Product Analytics (powered by Heap). Each product has its own plan: Free, Growth, Pro, or Enterprise.
 
-PostHog is cheaper than Hotjar for both session replay and user surveys, regardless of whether you choose Hotjar's most popular Business tier or the more expensive Scale tier that includes Hotjar's basic analytics features, and a dedicated account manager.
+PostHog, by contrast, has fully transparent, usage-based pricing for every product on a single bill.
 
-### Session replay pricing
+### Free tier comparison
 
-Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorded sessions. We've multiplied Hotjar's daily sessions by 30 to get a monthly equivalent.
+| | Contentsquare | PostHog |
+| --- | --- | --- |
+| **Session replays** | 10,000/mo | 5,000/mo |
+| **Heatmaps** | 200,000/m (with sessions) | Included with replays |
+| **Analytics events** | 10,000 sessions (Product Analytics) | 1,000,000 events |
+| **Survey responses** | 100/mo | 1,500/mo |
+| **Data retention** | 1 month (Experience Analytics) | 7 years |
+| **Feature flags** | ❌ | 1,000,000 requests |
+| **A/B tests** | ❌ | 1,000,000 requests |
+| **Error tracking** | ❌ | 100,000 requests |
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_light_cfa8ac3dd9.jpg"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_dark_c9dba6fd3f.jpg"
-    classes="rounded"
-    alt="session replay pricing"
-/>
+Contentsquare does offer 200,000 monthly sessions for its Experience Analytics free plan, which is generous for heatmaps and basic session data. But its Product Analytics free tier is limited to just 10,000 sessions with limited history, and surveys cap at 100 responses per month.
 
-| Monthly sessions | Hotjar Business | Hotjar Scale  | PostHog |
-| ---------------- | --------------- | ------------- | ------- |
-| **5k**           | $99             | $213          | $0      |
-| **15k**          | $99             | $213          | $50     |
-| **45k**          | $249            | $525          | $157    |
-| **75k**          | $389            | $827          | $224    |
-| **120k**         | $489            | Contact sales | $313    |
-| **240k**         | $789            | Contact sales | $524    |
+PostHog gives you 1 million analytics events, 5,000 web replays, 2,500 mobile replays, 1,500 survey responses, and 1 million feature flag requests – all on the same platform.
 
-At 75k recorded sessions per month, PostHog is $1,980 cheaper over 12 months compared to Hotjar's Business tier, and $7,236 cheaper than Hotjar's Scale tier, when paying monthly.
+### Paid pricing
 
-PostHog also offers a more generous free tier that includes 5,000 replay sessions, 1 million analytics events, and 1500 survey responses for free _every month_.
+PostHog uses usage-based pricing across all products. You only pay for what you use, and prices decrease at higher volumes. Here's what typical usage costs with PostHog:
 
-Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
+| Monthly usage | PostHog cost |
+| --- | --- |
+| **5,000 replays** | $0 (free tier) |
+| **15,000 replays** | $50 |
+| **50,000 replays** | $157.5 |
+| **100,000 replays** | $161.5 |
+| **1,500 survey responses** | $0 (free tier) |
+| **2,500 survey responses** | $50 |
+| **5,000 survey responses** | $122.50 |
+| **1M analytics events** | $0 (free tier) |
+| **5M analytics events** | $137.2 |
 
-### Surveys pricing
+Contentsquare's Growth plan starts at $40/month for Experience Analytics, $79/month for Voice of Customer (which includes surveys), and it's not disclosed for Product Analytics. Because replays, surveys, and analytics are billed as separate products, costs add up quickly once you need more than one tool. Pro and Enterprise pricing is custom and require a conversation with the sales team.
 
-It's a similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/surveys_light_d45a4a6318.jpg"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/surveys_dark_96fc402ad8.jpg"
-    classes="rounded"
-    alt="surveys pricing"
-/>
-
-| Monthly survey responses | Hotjar Business | Hotjar Scale  | PostHog |
-| ------------------------ | --------------- | ------------- | ------- |
-| **250**                  | $79             | $159          | $0      |
-| **500**                  | $79             | $159          | $51     |
-| **1,000**                | $99             | $259          | $99     |
-| **2,500**                | $179            | $479          | $152    |
-| **5,000**                | $289            | Contact sales | $240    |
-| **7,500**                | $399            | Contact sales | $330    |
-| **10,000**               | $479            | Contact sales | $418    |
-
-You can see how much PostHog will cost you using the calculator on our [pricing page](/pricing).
+With PostHog, everything is on one bill with one pricing calculator. You can see exactly how much you'll pay using the calculator on our [pricing page](/pricing).
 
 ## Platform and integrations
 
 ### Data sources
 
-PostHog has a [built-in data warehouse](/data-warehouse), so you can import, combine, and analyze data from multiple sources, and combine it with analytics events. This means you can [monitor deal counts](/tutorials/hubspot-reports) using data from Hubspot, [analyze gross revenue](/tutorials/stripe-reports) using Stripe data, and [track support ticket SLAs](/tutorials/zendesk-reports) using Zendesk data, all from within PostHog.
+PostHog has a [built-in data warehouse](/data-stack), so you can import, combine, and analyze data from multiple sources, and combine it with analytics events. This means you can [monitor deal counts](/tutorials/hubspot-reports) using data from Hubspot, [analyze gross revenue](/tutorials/stripe-reports) using Stripe data, and [track support ticket SLAs](/tutorials/zendesk-reports) using Zendesk data, all from within PostHog.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -232,11 +252,13 @@ PostHog has a [built-in data warehouse](/data-warehouse), so you can import, com
         'platform.integrations.gcs',
     ]}
 />
+</p>
 
 ### Data destinations
 
-Hotjar and PostHog support a similar range of data destinations, though PostHog can send more data because it collects more actionable data via product analytics. Hotjar is limited to sending basic event data, session replay, and survey responses.
+Contentsquare has improved its data export capabilities since the Hotjar days – its Data Connect feature now exports behavioral data to Snowflake, BigQuery, Redshift, S3, and Databricks. However, PostHog can still send richer data because it collects more actionable data via product analytics, feature flags, and experiments.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -253,11 +275,13 @@ Hotjar and PostHog support a similar range of data destinations, though PostHog 
         'platform.integrations.bigquery',
     ]}
 />
+</p>
 
 ### Privacy, compliance, and security
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPAA and GDPR can require teams to store data in certain locations or protect it in certain ways.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'hotjar']}
     rows={[
@@ -269,31 +293,128 @@ Regulatory compliance can be a critical need for many teams, especially if they 
         'platform.security.cookieless_tracking',
     ]}
 />
+</p>
+
+## When to choose PostHog vs Hotjar
+
+Choosing between PostHog and Hotjar (now Contentsquare) depends on what you need beyond session replay and heatmaps. Here's a quick guide:
+
+- Want an all-in-one developer platform that goes beyond user research with [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), and transparent pricing? Go with **PostHog**.
+
+- Need a focused UX research tool with session replays, AI-powered surveys, user interviews, and unmoderated user testing? **Hotjar/Contentsquare** is a solid choice.
+
+## Recommendations by team type
+
+**For engineering-led product teams**
+- **PostHog** – SQL access, open-source codebase, and SDKs for every major framework. Tightly integrated feature flags, experiments, error tracking, and LLM analytics mean fewer tools to manage.
+
+**For UX research and design teams**
+- **Hotjar / Contentsquare** – Built for qualitative user research with AI-generated surveys, user interviews, unmoderated user tests, and feedback widgets. The Sense AI assistant surfaces insights from survey responses and session replays automatically.
+
+**For product managers who also run experiments**
+- **PostHog** – Run A/B tests, roll out features with flags, and measure impact on funnels and retention – all in one platform. Contentsquare doesn't include native feature flags or experimentation.
+
+**For e-commerce and CRO teams**
+- **Hotjar / Contentsquare** – Zone-based heatmaps, journey analysis, and impact quantification help identify and prioritize conversion improvements. Its enterprise tier adds mobile app replay and revenue attribution.
+
+**For teams building AI products**
+- **PostHog** – Native [LLM analytics](/llm-analytics) for tracking model performance, token costs, and debugging AI interactions. Contentsquare doesn't offer AI observability.
+
+**For privacy-conscious and regulated organizations**
+- Both are SOC 2 certified, GDPR-ready, and CCPA-ready. **PostHog** is HIPAA-ready and offers EU hosting with raw data access via its [data warehouse](/data-stack). Contentsquare/Hotjar is not HIPAA-compliant, but they do offer EU hosting.
+
+**For early-stage startups**
+- **PostHog** – A single platform that scales from MVP to growth stage. The generous free tier includes 1 million analytics events, 5,000 replays, and 250 survey responses per month. [Startups can also qualify for $50k in free credits](/startups).
+
+<WizardCTA />
 
 ## Frequently asked questions
 
-### Can PostHog replace Google Analytics?
+<details>
+    <summary>What's the difference between PostHog and Hotjar?</summary>
 
-Absolutely. We include an easy-to-use [web analytics dashboard](/web-analytics) for tracking marketing and content performance, and you can use our product analytics to do more in-depth analysis as well. See our [PostHog vs Google Analytics comparison](/blog/posthog-vs-ga4) for more.
+**Hotjar** (now part of Contentsquare) is a UX research tool built for understanding user behavior through session replay, heatmaps, and surveys. **PostHog** is a broader all-in-one platform that combines those capabilities with product analytics, feature flags, A/B testing, error tracking, LLM analytics, and more – built for engineering-led teams who want everything in one place.
 
-### Can PostHog replace Mixpanel, Amplitude and Heap?
+</details>
 
-It's what PostHog's designed to do. The beauty of PostHog is that it replaces multiple tools in your analytics and product stack, so you can stop juggling data between multiple tools, and save money by consolidating everything. See our comparisons with [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) for more.
+<details>
+    <summary>Is Hotjar still available or is it just Contentsquare now?</summary>
 
-### Can I choose which sessions are recorded?
+As of July 2025, Hotjar formally merged into the Contentsquare Group. The Hotjar brand still exists, but all products – session replay, heatmaps, surveys – are now part of the Contentsquare platform under new pricing tiers (Free, Growth, Pro, Enterprise). Existing Hotjar users were migrated to Contentsquare accounts.
 
-Yes. You can choose to only record sessions on specific pages, or sessions with a minimum duration that you set. You can also set a sampling rate – i.e. only record 20% of sessions – or trigger recordings based on a feature flag. See [How to only record the sessions you want](/tutorials/limit-session-recordings) for more.
+</details>
 
-### Does PostHog offer discounts for paying annually?
+<details>
+    <summary>Does PostHog replace Hotjar?</summary>
 
-Yes. You get a 20% discount by default for paying annually upfront. Hotjar also offers a 20% discount for paying annually.
+**Yes, for most teams.** PostHog offers session replay, heatmaps, and surveys – the core Hotjar features – plus product analytics, feature flags, A/B testing, error tracking, and more. If you're an engineering or product team that wants to go beyond user research, PostHog replaces Hotjar and several other tools in one platform.
 
-### Can I use PostHog with a customer data platform like Segment?
+**Consider keeping Contentsquare if** your team relies heavily on user interviews, unmoderated user tests, or the Sense AI assistant for UX research.
 
-Yes. See our guide to [using PostHog with a CDP](/docs/advanced/cdp) for more on that, though many of our customers use PostHog as their CDP and utilize our [data pipelines](/docs/cdp) and [data warehouse](/docs/data-warehouse) for moving data in and out of PostHog.
+</details>
 
-Got another question? You can [ask the PostHog team anything you want](/questions)!
+<details>
+    <summary>Which has better session replay – PostHog or Contentsquare?</summary>
 
-### How does PostHog compare to other session replay tools?
+**PostHog** includes more developer-focused features like console logs, network request monitoring, a DOM explorer, and performance metrics. It also supports mobile replay on all plans (Android, iOS, React Native, Flutter). **Contentsquare** added AI-powered replay summaries and frustration signals, but mobile replay is limited to Enterprise plans or Pro add-ons.
 
-PostHog offers replay as part of a broader platform that also includes analytics, feature flags, and error tracking, so you get more context than a standalone replay tool. If you want a deeper look at how PostHog stacks up against options like LogRocket, FullStory, Hotjar, and OpenReplay, check out our full guide to the [best session replay tools for developers](/blog/best-session-replay-tools).
+</details>
+
+<details>
+    <summary>Does Contentsquare have error tracking?</summary>
+
+Contentsquare has basic error detection through its Experience Monitoring product, which surfaces JavaScript errors and performance issues. However, this is more focused on frontend monitoring than full error tracking. **PostHog** includes native [error tracking](/error-tracking) that connects exceptions and stack traces directly to session replays, user behavior, and feature flag changes.
+
+</details>
+
+<details>
+    <summary>Does Contentsquare have product analytics?</summary>
+
+Yes, but it's complicated. Contentsquare's Product Analytics is powered by [Heap](/blog/posthog-vs-heap), which it acquired in 2023. It's offered as a separate product with its own pricing (free tier: 10k sessions). Contentsquare's Experience Analytics also includes basic funnels, dashboards, and journey analysis. 
+
+PostHog's product analytics is fully integrated with all other tools on the same platform and same data.
+
+</details>
+
+<details>
+    <summary>Can I use PostHog and Contentsquare together?</summary>
+
+Yes, though most teams find it redundant for replays and heatmaps. You can use **Contentsquare** for UX research (interviews, user tests) alongside **PostHog** for product analytics, feature flags, and experiments. PostHog can receive data from or send data to other tools via its [CDP](/docs/cdp).
+
+</details>
+
+<details>
+    <summary>Does Contentsquare support mobile apps?</summary>
+
+Partially. Contentsquare's mobile session replay and experience monitoring are limited to Enterprise plans (or Pro add-ons). PostHog supports mobile session replay on all plans with native SDKs for Android, iOS, React Native, and Flutter.
+
+</details>
+
+<details>
+    <summary>What are the best Hotjar alternatives in 2026?</summary>
+
+The top Hotjar alternatives in 2026 include:
+
+- **[PostHog](/session-replay)** – Best all-in-one platform for teams wanting replay, heatmaps, analytics, feature flags, and experiments together
+- **[FullStory](/blog/posthog-vs-fullstory)** – Best for enterprise teams wanting AI-powered session insights with strong mobile support
+- **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best free option for basic heatmaps and session replay
+- **[LogRocket](/blog/posthog-vs-logrocket)** – Best for frontend teams wanting replay with error tracking and performance monitoring
+- **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for product teams wanting analytics-first with replay capabilities
+
+</details>
+
+<details>
+    <summary>Which is better for B2B SaaS – PostHog or Contentsquare?</summary>
+
+**PostHog** is generally better for B2B SaaS teams. It includes [group analytics](/docs/product-analytics/group-analytics) for account-level analysis, feature flags for enterprise rollouts, and a built-in [data warehouse](/data-stack) for connecting CRM data from Stripe, HubSpot, and Zendesk. Contentsquare is more oriented toward B2C e-commerce and high-traffic consumer websites.
+
+</details>
+
+<details>
+    <summary>Can I migrate from Hotjar to PostHog?</summary>
+
+There's no direct data migration from Hotjar/Contentsquare to PostHog since session replay data isn't portable between platforms. However, you can set up PostHog alongside Contentsquare and run them in parallel during a transition period. PostHog starts collecting data immediately via [autocapture](/docs/product-analytics/autocapture), so there's no gap in coverage. See our [getting started guide](/docs/getting-started/install) for setup instructions.
+
+</details>
+
+<NewsletterForm />

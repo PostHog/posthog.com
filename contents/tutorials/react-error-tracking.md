@@ -72,7 +72,7 @@ Next, we'll set up PostHog to capture these errors. First, we need to install `p
 npm install posthog-js @posthog/react
 ```
 
-Next, create a `PostHogProvider.jsx` file in your `src` directory, and in it, initialize PostHog using your project API key and host from [your project settings](https://us.posthog.com/settings/project). While you are there, make sure that [exception autocapture](https://us.posthog.com/settings/environment-error-tracking#error-tracking-exception-autocapture) is enabled. 
+Next, create a `PostHogProvider.jsx` file in your `src` directory, and in it, initialize PostHog using your project token and host from [your project settings](https://app.posthog.com/settings/project). While you are there, make sure that [exception autocapture](https://app.posthog.com/settings/environment-error-tracking#error-tracking-exception-autocapture) is enabled. 
 
 ```js
 // src/PostHogProvider.jsx
@@ -82,7 +82,7 @@ import { PostHogProvider as PHProvider } from '@posthog/react';
 
 export function PostHogProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     });
@@ -151,7 +151,7 @@ This is helpful if you have existing error handling logic you want to integrate 
 
 ## 3. Monitoring errors in PostHog
 
-Once you’ve set up error capture in your app, you can head to the [error tracking tab](https://us.posthog.com/error_tracking) in PostHog to review the issues popping up along with their frequency.
+Once you’ve set up error capture in your app, you can head to the [error tracking tab](https://app.posthog.com/error_tracking) in PostHog to review the issues popping up along with their frequency.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_21_at_16_35_28_2x_37f821fadd.png"

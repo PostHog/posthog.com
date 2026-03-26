@@ -11,14 +11,14 @@ export const appcues = {
             features: {
                 actions: false,
                 advertising_analytics: false,
-                autocapture: true,
+                autocapture: false,
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
                 monetization_analytics: false,
                 predictive_insights: false,
                 real_time_view: false,
-                toolbar: false,
+                toolbar: true, // https://docs.appcues.com/install-appcues-web/how-to-use-the-appcues-builder
                 user_profiles: true,
                 insights: {
                     available: true,
@@ -57,7 +57,7 @@ export const appcues = {
                     features: {},
                 },
                 group_analytics: {
-                    available: false,
+                    available: true, // https://docs.appcues.com/en_US/users-accounts
                     features: {},
                 },
             },
@@ -120,7 +120,7 @@ export const appcues = {
             available: false,
         },
         experiments: {
-            available: false,
+            available: 'AB testing and control experiments only', // https://docs.appcues.com/en_US/analytics-studio https://www.appcues.com/blog/guide-to-in-product-experimentation#section-6
         },
         error_tracking: {
             available: false,
@@ -131,7 +131,7 @@ export const appcues = {
     },
     platform: {
         deployment: {
-            eu_hosting: false,
+            eu_hosting: true, // https://docs.appcues.com/installation-overview/appcues-us-and-eu-hosting-environments
             open_source: false,
             reverse_proxy: false,
             self_host: false,
@@ -139,11 +139,11 @@ export const appcues = {
         libraries: {
             features: {
                 android: true,
-                flutter: false,
+                flutter: true,
                 ios: true,
                 javascript: true,
                 react: true,
-                react_native: false,
+                react_native: true,
                 ruby: false,
             },
         },

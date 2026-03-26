@@ -36,6 +36,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Databases',
         },
         {
+            label: 'BuildBetter',
+            url: '/docs/data-warehouse/sources/buildbetter',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/buildbetter_f523cfd0e6.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Bing Ads',
             url: '/docs/data-warehouse/sources/bing-ads',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Bing_Ads_ce5e8e208f.svg',
@@ -52,6 +58,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             url: '/docs/data-warehouse/sources/clerk',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_36_01_806_Z_30c81aea20.png',
             category: 'SaaS tools',
+        },
+        {
+            label: 'Convex',
+            url: '/docs/data-warehouse/sources/convex',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/convex_d8dcddcd63.svg',
+            category: 'Databases',
         },
         {
             label: 'Cloudflare R2',
@@ -126,6 +138,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'SaaS tools',
         },
         {
+            label: 'Linear',
+            url: '/docs/data-warehouse/sources/linear',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',
+            category: 'SaaS tools',
+        },
+        {
             label: 'Mailchimp',
             url: '/docs/data-warehouse/sources/mailchimp',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_37_02_666_Z_2c8f3e8398.png',
@@ -150,6 +168,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             category: 'Databases',
         },
         {
+            label: 'Redshift',
+            url: '/docs/data-warehouse/sources/redshift',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Amazon_Redshift_Logo_fbd926efbc.svg',
+            category: 'Databases',
+        },
+        {
             label: 'S3',
             url: '/docs/data-warehouse/sources/s3',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/s3_8f86e011ce.svg',
@@ -159,6 +183,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             label: 'Salesforce',
             url: '/docs/data-warehouse/sources/salesforce',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Salesforce_com_logo_2e650322bc.svg',
+            category: 'SaaS tools',
+        },
+        {
+            label: 'Sentry',
+            url: '/docs/data-warehouse/sources/sentry',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/sentry_f4b69c4d4b.png',
             category: 'SaaS tools',
         },
         {
@@ -184,6 +214,12 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
             url: '/tutorials/supabase-query',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/supabase_2fbe7c54ee.png',
             category: 'Databases',
+        },
+        {
+            label: 'Typeform',
+            url: '/docs/data-warehouse/sources/typeform',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/typeform_a12822b2db.png',
+            category: 'SaaS tools',
         },
         {
             label: 'Temporal.io',

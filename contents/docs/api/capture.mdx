@@ -6,7 +6,7 @@ showTitle: true
 
 The `/i/v0/e` and `/batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want.
 
-Both are POST-only public endpoints that use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
+Both are POST-only public endpoints that use your [project token](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
 
 > **Note:** Make sure to send API requests to the correct domain. These are `https://us.i.posthog.com` for US Cloud, `https://eu.i.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
@@ -22,7 +22,7 @@ Every event request must contain an `api_key`, `distinct_id`, and `event` field 
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "event name",
   "distinct_id": "user distinct id",
   "properties": {
@@ -38,7 +38,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "event name",
     "distinct_id": "user distinct id",
     "properties": {
@@ -59,7 +59,7 @@ async function sendPosthogEvent() {
       "Content-Type": "application/json",
   };
   const payload = {
-    api_key: "<ph_project_api_key>",
+    api_key: "<ph_project_token>",
     event: "event name",
     distinct_id: "user distinct id",
     properties: {
@@ -91,7 +91,7 @@ To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add th
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "event name",
   "distinct_id": "user distinct id",
   "properties": {
@@ -110,7 +110,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "event name",
     "distinct_id": "user distinct id",
     "properties": {
@@ -130,7 +130,7 @@ async function sendAnonymousPosthogEvent() {
       "Content-Type": "application/json",
   };
   const payload = {
-    api_key: "<ph_project_api_key>",
+    api_key: "<ph_project_token>",
     event: "event name",
     distinct_id: "user distinct id",
     properties: {
@@ -165,7 +165,7 @@ This example shows how the required `distinct_id` value can also be passed in `p
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "historical_migration": false,
   "batch": [
     {
@@ -196,7 +196,7 @@ headers = {
   "Content-Type": "application/json"
 }
 payload = {
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "historical_migration": False,
   "batch": [
     {
@@ -242,7 +242,7 @@ In this example, `123` is merged into `456` and `456` becomes the main `distinct
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "$create_alias",
   "distinct_id": "123",
   "properties": {
@@ -260,7 +260,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "$create_alias",
     "distinct_id": "123",
     "properties": {
@@ -284,7 +284,7 @@ Updates a group's information or creates one if it does not exist. Read more in 
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "$groupidentify",
   "distinct_id": "groups_setup_id",
   "properties": {
@@ -309,7 +309,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "$groupidentify",
     "distinct_id": "groups_setup_id",
     "properties": {
@@ -338,7 +338,7 @@ Captures event with a group. In this case, `company` is a [group type](/docs/pro
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "event name",
   "distinct_id": "user distinct id",
   "properties": {
@@ -356,7 +356,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "event name",
     "distinct_id": "user distinct id",
     "properties": {
@@ -380,7 +380,7 @@ Updates person properties. Read more in our [identify docs](/docs/product-analyt
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "$identify",
   "distinct_id": "user distinct id",
   "properties": {
@@ -401,7 +401,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "$identify",
     "distinct_id": "user distinct id",
     "properties": {
@@ -424,7 +424,7 @@ Default PostHog events and properties have the `$` prefix. The most common and p
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "$pageview",
   "distinct_id": "user distinct id",
   "properties": {
@@ -443,7 +443,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "$pageview",
     "distinct_id": "user distinct id",
     "properties": {
@@ -457,7 +457,7 @@ print(response)
 
 </MultiLanguage>
 
-> **Note:** For a server-side integration with Web Analytics, check out our [Server SDKs and Sessions](docs/data/sessions#server-sdks-and-sessions) guide to make sure you're capturing every event and session property required for our product to work.
+> **Note:** For a server-side integration with Web Analytics, check out our [Server SDKs and Sessions](/docs/data/sessions#server-sdks-and-sessions) guide to make sure you're capturing every event and session property required for our product to work.
 
 ## Screen view
 
@@ -467,7 +467,7 @@ The equivalent of a pageview for mobile apps.
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "$screen",
   "distinct_id": "user distinct id",
   "properties": {
@@ -485,7 +485,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "event": "$screen",
     "distinct_id": "user distinct id",
     "properties": {
@@ -506,7 +506,7 @@ Although there is a lot of functionality you miss out on if you only use the API
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "survey sent",
   "distinct_id": "user distinct id",
   "properties": {
@@ -531,7 +531,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "token": "<ph_project_token>",
     "event": "survey sent",
     "distinct_id": "user distinct id",
     "properties": {
@@ -553,7 +553,7 @@ print(response)
 
 ## Invalid events
 
-We perform basic validation on the payload and project API key (`api_key`), returning a failure response if an error is encountered.
+We perform basic validation on the payload and project token (`token`), returning a failure response if an error is encountered.
 
 PostHog **does not return an error** to the client when the following happens:
 

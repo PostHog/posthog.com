@@ -26,7 +26,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 
 [PostHog](/) (that's us 👋) is an open-source platform combining feature flags, A/B testing, product analytics, session replay, and surveys into one product. This means it's not only an alternative to Eppo, but also tools like [Amplitude](/blog/posthog-vs-launchdarkly) and [Hotjar](/blog/posthog-vs-hotjar).
 
-Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
+Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [Supabase](/customers/supabase), [ElevenLabs](/customers/elevenlabs), [Lovable](/customers/lovable), and Airbus.
 
 #### Key features
 
@@ -46,7 +46,7 @@ Both Eppo and PostHog support core feature flag and A/B testing components. The 
 
 -   Eppo is warehouse-native, meaning that it integrates with your existing data tools like Snowflake or Postgres.
 
--   PostHog is not warehouse-native, but instead aims to replace your existing data stack by combining product analytics, [pipelines](/docs/cdp), and warehousing into one platform. This eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data.
+-   PostHog offers an integrated data warehouse that enables you to use your warehouse data across other PostHog tools, such as analytics, feature flags, and surveys. This eliminates the need to stitch multiple tools together and provides a single platform for storing and working with data. Alternatively, you can ingest data from an external warehouse, such as Snowflake, and run queries on PostHog compute.
 
 Besides this, PostHog offers product analytics, session replays, and surveys, whereas Eppo does not. On the other hand, Eppo offers multi-armed bandit testing (called "contextual bandits" in Eppo) and [CUPED analysis](https://matteocourthoud.github.io/post/cuped/), whereas PostHog does not.
 

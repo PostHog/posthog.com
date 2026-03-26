@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
     - andy-vandervell
+    - natalia-amorim
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
@@ -61,7 +62,7 @@ Typical PostHog users are:
 -   Data-savvy product managers
 -   Startups and mid-size enterprises
 
-Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and [more](/customers).
+Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable), [ElevenLabs](/customers/elevenlabs), and [see all customers](/customers).
 
 ### How does PostHog compare to Mixpanel?
 
@@ -124,11 +125,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog is the best Mixpanel alternative for startups and mid-size companies. It replaces Mixpanel and numerous other tools, saving money and time. Power user features, like an SQL insight builder and session replay logs, make it a good choice for engineering-led teams, too.
 
-<p>
-  <CallToAction to="https://posthog.com/docs/product-analytics/installation">
-    Get started with PostHog – it's free!
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## 2. Google Analytics 4 (GA4)
 
@@ -416,7 +413,7 @@ This guide focuses on the most popular Mixpanel alternatives, but these aren't t
 
 - **[Plausible](/blog/best-plausible-alternatives)** and **[Fathom](/blog/best-fathom-alternatives)** are privacy-first, lightweight analytics tools. They're not direct Mixpanel replacements – they focus on simple website metrics rather than product analytics – but they're worth considering if GDPR compliance and minimal data collection are priorities.
 
-For more options, see our guide to the [best open-source product analytics tools](/blog/best-open-source-analytics-tools).
+For more options, see our guide to the [best open-source product analytics tools](/blog/best-open-source-analytics-tools) and [best product analytics tools for startups](/blog/best-product-analytics-tools-for-startups).
 
 </details>
 
@@ -438,9 +435,9 @@ We're biased, obviously, but we think PostHog is the perfect Mixpanel replacemen
 - You're an engineering-led team that wants SQL access and direct support from the people who build the product.
 - You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-Check out our [product analytics docs](/docs/product-analytics) and [PostHog vs Mixpanel comparison](/blog/posthog-vs-mixpanel) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -524,7 +521,20 @@ No. Mixpanel doesn't offer native survey functionality. If you need to collect u
 <details>
 <summary>Can I use Mixpanel with my data warehouse?</summary>
 
-Yes. Mixpanel offers warehouse connectors that sync data bidirectionally with Snowflake, BigQuery, and other warehouses. **Amplitude** goes further with warehouse-native analytics that queries your data directly without moving it. **PostHog** takes a different approach with a [built-in data warehouse](/data-stack) that imports external data for unified analysis.
+Yes. Mixpanel offers warehouse-native analytics that can query data directly from Snowflake, BigQuery, and Databricks. **Statsig** and **Amplitude** also offer strong data warehouse integrations. 
+
+**PostHog** offers two approaches to using warehouse data: 
+
+1. **Use PostHog as your integrated warehouse**: Data stays in PostHog and is accessible across many PostHog tools. This eliminates the need to stitch together multiple vendors and maintain multiple complex ETL pipelines.
+2. **Connect external warehouses as sources**: Sync tables and fields from Snowflake/BigQuery/Databricks into PostHog via our CDP. Queries run on PostHog compute, enabling you to use warehouse data across PostHog tools.
+
+**PostHog is better if:**
+- You want to eliminate tool sprawl (Mixpanel is analytics-focused with warehouse connectivity as an add-on)
+- You value having the warehouse and analytics in one platform
+- You want features Mixpanel doesn&apos;t offer, like surveys
+- You want transparent, usage-based pricing (1 million synced rows free per month)
+
+The managed warehouse approach PostHog offers is better if you want a single platform for analyzing data and using other features, such as surveys and feature flags, as you don't need to maintain an external warehouse in addition to other tools. 
 
 </details>
 
@@ -541,3 +551,5 @@ Yes. **PostHog** has a [managed migration tool](/docs/migrate/managed-migrations
 Beyond the tools in this guide, there are many other options worth considering. See our guides to [Amplitude alternatives](/blog/best-amplitude-alternatives), [Heap alternatives](/blog/best-heap-alternatives), [Google Analytics alternatives](/blog/ga4-alternatives), and [open-source product analytics tools](/blog/best-open-source-analytics-tools) for broader comparisons.
 
 </details>
+
+<NewsletterForm />

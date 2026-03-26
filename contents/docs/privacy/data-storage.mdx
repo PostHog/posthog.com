@@ -21,19 +21,29 @@ This guide covers the following features:
 
 ## Data storage location
 
-If you require GDPR compliance, there are [specific guidelines](docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
+If you require GDPR compliance, there are [specific guidelines](/docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
 
 ## Processing data before storage
 
 PostHog supports [realtime transformations](/docs/cdp/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
 
-- [Redacting PII data](https://posthog.com/docs/cdp/transformations/template-pii-hashing) before it's stored in PostHog
+- [Hashing PII data](https://posthog.com/docs/cdp/transformations/template-hash-properties) before it's stored in PostHog
 - Disabling default [GeoIP enrichment transformations](https://posthog.com/docs/cdp/transformations/template-geoip)
 - [Dropping events](https://posthog.com/docs/cdp/transformations/drop-events) based on a filter
-- [Hashing PII data](https://posthog.com/docs/cdp/transformations/template-hash-properties)
 - [IP anonymization](https://posthog.com/docs/cdp/transformations/template-ip-anonymization)
 
-When in doubt, you can always create your own [custom transformation](https://us.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
+When in doubt, you can always create your own [custom transformation](https://app.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [Hog language](/docs/hog) to transform data.
+
+### Discarding IP addresses at project level
+
+You can configure your project to discard client IP addresses from stored events. Navigate to [**Settings** > **Project** > **IP data capture configuration**](https://app.posthog.com/settings/project#datacapture) and enable the **Discard client IP data** toggle.
+
+When this setting is enabled:
+
+- Client IP addresses are **not stored** with your events
+- Transformations like [GeoIP enrichment](https://posthog.com/docs/cdp/transformations/template-geoip) and [bot detection](https://posthog.com/docs/cdp/transformations/template-bot-detection) can **still use the IP** before it is discarded
+
+This allows you to enrich your events with location data or filter out bot traffic while ensuring raw IP addresses are not retained in your data.
 
 <details>
 <summary>See all default event properties collected</summary>
@@ -91,6 +101,7 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 
 | What to delete | Where to delete | Additional details |
 |----------------|-----------------|-------------------|
+| **Your account** | [Account settings](https://us.posthog.com/settings/user#user-delete) | Account is deleted immediately; all stored data about you is cleared within 30 days. See [deleting your account](/docs/settings/account-settings#deleting-your-account). |
 | **Projects** | [Project settings](https://us.posthog.com/settings/project#project-delete) | All data under the project (including events) are automatically removed |
 | **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | All data under the organization's projects (including events) are automatically removed |
 | **Persons** | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten) | When a person is deleted, all events for that person can be deleted |

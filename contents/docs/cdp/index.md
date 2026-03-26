@@ -29,4 +29,4 @@ Pipelines can be used for a wide variety of use cases, such as:
 
 - **Correlate costs with impact.** You can [use the data warehouse](/blog/data-warehouse-at-posthog) to import cost data from sources like ads and cloud infrastructure platforms, and then use it in queries alongside product data to understand the impact and ROI of your spend. 
 
-For a full list of transformations and destinations currently available, see the [destinations](https://us.posthog.com/pipeline/destinations) and [transformations](https://us.posthog.com/pipeline/transformations) tabs under data pipeline in-app.
+For a full list of transformations and destinations currently available, see the [destinations](https://app.posthog.com/data-management/destinations) and [transformations](https://app.posthog.com/data-management/transformations) tabs under data pipeline in-app.

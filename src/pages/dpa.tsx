@@ -223,7 +223,7 @@ function DpaGenerator() {
                 description="PostHog's cutting-edge data processing agreement (DPA) generator"
                 image={`/images/og/dpa.png`}
             />
-            <header className="print:hidden">
+            <header data-scheme="primary" className="text-primary print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     DPA? Try DP
                     <em className="dark:text-primary-dark">
@@ -240,7 +240,8 @@ function DpaGenerator() {
             </header>
 
             <section
-                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary ${
+                data-scheme="primary"
+                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary text-primary ${
                     isSubmitted ? 'block' : 'hidden'
                 }`}
             >
@@ -265,7 +266,8 @@ function DpaGenerator() {
             </section>
 
             <section
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
+                data-scheme="primary"
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
@@ -1128,8 +1130,12 @@ function DpaGenerator() {
                         <div className="pl-8 pb-2">
                             <p>
                                 5.1. The Company provides Processor with general authorization to engage the
-                                Subprocessors set out in Annex III. These will differ depending on the Data Center
-                                Location chosen by the Company.
+                                Subprocessors set out on{' '}
+                                <a href="https://posthog.com/subprocessors">https://posthog.com/subprocessors</a> (the “
+                                <strong>Subprocessor Page</strong>”). These will differ depending on the Data Center
+                                Location chosen by the Company. In addition, Company provides Processor with general
+                                authorization to engage other third parties as Subprocessors, in accordance with this
+                                Section 5.
                             </p>
                             <p>
                                 5.2. Processor shall enter into a written contract with any Subprocessor and this
@@ -1250,8 +1256,8 @@ function DpaGenerator() {
                             <p>
                                 10.2. <strong>Transfers.</strong> The Company acknowledges that the Processor will
                                 Process the Company Personal Data outside of the Protected Area including in the US and
-                                elsewhere as identified in Annex III to provide the Services. Company agrees to
-                                authorize the transfers to these countries.
+                                elsewhere as identified on the Subprocessor Page to provide the Services. Company agrees
+                                to authorize the transfers to these countries.
                             </p>
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
@@ -1420,13 +1426,20 @@ function DpaGenerator() {
                         </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
                         <p>Company's end users (including prospects, customer and contractors)</p>
-                        <p>Data subjects include the individuals about whom data is provided to the Processor in connection with the provision of Services by (or at the direction of) Company or its users</p>
+                        <p>
+                            Data subjects include the individuals about whom data is provided to the Processor in
+                            connection with the provision of Services by (or at the direction of) Company or its users
+                        </p>
 
                         <p>
                             <strong>Categories of personal data processed</strong>
                         </p>
                         <p>The personal data processed comprises the following categories of data:</p>
-                        <p>(As determined at the discretion of the Company, including data relating to the individuals provided to the Processor in connection with the provision of the Services, and including, without limitation):</p>
+                        <p>
+                            (As determined at the discretion of the Company, including data relating to the individuals
+                            provided to the Processor in connection with the provision of the Services, and including,
+                            without limitation):
+                        </p>
 
                         <ul>
                             <li>
@@ -1612,213 +1625,6 @@ function DpaGenerator() {
                                 https://posthog.com/handbook/company/security
                             </a>
                         </p>
-
-                        <p className="text-center mt-12 !mb-0 !pb-0 [page-break-before:always]">
-                            <strong>ANNEX III</strong>
-                        </p>
-                        <p className="text-center print:pb-8">
-                            <strong>Subprocessors</strong>
-                        </p>
-                    </div>
-
-                    <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
-                        }`}
-                    >
-                        <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm pb-8">
-                            <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">
-                                PostHog EU Cloud and PostHog US Cloud Subprocessor(s)
-                            </div>
-                            {subprocessors
-                                .filter((subprocessor) => subprocessor.type === 'cloud')
-                                .map((subprocessor, index) => (
-                                    <React.Fragment key={index}>
-                                        <div className="col-span-3 @xl:!-mb-6">
-                                            <h3 className="!my-0 text-xl">
-                                                <strong>{subprocessor.name}</strong>
-                                            </h3>
-                                        </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
-                                            <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
-                                            <div className="pt-2">
-                                                <strong>Details</strong>
-                                                <br />
-                                                <div className="space-y-1">
-                                                    {subprocessor.details.map((detail, index) => (
-                                                        <div key={index}>
-                                                            <a
-                                                                href={detail}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="[word-break:break-word]"
-                                                            >
-                                                                {detail
-                                                                    .replace('https://', '')
-                                                                    .replace('http://', '')
-                                                                    .replace('www.', '')}
-                                                            </a>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                            <div>
-                                                <strong className="block">Categories of data subject</strong>
-                                                <div>{subprocessor.categories}</div>
-                                            </div>
-                                            <div>
-                                                <strong className="block">Duration of the processing</strong>
-                                                <div>{subprocessor.duration}</div>
-                                            </div>
-                                            <div>
-                                                <strong className="block">
-                                                    Geographical location of the processing
-                                                </strong>
-                                                <div dangerouslySetInnerHTML={{ __html: subprocessor.location }} />
-                                            </div>
-                                        </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                            <div>
-                                                <div>
-                                                    <strong>Subject matter of the processing</strong>
-                                                </div>
-                                                <div>{subprocessor.subject}</div>
-                                            </div>
-                                            <div>
-                                                <div>
-                                                    <strong>Nature and purpose of the processing</strong>
-                                                </div>
-                                                <div>{subprocessor.reason}</div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
-                                            <strong className="block mb-2 text-base">
-                                                Type of personal data processed
-                                            </strong>
-                                            <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                                {Object.entries(subprocessor.dataTypes).map(
-                                                    ([typeName, typeValues]) => (
-                                                        <React.Fragment key={typeName}>
-                                                            <div>
-                                                                <strong className="block pb-1">{typeName}</strong>
-                                                                <ul className="pl-4 !mb-1">
-                                                                    {typeValues.map((typeValue, index) => (
-                                                                        <li
-                                                                            key={index}
-                                                                            className="!mb-0 !leading-normal !text-sm"
-                                                                        >
-                                                                            {typeValue}
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-                                                        </React.Fragment>
-                                                    )
-                                                )}
-                                            </div>
-                                        </div>
-                                    </React.Fragment>
-                                ))}
-                            <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">
-                                Only if AI features are enabled
-                            </div>
-                            {subprocessors
-                                .filter((subprocessor) => subprocessor.type === 'ai')
-                                .map((subprocessor, index) => (
-                                    <React.Fragment key={index}>
-                                        <div className="col-span-3 @3xl:@xl:!-mb-6">
-                                            <h3 className="!my-0 text-xl">
-                                                <strong>{subprocessor.name}</strong>
-                                            </h3>
-                                        </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
-                                            <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
-                                            <div className="pt-2">
-                                                <strong>Details</strong>
-                                                <br />
-                                                <div className="space-y-1">
-                                                    {subprocessor.details.map((detail, index) => (
-                                                        <div key={index}>
-                                                            <a
-                                                                href={detail}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="[word-break:break-word]"
-                                                            >
-                                                                {detail
-                                                                    .replace('https://', '')
-                                                                    .replace('http://', '')
-                                                                    .replace('www.', '')}
-                                                            </a>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                            <div>
-                                                <strong className="block">Categories of data subject</strong>
-                                                <div>{subprocessor.categories}</div>
-                                            </div>
-                                            <div>
-                                                <strong className="block">Duration of the processing</strong>
-                                                <div>{subprocessor.duration}</div>
-                                            </div>
-                                            <div>
-                                                <strong className="block">
-                                                    Geographical location of the processing
-                                                </strong>
-                                                <div
-                                                    className="space-y-1"
-                                                    dangerouslySetInnerHTML={{ __html: subprocessor.location }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                            <div>
-                                                <div>
-                                                    <strong>Subject matter of the processing</strong>
-                                                </div>
-                                                <div>{subprocessor.subject}</div>
-                                            </div>
-                                            <div>
-                                                <div>
-                                                    <strong>Nature and purpose of the processing</strong>
-                                                </div>
-                                                <div>{subprocessor.reason}</div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
-                                            <strong className="block mb-2 text-base">
-                                                Type of personal data processed
-                                            </strong>
-                                            <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                                {Object.entries(subprocessor.dataTypes).map(
-                                                    ([typeName, typeValues]) => (
-                                                        <React.Fragment key={typeName}>
-                                                            <div>
-                                                                <strong className="block pb-1">{typeName}</strong>
-                                                                <ul className="pl-4 !mb-1">
-                                                                    {typeValues.map((typeValue, index) => (
-                                                                        <li
-                                                                            key={index}
-                                                                            className="!mb-0 !leading-normal !text-sm"
-                                                                        >
-                                                                            {typeValue}
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-                                                        </React.Fragment>
-                                                    )
-                                                )}
-                                            </div>
-                                        </div>
-                                    </React.Fragment>
-                                ))}
-                        </div>
                     </div>
                 </div>
             </section>

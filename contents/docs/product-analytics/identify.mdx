@@ -129,7 +129,7 @@ posthog.alias("frontend_id", "backend_id");
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "properties": {
         "distinct_id": "frontend_id",
         "alias": "backend_id"
@@ -351,7 +351,7 @@ posthog.capture({
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "properties": {
       "alias": "distinct_id_of_user_to_be_merged"
     },

@@ -7,14 +7,14 @@ showTitle: true
 PostHog complements a lot of other software companies. Since we’re active in the startup ecosystem and built around integrations, co-marketing opportunities come up naturally.
 
 ### Who takes the lead with co-marketing?
-Sales, engineering, or support will sometimes tag marketing into customer Slack channels where someone mentions co-marketing. There’s no obligation to say yes just because a partner is enthusiastic. If you’re unsure whether something is worth pursuing, ask [Joe](/community/profiles/29070).
+Sales, engineering, or support will sometimes tag marketing into customer Slack channels where someone mentions co-marketing. There’s no obligation to say yes just because a partner is enthusiastic. If you’re unsure whether something is worth pursuing, ask in the **#team-marketing** Slack channel. 
 
 If it does seem promising, a product marketer will take the lead and loop in events or other teams as needed.
 
 What this article doesn’t cover:
-- [Influencers](/handbook/growth/marketing/influencers) and newsletters
+- [Influencers](/handbook/marketing/influencers) and newsletters
 - Rev-share [partners](/handbook/brand/partners) and individual consultants
-- [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
+- [Sponsorships](/handbook/marketing/open-source-sponsorship)
 
 ## Integrations and CDP destinations
 
@@ -24,6 +24,8 @@ We have a CDP with 50+ destinations and a data warehouse that connects to tools 
 - Add it to the changelog (and changelog email if it’s really good)
 - A simple social media post like [this one](https://www.linkedin.com/feed/update/urn:li:activity:7294758378621337600)
 
+If you have a new integration which deserves marketing support, the best way to get it is to ask in the **#team-marketing** Slack channel. The team will discuss and specific product marketer will take responsibility for running co-marketing. 
+
 **When to level up:**
 Most integrations stop here. But if there's genuine opportunity, then it's worth doing more:
 
@@ -31,7 +33,10 @@ Most integrations stop here. But if there's genuine opportunity, then it's worth
 - A video walkthrough if the workflow is complex
 - A blog article or other co-authored content
 
+Typically whenever we are pursuing work like this with a partner, we work with them to reciprocate to their audience through their channels. 
+
 In some cases where there's big partnership potential, the partnership is of a strategic significance, and the ICP is the same, feel free to explore a joint in-person event that will gather the community of both partners and deliver value from both sides. 
+
 > Like all PostHog marketing, co-marketing should be useful to the reader. A super simple way to signal compatibility without being promotional is to casually reference partner companies in docs and editorial. However, we avoid case studies where there isn't an interesting story, guest posts, and other marketing 'fluff' content.
 
 For example, PostHog docs might say "If you're routing LLMs (e.g. via OpenRouter)..." while OpenRouter docs say "Track downstream behavior in PostHog..."
@@ -67,7 +72,7 @@ Examples:
 
 If we're signing anything with legal commitments, that needs to go via <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink>. If it's an informal exchange of perks, you can usually just coordinate directly with the partner company.
 
-If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/growth/marketing/campaigns-and-coupons) handbook entry for more detail.
+If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/marketing/campaigns-and-coupons) handbook entry for more detail.
 
 When a new startup perk goes live:
 - Add the offer to the [PostHog for startups](/startups) page
@@ -82,7 +87,7 @@ As a rule we don't commit to reporting sign-up performance to startup partners, 
 ### Other ecosystem partners
 Co-marketing goes both ways! PostHog’s startup program is promoted through partner channels like [Stripe Atlas perks](https://support.stripe.com/questions/stripe-atlas-perks-partners) and the [Fin Startup Pack](https://fin.ai/startup-pack).
 
-Joe maintains a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TWgioHlReyMj9otbQRkx8rSQYUO8yJqpv0pwM/edit?usp=sharing">#spreadsheet</PrivateLink> with most of our current partnerships. This also includes partnerships with VCs and PE firms. For the most part these do not require co-marketing. This spreadsheet doesn't list all VC partnerships via [GetProven](https://www.getproven.com/home), as these are best tracked directly through that tool. 
+We maintain a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TWgioHlReyMj9otbQRkx8rSQYUO8yJqpv0pwM/edit?usp=sharing">spreadsheet</PrivateLink> with most of our current partnerships. This also includes partnerships with VCs and PE firms. For the most part we do no co-marketing with these partners, though this may change. This spreadsheet doesn't list all VC partnerships via [GetProven](https://www.getproven.com/home), as these are best tracked directly through that tool. 
 
 ## Co-sponsored events
 [Events](/handbook/marketing/events) are a great place to co-market and vary from intimate gatherings to large scale meetups. These are higher effort and don’t usually sit under product marketing alone. Tag [Daniel](/community/profiles/34023) early – he’s the best judge of what events and co-sponsorships will actually land.

@@ -30,7 +30,7 @@ The potential challenge for high-traffic apps and sites is too many events being
 To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   autocapture: false,
@@ -49,7 +49,7 @@ If you’re worried that a specific area of your product may be generating too m
 First, you can turn off autocapture with a feature flag when the PostHog library loads. Toggling off this feature flag can lower event flow within PostHog without changing the code.
 
 ```js
-posthog.init('<ph_project_api_key>', { 
+posthog.init('<ph_project_token>', { 
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   loaded: function (posthog) {

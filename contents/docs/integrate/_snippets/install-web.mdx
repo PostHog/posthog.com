@@ -4,6 +4,13 @@ import Snippet from "./install-js-snippet.mdx"
 
 <Snippet />
 
+<details>
+<summary>Keeping the SDK version up to date</summary>
+
+Be careful to avoid things which can cause the SDK version to be cached and fail to update. See: [Ways SDK versions fall behind](/docs/sdk-doctor/keeping-sdks-current#ways-sdk-versions-fall-behind)
+
+</details>
+
 <details id="typescript-script-tag">
 <summary>Using TypeScript with the script tag?</summary>
 
@@ -38,12 +45,12 @@ import InstallWebPackageManagers from "./install-web-package-managers.mdx"
 
 <InstallWebPackageManagers />
 
-And then include it with your project API key and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
+And then include it with your project token and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
 
 ```js-web
 import posthog from 'posthog-js'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
 })
@@ -51,14 +58,38 @@ posthog.init('<ph_project_api_key>', {
 
 See our framework specific docs for [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [Vue](/docs/libraries/vue-js), [Angular](/docs/libraries/angular), [Astro](/docs/libraries/astro), [Remix](/docs/libraries/remix), and [Svelte](/docs/libraries/svelte) for more installation details.
 
+<details>
+<summary>Update early, update often</summary>
+
+We ship weirdly fast, especially for our JavaScript web SDK. If you choose the npm package instead of the HTML snippet, be sure to update it frequently:
+
+To actually _update_ the package, you need to update the version constraint in your `package.json` file and then reinstall, or run `update` instead of `install`:
+
+<MultiLanguage>
+
+```bash file=npm
+npm update posthog-js
+```
+
+```bash file=pnpm
+pnpm update posthog-js
+```
+
+```bash file=Yarn
+yarn upgrade posthog-js
+```
+
+</MultiLanguage>
+
+</details>
 <details id="bundle-extensions">
 <summary>Bundle all required extensions (advanced)</summary>
 
-By default, the JavaScript Web library only loads the core functionality. It lazy-loads extensions such as surveys or the session replay 'recorder' when needed. 
+By default, the JavaScript Web library only loads the core functionality. It lazy-loads extensions such as surveys or the session replay 'recorder' when needed.
 
 This can cause issues if:
 
-- You have a Content Security Policy (CSP) that blocks inline scripts. 
+- You have a Content Security Policy (CSP) that blocks inline scripts.
 - You want to optimize your bundle at build time to ensure all dependencies are ready immediately.
 - Your app is running in environments like the Chrome Extension store or [Electron](/tutorials/electron-analytics) that reject or block remote code loading.
 
@@ -76,7 +107,7 @@ import posthog from 'posthog-js/dist/module.full.no-external'
 // All external dependencies pre-bundled and with the ability to load external scripts (primarily useful is you use Site Apps)
 import posthog from 'posthog-js/dist/module.full'
 
-// Finally you can also import specific extra dependencies 
+// Finally you can also import specific extra dependencies
 import "posthog-js/dist/posthog-recorder"
 import "posthog-js/dist/surveys"
 import "posthog-js/dist/exception-autocapture"
@@ -85,10 +116,56 @@ import "posthog-js/dist/web-vitals"
 import posthog from 'posthog-js/dist/module.no-external'
 
 // All other posthog commands are the same as usual
-posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
+posthog.init('<ph_project_token>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 ```
 
 **Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `@posthog/react` does not work with any module import other than the default.
+
+</details>
+
+<details id="tree-shaking">
+<summary>Tree shaking with the slim bundle (advanced)</summary>
+
+If you only need a subset of PostHog features, you can use the **slim bundle** to reduce your bundle size. It gives you the core functionality (event capture, identify, group analytics) and lets you explicitly opt in to additional features via extension bundles. This is currently experimental, but offers the biggest reduction in bundle size.
+
+```js-web
+import posthog from 'posthog-js/dist/module.slim'
+import {
+    SessionReplayExtensions,
+    AnalyticsExtensions,
+} from 'posthog-js/dist/extension-bundles'
+
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    __extensionClasses: {
+        ...SessionReplayExtensions,
+        ...AnalyticsExtensions,
+    }
+})
+```
+
+**Note:** Always import `posthog-js` from the same module path (`posthog-js/dist/module.slim`) throughout your app, otherwise multiple bundles could get included.
+
+#### Available extension bundles
+
+| Bundle | What's included |
+| --- | --- |
+| `FeatureFlagsExtensions` | [Feature Flags](/docs/feature-flags) |
+| `SessionReplayExtensions` | [Session Replay](/docs/session-replay) |
+| `AnalyticsExtensions` | [Autocapture](/docs/product-analytics/autocapture), pageview tracking, [heatmaps](/docs/toolbar/heatmaps), dead click detection, [web vitals](/docs/web-analytics/web-vitals) |
+| `ErrorTrackingExtensions` | [Error Tracking](/docs/error-tracking) |
+| `SurveysExtensions` | [Surveys](/docs/surveys) |
+| `ExperimentsExtensions` | [Experiments](/docs/experiments) |
+| `ProductToursExtensions` | [Product Tours](/docs/product-tours) |
+| `SiteAppsExtensions` | [Site apps](/docs/site-apps) |
+| `TracingExtensions` | Distributed tracing header injection |
+| `ToolbarExtensions` | [Toolbar](/docs/toolbar) |
+| `LogsExtensions` | [Log capture](/docs/logs) |
+| `ConversationsExtensions` | Conversations |
+| `AllExtensions` | Everything (equivalent to the default `posthog-js` bundle) |
+
+**Note:** Each extension bundle includes its own dependencies. You don't need to worry about adding them separately.
 
 </details>
 
@@ -99,7 +176,7 @@ If you don't want to send test data while you're developing, you can do the foll
 
 ```js-web
 if (!window.location.host.includes('127.0.0.1') && !window.location.host.includes('localhost')) {
-    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
+    posthog.init('<ph_project_token>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 }
 ```
 
@@ -107,6 +184,7 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 <details id="defaults-option">
 <summary>What is the `defaults` option?</summary>
 
-The `defaults` is a date, such as `2025-11-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
+The `defaults` is a date, such as `2026-01-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>
+

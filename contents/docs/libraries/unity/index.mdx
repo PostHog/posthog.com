@@ -74,7 +74,7 @@ By default, the SDK captures identified events. To control whether events create
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     Host = "<ph_client_api_host>",
     PersonProfiles = PersonProfiles.IdentifiedOnly // Only create profiles on identify
 });
@@ -190,7 +190,7 @@ PostHog.CaptureException(e, new Dictionary<string, object>
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
 
     // Exception tracking options
     CaptureExceptions = true,              // Enable automatic capture (default: true)
@@ -204,7 +204,7 @@ PostHog.Setup(new PostHogConfig
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     CaptureExceptions = false  // Disable automatic exception capture
 });
 ```
@@ -222,7 +222,7 @@ The SDK uses `AsyncGPUReadback` to capture screenshots without blocking the main
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     Host = "<ph_client_api_host>",
     SessionReplay = true
 });
@@ -235,7 +235,7 @@ You can customize session replay behavior with `SessionReplayConfig`:
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     SessionReplay = true,
     SessionReplayConfig = new PostHogSessionReplayConfig
     {
@@ -341,7 +341,7 @@ If you're not seeing the expected events being captured or feature flags being e
 ```csharp
 PostHog.Setup(new PostHogConfig
 {
-    ApiKey = "<ph_project_api_key>",
+    ApiKey = "<ph_project_token>",
     Host = "<ph_client_api_host>",
     LogLevel = PostHogLogLevel.Debug
 });

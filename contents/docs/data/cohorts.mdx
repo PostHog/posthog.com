@@ -54,7 +54,8 @@ Your cohorts are available in the [People](https://us.posthog.com/persons) page 
 
 You can use cohorts in many different ways, such as:
 
-- In [trends](/docs/product-analytics/trends), funnels, retention, user paths, stickiness, and lifecycle insights
+- As a filter in [trends](/docs/product-analytics/trends), funnels, retention, user paths, stickiness, and lifecycle insights
+- As a [breakdown](/docs/product-analytics/trends#breaking-down-by-properties) dimension in trends and funnels
 - As a filter on any product analytics dashboard
 - To target feature flags, experiments, and user surveys
 - To filter the session replay list and create playlists
@@ -226,13 +227,15 @@ Has or doesn't have a person property with the following operators:
 | **Operator** | **Example** |
 | --- | --- |
 | `equals` or `does not equal` | `Pineapple on pizza` property `does not equal` "true" |
-| `contains` or `does not contain` | `email` property `does not contain` "gmail" |
+| `contains` or `does not contain` | `email` property `does not contain` "gmail", "yahoo", "hotmail" |
 | `matches regex` or `does not match regex` | `Country code` property `matches regex` "us\|uk\|aus" |
 | `greater than` or `greater than or equal to` | `Age` property `greater than` "21" |
 | `less than` or `less than or equal to` | `Age` property `less than or equal to` "21" |
 | `is set` or `is not set` | `UTM Source` property `is not set` |
 | `between` or `not between` | `Age` property is between "18" and "30" |
 | `minimum` or `maximum` value | `Organization size` property has a `minimum` of "5" |
+
+For a complete list of all available operators, including semver operators for version-based filtering, see the [property filter operators reference](/docs/data/property-filters).
 
 #### Lifecycle
 

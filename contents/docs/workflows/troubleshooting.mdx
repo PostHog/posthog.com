@@ -20,6 +20,38 @@ Ensure SPF/DKIM are valid, and consider setting up DMARC.
 
 Confirm the property exists on the person profile (e.g. `person.name`).
 
+## Validation errors when enabling?
+
+Validation errors occur when you try to enable a workflow, not when saving. You can save incomplete workflows as drafts and return to them later.
+
+Common validation issues include:
+
+- Missing trigger events
+- Incomplete dispatch configuration (e.g., no recipient email address)
+- Invalid filter conditions
+- Missing required fields in workflow steps
+
+Fix the issues listed in the error message, then try enabling again. Drafts can be archived even if they have validation errors.
+
+## Variable size limit exceeded?
+
+Workflows have a 5KB limit for storing output variables. If your total variable size exceeds this limit, you'll see an error like:
+
+```
+Total variable size after updating '[key names]' exceeds 5KB limit. Use result_path to store only the fields you need.
+```
+
+**Solutions:**
+
+- Use `result_path` in your output variable configuration to store only the specific fields you need rather than entire response objects
+- Reduce the amount of data being stored in variables
+- Split large data across multiple workflow steps if needed
+
+When this error occurs, the workflow's error handling setting determines what happens next:
+
+- `on_error: abort` - The workflow exits immediately
+- `on_error: continue` - The workflow skips to the next step
+
 ## Solved community questions
 
 <SolvedQuestions

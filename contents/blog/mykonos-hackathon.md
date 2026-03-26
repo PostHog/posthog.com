@@ -184,7 +184,7 @@ PostHog crunches a lot of data, especially on very complext queries. To help use
 
 ![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/datacrunch1_7ab73f5ab4.jpg)
 
-If you feel the need for a quick distraction while you wait, you could also check out [Hedgehog mode 2.0](https://posthog.com/changelog/2024#hedgehog-mode-2.0-launched), which also shipped recently.
+If you feel the need for a quick distraction while you wait, you could also check out [Hedgehog mode 2.0](/changelog?id=2014), which also shipped recently.
 
 ## CLI
 

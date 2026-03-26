@@ -58,7 +58,7 @@ Next, we install and set up PostHog using the [Python SDK](/docs/libraries/pytho
 pip install posthog
 ```
 
-We initialize PostHog to our `hello.py` file using our project API key and instance address from [your project settings](https://app.posthog.com/project/settings). In our user route, we use PostHog to capture an event using the user string and set a person property of `initial_name` on that user.
+We initialize PostHog to our `hello.py` file using our project token and instance address from [your project settings](https://app.posthog.com/project/settings). In our user route, we use PostHog to capture an event using the user string and set a person property of `initial_name` on that user.
 
 ```python
 # flag-demo/hello.py
@@ -66,7 +66,7 @@ from flask import Flask
 from posthog import Posthog
 
 posthog = Posthog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   host='<ph_client_api_host>'
 )
 

@@ -4,11 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We're frequently contacted about revenue-sharing partnerships, or individuals and agencies that want to be listed as official partners. We do not currently operate any form of partnership program to help users implement, extend, or adapt PostHog to their needs.
+We're frequently contacted about revenue-sharing partnerships, or individuals and agencies that want to be listed as official partners. Also, technology integrations!
 
-**If someone contacts you about partnering with PostHog**, refer them to [Joe](https://posthog.com/community/profiles/29070). He'll give them the bad news and explore any opportunities.  
+**If someone contacts you about partnering with PostHog**, refer them to [our partnerships page](/partnerships) and ask them to complete the survey there. This will directly alert relevant teams internally. 
 
-Instead, we recommend users who need this sort of help explore our existing resources, or [contact us](http://app.posthog.com/home#supportModal). If we can help, we will!
+We recommend users who need implementation help explore our existing resources, [purchase time with the onboarding team](/merch) or [contact us](http://app.posthog.com/home#supportModal). If we can help, we will!
 
 ## Helpful resources for users
 Users who contact us about wanting support from a partner often want particular types of help. We've curated some resources below which we can give them so they can self-serve where possible. 

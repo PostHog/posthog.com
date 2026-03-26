@@ -12,14 +12,7 @@ export const popularProducts = [
 ]
 
 // Newest products to highlight in the menu
-export const newestProducts = [
-    'logs',
-    'posthog_ai',
-    'llm_analytics',
-    'error_tracking',
-    'web_analytics',
-    'workflows_emails',
-]
+export const newestProducts = ['logs', 'endpoints', 'posthog_ai', 'llm_analytics', 'workflows_emails']
 
 // Category ordering for display
 export const categoryOrder = [
@@ -63,7 +56,17 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Product ordering within categories
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
-    data: ['data-stack', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
+    data: [
+        'data-stack',
+        'cdp',
+        'data_in',
+        'transformations',
+        'data_modeling',
+        'data_warehouse',
+        'sql_editor',
+        'bi',
+        'data_out',
+    ],
     product_engineering: ['session_replay', 'experiments', 'feature_flags', 'logs', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
@@ -74,17 +77,7 @@ export const productOrder: Record<string, string[]> = {
         'group_analytics',
         'custom_dashboards',
     ],
-    dataviz: [
-        'trends',
-        'funnels',
-        'user_paths',
-        'correlation_analysis',
-        'retention',
-        'stickiness',
-        'lifecycle',
-        'sql',
-        'bi',
-    ],
+    dataviz: ['trends', 'funnels', 'user_paths', 'correlation_analysis', 'retention', 'stickiness', 'lifecycle'],
     automation: ['posthog_ai', 'workflows', 'webhooks'],
     communication: ['surveys', 'messaging', 'user-interviews', 'workflows_emails'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages', 'services'],
@@ -92,38 +85,7 @@ export const productOrder: Record<string, string[]> = {
 
 // Non-product pages that appear in the product navigation
 // These need manual icon and link configuration
-export const nonProductPages = {
-    cdp: {
-        slug: 'cdp',
-        url: '/cdp',
-        icon: 'IconPlug',
-        color: 'sky-blue',
-    },
-    'data-stack': {
-        slug: 'data-stack',
-        url: '/data-stack',
-        icon: 'IconAsterisk',
-        color: 'purple',
-    },
-    'data-stack/sources': {
-        slug: 'data-stack/sources',
-        url: '/data-stack/sources',
-        icon: 'IconArrowRight',
-        color: 'orange',
-    },
-    'data-stack/data-modeling': {
-        slug: 'data-stack/data-modeling',
-        url: '/data-stack/data-modeling',
-        icon: 'IconRefresh',
-        color: 'green',
-    },
-    'data-stack/reverse-etl-export': {
-        slug: 'data-stack/reverse-etl-export',
-        url: '/data-stack/reverse-etl-export',
-        icon: 'IconDecisionTree',
-        color: 'purple',
-    },
-}
+export const nonProductPages = {}
 
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {

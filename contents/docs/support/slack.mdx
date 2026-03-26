@@ -1,0 +1,103 @@
+---
+title: Slack integration
+sidebar: Docs
+showTitle: true
+---
+
+import Alpha from './_snippets/alpha.mdx'
+
+<Alpha />
+
+The **SupportHog** Slack bot connects your Slack workspace to PostHog Support, enabling two-way sync between Slack conversations and support tickets.
+
+- **Slack to PostHog** — messages in Slack automatically create support tickets and add comments
+- **PostHog to Slack** — team replies in PostHog are posted back to the Slack thread
+
+This is separate from PostHog's main Slack integration (used for alerts and dashboards). SupportHog has its own bot, credentials, and event handling.
+
+## Connecting Slack
+
+1. Go to **Support > Settings** in PostHog
+2. Click **Add SupportHog to Slack**
+3. Authorize the app in your Slack workspace
+4. Select a **support channel** — messages posted there automatically become tickets
+5. You're redirected back to PostHog settings
+
+<CalloutBox icon="IconInfo" title="One workspace per project" type="fyi">
+
+Each PostHog project can connect to one Slack workspace. If the workspace is already connected to another project, you'll see an error.
+
+</CalloutBox>
+
+## Configuration
+
+After connecting, configure the integration in **Support > Settings**:
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | — |
+| **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
+| **Bot mentions** | Always active — `@SupportHog` in any channel creates a ticket from that message. | — |
+
+### Picking a support channel
+
+When you click the channel selector, PostHog lists all public and private channels the SupportHog bot has access to. Select the channel you want to use as your dedicated support inbox.
+
+## How tickets are created
+
+There are three ways a Slack message becomes a support ticket:
+
+### 1. Support channel messages
+
+Any top-level message in your configured support channel automatically creates a new ticket. Thread replies on that message sync as ticket messages.
+
+### 2. Bot mentions
+
+Type `@SupportHog` in any channel to create a ticket from that message. If mentioned inside an existing ticket thread, the message is added as a comment instead.
+
+### 3. Emoji reactions
+
+React with the configured emoji (default `:ticket:`) on any message to create a ticket from it. If a ticket already exists for that thread, the reaction is ignored to prevent duplicates.
+
+All three methods:
+
+- Set `channel_source` to `slack` on the ticket
+- Resolve the Slack user's name, email, and avatar
+- Convert Slack message formatting to PostHog's rich text format
+- Download and re-host any image attachments (up to 4 MB per image)
+- Post a confirmation reply in the Slack thread with the ticket number and a link to view it in PostHog
+
+## Two-way sync
+
+### Slack to PostHog
+
+- New messages in the support channel create tickets
+- Thread replies sync as ticket messages
+- Images from Slack are downloaded and stored in PostHog
+
+### PostHog to Slack
+
+- When a team member replies to a Slack-sourced ticket in PostHog, the reply is posted back to the original Slack thread
+- The reply shows the team member's name
+- Images attached in PostHog replies are uploaded to the Slack thread
+
+**Private notes** (internal notes) are never sent to Slack.
+
+## Viewing Slack tickets
+
+Slack-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget and email tickets. Each Slack ticket shows:
+
+- A Slack icon indicating the channel source
+- A link to the original Slack thread in the ticket sidebar
+- The Slack user's name and avatar on messages
+
+You can filter the ticket list by channel source to see only Slack tickets.
+
+## Disconnecting
+
+To remove the Slack integration:
+
+1. Go to **Support > Settings**
+2. Click **Disconnect** in the Slack section
+
+Existing tickets created from Slack are not affected — they remain in your inbox but will no longer sync new messages.

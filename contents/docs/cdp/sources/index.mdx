@@ -60,6 +60,8 @@ When choosing incremental replication, you must select a field to identify new a
 
 The one downside to incremental syncing is that deletions of data won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
 
+If you select a nullable field as the replication key, any rows where that field is null are skipped during sync. PostHog displays a warning when you select a nullable field. To avoid missing data, use a non-nullable field as the replication key.
+
 ### Append only
 
 Append only does what it says on the tin: append rows to your table. 
@@ -68,13 +70,15 @@ We use a cursor in the form of an incremental field (similar to incremental sync
 
 Append only is ideal for tables where rows are never updated, only added. A common example is an event log table, where each new event is recorded as a new row and existing records remain unchanged.
 
+As with incremental syncing, selecting a nullable field as the cursor skips any rows where that field is null.
+
 ### Full table
 
 This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
 
 ## Syncing
 
-Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://us.posthog.com/pipeline/sources). You can also reload or delete sources here.
+Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://app.posthog.com/data-management/sources). You can also reload or delete sources here.
 
 When you expand each source, you can see:
 
@@ -82,6 +86,10 @@ When you expand each source, you can see:
 - Enable or disable syncing for that table
 - Synced table name in PostHog
 - Time the table was last synced
+
+If you add new tables to your source database, click **Pull new schemas** to discover them without waiting for the next sync. This only updates the list of available schemas – it doesn't trigger a data sync.
+
+To sync all enabled schemas at once, click **Sync now**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
 
 <ProductScreenshot
     imageLight={SettingsLight}

@@ -1,0 +1,27 @@
+---
+title: Retrieve data from your endpoint with cURL
+platformIconName: IconTerminal
+---
+
+
+Call PostHog endpoints directly using HTTP requests.
+
+## Basic request
+
+```bash
+curl \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+## With variables
+
+Pass variables in the request body:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"customer_id": "cust_123"}}' \
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
+```

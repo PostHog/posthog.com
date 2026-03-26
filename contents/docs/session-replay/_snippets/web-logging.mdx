@@ -1,7 +1,7 @@
 As console logs can contain sensitive information, we do not capture these logs automatically. You can enable this feature globally _either_ from your [project settings](https://us.posthog.com/settings/project-replay#replay) **or** client-side by setting `enable_recording_console_log: true` in our [JavaScript Web SDK config](/docs/libraries/js/config).
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
     enable_recording_console_log: true, // TIP: This is only needed if you aren't configuring session replay using the project settings toggle.

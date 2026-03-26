@@ -76,7 +76,7 @@ import 'package:flutter/material.dart';
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 Future<void> main() async {
-  final config = PostHogConfig('<ph_project_api_key>');
+  final config = PostHogConfig('<ph_project_token>');
   config.debug = true;
   // or EU Host: 'https://eu.i.posthog.com'
   config.host = 'https://us.i.posthog.com';

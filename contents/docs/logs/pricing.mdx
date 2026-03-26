@@ -1,0 +1,26 @@
+---
+title: Logs pricing
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Logs comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies *use PostHog for free*.
+
+No credit card is required to get started. You can also set billing limits to avoid any surprise charges.
+
+Logs is billed by the number of GB ingested. The price per GB changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
+
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
+
+<Pricing productType="logs" />
+
+We aim to be significantly cheaper than our competitors. Below are tips to reduce your logs costs.
+
+- **Log wide events, not play-by-play.** One rich event per request (or stage) beats 20 tiny INFO lines. ([Logging requests, not code](/docs/logs/best-practices#log-what-happened-to-requests-not-what-your-code-is-doing), [Building wide events](/docs/logs/best-practices#build-events-throughout-the-request-lifecycle))
+- **Use structured JSON logs.** Easier to query, so you log less "just in case." ([Structured logging](/docs/logs/best-practices#use-structured-logging))
+- **Get log levels right.** Keep INFO for outcomes, push verbose detail to DEBUG (off by default). ([Log levels](/docs/logs/best-practices#use-log-levels-correctly))
+- **Filter noisy endpoints.** Drop or downsample health checks and load balancer pings. ([What not to log](/docs/logs/best-practices#what-not-to-log))
+- **Sample successful traffic.** Keep 100% of errors/slow requests; sample the boring stuff. ([Sampling](/docs/logs/best-practices#sample-strategically))
+- **Don't log payloads.** Skip request/response bodies and large objects — log metadata instead. ([What not to log](/docs/logs/best-practices#what-not-to-log), [Context bloat](/docs/logs/best-practices#build-events-throughout-the-request-lifecycle))
+- **Avoid duplicate logging across services.** Log the outcome once; don't replay the same event everywhere. ([What not to log](/docs/logs/best-practices#what-not-to-log))
+- **Treat your schema as stable.** Renames and type changes create churn (and usually more logs). ([Schema evolution](/docs/logs/best-practices#treat-your-log-schema-like-an-api-contract))
