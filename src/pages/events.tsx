@@ -42,6 +42,7 @@ export type Event = {
     presentation?: string
     link?: string
     startTime?: string // HH:mm format
+    online?: boolean
     id: number
 }
 
@@ -323,6 +324,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
             title="Cool tech events"
             fullScreen
             viewportClasses="[&>div>div]:h-full"
+            showAddressBar={false}
         >
             <div
                 data-scheme="primary"

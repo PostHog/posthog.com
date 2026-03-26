@@ -105,6 +105,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/chargebee',
                 },
                 {
+                    name: 'Convex',
+                    url: '/docs/cdp/sources/convex',
+                },
+                {
                     name: 'BigQuery',
                     url: '/docs/cdp/sources/bigquery',
                 },
@@ -1752,6 +1756,10 @@ export const handbookSidebar = [
                         name: 'Turning knowledge into agent skills',
                         url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
+                    {
+                        name: 'Running product training sessions',
+                        url: '/handbook/growth/sales/customer-training',
+                    },
                 ],
             },
             {
@@ -2695,21 +2703,58 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                        },
-                        {
-                            name: 'Platform integrations',
-                        },
-                        {
-                            name: 'Lovable',
-                            url: '/docs/integrations/lovable',
-                        },
-                        {
-                            name: 'Replit',
-                            url: '/docs/integrations/replit',
-                        },
-                        {
-                            name: 'v0',
-                            url: '/docs/integrations/v0',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/model-context-protocol',
+                                },
+                                {
+                                    name: 'Code editors',
+                                },
+                                {
+                                    name: 'Claude Code',
+                                    url: '/docs/model-context-protocol/claude-code',
+                                },
+                                {
+                                    name: 'Claude Desktop',
+                                    url: '/docs/model-context-protocol/claude-desktop',
+                                },
+                                {
+                                    name: 'Codex',
+                                    url: '/docs/model-context-protocol/codex',
+                                },
+                                {
+                                    name: 'Cursor',
+                                    url: '/docs/model-context-protocol/cursor',
+                                },
+                                {
+                                    name: 'VS Code',
+                                    url: '/docs/model-context-protocol/vscode',
+                                },
+                                {
+                                    name: 'Windsurf',
+                                    url: '/docs/model-context-protocol/windsurf',
+                                },
+                                {
+                                    name: 'Zed',
+                                    url: '/docs/model-context-protocol/zed',
+                                },
+                                {
+                                    name: 'Platforms',
+                                },
+                                {
+                                    name: 'Lovable',
+                                    url: '/docs/integrations/lovable',
+                                },
+                                {
+                                    name: 'Replit',
+                                    url: '/docs/integrations/replit',
+                                },
+                                {
+                                    name: 'v0',
+                                    url: '/docs/integrations/v0',
+                                },
+                            ],
                         },
                         {
                             name: 'LLM Analytics ↗',
@@ -4563,6 +4608,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Elixir',
+                            url: '/docs/error-tracking/installation/elixir',
+                        },
+                        {
                             name: 'Go',
                             url: '/docs/error-tracking/installation/go',
                         },
@@ -5176,6 +5225,10 @@ export const docsMenu = {
                         {
                             name: 'Clerk',
                             url: '/docs/data-warehouse/sources/clerk',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/data-warehouse/sources/convex',
                         },
                         {
                             name: 'DoIt',
@@ -6143,6 +6196,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Customer journeys',
+                    url: '/docs/customer-analytics/customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -6157,6 +6217,13 @@ export const docsMenu = {
                     url: '/docs/customer-analytics/create-usage-metrics',
                     icon: 'IconG',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create customer journeys',
+                    url: '/docs/customer-analytics/create-customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
@@ -6393,6 +6460,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/workflows/best-practices',
                     icon: 'IconStar',
@@ -6443,6 +6516,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
+                },
+                {
+                    name: 'Why you need logs',
+                    url: '/docs/logs/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Start here',

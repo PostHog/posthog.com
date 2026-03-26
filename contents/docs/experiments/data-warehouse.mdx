@@ -1,63 +1,43 @@
 ---
 title: Using data warehouse tables in experiments
+sidebar: Docs
+showTitle: true
 ---
 
-> 🚧 **Note:** The data warehouse integration is currently in `beta`. We are keen to gather as much feedback as possible so if you try this out, please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Evaluating [experiment metrics](/docs/experiments/metrics) always depends on events. They rely on something happening at a certain point in time. If one of your [data warehouse](/docs/data-warehouse) tables includes event-like data, you can use it as a primary or secondary metric for your trends experiment.
+If you have event-like data in a [data warehouse](/docs/data-warehouse) table (e.g. purchases, subscriptions, usage records), you can use it directly as a [metric](/docs/experiments/metrics) in your experiment.
 
-To use a data warehouse table with an experiment, you'll first need to join the `events` table to your data warehouse table:
+## Setting up a data warehouse metric
 
-1. Navigate to the [SQL](https://us.posthog.com/sql) tab and click on **Add join** from the triple dot menu next to your table.
+1. When adding a metric to your experiment, select the **Data warehouse tables** category and pick your table.
 
-2. Join the `events` table to your data warehouse table:
-    - Under **Source Table Key**, specify a column that holds the value of the `distinct_id` present for the `$feature_flag_called` event.
-    
-    - Check **Optimize for Experiments** to ensure only the most recent matching event is joined to your table.
-    
-    - Under **Source Timestamp Key**, specify a column that represents the timestamp of the table row. It will be compared with the event timestamp to determine the most recent `$feature_flag_called` event for the row.
+2. Configure the following fields:
 
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/add_join_light_fc0e4cab91.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/add_join_dark_cb350f80ef.png"
-  classes="rounded"
-  alt="Screenshot of the triple dot menu to add a join"
-/>
+    | Field | Description |
+    |-------|-------------|
+    | **Timestamp Field** | The column in your data warehouse table that contains the timestamp of each row |
+    | **Data Warehouse Join Key** | The column in your data warehouse table that identifies which user each row belongs to (e.g. `user_id`, `email`) |
+    | **Events Join Key** | The field on PostHog events to match against the data warehouse join key (usually `distinct_id`) |
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/join_events_light_d3feed92bd.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/join_events_dark_19308b52e9.png"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_25_at_06_23_00_7269911851.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_25_at_06_25_37_7dd9707d69.png"
   classes="rounded"
-  alt="Screenshot of the form to join the events table"
+  alt="Data warehouse metric configuration showing the Timestamp Field, Data Warehouse Join Key, and Events Join Key fields"
 />
 
-Once you've joined the [`events` table](/docs/data-warehouse/sources/posthog) to your data warehouse table, you can use the data warehouse table as a [primary or secondary metric](/docs/experiments/metrics) for your experiment:
+<CalloutBox icon="IconInfo" title="Matching users between your table and PostHog" type="info">
 
-1. When picking your metrics, click on the **Data warehouse tables** category and select your table.
+The **Data Warehouse Join Key** and **Events Join Key** together determine how PostHog links your data warehouse rows to PostHog events. In most cases, the data warehouse join key is the column containing your user identifier, and the events join key is `distinct_id`. If your setup uses a different identifier (e.g. `$session_id`), you can adjust the events join key accordingly.
 
-2. Specify the columns in your data warehouse table that represent the unique ID, the distinct ID, and the timestamp.
+</CalloutBox>
 
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/experiment_goal_light_c767c4f794.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/experiment_goal_dark_7eedc50ffe.png"
-  classes="rounded"
-  alt="Screenshot of the form to assign a data warehouse table to an experiment metric"
-/>
+## Supported metric types
 
-When you select a data warehouse table as a primary or secondary metric, PostHog sees it as an 'events-like' table and is thus able to use it to calculate results.
-
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/experiment_results_light_ccc5eb3f68.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/experiment_results_dark_38717c2c51.png"
-  classes="rounded"
-  alt="Screenshot of the experiment results"
-/>
-
-The PostHog uses the join to the `events` table to determine which variant a given data warehouse table row is associated with. For trends experiments, the most recent `$feature_flag_called` event before the row represents their active variant assignment:
-
-```
-Data Warehouse: timestamp=2024-01-03 12:00, distinct_id=user1
-Events:
-  - 2024-01-02 12:00: (user1, variant='control')   <- This event will be joined
-  - 2024-01-03 18:00: (user1, variant='test')      <- Ignored (occurs after data warehouse timestamp)
-```
+| Metric type | Supported | Notes |
+|------------|-----------|-------|
+| Mean | Yes | Count, sum, average, min, max aggregations |
+| Ratio | Yes | Both numerator and denominator can be data warehouse tables |
+| Retention | Yes | Both start and completion events can be data warehouse tables |
+| Funnel | No | Not currently supported |

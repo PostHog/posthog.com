@@ -27,6 +27,7 @@ Customer profiles pull together data from across PostHog and connected sources:
 | Errors | [Error tracking](/docs/error-tracking) | Error tracking enabled |
 | LLM traces | [LLM observability](/docs/ai-engineering/observability) | LLM observability enabled |
 | Support tickets | [Zendesk](/docs/cdp/sources/zendesk) | Zendesk data warehouse source connected |
+| Customer journeys | [Customer journeys](#customer-journeys) | Journeys configured with funnel insights |
 
 ## Viewing a customer profile
 
@@ -56,6 +57,20 @@ Each customer profile displays [usage metrics](/docs/customer-analytics/usage-me
     alt="Usage metrics in customer profile"
     classes="rounded"
 />
+
+## Customer journeys
+
+Customer profiles include a **Customer journey** node that shows where a person or group is within your defined journeys. Journeys are based on funnel insights you configure, letting you see a customer's progress through key conversion steps.
+
+The journey node displays:
+
+- Which funnel steps the customer has completed
+- Which steps are incomplete
+- Which steps are optional
+
+You can switch between different journeys using the dropdown selector in the node. If no journeys are configured, click **Configure journeys** to set them up.
+
+For details on creating and managing journeys, see [Create customer journeys](/docs/customer-analytics/create-customer-journeys).
 
 ## Connecting support tickets
 
