@@ -43,9 +43,9 @@ The data warehouse can link to data in your object storage system. To do this, y
 
 See an example in our [S3 setup docs](/docs/cdp/sources/s3).
 
-## Incremental vs append only vs full table
+## Sync methods
 
-On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication.
+On some sources and tables, you can choose the sync method. The options are incremental, append only, full table, or webhook (for supported sources).
 
 ### Incremental
 
@@ -75,6 +75,10 @@ As with incremental syncing, selecting a nullable field as the cursor skips any 
 ### Full table
 
 This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
+
+### Webhook
+
+Webhook sync receives data in real-time as changes happen in the source system, rather than waiting for the next scheduled sync. This provides faster data freshness compared to scheduled syncs. Webhook sync is only available for certain sources like Stripe and requires the initial sync to be complete before it activates.
 
 ## Syncing
 
