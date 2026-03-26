@@ -32,6 +32,7 @@ import {
     IconSparkles,
     IconTarget,
     IconArrowUpRight,
+    IconTrends,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -94,7 +95,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
         },
         {
-            name: 'Product tours',
+            name: 'Product Tours',
             Icon: IconSpotlight,
             description: 'Guide users through your product with interactive tours and announcements.',
             handle: 'product_tours',
@@ -137,7 +138,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'No-code A/B testing',
+            name: 'No-code A/B Testing',
             Icon: IconTestTube,
             description: 'Run A/B tests without writing code.',
             handle: 'no_code_ab_testing',
@@ -601,7 +602,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Graphs & trends',
-            Icon: IconGraph,
+            Icon: IconTrends,
             handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',

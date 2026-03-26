@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { getLogo } from 'constants/logos'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import useProduct from 'hooks/useProduct'
@@ -54,18 +55,19 @@ const analyticsHandles = [
 
 const debugHandles = ['error_tracking', 'logs', 'session_replay', 'profiles'] as const
 
-const featureDevHandles = [
-    'feature_flags',
-    'experiments',
-    'no_code_ab_testing',
-    'early_access',
-    'endpoints',
-    'product_tours',
-    'webhooks',
-    'workflows_emails',
-    'posthog_code',
-    'surveys',
-    'support',
+const rolloutGroups = [
+    {
+        title: 'Feature development',
+        handles: ['feature_flags', 'experiments', 'no_code_ab_testing', 'early_access'] as const,
+    },
+    {
+        title: 'Data APIs & automation',
+        handles: ['endpoints', 'webhooks', 'workflows_emails'] as const,
+    },
+    {
+        title: 'Feedback & training',
+        handles: ['surveys', 'support', 'product_tours', 'user_interviews'] as const,
+    },
 ] as const
 
 const ProductItem = ({ product }: { product: any }) => {
@@ -247,18 +249,56 @@ const statusDotColor: Record<string, string> = {
     WIP: 'bg-red',
 }
 
+const statusTooltipLabel: Record<string, string> = {
+    beta: 'Beta',
+    alpha: 'Alpha',
+    WIP: 'On the roadmap',
+    coming_soon: 'On the roadmap',
+    stable: 'Stable',
+}
+
 const ProductStatusLink = ({ product, className = '' }: { product: any; className?: string }) => {
     if (!product) return null
     const { Icon, color, name, slug, status } = product
+
+    const content = (
+        <>
+            {Icon && <Icon className={`size-4 text-${color}`} />}
+            <span>{name}</span>
+            {status && (
+                <Tooltip
+                    delay={0}
+                    trigger={
+                        <span
+                            className={`inline-block size-2 shrink-0 rounded-full relative -top-px -ml-px ${
+                                statusDotColor[status] || 'bg-muted'
+                            }`}
+                        />
+                    }
+                >
+                    <span>{statusTooltipLabel[status] || status}</span>
+                </Tooltip>
+            )}
+        </>
+    )
+
+    if (status === 'WIP' || !slug) {
+        return (
+            <span
+                className={`inline-flex items-center gap-1.5 text-primary text-sm whitespace-nowrap relative top-0.5 ${className}`}
+            >
+                {content}
+            </span>
+        )
+    }
+
     return (
         <Link
             to={`/${slug}`}
             state={{ newWindow: true }}
             className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm whitespace-nowrap relative top-0.5 ${className}`}
         >
-            {Icon && <Icon className={`size-4 text-${color}`} />}
-            <span>{name}</span>
-            {status && <span className={`size-1.5 shrink-0 rounded-full ${statusDotColor[status] || 'bg-muted'}`} />}
+            {content}
         </Link>
     )
 }
@@ -449,21 +489,25 @@ export const DebugFixSlide = () => {
 
 export const TestRolloutSlide = () => {
     const allProducts = useProduct() as any[]
-    const products = featureDevHandles.map((h) => allProducts.find((p: any) => p.handle === h))
+    const productByHandle = Object.fromEntries(allProducts.map((product: any) => [product.handle, product]))
+    const groupedProducts = rolloutGroups.map((group) => ({
+        ...group,
+        products: group.handles.map((handle) => productByHandle[handle]).filter(Boolean),
+    }))
 
     return (
-        <div className="rounded p-4">
+        <div className="rounded p-4 pb-6">
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
                 className="@lg:float-right @lg:ml-4 mb-4 @lg:mb-0 w-48"
             />
-            <h2 className="mt-0">Build</h2>
+            <h2 className="mt-0">Ship features safely & get feedback</h2>
             <p className="text-secondary text-sm">
                 Now that you know what's happening, you can make informed decisions about what to build.
             </p>
             <p className="text-secondary text-sm">
-                PostHog helps you build features safely, then test and validate ideas before you roll them out to
-                everyone.
+                PostHog helps you roll out features to specific users or groups, then test and validate ideas before you
+                roll them out to everyone.
             </p>
             <p className="text-secondary text-sm">
                 Use{' '}
@@ -473,10 +517,29 @@ export const TestRolloutSlide = () => {
                 for AI product development that writes code based on product data.
             </p>
 
-            <div className="grid grid-cols-2 @lg:grid-cols-3 gap-x-6 gap-y-2 clear-both pt-2">
-                {products.map(
-                    (product: any) => product && <ProductStatusLink key={product.handle} product={product} />
-                )}
+            <div className="grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-3 gap-6 clear-both pt-2">
+                {groupedProducts.map((group, index) => {
+                    const isFirstGroup = index === 0
+                    return (
+                        <div
+                            key={group.title}
+                            className={`flex flex-col gap-3 ${isFirstGroup ? '@sm:col-span-2 @xl:col-span-1' : ''}`}
+                        >
+                            <div className="text-secondary text-sm border-b border-secondary pb-1">{group.title}</div>
+                            <div
+                                className={
+                                    isFirstGroup
+                                        ? 'grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-1 gap-x-6 gap-y-1.5'
+                                        : 'flex flex-col gap-1.5'
+                                }
+                            >
+                                {group.products.map((product: any) => (
+                                    <ProductStatusLink key={product.handle} product={product} />
+                                ))}
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )
