@@ -1,6 +1,6 @@
 ---
 title: 'The best Microsoft Clarity alternatives & competitors, compared'
-date: 2026-03-24
+date: 2026-03-25
 author:
     - andy-vandervell
     - natalia-amorim
@@ -20,8 +20,8 @@ import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
 Microsoft Clarity is hard to beat on price – it's completely free with no traffic limits, session caps, or paid tiers. It offers heatmaps, session recordings, rage click detection, and an AI-powered Copilot that generates session takeaways. It also supports web, Android, iOS, React Native, and Flutter.
  
-But Clarity has its limitations; if you need more than basic behavior analysis, or you want deeper debugging tools, mobile analytics, or a full product development platform, you'll need something else.
- 
+It's worth noting that Clarity is free because Microsoft uses the anonymized behavioral data it collects to improve its own machine learning models – that's the trade-off. You'll also need another tool if you want more than basic behavior analysis, deeper debugging tools, mobile analytics, or a full product development platform.
+
 This guide compares the best Microsoft Clarity alternatives: what they do better, where they fall short, and who they're actually for.
 
 ## 1. PostHog
@@ -67,12 +67,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -84,6 +85,7 @@ rows={[
 
 - PostHog includes a built-in [data warehouse](/data-warehouse); you can import data from Stripe, HubSpot, Postgres, Snowflake, and more, then query it with SQL alongside your product analytics and session data in one place. Clarity has no equivalent.
 - PostHog supports group analytics for account-level analysis (useful for B2B SaaS). Clarity only tracks individual visitors.
+- PostHog offers EU hosting. Clarity stores data in Microsoft's US-based Azure cloud; EU customers are covered by cross-border data transfer agreements (SCCs) but have no data residency option.
 - PostHog is open source with a public roadmap. Clarity is a closed-source Microsoft product.
 
 </details>
@@ -150,12 +152,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -231,12 +234,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -312,12 +316,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -327,7 +332,6 @@ rows={[
 <details>
 <summary>Main differences between UXCam and Microsoft Clarity</summary>
 
-- Clarity supports web, UXCam doesn't.
 - UXCam includes retention analysis, cohort analysis, and funnel analysis as core features. Clarity only surfaces behavioral signals like rage taps and dead taps.
 - Clarity is free with no session limits. UXCam's free plan covers 3,000 sessions/month; paid plans require a sales conversation.
 - UXCam includes an AI analyst that proactively watches session recordings and surfaces insights automatically. Clarity's Copilot generates summaries on demand but doesn't monitor sessions autonomously.
@@ -356,7 +360,7 @@ According to G2 reviews, UXCam helps companies:
 
 > #### Bottom line
 >
-> UXCam is a good option if you're developing a mobile app and don't have a web app. It offers more tools than Clarity for understanding conversion behavior and useful features for diagnosing app crashes and performance issues.
+> UXCam is a good option if you're developing a mobile app; it offers more tools than Clarity for understanding conversion behavior and useful features for diagnosing app crashes and performance issues.
 
 ## 5. Lucky Orange
 
@@ -395,12 +399,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -463,7 +468,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 ### How does Hotjar compare to Clarity?
 
-In many ways, [Hotjar](/blog/best-hotjar-alternatives) is a more mature version of Clarity. It lacks the depth of analysis of PostHog or LogRocket, but it offers a few useful enhancements compared to Clarity. For example, it supports both Android and iOS mobile apps. Hotjar's free plan includes basic features and allows up to 10,000 sessions per month.
+In many ways, [Hotjar](/blog/best-hotjar-alternatives) is a more mature version of Clarity. It lacks the depth of analysis of PostHog or LogRocket, but it offers a few useful enhancements compared to Clarity. For example, it supports error detection. Hotjar's free plan includes basic features and allows up to 10,000 sessions per month.
 
 <p>
 <ProductComparisonTable
@@ -474,12 +479,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -538,7 +544,8 @@ Mouseflow is a behavioral analytics tool that offers session replay, heatmap, an
 -   **Friction scores:** Identify sessions where users experience frustration.
 -   **Heatmaps:** See where users click and scroll on your website.
 -   **User feedback:** Gather feedback and ratings from users.
--   **Form analytics:** Reduce abandonment on signup forms.-   **Feedback campaigns:** Gather in-page ratings and qualitative feedback.
+-   **Form analytics:** Reduce abandonment on signup forms.
+-   **Feedback campaigns:** Gather in-page ratings and qualitative feedback.
 
 ### How does Mouseflow compare to Clarity?
 
@@ -553,12 +560,13 @@ rows={[
 'session_replay.features.event_timeline',
 'session_replay.analysis.network_monitor',
 'session_replay.analysis.console_logs',
+'session_replay.features.ai_summaries',
 'session_replay.features.canvas_recording',
 'heatmaps',
 'heatmaps.features.rage_clicks',
 'heatmaps.features.scrollmaps',
 'product_analytics',
-'feature_flags',
+'error_tracking',
 'experiments',
 'surveys',
 ]}
@@ -633,6 +641,12 @@ Microsoft Clarity is a free behavior analytics tool for websites and mobile apps
 
 Yes. Microsoft Clarity is free with no paid tiers, and it includes unlimited session recordings, heatmaps, and Copilot AI insights. 
 
+It's free because Microsoft uses the anonymized behavioral data it collects to train and improve the machine learning models that power its own products and services. 
+
+Clarity is, in part, how Microsoft gathers that data at scale. If that trade-off gives your team pause, PostHog is open source with transparent data handling, and offers EU hosting for teams with stricter data residency requirements.
+
+See our guide to the [best open source session replay tools](/blog/best-open-source-session-replay-tools) for more privacy-friendly options.
+
 </details>
 
 <details>
@@ -667,11 +681,11 @@ For teams who need more than basic behavior analysis, PostHog replaces Clarity a
 
 For pure session replay and heatmaps, Clarity itself is hard to beat – it's free with no limits. 
 
-If you need more than just replay, PostHog's free tier includes 1 million analytics events, 1 million feature flag requests, 1,500 survey responses, 100k error tracking events, and more every month. Startups accepted into [PostHog for Startups](/startups) also get an additional $50k in credits on top of that.
+PostHog has one of the strongest free tiers with 5,000 web and 2,500 mobile recordings free per month. Unlike many of the other tools, this includes all the features. 
 
 If you need more than just replay, PostHog's free tier includes 1 million analytics events, feature flags, error tracking, surveys, and more every month. Startups accepted into the [PostHog for Startups](/startups) program also get an additional $50k in credits on top of that.
 
-If you specifically need enterprise-grade session replay, FullStory's free plan is generous – 30,000 sessions/month with 12 months of data retention.
+If you specifically need enterprise-grade session replay, FullStory's free plan is generous – 30,000 sessions/month with 12 months of data retention, but limited features. 
 
 </details>
 
