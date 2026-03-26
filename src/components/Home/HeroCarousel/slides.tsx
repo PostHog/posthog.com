@@ -70,7 +70,7 @@ export const OnePlaceSlide = () => {
 
     const { destinations } = useStaticQuery(graphql`
         query HeroDestinationCount {
-            destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
+            destinations: allPostHogPipeline(filter: { type: { eq: "destination" }, status: { ne: "coming_soon" } }) {
                 totalCount
             }
         }
