@@ -6,8 +6,8 @@ import {
     IconCode,
     IconEye,
     IconArrowRight,
-    IconListCheck,
     IconGear,
+    IconLightBulb,
 } from '@posthog/icons'
 
 type PipelineColor = 'orange' | 'yellow' | 'blue' | 'green' | 'red' | 'purple' | 'seagreen'
@@ -27,14 +27,14 @@ type PipelineStep = {
     color: PipelineColor
 }
 
-const colorMap: Record<PipelineColor, { dot: string; text: string; bg: string }> = {
-    orange: { dot: 'bg-orange', text: 'text-orange', bg: 'bg-orange/10 dark:bg-orange/20' },
-    yellow: { dot: 'bg-yellow', text: 'text-yellow', bg: 'bg-yellow/10 dark:bg-yellow/20' },
-    blue: { dot: 'bg-blue', text: 'text-blue', bg: 'bg-blue/10 dark:bg-blue/20' },
-    green: { dot: 'bg-green', text: 'text-green', bg: 'bg-green/10 dark:bg-green/20' },
-    red: { dot: 'bg-red', text: 'text-red', bg: 'bg-red/10 dark:bg-red/20' },
-    purple: { dot: 'bg-purple', text: 'text-purple', bg: 'bg-purple/10 dark:bg-purple/20' },
-    seagreen: { dot: 'bg-seagreen', text: 'text-seagreen', bg: 'bg-seagreen/10 dark:bg-seagreen/20' },
+const colorMap: Record<PipelineColor, { dot: string; text: string }> = {
+    orange: { dot: 'bg-orange', text: 'text-orange' },
+    yellow: { dot: 'bg-yellow', text: 'text-yellow' },
+    blue: { dot: 'bg-blue', text: 'text-blue' },
+    green: { dot: 'bg-green', text: 'text-green' },
+    red: { dot: 'bg-red', text: 'text-red' },
+    purple: { dot: 'bg-purple', text: 'text-purple' },
+    seagreen: { dot: 'bg-seagreen', text: 'text-seagreen' },
 }
 
 const MAINTENANCE_PIPELINE_STEPS: PipelineStep[] = [
@@ -72,15 +72,15 @@ const MAINTENANCE_PIPELINE_STEPS: PipelineStep[] = [
 
 const BUILD_PIPELINE_STEPS: PipelineStep[] = [
     {
-        icon: IconListCheck,
-        title: 'Backlog',
-        subtitle: 'Bets you chose',
+        icon: IconLightBulb,
+        title: 'Ideas',
+        subtitle: 'Engineers already have them',
         color: 'purple',
     },
     {
         icon: IconGear,
-        title: 'Scope',
-        subtitle: 'Plan & slices',
+        title: 'Shape',
+        subtitle: 'Plans, specs, slices',
         color: 'seagreen',
     },
     {
@@ -112,12 +112,8 @@ function ModePipelineProgressHeader({ steps, className = '' }: { steps: Pipeline
                 {steps.map((step, i) => (
                     <React.Fragment key={step.title}>
                         <div className="flex min-w-0 items-center gap-1.5 @md/reader-content:gap-2">
-                            <span
-                                className={`flex size-6 shrink-0 items-center justify-center rounded-full ${
-                                    colorMap[step.color].bg
-                                }`}
-                            >
-                                <step.icon className={`size-3.5 ${colorMap[step.color].text}`} />
+                            <span className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
+                                <step.icon className={`size-4 ${colorMap[step.color].text}`} aria-hidden />
                             </span>
                             <div className="hidden min-w-0 @md/reader-content:block">
                                 <p className="m-0 text-[11px] font-semibold leading-none text-primary">{step.title}</p>

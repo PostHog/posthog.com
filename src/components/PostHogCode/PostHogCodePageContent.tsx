@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -19,9 +19,10 @@ import { getLogo, type LogoKey } from 'constants/logos'
 import { AutonomousBuildingCapability, CodeCapabilities } from './CodeCapabilities'
 import { BuildModePipelineHeader, MaintenanceModePipelineHeader } from './SignalsInboxFlow'
 
-const HOG_HERO = 'https://res.cloudinary.com/dmukukwp6/image/upload/code_hero_image_6feaee4045.png'
-const HOG_FAST = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
-const HOG_BUILD = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_build_3e19fb38f5.png'
+const HOG_HERO = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
+const HOG_INBOX_CENTRIC = 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_144026_747081226e.png'
+const HOG_MAINTENANCE_MODE = 'https://res.cloudinary.com/dmukukwp6/image/upload/garden_hogs_2200a4b1d5.png'
+const HOG_BUILD_MODE = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_build_3e19fb38f5.png'
 const CODE_INTEGRATIONS = 'https://res.cloudinary.com/dmukukwp6/image/upload/code_integrations_9862a03308.png'
 const HOG_GROUP = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_group_6585f20d72.png'
 const HOG_VIBES = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_vibes_ec21263650.png'
@@ -29,9 +30,18 @@ const HOG_SIGN = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_sign_77
 
 /** Square favicons for “Ask …” CTAs (Google favicon cache, 64px). */
 const ASK_AI_FAVICONS = {
-    chatgpt: 'https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64',
+    chatgpt: 'https://www.google.com/s2/favicons?domain=openai.com&sz=64',
     claude: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=64',
-    gemini: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64',
+    perplexity: 'https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64',
+} as const
+
+/** Pre-filled prompts for third-party AI assistants. */
+const ASK_AI_HREFS = {
+    chatgpt:
+        'https://chat.openai.com/?q=Explain+why+I+should+use+PostHog+Code.+Focus+on+real+use+cases+(building+features,+debugging,+shipping+faster).+Compare+it+to+doing+things+manually+or+using+other+AI+coding+tools.+Be+concise+and+include+tradeoffs.+If+unsure,+infer+from+PostHog%E2%80%99s+approach+to+product+analytics+and+AI.',
+    claude: 'https://claude.ai/new?q=Explain+why+I+should+use+PostHog+Code.+Focus+on+real+use+cases+(building+features,+debugging,+shipping+faster).+Compare+it+to+doing+things+manually+or+using+other+AI+coding+tools.+Be+concise+and+include+tradeoffs.+If+unsure,+infer+from+PostHog%E2%80%99s+approach+to+product+analytics+and+AI.',
+    perplexity:
+        'https://www.perplexity.ai/search?q=Should+I+use+PostHog+Code%3F+Explain+with+real+use+cases+(building+features,+debugging,+shipping+faster).+Compare+to+manual+workflows+and+AI+coding+tools.+Be+concise+and+include+tradeoffs.',
 } as const
 
 /** Matches teams / reader patterns: 12-col grid inside @container/reader-content */
@@ -42,7 +52,7 @@ const span5 = 'col-span-12 @lg/reader-content:col-span-5'
 /** Body copy rhythm used across PostHog Code marketing sections. */
 const bodyComfort = 'text-[15px] leading-relaxed text-secondary'
 const hogImageMax = 'w-full max-w-[280px] @lg/reader-content:max-w-[320px]'
-const hogInboxShell = 'w-full max-w-60 @md:max-w-64 @lg:max-w-72'
+const hogInboxShell = 'w-full max-w-60 @md/reader-content:max-w-64 @lg/reader-content:max-w-72'
 
 /** Matches inbox lead-in (“AI without context…”) for section eyebrows. */
 const sectionLeadIn = 'text-lg font-medium leading-snug text-secondary @md/reader-content:text-xl'
@@ -97,10 +107,23 @@ const Section = ({ id, children, className = '' }: { id: string; children: React
     </section>
 )
 
-function Hog({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
+function Hog({
+    src,
+    alt,
+    className = '',
+    imgClassName,
+    imgStyle,
+}: {
+    src: string
+    alt: string
+    className?: string
+    /** Defaults to `hogImageMax`; use for height caps (e.g. maintenance/build vs. hero). */
+    imgClassName?: string
+    imgStyle?: React.CSSProperties
+}) {
     return (
         <div className={`flex items-end justify-center ${className}`}>
-            <img src={src} alt={alt} className={hogImageMax} loading="lazy" />
+            <img src={src} alt={alt} className={imgClassName ?? hogImageMax} style={imgStyle} loading="lazy" />
         </div>
     )
 }
@@ -154,43 +177,72 @@ const FAQ_ITEMS = [
     {
         trigger: 'Why is PostHog building a code editor?',
         content: (
-            <p className="m-0">
-                We&apos;re connecting product data to how code ships: an inbox and agent surface grounded in real usage,
-                with PRs as the handoff—not a generic IDE replacement.
-            </p>
+            <div className="space-y-3">
+                <p className="m-0">
+                    We&apos;ve spent years building tools that help teams understand their users. Then we looked at how
+                    software gets built, and something struck us as deeply wrong.
+                </p>
+                <p className="m-0">
+                    The latest generation of AI-powered editors are remarkably capable at writing code. The problem is
+                    they have no idea what your product is or what your users need. Engineers waste a remarkable amount
+                    of time finding and feeding context to orchestrate AI coding agents.
+                </p>
+                <p className="m-0">
+                    With the data PostHog already has, we realized we&apos;re uniquely positioned to build the
+                    solution—a future we call product autonomy. PostHog Code is the first step toward that future:
+                    engineers can wake up to the boring work already done and focus instead on building exciting,
+                    creative things.
+                </p>
+            </div>
         ),
     },
     {
         trigger: 'Is my data safe?',
         content: (
             <p className="m-0">
-                PostHog takes infrastructure and privacy seriously. See{' '}
-                <Link to="/privacy" className="font-semibold underline">
-                    Privacy
-                </Link>{' '}
-                and{' '}
-                <Link to="/dpa" className="font-semibold underline">
-                    DPA
-                </Link>{' '}
-                for how we handle customer data.
+                Yes. PostHog Code queries your data through the PostHog API using your personal API key. Data is never
+                stored, cached, or sent anywhere other than to PostHog&apos;s servers. The MCP server runs locally on
+                your machine, and you control exactly what the agent can access through your API key&apos;s permissions.
             </p>
         ),
     },
     {
-        trigger: 'Does PostHog Code replace Cursor, Copilot or Claude Code?',
+        trigger: 'Does it replace Cursor or Claude Code?',
         content: (
             <p className="m-0">
-                No. Those tools excel at editing in your IDE. PostHog Code prioritizes work from product signals and
-                turns it into reviewable PRs. Many teams will use both.
+                Maybe, but not unless you want to. PostHog Code is the missing layer between data and writing code. Keep
+                your editor if you like it, but give Code a try first.
             </p>
         ),
     },
     {
-        trigger: 'Can I modify my training configuration?',
+        trigger: 'What AI models does it work with?',
         content: (
             <p className="m-0">
-                PostHog Code is model-agnostic. You choose providers and bring your own API keys; configuration is yours
-                to adjust.
+                PostHog Code works with any MCP-compatible AI coding agent. Currently supported: Claude Code, Cursor,
+                Windsurf, VS Code with Copilot. The MCP standard is growing fast, so more editors will be supported over
+                time.
+            </p>
+        ),
+    },
+    {
+        trigger: 'How much does it cost?',
+        content: (
+            <p className="m-0">
+                PostHog Code is seat-based subscription. The PostHog MCP server is free and open source. You just need a
+                PostHog account (the generous free tier works) and an API key from your AI provider. PostHog Code reads
+                from your existing PostHog data, so you only pay for the PostHog products you already use. There&apos;s
+                no additional charge for MCP access.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can it modify my PostHog configuration?',
+        content: (
+            <p className="m-0">
+                PostHog Code can both read and write to PostHog, depending on your API key permissions. It can create
+                feature flags, set up experiments, build dashboards, and define actions. Every write operation requires
+                explicit approval from the agent&apos;s permission system—nothing happens without your confirmation.
             </p>
         ),
     },
@@ -198,41 +250,28 @@ const FAQ_ITEMS = [
         trigger: "What if I don't use PostHog yet?",
         content: (
             <p className="m-0">
-                Sign up for PostHog and join the waitlist. PostHog Code is built on the same project and permissions
-                model as the rest of the platform.
+                PostHog Code runs on top of PostHog. You&apos;ll need to be on PostHog first. The good news: PostHog is
+                free up to generous limits, and installation takes about 90 seconds with the wizard.
             </p>
         ),
     },
     {
-        trigger: 'Can it make its own decisions?',
+        trigger: 'Can it make bad decisions?',
         content: (
             <p className="m-0">
-                Agents propose plans and diffs; you stay in the loop to approve, edit, or reject. Nothing merges without
-                your review.
+                Sometimes. That is why you set a daily limit for agent actions and review PRs before they are merged.
+                PostHog Code never merges anything on its own. It surfaces the work. You ship. PostHog Code won&apos;t
+                yolo merge without your approval.
             </p>
         ),
     },
     {
-        trigger: 'Is my code used in PostHog?',
+        trigger: 'Is my code sent to PostHog?',
         content: (
             <p className="m-0">
-                Your repository stays yours. How we process product and integration data is described in our{' '}
-                <Link to="/privacy" className="font-semibold underline">
-                    Privacy
-                </Link>{' '}
-                policy—talk to us if you need a deeper review.
-            </p>
-        ),
-    },
-    {
-        trigger: 'How much does PostHog Code cost?',
-        content: (
-            <p className="m-0">
-                Pricing is still being finalized for general availability. Check{' '}
-                <Link to="/pricing" className="font-semibold underline">
-                    Pricing
-                </Link>{' '}
-                for current PostHog plans and watch this page for Code-specific details.
+                PostHog Code agents access your GitHub repo to open PRs, similar to any CI/CD integration. Your code
+                stays in GitHub. PostHog Code simply reads your product data (already in PostHog), and other sources you
+                connect to (like Zendesk, Linear, etc.) to direct the agents.
             </p>
         ),
     },
@@ -293,9 +332,24 @@ function NotCard({ heading, body, link, modelRow, searchPlaceholder }: (typeof N
 
 export default function PostHogCodePageContent() {
     const [waitlistAudience, setWaitlistAudience] = useState('already_posthog')
-    const [maintenanceBuildMode, setMaintenanceBuildMode] = useState<'maintenance' | 'build'>('maintenance')
+    const [maintenanceBuildMode, setMaintenanceBuildMode] = useState<'maintenance' | 'build'>('build')
     const [signalsSourceMode, setSignalsSourceMode] = useState<'products' | 'integrations'>('products')
+    const maintenanceTextColRef = useRef<HTMLDivElement>(null)
+    const [maintenanceHogMaxHeightPx, setMaintenanceHogMaxHeightPx] = useState<number | null>(null)
     const mcpIntegrationLogos: LogoKey[] = ['sentry', 'slack', 'linear', 'github']
+
+    useLayoutEffect(() => {
+        const el = maintenanceTextColRef.current
+        if (!el || typeof ResizeObserver === 'undefined') return undefined
+
+        const measure = () => {
+            setMaintenanceHogMaxHeightPx(Math.ceil(el.getBoundingClientRect().height))
+        }
+        measure()
+        const ro = new ResizeObserver(measure)
+        ro.observe(el)
+        return () => ro.disconnect()
+    }, [maintenanceBuildMode])
 
     return (
         <div className="not-prose w-full pb-8">
@@ -391,13 +445,95 @@ export default function PostHogCodePageContent() {
                         </div>
                         <div className={`${span5} flex justify-center`}>
                             <div className={`mt-6 @md/reader-content:mt-0 ${hogInboxShell}`}>
-                                <Hog src={HOG_HERO} alt="PostHog Code" className="w-full" />
+                                <Hog src={HOG_INBOX_CENTRIC} alt="PostHog Code" className="w-full" />
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <CodeCapabilities />
+            </Section>
+
+            {/* MAINTENANCE VS BUILD */}
+            <Section id="maintenance-and-build" className={`${sectionBorder} ${sectionY}`}>
+                <div className="flex flex-col">
+                    <div className={`${grid12} @lg/reader-content:items-start`}>
+                        <div className={span7}>
+                            <div ref={maintenanceTextColRef}>
+                                <div className="mb-6 max-w-lg">
+                                    <ToggleGroup
+                                        title="Maintenance or build mode"
+                                        hideTitle
+                                        className="w-full"
+                                        options={[
+                                            { label: 'Build mode', value: 'build' },
+                                            { label: 'Maintenance mode', value: 'maintenance' },
+                                        ]}
+                                        value={maintenanceBuildMode}
+                                        onValueChange={(v) => {
+                                            if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
+                                        }}
+                                    />
+                                </div>
+                                {maintenanceBuildMode === 'maintenance' ? (
+                                    <>
+                                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                            Self-driving development for the work you don't need to think about
+                                        </h2>
+                                        <p className={`m-0 ${bodyComfort}`}>
+                                            PostHog Code ranks those signals into an inbox so you see impact before you
+                                            pick what to unblock. Agents pull replay, stack traces, and usage context
+                                            into reviewable PRs; you stay in approve-and-ship mode instead of
+                                            re-explaining the same incident in chat. It&apos;s the loop you already run
+                                            for production health, with less manual glue between analytics and
+                                            engineering.
+                                        </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                            You didn't become an engineer to manage four terminals
+                                        </h2>
+                                        <p className={`m-0 ${bodyComfort}`}>
+                                            The same task and PR workflow applies, but the work starts from your specs
+                                            and ideas—not from an alert. Tasks break into shippable chunks;
+                                            instrumentation, flags, and experiments ride along when you care about safe
+                                            rollout or proof of impact. Maintenance mode reacts to what the product
+                                            surface is screaming about; build mode is how you ship the improvements your
+                                            team already wants to build.
+                                        </p>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                        <div className={`${span5} flex justify-center @lg/reader-content:justify-end`}>
+                            <div className="w-full max-w-xs @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
+                                <Hog
+                                    src={maintenanceBuildMode === 'maintenance' ? HOG_MAINTENANCE_MODE : HOG_BUILD_MODE}
+                                    alt={
+                                        maintenanceBuildMode === 'maintenance'
+                                            ? 'Maintenance mode: triage and ship fixes from product data'
+                                            : 'Build mode: ship the ideas and improvements engineers already want to build'
+                                    }
+                                    className="mt-6 @lg/reader-content:mt-0"
+                                    imgClassName={`${hogImageMax} w-auto max-w-full object-contain object-bottom max-h-80`}
+                                    imgStyle={
+                                        maintenanceHogMaxHeightPx != null
+                                            ? { maxHeight: maintenanceHogMaxHeightPx }
+                                            : undefined
+                                    }
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-4 w-full @md/reader-content:mt-5" key={maintenanceBuildMode}>
+                        {maintenanceBuildMode === 'maintenance' ? (
+                            <MaintenanceModePipelineHeader />
+                        ) : (
+                            <BuildModePipelineHeader />
+                        )}
+                    </div>
+                </div>
             </Section>
 
             {/* SIGNALS */}
@@ -537,86 +673,6 @@ export default function PostHogCodePageContent() {
                 <AutonomousBuildingCapability />
             </div>
 
-            {/* MAINTENANCE VS BUILD */}
-            <Section id="maintenance-and-build" className={`${sectionBorder} ${sectionY}`}>
-                <div className="flex flex-col">
-                    <div className={grid12}>
-                        <div className={span7}>
-                            <div className="mb-6 max-w-lg">
-                                <ToggleGroup
-                                    title="Maintenance or build mode"
-                                    hideTitle
-                                    className="w-full"
-                                    options={[
-                                        { label: 'Maintenance mode', value: 'maintenance' },
-                                        { label: 'Build mode', value: 'build' },
-                                    ]}
-                                    value={maintenanceBuildMode}
-                                    onValueChange={(v) => {
-                                        if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
-                                    }}
-                                />
-                            </div>
-                            {maintenanceBuildMode === 'maintenance' ? (
-                                <>
-                                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                        Maintenance mode
-                                    </h2>
-                                    <p className="m-0 mb-4 text-sm font-medium text-secondary">
-                                        When the product tells you something is wrong—errors, funnel drops, regressions,
-                                        noisy experiments—you want a clear queue, not another tab to babysit.
-                                    </p>
-                                    <p className={`m-0 ${bodyComfort}`}>
-                                        PostHog Code ranks those signals into an inbox so you see impact before you pick
-                                        what to unblock. Agents pull replay, stack traces, and usage context into
-                                        reviewable PRs; you stay in approve-and-ship mode instead of re-explaining the
-                                        same incident in chat. It&apos;s the loop you already run for production health,
-                                        with less manual glue between analytics and engineering.
-                                    </p>
-                                </>
-                            ) : (
-                                <>
-                                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                        Build mode
-                                    </h2>
-                                    <p className="m-0 mb-4 text-sm font-medium text-secondary">
-                                        When you&apos;re not firefighting, you&apos;re still shipping: roadmap bets,
-                                        polish, refactors, and net-new capability your team already prioritized.
-                                    </p>
-                                    <p className={`m-0 ${bodyComfort}`}>
-                                        The same task and PR workflow applies, but the work starts from your specs and
-                                        ideas—not from an alert. Tasks break into shippable chunks; instrumentation,
-                                        flags, and experiments ride along when you care about safe rollout or proof of
-                                        impact. Maintenance mode reacts to what the product surface is screaming about;
-                                        build mode is how you clear the backlog you chose before anything broke.
-                                    </p>
-                                </>
-                            )}
-                        </div>
-                        <div className={`${span5} flex justify-center @lg/reader-content:justify-end`}>
-                            <div className="w-full max-w-xs @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
-                                <Hog
-                                    src={maintenanceBuildMode === 'maintenance' ? HOG_FAST : HOG_BUILD}
-                                    alt={
-                                        maintenanceBuildMode === 'maintenance'
-                                            ? 'Maintenance mode: triage and ship fixes from product data'
-                                            : 'Build mode: ship prioritized product work from your backlog'
-                                    }
-                                    className="mt-6 @lg/reader-content:mt-0"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mt-4 w-full @md/reader-content:mt-5" key={maintenanceBuildMode}>
-                        {maintenanceBuildMode === 'maintenance' ? (
-                            <MaintenanceModePipelineHeader />
-                        ) : (
-                            <BuildModePipelineHeader />
-                        )}
-                    </div>
-                </div>
-            </Section>
-
             {/* GET STARTED */}
             <Section id="get-started" className="pt-10 pb-4 @md/reader-content:pt-14 @md/reader-content:pb-5">
                 <div className="grid items-start @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-2">
@@ -635,15 +691,15 @@ export default function PostHogCodePageContent() {
                         </p>
                         <div className="flex flex-wrap items-center gap-2">
                             <AskAiCta
-                                href="https://chatgpt.com"
+                                href={ASK_AI_HREFS.chatgpt}
                                 label="Ask ChatGPT"
                                 iconSrc={ASK_AI_FAVICONS.chatgpt}
                             />
-                            <AskAiCta href="https://claude.ai" label="Ask Claude" iconSrc={ASK_AI_FAVICONS.claude} />
+                            <AskAiCta href={ASK_AI_HREFS.claude} label="Ask Claude" iconSrc={ASK_AI_FAVICONS.claude} />
                             <AskAiCta
-                                href="https://gemini.google.com/app"
-                                label="Ask Gemini"
-                                iconSrc={ASK_AI_FAVICONS.gemini}
+                                href={ASK_AI_HREFS.perplexity}
+                                label="Ask Perplexity"
+                                iconSrc={ASK_AI_FAVICONS.perplexity}
                             />
                         </div>
                     </div>

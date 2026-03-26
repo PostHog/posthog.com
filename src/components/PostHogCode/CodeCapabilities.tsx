@@ -17,6 +17,7 @@ import { IconGrid, IconGemini, IconOpenAI, IconAnthropic } from 'components/OSIc
 import { LOGOS, type LogoKey } from 'constants/logos'
 
 const HOG_FAST = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
+const HOG_SIGNALS_INBOX = 'https://res.cloudinary.com/dmukukwp6/image/upload/mail_code_36790db1ae.png'
 
 const grid12 = 'grid @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-8'
 const span7 = 'col-span-12 @lg/reader-content:col-span-7'
@@ -263,7 +264,7 @@ function SignalsInboxPreview() {
     const selected = signalRows.find((s) => s.id === selectedId) || null
 
     return (
-        <div className="flex border-t border-primary">
+        <div className="flex">
             <div className="flex-1 flex flex-col min-w-0">
                 <div className="flex items-center justify-between border-b border-primary px-4 py-2.5">
                     <span className="text-xs font-semibold text-primary">Inbox</span>
@@ -569,21 +570,30 @@ export function CodeCapabilities() {
 export function AutonomousBuildingCapability() {
     return (
         <div className="flex flex-col gap-5 @md/reader-content:gap-6">
-            <div>
-                <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                    The signals inbox – like a spam filter for product data
-                </h2>
-                <p className={`m-0 max-w-3xl ${bodyComfort}`}>
-                    Signals are clustered and ranked by impact and urgency. You see a triaged inbox, not an overwhelming
-                    wall of data.
-                </p>
+            <div className={grid12}>
+                <div className={span7}>
+                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                        The signals inbox – like a spam filter for product data
+                    </h2>
+                    <p className={`m-0 ${bodyComfort}`}>
+                        Signals are clustered and ranked by impact and urgency. You see a triaged inbox, not an
+                        overwhelming wall of data.
+                    </p>
+                </div>
+                <div className={`${span5} flex @lg/reader-content:justify-end`}>
+                    <div className="flex w-full items-end justify-center">
+                        <img
+                            src={HOG_SIGNALS_INBOX}
+                            alt="Signals inbox: triaged product data like mail"
+                            className={`mt-6 @lg/reader-content:mt-0 ${hogArtMax}`}
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
             </div>
-            <CapabilityCard
-                title="Autonomous building for the whole team"
-                description="Signals surface what matters most, turning product data into prioritized tasks agents execute."
-            >
+            <div className="overflow-hidden rounded-md border border-primary">
                 <SignalsInboxPreview />
-            </CapabilityCard>
+            </div>
         </div>
     )
 }
