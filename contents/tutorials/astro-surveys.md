@@ -497,7 +497,7 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 					localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
 					window.posthog.capture("survey sent", {
 						$survey_id: surveyID, // required
-						$survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: event.detail, // required. Convert numbers to string
+						$survey_response: event.detail, // required. Convert numbers to string
 						$survey_questions: [
 							{
 								id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -577,7 +577,7 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 					localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
 					window.posthog.capture("survey sent", {
 						$survey_id: surveyID, // required
-						$survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: event.detail, // required. Convert numbers to string
+						$survey_response: event.detail, // required. Convert numbers to string
 						$survey_questions: [
 							{
 								id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

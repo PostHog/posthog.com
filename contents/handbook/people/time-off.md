@@ -102,6 +102,8 @@ Please communicate parental leave to Fraser as soon as you feel comfortable doin
 
 The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and let Fraser know the total amount of time you expect to take off as soon as possible.
 
+> For quota-carrying Sales roles taking 12 weeks or longer, your OTE will be calculated by averaging your sales quota attainment for the prior two full quarters (capped at 100% OTE).
+
 ### Paternity leave
 
 We do not offer unpaid leave for Paternity leave.

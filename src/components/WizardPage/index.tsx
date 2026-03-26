@@ -118,7 +118,6 @@ const frameworkCategories = [
             { name: 'React Native', logo: 'reactNative', url: '/docs/libraries/react-native' },
             { name: 'iOS', logo: 'ios', url: '/docs/libraries/ios' },
             { name: 'Android', logo: 'android', url: '/docs/libraries/android' },
-            { name: 'Flutter', logo: 'flutter', url: '/docs/libraries/flutter' },
         ],
     },
 ]

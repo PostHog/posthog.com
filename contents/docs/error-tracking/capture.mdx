@@ -28,7 +28,9 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 ### Automatic exception capture
 
-If you followed one of our guides to [set up error tracking](/docs/error-tracking/installation) and you [enabled exception auto capture](https://app.posthog.com/error_tracking/configuration), you'll have automatic exception capture enabled.
+If you followed one of our guides to [set up error tracking](/docs/error-tracking/installation) and you [enabled exception auto capture](https://app.posthog.com/project/2/error_tracking?activeTab=configuration), you'll have automatic exception capture enabled.
+
+For browser SDKs (JavaScript Web, React, Next.js, etc.), you can configure which types of errors are automatically captured using the `capture_exceptions` option:
 
 ```js
 posthog.init('<ph_project_token>', {
@@ -41,6 +43,14 @@ posthog.init('<ph_project_token>', {
   }
 })
 ```
+
+| Option | Default | Description |
+|---|---|---|
+| `capture_unhandled_errors` | `true` | Captures uncaught errors via `window.onerror`. |
+| `capture_unhandled_rejections` | `true` | Captures unhandled promise rejections via `window.onunhandledrejection`. |
+| `capture_console_errors` | `false` | Captures calls to `console.error` as exception events. |
+
+You can also pass `capture_exceptions: true` to enable all default options, or `capture_exceptions: false` to disable autocapture entirely.
 
 ### Manual exception capture
 
@@ -117,7 +127,7 @@ Like all data, the better **quality** of your exception events, the more **conte
 
 Customizing exception capture lets you override exception properties to influence how they're grouped into issues. 
 
-Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/product-analytics/data-warehouse).
+Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/data-warehouse/start-here).
 
 ### Customizing exception properties 
 

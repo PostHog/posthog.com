@@ -117,10 +117,11 @@ If users run into issues with redemption, we can help liaise — though all offe
 
 Contacts:
 
--   Mintlify: Tiffany Chen
+-   Incident.io: Zain Mobarik
 -   Speakeasy: Nolan Di Mare Sullivan
+-   Chroma: Philip Thomas
 
-We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
+We previously offered DigitalOcean credits ($25k) and a Mintlify partnership, but these were retired in Q2 2025.
 
 ## Program extensions
 

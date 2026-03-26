@@ -541,6 +541,7 @@ function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
 }
 
+// Also defined in src/pages/team-directory.tsx — update both if changed
 const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
 const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
 

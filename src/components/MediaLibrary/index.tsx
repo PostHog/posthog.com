@@ -1,132 +1,160 @@
-import { OSInput, OSSelect } from 'components/OSForm'
-import { Checkbox } from 'components/RadixUI/Checkbox'
-import React, { useEffect, useMemo, useState } from 'react'
-import Image from './Image'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { useMediaLibrary } from 'hooks/useMediaLibrary'
+import { IconUpload } from '@posthog/icons'
+import uploadImage from 'components/Squeak/util/uploadImage'
+import { useApp } from '../../context/App'
 import { useUser } from 'hooks/useUser'
-import OSButton from 'components/OSButton'
-import { IconSpinner } from '@posthog/icons'
-import debounce from 'lodash/debounce'
+import React, { useEffect, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
+import { useWindow } from '../../context/Window'
+import { useToast } from '../../context/Toast'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import Tabs from 'components/RadixUI/Tabs'
+import Libraries from 'components/MediaLibrary/Libraries'
+import Uploads from 'components/MediaLibrary/Uploads'
+import { useMediaLibraryContext } from 'components/MediaLibrary/context'
 
-export default function MediaLibrary({ mediaUploading }: { mediaUploading: number }): JSX.Element {
-    const { getJwt } = useUser()
-    const [showAll, setShowAll] = useState(false)
-    const [tag, setTag] = useState('all-tags')
-    const [search, setSearch] = useState('')
-    const [debouncedSearch, setDebouncedSearch] = useState('')
-    const [tags, setTags] = useState<{ id: string; attributes: { label: string } }[]>([])
+export default function MediaLibrary() {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+    const { getJwt, user, fetchUser } = useUser()
+    const [loading, setLoading] = useState(0)
+    const [activeTab, setActiveTab] = useState('libraries')
+    const { addToast } = useToast()
+    const { currentFolder, setCurrentFolder } = useMediaLibraryContext()
+    const isModerator = user?.role?.type === 'moderator'
 
-    const debouncedSetSearch = useMemo(
-        () =>
-            debounce((value: string) => {
-                setDebouncedSearch(value)
-            }, 500),
-        []
-    )
+    const handleTabChange = (value: string) => {
+        setActiveTab(value)
+        setCurrentFolder(null)
+    }
 
-    useEffect(() => {
-        debouncedSetSearch(search)
-    }, [search, debouncedSetSearch])
-
-    useEffect(() => {
-        return () => debouncedSetSearch.cancel()
-    }, [debouncedSetSearch])
-
-    const { images, isLoading, hasMore, fetchMore } = useMediaLibrary({
-        showAll,
-        tag,
-        search: debouncedSearch,
-    })
-
-    const fetchTags = async () => {
-        try {
-            const jwt = await getJwt()
-            const tags = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`, {
-                headers: {
-                    Authorization: `Bearer ${jwt}`,
-                },
-            })
-                .then((res) => res.json())
-                .then((data) => data.data)
-            setTags(tags)
-        } catch (error) {
-            console.error('Failed to fetch tags:', error)
+    const onDrop = async (acceptedFiles: File[]) => {
+        const profileID = user?.profile?.id
+        const jwt = await getJwt()
+        if (isModerator && profileID && jwt) {
+            setActiveTab('uploads')
+            console.log('currentFolder', currentFolder)
+            await Promise.all(
+                acceptedFiles.map(async (file: File) => {
+                    setLoading((loadingNumber) => loadingNumber + 1)
+                    await uploadImage(file, jwt, {
+                        field: 'images',
+                        id: profileID,
+                        type: 'api::profile.profile',
+                        folderId: currentFolder?.id,
+                    })
+                    setLoading((loadingNumber) => loadingNumber - 1)
+                })
+            ).catch((err) => console.error(err))
+            await fetchUser()
         }
     }
 
+    const { getRootProps, getInputProps, isDragActive, open } = useDropzone({ onDrop, noClick: true })
+
     useEffect(() => {
-        fetchTags()
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Upload media')
+        }
     }, [])
 
-    return (
-        <div data-scheme="primary" className="h-full">
-            <div className="h-full flex flex-col">
-                <div className="flex space-x-2 flex-grow-0 flex-shrink-0">
-                    <div className="flex-1">
-                        <OSInput
-                            size="md"
-                            direction="column"
-                            placeholder="Search..."
-                            showLabel={false}
-                            label="Search images"
-                            value={search}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-                        />
-                    </div>
-                    <div className="flex items-center space-x-1">
-                        <Checkbox
-                            id="mine-only"
-                            checked={!showAll}
-                            onCheckedChange={(checked) => setShowAll(!checked)}
-                        />
-                        <label htmlFor="mine-only" className="text-sm">
-                            Only mine
-                        </label>
-                    </div>
-                    <div className="w-[150px]">
-                        <OSSelect
-                            label="All tags"
-                            showLabel={false}
-                            options={[
-                                { label: 'All tags', value: 'all-tags' },
-                                ...tags.map((tag) => ({ label: tag.attributes.label, value: tag.id })),
-                            ]}
-                            value={tag}
-                            onChange={setTag}
-                            placeholder="Select tag..."
-                        />
+    useEffect(() => {
+        const handlePaste = async (e: ClipboardEvent) => {
+            const items = e.clipboardData?.items
+            if (!items) return
+
+            const imageItems = Array.from(items).filter((item) => item.type.startsWith('image/'))
+            if (imageItems.length === 0) return
+
+            e.preventDefault()
+
+            try {
+                const files = await Promise.all(
+                    imageItems.map(async (item) => {
+                        const blob = item.getAsFile()
+                        if (!blob) return null
+
+                        const extension = blob.type.split('/')[1] || 'png'
+                        const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+                        const fileName = `pasted-image-${timestamp}.${extension}`
+
+                        return new File([blob], fileName, { type: blob.type })
+                    })
+                )
+
+                const validFiles = files.filter((f): f is File => f !== null)
+                if (validFiles.length > 0) {
+                    await onDrop(validFiles)
+                    addToast({
+                        description: `Pasted ${validFiles.length} image${
+                            validFiles.length > 1 ? 's' : ''
+                        } from clipboard`,
+                        duration: 3000,
+                    })
+                }
+            } catch (err) {
+                console.error('Error pasting image:', err)
+                addToast({
+                    description: 'Failed to paste image from clipboard',
+                    error: true,
+                    duration: 3000,
+                })
+            }
+        }
+
+        window.addEventListener('paste', handlePaste)
+        return () => {
+            window.removeEventListener('paste', handlePaste)
+        }
+    }, [onDrop, addToast])
+
+    return isModerator ? (
+        <div {...getRootProps()} className="size-full outline-none">
+            <input {...getInputProps()} />
+            <ScrollArea className="w-full" dataScheme="primary" viewportClasses="bg-primary">
+                <div data-scheme="primary" className="bg-primary text-primary size-full">
+                    <div className="p-4 relative w-full">
+                        <div data-scheme="primary" className="h-full">
+                            <Tabs.Root
+                                value={activeTab}
+                                onValueChange={handleTabChange}
+                                orientation="horizontal"
+                                className="h-full flex-col w-full"
+                            >
+                                <div className="flex justify-center w-full rounded-md border border-primary mb-4">
+                                    <Tabs.List className="grid grid-cols-2 w-full" aria-label="Media library tabs">
+                                        <Tabs.Trigger
+                                            value="libraries"
+                                            className="justify-center cursor-pointer !h-[40px]"
+                                        >
+                                            Libraries
+                                        </Tabs.Trigger>
+                                        <Tabs.Trigger
+                                            value="uploads"
+                                            className="justify-center cursor-pointer !h-[40px]"
+                                        >
+                                            Uploads
+                                        </Tabs.Trigger>
+                                    </Tabs.List>
+                                </div>
+                                <Tabs.Content value="libraries" className="w-full">
+                                    <Libraries />
+                                </Tabs.Content>
+                                <Tabs.Content value="uploads" className="w-full">
+                                    <Uploads mediaUploading={loading} onUploadClick={open} />
+                                </Tabs.Content>
+                            </Tabs.Root>
+                        </div>
                     </div>
                 </div>
-                <div className="flex-grow-1 min-h-0">
-                    <ScrollArea>
-                        <ul className="list-none m-0 p-0 space-y-4 my-4">
-                            {mediaUploading > 0 &&
-                                Array.from({ length: mediaUploading }).map((_, index) => (
-                                    <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
-                                ))}
-                            {isLoading && images.length === 0 ? (
-                                <li className="text-center text-secondary py-8">Loading images...</li>
-                            ) : images.length === 0 ? (
-                                <li className="text-center text-secondary py-8">No images found</li>
-                            ) : (
-                                images?.map((image: { id: string | number; [key: string]: unknown }) => (
-                                    <li key={image.id}>
-                                        <Image {...image} allTags={tags} fetchTags={fetchTags} />
-                                    </li>
-                                ))
-                            )}
-                        </ul>
-                        {hasMore && (
-                            <div className="px-4 my-2">
-                                <OSButton variant="primary" width="full" onClick={fetchMore} disabled={isLoading}>
-                                    {isLoading ? <IconSpinner className="size-5 mx-auto animate-spin" /> : 'Load more'}
-                                </OSButton>
-                            </div>
-                        )}
-                    </ScrollArea>
+            </ScrollArea>
+            {isDragActive && (
+                <div className="absolute inset-0 bg-accent/70 flex items-center justify-center z-50 pointer-events-none">
+                    <div className="flex flex-col items-center gap-2 text-primary">
+                        <IconUpload className="size-12" />
+                        <span className="text-lg font-semibold">Drop files to upload</span>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
-    )
+    ) : null
 }

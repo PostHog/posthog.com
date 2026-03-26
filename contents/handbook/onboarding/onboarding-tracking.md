@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The onboarding team operates a high volume, high velocity sales pipeline with all pay-as-you-go (or YC) accounts that are forecasted to spend > $100 and are not otherwise engaged by Sales/CSM. As such, Onboarding is a linear flow moving from initial outreach to confirming the product is configured properly, ending with customers who are happy paying multiple bills. We aim to keep engagements to ~8 weeks, or 2 full billing periods, but in practice, there is some spillover depending on responsiveness.
+The onboarding team operates a high volume, high velocity sales pipeline with all pay-as-you-go (or YC) accounts that are forecasted to spend > $500 and are not otherwise engaged by Sales/CSM. As such, Onboarding is a linear flow moving from initial outreach to confirming the product is configured properly, ending with customers who are happy paying multiple bills. We aim to keep engagements to ~8 weeks, or 2 full billing periods, but in practice, there is some spillover depending on responsiveness.
 
 ### Principles
 
@@ -20,6 +20,26 @@ The program is guided by a few key principles:
 - Share best practices to leverage PostHog tailored to specific use cases.
 
 ### Internal process
+
+#### Vitaly views
+
+**Daily view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b">link</PrivateLink>)
+
+Sort your view by the “Next Renewal Date” column to reach out to users in a timely manner. Since our role is focused on proactively providing users with value and setting them up for success, we’ve found it’s best to contact them ~14 days before their bill renews. This gives them enough time to see our email, schedule a call, and implement potential improvements in their setup.
+
+Keep an eye on “Onboarding Pipeline,” which indicates whether the account is New or Onboarding has been initiated.
+
+In the view, you have other useful columns like OS Priority, OS Last Messaged, forecasted MRR, or who’s assigned to the account. All these help in prioritizing your work.
+
+Maintaining good hygiene and attention to detail is key here. Keep labels up to date and make sure not to miss accounts that were recently added to the segment—they might appear at the top of the list among accounts you’ve already worked through.
+
+Remember to add a short summary from meetings in a Note, and if you need to follow up at some point, create a Task with a due date.
+
+**Kanban view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/15496ad6-4a4b-4c53-a9ea-b36100c301cb">link</PrivateLink>)
+
+A supplementary view that’s great for getting a general overview of progress.
+
+#### Onboarding program - logic and sequence
 
 There are two paths for customers to progress through the onboarding process: those who engage with us in some way, and those who show little or no engagement.
 
@@ -53,6 +73,14 @@ The complete Onboarding Journey looks as follows:
 | Week 8    | Graduation (automated) - all accounts|
 
 The last two stages of the Onboarding Journey are automated with Vitally playbooks. Second outreach prompts users to surface unanswered questions and book a session with us, and the Graduation email is a nice way to conclude the journey and point out other avenues where users can get help. It's also where we ask for feedback about our Onboarding. 
+
+#### Account analysis for outreach and meetings
+
+-   Take a look at the [Metabase primer](https://posthog.com/handbook/onboarding/metabase-account-analysis) and follow the tips included there.
+-   Check and get familiar with the [Account health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking) and the [Onboarding conversations](https://posthog.com/handbook/onboarding/onboarding-conversations-playbook) pages.
+-   Use our docs, and link to relevant information.
+-   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
+-   Use Wappalyzer (browser or extension) to understand the customer's tech stack better. Credentials available in 1password.
 
 ### How this is organized in Vitally via Playbooks
 

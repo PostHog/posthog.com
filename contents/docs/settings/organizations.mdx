@@ -43,6 +43,19 @@ Newly-joined users get the basic Member access level.
 
 Organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your settings for more information.
 
+### IP data capture default
+
+Organizations can set a default IP data capture policy that automatically applies to all new projects created within the organization. This setting helps ensure consistent privacy controls across all environments.
+
+- **IP data capture enabled**: New projects will capture client IP addresses by default
+- **IP data capture disabled**: New projects will automatically discard client IP data for enhanced privacy
+
+This setting is particularly useful for organizations with GDPR compliance requirements, as it ensures all new environments are configured with appropriate privacy settings from the start.
+
+**Note**: EU organizations automatically default to IP data capture disabled for GDPR compliance. Existing projects are not affected by this setting - only newly created projects will inherit the organization's default.
+
+Individual projects can override this organization default by configuring their own IP data capture setting in **Settings** > **Project** > **General** under the **IP data capture configuration** setting.
+
 ### Notifications
 
 By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.

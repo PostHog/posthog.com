@@ -29,6 +29,11 @@ export default function Legal({ children, defaultTab }: { children: React.ReactN
                     value: '/baa',
                     content: children,
                 },
+                {
+                    label: 'Subprocessors',
+                    value: '/subprocessors',
+                    content: children,
+                },
             ]}
             defaultValue={defaultTab}
             onValueChange={(value) => {

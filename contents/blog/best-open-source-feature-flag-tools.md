@@ -71,6 +71,8 @@ PostHog's free tier includes 1 million feature flag requests per month. After th
 >
 > PostHog is the best choice if you want feature flags alongside [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [A/B testing](/experiments), and more in a single platform. Its [generous free tier](/pricing) makes it especially appealing for [startups and scaleups](/startups).
 
+<WizardCTA />
+
 ## 2. GrowthBook
 
 ![GrowthBook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/growthbook.png)
@@ -248,9 +250,9 @@ We're biased, obviously, but we think you'll love PostHog if:
 - You want tools to ship, track, and analyze new features – like feature flags, A/B testing, analytics, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/feature-flags) and [read our docs](/docs/feature-flags) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 

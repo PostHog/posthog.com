@@ -81,8 +81,8 @@ All content should include a "last updated" date so team members know they're wo
 | Data pipelines (batch and realtime) | Ryan       | - |
 | Data warehouse | Ryan       | - |
 | LLM Analytics | Leo        | - |
-| Workflows | TBD        | - |
-| Twig | Landon     | - |
+| Workflows | Phil        | - |
+| PostHog Code | Landon     | - |
 
 ## For SMEs
 
