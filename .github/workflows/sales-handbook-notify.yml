@@ -43,10 +43,10 @@ jobs:
 
             - name: Format file changes
               id: format-changes
+              env:
+                  CHANGES: ${{ steps.changed-files.outputs.CHANGED_FILES }}
               run: |
                   # Process the changed files and format them nicely
-                  CHANGES="${{ steps.changed-files.outputs.CHANGED_FILES }}"
-
                   ADDED_FILES=""
                   MODIFIED_FILES=""
                   DELETED_FILES=""

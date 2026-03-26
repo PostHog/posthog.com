@@ -99,10 +99,10 @@ export const endpoints = {
             description: 'Use your PostHog data to power dashboards outside the PostHog UI.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/create_endpoint_6e3c57698e.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_dashboard_a1e300960b.png',
                     // srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                    alt: 'Create an endpoint',
-                    className: 'justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
+                    alt: 'A dashboard powered by endpoints',
+                    className: 'justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0 rounded-md',
                 },
             ],
             features: [

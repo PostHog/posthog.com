@@ -56,7 +56,7 @@ Use the following product signals:
 
 **Set expectations early**. If you want consistent engagement throughout onboarding, be explicit about what the program includes and why it’s worth their time. When customers know what to expect and how to use our time, they’re more likely to participate. Setting clear boundaries also helps - what you can help with, and for how long we’re around. 
 
-**Use prior context to be proactive**. Before you write, scan previous conversations. Maybe there’s an old support ticket that never got closure, a Sales note about a previous goal, or a question asked months ago that you can now answer. Picking up that thread with a concrete solution feels personal, and a proactive delight is surely noticed.
+**Use prior context to be proactive**. Before you hit send, take a minute to scan prior threads. If a customer spoke with Sales during an evaluation, check what came up and reference it (e.g., “I saw you covered X with [Name]”) so your email feels connected. And look for other loose ends too, e.g., an old support ticket, or a question from months ago. Following up with a real solution feels personal, and proactive delight gets noticed.
 
 ### Checking in
 
@@ -83,7 +83,9 @@ A small, human touch can help here! Use what’s publicly obvious or clearly rel
 
 ## Preparing for the call
 
-Use Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup, then zoom out to learn about their business, their product, and the rest of their stack. The better your context, the faster you’ll get to relevant recommendations.
+Use Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup. For easier access, you can pin the "Engagement Metric Dashboard" custom trait in Vitally, where you can take a closer look at power users in the organization, the usage of AI or error tracking, and more. 
+
+Then zoom out to learn about their business, their product, and the rest of their stack. The better your context, the faster you’ll get to relevant recommendations.
 
 **Start with their KPIs**
 
@@ -117,6 +119,7 @@ AI can help you sanity-check assumptions and surface ideas you might miss. Custo
 - **Spot unused events**. Show what’s used vs. unused and where volume can be reduced.  This is an easy way to explain optimization opportunities and cost control:
   - Activity → Event counts → last 30 days
   - Open an event → check if it’s used in any saved insights/queries
+- **Introduce our beta features** (if relevant). Encourage customers to use them and share feedback. It can positively impact adoption before the feature becomes a paid product. 
 - **If growth signals are strong, plant the seed early**. If the account is on a positive trajectory, introduce the idea of prepaid credits coming with [a discount](https://posthog.com/handbook/growth/sales/contract-rules) and the option of a dedicated PostHog human. 
 
 ## Email Follow-up

@@ -197,6 +197,13 @@ const getTeamLeadInfo = (team: any) => {
     return `${firstName} joined in ${formatDate(startDate)} and lives in ${location}, ${country}.`
 }
 
+const getQueryString = (): string => {
+    if (typeof window !== 'undefined' && window.location.search) {
+        return window.location.search
+    }
+    return ''
+}
+
 export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const {
         allAshbyJobPosting: { departments, jobs: originalJobs },
@@ -731,7 +738,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 )}
                                 <OSButton
                                     asLink
-                                    to={selectedJob.fields.slug}
+                                    to={`${selectedJob.fields.slug}${getQueryString()}`}
                                     size="md"
                                     variant="primary"
                                     state={{ newWindow: true }}

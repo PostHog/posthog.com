@@ -10,12 +10,35 @@ on:
     pull_request_review:
         types: [submitted]
 
+    pull_request:
+        types: [opened]
+
 permissions:
     contents: read
-    pull-requests: read
+    pull-requests: write
+    issues: write
     id-token: write
 
 jobs:
+    reviewer-reminder:
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.login == 'inkeep[bot]'
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Post reviewer reminder
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = context.payload.pull_request;
+                      const reviewers = pr.requested_reviewers.map(r => `@${r.login}`).join(', ');
+
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: `Hey ${reviewers}! This docs PR was generated for you by an agent. You're responsible for reviewing and merging it into production.\n\n1. Review and approve the PR\n2. Merge the PR\n   a. Check the preview env and CI build and merge it yourself\n   b. Enable auto-merge if you're confident in the changes`
+                      });
+
     trigger-agent:
         if: |
             (github.event_name == 'issue_comment' &&  github.event.issue.pull_request && contains(github.event.comment.body, '@inkeep')) ||
@@ -24,7 +47,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Trigger Inkeep Agent
-              uses: inkeep/inkeep-agents-action@v0
+              uses: inkeep/inkeep-agents-action@39c725a2bf4d24acb89ae70139e13bf50f637c20 # v0.6.0
               with:
                   trigger-url: ${{ secrets.INKEEP_TRIGGER_URL }}
                   # Filters out PRs that dont match the given regex. Update regex as desired or remove entirely

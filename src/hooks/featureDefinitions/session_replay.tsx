@@ -51,6 +51,10 @@ export const sessionReplayFeatures = {
             name: 'Wireframe mode',
             description: 'Low performance impact mobile recordings using wireframes',
         },
+        ai_summaries: {
+            name: 'AI summaries',
+            description: 'AI-generated summaries of session recordings',
+        },
     },
     platform_support: {
         description: 'Record on web and mobile across major frameworks',

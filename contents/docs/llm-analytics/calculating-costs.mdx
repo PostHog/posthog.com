@@ -25,6 +25,24 @@ For cached LLM responses, our pricing models include cached token pricing which 
 
 We also take into account the reasoning / thinking tokens for models that support it.
 
+### Cache token accounting
+
+Different LLM providers report cache tokens differently:
+
+- **Exclusive counting** (Anthropic/Claude) - Cache tokens are separate from `$ai_input_tokens`. For example, if you have 100 input tokens and 50 cached tokens, `$ai_input_tokens` is 100.
+- **Inclusive counting** (OpenAI and most others) - Cache tokens are included in `$ai_input_tokens`. Using the same example, `$ai_input_tokens` is 150.
+
+PostHog auto-detects which counting style to use based on the `$ai_provider` and `$ai_model` properties. For Anthropic and Claude models, PostHog assumes exclusive counting. For all other providers, it assumes inclusive counting.
+
+#### Overriding auto-detection
+
+If you're manually capturing events or using a framework wrapper that normalizes token counts differently, override the auto-detection by setting the `$ai_cache_reporting_exclusive` property:
+
+- `$ai_cache_reporting_exclusive: true` - Cache tokens are separate from input tokens (Anthropic-style)
+- `$ai_cache_reporting_exclusive: false` - Input tokens already include cache tokens
+
+When not set, PostHog resolves this automatically and writes the resolved value back to the event for downstream consumers.
+
 ## Setting custom pricing
 
 You can override PostHog's automatic cost calculation by providing custom pricing for your LLM models. This is useful when:
@@ -159,5 +177,18 @@ Cost calculation follows this precedence order:
 1. **Pre-calculated costs** (`$ai_input_cost_usd`, `$ai_output_cost_usd`, `$ai_request_cost_usd`, `$ai_web_search_cost_usd`): These values are used directly without any additional calculation
 2. **Custom pricing** (`$ai_input_token_price`, `$ai_output_token_price`, `$ai_request_price`, `$ai_web_search_price`): PostHog calculates costs from token counts and usage metrics using your custom prices
 3. **Automatic model matching**: PostHog matches your model using OpenRouter's pricing data first, then falls back to manually maintained pricing if needed
+
+
+## Cost calculation metadata
+
+When PostHog calculates costs automatically, it sets the following metadata properties on the event to help you understand how costs were determined:
+
+| Property | Description | Examples |
+|----------|-------------|----------|
+| `$ai_model_cost_used` | The model identifier used for cost calculation. May differ from the requested model when a variant or alias is resolved. | `openai/gpt-4o-mini` |
+| `$ai_cost_model_source` | Where the cost data for this model was sourced from. | `openrouter`, `manual`, `custom`, `passthrough` |
+| `$ai_cost_model_provider` | The provider used to look up the cost for this model. | `openai`, `anthropic`, `custom` |
+
+These properties are useful for debugging cost discrepancies or understanding which pricing was applied when using model aliases or custom configurations.
 
 You can find the code for this on [GitHub](https://github.com/PostHog/posthog/tree/master/plugin-server/src/ingestion/ai-costs).

@@ -36,7 +36,7 @@ Open [Product analytics](https://us.posthog.com/insights) and create a Trends in
 
 ## Step 3: Execute with the breakdown variable
 
-For insight-based endpoints with a single breakdown, the breakdown property name automatically becomes a **magic variable**. Pass the variable in your request to filter results to a specific breakdown value.
+For insight-based endpoints with breakdowns, each breakdown property name automatically becomes a **magic variable**. Pass the variable in your request to filter results to a specific breakdown value.
 
 ```bash
 curl -X POST \
@@ -61,6 +61,20 @@ If your endpoint is [materialized](/docs/endpoints/materialization), you **must*
 
 </CalloutBox>
 
+### Multiple breakdowns
+
+If your insight has multiple breakdowns configured, each breakdown property name becomes a variable. Pass all breakdown variables when executing:
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"$os": "Mac OS X", "$browser": "Chrome"}}' \
+  "<ph_app_host>/api/projects/{project_id}/endpoints/pageviews_by_os_and_browser/run"
+```
+
+The response will only include data matching all specified breakdown values.
+
 ## Step 4: Use date variables (non-materialized only)
 
 For non-materialized insight endpoints, you can also filter by date range using `date_from` and `date_to`:
@@ -84,7 +98,7 @@ curl -X POST \
 
 Materialized endpoints have pre-computed data, so `date_from` and `date_to` variables are not supported. Passing them will fail the request.
 
-Only the breakdown variable can be passed to a materialized insight-based endpoint..
+Only breakdown variables can be passed to a materialized insight-based endpoint.
 
 </CalloutBox>
 
@@ -96,11 +110,7 @@ Breakdown variables work with:
 - **FunnelsQuery** - filter funnel results by breakdown value
 - **RetentionQuery** - filter retention cohorts by breakdown value
 
-<CalloutBox icon="IconInfo" type="info" title="Single breakdown only">
-
-The breakdown variable is only available for insights with a **single** breakdown configured. Insights with multiple breakdowns can still be used as endpoints but won't have a breakdown variable available.
-
-</CalloutBox>
+Insights with multiple breakdowns are supported. Each breakdown property becomes a separate variable that you can pass when executing the endpoint.
 
 ## Next steps
 

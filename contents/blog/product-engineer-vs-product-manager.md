@@ -29,7 +29,7 @@ Developing a product is a journey. The goal of the journey is to launch a succes
 
 ### Stage 1: Beginning the product development journey
 
-Both product engineers and managers are responsible for the start of the journey, figuring out what to work on. This means talking to users, analyzing usage data, understanding the competitive landscape, and using all this knowledge to prioritize work. Both translate user needs into product requirements.
+Both product engineers and managers are responsible for the start of the journey, figuring out what to work on. This means talking to users, analyzing usage data, [understanding the competitive landscape](/newsletter/what-does-a-product-manager-do), and using all this knowledge to prioritize work. Both translate user needs into product requirements.
 
 Product managers go into further depth here, often writing up reports and recommendations on their findings. This requires stronger analysis and research skills. Product engineers write issues and todos then move onto building as fast as possible. This makes product engineers ideal for early-stage startups, where shipping quickly and iterating is preferable to drawn out discovery work.
 
