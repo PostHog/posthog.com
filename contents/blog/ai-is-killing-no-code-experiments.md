@@ -33,7 +33,7 @@ The result is a real PR with real code. And because the variant is baked into th
 
 And this isn't just a theoretical improvement. We've seen it in practice. 18% of our experiments last week were created through the MCP and we only expect that number to grow.
 
-![PostHog MCP experiments](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/experiments_created_37e6f12f5f.png)
+![PostHog MCP experiments](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/experiments_77596cf342.png)
 
 > **Note:** If you're evaluating flags on the client side (the default), experiments on your landing page can still show a brief flash. For zero-flicker experiments, you [evaluate flags server-side and bootstrap them](/docs/feature-flags/bootstrapping) (which is not possible for no-code experiments). It's a one-time setup, not a per-experiment effort.
 
