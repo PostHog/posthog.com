@@ -1,10 +1,8 @@
 ---
 title: Running product training sessions
 sidebar: Handbook
-showTitle: false
+showTitle: true
 ---
-
-# Running product training sessions for managed accounts
 
 > **Purpose** - Get new PostHog customers self-sufficient and primed to explore more of PostHog.
 > **Format** - Two live group sessions for up to 30 people across product, marketing, and engineering.
