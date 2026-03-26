@@ -113,6 +113,9 @@ By default, release conditions **match by user**, meaning the flag is evaluated 
 
 Percentage rollouts are available for all flags. More options depend on your PostHog setup:
 
+Rollout percentages support decimal values with up to two decimal places of precision (e.g., 0.15% or 33.33%), down to a minimum of 0.01%. Enter decimal values in the percentage text input — the slider uses whole-number steps.
+
+
 - If GeoIP is enabled, you can target based on geographic location.
 
 - If you capture identified events, you can target based on [person properties](/docs/product-analytics/person-properties) and [cohorts](/docs/data/cohorts).

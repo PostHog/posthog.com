@@ -17,6 +17,8 @@ The event formats we prefer (and organize ourselves) fall into one of these:
 -   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
 
+All plans come together – from conception through to final delivery – on our [event management tool](https://www.notion.so/2f552be1aa2f808494f3e7f9bf4e258c?v=2f552be1aa2f80009544000c428b8082) which centralizes owners, logstics and feedback in one place.
+
 ## Community incubator
 
 We connect builders around the world by helping them start IRL micro-communities that gather for recurring co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person with other people who have a bias for action.

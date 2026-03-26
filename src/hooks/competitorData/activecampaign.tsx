@@ -16,10 +16,10 @@ export const activecampaign = {
             channels: {
                 features: {
                     email: true,
-                    sms: "Add-on",
-                    push: "Via integration",
+                    sms: 'Add-on',
+                    push: 'Via integration',
                     webhooks: true,
-                    whatsapp: "Add-on",
+                    whatsapp: 'Add-on',
                 },
             },
         },

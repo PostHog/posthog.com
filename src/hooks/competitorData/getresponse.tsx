@@ -17,7 +17,7 @@ export const getresponse = {
                 features: {
                     email: true,
                     sms: true,
-                    push: "Enterprise",
+                    push: 'Enterprise',
                     webhooks: true,
                     whatsapp: false,
                 },
