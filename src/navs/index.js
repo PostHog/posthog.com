@@ -1756,6 +1756,10 @@ export const handbookSidebar = [
                         name: 'Turning knowledge into agent skills',
                         url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
+                    {
+                        name: 'Running product training sessions',
+                        url: '/handbook/growth/sales/customer-training',
+                    },
                 ],
             },
             {
