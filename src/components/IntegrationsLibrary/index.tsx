@@ -13,8 +13,14 @@ const getIconUrl = (iconUrl: string) => {
 const Title = ({ pipeline }: { pipeline: any }) => {
     const url =
         (pipeline.status !== 'coming_soon' && pipeline.mdx?.fields?.slug) ||
-        (pipeline.type === 'source' && pipeline.slug && `/docs/data-warehouse/sources/${pipeline.slug}`) ||
-        (pipeline.type && pipeline.slug && `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
+        (pipeline.status !== 'coming_soon' &&
+            pipeline.type === 'source' &&
+            pipeline.slug &&
+            `/docs/data-warehouse/sources/${pipeline.slug}`) ||
+        (pipeline.status !== 'coming_soon' &&
+            pipeline.type &&
+            pipeline.slug &&
+            `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
 
     return (
         <div className="flex items-center space-x-2">
