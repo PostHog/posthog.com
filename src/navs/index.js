@@ -105,6 +105,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/chargebee',
                 },
                 {
+                    name: 'Convex',
+                    url: '/docs/cdp/sources/convex',
+                },
+                {
                     name: 'BigQuery',
                     url: '/docs/cdp/sources/bigquery',
                 },
@@ -1751,6 +1755,10 @@ export const handbookSidebar = [
                     {
                         name: 'Turning knowledge into agent skills',
                         url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
+                    },
+                    {
+                        name: 'Running product training sessions',
+                        url: '/handbook/growth/sales/customer-training',
                     },
                 ],
             },
@@ -4436,6 +4444,12 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Tracking long-term metrics',
+                    url: '/docs/experiments/tracking-long-term-metrics',
+                    icon: 'IconClock',
+                    color: 'purple',
+                },
+                {
                     name: 'Changing distribution after rollout',
                     url: '/docs/experiments/changing-distribution-after-rollout',
                     icon: 'IconGraph',
@@ -4648,6 +4662,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/error-tracking/installation/flutter',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/error-tracking/installation/elixir',
                         },
                         {
                             name: 'Go',
@@ -5263,6 +5281,10 @@ export const docsMenu = {
                         {
                             name: 'Clerk',
                             url: '/docs/data-warehouse/sources/clerk',
+                        },
+                        {
+                            name: 'Convex',
+                            url: '/docs/data-warehouse/sources/convex',
                         },
                         {
                             name: 'DoIt',
@@ -6230,6 +6252,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Customer journeys',
+                    url: '/docs/customer-analytics/customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Guides',
                 },
                 {
@@ -6244,6 +6273,13 @@ export const docsMenu = {
                     url: '/docs/customer-analytics/create-usage-metrics',
                     icon: 'IconG',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Create customer journeys',
+                    url: '/docs/customer-analytics/create-customer-journeys',
+                    icon: 'IconFunnels',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
@@ -6478,6 +6514,12 @@ export const docsMenu = {
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconDatabase',
                     color: 'blue',
+                },
+                {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconDatabase',
+                    color: 'orange',
                 },
                 {
                     name: 'Best practices',
