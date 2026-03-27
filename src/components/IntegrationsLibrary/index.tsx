@@ -3,6 +3,8 @@ import { useStaticQuery, graphql, navigate } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
+import { getLogo } from 'constants/logos'
+import { SELF_HOSTED_SOURCES } from 'constants/sources'
 
 const getIconUrl = (iconUrl: string) => {
     return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
@@ -98,33 +100,6 @@ export default function IntegrationsLibrary(): JSX.Element {
         }
     `)
 
-    const selfHostedSources = [
-        {
-            name: 'S3',
-            slug: 's3',
-            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/s3_8f86e011ce.svg',
-            description: 'Link S3 data to PostHog',
-        },
-        {
-            name: 'Google Cloud Storage',
-            slug: 'gcs',
-            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Cloud_14ebf7693d.svg',
-            description: 'Link Google Cloud Storage data to PostHog',
-        },
-        {
-            name: 'Cloudflare R2',
-            slug: 'r2',
-            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
-            description: 'Link Cloudflare R2 data to PostHog',
-        },
-        {
-            name: 'Azure Blob',
-            slug: 'azure-blob',
-            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_blob_storage_a5110351f6.svg',
-            description: 'Link Azure Blob data to PostHog',
-        },
-    ]
-
     // Combine all pipelines data
     const allPipelines = [
         ...(data.sources?.nodes || []).map((s: any) => ({
@@ -134,12 +109,14 @@ export default function IntegrationsLibrary(): JSX.Element {
             category: ['Data warehouse'],
             description: `Sync ${s.name} data into PostHog`,
         })),
-        ...selfHostedSources.map((s) => ({
-            ...s,
+        ...SELF_HOSTED_SOURCES.map((s) => ({
+            name: s.name,
+            slug: s.slug,
+            icon_url: getLogo(s.logo),
             status: 'live',
             type: 'source',
             category: ['Cloud storage'],
-            description: s.description,
+            description: `Link ${s.name} data to PostHog`,
         })),
         ...(data.destinations?.nodes || []).map((d: any) => ({
             ...d,
