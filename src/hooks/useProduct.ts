@@ -103,7 +103,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'salmon',
             category: 'product_engineering',
             slug: 'docs/product-tours',
-            status: 'WIP',
+            status: 'beta',
         },
         {
             name: 'Traces',

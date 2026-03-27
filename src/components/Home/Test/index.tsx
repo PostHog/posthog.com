@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight, IconHeadset, IconInfo, IconPlayFilled, IconRefresh } from '@posthog/icons'
+import { IconArrowRight, IconHeadset, IconInfo, IconPlayFilled, IconRefresh } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -44,7 +44,6 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
-import WizardCommand from 'components/WizardCommand'
 import HeroCarousel from 'components/Home/HeroCarousel'
 
 interface ProductButtonsProps {
@@ -96,23 +95,46 @@ const HomeHappyHog = () => {
 }
 
 const CTAs = () => {
-    const { setConfetti } = useApp()
+    const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
-        <>
+        <div>
+            <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
+                <CallToAction
+                    to="https://app.posthog.com/signup"
+                    size="md"
+                    state={{ newWindow: true, initialTab: 'signup' }}
+                >
+                    Get started - free
+                </CallToAction>
+                <CallToAction
+                    type="secondary"
+                    size="md"
+                    onClick={() => setShowIntegrationPrompt((current) => !current)}
+                >
+                    Install with AI
+                </CallToAction>
+            </div>
+            <motion.div
+                className="overflow-hidden"
+                initial={{ height: 0 }}
+                animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
+            >
+                <div
+                    data-scheme="secondary"
+                    className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
+                >
+                    <IntegrationPrompt />
+                </div>
+            </motion.div>
+            {/* @TODO(data-positioning): Restore the original test CTA row below once this experiment no longer needs control-matching primary buttons.
+            Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand
-                        latest={false}
-                        slim
-                        className="border border-primary"
-                        onCopy={() => setConfetti(true)}
-                    />
+                    <WizardCommand latest={false} slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
-                                <strong className="block mb-1">Add PostHog to your project in ~8 minutes.</strong> The
-                                wizard starts by analyzing your codebase, then it automagically sets up the right tools,
-                                custom events, and dashboards for your product.
+                                <strong className="block mb-1">Add PostHog to your project in ~8 minutes.</strong>
                             </p>
                             <p className="text-sm mb-0">
                                 <Link to="/wizard" state={{ newWindow: true }}>
@@ -134,7 +156,8 @@ const CTAs = () => {
                     signup with email
                 </CallToAction>
             </div>
-            <p className="text-sm flex items-center gap-2">
+            */}
+            <p className="text-sm flex items-center gap-2 mt-4">
                 <Link
                     to="/docs/model-context-protocol"
                     state={{ newWindow: true }}
@@ -154,7 +177,7 @@ const CTAs = () => {
                     <span className="underline font-semibold">Talk to a human</span>
                 </Link>
             </p>
-        </>
+        </div>
     )
 }
 
@@ -661,7 +684,7 @@ function HeroImage(): JSX.Element {
 function TaglineControl(): JSX.Element {
     return (
         <>
-            <h1 className="!text-2xl pt-8">The new way to build products</h1>
+            <h1 className="!text-2xl pt-4">The new way to build products</h1>
             <p>
                 Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling
                 out changes using dozens of tools.

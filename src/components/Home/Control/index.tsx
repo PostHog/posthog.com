@@ -39,7 +39,6 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
-import HeroCarousel from 'components/Home/HeroCarousel'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
@@ -120,6 +119,17 @@ const CTAs = () => {
                     <IntegrationPrompt />
                 </div>
             </motion.div>
+            <p className="mt-4">
+                Questions?{' '}
+                <Link to="/demo" className="font-semibold underline">
+                    Watch a demo
+                </Link>{' '}
+                or{' '}
+                <Link to="/talk-to-a-human" className="font-semibold underline">
+                    talk to a human
+                </Link>
+                .
+            </p>
         </div>
     )
 }
@@ -1432,18 +1442,13 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'HeroCarousel',
         kind: 'flow',
         props: [],
-        Editor: () => <HeroCarousel />,
+        Editor: () => <ProductsSection />,
     },
     {
         name: 'HeroImage',
         kind: 'flow',
         props: [],
-        Editor: () => (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-                className="w-64 @2xl:float-right @2xl:ml-4"
-            />
-        ),
+        Editor: () => null,
     },
     {
         name: 'FAQ',

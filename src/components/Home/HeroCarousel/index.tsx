@@ -10,17 +10,17 @@ const tabs = [
         value: 'one-place',
         label: 'One place for product data',
         content: <OnePlaceSlide />,
-        color: 'bg-yellow',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
     },
     {
         value: 'understand-usage',
         label: 'Understand product usage',
         content: <UnderstandUsageSlide />,
-        color: 'bg-blue',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        color: 'bg-teal',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
     },
     {
         value: 'debug-fix',
@@ -106,7 +106,7 @@ export default function HeroCarousel() {
                         isFirst ? '@sm:rounded-tl-none' : ''
                     } ${isLast ? '@sm:rounded-tr-none' : ''} relative ${activeColor} flex transition-colors`}
                 >
-                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl">
+                    <div className="flex flex-col bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded">
                         <button
                             onClick={() => setIsPaused((p) => !p)}
                             className="absolute top-4 right-4 shrink-0 p-2 text-secondary hover:text-primary cursor-pointer z-10 border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
