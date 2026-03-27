@@ -10,7 +10,7 @@ import {
     IconLightBulb,
 } from '@posthog/icons'
 
-type PipelineColor = 'orange' | 'yellow' | 'blue' | 'green' | 'red' | 'purple' | 'seagreen'
+type PipelineColor = 'orange' | 'purple'
 
 /** Staggered delays for connector shimmer (matches former inline `animation-delay: ${i * 0.4}s`). */
 const PIPELINE_CONNECTOR_DELAY_CLASS: readonly string[] = [
@@ -27,46 +27,42 @@ type PipelineStep = {
     color: PipelineColor
 }
 
-const colorMap: Record<PipelineColor, { dot: string; text: string }> = {
-    orange: { dot: 'bg-orange', text: 'text-orange' },
-    yellow: { dot: 'bg-yellow', text: 'text-yellow' },
-    blue: { dot: 'bg-blue', text: 'text-blue' },
-    green: { dot: 'bg-green', text: 'text-green' },
-    red: { dot: 'bg-red', text: 'text-red' },
-    purple: { dot: 'bg-purple', text: 'text-purple' },
-    seagreen: { dot: 'bg-seagreen', text: 'text-seagreen' },
+const pipelineStepIconText: Record<PipelineColor, string> = {
+    orange: 'text-orange',
+    purple: 'text-purple',
 }
 
+/** Purple = AI / automation. Orange = you're the driver (review, ideas, plan in build mode). */
 const MAINTENANCE_PIPELINE_STEPS: PipelineStep[] = [
     {
         icon: IconPulse,
         title: 'Signals',
         subtitle: 'Data surfaces issues',
-        color: 'orange',
+        color: 'purple',
     },
     {
         icon: IconSparkles,
         title: 'Prioritize',
         subtitle: 'Ranked by impact',
-        color: 'yellow',
+        color: 'purple',
     },
     {
         icon: IconTerminal,
         title: 'Task',
         subtitle: 'Scoped with context',
-        color: 'blue',
+        color: 'purple',
     },
     {
         icon: IconCode,
         title: 'Execute',
         subtitle: 'Agent ships code',
-        color: 'green',
+        color: 'purple',
     },
     {
         icon: IconEye,
         title: 'Review',
         subtitle: 'You approve',
-        color: 'red',
+        color: 'orange',
     },
 ]
 
@@ -75,31 +71,31 @@ const BUILD_PIPELINE_STEPS: PipelineStep[] = [
         icon: IconLightBulb,
         title: 'Ideas',
         subtitle: 'Engineers already have them',
-        color: 'purple',
+        color: 'orange',
     },
     {
         icon: IconGear,
-        title: 'Shape',
-        subtitle: 'Plans, specs, slices',
-        color: 'seagreen',
+        title: 'Plan',
+        subtitle: 'Explore the problem space',
+        color: 'orange',
     },
     {
         icon: IconTerminal,
         title: 'Task',
-        subtitle: 'Ready to run',
-        color: 'blue',
+        subtitle: 'Queue one or more agents',
+        color: 'purple',
     },
     {
         icon: IconCode,
         title: 'Execute',
-        subtitle: 'Agent ships code',
-        color: 'green',
+        subtitle: 'Generate code with context',
+        color: 'purple',
     },
     {
         icon: IconEye,
         title: 'Review',
-        subtitle: 'You approve',
-        color: 'red',
+        subtitle: 'Kill, iterate or merge',
+        color: 'orange',
     },
 ]
 
@@ -113,7 +109,7 @@ function ModePipelineProgressHeader({ steps, className = '' }: { steps: Pipeline
                     <React.Fragment key={step.title}>
                         <div className="flex min-w-0 items-center gap-1.5 @md/reader-content:gap-2">
                             <span className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
-                                <step.icon className={`size-4 ${colorMap[step.color].text}`} aria-hidden />
+                                <step.icon className={`size-4 ${pipelineStepIconText[step.color]}`} aria-hidden />
                             </span>
                             <div className="hidden min-w-0 @md/reader-content:block">
                                 <p className="m-0 text-[11px] font-semibold leading-none text-primary">{step.title}</p>
@@ -134,6 +130,20 @@ function ModePipelineProgressHeader({ steps, className = '' }: { steps: Pipeline
                         )}
                     </React.Fragment>
                 ))}
+            </div>
+            <div
+                className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-input pt-2.5 text-[10px] leading-none text-secondary"
+                role="note"
+                aria-label="Step colors: orange is you driving, purple is AI and automation"
+            >
+                <span className="inline-flex items-center gap-1.5">
+                    <span className="size-2 shrink-0 rounded-full bg-orange" aria-hidden />
+                    <span>You&apos;re the driver</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                    <span className="size-2 shrink-0 rounded-full bg-purple" aria-hidden />
+                    <span>AI &amp; automation</span>
+                </span>
             </div>
         </div>
     )

@@ -1,28 +1,31 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { RadioGroup } from 'components/RadixUI/RadioGroup'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import CloudinaryImage from 'components/CloudinaryImage'
 import {
     IconGitBranch,
-    IconBolt,
     IconCode,
     IconCloud,
     IconLaptop,
     IconMagicWand,
     IconListCheck,
     IconSparkles,
+    IconGraph,
+    IconRewindPlay,
+    IconWarning,
+    IconLlmAnalytics,
+    IconActivity,
+    IconPulse,
+    IconPlus,
+    IconSupport,
+    IconShield,
 } from '@posthog/icons'
-import { getLogo, type LogoKey } from 'constants/logos'
-import { AutonomousBuildingCapability, CodeCapabilities } from './CodeCapabilities'
-import { BuildModePipelineHeader, MaintenanceModePipelineHeader } from './SignalsInboxFlow'
+import { LOGOS, type LogoKey } from 'constants/logos'
+import { AutonomousBuildingCapability, CodeCapabilities, MaintenanceBuildModeSection } from './CodeCapabilities'
 
 const HOG_HERO = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
 const HOG_INBOX_CENTRIC = 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_144026_747081226e.png'
-const HOG_MAINTENANCE_MODE = 'https://res.cloudinary.com/dmukukwp6/image/upload/garden_hogs_2200a4b1d5.png'
-const HOG_BUILD_MODE = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_build_3e19fb38f5.png'
 const CODE_INTEGRATIONS = 'https://res.cloudinary.com/dmukukwp6/image/upload/code_integrations_9862a03308.png'
 const HOG_GROUP = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_group_6585f20d72.png'
 const HOG_VIBES = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_vibes_ec21263650.png'
@@ -44,6 +47,8 @@ const ASK_AI_HREFS = {
         'https://www.perplexity.ai/search?q=Should+I+use+PostHog+Code%3F+Explain+with+real+use+cases+(building+features,+debugging,+shipping+faster).+Compare+to+manual+workflows+and+AI+coding+tools.+Be+concise+and+include+tradeoffs.',
 } as const
 
+const POSTHOG_CODE_DISCORD_URL = 'https://discord.com/invite/E9xV2WnR98'
+
 /** Matches teams / reader patterns: 12-col grid inside @container/reader-content */
 const grid12 = 'grid @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-8'
 const span7 = 'col-span-12 @lg/reader-content:col-span-7'
@@ -60,13 +65,27 @@ const sectionLeadIn = 'text-lg font-medium leading-snug text-secondary @md/reade
 const sectionY = 'py-10 @md/reader-content:py-14'
 const sectionBorder = 'border-b border-input'
 
-const HERO_OVERVIEW_LINES: { label: string; Icon: typeof IconBolt }[] = [
-    { label: 'Multi-model agent orchestration – use Claude Code and Codex in one place', Icon: IconMagicWand },
-    { label: 'Product signals inbox – triage issues and prioritize product work', Icon: IconListCheck },
-    { label: 'Agentic development environment – build features as fast as your roadmap', Icon: IconCode },
+type IconComponent = React.ComponentType<{ className?: string }>
+
+const HERO_OVERVIEW_LINES: { title: string; description: string; Icon: IconComponent }[] = [
+    {
+        title: 'Multi-model agent orchestration',
+        description: 'use Claude Code and Codex in one place',
+        Icon: IconMagicWand,
+    },
+    {
+        title: 'Product signals inbox',
+        description: 'triage issues and prioritize product work',
+        Icon: IconListCheck,
+    },
+    {
+        title: 'Agentic development environment',
+        description: 'build features faster than your roadmap',
+        Icon: IconCode,
+    },
 ]
 
-const INBOX_WORK_MODE_LINES: { title: string; description: string; Icon: typeof IconGitBranch }[] = [
+const INBOX_WORK_MODE_LINES: { title: string; description: string; Icon: IconComponent }[] = [
     {
         title: 'Worktree',
         description: 'Create a copy of your local project to work in parallel',
@@ -84,46 +103,39 @@ const INBOX_WORK_MODE_LINES: { title: string; description: string; Icon: typeof 
     },
 ]
 
-function HeroOverviewLabel({ label }: { label: string }) {
-    const parts = label.split(' – ')
-    if (parts.length < 2) {
-        return <span className="text-sm font-medium text-primary">{label}</span>
-    }
-
-    const [head, ...tailParts] = parts
-    const tail = tailParts.join(' – ')
-
-    return (
-        <>
-            <span className="text-sm font-medium text-primary">{head}</span>
-            <span className="text-sm text-secondary"> – {tail}</span>
-        </>
-    )
-}
-
 const Section = ({ id, children, className = '' }: { id: string; children: React.ReactNode; className?: string }) => (
     <section id={id} className={`scroll-mt-20 ${className}`}>
         {children}
     </section>
 )
 
+const sectionLeadInCodeChipClass =
+    'relative inline-flex items-baseline gap-0.5 rounded-sm border border-input bg-accent px-2 py-0.5 font-code text-base font-medium text-primary @md/reader-content:text-lg'
+
+/** Code-styled word + blue caret pulse (reused under section lead-ins). */
+function SectionLeadInCodeChip({ label }: { label: string }) {
+    return (
+        <span className={sectionLeadInCodeChipClass}>
+            {label}
+            <span className="mb-px inline-block h-3 w-px shrink-0 animate-pulse bg-blue" aria-hidden />
+        </span>
+    )
+}
+
 function Hog({
     src,
     alt,
     className = '',
     imgClassName,
-    imgStyle,
 }: {
     src: string
     alt: string
     className?: string
-    /** Defaults to `hogImageMax`; use for height caps (e.g. maintenance/build vs. hero). */
     imgClassName?: string
-    imgStyle?: React.CSSProperties
 }) {
     return (
         <div className={`flex items-end justify-center ${className}`}>
-            <img src={src} alt={alt} className={imgClassName ?? hogImageMax} style={imgStyle} loading="lazy" />
+            <img src={src} alt={alt} className={imgClassName ?? hogImageMax} loading="lazy" />
         </div>
     )
 }
@@ -146,30 +158,164 @@ function AskAiCta({ href, label, iconSrc }: { href: string; label: string; iconS
     )
 }
 
-const MODEL_LOGOS: LogoKey[] = ['cohere', 'mistral', 'azureOpenAI', 'togetherAI', 'deepseek']
+type NotCardFooter = {
+    type: 'command'
+    text: string
+    to?: string
+    ariaHidden?: boolean
+    /** When there is no `to`, footer is monospace by default (e.g. `npx`); set false for a prose tagline. */
+    fontCode?: boolean
+}
 
 const NOT_CARDS: {
     heading: string
     body: string
-    link?: { href: string; label: string }
-    modelRow?: boolean
-    searchPlaceholder?: string
+    footer: NotCardFooter
 }[] = [
     {
         heading: 'not another dashboard',
-        body: 'Skip straight to product analytics that drive code changes—not another dashboard you scroll past instead of shipping.',
-        link: { href: '/docs', label: 'Show me dashboarding' },
+        body: 'Signals become tasks, not graphs. PostHog Code and PostHog Cloud are data twins, so when you want charts or a real conversation about the numbers, you open product analytics or PostHog AI.',
+        footer: {
+            type: 'command',
+            text: 'Show me some charts',
+            to: '/docs/product-analytics',
+        },
     },
     {
         heading: 'not a model harness',
-        body: 'We are the engine that powers the agent—context in, prioritized work out—not a thin harness on a single model vendor.',
-        modelRow: true,
+        body: 'Claude Code, Cursor, and Codex accelerate your workflow, but you always make the first move. PostHog Code points agents at the right work with context pre-filled in the prompts.',
+        footer: {
+            type: 'command',
+            text: 'Use your favourite agents without any markup',
+            fontCode: false,
+        },
     },
     {
-        heading: 'not a one-size fits all',
-        body: 'Built for engineers: open source, forkable, and meant to fit how your team ships—not a rigid hosted black box.',
-        link: { href: 'https://github.com/PostHog/posthog', label: 'See open source repo' },
-        searchPlaceholder: 'Search everything…',
+        heading: 'not a no-code toy',
+        body: "PostHog Code is built for engineers. Orchestrate agents to fix bugs while you sleep, and build big features. Hardcore user of another IDE? You'll get the best experience in our editor, but if you insist:",
+        footer: { type: 'command', text: 'npx @posthog/code-mcp', ariaHidden: true },
+    },
+]
+
+const GRANOLA_FAVICON = 'https://www.google.com/s2/favicons?domain=granola.ai&sz=64'
+
+const signalsBarChipClass =
+    'inline-flex max-w-full items-center gap-1 rounded border border-input bg-accent px-1.5 py-px text-[10px] font-medium leading-tight text-primary skin-classic:border-b-3 skin-classic:border-primary @md/reader-content:gap-1 @md/reader-content:px-2 @md/reader-content:py-0.5 @md/reader-content:text-[11px]'
+
+const SIGNALS_BAR_POSTHOG: { key: string; label: string; Icon: IconComponent; iconClass: string }[] = [
+    { key: 'product-analytics', label: 'Product Analytics', Icon: IconGraph, iconClass: 'text-blue' },
+    { key: 'session-replay', label: 'Session replay', Icon: IconRewindPlay, iconClass: 'text-yellow' },
+    { key: 'error-tracking', label: 'Error tracking', Icon: IconWarning, iconClass: 'text-orange' },
+    { key: 'llm-analytics', label: 'LLM Analytics', Icon: IconLlmAnalytics, iconClass: 'text-purple' },
+    { key: 'logs', label: 'Logs', Icon: IconActivity, iconClass: 'text-red' },
+]
+
+type SignalsBarIntegrationRow =
+    | { key: string; label: string; logoKey: LogoKey }
+    | { key: string; label: string; logoUrl: string }
+
+const SIGNALS_BAR_INTEGRATIONS: SignalsBarIntegrationRow[] = [
+    { key: 'linear', label: 'Linear', logoKey: 'linear' },
+    { key: 'slack', label: 'Slack', logoKey: 'slack' },
+    { key: 'github', label: 'GitHub', logoKey: 'github' },
+    { key: 'granola', label: 'Granola', logoUrl: GRANOLA_FAVICON },
+    { key: 'zendesk', label: 'Zendesk', logoKey: 'zendesk' },
+]
+
+function signalsBarIntegrationSrc(row: SignalsBarIntegrationRow): string {
+    return 'logoUrl' in row ? row.logoUrl : LOGOS[row.logoKey]
+}
+
+const SIGNALS_BAR_MCP: { key: string; label: string; Icon: IconComponent }[] = [
+    { key: 'observability', label: 'Observability', Icon: IconPulse },
+    { key: 'alerting', label: 'Alerting', Icon: IconWarning },
+    { key: 'support', label: 'Support', Icon: IconSupport },
+    { key: 'crm', label: 'CRM', Icon: IconCloud },
+    { key: 'internal-tools', label: 'Internal tools', Icon: IconShield },
+]
+
+function SignalsContextBarMoreItem() {
+    return (
+        <li className={signalsBarChipClass}>
+            <IconPlus className="size-3 shrink-0 text-secondary" aria-hidden />
+            <span className="min-w-0 text-secondary">and more</span>
+        </li>
+    )
+}
+
+function SignalsContextSourcesBar() {
+    return (
+        <div className="overflow-hidden rounded-md border border-primary bg-primary px-3 py-2 @md/reader-content:px-4 @md/reader-content:py-2.5">
+            <div
+                className="grid grid-cols-1 gap-3 @lg/reader-content:grid-cols-3 @lg/reader-content:gap-4"
+                aria-label="PostHog products, integrations, and MCP context sources"
+            >
+                <div>
+                    <p className="m-0 mb-1 text-[10px] font-semibold uppercase tracking-wide text-secondary">
+                        PostHog products
+                    </p>
+                    <ul className="m-0 flex flex-wrap gap-1 p-0 list-none @md/reader-content:gap-1.5">
+                        {SIGNALS_BAR_POSTHOG.map(({ key, label, Icon, iconClass }) => (
+                            <li key={key} className={signalsBarChipClass}>
+                                <Icon className={`size-3 shrink-0 ${iconClass}`} aria-hidden />
+                                <span className="min-w-0">{label}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <p className="m-0 mb-1 text-[10px] font-semibold uppercase tracking-wide text-secondary">
+                        Integrations
+                    </p>
+                    <ul className="m-0 flex flex-wrap gap-1 p-0 list-none @md/reader-content:gap-1.5">
+                        {SIGNALS_BAR_INTEGRATIONS.map((row) => (
+                            <li key={row.key} className={signalsBarChipClass}>
+                                <img
+                                    src={signalsBarIntegrationSrc(row)}
+                                    alt=""
+                                    className="size-3 shrink-0 object-contain"
+                                    width={12}
+                                    height={12}
+                                    loading="lazy"
+                                />
+                                <span className="min-w-0">{row.label}</span>
+                            </li>
+                        ))}
+                        <SignalsContextBarMoreItem />
+                    </ul>
+                </div>
+                <div>
+                    <p className="m-0 mb-1 text-[10px] font-semibold uppercase tracking-wide text-secondary">MCP</p>
+                    <ul className="m-0 flex flex-wrap gap-1 p-0 list-none @md/reader-content:gap-1.5">
+                        {SIGNALS_BAR_MCP.map(({ key, label, Icon }) => (
+                            <li key={key} className={signalsBarChipClass}>
+                                <Icon className="size-3 shrink-0 text-secondary" aria-hidden />
+                                <span className="min-w-0">{label}</span>
+                            </li>
+                        ))}
+                        <SignalsContextBarMoreItem />
+                    </ul>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const SIGNALS_SOURCE_LINES: { title: string; description: string; Icon: IconComponent }[] = [
+    {
+        title: 'Your codebase',
+        description: 'PostHog Code scans your repo and understands your architecture',
+        Icon: IconCode,
+    },
+    {
+        title: 'Native PostHog data',
+        description: 'Put the product usage and behavioral data you already trust into action',
+        Icon: IconSparkles,
+    },
+    {
+        title: 'Third-party tools & MCP',
+        description: 'Route whatever else matters to you into the same prioritized queue',
+        Icon: IconCloud,
     },
 ]
 
@@ -260,8 +406,8 @@ const FAQ_ITEMS = [
         content: (
             <p className="m-0">
                 Sometimes. That is why you set a daily limit for agent actions and review PRs before they are merged.
-                PostHog Code never merges anything on its own. It surfaces the work. You ship. PostHog Code won&apos;t
-                yolo merge without your approval.
+                PostHog Code never merges anything on its own. It surfaces the work. You ship. Nothing merges without
+                your approval.
             </p>
         ),
     },
@@ -277,79 +423,42 @@ const FAQ_ITEMS = [
     },
 ]
 
-function NotCard({ heading, body, link, modelRow, searchPlaceholder }: (typeof NOT_CARDS)[number]) {
+function NotCard({ heading, body, footer }: (typeof NOT_CARDS)[number]) {
+    const footerInnerClass = 'rounded-sm border border-primary bg-accent px-3 py-2 text-[11px] text-secondary'
+    const footerMono = footer.to ? false : footer.fontCode !== false
+
     return (
         <div className="flex h-full flex-col overflow-hidden rounded-md border border-primary">
             <div className="flex flex-1 flex-col px-5 py-4 @md/reader-content:px-5 @md/reader-content:py-5">
                 <h3 className="m-0 mb-2 text-[10px] font-semibold uppercase tracking-wide text-secondary">{heading}</h3>
                 <p className="m-0 flex-1 text-sm leading-relaxed text-secondary">{body}</p>
-                {link ? (
-                    <Link
-                        to={link.href}
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-                        external={link.href.startsWith('http')}
-                    >
-                        {link.label}
-                        <span aria-hidden>→</span>
-                    </Link>
-                ) : null}
             </div>
-            {modelRow ? (
-                <div className="border-t border-primary bg-accent px-5 py-4">
-                    <div className="flex flex-wrap items-center gap-2">
-                        {MODEL_LOGOS.map((key) => {
-                            const src = getLogo(key)
-                            if (!src) return null
-                            return (
-                                <div
-                                    key={key}
-                                    className="flex size-8 items-center justify-center rounded-sm border border-primary bg-primary p-1.5"
-                                >
-                                    <CloudinaryImage
-                                        src={src as `https://res.cloudinary.com/${string}`}
-                                        alt={key}
-                                        className="max-h-4 max-w-full object-contain"
-                                    />
-                                </div>
-                            )
-                        })}
-                    </div>
+            <div className="border-t border-primary px-5 py-4">
+                <div className={`${footerInnerClass} ${footerMono ? 'font-code' : ''}`}>
+                    {footer.to ? (
+                        <Link
+                            to={footer.to}
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary underline-offset-4 hover:underline"
+                        >
+                            {footer.text}
+                            <span aria-hidden>→</span>
+                        </Link>
+                    ) : (
+                        <span
+                            className={footerMono ? '' : 'font-semibold text-primary'}
+                            aria-hidden={footer.ariaHidden}
+                        >
+                            {footer.text}
+                        </span>
+                    )}
                 </div>
-            ) : null}
-            {searchPlaceholder ? (
-                <div className="border-t border-primary px-5 py-4">
-                    <div
-                        className="rounded-sm border border-primary bg-accent px-3 py-2 font-code text-[11px] text-secondary"
-                        aria-hidden
-                    >
-                        {searchPlaceholder}
-                    </div>
-                </div>
-            ) : null}
+            </div>
         </div>
     )
 }
 
 export default function PostHogCodePageContent() {
     const [waitlistAudience, setWaitlistAudience] = useState('already_posthog')
-    const [maintenanceBuildMode, setMaintenanceBuildMode] = useState<'maintenance' | 'build'>('build')
-    const [signalsSourceMode, setSignalsSourceMode] = useState<'products' | 'integrations'>('products')
-    const maintenanceTextColRef = useRef<HTMLDivElement>(null)
-    const [maintenanceHogMaxHeightPx, setMaintenanceHogMaxHeightPx] = useState<number | null>(null)
-    const mcpIntegrationLogos: LogoKey[] = ['sentry', 'slack', 'linear', 'github']
-
-    useLayoutEffect(() => {
-        const el = maintenanceTextColRef.current
-        if (!el || typeof ResizeObserver === 'undefined') return undefined
-
-        const measure = () => {
-            setMaintenanceHogMaxHeightPx(Math.ceil(el.getBoundingClientRect().height))
-        }
-        measure()
-        const ro = new ResizeObserver(measure)
-        ro.observe(el)
-        return () => ro.disconnect()
-    }, [maintenanceBuildMode])
 
     return (
         <div className="not-prose w-full pb-8">
@@ -369,23 +478,26 @@ export default function PostHogCodePageContent() {
                             you needing to steer.
                         </p>
                         <ul className="m-0 mb-6 list-none space-y-3 p-0">
-                            {HERO_OVERVIEW_LINES.map(({ label, Icon }) => (
-                                <li key={label} className="flex items-center gap-2.5">
-                                    <span className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
+                            {HERO_OVERVIEW_LINES.map(({ title, description, Icon }) => (
+                                <li key={title} className="flex items-start gap-2.5">
+                                    <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
                                         <Icon className="size-4 text-brown" aria-hidden />
                                     </span>
-                                    <HeroOverviewLabel label={label} />
+                                    <p className="m-0 min-w-0 flex-1 text-sm leading-relaxed">
+                                        <span className="font-semibold text-primary">{title}</span>
+                                        <span className="text-secondary"> – {description}</span>
+                                    </p>
                                 </li>
                             ))}
                         </ul>
                         <div className="flex flex-wrap items-center gap-2">
-                            <CallToAction type="primary" size="sm" href="https://app.posthog.com/signup">
+                            <CallToAction type="primary" size="sm" href="/posthog-code#get-started">
                                 Get early access
                             </CallToAction>
                             <CallToAction
                                 type="secondary"
                                 size="sm"
-                                href="https://github.com/PostHog/posthog"
+                                href="https://github.com/PostHog/code"
                                 externalNoIcon
                             >
                                 View our source code
@@ -397,11 +509,7 @@ export default function PostHogCodePageContent() {
                     </div>
                 </div>
 
-                <div className="mt-8 grid gap-6 @md/reader-content:mt-10 @md/reader-content:grid-cols-3">
-                    {NOT_CARDS.map((card) => (
-                        <NotCard key={card.heading} {...card} />
-                    ))}
-                </div>
+                <MaintenanceBuildModeSection />
 
                 <div
                     id="inbox-centric"
@@ -411,23 +519,18 @@ export default function PostHogCodePageContent() {
                         <div className={span7}>
                             <div className="mb-3 flex flex-col gap-2 @md/reader-content:mb-4 @md/reader-content:gap-3">
                                 <p className={`m-0 ${sectionLeadIn}`}>
-                                    AI without context is just{' '}
-                                    <span className="relative inline-flex items-baseline gap-0.5 rounded-sm border border-input bg-accent px-2 py-0.5 font-code text-base font-medium text-primary @md/reader-content:text-lg">
-                                        autocomplete
-                                        <span
-                                            className="mb-px inline-block h-3 w-px shrink-0 animate-pulse bg-blue"
-                                            aria-hidden
-                                        />
-                                    </span>
+                                    AI without context is just <SectionLeadInCodeChip label="autocomplete" />
                                 </p>
                                 <h2 className="m-0 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                    PostHog Code is a more intuitive way to build a software product
+                                    Signals give coding agents the complete picture
                                 </h2>
                             </div>
                             <p className={`m-0 mb-5 ${bodyComfort}`}>
-                                The biggest limit to productivity today is context. PostHog Code is where you get it.
-                                Orchestrate context signals across our database and ship code tailored for performance.
-                                You stay in the loop, but not in the weeds.
+                                Background agents pick up prioritized tasks, plan a fix, and ship the solution. You
+                                control how much they run with a daily limit – and can kick off more anytime.
+                            </p>
+                            <p className={`m-0 mb-5 ${bodyComfort}`}>
+                                When orchestrating your own work, you have three options:
                             </p>
                             <ul className="m-0 list-none space-y-3 p-0">
                                 {INBOX_WORK_MODE_LINES.map(({ title, description, Icon }) => (
@@ -454,217 +557,48 @@ export default function PostHogCodePageContent() {
                 <CodeCapabilities />
             </Section>
 
-            {/* MAINTENANCE VS BUILD */}
-            <Section id="maintenance-and-build" className={`${sectionBorder} ${sectionY}`}>
-                <div className="flex flex-col">
-                    <div className={`${grid12} @lg/reader-content:items-start`}>
-                        <div className={span7}>
-                            <div ref={maintenanceTextColRef}>
-                                <div className="mb-6 max-w-lg">
-                                    <ToggleGroup
-                                        title="Maintenance or build mode"
-                                        hideTitle
-                                        className="w-full"
-                                        options={[
-                                            { label: 'Build mode', value: 'build' },
-                                            { label: 'Maintenance mode', value: 'maintenance' },
-                                        ]}
-                                        value={maintenanceBuildMode}
-                                        onValueChange={(v) => {
-                                            if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
-                                        }}
-                                    />
-                                </div>
-                                {maintenanceBuildMode === 'maintenance' ? (
-                                    <>
-                                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                            Self-driving development for the work you don't need to think about
-                                        </h2>
-                                        <p className={`m-0 ${bodyComfort}`}>
-                                            PostHog Code ranks those signals into an inbox so you see impact before you
-                                            pick what to unblock. Agents pull replay, stack traces, and usage context
-                                            into reviewable PRs; you stay in approve-and-ship mode instead of
-                                            re-explaining the same incident in chat. It&apos;s the loop you already run
-                                            for production health, with less manual glue between analytics and
-                                            engineering.
-                                        </p>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                                            You didn't become an engineer to manage four terminals
-                                        </h2>
-                                        <p className={`m-0 ${bodyComfort}`}>
-                                            The same task and PR workflow applies, but the work starts from your specs
-                                            and ideas—not from an alert. Tasks break into shippable chunks;
-                                            instrumentation, flags, and experiments ride along when you care about safe
-                                            rollout or proof of impact. Maintenance mode reacts to what the product
-                                            surface is screaming about; build mode is how you ship the improvements your
-                                            team already wants to build.
-                                        </p>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                        <div className={`${span5} flex justify-center @lg/reader-content:justify-end`}>
-                            <div className="w-full max-w-xs @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
-                                <Hog
-                                    src={maintenanceBuildMode === 'maintenance' ? HOG_MAINTENANCE_MODE : HOG_BUILD_MODE}
-                                    alt={
-                                        maintenanceBuildMode === 'maintenance'
-                                            ? 'Maintenance mode: triage and ship fixes from product data'
-                                            : 'Build mode: ship the ideas and improvements engineers already want to build'
-                                    }
-                                    className="mt-6 @lg/reader-content:mt-0"
-                                    imgClassName={`${hogImageMax} w-auto max-w-full object-contain object-bottom max-h-80`}
-                                    imgStyle={
-                                        maintenanceHogMaxHeightPx != null
-                                            ? { maxHeight: maintenanceHogMaxHeightPx }
-                                            : undefined
-                                    }
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mt-4 w-full @md/reader-content:mt-5" key={maintenanceBuildMode}>
-                        {maintenanceBuildMode === 'maintenance' ? (
-                            <MaintenanceModePipelineHeader />
-                        ) : (
-                            <BuildModePipelineHeader />
-                        )}
-                    </div>
-                </div>
-            </Section>
-
             {/* SIGNALS */}
             <Section id="signals" className={`${sectionBorder} ${sectionY}`}>
-                <div className={grid12}>
-                    <div className={span7}>
-                        <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                            Pull signals from tools your team already uses
-                        </h2>
-                        <p className={`m-0 ${bodyComfort}`}>
-                            PostHog Code combines first-party product data and external integrations into one ranked
-                            stream of work, so agents can act with context instead of guesswork.
-                        </p>
-                        <div className="mt-5 max-w-xl">
-                            <ToggleGroup
-                                title="Signal source mode"
-                                hideTitle
-                                className="w-full"
-                                options={[
-                                    { label: 'PostHog products', value: 'products' },
-                                    { label: 'External integrations', value: 'integrations' },
-                                ]}
-                                value={signalsSourceMode}
-                                onValueChange={(v) => {
-                                    if (v === 'products' || v === 'integrations') setSignalsSourceMode(v)
-                                }}
-                            />
-                        </div>
-                        <div className="mt-4 rounded-sm border border-input bg-accent p-4">
-                            <div className="flex items-start justify-between gap-3">
-                                <div className="flex items-start gap-3">
-                                    <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-primary">
-                                        <IconSparkles className="size-4 text-yellow" aria-hidden />
-                                    </div>
-                                    <div className="min-w-0">
-                                        <p className="m-0 text-sm font-semibold text-primary">
-                                            {signalsSourceMode === 'products'
-                                                ? 'Native sources inside PostHog'
-                                                : 'External sources via MCP'}
-                                        </p>
-                                        <p className="m-0 mt-1 text-sm leading-relaxed text-secondary">
-                                            {signalsSourceMode === 'products'
-                                                ? 'PostHog turns product behavior into signals agents can act on.'
-                                                : 'MCP connects tools once, then normalizes results into the same task schema.'}
-                                        </p>
-                                    </div>
-                                </div>
-                                <span
-                                    className={`shrink-0 rounded-sm border px-2 py-1 text-[11px] font-semibold ${
-                                        signalsSourceMode === 'products'
-                                            ? 'border-orange/40 bg-orange/10 text-orange'
-                                            : 'border-blue/40 bg-blue/10 text-blue'
-                                    }`}
-                                >
-                                    {signalsSourceMode === 'products' ? 'PostHog' : 'MCP'}
-                                </span>
+                <div className="flex flex-col">
+                    <div className={grid12}>
+                        <div className={span7}>
+                            <div className="mb-3 flex flex-col gap-2 @md/reader-content:mb-4 @md/reader-content:gap-3">
+                                <p className={`m-0 ${sectionLeadIn}`}>
+                                    It&apos;s not magic – it&apos;s <SectionLeadInCodeChip label="data" />
+                                </p>
+                                <h2 className="m-0 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                    Extract signals and context from tools your team uses
+                                </h2>
                             </div>
-
-                            <div className="mt-3 rounded-sm border border-input bg-primary/10 p-3">
-                                {signalsSourceMode === 'products' ? (
-                                    <>
-                                        <p className="m-0 text-[11px] font-semibold uppercase tracking-wide text-orange">
-                                            What agents already get
+                            <p className={`m-0 mb-5 max-w-2xl ${bodyComfort}`}>
+                                Your data shouldn&apos;t just inform decisions — it should decide what gets built.
+                                PostHog Code merges what PostHog already knows about your product with the messy context
+                                from the rest of your stack.
+                            </p>
+                            <ul className="m-0 max-w-2xl list-none space-y-3 p-0">
+                                {SIGNALS_SOURCE_LINES.map(({ title, description, Icon }) => (
+                                    <li key={title} className="flex items-start gap-2.5">
+                                        <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-sm border border-input bg-accent">
+                                            <Icon className="size-4 text-blue" aria-hidden />
+                                        </span>
+                                        <p className="m-0 min-w-0 flex-1 text-sm leading-relaxed">
+                                            <span className="font-semibold text-primary">{title}</span>
+                                            <span className="text-secondary"> – {description}</span>
                                         </p>
-                                        <ul className="mt-2 space-y-1.5">
-                                            {[
-                                                'Product analytics',
-                                                'Session replay',
-                                                'Experiments',
-                                                'Error tracking',
-                                            ].map((label) => (
-                                                <li key={label} className="flex items-center gap-2">
-                                                    <span className="size-2 rounded-sm bg-brown" aria-hidden />
-                                                    <span className="text-sm text-secondary">{label}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </>
-                                ) : (
-                                    <>
-                                        <div className="flex items-center justify-between gap-3">
-                                            <p className="m-0 text-[11px] font-semibold uppercase tracking-wide text-secondary">
-                                                Possible via MCP
-                                            </p>
-                                            <div className="flex items-center gap-2">
-                                                {mcpIntegrationLogos.map((key) => {
-                                                    const src = getLogo(key)
-                                                    if (!src) return null
-                                                    return (
-                                                        <div
-                                                            key={key}
-                                                            className="flex size-8 items-center justify-center rounded-sm border border-input bg-primary p-1.5"
-                                                        >
-                                                            <CloudinaryImage
-                                                                src={src as `https://res.cloudinary.com/${string}`}
-                                                                alt={key}
-                                                                className="max-h-4 max-w-full object-contain"
-                                                            />
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-                                        <ul className="mt-2 space-y-1.5">
-                                            {['Alerts & incidents', 'Support and CRM notes', 'Repo context'].map(
-                                                (label) => (
-                                                    <li key={label} className="flex items-center gap-2">
-                                                        <span className="size-2 rounded-sm bg-brown" aria-hidden />
-                                                        <span className="text-sm text-secondary">{label}</span>
-                                                    </li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </>
-                                )}
-
-                                <div className="mt-3 flex items-start gap-2">
-                                    <IconGitBranch className="mt-0.5 size-4 text-brown" aria-hidden />
-                                    <p className="m-0 text-sm leading-relaxed text-secondary">
-                                        Same signals pipeline, same task schema, same agent workflow.
-                                    </p>
-                                </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div
+                            className={`${span5} flex justify-center @lg/reader-content:justify-end @lg/reader-content:pt-1`}
+                        >
+                            <div className="w-full max-w-xs p-5 @md/reader-content:max-w-sm @md/reader-content:p-6 @lg/reader-content:max-w-md @lg/reader-content:p-8">
+                                <img src={CODE_INTEGRATIONS} alt="" className="w-full object-contain" loading="lazy" />
                             </div>
                         </div>
                     </div>
-                    <div
-                        className={`${span5} flex justify-center @lg/reader-content:justify-end @lg/reader-content:pt-1`}
-                    >
-                        <div className="w-full max-w-xs p-5 @md/reader-content:max-w-sm @md/reader-content:p-6 @lg/reader-content:max-w-md @lg/reader-content:p-8">
-                            <img src={CODE_INTEGRATIONS} alt="" className="w-full object-contain" loading="lazy" />
-                        </div>
+                    <div className="mt-4 w-full @md/reader-content:mt-5">
+                        <SignalsContextSourcesBar />
                     </div>
                 </div>
             </Section>
@@ -682,9 +616,9 @@ export default function PostHogCodePageContent() {
                             that&apos;s bliss.
                         </h2>
                         <p className={`m-0 mb-5 ${bodyComfort}`}>
-                            Cursor and Claude Code are great in the editor. PostHog Code keeps identifying product
-                            issues from live usage and proposing improvements—so work keeps surfacing without you
-                            stitching context together by hand.
+                            You didn&apos;t become an engineer to babysit four terminals. PostHog Code continuously
+                            identifies issues, builds solutions, and ships improvements – without you needing to prompt
+                            it.
                         </p>
                         <p className="m-0 mb-5 text-sm font-semibold text-primary @md/reader-content:mb-6">
                             Not sure if PostHog Code is right for you?
@@ -702,12 +636,26 @@ export default function PostHogCodePageContent() {
                                 iconSrc={ASK_AI_FAVICONS.perplexity}
                             />
                         </div>
+                        <p className="m-0 mt-8 max-w-xl text-sm font-semibold text-primary @md/reader-content:mt-9">
+                            Or, ask a human –{' '}
+                            <Link to={POSTHOG_CODE_DISCORD_URL} external className="underline-offset-4 hover:underline">
+                                Join the PostHog Code Discord community
+                            </Link>
+                        </p>
                     </div>
                     <div className={`${span5} flex @lg/reader-content:justify-end`}>
                         <Hog src={HOG_VIBES} alt="" className="mt-3 @lg/reader-content:mt-0" />
                     </div>
                 </div>
             </Section>
+
+            <div className={`${sectionBorder} ${sectionY}`}>
+                <div className="grid gap-6 @md/reader-content:grid-cols-3">
+                    {NOT_CARDS.map((card) => (
+                        <NotCard key={card.heading} {...card} />
+                    ))}
+                </div>
+            </div>
 
             {/* Final CTA — window-style card (matches in-page demos) */}
             <div className={`${sectionBorder} pt-4 pb-10 @md/reader-content:pt-5 @md/reader-content:pb-14`}>
@@ -728,13 +676,13 @@ export default function PostHogCodePageContent() {
                                 If you&apos;re looking for a sign, this is it: try PostHog Code.
                             </h2>
                             <p className="m-0 mb-3 text-sm leading-relaxed text-secondary">
-                                PostHog Code is designed for experienced product engineers who already use AI coding
-                                tools regularly. We&apos;re explicitly not targeting non-technical &ldquo;vibe
-                                coders&rdquo; or hobbyist users.
+                                PostHog Code is designed for experienced engineers who use AI coding tools on the
+                                regular, and have killer instincts for building great products.
                             </p>
                             <p className="m-0 mb-5 text-sm leading-relaxed text-secondary">
-                                Our initial customer profile is early-stage startups with 2&ndash;10 engineers and
-                                hundreds to low thousands of users.
+                                Want to burn some tokens with us? We&apos;re looking for early-stage startups with
+                                2&ndash;10 engineers and hundreds to low thousands of users to battle test what
+                                we&apos;re building.
                             </p>
                             <div className="mb-5">
                                 <RadioGroup
@@ -743,7 +691,7 @@ export default function PostHogCodePageContent() {
                                     onValueChange={setWaitlistAudience}
                                     options={[
                                         {
-                                            label: "Already using PostHog? Yes, I'm ready for the future.",
+                                            label: "Already using PostHog? (yes, I'm ready for the future)",
                                             value: 'already_posthog',
                                         },
                                         {

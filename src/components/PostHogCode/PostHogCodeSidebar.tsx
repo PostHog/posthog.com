@@ -1,30 +1,21 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconBolt, IconBook, IconHome, IconQuestion, IconRocket, IconWrench } from '@posthog/icons'
+import { IconBolt, IconBook, IconHome, IconQuestion, IconWrench } from '@posthog/icons'
 
-/** Labels follow the V2 mockup; `id` values match on-page section anchors. */
+/** `id` values match on-page section anchors (`#overview`, etc.). */
 const NAV_ITEMS = [
     { id: 'overview', name: 'Overview', icon: IconHome },
-    { id: 'product-autonomy', name: 'Product autonomy', icon: IconRocket },
-    { id: 'signals', name: 'Signals', icon: IconBolt },
     { id: 'maintenance-and-build', name: 'Maintenance & build', icon: IconWrench },
+    { id: 'signals', name: 'Signals', icon: IconBolt },
     { id: 'get-started', name: 'Get started', icon: IconBook },
     { id: 'faq', name: 'FAQ', icon: IconQuestion },
 ] as const
 
 export function PostHogCodeSidebar() {
     const { pathname, hash } = useLocation()
-
-    const activeId = useMemo(() => {
-        if (pathname.replace(/\/$/, '') !== '/posthog-code') {
-            return null
-        }
-        if (!hash) {
-            return 'overview'
-        }
-        return hash.replace(/^#/, '')
-    }, [pathname, hash])
+    const onPostHogCodePage = pathname.replace(/\/$/, '') === '/posthog-code'
+    const activeId = !onPostHogCodePage ? null : !hash ? 'overview' : hash.replace(/^#/, '')
 
     return (
         <div className="not-prose space-y-px">

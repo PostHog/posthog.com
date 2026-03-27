@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import {
     IconGear,
     IconGitBranch,
@@ -13,18 +13,22 @@ import {
     IconWarning,
 } from '@posthog/icons'
 import Link from 'components/Link'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { IconGrid, IconGemini, IconOpenAI, IconAnthropic } from 'components/OSIcons/Icons'
 import { LOGOS, type LogoKey } from 'constants/logos'
+import { BuildModePipelineHeader, MaintenanceModePipelineHeader } from './SignalsInboxFlow'
 
-const HOG_FAST = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_fast_97de1bbc27.png'
+const HOG_MAINTENANCE_MODE = 'https://res.cloudinary.com/dmukukwp6/image/upload/garden_hogs_2200a4b1d5.png'
+const HOG_BUILD_MODE = 'https://res.cloudinary.com/dmukukwp6/image/upload/Code_build_3e19fb38f5.png'
 const HOG_SIGNALS_INBOX = 'https://res.cloudinary.com/dmukukwp6/image/upload/mail_code_36790db1ae.png'
+
+const hogModeImageMax = 'w-full max-w-[280px] @lg/reader-content:max-w-[320px]'
 
 const grid12 = 'grid @lg/reader-content:grid-cols-12 @lg/reader-content:gap-x-10 @lg/reader-content:gap-y-8 gap-y-8'
 const span7 = 'col-span-12 @lg/reader-content:col-span-7'
 const span5 = 'col-span-12 @lg/reader-content:col-span-5'
 
 const bodyComfort = 'text-[15px] leading-relaxed text-secondary'
-const hogArtMax = 'w-full max-w-[280px] @lg/reader-content:max-w-[320px]'
 
 type MCPServerRow = {
     name: string
@@ -97,41 +101,134 @@ function MCPServersPreview() {
 
 const frontierMetaChipClass = 'rounded border px-1.5 py-0.5 text-[10px] font-medium leading-none'
 
-function ProductAutonomyPitch() {
+function ModeHog({
+    src,
+    alt,
+    className = '',
+    imgClassName,
+    imgStyle,
+}: {
+    src: string
+    alt: string
+    className?: string
+    imgClassName: string
+    imgStyle?: React.CSSProperties
+}) {
+    return (
+        <div className={`flex items-end justify-center ${className}`}>
+            <img src={src} alt={alt} className={imgClassName} style={imgStyle} loading="lazy" />
+        </div>
+    )
+}
+
+export function MaintenanceBuildModeSection() {
+    const [maintenanceBuildMode, setMaintenanceBuildMode] = useState<'maintenance' | 'build'>('maintenance')
+    const maintenanceTextColRef = useRef<HTMLDivElement>(null)
+    const [maintenanceHogMaxHeightPx, setMaintenanceHogMaxHeightPx] = useState<number | null>(null)
+
+    useLayoutEffect(() => {
+        const el = maintenanceTextColRef.current
+        if (!el || typeof ResizeObserver === 'undefined') return undefined
+
+        const measure = () => {
+            setMaintenanceHogMaxHeightPx(Math.ceil(el.getBoundingClientRect().height))
+        }
+        measure()
+        const ro = new ResizeObserver(measure)
+        ro.observe(el)
+        return () => ro.disconnect()
+    }, [maintenanceBuildMode])
+
     return (
         <div
-            id="product-autonomy"
+            id="maintenance-and-build"
             className="scroll-mt-20 mt-10 border-t border-input pt-10 @md/reader-content:mt-12 @md/reader-content:pt-12"
         >
-            <div className={grid12}>
-                <div className={span7}>
-                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                        Self-driving development for the work you don&apos;t need to think about
-                    </h2>
-                    <p className={`m-0 ${bodyComfort}`}>
-                        With bug fixes and consumer feedback taken care of on autopilot, you can focus on
-                        higher-leverage work that demand creativity. You stay in the loop, but out of the weeds.
-                    </p>
-                    <Link
-                        to="/docs/ai-engineering"
-                        className="group mt-4 inline-flex items-start gap-2 text-sm font-semibold text-primary"
-                    >
-                        <IconWarning className="mt-0.5 size-4 shrink-0 text-orange" aria-hidden />
-                        <span className="underline decoration-dotted underline-offset-4 group-hover:decoration-solid">
-                            Discover what&apos;s next with code quality filters for the same models you use
-                        </span>
-                    </Link>
-                </div>
-                <div className={`${span5} flex @lg/reader-content:justify-end`}>
-                    <div className="flex w-full items-end justify-center">
-                        <img
-                            src={HOG_FAST}
-                            alt="Self-driving development"
-                            className={`mt-6 @lg/reader-content:mt-0 ${hogArtMax}`}
-                            loading="lazy"
-                        />
+            <div className="flex flex-col">
+                <div className={`${grid12} @lg/reader-content:items-start`}>
+                    <div className={span7}>
+                        <div ref={maintenanceTextColRef}>
+                            <div className="mb-6 max-w-lg">
+                                <ToggleGroup
+                                    title="Maintenance or build mode"
+                                    hideTitle
+                                    className="w-full"
+                                    options={[
+                                        { label: 'Build mode', value: 'build' },
+                                        { label: 'Maintenance mode', value: 'maintenance' },
+                                    ]}
+                                    value={maintenanceBuildMode}
+                                    onValueChange={(v) => {
+                                        if (v === 'maintenance' || v === 'build') setMaintenanceBuildMode(v)
+                                    }}
+                                />
+                            </div>
+                            {maintenanceBuildMode === 'maintenance' ? (
+                                <>
+                                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                        A self-improving product loop, powered by your data
+                                    </h2>
+                                    <p className={`m-0 ${bodyComfort}`}>
+                                        Until now, building with AI meant spoon-feeding it context. PostHog Code already
+                                        has it. Every data point becomes a signal source including support tickets,
+                                        incident reports, CRMs, observability tools, and meeting notes.
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
+                                        A more intuitive way to build a software product
+                                    </h2>
+                                    <p className={`m-0 ${bodyComfort}`}>
+                                        With bug fixes and user feedback cruising on autopilot, you can focus on
+                                        higher-leverage work that demands creativity. PostHog Code helps you ship big
+                                        ideas faster. The difference is that you stay in the loop, not stuck in the
+                                        weeds.
+                                    </p>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                    <div className={`${span5} flex justify-center @lg/reader-content:justify-end`}>
+                        <div className="w-full max-w-xs @lg/reader-content:max-w-none" key={maintenanceBuildMode}>
+                            <ModeHog
+                                src={maintenanceBuildMode === 'maintenance' ? HOG_MAINTENANCE_MODE : HOG_BUILD_MODE}
+                                alt={
+                                    maintenanceBuildMode === 'maintenance'
+                                        ? 'Maintenance mode: triage and ship fixes from product data'
+                                        : 'Build mode: ship the ideas and improvements engineers already want to build'
+                                }
+                                className="mt-6 @lg/reader-content:mt-0"
+                                imgClassName={`${hogModeImageMax} w-auto max-w-full object-contain object-bottom max-h-80`}
+                                imgStyle={
+                                    maintenanceHogMaxHeightPx != null
+                                        ? { maxHeight: maintenanceHogMaxHeightPx }
+                                        : undefined
+                                }
+                            />
+                        </div>
                     </div>
                 </div>
+                <div className="mt-4 w-full @md/reader-content:mt-5" key={maintenanceBuildMode}>
+                    {maintenanceBuildMode === 'maintenance' ? (
+                        <MaintenanceModePipelineHeader />
+                    ) : (
+                        <BuildModePipelineHeader />
+                    )}
+                </div>
+                {maintenanceBuildMode === 'build' ? (
+                    <p className="m-0 mt-5 max-w-4xl text-[11px] leading-relaxed text-secondary @md/reader-content:mt-6">
+                        BTW, we also have a newsletter called{' '}
+                        <Link
+                            to="https://newsletter.posthog.com/"
+                            external
+                            className="font-medium text-primary underline-offset-2 hover:underline"
+                        >
+                            Build Mode
+                        </Link>
+                        . It&apos;s about building great products. It used to be called Product for Engineers.
+                    </p>
+                ) : null}
             </div>
         </div>
     )
@@ -546,8 +643,6 @@ export function CodeCapabilities() {
                 </CapabilityCard>
             </div>
 
-            <ProductAutonomyPitch />
-
             <div className="grid gap-6 @md/reader-content:grid-cols-2">
                 <CapabilityCard
                     title="MCP servers"
@@ -573,11 +668,11 @@ export function AutonomousBuildingCapability() {
             <div className={grid12}>
                 <div className={span7}>
                     <h2 className="m-0 mb-3 text-2xl font-bold leading-tight text-primary @md/reader-content:text-3xl">
-                        The signals inbox – like a spam filter for product data
+                        Like a spam filter, but for product data
                     </h2>
                     <p className={`m-0 ${bodyComfort}`}>
-                        Signals are clustered and ranked by impact and urgency. You see a triaged inbox, not an
-                        overwhelming wall of data.
+                        Sound like too much context? No such thing. Signals are clustered and ranked by impact and
+                        urgency. You see a triaged inbox, not an overwhelming wall of data.
                     </p>
                 </div>
                 <div className={`${span5} flex @lg/reader-content:justify-end`}>
@@ -585,7 +680,7 @@ export function AutonomousBuildingCapability() {
                         <img
                             src={HOG_SIGNALS_INBOX}
                             alt="Signals inbox: triaged product data like mail"
-                            className={`mt-6 @lg/reader-content:mt-0 ${hogArtMax}`}
+                            className={`mt-6 @lg/reader-content:mt-0 ${hogModeImageMax}`}
                             loading="lazy"
                         />
                     </div>
