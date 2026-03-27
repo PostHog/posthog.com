@@ -960,14 +960,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     // Create data-warehouse/sources/* pages for sources that have hand-written docs at cdp/sources/*
     result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
-        const mdxSlug = node.mdx?.fields?.slug
-        if (mdxSlug) {
+        if (node.mdx?.id) {
             createPage({
                 path: `/docs/data-warehouse/sources/${node.slug}`,
                 component: HandbookTemplate,
                 context: {
                     id: node.mdx.id,
-                    ignoreWrapper: true,
+                    links: [],
+                    nextURL: '',
+                    searchFilter: 'Docs',
                 },
             })
         }
