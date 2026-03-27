@@ -114,6 +114,219 @@ client.Enqueue(exception)
 
 </MultiLanguage>
 
+## Add exception steps
+
+Exception steps let you attach the most relevant actions, checkpoints, and diagnostic state to an exception without emitting extra events. The SDK buffers recent steps in memory and automatically includes them on the next `captureException(...)` call as the `$exception_steps` property on the `$exception` event.
+
+Use this for high-signal breadcrumbs like:
+
+- Checkout or onboarding milestones
+- API calls and retries
+- Feature flag decisions
+- Validation checkpoints
+- Job state transitions on the server
+
+### How exception steps work
+
+- Steps are **buffered locally** until an exception is captured.
+- Steps are attached to the exception event under **`$exception_steps`**.
+- Steps are **not** sent as standalone PostHog events.
+- `captureException(...)` includes recent buffered steps by default.
+- In PostHog, the steps appear on the related exception in the **session timeline** so you can see what happened immediately before the error.
+
+### Scoping behavior across SDKs
+
+The buffer scope depends on the environment:
+
+- **Frontend SDKs** use a global in-memory recent-step buffer for the current app runtime.
+- **Server SDKs** should scope steps to the current request, job, or execution context where possible.
+- If a server-side exception is captured **without** an active scope, `captureException(...)` should still send the exception, but buffered steps may be missing.
+
+For server-side SDKs, this means you should set up request or job context before adding steps if you want them to appear on the exception.
+
+### End-to-end example
+
+This example records a few recent checkpoints, then captures the exception. PostHog stores the exception as a `$exception` event with the recent steps attached under `$exception_steps`, and those steps show up in the error's session timeline.
+
+<MultiLanguage>
+
+```javascript file=Web
+posthog.addExceptionStep('checkout_started', {
+  cart_total: 12900,
+  item_count: 3,
+})
+
+posthog.addExceptionStep('payment_attempted', {
+  provider: 'stripe',
+  plan: 'pro',
+})
+
+try {
+  await confirmCardPayment(clientSecret)
+} catch (error) {
+  posthog.captureException(error, {
+    checkout_id: 'chk_123',
+  })
+}
+```
+
+```javascript file=Node.js
+await posthog.withContext({
+  distinctId: 'user_123',
+  sessionId: '<session_id>',
+}, async () => {
+  posthog.addExceptionStep('invoice_generation_started', {
+    invoice_id: 'inv_123',
+    attempt: 1,
+  })
+
+  posthog.addExceptionStep('pdf_upload_requested', {
+    bucket: 'customer-invoices',
+  })
+
+  try {
+    await generateInvoicePdf()
+  } catch (error) {
+    posthog.captureException(error, 'user_123', {
+      job_name: 'generate_invoice_pdf',
+    })
+  }
+})
+```
+
+```python
+import posthog
+from posthog import new_context, identify_context, set_context_session
+
+with new_context():
+    identify_context('user_123')
+    set_context_session('<session_id>')
+
+    posthog.add_exception_step('report_requested', {
+        'report_type': 'weekly_summary',
+        'workspace_id': 'team_123',
+    })
+
+    posthog.add_exception_step('query_started', {
+        'model': 'revenue_rollup',
+    })
+
+    try:
+        generate_report()
+    except Exception as e:
+        posthog.capture_exception(e, properties={
+            'report_id': 'report_123',
+        })
+```
+
+</MultiLanguage>
+
+### Configuring step count and size limits
+
+If your SDK supports exception-step configuration, you should be able to control both:
+
+- the maximum number of buffered steps kept before `captureException(...)` is called
+- the maximum serialized size in bytes that can be attached as exception steps on the final exception event
+
+Use a smaller step count when you only care about the most recent checkpoints, or a larger one when longer flows are important for debugging. Use a smaller byte budget when you need tighter control over payload size.
+
+<MultiLanguage>
+
+```javascript file=Web
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_api_client_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  capture_exceptions: {
+    exception_steps: {
+      enabled: true,
+      max_queue_size: 20,
+      max_bytes: 16384,
+    },
+  },
+})
+```
+
+```javascript file=Node.js
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_api_client_host>',
+  captureExceptions: {
+    exceptionSteps: {
+      enabled: true,
+      maxQueueSize: 20,
+      maxBytes: 16384,
+    },
+  },
+})
+```
+
+```python
+posthog.configure(
+    '<ph_project_token>',
+    host='<ph_api_client_host>',
+    capture_exceptions={
+        'exception_steps': {
+            'enabled': True,
+            'max_queue_size': 20,
+            'max_bytes': 16384,
+        }
+    }
+)
+```
+
+</MultiLanguage>
+
+When the queue is full, SDKs should drop the **oldest** buffered step first so the most recent steps are preserved for the exception.
+
+At capture time, SDKs should then attach the largest in-order set of retained steps that fits within the configured step-count and byte limits.
+
+### How step count and size limits interact
+
+Three limits can control how many steps end up on the final exception event:
+
+1. **Max queue size** limits how many recent buffered steps the SDK keeps in memory.
+2. **Max bytes** limits how much serialized exception-step data can be attached to the final `$exception` event.
+3. **Max event size** limits how many of those retained steps can actually be attached to the final `$exception` event overall.
+
+At capture time, SDKs should:
+
+- start with the retained buffered steps after queue-size eviction
+- keep the steps in chronological order
+- add steps to `$exception_steps` in that order
+- stop once adding the next step would exceed either the configured attached-step count, the configured byte budget, or the final exception event size
+
+This means the number of attached steps can be smaller than the configured queue size. The included steps should always stay in order, and SDKs should prefer dropping later candidate steps rather than reordering earlier ones.
+
+### Step payload guidelines
+
+Keep step payloads small and focused on the details that help explain the failure.
+
+- Use short step names that describe a checkpoint or action.
+- Supported values should be simple JSON types: strings, numbers, booleans, arrays, objects, and `null`.
+- Avoid large nested payloads, raw request bodies, or sensitive data.
+- SDKs may truncate oversized step payloads before building the final `$exception_steps` array.
+- The number of retained candidate steps is controlled by the exception-step max queue size when the SDK exposes that option.
+- The number of attached steps may still be lower if adding more steps would exceed the configured attached-step count, byte budget, or final exception event size.
+- Steps should be attached in order until one of those limits is reached.
+
+A good rule of thumb is to record the information you'd want to see in the timeline while debugging, but not full logs.
+
+### Automatic exception capture
+
+When an SDK supports exception autocapture, automatically captured exceptions should also include the currently buffered exception steps from the active buffer or scope.
+
+This is especially useful when an error is thrown before your code reaches a manual `catch` block.
+
+### Troubleshooting missing steps
+
+If an exception appears in error tracking but no steps show in the timeline:
+
+- Confirm you're using `addExceptionStep(...)` before the failing code path runs.
+- Confirm the exception is sent with `captureException(...)` or SDK autocapture, not `posthog.capture('$exception', ...)`.
+- On the server, confirm the exception and steps run inside the same request, job, or execution scope.
+- Check that step payloads are not too large and don't contain unsupported values.
+- Remember that even valid buffered steps may be omitted if the final exception event reaches its size limit.
+- Make sure the exception is linked to a session if you expect to see the steps in a replay timeline.
+
 ### Error boundaries
 
 Error boundaries let you catch rendering errors in your component tree and report them to PostHog. We currently support error boundaries for:
@@ -359,6 +572,18 @@ import BurstProtection from './_snippets/burst-protection.mdx'
 <BurstProtection />
 
 ## Common problems
+
+### Exception steps don't appear in the session timeline
+
+If you can see the exception in error tracking but not its steps in the timeline, the most common causes are:
+
+- The steps were recorded after the exception was captured.
+- The server-side code didn't have an active request or job scope.
+- The exception wasn't linked to the same user or session as the replay.
+- The step payload was too large and got truncated or dropped.
+
+Start by verifying identification and session linkage, then confirm your steps are being added immediately before the risky operation.
+
 
 ### Don't use `posthog.capture()` for exceptions
 
