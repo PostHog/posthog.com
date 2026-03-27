@@ -4,10 +4,10 @@ import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { getLogo } from 'constants/logos'
 
 const SELF_HOSTED_SOURCES = [
-    { label: 'S3', url: '/docs/cdp/sources/s3', image: getLogo('s3') },
-    { label: 'Google Cloud Storage', url: '/docs/cdp/sources/gcs', image: getLogo('googleCloud') },
-    { label: 'Cloudflare R2', url: '/docs/cdp/sources/r2', image: getLogo('cloudflareR2') },
-    { label: 'Azure Blob', url: '/docs/cdp/sources/azure-blob', image: getLogo('azureBlob') },
+    { label: 'S3', url: '/docs/data-warehouse/sources/s3', image: getLogo('s3') },
+    { label: 'Google Cloud Storage', url: '/docs/data-warehouse/sources/gcs', image: getLogo('googleCloud') },
+    { label: 'Cloudflare R2', url: '/docs/data-warehouse/sources/r2', image: getLogo('cloudflareR2') },
+    { label: 'Azure Blob', url: '/docs/data-warehouse/sources/azure-blob', image: getLogo('azureBlob') },
 ]
 
 interface DWInstallationPlatformsProps {

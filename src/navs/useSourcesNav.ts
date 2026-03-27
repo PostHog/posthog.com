@@ -1,10 +1,10 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
 const SELF_MANAGED_SOURCES = [
-    { name: 'S3', url: '/docs/cdp/sources/s3' },
-    { name: 'Azure Blob', url: '/docs/cdp/sources/azure-blob' },
-    { name: 'Cloudflare R2', url: '/docs/cdp/sources/r2' },
-    { name: 'Google Cloud Storage', url: '/docs/cdp/sources/gcs' },
+    { name: 'S3', url: '/docs/data-warehouse/sources/s3' },
+    { name: 'Azure Blob', url: '/docs/data-warehouse/sources/azure-blob' },
+    { name: 'Cloudflare R2', url: '/docs/data-warehouse/sources/r2' },
+    { name: 'Google Cloud Storage', url: '/docs/data-warehouse/sources/gcs' },
 ]
 
 export default function useSourcesNav(): { url?: string; name: string }[] {
@@ -21,7 +21,7 @@ export default function useSourcesNav(): { url?: string; name: string }[] {
     `)
 
     const managed = allPostHogSource.nodes.map((node: any) => ({
-        url: `/docs/cdp/sources/${node.slug}`,
+        url: `/docs/data-warehouse/sources/${node.slug}`,
         name: node.name,
         ...(node.beta && {
             badge: {

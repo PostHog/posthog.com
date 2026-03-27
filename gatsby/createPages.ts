@@ -946,23 +946,23 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.postHogSources.nodes.forEach((node) => {
         createPage({
-            path: `/docs/cdp/sources/${node.slug}`,
+            path: `/docs/data-warehouse/sources/${node.slug}`,
             component: DataWarehouseSource,
             context: { id: node.id, ignoreWrapper: true },
         })
         createPage({
-            path: `/docs/data-warehouse/sources/${node.slug}`,
+            path: `/docs/cdp/sources/${node.slug}`,
             component: DataWarehouseSource,
             context: { id: node.id, ignoreWrapper: true },
         })
     })
 
-    // Create data-warehouse/sources/* redirects for sources that have hand-written docs
+    // Create cdp/sources/* redirects for sources that have hand-written docs
     result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
         createPage({
-            path: `/docs/data-warehouse/sources/${node.slug}`,
+            path: `/docs/cdp/sources/${node.slug}`,
             component: SourceRedirect,
-            context: { redirectTo: `/docs/cdp/sources/${node.slug}` },
+            context: { redirectTo: `/docs/data-warehouse/sources/${node.slug}` },
         })
     })
 
