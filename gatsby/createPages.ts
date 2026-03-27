@@ -86,6 +86,26 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     rawBody
                 }
             }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
+                    }
+                    rawBody
+                }
+            }
             apidocs: allApiEndpoint {
                 nodes {
                     id
@@ -692,6 +712,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     )
     createPosts(engineeringHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(result.data.productEngineerHandbook.nodes, 'product-engineer', HandbookTemplate, {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
@@ -1014,6 +1038,20 @@ async function createMinimalPages({
                     }
                 }
             }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
             posts: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -1117,10 +1155,15 @@ async function createMinimalPages({
     const data = result.data as {
         docs: { nodes: any[] }
         handbook: { nodes: any[] }
+        productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createBlogPreviewPosts(data.posts.nodes)
 }
