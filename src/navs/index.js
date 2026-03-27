@@ -1832,6 +1832,55 @@ export const handbookSidebar = [
     },
 ]
 
+export const productEngineerHandbookSidebar = [
+    {
+        name: 'Product Engineer Handbook',
+        icon: 'IconBook',
+        color: 'seagreen',
+        children: [
+            {
+                name: 'Chapters',
+            },
+            {
+                name: '1. What is a product engineer?',
+                url: '/product-engineer/what-is-a-product-engineer',
+            },
+            {
+                name: '2. Traits',
+                url: '/product-engineer/traits',
+            },
+            {
+                name: '3. Skills',
+                url: '/product-engineer/skills',
+            },
+            {
+                name: '4. How they work',
+                url: '/product-engineer/product-teams',
+            },
+            {
+                name: '5. Benefits',
+                url: '/product-engineer/benefits',
+            },
+            {
+                name: '6. Culture',
+                url: '/product-engineer/culture',
+            },
+            {
+                name: '7. Antipatterns',
+                url: '/product-engineer/antipatterns',
+            },
+            {
+                name: '8. Getting started',
+                url: '/product-engineer/getting-started',
+            },
+            {
+                name: '9. Further reading',
+                url: '/product-engineer/further-reading',
+            },
+        ],
+    },
+]
+
 export const communityMenu = {
     name: 'Community',
     url: '/community',
@@ -1945,6 +1994,7 @@ export const communityMenu = {
                 },
             ],
         },
+        ...productEngineerHandbookSidebar,
         {
             name: 'Templates',
             icon: 'IconMagic',
