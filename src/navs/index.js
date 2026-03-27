@@ -5722,7 +5722,7 @@ export const docsMenu = {
                         {
                             name: 'OpenClaw',
                             url: '/docs/llm-analytics/installation/openclaw',
-                            icon: 'IconCode',
+                            icon: 'IconOpenClaw',
                         },
                         {
                             name: 'Convex',
