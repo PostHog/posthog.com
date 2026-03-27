@@ -63,7 +63,7 @@ The team-specific tools for this team are:
 
 - Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts.
 - [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
-- [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
+- [Github project board](https://github.com/orgs/PostHog/projects/).
 - [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.
 - [Alfred workflows](https://github.com/PostHog/company-internal/tree/master/onboarding-team).
 
