@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Regular readers will know we think engineers today need to [get involved in product decisions](/product-engineer-handbook/what-is-a-product-engineer), talk to users, and analyze usage data. It’s a core part of how we [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
+Regular readers will know we think engineers today need to [get involved in product decisions](/product-engineer/what-is-a-product-engineer), talk to users, and analyze usage data. It’s a core part of how we [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
 But not all engineers are totally comfortable with using analytics data day-to-day. Often it’s due to working at companies where data is distorted as evidence for bad decisions, or frustration at dealing with overly complex implementations.
 

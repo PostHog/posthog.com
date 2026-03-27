@@ -61,4 +61,4 @@ As noted in an earlier chapter, management should be a part-time activity for a 
 
 A product engineer should be able to describe their [ideal customer profile](/newsletter/ideal-customer-profile-framework) or [user persona](/product-engineers/how-to-create-user-personas), the high-level goals of their company, and the why behind what they're building. Failure to engage on these points is a clear sign someone won't work out. You can't make good decisions about what to build if you don't know, or care to know, the context in which you're building.
 
-**Next chapter:** [Getting started as a product engineer](/product-engineer-handbook/getting-started)
+**Next chapter:** [Getting started as a product engineer](/product-engineer/getting-started)

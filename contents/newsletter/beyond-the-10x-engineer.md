@@ -89,7 +89,7 @@ Because engineers shape the direction of every product, having this trait ensure
 
 ## 4. Customer obsessed
 
-To uncover the real problems users have (and value), [product engineers](/product-engineer-handbook/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
+To uncover the real problems users have (and value), [product engineers](/product-engineer/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
 
 - [Talking to users](/product-engineers/10x-engineers-do-user-interviews), doing user interviews.
 - Recruiting testers for new features and collecting feedback.

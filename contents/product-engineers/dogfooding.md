@@ -106,7 +106,7 @@ We've found three details are key to getting the most out of dogfooding:
 
 1. **Treat your team like a customer.** [Interview them](/newsletter/talk-to-users), ask them for feedback on what you built, use this to guide your next iteration, and repeat. For the best results, go out of your way to ask for feedback and make your ask specific.
 
-2. **Create tighter feedback loops.** At PostHog, we have [product engineers](/product-engineer-handbook/what-is-a-product-engineer) who take full ownership of a product. They both figure out what to build and build it. This means they dogfood and can implement the improvements from dogfooding, iterating rapidly. If you never action feedback, your dogfooding is going to waste.
+2. **Create tighter feedback loops.** At PostHog, we have [product engineers](/product-engineer/what-is-a-product-engineer) who take full ownership of a product. They both figure out what to build and build it. This means they dogfood and can implement the improvements from dogfooding, iterating rapidly. If you never action feedback, your dogfooding is going to waste.
 
 3. **Separate deployment from release.** Doing this enables you to dogfood a change without releasing it to all your users. Using [feature flags](/feature-flags), you can [test in production](/product-engineers/testing-in-production), fix issues, and ship a polished product to users. 
 

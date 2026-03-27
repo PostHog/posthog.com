@@ -106,4 +106,4 @@ An effective small team should have one leader, be able to ship and make decisio
 
 At the time of writing this, PostHog is 187 people organized into 47 teams with an average team size of 4.2 people. Each team lead reports to a member of our exec team, keeping our company structure flat and our teams tight, fast moving, and autonomous.
 
-**Next chapter:** [Antipatterns for product engineers](/product-engineer-handbook/antipatterns)
+**Next chapter:** [Antipatterns for product engineers](/product-engineer/antipatterns)

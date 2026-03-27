@@ -1835,39 +1835,39 @@ export const productEngineerHandbookSidebar = [
             },
             {
                 name: '1. What is a product engineer?',
-                url: '/product-engineer-handbook/what-is-a-product-engineer',
+                url: '/product-engineer/what-is-a-product-engineer',
             },
             {
                 name: '2. Traits',
-                url: '/product-engineer-handbook/traits',
+                url: '/product-engineer/traits',
             },
             {
                 name: '3. Skills',
-                url: '/product-engineer-handbook/skills',
+                url: '/product-engineer/skills',
             },
             {
                 name: '4. How they work',
-                url: '/product-engineer-handbook/product-teams',
+                url: '/product-engineer/product-teams',
             },
             {
                 name: '5. Benefits',
-                url: '/product-engineer-handbook/benefits',
+                url: '/product-engineer/benefits',
             },
             {
                 name: '6. Culture',
-                url: '/product-engineer-handbook/culture',
+                url: '/product-engineer/culture',
             },
             {
                 name: '7. Antipatterns',
-                url: '/product-engineer-handbook/antipatterns',
+                url: '/product-engineer/antipatterns',
             },
             {
                 name: '8. Getting started',
-                url: '/product-engineer-handbook/getting-started',
+                url: '/product-engineer/getting-started',
             },
             {
                 name: '9. Further reading',
-                url: '/product-engineer-handbook/further-reading',
+                url: '/product-engineer/further-reading',
             },
         ],
     },

@@ -61,4 +61,4 @@ Product engineers are intrinsically motivated because [they love building](/blog
 
 Ultimately, building a successful company and product is a team sport, and a long journey. You're much more likely to be successful if the people responsible for building that product feel invested and trusted to build that success.
 
-**Next chapter:** [Creating a product engineering culture](/product-engineer-handbook/culture)
+**Next chapter:** [Creating a product engineering culture](/product-engineer/culture)

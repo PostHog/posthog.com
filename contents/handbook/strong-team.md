@@ -14,7 +14,7 @@ _You're the driver_ is one of our values. 90% of a startup's problems are solved
 
 **Will join us on the journey.** Some people are inspirational to work with – they lift others up. We have a _huge_ opportunity at PostHog, and it often feels like we've caught lightning in a bottle. Anyone joining the company at this stage could make this the last job we all ever need. We want people that will push to get this done, for each other's sake. We don't hire mercenaries. We need to feel people here are producing the best work of their lives.
 
-**Drivers not passengers.** Proactive people that can fully own projects and get them done (or make sure they get help) are what we need. For many of our roles, while it isn't a common job title, internally we have the concept of [product engineers](/product-engineer-handbook/what-is-a-product-engineer) – people who can take high-level requirements, decide what to build, do so with customers, and keep iterating.
+**Drivers not passengers.** Proactive people that can fully own projects and get them done (or make sure they get help) are what we need. For many of our roles, while it isn't a common job title, internally we have the concept of [product engineers](/product-engineer/what-is-a-product-engineer) – people who can take high-level requirements, decide what to build, do so with customers, and keep iterating.
 
 ## Great (and terrible) reasons to join us
 

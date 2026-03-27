@@ -490,7 +490,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Product Engineer Handbook',
-                    link: '/product-engineer-handbook',
+                    link: '/product-engineer',
                 },
                 {
                     type: 'item',

@@ -71,7 +71,7 @@ So we decided to lean into this. At PostHog, PMs no longer own the roadmap, make
 
 Instead, our engineers run the show. They manage product teams. They have complete autonomy and drive our products forward. They even *gasp* [talk to users](/newsletter/talk-to-users).
 
-This is why developers at PostHog are called [product engineers](/product-engineer-handbook/what-is-a-product-engineer). We want them to be opinionated and customer obsessed, and that’s only possible if they have genuine autonomy and responsibility for product decisions.
+This is why developers at PostHog are called [product engineers](/product-engineer/what-is-a-product-engineer). We want them to be opinionated and customer obsessed, and that’s only possible if they have genuine autonomy and responsibility for product decisions.
 
 However, if engineers are to make all the decisions, they still need support…
 

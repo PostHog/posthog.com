@@ -100,6 +100,6 @@ A product engineer's reaction to any difficult problem should always be "this is
 
 This doesn't mean saying yes to every problem or request that comes along – product engineers are opinionated about their work, after all. It means having an open mind about what's possible.
 
-**Next chapter:** [Things product engineers need to know](/product-engineer-handbook/skills).
+**Next chapter:** [Things product engineers need to know](/product-engineer/skills).
 
 <NewsletterForm />

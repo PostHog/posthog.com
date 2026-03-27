@@ -96,7 +96,7 @@ Every problem has its own set of evaluation criteria, but there are some recurri
 
 You'll notice that some of these are business factors and others are technical. 
 
-This is possible because [product engineers](/product-engineer-handbook/what-is-a-product-engineer) can move faster by engaging with and understanding the broader business context, rather than relying on a product or procurement team to evaluate business factors separately.
+This is possible because [product engineers](/product-engineer/what-is-a-product-engineer) can move faster by engaging with and understanding the broader business context, rather than relying on a product or procurement team to evaluate business factors separately.
 
 ## 4. We make decisions asynchronously
 

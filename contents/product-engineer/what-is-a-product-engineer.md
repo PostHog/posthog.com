@@ -80,7 +80,7 @@ Embracing the product engineer mindset requires a complete reset of how organiza
 
 For individuals, being a [product engineer is just plain fun](/blog/why-product-engineering-is-so-fun). When you truly understand and engage with the impact of your work on real users, every line of code you write is more meaningful.
 
-For companies, embracing product engineers and the [culture they need to flourish](/product-engineer-handbook/culture), unlocks the kind of speed and agency that allows small companies to out flank larger incumbents. To spark joy in users and build products they truly love. It's a competitive advantage.
+For companies, embracing product engineers and the [culture they need to flourish](/product-engineer/culture), unlocks the kind of speed and agency that allows small companies to out flank larger incumbents. To spark joy in users and build products they truly love. It's a competitive advantage.
 
 In our experience, nothing is more motivating than working with other talented product engineers. The speed, scale, and ambition of problems you can tackle when product engineers work together is on a different level.
 
@@ -92,4 +92,4 @@ And, as one of our colleagues, Danilo Campos, shared in Slack:
 
 > "We are surrounded by optimists. By people who want things to work, and believe in their bones things CAN work. An astonishing amount is possible when talented people BELIEVE it’s possible. It’s so much fun to do the things you’re good at when everyone is happy you’re good at them."
 
-**Next chapter:** [Traits of product engineers](/product-engineer-handbook/traits).
+**Next chapter:** [Traits of product engineers](/product-engineer/traits).

@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-We build PostHog for [product engineers](/product-engineer-handbook/what-is-a-product-engineer). We define product engineers as full-stack engineers who:
+We build PostHog for [product engineers](/product-engineer/what-is-a-product-engineer). We define product engineers as full-stack engineers who:
 
 - Write full-stack code with a focus on the front end.
 - Enjoy speaking directly with customers and understanding their problems.

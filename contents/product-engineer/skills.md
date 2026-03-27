@@ -65,7 +65,7 @@ At a more advanced level, it could mean:
 
 Product engineers don't need to be data-led per se – over relying on data for decisions is a bit of a red flag, actually – but you do need to be comfortable using data tools, and digging into product usage data when it makes sense to do so.
 
-Product managers can and should support this work, but product engineers shouldn't be wholly reliant on them to gather actionable insights. See [The product's engineer's role in the product team](/product-engineer-handbook/product-teams) for more on how product engineers and product managers can work together.
+Product managers can and should support this work, but product engineers shouldn't be wholly reliant on them to gather actionable insights. See [The product's engineer's role in the product team](/product-engineer/product-teams) for more on how product engineers and product managers can work together.
 
 ## 5. Technologies beyond languages and frameworks 
 
@@ -135,4 +135,4 @@ Whether it's code reviews, UX feedback, or feedback on plans and goals, a huge p
 
 Likewise, a product engineer needs to be great at hearing the substance of feedback and digging into root causes, whether that feedback is coming from users or their colleagues.
 
-**Next chapter:** [The product engineer's role in the product team](/product-engineer-handbook/product-teams)
+**Next chapter:** [The product engineer's role in the product team](/product-engineer/product-teams)

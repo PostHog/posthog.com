@@ -135,6 +135,6 @@ Integrating more of the startup data stack into PostHog enables engineers to con
 
 - [Our simpler goal: Help engineers to be better at product](/blog/helping-engineers-to-product)
 - [The 80/20 of early-stage startup analytics](/blog/early-stage-analytics)
-- [What is a product engineer (and why they're awesome)](/product-engineer-handbook/what-is-a-product-engineer)
+- [What is a product engineer (and why they're awesome)](/product-engineer/what-is-a-product-engineer)
 
 <NewsletterForm />

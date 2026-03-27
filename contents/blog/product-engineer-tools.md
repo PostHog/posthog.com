@@ -16,7 +16,7 @@ tags:
   - Product engineers
 ---
 
-Like every role, [product engineers](/product-engineer-handbook/what-is-a-product-engineer/) have a set of essential tools for their work. Their need to gather insights, ideate, and deploy solutions independently makes creating an efficient stack all the more important. Here we explore the popular engineering, product, and automation tools that will help you gather insights and deploy product improvements fast.
+Like every role, [product engineers](/product-engineer/what-is-a-product-engineer/) have a set of essential tools for their work. Their need to gather insights, ideate, and deploy solutions independently makes creating an efficient stack all the more important. Here we explore the popular engineering, product, and automation tools that will help you gather insights and deploy product improvements fast.
 
 ## Tools for talking to users
 
@@ -103,7 +103,7 @@ Many of these tools trade customizability (and money) for speed and specificity.
 
 ## Further reading
 
-- [What is a product engineer (and why they matter)](/product-engineer-handbook/what-is-a-product-engineer/)
+- [What is a product engineer (and why they matter)](/product-engineer/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
 

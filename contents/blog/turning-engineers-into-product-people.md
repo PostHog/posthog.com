@@ -40,7 +40,7 @@ You can get a sense of project ownership during the hiring phase. At PostHog, we
 
 We also don't care whether they’ve worked at only one company or job-hopped - just that they learned new stuff, grew continuously, and built better products. Likewise, we don’t care whether you dropped out of college or attained a PhD - experience and entrepreneurship are not tied to qualifications. Most people underestimate the four-year head-start one gets by skipping college, especially for a field like computer science where everything you need to know is a Google search away.
 
-Beyond iteration speed, risk-taking, and problem-solving, we’re also looking for _curiosity_ - being willing to ask endless questions about the problem and the solution. For example, is there another way we could structure the dashboard? Do we really need three buttons here or is one enough? Do our users actually care about this feature? These are the types of questions we expect from [product-minded engineers](/product-engineer-handbook/what-is-a-product-engineer).
+Beyond iteration speed, risk-taking, and problem-solving, we’re also looking for _curiosity_ - being willing to ask endless questions about the problem and the solution. For example, is there another way we could structure the dashboard? Do we really need three buttons here or is one enough? Do our users actually care about this feature? These are the types of questions we expect from [product-minded engineers](/product-engineer/what-is-a-product-engineer).
 
 <iframe src="https://giphy.com/embed/3o7btZ1Gm7ZL25pLMs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 

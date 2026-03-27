@@ -3,7 +3,7 @@ title: Getting started as a product engineer
 showTitle: true
 ---
 
-If you've read this far, you should have a reasonably coherent idea of what's needed to work like a product engineer – we suggest [going to chapter 1](/product-engineer-handbook/what-is-a-product-engineer) if you landed here first.
+If you've read this far, you should have a reasonably coherent idea of what's needed to work like a product engineer – we suggest [going to chapter 1](/product-engineer/what-is-a-product-engineer) if you landed here first.
 
 These tips are intended to help you get started on your journey. This isn't a checklist you need to complete in order, but a series of jumping off points for learning the craft of a product engineer. Start wherever you want and see where you end up.
 
@@ -75,4 +75,4 @@ Get into the habit of writing up notes. They don't have to be super detailed or 
 
 This exercise is all about building and refining your product sense, the less obvious and indefinable things that make a product nice to use or not. Learning the patterns that successful products lean into, and the ones that are common to less successful products.
 
-**Next chapter:** [Further reading for product engineers](/product-engineer-handbook/further-reading)
+**Next chapter:** [Further reading for product engineers](/product-engineer/further-reading)

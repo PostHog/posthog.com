@@ -77,7 +77,7 @@ If all this sounds like a unicorn, you aren’t wrong. This is again why we find
 
 ![Growth engineers' power](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/thanos.png)
 
-> **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/product-engineer-handbook/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
+> **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/product-engineer/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
 <NewsletterForm />
 
@@ -132,7 +132,7 @@ From our experience, we'd recommend the technical and entrepreneurial growth eng
 
 ## Further reading
 
-- [What is a product engineer (and why they're awesome)](/product-engineer-handbook/what-is-a-product-engineer)
+- [What is a product engineer (and why they're awesome)](/product-engineer/what-is-a-product-engineer)
 - [What we've learned about multi-product pricing (so far)](/blog/multi-product-pricing)
 - [Why 'Product Engineer' is the most fun role I've had in tech](/blog/why-product-engineering-is-so-fun)
 - [WTF is a forward-deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer)

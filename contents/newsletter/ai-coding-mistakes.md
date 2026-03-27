@@ -75,7 +75,7 @@ Of course, engineers have built a whole set of non-AI (😱) tools for preventin
 - IDE tooling like PyCharm, JetBrains' testing suite, and IntelliJ.
 - Style guides and [coding standards](/handbook/engineering/conventions/backend-coding).
 
-Developers, especially [product engineers](/product-engineer-handbook/what-is-a-product-engineer), were already relying on tools like these prior to AI. AI has just made these deterministic checks and guardrails even more important.
+Developers, especially [product engineers](/product-engineer/what-is-a-product-engineer), were already relying on tools like these prior to AI. AI has just made these deterministic checks and guardrails even more important.
 
 Like AI, the rise in importance of these tools isn't expected to slow down either. As [Gergely from Pragmatic Engineer](https://newsletter.pragmaticengineer.com/p/software-engineering-with-llms-in-2025) says:
 
@@ -116,7 +116,7 @@ Identifying what AI is and isn't good at also helps you at a meta level. It stop
 
 ## 4. Being content with your existing workflow
 
-A personality trait of a [great product engineer](/product-engineer-handbook/what-is-a-product-engineer) is that they are always experimenting. When it comes to AI tools, this is no different. 
+A personality trait of a [great product engineer](/product-engineer/what-is-a-product-engineer) is that they are always experimenting. When it comes to AI tools, this is no different. 
 
 Our team is always testing (and talking about) new tools and approaches. There have been 1,104 messages with the word "Cursor" in our Slack, 187 with "Claude Code." This started early and is led by [our cofounders](/newsletter/how-to-not-breakup-with-your-cofounder). 
 

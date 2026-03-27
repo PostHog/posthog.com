@@ -122,7 +122,7 @@ There are two key points here.
 
 ### 1. Be clear about what you need from people
 
-For example, we have this guidance for our [product engineers](/product-engineer-handbook/what-is-a-product-engineer):
+For example, we have this guidance for our [product engineers](/product-engineer/what-is-a-product-engineer):
 
 **Good product engineers:**
 

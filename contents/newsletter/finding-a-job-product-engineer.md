@@ -16,7 +16,7 @@ crosspost:
   - Blog
 ---
 
-Regular readers will know we're big believers in [product engineers](/product-engineer-handbook/what-is-a-product-engineer) – it's literally the [point of this newsletter](https://newsletter.posthog.com/p/what-is-product-for-engineers). We define this as someone who:
+Regular readers will know we're big believers in [product engineers](/product-engineer/what-is-a-product-engineer) – it's literally the [point of this newsletter](https://newsletter.posthog.com/p/what-is-product-for-engineers). We define this as someone who:
 
 * Makes and owns product decisions  
 * Talks to users and cares deeply about their needs  

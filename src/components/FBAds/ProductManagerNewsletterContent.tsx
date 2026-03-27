@@ -132,7 +132,7 @@ export default function ProductManagerNewsletterContent(): JSX.Element {
 
                 <p>
                     This is why developers at PostHog are called{' '}
-                    <Link to="/product-engineer-handbook/what-is-a-product-engineer">product engineers</Link>. We want
+                    <Link to="/product-engineer/what-is-a-product-engineer">product engineers</Link>. We want
                     them to be opinionated and customer obsessed, and that's only possible if they have genuine autonomy
                     and responsibility for product decisions.
                 </p>

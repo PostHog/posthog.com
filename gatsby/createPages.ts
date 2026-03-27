@@ -87,7 +87,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             productEngineerHandbook: allMdx(
-                filter: { fields: { slug: { regex: "/^/product-engineer-handbook/" } }, frontmatter: { title: { ne: "" } } }
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
             ) {
                 nodes {
                     id
@@ -714,9 +714,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(
         result.data.productEngineerHandbook.nodes,
-        'product-engineer-handbook',
+        'product-engineer',
         HandbookTemplate,
-        { name: 'Product Engineer Handbook', url: '/product-engineer-handbook' }
+        { name: 'Product Engineer Handbook', url: '/product-engineer' }
     )
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
