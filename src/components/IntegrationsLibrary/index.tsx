@@ -99,23 +99,28 @@ export default function IntegrationsLibrary(): JSX.Element {
     `)
 
     const selfHostedSources = [
-        { name: 'S3', slug: 's3', icon_url: '/static/services/s3.png', description: 'Link S3 data to PostHog' },
+        {
+            name: 'S3',
+            slug: 's3',
+            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/s3_8f86e011ce.svg',
+            description: 'Link S3 data to PostHog',
+        },
         {
             name: 'Google Cloud Storage',
             slug: 'gcs',
-            icon_url: '/static/services/google-cloud-storage.png',
+            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Cloud_14ebf7693d.svg',
             description: 'Link Google Cloud Storage data to PostHog',
         },
         {
             name: 'Cloudflare R2',
             slug: 'r2',
-            icon_url: '/static/services/cloudflare-r2.png',
+            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
             description: 'Link Cloudflare R2 data to PostHog',
         },
         {
             name: 'Azure Blob',
             slug: 'azure-blob',
-            icon_url: '/static/services/azure-blob-storage.png',
+            icon_url: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_blob_storage_a5110351f6.svg',
             description: 'Link Azure Blob data to PostHog',
         },
     ]
