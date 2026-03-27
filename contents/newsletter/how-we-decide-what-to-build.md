@@ -78,7 +78,7 @@ For example, **mobile replay**, in the top right corner (high impact, high effor
 
 This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for [validating the idea](/newsletter/validating-product-ideas), implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
 
-The unique qualities of [product engineers](/blog/what-is-a-product-engineer) are key here. They have all the skills needed to take an idea to a fully-featured, revenue-generating product. This enables them to work with a high degree of autonomy and speed.
+The unique qualities of [product engineers](/product-engineer/what-is-a-product-engineer) are key here. They have all the skills needed to take an idea to a fully-featured, revenue-generating product. This enables them to work with a high degree of autonomy and speed.
 
 This is counter to a larger, ownership-avoidant team. Their process for choosing what to build might look like:
 
