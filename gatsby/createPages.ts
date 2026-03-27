@@ -1040,6 +1040,20 @@ async function createMinimalPages({
                     }
                 }
             }
+            productEngineerHandbook: allMdx(
+                filter: { fields: { slug: { regex: "/^/product-engineer/" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
             posts: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -1143,10 +1157,15 @@ async function createMinimalPages({
     const data = result.data as {
         docs: { nodes: any[] }
         handbook: { nodes: any[] }
+        productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
+    createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
+        name: 'Product Engineer Handbook',
+        url: '/product-engineer',
+    })
     createBlogPreviewPosts(data.posts.nodes)
 }
