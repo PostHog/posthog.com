@@ -1,0 +1,49 @@
+The Slack source syncs your workspace's channels, users, and messages into PostHog.
+
+| Table                | Description                                                  | Sync type    |
+| -------------------- | ------------------------------------------------------------ | ------------ |
+| `$channels`          | Public and private channels the Slack bot can access         | Full refresh |
+| `$users`             | Workspace members                                            | Full refresh |
+| Per-channel messages | One table per channel containing messages and thread replies | Incremental  |
+
+Each Slack channel creates its own messages table. Tables use the channel ID as an identifier (not the channel name), so renaming a channel in Slack won't break your sync.
+
+## Requirements
+
+- A Slack workspace where you have permission to install apps.
+- The PostHog Slack integration requires the following OAuth scopes: `channels:read`, `groups:read`, `channels:history`, `groups:history`, `users:read`, `users:read.email`, `reactions:read`.
+
+<CalloutBox icon="IconWarning" title="Existing Slack integrations need to reconnect" type="caution">
+
+If you already have a Slack integration connected to PostHog (e.g. for notifications or workflow destinations), you'll need to reconnect it to grant the additional OAuth scopes required by the data warehouse source.
+
+</CalloutBox>
+
+## Linking Slack as a source
+
+1. Go to the [Data pipeline sources tab](https://app.posthog.com/data-management/sources) in PostHog.
+2. Click **New source** and select **Slack**.
+3. Log in to your Slack workspace and authorize PostHog to access your data.
+4. _(Optional)_ Add a prefix to your table names.
+5. Select the tables you want to import.
+6. Click **Import**.
+
+## Synced data
+
+### Channels
+
+The `$channels` table contains metadata about the Slack channels the bot can access, including channel name, topic, purpose, and member count.
+
+### Users
+
+The `$users` table contains workspace member profiles, including display name, email, and status.
+
+### Messages
+
+Each channel you choose to sync gets its own table. Messages include:
+
+- Message text and metadata
+- Thread replies (included in the same table as the parent channel)
+- Reactions
+
+Messages support **incremental sync**, meaning only new messages since the last sync are fetched. The `$channels` and `$users` tables do a full refresh on each sync.
