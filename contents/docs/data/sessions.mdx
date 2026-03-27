@@ -166,7 +166,7 @@ If the events are logically part of the same session, e.g. a user starts a purch
 If you enable tracing headers within the JavaScript SDK, the session ID will be sent on every request. You can enable tracing headers by adding the `__add_tracing_headers` option to your `posthog.init` call:
 
 ```ts
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     __add_tracing_headers: ['your-backend-domain.com'] // +
 })
 ```

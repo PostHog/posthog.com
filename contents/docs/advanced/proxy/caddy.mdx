@@ -106,14 +106,14 @@ In your application code, update your PostHog initialization to use your trackin
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -229,7 +229,7 @@ If you want to test your proxy locally, create a file named `home.html` in the s
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: 'http://localhost:2015/ph-proxy',
       ui_host: 'https://us.posthog.com' // US, or https://eu.posthog.com for EU
     })
@@ -261,14 +261,14 @@ For production deployment, update your application code to use your proxy path:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/ph-proxy',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://yourdomain.com/ph-proxy',
   ui_host: 'https://eu.posthog.com'
 })
@@ -387,14 +387,14 @@ In your application code, update your PostHog initialization to use your trackin
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
 ```js file=EU
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
 })
@@ -443,7 +443,7 @@ If PostHog returns `401 Unauthorized` when capturing events:
 
 1. Verify you set `header_up Host` to the correct PostHog domain
 2. Check that your PostHog region matches
-3. Confirm your project API key is correct in the SDK initialization
+3. Confirm your project token is correct in the SDK initialization
 
 The `header_up Host` directive is essential. PostHog uses the Host header to identify which project the request belongs to. Without it, PostHog can't authenticate your events.
 

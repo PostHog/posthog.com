@@ -67,7 +67,7 @@ export default function RootLayout() {
 
   return (
     <PostHogProvider
-      apiKey="<ph_project_api_key>"
+      apiKey="<ph_project_token>"
       options={{
         host: "<ph_client_api_host>", // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
       }}

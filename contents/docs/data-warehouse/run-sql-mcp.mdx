@@ -1,0 +1,82 @@
+---
+title: Run SQL and manage views with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, and explore your schema directly from your code editor. Query events, create and materialize views, and work with warehouse tables – without switching to the PostHog app.
+
+This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
+
+## How it works
+
+
+With MCP, your coding agent can:
+
+- **Run ad-hoc queries** – "How many `purchase_completed` events happened this week?" to quickly check data
+- **Explore your schema** – "What tables do I have?" or "Show me the columns in `stripe_charges`" to discover available data
+- **Generate queries from questions** – "Write a HogQL query to find the top users by event count" to get a query you can refine
+- **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
+- **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
+
+## SQL tools
+
+The MCP server provides these tools for running SQL:
+
+| Tool | Description |
+|------|-------------|
+| `query-run` | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions. |
+| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
+| `property-definitions` | List all event and person properties in your project. Useful for understanding what data is available before writing a query. |
+| `event-definitions-list` | List all event definitions in your project with volume and usage data. |
+
+## View management tools
+
+The MCP server also provides tools for managing [Data Warehouse views](/docs/data-warehouse/views):
+
+| Tool | Description |
+|------|-------------|
+| `warehouse-saved-queries-list` | List all saved views in your project with their materialization status, sync frequency, and column schema. |
+| `warehouse-saved-queries-retrieve` | Get full details of a specific view by ID, including its HogQL query and run history. |
+| `warehouse-saved-queries-create` | Create a new view from a HogQL query. Upserts by name if a view with the same name exists. |
+| `warehouse-saved-queries-partial-update` | Update a view's name, HogQL query, or sync frequency. |
+| `warehouse-saved-queries-destroy` | Delete a view (soft delete). |
+| `warehouse-saved-queries-materialize-create` | Enable materialization for a view with a 24-hour refresh schedule. |
+| `warehouse-saved-queries-revert-materialization-create` | Revert a materialized view back to a virtual query. |
+| `warehouse-saved-queries-run-create` | Trigger a manual refresh of a materialized view. |
+| `warehouse-saved-queries-run-history-retrieve` | Get the last 5 materialization run statuses for a view. |
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Run a HogQL query to find the top 10 events by count today.`
+- `What tables are available in my data warehouse?`
+- `Write a query joining events with stripe_subscriptions to find revenue per user.`
+- `Generate a HogQL query to calculate weekly active users by cohort.`
+- `Show me 5 sample rows from the hubspot_contacts table.`
+- `What properties are available on the purchase_completed event?`
+
+For querying alerts:
+
+- `Query system.alerts to find all enabled alerts in the project.`
+- `Show me alerts that check hourly and their last check results.`
+- `Write a HogQL query to find alerts that fired in the last week.`
+
+For view management:
+
+- `List all my saved views in the data warehouse.`
+- `Create a view called 'daily_active_users' that counts distinct user_ids per day.`
+- `Materialize my 'revenue_summary' view for faster queries.`
+- `Trigger a refresh of my 'user_metrics' materialized view.`
+- `Show me the run history for my 'sales_data' view.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.

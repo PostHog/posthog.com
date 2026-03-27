@@ -92,6 +92,7 @@ export const fullstory = {
                 free_tier: true, // https://www.fullstory.com/FullstoryFree
             },
             features: {
+                ai_summaries: 'Add-on',
                 canvas_recording: true,
                 chat_with_recordings: false,
                 // https://help.fullstory.com/hc/en-us/articles/360020623854-Is-it-possible-to-rate-limit-or-sample-with-Fullstory
@@ -142,21 +143,15 @@ export const fullstory = {
                     rage_taps: true,
                 },
             },
-            // https://www.fullstory.com/plans/
-            ai: {
-                features: {
-                    ai_summaries: 'Add-on',
-                },
-            },
         },
         feature_flags: {
             available: false,
         },
         surveys: {
-            available: false,
+            available: true,
             platforms: {
                 features: {
-                    web: false,
+                    web: true,
                     mobile: false,
                 },
             },
@@ -177,10 +172,17 @@ export const fullstory = {
             features: {
                 issue_management: false,
                 performance_monitoring: false,
+                stack_tracing: true, // https://help.fullstory.com/hc/en-us/articles/360020828533-How-do-I-use-the-Fullstory-Console
             },
         },
         dashboards: {
             available: true,
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
         },
     },
     platform: {
@@ -188,6 +190,7 @@ export const fullstory = {
             open_source: false,
             reverse_proxy: true,
             self_host: false,
+            eu_hosting: true,
         },
         pricing: {
             free_tier: true,
@@ -231,6 +234,7 @@ export const fullstory = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,

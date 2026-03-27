@@ -132,7 +132,7 @@ The key settings are:
 // Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
 
     // Disable all flag requests in test environments
@@ -158,7 +158,7 @@ posthog.init('<ph_project_api_key>', {
 // Detect test/CI environment
 val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
 
-val config = PostHogConfig(apiKey = "<ph_project_api_key>").apply {
+val config = PostHogConfig(apiKey = "<ph_project_token>").apply {
     if (isTestEnv) {
         // Disable flag requests entirely
         preloadFeatureFlags = false
@@ -182,7 +182,7 @@ if (isTestEnv) {
 // Detect test/CI environment
 let isTestEnv = ProcessInfo.processInfo.environment["CI"] != nil
 
-let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+let config = PostHogConfig(apiKey: "<ph_project_token>")
 
 if isTestEnv {
     config.preloadFeatureFlags = false
@@ -203,7 +203,7 @@ if isTestEnv {
 // Detect test/CI environment
 final isTestEnv = Platform.environment['CI'] != null;
 
-final config = PostHogConfig('<ph_project_api_key>');
+final config = PostHogConfig('<ph_project_token>');
 
 if (isTestEnv) {
     config.preloadFeatureFlags = false;
@@ -224,7 +224,7 @@ if (isTestEnv) {
 // Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
-const posthog = await Posthog.initAsync('<ph_project_api_key>', {
+const posthog = await Posthog.initAsync('<ph_project_token>', {
     host: '<ph_client_api_host>',
     ...(isTestEnv && {
         preloadFeatureFlags: false,
@@ -267,7 +267,7 @@ This shows you every SDK, domain, and version currently making requests, so you 
 If you find environments that don't need feature flags, replays, or surveys, disable them entirely using `advanced_disable_feature_flags`:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   advanced_disable_feature_flags: true // Disables feature flags, surveys, and session recording
 })
 ```

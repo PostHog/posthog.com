@@ -529,7 +529,9 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                 <>
                     {/* Backdrop for mobile overlay - only visible on small screens */}
                     <motion.div
-                        className="fixed inset-0 top-[37px] bg-black/50 z-40 @2xl/app-reader:hidden"
+                        className={`fixed inset-0 bg-black/50 z-40 @2xl/app-reader:hidden ${
+                            websiteMode ? 'top-0' : 'top-[37px]'
+                        }`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1, transition: { duration: 0.2 } }}
                         exit={{ opacity: 0, transition: { duration: 0.2 } }}
@@ -541,8 +543,8 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                         id="nav"
                         className={`flex-shrink-0 overflow-hidden text-primary ${
                             websiteMode
-                                ? 'sticky top-[49px] self-start h-[calc(100vh-48px)] ml-2 -mb-[50px]'
-                                : ` mb-[-47px] fixed left-2 top-[47px] bottom-16 z-50 @2xl/app-reader:static @2xl/app-reader:z-auto @2xl app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto`
+                                ? 'fixed left-2 top-2 bottom-2 z-50 @2xl/app-reader:sticky @2xl/app-reader:top-[49px] @2xl/app-reader:z-auto @2xl/app-reader:left-auto @2xl/app-reader:bottom-auto @2xl/app-reader:self-start @2xl/app-reader:h-[calc(100vh-48px)] @2xl/app-reader:ml-2 @2xl/app-reader:-mb-[50px]'
+                                : 'mb-[-47px] fixed left-2 top-[47px] bottom-16 z-50 @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto'
                         }`}
                         initial={{
                             width: '250px',
@@ -561,7 +563,9 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                     >
                         <motion.div
                             className={`h-full rounded @2xl/app-reader:rounded-none ${
-                                websiteMode ? 'pt-2' : 'pt-4 bg-primary @2xl/app-reader:pt-0'
+                                websiteMode
+                                    ? 'p-4 bg-primary @2xl/app-reader:p-0 @2xl/app-reader:pt-2 @2xl/app-reader:pb-0 @2xl/app-reader:bg-transparent'
+                                    : 'pt-4 bg-primary @2xl/app-reader:pt-0'
                             }`}
                             initial={{ opacity: 1 }}
                             animate={{
@@ -763,6 +767,29 @@ function ReaderViewContent({
                                 proseSize
                             )} max-w-none relative`}
                         >
+                            {websiteMode && (
+                                <div className="border-b border-primary [&>*]:bg-primary">
+                                    <HeaderBar
+                                        isNavVisible={isNavVisible}
+                                        isTocVisible={isTocVisible}
+                                        onToggleNav={toggleNav}
+                                        onToggleToc={toggleToc}
+                                        showSearch
+                                        showToc
+                                        showSidebar={showSidebar}
+                                        hasLeftSidebar={renderLeftSidebar}
+                                        searchContentRef={contentRef}
+                                        homeURL={homeURL}
+                                        bookmark={{
+                                            title,
+                                            description,
+                                        }}
+                                        rightActionButtons={rightActionButtons}
+                                        isEditing={isEditing}
+                                        onSearch={onSearch}
+                                    />
+                                </div>
+                            )}
                             {header && (
                                 <header className="relative">
                                     <CloudinaryImage
@@ -901,7 +928,8 @@ function ReaderViewContent({
                                             <a href="/error-tracking">error tracking</a>,{' '}
                                             <a href="/feature-flags">feature flags</a>,{' '}
                                             <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                            <a href="/llm-analytics">LLM analytics</a>,{' '}
+                                            <a href="/llm-analytics">LLM analytics</a>, <a href="/logs">logs</a>,{' '}
+                                            <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
                                             <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
                                             <a href="/ai">AI product assistant</a> to help debug your code, ship
                                             features faster, and keep all your usage and customer data in one stack.
@@ -996,7 +1024,7 @@ function ReaderViewContent({
                 >
                     <motion.div
                         className={`flex-shrink-0 transition-all min-w-0 ${
-                            websiteMode ? 'pr-4 box-content bg-primary' : ''
+                            websiteMode ? '@2xl:pr-4 box-content bg-primary' : ''
                         } ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'}`}
                     >
                         {/* this space intentionally left blank */}

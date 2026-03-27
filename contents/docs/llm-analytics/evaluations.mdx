@@ -6,7 +6,10 @@ import BetaCallout from "./_snippets/beta.mdx"
 
 <BetaCallout />
 
-Evaluations automatically assess the quality of your LLM [generations](/docs/llm-analytics/generations) using an "LLM-as-a-judge" approach. Each evaluation runs a customizable prompt against your generations and returns a pass/fail result with reasoning.
+Evaluations automatically assess the quality of your LLM [generations](/docs/llm-analytics/generations) and return a pass/fail result with reasoning. PostHog supports two types of evaluations:
+
+- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
+- **Code-based (Hog)** – Runs deterministic code you write against each generation. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
 
 ## Why use evaluations?
 
@@ -15,13 +18,25 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/llm
 - **Track quality trends** – See pass rates across models, prompts, or user segments over time.
 - **Debug with reasoning** – Each evaluation provides an explanation for its decision, making it easy to understand failures.
 
-## How evaluations work
+## Choosing an evaluation type
+
+| | LLM-as-a-judge | Code-based (Hog) |
+|---|---|---|
+| **Best for** | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) |
+| **Cost** | LLM API call per evaluation | Free |
+| **Speed** | Seconds | Milliseconds |
+| **Consistency** | May vary between runs | Deterministic — same input always produces same result |
+| **Setup** | Write a prompt | Write Hog code |
+
+## LLM-as-a-judge evaluations
+
+### How they work
 
 When a [generation](/docs/llm-analytics/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
 
 You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
-## Built-in templates
+### Built-in templates
 
 PostHog provides five pre-built evaluation templates to get you started:
 
@@ -33,25 +48,20 @@ PostHog provides five pre-built evaluation templates to get you started:
 | **Hallucination** | Made-up facts or unsupported claims | RAG systems, knowledge bases |
 | **Toxicity** | Harmful, offensive, or inappropriate content | User-facing applications |
 
-## Creating an evaluation
+### Creating an LLM judge evaluation
 
 1. Navigate to **LLM analytics** > **Evaluations**
 2. Click **New evaluation**
-3. Choose a template or start from scratch
-4. Configure the evaluation:
+3. Select **LLM-as-a-judge** as the evaluation type
+4. Choose a template or start from scratch
+5. Configure the evaluation:
    - **Name**: A descriptive name for the evaluation
    - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
    - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
-5. Enable the evaluation and click **Save**
+6. Enable the evaluation and click **Save**
 
-## Viewing results
-
-The **Evaluations** tab shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the LLM judge.
-
-You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
-
-## Writing custom prompts
+### Writing custom prompts
 
 When creating a custom evaluation, your prompt should instruct the LLM judge to return `true` (pass) or `false` (fail) along with reasoning. The judge receives the generation's input and output for context.
 
@@ -75,10 +85,172 @@ Return true if the response follows these guidelines, false otherwise.
 Explain your reasoning briefly.
 ```
 
+## Code-based evaluations (Hog)
+
+Code-based evaluations run [Hog](/docs/hog) code you write against each generation. They execute in milliseconds with zero LLM cost, making them ideal for high-volume, deterministic checks.
+
+### How they work
+
+1. You write Hog code that inspects the generation's input and output.
+2. On save, PostHog compiles your code to bytecode.
+3. When a generation is sampled, the code runs against it in PostHog's HogVM.
+4. Your code must return `true` (pass) or `false` (fail). Use `print()` to add reasoning.
+5. If `allows_na` is enabled, returning `null` marks the result as N/A (not applicable).
+
+Code-based evaluations share the same sampling rate and property filter options as LLM judge evaluations.
+
+### Available globals
+
+Your Hog code has access to these variables:
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `input` | string or object | The LLM input (prompt or messages array) |
+| `output` | string or object | The LLM output (response or choices) |
+| `properties` | object | All event properties from the generation |
+| `event.uuid` | string | The event UUID |
+| `event.event` | string | The event name |
+| `event.distinct_id` | string | The distinct ID of the user |
+
+### Creating a code-based evaluation
+
+1. Navigate to **LLM analytics** > **Evaluations**
+2. Click **New evaluation**
+3. Select **Code-based (Hog)** as the evaluation type
+4. Write your Hog code in the editor
+5. Click **Test on sample** to run your code against recent generations and verify it works
+6. Configure:
+   - **Name**: A descriptive name for the evaluation
+   - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
+   - **Allows N/A**: Whether your code can return `null` to skip inapplicable generations
+   - **Property filters** (optional): Narrow which generations to evaluate
+7. Enable the evaluation and click **Save**
+
+### Writing Hog evaluation code
+
+Your code must return a boolean: `true` for pass, `false` for fail. Use `print()` statements to provide reasoning — the output is captured and stored alongside the result.
+
+> **Hog tip:** Use single quotes for strings (`'hello'`), `length()` instead of `len()`, and wrap property access with `ifNull()` to avoid null comparison errors.
+
+**Check output length:**
+
+```hog
+let maxLength := 2000
+let outputLength := length(ifNull(output, ''))
+
+if (outputLength > maxLength) {
+    print('Output too long: ' + toString(outputLength) + ' characters (max ' + toString(maxLength) + ')')
+    return false
+}
+
+print('Output length OK: ' + toString(outputLength) + ' characters')
+return true
+```
+
+**Check for required keywords:**
+
+```hog
+let requiredKeywords := ['disclaimer', 'not financial advice']
+let outputLower := lower(ifNull(output, ''))
+
+for (let i := 0; i < length(requiredKeywords); i := i + 1) {
+    if (outputLower !ilike '%' + requiredKeywords[i] + '%') {
+        print('Missing required keyword: ' + requiredKeywords[i])
+        return false
+    }
+}
+
+print('All required keywords found')
+return true
+```
+
+**Check model and cost thresholds:**
+
+```hog
+let model := ifNull(properties.$ai_model, 'unknown')
+let cost := ifNull(properties.$ai_total_cost_usd, 0)
+let maxCost := 0.05
+
+if (cost > maxCost) {
+    print('Cost too high for model ' + model + ': $' + toString(cost))
+    return false
+}
+
+print('Cost within budget: $' + toString(cost))
+return true
+```
+
+**Return N/A for non-applicable generations** (requires `allows_na` enabled):
+
+```hog
+let model := ifNull(properties.$ai_model, '')
+
+// Only evaluate GPT-4 generations
+if (model !ilike '%gpt-4%') {
+    print('Skipping non-GPT-4 model: ' + model)
+    return null
+}
+
+// Check that the output is non-empty
+if (length(ifNull(output, '')) == 0) {
+    print('Empty output from GPT-4')
+    return false
+}
+
+print('GPT-4 output OK')
+return true
+```
+
+### Testing on sample data
+
+Before saving, use the **Test on sample** button to run your code against recent generations. This shows:
+
+- The input and output from each sampled generation
+- Whether your code returned pass, fail, or N/A
+- Any `print()` output (reasoning)
+- Any errors in your code
+
+Testing does not create evaluation events or affect your data — it runs entirely in preview mode.
+
+### Using AI to generate evaluations
+
+Click **Generate with AI** in the code editor to open Max, PostHog's AI assistant, with your evaluation context pre-loaded. Max can help you:
+
+- Write Hog evaluation code from a description of what you want to check
+- Debug errors in your existing code
+- Iterate on the logic by testing and refining
+
+## Managing evaluations via MCP
+
+You can also manage evaluations through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
+
+The MCP server provides six evaluation management tools:
+
+| Tool | Description |
+|------|-------------|
+| `evaluations-get` | List evaluations with optional search and enabled filter |
+| `evaluation-get` | Get a specific evaluation by UUID |
+| `evaluation-create` | Create LLM judge or Hog code evaluations |
+| `evaluation-update` | Update evaluation config, name, or enabled status |
+| `evaluation-delete` | Delete an evaluation (soft delete) |
+| `evaluation-run` | Trigger an async evaluation run on a specific generation event |
+
+This enables teams to manage evaluations programmatically from agent workflows without using the web UI.
+
+## Viewing results
+
+The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the evaluation.
+
+You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
+
 ## Pricing
 
 Each evaluation run counts as one LLM analytics event toward your quota.
 
-Evaluations use an LLM judge to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Google Gemini, Anthropic, or OpenRouter in [project settings](https://app.posthog.com/llm-analytics/settings) to keep running evaluations.
+**LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Google Gemini, Anthropic, OpenRouter, or Fireworks in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok) to keep running evaluations.
+
+If a provider API key becomes invalid or encounters an error, PostHog displays a warning banner on the evaluations page so you can take action quickly. Update or replace the key in [**Settings** > **LLM analytics**](https://app.posthog.com/settings/environment-llm-analytics#llm-analytics-byok).
+
+**Code-based evaluations** have no LLM cost — they run your Hog code directly with no external API calls.
 
 Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.

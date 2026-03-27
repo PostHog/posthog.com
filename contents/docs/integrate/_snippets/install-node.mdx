@@ -4,19 +4,19 @@ import InstallNodePackageManagers from "./install-node-package-managers.mdx"
 
 <InstallNodePackageManagers />
 
-In your app, set your project API key **before** making any calls.
+In your app, set your project token **before** making any calls.
 
 ```node
 import { PostHog } from 'posthog-node'
 
 const client = new PostHog(
-    '<ph_project_api_key>',
+    '<ph_project_token>',
     { host: '<ph_client_api_host>' }
 )
 
 await client.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
 ```
 
-You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
 
-> **Note:** As a rule of thumb, we do not recommend hardcoding API keys. Setting it as an environment variable is preferred.
+> **Note:** As a rule of thumb, we do not recommend hardcoding API keys or tokens. Setting it as an environment variable is preferred.

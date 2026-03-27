@@ -66,7 +66,7 @@ After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 npm i posthog-js
 ```
 
-Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project API key and instance address and export a provider component. If you have a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.
+Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project token and instance address and export a provider component. If you have a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.
 
 ```js
 // app/providers.js
@@ -77,7 +77,7 @@ import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       ui_host: '<ph_app_host>',
       defaults: '<ph_posthog_js_defaults>',

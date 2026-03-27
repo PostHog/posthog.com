@@ -16,7 +16,7 @@ tags:
   - Product engineers
 ---
 
-Are [product engineers](/blog/what-is-a-product-engineer) a better choice for your startup than product managers are, or do you need both? To answer that, this post compares the approaches they take to product development, like we recently did with [product engineers and software engineers](/blog/product-engineer-vs-software-engineer), if you're interested.
+Are [product engineers](/product-engineer/what-is-a-product-engineer) a better choice for your startup than product managers are, or do you need both? To answer that, this post compares the approaches they take to product development, like we recently did with [product engineers and software engineers](/blog/product-engineer-vs-software-engineer), if you're interested.
 
 The ELI5 here is product engineers are a hybrid of software engineer and product manager. They have the same goals as product managers, but they ship code and approach problems in a more direct, iterative way, like software engineers. To help you understand both roles, we:
 - Compare how both work to build a product
@@ -29,7 +29,7 @@ Developing a product is a journey. The goal of the journey is to launch a succes
 
 ### Stage 1: Beginning the product development journey
 
-Both product engineers and managers are responsible for the start of the journey, figuring out what to work on. This means talking to users, analyzing usage data, understanding the competitive landscape, and using all this knowledge to prioritize work. Both translate user needs into product requirements.
+Both product engineers and managers are responsible for the start of the journey, figuring out what to work on. This means talking to users, analyzing usage data, [understanding the competitive landscape](/newsletter/what-does-a-product-manager-do), and using all this knowledge to prioritize work. Both translate user needs into product requirements.
 
 Product managers go into further depth here, often writing up reports and recommendations on their findings. This requires stronger analysis and research skills. Product engineers write issues and todos then move onto building as fast as possible. This makes product engineers ideal for early-stage startups, where shipping quickly and iterating is preferable to drawn out discovery work.
 
@@ -77,7 +77,7 @@ The future of building great products contains both product engineers and produc
 
 ## Further reading
 
-- [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
+- [What is a product engineer (and why they matter)](/product-engineer/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
 

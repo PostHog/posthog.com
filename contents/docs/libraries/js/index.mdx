@@ -25,6 +25,12 @@ import JSInstall from '../../integrate/_snippets/install-web.mdx'
 
 <JSInstall />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
+
 Once you've installed PostHog, see our [features doc](/docs/libraries/js/features) for more information about what you can do with it.
 
 ### Track across marketing website &amp; app
@@ -46,7 +52,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your [PostHog config](/docs/libraries/js/config).
 
 ```js-web
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     opt_out_capturing_by_default: true,
 });
 ```
@@ -72,8 +78,8 @@ While not a first-class citizen, PostHog allows you to run more than one instanc
 `posthog.init` accepts a third parameter that can be used to create named instances.
 
 ```ts
-posthog.init('<ph_project_api_key>', {}, 'project1')
-posthog.init('<ph_project_api_key>', {}, 'project2')
+posthog.init('<ph_project_token>', {}, 'project1')
+posthog.init('<ph_project_token>', {}, 'project2')
 ```
 
 You can then call these different instances by accessing it on the global `posthog` object

@@ -30,7 +30,7 @@ Want to assign issues to a **team** rather than an individual teammate? You can 
 
 ## Automatic issue assignment
 
-You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment) using **auto assignment rules**.
+You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-auto-assignment) using **auto assignment rules**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
@@ -64,6 +64,10 @@ You can also set custom properties on the error tracking event to filter on. For
 ### Order of issue assignment rules
 
 Issue assignment filters are evaluated in the order they are configured. They can also be reordered once created. The first filter that matches is used to assign the issue. This means you should configure the most specific filters first, and then the more general filters later.
+
+### Disabled assignment rules
+
+Assignment rules can become disabled if an error occurs during ingestion. When a rule is disabled, a banner displays the original error message. To re-enable the rule, edit it to fix the problem and save your changes. If the issue persists, reach out to support.
 
 ### Alerting based on assignment 
 

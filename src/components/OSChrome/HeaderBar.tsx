@@ -332,12 +332,16 @@ export default function HeaderBar({
                 {showSidebar && (
                     <motion.div
                         className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
-                            isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
+                            isTocVisible && !websiteMode ? '@4xl:min-w-[250px]' : 'w-auto'
                         }`}
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (
-                            <div className="hidden @4xl:block [&>span]:inline-block">
+                            <div
+                                className={`[&>span]:inline-block ${
+                                    websiteMode ? 'hidden @4xl/app-reader:block' : 'hidden @4xl:block '
+                                }`}
+                            >
                                 <Tooltip
                                     trigger={
                                         <OSButton

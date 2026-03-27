@@ -25,6 +25,12 @@ import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
 <RubyInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ## Capturing events
 
 import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ruby.mdx'
@@ -100,7 +106,7 @@ If you have `preload_app true` in your unicorn config, you can use the [`after_f
 ```ruby
 after_fork do |server, worker|
   $posthog = PostHog::Client.new(
-    api_key: '<ph_project_api_key>',
+    api_key: '<ph_project_token>',
     personal_api_key: '<ph_personal_api_key>'
     host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
@@ -115,7 +121,7 @@ If you use Puma with multiple workers, you can use the `on_worker_boot` hook (wh
 ```ruby
 on_worker_boot do
   $posthog = PostHog::Client.new(
-    api_key: '<ph_project_api_key>',
+    api_key: '<ph_project_token>',
     personal_api_key: '<ph_personal_api_key>'
     host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }

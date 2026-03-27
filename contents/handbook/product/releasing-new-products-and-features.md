@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 This guide walks you through the full lifecycle of releasing new products and features at PostHog, from initial planning to general availability.
 
-For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments/blob/main/.github/ISSUE_TEMPLATE/new-product.md).
+For complete step-by-step checklists when creating a new product, use [the new product RFC template](https://github.com/PostHog/requests-for-comments-internal/blob/main/_TEMPLATES/request-for-comments-new-product.md).
 
 ## Overview of the product lifecycle
 
@@ -42,7 +42,7 @@ Beta is when you open up the product to all users who want to opt-in. Betas do n
 
 <CalloutBox icon="IconInfo" title="Moving from Concept to Beta" type="fyi">
 
-Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
+Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, update the stage from `concept` to `beta` (or `alpha`). This triggers an automatic notification to all subscribed users letting them know that the beta is available. Users who registered interest during the Concept stage can then opt in to enable the feature.
 
 Make sure your early access feature flag includes a `product_key` on the payload field to give people access to the product in their sidebar. Check the new product RFC for more details.
 
@@ -78,7 +78,7 @@ Product teams are responsible for [writing documentation](/handbook/engineering/
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
-  It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+  It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
 
 </CalloutBox>
 
@@ -90,7 +90,7 @@ After a week in any new beta, users will trigger an automatic email from the `be
 
 Regardless, emails to this Google Group will sync to the PostHog Feedback Slack channel for general awareness. Team leads are encouraged to respond to beta feedback emails.
 
-Teams can collect additional feedback if needed and the Brand & Vibes team is able to help with creating feedback emails or funnels.
+Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
 
 ## Phase 4: Launching to general availability
 
@@ -98,7 +98,7 @@ Once a beta is mature enough, you may want to launch it into general availabilit
 
 **If you're planning to launch your product in a specific quarter, you MUST let the Marketing team know at the start of the quarter.**
 
-Smaller features which don't require [major announcements](/handbook/brand/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
+Smaller features which don't require [major announcements](/handbook/marketing/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware.
 
 You can set the feature flag to release to 100% of users BEFORE the Marketing launch, you don't need to wait for it.
 

@@ -6,7 +6,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingReactNativeInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{}}>
-            <ReactNativeInstallation modifySteps={addNextStepsStep} />
+            <ReactNativeInstallation modifySteps={(steps) => addNextStepsStep(steps, 'react-native')} />
         </OnboardingContentWrapper>
     )
 }

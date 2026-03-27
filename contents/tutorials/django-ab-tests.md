@@ -67,7 +67,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 To start, run `pip install posthog` to install [PostHog’s Python SDK](/docs/libraries/python).
 
-Then, set the PostHog API key and host in your `AppConfig` in `basic_app/apps.py` so that's it's available everywhere:
+Then, set the PostHog token and host in your `AppConfig` in `basic_app/apps.py` so that's it's available everywhere:
 
 ```python file=basic_app/apps.py
 from django.apps import AppConfig
@@ -77,11 +77,11 @@ class BasicAppConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "basic_app"
     def ready(self):
-        posthog.api_key = '<ph_project_api_key>'
+        posthog.api_key = '<ph_project_token>'
         posthog.host = '<ph_client_api_host>'
 ```
 
-You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings). 
 
 Next, add your `AppConfig` to `django_ab_tests/settings.py` under `INSTALLED_APPS`:
 

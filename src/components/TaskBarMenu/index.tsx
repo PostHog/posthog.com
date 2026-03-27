@@ -12,6 +12,8 @@ import {
     IconUpload,
     IconCode,
     IconFeatures,
+    IconPlay,
+    IconPeople,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -203,40 +205,6 @@ export default function TaskBarMenu() {
                                 },
                                 {
                                     type: 'item' as const,
-                                    label: 'My profile',
-                                    link: `/community/profiles/${user?.profile.id}`,
-                                    icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Bookmarks',
-                                    link: '/bookmarks',
-                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                            ]
-                          : []),
-                      ...(isModerator
-                          ? [
-                                {
-                                    type: 'item' as const,
-                                    label: 'Moderator tools',
-                                    disabled: true,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Upload media',
-                                    icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                    onClick: () =>
-                                        addWindow(
-                                            <MediaUploadModal
-                                                newWindow
-                                                location={{ pathname: `media-upload` }}
-                                                key={`media-upload`}
-                                            />
-                                        ),
-                                },
-                                {
-                                    type: 'item' as const,
                                     label: 'Components',
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
@@ -246,6 +214,18 @@ export default function TaskBarMenu() {
                                     label: 'Feature matrix',
                                     link: '/feature-matrix',
                                     icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Team directory',
+                                    link: '/team-directory',
+                                    icon: <IconPeople className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'HogWatch 3000',
+                                    link: '/hogwatch',
+                                    icon: <IconPlay className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),

@@ -7,7 +7,7 @@ import { addNextStepsStep } from './shared-helpers'
 export const ErrorTrackingNuxtInstallationWrapper = () => {
     return (
         <OnboardingContentWrapper snippets={{ JSEventCapture }}>
-            <Nuxt37Installation modifySteps={addNextStepsStep} />
+            <Nuxt37Installation modifySteps={(steps) => addNextStepsStep(steps, 'nuxt')} />
         </OnboardingContentWrapper>
     )
 }

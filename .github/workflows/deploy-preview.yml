@@ -1,0 +1,134 @@
+name: Deploy preview to Cloudflare Pages
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+concurrency:
+    group: deploy-preview-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
+env:
+    NODE_OPTIONS: '--max_old_space_size=8192'
+
+jobs:
+    build-and-deploy:
+        name: Build & deploy preview
+        runs-on: ubuntu-latest
+        timeout-minutes: 45
+        if: ${{ !github.event.pull_request.head.repo.fork }}
+        permissions:
+            contents: read
+            pull-requests: write
+
+        steps:
+            - name: Find existing comment
+              uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+              id: find-comment
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-author: 'github-actions[bot]'
+                  body-includes: '<!-- cloudflare-pages-preview -->'
+
+            - name: Get timestamp
+              id: timestamp
+              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
+
+            - name: Comment pending
+              id: comment
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-id: ${{ steps.find-comment.outputs.comment-id }}
+                  edit-mode: replace
+                  body: |
+                      <!-- cloudflare-pages-preview -->
+                      ### Deploy preview
+
+                      | Status | Details | Updated (UTC) |
+                      |--------|---------|---------|
+                      | 🟡 **Building** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp.outputs.time }} |
+
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Cache Gatsby
+              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+              with:
+                  path: |
+                      .cache
+                      public
+                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
+                  restore-keys: |
+                      gatsby-${{ runner.os }}-
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build site
+              run: pnpm build
+              env:
+                  GATSBY_MINIMAL: 'true'
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+
+            - name: Deploy to Cloudflare Pages
+              id: deploy
+              uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  packageManager: pnpm
+                  command: pages deploy public --project-name=posthog-preview --branch=pr-${{ github.event.pull_request.number }}
+
+            - name: Get timestamp (final)
+              if: always()
+              id: timestamp-final
+              run: echo "time=$(date -u +'%b %d, %Y %I:%M%p')" >> $GITHUB_OUTPUT
+
+            - name: Comment on success
+              if: success()
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-id: ${{ steps.comment.outputs.comment-id }}
+                  edit-mode: replace
+                  body: |
+                      <!-- cloudflare-pages-preview -->
+                      ### Deploy preview
+
+                      | Status | Details | Updated (UTC) |
+                      |--------|---------|---------|
+                      | 🟢 **Ready** | [View preview](${{ steps.deploy.outputs.deployment-url }}) | ${{ steps.timestamp-final.outputs.time }} |
+
+            - name: Comment on failure
+              if: failure()
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-id: ${{ steps.comment.outputs.comment-id }}
+                  edit-mode: replace
+                  body: |
+                      <!-- cloudflare-pages-preview -->
+                      ### Deploy preview
+
+                      | Status | Details | Updated (UTC) |
+                      |--------|---------|---------|
+                      | 🔴 **Failed** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp-final.outputs.time }} |
+
+                      Push a fix or re-run the workflow to try again.
+
+                      <details><summary>Common culprits</summary>
+
+                      - **MDX issues** - unescaped `<`/`>` characters, unclosed tags, or malformed JSX
+                      - **External API timeouts** - GitHub, Strapi, or Ashby occasionally hiccup
+                      </details>

@@ -12,7 +12,7 @@ Each Product Tour step (or modal announcement) has a primary button and, optiona
 
 ## Next step
 
-Default primary button behavior - moves your tour to the next step.
+Default primary button action. Moves your tour to the next step. On the last step, this is labeled **Complete tour** and triggers the `product tour completed` event.
 
 _Not available for announcements._
 
@@ -34,4 +34,4 @@ Opens a given link in a new tab.
 
 ## Dismiss
 
-Dismisses the current tour or announcement.
+Dismisses the current tour or announcement. Triggers the `product tour dismissed` event but not the `product tour completed` event.

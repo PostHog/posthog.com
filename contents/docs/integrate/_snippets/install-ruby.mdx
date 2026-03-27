@@ -10,10 +10,10 @@ In your app, set your API key **before** making any calls. If setting a custom `
 require 'posthog'
 
 posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
+  api_key: "<ph_project_token>",
   host: "<ph_client_api_host>",
   on_error: Proc.new { |status, msg| print msg }
 })
 ```
 
-You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.

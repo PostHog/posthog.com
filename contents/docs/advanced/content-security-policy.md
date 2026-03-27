@@ -53,6 +53,23 @@ Depending on your compliance needs you can either:
 
 **NOTE**: This list should be enough at the time of writing. As the PostHog application changes rapidly, it is possible that other directives may be needed over time for loading the Toolbar. If you experience issues after implementing one of the above solutions, you can typically debug in the browser tools which part of the CSP is blocking requests.
 
+
+### Hedgehog mode
+
+The Toolbar's hedgehog mode renders a playful animated hedgehog on your site — it's a fun Easter egg, not a feature you need for analytics. It uses WebGL via pixi.js, which requires `new Function()` calls internally. This means `'unsafe-eval'` must be in your CSP's `script-src` directive.
+
+If your site has a strict CSP that doesn't include `'unsafe-eval'`, hedgehog mode is automatically disabled. When this happens, the hedgehog mode option in the Toolbar menu shows a tooltip explaining why it's unavailable.
+
+If you want to join the fun and enable hedgehog mode, add `'unsafe-eval'` to your `script-src` directive:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+  script-src 'self' 'unsafe-eval' https://*.posthog.com;
+">
+```
+
+**Note:** Adding `'unsafe-eval'` reduces the security benefits of CSP by allowing dynamic code execution. Since hedgehog mode is purely for fun, weigh whether the whimsy is worth the tradeoff for your security requirements.
+
 ### Enabling heatmaps
 
 You will need the following CSP to allow heatmaps to render your site in an iframe of ours:
@@ -68,7 +85,7 @@ You will need the following CSP to allow heatmaps to render your site in an ifra
 You may choose to use a `nonce` in your CSP in order to ensure every script/style loaded has the matching `nonce` for the current page load. This can be done via two config options in `posthog-js` like so:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   prepare_external_dependency_script: (script) => {
     script.nonce = '<your-nonce-value>'
     return script

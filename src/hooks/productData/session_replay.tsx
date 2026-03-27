@@ -17,6 +17,7 @@ export const sessionReplay = {
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
+    wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
@@ -120,7 +121,7 @@ export const sessionReplay = {
                         <div className="shrink">
                             <h4 className="text-lg">Your code</h4>
                             <CodeBlock
-                                code={`posthog.init('<ph_project_api_key>', {
+                                code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   enable_recording_console_log: true,
@@ -249,7 +250,7 @@ export const sessionReplay = {
                 <div>
                     <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
                     <CodeBlock
-                        code={`posthog.init('<ph_project_api_key>', {
+                        code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   disable_session_recording: true,

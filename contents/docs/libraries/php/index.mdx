@@ -22,6 +22,12 @@ import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 
 <PHPInstall />
 
+## Identifying users
+
+import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+
+<IdentifyBackendCallout />
+
 ## Capturing events
 
 import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php.mdx'
@@ -142,7 +148,7 @@ When calling `PostHog::init`, there are various configuration options you can se
 
 ```php
 PostHog::init(
-    '<ph_project_api_key>',
+    '<ph_project_token>',
     [
         'host' => '<ph_client_api_host>', 
         'debug' => true,
@@ -169,7 +175,7 @@ All possible options below:
 
 ```php
 PostHog::init(
-    '<ph_project_api_key>',
+    '<ph_project_token>',
     [
         'host' => '<ph_client_api_host>', 
         'debug' => true, // +

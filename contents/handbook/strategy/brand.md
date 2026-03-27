@@ -7,7 +7,7 @@ showTitle: true
 Brand matters to us, greatly. It's one of the four major reasons people get recommended PostHog so directly helps us grow. Everyone else is largely terrible at it so it's a massive opportunity to build a long term advantage as a company, and frankly it's fun. It's every interaction we have with our users and comes from how the company itself is designed. It's more than hedgehogs:
 
 * How our [pricing](/blog/session-replay-pricing) works
-* The way we [word](/handbook/growth/marketing/writing-for-posthog) our emails
+* The way we [word](/handbook/content/writing-for-posthog) our emails
 * The vibe on [sales](/sales) calls
 * _You get it by now_
 

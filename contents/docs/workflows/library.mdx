@@ -14,6 +14,18 @@ Our library lets you create reusable message templates for your workflows. You c
 
 Currently, we support email templates, with push notifications and SMS templates coming soon.
 
+## Workflow templates
+
+You can save workflows as reusable templates to share across your team. When saving a workflow as a template, select a scope to control visibility:
+
+| Scope | Description |
+|-------|-------------|
+| **Project** | Template is only visible within the current project (default) |
+| **Organization** | Template is visible to all projects within your organization |
+| **Global** | Official PostHog templates (staff-only) |
+
+Organization-scoped templates are accessible to all teams within the same organization. Any team member can use and update these shared templates. Templates remain isolated to their organization and aren't visible to other organizations.
+
 ## Liquid and merge tags
 
 All template types support [Liquid templating](https://shopify.github.io/liquid/) to personalize your messages with user properties and data. You can type liquid directly, or use the merge tag dropdown in your message templates, which will show you the entire list of available person properties (see email example below).

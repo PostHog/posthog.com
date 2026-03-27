@@ -15,6 +15,12 @@ To link Postgres:
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
 
+<CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
+
+PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected.
+
+</CalloutBox>
+
 > **Permissions** The Postgres source only requires read permissions on the schemas and tables you intend to sync.
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).

@@ -43,6 +43,7 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import SmallTeam from 'components/SmallTeam'
 import { RenderInClient } from 'components/RenderInClient'
+import WizardCommand from 'components/WizardCommand'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -194,199 +195,31 @@ const HomeHitCounter = () => {
     )
 }
 
-const AIAgents = () => {
-    const columns = [
-        { name: '', width: 'auto', align: 'center' as const },
-        { name: 'Agent', width: 'minmax(150px,300px)', align: 'left' as const },
-        { name: 'Skills', width: 'minmax(auto,1fr)', align: 'left' as const },
-    ]
+const COL1 = [
+    'ycombinator',
+    'airbus',
+    'ukgovt',
+    'nationaldesignstudio',
+    'trust',
+    'lovable',
+    'startengine',
+    'researchgate',
+    'heygen',
+]
 
-    const rows = [
-        {
-            cells: [
-                { content: 1 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <Link to="/ai" state={{ newWindow: true }}>
-                                            <img
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
-                                                className="w-16 -m-2"
-                                            />
-                                        </Link>
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
-                                            Hi, I'm PostHog AI
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <Link to="/ai" state={{ newWindow: true }}>
-                                    PostHog AI
-                                </Link>
-                                <span className="text-sm text-secondary">Helpful chatbot, data concierge</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content: 'Writes SQL, builds data transformations, gathers context in insights',
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 2 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <Link to="/raquel" state={{ newWindow: true }}>
-                                            <img
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png"
-                                                className="w-16 -m-2"
-                                            />
-                                        </Link>
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">
-                                            Hi, I'm Raquel
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <span>
-                                    <Link to="/raquel" state={{ newWindow: true }}>
-                                        Raquel
-                                    </Link>{' '}
-                                    – <em>beta</em>
-                                </span>
-                                <span className="text-sm text-secondary">Hands-on exec</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content: 'Researches complex data problems, summarizes session recordings',
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 3 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png"
-                                            className="w-16 -m-2"
-                                        />
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">
-                                            Hi, I'm Annika
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <span>
-                                    <strong>Annika</strong> – <em>beta</em>
-                                </span>
-                                <span className="text-sm text-secondary">Product manager</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content:
-                        'Identifies errors and UX bugs, writes requirements docs, monitors code changes with phased rollouts',
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 4 },
-                {
-                    content: (
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <Tooltip
-                                    trigger={
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png"
-                                            className="w-16 -m-2"
-                                        />
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="relative">
-                                        <img
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png"
-                                            className=""
-                                        />
-                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
-                                            Hi, I'm Marius
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            </span>
-                            <div className="flex flex-col">
-                                <span>
-                                    <strong>Marius</strong> – <em>beta</em>
-                                </span>
-                                <span className="text-sm text-secondary">10x engineer</span>
-                            </div>
-                        </div>
-                    ),
-                },
-                {
-                    content:
-                        'Implements bug fixes, creates and configures feature flags, writes code and generates pull requests',
-                    className: 'text-sm',
-                },
-            ],
-        },
-    ]
-
-    return <OSTable columns={columns} rows={rows} size="sm" />
-}
-
-const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
-
-const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
+const COL2 = [
+    'supabase',
+    'mistralai',
+    'elevenlabs',
+    'convex',
+    'hasura',
+    'exa',
+    'raycast',
+    'resend',
+    'greptile',
+    'wisprflow',
+    'posthog',
+]
 
 const companyBreakdowns = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
@@ -405,6 +238,8 @@ const companyBreakdowns = {
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
+    arr: { col1: 'Measured in ARR', col2: 'Measured in GDP' },
+    devTool: { col1: 'Trendy devtool', col2: 'Trendy, but not a devtool' },
 }
 
 const companyAttributes = {
@@ -412,6 +247,9 @@ const companyAttributes = {
         'ycombinator',
         'airbus',
         // "elevenlabs",
+        // 'convex',
+        'nationaldesignstudio',
+        'ukgovt',
         'trust',
         'lovable',
         // "supabase",
@@ -419,15 +257,19 @@ const companyAttributes = {
         'startengine',
         // "mistralai",
         // "raycast",
+        // "resend",
         'researchgate',
-        'exa',
+        // 'exa',
         'heygen',
+        // 'greptile',
+        // 'wisprflow',
         // "posthog"
     ],
     colorful: [
         'ycombinator',
         // "airbus",
         // "elevenlabs",
+        'convex',
         'trust',
         'lovable',
         'supabase',
@@ -435,15 +277,21 @@ const companyAttributes = {
         'startengine',
         'mistralai',
         'raycast',
+        // 'resend',
         // "researchgate",
-        // "heygen",
+        'heygen',
         // 'exa',
+        // 'nationaldesignstudio',
+        // 'ukgovt',
+        // 'wisprflow',
+        // 'greptile',
         'posthog',
     ],
     hardware: [
         // "ycombinator",
         'airbus',
         // "elevenlabs",
+        // 'convex',
         // "trust",
         // "lovable",
         // "supabase",
@@ -451,15 +299,23 @@ const companyAttributes = {
         // "startengine",
         // "mistralai",
         // "raycast",
+        // 'resend',
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'nationaldesignstudio',
+        // 'wisprflow',
+        // 'greptile',
+        'ukgovt',
         'posthog',
     ],
     planes: [
         // "ycombinator",
         'airbus',
+        // 'nationaldesignstudio',
+        'ukgovt',
         // "elevenlabs",
+        // 'convex',
         // "trust",
         // "lovable",
         // "supabase",
@@ -467,31 +323,41 @@ const companyAttributes = {
         // "startengine",
         // "mistralai",
         // "raycast",
+        // 'resend',
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'wisprflow',
+        // 'greptile',
         // "posthog"
     ],
     highValue: [
+        'ukgovt',
         'airbus',
         'elevenlabs',
+        // 'convex',
         // "ycombinator",
         'lovable',
         'supabase',
+        // 'nationaldesignstudio',
         'hasura',
         // "trust",
         // "startengine",
         'mistralai',
         // "raycast",
+        // 'resend',
         // "researchgate",
         // "heygen",
         // 'exa',
+        // 'wisprflow',
+        // 'greptile',
         // "posthog"
     ],
     caseStudy: [
         'ycombinator',
         // "airbus",
         'elevenlabs',
+        // 'convex',
         // "trust",
         'lovable',
         'supabase',
@@ -499,9 +365,14 @@ const companyAttributes = {
         // "startengine",
         // "mistralai",
         // "raycast",
+        // 'resend',
         'researchgate',
         'exa',
         // "heygen",
+        // 'nationaldesignstudio',
+        // 'wisprflow',
+        // 'greptile',
+        // 'ukgovt',
         'posthog',
     ],
     easyToYell: [
@@ -509,31 +380,43 @@ const companyAttributes = {
         'airbus',
         // "elevenlabs",
         'trust',
+        'convex',
         // "lovable",
         // "supabase",
         // "hasura",
         // "startengine",
         // "mistralai",
         'raycast',
+        'resend',
         // "researchgate",
         'exa',
         'heygen',
         'posthog',
+        'wisprflow',
+        // 'greptile',
+        // 'nationaldesignstudio',
+        'ukgovt',
     ],
     goodBandName: [
         // "ycombinator",
         'elevenlabs',
         'lovable',
         // "hasura",
+        'convex',
         'trust',
         // "airbus",
         // "supabase",
         'startengine',
         // "mistralai",
         'raycast',
+        'resend',
         'researchgate',
         //'exa',
         // "heygen",
+        'nationaldesignstudio',
+        'wisprflow',
+        // 'greptile',
+        // 'ukgovt',
         'posthog',
     ],
     explainable: [
@@ -541,6 +424,7 @@ const companyAttributes = {
         'airbus',
         // "trust",
         'lovable',
+        // 'convex',
         // "elevenlabs",
         // "supabase",
         // "hasura",
@@ -548,7 +432,12 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        // 'resend',
         'exa',
+        'nationaldesignstudio',
+        'ukgovt',
+        'wisprflow',
+        // 'greptile',
         // "heygen",
         // "posthog"
     ],
@@ -557,20 +446,27 @@ const companyAttributes = {
         'airbus',
         'trust',
         'lovable',
+        'convex',
         // "elevenlabs",
         // "supabase",
         'hasura',
         // "startengine",
         // "mistralai",
         'raycast',
+        'resend',
         // "researchgate",
         'exa',
         'heygen',
+        // 'greptile',
+        // 'nationaldesignstudio',
+        'wisprflow',
+        'ukgovt',
         'posthog',
     ],
     realWords: [
         // "ycombinator",
         'airbus',
+        'convex',
         'trust',
         'lovable',
         'elevenlabs',
@@ -579,15 +475,21 @@ const companyAttributes = {
         'startengine',
         // "mistralai",
         // "raycast",
+        'resend',
         'researchgate',
         //'exa',
         // "heygen",
+        'nationaldesignstudio',
+        // 'ukgovt',
+        // 'greptile',
+        'wisprflow',
         'posthog',
     ],
     american: [
         'ycombinator',
         // "airbus",
         // "elevenlabs",
+        'convex',
         'trust',
         // "lovable",
         'supabase',
@@ -595,9 +497,14 @@ const companyAttributes = {
         'startengine',
         // "mistralai",
         // "raycast",
+        'resend',
         'researchgate',
         'exa',
         'heygen',
+        'nationaldesignstudio',
+        // 'ukgovt',
+        'wisprflow',
+        'greptile',
         'posthog',
     ],
     pokemon: [
@@ -606,15 +513,65 @@ const companyAttributes = {
         // "elevenlabs",
         // "trust",
         'lovable',
+        'convex',
         'supabase',
         'hasura',
         // "startengine",
         'mistralai',
         'raycast',
+        'resend',
         // "researchgate",
         'exa',
         'heygen',
+        // 'wisprflow',
+        // 'nationaldesignstudio',
+        // 'ukgovt',
+        'greptile',
         // "posthog"
+    ],
+    arr: [
+        'ycombinator',
+        'airbus',
+        'elevenlabs',
+        'trust',
+        'lovable',
+        'convex',
+        'supabase',
+        'hasura',
+        'startengine',
+        'mistralai',
+        'raycast',
+        'resend',
+        'researchgate',
+        'exa',
+        'heygen',
+        'wisprflow',
+        'greptile',
+        // 'ukgovt',
+        // 'nationaldesignstudio',
+        'posthog',
+    ],
+    devTool: [
+        'ycombinator',
+        // 'airbus',
+        'elevenlabs',
+        // 'trust',
+        // 'lovable',
+        'convex',
+        'supabase',
+        'hasura',
+        // 'startengine',
+        'mistralai',
+        'raycast',
+        'resend',
+        // 'researchgate',
+        'exa',
+        // 'heygen',
+        // 'wisprflow',
+        'greptile',
+        // 'ukgovt',
+        // 'nationaldesignstudio',
+        'posthog',
     ],
 }
 
@@ -642,6 +599,217 @@ const AppCount = () => {
             <Link to="/products">Browse app library</Link>
             <span>({APP_COUNT})</span>
         </span>
+    )
+}
+
+const productCategories = [
+    {
+        name: 'Analytics',
+        handles: [
+            'web_analytics',
+            'revenue_analytics',
+            'trenationaldesignstudio',
+            'funnels',
+            'user_paths',
+            'lifecycle',
+            'retention',
+            'stickiness',
+            'correlation_analysis',
+            'group_analytics',
+        ],
+    },
+    {
+        name: 'Data stack',
+        handles: ['data_warehouse', 'cdp', 'data_in', 'sql_editor', 'bi', 'data_modeling', 'data_out'],
+    },
+    {
+        name: 'Feature development',
+        handles: [
+            'posthog_code',
+            'feature_flags',
+            'workflows_emails',
+            'webhooks',
+            'endpoints',
+            'product_tours',
+            'early_access',
+        ],
+    },
+    {
+        name: 'Debugging & analysis',
+        handles: ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles'],
+    },
+    {
+        name: 'AI tools',
+        handles: ['llm_traces', 'llm_generations', 'llm_evals'],
+    },
+    {
+        name: 'Feedback & testing',
+        handles: ['experiments', 'surveys', 'no_code_ab_testing', 'messaging', 'support', 'user_interviews'],
+    },
+    {
+        name: 'Tools',
+        handles: ['posthog_ai', 'dashboards', 'activity', 'notebooks'],
+    },
+]
+
+const MAX_VISIBLE_ITEMS = 7
+const TRUNCATED_VISIBLE = 6
+
+const StatusDot = ({ status }: { status?: string }) => {
+    if (!status) return null
+
+    const isBeta = status === 'beta'
+    const isAlpha = status === 'private alpha' || status === 'alpha' || status === 'WIP'
+
+    if (!isBeta && !isAlpha) return null
+
+    const dotColor = isBeta ? 'bg-yellow' : 'bg-red'
+    const label = isBeta ? 'Beta' : 'Alpha'
+
+    return (
+        <Tooltip
+            trigger={<span className={`inline-block size-2 rounded-full ${dotColor} shrink-0`} />}
+            delay={0}
+            side="top"
+        >
+            <span className="text-sm">{label}</span>
+        </Tooltip>
+    )
+}
+
+const ProductCategoryItem = ({
+    product,
+}: {
+    product: { name: string; handle: string; slug?: string; color?: string; Icon?: any; status?: string }
+}) => {
+    const hasLink = !!product.slug
+    const icon = product.Icon ? (
+        <product.Icon className={`size-4 shrink-0 ${!hasLink ? 'text-muted' : `text-${product.color || 'gray'}`}`} />
+    ) : null
+
+    const content = (
+        <span className="flex items-center gap-1.5 py-0.5">
+            {icon}
+            <span className={!hasLink ? 'text-muted' : ''}>{product.name}</span>
+            <StatusDot status={product.status} />
+        </span>
+    )
+
+    if (!hasLink) {
+        return <span className="text-sm cursor-default">{content}</span>
+    }
+
+    return (
+        <Link
+            to={`/${product.slug}`}
+            state={{ newWindow: true }}
+            className="text-sm text-primary hover:text-primary !font-normal !no-underline hover:!underline"
+            data-attr="product-grid-item"
+        >
+            {content}
+        </Link>
+    )
+}
+
+const ProductCategoryColumn = ({
+    category,
+    allProducts,
+}: {
+    category: { name: string; handles: string[] }
+    allProducts: any[]
+}) => {
+    const [expanded, setExpanded] = useState(false)
+
+    const products = category.handles.map((handle) => allProducts.find((p: any) => p.handle === handle)).filter(Boolean)
+
+    const needsTruncation = products.length > MAX_VISIBLE_ITEMS
+    const visibleProducts = needsTruncation && !expanded ? products.slice(0, TRUNCATED_VISIBLE) : products
+    const remainingCount = products.length - TRUNCATED_VISIBLE
+
+    return (
+        <div className="flex flex-col gap-0.5">
+            <h3 className="text-sm font-normal text-secondary !tracking-normal m-0 mb-1">{category.name}</h3>
+            {visibleProducts.map((product: any) => (
+                <ProductCategoryItem key={product.handle} product={product} />
+            ))}
+            {needsTruncation && !expanded && (
+                <button
+                    onClick={() => setExpanded(true)}
+                    className="text-sm text-secondary hover:text-primary font-medium text-left py-0.5 flex items-center gap-1.5 cursor-pointer"
+                >
+                    <span className="size-4 shrink-0 flex items-center justify-center text-secondary text-xs font-bold">
+                        &bull;&bull;&bull;
+                    </span>
+                    {remainingCount} more
+                </button>
+            )}
+        </div>
+    )
+}
+
+const ProductCategoryGrid = () => {
+    const allProducts = useProduct() as any[]
+
+    return (
+        <div className="product-section-test @container mb-12">
+            <div className="grid grid-cols-2 @xl:grid-cols-3 @3xl:grid-cols-4 gap-x-6 gap-y-8">
+                {productCategories.map((category) => (
+                    <ProductCategoryColumn key={category.name} category={category} allProducts={allProducts} />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+const ProductsSectionControl = () => (
+    <>
+        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+            <h2 className="m-0 tracking-tight">
+                Explore apps{' '}
+                <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
+            </h2>
+            <aside className="hidden @xl:inline-flex">
+                <span>
+                    <Link to="/products" state={{ newWindow: true }}>
+                        Browse app library
+                    </Link>{' '}
+                    ({APP_COUNT})
+                </span>
+            </aside>
+        </header>
+        <CompanyStageTabs />
+    </>
+)
+
+const ProductsSectionTest = () => (
+    <>
+        <header className="product-section-test flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+            <h2 className="m-0 tracking-tight">Products</h2>
+            <Link
+                to="/products"
+                state={{ newWindow: true }}
+                className="text-sm font-semibold flex items-center gap-0.5"
+            >
+                Explore all products <IconArrowRight className="size-4" />
+            </Link>
+        </header>
+        <ProductCategoryGrid />
+    </>
+)
+
+const ProductsSection = () => {
+    const posthog = usePostHog()
+    return (
+        <RenderInClient
+            placeholder={<ProductsSectionControl />}
+            render={() =>
+                posthog?.getFeatureFlag?.('homepage-product-groupings', { fresh: true }) === 'experiment' ? (
+                    <ProductsSectionTest />
+                ) : (
+                    <ProductsSectionControl />
+                )
+            }
+        />
     )
 }
 
@@ -707,7 +875,6 @@ const CompanyStageTabs = () => {
                             'error_tracking',
                             'experiments',
                             'feature_flags',
-                            'surveys',
                             'logs',
                             'cdp',
                             'workflows_emails',
@@ -966,26 +1133,27 @@ const Customers = () => {
 
     return (
         <>
-            <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-                <div className={websiteMode ? 'mb-2' : `@xl:absolute right-0 -top-8`}>
-                    <OSButton
-                        onClick={toggleBreakdown}
-                        variant="secondary"
-                        size="sm"
-                        className="font-semibold [&_span]:min-w-[146px]"
-                        disabled={isAnimating}
-                    >
-                        {isAnimating ? (
-                            '🔀 Shuffling...'
-                        ) : (
-                            <>
-                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
-                            </>
-                        )}
-                    </OSButton>
-                </div>
+            <div className="inline-block">
+                <div className="relative @xl:pt-1 pb-2 @xl:pb-0 @4xl:mt-8">
+                    <div className="@xl:absolute right-0 -top-8">
+                        <OSButton
+                            onClick={toggleBreakdown}
+                            variant="secondary"
+                            size="sm"
+                            className="font-semibold [&_span]:min-w-[146px]"
+                            disabled={isAnimating}
+                        >
+                            {isAnimating ? (
+                                '🔀 Shuffling...'
+                            ) : (
+                                <>
+                                    <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                                </>
+                            )}
+                        </OSButton>
+                    </div>
 
-                {/* 
+                    {/* 
             <select
                 value={currentBreakdown}
                 onChange={(e) => {
@@ -1044,11 +1212,19 @@ const Customers = () => {
                 ))}
             </select>
              */}
+                </div>
+                <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+                <OSButton
+                    asLink
+                    to="/customers"
+                    variant="secondary"
+                    size="md"
+                    className="mt-4"
+                    state={{ newWindow: true }}
+                >
+                    Open customers.mdx
+                </OSButton>
             </div>
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
-            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open customers.mdx
-            </OSButton>
         </>
     )
 }
@@ -1105,6 +1281,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <CompanyStageTabs />,
     },
     {
+        name: 'ProductsSection',
+        kind: 'flow',
+        props: [],
+        Editor: () => <ProductsSection />,
+    },
+    {
         name: 'CTAs',
         kind: 'flow',
         props: [],
@@ -1115,12 +1297,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HomeHitCounter />,
-    },
-    {
-        name: 'AIAgents',
-        kind: 'flow',
-        props: [],
-        Editor: () => <AIAgents />,
     },
     {
         name: 'Pricing',

@@ -34,3 +34,50 @@ The activity tab also has multiple views:
 4. **Live:** Shows a live feed of events as they are captured as well as the number of currently active users. This can be filtered for a specific event or paused. 
 
 5. **Jump to timestamp:** Press `J` then `T` to quickly navigate to events around a specific point in time.
+
+## Terminal live events (posthog-live)
+
+You can also view live PostHog events directly in your terminal using the `posthog-live` CLI tool.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_17_T19_57_16_416_Z_dd40e49aea.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_17_T19_57_16_416_Z_dd40e49aea.png"
+  alt="`posthog-live` CLI tool showing live events in the terminal"
+  classes="rounded"
+/>
+
+### Installation
+
+Download and install for macOS (Apple Silicon):
+
+```bash
+curl -L https://github.com/PostHog/posthog/releases/download/posthog-live-latest/posthog-live-darwin-arm64 -o posthog-live && chmod +x posthog-live
+```
+
+For other platforms (Linux, Intel Mac), see the [GitHub releases page](https://github.com/PostHog/posthog/releases?q=posthog-live&expanded=true).
+
+### Usage
+
+Run the tool and authenticate via your browser:
+
+```bash
+./posthog-live
+```
+
+Filter events using CLI flags:
+
+```bash
+./posthog-live --event-type "$pageview,$autocapture" --distinct-id "user_123"
+```
+
+### Keyboard shortcuts
+
+| Key | Action |
+|-----|--------|
+| `p` | Pause/resume event stream |
+| `f` | Set event type filter |
+| `d` | Set distinct ID filter |
+| `c` | Set property columns |
+| `Enter` | Open event detail view |
+| `?` | Toggle help |
+| `q` | Quit |

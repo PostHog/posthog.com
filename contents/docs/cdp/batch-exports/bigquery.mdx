@@ -1,0 +1,237 @@
+---
+title: BigQuery destination for batch exports
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+
+Batch exports can be used to export data to a BigQuery table.
+
+## Setting up BigQuery access
+
+To set up the right permissions for a batch export targeting BigQuery, you need:
+
+1. A Google Cloud service account with the required BigQuery permissions.
+2. A dataset which has permissions allowing the service account to access it.
+
+PostHog supports two authentication methods for connecting to your service account:
+
+- **Service account impersonation** – You provide a service account email and project ID, and PostHog impersonates your service account using its own credentials. **A service account key is not required**.
+- **JSON key file** – You generate a service account JSON key file containing long-lived credentials and upload it to PostHog.
+
+### Service account permissions
+
+Regardless of which authentication method you choose, you need a service account with permissions to load data in BigQuery by running BigQuery jobs. Follow these steps:
+
+1. Create a [service account](https://cloud.google.com/iam/docs/service-accounts-create#creating).
+
+![Create service account](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-service-account.png)
+
+2. Create one or more roles which have the specific permissions the batch export requires.
+
+At the project level, we require permission to run BigQuery jobs:
+   * `bigquery.jobs.create`
+
+And at the dataset level we require permissions to interact with the dataset and its tables:
+   * `bigquery.datasets.get`
+   * `bigquery.tables.create`
+   * `bigquery.tables.get`
+   * `bigquery.tables.getData`
+   * `bigquery.tables.list`
+   * `bigquery.tables.updateData`
+   * (Optional, for mutable models) `bigquery.tables.delete`
+
+![Create custom role for batch exports](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-role.png)
+
+Alternatively, you may use the built-in roles `BigQuery Job User` at the project level and `BigQuery Data Editor` at the dataset level in the steps that follow in place of a new role or roles. These built-in roles contain all the permissions listed above, additional to some others that we do not require.
+
+3. Assign the project-level role from step 2 to the service account created in step 1.
+
+To do so, use the sidebar to navigate to "IAM" and click on "Grant access" on top of the principals' list to arrive at the panel shown in the screenshot below. Then, input the service account from step 1 as principal, assign it the roles from step 2 and click "Save".
+
+![Project grant](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/project-grant.png)
+
+> In the screenshot above, we have used a custom role named `Testing PostHog BatchExports` created as part of step 2.
+
+4. Create a new BigQuery dataset, or choose an existing BigQuery dataset, and navigate to it. This is the dataset to where data will be exported.
+
+5. Assign the dataset-level role from step 2 to the service account created in step 1.
+
+To do so, from the dataset view, click on "Share", then "Manage permissions", and next "Add principal". Assign either the `BigQuery Data Editor` role or your own dataset-level role created in step 2.
+
+If required, this step is also [explained in Google Cloud's own documentation](https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset).
+
+### Option 1: Service account impersonation
+
+With this method, you don't need to create, store, or share a JSON key file for your service account. Instead, you grant PostHog permission to impersonate your service account.
+
+1. Add `posthog:{organization_id}` to your service account's **description** in Google Cloud. Replace `{organization_id}` with your PostHog organization ID, which you can find in your [PostHog organization settings](https://app.posthog.com/settings/organization).
+
+This is required as we use the service account's description to verify your PostHog organization as the. Skipping this step will lead to errors when executing a batch export.
+
+2. Assign PostHog's service account the **Service Account Token Creator** role (`roles/iam.serviceAccountTokenCreator`) and any role containing the `iam.serviceAccounts.get` permission on your service account.
+
+To do so, use the sidebar to navigate to "IAM" and navigate to "Service Accounts". Select your service account with BigQuery access created in the previous section and click on the "Principals with access" tab. Click on "Grant access". Input PostHog's service account email as the principal:
+
+   ```
+   posthog-batch-exports@posthog-external.iam.gserviceaccount.com
+   ```
+
+And assign the aforementioned roles. This allows PostHog to impersonate your service account and to read your service account's description to verify ownership.
+
+![Grant access for PostHog's service account](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_20_at_16_31_40_posthog_batch_exports_IAM_and_Admin_posthog_Google_Cloud_console_2aa374fe60.png)
+
+> In the screenshot above, we are assigning the built-in `roles/iam.serviceAccountViewer` role which contains the `iam.serviceAccounts.get` permission, but you may choose a different custom one just with that single permission.
+
+3. When creating the batch export, connect to a new Google Cloud service account, select **Impersonate service account**, and provide your service account email and Google Cloud project ID.
+
+### Option 2: JSON key file
+
+With this method, you generate a JSON key file for your service account and upload it to PostHog.
+
+<CalloutBox icon="IconWarning" title="Prefer impersonating a service account to avoid generating long-lived credentials" type="caution">
+
+The generated JSON key file contains long-lived credentials. Purely by their nature, long-lived credentials represent a security risk. We strongly recommend the previous option which eliminates this risk entirely.
+
+</CalloutBox>
+
+1. [Create a key](https://cloud.google.com/iam/docs/keys-create-delete#creating) for your service account.
+2. Save the key file as JSON.
+
+![Create JSON private key](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-private-key-json.png)
+
+3. When creating a batch export, connect to a new Google Cloud service account, select **Upload service account JSON key file**, and upload the key file from the previous step.
+
+## Models
+
+This section describes the models that can be exported to BigQuery.
+
+> **Note:** New fields may be added to these models over time. To maintain consistency, these fields are not automatically added to the destination tables. If a particular field is missing in your BigQuery tables, you can manually add the field, and it will be populated in future exports.
+
+### Events model
+
+This is the default model for BigQuery batch exports. The schema of the model as created in BigQuery is:
+
+| Field                 | Type               | Description                                                               |
+|-----------------------|--------------------|---------------------------------------------------------------------------|
+| uuid                  | `STRING`           | The unique ID of the event within PostHog                                 |
+| event                 | `STRING`           | The name of the event that was sent                                       |
+| properties            | `STRING` or `JSON` | A JSON object with all the properties sent along with an event            |
+| elements              | `STRING`           | This field is present for backwards compatibility but has been deprecated |
+| set                   | `STRING` or `JSON` | A JSON object with any person properties sent with the `$set` field       |
+| set_once              | `STRING` or `JSON` | A JSON object with any person properties sent with the `$set_once` field  |
+| distinct_id           | `STRING`           | The `distinct_id` of the user who sent the event                          |
+| team_id               | `INT64`            | The `team_id` for the event                                               |
+| ip                    | `STRING`           | The IP address that was sent with the event                               |
+| site_url              | `STRING`           | This field is present for backwards compatibility but has been deprecated |
+| timestamp             | `TIMESTAMP`        | The timestamp associated with an event                                    |
+| bq_ingested_timestamp | `TIMESTAMP`        | The timestamp when the event was sent to BigQuery                         |
+
+Some fields can be either `STRING` or `JSON` type depending on whether the corresponding checkbox is marked or not when creating the batch export.
+
+### Persons model
+
+The schema of the model as created in BigQuery is:
+
+| Field                      | Type               | Description                                                                                                                        |
+|----------------------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| team_id                    | `INT64`            | The id of the project (team) the person belongs to                                                                                 |
+| distinct_id                | `STRING`           | A `distinct_id` associated with the person                                                                                         |
+| person_id                  | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                                                            |
+| properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                                                         |
+| person_version             | `INT64`            | Internal version of the person properties associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation               |
+| person_distinct_id_version | `INT64`            | Internal version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation |
+| created_at                 | `TIMESTAMP`        | The timestamp when the person was created                                                                                          |
+
+The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
+
+<PersonsModelNote />
+
+### Sessions model
+
+You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
+
+## Creating the batch export
+
+1. Click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
+2. Click **+ New destination** in the top-right corner.
+3. Select **BigQuery** as the batch export destination.
+4. Fill in the necessary [configuration details](#bigquery-configuration).
+5. Finalize the creation by clicking on **Create**.
+6. Done! The batch export will schedule its first run on the start of the next period.
+
+## BigQuery configuration
+
+Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
+* **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
+* **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
+
+The configuration of a Google Cloud service account integration depends on your authentication method:
+
+* **If using service account impersonation:** Provide the **Service Account Email** and **Project ID**. No key file is needed.
+* **If using a JSON key file:** Upload the **Google Cloud JSON key file** for your Service Account. The project ID and service account information are extracted automatically from the key file.
+
+See the [BigQuery access setup section](#setting-up-bigquery-access) for more information on configuring authentication.
+
+## Examples
+
+These examples illustrate how to use the data from batch exports in BigQuery.
+
+### Requirements
+
+Two batch exports need to be created:
+* An events model batch export.
+* A persons model batch export.
+
+For the purposes of these examples, assume that these two batch exports have already been created and have exported some data to BigQuery in tables `example.events` and `example.persons`.
+
+### Example: Count unique persons that have triggered an event
+
+The following query counts unique persons that have triggered events.
+It uses `COALESCE` to fall back to `distinct_id` for events where the person has no profile in the persons export (for example, anonymous users when [person profile processing is disabled](/docs/data/anonymous-vs-identified-events)):
+
+```sql runInPostHog=false
+SELECT
+  event,
+  COUNT(DISTINCT COALESCE(persons.person_id, events.distinct_id)) AS unique_persons_count
+FROM
+  example.events AS events
+LEFT JOIN
+  example.persons AS persons ON events.distinct_id = persons.distinct_id AND events.team_id = persons.team_id
+GROUP BY
+  event
+ORDER BY
+  unique_persons_count DESC
+```
+
+## FAQ
+
+### How does PostHog keep the persons model (or any mutable model) up to date?
+
+Exporting a mutable model can be divided into new rows that have to be inserted, and existing rows that have to be updated. When a PostHog batch export exports mutable data (like the persons model) to BigQuery, it executes a merge operation to apply new updates to existing rows.
+
+The operation the PostHog batch export executes in BigQuery roughly involves the following steps:
+
+1. Creating a stage table.
+2. Inserting new data into stage table.
+3. Execute a merge operation between existing table and stage table.
+    a. Any rows that match in the final table and for which any of the stage table's version fields is higher are updated.
+    b. Any new rows not found in the final table are inserted.
+4. Drop the stage table.
+
+### Why are additional permissions required to export the persons model?
+
+The merge operation described above explains why a mutable export requires additional permissions beyond the permissions required for exporting the events model: Since we need to clean-up a stage table, `bigquery.tables.delete` is required.
+
+### Which jobs does the batch export run in BigQuery?
+
+If you check your BigQuery [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) or the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job) for job details, you may notice the PostHog batch export running jobs in your BigQuery warehouse.
+
+Regardless of model, PostHog batch exports run a [load job](https://cloud.google.com/bigquery/docs/batch-loading-data) to batch load the data for the current period into BigQuery. Moreover, you will see additional [query jobs](https://cloud.google.com/bigquery/docs/running-queries) in your logs when exporting a mutable model as the merge operation the batch export executes requires running additional queries in your BigQuery warehouse.
+
+If you are noticing an issue with your BigQuery batch export, it may be useful to check the aforementioned [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) and the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job). The error logs in them could be valuable to either diagnose the issue by yourself, or when creating a support request for us to look into.

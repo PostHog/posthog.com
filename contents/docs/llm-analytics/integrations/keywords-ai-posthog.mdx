@@ -11,14 +11,14 @@ You can integrate with [Keywords AI](https://www.keywordsai.co) and bring data i
 ## How to install the integration
 
 1. Sign up for [Keywords AI](https://keywordsai.co/) and add it to your app.
-2. Copy PostHog host and project API key from your [PostHog project settings](https://us.posthog.com/settings/project).
+2. Copy PostHog host and project token from your [PostHog project settings](https://us.posthog.com/settings/project).
 3. In your Keywords AI requests in your code, add the following parameters:
 
 ```
 {
 // other parameters
 "posthog_integration": {
-        "posthog_api_key": "<ph_project_api_key>",
+        "posthog_api_key": "<ph_project_token>",
         "posthog_base_url": "<ph_client_api_host>"
     }
 }

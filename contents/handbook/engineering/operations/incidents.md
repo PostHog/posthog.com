@@ -47,7 +47,7 @@ Things that _shouldn’t_ be an incident
 - Unable to save insights, create feature flags
 - Expected disruption which happens as part of scheduled maintenance
 
-> Planning some maintenance? Check the [announcements](/handbook/growth/brand/product-announcements) section instead.
+> Planning some maintenance? Check the [announcements](/handbook/marketing/product-announcements) section instead.
 
 
 ### Security-specific guidance
@@ -113,14 +113,13 @@ When an incident is declared, the person who raised the incident is the incident
 
 - Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
-- Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
-    - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.
-    - Access to Atlassian is limited due to seats so if you need access talk to Tim or James.
-    - Do not try and update the status page via the incident.io dashboard because it won't be sync'd to the Atlassian status page.
+- Update the [status page](https://status.posthog.com/). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). If needed, ask the support team for help managing the status page so you can focus on the technical management of the incident. The status page can be updated from:
+    - (recommended) the incident Slack channel using `/incident statuspage` (`/inc sp`)
+    - the [status page area](https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now) of the incident.io dashboard (only recommended for corrections/modifications - Slack tooling provides better context)
 
 The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
-Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/growth/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
+Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
 
 [You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
@@ -134,7 +133,7 @@ When updating the status page, make sure to mark the affected component appropri
 
 ### Getting help from a comms lead
 
-Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/growth/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
+Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it. If the incident is minor this can usually be done by updating the status page, but it may be desirable to do additional customer communications, such as sending an email to impacted customers. When this is required, you should [involve a Comms Lead](/handbook/marketing/incident-comms) and [ensure the Sales team are aware](/handbook/growth/sales/communications-templates-incidents).
 
 The best way to ask for support from a Comms Lead is to post in the incident channel and use the `@all-marketers` group tag. This will alert the all relevant marketing teams. 
 

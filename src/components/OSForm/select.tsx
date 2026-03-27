@@ -149,6 +149,7 @@ const OSSelect = ({
     }, []) // Remove dependency on isOpen
 
     // Focus search input when dropdown opens and highlight first non-header option
+    // Only run when isOpen changes - not when filteredOptions changes (which can happen on parent re-renders)
     useEffect(() => {
         if (isOpen) {
             if (searchable && searchInputRef.current) {
@@ -162,7 +163,7 @@ const OSSelect = ({
         } else {
             setHighlightedIndex(-1)
         }
-    }, [isOpen, searchable, filteredOptions])
+    }, [isOpen])
 
     // Scroll highlighted option into view
     useEffect(() => {
@@ -174,13 +175,14 @@ const OSSelect = ({
         }
     }, [highlightedIndex])
 
-    // Auto-highlight first selectable option when filtered options change
+    // Auto-highlight first selectable option when search term changes
+    // This handles the case where the user types in the search box and results filter
     useEffect(() => {
-        if (isOpen) {
+        if (isOpen && searchTerm) {
             const firstSelectableIndex = filteredOptions.findIndex((opt) => !opt.isHeader)
             setHighlightedIndex(firstSelectableIndex >= 0 ? firstSelectableIndex : -1)
         }
-    }, [filteredOptions, isOpen])
+    }, [searchTerm])
 
     // Helper functions to find next/previous non-header option
     const findNextSelectableIndex = (currentIndex: number): number => {
