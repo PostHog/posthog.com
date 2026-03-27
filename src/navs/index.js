@@ -5944,6 +5944,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Demos & examples',
+                    url: '/docs/llm-analytics/demos',
+                    icon: 'IconFlask',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
