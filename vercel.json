@@ -1744,6 +1744,14 @@
         },
         { "source": "/docs/customer-analytics/faq", "destination": "/docs/customer-analytics/troubleshooting" },
         { "source": "/docs/error-tracking/cutting-costs", "destination": "/docs/error-tracking/pricing" },
+        {
+            "source": "/blog/what-is-a-product-engineer",
+            "destination": "/product-engineer/what-is-a-product-engineer"
+        },
+        {
+            "source": "/product-engineer",
+            "destination": "/product-engineer/what-is-a-product-engineer"
+        },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" }
     ],
