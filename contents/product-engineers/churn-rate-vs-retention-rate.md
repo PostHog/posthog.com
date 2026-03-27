@@ -209,7 +209,7 @@ You're gonna need a few things to track, analyze and reduce customer churn, such
 
 Some companies deploy a complicated data stack to get all this, but it's not necessary. We built PostHog (yes, this is a teeny bit of sales pitch, now) so you can get all those things in one, tightly integrated tool.
 
-And, while we can't help you with #6, we do have strong opinions on why [product engineers are awesome](/blog/what-is-a-product-engineer) for startups, and how product engineers and [product managers](/newsletter/what-does-a-product-manager-do) can work together.
+And, while we can't help you with #6, we do have strong opinions on why [product engineers are awesome](/product-engineer/what-is-a-product-engineer) for startups, and how product engineers and [product managers](/newsletter/what-does-a-product-manager-do) can work together.
 
 Check out [our product page](/product) if this sounds interesting to you.
 
