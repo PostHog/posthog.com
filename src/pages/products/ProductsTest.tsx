@@ -22,7 +22,11 @@ const sections = [
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
         link: { label: 'Data stack readme.md', url: '/data-stack' },
         groups: [
-            { label: 'Data I/O', handles: ['data_in', 'data_out'] },
+            {
+                label: 'Data I/O',
+                handles: ['data_in', 'data_out'],
+                afterLink: { label: 'View all integrations', url: '/data-stack/integrations-library' },
+            },
             {
                 label: 'Manage & query',
                 colSpan: 2,
@@ -40,43 +44,40 @@ const sections = [
         link: { label: 'Tooling readme.md', url: '/docs' },
         groups: [
             {
-                label: 'Analytics',
-                handles: [
-                    'web_analytics',
-                    'product_analytics',
-                    'revenue_analytics',
-                    'trends',
-                    'funnels',
-                    'user_paths',
-                    'lifecycle',
-                    'llm_traces',
-                    'llm_generations',
-                    'llm_evals',
+                label: 'Understand product usage',
+                colSpan: 2,
+                columns: [
+                    ['web_analytics', 'product_analytics', 'revenue_analytics', 'trends'],
+                    ['funnels', 'user_paths', 'lifecycle', 'llm_traces'],
+                    ['llm_generations', 'llm_evals', 'session_replay', 'heatmaps'],
                 ],
             },
             {
-                label: 'Debugging & analysis',
-                handles: ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles', 'surveys', 'support'],
+                label: 'Debug & fix issues',
+                handles: ['error_tracking', 'logs', 'session_replay', 'profiles'],
             },
             {
-                label: 'Feature development',
-                handles: [
-                    'feature_flags',
-                    'experiments',
-                    'no_code_ab_testing',
-                    'early_access',
-                    'endpoints',
-                    'product_tours',
-                    'webhooks',
-                    'workflows_emails',
+                label: 'Ship features & get feedback',
+                colSpan: 2,
+                columns: [
+                    ['feature_flags', 'experiments', 'no_code_ab_testing', 'early_access', 'endpoints', 'webhooks'],
+                    ['workflows_emails', 'surveys', 'product_tours', 'support', 'user_interviews'],
                 ],
             },
         ],
     },
     {
         title: 'Tools',
-        description:
-            'While PostHog AI is the main way to interact with PostHog, there are still some bespoke views that will come in handy.',
+        description: (
+            <>
+                <Link to="/ai" state={{ newWindow: true }} className="font-semibold">
+                    PostHog AI
+                </Link>{' '}
+                can answer most questions directly, but dashboards give you at-a-glance metrics, notebooks let you
+                compile insights and replays to support a deep dive, and the activity feed shows a real-time event
+                timeline of what users are doing.
+            </>
+        ),
         groups: [
             {
                 label: null,
@@ -210,20 +211,31 @@ export default function ProductsTest(): JSX.Element {
                             <div
                                 className={`grid gap-x-8 gap-y-6 ${
                                     section.groups.length >= 3
-                                        ? 'grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3'
+                                        ? 'grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3'
                                         : 'grid-cols-1 @md:grid-cols-3'
                                 }`}
                             >
                                 {section.groups.map((group, gi) => {
                                     if ('columns' in group && group.columns) {
+                                        const isFirstGroup = gi === 0
+                                        const spanClass =
+                                            group.colSpan === 2
+                                                ? isFirstGroup
+                                                    ? '@md:col-span-2 @2xl:col-span-3'
+                                                    : '@md:col-span-2'
+                                                : ''
                                         return (
-                                            <div key={gi} className={group.colSpan === 2 ? '@md:col-span-2' : ''}>
+                                            <div key={gi} className={spanClass}>
                                                 {group.label && (
                                                     <h3 className="text-xs font-semibold uppercase tracking-wide text-secondary mb-1.5">
                                                         {group.label}
                                                     </h3>
                                                 )}
-                                                <div className="grid grid-cols-2 gap-x-8">
+                                                <div
+                                                    className={`grid gap-x-8 ${
+                                                        isFirstGroup ? 'grid-cols-2 @2xl:grid-cols-3' : 'grid-cols-2'
+                                                    }`}
+                                                >
                                                     {group.columns.map((col: string[], ci: number) => (
                                                         <div key={ci} className="space-y-1">
                                                             {col.map((handle: string) => {
@@ -250,6 +262,15 @@ export default function ProductsTest(): JSX.Element {
                                                 if (!product) return null
                                                 return <ProductRow key={handle} product={product} />
                                             })}
+                                            {'afterLink' in group && group.afterLink && (
+                                                <Link
+                                                    to={group.afterLink.url}
+                                                    state={{ newWindow: true }}
+                                                    className="inline-flex items-center gap-1 text-sm font-medium mt-2"
+                                                >
+                                                    {group.afterLink.label} <IconArrowRight className="size-3.5" />
+                                                </Link>
+                                            )}
                                         </div>
                                     )
                                 })}
