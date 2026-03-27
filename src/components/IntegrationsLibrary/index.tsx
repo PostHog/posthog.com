@@ -98,6 +98,28 @@ export default function IntegrationsLibrary(): JSX.Element {
         }
     `)
 
+    const selfHostedSources = [
+        { name: 'S3', slug: 's3', icon_url: '/static/services/s3.png', description: 'Link S3 data to PostHog' },
+        {
+            name: 'Google Cloud Storage',
+            slug: 'gcs',
+            icon_url: '/static/services/google-cloud-storage.png',
+            description: 'Link Google Cloud Storage data to PostHog',
+        },
+        {
+            name: 'Cloudflare R2',
+            slug: 'r2',
+            icon_url: '/static/services/cloudflare-r2.png',
+            description: 'Link Cloudflare R2 data to PostHog',
+        },
+        {
+            name: 'Azure Blob',
+            slug: 'azure-blob',
+            icon_url: '/static/services/azure-blob-storage.png',
+            description: 'Link Azure Blob data to PostHog',
+        },
+    ]
+
     // Combine all pipelines data
     const allPipelines = [
         ...(data.sources?.nodes || []).map((s: any) => ({
@@ -106,6 +128,13 @@ export default function IntegrationsLibrary(): JSX.Element {
             type: 'source',
             category: ['Data warehouse'],
             description: `Sync ${s.name} data into PostHog`,
+        })),
+        ...selfHostedSources.map((s) => ({
+            ...s,
+            status: 'live',
+            type: 'source',
+            category: ['Cloud storage'],
+            description: s.description,
         })),
         ...(data.destinations?.nodes || []).map((d: any) => ({
             ...d,
