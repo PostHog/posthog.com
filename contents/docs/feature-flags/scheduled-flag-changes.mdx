@@ -7,9 +7,12 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const ScheduledFlagChangesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-light.png"
-export const ScheduledFlagChangesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-dark.png"
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+export const ScheduledFlagChangesLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-light.png";
+export const ScheduledFlagChangesDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/feature-flags/scheduled-flag-changes-dark.png";
 
 Scheduling feature flag changes enable you to automatically change flag properties at a future point in time. For example, you can schedule an initial release of a flag for internal testing, then enable it to the beta users group 2 days later, and finally, roll it out to 100% of the users in 2 weeks.
 
@@ -20,21 +23,42 @@ This is also useful if your releases fall outside normal working hours. For exam
 1. Navigate to the relevant feature flag.
 2. Select the `Schedule` tab.
 3. Under `Change type`:
-    - Select `Change status` if you want to enable or disable your flag at a scheduled time.
-    - Select `Add condition` if you want to specify the rollout conditions of your flag at a scheduled time.
-    - Select `Update variants` if you want to update the variants keys, descriptions, payloads, or rollouts.
+   - Select `Change status` if you want to enable or disable your flag at a scheduled time.
+   - Select `Add condition` if you want to specify the rollout conditions of your flag at a scheduled time.
+   - Select `Update variants` if you want to update the variants keys, descriptions, payloads, or rollouts.
 4. Select the `Date and time` of your scheduled change using the date picker.
 5. Click `Schedule`.
 
 You can view the scheduled changes in the table at the bottom of the page.
 
 <ProductScreenshot
-    imageLight={ScheduledFlagChangesLight}
-    imageDark={ScheduledFlagChangesDark}
-    alt="Scheduled flag changes"
-    classes="rounded"
+  imageLight={ScheduledFlagChangesLight}
+  imageDark={ScheduledFlagChangesDark}
+  alt="Scheduled flag changes"
+  classes="rounded"
 />
 
+## Schedule changes with MCP
+
+You can also schedule flag changes programmatically using the [PostHog MCP server](/docs/feature-flags/create-flags-mcp#scheduled-change-tools). This enables AI coding agents to create, list, update, and delete scheduled changes directly from your code editor.
+
+The MCP server provides five tools for scheduled changes:
+
+| Tool                       | Description                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `scheduled-changes-list`   | List scheduled changes in the current project. Filter by flag ID to see schedules for a specific flag.  |
+| `scheduled-changes-get`    | Get a single scheduled change by ID, including payload, timing, and execution status.                   |
+| `scheduled-changes-create` | Schedule a future change to a feature flag (enable/disable, add release condition, or update variants). |
+| `scheduled-changes-update` | Update a pending scheduled change's payload, timing, or recurrence settings.                            |
+| `scheduled-changes-delete` | Delete a scheduled change so it won't be executed.                                                      |
+
+Example prompts:
+
+- `Schedule the new-checkout flag to enable at midnight tomorrow.`
+- `List all pending scheduled changes for my feature flags.`
+- `Cancel the scheduled rollout for the dark-mode flag.`
+
+See the [MCP server docs](/docs/model-context-protocol) for setup instructions.
 
 ## Copy scheduled changes across projects
 
