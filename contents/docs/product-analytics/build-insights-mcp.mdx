@@ -21,7 +21,8 @@ The MCP server provides these tools for working with Product Analytics:
 
 | Tool                                 | Description                                                                                                                                                                                        |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `query-run`                          | Run any analytics query – trends, funnels, retention, lifecycle, stickiness, or custom HogQL. Returns results directly in your editor.                                                             |
+| `query-run`                          | Run any analytics query – trends, funnels, retention, lifecycle, paths, stickiness, or custom HogQL. Returns results directly in your editor.                                                      |
+| `query-paths`                        | Run a [paths query](/docs/product-analytics/paths) to analyze the most common sequences of events or pages users navigate through. Visualize user flows and identify drop-off points.              |
 | `query-paths`                        | Run a [paths query](/docs/product-analytics/paths) to analyze the most common sequences of events or pages users navigate through. Visualizes user flows as a directed graph with drop-off points. |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it.                                                                    |
 | `insight-create-from-query`          | Create a saved insight from a query and optionally add it to a dashboard.                                                                                                                          |
@@ -38,7 +39,9 @@ Try these with your MCP-enabled agent:
 - `How is the new checkout flow performing compared to last week?`
 - `Show me the top 10 events by volume today.`
 - `Create a funnel from user_signed_up to project_created to insight_viewed.`
-- `What's the retention rate for users who completed onboarding?`
+- `Run a HogQL query to find the most active users by event count this month.`
+- `What are the most common paths users take after signing up?`
+- `Show me the navigation paths from the pricing page to checkout.`
 - `Run a HogQL query to find the most active users by event count this month.`
 - `What pages do users visit after the homepage?`
 - `Show me navigation paths from signup to first purchase, grouped by marketing source.`
