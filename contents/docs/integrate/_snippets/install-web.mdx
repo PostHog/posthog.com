@@ -1,4 +1,4 @@
-import Snippet from "./install-js-snippet.mdx"
+import Snippet from "./install-js-snippet.mdx";
 
 ### Option 1: Add the JavaScript snippet to your HTML <span class="bg-accent text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
 
@@ -8,6 +8,8 @@ import Snippet from "./install-js-snippet.mdx"
 <summary>Keeping the SDK version up to date</summary>
 
 Be careful to avoid things which can cause the SDK version to be cached and fail to update. See: [Ways SDK versions fall behind](/docs/sdk-doctor/keeping-sdks-current#ways-sdk-versions-fall-behind)
+
+You can also pin the snippet to a specific version of `posthog-js` in your [project settings](https://app.posthog.com/settings/environment#js-snippet-version). Accepted formats are major (`1`), minor (`1.358`), or exact (`1.358.0`). The default is `1`, which always serves the latest v1.x release.
 
 </details>
 
@@ -24,15 +26,15 @@ Then create a type declaration file:
 
 ```typescript
 // posthog.d.ts
-import type { PostHog } from '@posthog/types'
+import type { PostHog } from "@posthog/types";
 
 declare global {
-    interface Window {
-        posthog?: PostHog
-    }
+  interface Window {
+    posthog?: PostHog;
+  }
 }
 
-export {}
+export {};
 ```
 
 See the [TypeScript types documentation](/docs/libraries/js/types) for more details.
@@ -41,7 +43,7 @@ See the [TypeScript types documentation](/docs/libraries/js/types) for more deta
 
 ### Option 2: Install via package manager
 
-import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+import InstallWebPackageManagers from "./install-web-package-managers.mdx";
 
 <InstallWebPackageManagers />
 
@@ -149,21 +151,21 @@ posthog.init('<ph_project_token>', {
 
 #### Available extension bundles
 
-| Bundle | What's included |
-| --- | --- |
-| `FeatureFlagsExtensions` | [Feature Flags](/docs/feature-flags) |
-| `SessionReplayExtensions` | [Session Replay](/docs/session-replay) |
-| `AnalyticsExtensions` | [Autocapture](/docs/product-analytics/autocapture), pageview tracking, [heatmaps](/docs/toolbar/heatmaps), dead click detection, [web vitals](/docs/web-analytics/web-vitals) |
-| `ErrorTrackingExtensions` | [Error Tracking](/docs/error-tracking) |
-| `SurveysExtensions` | [Surveys](/docs/surveys) |
-| `ExperimentsExtensions` | [Experiments](/docs/experiments) |
-| `ProductToursExtensions` | [Product Tours](/docs/product-tours) |
-| `SiteAppsExtensions` | [Site apps](/docs/site-apps) |
-| `TracingExtensions` | Distributed tracing header injection |
-| `ToolbarExtensions` | [Toolbar](/docs/toolbar) |
-| `LogsExtensions` | [Log capture](/docs/logs) |
-| `ConversationsExtensions` | Conversations |
-| `AllExtensions` | Everything (equivalent to the default `posthog-js` bundle) |
+| Bundle                    | What's included                                                                                                                                                               |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FeatureFlagsExtensions`  | [Feature Flags](/docs/feature-flags)                                                                                                                                          |
+| `SessionReplayExtensions` | [Session Replay](/docs/session-replay)                                                                                                                                        |
+| `AnalyticsExtensions`     | [Autocapture](/docs/product-analytics/autocapture), pageview tracking, [heatmaps](/docs/toolbar/heatmaps), dead click detection, [web vitals](/docs/web-analytics/web-vitals) |
+| `ErrorTrackingExtensions` | [Error Tracking](/docs/error-tracking)                                                                                                                                        |
+| `SurveysExtensions`       | [Surveys](/docs/surveys)                                                                                                                                                      |
+| `ExperimentsExtensions`   | [Experiments](/docs/experiments)                                                                                                                                              |
+| `ProductToursExtensions`  | [Product Tours](/docs/product-tours)                                                                                                                                          |
+| `SiteAppsExtensions`      | [Site apps](/docs/site-apps)                                                                                                                                                  |
+| `TracingExtensions`       | Distributed tracing header injection                                                                                                                                          |
+| `ToolbarExtensions`       | [Toolbar](/docs/toolbar)                                                                                                                                                      |
+| `LogsExtensions`          | [Log capture](/docs/logs)                                                                                                                                                     |
+| `ConversationsExtensions` | Conversations                                                                                                                                                                 |
+| `AllExtensions`           | Everything (equivalent to the default `posthog-js` bundle)                                                                                                                    |
 
 **Note:** Each extension bundle includes its own dependencies. You don't need to worry about adding them separately.
 
@@ -187,4 +189,3 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 The `defaults` is a date, such as `2026-01-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>
-
