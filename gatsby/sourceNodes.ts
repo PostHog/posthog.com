@@ -1131,6 +1131,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         for (const config of configs) {
             const displayName = config.label || config.name
+            if (!displayName) continue
             const slug = displayName
                 .toLowerCase()
                 .replace(/\./g, '')
