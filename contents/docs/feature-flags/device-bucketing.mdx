@@ -20,7 +20,7 @@ Use it when a flag is shown before `identify()` runs, such as signup flows, land
 
 By default, release conditions **match by user**. That means PostHog uses `distinct_id` to decide which rollout bucket or variant someone gets.
 
-That works well for identified users, but it can change during the anonymous to identified transition:
+That works well for identified users, but it can change during the transition from anonymous to identified:
 
 | Step | `distinct_id` | `$device_id` | What happens |
 |---|---|---|---|
