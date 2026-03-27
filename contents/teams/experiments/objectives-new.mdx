@@ -1,0 +1,31 @@
+### Q2 2026 Objectives
+This quarter we're making experiments work great with AI agents, removing feature flag friction, and improving the results experience.
+
+#### AI
+
+##### API layer <TeamMember name="Marcel Poelker" photo />
+Get the API layer ready for AI agents. All experiment operations should be covered, well tested and work the same way whether the caller is our frontend or an agent.
+
+##### PostHog AI <TeamMember name="Marcel Poelker" photo />
+Users should be able to do any experiment operation through PostHog AI chat and have it just work.
+
+##### MCP <TeamMember name="Rodrigo Iloro" photo />
+External callers like PostHog Code or any other agent can connect via MCP and run experiment operations reliably.
+
+##### Signals <TeamMember name="Marcel Poelker" photo />
+Ship our first signal - notifying users when an experiment reaches significance.
+
+#### Feature flags <TeamMember name="Anders Asheim Hennum" photo />
+There's still a lot of friction with feature flags. Configuration is confusing and rollouts are hard to get right.
+
+##### Per-condition variant configuration
+Let each feature flag rule define its own variant split, so experiments and manual rollouts on the same flag don't interfere with each other.
+
+##### Rule-level exposure attribution
+Tag flag evaluations with the specific rule that triggered the assignment, so experiment analysis only counts traffic from the experiment's targeting rule.
+
+#### Query performance <TeamMember name="Juraj Majerik" photo />
+Extend precomputation to the main subquery for all metric types. Make precomputation observable - see where it kicked in, how it ran and compare results against direct-scan queries.
+
+#### Loading experience <TeamMember name="Rodrigo Iloro" photo />
+Loading is painful for our high-volume users. Consolidate query fetching, only re-query when the user asks and set better expectations around loading states.
