@@ -259,6 +259,7 @@ posthog.configure(
 - Use short step names that describe a checkpoint or action.
 - Keep payloads small and focused.
 - Avoid sensitive data, raw request bodies, and large nested objects.
+- If your SDK supports a `beforeSend`-style callback, use it to redact exception steps before they are sent.
 - Add steps before the risky operation runs.
 
 ### Troubleshooting missing steps
