@@ -2,8 +2,6 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import ReactMarkdown from 'react-markdown'
-import PostLayout from 'components/PostLayout'
-import { dataPipelines, docsMenu } from '../navs'
 
 interface SourceField {
     name: string
@@ -16,7 +14,6 @@ interface SourceField {
 
 export default function DataWarehouseSource({
     data,
-    location,
 }: {
     data: {
         postHogSource: {
@@ -29,15 +26,11 @@ export default function DataWarehouseSource({
             sourceFields: SourceField[]
         }
     }
-    location: { pathname: string }
 }): JSX.Element {
     const { sourceId, name, icon_url, caption, permissionsCaption, beta, sourceFields } = data.postHogSource
-    const isDataWarehouse = location.pathname.startsWith('/docs/data-warehouse/')
-    const dataWarehouseMenu = docsMenu.children?.find((item: any) => item.name === 'Data Warehouse')
-    const menu = isDataWarehouse ? dataWarehouseMenu : dataPipelines
 
     return (
-        <PostLayout menu={menu.children} sidebar="Docs" darkMode={false}>
+        <>
             <SEO title={`${name} source - Docs - PostHog`} description={`Connect ${name} to PostHog`} />
             <div className="flex items-center space-x-2 mb-4">
                 <img src={icon_url} alt={name} className="w-10 h-10 object-contain" />
@@ -100,7 +93,7 @@ export default function DataWarehouseSource({
                     <strong>Import</strong>
                 </li>
             </ol>
-        </PostLayout>
+        </>
     )
 }
 
