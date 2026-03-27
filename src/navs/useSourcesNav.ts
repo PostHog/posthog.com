@@ -1,6 +1,13 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export default function useSourcesNav(): { url: string; name: string }[] {
+const SELF_MANAGED_SOURCES = [
+    { name: 'S3', url: '/docs/cdp/sources/s3' },
+    { name: 'Azure Blob', url: '/docs/cdp/sources/azure-blob' },
+    { name: 'Cloudflare R2', url: '/docs/cdp/sources/r2' },
+    { name: 'Google Cloud Storage', url: '/docs/cdp/sources/gcs' },
+]
+
+export default function useSourcesNav(): { url?: string; name: string }[] {
     const { allPostHogSource } = useStaticQuery(graphql`
         query SourcesNav {
             allPostHogSource(filter: { unreleased: { ne: true } }, sort: { fields: name, order: ASC }) {
@@ -13,7 +20,7 @@ export default function useSourcesNav(): { url: string; name: string }[] {
         }
     `)
 
-    return allPostHogSource.nodes.map((node: any) => ({
+    const managed = allPostHogSource.nodes.map((node: any) => ({
         url: `/docs/cdp/sources/${node.slug}`,
         name: node.name,
         ...(node.beta && {
@@ -23,4 +30,6 @@ export default function useSourcesNav(): { url: string; name: string }[] {
             },
         }),
     }))
+
+    return [...managed, { name: 'Self-managed' }, ...SELF_MANAGED_SOURCES]
 }
