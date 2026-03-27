@@ -945,6 +945,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    // Create /docs/data-warehouse/sources/* for ALL released sources (from API)
+    // Create /docs/cdp/sources/* only for sources WITHOUT hand-written docs
     result.data.postHogSources.nodes.forEach((node) => {
         createPage({
             path: `/docs/data-warehouse/sources/${node.slug}`,
@@ -958,20 +960,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Create data-warehouse/sources/* pages for sources that have hand-written docs at cdp/sources/*
+    // Sources with hand-written docs: create data-warehouse page + cdp page is already from MDX
     result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
-        if (node.mdx?.id) {
-            createPage({
-                path: `/docs/data-warehouse/sources/${node.slug}`,
-                component: HandbookTemplate,
-                context: {
-                    id: node.mdx.id,
-                    links: [],
-                    nextURL: '',
-                    searchFilter: 'Docs',
-                },
-            })
-        }
+        createPage({
+            path: `/docs/data-warehouse/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
     })
 
     // Grab types available for each SDK and version
