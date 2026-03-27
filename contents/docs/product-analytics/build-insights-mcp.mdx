@@ -2,7 +2,7 @@
 title: Build insights with MCP
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) gives your AI coding agent direct access to PostHog analytics. Query trends, funnels, retention, and custom HogQL – all from your code editor.
+The [PostHog MCP server](/docs/model-context-protocol) gives your AI coding agent direct access to PostHog analytics. Query trends, funnels, retention, paths, and custom HogQL – all from your code editor.
 
 This works in any MCP client – Cursor, Windsurf, Claude Code, VS Code, and others.
 
@@ -19,16 +19,17 @@ With MCP, your coding agent can:
 
 The MCP server provides these tools for working with Product Analytics:
 
-| Tool | Description |
-|------|-------------|
-| `query-run` | Run any analytics query – trends, funnels, retention, lifecycle, paths, stickiness, or custom HogQL. Returns results directly in your editor. |
-| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it. |
-| `insight-create-from-query` | Create a saved insight from a query and optionally add it to a dashboard. |
-| `insight-get` | Get details for a specific insight by ID. |
-| `insights-get-all` | List all insights in the current project. Filter by name or type. |
-| `insight-query` | Run the query behind a saved insight and return fresh results. |
-| `insight-update` | Update a saved insight's name, description, or query. |
-| `insight-delete` | Delete a saved insight. |
+| Tool                                 | Description                                                                                                                                                                                        |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `query-run`                          | Run any analytics query – trends, funnels, retention, lifecycle, stickiness, or custom HogQL. Returns results directly in your editor.                                                             |
+| `query-paths`                        | Run a [paths query](/docs/product-analytics/paths) to analyze the most common sequences of events or pages users navigate through. Visualizes user flows as a directed graph with drop-off points. |
+| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it.                                                                    |
+| `insight-create-from-query`          | Create a saved insight from a query and optionally add it to a dashboard.                                                                                                                          |
+| `insight-get`                        | Get details for a specific insight by ID.                                                                                                                                                          |
+| `insights-get-all`                   | List all insights in the current project. Filter by name or type.                                                                                                                                  |
+| `insight-query`                      | Run the query behind a saved insight and return fresh results.                                                                                                                                     |
+| `insight-update`                     | Update a saved insight's name, description, or query.                                                                                                                                              |
+| `insight-delete`                     | Delete a saved insight.                                                                                                                                                                            |
 
 ## Example prompts
 
@@ -39,19 +40,22 @@ Try these with your MCP-enabled agent:
 - `Create a funnel from user_signed_up to project_created to insight_viewed.`
 - `What's the retention rate for users who completed onboarding?`
 - `Run a HogQL query to find the most active users by event count this month.`
+- `What pages do users visit after the homepage?`
+- `Show me navigation paths from signup to first purchase, grouped by marketing source.`
+- `Analyze custom event paths after user signed up, excluding noisy events like page_ping.`
 
 ## Dashboard tools
 
 You can also create and manage dashboards from your editor:
 
-| Tool | Description |
-|------|-------------|
-| `dashboard-create` | Create a new dashboard. |
-| `dashboard-get` | Get a dashboard and its tiles. |
-| `dashboards-get-all` | List all dashboards in the project. |
-| `add-insight-to-dashboard` | Add an existing insight to a dashboard. |
-| `dashboard-update` | Update a dashboard's name or description. |
-| `dashboard-delete` | Delete a dashboard. |
+| Tool                       | Description                               |
+| -------------------------- | ----------------------------------------- |
+| `dashboard-create`         | Create a new dashboard.                   |
+| `dashboard-get`            | Get a dashboard and its tiles.            |
+| `dashboards-get-all`       | List all dashboards in the project.       |
+| `add-insight-to-dashboard` | Add an existing insight to a dashboard.   |
+| `dashboard-update`         | Update a dashboard's name or description. |
+| `dashboard-delete`         | Delete a dashboard.                       |
 
 ## Install the MCP server
 
