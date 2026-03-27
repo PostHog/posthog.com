@@ -270,7 +270,6 @@ If an exception appears in error tracking but not in the timeline with steps:
 - Make sure you called `addExceptionStep(...)` before the failure.
 - Use `captureException(...)` or SDK autocapture, not `posthog.capture('$exception', ...)`.
 - On the server, make sure the steps and exception use the same request or job scope.
-- If you expect to see the exception in a replay or session timeline, make sure the exception itself is linked to the correct user or session.
 - Reduce step payload size if the final event is too large.
 
 ### Error boundaries
