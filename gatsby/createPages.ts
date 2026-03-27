@@ -963,12 +963,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         createPage({
             path: `/docs/data-warehouse/sources/${node.slug}`,
             component: DataWarehouseSource,
-            context: { id: node.id, ignoreWrapper: true },
+            context: { id: node.id },
         })
         createPage({
             path: `/docs/cdp/sources/${node.slug}`,
             component: DataWarehouseSource,
-            context: { id: node.id, ignoreWrapper: true },
+            context: { id: node.id },
         })
     })
 
