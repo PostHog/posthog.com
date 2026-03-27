@@ -15,7 +15,7 @@ crosspost:
 
 One thing on every startup’s mind: Should we build an AI agent?
 
-We had this thought two years ago, released an “AI product assistant” 6 months later, iterated, and then relaunched as [PostHog AI](/ai) in November last year
+We had this thought two years ago, released an “AI product assistant” 6 months later, iterated, and then relaunched as [PostHog AI](/ai) in November last year.
 
 We learned a lot along the way that we wished we knew when we started. With that knowledge, we could have…
 
