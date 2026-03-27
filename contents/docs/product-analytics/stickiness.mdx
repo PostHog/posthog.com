@@ -3,9 +3,9 @@ title: Stickiness
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 Stickiness is a type of [insight](/docs/user-guides/insights) that enables you to see how many times users perform an event within a specific time period. This is useful for tracking if a particular feature is engaging for users.
@@ -14,9 +14,9 @@ For example, if you track `Weekly Active Users`, stickiness highlights those tha
 
 Stickiness helps you answer questions such as:
 
--   How frequently are users engaging with my product?
--   Who are my most engaged users?
--   Are users engaging more with my product now than they did a month ago?
+- How frequently are users engaging with my product?
+- Who are my most engaged users?
+- Are users engaging more with my product now than they did a month ago?
 
 ## How to create a stickiness insight
 
@@ -26,10 +26,14 @@ Stickiness helps you answer questions such as:
 4. Select the event you want to see the stickiness of
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716289465/posthog.com/contents/stickiness-dark.png"}
-    alt="How to create a stickiness insight" 
-    classes="rounded"
+  imageLight={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png"
+  }
+  imageDark={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/v1716289465/posthog.com/contents/stickiness-dark.png"
+  }
+  alt="How to create a stickiness insight"
+  classes="rounded"
 />
 
 ## Understanding stickiness charts
@@ -39,13 +43,27 @@ The **y-axis** on the graph represents the number of unique users or [groups](/d
 For example, the below chart shows 938 people performed a pageview event on 3 of the last 7 days:
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716296397/posthog.com/contents/stickiness-example-light.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716296397/posthog.com/contents/stickiness-example-dark.png"}
-    alt="example of a stickiness chart" 
-    classes="rounded"
+  imageLight={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/v1716296397/posthog.com/contents/stickiness-example-light.png"
+  }
+  imageDark={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/v1716296397/posthog.com/contents/stickiness-example-dark.png"
+  }
+  alt="example of a stickiness chart"
+  classes="rounded"
 />
 
 It's worth noting that stickiness measures the **exact** number of times a user performed an action. For example, if a user performed an event in 3 out of the last 7 days, they would _only_ be included in this group, and not the group who performed the action in 2 out of the last 5 days.
+
+## Advanced stickiness options
+
+Stickiness insights support several advanced options for more detailed analysis:
+
+- **Stickiness criteria** - Filter the chart to only show users who meet a frequency threshold. You can use `greater than or equal to`, `less than or equal to`, or `exactly` operators with a day count. For example, show only users who performed an event on at least 5 days.
+
+- **Custom aggregations with HogQL** - Use custom [HogQL expressions](/docs/hogql/expressions) for aggregation beyond the default unique users and groups. For example, `sum(toFloat(properties.$revenue))` for revenue-based stickiness or `count(distinct properties.$session_id)` for session-based stickiness.
+
+- **Cumulative mode** - By default, stickiness shows users who performed an event on **exactly** N days. Switch to cumulative mode to instead show users who performed an event on **at least** N days.
 
 ## Viewing individual users
 
@@ -57,17 +75,21 @@ You can drill down into specific users who have performed an event or action mul
 You can then create a [cohort](/docs/data/cohorts) of those users by clicking the **Save as cohort** button in the modal. This is useful for creating further insights for a highly engaged group of users.
 
 <ProductScreenshot
-    imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716298213/posthog.com/contents/stickiness-cohort-light.png"} 
-    imageDark = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716298207/posthog.com/contents/stickiness-cohort-dark.png"}
-    alt="Cohort of stickiness users" 
-    classes="rounded"
+  imageLight={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/v1716298213/posthog.com/contents/stickiness-cohort-light.png"
+  }
+  imageDark={
+    "https://res.cloudinary.com/dmukukwp6/image/upload/v1716298207/posthog.com/contents/stickiness-cohort-dark.png"
+  }
+  alt="Cohort of stickiness users"
+  classes="rounded"
 />
 
 ## Stickiness vs retention
 
 Stickiness and [retention](/docs/user-guides/retention) insights can look very similar, but they tell you different things:
 
--   **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
--   **Stickiness** measures **how many** times within a period a user performed an event
+- **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
+- **Stickiness** measures **how many** times within a period a user performed an event
 
 Retention is good for seeing how well you're doing at keeping users engaged overall. Stickiness is useful for seeing how deeply users are engaging with your product, and helps you identify the most engaged users.
