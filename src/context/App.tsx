@@ -1314,14 +1314,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const sourcesNav = useSourcesNav()
+    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
+    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
-            'data-pipeline-sources': sourcesNav,
+            'data-pipeline-sources': cdpSourcesNav,
+            'data-warehouse-sources': dwSourcesNav,
         }),
         [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
     )

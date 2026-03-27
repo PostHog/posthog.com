@@ -1,13 +1,13 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
 const SELF_MANAGED_SOURCES = [
-    { name: 'S3', url: '/docs/data-warehouse/sources/s3' },
-    { name: 'Azure Blob', url: '/docs/data-warehouse/sources/azure-blob' },
-    { name: 'Cloudflare R2', url: '/docs/data-warehouse/sources/r2' },
-    { name: 'Google Cloud Storage', url: '/docs/data-warehouse/sources/gcs' },
+    { name: 'S3', slug: 's3' },
+    { name: 'Azure Blob', slug: 'azure-blob' },
+    { name: 'Cloudflare R2', slug: 'r2' },
+    { name: 'Google Cloud Storage', slug: 'gcs' },
 ]
 
-export default function useSourcesNav(): { url?: string; name: string }[] {
+export default function useSourcesNav(basePath = '/docs/data-warehouse/sources'): { url?: string; name: string }[] {
     const { allPostHogSource } = useStaticQuery(graphql`
         query SourcesNav {
             allPostHogSource(filter: { unreleased: { ne: true } }, sort: { fields: name, order: ASC }) {
@@ -21,7 +21,7 @@ export default function useSourcesNav(): { url?: string; name: string }[] {
     `)
 
     const managed = allPostHogSource.nodes.map((node: any) => ({
-        url: `/docs/data-warehouse/sources/${node.slug}`,
+        url: `${basePath}/${node.slug}`,
         name: node.name,
         ...(node.beta && {
             badge: {
@@ -31,5 +31,10 @@ export default function useSourcesNav(): { url?: string; name: string }[] {
         }),
     }))
 
-    return [...managed, { name: 'Self-managed' }, ...SELF_MANAGED_SOURCES]
+    const selfManaged = SELF_MANAGED_SOURCES.map((s) => ({
+        name: s.name,
+        url: `${basePath}/${s.slug}`,
+    }))
+
+    return [...managed, { name: 'Self-managed' }, ...selfManaged]
 }

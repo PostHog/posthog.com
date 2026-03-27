@@ -5101,7 +5101,7 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/sources',
                     icon: 'IconBook',
                     color: 'blue',
-                    dynamicChildren: 'data-pipeline-sources',
+                    dynamicChildren: 'data-warehouse-sources',
                     children: [
                         {
                             name: 'Overview',
