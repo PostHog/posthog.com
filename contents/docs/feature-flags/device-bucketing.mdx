@@ -127,15 +127,6 @@ with new_context():
 - `posthog.reset()` keeps `$device_id`. Device-bucketed flags stay stable even after logout.
 - `posthog.reset(true)` creates a new `$device_id`. Use this on shared devices or kiosks when each session should be treated as a new device.
 
-## What happens if no device ID is available
-
-If a flag is configured for device bucketing but no device ID is available:
-
-| Scenario | Behavior |
-|---|---|
-| **JavaScript web** | The SDK normally includes `$device_id` automatically. The main exception is [cookieless mode](/docs/libraries/js#cookieless-tracking), where PostHog omits it and falls back to `distinct_id` bucketing. |
-| **Node.js / Python** | Local evaluation cannot resolve a device-bucketed flag without a device ID. The SDK falls back to server evaluation when possible. If you force local-only evaluation, it returns no result (`undefined` in Node.js, `None` in Python). |
-
 ## Further reading
 
 - [Creating feature flags](/docs/feature-flags/creating-feature-flags)
