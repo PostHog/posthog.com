@@ -14,9 +14,7 @@ Feel free to ask any questions in the [#team-youtube](https://posthog.slack.com/
 
 You like cookies? Then watch this video. Plus, you’ll learn about how to properly set up Screen Studio and your recording area aspect ratio for PostHog videos:
 
-[Screen Recording Tips.mov](https://drive.google.com/file/d/1xZQc2shX-nzhvhX3uSBPuB94ToRPpteN/view?usp=drive_link)
-
-[![][image1]](https://drive.google.com/file/d/1xZQc2shX-nzhvhX3uSBPuB94ToRPpteN/view?usp=sharing)
+<script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/ywyarka3kd.js" async type="module"></script><style>wistia-player[media-id='ywyarka3kd']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/ywyarka3kd/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> <wistia-player media-id="ywyarka3kd" aspect="1.7777777777777777"></wistia-player>
 
 ## 1. Download Screen Studio
 
