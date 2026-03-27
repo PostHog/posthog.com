@@ -165,11 +165,11 @@ The agent will use the `query-run` tool to execute a trends query and return dai
 
 **Prompt:** "What are the most common paths users take after signing up?"
 
-The agent will use the `query-paths` tool to analyze user journeys, returning a directed graph of the events users follow after signup. You can scope paths to specific event types like `$pageview` for page navigation, `$screen` for mobile screens, or `custom_event` for custom-tracked events.
+The agent will use the `query-paths` tool to analyze user journeys, returning the flow of events users follow after signup.
 
 **Prompt:** "Show me the navigation paths from the pricing page to checkout"
 
-The agent will execute a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take between those two pages.
+The agent will execute a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take.
 
 **Prompt:** "Show me pageview paths but normalize all product and user URLs into single nodes"
 
