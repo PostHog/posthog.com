@@ -1,27 +1,7 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import List from 'components/List'
+import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { getLogo } from 'constants/logos'
-
-const useSourcePlatforms = () => {
-    const { allPostHogSource } = useStaticQuery(graphql`
-        query DataSourcesList {
-            allPostHogSource(filter: { unreleased: { ne: true } }, sort: { name: ASC }) {
-                nodes {
-                    name
-                    slug
-                    icon_url
-                }
-            }
-        }
-    `)
-
-    return allPostHogSource.nodes.map((node: any) => ({
-        label: node.name,
-        url: `/docs/cdp/sources/${node.slug}`,
-        image: node.icon_url,
-    }))
-}
 
 const SELF_HOSTED_SOURCES = [
     { label: 'S3', url: '/docs/cdp/sources/s3', logo: 's3' },

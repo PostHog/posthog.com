@@ -33,11 +33,11 @@ export default function DataWarehouseSource({
             caption: string
             permissionsCaption: string
             beta: boolean
-            fields: SourceField[]
+            sourceFields: SourceField[]
         }
     }
 }): JSX.Element {
-    const { sourceId, name, icon_url, caption, permissionsCaption, beta, fields } = data.postHogSource
+    const { sourceId, name, icon_url, caption, permissionsCaption, beta, sourceFields } = data.postHogSource
 
     return (
         <>
@@ -66,7 +66,7 @@ export default function DataWarehouseSource({
                         </>
                     )}
 
-                    {fields && fields.length > 0 && (
+                    {sourceFields && sourceFields.length > 0 && (
                         <>
                             <h2>Configuration</h2>
                             <table>
@@ -78,7 +78,7 @@ export default function DataWarehouseSource({
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {fields.map((field) => (
+                                    {sourceFields.map((field) => (
                                         <tr key={field.name}>
                                             <td>
                                                 <strong>{field.label || field.name}</strong>
@@ -131,7 +131,7 @@ export const query = graphql`
             caption
             permissionsCaption
             beta
-            fields {
+            sourceFields {
                 name
                 label
                 type

@@ -334,7 +334,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       description: String
     }
-    type PostHogSource implements Node {
+    type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
       sourceId: String
       name: String
@@ -345,7 +345,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       beta: Boolean
       featured: Boolean
       caption: String
-      fields: [PostHogSourceField]
+      sourceFields: [PostHogSourceField]
       permissionsCaption: String
       featureFlag: String
     }

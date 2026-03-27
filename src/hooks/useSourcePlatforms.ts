@@ -1,26 +1,21 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export default function useSourcesNav(): { url: string; name: string }[] {
+export default function useSourcePlatforms() {
     const { allPostHogSource } = useStaticQuery(graphql`
-        query SourcesNav {
+        query SourcePlatforms {
             allPostHogSource(filter: { unreleased: { ne: true } }, sort: { fields: name, order: ASC }) {
                 nodes {
-                    slug
                     name
-                    beta
+                    slug
+                    icon_url
                 }
             }
         }
     `)
 
     return allPostHogSource.nodes.map((node: any) => ({
+        label: node.name,
         url: `/docs/cdp/sources/${node.slug}`,
-        name: node.name,
-        ...(node.beta && {
-            badge: {
-                title: 'Beta',
-                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
-        }),
+        image: node.icon_url,
     }))
 }

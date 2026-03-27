@@ -1152,7 +1152,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 beta: config.betaSource || false,
                 featured: config.featured || false,
                 caption: config.caption || null,
-                fields: config.fields || [],
+                sourceFields: config.fields || [],
                 permissionsCaption: config.permissionsCaption || null,
                 featureFlag: config.featureFlag || null,
             })

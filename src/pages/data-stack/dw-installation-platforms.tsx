@@ -1,6 +1,6 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import List from 'components/List'
+import useSourcePlatforms from 'hooks/useSourcePlatforms'
 
 interface DWInstallationPlatformsProps {
     showFiltering?: boolean
@@ -8,23 +8,7 @@ interface DWInstallationPlatformsProps {
 }
 
 const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstallationPlatformsProps) => {
-    const { allPostHogSource } = useStaticQuery(graphql`
-        query {
-            allPostHogSource(filter: { unreleased: { ne: true } }, sort: { name: ASC }) {
-                nodes {
-                    name
-                    slug
-                    icon_url
-                }
-            }
-        }
-    `)
-
-    const platforms = allPostHogSource.nodes.map((node: any) => ({
-        label: node.name,
-        url: `/docs/cdp/sources/${node.slug}`,
-        image: node.icon_url,
-    }))
+    const platforms = useSourcePlatforms()
 
     const displayedPlatforms = maxItems ? platforms.slice(0, maxItems) : platforms
     const remainingCount = maxItems && platforms.length > maxItems ? platforms.length - maxItems : 0
