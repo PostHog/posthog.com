@@ -5,14 +5,6 @@ import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
 import { getProseClasses } from '../constants'
 
-const INBOUND_IPS = `
-| US | EU |
-| --- | --- |
-| 44.205.89.55  | 3.75.65.221 |
-| 44.208.188.173 | 18.197.246.42 |
-| 52.4.194.122 | 3.120.223.253 |
-`
-
 interface SourceField {
     name: string
     label: string
@@ -109,13 +101,6 @@ export default function DataWarehouseSource({
                             <strong>Import</strong>
                         </li>
                     </ol>
-
-                    <h4>Inbound IP addresses</h4>
-                    <p>
-                        We use a set of IP addresses to access your instance. To ensure this connector works, add these
-                        IPs to your inbound security rules:
-                    </p>
-                    <ReactMarkdown>{INBOUND_IPS}</ReactMarkdown>
                 </div>
             </ReaderView>
         </>
