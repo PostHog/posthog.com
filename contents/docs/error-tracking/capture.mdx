@@ -206,7 +206,7 @@ with new_context():
 
 If your SDK supports it, you can configure:
 
-- how many recent steps to keep in memory
+- how many recent steps to keep in the circular buffer in memory
 - how many bytes of step data to attach to the final exception event
 
 <MultiLanguage>
@@ -253,8 +253,6 @@ posthog.configure(
 ```
 
 </MultiLanguage>
-
-When the queue is full, SDKs should drop the oldest step first. At capture time, PostHog attaches the most recent in-order steps that fit within the configured limits and the final event size.
 
 ### Best practices
 
