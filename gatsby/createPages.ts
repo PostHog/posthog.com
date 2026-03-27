@@ -402,6 +402,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            selfHostedSources: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/docs/cdp/sources/(s3|azure-blob|r2|gcs)$/" } }
+                    frontmatter: { title: { ne: "" } }
+                }
+            ) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                }
+            }
             allSdkReferences {
                 nodes {
                     info {
@@ -975,6 +988,23 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 },
             })
         }
+    })
+
+    // Self-hosted sources: not in the API, but have MDX files at cdp/sources/
+    // Create data-warehouse alias pages for them
+    result.data.selfHostedSources.nodes.forEach((node) => {
+        const slug = node.fields.slug.replace('/docs/cdp/sources/', '')
+        createPage({
+            path: `/docs/data-warehouse/sources/${slug}`,
+            component: HandbookTemplate,
+            context: {
+                id: node.id,
+                links: [],
+                nextURL: '',
+                searchFilter: 'Docs',
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+            },
+        })
     })
 
     // Grab types available for each SDK and version
