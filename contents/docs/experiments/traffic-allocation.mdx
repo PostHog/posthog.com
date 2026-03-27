@@ -17,6 +17,14 @@ By default, users are split evenly across all variants. You can customize the sp
 
 Keep in mind that the more variants you add, the more traffic you need to reach reliable results. It's recommended to split traffic equally between variants – the lower the traffic a variant receives, the longer it takes to reach statistical significance.
 
+## Use rollout percentage to limit exposure
+
+A common mistake is using an uneven variant split (e.g., 80/20) to limit how many users see the test variant. Instead, use the **rollout percentage** to control exposure and keep your variant split equal.
+
+For example, if you want only 20% of users exposed to your experiment, set the rollout percentage to 20% and keep an equal 50/50 split between control and test. Don't use a 100% rollout with an 80/20 split – this exposes all users to the experiment and gives you less statistical power in the test group.
+
+Equal splits give each variant the same amount of traffic, which means your experiment reaches statistical significance faster. PostHog shows a warning in the experiment wizard when your variant splits are uneven to help you avoid this.
+
 ## Handle low data volumes
 
 It's important to note that when dealing with low data volumes (less than 1,000 users per variant), the difference in variant exposure can be as much as 20%. This means a test variant could have only 800 people, while the control variant has 1,000. All our calculations take this exposure discrepancy into account.
