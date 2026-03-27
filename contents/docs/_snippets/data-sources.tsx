@@ -26,6 +26,12 @@ export const SelfHostedSources = () => {
 }
 
 export const AllSources = () => {
-    const platforms = useSourcePlatforms()
+    const managed = useSourcePlatforms()
+    const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
+        label: s.label,
+        url: s.url,
+        image: getLogo(s.logo),
+    }))
+    const platforms = [...managed, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
     return <List className="grid @2xl:grid-cols-2 @3xl:grid-cols-3 mb-4" items={platforms} />
 }
