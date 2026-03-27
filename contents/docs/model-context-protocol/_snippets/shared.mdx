@@ -1,4 +1,4 @@
-import MCPTools from '../../../../src/components/Docs/MCPTools'
+import MCPTools from "../../../../src/components/Docs/MCPTools";
 
 Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them.
 
@@ -40,10 +40,12 @@ When you pin the context, the `switch-organization` and `switch-project` tools a
 - When only `organizationId` is provided: only `switch-organization` is excluded
 
 **Headers:**
+
 - `x-posthog-organization-id` - Pin to a specific organization
 - `x-posthog-project-id` - Pin to a specific project
 
 **Query parameters:**
+
 - `organization_id` - Pin to a specific organization
 - `project_id` - Pin to a specific project
 
@@ -78,37 +80,37 @@ https://mcp.posthog.com/mcp?features=flags,dashboards,insights
 
 Available features:
 
-| Feature | Description |
-|---------|-------------|
-| `workspace` | Organization and project management |
-| `actions` | [Action definitions](/docs/data/actions) |
-| `activity_logs` | Activity log viewing |
-| `alerts` | [Alert management](/docs/product-analytics/alerts) |
-| `annotations` | [Annotation management](/docs/product-analytics/annotations) |
-| `cohorts` | [Cohort management](/docs/data/cohorts) |
-| `dashboards` | [Dashboard creation and management](/docs/product-analytics/dashboards) |
-| `data_schema` | Data schema exploration |
-| `data_warehouse` | [Data warehouse management](/docs/data-warehouse) |
-| `debug` | Debug and diagnostic tools |
-| `docs` | PostHog documentation search |
-| `early_access_features` | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
-| `error_tracking` | [Error monitoring and debugging](/docs/error-tracking) |
-| `events` | Event and property definitions |
-| `experiments` | [A/B testing experiments](/docs/experiments) |
-| `flags` | [Feature flag management](/docs/feature-flags) |
-| `hog_functions` | [CDP function management](/docs/cdp) |
-| `hog_function_templates` | CDP function template browsing |
-| `insights` | [Analytics insights](/docs/product-analytics/insights) |
-| `llm_analytics` | [LLM analytics evaluations](/docs/ai-engineering) |
-| `prompts` | [LLM prompt management](/docs/ai-engineering) |
-| `logs` | [Log querying](/docs/ai-engineering/observability) |
-| `notebooks` | [Notebook management](/docs/notebooks) |
-| `persons` | [Person and group management](/docs/data/persons) |
-| `reverse_proxy` | Reverse proxy record management |
-| `search` | Entity search across the project |
-| `sql` | SQL query execution |
-| `surveys` | [Survey management](/docs/surveys) |
-| `workflows` | [Workflow management](/docs/cdp) |
+| Feature                  | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `workspace`              | Organization and project management                                                    |
+| `actions`                | [Action definitions](/docs/data/actions)                                               |
+| `activity_logs`          | Activity log viewing                                                                   |
+| `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
+| `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
+| `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
+| `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
+| `data_schema`            | Data schema exploration                                                                |
+| `data_warehouse`         | [Data warehouse management](/docs/data-warehouse)                                      |
+| `debug`                  | Debug and diagnostic tools                                                             |
+| `docs`                   | PostHog documentation search                                                           |
+| `early_access_features`  | [Early access feature management](/docs/feature-flags/early-access-feature-management) |
+| `error_tracking`         | [Error monitoring and debugging](/docs/error-tracking)                                 |
+| `events`                 | Event and property definitions                                                         |
+| `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
+| `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
+| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_function_templates` | CDP function template browsing                                                         |
+| `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
+| `llm_analytics`          | [LLM analytics evaluations](/docs/ai-engineering)                                      |
+| `prompts`                | [LLM prompt management](/docs/ai-engineering)                                          |
+| `logs`                   | [Log querying](/docs/ai-engineering/observability)                                     |
+| `notebooks`              | [Notebook management](/docs/notebooks)                                                 |
+| `persons`                | [Person and group management](/docs/data/persons)                                      |
+| `reverse_proxy`          | Reverse proxy record management                                                        |
+| `search`                 | Entity search across the project                                                       |
+| `sql`                    | SQL query execution                                                                    |
+| `surveys`                | [Survey management](/docs/surveys)                                                     |
+| `workflows`              | [Workflow management](/docs/cdp)                                                       |
 
 > **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).
 
@@ -128,7 +130,6 @@ Example for Cursor (add to `.cursor/mcp.json`):
 ```
 
 </details>
-
 
 ## Available tools
 
@@ -160,16 +161,23 @@ The agent will use the `create-feature-flag` tool with a `multivariate` configur
 
 The agent will use the `query-run` tool to execute a trends query and return daily signup counts.
 
-
 ### Path analysis
 
 **Prompt:** "What are the most common paths users take after signing up?"
 
-The agent will use the `query-run` tool with a PathsQuery to analyze user journeys, returning the flow of events users follow after signup.
+The agent will use the `query-paths` tool to analyze user journeys, returning a directed graph of the events users follow after signup. You can scope paths to specific event types like `$pageview` for page navigation, `$screen` for mobile screens, or `custom_event` for custom-tracked events.
 
 **Prompt:** "Show me the navigation paths from the pricing page to checkout"
 
-The agent will execute a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take.
+The agent will execute a paths query with `startPoint` set to the pricing page and `endPoint` set to checkout, revealing the most common routes users take between those two pages.
+
+**Prompt:** "Show me pageview paths but normalize all product and user URLs into single nodes"
+
+The agent will use path cleaning filters (`localPathCleaningFilters`) with regex patterns to collapse dynamic URL segments – for example, `/product/123` and `/product/456` both become `/product/:id` – so the visualization groups them as a single step.
+
+**Prompt:** "What custom events do users trigger after completing onboarding, excluding heartbeat events?"
+
+The agent will run a paths query filtered to `custom_event` types with `startPoint` set to the onboarding event and `excludeEvents` set to remove noisy events like `heartbeat` from the results.
 
 ### SQL and HogQL queries
 
