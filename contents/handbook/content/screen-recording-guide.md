@@ -20,7 +20,7 @@ You like cookies? Then watch this video. Plus, you’ll learn about how to prope
 
 ## 1. Download Screen Studio
 
-- [ ] Download Screen Studio [here](https://screen.studio/download). 
+- [ ] [Download Screen Studio](https://screen.studio/download). 
 
 By default, **Screen Studio is free** and there’s **no need to upgrade to a paid plan**.
 
@@ -86,6 +86,6 @@ Use your name or the project’s name for the file name, and ensure the file end
 
 Drag that file into the [“ScreenStudio Projects” Google Drive](https://drive.google.com/drive/folders/1syLVUYgRkX81fP7LXzt1M7hSK0OarrWn?usp=drive_link) and ping the YouTube team/member in the corresponding GitHub issue.  
         
-> ** ⚠️ Important!** If your recording contains any customer-sensitive information that needs to be blurred or removed, please leave exact timestamps of where the information appears in the recording project. Please triple check your work, as our post team will not always be able to catch this on our own.  
+> **⚠️Important!** If your recording contains any customer-sensitive information that needs to be blurred or removed, please leave exact timestamps of where the information appears in the recording project. Please triple check your work, as our post team will not always be able to catch this on our own.  
       
 And voila! You’re done! Thanks for following these steps, and feel free to ask any questions in the [\#team-youtube](https://posthog.slack.com/archives/C01R387F6H5) Slack channel.
