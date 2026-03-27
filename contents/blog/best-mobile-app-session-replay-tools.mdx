@@ -18,7 +18,7 @@ seo:
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
 
-There are plenty of [session replay tools](/blog/best-session-replay-tools) out there, but not all of them supports mobile, and those that do vary significantly in depth, platform support, and what they capture alongside replays.
+There are plenty of [session replay tools](/blog/best-session-replay-tools) out there, but not all of them support mobile, and those that do vary significantly in depth, platform support, and what they capture alongside replays.
 
 This guide covers the seven best mobile session replay tools: what they do better, where they fall short, and who they're actually for.
 
@@ -26,13 +26,13 @@ This guide covers the seven best mobile session replay tools: what they do bette
 
 **Typical users:** Engineering and product teams
 
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1722527045/posthog.com/contents/posthog-mobile-replay.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_03_26_at_13_19_27_2x_9f924243c4.png)
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one developer platform built to enable engineers to create better products. It includes [session replays](/session-replay) and a whole bunch more, such as [product analytics](/product-analytics), [LLM analytics](/llm-analytics), [error tracking](/error-tracking), [experiments](/experiments), [feature flags](/feature-flags), and more.
+[PostHog](/) (that's us 👋) is an all-in-one developer platform built to enable engineers to create better products. It includes [session replays](/session-replay) and a whole bunch more, such as [product analytics](/product-analytics), [LLM analytics](/llm-analytics), [error tracking](/error-tracking), [experiments](/experiments), and [feature flags](/feature-flags).
 
-It's designed for product-minded engineers, founders, growh teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
+It's designed for product-minded engineers, founders, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
 #### Supported features
 
@@ -67,7 +67,7 @@ It's designed for product-minded engineers, founders, growh teams, and product m
 
 ### How much does PostHog cost?
 
-PostHog has transparent pricing](/pricing) based on usage. It's free to get started and completely free for the first 2,500 mobile recordings and 5,000 web ones per month. 
+PostHog has [transparent pricing](/pricing) based on usage. It's free to get started and completely free for the first 2,500 mobile recordings and 5,000 web ones per month. 
 
 After this, pricing starts at $0.0100 per mobile recording, and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#3-microsoft-clarity)).
 
@@ -147,7 +147,7 @@ Reviewers on [G2](https://www.g2.com/products/logrocket/reviews) use LogRocket f
 
 > #### Bottom line
 >
-> LogRocket is the best choice for teams building React Native apps who need Redux or Vuex state capture alongside session replay. Galileo AI also sets it apart by proactively surfacing struggle patterns across sessions, so you're not waiting to discover problems.
+> LogRocket is the best choice for teams building React Native apps who need Redux state capture alongside session replay. Galileo AI also sets it apart by proactively surfacing struggle patterns across sessions, so you're not waiting to discover problems.
 
 ## 3. UXCam
 
@@ -442,7 +442,7 @@ It acquired [Hotjar](/blog/posthog-vs-hotjar) in 2021 and [Heap](/blog/posthog-v
 
 ### How much does Contentsquare cost?
 
-Contentsquare offers a free plan that includes 200,000 monthly sessions, replays, heatmaps, funnels, error monitoring, and surveys. 
+Contentsquare offers a free plan that includes 200,000 monthly sessions, replays, heatmaps, funnels, error monitoring, and surveys. Only 5% of sessions are recorded on their free plan though (a max of 10k per month) with 1 month retention and limited features (like filters). 
 
 The Growth plan starts from 7,000 monthly sessions with 13 months of data access and adds zone-based heatmaps, journey analysis, impact quantification, and Sense AI. 
 
@@ -522,8 +522,8 @@ See our guide to the [best session replay tools](/blog/best-session-replay-tools
 
 <details>
 <summary>What is the best free mobile session replay tool?</summary>
- 
-**[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** xis completely free with no session limits. 
+
+**[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** is completely free with no session limits. 
 
 **PostHog**'s free tier includes 2,500 mobile recordings/month plus product analytics, feature flags, error tracking and more. 
 
@@ -535,8 +535,8 @@ See our guide to the [best session replay tools](/blog/best-session-replay-tools
 
 <details>
 <summary>What is the difference between web and mobile session replay?</summary>
- 
-**Web session**replay captures DOM changes in a browser – it reconstructs what happened by replaying HTML, CSS, and JavaScript events. 
+
+**Web session replay** captures DOM changes in a browser – it reconstructs what happened by replaying HTML, CSS, and JavaScript events. 
 
 **Mobile session replay** hooks into the native rendering pipeline of iOS or Android to capture screen state, touch gestures, swipes, and taps. 
 
@@ -546,7 +546,7 @@ The technical approach is fundamentally different, which is why most web replay 
  
 <details>
 <summary>Do mobile session replay tools affect app performance?</summary>
- 
+
 All tools on this list are designed to have minimal performance impact. Recording is typically done on a background thread, data is buffered and uploaded when the app goes into the background, and SDKs are lightweight (usually adding less than 1MB to app binary size). 
 
 That said, it's worth testing with your specific app – recording-heavy apps or those with complex animations may see more overhead than simple utility apps.
