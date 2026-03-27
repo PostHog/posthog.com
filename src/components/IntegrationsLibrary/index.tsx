@@ -53,11 +53,12 @@ export default function IntegrationsLibrary(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState('')
     const data = useStaticQuery(graphql`
         query {
-            sources: allPostHogSource(filter: { unreleased: { ne: true } }) {
+            sources: allPostHogSource {
                 nodes {
                     name
                     slug
                     icon_url
+                    unreleased
                 }
             }
             destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
@@ -101,7 +102,7 @@ export default function IntegrationsLibrary(): JSX.Element {
     const allPipelines = [
         ...(data.sources?.nodes || []).map((s: any) => ({
             ...s,
-            status: 'live',
+            status: s.unreleased ? 'coming_soon' : 'live',
             type: 'source',
             category: ['Data warehouse'],
             description: `Sync ${s.name} data into PostHog`,
