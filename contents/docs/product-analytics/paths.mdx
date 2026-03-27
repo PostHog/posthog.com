@@ -253,3 +253,15 @@ Several technical differences explain the discrepancy:
 - **30-minute session windows** – Events more than 30 minutes apart start a new path. Funnels use a conversion window (default 14 days).
 
 The best practice is to use paths to explore what patterns exist, then validate specific flows with funnels, and investigate individual behavior with [session replays](/docs/session-replay).
+
+## Create paths with PostHog AI
+
+You can also create paths queries using [PostHog AI](/docs/posthog-ai) or AI coding agents via the [MCP server](/docs/model-context-protocol).
+
+Try prompts like:
+
+- "What pages do users visit after signing up?"
+- "Show me navigation paths from the pricing page to checkout"
+- "Analyze paths with dynamic URLs normalized into single nodes"
+
+See [Build insights with MCP](/docs/product-analytics/build-insights-mcp) for more examples.
