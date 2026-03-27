@@ -3,12 +3,14 @@ title: Keeping SDKs current
 sidebar: Docs
 showTitle: true
 ---
+
 [SDK doctor](/docs/sdk-doctor) identifies when your PostHog SDKs are outdated, but understanding why they fall behind, and how to prevent it, helps avoid the problem in the first place.
+
 ## Ways SDK versions fall behind
 
 ### HTML snippet for the JavaScript web SDK
 
-The [HTML snippet](/docs/web-analytics/installation/html-snippet) loads `posthog-js` directly from our CDN. When a new version is released, visitors to your site should get the latest version automatically.
+The [HTML snippet](/docs/web-analytics/installation/html-snippet) loads `posthog-js` directly from our CDN. When a new version is released, visitors to your site get the latest version automatically. If you prefer more control, you can optionally [pin the snippet to a specific version](#pinning-the-snippet-to-a-specific-version).
 
 However, there are a few things which can break the intended auto-update behavior:
 
@@ -18,7 +20,7 @@ However, there are a few things which can break the intended auto-update behavio
 
 - **See also** - [Caching layers](#caching-layers) for more causes of stale SDK versions hanging around long past the expiry date, when using the HTML snippet.
 
- > **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available version of the SDK.
+> **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available version of the SDK.
 
 ### npm and package manager lockfiles
 
@@ -72,6 +74,7 @@ Caching at the CDN layer is closely related to how you build and deploy your app
 - **Multiple entry points** - Apps with multiple build entry points may load different builds of `posthog-js`, some updated, some not, depending on which entry point a user lands on.
 
 ---
+
 ## Ways to keep SDK versions current
 
 ### Staying current automatically
@@ -79,11 +82,27 @@ Caching at the CDN layer is closely related to how you build and deploy your app
 > For our [JavaScript web SDK](/docs/libraries/js) (a package within the `posthog-js` monorepo) we recommend the [HTML snippet](/docs/web-analytics/installation/html-snippet), which will serve the latest/current version automatically.
 
 #### JavaScript web HTML snippet
+
 1. Copy your snippet from [project settings](https://app.posthog.com/settings/project-details#snippet). This ensures you're using the current snippet code with your project API key pre-populated.
 2. Do NOT add an `if (!window.posthog)` guard wrapping the snippet.
 3. The snippet loads `posthog-js` from our CDN and will auto-update on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
 
+#### Pinning the snippet to a specific version
+
+If you want to control which version of `posthog-js` your snippet loads — for example, to avoid unexpected breaking changes or to test before upgrading — you can pin your snippet to a specific version.
+
+To configure this, go to [**Settings** > **General** > **Snippet version**](https://app.posthog.com/settings/environment-details#js-snippet-version). You can pin to:
+
+- **Major version** (e.g., `1`) – always loads the latest `1.x.x` release. This is the default and matches the existing behavior.
+- **Minor version** (e.g., `1.358`) – always loads the latest `1.358.x` patch release.
+- **Exact version** (e.g., `1.358.0`) – loads only that specific version.
+
+The default pin is `1`, which means the snippet loads the latest v1.x release — the same behavior as before this feature existed.
+
+> **Note:** This feature is experimental and requires admin-level access to configure. It only applies to the HTML snippet, not to npm package installations.
+
 #### JavaScript web npm package
+
 Dependabot and Renovate can open pull requests when new versions of PostHog packages are published, making it easier to stay current without manual monitoring.
 
 ##### Security considerations
@@ -95,6 +114,7 @@ The key safeguard is setting a **minimum release age** before auto-merging depen
 PostHog's recommendation (from the post-mortem) is to set a minimum release age of **3 days** or more.
 
 **pnpm:** Add to `.npmrc`:
+
 ```
 minimum-release-age=3 days
 ```
@@ -102,6 +122,7 @@ minimum-release-age=3 days
 **yarn:** Check your yarn version's documentation for the equivalent `minimumReleaseAge` setting.
 
 **Renovate:** Use `minimumReleaseAge` or `stabilityDays` in your `renovate.json`:
+
 ```json
 {
   "packageRules": [
