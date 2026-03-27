@@ -1124,8 +1124,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const fetchDataWarehouseSources = async () => {
-        const response = await fetch('http://localhost:8010/api/public_source_configs?format=json')
-        // const response = await fetch('https://us.posthog.com/api/public_source_configs')
+        const response = await fetch('https://us.posthog.com/api/public_source_configs')
         const data = await response.json()
         if (data?.type === 'invalid_request' || data?.code === 'not_found') {
             console.warn('Failed to fetch data warehouse sources:', data?.detail || 'unknown error')
