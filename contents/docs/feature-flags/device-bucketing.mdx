@@ -29,7 +29,7 @@ That works well for identified users, but it can change during the transition fr
 | After `reset()` | `UUID-B` | `UUID-A` | Device bucketing still uses the same device |
 | After `reset(true)` | `UUID-C` | `UUID-C` | PostHog treats it as a new device |
 
-This makes device bucketing the simpler choice when you only need consistency on the same device through login. It avoids the tradeoffs of [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional), which disables local evaluation and bootstrapping, and adds extra server-side work.
+When you need consistency during login, device bucketing is the simpler choice than [persisting feature flags across authentication steps](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional). It avoids the tradeoffs of that approach, which disables local evaluation and bootstrapping, and adds extra server-side work.
 
 ## When to use device bucketing
 
@@ -48,9 +48,9 @@ Don't use device bucketing when you need cross-device consistency for the same i
 |---|---|---|
 | **Hashes on** | User's `distinct_id` | `$device_id` |
 | **Best for** | Logged-in, identified users | Anonymous or pre-login experiences |
-| **Behavior through `identify()`** | May change if `distinct_id` changes | Stays stable on the same device |
+| **Behavior through `identify()`** | Changes if `distinct_id` changes | Stays stable on the same device |
 | **Behavior through `reset()`** | Changes | Stays stable unless you call `reset(true)` |
-| **Behavior across devices** | Can stay consistent for the same identified user | Each device is evaluated independently |
+| **Behavior across devices** | Stays stable for the same identified user | Changes (each device is evaluated independently) |
 
 ## How to enable it
 
