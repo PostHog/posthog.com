@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are statistically significant. For all metric types, only events that occur after a user's [exposure](/docs/experiments/exposures) to the experiment are included in calculations.
 
@@ -17,6 +17,7 @@ PostHog supports four types of metrics to measure different aspects of your expe
 Use funnel metrics to measure conversion rates through multi-step processes. This is ideal for tracking user journeys like onboarding flows, checkout processes, or feature adoption paths.
 
 How it works:
+
 1. Define a series of events that users must complete in sequence (or any order if using unordered funnels)
 2. Each user either completes all steps (success) or drops off somewhere (failure)
 3. We calculate the conversion rate from the first step (the exposure event) to the last step for each variant
@@ -37,10 +38,11 @@ When defining your funnel metric, you only specify the events that should occur 
 Use this to track metrics like total event count or summed values (e.g., revenue). Here's how it works:
 
 1. We aggregate the chosen value for each user using your selected method (count, sum, or average).
-2. We then compute the *mean* of those values for each variant.
+2. We then compute the _mean_ of those values for each variant.
 3. This mean is used to determine the statistical difference between variants.
 
 For example:
+
 - If you choose **sum of revenue**, we calculate total revenue per user, then take the mean across users.
 - If you select **average revenue** (not supported yet, but coming soon), we first compute each user's average (total revenue / number of events), then average those values across users.
 
@@ -49,12 +51,14 @@ For example:
 Use ratio metrics to calculate the relationship between two different metrics. This is useful when you want to measure metrics like revenue per user, items per order, or conversion rate with a custom denominator (different from the users exposed to the experiment).
 
 How it works:
+
 1. We calculate the numerator value for each user (e.g., total revenue)
 2. We calculate the denominator value for each user (e.g., number of purchases)
 3. We compute the ratio between these aggregated values for each variant
 4. Statistical significance is calculated using the delta method for ratio estimation
 
 Common use cases:
+
 - **Revenue per purchase**: Track average order value by dividing total revenue by number of purchases
 - **Items per session**: Measure engagement by dividing total interactions by unique sessions
 - **Custom conversion rates**: Calculate conversions with a denominator other than exposed users (e.g., conversions per active user)
@@ -67,17 +71,18 @@ Use retention metrics to measure if users come back to perform a specific action
 
 Retention metrics track two events and a time window:
 
-| Event | Description | Examples |
-|-------|------------|----------|
-| Start event | The initial action that begins tracking | Signup, complete onboarding, first purchase |
-| Completion event | The action you want users to return for | Login, feature use, make another purchase |
-| Retention window | When the completion event should occur | Between 1 and 7 days after start event |
+| Event            | Description                             | Examples                                    |
+| ---------------- | --------------------------------------- | ------------------------------------------- |
+| Start event      | The initial action that begins tracking | Signup, complete onboarding, first purchase |
+| Completion event | The action you want users to return for | Login, feature use, make another purchase   |
+| Retention window | When the completion event should occur  | Between 1 and 7 days after start event      |
 
 PostHog calculates the retention rate by measuring what proportion of users performed the completion event within the window. Statistical significance is determined using the difference in retention rates between variants.
 
 The **retention window** defines when completion events count. A "1 to 7 days" window means the completion event must occur at least 1 full day after the start event, up to and including day 7. PostHog compares calendar days rather than exact 24-hour periods, so a "7 days" window includes any completion event on the 7th calendar day. Hour-based windows work the same way.
 
 For start handling, you can choose:
+
 - **First seen:** Uses the first occurrence of the start event, ideal for one-time actions like signup
 - **Last seen:** Uses the last occurrence of the start event, useful for recurring actions
 
@@ -100,12 +105,11 @@ When calculating the upper bound percentile, you can choose to ignore zero value
 By excluding these zeros from the percentile calculation, you can more accurately tune the upper bound to focus on the distribution of actual positive values, making it easier to identify and handle true outliers among participants who did engage with the feature.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/outlier_handling_light_2_7ed0631f70.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/outlier_handling_dark_2_3914745be7.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/outlier_handling_light_2_7ed0631f70.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/outlier_handling_dark_2_3914745be7.png"
   classes="rounded"
   alt="Screenshot of outlier handling"
 />
-
 
 ## Conversion windows
 
@@ -114,8 +118,8 @@ Conversion windows restrict metric events to those that occur within a defined t
 This ensures that only relevant, post-exposure behavior is included in the analysis.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_light_25b34f15b9.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_dark_c07beddef8.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_light_25b34f15b9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_dark_c07beddef8.png"
   classes="rounded"
   alt="Screenshot of conversion window configuration"
 />
@@ -127,10 +131,10 @@ Each metric can be set as either a **primary** or **secondary** metric. This is 
 **Primary metrics** represent the main goal of your experiment. They directly measure if your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_22_2x_e0b179b143.png"
-    alt="Primary metrics in PostHog experiments"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_22_2x_e0b179b143.png"
+  alt="Primary metrics in PostHog experiments"
+  classes="rounded"
 />
 
 **Secondary metrics** provide more context for your experiment. They can help you understand the impact of your primary metric and ensure your experiment didn't have negative side effects.
@@ -145,10 +149,10 @@ Each bar shows how a variant is performing compared to the control (the gray bar
 - To the left (red): The metric is lower (a decrease).
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_19_24_2x_3cadbb532c.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_19_43_2x_730755c2c5.png"
-    alt="Credible interval bar chart"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_19_24_2x_3cadbb532c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_19_43_2x_730755c2c5.png"
+  alt="Credible interval bar chart"
+  classes="rounded"
 />
 
 The width of the bar represents uncertainty. A narrower bar means we're more confident in that result, while a wider bar means it could shift either way.
@@ -159,20 +163,22 @@ The control (baseline) is always shown in gray. Other bars will be green or redâ
 
 Create a shared metric to easily reuse a funnel or a trend metric across experiments. This is ideal for key company metrics like conversion, revenue, churn, and more.
 
-To create one, go to the [shared metrics tab](https://us.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
+To create one, go to the [shared metrics tab](https://app.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_02_56_2x_1a7cf4bd0e.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_03_11_2x_0e3853ba73.png"
-    alt="Shared metrics"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_02_56_2x_1a7cf4bd0e.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_03_11_2x_0e3853ba73.png"
+  alt="Shared metrics"
+  classes="rounded"
 />
 
-Once created, choose **Shared** as a metric source when adding a primary or secondary metric to an experiment and then select the shared metric(s) you want to use. If you add tags to your shared metrics, you can quickly select all of the metrics associated with a specific tag.
+Once created, choose **Shared** as a metric source when adding a primary or secondary metric to an experiment and then select the shared metric(s) you want to use.
+
+Both the shared metrics list and the selection modal include a search bar that filters metrics by name, description, or tags. You can also add and edit tags inline directly from either view, making it easy to organize and find metrics at scale. If you add tags to your shared metrics, you can quickly select all of the metrics associated with a specific tag.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_07_27_2x_9d55300e49.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_07_12_2x_9043573390.png"
-    alt="Shared metrics"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_07_27_2x_9d55300e49.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_07_12_2x_9043573390.png"
+  alt="Shared metrics"
+  classes="rounded"
 />
