@@ -101,6 +101,21 @@ const getUnitySteps = (ctx: any) => {
                             on WebGL.
                         </Markdown>
                     </CalloutBox>
+                    <CalloutBox type="caution" title="No masking support">
+                        <Markdown>
+                            The Unity SDK uses screenshot-based capture. Unlike web and mobile SDKs, there is **no
+                            built-in masking** for text, images, or other UI elements. Screenshots may contain sensitive
+                            information. Make sure you are not displaying personal data or secrets on screen during
+                            recorded sessions.
+                        </Markdown>
+                    </CalloutBox>
+                    <CalloutBox type="info" title="Limitations">
+                        <Markdown>
+                            The Unity SDK does **not** currently support remote configuration via PostHog project
+                            settings. Options like `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling must be
+                            configured locally in code. All Session Replay settings are applied at initialization time.
+                        </Markdown>
+                    </CalloutBox>
                 </>
             ),
         },
