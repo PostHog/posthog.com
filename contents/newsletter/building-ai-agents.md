@@ -53,6 +53,8 @@ Although PostHog AI is an agent now, we validated demand for it with a simpler u
 
 Only once this workflow saw adoption and users demanded other use cases (like answering docs questions or [creating feature flags](/docs/feature-flags/creating-feature-flags)) did the team build an agent.
 
+<NewsletterForm />
+
 ## 2. Your harness is not your moat
 
 Once you decide to build an agent, the next question is how will it work. The answer to this is an agent harness: the code and infrastructure that combines with a model to help it understand and use your product.
@@ -136,3 +138,5 @@ What users want is often at odds with what’s coolest. The most common pain poi
 - Lack of signs of uncertainty, source of insights, and progress
 
 While new capabilities are cool, ensuring your agent actually solves your customer’s problems is even cooler. Ultimately, building an AI agent is not just a showcase of your AI skillz, but a [product engineering problem](/blog/what-is-a-product-engineer). This requires you to talk to users, ship features they want, and iterate.
+
+<NewsletterForm />
