@@ -11,8 +11,9 @@ availability:
 Batch exports give you a platform to schedule data exports to supported destinations. Batch exports are built on [Temporal](https://www.temporal.io/) to enable reliable data exports, ensuring your data reaches your destination.
 
 The key features offered by this platform are:
-* **Resiliency:** Retry capabilities (both automated and manual) when the destination is temporarily unavailable.
-* **Efficient data transfers:** Processing data in batches reduces the number of data transfers required (less `INSERT` queries or file uploads).
+
+- **Resiliency:** Retry capabilities (both automated and manual) when the destination is temporarily unavailable.
+- **Efficient data transfers:** Processing data in batches reduces the number of data transfers required (less `INSERT` queries or file uploads).
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
 
@@ -20,13 +21,13 @@ Batch exports are designed to power any complimentary analytics use cases outsid
 
 Every batch export exports data to a destination using the configuration parameters provided when creating a batch export. The following destinations are currently supported:
 
-* [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
-* [BigQuery](/docs/cdp/batch-exports/bigquery)
-* [Databricks](/docs/cdp/batch-exports/databricks)
-* [S3](/docs/cdp/batch-exports/s3)
-* [Snowflake](/docs/cdp/batch-exports/snowflake)
-* [Postgres](/docs/cdp/batch-exports/postgres)
-* [Redshift](/docs/cdp/batch-exports/redshift)
+- [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
+- [BigQuery](/docs/cdp/batch-exports/bigquery)
+- [Databricks](/docs/cdp/batch-exports/databricks)
+- [S3](/docs/cdp/batch-exports/s3)
+- [Snowflake](/docs/cdp/batch-exports/snowflake)
+- [Postgres](/docs/cdp/batch-exports/postgres)
+- [Redshift](/docs/cdp/batch-exports/redshift)
 
 You can test the configurations of each destination by clicking the **Start test** button below the configuration form:
 
@@ -34,10 +35,10 @@ You can test the configurations of each destination by clicking the **Start test
 
 This test can detect and diagnose configuration issues, like invalid credentials or missing permissions, before running the batch export.
 
-Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or create an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in  new destinations.
+Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or create an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in new destinations.
 
-import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
-import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
 <InboundIpAddresses />
 
@@ -45,12 +46,11 @@ import PersonsModelNote from '../_snippets/persons-model-note.mdx'
 
 Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
 
-> **Note:** New fields may be added to these models over time. 
-> 
+> **Note:** New fields may be added to these models over time.
+>
 > To maintain consistency, these fields are not automatically added to database destination tables.
-If a particular field is missing from your tables, you can manually add the field and it will be populated in future exports.
-In the case of S3, these new fields will be added to the exported files as soon as they become available.
-
+> If a particular field is missing from your tables, you can manually add the field and it will be populated in future exports.
+> In the case of S3, these new fields will be added to the exported files as soon as they become available.
 
 ### Events model
 
@@ -58,17 +58,18 @@ The events model is the default model for all batch exports, and it represents a
 
 For historical reasons, this model can vary depending on the destination, so we suggest checking each destinations documentation for the precise composition of the model's schema:
 
-* [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
-* [BigQuery](/docs/cdp/batch-exports/bigquery)
-* [Databricks](/docs/cdp/batch-exports/databricks)
-* [S3](/docs/cdp/batch-exports/s3)
-* [Snowflake](/docs/cdp/batch-exports/snowflake)
-* [Postgres](/docs/cdp/batch-exports/postgres)
-* [Redshift](/docs/cdp/batch-exports/redshift)
+- [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
+- [BigQuery](/docs/cdp/batch-exports/bigquery)
+- [Databricks](/docs/cdp/batch-exports/databricks)
+- [S3](/docs/cdp/batch-exports/s3)
+- [Snowflake](/docs/cdp/batch-exports/snowflake)
+- [Postgres](/docs/cdp/batch-exports/postgres)
+- [Redshift](/docs/cdp/batch-exports/redshift)
 
 However, there are some properties of the model that apply to all destinations:
-* This model is **immutable** with all fields set once the event is ingested.
-* Each event is **uniquely** identified by a UUID that can be used for de-duplication.
+
+- This model is **immutable** with all fields set once the event is ingested.
+- Each event is **uniquely** identified by a UUID that can be used for de-duplication.
 
 ### Persons model
 
@@ -86,12 +87,12 @@ The intended use-case for this model is to be exported alongside the events mode
 
 More information, including any additional necessary permissions, schema information, and examples, can be found in each of the destinations documentation:
 
-* [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
-* [BigQuery](/docs/cdp/batch-exports/bigquery)
-* [Snowflake](/docs/cdp/batch-exports/snowflake)
-* [Postgres](/docs/cdp/batch-exports/postgres)
-* [Redshift](/docs/cdp/batch-exports/redshift)
-* [Databricks](/docs/cdp/batch-exports/databricks)
+- [Azure Blob Storage](/docs/cdp/batch-exports/azureblob)
+- [BigQuery](/docs/cdp/batch-exports/bigquery)
+- [Snowflake](/docs/cdp/batch-exports/snowflake)
+- [Postgres](/docs/cdp/batch-exports/postgres)
+- [Redshift](/docs/cdp/batch-exports/redshift)
+- [Databricks](/docs/cdp/batch-exports/databricks)
 
 ### Sessions model
 
@@ -114,6 +115,7 @@ On each batch export view, you are presented with a list of the latest executed 
 ![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/runs_tracking_progress_3268c67863.png)
 
 Each run has:
+
 1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
 2. The exported data start and end intervals.
 3. When the run actually started.
@@ -122,6 +124,8 @@ Each run has:
 ## Backfills (exporting historical data)
 
 When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can **backfill** the batch export.
+
+> **Note:** Backfills are only available for batch exports using the **events** model. Batch exports using the persons model do not support backfills.
 
 To view your existing backfills or to start a new one, you can navigate to the "Backfills" tab of the destination:
 
@@ -212,7 +216,6 @@ Occasionally, PostHog ingests duplicate data, as we want to ensure all data is c
 Batch exports can run before these asynchronous processes have done their work. In that situation, the batch export can be served duplicate data by our underlying data storage. Batch exports will attempt to de-duplicate data within a batch, but any de-duplication across multiple batches would be too expensive to execute within the time constraints of the batch export.
 
 In these rare situations, you will see duplicate data in your destination.
-
 
 #### 2. Backfills
 
