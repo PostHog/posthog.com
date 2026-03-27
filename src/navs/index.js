@@ -5722,7 +5722,7 @@ export const docsMenu = {
                         {
                             name: 'OpenClaw',
                             url: '/docs/llm-analytics/installation/openclaw',
-                            icon: 'IconCode',
+                            icon: 'IconOpenClaw',
                         },
                         {
                             name: 'Convex',
@@ -5942,6 +5942,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Demos & examples',
+                    url: '/docs/llm-analytics/demos',
+                    icon: 'IconFlask',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Troubleshooting',
