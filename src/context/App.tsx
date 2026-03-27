@@ -1325,7 +1325,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             'data-pipeline-sources': cdpSourcesNav,
             'data-warehouse-sources': dwSourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
     )
 
     const desktopParams = useMemo(() => {
