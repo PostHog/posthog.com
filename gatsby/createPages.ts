@@ -395,6 +395,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     id
                     slug
                     mdx {
+                        id
                         fields {
                             slug
                         }
@@ -957,13 +958,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Create cdp/sources/* redirects for sources that have hand-written docs
+    // Create data-warehouse/sources/* pages for sources that have hand-written docs at cdp/sources/*
     result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
-        createPage({
-            path: `/docs/cdp/sources/${node.slug}`,
-            component: SourceRedirect,
-            context: { redirectTo: `/docs/data-warehouse/sources/${node.slug}` },
-        })
+        const mdxSlug = node.mdx?.fields?.slug
+        if (mdxSlug) {
+            createPage({
+                path: `/docs/data-warehouse/sources/${node.slug}`,
+                component: HandbookTemplate,
+                context: {
+                    id: node.mdx.id,
+                    ignoreWrapper: true,
+                },
+            })
+        }
     })
 
     // Grab types available for each SDK and version
