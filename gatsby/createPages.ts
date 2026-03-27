@@ -24,6 +24,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
+    const SideProjectTemplate = path.resolve(`src/templates/SideProject.tsx`)
     const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const EventTemplate = path.resolve(`src/templates/Event.tsx`)
@@ -162,6 +163,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                }
+            }
+            sideProjects: allMdx(filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } } }) {
                 nodes {
                     id
                     fields {
@@ -832,6 +841,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         createPage({
             path: slug,
             component: DashboardTemplate,
+            context: {
+                id: node.id,
+            },
+        })
+    })
+
+    result.data.sideProjects.nodes.forEach((node) => {
+        const { slug } = node.fields
+        createPage({
+            path: slug,
+            component: SideProjectTemplate,
             context: {
                 id: node.id,
             },

@@ -35,5 +35,6 @@ __pycache__
 *.pyc
 *.pyo
 
+.playwright-mcp/
 .env*.local
 /.claude/worktrees/

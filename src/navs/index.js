@@ -1975,6 +1975,12 @@ export const communityMenu = {
             color: 'seagreen',
             url: '/merch',
         },
+        {
+            name: 'Side projects',
+            icon: 'IconRocket',
+            color: 'purple',
+            url: '/side-projects',
+        },
     ],
 }
 
@@ -5961,6 +5967,12 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Demos & examples',
+                    url: '/docs/llm-analytics/demos',
+                    icon: 'IconApp',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Third-party integrations',
