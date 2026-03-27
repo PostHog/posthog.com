@@ -3,9 +3,9 @@ title: Projects
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: full
+  free: partial
+  selfServe: partial
+  enterprise: full
 ---
 
 A project is a silo of data within PostHog. All data belongs to a single project and all queries are project-specific.
@@ -19,6 +19,7 @@ To switch between projects, navigate to project settings, or create new projects
 ## How to organize projects
 
 For most companies, we recommend creating **three projects**:
+
 1. Local Development - when you're running the app on your own device
 2. Staging - when you're running your app on a staging server
 3. Production - for all your production data (e.g. your live website/app)
@@ -47,7 +48,26 @@ IP data capture can be configured at both the organization and project levels:
 
 Individual projects can override organization defaults to meet specific privacy requirements.
 
+#### JS snippet version
+
+If you use the [HTML snippet](/docs/libraries/js#option-1-add-the-javascript-snippet-to-your-html) to install PostHog, you can control which version of `posthog-js` loads on your site. By default, the snippet serves the latest version automatically.
+
+To pin to a specific version, go to [**Settings** > **Project** > **JS snippet version**](https://app.posthog.com/settings/environment-details#js-snippet-version) and enter a version constraint:
+
+- **Major** (e.g., `1`) - Always serves the latest v1.x release
+- **Minor** (e.g., `1.358`) - Always serves the latest v1.358.x release
+- **Exact** (e.g., `1.358.0`) - Serves only that specific version
+
+The default is `1`, which means the snippet serves the latest v1.x release. This is the same behavior as before this setting existed.
+
+Version pinning is useful when you want to:
+
+- Avoid automatic updates that might introduce breaking changes
+- Test a new version before rolling it out to all users
+- Roll back to a known stable version without redeploying your app
+
 It's best to use separate projects for:
+
 - Apps that are entirely separate products with unlinked authentication systems
 - Admin apps that aren't customer-facing products
 - Internal websites and services
