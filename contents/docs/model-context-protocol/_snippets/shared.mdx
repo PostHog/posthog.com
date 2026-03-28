@@ -223,6 +223,20 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Activity logs
+
+**Prompt:** "Show me recent activity in my project"
+
+The agent will use the `activity-logs-list` tool to fetch recent changes, showing who made them, what was modified, and when.
+
+**Prompt:** "What changes were made to feature flags this week?"
+
+The agent will filter activity logs by the `FeatureFlag` scope and return flag creations, updates, and deletions with timestamps and user details.
+
+**Prompt:** "Who modified the checkout-flow feature flag recently?"
+
+The agent will query activity logs for a specific resource's change history, including what fields changed and their before/after values.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.

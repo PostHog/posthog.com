@@ -127,6 +127,26 @@ The `query_log` table is the only table with data on you and your team's interna
 
 PostHog also provides access to system tables that contain metadata about your PostHog project. These tables are accessed using the `system.` prefix in your queries, like `SELECT * FROM system.actions`.
 
+### `system.activity_logs`
+
+The `system.activity_logs` table provides an audit trail of user and system actions across PostHog entities like feature flags, insights, dashboards, and experiments.
+
+> **Note:** Only team-scoped activity logs are visible. Organization-level logs (e.g., membership changes) are not included because they are not associated with a specific team.
+
+| Column       | Description                                                |
+|--------------|------------------------------------------------------------|
+| `id`         | Unique identifier for the activity log entry               |
+| `team_id`    | Team ID the activity belongs to                            |
+| `activity`   | Action performed (e.g., `created`, `updated`, `deleted`)   |
+| `item_id`    | ID of the entity being logged                              |
+| `scope`      | Entity type (e.g., `FeatureFlag`, `Insight`, `Dashboard`)  |
+| `detail`     | JSON containing structured details about the change        |
+| `created_at` | When the activity occurred                                 |
+
+The `detail` field contains a JSON object with information about what changed, including the entity name, field-level changes with before/after values, and the type of change.
+
+Common scopes include: `FeatureFlag`, `Insight`, `Dashboard`, `Experiment`, `Cohort`, `Survey`, `Notebook`, `Action`, `HogFunction`, `Person`, `Replay`, `BatchExport`, `Team`, `Project`, `ErrorTrackingIssue`, `EarlyAccessFeature`, `Annotation`, and `AlertConfiguration`.
+
 ### `system.actions`
 
 The `system.actions` table contains action definitions created in your project.
