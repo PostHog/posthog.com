@@ -173,9 +173,18 @@ This will publish the workflow and start delivering messages to your users when 
 Once the workflow is enabled, you can monitor your workflow in the **Metrics** and **Logs** tabs of the workflow builder.
 
 To confirm your workflow is delivering messages, look for these signs:
-- In the **Metrics** tab, you should see a line chart showing the number of **succeeded** and **triggered** messages.
+- In the **Metrics** tab, you should see charts showing triggered workflow runs and message delivery.
 - In the **Logs** tab, you can see logs of recently triggered workflows. Confirm that there aren't any errors.
 - See the message delivered in your inbox.
+
+For email dispatches, the **Metrics** tab shows these email-specific metrics:
+
+| Metric | Description |
+|--------|-------------|
+| **Sent** | Emails successfully handed off to the email provider |
+| **Delivered** | Emails confirmed delivered to the recipient's inbox by their mail server |
+| **Opened** | Emails the recipient opened |
+| **Clicked** | Emails where the recipient clicked a link |
 
 </Step>
 
