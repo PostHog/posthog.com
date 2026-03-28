@@ -25,6 +25,7 @@ Each ticket has the following properties:
 | **Priority** | `low`, `medium`, `high` (optional) |
 | **Channel** | Where the ticket came from: `widget`, `slack`, or `email` |
 | **Assignee** | User or role responsible for the ticket |
+| **Tags** | Custom labels for categorizing tickets |
 | **Session ID** | The PostHog session for events and exceptions |
 | **Session Replay ID** | The session recording (if replay is enabled) |
 | **Distinct ID** | PostHog distinct_id for person linking |
@@ -47,7 +48,7 @@ The ticket inbox supports filtering by:
 - **Priority** - Filter by priority level
 - **Channel** - Filter by source: widget, Slack, or email
 - **SLA state** - On track, at risk, or breached
-- **Tags** - Filter by tags attached to tickets
+- **Tags** - Filter by one or more tags
 - **Assignee** - Unassigned, specific user, or specific role
 - **Date range** - Filter by creation date
 - **Search** - Search by ticket number, customer name, or email
@@ -97,13 +98,20 @@ See [workflow automation](/docs/support/workflows) for examples of setting SLAs 
 
 ## Tags
 
-Tickets support free-form tags for categorization and filtering.
+Tags help you categorize tickets by issue type, feature request, or any category that makes sense for your team. Tags are shared across the project — any tag used on one ticket is available on all tickets.
 
-- Tags are shared across the project — any tag used on one ticket is available on all tickets
-- Add or remove tags from the ticket detail sidebar
-- Filter the ticket list by tags
+### Adding tags to a ticket
+
+1. Open a ticket
+2. In the sidebar, find the **Tags** section
+3. Click to add existing tags or create new ones
+4. Tags are saved automatically
 
 Tags can also be set automatically via [workflow automation](/docs/support/workflows#8-auto-tag-tickets-by-customer-email-domain).
+
+### Filtering by tags
+
+Use the tags filter in the ticket list to show only tickets with specific tags. You can filter by multiple tags at once.
 
 ## Messages
 
