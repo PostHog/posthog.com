@@ -32,3 +32,14 @@ Changing the synced properties after the initial import requires a full resync o
 </CalloutBox>
 
 The data warehouse then starts syncing your Hubspot data. You can see details, progress, and rows synced in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Selecting properties to sync
+
+By default, HubSpot syncs all standard and custom properties for each table. To sync only specific properties:
+
+1. Go to **Data pipeline** > **Sources** and click on your HubSpot source
+2. Enable **Customize synced properties**
+3. For each table (e.g., **Contacts properties**, **Companies properties**), enter a comma-separated list of property names
+4. Save your changes
+
+Leave the field empty to sync all default properties. Changing properties triggers a full resync of that table.
