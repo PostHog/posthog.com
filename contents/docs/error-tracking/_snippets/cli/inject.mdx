@@ -2,3 +2,10 @@
 # Inject release and chunk metadata into sourcemaps
 posthog-cli sourcemap inject --directory ./path/to/assets
 ```
+
+You can also pipe file or directory paths from stdin using the `--stdin` flag:
+
+```bash
+# Inject using paths piped from find
+find ./dist -name "*.js" | posthog-cli sourcemap inject --stdin
+```
