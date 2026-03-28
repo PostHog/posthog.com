@@ -220,6 +220,22 @@ arraySum(x -> JSONExtractFloat(x, 'value'),
 **Required tables:** `campaigns` and `campaign_analytics`
 
 </Tab.Panel>
+<Tab.Panel>
+
+| PostHog Column | Pinterest Ads Field | Notes | Platform Docs |
+|----------------|---------------------|-------|---------------|
+| `Campaign` | `name` | Campaign name | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/campaign-get/) |
+| `ID` | `id` | Campaign ID | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/campaign-get/) |
+| `Impressions` | `total_impression` | | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/analytics-get_ad_account_analytics/) |
+| `Clicks` | `total_clickthrough` | | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/analytics-get_ad_account_analytics/) |
+| `Cost` | `spend_in_dollar` | Already in standard dollars (no micro conversion). Converted from `currency` if available. | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/analytics-get_ad_account_analytics/) |
+| `Reported Conversion` | `total_conversions` | Returns 0 if field not available | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/analytics-get_ad_account_analytics/) |
+| `Reported Conversion Value` | `total_checkout_value_in_micro_dollar` | Divided by 1,000,000 (stored in micros). Returns 0 if field not available. | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/analytics-get_ad_account_analytics/) |
+| Date field | `date` | Reporting date | [Pinterest Ads API](https://developers.pinterest.com/docs/api/v5/analytics-get_ad_account_analytics/) |
+
+**Required tables:** `campaigns` and `campaign_analytics`
+
+</Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
 
