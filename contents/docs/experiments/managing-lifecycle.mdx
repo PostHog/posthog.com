@@ -61,3 +61,21 @@ Here's how the actions differ:
 | **Pausing** | Disabled | Control variant | Stops | Fixed | Yes |
 | **Ending** | Modified to roll out chosen variant to all users | Chosen variant | Continues (chosen variant only) | Fixed | No |
 | **Resetting** | Unchanged | Multiple variants | Continues | Cleared | Yes (relaunch) |
+
+## Copying experiments to other projects
+
+You may want to use the same experiment configuration across different PostHog [projects](/docs/settings/projects) – for example, when testing an experiment in staging before running it in production.
+
+To copy an experiment to another project:
+
+1. Navigate to the experiment you want to copy.
+2. Click the **...** menu and select **Copy to another project**.
+3. Select the target project from the dropdown.
+4. Click **Copy**.
+
+The copied experiment is created as a draft in the target project with:
+
+- The experiment's metrics, parameters, and configuration
+- A new feature flag that is disabled by default (if a flag with the same key exists, the key is deduplicated – for example, `my-flag-copy`)
+
+Saved metrics and holdouts are not copied because they are project-specific resources. If your experiment uses saved metrics, you'll need to recreate them in the target project.

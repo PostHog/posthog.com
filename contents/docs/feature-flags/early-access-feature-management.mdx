@@ -218,3 +218,17 @@ const registerInterest = (featureKey) => {
 Other useful functions for custom implementations are `isFeatureEnabled()` and `useActiveFeatureFlags()` (React only). These help you differentiate users who have opted into early access features from those who have not.
 
 For a sample implementation, see the [public beta tutorial here](/tutorials/public-beta-program#creating-a-beta-opt-in-page) or [the site app code here](https://github.com/PostHog/early-access-features-app/blob/main/site.ts).
+
+## Copying to other projects
+
+You can copy an early access feature to another PostHog [project](/docs/settings/projects) – for example, when testing a beta program in staging before launching in production.
+
+To copy an early access feature:
+
+1. Navigate to the feature you want to copy.
+2. Click the **...** menu at the top of the page.
+3. Select **Copy to another project**.
+4. Choose the target project from the list.
+5. Click **Copy**.
+
+When you copy an early access feature, PostHog also copies its linked feature flag. If a flag with the same key already exists in the target project, the key is deduplicated (for example, `my-flag-copy`).
