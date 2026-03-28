@@ -12,6 +12,17 @@ If you have event-like data in a [data warehouse](/docs/data-warehouse) table (e
 
 1. When adding a metric to your experiment, select the **Data warehouse tables** category and pick your table.
 
+<<<<<<< HEAD
+2. Join the `events` table to your data warehouse table:
+    - Under **Source Table Key**, specify a column that holds the value of the `distinct_id` present for the `$feature_flag_called` event.
+||||||| b884b0de2
+2. Join the `events` table to your data warehouse table:
+    - Under **Source Table Key**, specify a column that holds the value of the `distinct_id` present for the `$feature_flag_called` event.
+    
+    - Check **Optimize for Experiments** to ensure only the most recent matching event is joined to your table.
+    
+    - Under **Source Timestamp Key**, specify a column that represents the timestamp of the table row. It will be compared with the event timestamp to determine the most recent `$feature_flag_called` event for the row.
+=======
 2. Configure the following fields:
 
     | Field | Description |
@@ -19,6 +30,7 @@ If you have event-like data in a [data warehouse](/docs/data-warehouse) table (e
     | **Timestamp Field** | The column in your data warehouse table that contains the timestamp of each row |
     | **Data Warehouse Join Key** | The column in your data warehouse table that identifies which user each row belongs to (e.g. `user_id`, `email`) |
     | **Events Join Key** | The field on PostHog events to match against the data warehouse join key (usually `distinct_id`) |
+>>>>>>> main
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_25_at_06_23_00_7269911851.png"
