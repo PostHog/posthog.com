@@ -1,0 +1,14 @@
+The Intercom connector can link contacts, conversations, companies, admins, tags, teams, and data attributes to PostHog.
+
+To link Intercom:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Intercom
+3. Get an API key from the [Intercom Developer Hub](https://developers.intercom.com/) by navigating to **Authentication**
+4. Paste your API key in the **API key** field
+5. *Optional:* Add a prefix to your table names
+6. Click **Next**
+7. Select the tables you want to sync and set the sync method and frequency. The contacts and conversations tables support incremental syncs.
+8. Click **Import**
+
+The data warehouse then starts syncing your Intercom data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
