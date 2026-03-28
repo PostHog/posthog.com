@@ -36,7 +36,7 @@ You can access customer profiles in two main ways:
 1. **From the dashboard**: Click on any customer in the [customer analytics dashboard](https://us.posthog.com/customer_analytics)
 2. **From customer lists**: Click any [person](https://app.posthog.com/persons) or [group](https://app.posthog.com/groups/0) from the lists to open their profile
 
-Accessing customers from insights and other producs will also land in their profile page.
+Accessing customers from insights and other products will also land in their profile page.
 
 ## Persons vs groups
 
@@ -62,13 +62,15 @@ Each customer profile displays [usage metrics](/docs/customer-analytics/usage-me
 
 Customer profiles include a **Customer journey** node that shows where a person or group is within your defined journeys. Journeys are based on funnel insights you configure, letting you see a customer's progress through key conversion steps.
 
-The journey node displays:
+The journey node displays a flow diagram with your funnel steps:
 
-- Which funnel steps the customer has completed
-- Which steps are incomplete
-- Which steps are optional
+- **Completed steps** show green checkmarks
+- **Incomplete steps** show X icons
+- **Optional steps** appear with dashed lines and an "(optional)" label
 
 You can switch between different journeys using the dropdown selector in the node. If no journeys are configured, click **Configure journeys** to set them up.
+
+This helps you see where a customer dropped off in your conversion flow, or confirm they completed key milestones like signing up, activating, or upgrading.
 
 For details on creating and managing journeys, see [Create customer journeys](/docs/customer-analytics/create-customer-journeys).
 
