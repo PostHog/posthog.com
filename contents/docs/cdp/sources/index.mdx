@@ -102,8 +102,18 @@ If you add new tables to your source database, click **Pull new schemas** to dis
 To sync all enabled schemas at once, click **Sync now**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
 
 <ProductScreenshot
-  imageLight={SettingsLight}
-  imageDark={SettingsDark}
-  alt="Source settings in PostHog"
-  classes="rounded"
-/>
+    imageLight={SettingsLight}
+    imageDark={SettingsDark}
+    alt="Source settings in PostHog"
+    classes="rounded"
+  />
+
+### Pull new schemas
+
+If you add new tables to your source database, click **Pull new schemas** in the **Schemas** tab to sync them without waiting for the next scheduled sync. A notification shows how many schemas were added or removed.
+
+### Sync now
+
+Click **Sync now** in the **Schemas** tab to sync all enabled schemas at once. A confirmation dialog appears before syncing starts, and new sync jobs appear in the **Syncs** tab.
+
+Use this to refresh your data immediately instead of waiting for the next scheduled sync.
