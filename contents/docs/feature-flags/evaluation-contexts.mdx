@@ -14,11 +14,11 @@ Evaluation contexts provide fine-grained control over where and when your featur
 
 ## What are evaluation contexts?
 
-Evaluation contexts are constraints that determine when a feature flag should be evaluated. They're configured in the PostHog UI in a dedicated **Evaluation Contexts** section on each feature flag. Evaluation contexts actively filter which flags are returned during evaluation requests.
+Evaluation contexts control when a feature flag evaluates. You configure them in the PostHog UI in a dedicated **Evaluation Contexts** section on each feature flag. Unlike tags (which are purely organizational), evaluation contexts actively filter which flags are returned during evaluation requests.
 
 When you configure evaluation contexts on a feature flag:
-- The flag **only** evaluates when the SDK provides matching contexts via `evaluation_contexts` (or the legacy `evaluation_environments` parameter)
-- Flags without evaluation contexts continue to work as before (evaluating for all requests)
+- The flag only evaluates when the SDK provides matching contexts via `evaluation_contexts` (or the legacy `evaluation_environments` parameter)
+- Flags without evaluation contexts continue to evaluate for all requests
 - At least one context must match for the flag to be included
 
 ## Why use evaluation contexts?
@@ -57,15 +57,18 @@ Smaller, more focused flag sets mean:
 When creating or editing a feature flag:
 
 1. Navigate to the **Evaluation Contexts** section on the feature flag page
-2. Add contexts that represent where the flag should evaluate (e.g., "main-app", "marketing-site", "docs", "mobile")
+2. Add contexts that represent where the flag should evaluate (e.g., "main-app", "marketing-site", "docs", "mobile") — autocomplete suggests your team's existing contexts
+3. Click **Save**
+
+Evaluation contexts are independent from tags. Use tags for organization and evaluation contexts to control where flags evaluate.
 
 > **Note:** Each flag supports a maximum of 50 evaluation contexts, and each context name can be up to 255 characters.
 
-> **Remember:** Setting evaluation contexts in the PostHog app is only half the setup. Your application needs to declare its context via the SDK configuration (Step 2).
+> **Remember:** Setting evaluation contexts in PostHog is only half the setup. Your app also needs to declare its context via SDK configuration (Step 2).
 
 ### Step 2: Configure your SDKs
 
-**This step is essential** – after adding evaluation contexts to your flag, you must update your SDK configuration to declare which contexts your application represents. The SDK's `evaluation_contexts` parameter must match the contexts you've configured in the UI.
+**This step is essential** – after adding evaluation contexts to your flags in PostHog, you must update your SDK configuration to declare which contexts your application represents. The SDK's `evaluation_contexts` parameter must match the contexts you've configured in the UI.
 
 > **Note:** Newer SDK versions use `evaluation_contexts` (or `evaluationContexts` depending on the language). Older versions use `evaluation_environments` (or `evaluationEnvironments`). Both parameters are supported for backward compatibility – see the [SDK support](#sdk-support) section for version details.
 
@@ -179,7 +182,7 @@ When a flag evaluation request is made:
 
 ### Example scenario
 
-Consider these feature flags (with their evaluation contexts configured in the UI):
+Consider these feature flags (with their evaluation contexts):
 - Flag A: No evaluation contexts → Evaluates for all requests
 - Flag B: Evaluation contexts `["main-app", "web"]` → Only evaluates when SDK declares "main-app" OR "web"
 - Flag C: Evaluation contexts `["marketing-site"]` → Only evaluates when SDK declares "marketing-site"
@@ -302,11 +305,11 @@ If you don't see performance improvements:
 To adopt evaluation contexts in an existing PostHog setup:
 
 1. **Audit current flags**: Identify which flags are used in which application contexts
-2. **Define context taxonomy**: Create a consistent naming scheme for your contexts
+2. **Define naming conventions**: Create a consistent naming scheme for your contexts
 3. **Configure contexts**: Add evaluation contexts to your flags in the **Evaluation Contexts** section
 4. **Update high-impact flags first**: Start with flags that have the most evaluations
 5. **Update SDKs gradually**: Roll out [SDK changes](/docs/sdk-doctor) with `evaluation_contexts` per context
-6. **Monitor and adjust**: Track the impact and refine your evaluation context strategy
+6. **Monitor and adjust**: Track the impact and refine your context strategy
 
 ## SDK support
 
