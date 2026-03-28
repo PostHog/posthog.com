@@ -83,6 +83,26 @@ Caching at the CDN layer is closely related to how you build and deploy your app
 2. Do NOT add an `if (!window.posthog)` guard wrapping the snippet.
 3. The snippet loads `posthog-js` from our CDN and will auto-update on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
 
+##### Pinning the snippet to a specific version
+
+The HTML snippet auto-updates to the latest version by default, but you can pin it to a specific version of posthog-js. This is useful if you want consistency across your deployment or need to test a version before updating.
+
+To pin your snippet version:
+
+1. Go to [**Settings** > **Project** > **Snippet version**](https://app.posthog.com/settings/project-details#js-snippet-version)
+2. Enter the version you want to pin to
+3. Click **Save**
+
+You can pin to:
+
+- **A major version** (e.g., `1`) – receives all minor and patch updates within that major version
+- **A minor version** (e.g., `1.358`) – receives only patch updates within that minor version
+- **An exact version** (e.g., `1.358.0`) – no automatic updates
+
+Leave the field empty to use the latest version (default behavior).
+
+> **Note:** This feature is experimental and requires the `js-snippet-versioning` feature flag. Contact support if you need access.
+
 #### JavaScript web npm package
 Dependabot and Renovate can open pull requests when new versions of PostHog packages are published, making it easier to stay current without manual monitoring.
 
