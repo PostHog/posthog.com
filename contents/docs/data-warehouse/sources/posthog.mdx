@@ -194,6 +194,43 @@ The `system.cohort_calculation_history` table tracks cohort calculation runs, us
 | `finished_at`| When the calculation finished                      |
 | `error_code` | Error code if the calculation failed               |
 
+### `system.data_modeling_jobs`
+
+The `system.data_modeling_jobs` table tracks materialization job runs for your views. Use this to monitor job status, progress, and storage impact.
+
+| Column                 | Description                                              |
+|------------------------|----------------------------------------------------------|
+| `id`                   | Unique identifier for the job                            |
+| `team_id`              | Team ID the job belongs to                               |
+| `data_modeling_view_id`| ID of the view being materialized                        |
+| `status`               | Current status of the job                                |
+| `rows_materialized`    | Number of rows materialized so far                       |
+| `rows_expected`        | Expected number of rows to materialize                   |
+| `error`                | Error message if the job failed                          |
+| `storage_delta_mib`    | Change in storage in MiB from this job                   |
+| `last_run_at`          | When the job last ran                                    |
+| `created_at`           | When the job was created                                 |
+| `updated_at`           | When the job was last updated                            |
+
+### `system.data_modeling_views`
+
+The `system.data_modeling_views` table contains metadata about views in your project.
+
+| Column           | Description                                       |
+|------------------|---------------------------------------------------|
+| `id`             | Unique identifier for the view                    |
+| `team_id`        | Team ID the view belongs to                       |
+| `name`           | Name of the view                                  |
+| `status`         | Current status of the view                        |
+| `columns`        | JSON containing column definitions                |
+| `query`          | JSON containing the HogQL query                   |
+| `last_run_at`    | When the view was last run                        |
+| `is_materialized`| Whether the view is materialized (1 = yes, 0 = no)|
+| `deleted`        | Whether the view is deleted (1 = yes, 0 = no)     |
+| `deleted_at`     | When the view was deleted                         |
+| `created_at`     | When the view was created                         |
+| `updated_at`     | When the view was last updated                    |
+
 ### `system.data_warehouse_tables`
 
 The `system.data_warehouse_tables` table contains metadata about data warehouse tables in your project.
@@ -260,3 +297,40 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `version`         | Version number of the notebook                     |
 | `created_at`      | When the notebook was created                      |
 | `last_modified_at`| When the notebook was last modified                |
+
+### `system.source_schemas`
+
+The `system.source_schemas` table contains per-table sync configuration for your external data sources. Each row represents one table being synced from a source like Stripe, Hubspot, or Postgres.
+
+| Column          | Description                                                    |
+|-----------------|----------------------------------------------------------------|
+| `id`            | Unique identifier for the schema                               |
+| `name`          | Name of the table being synced (e.g., `customers`, `invoices`) |
+| `source_id`     | ID of the external data source                                 |
+| `table_id`      | ID of the resulting data warehouse table                       |
+| `should_sync`   | Whether this table is enabled for syncing (1 = yes, 0 = no)    |
+| `status`        | Current sync status (e.g., `Running`, `Completed`, `Failed`)   |
+| `sync_type`     | Sync strategy: `full_refresh`, `incremental`, or `append`      |
+| `last_synced_at`| When the table was last successfully synced                    |
+| `latest_error`  | Most recent error message if sync failed                       |
+| `created_at`    | When the schema was created                                    |
+| `updated_at`    | When the schema was last updated                               |
+| `deleted`       | Whether the schema is deleted (1 = yes, 0 = no)                |
+| `deleted_at`    | When the schema was deleted                                    |
+
+### `system.source_sync_jobs`
+
+The `system.source_sync_jobs` table tracks individual sync job runs for your external data sources. Use this to monitor sync progress, troubleshoot failures, and analyze sync performance.
+
+| Column         | Description                                                   |
+|----------------|---------------------------------------------------------------|
+| `id`           | Unique identifier for the job                                 |
+| `pipeline_id`  | ID of the external data source being synced                   |
+| `schema_id`    | ID of the specific schema being synced                        |
+| `status`       | Job status: `Running`, `Completed`, `Failed`                  |
+| `rows_synced`  | Number of rows synced in this job                             |
+| `billable`     | Whether the job is billable (non-billable syncs don't appear in the syncs UI) |
+| `latest_error` | Error message if the job failed                               |
+| `created_at`   | When the job started                                          |
+| `finished_at`  | When the job completed                                        |
+| `updated_at`   | When the job was last updated                                 |
