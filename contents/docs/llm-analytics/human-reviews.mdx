@@ -1,0 +1,90 @@
+---
+title: Human reviews
+---
+
+import BetaCallout from "./_snippets/beta.mdx"
+
+<BetaCallout />
+
+Human reviews let your team manually review [traces](/docs/llm-analytics/traces), add scores, and provide reasoning. Unlike automated [evaluations](/docs/llm-analytics/evaluations) that run code or use an LLM judge, human reviews capture your team's own assessment of trace quality.
+
+Use human reviews to:
+- Spot-check traces flagged by automated evaluations
+- Build reviewed datasets for training or fine-tuning
+- Track which traces your team has verified
+- Document issues or patterns in LLM outputs
+
+## Managing scorers
+
+Scorers are reusable score definitions your team selects when reviewing traces. Define them once in the **Human reviews** tab, then use them across reviews.
+
+### Scorer types
+
+- **Categorical** – A list of options to choose from, like "Excellent", "Good", "Fair", "Poor" or custom labels matching your quality criteria. Supports single-select (pick one option) or multi-select mode (pick multiple options, with optional min/max limits).
+- **Numeric** – A number within optional bounds. Set minimum, maximum, and step values.
+- **Boolean** – A true/false choice with customizable labels. Defaults to "Good" and "Bad".
+
+### Creating a scorer
+
+1. Go to **Human reviews** in LLM Analytics
+2. Click **New scorer**
+3. Enter a name and optional description
+4. Select the scorer type (categorical, numeric, or boolean)
+5. Configure the options:
+   - **Categorical**: Add option labels. Choose single-select or multi-select mode. For multi-select, optionally set minimum and maximum selections.
+   - **Numeric**: Set minimum, maximum, and step values.
+   - **Boolean**: Customize the true/false labels (defaults to "Good" and "Bad").
+6. Click **Create**
+
+### Editing scorers
+
+Click the three-dot menu on any scorer to:
+
+- **Edit metadata** – Change the name or description
+- **Edit config** – Update the configuration. Creates a new version so existing reviews keep their original scoring context.
+- **Duplicate** – Copy the scorer as a starting point for a new one
+- **Archive** or **Unarchive** – Remove from active use without deleting
+
+### Versioning
+
+When you edit a scorer's configuration, PostHog creates a new version instead of overwriting it. This preserves context for existing reviews – you can always see what options were available when a review was created.
+
+The version number appears in the scorer list so you can track changes.
+
+## Reviewing a trace
+
+1. Open any trace from the **Traces** tab
+2. Click **Review trace** in the toolbar
+3. Fill in scores for each configured scorer:
+   - **Categorical**: Select one or more options
+   - **Numeric**: Enter a number within the defined range
+   - **Boolean**: Choose true or false
+4. Click **Remove** next to any scorer you don't want to include
+5. Optionally add reasoning to explain your assessment
+6. Click **Save review**
+
+Reviewed traces display score chips showing your ratings. Hover over a chip to see the reviewer, timestamp, scores, and reasoning.
+
+To edit or remove a review, click **Edit review** on the trace.
+
+## Browsing reviews
+
+The **Human reviews** tab lists all reviews created by your team. You can:
+
+- Search by trace ID or comment text
+- Sort by creation or last updated time
+- Click a trace ID to view that trace's detail page
+
+The [Traces](/docs/llm-analytics/traces) tab also shows a **Review** column so you can quickly see which traces still need attention.
+
+## Human reviews vs user feedback
+
+Human reviews and [user feedback](/docs/llm-analytics/collect-user-feedback) serve different purposes:
+
+| | Human reviews | User feedback |
+|---|---|---|
+| **Who provides it** | Your internal team | Your end users |
+| **Where it happens** | PostHog LLM Analytics UI | Your app (via Surveys) |
+| **Best for** | QA, auditing, building training data | Understanding user satisfaction |
+
+Use both together for a complete picture of trace quality from both internal and external perspectives.

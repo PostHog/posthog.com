@@ -5893,6 +5893,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Human reviews',
+                    url: '/docs/llm-analytics/human-reviews',
+                    icon: 'IconPerson',
+                    color: 'salmon',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Prompt management',
                     url: '/docs/llm-analytics/prompts',
                     icon: 'IconPencil',
