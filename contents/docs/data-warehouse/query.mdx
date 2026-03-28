@@ -95,6 +95,20 @@ Hover over **Execution details** to see additional information about how the que
 
 These metrics are helpful for optimizing queries, especially when working with large datasets or complex joins. As you develop and change your query, keep an eye on the impact of your changes on the metrics. Seeing a spike in bytes read might prompt you to use a more selective filter.
 
+## Query log
+
+The SQL editor keeps a log of your recent queries. Click **Query log** in the toolbar to view your query history from the last 7 days.
+
+The log shows:
+
+- **Query**: The SQL text (hover to see the full query if truncated)
+- **Time**: When you ran the query
+- **Result rows**: Number of rows returned
+- **Duration**: How long the query took
+- **Status**: Whether it succeeded or failed
+
+Click any column header to sort. To reload a query into the editor, click the arrow button next to it.
+
 ## Optimizing queries
 
 import OptimalQueries from '../_snippets/optimal-queries.mdx'
