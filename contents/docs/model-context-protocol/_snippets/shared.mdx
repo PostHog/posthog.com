@@ -205,6 +205,16 @@ The agent will use the `list-errors` tool to fetch error groups sorted by occurr
 
 The agent will use `logs-query` to search for logs filtered by severity level and service name, returning log entries with timestamps, messages, and trace information.
 
+### Cohort management
+
+**Prompt:** "Create a dynamic cohort called 'power-users' that includes users who performed the 'purchase' event more than 5 times in the last 30 days"
+
+The agent uses the `cohorts-create` tool to create a dynamic cohort with behavioral filters. The cohort automatically updates as users meet or no longer meet the criteria.
+
+**Prompt:** "Create a static cohort called 'beta-testers' and add these three users to it: user-uuid-1, user-uuid-2, user-uuid-3"
+
+The agent uses `cohorts-create` with `is_static: true` to create the cohort, then `cohorts-add-persons-to-static-cohort-partial-update` to add the specified users by their UUIDs.
+
 ### Prompt management
 
 **Prompt:** "List all prompts stored in my project"
