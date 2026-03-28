@@ -5883,6 +5883,16 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Playground',
+                    url: '/docs/llm-analytics/playground',
+                    icon: 'IconFlask',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Evaluations',
                     url: '/docs/llm-analytics/evaluations',
                     icon: 'IconTarget',
