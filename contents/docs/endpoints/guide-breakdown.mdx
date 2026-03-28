@@ -34,9 +34,9 @@ Open [Product analytics](https://us.posthog.com/insights) and create a Trends in
   classes="rounded"
 />
 
-## Step 3: Execute with the breakdown variable
+## Step 3: Execute with breakdown variables
 
-For insight-based endpoints with breakdowns, each breakdown property name automatically becomes a **magic variable**. Pass the variable in your request to filter results to a specific breakdown value.
+For insight-based endpoints with breakdowns, each breakdown property name automatically becomes a **magic variable**. Pass variables in your request to filter results to specific breakdown values.
 
 ```bash
 curl -X POST \
@@ -55,9 +55,9 @@ The response will only include data where `$os` equals "Mac OS X".
   classes="rounded"
 />
 
-<CalloutBox icon="IconInfo" type="info" title="Variable required for materialized endpoints">
+<CalloutBox icon="IconInfo" type="info" title="Variables required for materialized endpoints">
 
-If your endpoint is [materialized](/docs/endpoints/materialization), you **must** provide the breakdown variable. This prevents accidentally returning all breakdown values when you intended to filter.
+If your endpoint is [materialized](/docs/endpoints/materialization), you **must** provide all breakdown variables. This prevents accidentally returning all breakdown values when you intended to filter.
 
 </CalloutBox>
 
@@ -107,7 +107,6 @@ Only breakdown variables can be passed to a materialized insight-based endpoint.
 Breakdown variables work with:
 
 - **TrendsQuery** - filter trend data by breakdown value
-- **FunnelsQuery** - filter funnel results by breakdown value
 - **RetentionQuery** - filter retention cohorts by breakdown value
 
 Insights with multiple breakdowns are supported. Each breakdown property becomes a separate variable that you can pass when executing the endpoint.

@@ -117,7 +117,6 @@ This filters the results to only return data where both `$browser` equals "Chrom
 
 Breakdown variables work with:
 - TrendsQuery
-- FunnelsQuery
 - RetentionQuery
 
 ### Date variables
@@ -146,7 +145,7 @@ curl -X POST \
 
 Materialized insight-based endpoints only support breakdown property variables. Date variables (`date_from`, `date_to`) are not available for materialized endpoints because the data is pre-computed.
 
-If your insight has a breakdown, you can still filter by that property:
+If your insight has breakdowns, you can still filter by those properties:
 
 ```bash
 curl -X POST \
