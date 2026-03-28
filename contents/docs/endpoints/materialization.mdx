@@ -86,6 +86,29 @@ Smaller buckets give more precise results, while larger buckets produce less gra
 
 Bucketed materialization only works with aggregate functions that can be re-aggregated across buckets: `count`, `sum`, `min`, `max`, and their combinator variants like `countIf` and `sumIf`. Functions like `avg`, `uniq`, and `countDistinct` cannot be re-aggregated and are not supported.
 
+### Configuring bucket size
+
+When your endpoint uses timestamp range variables, you can configure the bucket size for each timestamp column. Smaller buckets give more precise results but use more storage.
+
+To configure bucket size:
+
+1. Go to your endpoint's **Configuration** tab
+2. Expand the **Materialization** section
+3. For each timestamp column, select a bucket size:
+   - **Hour**
+   - **Day** (default)
+   - **Week**
+   - **Month**
+
+When you change and save a bucket size, PostHog triggers a new materialization run to rebuild the data.
+
+### Query preview
+
+When materialization is enabled, the **Configuration** tab shows two query previews:
+
+- **Query we materialize** - The query PostHog runs on a schedule to pre-compute results. Variables are removed and their columns are added to the output.
+- **Query we run** - The query PostHog runs when you execute the endpoint. This reads from the pre-computed table and applies your variable values as filters.
+
 ## How materialization works with execution
 
 When you execute an endpoint:
