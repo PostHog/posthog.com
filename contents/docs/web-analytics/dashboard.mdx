@@ -44,6 +44,14 @@ Top paths drill down into specific pages on your site to show their views, visit
 
 Entry and end paths show these stats for the first and last pageviews of each session, while outbound clicks shows the URLs that users clicked on to leave your site.
 
+### Including the host in path breakdowns
+
+By default, path breakdowns only show the pathname (e.g., `/landing`). If you have multiple hosts or subdomains sending data to the same project, enable the **Include host** toggle to show the full host + path (e.g., `example.com/landing`). This makes it easier to distinguish between the same path on different domains.
+
+> **Note:** This feature requires the `web-analytics-include-host` [feature flag](/docs/feature-flags) to be enabled.
+
+When this toggle is enabled, clicking a row no longer filters the dashboard since the combined host + path value doesn't map to a single filter.
+
 ## Channels, referrers, UTMs
 
 To get an idea of where users are visiting your site from, you can see top referrers, [channels](/docs/data/channel-type), and [UTMs](/docs/data/utm-segmentation).
