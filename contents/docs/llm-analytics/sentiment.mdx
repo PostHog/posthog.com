@@ -48,6 +48,35 @@ When you click into a trace, the trace header displays an overall sentiment bar.
 
 The generations table also supports sentiment classification. Each generation row shows a sentiment bar based on the user messages in that specific generation.
 
+### Sentiment tab
+
+<CalloutBox icon="IconFlag" title="Feature flag required" type="fyi">
+
+The Sentiment tab requires the `LLM_ANALYTICS_SENTIMENT_TAB` feature flag. Contact support to enable it for your organization.
+
+</CalloutBox>
+
+The **Sentiment** tab in [**LLM Analytics**](https://app.posthog.com/llm-analytics) lets you scan user messages organized by sentiment score.
+
+Each message card shows the most recent user message from a generation along with its sentiment score. Cards have color-coded accent bars: green for positive, red for negative, and gray for neutral or loading states.
+
+Messages with identical text are grouped together. If the same message appears across multiple traces, the card shows a count badge (e.g., "5x") indicating how many distinct traces contain that message. This reduces noise from repeated system prompts or common instructions.
+
+#### Filtering messages
+
+Use the controls at the top to filter messages:
+
+- **Show** – Filter by sentiment: **Positive**, **Negative**, or **Both** (excludes neutral)
+- **Min intensity** – Set a minimum confidence threshold (0 to 1). Higher values show only messages with stronger sentiment signals.
+
+You can also filter by date range, properties, and test accounts. Click **Reload** to refresh the feed.
+
+#### Viewing conversation context
+
+Each card shows the last user message. Click the expander to reveal earlier messages in the conversation thread.
+
+Click **View trace** to open the trace detail view with that generation highlighted.
+
 ## Per-message breakdown
 
 Sentiment is classified at the individual message level. Each user message within a generation gets its own sentiment score. The overall trace or generation sentiment is the average of all per-message scores, giving you both a high-level view and the ability to drill into specific messages.
