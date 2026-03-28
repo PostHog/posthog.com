@@ -191,3 +191,14 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `json_agg`
 - `string_agg`
 - `every`
+
+## Ordered-set aggregate functions
+
+These aggregate values in a sorted order using the `WITHIN GROUP` clause.
+
+```sql
+SELECT percentile_cont(0.50) WITHIN GROUP (ORDER BY duration) FROM events
+```
+
+- `percentile_cont` - Returns an interpolated percentile value (e.g., `0.5` for median).
+- `percentile_disc` - Returns an actual value from the input at the specified percentile.
