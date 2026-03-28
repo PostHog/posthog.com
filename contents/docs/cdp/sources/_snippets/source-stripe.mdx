@@ -25,18 +25,39 @@ If your Stripe account is in a language other than English, we suggest you updat
 5. _Optional:_ Add a prefix to your table names
 6. Click **Next**
 
-> For Stripe tables, incremental syncs only sync new records and don't update existing records. This is a limitation of the Stripe API. To get real-time updates including changes to existing records, [set up webhooks](#setting-up-webhooks-for-real-time-syncing).
+### Choosing a sync method
+
+When configuring your Stripe tables, you'll see sync method options for each table:
+
+- **Webhook** (recommended) – Real-time updates via webhooks. PostHog receives changes as they happen in Stripe, including updates to existing records.
+- **Incremental** – Syncs new records on a schedule. Does not update existing records due to Stripe API limitations.
+- **Full refresh** – Resyncs all records on each sync.
+
+Webhook is the default and recommended option for Stripe. It provides the fastest data freshness with minimal sync overhead.
 
 The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
 
-## Setting up webhooks for real-time syncing
+## Webhook setup details
 
-By default, Stripe data syncs on a schedule. You can set up webhooks to get real-time updates instead, including changes to existing records.
+When you select the **Webhook** sync method during setup, PostHog automatically creates and registers the webhook on your Stripe account. You can view the webhook status, including both PostHog's internal status and the Stripe-side webhook status, from the **Webhook** tab.
 
-To set up a webhook:
+To add webhooks to an existing Stripe source that was set up without them:
 
 1. Go to your Stripe source in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
 2. Click the **Webhook** tab.
 3. Click **Create webhook**.
 
-PostHog automatically creates and registers the webhook on your Stripe account. Once set up, you can view the webhook status, including both PostHog's internal status and the Stripe-side webhook status, from the **Webhook** tab.
+### API key permissions
+
+For automatic webhook creation, your Stripe API key needs **Write** permission for **Webhook endpoints** in addition to the read permissions listed above.
+
+### Manual webhook setup
+
+If PostHog can't create the webhook automatically (e.g., your API key lacks permission), you'll see the webhook URL and setup instructions:
+
+1. Go to your [Stripe Dashboard > Developers > Webhooks](https://dashboard.stripe.com/webhooks)
+2. Click **Add endpoint**
+3. Paste the webhook URL shown in PostHog into the **Endpoint URL** field
+4. Under **Events to send**, select **All events** (or choose specific events matching your synced tables)
+5. Click **Add endpoint**
+6. Copy the **Signing secret** from the webhook details page in Stripe and enter it in PostHog to enable signature verification
