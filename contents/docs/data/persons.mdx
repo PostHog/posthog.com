@@ -64,6 +64,25 @@ When enabled:
 - If a person was active within the last hour, the column displays "last hour" instead of a specific time.
 - Individual events can opt out of updating this value by setting the event property `$update_person_last_seen_at` to `false`.
 
+### Skipping last seen updates
+
+Every event updates the person's **Last seen** timestamp by default, including events from backend enrichment jobs or automated processes.
+
+To prevent this, set `$update_person_last_seen_at` to `false`:
+
+```python
+posthog.capture(
+    distinct_id='user_123',
+    event='enrichment',
+    properties={
+        '$set': {'plan': 'enterprise'},
+        '$update_person_last_seen_at': False
+    }
+)
+```
+
+This is useful for backend processes that update person properties but don't represent actual user activity.
+
 ## Viewing person profiles
 
 Clicking on a person in the [People tab](https://app.posthog.com/persons) opens their profile and shows all their properties.
