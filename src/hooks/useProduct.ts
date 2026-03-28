@@ -91,7 +91,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'brown',
             category: 'automation',
             // slug: 'posthog-code',
-            status: 'WIP',
+            status: 'beta',
         },
         {
             name: 'Product tours',

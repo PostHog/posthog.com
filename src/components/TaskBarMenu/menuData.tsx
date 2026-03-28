@@ -249,6 +249,12 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             mobileDestination: '/products',
         },
         {
+            type: 'item',
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCode className="size-4 text-blue" />,
+        },
+        {
             type: 'separator',
         },
         {

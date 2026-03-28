@@ -203,6 +203,7 @@
         "remark-gfm": "^3.0.1",
         "remove-markdown": "^0.5.5",
         "request": "^2.88.2",
+        "rough-notation": "^0.5.1",
         "sass": "^1.43.2",
         "scrapingbee": "^1.7.5",
         "shallow-compare": "^1.2.2",
