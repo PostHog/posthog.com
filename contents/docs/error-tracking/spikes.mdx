@@ -42,6 +42,26 @@ The following options are available:
 | **Multiplier** | How many times the current bucket must exceed the baseline for the spike to fire. A higher multiplier means only more dramatic surges trigger an alert. |
 | **Snooze duration** | After a spike fires for an issue, you won't be notified again for this many minutes — even if the issue continues spiking. This prevents alert fatigue during sustained incidents. |
 
+## Viewing spike history
+
+The configuration page includes a **Recent spike events** table showing all detected spikes across your issues:
+
+<ProductScreenshot
+    imageLight="https://promptless-customer-doc-assets.s3.amazonaws.com/docs-images/org_2tEBLS11qNiDQzcfVnYxrpDJ61J/spike-events-table-e47a1503.png"
+    imageDark="https://promptless-customer-doc-assets.s3.amazonaws.com/docs-images/org_2tEBLS11qNiDQzcfVnYxrpDJ61J/spike-events-table-e47a1503.png"
+    alt="Recent spike events table"
+    classes="rounded"
+/>
+
+| Column | Description |
+| --- | --- |
+| **Issue** | The issue that spiked |
+| **Detected at** | When the spike was detected |
+| **Baseline** | The baseline value at the time of detection |
+| **Multiplier** | How many times the current bucket exceeded the baseline |
+
+Spike events are automatically removed after 30 days.
+
 ## Getting notified about spikes
 
 You can set up alerts to be notified when a spike occurs. Head to the [alerts tab](https://app.posthog.com/error_tracking?activeTab=configuration#selectedSetting=error-tracking-spike-detection) to configure notifications to Slack, Discord, Teams, HTTP Webhook and more
