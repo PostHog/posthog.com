@@ -142,7 +142,6 @@ The `system.actions` table contains action definitions created in your project.
 | `updated_at` | When the action was last updated               |
 | `steps_json` | JSON containing the action's step definitions  |
 
-
 ### `system.activity_logs`
 
 The `system.activity_logs` table tracks user and system actions across PostHog entities, providing an audit trail of changes to feature flags, insights, dashboards, experiments, and more.
@@ -163,14 +162,14 @@ Common scopes include `FeatureFlag`, `Insight`, `Dashboard`, `Experiment`, `Coho
 
 ### `system.annotations`
 
-The `system.annotations` table contains annotation data from your project. Annotations are timestamped notes used to mark product changes, incidents, or releases on charts.
+The `system.annotations` table contains timestamped notes used to mark deployments, incidents, or releases on charts. Learn more about [annotations](/docs/data/annotations).
 
 | Column             | Description                                                   |
 |--------------------|---------------------------------------------------------------|
 | `id`               | Unique identifier for the annotation                          |
 | `team_id`          | Team ID the annotation belongs to                             |
-| `content`          | Text content of the annotation                                |
-| `scope`            | Scope of the annotation: `project`, `organization`, `dashboard`, or `dashboard_item` |
+| `content`          | Annotation text content (max 8192 characters)                 |
+| `scope`            | Visibility scope: `project`, `organization`, `dashboard`, or `dashboard_item` |
 | `creation_type`    | How the annotation was created: `USR` (user) or `GIT` (automated) |
 | `date_marker`      | Timestamp shown on charts (ISO 8601 format)                   |
 | `deleted`          | Whether the annotation is deleted (1 = yes, 0 = no)           |

@@ -223,6 +223,28 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Annotation management
+
+**Prompt:** "Add an annotation saying 'Marketing campaign launched' on March 1st, 2026"
+
+The agent will use the `annotation-create` tool to create an annotation with the specified content and date. Annotations appear as markers on charts, helping you correlate metric changes with deployments, incidents, or campaigns.
+
+**Prompt:** "Show me all annotations from the last week"
+
+The agent will use the `annotations-list` tool to fetch recent annotations and return a summary including content, dates, and scopes.
+
+**Prompt:** "Add an organization-wide annotation for March 15th marking our company rebrand"
+
+The agent will create an annotation with `scope` set to `organization` so it appears across all projects in your organization.
+
+**Prompt:** "Update annotation 42 to say 'Database migration completed successfully'"
+
+The agent will use the `annotations-partial-update` tool to modify the annotation's content. You can update the text, date, or scope without recreating the annotation.
+
+**Prompt:** "Delete the annotation with ID 42"
+
+The agent will use the `annotation-delete` tool to remove the annotation. Deleted annotations are hidden from views but preserved for historical reference.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.
