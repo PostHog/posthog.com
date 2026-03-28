@@ -223,6 +223,28 @@ The agent will use the `prompt-get` tool to retrieve the full prompt content by 
 
 The agent will use the `prompt-update` tool to publish a new version of the prompt with the updated content. The update includes conflict detection to prevent overwriting changes made by others.
 
+### Alert management
+
+**Prompt:** "Create a daily alert on my pageview count insight that fires when the value exceeds 500"
+
+The agent will use the `alert-create` tool to create an alert with an absolute threshold. The alert notifies subscribed users when the threshold is breached. You can also create anomaly detection alerts by specifying a `detector_config` instead of a threshold.
+
+**Prompt:** "List all my alerts and show their current state"
+
+The agent will use the `alerts-list` tool to retrieve all alerts in your project, returning each alert's name, state (Firing, Not firing, Snoozed, or Errored), threshold or detector configuration, and check interval.
+
+**Prompt:** "Update my pageview alert to check hourly instead of daily, and set the threshold to fire when the count is below 50 or above 1000"
+
+The agent will use the `alert-update` tool to modify the check interval and threshold bounds. You can also use this to snooze, enable, disable alerts, or switch between threshold and anomaly detection modes.
+
+**Prompt:** "Delete my old pageview alert"
+
+The agent will use the `alerts-list` tool to find the alert by name, then `alert-delete` to permanently remove it along with its check history.
+
+**Prompt:** "Test how a Z-Score detector would perform on my signup insight over the last 30 days"
+
+The agent will use the `alert-simulate` tool to run the anomaly detector on historical data without creating an alert. This helps you preview how different detector configurations (Z-Score, MAD, Isolation Forest, etc.) would have triggered before saving them as alerts.
+
 ## Prompts and resources
 
 The MCP server provides **resources**, including framework-specific documentation and example code, to help agents build great PostHog integrations. You can try these yourself using the `posthog:posthog-setup` **prompt**, available via a slash command in your agent. Just hit the `/` key.

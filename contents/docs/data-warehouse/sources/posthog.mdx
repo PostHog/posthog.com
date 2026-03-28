@@ -142,6 +142,27 @@ The `system.actions` table contains action definitions created in your project.
 | `updated_at` | When the action was last updated               |
 | `steps_json` | JSON containing the action's step definitions  |
 
+### `system.alerts`
+
+The `system.alerts` table contains insight alert configurations from your project. Alerts monitor insight values and notify subscribed users when thresholds are breached.
+
+| Column               | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| `id`                 | Unique identifier for the alert                                             |
+| `team_id`            | Team ID the alert belongs to                                                |
+| `name`               | Name of the alert                                                           |
+| `insight_id`         | ID of the insight being monitored                                           |
+| `enabled`            | Whether the alert is actively evaluated (1 = yes, 0 = no)                   |
+| `state`              | Current state: `Firing`, `Not firing`, `Errored`, or `Snoozed`              |
+| `calculation_interval`| How often the alert is checked: `hourly`, `daily`, `weekly`, or `monthly`  |
+| `condition`          | JSON containing the alert condition type (`absolute_value`, `relative_increase`, or `relative_decrease`) |
+| `config`             | JSON containing trends-specific config (series index, check ongoing interval) |
+| `created_at`         | When the alert was created                                                  |
+| `last_notified_at`   | When subscribers were last notified                                         |
+| `last_checked_at`    | When the alert was last evaluated                                           |
+| `next_check_at`      | When the next evaluation is scheduled                                       |
+| `snoozed_until`      | When the snooze expires (if snoozed)                                        |
+| `skip_weekend`       | Whether to skip evaluation on weekends (1 = yes, 0 = no)                    |
 
 ### `system.activity_logs`
 
