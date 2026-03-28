@@ -24,10 +24,23 @@ Each ticket has the following properties:
 | **Status** | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | **Priority** | `low`, `medium`, `high` (optional) |
 | **Channel** | Where the ticket came from: `widget`, `slack`, or `email` |
+| **Channel detail** | How the ticket was created within that channel (see below) |
 | **Assignee** | User or role responsible for the ticket |
 | **Session ID** | The PostHog session for events and exceptions |
 | **Session Replay ID** | The session recording (if replay is enabled) |
 | **Distinct ID** | PostHog distinct_id for person linking |
+
+### Channel detail values
+
+Channel detail provides more granular information about how a ticket was created:
+
+| Channel | Detail | Description |
+|---------|--------|-------------|
+| Slack | **Channel message** | Message posted in the configured support channel |
+| Slack | **Bot mention** | Message mentioning `@SupportHog` |
+| Slack | **Emoji reaction** | Ticket created via emoji reaction on a message |
+| Widget | **Widget** | Created via the embedded chat widget |
+| Widget | **API** | Created via the widget API directly |
 
 ## Status workflow
 
@@ -46,6 +59,7 @@ The ticket inbox supports filtering by:
 - **Status** - Filter by ticket status
 - **Priority** - Filter by priority level
 - **Channel** - Filter by source: widget, Slack, or email
+- **Channel detail** - Filter by how tickets were created (e.g., bot mention, emoji reaction)
 - **SLA state** - On track, at risk, or breached
 - **Tags** - Filter by tags attached to tickets
 - **Assignee** - Unassigned, specific user, or specific role

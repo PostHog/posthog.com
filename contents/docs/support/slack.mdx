@@ -62,6 +62,7 @@ React with the configured emoji (default `:ticket:`) on any message to create a 
 All three methods:
 
 - Set `channel_source` to `slack` on the ticket
+- Set a `channel_detail` indicating how the ticket was created (`Channel message`, `Bot mention`, or `Emoji reaction`)
 - Resolve the Slack user's name, email, and avatar
 - Convert Slack message formatting to PostHog's rich text format
 - Download and re-host any image attachments (up to 4 MB per image)
@@ -88,10 +89,11 @@ All three methods:
 Slack-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget and email tickets. Each Slack ticket shows:
 
 - A Slack icon indicating the channel source
+- The channel detail (e.g., "Channel message", "Bot mention", or "Emoji reaction")
 - A link to the original Slack thread in the ticket sidebar
 - The Slack user's name and avatar on messages
 
-You can filter the ticket list by channel source to see only Slack tickets.
+You can filter the ticket list by channel source or channel detail to see specific types of Slack tickets.
 
 ## Disconnecting
 
